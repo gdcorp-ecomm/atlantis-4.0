@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:WSCgdSiteLogService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSCgdSiteLogService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WSCgdSiteLogService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LogErrorIn">
+    <wsdl:part name="bstrInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogErrorOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogErrorExIn">
+    <wsdl:part name="bstrSourceServer" type="s:string" />
+    <wsdl:part name="bstrSourceFunction" type="s:string" />
+    <wsdl:part name="bstrURL" type="s:string" />
+    <wsdl:part name="lErrorNumber" type="s:unsignedInt" />
+    <wsdl:part name="bstrErrorDescription" type="s:string" />
+    <wsdl:part name="bstrInputData" type="s:string" />
+    <wsdl:part name="bstrShopperId" type="s:string" />
+    <wsdl:part name="bstrOrderId" type="s:string" />
+    <wsdl:part name="bstrClientIP" type="s:string" />
+    <wsdl:part name="bstrPathway" type="s:string" />
+    <wsdl:part name="lPageCount" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="LogErrorExOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WSCgdSiteLogServiceSoap">
+    <wsdl:operation name="LogError">
+      <wsdl:input message="s0:LogErrorIn" />
+      <wsdl:output message="s0:LogErrorOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogErrorEx">
+      <wsdl:input message="s0:LogErrorExIn" />
+      <wsdl:output message="s0:LogErrorExOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSCgdSiteLogServiceSoap" type="s0:WSCgdSiteLogServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="LogError">
+      <soap:operation soapAction="#LogError" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdSiteLogService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdSiteLogService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogErrorEx">
+      <soap:operation soapAction="#LogErrorEx" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdSiteLogService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdSiteLogService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCgdSiteLogService">
+    <wsdl:port name="WSCgdSiteLogServiceSoap" binding="s0:WSCgdSiteLogServiceSoap">
+      <soap:address location="http://commgtwyws.dev.glbt1.gdg:80/WSCgdSiteLog/WSCgdSiteLog.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

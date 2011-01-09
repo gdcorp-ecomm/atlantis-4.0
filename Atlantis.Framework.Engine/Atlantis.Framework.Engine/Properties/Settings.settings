@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.Engine.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConfigFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\atlantis.config.xml</Value>
+    </Setting>
+    <Setting Name="Atlantis_Framework_Engine_gdSiteLog_WSCgdSiteLogService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://commgtwyws.dev.glbt1.gdg:80/WSCgdSiteLog/WSCgdSiteLog.dll?Handler=Default</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

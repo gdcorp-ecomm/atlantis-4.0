@@ -1,12 +1,55 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine.Tests", "Atlantis.Framework.Engine.Tests\Atlantis.Framework.Engine.Tests.csproj", "{7FC24847-08DF-4B46-8828-4F40887974C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9393533D-BE08-40A1-8225-A7D7F92FFDAB}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.Engine.vsmdi = Atlantis.Framework.Engine.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 1
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
 		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.Interface
+		SccLocalPath1 = Atlantis.Framework.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectName2 = Atlantis.Framework.Engine
+		SccLocalPath2 = Atlantis.Framework.Engine
+		SccProjectUniqueName3 = Atlantis.Framework.Engine.Tests\\Atlantis.Framework.Engine.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.Engine.Tests
+		SccLocalPath3 = Atlantis.Framework.Engine.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.Engine.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FC24847-08DF-4B46-8828-4F40887974C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC24847-08DF-4B46-8828-4F40887974C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC24847-08DF-4B46-8828-4F40887974C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC24847-08DF-4B46-8828-4F40887974C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

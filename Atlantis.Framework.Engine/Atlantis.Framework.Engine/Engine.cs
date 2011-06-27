@@ -11,7 +11,7 @@ namespace Atlantis.Framework.Engine
 
   public class Engine
   {
-    public static event ProcessRequestStartDelegate OnProcessRequest;
+    public static event ProcessRequestStartDelegate OnProcessRequestStart;
     public static event ProcessRequestCompleteDelegate OnProcessRequestComplete;
 
     static EngineLock _requestLock;
@@ -53,9 +53,9 @@ namespace Atlantis.Framework.Engine
 
         Guid requestId = Guid.NewGuid();
 
-        if (OnProcessRequest != null)
+        if (OnProcessRequestStart != null)
         {
-          OnProcessRequest.Invoke(request, requestType, requestId);
+          OnProcessRequestStart.Invoke(request, requestType, requestId);
         }
 
         response = oIRequest.RequestHandler((RequestData)request, configItem);

@@ -247,31 +247,33 @@ namespace Atlantis.Framework.Engine
     {
       try
       {
-        gdSiteLog.WSCgdSiteLogService oLog = new Atlantis.Framework.Engine.gdSiteLog.WSCgdSiteLogService();
-        oLog.Url = _engineConfig.LogWebServiceUrl;
-
-        // Get some defaults
-        string sourceServer = exAtlantis.SourceServer;
-        if (string.IsNullOrEmpty(sourceServer))
+        using (gdSiteLog.WSCgdSiteLogService oLog = new Atlantis.Framework.Engine.gdSiteLog.WSCgdSiteLogService())
         {
-          sourceServer = Environment.MachineName;
-        }
+          oLog.Url = _engineConfig.LogWebServiceUrl;
 
-        string errorDescription = exAtlantis.ErrorDescription;
-        if (string.IsNullOrEmpty(errorDescription))
-        {
-          Exception ex = exAtlantis.GetBaseException();
-          if (ex != null)
+          // Get some defaults
+          string sourceServer = exAtlantis.SourceServer;
+          if (string.IsNullOrEmpty(sourceServer))
           {
-            errorDescription = ex.Message + Environment.NewLine + ex.StackTrace;
+            sourceServer = Environment.MachineName;
           }
-        }
 
-        oLog.LogErrorEx(sourceServer, exAtlantis.SourceFunction, exAtlantis.SourceURL,
-                        uint.Parse(exAtlantis.ErrorNumber), errorDescription,
-                        exAtlantis.ExData, exAtlantis.ShopperID, exAtlantis.OrderID,
-                        exAtlantis.ClientIP, exAtlantis.Pathway, exAtlantis.PageCount);
-        _loggingStatus = LoggingStatusType.WorkingNormally;
+          string errorDescription = exAtlantis.ErrorDescription;
+          if (string.IsNullOrEmpty(errorDescription))
+          {
+            Exception ex = exAtlantis.GetBaseException();
+            if (ex != null)
+            {
+              errorDescription = ex.Message + Environment.NewLine + ex.StackTrace;
+            }
+          }
+
+          oLog.LogErrorEx(sourceServer, exAtlantis.SourceFunction, exAtlantis.SourceURL,
+                          uint.Parse(exAtlantis.ErrorNumber), errorDescription,
+                          exAtlantis.ExData, exAtlantis.ShopperID, exAtlantis.OrderID,
+                          exAtlantis.ClientIP, exAtlantis.Pathway, exAtlantis.PageCount);
+          _loggingStatus = LoggingStatusType.WorkingNormally;
+        }
       }
       catch (Exception ex)
       {

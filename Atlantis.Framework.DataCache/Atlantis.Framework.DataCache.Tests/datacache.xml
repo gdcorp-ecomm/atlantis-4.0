@@ -1,0 +1,348 @@
+<cacheConfig>
+	<proc sp_name="gdshop_getNamespaceList_sp" name="GetNamespaceList" database="godaddynotes_dc" timeout_minutes="60"/>
+	<proc sp_name="rex_resellerHuntByProgID_sp" name="ResellerHuntByProgID" database="godaddy_dc" type="single_row" timeout_minutes="60">
+		<param name="ProgID" type="adVarChar" length="50"/>
+	</proc>
+	<proc sp_name="gdshop_networkStatusMessageGet_sp" name="GetNetworkStatusXml" database="godaddy_dc" timeout_minutes="60">
+		<param name="category" type="adInteger" length="4"/>
+		<param name="site" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdshop_resellerProgramByShopper_sp" name="GetProgramByShopper" database="godaddy_dc" timeout_minutes="15">
+		<param name="shopper_id" type="adVarChar" length="10"/>
+	</proc>
+	<proc sp_name="rotating_checkout_getInfo_sp" name="GetRotatingCheckoutInfo" database="godaddy_dc" timeout_minutes="120"/>
+	<proc sp_name="gdshop_product_attributes_get_sp" name="GetAttribsByPFID" database="godaddy_dc" timeout_minutes="60">
+		<param name="pf_id_list" type="adVarChar" length="8000"/>
+		<param name="n_gdshop_variant_price_type_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="pl_getHostedProductsOfferedByPL_sp" name="GetHostedProductsByPL" database="godaddy_dc" timeout_minutes="120" privatelabelid_name="PrivateLabelID">
+		<param name="PrivateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="pl_getHostedProductsOfferedCountByPL_sp" name="GetHostedProductCountByPL" database="godaddy_dc" type="single_row" timeout_minutes="120" privatelabelid_name="PrivateLabelID">
+		<param name="PrivateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getProductOfferingsByPLID_sp" name="GetProductOfferingsByPLID" database="godaddy_dc" timeout_minutes="60" privatelabelid_name="n_privateLabelID">
+		<param name="n_privateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="sbad_getQuestions_sp" name="Get_SBAD_Questions" database="godaddysurvey_dc" timeout_minutes="120"/>
+	<proc sp_name="sbad_getanswerLookups_sp" name="Get_SBAD_Answers" database="godaddysurvey_dc" timeout_minutes="120"/>
+	<proc sp_name="sbad_getAdTypes_sp" name="Get_SBAD_Types" database="godaddysurvey_dc" timeout_minutes="120"/>
+	<proc sp_name="sbad_getGenderAgeRanges_sp" name="Get_SBAD_AgeRanges" database="godaddysurvey_dc" timeout_minutes="120"/>
+	<proc sp_name="sbad_getPoliticalAffiliations_sp" name="Get_SBAD_Affiliations" database="godaddysurvey_dc" timeout_minutes="120"/>
+	<proc sp_name="dns_IsGoDaddyNameServer" name="IsGoDaddyNameServer" database="godaddy_dc" type="single_row" timeout_minutes="120">
+		<param name="server_name" type="adVarChar" length="255"/>
+	</proc>
+	<proc sp_name="gdshop_crossSellConfigurationGetByID_sp" name="GetCrossSellConfig" database="godaddy_dc" timeout_minutes="120">
+		<param name="configurationID" type="adVarChar" length="50"/>
+	</proc>
+	<proc sp_name="gdcache_getResellerContactInfoByID_sp" name="GetResellerContactInfo" database="godaddy_dc" timeout_minutes="120" privatelabelid_name="n_privateLabelID">
+		<param name="n_privatelabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdshop_topAccountGetByMgrId_sp" name="GetTopAccountsByMgrId" database="godaddy_dc" timeout_minutes="30">
+		<param name="mgr_Id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getTopAccountShopperDataByShopperID_sp" name="GetTopAccountDataByShopperId" database="godaddy_dc" timeout_minutes="15">
+		<param name="s_shopper_id" type="adVarChar" length="10"/>
+	</proc>
+	<proc sp_name="gdcache_getDomainStackPricesByResellerType_sp" name="GetDomainStackPricesByType"  database="godaddy_dc" price_return_columns="list_price" timeout_minutes="60">
+		<param name="n_privateLabelResellerTypeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdshop_pressGetCount_sp" name="GetPressCountByType" database="godaddy_dc" timeout_minutes="60">
+		<param name="n_pressTypeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdshop_mktg_copy_sp" name="GetMarketingCopyByCode" database="godaddy_dc" timeout_minutes="60">
+		<param name="code_prefix" type="adVarChar" length="2"/>
+		<param name="code_suffix" type="adVarChar" length="12"/>
+	</proc>
+	<proc sp_name="gdshop_pressGetDetailActive_sp" name="GetPressDetailByType" database="godaddy_dc" timeout_minutes="120">
+		<param name="n_pressTypeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdshop_sourceCodeVendorGet_sp" name="GetVendorBySourceCode" database="godaddy_dc" timeout_minutes="60" privatelabelid_name="privateLabelID">
+		<param name="source_code" type="adVarChar" length="20"/>
+		<param name="privateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="sso_serviceProviderGetByID_sp" name="ssoGetServiceProviderByName" database="godaddy_dc" timeout_minutes="120">
+		<param name="serviceProviderName" type="adVarChar" length="50"/>
+	</proc>
+	<proc sp_name="sso_identityProviderGetBySPKey" name="ssoGetIdentityProviderByName" database="godaddy_dc" timeout_minutes="120">
+		<param name="serviceProviderName" type="adVarChar" length="50"/>
+	</proc>
+	<proc sp_name="sso_identityProviderGetByServer_sp" name="ssoGetIdentityProviderByServer" database="godaddy_dc" timeout_minutes="120">
+		<param name="serviceProviderGroupName" type="adVarChar" length="50"/>
+		<param name="serverName" type="adVarChar" length="50"/>
+	</proc>
+	<proc sp_name="sso_identityProviderGetPublicKey_sp" name="ssoGetIDPPublicKey" database="godaddy_dc" timeout_minutes="120">
+		<param name="identityProviderName" type="adVarChar" length="50"/>
+		<param name="serviceProviderName" type="adVarChar" length="50"/>
+	</proc>
+	<proc sp_name="gdshop_getRadioArchiveAll_sp" name="GetRadioArchiveByYear" database="godaddy_dc" timeout_minutes="120">
+		<param name="n_archiveYear" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getRadioArchive_sp" name="GetRadioArchiveByYearAndType" database="godaddylive_dc" timeout_minutes="120">
+		<param name="n_archiveYear" type="adInteger" length="4"/>
+		<param name="n_callType" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getRadioRating_sp" name="GetRadioRatingByID" database="godaddylive_dc" timeout_minutes="120">
+		<param name="n_radioArchiveID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getRadioSegments_sp" name="GetRadioSegmentsByID" database="godaddylive_dc" timeout_minutes="120">
+		<param name="n_radioArchiveID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getRadioShow_sp" name="GetRadioShowByID" database="godaddylive_dc" timeout_minutes="240">
+		<param name="n_radioArchiveID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdCache_getRadioVideo_sp" name="GetRadioVideoByID" database="godaddylive_dc" timeout_minutes="120">
+		<param name="n_radioArchiveID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdCache_getRadioPromos_sp" name="GetRadioPromos" database="godaddylive_dc" timeout_minutes="120">
+		<param name="n_radioArchiveID" type="adInteger" length="4"/>
+		<param name="s_promoType" type="adVarChar" length="10"/>
+	</proc>
+	<proc sp_name="gdcache_getDomainStackPricesByPLID_sp" name="GetDomainStackPricesByPLID" database="godaddy_dc" price_return_columns="list_price" timeout_minutes="60" privatelabelid_name="n_privateLabelID">
+		<param name="n_privateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getDomainMultiStackPricesbyPLID_sp" name="GetDomainMultiStackPrices" database="godaddy_dc" price_return_columns="list_price" timeout_minutes="60" privatelabelid_name="n_privateLabelID">
+		<param name="n_privateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdshop_radioTopicListByDate_sp" name="GetRadioTopicsByDate" database="godaddy_dc" timeout_minutes="120">
+		<param name="d_topicDate" type="adVarChar" length="30"/>
+	</proc>
+	<proc sp_name="crm_RepHierarchyGetAll_sp" name="GetRepHierarchy" database="godaddy_dc" timeout_minutes="120"/>
+	<proc sp_name="repossessedGetTLDList_shopper" name="GetRepossessedTLDList" database="domains_dc" timeout_minutes="60" privatelabelid_name="PrivateLabelID">
+		<param name="PrivateLabelID" type="adInteger" length="4"/>
+		<param name="ProductType" type="adVarChar" length="10"/>
+		<param name="tldempty" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="repossessedCategoryGet_sp" name="GetRepossessedCategory" database="domains_dc" timeout_minutes="60">
+		<param name="isAdult" type="adVarChar" length="50"/>
+		<param name="isActive" type="adVarChar" length="50"/>
+		<param name="categoryempty" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="ma_merchantAccountAttributeGet_sp" name="GetMerchantAcctAttrib" database="merchantaccounts_dc" timeout_minutes="120" privatelabelid_name="privatelabelid">
+		<param name="pf_id" type="adInteger" length="4"/>
+		<param name="privatelabelid" type="adInteger" length="4"/>
+		<param name="n_gdshop_variant_price_type_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="rgd_strangeDomainsGet_sp" name="GetStrangeDomainsByYear" database="godaddy_dc" timeout_minutes="240">
+		<param name="year" type="adInteger" length="4"/>
+		<param name="month" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="mya_ipAddressListGetByType_sp" name="GetMyaIpAddressListByType" database="godaddy_dc" timeout_minutes="120">
+		<param name="IpAddressType" type="adVarChar" length="50"/>
+	</proc>
+	<proc sp_name="gdcache_getPLDataByResellerTypeAndCategory_sp" name="GetDefaultPLData" type="single_row" database="godaddy_dc" timeout_minutes="120">
+		<param name="privateLabelResellerTypeID" type="adInteger" length="4"/>
+		<param name="category" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getResellerSampleCommissionByResellerTypeAndPFID_sp" name="GetSampleCommission" database="godaddy_dc" timeout_minutes="120">
+		<param name="n_pf_id" type="adInteger" length="4"/>
+		<param name="n_resellerTypeId" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getBuyRateByResellerTypeID_sp" name="GetBuyRatesByResellerType" database="godaddy_dc" timeout_minutes="60">
+		<param name="pf_id" type="adInteger" length="4"/>
+		<param name="ResellerTypeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="dp_GetTldList_sp" name="GetTLDList" database="domains_dc" timeout_minutes="60"/>
+	<proc sp_name="gdcache_tldGetByTldIdOrName_sp" name="GetTLDInfo" database="domains_dc" timeout_minutes="60">
+		<param name="tldIdOrName" type="adVarChar" length="10"/>
+	</proc>
+	<proc sp_name="mgr_gdshopTestimonial_getByPIdTid_sp" name="GetTestimonials" database="godaddy_dc" timeout_minutes="120">
+		<param name="productID" type="adInteger" length="4"/>
+		<param name="TypeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="radio_recentTopicGet_sp" name="GetRecentRadioTopics" database="godaddy_dc" timeout_minutes="120">
+		<param name="d_topicDate" type="adVarChar" length="30"/>
+	</proc>
+	<proc sp_name="gdcache_getQueueManagementByPriority_sp" name="GetQueueManagementByPriority" database="crm2005_dc" timeout_minutes="120">
+		<param name="ManagerUserID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="JOBSAppInfoIndustryGet_ByID_sp" name="GetJOBSIndustryInfo" database="domains_dc" timeout_minutes="240"/>
+	<proc sp_name="rex_resellerNewsWire_get_sp" name="GetResellerNewsWire" database="godaddy_dc" timeout_minutes="120">
+		<param name="resellerTypeID" type="adInteger" length="4"/>
+		<param name="newsTypeID" type="adInteger" length="4"/>
+		<param name="showMessage" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getPrivateLabelLinksByPLID_sp" name="GetPrivateLabelLinks" database="godaddy_dc" timeout_minutes="120" privatelabelid_name="n_privateLabelID">
+		<param name="n_privateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="rex_GetLegalInfo_sp" name="GetLegalInfo" type="single_row" database="godaddy_dc" timeout_minutes="240" privatelabelid_name="ResellerID">
+		<param name="ResellerID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getPromoOfferingsByPLID_sp" name="GetPromoOfferingsByPLID" database="godaddy_dc" timeout_minutes="60" privatelabelid_name="n_privateLabelID">
+		<param name="n_privateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdshop_radioTopicListByDate_topicType_sp" name="GetRadioTopicsByDateAndType" database="godaddy_dc" timeout_minutes="120">
+		<param name="d_topicDate" type="adVarChar" length="30"/>
+		<param name="gdshop_radio_topicType_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getBillingSyncProductList_sp" name="GetBillingSyncProductList" database="godaddy_dc" timeout_minutes="120">
+		<param name="n_pf_id" type="adInteger" length="4"/>
+		<param name="n_privatelabelResellerTypeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="rex_getPromoBuyRates_sp" name="GetPromoBuyRates" database="godaddy_dc" price_return_columns="BasicWholesalePrice,ProWholesalePrice,superResellerBuyRate" timeout_minutes="120">
+		<param name="pl_promoGroupID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getPFIDByUnifiedID_sp" name="GetPFIDByUnifiedID" database="godaddy_dc" timeout_minutes="60" privatelabelid_name="n_privateLabelID" type="single_row">
+		<param name="n_gdshop_product_unifiedProductID" type="adInteger" length="4"/>
+		<param name="n_privateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdshop_price_by_pf_id_with_promo" name="PriceByPFIDWithPromo" database="godaddy_dc"  price_return_columns="price" timeout_minutes="60" privatelabelid_name="n_privateLabelID">
+		<param name="pf_id" type="adInteger" length="4"/>
+		<param name="quantity" type="adInteger" length="4"/>
+		<param name="privateLabelID" type="adInteger" length="4"/>
+		<param name="gdshop_variant_price_type_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdshop_list_price_by_pf_id" name="ListPriceByPFID" database="godaddy_dc"  price_return_columns="list_price" timeout_minutes="60" privatelabelid_name="n_privateLabelID">
+		<param name="pf_id" type="adInteger" length="4"/>
+		<param name="privateLabelID" type="adInteger" length="4"/>
+		<param name="gdshop_variant_price_type_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdshop_getTLDbyPFID_sp" name="GetTLDByPFID" database="godaddy_dc" timeout_minutes="60" type="single_row">
+		<param name="pf_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getDomainFYPromoPricesByPLID_sp" name="getDomainFYPromoPricesByPLID" database="godaddy_dc"  price_return_columns="list_price" timeout_minutes="60" privatelabelid_name="n_privateLabelID">
+		<param name="n_privateLabelID" type="adInteger" length="4"/>
+		<param name="s_promo_tracking_code" type="adVarChar" length="100"/>
+	</proc>
+	<proc sp_name="gdcache_getDomainFYPromoPricesByResellerType_sp" name="getDomainFYPromoPricesByResellerType" database="godaddy_dc" price_return_columns="list_price" timeout_minutes="60">
+		<param name="n_privateLabelResellerTypeID" type="adInteger" length="4"/>
+		<param name="s_promo_tracking_code" type="adVarChar" length="100"/>
+	</proc>
+	<proc sp_name="gdcache_newsCenterMenu_GetAll_sp" name="getNewsCenterMenu" database="godaddycontent_dc" timeout_minutes="240"/>
+	<proc sp_name="gdcache_newsCenterRelease_GetByDate_sp" name="getNewsReleaseByDate" database="godaddycontent_dc" timeout_minutes="240">
+		<param name="itemDate" type="adVarChar" length="30"/>
+	</proc>
+	<proc sp_name="gdcache_newsCenter_getByDateandType_sp" name="getNewsReleaseByDateAndType" database="godaddycontent_dc" timeout_minutes="240">
+		<param name="itemDate" type="adVarChar" length="30"/>
+		<param name="news_type_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_newsCenterFeature_GetByDate_sp" name="getNewsFeatureByDate" database="godaddycontent_dc" timeout_minutes="240">
+		<param name="itemDate" type="adVarChar" length="30"/>
+	</proc>
+	<proc sp_name="report_C3StatusDisplayGetLast_sp" name="GetSupportStats" database="crm2005_dc" timeout_minutes="60"/>
+	<proc sp_name="gdcache_news_AwardGetAll_sp" name="getNewsAwards" database="godaddycontent_dc" timeout_minutes="240" max_rows="100"/>
+	<proc sp_name="gdcache_news_BioGetAll_sp" name="getNewsBios" database="godaddycontent_dc" timeout_minutes="240" max_rows="100"/>
+	<proc sp_name="gdshop_price_by_unifiedProductID_with_promo_sp" name="PriceByUnifiedPFIDWithPromo" database="godaddy_dc"  price_return_columns="price" timeout_minutes="60" privatelabelid_name="n_privateLabelID">
+		<param name="pf_id" type="adInteger" length="4"/>
+		<param name="quantity" type="adInteger" length="4"/>
+		<param name="privateLabelID" type="adInteger" length="4"/>
+		<param name="gdshop_variant_price_type_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getRadioVideoByDate_sp" name="GetRadioVideoByYear" database="godaddy_dc" timeout_minutes="240">
+		<param name="n_videoYear" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_crossPfidGetbyReseller_sp" name="GetCrossPFIDByReseller" database="godaddy_dc" timeout_minutes="240" privatelabelid_name="resellerid" type="single_row">
+		<param name="resellerid" type="adInteger" length="4"/>
+		<param name="pf_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getCountriesByRegion_sp" name="GetCountryListByRegion" database="godaddy_dc" timeout_minutes="120">
+		<param name="regionId" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getICANNFeeByPFID_sp" name="GetICANNFeeByPFID" database="godaddy_dc" timeout_minutes="240" type="single_row">
+		<param name="n_pf_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getUnifiedProductAttributesByID_sp" name="GetAttribsByUnifiedPFID" database="godaddy_dc" type="single_row" timeout_minutes="120">
+		<param name="n_gdshop_product_unifiedProductID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getProductInfoByUnifiedID_sp" name="GetProductInfoByUnifiedPFID" database="godaddy_dc" type="single_row" timeout_minutes="120" privatelabelid_name="n_privateLabelID">
+		<param name="n_gdshop_product_unifiedProductID" type="adInteger" length="4"/>
+		<param name="n_privateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="contentControl_filterGetByValue_sp" name="ContentControlFilter" database="atlantisframework_dc" timeout_minutes="240" IPC="1">
+		<param name="s_AppHeaderValue" type="adVarChar" length="100"/>
+		<param name="s_FromAppValue" type="adVarChar" length="100"/>
+		<param name="s_ISCCodeValue" type="adVarChar" length="100"/>
+		<param name="s_customContentIDList" type="adVarChar" length="500"/>
+	</proc>
+	<proc sp_name="displayBanner_filterGetByValue_sp" name="DisplayBannerFilter" database="atlantisframework_dc" timeout_minutes="240" IPC="1">
+		<param name="s_AppHeaderValue" type="adVarChar" length="100"/>
+		<param name="s_FromAppValue" type="adVarChar" length="100"/>
+		<param name="s_ISCCodeValue" type="adVarChar" length="100"/>
+		<param name="n_displayBanner_priceTypeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="displayBanner_filterRegularExpressionGetList_sp" name="DisplayBannerFilterRegEx" database="atlantisframework_dc" timeout_minutes="240" IPC="1">
+		<param name="n_displayBanner_priceTypeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="contentControl_filterRegularExpressionGetList_sp" name="ContentControlFilterRegEx" database="atlantisframework_dc" timeout_minutes="240" IPC="1">
+		<param name="s_customContentIDList" type="adVarChar" length="500"/>
+	</proc>
+	<proc sp_name="displayBanner_filterIPAddressGetList_sp" name="DisplayBannerFilterIPAddress" database="atlantisframework_dc"  timeout_minutes="240" IPC="1">
+		<param name="n_displayBanner_priceTypeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="contentControl_filterIPAddressGetList_sp" name="ContentControlFilterIPAddress" database="atlantisframework_dc"  timeout_minutes="240" IPC="1">
+		<param name="s_customContentIDList" type="adVarChar" length="500"/>
+	</proc>
+	<proc sp_name="linkURL_getLinkTypeURLByContextEnvironment_sp" name="LinkInfo" database="atlantisframework_dc"  timeout_minutes="240" IPC="1">
+		<param name="contextID" type="adInteger" length="4"/>
+		<param name="environment" type="adVarChar" length="50"/>
+	</proc>
+	<proc sp_name="gdshop_product_unifiedProduct_mtm_productGroupGET_sp" name="ProductGroup" database="godaddy_dc"  timeout_minutes="240" IPC="1">
+		<param name="n_gdshop_product_unifiedProductGroupID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="bonsai_orionAccountTypeLookupGetBonsaiTypeByUnifiedProductID_sp" name="GetBonsaiType" database="godaddy_dc"  timeout_minutes="240" IPC="1">
+		<param name="gdshop_product_unifiedProductID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="rs_languageListGetByTldId_sp" name="GetLanguageListByTLDId" database="domains_dc" timeout_minutes="360">
+		<param name="tldId" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="rs_languageGetById_sp" name="GetLanguageList" database="domains_dc" timeout_minutes="360"/>
+	<proc sp_name="gdcache_girls_GetActiveBlog_sp" name="GetGDGirlsActiveBlogs" database="godaddycontent_dc" timeout_minutes="240" max_rows="50"/>
+	<proc sp_name="gdshop_billingMktPlcShopTaxInfoGetByID_sp" name="GetMktPlaceTaxInfo" database="billing_dc" timeout_minutes="20">
+		<param name="n_resource_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdshop_taxCodeEUVATGetList_sp" name="GetEUVATInfo" database="godaddy_dc" timeout_minutes="240"/>
+	<proc sp_name="gdshop_taxCodeEUVATExclusionGetList_sp" name="GetEUVATExclusions" database="godaddy_dc" timeout_minutes="240"/>
+	<proc sp_name="gdshop_taxCodeUSSalesGetList_sp" name="GetGDUSTaxInfo" database="godaddy_dc" timeout_minutes="240"/>
+	<proc sp_name="gdshop_taxCodeCanadaSalesGetList_sp" name="GetGDCATaxInfo" database="godaddy_dc" timeout_minutes="240" />
+	<proc sp_name="gdshop_productGetThirdParty_sp" name="GetMarketPlaceProductInfo" database="godaddy_dc"  type="single_row" timeout_minutes="20">
+		<param name="n_pf_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getUnifiedProductInfoByPFID_sp" name="GetUnifiedIDByPFID" database="godaddy_dc" timeout_minutes="240" privatelabelid_name="n_privateLabelID">
+		<param name="n_pf_id" type="adInteger" length="4"/>
+		<param name="n_privateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdGirls_blogType_getAll_sp" name="GetGDGirlsBlogTypes" database="godaddycontent_dc" timeout_minutes="240"/>
+	<proc sp_name="gdcache_blogArchiveGet_sp" name="GetGDGirlsBlogArchive" database="godaddycontent_dc" timeout_minutes="240">
+		<param name="blogTypeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdGirls_GetBlogByID_sp" name="GetGDGirlsBlogByBlogID" database="godaddycontent_dc" timeout_minutes="240">
+		<param name="blogID" type="adInteger" length="4"/>
+		<param name="blogTypeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="bz_MarketplaceHeaderCategoryGet_sp" name="GetMktPlcHeaderCategoryByType" database="proxima_dc" timeout_minutes="10">
+		<param name="CategoryType" type="adVarChar" length="15"/>
+	</proc>
+	<proc sp_name="gdcache_getMktPlcShopInfoByID_sp" name="GetMktPlcShopInfoByID" database="godaddy_dc" type="single_row" timeout_minutes="30">
+		<param name="n_resource_id" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="pl_getEntity_sp" name="GetEntityData" database="godaddy_dc" type="single_row" timeout_minutes="60" privatelabelid_name="privateLabelId">
+		<param name="privateLabelId" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="pl_signupInfoGetByEntityID_sp" name="GetSignupInfoByEntityID" database="godaddy_dc" type="single_row" timeout_minutes="60" privatelabelid_name="n_EntityID">
+		<param name="n_EntityID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="pl_tldOfferingGetByPrivateLabelID_sp" name="GetTLDOfferingByPLID" database="godaddy_dc" timeout_minutes="60" privatelabelid_name="n_PrivateLabelId">
+		<param name="n_PrivateLabelId" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_getPLDataByPLID_sp" name="GetPrivateLabelData" database="godaddy_dc" timeout_minutes="30" privatelabelid_name="privateLableId">
+		<param name="privateLableId" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="parkpage_getProductInfoByPLID_sp" name="GetParkPageProductInfo" database="godaddy_dc" timeout_minutes="30" privatelabelid_name="n_privateLabelID">
+		<param name="n_privateLabelID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_gdLive_radioArchivePhotoGetByRadioArchiveID_sp" name="GetLiveRadioEpisodeByID" database="godaddylive_dc" timeout_minutes="60">
+		<param name="radio_episodeID" type="adInteger" length="4"/>
+	</proc>
+	<proc sp_name="gdcache_bobGetActiveTeaserBlog_sp" name="GetActiveBlogTeasers" database="godaddycontent_dc" timeout_minutes="60"/>
+  <proc sp_name="gdCache_CelebrityEventGetAll_sp" name="GetCelebrityEvents" database="godaddycontent_dc" timeout_minutes="60">
+    <param name="dt_eventDateAfter" type="adVarChar" length="30"/>
+    <param name="n_celebrityID" type="adInteger" length="4"/>
+  </proc>
+  <proc sp_name="gdcache_des_mapGetByPage_sp" name="desMapGetByPage" database="godaddycontent_dc" timeout_minutes="240">
+    <param name="page_filename" type="adVarChar" length="99"/>
+  </proc>
+  <proc sp_name="gdcache_getBillingSyncProductListWithRenewal_sp" name="BillingSyncProductList" database="godaddy_dc" timeout_minutes="240">
+    <param name="n_pf_id" type="adInteger" length="4"/>
+    <param name="n_privatelabelResellerTypeID" type="adInteger" length="4"/>
+  </proc>
+</cacheConfig>

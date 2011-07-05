@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{59C74212-016C-45EE-B867-B111CF7DA358}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.VerifyShopper.Interface", "Atlantis.Framework.VerifyShopper.Interface\Atlantis.Framework.VerifyShopper.Interface.csproj", "{8CDD515F-375E-4FA5-9E41-F95227396675}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.VerifyShopper.Impl", "Atlantis.Framework.VerifyShopper.Impl\Atlantis.Framework.VerifyShopper.Impl.csproj", "{FB8A1912-7114-4FE2-9E96-9698635FBEB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.VerifyShopper.Tests", "Atlantis.Framework.VerifyShopper.Tests\Atlantis.Framework.VerifyShopper.Tests.csproj", "{ED3F0148-ED6B-4E4D-B37A-51620264A186}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0875E8F7-1F69-45A5-88D6-FC00C95A4D6A}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.VerifyShopper.vsmdi = Atlantis.Framework.VerifyShopper.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.VerifyShopper.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.VerifyShopper.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.VerifyShopper.sln
+		SccProjectName3 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName4 = Atlantis.Framework.VerifyShopper.Interface\\Atlantis.Framework.VerifyShopper.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.VerifyShopper.Interface
+		SccLocalPath4 = Atlantis.Framework.VerifyShopper.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.VerifyShopper.Impl\\Atlantis.Framework.VerifyShopper.Impl.csproj
+		SccProjectName5 = Atlantis.Framework.VerifyShopper.Impl
+		SccLocalPath5 = Atlantis.Framework.VerifyShopper.Impl
+		SccProjectUniqueName6 = Atlantis.Framework.VerifyShopper.Tests\\Atlantis.Framework.VerifyShopper.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.VerifyShopper.Tests
+		SccLocalPath6 = Atlantis.Framework.VerifyShopper.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.VerifyShopper.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CDD515F-375E-4FA5-9E41-F95227396675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CDD515F-375E-4FA5-9E41-F95227396675}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CDD515F-375E-4FA5-9E41-F95227396675}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CDD515F-375E-4FA5-9E41-F95227396675}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB8A1912-7114-4FE2-9E96-9698635FBEB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB8A1912-7114-4FE2-9E96-9698635FBEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB8A1912-7114-4FE2-9E96-9698635FBEB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB8A1912-7114-4FE2-9E96-9698635FBEB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED3F0148-ED6B-4E4D-B37A-51620264A186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED3F0148-ED6B-4E4D-B37A-51620264A186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED3F0148-ED6B-4E4D-B37A-51620264A186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED3F0148-ED6B-4E4D-B37A-51620264A186}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {59C74212-016C-45EE-B867-B111CF7DA358}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {59C74212-016C-45EE-B867-B111CF7DA358}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {59C74212-016C-45EE-B867-B111CF7DA358}
+	EndGlobalSection
+EndGlobal

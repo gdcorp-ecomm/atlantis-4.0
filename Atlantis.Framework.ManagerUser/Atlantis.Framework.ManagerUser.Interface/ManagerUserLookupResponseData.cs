@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Atlantis.Framework.Interface;
 using System.Xml;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.ManagerUser.Interface
 {

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.ManagerUser.Interface;
 using Atlantis.Framework.ManagerUser.Impl.ManagerLookupWS;
+using Atlantis.Framework.ManagerUser.Interface;
 
 namespace Atlantis.Framework.ManagerUser.Impl
 {

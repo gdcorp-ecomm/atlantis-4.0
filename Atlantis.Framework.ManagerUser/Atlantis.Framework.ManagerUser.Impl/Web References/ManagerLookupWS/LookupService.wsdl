@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Company.ManagerUserLookup.WebService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Company.ManagerUserLookup.WebService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Company.ManagerUserLookup.WebService">
+      <s:element name="GetUserMapping">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ntDomain" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ntLoginName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserMappingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserMappingResult" type="tns:UserMapping" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UserMapping">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ForceLogin" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="CanImpersonate" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FullName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MstkToken" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImpersonationUsers" type="tns:ArrayOfImpersonationMapping" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfImpersonationMapping">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ImpersonationMapping" nillable="true" type="tns:ImpersonationMapping" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ImpersonationMapping">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsAuthenticatedUser" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FullName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MSTK" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUserMappingXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ntDomain" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ntLoginName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserMappingXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserMappingXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetUserMappingSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserMapping" />
+  </wsdl:message>
+  <wsdl:message name="GetUserMappingSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserMappingResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserMappingXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserMappingXml" />
+  </wsdl:message>
+  <wsdl:message name="GetUserMappingXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserMappingXmlResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LookupServiceSoap">
+    <wsdl:operation name="GetUserMapping">
+      <wsdl:input message="tns:GetUserMappingSoapIn" />
+      <wsdl:output message="tns:GetUserMappingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserMappingXml">
+      <wsdl:input message="tns:GetUserMappingXmlSoapIn" />
+      <wsdl:output message="tns:GetUserMappingXmlSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LookupServiceSoap" type="tns:LookupServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUserMapping">
+      <soap:operation soapAction="http://Company.ManagerUserLookup.WebService/GetUserMapping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserMappingXml">
+      <soap:operation soapAction="http://Company.ManagerUserLookup.WebService/GetUserMappingXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LookupServiceSoap12" type="tns:LookupServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUserMapping">
+      <soap12:operation soapAction="http://Company.ManagerUserLookup.WebService/GetUserMapping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserMappingXml">
+      <soap12:operation soapAction="http://Company.ManagerUserLookup.WebService/GetUserMappingXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LookupService">
+    <wsdl:port name="LookupServiceSoap" binding="tns:LookupServiceSoap">
+      <soap:address location="http://g1dwdvweb01/ManagerUserLookup/LookupService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LookupServiceSoap12" binding="tns:LookupServiceSoap12">
+      <soap12:address location="http://g1dwdvweb01/ManagerUserLookup/LookupService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

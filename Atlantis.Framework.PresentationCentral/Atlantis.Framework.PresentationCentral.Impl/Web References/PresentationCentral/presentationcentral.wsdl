@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://atlantis.presentationcentral.prod.mesa1.gdg/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://atlantis.presentationcentral.prod.mesa1.gdg/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://atlantis.presentationcentral.prod.mesa1.gdg/">
+      <s:element name="RequestHTML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RequestHTMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RequestHTMLResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ClearApplicationCache">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ClearApplicationCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ClearApplicationCacheResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnApplicationCache">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReturnApplicationCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReturnApplicationCacheResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getServiceStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="getServiceStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getServiceStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="isMirageDifferentToProdOffering">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="isMirageDifferentToProdOfferingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="isMirageDifferentToProdOfferingResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CurrentCachedCategories">
+        <s:complexType />
+      </s:element>
+      <s:element name="CurrentCachedCategoriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CurrentCachedCategoriesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLoggingStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetLoggingStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLoggingStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RequestHTMLSoapIn">
+    <wsdl:part name="parameters" element="tns:RequestHTML" />
+  </wsdl:message>
+  <wsdl:message name="RequestHTMLSoapOut">
+    <wsdl:part name="parameters" element="tns:RequestHTMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="ClearApplicationCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:ClearApplicationCache" />
+  </wsdl:message>
+  <wsdl:message name="ClearApplicationCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:ClearApplicationCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReturnApplicationCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:ReturnApplicationCache" />
+  </wsdl:message>
+  <wsdl:message name="ReturnApplicationCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:ReturnApplicationCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:getServiceStatus" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:getServiceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="isMirageDifferentToProdOfferingSoapIn">
+    <wsdl:part name="parameters" element="tns:isMirageDifferentToProdOffering" />
+  </wsdl:message>
+  <wsdl:message name="isMirageDifferentToProdOfferingSoapOut">
+    <wsdl:part name="parameters" element="tns:isMirageDifferentToProdOfferingResponse" />
+  </wsdl:message>
+  <wsdl:message name="CurrentCachedCategoriesSoapIn">
+    <wsdl:part name="parameters" element="tns:CurrentCachedCategories" />
+  </wsdl:message>
+  <wsdl:message name="CurrentCachedCategoriesSoapOut">
+    <wsdl:part name="parameters" element="tns:CurrentCachedCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLoggingStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLoggingStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetLoggingStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLoggingStatusResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PresentationCentralSoap">
+    <wsdl:operation name="RequestHTML">
+      <wsdl:input message="tns:RequestHTMLSoapIn" />
+      <wsdl:output message="tns:RequestHTMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearApplicationCache">
+      <wsdl:input message="tns:ClearApplicationCacheSoapIn" />
+      <wsdl:output message="tns:ClearApplicationCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnApplicationCache">
+      <wsdl:input message="tns:ReturnApplicationCacheSoapIn" />
+      <wsdl:output message="tns:ReturnApplicationCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusSoapIn" />
+      <wsdl:output message="tns:getServiceStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="isMirageDifferentToProdOffering">
+      <wsdl:input message="tns:isMirageDifferentToProdOfferingSoapIn" />
+      <wsdl:output message="tns:isMirageDifferentToProdOfferingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CurrentCachedCategories">
+      <wsdl:input message="tns:CurrentCachedCategoriesSoapIn" />
+      <wsdl:output message="tns:CurrentCachedCategoriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoggingStatus">
+      <wsdl:input message="tns:GetLoggingStatusSoapIn" />
+      <wsdl:output message="tns:GetLoggingStatusSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PresentationCentralSoap" type="tns:PresentationCentralSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RequestHTML">
+      <soap:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/RequestHTML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearApplicationCache">
+      <soap:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/ClearApplicationCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnApplicationCache">
+      <soap:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/ReturnApplicationCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <soap:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isMirageDifferentToProdOffering">
+      <soap:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/isMirageDifferentToProdOffering" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CurrentCachedCategories">
+      <soap:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/CurrentCachedCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoggingStatus">
+      <soap:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/GetLoggingStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PresentationCentralSoap12" type="tns:PresentationCentralSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RequestHTML">
+      <soap12:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/RequestHTML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearApplicationCache">
+      <soap12:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/ClearApplicationCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnApplicationCache">
+      <soap12:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/ReturnApplicationCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <soap12:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isMirageDifferentToProdOffering">
+      <soap12:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/isMirageDifferentToProdOffering" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CurrentCachedCategories">
+      <soap12:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/CurrentCachedCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoggingStatus">
+      <soap12:operation soapAction="http://atlantis.presentationcentral.prod.mesa1.gdg/GetLoggingStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PresentationCentral">
+    <wsdl:port name="PresentationCentralSoap" binding="tns:PresentationCentralSoap">
+      <soap:address location="http://presentationcentral.dev.glbt1.gdg/atlantis/presentationcentral.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PresentationCentralSoap12" binding="tns:PresentationCentralSoap12">
+      <soap12:address location="http://presentationcentral.dev.glbt1.gdg/atlantis/presentationcentral.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

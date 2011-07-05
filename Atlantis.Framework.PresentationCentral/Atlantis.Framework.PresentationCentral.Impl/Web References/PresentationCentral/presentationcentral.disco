@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://presentationcentral.dev.glbt1.gdg/atlantis/presentationcentral.asmx?wsdl" docRef="http://presentationcentral.dev.glbt1.gdg/atlantis/presentationcentral.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://presentationcentral.dev.glbt1.gdg/atlantis/presentationcentral.asmx" xmlns:q1="http://atlantis.presentationcentral.prod.mesa1.gdg/" binding="q1:PresentationCentralSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://presentationcentral.dev.glbt1.gdg/atlantis/presentationcentral.asmx" xmlns:q2="http://atlantis.presentationcentral.prod.mesa1.gdg/" binding="q2:PresentationCentralSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

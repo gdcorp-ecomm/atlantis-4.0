@@ -111,6 +111,18 @@ namespace Atlantis.Framework.PresentationCentral.Impl.PresentationCentral {
         }
         
         /// <remarks/>
+        public System.IAsyncResult BeginRequestHTML(string xmlRequest, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("RequestHTML", new object[] {
+                        xmlRequest}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public System.Xml.XmlNode EndRequestHTML(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((System.Xml.XmlNode)(results[0]));
+        }
+        
+        /// <remarks/>
         public void RequestHTMLAsync(string xmlRequest) {
             this.RequestHTMLAsync(xmlRequest, null);
         }
@@ -136,6 +148,18 @@ namespace Atlantis.Framework.PresentationCentral.Impl.PresentationCentral {
         public int ClearApplicationCache(string key) {
             object[] results = this.Invoke("ClearApplicationCache", new object[] {
                         key});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginClearApplicationCache(string key, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("ClearApplicationCache", new object[] {
+                        key}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public int EndClearApplicationCache(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
             return ((int)(results[0]));
         }
         
@@ -168,6 +192,17 @@ namespace Atlantis.Framework.PresentationCentral.Impl.PresentationCentral {
         }
         
         /// <remarks/>
+        public System.IAsyncResult BeginReturnApplicationCache(System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("ReturnApplicationCache", new object[0], callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndReturnApplicationCache(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
         public void ReturnApplicationCacheAsync() {
             this.ReturnApplicationCacheAsync(null);
         }
@@ -191,6 +226,17 @@ namespace Atlantis.Framework.PresentationCentral.Impl.PresentationCentral {
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://atlantis.presentationcentral.prod.mesa1.gdg/getServiceStatus", RequestNamespace="http://atlantis.presentationcentral.prod.mesa1.gdg/", ResponseNamespace="http://atlantis.presentationcentral.prod.mesa1.gdg/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getServiceStatus() {
             object[] results = this.Invoke("getServiceStatus", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BegingetServiceStatus(System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("getServiceStatus", new object[0], callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndgetServiceStatus(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
             return ((string)(results[0]));
         }
         
@@ -225,6 +271,19 @@ namespace Atlantis.Framework.PresentationCentral.Impl.PresentationCentral {
         }
         
         /// <remarks/>
+        public System.IAsyncResult BeginisMirageDifferentToProdOffering(string sShopperID, int privateLabelID, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("isMirageDifferentToProdOffering", new object[] {
+                        sShopperID,
+                        privateLabelID}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public bool EndisMirageDifferentToProdOffering(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
         public void isMirageDifferentToProdOfferingAsync(string sShopperID, int privateLabelID) {
             this.isMirageDifferentToProdOfferingAsync(sShopperID, privateLabelID, null);
         }
@@ -254,6 +313,17 @@ namespace Atlantis.Framework.PresentationCentral.Impl.PresentationCentral {
         }
         
         /// <remarks/>
+        public System.IAsyncResult BeginCurrentCachedCategories(System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("CurrentCachedCategories", new object[0], callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndCurrentCachedCategories(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
         public void CurrentCachedCategoriesAsync() {
             this.CurrentCachedCategoriesAsync(null);
         }
@@ -277,6 +347,17 @@ namespace Atlantis.Framework.PresentationCentral.Impl.PresentationCentral {
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://atlantis.presentationcentral.prod.mesa1.gdg/GetLoggingStatus", RequestNamespace="http://atlantis.presentationcentral.prod.mesa1.gdg/", ResponseNamespace="http://atlantis.presentationcentral.prod.mesa1.gdg/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string GetLoggingStatus() {
             object[] results = this.Invoke("GetLoggingStatus", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetLoggingStatus(System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetLoggingStatus", new object[0], callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndGetLoggingStatus(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
             return ((string)(results[0]));
         }
         

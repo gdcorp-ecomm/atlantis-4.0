@@ -8,7 +8,7 @@ using Atlantis.Framework.PresentationCentral.Interface;
 
 namespace Atlantis.Framework.PresentationCentral.Impl
 {
- /* public class HtmlAsyncRequest : IAsyncRequest
+  public class HtmlAsyncRequest : IAsyncRequest
   {
 
     // **************************************************************** //
@@ -68,5 +68,5 @@ namespace Atlantis.Framework.PresentationCentral.Impl
     // **************************************************************** //
 
   }
-  */
+  
 }

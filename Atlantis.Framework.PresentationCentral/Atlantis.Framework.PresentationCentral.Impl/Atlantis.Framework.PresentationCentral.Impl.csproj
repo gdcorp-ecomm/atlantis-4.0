@@ -7,6 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{281BF281-478B-4054-9196-B1D188938687}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <WebReference_EnableLegacyEventingModel>true</WebReference_EnableLegacyEventingModel>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Atlantis.Framework.PresentationCentral.Impl</RootNamespace>
     <AssemblyName>Atlantis.Framework.PresentationCentral.Impl</AssemblyName>

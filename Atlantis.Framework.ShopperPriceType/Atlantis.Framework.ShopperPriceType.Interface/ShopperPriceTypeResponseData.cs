@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
+using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.SessionCache;
-using System.Xml.Linq;
 
 namespace Atlantis.Framework.ShopperPriceType.Interface
 {

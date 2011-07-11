@@ -1,0 +1,106 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5277AB54-EBB7-416A-96CF-80885648D6A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockHttpContext", "..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj", "{2F8983B4-801B-461A-9D76-26A58A496261}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BillingAlertsByShopper.Impl", "Atlantis.Framework.BillingAlertsByShopper.Impl\Atlantis.Framework.BillingAlertsByShopper.Impl.csproj", "{C4EAE539-B4A5-4016-9E3A-CBDC8D3CC170}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BillingAlertsByShopper.Interface", "Atlantis.Framework.BillingAlertsByShopper.Interface\Atlantis.Framework.BillingAlertsByShopper.Interface.csproj", "{2AF5FFAB-FF67-4E26-B6B5-495C8E41BEA3}"
+EndProject
+Project("{00000000-0000-0000-0000-000000000000}") = "Atlantis.Framework.BillingAlertsByShopper.Tests", "Atlantis.Framework.BillingAlertsByShopper.Tests\Atlantis.Framework.BillingAlertsByShopper.Tests.csproj", "{FC26CAD2-16DF-4BE4-BBFA-3ED5DC2DA45D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.BillingAlertsByShopper.sln
+		SccProjectName0 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.BillingAlertsByShopper.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.BillingAlertsByShopper.sln
+		SccProjectName2 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath2 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.BillingAlertsByShopper.sln
+		SccProjectName3 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
+		SccLocalPath3 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.BillingAlertsByShopper.sln
+		SccProjectName4 = ../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
+		SccLocalPath4 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
+		SccLocalPath5 = .
+		SccProjectUniqueName6 = Atlantis.Framework.BillingAlertsByShopper.Impl\\Atlantis.Framework.BillingAlertsByShopper.Impl.csproj
+		SccProjectName6 = Atlantis.Framework.BillingAlertsByShopper.Impl
+		SccLocalPath6 = Atlantis.Framework.BillingAlertsByShopper.Impl
+		SccProjectUniqueName7 = Atlantis.Framework.BillingAlertsByShopper.Interface\\Atlantis.Framework.BillingAlertsByShopper.Interface.csproj
+		SccProjectName7 = Atlantis.Framework.BillingAlertsByShopper.Interface
+		SccLocalPath7 = Atlantis.Framework.BillingAlertsByShopper.Interface
+		SccProjectUniqueName8 = Atlantis.Framework.BillingAlertsByShopper.Tests\\Atlantis.Framework.BillingAlertsByShopper.Tests.csproj
+		SccProjectName8 = Atlantis.Framework.BillingAlertsByShopper.Tests
+		SccLocalPath8 = Atlantis.Framework.BillingAlertsByShopper.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4EAE539-B4A5-4016-9E3A-CBDC8D3CC170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4EAE539-B4A5-4016-9E3A-CBDC8D3CC170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4EAE539-B4A5-4016-9E3A-CBDC8D3CC170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4EAE539-B4A5-4016-9E3A-CBDC8D3CC170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AF5FFAB-FF67-4E26-B6B5-495C8E41BEA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AF5FFAB-FF67-4E26-B6B5-495C8E41BEA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AF5FFAB-FF67-4E26-B6B5-495C8E41BEA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AF5FFAB-FF67-4E26-B6B5-495C8E41BEA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC26CAD2-16DF-4BE4-BBFA-3ED5DC2DA45D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC26CAD2-16DF-4BE4-BBFA-3ED5DC2DA45D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC26CAD2-16DF-4BE4-BBFA-3ED5DC2DA45D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC26CAD2-16DF-4BE4-BBFA-3ED5DC2DA45D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {5277AB54-EBB7-416A-96CF-80885648D6A8}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {5277AB54-EBB7-416A-96CF-80885648D6A8}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {5277AB54-EBB7-416A-96CF-80885648D6A8}
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {5277AB54-EBB7-416A-96CF-80885648D6A8}
+		{2F8983B4-801B-461A-9D76-26A58A496261} = {5277AB54-EBB7-416A-96CF-80885648D6A8}
+	EndGlobalSection
+EndGlobal

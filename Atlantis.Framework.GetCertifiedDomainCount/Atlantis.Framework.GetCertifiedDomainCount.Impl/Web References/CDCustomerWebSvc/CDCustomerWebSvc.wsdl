@@ -1,0 +1,1429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc">
+      <s:element name="WebSvcHealthCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WebSvcHealthCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WebSvcHealthCheckResult" type="tns:StandardResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StandardResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="WebServiceResponseBase" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Server" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ProcessingResults" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="tns:WebServiceError" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ProcessingResults">
+        <s:restriction base="s:string">
+          <s:enumeration value="UNDEFINED" />
+          <s:enumeration value="NOTFOUND" />
+          <s:enumeration value="SUCCESS" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="FATAL" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="WebServiceError">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Code" type="tns:WebServiceErrorCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Detail" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="WebServiceErrorCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="UNKNOWN" />
+          <s:enumeration value="VALUE_NOT_FOUND" />
+          <s:enumeration value="REQUEST_IN_USE" />
+          <s:enumeration value="CREDIT_NOT_FOUND" />
+          <s:enumeration value="REQUEST_ALREADY_EXISTS" />
+          <s:enumeration value="VALIDATION_DOMAIN_NAME" />
+          <s:enumeration value="VALIDATION_PHONE_DELAY" />
+          <s:enumeration value="QUEUED_REQUEST_EXCEPTION" />
+          <s:enumeration value="NO_SUCH_REQUEST" />
+          <s:enumeration value="UNAVAILABLE_OPERATION" />
+          <s:enumeration value="MESSAGING_FAILURE" />
+          <s:enumeration value="TELEVERIFY_INVALID_LANGUAGE" />
+          <s:enumeration value="TELEVERIFY_OVER_QUOTA" />
+          <s:enumeration value="TELEVERIFY_OVER_DAILY_LIMIT" />
+          <s:enumeration value="TELEVERIFY_INVALID_VOIP_NUMBER" />
+          <s:enumeration value="TELEVERIFY_INVALID_EXTENSION" />
+          <s:enumeration value="TELEVERIFY_INVALID_PIN" />
+          <s:enumeration value="TELEVERIFY_WEBSERVICE_ERROR" />
+          <s:enumeration value="TELEVERIFY_UNKNOWN_ERROR" />
+          <s:enumeration value="WHOIS_DATA_INCONSISTENT" />
+          <s:enumeration value="WHOIS_CONTACT_NOT_FOUND" />
+          <s:enumeration value="REMOTE_EXCEPTION" />
+          <s:enumeration value="TOO_MANY_RESULTS" />
+          <s:enumeration value="REGISTRATION_SYSTEM_FAILURE" />
+          <s:enumeration value="NUMBER_FORMAT_ERROR" />
+          <s:enumeration value="ORION_ERROR" />
+          <s:enumeration value="HIBERNATE_STALE_OBJECT_STATE" />
+          <s:enumeration value="CREDITLESS_CONSUMED_CREDIT" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="CreateProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="domainId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateProductResult" type="tns:StandardResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductStatusResult" type="tns:GetProductStatusResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetProductStatusResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="StatusResult" type="tns:ProductStatus" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ProductStatus">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ProductRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ShopperId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ResellerId" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PhoneVerificationAvailable" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="PhoneVerificationComplete" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="WhoisVerificationAvailable" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="WhoisVerificationComplete" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="Registrant" type="tns:ApolloWhoisContact" />
+              <s:element minOccurs="0" maxOccurs="1" name="Admin" type="tns:ApolloWhoisContact" />
+              <s:element minOccurs="0" maxOccurs="1" name="Technical" type="tns:ApolloWhoisContact" />
+              <s:element minOccurs="0" maxOccurs="1" name="Billing" type="tns:ApolloWhoisContact" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ProductRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AccountUid" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DomainId" nillable="true" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="DomainName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ApolloWhoisContact">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmailVerificationGuid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmailVerificationStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneVerificationPrefix" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneVerificationPhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneVerificationExtension" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneVerificationGuid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneVerificationPin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneVerificationStatus" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CancelProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CancelProductResult" type="tns:StandardResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InitiatePhoneCall">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="whoisContactId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="callDelay" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InitiatePhoneCallResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InitiatePhoneCallResult" type="tns:StringResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StringResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Results" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ValidatePhoneNumberManual">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidatePhoneNumberManualResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidatePhoneNumberManualResult" type="tns:BoolResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BoolResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Results" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ValidatePhoneNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="whoisContactId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pin" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidatePhoneNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidatePhoneNumberResult" type="tns:BoolResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResendDomainAuth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResendDomainAuthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResendDomainAuthResult" type="tns:StandardResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainAuth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="auth" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainAuthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateDomainAuthResult" type="tns:StringResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDomainAuthorization">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="auth" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="approve" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDomainAuthorizationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetDomainAuthorizationResult" type="tns:StandardResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSiteSealHtmlForAccountResult" type="tns:StringResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForAccountAndSealType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sealType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForAccountAndSealTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSiteSealHtmlForAccountAndSealTypeResult" type="tns:StringResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForDomain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForDomainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSiteSealHtmlForDomainResult" type="tns:StringResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForDomainAndSealType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sealType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForDomainAndSealTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSiteSealHtmlForDomainAndSealTypeResult" type="tns:StringResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsCreditAvailable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsCreditAvailableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsCreditAvailableResult" type="tns:BoolResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainsByShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainsByShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainsByShopperResult" type="tns:GetDomainsByShopperResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetDomainsByShopperResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="DomainList" type="tns:ArrayOfString" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="IsDomainCertified">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsDomainCertifiedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsDomainCertifiedResult" type="tns:BoolResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsDomainAvailable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsDomainAvailableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsDomainAvailableResult" type="tns:BoolResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCreditByCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="resellerId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCreditByCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCreditByCustomerResult" type="tns:GetCreditByCustomerResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetCreditByCustomerResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ApolloCredit" type="tns:ApolloCredit" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ApolloCredit">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AccountId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShopperId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResellerId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrionCustomerId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumberOfYears" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DomainName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreditStatus" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCreditsByCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="resellerId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCreditsByCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCreditsByCustomerResult" type="tns:GetCreditsByCustomerResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetCreditsByCustomerResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ApolloCredits" type="tns:ArrayOfApolloCredit" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfApolloCredit">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ApolloCredit" nillable="true" type="tns:ApolloCredit" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateWhoIsContactPhoneDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="whoisContactId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="phonePrefix" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneExtension" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateWhoIsContactPhoneDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateWhoIsContactPhoneDetailsResult" type="tns:StandardResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateWhoIsContactManualPhoneDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="whoisContactId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="phonePrefix" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneExtension" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateWhoIsContactManualPhoneDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateWhoIsContactManualPhoneDetailsResult" type="tns:UpdateWhoIsContactManualPhoneDetailsResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UpdateWhoIsContactManualPhoneDetailsResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="PhoneValidationState" type="tns:PhoneValidationState" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="PhoneValidationState">
+        <s:restriction base="s:string">
+          <s:enumeration value="Unverified" />
+          <s:enumeration value="Verified" />
+          <s:enumeration value="Error" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetCertifiedDomainCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCertifiedDomainCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCertifiedDomainCountResult" type="tns:LongResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LongResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Results" type="s:long" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetDomainInfoByDomainId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="domainId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainInfoByDomainIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainInfoByDomainIdResult" type="tns:GetDomainInfoResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetDomainInfoResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="RequestInfo" type="tns:RequestInfo" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="RequestInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResellerId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShopperId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DomainId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="DomainName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrionGuid" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsCertified" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Created" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Started" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Completed" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumberOfYears" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Expires" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteSealGuid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteSealHtml" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteSealImage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDomainInfoByDomainName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainInfoByDomainNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainInfoByDomainNameResult" type="tns:GetDomainInfoResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lastUpdate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainLogResult" type="tns:GetDomainLogResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetDomainLogResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="DomainEntry" type="tns:ArrayOfDomainEntry" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfDomainEntry">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DomainEntry" nillable="true" type="tns:DomainEntry" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DomainEntry">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DomainName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidFrom" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidTo" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreateDate" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="WebSvcHealthCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:WebSvcHealthCheck" />
+  </wsdl:message>
+  <wsdl:message name="WebSvcHealthCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:WebSvcHealthCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateProductSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateProduct" />
+  </wsdl:message>
+  <wsdl:message name="CreateProductSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetProductStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="CancelProductSoapIn">
+    <wsdl:part name="parameters" element="tns:CancelProduct" />
+  </wsdl:message>
+  <wsdl:message name="CancelProductSoapOut">
+    <wsdl:part name="parameters" element="tns:CancelProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="InitiatePhoneCallSoapIn">
+    <wsdl:part name="parameters" element="tns:InitiatePhoneCall" />
+  </wsdl:message>
+  <wsdl:message name="InitiatePhoneCallSoapOut">
+    <wsdl:part name="parameters" element="tns:InitiatePhoneCallResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePhoneNumberManualSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidatePhoneNumberManual" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePhoneNumberManualSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidatePhoneNumberManualResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePhoneNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidatePhoneNumber" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePhoneNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidatePhoneNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResendDomainAuthSoapIn">
+    <wsdl:part name="parameters" element="tns:ResendDomainAuth" />
+  </wsdl:message>
+  <wsdl:message name="ResendDomainAuthSoapOut">
+    <wsdl:part name="parameters" element="tns:ResendDomainAuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainAuthSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateDomainAuth" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainAuthSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateDomainAuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetDomainAuthorizationSoapIn">
+    <wsdl:part name="parameters" element="tns:SetDomainAuthorization" />
+  </wsdl:message>
+  <wsdl:message name="SetDomainAuthorizationSoapOut">
+    <wsdl:part name="parameters" element="tns:SetDomainAuthorizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForAccount" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForAccountAndSealTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForAccountAndSealType" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForAccountAndSealTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForAccountAndSealTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForDomain" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForDomainAndSealTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForDomainAndSealType" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForDomainAndSealTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForDomainAndSealTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsCreditAvailableSoapIn">
+    <wsdl:part name="parameters" element="tns:IsCreditAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IsCreditAvailableSoapOut">
+    <wsdl:part name="parameters" element="tns:IsCreditAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsByShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainsByShopper" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsByShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainsByShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainCertifiedSoapIn">
+    <wsdl:part name="parameters" element="tns:IsDomainCertified" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainCertifiedSoapOut">
+    <wsdl:part name="parameters" element="tns:IsDomainCertifiedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainAvailableSoapIn">
+    <wsdl:part name="parameters" element="tns:IsDomainAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainAvailableSoapOut">
+    <wsdl:part name="parameters" element="tns:IsDomainAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditByCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCreditByCustomer" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditByCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCreditByCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsByCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCreditsByCustomer" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsByCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCreditsByCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWhoIsContactPhoneDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateWhoIsContactPhoneDetails" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWhoIsContactPhoneDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateWhoIsContactPhoneDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWhoIsContactManualPhoneDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateWhoIsContactManualPhoneDetails" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWhoIsContactManualPhoneDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateWhoIsContactManualPhoneDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCertifiedDomainCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCertifiedDomainCount" />
+  </wsdl:message>
+  <wsdl:message name="GetCertifiedDomainCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCertifiedDomainCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoByDomainIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainInfoByDomainId" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoByDomainIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainInfoByDomainIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoByDomainNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainInfoByDomainName" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoByDomainNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainInfoByDomainNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainLogSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainLog" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainLogSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainLogResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CDCustomerWebSvcSoap">
+    <wsdl:operation name="WebSvcHealthCheck">
+      <wsdl:input message="tns:WebSvcHealthCheckSoapIn" />
+      <wsdl:output message="tns:WebSvcHealthCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateProduct">
+      <wsdl:input message="tns:CreateProductSoapIn" />
+      <wsdl:output message="tns:CreateProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductStatus">
+      <wsdl:input message="tns:GetProductStatusSoapIn" />
+      <wsdl:output message="tns:GetProductStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelProduct">
+      <wsdl:input message="tns:CancelProductSoapIn" />
+      <wsdl:output message="tns:CancelProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InitiatePhoneCall">
+      <wsdl:input message="tns:InitiatePhoneCallSoapIn" />
+      <wsdl:output message="tns:InitiatePhoneCallSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePhoneNumberManual">
+      <wsdl:input message="tns:ValidatePhoneNumberManualSoapIn" />
+      <wsdl:output message="tns:ValidatePhoneNumberManualSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePhoneNumber">
+      <wsdl:input message="tns:ValidatePhoneNumberSoapIn" />
+      <wsdl:output message="tns:ValidatePhoneNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResendDomainAuth">
+      <wsdl:input message="tns:ResendDomainAuthSoapIn" />
+      <wsdl:output message="tns:ResendDomainAuthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainAuth">
+      <wsdl:input message="tns:ValidateDomainAuthSoapIn" />
+      <wsdl:output message="tns:ValidateDomainAuthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDomainAuthorization">
+      <wsdl:input message="tns:SetDomainAuthorizationSoapIn" />
+      <wsdl:output message="tns:SetDomainAuthorizationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccount">
+      <wsdl:input message="tns:GetSiteSealHtmlForAccountSoapIn" />
+      <wsdl:output message="tns:GetSiteSealHtmlForAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccountAndSealType">
+      <wsdl:input message="tns:GetSiteSealHtmlForAccountAndSealTypeSoapIn" />
+      <wsdl:output message="tns:GetSiteSealHtmlForAccountAndSealTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomain">
+      <wsdl:input message="tns:GetSiteSealHtmlForDomainSoapIn" />
+      <wsdl:output message="tns:GetSiteSealHtmlForDomainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomainAndSealType">
+      <wsdl:input message="tns:GetSiteSealHtmlForDomainAndSealTypeSoapIn" />
+      <wsdl:output message="tns:GetSiteSealHtmlForDomainAndSealTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsCreditAvailable">
+      <wsdl:input message="tns:IsCreditAvailableSoapIn" />
+      <wsdl:output message="tns:IsCreditAvailableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsByShopper">
+      <wsdl:input message="tns:GetDomainsByShopperSoapIn" />
+      <wsdl:output message="tns:GetDomainsByShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainCertified">
+      <wsdl:input message="tns:IsDomainCertifiedSoapIn" />
+      <wsdl:output message="tns:IsDomainCertifiedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainAvailable">
+      <wsdl:input message="tns:IsDomainAvailableSoapIn" />
+      <wsdl:output message="tns:IsDomainAvailableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditByCustomer">
+      <wsdl:input message="tns:GetCreditByCustomerSoapIn" />
+      <wsdl:output message="tns:GetCreditByCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsByCustomer">
+      <wsdl:input message="tns:GetCreditsByCustomerSoapIn" />
+      <wsdl:output message="tns:GetCreditsByCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWhoIsContactPhoneDetails">
+      <wsdl:input message="tns:UpdateWhoIsContactPhoneDetailsSoapIn" />
+      <wsdl:output message="tns:UpdateWhoIsContactPhoneDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWhoIsContactManualPhoneDetails">
+      <wsdl:input message="tns:UpdateWhoIsContactManualPhoneDetailsSoapIn" />
+      <wsdl:output message="tns:UpdateWhoIsContactManualPhoneDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCertifiedDomainCount">
+      <wsdl:input message="tns:GetCertifiedDomainCountSoapIn" />
+      <wsdl:output message="tns:GetCertifiedDomainCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByDomainId">
+      <wsdl:input message="tns:GetDomainInfoByDomainIdSoapIn" />
+      <wsdl:output message="tns:GetDomainInfoByDomainIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByDomainName">
+      <wsdl:input message="tns:GetDomainInfoByDomainNameSoapIn" />
+      <wsdl:output message="tns:GetDomainInfoByDomainNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainLog">
+      <wsdl:input message="tns:GetDomainLogSoapIn" />
+      <wsdl:output message="tns:GetDomainLogSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CDCustomerWebSvcSoap" type="tns:CDCustomerWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WebSvcHealthCheck">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/WebSvcHealthCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProduct">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/CreateProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductStatus">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetProductStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelProduct">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/CancelProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiatePhoneCall">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/InitiatePhoneCall" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePhoneNumberManual">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/ValidatePhoneNumberManual" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePhoneNumber">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/ValidatePhoneNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResendDomainAuth">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/ResendDomainAuth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainAuth">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/ValidateDomainAuth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDomainAuthorization">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/SetDomainAuthorization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccount">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetSiteSealHtmlForAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccountAndSealType">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetSiteSealHtmlForAccountAndSealType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomain">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetSiteSealHtmlForDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomainAndSealType">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetSiteSealHtmlForDomainAndSealType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCreditAvailable">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/IsCreditAvailable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsByShopper">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetDomainsByShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainCertified">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/IsDomainCertified" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainAvailable">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/IsDomainAvailable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditByCustomer">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetCreditByCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsByCustomer">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetCreditsByCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWhoIsContactPhoneDetails">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/UpdateWhoIsContactPhoneDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWhoIsContactManualPhoneDetails">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/UpdateWhoIsContactManualPhoneDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCertifiedDomainCount">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetCertifiedDomainCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByDomainId">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetDomainInfoByDomainId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByDomainName">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetDomainInfoByDomainName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainLog">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetDomainLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CDCustomerWebSvcSoap12" type="tns:CDCustomerWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WebSvcHealthCheck">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/WebSvcHealthCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProduct">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/CreateProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductStatus">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetProductStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelProduct">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/CancelProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiatePhoneCall">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/InitiatePhoneCall" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePhoneNumberManual">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/ValidatePhoneNumberManual" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePhoneNumber">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/ValidatePhoneNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResendDomainAuth">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/ResendDomainAuth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainAuth">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/ValidateDomainAuth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDomainAuthorization">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/SetDomainAuthorization" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccount">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetSiteSealHtmlForAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccountAndSealType">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetSiteSealHtmlForAccountAndSealType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomain">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetSiteSealHtmlForDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomainAndSealType">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetSiteSealHtmlForDomainAndSealType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCreditAvailable">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/IsCreditAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsByShopper">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetDomainsByShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainCertified">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/IsDomainCertified" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainAvailable">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/IsDomainAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditByCustomer">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetCreditByCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsByCustomer">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetCreditsByCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWhoIsContactPhoneDetails">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/UpdateWhoIsContactPhoneDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWhoIsContactManualPhoneDetails">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/UpdateWhoIsContactManualPhoneDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCertifiedDomainCount">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetCertifiedDomainCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByDomainId">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetDomainInfoByDomainId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByDomainName">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetDomainInfoByDomainName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainLog">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc/GetDomainLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CDCustomerWebSvc">
+    <wsdl:port name="CDCustomerWebSvcSoap" binding="tns:CDCustomerWebSvcSoap">
+      <soap:address location="https://certifieddomains.dev.intranet.gdg/CDCustomerWebSvc/CDCustomerWebSvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CDCustomerWebSvcSoap12" binding="tns:CDCustomerWebSvcSoap12">
+      <soap12:address location="https://certifieddomains.dev.intranet.gdg/CDCustomerWebSvc/CDCustomerWebSvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

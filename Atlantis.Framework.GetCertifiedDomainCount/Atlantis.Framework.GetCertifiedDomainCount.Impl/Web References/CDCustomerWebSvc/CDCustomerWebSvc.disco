@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://certifieddomains.dev.intranet.gdg/CDCustomerWebSvc/CDCustomerWebSvc.asmx?wsdl" docRef="https://certifieddomains.dev.intranet.gdg/CDCustomerWebSvc/CDCustomerWebSvc.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://certifieddomains.dev.intranet.gdg/CDCustomerWebSvc/CDCustomerWebSvc.asmx" xmlns:q1="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc" binding="q1:CDCustomerWebSvcSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://certifieddomains.dev.intranet.gdg/CDCustomerWebSvc/CDCustomerWebSvc.asmx" xmlns:q2="http://starfieldtech.com/webservices/CertifiedDomains/CDCustomerWebSvc" binding="q2:CDCustomerWebSvcSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

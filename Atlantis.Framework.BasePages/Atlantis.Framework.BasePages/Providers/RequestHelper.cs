@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Web;
-using Atlantis.Framework.Interface;
-using System.Web.Configuration;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Web;
+using System.Web.Configuration;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.BasePages.Providers
 {
@@ -37,7 +36,7 @@ namespace Atlantis.Framework.BasePages.Providers
 
       List<string> excludedIPs = new List<string>(DataCache.DataCache.GetAppSetting("ATLANTIS_INTERNALEXCLUDEDIPADDRESSES").Split('|'));
       List<string> excludedUserAgents = new List<string>(DataCache.DataCache.GetAppSetting("ATLANTIS_INTERNALEXCLUDEDUSERAGENTS").ToLower().Split('|'));
-      
+
       string userAgent = HttpContext.Current.Request.ServerVariables["HTTP_USER_AGENT"];
 
       if (!String.IsNullOrEmpty(userAgent))

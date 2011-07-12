@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web;
 using Atlantis.Framework.Interface;
 
@@ -113,61 +112,6 @@ namespace Atlantis.Framework.BasePages.Providers
       }
     }
 
-    private const string COOKIE_COMMISSIONJUNCTION = "commissionJunctionStartDate";
-    private string _commissionJunctionStartDate;
-    public string CommissionJunctionStartDate
-    {
-      get
-      {
-        if (_commissionJunctionStartDate == null)
-        {
-          _commissionJunctionStartDate = string.Empty;
-
-          if (ContextId == ContextIds.GoDaddy)
-          {
-            HttpCookie cjCookie = HttpContext.Current.Request.Cookies[COOKIE_COMMISSIONJUNCTION];
-            if (cjCookie != null)
-            {
-              _commissionJunctionStartDate = cjCookie.Value;
-            }
-          }
-        }
-        return _commissionJunctionStartDate;
-      }
-      set
-      {
-        if (ContextId == ContextIds.GoDaddy)
-        {
-          HttpCookie cjCookie = HttpContext.Current.Request.Cookies[COOKIE_COMMISSIONJUNCTION];
-          if (cjCookie == null)
-          {
-            string cjcDaySetting = DataCache.DataCache.GetAppSetting("CJC_DAYS");
-            int cjcDays;
-            if (Int32.TryParse(cjcDaySetting, out cjcDays))
-            {
-              DateTime cjNow = DateTime.Now;
-              cjCookie = NewCrossDomainCookie(COOKIE_COMMISSIONJUNCTION, cjNow.AddDays(cjcDays));
-              _commissionJunctionStartDate = value;
-              cjCookie.Value = value;
-              HttpContext.Current.Response.Cookies.Add(cjCookie);
-            }
-            else
-            {
-              AtlantisException ex = new AtlantisException(
-                "SalesBasePage.SetCommissionJunctionStartDate",
-                HttpContext.Current.Request.Url.ToString(),
-                "0",
-                "CJC_DAYS AppSetting is not numeric.",
-                "Setting=" + cjcDaySetting,
-                string.Empty, string.Empty, HttpContext.Current.Request.UserHostAddress,
-                Pathway, PageCount);
-              Engine.Engine.LogAtlantisException(ex);
-            }
-          }
-        }
-      }
-    }
-
     private const string PARAM_ISC = "isc";
     private string _isc;
     public string ISC
@@ -189,87 +133,6 @@ namespace Atlantis.Framework.BasePages.Providers
 
         return _isc;
       }
-    }
-
-    private const string COOKIE_CURRENCY_PREFIX = "currency";
-    protected const string POTABLE_SOURCE_STR_KEY = "potableSourceStr";
-    protected const string DEFAULT_CURRENCY_TYPE = "USD";
-    private const string PARAM_CURRENCYTYPE = "currencyType";
-    private string _currencyType;
-    public string CurrencyType
-    {
-      get
-      {
-        if (_currencyType == null)
-        {
-          bool saveCookie = true;
-          Dictionary<string, Dictionary<string, string>> currencyDataAll = DataCache.DataCache.GetCurrencyDataAll();
-
-          string currencyType = HttpContext.Current.Request[PARAM_CURRENCYTYPE];
-          if ((string.IsNullOrEmpty(currencyType) || (!currencyDataAll.ContainsKey(currencyType))))
-          {
-            currencyType = GetCurrencyTypeFromCookie();
-            if ((!string.IsNullOrEmpty(currencyType)) && currencyDataAll.ContainsKey(currencyType))
-            {
-              saveCookie = false;
-            }
-            else
-            {
-              currencyType = DEFAULT_CURRENCY_TYPE;
-            }
-          }
-
-          _currencyType = currencyType;
-          if (saveCookie)
-          {
-            SaveCurrencyIntoCookie();
-          }
-        }
-
-        return _currencyType;
-      }
-    }
-
-    protected string CrossDomainCurrencyCookieName
-    {
-      get { return COOKIE_CURRENCY_PREFIX + PrivateLabelId; }
-    }
-
-    private void SaveCurrencyIntoCookie()
-    {
-      HttpCookie currencyCookie = HttpContext.Current.Request.Cookies[CrossDomainCurrencyCookieName];
-
-      if (currencyCookie == null
-         || !currencyCookie.HasKeys
-         || currencyCookie[POTABLE_SOURCE_STR_KEY] != _currencyType)
-      {
-        currencyCookie = NewCrossDomainCookie(CrossDomainCurrencyCookieName, DateTime.UtcNow.Add(TimeSpan.FromDays(365)));
-        currencyCookie[POTABLE_SOURCE_STR_KEY] = _currencyType;
-        HttpContext.Current.Response.Cookies.Add(currencyCookie);
-      }
-    }
-
-    protected string GetCurrencyTypeFromCookie()
-    {
-      string sResult = null;
-
-      HttpCookie currencyCookie = HttpContext.Current.Request.Cookies[CrossDomainCurrencyCookieName];
-      if (currencyCookie != null && currencyCookie.HasKeys)
-        sResult = currencyCookie[POTABLE_SOURCE_STR_KEY];
-
-      return sResult;
-    }
-
-    public virtual void SetCurrencyType(string currencyType)
-    {
-      Dictionary<string, Dictionary<string, string>> currencyDataAll = DataCache.DataCache.GetCurrencyDataAll();
-      if (!currencyDataAll.ContainsKey(currencyType))
-      {
-        currencyType = DEFAULT_CURRENCY_TYPE;
-      }
-
-      _currencyType = currencyType;
-      SaveCurrencyIntoCookie();
     }
 
     private bool? _isRequestInternal;
@@ -301,8 +164,8 @@ namespace Atlantis.Framework.BasePages.Providers
     private IManagerContext _managerContext;
     public IManagerContext Manager
     {
-      get 
-      { 
+      get
+      {
         if (_managerContext == null)
         {
           _managerContext = Container.Resolve<IManagerContext>();
@@ -313,7 +176,8 @@ namespace Atlantis.Framework.BasePages.Providers
 
     #endregion
 
-    protected SiteContextProviderBase(IProviderContainer providerContainer) : base(providerContainer)
+    protected SiteContextProviderBase(IProviderContainer providerContainer)
+      : base(providerContainer)
     {
     }
   }

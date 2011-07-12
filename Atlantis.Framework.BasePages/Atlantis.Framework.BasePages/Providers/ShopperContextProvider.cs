@@ -456,7 +456,7 @@ namespace Atlantis.Framework.BasePages.Providers
 
     private int GetShopperPriceTypeFromSessionCache()
     {
-      int result = ShopperPriceTypes.Standard;
+      int result = 0; //ShopperPriceTypes.Standard;
 
       if (!string.IsNullOrEmpty(ShopperId))
       {

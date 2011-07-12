@@ -1,9 +1,9 @@
 ﻿using System;
-using Atlantis.Framework.Interface;
 using System.Collections.Specialized;
 using System.Web;
-using Atlantis.Framework.VerifyShopper.Interface;
 using Atlantis.Framework.BasePages.Authentication;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.VerifyShopper.Interface;
 
 namespace Atlantis.Framework.BasePages.Providers
 {

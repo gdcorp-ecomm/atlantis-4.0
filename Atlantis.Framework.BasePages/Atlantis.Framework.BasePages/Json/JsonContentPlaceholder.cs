@@ -1,5 +1,4 @@
 ﻿using System.Web.UI.WebControls;
-using System.Web.UI;
 
 namespace Atlantis.Framework.BasePages.Json
 {

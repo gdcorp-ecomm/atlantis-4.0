@@ -1,12 +1,12 @@
 ﻿using System;
-using Atlantis.Framework.Interface;
 using System.Collections.Specialized;
-using System.Web;
 using System.Security.Principal;
-using Atlantis.Framework.VerifyShopper.Interface;
-using Atlantis.Framework.ManagerUser.Interface;
+using System.Web;
 using System.Web.Configuration;
 using Atlantis.Framework.BasePages.Cookies;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.ManagerUser.Interface;
+using Atlantis.Framework.VerifyShopper.Interface;
 
 namespace Atlantis.Framework.BasePages.Providers
 {

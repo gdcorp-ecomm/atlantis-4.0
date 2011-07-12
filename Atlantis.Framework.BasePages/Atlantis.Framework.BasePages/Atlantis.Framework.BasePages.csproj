@@ -69,46 +69,14 @@
     <Compile Include="ContextIds.cs" />
     <Compile Include="Cookies\CookieCryptWrapper.cs" />
     <Compile Include="Cookies\CookieHelper.cs" />
-    <Compile Include="GoDaddyOnlyBaseControl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GoDaddyOnlyBaseHttpHandler.cs" />
-    <Compile Include="GoDaddyOnlyBaseMaster.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GoDaddyOnlyBasePage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Json\AtlantisContextJsonContentBasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Json\AtlantisContextJsonDataBasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Json\GoDaddyOnlyJsonContentBasePage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Json\GoDaddyOnlyJsonDataBasePage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Json\JsonContent.cs" />
     <Compile Include="Json\JsonContentPlaceholder.cs" />
-    <Compile Include="Json\PrivateLabelAwareJsonContentBasePage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Json\PrivateLabelAwareJsonDataBasePage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PrivateLabelAwareBaseControl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PrivateLabelAwareBaseHttpHandler.cs" />
-    <Compile Include="PrivateLabelAwareBaseMaster.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PrivateLabelAwareBasePage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DebugProvider.cs" />
     <Compile Include="Providers\GdgManagerContextProvider.cs" />
@@ -118,7 +86,6 @@
     <Compile Include="Providers\RequestHelper.cs" />
     <Compile Include="Providers\ShopperContextProvider.cs" />
     <Compile Include="Providers\SiteContextProviderBase.cs" />
-    <Compile Include="ShopperPriceTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">

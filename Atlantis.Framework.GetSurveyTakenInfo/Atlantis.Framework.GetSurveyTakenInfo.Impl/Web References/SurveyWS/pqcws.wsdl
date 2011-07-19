@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetSurveyQuestionAnswerXmlBySurveyID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="surveyID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSurveyQuestionAnswerXmlBySurveyIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSurveyQuestionAnswerXmlBySurveyIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitSurveyAnswerXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlSurveyAnswers" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitSurveyAnswerXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitSurveyAnswerXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnSurveyTakenInfobySurveyIDAndShopperID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SurveyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnSurveyTakenInfobySurveyIDAndShopperIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReturnSurveyTakenInfobySurveyIDAndShopperIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSurveyQuestionAnswerXmlBySurveyIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSurveyQuestionAnswerXmlBySurveyID" />
+  </wsdl:message>
+  <wsdl:message name="GetSurveyQuestionAnswerXmlBySurveyIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSurveyQuestionAnswerXmlBySurveyIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitSurveyAnswerXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitSurveyAnswerXml" />
+  </wsdl:message>
+  <wsdl:message name="SubmitSurveyAnswerXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitSurveyAnswerXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReturnSurveyTakenInfobySurveyIDAndShopperIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReturnSurveyTakenInfobySurveyIDAndShopperID" />
+  </wsdl:message>
+  <wsdl:message name="ReturnSurveyTakenInfobySurveyIDAndShopperIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReturnSurveyTakenInfobySurveyIDAndShopperIDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PQCWSSoap">
+    <wsdl:operation name="GetSurveyQuestionAnswerXmlBySurveyID">
+      <wsdl:input message="tns:GetSurveyQuestionAnswerXmlBySurveyIDSoapIn" />
+      <wsdl:output message="tns:GetSurveyQuestionAnswerXmlBySurveyIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitSurveyAnswerXml">
+      <wsdl:input message="tns:SubmitSurveyAnswerXmlSoapIn" />
+      <wsdl:output message="tns:SubmitSurveyAnswerXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnSurveyTakenInfobySurveyIDAndShopperID">
+      <wsdl:input message="tns:ReturnSurveyTakenInfobySurveyIDAndShopperIDSoapIn" />
+      <wsdl:output message="tns:ReturnSurveyTakenInfobySurveyIDAndShopperIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PQCWSSoap" type="tns:PQCWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSurveyQuestionAnswerXmlBySurveyID">
+      <soap:operation soapAction="http://tempuri.org/GetSurveyQuestionAnswerXmlBySurveyID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitSurveyAnswerXml">
+      <soap:operation soapAction="http://tempuri.org/SubmitSurveyAnswerXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnSurveyTakenInfobySurveyIDAndShopperID">
+      <soap:operation soapAction="http://tempuri.org/ReturnSurveyTakenInfobySurveyIDAndShopperID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PQCWSSoap12" type="tns:PQCWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSurveyQuestionAnswerXmlBySurveyID">
+      <soap12:operation soapAction="http://tempuri.org/GetSurveyQuestionAnswerXmlBySurveyID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitSurveyAnswerXml">
+      <soap12:operation soapAction="http://tempuri.org/SubmitSurveyAnswerXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnSurveyTakenInfobySurveyIDAndShopperID">
+      <soap12:operation soapAction="http://tempuri.org/ReturnSurveyTakenInfobySurveyIDAndShopperID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PQCWS">
+    <wsdl:port name="PQCWSSoap" binding="tns:PQCWSSoap">
+      <soap:address location="http://devisgweb01/pqcws/pqcws.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PQCWSSoap12" binding="tns:PQCWSSoap12">
+      <soap12:address location="http://devisgweb01/pqcws/pqcws.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

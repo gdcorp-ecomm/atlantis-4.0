@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="getEmailTemplatebyTemplateID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iTemplateID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getEmailTemplatebyTemplateIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getEmailTemplatebyTemplateIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReplacePLVParms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="replaceText" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReplacePLVParmsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReplacePLVParmsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckBounceRules">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="emailHash" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailAddress" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrivateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckBounceRulesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckBounceRulesResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ShowUpdateEmailMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="emailHash" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrivateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ShowUpdateEmailMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ShowUpdateEmailMessageResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ShopperMergeForEmailSystem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="losingShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gainingShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ShopperMergeForEmailSystemResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ShopperUnMergeForEmailSystem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="losingShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gainingShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ShopperUnMergeForEmailSystemResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getEmailTemplatebyTemplateIDSoapIn">
+    <wsdl:part name="parameters" element="tns:getEmailTemplatebyTemplateID" />
+  </wsdl:message>
+  <wsdl:message name="getEmailTemplatebyTemplateIDSoapOut">
+    <wsdl:part name="parameters" element="tns:getEmailTemplatebyTemplateIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReplacePLVParmsSoapIn">
+    <wsdl:part name="parameters" element="tns:ReplacePLVParms" />
+  </wsdl:message>
+  <wsdl:message name="ReplacePLVParmsSoapOut">
+    <wsdl:part name="parameters" element="tns:ReplacePLVParmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckBounceRulesSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckBounceRules" />
+  </wsdl:message>
+  <wsdl:message name="CheckBounceRulesSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckBounceRulesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ShowUpdateEmailMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:ShowUpdateEmailMessage" />
+  </wsdl:message>
+  <wsdl:message name="ShowUpdateEmailMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:ShowUpdateEmailMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="ShopperMergeForEmailSystemSoapIn">
+    <wsdl:part name="parameters" element="tns:ShopperMergeForEmailSystem" />
+  </wsdl:message>
+  <wsdl:message name="ShopperMergeForEmailSystemSoapOut">
+    <wsdl:part name="parameters" element="tns:ShopperMergeForEmailSystemResponse" />
+  </wsdl:message>
+  <wsdl:message name="ShopperUnMergeForEmailSystemSoapIn">
+    <wsdl:part name="parameters" element="tns:ShopperUnMergeForEmailSystem" />
+  </wsdl:message>
+  <wsdl:message name="ShopperUnMergeForEmailSystemSoapOut">
+    <wsdl:part name="parameters" element="tns:ShopperUnMergeForEmailSystemResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MessagingWebServiceSoap">
+    <wsdl:operation name="getEmailTemplatebyTemplateID">
+      <wsdl:input message="tns:getEmailTemplatebyTemplateIDSoapIn" />
+      <wsdl:output message="tns:getEmailTemplatebyTemplateIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReplacePLVParms">
+      <wsdl:input message="tns:ReplacePLVParmsSoapIn" />
+      <wsdl:output message="tns:ReplacePLVParmsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckBounceRules">
+      <wsdl:input message="tns:CheckBounceRulesSoapIn" />
+      <wsdl:output message="tns:CheckBounceRulesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ShowUpdateEmailMessage">
+      <wsdl:input message="tns:ShowUpdateEmailMessageSoapIn" />
+      <wsdl:output message="tns:ShowUpdateEmailMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ShopperMergeForEmailSystem">
+      <wsdl:input message="tns:ShopperMergeForEmailSystemSoapIn" />
+      <wsdl:output message="tns:ShopperMergeForEmailSystemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ShopperUnMergeForEmailSystem">
+      <wsdl:input message="tns:ShopperUnMergeForEmailSystemSoapIn" />
+      <wsdl:output message="tns:ShopperUnMergeForEmailSystemSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MessagingWebServiceSoap" type="tns:MessagingWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getEmailTemplatebyTemplateID">
+      <soap:operation soapAction="http://tempuri.org/getEmailTemplatebyTemplateID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReplacePLVParms">
+      <soap:operation soapAction="http://tempuri.org/ReplacePLVParms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckBounceRules">
+      <soap:operation soapAction="http://tempuri.org/CheckBounceRules" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShowUpdateEmailMessage">
+      <soap:operation soapAction="http://tempuri.org/ShowUpdateEmailMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShopperMergeForEmailSystem">
+      <soap:operation soapAction="http://tempuri.org/ShopperMergeForEmailSystem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShopperUnMergeForEmailSystem">
+      <soap:operation soapAction="http://tempuri.org/ShopperUnMergeForEmailSystem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MessagingWebServiceSoap12" type="tns:MessagingWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getEmailTemplatebyTemplateID">
+      <soap12:operation soapAction="http://tempuri.org/getEmailTemplatebyTemplateID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReplacePLVParms">
+      <soap12:operation soapAction="http://tempuri.org/ReplacePLVParms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckBounceRules">
+      <soap12:operation soapAction="http://tempuri.org/CheckBounceRules" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShowUpdateEmailMessage">
+      <soap12:operation soapAction="http://tempuri.org/ShowUpdateEmailMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShopperMergeForEmailSystem">
+      <soap12:operation soapAction="http://tempuri.org/ShopperMergeForEmailSystem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShopperUnMergeForEmailSystem">
+      <soap12:operation soapAction="http://tempuri.org/ShopperUnMergeForEmailSystem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessagingWebService">
+    <wsdl:port name="MessagingWebServiceSoap" binding="tns:MessagingWebServiceSoap">
+      <soap:address location="http://devgdmsg/MessagingWS/MessagingWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MessagingWebServiceSoap12" binding="tns:MessagingWebServiceSoap12">
+      <soap12:address location="http://devgdmsg/MessagingWS/MessagingWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

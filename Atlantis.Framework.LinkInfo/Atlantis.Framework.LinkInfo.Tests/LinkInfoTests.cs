@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.LinkInfo.Interface;
-using Atlantis.Framework.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.LinkInfo.Tests
 {

@@ -1,23 +1,23 @@
 using System;
 using System.Collections.Generic;
+using System.Xml;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.LinkInfo.Interface;
-using System.Xml;
 
 namespace Atlantis.Framework.LinkInfo.Impl
 {
-	public class LinkInfoRequest : IRequest
-	{
-		#region IRequest Members
+  public class LinkInfoRequest : IRequest
+  {
+    #region IRequest Members
 
-		public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
-		{
-			IResponseData oResponseData = null;
-			Dictionary<string, string> dictResult = new Dictionary<string, string>();
+    public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
+    {
+      IResponseData oResponseData = null;
+      Dictionary<string, string> dictResult = new Dictionary<string, string>();
 
-			try
-			{
-				LinkInfoRequestData oGetLinkInfoRequestData = (LinkInfoRequestData)oRequestData;
+      try
+      {
+        LinkInfoRequestData oGetLinkInfoRequestData = (LinkInfoRequestData)oRequestData;
         string xmlLinkInfo = DataCache.DataCache.GetCacheData(oRequestData.ToXML());
 
         XmlDocument linkInfoDoc = new XmlDocument();
@@ -34,28 +34,28 @@ namespace Atlantis.Framework.LinkInfo.Impl
           }
         }
 
-        if ((dictResult.Count == 0) && (!oGetLinkInfoRequestData.AllowEmptyLinkSet))
+        if ((dictResult.Count == 0) && (oGetLinkInfoRequestData.ContextID != 0) && (!oGetLinkInfoRequestData.AllowEmptyLinkSet))
         {
           string message = "Empty LinkInfo exception! ContextId=" + oGetLinkInfoRequestData.ContextID.ToString();
           throw new Exception(message);
         }
 
-				oResponseData = new LinkInfoResponseData(dictResult);
-			}
-			catch (AtlantisException exAtlantis)
-			{
-				oResponseData = new LinkInfoResponseData(dictResult, exAtlantis);
-			}
-			catch (Exception ex)
-			{
-				oResponseData = new LinkInfoResponseData(dictResult, oRequestData, ex);
-			}
+        oResponseData = new LinkInfoResponseData(dictResult);
+      }
+      catch (AtlantisException exAtlantis)
+      {
+        oResponseData = new LinkInfoResponseData(dictResult, exAtlantis);
+      }
+      catch (Exception ex)
+      {
+        oResponseData = new LinkInfoResponseData(dictResult, oRequestData, ex);
+      }
 
-			return oResponseData;
+      return oResponseData;
 
-		}
+    }
 
-		#endregion
+    #endregion
 
-	}
+  }
 }

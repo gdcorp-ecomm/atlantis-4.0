@@ -1,0 +1,95 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{DEBD1E66-262D-4DF4-9D61-7F1A1B544844}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockHttpContext", "..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj", "{2F8983B4-801B-461A-9D76-26A58A496261}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionsAreaBySection.Impl", "Atlantis.Framework.AuctionsAreaBySection.Impl\Atlantis.Framework.AuctionsAreaBySection.Impl.csproj", "{90D7E2EF-9B35-4203-B773-36F841319BEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionsAreaBySection.Interface", "Atlantis.Framework.AuctionsAreaBySection.Interface\Atlantis.Framework.AuctionsAreaBySection.Interface.csproj", "{276AD5B9-422B-4C25-8F39-2FF07215064D}"
+EndProject
+Project("{00000000-0000-0000-0000-000000000000}") = "Atlantis.Framework.AuctionsAreaBySection.Tests", "Atlantis.Framework.AuctionsAreaBySection.Tests\Atlantis.Framework.AuctionsAreaBySection.Tests.csproj", "{B7815887-813A-400A-80CB-D6DDCA8A9E88}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.AuctionsAreaBySection.sln
+		SccProjectName0 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.AuctionsAreaBySection.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.AuctionsAreaBySection.sln
+		SccProjectName2 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
+		SccLocalPath2 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.AuctionsAreaBySection.sln
+		SccProjectName3 = ../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
+		SccLocalPath3 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
+		SccLocalPath4 = .
+		SccProjectUniqueName5 = Atlantis.Framework.AuctionsAreaBySection.Impl\\Atlantis.Framework.AuctionsAreaBySection.Impl.csproj
+		SccProjectName5 = Atlantis.Framework.AuctionsAreaBySection.Impl
+		SccLocalPath5 = Atlantis.Framework.AuctionsAreaBySection.Impl
+		SccProjectUniqueName6 = Atlantis.Framework.AuctionsAreaBySection.Interface\\Atlantis.Framework.AuctionsAreaBySection.Interface.csproj
+		SccProjectName6 = Atlantis.Framework.AuctionsAreaBySection.Interface
+		SccLocalPath6 = Atlantis.Framework.AuctionsAreaBySection.Interface
+		SccProjectUniqueName7 = Atlantis.Framework.AuctionsAreaBySection.Tests\\Atlantis.Framework.AuctionsAreaBySection.Tests.csproj
+		SccProjectName7 = Atlantis.Framework.AuctionsAreaBySection.Tests
+		SccLocalPath7 = Atlantis.Framework.AuctionsAreaBySection.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D7E2EF-9B35-4203-B773-36F841319BEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D7E2EF-9B35-4203-B773-36F841319BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D7E2EF-9B35-4203-B773-36F841319BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D7E2EF-9B35-4203-B773-36F841319BEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{276AD5B9-422B-4C25-8F39-2FF07215064D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{276AD5B9-422B-4C25-8F39-2FF07215064D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{276AD5B9-422B-4C25-8F39-2FF07215064D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{276AD5B9-422B-4C25-8F39-2FF07215064D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7815887-813A-400A-80CB-D6DDCA8A9E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7815887-813A-400A-80CB-D6DDCA8A9E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7815887-813A-400A-80CB-D6DDCA8A9E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7815887-813A-400A-80CB-D6DDCA8A9E88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {DEBD1E66-262D-4DF4-9D61-7F1A1B544844}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {DEBD1E66-262D-4DF4-9D61-7F1A1B544844}
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {DEBD1E66-262D-4DF4-9D61-7F1A1B544844}
+		{2F8983B4-801B-461A-9D76-26A58A496261} = {DEBD1E66-262D-4DF4-9D61-7F1A1B544844}
+	EndGlobalSection
+EndGlobal

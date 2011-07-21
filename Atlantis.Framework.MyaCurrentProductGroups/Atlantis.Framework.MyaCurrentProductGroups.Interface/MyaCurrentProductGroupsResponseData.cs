@@ -7,17 +7,17 @@ namespace Atlantis.Framework.MyaCurrentProductGroups.Interface
 {
   public class MyaCurrentProductGroupsResponseData : IResponseData, IEnumerable<int>
   {
-    private HashSet<int> _currentProductGroups;
+    public HashSet<int> CurrentProductGroups { get; private set; }
 
     public MyaCurrentProductGroupsResponseData(HashSet<int> currentProductGroups)
     {
       if (currentProductGroups == null)
       {
-        _currentProductGroups = new HashSet<int>();
+        CurrentProductGroups = new HashSet<int>();
       }
       else
       {
-        _currentProductGroups = currentProductGroups;
+        CurrentProductGroups = currentProductGroups;
       }
     }
 
@@ -25,7 +25,7 @@ namespace Atlantis.Framework.MyaCurrentProductGroups.Interface
     {
       string message = ex.Message + Environment.NewLine + ex.StackTrace;
       RequestException = new AtlantisException(requestData, "MyaCurrentProductGroupsResponseData", message, requestData.ToXML(), ex);
-      _currentProductGroups = new HashSet<int>();
+      CurrentProductGroups = new HashSet<int>();
     }
 
     public AtlantisException RequestException { get; private set; }
@@ -43,7 +43,7 @@ namespace Atlantis.Framework.MyaCurrentProductGroups.Interface
         rootElement.Add(errorElement);
       }
 
-      foreach (int productGroupId in _currentProductGroups)
+      foreach (int productGroupId in CurrentProductGroups)
       {
         XElement groupIdElement = new XElement("ProductGroupId", productGroupId.ToString());
         rootElement.Add(groupIdElement);
@@ -63,7 +63,7 @@ namespace Atlantis.Framework.MyaCurrentProductGroups.Interface
 
     public IEnumerator<int> GetEnumerator()
     {
-      return _currentProductGroups.GetEnumerator();
+      return CurrentProductGroups.GetEnumerator();
     }
 
     #endregion
@@ -72,7 +72,7 @@ namespace Atlantis.Framework.MyaCurrentProductGroups.Interface
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {
-      return _currentProductGroups.GetEnumerator();
+      return CurrentProductGroups.GetEnumerator();
     }
 
     #endregion

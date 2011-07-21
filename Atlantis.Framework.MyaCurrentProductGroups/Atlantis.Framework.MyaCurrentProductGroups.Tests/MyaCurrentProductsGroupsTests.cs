@@ -65,7 +65,7 @@ namespace Atlantis.Framework.MyaCurrentProductGroups.Tests
     public void MyaCurrentProductGroupsBasic()
     {
       MyaCurrentProductGroupsRequestData request =
-        new MyaCurrentProductGroupsRequestData("832652", string.Empty, string.Empty, string.Empty, 0, 1);
+        new MyaCurrentProductGroupsRequestData("856907", string.Empty, string.Empty, string.Empty, 0, 1);
       MyaCurrentProductGroupsResponseData response = (MyaCurrentProductGroupsResponseData)Engine.Engine.ProcessRequest(request, 163);
       Assert.IsNull(response.RequestException);
     }

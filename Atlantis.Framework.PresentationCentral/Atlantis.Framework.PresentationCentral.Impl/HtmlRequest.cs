@@ -23,22 +23,24 @@ namespace Atlantis.Framework.PresentationCentral.Impl
       {
         HtmlRequestData oPageHeaderData = (HtmlRequestData)oRequestData;
 
-        PresentationCentral.PresentationCentral oPresentationCentralWS = new PresentationCentral.PresentationCentral();
-        oPresentationCentralWS.Url = ((WsConfigElement)oConfig).WSURL;
-        oPresentationCentralWS.Timeout = (int)oPageHeaderData.RequestTimeout.TotalMilliseconds;
-        string sRequestXML = oRequestData.ToXML();
-
-        XmlNode oResultNode = oPresentationCentralWS.RequestHTML(sRequestXML);
-
-        if (oResultNode == null) // Bad request yields a null XmlNode
+        using (PresentationCentral.PresentationCentral oPresentationCentralWS = new PresentationCentral.PresentationCentral()) 
         {
-          throw new AtlantisException((RequestData)oRequestData,
-                                      "PageHeader.RequestHandler",
-                                      "Invalid request, (null) node returned",
-                                      oRequestData.ToXML());
-        }
+          oPresentationCentralWS.Url = ((WsConfigElement)oConfig).WSURL;
+          oPresentationCentralWS.Timeout = (int)oPageHeaderData.RequestTimeout.TotalMilliseconds;
+          string sRequestXML = oRequestData.ToXML();
 
-        oResponseData = new HtmlResponseData(oResultNode);
+          XmlNode oResultNode = oPresentationCentralWS.RequestHTML(sRequestXML);
+
+          if (oResultNode == null) // Bad request yields a null XmlNode
+          {
+            throw new AtlantisException((RequestData)oRequestData,
+                                        "PageHeader.RequestHandler",
+                                        "Invalid request, (null) node returned",
+                                        oRequestData.ToXML());
+          }
+
+          oResponseData = new HtmlResponseData(oResultNode);
+        }
       }
       catch (AtlantisException exAtlantis)
       {

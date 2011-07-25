@@ -20,12 +20,14 @@ namespace Atlantis.Framework.PresentationCentral.Impl
     public IAsyncResult BeginHandleRequest(RequestData oRequestData, ConfigElement oConfig, AsyncCallback oCallback, object oState)
     {
       HtmlRequestData oHtmlRequestData = (HtmlRequestData)oRequestData;
-	  PresentationCentral.PresentationCentral oPresentationCentralWS = new PresentationCentral.PresentationCentral();
-      oPresentationCentralWS.Url = ((WsConfigElement)oConfig).WSURL;
-      string sRequestXML = oHtmlRequestData.ToXML();
-      AsyncState oAsyncState = new AsyncState(oRequestData, oConfig, oPresentationCentralWS, oState);
+      using (PresentationCentral.PresentationCentral oPresentationCentralWS = new PresentationCentral.PresentationCentral())
+      {
+        oPresentationCentralWS.Url = ((WsConfigElement)oConfig).WSURL;
+        string sRequestXML = oHtmlRequestData.ToXML();
+        AsyncState oAsyncState = new AsyncState(oRequestData, oConfig, oPresentationCentralWS, oState);
 
-      return oPresentationCentralWS.BeginRequestHTML(oRequestData.ToXML(), oCallback, oAsyncState);
+        return oPresentationCentralWS.BeginRequestHTML(oRequestData.ToXML(), oCallback, oAsyncState);
+      }
     }
 
     // **************************************************************** //

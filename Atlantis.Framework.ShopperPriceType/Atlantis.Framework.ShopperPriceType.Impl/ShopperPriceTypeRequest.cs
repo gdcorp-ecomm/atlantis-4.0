@@ -18,11 +18,12 @@ namespace Atlantis.Framework.ShopperPriceType.Impl
       {
         ShopperPriceTypeRequestData shopperPriceTypeRequestData = (ShopperPriceTypeRequestData)requestData;
 
-        WSgdBillingData.WSgdBillingDataService wsBillingData = new Atlantis.Framework.ShopperPriceType.Impl.WSgdBillingData.WSgdBillingDataService();
-        wsBillingData.Url = ((WsConfigElement)config).WSURL;
-        wsBillingData.Timeout = (int)shopperPriceTypeRequestData.RequestTimeout.TotalMilliseconds;
-        
-        priceType = wsBillingData.GetShopperPriceType(shopperPriceTypeRequestData.ShopperID, shopperPriceTypeRequestData.PrivateLabelID, out outputError);
+        using (WSgdBillingData.WSgdBillingDataService wsBillingData = new Atlantis.Framework.ShopperPriceType.Impl.WSgdBillingData.WSgdBillingDataService())
+        {
+          wsBillingData.Url = ((WsConfigElement)config).WSURL;
+          wsBillingData.Timeout = (int)shopperPriceTypeRequestData.RequestTimeout.TotalMilliseconds;
+          priceType = wsBillingData.GetShopperPriceType(shopperPriceTypeRequestData.ShopperID, shopperPriceTypeRequestData.PrivateLabelID, out outputError);
+        }
 
         if (outputError.IndexOf("ERROR", StringComparison.InvariantCultureIgnoreCase) > 0)
         {

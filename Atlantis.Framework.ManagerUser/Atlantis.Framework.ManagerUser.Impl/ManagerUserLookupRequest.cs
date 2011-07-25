@@ -16,12 +16,14 @@ namespace Atlantis.Framework.ManagerUser.Impl
 
       try
       {
-        ManagerUserLookupRequestData request = (ManagerUserLookupRequestData)oRequestData;
-        LookupService lookupService = new LookupService();
-        lookupService.Url = ((WsConfigElement)oConfig).WSURL;
-        lookupService.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
-        responseXml = lookupService.GetUserMappingXml(request.Domain, request.UserId);
-        oResponseData = new ManagerUserLookupResponseData(responseXml);
+        using (LookupService lookupService = new LookupService())
+        {
+          ManagerUserLookupRequestData request = (ManagerUserLookupRequestData)oRequestData;
+          lookupService.Url = ((WsConfigElement)oConfig).WSURL;
+          lookupService.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
+          responseXml = lookupService.GetUserMappingXml(request.Domain, request.UserId);
+          oResponseData = new ManagerUserLookupResponseData(responseXml);
+        }
       }
       catch (AtlantisException exAtlantis)
       {
@@ -30,7 +32,7 @@ namespace Atlantis.Framework.ManagerUser.Impl
       catch (Exception ex)
       {
         oResponseData = new ManagerUserLookupResponseData(responseXml, (ManagerUserLookupRequestData)oRequestData, ex);
-      }
+     } 
 
       return oResponseData;
     }

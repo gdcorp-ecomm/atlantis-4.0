@@ -128,5 +128,25 @@ namespace Atlantis.Framework.SessionCache.Tests
 
     }
 
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void SessionCacheCheckCachedResponse()
+    {
+      HttpContext.Current.Session.Clear();
+      TestTripletRequest.Reset();
+
+      TestTripletRequestData request = new TestTripletRequestData(
+        string.Empty, string.Empty, string.Empty, string.Empty, 0, 2);
+      TestTripletResponseData response = SessionCache.GetProcessRequest<TestTripletResponseData>(request, 999, TimeSpan.FromSeconds(30));
+      string firstResult = response.Result;
+
+      Assert.IsTrue(SessionCache.IsCachedRequest<TestTripletResponseData>(request, 999));
+
+      TestTripletResponseData response2;
+      SessionCache.IsCachedRequest<TestTripletResponseData>(request, 999, out response2);
+
+      Assert.AreEqual(response.Result, response2.Result);
+
+    }
   }
 }

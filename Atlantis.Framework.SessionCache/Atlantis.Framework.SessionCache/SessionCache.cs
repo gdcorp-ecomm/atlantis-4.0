@@ -138,32 +138,16 @@ namespace Atlantis.Framework.SessionCache
       }
 
       T result = null;
-      string sessionKey = "SessionCache." + requestType.ToString() + "." + requestData.GetCacheMD5();
+      string sessionKey = GetSessionKey(requestData, requestType);
       SessionCacheItem cacheItem = null;
 
       if (!forceRequest)
       {
         try
         {
-          if (MinimizeDeserializationsPerRequest)
+          if (!IsResponseInSession<T>(requestData, requestType, true, out result, out cacheItem))
           {
-            result = HttpContext.Current.Items[sessionKey] as T;
-          }
-
-          if (result == null)
-          {
-            Pair sessionPair = HttpContext.Current.Session[sessionKey] as Pair;
-            cacheItem = new SessionCacheItem(sessionPair);
-            if ((cacheItem.IsValid) && (!cacheItem.IsExpired))
-            {
-              result = new T();
-              result.DeserializeSessionData(cacheItem.SessionData);
-
-              if (MinimizeDeserializationsPerRequest)
-              {
-                HttpContext.Current.Items[sessionKey] = result;
-              }
-            }
+            result = null;
           }
         }
         catch (Exception ex)
@@ -236,5 +220,61 @@ namespace Atlantis.Framework.SessionCache
 
     #endregion
 
+    #region Methods for Checking if item is in cache
+    public static bool IsCachedRequest<T>(RequestData requestData, int requestType)
+      where T : class, IResponseData, ISessionSerializableResponse, new()
+    {
+      SessionCacheItem cacheItem = null;
+      T data = default(T);
+      return IsResponseInSession(requestData, requestType, false, out data, out cacheItem);
+    }
+    public static bool IsCachedRequest<T>(RequestData requestData, int requestType, out T data)
+      where T : class, IResponseData, ISessionSerializableResponse, new()
+    {
+      SessionCacheItem cacheItem = null;
+      return IsResponseInSession(requestData, requestType, true, out data, out cacheItem);
+    }
+    private static bool IsResponseInSession<T>(RequestData requestData, int requestType, bool shouldDeserializeData, out T data, out SessionCacheItem cacheItem)
+      where T : class, IResponseData, ISessionSerializableResponse, new()
+    {
+      bool isCachedRequest = false;
+      data = null;
+      string sessionKey = GetSessionKey(requestData, requestType);
+      cacheItem = null;
+      if (MinimizeDeserializationsPerRequest)
+      {
+        data = HttpContext.Current.Items[sessionKey] as T;
+      }
+      if (data == null)
+      {
+        Pair sessionPair = HttpContext.Current.Session[sessionKey] as Pair;
+        cacheItem = new SessionCacheItem(sessionPair);
+        if ((cacheItem.IsValid) && (!cacheItem.IsExpired))
+        {
+          isCachedRequest = true;
+          if (shouldDeserializeData)
+          {
+            data = new T();
+            data.DeserializeSessionData(cacheItem.SessionData);
+            if (MinimizeDeserializationsPerRequest)
+            {
+              HttpContext.Current.Items[sessionKey] = data;
+            }
+          }
+        }
+      }
+      else
+      {
+        isCachedRequest = true;
+      }
+      return isCachedRequest;
+    }
+    #endregion
+    #region Helper Methods
+    private static string GetSessionKey(RequestData requestData, int requestType)
+    {
+      return String.Format("{0}{1}.{2}", _CacheKeyPrefix, requestType.ToString(), requestData.GetCacheMD5());
+    }
+    #endregion
   }
 }

@@ -156,41 +156,8 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
     public override string GetCacheMD5()
     {
       MD5 md5 = new MD5CryptoServiceProvider();
-
-      StringBuilder dataBuilder = new StringBuilder();
-      dataBuilder.Append(ShopperID);
-      dataBuilder.AppendFormat(".{0}", Paging.SortOrderField);
-      dataBuilder.AppendFormat(".{0}", Paging.SortOrder == SortOrderType.Ascending ? "ASC" : "DESC");
-      dataBuilder.AppendFormat(".{0}", !string.IsNullOrEmpty(Paging.SearchTerm) ? Paging.SearchTerm : "none");
-      dataBuilder.AppendFormat(".{0}", Paging.RowsPerPage);
-      dataBuilder.AppendFormat(".{0}", Paging.ExpirationDays.HasValue ? Paging.ExpirationDays.Value.ToString() : "none");
-      dataBuilder.AppendFormat(".{0}", Paging.SummaryOnly ? "true" : "false");
-      dataBuilder.AppendFormat(".{0}", Paging.StatusType.HasValue ? Paging.StatusType.Value : -1);
-      dataBuilder.AppendFormat(".{0}", DbpFilter);
-      
-      if(Paging.IncludeBoundary && !string.IsNullOrEmpty(Paging.BoundaryField))
-      {
-        dataBuilder.AppendFormat(".{0}.{1}", Paging.BoundaryField, Paging.BoundaryFieldValue);
-
-        if(!string.IsNullOrEmpty(Paging.BoundaryUniquifierField) && !string.IsNullOrEmpty(Paging.BoundaryUniquifierFieldValue))
-        {
-          dataBuilder.AppendFormat(".{0}.{1}", Paging.BoundaryUniquifierField, Paging.BoundaryUniquifierFieldValue);
-        }
-
-        dataBuilder.AppendFormat(".{0}", Paging.NavigatingForward ? "forward" : "backward");
-      }
-
-      if(Paging.TldIdList != null && Paging.TldIdList.Count > 0)
-      {
-        dataBuilder.AppendFormat(".{0}", "TldIds:");
-        foreach (int tldId in Paging.TldIdList)
-        {
-          dataBuilder.AppendFormat("{0},", tldId);
-        }
-      }
-
-      var data = Encoding.UTF8.GetBytes(dataBuilder.ToString());
-
+      var requestXml = ToXML();
+      var data = Encoding.UTF8.GetBytes(requestXml);
       var hash = md5.ComputeHash(data);
       var result = Encoding.UTF8.GetString(hash);
       return result;

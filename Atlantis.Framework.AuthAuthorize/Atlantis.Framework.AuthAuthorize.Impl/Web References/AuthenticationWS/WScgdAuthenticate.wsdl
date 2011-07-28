@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="urn:WScgdAuthenticateService" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WScgdAuthenticateService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WScgdAuthenticateService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetHintIn">
+    <wsdl:part name="bstrLoginName" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+    <wsdl:part name="bstrStreet" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetHintOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrPwdHint" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyIn">
+    <wsdl:part name="bstrLoginName" type="s:string" />
+    <wsdl:part name="bstrPassword" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+    <wsdl:part name="bstrIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrLoginKey" type="s:string" />
+    <wsdl:part name="pbstrValidationSource" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthTokenIn">
+    <wsdl:part name="bstrLoginName" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthTokenOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrGUID" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResetPasswordIn">
+    <wsdl:part name="bstrLoginName" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+    <wsdl:part name="bstrIPAddress" type="s:string" />
+    <wsdl:part name="bstrNewPassword" type="s:string" />
+    <wsdl:part name="bstrNewHint" type="s:string" />
+    <wsdl:part name="bstrGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResetPasswordOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LookupNamespaceIn">
+    <wsdl:part name="bstrNamespace" type="s:string" />
+    <wsdl:part name="bstrKey" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="LookupNamespaceOut">
+    <wsdl:part name="pbstrShopperID" type="s:string" />
+    <wsdl:part name="pbstrEmail" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AuthorizeIn">
+    <wsdl:part name="bstrLogin" type="s:string" />
+    <wsdl:part name="bstrPassword" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+    <wsdl:part name="bstrIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AuthorizeOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrXML" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsStrongPasswordIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsStrongPasswordOut">
+    <wsdl:part name="return" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+    <wsdl:part name="bstrCurrentPassword" type="s:string" />
+    <wsdl:part name="bstrNewPassword" type="s:string" />
+    <wsdl:part name="bstrNewHint" type="s:string" />
+    <wsdl:part name="bstrNewLogin" type="s:string" />
+    <wsdl:part name="lStrong" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDigestAuthIn">
+    <wsdl:part name="bstrLogin" type="s:string" />
+    <wsdl:part name="bstrRealm" type="s:string" />
+    <wsdl:part name="bstrMethod" type="s:string" />
+    <wsdl:part name="bstrURI" type="s:string" />
+    <wsdl:part name="bstrNonce" type="s:string" />
+    <wsdl:part name="bstrQOP" type="s:string" />
+    <wsdl:part name="bstrClientNonce" type="s:string" />
+    <wsdl:part name="bstrNonceCount" type="s:string" />
+    <wsdl:part name="bstrResponse" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDigestAuthOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AuthorizeAPIResellerIn">
+    <wsdl:part name="bstrLogin" type="s:string" />
+    <wsdl:part name="bstrPassword" type="s:string" />
+    <wsdl:part name="bstrIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AuthorizeAPIResellerOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePINIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+    <wsdl:part name="bstrPIN" type="s:string" />
+    <wsdl:part name="bstrIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePINOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrievePINIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+    <wsdl:part name="bstrPassword" type="s:string" />
+    <wsdl:part name="bstrIPAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrievePINOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrPIN" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WScgdAuthenticateServiceSoap">
+    <wsdl:operation name="GetHint">
+      <wsdl:input message="s0:GetHintIn" />
+      <wsdl:output message="s0:GetHintOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Verify">
+      <wsdl:input message="s0:VerifyIn" />
+      <wsdl:output message="s0:VerifyOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthToken">
+      <wsdl:input message="s0:GetAuthTokenIn" />
+      <wsdl:output message="s0:GetAuthTokenOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <wsdl:input message="s0:ResetPasswordIn" />
+      <wsdl:output message="s0:ResetPasswordOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupNamespace">
+      <wsdl:input message="s0:LookupNamespaceIn" />
+      <wsdl:output message="s0:LookupNamespaceOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Authorize">
+      <wsdl:input message="s0:AuthorizeIn" />
+      <wsdl:output message="s0:AuthorizeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsStrongPassword">
+      <wsdl:input message="s0:IsStrongPasswordIn" />
+      <wsdl:output message="s0:IsStrongPasswordOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:input message="s0:ChangePasswordIn" />
+      <wsdl:output message="s0:ChangePasswordOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDigestAuth">
+      <wsdl:input message="s0:ValidateDigestAuthIn" />
+      <wsdl:output message="s0:ValidateDigestAuthOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizeAPIReseller">
+      <wsdl:input message="s0:AuthorizeAPIResellerIn" />
+      <wsdl:output message="s0:AuthorizeAPIResellerOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePIN">
+      <wsdl:input message="s0:ValidatePINIn" />
+      <wsdl:output message="s0:ValidatePINOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrievePIN">
+      <wsdl:input message="s0:RetrievePINIn" />
+      <wsdl:output message="s0:RetrievePINOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <wsdl:input message="s0:SendPasswordResetEmailIn" />
+      <wsdl:output message="s0:SendPasswordResetEmailOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WScgdAuthenticateServiceSoap" type="s0:WScgdAuthenticateServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="GetHint">
+      <soap:operation soapAction="#GetHint" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Verify">
+      <soap:operation soapAction="#Verify" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthToken">
+      <soap:operation soapAction="#GetAuthToken" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap:operation soapAction="#ResetPassword" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupNamespace">
+      <soap:operation soapAction="#LookupNamespace" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authorize">
+      <soap:operation soapAction="#Authorize" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsStrongPassword">
+      <soap:operation soapAction="#IsStrongPassword" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap:operation soapAction="#ChangePassword" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDigestAuth">
+      <soap:operation soapAction="#ValidateDigestAuth" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizeAPIReseller">
+      <soap:operation soapAction="#AuthorizeAPIReseller" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePIN">
+      <soap:operation soapAction="#ValidatePIN" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrievePIN">
+      <soap:operation soapAction="#RetrievePIN" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <soap:operation soapAction="#SendPasswordResetEmail" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WScgdAuthenticateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WScgdAuthenticateService">
+    <wsdl:port name="WScgdAuthenticateServiceSoap" binding="s0:WScgdAuthenticateServiceSoap">
+      <soap:address location="https://authentication.dev.glbt1.gdg:443/WScgdAuthentication/WScgdAuthenticate.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

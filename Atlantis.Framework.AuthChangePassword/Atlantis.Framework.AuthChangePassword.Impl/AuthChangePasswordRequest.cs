@@ -143,35 +143,37 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
         }
 
         AuthChangePasswordRequestData request = (AuthChangePasswordRequestData)oRequestData;
-        WScgdAuthenticateService authenticationService = new WScgdAuthenticateService()
+        using (WScgdAuthenticateService authenticationService = new WScgdAuthenticateService()
                                                            {
                                                              Url = authServiceUrl,
-                                                             Timeout = (int) request.RequestTimeout.TotalMilliseconds
-                                                           };
-
-        string errorOutput = null;
-
-        HashSet<int> responseCodes = ValidateRequest(request, authenticationService);
-        if (responseCodes.Count > 0)
+                                                             Timeout = (int)request.RequestTimeout.TotalMilliseconds
+                                                           })
         {
-          errorOutput = "Request not valid.";
-        }
-        else
-        {
-          int useStrongPasswordValue = 0;
-          if (request.UseStrongPassword)
+          string errorOutput = null;
+
+          HashSet<int> responseCodes = ValidateRequest(request, authenticationService);
+          if (responseCodes.Count > 0)
           {
-            useStrongPasswordValue = 1;
+            errorOutput = "Request not valid.";
+          }
+          else
+          {
+            int useStrongPasswordValue = 0;
+            if (request.UseStrongPassword)
+            {
+              useStrongPasswordValue = 1;
+            }
+
+            int resultCode = authenticationService.ChangePassword(
+              request.ShopperID, request.PrivateLabelId, request.CurrentPassword, request.NewPassword,
+              request.NewHint, request.NewLogin, useStrongPasswordValue, out errorOutput);
+
+            responseCodes.Add(resultCode);
           }
 
-          int resultCode = authenticationService.ChangePassword(
-            request.ShopperID, request.PrivateLabelId, request.CurrentPassword, request.NewPassword,
-            request.NewHint, request.NewLogin, useStrongPasswordValue, out errorOutput);
-
-          responseCodes.Add(resultCode);
+          responseData = new AuthChangePasswordResponseData(responseCodes, errorOutput);
         }
 
-        responseData = new AuthChangePasswordResponseData(responseCodes, errorOutput);
       }
       catch (AtlantisException exAtlantis)
       {

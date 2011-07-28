@@ -20,27 +20,29 @@ namespace Atlantis.Framework.AuthAuthorize.Impl
           throw new AtlantisException(requestData, "AuthAuthorize.RequestHandler", "AuthAuthorize WS URL in atlantis.config must use https.", string.Empty);
         }
 
-        WScgdAuthenticateService authenticationService = new WScgdAuthenticateService();
-        authenticationService.Url = authServiceUrl;
-
-        AuthAuthorizeRequestData request = (AuthAuthorizeRequestData)requestData;
-        authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
-
-        HashSet<int> responseCodes = ValidateRequest(request);
-        string resultXml = string.Empty;
-        string errorOutput;
-
-        if (responseCodes.Count > 0)
+        using (WScgdAuthenticateService authenticationService = new WScgdAuthenticateService())
         {
-          errorOutput = "Request not valid.";
-        }
-        else
-        {
-          int resultCode = authenticationService.Authorize(request.LoginName, request.Password, request.PrivateLabelId, request.IpAddress, out resultXml, out errorOutput);
-          responseCodes.Add(resultCode);
-        }
+          authenticationService.Url = authServiceUrl;
 
-        responseData = new AuthAuthorizeResponseData(resultXml, responseCodes, errorOutput);
+          AuthAuthorizeRequestData request = (AuthAuthorizeRequestData)requestData;
+          authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+
+          HashSet<int> responseCodes = ValidateRequest(request);
+          string resultXml = string.Empty;
+          string errorOutput;
+
+          if (responseCodes.Count > 0)
+          {
+            errorOutput = "Request not valid.";
+          }
+          else
+          {
+            int resultCode = authenticationService.Authorize(request.LoginName, request.Password, request.PrivateLabelId, request.IpAddress, out resultXml, out errorOutput);
+            responseCodes.Add(resultCode);
+          }
+
+          responseData = new AuthAuthorizeResponseData(resultXml, responseCodes, errorOutput);
+        }
       }
       catch (Exception ex)
       {

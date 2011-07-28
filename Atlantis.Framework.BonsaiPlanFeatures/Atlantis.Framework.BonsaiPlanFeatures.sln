@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BonsaiPlanFeatures.Interface", "Atlantis.Framework.BonsaiPlanFeatures.Interface\Atlantis.Framework.BonsaiPlanFeatures.Interface.csproj", "{635732C4-CE63-4455-811F-BC09C35F3FCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{21D84498-0304-4339-8B84-59631DD0B8CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BonsaiPlanFeatures.Impl", "Atlantis.Framework.BonsaiPlanFeatures.Impl\Atlantis.Framework.BonsaiPlanFeatures.Impl.csproj", "{7386CCA8-7219-49DD-B963-5B5E2393BF69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BonsaiPlanFeatures.Tests", "Atlantis.Framework.BonsaiPlanFeatures.Tests\Atlantis.Framework.BonsaiPlanFeatures.Tests.csproj", "{1434971C-A522-44DB-8722-6A616CE8C2C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C45796FF-D83B-4DC3-9AB0-AEFC90D2B74C}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.BonsaiPlanFeatures.vsmdi = Atlantis.Framework.BonsaiPlanFeatures.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.BonsaiPlanFeatures.Interface\\Atlantis.Framework.BonsaiPlanFeatures.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.BonsaiPlanFeatures.Interface
+		SccLocalPath1 = Atlantis.Framework.BonsaiPlanFeatures.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.BonsaiPlanFeatures.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.BonsaiPlanFeatures.sln
+		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.BonsaiPlanFeatures.Impl\\Atlantis.Framework.BonsaiPlanFeatures.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.BonsaiPlanFeatures.Impl
+		SccLocalPath4 = Atlantis.Framework.BonsaiPlanFeatures.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.BonsaiPlanFeatures.Tests\\Atlantis.Framework.BonsaiPlanFeatures.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.BonsaiPlanFeatures.Tests
+		SccLocalPath5 = Atlantis.Framework.BonsaiPlanFeatures.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.BonsaiPlanFeatures.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{635732C4-CE63-4455-811F-BC09C35F3FCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{635732C4-CE63-4455-811F-BC09C35F3FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{635732C4-CE63-4455-811F-BC09C35F3FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{635732C4-CE63-4455-811F-BC09C35F3FCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7386CCA8-7219-49DD-B963-5B5E2393BF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7386CCA8-7219-49DD-B963-5B5E2393BF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7386CCA8-7219-49DD-B963-5B5E2393BF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7386CCA8-7219-49DD-B963-5B5E2393BF69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1434971C-A522-44DB-8722-6A616CE8C2C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1434971C-A522-44DB-8722-6A616CE8C2C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1434971C-A522-44DB-8722-6A616CE8C2C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1434971C-A522-44DB-8722-6A616CE8C2C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {21D84498-0304-4339-8B84-59631DD0B8CF}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {21D84498-0304-4339-8B84-59631DD0B8CF}
+	EndGlobalSection
+EndGlobal

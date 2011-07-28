@@ -80,6 +80,7 @@
     <Compile Include="Paging\DomainNamePaging.cs" />
     <Compile Include="Paging\ExpirationDatePaging.cs" />
     <Compile Include="Paging\IDomainPaging.cs" />
+    <Compile Include="Paging\MinimalSummaryOnlyPaging.cs" />
     <Compile Include="Paging\PageSummary.cs" />
     <Compile Include="Paging\SortOrderType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

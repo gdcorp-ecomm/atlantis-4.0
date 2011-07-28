@@ -193,5 +193,43 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Tests
 
       Assert.AreEqual(response1.FullSummary.FirstDomain, response2.FullSummary.FirstDomain);
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void DomainsByProxy_IncludeDbpOnly_Test()
+    {
+      IDomainPaging paging = new MinimalSummaryOnlyPaging();
+
+      DCCGetDomainByShopperRequestData request = new DCCGetDomainByShopperRequestData("859148", string.Empty, string.Empty, string.Empty, 0, paging, "MOBILE_CSA_DCC");
+      request.DbpFilter = DCCGetDomainByShopperRequestData.DomainByProxyFilter.DbpOnly;
+      request.RequestTimeout = TimeSpan.FromMinutes(1);
+      DCCGetDomainByShopperResponseData response = (DCCGetDomainByShopperResponseData)Engine.Engine.ProcessRequest(request, 100);
+
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(response.FullSummary != null);
+      Assert.IsTrue(response.FullSummary.ResultCount > 0);
+
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void DomainsByProxy_IncludeNoDbp_Test()
+    {
+      IDomainPaging paging = new MinimalSummaryOnlyPaging();
+
+      DCCGetDomainByShopperRequestData request = new DCCGetDomainByShopperRequestData("859148", string.Empty, string.Empty, string.Empty, 0, paging, "MOBILE_CSA_DCC");
+      request.DbpFilter = DCCGetDomainByShopperRequestData.DomainByProxyFilter.NoDbpOnly;
+      request.RequestTimeout = TimeSpan.FromMinutes(1);
+
+      Console.WriteLine(request.ToXML());
+
+      DCCGetDomainByShopperResponseData response = (DCCGetDomainByShopperResponseData)Engine.Engine.ProcessRequest(request, 100);
+
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(response.FullSummary != null);
+      Assert.IsTrue(response.FullSummary.ResultCount > 0);
+
+    }
+
   }
 }

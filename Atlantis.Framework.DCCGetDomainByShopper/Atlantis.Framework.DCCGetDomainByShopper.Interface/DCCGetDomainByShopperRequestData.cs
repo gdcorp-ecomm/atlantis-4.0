@@ -9,11 +9,21 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
 {
   public class DCCGetDomainByShopperRequestData : RequestData
   {
+
+    public enum DomainByProxyFilter
+    {
+      NoFilter = 0, //default 
+      DbpOnly, 
+      NoDbpOnly,
+    }
+
     public string DccDomainUser { get; private set; }
 
     public IDomainPaging Paging { get; private set; }
 
     public bool UseMaxdateAsDefaultForExpirationDate { get; set; }
+
+    public DomainByProxyFilter DbpFilter { get; set; }
 
     public DCCGetDomainByShopperRequestData(string shopperId,
                                             string sourceUrl,
@@ -97,6 +107,23 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
         AddAttribute(filterElement, "statustype", Paging.StatusType.Value.ToString());
       }
 
+      if (DbpFilter != DomainByProxyFilter.NoFilter)
+      {
+        if (filterElement == null)
+        {
+          filterElement = (XmlElement)AddNode(oRoot, "filter");
+        }
+        switch (DbpFilter)
+        {
+          case DomainByProxyFilter.DbpOnly:
+            AddAttribute(filterElement, "isproxied", "1");
+            break;
+          case DomainByProxyFilter.NoDbpOnly:
+            AddAttribute(filterElement, "isproxied", "0");
+            break;
+        }
+      }
+
       if (!string.IsNullOrEmpty(Paging.BoundaryFieldValue))
       {
         XmlElement oPaging = (XmlElement)AddNode(oRoot, "paging");
@@ -139,6 +166,7 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Interface
       dataBuilder.AppendFormat(".{0}", Paging.ExpirationDays.HasValue ? Paging.ExpirationDays.Value.ToString() : "none");
       dataBuilder.AppendFormat(".{0}", Paging.SummaryOnly ? "true" : "false");
       dataBuilder.AppendFormat(".{0}", Paging.StatusType.HasValue ? Paging.StatusType.Value : -1);
+      dataBuilder.AppendFormat(".{0}", DbpFilter);
       
       if(Paging.IncludeBoundary && !string.IsNullOrEmpty(Paging.BoundaryField))
       {

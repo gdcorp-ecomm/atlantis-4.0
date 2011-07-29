@@ -35,13 +35,12 @@ namespace Atlantis.Framework.Engine
     {
       XmlDocument xdConfig = new XmlDocument();
       string configFilePath = string.Empty;
-      bool isRegistry = false;
 
       try
       {
         _engineLock.GetWriterLock();
 
-        configFilePath = GetConfigFilePath(out isRegistry);
+        configFilePath = GetConfigFilePath();
         _configItems.Clear();
 
         xdConfig.Load(configFilePath);
@@ -52,8 +51,7 @@ namespace Atlantis.Framework.Engine
         {
           int requestType = 0;
           int lpc = 0;
-          string assemblyPath = isRegistry ? xlConfigElement.GetAttribute("assembly")
-                                         : Path.Combine(AssemblyPath, xlConfigElement.GetAttribute("assembly"));
+          string assemblyPath = Path.Combine(AssemblyPath, xlConfigElement.GetAttribute("assembly"));
           string progId = xlConfigElement.GetAttribute("progid");
           string requestTypeString = xlConfigElement.GetAttribute("request_type");
           string lpcString = xlConfigElement.GetAttribute("lpc");
@@ -151,10 +149,9 @@ namespace Atlantis.Framework.Engine
       }
     }
 
-    private string GetConfigFilePath(out bool isRegistry)
+    private string GetConfigFilePath()
     {
       string configFilePath = string.Empty;
-      isRegistry = false;
 
       try
       {

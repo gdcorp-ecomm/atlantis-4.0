@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataProviderElements>
+  <DatabaseAccess>
+    <dbsetting name="buyerprofiles" dsn="corp.web.cart.godaddy" app_name="cart" cert_name="corp.web.cart.dev.client.godaddy.com" target_name="mya_GetBuyerProfiles_sp">
+      <param name="shopper_id" type="varchar" size="10" />
+    </dbsetting>
+    <dbsetting name="buyerprofiledetails" dsn="corp.web.cart.godaddy" app_name="cart" cert_name="corp.web.cart.dev.client.godaddy.com" target_name="mya_GetBuyerProfileDetails_sp">
+      <param name="shopper_id" type="varchar" size="10" />
+      <param name="profile_id" type="int" size="" />
+    </dbsetting>
+    <dbsetting name="buyerproxyaccounts" dsn="corp.web.cart.godaddy" app_name="cart" cert_name="corp.web.cart.dev.client.godaddy.com" target_name="mya_dbp_logins_by_shopper_id_sp">
+      <param name="shopper_id" type="varchar" size="10" />
+    </dbsetting>
+    <dbsetting name="addsbscontactinfo" dsn="corp.web.cart.godaddy" app_name="cart" cert_name="corp.web.cart.dev.client.godaddy.com" target_name="gitme_domainBusinessContactInfoInsert_sp">
+      <param name="gitme_sessionID" type="varchar" size="100" />
+      <param name="domainName" type="varchar" size="128" />
+      <param name="name" type="varchar" size="100" />
+      <param name="companyName" type="varchar" size="100" />
+      <param name="address1" type="varchar" size="100" />
+      <param name="address2" type="varchar" size="100" />
+      <param name="city" type="varchar" size="100" />
+      <param name="stateOrProvince" type="varchar" size="100" />
+      <param name="zipCode" type="varchar" size="25" />
+      <param name="country" type="varchar" size="50" />
+      <param name="email" type="varchar" size="256" />
+      <param name="phone" type="varchar" size="50" />
+      <param name="fax" type="varchar" size="50" />
+    </dbsetting>
+    <dbsetting name="sbscontactinfobysessionid" dsn="corp.web.cart.godaddy" app_name="cart" cert_name="corp.web.cart.dev.client.godaddy.com" target_name="gitme_domainBusinessContactInfoGetBySessionID_sp">
+      <param name="gitme_sessionID" type="varchar" size="100" />
+    </dbsetting>
+  </DatabaseAccess>
+  <WebService>
+    <wssetting name="JustForYouOffers_GetOffersWithPlId" host_name="http://172.19.69.1/fbiSmartOffers/SmartOffers.asmx" target_name="GetOffersWithPlid">
+      <param name="shopper_id" type="string"></param>
+      <param name="application_id" type="short"></param>
+      <param name="privateLabelId" type="int"></param>
+    </wssetting>
+    <wssetting name="domaincontactcheck_validate" host_name="http://check.dev.secureserver-net.ide/RegContactValidationWebSvc/ContactValidationService.asmx?WSDL" target_name="Validate">
+      <param name="xmlInput" type="varchar" size="" />
+    </wssetting>
+    <wssetting name="messagesystemservice_processxml" host_name="http://devgdmsg/gdMessagingSystem/WSCgdMessagingSystem.dll?Handler=GenWSCgdMessagingSystemWSDL" target_name="ProcessXml">
+      <param name="bstrMessageXml" type="varchar" size="" />
+    </wssetting>
+  </WebService>
+  <WebService>
+    <wssetting name="atlantis_shopperconversion" host_name="http://172.19.68.67/wscAtlantisConversion/wscAtlantisConversion.dll?Handler=GenwscAtlantisConversionWSDL" target_name="IsShopperHeaderEnabled">
+      <param name="bstrShopperID" type="varchar" size="" />
+      <param name="pbstrOutput" type="varchar" size="" />
+    </wssetting>
+  </WebService>
+  <WebService>
+    <wssetting name="PrivacyAppInsertUpdate" host_name="http://devsbeapp01.jomax.paholdings.com/wscgdPrivacyApp/wscgdPrivacyApp.dll?Handler=GenwscgdPrivacyAppWSDL" target_name="InsertUpdate">
+      <param name="bstrXML" type="string" size="" />
+      <param name="pbstrOutput" type="string" size="" />
+    </wssetting>
+  </WebService>
+  <RESTService>
+    <rssetting name="menuxmlservice_request" host_name="http://services.dev.godaddy-com.ide/menus/ControlPanelMenuXmlService.aspx" target_name="">
+      <param name="privateLabelId" type="varchar" size="" />
+      <param name="shopperId" type="varchar" size="" />
+      <param name="requestType" type="varchar" size="" />
+      <param name="realtime" type="varchar" size="" />
+    </rssetting>
+  </RESTService>
+</DataProviderElements>

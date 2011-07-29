@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataProviderElements>
+  <DatabaseAccess>
+    <dbsetting name="buyerprofiles" dsn="corp.web.mya.Godaddy" app_name="MYA" cert_name="corp.web.mya.dev.client.godaddy.com" target_name="mya_GetBuyerProfiles_sp">
+      <param name="shopper_id" type="varchar" size="10" />
+    </dbsetting>
+    <dbsetting name="sb10videocontestinsert" dsn="corp.web.sales.godaddy_content" app_name="sales" cert_name="corp.web.sales.dev.client.godaddy.com" target_name="gdshop_socialMediaVideoInsert_sp">
+      <param name="url" type="varchar" size="250" />
+      <param name="title" type="varchar" size="100" />
+      <param name="description" type="varchar" size="500" />
+      <param name="screenshotSelection" type="int" size="" />
+      <param name="category" type="int" size="" />
+      <param name="agreement" type="bit" size="" />
+      <param name="gdshop_socialMediaVideoApprovalStatusID" type="int" size="" />
+      <param name="storeBitlyLink" type="varchar" size="250" />
+      <param name="displayName" type="varchar" size="100" />
+      <param name="shopper_id" type="varchar" size="10" />
+      <param name="reviewerNote" type="varchar" size="500" />
+      <param name="reviewedBy" type="int" size="" />
+      <param name="reviewedDate" type="datetime" size="" />
+      <param name="emailNote" type="varchar" size="500" />
+      <param name="validURL" type="bit" size="" />
+      <param name="gdshop_socialMediaVideoID" type="int" size="" direction="output" />
+      <param name="gdshop_socialMediaCompetitionID" type="int" size="" />
+    </dbsetting>
+  </DatabaseAccess>
+  <WebService>
+    <wssetting name="JustForYouOffers_GetOffersWithPlId" host_name="http://172.19.69.1/fbiSmartOffers/SmartOffers.asmx" target_name="GetOffersWithPlid">
+      <param name="shopper_id" type="string"></param>
+      <param name="application_id" type="short"></param>
+      <param name="privateLabelId" type="int"></param>
+    </wssetting>
+  </WebService>
+  <RESTService>
+    <rssetting name="menuxmlservice_request" host_name="http://services.dev.godaddy-com.ide/menus/ControlPanelMenuXmlService.aspx" target_name="">
+      <param name="privateLabelId" type="varchar" size="" />
+      <param name="shopperId" type="varchar" size="" />
+      <param name="requestType" type="varchar" size="" />
+      <param name="realtime" type="varchar" size="" />
+    </rssetting>
+  </RESTService>
+</DataProviderElements>

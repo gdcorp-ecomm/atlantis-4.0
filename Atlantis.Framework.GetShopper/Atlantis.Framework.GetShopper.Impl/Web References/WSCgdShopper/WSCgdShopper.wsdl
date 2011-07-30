@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:WSCgdShopperService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSCgdShopperService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WSCgdShopperService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetShopperIn">
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateShopperIn">
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateShopperOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchShoppersIn">
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchShoppersOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateShopperIn">
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateShopperOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AuditShopperIn">
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AuditShopperOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsShopperPINSetIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsShopperPINSetOut">
+    <wsdl:part name="return" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="CreateShopperForIdIn">
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateShopperForIdOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyShopperWithUpdatesIn">
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyShopperWithUpdatesOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePaymentTypeIn">
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePaymentTypeOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WSCgdShopperServiceSoap">
+    <wsdl:operation name="GetShopper">
+      <wsdl:input message="s0:GetShopperIn" />
+      <wsdl:output message="s0:GetShopperOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateShopper">
+      <wsdl:input message="s0:UpdateShopperIn" />
+      <wsdl:output message="s0:UpdateShopperOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchShoppers">
+      <wsdl:input message="s0:SearchShoppersIn" />
+      <wsdl:output message="s0:SearchShoppersOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateShopper">
+      <wsdl:input message="s0:CreateShopperIn" />
+      <wsdl:output message="s0:CreateShopperOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuditShopper">
+      <wsdl:input message="s0:AuditShopperIn" />
+      <wsdl:output message="s0:AuditShopperOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsShopperPINSet">
+      <wsdl:input message="s0:IsShopperPINSetIn" />
+      <wsdl:output message="s0:IsShopperPINSetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateShopperForId">
+      <wsdl:input message="s0:CreateShopperForIdIn" />
+      <wsdl:output message="s0:CreateShopperForIdOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyShopperWithUpdates">
+      <wsdl:input message="s0:CopyShopperWithUpdatesIn" />
+      <wsdl:output message="s0:CopyShopperWithUpdatesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePaymentType">
+      <wsdl:input message="s0:UpdatePaymentTypeIn" />
+      <wsdl:output message="s0:UpdatePaymentTypeOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSCgdShopperServiceSoap" type="s0:WSCgdShopperServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="GetShopper">
+      <soap:operation soapAction="#GetShopper" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateShopper">
+      <soap:operation soapAction="#UpdateShopper" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchShoppers">
+      <soap:operation soapAction="#SearchShoppers" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateShopper">
+      <soap:operation soapAction="#CreateShopper" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuditShopper">
+      <soap:operation soapAction="#AuditShopper" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsShopperPINSet">
+      <soap:operation soapAction="#IsShopperPINSet" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateShopperForId">
+      <soap:operation soapAction="#CreateShopperForId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyShopperWithUpdates">
+      <soap:operation soapAction="#CopyShopperWithUpdates" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePaymentType">
+      <soap:operation soapAction="#UpdatePaymentType" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdShopperService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCgdShopperService">
+    <wsdl:port name="WSCgdShopperServiceSoap" binding="s0:WSCgdShopperServiceSoap">
+      <soap:address location="http://devsbeapp01:80/WSCgdShopper/WSCgdShopper.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -120,14 +120,6 @@
       <Project>{CA50A18E-5CA1-43BE-82C1-F1910F09780B}</Project>
       <Name>Atlantis.Framework.Providers.Preferences</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPrefGetModDate\Atlantis.Framework.ShopperPrefGetModDate.Impl\Atlantis.Framework.ShopperPrefGetModDate.Impl.csproj">
-      <Project>{169C0776-313C-4A6F-BC7F-27BB86334C18}</Project>
-      <Name>Atlantis.Framework.ShopperPrefGetModDate.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPrefGetModDate\Atlantis.Framework.ShopperPrefGetModDate.Interface\Atlantis.Framework.ShopperPrefGetModDate.Interface.csproj">
-      <Project>{C6399678-5F8B-40C1-B216-F507E92A1ACF}</Project>
-      <Name>Atlantis.Framework.ShopperPrefGetModDate.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.ShopperPrefGet\Atlantis.Framework.ShopperPrefGet.Impl\Atlantis.Framework.ShopperPrefGet.Impl.csproj">
       <Project>{F6887293-66C9-4BB8-98EF-8AC047D22E91}</Project>
       <Name>Atlantis.Framework.ShopperPrefGet.Impl</Name>

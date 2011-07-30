@@ -197,48 +197,51 @@ namespace Atlantis.Framework.DataProvider.Impl
       bool hasOutput = false;
 
       string connStr = LookupConnectionString(dbs, oDataProviderRequestData);
-      SqlConnection sqlConn = new SqlConnection(connStr);
-      using (sqlConn)
+      using (SqlConnection sqlConn = new SqlConnection(connStr))
       {
         sqlConn.Open();
 
-        SqlCommand sqlCmd = new SqlCommand(dbs.TargetName, sqlConn);
-        sqlCmd.CommandType = CommandType.StoredProcedure;
-        sqlCmd.CommandTimeout = (int)oDataProviderRequestData.RequestTimeout.TotalSeconds;
-
-        foreach (ProviderParameter p in dbs.ParamList)
+        using (SqlCommand sqlCmd = new SqlCommand(dbs.TargetName, sqlConn))
         {
-          if (oDataProviderRequestData.Params.ContainsKey(p.Name))
-          {
-            SqlParameter pn = new SqlParameter();
-            pn.ParameterName = p.Name;
-            pn.SqlDbType = GetSqlDbType(p.Type);
-            pn.SqlValue = oDataProviderRequestData.Params[p.Name];
-            pn.Direction = GetParameterDirection(p.Direction);
-            if (pn.Direction != ParameterDirection.Input)
-            {
-              hasOutput = true;
-            }
-            sqlCmd.Parameters.Add(pn);
-          }
-        }
+          sqlCmd.CommandType = CommandType.StoredProcedure;
+          sqlCmd.CommandTimeout = (int)oDataProviderRequestData.RequestTimeout.TotalSeconds;
 
-        SqlDataAdapter adp = new SqlDataAdapter(sqlCmd);
-        adp.Fill(ds);
-
-        if (hasOutput)
-        {
-          outputParameters = new Dictionary<string, object>();
-          foreach (SqlParameter param in sqlCmd.Parameters)
+          foreach (ProviderParameter p in dbs.ParamList)
           {
-            if (param.Direction != ParameterDirection.Input)
+            if (oDataProviderRequestData.Params.ContainsKey(p.Name))
             {
-              outputParameters.Add(param.ParameterName, param.Value);
+              SqlParameter pn = new SqlParameter();
+              pn.ParameterName = p.Name;
+              pn.SqlDbType = GetSqlDbType(p.Type);
+              pn.SqlValue = oDataProviderRequestData.Params[p.Name];
+              pn.Direction = GetParameterDirection(p.Direction);
+              if (pn.Direction != ParameterDirection.Input)
+              {
+                hasOutput = true;
+              }
+              sqlCmd.Parameters.Add(pn);
             }
           }
-        }
 
+          using (SqlDataAdapter adp = new SqlDataAdapter(sqlCmd))
+          {
+            adp.Fill(ds);
+          }
+
+          if (hasOutput)
+          {
+            outputParameters = new Dictionary<string, object>();
+            foreach (SqlParameter param in sqlCmd.Parameters)
+            {
+              if (param.Direction != ParameterDirection.Input)
+              {
+                outputParameters.Add(param.ParameterName, param.Value);
+              }
+            }
+          }
+        }
       }
+
       return ds;
     }
 
@@ -327,20 +330,23 @@ namespace Atlantis.Framework.DataProvider.Impl
         }
       }
 
-      object instance = Activator.CreateInstance(serviceType);
-      if (timeoutProperty != null)
+      object result = null;
+      using (IDisposable instance = Activator.CreateInstance(serviceType) as IDisposable)
       {
-        int millisecondTimeout = (int)oDataProviderRequestData.RequestTimeout.TotalMilliseconds;
-        timeoutProperty.SetValue(instance, millisecondTimeout, null);
-      }
-      object result = targetMethod.Invoke(instance, methodParms);
-
-      if (tempOutputParameters.Count > 0)
-      {
-        outputParameters = new Dictionary<string, object>(tempOutputParameters.Count);
-        foreach (int key in tempOutputParameters.Keys)
+        if (timeoutProperty != null)
         {
-          outputParameters[parameters[key].Name] = methodParms[key];
+          int millisecondTimeout = (int)oDataProviderRequestData.RequestTimeout.TotalMilliseconds;
+          timeoutProperty.SetValue(instance, millisecondTimeout, null);
+        }
+        result = targetMethod.Invoke(instance, methodParms);
+
+        if (tempOutputParameters.Count > 0)
+        {
+          outputParameters = new Dictionary<string, object>(tempOutputParameters.Count);
+          foreach (int key in tempOutputParameters.Keys)
+          {
+            outputParameters[parameters[key].Name] = methodParms[key];
+          }
         }
       }
 
@@ -495,7 +501,6 @@ namespace Atlantis.Framework.DataProvider.Impl
       oRequest.KeepAlive = false;
       oRequest.Method = "POST";
       oRequest.ContentLength = oRequestBytes.Length;
-
       string result = string.Empty;
 
       using (Stream requestStream = oRequest.GetRequestStream())

@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommSwitchPaymentProfile.Tests", "Atlantis.Framework.EcommSwitchPaymentProfile.Tests\Atlantis.Framework.EcommSwitchPaymentProfile.Tests.csproj", "{29A1483E-41B6-483F-B67B-672302D1B4C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CECE8C2C-7CF5-42FC-95AA-5551F9F3388F}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.EcommSwitchPaymentProfile.vsmdi = Atlantis.Framework.EcommSwitchPaymentProfile.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A7D81C9F-D719-4A14-A82A-9B5139EF81F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommSwitchPaymentProfile.Interface", "Atlantis.Framework.EcommSwitchPaymentProfile.Interface\Atlantis.Framework.EcommSwitchPaymentProfile.Interface.csproj", "{A4996FBF-084A-4275-BC78-26DC6290FEFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommSwitchPaymentProfile.Impl", "Atlantis.Framework.EcommSwitchPaymentProfile.Impl\Atlantis.Framework.EcommSwitchPaymentProfile.Impl.csproj", "{70F13EC2-1683-440C-B10C-A6282FB60C5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.EcommSwitchPaymentProfile.Tests\\Atlantis.Framework.EcommSwitchPaymentProfile.Tests.csproj
+		SccProjectName1 = Atlantis.Framework.EcommSwitchPaymentProfile.Tests
+		SccLocalPath1 = Atlantis.Framework.EcommSwitchPaymentProfile.Tests
+		SccProjectUniqueName2 = Atlantis.Framework.EcommSwitchPaymentProfile.Interface\\Atlantis.Framework.EcommSwitchPaymentProfile.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.EcommSwitchPaymentProfile.Interface
+		SccLocalPath2 = Atlantis.Framework.EcommSwitchPaymentProfile.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.EcommSwitchPaymentProfile.Impl\\Atlantis.Framework.EcommSwitchPaymentProfile.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.EcommSwitchPaymentProfile.Impl
+		SccLocalPath3 = Atlantis.Framework.EcommSwitchPaymentProfile.Impl
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.EcommSwitchPaymentProfile.sln
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.EcommSwitchPaymentProfile.sln
+		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.EcommSwitchPaymentProfile.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29A1483E-41B6-483F-B67B-672302D1B4C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29A1483E-41B6-483F-B67B-672302D1B4C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29A1483E-41B6-483F-B67B-672302D1B4C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29A1483E-41B6-483F-B67B-672302D1B4C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4996FBF-084A-4275-BC78-26DC6290FEFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4996FBF-084A-4275-BC78-26DC6290FEFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4996FBF-084A-4275-BC78-26DC6290FEFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4996FBF-084A-4275-BC78-26DC6290FEFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F13EC2-1683-440C-B10C-A6282FB60C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F13EC2-1683-440C-B10C-A6282FB60C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F13EC2-1683-440C-B10C-A6282FB60C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F13EC2-1683-440C-B10C-A6282FB60C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {A7D81C9F-D719-4A14-A82A-9B5139EF81F4}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A7D81C9F-D719-4A14-A82A-9B5139EF81F4}
+	EndGlobalSection
+EndGlobal

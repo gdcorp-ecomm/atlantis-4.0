@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://gdcomm.dev.glbt1.gdg/WSgdQueuePPUpdate/QueuePPUpdateWebSvc.asmx?wsdl" docRef="http://gdcomm.dev.glbt1.gdg/WSgdQueuePPUpdate/QueuePPUpdateWebSvc.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://gdcomm.dev.glbt1.gdg/WSgdQueuePPUpdate/QueuePPUpdateWebSvc.asmx" xmlns:q1="http://queueppupdate.godaddy.com/" binding="q1:QueuePPUpdateWebSvcSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://gdcomm.dev.glbt1.gdg/WSgdQueuePPUpdate/QueuePPUpdateWebSvc.asmx" xmlns:q2="http://queueppupdate.godaddy.com/" binding="q2:QueuePPUpdateWebSvcSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

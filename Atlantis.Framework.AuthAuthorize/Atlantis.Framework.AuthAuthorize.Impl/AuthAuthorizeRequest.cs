@@ -61,21 +61,21 @@ namespace Atlantis.Framework.AuthAuthorize.Impl
       #region LoginName
       if (string.IsNullOrEmpty(request.LoginName))
       {
-        result.Add(AuthAuthorizeStatusCodes.LoginNameRequired);
+        result.Add(AuthAuthorizeStatusCodes.ValidateLoginNameRequired);
       }
       #endregion
 
       #region IpAddress
       if (string.IsNullOrEmpty(request.IpAddress))
       {
-        result.Add(AuthAuthorizeStatusCodes.IpAddressRequired);
+        result.Add(AuthAuthorizeStatusCodes.ValidateIpAddressRequired);
       }
       #endregion
 
       #region Password
       if (string.IsNullOrEmpty(request.Password))
       {
-        result.Add(AuthAuthorizeStatusCodes.PasswordRequired);
+        result.Add(AuthAuthorizeStatusCodes.ValidatePasswordRequired);
       }
       #endregion
 

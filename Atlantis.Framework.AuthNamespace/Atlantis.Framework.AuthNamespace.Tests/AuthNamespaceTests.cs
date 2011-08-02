@@ -64,8 +64,8 @@ namespace Atlantis.Framework.AuthNamespace.Tests
         String.Empty, String.Empty, String.Empty, String.Empty, 0, String.Empty, String.Empty, 1 );
       AuthNamespaceResponseData response = (AuthNamespaceResponseData)Engine.Engine.ProcessRequest( request, 210 );
       Assert.IsFalse( response.IsSuccess );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthNamespaceStatusCodes.NamespaceRequired ) );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthNamespaceStatusCodes.KeyRequired ) );
+      Assert.IsTrue( response.StatusCodes.Contains( AuthNamespaceStatusCodes.ValidateNamespaceRequired ) );
+      Assert.IsTrue( response.StatusCodes.Contains( AuthNamespaceStatusCodes.ValidateKeyRequired ) );
     }
 
     [TestMethod]

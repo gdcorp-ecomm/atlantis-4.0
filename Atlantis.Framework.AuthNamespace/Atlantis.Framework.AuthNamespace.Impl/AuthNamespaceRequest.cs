@@ -75,14 +75,14 @@ namespace Atlantis.Framework.AuthNamespace.Impl
       #region Namespace
       if (string.IsNullOrEmpty( request.Namespace ))
       {
-        result.Add( AuthNamespaceStatusCodes.NamespaceRequired );
+        result.Add( AuthNamespaceStatusCodes.ValidateNamespaceRequired );
       }
       #endregion
 
       #region Key
       if (string.IsNullOrEmpty( request.Key ))
       {
-        result.Add( AuthNamespaceStatusCodes.KeyRequired );
+        result.Add( AuthNamespaceStatusCodes.ValidateKeyRequired );
       }
       #endregion
 

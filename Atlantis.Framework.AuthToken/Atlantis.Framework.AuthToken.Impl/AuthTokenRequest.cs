@@ -64,7 +64,7 @@ namespace Atlantis.Framework.AuthToken.Impl
       #region ShopperID
       if (string.IsNullOrEmpty( request.ShopperID ))
       {
-        result.Add( AuthTokenStatusCodes.ShopperIdRequired );
+        result.Add(AuthTokenStatusCodes.ValidateShopperIdRequired);
       }
       #endregion
 

@@ -61,7 +61,7 @@ namespace Atlantis.Framework.AuthToken.Tests
         String.Empty, String.Empty, String.Empty, String.Empty, 0, 1 );
       AuthTokenResponseData response = (AuthTokenResponseData)Engine.Engine.ProcessRequest( request, 208 );
       Assert.IsFalse( response.IsSuccess );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthTokenStatusCodes.ShopperIdRequired ) );
+      Assert.IsTrue(response.StatusCodes.Contains(AuthTokenStatusCodes.ValidateShopperIdRequired));
     }
 
     [TestMethod]

@@ -63,8 +63,8 @@ namespace Atlantis.Framework.AuthHint.Tests
         String.Empty, String.Empty, String.Empty, String.Empty, 0, String.Empty, 1, String.Empty );
       AuthHintResponseData response = (AuthHintResponseData)Engine.Engine.ProcessRequest( request, 211 );
       Assert.IsFalse( response.IsSuccess );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthHintStatusCodes.LoginNameRequired ) );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthHintStatusCodes.StreetRequired ) );
+      Assert.IsTrue( response.StatusCodes.Contains( AuthHintStatusCodes.ValidateLoginNameRequired ) );
+      Assert.IsTrue( response.StatusCodes.Contains( AuthHintStatusCodes.ValidateStreetRequired ) );
     }
 
     [TestMethod]

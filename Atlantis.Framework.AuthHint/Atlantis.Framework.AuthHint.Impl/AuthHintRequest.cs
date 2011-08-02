@@ -64,14 +64,14 @@ namespace Atlantis.Framework.AuthHint.Impl
       #region LoginName
       if (string.IsNullOrEmpty( request.LoginName ))
       {
-        result.Add( AuthHintStatusCodes.LoginNameRequired );
+        result.Add( AuthHintStatusCodes.ValidateLoginNameRequired );
       }
       #endregion
 
       #region Street
       if (string.IsNullOrEmpty( request.Street ))
       {
-        result.Add( AuthHintStatusCodes.StreetRequired );
+        result.Add( AuthHintStatusCodes.ValidateStreetRequired );
       }
       #endregion
 

@@ -20,15 +20,15 @@ namespace Atlantis.Framework.AuthChangePassword.Interface
     public const int PasswordStrengthNoNumeric = -12;
     public const int PasswordStrengthNoCapital = -13;
     public const int PasswordStrengthAlreadyUsed = -14;
-    public const int CurrentPasswordRequired = -100;
-    public const int CurrentPasswordToShort = -101;
-    public const int PasswordRequired = -110;
-    public const int PasswordInvalidCharacters = -111;
-    public const int LoginRequired = -120;
-    public const int LoginMaxLength = -121;
-    public const int LoginInvalidCharacters = -122;
-    public const int HintRequired = -130;
-    public const int HintMaxLength = -131;
-    public const int HintInvalidCharacters = -132;
+    public const int ValidateCurrentPasswordRequired = -100;
+    public const int ValidateCurrentPasswordToShort = -101;
+    public const int ValidatePasswordRequired = -110;
+    public const int ValidatePasswordInvalidCharacters = -111;
+    public const int ValidateLoginRequired = -120;
+    public const int ValidateLoginMaxLength = -121;
+    public const int ValidateLoginInvalidCharacters = -122;
+    public const int ValidateHintRequired = -130;
+    public const int ValidateHintMaxLength = -131;
+    public const int ValidateHintInvalidCharacters = -132;
   }
 }

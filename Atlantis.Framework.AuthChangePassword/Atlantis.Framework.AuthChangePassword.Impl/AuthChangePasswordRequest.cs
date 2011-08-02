@@ -21,11 +21,11 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
 
       if (string.IsNullOrEmpty(request.CurrentPassword))
       {
-        result.Add(AuthChangePasswordStatusCodes.CurrentPasswordRequired);
+        result.Add(AuthChangePasswordStatusCodes.ValidateCurrentPasswordRequired);
       }
       else if (request.CurrentPassword.Length < 5)
       {
-        result.Add(AuthChangePasswordStatusCodes.CurrentPasswordToShort);
+        result.Add(AuthChangePasswordStatusCodes.ValidateCurrentPasswordToShort);
       }
 
       #endregion
@@ -34,7 +34,7 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
 
       if (string.IsNullOrEmpty(request.NewPassword))
       {
-        result.Add(AuthChangePasswordStatusCodes.PasswordRequired);
+        result.Add(AuthChangePasswordStatusCodes.ValidatePasswordRequired);
       }
       else
       {
@@ -49,7 +49,7 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
 
         if (_newPasswordInvalidCharactersRegex.Match(request.NewPassword).Success)
         {
-          result.Add(AuthChangePasswordStatusCodes.PasswordInvalidCharacters);
+          result.Add(AuthChangePasswordStatusCodes.ValidatePasswordInvalidCharacters);
         }
         else if (request.UseStrongPassword)
         {
@@ -68,18 +68,18 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
 
       if (string.IsNullOrEmpty(request.NewLogin))
       {
-        result.Add(AuthChangePasswordStatusCodes.LoginRequired);
+        result.Add(AuthChangePasswordStatusCodes.ValidateLoginRequired);
       }
       else
       {
         if (request.NewLogin.Length > 30)
         {
-          result.Add(AuthChangePasswordStatusCodes.LoginMaxLength);
+          result.Add(AuthChangePasswordStatusCodes.ValidateLoginMaxLength);
         }
 
         if (_newLoginInvalidCharactersRegex.Match(request.NewLogin).Success)
         {
-          result.Add(AuthChangePasswordStatusCodes.LoginInvalidCharacters);
+          result.Add(AuthChangePasswordStatusCodes.ValidateLoginInvalidCharacters);
         }
       }
 
@@ -89,18 +89,18 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
 
       if (string.IsNullOrEmpty(request.NewHint))
       {
-        result.Add(AuthChangePasswordStatusCodes.HintRequired);
+        result.Add(AuthChangePasswordStatusCodes.ValidateHintRequired);
       }
       else
       {
         if (request.NewHint.Length > 255)
         {
-          result.Add(AuthChangePasswordStatusCodes.HintMaxLength);
+          result.Add(AuthChangePasswordStatusCodes.ValidateHintMaxLength);
         }
 
         if (_newHintInvalidCharactersRegex.Match(request.NewHint).Success)
         {
-          result.Add(AuthChangePasswordStatusCodes.HintInvalidCharacters);
+          result.Add(AuthChangePasswordStatusCodes.ValidateHintInvalidCharacters);
         }
       }
 

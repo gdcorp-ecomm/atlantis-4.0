@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.AuthChangePassword.Impl")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2010")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2010-2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

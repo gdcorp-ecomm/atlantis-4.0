@@ -13,7 +13,7 @@ namespace Atlantis.Framework.AuthResetPassword.Interface
     public const int PasswordHintMatch = -6;
     public const int PasswordHasNoNumeric = -12;
     public const int PasswordHasNoCapitals = -13;
-    public const int LoginUsed = -14;
+    public const int PasswordPreviouslyUsed = -14;
 
     public const int ValidatePasswordRequired = -110;
     public const int ValidatePasswordInvalidCharacters = -111;

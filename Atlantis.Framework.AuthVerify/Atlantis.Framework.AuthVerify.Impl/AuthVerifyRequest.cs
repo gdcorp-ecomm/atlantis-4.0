@@ -64,21 +64,21 @@ namespace Atlantis.Framework.AuthVerify.Impl
       #region LoginName
       if (string.IsNullOrEmpty( request.LoginName ))
       {
-        result.Add( AuthVerifyStatusCodes.LoginNameRequired );
+        result.Add(AuthVerifyStatusCodes.ValidateLoginNameRequired);
       }
       #endregion
 
       #region IpAddress
       if (string.IsNullOrEmpty( request.IpAddress ))
       {
-        result.Add( AuthVerifyStatusCodes.IpAddressRequired );
+        result.Add(AuthVerifyStatusCodes.ValidateIpAddressRequired);
       }
       #endregion
 
       #region Password
       if (string.IsNullOrEmpty( request.Password ))
       {
-        result.Add( AuthVerifyStatusCodes.PasswordRequired );
+        result.Add(AuthVerifyStatusCodes.ValidatePasswordRequired);
       }
       #endregion
 

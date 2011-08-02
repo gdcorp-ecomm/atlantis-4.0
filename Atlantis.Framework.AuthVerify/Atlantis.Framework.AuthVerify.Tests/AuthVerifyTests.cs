@@ -64,9 +64,9 @@ namespace Atlantis.Framework.AuthVerify.Tests
         String.Empty, String.Empty, String.Empty, String.Empty, 0, String.Empty, String.Empty, 1, String.Empty );
       AuthVerifyResponseData response = (AuthVerifyResponseData)Engine.Engine.ProcessRequest( request, 209 );
       Assert.IsFalse( response.IsSuccess );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthVerifyStatusCodes.LoginNameRequired ) );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthVerifyStatusCodes.IpAddressRequired ) );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthVerifyStatusCodes.PasswordRequired ) );
+      Assert.IsTrue(response.StatusCodes.Contains(AuthVerifyStatusCodes.ValidateLoginNameRequired));
+      Assert.IsTrue(response.StatusCodes.Contains(AuthVerifyStatusCodes.ValidateIpAddressRequired));
+      Assert.IsTrue(response.StatusCodes.Contains(AuthVerifyStatusCodes.ValidatePasswordRequired));
     }
 
     [TestMethod]

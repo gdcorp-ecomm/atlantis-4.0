@@ -3,22 +3,25 @@ namespace Atlantis.Framework.AuthResetPassword.Interface
 {
   public static class AuthResetPasswordStatusCodes
   {
-    public const int Success = 1;
     public const int Failure = 0;
-    public const int Locked = 3;
-    public const int SuccessMixed = 2;
+    public const int Success = 1;
     public const int Error = -1;
     public const int PasswordTooShort = -2;
     public const int PasswordTooLong = -3;
+    public const int LoginHintMatch = -4;
+    public const int LoginPasswordMatch = -5;
     public const int PasswordHintMatch = -6;
-    public const int PasswordRequired = -110;
-    public const int PasswordInvalidCharacters = -111;
-    public const int ShopperIdRequired = -120;
-    public const int HintRequired = -130;
-    public const int HintMaxLength = -131;
-    public const int HintInvalidCharacters = -132;
-    public const int IpAddressRequired = -140;
-    public const int IpAddressInvalid = -141;
-    public const int AuthTokenRequired = -150;
+    public const int PasswordHasNoNumeric = -12;
+    public const int PasswordHasNoCapitals = -13;
+    public const int LoginUsed = -14;
+
+    public const int ValidatePasswordRequired = -110;
+    public const int ValidatePasswordInvalidCharacters = -111;
+    public const int ValidateShopperIdRequired = -120;
+    public const int ValidateHintRequired = -130;
+    public const int ValidateHintMaxLength = -131;
+    public const int ValidateHintInvalidCharacters = -132;
+    public const int ValidateIpAddressRequired = -140;
+    public const int ValidateAuthTokenRequired = -150;
   }
 }

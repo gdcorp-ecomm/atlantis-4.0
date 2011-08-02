@@ -81,11 +81,11 @@ namespace Atlantis.Framework.AuthResetPassword.Tests
         1, String.Empty, String.Empty, String.Empty, String.Empty );
       AuthResetPasswordResponseData response = (AuthResetPasswordResponseData)Engine.Engine.ProcessRequest( request, 206 );
       Assert.IsFalse( response.IsSuccess );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthResetPasswordStatusCodes.ShopperIdRequired ) );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthResetPasswordStatusCodes.IpAddressRequired ) );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthResetPasswordStatusCodes.PasswordRequired ) );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthResetPasswordStatusCodes.HintRequired ) );
-      Assert.IsTrue( response.StatusCodes.Contains( AuthResetPasswordStatusCodes.AuthTokenRequired ) );
+      Assert.IsTrue(response.StatusCodes.Contains(AuthResetPasswordStatusCodes.ValidateShopperIdRequired));
+      Assert.IsTrue(response.StatusCodes.Contains(AuthResetPasswordStatusCodes.ValidateIpAddressRequired));
+      Assert.IsTrue(response.StatusCodes.Contains(AuthResetPasswordStatusCodes.ValidatePasswordRequired));
+      Assert.IsTrue(response.StatusCodes.Contains(AuthResetPasswordStatusCodes.ValidateHintRequired));
+      Assert.IsTrue(response.StatusCodes.Contains(AuthResetPasswordStatusCodes.ValidateAuthTokenRequired));
     }
 
     [TestMethod]

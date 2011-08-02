@@ -63,21 +63,21 @@ namespace Atlantis.Framework.AuthResetPassword.Impl
       #region ShopperID
       if (string.IsNullOrEmpty( request.ShopperID ))
       {
-        result.Add( AuthResetPasswordStatusCodes.ShopperIdRequired );
+        result.Add(AuthResetPasswordStatusCodes.ValidateShopperIdRequired);
       }
       #endregion
 
       #region IpAddress
       if (string.IsNullOrEmpty( request.IpAddress ))
       {
-        result.Add( AuthResetPasswordStatusCodes.IpAddressRequired );
+        result.Add(AuthResetPasswordStatusCodes.ValidateIpAddressRequired);
       }
       #endregion
 
       #region NewPassword
       if (string.IsNullOrEmpty( request.NewPassword ))
       {
-        result.Add( AuthResetPasswordStatusCodes.PasswordRequired );
+        result.Add(AuthResetPasswordStatusCodes.ValidatePasswordRequired);
       }
       else
       {
@@ -92,7 +92,7 @@ namespace Atlantis.Framework.AuthResetPassword.Impl
 
         if (Regex.Match( request.NewPassword, "[^\x20-\x7E]" ).Success)
         {
-          result.Add( AuthResetPasswordStatusCodes.PasswordInvalidCharacters );
+          result.Add(AuthResetPasswordStatusCodes.ValidatePasswordInvalidCharacters);
         }
       }
       #endregion
@@ -100,18 +100,18 @@ namespace Atlantis.Framework.AuthResetPassword.Impl
       #region NewHint
       if (string.IsNullOrEmpty( request.NewHint ))
       {
-        result.Add( AuthResetPasswordStatusCodes.HintRequired );
+        result.Add(AuthResetPasswordStatusCodes.ValidateHintRequired);
       }
       else
       {
         if (request.NewHint.Length > 255)
         {
-          result.Add( AuthResetPasswordStatusCodes.HintMaxLength );
+          result.Add(AuthResetPasswordStatusCodes.ValidateHintMaxLength);
         }
 
         if (Regex.Match( request.NewHint, "[^\x20-\x3b\x3f-\x7e]" ).Success)
         {
-          result.Add( AuthResetPasswordStatusCodes.HintInvalidCharacters );
+          result.Add(AuthResetPasswordStatusCodes.ValidateHintInvalidCharacters);
         }
       }
       #endregion
@@ -119,7 +119,7 @@ namespace Atlantis.Framework.AuthResetPassword.Impl
       #region AuthToken
       if (String.IsNullOrEmpty( request.AuthToken ))
       {
-        result.Add( AuthResetPasswordStatusCodes.AuthTokenRequired );
+        result.Add(AuthResetPasswordStatusCodes.ValidateAuthTokenRequired);
       }
       #endregion
 

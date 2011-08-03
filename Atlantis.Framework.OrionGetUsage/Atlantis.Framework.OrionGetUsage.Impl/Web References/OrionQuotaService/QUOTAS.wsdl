@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://schemas.orion.starfieldtech.com/quotas" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://schemas.orion.starfieldtech.com/quotas" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://schemas.orion.starfieldtech.com/quotas">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="AddUsageLogItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertRequests" type="tns:ArrayOfLogItemRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLogItemRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LogItemRequest" nillable="true" type="tns:LogItemRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LogItemRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ServerKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UsageType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddUsageLogItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddUsageLogItemResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LogItemIDs" type="tns:ArrayOfLong" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLong">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="long" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SecureHeader" type="tns:SecureHeader" />
+      <s:complexType name="SecureHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddUsageLogItemByAccountUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertRequests" type="tns:ArrayOfLogItemRequestUID" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLogItemRequestUID">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LogItemRequestUID" nillable="true" type="tns:LogItemRequestUID" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LogItemRequestUID">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ServerKey" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountUID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="UsageType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddUsageLogItemByAccountUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddUsageLogItemByAccountUIDResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LogItemIDs" type="tns:ArrayOfLong" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountUID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="UsageCategory" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetUsageResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="UsageReport" type="tns:UsageReport" />
+            <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UsageReport">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountUID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="UsageType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MeasurementUnit" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BaseQuotaElementUID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentBaseQuotaAllowed" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentExtendedQuotaAllowed" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalUsage" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="FirstReportedUsage" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastReportedUsage" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="OverageProtection" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OverageSystemSettings" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUsageByType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountUID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="UsageType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsageByTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetUsageByTypeResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="UsageReport" type="tns:UsageReport" />
+            <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAccountQuotaDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetAccountQuotaRequests" type="tns:ArrayOfSetAccountQuotaRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSetAccountQuotaRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SetAccountQuotaRequest" nillable="true" type="tns:SetAccountQuotaRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SetAccountQuotaRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AccountUID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="UsageType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExtendedQuotaAmount" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetAccountQuotaDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetAccountQuotaDetailsResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAccountQuotaExtendedAmount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountUID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="UsageType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAccountQuotaExtendedAmountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetAccountQuotaExtendedAmountResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAccountQuotaStartDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountUID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAccountQuotaStartDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetAccountQuotaStartDateResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountQuotaDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountQuotaDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetAccountQuotaDetailsResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="DetailReport" type="tns:AccountQuotaDetailReport" />
+            <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AccountQuotaDetailReport">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountUID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UsageTypes" type="tns:ArrayOfAccountQuotaUsageType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAccountQuotaUsageType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountQuotaUsageType" nillable="true" type="tns:AccountQuotaUsageType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountQuotaUsageType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UsageType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExtendedQuotaAmount" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="MeasurementUnit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UsageCategory" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddUsageLogItemSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUsageLogItem" />
+  </wsdl:message>
+  <wsdl:message name="AddUsageLogItemSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUsageLogItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUsageLogItemSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="AddUsageLogItemByAccountUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUsageLogItemByAccountUID" />
+  </wsdl:message>
+  <wsdl:message name="AddUsageLogItemByAccountUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUsageLogItemByAccountUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUsageLogItemByAccountUIDSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetUsageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUsage" />
+  </wsdl:message>
+  <wsdl:message name="GetUsageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUsageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUsageSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetUsageByTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUsageByType" />
+  </wsdl:message>
+  <wsdl:message name="GetUsageByTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUsageByTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUsageByTypeSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="SetAccountQuotaDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:SetAccountQuotaDetails" />
+  </wsdl:message>
+  <wsdl:message name="SetAccountQuotaDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:SetAccountQuotaDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetAccountQuotaDetailsSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="SetAccountQuotaExtendedAmountSoapIn">
+    <wsdl:part name="parameters" element="tns:SetAccountQuotaExtendedAmount" />
+  </wsdl:message>
+  <wsdl:message name="SetAccountQuotaExtendedAmountSoapOut">
+    <wsdl:part name="parameters" element="tns:SetAccountQuotaExtendedAmountResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetAccountQuotaExtendedAmountSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="SetAccountQuotaStartDateSoapIn">
+    <wsdl:part name="parameters" element="tns:SetAccountQuotaStartDate" />
+  </wsdl:message>
+  <wsdl:message name="SetAccountQuotaStartDateSoapOut">
+    <wsdl:part name="parameters" element="tns:SetAccountQuotaStartDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetAccountQuotaStartDateSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountQuotaDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountQuotaDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountQuotaDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountQuotaDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountQuotaDetailsSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:portType name="QuotasSoap">
+    <wsdl:operation name="AddUsageLogItem">
+      <wsdl:input message="tns:AddUsageLogItemSoapIn" />
+      <wsdl:output message="tns:AddUsageLogItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUsageLogItemByAccountUID">
+      <wsdl:input message="tns:AddUsageLogItemByAccountUIDSoapIn" />
+      <wsdl:output message="tns:AddUsageLogItemByAccountUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsage">
+      <wsdl:input message="tns:GetUsageSoapIn" />
+      <wsdl:output message="tns:GetUsageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsageByType">
+      <wsdl:input message="tns:GetUsageByTypeSoapIn" />
+      <wsdl:output message="tns:GetUsageByTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountQuotaDetails">
+      <wsdl:input message="tns:SetAccountQuotaDetailsSoapIn" />
+      <wsdl:output message="tns:SetAccountQuotaDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountQuotaExtendedAmount">
+      <wsdl:input message="tns:SetAccountQuotaExtendedAmountSoapIn" />
+      <wsdl:output message="tns:SetAccountQuotaExtendedAmountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountQuotaStartDate">
+      <wsdl:input message="tns:SetAccountQuotaStartDateSoapIn" />
+      <wsdl:output message="tns:SetAccountQuotaStartDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountQuotaDetails">
+      <wsdl:input message="tns:GetAccountQuotaDetailsSoapIn" />
+      <wsdl:output message="tns:GetAccountQuotaDetailsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="QuotasSoap" type="tns:QuotasSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddUsageLogItem">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/quotas/AddUsageLogItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AddUsageLogItemSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUsageLogItemByAccountUID">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/quotas/AddUsageLogItemByAccountUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AddUsageLogItemByAccountUIDSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsage">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/quotas/GetUsage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetUsageSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsageByType">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/quotas/GetUsageByType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetUsageByTypeSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountQuotaDetails">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/quotas/SetAccountQuotaDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SetAccountQuotaDetailsSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountQuotaExtendedAmount">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/quotas/SetAccountQuotaExtendedAmount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SetAccountQuotaExtendedAmountSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountQuotaStartDate">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/quotas/SetAccountQuotaStartDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SetAccountQuotaStartDateSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountQuotaDetails">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/quotas/GetAccountQuotaDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAccountQuotaDetailsSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Quotas">
+    <wsdl:port name="QuotasSoap" binding="tns:QuotasSoap">
+      <soap:address location="http://orion.dev.starfieldtech.com/system/quotas.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

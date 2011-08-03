@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.OrionGetUsage.Impl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Atlantis_Framework_OrionGetUsage_Impl_OrionQuotaService_Quotas" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://orion.dev.starfieldtech.com/system/quotas.asmx</Value>
+    </Setting>
+    <Setting Name="Atlantis_Framework_OrionGetUsage_Impl_Orion_Security_Security" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://172.16.17.48/security/security.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

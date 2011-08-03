@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://schemas.orion.starfieldtech.com/security" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://schemas.orion.starfieldtech.com/security" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://schemas.orion.starfieldtech.com/security">
+      <s:element name="Authenticate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSSOAuthToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProductName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="tns:OrionCustomer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrionCustomer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OrionCustomerId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="SystemNamespace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResellerId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sub" type="tns:CustomerSubAccount" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomerSubAccount">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OrionCustomerId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="SubAccountNum" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSSOAuthTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetSSOAuthTokenResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="AuthTokenUid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SecureHeader" type="tns:SecureHeader" />
+      <s:complexType name="SecureHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ValidateSSOAuthToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AuthTokenUid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProductGroupName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateSSOAuthTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidateSSOAuthTokenResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="tns:OrionCustomer" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthenticateSoapIn">
+    <wsdl:part name="parameters" element="tns:Authenticate" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSSOAuthTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSSOAuthToken" />
+  </wsdl:message>
+  <wsdl:message name="GetSSOAuthTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSSOAuthTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSSOAuthTokenSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="ValidateSSOAuthTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateSSOAuthToken" />
+  </wsdl:message>
+  <wsdl:message name="ValidateSSOAuthTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateSSOAuthTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateSSOAuthTokenSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:portType name="SecuritySoap">
+    <wsdl:operation name="Authenticate">
+      <wsdl:input message="tns:AuthenticateSoapIn" />
+      <wsdl:output message="tns:AuthenticateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSSOAuthToken">
+      <wsdl:input message="tns:GetSSOAuthTokenSoapIn" />
+      <wsdl:output message="tns:GetSSOAuthTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSSOAuthToken">
+      <wsdl:input message="tns:ValidateSSOAuthTokenSoapIn" />
+      <wsdl:output message="tns:ValidateSSOAuthTokenSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SecuritySoap" type="tns:SecuritySoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authenticate">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/security/Authenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSSOAuthToken">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/security/GetSSOAuthToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSSOAuthTokenSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSSOAuthToken">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/security/ValidateSSOAuthToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ValidateSSOAuthTokenSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Security">
+    <wsdl:port name="SecuritySoap" binding="tns:SecuritySoap">
+      <soap:address location="http://172.16.17.48/security/security.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

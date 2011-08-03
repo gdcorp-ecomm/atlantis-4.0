@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://check.dev.secureserver-net.ide/RegContactValidationWebSvc/ContactValidationService.asmx?wsdl" docRef="http://check.dev.secureserver-net.ide/RegContactValidationWebSvc/ContactValidationService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://check.dev.secureserver-net.ide/RegContactValidationWebSvc/ContactValidationService.asmx" xmlns:q1="http://regchk/RegContactValidationWebSvc" binding="q1:ContactValidationServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://check.dev.secureserver-net.ide/RegContactValidationWebSvc/ContactValidationService.asmx" xmlns:q2="http://regchk/RegContactValidationWebSvc" binding="q2:ContactValidationServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

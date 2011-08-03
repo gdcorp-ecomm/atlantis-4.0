@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F7059892-78FC-4915-A276-6739838A95AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MktgSubscribeRemove.Impl", "Atlantis.Framework.MktgSubscribeRemove.Impl\Atlantis.Framework.MktgSubscribeRemove.Impl.csproj", "{08970D9B-A3E5-4895-A667-59C476DD5FDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MktgSubscribeRemove.Interface", "Atlantis.Framework.MktgSubscribeRemove.Interface\Atlantis.Framework.MktgSubscribeRemove.Interface.csproj", "{00E731C0-A583-4867-840B-27F15FC2BEB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MktgSubscribeRemove.Tests", "Atlantis.Framework.MktgSubscribeRemove.Tests\Atlantis.Framework.MktgSubscribeRemove.Tests.csproj", "{9D5EA0CC-834F-45B6-8E53-32B60D757999}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4662AEC6-561F-4487-B8CD-E7F947A5E06F}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.MktgSubscribeRemove.vsmdi = Atlantis.Framework.MktgSubscribeRemove.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.MktgSubscribeRemove.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.MktgSubscribeRemove.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = Atlantis.Framework.MktgSubscribeRemove.Impl\\Atlantis.Framework.MktgSubscribeRemove.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.MktgSubscribeRemove.Impl
+		SccLocalPath3 = Atlantis.Framework.MktgSubscribeRemove.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.MktgSubscribeRemove.Interface\\Atlantis.Framework.MktgSubscribeRemove.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.MktgSubscribeRemove.Interface
+		SccLocalPath4 = Atlantis.Framework.MktgSubscribeRemove.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.MktgSubscribeRemove.Tests\\Atlantis.Framework.MktgSubscribeRemove.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.MktgSubscribeRemove.Tests
+		SccLocalPath5 = Atlantis.Framework.MktgSubscribeRemove.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.MktgSubscribeRemove.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08970D9B-A3E5-4895-A667-59C476DD5FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08970D9B-A3E5-4895-A667-59C476DD5FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08970D9B-A3E5-4895-A667-59C476DD5FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08970D9B-A3E5-4895-A667-59C476DD5FDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00E731C0-A583-4867-840B-27F15FC2BEB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E731C0-A583-4867-840B-27F15FC2BEB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E731C0-A583-4867-840B-27F15FC2BEB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00E731C0-A583-4867-840B-27F15FC2BEB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D5EA0CC-834F-45B6-8E53-32B60D757999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D5EA0CC-834F-45B6-8E53-32B60D757999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D5EA0CC-834F-45B6-8E53-32B60D757999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D5EA0CC-834F-45B6-8E53-32B60D757999}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {F7059892-78FC-4915-A276-6739838A95AE}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {F7059892-78FC-4915-A276-6739838A95AE}
+	EndGlobalSection
+EndGlobal

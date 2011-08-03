@@ -69,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GetOverrideHashTests.cs">
+    <Compile Include="GetOverrideHashTest.cs">
     </Compile>
   </ItemGroup>
   <ItemGroup>

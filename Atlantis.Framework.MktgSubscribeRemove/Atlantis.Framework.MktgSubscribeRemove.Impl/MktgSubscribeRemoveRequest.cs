@@ -1,7 +1,7 @@
 ﻿using System;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.MktgSubscribeRemove.Interface;
 using Atlantis.Framework.MktgSubscribeRemove.Impl.UnsubscribeWS;
+using Atlantis.Framework.MktgSubscribeRemove.Interface;
 
 namespace Atlantis.Framework.MktgSubscribeRemove.Impl
 {

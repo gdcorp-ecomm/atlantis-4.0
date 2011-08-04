@@ -1,10 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Atlantis.Framework.MktgSubscribeRemove.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.MktgSubscribeRemove.Interface;
 
 namespace Atlantis.Framework.MktgSubscribeRemove.Tests
 {

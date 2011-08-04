@@ -1,10 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Atlantis.Framework.BPSubscribeRemove.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.BPSubscribeRemove.Interface;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.BPSubscribeRemove.Tests
 {

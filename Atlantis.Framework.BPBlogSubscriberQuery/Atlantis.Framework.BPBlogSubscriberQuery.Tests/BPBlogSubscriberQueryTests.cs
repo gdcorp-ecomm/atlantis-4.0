@@ -1,9 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Atlantis.Framework.BPBlogSubscriberQuery.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.BPBlogSubscriberQuery.Interface;
 
 namespace Atlantis.Framework.BPBlogSubscriberQuery.Tests
 {

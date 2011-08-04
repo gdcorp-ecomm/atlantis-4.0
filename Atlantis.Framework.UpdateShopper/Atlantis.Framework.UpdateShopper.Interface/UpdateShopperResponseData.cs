@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.UpdateShopper.Interface

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="BBSoapNS" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="BBSoapNS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="BBSoapNS">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="add_subscriberRequest">
+    <wsdl:part name="email" type="xsd:string" />
+    <wsdl:part name="firstname" type="xsd:string" />
+    <wsdl:part name="lastname" type="xsd:string" />
+    <wsdl:part name="confirmed" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="add_subscriberResponse">
+    <wsdl:part name="response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="add_gdsite_subscriberRequest">
+    <wsdl:part name="email" type="xsd:string" />
+    <wsdl:part name="firstname" type="xsd:string" />
+    <wsdl:part name="lastname" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="add_gdsite_subscriberResponse">
+    <wsdl:part name="response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="query_subscriberRequest">
+    <wsdl:part name="email" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="query_subscriberResponse">
+    <wsdl:part name="response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="remove_subscriberRequest">
+    <wsdl:part name="email" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="remove_subscriberResponse">
+    <wsdl:part name="response" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="BBSoapPortType">
+    <wsdl:operation name="add_subscriber">
+      <wsdl:input message="tns:add_subscriberRequest" />
+      <wsdl:output message="tns:add_subscriberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="add_gdsite_subscriber">
+      <wsdl:input message="tns:add_gdsite_subscriberRequest" />
+      <wsdl:output message="tns:add_gdsite_subscriberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="query_subscriber">
+      <wsdl:input message="tns:query_subscriberRequest" />
+      <wsdl:output message="tns:query_subscriberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="remove_subscriber">
+      <wsdl:input message="tns:remove_subscriberRequest" />
+      <wsdl:output message="tns:remove_subscriberResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BBSoapBinding" type="tns:BBSoapPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="add_subscriber">
+      <soap:operation soapAction="http://www.bobparsons.me-dev.ide/service.php/add_subscriber" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="BBSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="BBSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add_gdsite_subscriber">
+      <soap:operation soapAction="http://www.bobparsons.me-dev.ide/service.php/add_gdsite_subscriber" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="BBSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="BBSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="query_subscriber">
+      <soap:operation soapAction="http://www.bobparsons.me-dev.ide/service.php/query_subscriber" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="BBSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="BBSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="remove_subscriber">
+      <soap:operation soapAction="http://www.bobparsons.me-dev.ide/service.php/remove_subscriber" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="BBSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="BBSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BBSoap">
+    <wsdl:port name="BBSoapPort" binding="tns:BBSoapBinding">
+      <soap:address location="http://www.bobparsons.me-dev.ide/service.php?version=1" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -58,9 +58,8 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Company.CreditCard, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Atlantis.Framework.ExternalReferences\ExternalReferences\Company.CreditCard.dll</HintPath>
+    <Reference Include="Company.CreditCard">
+      <HintPath>..\..\..\..\project\Web Applications\MYA\Web2\Main\Mya\Bin\Company.CreditCard.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:WSCgdMessagingSystemService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSCgdMessagingSystemService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WSCgdMessagingSystemService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ProcessXmlIn">
+    <wsdl:part name="bstrMessageXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcessXmlOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcessShopperMessageIn">
+    <wsdl:part name="bstrMessageXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcessShopperMessageOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcessGenericMessageIn">
+    <wsdl:part name="bstrMessageXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcessGenericMessageOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFailedMessagesByTypeIn">
+    <wsdl:part name="bstrNamespace" type="s:string" />
+    <wsdl:part name="bstrType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFailedMessagesByTypeOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFailedMessagesByNamespaceIn">
+    <wsdl:part name="bstrNamespace" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFailedMessagesByNamespaceOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageStatusIn">
+    <wsdl:part name="bstrMessageID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageStatusOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WSCgdMessagingSystemServiceSoap">
+    <wsdl:operation name="ProcessXml">
+      <wsdl:input message="s0:ProcessXmlIn" />
+      <wsdl:output message="s0:ProcessXmlOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessShopperMessage">
+      <wsdl:input message="s0:ProcessShopperMessageIn" />
+      <wsdl:output message="s0:ProcessShopperMessageOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessGenericMessage">
+      <wsdl:input message="s0:ProcessGenericMessageIn" />
+      <wsdl:output message="s0:ProcessGenericMessageOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFailedMessagesByType">
+      <wsdl:input message="s0:GetFailedMessagesByTypeIn" />
+      <wsdl:output message="s0:GetFailedMessagesByTypeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFailedMessagesByNamespace">
+      <wsdl:input message="s0:GetFailedMessagesByNamespaceIn" />
+      <wsdl:output message="s0:GetFailedMessagesByNamespaceOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageStatus">
+      <wsdl:input message="s0:GetMessageStatusIn" />
+      <wsdl:output message="s0:GetMessageStatusOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSCgdMessagingSystemServiceSoap" type="s0:WSCgdMessagingSystemServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="ProcessXml">
+      <soap:operation soapAction="#ProcessXml" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessShopperMessage">
+      <soap:operation soapAction="#ProcessShopperMessage" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessGenericMessage">
+      <soap:operation soapAction="#ProcessGenericMessage" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFailedMessagesByType">
+      <soap:operation soapAction="#GetFailedMessagesByType" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFailedMessagesByNamespace">
+      <soap:operation soapAction="#GetFailedMessagesByNamespace" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageStatus">
+      <soap:operation soapAction="#GetMessageStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdMessagingSystemService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCgdMessagingSystemService">
+    <wsdl:port name="WSCgdMessagingSystemServiceSoap" binding="s0:WSCgdMessagingSystemServiceSoap">
+      <soap:address location="http://devgdmsg:80/gdMessagingSystem/WSCgdMessagingSystem.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,18 @@
+﻿<messageXml type="DomainBuySetMinMax" namespace="DomainBuy">
+  <dictionary>
+    <item name="PrivateLabelID">1</item>
+    <item name="ShopperID">832652</item>
+  </dictionary>
+  <contactpoints>
+    <contactpoint contact="ShopperContact" type="SHOPPER" />
+  </contactpoints>
+  <resources>
+    <resource type="DomainBuyInfo" id="resource1">
+      <attribute name="DOMAIN">micco.com</attribute>
+      <attribute name="CLAIMID">1234</attribute>
+      <contact name="ShopperContact">
+        <attribute name="id">832652</attribute>
+      </contact>
+    </resource>
+  </resources>
+</messageXml>

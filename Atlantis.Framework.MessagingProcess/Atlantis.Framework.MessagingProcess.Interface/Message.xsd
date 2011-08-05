@@ -1,0 +1,79 @@
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="dictionary">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="item" nillable="false">
+                    <xs:complexType mixed="true">
+                        <xs:complexContent mixed="true">
+                            <xs:extension base="itemPLType" />
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:any namespace="##any" processContents="skip" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="messageXml">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="contactpoints" />
+                <xs:element ref="dictionary" />
+                <xs:element ref="resources" />
+            </xs:all>
+            <xs:attribute name="type" type="xs:string" use="required" />
+            <xs:attribute name="namespace" type="xs:string" use="required" />
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="resources">
+        <xs:complexType>
+            <xs:sequence maxOccurs="unbounded">
+                <xs:element ref="resource" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="itemPLType">
+        <xs:attribute name="name" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="PrivateLabelID" />
+                    <xs:enumeration value="*" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="resourceType" mixed="0">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:any namespace="##any" processContents="skip" />
+        </xs:sequence>
+        <xs:attribute name="type" type="xs:string" use="required" />
+        <xs:attribute name="id" type="xs:string" use="required" />
+    </xs:complexType>
+    <xs:element name="resource" type="resourceType" />
+    <xs:complexType name="contactPointType" />
+    <xs:element name="contactpoints">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element name="contactpoint" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="contactPointType">
+                                <xs:attribute name="contact" type="xs:string" use="required" />
+                                <xs:attribute name="type" use="optional">
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                            <xs:enumeration value="AURORA" />
+                                            <xs:enumeration value="SHOPPER" />
+                                            <xs:enumeration value="DOMAIN" />
+                                            <xs:enumeration value="RESELLER" />
+                                            <xs:enumeration value="TEAM" />
+                                        </xs:restriction>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

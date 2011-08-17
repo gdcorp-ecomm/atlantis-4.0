@@ -14,12 +14,12 @@ namespace Atlantis.Framework.BonzaiApplyAddOn.Interface
 
     public BonzaiApplyAddOnRequestData(string shopperId,
                                   string sourceUrl,
-                                  string orderIo,
+                                  string orderId,
                                   string pathway,
                                   int pageCount,
                                   string accountUid,
                                   string addOnType)
-      : base(shopperId, sourceUrl, orderIo, pathway, pageCount)
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       AccountUid = accountUid;
       AddOnType = addOnType;

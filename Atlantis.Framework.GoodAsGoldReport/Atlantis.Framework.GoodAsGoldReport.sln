@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{CCD9B194-BA08-45F1-A24F-B1AA0057000E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GoodAsGoldReport.Interface", "Atlantis.Framework.GoodAsGoldReport.Interface\Atlantis.Framework.GoodAsGoldReport.Interface.csproj", "{2AD57A52-2396-4888-8838-CF8939B2C0E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GoodAsGoldReport.Impl", "Atlantis.Framework.GoodAsGoldReport.Impl\Atlantis.Framework.GoodAsGoldReport.Impl.csproj", "{1B9E8DB7-CAAD-4793-BBF1-5D652738C30B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GoodAsGoldReport.Tests", "Atlantis.Framework.GoodAsGoldReport.Tests\Atlantis.Framework.GoodAsGoldReport.Tests.csproj", "{D858EA6C-2249-4721-8D79-EE51832C72EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{789A8028-3D19-465D-AE57-475F03AB52ED}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.GoodAsGoldReport.vsmdi = Atlantis.Framework.GoodAsGoldReport.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.GoodAsGoldReport.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.GoodAsGoldReport.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.GoodAsGoldReport.sln
+		SccProjectName3 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName4 = Atlantis.Framework.GoodAsGoldReport.Interface\\Atlantis.Framework.GoodAsGoldReport.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.GoodAsGoldReport.Interface
+		SccLocalPath4 = Atlantis.Framework.GoodAsGoldReport.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.GoodAsGoldReport.Impl\\Atlantis.Framework.GoodAsGoldReport.Impl.csproj
+		SccProjectName5 = Atlantis.Framework.GoodAsGoldReport.Impl
+		SccLocalPath5 = Atlantis.Framework.GoodAsGoldReport.Impl
+		SccProjectUniqueName6 = Atlantis.Framework.GoodAsGoldReport.Tests\\Atlantis.Framework.GoodAsGoldReport.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.GoodAsGoldReport.Tests
+		SccLocalPath6 = Atlantis.Framework.GoodAsGoldReport.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.GoodAsGoldReport.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AD57A52-2396-4888-8838-CF8939B2C0E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AD57A52-2396-4888-8838-CF8939B2C0E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AD57A52-2396-4888-8838-CF8939B2C0E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AD57A52-2396-4888-8838-CF8939B2C0E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B9E8DB7-CAAD-4793-BBF1-5D652738C30B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B9E8DB7-CAAD-4793-BBF1-5D652738C30B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B9E8DB7-CAAD-4793-BBF1-5D652738C30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B9E8DB7-CAAD-4793-BBF1-5D652738C30B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D858EA6C-2249-4721-8D79-EE51832C72EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D858EA6C-2249-4721-8D79-EE51832C72EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D858EA6C-2249-4721-8D79-EE51832C72EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D858EA6C-2249-4721-8D79-EE51832C72EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {CCD9B194-BA08-45F1-A24F-B1AA0057000E}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {CCD9B194-BA08-45F1-A24F-B1AA0057000E}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {CCD9B194-BA08-45F1-A24F-B1AA0057000E}
+	EndGlobalSection
+EndGlobal

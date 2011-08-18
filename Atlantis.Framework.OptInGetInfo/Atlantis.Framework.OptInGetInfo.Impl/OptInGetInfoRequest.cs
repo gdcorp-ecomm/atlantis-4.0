@@ -8,9 +8,9 @@ using Atlantis.Framework.BPBlogSubscriberQuery.Interface;
 using Atlantis.Framework.DataProvider.Interface;
 using Atlantis.Framework.GetShopper.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.OptIn.Interface;
 using Atlantis.Framework.OptIn.Interface.Enums;
 using Atlantis.Framework.OptInGetInfo.Interface;
-using Atlantis.Framework.OptIn.Interface;
 
 namespace Atlantis.Framework.OptInGetInfo.Impl
 {

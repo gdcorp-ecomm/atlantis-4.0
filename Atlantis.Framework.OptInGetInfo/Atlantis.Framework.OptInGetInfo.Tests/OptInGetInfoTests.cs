@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Atlantis.Framework.OptIn.Interface.Enums;
 using Atlantis.Framework.OptInGetInfo.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

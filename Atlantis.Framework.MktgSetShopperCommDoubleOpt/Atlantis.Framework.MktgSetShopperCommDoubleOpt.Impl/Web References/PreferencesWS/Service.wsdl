@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Subscribe">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sEmail" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPublicationId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPrivateLabelId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iEmailType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFromApp" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFromIPAddr" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bIsConfirmed" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubscribeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubscribeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Unsubscribe">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sEmail" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPublicationId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPrivateLabelId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFromApp" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFromIPAddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UnsubscribeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UnsubscribeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetShopperCommPreference">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iCommTypeId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="bOptIn" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetShopperCommPreferenceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetShopperCommPreferenceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetShopperCommDoubleOptIn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iCommTypeId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetShopperCommDoubleOptInResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetShopperCommDoubleOptInResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetShopperInterestPreference">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iCommTypeId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iInterestTypeId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="bOptIn" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetShopperInterestPreferenceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetShopperInterestPreferenceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperOptIns">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperOptInsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShopperOptInsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SubscribeSoapIn">
+    <wsdl:part name="parameters" element="tns:Subscribe" />
+  </wsdl:message>
+  <wsdl:message name="SubscribeSoapOut">
+    <wsdl:part name="parameters" element="tns:SubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="UnsubscribeSoapIn">
+    <wsdl:part name="parameters" element="tns:Unsubscribe" />
+  </wsdl:message>
+  <wsdl:message name="UnsubscribeSoapOut">
+    <wsdl:part name="parameters" element="tns:UnsubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetShopperCommPreferenceSoapIn">
+    <wsdl:part name="parameters" element="tns:SetShopperCommPreference" />
+  </wsdl:message>
+  <wsdl:message name="SetShopperCommPreferenceSoapOut">
+    <wsdl:part name="parameters" element="tns:SetShopperCommPreferenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetShopperCommDoubleOptInSoapIn">
+    <wsdl:part name="parameters" element="tns:SetShopperCommDoubleOptIn" />
+  </wsdl:message>
+  <wsdl:message name="SetShopperCommDoubleOptInSoapOut">
+    <wsdl:part name="parameters" element="tns:SetShopperCommDoubleOptInResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetShopperInterestPreferenceSoapIn">
+    <wsdl:part name="parameters" element="tns:SetShopperInterestPreference" />
+  </wsdl:message>
+  <wsdl:message name="SetShopperInterestPreferenceSoapOut">
+    <wsdl:part name="parameters" element="tns:SetShopperInterestPreferenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperOptInsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShopperOptIns" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperOptInsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShopperOptInsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="Subscribe">
+      <wsdl:input message="tns:SubscribeSoapIn" />
+      <wsdl:output message="tns:SubscribeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Unsubscribe">
+      <wsdl:input message="tns:UnsubscribeSoapIn" />
+      <wsdl:output message="tns:UnsubscribeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetShopperCommPreference">
+      <wsdl:input message="tns:SetShopperCommPreferenceSoapIn" />
+      <wsdl:output message="tns:SetShopperCommPreferenceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetShopperCommDoubleOptIn">
+      <wsdl:input message="tns:SetShopperCommDoubleOptInSoapIn" />
+      <wsdl:output message="tns:SetShopperCommDoubleOptInSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetShopperInterestPreference">
+      <wsdl:input message="tns:SetShopperInterestPreferenceSoapIn" />
+      <wsdl:output message="tns:SetShopperInterestPreferenceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperOptIns">
+      <wsdl:input message="tns:GetShopperOptInsSoapIn" />
+      <wsdl:output message="tns:GetShopperOptInsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Subscribe">
+      <soap:operation soapAction="http://tempuri.org/Subscribe" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Unsubscribe">
+      <soap:operation soapAction="http://tempuri.org/Unsubscribe" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetShopperCommPreference">
+      <soap:operation soapAction="http://tempuri.org/SetShopperCommPreference" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetShopperCommDoubleOptIn">
+      <soap:operation soapAction="http://tempuri.org/SetShopperCommDoubleOptIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetShopperInterestPreference">
+      <soap:operation soapAction="http://tempuri.org/SetShopperInterestPreference" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperOptIns">
+      <soap:operation soapAction="http://tempuri.org/GetShopperOptIns" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Subscribe">
+      <soap12:operation soapAction="http://tempuri.org/Subscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Unsubscribe">
+      <soap12:operation soapAction="http://tempuri.org/Unsubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetShopperCommPreference">
+      <soap12:operation soapAction="http://tempuri.org/SetShopperCommPreference" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetShopperCommDoubleOptIn">
+      <soap12:operation soapAction="http://tempuri.org/SetShopperCommDoubleOptIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetShopperInterestPreference">
+      <soap12:operation soapAction="http://tempuri.org/SetShopperInterestPreference" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperOptIns">
+      <soap12:operation soapAction="http://tempuri.org/GetShopperOptIns" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="https://gdcomm.dev.glbt1.gdg/WsgdMktgPublicationEmail/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="https://gdcomm.dev.glbt1.gdg/WsgdMktgPublicationEmail/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

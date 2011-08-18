@@ -17,41 +17,44 @@ namespace Atlantis.Framework.ProductFreeCreditsByProductId.Impl
 
     #endregion
 
-    private static ConfigElement _config;
-
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      ProductFreeCreditsByProductIdResponseData responseData = null;
+      ProductFreeCreditsByProductIdResponseData responseData;
 
       try
       {
-        _config = config;
+        var request = (ProductFreeCreditsByProductIdRequestData)requestData;
 
-        ProductFreeCreditsByProductIdRequestData request = (ProductFreeCreditsByProductIdRequestData)requestData;
-
-        //Get proc to execute
-        using (SqlConnection cn = new SqlConnection(Nimitz.NetConnect.LookupConnectInfo(config)))
+        using (var cn = new SqlConnection(Nimitz.NetConnect.LookupConnectInfo(config)))
         {
-          cn.Open();
-
-          using (SqlCommand cmd = new SqlCommand(STORED_PROCEDURE, cn))
+          using (var cmd = new SqlCommand(STORED_PROCEDURE, cn))
           {
             cmd.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddRange(SetSqlParameters(request));
+            cmd.Parameters.AddRange(new[]
+                                      {
+                                        new SqlParameter(UNIFIED_PRODUCT_ID_PARAM, request.UnifiedProductId),
+                                        new SqlParameter(PRIVATE_LABEL_ID_PARAM, request.PrivateLabelId)
+                                      });
 
             var productFreeCredits = new List<ProductFreeCredit>();
+
+            cn.Open();
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
               while (reader.Read())
               {
-                productFreeCredits.Add(GetProductFreeCredit(reader));
+                productFreeCredits.Add(new ProductFreeCredit
+                                         {
+                                           UnifiedProductId = (int) reader.GetDecimal(0),
+                                           BillingNamespace = reader.GetString(1)
+                                         });
               }
             }
+            cn.Close();
 
             responseData = new ProductFreeCreditsByProductIdResponseData(productFreeCredits);
           }
-          cn.Close();
         }
       }
       catch (AtlantisException exAtlantis)
@@ -66,37 +69,5 @@ namespace Atlantis.Framework.ProductFreeCreditsByProductId.Impl
 
       return responseData;
     }
-
-    #region SQL Parameter Handling
-    
-    private SqlParameter[] SetSqlParameters(ProductFreeCreditsByProductIdRequestData request)
-    {
-      List<SqlParameter> paramColl = new List<SqlParameter>();
-
-      paramColl.Add(new SqlParameter(UNIFIED_PRODUCT_ID_PARAM, request.UnifiedProductId));
-      paramColl.Add(new SqlParameter(PRIVATE_LABEL_ID_PARAM, request.PrivateLabelId));
-
-      SqlParameter[] paramArray = new SqlParameter[paramColl.Count];
-      paramColl.CopyTo(paramArray, 0);
-
-      return paramArray;
-    }
-
-    #endregion
-
-    #region ProductFreeCredit
-
-    private ProductFreeCredit GetProductFreeCredit(SqlDataReader reader)
-    {
-      var productFreeCredit = new ProductFreeCredit();
-
-      productFreeCredit.UnifiedProductId = (int)reader.GetDecimal(0);
-      productFreeCredit.BillingNamespace = reader.GetString(1);
-      
-      return productFreeCredit;
-    }
-
-    #endregion ProductFreeCredit
-
   }
 }

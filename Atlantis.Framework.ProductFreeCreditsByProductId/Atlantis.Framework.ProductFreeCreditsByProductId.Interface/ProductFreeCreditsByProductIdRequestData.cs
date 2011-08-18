@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.ProductFreeCreditsByProductId.Interface
@@ -19,12 +17,11 @@ namespace Atlantis.Framework.ProductFreeCreditsByProductId.Interface
       , string orderId
       , string pathway
       , int pageCount
-      , int timeoutSeconds
       , int unifiedProductId
       , int privateLabelId)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      RequestTimeout = TimeSpan.FromSeconds(timeoutSeconds);
+      RequestTimeout = TimeSpan.FromSeconds(2d);
       UnifiedProductId = unifiedProductId;
       PrivateLabelId = privateLabelId;
     }

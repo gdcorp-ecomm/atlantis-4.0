@@ -42,12 +42,12 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Impl
               cmd.CommandType = CommandType.StoredProcedure;
               cmd.Parameters.AddRange(SetSqlParameters(request, configItem));
 
-              var productFreeCredits = new List<ProductFreeCredit>();
+              var productFreeCredits = new List<ResourceFreeCredit>();
               using (SqlDataReader reader = cmd.ExecuteReader())
               {
                 while (reader.Read())
                 {
-                  productFreeCredits.Add(GetProductFreeCredit(reader));
+                  productFreeCredits.Add(GetResourceFreeCredit(reader));
                 }
               }
 
@@ -89,15 +89,15 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Impl
 
     #region ProductFreeCredit
 
-    private ProductFreeCredit GetProductFreeCredit(SqlDataReader reader)
+    private ResourceFreeCredit GetResourceFreeCredit(SqlDataReader reader)
     {
-      var productFreeCredit = new ProductFreeCredit();
+      var resourceFreeCredit = new ResourceFreeCredit();
 
-      productFreeCredit.FreeProductPackageId = reader.GetInt32(0);
-      productFreeCredit.UnifiedProductId = (int)reader.GetDecimal(1);
-      productFreeCredit.Quantity = reader.GetInt32(3);
-      
-      return productFreeCredit;
+      resourceFreeCredit.FreeProductPackageId = reader.GetInt32(0);
+      resourceFreeCredit.UnifiedProductId = (int)reader.GetDecimal(1);
+      resourceFreeCredit.Quantity = reader.GetInt32(3);
+
+      return resourceFreeCredit;
     }
 
     #endregion ProductFreeCredit

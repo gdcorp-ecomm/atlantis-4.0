@@ -9,16 +9,16 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Interface
   public partial class ProductFreeCreditsByResourceResponseData : IResponseData
   {
     private readonly AtlantisException _atlantisException;
-    public List<ProductFreeCredit> ProductFreeCredits { get; set; }
+    public List<ResourceFreeCredit> ResourceFreeCredits { get; set; }
 
     public bool IsSuccess
     {
       get { return _atlantisException == null; }
     }
 
-    public ProductFreeCreditsByResourceResponseData(List<ProductFreeCredit> productFreeCredits)
+    public ProductFreeCreditsByResourceResponseData(List<ResourceFreeCredit> resourceFreeCredits)
     {
-      ProductFreeCredits = productFreeCredits;
+      ResourceFreeCredits = resourceFreeCredits;
     }
 
     public ProductFreeCreditsByResourceResponseData(AtlantisException atlantisException)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Atlantis.Framework.ProductFreeCreditsByResource.Interface
 {
-  public class ProductFreeCredit
+  public class ResourceFreeCredit
   {
     public int FreeProductPackageId { get; set; }
     public int UnifiedProductId { get; set; }

@@ -23,6 +23,7 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Tests
          , string.Empty
          , string.Empty
          , 0
+         , 5
          , _hostingResourceID
          , _hostingProductTypeID);
 
@@ -33,10 +34,10 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Tests
       {
         responseData = (ProductFreeCreditsByResourceResponseData)Engine.Engine.ProcessRequest(requestData, _requestType);
 
-        Debug.WriteLine(string.Format("Available Free Credits: {0}", responseData.ProductFreeCredits.Count));
-        foreach (ProductFreeCredit pfc in responseData.ProductFreeCredits)
+        Debug.WriteLine(string.Format("Available Free Credits: {0}", responseData.ResourceFreeCredits.Count));
+        foreach (ResourceFreeCredit rfc in responseData.ResourceFreeCredits)
         {
-          Debug.WriteLine(string.Format("PackageId:{0}, UnifiedProductId:{1}, Quantity:{2}", pfc.FreeProductPackageId, pfc.UnifiedProductId, pfc.Quantity));
+          Debug.WriteLine(string.Format("PackageId:{0}, UnifiedProductId:{1}, Quantity:{2}", rfc.FreeProductPackageId, rfc.UnifiedProductId, rfc.Quantity));
         }
 
         Assert.IsTrue(responseData.IsSuccess);

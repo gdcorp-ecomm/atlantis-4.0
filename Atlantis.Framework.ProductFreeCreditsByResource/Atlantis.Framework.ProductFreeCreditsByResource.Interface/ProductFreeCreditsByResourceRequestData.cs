@@ -9,8 +9,6 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Interface
   {
     #region Properties
     
-    public TimeSpan RequestTimeout { get; set; }
-
     public int BillingResourceId { get; set; }
     public int ProductTypeId { get; set; }
 
@@ -21,11 +19,12 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Interface
       , string orderId
       , string pathway
       , int pageCount
+      , int timeoutSeconds
       , int billingResourceId
       , int productTypeId)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      RequestTimeout = TimeSpan.FromSeconds(5);
+      RequestTimeout = TimeSpan.FromSeconds(timeoutSeconds);
       BillingResourceId = billingResourceId;
       ProductTypeId = productTypeId;
     }

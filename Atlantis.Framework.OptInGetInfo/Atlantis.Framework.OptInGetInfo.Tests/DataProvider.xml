@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataProviderElements>
+  <DatabaseAccess>
+    <dbsetting name="emailoptinget" dsn="corp.web.mya.Godaddy" app_name="MYA" cert_name="corp.web.mya.dev.client.godaddy.com" target_name="gdshop_mktg_contactGetPubListByHashAndPrivateLabel_sp">
+      <param name="contactHash" type="varchar" size="10" />
+      <param name="PrivateLabelId" type="int" size=""  />
+    </dbsetting>
+  </DatabaseAccess>
+</DataProviderElements>

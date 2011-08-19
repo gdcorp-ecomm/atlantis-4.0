@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using Atlantis.Framework.ProductFreeCreditsByResource.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.ProductFreeCreditsByResource.Interface;
 
 namespace Atlantis.Framework.ProductFreeCreditsByResource.Tests
 {
@@ -18,21 +17,17 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Tests
     [DeploymentItem("atlantis.config")]
     public void GetHostingProductFreeCredits()
     {
-      ProductFreeCreditsByResourceRequestData requestData = new ProductFreeCreditsByResourceRequestData(_shopperID
+      var requestData = new ProductFreeCreditsByResourceRequestData(_shopperID
          , string.Empty
          , string.Empty
          , string.Empty
          , 0
-         , 5
          , _hostingResourceID
-         , _hostingProductTypeID);
-
-
-      ProductFreeCreditsByResourceResponseData responseData;
+         , _hostingProductTypeID) {RequestTimeout = TimeSpan.FromSeconds(5d)};
 
       try
       {
-        responseData = (ProductFreeCreditsByResourceResponseData)Engine.Engine.ProcessRequest(requestData, _requestType);
+        var responseData = (ProductFreeCreditsByResourceResponseData)Engine.Engine.ProcessRequest(requestData, _requestType);
 
         Debug.WriteLine(string.Format("Available Free Credits: {0}", responseData.ResourceFreeCredits.Count));
         foreach (ResourceFreeCredit rfc in responseData.ResourceFreeCredits)
@@ -47,6 +42,5 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Tests
         Assert.Fail(ex.Message);
       }
     }
-
   }
 }

@@ -26,34 +26,39 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Impl
       {
         _config = config;
 
-        ProductFreeCreditsByResourceRequestData request = (ProductFreeCreditsByResourceRequestData)requestData;
+        var request = (ProductFreeCreditsByResourceRequestData)requestData;
 
         //Get proc to execute
-        using (SqlConnection cn = new SqlConnection(Nimitz.NetConnect.LookupConnectInfo(config)))
+        using (var cn = new SqlConnection(Nimitz.NetConnect.LookupConnectInfo(config)))
         {
-          cn.Open();
-
-          ProcConfigItem configItem = ProductFreeCreditsByResourceRequest.ProcConfigList[request.ProductTypeId];
+          ProcConfigItem configItem = ProcConfigList[request.ProductTypeId];
           if (configItem != null)
           {
-            using (SqlCommand cmd = new SqlCommand(configItem.StoredProcedure, cn))
+            using (var cmd = new SqlCommand(configItem.StoredProcedure, cn))
             {
               cmd.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
               cmd.CommandType = CommandType.StoredProcedure;
-              cmd.Parameters.AddRange(SetSqlParameters(request, configItem));
+              cmd.Parameters.Add(new SqlParameter(BILLING_RESOURCE_ID_PARAM, request.BillingResourceId));
 
               var productFreeCredits = new List<ResourceFreeCredit>();
+
+              cn.Open();
               using (SqlDataReader reader = cmd.ExecuteReader())
               {
                 while (reader.Read())
                 {
-                  productFreeCredits.Add(GetResourceFreeCredit(reader));
+                  productFreeCredits.Add(new ResourceFreeCredit
+                                           {
+                                             FreeProductPackageId = reader.GetInt32(0),
+                                             UnifiedProductId = (int) reader.GetDecimal(1),
+                                             Quantity = reader.GetInt32(3)
+                                           });
                 }
               }
+              cn.Close();
 
               responseData = new ProductFreeCreditsByResourceResponseData(productFreeCredits);
             }
-            cn.Close();
           }
         }
       }
@@ -71,50 +76,18 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Impl
       return responseData;
     }
 
-    #region SQL Parameter Handling
-    
-    private SqlParameter[] SetSqlParameters(ProductFreeCreditsByResourceRequestData request, ProcConfigItem configItem)
-    {
-      List<SqlParameter> paramColl = new List<SqlParameter>();
-
-      paramColl.Add(new SqlParameter(BILLING_RESOURCE_ID_PARAM, request.BillingResourceId));
-
-      SqlParameter[] paramArray = new SqlParameter[paramColl.Count];
-      paramColl.CopyTo(paramArray, 0);
-
-      return paramArray;
-    }
-
-    #endregion
-
-    #region ProductFreeCredit
-
-    private ResourceFreeCredit GetResourceFreeCredit(SqlDataReader reader)
-    {
-      var resourceFreeCredit = new ResourceFreeCredit();
-
-      resourceFreeCredit.FreeProductPackageId = reader.GetInt32(0);
-      resourceFreeCredit.UnifiedProductId = (int)reader.GetDecimal(1);
-      resourceFreeCredit.Quantity = reader.GetInt32(3);
-
-      return resourceFreeCredit;
-    }
-
-    #endregion ProductFreeCredit
-
     #region ProcConfigList DataCached
 
     internal static Dictionary<int, ProcConfigItem> GetProcConfigList(string key)
     {
       var procConfigList = new Dictionary<int, ProcConfigItem>();
-      using (SqlConnection cn = new SqlConnection(Nimitz.NetConnect.LookupConnectInfo(_config)))
+      using (var cn = new SqlConnection(Nimitz.NetConnect.LookupConnectInfo(_config)))
       {
-        cn.Open();
-
-        using (SqlCommand cmd = new SqlCommand(CONFIG_STORED_PROCEDURE, cn))
+        using (var cmd = new SqlCommand(CONFIG_STORED_PROCEDURE, cn))
         {
           cmd.CommandType = CommandType.StoredProcedure;
 
+          cn.Open();
           using (SqlDataReader reader = cmd.ExecuteReader())
           {
             while (reader.Read())
@@ -122,9 +95,8 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Impl
               procConfigList.Add(reader.GetInt32(0), new ProcConfigItem(reader.GetInt32(0), reader.GetString(1)));
             }
           }
+          cn.Close();
         }
-
-        cn.Close();
       }
 
       return procConfigList;

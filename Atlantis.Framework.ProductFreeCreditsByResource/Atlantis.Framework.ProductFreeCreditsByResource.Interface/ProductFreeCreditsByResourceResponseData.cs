@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Atlantis.Framework.Interface;
 using System.Reflection;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.ProductFreeCreditsByResource.Interface
 {
-  public partial class ProductFreeCreditsByResourceResponseData : IResponseData
+  public class ProductFreeCreditsByResourceResponseData : IResponseData
   {
     private readonly AtlantisException _atlantisException;
     public List<ResourceFreeCredit> ResourceFreeCredits { get; set; }

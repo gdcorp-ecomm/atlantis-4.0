@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataProviderElements>
+  <WebService>
+    <wssetting name="ActivateWhoIsMailer" host_name="http://g1twdtvapp01/RegWhoisOptOutWebSvc/RegWhoisOptOutWebSvc.dll?Handler=GenRegWhoisOptOutWebSvcWSDL" target_name="ActivateWhoisOptout">
+      <param name="requestXml" type="string"></param>
+    </wssetting>
+  </WebService>
+</DataProviderElements>

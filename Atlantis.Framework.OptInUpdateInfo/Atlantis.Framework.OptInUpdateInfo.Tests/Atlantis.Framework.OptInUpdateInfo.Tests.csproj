@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7A5CFECC-83C0-489C-8289-4CBC49353D89}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atlantis.Framework.OptInUpdateInfo.Tests</RootNamespace>
+    <AssemblyName>Atlantis.Framework.OptInUpdateInfo.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="OptInUpdateInfoTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataProvider.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.BPBlogSubscriberAdd\Atlantis.Framework.BPBlogSubscriberAdd.Impl\Atlantis.Framework.BPBlogSubscriberAdd.Impl.csproj">
+      <Project>{39FD7A46-8A41-42BA-ADEA-CEC6DDF343B1}</Project>
+      <Name>Atlantis.Framework.BPBlogSubscriberAdd.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.BPBlogSubscriberAdd\Atlantis.Framework.BPBlogSubscriberAdd.Interface\Atlantis.Framework.BPBlogSubscriberAdd.Interface.csproj">
+      <Project>{51725BCC-C14D-4790-B7F4-CBA2EB9A779B}</Project>
+      <Name>Atlantis.Framework.BPBlogSubscriberAdd.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.BPSubscribeRemove\Atlantis.Framework.BPSubscribeRemove.Impl\Atlantis.Framework.BPSubscribeRemove.Impl.csproj">
+      <Project>{9DEA434C-3DDE-4B61-9C46-058792278C63}</Project>
+      <Name>Atlantis.Framework.BPSubscribeRemove.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.BPSubscribeRemove\Atlantis.Framework.BPSubscribeRemove.Interface\Atlantis.Framework.BPSubscribeRemove.Interface.csproj">
+      <Project>{0B69DEC3-09E5-41B2-86C2-D548309211C2}</Project>
+      <Name>Atlantis.Framework.BPSubscribeRemove.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.DataProvider\Atlantis.Framework.DataProvider.Impl\Atlantis.Framework.DataProvider.Impl.csproj">
+      <Project>{2082EE07-1D5E-4E67-AB16-FA409182FB13}</Project>
+      <Name>Atlantis.Framework.DataProvider.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.DataProvider\Atlantis.Framework.DataProvider.Interface\Atlantis.Framework.DataProvider.Interface.csproj">
+      <Project>{BEE136BA-2908-438B-9033-CCDB137CB5F9}</Project>
+      <Name>Atlantis.Framework.DataProvider.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.EEMResellerOptIn\Atlantis.Framework.EEMResellerOptIn.Impl\Atlantis.Framework.EEMResellerOptIn.Impl.csproj">
+      <Project>{2925BAAF-2A52-412F-8291-D4E0E1D39EA7}</Project>
+      <Name>Atlantis.Framework.EEMResellerOptIn.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.EEMResellerOptOut\Atlantis.Framework.EEMResellerOptOut.Impl\Atlantis.Framework.EEMResellerOptOut.Impl.csproj">
+      <Project>{7DCEA28F-6FD6-46B0-893B-75E5073DD66A}</Project>
+      <Name>Atlantis.Framework.EEMResellerOptOut.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.EEMResellerOptOut\Atlantis.Framework.EEMResellerOptOut.Interface\Atlantis.Framework.EEMResellerOptOut.Interface.csproj">
+      <Project>{9E0D2A62-85AE-4064-8A4C-B5BE06926578}</Project>
+      <Name>Atlantis.Framework.EEMResellerOptOut.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+      <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>
+      <Name>Atlantis.Framework.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MktgSubscribeAdd\Atlantis.Framework.MktgSubscribeAdd.Impl\Atlantis.Framework.MktgSubscribeAdd.Impl.csproj">
+      <Project>{DAE51C81-3062-4473-B02E-D30F67C110F3}</Project>
+      <Name>Atlantis.Framework.MktgSubscribeAdd.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MktgSubscribeAdd\Atlantis.Framework.MktgSubscribeAdd.Interface\Atlantis.Framework.MktgSubscribeAdd.Interface.csproj">
+      <Project>{74597CF7-42C7-4311-81AE-45B2F1BC3ACA}</Project>
+      <Name>Atlantis.Framework.MktgSubscribeAdd.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MktgSubscribeRemove\Atlantis.Framework.MktgSubscribeRemove.Impl\Atlantis.Framework.MktgSubscribeRemove.Impl.csproj">
+      <Project>{08970D9B-A3E5-4895-A667-59C476DD5FDA}</Project>
+      <Name>Atlantis.Framework.MktgSubscribeRemove.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MktgSubscribeRemove\Atlantis.Framework.MktgSubscribeRemove.Interface\Atlantis.Framework.MktgSubscribeRemove.Interface.csproj">
+      <Project>{00E731C0-A583-4867-840B-27F15FC2BEB8}</Project>
+      <Name>Atlantis.Framework.MktgSubscribeRemove.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.OptInGetInfo\Atlantis.Framework.OptIn.Interface\Atlantis.Framework.OptIn.Interface.csproj">
+      <Project>{59815F03-B3F1-43E2-89EE-C3B9B0C6D850}</Project>
+      <Name>Atlantis.Framework.OptIn.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.UpdateShopper\Atlantis.Framework.UpdateShopper.Impl\Atlantis.Framework.UpdateShopper.Impl.csproj">
+      <Project>{6FE21F4E-5A20-4DA9-BEDA-59396FF355E2}</Project>
+      <Name>Atlantis.Framework.UpdateShopper.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.UpdateShopper\Atlantis.Framework.UpdateShopper.Interface\Atlantis.Framework.UpdateShopper.Interface.csproj">
+      <Project>{0C3DCE0F-5C45-4206-BED7-24E57CBB5EB4}</Project>
+      <Name>Atlantis.Framework.UpdateShopper.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.OptInUpdateInfo.Impl\Atlantis.Framework.OptInUpdateInfo.Impl.csproj">
+      <Project>{E8F68284-AFBC-42B1-A72E-798496977AE8}</Project>
+      <Name>Atlantis.Framework.OptInUpdateInfo.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.OptInUpdateInfo.Interface\Atlantis.Framework.OptInUpdateInfo.Interface.csproj">
+      <Project>{B53AC9E0-3A6B-47BC-81F1-3C5B92DD9991}</Project>
+      <Name>Atlantis.Framework.OptInUpdateInfo.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

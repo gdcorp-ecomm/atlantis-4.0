@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.BonsaiRenewalsByProductId.Interface
@@ -18,7 +19,13 @@ namespace Atlantis.Framework.BonsaiRenewalsByProductId.Interface
 
     public override string GetCacheMD5()
     {
-      throw new NotImplementedException();
+      MD5 hashProvider = new MD5CryptoServiceProvider();
+      hashProvider.Initialize();
+
+      byte[] stringBytes = System.Text.Encoding.ASCII.GetBytes(string.Join(":", UnifiedProductId.ToString(), PrivateLabelId.ToString()));
+      byte[] md5Bytes = hashProvider.ComputeHash(stringBytes);
+      string sValue = BitConverter.ToString(md5Bytes, 0).Replace("-", string.Empty);
+      return sValue; 
     }
   }
 }

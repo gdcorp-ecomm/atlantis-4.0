@@ -15,6 +15,23 @@ namespace Atlantis.Framework.ChangeAccount.Tests
 
     #region Additional test attributes  
     #endregion
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void ChangeAccountVirHostAddBandwidth()
+    {
+      string accountChangeXML =
+        "<ClientChange TreeID=\"1138\" ShopperID=\"840420\"><Branches><Branch BranchID=\"33\"><SelectedNodes><SelectedNode SelectedNodeID=\"258:108\" Qty=\"30\" StartDate=\"\" EndDate=\"\" /></SelectedNodes></Branch></Branches><Prepaid><PrepaidItem UnifiedProductID=\"658\" Quantity=\"0\" StartMonth=\"\" StartYear=\"\" EndMonth=\"\" EndYear=\"\" /></Prepaid></ClientChange>";
+
+      string itemRequestXML = "";
+      //      "<itemRequest isc=\"muiIscDev\"><itemTemplate itemTrackingCode=\"mya_web_maccloud\" /></itemRequest>";
+
+      ChangeAccountRequestData requestData = new ChangeAccountRequestData("840420", "http://localhost",
+        "", "", 0, "418728", "virhost", "billing", accountChangeXML, 0, 0, itemRequestXML);
+
+      ChangeAccountResponseData responseData = (ChangeAccountResponseData)Engine.Engine.ProcessRequest(requestData, 77);
+      Assert.AreEqual(true, responseData.IsSuccess);
+    }
+    
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]

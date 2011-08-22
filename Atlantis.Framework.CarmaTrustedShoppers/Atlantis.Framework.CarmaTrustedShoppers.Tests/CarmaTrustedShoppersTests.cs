@@ -12,7 +12,7 @@ namespace Atlantis.Framework.CarmaTrustedShoppers.Tests
   {
 
     private const string _shopperId = "856907";  // Shopper with Account Exec: 856907 | Shopper without: 857623
-    private const int _requestType = 408;
+    private const int _requestType = 409;
 
 
     public GetCarmaTrustedShoppersTests()

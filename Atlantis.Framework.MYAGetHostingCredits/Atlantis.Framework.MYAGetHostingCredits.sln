@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MYAGetHostingCredits.Impl", "Atlantis.Framework.MYAGetHostingCredits.Impl\Atlantis.Framework.MYAGetHostingCredits.Impl.csproj", "{7EF1577F-7313-4CA1-B32F-919FCF659A82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MYAGetHostingCredits.Interface", "Atlantis.Framework.MYAGetHostingCredits.Interface\Atlantis.Framework.MYAGetHostingCredits.Interface.csproj", "{AB7D4A78-BBC3-4AC2-B61E-74D6FB009EB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MYAGetHostingCredits.Tests", "Atlantis.Framework.MYAGetHostingCredits.Tests\Atlantis.Framework.MYAGetHostingCredits.Tests.csproj", "{6FBDD6AD-88AC-4CFC-866D-364839AF1576}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{482135BB-72DD-406C-9D44-5CEBA37198D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.MYAGetHostingCredits.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.MYAGetHostingCredits.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.MYAGetHostingCredits.Impl\\Atlantis.Framework.MYAGetHostingCredits.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.MYAGetHostingCredits.Impl
+		SccLocalPath3 = Atlantis.Framework.MYAGetHostingCredits.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.MYAGetHostingCredits.Interface\\Atlantis.Framework.MYAGetHostingCredits.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.MYAGetHostingCredits.Interface
+		SccLocalPath4 = Atlantis.Framework.MYAGetHostingCredits.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.MYAGetHostingCredits.Tests\\Atlantis.Framework.MYAGetHostingCredits.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.MYAGetHostingCredits.Tests
+		SccLocalPath5 = Atlantis.Framework.MYAGetHostingCredits.Tests
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.MYAGetHostingCredits.sln
+		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EF1577F-7313-4CA1-B32F-919FCF659A82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EF1577F-7313-4CA1-B32F-919FCF659A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EF1577F-7313-4CA1-B32F-919FCF659A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EF1577F-7313-4CA1-B32F-919FCF659A82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB7D4A78-BBC3-4AC2-B61E-74D6FB009EB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB7D4A78-BBC3-4AC2-B61E-74D6FB009EB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB7D4A78-BBC3-4AC2-B61E-74D6FB009EB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB7D4A78-BBC3-4AC2-B61E-74D6FB009EB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FBDD6AD-88AC-4CFC-866D-364839AF1576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FBDD6AD-88AC-4CFC-866D-364839AF1576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FBDD6AD-88AC-4CFC-866D-364839AF1576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FBDD6AD-88AC-4CFC-866D-364839AF1576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {482135BB-72DD-406C-9D44-5CEBA37198D8}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {482135BB-72DD-406C-9D44-5CEBA37198D8}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {482135BB-72DD-406C-9D44-5CEBA37198D8}
+	EndGlobalSection
+EndGlobal

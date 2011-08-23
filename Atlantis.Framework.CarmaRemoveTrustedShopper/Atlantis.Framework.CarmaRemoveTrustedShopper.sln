@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9A5F98F3-5F4A-4324-A972-71CD1DC662D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CarmaRemoveTrustedShopper.Impl", "Atlantis.Framework.CarmaRemoveTrustedShopper.Impl\Atlantis.Framework.CarmaRemoveTrustedShopper.Impl.csproj", "{DEEAA448-AF6B-478E-B10B-C8DA95F50EF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CarmaRemoveTrustedShopper.Interface", "Atlantis.Framework.CarmaRemoveTrustedShopper.Interface\Atlantis.Framework.CarmaRemoveTrustedShopper.Interface.csproj", "{4350A8D7-5BED-4096-9ACE-23B5ECA7DBF7}"
+EndProject
+Project("{00000000-0000-0000-0000-000000000000}") = "Atlantis.Framework.CarmaRemoveTrustedShopper.Tests", "Atlantis.Framework.CarmaRemoveTrustedShopper.Tests\Atlantis.Framework.CarmaRemoveTrustedShopper.Tests.csproj", "{AA04BD18-88A7-461B-9F10-D84C9618F31D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.CarmaRemoveTrustedShopper.sln
+		SccProjectName0 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.CarmaRemoveTrustedShopper.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = Atlantis.Framework.CarmaRemoveTrustedShopper.Impl\\Atlantis.Framework.CarmaRemoveTrustedShopper.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.CarmaRemoveTrustedShopper.Impl
+		SccLocalPath3 = Atlantis.Framework.CarmaRemoveTrustedShopper.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.CarmaRemoveTrustedShopper.Interface\\Atlantis.Framework.CarmaRemoveTrustedShopper.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.CarmaRemoveTrustedShopper.Interface
+		SccLocalPath4 = Atlantis.Framework.CarmaRemoveTrustedShopper.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.CarmaRemoveTrustedShopper.Tests\\Atlantis.Framework.CarmaRemoveTrustedShopper.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.CarmaRemoveTrustedShopper.Tests
+		SccLocalPath5 = Atlantis.Framework.CarmaRemoveTrustedShopper.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEEAA448-AF6B-478E-B10B-C8DA95F50EF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEEAA448-AF6B-478E-B10B-C8DA95F50EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEEAA448-AF6B-478E-B10B-C8DA95F50EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEEAA448-AF6B-478E-B10B-C8DA95F50EF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4350A8D7-5BED-4096-9ACE-23B5ECA7DBF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4350A8D7-5BED-4096-9ACE-23B5ECA7DBF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4350A8D7-5BED-4096-9ACE-23B5ECA7DBF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4350A8D7-5BED-4096-9ACE-23B5ECA7DBF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA04BD18-88A7-461B-9F10-D84C9618F31D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA04BD18-88A7-461B-9F10-D84C9618F31D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA04BD18-88A7-461B-9F10-D84C9618F31D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA04BD18-88A7-461B-9F10-D84C9618F31D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {9A5F98F3-5F4A-4324-A972-71CD1DC662D4}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {9A5F98F3-5F4A-4324-A972-71CD1DC662D4}
+	EndGlobalSection
+EndGlobal

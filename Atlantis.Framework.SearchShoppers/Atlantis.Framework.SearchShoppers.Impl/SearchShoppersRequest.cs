@@ -16,25 +16,24 @@ namespace Atlantis.Framework.SearchShoppers.Impl
       try
       {
         SearchShoppersRequestData oSearchRequestData = (SearchShoppersRequestData)oRequestData;
-        WSCgdShopper.WSCgdShopperService shopperWS = new WSCgdShopper.WSCgdShopperService();
-        shopperWS.Url = ((WsConfigElement)oConfig).WSURL;
-        responseXml = shopperWS.SearchShoppers(oSearchRequestData.ToXML());
-
-        if (responseXml.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+        using (WSCgdShopper.WSCgdShopperService shopperWS = new WSCgdShopper.WSCgdShopperService())
         {
-          AtlantisException exAtlantis = new AtlantisException(oRequestData,
-                                                               "ShopperRequest.RequestHandler",
-                                                               responseXml,
-                                                               oRequestData.ToXML());
+          shopperWS.Url = ((WsConfigElement)oConfig).WSURL;
+          shopperWS.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
+          responseXml = shopperWS.SearchShoppers(oSearchRequestData.ToXML());
 
-          oResponseData = new SearchShoppersResponseData(responseXml, exAtlantis);
+          if (responseXml.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+          {
+            AtlantisException exAtlantis = new AtlantisException(oRequestData,
+                                                                 "ShopperRequest.RequestHandler",
+                                                                 responseXml,
+                                                                 oRequestData.ToXML());
+
+            oResponseData = new SearchShoppersResponseData(responseXml, exAtlantis);
+          }
+          else
+            oResponseData = new SearchShoppersResponseData(responseXml);
         }
-        else
-          oResponseData = new SearchShoppersResponseData(responseXml);
-      }
-      catch (AtlantisException exAtlantis)
-      {
-        oResponseData = new SearchShoppersResponseData(responseXml, exAtlantis);
       }
       catch (Exception ex)
       {

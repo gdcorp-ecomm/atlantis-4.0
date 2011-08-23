@@ -9,30 +9,30 @@ namespace Atlantis.Framework.CreateShopper.Interface
 {
   public class CreateShopperRequestData : RequestData
   {
-    string m_sRequestedBy;
-
-    public CreateShopperRequestData(string sourceUrl, string orderID, string pathway, int pageCount, int privateLabelID)
-      : base(string.Empty, sourceUrl, orderID, pathway, pageCount)
+    public CreateShopperRequestData(string sourceUrl, string orderId, string pathway, int pageCount, int privateLabelId)
+      : base(string.Empty, sourceUrl, orderId, pathway, pageCount)
     {
-      PrivateLabelId = privateLabelID;
-      m_sRequestedBy = "";
-
+      PrivateLabelId = privateLabelId;
+      RequestedBy = string.Empty;
+      IpAddress = GetLocalAddress();
     }
 
+    public CreateShopperRequestData(string sourceUrl, string orderId, string pathway, int pageCount, int privateLabelId, string requestedBy, string ipAddress)
+      : base(string.Empty, sourceUrl, orderId, pathway, pageCount)
+    {
+      PrivateLabelId = privateLabelId;
+      RequestedBy = requestedBy;
+      IpAddress = string.IsNullOrEmpty(ipAddress) ? GetLocalAddress() : ipAddress;
+    }
+
+    public string RequestedBy { get; set; }
     public int PrivateLabelId { get; private set; }
-
-    // **************************************************************** //
-
-    #region RequestData Members
-
-    // **************************************************************** //
+    public string IpAddress { get; set; }
 
     public override string GetCacheMD5()
     {
       throw new Exception("CreateShopper is not a cacheable request.");
     }
-
-    // **************************************************************** //
 
     public override string ToXML()
     {
@@ -40,19 +40,15 @@ namespace Atlantis.Framework.CreateShopper.Interface
       XmlTextWriter xtwRequest = new XmlTextWriter(new StringWriter(sbRequest));
 
       xtwRequest.WriteStartElement("ShopperCreate");
-
       xtwRequest.WriteAttributeString("PLID", PrivateLabelId.ToString());
-      xtwRequest.WriteAttributeString("IPAddress", GetLocalAddress());
-      xtwRequest.WriteAttributeString("RequestedBy", m_sRequestedBy);
-
+      xtwRequest.WriteAttributeString("IPAddress", IpAddress);
+      xtwRequest.WriteAttributeString("RequestedBy", RequestedBy);
       xtwRequest.WriteEndElement(); // CreateShopper
 
       return sbRequest.ToString();
     }
 
-    // **************************************************************** //
-
-    string GetLocalAddress()
+    static string GetLocalAddress()
     {
       string sLocalAddress = "";
 
@@ -64,11 +60,5 @@ namespace Atlantis.Framework.CreateShopper.Interface
       return sLocalAddress;
     }
 
-
-    // **************************************************************** //
-
-    #endregion
-
-    // **************************************************************** //
   }
 }

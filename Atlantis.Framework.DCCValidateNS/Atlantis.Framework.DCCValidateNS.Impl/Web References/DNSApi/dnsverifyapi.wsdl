@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://dnsapi.domaincontrol.com/dnsverifyapi" targetNamespace="http://dnsapi.domaincontrol.com/dnsverifyapi" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://dnsapi.domaincontrol.com/dnsverifyapi">
+      <xsd:complexType name="custDataType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="shopperid" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="resellerid" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="execshopperid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="execresellerid" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="origin" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="enduserip" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="offsite" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="systemid" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="manageruserid" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="authDataType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="clientid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="token" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="clientip" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="simpleResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="errorcode" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="errortext" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="booleanResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="errorcode" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="errortext" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="responseinfo" type="tns:responseinfoType" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="affecteduids" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="responseinfoType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="infocode" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="affectedtype" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="affectedname" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="info" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="nameserverArrayType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="nameservers" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="nameServerValType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="nameserver" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="type" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="status" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="validateNSResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="errorcode" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="internal" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="nameservers" type="tns:nameServerValType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="vanityNameServerAliasMapType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="vanityname" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="realname" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="realipv4" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="realipv6" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="vanityNameServerType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="domain" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="aliasmap" type="tns:vanityNameServerAliasMapType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getVanityNSByShopperResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="vanitynames" type="tns:vanityNameServerType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="clientAuth" type="tns:authDataType" />
+      <xsd:element name="custInfo" type="tns:custDataType" />
+    </xsd:schema>
+  </types>
+  <message name="authHeader">
+    <part name="clientAuth" element="tns:clientAuth" />
+  </message>
+  <message name="custHeader">
+    <part name="custInfo" element="tns:custInfo" />
+  </message>
+  <message name="booleanResponseTypeOut">
+    <part name="result" type="tns:booleanResponseType" />
+  </message>
+  <message name="simpleResponseTypeOut">
+    <part name="result" type="tns:simpleResponseType" />
+  </message>
+  <message name="getVersionOut">
+    <part name="version" type="xsd:string" />
+  </message>
+  <message name="echoCustOut">
+    <part name="CustInfo" type="tns:custDataType" />
+  </message>
+  <message name="validateNSIn">
+    <part name="request" type="tns:nameserverArrayType" />
+  </message>
+  <message name="validateNSOut">
+    <part name="result" type="tns:validateNSResponseType" />
+  </message>
+  <message name="getVanityNSByShopperOut">
+    <part name="result" type="tns:getVanityNSByShopperResponseType" />
+  </message>
+  <message name="empty" />
+  <portType name="dnsverifyapiPortType">
+    <operation name="getVersion">
+      <documentation>getVersion</documentation>
+      <input message="tns:empty" />
+      <output message="tns:getVersionOut" />
+    </operation>
+    <operation name="echoCust">
+      <documentation>echoCust</documentation>
+      <input message="tns:empty" />
+      <output message="tns:echoCustOut" />
+    </operation>
+    <operation name="validateNS">
+      <documentation>validateNS</documentation>
+      <input message="tns:validateNSIn" />
+      <output message="tns:validateNSOut" />
+    </operation>
+    <operation name="getVanityNSByShopper">
+      <documentation>getVanityNSByShopper</documentation>
+      <input message="tns:empty" />
+      <output message="tns:getVanityNSByShopperOut" />
+    </operation>
+  </portType>
+  <binding name="dnsverifyapiSoap" type="tns:dnsverifyapiPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="getVersion">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsverifyapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsverifyapi" />
+      </output>
+    </operation>
+    <operation name="echoCust">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsverifyapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsverifyapi" />
+      </output>
+    </operation>
+    <operation name="validateNS">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsverifyapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsverifyapi" />
+      </output>
+    </operation>
+    <operation name="getVanityNSByShopper">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsverifyapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsverifyapi" />
+      </output>
+    </operation>
+  </binding>
+  <service name="dnsverifyapi">
+    <port name="dnsverifyapiPort" binding="tns:dnsverifyapiSoap">
+      <soap:address location="http://dnsapi.domaincontrol.com/dnsverifyapi.php" />
+    </port>
+  </service>
+</definitions>

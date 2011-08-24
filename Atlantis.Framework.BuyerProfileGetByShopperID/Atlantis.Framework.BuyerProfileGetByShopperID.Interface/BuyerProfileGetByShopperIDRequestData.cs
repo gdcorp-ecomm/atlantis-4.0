@@ -14,7 +14,7 @@ namespace Atlantis.Framework.BuyerProfileGetByShopperID.Interface
     
     public override string GetCacheMD5()
     {
-      throw new Exception("GetBuyerProfileByID is not a cacheable request.");
+      throw new Exception("BuyerProfileGetByShopperID is not a cacheable request.");
     }
 
   }

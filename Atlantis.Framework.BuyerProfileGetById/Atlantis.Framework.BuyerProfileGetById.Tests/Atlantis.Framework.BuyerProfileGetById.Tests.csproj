@@ -67,6 +67,10 @@
       <Project>{3213E6DB-F026-4F17-A46A-7127F79F6620}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.BuyerProfileDetails.Interface\Atlantis.Framework.BuyerProfileDetails.Interface.csproj">
+      <Project>{F127881E-CF8C-4853-A869-AFBAC96731FC}</Project>
+      <Name>Atlantis.Framework.BuyerProfileDetails.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.BuyerProfileGetById.Impl\Atlantis.Framework.BuyerProfileGetById.Impl.csproj">
       <Project>{3D0A54DF-759E-4874-BF27-355D09AA6793}</Project>
       <Name>Atlantis.Framework.BuyerProfileGetById.Impl</Name>

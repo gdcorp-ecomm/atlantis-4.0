@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Atlantis.Framework.BuyerProfileGetById.Interface;
-using Atlantis.Framework.BuyerProfileGetById.Interface.BuyerProfileDetails;
+using Atlantis.Framework.BuyerProfileDetails.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Nimitz;
 
@@ -21,7 +21,7 @@ namespace Atlantis.Framework.BuyerProfileGetById.Impl
       BuyerProfileGetByIdRequestData request = (BuyerProfileGetByIdRequestData)oRequestData;
 
       DataSet ds = null;
-      BuyerProfileDetails _details = null;
+      ProfileDetail _details = null;
 
       try
       {
@@ -54,9 +54,9 @@ namespace Atlantis.Framework.BuyerProfileGetById.Impl
 
     #endregion
 
-    private BuyerProfileDetails GetBuyerProfileDetail(DataSet buyerProfileDetail)
+    private ProfileDetail GetBuyerProfileDetail(DataSet buyerProfileDetail)
     {
-      BuyerProfileDetails _details = null;
+      ProfileDetail _details = null;
       int regLength = 0;
 
       foreach (DataRow dr in buyerProfileDetail.Tables[0].Rows)
@@ -103,7 +103,7 @@ namespace Atlantis.Framework.BuyerProfileGetById.Impl
           hostList.Add(hostName);
         }
 
-        _details = new BuyerProfileDetails(profileName, regLength, autoRenew, parkDns, defaultProfileFlag, quickCheckoutFlag, addressList, hostList);
+        _details = new ProfileDetail(profileName, regLength, autoRenew, parkDns, defaultProfileFlag, quickCheckoutFlag, addressList, hostList);
 
       }
 

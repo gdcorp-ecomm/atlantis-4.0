@@ -1,5 +1,5 @@
 ﻿
-namespace Atlantis.Framework.BuyerProfileGetById.Interface.BuyerProfileDetails
+namespace Atlantis.Framework.BuyerProfileDetails.Interface
 {
   public struct AddressList
   {

@@ -3,6 +3,7 @@ using System.Data;
 using System.IO;
 using System.Xml.Serialization;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.BuyerProfileDetails.Interface;
 
 namespace Atlantis.Framework.BuyerProfileGetById.Interface
 {
@@ -10,9 +11,9 @@ namespace Atlantis.Framework.BuyerProfileGetById.Interface
   {
     private AtlantisException _atlException = null;
     private bool _success = false;
-    private BuyerProfileDetails.BuyerProfileDetails _details = null;
+    private ProfileDetail _details = null;
 
-    public BuyerProfileGetByIdResponseData(BuyerProfileDetails.BuyerProfileDetails details)
+    public BuyerProfileGetByIdResponseData(ProfileDetail details)
     {
       _details = details;
       _success = (details != null);
@@ -29,7 +30,7 @@ namespace Atlantis.Framework.BuyerProfileGetById.Interface
       get { return _success; }
     }
 
-    public BuyerProfileDetails.BuyerProfileDetails BuyerProfileDetail
+    public ProfileDetail BuyerProfileDetail
     {
       get { return _details; }
     }

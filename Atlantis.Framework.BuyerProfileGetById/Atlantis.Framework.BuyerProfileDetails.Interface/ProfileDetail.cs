@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Atlantis.Framework.BuyerProfileGetById.Interface.BuyerProfileDetails
+namespace Atlantis.Framework.BuyerProfileDetails.Interface
 {
-  public class BuyerProfileDetails
+  public class ProfileDetail
   {
 
     #region properties
@@ -23,21 +23,21 @@ namespace Atlantis.Framework.BuyerProfileGetById.Interface.BuyerProfileDetails
 
     public List<string> HostNameList { get; set; }
 
-        
+
     #endregion
 
-    public BuyerProfileDetails(string profileName, int regLength, bool autoRenew, bool parkDNS, 
+    public ProfileDetail(string profileName, int regLength, bool autoRenew, bool parkDNS,
           bool defaultProfileFlag, bool quickCheckoutFlag, List<AddressList> bpAddressList, List<string> hostNameList)
-      {
-        ProfileName = profileName;
-        RegLength = regLength;
-        AutoRenew = autoRenew;
-        ParkDNS = parkDNS;
-        DefaultProfileFlag = defaultProfileFlag;
-        QuickCheckoutFlag = quickCheckoutFlag;
-        BuyerProfileAddressList = bpAddressList;
-        HostNameList = hostNameList;
-      }
+    {
+      ProfileName = profileName;
+      RegLength = regLength;
+      AutoRenew = autoRenew;
+      ParkDNS = parkDNS;
+      DefaultProfileFlag = defaultProfileFlag;
+      QuickCheckoutFlag = quickCheckoutFlag;
+      BuyerProfileAddressList = bpAddressList;
+      HostNameList = hostNameList;
+    }
 
   }
 }

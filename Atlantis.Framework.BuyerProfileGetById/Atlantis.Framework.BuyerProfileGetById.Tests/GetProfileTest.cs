@@ -5,7 +5,7 @@ using System.Linq;
 using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.BuyerProfileGetById.Interface;
-using Atlantis.Framework.BuyerProfileGetById.Interface.BuyerProfileDetails;
+using Atlantis.Framework.BuyerProfileDetails.Interface;
 
 namespace Atlantis.Framework.BuyerProfileGetById.Tests
 {
@@ -27,7 +27,7 @@ namespace Atlantis.Framework.BuyerProfileGetById.Tests
 
       if (response.IsSuccess)
       {
-        BuyerProfileDetails detail = response.BuyerProfileDetail;
+        ProfileDetail detail = response.BuyerProfileDetail;
       }
       Assert.IsTrue(response.IsSuccess);
 

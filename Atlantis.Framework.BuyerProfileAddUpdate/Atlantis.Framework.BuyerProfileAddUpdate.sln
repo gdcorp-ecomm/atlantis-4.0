@@ -1,0 +1,105 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3E81E5FC-06B0-45DC-86C0-FA1181382215}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BuyerProfileDetails.Interface", "..\Atlantis.Framework.BuyerProfileGetById\Atlantis.Framework.BuyerProfileDetails.Interface\Atlantis.Framework.BuyerProfileDetails.Interface.csproj", "{F127881E-CF8C-4853-A869-AFBAC96731FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BuyerProfileAddUpdate.Interface", "Atlantis.Framework.BuyerProfileAddUpdate.Interface\Atlantis.Framework.BuyerProfileAddUpdate.Interface.csproj", "{4AC8E76E-32C4-40E9-8B75-B3C29B5B9A12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BuyerProfileAddUpdate.Impl", "Atlantis.Framework.BuyerProfileAddUpdate.Impl\Atlantis.Framework.BuyerProfileAddUpdate.Impl.csproj", "{CEAF5B48-0C51-4F5E-86AA-E830D75B169A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BuyerProfileAddUpdate.Tests", "Atlantis.Framework.BuyerProfileAddUpdate.Tests\Atlantis.Framework.BuyerProfileAddUpdate.Tests.csproj", "{4E0FBF01-D110-41FB-91D8-7F4FFC15ED25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{61A78E45-8CB6-488E-8A1A-E98304532818}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.BuyerProfileAddUpdate.vsmdi = Atlantis.Framework.BuyerProfileAddUpdate.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.BuyerProfileAddUpdate.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.BuyerProfileAddUpdate.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.BuyerProfileAddUpdate.sln
+		SccProjectName3 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.BuyerProfileGetById\\Atlantis.Framework.BuyerProfileDetails.Interface\\Atlantis.Framework.BuyerProfileDetails.Interface.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.BuyerProfileAddUpdate.sln
+		SccProjectName4 = ../Atlantis.Framework.BuyerProfileGetById/Atlantis.Framework.BuyerProfileDetails.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.BuyerProfileGetById\\Atlantis.Framework.BuyerProfileDetails.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.BuyerProfileAddUpdate.Interface\\Atlantis.Framework.BuyerProfileAddUpdate.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.BuyerProfileAddUpdate.Interface
+		SccLocalPath5 = Atlantis.Framework.BuyerProfileAddUpdate.Interface
+		SccProjectUniqueName6 = Atlantis.Framework.BuyerProfileAddUpdate.Impl\\Atlantis.Framework.BuyerProfileAddUpdate.Impl.csproj
+		SccProjectName6 = Atlantis.Framework.BuyerProfileAddUpdate.Impl
+		SccLocalPath6 = Atlantis.Framework.BuyerProfileAddUpdate.Impl
+		SccProjectUniqueName7 = Atlantis.Framework.BuyerProfileAddUpdate.Tests\\Atlantis.Framework.BuyerProfileAddUpdate.Tests.csproj
+		SccProjectName7 = Atlantis.Framework.BuyerProfileAddUpdate.Tests
+		SccLocalPath7 = Atlantis.Framework.BuyerProfileAddUpdate.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.BuyerProfileAddUpdate.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F127881E-CF8C-4853-A869-AFBAC96731FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F127881E-CF8C-4853-A869-AFBAC96731FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F127881E-CF8C-4853-A869-AFBAC96731FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F127881E-CF8C-4853-A869-AFBAC96731FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AC8E76E-32C4-40E9-8B75-B3C29B5B9A12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC8E76E-32C4-40E9-8B75-B3C29B5B9A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AC8E76E-32C4-40E9-8B75-B3C29B5B9A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AC8E76E-32C4-40E9-8B75-B3C29B5B9A12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEAF5B48-0C51-4F5E-86AA-E830D75B169A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEAF5B48-0C51-4F5E-86AA-E830D75B169A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEAF5B48-0C51-4F5E-86AA-E830D75B169A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEAF5B48-0C51-4F5E-86AA-E830D75B169A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E0FBF01-D110-41FB-91D8-7F4FFC15ED25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0FBF01-D110-41FB-91D8-7F4FFC15ED25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0FBF01-D110-41FB-91D8-7F4FFC15ED25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0FBF01-D110-41FB-91D8-7F4FFC15ED25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {3E81E5FC-06B0-45DC-86C0-FA1181382215}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {3E81E5FC-06B0-45DC-86C0-FA1181382215}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {3E81E5FC-06B0-45DC-86C0-FA1181382215}
+		{F127881E-CF8C-4853-A869-AFBAC96731FC} = {3E81E5FC-06B0-45DC-86C0-FA1181382215}
+	EndGlobalSection
+EndGlobal

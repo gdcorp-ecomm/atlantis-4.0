@@ -46,8 +46,8 @@ namespace Atlantis.Framework.ProductFreeCreditsByProductId.Impl
               {
                 productFreeCredits.Add(new ProductFreeCredit
                                          {
-                                           UnifiedProductId = (int) reader.GetDecimal(0),
-                                           BillingNamespace = reader.GetString(1)
+                                           UnifiedProductId = Convert.ToInt32(reader["pf_id"]),
+                                           BillingNamespace = reader["nameSpace"].ToString()
                                          });
               }
             }

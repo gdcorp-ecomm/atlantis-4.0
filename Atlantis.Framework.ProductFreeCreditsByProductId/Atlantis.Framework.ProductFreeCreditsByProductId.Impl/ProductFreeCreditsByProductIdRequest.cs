@@ -37,18 +37,24 @@ namespace Atlantis.Framework.ProductFreeCreditsByProductId.Impl
                                         new SqlParameter(PRIVATE_LABEL_ID_PARAM, request.PrivateLabelId)
                                       });
 
-            var productFreeCredits = new List<ProductFreeCredit>();
+            var productFreeCredits = new Dictionary<int, List<ProductFreeCredit>>();
 
             cn.Open();
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
               while (reader.Read())
               {
-                productFreeCredits.Add(new ProductFreeCredit
-                                         {
-                                           UnifiedProductId = Convert.ToInt32(reader["pf_id"]),
-                                           BillingNamespace = reader["nameSpace"].ToString()
-                                         });
+                int freeProductGroupId = Convert.ToInt32(reader["redemptionGroup"]);
+
+                if (!productFreeCredits.ContainsKey(freeProductGroupId))
+                  productFreeCredits.Add(freeProductGroupId, new List<ProductFreeCredit>());
+
+                productFreeCredits[freeProductGroupId].Add(new ProductFreeCredit
+                                                             {
+                                                               UnifiedProductId = Convert.ToInt32(reader["catalog_productUnifiedProductID"]),
+                                                               Quantity = Convert.ToInt32(reader["quantity"]),
+                                                               ProductNamespace = reader["nameSpace"].ToString()
+                                                             });
               }
             }
             cn.Close();

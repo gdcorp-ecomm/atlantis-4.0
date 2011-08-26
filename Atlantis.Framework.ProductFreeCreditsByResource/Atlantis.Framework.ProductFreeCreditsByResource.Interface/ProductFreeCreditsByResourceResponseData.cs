@@ -8,14 +8,14 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Interface
   public class ProductFreeCreditsByResourceResponseData : IResponseData
   {
     private readonly AtlantisException _atlantisException;
-    public List<ResourceFreeCredit> ResourceFreeCredits { get; set; }
+    public Dictionary<int, List<ResourceFreeCredit>> ResourceFreeCredits { get; set; }
 
     public bool IsSuccess
     {
       get { return _atlantisException == null; }
     }
 
-    public ProductFreeCreditsByResourceResponseData(List<ResourceFreeCredit> resourceFreeCredits)
+    public ProductFreeCreditsByResourceResponseData(Dictionary<int, List<ResourceFreeCredit>> resourceFreeCredits)
     {
       ResourceFreeCredits = resourceFreeCredits;
     }
@@ -27,11 +27,11 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Interface
 
     public ProductFreeCreditsByResourceResponseData(RequestData requestData, Exception ex)
     {
-      _atlantisException = new AtlantisException(requestData
-        , MethodBase.GetCurrentMethod().DeclaringType.FullName
-        , string.Format("ProductFreeCreditsByResource Error: {0}", ex.Message)
-        , ex.Data.ToString()
-        , ex);
+      _atlantisException = new AtlantisException(requestData,
+                                                 MethodBase.GetCurrentMethod().DeclaringType.FullName,
+                                                 string.Format("ProductFreeCreditsByResource Error: {0}", ex.Message),
+                                                 ex.Data.ToString(),
+                                                 ex);
     }
 
     #region IResponseData Members

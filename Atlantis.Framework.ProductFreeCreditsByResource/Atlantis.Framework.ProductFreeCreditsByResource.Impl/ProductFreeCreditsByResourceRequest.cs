@@ -40,19 +40,24 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Impl
               cmd.CommandType = CommandType.StoredProcedure;
               cmd.Parameters.Add(new SqlParameter(BILLING_RESOURCE_ID_PARAM, request.BillingResourceId));
 
-              var productFreeCredits = new List<ResourceFreeCredit>();
+              var productFreeCredits = new Dictionary<int, List<ResourceFreeCredit>>();
 
               cn.Open();
               using (SqlDataReader reader = cmd.ExecuteReader())
               {
                 while (reader.Read())
                 {
-                  productFreeCredits.Add(new ResourceFreeCredit
-                                           {
-                                             FreeProductPackageId = reader.GetInt32(0),
-                                             UnifiedProductId = (int) reader.GetDecimal(1),
-                                             Quantity = reader.GetInt32(3)
-                                           });
+                  int freeProductGroupId = Convert.ToInt32(reader["redemptionGroup"]);
+                  
+                  if (!productFreeCredits.ContainsKey(freeProductGroupId))
+                    productFreeCredits.Add(freeProductGroupId, new List<ResourceFreeCredit>());
+
+                  productFreeCredits[freeProductGroupId].Add(new ResourceFreeCredit
+                                                               {
+                                                                 UnifiedProductId = Convert.ToInt32(reader["catalog_productUnifiedProductID"]),
+                                                                 Quantity = Convert.ToInt32(reader["quantity"]),
+                                                                 ProductNamespace = reader["nameSpace"].ToString()
+                                                               });
                 }
               }
               cn.Close();

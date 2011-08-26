@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.ProductFreeCreditsByProductId.Interface;
@@ -17,22 +18,27 @@ namespace Atlantis.Framework.ProductFreeCreditsByProductId.Tests
     [DeploymentItem("atlantis.config")]
     public void GetHostingProductFreeCredits()
     {
-      var requestData = new ProductFreeCreditsByProductIdRequestData(_shopperID
-         , string.Empty
-         , string.Empty
-         , string.Empty
-         , 0
-         , _hostingProductID
-         , _hostingPrivateLabelID) {RequestTimeout = TimeSpan.FromSeconds(5d)};
+      var requestData = new ProductFreeCreditsByProductIdRequestData(_shopperID,
+                                                                     string.Empty,
+                                                                     string.Empty,
+                                                                     string.Empty,
+                                                                     0,
+                                                                     _hostingProductID,
+                                                                     _hostingPrivateLabelID);
+      requestData.RequestTimeout = TimeSpan.FromSeconds(5d);
 
       try
       {
         var responseData = (ProductFreeCreditsByProductIdResponseData)Engine.Engine.ProcessRequest(requestData, _requestType);
 
-        Debug.WriteLine(string.Format("Available Free Credits: {0}", responseData.ProductFreeCredits.Count));
-        foreach (ProductFreeCredit pfc in responseData.ProductFreeCredits)
+        Debug.WriteLine(string.Format("Available Free Credits: {0}", responseData.ProductFreeCredits.Keys.Count));
+        foreach (List<ProductFreeCredit> pfcGroup in responseData.ProductFreeCredits.Values)
         {
-          Debug.WriteLine(string.Format("UnifiedProductId:{0}, BillingNamespace:{1}", pfc.UnifiedProductId, pfc.BillingNamespace));
+          foreach (var pfc in pfcGroup)
+          {
+            Debug.WriteLine(string.Format("UnifiedProductId:{0}, BillingNamespace:{1}, Qty:{2}", pfc.UnifiedProductId, pfc.ProductNamespace, pfc.Quantity));
+          }
+          
         }
 
         Assert.IsTrue(responseData.IsSuccess);

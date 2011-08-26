@@ -22,28 +22,30 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interfac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ProductFreeCreditsByProductId.Interface", "..\Atlantis.Framework.ProductFreeCreditsByProductId\Atlantis.Framework.ProductFreeCreditsByProductId.Interface\Atlantis.Framework.ProductFreeCreditsByProductId.Interface.csproj", "{8386FB04-A6FF-4D0C-B240-E6E820D0AF07}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
-		SccProjectUniqueName0 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
-		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.ProductFreeCreditsByResource.sln
-		SccProjectName0 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
-		SccLocalPath0 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
 		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.ProductFreeCreditsByResource.sln
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectName1 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
+		SccLocalPath1 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
 		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.ProductFreeCreditsByResource.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.ProductFreeCreditsByResource.sln
-		SccProjectName3 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
-		SccLocalPath3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
-		SccLocalPath4 = .
+		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.ProductFreeCreditsByResource.sln
+		SccProjectName4 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath4 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
 		SccProjectUniqueName5 = Atlantis.Framework.ProductFreeCreditsByResource.Impl\\Atlantis.Framework.ProductFreeCreditsByResource.Impl.csproj
 		SccProjectName5 = Atlantis.Framework.ProductFreeCreditsByResource.Impl
 		SccLocalPath5 = Atlantis.Framework.ProductFreeCreditsByResource.Impl
@@ -53,6 +55,10 @@ Global
 		SccProjectUniqueName7 = Atlantis.Framework.ProductFreeCreditsByResource.Tests\\Atlantis.Framework.ProductFreeCreditsByResource.Tests.csproj
 		SccProjectName7 = Atlantis.Framework.ProductFreeCreditsByResource.Tests
 		SccLocalPath7 = Atlantis.Framework.ProductFreeCreditsByResource.Tests
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.ProductFreeCreditsByProductId\\Atlantis.Framework.ProductFreeCreditsByProductId.Interface\\Atlantis.Framework.ProductFreeCreditsByProductId.Interface.csproj
+		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.ProductFreeCreditsByResource.sln
+		SccProjectName8 = ../Atlantis.Framework.ProductFreeCreditsByProductId/Atlantis.Framework.ProductFreeCreditsByProductId.Interface
+		SccLocalPath8 = ..\\Atlantis.Framework.ProductFreeCreditsByProductId\\Atlantis.Framework.ProductFreeCreditsByProductId.Interface
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.ProductFreeCreditsByResource.vsmdi
@@ -90,6 +96,10 @@ Global
 		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8386FB04-A6FF-4D0C-B240-E6E820D0AF07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8386FB04-A6FF-4D0C-B240-E6E820D0AF07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8386FB04-A6FF-4D0C-B240-E6E820D0AF07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8386FB04-A6FF-4D0C-B240-E6E820D0AF07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,5 +109,6 @@ Global
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {9EBD28DB-0A24-4307-B094-587D79A1A203}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {9EBD28DB-0A24-4307-B094-587D79A1A203}
 		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {9EBD28DB-0A24-4307-B094-587D79A1A203}
+		{8386FB04-A6FF-4D0C-B240-E6E820D0AF07} = {9EBD28DB-0A24-4307-B094-587D79A1A203}
 	EndGlobalSection
 EndGlobal

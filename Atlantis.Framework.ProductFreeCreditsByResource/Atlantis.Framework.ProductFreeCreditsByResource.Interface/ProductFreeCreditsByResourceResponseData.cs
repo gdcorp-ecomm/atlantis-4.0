@@ -2,20 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.ProductFreeCreditsByProductId.Interface.Types;
 
 namespace Atlantis.Framework.ProductFreeCreditsByResource.Interface
 {
   public class ProductFreeCreditsByResourceResponseData : IResponseData
   {
     private readonly AtlantisException _atlantisException;
-    public Dictionary<int, List<ResourceFreeCredit>> ResourceFreeCredits { get; set; }
+    public Dictionary<int, List<IProductFreeCredit>> ResourceFreeCredits { get; set; }
 
     public bool IsSuccess
     {
       get { return _atlantisException == null; }
     }
 
-    public ProductFreeCreditsByResourceResponseData(Dictionary<int, List<ResourceFreeCredit>> resourceFreeCredits)
+    public ProductFreeCreditsByResourceResponseData(Dictionary<int, List<IProductFreeCredit>> resourceFreeCredits)
     {
       ResourceFreeCredits = resourceFreeCredits;
     }

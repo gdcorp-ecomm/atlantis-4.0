@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.ProductFreeCreditsByProductId.Interface.Types;
 using Atlantis.Framework.ProductFreeCreditsByResource.Interface;
+using Atlantis.Framework.ProductFreeCreditsByResource.Interface.Types;
 
 namespace Atlantis.Framework.ProductFreeCreditsByResource.Impl
 {
@@ -40,7 +42,7 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Impl
               cmd.CommandType = CommandType.StoredProcedure;
               cmd.Parameters.Add(new SqlParameter(BILLING_RESOURCE_ID_PARAM, request.BillingResourceId));
 
-              var productFreeCredits = new Dictionary<int, List<ResourceFreeCredit>>();
+              var productFreeCredits = new Dictionary<int, List<IProductFreeCredit>>();
 
               cn.Open();
               using (SqlDataReader reader = cmd.ExecuteReader())
@@ -50,7 +52,7 @@ namespace Atlantis.Framework.ProductFreeCreditsByResource.Impl
                   int freeProductGroupId = Convert.ToInt32(reader["redemptionGroup"]);
                   
                   if (!productFreeCredits.ContainsKey(freeProductGroupId))
-                    productFreeCredits.Add(freeProductGroupId, new List<ResourceFreeCredit>());
+                    productFreeCredits.Add(freeProductGroupId, new List<IProductFreeCredit>());
 
                   productFreeCredits[freeProductGroupId].Add(new ResourceFreeCredit
                                                                {

@@ -63,6 +63,10 @@
       <Project>{3213E6DB-F026-4F17-A46A-7127F79F6620}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.ProductFreeCreditsByProductId\Atlantis.Framework.ProductFreeCreditsByProductId.Interface\Atlantis.Framework.ProductFreeCreditsByProductId.Interface.csproj">
+      <Project>{8386FB04-A6FF-4D0C-B240-E6E820D0AF07}</Project>
+      <Name>Atlantis.Framework.ProductFreeCreditsByProductId.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.ProductFreeCreditsByResource.Interface\Atlantis.Framework.ProductFreeCreditsByResource.Interface.csproj">
       <Project>{BF2E5728-D267-4337-BEBB-7CA3CD0A40D7}</Project>
       <Name>Atlantis.Framework.ProductFreeCreditsByResource.Interface</Name>

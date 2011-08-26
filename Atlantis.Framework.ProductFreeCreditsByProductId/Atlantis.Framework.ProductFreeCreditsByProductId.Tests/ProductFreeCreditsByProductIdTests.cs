@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Atlantis.Framework.ProductFreeCreditsByProductId.Interface.Types;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.ProductFreeCreditsByProductId.Interface;
 
@@ -32,7 +33,7 @@ namespace Atlantis.Framework.ProductFreeCreditsByProductId.Tests
         var responseData = (ProductFreeCreditsByProductIdResponseData)Engine.Engine.ProcessRequest(requestData, _requestType);
 
         Debug.WriteLine(string.Format("Available Free Credits: {0}", responseData.ProductFreeCredits.Keys.Count));
-        foreach (List<ProductFreeCredit> pfcGroup in responseData.ProductFreeCredits.Values)
+        foreach (List<IProductFreeCredit> pfcGroup in responseData.ProductFreeCredits.Values)
         {
           foreach (var pfc in pfcGroup)
           {

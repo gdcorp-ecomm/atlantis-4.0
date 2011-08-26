@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.ProductFreeCreditsByProductId.Interface;
+using Atlantis.Framework.ProductFreeCreditsByProductId.Interface.Types;
 
 namespace Atlantis.Framework.ProductFreeCreditsByProductId.Impl
 {
@@ -37,7 +38,7 @@ namespace Atlantis.Framework.ProductFreeCreditsByProductId.Impl
                                         new SqlParameter(PRIVATE_LABEL_ID_PARAM, request.PrivateLabelId)
                                       });
 
-            var productFreeCredits = new Dictionary<int, List<ProductFreeCredit>>();
+            var productFreeCredits = new Dictionary<int, List<IProductFreeCredit>>();
 
             cn.Open();
             using (SqlDataReader reader = cmd.ExecuteReader())
@@ -47,7 +48,7 @@ namespace Atlantis.Framework.ProductFreeCreditsByProductId.Impl
                 int freeProductGroupId = Convert.ToInt32(reader["redemptionGroup"]);
 
                 if (!productFreeCredits.ContainsKey(freeProductGroupId))
-                  productFreeCredits.Add(freeProductGroupId, new List<ProductFreeCredit>());
+                  productFreeCredits.Add(freeProductGroupId, new List<IProductFreeCredit>());
 
                 productFreeCredits[freeProductGroupId].Add(new ProductFreeCredit
                                                              {

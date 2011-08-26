@@ -40,7 +40,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProductFreeCredit.cs" />
+    <Compile Include="Types\IProductFreeCredit.cs" />
+    <Compile Include="Types\ProductFreeCredit.cs" />
     <Compile Include="ProductFreeCreditsByProductIdRequestData.cs" />
     <Compile Include="ProductFreeCreditsByProductIdResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,10 +7,12 @@ namespace Atlantis.Framework.BuyerProfileAddUpdate.Interface
   {
     private AtlantisException _atlException = null;
     private bool _success = false;
+    private int _result = -1;
 
-    public BuyerProfileAddUpdateResponseData()
+    public BuyerProfileAddUpdateResponseData(int result)
     {
-      _success = true;
+      _result = result;
+      _success = (result == 0);
     }
 
     public BuyerProfileAddUpdateResponseData(RequestData oRequestData, Exception ex)
@@ -22,6 +24,11 @@ namespace Atlantis.Framework.BuyerProfileAddUpdate.Interface
     public bool IsSuccess
     {
       get { return _success; }
+    }
+
+    public int ResultCode
+    {
+      get { return _result; }
     }
 
     #region IResponseData Members

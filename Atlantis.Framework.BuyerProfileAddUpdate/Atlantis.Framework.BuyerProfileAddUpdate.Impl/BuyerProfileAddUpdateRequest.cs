@@ -19,7 +19,7 @@ namespace Atlantis.Framework.BuyerProfileAddUpdate.Impl
       IResponseData oResponseData;
       BuyerProfileAddUpdateRequestData request = (BuyerProfileAddUpdateRequestData)oRequestData;
 
-      DataSet ds = null;
+      int result = -1;
 
       try
       {
@@ -32,14 +32,15 @@ namespace Atlantis.Framework.BuyerProfileAddUpdate.Impl
             command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
             command.Parameters.Add(new SqlParameter("@shopper_id", request.ShopperID));
             command.Parameters.Add(new SqlParameter("@XMLDoc", request.ToXML()));
+            SqlParameter newparam = command.Parameters.Add("@ReturnValue", SqlDbType.Int);
+            newparam.Direction = ParameterDirection.ReturnValue;
 
             connection.Open();
-            ds = new DataSet(Guid.NewGuid().ToString());
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds);
+            command.ExecuteNonQuery();
+            result = (int)command.Parameters["@ReturnValue"].Value;
           }
         }
-        oResponseData = new BuyerProfileAddUpdateResponseData();
+        oResponseData = new BuyerProfileAddUpdateResponseData(result);
       }
       catch (Exception ex)
       {

@@ -85,7 +85,7 @@ namespace Atlantis.Framework.BuyerProfileAddUpdate.Tests
       addlist.Add(addlist4);
 
       List<string> nameservers = new List<string>();
-      ProfileDetail profile = new ProfileDetail("profiletest-new2", 2, false, true, false, false, addlist, nameservers);
+      ProfileDetail profile = new ProfileDetail("profiletest-new3", 2, false, true, false, false, addlist, nameservers);
       BuyerProfileAddUpdateRequestData request = new BuyerProfileAddUpdateRequestData("850774", string.Empty, string.Empty, string.Empty, 0);
       request.IsNewBuyerProfile = true;
       request.BuyerProfile = profile;
@@ -111,8 +111,8 @@ namespace Atlantis.Framework.BuyerProfileAddUpdate.Tests
       List<string> nameservers = new List<string>();
       ProfileDetail profile = new ProfileDetail("us1", 2, false, true, false, false, addlist, nameservers);
       BuyerProfileAddUpdateRequestData request = new BuyerProfileAddUpdateRequestData("850774", string.Empty, string.Empty, string.Empty, 0);
-      request.IsNewBuyerProfile = false;
-      request.ProfileID = "150304";
+      request.IsNewBuyerProfile = true;
+      request.ProfileID = "";
       request.BuyerProfile = profile;
 
       BuyerProfileAddUpdateResponseData response = (BuyerProfileAddUpdateResponseData)Engine.Engine.ProcessRequest(request, 412);

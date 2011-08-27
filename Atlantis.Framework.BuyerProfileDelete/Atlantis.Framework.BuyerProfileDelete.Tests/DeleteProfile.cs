@@ -65,7 +65,7 @@ namespace Atlantis.Framework.BuyerProfileDelete.Tests
     [DeploymentItem("App.config")]  
     public void TestMethod1()
     {
-      BuyerProfileDeleteRequestData request = new BuyerProfileDeleteRequestData("850774", string.Empty, string.Empty, string.Empty, 0, "150322");
+      BuyerProfileDeleteRequestData request = new BuyerProfileDeleteRequestData("850774", string.Empty, string.Empty, string.Empty, 0, "150320");
 
       BuyerProfileDeleteResponseData response = (BuyerProfileDeleteResponseData)Engine.Engine.ProcessRequest(request, 414);
 

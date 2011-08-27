@@ -8,10 +8,12 @@ namespace Atlantis.Framework.BuyerProfileDelete.Interface
 
     private AtlantisException _atlException = null;
     private bool _success = false;
+    private int _result = -1;
 
-    public BuyerProfileDeleteResponseData()
+    public BuyerProfileDeleteResponseData(int result)
     {
-      _success = true;
+      _result = result;
+      _success = (result == 0);
     }
 
     public BuyerProfileDeleteResponseData(RequestData oRequestData, Exception ex)
@@ -23,6 +25,11 @@ namespace Atlantis.Framework.BuyerProfileDelete.Interface
     public bool IsSuccess
     {
       get { return _success; }
+    }
+
+    public int ResultCode
+    {
+      get { return _result; }
     }
 
     #region IResponseData Members

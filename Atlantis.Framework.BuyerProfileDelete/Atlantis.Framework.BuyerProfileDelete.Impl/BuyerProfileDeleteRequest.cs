@@ -18,7 +18,7 @@ namespace Atlantis.Framework.BuyerProfileDelete.Impl
       IResponseData oResponseData;
       BuyerProfileDeleteRequestData request = (BuyerProfileDeleteRequestData)oRequestData;
 
-      DataSet ds = null;
+      int result = -1;
 
       try
       {
@@ -31,14 +31,16 @@ namespace Atlantis.Framework.BuyerProfileDelete.Impl
             command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
             command.Parameters.Add(new SqlParameter("@profile_id", request.ProfileID));
             command.Parameters.Add(new SqlParameter("@shopper_id", request.ShopperID));
+            SqlParameter newparam = command.Parameters.Add("@ReturnValue", SqlDbType.Int);
+            newparam.Direction = ParameterDirection.ReturnValue;
 
             connection.Open();
-            ds = new DataSet(Guid.NewGuid().ToString());
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds);
+            command.ExecuteNonQuery();
+
+            result = (int)command.Parameters["@ReturnValue"].Value;
           }
         }
-        oResponseData = new BuyerProfileDeleteResponseData();
+        oResponseData = new BuyerProfileDeleteResponseData(result);
       }
       catch (Exception ex)
       {

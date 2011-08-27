@@ -70,7 +70,7 @@ namespace Atlantis.Framework.ShopperDataCategoryUpdate.Tests
 
       if (response.IsSuccess)
       {
-        int result = response.Result;
+        int result = response.ResultCode;
       }
 
 

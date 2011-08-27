@@ -26,7 +26,7 @@ namespace Atlantis.Framework.ShopperDataCategoryUpdate.Interface
       get { return _success; }
     }
 
-    public int Result
+    public int ResultCode
     {
       get
       {

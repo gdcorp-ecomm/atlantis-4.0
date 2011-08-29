@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Check">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sCheckXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainSyntaxCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sCheckXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainSyntaxCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DomainSyntaxCheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CheckSoapIn">
+    <wsdl:part name="parameters" element="tns:Check" />
+  </wsdl:message>
+  <wsdl:message name="CheckSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="DomainSyntaxCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:DomainSyntaxCheck" />
+  </wsdl:message>
+  <wsdl:message name="DomainSyntaxCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:DomainSyntaxCheckResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AvailCheckWebSvcSoap">
+    <wsdl:operation name="Check">
+      <wsdl:input message="tns:CheckSoapIn" />
+      <wsdl:output message="tns:CheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainSyntaxCheck">
+      <wsdl:input message="tns:DomainSyntaxCheckSoapIn" />
+      <wsdl:output message="tns:DomainSyntaxCheckSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AvailCheckWebSvcSoap" type="tns:AvailCheckWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Check">
+      <soap:operation soapAction="http://tempuri.org/Check" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainSyntaxCheck">
+      <soap:operation soapAction="http://tempuri.org/DomainSyntaxCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AvailCheckWebSvcSoap12" type="tns:AvailCheckWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Check">
+      <soap12:operation soapAction="http://tempuri.org/Check" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainSyntaxCheck">
+      <soap12:operation soapAction="http://tempuri.org/DomainSyntaxCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AvailCheckWebSvc">
+    <wsdl:port name="AvailCheckWebSvcSoap" binding="tns:AvailCheckWebSvcSoap">
+      <soap:address location="http://g1dwregcheck01/availcheckwebsvc/availcheckwebsvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AvailCheckWebSvcSoap12" binding="tns:AvailCheckWebSvcSoap12">
+      <soap12:address location="http://g1dwregcheck01/availcheckwebsvc/availcheckwebsvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -30,7 +30,7 @@ namespace Atlantis.Framework.ShopperDataCategoryUpdate.Impl
             command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
             command.Parameters.Add(new SqlParameter("@Category", request.CategoryID));
             command.Parameters.Add(new SqlParameter("@Shopper_id", request.ShopperID));
-            command.Parameters.Add(new SqlParameter("@Data", request.ShopperData));
+            command.Parameters.Add(new SqlParameter("@Data", (int)request.Status));
             SqlParameter newparam = command.Parameters.Add("@ReturnValue", SqlDbType.Int);
             newparam.Direction = ParameterDirection.ReturnValue;
 

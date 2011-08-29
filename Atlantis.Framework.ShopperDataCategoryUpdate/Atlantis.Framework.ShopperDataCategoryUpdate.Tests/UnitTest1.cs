@@ -65,7 +65,7 @@ namespace Atlantis.Framework.ShopperDataCategoryUpdate.Tests
     [DeploymentItem("App.config")]    
     public void TestMethod1()
     {
-      ShopperDataCategoryUpdateRequestData request = new ShopperDataCategoryUpdateRequestData("850774", string.Empty, string.Empty, string.Empty, 0, 1, 1);
+      ShopperDataCategoryUpdateRequestData request = new ShopperDataCategoryUpdateRequestData("850774", string.Empty, string.Empty, string.Empty, 0, 1, ShopperDataCategoryUpdateRequestData.CategoryStatus.Remove);
       ShopperDataCategoryUpdateResponseData response = (ShopperDataCategoryUpdateResponseData)Engine.Engine.ProcessRequest(request, 417);
 
       if (response.IsSuccess)

@@ -6,13 +6,19 @@ namespace Atlantis.Framework.ShopperDataCategoryUpdate.Interface
   public class ShopperDataCategoryUpdateRequestData : RequestData
   {
     private int _categoryId;
-    private int _shopperData;
+    private CategoryStatus _status;
 
-    public ShopperDataCategoryUpdateRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int categoryId, int shopperdata)
+    public enum CategoryStatus
+    {
+      Remove = 0,
+      Add = 1
+    }
+
+    public ShopperDataCategoryUpdateRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int categoryId, CategoryStatus status)
       : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
       _categoryId = categoryId;
-      _shopperData = shopperdata;
+      _status = status;
     }
 
     public int CategoryID
@@ -23,11 +29,11 @@ namespace Atlantis.Framework.ShopperDataCategoryUpdate.Interface
       }
     }
 
-    public int ShopperData
+    public CategoryStatus Status
     {
       get
       {
-        return _shopperData;
+        return _status;
       }
     } 
 

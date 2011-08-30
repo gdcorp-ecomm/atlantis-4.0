@@ -35,7 +35,6 @@ namespace Atlantis.Framework.BuyerProfileGetById.Impl
             command.Parameters.Add(new SqlParameter("@profile_id", request.ProfileID));
             command.Parameters.Add(new SqlParameter("@shopper_id", request.ShopperID));
 
-            connection.Open();
             ds = new DataSet(Guid.NewGuid().ToString());
             SqlDataAdapter adp = new SqlDataAdapter(command);
             adp.Fill(ds);

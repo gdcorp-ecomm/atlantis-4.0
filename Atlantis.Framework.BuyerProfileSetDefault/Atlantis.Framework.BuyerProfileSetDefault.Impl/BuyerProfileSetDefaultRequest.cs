@@ -18,7 +18,7 @@ namespace Atlantis.Framework.BuyerProfileSetDefault.Impl
       IResponseData oResponseData;
       BuyerProfileSetDefaultRequestData request = (BuyerProfileSetDefaultRequestData)oRequestData;
 
-      DataSet ds = null;
+      int result = -1;
       try
       {
         string connectionString = NetConnect.LookupConnectInfo(oConfig);
@@ -30,15 +30,17 @@ namespace Atlantis.Framework.BuyerProfileSetDefault.Impl
             command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
             command.Parameters.Add(new SqlParameter("@profile_id", request.ProfileID));
             command.Parameters.Add(new SqlParameter("@shopper_id", request.ShopperID));
-            command.Parameters.Add(new SqlParameter("@defaultProfileFlag", request.DefaultFlag));
+            command.Parameters.Add(new SqlParameter("@defaultProfileFlag", "1"));
+
+            SqlParameter newparam = command.Parameters.Add("@ReturnValue", SqlDbType.Int);
+            newparam.Direction = ParameterDirection.ReturnValue;
 
             connection.Open();
-            ds = new DataSet(Guid.NewGuid().ToString());
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds);
+            command.ExecuteNonQuery();
+            result = (int)command.Parameters["@ReturnValue"].Value;
           }
         }
-        oResponseData = new BuyerProfileSetDefaultResponseData();
+        oResponseData = new BuyerProfileSetDefaultResponseData(result);
       }
       catch (Exception ex)
       {

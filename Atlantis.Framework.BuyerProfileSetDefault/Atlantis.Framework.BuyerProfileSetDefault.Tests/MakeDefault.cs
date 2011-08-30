@@ -65,7 +65,7 @@ namespace Atlantis.Framework.BuyerProfileSetDefault.Tests
     [DeploymentItem("App.config")]    
     public void TestMethod1()
     {
-      BuyerProfileSetDefaultRequestData request = new BuyerProfileSetDefaultRequestData("850774", string.Empty, string.Empty, string.Empty, 0, "150304", true);
+      BuyerProfileSetDefaultRequestData request = new BuyerProfileSetDefaultRequestData("850774", string.Empty, string.Empty, string.Empty, 0, "150304");
 
       BuyerProfileSetDefaultResponseData response = (BuyerProfileSetDefaultResponseData)Engine.Engine.ProcessRequest(request, 415);
 

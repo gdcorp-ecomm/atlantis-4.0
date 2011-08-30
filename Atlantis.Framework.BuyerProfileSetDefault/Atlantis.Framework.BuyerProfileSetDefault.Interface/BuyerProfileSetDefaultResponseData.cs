@@ -8,9 +8,9 @@ namespace Atlantis.Framework.BuyerProfileSetDefault.Interface
     private AtlantisException _atlException = null;
     private bool _success = false;
 
-    public BuyerProfileSetDefaultResponseData()
+    public BuyerProfileSetDefaultResponseData(int result)
     {
-      _success = true;
+      _success = (result == 0);
     }
 
     public BuyerProfileSetDefaultResponseData(RequestData oRequestData, Exception ex)

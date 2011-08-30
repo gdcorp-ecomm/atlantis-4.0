@@ -20,7 +20,6 @@ namespace Atlantis.Framework.MYAGetMobileCarriers.Impl
       IResponseData oResponseData;
       MYAGetMobileCarriersRequestData request = (MYAGetMobileCarriersRequestData)oRequestData;
 
-      DataSet ds = null;
       List<MobileCarrierItem> carrierList = new List<MobileCarrierItem>();
 
       try
@@ -34,11 +33,25 @@ namespace Atlantis.Framework.MYAGetMobileCarriers.Impl
             command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
 
             connection.Open();
-            ds = new DataSet(Guid.NewGuid().ToString());
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds);
 
-            carrierList = GetObjectListFromDataset(ds);
+            using (SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection))
+            {
+              if (reader.HasRows)
+              {
+                int CARRIER_ID = reader.GetOrdinal("gdshop_mktgMobileCarrierID");
+                int DESCRIPTION = reader.GetOrdinal("description");
+                while (reader.Read())
+                {
+                  MobileCarrierItem item = new MobileCarrierItem();
+                  if (reader.GetString(DESCRIPTION) != null)
+                  {
+                    item.MobileCarrierID = reader.GetInt32(CARRIER_ID);
+                    item.Description = reader.GetString(DESCRIPTION);
+                    carrierList.Add(item);
+                  }
+                }
+              }
+            }
           }
         }
 
@@ -53,32 +66,5 @@ namespace Atlantis.Framework.MYAGetMobileCarriers.Impl
     }
 
     #endregion
-
-    private List<MobileCarrierItem> GetObjectListFromDataset(DataSet ds)
-    {
-      List<MobileCarrierItem> carrierList = new List<MobileCarrierItem>();
-
-      if (ds.Tables.Count > 0)
-      {
-        foreach (DataRow row in ds.Tables[0].Rows)
-        {
-          MobileCarrierItem item = new MobileCarrierItem();
-
-          if (IsColumnNotNull("gdshop_mktgMobileCarrierID", row))
-          {
-            item.MobileCarrierID = Convert.ToInt32(row["gdshop_mktgMobileCarrierID"]);
-            item.Description = Convert.ToString(row["description"]);
-          }
-          carrierList.Add(item);
-        }
-      }
-
-      return carrierList;
-    }
-
-    private bool IsColumnNotNull(string columnName, DataRow row)
-    {
-      return row[columnName] != null && !(row[columnName] is DBNull);
-    }
   }
 }

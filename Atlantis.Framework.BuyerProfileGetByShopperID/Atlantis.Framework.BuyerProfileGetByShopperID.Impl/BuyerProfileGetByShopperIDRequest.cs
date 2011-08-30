@@ -19,7 +19,7 @@ namespace Atlantis.Framework.BuyerProfileGetByShopperID.Impl
       IResponseData oResponseData;
       BuyerProfileGetByShopperIDRequestData request = (BuyerProfileGetByShopperIDRequestData)oRequestData;
 
-      DataSet ds = null;
+      List<ProfileSummary> _profiles = new List<ProfileSummary>();
 
       try
       {
@@ -33,12 +33,27 @@ namespace Atlantis.Framework.BuyerProfileGetByShopperID.Impl
             command.Parameters.Add(new SqlParameter("@shopper_id", request.ShopperID));
 
             connection.Open();
-            ds = new DataSet(Guid.NewGuid().ToString());
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds);
+
+            using (SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection))
+            {
+              if (reader.HasRows)
+              {
+                while (reader.Read())
+                {
+                  string name = string.Empty;
+                  string id = string.Empty;
+                  bool isdefault = false;
+                  id = reader["gdshop_BuyerProfileID"].ToString();
+                  name = reader["profileName"].ToString(); 
+                  isdefault = reader["defaultProfileFlag"].ToString() == "1";
+                  ProfileSummary ps = new ProfileSummary(id, name, isdefault);
+                  _profiles.Add(ps);
+
+                }
+              }
+            }
           }
         }
-        List<ProfileSummary> _profiles = ProcessProfiles(ds);
         oResponseData = new BuyerProfileGetByShopperIDResponseData(_profiles);
       }
       catch (Exception ex)
@@ -47,32 +62,6 @@ namespace Atlantis.Framework.BuyerProfileGetByShopperID.Impl
       }
 
       return oResponseData;
-    }
-
-    private List<ProfileSummary> ProcessProfiles(DataSet ds)
-    {
-      List<ProfileSummary> _profiles = new List<ProfileSummary>();
-
-      if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-      {
-        string name = string.Empty;
-        string id = string.Empty;
-        bool isdefault = false;
-        
-        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-        {
-          id = ds.Tables[0].Rows[i]["gdshop_BuyerProfileID"].ToString();
-          name= ds.Tables[0].Rows[i]["profileName"].ToString();
-          isdefault = ds.Tables[0].Rows[i]["defaultProfileFlag"].ToString() == "1";
-          ProfileSummary ps = new ProfileSummary(id, name, isdefault);
-          _profiles.Add(ps);
-          name = id = string.Empty; isdefault = false;
-        }
-        
-      }
-
-      return _profiles;
-
     }
 
     #endregion

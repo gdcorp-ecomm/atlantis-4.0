@@ -127,21 +127,24 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Impl
       }
 
       var filteredPlans = new List<FilteredProductPlan>();
-      var filteredTransitions = currentTreeXml.Element("FilteredTransitions").Elements("FilteredTransition");
-      foreach (var filteredTransition in filteredTransitions)
+      var filteredTransitionsNode = currentTreeXml.Element("FilteredTransitions");
+      if (filteredTransitionsNode != null)
       {
-        string treeId = filteredTransition.Attribute("TreeID").Value;
-        string productId = filteredTransition.Attribute("UnifiedProductID").Value;
-        bool isFree;
-        bool.TryParse((filteredTransition.Attribute("IsFree") ?? new XAttribute("IsFree", "False")).Value, out isFree);
+        var filteredTransitions = filteredTransitionsNode.Elements("FilteredTransition");
+        foreach (var filteredTransition in filteredTransitions)
+        {
+          string treeId = filteredTransition.Attribute("TreeID").Value;
+          string productId = filteredTransition.Attribute("UnifiedProductID").Value;
+          bool isFree;
+          bool.TryParse((filteredTransition.Attribute("IsFree") ?? new XAttribute("IsFree", "False")).Value, out isFree);
 
-        var reason = filteredTransition.Element("Reason");
-        int reasonCode = int.Parse(reason.Attribute("MessageCode").Value);
-        string reasonMessage = reason.Attribute("Message").Value;
+          var reason = filteredTransition.Element("Reason");
+          int reasonCode = int.Parse(reason.Attribute("MessageCode").Value);
+          string reasonMessage = reason.Attribute("Message").Value;
 
-        filteredPlans.Add(new FilteredProductPlan(treeId, productId, reasonCode, reasonMessage, isFree));
+          filteredPlans.Add(new FilteredProductPlan(treeId, productId, reasonCode, reasonMessage, isFree));
+        }
       }
-
       return filteredPlans;
     }
 

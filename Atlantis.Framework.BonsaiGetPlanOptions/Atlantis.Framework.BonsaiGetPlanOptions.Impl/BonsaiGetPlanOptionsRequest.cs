@@ -26,7 +26,8 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Impl
         }
         catch (Exception ex)
         {
-          var atlEx = new AtlantisException(requestData, "RequestHandler", "Error building PlanOptionsResponseData", string.Empty, ex);
+          string data = string.Format("rid:{0}, rtype:{1}, idtype:{2}, plid:{3}", planOptionsRequest.ResourceId, planOptionsRequest.ResourceType, planOptionsRequest.IdType, planOptionsRequest.PrivateLabelId);
+          var atlEx = new AtlantisException(requestData, "RequestHandler", "Error building PlanOptionsResponseData", data, ex);
           planOptionsResponse = new BonsaiGetPlanOptionsResponseData(atlEx);
         }
       }

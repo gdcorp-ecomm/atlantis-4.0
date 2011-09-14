@@ -16,6 +16,7 @@
     RelatedOffers = 105,
     PostalCommunications = 106,
     PhoneCommunications = 107,
+    Twitter = 108,
     BobsBlog = 200, 
     WhoIsMailer = 300
   }

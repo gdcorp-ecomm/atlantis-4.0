@@ -41,7 +41,7 @@ namespace Atlantis.Framework.MktgGetShopperPreferences.Interface
                 {
                   currentPreference[currentAttribute.Name] = currentAttribute.Value;
                 }
-                if (currentPreference.CommTypeID != -1)
+                if (currentPreference.InterestTypeID == -1)
                 {
                   CommunicationPreferences.Add(currentPreference.CommTypeID, currentPreference);
                 }

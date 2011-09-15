@@ -431,11 +431,11 @@ namespace Atlantis.Framework.OptInGetInfo.Impl
 
 
         int smsOptIn;
-        int.TryParse(getShopperResponseData.GetCommunicationPref(2).ToString(), out smsOptIn);
+        int.TryParse(getShopperResponseData.GetCommunicationPref((int)PreferenceIds.SmsCommunication).ToString(), out smsOptIn);
         SmsOptIn = smsOptIn == 1 ? true : false;
 
         int businessOfferOptIn;
-        int.TryParse(getShopperResponseData.GetInterestPref(1, 1).ToString(), out businessOfferOptIn);
+        int.TryParse(getShopperResponseData.GetInterestPref((int)PreferenceIds.EmailCommunication, (int)PreferenceIds.BusinessOffersInterest).ToString(), out businessOfferOptIn);
         BusinessOffersOptIn = businessOfferOptIn == 1 ? true : false;
       }
     }

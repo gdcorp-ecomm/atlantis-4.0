@@ -5,5 +5,6 @@
     public const int GetShopper = 1;
     public const int DataProvider = 35;
     public const int BobsBlogQuery = 140;
+    public const int MktgGetShopperPreferences = 340;
   }
 }

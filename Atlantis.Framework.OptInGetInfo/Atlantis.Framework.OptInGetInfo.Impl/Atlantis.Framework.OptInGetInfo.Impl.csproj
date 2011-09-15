@@ -93,6 +93,10 @@
       <Project>{4AEB3769-5282-49FC-941B-1AF979BBF39A}</Project>
       <Name>Atlantis.Framework.GetShopper.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MktgGetShopperPreferences\Atlantis.Framework.MktgGetShopperPreferences.Interface\Atlantis.Framework.MktgGetShopperPreferences.Interface.csproj">
+      <Project>{F733BBCF-5BE2-4083-B9DA-2070D7A05AF8}</Project>
+      <Name>Atlantis.Framework.MktgGetShopperPreferences.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.OptIn.Interface\Atlantis.Framework.OptIn.Interface.csproj">
       <Project>{59815F03-B3F1-43E2-89EE-C3B9B0C6D850}</Project>
       <Name>Atlantis.Framework.OptIn.Interface</Name>

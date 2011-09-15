@@ -28,9 +28,10 @@ namespace Atlantis.Framework.OptInGetInfo.Tests
       requestedOptIns.Add(OptInPublicationTypes.RelatedOffers );
       requestedOptIns.Add(OptInPublicationTypes.SmsCommunications );
       requestedOptIns.Add(OptInPublicationTypes.PhoneCommunications);
+      requestedOptIns.Add(OptInPublicationTypes.Twitter);
 
-      String emailAddress = "rhawkinson@godaddy.com";
-      String shopperId = "862200";
+      String emailAddress = "sthota@godaddy.com";
+      String shopperId = "850774";
       OptInGetInfoRequestData request = new OptInGetInfoRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, 1, emailAddress, requestedOptIns);
       OptInGetInfoResponseData response = (OptInGetInfoResponseData) Engine.Engine.ProcessRequest(request, 309);
 

@@ -26,5 +26,12 @@
     Text = 1,
     Html = 2
   }
+
+  public enum PreferenceIds
+  {
+    SmsCommunication = 2,
+    TwitterCommunication = 4,
+    BusinessOffersInterest = 1 
+  }
 }
 

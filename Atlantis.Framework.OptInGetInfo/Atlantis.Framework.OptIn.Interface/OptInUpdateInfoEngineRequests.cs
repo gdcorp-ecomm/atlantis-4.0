@@ -10,5 +10,6 @@
     public const int DataProvider = 35;
     public const int ResellerOptIn = 312;
     public const int ResellerOptOut = 313;
+    public const int MktgSetShopperCommPreference = 337;
   }
 }

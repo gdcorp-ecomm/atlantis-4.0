@@ -80,9 +80,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMResel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMResellerOptIn.Interface", "..\Atlantis.Framework.EEMResellerOptIn\Atlantis.Framework.EEMResellerOptIn.Interface\Atlantis.Framework.EEMResellerOptIn.Interface.csproj", "{ABD4CA6D-46F6-430A-9AF5-CB8C78AB6ACA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MktgSetShopperCommPref.Interface", "..\Atlantis.Framework.MktgSetShopperCommPref\Atlantis.Framework.MktgSetShopperCommPref.Interface\Atlantis.Framework.MktgSetShopperCommPref.Interface.csproj", "{CBEBB26C-8057-4ECC-A17F-3E8EAB458EB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MktgSetShopperCommPref.Impl", "..\Atlantis.Framework.MktgSetShopperCommPref\Atlantis.Framework.MktgSetShopperCommPref.Impl\Atlantis.Framework.MktgSetShopperCommPref.Impl.csproj", "{A7C8D9B6-9871-4DB1-AEFE-D32D023B270A}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 23
+		SccNumberOfProjects = 25
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
 		SccLocalPath0 = .
@@ -170,6 +174,14 @@ Global
 		SccProjectTopLevelParentUniqueName22 = Atlantis.Framework.OptInUpdateInfo.sln
 		SccProjectName22 = ../Atlantis.Framework.EEMResellerOptIn/Atlantis.Framework.EEMResellerOptIn.Interface
 		SccLocalPath22 = ..\\Atlantis.Framework.EEMResellerOptIn\\Atlantis.Framework.EEMResellerOptIn.Interface
+		SccProjectUniqueName23 = ..\\Atlantis.Framework.MktgSetShopperCommPref\\Atlantis.Framework.MktgSetShopperCommPref.Interface\\Atlantis.Framework.MktgSetShopperCommPref.Interface.csproj
+		SccProjectTopLevelParentUniqueName23 = Atlantis.Framework.OptInUpdateInfo.sln
+		SccProjectName23 = ../Atlantis.Framework.MktgSetShopperCommPref/Atlantis.Framework.MktgSetShopperCommPref.Interface
+		SccLocalPath23 = ..\\Atlantis.Framework.MktgSetShopperCommPref\\Atlantis.Framework.MktgSetShopperCommPref.Interface
+		SccProjectUniqueName24 = ..\\Atlantis.Framework.MktgSetShopperCommPref\\Atlantis.Framework.MktgSetShopperCommPref.Impl\\Atlantis.Framework.MktgSetShopperCommPref.Impl.csproj
+		SccProjectTopLevelParentUniqueName24 = Atlantis.Framework.OptInUpdateInfo.sln
+		SccProjectName24 = ../Atlantis.Framework.MktgSetShopperCommPref/Atlantis.Framework.MktgSetShopperCommPref.Impl
+		SccLocalPath24 = ..\\Atlantis.Framework.MktgSetShopperCommPref\\Atlantis.Framework.MktgSetShopperCommPref.Impl
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.OptInUpdateInfo.vsmdi
@@ -267,6 +279,14 @@ Global
 		{ABD4CA6D-46F6-430A-9AF5-CB8C78AB6ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABD4CA6D-46F6-430A-9AF5-CB8C78AB6ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABD4CA6D-46F6-430A-9AF5-CB8C78AB6ACA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBEBB26C-8057-4ECC-A17F-3E8EAB458EB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBEBB26C-8057-4ECC-A17F-3E8EAB458EB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBEBB26C-8057-4ECC-A17F-3E8EAB458EB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBEBB26C-8057-4ECC-A17F-3E8EAB458EB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7C8D9B6-9871-4DB1-AEFE-D32D023B270A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7C8D9B6-9871-4DB1-AEFE-D32D023B270A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7C8D9B6-9871-4DB1-AEFE-D32D023B270A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7C8D9B6-9871-4DB1-AEFE-D32D023B270A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -290,5 +310,7 @@ Global
 		{7DCEA28F-6FD6-46B0-893B-75E5073DD66A} = {5E376DC1-EFAA-4299-B3B1-DBC3DC720831}
 		{9E0D2A62-85AE-4064-8A4C-B5BE06926578} = {5E376DC1-EFAA-4299-B3B1-DBC3DC720831}
 		{ABD4CA6D-46F6-430A-9AF5-CB8C78AB6ACA} = {5E376DC1-EFAA-4299-B3B1-DBC3DC720831}
+		{CBEBB26C-8057-4ECC-A17F-3E8EAB458EB9} = {5E376DC1-EFAA-4299-B3B1-DBC3DC720831}
+		{A7C8D9B6-9871-4DB1-AEFE-D32D023B270A} = {5E376DC1-EFAA-4299-B3B1-DBC3DC720831}
 	EndGlobalSection
 EndGlobal

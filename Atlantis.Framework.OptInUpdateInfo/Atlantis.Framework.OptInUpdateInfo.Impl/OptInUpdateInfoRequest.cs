@@ -14,6 +14,7 @@ using Atlantis.Framework.OptIn.Interface;
 using Atlantis.Framework.OptIn.Interface.Enums;
 using Atlantis.Framework.OptInUpdateInfo.Interface;
 using Atlantis.Framework.UpdateShopper.Interface;
+using Atlantis.Framework.MktgSetShopperCommPref.Interface;
 
 namespace Atlantis.Framework.OptInUpdateInfo.Impl
 {
@@ -62,6 +63,20 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
         {
           _problems.Add(ex2);
         }
+
+        try
+        {
+          bSuccess = AddTwitterOptin((OptInUpdateInfoRequestData)requestData, out currentException);
+          results.Add("Twitter", bSuccess);
+          if (currentException != null)
+          {
+            _problems.Add(currentException);
+          }
+        }
+        catch (Exception exT)
+        {
+          _problems.Add(exT);
+        }        
 
         try
         {
@@ -193,7 +208,7 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
           if (smsOptIn != null && smsOptIn.IsModified)
           {
             var commPrefs = new Hashtable();
-            commPrefs.Add("CommTypeID", "2");
+            commPrefs.Add("CommTypeID", ((int)PreferenceIds.SmsCommunication).ToString());
             commPrefs.Add("OptIn", smsOptIn.Status ? "1" : "0");
             shopperRequest.AddPreference("Communication", commPrefs);
           }
@@ -201,8 +216,8 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
           if ((businessOfferOptIn != null && businessOfferOptIn.IsModified))
           {
             var interestPrefs = new Hashtable();
-            interestPrefs.Add("InterestTypeID", "1");
-            interestPrefs.Add("CommTypeID", "1");
+            interestPrefs.Add("InterestTypeID", ((int)PreferenceIds.BusinessOffersInterest).ToString());
+            interestPrefs.Add("CommTypeID", ((int)PreferenceIds.EmailCommunication).ToString());
             interestPrefs.Add("OptIn", businessOfferOptIn.Status ? "1" : "0");
             shopperRequest.AddPreference("Interest", interestPrefs);
           }
@@ -301,6 +316,46 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
         Engine.Engine.LogAtlantisException(aex);
         bSuccess = false;
       }
+
+      return bSuccess;
+    }
+
+    private static bool AddTwitterOptin(OptInUpdateInfoRequestData request, out Exception exception)
+    {
+      bool bSuccess = true;
+      exception = null;
+      var twitterOptIn = request.OptIns.FirstOrDefault(x => x.Type == OptInPublicationTypes.Twitter);
+      if ((twitterOptIn != null && twitterOptIn.IsModified))
+      {
+        bool isOpted = twitterOptIn.Status ? true : false;
+        bSuccess = SaveCommunicationPreferenceOptin(request, (int)PreferenceIds.TwitterCommunication, isOpted, out exception);
+      }
+      return bSuccess;
+
+    }
+
+    private static bool SaveCommunicationPreferenceOptin(OptInUpdateInfoRequestData requestData, int optinId, bool isOptedIn, out Exception exception)
+    {
+      bool bSuccess = false;
+      exception = null;
+      try
+      {
+        MktgSetShopperCommPrefRequestData request = new MktgSetShopperCommPrefRequestData(requestData.ShopperID, requestData.SourceURL, requestData.OrderID, requestData.Pathway, requestData.PageCount, optinId, isOptedIn);
+        MktgSetShopperCommPrefResponseData response = (MktgSetShopperCommPrefResponseData)Engine.Engine.ProcessRequest(request, OptInUpdateInfoEngineRequests.MktgSetShopperCommPreference);
+        if (response.IsSuccess)
+        {
+          bSuccess = true;
+        }
+      }
+      catch (Exception ex)
+      {
+        exception = ex;
+        string message = "Error saving Comm pref: " + ex.Message + " " + ex.StackTrace;
+        var aex = new AtlantisException(requestData, "OptInUpdateInfoRequest.SaveCommunicationPreferenceOptin", message, string.Empty, ex);
+        Engine.Engine.LogAtlantisException(aex);
+        bSuccess = false;
+      }
+
 
       return bSuccess;
     }

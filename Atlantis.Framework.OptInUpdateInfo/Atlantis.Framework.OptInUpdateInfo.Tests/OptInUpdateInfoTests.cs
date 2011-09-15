@@ -245,18 +245,19 @@ namespace Atlantis.Framework.OptInUpdateInfo.Tests
     [DeploymentItem("DataProvider.xml")]
     public void TestMethod_SingleItem_Phone()
     {
-      String emailAddress = "triedy@godaddy.com";
-      String shopperId = "859775";
+      String emailAddress = "sthota@godaddy.com";
+      String shopperId = "850774";
       int requestId = 315;
 
       bool isReseller = false;
-      string lastName = "Riedy";
-      string firstName = "Thomas";
+      string lastName = "srd";
+      string firstName = "Tht";
       //string userHostAddress = "127.0.0.1";
       string userHostAddress = "fe80::c813:7781:8925:6297%11";
       List<OptIn.Interface.OptIn> optIns = new List<OptIn.Interface.OptIn>();
 
-      optIns.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.PhoneCommunications, false, string.Empty));
+      optIns.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.SmsCommunications, false, string.Empty));
+      optIns.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.Twitter, false, string.Empty));
 
       optIns.ForEach(x => x.Status = true);
 

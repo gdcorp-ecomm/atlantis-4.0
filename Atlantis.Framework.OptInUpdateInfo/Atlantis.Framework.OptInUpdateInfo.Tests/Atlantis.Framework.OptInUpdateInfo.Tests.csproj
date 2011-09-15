@@ -108,6 +108,14 @@
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MktgSetShopperCommPref\Atlantis.Framework.MktgSetShopperCommPref.Impl\Atlantis.Framework.MktgSetShopperCommPref.Impl.csproj">
+      <Project>{A7C8D9B6-9871-4DB1-AEFE-D32D023B270A}</Project>
+      <Name>Atlantis.Framework.MktgSetShopperCommPref.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MktgSetShopperCommPref\Atlantis.Framework.MktgSetShopperCommPref.Interface\Atlantis.Framework.MktgSetShopperCommPref.Interface.csproj">
+      <Project>{CBEBB26C-8057-4ECC-A17F-3E8EAB458EB9}</Project>
+      <Name>Atlantis.Framework.MktgSetShopperCommPref.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.MktgSubscribeAdd\Atlantis.Framework.MktgSubscribeAdd.Impl\Atlantis.Framework.MktgSubscribeAdd.Impl.csproj">
       <Project>{DAE51C81-3062-4473-B02E-D30F67C110F3}</Project>
       <Name>Atlantis.Framework.MktgSubscribeAdd.Impl</Name>

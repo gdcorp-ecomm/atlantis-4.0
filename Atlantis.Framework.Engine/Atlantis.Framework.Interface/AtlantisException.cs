@@ -2,13 +2,40 @@ using System;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Web;
 using System.Xml;
+using System.Web;
 
 namespace Atlantis.Framework.Interface
 {
   public class AtlantisException : Exception
   {
+    const string _containerKey = "AtlantisException.HttpProviderContainer";
+
+    /// <summary>
+    /// In order to properly detect and log proxy information, set this value in your Global Application Begin Request method
+    /// </summary>
+    /// <param name="container">Pass in the HttpProviderContainer.Instance</param>
+    public static void SetWebRequestProviderContainer(IProviderContainer container)
+    {
+      if (HttpContext.Current != null)
+      {
+        HttpContext.Current.Items[_containerKey] = container;
+      }
+    }
+
+    private static IProviderContainer WebRequestProviderContainer
+    {
+      get
+      {
+        IProviderContainer result = null;
+        if (HttpContext.Current != null)
+        {
+          result = HttpContext.Current.Items[_containerKey] as IProviderContainer;
+        }
+        return result;
+      }
+    }
+
     DateTime _logTime;
     string _sourceServer = string.Empty;
     string _sourceFunction = string.Empty;
@@ -38,17 +65,8 @@ namespace Atlantis.Framework.Interface
       Pathway = requestData.Pathway;
       _pageCount = requestData.PageCount;
 
-      if (!string.IsNullOrEmpty(requestData.SourceURL))
-      {
-        SourceURL = requestData.SourceURL;
-      }
-      else
-      {
-        SourceURL = GetSourceUrlFromContext();
-      }
-
-      ClientIP = GetClientIPFromContext();
-
+      SourceURL = requestData.SourceURL;
+      ClientIP = IPAddress.Loopback.ToString();
     }
 
     public AtlantisException(RequestData requestData,
@@ -63,11 +81,13 @@ namespace Atlantis.Framework.Interface
       _sourceFunction = sourceFunction;
       _errorDescription = errorDescription;
       ExData = data;
-      SourceURL = requestData.SourceURL;
       ShopperID = requestData.ShopperID;
       OrderID = requestData.OrderID;
       Pathway = requestData.Pathway;
       _pageCount = requestData.PageCount;
+
+      SourceURL = requestData.SourceURL;
+      ClientIP = IPAddress.Loopback.ToString();
     }
 
     public AtlantisException(RequestData requestData,
@@ -88,24 +108,8 @@ namespace Atlantis.Framework.Interface
       Pathway = requestData.Pathway;
       _pageCount = requestData.PageCount;
 
-      if (!string.IsNullOrEmpty(requestData.SourceURL))
-      {
-        SourceURL = requestData.SourceURL;
-      }
-      else
-      {
-        SourceURL = GetSourceUrlFromContext();
-      }
-
-      if (!string.IsNullOrEmpty(clientIP))
-      {
-        ClientIP = clientIP;
-      }
-      else
-      {
-        ClientIP = GetClientIPFromContext();
-      }
-
+      SourceURL = requestData.SourceURL;
+      ClientIP = clientIP;
     }
 
     public AtlantisException(string sourceFunction,
@@ -131,28 +135,13 @@ namespace Atlantis.Framework.Interface
       Pathway = pathway;
       _pageCount = pageCount;
 
-      if (!string.IsNullOrEmpty(sourceURL))
-      {
-        SourceURL = sourceURL;
-      }
-      else
-      {
-        SourceURL = GetSourceUrlFromContext();
-      }
-
-      if (!string.IsNullOrEmpty(clientIP))
-      {
-        ClientIP = clientIP;
-      }
-      else
-      {
-        ClientIP = GetClientIPFromContext();
-      }
+      SourceURL = sourceURL;
+      ClientIP = clientIP;
     }
 
     public AtlantisException(
-      string sourceFunction, 
-      string errorNumber, 
+      string sourceFunction,
+      string errorNumber,
       string errorDescription,
       string data,
       ISiteContext siteContext,
@@ -177,31 +166,81 @@ namespace Atlantis.Framework.Interface
         _pageCount = siteContext.PageCount;
       }
 
-      SourceURL = GetSourceUrlFromContext();
-      ClientIP = GetClientIPFromContext();
+      SourceURL = _sourceUrl;
+      ClientIP = _clientIP;
     }
 
-    private string GetClientIPFromContext()
+    private string GetClientIPFromContext(string givenIP)
     {
-      string result = string.Empty;
-      if ((HttpContext.Current != null) && (HttpContext.Current.Request != null))
+      string result = givenIP ?? string.Empty;
+
+      try
       {
-        result = HttpContext.Current.Request.UserHostAddress;
+        if (HttpContext.Current != null)
+        {
+          if (HttpContext.Current.Request != null)
+          {
+            result = HttpContext.Current.Request.UserHostAddress;
+          }
+
+          IProviderContainer container = WebRequestProviderContainer;
+          if ((container != null) && (container.CanResolve<IProxyContext>()))
+          {
+            IProxyContext proxy = container.Resolve<IProxyContext>();
+            result = proxy.OriginIP;
+          }
+        }
       }
+      catch (Exception ex)
+      {
+        result = ex.Message;
+      }
+
       return result;
     }
 
-    private string GetSourceUrlFromContext()
+    private string GetSourceUrlFromContext(string givenUrl)
     {
-      string result = string.Empty;
-      if ((HttpContext.Current != null) && (HttpContext.Current.Request != null))
+      string result = givenUrl ?? string.Empty;
+
+      try
       {
-        try
+        if (HttpContext.Current != null)
         {
-          result = HttpContext.Current.Request.Url.OriginalString;
+          if (HttpContext.Current.Request != null)
+          {
+            result = HttpContext.Current.Request.Url.OriginalString;
+          }
+
+          IProviderContainer container = WebRequestProviderContainer;
+          if ((container != null) && (container.CanResolve<IProxyContext>()))
+          {
+            IProxyContext proxy = container.Resolve<IProxyContext>();
+
+            if (proxy.Status != ProxyStatusType.None)
+            {
+              if (proxy.IsLocalARR)
+              {
+                result = "[" + proxy.ARRHost + "]" + result;
+              }
+
+              /// Regardless of ARR proxy or not, we could have another external proxy 
+              /// from custom reseller domains or our translation servers
+              if (proxy.IsResellerDomain)
+              {
+                result = "[" + proxy.ResellerDomainHost + "]" + result;
+              }
+              else if (proxy.IsTransalationDomain)
+              {
+                result = "[" + proxy.TranslationHost + "]" + result;
+              }
+            }
+          }
         }
-        catch
-        { }
+      }
+      catch (Exception ex)
+      {
+        result = ex.Message;
       }
 
       return result;
@@ -227,8 +266,7 @@ namespace Atlantis.Framework.Interface
       get { return _sourceUrl; }
       set
       {
-        if (!string.IsNullOrEmpty(value))
-          _sourceUrl = value;
+        _sourceUrl = GetSourceUrlFromContext(value);
       }
     }
 
@@ -249,7 +287,9 @@ namespace Atlantis.Framework.Interface
       set
       {
         if (!string.IsNullOrEmpty(value))
+        {
           _data = value;
+        }
       }
     }
 
@@ -259,7 +299,9 @@ namespace Atlantis.Framework.Interface
       set
       {
         if (!String.IsNullOrEmpty(value))
+        {
           _shopperId = value;
+        }
       }
     }
 
@@ -269,7 +311,9 @@ namespace Atlantis.Framework.Interface
       set
       {
         if (!string.IsNullOrEmpty(value))
+        {
           _orderId = value;
+        }
       }
     }
 
@@ -278,9 +322,7 @@ namespace Atlantis.Framework.Interface
       get { return _clientIP; }
       set
       {
-        IPAddress address = null;
-        if (!string.IsNullOrEmpty(value) && IPAddress.TryParse(value, out address))
-          _clientIP = address.ToString();
+        _clientIP = GetClientIPFromContext(value);
       }
     }
 
@@ -290,7 +332,9 @@ namespace Atlantis.Framework.Interface
       set
       {
         if (!string.IsNullOrEmpty(value))
+        {
           _pathway = value;
+        }
       }
     }
 
@@ -322,5 +366,6 @@ namespace Atlantis.Framework.Interface
 
       return sbRequest.ToString();
     }
+
   }
 }

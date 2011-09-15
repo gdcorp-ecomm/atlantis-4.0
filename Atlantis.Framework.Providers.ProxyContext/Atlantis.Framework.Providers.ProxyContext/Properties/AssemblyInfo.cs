@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.Providers.Links")]
+[assembly: AssemblyTitle("Atlantis.Framework.Providers.ProxyContext")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com")]
-[assembly: AssemblyProduct("Atlantis.Framework.Providers.Links")]
+[assembly: AssemblyProduct("Atlantis.Framework.Providers.ProxyContext")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("997e5d94-b882-4fc6-9e73-d23175273fb0")]
+[assembly: Guid("385e5dc6-93ec-4be4-842b-f94fc330a7bf")]
 
 // Version information for an assembly consists of the following four values:
 //

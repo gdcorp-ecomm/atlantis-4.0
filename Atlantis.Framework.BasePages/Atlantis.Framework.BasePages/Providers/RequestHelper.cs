@@ -1,20 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web;
-using System.Web.Configuration;
 using Atlantis.Framework.Interface;
+using System.Web.Configuration;
+using System.Collections.Generic;
+using Atlantis.Framework.Providers.Interface.ProviderContainer;
 
 namespace Atlantis.Framework.BasePages.Providers
 {
   internal static class RequestHelper
   {
+    internal static IProxyContext GetProxyContext()
+    {
+      IProxyContext result = null;
+      if (HttpProviderContainer.Instance.CanResolve<IProxyContext>())
+      {
+        result = HttpProviderContainer.Instance.Resolve<IProxyContext>();
+      }
+      return result;
+    }
+
+    internal static string GetOriginUserHostAddress()
+    {
+      string result = HttpContext.Current.Request.UserHostAddress;
+      IProxyContext proxyContext = GetProxyContext();
+      if (proxyContext != null)
+      {
+        result = proxyContext.OriginIP;
+      }
+      return result;
+    }
+
+    internal static string GetContextHost()
+    {
+      string result = HttpContext.Current.Request.Url.Host;
+      IProxyContext proxyContext = GetProxyContext();
+      if ((proxyContext != null) && (proxyContext.IsLocalARR))
+      {
+        result = proxyContext.ARRHost;
+      }
+      return result;
+    }
+
     internal static bool IsRequestInternal()
     {
+      IProxyContext proxyContext = GetProxyContext();
+      if ((proxyContext != null) && (proxyContext.Status == ProxyStatusType.Invalid)) 
+      {
+        return false; // If the proxy status is invalid for any reason, treat as external
+      }
       bool result = false;
-      string[] ipsplits = HttpContext.Current.Request.UserHostAddress.Split('.');
+      string originalHostAddress = GetOriginUserHostAddress();
+      string[] ipsplits = originalHostAddress.Split('.');
       if (ipsplits.Length == 4)
       {
-        if ((HttpContext.Current.Request.UserHostAddress == "127.0.0.1") ||
+        if ((originalHostAddress == "127.0.0.1") ||
           (ipsplits[0] == "10") ||
           ((ipsplits[0] == "192") && (ipsplits[1] == "168")))
         {
@@ -27,10 +66,10 @@ namespace Atlantis.Framework.BasePages.Providers
             result = true;
         }
       }
-      return result && !IsInternalRequestExcluded();
+      return result && !IsInternalRequestExcluded(originalHostAddress);
     }
 
-    private static bool IsInternalRequestExcluded()
+    private static bool IsInternalRequestExcluded(string userHostAddress)
     {
       bool returnValue = false;
 
@@ -43,21 +82,21 @@ namespace Atlantis.Framework.BasePages.Providers
       {
         excludedUserAgents.ForEach(delegate(String agent)
         {
-          if (HttpContext.Current.Request.UserAgent.ToLower().Contains(agent))
+          if (userAgent.Contains(agent))
           {
             returnValue = true;
           }
         });
       }
 
-      return returnValue || (excludedIPs.Contains(HttpContext.Current.Request.UserHostAddress));
+      return returnValue || (excludedIPs.Contains(userHostAddress));
     }
 
     internal static ServerLocationType GetServerLocation(bool isRequestInternal)
     {
       ServerLocationType result = ServerLocationType.Prod;
 
-      string hostName = HttpContext.Current.Request.Url.Host.ToLowerInvariant();
+      string hostName = GetContextHost().ToLowerInvariant();
 
       if (hostName.Contains(".ote."))
       {

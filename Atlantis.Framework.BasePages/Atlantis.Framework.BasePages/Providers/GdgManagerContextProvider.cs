@@ -283,7 +283,7 @@ namespace Atlantis.Framework.BasePages.Providers
         string result = string.Empty;
         if ((HttpContext.Current != null) && (HttpContext.Current.Request != null))
         {
-          result = HttpContext.Current.Request.RawUrl;
+          result = HttpContext.Current.Request.Url.OriginalString;
         }
         return result;
       }

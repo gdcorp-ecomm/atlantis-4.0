@@ -141,14 +141,49 @@ namespace Atlantis.Framework.BasePages.Providers
           }
         }
       }
-      catch
+      catch(Exception ex)
       {
         _isManager = false;
         _managerUserId = string.Empty;
         _managerUserName = string.Empty;
         _managerQuery.Clear();
         _managerContextId = 0;
+        LogManagerException(ex.Message, ex.StackTrace);
       }
+    }
+
+    private string RequestUrl
+    {
+      get
+      {
+        string result = string.Empty;
+        if ((HttpContext.Current != null) && (HttpContext.Current.Request != null))
+        {
+          result = HttpContext.Current.Request.Url.OriginalString;
+        }
+        return result;
+      }
+    }
+
+    private string ClientIP
+    {
+      get
+      {
+        string result = string.Empty;
+        if ((HttpContext.Current != null) && (HttpContext.Current.Request != null))
+        {
+          result = HttpContext.Current.Request.UserHostAddress;
+        }
+        return result;
+      }
+    }
+
+    private void LogManagerException(string message, string data)
+    {
+      AtlantisException managerException = new AtlantisException(
+        "GdgManagerContextProvider.DetermineManager", RequestUrl, "403", message, data,
+        _managerShopperId, string.Empty, ClientIP, string.Empty, 0);
+      Engine.Engine.LogAtlantisException(managerException);
     }
 
     #region IManagerContext Members

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</ProjectGuid>
+    <ProjectGuid>{016D33CB-E21F-430C-B793-4E345D2837BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.Interface</RootNamespace>
-    <AssemblyName>Atlantis.Framework.Interface</AssemblyName>
+    <RootNamespace>Atlantis.Framework.Providers.ProxyContext</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Providers.ProxyContext</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -45,25 +45,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncState.cs" />
-    <Compile Include="AtlantisException.cs" />
-    <Compile Include="ConfigElement.cs" />
-    <Compile Include="IAsyncRequest.cs" />
-    <Compile Include="IDebugContext.cs" />
-    <Compile Include="IManagerContext.cs" />
-    <Compile Include="IProviderContainer.cs" />
-    <Compile Include="IProxyContext.cs" />
-    <Compile Include="IRequest.cs" />
-    <Compile Include="IResponseData.cs" />
-    <Compile Include="IShopperContext.cs" />
-    <Compile Include="ISiteContext.cs" />
+    <Compile Include="ARRHeaderValues.cs" />
+    <Compile Include="HeaderValuesBase.cs" />
+    <Compile Include="HeaderValueStatus.cs" />
+    <Compile Include="ProxyWhiteList.cs" />
+    <Compile Include="ResellerDomainHeaderValues.cs" />
+    <Compile Include="ResellerProxyWhitelist.cs" />
+    <Compile Include="TranslationHeaderValues.cs" />
+    <Compile Include="TranslationProxyWhitelist.cs" />
+    <Compile Include="WebProxyContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProviderBase.cs" />
-    <Compile Include="ProxyStatusType.cs" />
-    <Compile Include="RequestData.cs" />
-    <Compile Include="ServerLocationType.cs" />
-    <Compile Include="ShopperStatusType.cs" />
-    <Compile Include="WsConfigElement.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
+      <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
+      <Name>Atlantis.Framework.DataCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+      <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>
+      <Name>Atlantis.Framework.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

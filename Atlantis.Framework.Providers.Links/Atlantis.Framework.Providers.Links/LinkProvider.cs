@@ -64,6 +64,26 @@ namespace Atlantis.Framework.Providers.Links
       _shopperContext = container.Resolve<IShopperContext>();
     }
 
+    private string _contextHost;
+    private string ContextHost
+    {
+      get
+      {
+        if (_contextHost == null)
+        {
+          _contextHost = HttpContext.Current.Request.Url.Host.ToLowerInvariant();
+          if (Container.CanResolve<IProxyContext>())
+          {
+            IProxyContext proxy = Container.Resolve<IProxyContext>();
+            if (proxy.IsLocalARR)
+            {
+              _contextHost = proxy.ARRHost;
+            }
+          }
+        }
+        return _contextHost;
+      }
+    }
     /// <summary>
     /// Used so if internal and debug url, https links are not given for relative urls
     /// </summary>
@@ -72,7 +92,7 @@ namespace Atlantis.Framework.Providers.Links
     {
       bool result = false;
       if ((_siteContext.IsRequestInternal) &&
-        (HttpContext.Current.Request.Url.Host.ToLowerInvariant().Contains(".debug.")))
+        (ContextHost.Contains(".debug.")))
       {
         result = true;
       }
@@ -173,7 +193,7 @@ namespace Atlantis.Framework.Providers.Links
           if (HttpContext.Current != null && HttpContext.Current.Request != null)
           {
             _defaultRootLink = HttpContext.Current.Request.Url.Authority;
-            if (HttpContext.Current.Request.Url.Host == "localhost")
+            if (ContextHost == "localhost")
             {
               _defaultRootLink = _defaultRootLink + HttpContext.Current.Request.Url.Segments[0] +
                 HttpContext.Current.Request.Url.Segments[1];

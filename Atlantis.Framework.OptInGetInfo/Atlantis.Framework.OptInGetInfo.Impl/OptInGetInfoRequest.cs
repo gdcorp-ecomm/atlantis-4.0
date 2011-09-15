@@ -56,8 +56,6 @@ namespace Atlantis.Framework.OptInGetInfo.Impl
               (x => x == ((int)OptInPublicationTypes.NonPromotional) ||
                   x == ((int)OptInPublicationTypes.RelatedOffers) ||
                   x == ((int)OptInPublicationTypes.PostalCommunications) ||
-//                  x == ((int)OptInPublicationTypes.SmsCommunications) ||
-//                  x == ((int)OptInPublicationTypes.BusinessOffers) ||
                   x == ((int)OptInPublicationTypes.PhoneCommunications))
 
               ).Count() > 0)
@@ -210,9 +208,7 @@ namespace Atlantis.Framework.OptInGetInfo.Impl
         
         shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.PostalCommunications,shopperData.MarketingStandardMailOptIn, string.Empty));
         shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.NonPromotional, shopperData.MarketingNonPromotionalOptIn, string.Empty));
-//        shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.BusinessOffers, shopperData.BusinessOffersOptIn, string.Empty));
         shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.RelatedOffers, shopperData.MarketingEmailOptIn, string.Empty));
-//        shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.SmsCommunications, shopperData.SmsOptIn, string.Empty));
         //Phone communications is opposite of the DoNotCallFlag! to indicate if we CAN call, not who we CANNOT call (which is stored in the shopper DNC flag) 
         shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.PhoneCommunications, !shopperData.HasDoNotCallSet, string.Empty));
         
@@ -237,9 +233,6 @@ namespace Atlantis.Framework.OptInGetInfo.Impl
       {
         request.AddField(shopperField);
       }
-
-//      request.AddCommunicationPref(2); // SMS Prefs
-//      request.AddInterestPref(1, 1); //Business Offers
 
       request.RequestTimeout = timeout;
 

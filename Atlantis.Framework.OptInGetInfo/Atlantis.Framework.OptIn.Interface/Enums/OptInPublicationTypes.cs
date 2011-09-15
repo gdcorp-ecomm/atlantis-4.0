@@ -29,7 +29,9 @@
 
   public enum PreferenceIds
   {
+    EmailCommunication = 1,
     SmsCommunication = 2,
+    PhoneCommunication = 3,
     TwitterCommunication = 4,
     BusinessOffersInterest = 1 
   }

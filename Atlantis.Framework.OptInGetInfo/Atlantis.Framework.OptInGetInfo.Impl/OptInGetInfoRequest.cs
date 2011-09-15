@@ -56,6 +56,8 @@ namespace Atlantis.Framework.OptInGetInfo.Impl
               (x => x == ((int)OptInPublicationTypes.NonPromotional) ||
                   x == ((int)OptInPublicationTypes.RelatedOffers) ||
                   x == ((int)OptInPublicationTypes.PostalCommunications) ||
+                  x == ((int)OptInPublicationTypes.SmsCommunications) ||
+                  x == ((int)OptInPublicationTypes.BusinessOffers) ||
                   x == ((int)OptInPublicationTypes.PhoneCommunications))
 
               ).Count() > 0)
@@ -77,12 +79,7 @@ namespace Atlantis.Framework.OptInGetInfo.Impl
             }
           }
 
-          if (request.OptIns.Where(
-              (x => x == ((int)OptInPublicationTypes.SmsCommunications) ||
-                  x == ((int)OptInPublicationTypes.BusinessOffers) ||
-                  x == ((int)OptInPublicationTypes.Twitter))
-
-              ).Count() > 0)
+          if (request.OptIns.Where((x => x == ((int)OptInPublicationTypes.Twitter))).Count() > 0)
           {
             if (GetInterestAndCommunicationPreferencesOptins(request.ShopperID, out workingOptIns))
             {
@@ -208,7 +205,9 @@ namespace Atlantis.Framework.OptInGetInfo.Impl
         
         shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.PostalCommunications,shopperData.MarketingStandardMailOptIn, string.Empty));
         shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.NonPromotional, shopperData.MarketingNonPromotionalOptIn, string.Empty));
+        shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.BusinessOffers, shopperData.BusinessOffersOptIn, string.Empty));
         shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.RelatedOffers, shopperData.MarketingEmailOptIn, string.Empty));
+        shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.SmsCommunications, shopperData.SmsOptIn, string.Empty));
         //Phone communications is opposite of the DoNotCallFlag! to indicate if we CAN call, not who we CANNOT call (which is stored in the shopper DNC flag) 
         shoppePrefs.Add(new OptIn.Interface.OptIn(OptInPublicationTypes.PhoneCommunications, !shopperData.HasDoNotCallSet, string.Empty));
         
@@ -233,6 +232,9 @@ namespace Atlantis.Framework.OptInGetInfo.Impl
       {
         request.AddField(shopperField);
       }
+
+      request.AddCommunicationPref((int)PreferenceIds.SmsCommunication);
+      request.AddInterestPref((int)PreferenceIds.EmailCommunication, (int)PreferenceIds.BusinessOffersInterest); //busniess offers are offered via email
 
       request.RequestTimeout = timeout;
 
@@ -284,6 +286,7 @@ namespace Atlantis.Framework.OptInGetInfo.Impl
 
     private bool GetInterestAndCommunicationPreferencesOptins(string shopperId, out List<OptIn.Interface.OptIn> optIns)
     {
+      // the commented out code is the correct way to use for the respective optins, but we are going to pull that info from the shopperData WS call, so that this WS call happens only when Twitter is an optin choice
       bool bSuccess = false;
       optIns = null;
       try
@@ -300,10 +303,10 @@ namespace Atlantis.Framework.OptInGetInfo.Impl
               OptIn.Interface.OptIn currentOptIn;
               switch (commInfo.Key)
               {
-                case (int)PreferenceIds.SmsCommunication:
-                  currentOptIn = new OptIn.Interface.OptIn(OptInPublicationTypes.SmsCommunications, true, string.Empty);
-                  optIns.Add(currentOptIn);
-                  break;
+                //case (int)PreferenceIds.SmsCommunication:
+                //  currentOptIn = new OptIn.Interface.OptIn(OptInPublicationTypes.SmsCommunications, true, string.Empty);
+                //  optIns.Add(currentOptIn);
+                //  break;
                 case (int)PreferenceIds.TwitterCommunication:
                   currentOptIn = new OptIn.Interface.OptIn(OptInPublicationTypes.Twitter, true, string.Empty);
                   optIns.Add(currentOptIn);
@@ -311,17 +314,17 @@ namespace Atlantis.Framework.OptInGetInfo.Impl
               }
             }
           }
-          if (response.InterestPreferences.Count > 0)
-          {
-            foreach (KeyValuePair<int, PreferenceInfo> interestInfo in response.InterestPreferences)
-            {
-              if (interestInfo.Key == 1 && interestInfo.Value.InterestTypeID == (int)PreferenceIds.BusinessOffersInterest)
-              {
-                var currentOptIn = new OptIn.Interface.OptIn(OptInPublicationTypes.BusinessOffers, true, string.Empty);
-                optIns.Add(currentOptIn);
-              }
-            } 
-          }
+          //if (response.InterestPreferences.Count > 0)
+          //{
+          //  foreach (KeyValuePair<int, PreferenceInfo> interestInfo in response.InterestPreferences)
+          //  {
+          //    if (interestInfo.Key == 1 && interestInfo.Value.InterestTypeID == (int)PreferenceIds.BusinessOffersInterest)
+          //    {
+          //      var currentOptIn = new OptIn.Interface.OptIn(OptInPublicationTypes.BusinessOffers, true, string.Empty);
+          //      optIns.Add(currentOptIn);
+          //    }
+          //  } 
+          //}
 
           bSuccess = true;
         }

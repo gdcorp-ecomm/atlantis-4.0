@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -37,7 +36,6 @@ namespace Atlantis.Framework.ECCSetEmailAccount.Interface
     }
 
     public int ResellerId { get; set; }
-    public TimeSpan RequestTimeout { get; set; }    
     public string EmailAddress { get; set; }        
     public string Subaccount { get; set; }        
 

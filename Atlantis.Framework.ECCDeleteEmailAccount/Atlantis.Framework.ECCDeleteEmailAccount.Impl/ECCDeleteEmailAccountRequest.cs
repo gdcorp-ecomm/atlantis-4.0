@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xml;
 using Atlantis.Framework.Ecc.Interface.Authentication;
 using Atlantis.Framework.Ecc.Interface.jsonHelpers;
 using Atlantis.Framework.ECCSetEmailAccount.Impl.Json;

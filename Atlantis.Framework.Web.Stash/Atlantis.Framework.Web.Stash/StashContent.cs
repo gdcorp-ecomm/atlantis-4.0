@@ -12,10 +12,15 @@ namespace Atlantis.Framework.Web.Stash
 
     public StashContent()
     {
-      PreRender += new EventHandler(StashContent_PreRender);
+      Init += new EventHandler(StashContent_Init);
     }
 
-    void StashContent_PreRender(object sender, EventArgs e)
+    void StashContent_Init(object sender, EventArgs e)
+    {
+      Page.PreRenderComplete += new EventHandler(Page_PreRenderComplete);
+    }
+
+    void Page_PreRenderComplete(object sender, EventArgs e)
     {
       if (StashBeforeRender)
       {

@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.Stash", "Atlantis.Framework.Web.Stash\Atlantis.Framework.Web.Stash.csproj", "{3F594DF0-9705-4781-B65D-937C0CCD9E4A}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Atlantis.Framework.Web.Stash.TestWeb", "Atlantis.Framework.Web.Stash.TestWeb", "{C9126CA4-744F-4B22-A5F4-7C623F224A5D}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{3F594DF0-9705-4781-B65D-937C0CCD9E4A}|Atlantis.Framework.Web.Stash.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/Atlantis.Framework.Web.Stash.TestWeb"
+		Debug.AspNetCompiler.PhysicalPath = "Atlantis.Framework.Web.Stash.TestWeb\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Atlantis.Framework.Web.Stash.TestWeb\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Atlantis.Framework.Web.Stash.TestWeb"
+		Release.AspNetCompiler.PhysicalPath = "Atlantis.Framework.Web.Stash.TestWeb\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Atlantis.Framework.Web.Stash.TestWeb\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "59182"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.Web.Stash\\Atlantis.Framework.Web.Stash.csproj
+		SccProjectName1 = Atlantis.Framework.Web.Stash
+		SccLocalPath1 = Atlantis.Framework.Web.Stash
+		SccWebProject2 = true
+		SccProjectUniqueName2 = Atlantis.Framework.Web.Stash.TestWeb
+		SccProjectName2 = Atlantis.Framework.Web.Stash.TestWeb
+		SccLocalPath2 = Atlantis.Framework.Web.Stash.TestWeb
+		SccProjectEnlistmentChoice2 = 2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F594DF0-9705-4781-B65D-937C0CCD9E4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F594DF0-9705-4781-B65D-937C0CCD9E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F594DF0-9705-4781-B65D-937C0CCD9E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F594DF0-9705-4781-B65D-937C0CCD9E4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9126CA4-744F-4B22-A5F4-7C623F224A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9126CA4-744F-4B22-A5F4-7C623F224A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9126CA4-744F-4B22-A5F4-7C623F224A5D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9126CA4-744F-4B22-A5F4-7C623F224A5D}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

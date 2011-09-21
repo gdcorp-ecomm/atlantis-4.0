@@ -1,6 +1,6 @@
-﻿using System.Web;
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
+using System.Web;
 using System.Web.SessionState;
 
 namespace Atlantis.Framework.Testing.MockHttpContext

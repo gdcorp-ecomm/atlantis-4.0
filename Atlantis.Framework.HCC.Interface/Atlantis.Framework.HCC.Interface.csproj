@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EDAF9BF3-0605-4F44-95EF-D44254EE962B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atlantis.Framework.HCC.Interface</RootNamespace>
+    <AssemblyName>Atlantis.Framework.HCC.Interface</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\HCCDomainType.cs" />
+    <Compile Include="Constants\HCCErrorBehaviorPageType.cs" />
+    <Compile Include="Constants\OptionType.cs" />
+    <Compile Include="DomainSettings\HCCOptionGroup.cs" />
+    <Compile Include="DomainSettings\HCCOptionListItem.cs" />
+    <Compile Include="HCCAccountDetailsResponse.cs" />
+    <Compile Include="HCCAvailDomainsResponse.cs" />
+    <Compile Include="HCCDomainMgmtResponse.cs" />
+    <Compile Include="HCCAccount.cs" />
+    <Compile Include="HCCAccounts.cs" />
+    <Compile Include="HCCAcctPasswordResponse.cs" />
+    <Compile Include="HCCAvailableSSLResponse.cs" />
+    <Compile Include="HCCDomainSettingsResponse.cs" />
+    <Compile Include="HCCGet404ErrorBehaviorResponse.cs" />
+    <Compile Include="HCCGetServiceAgreementResponse.cs" />
+    <Compile Include="HCCIsPasswordValidResponse.cs" />
+    <Compile Include="HCCIsUsernameValidResponse.cs" />
+    <Compile Include="HCCSet404ErrorBehaviorResponse.cs" />
+    <Compile Include="HCCSetupOptionsResponse.cs" />
+    <Compile Include="HCCSetUpHostingAccountResponse.cs" />
+    <Compile Include="HCCSSLItem.cs" />
+    <Compile Include="IResponseMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{644184AF-501A-4E0E-8B6B-C3F5B892019E}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.AuctionBidCloseOuts.vsmdi = Atlantis.Framework.AuctionBidCloseOuts.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionBidCloseOuts.Tests", "Atlantis.Framework.AuctionBidCloseOuts.Tests\Atlantis.Framework.AuctionBidCloseOuts.Tests.csproj", "{9446FDA4-172F-4B7E-8E7A-EDE1E2A3997F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionBidCloseOuts.Interface", "Atlantis.Framework.AuctionBidCloseOuts.Interface\Atlantis.Framework.AuctionBidCloseOuts.Interface.csproj", "{11219451-BA84-413F-8E11-782CE369C7BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionBidCloseOuts.Impl", "Atlantis.Framework.AuctionBidCloseOuts.Impl\Atlantis.Framework.AuctionBidCloseOuts.Impl.csproj", "{F8FEBD70-FD40-4C0E-83EE-99F73E3CFDC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{405AFD44-36AE-4BF5-A478-81A8674781CF}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.AuctionBidCloseOuts.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.AuctionBidCloseOuts.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.AuctionBidCloseOuts.Tests\\Atlantis.Framework.AuctionBidCloseOuts.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.AuctionBidCloseOuts.Tests
+		SccLocalPath3 = Atlantis.Framework.AuctionBidCloseOuts.Tests
+		SccProjectUniqueName4 = Atlantis.Framework.AuctionBidCloseOuts.Interface\\Atlantis.Framework.AuctionBidCloseOuts.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.AuctionBidCloseOuts.Interface
+		SccLocalPath4 = Atlantis.Framework.AuctionBidCloseOuts.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.AuctionBidCloseOuts.Impl\\Atlantis.Framework.AuctionBidCloseOuts.Impl.csproj
+		SccProjectName5 = Atlantis.Framework.AuctionBidCloseOuts.Impl
+		SccLocalPath5 = Atlantis.Framework.AuctionBidCloseOuts.Impl
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.AuctionBidCloseOuts.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9446FDA4-172F-4B7E-8E7A-EDE1E2A3997F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9446FDA4-172F-4B7E-8E7A-EDE1E2A3997F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9446FDA4-172F-4B7E-8E7A-EDE1E2A3997F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9446FDA4-172F-4B7E-8E7A-EDE1E2A3997F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11219451-BA84-413F-8E11-782CE369C7BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11219451-BA84-413F-8E11-782CE369C7BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11219451-BA84-413F-8E11-782CE369C7BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11219451-BA84-413F-8E11-782CE369C7BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8FEBD70-FD40-4C0E-83EE-99F73E3CFDC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8FEBD70-FD40-4C0E-83EE-99F73E3CFDC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8FEBD70-FD40-4C0E-83EE-99F73E3CFDC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8FEBD70-FD40-4C0E-83EE-99F73E3CFDC2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {405AFD44-36AE-4BF5-A478-81A8674781CF}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {405AFD44-36AE-4BF5-A478-81A8674781CF}
+	EndGlobalSection
+EndGlobal

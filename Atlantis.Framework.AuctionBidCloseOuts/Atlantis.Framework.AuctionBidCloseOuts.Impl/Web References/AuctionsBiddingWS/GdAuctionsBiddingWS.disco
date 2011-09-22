@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://auctions.test.godaddy-com.ide/gdAuctionsWS/GdAuctionsBiddingWS.asmx?wsdl" docRef="http://auctions.test.godaddy-com.ide/gdAuctionsWS/GdAuctionsBiddingWS.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://auctions.test.godaddy-com.ide/gdAuctionsWS/GdAuctionsBiddingWS.asmx" xmlns:q1="GdAuctionsBiddingWS" binding="q1:GdAuctionsBiddingWSSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://auctions.test.godaddy-com.ide/gdAuctionsWS/GdAuctionsBiddingWS.asmx" xmlns:q2="GdAuctionsBiddingWS" binding="q2:GdAuctionsBiddingWSSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

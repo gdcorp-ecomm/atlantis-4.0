@@ -1,0 +1,103 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4F82EBB2-C403-421E-A4C7-3A0FF67C7375}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECC.Interface", "..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\Atlantis.Framework.ECC.Interface.csproj", "{35A2F607-EB94-4A71-9A01-2285357D3A61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetCalendarDetails.Impl", "Atlantis.Framework.ECCGetCalendarDetails.Impl\Atlantis.Framework.ECCGetCalendarDetails.Impl.csproj", "{CCCB5AEF-F9A3-435D-BBBA-03F992F26F40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetCalendarDetails.Interface", "Atlantis.Framework.ECCGetCalendarDetails.Interface\Atlantis.Framework.ECCGetCalendarDetails.Interface.csproj", "{6FDC8AE5-E70E-4540-9219-87EF29AA1EE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetCalendarDetails.Tests", "Atlantis.Framework.ECCGetCalendarDetails.Tests\Atlantis.Framework.ECCGetCalendarDetails.Tests.csproj", "{92DC7106-D37A-48C9-ADF3-A970091D1108}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6A5344E4-037C-4564-A6A1-D3BE14ED10B2}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.ECCGetCalendarDetails.vsmdi = Atlantis.Framework.ECCGetCalendarDetails.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.ECCGetCalendarDetails.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.ECCGetCalendarDetails.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.ECCGetCalendarDetails.sln
+		SccProjectName3 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface\\Atlantis.Framework.ECC.Interface.csproj
+		SccProjectName4 = ../Atlantis.Framework.ECC/Atlantis.Framework.ECC.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.ECCGetCalendarDetails.Impl\\Atlantis.Framework.ECCGetCalendarDetails.Impl.csproj
+		SccProjectName5 = Atlantis.Framework.ECCGetCalendarDetails.Impl
+		SccLocalPath5 = Atlantis.Framework.ECCGetCalendarDetails.Impl
+		SccProjectUniqueName6 = Atlantis.Framework.ECCGetCalendarDetails.Interface\\Atlantis.Framework.ECCGetCalendarDetails.Interface.csproj
+		SccProjectName6 = Atlantis.Framework.ECCGetCalendarDetails.Interface
+		SccLocalPath6 = Atlantis.Framework.ECCGetCalendarDetails.Interface
+		SccProjectUniqueName7 = Atlantis.Framework.ECCGetCalendarDetails.Tests\\Atlantis.Framework.ECCGetCalendarDetails.Tests.csproj
+		SccProjectName7 = Atlantis.Framework.ECCGetCalendarDetails.Tests
+		SccLocalPath7 = Atlantis.Framework.ECCGetCalendarDetails.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.ECCGetCalendarDetails.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCCB5AEF-F9A3-435D-BBBA-03F992F26F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCCB5AEF-F9A3-435D-BBBA-03F992F26F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCCB5AEF-F9A3-435D-BBBA-03F992F26F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCCB5AEF-F9A3-435D-BBBA-03F992F26F40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FDC8AE5-E70E-4540-9219-87EF29AA1EE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FDC8AE5-E70E-4540-9219-87EF29AA1EE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FDC8AE5-E70E-4540-9219-87EF29AA1EE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FDC8AE5-E70E-4540-9219-87EF29AA1EE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92DC7106-D37A-48C9-ADF3-A970091D1108}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92DC7106-D37A-48C9-ADF3-A970091D1108}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92DC7106-D37A-48C9-ADF3-A970091D1108}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92DC7106-D37A-48C9-ADF3-A970091D1108}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {4F82EBB2-C403-421E-A4C7-3A0FF67C7375}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {4F82EBB2-C403-421E-A4C7-3A0FF67C7375}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {4F82EBB2-C403-421E-A4C7-3A0FF67C7375}
+	EndGlobalSection
+EndGlobal

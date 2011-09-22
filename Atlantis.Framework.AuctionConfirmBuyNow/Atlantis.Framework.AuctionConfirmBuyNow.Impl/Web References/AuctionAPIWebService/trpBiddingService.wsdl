@@ -1,0 +1,1734 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="trpBiddingService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="trpBiddingService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Domain Name AfterMarket Bidding WebService.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="trpBiddingService">
+      <s:element name="getServiceStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="getServiceStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getServiceStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetCache">
+        <s:complexType />
+      </s:element>
+      <s:element name="ResetCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResetCacheResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAuctionInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAuctionInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAuctionInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBidInformation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBidInformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBidInformationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceExternalBid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomain" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidderShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidAmount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceExternalBidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PlaceExternalBidResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceBid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidderShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidAmount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceBidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PlaceBidResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sourceSystemID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidderShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidAmount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sComments" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmBidResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBidBulk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBidBulkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmBidBulkResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBackorderBid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidderShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidAmount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBackorderTypeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBackorderId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBackorderBidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmBackorderBidResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceBuyNow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidderShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceBuyNowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PlaceBuyNowResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBuyNowWithSystemId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sourceSystemId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidderShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sComments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sISC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sITC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBuyNowWithSystemIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmBuyNowWithSystemIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBuyNow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidderShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sComments" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBuyNowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmBuyNowResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBuyNowBulk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmBuyNowBulkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmBuyNowBulkResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOffers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOffersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOffersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceCounterOffer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sItemBidID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidAmount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sComments" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceCounterOfferResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PlaceCounterOfferResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmCounterOffer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sItemBidID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sBidAmount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sComments" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmCounterOfferResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmCounterOfferResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceAcceptOffer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sItemBidID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceAcceptOfferResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PlaceAcceptOfferResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmAcceptOffer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sItemBidID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmAcceptOfferResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmAcceptOfferResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmAcceptOfferWithSystemId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sourceSystemID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sItemBidID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmAcceptOfferWithSystemIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmAcceptOfferWithSystemIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBidHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBidHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBidHistoryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getServiceStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:getServiceStatus" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:getServiceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetCache" />
+  </wsdl:message>
+  <wsdl:message name="ResetCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAuctionInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAuctionInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAuctionInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAuctionInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBidInformationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBidInformation" />
+  </wsdl:message>
+  <wsdl:message name="GetBidInformationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBidInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlaceExternalBidSoapIn">
+    <wsdl:part name="parameters" element="tns:PlaceExternalBid" />
+  </wsdl:message>
+  <wsdl:message name="PlaceExternalBidSoapOut">
+    <wsdl:part name="parameters" element="tns:PlaceExternalBidResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBidSoapIn">
+    <wsdl:part name="parameters" element="tns:PlaceBid" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBidSoapOut">
+    <wsdl:part name="parameters" element="tns:PlaceBidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmBid" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmBidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidBulkSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmBidBulk" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidBulkSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmBidBulkResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBackorderBidSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmBackorderBid" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBackorderBidSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmBackorderBidResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBuyNowSoapIn">
+    <wsdl:part name="parameters" element="tns:PlaceBuyNow" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBuyNowSoapOut">
+    <wsdl:part name="parameters" element="tns:PlaceBuyNowResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowWithSystemIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmBuyNowWithSystemId" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowWithSystemIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmBuyNowWithSystemIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmBuyNow" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmBuyNowResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowBulkSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmBuyNowBulk" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowBulkSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmBuyNowBulkResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOffers" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOffersResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlaceCounterOfferSoapIn">
+    <wsdl:part name="parameters" element="tns:PlaceCounterOffer" />
+  </wsdl:message>
+  <wsdl:message name="PlaceCounterOfferSoapOut">
+    <wsdl:part name="parameters" element="tns:PlaceCounterOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmCounterOfferSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmCounterOffer" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmCounterOfferSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmCounterOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlaceAcceptOfferSoapIn">
+    <wsdl:part name="parameters" element="tns:PlaceAcceptOffer" />
+  </wsdl:message>
+  <wsdl:message name="PlaceAcceptOfferSoapOut">
+    <wsdl:part name="parameters" element="tns:PlaceAcceptOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmAcceptOffer" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmAcceptOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferWithSystemIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmAcceptOfferWithSystemId" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferWithSystemIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmAcceptOfferWithSystemIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBidHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetBidHistory" />
+  </wsdl:message>
+  <wsdl:message name="GetBidHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetBidHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusHttpGetIn" />
+  <wsdl:message name="getServiceStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ResetCacheHttpGetIn" />
+  <wsdl:message name="ResetCacheHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAuctionInfoHttpGetIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAuctionInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBidInformationHttpGetIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBidInformationHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceExternalBidHttpGetIn">
+    <wsdl:part name="sDomain" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceExternalBidHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBidHttpGetIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBidHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidHttpGetIn">
+    <wsdl:part name="sourceSystemID" type="s:string" />
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+    <wsdl:part name="sComments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidBulkHttpGetIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidBulkHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBackorderBidHttpGetIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+    <wsdl:part name="sBackorderTypeID" type="s:string" />
+    <wsdl:part name="sBackorderId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBackorderBidHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBuyNowHttpGetIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBuyNowHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowWithSystemIdHttpGetIn">
+    <wsdl:part name="sourceSystemId" type="s:string" />
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sComments" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+    <wsdl:part name="sITC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowWithSystemIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowHttpGetIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sComments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowBulkHttpGetIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowBulkHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersHttpGetIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceCounterOfferHttpGetIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sItemBidID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+    <wsdl:part name="sComments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceCounterOfferHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmCounterOfferHttpGetIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sItemBidID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+    <wsdl:part name="sComments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmCounterOfferHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceAcceptOfferHttpGetIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sItemBidID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceAcceptOfferHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferHttpGetIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sItemBidID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferWithSystemIdHttpGetIn">
+    <wsdl:part name="sourceSystemID" type="s:string" />
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sItemBidID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferWithSystemIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBidHistoryHttpGetIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBidHistoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusHttpPostIn" />
+  <wsdl:message name="getServiceStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ResetCacheHttpPostIn" />
+  <wsdl:message name="ResetCacheHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAuctionInfoHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAuctionInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBidInformationHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBidInformationHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceExternalBidHttpPostIn">
+    <wsdl:part name="sDomain" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceExternalBidHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBidHttpPostIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBidHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidHttpPostIn">
+    <wsdl:part name="sourceSystemID" type="s:string" />
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+    <wsdl:part name="sComments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidBulkHttpPostIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBidBulkHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBackorderBidHttpPostIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+    <wsdl:part name="sBackorderTypeID" type="s:string" />
+    <wsdl:part name="sBackorderId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBackorderBidHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBuyNowHttpPostIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBuyNowHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowWithSystemIdHttpPostIn">
+    <wsdl:part name="sourceSystemId" type="s:string" />
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sComments" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+    <wsdl:part name="sITC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowWithSystemIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowHttpPostIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sBidderShopperID" type="s:string" />
+    <wsdl:part name="sComments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowBulkHttpPostIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmBuyNowBulkHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersHttpPostIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceCounterOfferHttpPostIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sItemBidID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+    <wsdl:part name="sComments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceCounterOfferHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmCounterOfferHttpPostIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sItemBidID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sBidAmount" type="s:string" />
+    <wsdl:part name="sComments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmCounterOfferHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceAcceptOfferHttpPostIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sItemBidID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PlaceAcceptOfferHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferHttpPostIn">
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sItemBidID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferWithSystemIdHttpPostIn">
+    <wsdl:part name="sourceSystemID" type="s:string" />
+    <wsdl:part name="sMemberItemID" type="s:string" />
+    <wsdl:part name="sItemBidID" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmAcceptOfferWithSystemIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBidHistoryHttpPostIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBidHistoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="trpBiddingServiceSoap">
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusSoapIn" />
+      <wsdl:output message="tns:getServiceStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <wsdl:input message="tns:ResetCacheSoapIn" />
+      <wsdl:output message="tns:ResetCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuctionInfo">
+      <wsdl:input message="tns:GetAuctionInfoSoapIn" />
+      <wsdl:output message="tns:GetAuctionInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBidInformation">
+      <wsdl:input message="tns:GetBidInformationSoapIn" />
+      <wsdl:output message="tns:GetBidInformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceExternalBid">
+      <wsdl:input message="tns:PlaceExternalBidSoapIn" />
+      <wsdl:output message="tns:PlaceExternalBidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBid">
+      <wsdl:input message="tns:PlaceBidSoapIn" />
+      <wsdl:output message="tns:PlaceBidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBid">
+      <wsdl:input message="tns:ConfirmBidSoapIn" />
+      <wsdl:output message="tns:ConfirmBidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBidBulk">
+      <wsdl:input message="tns:ConfirmBidBulkSoapIn" />
+      <wsdl:output message="tns:ConfirmBidBulkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBackorderBid">
+      <wsdl:input message="tns:ConfirmBackorderBidSoapIn" />
+      <wsdl:output message="tns:ConfirmBackorderBidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBuyNow">
+      <wsdl:input message="tns:PlaceBuyNowSoapIn" />
+      <wsdl:output message="tns:PlaceBuyNowSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowWithSystemId">
+      <wsdl:input message="tns:ConfirmBuyNowWithSystemIdSoapIn" />
+      <wsdl:output message="tns:ConfirmBuyNowWithSystemIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNow">
+      <wsdl:input message="tns:ConfirmBuyNowSoapIn" />
+      <wsdl:output message="tns:ConfirmBuyNowSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowBulk">
+      <wsdl:input message="tns:ConfirmBuyNowBulkSoapIn" />
+      <wsdl:output message="tns:ConfirmBuyNowBulkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOffers">
+      <wsdl:input message="tns:GetOffersSoapIn" />
+      <wsdl:output message="tns:GetOffersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceCounterOffer">
+      <wsdl:input message="tns:PlaceCounterOfferSoapIn" />
+      <wsdl:output message="tns:PlaceCounterOfferSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmCounterOffer">
+      <wsdl:input message="tns:ConfirmCounterOfferSoapIn" />
+      <wsdl:output message="tns:ConfirmCounterOfferSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceAcceptOffer">
+      <wsdl:input message="tns:PlaceAcceptOfferSoapIn" />
+      <wsdl:output message="tns:PlaceAcceptOfferSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOffer">
+      <wsdl:input message="tns:ConfirmAcceptOfferSoapIn" />
+      <wsdl:output message="tns:ConfirmAcceptOfferSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
+      <wsdl:input message="tns:ConfirmAcceptOfferWithSystemIdSoapIn" />
+      <wsdl:output message="tns:ConfirmAcceptOfferWithSystemIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBidHistory">
+      <wsdl:input message="tns:GetBidHistorySoapIn" />
+      <wsdl:output message="tns:GetBidHistorySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="trpBiddingServiceHttpGet">
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusHttpGetIn" />
+      <wsdl:output message="tns:getServiceStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <wsdl:input message="tns:ResetCacheHttpGetIn" />
+      <wsdl:output message="tns:ResetCacheHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuctionInfo">
+      <wsdl:input message="tns:GetAuctionInfoHttpGetIn" />
+      <wsdl:output message="tns:GetAuctionInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBidInformation">
+      <wsdl:input message="tns:GetBidInformationHttpGetIn" />
+      <wsdl:output message="tns:GetBidInformationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceExternalBid">
+      <wsdl:input message="tns:PlaceExternalBidHttpGetIn" />
+      <wsdl:output message="tns:PlaceExternalBidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBid">
+      <wsdl:input message="tns:PlaceBidHttpGetIn" />
+      <wsdl:output message="tns:PlaceBidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBid">
+      <wsdl:input message="tns:ConfirmBidHttpGetIn" />
+      <wsdl:output message="tns:ConfirmBidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBidBulk">
+      <wsdl:input message="tns:ConfirmBidBulkHttpGetIn" />
+      <wsdl:output message="tns:ConfirmBidBulkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBackorderBid">
+      <wsdl:input message="tns:ConfirmBackorderBidHttpGetIn" />
+      <wsdl:output message="tns:ConfirmBackorderBidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBuyNow">
+      <wsdl:input message="tns:PlaceBuyNowHttpGetIn" />
+      <wsdl:output message="tns:PlaceBuyNowHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowWithSystemId">
+      <wsdl:input message="tns:ConfirmBuyNowWithSystemIdHttpGetIn" />
+      <wsdl:output message="tns:ConfirmBuyNowWithSystemIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNow">
+      <wsdl:input message="tns:ConfirmBuyNowHttpGetIn" />
+      <wsdl:output message="tns:ConfirmBuyNowHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowBulk">
+      <wsdl:input message="tns:ConfirmBuyNowBulkHttpGetIn" />
+      <wsdl:output message="tns:ConfirmBuyNowBulkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOffers">
+      <wsdl:input message="tns:GetOffersHttpGetIn" />
+      <wsdl:output message="tns:GetOffersHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceCounterOffer">
+      <wsdl:input message="tns:PlaceCounterOfferHttpGetIn" />
+      <wsdl:output message="tns:PlaceCounterOfferHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmCounterOffer">
+      <wsdl:input message="tns:ConfirmCounterOfferHttpGetIn" />
+      <wsdl:output message="tns:ConfirmCounterOfferHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceAcceptOffer">
+      <wsdl:input message="tns:PlaceAcceptOfferHttpGetIn" />
+      <wsdl:output message="tns:PlaceAcceptOfferHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOffer">
+      <wsdl:input message="tns:ConfirmAcceptOfferHttpGetIn" />
+      <wsdl:output message="tns:ConfirmAcceptOfferHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
+      <wsdl:input message="tns:ConfirmAcceptOfferWithSystemIdHttpGetIn" />
+      <wsdl:output message="tns:ConfirmAcceptOfferWithSystemIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBidHistory">
+      <wsdl:input message="tns:GetBidHistoryHttpGetIn" />
+      <wsdl:output message="tns:GetBidHistoryHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="trpBiddingServiceHttpPost">
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusHttpPostIn" />
+      <wsdl:output message="tns:getServiceStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <wsdl:input message="tns:ResetCacheHttpPostIn" />
+      <wsdl:output message="tns:ResetCacheHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuctionInfo">
+      <wsdl:input message="tns:GetAuctionInfoHttpPostIn" />
+      <wsdl:output message="tns:GetAuctionInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBidInformation">
+      <wsdl:input message="tns:GetBidInformationHttpPostIn" />
+      <wsdl:output message="tns:GetBidInformationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceExternalBid">
+      <wsdl:input message="tns:PlaceExternalBidHttpPostIn" />
+      <wsdl:output message="tns:PlaceExternalBidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBid">
+      <wsdl:input message="tns:PlaceBidHttpPostIn" />
+      <wsdl:output message="tns:PlaceBidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBid">
+      <wsdl:input message="tns:ConfirmBidHttpPostIn" />
+      <wsdl:output message="tns:ConfirmBidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBidBulk">
+      <wsdl:input message="tns:ConfirmBidBulkHttpPostIn" />
+      <wsdl:output message="tns:ConfirmBidBulkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBackorderBid">
+      <wsdl:input message="tns:ConfirmBackorderBidHttpPostIn" />
+      <wsdl:output message="tns:ConfirmBackorderBidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBuyNow">
+      <wsdl:input message="tns:PlaceBuyNowHttpPostIn" />
+      <wsdl:output message="tns:PlaceBuyNowHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowWithSystemId">
+      <wsdl:input message="tns:ConfirmBuyNowWithSystemIdHttpPostIn" />
+      <wsdl:output message="tns:ConfirmBuyNowWithSystemIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNow">
+      <wsdl:input message="tns:ConfirmBuyNowHttpPostIn" />
+      <wsdl:output message="tns:ConfirmBuyNowHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowBulk">
+      <wsdl:input message="tns:ConfirmBuyNowBulkHttpPostIn" />
+      <wsdl:output message="tns:ConfirmBuyNowBulkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOffers">
+      <wsdl:input message="tns:GetOffersHttpPostIn" />
+      <wsdl:output message="tns:GetOffersHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceCounterOffer">
+      <wsdl:input message="tns:PlaceCounterOfferHttpPostIn" />
+      <wsdl:output message="tns:PlaceCounterOfferHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmCounterOffer">
+      <wsdl:input message="tns:ConfirmCounterOfferHttpPostIn" />
+      <wsdl:output message="tns:ConfirmCounterOfferHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceAcceptOffer">
+      <wsdl:input message="tns:PlaceAcceptOfferHttpPostIn" />
+      <wsdl:output message="tns:PlaceAcceptOfferHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOffer">
+      <wsdl:input message="tns:ConfirmAcceptOfferHttpPostIn" />
+      <wsdl:output message="tns:ConfirmAcceptOfferHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
+      <wsdl:input message="tns:ConfirmAcceptOfferWithSystemIdHttpPostIn" />
+      <wsdl:output message="tns:ConfirmAcceptOfferWithSystemIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBidHistory">
+      <wsdl:input message="tns:GetBidHistoryHttpPostIn" />
+      <wsdl:output message="tns:GetBidHistoryHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="trpBiddingServiceSoap" type="tns:trpBiddingServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServiceStatus">
+      <soap:operation soapAction="trpBiddingService/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <soap:operation soapAction="trpBiddingService/ResetCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuctionInfo">
+      <soap:operation soapAction="trpBiddingService/GetAuctionInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBidInformation">
+      <soap:operation soapAction="trpBiddingService/GetBidInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceExternalBid">
+      <soap:operation soapAction="trpBiddingService/PlaceExternalBid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBid">
+      <soap:operation soapAction="trpBiddingService/PlaceBid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBid">
+      <soap:operation soapAction="trpBiddingService/ConfirmBid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBidBulk">
+      <soap:operation soapAction="trpBiddingService/ConfirmBidBulk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBackorderBid">
+      <soap:operation soapAction="trpBiddingService/ConfirmBackorderBid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBuyNow">
+      <soap:operation soapAction="trpBiddingService/PlaceBuyNow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowWithSystemId">
+      <soap:operation soapAction="trpBiddingService/ConfirmBuyNowWithSystemId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNow">
+      <soap:operation soapAction="trpBiddingService/ConfirmBuyNow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowBulk">
+      <soap:operation soapAction="trpBiddingService/ConfirmBuyNowBulk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffers">
+      <soap:operation soapAction="trpBiddingService/GetOffers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceCounterOffer">
+      <soap:operation soapAction="trpBiddingService/PlaceCounterOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmCounterOffer">
+      <soap:operation soapAction="trpBiddingService/ConfirmCounterOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceAcceptOffer">
+      <soap:operation soapAction="trpBiddingService/PlaceAcceptOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOffer">
+      <soap:operation soapAction="trpBiddingService/ConfirmAcceptOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
+      <soap:operation soapAction="trpBiddingService/ConfirmAcceptOfferWithSystemId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBidHistory">
+      <soap:operation soapAction="trpBiddingService/GetBidHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="trpBiddingServiceSoap12" type="tns:trpBiddingServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServiceStatus">
+      <soap12:operation soapAction="trpBiddingService/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <soap12:operation soapAction="trpBiddingService/ResetCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuctionInfo">
+      <soap12:operation soapAction="trpBiddingService/GetAuctionInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBidInformation">
+      <soap12:operation soapAction="trpBiddingService/GetBidInformation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceExternalBid">
+      <soap12:operation soapAction="trpBiddingService/PlaceExternalBid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBid">
+      <soap12:operation soapAction="trpBiddingService/PlaceBid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBid">
+      <soap12:operation soapAction="trpBiddingService/ConfirmBid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBidBulk">
+      <soap12:operation soapAction="trpBiddingService/ConfirmBidBulk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBackorderBid">
+      <soap12:operation soapAction="trpBiddingService/ConfirmBackorderBid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBuyNow">
+      <soap12:operation soapAction="trpBiddingService/PlaceBuyNow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowWithSystemId">
+      <soap12:operation soapAction="trpBiddingService/ConfirmBuyNowWithSystemId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNow">
+      <soap12:operation soapAction="trpBiddingService/ConfirmBuyNow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowBulk">
+      <soap12:operation soapAction="trpBiddingService/ConfirmBuyNowBulk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffers">
+      <soap12:operation soapAction="trpBiddingService/GetOffers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceCounterOffer">
+      <soap12:operation soapAction="trpBiddingService/PlaceCounterOffer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmCounterOffer">
+      <soap12:operation soapAction="trpBiddingService/ConfirmCounterOffer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceAcceptOffer">
+      <soap12:operation soapAction="trpBiddingService/PlaceAcceptOffer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOffer">
+      <soap12:operation soapAction="trpBiddingService/ConfirmAcceptOffer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
+      <soap12:operation soapAction="trpBiddingService/ConfirmAcceptOfferWithSystemId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBidHistory">
+      <soap12:operation soapAction="trpBiddingService/GetBidHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="trpBiddingServiceHttpGet" type="tns:trpBiddingServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="getServiceStatus">
+      <http:operation location="/getServiceStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <http:operation location="/ResetCache" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuctionInfo">
+      <http:operation location="/GetAuctionInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBidInformation">
+      <http:operation location="/GetBidInformation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceExternalBid">
+      <http:operation location="/PlaceExternalBid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBid">
+      <http:operation location="/PlaceBid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBid">
+      <http:operation location="/ConfirmBid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBidBulk">
+      <http:operation location="/ConfirmBidBulk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBackorderBid">
+      <http:operation location="/ConfirmBackorderBid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBuyNow">
+      <http:operation location="/PlaceBuyNow" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowWithSystemId">
+      <http:operation location="/ConfirmBuyNowWithSystemId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNow">
+      <http:operation location="/ConfirmBuyNow" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowBulk">
+      <http:operation location="/ConfirmBuyNowBulk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffers">
+      <http:operation location="/GetOffers" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceCounterOffer">
+      <http:operation location="/PlaceCounterOffer" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmCounterOffer">
+      <http:operation location="/ConfirmCounterOffer" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceAcceptOffer">
+      <http:operation location="/PlaceAcceptOffer" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOffer">
+      <http:operation location="/ConfirmAcceptOffer" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
+      <http:operation location="/ConfirmAcceptOfferWithSystemId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBidHistory">
+      <http:operation location="/GetBidHistory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="trpBiddingServiceHttpPost" type="tns:trpBiddingServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getServiceStatus">
+      <http:operation location="/getServiceStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <http:operation location="/ResetCache" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuctionInfo">
+      <http:operation location="/GetAuctionInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBidInformation">
+      <http:operation location="/GetBidInformation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceExternalBid">
+      <http:operation location="/PlaceExternalBid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBid">
+      <http:operation location="/PlaceBid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBid">
+      <http:operation location="/ConfirmBid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBidBulk">
+      <http:operation location="/ConfirmBidBulk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBackorderBid">
+      <http:operation location="/ConfirmBackorderBid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBuyNow">
+      <http:operation location="/PlaceBuyNow" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowWithSystemId">
+      <http:operation location="/ConfirmBuyNowWithSystemId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNow">
+      <http:operation location="/ConfirmBuyNow" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmBuyNowBulk">
+      <http:operation location="/ConfirmBuyNowBulk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffers">
+      <http:operation location="/GetOffers" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceCounterOffer">
+      <http:operation location="/PlaceCounterOffer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmCounterOffer">
+      <http:operation location="/ConfirmCounterOffer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceAcceptOffer">
+      <http:operation location="/PlaceAcceptOffer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOffer">
+      <http:operation location="/ConfirmAcceptOffer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
+      <http:operation location="/ConfirmAcceptOfferWithSystemId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBidHistory">
+      <http:operation location="/GetBidHistory" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="trpBiddingService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Domain Name AfterMarket Bidding WebService.</wsdl:documentation>
+    <wsdl:port name="trpBiddingServiceSoap" binding="tns:trpBiddingServiceSoap">
+      <soap:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="trpBiddingServiceSoap12" binding="tns:trpBiddingServiceSoap12">
+      <soap12:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="trpBiddingServiceHttpGet" binding="tns:trpBiddingServiceHttpGet">
+      <http:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="trpBiddingServiceHttpPost" binding="tns:trpBiddingServiceHttpPost">
+      <http:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{037B8406-A559-4406-BE8C-F1411F9C6066}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionConfirmBuyNow.Impl", "Atlantis.Framework.AuctionConfirmBuyNow.Impl\Atlantis.Framework.AuctionConfirmBuyNow.Impl.csproj", "{AC6F11DF-7F58-4644-A944-C62BC70A5B1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionConfirmBuyNow.Interface", "Atlantis.Framework.AuctionConfirmBuyNow.Interface\Atlantis.Framework.AuctionConfirmBuyNow.Interface.csproj", "{EBCAA29F-21EE-4361-A512-10448018D437}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionConfirmBuyNow.Tests", "Atlantis.Framework.AuctionConfirmBuyNow.Tests\Atlantis.Framework.AuctionConfirmBuyNow.Tests.csproj", "{1ED38D9D-E7B0-4B6D-B892-5B6F8E04AAAD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93707A97-1138-4D89-A472-0E7B5D027A56}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.AuctionConfirmBuyNow.vsmdi = Atlantis.Framework.AuctionConfirmBuyNow.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.AuctionConfirmBuyNow.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.AuctionConfirmBuyNow.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.AuctionConfirmBuyNow.Impl\\Atlantis.Framework.AuctionConfirmBuyNow.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.AuctionConfirmBuyNow.Impl
+		SccLocalPath3 = Atlantis.Framework.AuctionConfirmBuyNow.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.AuctionConfirmBuyNow.Interface\\Atlantis.Framework.AuctionConfirmBuyNow.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.AuctionConfirmBuyNow.Interface
+		SccLocalPath4 = Atlantis.Framework.AuctionConfirmBuyNow.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.AuctionConfirmBuyNow.Tests\\Atlantis.Framework.AuctionConfirmBuyNow.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.AuctionConfirmBuyNow.Tests
+		SccLocalPath5 = Atlantis.Framework.AuctionConfirmBuyNow.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.AuctionConfirmBuyNow.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC6F11DF-7F58-4644-A944-C62BC70A5B1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC6F11DF-7F58-4644-A944-C62BC70A5B1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC6F11DF-7F58-4644-A944-C62BC70A5B1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC6F11DF-7F58-4644-A944-C62BC70A5B1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBCAA29F-21EE-4361-A512-10448018D437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBCAA29F-21EE-4361-A512-10448018D437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBCAA29F-21EE-4361-A512-10448018D437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBCAA29F-21EE-4361-A512-10448018D437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ED38D9D-E7B0-4B6D-B892-5B6F8E04AAAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ED38D9D-E7B0-4B6D-B892-5B6F8E04AAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ED38D9D-E7B0-4B6D-B892-5B6F8E04AAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ED38D9D-E7B0-4B6D-B892-5B6F8E04AAAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {037B8406-A559-4406-BE8C-F1411F9C6066}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {037B8406-A559-4406-BE8C-F1411F9C6066}
+	EndGlobalSection
+EndGlobal

@@ -121,11 +121,39 @@ namespace Atlantis.Framework.Engine
     public ConfigElement GetConfig(int key)
     {
       ConfigElement configItem = null;
+
       _engineLock.GetReaderLock();
-      if (!_configItems.TryGetValue(key, out configItem))
-        throw new Exception(String.Format("Unable to Find ConfigElement for Request Type: {0}", key));
-      _engineLock.ReleaseReaderLock();
+      try
+      {
+        if (!_configItems.TryGetValue(key, out configItem))
+        {
+          throw new Exception(String.Format("Unable to Find ConfigElement for Request Type: {0}", key));
+        }
+      }
+      finally
+      {
+        _engineLock.ReleaseReaderLock();
+      }
       return configItem;
+    }
+
+    public List<ConfigElement> GetAllConfigs()
+    {
+      List<ConfigElement> result = new List<ConfigElement>(_configItems.Count);
+      _engineLock.GetReaderLock();
+      try
+      {
+        foreach (int requestType in _configItems.Keys)
+        {
+          result.Add(_configItems[requestType]);
+        }
+      }
+      finally
+      {
+        _engineLock.ReleaseReaderLock();
+      }
+
+      return result;
     }
 
     private string AssemblyPath

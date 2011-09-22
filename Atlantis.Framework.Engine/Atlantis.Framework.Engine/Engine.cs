@@ -311,6 +311,11 @@ namespace Atlantis.Framework.Engine
       _requestLock.ReleaseWriterLock();
     }
 
+    public static IList<ConfigElement> GetConfigElements()
+    {
+      return _engineConfig.GetAllConfigs();
+    }
+
   }
 
 }

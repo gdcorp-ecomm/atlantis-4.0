@@ -1,0 +1,102 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AB8BC41F-0FBE-4FB0-BB99-13384FF6BBE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECC.Interface", "..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\Atlantis.Framework.ECC.Interface.csproj", "{35A2F607-EB94-4A71-9A01-2285357D3A61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetEmailAddressesForDomain.Impl", "Atlantis.Framework.ECCGetEmailAddressesForDomain.Impl\Atlantis.Framework.ECCGetEmailAddressesForDomain.Impl.csproj", "{4B383B7D-4262-48B8-BA3E-6B7243FD8701}"
+	ProjectSection(ProjectDependencies) = postProject
+		{35A2F607-EB94-4A71-9A01-2285357D3A61} = {35A2F607-EB94-4A71-9A01-2285357D3A61}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A083A52E-C3C3-42E0-8DFD-54719E4C3B25}
+		{E9EA36D8-BE8F-49E8-BF7B-B9D5B2F1C8E1} = {E9EA36D8-BE8F-49E8-BF7B-B9D5B2F1C8E1}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D30157B2-C1B3-4073-BA5E-632E2337A997}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetEmailAddressesForDomain.Interface", "Atlantis.Framework.ECCGetEmailAddressesForDomain.Int\Atlantis.Framework.ECCGetEmailAddressesForDomain.Interface.csproj", "{E9EA36D8-BE8F-49E8-BF7B-B9D5B2F1C8E1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A083A52E-C3C3-42E0-8DFD-54719E4C3B25}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D30157B2-C1B3-4073-BA5E-632E2337A997}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{522B9DAD-0A2F-407A-87A9-8C1F59D4E109}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.ECCGetEmailAddressesForDomain.vsmdi = Atlantis.Framework.ECCGetEmailAddressesForDomain.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetEmailAddressesForDomain.Test", "Atlantis.Framework.ECCGetEmailAddressesForDomain.Test\Atlantis.Framework.ECCGetEmailAddressesForDomain.Test.csproj", "{FB5B295E-6AB5-44E6-A39E-43D570F3C73B}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.ECCGetEmailAddressesForDomain.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.ECCGetEmailAddressesForDomain.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface\\Atlantis.Framework.ECC.Interface.csproj
+		SccProjectName3 = ../Atlantis.Framework.ECC/Atlantis.Framework.ECC.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.ECCGetEmailAddressesForDomain.Impl\\Atlantis.Framework.ECCGetEmailAddressesForDomain.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.ECCGetEmailAddressesForDomain.Impl
+		SccLocalPath4 = Atlantis.Framework.ECCGetEmailAddressesForDomain.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.ECCGetEmailAddressesForDomain.Int\\Atlantis.Framework.ECCGetEmailAddressesForDomain.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.ECCGetEmailAddressesForDomain.Int
+		SccLocalPath5 = Atlantis.Framework.ECCGetEmailAddressesForDomain.Int
+		SccProjectUniqueName6 = Atlantis.Framework.ECCGetEmailAddressesForDomain.Test\\Atlantis.Framework.ECCGetEmailAddressesForDomain.Test.csproj
+		SccProjectName6 = Atlantis.Framework.ECCGetEmailAddressesForDomain.Test
+		SccLocalPath6 = Atlantis.Framework.ECCGetEmailAddressesForDomain.Test
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.ECCGetEmailAddressesForDomain.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B383B7D-4262-48B8-BA3E-6B7243FD8701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B383B7D-4262-48B8-BA3E-6B7243FD8701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B383B7D-4262-48B8-BA3E-6B7243FD8701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B383B7D-4262-48B8-BA3E-6B7243FD8701}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9EA36D8-BE8F-49E8-BF7B-B9D5B2F1C8E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9EA36D8-BE8F-49E8-BF7B-B9D5B2F1C8E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9EA36D8-BE8F-49E8-BF7B-B9D5B2F1C8E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9EA36D8-BE8F-49E8-BF7B-B9D5B2F1C8E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB5B295E-6AB5-44E6-A39E-43D570F3C73B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB5B295E-6AB5-44E6-A39E-43D570F3C73B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB5B295E-6AB5-44E6-A39E-43D570F3C73B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB5B295E-6AB5-44E6-A39E-43D570F3C73B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {AB8BC41F-0FBE-4FB0-BB99-13384FF6BBE6}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {AB8BC41F-0FBE-4FB0-BB99-13384FF6BBE6}
+	EndGlobalSection
+EndGlobal

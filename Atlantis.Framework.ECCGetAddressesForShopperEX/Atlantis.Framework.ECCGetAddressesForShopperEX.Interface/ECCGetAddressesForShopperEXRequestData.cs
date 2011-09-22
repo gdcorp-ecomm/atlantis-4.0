@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.Ecc.Interface.Constants;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.ECCGetAddressesForShopperEX.Interface
 {

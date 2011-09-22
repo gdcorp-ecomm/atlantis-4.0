@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Atlantis.Framework.Ecc.Interface.Constants;
 using Atlantis.Framework.ECCGetAddressesForShopperEX.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

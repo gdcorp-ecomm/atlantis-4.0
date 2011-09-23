@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{755BA51D-527B-4667-9F93-0AE5550177DC}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.DCCCreateDNS2.vsmdi = Atlantis.Framework.DCCCreateDNS2.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCCreateDNS.Impl", "Atlantis.Framework.DCCCreateDNS.Impl\Atlantis.Framework.DCCCreateDNS.Impl.csproj", "{024C90F7-9741-415A-8CD6-6CE2D5173D5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCCreateDNS.Interface", "Atlantis.Framework.DCCCreateDNS.Interface\Atlantis.Framework.DCCCreateDNS.Interface.csproj", "{D14F4EF4-1E11-4C6D-AAA3-FE65E3DAED38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCCreateDNS.Tests", "Atlantis.Framework.DCCCreateDNS.Tests\Atlantis.Framework.DCCCreateDNS.Tests.csproj", "{0D02F2C4-267D-4820-91B4-63FC2FA2F20C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{56D459F1-7D5E-43E1-97F1-B376D03817A3}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.DCCCreateDNS.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.DCCCreateDNS.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.DCCCreateDNS.Impl\\Atlantis.Framework.DCCCreateDNS.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.DCCCreateDNS.Impl
+		SccLocalPath3 = Atlantis.Framework.DCCCreateDNS.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.DCCCreateDNS.Interface\\Atlantis.Framework.DCCCreateDNS.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.DCCCreateDNS.Interface
+		SccLocalPath4 = Atlantis.Framework.DCCCreateDNS.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.DCCCreateDNS.Tests\\Atlantis.Framework.DCCCreateDNS.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.DCCCreateDNS.Tests
+		SccLocalPath5 = Atlantis.Framework.DCCCreateDNS.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.DCCCreateDNS2.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{024C90F7-9741-415A-8CD6-6CE2D5173D5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{024C90F7-9741-415A-8CD6-6CE2D5173D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{024C90F7-9741-415A-8CD6-6CE2D5173D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{024C90F7-9741-415A-8CD6-6CE2D5173D5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D14F4EF4-1E11-4C6D-AAA3-FE65E3DAED38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D14F4EF4-1E11-4C6D-AAA3-FE65E3DAED38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D14F4EF4-1E11-4C6D-AAA3-FE65E3DAED38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D14F4EF4-1E11-4C6D-AAA3-FE65E3DAED38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D02F2C4-267D-4820-91B4-63FC2FA2F20C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D02F2C4-267D-4820-91B4-63FC2FA2F20C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D02F2C4-267D-4820-91B4-63FC2FA2F20C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D02F2C4-267D-4820-91B4-63FC2FA2F20C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {56D459F1-7D5E-43E1-97F1-B376D03817A3}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {56D459F1-7D5E-43E1-97F1-B376D03817A3}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://metrowebservices.test.secureserver-net.ide/HCAppCountService.asmx?wsdl" docRef="http://metrowebservices.test.secureserver-net.ide/HCAppCountService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://metrowebservices.test.secureserver-net.ide/HCAppCountService.asmx" xmlns:q1="http://metropolis.starfieldtech.com/schemas/HCAppCountService/" binding="q1:HCAppCountServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://metrowebservices.test.secureserver-net.ide/HCAppCountService.asmx" xmlns:q2="http://metropolis.starfieldtech.com/schemas/HCAppCountService/" binding="q2:HCAppCountServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCCreateBlogRecord.Interface", "Atlantis.Framework.DCCCreateBlogRecord.Interface\Atlantis.Framework.DCCCreateBlogRecord.Interface.csproj", "{A07427E0-274F-42EC-AFF4-E1F0CC336873}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCCreateBlogRecord.Impl", "Atlantis.Framework.DCCCreateBlogRecord.Impl\Atlantis.Framework.DCCCreateBlogRecord.Impl.csproj", "{F7EC53A8-120D-401B-B11F-779DAD0A5E7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCCreateBlogRecord.Tests", "Atlantis.Framework.DCCCreateBlogRecord.Tests\Atlantis.Framework.DCCCreateBlogRecord.Tests.csproj", "{538A9520-196E-476F-A62F-55742C74AD9F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E68992E3-F57F-4F48-A437-693635C775B4}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.DCCCreateBlogRecord.vsmdi = Atlantis.Framework.DCCCreateBlogRecord.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{EB1114B4-EFEA-4706-AE21-F7A0A9ADED6B}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.DCCCreateBlogRecord.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.DCCCreateBlogRecord.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.DCCCreateBlogRecord.Impl\\Atlantis.Framework.DCCCreateBlogRecord.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.DCCCreateBlogRecord.Impl
+		SccLocalPath3 = Atlantis.Framework.DCCCreateBlogRecord.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.DCCCreateBlogRecord.Interface\\Atlantis.Framework.DCCCreateBlogRecord.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.DCCCreateBlogRecord.Interface
+		SccLocalPath4 = Atlantis.Framework.DCCCreateBlogRecord.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.DCCCreateBlogRecord.Tests\\Atlantis.Framework.DCCCreateBlogRecord.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.DCCCreateBlogRecord.Tests
+		SccLocalPath5 = Atlantis.Framework.DCCCreateBlogRecord.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.DCCCreateBlogRecord.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A07427E0-274F-42EC-AFF4-E1F0CC336873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A07427E0-274F-42EC-AFF4-E1F0CC336873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A07427E0-274F-42EC-AFF4-E1F0CC336873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A07427E0-274F-42EC-AFF4-E1F0CC336873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7EC53A8-120D-401B-B11F-779DAD0A5E7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7EC53A8-120D-401B-B11F-779DAD0A5E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7EC53A8-120D-401B-B11F-779DAD0A5E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7EC53A8-120D-401B-B11F-779DAD0A5E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{538A9520-196E-476F-A62F-55742C74AD9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{538A9520-196E-476F-A62F-55742C74AD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{538A9520-196E-476F-A62F-55742C74AD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{538A9520-196E-476F-A62F-55742C74AD9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {EB1114B4-EFEA-4706-AE21-F7A0A9ADED6B}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {EB1114B4-EFEA-4706-AE21-F7A0A9ADED6B}
+	EndGlobalSection
+EndGlobal

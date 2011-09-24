@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://mobilehccwebservices.test.secureserver-net.ide:8087/HCCAPIService.asmx?wsdl" docRef="http://mobilehccwebservices.test.secureserver-net.ide:8087/HCCAPIService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://mobilehccwebservices.test.secureserver-net.ide:8087/HCCAPIService.asmx" xmlns:q1="http://hosting.starfieldtech.com/schemas/hostingapiservices/" binding="q1:HCCAPIServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://mobilehccwebservices.test.secureserver-net.ide:8087/HCCAPIService.asmx" xmlns:q2="http://hosting.starfieldtech.com/schemas/hostingapiservices/" binding="q2:HCCAPIServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx?wsdl" docRef="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx" xmlns:q1="trpBiddingService" binding="q1:trpBiddingServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx" xmlns:q2="trpBiddingService" binding="q2:trpBiddingServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

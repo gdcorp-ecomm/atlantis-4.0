@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://testdnaweb01/trpAdminUtilsService/trpAdminUtilsService.asmx?wsdl" docRef="http://testdnaweb01/trpAdminUtilsService/trpAdminUtilsService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://testdnaweb01/trpAdminUtilsService/trpAdminUtilsService.asmx" xmlns:q1="trpAdminUtilsService" binding="q1:trpAdminUtilsServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://testdnaweb01/trpAdminUtilsService/trpAdminUtilsService.asmx" xmlns:q2="trpAdminUtilsService" binding="q2:trpAdminUtilsServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

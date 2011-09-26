@@ -193,6 +193,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Impl
         }
 
         prepaids.Add(new PrepaidAddon(prepaidItem.Attribute("Name").Value,
+                                      int.Parse(prepaidItem.Attribute("CategoryID").Value),
                                       prepaidItem.Attribute("UnifiedProductID").Value,
                                       bool.Parse(prepaidItem.Attribute("IsQuantityBased").Value),
                                       int.Parse(prepaidItem.Attribute("MinQty").Value),

@@ -1,0 +1,3535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="trpAdminUtilsService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="trpAdminUtilsService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Domain Name AfterMarket Administrative WebService.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="trpAdminUtilsService">
+      <s:element name="getRSSStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="getRSSStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getRSSStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getServiceStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDummy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getServiceStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getServiceStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetCache">
+        <s:complexType />
+      </s:element>
+      <s:element name="ResetCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResetCacheResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUnpaidExpiredAuctions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUnpaidExpiredAuctionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUnpaidExpiredAuctionsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUnpaidAuctions">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUnpaidAuctionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUnpaidAuctionsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUnpaidAuctionsByShopperID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUnpaidAuctionsByShopperIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUnpaidAuctionsByShopperIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddExpiredAuctionsToCart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIDList" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sISC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddExpiredAuctionsToCartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddExpiredAuctionsToCartResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddExpiredAuctionsToCartWithITC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIDList" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sISC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sITC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddExpiredAuctionsToCartWithITCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddExpiredAuctionsToCartWithITCResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemsIveWonToCart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIDList" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sISC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemsIveWonToCartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddItemsIveWonToCartResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemsIveWonToCartWithITC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIDList" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sISC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sITC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemsIveWonToCartWithITCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddItemsIveWonToCartWithITCResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddValuePricedDomainToCart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIDList" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sISC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sAgreementsChecked" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddValuePricedDomainToCartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddValuePricedDomainToCartResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MemberIsSubscriber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MemberIsSubscriberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MemberIsSubscriberResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MemberIsActive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MemberIsActiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MemberIsActiveResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddMembershipToCart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sISCCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddMembershipToCartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddMembershipToCartResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMembersAreaBySection">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMembersAreaID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sReturnBids" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMembersAreaBySectionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMembersAreaBySectionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMembersAreaAlerts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMembersAreaAlertsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMembersAreaAlertsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMembersAreaBySingleSection">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMembersAreaID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sReturnBids" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMembersAreaBySingleSectionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMembersAreaBySingleSectionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMembersAreaBySectionXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMembersAreaBySectionXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMembersAreaBySectionXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateMemberPreferences">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPayPalEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRecordsPerPage" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sAdultFilterFlag" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateMemberPreferencesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateMemberPreferencesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadDomainListings">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sInputString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPayPalAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadDomainListingsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadDomainListingsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadDomainListingsToCart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sInputString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPayPalAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sISCCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sAgreementChecked" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadDomainListingsToCartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadDomainListingsToCartResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadDomainListingsToCartVendor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sInputString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPayPalAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sISCCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sAgreementChecked" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sVendorId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadDomainListingsToCartVendorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadDomainListingsToCartVendorResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportAPPayment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportAPPaymentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ImportAPPaymentResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfigSetting">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sConfigFile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfigSettingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConfigSettingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReferenceTable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sTable" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReferenceTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReferenceTableResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OptionList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sOptionType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OptionListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OptionListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSupportedTlds">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSupportedTldsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSupportedTldsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetListingsByShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSearchVal" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sCurrentPageIndex" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPageSize" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetListingsByShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetListingsByShopperResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpsellShopperListing">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sListingInput" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sISC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpsellShopperListingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpsellShopperListingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BDDomainCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BDDomainCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BDDomainCheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BDHoldDomain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BDHoldDomainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BDHoldDomainResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BDReleaseDomain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BDReleaseDomainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BDReleaseDomainResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CLSItemCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CLSItemCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CLSItemCheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CLSBidCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMaxBidAmount" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPrivateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CLSBidCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CLSBidCreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CLSBidStatusUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sBidID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sStatus" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPrivateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CLSBidStatusUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CLSBidStatusUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CLSBidInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sBidID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHistory" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPrivateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CLSBidInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CLSBidInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTDNAMWhoIs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTDNAMWhoIsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTDNAMWhoIsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuctionSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuctionSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuctionSearchResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberInfoByShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberInfoByShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMemberInfoByShopperResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberSettings">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberSettingsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMemberSettingsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetMemberSettings">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetMemberSettingsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetMemberSettingsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberSavedSearches">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMemberSavedSearchesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMemberSavedSearchesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="int" type="s:int" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getRSSStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:getRSSStatus" />
+  </wsdl:message>
+  <wsdl:message name="getRSSStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:getRSSStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:getServiceStatus" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:getServiceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetCache" />
+  </wsdl:message>
+  <wsdl:message name="ResetCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidExpiredAuctionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUnpaidExpiredAuctions" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidExpiredAuctionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUnpaidExpiredAuctionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidAuctionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUnpaidAuctions" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidAuctionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUnpaidAuctionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidAuctionsByShopperIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUnpaidAuctionsByShopperID" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidAuctionsByShopperIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUnpaidAuctionsByShopperIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartSoapIn">
+    <wsdl:part name="parameters" element="tns:AddExpiredAuctionsToCart" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartSoapOut">
+    <wsdl:part name="parameters" element="tns:AddExpiredAuctionsToCartResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartWithITCSoapIn">
+    <wsdl:part name="parameters" element="tns:AddExpiredAuctionsToCartWithITC" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartWithITCSoapOut">
+    <wsdl:part name="parameters" element="tns:AddExpiredAuctionsToCartWithITCResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartSoapIn">
+    <wsdl:part name="parameters" element="tns:AddItemsIveWonToCart" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartSoapOut">
+    <wsdl:part name="parameters" element="tns:AddItemsIveWonToCartResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartWithITCSoapIn">
+    <wsdl:part name="parameters" element="tns:AddItemsIveWonToCartWithITC" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartWithITCSoapOut">
+    <wsdl:part name="parameters" element="tns:AddItemsIveWonToCartWithITCResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddValuePricedDomainToCartSoapIn">
+    <wsdl:part name="parameters" element="tns:AddValuePricedDomainToCart" />
+  </wsdl:message>
+  <wsdl:message name="AddValuePricedDomainToCartSoapOut">
+    <wsdl:part name="parameters" element="tns:AddValuePricedDomainToCartResponse" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsSubscriberSoapIn">
+    <wsdl:part name="parameters" element="tns:MemberIsSubscriber" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsSubscriberSoapOut">
+    <wsdl:part name="parameters" element="tns:MemberIsSubscriberResponse" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsActiveSoapIn">
+    <wsdl:part name="parameters" element="tns:MemberIsActive" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsActiveSoapOut">
+    <wsdl:part name="parameters" element="tns:MemberIsActiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddMembershipToCartSoapIn">
+    <wsdl:part name="parameters" element="tns:AddMembershipToCart" />
+  </wsdl:message>
+  <wsdl:message name="AddMembershipToCartSoapOut">
+    <wsdl:part name="parameters" element="tns:AddMembershipToCartResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMembersAreaBySection" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMembersAreaBySectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaAlertsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMembersAreaAlerts" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaAlertsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMembersAreaAlertsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySingleSectionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMembersAreaBySingleSection" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySingleSectionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMembersAreaBySingleSectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMembersAreaBySectionXML" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMembersAreaBySectionXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMemberPreferencesSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateMemberPreferences" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMemberPreferencesSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateMemberPreferencesResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadDomainListings" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadDomainListingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadDomainListingsToCart" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadDomainListingsToCartResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartVendorSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadDomainListingsToCartVendor" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartVendorSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadDomainListingsToCartVendorResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImportAPPaymentSoapIn">
+    <wsdl:part name="parameters" element="tns:ImportAPPayment" />
+  </wsdl:message>
+  <wsdl:message name="ImportAPPaymentSoapOut">
+    <wsdl:part name="parameters" element="tns:ImportAPPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSettingSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConfigSetting" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSettingSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConfigSettingResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceTableSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReferenceTable" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceTableSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReferenceTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="OptionListSoapIn">
+    <wsdl:part name="parameters" element="tns:OptionList" />
+  </wsdl:message>
+  <wsdl:message name="OptionListSoapOut">
+    <wsdl:part name="parameters" element="tns:OptionListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSupportedTldsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSupportedTlds" />
+  </wsdl:message>
+  <wsdl:message name="GetSupportedTldsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSupportedTldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetListingsByShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:GetListingsByShopper" />
+  </wsdl:message>
+  <wsdl:message name="GetListingsByShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:GetListingsByShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpsellShopperListingSoapIn">
+    <wsdl:part name="parameters" element="tns:UpsellShopperListing" />
+  </wsdl:message>
+  <wsdl:message name="UpsellShopperListingSoapOut">
+    <wsdl:part name="parameters" element="tns:UpsellShopperListingResponse" />
+  </wsdl:message>
+  <wsdl:message name="BDDomainCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:BDDomainCheck" />
+  </wsdl:message>
+  <wsdl:message name="BDDomainCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:BDDomainCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="BDHoldDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:BDHoldDomain" />
+  </wsdl:message>
+  <wsdl:message name="BDHoldDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:BDHoldDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="BDReleaseDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:BDReleaseDomain" />
+  </wsdl:message>
+  <wsdl:message name="BDReleaseDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:BDReleaseDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="CLSItemCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:CLSItemCheck" />
+  </wsdl:message>
+  <wsdl:message name="CLSItemCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:CLSItemCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:CLSBidCreate" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CLSBidCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidStatusUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:CLSBidStatusUpdate" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidStatusUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:CLSBidStatusUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:CLSBidInfo" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:CLSBidInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTDNAMWhoIsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTDNAMWhoIs" />
+  </wsdl:message>
+  <wsdl:message name="GetTDNAMWhoIsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTDNAMWhoIsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AuctionSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:AuctionSearch" />
+  </wsdl:message>
+  <wsdl:message name="AuctionSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:AuctionSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoByShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMemberInfoByShopper" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoByShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMemberInfoByShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSettingsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMemberSettings" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSettingsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMemberSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetMemberSettingsSoapIn">
+    <wsdl:part name="parameters" element="tns:SetMemberSettings" />
+  </wsdl:message>
+  <wsdl:message name="SetMemberSettingsSoapOut">
+    <wsdl:part name="parameters" element="tns:SetMemberSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSavedSearchesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMemberSavedSearches" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSavedSearchesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMemberSavedSearchesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRSSStatusHttpGetIn" />
+  <wsdl:message name="getRSSStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusHttpGetIn">
+    <wsdl:part name="sDummy" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ResetCacheHttpGetIn" />
+  <wsdl:message name="ResetCacheHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidExpiredAuctionsHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidExpiredAuctionsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidAuctionsHttpGetIn" />
+  <wsdl:message name="GetUnpaidAuctionsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidAuctionsByShopperIDHttpGetIn">
+    <wsdl:part name="ShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidAuctionsByShopperIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sIDList" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartWithITCHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sIDList" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+    <wsdl:part name="sITC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartWithITCHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sIDList" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartWithITCHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sIDList" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+    <wsdl:part name="sITC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartWithITCHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddValuePricedDomainToCartHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sIDList" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+    <wsdl:part name="sAgreementsChecked" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddValuePricedDomainToCartHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsSubscriberHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsSubscriberHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsActiveHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsActiveHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddMembershipToCartHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sISCCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddMembershipToCartHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sMembersAreaID" type="s:string" />
+    <wsdl:part name="sReturnBids" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaAlertsHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaAlertsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySingleSectionHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sMembersAreaID" type="s:string" />
+    <wsdl:part name="sReturnBids" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySingleSectionHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionXMLHttpGetIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionXMLHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMemberPreferencesHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sPayPalEmail" type="s:string" />
+    <wsdl:part name="sRecordsPerPage" type="s:string" />
+    <wsdl:part name="sAdultFilterFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMemberPreferencesHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sInputString" type="s:string" />
+    <wsdl:part name="sPayPalAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sInputString" type="s:string" />
+    <wsdl:part name="sPayPalAddress" type="s:string" />
+    <wsdl:part name="sISCCode" type="s:string" />
+    <wsdl:part name="sAgreementChecked" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartVendorHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sInputString" type="s:string" />
+    <wsdl:part name="sPayPalAddress" type="s:string" />
+    <wsdl:part name="sISCCode" type="s:string" />
+    <wsdl:part name="sAgreementChecked" type="s:string" />
+    <wsdl:part name="sVendorId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartVendorHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ImportAPPaymentHttpGetIn">
+    <wsdl:part name="xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ImportAPPaymentHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSettingHttpGetIn">
+    <wsdl:part name="sConfigFile" type="s:string" />
+    <wsdl:part name="sKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSettingHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceTableHttpGetIn">
+    <wsdl:part name="sTable" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceTableHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="OptionListHttpGetIn">
+    <wsdl:part name="sOptionType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OptionListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSupportedTldsHttpGetIn" />
+  <wsdl:message name="GetSupportedTldsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetListingsByShopperHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sSearchVal" type="s:string" />
+    <wsdl:part name="sCurrentPageIndex" type="s:string" />
+    <wsdl:part name="sPageSize" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetListingsByShopperHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpsellShopperListingHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sListingInput" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpsellShopperListingHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BDDomainCheckHttpGetIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BDDomainCheckHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BDHoldDomainHttpGetIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BDHoldDomainHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BDReleaseDomainHttpGetIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BDReleaseDomainHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSItemCheckHttpGetIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSItemCheckHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidCreateHttpGetIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+    <wsdl:part name="sMaxBidAmount" type="s:string" />
+    <wsdl:part name="iPrivateLabelID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidCreateHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidStatusUpdateHttpGetIn">
+    <wsdl:part name="sBidID" type="s:string" />
+    <wsdl:part name="sStatus" type="s:string" />
+    <wsdl:part name="iPrivateLabelID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidStatusUpdateHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidInfoHttpGetIn">
+    <wsdl:part name="sBidID" type="s:string" />
+    <wsdl:part name="sHistory" type="s:string" />
+    <wsdl:part name="iPrivateLabelID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTDNAMWhoIsHttpGetIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTDNAMWhoIsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AuctionSearchHttpGetIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AuctionSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoByShopperHttpGetIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoByShopperHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSettingsHttpGetIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSettingsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SetMemberSettingsHttpGetIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetMemberSettingsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSavedSearchesHttpGetIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSavedSearchesHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getRSSStatusHttpPostIn" />
+  <wsdl:message name="getRSSStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusHttpPostIn">
+    <wsdl:part name="sDummy" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ResetCacheHttpPostIn" />
+  <wsdl:message name="ResetCacheHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidExpiredAuctionsHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidExpiredAuctionsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidAuctionsHttpPostIn" />
+  <wsdl:message name="GetUnpaidAuctionsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidAuctionsByShopperIDHttpPostIn">
+    <wsdl:part name="ShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUnpaidAuctionsByShopperIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sIDList" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartWithITCHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sIDList" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+    <wsdl:part name="sITC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddExpiredAuctionsToCartWithITCHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sIDList" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartWithITCHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sIDList" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+    <wsdl:part name="sITC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddItemsIveWonToCartWithITCHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddValuePricedDomainToCartHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sIDList" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+    <wsdl:part name="sAgreementsChecked" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddValuePricedDomainToCartHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsSubscriberHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsSubscriberHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsActiveHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MemberIsActiveHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AddMembershipToCartHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sISCCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddMembershipToCartHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sMembersAreaID" type="s:string" />
+    <wsdl:part name="sReturnBids" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaAlertsHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaAlertsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySingleSectionHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sMembersAreaID" type="s:string" />
+    <wsdl:part name="sReturnBids" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySingleSectionHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionXMLHttpPostIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMembersAreaBySectionXMLHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMemberPreferencesHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sPayPalEmail" type="s:string" />
+    <wsdl:part name="sRecordsPerPage" type="s:string" />
+    <wsdl:part name="sAdultFilterFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMemberPreferencesHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sInputString" type="s:string" />
+    <wsdl:part name="sPayPalAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sInputString" type="s:string" />
+    <wsdl:part name="sPayPalAddress" type="s:string" />
+    <wsdl:part name="sISCCode" type="s:string" />
+    <wsdl:part name="sAgreementChecked" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartVendorHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sInputString" type="s:string" />
+    <wsdl:part name="sPayPalAddress" type="s:string" />
+    <wsdl:part name="sISCCode" type="s:string" />
+    <wsdl:part name="sAgreementChecked" type="s:string" />
+    <wsdl:part name="sVendorId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDomainListingsToCartVendorHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ImportAPPaymentHttpPostIn">
+    <wsdl:part name="xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ImportAPPaymentHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSettingHttpPostIn">
+    <wsdl:part name="sConfigFile" type="s:string" />
+    <wsdl:part name="sKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSettingHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceTableHttpPostIn">
+    <wsdl:part name="sTable" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceTableHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="OptionListHttpPostIn">
+    <wsdl:part name="sOptionType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OptionListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSupportedTldsHttpPostIn" />
+  <wsdl:message name="GetSupportedTldsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetListingsByShopperHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sSearchVal" type="s:string" />
+    <wsdl:part name="sCurrentPageIndex" type="s:string" />
+    <wsdl:part name="sPageSize" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetListingsByShopperHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpsellShopperListingHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+    <wsdl:part name="sListingInput" type="s:string" />
+    <wsdl:part name="sISC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpsellShopperListingHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BDDomainCheckHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BDDomainCheckHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BDHoldDomainHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BDHoldDomainHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="BDReleaseDomainHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BDReleaseDomainHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSItemCheckHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSItemCheckHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidCreateHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+    <wsdl:part name="sMaxBidAmount" type="s:string" />
+    <wsdl:part name="iPrivateLabelID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidCreateHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidStatusUpdateHttpPostIn">
+    <wsdl:part name="sBidID" type="s:string" />
+    <wsdl:part name="sStatus" type="s:string" />
+    <wsdl:part name="iPrivateLabelID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidStatusUpdateHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidInfoHttpPostIn">
+    <wsdl:part name="sBidID" type="s:string" />
+    <wsdl:part name="sHistory" type="s:string" />
+    <wsdl:part name="iPrivateLabelID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CLSBidInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTDNAMWhoIsHttpPostIn">
+    <wsdl:part name="sDomainName" type="s:string" />
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTDNAMWhoIsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="AuctionSearchHttpPostIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AuctionSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoByShopperHttpPostIn">
+    <wsdl:part name="sShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberInfoByShopperHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSettingsHttpPostIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSettingsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SetMemberSettingsHttpPostIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetMemberSettingsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSavedSearchesHttpPostIn">
+    <wsdl:part name="xmlInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMemberSavedSearchesHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="trpAdminUtilsServiceSoap">
+    <wsdl:operation name="getRSSStatus">
+      <wsdl:input message="tns:getRSSStatusSoapIn" />
+      <wsdl:output message="tns:getRSSStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusSoapIn" />
+      <wsdl:output message="tns:getServiceStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <wsdl:input message="tns:ResetCacheSoapIn" />
+      <wsdl:output message="tns:ResetCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidExpiredAuctions">
+      <wsdl:input message="tns:GetUnpaidExpiredAuctionsSoapIn" />
+      <wsdl:output message="tns:GetUnpaidExpiredAuctionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctions">
+      <wsdl:input message="tns:GetUnpaidAuctionsSoapIn" />
+      <wsdl:output message="tns:GetUnpaidAuctionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctionsByShopperID">
+      <wsdl:input message="tns:GetUnpaidAuctionsByShopperIDSoapIn" />
+      <wsdl:output message="tns:GetUnpaidAuctionsByShopperIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCart">
+      <wsdl:input message="tns:AddExpiredAuctionsToCartSoapIn" />
+      <wsdl:output message="tns:AddExpiredAuctionsToCartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCartWithITC">
+      <wsdl:input message="tns:AddExpiredAuctionsToCartWithITCSoapIn" />
+      <wsdl:output message="tns:AddExpiredAuctionsToCartWithITCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCart">
+      <wsdl:input message="tns:AddItemsIveWonToCartSoapIn" />
+      <wsdl:output message="tns:AddItemsIveWonToCartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCartWithITC">
+      <wsdl:input message="tns:AddItemsIveWonToCartWithITCSoapIn" />
+      <wsdl:output message="tns:AddItemsIveWonToCartWithITCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddValuePricedDomainToCart">
+      <wsdl:input message="tns:AddValuePricedDomainToCartSoapIn" />
+      <wsdl:output message="tns:AddValuePricedDomainToCartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsSubscriber">
+      <wsdl:input message="tns:MemberIsSubscriberSoapIn" />
+      <wsdl:output message="tns:MemberIsSubscriberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsActive">
+      <wsdl:input message="tns:MemberIsActiveSoapIn" />
+      <wsdl:output message="tns:MemberIsActiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddMembershipToCart">
+      <wsdl:input message="tns:AddMembershipToCartSoapIn" />
+      <wsdl:output message="tns:AddMembershipToCartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySection">
+      <wsdl:input message="tns:GetMembersAreaBySectionSoapIn" />
+      <wsdl:output message="tns:GetMembersAreaBySectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaAlerts">
+      <wsdl:input message="tns:GetMembersAreaAlertsSoapIn" />
+      <wsdl:output message="tns:GetMembersAreaAlertsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySingleSection">
+      <wsdl:input message="tns:GetMembersAreaBySingleSectionSoapIn" />
+      <wsdl:output message="tns:GetMembersAreaBySingleSectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySectionXML">
+      <wsdl:input message="tns:GetMembersAreaBySectionXMLSoapIn" />
+      <wsdl:output message="tns:GetMembersAreaBySectionXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMemberPreferences">
+      <wsdl:input message="tns:UpdateMemberPreferencesSoapIn" />
+      <wsdl:output message="tns:UpdateMemberPreferencesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListings">
+      <wsdl:input message="tns:LoadDomainListingsSoapIn" />
+      <wsdl:output message="tns:LoadDomainListingsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCart">
+      <wsdl:input message="tns:LoadDomainListingsToCartSoapIn" />
+      <wsdl:output message="tns:LoadDomainListingsToCartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCartVendor">
+      <wsdl:input message="tns:LoadDomainListingsToCartVendorSoapIn" />
+      <wsdl:output message="tns:LoadDomainListingsToCartVendorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportAPPayment">
+      <wsdl:input message="tns:ImportAPPaymentSoapIn" />
+      <wsdl:output message="tns:ImportAPPaymentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSetting">
+      <wsdl:input message="tns:GetConfigSettingSoapIn" />
+      <wsdl:output message="tns:GetConfigSettingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceTable">
+      <wsdl:input message="tns:GetReferenceTableSoapIn" />
+      <wsdl:output message="tns:GetReferenceTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OptionList">
+      <wsdl:input message="tns:OptionListSoapIn" />
+      <wsdl:output message="tns:OptionListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedTlds">
+      <wsdl:input message="tns:GetSupportedTldsSoapIn" />
+      <wsdl:output message="tns:GetSupportedTldsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListingsByShopper">
+      <wsdl:input message="tns:GetListingsByShopperSoapIn" />
+      <wsdl:output message="tns:GetListingsByShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpsellShopperListing">
+      <wsdl:input message="tns:UpsellShopperListingSoapIn" />
+      <wsdl:output message="tns:UpsellShopperListingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BDDomainCheck">
+      <wsdl:input message="tns:BDDomainCheckSoapIn" />
+      <wsdl:output message="tns:BDDomainCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BDHoldDomain">
+      <wsdl:input message="tns:BDHoldDomainSoapIn" />
+      <wsdl:output message="tns:BDHoldDomainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BDReleaseDomain">
+      <wsdl:input message="tns:BDReleaseDomainSoapIn" />
+      <wsdl:output message="tns:BDReleaseDomainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSItemCheck">
+      <wsdl:input message="tns:CLSItemCheckSoapIn" />
+      <wsdl:output message="tns:CLSItemCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidCreate">
+      <wsdl:input message="tns:CLSBidCreateSoapIn" />
+      <wsdl:output message="tns:CLSBidCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidStatusUpdate">
+      <wsdl:input message="tns:CLSBidStatusUpdateSoapIn" />
+      <wsdl:output message="tns:CLSBidStatusUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidInfo">
+      <wsdl:input message="tns:CLSBidInfoSoapIn" />
+      <wsdl:output message="tns:CLSBidInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTDNAMWhoIs">
+      <wsdl:input message="tns:GetTDNAMWhoIsSoapIn" />
+      <wsdl:output message="tns:GetTDNAMWhoIsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuctionSearch">
+      <wsdl:input message="tns:AuctionSearchSoapIn" />
+      <wsdl:output message="tns:AuctionSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfoByShopper">
+      <wsdl:input message="tns:GetMemberInfoByShopperSoapIn" />
+      <wsdl:output message="tns:GetMemberInfoByShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSettings">
+      <wsdl:input message="tns:GetMemberSettingsSoapIn" />
+      <wsdl:output message="tns:GetMemberSettingsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetMemberSettings">
+      <wsdl:input message="tns:SetMemberSettingsSoapIn" />
+      <wsdl:output message="tns:SetMemberSettingsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSavedSearches">
+      <wsdl:input message="tns:GetMemberSavedSearchesSoapIn" />
+      <wsdl:output message="tns:GetMemberSavedSearchesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="trpAdminUtilsServiceHttpGet">
+    <wsdl:operation name="getRSSStatus">
+      <wsdl:input message="tns:getRSSStatusHttpGetIn" />
+      <wsdl:output message="tns:getRSSStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusHttpGetIn" />
+      <wsdl:output message="tns:getServiceStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <wsdl:input message="tns:ResetCacheHttpGetIn" />
+      <wsdl:output message="tns:ResetCacheHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidExpiredAuctions">
+      <wsdl:input message="tns:GetUnpaidExpiredAuctionsHttpGetIn" />
+      <wsdl:output message="tns:GetUnpaidExpiredAuctionsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctions">
+      <wsdl:input message="tns:GetUnpaidAuctionsHttpGetIn" />
+      <wsdl:output message="tns:GetUnpaidAuctionsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctionsByShopperID">
+      <wsdl:input message="tns:GetUnpaidAuctionsByShopperIDHttpGetIn" />
+      <wsdl:output message="tns:GetUnpaidAuctionsByShopperIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCart">
+      <wsdl:input message="tns:AddExpiredAuctionsToCartHttpGetIn" />
+      <wsdl:output message="tns:AddExpiredAuctionsToCartHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCartWithITC">
+      <wsdl:input message="tns:AddExpiredAuctionsToCartWithITCHttpGetIn" />
+      <wsdl:output message="tns:AddExpiredAuctionsToCartWithITCHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCart">
+      <wsdl:input message="tns:AddItemsIveWonToCartHttpGetIn" />
+      <wsdl:output message="tns:AddItemsIveWonToCartHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCartWithITC">
+      <wsdl:input message="tns:AddItemsIveWonToCartWithITCHttpGetIn" />
+      <wsdl:output message="tns:AddItemsIveWonToCartWithITCHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddValuePricedDomainToCart">
+      <wsdl:input message="tns:AddValuePricedDomainToCartHttpGetIn" />
+      <wsdl:output message="tns:AddValuePricedDomainToCartHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsSubscriber">
+      <wsdl:input message="tns:MemberIsSubscriberHttpGetIn" />
+      <wsdl:output message="tns:MemberIsSubscriberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsActive">
+      <wsdl:input message="tns:MemberIsActiveHttpGetIn" />
+      <wsdl:output message="tns:MemberIsActiveHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddMembershipToCart">
+      <wsdl:input message="tns:AddMembershipToCartHttpGetIn" />
+      <wsdl:output message="tns:AddMembershipToCartHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySection">
+      <wsdl:input message="tns:GetMembersAreaBySectionHttpGetIn" />
+      <wsdl:output message="tns:GetMembersAreaBySectionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaAlerts">
+      <wsdl:input message="tns:GetMembersAreaAlertsHttpGetIn" />
+      <wsdl:output message="tns:GetMembersAreaAlertsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySingleSection">
+      <wsdl:input message="tns:GetMembersAreaBySingleSectionHttpGetIn" />
+      <wsdl:output message="tns:GetMembersAreaBySingleSectionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySectionXML">
+      <wsdl:input message="tns:GetMembersAreaBySectionXMLHttpGetIn" />
+      <wsdl:output message="tns:GetMembersAreaBySectionXMLHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMemberPreferences">
+      <wsdl:input message="tns:UpdateMemberPreferencesHttpGetIn" />
+      <wsdl:output message="tns:UpdateMemberPreferencesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListings">
+      <wsdl:input message="tns:LoadDomainListingsHttpGetIn" />
+      <wsdl:output message="tns:LoadDomainListingsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCart">
+      <wsdl:input message="tns:LoadDomainListingsToCartHttpGetIn" />
+      <wsdl:output message="tns:LoadDomainListingsToCartHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCartVendor">
+      <wsdl:input message="tns:LoadDomainListingsToCartVendorHttpGetIn" />
+      <wsdl:output message="tns:LoadDomainListingsToCartVendorHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportAPPayment">
+      <wsdl:input message="tns:ImportAPPaymentHttpGetIn" />
+      <wsdl:output message="tns:ImportAPPaymentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSetting">
+      <wsdl:input message="tns:GetConfigSettingHttpGetIn" />
+      <wsdl:output message="tns:GetConfigSettingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceTable">
+      <wsdl:input message="tns:GetReferenceTableHttpGetIn" />
+      <wsdl:output message="tns:GetReferenceTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OptionList">
+      <wsdl:input message="tns:OptionListHttpGetIn" />
+      <wsdl:output message="tns:OptionListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedTlds">
+      <wsdl:input message="tns:GetSupportedTldsHttpGetIn" />
+      <wsdl:output message="tns:GetSupportedTldsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListingsByShopper">
+      <wsdl:input message="tns:GetListingsByShopperHttpGetIn" />
+      <wsdl:output message="tns:GetListingsByShopperHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpsellShopperListing">
+      <wsdl:input message="tns:UpsellShopperListingHttpGetIn" />
+      <wsdl:output message="tns:UpsellShopperListingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BDDomainCheck">
+      <wsdl:input message="tns:BDDomainCheckHttpGetIn" />
+      <wsdl:output message="tns:BDDomainCheckHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BDHoldDomain">
+      <wsdl:input message="tns:BDHoldDomainHttpGetIn" />
+      <wsdl:output message="tns:BDHoldDomainHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BDReleaseDomain">
+      <wsdl:input message="tns:BDReleaseDomainHttpGetIn" />
+      <wsdl:output message="tns:BDReleaseDomainHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSItemCheck">
+      <wsdl:input message="tns:CLSItemCheckHttpGetIn" />
+      <wsdl:output message="tns:CLSItemCheckHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidCreate">
+      <wsdl:input message="tns:CLSBidCreateHttpGetIn" />
+      <wsdl:output message="tns:CLSBidCreateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidStatusUpdate">
+      <wsdl:input message="tns:CLSBidStatusUpdateHttpGetIn" />
+      <wsdl:output message="tns:CLSBidStatusUpdateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidInfo">
+      <wsdl:input message="tns:CLSBidInfoHttpGetIn" />
+      <wsdl:output message="tns:CLSBidInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTDNAMWhoIs">
+      <wsdl:input message="tns:GetTDNAMWhoIsHttpGetIn" />
+      <wsdl:output message="tns:GetTDNAMWhoIsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuctionSearch">
+      <wsdl:input message="tns:AuctionSearchHttpGetIn" />
+      <wsdl:output message="tns:AuctionSearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfoByShopper">
+      <wsdl:input message="tns:GetMemberInfoByShopperHttpGetIn" />
+      <wsdl:output message="tns:GetMemberInfoByShopperHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSettings">
+      <wsdl:input message="tns:GetMemberSettingsHttpGetIn" />
+      <wsdl:output message="tns:GetMemberSettingsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetMemberSettings">
+      <wsdl:input message="tns:SetMemberSettingsHttpGetIn" />
+      <wsdl:output message="tns:SetMemberSettingsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSavedSearches">
+      <wsdl:input message="tns:GetMemberSavedSearchesHttpGetIn" />
+      <wsdl:output message="tns:GetMemberSavedSearchesHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="trpAdminUtilsServiceHttpPost">
+    <wsdl:operation name="getRSSStatus">
+      <wsdl:input message="tns:getRSSStatusHttpPostIn" />
+      <wsdl:output message="tns:getRSSStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusHttpPostIn" />
+      <wsdl:output message="tns:getServiceStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <wsdl:input message="tns:ResetCacheHttpPostIn" />
+      <wsdl:output message="tns:ResetCacheHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidExpiredAuctions">
+      <wsdl:input message="tns:GetUnpaidExpiredAuctionsHttpPostIn" />
+      <wsdl:output message="tns:GetUnpaidExpiredAuctionsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctions">
+      <wsdl:input message="tns:GetUnpaidAuctionsHttpPostIn" />
+      <wsdl:output message="tns:GetUnpaidAuctionsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctionsByShopperID">
+      <wsdl:input message="tns:GetUnpaidAuctionsByShopperIDHttpPostIn" />
+      <wsdl:output message="tns:GetUnpaidAuctionsByShopperIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCart">
+      <wsdl:input message="tns:AddExpiredAuctionsToCartHttpPostIn" />
+      <wsdl:output message="tns:AddExpiredAuctionsToCartHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCartWithITC">
+      <wsdl:input message="tns:AddExpiredAuctionsToCartWithITCHttpPostIn" />
+      <wsdl:output message="tns:AddExpiredAuctionsToCartWithITCHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCart">
+      <wsdl:input message="tns:AddItemsIveWonToCartHttpPostIn" />
+      <wsdl:output message="tns:AddItemsIveWonToCartHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCartWithITC">
+      <wsdl:input message="tns:AddItemsIveWonToCartWithITCHttpPostIn" />
+      <wsdl:output message="tns:AddItemsIveWonToCartWithITCHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddValuePricedDomainToCart">
+      <wsdl:input message="tns:AddValuePricedDomainToCartHttpPostIn" />
+      <wsdl:output message="tns:AddValuePricedDomainToCartHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsSubscriber">
+      <wsdl:input message="tns:MemberIsSubscriberHttpPostIn" />
+      <wsdl:output message="tns:MemberIsSubscriberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsActive">
+      <wsdl:input message="tns:MemberIsActiveHttpPostIn" />
+      <wsdl:output message="tns:MemberIsActiveHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddMembershipToCart">
+      <wsdl:input message="tns:AddMembershipToCartHttpPostIn" />
+      <wsdl:output message="tns:AddMembershipToCartHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySection">
+      <wsdl:input message="tns:GetMembersAreaBySectionHttpPostIn" />
+      <wsdl:output message="tns:GetMembersAreaBySectionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaAlerts">
+      <wsdl:input message="tns:GetMembersAreaAlertsHttpPostIn" />
+      <wsdl:output message="tns:GetMembersAreaAlertsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySingleSection">
+      <wsdl:input message="tns:GetMembersAreaBySingleSectionHttpPostIn" />
+      <wsdl:output message="tns:GetMembersAreaBySingleSectionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySectionXML">
+      <wsdl:input message="tns:GetMembersAreaBySectionXMLHttpPostIn" />
+      <wsdl:output message="tns:GetMembersAreaBySectionXMLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMemberPreferences">
+      <wsdl:input message="tns:UpdateMemberPreferencesHttpPostIn" />
+      <wsdl:output message="tns:UpdateMemberPreferencesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListings">
+      <wsdl:input message="tns:LoadDomainListingsHttpPostIn" />
+      <wsdl:output message="tns:LoadDomainListingsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCart">
+      <wsdl:input message="tns:LoadDomainListingsToCartHttpPostIn" />
+      <wsdl:output message="tns:LoadDomainListingsToCartHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCartVendor">
+      <wsdl:input message="tns:LoadDomainListingsToCartVendorHttpPostIn" />
+      <wsdl:output message="tns:LoadDomainListingsToCartVendorHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportAPPayment">
+      <wsdl:input message="tns:ImportAPPaymentHttpPostIn" />
+      <wsdl:output message="tns:ImportAPPaymentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSetting">
+      <wsdl:input message="tns:GetConfigSettingHttpPostIn" />
+      <wsdl:output message="tns:GetConfigSettingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceTable">
+      <wsdl:input message="tns:GetReferenceTableHttpPostIn" />
+      <wsdl:output message="tns:GetReferenceTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OptionList">
+      <wsdl:input message="tns:OptionListHttpPostIn" />
+      <wsdl:output message="tns:OptionListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedTlds">
+      <wsdl:input message="tns:GetSupportedTldsHttpPostIn" />
+      <wsdl:output message="tns:GetSupportedTldsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListingsByShopper">
+      <wsdl:input message="tns:GetListingsByShopperHttpPostIn" />
+      <wsdl:output message="tns:GetListingsByShopperHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpsellShopperListing">
+      <wsdl:input message="tns:UpsellShopperListingHttpPostIn" />
+      <wsdl:output message="tns:UpsellShopperListingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BDDomainCheck">
+      <wsdl:input message="tns:BDDomainCheckHttpPostIn" />
+      <wsdl:output message="tns:BDDomainCheckHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BDHoldDomain">
+      <wsdl:input message="tns:BDHoldDomainHttpPostIn" />
+      <wsdl:output message="tns:BDHoldDomainHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BDReleaseDomain">
+      <wsdl:input message="tns:BDReleaseDomainHttpPostIn" />
+      <wsdl:output message="tns:BDReleaseDomainHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSItemCheck">
+      <wsdl:input message="tns:CLSItemCheckHttpPostIn" />
+      <wsdl:output message="tns:CLSItemCheckHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidCreate">
+      <wsdl:input message="tns:CLSBidCreateHttpPostIn" />
+      <wsdl:output message="tns:CLSBidCreateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidStatusUpdate">
+      <wsdl:input message="tns:CLSBidStatusUpdateHttpPostIn" />
+      <wsdl:output message="tns:CLSBidStatusUpdateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidInfo">
+      <wsdl:input message="tns:CLSBidInfoHttpPostIn" />
+      <wsdl:output message="tns:CLSBidInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTDNAMWhoIs">
+      <wsdl:input message="tns:GetTDNAMWhoIsHttpPostIn" />
+      <wsdl:output message="tns:GetTDNAMWhoIsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuctionSearch">
+      <wsdl:input message="tns:AuctionSearchHttpPostIn" />
+      <wsdl:output message="tns:AuctionSearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfoByShopper">
+      <wsdl:input message="tns:GetMemberInfoByShopperHttpPostIn" />
+      <wsdl:output message="tns:GetMemberInfoByShopperHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSettings">
+      <wsdl:input message="tns:GetMemberSettingsHttpPostIn" />
+      <wsdl:output message="tns:GetMemberSettingsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetMemberSettings">
+      <wsdl:input message="tns:SetMemberSettingsHttpPostIn" />
+      <wsdl:output message="tns:SetMemberSettingsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSavedSearches">
+      <wsdl:input message="tns:GetMemberSavedSearchesHttpPostIn" />
+      <wsdl:output message="tns:GetMemberSavedSearchesHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="trpAdminUtilsServiceSoap" type="tns:trpAdminUtilsServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getRSSStatus">
+      <soap:operation soapAction="trpAdminUtilsService/getRSSStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <soap:operation soapAction="trpAdminUtilsService/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <soap:operation soapAction="trpAdminUtilsService/ResetCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidExpiredAuctions">
+      <soap:operation soapAction="trpAdminUtilsService/GetUnpaidExpiredAuctions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctions">
+      <soap:operation soapAction="trpAdminUtilsService/GetUnpaidAuctions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctionsByShopperID">
+      <soap:operation soapAction="trpAdminUtilsService/GetUnpaidAuctionsByShopperID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCart">
+      <soap:operation soapAction="trpAdminUtilsService/AddExpiredAuctionsToCart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCartWithITC">
+      <soap:operation soapAction="trpAdminUtilsService/AddExpiredAuctionsToCartWithITC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCart">
+      <soap:operation soapAction="trpAdminUtilsService/AddItemsIveWonToCart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCartWithITC">
+      <soap:operation soapAction="trpAdminUtilsService/AddItemsIveWonToCartWithITC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddValuePricedDomainToCart">
+      <soap:operation soapAction="trpAdminUtilsService/AddValuePricedDomainToCart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsSubscriber">
+      <soap:operation soapAction="trpAdminUtilsService/MemberIsSubscriber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsActive">
+      <soap:operation soapAction="trpAdminUtilsService/MemberIsActive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMembershipToCart">
+      <soap:operation soapAction="trpAdminUtilsService/AddMembershipToCart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySection">
+      <soap:operation soapAction="trpAdminUtilsService/GetMembersAreaBySection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaAlerts">
+      <soap:operation soapAction="trpAdminUtilsService/GetMembersAreaAlerts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySingleSection">
+      <soap:operation soapAction="trpAdminUtilsService/GetMembersAreaBySingleSection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySectionXML">
+      <soap:operation soapAction="trpAdminUtilsService/GetMembersAreaBySectionXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMemberPreferences">
+      <soap:operation soapAction="trpAdminUtilsService/UpdateMemberPreferences" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListings">
+      <soap:operation soapAction="trpAdminUtilsService/LoadDomainListings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCart">
+      <soap:operation soapAction="trpAdminUtilsService/LoadDomainListingsToCart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCartVendor">
+      <soap:operation soapAction="trpAdminUtilsService/LoadDomainListingsToCartVendor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportAPPayment">
+      <soap:operation soapAction="trpAdminUtilsService/ImportAPPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSetting">
+      <soap:operation soapAction="trpAdminUtilsService/GetConfigSetting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceTable">
+      <soap:operation soapAction="trpAdminUtilsService/GetReferenceTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OptionList">
+      <soap:operation soapAction="trpAdminUtilsService/OptionList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedTlds">
+      <soap:operation soapAction="trpAdminUtilsService/GetSupportedTlds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListingsByShopper">
+      <soap:operation soapAction="trpAdminUtilsService/GetListingsByShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpsellShopperListing">
+      <soap:operation soapAction="trpAdminUtilsService/UpsellShopperListing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDDomainCheck">
+      <soap:operation soapAction="trpAdminUtilsService/BDDomainCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDHoldDomain">
+      <soap:operation soapAction="trpAdminUtilsService/BDHoldDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDReleaseDomain">
+      <soap:operation soapAction="trpAdminUtilsService/BDReleaseDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSItemCheck">
+      <soap:operation soapAction="trpAdminUtilsService/CLSItemCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidCreate">
+      <soap:operation soapAction="trpAdminUtilsService/CLSBidCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidStatusUpdate">
+      <soap:operation soapAction="trpAdminUtilsService/CLSBidStatusUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidInfo">
+      <soap:operation soapAction="trpAdminUtilsService/CLSBidInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTDNAMWhoIs">
+      <soap:operation soapAction="trpAdminUtilsService/GetTDNAMWhoIs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuctionSearch">
+      <soap:operation soapAction="trpAdminUtilsService/AuctionSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfoByShopper">
+      <soap:operation soapAction="trpAdminUtilsService/GetMemberInfoByShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSettings">
+      <soap:operation soapAction="trpAdminUtilsService/GetMemberSettings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMemberSettings">
+      <soap:operation soapAction="trpAdminUtilsService/SetMemberSettings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSavedSearches">
+      <soap:operation soapAction="trpAdminUtilsService/GetMemberSavedSearches" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="trpAdminUtilsServiceSoap12" type="tns:trpAdminUtilsServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getRSSStatus">
+      <soap12:operation soapAction="trpAdminUtilsService/getRSSStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <soap12:operation soapAction="trpAdminUtilsService/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <soap12:operation soapAction="trpAdminUtilsService/ResetCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidExpiredAuctions">
+      <soap12:operation soapAction="trpAdminUtilsService/GetUnpaidExpiredAuctions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctions">
+      <soap12:operation soapAction="trpAdminUtilsService/GetUnpaidAuctions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctionsByShopperID">
+      <soap12:operation soapAction="trpAdminUtilsService/GetUnpaidAuctionsByShopperID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCart">
+      <soap12:operation soapAction="trpAdminUtilsService/AddExpiredAuctionsToCart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCartWithITC">
+      <soap12:operation soapAction="trpAdminUtilsService/AddExpiredAuctionsToCartWithITC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCart">
+      <soap12:operation soapAction="trpAdminUtilsService/AddItemsIveWonToCart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCartWithITC">
+      <soap12:operation soapAction="trpAdminUtilsService/AddItemsIveWonToCartWithITC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddValuePricedDomainToCart">
+      <soap12:operation soapAction="trpAdminUtilsService/AddValuePricedDomainToCart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsSubscriber">
+      <soap12:operation soapAction="trpAdminUtilsService/MemberIsSubscriber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsActive">
+      <soap12:operation soapAction="trpAdminUtilsService/MemberIsActive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMembershipToCart">
+      <soap12:operation soapAction="trpAdminUtilsService/AddMembershipToCart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySection">
+      <soap12:operation soapAction="trpAdminUtilsService/GetMembersAreaBySection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaAlerts">
+      <soap12:operation soapAction="trpAdminUtilsService/GetMembersAreaAlerts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySingleSection">
+      <soap12:operation soapAction="trpAdminUtilsService/GetMembersAreaBySingleSection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySectionXML">
+      <soap12:operation soapAction="trpAdminUtilsService/GetMembersAreaBySectionXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMemberPreferences">
+      <soap12:operation soapAction="trpAdminUtilsService/UpdateMemberPreferences" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListings">
+      <soap12:operation soapAction="trpAdminUtilsService/LoadDomainListings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCart">
+      <soap12:operation soapAction="trpAdminUtilsService/LoadDomainListingsToCart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCartVendor">
+      <soap12:operation soapAction="trpAdminUtilsService/LoadDomainListingsToCartVendor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportAPPayment">
+      <soap12:operation soapAction="trpAdminUtilsService/ImportAPPayment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSetting">
+      <soap12:operation soapAction="trpAdminUtilsService/GetConfigSetting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceTable">
+      <soap12:operation soapAction="trpAdminUtilsService/GetReferenceTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OptionList">
+      <soap12:operation soapAction="trpAdminUtilsService/OptionList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedTlds">
+      <soap12:operation soapAction="trpAdminUtilsService/GetSupportedTlds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListingsByShopper">
+      <soap12:operation soapAction="trpAdminUtilsService/GetListingsByShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpsellShopperListing">
+      <soap12:operation soapAction="trpAdminUtilsService/UpsellShopperListing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDDomainCheck">
+      <soap12:operation soapAction="trpAdminUtilsService/BDDomainCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDHoldDomain">
+      <soap12:operation soapAction="trpAdminUtilsService/BDHoldDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDReleaseDomain">
+      <soap12:operation soapAction="trpAdminUtilsService/BDReleaseDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSItemCheck">
+      <soap12:operation soapAction="trpAdminUtilsService/CLSItemCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidCreate">
+      <soap12:operation soapAction="trpAdminUtilsService/CLSBidCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidStatusUpdate">
+      <soap12:operation soapAction="trpAdminUtilsService/CLSBidStatusUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidInfo">
+      <soap12:operation soapAction="trpAdminUtilsService/CLSBidInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTDNAMWhoIs">
+      <soap12:operation soapAction="trpAdminUtilsService/GetTDNAMWhoIs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuctionSearch">
+      <soap12:operation soapAction="trpAdminUtilsService/AuctionSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfoByShopper">
+      <soap12:operation soapAction="trpAdminUtilsService/GetMemberInfoByShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSettings">
+      <soap12:operation soapAction="trpAdminUtilsService/GetMemberSettings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMemberSettings">
+      <soap12:operation soapAction="trpAdminUtilsService/SetMemberSettings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSavedSearches">
+      <soap12:operation soapAction="trpAdminUtilsService/GetMemberSavedSearches" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="trpAdminUtilsServiceHttpGet" type="tns:trpAdminUtilsServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="getRSSStatus">
+      <http:operation location="/getRSSStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <http:operation location="/getServiceStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <http:operation location="/ResetCache" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidExpiredAuctions">
+      <http:operation location="/GetUnpaidExpiredAuctions" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctions">
+      <http:operation location="/GetUnpaidAuctions" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctionsByShopperID">
+      <http:operation location="/GetUnpaidAuctionsByShopperID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCart">
+      <http:operation location="/AddExpiredAuctionsToCart" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCartWithITC">
+      <http:operation location="/AddExpiredAuctionsToCartWithITC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCart">
+      <http:operation location="/AddItemsIveWonToCart" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCartWithITC">
+      <http:operation location="/AddItemsIveWonToCartWithITC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddValuePricedDomainToCart">
+      <http:operation location="/AddValuePricedDomainToCart" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsSubscriber">
+      <http:operation location="/MemberIsSubscriber" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsActive">
+      <http:operation location="/MemberIsActive" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMembershipToCart">
+      <http:operation location="/AddMembershipToCart" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySection">
+      <http:operation location="/GetMembersAreaBySection" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaAlerts">
+      <http:operation location="/GetMembersAreaAlerts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySingleSection">
+      <http:operation location="/GetMembersAreaBySingleSection" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySectionXML">
+      <http:operation location="/GetMembersAreaBySectionXML" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMemberPreferences">
+      <http:operation location="/UpdateMemberPreferences" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListings">
+      <http:operation location="/LoadDomainListings" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCart">
+      <http:operation location="/LoadDomainListingsToCart" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCartVendor">
+      <http:operation location="/LoadDomainListingsToCartVendor" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportAPPayment">
+      <http:operation location="/ImportAPPayment" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSetting">
+      <http:operation location="/GetConfigSetting" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceTable">
+      <http:operation location="/GetReferenceTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OptionList">
+      <http:operation location="/OptionList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedTlds">
+      <http:operation location="/GetSupportedTlds" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListingsByShopper">
+      <http:operation location="/GetListingsByShopper" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpsellShopperListing">
+      <http:operation location="/UpsellShopperListing" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDDomainCheck">
+      <http:operation location="/BDDomainCheck" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDHoldDomain">
+      <http:operation location="/BDHoldDomain" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDReleaseDomain">
+      <http:operation location="/BDReleaseDomain" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSItemCheck">
+      <http:operation location="/CLSItemCheck" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidCreate">
+      <http:operation location="/CLSBidCreate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidStatusUpdate">
+      <http:operation location="/CLSBidStatusUpdate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidInfo">
+      <http:operation location="/CLSBidInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTDNAMWhoIs">
+      <http:operation location="/GetTDNAMWhoIs" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuctionSearch">
+      <http:operation location="/AuctionSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfoByShopper">
+      <http:operation location="/GetMemberInfoByShopper" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSettings">
+      <http:operation location="/GetMemberSettings" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMemberSettings">
+      <http:operation location="/SetMemberSettings" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSavedSearches">
+      <http:operation location="/GetMemberSavedSearches" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="trpAdminUtilsServiceHttpPost" type="tns:trpAdminUtilsServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getRSSStatus">
+      <http:operation location="/getRSSStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <http:operation location="/getServiceStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <http:operation location="/ResetCache" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidExpiredAuctions">
+      <http:operation location="/GetUnpaidExpiredAuctions" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctions">
+      <http:operation location="/GetUnpaidAuctions" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnpaidAuctionsByShopperID">
+      <http:operation location="/GetUnpaidAuctionsByShopperID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCart">
+      <http:operation location="/AddExpiredAuctionsToCart" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddExpiredAuctionsToCartWithITC">
+      <http:operation location="/AddExpiredAuctionsToCartWithITC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCart">
+      <http:operation location="/AddItemsIveWonToCart" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemsIveWonToCartWithITC">
+      <http:operation location="/AddItemsIveWonToCartWithITC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddValuePricedDomainToCart">
+      <http:operation location="/AddValuePricedDomainToCart" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsSubscriber">
+      <http:operation location="/MemberIsSubscriber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MemberIsActive">
+      <http:operation location="/MemberIsActive" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMembershipToCart">
+      <http:operation location="/AddMembershipToCart" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySection">
+      <http:operation location="/GetMembersAreaBySection" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaAlerts">
+      <http:operation location="/GetMembersAreaAlerts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySingleSection">
+      <http:operation location="/GetMembersAreaBySingleSection" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMembersAreaBySectionXML">
+      <http:operation location="/GetMembersAreaBySectionXML" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMemberPreferences">
+      <http:operation location="/UpdateMemberPreferences" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListings">
+      <http:operation location="/LoadDomainListings" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCart">
+      <http:operation location="/LoadDomainListingsToCart" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDomainListingsToCartVendor">
+      <http:operation location="/LoadDomainListingsToCartVendor" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportAPPayment">
+      <http:operation location="/ImportAPPayment" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigSetting">
+      <http:operation location="/GetConfigSetting" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceTable">
+      <http:operation location="/GetReferenceTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OptionList">
+      <http:operation location="/OptionList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedTlds">
+      <http:operation location="/GetSupportedTlds" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListingsByShopper">
+      <http:operation location="/GetListingsByShopper" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpsellShopperListing">
+      <http:operation location="/UpsellShopperListing" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDDomainCheck">
+      <http:operation location="/BDDomainCheck" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDHoldDomain">
+      <http:operation location="/BDHoldDomain" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BDReleaseDomain">
+      <http:operation location="/BDReleaseDomain" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSItemCheck">
+      <http:operation location="/CLSItemCheck" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidCreate">
+      <http:operation location="/CLSBidCreate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidStatusUpdate">
+      <http:operation location="/CLSBidStatusUpdate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CLSBidInfo">
+      <http:operation location="/CLSBidInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTDNAMWhoIs">
+      <http:operation location="/GetTDNAMWhoIs" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuctionSearch">
+      <http:operation location="/AuctionSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfoByShopper">
+      <http:operation location="/GetMemberInfoByShopper" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSettings">
+      <http:operation location="/GetMemberSettings" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMemberSettings">
+      <http:operation location="/SetMemberSettings" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberSavedSearches">
+      <http:operation location="/GetMemberSavedSearches" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="trpAdminUtilsService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Domain Name AfterMarket Administrative WebService.</wsdl:documentation>
+    <wsdl:port name="trpAdminUtilsServiceSoap" binding="tns:trpAdminUtilsServiceSoap">
+      <soap:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpAdminUtilsService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="trpAdminUtilsServiceSoap12" binding="tns:trpAdminUtilsServiceSoap12">
+      <soap12:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpAdminUtilsService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="trpAdminUtilsServiceHttpGet" binding="tns:trpAdminUtilsServiceHttpGet">
+      <http:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpAdminUtilsService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="trpAdminUtilsServiceHttpPost" binding="tns:trpAdminUtilsServiceHttpPost">
+      <http:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpAdminUtilsService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

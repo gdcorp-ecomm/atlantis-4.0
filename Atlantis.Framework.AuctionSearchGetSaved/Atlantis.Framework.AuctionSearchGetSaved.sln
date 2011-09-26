@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{59F58829-C6DD-4495-ABA5-9577B3E335D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionSearchGetSaved.Impl", "Atlantis.Framework.AuctionSearchGetSaved.Impl\Atlantis.Framework.AuctionSearchGetSaved.Impl.csproj", "{9922336C-B650-4FB6-ADD9-5A1FDBDFBD5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionSearchGetSaved.Interface", "Atlantis.Framework.AuctionSearchGetSaved.Interface\Atlantis.Framework.AuctionSearchGetSaved.Interface.csproj", "{D2DA782E-1C34-43EB-8976-C05F6E4DE227}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionSearchGetSaved.Test", "Atlantis.Framework.AuctionSearchGetSaved.Test\Atlantis.Framework.AuctionSearchGetSaved.Test.csproj", "{44A7DFA5-1660-4434-8D59-05965D27E98C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Auction.Interface", "..\Atlantis.Framework.Auction.Interface\Atlantis.Framework.Auction.Interface\Atlantis.Framework.Auction.Interface.csproj", "{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.AuctionSearchGetSaved.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.AuctionSearchGetSaved.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Auction.Interface\\Atlantis.Framework.Auction.Interface\\Atlantis.Framework.Auction.Interface.csproj
+		SccProjectName3 = ../Atlantis.Framework.Auction.Interface/Atlantis.Framework.Auction.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.Auction.Interface\\Atlantis.Framework.Auction.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.AuctionSearchGetSaved.Impl\\Atlantis.Framework.AuctionSearchGetSaved.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.AuctionSearchGetSaved.Impl
+		SccLocalPath4 = Atlantis.Framework.AuctionSearchGetSaved.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.AuctionSearchGetSaved.Interface\\Atlantis.Framework.AuctionSearchGetSaved.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.AuctionSearchGetSaved.Interface
+		SccLocalPath5 = Atlantis.Framework.AuctionSearchGetSaved.Interface
+		SccProjectUniqueName6 = Atlantis.Framework.AuctionSearchGetSaved.Test\\Atlantis.Framework.AuctionSearchGetSaved.Test.csproj
+		SccProjectName6 = Atlantis.Framework.AuctionSearchGetSaved.Test
+		SccLocalPath6 = Atlantis.Framework.AuctionSearchGetSaved.Test
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9922336C-B650-4FB6-ADD9-5A1FDBDFBD5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9922336C-B650-4FB6-ADD9-5A1FDBDFBD5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9922336C-B650-4FB6-ADD9-5A1FDBDFBD5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9922336C-B650-4FB6-ADD9-5A1FDBDFBD5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2DA782E-1C34-43EB-8976-C05F6E4DE227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2DA782E-1C34-43EB-8976-C05F6E4DE227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2DA782E-1C34-43EB-8976-C05F6E4DE227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2DA782E-1C34-43EB-8976-C05F6E4DE227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44A7DFA5-1660-4434-8D59-05965D27E98C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44A7DFA5-1660-4434-8D59-05965D27E98C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44A7DFA5-1660-4434-8D59-05965D27E98C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44A7DFA5-1660-4434-8D59-05965D27E98C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {59F58829-C6DD-4495-ABA5-9577B3E335D0}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {59F58829-C6DD-4495-ABA5-9577B3E335D0}
+	EndGlobalSection
+EndGlobal

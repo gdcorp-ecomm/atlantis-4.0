@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Xml;
 using Atlantis.Framework.Ecc.Interface.Authentication;
 using Atlantis.Framework.Ecc.Interface.jsonHelpers;
 using Atlantis.Framework.EccGetEmailAddressInfo.Impl.Json;

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using Atlantis.Framework.Ecc.Interface.Enums;
-using System.Text;
 
 namespace Atlantis.Framework.EccGetEmailAddressInfo.Impl.Json
 {

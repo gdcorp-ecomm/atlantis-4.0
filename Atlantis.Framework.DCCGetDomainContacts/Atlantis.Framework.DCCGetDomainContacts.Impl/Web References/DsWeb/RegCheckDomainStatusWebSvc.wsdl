@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:RegCheckDomainStatusWebSvcService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:RegCheckDomainStatusWebSvcService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:RegCheckDomainStatusWebSvcService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldIn">
+    <wsdl:part name="bstrInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckDomainStatusIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckDomainStatusOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoByNameIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoByNameOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoByIDIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoByIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoByNameWithContactsIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoByNameWithContactsOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DomainCancellationForFraudIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DomainCancellationForFraudOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchMiniDCCDomainsIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchMiniDCCDomainsOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainForFraudIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainForFraudOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReleasePremiumDomainForFraudIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReleasePremiumDomainForFraudOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainStatusCountIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainStatusCountOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRedemptionListByShopperIdIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRedemptionListByShopperIdOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainPrivateLabelIdIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainPrivateLabelIdOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNameserverInfoByDomainNameIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNameserverInfoByDomainNameOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePendingDomainStatusForDnsIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePendingDomainStatusForDnsOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNameserverInfoByDomainNameAndShopperIdIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNameserverInfoByDomainNameAndShopperIdOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetCertifiedDomainStatusIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetCertifiedDomainStatusOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainMobilizedIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainMobilizedOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsPrivacyAllowedIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsPrivacyAllowedOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsCancellableIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsCancellableOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckRegistrationPeriodIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckRegistrationPeriodOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCertifiableDomainsListIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCertifiableDomainsListOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDCCDomainListIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDCCDomainListOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDCCTransfersInProgressIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDCCTransfersInProgressOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckRenewalPeriodIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckRenewalPeriodOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetExpirationDomainCountsByShopperIdIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetExpirationDomainCountsByShopperIdOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="RegCheckDomainStatusWebSvcServiceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="s0:HelloWorldIn" />
+      <wsdl:output message="s0:HelloWorldOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckDomainStatus">
+      <wsdl:input message="s0:CheckDomainStatusIn" />
+      <wsdl:output message="s0:CheckDomainStatusOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByName">
+      <wsdl:input message="s0:GetDomainInfoByNameIn" />
+      <wsdl:output message="s0:GetDomainInfoByNameOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByID">
+      <wsdl:input message="s0:GetDomainInfoByIDIn" />
+      <wsdl:output message="s0:GetDomainInfoByIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByNameWithContacts">
+      <wsdl:input message="s0:GetDomainInfoByNameWithContactsIn" />
+      <wsdl:output message="s0:GetDomainInfoByNameWithContactsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainCancellationForFraud">
+      <wsdl:input message="s0:DomainCancellationForFraudIn" />
+      <wsdl:output message="s0:DomainCancellationForFraudOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchMiniDCCDomains">
+      <wsdl:input message="s0:SearchMiniDCCDomainsIn" />
+      <wsdl:output message="s0:SearchMiniDCCDomainsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainForFraud">
+      <wsdl:input message="s0:VerifyPremiumDomainForFraudIn" />
+      <wsdl:output message="s0:VerifyPremiumDomainForFraudOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReleasePremiumDomainForFraud">
+      <wsdl:input message="s0:ReleasePremiumDomainForFraudIn" />
+      <wsdl:output message="s0:ReleasePremiumDomainForFraudOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainStatusCount">
+      <wsdl:input message="s0:GetDomainStatusCountIn" />
+      <wsdl:output message="s0:GetDomainStatusCountOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRedemptionListByShopperId">
+      <wsdl:input message="s0:GetRedemptionListByShopperIdIn" />
+      <wsdl:output message="s0:GetRedemptionListByShopperIdOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainPrivateLabelId">
+      <wsdl:input message="s0:GetDomainPrivateLabelIdIn" />
+      <wsdl:output message="s0:GetDomainPrivateLabelIdOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNameserverInfoByDomainName">
+      <wsdl:input message="s0:GetNameserverInfoByDomainNameIn" />
+      <wsdl:output message="s0:GetNameserverInfoByDomainNameOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePendingDomainStatusForDns">
+      <wsdl:input message="s0:UpdatePendingDomainStatusForDnsIn" />
+      <wsdl:output message="s0:UpdatePendingDomainStatusForDnsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNameserverInfoByDomainNameAndShopperId">
+      <wsdl:input message="s0:GetNameserverInfoByDomainNameAndShopperIdIn" />
+      <wsdl:output message="s0:GetNameserverInfoByDomainNameAndShopperIdOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCertifiedDomainStatus">
+      <wsdl:input message="s0:SetCertifiedDomainStatusIn" />
+      <wsdl:output message="s0:SetCertifiedDomainStatusOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainMobilized">
+      <wsdl:input message="s0:IsDomainMobilizedIn" />
+      <wsdl:output message="s0:IsDomainMobilizedOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsPrivacyAllowed">
+      <wsdl:input message="s0:IsPrivacyAllowedIn" />
+      <wsdl:output message="s0:IsPrivacyAllowedOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsCancellable">
+      <wsdl:input message="s0:IsCancellableIn" />
+      <wsdl:output message="s0:IsCancellableOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckRegistrationPeriod">
+      <wsdl:input message="s0:CheckRegistrationPeriodIn" />
+      <wsdl:output message="s0:CheckRegistrationPeriodOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCertifiableDomainsList">
+      <wsdl:input message="s0:GetCertifiableDomainsListIn" />
+      <wsdl:output message="s0:GetCertifiableDomainsListOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDCCDomainList">
+      <wsdl:input message="s0:GetDCCDomainListIn" />
+      <wsdl:output message="s0:GetDCCDomainListOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDCCTransfersInProgress">
+      <wsdl:input message="s0:GetDCCTransfersInProgressIn" />
+      <wsdl:output message="s0:GetDCCTransfersInProgressOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckRenewalPeriod">
+      <wsdl:input message="s0:CheckRenewalPeriodIn" />
+      <wsdl:output message="s0:CheckRenewalPeriodOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExpirationDomainCountsByShopperId">
+      <wsdl:input message="s0:GetExpirationDomainCountsByShopperIdIn" />
+      <wsdl:output message="s0:GetExpirationDomainCountsByShopperIdOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegCheckDomainStatusWebSvcServiceSoap" type="s0:RegCheckDomainStatusWebSvcServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="#HelloWorld" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckDomainStatus">
+      <soap:operation soapAction="#CheckDomainStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByName">
+      <soap:operation soapAction="#GetDomainInfoByName" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByID">
+      <soap:operation soapAction="#GetDomainInfoByID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoByNameWithContacts">
+      <soap:operation soapAction="#GetDomainInfoByNameWithContacts" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainCancellationForFraud">
+      <soap:operation soapAction="#DomainCancellationForFraud" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchMiniDCCDomains">
+      <soap:operation soapAction="#SearchMiniDCCDomains" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainForFraud">
+      <soap:operation soapAction="#VerifyPremiumDomainForFraud" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReleasePremiumDomainForFraud">
+      <soap:operation soapAction="#ReleasePremiumDomainForFraud" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainStatusCount">
+      <soap:operation soapAction="#GetDomainStatusCount" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRedemptionListByShopperId">
+      <soap:operation soapAction="#GetRedemptionListByShopperId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainPrivateLabelId">
+      <soap:operation soapAction="#GetDomainPrivateLabelId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNameserverInfoByDomainName">
+      <soap:operation soapAction="#GetNameserverInfoByDomainName" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePendingDomainStatusForDns">
+      <soap:operation soapAction="#UpdatePendingDomainStatusForDns" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNameserverInfoByDomainNameAndShopperId">
+      <soap:operation soapAction="#GetNameserverInfoByDomainNameAndShopperId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCertifiedDomainStatus">
+      <soap:operation soapAction="#SetCertifiedDomainStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainMobilized">
+      <soap:operation soapAction="#IsDomainMobilized" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPrivacyAllowed">
+      <soap:operation soapAction="#IsPrivacyAllowed" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCancellable">
+      <soap:operation soapAction="#IsCancellable" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckRegistrationPeriod">
+      <soap:operation soapAction="#CheckRegistrationPeriod" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCertifiableDomainsList">
+      <soap:operation soapAction="#GetCertifiableDomainsList" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDCCDomainList">
+      <soap:operation soapAction="#GetDCCDomainList" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDCCTransfersInProgress">
+      <soap:operation soapAction="#GetDCCTransfersInProgress" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckRenewalPeriod">
+      <soap:operation soapAction="#CheckRenewalPeriod" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExpirationDomainCountsByShopperId">
+      <soap:operation soapAction="#GetExpirationDomainCountsByShopperId" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegCheckDomainStatusWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegCheckDomainStatusWebSvcService">
+    <wsdl:port name="RegCheckDomainStatusWebSvcServiceSoap" binding="s0:RegCheckDomainStatusWebSvcServiceSoap">
+      <soap:address location="http://devdsweb:80/RegCheckDomainStatusWebSvc/RegCheckDomainStatusWebSvc.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

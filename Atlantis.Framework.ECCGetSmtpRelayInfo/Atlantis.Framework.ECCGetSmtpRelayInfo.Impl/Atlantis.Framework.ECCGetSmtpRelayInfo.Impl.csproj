@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BA2F04AF-3F0E-436C-8DF1-5A7BB855FD7C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atlantis.Framework.ECCGetSmtpRelayInfo.Impl</RootNamespace>
+    <AssemblyName>Atlantis.Framework.ECCGetSmtpRelayInfo.Impl</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Atlantis.Framework.ECC.Interface">
+      <HintPath>..\..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\bin\Debug\Atlantis.Framework.ECC.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Engine">
+      <HintPath>..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\bin\Debug\Atlantis.Framework.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.Interface">
+      <HintPath>..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\bin\Debug\Atlantis.Framework.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ECCGetSmtpRelayInfoRequest.cs" />
+    <Compile Include="Json\EccJsonSmtpRelayInfoRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
+      <Project>{17EBED78-9469-4678-96B1-A175AB221916}</Project>
+      <Name>Atlantis.Framework.Nimitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.ECCGetSmtpRelayInfo.Interface\Atlantis.Framework.ECCGetSmtpRelayInfo.Interface.csproj">
+      <Project>{B3B24F51-542E-4180-AE29-D173BD2A7DD7}</Project>
+      <Name>Atlantis.Framework.ECCGetSmtpRelayInfo.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

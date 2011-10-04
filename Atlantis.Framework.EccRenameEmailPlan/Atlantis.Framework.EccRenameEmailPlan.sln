@@ -1,0 +1,115 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EccRenameEmailPlan.Interface", "Atlantis.Framework.EccRenameEmailPlan.Interface\Atlantis.Framework.EccRenameEmailPlan.Interface.csproj", "{A208EDA3-B005-45F3-A9EB-039C3C9B3C28}"
+	ProjectSection(ProjectDependencies) = postProject
+		{35A2F607-EB94-4A71-9A01-2285357D3A61} = {35A2F607-EB94-4A71-9A01-2285357D3A61}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A083A52E-C3C3-42E0-8DFD-54719E4C3B25}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D30157B2-C1B3-4073-BA5E-632E2337A997}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EccRenameEmailPlan.Impl", "Atlantis.Framework.EccRenameEmailPlan.Impl\Atlantis.Framework.EccRenameEmailPlan.Impl.csproj", "{DCFEB2BF-C68F-420E-A974-17F4EBBC5B7F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{35A2F607-EB94-4A71-9A01-2285357D3A61} = {35A2F607-EB94-4A71-9A01-2285357D3A61}
+		{A208EDA3-B005-45F3-A9EB-039C3C9B3C28} = {A208EDA3-B005-45F3-A9EB-039C3C9B3C28}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EccRenameEmailPlan.Tests", "Atlantis.Framework.EccRenameEmailPlan.Tests\Atlantis.Framework.EccRenameEmailPlan.Tests.csproj", "{1C191EE6-C8D3-41D4-BADC-C738C41BA3F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D74BCCFB-D793-4CD3-924E-916463021AC5}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.EccRenameEmailPlan.vsmdi = Atlantis.Framework.EccRenameEmailPlan.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{28739BF1-46BD-47B6-BAC9-55986AF77571}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECC.Interface", "..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\Atlantis.Framework.ECC.Interface.csproj", "{35A2F607-EB94-4A71-9A01-2285357D3A61}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D30157B2-C1B3-4073-BA5E-632E2337A997}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.EccRenameEmailPlan.Interface\\Atlantis.Framework.EccRenameEmailPlan.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.EccRenameEmailPlan.Interface
+		SccLocalPath1 = Atlantis.Framework.EccRenameEmailPlan.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.EccRenameEmailPlan.Impl\\Atlantis.Framework.EccRenameEmailPlan.Impl.csproj
+		SccProjectName2 = Atlantis.Framework.EccRenameEmailPlan.Impl
+		SccLocalPath2 = Atlantis.Framework.EccRenameEmailPlan.Impl
+		SccProjectUniqueName3 = Atlantis.Framework.EccRenameEmailPlan.Tests\\Atlantis.Framework.EccRenameEmailPlan.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.EccRenameEmailPlan.Tests
+		SccLocalPath3 = Atlantis.Framework.EccRenameEmailPlan.Tests
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.EccRenameEmailPlan.sln
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.EccRenameEmailPlan.sln
+		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface\\Atlantis.Framework.ECC.Interface.csproj
+		SccProjectName6 = ../Atlantis.Framework.ECC/Atlantis.Framework.ECC.Interface
+		SccLocalPath6 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.EccRenameEmailPlan.sln
+		SccProjectName7 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath7 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.EccRenameEmailPlan.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A208EDA3-B005-45F3-A9EB-039C3C9B3C28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A208EDA3-B005-45F3-A9EB-039C3C9B3C28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A208EDA3-B005-45F3-A9EB-039C3C9B3C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A208EDA3-B005-45F3-A9EB-039C3C9B3C28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCFEB2BF-C68F-420E-A974-17F4EBBC5B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCFEB2BF-C68F-420E-A974-17F4EBBC5B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCFEB2BF-C68F-420E-A974-17F4EBBC5B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCFEB2BF-C68F-420E-A974-17F4EBBC5B7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C191EE6-C8D3-41D4-BADC-C738C41BA3F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C191EE6-C8D3-41D4-BADC-C738C41BA3F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C191EE6-C8D3-41D4-BADC-C738C41BA3F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C191EE6-C8D3-41D4-BADC-C738C41BA3F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {28739BF1-46BD-47B6-BAC9-55986AF77571}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {28739BF1-46BD-47B6-BAC9-55986AF77571}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {28739BF1-46BD-47B6-BAC9-55986AF77571}
+	EndGlobalSection
+EndGlobal

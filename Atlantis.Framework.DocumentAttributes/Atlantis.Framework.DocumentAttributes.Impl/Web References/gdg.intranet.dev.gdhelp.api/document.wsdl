@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="HCDocument" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="HCDocument" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="HCDocument">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="documentRequest">
+    <wsdl:part name="xmlcmd" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="documentResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="documentListRequest">
+    <wsdl:part name="request" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="documentListResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="documentAttributesRequest">
+    <wsdl:part name="xmlcmd" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="documentAttributesResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="DocumentServicePortType">
+    <wsdl:operation name="document">
+      <documentation>Retrieves a single legal agreement. The following xml may be passed in:
+				&amp;lt;d3s privateLabelID="x"&amp;gt;&amp;lt;document name="y" showError="true" TransformType="generic" /&amp;gt;&amp;lt;/d3s&amp;gt;</documentation>
+      <wsdl:input message="tns:documentRequest" />
+      <wsdl:output message="tns:documentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="documentList">
+      <documentation>Retrieves a list of all active Legal Agreements as a XML string.  The result will be in the following format:
+                &amp;lt;documents&amp;gt;&amp;lt;document id="x" name="y" /&amp;gt;&amp;lt;/documents&amp;gt; where the document element may occur 0 or more times.</documentation>
+      <wsdl:input message="tns:documentListRequest" />
+      <wsdl:output message="tns:documentListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="documentAttributes">
+      <documentation>Retrieves a list of attributes for specified Legal Agreements as a XML string.  
+The following xml may be passed in:
+		&amp;lt;documents privateLabelID="x" title="1" last_modified="1" document_id="1" document_name="1"&amp;gt;&amp;lt;document name="y" /&amp;gt;&amp;lt;/documents&amp;gt;
+The result will be in the following format:
+                &amp;lt;documents&amp;gt;&amp;lt;document title="x" last_modified="y"/&amp;gt;&amp;lt;/documents&amp;gt; where the document element may occur 1 or more times.
+</documentation>
+      <wsdl:input message="tns:documentAttributesRequest" />
+      <wsdl:output message="tns:documentAttributesResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DocumentServiceBinding" type="tns:DocumentServicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="document">
+      <soap:operation soapAction="urn:HCDocument#document" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCDocument" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCDocument" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="documentList">
+      <soap:operation soapAction="urn:HCDocument#document" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCDocument" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCDocument" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="documentAttributes">
+      <soap:operation soapAction="urn:HCDocument#document" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCDocument" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCDocument" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DocumentService">
+    <wsdl:port name="DocumentServicePort" binding="tns:DocumentServiceBinding">
+      <soap:address location="http://api.gdhelp.dev.intranet.gdg/document" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Authentication;
-using System.Text;
 using Atlantis.Framework.Ecc.Interface.Authentication;
 using Atlantis.Framework.Ecc.Interface.jsonHelpers;
 using Atlantis.Framework.ECCSetCalendarAccount.Impl.Json;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.ECCSetCalendarAccount.Interface;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Nimitz;
 
 namespace Atlantis.Framework.ECCSetCalendarAccount.Impl

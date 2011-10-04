@@ -1,0 +1,228 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetEmailPlansForShopper.Interface", "Atlantis.Framework.ECCGetEmailPlansForShopper.Interface\Atlantis.Framework.ECCGetEmailPlansForShopper.Interface.csproj", "{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}"
+	ProjectSection(ProjectDependencies) = postProject
+		{35A2F607-EB94-4A71-9A01-2285357D3A61} = {35A2F607-EB94-4A71-9A01-2285357D3A61}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A083A52E-C3C3-42E0-8DFD-54719E4C3B25}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D30157B2-C1B3-4073-BA5E-632E2337A997}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetEmailPlansForShopper.Impl", "Atlantis.Framework.ECCGetEmailPlansForShopper.Impl\Atlantis.Framework.ECCGetEmailPlansForShopper.Impl.csproj", "{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{35A2F607-EB94-4A71-9A01-2285357D3A61} = {35A2F607-EB94-4A71-9A01-2285357D3A61}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A083A52E-C3C3-42E0-8DFD-54719E4C3B25}
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243} = {54C591DA-30E4-4D52-A4C8-E60DCB4E7243}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D30157B2-C1B3-4073-BA5E-632E2337A997}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECCGetEmailPlansForShopper.ServiceTest", "ECCGetEmailPlansForShopper.ServiceTest\ECCGetEmailPlansForShopper.ServiceTest.csproj", "{D42B8AAA-52E4-40EE-8FD8-0BAB362A08CC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{35A2F607-EB94-4A71-9A01-2285357D3A61} = {35A2F607-EB94-4A71-9A01-2285357D3A61}
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF} = {5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A083A52E-C3C3-42E0-8DFD-54719E4C3B25}
+		{BA536183-6973-4B80-851F-A68904E3C3FF} = {BA536183-6973-4B80-851F-A68904E3C3FF}
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243} = {54C591DA-30E4-4D52-A4C8-E60DCB4E7243}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D30157B2-C1B3-4073-BA5E-632E2337A997}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetEmailPlansForShopper.Test", "Atlantis.Framework.ECCGetEmailPlansForShopper.Test\Atlantis.Framework.ECCGetEmailPlansForShopper.Test.csproj", "{BA536183-6973-4B80-851F-A68904E3C3FF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{35A2F607-EB94-4A71-9A01-2285357D3A61} = {35A2F607-EB94-4A71-9A01-2285357D3A61}
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF} = {5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A083A52E-C3C3-42E0-8DFD-54719E4C3B25}
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243} = {54C591DA-30E4-4D52-A4C8-E60DCB4E7243}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D30157B2-C1B3-4073-BA5E-632E2337A997}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{44128984-F0D0-49C6-A951-6C18011DEBA0}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.ECCGetEmailPlansForShopper.vsmdi = Atlantis.Framework.ECCGetEmailPlansForShopper.vsmdi
+		..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.sln = ..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.sln
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{37C7150E-08E3-4D4F-828E-4AD68C971BEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECC.Interface", "..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\Atlantis.Framework.ECC.Interface.csproj", "{35A2F607-EB94-4A71-9A01-2285357D3A61}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D30157B2-C1B3-4073-BA5E-632E2337A997}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockHttpContext", "..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj", "{2F8983B4-801B-461A-9D76-26A58A496261}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.ECCGetEmailPlansForShopper.Interface\\Atlantis.Framework.ECCGetEmailPlansForShopper.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.ECCGetEmailPlansForShopper.Interface
+		SccLocalPath1 = Atlantis.Framework.ECCGetEmailPlansForShopper.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.ECCGetEmailPlansForShopper.Impl\\Atlantis.Framework.ECCGetEmailPlansForShopper.Impl.csproj
+		SccProjectName2 = Atlantis.Framework.ECCGetEmailPlansForShopper.Impl
+		SccLocalPath2 = Atlantis.Framework.ECCGetEmailPlansForShopper.Impl
+		SccProjectUniqueName3 = ECCGetEmailPlansForShopper.ServiceTest\\ECCGetEmailPlansForShopper.ServiceTest.csproj
+		SccProjectName3 = ECCGetEmailPlansForShopper.ServiceTest
+		SccLocalPath3 = ECCGetEmailPlansForShopper.ServiceTest
+		SccProjectUniqueName4 = Atlantis.Framework.ECCGetEmailPlansForShopper.Test\\Atlantis.Framework.ECCGetEmailPlansForShopper.Test.csproj
+		SccProjectName4 = Atlantis.Framework.ECCGetEmailPlansForShopper.Test
+		SccLocalPath4 = Atlantis.Framework.ECCGetEmailPlansForShopper.Test
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.ECCGetEmailPlansForShopper.sln
+		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.ECCGetEmailPlansForShopper.sln
+		SccProjectName6 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath6 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface\\Atlantis.Framework.ECC.Interface.csproj
+		SccProjectName7 = ../Atlantis.Framework.ECC/Atlantis.Framework.ECC.Interface
+		SccLocalPath7 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.ECCGetEmailPlansForShopper.sln
+		SccProjectName8 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath8 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName9 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
+		SccProjectTopLevelParentUniqueName9 = Atlantis.Framework.ECCGetEmailPlansForShopper.sln
+		SccProjectName9 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
+		SccLocalPath9 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
+		SccProjectUniqueName10 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
+		SccProjectTopLevelParentUniqueName10 = Atlantis.Framework.ECCGetEmailPlansForShopper.sln
+		SccProjectName10 = ../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
+		SccLocalPath10 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.ECCGetEmailPlansForShopper.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}.Release|x86.ActiveCfg = Release|Any CPU
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5041F226-2C68-4A1E-A3DE-E612FFD1A4FF}.Release|x86.ActiveCfg = Release|Any CPU
+		{D42B8AAA-52E4-40EE-8FD8-0BAB362A08CC}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D42B8AAA-52E4-40EE-8FD8-0BAB362A08CC}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{D42B8AAA-52E4-40EE-8FD8-0BAB362A08CC}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{D42B8AAA-52E4-40EE-8FD8-0BAB362A08CC}.Debug|x86.ActiveCfg = Debug|x86
+		{D42B8AAA-52E4-40EE-8FD8-0BAB362A08CC}.Debug|x86.Build.0 = Debug|x86
+		{D42B8AAA-52E4-40EE-8FD8-0BAB362A08CC}.Release|Any CPU.ActiveCfg = Release|x86
+		{D42B8AAA-52E4-40EE-8FD8-0BAB362A08CC}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{D42B8AAA-52E4-40EE-8FD8-0BAB362A08CC}.Release|Mixed Platforms.Build.0 = Release|x86
+		{D42B8AAA-52E4-40EE-8FD8-0BAB362A08CC}.Release|x86.ActiveCfg = Release|x86
+		{D42B8AAA-52E4-40EE-8FD8-0BAB362A08CC}.Release|x86.Build.0 = Release|x86
+		{BA536183-6973-4B80-851F-A68904E3C3FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA536183-6973-4B80-851F-A68904E3C3FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA536183-6973-4B80-851F-A68904E3C3FF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BA536183-6973-4B80-851F-A68904E3C3FF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BA536183-6973-4B80-851F-A68904E3C3FF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BA536183-6973-4B80-851F-A68904E3C3FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA536183-6973-4B80-851F-A68904E3C3FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA536183-6973-4B80-851F-A68904E3C3FF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BA536183-6973-4B80-851F-A68904E3C3FF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BA536183-6973-4B80-851F-A68904E3C3FF}.Release|x86.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|x86.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|x86.ActiveCfg = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|x86.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|x86.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {37C7150E-08E3-4D4F-828E-4AD68C971BEF}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {37C7150E-08E3-4D4F-828E-4AD68C971BEF}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {37C7150E-08E3-4D4F-828E-4AD68C971BEF}
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {37C7150E-08E3-4D4F-828E-4AD68C971BEF}
+		{2F8983B4-801B-461A-9D76-26A58A496261} = {37C7150E-08E3-4D4F-828E-4AD68C971BEF}
+	EndGlobalSection
+EndGlobal

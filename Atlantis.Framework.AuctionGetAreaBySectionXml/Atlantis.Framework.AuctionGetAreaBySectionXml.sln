@@ -1,0 +1,136 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5C7E6F84-C621-4E91-93A9-1A54720E96E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Auction.Interface", "..\Atlantis.Framework.Auction.Interface\Atlantis.Framework.Auction.Interface\Atlantis.Framework.Auction.Interface.csproj", "{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionGetAreaBySectionXml.Impl", "Atlantis.Framework.AuctionGetAreaBySectionXml.Impl\Atlantis.Framework.AuctionGetAreaBySectionXml.Impl.csproj", "{BFA84757-12C7-4790-B627-A4A51BAD2904}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3A79F388-5068-4AA3-850C-0A8148D3078A} = {3A79F388-5068-4AA3-850C-0A8148D3078A}
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A} = {F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionGetAreaBySectionXml.Interface", "Atlantis.Framework.AuctionGetAreaBySectionXml.Interface\Atlantis.Framework.AuctionGetAreaBySectionXml.Interface.csproj", "{3A79F388-5068-4AA3-850C-0A8148D3078A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuctionGetAreaBySectionXml.Tests", "Atlantis.Framework.AuctionGetAreaBySectionXml.Tests\Atlantis.Framework.AuctionGetAreaBySectionXml.Tests.csproj", "{9EF7DFF7-7618-4663-8227-6D54BE9F3066}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{366E76CF-B77F-4C0B-A610-D988A267DD07}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.AuctionGetAreaBySectionXml.vsmdi = Atlantis.Framework.AuctionGetAreaBySectionXml.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.AuctionGetAreaBySectionXml.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.AuctionGetAreaBySectionXml.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Auction.Interface\\Atlantis.Framework.Auction.Interface\\Atlantis.Framework.Auction.Interface.csproj
+		SccProjectName3 = ../Atlantis.Framework.Auction.Interface/Atlantis.Framework.Auction.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.Auction.Interface\\Atlantis.Framework.Auction.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.AuctionGetAreaBySectionXml.Impl\\Atlantis.Framework.AuctionGetAreaBySectionXml.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.AuctionGetAreaBySectionXml.Impl
+		SccLocalPath4 = Atlantis.Framework.AuctionGetAreaBySectionXml.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.AuctionGetAreaBySectionXml.Interface\\Atlantis.Framework.AuctionGetAreaBySectionXml.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.AuctionGetAreaBySectionXml.Interface
+		SccLocalPath5 = Atlantis.Framework.AuctionGetAreaBySectionXml.Interface
+		SccProjectUniqueName6 = Atlantis.Framework.AuctionGetAreaBySectionXml.Tests\\Atlantis.Framework.AuctionGetAreaBySectionXml.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.AuctionGetAreaBySectionXml.Tests
+		SccLocalPath6 = Atlantis.Framework.AuctionGetAreaBySectionXml.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.AuctionGetAreaBySectionXml.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|x86.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|x86.ActiveCfg = Release|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}.Release|x86.ActiveCfg = Release|Any CPU
+		{BFA84757-12C7-4790-B627-A4A51BAD2904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFA84757-12C7-4790-B627-A4A51BAD2904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFA84757-12C7-4790-B627-A4A51BAD2904}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BFA84757-12C7-4790-B627-A4A51BAD2904}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BFA84757-12C7-4790-B627-A4A51BAD2904}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BFA84757-12C7-4790-B627-A4A51BAD2904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFA84757-12C7-4790-B627-A4A51BAD2904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFA84757-12C7-4790-B627-A4A51BAD2904}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BFA84757-12C7-4790-B627-A4A51BAD2904}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BFA84757-12C7-4790-B627-A4A51BAD2904}.Release|x86.ActiveCfg = Release|Any CPU
+		{3A79F388-5068-4AA3-850C-0A8148D3078A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A79F388-5068-4AA3-850C-0A8148D3078A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A79F388-5068-4AA3-850C-0A8148D3078A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3A79F388-5068-4AA3-850C-0A8148D3078A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3A79F388-5068-4AA3-850C-0A8148D3078A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3A79F388-5068-4AA3-850C-0A8148D3078A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A79F388-5068-4AA3-850C-0A8148D3078A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A79F388-5068-4AA3-850C-0A8148D3078A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3A79F388-5068-4AA3-850C-0A8148D3078A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3A79F388-5068-4AA3-850C-0A8148D3078A}.Release|x86.ActiveCfg = Release|Any CPU
+		{9EF7DFF7-7618-4663-8227-6D54BE9F3066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EF7DFF7-7618-4663-8227-6D54BE9F3066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EF7DFF7-7618-4663-8227-6D54BE9F3066}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9EF7DFF7-7618-4663-8227-6D54BE9F3066}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9EF7DFF7-7618-4663-8227-6D54BE9F3066}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9EF7DFF7-7618-4663-8227-6D54BE9F3066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EF7DFF7-7618-4663-8227-6D54BE9F3066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EF7DFF7-7618-4663-8227-6D54BE9F3066}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9EF7DFF7-7618-4663-8227-6D54BE9F3066}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9EF7DFF7-7618-4663-8227-6D54BE9F3066}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {5C7E6F84-C621-4E91-93A9-1A54720E96E5}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {5C7E6F84-C621-4E91-93A9-1A54720E96E5}
+	EndGlobalSection
+EndGlobal

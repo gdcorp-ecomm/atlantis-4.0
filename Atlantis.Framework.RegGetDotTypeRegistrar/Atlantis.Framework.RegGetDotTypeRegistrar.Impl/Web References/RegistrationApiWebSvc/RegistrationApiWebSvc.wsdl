@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:RegistrationApiWebSvc" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="urn:RegistrationApiWebSvc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="urn:RegistrationApiWebSvc">
+      <s:element name="GetDomainAPI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainAPIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainAPIResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTLDAPI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTLDAPIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTLDAPIResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTLDAPIList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTLDAPIListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTLDAPIListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductIdList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductIdListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductIdListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetDomainAPISoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainAPI" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainAPISoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainAPIResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTLDAPISoapIn">
+    <wsdl:part name="parameters" element="tns:GetTLDAPI" />
+  </wsdl:message>
+  <wsdl:message name="GetTLDAPISoapOut">
+    <wsdl:part name="parameters" element="tns:GetTLDAPIResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTLDAPIListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTLDAPIList" />
+  </wsdl:message>
+  <wsdl:message name="GetTLDAPIListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTLDAPIListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductId" />
+  </wsdl:message>
+  <wsdl:message name="GetProductIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductIdListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductIdList" />
+  </wsdl:message>
+  <wsdl:message name="GetProductIdListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductIdListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegistrationApiWebSvcSoap">
+    <wsdl:operation name="GetDomainAPI">
+      <wsdl:input message="tns:GetDomainAPISoapIn" />
+      <wsdl:output message="tns:GetDomainAPISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTLDAPI">
+      <wsdl:input message="tns:GetTLDAPISoapIn" />
+      <wsdl:output message="tns:GetTLDAPISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTLDAPIList">
+      <wsdl:input message="tns:GetTLDAPIListSoapIn" />
+      <wsdl:output message="tns:GetTLDAPIListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductId">
+      <wsdl:input message="tns:GetProductIdSoapIn" />
+      <wsdl:output message="tns:GetProductIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdList">
+      <wsdl:input message="tns:GetProductIdListSoapIn" />
+      <wsdl:output message="tns:GetProductIdListSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegistrationApiWebSvcSoap" type="tns:RegistrationApiWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDomainAPI">
+      <soap:operation soapAction="urn:RegistrationApiWebSvc/GetDomainAPI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTLDAPI">
+      <soap:operation soapAction="urn:RegistrationApiWebSvc/GetTLDAPI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTLDAPIList">
+      <soap:operation soapAction="urn:RegistrationApiWebSvc/GetTLDAPIList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductId">
+      <soap:operation soapAction="urn:RegistrationApiWebSvc/GetProductId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdList">
+      <soap:operation soapAction="urn:RegistrationApiWebSvc/GetProductIdList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegistrationApiWebSvcSoap12" type="tns:RegistrationApiWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDomainAPI">
+      <soap12:operation soapAction="urn:RegistrationApiWebSvc/GetDomainAPI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTLDAPI">
+      <soap12:operation soapAction="urn:RegistrationApiWebSvc/GetTLDAPI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTLDAPIList">
+      <soap12:operation soapAction="urn:RegistrationApiWebSvc/GetTLDAPIList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductId">
+      <soap12:operation soapAction="urn:RegistrationApiWebSvc/GetProductId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdList">
+      <soap12:operation soapAction="urn:RegistrationApiWebSvc/GetProductIdList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegistrationApiWebSvc">
+    <wsdl:port name="RegistrationApiWebSvcSoap" binding="tns:RegistrationApiWebSvcSoap">
+      <soap:address location="http://g1dwdsweb01/RegistrationApiWebSvc/RegistrationApiWebSvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegistrationApiWebSvcSoap12" binding="tns:RegistrationApiWebSvcSoap12">
+      <soap12:address location="http://g1dwdsweb01/RegistrationApiWebSvc/RegistrationApiWebSvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

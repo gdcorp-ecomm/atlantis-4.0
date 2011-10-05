@@ -58,6 +58,7 @@
     <Compile Include="CachedValue.cs" />
     <Compile Include="CacheLock.cs" />
     <Compile Include="CacheManager.cs" />
+    <Compile Include="CachedValueStatus.cs" />
     <Compile Include="DataCache.cs" />
     <Compile Include="DataCacheWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

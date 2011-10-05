@@ -290,26 +290,32 @@ namespace Atlantis.Framework.DataCache
       T result = default(T);
       string cacheName = "CustomCacheData." + typeof(T).FullName;
       Cache cache = _cacheManger.GetCache(cacheName, false);
-      object cacheValue = null;
-      bool isValid = cache.TryGetValue(request, out cacheValue);
+      CachedValue cachedValue = null;
+      bool isValid = cache.TryGetValue(request, out cachedValue);
 
-      if (!isValid)
+      if ((isValid) || ((cachedValue != null) && (cachedValue.Status == CachedValueStatus.RefreshInProgress)))
+      {
+        result = (T)cachedValue.Value;
+      }
+      else
       {
         try
         {
+          if (cachedValue != null)
+          {
+            cachedValue.MarkInProgress();
+          }
+
           result = getCustomDataForCache(request);
 
-          if (cacheValue != null)
-            cache.QuickClean((CachedValue)cacheValue);
-
-          cache.AddValue(request, result);
+          cache.AddValue(request, result, 0, cachedValue);
         }
         catch (Exception ex)
         {
-          if (cacheValue != null)
+          if (cachedValue != null)
           {
-            result = (T)((CachedValue)cacheValue).Value;
-            cache.RenewValue((CachedValue)cacheValue);
+            result = (T)cachedValue.Value;
+            cache.RenewValue(cachedValue);
           }
           else
           {
@@ -317,10 +323,6 @@ namespace Atlantis.Framework.DataCache
             throw ex;
           }
         }
-      }
-      else
-      {
-        result = (T)((CachedValue)cacheValue).Value;
       }
 
       return result;
@@ -1177,31 +1179,39 @@ namespace Atlantis.Framework.DataCache
 
     public static IResponseData GetProcessRequest(RequestData oRequestData, int iRequestType)
     {
-      IResponseData oResponseData = null;
+      IResponseData result = null;
       string sCacheName = "GetProcessRequest" + iRequestType.ToString();
       //TODO: Add Try Catch for MD5
       string sKey = oRequestData.GetCacheMD5();
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
-      bool bValid = oCache.TryGetValue(sKey, out oValue);
+      CachedValue cachedValue = null;
+      bool bValid = oCache.TryGetValue(sKey, out cachedValue);
 
-      if (!bValid)
+      if ((bValid) || ((cachedValue != null) && (cachedValue.Status == CachedValueStatus.RefreshInProgress)))
       {
+        result = (IResponseData)cachedValue.Value;
+      }
+      else
+      {
+        // We are going to make the call get a new value for the cache, if there is an existing value, change
+        // its status to Refreshing, so even though it is not valid, we don't make the call too many times.
+        // if its status is already refrehsing and we have a value, just use it.
+        if (cachedValue != null)
+        {
+          cachedValue.MarkInProgress();
+        }
+
         try
         {
-          oResponseData = Engine.Engine.ProcessRequest(oRequestData, iRequestType);
-
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, oResponseData);
+          result = Engine.Engine.ProcessRequest(oRequestData, iRequestType);
+          oCache.AddValue(sKey, result, 0, cachedValue);
         }
         catch (Exception ex)
         {
-          if (oValue != null)
+          if (cachedValue != null)
           {
-            oResponseData = (IResponseData)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            result = (IResponseData)cachedValue.Value;
+            oCache.RenewValue(cachedValue);
           }
           else
           {
@@ -1210,10 +1220,8 @@ namespace Atlantis.Framework.DataCache
           }
         }
       }
-      else
-        oResponseData = (IResponseData)((CachedValue)oValue).Value;
 
-      return oResponseData;
+      return result;
     }
 
     public static string GetProductDescription(string sPfidOrSku)

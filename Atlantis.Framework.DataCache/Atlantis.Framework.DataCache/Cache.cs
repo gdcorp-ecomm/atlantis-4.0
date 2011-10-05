@@ -104,31 +104,34 @@ namespace Atlantis.Framework.DataCache
       return sb.ToString();
     }
 
-    public bool TryGetValue(string key, out object cachedValue)
+    public bool TryGetValue(string key, out CachedValue cachedValue)
     {
-      CachedValue tempCachedValue = null;
+      cachedValue = null;
       bool isValid = false;
       bool foundValue = false;
 
       try
       {
         _cacheLock.GetReaderLock();
-        foundValue = _cachedValuesDictionary.TryGetValue(key, out tempCachedValue);
-        _cacheLock.ReleaseReaderLock();
+        try
+        {
+          foundValue = _cachedValuesDictionary.TryGetValue(key, out cachedValue);
+        }
+        finally
+        {
+          _cacheLock.ReleaseReaderLock();
+        }
 
-        if (foundValue && tempCachedValue != null)
-          isValid = tempCachedValue.IsValidValue;
+        if (foundValue && cachedValue != null)
+          isValid = (cachedValue.Status == CachedValueStatus.Valid);
 
         if (isValid && foundValue)
           Interlocked.Increment(ref _iHit);
         else
           Interlocked.Increment(ref _iMiss);
-
-        cachedValue = tempCachedValue;
       }
       catch (Exception ex)
       {
-        _cacheLock.ReleaseReaderLock();
         LogError(_cacheName, key, ex);
         cachedValue = null;
         isValid = false;
@@ -137,27 +140,38 @@ namespace Atlantis.Framework.DataCache
       return isValid && foundValue;
     }
 
+    public bool TryGetValue(string key, out object cachedValue)
+    {
+      CachedValue typedOutValue;
+      bool result = TryGetValue(key, out typedOutValue);
+      cachedValue = typedOutValue;
+      return result;
+    }
+
     public void RenewValue(CachedValue cachedValue)
     {
       try
       {
         _cacheLock.GetWriterLock();
 
-        cachedValue.MarkInvalid();
-        _cachedValuesDictionary.Remove(cachedValue.Key);
+        try
+        {
+          cachedValue.MarkInactive();
+          _cachedValuesDictionary.Remove(cachedValue.Key);
 
-        if (cachedValue.PrivateLabelId != 0)
-          AddValue(cachedValue.Key, cachedValue.Value, cachedValue.PrivateLabelId);
-        else
-          AddValue(cachedValue.Key, cachedValue.Value, 0);
+          if (cachedValue.PrivateLabelId != 0)
+            AddValue(cachedValue.Key, cachedValue.Value, cachedValue.PrivateLabelId);
+          else
+            AddValue(cachedValue.Key, cachedValue.Value, 0);
+        }
+        finally
+        {
+          _cacheLock.ReleaseWriterLock(); // Clean-up lock
+        }
       }
       catch (Exception ex)
       {
         LogError(_cacheName, cachedValue.Key, ex);
-      }
-      finally
-      {
-        _cacheLock.ReleaseWriterLock(); // Clean-up lock
       }
     }
 
@@ -169,61 +183,123 @@ namespace Atlantis.Framework.DataCache
       try
       {
         timeKey = DateTime.UtcNow.Ticks;
-
         _cacheLock.GetWriterLock();
 
-        maxCheck = System.Math.Min(MAX_CLEAN, (int)((_cachedValuesLinkList.Count * .05) + 1));
-
-        if (cachedValue.IsActive)
+        try
         {
-          cachedValue.MarkInvalid();
-          _cachedValuesDictionary.Remove(cachedValue.Key);
+          maxCheck = System.Math.Min(MAX_CLEAN, (int)((_cachedValuesLinkList.Count * .05) + 1));
+
+          if (cachedValue.IsActive)
+          {
+            cachedValue.MarkInactive();
+            _cachedValuesDictionary.Remove(cachedValue.Key);
+          }
+
+          LinkedListNode<object> oNode = _cachedValuesLinkList.First;
+          int i = 0;
+          bool bExit = false;
+          while (i < maxCheck && oNode != null && !bExit)
+          {
+            WeakReference oWeakRef = (WeakReference)oNode.Value;
+            LinkedListNode<object> oNextNode = oNode.Next;
+
+            if (oWeakRef.Target == null || !(((CachedValue)oWeakRef.Target).IsActive))
+            {
+              _cachedValuesLinkList.Remove(oNode);
+            }
+            else if (((CachedValue)oWeakRef.Target).FinalTicks < timeKey)
+            {
+              ((CachedValue)oWeakRef.Target).MarkInactive();
+              _cachedValuesDictionary.Remove(((CachedValue)oWeakRef.Target).Key);
+              _cachedValuesLinkList.Remove(oNode);
+            }
+            else
+              bExit = true;
+
+            oNode = oNextNode;
+            i++;
+          }
         }
-
-        LinkedListNode<object> oNode = _cachedValuesLinkList.First;
-        int i = 0;
-        bool bExit = false;
-        while (i < maxCheck && oNode != null && !bExit)
+        finally
         {
-          WeakReference oWeakRef = (WeakReference)oNode.Value;
-          LinkedListNode<object> oNextNode = oNode.Next;
-
-          if (oWeakRef.Target == null || !(((CachedValue)oWeakRef.Target).IsActive))
-          {
-            _cachedValuesLinkList.Remove(oNode);
-          }
-          else if (((CachedValue)oWeakRef.Target).FinalTicks < timeKey)
-          {
-            ((CachedValue)oWeakRef.Target).MarkInvalid();
-            _cachedValuesDictionary.Remove(((CachedValue)oWeakRef.Target).Key);
-            _cachedValuesLinkList.Remove(oNode);
-          }
-          else
-            bExit = true;
-
-          oNode = oNextNode;
-          i++;
+          _cacheLock.ReleaseWriterLock(); // Clean-up lock
         }
       }
       catch (Exception ex)
       {
         LogError(_cacheName, cachedValue.Key, ex);
       }
-      finally
-      {
-        _cacheLock.ReleaseWriterLock(); // Clean-up lock
-      }
     }
 
     // WeakReference - http://msdn2.microsoft.com/en-us/library/ms404247.aspx
+    public void AddValue(string key, object cacheValue, int privateLabelId, CachedValue oldCachedValue)
+    {
+      DateTime finalExpiration = DateTime.UtcNow + _itemCacheTime;
+      CachedValue newCachedValue = new CachedValue(key, cacheValue, finalExpiration.Ticks, privateLabelId);
+
+      _cacheLock.GetWriterLock();
+      try
+      {
+        if ((oldCachedValue != null) && (oldCachedValue.Key == newCachedValue.Key))
+        {
+          try
+          {
+            int maxCheck = System.Math.Min(MAX_CLEAN, (int)((_cachedValuesLinkList.Count * .05) + 1));
+            long timeKey = DateTime.UtcNow.Ticks;
+
+            if (oldCachedValue.IsActive)
+            {
+              oldCachedValue.MarkInactive();
+            }
+
+            LinkedListNode<object> oNode = _cachedValuesLinkList.First;
+            int i = 0;
+            bool bExit = false;
+            while (i < maxCheck && oNode != null && !bExit)
+            {
+              WeakReference oWeakRef = (WeakReference)oNode.Value;
+              LinkedListNode<object> oNextNode = oNode.Next;
+
+              CachedValue targetCachedValue = oWeakRef.Target as CachedValue;
+              if ((targetCachedValue == null) || (!targetCachedValue.IsActive))
+              {
+                _cachedValuesLinkList.Remove(oNode);
+              }
+              else if ((targetCachedValue.FinalTicks < timeKey) && (targetCachedValue.Status != CachedValueStatus.RefreshInProgress))
+              {
+                _cachedValuesLinkList.Remove(oNode);
+                _cachedValuesDictionary.Remove(targetCachedValue.Key);
+              }
+              else
+                bExit = true;
+
+              oNode = oNextNode;
+              i++;
+            }
+          }
+          catch (Exception ex)
+          {
+            LogError(_cacheName, oldCachedValue.Key, ex);
+          }
+        }
+
+        _cachedValuesDictionary[newCachedValue.Key] = newCachedValue;
+        _cachedValuesLinkList.AddLast(new WeakReference(newCachedValue));
+      }
+      finally
+      {
+        _cacheLock.ReleaseWriterLock();
+      }
+    }
+
     public void AddValue(string key, object cacheValue, int privateLabelId)
     {
       DateTime finalExpiration = DateTime.UtcNow + _itemCacheTime;
       CachedValue oCachedValue = new CachedValue(key, cacheValue, finalExpiration.Ticks, privateLabelId);
 
+      _cacheLock.GetWriterLock();
       try
       {
-        _cacheLock.GetWriterLock();
         if (!_cachedValuesDictionary.ContainsKey(key))
         {
           _cachedValuesDictionary.Add(key, oCachedValue);
@@ -246,53 +322,56 @@ namespace Atlantis.Framework.DataCache
       try
       {
         _cacheLock.GetWriterLock();
-        if (privateLabelIds.Count > 0)
+        try
         {
-          long timeKey = DateTime.UtcNow.Ticks;
-          LinkedListNode<object> oNode = _cachedValuesLinkList.First;
-
-          while (oNode != null)
+          if (privateLabelIds.Count > 0)
           {
-            WeakReference oWeakRef = (WeakReference)oNode.Value;
-            LinkedListNode<object> oNextNode = oNode.Next;
+            long timeKey = DateTime.UtcNow.Ticks;
+            LinkedListNode<object> oNode = _cachedValuesLinkList.First;
 
-            if (oWeakRef.Target == null || !(((CachedValue)oWeakRef.Target).IsActive))
+            while (oNode != null)
             {
-              _cachedValuesLinkList.Remove(oNode);
-            }
-            else if (((CachedValue)oWeakRef.Target).FinalTicks < timeKey ||
-                     ((CachedValue)oWeakRef.Target).PrivateLabelId == 0 ||
-                     privateLabelIds.Contains(((CachedValue)oWeakRef.Target).PrivateLabelId))
-            {
-              ((CachedValue)oWeakRef.Target).MarkInvalid();
-              _cachedValuesDictionary.Remove(((CachedValue)oWeakRef.Target).Key);
-              _cachedValuesLinkList.Remove(oNode);
-            }
+              WeakReference oWeakRef = (WeakReference)oNode.Value;
+              LinkedListNode<object> oNextNode = oNode.Next;
 
-            oNode = oNextNode;
+              if (oWeakRef.Target == null || !(((CachedValue)oWeakRef.Target).IsActive))
+              {
+                _cachedValuesLinkList.Remove(oNode);
+              }
+              else if (((CachedValue)oWeakRef.Target).FinalTicks < timeKey ||
+                       ((CachedValue)oWeakRef.Target).PrivateLabelId == 0 ||
+                       privateLabelIds.Contains(((CachedValue)oWeakRef.Target).PrivateLabelId))
+              {
+                ((CachedValue)oWeakRef.Target).MarkInactive();
+                _cachedValuesDictionary.Remove(((CachedValue)oWeakRef.Target).Key);
+                _cachedValuesLinkList.Remove(oNode);
+              }
+
+              oNode = oNextNode;
+            }
+          }
+          else
+          {
+            _cachedValuesDictionary.Clear();
+            _cachedValuesLinkList.Clear();
           }
         }
-        else
+        finally
         {
-          _cachedValuesDictionary.Clear();
-          _cachedValuesLinkList.Clear();
+          _cacheLock.ReleaseWriterLock();
         }
       }
       catch (Exception ex)
       {
         LogError("Cache.ClearByPLID(): " + _cacheName, "", ex);
       }
-      finally
-      {
-        _cacheLock.ReleaseWriterLock();
-      }
     }
 
     public void Clear()
     {
+      _cacheLock.GetWriterLock();
       try
       {
-        _cacheLock.GetWriterLock();
         _cachedValuesLinkList.Clear();
         _cachedValuesDictionary.Clear();
       }
@@ -309,9 +388,9 @@ namespace Atlantis.Framework.DataCache
       xtwRequest.WriteStartElement("Cache");
       xtwRequest.WriteAttributeString("MethodName", _cacheName);
 
+      _cacheLock.GetReaderLock();
       try
       {
-        _cacheLock.GetReaderLock();
         foreach (KeyValuePair<string, CachedValue> oPair in _cachedValuesDictionary)
         {
           xtwRequest.WriteStartElement("Data");

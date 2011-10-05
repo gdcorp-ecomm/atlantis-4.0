@@ -9,6 +9,7 @@ namespace Atlantis.Framework.DataCache
     string _key;
     bool _isActive;
     int _privateLabelId;
+    CachedValueStatus _status;
 
     public CachedValue(string key, object cacheValue, long finalTicks, int privateLabelId)
     {
@@ -17,6 +18,7 @@ namespace Atlantis.Framework.DataCache
       _finalTicks = finalTicks;
       _isActive = true;
       _privateLabelId = privateLabelId;
+      _status = CachedValueStatus.Valid;
     }
 
     public object Value
@@ -44,20 +46,24 @@ namespace Atlantis.Framework.DataCache
       get { return _isActive; }
     }
 
-    public bool IsValidValue
+    public CachedValueStatus Status
     {
       get
       {
-        bool result = false;
-        if (DateTime.UtcNow.Ticks <= _finalTicks)
+        if ((_status == CachedValueStatus.Valid) && ((DateTime.UtcNow.Ticks > _finalTicks)))
         {
-          result = true;
+          _status = CachedValueStatus.Invalid;
         }
-        return result;
+        return _status;
       }
     }
 
-    public void MarkInvalid()
+    public void MarkInProgress()
+    {
+      _status = CachedValueStatus.RefreshInProgress;
+    }
+
+    public void MarkInactive()
     {
       _isActive = false;
     }

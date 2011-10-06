@@ -139,7 +139,7 @@ namespace Atlantis.Framework.DataCache
 
     public void ClearCacheAllCachesByPLID(HashSet<int> privateLabelIds)
     {
-      using (SlimWrite write = _cacheLock.GetWriteLock())
+      using (SlimRead read = _cacheLock.GetReadLock())
       {
         foreach (KeyValuePair<string, Cache> oPair in _cacheMap)
           oPair.Value.ClearByPLID(privateLabelIds);
@@ -153,7 +153,7 @@ namespace Atlantis.Framework.DataCache
     public void ClearCacheData(string cacheName)
     {
       Cache oCache = null;
-      using (SlimWrite write = _cacheLock.GetWriteLock())
+      using (SlimRead read = _cacheLock.GetReadLock())
       {
         if (_cacheMap.TryGetValue(cacheName, out oCache))
           oCache.Clear();
@@ -166,7 +166,7 @@ namespace Atlantis.Framework.DataCache
 
     public void ClearAllCaches()
     {
-      using (SlimWrite write = _cacheLock.GetWriteLock())
+      using (SlimRead read = _cacheLock.GetReadLock())
       {
         foreach (KeyValuePair<string, Cache> oPair in _cacheMap)
           oPair.Value.Clear();

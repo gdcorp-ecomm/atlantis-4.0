@@ -19,7 +19,7 @@ namespace Atlantis.Framework.DataCache
       _finalTicks = finalTicks;
       _isActive = true;
       _privateLabelId = privateLabelId;
-      _status = CachedValueStatus.Valid;
+      _status = CachedValueStatus.NotExpired;
       _statusLock = new SlimLock();
     }
 
@@ -58,13 +58,13 @@ namespace Atlantis.Framework.DataCache
           tempStatus = _status;
         }
         
-        if ((tempStatus == CachedValueStatus.Valid) && ((DateTime.UtcNow.Ticks > _finalTicks)))
+        if ((tempStatus == CachedValueStatus.NotExpired) && ((DateTime.UtcNow.Ticks > _finalTicks)))
         {
           using (SlimWrite write = _statusLock.GetWriteLock())
           {
-            if (_status == CachedValueStatus.Valid)
+            if (_status == CachedValueStatus.NotExpired)
             {
-              _status = CachedValueStatus.Invalid;
+              _status = CachedValueStatus.Expired;
             }
           }
         }

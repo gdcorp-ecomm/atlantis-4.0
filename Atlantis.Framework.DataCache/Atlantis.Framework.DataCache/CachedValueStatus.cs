@@ -3,8 +3,8 @@ namespace Atlantis.Framework.DataCache
 {
   internal enum CachedValueStatus : int
   {
-    Valid = 0,
-    Invalid = 1,
+    NotExpired = 0,
+    Expired = 1,
     RefreshInProgress = 2
   }
 }

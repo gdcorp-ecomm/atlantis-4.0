@@ -106,7 +106,7 @@ namespace Atlantis.Framework.DataCache
     public bool TryGetValue(string key, out CachedValue cachedValue)
     {
       cachedValue = null;
-      bool isValid = false;
+      bool isFresh = false;
       bool foundValue = false;
 
       try
@@ -118,11 +118,11 @@ namespace Atlantis.Framework.DataCache
 
         if (foundValue && cachedValue != null)
         {
-          isValid = (cachedValue.Status == CachedValueStatus.Valid);
+          isFresh = (cachedValue.Status == CachedValueStatus.NotExpired);
         }
 
 #if DEBUG
-        if (isValid && foundValue)
+        if (isFresh && foundValue)
           Interlocked.Increment(ref _iHit);
         else
           Interlocked.Increment(ref _iMiss);
@@ -133,10 +133,10 @@ namespace Atlantis.Framework.DataCache
       {
         LogError(_cacheName, key, ex);
         cachedValue = null;
-        isValid = false;
+        isFresh = false;
       }
 
-      return isValid && foundValue;
+      return isFresh && foundValue;
     }
 
     public void RenewValue(CachedValue cachedValue)

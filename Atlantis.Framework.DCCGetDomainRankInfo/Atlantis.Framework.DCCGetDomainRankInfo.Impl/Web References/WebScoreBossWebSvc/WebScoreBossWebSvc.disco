@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://godaddydiagnostics.dev.intranet.gdg/WebScoreBossWebSvc/WebScoreBossWebSvc.asmx?wsdl" docRef="http://godaddydiagnostics.dev.intranet.gdg/WebScoreBossWebSvc/WebScoreBossWebSvc.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://godaddydiagnostics.dev.intranet.gdg/WebScoreBossWebSvc/WebScoreBossWebSvc.asmx" xmlns:q1="http://webscore/webscorebosswebsvc/" binding="q1:WebScoreBossWebSvcSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://godaddydiagnostics.dev.intranet.gdg/WebScoreBossWebSvc/WebScoreBossWebSvc.asmx" xmlns:q2="http://webscore/webscorebosswebsvc/" binding="q2:WebScoreBossWebSvcSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

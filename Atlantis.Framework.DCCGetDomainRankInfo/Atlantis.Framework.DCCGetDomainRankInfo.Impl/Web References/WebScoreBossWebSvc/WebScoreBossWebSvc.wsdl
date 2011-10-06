@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://webscore/webscorebosswebsvc/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://webscore/webscorebosswebsvc/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://webscore/webscorebosswebsvc/">
+      <s:element name="GetRankInfoForDomainIds">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRankInfoForDomainIdsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRankInfoForDomainIdsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="label" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="queueNickName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendMessageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessageByLookupId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lookupId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="queueNickName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessageByLookupIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMessageByLookupIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lookupId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="queueNickName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveMessageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOldestMessages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="queueNickName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOldestMessagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOldestMessagesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetQueueCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="queueNickName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetQueueCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetQueueCountResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRealTimeQueueCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="queueNickName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRealTimeQueueCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeQueueCountResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="domainId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="requestTypeCode" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertRequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequestsByDomainId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="domainId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="howMany" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequestsByDomainIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRequestsByDomainIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequestById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="requestId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequestByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRequestByIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequestByIdEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="requestId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="generateXmlIfMissing" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequestByIdExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRequestByIdExResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelRequestsByDomainId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="domainId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelRequestsByDomainIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CancelRequestsByDomainIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelRequestById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="requestId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelRequestByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CancelRequestByIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WebSvcHealthCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WebSvcHealthCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WebSvcHealthCheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetRankInfoForDomainIdsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRankInfoForDomainIds" />
+  </wsdl:message>
+  <wsdl:message name="GetRankInfoForDomainIdsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRankInfoForDomainIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageByLookupIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMessageByLookupId" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageByLookupIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMessageByLookupIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveMessage" />
+  </wsdl:message>
+  <wsdl:message name="RemoveMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOldestMessagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOldestMessages" />
+  </wsdl:message>
+  <wsdl:message name="GetOldestMessagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOldestMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetQueueCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetQueueCount" />
+  </wsdl:message>
+  <wsdl:message name="GetQueueCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetQueueCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRealTimeQueueCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRealTimeQueueCount" />
+  </wsdl:message>
+  <wsdl:message name="GetRealTimeQueueCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRealTimeQueueCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertRequest" />
+  </wsdl:message>
+  <wsdl:message name="InsertRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRequestsByDomainIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRequestsByDomainId" />
+  </wsdl:message>
+  <wsdl:message name="GetRequestsByDomainIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRequestsByDomainIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRequestByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRequestById" />
+  </wsdl:message>
+  <wsdl:message name="GetRequestByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRequestByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRequestByIdExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRequestByIdEx" />
+  </wsdl:message>
+  <wsdl:message name="GetRequestByIdExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRequestByIdExResponse" />
+  </wsdl:message>
+  <wsdl:message name="CancelRequestsByDomainIdSoapIn">
+    <wsdl:part name="parameters" element="tns:CancelRequestsByDomainId" />
+  </wsdl:message>
+  <wsdl:message name="CancelRequestsByDomainIdSoapOut">
+    <wsdl:part name="parameters" element="tns:CancelRequestsByDomainIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="CancelRequestByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:CancelRequestById" />
+  </wsdl:message>
+  <wsdl:message name="CancelRequestByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:CancelRequestByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="WebSvcHealthCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:WebSvcHealthCheck" />
+  </wsdl:message>
+  <wsdl:message name="WebSvcHealthCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:WebSvcHealthCheckResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebScoreBossWebSvcSoap">
+    <wsdl:operation name="GetRankInfoForDomainIds">
+      <wsdl:input message="tns:GetRankInfoForDomainIdsSoapIn" />
+      <wsdl:output message="tns:GetRankInfoForDomainIdsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:input message="tns:SendMessageSoapIn" />
+      <wsdl:output message="tns:SendMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageByLookupId">
+      <wsdl:input message="tns:GetMessageByLookupIdSoapIn" />
+      <wsdl:output message="tns:GetMessageByLookupIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMessage">
+      <wsdl:input message="tns:RemoveMessageSoapIn" />
+      <wsdl:output message="tns:RemoveMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOldestMessages">
+      <wsdl:input message="tns:GetOldestMessagesSoapIn" />
+      <wsdl:output message="tns:GetOldestMessagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQueueCount">
+      <wsdl:input message="tns:GetQueueCountSoapIn" />
+      <wsdl:output message="tns:GetQueueCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRealTimeQueueCount">
+      <wsdl:input message="tns:GetRealTimeQueueCountSoapIn" />
+      <wsdl:output message="tns:GetRealTimeQueueCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRequest">
+      <wsdl:input message="tns:InsertRequestSoapIn" />
+      <wsdl:output message="tns:InsertRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestsByDomainId">
+      <wsdl:input message="tns:GetRequestsByDomainIdSoapIn" />
+      <wsdl:output message="tns:GetRequestsByDomainIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestById">
+      <wsdl:input message="tns:GetRequestByIdSoapIn" />
+      <wsdl:output message="tns:GetRequestByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestByIdEx">
+      <wsdl:input message="tns:GetRequestByIdExSoapIn" />
+      <wsdl:output message="tns:GetRequestByIdExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelRequestsByDomainId">
+      <wsdl:input message="tns:CancelRequestsByDomainIdSoapIn" />
+      <wsdl:output message="tns:CancelRequestsByDomainIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelRequestById">
+      <wsdl:input message="tns:CancelRequestByIdSoapIn" />
+      <wsdl:output message="tns:CancelRequestByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WebSvcHealthCheck">
+      <wsdl:input message="tns:WebSvcHealthCheckSoapIn" />
+      <wsdl:output message="tns:WebSvcHealthCheckSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebScoreBossWebSvcSoap" type="tns:WebScoreBossWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRankInfoForDomainIds">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/GetRankInfoForDomainIds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/SendMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageByLookupId">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/GetMessageByLookupId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMessage">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/RemoveMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOldestMessages">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/GetOldestMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQueueCount">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/GetQueueCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRealTimeQueueCount">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/GetRealTimeQueueCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRequest">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/InsertRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestsByDomainId">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/GetRequestsByDomainId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestById">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/GetRequestById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestByIdEx">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/GetRequestByIdEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelRequestsByDomainId">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/CancelRequestsByDomainId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelRequestById">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/CancelRequestById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WebSvcHealthCheck">
+      <soap:operation soapAction="http://webscore/webscorebosswebsvc/WebSvcHealthCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebScoreBossWebSvcSoap12" type="tns:WebScoreBossWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRankInfoForDomainIds">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/GetRankInfoForDomainIds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/SendMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageByLookupId">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/GetMessageByLookupId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMessage">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/RemoveMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOldestMessages">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/GetOldestMessages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQueueCount">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/GetQueueCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRealTimeQueueCount">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/GetRealTimeQueueCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRequest">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/InsertRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestsByDomainId">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/GetRequestsByDomainId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestById">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/GetRequestById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestByIdEx">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/GetRequestByIdEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelRequestsByDomainId">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/CancelRequestsByDomainId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelRequestById">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/CancelRequestById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WebSvcHealthCheck">
+      <soap12:operation soapAction="http://webscore/webscorebosswebsvc/WebSvcHealthCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebScoreBossWebSvc">
+    <wsdl:port name="WebScoreBossWebSvcSoap" binding="tns:WebScoreBossWebSvcSoap">
+      <soap:address location="http://godaddydiagnostics.dev.intranet.gdg/WebScoreBossWebSvc/WebScoreBossWebSvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebScoreBossWebSvcSoap12" binding="tns:WebScoreBossWebSvcSoap12">
+      <soap12:address location="http://godaddydiagnostics.dev.intranet.gdg/WebScoreBossWebSvc/WebScoreBossWebSvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

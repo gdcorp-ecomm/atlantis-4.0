@@ -200,7 +200,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetAdServerCategories";
       string sKey = appName + "-" + pageName + "-" + locationName;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -215,17 +215,14 @@ namespace Atlantis.Framework.DataCache
 
           dtResult = GetDataTableFromRecordset(oRecordSet);
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, dtResult);
+          oCache.AddValue(sKey, dtResult, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            dtResult = (DataTable)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            dtResult = (DataTable)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -235,7 +232,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        dtResult = (DataTable)((CachedValue)oValue).Value;
+        dtResult = (DataTable)oValue.Value;
 
       return dtResult;
     }
@@ -246,7 +243,7 @@ namespace Atlantis.Framework.DataCache
       string sSettingValue = string.Empty;
       string sKey = settingName;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -258,17 +255,14 @@ namespace Atlantis.Framework.DataCache
             sSettingValue = oCacheWrapper.COMAccessClass.GetAppSetting(settingName);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, sSettingValue);
+          oCache.AddValue(sKey, sSettingValue, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            sSettingValue = (string)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            sSettingValue = (string)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -278,7 +272,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        sSettingValue = (string)((CachedValue)oValue).Value;
+        sSettingValue = (string)oValue.Value;
 
       return sSettingValue;
     }
@@ -334,7 +328,7 @@ namespace Atlantis.Framework.DataCache
       string sValue = string.Empty;
       string sKey = requestXml;
       Cache oCache = _cacheManger.GetGenericDataCache(sCacheName);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -346,20 +340,17 @@ namespace Atlantis.Framework.DataCache
             sValue = oCacheWrapper.COMAccessClass.GetCacheData(requestXml);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
           if (oCache.IsBasedOnPrivateLabelId)
-            oCache.AddValue(sKey, sValue, GetPrivateLabelIDFromCallXML(requestXml, oCache.PrivateLabelIdName));
+            oCache.AddValue(sKey, sValue, GetPrivateLabelIDFromCallXML(requestXml, oCache.PrivateLabelIdName), oValue);
           else
-            oCache.AddValue(sKey, sValue);
+            oCache.AddValue(sKey, sValue, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            sValue = (string)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            sValue = (string)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -369,7 +360,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        sValue = (string)((CachedValue)oValue).Value;
+        sValue = (string)oValue.Value;
 
       return sValue;
     }
@@ -380,7 +371,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = GetOuterTagName(requestXml);
       string sKey = requestXml;
       Cache oCache = _cacheManger.GetGenericRsCache(sCacheName);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -396,20 +387,17 @@ namespace Atlantis.Framework.DataCache
 
           dtResult = GetDataTableFromRecordset(oRecordSet);
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
           if (oCache.IsBasedOnPrivateLabelId)
-            oCache.AddValue(sKey, dtResult, GetPrivateLabelIDFromCallXML(requestXml, oCache.PrivateLabelIdName));
+            oCache.AddValue(sKey, dtResult, GetPrivateLabelIDFromCallXML(requestXml, oCache.PrivateLabelIdName), oValue);
           else
-            oCache.AddValue(sKey, dtResult);
+            oCache.AddValue(sKey, dtResult, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            dtResult = (DataTable)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            dtResult = (DataTable)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -419,7 +407,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        dtResult = (DataTable)((CachedValue)oValue).Value;
+        dtResult = (DataTable)oValue.Value;
 
       return dtResult;
     }
@@ -434,7 +422,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetCountryData";
       string sKey = countryId.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -457,17 +445,15 @@ namespace Atlantis.Framework.DataCache
                                                             (string)oPvtAbbreviation,
                                                             (int)oPvtCallingCode,
                                                             (bool)oPvtIsSupported);
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
 
-          oCache.AddValue(sKey, oCountryValues);
+          oCache.AddValue(sKey, oCountryValues, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            oCountryValues = (Structs.GetCountryDataValues)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            oCountryValues = (Structs.GetCountryDataValues)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -478,7 +464,7 @@ namespace Atlantis.Framework.DataCache
       }
       else
       {
-        oCountryValues = (Structs.GetCountryDataValues)((CachedValue)oValue).Value;
+        oCountryValues = (Structs.GetCountryDataValues)oValue.Value;
       }
 
       abbreviation = oCountryValues.Abbreviation;
@@ -493,7 +479,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetCountryList";
       string sKey = sCacheName;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -509,17 +495,14 @@ namespace Atlantis.Framework.DataCache
 
           dtResult = GetDataTableFromXMLElements("/countries/country", sCountryList);
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, dtResult);
+          oCache.AddValue(sKey, dtResult, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            dtResult = (DataTable)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            dtResult = (DataTable)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -529,7 +512,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        dtResult = (DataTable)((CachedValue)oValue).Value;
+        dtResult = (DataTable)oValue.Value;
 
       return dtResult;
     }
@@ -540,7 +523,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetCurrencyDataXml";
       string sKey = currencyType;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -552,17 +535,14 @@ namespace Atlantis.Framework.DataCache
             result = oCacheWrapper.COMAccessClass.GetCurrencyData(sKey);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, result);
+          oCache.AddValue(sKey, result, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            result = (string)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            result = (string)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -572,7 +552,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        result = (string)((CachedValue)oValue).Value;
+        result = (string)oValue.Value;
 
       return result;
     }
@@ -584,7 +564,7 @@ namespace Atlantis.Framework.DataCache
       string sCurrencyAll = "{all}";
       string sKey = sCurrencyAll;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -617,17 +597,14 @@ namespace Atlantis.Framework.DataCache
             }
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, dictResult);
+          oCache.AddValue(sKey, dictResult, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            dictResult = (Dictionary<string, Dictionary<string, string>>)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            dictResult = (Dictionary<string, Dictionary<string, string>>)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -637,7 +614,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        dictResult = (Dictionary<string, Dictionary<string, string>>)((CachedValue)oValue).Value;
+        dictResult = (Dictionary<string, Dictionary<string, string>>)oValue.Value;
 
       return dictResult;
     }
@@ -648,7 +625,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetCurrencyData";
       string sKey = sCurrency;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -663,17 +640,14 @@ namespace Atlantis.Framework.DataCache
 
           dictResult = GetDictionaryFromXMLElement("/currency", sCurrencyValue);
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, dictResult);
+          oCache.AddValue(sKey, dictResult, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            dictResult = (Dictionary<string, string>)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            dictResult = (Dictionary<string, string>)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -683,7 +657,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        dictResult = (Dictionary<string, string>)((CachedValue)oValue).Value;
+        dictResult = (Dictionary<string, string>)oValue.Value;
 
       return dictResult;
     }
@@ -700,7 +674,7 @@ namespace Atlantis.Framework.DataCache
       int iListPrice = -1;
       string sKey = iPrivateLabelID.ToString() + "-" + sPfidOrSku + "_" + iPriceTypeID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -712,17 +686,14 @@ namespace Atlantis.Framework.DataCache
             iListPrice = oCacheWrapper.COMAccessClass.GetListPrice(iPrivateLabelID, sPfidOrSku, iPriceTypeID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, iListPrice, iPrivateLabelID);
+          oCache.AddValue(sKey, iListPrice, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            iListPrice = (int)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            iListPrice = (int)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -732,7 +703,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        iListPrice = (int)((CachedValue)oValue).Value;
+        iListPrice = (int)oValue.Value;
 
       return iListPrice;
     }
@@ -765,7 +736,7 @@ namespace Atlantis.Framework.DataCache
       bool bRet = false;
       string sKey = iPrivateLabelID.ToString() + "-" + sPfidOrSku + "-" + iPriceTypeID.ToString() + "-" + sCurrency;
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -786,17 +757,14 @@ namespace Atlantis.Framework.DataCache
             oPriceValues.ReturnValue = bRet;
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, oPriceValues, iPrivateLabelID);
+          oCache.AddValue(sKey, oPriceValues, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            oPriceValues = (Structs.GetListPriceExValues)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            oPriceValues = (Structs.GetListPriceExValues)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -806,7 +774,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        oPriceValues = (Structs.GetListPriceExValues)((CachedValue)oValue).Value;
+        oPriceValues = (Structs.GetListPriceExValues)oValue.Value;
 
       iListPrice = oPriceValues.ListPrice;
       bEstimate = oPriceValues.IsEstimate;
@@ -823,7 +791,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetMaintNotice";
       string sKey = sWebsite;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -842,17 +810,14 @@ namespace Atlantis.Framework.DataCache
             oNoticeValues.NoticeBody = (string)oPvtNoticeBody;
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, oNoticeValues);
+          oCache.AddValue(sKey, oNoticeValues, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            oNoticeValues = (Structs.GetMaintNoticeValues)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            oNoticeValues = (Structs.GetMaintNoticeValues)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -862,7 +827,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        oNoticeValues = (Structs.GetMaintNoticeValues)((CachedValue)oValue).Value;
+        oNoticeValues = (Structs.GetMaintNoticeValues)oValue.Value;
 
       bNoticeIsPresent = oNoticeValues.NoticeIsPresent;
       sNoticeHeader = oNoticeValues.NoticeHeader;
@@ -877,7 +842,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetMgrCategoriesForUser";
       string sKey = iManagerUserID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -893,17 +858,14 @@ namespace Atlantis.Framework.DataCache
 
           oMgrValues = GetMgrAttrsAndCategoriesFromXML(sMgrCategories);
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, oMgrValues);
+          oCache.AddValue(sKey, oMgrValues, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            oMgrValues = (Structs.GetMgrCategoriesForUserValues)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            oMgrValues = (Structs.GetMgrCategoriesForUserValues)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -913,7 +875,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        oMgrValues = (Structs.GetMgrCategoriesForUserValues)((CachedValue)oValue).Value;
+        oMgrValues = (Structs.GetMgrCategoriesForUserValues)oValue.Value;
 
       dictMgrAttributes = oMgrValues.ManagerAttributes;
       lstMgrCategories = oMgrValues.ManagerCategories;
@@ -925,7 +887,7 @@ namespace Atlantis.Framework.DataCache
       int iPFID = -1;
       string sKey = iUnifiedPFID.ToString() + "-" + iPrivateLabelID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -937,17 +899,14 @@ namespace Atlantis.Framework.DataCache
             iPFID = oCacheWrapper.COMAccessClass.GetPFIDByUnifiedID(iUnifiedPFID, iPrivateLabelID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, iPFID, iPrivateLabelID);
+          oCache.AddValue(sKey, iPFID, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            iPFID = (int)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            iPFID = (int)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -957,7 +916,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        iPFID = (int)((CachedValue)oValue).Value;
+        iPFID = (int)oValue.Value;
 
       return iPFID;
     }
@@ -968,7 +927,7 @@ namespace Atlantis.Framework.DataCache
       string sPLData = "";
       string sKey = iPrivateLabelID.ToString() + "-" + iDataID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -980,17 +939,14 @@ namespace Atlantis.Framework.DataCache
             sPLData = oCacheWrapper.COMAccessClass.GetPLData(iPrivateLabelID, iDataID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, sPLData, iPrivateLabelID);
+          oCache.AddValue(sKey, sPLData, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            sPLData = (string)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            sPLData = (string)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1000,7 +956,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        sPLData = (string)((CachedValue)oValue).Value;
+        sPLData = (string)oValue.Value;
 
       return sPLData;
     }
@@ -1011,7 +967,7 @@ namespace Atlantis.Framework.DataCache
       string sPLBKColor = "";
       string sKey = iPrivateLabelID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1023,17 +979,14 @@ namespace Atlantis.Framework.DataCache
             sPLBKColor = oCacheWrapper.COMAccessClass.GetPrivateLabelBkColor(iPrivateLabelID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, sPLBKColor, iPrivateLabelID);
+          oCache.AddValue(sKey, sPLBKColor, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            sPLBKColor = (string)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            sPLBKColor = (string)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1043,7 +996,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        sPLBKColor = (string)((CachedValue)oValue).Value;
+        sPLBKColor = (string)oValue.Value;
 
       return sPLBKColor;
     }
@@ -1054,7 +1007,7 @@ namespace Atlantis.Framework.DataCache
       int iPrivateLabelID = -1;
       string sKey = sProgID;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1066,17 +1019,14 @@ namespace Atlantis.Framework.DataCache
             iPrivateLabelID = oCacheWrapper.COMAccessClass.GetPrivateLabelId(sProgID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, iPrivateLabelID);
+          oCache.AddValue(sKey, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            iPrivateLabelID = (int)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            iPrivateLabelID = (int)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1086,7 +1036,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        iPrivateLabelID = (int)((CachedValue)oValue).Value;
+        iPrivateLabelID = (int)oValue.Value;
 
       return iPrivateLabelID;
     }
@@ -1097,7 +1047,7 @@ namespace Atlantis.Framework.DataCache
       string sValue = "";
       string sKey = iPrivateLabelID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1109,17 +1059,14 @@ namespace Atlantis.Framework.DataCache
             sValue = oCacheWrapper.COMAccessClass.GetPrivateLabelOrderId(iPrivateLabelID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, sValue, iPrivateLabelID);
+          oCache.AddValue(sKey, sValue, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            sValue = (string)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            sValue = (string)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1129,7 +1076,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        sValue = (string)((CachedValue)oValue).Value;
+        sValue = (string)oValue.Value;
 
       return sValue;
     }
@@ -1140,7 +1087,7 @@ namespace Atlantis.Framework.DataCache
       int iValue = -1;
       string sKey = iPrivateLabelID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1152,17 +1099,14 @@ namespace Atlantis.Framework.DataCache
             iValue = oCacheWrapper.COMAccessClass.GetPrivateLabelType(iPrivateLabelID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, iValue, iPrivateLabelID);
+          oCache.AddValue(sKey, iValue, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            iValue = (int)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            iValue = (int)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1172,7 +1116,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        iValue = (int)((CachedValue)oValue).Value;
+        iValue = (int)oValue.Value;
 
       return iValue;
     }
@@ -1230,7 +1174,7 @@ namespace Atlantis.Framework.DataCache
       string sValue = "";
       string sKey = sPfidOrSku;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1242,17 +1186,14 @@ namespace Atlantis.Framework.DataCache
             sValue = oCacheWrapper.COMAccessClass.GetProductDescription(sPfidOrSku);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, sValue);
+          oCache.AddValue(sKey, sValue, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            sValue = (string)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            sValue = (string)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1262,7 +1203,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        sValue = (string)((CachedValue)oValue).Value;
+        sValue = (string)oValue.Value;
 
       return sValue;
     }
@@ -1273,7 +1214,7 @@ namespace Atlantis.Framework.DataCache
       string sValue = "";
       string sKey = iXsdID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1285,17 +1226,14 @@ namespace Atlantis.Framework.DataCache
             sValue = oCacheWrapper.COMAccessClass.GetProductUpdateXSD(iXsdID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, sValue);
+          oCache.AddValue(sKey, sValue, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            sValue = (string)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            sValue = (string)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1305,7 +1243,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        sValue = (string)((CachedValue)oValue).Value;
+        sValue = (string)oValue.Value;
 
 
       return sValue;
@@ -1317,7 +1255,7 @@ namespace Atlantis.Framework.DataCache
       string sValue = "";
       string sKey = iXsdID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1329,17 +1267,14 @@ namespace Atlantis.Framework.DataCache
             sValue = oCacheWrapper.COMAccessClass.GetProductXSD(iXsdID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, sValue);
+          oCache.AddValue(sKey, sValue, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            sValue = (string)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            sValue = (string)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1349,7 +1284,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        sValue = (string)((CachedValue)oValue).Value;
+        sValue = (string)oValue.Value;
 
       return sValue;
     }
@@ -1360,7 +1295,7 @@ namespace Atlantis.Framework.DataCache
       string sValue = "";
       string sKey = iPrivateLabelID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1372,17 +1307,14 @@ namespace Atlantis.Framework.DataCache
             sValue = oCacheWrapper.COMAccessClass.GetProgID(iPrivateLabelID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, sValue, iPrivateLabelID);
+          oCache.AddValue(sKey, sValue, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            sValue = (string)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            sValue = (string)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1392,7 +1324,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        sValue = (string)((CachedValue)oValue).Value;
+        sValue = (string)oValue.Value;
 
       return sValue;
     }
@@ -1409,7 +1341,7 @@ namespace Atlantis.Framework.DataCache
       int iValue = -1;
       string sKey = iPrivateLabelID.ToString() + "-" + sPfidOrSku + "-" + iPriceTypeID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1421,17 +1353,14 @@ namespace Atlantis.Framework.DataCache
             iValue = oCacheWrapper.COMAccessClass.GetPromoPrice(iPrivateLabelID, sPfidOrSku, iPriceTypeID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue) oValue);
-
-          oCache.AddValue(sKey, iValue, iPrivateLabelID);
+          oCache.AddValue(sKey, iValue, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            iValue = (int) ((CachedValue) oValue).Value;
-            oCache.RenewValue((CachedValue) oValue);
+            iValue = (int)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1442,7 +1371,7 @@ namespace Atlantis.Framework.DataCache
       }
       else
       {
-        iValue = (int)((CachedValue)oValue).Value;
+        iValue = (int)oValue.Value;
       }
 
       return iValue;
@@ -1460,7 +1389,7 @@ namespace Atlantis.Framework.DataCache
       int iValue = -1;
       string sKey = iPrivateLabelID.ToString() + "-" + sPfidOrSku + "-" + iPriceTypeID.ToString() + "-" + iQuantity.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1472,17 +1401,14 @@ namespace Atlantis.Framework.DataCache
             iValue = oCacheWrapper.COMAccessClass.GetPromoPriceByQty(iPrivateLabelID, sPfidOrSku, iQuantity, iPriceTypeID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, iValue, iPrivateLabelID);
+          oCache.AddValue(sKey, iValue, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            iValue = (int)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            iValue = (int)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1492,7 +1418,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        iValue = (int)((CachedValue)oValue).Value;
+        iValue = (int)oValue.Value;
 
       return iValue;
     }
@@ -1528,7 +1454,7 @@ namespace Atlantis.Framework.DataCache
       bool bRetValue = false;
       string sKey = iPrivateLabelID.ToString() + "-" + sPfidOrSku + "-" + iPriceTypeID.ToString() + "-" + iQuantity.ToString() + "-" + sCurrency;
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1551,17 +1477,14 @@ namespace Atlantis.Framework.DataCache
             oPriceData.IsEstimate = (bool)oEstimate;
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, oPriceData, iPrivateLabelID);
+          oCache.AddValue(sKey, oPriceData, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            oPriceData = (Structs.GetPromoPriceByQtyExValues)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            oPriceData = (Structs.GetPromoPriceByQtyExValues)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1571,7 +1494,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        oPriceData = (Structs.GetPromoPriceByQtyExValues)((CachedValue)oValue).Value;
+        oPriceData = (Structs.GetPromoPriceByQtyExValues)oValue.Value;
 
       bRetValue = oPriceData.ReturnValue;
       bEstimate = oPriceData.IsEstimate;
@@ -1608,7 +1531,7 @@ namespace Atlantis.Framework.DataCache
       Structs.GetPromoPriceByQtyExValues oPriceData = new Structs.GetPromoPriceByQtyExValues();
       string sKey = iPrivateLabelID.ToString() + "-" + sPfidOrSku + "-" + iPriceTypeID.ToString() + "-" + sCurrency;
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1630,17 +1553,14 @@ namespace Atlantis.Framework.DataCache
             oPriceData.IsEstimate = (bool)oEstimate;
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, oPriceData, iPrivateLabelID);
+          oCache.AddValue(sKey, oPriceData, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            oPriceData = (Structs.GetPromoPriceByQtyExValues)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            oPriceData = (Structs.GetPromoPriceByQtyExValues)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1650,7 +1570,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        oPriceData = (Structs.GetPromoPriceByQtyExValues)((CachedValue)oValue).Value;
+        oPriceData = (Structs.GetPromoPriceByQtyExValues)oValue.Value;
 
       bRetValue = oPriceData.ReturnValue;
       bEstimate = oPriceData.IsEstimate;
@@ -1668,7 +1588,7 @@ namespace Atlantis.Framework.DataCache
       Structs.GetRelatedIDsForPrivateLabelValues oRelatedPLIDValues = new Structs.GetRelatedIDsForPrivateLabelValues();
       string sKey = iPrivateLabelID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1688,17 +1608,14 @@ namespace Atlantis.Framework.DataCache
             oRelatedPLIDValues.FreeTurnkeyID = (int)oFreeTurnKeyID;
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, oRelatedPLIDValues, iPrivateLabelID);
+          oCache.AddValue(sKey, oRelatedPLIDValues, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            oRelatedPLIDValues = (Structs.GetRelatedIDsForPrivateLabelValues)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            oRelatedPLIDValues = (Structs.GetRelatedIDsForPrivateLabelValues)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1708,7 +1625,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        oRelatedPLIDValues = (Structs.GetRelatedIDsForPrivateLabelValues)((CachedValue)oValue).Value;
+        oRelatedPLIDValues = (Structs.GetRelatedIDsForPrivateLabelValues)oValue.Value;
 
       iParentPrivateLabelID = oRelatedPLIDValues.ParentPrivateLabelID;
       iDefaultTurnkeyID = oRelatedPLIDValues.DefaultTurnkeyID;
@@ -1721,7 +1638,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetResellerSampleCommission";
       string sKey = iPfid.ToString() + "-" + sResellerType;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1737,17 +1654,14 @@ namespace Atlantis.Framework.DataCache
 
           dictResult = GetDictionaryFromXMLElement("/PRODUCT ", sValue);
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, dictResult);
+          oCache.AddValue(sKey, dictResult, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            dictResult = (Dictionary<string, string>)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            dictResult = (Dictionary<string, string>)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1757,7 +1671,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        dictResult = (Dictionary<string, string>)((CachedValue)oValue).Value;
+        dictResult = (Dictionary<string, string>)oValue.Value;
 
       return dictResult;
     }
@@ -1768,7 +1682,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetShopperProduct";
       string sKey = sShopperID;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1805,17 +1719,14 @@ namespace Atlantis.Framework.DataCache
             result = new Dictionary<string, int>(0);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, result);
+          oCache.AddValue(sKey, result, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            result = (Dictionary<string, int>)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            result = (Dictionary<string, int>)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1826,7 +1737,7 @@ namespace Atlantis.Framework.DataCache
       }
       else
       {
-        result = (Dictionary<string, int>)((CachedValue)oValue).Value;
+        result = (Dictionary<string, int>)oValue.Value;
       }
 
       return result;
@@ -1840,7 +1751,7 @@ namespace Atlantis.Framework.DataCache
       Structs.GetShopperRenewingServicesValues oRenewalData = new Structs.GetShopperRenewingServicesValues();
       string sKey = sShopperID;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1858,17 +1769,14 @@ namespace Atlantis.Framework.DataCache
           oRenewalData.HasRenewingServices = Convert.ToInt32(oValues[0]) != 0;
           oRenewalData.HasRenewingDomains = Convert.ToInt32(oValues[1]) != 0;
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, oRenewalData);
+          oCache.AddValue(sKey, oRenewalData, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            oRenewalData = (Structs.GetShopperRenewingServicesValues)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            oRenewalData = (Structs.GetShopperRenewingServicesValues)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1878,7 +1786,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        oRenewalData = (Structs.GetShopperRenewingServicesValues)((CachedValue)oValue).Value;
+        oRenewalData = (Structs.GetShopperRenewingServicesValues)oValue.Value;
 
       bHasRenewingServices = oRenewalData.HasRenewingServices;
       bHasRenewingDomains = oRenewalData.HasRenewingDomains;
@@ -1890,7 +1798,7 @@ namespace Atlantis.Framework.DataCache
       Structs.GetStateDataValues oStateData = new Structs.GetStateDataValues();
       string sKey = iStateID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1907,17 +1815,14 @@ namespace Atlantis.Framework.DataCache
             oStateData.CountryId = (int)oCountryID;
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, oStateData);
+          oCache.AddValue(sKey, oStateData, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            oStateData = (Structs.GetStateDataValues)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            oStateData = (Structs.GetStateDataValues)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1927,7 +1832,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        oStateData = (Structs.GetStateDataValues)((CachedValue)oValue).Value;
+        oStateData = (Structs.GetStateDataValues)oValue.Value;
 
       sName = oStateData.Name;
       sAbbreviation = oStateData.Abbreviation;
@@ -1940,7 +1845,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetStateList";
       string sKey = iCountryID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -1956,17 +1861,14 @@ namespace Atlantis.Framework.DataCache
 
           dtResult = GetDataTableFromXMLElements("states/state", sValue);
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, dtResult);
+          oCache.AddValue(sKey, dtResult, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            dtResult = (DataTable)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            dtResult = (DataTable)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -1976,7 +1878,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        dtResult = (DataTable)((CachedValue)oValue).Value;
+        dtResult = (DataTable)oValue.Value;
 
       return dtResult;
     }
@@ -1988,7 +1890,7 @@ namespace Atlantis.Framework.DataCache
       string sKey = "0";
 
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -2014,17 +1916,14 @@ namespace Atlantis.Framework.DataCache
             }
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, result);
+          oCache.AddValue(sKey, result, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            result = (HashSet<string>)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            result = (HashSet<string>)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -2035,7 +1934,7 @@ namespace Atlantis.Framework.DataCache
       }
       else
       {
-        result = (HashSet<string>)((CachedValue)oValue).Value;
+        result = (HashSet<string>)oValue.Value;
       }
 
       return result;
@@ -2047,7 +1946,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetTLDData";
       string sKey = sTldIdOrName;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -2072,17 +1971,14 @@ namespace Atlantis.Framework.DataCache
             dictResult.Add(dictTLDData["tld"], dictTLDData);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, dictResult);
+          oCache.AddValue(sKey, dictResult, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            dictResult = (Dictionary<string, Dictionary<string, string>>)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            dictResult = (Dictionary<string, Dictionary<string, string>>)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -2093,7 +1989,7 @@ namespace Atlantis.Framework.DataCache
       }
       else
       {
-        dictResult = (Dictionary<string, Dictionary<string, string>>)((CachedValue)oValue).Value;
+        dictResult = (Dictionary<string, Dictionary<string, string>>)oValue.Value;
       }
 
       return dictResult;
@@ -2105,7 +2001,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetTLDData";
       string sKey = sTldIdOrName;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -2131,17 +2027,15 @@ namespace Atlantis.Framework.DataCache
               dictResult.Add(dictTLDData["tld"], dictTLDData);
             }
           }
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
 
-          oCache.AddValue(sKey, dictResult);
+          oCache.AddValue(sKey, dictResult, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            dictResult = (Dictionary<string, Dictionary<string, string>>)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            dictResult = (Dictionary<string, Dictionary<string, string>>)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -2152,7 +2046,7 @@ namespace Atlantis.Framework.DataCache
       }
       else
       {
-        dictResult = (Dictionary<string, Dictionary<string, string>>)((CachedValue)oValue).Value;
+        dictResult = (Dictionary<string, Dictionary<string, string>>)oValue.Value;
       }
 
       return dictResult;
@@ -2164,7 +2058,7 @@ namespace Atlantis.Framework.DataCache
       string sCacheName = "GetTLDList";
       string sKey = iPrivateLabelId.ToString() + "-" + iProductType.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -2179,17 +2073,14 @@ namespace Atlantis.Framework.DataCache
 
           dtResult = GetDataTableFromXMLElements("/tldList/tld", sValue);
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, dtResult, iPrivateLabelId);
+          oCache.AddValue(sKey, dtResult, iPrivateLabelId, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            dtResult = (DataTable)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            dtResult = (DataTable)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -2199,7 +2090,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        dtResult = (DataTable)((CachedValue)oValue).Value;
+        dtResult = (DataTable)oValue.Value;
 
       return dtResult;
     }
@@ -2210,7 +2101,7 @@ namespace Atlantis.Framework.DataCache
       bool bRetValue = false;
       string sKey = iPrivateLabelID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -2222,17 +2113,14 @@ namespace Atlantis.Framework.DataCache
             bRetValue = oCacheWrapper.COMAccessClass.IsPrivateLabelActive(iPrivateLabelID);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, bRetValue, iPrivateLabelID);
+          oCache.AddValue(sKey, bRetValue, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            bRetValue = (bool)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            bRetValue = (bool)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -2242,7 +2130,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        bRetValue = (bool)((CachedValue)oValue).Value;
+        bRetValue = (bool)oValue.Value;
 
       return bRetValue;
     }
@@ -2254,7 +2142,7 @@ namespace Atlantis.Framework.DataCache
       int pfid = GetPFIDByUnifiedID(unifiedProductId, privateLabelId);
       string sKey = string.Concat(privateLabelId.ToString(), "-", pfid.ToString(), "-", currencyType);
       Cache cache = _cacheManger.GetCache(cacheName, true);
-      object cachedValue = null;
+      CachedValue cachedValue = null;
       bool isCacheValid = cache.TryGetValue(sKey, out cachedValue);
 
       if (!isCacheValid)
@@ -2266,17 +2154,14 @@ namespace Atlantis.Framework.DataCache
             result = oCacheWrapper.COMAccessClass.IsProductOnSaleForCurrency(privateLabelId, pfid.ToString(), currencyType);
           }
 
-          if (cachedValue != null)
-            cache.QuickClean((CachedValue)cachedValue);
-
-          cache.AddValue(sKey, result, privateLabelId);
+          cache.AddValue(sKey, result, privateLabelId, cachedValue);
         }
         catch (Exception ex)
         {
           if (cachedValue != null)
           {
-            result = (bool)((CachedValue)cachedValue).Value;
-            cache.RenewValue((CachedValue)cachedValue);
+            result = (bool)cachedValue.Value;
+            cache.RenewValue(cachedValue);
           }
           else
           {
@@ -2286,7 +2171,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        result = (bool)((CachedValue)cachedValue).Value;
+        result = (bool)cachedValue.Value;
 
       return result;
     }
@@ -2303,7 +2188,7 @@ namespace Atlantis.Framework.DataCache
       bool bRetValue = false;
       string sKey = iPrivateLabelID.ToString() + "-" + sPfidOrSku;
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -2315,17 +2200,14 @@ namespace Atlantis.Framework.DataCache
             bRetValue = oCacheWrapper.COMAccessClass.IsProductOnSale(iPrivateLabelID, sPfidOrSku);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, bRetValue, iPrivateLabelID);
+          oCache.AddValue(sKey, bRetValue, iPrivateLabelID, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            bRetValue = (bool)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            bRetValue = (bool)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -2335,7 +2217,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        bRetValue = (bool)((CachedValue)oValue).Value;
+        bRetValue = (bool)oValue.Value;
 
       return bRetValue;
     }
@@ -2346,7 +2228,7 @@ namespace Atlantis.Framework.DataCache
       string sValue = "";
       string sKey = iCategory.ToString() + "-" + sColName;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
-      object oValue = null;
+      CachedValue oValue = null;
       bool bValid = oCache.TryGetValue(sKey, out oValue);
 
       if (!bValid)
@@ -2358,17 +2240,14 @@ namespace Atlantis.Framework.DataCache
             sValue = oCacheWrapper.COMAccessClass.LookupPLData(iCategory, sColName);
           }
 
-          if (oValue != null)
-            oCache.QuickClean((CachedValue)oValue);
-
-          oCache.AddValue(sKey, sValue);
+          oCache.AddValue(sKey, sValue, oValue);
         }
         catch (Exception ex)
         {
           if (oValue != null)
           {
-            sValue = (string)((CachedValue)oValue).Value;
-            oCache.RenewValue((CachedValue)oValue);
+            sValue = (string)oValue.Value;
+            oCache.RenewValue(oValue);
           }
           else
           {
@@ -2378,7 +2257,7 @@ namespace Atlantis.Framework.DataCache
         }
       }
       else
-        sValue = (string)((CachedValue)oValue).Value;
+        sValue = (string)oValue.Value;
 
       return sValue;
     }

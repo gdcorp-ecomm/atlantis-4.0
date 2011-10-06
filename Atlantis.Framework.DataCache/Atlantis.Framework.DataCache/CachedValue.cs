@@ -10,6 +10,7 @@ namespace Atlantis.Framework.DataCache
     bool _isActive;
     int _privateLabelId;
     CachedValueStatus _status;
+    SlimLock _statusLock;
 
     public CachedValue(string key, object cacheValue, long finalTicks, int privateLabelId)
     {
@@ -19,6 +20,7 @@ namespace Atlantis.Framework.DataCache
       _isActive = true;
       _privateLabelId = privateLabelId;
       _status = CachedValueStatus.Valid;
+      _statusLock = new SlimLock();
     }
 
     public object Value
@@ -50,9 +52,21 @@ namespace Atlantis.Framework.DataCache
     {
       get
       {
-        if ((_status == CachedValueStatus.Valid) && ((DateTime.UtcNow.Ticks > _finalTicks)))
+        CachedValueStatus tempStatus;
+        using (SlimRead read = _statusLock.GetReadLock())
         {
-          _status = CachedValueStatus.Invalid;
+          tempStatus = _status;
+        }
+        
+        if ((tempStatus == CachedValueStatus.Valid) && ((DateTime.UtcNow.Ticks > _finalTicks)))
+        {
+          using (SlimWrite write = _statusLock.GetWriteLock())
+          {
+            if (_status == CachedValueStatus.Valid)
+            {
+              _status = CachedValueStatus.Invalid;
+            }
+          }
         }
         return _status;
       }
@@ -60,7 +74,10 @@ namespace Atlantis.Framework.DataCache
 
     public void MarkInProgress()
     {
-      _status = CachedValueStatus.RefreshInProgress;
+      using (SlimWrite write = _statusLock.GetWriteLock())
+      {
+        _status = CachedValueStatus.RefreshInProgress;
+      }
     }
 
     public void MarkInactive()

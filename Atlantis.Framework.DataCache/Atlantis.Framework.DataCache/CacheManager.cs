@@ -7,22 +7,22 @@ namespace Atlantis.Framework.DataCache
   class CacheManager
   {
     Dictionary<string, Cache> _cacheMap;
-    CacheLock _cacheLock;
+    SlimLock _cacheLock;
 
     Dictionary<string, Cache> _genericCacheDataMap;
     Dictionary<string, Cache> _genericCacheRsMap;
     Dictionary<string, string> _genericCacheNames;
-    CacheLock _genericCachesLock;
+    SlimLock _genericCachesLock;
 
     public CacheManager()
     {
       _cacheMap = new Dictionary<string, Cache>();
-      _cacheLock = new CacheLock();
+      _cacheLock = new SlimLock();
 
       _genericCacheDataMap = new Dictionary<string, Cache>();
       _genericCacheRsMap = new Dictionary<string, Cache>();
       _genericCacheNames = new Dictionary<string, string>();
-      _genericCachesLock = new CacheLock();
+      _genericCachesLock = new SlimLock();
 
       ReloadGenericCaches();
     }
@@ -41,44 +41,31 @@ namespace Atlantis.Framework.DataCache
     {
       Cache result = null;
 
-      try
+      bool cacheFound;
+      using (SlimRead read = _cacheLock.GetReadLock())
       {
-        _cacheLock.GetReaderLock();
-        if (!genericCacheMap.TryGetValue(cacheName, out result))
-        {
-          try
-          {
-            _cacheLock.GetWriterLock();
-            if (!genericCacheMap.TryGetValue(cacheName, out result))
-            {
-              string privateLabelIdName = string.Empty;
-
-              try
-              {
-                _genericCachesLock.GetReaderLock();
-                if (_genericCacheNames.TryGetValue(cacheName, out privateLabelIdName))
-                  result = new Cache(cacheName, privateLabelIdName);
-                else
-                  result = new Cache(cacheName, false);
-              }
-              finally
-              {
-                _genericCachesLock.ReleaseReaderLock();
-              }
-
-              genericCacheMap.Add(cacheName, result);
-            }
-          }
-          finally
-          {
-            _cacheLock.ReleaseWriterLock();
-          }
-
-        }
+        cacheFound = genericCacheMap.TryGetValue(cacheName, out result);
       }
-      finally
+
+      if (!cacheFound)
       {
-        _cacheLock.ReleaseReaderLock();
+        using (SlimWrite write = _cacheLock.GetWriteLock())
+        {
+          if (!genericCacheMap.TryGetValue(cacheName, out result))
+          {
+            string privateLabelIdName = string.Empty;
+
+            using (SlimRead genericRead = _genericCachesLock.GetReadLock())
+            {
+              if (_genericCacheNames.TryGetValue(cacheName, out privateLabelIdName))
+                result = new Cache(cacheName, privateLabelIdName);
+              else
+                result = new Cache(cacheName, false);
+            }
+
+            genericCacheMap.Add(cacheName, result);
+          }
+        }
       }
 
       return result;
@@ -88,29 +75,22 @@ namespace Atlantis.Framework.DataCache
     {
       Cache result = null;
 
-      try
+      bool cacheFound;
+      using (SlimRead read = _cacheLock.GetReadLock())
       {
-        _cacheLock.GetReaderLock();
-        if (!_cacheMap.TryGetValue(cacheName, out result))
+        cacheFound = _cacheMap.TryGetValue(cacheName, out result);
+      }
+
+      if (!cacheFound)
+      {
+        using (SlimWrite write = _cacheLock.GetWriteLock())
         {
-          try
+          if (!_cacheMap.TryGetValue(cacheName, out result))
           {
-            _cacheLock.GetWriterLock();
-            if (!_cacheMap.TryGetValue(cacheName, out result))
-            {
-              result = new Cache(cacheName, isBasedOnPrivateLabelId);
-              _cacheMap.Add(cacheName, result);
-            }
-          }
-          finally
-          {
-            _cacheLock.ReleaseWriterLock();
+            result = new Cache(cacheName, isBasedOnPrivateLabelId);
+            _cacheMap.Add(cacheName, result);
           }
         }
-      }
-      finally
-      {
-        _cacheLock.ReleaseReaderLock();
       }
 
       return result;
@@ -120,30 +100,25 @@ namespace Atlantis.Framework.DataCache
     {
       string genericCachesXML = string.Empty;
 
-      try
+      using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
       {
-        using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
-        {
-          genericCachesXML = oCacheWrapper.COMAccessClass.GetGenericCaches();
-        }
+        genericCachesXML = oCacheWrapper.COMAccessClass.GetGenericCaches();
+      }
 
-        XmlDocument xdDoc = new XmlDocument();
+      XmlDocument xdDoc = new XmlDocument();
 
-        xdDoc.LoadXml(genericCachesXML);
+      xdDoc.LoadXml(genericCachesXML);
 
-        XmlNodeList xnlCaches = xdDoc.SelectNodes("/GenericCaches/Cache");
+      XmlNodeList xnlCaches = xdDoc.SelectNodes("/GenericCaches/Cache");
 
-        _genericCachesLock.GetWriterLock();
+      using (SlimWrite write = _genericCachesLock.GetWriteLock())
+      {
         _genericCacheNames.Clear();
         foreach (XmlElement xlCache in xnlCaches)
         {
           _genericCacheNames.Add(xlCache.GetAttribute("name"),
-                               xlCache.GetAttribute("plid_name"));
+                                xlCache.GetAttribute("plid_name"));
         }
-      }
-      finally
-      {
-        _genericCachesLock.ReleaseWriterLock();
       }
     }
 
@@ -151,10 +126,8 @@ namespace Atlantis.Framework.DataCache
     {
       Cache oCache = null;
 
-      try
+      using (SlimRead read = _cacheLock.GetReadLock())
       {
-        _cacheLock.GetReaderLock();
-
         if (_cacheMap.TryGetValue(cacheName, out oCache))
           oCache.ClearByPLID(privateLabelIds);
         if (_genericCacheDataMap.TryGetValue(cacheName, out oCache))
@@ -162,19 +135,12 @@ namespace Atlantis.Framework.DataCache
         if (_genericCacheRsMap.TryGetValue(cacheName, out oCache))
           oCache.ClearByPLID(privateLabelIds);
       }
-      finally
-      {
-        _cacheLock.ReleaseReaderLock();
-      }
-
     }
 
     public void ClearCacheAllCachesByPLID(HashSet<int> privateLabelIds)
     {
-      try
+      using (SlimWrite write = _cacheLock.GetWriteLock())
       {
-        _cacheLock.GetWriterLock();
-
         foreach (KeyValuePair<string, Cache> oPair in _cacheMap)
           oPair.Value.ClearByPLID(privateLabelIds);
         foreach (KeyValuePair<string, Cache> oPair in _genericCacheDataMap)
@@ -182,20 +148,13 @@ namespace Atlantis.Framework.DataCache
         foreach (KeyValuePair<string, Cache> oPair in _genericCacheRsMap)
           oPair.Value.ClearByPLID(privateLabelIds);
       }
-      finally
-      {
-        _cacheLock.ReleaseWriterLock();
-      }
-
     }
 
     public void ClearCacheData(string cacheName)
     {
       Cache oCache = null;
-      try
+      using (SlimWrite write = _cacheLock.GetWriteLock())
       {
-        _cacheLock.GetWriterLock();
-
         if (_cacheMap.TryGetValue(cacheName, out oCache))
           oCache.Clear();
         if (_genericCacheDataMap.TryGetValue(cacheName, out oCache))
@@ -203,18 +162,12 @@ namespace Atlantis.Framework.DataCache
         if (_genericCacheRsMap.TryGetValue(cacheName, out oCache))
           oCache.Clear();
       }
-      finally
-      {
-        _cacheLock.ReleaseWriterLock();
-      }
     }
 
     public void ClearAllCaches()
     {
-      try
+      using (SlimWrite write = _cacheLock.GetWriteLock())
       {
-        _cacheLock.GetWriterLock();
-
         foreach (KeyValuePair<string, Cache> oPair in _cacheMap)
           oPair.Value.Clear();
         foreach (KeyValuePair<string, Cache> oPair in _genericCacheDataMap)
@@ -222,11 +175,6 @@ namespace Atlantis.Framework.DataCache
         foreach (KeyValuePair<string, Cache> oPair in _genericCacheRsMap)
           oPair.Value.Clear();
       }
-      finally
-      {
-        _cacheLock.ReleaseWriterLock();
-      }
-
     }
 
     public string DisplayCache(string cacheName)
@@ -235,20 +183,14 @@ namespace Atlantis.Framework.DataCache
       StringBuilder sb = new StringBuilder();
       sb.Append("<Caches>");
 
-      try
+      using (SlimRead read = _cacheLock.GetReadLock())
       {
-        _cacheLock.GetReaderLock();
-
         if (_cacheMap.TryGetValue(cacheName, out oCache))
           sb.Append(oCache.Display());
         if (_genericCacheDataMap.TryGetValue(cacheName, out oCache))
           sb.Append(oCache.Display());
         if (_genericCacheRsMap.TryGetValue(cacheName, out oCache))
           sb.Append(oCache.Display());
-      }
-      finally
-      {
-        _cacheLock.ReleaseReaderLock();
       }
 
       sb.Append("</Caches>");
@@ -260,21 +202,14 @@ namespace Atlantis.Framework.DataCache
       StringBuilder sb = new StringBuilder();
       sb.Append("<ManagerStats>");
 
-      try
+      using (SlimRead read = _cacheLock.GetReadLock())
       {
-        _cacheLock.GetReaderLock();
-
         foreach (KeyValuePair<string, Cache> oPair in _cacheMap)
           sb.Append(oPair.Value.GetStats());
         foreach (KeyValuePair<string, Cache> oPair in _genericCacheDataMap)
           sb.Append(oPair.Value.GetStats());
         foreach (KeyValuePair<string, Cache> oPair in _genericCacheRsMap)
           sb.Append(oPair.Value.GetStats());
-
-      }
-      finally
-      {
-        _cacheLock.ReleaseReaderLock();
       }
 
       sb.Append("</ManagerStats>");

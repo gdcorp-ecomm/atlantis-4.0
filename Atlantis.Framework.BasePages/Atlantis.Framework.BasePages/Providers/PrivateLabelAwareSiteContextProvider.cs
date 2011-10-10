@@ -60,11 +60,15 @@ namespace Atlantis.Framework.BasePages.Providers
             _styleId = "1";
           else if (ContextId == ContextIds.BlueRazor)
             _styleId = "2";
+          else if (ContextId == ContextIds.WildWestDomains && GetWWDStyleFromThis)
+            _styleId = "1387";
         }
 
         return _styleId;
       }
     }
+
+    public bool GetWWDStyleFromThis { get; set; } 
 
     private const int DOMAINME_PLID = 435560;
     private const int WWD_PLID = 1387;
@@ -134,5 +138,6 @@ namespace Atlantis.Framework.BasePages.Providers
     public PrivateLabelAwareSiteContextProvider(IProviderContainer providerContainer) : base(providerContainer)
     {
     }
+
   }
 }

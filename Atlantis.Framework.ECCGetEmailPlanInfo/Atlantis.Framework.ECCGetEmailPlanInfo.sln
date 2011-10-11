@@ -22,9 +22,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D6C36A08-D7CC-45A2-A06B-DFFC6862A645}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetEmailPlanInfo.Tests", "Atlantis.Framework.ECCGetEmailPlanInfo.Tests\Atlantis.Framework.ECCGetEmailPlanInfo.Tests.csproj", "{D23F638F-572F-4E91-B533-3B5E1B2919BF}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
 		SccLocalPath0 = .
@@ -49,6 +51,9 @@ Global
 		SccProjectUniqueName6 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface\\Atlantis.Framework.ECC.Interface.csproj
 		SccProjectName6 = ../Atlantis.Framework.ECC/Atlantis.Framework.ECC.Interface
 		SccLocalPath6 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface
+		SccProjectUniqueName7 = Atlantis.Framework.ECCGetEmailPlanInfo.Tests\\Atlantis.Framework.ECCGetEmailPlanInfo.Tests.csproj
+		SccProjectName7 = Atlantis.Framework.ECCGetEmailPlanInfo.Tests
+		SccLocalPath7 = Atlantis.Framework.ECCGetEmailPlanInfo.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.ECCGetEmailPlanInfo.vsmdi
@@ -82,6 +87,10 @@ Global
 		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D23F638F-572F-4E91-B533-3B5E1B2919BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D23F638F-572F-4E91-B533-3B5E1B2919BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D23F638F-572F-4E91-B533-3B5E1B2919BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D23F638F-572F-4E91-B533-3B5E1B2919BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

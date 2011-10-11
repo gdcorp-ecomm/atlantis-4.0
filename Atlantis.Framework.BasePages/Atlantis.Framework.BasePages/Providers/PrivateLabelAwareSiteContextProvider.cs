@@ -5,6 +5,19 @@ namespace Atlantis.Framework.BasePages.Providers
 {
   public class PrivateLabelAwareSiteContextProvider : SiteContextProviderBase
   {
+    private static bool _enableWWDStyleId = false;
+    public static bool EnableWWDStyleId
+    {
+      get
+      {
+        return _enableWWDStyleId;
+      }
+      set
+      { 
+        _enableWWDStyleId = value;
+      }
+    }
+
     private int? _contextId;
     public override int ContextId
     {
@@ -54,7 +67,7 @@ namespace Atlantis.Framework.BasePages.Providers
             _styleId = "1";
           else if (ContextId == ContextIds.BlueRazor)
             _styleId = "2";
-          else if (ContextId == ContextIds.WildWestDomains && GetWWDStyleFromThis)
+          else if (EnableWWDStyleId && ContextId == ContextIds.WildWestDomains)
             _styleId = "1387";
         }
 
@@ -62,7 +75,7 @@ namespace Atlantis.Framework.BasePages.Providers
       }
     }
 
-    public bool GetWWDStyleFromThis { get; set; } 
+
 
     private const int DOMAINME_PLID = 435560;
     private const int WWD_PLID = 1387;
@@ -127,7 +140,8 @@ namespace Atlantis.Framework.BasePages.Providers
       }
     }
 
-    public PrivateLabelAwareSiteContextProvider(IProviderContainer providerContainer) : base(providerContainer)
+    public PrivateLabelAwareSiteContextProvider(IProviderContainer providerContainer)
+      : base(providerContainer)
     {
     }
 

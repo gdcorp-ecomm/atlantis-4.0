@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.DCCSetContacts.Impl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Atlantis_Framework_DCCSetContacts_Impl_DsWebSubmit_RegDCCRequestWebSvcService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://devdsweb:80/RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll?Handler=Default</Value>
+    </Setting>
+    <Setting Name="Atlantis_Framework_DCCSetContacts_Impl_DsWebVerify_RegDCCVerifyWebSvcService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://devdsweb:80/RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll?Handler=Default</Value>
+    </Setting>
+    <Setting Name="Atlantis_Framework_DCCSetContacts_Impl_DsWebValidate_RegDCCValidateWebSvc" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://devdsweb/RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

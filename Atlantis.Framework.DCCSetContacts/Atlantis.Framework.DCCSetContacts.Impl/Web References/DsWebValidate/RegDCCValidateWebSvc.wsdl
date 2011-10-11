@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ValidateDomainSetLock">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="action" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domains" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainSetLockResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateDomainSetLockResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainSetAutoRenew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="action" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domains" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainSetAutoRenewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateDomainSetAutoRenewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainForwardingUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="action" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domains" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainForwardingUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateDomainForwardingUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainForwardingDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="action" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domains" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainForwardingDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateDomainForwardingDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateContactUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="action" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domains" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateContactUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateContactUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateNameserverUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="action" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domains" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateNameserverUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateNameserverUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainRenewal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="action" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domains" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainRenewalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateDomainRenewalResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidateDomainSetLockSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateDomainSetLock" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainSetLockSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateDomainSetLockResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainSetAutoRenewSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateDomainSetAutoRenew" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainSetAutoRenewSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateDomainSetAutoRenewResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainForwardingUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateDomainForwardingUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainForwardingUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateDomainForwardingUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainForwardingDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateDomainForwardingDelete" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainForwardingDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateDomainForwardingDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateContactUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateContactUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ValidateContactUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateContactUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateNameserverUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateNameserverUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ValidateNameserverUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateNameserverUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainRenewalSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateDomainRenewal" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainRenewalSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateDomainRenewalResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegDCCValidateWebSvcSoap">
+    <wsdl:operation name="ValidateDomainSetLock">
+      <wsdl:input message="tns:ValidateDomainSetLockSoapIn" />
+      <wsdl:output message="tns:ValidateDomainSetLockSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainSetAutoRenew">
+      <wsdl:input message="tns:ValidateDomainSetAutoRenewSoapIn" />
+      <wsdl:output message="tns:ValidateDomainSetAutoRenewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainForwardingUpdate">
+      <wsdl:input message="tns:ValidateDomainForwardingUpdateSoapIn" />
+      <wsdl:output message="tns:ValidateDomainForwardingUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainForwardingDelete">
+      <wsdl:input message="tns:ValidateDomainForwardingDeleteSoapIn" />
+      <wsdl:output message="tns:ValidateDomainForwardingDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateContactUpdate">
+      <wsdl:input message="tns:ValidateContactUpdateSoapIn" />
+      <wsdl:output message="tns:ValidateContactUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateNameserverUpdate">
+      <wsdl:input message="tns:ValidateNameserverUpdateSoapIn" />
+      <wsdl:output message="tns:ValidateNameserverUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainRenewal">
+      <wsdl:input message="tns:ValidateDomainRenewalSoapIn" />
+      <wsdl:output message="tns:ValidateDomainRenewalSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegDCCValidateWebSvcSoap" type="tns:RegDCCValidateWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidateDomainSetLock">
+      <soap:operation soapAction="http://tempuri.org/ValidateDomainSetLock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainSetAutoRenew">
+      <soap:operation soapAction="http://tempuri.org/ValidateDomainSetAutoRenew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainForwardingUpdate">
+      <soap:operation soapAction="http://tempuri.org/ValidateDomainForwardingUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainForwardingDelete">
+      <soap:operation soapAction="http://tempuri.org/ValidateDomainForwardingDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateContactUpdate">
+      <soap:operation soapAction="http://tempuri.org/ValidateContactUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateNameserverUpdate">
+      <soap:operation soapAction="http://tempuri.org/ValidateNameserverUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainRenewal">
+      <soap:operation soapAction="http://tempuri.org/ValidateDomainRenewal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegDCCValidateWebSvcSoap12" type="tns:RegDCCValidateWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidateDomainSetLock">
+      <soap12:operation soapAction="http://tempuri.org/ValidateDomainSetLock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainSetAutoRenew">
+      <soap12:operation soapAction="http://tempuri.org/ValidateDomainSetAutoRenew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainForwardingUpdate">
+      <soap12:operation soapAction="http://tempuri.org/ValidateDomainForwardingUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainForwardingDelete">
+      <soap12:operation soapAction="http://tempuri.org/ValidateDomainForwardingDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateContactUpdate">
+      <soap12:operation soapAction="http://tempuri.org/ValidateContactUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateNameserverUpdate">
+      <soap12:operation soapAction="http://tempuri.org/ValidateNameserverUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainRenewal">
+      <soap12:operation soapAction="http://tempuri.org/ValidateDomainRenewal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegDCCValidateWebSvc">
+    <wsdl:port name="RegDCCValidateWebSvcSoap" binding="tns:RegDCCValidateWebSvcSoap">
+      <soap:address location="http://devdsweb/RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegDCCValidateWebSvcSoap12" binding="tns:RegDCCValidateWebSvcSoap12">
+      <soap12:address location="http://devdsweb/RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

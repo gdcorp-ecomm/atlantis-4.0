@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:RegDCCRequestWebSvcService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:RegDCCRequestWebSvcService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:RegDCCRequestWebSvcService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldIn">
+    <wsdl:part name="bstrInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusIn" />
+  <wsdl:message name="getServiceStatusOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitRequestStandardIn">
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitRequestStandardOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitRequestAPIIn">
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitRequestAPIOut">
+    <wsdl:part name="return" type="s:int" />
+  </wsdl:message>
+  <wsdl:portType name="RegDCCRequestWebSvcServiceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="s0:HelloWorldIn" />
+      <wsdl:output message="s0:HelloWorldOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="s0:getServiceStatusIn" />
+      <wsdl:output message="s0:getServiceStatusOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitRequestStandard">
+      <wsdl:input message="s0:SubmitRequestStandardIn" />
+      <wsdl:output message="s0:SubmitRequestStandardOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitRequestAPI">
+      <wsdl:input message="s0:SubmitRequestAPIIn" />
+      <wsdl:output message="s0:SubmitRequestAPIOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegDCCRequestWebSvcServiceSoap" type="s0:RegDCCRequestWebSvcServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="#HelloWorld" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCRequestWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCRequestWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <soap:operation soapAction="#getServiceStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCRequestWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCRequestWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitRequestStandard">
+      <soap:operation soapAction="#SubmitRequestStandard" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCRequestWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCRequestWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitRequestAPI">
+      <soap:operation soapAction="#SubmitRequestAPI" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCRequestWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCRequestWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegDCCRequestWebSvcService">
+    <wsdl:port name="RegDCCRequestWebSvcServiceSoap" binding="s0:RegDCCRequestWebSvcServiceSoap">
+      <soap:address location="http://devdsweb:80/RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

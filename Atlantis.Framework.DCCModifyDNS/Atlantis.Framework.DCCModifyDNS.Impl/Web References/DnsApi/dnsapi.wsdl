@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="http://dnsapi.domaincontrol.com/dnsapi" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://dnsapi.domaincontrol.com/dnsapi" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://dnsapi.domaincontrol.com/dnsapi">
+      <xsd:complexType name="custDataType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="shopperid" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="resellerid" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="origin" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="enduserip" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="offsite" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="authDataType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="clientid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="token" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="clientip" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="zoneType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="domain" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="accountuid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="sourcetype" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="status" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="rrecords" type="tns:recordListType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="recordListType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="rrecord" type="tns:rrecordType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="rrecordType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="type" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="attributeUid" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="nameUid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="data" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="dataUid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="service" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="serviceUid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="protocol" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="protocolUid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="port" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="portUid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="weight" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="weightUid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="priority" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="priorityUid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ttl" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ttlUid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="status" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="soaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="origin" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="ttl" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="ns" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="mbox" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="serial" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="refresh" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="retry" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="expire" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="minimum" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="booleanResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="errorcode" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="errortext" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="responseinfo" type="tns:responseinfoType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="responseinfoType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="infocode" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="info" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="stringArrayType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="configDataType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="application" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="site" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="anycast" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="instance" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="class" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="parameter" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="pvalue" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="active" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="configDataResponseArrayType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="proxyconfig" type="tns:configDataType" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="anycastlist" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="parameterlist" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="proxySiteArrayType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="site" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="servers" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="proxySiteServersResponseArrayType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="siteservers" type="tns:proxySiteArrayType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="proxyFilterDataType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="filter" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="site" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="anycast" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="instance" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="zone" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="parameter" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="pvalue" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="active" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="proxyFilterParameterArrayType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="filter" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="parameters" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="proxyFilterDataResponseArrayType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="proxyfilters" type="tns:proxyFilterDataType" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="anycastlist" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="parameterlist" type="tns:proxyFilterParameterArrayType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="nameServerArrayType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="nameservers" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="zoneHealthCheckResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="domain" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="accountUid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="nameServers" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="problemDetected" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="recommendedFix" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fixPerformed" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="flags" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="errors" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="debug" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="protectedDomainResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="protected" type="xsd:integer" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="nameServersType" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="nameServers" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="zoneFile" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="clientAuth" type="tns:authDataType" />
+      <xsd:element name="custInfo" type="tns:custDataType" />
+    </xsd:schema>
+  </types>
+  <message name="returnTimeOut">
+    <part name="result" type="xsd:string" />
+  </message>
+  <message name="authHeader">
+    <part name="clientAuth" element="tns:clientAuth" />
+  </message>
+  <message name="custHeader">
+    <part name="custInfo" element="tns:custInfo" />
+  </message>
+  <message name="echoAuthOut">
+    <part name="authOut" type="tns:authDataType" />
+  </message>
+  <message name="echoCustOut">
+    <part name="CustInfo" type="tns:custDataType" />
+  </message>
+  <message name="getDomainIn">
+    <part name="domain" type="xsd:string" />
+  </message>
+  <message name="getRecordsIn">
+    <part name="domain" type="xsd:string" />
+    <part name="type" type="xsd:string" />
+  </message>
+  <message name="getRecordsOut">
+    <part name="result" type="tns:recordListType" />
+  </message>
+  <message name="setRecordsIn">
+    <part name="domain" type="xsd:string" />
+    <part name="recordList" type="tns:recordListType" />
+  </message>
+  <message name="setRecordsOut">
+    <part name="result" type="tns:booleanResponseType" />
+  </message>
+  <message name="getSoaOut">
+    <part name="result" type="tns:soaType" />
+  </message>
+  <message name="getNameServersIn">
+    <part name="domain" type="xsd:string" />
+    <part name="even" type="xsd:int" />
+  </message>
+  <message name="getStringArrayOut">
+    <part name="result" type="tns:stringArrayType" />
+  </message>
+  <message name="getStringOut">
+    <part name="result" type="xsd:string" />
+  </message>
+  <message name="getZoneOut">
+    <part name="result" type="tns:zoneType" />
+  </message>
+  <message name="getSiteIn">
+    <part name="site" type="xsd:int" />
+  </message>
+  <message name="getSiteServerIn">
+    <part name="site" type="xsd:int" />
+    <part name="server" type="xsd:string" />
+  </message>
+  <message name="getConfigDataOut">
+    <part name="result" type="tns:configDataResponseArrayType" />
+  </message>
+  <message name="getProxyInstancesOut">
+    <part name="result" type="tns:proxySiteServersResponseArrayType" />
+  </message>
+  <message name="saveNewProxyConfigRecordIn">
+    <part name="record" type="tns:configDataType" />
+  </message>
+  <message name="saveNewProxyConfigRecordOut">
+    <part name="result" type="xsd:string" />
+  </message>
+  <message name="removeProxyConfigRecordIn">
+    <part name="id" type="xsd:int" />
+  </message>
+  <message name="removeProxyConfigRecordOut">
+    <part name="result" type="xsd:string" />
+  </message>
+  <message name="modifyProxyConfigRecordIn">
+    <part name="id" type="xsd:int" />
+    <part name="editField" type="xsd:string" />
+    <part name="newpvalue" type="xsd:string" />
+  </message>
+  <message name="modifyProxyConfigRecordOut">
+    <part name="result" type="xsd:string" />
+  </message>
+  <message name="getProxyFilterDataOut">
+    <part name="result" type="tns:proxyFilterDataResponseArrayType" />
+  </message>
+  <message name="getProxyFilterInstancesOut">
+    <part name="result" type="tns:proxySiteServersResponseArrayType" />
+  </message>
+  <message name="saveNewProxyFilterRecordIn">
+    <part name="record" type="tns:proxyFilterDataType" />
+  </message>
+  <message name="saveNewProxyFilterRecordOut">
+    <part name="result" type="xsd:string" />
+  </message>
+  <message name="removeProxyFilterRecordIn">
+    <part name="id" type="xsd:int" />
+  </message>
+  <message name="removeProxyFilterRecordOut">
+    <part name="result" type="xsd:string" />
+  </message>
+  <message name="modifyProxyFilterRecordIn">
+    <part name="id" type="xsd:int" />
+    <part name="editField" type="xsd:string" />
+    <part name="newpvalue" type="xsd:string" />
+  </message>
+  <message name="modifyProxyFilterRecordOut">
+    <part name="result" type="xsd:string" />
+  </message>
+  <message name="zoneHealthCheckIn">
+    <part name="domain" type="xsd:string" />
+    <part name="action" type="xsd:string" />
+  </message>
+  <message name="zoneHealthCheckOut">
+    <part name="result" type="tns:zoneHealthCheckResponseType" />
+  </message>
+  <message name="refreshZoneIn">
+    <part name="domain" type="xsd:string" />
+    <part name="nameservers" type="tns:nameServerArrayType" />
+  </message>
+  <message name="getProtectedDomainInfoIn">
+    <part name="checkdomain" type="xsd:string" />
+  </message>
+  <message name="getProtectedDomainInfoOut">
+    <part name="result" type="tns:protectedDomainResponseType" />
+  </message>
+  <message name="empty" />
+  <portType name="dnsapiPortType">
+    <operation name="returnTime">
+      <documentation>returnTime</documentation>
+      <input message="tns:empty" />
+      <output message="tns:returnTimeOut" />
+    </operation>
+    <operation name="echoAuth">
+      <documentation>echoAuth</documentation>
+      <input message="tns:empty" />
+      <output message="tns:echoAuthOut" />
+    </operation>
+    <operation name="echoCust">
+      <documentation>echoCust</documentation>
+      <input message="tns:empty" />
+      <output message="tns:echoCustOut" />
+    </operation>
+    <operation name="getMXRecords">
+      <documentation>getMXRecords</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:getRecordsOut" />
+    </operation>
+    <operation name="getNSRecords">
+      <documentation>getNSRecords</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:getRecordsOut" />
+    </operation>
+    <operation name="getSRVRecords">
+      <documentation>getSRVRecords</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:getRecordsOut" />
+    </operation>
+    <operation name="getRRecords">
+      <documentation>getRRecords</documentation>
+      <input message="tns:getRecordsIn" />
+      <output message="tns:getRecordsOut" />
+    </operation>
+    <operation name="setMXRecords">
+      <documentation>setMXRecords</documentation>
+      <input message="tns:setRecordsIn" />
+      <output message="tns:setRecordsOut" />
+    </operation>
+    <operation name="createRecords">
+      <documentation>createRecords</documentation>
+      <input message="tns:setRecordsIn" />
+      <output message="tns:setRecordsOut" />
+    </operation>
+    <operation name="modifyRecords">
+      <documentation>modifyRecords</documentation>
+      <input message="tns:setRecordsIn" />
+      <output message="tns:setRecordsOut" />
+    </operation>
+    <operation name="deleteRecords">
+      <documentation>deleteRecords</documentation>
+      <input message="tns:setRecordsIn" />
+      <output message="tns:setRecordsOut" />
+    </operation>
+    <operation name="getSOA">
+      <documentation>getSOA</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:getSoaOut" />
+    </operation>
+    <operation name="getNameServers">
+      <documentation>getNameServers</documentation>
+      <input message="tns:getNameServersIn" />
+      <output message="tns:getStringArrayOut" />
+    </operation>
+    <operation name="getBindFile">
+      <documentation>getBindFile</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:getStringOut" />
+    </operation>
+    <operation name="getZone">
+      <documentation>getZone</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:getZoneOut" />
+    </operation>
+    <operation name="fixZoneOwnership">
+      <documentation>fixHostingZoneFile</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:getStringOut" />
+    </operation>
+    <operation name="createDefaultZone">
+      <documentation>createDefaultZone</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:getStringOut" />
+    </operation>
+    <operation name="zoneHealthCheck">
+      <documentation>zoneHealthCheck</documentation>
+      <input message="tns:zoneHealthCheckIn" />
+      <output message="tns:zoneHealthCheckOut" />
+    </operation>
+    <operation name="refreshZone">
+      <documentation>refreshZone</documentation>
+      <input message="tns:refreshZoneIn" />
+      <output message="tns:getStringOut" />
+    </operation>
+    <operation name="getForwardingData">
+      <documentation>getForwardingData</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:getStringOut" />
+    </operation>
+    <operation name="getProxyConfig">
+      <documentation>getProxyConfig</documentation>
+      <input message="tns:getSiteServerIn" />
+      <output message="tns:getConfigDataOut" />
+    </operation>
+    <operation name="getProxyInstances">
+      <documentation>getProxyInstances</documentation>
+      <input message="tns:getSiteIn" />
+      <output message="tns:getProxyInstancesOut" />
+    </operation>
+    <operation name="saveNewProxyConfigRecord">
+      <documentation>saveNewProxyConfigRecord</documentation>
+      <input message="tns:saveNewProxyConfigRecordIn" />
+      <output message="tns:saveNewProxyConfigRecordOut" />
+    </operation>
+    <operation name="removeProxyConfigRecord">
+      <documentation>removeProxyConfigRecord</documentation>
+      <input message="tns:removeProxyConfigRecordIn" />
+      <output message="tns:removeProxyConfigRecordOut" />
+    </operation>
+    <operation name="modifyProxyConfigRecord">
+      <documentation>modifyProxyConfigRecord</documentation>
+      <input message="tns:modifyProxyConfigRecordIn" />
+      <output message="tns:modifyProxyConfigRecordOut" />
+    </operation>
+    <operation name="getProxyFilters">
+      <documentation>getProxyFilters</documentation>
+      <input message="tns:getSiteServerIn" />
+      <output message="tns:getProxyFilterDataOut" />
+    </operation>
+    <operation name="saveNewProxyFilterRecord">
+      <documentation>saveNewProxyFilterRecord</documentation>
+      <input message="tns:saveNewProxyFilterRecordIn" />
+      <output message="tns:saveNewProxyFilterRecordOut" />
+    </operation>
+    <operation name="removeProxyFilterRecord">
+      <documentation>removeProxyFilterRecord</documentation>
+      <input message="tns:removeProxyFilterRecordIn" />
+      <output message="tns:removeProxyFilterRecordOut" />
+    </operation>
+    <operation name="modifyProxyFilterRecord">
+      <documentation>modifyProxyFilterRecord</documentation>
+      <input message="tns:modifyProxyFilterRecordIn" />
+      <output message="tns:modifyProxyFilterRecordOut" />
+    </operation>
+    <operation name="getProtectedDomainInfo">
+      <documentation>getProtectedDomainInfo</documentation>
+      <input message="tns:getProtectedDomainInfoIn" />
+      <output message="tns:getProtectedDomainInfoOut" />
+    </operation>
+  </portType>
+  <binding name="dnsapiSoap" type="tns:dnsapiPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="returnTime">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="echoAuth">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="echoCust">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getMXRecords">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getNSRecords">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getSRVRecords">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getRRecords">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="setMXRecords">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="createRecords">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="modifyRecords">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="deleteRecords">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getSOA">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getNameServers">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getBindFile">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getZone">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="fixZoneOwnership">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="createDefaultZone">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="zoneHealthCheck">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="refreshZone">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getForwardingData">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getProxyConfig">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getProxyInstances">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="saveNewProxyConfigRecord">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="removeProxyConfigRecord">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="modifyProxyConfigRecord">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getProxyFilters">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="saveNewProxyFilterRecord">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="removeProxyFilterRecord">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="modifyProxyFilterRecord">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getProtectedDomainInfo">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+  </binding>
+  <service name="dnssoapapi">
+    <port name="dnsapiPort" binding="tns:dnsapiSoap">
+      <soap:address location="http://dnsapi.domaincontrol.com/dnsapi.php" />
+    </port>
+  </service>
+</definitions>

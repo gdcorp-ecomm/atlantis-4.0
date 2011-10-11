@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D74E40AB-A0C8-4782-81D1-31F9A2948A74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCIsDomainAlertCancellable.Impl", "Atlantis.Framework.DCCIsDomainAlertCancellable.Impl\Atlantis.Framework.DCCIsDomainAlertCancellable.Impl.csproj", "{CA8AD149-BDF6-4F05-8C76-FA2F1C4FD87F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCIsDomainAlertCancellable.Interface", "Atlantis.Framework.DCCIsDomainAlertCancellable.Interface\Atlantis.Framework.DCCIsDomainAlertCancellable.Interface.csproj", "{08AC64A0-2A61-4289-A59C-9D563AA0B444}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DCCIsDomainAlertCancellable.Tests", "Atlantis.Framework.DCCIsDomainAlertCancellable.Tests\Atlantis.Framework.DCCIsDomainAlertCancellable.Tests.csproj", "{6E639A36-0EAF-4ABB-B5F0-4D4FB4B11A3B}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = DCCIsDomainAlertCancellable.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = DCCIsDomainAlertCancellable.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.DCCIsDomainAlertCancellable.Impl\\Atlantis.Framework.DCCIsDomainAlertCancellable.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.DCCIsDomainAlertCancellable.Impl
+		SccLocalPath3 = Atlantis.Framework.DCCIsDomainAlertCancellable.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.DCCIsDomainAlertCancellable.Interface\\Atlantis.Framework.DCCIsDomainAlertCancellable.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.DCCIsDomainAlertCancellable.Interface
+		SccLocalPath4 = Atlantis.Framework.DCCIsDomainAlertCancellable.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.DCCIsDomainAlertCancellable.Tests\\Atlantis.Framework.DCCIsDomainAlertCancellable.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.DCCIsDomainAlertCancellable.Tests
+		SccLocalPath5 = Atlantis.Framework.DCCIsDomainAlertCancellable.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA8AD149-BDF6-4F05-8C76-FA2F1C4FD87F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA8AD149-BDF6-4F05-8C76-FA2F1C4FD87F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA8AD149-BDF6-4F05-8C76-FA2F1C4FD87F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA8AD149-BDF6-4F05-8C76-FA2F1C4FD87F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08AC64A0-2A61-4289-A59C-9D563AA0B444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08AC64A0-2A61-4289-A59C-9D563AA0B444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08AC64A0-2A61-4289-A59C-9D563AA0B444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08AC64A0-2A61-4289-A59C-9D563AA0B444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E639A36-0EAF-4ABB-B5F0-4D4FB4B11A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E639A36-0EAF-4ABB-B5F0-4D4FB4B11A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E639A36-0EAF-4ABB-B5F0-4D4FB4B11A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E639A36-0EAF-4ABB-B5F0-4D4FB4B11A3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D74E40AB-A0C8-4782-81D1-31F9A2948A74}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {D74E40AB-A0C8-4782-81D1-31F9A2948A74}
+	EndGlobalSection
+EndGlobal

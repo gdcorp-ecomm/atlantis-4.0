@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="trn:RegBackorderDataWebSvc" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="trn:RegBackorderDataWebSvc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="trn:RegBackorderDataWebSvc">
+      <s:element name="IsDomainAlertCancellable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsDomainAlertCancellableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsDomainAlertCancellableResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRefundableBackorderCreditUsage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRefundableBackorderCreditUsageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRefundableBackorderCreditUsageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertRegistryDomainBackorderCapture">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertRegistryDomainBackorderCaptureResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertRegistryDomainBackorderCaptureResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="IsDomainAlertCancellableSoapIn">
+    <wsdl:part name="parameters" element="tns:IsDomainAlertCancellable" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainAlertCancellableSoapOut">
+    <wsdl:part name="parameters" element="tns:IsDomainAlertCancellableResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRefundableBackorderCreditUsageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRefundableBackorderCreditUsage" />
+  </wsdl:message>
+  <wsdl:message name="GetRefundableBackorderCreditUsageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRefundableBackorderCreditUsageResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertRegistryDomainBackorderCaptureSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertRegistryDomainBackorderCapture" />
+  </wsdl:message>
+  <wsdl:message name="InsertRegistryDomainBackorderCaptureSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertRegistryDomainBackorderCaptureResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegBackorderDataWebSvcSoap">
+    <wsdl:operation name="IsDomainAlertCancellable">
+      <wsdl:input message="tns:IsDomainAlertCancellableSoapIn" />
+      <wsdl:output message="tns:IsDomainAlertCancellableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRefundableBackorderCreditUsage">
+      <wsdl:input message="tns:GetRefundableBackorderCreditUsageSoapIn" />
+      <wsdl:output message="tns:GetRefundableBackorderCreditUsageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRegistryDomainBackorderCapture">
+      <wsdl:input message="tns:InsertRegistryDomainBackorderCaptureSoapIn" />
+      <wsdl:output message="tns:InsertRegistryDomainBackorderCaptureSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegBackorderDataWebSvcSoap" type="tns:RegBackorderDataWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IsDomainAlertCancellable">
+      <soap:operation soapAction="trn:RegBackorderDataWebSvc/IsDomainAlertCancellable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRefundableBackorderCreditUsage">
+      <soap:operation soapAction="trn:RegBackorderDataWebSvc/GetRefundableBackorderCreditUsage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRegistryDomainBackorderCapture">
+      <soap:operation soapAction="trn:RegBackorderDataWebSvc/InsertRegistryDomainBackorderCapture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegBackorderDataWebSvcSoap12" type="tns:RegBackorderDataWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IsDomainAlertCancellable">
+      <soap12:operation soapAction="trn:RegBackorderDataWebSvc/IsDomainAlertCancellable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRefundableBackorderCreditUsage">
+      <soap12:operation soapAction="trn:RegBackorderDataWebSvc/GetRefundableBackorderCreditUsage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRegistryDomainBackorderCapture">
+      <soap12:operation soapAction="trn:RegBackorderDataWebSvc/InsertRegistryDomainBackorderCapture" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegBackorderDataWebSvc">
+    <wsdl:port name="RegBackorderDataWebSvcSoap" binding="tns:RegBackorderDataWebSvcSoap">
+      <soap:address location="http://g1dwdsweb01/RegBackorderDataWebSvc/RegBackorderDataWebSvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegBackorderDataWebSvcSoap12" binding="tns:RegBackorderDataWebSvcSoap12">
+      <soap12:address location="http://g1dwdsweb01/RegBackorderDataWebSvc/RegBackorderDataWebSvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

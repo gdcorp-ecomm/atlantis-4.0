@@ -36,7 +36,7 @@ namespace Atlantis.Framework.DataCache
       get { return _DEFAULTITEMCACHETIME; }
     }
 
-    public Cache(string cacheName, string privateLabelIdName)
+    internal Cache(string cacheName, string privateLabelIdName)
     {
       _cachedValuesDictionary = new Dictionary<string, CachedValue>();
       _cachedValuesLinkList = new LinkedList<object>();
@@ -49,23 +49,10 @@ namespace Atlantis.Framework.DataCache
       _cacheCreateTime = DateTime.UtcNow;
     }
 
-    public Cache(string cacheName, string privateLabelIdName, TimeSpan itemCacheTime)
-      : this(cacheName, privateLabelIdName)
-    {
-      _itemCacheTime = itemCacheTime;
-    }
-
-    public Cache(string cacheName, bool isBasedOnPrivateLabelId)
+    internal Cache(string cacheName, bool isBasedOnPrivateLabelId)
       : this(cacheName, null)
     {
       _isBasedOnPrivateLabelId = isBasedOnPrivateLabelId;
-    }
-
-    public Cache(string cacheName, bool isBasedOnPrivateLabelId, TimeSpan itemCacheTime)
-      : this(cacheName, null)
-    {
-      _isBasedOnPrivateLabelId = isBasedOnPrivateLabelId;
-      _itemCacheTime = itemCacheTime;
     }
 
     public string PrivateLabelIdName
@@ -118,7 +105,7 @@ namespace Atlantis.Framework.DataCache
 
         if (foundValue && cachedValue != null)
         {
-          isFresh = (cachedValue.Status == CachedValueStatus.NotExpired);
+          isFresh = !cachedValue.IsExpired || cachedValue.RefreshInProgress;
         }
 
 #if DEBUG
@@ -136,7 +123,7 @@ namespace Atlantis.Framework.DataCache
         isFresh = false;
       }
 
-      return isFresh && foundValue;
+      return isFresh;
     }
 
     public void RenewValue(CachedValue cachedValue)
@@ -166,7 +153,7 @@ namespace Atlantis.Framework.DataCache
         int maxCheck = System.Math.Min(MAX_CLEAN, (int)((_cachedValuesLinkList.Count * .05) + 1));
         long timeKeyFiveHoursAgo = (DateTime.UtcNow.AddHours(-5)).Ticks;
 
-        if (oldCachedValue.IsActive)
+        if (oldCachedValue != null)
         {
           oldCachedValue.MarkInactive();
         }
@@ -184,7 +171,7 @@ namespace Atlantis.Framework.DataCache
           {
             _cachedValuesLinkList.Remove(oNode);
           }
-          else if ((targetCachedValue.FinalTicks < timeKeyFiveHoursAgo) && (targetCachedValue.Status != CachedValueStatus.RefreshInProgress))
+          else if (targetCachedValue.FinalTicks < timeKeyFiveHoursAgo)
           {
             _cachedValuesLinkList.Remove(oNode);
             _cachedValuesDictionary.Remove(targetCachedValue.Key);
@@ -200,7 +187,7 @@ namespace Atlantis.Framework.DataCache
       }
       catch (Exception ex)
       {
-        LogError(_cacheName, oldCachedValue.Key, ex);
+        LogError(_cacheName, "QuickClean", ex);
       }
     }
 
@@ -212,10 +199,7 @@ namespace Atlantis.Framework.DataCache
 
       using (SlimWrite write = _cacheLock.GetWriteLock())
       {
-        if ((oldCachedValue != null) && (oldCachedValue.Key == newCachedValue.Key))
-        {
-          QuickClean(oldCachedValue);
-        }
+        QuickClean(oldCachedValue);
         _cachedValuesDictionary[newCachedValue.Key] = newCachedValue;
         _cachedValuesLinkList.AddLast(new WeakReference(newCachedValue));
       }
@@ -230,11 +214,11 @@ namespace Atlantis.Framework.DataCache
     {
       try
       {
-        using (SlimWrite write = _cacheLock.GetWriteLock())
+        if ((privateLabelIds != null) && (privateLabelIds.Count > 0))
         {
-          if (privateLabelIds.Count > 0)
+          using (SlimWrite write = _cacheLock.GetWriteLock())
           {
-            long timeKey = DateTime.UtcNow.Ticks;
+            long timeKeyFiveHoursAgo = (DateTime.UtcNow.AddHours(-5)).Ticks;
             LinkedListNode<object> oNode = _cachedValuesLinkList.First;
 
             while (oNode != null)
@@ -242,26 +226,27 @@ namespace Atlantis.Framework.DataCache
               WeakReference oWeakRef = (WeakReference)oNode.Value;
               LinkedListNode<object> oNextNode = oNode.Next;
 
-              if (oWeakRef.Target == null || !(((CachedValue)oWeakRef.Target).IsActive))
+              CachedValue cachedValue = oWeakRef.Target as CachedValue;
+
+              if ((cachedValue == null) || (!cachedValue.IsActive))
               {
                 _cachedValuesLinkList.Remove(oNode);
               }
-              else if (((CachedValue)oWeakRef.Target).FinalTicks < timeKey ||
-                       ((CachedValue)oWeakRef.Target).PrivateLabelId == 0 ||
-                       privateLabelIds.Contains(((CachedValue)oWeakRef.Target).PrivateLabelId))
+              else if (cachedValue.FinalTicks < timeKeyFiveHoursAgo)
               {
-                ((CachedValue)oWeakRef.Target).MarkInactive();
-                _cachedValuesDictionary.Remove(((CachedValue)oWeakRef.Target).Key);
+                cachedValue.MarkInactive();
+                _cachedValuesDictionary.Remove(cachedValue.Key);
+                _cachedValuesLinkList.Remove(oNode);
+              }
+              else if ((cachedValue.PrivateLabelId > 0) && (privateLabelIds.Contains(cachedValue.PrivateLabelId)))
+              {
+                cachedValue.MarkInactive();
+                _cachedValuesDictionary.Remove(cachedValue.Key);
                 _cachedValuesLinkList.Remove(oNode);
               }
 
               oNode = oNextNode;
             }
-          }
-          else
-          {
-            _cachedValuesDictionary.Clear();
-            _cachedValuesLinkList.Clear();
           }
         }
       }
@@ -270,7 +255,6 @@ namespace Atlantis.Framework.DataCache
         LogError("Cache.ClearByPLID(): " + _cacheName, "", ex);
       }
     }
-
     public void Clear()
     {
       using (SlimWrite write = _cacheLock.GetWriteLock())
@@ -287,6 +271,7 @@ namespace Atlantis.Framework.DataCache
       xtwRequest.WriteStartElement("Cache");
       xtwRequest.WriteAttributeString("MethodName", _cacheName);
 
+#if DEBUG
       using (SlimRead read = _cacheLock.GetReadLock())
       {
         foreach (KeyValuePair<string, CachedValue> oPair in _cachedValuesDictionary)
@@ -297,6 +282,7 @@ namespace Atlantis.Framework.DataCache
           xtwRequest.WriteEndElement();
         }
       }
+#endif
 
       xtwRequest.WriteEndElement();
       return sbRequest.ToString();

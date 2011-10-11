@@ -63,10 +63,6 @@ namespace Atlantis.Framework.DataCache
         {
           _cacheManger.ReloadGenericCaches();
         }
-        else if (String.Compare(request, "connectionStrings", true) == 0)
-        {
-          // NOP
-        }
         else
         {
           _cacheManger.ClearCacheDataByPLID(request, privateLabelIds);
@@ -138,11 +134,6 @@ namespace Atlantis.Framework.DataCache
       _cacheManger.ClearCacheData(cacheName);
     }
 
-    public static void ClearAllInProcessCachedData()
-    {
-      _cacheManger.ClearAllCaches();
-    }
-
     public static string DisplayInProcessCachedData(string cacheName)
     {
       string result = string.Empty;
@@ -207,6 +198,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           ADODB.Recordset oRecordSet = null;
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
@@ -250,6 +246,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sSettingValue = oCacheWrapper.COMAccessClass.GetAppSetting(settingName);
@@ -287,7 +288,7 @@ namespace Atlantis.Framework.DataCache
       CachedValue cachedValue = null;
       bool isValid = cache.TryGetValue(request, out cachedValue);
 
-      if ((isValid) || ((cachedValue != null) && (cachedValue.Status == CachedValueStatus.RefreshInProgress)))
+      if (isValid)
       {
         result = (T)cachedValue.Value;
       }
@@ -335,6 +336,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.GetCacheData(requestXml);
@@ -378,6 +384,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           ADODB.Recordset oRecordSet = null;
 
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
@@ -429,6 +440,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           object oPvtName, oPvtAbbreviation, oPvtCallingCode, oPvtIsSupported = null;
 
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
@@ -484,7 +500,12 @@ namespace Atlantis.Framework.DataCache
 
       if (!bValid)
       {
-        string sCountryList = "";
+        if (oValue != null)
+        {
+          oValue.MarkInProgress();
+        }
+
+        string sCountryList = string.Empty;
 
         try
         {
@@ -530,6 +551,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             result = oCacheWrapper.COMAccessClass.GetCurrencyData(sKey);
@@ -571,6 +597,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           string sXML = string.Empty;
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
@@ -632,7 +663,12 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
-          string sCurrencyValue = "";
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
+          string sCurrencyValue = string.Empty;
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sCurrencyValue = oCacheWrapper.COMAccessClass.GetCurrencyData(sCurrency);
@@ -681,6 +717,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             iListPrice = oCacheWrapper.COMAccessClass.GetListPrice(iPrivateLabelID, sPfidOrSku, iPriceTypeID);
@@ -743,6 +784,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           object oPvtPrice, oPvtEstimate = null;
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
@@ -798,6 +844,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           object oPvtNoticeIsPresent, oPvtNoticeHeader, oPvtNoticeBody = null;
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
@@ -849,8 +900,12 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
-          string sMgrCategories = "";
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
 
+          string sMgrCategories = string.Empty;
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sMgrCategories = oCacheWrapper.COMAccessClass.GetMgrCategoriesForUser(iManagerUserID);
@@ -894,6 +949,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             iPFID = oCacheWrapper.COMAccessClass.GetPFIDByUnifiedID(iUnifiedPFID, iPrivateLabelID);
@@ -924,7 +984,7 @@ namespace Atlantis.Framework.DataCache
     public static string GetPLData(int iPrivateLabelID, int iDataID)
     {
       string sCacheName = "GetPLData";
-      string sPLData = "";
+      string sPLData = string.Empty;
       string sKey = iPrivateLabelID.ToString() + "-" + iDataID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
       CachedValue oValue = null;
@@ -934,6 +994,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sPLData = oCacheWrapper.COMAccessClass.GetPLData(iPrivateLabelID, iDataID);
@@ -964,7 +1029,7 @@ namespace Atlantis.Framework.DataCache
     public static string GetPrivateLabelBkColor(int iPrivateLabelID)
     {
       string sCacheName = "GetPrivateLabelBkColor";
-      string sPLBKColor = "";
+      string sPLBKColor = string.Empty;
       string sKey = iPrivateLabelID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
       CachedValue oValue = null;
@@ -974,6 +1039,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sPLBKColor = oCacheWrapper.COMAccessClass.GetPrivateLabelBkColor(iPrivateLabelID);
@@ -1014,6 +1084,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             iPrivateLabelID = oCacheWrapper.COMAccessClass.GetPrivateLabelId(sProgID);
@@ -1044,7 +1119,7 @@ namespace Atlantis.Framework.DataCache
     public static string GetPrivateLabelOrderId(int iPrivateLabelID)
     {
       string sCacheName = "GetPrivateLabelOrderId";
-      string sValue = "";
+      string sValue = string.Empty;
       string sKey = iPrivateLabelID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
       CachedValue oValue = null;
@@ -1054,6 +1129,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.GetPrivateLabelOrderId(iPrivateLabelID);
@@ -1094,6 +1174,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             iValue = oCacheWrapper.COMAccessClass.GetPrivateLabelType(iPrivateLabelID);
@@ -1131,15 +1216,12 @@ namespace Atlantis.Framework.DataCache
       CachedValue cachedValue = null;
       bool bValid = oCache.TryGetValue(sKey, out cachedValue);
 
-      if ((bValid) || ((cachedValue != null) && (cachedValue.Status == CachedValueStatus.RefreshInProgress)))
+      if (bValid)
       {
         result = (IResponseData)cachedValue.Value;
       }
       else
       {
-        // We are going to make the call get a new value for the cache, if there is an existing value, change
-        // its status to Refreshing, so even though it is not valid, we don't make the call too many times.
-        // if its status is already refrehsing and we have a value, just use it.
         if (cachedValue != null)
         {
           cachedValue.MarkInProgress();
@@ -1171,7 +1253,7 @@ namespace Atlantis.Framework.DataCache
     public static string GetProductDescription(string sPfidOrSku)
     {
       string sCacheName = "GetProductDescription";
-      string sValue = "";
+      string sValue = string.Empty;
       string sKey = sPfidOrSku;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
       CachedValue oValue = null;
@@ -1181,6 +1263,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.GetProductDescription(sPfidOrSku);
@@ -1211,7 +1298,7 @@ namespace Atlantis.Framework.DataCache
     public static string GetProductUpdateXSD(int iXsdID)
     {
       string sCacheName = "GetProductUpdateXSD";
-      string sValue = "";
+      string sValue = string.Empty;
       string sKey = iXsdID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
       CachedValue oValue = null;
@@ -1221,6 +1308,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.GetProductUpdateXSD(iXsdID);
@@ -1252,7 +1344,7 @@ namespace Atlantis.Framework.DataCache
     public static string GetProductXSD(int iXsdID)
     {
       string sCacheName = "GetProductXSD";
-      string sValue = "";
+      string sValue = string.Empty;
       string sKey = iXsdID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
       CachedValue oValue = null;
@@ -1262,6 +1354,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.GetProductXSD(iXsdID);
@@ -1292,7 +1389,7 @@ namespace Atlantis.Framework.DataCache
     public static string GetProgID(int iPrivateLabelID)
     {
       string sCacheName = "GetProgID";
-      string sValue = "";
+      string sValue = string.Empty;
       string sKey = iPrivateLabelID.ToString();
       Cache oCache = _cacheManger.GetCache(sCacheName, true);
       CachedValue oValue = null;
@@ -1302,6 +1399,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.GetProgID(iPrivateLabelID);
@@ -1348,6 +1450,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             iValue = oCacheWrapper.COMAccessClass.GetPromoPrice(iPrivateLabelID, sPfidOrSku, iPriceTypeID);
@@ -1396,6 +1503,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             iValue = oCacheWrapper.COMAccessClass.GetPromoPriceByQty(iPrivateLabelID, sPfidOrSku, iQuantity, iPriceTypeID);
@@ -1461,6 +1573,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             object oPrice, oEstimate = null;
@@ -1538,6 +1655,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             object oPrice, oEstimate = null;
@@ -1595,6 +1717,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             object oParentPLID, oDefaultTK, oFreeTurnKeyID;
@@ -1643,10 +1770,14 @@ namespace Atlantis.Framework.DataCache
 
       if (!bValid)
       {
-        string sValue = "";
-
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
+          string sValue = string.Empty;
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.GetResellerSampleCommission(sResellerType, iPfid);
@@ -1687,10 +1818,14 @@ namespace Atlantis.Framework.DataCache
 
       if (!bValid)
       {
-        ADODB.Recordset oRecordSet = null;
-
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
+          ADODB.Recordset oRecordSet = null;
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             oRecordSet = (ADODB.Recordset)oCacheWrapper.COMAccessClass.GetShopperProduct(sShopperID);
@@ -1756,10 +1891,14 @@ namespace Atlantis.Framework.DataCache
 
       if (!bValid)
       {
-        string sValue = "";
-
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
+          string sValue = string.Empty;
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.GetShopperRenewingServices(sShopperID);
@@ -1805,6 +1944,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             object oName, oAbbreviation, oCountryID;
@@ -1850,10 +1994,14 @@ namespace Atlantis.Framework.DataCache
 
       if (!bValid)
       {
-        string sValue = "";
-
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
+          string sValue = string.Empty;
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.GetStateList(iCountryID);
@@ -1895,10 +2043,14 @@ namespace Atlantis.Framework.DataCache
 
       if (!bValid)
       {
-        string sValue = "";
-
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
+          string sValue = string.Empty;
           XmlDocument xdDoc = new XmlDocument();
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
@@ -1951,10 +2103,14 @@ namespace Atlantis.Framework.DataCache
 
       if (!bValid)
       {
-        string sValue = "";
-
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
+          string sValue = string.Empty;
           XmlDocument xdDoc = new XmlDocument();
           string xmlRequest = "<GetTLDInfo><param name=\"tldIdOrName\" value=\"" + sTldIdOrName + "\"/></GetTLDInfo>";
 
@@ -2006,12 +2162,15 @@ namespace Atlantis.Framework.DataCache
 
       if (!bValid)
       {
-        string sValue = "";
-
         try
         {
-          XmlDocument xdDoc = new XmlDocument();
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
 
+          string sValue = string.Empty;
+          XmlDocument xdDoc = new XmlDocument();
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.GetTLDData(sTldIdOrName);
@@ -2063,9 +2222,14 @@ namespace Atlantis.Framework.DataCache
 
       if (!bValid)
       {
-        string sValue = "";
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
+          string sValue = string.Empty;
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.GetTLDList(iPrivateLabelId, iProductType);
@@ -2108,6 +2272,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             bRetValue = oCacheWrapper.COMAccessClass.IsPrivateLabelActive(iPrivateLabelID);
@@ -2149,6 +2318,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (cachedValue != null)
+          {
+            cachedValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             result = oCacheWrapper.COMAccessClass.IsProductOnSaleForCurrency(privateLabelId, pfid.ToString(), currencyType);
@@ -2195,6 +2369,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             bRetValue = oCacheWrapper.COMAccessClass.IsProductOnSale(iPrivateLabelID, sPfidOrSku);
@@ -2225,7 +2404,7 @@ namespace Atlantis.Framework.DataCache
     public static string LookupPLData(int iCategory, string sColName)
     {
       string sCacheName = "LookupPLData";
-      string sValue = "";
+      string sValue = string.Empty;
       string sKey = iCategory.ToString() + "-" + sColName;
       Cache oCache = _cacheManger.GetCache(sCacheName, false);
       CachedValue oValue = null;
@@ -2235,6 +2414,11 @@ namespace Atlantis.Framework.DataCache
       {
         try
         {
+          if (oValue != null)
+          {
+            oValue.MarkInProgress();
+          }
+
           using (DataCacheWrapper oCacheWrapper = new DataCacheWrapper())
           {
             sValue = oCacheWrapper.COMAccessClass.LookupPLData(iCategory, sColName);
@@ -2376,7 +2560,7 @@ namespace Atlantis.Framework.DataCache
 
     private static string GetOuterTagName(string sXML)
     {
-      string sName = "";
+      string sName = string.Empty;
       int iStart = sXML.IndexOf('<');
       int iEnd = sXML.IndexOf('>') - 1;
 

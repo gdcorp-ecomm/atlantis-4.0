@@ -110,5 +110,14 @@ namespace Atlantis.Framework.DataCache.Tests
         return 2;
     }
 
+    [TestMethod]
+    [DeploymentItem("Interop.gdDataCacheLib.dll")]
+    public void CacheDataLinkInfo()
+    {
+      string xml = DataCache.GetCacheData("<LinkInfo><param name=\"contextID\" value=\"1\" /></LinkInfo>");
+      Assert.IsNotNull(xml);
+    }
+
+
   }
 }

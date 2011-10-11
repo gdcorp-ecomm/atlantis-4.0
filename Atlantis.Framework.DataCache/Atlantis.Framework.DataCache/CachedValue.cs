@@ -7,20 +7,16 @@ namespace Atlantis.Framework.DataCache
     long _finalTicks;
     object _cacheValue;
     string _key;
-    bool _isActive;
+    bool _isActive = true;
     int _privateLabelId;
-    CachedValueStatus _status;
-    SlimLock _statusLock;
+    bool _refreshInProgress = false;
 
     public CachedValue(string key, object cacheValue, long finalTicks, int privateLabelId)
     {
       _key = key;
       _cacheValue = cacheValue;
       _finalTicks = finalTicks;
-      _isActive = true;
       _privateLabelId = privateLabelId;
-      _status = CachedValueStatus.NotExpired;
-      _statusLock = new SlimLock();
     }
 
     public object Value
@@ -48,36 +44,19 @@ namespace Atlantis.Framework.DataCache
       get { return _isActive; }
     }
 
-    public CachedValueStatus Status
+    public bool IsExpired
     {
-      get
-      {
-        CachedValueStatus tempStatus;
-        using (SlimRead read = _statusLock.GetReadLock())
-        {
-          tempStatus = _status;
-        }
-        
-        if ((tempStatus == CachedValueStatus.NotExpired) && ((DateTime.UtcNow.Ticks > _finalTicks)))
-        {
-          using (SlimWrite write = _statusLock.GetWriteLock())
-          {
-            if (_status == CachedValueStatus.NotExpired)
-            {
-              _status = CachedValueStatus.Expired;
-            }
-          }
-        }
-        return _status;
-      }
+      get { return DateTime.UtcNow.Ticks > _finalTicks; }
+    }
+
+    public bool RefreshInProgress
+    {
+      get { return _refreshInProgress; }
     }
 
     public void MarkInProgress()
     {
-      using (SlimWrite write = _statusLock.GetWriteLock())
-      {
-        _status = CachedValueStatus.RefreshInProgress;
-      }
+      _refreshInProgress = true;
     }
 
     public void MarkInactive()

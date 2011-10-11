@@ -164,19 +164,6 @@ namespace Atlantis.Framework.DataCache
       }
     }
 
-    public void ClearAllCaches()
-    {
-      using (SlimRead read = _cacheLock.GetReadLock())
-      {
-        foreach (KeyValuePair<string, Cache> oPair in _cacheMap)
-          oPair.Value.Clear();
-        foreach (KeyValuePair<string, Cache> oPair in _genericCacheDataMap)
-          oPair.Value.Clear();
-        foreach (KeyValuePair<string, Cache> oPair in _genericCacheRsMap)
-          oPair.Value.Clear();
-      }
-    }
-
     public string DisplayCache(string cacheName)
     {
       Cache oCache = null;

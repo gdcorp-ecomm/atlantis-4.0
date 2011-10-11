@@ -5,7 +5,6 @@ namespace Atlantis.Framework.BasePages.Providers
 {
   public class PrivateLabelAwareSiteContextProvider : SiteContextProviderBase
   {
-    private bool _isDomainMe;
     private int? _contextId;
     public override int ContextId
     {
@@ -36,11 +35,6 @@ namespace Atlantis.Framework.BasePages.Providers
               _contextId = ContextIds.WildWestDomains;
             else if (sHost.Contains("securepaynet.net") || sHost.Contains("securepaynet-net.ide") || sHost.Contains("securepaynetmobile.net") || sHost.Contains("securepaynetmobile-net.ide"))
               _contextId = ContextIds.Reseller;
-            else if (sHost.Contains("domain.me") || sHost.Contains("domain-me.ide"))
-            {
-              _contextId = ContextIds.Reseller;
-              _isDomainMe = true;
-            }
           }
         }
 
@@ -96,12 +90,10 @@ namespace Atlantis.Framework.BasePages.Providers
               _privateLabelId = WWD_PLID;
             else
             {
-              if (_isDomainMe)
+              if (ProgId.Length > 0)
               {
-                _privateLabelId = DOMAINME_PLID;
-              }
-              else if (ProgId.Length > 0)
                 _privateLabelId = DataCache.DataCache.GetPrivateLabelId(ProgId);
+              }
 
               if (_privateLabelId == 0 && !string.IsNullOrEmpty(HttpContext.Current.Request[PARAM_PLID]))
               {

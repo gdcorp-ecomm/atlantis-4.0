@@ -19,7 +19,7 @@ namespace Atlantis.Framework.GoodAsGoldReport.Tests
     {
       DateTime sdate = new DateTime(2011,1,1);
       DateTime edate = new DateTime(2012,1,1);
-      GoodAsGoldReportRequestData request = new GoodAsGoldReportRequestData("850774", string.Empty, string.Empty, string.Empty, 0, sdate, edate);
+      GoodAsGoldReportRequestData request = new GoodAsGoldReportRequestData("860431", string.Empty, string.Empty, string.Empty, 0, sdate, edate, 5, 2, "displayDate", "asc", "Withdrawal");
 
       GoodAsGoldReportResponseData response = (GoodAsGoldReportResponseData)Engine.Engine.ProcessRequest(request, 405);
 

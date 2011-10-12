@@ -3,6 +3,8 @@ using System.Data;
 using System.IO;
 using System.Xml.Serialization;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.GoodAsGoldReport.Interface.Abstract;
+using Atlantis.Framework.GoodAsGoldReport.Interface.Concrete;
 
 namespace Atlantis.Framework.GoodAsGoldReport.Interface
 {
@@ -12,8 +14,17 @@ namespace Atlantis.Framework.GoodAsGoldReport.Interface
     private bool _success = false;
     private DataSet _report = null;
 
-    public GoodAsGoldReportResponseData(DataSet returnAllReport)
+    public IPageResult PageTotals { get; set; }
+    public string BeginningBalance { get; set; }
+    public string EndingBalance { get; set; }
+    public string CurrentBalance { get; set; }
+
+    public GoodAsGoldReportResponseData(DataSet returnAllReport, int totalPages, int totalRecords, string beginningBalance, string endingBalance, string currentBalance)
     {
+      PageTotals = new GAGPagingResult(totalPages, totalRecords);
+      BeginningBalance = beginningBalance;
+      EndingBalance = endingBalance;
+      CurrentBalance = currentBalance;
       _report = returnAllReport;
       _success = (returnAllReport != null);
     }

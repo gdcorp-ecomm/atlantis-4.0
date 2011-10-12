@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C86DA599-D09D-4C1E-934D-7E59D38EA9C2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atlantis.Framework.DotTypeCache</RootNamespace>
+    <AssemblyName>Atlantis.Framework.DotTypeCache</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConfigElement.cs" />
+    <Compile Include="ConfigLock.cs" />
+    <Compile Include="DotTypeCache.cs" />
+    <Compile Include="DotTypeCacheConfig.cs" />
+    <Compile Include="MultiRegDotTypeInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
+      <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
+      <Name>Atlantis.Framework.DataCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+      <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>
+      <Name>Atlantis.Framework.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
+      <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>
+      <Name>Atlantis.Framework.Providers.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.RegGetDotTypeProductIdList\Atlantis.Framework.RegGetDotTypeProductIdList.Impl\Atlantis.Framework.RegGetDotTypeProductIdList.Impl.csproj">
+      <Project>{FAF7E237-EEB7-451A-A989-40F7A695AAF8}</Project>
+      <Name>Atlantis.Framework.RegGetDotTypeProductIdList.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.RegGetDotTypeProductIdList\Atlantis.Framework.RegGetDotTypeProductIdList.Interface\Atlantis.Framework.RegGetDotTypeProductIdList.Interface.csproj">
+      <Project>{111A8AD3-44D6-427E-95B3-3F52409B20F4}</Project>
+      <Name>Atlantis.Framework.RegGetDotTypeProductIdList.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.RegGetDotTypeRegistrar\Atlantis.Framework.RegGetDotTypeRegistrar.Impl\Atlantis.Framework.RegGetDotTypeRegistrar.Impl.csproj">
+      <Project>{66A3D2C3-081A-4567-9AF5-14E50235258D}</Project>
+      <Name>Atlantis.Framework.RegGetDotTypeRegistrar.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.RegGetDotTypeRegistrar\Atlantis.Framework.RegGetDotTypeRegistrar.Interface\Atlantis.Framework.RegGetDotTypeRegistrar.Interface.csproj">
+      <Project>{8A633558-14E4-4DDF-8C04-2624753F0A3F}</Project>
+      <Name>Atlantis.Framework.RegGetDotTypeRegistrar.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotAg\Atlantis.Framework.DotTypeCache.DotAg.csproj">
+      <Project>{07EB8F6D-AA23-491F-A82C-6F2DB04988A8}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotAg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotAm\Atlantis.Framework.DotTypeCache.DotAm.csproj">
+      <Project>{1C4A46C6-795B-4D06-8C9D-82F412CEA282}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotAm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotAsia\Atlantis.Framework.DotTypeCache.DotAsia.csproj">
+      <Project>{97978F7B-5558-4A25-AFD2-987439A9FD29}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotAsia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotAt\Atlantis.Framework.DotTypeCache.DotAt.csproj">
+      <Project>{E131584E-4742-463D-B19A-8AFBB57C5E6A}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotAt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotBe\Atlantis.Framework.DotTypeCache.DotBe.csproj">
+      <Project>{3ADE6328-EB02-4F8E-80DA-89C10947F3EF}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotBe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotBiz\Atlantis.Framework.DotTypeCache.DotBiz.csproj">
+      <Project>{8B69D51C-04A8-435F-9395-F36A89BEA844}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotBiz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotBz\Atlantis.Framework.DotTypeCache.DotBz.csproj">
+      <Project>{95F72E99-F32F-48A4-B73F-4C494D3A6444}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotBz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotCa\Atlantis.Framework.DotTypeCache.DotCa.csproj">
+      <Project>{DE643DDB-6636-4BB7-B978-3D5E7507AD5E}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotCa</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotCc\Atlantis.Framework.DotTypeCache.DotCc.csproj">
+      <Project>{4E00172C-A11C-4DEF-B160-4360BF517E7A}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotCc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotCn\Atlantis.Framework.DotTypeCache.DotCn.csproj">
+      <Project>{D7294240-92FF-42D6-9F2B-58A24E15D8D4}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotCn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotCoDotIn\Atlantis.Framework.DotTypeCache.DotCoDotIn.csproj">
+      <Project>{96011F8D-6FAE-4649-AD16-AE015E32A7F2}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotCoDotIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotCoDotNz\Atlantis.Framework.DotTypeCache.DotCoDotNz.csproj">
+      <Project>{7915054C-D6D9-471D-AF43-163E8399B273}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotCoDotNz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotCoDotUk\Atlantis.Framework.DotTypeCache.DotCoDotUk.csproj">
+      <Project>{F8C0DBCF-A626-485A-AB08-3DBEB1D70FED}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotCoDotUk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotComDotAg\Atlantis.Framework.DotTypeCache.DotComDotAg.csproj">
+      <Project>{58E40473-184F-41F7-933E-4177212A50DC}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotComDotAg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotComDotBr\Atlantis.Framework.DotTypeCache.DotComDotBr.csproj">
+      <Project>{6FD7CF57-A3BF-45A5-AB00-C86B5487E0D6}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotComDotBr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotComDotBz\Atlantis.Framework.DotTypeCache.DotComDotBz.csproj">
+      <Project>{5C89E5F7-86A8-4031-812D-DD317583B83D}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotComDotBz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotComDotCn\Atlantis.Framework.DotTypeCache.DotComDotCn.csproj">
+      <Project>{F7FC9A5F-EEB7-44BA-AE39-1DDC59ED82F7}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotComDotCn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotComDotCo\Atlantis.Framework.DotTypeCache.DotComDotCo.csproj">
+      <Project>{E538B9A7-5664-4725-87EC-0650F078DCC3}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotComDotCo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotComDotEs\Atlantis.Framework.DotTypeCache.DotComDotEs.csproj">
+      <Project>{9D0D2FF8-C8B4-46E8-8E4A-86BB0755C0F9}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotComDotEs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotComDotMx\Atlantis.Framework.DotTypeCache.DotComDotMx.csproj">
+      <Project>{38838CE9-7487-4A70-B57E-FB27CF67E3CF}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotComDotMx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotComDotSc\Atlantis.Framework.DotTypeCache.DotComDotSc.csproj">
+      <Project>{DABD15CA-78FF-41D0-BBDB-210938442CCE}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotComDotSc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotComDotTw\Atlantis.Framework.DotTypeCache.DotComDotTw.csproj">
+      <Project>{75DA3367-3F00-41C4-8AD6-E7A1BB2AD680}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotComDotTw</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotCom\Atlantis.Framework.DotTypeCache.DotCom.csproj">
+      <Project>{14DA24EA-6151-4E7C-B955-1E7E01F2E830}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotCom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotCo\Atlantis.Framework.DotTypeCache.DotCo.csproj">
+      <Project>{D1420004-D57F-4B9F-AC16-81C910C6632E}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotCo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotDe\Atlantis.Framework.DotTypeCache.DotDe.csproj">
+      <Project>{C83F1B59-8F4E-4268-A56F-FFA14AECAA21}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotDe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotEs\Atlantis.Framework.DotTypeCache.DotEs.csproj">
+      <Project>{958396DC-2F6C-42B9-97A0-D513ED0E6BE8}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotEs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotEu\Atlantis.Framework.DotTypeCache.DotEu.csproj">
+      <Project>{D7A6D62A-3F96-426F-8273-0786610AA80F}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotEu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotFirmDotIn\Atlantis.Framework.DotTypeCache.DotFirmDotIn.csproj">
+      <Project>{51538A00-F5CA-4FC2-BF65-6D4E15F9F574}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotFirmDotIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotFm\Atlantis.Framework.DotTypeCache.DotFm.csproj">
+      <Project>{77FB8003-0F22-471F-A832-C123D24E37AF}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotFm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotFr\Atlantis.Framework.DotTypeCache.DotFr.csproj">
+      <Project>{7B3C6AC4-0258-4B23-9C17-3D298F8A7516}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotFr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotGenDotIn\Atlantis.Framework.DotTypeCache.DotGenDotIn.csproj">
+      <Project>{7BAD90DB-9DAF-4D59-AE8F-29CB1833F492}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotGenDotIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotGs\Atlantis.Framework.DotTypeCache.DotGs.csproj">
+      <Project>{55DDE69D-B473-4305-9781-05F4A700A2C0}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotGs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotIdvDotTw\Atlantis.Framework.DotTypeCache.DotIdvDotTw.csproj">
+      <Project>{BF834256-4C36-4239-96CB-5841F08D101C}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotIdvDotTw</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotIndDotIn\Atlantis.Framework.DotTypeCache.DotIndDotIn.csproj">
+      <Project>{B3C2DE9E-7629-4DF5-9BBA-076E7137A20F}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotIndDotIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotInfo\Atlantis.Framework.DotTypeCache.DotInfo.csproj">
+      <Project>{CBC9CEAB-0BDC-4338-83AE-6F389486090B}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotInfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotIn\Atlantis.Framework.DotTypeCache.DotIn.csproj">
+      <Project>{FC594CBA-FBAA-400F-8628-487CA69409A1}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotIt\Atlantis.Framework.DotTypeCache.DotIt.csproj">
+      <Project>{67C9C27E-5066-4194-8A3F-DF12AE7CC350}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotIt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotJobs\Atlantis.Framework.DotTypeCache.DotJobs.csproj">
+      <Project>{796A681C-B204-462E-A688-4BD3C4249599}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotJobs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotJp\Atlantis.Framework.DotTypeCache.DotJp.csproj">
+      <Project>{C1A122E7-9165-42E7-9963-BC352FB72EFE}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotJp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotMeDotUk\Atlantis.Framework.DotTypeCache.DotMeDotUk.csproj">
+      <Project>{08936250-1B0D-4489-9918-EA4FCCC85223}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotMeDotUk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotMe\Atlantis.Framework.DotTypeCache.DotMe.csproj">
+      <Project>{AC7628E1-9B6E-446A-A5FA-EC61C44A750E}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotMe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotMobi\Atlantis.Framework.DotTypeCache.DotMobi.csproj">
+      <Project>{448BC1AD-732F-4750-AC86-3B67F5A6A010}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotMobi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotMs\Atlantis.Framework.DotTypeCache.DotMs.csproj">
+      <Project>{7C9B7294-D7ED-4787-A97A-D54BEEA048CA}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotMs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotMx\Atlantis.Framework.DotTypeCache.DotMx.csproj">
+      <Project>{CEA46B1C-B716-4F44-ABEC-44CEEBABEEF0}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotMx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotName\Atlantis.Framework.DotTypeCache.DotName.csproj">
+      <Project>{407597A4-59CA-4DE7-97ED-8A2B582DC42B}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotName</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNetDotAg\Atlantis.Framework.DotTypeCache.DotNetDotAg.csproj">
+      <Project>{367C08A6-51C6-4249-9810-5368C1F9F67E}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNetDotAg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNetDotBr\Atlantis.Framework.DotTypeCache.DotNetDotBr.csproj">
+      <Project>{DE7BBC58-C052-4EEF-9E8A-12AAC08C815E}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNetDotBr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNetDotBz\Atlantis.Framework.DotTypeCache.DotNetDotBz.csproj">
+      <Project>{BBB44894-26BC-455D-8EEE-859E81606C66}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNetDotBz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNetDotCn\Atlantis.Framework.DotTypeCache.DotNetDotCn.csproj">
+      <Project>{912AD61A-BFEA-4E40-BA34-D182A533D0E4}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNetDotCn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNetDotCo\Atlantis.Framework.DotTypeCache.DotNetDotCo.csproj">
+      <Project>{37BAF84D-1842-4D64-9185-B55440A0EE22}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNetDotCo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNetDotIn\Atlantis.Framework.DotTypeCache.DotNetDotIn.csproj">
+      <Project>{CFF1BDDC-CCF7-4715-895A-C789885A2EC1}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNetDotIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNetDotNz\Atlantis.Framework.DotTypeCache.DotNetDotNz.csproj">
+      <Project>{1B750631-0BCF-4DA3-A53E-2771D318CEB4}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNetDotNz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNetDotSc\Atlantis.Framework.DotTypeCache.DotNetDotSc.csproj">
+      <Project>{CC126612-2004-46F3-962B-97B569CB4403}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNetDotSc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNet\Atlantis.Framework.DotTypeCache.DotNet.csproj">
+      <Project>{76F3F750-6BA9-4781-93C1-B328DB4A3C08}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNl\Atlantis.Framework.DotTypeCache.DotNl.csproj">
+      <Project>{DC6FD5C6-4AB4-43F4-BA37-0F990EF4E92E}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNomDotCo\Atlantis.Framework.DotTypeCache.DotNomDotCo.csproj">
+      <Project>{7207C250-FF92-4D58-8E1A-215A6ED8D13A}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNomDotCo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNomDotEs\Atlantis.Framework.DotTypeCache.DotNomDotEs.csproj">
+      <Project>{EE913CB4-60BC-414A-AE1B-E2815E6A3CF8}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNomDotEs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNu\Atlantis.Framework.DotTypeCache.DotNu.csproj">
+      <Project>{7CF8554B-A74D-4722-A1DB-C3A977EBBD80}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrgDotAg\Atlantis.Framework.DotTypeCache.DotOrgDotAg.csproj">
+      <Project>{32117032-9399-4D01-B1D9-5274EE18F263}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotOrgDotAg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrgDotCn\Atlantis.Framework.DotTypeCache.DotOrgDotCn.csproj">
+      <Project>{4E17F9B2-6967-4932-B3CA-DDFD1AFC00DC}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotOrgDotCn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrgDotEs\Atlantis.Framework.DotTypeCache.DotOrgDotEs.csproj">
+      <Project>{0DF00F0E-D366-46F4-8085-E56EF16303F4}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotOrgDotEs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrgDotIn\Atlantis.Framework.DotTypeCache.DotOrgDotIn.csproj">
+      <Project>{2EC7E319-FE77-4C85-BDE3-1CCBE13AB1B3}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotOrgDotIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrgDotNz\Atlantis.Framework.DotTypeCache.DotOrgDotNz.csproj">
+      <Project>{6E446EA5-578C-41F8-BCEB-38C53608E866}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotOrgDotNz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrgDotSc\Atlantis.Framework.DotTypeCache.DotOrgDotSc.csproj">
+      <Project>{11F2B949-1A3A-4D31-B1F2-E366C4017072}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotOrgDotSc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrgDotTw\Atlantis.Framework.DotTypeCache.DotOrgDotTw.csproj">
+      <Project>{EC5FB743-AE7F-4380-9EEC-107329C792A7}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotOrgDotTw</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrgDotUk\Atlantis.Framework.DotTypeCache.DotOrgDotUk.csproj">
+      <Project>{D232BB1F-A291-4FCD-8332-17978A9E4862}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotOrgDotUk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrg\Atlantis.Framework.DotTypeCache.DotOrg.csproj">
+      <Project>{E27D1885-7FD8-4171-A9B9-12995CD7A85E}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotOrg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotSc\Atlantis.Framework.DotTypeCache.DotSc.csproj">
+      <Project>{B2C562E3-95E6-46A3-9A81-2A44746B8E96}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotSc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotTc\Atlantis.Framework.DotTypeCache.DotTc.csproj">
+      <Project>{54F3F6FF-F5AC-467D-A979-EC49F1645C2B}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotTc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotTk\Atlantis.Framework.DotTypeCache.DotTk.csproj">
+      <Project>{9C31CF3E-0DFF-4247-9856-B738BF2F16DC}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotTk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotTv\Atlantis.Framework.DotTypeCache.DotTv.csproj">
+      <Project>{9C17AF78-3BED-428D-8C9E-CF9EEFA2243A}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotTv</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotTw\Atlantis.Framework.DotTypeCache.DotTw.csproj">
+      <Project>{F443AA25-8C5D-4EAE-B2DA-C2F0186A6AB5}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotTw</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotUs\Atlantis.Framework.DotTypeCache.DotUs.csproj">
+      <Project>{B93E960F-16F7-4F70-9329-77C1A852261A}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotUs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotVg\Atlantis.Framework.DotTypeCache.DotVg.csproj">
+      <Project>{7F1FC29E-B26E-41E5-A31F-F41984B3334B}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotVg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotWs\Atlantis.Framework.DotTypeCache.DotWs.csproj">
+      <Project>{E378F420-A56A-45E1-B79C-F395FFA2A9D4}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotWs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotXXX\Atlantis.Framework.DotTypeCache.DotXxx.csproj">
+      <Project>{159D2700-A51E-47E8-BC16-A31931AC5D66}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotXxx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
+      <Project>{95E67E48-7173-4F0C-854F-2F08CBFCF923}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dottypecache.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -75,9 +75,6 @@ namespace Atlantis.Framework.BasePages.Providers
       }
     }
 
-
-
-    private const int DOMAINME_PLID = 435560;
     private const int WWD_PLID = 1387;
     private const string PARAM_PLID = "pl_id";
     private int? _privateLabelId;

@@ -9,7 +9,7 @@ namespace Atlantis.Framework.DataCache
     string _key;
     bool _isActive = true;
     int _privateLabelId;
-    bool _refreshInProgress = false;
+    volatile bool _refreshInProgress = false;
 
     public CachedValue(string key, object cacheValue, long finalTicks, int privateLabelId)
     {

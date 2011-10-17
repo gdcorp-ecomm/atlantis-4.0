@@ -70,7 +70,7 @@ namespace Atlantis.Framework.BillingResourceId.Tests
         productId);
 
       BillingResourceIdResponseData response = (BillingResourceIdResponseData)Engine.Engine.ProcessRequest(request, 204);
-
+      string result = response.ToXML();
     }
 
     [TestMethod]

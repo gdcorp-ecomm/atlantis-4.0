@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:WSgdBillingDataService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSgdBillingDataService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WSgdBillingDataService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetDomainFromAccountGUIDIn">
+    <wsdl:part name="bstrExternalResourceID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainFromAccountGUIDOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="bstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParentFromAccountGUIDIn">
+    <wsdl:part name="bstrExternalResourceID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParentFromAccountGUIDOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="lParentType" type="s:int" />
+    <wsdl:part name="bstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParentGUIDForAddOnIn">
+    <wsdl:part name="lAddOnResourceID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetParentGUIDForAddOnOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="bstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetExternalResourceIDByBillingIDIn">
+    <wsdl:part name="lResourceID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetExternalResourceIDByBillingIDOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="bstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateDomainBillingRecordIn">
+    <wsdl:part name="bstrInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateDomainBillingRecordOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="bstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProtectionIDForDomainIDIn">
+    <wsdl:part name="lDomainID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetProtectionIDForDomainIDOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="bstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetResourceIDForShopperIDIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lProductId" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetResourceIDForShopperIDOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="bstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperPriceTypeIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperPriceTypeOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="bstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBillingDataByAcctUIDIn">
+    <wsdl:part name="bstrOrionAcctUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBillingDataByAcctUIDOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="bstrOrderID" type="s:string" />
+    <wsdl:part name="plResourceID" type="s:int" />
+    <wsdl:part name="plRowID" type="s:int" />
+    <wsdl:part name="plPFID" type="s:int" />
+    <wsdl:part name="pbstrErrorMsg" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParentFromResourceIn">
+    <wsdl:part name="bstrResourceID" type="s:string" />
+    <wsdl:part name="bstrResourceType" type="s:string" />
+    <wsdl:part name="bstrIDType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParentFromResourceOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="bstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperAndPrivateLabelByDomainNameIn">
+    <wsdl:part name="bstrDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperAndPrivateLabelByDomainNameOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetBillingDataAndDatesByAcctUIDIn">
+    <wsdl:part name="bstrOrionAcctUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBillingDataAndDatesByAcctUIDOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="plResourceID" type="s:int" />
+    <wsdl:part name="pbstrShopper" type="s:string" />
+    <wsdl:part name="pbstrRenewalDate" type="s:string" />
+    <wsdl:part name="pbstrExpirationDate" type="s:string" />
+    <wsdl:part name="pbstrErrorMsg" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LookupBillingResourceIDIn">
+    <wsdl:part name="bstrResourceID" type="s:string" />
+    <wsdl:part name="bstrResourceType" type="s:string" />
+    <wsdl:part name="bstrIDType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LookupBillingResourceIDOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="plBillingResourceID" type="s:int" />
+    <wsdl:part name="pbstrBillingNamespace" type="s:string" />
+    <wsdl:part name="pbstrErrorMsg" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsForShopperIDIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsForShopperIDOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="bstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WSgdBillingDataServiceSoap">
+    <wsdl:operation name="GetDomainFromAccountGUID">
+      <wsdl:input message="s0:GetDomainFromAccountGUIDIn" />
+      <wsdl:output message="s0:GetDomainFromAccountGUIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParentFromAccountGUID">
+      <wsdl:input message="s0:GetParentFromAccountGUIDIn" />
+      <wsdl:output message="s0:GetParentFromAccountGUIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParentGUIDForAddOn">
+      <wsdl:input message="s0:GetParentGUIDForAddOnIn" />
+      <wsdl:output message="s0:GetParentGUIDForAddOnOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExternalResourceIDByBillingID">
+      <wsdl:input message="s0:GetExternalResourceIDByBillingIDIn" />
+      <wsdl:output message="s0:GetExternalResourceIDByBillingIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDomainBillingRecord">
+      <wsdl:input message="s0:CreateDomainBillingRecordIn" />
+      <wsdl:output message="s0:CreateDomainBillingRecordOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProtectionIDForDomainID">
+      <wsdl:input message="s0:GetProtectionIDForDomainIDIn" />
+      <wsdl:output message="s0:GetProtectionIDForDomainIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResourceIDForShopperID">
+      <wsdl:input message="s0:GetResourceIDForShopperIDIn" />
+      <wsdl:output message="s0:GetResourceIDForShopperIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperPriceType">
+      <wsdl:input message="s0:GetShopperPriceTypeIn" />
+      <wsdl:output message="s0:GetShopperPriceTypeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBillingDataByAcctUID">
+      <wsdl:input message="s0:GetBillingDataByAcctUIDIn" />
+      <wsdl:output message="s0:GetBillingDataByAcctUIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParentFromResource">
+      <wsdl:input message="s0:GetParentFromResourceIn" />
+      <wsdl:output message="s0:GetParentFromResourceOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperAndPrivateLabelByDomainName">
+      <wsdl:input message="s0:GetShopperAndPrivateLabelByDomainNameIn" />
+      <wsdl:output message="s0:GetShopperAndPrivateLabelByDomainNameOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBillingDataAndDatesByAcctUID">
+      <wsdl:input message="s0:GetBillingDataAndDatesByAcctUIDIn" />
+      <wsdl:output message="s0:GetBillingDataAndDatesByAcctUIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupBillingResourceID">
+      <wsdl:input message="s0:LookupBillingResourceIDIn" />
+      <wsdl:output message="s0:LookupBillingResourceIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsForShopperID">
+      <wsdl:input message="s0:GetDomainsForShopperIDIn" />
+      <wsdl:output message="s0:GetDomainsForShopperIDOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSgdBillingDataServiceSoap" type="s0:WSgdBillingDataServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="GetDomainFromAccountGUID">
+      <soap:operation soapAction="#GetDomainFromAccountGUID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParentFromAccountGUID">
+      <soap:operation soapAction="#GetParentFromAccountGUID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParentGUIDForAddOn">
+      <soap:operation soapAction="#GetParentGUIDForAddOn" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExternalResourceIDByBillingID">
+      <soap:operation soapAction="#GetExternalResourceIDByBillingID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDomainBillingRecord">
+      <soap:operation soapAction="#CreateDomainBillingRecord" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProtectionIDForDomainID">
+      <soap:operation soapAction="#GetProtectionIDForDomainID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResourceIDForShopperID">
+      <soap:operation soapAction="#GetResourceIDForShopperID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperPriceType">
+      <soap:operation soapAction="#GetShopperPriceType" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBillingDataByAcctUID">
+      <soap:operation soapAction="#GetBillingDataByAcctUID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParentFromResource">
+      <soap:operation soapAction="#GetParentFromResource" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperAndPrivateLabelByDomainName">
+      <soap:operation soapAction="#GetShopperAndPrivateLabelByDomainName" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBillingDataAndDatesByAcctUID">
+      <soap:operation soapAction="#GetBillingDataAndDatesByAcctUID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupBillingResourceID">
+      <soap:operation soapAction="#LookupBillingResourceID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsForShopperID">
+      <soap:operation soapAction="#GetDomainsForShopperID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdBillingDataService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSgdBillingDataService">
+    <wsdl:port name="WSgdBillingDataServiceSoap" binding="s0:WSgdBillingDataServiceSoap">
+      <soap:address location="http://commgtwyws.dev.glbt1.gdg:80/WSgdBillingData/WSgdBillingData.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

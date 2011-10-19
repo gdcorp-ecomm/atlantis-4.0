@@ -12,15 +12,15 @@ namespace Atlantis.Framework.MyaAccountList.Interface
   {
     private AtlantisException _atlException = null;
     private bool _success = false;
-    private DataSet _report = null;
+    private DataSet _productList = null;
 
     public IPageResult PageTotals { get; set; }
 
-    public MyaAccountListResponseData(DataSet returnAllReport, int totalPages, int totalRecords)
+    public MyaAccountListResponseData(DataSet returnAccountList, int totalPages, int totalRecords)
     {
       PageTotals = new AccountListPagingResult(totalPages, totalRecords);
-      _report = returnAllReport;
-      _success = (returnAllReport != null);
+      _productList = returnAccountList;
+      _success = (returnAccountList != null);
     }
 
     public MyaAccountListResponseData(RequestData oRequestData, Exception ex)
@@ -34,9 +34,9 @@ namespace Atlantis.Framework.MyaAccountList.Interface
       get { return _success; }
     }
 
-    public DataSet ReportDataSet
+    public DataSet AccountListDataSet
     {
-      get { return _report; }
+      get { return _productList; }
     }
 
     #region IResponseData Members
@@ -46,7 +46,7 @@ namespace Atlantis.Framework.MyaAccountList.Interface
       XmlSerializer xmlSerializer = new XmlSerializer(typeof(DataSet));
       StringWriter writer = new StringWriter();
 
-      xmlSerializer.Serialize(writer, _report);
+      xmlSerializer.Serialize(writer, _productList);
 
       return writer.ToString();
     }

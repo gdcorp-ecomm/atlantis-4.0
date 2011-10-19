@@ -27,7 +27,7 @@ namespace Atlantis.Framework.MyaAccountList.Tests
     [DeploymentItem("atlantis.config")]
     public void GetFreeAccountsOnly()
     {
-      MyaAccountListRequestData request = new MyaAccountListRequestData("856907", string.Empty, string.Empty, string.Empty, 0, "mya_accountListGetHosting_sp", returnFreeListOnly:1);
+      MyaAccountListRequestData request = new MyaAccountListRequestData("856907", string.Empty, string.Empty, string.Empty, 0, "mya_accountListGetHosting_sp", returnFreeListOnly: 1);
 
       MyaAccountListResponseData response = (MyaAccountListResponseData)Engine.Engine.ProcessRequest(request, 425);
 
@@ -57,7 +57,7 @@ namespace Atlantis.Framework.MyaAccountList.Tests
 
       if (response.IsSuccess)
       {
-        DataSet ds = response.ReportDataSet;
+        DataSet ds = response.AccountListDataSet;
         int total = response.PageTotals.TotalRecords;
         int pages = response.PageTotals.TotalPages;
 
@@ -75,13 +75,13 @@ namespace Atlantis.Framework.MyaAccountList.Tests
     [DeploymentItem("atlantis.config")]
     public void GetDefault5AccountListPage2()
     {
-      MyaAccountListRequestData request = new MyaAccountListRequestData("856907", string.Empty, string.Empty, string.Empty, 0, "mya_accountListGetHosting_sp", currentPage:2);
+      MyaAccountListRequestData request = new MyaAccountListRequestData("856907", string.Empty, string.Empty, string.Empty, 0, "mya_accountListGetHosting_sp", currentPage: 2);
 
       MyaAccountListResponseData response = (MyaAccountListResponseData)Engine.Engine.ProcessRequest(request, 425);
 
       if (response.IsSuccess)
       {
-        DataSet ds = response.ReportDataSet;
+        DataSet ds = response.AccountListDataSet;
         int total = response.PageTotals.TotalRecords;
         int pages = response.PageTotals.TotalPages;
 
@@ -105,7 +105,7 @@ namespace Atlantis.Framework.MyaAccountList.Tests
 
       if (response.IsSuccess)
       {
-        DataSet ds = response.ReportDataSet;
+        DataSet ds = response.AccountListDataSet;
         int total = response.PageTotals.TotalRecords;
         int pages = response.PageTotals.TotalPages;
 
@@ -129,7 +129,7 @@ namespace Atlantis.Framework.MyaAccountList.Tests
 
       if (response.IsSuccess)
       {
-        DataSet ds = response.ReportDataSet;
+        DataSet ds = response.AccountListDataSet;
         int total = response.PageTotals.TotalRecords;
         int pages = response.PageTotals.TotalPages;
 

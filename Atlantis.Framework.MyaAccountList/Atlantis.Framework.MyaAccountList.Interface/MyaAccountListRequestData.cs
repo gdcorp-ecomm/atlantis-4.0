@@ -20,7 +20,7 @@ namespace Atlantis.Framework.MyaAccountList.Interface
       PageInfo.PageSize = pageSize;
       PageInfo.CurrentPage = currentPage;
       SortDirection = sortDirection;
-      Filter = filter;
+      Filter = string.IsNullOrWhiteSpace(filter) ? null : filter;
       ReturnFreeListOnly = returnFreeListOnly;
       DaysTillExpiration = daysTillExpiration;
       ReturnAll = returnAllFlag;

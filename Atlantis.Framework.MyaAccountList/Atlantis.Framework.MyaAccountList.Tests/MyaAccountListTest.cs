@@ -33,7 +33,7 @@ namespace Atlantis.Framework.MyaAccountList.Tests
 
       if (response.IsSuccess)
       {
-        DataSet ds = response.ReportDataSet;
+        DataSet ds = response.AccountListDataSet;
         int total = response.PageTotals.TotalRecords;
         int pages = response.PageTotals.TotalPages;
 

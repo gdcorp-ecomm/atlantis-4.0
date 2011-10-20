@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="046982b3-70a2-4b89-9423-2c7850bd6865" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://devciaapp01/fbiMobileTrackingSvc/fbimobiletracking.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="fbiMobileTrackingService.wsdl" MetadataType="Wsdl" ID="55d6fae0-64bb-4a51-9569-dcb773264acc" SourceId="1" SourceUrl="http://devciaapp01.jomax.paholdings.com/fbiMobileTrackingSvc/fbiMobileTracking.svc?wsdl" />
+    <MetadataFile FileName="fbiMobileTracking.xsd" MetadataType="Schema" ID="1a877af6-66f3-4bcc-9b1d-32c4e732388b" SourceId="1" SourceUrl="http://devciaapp01.jomax.paholdings.com/fbiMobileTrackingSvc/fbiMobileTracking.svc?xsd=xsd1" />
+    <MetadataFile FileName="fbiMobileTracking1.xsd" MetadataType="Schema" ID="bb2f829e-1bc4-4611-806c-f3fe25515986" SourceId="1" SourceUrl="http://devciaapp01.jomax.paholdings.com/fbiMobileTrackingSvc/fbiMobileTracking.svc?xsd=xsd0" />
+    <MetadataFile FileName="fbiMobileTracking.disco" MetadataType="Disco" ID="745177ae-66be-4e7c-9b73-d6a271888bd6" SourceId="1" SourceUrl="http://devciaapp01.jomax.paholdings.com/fbiMobileTrackingSvc/fbiMobileTracking.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

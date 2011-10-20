@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{391D2498-D52C-463F-9F3A-55FB924A126E}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.TrafficMobileTracking.vsmdi = Atlantis.Framework.TrafficMobileTracking.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.TrafficMobileTracking.Impl", "Atlantis.Framework.TrafficMobileTracking.Impl\Atlantis.Framework.TrafficMobileTracking.Impl.csproj", "{19040012-973D-4CE6-937D-CA351136C64E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.TrafficMobileTracking.Interface", "Atlantis.Framework.TrafficMobileTracking.Interface\Atlantis.Framework.TrafficMobileTracking.Interface.csproj", "{31062709-AC2B-4451-91E2-07F909BCCD05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.TrafficMobileTracking.Tests", "Atlantis.Framework.TrafficMobileTracking.Tests\Atlantis.Framework.TrafficMobileTracking.Tests.csproj", "{1BB08C38-826C-4550-A33F-36071950F5AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{ECD3C9D6-C170-4364-B9D4-9AD529286066}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.TrafficMobileTracking.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.TrafficMobileTracking.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.TrafficMobileTracking.Impl\\Atlantis.Framework.TrafficMobileTracking.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.TrafficMobileTracking.Impl
+		SccLocalPath3 = Atlantis.Framework.TrafficMobileTracking.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.TrafficMobileTracking.Interface\\Atlantis.Framework.TrafficMobileTracking.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.TrafficMobileTracking.Interface
+		SccLocalPath4 = Atlantis.Framework.TrafficMobileTracking.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.TrafficMobileTracking.Tests\\Atlantis.Framework.TrafficMobileTracking.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.TrafficMobileTracking.Tests
+		SccLocalPath5 = Atlantis.Framework.TrafficMobileTracking.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.TrafficMobileTracking.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19040012-973D-4CE6-937D-CA351136C64E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19040012-973D-4CE6-937D-CA351136C64E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19040012-973D-4CE6-937D-CA351136C64E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19040012-973D-4CE6-937D-CA351136C64E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31062709-AC2B-4451-91E2-07F909BCCD05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31062709-AC2B-4451-91E2-07F909BCCD05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31062709-AC2B-4451-91E2-07F909BCCD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31062709-AC2B-4451-91E2-07F909BCCD05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BB08C38-826C-4550-A33F-36071950F5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB08C38-826C-4550-A33F-36071950F5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB08C38-826C-4550-A33F-36071950F5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB08C38-826C-4550-A33F-36071950F5AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {ECD3C9D6-C170-4364-B9D4-9AD529286066}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {ECD3C9D6-C170-4364-B9D4-9AD529286066}
+	EndGlobalSection
+EndGlobal

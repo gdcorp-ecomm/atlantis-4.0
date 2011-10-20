@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="MobileClientData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="deviceID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mAppID" type="xs:short" />
+        <xs:element minOccurs="0" name="appVersion" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="OS" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="OSVersion" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="deviceModel" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="deviceType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shopperID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="plid" type="xs:int" />
+        <xs:element minOccurs="0" name="webserviceAction" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clientIP" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clientCarrier" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="webserviceLogData" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MobileClientDataResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MobileClientDataWithCICode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="deviceID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mAppID" type="xs:short" />
+        <xs:element minOccurs="0" name="appVersion" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="OS" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="OSVersion" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="deviceModel" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="deviceType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="shopperID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="plid" type="xs:int" />
+        <xs:element minOccurs="0" name="webserviceAction" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clientIP" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clientCarrier" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="webserviceLogData" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ciCode" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MobileClientDataWithCICodeResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

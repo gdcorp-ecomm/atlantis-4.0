@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7ef186e2-9ede-4b87-9284-50d56481d19b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://sitetracking.dev.glbt1.gdg/fbiPageEventService/PageEventService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PageEventService1.wsdl" MetadataType="Wsdl" ID="5ac0f977-6210-4329-ae55-502a09f64fcf" SourceId="1" SourceUrl="http://sitetracking.dev.glbt1.gdg/fbiPageEventService/PageEventService.svc?wsdl" />
+    <MetadataFile FileName="PageEventService2.xsd" MetadataType="Schema" ID="a59ba02a-fa3f-4897-a48c-879161601c84" SourceId="1" SourceUrl="http://sitetracking.dev.glbt1.gdg/fbiPageEventService/PageEventService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PageEventService1.disco" MetadataType="Disco" ID="8605b48e-3712-40df-8efb-a37665dc0da7" SourceId="1" SourceUrl="http://sitetracking.dev.glbt1.gdg/fbiPageEventService/PageEventService.svc?disco" />
+    <MetadataFile FileName="PageEventService21.xsd" MetadataType="Schema" ID="12c0c0a5-6d7e-4329-9e88-078295bb5484" SourceId="1" SourceUrl="http://sitetracking.dev.glbt1.gdg/fbiPageEventService/PageEventService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc">
+      <s:element name="RegisterPIIData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="requestXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterPIIDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegisterPIIDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RegisterPIIDataSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterPIIData" />
+  </wsdl:message>
+  <wsdl:message name="RegisterPIIDataSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterPIIDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegAppTokenWebSvcSoap">
+    <wsdl:operation name="RegisterPIIData">
+      <wsdl:input message="tns:RegisterPIIDataSoapIn" />
+      <wsdl:output message="tns:RegisterPIIDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegAppTokenWebSvcSoap" type="tns:RegAppTokenWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegisterPIIData">
+      <soap:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/RegisterPIIData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegAppTokenWebSvcSoap12" type="tns:RegAppTokenWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegisterPIIData">
+      <soap12:operation soapAction="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc/RegisterPIIData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegAppTokenWebSvc">
+    <wsdl:port name="RegAppTokenWebSvcSoap" binding="tns:RegAppTokenWebSvcSoap">
+      <soap:address location="https://g1dwdtvapp01.dc1.corp.gd/RegAppTokenWebSvc/RegAppTokenWebSvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegAppTokenWebSvcSoap12" binding="tns:RegAppTokenWebSvcSoap12">
+      <soap12:address location="https://g1dwdtvapp01.dc1.corp.gd/RegAppTokenWebSvc/RegAppTokenWebSvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<application clientapplication="dpp source_code" servername="server" tldid="121">
+  <key name="itPINNumber" value="123456789" />
+  <key name="itPINType" value="ID" />
+</application>

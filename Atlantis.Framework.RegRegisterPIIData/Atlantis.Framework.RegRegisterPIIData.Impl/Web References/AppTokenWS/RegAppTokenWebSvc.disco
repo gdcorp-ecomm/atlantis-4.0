@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://g1dwdtvapp01.dc1.corp.gd/RegAppTokenWebSvc/RegAppTokenWebSvc.asmx?wsdl" docRef="https://g1dwdtvapp01.dc1.corp.gd/RegAppTokenWebSvc/RegAppTokenWebSvc.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://g1dwdtvapp01.dc1.corp.gd/RegAppTokenWebSvc/RegAppTokenWebSvc.asmx" xmlns:q1="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc" binding="q1:RegAppTokenWebSvcSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://g1dwdtvapp01.dc1.corp.gd/RegAppTokenWebSvc/RegAppTokenWebSvc.asmx" xmlns:q2="http://m1pwdtvapp-v01.prod.mesa1.gdg/RegAppTokenWebSvc" binding="q2:RegAppTokenWebSvcSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

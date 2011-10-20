@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:WSCgdSurveyService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSCgdSurveyService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WSCgdSurveyService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LogCommercialDataIn">
+    <wsdl:part name="lReferralID" type="s:int" />
+    <wsdl:part name="lMediaID" type="s:int" />
+    <wsdl:part name="lConnectionID" type="s:int" />
+    <wsdl:part name="lPLID" type="s:int" />
+    <wsdl:part name="bstrServerName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogCommercialDataOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveSBAnswersIn">
+    <wsdl:part name="bstrIPAddress" type="s:string" />
+    <wsdl:part name="lAdVersion" type="s:int" />
+    <wsdl:part name="lAgeGroupID" type="s:int" />
+    <wsdl:part name="lPoliticalID" type="s:int" />
+    <wsdl:part name="bstrAnswers" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveSBAnswersOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WSCgdSurveyServiceSoap">
+    <wsdl:operation name="LogCommercialData">
+      <wsdl:input message="s0:LogCommercialDataIn" />
+      <wsdl:output message="s0:LogCommercialDataOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSBAnswers">
+      <wsdl:input message="s0:SaveSBAnswersIn" />
+      <wsdl:output message="s0:SaveSBAnswersOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSCgdSurveyServiceSoap" type="s0:WSCgdSurveyServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="LogCommercialData">
+      <soap:operation soapAction="#LogCommercialData" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdSurveyService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdSurveyService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSBAnswers">
+      <soap:operation soapAction="#SaveSBAnswers" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdSurveyService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdSurveyService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCgdSurveyService">
+    <wsdl:port name="WSCgdSurveyServiceSoap" binding="s0:WSCgdSurveyServiceSoap">
+      <soap:address location="http://devciaapp01:80/WSCgdSurvey/WSCgdSurvey.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

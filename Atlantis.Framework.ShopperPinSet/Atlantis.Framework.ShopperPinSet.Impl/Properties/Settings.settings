@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.ShopperPinSet.Impl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Atlantis_Framework_ShopperPinSet_Impl_WscgdShopper_WSCgdShopperService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://devsbeapp01:80/WSCgdShopper/WSCgdShopper.dll?Handler=Default</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

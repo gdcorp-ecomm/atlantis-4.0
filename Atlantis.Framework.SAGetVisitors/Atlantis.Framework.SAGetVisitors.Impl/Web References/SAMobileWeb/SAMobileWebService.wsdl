@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" xmlns:si="http://soapinterop.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+      <xsd:complexType name="mwDomainStruct">
+        <xsd:all>
+          <xsd:element name="Domain" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="mwDomainStructArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:mwDomainStruct[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="mwDomainReturnStruct">
+        <xsd:all>
+          <xsd:element name="returnCode" type="xsd:string" />
+          <xsd:element name="returnMessage" type="xsd:string" />
+          <xsd:element name="domainCount" type="xsd:string" />
+          <xsd:element name="domainList" type="tns:mwDomainStructArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="mwVisitorStruct">
+        <xsd:all>
+          <xsd:element name="StatsDate" type="xsd:string" />
+          <xsd:element name="UniqueVisitors" type="xsd:integer" />
+          <xsd:element name="Visitors" type="xsd:integer" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="mwVisitorStructArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:mwVisitorStruct[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="mwVisReturnStruct">
+        <xsd:all>
+          <xsd:element name="returnCode" type="xsd:string" />
+          <xsd:element name="returnMessage" type="xsd:string" />
+          <xsd:element name="shopper" type="xsd:string" />
+          <xsd:element name="visitorStats" type="tns:mwVisitorStructArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="mwUSVisitorStruct">
+        <xsd:all>
+          <xsd:element name="State" type="xsd:string" />
+          <xsd:element name="Visitors" type="xsd:integer" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="mwUSVisitorStructArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:mwUSVisitorStruct[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="mwUSVisReturnStruct">
+        <xsd:all>
+          <xsd:element name="returnCode" type="xsd:string" />
+          <xsd:element name="returnMessage" type="xsd:string" />
+          <xsd:element name="shopper" type="xsd:string" />
+          <xsd:element name="usVisitorStats" type="tns:mwUSVisitorStructArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="mwMostPopDayStruct">
+        <xsd:all>
+          <xsd:element name="Day" type="xsd:string" />
+          <xsd:element name="PageViews" type="xsd:integer" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="mwMostPopDayStructArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:mwMostPopDayStruct[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="mwMostPopDayReturnStruct">
+        <xsd:all>
+          <xsd:element name="returnCode" type="xsd:string" />
+          <xsd:element name="returnMessage" type="xsd:string" />
+          <xsd:element name="shopper" type="xsd:string" />
+          <xsd:element name="mostPopDayStats" type="tns:mwMostPopDayStructArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="mwTrafficSourcesStruct">
+        <xsd:all>
+          <xsd:element name="Source" type="xsd:string" />
+          <xsd:element name="Visits" type="xsd:integer" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="mwTrafficSourcesStructArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:mwTrafficSourcesStruct[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="mwTrafficSourcesReturnStruct">
+        <xsd:all>
+          <xsd:element name="returnCode" type="xsd:string" />
+          <xsd:element name="returnMessage" type="xsd:string" />
+          <xsd:element name="shopper" type="xsd:string" />
+          <xsd:element name="trafficSources" type="tns:mwTrafficSourcesStructArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="mwErrorCodeList">
+        <xsd:all>
+          <xsd:element name="returnCode" type="xsd:unsignedShort" />
+          <xsd:element name="returnText" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="mwErrorCodeListArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:mwErrorCodeList[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetDomainListByShopperRequest">
+    <wsdl:part name="clientid" type="xsd:string" />
+    <wsdl:part name="shopper" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainListByShopperResponse">
+    <wsdl:part name="return" type="tns:mwDomainReturnStruct" />
+  </wsdl:message>
+  <wsdl:message name="VisitorsRequest">
+    <wsdl:part name="clientid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="startDate" type="xsd:string" />
+    <wsdl:part name="endDate" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="VisitorsResponse">
+    <wsdl:part name="return" type="tns:mwVisReturnStruct" />
+  </wsdl:message>
+  <wsdl:message name="USVisByLocationRequest">
+    <wsdl:part name="clientid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="startDate" type="xsd:string" />
+    <wsdl:part name="endDate" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="USVisByLocationResponse">
+    <wsdl:part name="return" type="tns:mwUSVisReturnStruct" />
+  </wsdl:message>
+  <wsdl:message name="MostPopularDayRequest">
+    <wsdl:part name="clientid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="startDate" type="xsd:string" />
+    <wsdl:part name="endDate" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="MostPopularDayResponse">
+    <wsdl:part name="return" type="tns:mwMostPopDayReturnStruct" />
+  </wsdl:message>
+  <wsdl:message name="TrafficSourcesRequest">
+    <wsdl:part name="clientid" type="xsd:string" />
+    <wsdl:part name="domain" type="xsd:string" />
+    <wsdl:part name="startDate" type="xsd:string" />
+    <wsdl:part name="endDate" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="TrafficSourcesResponse">
+    <wsdl:part name="return" type="tns:mwTrafficSourcesReturnStruct" />
+  </wsdl:message>
+  <wsdl:message name="GetCompleteErrorCodeListRequest">
+    <wsdl:part name="clientid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompleteErrorCodeListResponse">
+    <wsdl:part name="return" type="tns:mwErrorCodeListArray" />
+  </wsdl:message>
+  <wsdl:portType name="SAMobileWebPortType">
+    <wsdl:operation name="GetDomainListByShopper">
+      <wsdl:input message="tns:GetDomainListByShopperRequest" />
+      <wsdl:output message="tns:GetDomainListByShopperResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="Visitors">
+      <wsdl:input message="tns:VisitorsRequest" />
+      <wsdl:output message="tns:VisitorsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="USVisByLocation">
+      <wsdl:input message="tns:USVisByLocationRequest" />
+      <wsdl:output message="tns:USVisByLocationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="MostPopularDay">
+      <wsdl:input message="tns:MostPopularDayRequest" />
+      <wsdl:output message="tns:MostPopularDayResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="TrafficSources">
+      <wsdl:input message="tns:TrafficSourcesRequest" />
+      <wsdl:output message="tns:TrafficSourcesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompleteErrorCodeList">
+      <wsdl:input message="tns:GetCompleteErrorCodeListRequest" />
+      <wsdl:output message="tns:GetCompleteErrorCodeListResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SAMobileWebBinding" type="tns:SAMobileWebPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="GetDomainListByShopper">
+      <soap:operation soapAction="http://teststatsweb01.test.glbt1.gdg/admin/mw/SAMobileWebService.php/GetDomainListByShopper" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Visitors">
+      <soap:operation soapAction="http://teststatsweb01.test.glbt1.gdg/admin/mw/SAMobileWebService.php/Visitors" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="USVisByLocation">
+      <soap:operation soapAction="http://teststatsweb01.test.glbt1.gdg/admin/mw/SAMobileWebService.php/USVisByLocation" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MostPopularDay">
+      <soap:operation soapAction="http://teststatsweb01.test.glbt1.gdg/admin/mw/SAMobileWebService.php/MostPopularDay" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TrafficSources">
+      <soap:operation soapAction="http://teststatsweb01.test.glbt1.gdg/admin/mw/SAMobileWebService.php/TrafficSources" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompleteErrorCodeList">
+      <soap:operation soapAction="http://teststatsweb01.test.glbt1.gdg/admin/mw/SAMobileWebService.php/GetCompleteErrorCodeList" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.godaddy.com/SiteAnalytics/mw/SAMobileWeb" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SAMobileWeb">
+    <wsdl:port name="SAMobileWebPort" binding="tns:SAMobileWebBinding">
+      <soap:address location="http://teststatsweb01.test.glbt1.gdg/admin/mw/SAMobileWebService.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

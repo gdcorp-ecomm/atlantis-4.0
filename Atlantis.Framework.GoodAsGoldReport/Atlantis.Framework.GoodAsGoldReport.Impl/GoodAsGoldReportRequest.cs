@@ -86,9 +86,7 @@ namespace Atlantis.Framework.GoodAsGoldReport.Impl
             else
             {
               curBal = "$0.00";
-            }
-
-            curBal = prmCurBalance.Value.ToString();           
+            }         
           }
         }
 

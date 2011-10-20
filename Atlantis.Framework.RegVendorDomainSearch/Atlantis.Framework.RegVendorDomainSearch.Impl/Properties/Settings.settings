@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.RegVendorDomainSearch.Impl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Atlantis_Framework_RegVendorDomainSearch_Impl_gdDPPSearch_gdDppSearchWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://g1dwlep001/gddppsearch/gddppsearchws.asmx</Value>
+    </Setting>
+    <Setting Name="Atlantis_Framework_DPPDomainSearch_Impl_gdDPPSearch_gdDppSearchWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://g1dwlep001/gddppsearch/gddppsearchws.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

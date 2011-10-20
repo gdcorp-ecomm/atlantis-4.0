@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://auctions.godaddy.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://auctions.godaddy.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://auctions.godaddy.com">
+      <s:element name="getServiceStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="getServiceStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getServiceStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getServiceStatistics">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getServiceStatisticsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getServiceStatisticsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dppDomainSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="requestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dppDomainSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dppDomainSearchResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getServiceStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:getServiceStatus" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:getServiceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsSoapIn">
+    <wsdl:part name="parameters" element="tns:getServiceStatistics" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsSoapOut">
+    <wsdl:part name="parameters" element="tns:getServiceStatisticsResponse" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:dppDomainSearch" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:dppDomainSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusHttpGetIn" />
+  <wsdl:message name="getServiceStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsHttpGetIn">
+    <wsdl:part name="token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchHttpGetIn">
+    <wsdl:part name="requestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusHttpPostIn" />
+  <wsdl:message name="getServiceStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsHttpPostIn">
+    <wsdl:part name="token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchHttpPostIn">
+    <wsdl:part name="requestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="gdDppSearchWSSoap">
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusSoapIn" />
+      <wsdl:output message="tns:getServiceStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <wsdl:input message="tns:getServiceStatisticsSoapIn" />
+      <wsdl:output message="tns:getServiceStatisticsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <wsdl:input message="tns:dppDomainSearchSoapIn" />
+      <wsdl:output message="tns:dppDomainSearchSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="gdDppSearchWSHttpGet">
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusHttpGetIn" />
+      <wsdl:output message="tns:getServiceStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <wsdl:input message="tns:getServiceStatisticsHttpGetIn" />
+      <wsdl:output message="tns:getServiceStatisticsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <wsdl:input message="tns:dppDomainSearchHttpGetIn" />
+      <wsdl:output message="tns:dppDomainSearchHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="gdDppSearchWSHttpPost">
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusHttpPostIn" />
+      <wsdl:output message="tns:getServiceStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <wsdl:input message="tns:getServiceStatisticsHttpPostIn" />
+      <wsdl:output message="tns:getServiceStatisticsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <wsdl:input message="tns:dppDomainSearchHttpPostIn" />
+      <wsdl:output message="tns:dppDomainSearchHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="gdDppSearchWSSoap" type="tns:gdDppSearchWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServiceStatus">
+      <soap:operation soapAction="http://auctions.godaddy.com/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <soap:operation soapAction="http://auctions.godaddy.com/getServiceStatistics" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <soap:operation soapAction="http://auctions.godaddy.com/dppDomainSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="gdDppSearchWSSoap12" type="tns:gdDppSearchWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServiceStatus">
+      <soap12:operation soapAction="http://auctions.godaddy.com/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <soap12:operation soapAction="http://auctions.godaddy.com/getServiceStatistics" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <soap12:operation soapAction="http://auctions.godaddy.com/dppDomainSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="gdDppSearchWSHttpGet" type="tns:gdDppSearchWSHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="getServiceStatus">
+      <http:operation location="/getServiceStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <http:operation location="/getServiceStatistics" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <http:operation location="/dppDomainSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="gdDppSearchWSHttpPost" type="tns:gdDppSearchWSHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getServiceStatus">
+      <http:operation location="/getServiceStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <http:operation location="/getServiceStatistics" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <http:operation location="/dppDomainSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="gdDppSearchWS">
+    <wsdl:port name="gdDppSearchWSSoap" binding="tns:gdDppSearchWSSoap">
+      <soap:address location="http://g1dwlep001/gddppsearch/gddppsearchws.asmx" />
+    </wsdl:port>
+    <wsdl:port name="gdDppSearchWSSoap12" binding="tns:gdDppSearchWSSoap12">
+      <soap12:address location="http://g1dwlep001/gddppsearch/gddppsearchws.asmx" />
+    </wsdl:port>
+    <wsdl:port name="gdDppSearchWSHttpGet" binding="tns:gdDppSearchWSHttpGet">
+      <http:address location="http://g1dwlep001/gddppsearch/gddppsearchws.asmx" />
+    </wsdl:port>
+    <wsdl:port name="gdDppSearchWSHttpPost" binding="tns:gdDppSearchWSHttpPost">
+      <http:address location="http://g1dwlep001/gddppsearch/gddppsearchws.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

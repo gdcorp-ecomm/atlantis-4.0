@@ -1,0 +1,91 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6FE128BB-C266-476F-8366-729D0FC75F6A}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.VerifyMobileToken.vsmdi = Atlantis.Framework.VerifyMobileToken.vsmdi
+		Atlantis.Framework.VerifyMobileToken1.vsmdi = Atlantis.Framework.VerifyMobileToken1.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.VerifyMobileToken.Impl", "Atlantis.Framewok.VerifyMobileToken.Impl\Atlantis.Framework.VerifyMobileToken.Impl.csproj", "{AC481660-9AFF-41DD-8E1F-F6C2375396D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.VerifyMobileToken.Interface", "Atlantis.Framework.VerifyMobileToken.Interface\Atlantis.Framework.VerifyMobileToken.Interface.csproj", "{3292FA94-B2BB-41B1-B062-ACCB6C0D81DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.VerifyMobileToken.Tests", "Atlantis.Framework.VerifyMobileToken.Tests\Atlantis.Framework.VerifyMobileToken.Tests.csproj", "{4030CA80-28C1-4CF2-9EC7-F45960EBCEE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0B607BD4-A747-49FD-8DD7-5769605B5A2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.VerifyMobileToken.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.VerifyMobileToken.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.VerifyMobileToken.Interface\\Atlantis.Framework.VerifyMobileToken.Interface.csproj
+		SccProjectName3 = Atlantis.Framework.VerifyMobileToken.Interface
+		SccLocalPath3 = Atlantis.Framework.VerifyMobileToken.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.VerifyMobileToken.Tests\\Atlantis.Framework.VerifyMobileToken.Tests.csproj
+		SccProjectName4 = Atlantis.Framework.VerifyMobileToken.Tests
+		SccLocalPath4 = Atlantis.Framework.VerifyMobileToken.Tests
+		SccProjectUniqueName5 = Atlantis.Framewok.VerifyMobileToken.Impl\\Atlantis.Framework.VerifyMobileToken.Impl.csproj
+		SccProjectName5 = Atlantis.Framewok.VerifyMobileToken.Impl
+		SccLocalPath5 = Atlantis.Framewok.VerifyMobileToken.Impl
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.VerifyMobileToken.sln
+		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC481660-9AFF-41DD-8E1F-F6C2375396D4}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{AC481660-9AFF-41DD-8E1F-F6C2375396D4}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{AC481660-9AFF-41DD-8E1F-F6C2375396D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC481660-9AFF-41DD-8E1F-F6C2375396D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3292FA94-B2BB-41B1-B062-ACCB6C0D81DD}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{3292FA94-B2BB-41B1-B062-ACCB6C0D81DD}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{3292FA94-B2BB-41B1-B062-ACCB6C0D81DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3292FA94-B2BB-41B1-B062-ACCB6C0D81DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4030CA80-28C1-4CF2-9EC7-F45960EBCEE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4030CA80-28C1-4CF2-9EC7-F45960EBCEE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4030CA80-28C1-4CF2-9EC7-F45960EBCEE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4030CA80-28C1-4CF2-9EC7-F45960EBCEE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {0B607BD4-A747-49FD-8DD7-5769605B5A2B}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {0B607BD4-A747-49FD-8DD7-5769605B5A2B}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {0B607BD4-A747-49FD-8DD7-5769605B5A2B}
+	EndGlobalSection
+EndGlobal

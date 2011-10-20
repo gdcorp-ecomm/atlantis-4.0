@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="#ServiceAggregator" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="#ServiceAggregator" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="#ServiceAggregator">
+      <s:element name="GetToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WebServiceResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseXml" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AuthHeader" type="tns:AuthHeader" />
+      <s:complexType name="AuthHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShopperToken" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeviceID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SystemName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SystemVer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MobileAppID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CarrierType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AppVersion" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GetCatalog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCatalogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfig">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfigResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ShopperCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ShopperCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataCache">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BasketGet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BasketGetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Feedback">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FeedbackResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHelp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHelpResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLegal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLegalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Iris">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IrisResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="About">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AboutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WhoIs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WhoIsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BasketAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SchemaVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RequestXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BasketAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:WebServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetToken" />
+  </wsdl:message>
+  <wsdl:message name="GetTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTokenAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetCatalogSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCatalog" />
+  </wsdl:message>
+  <wsdl:message name="GetCatalogSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCatalogResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCatalogAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConfig" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="ShopperCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:ShopperCreate" />
+  </wsdl:message>
+  <wsdl:message name="ShopperCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:ShopperCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ShopperCreateAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="DomainSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:DomainSearch" />
+  </wsdl:message>
+  <wsdl:message name="DomainSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:DomainSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="DomainSearchAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="DataCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:DataCache" />
+  </wsdl:message>
+  <wsdl:message name="DataCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:DataCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataCacheAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="BasketGetSoapIn">
+    <wsdl:part name="parameters" element="tns:BasketGet" />
+  </wsdl:message>
+  <wsdl:message name="BasketGetSoapOut">
+    <wsdl:part name="parameters" element="tns:BasketGetResponse" />
+  </wsdl:message>
+  <wsdl:message name="BasketGetAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="FeedbackSoapIn">
+    <wsdl:part name="parameters" element="tns:Feedback" />
+  </wsdl:message>
+  <wsdl:message name="FeedbackSoapOut">
+    <wsdl:part name="parameters" element="tns:FeedbackResponse" />
+  </wsdl:message>
+  <wsdl:message name="FeedbackAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetHelpSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHelp" />
+  </wsdl:message>
+  <wsdl:message name="GetHelpSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHelpResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetHelpAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetLegalSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLegal" />
+  </wsdl:message>
+  <wsdl:message name="GetLegalSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLegalResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLegalAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="IrisSoapIn">
+    <wsdl:part name="parameters" element="tns:Iris" />
+  </wsdl:message>
+  <wsdl:message name="IrisSoapOut">
+    <wsdl:part name="parameters" element="tns:IrisResponse" />
+  </wsdl:message>
+  <wsdl:message name="IrisAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="AboutSoapIn">
+    <wsdl:part name="parameters" element="tns:About" />
+  </wsdl:message>
+  <wsdl:message name="AboutSoapOut">
+    <wsdl:part name="parameters" element="tns:AboutResponse" />
+  </wsdl:message>
+  <wsdl:message name="AboutAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WhoIsSoapIn">
+    <wsdl:part name="parameters" element="tns:WhoIs" />
+  </wsdl:message>
+  <wsdl:message name="WhoIsSoapOut">
+    <wsdl:part name="parameters" element="tns:WhoIsResponse" />
+  </wsdl:message>
+  <wsdl:message name="WhoIsAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="BasketAddSoapIn">
+    <wsdl:part name="parameters" element="tns:BasketAdd" />
+  </wsdl:message>
+  <wsdl:message name="BasketAddSoapOut">
+    <wsdl:part name="parameters" element="tns:BasketAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="BasketAddAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="GetToken">
+      <wsdl:input message="tns:GetTokenSoapIn" />
+      <wsdl:output message="tns:GetTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCatalog">
+      <wsdl:input message="tns:GetCatalogSoapIn" />
+      <wsdl:output message="tns:GetCatalogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfig">
+      <wsdl:input message="tns:GetConfigSoapIn" />
+      <wsdl:output message="tns:GetConfigSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ShopperCreate">
+      <wsdl:input message="tns:ShopperCreateSoapIn" />
+      <wsdl:output message="tns:ShopperCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainSearch">
+      <wsdl:input message="tns:DomainSearchSoapIn" />
+      <wsdl:output message="tns:DomainSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DataCache">
+      <wsdl:input message="tns:DataCacheSoapIn" />
+      <wsdl:output message="tns:DataCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BasketGet">
+      <wsdl:input message="tns:BasketGetSoapIn" />
+      <wsdl:output message="tns:BasketGetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Feedback">
+      <wsdl:input message="tns:FeedbackSoapIn" />
+      <wsdl:output message="tns:FeedbackSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHelp">
+      <wsdl:input message="tns:GetHelpSoapIn" />
+      <wsdl:output message="tns:GetHelpSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLegal">
+      <wsdl:input message="tns:GetLegalSoapIn" />
+      <wsdl:output message="tns:GetLegalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Iris">
+      <wsdl:input message="tns:IrisSoapIn" />
+      <wsdl:output message="tns:IrisSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="About">
+      <wsdl:input message="tns:AboutSoapIn" />
+      <wsdl:output message="tns:AboutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WhoIs">
+      <wsdl:input message="tns:WhoIsSoapIn" />
+      <wsdl:output message="tns:WhoIsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BasketAdd">
+      <wsdl:input message="tns:BasketAddSoapIn" />
+      <wsdl:output message="tns:BasketAddSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetToken">
+      <soap:operation soapAction="#ServiceAggregator/GetToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetTokenAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCatalog">
+      <soap:operation soapAction="#ServiceAggregator/GetCatalog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetCatalogAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfig">
+      <soap:operation soapAction="#ServiceAggregator/GetConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetConfigAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShopperCreate">
+      <soap:operation soapAction="#ServiceAggregator/ShopperCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ShopperCreateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainSearch">
+      <soap:operation soapAction="#ServiceAggregator/DomainSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DomainSearchAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataCache">
+      <soap:operation soapAction="#ServiceAggregator/DataCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DataCacheAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BasketGet">
+      <soap:operation soapAction="#ServiceAggregator/BasketGet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:BasketGetAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Feedback">
+      <soap:operation soapAction="#ServiceAggregator/Feedback" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FeedbackAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHelp">
+      <soap:operation soapAction="#ServiceAggregator/GetHelp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetHelpAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLegal">
+      <soap:operation soapAction="#ServiceAggregator/GetLegal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetLegalAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Iris">
+      <soap:operation soapAction="#ServiceAggregator/Iris" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:IrisAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="About">
+      <soap:operation soapAction="#ServiceAggregator/About" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AboutAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WhoIs">
+      <soap:operation soapAction="#ServiceAggregator/WhoIs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WhoIsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BasketAdd">
+      <soap:operation soapAction="#ServiceAggregator/BasketAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:BasketAddAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetToken">
+      <soap12:operation soapAction="#ServiceAggregator/GetToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetTokenAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCatalog">
+      <soap12:operation soapAction="#ServiceAggregator/GetCatalog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetCatalogAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfig">
+      <soap12:operation soapAction="#ServiceAggregator/GetConfig" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetConfigAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShopperCreate">
+      <soap12:operation soapAction="#ServiceAggregator/ShopperCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ShopperCreateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainSearch">
+      <soap12:operation soapAction="#ServiceAggregator/DomainSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DomainSearchAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataCache">
+      <soap12:operation soapAction="#ServiceAggregator/DataCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DataCacheAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BasketGet">
+      <soap12:operation soapAction="#ServiceAggregator/BasketGet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:BasketGetAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Feedback">
+      <soap12:operation soapAction="#ServiceAggregator/Feedback" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FeedbackAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHelp">
+      <soap12:operation soapAction="#ServiceAggregator/GetHelp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetHelpAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLegal">
+      <soap12:operation soapAction="#ServiceAggregator/GetLegal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetLegalAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Iris">
+      <soap12:operation soapAction="#ServiceAggregator/Iris" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:IrisAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="About">
+      <soap12:operation soapAction="#ServiceAggregator/About" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AboutAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WhoIs">
+      <soap12:operation soapAction="#ServiceAggregator/WhoIs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WhoIsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BasketAdd">
+      <soap12:operation soapAction="#ServiceAggregator/BasketAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:BasketAddAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="https://mob.dev.godaddy-com.ide/csa/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="https://mob.dev.godaddy-com.ide/csa/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:WSCgdCMSService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSCgdCMSService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WSCgdCMSService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCreditSummaryIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditSummaryOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditGroupSummaryIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lDisplayGroupID" type="s:int" />
+    <wsdl:part name="lApplicationID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditGroupSummaryOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditGroupDetailIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lDisplayGroupID" type="s:int" />
+    <wsdl:part name="lApplicationID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditGroupDetailOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsByParentResourceIDIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lParentResourceID" type="s:int" />
+    <wsdl:part name="lParentResourceType" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsByParentResourceIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsRedeemedByParentResourceIDIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lParentResourceID" type="s:int" />
+    <wsdl:part name="lParentResourceType" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsRedeemedByParentResourceIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsByParentExternalResourceIDIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrParentExternalResourceID" type="s:string" />
+    <wsdl:part name="lParentResourceType" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsByParentExternalResourceIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsRedeemedByParentExternalResourceIDIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrParentExternalResourceID" type="s:string" />
+    <wsdl:part name="lParentResourceType" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsRedeemedByParentExternalResourceIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RedeemCreditIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lParentResourceID" type="s:int" />
+    <wsdl:part name="lParentResourceType" type="s:int" />
+    <wsdl:part name="lChildUnifiedProductID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="RedeemCreditOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsByUIDIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrOrionAccountUID" type="s:string" />
+    <wsdl:part name="bstrOrionProduct" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsByUIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsRedeemedByUIDIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrOrionAccountUID" type="s:string" />
+    <wsdl:part name="bstrOrionProduct" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsRedeemedByUIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RedeemCreditWithConfigurationIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lParentResourceID" type="s:int" />
+    <wsdl:part name="lParentResourceType" type="s:int" />
+    <wsdl:part name="lChildUnifiedProductID" type="s:int" />
+    <wsdl:part name="bstrCustomXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RedeemCreditWithConfigurationOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetKeysByChildResourceIDIn">
+    <wsdl:part name="lChildResourceID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetKeysByChildResourceIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFreeProductPackageListIn">
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetFreeProductPackageListOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFreeProductPackageConfigurationIn">
+    <wsdl:part name="lPackageID" type="s:int" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetFreeProductPackageConfigurationOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetFreeProductPackageConfigurationIn">
+    <wsdl:part name="lPackageID" type="s:int" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+    <wsdl:part name="bstrConfigurationXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetFreeProductPackageConfigurationOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsByParentResourceExIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrParentResourceID" type="s:string" />
+    <wsdl:part name="bstrParentResourceType" type="s:string" />
+    <wsdl:part name="bstrParentResourceIDType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsByParentResourceExOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParentResourcesByAvailableCreditsIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lChildUnifiedProductID" type="s:int" />
+    <wsdl:part name="lParentDisplayGroupID" type="s:int" />
+    <wsdl:part name="bstrCreditType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetParentResourcesByAvailableCreditsOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditGroupSummaryByParentGroupIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lChildDisplayGroupID" type="s:int" />
+    <wsdl:part name="lParentDisplayGroupID" type="s:int" />
+    <wsdl:part name="lApplicationID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditGroupSummaryByParentGroupOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RedeemCreditExIn">
+    <wsdl:part name="bstrRedeemXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RedeemCreditExOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsRedeemedByParentResourceExIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrParentResourceID" type="s:string" />
+    <wsdl:part name="bstrParentResourceType" type="s:string" />
+    <wsdl:part name="bstrParentIDType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCreditsRedeemedByParentResourceExOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetKeysByResourceIDIn">
+    <wsdl:part name="bstrResourceID" type="s:string" />
+    <wsdl:part name="bstrResourceType" type="s:string" />
+    <wsdl:part name="bstrIDType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetKeysByResourceIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WSCgdCMSServiceSoap">
+    <wsdl:operation name="GetCreditSummary">
+      <wsdl:input message="s0:GetCreditSummaryIn" />
+      <wsdl:output message="s0:GetCreditSummaryOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditGroupSummary">
+      <wsdl:input message="s0:GetCreditGroupSummaryIn" />
+      <wsdl:output message="s0:GetCreditGroupSummaryOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditGroupDetail">
+      <wsdl:input message="s0:GetCreditGroupDetailIn" />
+      <wsdl:output message="s0:GetCreditGroupDetailOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsByParentResourceID">
+      <wsdl:input message="s0:GetCreditsByParentResourceIDIn" />
+      <wsdl:output message="s0:GetCreditsByParentResourceIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsRedeemedByParentResourceID">
+      <wsdl:input message="s0:GetCreditsRedeemedByParentResourceIDIn" />
+      <wsdl:output message="s0:GetCreditsRedeemedByParentResourceIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsByParentExternalResourceID">
+      <wsdl:input message="s0:GetCreditsByParentExternalResourceIDIn" />
+      <wsdl:output message="s0:GetCreditsByParentExternalResourceIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsRedeemedByParentExternalResourceID">
+      <wsdl:input message="s0:GetCreditsRedeemedByParentExternalResourceIDIn" />
+      <wsdl:output message="s0:GetCreditsRedeemedByParentExternalResourceIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RedeemCredit">
+      <wsdl:input message="s0:RedeemCreditIn" />
+      <wsdl:output message="s0:RedeemCreditOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsByUID">
+      <wsdl:input message="s0:GetCreditsByUIDIn" />
+      <wsdl:output message="s0:GetCreditsByUIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsRedeemedByUID">
+      <wsdl:input message="s0:GetCreditsRedeemedByUIDIn" />
+      <wsdl:output message="s0:GetCreditsRedeemedByUIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RedeemCreditWithConfiguration">
+      <wsdl:input message="s0:RedeemCreditWithConfigurationIn" />
+      <wsdl:output message="s0:RedeemCreditWithConfigurationOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKeysByChildResourceID">
+      <wsdl:input message="s0:GetKeysByChildResourceIDIn" />
+      <wsdl:output message="s0:GetKeysByChildResourceIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFreeProductPackageList">
+      <wsdl:input message="s0:GetFreeProductPackageListIn" />
+      <wsdl:output message="s0:GetFreeProductPackageListOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFreeProductPackageConfiguration">
+      <wsdl:input message="s0:GetFreeProductPackageConfigurationIn" />
+      <wsdl:output message="s0:GetFreeProductPackageConfigurationOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetFreeProductPackageConfiguration">
+      <wsdl:input message="s0:SetFreeProductPackageConfigurationIn" />
+      <wsdl:output message="s0:SetFreeProductPackageConfigurationOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsByParentResourceEx">
+      <wsdl:input message="s0:GetCreditsByParentResourceExIn" />
+      <wsdl:output message="s0:GetCreditsByParentResourceExOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParentResourcesByAvailableCredits">
+      <wsdl:input message="s0:GetParentResourcesByAvailableCreditsIn" />
+      <wsdl:output message="s0:GetParentResourcesByAvailableCreditsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditGroupSummaryByParentGroup">
+      <wsdl:input message="s0:GetCreditGroupSummaryByParentGroupIn" />
+      <wsdl:output message="s0:GetCreditGroupSummaryByParentGroupOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RedeemCreditEx">
+      <wsdl:input message="s0:RedeemCreditExIn" />
+      <wsdl:output message="s0:RedeemCreditExOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsRedeemedByParentResourceEx">
+      <wsdl:input message="s0:GetCreditsRedeemedByParentResourceExIn" />
+      <wsdl:output message="s0:GetCreditsRedeemedByParentResourceExOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKeysByResourceID">
+      <wsdl:input message="s0:GetKeysByResourceIDIn" />
+      <wsdl:output message="s0:GetKeysByResourceIDOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSCgdCMSServiceSoap" type="s0:WSCgdCMSServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="GetCreditSummary">
+      <soap:operation soapAction="#GetCreditSummary" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditGroupSummary">
+      <soap:operation soapAction="#GetCreditGroupSummary" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditGroupDetail">
+      <soap:operation soapAction="#GetCreditGroupDetail" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsByParentResourceID">
+      <soap:operation soapAction="#GetCreditsByParentResourceID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsRedeemedByParentResourceID">
+      <soap:operation soapAction="#GetCreditsRedeemedByParentResourceID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsByParentExternalResourceID">
+      <soap:operation soapAction="#GetCreditsByParentExternalResourceID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsRedeemedByParentExternalResourceID">
+      <soap:operation soapAction="#GetCreditsRedeemedByParentExternalResourceID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemCredit">
+      <soap:operation soapAction="#RedeemCredit" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsByUID">
+      <soap:operation soapAction="#GetCreditsByUID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsRedeemedByUID">
+      <soap:operation soapAction="#GetCreditsRedeemedByUID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemCreditWithConfiguration">
+      <soap:operation soapAction="#RedeemCreditWithConfiguration" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKeysByChildResourceID">
+      <soap:operation soapAction="#GetKeysByChildResourceID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFreeProductPackageList">
+      <soap:operation soapAction="#GetFreeProductPackageList" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFreeProductPackageConfiguration">
+      <soap:operation soapAction="#GetFreeProductPackageConfiguration" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFreeProductPackageConfiguration">
+      <soap:operation soapAction="#SetFreeProductPackageConfiguration" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsByParentResourceEx">
+      <soap:operation soapAction="#GetCreditsByParentResourceEx" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParentResourcesByAvailableCredits">
+      <soap:operation soapAction="#GetParentResourcesByAvailableCredits" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditGroupSummaryByParentGroup">
+      <soap:operation soapAction="#GetCreditGroupSummaryByParentGroup" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemCreditEx">
+      <soap:operation soapAction="#RedeemCreditEx" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditsRedeemedByParentResourceEx">
+      <soap:operation soapAction="#GetCreditsRedeemedByParentResourceEx" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKeysByResourceID">
+      <soap:operation soapAction="#GetKeysByResourceID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdCMSService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCgdCMSService">
+    <wsdl:port name="WSCgdCMSServiceSoap" binding="s0:WSCgdCMSServiceSoap">
+      <soap:address location="http://devgdcomm02:80/WSCgdCMS/WSCgdCMS.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

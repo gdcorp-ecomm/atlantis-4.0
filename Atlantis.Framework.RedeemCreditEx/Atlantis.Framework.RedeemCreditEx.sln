@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AA3B224F-1B1E-452C-8617-2B6E1F17A0E9}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.RedeemCreditEx.vsmdi = Atlantis.Framework.RedeemCreditEx.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RedeemCreditEx.Interface", "Atlantis.Framework.RedeemCreditEx.Interface\Atlantis.Framework.RedeemCreditEx.Interface.csproj", "{F425E523-85A4-4CD3-9C5E-CE25AD02ADD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RedeemCreditEx.Impl", "Atlantis.Framework.RedeemCreditEx.Impl\Atlantis.Framework.RedeemCreditEx.Impl.csproj", "{2D9709B9-60D2-4D71-9C23-46F182E93D9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RedeemCreditEx.Tests", "Atlantis.Framework.RedeemCreditEx.Tests\Atlantis.Framework.RedeemCreditEx.Tests.csproj", "{80F93A57-5DD6-4EF7-B4F9-CA990B2F7953}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D064C1D6-7565-4D88-AFB3-6814CD0BC88F}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.RedeemCreditEx.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.RedeemCreditEx.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = Atlantis.Framework.RedeemCreditEx.Impl\\Atlantis.Framework.RedeemCreditEx.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.RedeemCreditEx.Impl
+		SccLocalPath3 = Atlantis.Framework.RedeemCreditEx.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.RedeemCreditEx.Interface\\Atlantis.Framework.RedeemCreditEx.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.RedeemCreditEx.Interface
+		SccLocalPath4 = Atlantis.Framework.RedeemCreditEx.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.RedeemCreditEx.Tests\\Atlantis.Framework.RedeemCreditEx.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.RedeemCreditEx.Tests
+		SccLocalPath5 = Atlantis.Framework.RedeemCreditEx.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.RedeemCreditEx.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F425E523-85A4-4CD3-9C5E-CE25AD02ADD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F425E523-85A4-4CD3-9C5E-CE25AD02ADD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F425E523-85A4-4CD3-9C5E-CE25AD02ADD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F425E523-85A4-4CD3-9C5E-CE25AD02ADD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D9709B9-60D2-4D71-9C23-46F182E93D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D9709B9-60D2-4D71-9C23-46F182E93D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D9709B9-60D2-4D71-9C23-46F182E93D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D9709B9-60D2-4D71-9C23-46F182E93D9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80F93A57-5DD6-4EF7-B4F9-CA990B2F7953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80F93A57-5DD6-4EF7-B4F9-CA990B2F7953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80F93A57-5DD6-4EF7-B4F9-CA990B2F7953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80F93A57-5DD6-4EF7-B4F9-CA990B2F7953}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D064C1D6-7565-4D88-AFB3-6814CD0BC88F}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {D064C1D6-7565-4D88-AFB3-6814CD0BC88F}
+	EndGlobalSection
+EndGlobal

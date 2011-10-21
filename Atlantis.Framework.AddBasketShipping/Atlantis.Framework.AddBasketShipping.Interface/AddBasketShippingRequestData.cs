@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Atlantis.Framework.Interface;
-using System.Xml;
 using System.IO;
+using System.Text;
+using System.Xml;
+using Atlantis.Framework.Interface;
 namespace Atlantis.Framework.AddBasketShipping.Interface
 {
   public class AddBasketShippingRequestData : RequestData

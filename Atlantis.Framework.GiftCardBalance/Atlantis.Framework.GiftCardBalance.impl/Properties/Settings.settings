@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.GiftCardBalance.Impl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Atlantis_Framework_GetGiftCardBalance_Impl_WscGiftCard_wscGiftCardService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://gdcomm.dev.glbt1.gdg:80/wscGiftCard/wscGiftCard.dll?Handler=Default</Value>
+    </Setting>
+    <Setting Name="Atlantis_Framework_GiftCardBalance_Impl_WscGiftCard_wscGiftCardService" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://devgdcomm02:80/wscGiftCard/wscGiftCard.dll?Handler=Default</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

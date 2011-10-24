@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B250BC27-84A7-444F-83BA-6D39219D3119}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushShopperAdd.Impl", "Atlantis.Framework.MobilePushShopperAdd.Impl\Atlantis.Framework.MobilePushShopperAdd.Impl.csproj", "{631D76DE-E739-421C-B13D-685A70BAFB26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushShopperAdd.Tests", "Atlantis.Framework.MobilePushShopperAdd.Tests\Atlantis.Framework.MobilePushShopperAdd.Tests.csproj", "{3ED49D59-ECEB-458D-8A25-319A6E96D135}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1B83B36B-B340-4F6A-8F02-431862A553F3}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.MobilePushShopperAdd.vsmdi = Atlantis.Framework.MobilePushShopperAdd.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushShopperAdd.Interface", "Atlantis.Framework.MobilePushShopperAdd.Interface\Atlantis.Framework.MobilePushShopperAdd.Interface.csproj", "{BE4BB6DA-2000-4F39-951D-8C40DA7D67FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePush.Interface", "..\Atlantis.Framework.MobilePush.Interface\Atlantis.Framework.MobilePush.Interface\Atlantis.Framework.MobilePush.Interface.csproj", "{93B3C80A-84E1-4278-95CC-E63A1D055E50}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.MobilePushShopperAdd.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.MobilePushShopperAdd.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.MobilePushShopperAdd.Impl\\Atlantis.Framework.MobilePushShopperAdd.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.MobilePushShopperAdd.Impl
+		SccLocalPath3 = Atlantis.Framework.MobilePushShopperAdd.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.MobilePushShopperAdd.Tests\\Atlantis.Framework.MobilePushShopperAdd.Tests.csproj
+		SccProjectName4 = Atlantis.Framework.MobilePushShopperAdd.Tests
+		SccLocalPath4 = Atlantis.Framework.MobilePushShopperAdd.Tests
+		SccProjectUniqueName5 = Atlantis.Framework.MobilePushShopperAdd.Interface\\Atlantis.Framework.MobilePushShopperAdd.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.MobilePushShopperAdd.Interface
+		SccLocalPath5 = Atlantis.Framework.MobilePushShopperAdd.Interface
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.MobilePush.Interface\\Atlantis.Framework.MobilePush.Interface\\Atlantis.Framework.MobilePush.Interface.csproj
+		SccProjectName6 = ../Atlantis.Framework.MobilePush.Interface/Atlantis.Framework.MobilePush.Interface
+		SccLocalPath6 = ..\\Atlantis.Framework.MobilePush.Interface\\Atlantis.Framework.MobilePush.Interface
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.MobilePushShopperAdd.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{631D76DE-E739-421C-B13D-685A70BAFB26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{631D76DE-E739-421C-B13D-685A70BAFB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{631D76DE-E739-421C-B13D-685A70BAFB26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{631D76DE-E739-421C-B13D-685A70BAFB26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED49D59-ECEB-458D-8A25-319A6E96D135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED49D59-ECEB-458D-8A25-319A6E96D135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED49D59-ECEB-458D-8A25-319A6E96D135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED49D59-ECEB-458D-8A25-319A6E96D135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE4BB6DA-2000-4F39-951D-8C40DA7D67FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE4BB6DA-2000-4F39-951D-8C40DA7D67FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE4BB6DA-2000-4F39-951D-8C40DA7D67FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE4BB6DA-2000-4F39-951D-8C40DA7D67FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93B3C80A-84E1-4278-95CC-E63A1D055E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93B3C80A-84E1-4278-95CC-E63A1D055E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93B3C80A-84E1-4278-95CC-E63A1D055E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93B3C80A-84E1-4278-95CC-E63A1D055E50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {B250BC27-84A7-444F-83BA-6D39219D3119}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {B250BC27-84A7-444F-83BA-6D39219D3119}
+	EndGlobalSection
+EndGlobal

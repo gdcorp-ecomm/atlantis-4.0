@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{02A4730E-A162-4836-9991-BED19456BD95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommValidPaymentType.Interface", "Atlantis.Framework.EcommValidPaymentType.Interface\Atlantis.Framework.EcommValidPaymentType.Interface.csproj", "{B0FBF0B0-5D38-4B03-856B-410385D648C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommValidPaymentType.Impl", "Atlantis.Framework.EcommValidPaymentType.Impl\Atlantis.Framework.EcommValidPaymentType.Impl.csproj", "{C2DE470E-0888-4816-AB50-B6525C3CBE09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommValidPaymentType.Tests", "Atlantis.Framework.EcommValidPaymentType.Tests\Atlantis.Framework.EcommValidPaymentType.Tests.csproj", "{237A5B49-6205-472A-8A1D-00A191FD4412}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8F4B5E6D-FC93-4A12-9517-6C0D2C3EC55B}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.EcommValidPaymentType.vsmdi = Atlantis.Framework.EcommValidPaymentType.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.EcommValidPaymentType.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.EcommValidPaymentType.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.EcommValidPaymentType.Interface\\Atlantis.Framework.EcommValidPaymentType.Interface.csproj
+		SccProjectName3 = Atlantis.Framework.EcommValidPaymentType.Interface
+		SccLocalPath3 = Atlantis.Framework.EcommValidPaymentType.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.EcommValidPaymentType.Impl\\Atlantis.Framework.EcommValidPaymentType.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.EcommValidPaymentType.Impl
+		SccLocalPath4 = Atlantis.Framework.EcommValidPaymentType.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.EcommValidPaymentType.Tests\\Atlantis.Framework.EcommValidPaymentType.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.EcommValidPaymentType.Tests
+		SccLocalPath5 = Atlantis.Framework.EcommValidPaymentType.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.EcommValidPaymentType.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0FBF0B0-5D38-4B03-856B-410385D648C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0FBF0B0-5D38-4B03-856B-410385D648C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0FBF0B0-5D38-4B03-856B-410385D648C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0FBF0B0-5D38-4B03-856B-410385D648C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2DE470E-0888-4816-AB50-B6525C3CBE09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2DE470E-0888-4816-AB50-B6525C3CBE09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2DE470E-0888-4816-AB50-B6525C3CBE09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2DE470E-0888-4816-AB50-B6525C3CBE09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{237A5B49-6205-472A-8A1D-00A191FD4412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{237A5B49-6205-472A-8A1D-00A191FD4412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{237A5B49-6205-472A-8A1D-00A191FD4412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{237A5B49-6205-472A-8A1D-00A191FD4412}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {02A4730E-A162-4836-9991-BED19456BD95}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {02A4730E-A162-4836-9991-BED19456BD95}
+	EndGlobalSection
+EndGlobal

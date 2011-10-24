@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.MobilePushShopperAdd.Tests
 {
   [TestClass]
-  [DeploymentItem("atlantis.config")]
   public class MobilePushShopperAddTests
   {
     private void WriteMessageToConsole(string message)
@@ -16,6 +15,7 @@ namespace Atlantis.Framework.MobilePushShopperAdd.Tests
     }
 
     [TestMethod]
+    [DeploymentItem("atlantis.config")]
     public void ValidShopperAddNotification()
     {
       string registrationId = "d3d4d197-638d-47b3-a379-1a9f094cf502";
@@ -45,6 +45,7 @@ namespace Atlantis.Framework.MobilePushShopperAdd.Tests
     }
 
     [TestMethod]
+    [DeploymentItem("atlantis.config")]
     public void InValidShopperAddNotification()
     {
       string registrationId = "d3d4d197-638d-47b3-a379-1a9f094cf502";
@@ -74,6 +75,7 @@ namespace Atlantis.Framework.MobilePushShopperAdd.Tests
     }
 
     [TestMethod]
+    [DeploymentItem("atlantis.config")]
     public void ShopperDoesNotExistShopperAddNotification()
     {
       string registrationId = "d3d4d197-638d-47b3-a379-1a9f094cf502";

@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C77A471F-7980-4338-8208-5D3AE8FFFB4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8A91D488-9897-4CAD-81B2-1EBEDBB9EB1F}"
+	ProjectSection(SolutionItems) = preProject
+		Atlanitis.Framework.FastballPromoBanners.vsmdi = Atlanitis.Framework.FastballPromoBanners.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FastballPromoBanners.Impl", "Atlantis.Framework.FastballPromoBanners.Impl\Atlantis.Framework.FastballPromoBanners.Impl.csproj", "{0DC67329-D06B-4CB9-9C2A-38C7B608D64F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FastballPromoBanners.Interface", "Atlantis.Framework.FastballPromoBanners.Interface\Atlantis.Framework.FastballPromoBanners.Interface.csproj", "{2F5DAFBD-C2D4-4AF5-A6B7-AF1C33898057}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FastballPromoBanners.Tests", "Atlantis.Framework.FastballPromoBanners.Tests\Atlantis.Framework.FastballPromoBanners.Tests.csproj", "{13FDC64E-B1F4-4C6A-B907-F13E7E0093B4}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlanitis.Framework.FastballPromoBanners.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlanitis.Framework.FastballPromoBanners.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlanitis.Framework.FastballPromoBanners.sln
+		SccProjectName3 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
+		SccLocalPath3 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
+		SccProjectUniqueName4 = Atlantis.Framework.FastballPromoBanners.Impl\\Atlantis.Framework.FastballPromoBanners.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.FastballPromoBanners.Impl
+		SccLocalPath4 = Atlantis.Framework.FastballPromoBanners.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.FastballPromoBanners.Interface\\Atlantis.Framework.FastballPromoBanners.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.FastballPromoBanners.Interface
+		SccLocalPath5 = Atlantis.Framework.FastballPromoBanners.Interface
+		SccProjectUniqueName6 = Atlantis.Framework.FastballPromoBanners.Tests\\Atlantis.Framework.FastballPromoBanners.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.FastballPromoBanners.Tests
+		SccLocalPath6 = Atlantis.Framework.FastballPromoBanners.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlanitis.Framework.FastballPromoBanners.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC67329-D06B-4CB9-9C2A-38C7B608D64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC67329-D06B-4CB9-9C2A-38C7B608D64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC67329-D06B-4CB9-9C2A-38C7B608D64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC67329-D06B-4CB9-9C2A-38C7B608D64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F5DAFBD-C2D4-4AF5-A6B7-AF1C33898057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F5DAFBD-C2D4-4AF5-A6B7-AF1C33898057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F5DAFBD-C2D4-4AF5-A6B7-AF1C33898057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F5DAFBD-C2D4-4AF5-A6B7-AF1C33898057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13FDC64E-B1F4-4C6A-B907-F13E7E0093B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13FDC64E-B1F4-4C6A-B907-F13E7E0093B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13FDC64E-B1F4-4C6A-B907-F13E7E0093B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13FDC64E-B1F4-4C6A-B907-F13E7E0093B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {C77A471F-7980-4338-8208-5D3AE8FFFB4C}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {C77A471F-7980-4338-8208-5D3AE8FFFB4C}
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {C77A471F-7980-4338-8208-5D3AE8FFFB4C}
+	EndGlobalSection
+EndGlobal

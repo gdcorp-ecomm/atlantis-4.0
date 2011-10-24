@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://fastball.godaddy.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="https://fastball.godaddy.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://fastball.godaddy.com/">
+      <s:element name="GetOffers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopper_id" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="application_id" type="s:short" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOffersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOffersResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOffersWithPlid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopper_id" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="application_id" type="s:short" />
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOffersWithPlidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOffersWithPlidResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOffersListWithPlid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopper_id" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="application_id" type="s:short" />
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOffersListWithPlidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOffersListWithPlidResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDailyOffersWithPlid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDailyOffersWithPlidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDailyOffersWithPlidResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogOfferImpressionWithRep">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopper_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fbiOfferID_list" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="application_id" type="s:short" />
+            <s:element minOccurs="1" maxOccurs="1" name="impressionDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="visitGuid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageCount" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="impressionType" type="s:short" />
+            <s:element minOccurs="1" maxOccurs="1" name="repVersion" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogOfferImpressionWithRepResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogOfferImpression">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopper_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fbiOfferID_list" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="application_id" type="s:short" />
+            <s:element minOccurs="1" maxOccurs="1" name="impressionDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="visitGuid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogOfferImpressionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogOfferClick">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fbiOfferID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopper_id" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="clickDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="application_id" type="s:short" />
+            <s:element minOccurs="0" maxOccurs="1" name="visitGuid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogOfferClickResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogOfferClickWithRep">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fbiOfferID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopper_id" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="clickDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="application_id" type="s:short" />
+            <s:element minOccurs="0" maxOccurs="1" name="visitGuid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageCount" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="repVersion" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ucid" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogOfferClickWithRepResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogOfferDeclineWithRep">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fbiOfferID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopper_id" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="clickDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="application_id" type="s:short" />
+            <s:element minOccurs="0" maxOccurs="1" name="visitGuid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageCount" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="repVersion" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ucid" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="disposition" type="s:short" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogOfferDeclineWithRepResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSmartOffersHealth">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSmartOffersHealthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSmartOffersHealthResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetOffersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOffers" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOffersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersWithPlidSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOffersWithPlid" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersWithPlidSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOffersWithPlidResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersListWithPlidSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOffersListWithPlid" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersListWithPlidSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOffersListWithPlidResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOffersWithPlidSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDailyOffersWithPlid" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOffersWithPlidSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDailyOffersWithPlidResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferImpressionWithRepSoapIn">
+    <wsdl:part name="parameters" element="tns:LogOfferImpressionWithRep" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferImpressionWithRepSoapOut">
+    <wsdl:part name="parameters" element="tns:LogOfferImpressionWithRepResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferImpressionSoapIn">
+    <wsdl:part name="parameters" element="tns:LogOfferImpression" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferImpressionSoapOut">
+    <wsdl:part name="parameters" element="tns:LogOfferImpressionResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferClickSoapIn">
+    <wsdl:part name="parameters" element="tns:LogOfferClick" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferClickSoapOut">
+    <wsdl:part name="parameters" element="tns:LogOfferClickResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferClickWithRepSoapIn">
+    <wsdl:part name="parameters" element="tns:LogOfferClickWithRep" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferClickWithRepSoapOut">
+    <wsdl:part name="parameters" element="tns:LogOfferClickWithRepResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferDeclineWithRepSoapIn">
+    <wsdl:part name="parameters" element="tns:LogOfferDeclineWithRep" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferDeclineWithRepSoapOut">
+    <wsdl:part name="parameters" element="tns:LogOfferDeclineWithRepResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSmartOffersHealthSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSmartOffersHealth" />
+  </wsdl:message>
+  <wsdl:message name="GetSmartOffersHealthSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSmartOffersHealthResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersHttpGetIn">
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersWithPlidHttpGetIn">
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="privateLabelId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersWithPlidHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersListWithPlidHttpGetIn">
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="privateLabelId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersListWithPlidHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOffersWithPlidHttpGetIn">
+    <wsdl:part name="privateLabelId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOffersWithPlidHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferImpressionWithRepHttpGetIn">
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="fbiOfferID_list" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="impressionDate" type="s:string" />
+    <wsdl:part name="visitGuid" type="s:string" />
+    <wsdl:part name="pageCount" type="s:string" />
+    <wsdl:part name="impressionType" type="s:string" />
+    <wsdl:part name="repVersion" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferImpressionWithRepHttpGetOut" />
+  <wsdl:message name="LogOfferImpressionHttpGetIn">
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="fbiOfferID_list" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="impressionDate" type="s:string" />
+    <wsdl:part name="visitGuid" type="s:string" />
+    <wsdl:part name="pageCount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferImpressionHttpGetOut" />
+  <wsdl:message name="LogOfferClickHttpGetIn">
+    <wsdl:part name="fbiOfferID" type="s:string" />
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="clickDate" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="visitGuid" type="s:string" />
+    <wsdl:part name="pageCount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferClickHttpGetOut" />
+  <wsdl:message name="LogOfferClickWithRepHttpGetIn">
+    <wsdl:part name="fbiOfferID" type="s:string" />
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="clickDate" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="visitGuid" type="s:string" />
+    <wsdl:part name="pageCount" type="s:string" />
+    <wsdl:part name="repVersion" type="s:string" />
+    <wsdl:part name="ucid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferClickWithRepHttpGetOut" />
+  <wsdl:message name="LogOfferDeclineWithRepHttpGetIn">
+    <wsdl:part name="fbiOfferID" type="s:string" />
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="clickDate" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="visitGuid" type="s:string" />
+    <wsdl:part name="pageCount" type="s:string" />
+    <wsdl:part name="repVersion" type="s:string" />
+    <wsdl:part name="ucid" type="s:string" />
+    <wsdl:part name="disposition" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferDeclineWithRepHttpGetOut" />
+  <wsdl:message name="GetSmartOffersHealthHttpGetIn" />
+  <wsdl:message name="GetSmartOffersHealthHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersHttpPostIn">
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersWithPlidHttpPostIn">
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="privateLabelId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersWithPlidHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersListWithPlidHttpPostIn">
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="privateLabelId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOffersListWithPlidHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOffersWithPlidHttpPostIn">
+    <wsdl:part name="privateLabelId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOffersWithPlidHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferImpressionWithRepHttpPostIn">
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="fbiOfferID_list" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="impressionDate" type="s:string" />
+    <wsdl:part name="visitGuid" type="s:string" />
+    <wsdl:part name="pageCount" type="s:string" />
+    <wsdl:part name="impressionType" type="s:string" />
+    <wsdl:part name="repVersion" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferImpressionWithRepHttpPostOut" />
+  <wsdl:message name="LogOfferImpressionHttpPostIn">
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="fbiOfferID_list" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="impressionDate" type="s:string" />
+    <wsdl:part name="visitGuid" type="s:string" />
+    <wsdl:part name="pageCount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferImpressionHttpPostOut" />
+  <wsdl:message name="LogOfferClickHttpPostIn">
+    <wsdl:part name="fbiOfferID" type="s:string" />
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="clickDate" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="visitGuid" type="s:string" />
+    <wsdl:part name="pageCount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferClickHttpPostOut" />
+  <wsdl:message name="LogOfferClickWithRepHttpPostIn">
+    <wsdl:part name="fbiOfferID" type="s:string" />
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="clickDate" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="visitGuid" type="s:string" />
+    <wsdl:part name="pageCount" type="s:string" />
+    <wsdl:part name="repVersion" type="s:string" />
+    <wsdl:part name="ucid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferClickWithRepHttpPostOut" />
+  <wsdl:message name="LogOfferDeclineWithRepHttpPostIn">
+    <wsdl:part name="fbiOfferID" type="s:string" />
+    <wsdl:part name="shopper_id" type="s:string" />
+    <wsdl:part name="clickDate" type="s:string" />
+    <wsdl:part name="application_id" type="s:string" />
+    <wsdl:part name="visitGuid" type="s:string" />
+    <wsdl:part name="pageCount" type="s:string" />
+    <wsdl:part name="repVersion" type="s:string" />
+    <wsdl:part name="ucid" type="s:string" />
+    <wsdl:part name="disposition" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogOfferDeclineWithRepHttpPostOut" />
+  <wsdl:message name="GetSmartOffersHealthHttpPostIn" />
+  <wsdl:message name="GetSmartOffersHealthHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:portType name="SmartOffersSoap">
+    <wsdl:operation name="GetOffers">
+      <wsdl:input message="tns:GetOffersSoapIn" />
+      <wsdl:output message="tns:GetOffersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersWithPlid">
+      <wsdl:input message="tns:GetOffersWithPlidSoapIn" />
+      <wsdl:output message="tns:GetOffersWithPlidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersListWithPlid">
+      <wsdl:input message="tns:GetOffersListWithPlidSoapIn" />
+      <wsdl:output message="tns:GetOffersListWithPlidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOffersWithPlid">
+      <wsdl:input message="tns:GetDailyOffersWithPlidSoapIn" />
+      <wsdl:output message="tns:GetDailyOffersWithPlidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpressionWithRep">
+      <wsdl:input message="tns:LogOfferImpressionWithRepSoapIn" />
+      <wsdl:output message="tns:LogOfferImpressionWithRepSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpression">
+      <wsdl:input message="tns:LogOfferImpressionSoapIn" />
+      <wsdl:output message="tns:LogOfferImpressionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClick">
+      <wsdl:input message="tns:LogOfferClickSoapIn" />
+      <wsdl:output message="tns:LogOfferClickSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClickWithRep">
+      <wsdl:input message="tns:LogOfferClickWithRepSoapIn" />
+      <wsdl:output message="tns:LogOfferClickWithRepSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferDeclineWithRep">
+      <wsdl:input message="tns:LogOfferDeclineWithRepSoapIn" />
+      <wsdl:output message="tns:LogOfferDeclineWithRepSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSmartOffersHealth">
+      <wsdl:input message="tns:GetSmartOffersHealthSoapIn" />
+      <wsdl:output message="tns:GetSmartOffersHealthSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SmartOffersHttpGet">
+    <wsdl:operation name="GetOffers">
+      <wsdl:input message="tns:GetOffersHttpGetIn" />
+      <wsdl:output message="tns:GetOffersHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersWithPlid">
+      <wsdl:input message="tns:GetOffersWithPlidHttpGetIn" />
+      <wsdl:output message="tns:GetOffersWithPlidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersListWithPlid">
+      <wsdl:input message="tns:GetOffersListWithPlidHttpGetIn" />
+      <wsdl:output message="tns:GetOffersListWithPlidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOffersWithPlid">
+      <wsdl:input message="tns:GetDailyOffersWithPlidHttpGetIn" />
+      <wsdl:output message="tns:GetDailyOffersWithPlidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpressionWithRep">
+      <wsdl:input message="tns:LogOfferImpressionWithRepHttpGetIn" />
+      <wsdl:output message="tns:LogOfferImpressionWithRepHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpression">
+      <wsdl:input message="tns:LogOfferImpressionHttpGetIn" />
+      <wsdl:output message="tns:LogOfferImpressionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClick">
+      <wsdl:input message="tns:LogOfferClickHttpGetIn" />
+      <wsdl:output message="tns:LogOfferClickHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClickWithRep">
+      <wsdl:input message="tns:LogOfferClickWithRepHttpGetIn" />
+      <wsdl:output message="tns:LogOfferClickWithRepHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferDeclineWithRep">
+      <wsdl:input message="tns:LogOfferDeclineWithRepHttpGetIn" />
+      <wsdl:output message="tns:LogOfferDeclineWithRepHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSmartOffersHealth">
+      <wsdl:input message="tns:GetSmartOffersHealthHttpGetIn" />
+      <wsdl:output message="tns:GetSmartOffersHealthHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SmartOffersHttpPost">
+    <wsdl:operation name="GetOffers">
+      <wsdl:input message="tns:GetOffersHttpPostIn" />
+      <wsdl:output message="tns:GetOffersHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersWithPlid">
+      <wsdl:input message="tns:GetOffersWithPlidHttpPostIn" />
+      <wsdl:output message="tns:GetOffersWithPlidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersListWithPlid">
+      <wsdl:input message="tns:GetOffersListWithPlidHttpPostIn" />
+      <wsdl:output message="tns:GetOffersListWithPlidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOffersWithPlid">
+      <wsdl:input message="tns:GetDailyOffersWithPlidHttpPostIn" />
+      <wsdl:output message="tns:GetDailyOffersWithPlidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpressionWithRep">
+      <wsdl:input message="tns:LogOfferImpressionWithRepHttpPostIn" />
+      <wsdl:output message="tns:LogOfferImpressionWithRepHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpression">
+      <wsdl:input message="tns:LogOfferImpressionHttpPostIn" />
+      <wsdl:output message="tns:LogOfferImpressionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClick">
+      <wsdl:input message="tns:LogOfferClickHttpPostIn" />
+      <wsdl:output message="tns:LogOfferClickHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClickWithRep">
+      <wsdl:input message="tns:LogOfferClickWithRepHttpPostIn" />
+      <wsdl:output message="tns:LogOfferClickWithRepHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferDeclineWithRep">
+      <wsdl:input message="tns:LogOfferDeclineWithRepHttpPostIn" />
+      <wsdl:output message="tns:LogOfferDeclineWithRepHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSmartOffersHealth">
+      <wsdl:input message="tns:GetSmartOffersHealthHttpPostIn" />
+      <wsdl:output message="tns:GetSmartOffersHealthHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SmartOffersSoap" type="tns:SmartOffersSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOffers">
+      <soap:operation soapAction="https://fastball.godaddy.com/GetOffers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersWithPlid">
+      <soap:operation soapAction="https://fastball.godaddy.com/GetOffersWithPlid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersListWithPlid">
+      <soap:operation soapAction="https://fastball.godaddy.com/GetOffersListWithPlid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOffersWithPlid">
+      <soap:operation soapAction="https://fastball.godaddy.com/GetDailyOffersWithPlid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpressionWithRep">
+      <soap:operation soapAction="https://fastball.godaddy.com/LogOfferImpressionWithRep" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpression">
+      <soap:operation soapAction="https://fastball.godaddy.com/LogOfferImpression" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClick">
+      <soap:operation soapAction="https://fastball.godaddy.com/LogOfferClick" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClickWithRep">
+      <soap:operation soapAction="https://fastball.godaddy.com/LogOfferClickWithRep" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferDeclineWithRep">
+      <soap:operation soapAction="https://fastball.godaddy.com/LogOfferDeclineWithRep" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSmartOffersHealth">
+      <soap:operation soapAction="https://fastball.godaddy.com/GetSmartOffersHealth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SmartOffersSoap12" type="tns:SmartOffersSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOffers">
+      <soap12:operation soapAction="https://fastball.godaddy.com/GetOffers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersWithPlid">
+      <soap12:operation soapAction="https://fastball.godaddy.com/GetOffersWithPlid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersListWithPlid">
+      <soap12:operation soapAction="https://fastball.godaddy.com/GetOffersListWithPlid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOffersWithPlid">
+      <soap12:operation soapAction="https://fastball.godaddy.com/GetDailyOffersWithPlid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpressionWithRep">
+      <soap12:operation soapAction="https://fastball.godaddy.com/LogOfferImpressionWithRep" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpression">
+      <soap12:operation soapAction="https://fastball.godaddy.com/LogOfferImpression" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClick">
+      <soap12:operation soapAction="https://fastball.godaddy.com/LogOfferClick" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClickWithRep">
+      <soap12:operation soapAction="https://fastball.godaddy.com/LogOfferClickWithRep" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferDeclineWithRep">
+      <soap12:operation soapAction="https://fastball.godaddy.com/LogOfferDeclineWithRep" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSmartOffersHealth">
+      <soap12:operation soapAction="https://fastball.godaddy.com/GetSmartOffersHealth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SmartOffersHttpGet" type="tns:SmartOffersHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetOffers">
+      <http:operation location="/GetOffers" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersWithPlid">
+      <http:operation location="/GetOffersWithPlid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersListWithPlid">
+      <http:operation location="/GetOffersListWithPlid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOffersWithPlid">
+      <http:operation location="/GetDailyOffersWithPlid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpressionWithRep">
+      <http:operation location="/LogOfferImpressionWithRep" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpression">
+      <http:operation location="/LogOfferImpression" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClick">
+      <http:operation location="/LogOfferClick" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClickWithRep">
+      <http:operation location="/LogOfferClickWithRep" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferDeclineWithRep">
+      <http:operation location="/LogOfferDeclineWithRep" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetSmartOffersHealth">
+      <http:operation location="/GetSmartOffersHealth" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SmartOffersHttpPost" type="tns:SmartOffersHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetOffers">
+      <http:operation location="/GetOffers" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersWithPlid">
+      <http:operation location="/GetOffersWithPlid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffersListWithPlid">
+      <http:operation location="/GetOffersListWithPlid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOffersWithPlid">
+      <http:operation location="/GetDailyOffersWithPlid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpressionWithRep">
+      <http:operation location="/LogOfferImpressionWithRep" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferImpression">
+      <http:operation location="/LogOfferImpression" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClick">
+      <http:operation location="/LogOfferClick" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferClickWithRep">
+      <http:operation location="/LogOfferClickWithRep" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LogOfferDeclineWithRep">
+      <http:operation location="/LogOfferDeclineWithRep" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetSmartOffersHealth">
+      <http:operation location="/GetSmartOffersHealth" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SmartOffers">
+    <wsdl:port name="SmartOffersSoap" binding="tns:SmartOffersSoap">
+      <soap:address location="http://devciaapp01/fbiSmartOffers/SmartOffers.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SmartOffersSoap12" binding="tns:SmartOffersSoap12">
+      <soap12:address location="http://devciaapp01/fbiSmartOffers/SmartOffers.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SmartOffersHttpGet" binding="tns:SmartOffersHttpGet">
+      <http:address location="http://devciaapp01/fbiSmartOffers/SmartOffers.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SmartOffersHttpPost" binding="tns:SmartOffersHttpPost">
+      <http:address location="http://devciaapp01/fbiSmartOffers/SmartOffers.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

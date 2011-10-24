@@ -57,6 +57,25 @@ namespace Atlantis.Framework.MyaMirageData.Interface
       return result;
     }
 
+    public List<string> GetOwnedNamespaceList()
+    {
+      List<string> ownedNamespaces = new List<string>();
+
+      foreach (string key in _mirageData.Keys)
+      {
+        int temp = 0;
+        if (!int.TryParse(key, out temp))
+        {
+          if (!key.Contains("pg|") && key != "net_total")
+          {
+            ownedNamespaces.Add(key);
+          }
+        }
+      }
+
+      return ownedNamespaces; 
+    }
+
     #region IResponseData Members
 
     public string ToXML()

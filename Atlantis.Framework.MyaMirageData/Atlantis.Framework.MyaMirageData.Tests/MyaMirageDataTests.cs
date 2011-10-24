@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.MyaMirageData.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
 
 namespace Atlantis.Framework.MyaMirageData.Tests
 {
@@ -61,7 +62,7 @@ namespace Atlantis.Framework.MyaMirageData.Tests
     [DeploymentItem("atlantis.config")]
     public void MirageDataBasic()
     {
-      MyaMirageDataRequestData request = new MyaMirageDataRequestData("832652", string.Empty, string.Empty, string.Empty, 0);
+      MyaMirageDataRequestData request = new MyaMirageDataRequestData("856907", string.Empty, string.Empty, string.Empty, 0);
       MyaMirageDataResponseData response = (MyaMirageDataResponseData)Engine.Engine.ProcessRequest(request, 386);
       Assert.IsTrue(response.IsSuccess);
     }
@@ -81,6 +82,19 @@ namespace Atlantis.Framework.MyaMirageData.Tests
       Assert.AreEqual(quantity, response.GetProductNamespaceTotal("photoalbum"));
     }
 
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void OwnedNamespaces()
+    {
+      MyaMirageDataRequestData request = new MyaMirageDataRequestData("856907", string.Empty, string.Empty, string.Empty, 0);
+      MyaMirageDataResponseData response = (MyaMirageDataResponseData)Engine.Engine.ProcessRequest(request, 386);
 
+      foreach (string namespacekey in response.GetOwnedNamespaceList())
+      {
+        Debug.WriteLine(namespacekey);
+      }
+
+      Assert.IsTrue(response.IsSuccess);
+    }
   }
 }

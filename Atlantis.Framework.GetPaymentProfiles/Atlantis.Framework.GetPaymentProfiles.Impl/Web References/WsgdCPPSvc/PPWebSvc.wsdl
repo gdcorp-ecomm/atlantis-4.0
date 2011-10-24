@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:PPWebSvcService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:PPWebSvcService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:PPWebSvcService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="UpdateProfileIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrXProfile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProfileOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetStatusIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrXPaymentXML" type="s:string" />
+    <wsdl:part name="bActive" type="s:short" />
+    <wsdl:part name="bFraudulent" type="s:short" />
+  </wsdl:message>
+  <wsdl:message name="SetStatusOut">
+    <wsdl:part name="return" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="SetAccountFraudulentIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrXPaymentXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetAccountFraudulentOut">
+    <wsdl:part name="return" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="MergeShoppersIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrXMergeXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MergeShoppersOut" />
+  <wsdl:message name="GetInfoByShopperIDIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoByShopperIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoByProfileIDIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="lProfileID" type="s:int" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoByProfileIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MatchCCProfileIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrAcctNumSuffix" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MatchCCProfileOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="plProfileID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="MatchCheckingProfileIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrAcctNumSuffix" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MatchCheckingProfileOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="plProfileID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetCCBankInfoIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="lProfileID" type="s:int" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCCBankInfoOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LookupByAccountIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrXAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LookupByAccountOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LookupByProfileIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lProfileID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="LookupByProfileOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckBINCategoryMembershipIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="lCategoryID" type="s:int" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lProfileID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="CheckBINCategoryMembershipOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBINCategoryMembershipIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lProfileID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetBINCategoryMembershipOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountStatusIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lProfileID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountStatusOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProfilesWithCartPropertiesIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProfilesWithCartPropertiesOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetExpiringProfilesIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lDaysBefore" type="s:int" />
+    <wsdl:part name="lDaysAfter" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetExpiringProfilesOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetShopperPINIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrXAcctNumSuffix" type="s:string" />
+    <wsdl:part name="bstrAcctType" type="s:string" />
+    <wsdl:part name="bstrXNewPIN" type="s:string" />
+    <wsdl:part name="bstrRequestingIP" type="s:string" />
+    <wsdl:part name="bstrRequestedBy" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetShopperPINOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="PPWebSvcServiceSoap">
+    <wsdl:operation name="UpdateProfile">
+      <wsdl:input message="s0:UpdateProfileIn" />
+      <wsdl:output message="s0:UpdateProfileOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetStatus">
+      <wsdl:input message="s0:SetStatusIn" />
+      <wsdl:output message="s0:SetStatusOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountFraudulent">
+      <wsdl:input message="s0:SetAccountFraudulentIn" />
+      <wsdl:output message="s0:SetAccountFraudulentOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MergeShoppers">
+      <wsdl:input message="s0:MergeShoppersIn" />
+      <wsdl:output message="s0:MergeShoppersOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByShopperID">
+      <wsdl:input message="s0:GetInfoByShopperIDIn" />
+      <wsdl:output message="s0:GetInfoByShopperIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByProfileID">
+      <wsdl:input message="s0:GetInfoByProfileIDIn" />
+      <wsdl:output message="s0:GetInfoByProfileIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MatchCCProfile">
+      <wsdl:input message="s0:MatchCCProfileIn" />
+      <wsdl:output message="s0:MatchCCProfileOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MatchCheckingProfile">
+      <wsdl:input message="s0:MatchCheckingProfileIn" />
+      <wsdl:output message="s0:MatchCheckingProfileOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCCBankInfo">
+      <wsdl:input message="s0:GetCCBankInfoIn" />
+      <wsdl:output message="s0:GetCCBankInfoOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupByAccount">
+      <wsdl:input message="s0:LookupByAccountIn" />
+      <wsdl:output message="s0:LookupByAccountOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupByProfile">
+      <wsdl:input message="s0:LookupByProfileIn" />
+      <wsdl:output message="s0:LookupByProfileOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckBINCategoryMembership">
+      <wsdl:input message="s0:CheckBINCategoryMembershipIn" />
+      <wsdl:output message="s0:CheckBINCategoryMembershipOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBINCategoryMembership">
+      <wsdl:input message="s0:GetBINCategoryMembershipIn" />
+      <wsdl:output message="s0:GetBINCategoryMembershipOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountStatus">
+      <wsdl:input message="s0:GetAccountStatusIn" />
+      <wsdl:output message="s0:GetAccountStatusOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProfilesWithCartProperties">
+      <wsdl:input message="s0:GetProfilesWithCartPropertiesIn" />
+      <wsdl:output message="s0:GetProfilesWithCartPropertiesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExpiringProfiles">
+      <wsdl:input message="s0:GetExpiringProfilesIn" />
+      <wsdl:output message="s0:GetExpiringProfilesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetShopperPIN">
+      <wsdl:input message="s0:SetShopperPINIn" />
+      <wsdl:output message="s0:SetShopperPINOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PPWebSvcServiceSoap" type="s0:PPWebSvcServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="UpdateProfile">
+      <soap:operation soapAction="#UpdateProfile" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetStatus">
+      <soap:operation soapAction="#SetStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountFraudulent">
+      <soap:operation soapAction="#SetAccountFraudulent" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MergeShoppers">
+      <soap:operation soapAction="#MergeShoppers" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByShopperID">
+      <soap:operation soapAction="#GetInfoByShopperID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByProfileID">
+      <soap:operation soapAction="#GetInfoByProfileID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchCCProfile">
+      <soap:operation soapAction="#MatchCCProfile" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchCheckingProfile">
+      <soap:operation soapAction="#MatchCheckingProfile" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCCBankInfo">
+      <soap:operation soapAction="#GetCCBankInfo" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupByAccount">
+      <soap:operation soapAction="#LookupByAccount" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupByProfile">
+      <soap:operation soapAction="#LookupByProfile" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckBINCategoryMembership">
+      <soap:operation soapAction="#CheckBINCategoryMembership" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBINCategoryMembership">
+      <soap:operation soapAction="#GetBINCategoryMembership" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountStatus">
+      <soap:operation soapAction="#GetAccountStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfilesWithCartProperties">
+      <soap:operation soapAction="#GetProfilesWithCartProperties" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExpiringProfiles">
+      <soap:operation soapAction="#GetExpiringProfiles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetShopperPIN">
+      <soap:operation soapAction="#SetShopperPIN" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PPWebSvcService">
+    <wsdl:port name="PPWebSvcServiceSoap" binding="s0:PPWebSvcServiceSoap">
+      <soap:address location="http://devgdcomm02:80/wscgdProfiles/PPWebSvc.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

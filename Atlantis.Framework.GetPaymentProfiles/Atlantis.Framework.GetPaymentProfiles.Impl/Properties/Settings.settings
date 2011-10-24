@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.GetPaymentProfiles.Impl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Atlantis_Framework_GetPaymentProfiles_Impl_WsgdCPPSvc_PPWebSvcService" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://devgdcomm02:80/wscgdProfiles/PPWebSvc.dll?Handler=Default</Value>
+    </Setting>
+    <Setting Name="Atlantis_Framework_GetShopperProfiles_Impl_WsgdCPPSvc_PPWebSvcService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://devgdcomm02:80/wscgdProfiles/PPWebSvc.dll?Handler=Default</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

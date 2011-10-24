@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="#Bonsai" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="#Bonsai" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="#Bonsai">
+      <s:element name="GetAccountXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResourceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ResourceType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TreeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrivateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountXml">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeAccountRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResourceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ResourceType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountChangeXml" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RenewalPFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RenewalPeriods" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemRequestXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeAccountRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangeAccountRequestResult" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRenewalOptions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResourceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ResourceType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrivateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRenewalOptionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRenewalOptionsResult" type="tns:RenewalResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RenewalResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RenewalOptions" type="tns:ArrayOfRenewalOption" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRenewalOption">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RenewalOption" type="tns:RenewalOption" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RenewalOption">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UnifiedProductID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinRenewalPeriods" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxRenewalPeriods" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RenewalLength" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RenewalType" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTransitionsAndRank">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResourceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ResourceType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UnifiedProductID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTransitionsAndRankResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTransitionsAndRankResult" type="tns:TransitionResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TransitionResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Transitions" type="tns:ArrayOfRankTransition" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRankTransition">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RankTransition" nillable="true" type="tns:RankTransition" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RankTransition">
+        <s:attribute name="NodeName" type="s:string" />
+        <s:attribute name="NodeRank" type="s:int" use="required" />
+        <s:attribute name="UnifiedProductID" type="s:int" use="required" />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAccountXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountXml" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeAccountRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeAccountRequest" />
+  </wsdl:message>
+  <wsdl:message name="ChangeAccountRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeAccountRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRenewalOptionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRenewalOptions" />
+  </wsdl:message>
+  <wsdl:message name="GetRenewalOptionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRenewalOptionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTransitionsAndRankSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTransitionsAndRank" />
+  </wsdl:message>
+  <wsdl:message name="GetTransitionsAndRankSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTransitionsAndRankResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="GetAccountXml">
+      <wsdl:input message="tns:GetAccountXmlSoapIn" />
+      <wsdl:output message="tns:GetAccountXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeAccountRequest">
+      <wsdl:input message="tns:ChangeAccountRequestSoapIn" />
+      <wsdl:output message="tns:ChangeAccountRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRenewalOptions">
+      <wsdl:input message="tns:GetRenewalOptionsSoapIn" />
+      <wsdl:output message="tns:GetRenewalOptionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransitionsAndRank">
+      <wsdl:input message="tns:GetTransitionsAndRankSoapIn" />
+      <wsdl:output message="tns:GetTransitionsAndRankSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAccountXml">
+      <soap:operation soapAction="#Bonsai/GetAccountXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeAccountRequest">
+      <soap:operation soapAction="#Bonsai/ChangeAccountRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRenewalOptions">
+      <soap:operation soapAction="#Bonsai/GetRenewalOptions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransitionsAndRank">
+      <soap:operation soapAction="#Bonsai/GetTransitionsAndRank" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAccountXml">
+      <soap12:operation soapAction="#Bonsai/GetAccountXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeAccountRequest">
+      <soap12:operation soapAction="#Bonsai/ChangeAccountRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRenewalOptions">
+      <soap12:operation soapAction="#Bonsai/GetRenewalOptions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransitionsAndRank">
+      <soap12:operation soapAction="#Bonsai/GetTransitionsAndRank" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://devgdbonsai/bonsai/bonsaimanager/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://devgdbonsai/bonsai/bonsaimanager/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

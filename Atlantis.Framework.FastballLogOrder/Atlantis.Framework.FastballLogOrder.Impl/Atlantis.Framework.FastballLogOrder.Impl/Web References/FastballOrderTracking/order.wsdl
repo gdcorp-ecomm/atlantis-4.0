@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="LogOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="visitGuid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="orderId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="sequenceId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogOrderResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogOrderWithType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="visitGuid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="orderId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="sequenceId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="basketType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogOrderWithTypeResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LogOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:LogOrder" />
+  </wsdl:message>
+  <wsdl:message name="LogOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:LogOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogOrderWithTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:LogOrderWithType" />
+  </wsdl:message>
+  <wsdl:message name="LogOrderWithTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:LogOrderWithTypeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="OrderSoap">
+    <wsdl:operation name="LogOrder">
+      <wsdl:input message="tns:LogOrderSoapIn" />
+      <wsdl:output message="tns:LogOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOrderWithType">
+      <wsdl:input message="tns:LogOrderWithTypeSoapIn" />
+      <wsdl:output message="tns:LogOrderWithTypeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="OrderHttpGet" />
+  <wsdl:portType name="OrderHttpPost" />
+  <wsdl:binding name="OrderSoap" type="tns:OrderSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LogOrder">
+      <soap:operation soapAction="http://tempuri.org/LogOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOrderWithType">
+      <soap:operation soapAction="http://tempuri.org/LogOrderWithType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OrderSoap12" type="tns:OrderSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LogOrder">
+      <soap12:operation soapAction="http://tempuri.org/LogOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOrderWithType">
+      <soap12:operation soapAction="http://tempuri.org/LogOrderWithType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OrderHttpGet" type="tns:OrderHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="OrderHttpPost" type="tns:OrderHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="Order">
+    <wsdl:port name="OrderSoap" binding="tns:OrderSoap">
+      <soap:address location="http://devciaapp01/fbiwebsitevisittrackingws/order.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OrderSoap12" binding="tns:OrderSoap12">
+      <soap12:address location="http://devciaapp01/fbiwebsitevisittrackingws/order.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OrderHttpGet" binding="tns:OrderHttpGet">
+      <http:address location="http://devciaapp01/fbiwebsitevisittrackingws/order.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OrderHttpPost" binding="tns:OrderHttpPost">
+      <http:address location="http://devciaapp01/fbiwebsitevisittrackingws/order.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

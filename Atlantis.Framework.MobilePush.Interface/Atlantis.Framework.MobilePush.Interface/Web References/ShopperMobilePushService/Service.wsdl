@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="PushNotificationGetByShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PushNotificationGetByShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PushNotificationGetByShopperResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PushNotificationGetByRegistrationID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRegistrationID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PushNotificationGetByRegistrationIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PushNotificationGetByRegistrationIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PushNotificationInsert">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRegistrationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperMobileAppID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDeviceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PushNotificationInsertResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PushNotificationInsertResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PushNotificationUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iShopperMobilePushNotifID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRegistrationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperMobileAppID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDeviceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PushNotificationUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PushNotificationUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PushNotificationDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iShopperMobilePushNotifID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PushNotificationDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PushNotificationDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MobileAppGetAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="MobileAppGetAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MobileAppGetAllResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="PushNotificationGetByShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:PushNotificationGetByShopper" />
+  </wsdl:message>
+  <wsdl:message name="PushNotificationGetByShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:PushNotificationGetByShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="PushNotificationGetByRegistrationIDSoapIn">
+    <wsdl:part name="parameters" element="tns:PushNotificationGetByRegistrationID" />
+  </wsdl:message>
+  <wsdl:message name="PushNotificationGetByRegistrationIDSoapOut">
+    <wsdl:part name="parameters" element="tns:PushNotificationGetByRegistrationIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="PushNotificationInsertSoapIn">
+    <wsdl:part name="parameters" element="tns:PushNotificationInsert" />
+  </wsdl:message>
+  <wsdl:message name="PushNotificationInsertSoapOut">
+    <wsdl:part name="parameters" element="tns:PushNotificationInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="PushNotificationUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:PushNotificationUpdate" />
+  </wsdl:message>
+  <wsdl:message name="PushNotificationUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:PushNotificationUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="PushNotificationDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:PushNotificationDelete" />
+  </wsdl:message>
+  <wsdl:message name="PushNotificationDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:PushNotificationDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="MobileAppGetAllSoapIn">
+    <wsdl:part name="parameters" element="tns:MobileAppGetAll" />
+  </wsdl:message>
+  <wsdl:message name="MobileAppGetAllSoapOut">
+    <wsdl:part name="parameters" element="tns:MobileAppGetAllResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="PushNotificationGetByShopper">
+      <wsdl:input message="tns:PushNotificationGetByShopperSoapIn" />
+      <wsdl:output message="tns:PushNotificationGetByShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationGetByRegistrationID">
+      <wsdl:input message="tns:PushNotificationGetByRegistrationIDSoapIn" />
+      <wsdl:output message="tns:PushNotificationGetByRegistrationIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationInsert">
+      <wsdl:input message="tns:PushNotificationInsertSoapIn" />
+      <wsdl:output message="tns:PushNotificationInsertSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationUpdate">
+      <wsdl:input message="tns:PushNotificationUpdateSoapIn" />
+      <wsdl:output message="tns:PushNotificationUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationDelete">
+      <wsdl:input message="tns:PushNotificationDeleteSoapIn" />
+      <wsdl:output message="tns:PushNotificationDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MobileAppGetAll">
+      <wsdl:input message="tns:MobileAppGetAllSoapIn" />
+      <wsdl:output message="tns:MobileAppGetAllSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PushNotificationGetByShopper">
+      <soap:operation soapAction="http://tempuri.org/PushNotificationGetByShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationGetByRegistrationID">
+      <soap:operation soapAction="http://tempuri.org/PushNotificationGetByRegistrationID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationInsert">
+      <soap:operation soapAction="http://tempuri.org/PushNotificationInsert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationUpdate">
+      <soap:operation soapAction="http://tempuri.org/PushNotificationUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationDelete">
+      <soap:operation soapAction="http://tempuri.org/PushNotificationDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MobileAppGetAll">
+      <soap:operation soapAction="http://tempuri.org/MobileAppGetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PushNotificationGetByShopper">
+      <soap12:operation soapAction="http://tempuri.org/PushNotificationGetByShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationGetByRegistrationID">
+      <soap12:operation soapAction="http://tempuri.org/PushNotificationGetByRegistrationID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationInsert">
+      <soap12:operation soapAction="http://tempuri.org/PushNotificationInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationUpdate">
+      <soap12:operation soapAction="http://tempuri.org/PushNotificationUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushNotificationDelete">
+      <soap12:operation soapAction="http://tempuri.org/PushNotificationDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MobileAppGetAll">
+      <soap12:operation soapAction="http://tempuri.org/MobileAppGetAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://shopper.mobilepush.debug.glbt1.gdg/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://shopper.mobilepush.debug.glbt1.gdg/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

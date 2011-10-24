@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="DomainsBot.FirstImpact" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="Domainsbot.FirstImpact" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="DomainsBot.FirstImpact" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">DomainsBot FirstImpact v3.0 XML WebService</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="DomainsBot.FirstImpact">
+      <s:import namespace="Domainsbot.FirstImpact" />
+      <s:element name="SearchDomains">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searches" type="tns:ArrayOfAdvancedSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="orderBy" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageIndex" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAdvancedSearch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AdvancedSearch" nillable="true" type="s1:AdvancedSearch" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SearchDomainsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchDomainsResult" type="s1:AdvancedResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchDomainsGrid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searches" type="tns:ArrayOfAdvancedSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="orderBy" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageIndex" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchDomainsGridResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchDomainsGridResult" type="s1:GridResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchAvailableDomainsGrid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tlds" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="limit" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="addDashes" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="addRelated" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="addCompound" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="addVariations" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="removeKeys" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="filters" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="supportedLanguages" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGridDomain">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GridDomain" nillable="true" type="s1:GridDomain" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SearchAvailableDomainsGridResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchAvailableDomainsGridResult" type="tns:ArrayOfGridDomain" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchAvailableDomains">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tlds" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="limit" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="addDashes" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="addRelated" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="addCompound" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="addVariations" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="removeKeys" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="filters" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="supportedLanguages" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDomain">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Domain" nillable="true" type="s1:Domain" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SearchAvailableDomainsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchAvailableDomainsResult" type="tns:ArrayOfDomain" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchDatabaseDomains">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tlds" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="limit" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="removeKeys" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="filters" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="orderBy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="supportedLanguages" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchDatabaseDomainsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchDatabaseDomainsResult" type="tns:ArrayOfDomain" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchAvailableDomainsWithTargets">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tlds" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="limit" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="removeKeys" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="filters" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="targets" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="supportedLanguages" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchAvailableDomainsWithTargetsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchAvailableDomainsWithTargetsResult" type="tns:ArrayOfDomain" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfGridDomain" nillable="true" type="tns:ArrayOfGridDomain" />
+      <s:element name="ArrayOfDomain" nillable="true" type="tns:ArrayOfDomain" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="Domainsbot.FirstImpact">
+      <s:complexType name="AdvancedSearch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Fields" type="s1:ArrayOfField" />
+          <s:element minOccurs="0" maxOccurs="1" name="Rules" type="s1:ArrayOfRule" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tlds" type="s1:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="Databases" type="s1:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="Filters" type="s1:ArrayOfArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="SupportedLanguages" type="s1:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="Limit" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AllowIDN" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExcludeKeys" type="s1:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomTldRates" type="s1:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShowDebugInfo" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserFeatureTargets" type="s1:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Field" nillable="true" type="s1:Field" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Field">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AddCompound" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddDashes" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddTypos" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddRelated" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddVariations" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSplittable" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RemoveKeys" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="SpinSynonyms" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Prefixes" type="s1:ArrayOfRatedKey" />
+          <s:element minOccurs="0" maxOccurs="1" name="Suffixes" type="s1:ArrayOfRatedKey" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserSynonyms" type="s1:ArrayOfArrayOfRatedKey" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" />
+          <s:element minOccurs="0" maxOccurs="1" name="SupportedLanguages" type="s1:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnchorLeft" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnchorRight" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Keys" type="s1:ArrayOfArrayOfRatedKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRatedKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RatedKey" nillable="true" type="s1:RatedKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RatedKey">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:TaggedKey">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Rate" type="s:double" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TaggedKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfArrayOfRatedKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfRatedKey" nillable="true" type="s1:ArrayOfRatedKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRule">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Rule" nillable="true" type="s1:Rule" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Rule">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FieldKeys" type="s1:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="Rate" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddDashes" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddRelated" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddVariations" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnchorLeft" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnchorRight" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfString" nillable="true" type="s1:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AdvancedResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Searches" type="s1:ArrayOfAdvancedSearch" />
+          <s:element minOccurs="0" maxOccurs="1" name="Domains" type="s1:ArrayOfDomain" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalResults" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageIndex" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAdvancedSearch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AdvancedSearch" nillable="true" type="s1:AdvancedSearch" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDomain">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Domain" nillable="true" type="s1:Domain" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Domain">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Name">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Extension" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DomainName" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Name">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="NameWithoutExtension" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Keys" type="s1:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="s1:ArrayOfArrayOfDomainData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfArrayOfDomainData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfDomainData" nillable="true" type="s1:ArrayOfDomainData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDomainData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DomainData" nillable="true" type="s1:DomainData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DomainData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GridDomain">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Name">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Extensions" type="s1:ArrayOfGridExtension" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfGridExtension">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GridExtension" nillable="true" type="s1:GridExtension" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GridExtension">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s1:DomainStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="s1:ArrayOfArrayOfDomainData" />
+          <s:element minOccurs="0" maxOccurs="1" name="Extension" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DomainStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Available" />
+          <s:enumeration value="Registered" />
+          <s:enumeration value="Database" />
+          <s:enumeration value="Unknown" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="GridResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Searches" type="s1:ArrayOfAdvancedSearch" />
+          <s:element minOccurs="0" maxOccurs="1" name="Domains" type="s1:ArrayOfGridDomain" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalResults" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageIndex" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGridDomain">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GridDomain" nillable="true" type="s1:GridDomain" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SearchDomainsSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchDomains" />
+  </wsdl:message>
+  <wsdl:message name="SearchDomainsSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchDomainsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchDomainsGridSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchDomainsGrid" />
+  </wsdl:message>
+  <wsdl:message name="SearchDomainsGridSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchDomainsGridResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsGridSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchAvailableDomainsGrid" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsGridSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchAvailableDomainsGridResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchAvailableDomains" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchAvailableDomainsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchDatabaseDomainsSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchDatabaseDomains" />
+  </wsdl:message>
+  <wsdl:message name="SearchDatabaseDomainsSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchDatabaseDomainsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsWithTargetsSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchAvailableDomainsWithTargets" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsWithTargetsSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchAvailableDomainsWithTargetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsGridHttpGetIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="tlds" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+    <wsdl:part name="addDashes" type="s:string" />
+    <wsdl:part name="addRelated" type="s:string" />
+    <wsdl:part name="addCompound" type="s:string" />
+    <wsdl:part name="addVariations" type="s:string" />
+    <wsdl:part name="removeKeys" type="s:string" />
+    <wsdl:part name="filters" type="s:string" />
+    <wsdl:part name="supportedLanguages" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsGridHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGridDomain" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsHttpGetIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="tlds" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+    <wsdl:part name="addDashes" type="s:string" />
+    <wsdl:part name="addRelated" type="s:string" />
+    <wsdl:part name="addCompound" type="s:string" />
+    <wsdl:part name="addVariations" type="s:string" />
+    <wsdl:part name="removeKeys" type="s:string" />
+    <wsdl:part name="filters" type="s:string" />
+    <wsdl:part name="supportedLanguages" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDomain" />
+  </wsdl:message>
+  <wsdl:message name="SearchDatabaseDomainsHttpGetIn">
+    <wsdl:part name="database" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="tlds" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+    <wsdl:part name="removeKeys" type="s:string" />
+    <wsdl:part name="filters" type="s:string" />
+    <wsdl:part name="orderBy" type="s:string" />
+    <wsdl:part name="supportedLanguages" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchDatabaseDomainsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDomain" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsWithTargetsHttpGetIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="tlds" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+    <wsdl:part name="removeKeys" type="s:string" />
+    <wsdl:part name="filters" type="s:string" />
+    <wsdl:part name="targets" type="s:string" />
+    <wsdl:part name="supportedLanguages" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsWithTargetsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDomain" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsGridHttpPostIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="tlds" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+    <wsdl:part name="addDashes" type="s:string" />
+    <wsdl:part name="addRelated" type="s:string" />
+    <wsdl:part name="addCompound" type="s:string" />
+    <wsdl:part name="addVariations" type="s:string" />
+    <wsdl:part name="removeKeys" type="s:string" />
+    <wsdl:part name="filters" type="s:string" />
+    <wsdl:part name="supportedLanguages" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsGridHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGridDomain" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsHttpPostIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="tlds" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+    <wsdl:part name="addDashes" type="s:string" />
+    <wsdl:part name="addRelated" type="s:string" />
+    <wsdl:part name="addCompound" type="s:string" />
+    <wsdl:part name="addVariations" type="s:string" />
+    <wsdl:part name="removeKeys" type="s:string" />
+    <wsdl:part name="filters" type="s:string" />
+    <wsdl:part name="supportedLanguages" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDomain" />
+  </wsdl:message>
+  <wsdl:message name="SearchDatabaseDomainsHttpPostIn">
+    <wsdl:part name="database" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="tlds" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+    <wsdl:part name="removeKeys" type="s:string" />
+    <wsdl:part name="filters" type="s:string" />
+    <wsdl:part name="orderBy" type="s:string" />
+    <wsdl:part name="supportedLanguages" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchDatabaseDomainsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDomain" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsWithTargetsHttpPostIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="tlds" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+    <wsdl:part name="removeKeys" type="s:string" />
+    <wsdl:part name="filters" type="s:string" />
+    <wsdl:part name="targets" type="s:string" />
+    <wsdl:part name="supportedLanguages" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchAvailableDomainsWithTargetsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDomain" />
+  </wsdl:message>
+  <wsdl:portType name="FirstImpact3Soap">
+    <wsdl:operation name="SearchDomains">
+      <wsdl:input message="tns:SearchDomainsSoapIn" />
+      <wsdl:output message="tns:SearchDomainsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchDomainsGrid">
+      <wsdl:input message="tns:SearchDomainsGridSoapIn" />
+      <wsdl:output message="tns:SearchDomainsGridSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomainsGrid">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search available domains in grid</wsdl:documentation>
+      <wsdl:input message="tns:SearchAvailableDomainsGridSoapIn" />
+      <wsdl:output message="tns:SearchAvailableDomainsGridSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search available domains</wsdl:documentation>
+      <wsdl:input message="tns:SearchAvailableDomainsSoapIn" />
+      <wsdl:output message="tns:SearchAvailableDomainsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchDatabaseDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search domains in database</wsdl:documentation>
+      <wsdl:input message="tns:SearchDatabaseDomainsSoapIn" />
+      <wsdl:output message="tns:SearchDatabaseDomainsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomainsWithTargets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search available domains</wsdl:documentation>
+      <wsdl:input message="tns:SearchAvailableDomainsWithTargetsSoapIn" />
+      <wsdl:output message="tns:SearchAvailableDomainsWithTargetsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FirstImpact3HttpGet">
+    <wsdl:operation name="SearchAvailableDomainsGrid">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search available domains in grid</wsdl:documentation>
+      <wsdl:input message="tns:SearchAvailableDomainsGridHttpGetIn" />
+      <wsdl:output message="tns:SearchAvailableDomainsGridHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search available domains</wsdl:documentation>
+      <wsdl:input message="tns:SearchAvailableDomainsHttpGetIn" />
+      <wsdl:output message="tns:SearchAvailableDomainsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchDatabaseDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search domains in database</wsdl:documentation>
+      <wsdl:input message="tns:SearchDatabaseDomainsHttpGetIn" />
+      <wsdl:output message="tns:SearchDatabaseDomainsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomainsWithTargets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search available domains</wsdl:documentation>
+      <wsdl:input message="tns:SearchAvailableDomainsWithTargetsHttpGetIn" />
+      <wsdl:output message="tns:SearchAvailableDomainsWithTargetsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FirstImpact3HttpPost">
+    <wsdl:operation name="SearchAvailableDomainsGrid">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search available domains in grid</wsdl:documentation>
+      <wsdl:input message="tns:SearchAvailableDomainsGridHttpPostIn" />
+      <wsdl:output message="tns:SearchAvailableDomainsGridHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search available domains</wsdl:documentation>
+      <wsdl:input message="tns:SearchAvailableDomainsHttpPostIn" />
+      <wsdl:output message="tns:SearchAvailableDomainsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchDatabaseDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search domains in database</wsdl:documentation>
+      <wsdl:input message="tns:SearchDatabaseDomainsHttpPostIn" />
+      <wsdl:output message="tns:SearchDatabaseDomainsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomainsWithTargets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search available domains</wsdl:documentation>
+      <wsdl:input message="tns:SearchAvailableDomainsWithTargetsHttpPostIn" />
+      <wsdl:output message="tns:SearchAvailableDomainsWithTargetsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FirstImpact3Soap" type="tns:FirstImpact3Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SearchDomains">
+      <soap:operation soapAction="DomainsBot.FirstImpact/SearchDomains" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchDomainsGrid">
+      <soap:operation soapAction="DomainsBot.FirstImpact/SearchDomainsGrid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomainsGrid">
+      <soap:operation soapAction="DomainsBot.FirstImpact/SearchAvailableDomainsGrid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomains">
+      <soap:operation soapAction="DomainsBot.FirstImpact/SearchAvailableDomains" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchDatabaseDomains">
+      <soap:operation soapAction="DomainsBot.FirstImpact/SearchDatabaseDomains" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomainsWithTargets">
+      <soap:operation soapAction="DomainsBot.FirstImpact/SearchAvailableDomainsWithTargets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FirstImpact3Soap12" type="tns:FirstImpact3Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SearchDomains">
+      <soap12:operation soapAction="DomainsBot.FirstImpact/SearchDomains" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchDomainsGrid">
+      <soap12:operation soapAction="DomainsBot.FirstImpact/SearchDomainsGrid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomainsGrid">
+      <soap12:operation soapAction="DomainsBot.FirstImpact/SearchAvailableDomainsGrid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomains">
+      <soap12:operation soapAction="DomainsBot.FirstImpact/SearchAvailableDomains" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchDatabaseDomains">
+      <soap12:operation soapAction="DomainsBot.FirstImpact/SearchDatabaseDomains" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomainsWithTargets">
+      <soap12:operation soapAction="DomainsBot.FirstImpact/SearchAvailableDomainsWithTargets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FirstImpact3HttpGet" type="tns:FirstImpact3HttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SearchAvailableDomainsGrid">
+      <http:operation location="/SearchAvailableDomainsGrid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomains">
+      <http:operation location="/SearchAvailableDomains" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchDatabaseDomains">
+      <http:operation location="/SearchDatabaseDomains" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomainsWithTargets">
+      <http:operation location="/SearchAvailableDomainsWithTargets" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FirstImpact3HttpPost" type="tns:FirstImpact3HttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SearchAvailableDomainsGrid">
+      <http:operation location="/SearchAvailableDomainsGrid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomains">
+      <http:operation location="/SearchAvailableDomains" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchDatabaseDomains">
+      <http:operation location="/SearchDatabaseDomains" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableDomainsWithTargets">
+      <http:operation location="/SearchAvailableDomainsWithTargets" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FirstImpact3">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">DomainsBot FirstImpact v3.0 XML WebService</wsdl:documentation>
+    <wsdl:port name="FirstImpact3Soap" binding="tns:FirstImpact3Soap">
+      <soap:address location="http://xml.domainsbot.com/xmlservices/firstimpact3.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FirstImpact3Soap12" binding="tns:FirstImpact3Soap12">
+      <soap12:address location="http://xml.domainsbot.com/xmlservices/firstimpact3.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FirstImpact3HttpGet" binding="tns:FirstImpact3HttpGet">
+      <http:address location="http://xml.domainsbot.com/xmlservices/firstimpact3.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FirstImpact3HttpPost" binding="tns:FirstImpact3HttpPost">
+      <http:address location="http://xml.domainsbot.com/xmlservices/firstimpact3.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

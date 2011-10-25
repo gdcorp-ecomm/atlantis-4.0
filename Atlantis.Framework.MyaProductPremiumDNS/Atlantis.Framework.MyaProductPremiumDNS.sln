@@ -1,0 +1,106 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C098E2B4-51AC-4264-8F50-B063A1398880}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaProductPremiumDNS.Impl", "Atlantis.Framework.MyaProductPremiumDNS.Impl\Atlantis.Framework.MyaProductPremiumDNS.Impl.csproj", "{38454E04-AC78-4F96-8FF7-E3E59F10A2BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaProductPremiumDNS.Interface", "Atlantis.Framework.MyaProductPremiumDNS.Interface\Atlantis.Framework.MyaProductPremiumDNS.Interface.csproj", "{494B6A03-3DA8-4DE8-BC64-D339CAD93F4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaProductPremiumDNS.Tests", "Atlantis.Framework.MyaProductPremiumDNS.Tests\Atlantis.Framework.MyaProductPremiumDNS.Tests.csproj", "{1793A7E1-D3F0-488C-9DE9-E88B85DB6A9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaProduct.Interface", "..\Atlantis.Framework.MyaProduct\Atlantis.Framework.MyaProduct.Interface\Atlantis.Framework.MyaProduct.Interface.csproj", "{E0BF15B6-2A3A-4EE9-8080-495678392100}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.MyaProductPremiumDNS.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.MyaProductPremiumDNS.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.MyaProductPremiumDNS.sln
+		SccProjectName3 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.MyaProduct\\Atlantis.Framework.MyaProduct.Interface\\Atlantis.Framework.MyaProduct.Interface.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.MyaProductPremiumDNS.sln
+		SccProjectName4 = ../Atlantis.Framework.MyaProduct/Atlantis.Framework.MyaProduct.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.MyaProduct\\Atlantis.Framework.MyaProduct.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.MyaProductPremiumDNS.Impl\\Atlantis.Framework.MyaProductPremiumDNS.Impl.csproj
+		SccProjectName5 = Atlantis.Framework.MyaProductPremiumDNS.Impl
+		SccLocalPath5 = Atlantis.Framework.MyaProductPremiumDNS.Impl
+		SccProjectUniqueName6 = Atlantis.Framework.MyaProductPremiumDNS.Interface\\Atlantis.Framework.MyaProductPremiumDNS.Interface.csproj
+		SccProjectName6 = Atlantis.Framework.MyaProductPremiumDNS.Interface
+		SccLocalPath6 = Atlantis.Framework.MyaProductPremiumDNS.Interface
+		SccProjectUniqueName7 = Atlantis.Framework.MyaProductPremiumDNS.Tests\\Atlantis.Framework.MyaProductPremiumDNS.Tests.csproj
+		SccProjectName7 = Atlantis.Framework.MyaProductPremiumDNS.Tests
+		SccLocalPath7 = Atlantis.Framework.MyaProductPremiumDNS.Tests
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
+		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.MyaProductPremiumDNS.sln
+		SccProjectName8 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
+		SccLocalPath8 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38454E04-AC78-4F96-8FF7-E3E59F10A2BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38454E04-AC78-4F96-8FF7-E3E59F10A2BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38454E04-AC78-4F96-8FF7-E3E59F10A2BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38454E04-AC78-4F96-8FF7-E3E59F10A2BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{494B6A03-3DA8-4DE8-BC64-D339CAD93F4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{494B6A03-3DA8-4DE8-BC64-D339CAD93F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{494B6A03-3DA8-4DE8-BC64-D339CAD93F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{494B6A03-3DA8-4DE8-BC64-D339CAD93F4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1793A7E1-D3F0-488C-9DE9-E88B85DB6A9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1793A7E1-D3F0-488C-9DE9-E88B85DB6A9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1793A7E1-D3F0-488C-9DE9-E88B85DB6A9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1793A7E1-D3F0-488C-9DE9-E88B85DB6A9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0BF15B6-2A3A-4EE9-8080-495678392100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0BF15B6-2A3A-4EE9-8080-495678392100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0BF15B6-2A3A-4EE9-8080-495678392100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0BF15B6-2A3A-4EE9-8080-495678392100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {C098E2B4-51AC-4264-8F50-B063A1398880}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {C098E2B4-51AC-4264-8F50-B063A1398880}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {C098E2B4-51AC-4264-8F50-B063A1398880}
+		{E0BF15B6-2A3A-4EE9-8080-495678392100} = {C098E2B4-51AC-4264-8F50-B063A1398880}
+		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {C098E2B4-51AC-4264-8F50-B063A1398880}
+	EndGlobalSection
+EndGlobal

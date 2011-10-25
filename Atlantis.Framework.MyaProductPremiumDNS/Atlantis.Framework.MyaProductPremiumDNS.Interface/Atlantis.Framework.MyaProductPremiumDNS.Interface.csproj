@@ -5,26 +5,21 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E0BF15B6-2A3A-4EE9-8080-495678392100}</ProjectGuid>
+    <ProjectGuid>{494B6A03-3DA8-4DE8-BC64-D339CAD93F4A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.MyaProduct.Interface</RootNamespace>
-    <AssemblyName>Atlantis.Framework.MyaProduct.Interface</AssemblyName>
+    <RootNamespace>Atlantis.Framework.MyaProductPremiumDNS.Interface</RootNamespace>
+    <AssemblyName>Atlantis.Framework.MyaProductPremiumDNS.Interface</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <PublishUrl>publish\</PublishUrl>
+    <UpgradeBackupLocation />
+    <PublishUrl>http://localhost/Atlantis.Framework.MyaProductPremiumDNS.Interface/</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
@@ -33,9 +28,13 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -72,17 +71,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\SortDirectionType.cs" />
-    <Compile Include="IMyaProductFree.cs" />
-    <Compile Include="IMyaProductPaymentProfile.cs" />
-    <Compile Include="Enums\MyaProductType.cs" />
-    <Compile Include="Paging\IPagingResult.cs" />
-    <Compile Include="MyaProductBase.cs" />
-    <Compile Include="IMyaProductAutoRenewable.cs" />
-    <Compile Include="MyaProductRenewalOption.cs" />
-    <Compile Include="Paging\IPagingInfo.cs" />
+    <Compile Include="MyaProductPremiumDNSRequestData.cs" />
+    <Compile Include="MyaProductPremiumDNSResponseData.cs" />
+    <Compile Include="PremiumDNSPagingInfo.cs" />
+    <Compile Include="PremiumDNSPagingResult.cs" />
+    <Compile Include="PremiumDNSProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Enums\RecurringPaymentType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MyaProduct\Atlantis.Framework.MyaProduct.Interface\Atlantis.Framework.MyaProduct.Interface.csproj">
+      <Project>{E0BF15B6-2A3A-4EE9-8080-495678392100}</Project>
+      <Name>Atlantis.Framework.MyaProduct.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -100,12 +104,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
-      <Project>{7F2738F8-683C-49E7-88CD-E986C70F0321}</Project>
-      <Name>Atlantis.Framework.DataCache</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

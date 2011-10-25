@@ -1,0 +1,104 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7AA4FB2E-65EB-4637-A319-6C054B0F0A8F}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.MyaRenewalBundleItems.vsmdi = Atlantis.Framework.MyaRenewalBundleItems.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaRenewalBundleItems.Impl", "Atlantis.Framework.MyaRenewalBundleItems.Impl\Atlantis.Framework.MyaRenewalBundleItems.Impl.csproj", "{E7D34CF2-9312-4995-AF56-87967A2D13AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaRenewalBundleItems.Interface", "Atlantis.Framework.MyaRenewalBundleItems.Interface\Atlantis.Framework.MyaRenewalBundleItems.Interface.csproj", "{8AC97C86-574E-44F6-8E47-91ECC2EC9119}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaRenewalBundleItems.Tests", "Atlantis.Framework.MyaRenewalBundleItems.Tests\Atlantis.Framework.MyaRenewalBundleItems.Tests.csproj", "{D318D0C4-AD53-4269-9BA8-DAEEBD4A29A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ExternalReferences", "..\Atlantis.Framework.ExternalReferences\Atlantis.Framework.ExternalReferences.csproj", "{97FDB84B-02BD-4174-9942-812663DC1B0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{ED9F987E-84E2-4420-8EB9-50A4C23ECF71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.MyaRenewalBundleItems.Impl\\Atlantis.Framework.MyaRenewalBundleItems.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.MyaRenewalBundleItems.Impl
+		SccLocalPath1 = Atlantis.Framework.MyaRenewalBundleItems.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.MyaRenewalBundleItems.Interface\\Atlantis.Framework.MyaRenewalBundleItems.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.MyaRenewalBundleItems.Interface
+		SccLocalPath2 = Atlantis.Framework.MyaRenewalBundleItems.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.MyaRenewalBundleItems.Tests\\Atlantis.Framework.MyaRenewalBundleItems.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.MyaRenewalBundleItems.Tests
+		SccLocalPath3 = Atlantis.Framework.MyaRenewalBundleItems.Tests
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.MyaRenewalBundleItems.sln
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.MyaRenewalBundleItems.sln
+		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.ExternalReferences\\Atlantis.Framework.ExternalReferences.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.MyaRenewalBundleItems.sln
+		SccProjectName6 = ../Atlantis.Framework.ExternalReferences
+		SccLocalPath6 = ..\\Atlantis.Framework.ExternalReferences
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.MyaRenewalBundleItems.sln
+		SccProjectName7 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath7 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.MyaRenewalBundleItems.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7D34CF2-9312-4995-AF56-87967A2D13AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7D34CF2-9312-4995-AF56-87967A2D13AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7D34CF2-9312-4995-AF56-87967A2D13AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7D34CF2-9312-4995-AF56-87967A2D13AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AC97C86-574E-44F6-8E47-91ECC2EC9119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AC97C86-574E-44F6-8E47-91ECC2EC9119}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AC97C86-574E-44F6-8E47-91ECC2EC9119}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AC97C86-574E-44F6-8E47-91ECC2EC9119}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D318D0C4-AD53-4269-9BA8-DAEEBD4A29A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D318D0C4-AD53-4269-9BA8-DAEEBD4A29A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D318D0C4-AD53-4269-9BA8-DAEEBD4A29A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D318D0C4-AD53-4269-9BA8-DAEEBD4A29A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {ED9F987E-84E2-4420-8EB9-50A4C23ECF71}
+		{97FDB84B-02BD-4174-9942-812663DC1B0B} = {ED9F987E-84E2-4420-8EB9-50A4C23ECF71}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {ED9F987E-84E2-4420-8EB9-50A4C23ECF71}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {ED9F987E-84E2-4420-8EB9-50A4C23ECF71}
+	EndGlobalSection
+EndGlobal

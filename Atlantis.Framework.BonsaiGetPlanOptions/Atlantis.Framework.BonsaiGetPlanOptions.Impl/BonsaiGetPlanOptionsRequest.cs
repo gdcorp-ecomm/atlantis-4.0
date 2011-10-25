@@ -51,7 +51,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Impl
                                                      planOptionsRequest.IdType,
                                                      planOptionsRequest.TreeId,
                                                      planOptionsRequest.PrivateLabelId);
-      
+      requestData.RequestTimeout = planOptionsRequest.RequestTimeout;
       var response = (GetAccountXMLResponseData)Engine.Engine.ProcessRequest(requestData, planOptionsRequest.BonsaiGetAccountXmlRequestType);
       return response;
     }

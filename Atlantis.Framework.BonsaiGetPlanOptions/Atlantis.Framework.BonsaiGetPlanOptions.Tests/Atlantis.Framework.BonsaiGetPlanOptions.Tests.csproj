@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="TestData\CashParking1.txt" />
     <Content Include="TestData\LegacyDhs1.txt" />
     <Content Include="TestData\DhsPackage1.txt" />
     <Content Include="TestData\LegacyVph1.txt">

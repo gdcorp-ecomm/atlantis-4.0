@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.BonsaiGetPlanOptions.Interface
@@ -17,6 +18,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Interface
       TreeId = treeId;
       PrivateLabelId = privateLabelId;
       BonsaiGetAccountXmlRequestType = 74;
+      RequestTimeout = TimeSpan.FromSeconds(5d);
     }
 
     public override string GetCacheMD5()

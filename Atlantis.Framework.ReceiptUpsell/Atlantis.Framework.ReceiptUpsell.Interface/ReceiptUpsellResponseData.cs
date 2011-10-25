@@ -1,8 +1,8 @@
 ﻿using System;
-using Atlantis.Framework.Interface;
+using System.IO;
 using System.Text;
 using System.Xml;
-using System.IO;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.ReceiptUpsell.Interface
 {

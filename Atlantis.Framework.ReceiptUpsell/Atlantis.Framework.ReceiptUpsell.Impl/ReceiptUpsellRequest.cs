@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Nimitz;
 using Atlantis.Framework.ReceiptUpsell.Interface;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace Atlantis.Framework.ReceiptUpsell.Impl
 {

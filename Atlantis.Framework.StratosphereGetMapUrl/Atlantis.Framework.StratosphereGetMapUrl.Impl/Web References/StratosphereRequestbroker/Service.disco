@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://requestbroker.stratosphere.dev.sdl1.gdg/RequestBroker/Service.asmx?wsdl" docRef="https://requestbroker.stratosphere.dev.sdl1.gdg/RequestBroker/Service.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://requestbroker.stratosphere.dev.sdl1.gdg/RequestBroker/Service.asmx" xmlns:q1="Stratosphere" binding="q1:ServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://requestbroker.stratosphere.dev.sdl1.gdg/RequestBroker/Service.asmx" xmlns:q2="Stratosphere" binding="q2:ServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

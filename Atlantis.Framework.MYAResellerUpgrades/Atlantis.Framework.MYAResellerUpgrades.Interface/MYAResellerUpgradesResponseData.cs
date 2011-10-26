@@ -7,21 +7,10 @@ namespace Atlantis.Framework.MYAResellerUpgrades.Interface
 {
   public class MYAResellerUpgradesResponseData : IResponseData
   {
-    private AtlantisException _exception = null;
-    private string _resultXML = string.Empty;
-    private bool _success = false;
-    private List<ResellerUpgrade> _resellerUpgrades;
+    private readonly AtlantisException _exception;
 
-    public bool IsSuccess
-    {
-      get { return _success; }
-    }
-
-    public List<ResellerUpgrade> ResellerUpgrades
-    {
-      get { return _resellerUpgrades; }
-      set { _resellerUpgrades = value; }
-    }
+    public bool IsSuccess { get; private set; }
+    public List<ResellerUpgrade> ResellerUpgrades { get; set; }
 
     public MYAResellerUpgradesResponseData(string xml)
     {
@@ -30,11 +19,11 @@ namespace Atlantis.Framework.MYAResellerUpgrades.Interface
 
     public MYAResellerUpgradesResponseData(List<ResellerUpgrade> resellerUpgrades)
     {
-      _resellerUpgrades = resellerUpgrades;
-      _success = true;
+      ResellerUpgrades = resellerUpgrades;
+      IsSuccess = true;
     }
 
-     public MYAResellerUpgradesResponseData(AtlantisException atlantisException)
+    public MYAResellerUpgradesResponseData(AtlantisException atlantisException)
     {
       _exception = atlantisException;
     }
@@ -42,9 +31,9 @@ namespace Atlantis.Framework.MYAResellerUpgrades.Interface
     public MYAResellerUpgradesResponseData(RequestData requestData, Exception exception)
     {
       _exception = new AtlantisException(requestData,
-                                   "MYAResellerUpgradesResponseData",
-                                   exception.Message,
-                                   requestData.ToXML());
+                                         "MYAResellerUpgradesResponseData",
+                                         exception.Message,
+                                         requestData.ToXML());
     }
 
 
@@ -52,9 +41,8 @@ namespace Atlantis.Framework.MYAResellerUpgrades.Interface
 
     public string ToXML()
     {
-      XDocument xdoc = new XDocument();
-      XElement productPlans = new XElement("productplans");
-      xdoc.Add(productPlans);
+      var xdoc = new XDocument();
+      var productPlans = new XElement("productplans");
 
       foreach (ResellerUpgrade ru in ResellerUpgrades)
       {
@@ -65,6 +53,8 @@ namespace Atlantis.Framework.MYAResellerUpgrades.Interface
           )
         );
       }
+      
+      xdoc.Add(productPlans);
       return xdoc.ToString();
     }
 

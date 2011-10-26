@@ -18,22 +18,19 @@ namespace Atlantis.Framework.MYAResellerUpgrades.Impl
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      MYAResellerUpgradesResponseData responseData = null;
-      List<ResellerUpgrade> resellerUpgrades = new List<ResellerUpgrade>();
+      MYAResellerUpgradesResponseData responseData;
 
       try
       {
         MYAResellerUpgradesRequestData myaResellerUpgradeRequestData = (MYAResellerUpgradesRequestData)requestData;
-        resellerUpgrades = GetUpgrades(myaResellerUpgradeRequestData, config);
+        List<ResellerUpgrade> resellerUpgrades = GetUpgrades(myaResellerUpgradeRequestData, config);
 
         responseData = new MYAResellerUpgradesResponseData(resellerUpgrades);
       }
-
       catch (AtlantisException exAtlantis)
       {
         responseData = new MYAResellerUpgradesResponseData(exAtlantis);
       }
-
       catch (Exception ex)
       {
         responseData = new MYAResellerUpgradesResponseData(requestData, ex);
@@ -42,7 +39,7 @@ namespace Atlantis.Framework.MYAResellerUpgrades.Impl
       return responseData;
     }
 
-    private List<ResellerUpgrade> GetUpgrades(MYAResellerUpgradesRequestData requestData, ConfigElement config)
+    private static List<ResellerUpgrade> GetUpgrades(MYAResellerUpgradesRequestData requestData, ConfigElement config)
     {
       List<ResellerUpgrade> resellerUpgrades = new List<ResellerUpgrade>();
       using (var cn = new SqlConnection(Nimitz.NetConnect.LookupConnectInfo(config)))
@@ -68,7 +65,7 @@ namespace Atlantis.Framework.MYAResellerUpgrades.Impl
       return resellerUpgrades;
     }
 
-    private ResellerUpgrade PopulateObjectFromDB(IDataReader dr)
+    private static ResellerUpgrade PopulateObjectFromDB(IDataReader dr)
     {
       ResellerUpgrade resellerUpgrade = new ResellerUpgrade();
 

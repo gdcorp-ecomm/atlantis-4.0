@@ -1,0 +1,106 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.StratosphereGetMap.Impl", "Atlantis.Framework.StratosphereGetMap.Impl\Atlantis.Framework.StratosphereGetMap.Impl.csproj", "{26FD1203-9C88-4991-B99E-491E5A092559}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.StratosphereGetMap.Interface", "Atlantis.Framework.StratosphereGetMap.Interface\Atlantis.Framework.StratosphereGetMap.Interface.csproj", "{FF5925F1-D78D-476D-90FC-32242E6487CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.StratosphereGetMap.Tests", "Atlantis.Framework.StratosphereGetMap.Tests\Atlantis.Framework.StratosphereGetMap.Tests.csproj", "{39064EA5-ADE8-4D4F-AB13-DA783CF93779}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7812D218-77BB-4836-9E6B-B66AF93EC5E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.StratosphereGetMapUrl.Interface", "..\Atlantis.Framework.StratosphereGetMapUrl\Atlantis.Framework.StratosphereGetMapUrl.Interface\Atlantis.Framework.StratosphereGetMapUrl.Interface.csproj", "{A0F60EE4-64EE-4229-B2B4-67BB3D9ECDFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.StratosphereGetMapUrl.Impl", "..\Atlantis.Framework.StratosphereGetMapUrl\Atlantis.Framework.StratosphereGetMapUrl.Impl\Atlantis.Framework.StratosphereGetMapUrl.Impl.csproj", "{50B0C042-5391-467E-885F-71FA912F5C21}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.StratosphereGetMap.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.StratosphereGetMap.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.StratosphereGetMap.sln
+		SccProjectName3 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
+		SccLocalPath3 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.StratosphereGetMapUrl\\Atlantis.Framework.StratosphereGetMapUrl.Interface\\Atlantis.Framework.StratosphereGetMapUrl.Interface.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.StratosphereGetMap.sln
+		SccProjectName4 = ../Atlantis.Framework.StratosphereGetMapUrl/Atlantis.Framework.StratosphereGetMapUrl.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.StratosphereGetMapUrl\\Atlantis.Framework.StratosphereGetMapUrl.Interface
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.StratosphereGetMapUrl\\Atlantis.Framework.StratosphereGetMapUrl.Impl\\Atlantis.Framework.StratosphereGetMapUrl.Impl.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.StratosphereGetMap.sln
+		SccProjectName5 = ../Atlantis.Framework.StratosphereGetMapUrl/Atlantis.Framework.StratosphereGetMapUrl.Impl
+		SccLocalPath5 = ..\\Atlantis.Framework.StratosphereGetMapUrl\\Atlantis.Framework.StratosphereGetMapUrl.Impl
+		SccProjectUniqueName6 = Atlantis.Framework.StratosphereGetMap.Impl\\Atlantis.Framework.StratosphereGetMap.Impl.csproj
+		SccProjectName6 = Atlantis.Framework.StratosphereGetMap.Impl
+		SccLocalPath6 = Atlantis.Framework.StratosphereGetMap.Impl
+		SccProjectUniqueName7 = Atlantis.Framework.StratosphereGetMap.Interface\\Atlantis.Framework.StratosphereGetMap.Interface.csproj
+		SccProjectName7 = Atlantis.Framework.StratosphereGetMap.Interface
+		SccLocalPath7 = Atlantis.Framework.StratosphereGetMap.Interface
+		SccProjectUniqueName8 = Atlantis.Framework.StratosphereGetMap.Tests\\Atlantis.Framework.StratosphereGetMap.Tests.csproj
+		SccProjectName8 = Atlantis.Framework.StratosphereGetMap.Tests
+		SccLocalPath8 = Atlantis.Framework.StratosphereGetMap.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{26FD1203-9C88-4991-B99E-491E5A092559}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26FD1203-9C88-4991-B99E-491E5A092559}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26FD1203-9C88-4991-B99E-491E5A092559}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26FD1203-9C88-4991-B99E-491E5A092559}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF5925F1-D78D-476D-90FC-32242E6487CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5925F1-D78D-476D-90FC-32242E6487CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5925F1-D78D-476D-90FC-32242E6487CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5925F1-D78D-476D-90FC-32242E6487CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39064EA5-ADE8-4D4F-AB13-DA783CF93779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39064EA5-ADE8-4D4F-AB13-DA783CF93779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39064EA5-ADE8-4D4F-AB13-DA783CF93779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39064EA5-ADE8-4D4F-AB13-DA783CF93779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0F60EE4-64EE-4229-B2B4-67BB3D9ECDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0F60EE4-64EE-4229-B2B4-67BB3D9ECDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0F60EE4-64EE-4229-B2B4-67BB3D9ECDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0F60EE4-64EE-4229-B2B4-67BB3D9ECDFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50B0C042-5391-467E-885F-71FA912F5C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50B0C042-5391-467E-885F-71FA912F5C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50B0C042-5391-467E-885F-71FA912F5C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50B0C042-5391-467E-885F-71FA912F5C21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {7812D218-77BB-4836-9E6B-B66AF93EC5E4}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {7812D218-77BB-4836-9E6B-B66AF93EC5E4}
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {7812D218-77BB-4836-9E6B-B66AF93EC5E4}
+		{A0F60EE4-64EE-4229-B2B4-67BB3D9ECDFE} = {7812D218-77BB-4836-9E6B-B66AF93EC5E4}
+		{50B0C042-5391-467E-885F-71FA912F5C21} = {7812D218-77BB-4836-9E6B-B66AF93EC5E4}
+	EndGlobalSection
+EndGlobal

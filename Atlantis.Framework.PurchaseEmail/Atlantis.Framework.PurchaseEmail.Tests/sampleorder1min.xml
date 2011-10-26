@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ORDER>
+  <ORDERDETAIL 
+    currencydisplay="USD" 
+    _oadjust_subtotal="2268" 
+    _total_total="2268" 
+    shopper_id="832652" 
+    third_party_shipping_amount="" 
+    order_id="1439138" 
+    basket_type="gdshop" 
+    order_billing="domestic" 
+    _shipping_total="0" 
+    privatelabelid="1" 
+    _oadjust_subtotal_display="2268" 
+    _tax_total="0" 
+    _handling_total="0"
+    notes="" >
+  </ORDERDETAIL>
+
+  <ITEMS>
+
+    <ITEM marketplacecommissionrate="0" refundbitmask="0" product_bulk_year="1" _iadjust_regularprice_operating="2268" _product_sale_start="1/1/2000" coupon_group_id="" gdshop_product_refundbasisid="1" _fairmarketvalue_operating="2268" dept_id="105" _product_defaultdurationvalue="1" entered_by="customer" adjusted_actualcost="444" _icann_fee="0" _product_sale_price="2268" _icann_fee_adjusted_display="0" _fairmarketvalue_usd="2268" source_code="???" cicode="9031" acct_glchartid="49999-9999-999" adjusted_price="2268" list_price="2268" _gdshop_product_domain_discountexists="0" _product_sku="5601-1" _glrevenueaccount="49999-9999-999" _isdomaindiscounteligible="1" _oadjust_discount="0" original_row_id="-1" gdshop_item_trackingcode="slp_photofiler" original_order_id="-1" pathway="8208c93f-6622-4ca2-afed-71a642cd004a" _placed_price="0" _product_taxtypebit="0" fairmarketvalue="2268" isrenewalpricelocked="0" icannfee_adjusted="0" _gdshop_orderleveldiscounttypeid="0" list_price_display="2268" estimated_revenue="0" estimated_cost="0" product_isbundle="0" _product_is_renewal_price_locked="0" _fairmarketvalue="2268" pf_id="5601" shopper_id="832652" shoprevenue="0" _iadjust_currentprice_operating="2268" _iadjust_regularprice="2268" refundliabilityamount="0" recurring_payment="annual" item_id="1" trans_method="service" gdshop_variant_price_type_id="0" processctrl="{00000000-0000-0000-0000-000000000000}" _row_id="0" row_id="0" adjusted_wholesaleprice="0" zero="0" _product_dept_id="105" originallistprice="2268" order_id="1439138" _product_list_price_display="2268" min_shipping="650" _product_prepaiddiscountlevel="0" marketplacecommission="0" list_price_usd="2268" _iadjust_currentprice_display="2268" status_id="1" createcosentry="0" _oadjust_adjustedprice_operating="2268" commissionjunctionstartdate="5/31/2009" _product_list_price_usd="2268" gdshop_product_typeid="176" period_description="Period(s)" duration="1" _oadjust_adjustedprice_display="2268" _is_base_on_sale="0" _n_unadjusted="1" shopreserve="0" date_entered="7/23/2009 1:41:18 PM" product_isbulk="0" commission_amount="0" product_list_price="2268" _tax_amount="0" _product_sale_end="1/1/2000" _product_list_price_operating="2268" periodsperduration="12" date_added="7/23/2009 1:36:17 PM" _product_basketlocked="3" _product_defaultdurationtypeid="1" product_basketlocked="3" unifiedproductid="5601" _iadjust_regularprice_usd="2268" _oadjust_adjustedprice_usd="2268" name="Photo Album Yearly" _product_unifiedproductid="5601" privatelabelid="1" _product_pf_id="5601" _distribute_eligible="2268" _product_trans_method="service" _iadjust_currentprice_usd="2268" gdshop_deferrmentconfigurationtypeid="6" _product_price_locked="0" placed_price="2268" sku="5601-1" numberofperiods="1" _gdshop_variant_price_type_id="0" quantitydescription="year(s)" _oadjust_adjustedprice="2268" _product_list_price="2268" product_hasfreedependentresource="0" _iadjust_currentprice="2268" overridepricerequired="0" _product_name="Photo Album Yearly" _icann_fee_adjusted_usd="0" _icann_fee_adjusted_operating="0" isplcommissionable="1" _icann_fee_usd="0" list_price_operating="2268" accountingcompanyid="1" _icann_fee_adjusted="0" itemtrackingcode="slp_photofiler" quantity="1" _iadjust_regularprice_display="2268">
+
+      <CANCELITEMSXML>
+
+        <CANCELITEM resourceid="372210" namespace="photoalbum" isactive="1">
+
+          <CANCELDETAIL desc1="Photo Album for New Account"/>
+
+        </CANCELITEM>
+
+      </CANCELITEMSXML>
+
+    </ITEM>
+
+  </ITEMS>
+
+  <BASKETERRORS/>
+
+  <PURCHASEERRORS/>
+
+</ORDER>

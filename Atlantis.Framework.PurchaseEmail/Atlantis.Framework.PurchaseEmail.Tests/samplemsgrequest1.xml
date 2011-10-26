@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<messageXml type="OrderConfirmation" namespace="OrderProcessing">
+  <dictionary>
+    <item name="PrivateLabelID">1</item>
+    <item name="ShopperID">832652</item>
+  </dictionary>
+  <contactpoints>
+    <contactpoint contact="ShopperContact" type="SHOPPER" />
+  </contactpoints>
+  <resources>
+    <resource type="CartOrder" id="1439138">
+      <attribute name="ORDER_ID">1439138</attribute>
+      <attribute name="ITEMS_TEXT">
+        &lt;table width='300' cellspacing='0' cellpadding='0' border='0'&gt;&lt;tr&gt;&lt;td align='left' class='bodyText'&gt;&lt;u&gt;QTY&lt;/u&gt;&lt;/td&gt;&lt;td align='center' class='bodyText'&gt;&lt;u&gt;ITEM&lt;/u&gt;&lt;/td&gt;&lt;td align='right' class='bodyText' style='padding-right:4px'&gt;&lt;u&gt;PRICE&lt;/u&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table width='300' cellspacing='2' cellpadding='2' border='0'&gt;&lt;tr&gt;&lt;td valign='top' align='left' class='bodyText' width='14px'&gt;1&lt;/td&gt;&lt;td valign='top' align='left' class='bodyText' style='padding-left:12px'&gt;Photo Album Yearly&lt;br/&gt;Length: 1 Period(s)&lt;/td&gt;&lt;td valign='top' align='right' class='bodyText'&gt;$22.68&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table cellpadding=0 cellspacing=0 border=0&gt;&lt;tr&gt;&lt;td style='line-height:4px'&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+        &lt;table width='300' cellspacing='0' cellpadding='0' border='0'&gt;&lt;tr&gt;&lt;td colspan='3' align='center' class='bodyText'&gt;&lt;hr&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td colspan='3' align='right' class='bodyText'&gt;Subtotal:&amp;nbsp;&amp;nbsp;&amp;nbsp;$22.68&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td colspan='3' align='right' class='bodyText'&gt;Shipping &amp; Handling:&amp;nbsp;&amp;nbsp;&amp;nbsp;$0.00&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td colspan='3' align='right' class='bodyText'&gt;Tax:&amp;nbsp;&amp;nbsp;&amp;nbsp;$0.00&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td colspan='3' align='right' class='bodyText'&gt;Total:&amp;nbsp;&amp;nbsp;&amp;nbsp;$22.68&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;br /&gt;&lt;br /&gt;&lt;table width='315' cellspacing='1' cellpadding='0' border='0' class='bodyText' bgcolor='#EEEEEE'&gt;&lt;tr&gt;&lt;td style='line-height:5px'&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan='3' class='bodyText'&gt;&lt;b&gt;Important Information concerning your purchase:&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='line-height:5px'&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td width=130px class='bodyText' style='padding-left:3px'&gt;Go Daddy Photo Album &lt;/td&gt;&lt;td width=75px class='bodyText'&gt;&lt;a href='http://help.dev.godaddy-com.ide/topic/340?isc=&amp;prog_id='&gt;Product Info&lt;/a&gt;&lt;/td&gt;&lt;td width=100px class='bodyText'&gt;&lt;a href='https://www.dev.godaddy-com.ide/gdshop/legal_agreements/show_doc.asp?pageid=&amp;isc=&amp;prog_id='&gt;Service Agreement&lt;/a&gt;&lt;/td&gt;&lt;tr&gt;&lt;tr&gt;&lt;td style='line-height:5px'&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+      </attribute>
+      <attribute name="SHOPPER_ID">832652</attribute>
+      <attribute name="ORDER_TOTAL">$22.68</attribute>
+      <attribute name="SERVERNAME">www.dev.godaddy.com</attribute>
+      <attribute name="LOGINNAME">mmicco</attribute>
+      <attribute name="CC_ADDRESS" />
+      <attribute name="ORDERTIME">Monday, August 03, 2009 9:05:29 AM</attribute>
+      <attribute name="XSELLITEMS">
+        &lt;table border="0" cellpadding="1" cellspacing="0"&gt;&lt;tr&gt;&lt;td style="font-size:10px;line-height:14px;font-family:verdana, sans serif"&gt;&lt;a href="https://www.dev.godaddy-com.ide/gdshop/deluxe_whois/landing.asp?isc=&amp;ci=&amp;prog_id="&gt;Business Registration&lt;/a&gt; - &lt;span style="color:#CC0000;"&gt;Just $4.99/yr!&lt;/span&gt; Put your vital advertising information online!&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+      </attribute>
+      <attribute name="VATID" />
+      <contact name="ShopperContact">
+        <attribute name="id">832652</attribute>
+        <attribute name="EmailType">html</attribute>
+      </contact>
+    </resource>
+  </resources>
+</messageXml>
+

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataProviderElements>
+  <DatabaseAccess>
+    <dbsetting name="ismiragecurrent" target_name="mya_isMirageCurrent_sp" dsn="corp.web.mya.Godaddy" app_name="MYA" cert_name="corp.web.mya.dev.client.godaddy.com">
+      <param name="shopper_id" type="varchar" size="10" />
+    </dbsetting>
+    <dbsetting name="currentproductgroups_ro" target_name="mya_getCurrentProductGroups_sp" dsn="corp.web.mya.godaddyReporting_ro" app_name="MYA" cert_name="corp.web.mya.dev.client.godaddy.com">
+      <param name="s_shopper_id" type="varchar" size="10" />
+      <param name="s_privateLabelID" type="int" size="" />
+    </dbsetting>
+    <dbsetting name="currentproductgroups" target_name="mya_getCurrentProductGroups_sp" dsn="corp.web.mya.Godaddy" app_name="MYA" cert_name="corp.web.mya.dev.client.godaddy.com">
+      <param name="s_shopper_id" type="varchar" size="10" />
+      <param name="s_privateLabelID" type="int" size="" />
+    </dbsetting>
+  </DatabaseAccess>
+  <WebService>
+    <wssetting name="WsceCommerce_GetOrderXML" host_name="http://gdcomm.test.glbt1.gdg/WsceCommerce/WsceCommerce.dll?Handler=GenWsceCommerceWSDL" target_name="GetOrderXML">
+      <param name="bstrOrderID" type="string"></param>
+      <param name="bstrShopperID" type="string"></param>
+    </wssetting>
+  </WebService>
+</DataProviderElements>

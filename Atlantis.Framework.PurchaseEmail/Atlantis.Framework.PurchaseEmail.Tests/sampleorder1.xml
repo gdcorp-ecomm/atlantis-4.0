@@ -1,0 +1,38 @@
+<ORDER>
+
+  <ORDERDETAIL currencydisplay="USD" ship_to_last_name="Micco" from_app="" fairmarketvaluetotal="2268" ship_to_street1="12246 N 59th St" _old_spend="2268" gdshop_purchaserequesttypeid="1" prepaid_discount_total="0" purchaserequestid="1439138" entered_by="customer" payment_gateway_raw="no charge attempt: FAITH" _total_total_display="2268" _tax_total_usd="0" transactioncurrency="USD" item_id_start="1" _oadjust_subtotal="2268" _commserver="DEVGDCOMM02" source_code="???" createdate="7/23/2009 1:36:18 PM" payment_response_code="1" payment_auth_code="FAITH" _purchase_gateway_action="3" ship_to_state="AZ" ship_to_email="mmicco@godaddy.com" _product_promo_list="5601" _tax_total_operating="0" original_order_id="-1" bill_to_last_name="Micco" pathway="8208c93f-6622-4ca2-afed-71a642cd004a" foreign_ip_status="0" bill_to_state="AZ" basketid="1439138" _promo_run_time="10" conversionratet2o="1" ship_to_zip="85254" _shipping_total_display="0" remote_host="127.0.0.1" _total_total="2268" _purchase_hash="yjbftibggjlhmfkatisaxasaegljqczfradamcpjcgbfcbedaiqfgeqevbgdcidj" repversion="0" _fairmarketvaluetotal_operating="2268" _tax_included="0" _tax_type="0" _shipping_total_operating="0" shopper_id="832652" _old_discount="2268" thirdpartyshippingamount="0" gdshop_receiptapplicationid="0" ship_to_first_name="Michael" _total_total_usd="2268" _fairmarketvaluetotal_usd="2268" operatingcurrency="USD" third_party_shipping_amount="" _shipping_total_usd="0" pp_shopperprofileid="55128" _handling_total_usd="0" _payment_auth_code="FAITH" payment="credit_card" order_id="1439138" basket_type="gdshop" bill_to_phone1="303-333-3333" _tax_total_display="0" _oadjust_subtotal_operating="2268" bill_to_street2="" date_changed="7/23/2009 1:40:17 PM" shippable="0" remote_addr="127.0.0.1" ship_to_country="US" bill_to_company="" ship_to_phone2="(480) 609-8682" _shopper_shopper_id="832652" loginname="mmicco" _oadjust_subtotal_usd="2268" authonly="0" bill_to_first_name="Michael" _handling_total="0" payment_processor="1" conversionratet2d="1.0000" _handling_total_display="0" cc_expyear="2011" _handling_total_operating="0" date_entered="7/23/2009 1:41:18 PM" total="2268" payment_auth_type="FAITH" currencyxchangerate="1" order_billing="domestic" payment_gateway_response_time="0" bill_to_fax="" _total_total_operating="2268" conversionratet2u="1" bill_to_street1="12246 N 59th St" taxexemptid="" card_issuer_id="" ship_to_city="Scottsdale" payment_response_sub_code="0" bill_to_zip="85254" payment_reason_code="1" bill_to_country="US" _webserver="D1WSDV-MMICC" cc_expmonth="1" _shipping_total="0" privatelabelid="1" cc_type="Discover" _oadjust_subtotal_display="2268" basket_paymenttype="-1" tax_id="" ship_to_phone1="303-333-3333" order_source="Online" thirdpartyshippingmethod="" _fairmarketvaluetotal="2268" conversionrateo2u="1" bill_to_email="mmicco@godaddy.com" third_party_shipping_method="" _repversion="" bar_restricted_payment_type="" shipping_price="0" third_party_shipping_options="&lt;EZPrintShipping/&gt;" itemcount="1" _restricted_payment_type="" ip_country_code="--" bill_to_phone2="(480) 609-8682" merchantaccountid="1" accountingcompanyid="1" _purchase_pipeline_name="D:\gdcomponents\Pipelines\plan_receipt.pcf" bill_to_city="Scottsdale" membershiplevel="4" _tax_total="0" status="active" type="credit_card" cc_name="Go Daddy" cc_number="############1117" firstname="Michael" lastname="Micco" street1="12246 N 59th St" city="Scottsdale" state="AZ" country="US" postal_code="85254" phone1="303-333-3333" phone2="(480) 609-8682" email="mmicco@godaddy.com">
+
+    <PAYMENTXML>
+
+      <Payments>
+
+        <Payment index="0" amount="2268" type="credit_card" subtype="Discover" xindex="0" gateway_progid="FAITH" processor="1" auth_code="FAITH" response_code="1" response_sub_code="0" reason_code="1" gateway_raw="no charge attempt: FAITH" gateway_response_time="0" auth_type="FAITH" total="2268" gateway_action="3" destination_queue="receipt" amount_usd="2268" amount_display="2268" amount_operating="2268" pp_shopperProfileID="55128"/>
+
+      </Payments>
+    </PAYMENTXML>
+
+  </ORDERDETAIL>
+
+  <ITEMS>
+
+    <ITEM marketplacecommissionrate="0" refundbitmask="0" product_bulk_year="1" _iadjust_regularprice_operating="2268" _product_sale_start="1/1/2000" coupon_group_id="" gdshop_product_refundbasisid="1" _fairmarketvalue_operating="2268" dept_id="105" _product_defaultdurationvalue="1" entered_by="customer" adjusted_actualcost="444" _icann_fee="0" _product_sale_price="2268" _icann_fee_adjusted_display="0" _fairmarketvalue_usd="2268" source_code="???" cicode="9031" acct_glchartid="49999-9999-999" adjusted_price="2268" list_price="2268" _gdshop_product_domain_discountexists="0" _product_sku="5601-1" _glrevenueaccount="49999-9999-999" _isdomaindiscounteligible="1" _oadjust_discount="0" original_row_id="-1" gdshop_item_trackingcode="slp_photofiler" original_order_id="-1" pathway="8208c93f-6622-4ca2-afed-71a642cd004a" _placed_price="0" _product_taxtypebit="0" fairmarketvalue="2268" isrenewalpricelocked="0" icannfee_adjusted="0" _gdshop_orderleveldiscounttypeid="0" list_price_display="2268" estimated_revenue="0" estimated_cost="0" product_isbundle="0" _product_is_renewal_price_locked="0" _fairmarketvalue="2268" pf_id="5601" shopper_id="832652" shoprevenue="0" _iadjust_currentprice_operating="2268" _iadjust_regularprice="2268" refundliabilityamount="0" recurring_payment="annual" item_id="1" trans_method="service" gdshop_variant_price_type_id="0" processctrl="{00000000-0000-0000-0000-000000000000}" _row_id="0" row_id="0" adjusted_wholesaleprice="0" zero="0" _product_dept_id="105" originallistprice="2268" order_id="1439138" _product_list_price_display="2268" min_shipping="650" _product_prepaiddiscountlevel="0" marketplacecommission="0" list_price_usd="2268" _iadjust_currentprice_display="2268" status_id="1" createcosentry="0" _oadjust_adjustedprice_operating="2268" commissionjunctionstartdate="5/31/2009" _product_list_price_usd="2268" gdshop_product_typeid="176" period_description="Period(s)" duration="1" _oadjust_adjustedprice_display="2268" _is_base_on_sale="0" _n_unadjusted="1" shopreserve="0" date_entered="7/23/2009 1:41:18 PM" product_isbulk="0" commission_amount="0" product_list_price="2268" _tax_amount="0" _product_sale_end="1/1/2000" _product_list_price_operating="2268" periodsperduration="12" date_added="7/23/2009 1:36:17 PM" _product_basketlocked="3" _product_defaultdurationtypeid="1" product_basketlocked="3" unifiedproductid="5601" _iadjust_regularprice_usd="2268" _oadjust_adjustedprice_usd="2268" name="Photo Album Yearly" _product_unifiedproductid="5601" privatelabelid="1" _product_pf_id="5601" _distribute_eligible="2268" _product_trans_method="service" _iadjust_currentprice_usd="2268" gdshop_deferrmentconfigurationtypeid="6" _product_price_locked="0" placed_price="2268" sku="5601-1" numberofperiods="1" _gdshop_variant_price_type_id="0" quantitydescription="year(s)" _oadjust_adjustedprice="2268" _product_list_price="2268" product_hasfreedependentresource="0" _iadjust_currentprice="2268" overridepricerequired="0" _product_name="Photo Album Yearly" _icann_fee_adjusted_usd="0" _icann_fee_adjusted_operating="0" isplcommissionable="1" _icann_fee_usd="0" list_price_operating="2268" accountingcompanyid="1" _icann_fee_adjusted="0" itemtrackingcode="slp_photofiler" quantity="1" _iadjust_regularprice_display="2268">
+
+      <CANCELITEMSXML>
+
+        <CANCELITEM resourceid="372210" namespace="photoalbum" isactive="1">
+
+          <CANCELDETAIL desc1="Photo Album for New Account"/>
+
+        </CANCELITEM>
+
+      </CANCELITEMSXML>
+
+    </ITEM>
+
+  </ITEMS>
+
+  <BASKETERRORS/>
+
+  <PURCHASEERRORS/>
+
+</ORDER>

@@ -61,6 +61,7 @@ namespace Atlantis.Framework.MYAResellerUpgrades.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("bin/netconnect.dll")]
     public void MYAResellerUpgradesTest()
     {
       const int billingResourceId = 272225;

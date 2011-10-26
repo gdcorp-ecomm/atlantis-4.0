@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:wscgdDomainProtectionXMLService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:wscgdDomainProtectionXMLService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:wscgdDomainProtectionXMLService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetBundleXMLIn">
+    <wsdl:part name="bstrAttribXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBundleXMLOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrErrMsg" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="wscgdDomainProtectionXMLServiceSoap">
+    <wsdl:operation name="GetBundleXML">
+      <wsdl:input message="s0:GetBundleXMLIn" />
+      <wsdl:output message="s0:GetBundleXMLOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wscgdDomainProtectionXMLServiceSoap" type="s0:wscgdDomainProtectionXMLServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="GetBundleXML">
+      <soap:operation soapAction="#GetBundleXML" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdDomainProtectionXMLService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdDomainProtectionXMLService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wscgdDomainProtectionXMLService">
+    <wsdl:port name="wscgdDomainProtectionXMLServiceSoap" binding="s0:wscgdDomainProtectionXMLServiceSoap">
+      <soap:address location="http://commgtwyws.dev.glbt1.gdg:80/wscgdDomainProtectionXML/wscgdDomainProtectionXML.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

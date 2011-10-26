@@ -10,15 +10,16 @@ namespace Atlantis.Framework.StratosphereGetMapUrl.Impl
     public IAsyncResult BeginHandleRequest(RequestData requestData, ConfigElement config, AsyncCallback callback, object state)
     {
       StratosphereGetMapUrlRequestData request = (StratosphereGetMapUrlRequestData)requestData;
-
-      StratosphereRequestbroker.Service stratosphereWS = new StratosphereRequestbroker.Service();
-      stratosphereWS.Url = ((WsConfigElement)config).WSURL;
-      stratosphereWS.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
-      request.Certificate.Verify();
-      stratosphereWS.ClientCertificates.Add(request.Certificate);
-
-      AsyncState asyncState = new AsyncState(requestData, config, stratosphereWS, state);
-      IAsyncResult asyncResult = stratosphereWS.BeginGetMapUrl(request.MapType, request.LookupValue, callback, asyncState);
+      IAsyncResult asyncResult;
+      using (StratosphereRequestbroker.Service stratosphereWS = new StratosphereRequestbroker.Service())
+      {
+        stratosphereWS.Url = ((WsConfigElement)config).WSURL;
+        stratosphereWS.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+        request.Certificate.Verify();
+        stratosphereWS.ClientCertificates.Add(request.Certificate);
+        AsyncState asyncState = new AsyncState(requestData, config, stratosphereWS, state);
+        asyncResult = stratosphereWS.BeginGetMapUrl(request.MapType, request.LookupValue, callback, asyncState);
+      }
 
       return asyncResult;
     }
@@ -31,10 +32,12 @@ namespace Atlantis.Framework.StratosphereGetMapUrl.Impl
 
       try
       {
-        StratosphereRequestbroker.Service stratosphereWS = (StratosphereRequestbroker.Service)asyncState.Request;
-        WebServiceResponse wsResponse = stratosphereWS.EndGetMapUrl(asyncResult, out urlResponse);
-
-        if (wsResponse.ResultCode == 0)
+        WebServiceResponse wsResponse = null;
+        using (StratosphereRequestbroker.Service stratosphereWS = (StratosphereRequestbroker.Service)asyncState.Request)
+        {
+          wsResponse = stratosphereWS.EndGetMapUrl(asyncResult, out urlResponse);
+        }
+        if (wsResponse !=null && wsResponse.ResultCode == 0)
         {
           responseData = new StratosphereGetMapUrlResponseData(urlResponse);
         }

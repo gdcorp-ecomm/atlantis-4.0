@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.MYAResellerUpgrades.Interface
@@ -10,19 +7,8 @@ namespace Atlantis.Framework.MYAResellerUpgrades.Interface
   {
     #region Properties
 
-    private int _billingResourceId;
-    private TimeSpan _requestTimeout = new TimeSpan(0, 0, 2);
-
-    public int BillingResourceId
-    {
-      get { return _billingResourceId; }
-    }
-
-    public TimeSpan RequestTimeout
-    {
-      get { return _requestTimeout; }
-      set { _requestTimeout = value; }
-    }
+    public int BillingResourceId { get; set; }
+   
     #endregion
     
     public MYAResellerUpgradesRequestData(string shopperId,
@@ -33,7 +19,8 @@ namespace Atlantis.Framework.MYAResellerUpgrades.Interface
                                   int billingResourceId)
       : base(shopperId, sourceUrl, orderIo, pathway, pageCount)
     {
-      _billingResourceId = billingResourceId;
+      RequestTimeout = TimeSpan.FromSeconds(5d);
+      BillingResourceId = billingResourceId;
     }
 
     public override string GetCacheMD5()

@@ -4,7 +4,6 @@ using System.Text;
 using System.Xml;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MYAResellerUpgrades.Interface;
-//using netConnect;
 using System.Data.SqlClient;
 using System.Data;
 

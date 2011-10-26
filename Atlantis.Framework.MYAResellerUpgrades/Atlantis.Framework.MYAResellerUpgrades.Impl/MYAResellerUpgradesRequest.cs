@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+using System.Data;
+using System.Data.SqlClient;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MYAResellerUpgrades.Interface;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace Atlantis.Framework.MYAResellerUpgrades.Impl
 {

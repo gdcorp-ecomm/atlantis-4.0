@@ -1,7 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
-using Atlantis.Framework.MYAResellerUpgrades.Impl;
+﻿using System.Diagnostics;
 using Atlantis.Framework.MYAResellerUpgrades.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 namespace Atlantis.Framework.MYAResellerUpgrades.Tests

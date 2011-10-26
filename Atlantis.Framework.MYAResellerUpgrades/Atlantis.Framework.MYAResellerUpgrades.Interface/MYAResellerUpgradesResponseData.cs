@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using Atlantis.Framework.Interface;
 using System.Xml.Linq;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.MYAResellerUpgrades.Interface
 {

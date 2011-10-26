@@ -9,13 +9,6 @@ namespace Atlantis.Framework.StratosphereGetMapUrl.Interface
   {
     #region Properties
 
-    private TimeSpan _requestTimeout = new TimeSpan(0, 0, 10);
-    public TimeSpan RequestTimeout
-    {
-      get { return _requestTimeout; }
-      set { _requestTimeout = value; }
-    }
-
     private int _stratosphereGetMapUrlRequestType = 236;
     public int StratosphereGetMapUrlRequestType
     {

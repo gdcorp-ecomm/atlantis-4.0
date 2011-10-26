@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3AA2B2E3-9C85-4D66-8B52-6CF3F4EAB59B}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.PrivacyAppInsertEmailAddress.vsmdi = Atlantis.Framework.PrivacyAppInsertEmailAddress.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PrivacyAppInsertEmailAddress.Impl", "Atlantis.Framework.PrivacyAppInsertEmailAddress.Impl\Atlantis.Framework.PrivacyAppInsertEmailAddress.Impl.csproj", "{04416590-E029-475F-B1D3-BC8A041F32E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PrivacyAppInsertEmailAddress.Interface", "Atlantis.Framework.PrivacyAppInsertEmailAddress.Interface\Atlantis.Framework.PrivacyAppInsertEmailAddress.Interface.csproj", "{9527612C-DB4C-4E02-A614-4B838FBE0175}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PrivacyAppInsertEmailAddress.Tests", "Atlantis.Framework.PrivacyAppInsertEmailAddress.Tests\Atlantis.Framework.PrivacyAppInsertEmailAddress.Tests.csproj", "{ABDE4A96-BF65-45AB-9F78-DD2AB796D553}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E20AF9FF-B83E-490E-A920-84F3F002EC4C}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.PrivacyAppInsertEmailAddress.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.PrivacyAppInsertEmailAddress.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.PrivacyAppInsertEmailAddress.Impl\\Atlantis.Framework.PrivacyAppInsertEmailAddress.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.PrivacyAppInsertEmailAddress.Impl
+		SccLocalPath3 = Atlantis.Framework.PrivacyAppInsertEmailAddress.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.PrivacyAppInsertEmailAddress.Interface\\Atlantis.Framework.PrivacyAppInsertEmailAddress.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.PrivacyAppInsertEmailAddress.Interface
+		SccLocalPath4 = Atlantis.Framework.PrivacyAppInsertEmailAddress.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.PrivacyAppInsertEmailAddress.Tests\\Atlantis.Framework.PrivacyAppInsertEmailAddress.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.PrivacyAppInsertEmailAddress.Tests
+		SccLocalPath5 = Atlantis.Framework.PrivacyAppInsertEmailAddress.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.PrivacyAppInsertEmailAddress.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04416590-E029-475F-B1D3-BC8A041F32E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04416590-E029-475F-B1D3-BC8A041F32E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04416590-E029-475F-B1D3-BC8A041F32E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04416590-E029-475F-B1D3-BC8A041F32E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9527612C-DB4C-4E02-A614-4B838FBE0175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9527612C-DB4C-4E02-A614-4B838FBE0175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9527612C-DB4C-4E02-A614-4B838FBE0175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9527612C-DB4C-4E02-A614-4B838FBE0175}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABDE4A96-BF65-45AB-9F78-DD2AB796D553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABDE4A96-BF65-45AB-9F78-DD2AB796D553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABDE4A96-BF65-45AB-9F78-DD2AB796D553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABDE4A96-BF65-45AB-9F78-DD2AB796D553}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {E20AF9FF-B83E-490E-A920-84F3F002EC4C}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {E20AF9FF-B83E-490E-A920-84F3F002EC4C}
+	EndGlobalSection
+EndGlobal

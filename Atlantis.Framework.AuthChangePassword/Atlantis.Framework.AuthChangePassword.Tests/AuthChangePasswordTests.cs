@@ -154,6 +154,17 @@ namespace Atlantis.Framework.AuthChangePassword.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    public void VerifyCurrentPasswordMeetsRequirements()
+    {
+      AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
+        "867900", string.Empty, string.Empty, string.Empty, 0,
+        1, "007scy", "Ww!11111", "goldeneys", "syukna", true);
+      AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
+      Assert.IsTrue(response.IsSuccess);     
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
     public void ChangePasswordValid()
     {
       AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(

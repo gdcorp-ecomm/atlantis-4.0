@@ -22,6 +22,7 @@ namespace Atlantis.Framework.AuthChangePassword.Interface
     public const int PasswordStrengthAlreadyUsed = -14;
     public const int ValidateCurrentPasswordRequired = -100;
     public const int ValidateCurrentPasswordToShort = -101;
+    public const int ValidateCurrentPasswordMeetsRequirements = -102;
     public const int ValidatePasswordRequired = -110;
     public const int ValidatePasswordInvalidCharacters = -111;
     public const int ValidateLoginRequired = -120;

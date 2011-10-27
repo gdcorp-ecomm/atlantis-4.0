@@ -12,6 +12,7 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
     private static readonly Regex _newPasswordInvalidCharactersRegex = new Regex("[^\x20-\x7E]", RegexOptions.Compiled);
     private static readonly Regex _newLoginInvalidCharactersRegex = new Regex(@"[^\-A-Za-z0-9]", RegexOptions.Compiled);
     private static readonly Regex _newHintInvalidCharactersRegex = new Regex("[^\x20-\x3b\x3f-\x7e]", RegexOptions.Compiled);
+    private static readonly Regex _meetsStrongPwReqs = new Regex("(?=^[A-z])(?=.{8,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@$%]).*$");
 
     private HashSet<int> ValidateRequest(AuthChangePasswordRequestData request, WScgdAuthenticateService service)
     {
@@ -26,6 +27,10 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
       else if (request.CurrentPassword.Length < 5)
       {
         result.Add(AuthChangePasswordStatusCodes.ValidateCurrentPasswordToShort);
+      }
+      else if (request.UseStrongPassword && !_meetsStrongPwReqs.IsMatch(request.CurrentPassword) && request.CurrentPassword == request.NewPassword) //when new = current we aren't changing pw
+      {
+        result.Add(AuthChangePasswordStatusCodes.ValidateCurrentPasswordMeetsRequirements);
       }
 
       #endregion

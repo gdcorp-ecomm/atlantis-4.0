@@ -46,12 +46,14 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl
 
           if (verifyResponseXml.Contains("ActionResultID=\"0\""))
           {
-            DsWebSubmit.RegDCCRequestWebSvcService oDsWeb = new DsWebSubmit.RegDCCRequestWebSvcService();
-            oDsWeb.Url = ((WsConfigElement)oConfig).WSURL;
-            oDsWeb.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
+            using (DsWebSubmit.RegDCCRequestWebSvcService oDsWeb = new DsWebSubmit.RegDCCRequestWebSvcService())
+            {
+              oDsWeb.Url = ((WsConfigElement) oConfig).WSURL;
+              oDsWeb.Timeout = (int) oRequest.RequestTimeout.TotalMilliseconds;
 
-            responseXml = oDsWeb.SubmitRequestStandard(oRequest.XmlToSubmit());
-            responseData = new DCCForwardingUpdateResponseData(responseXml);
+              responseXml = oDsWeb.SubmitRequestStandard(oRequest.XmlToSubmit());
+              responseData = new DCCForwardingUpdateResponseData(responseXml);
+            }
           }
           else
           {

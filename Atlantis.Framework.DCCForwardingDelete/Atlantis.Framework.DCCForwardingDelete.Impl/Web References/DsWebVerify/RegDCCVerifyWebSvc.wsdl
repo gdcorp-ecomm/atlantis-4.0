@@ -1,0 +1,1674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:RegDCCVerifyWebSvcService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:RegDCCVerifyWebSvcService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:RegDCCVerifyWebSvcService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldIn">
+    <wsdl:part name="bstrInput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusIn" />
+  <wsdl:message name="getServiceStatusOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyNameServerUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyNameServerUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyContactUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyContactUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyLocalizedContactUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyLocalizedContactUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyHostUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyHostUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainSetLockIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainSetLockOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainEmailForwardingUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainEmailForwardingUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainNexusUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainNexusUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCEDUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCEDUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCancellationIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCancellationOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainSetAutoRenewIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainSetAutoRenewOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainRenewalIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainRenewalOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainRedemptionIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainRedemptionOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCertificationAddIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCertificationAddOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyAddIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyAddOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyRenewIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyRenewOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyUpdatePrivateContactsIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyUpdatePrivateContactsOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyUpdateEmailForwardingIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyUpdateEmailForwardingOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacySendAuthorizationLetterIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacySendAuthorizationLetterOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAccountPrivacyUpdateContactIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDBPAccountsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAccountPrivacyUpdateContactOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAccountPrivacyUpdateEmailPreferencesIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDBPAccountsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAccountPrivacyUpdateEmailPreferencesOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyCancelIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyCancelOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProximaAddIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProximaAddOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProximaRenewIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProximaRenewOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainExpirationProtectionAddIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainExpirationProtectionAddOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainExpirationProtectionRenewIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainExpirationProtectionRenewOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainForwardingUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainForwardingUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainForwardingDeleteIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainForwardingDeleteOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifySubDomainUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifySubDomainUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifySubDomainDeleteIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifySubDomainDeleteOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyCashParkingUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyCashParkingUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAuthCodeSendEmailIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAuthCodeSendEmailOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeInsertIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeInsertOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeDeleteIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeDeleteOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeSendEmailIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeSendEmailOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeValidateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeValidateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeAcceptIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeAcceptOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeInstantIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeInstantOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToSendEmailIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToSendEmailOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToAuthInfoChangeIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToAuthInfoChangeOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToRestartIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToRestartOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToAckIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToAckOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToNackIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToNackOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToRetryIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToRetryOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToCancelIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToCancelOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferFromAckIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferFromAckOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferFromNackIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferFromNackOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderAssignIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderAssignOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderUnassignIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderUnassignOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderUnassignAllIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderUnassignAllOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProtectionUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProtectionUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainDownloadListIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainDownloadListOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorBackorderSetupIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrMonitorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorBackorderSetupOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorBackorderCancelIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrMonitorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorBackorderCancelOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorUpgradeIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrMonitorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorUpgradeOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorEmailUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrMonitorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorEmailUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorResendEmailsIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrMonitorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorResendEmailsOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderContactUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrMonitorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderContactUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderAgreementsUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrMonitorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderAgreementsUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderPrivacyUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrMonitorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderPrivacyUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainSetupIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainSetupOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainSetAutoRelistIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrPremiumDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainSetAutoRelistOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrPremiumDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainRemoveIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrPremiumDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainRemoveOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTDNAMAuctionSetupIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTDNAMAuctionSetupOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTDNAMAuctionCancelIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTDNAMAuctionCancelOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileCreateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileCreateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileAssignIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileAssignOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileUnassignIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileUnassignOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileUnassignAllIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileUnassignAllOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileAttributeChangeIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileAttributeChangeOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileDeleteIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrProfilesXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileDeleteOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyProfileSetAttributeIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrProfilesXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyProfileSetAttributeOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifySendCIRAAccountInfoEmailIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrProfilesXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifySendCIRAAccountInfoEmailOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileMergeCAIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrProfilesXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileMergeCAOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainConsolidateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainConsolidateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAppraisalUpgradeIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrAppraisalsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAppraisalUpgradeOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifySmartDomainsAddIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifySmartDomainsAddOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifySmartDomainsRenewIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifySmartDomainsRenewOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainChangeOfRegistrantCAIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainChangeOfRegistrantCAOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainMobilizerUpdateIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainMobilizerUpdateOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainMobilizerRemoveIn">
+    <wsdl:part name="bstrActionXML" type="s:string" />
+    <wsdl:part name="bstrDomainsXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainMobilizerRemoveOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="RegDCCVerifyWebSvcServiceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="s0:HelloWorldIn" />
+      <wsdl:output message="s0:HelloWorldOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="s0:getServiceStatusIn" />
+      <wsdl:output message="s0:getServiceStatusOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyNameServerUpdate">
+      <wsdl:input message="s0:VerifyNameServerUpdateIn" />
+      <wsdl:output message="s0:VerifyNameServerUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyContactUpdate">
+      <wsdl:input message="s0:VerifyContactUpdateIn" />
+      <wsdl:output message="s0:VerifyContactUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyLocalizedContactUpdate">
+      <wsdl:input message="s0:VerifyLocalizedContactUpdateIn" />
+      <wsdl:output message="s0:VerifyLocalizedContactUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyHostUpdate">
+      <wsdl:input message="s0:VerifyHostUpdateIn" />
+      <wsdl:output message="s0:VerifyHostUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainSetLock">
+      <wsdl:input message="s0:VerifyDomainSetLockIn" />
+      <wsdl:output message="s0:VerifyDomainSetLockOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainEmailForwardingUpdate">
+      <wsdl:input message="s0:VerifyDomainEmailForwardingUpdateIn" />
+      <wsdl:output message="s0:VerifyDomainEmailForwardingUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainNexusUpdate">
+      <wsdl:input message="s0:VerifyDomainNexusUpdateIn" />
+      <wsdl:output message="s0:VerifyDomainNexusUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCEDUpdate">
+      <wsdl:input message="s0:VerifyDomainCEDUpdateIn" />
+      <wsdl:output message="s0:VerifyDomainCEDUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCancellation">
+      <wsdl:input message="s0:VerifyDomainCancellationIn" />
+      <wsdl:output message="s0:VerifyDomainCancellationOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainSetAutoRenew">
+      <wsdl:input message="s0:VerifyDomainSetAutoRenewIn" />
+      <wsdl:output message="s0:VerifyDomainSetAutoRenewOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainRenewal">
+      <wsdl:input message="s0:VerifyDomainRenewalIn" />
+      <wsdl:output message="s0:VerifyDomainRenewalOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainRedemption">
+      <wsdl:input message="s0:VerifyDomainRedemptionIn" />
+      <wsdl:output message="s0:VerifyDomainRedemptionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCertificationAdd">
+      <wsdl:input message="s0:VerifyDomainCertificationAddIn" />
+      <wsdl:output message="s0:VerifyDomainCertificationAddOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyAdd">
+      <wsdl:input message="s0:VerifyDomainPrivacyAddIn" />
+      <wsdl:output message="s0:VerifyDomainPrivacyAddOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyRenew">
+      <wsdl:input message="s0:VerifyDomainPrivacyRenewIn" />
+      <wsdl:output message="s0:VerifyDomainPrivacyRenewOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyUpdatePrivateContacts">
+      <wsdl:input message="s0:VerifyDomainPrivacyUpdatePrivateContactsIn" />
+      <wsdl:output message="s0:VerifyDomainPrivacyUpdatePrivateContactsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyUpdateEmailForwarding">
+      <wsdl:input message="s0:VerifyDomainPrivacyUpdateEmailForwardingIn" />
+      <wsdl:output message="s0:VerifyDomainPrivacyUpdateEmailForwardingOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacySendAuthorizationLetter">
+      <wsdl:input message="s0:VerifyDomainPrivacySendAuthorizationLetterIn" />
+      <wsdl:output message="s0:VerifyDomainPrivacySendAuthorizationLetterOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccountPrivacyUpdateContact">
+      <wsdl:input message="s0:VerifyAccountPrivacyUpdateContactIn" />
+      <wsdl:output message="s0:VerifyAccountPrivacyUpdateContactOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccountPrivacyUpdateEmailPreferences">
+      <wsdl:input message="s0:VerifyAccountPrivacyUpdateEmailPreferencesIn" />
+      <wsdl:output message="s0:VerifyAccountPrivacyUpdateEmailPreferencesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyCancel">
+      <wsdl:input message="s0:VerifyDomainPrivacyCancelIn" />
+      <wsdl:output message="s0:VerifyDomainPrivacyCancelOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProximaAdd">
+      <wsdl:input message="s0:VerifyDomainProximaAddIn" />
+      <wsdl:output message="s0:VerifyDomainProximaAddOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProximaRenew">
+      <wsdl:input message="s0:VerifyDomainProximaRenewIn" />
+      <wsdl:output message="s0:VerifyDomainProximaRenewOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExpirationProtectionAdd">
+      <wsdl:input message="s0:VerifyDomainExpirationProtectionAddIn" />
+      <wsdl:output message="s0:VerifyDomainExpirationProtectionAddOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExpirationProtectionRenew">
+      <wsdl:input message="s0:VerifyDomainExpirationProtectionRenewIn" />
+      <wsdl:output message="s0:VerifyDomainExpirationProtectionRenewOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainForwardingUpdate">
+      <wsdl:input message="s0:VerifyDomainForwardingUpdateIn" />
+      <wsdl:output message="s0:VerifyDomainForwardingUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainForwardingDelete">
+      <wsdl:input message="s0:VerifyDomainForwardingDeleteIn" />
+      <wsdl:output message="s0:VerifyDomainForwardingDeleteOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifySubDomainUpdate">
+      <wsdl:input message="s0:VerifySubDomainUpdateIn" />
+      <wsdl:output message="s0:VerifySubDomainUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifySubDomainDelete">
+      <wsdl:input message="s0:VerifySubDomainDeleteIn" />
+      <wsdl:output message="s0:VerifySubDomainDeleteOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyCashParkingUpdate">
+      <wsdl:input message="s0:VerifyCashParkingUpdateIn" />
+      <wsdl:output message="s0:VerifyCashParkingUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAuthCodeSendEmail">
+      <wsdl:input message="s0:VerifyAuthCodeSendEmailIn" />
+      <wsdl:output message="s0:VerifyAuthCodeSendEmailOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeInsert">
+      <wsdl:input message="s0:VerifyRegistrantChangeInsertIn" />
+      <wsdl:output message="s0:VerifyRegistrantChangeInsertOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeDelete">
+      <wsdl:input message="s0:VerifyRegistrantChangeDeleteIn" />
+      <wsdl:output message="s0:VerifyRegistrantChangeDeleteOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeSendEmail">
+      <wsdl:input message="s0:VerifyRegistrantChangeSendEmailIn" />
+      <wsdl:output message="s0:VerifyRegistrantChangeSendEmailOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeValidate">
+      <wsdl:input message="s0:VerifyRegistrantChangeValidateIn" />
+      <wsdl:output message="s0:VerifyRegistrantChangeValidateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeAccept">
+      <wsdl:input message="s0:VerifyRegistrantChangeAcceptIn" />
+      <wsdl:output message="s0:VerifyRegistrantChangeAcceptOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeInstant">
+      <wsdl:input message="s0:VerifyRegistrantChangeInstantIn" />
+      <wsdl:output message="s0:VerifyRegistrantChangeInstantOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToSendEmail">
+      <wsdl:input message="s0:VerifyTransferToSendEmailIn" />
+      <wsdl:output message="s0:VerifyTransferToSendEmailOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToAuthInfoChange">
+      <wsdl:input message="s0:VerifyTransferToAuthInfoChangeIn" />
+      <wsdl:output message="s0:VerifyTransferToAuthInfoChangeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToRestart">
+      <wsdl:input message="s0:VerifyTransferToRestartIn" />
+      <wsdl:output message="s0:VerifyTransferToRestartOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToAck">
+      <wsdl:input message="s0:VerifyTransferToAckIn" />
+      <wsdl:output message="s0:VerifyTransferToAckOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToNack">
+      <wsdl:input message="s0:VerifyTransferToNackIn" />
+      <wsdl:output message="s0:VerifyTransferToNackOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToRetry">
+      <wsdl:input message="s0:VerifyTransferToRetryIn" />
+      <wsdl:output message="s0:VerifyTransferToRetryOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToCancel">
+      <wsdl:input message="s0:VerifyTransferToCancelIn" />
+      <wsdl:output message="s0:VerifyTransferToCancelOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferFromAck">
+      <wsdl:input message="s0:VerifyTransferFromAckIn" />
+      <wsdl:output message="s0:VerifyTransferFromAckOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferFromNack">
+      <wsdl:input message="s0:VerifyTransferFromNackIn" />
+      <wsdl:output message="s0:VerifyTransferFromNackOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderAssign">
+      <wsdl:input message="s0:VerifyDomainFolderAssignIn" />
+      <wsdl:output message="s0:VerifyDomainFolderAssignOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderUnassign">
+      <wsdl:input message="s0:VerifyDomainFolderUnassignIn" />
+      <wsdl:output message="s0:VerifyDomainFolderUnassignOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderUnassignAll">
+      <wsdl:input message="s0:VerifyDomainFolderUnassignAllIn" />
+      <wsdl:output message="s0:VerifyDomainFolderUnassignAllOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProtectionUpdate">
+      <wsdl:input message="s0:VerifyDomainProtectionUpdateIn" />
+      <wsdl:output message="s0:VerifyDomainProtectionUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainDownloadList">
+      <wsdl:input message="s0:VerifyDomainDownloadListIn" />
+      <wsdl:output message="s0:VerifyDomainDownloadListOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorBackorderSetup">
+      <wsdl:input message="s0:VerifyMonitorBackorderSetupIn" />
+      <wsdl:output message="s0:VerifyMonitorBackorderSetupOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorBackorderCancel">
+      <wsdl:input message="s0:VerifyMonitorBackorderCancelIn" />
+      <wsdl:output message="s0:VerifyMonitorBackorderCancelOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorUpgrade">
+      <wsdl:input message="s0:VerifyMonitorUpgradeIn" />
+      <wsdl:output message="s0:VerifyMonitorUpgradeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorEmailUpdate">
+      <wsdl:input message="s0:VerifyMonitorEmailUpdateIn" />
+      <wsdl:output message="s0:VerifyMonitorEmailUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorResendEmails">
+      <wsdl:input message="s0:VerifyMonitorResendEmailsIn" />
+      <wsdl:output message="s0:VerifyMonitorResendEmailsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderContactUpdate">
+      <wsdl:input message="s0:VerifyBackorderContactUpdateIn" />
+      <wsdl:output message="s0:VerifyBackorderContactUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderAgreementsUpdate">
+      <wsdl:input message="s0:VerifyBackorderAgreementsUpdateIn" />
+      <wsdl:output message="s0:VerifyBackorderAgreementsUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderPrivacyUpdate">
+      <wsdl:input message="s0:VerifyBackorderPrivacyUpdateIn" />
+      <wsdl:output message="s0:VerifyBackorderPrivacyUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainSetup">
+      <wsdl:input message="s0:VerifyPremiumDomainSetupIn" />
+      <wsdl:output message="s0:VerifyPremiumDomainSetupOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainSetAutoRelist">
+      <wsdl:input message="s0:VerifyPremiumDomainSetAutoRelistIn" />
+      <wsdl:output message="s0:VerifyPremiumDomainSetAutoRelistOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainUpdate">
+      <wsdl:input message="s0:VerifyPremiumDomainUpdateIn" />
+      <wsdl:output message="s0:VerifyPremiumDomainUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainRemove">
+      <wsdl:input message="s0:VerifyPremiumDomainRemoveIn" />
+      <wsdl:output message="s0:VerifyPremiumDomainRemoveOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTDNAMAuctionSetup">
+      <wsdl:input message="s0:VerifyTDNAMAuctionSetupIn" />
+      <wsdl:output message="s0:VerifyTDNAMAuctionSetupOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTDNAMAuctionCancel">
+      <wsdl:input message="s0:VerifyTDNAMAuctionCancelIn" />
+      <wsdl:output message="s0:VerifyTDNAMAuctionCancelOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileCreate">
+      <wsdl:input message="s0:VerifyDomainProfileCreateIn" />
+      <wsdl:output message="s0:VerifyDomainProfileCreateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileAssign">
+      <wsdl:input message="s0:VerifyDomainProfileAssignIn" />
+      <wsdl:output message="s0:VerifyDomainProfileAssignOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileUnassign">
+      <wsdl:input message="s0:VerifyDomainProfileUnassignIn" />
+      <wsdl:output message="s0:VerifyDomainProfileUnassignOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileUnassignAll">
+      <wsdl:input message="s0:VerifyDomainProfileUnassignAllIn" />
+      <wsdl:output message="s0:VerifyDomainProfileUnassignAllOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileAttributeChange">
+      <wsdl:input message="s0:VerifyDomainProfileAttributeChangeIn" />
+      <wsdl:output message="s0:VerifyDomainProfileAttributeChangeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileDelete">
+      <wsdl:input message="s0:VerifyDomainProfileDeleteIn" />
+      <wsdl:output message="s0:VerifyDomainProfileDeleteOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyProfileSetAttribute">
+      <wsdl:input message="s0:VerifyProfileSetAttributeIn" />
+      <wsdl:output message="s0:VerifyProfileSetAttributeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifySendCIRAAccountInfoEmail">
+      <wsdl:input message="s0:VerifySendCIRAAccountInfoEmailIn" />
+      <wsdl:output message="s0:VerifySendCIRAAccountInfoEmailOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileMergeCA">
+      <wsdl:input message="s0:VerifyDomainProfileMergeCAIn" />
+      <wsdl:output message="s0:VerifyDomainProfileMergeCAOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainConsolidate">
+      <wsdl:input message="s0:VerifyDomainConsolidateIn" />
+      <wsdl:output message="s0:VerifyDomainConsolidateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAppraisalUpgrade">
+      <wsdl:input message="s0:VerifyAppraisalUpgradeIn" />
+      <wsdl:output message="s0:VerifyAppraisalUpgradeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifySmartDomainsAdd">
+      <wsdl:input message="s0:VerifySmartDomainsAddIn" />
+      <wsdl:output message="s0:VerifySmartDomainsAddOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifySmartDomainsRenew">
+      <wsdl:input message="s0:VerifySmartDomainsRenewIn" />
+      <wsdl:output message="s0:VerifySmartDomainsRenewOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainChangeOfRegistrantCA">
+      <wsdl:input message="s0:VerifyDomainChangeOfRegistrantCAIn" />
+      <wsdl:output message="s0:VerifyDomainChangeOfRegistrantCAOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainMobilizerUpdate">
+      <wsdl:input message="s0:VerifyDomainMobilizerUpdateIn" />
+      <wsdl:output message="s0:VerifyDomainMobilizerUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainMobilizerRemove">
+      <wsdl:input message="s0:VerifyDomainMobilizerRemoveIn" />
+      <wsdl:output message="s0:VerifyDomainMobilizerRemoveOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegDCCVerifyWebSvcServiceSoap" type="s0:RegDCCVerifyWebSvcServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="#HelloWorld" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatus">
+      <soap:operation soapAction="#getServiceStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyNameServerUpdate">
+      <soap:operation soapAction="#VerifyNameServerUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyContactUpdate">
+      <soap:operation soapAction="#VerifyContactUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyLocalizedContactUpdate">
+      <soap:operation soapAction="#VerifyLocalizedContactUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyHostUpdate">
+      <soap:operation soapAction="#VerifyHostUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainSetLock">
+      <soap:operation soapAction="#VerifyDomainSetLock" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainEmailForwardingUpdate">
+      <soap:operation soapAction="#VerifyDomainEmailForwardingUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainNexusUpdate">
+      <soap:operation soapAction="#VerifyDomainNexusUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCEDUpdate">
+      <soap:operation soapAction="#VerifyDomainCEDUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCancellation">
+      <soap:operation soapAction="#VerifyDomainCancellation" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainSetAutoRenew">
+      <soap:operation soapAction="#VerifyDomainSetAutoRenew" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainRenewal">
+      <soap:operation soapAction="#VerifyDomainRenewal" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainRedemption">
+      <soap:operation soapAction="#VerifyDomainRedemption" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCertificationAdd">
+      <soap:operation soapAction="#VerifyDomainCertificationAdd" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyAdd">
+      <soap:operation soapAction="#VerifyDomainPrivacyAdd" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyRenew">
+      <soap:operation soapAction="#VerifyDomainPrivacyRenew" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyUpdatePrivateContacts">
+      <soap:operation soapAction="#VerifyDomainPrivacyUpdatePrivateContacts" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyUpdateEmailForwarding">
+      <soap:operation soapAction="#VerifyDomainPrivacyUpdateEmailForwarding" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacySendAuthorizationLetter">
+      <soap:operation soapAction="#VerifyDomainPrivacySendAuthorizationLetter" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccountPrivacyUpdateContact">
+      <soap:operation soapAction="#VerifyAccountPrivacyUpdateContact" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccountPrivacyUpdateEmailPreferences">
+      <soap:operation soapAction="#VerifyAccountPrivacyUpdateEmailPreferences" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyCancel">
+      <soap:operation soapAction="#VerifyDomainPrivacyCancel" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProximaAdd">
+      <soap:operation soapAction="#VerifyDomainProximaAdd" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProximaRenew">
+      <soap:operation soapAction="#VerifyDomainProximaRenew" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExpirationProtectionAdd">
+      <soap:operation soapAction="#VerifyDomainExpirationProtectionAdd" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExpirationProtectionRenew">
+      <soap:operation soapAction="#VerifyDomainExpirationProtectionRenew" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainForwardingUpdate">
+      <soap:operation soapAction="#VerifyDomainForwardingUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainForwardingDelete">
+      <soap:operation soapAction="#VerifyDomainForwardingDelete" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySubDomainUpdate">
+      <soap:operation soapAction="#VerifySubDomainUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySubDomainDelete">
+      <soap:operation soapAction="#VerifySubDomainDelete" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyCashParkingUpdate">
+      <soap:operation soapAction="#VerifyCashParkingUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAuthCodeSendEmail">
+      <soap:operation soapAction="#VerifyAuthCodeSendEmail" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeInsert">
+      <soap:operation soapAction="#VerifyRegistrantChangeInsert" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeDelete">
+      <soap:operation soapAction="#VerifyRegistrantChangeDelete" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeSendEmail">
+      <soap:operation soapAction="#VerifyRegistrantChangeSendEmail" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeValidate">
+      <soap:operation soapAction="#VerifyRegistrantChangeValidate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeAccept">
+      <soap:operation soapAction="#VerifyRegistrantChangeAccept" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeInstant">
+      <soap:operation soapAction="#VerifyRegistrantChangeInstant" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToSendEmail">
+      <soap:operation soapAction="#VerifyTransferToSendEmail" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToAuthInfoChange">
+      <soap:operation soapAction="#VerifyTransferToAuthInfoChange" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToRestart">
+      <soap:operation soapAction="#VerifyTransferToRestart" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToAck">
+      <soap:operation soapAction="#VerifyTransferToAck" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToNack">
+      <soap:operation soapAction="#VerifyTransferToNack" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToRetry">
+      <soap:operation soapAction="#VerifyTransferToRetry" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToCancel">
+      <soap:operation soapAction="#VerifyTransferToCancel" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferFromAck">
+      <soap:operation soapAction="#VerifyTransferFromAck" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferFromNack">
+      <soap:operation soapAction="#VerifyTransferFromNack" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderAssign">
+      <soap:operation soapAction="#VerifyDomainFolderAssign" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderUnassign">
+      <soap:operation soapAction="#VerifyDomainFolderUnassign" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderUnassignAll">
+      <soap:operation soapAction="#VerifyDomainFolderUnassignAll" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProtectionUpdate">
+      <soap:operation soapAction="#VerifyDomainProtectionUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainDownloadList">
+      <soap:operation soapAction="#VerifyDomainDownloadList" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorBackorderSetup">
+      <soap:operation soapAction="#VerifyMonitorBackorderSetup" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorBackorderCancel">
+      <soap:operation soapAction="#VerifyMonitorBackorderCancel" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorUpgrade">
+      <soap:operation soapAction="#VerifyMonitorUpgrade" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorEmailUpdate">
+      <soap:operation soapAction="#VerifyMonitorEmailUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorResendEmails">
+      <soap:operation soapAction="#VerifyMonitorResendEmails" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderContactUpdate">
+      <soap:operation soapAction="#VerifyBackorderContactUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderAgreementsUpdate">
+      <soap:operation soapAction="#VerifyBackorderAgreementsUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderPrivacyUpdate">
+      <soap:operation soapAction="#VerifyBackorderPrivacyUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainSetup">
+      <soap:operation soapAction="#VerifyPremiumDomainSetup" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainSetAutoRelist">
+      <soap:operation soapAction="#VerifyPremiumDomainSetAutoRelist" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainUpdate">
+      <soap:operation soapAction="#VerifyPremiumDomainUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainRemove">
+      <soap:operation soapAction="#VerifyPremiumDomainRemove" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTDNAMAuctionSetup">
+      <soap:operation soapAction="#VerifyTDNAMAuctionSetup" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTDNAMAuctionCancel">
+      <soap:operation soapAction="#VerifyTDNAMAuctionCancel" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileCreate">
+      <soap:operation soapAction="#VerifyDomainProfileCreate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileAssign">
+      <soap:operation soapAction="#VerifyDomainProfileAssign" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileUnassign">
+      <soap:operation soapAction="#VerifyDomainProfileUnassign" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileUnassignAll">
+      <soap:operation soapAction="#VerifyDomainProfileUnassignAll" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileAttributeChange">
+      <soap:operation soapAction="#VerifyDomainProfileAttributeChange" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileDelete">
+      <soap:operation soapAction="#VerifyDomainProfileDelete" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyProfileSetAttribute">
+      <soap:operation soapAction="#VerifyProfileSetAttribute" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySendCIRAAccountInfoEmail">
+      <soap:operation soapAction="#VerifySendCIRAAccountInfoEmail" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileMergeCA">
+      <soap:operation soapAction="#VerifyDomainProfileMergeCA" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainConsolidate">
+      <soap:operation soapAction="#VerifyDomainConsolidate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAppraisalUpgrade">
+      <soap:operation soapAction="#VerifyAppraisalUpgrade" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySmartDomainsAdd">
+      <soap:operation soapAction="#VerifySmartDomainsAdd" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySmartDomainsRenew">
+      <soap:operation soapAction="#VerifySmartDomainsRenew" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainChangeOfRegistrantCA">
+      <soap:operation soapAction="#VerifyDomainChangeOfRegistrantCA" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainMobilizerUpdate">
+      <soap:operation soapAction="#VerifyDomainMobilizerUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainMobilizerRemove">
+      <soap:operation soapAction="#VerifyDomainMobilizerRemove" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegDCCVerifyWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegDCCVerifyWebSvcService">
+    <wsdl:port name="RegDCCVerifyWebSvcServiceSoap" binding="s0:RegDCCVerifyWebSvcServiceSoap">
+      <soap:address location="http://devdsweb:80/RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -17,15 +17,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ExternalReferences", "..\Atlantis.Framework.ExternalReferences\Atlantis.Framework.ExternalReferences.csproj", "{97FDB84B-02BD-4174-9942-812663DC1B0B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{ED9F987E-84E2-4420-8EB9-50A4C23ECF71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
 		SccLocalPath0 = .
@@ -46,14 +44,10 @@ Global
 		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.MyaRenewalBundleItems.sln
 		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
 		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName6 = ..\\Atlantis.Framework.ExternalReferences\\Atlantis.Framework.ExternalReferences.csproj
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
 		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.MyaRenewalBundleItems.sln
-		SccProjectName6 = ../Atlantis.Framework.ExternalReferences
-		SccLocalPath6 = ..\\Atlantis.Framework.ExternalReferences
-		SccProjectUniqueName7 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
-		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.MyaRenewalBundleItems.sln
-		SccProjectName7 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
-		SccLocalPath7 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.MyaRenewalBundleItems.vsmdi
@@ -83,10 +77,6 @@ Global
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -97,7 +87,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {ED9F987E-84E2-4420-8EB9-50A4C23ECF71}
-		{97FDB84B-02BD-4174-9942-812663DC1B0B} = {ED9F987E-84E2-4420-8EB9-50A4C23ECF71}
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {ED9F987E-84E2-4420-8EB9-50A4C23ECF71}
 		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {ED9F987E-84E2-4420-8EB9-50A4C23ECF71}
 	EndGlobalSection

@@ -26,6 +26,7 @@ namespace Atlantis.Framework.SAGetVisitors.Interface
       get { return _response.Visits; }
     }
    
+    public SAGetVisitorsResponseData(){}
 
     public SAGetVisitorsResponseData(VisitorResponseData  data)
     {

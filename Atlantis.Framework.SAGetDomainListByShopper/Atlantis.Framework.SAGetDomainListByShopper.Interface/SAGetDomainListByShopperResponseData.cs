@@ -28,6 +28,9 @@ namespace Atlantis.Framework.SAGetDomainListByShopper.Interface
       }
     }
 
+
+    public SAGetDomainListByShopperResponseData() { }
+
     public SAGetDomainListByShopperResponseData(AtlantisException atlantisException)
     {
       _exception = atlantisException;

@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace Atlantis.Framework.DataCache
 {
-  internal class SlimWrite : IDisposable
+  public class SlimWrite : IDisposable
   {
     ReaderWriterLockSlim _slimLock;
 

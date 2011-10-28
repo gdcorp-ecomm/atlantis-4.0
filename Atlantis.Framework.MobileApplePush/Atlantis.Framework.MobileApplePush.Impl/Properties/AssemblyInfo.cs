@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.DataCache")]
+[assembly: AssemblyTitle("Atlantis.Framework.MobileApplePush.Impl")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com")]
-[assembly: AssemblyProduct("Atlantis.Framework.DataCache")]
+[assembly: AssemblyProduct("Atlantis.Framework.MobileApplePush.Impl")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b6f4ec96-a67f-4c0d-b1f5-1bd7b209961d")]
+[assembly: Guid("a89739e3-67b0-4ba3-b142-7fd077395a3b")]
 
 // Version information for an assembly consists of the following four values:
 //

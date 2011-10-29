@@ -7,7 +7,34 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 {
   public class AccordionMetaData
   {
-    #region Properties
+    #region Private Properties
+    private XDocument _xDoc;
+    private XDocument AccordionXDoc
+    {
+      get
+      {
+        if (_xDoc == null)
+        {
+          try
+          {
+            _xDoc = XDocument.Parse(AccordionXml);
+          }
+          catch
+          {
+            _xDoc = XDocument.Parse("<accordion error='AccordionXml Malformed'/>");
+          }
+        }
+        return _xDoc;
+      }
+    }
+    private bool IsWellFormedAccordionXml
+    {
+      get { return !AccordionXDoc.Element("accordion").FirstAttribute.Name.Equals("error"); }
+    }
+
+    #endregion
+
+    #region Public Properties
     public class CssSpriteCoordinate
     {
       public string X { get; set; }
@@ -24,26 +51,56 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       }
     }
 
+    #region Stored Database Properties
     public int AccordionId { get; set; }
     public string AccordionTitle { get; set; }
-    public string CiExpansion { get; set; }
-    public string CiRenewNow { get; set; }
-    public string CiSetup { get; set; }
+    public string AccordionXml { get; set; }
     public string ContentXml { get; set; }
     public string ControlPanelXml { get; set; }
-    public bool ControlPanelRequiresAccount { get; set; }
     public int DefaultSortOrder { get; set; }
-    public CssSpriteCoordinate IconnCssCoordinates { get; set; }
-    public bool IsProductOfferedFree { get; set; }
     public List<string> Namespaces { get; set; }
-    public bool ShowSetupForManagerOnly { get; set; }
     public string WorkspaceLoginXml { get; set; }
-   
+    #endregion
+
+    #region Derived Xml Properties
+    public string CiExpansion 
+    {
+      get { return ParseAccordionXml("ciexpansion"); }
+    }
+    public string CiRenewNow
+    {
+      get { return ParseAccordionXml("cirenewnow"); }
+    }
+    public string CiSetup
+    {
+      get { return ParseAccordionXml("cisetup"); }    
+    }
+    public CssSpriteCoordinate IconCssCoordinates 
+    { 
+      get { return SetCoordinates(ParseAccordionXml("iconcsscoordinates")); }
+    }
+    public bool IsProductOfferedFree
+    {
+      get { return string.Compare(ParseAccordionXml("isproductofferedfree"), "true", true) == 0; }
+    }
+    public bool ShowControlPanel
+    {
+      get { return string.Compare(ParseAccordionXml("controlpanelrequiresaccount"), "false", true) == 0; }
+    }
+    public bool ShowSetupForManagerOnly
+    {
+      get { return string.Compare(ParseAccordionXml("showsetupformanageronly"), "true", true) == 0; }
+    }
+    #endregion
+
     #endregion
 
     #region Constructor
     public AccordionMetaData()
     { }
+    #endregion
+
+    #region Private Methods
 
     private CssSpriteCoordinate SetCoordinates(string iconnCssCoordinates)
     {
@@ -58,13 +115,14 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
         return new CssSpriteCoordinate("0px", "0px", "0px", "0px");
       }
     }
+
+    private string ParseAccordionXml(string attribute)
+    {
+      return IsWellFormedAccordionXml ? AccordionXDoc.Element("accordion").Attribute(attribute).Value : string.Empty;
+    }
     #endregion
 
-    #region Convenience Methods
-    public bool ShowControlPanel()
-    {
-      return !ControlPanelRequiresAccount;
-    }
+    #region Public Methods
 
     public bool HasProductList()
     {
@@ -76,9 +134,16 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       }
       else
       {
-        XDocument content = XDocument.Parse(ContentXml);
-        XElement root = content.Element("groups");
-        hasProductList = root.HasElements;
+        try
+        {
+          XDocument root = XDocument.Parse(ContentXml);
+          XElement content = root.Element("content");
+          hasProductList = content.HasElements;
+        }
+        catch
+        {
+          hasProductList = false;
+        }        
       }
 
       return hasProductList;
@@ -93,9 +158,16 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       }
       else
       {
-        XDocument content = XDocument.Parse(WorkspaceLoginXml);
-        XElement workspace = content.Element("workspace");
-        show = workspace.HasAttributes && !string.IsNullOrWhiteSpace(workspace.Attribute("apptag").Value);       
+        try
+        {
+          XDocument root = XDocument.Parse(WorkspaceLoginXml);
+          XElement workspace = root.Element("workspace");
+          show = workspace.HasElements;
+        }
+        catch
+        {
+          show = false;
+        }
       }
       return show;
     }

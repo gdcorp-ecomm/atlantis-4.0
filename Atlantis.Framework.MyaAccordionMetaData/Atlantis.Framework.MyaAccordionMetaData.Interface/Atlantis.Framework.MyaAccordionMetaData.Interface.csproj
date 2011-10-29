@@ -100,6 +100,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="MetaData\Accordion.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="MetaData\Content.xsd">
       <SubType>Designer</SubType>
     </None>

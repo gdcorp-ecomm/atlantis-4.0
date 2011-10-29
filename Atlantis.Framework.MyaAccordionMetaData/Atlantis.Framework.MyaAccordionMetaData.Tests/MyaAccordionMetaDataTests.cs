@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
+using System.Web;
 using Atlantis.Framework.MyaAccordionMetaData.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -65,6 +67,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
         namespaces.Add("pg|4");
         namespaces.Add("campblazer");
         namespaces.Add("pg|1");
+        namespaces.Add("dbp");
         namespaces.Add("bogus");
         namespaces.Add("domain");
         IList<AccordionMetaData> myAccordions = response.GetMyAccordions(namespaces);
@@ -73,16 +76,44 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
         Debug.WriteLine("");
         foreach (AccordionMetaData amd in myAccordions)
         {
-          Debug.WriteLine(string.Format("ID: {0} | Title: {1} | SortOrder: {2}", amd.AccordionId, amd.AccordionTitle, amd.DefaultSortOrder));
+          Debug.WriteLine(string.Format("{0}: (ID={1}, DefaultSortOrder={2})", amd.AccordionTitle, amd.AccordionId, amd.DefaultSortOrder));
         }
 
-        Debug.WriteLine("");
-        Debug.WriteLine("********************** GET ACCORDION BY ID (Email) **********************");
-        AccordionMetaData emailAccordion = response.GetAccordionById(3);
-        Debug.WriteLine(string.Format("ID: {0} | Title: {1} | CSSCoordinates: {2}", emailAccordion.AccordionId, emailAccordion.AccordionTitle, string.Format("{0},{1},{2},{3}", emailAccordion.IconnCssCoordinates.X, emailAccordion.IconnCssCoordinates.Y, emailAccordion.IconnCssCoordinates.Width, emailAccordion.IconnCssCoordinates.Height)));
-        Debug.WriteLine("");
+        foreach (AccordionMetaData accordion in myAccordions)
+        {
+          Debug.WriteLine("");
+          Debug.WriteLine(string.Format("********************** GET ACCORDION BY ID ({0}) **********************", accordion.AccordionTitle));
+          PropertyInfo[] properties = accordion.GetType().GetProperties();
+          foreach (PropertyInfo p in properties)
+          {
+            switch (p.Name)
+            {
+              case "Namespaces":
+                string list = string.Empty;
+                List<string> nss = p.GetValue(accordion, null) as List<string>;
+                foreach (string ns in nss)
+                {
+                  list = list + string.Format("{0},", ns);
+                }
+                list.TrimEnd(',');
+                Debug.WriteLine(string.Format("{0}: {1}", p.Name, list));
+                break;
+              case "IconCssCoordinates":
+                AccordionMetaData.CssSpriteCoordinate coords = p.GetValue(accordion, null) as AccordionMetaData.CssSpriteCoordinate;
+                Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("X:{0},Y:{1},Width:{2},Height:{3}", coords.X, coords.Y, coords.Width, coords.Height)));
+                break;
+              default:
+                Debug.WriteLine(string.Format("{0}: {1}", p.Name, p.GetValue(accordion, null)));
+                break;
+            }
+          }
+          Debug.WriteLine(string.Format("HasProductList: {0}", accordion.HasProductList()));
+          Debug.WriteLine(string.Format("ShowWorkspaceLogin: {0}", accordion.ShowWorkspaceLogin()));
+        }
+        Debug.WriteLine("");        
+                
         Debug.WriteLine("********************** ToXML() **********************");
-        Debug.WriteLine(response.ToXML());
+        Debug.WriteLine(HttpUtility.HtmlDecode(response.ToXML()));
       }
     }
   }

@@ -75,20 +75,14 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
         XDocument xDoc = XDocument.Parse(metaDataXml);
         accordions = (from accordion in xDoc.Element("data").Elements()
                       select new AccordionMetaData()
-                      {        
+                      {
                         AccordionId = Convert.ToInt32(accordion.Attribute("accordionId").Value),
                         AccordionTitle = accordion.Attribute("accordionTitle").Value,
-                        CiExpansion = accordion.Attribute("ciExpansion").Value,
-                        CiRenewNow = accordion.Attribute("ciRenewNow").Value,
-                        CiSetup = accordion.Attribute("ciSetup").Value,
+                        AccordionXml = accordion.Attribute("accordionXml").Value,
                         ContentXml = accordion.Attribute("contentXml").Value,
                         ControlPanelXml = accordion.Attribute("controlPanelXml").Value,
-                        ControlPanelRequiresAccount = string.Compare(accordion.Attribute("controlPanelRequiresAccount").Value, "1") == 0,
                         DefaultSortOrder = Convert.ToInt32(accordion.Attribute("defaultSortOrder").Value),
-                        IconnCssCoordinates = SetCoordinates(accordion.Attribute("iconcsscoordinate").Value),
-                        IsProductOfferedFree = string.Compare(accordion.Attribute("isProductOfferedFree").Value, "1") == 0,
                         Namespaces = Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", "").Split(',').ToList<string>(),
-                        ShowSetupForManagerOnly = string.Compare(accordion.Attribute("showSetupForManagerOnly").Value, "1") == 0,
                         WorkspaceLoginXml = accordion.Attribute("workspaceLoginXml").Value
                       }
                     ).ToList<AccordionMetaData>();

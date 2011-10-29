@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="accordion">
+    <xs:complexType>
+      <xs:attribute name="ciexpansion" type="xs:string" use="required" />
+      <xs:attribute name="cirenewnow" type="xs:string" use="required" />
+      <xs:attribute name="cisetup" type="xs:string" use="required" />
+      <xs:attribute name="controlpanelrequiresaccount" type="xs:string" use="required" />
+      <xs:attribute name="iconcsscoordinates" type="xs:string" use="required" />
+      <xs:attribute name="isproductofferedfree" type="xs:string" use="required" />
+      <xs:attribute name="showsetupformanageronly" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

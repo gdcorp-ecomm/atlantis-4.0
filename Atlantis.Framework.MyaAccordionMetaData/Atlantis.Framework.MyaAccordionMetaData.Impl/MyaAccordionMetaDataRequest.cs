@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
+using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MyaAccordionMetaData.Interface;
 
@@ -14,12 +13,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
 
       try
       {
-        var request = (MyaAccordionMetaDataRequestData)requestData;
-        IList<AccordionMetaData> metaDataList;
+        //string metaDataXml = DataCache.DataCache.GetCacheData("<AccordionMetaData/>");
+        string metaDataXml = BuildDebugMetaDataTable();
 
-        GetAccordionMetaData(request, config, out metaDataList);
-
-        responseData = new MyaAccordionMetaDataResponseData(metaDataList);
+        responseData = new MyaAccordionMetaDataResponseData(metaDataXml);
       }
 
       catch (AtlantisException exAtlantis)
@@ -35,88 +32,82 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
       return responseData;
     }
 
-    private void GetAccordionMetaData(MyaAccordionMetaDataRequestData request, ConfigElement config, out IList<AccordionMetaData> metaDataList)
-    {
-      metaDataList = new List<AccordionMetaData>();
-
-      //DataTable accordionDT = DataCache.DataCache.GetMyaAccordionMetadataList();      
-      DataTable accordionDT = BuildDebugMetaDataTable();
-
-      foreach (DataRow dr in accordionDT.Rows)
-      {
-        AccordionMetaData amd = new AccordionMetaData(dr);
-        if (amd != null)
-        {
-          metaDataList.Add(amd);
-        }
-      }
-    }
-
     #region Debug Data
-    private DataTable BuildDebugMetaDataTable()
+    private string BuildDebugMetaDataTable()
     {
-      DataTable tbl = new DataTable("accordiondata");
-      tbl.Columns.Add("accordionId");
-      tbl.Columns.Add("accordionTitle");
-      tbl.Columns.Add("ciExpansion");
-      tbl.Columns.Add("ciRenewNow");
-      tbl.Columns.Add("ciSetup");
-      tbl.Columns.Add("contentXml");
-      tbl.Columns.Add("controlPanelXml");
-      tbl.Columns.Add("controlPanelRequiresAccount");
-      tbl.Columns.Add("defaultSortOrder");
-      tbl.Columns.Add("isProductOfferedFree");
-      tbl.Columns.Add("myaUserControl");
-      tbl.Columns.Add("namespaces");
-      tbl.Columns.Add("showSetupForManagerOnly");
-      tbl.Columns.Add("workspaceLoginXml");
+      XElement root = new XElement("data",
+        new XAttribute("count", "4"));
 
-      tbl.Rows.Add("1"
-        , "Web Hosting"
-        , "11111"
-        , "22222"
-        , "33333"
-        , "<content procname='mya_accountListGetHosting_sp'/>"
-        , "<controlpanels><linkurl link='HCCURL' ci='44444' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='%ERID%'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>"
-        , "0"
-        , "3"
-        , "1"
-        , "defaultUserControl"
-        , "pg|1, Hosting"
-        , "0"
-        , "<workspace/>");
+      XElement accordiondata1 = new XElement("accordiondata"
+        , new XAttribute("accordionId", 1)
+        , new XAttribute("accordionTitle", "Web Hosting")
+        , new XAttribute("ciExpansion", "11111")
+        , new XAttribute("ciRenewNow", "22222")
+        , new XAttribute("ciSetup", "33333")
+        , new XAttribute("contentXml", "<content accountlist='mya_accountListGetHosting_sp' usercontrol='GetProductList.ascx'/>")
+        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='HCCURL' ci='44444' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='%ERID%'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>")
+        , new XAttribute("controlPanelRequiresAccount", 0)
+        , new XAttribute("defaultSortOrder", 3)
+        , new XAttribute("iconcsscoordinate", "-34px,-82px,14px,14px")
+        , new XAttribute("isProductOfferedFree", 1)
+        , new XAttribute("namespaces", "pg|1,Hosting,hostingfree")
+        , new XAttribute("showSetupForManagerOnly", 0)
+        , new XAttribute("workspaceLoginXml", "<workspace/>"));
 
-      tbl.Rows.Add("10"
-        , "Express Email Marketing"
-        , "12345"
-        , "12346"
-        , "12347"
-        , "<content procname='mya_accountListGetHosting_sp'/>"
-        , "<controlpanels><linkurl link='EEMURL' ci='12348' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value'%PID%'/><qskey name='erID' value='-1'/><qskey name='common_name' value='%CN%'/><qskey name='start' value='%START%'/><qskey name='recurring' value='%RECUR%'/><qskey name='id' value='%ID%'/><qskey name='pbid' value='%PBID%'/><qskey name='pbtype' value='%PBTYPE%'/></linkurl></controlpanels>"
-        , "1"
-        , "21"
-        , "0"
-        , "defaultUserControl"
-        , "pg|21, campblazer"
-        , "0"
-        , "<workspace/>");
+      XElement accordiondata2 = new XElement("accordiondata"
+        , new XAttribute("accordionId", 10)
+        , new XAttribute("accordionTitle", "Express Email Marketing")
+        , new XAttribute("ciExpansion", "12345")
+        , new XAttribute("ciRenewNow", "12346")
+        , new XAttribute("ciSetup", "12347")
+        , new XAttribute("contentXml", "<content accountlist='mya_accountListGetEEM_sp' usercontrol='GetProductList.ascx'/>")
+        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='EEMURL' ci='12348' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value'%PID%'/><qskey name='erID' value='-1'/><qskey name='common_name' value='%CN%'/><qskey name='start' value='%START%'/><qskey name='recurring' value='%RECUR%'/><qskey name='id' value='%ID%'/><qskey name='pbid' value='%PBID%'/><qskey name='pbtype' value='%PBTYPE%'/></linkurl></controlpanels>")
+        , new XAttribute("controlPanelRequiresAccount", "1")
+        , new XAttribute("defaultSortOrder", "21")
+        , new XAttribute("iconcsscoordinate", "-54px,-102px,14px,14px")
+        , new XAttribute("isProductOfferedFree", "0")
+        , new XAttribute("namespaces", "pg|21,campblazer")
+        , new XAttribute("showSetupForManagerOnly", "0")
+        , new XAttribute("workspaceLoginXml", "<workspace/>"));
 
-      tbl.Rows.Add("3"
-        , "Email"
-        , "55555"
-        , "66666"
-        , "77777"
-        , "<content procname='mya_accountListGetHosting_sp'/>"
-        , "<controlpanels><linkurl link='HCCURL' ci='88888' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='%ERID%'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>"
-        , "0"
-        , "4"
-        , "1"
-        , "defaultUserControl"
-        , "pg|4, email"
-        , "0"
-        , "<workspace><linkurl link='SECURESERVERLOGINURL' ci='99999' type='std'><qskey name='apptag' value='wbe'/></linkurl></workspace>");
+      XElement accordiondata3 = new XElement("accordiondata"
+        , new XAttribute("accordionId", 3)
+        , new XAttribute("accordionTitle", "Email")
+        , new XAttribute("ciExpansion", "55555")
+        , new XAttribute("ciRenewNow", "66666")
+        , new XAttribute("ciSetup", "77777")
+        , new XAttribute("contentXml", "<content accountlist='mya_accountListGetEmail_sp' usercontrol='GetProductList.ascx'/>")
+        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='ECCURL' ci='88888' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='%ERID%'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>")
+        , new XAttribute("controlPanelRequiresAccount", "0")
+        , new XAttribute("defaultSortOrder", "4")
+        , new XAttribute("iconcsscoordinate", "-34px,-42px,14px,14px")
+        , new XAttribute("isProductOfferedFree", "1")
+        , new XAttribute("namespaces", "pg|4,email,emailfree,smtprelay,pg|16,emailfwd")
+        , new XAttribute("showSetupForManagerOnly", "0")
+        , new XAttribute("workspaceLoginXml", "<workspace><linkurl link='SECURESERVERLOGINURL' ci='99999' type='std'><qskey name='apptag' value='wbe'/></linkurl></workspace>"));
 
-      return tbl;
+      XElement accordiondata4 = new XElement("accordiondata"
+        , new XAttribute("accordionId", 2)
+        , new XAttribute("accordionTitle", "Domains")
+        , new XAttribute("ciExpansion", "98765")
+        , new XAttribute("ciRenewNow", "98766")
+        , new XAttribute("ciSetup", "98767")
+        , new XAttribute("contentXml", "<content accountlist='' usercontrol='domains.ascx'/>")
+        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='DCCURL' ci='98768' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value'%PID%'/><qskey name='erID' value='-1'/><qskey name='common_name' value='%CN%'/><qskey name='start' value='%START%'/><qskey name='recurring' value='%RECUR%'/><qskey name='id' value='%ID%'/><qskey name='pbid' value='%PBID%'/><qskey name='pbtype' value='%PBTYPE%'/></linkurl></controlpanels>")
+        , new XAttribute("controlPanelRequiresAccount", "0")
+        , new XAttribute("defaultSortOrder", "1")
+        , new XAttribute("iconcsscoordinate", "-154px,-92px,14px,14px")
+        , new XAttribute("isProductOfferedFree", "0")
+        , new XAttribute("namespaces", "pg|30,domain")
+        , new XAttribute("showSetupForManagerOnly", "0")
+        , new XAttribute("workspaceLoginXml", "<workspace/>"));
+
+      root.Add(accordiondata1);
+      root.Add(accordiondata2);
+      root.Add(accordiondata3);
+      root.Add(accordiondata4);
+
+      return root.ToString();
     }
     #endregion
   }

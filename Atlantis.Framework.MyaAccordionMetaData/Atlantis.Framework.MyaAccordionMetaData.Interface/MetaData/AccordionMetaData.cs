@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -9,40 +8,86 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
   public class AccordionMetaData
   {
     #region Properties
-    public int AccordionId { get; private set; }
-    public string AccordionTitle { get; private set; }
-    public string CiExpansion { get; private set; }
-    public string CiRenewNow { get; private set; }
-    public string CiSetup { get; private set; }
-    public string ContentXml { get; private set; }
-    public string ControlPanelXml { get; private set; }
-    public bool ControlPanelRequiresAccount { get; private set; }
-    public int DefaultSortOrder { get; private set; }
-    public bool IsProductOfferedFree { get; private set; }
-    public string MyaUserControl { get; private set; }
-    public List<string> Namespaces { get; private set; }
-    public bool ShowSetupForManagerOnly { get; private set; }
-    public string WorkspaceLoginXml { get; private set; }
+    public class CssSpriteCoordinate
+    {
+      public string X { get; set; }
+      public string Y { get; set; }
+      public string Width { get; set; }
+      public string Height { get; set; }
+
+      public CssSpriteCoordinate(string x, string y, string width, string height)
+      {
+        X = x;
+        Y = y;
+        Width = width;
+        Height = height;
+      }
+    }
+
+    public int AccordionId { get; set; }
+    public string AccordionTitle { get; set; }
+    public string CiExpansion { get; set; }
+    public string CiRenewNow { get; set; }
+    public string CiSetup { get; set; }
+    public string ContentXml { get; set; }
+    public string ControlPanelXml { get; set; }
+    public bool ControlPanelRequiresAccount { get; set; }
+    public int DefaultSortOrder { get; set; }
+    public CssSpriteCoordinate IconnCssCoordinates { get; set; }
+    public bool IsProductOfferedFree { get; set; }
+    public List<string> Namespaces { get; set; }
+    public bool ShowSetupForManagerOnly { get; set; }
+    public string WorkspaceLoginXml { get; set; }
    
     #endregion
 
     #region Constructor
-    public AccordionMetaData(DataRow dr)
+    public AccordionMetaData()
+    { }
+
+    public AccordionMetaData(string accordionId
+      , string accordionTitle
+      , string ciExpansion
+      , string ciRenewNow
+      , string ciSetup
+      , string contentXml
+      , string controlPanelXml
+      , string controlPanelRequiresAccount
+      , string defaultSortOrder
+      , string iconnCssCoordinates
+      , string isProductOfferedFree
+      , string namespaces
+      , string showSetupForManagerOnly
+      , string workspaceLoginXml)
     {
-      AccordionId = Convert.ToInt32(dr["accordionId"]);
-      AccordionTitle = Convert.ToString(dr["accordionTitle"]);
-      CiExpansion = Convert.ToString(dr["ciExpansion"]);
-      CiRenewNow = Convert.ToString(dr["ciRenewNow"]);
-      CiSetup = Convert.ToString(dr["ciSetup"]);
-      ContentXml = Convert.ToString(dr["contentXml"]);
-      ControlPanelXml = Convert.ToString(dr["controlPanelXml"]);
-      ControlPanelRequiresAccount = string.Compare(Convert.ToString(dr["controlPanelRequiresAccount"]), "1") == 0;
-      DefaultSortOrder = Convert.ToInt32(dr["defaultSortOrder"]);
-      IsProductOfferedFree = string.Compare(Convert.ToString(dr["isProductOfferedFree"]), "1") == 0;
-      MyaUserControl = Convert.ToString(dr["myaUserControl"]);
-      Namespaces = Convert.ToString(dr["namespaces"]).ToLowerInvariant().Replace(" ", "").Split(',').ToList<string>();
-      ShowSetupForManagerOnly = string.Compare(Convert.ToString(dr["showSetupForManagerOnly"]), "1") == 0;
-      WorkspaceLoginXml = Convert.ToString(dr["workspaceLoginXml"]);
+      AccordionId = Convert.ToInt32(accordionId);
+      AccordionTitle = accordionTitle;
+      CiExpansion = ciExpansion;
+      CiRenewNow = ciRenewNow;
+      CiSetup = ciSetup;
+      ContentXml = contentXml;
+      ControlPanelXml = controlPanelXml;
+      ControlPanelRequiresAccount = string.Compare(controlPanelRequiresAccount, "1") == 0;
+      DefaultSortOrder = Convert.ToInt32(defaultSortOrder);
+      IconnCssCoordinates = SetCoordinates(iconnCssCoordinates);
+      IsProductOfferedFree = string.Compare(isProductOfferedFree, "1") == 0;
+      Namespaces = namespaces.ToLowerInvariant().Replace(" ", "").Split(',').ToList<string>();
+      ShowSetupForManagerOnly = string.Compare(showSetupForManagerOnly, "1") == 0;
+      WorkspaceLoginXml = workspaceLoginXml;
+    }
+
+    private CssSpriteCoordinate SetCoordinates(string iconnCssCoordinates)
+    {
+      string[] coordintatePoints = iconnCssCoordinates.Split(',');
+
+      try
+      {
+        return new CssSpriteCoordinate(coordintatePoints[0], coordintatePoints[1], coordintatePoints[2], coordintatePoints[3]);
+      }
+      catch
+      {
+        return new CssSpriteCoordinate("0px", "0px", "0px", "0px");
+      }
     }
     #endregion
 

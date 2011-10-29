@@ -55,6 +55,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
         , 0 );
 
 	    MyaAccordionMetaDataResponseData response = (MyaAccordionMetaDataResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
+      DataCache.DataCache.GetCacheData("<AccordionData/>");
 	  
       Assert.IsTrue(response.IsSuccess);
       if (response.IsSuccess)
@@ -64,11 +65,24 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
         namespaces.Add("pg|4");
         namespaces.Add("campblazer");
         namespaces.Add("pg|1");
-        IList<AccordionMetaData> myAccordions = response.GetMyAccordionIds(namespaces);
+        namespaces.Add("bogus");
+        namespaces.Add("domain");
+        IList<AccordionMetaData> myAccordions = response.GetMyAccordions(namespaces);
+
+        Debug.WriteLine("********************** GET MY ACCORDIONS **********************");
+        Debug.WriteLine("");
         foreach (AccordionMetaData amd in myAccordions)
         {
           Debug.WriteLine(string.Format("ID: {0} | Title: {1} | SortOrder: {2}", amd.AccordionId, amd.AccordionTitle, amd.DefaultSortOrder));
         }
+
+        Debug.WriteLine("");
+        Debug.WriteLine("********************** GET ACCORDION BY ID (Email) **********************");
+        AccordionMetaData emailAccordion = response.GetAccordionById(3);
+        Debug.WriteLine(string.Format("ID: {0} | Title: {1} | CSSCoordinates: {2}", emailAccordion.AccordionId, emailAccordion.AccordionTitle, string.Format("{0},{1},{2},{3}", emailAccordion.IconnCssCoordinates.X, emailAccordion.IconnCssCoordinates.Y, emailAccordion.IconnCssCoordinates.Width, emailAccordion.IconnCssCoordinates.Height)));
+        Debug.WriteLine("");
+        Debug.WriteLine("********************** ToXML() **********************");
+        Debug.WriteLine(response.ToXML());
       }
     }
   }

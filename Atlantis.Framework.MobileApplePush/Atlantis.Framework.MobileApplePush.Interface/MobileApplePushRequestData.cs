@@ -9,9 +9,17 @@ namespace Atlantis.Framework.MobileApplePush.Interface
 
     public MobileApplePushNotification Notification { get; private set; }
 
-    public MobileApplePushRequestData(string deviceToken, string message, string shopperId, string sourceUrl, string orderId, string pathway, int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public MobileApplePushRequestData(string message, string deviceToken, string shopperId, string sourceUrl, string orderId, string pathway, int pageCount) : this(message, null, deviceToken, shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      Notification = new MobileApplePushNotification(deviceToken, message);
+    }
+
+    public MobileApplePushRequestData(int? badge, string deviceToken, string shopperId, string sourceUrl, string orderId, string pathway, int pageCount) : this(null, badge, deviceToken, shopperId, sourceUrl, orderId, pathway, pageCount)
+    {
+    }
+
+    public MobileApplePushRequestData(string message, int? badge, string deviceToken, string shopperId, string sourceUrl, string orderId, string pathway, int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    {
+      Notification = new MobileApplePushNotification(message, badge, deviceToken);
       RequestTimeout = _defaultRequestTimeout;
     }
 

@@ -53,10 +53,6 @@
     <Compile Include="MobileApplePushTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
-      <Project>{7F2738F8-683C-49E7-88CD-E986C70F0321}</Project>
-      <Name>Atlantis.Framework.DataCache</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{D30157B2-C1B3-4073-BA5E-632E2337A997}</Project>
       <Name>Atlantis.Framework.Engine</Name>

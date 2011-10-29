@@ -72,10 +72,10 @@ namespace Atlantis.Framework.MobileApplePush.Interface
       return success;
     }
 
-    public MobileApplePushNotification(string deviceToken, string message)
+    public MobileApplePushNotification(string message, int? badge, string deviceToken)
     {
       DeviceToken = deviceToken;
-      Payload = new MobileApplePushNotificationPayload(message);
+      Payload = new MobileApplePushNotificationPayload(message, badge);
     }
   }
 }

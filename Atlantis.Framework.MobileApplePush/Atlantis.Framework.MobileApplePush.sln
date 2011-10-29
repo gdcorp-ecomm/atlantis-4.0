@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobileApplePush.Impl", "Atlantis.Framework.MobileApplePush.Impl\Atlantis.Framework.MobileApplePush.Impl.csproj", "{BA70615C-C2A7-477D-84AA-4BD6D0ED8A42}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobileApplePush.Interface", "Atlantis.Framework.MobileApplePush.Interface\Atlantis.Framework.MobileApplePush.Interface.csproj", "{322DBB64-1544-411B-8FB1-4A37A58BC463}"
@@ -24,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
 		SccLocalPath0 = .
@@ -36,19 +34,15 @@ Global
 		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.MobileApplePush.sln
 		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
 		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
-		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.MobileApplePush.sln
-		SccProjectName3 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
-		SccLocalPath3 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
-		SccProjectUniqueName4 = Atlantis.Framework.MobileApplePush.Impl\\Atlantis.Framework.MobileApplePush.Impl.csproj
-		SccProjectName4 = Atlantis.Framework.MobileApplePush.Impl
-		SccLocalPath4 = Atlantis.Framework.MobileApplePush.Impl
-		SccProjectUniqueName5 = Atlantis.Framework.MobileApplePush.Interface\\Atlantis.Framework.MobileApplePush.Interface.csproj
-		SccProjectName5 = Atlantis.Framework.MobileApplePush.Interface
-		SccLocalPath5 = Atlantis.Framework.MobileApplePush.Interface
-		SccProjectUniqueName6 = Atlantis.Framework.MobileApplePush.Tests\\Atlantis.Framework.MobileApplePush.Tests.csproj
-		SccProjectName6 = Atlantis.Framework.MobileApplePush.Tests
-		SccLocalPath6 = Atlantis.Framework.MobileApplePush.Tests
+		SccProjectUniqueName3 = Atlantis.Framework.MobileApplePush.Impl\\Atlantis.Framework.MobileApplePush.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.MobileApplePush.Impl
+		SccLocalPath3 = Atlantis.Framework.MobileApplePush.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.MobileApplePush.Interface\\Atlantis.Framework.MobileApplePush.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.MobileApplePush.Interface
+		SccLocalPath4 = Atlantis.Framework.MobileApplePush.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.MobileApplePush.Tests\\Atlantis.Framework.MobileApplePush.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.MobileApplePush.Tests
+		SccLocalPath5 = Atlantis.Framework.MobileApplePush.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.MobileApplePush.vsmdi
@@ -66,10 +60,6 @@ Global
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA70615C-C2A7-477D-84AA-4BD6D0ED8A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA70615C-C2A7-477D-84AA-4BD6D0ED8A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA70615C-C2A7-477D-84AA-4BD6D0ED8A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -89,6 +79,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D93EE239-610E-47CD-9F98-5375AA267DAF}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {D93EE239-610E-47CD-9F98-5375AA267DAF}
-		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {D93EE239-610E-47CD-9F98-5375AA267DAF}
 	EndGlobalSection
 EndGlobal

@@ -4,7 +4,6 @@ using System.Net.Sockets;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using Atlantis.Framework.DataCache;
 
 namespace Atlantis.Framework.MobileApplePush.Impl
 {
@@ -21,8 +20,6 @@ namespace Atlantis.Framework.MobileApplePush.Impl
     private readonly TimeSpan _requestTimeout;
     private readonly long _connectionDurationTicks;
     private readonly int _connectionOpenRetryCount;
-
-    private readonly SlimLock _connectionLock = new SlimLock();
 
     private bool IsConnected
     {
@@ -65,6 +62,10 @@ namespace Atlantis.Framework.MobileApplePush.Impl
       }
     }
 
+    /// <summary>
+    /// This is NOT thread safe, make sure to get a lock before calling this method
+    /// </summary>
+    /// <returns></returns>
     private bool OpenConnection()
     {
       bool success = false;
@@ -90,6 +91,12 @@ namespace Atlantis.Framework.MobileApplePush.Impl
       return success;
     }
 
+
+    /// <summary>
+    /// This is NOT thread safe, make sure to get a lock before calling this method
+    /// </summary>
+    /// <param name="notificationBytes"></param>
+    /// <returns></returns>
     private bool WriteBytesToStream(byte[] notificationBytes)
     {
       bool success = false;
@@ -107,62 +114,10 @@ namespace Atlantis.Framework.MobileApplePush.Impl
       return success;
     }
 
-    internal bool SendNotification(byte[] notificationBytes)
-    {
-      bool success = false;
-      bool connected;
-
-      using(_connectionLock.GetReadLock())
-      {
-        connected = IsConnected;
-        if (connected)
-        {
-          success = WriteBytesToStream(notificationBytes);
-        }
-      }
-
-      if (!connected)
-      {
-        using (_connectionLock.GetWriteLock())
-        {
-          if (!IsConnected)
-          {
-            bool opened = OpenConnection();
-            if (!opened && _connectionOpenRetryCount > 0)
-            {
-              for (int i = 0; i < _connectionOpenRetryCount; i++)
-              {
-                Thread.Sleep(100);
-                opened = OpenConnection();
-                if (opened)
-                {
-                  break;
-                }
-              }
-            }
-
-            if (!IsConnected)
-            {
-              if (CurrentException == null)
-              {
-                CurrentException = new Exception(string.Format("Unable to open a connection after {0} re-tries. No exception thrown.", _connectionOpenRetryCount));
-              }
-            }
-          }
-        }
-
-        using (_connectionLock.GetReadLock())
-        {
-          if (IsConnected)
-          {
-            success = WriteBytesToStream(notificationBytes);
-          }
-        }
-      }
-
-      return success;
-    }
-
+    /// <summary>
+    /// This is NOT thread safe, make sure to get a lock before calling this method
+    /// </summary>
+    /// <returns></returns>
     private void Dispose()
     {
       if (_apnsStream != null)
@@ -177,6 +132,46 @@ namespace Atlantis.Framework.MobileApplePush.Impl
         _apnsClient.Client.Close();
         _apnsClient.Close();
       }
+    }
+
+    internal bool SendNotification(byte[] notificationBytes)
+    {
+      bool success = false;
+
+      using(new MonitorLock(this))
+      {
+        if (!IsConnected)
+        {
+          bool opened = OpenConnection();
+          if (!opened && _connectionOpenRetryCount > 0)
+          {
+            for (int i = 0; i < _connectionOpenRetryCount; i++)
+            {
+              Thread.Sleep(100);
+              opened = OpenConnection();
+              if (opened)
+              {
+                break;
+              }
+            }
+          }
+
+          if (!IsConnected)
+          {
+            if (CurrentException == null)
+            {
+              CurrentException = new Exception(string.Format("Unable to open a connection after {0} re-tries. No exception thrown.", _connectionOpenRetryCount));
+            }
+          }
+        }
+
+        if(IsConnected)
+        {
+          success = WriteBytesToStream(notificationBytes);
+        }
+      }
+
+      return success;
     }
   }
 }

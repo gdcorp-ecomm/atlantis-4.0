@@ -45,37 +45,6 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     public AccordionMetaData()
     { }
 
-    public AccordionMetaData(string accordionId
-      , string accordionTitle
-      , string ciExpansion
-      , string ciRenewNow
-      , string ciSetup
-      , string contentXml
-      , string controlPanelXml
-      , string controlPanelRequiresAccount
-      , string defaultSortOrder
-      , string iconnCssCoordinates
-      , string isProductOfferedFree
-      , string namespaces
-      , string showSetupForManagerOnly
-      , string workspaceLoginXml)
-    {
-      AccordionId = Convert.ToInt32(accordionId);
-      AccordionTitle = accordionTitle;
-      CiExpansion = ciExpansion;
-      CiRenewNow = ciRenewNow;
-      CiSetup = ciSetup;
-      ContentXml = contentXml;
-      ControlPanelXml = controlPanelXml;
-      ControlPanelRequiresAccount = string.Compare(controlPanelRequiresAccount, "1") == 0;
-      DefaultSortOrder = Convert.ToInt32(defaultSortOrder);
-      IconnCssCoordinates = SetCoordinates(iconnCssCoordinates);
-      IsProductOfferedFree = string.Compare(isProductOfferedFree, "1") == 0;
-      Namespaces = namespaces.ToLowerInvariant().Replace(" ", "").Split(',').ToList<string>();
-      ShowSetupForManagerOnly = string.Compare(showSetupForManagerOnly, "1") == 0;
-      WorkspaceLoginXml = workspaceLoginXml;
-    }
-
     private CssSpriteCoordinate SetCoordinates(string iconnCssCoordinates)
     {
       string[] coordintatePoints = iconnCssCoordinates.Split(',');

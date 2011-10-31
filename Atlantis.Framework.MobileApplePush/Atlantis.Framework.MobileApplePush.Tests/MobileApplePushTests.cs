@@ -52,6 +52,7 @@ namespace Atlantis.Framework.MobileApplePush.Tests
         Assert.Fail(ex.Message);
       }
 
+      // Message, 128 char max, Badge 4 character max
       MobileApplePushRequestData requestData2 = new MobileApplePushRequestData("123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 1234567890 1234567890 123456789",
                                                                               9999,
                                                                               deviceToken,
@@ -64,12 +65,12 @@ namespace Atlantis.Framework.MobileApplePush.Tests
       // View mapping "v" key, 4 digit mapping max
       requestData2.Notification.Payload.AddCustomInt("v", 1234);
 
-      // ISC code, 15 characters max OR fbiOfferId (fastball), 15 digit max
-      requestData2.Notification.Payload.AddCustomString("i", "danica123456789");
-      //requestData2.Notification.Payload.AddCustomInt("f", 123456789012345);
+      // ISC code, 12 characters max OR fbiOfferId (fastball), 15 digit max
+      requestData2.Notification.Payload.AddCustomString("i", "danica123456");
+      //requestData2.Notification.Payload.AddCustomInt("f", 123456789012);
 
-      // ci (click impression), 15 digit max
-      requestData2.Notification.Payload.AddCustomInt("c", 123456789012345);
+      // ci (click impression), 12 digit max
+      requestData2.Notification.Payload.AddCustomInt("c", 123456789012);
 
       try
       {

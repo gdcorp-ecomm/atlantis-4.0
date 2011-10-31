@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx?wsdl" docRef="https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx" xmlns:q1="http://WSgdCardRequirements.godaddy.com/" binding="q1:CardRequirementsSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx" xmlns:q2="http://WSgdCardRequirements.godaddy.com/" binding="q2:CardRequirementsSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

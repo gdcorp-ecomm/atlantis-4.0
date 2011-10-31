@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://WSgdCardRequirements.godaddy.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://WSgdCardRequirements.godaddy.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://WSgdCardRequirements.godaddy.com/">
+      <s:element name="GetRequirements">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sXCardNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequirementsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRequirementsResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRequirementXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequirementsEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sCardXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequirementsExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRequirementsExResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRequirementXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequirementsByProfile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nProfileID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequirementsByProfileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRequirementsByProfileResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRequirementXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetRequirementsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRequirements" />
+  </wsdl:message>
+  <wsdl:message name="GetRequirementsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRequirementsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRequirementsExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRequirementsEx" />
+  </wsdl:message>
+  <wsdl:message name="GetRequirementsExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRequirementsExResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRequirementsByProfileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRequirementsByProfile" />
+  </wsdl:message>
+  <wsdl:message name="GetRequirementsByProfileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRequirementsByProfileResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CardRequirementsSoap">
+    <wsdl:operation name="GetRequirements">
+      <wsdl:input message="tns:GetRequirementsSoapIn" />
+      <wsdl:output message="tns:GetRequirementsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRequirementsEx">
+      <wsdl:input message="tns:GetRequirementsExSoapIn" />
+      <wsdl:output message="tns:GetRequirementsExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRequirementsByProfile">
+      <wsdl:input message="tns:GetRequirementsByProfileSoapIn" />
+      <wsdl:output message="tns:GetRequirementsByProfileSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CardRequirementsSoap" type="tns:CardRequirementsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRequirements">
+      <soap:operation soapAction="http://WSgdCardRequirements.godaddy.com/GetRequirements" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequirementsEx">
+      <soap:operation soapAction="http://WSgdCardRequirements.godaddy.com/GetRequirementsEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequirementsByProfile">
+      <soap:operation soapAction="http://WSgdCardRequirements.godaddy.com/GetRequirementsByProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CardRequirementsSoap12" type="tns:CardRequirementsSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRequirements">
+      <soap12:operation soapAction="http://WSgdCardRequirements.godaddy.com/GetRequirements" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequirementsEx">
+      <soap12:operation soapAction="http://WSgdCardRequirements.godaddy.com/GetRequirementsEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequirementsByProfile">
+      <soap12:operation soapAction="http://WSgdCardRequirements.godaddy.com/GetRequirementsByProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CardRequirements">
+    <wsdl:port name="CardRequirementsSoap" binding="tns:CardRequirementsSoap">
+      <soap:address location="https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CardRequirementsSoap12" binding="tns:CardRequirementsSoap12">
+      <soap12:address location="https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

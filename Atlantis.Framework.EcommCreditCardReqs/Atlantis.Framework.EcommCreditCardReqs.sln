@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommCreditCardReqs.Impl", "Atlantis.Framework.EcommCreditCardReqs.Impl\Atlantis.Framework.EcommCreditCardReqs.Impl.csproj", "{F611FDE6-229F-4972-804A-C1959891565A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommCreditCardReqs.Interface", "Atlantis.Framework.EcommCreditCardReqs.Interface\Atlantis.Framework.EcommCreditCardReqs.Interface.csproj", "{EA4DDC48-C9EA-400E-99B7-AE4BDFF22E3E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F0169F2C-7FE7-4091-BDED-6EAA1B65E429}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommCreditCardReqs.Tests", "Atlantis.Framework.EcommCreditCardReqs.Test\Atlantis.Framework.EcommCreditCardReqs.Tests.csproj", "{C889039C-0CF7-4212-83FE-4F884C499036}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F820A2A5-DAE7-460B-92D7-75C1923ED63E}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.EcommCreditCardReqs.vsmdi = Atlantis.Framework.EcommCreditCardReqs.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.EcommCreditCardReqs.Impl\\Atlantis.Framework.EcommCreditCardReqs.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.EcommCreditCardReqs.Impl
+		SccLocalPath1 = Atlantis.Framework.EcommCreditCardReqs.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.EcommCreditCardReqs.Interface\\Atlantis.Framework.EcommCreditCardReqs.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.EcommCreditCardReqs.Interface
+		SccLocalPath2 = Atlantis.Framework.EcommCreditCardReqs.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.EcommCreditCardReqs.Test\\Atlantis.Framework.EcommCreditCardReqs.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.EcommCreditCardReqs.Test
+		SccLocalPath3 = Atlantis.Framework.EcommCreditCardReqs.Test
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.EcommCreditCardReqs.sln
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.EcommCreditCardReqs.sln
+		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.EcommCreditCardReqs.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F611FDE6-229F-4972-804A-C1959891565A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F611FDE6-229F-4972-804A-C1959891565A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F611FDE6-229F-4972-804A-C1959891565A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F611FDE6-229F-4972-804A-C1959891565A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA4DDC48-C9EA-400E-99B7-AE4BDFF22E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA4DDC48-C9EA-400E-99B7-AE4BDFF22E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA4DDC48-C9EA-400E-99B7-AE4BDFF22E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA4DDC48-C9EA-400E-99B7-AE4BDFF22E3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C889039C-0CF7-4212-83FE-4F884C499036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C889039C-0CF7-4212-83FE-4F884C499036}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C889039C-0CF7-4212-83FE-4F884C499036}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C889039C-0CF7-4212-83FE-4F884C499036}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {F0169F2C-7FE7-4091-BDED-6EAA1B65E429}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {F0169F2C-7FE7-4091-BDED-6EAA1B65E429}
+	EndGlobalSection
+EndGlobal

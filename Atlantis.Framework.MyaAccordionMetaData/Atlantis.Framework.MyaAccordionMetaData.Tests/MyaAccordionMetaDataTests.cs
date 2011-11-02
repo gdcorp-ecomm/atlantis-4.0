@@ -49,11 +49,6 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 
     [TestMethod]
 	  [DeploymentItem("atlantis.config")]
-    [DeploymentItem("C:/TFS/AF40/Atlantis.Framework.MyaAccordionMetaData/Atlantis.Framework.MyaAccordionMetaData.Interface/MetaData/Accordion.xsd")]
-    [DeploymentItem("C:/TFS/AF40/Atlantis.Framework.MyaAccordionMetaData/Atlantis.Framework.MyaAccordionMetaData.Interface/MetaData/Content.xsd")]
-    [DeploymentItem("C:/TFS/AF40/Atlantis.Framework.MyaAccordionMetaData/Atlantis.Framework.MyaAccordionMetaData.Interface/MetaData/ControlPanel.xsd")]
-    [DeploymentItem("C:/TFS/AF40/Atlantis.Framework.MyaAccordionMetaData/Atlantis.Framework.MyaAccordionMetaData.Interface/MetaData/LinkUrl.xsd")]
-    [DeploymentItem("C:/TFS/AF40/Atlantis.Framework.MyaAccordionMetaData/Atlantis.Framework.MyaAccordionMetaData.Interface/MetaData/WorkspaceLogin.xsd")]
     public void MyaAccordionMetaDataTest()
     {
       MyaAccordionMetaDataRequestData request = new MyaAccordionMetaDataRequestData("856907"

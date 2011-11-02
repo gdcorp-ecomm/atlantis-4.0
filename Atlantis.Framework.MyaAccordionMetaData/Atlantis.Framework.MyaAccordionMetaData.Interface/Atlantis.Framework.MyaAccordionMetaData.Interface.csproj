@@ -106,21 +106,21 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="MetaData\Accordion.xsd">
+    <EmbeddedResource Include="MetaData\Accordion.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="MetaData\Content.xsd">
+    </EmbeddedResource>
+    <EmbeddedResource Include="MetaData\Content.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="MetaData\ControlPanel.xsd">
+    </EmbeddedResource>
+    <EmbeddedResource Include="MetaData\ControlPanel.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="MetaData\LinkUrl.xsd">
+    </EmbeddedResource>
+    <EmbeddedResource Include="MetaData\LinkUrl.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="MetaData\WorkspaceLogin.xsd">
+    </EmbeddedResource>
+    <EmbeddedResource Include="MetaData\WorkspaceLogin.xsd">
       <SubType>Designer</SubType>
-    </None>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

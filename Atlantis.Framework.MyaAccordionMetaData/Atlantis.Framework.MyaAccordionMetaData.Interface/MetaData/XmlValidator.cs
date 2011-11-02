@@ -3,6 +3,8 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
+using Atlantis.Framework.Interface;
+using System.Reflection;
 
 namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
 {
@@ -123,16 +125,24 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
     private static string GetSchema(string filename)
     {
       string schema = string.Empty;
+      string defaultNamespace = "Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData";
+      string streampath = string.Format("{0}.{1}", defaultNamespace, filename);
+
       try
       {
-        string filepath = string.Format("{0}/{1}", AppDomain.CurrentDomain.BaseDirectory, filename);
-        using (StreamReader rdr = File.OpenText(filepath))
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        StreamReader schemaStreamReader = new StreamReader(assembly.GetManifestResourceStream(streampath));
+
+        if (schemaStreamReader.Peek() != -1)
         {
-          schema = rdr.ReadToEnd();
+          schema = schemaStreamReader.ReadToEnd();
         }
       }
-      catch
+      catch (Exception ex)
       {
+        string data = string.Format("Streampath: {0}", streampath);
+        AtlantisException aex = new AtlantisException("XmlValidator::GetSchema", "0", ex.Message, data, null, null);
+        Engine.Engine.LogAtlantisException(aex);
         schema = string.Empty;
       }
 

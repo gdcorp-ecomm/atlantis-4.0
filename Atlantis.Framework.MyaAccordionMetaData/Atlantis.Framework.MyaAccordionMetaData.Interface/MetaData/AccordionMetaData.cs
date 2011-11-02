@@ -285,12 +285,12 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     public class ContentData
     {
       public string AccountList { get; private set; }
-      public string UserControl { get; private set; }
+      public string JsonPage { get; private set; }
 
-      public ContentData(string accountList, string userControl)
+      public ContentData(string accountList, string jsonPage)
       {
         AccountList = accountList;
-        UserControl = userControl;
+        JsonPage = jsonPage;
       }
     }
     public ContentData Content

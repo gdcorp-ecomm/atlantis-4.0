@@ -8,6 +8,13 @@ using Atlantis.Framework.Providers.Interface.Preferences;
 
 namespace Atlantis.Framework.Providers.Currency
 {
+  public enum ConversionRoundingType
+  {
+    Round = 0,
+    Ceiling = 1,
+    Floor = 2
+  }
+
   public class CurrencyProvider : ProviderBase, ICurrencyProvider
   {
     #region Static Properties
@@ -605,6 +612,11 @@ namespace Atlantis.Framework.Providers.Currency
 
     public static ICurrencyPrice ConvertPrice(ICurrencyPrice priceToConvert, ICurrencyInfo targetCurrencyInfo)
     {
+      return ConvertPrice(priceToConvert, targetCurrencyInfo, ConversionRoundingType.Round);
+    }
+
+    public static ICurrencyPrice ConvertPrice(ICurrencyPrice priceToConvert, ICurrencyInfo targetCurrencyInfo, ConversionRoundingType conversionRoundingType)
+    {
       ICurrencyPrice result = priceToConvert;
 
       if ((priceToConvert != null) && (targetCurrencyInfo != null))
@@ -613,7 +625,20 @@ namespace Atlantis.Framework.Providers.Currency
         {
           if ((!priceToConvert.CurrencyInfo.Equals(targetCurrencyInfo)) && (targetCurrencyInfo.ExchangeRatePricing > 0))
           {
-            double convertedDouble = Math.Floor(priceToConvert.Price / targetCurrencyInfo.ExchangeRatePricing);
+            double convertedDouble;
+            if (conversionRoundingType == ConversionRoundingType.Ceiling)
+            {
+              convertedDouble = Math.Ceiling(priceToConvert.Price / targetCurrencyInfo.ExchangeRatePricing);
+            }
+            else if (conversionRoundingType == ConversionRoundingType.Floor)
+            {
+              convertedDouble = Math.Floor(priceToConvert.Price / targetCurrencyInfo.ExchangeRatePricing);
+            }
+            else
+            {
+              convertedDouble = Math.Round(priceToConvert.Price / targetCurrencyInfo.ExchangeRatePricing);
+            }
+
             int convertedPrice = Int32.MaxValue;
             if (convertedDouble < Int32.MaxValue)
             {
@@ -626,6 +651,7 @@ namespace Atlantis.Framework.Providers.Currency
 
       return result;
     }
+
 
     #endregion
 

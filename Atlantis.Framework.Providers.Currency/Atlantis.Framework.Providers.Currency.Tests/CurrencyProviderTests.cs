@@ -112,6 +112,25 @@ namespace Atlantis.Framework.Providers.Currency.Tests
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
     [DeploymentItem("Interop.gdMiniEncryptLib.dll")]
     [DeploymentItem("atlantis.config")]
+    public void ConvertingIcannFees()
+    {
+      SetContexts(1, "");
+
+      ICurrencyPrice usd18 = new CurrencyPrice(18, CurrencyData.GetCurrencyInfo("USD"), CurrencyPriceType.Transactional);
+      ICurrencyPrice converted = CurrencyProvider.ConvertPrice(usd18, CurrencyData.GetCurrencyInfo("EUR"));
+      Console.WriteLine("EUR=" + converted.Price.ToString());
+
+      converted = CurrencyProvider.ConvertPrice(usd18, CurrencyData.GetCurrencyInfo("AUD"));
+      Console.WriteLine("AUD=" + converted.Price.ToString());
+
+      converted = CurrencyProvider.ConvertPrice(usd18, CurrencyData.GetCurrencyInfo("GBP"));
+      Console.WriteLine("GBP=" + converted.Price.ToString());
+    }
+
+    [TestMethod]
+    [DeploymentItem("Interop.gdDataCacheLib.dll")]
+    [DeploymentItem("Interop.gdMiniEncryptLib.dll")]
+    [DeploymentItem("atlantis.config")]
     public void MultiCurrencyCatalogReseller()
     {
       SetContexts(1724, "");

@@ -1,55 +1,228 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Specialized;
 using System.Xml.Linq;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData;
 
 namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 {
   public class AccordionMetaData
   {
-    #region Private Properties
-    private XDocument _xDoc;
+    #region Private XML Validation Properties & Methods
+
+    #region Accordion XML
+    private XDocument _accordionXDoc;
     private XDocument AccordionXDoc
     {
       get
       {
-        if (_xDoc == null)
+        string msg = string.Empty;
+        if (_accordionXDoc == null)
         {
           try
           {
-            _xDoc = XDocument.Parse(AccordionXml);
+            _accordionXDoc = XDocument.Parse(AccordionXml);
+            XmlValidator.ValidateAccordionXml(_accordionXDoc, out msg);
           }
-          catch
+          catch (Exception ex)
           {
-            _xDoc = XDocument.Parse("<accordion error='AccordionXml Malformed'/>");
+            AtlantisException aex = new AtlantisException("AccordionMetaData::AccordionXDoc", "0", ex.Message, msg, null, null);
+            Engine.Engine.LogAtlantisException(aex);
+            _accordionXDoc = XDocument.Parse("<accordion error='AccordionXml Malformed'/>");
           }
         }
-        return _xDoc;
+        return _accordionXDoc;
       }
     }
+
     private bool IsWellFormedAccordionXml
     {
       get { return !AccordionXDoc.Element("accordion").FirstAttribute.Name.Equals("error"); }
     }
 
+    private string ParseAccordionXml(string attribute)
+    {
+      return IsWellFormedAccordionXml ? AccordionXDoc.Element("accordion").Attribute(attribute).Value : string.Empty;
+    }
+    #endregion
+
+    #region Content XML
+    private XDocument _contentXDoc;
+    private XDocument ContentXDoc
+    {
+      get
+      {
+        string msg = string.Empty;
+        if (_contentXDoc == null)
+        {
+          try
+          {
+            _contentXDoc = XDocument.Parse(ContentXml);
+            XmlValidator.ValidateContentXml(_contentXDoc, out msg);
+          }
+          catch (Exception ex)
+          {
+            AtlantisException aex = new AtlantisException("AccordionMetaData::ContentXDoc", "0", ex.Message, msg, null, null);
+            Engine.Engine.LogAtlantisException(aex);
+            _contentXDoc = XDocument.Parse("<content error='ContentXml Malformed'/>");
+          }
+        }
+        return _contentXDoc;
+      }
+    }
+
+    private bool IsWellFormedContentXml
+    {
+      get { return !ContentXDoc.Element("content").HasAttributes; }
+    }
+
+    private string ParseContentXml(string attribute)
+    {
+      string attrib = string.Empty;
+
+      if (IsWellFormedContentXml && ContentXDoc.Element("content").HasElements)
+      {
+        attrib = ContentXDoc.Element("content").Element("data").Attribute(attribute).Value;
+      }
+
+      return attrib;
+    }
+    #endregion
+
+    #region ControlPanel XML
+    private XDocument _controlPanelXDoc;
+    private XDocument ControlPanelXDoc
+    {
+      get
+      {
+        string msg = string.Empty;
+        if (_controlPanelXDoc == null)
+        {
+          try
+          {
+            _controlPanelXDoc = XDocument.Parse(ControlPanelXml);
+            XmlValidator.ValidateControlPanelXml(_controlPanelXDoc, out msg);
+          }
+          catch (Exception ex)
+          {
+            AtlantisException aex = new AtlantisException("AccordionMetaData::ControlPanelXDoc", "0", ex.Message, msg, null, null);
+            Engine.Engine.LogAtlantisException(aex);
+            _controlPanelXDoc = XDocument.Parse("<controlpanels error='ControlPanelXml Malformed'/>");
+          }
+        }
+        return _controlPanelXDoc;
+      }
+    }
+
+    private bool IsWellFormedControlPanelXml
+    {
+      get { return !ControlPanelXDoc.Element("controlpanels").HasAttributes; }
+    }
+
+    private List<LinkUrlData> ParseControlPanelXml(XElement controlpanels)
+    {
+      List<LinkUrlData> links = new List<LinkUrlData>();
+      if (IsWellFormedControlPanelXml)
+      {
+        foreach (XElement link in controlpanels.Elements("linkurl"))
+        {
+          links.Add(ParseLinkUrlXml(link));
+        }
+      }
+      return links;
+    }
+    #endregion
+
+    #region WorkspaceLogin XML
+    private XDocument _workspaceLoginXDoc;
+    private XDocument WorkspaceLoginXDoc
+    {
+      get
+      {
+        string msg = string.Empty;
+        if (_workspaceLoginXDoc == null)
+        {
+          try
+          {
+            _workspaceLoginXDoc = XDocument.Parse(WorkspaceLoginXml);
+            XmlValidator.ValidateWorkspaceLoginXml(_workspaceLoginXDoc, out msg);
+          }
+          catch (Exception ex)
+          {
+            AtlantisException aex = new AtlantisException("AccordionMetaData::WorkspaceLoginXDoc", "0", ex.Message, msg, null, null);
+            Engine.Engine.LogAtlantisException(aex);
+            _workspaceLoginXDoc = XDocument.Parse("<workspace error='WorkspaceLoginXml Malformed'/>");
+          }
+        }
+        return _workspaceLoginXDoc;
+      }
+    }
+
+    private bool IsWellFormedWorkspaceLoginXml
+    {
+      get { return !WorkspaceLoginXDoc.Element("workspace").HasAttributes; }
+    }
+
+    private LinkUrlData ParseWorkspaceLoginXml(XElement workspaceLogin)
+    {
+      return IsWellFormedWorkspaceLoginXml ? (workspaceLogin.HasElements ? ParseLinkUrlXml(workspaceLogin.Element("linkurl")) : null) : null;
+    }
+    #endregion
+
+    #region LinkUrl XML
+    private XDocument LinkUrlXDoc(XElement linkUrlXml)
+    {
+      XDocument linkUrlXDoc;
+      string msg = string.Empty;
+      try
+      {
+        linkUrlXDoc = XDocument.Parse(linkUrlXml.ToString());
+        XmlValidator.ValidateLinkXml(linkUrlXDoc, out msg);
+      }
+      catch (Exception ex)
+      {
+        AtlantisException aex = new AtlantisException("AccordionMetaData::LinkUrlXDoc", "0", ex.Message, msg, null, null);
+        Engine.Engine.LogAtlantisException(aex);
+        linkUrlXDoc = XDocument.Parse("<linkurl error='LinkUrl Malformed'/>");
+      }
+
+      return linkUrlXDoc;
+    }
+
+    private bool IsWellFormedLinkUrlXml(XElement linkUrlXml)
+    {
+      return !LinkUrlXDoc(linkUrlXml).Element("linkurl").FirstAttribute.Name.Equals("error"); 
+    }
+
+    private LinkUrlData ParseLinkUrlXml(XElement linkUrlXml)
+    {
+      LinkUrlData linkUrl = null;
+      NameValueCollection nvc = new NameValueCollection();
+
+      if (IsWellFormedLinkUrlXml(linkUrlXml))
+      {
+        linkUrl = new LinkUrlData();
+        linkUrl.CiCode = linkUrlXml.Attribute("ci").Value;
+        linkUrl.Link = linkUrlXml.Attribute("link").Value;
+        linkUrl.Type = (LinkUrlData.TypeOfLink)Enum.Parse(typeof(LinkUrlData.TypeOfLink), linkUrlXml.Attribute("type").Value);
+        if (linkUrlXml.HasElements)
+        {
+          foreach (XElement qsKey in linkUrlXml.Elements("qskey"))
+          {
+            nvc.Add(qsKey.Attribute("name").Value, qsKey.Attribute("value").Value);
+          }
+          linkUrl.QsKeys = nvc;
+        }
+      }
+
+      return linkUrl;
+    }
+    #endregion
+
     #endregion
 
     #region Public Properties
-    public class CssSpriteCoordinate
-    {
-      public string X { get; set; }
-      public string Y { get; set; }
-      public string Width { get; set; }
-      public string Height { get; set; }
-
-      public CssSpriteCoordinate(string x, string y, string width, string height)
-      {
-        X = x;
-        Y = y;
-        Width = width;
-        Height = height;
-      }
-    }
 
     #region Stored Database Properties
     public int AccordionId { get; set; }
@@ -62,7 +235,22 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     public string WorkspaceLoginXml { get; set; }
     #endregion
 
-    #region Derived Xml Properties
+    #region Derived Accordion Xml Properties
+    public class CssSpriteCoordinate
+    {
+      public string X { get; private set; }
+      public string Y { get; private set; }
+      public string Width { get; private set; }
+      public string Height { get; private set; }
+
+      public CssSpriteCoordinate(string x, string y, string width, string height)
+      {
+        X = x;
+        Y = y;
+        Width = width;
+        Height = height;
+      }
+    }
     public string CiExpansion 
     {
       get { return ParseAccordionXml("ciexpansion"); }
@@ -93,6 +281,84 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     }
     #endregion
 
+    #region Derived Content Xml Properties
+    public class ContentData
+    {
+      public string AccountList { get; private set; }
+      public string UserControl { get; private set; }
+
+      public ContentData(string accountList, string userControl)
+      {
+        AccountList = accountList;
+        UserControl = userControl;
+      }
+    }
+    public ContentData Content
+    {
+      get { return new ContentData(ParseContentXml("accountlist"), ParseContentXml("usercontrol")); }
+    }
+    #endregion
+
+    #region Derived ControlPanel Xml Properties
+    public class ControlPanelData
+    {
+      public List<LinkUrlData> LinkUrls { get; private set; }
+      public bool HasManagerLink
+      {
+        get { return LinkUrls.Count.Equals(2); }
+      }
+
+      public ControlPanelData(List<LinkUrlData> linkUrls)
+      {
+        LinkUrls = linkUrls;
+      }
+    }
+    #endregion
+
+    #region Derived LinkUrl Xml Properties
+    public class LinkUrlData
+    {
+      public enum TypeOfLink : int
+      {
+        Standard = 0,
+        Manager = 1
+      }
+      public string Link { get; set; }
+      public string CiCode { get; set; }
+      public TypeOfLink Type { get; set; }
+      public NameValueCollection QsKeys { get; set; }
+
+      public LinkUrlData()
+      { }
+    }
+
+    public ControlPanelData ControlPanels
+    {
+      get { return new ControlPanelData(ParseControlPanelXml(ControlPanelXDoc.Element("controlpanels"))); }
+    }
+    #endregion
+
+    #region Derived WorkspaceLogin Xml Properties
+    public class WorkspaceLoginData
+    {
+      public LinkUrlData LinkUrl { get; private set; }
+      public bool HasLink
+      {
+        get { return LinkUrl != null; }
+      }
+
+      public WorkspaceLoginData(LinkUrlData linkUrl)
+      {
+        LinkUrl = linkUrl;
+      }
+    }
+
+    public WorkspaceLoginData WorkspaceLogin
+    {
+      get { return new WorkspaceLoginData(ParseWorkspaceLoginXml(WorkspaceLoginXDoc.Element("workspace"))); }
+    }
+    #endregion
+
     #endregion
 
     #region Constructor
@@ -116,10 +382,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       }
     }
 
-    private string ParseAccordionXml(string attribute)
-    {
-      return IsWellFormedAccordionXml ? AccordionXDoc.Element("accordion").Attribute(attribute).Value : string.Empty;
-    }
+
     #endregion
 
     #region Public Methods

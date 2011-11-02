@@ -13,6 +13,6 @@
       <xs:attribute name="link" type="xs:string" use="required" />
       <xs:attribute name="ci" type="xs:string" use="required" />
       <xs:attribute name="type" type="xs:string" use="required" />
-    </xs:complexType>
+    </xs:complexType>    
   </xs:element>
 </xs:schema>

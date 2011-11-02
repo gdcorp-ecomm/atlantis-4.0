@@ -7,5 +7,5 @@
         <xs:element minOccurs="0" maxOccurs="1" ref="linkurl"/>
       </xs:sequence>
     </xs:complexType>
-  </xs:element>      
+  </xs:element>
 </xs:schema>

@@ -14,7 +14,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
       try
       {
         //string metaDataXml = DataCache.DataCache.GetCacheData("<AccordionMetaData/>");
-        string metaDataXml = BuildDebugMetaDataTable();
+        string metaDataXml = BuildDebugMetaDataXml();
 
         responseData = new MyaAccordionMetaDataResponseData(metaDataXml);
       }
@@ -33,7 +33,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
     }
 
     #region Debug Data
-    private string BuildDebugMetaDataTable()
+    private string BuildDebugMetaDataXml()
     {
       XElement root = new XElement("data",
         new XAttribute("count", "5"));
@@ -43,7 +43,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
         , new XAttribute("accordionTitle", "Web Hosting")
         , new XAttribute("accordionXml", "<accordion ciexpansion='11111' cirenewnow='22222' cisetup='33333' controlpanelrequiresaccount='false' iconcsscoordinates='-34px,-82px,14px,12px' isproductofferedfree='true' showsetupformanageronly='false' />")
         , new XAttribute("contentXml", "<content><data accountlist='mya_accountListGetHosting_sp' usercontrol='GetProductList.ascx'/></content>")
-        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='HCCURL' ci='44444' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='%ERID%'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>")
+        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='HCCURL' ci='44444' type='Standard'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='%ERID%'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>")
         , new XAttribute("defaultSortOrder", 3)
         , new XAttribute("namespaces", "pg|1,Hosting,hostingfree")
         , new XAttribute("workspaceLoginXml", "<workspace/>"));
@@ -53,7 +53,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
         , new XAttribute("accordionTitle", "Express Email Marketing")
         , new XAttribute("accordionXml", "<accordion ciexpansion='12345' cirenewnow='12346' cisetup='' controlpanelrequiresaccount='true' iconcsscoordinates='-54px,-102px,14px,12px' isproductofferedfree='false' showsetupformanageronly='false' />")
         , new XAttribute("contentXml", "<content><data accountlist='mya_accountListGetEEM_sp' usercontrol='GetProductList.ascx'/></content>")
-        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='EEMURL' ci='12348' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value'%PID%'/><qskey name='erID' value='-1'/><qskey name='common_name' value='%CN%'/><qskey name='start' value='%START%'/><qskey name='recurring' value='%RECUR%'/><qskey name='id' value='%ID%'/><qskey name='pbid' value='%PBID%'/><qskey name='pbtype' value='%PBTYPE%'/></linkurl></controlpanels>")
+        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='EEMURL' ci='12348' type='Standard'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='-1'/><qskey name='common_name' value='%CN%'/><qskey name='start' value='%START%'/><qskey name='recurring' value='%RECUR%'/><qskey name='id' value='%ID%'/><qskey name='pbid' value='%PBID%'/><qskey name='pbtype' value='%PBTYPE%'/></linkurl></controlpanels>")
         , new XAttribute("defaultSortOrder", 21)
         , new XAttribute("namespaces", "pg|21,campblazer")
         , new XAttribute("workspaceLoginXml", "<workspace/>"));
@@ -62,18 +62,18 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
         , new XAttribute("accordionId", 3)
         , new XAttribute("accordionTitle", "Email")
         , new XAttribute("accordionXml", "<accordion ciexpansion='55555' cirenewnow='66666' cisetup='77777' controlpanelrequiresaccount='false' iconcsscoordinates='-34px,-42px,14px,12px' isproductofferedfree='true' showsetupformanageronly='false' />")
-        , new XAttribute("contentXml", "<content><data accountlist='mya_accountListGetEmail_sp' usercontrol='GetProductList.ascx'/></content>")
-        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='ECCURL' ci='88888' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='%ERID%'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>")
+        , new XAttribute("contentXml", "<content><data accountlist='mya_accountListGetEmailAllTypes_sp' usercontrol='GetProductList.ascx'/></content>")
+        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='ECCURL' ci='88888' type='Standard'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='%ERID%'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>")
         , new XAttribute("defaultSortOrder", 4)
         , new XAttribute("namespaces", "pg|4,email,emailfree,smtprelay,pg|16,emailfwd")
-        , new XAttribute("workspaceLoginXml", "<workspace><linkurl link='SECURESERVERLOGINURL' ci='99999' type='std'><qskey name='apptag' value='wbe'/></linkurl></workspace>"));
+        , new XAttribute("workspaceLoginXml", "<workspace><linkurl link='SECURESERVERLOGINURL' ci='99999' type='Standard'><qskey name='apptag' value='wbe'/></linkurl></workspace>"));
 
       XElement accordiondata4 = new XElement("accordiondata"
         , new XAttribute("accordionId", 2)
         , new XAttribute("accordionTitle", "Domains")
         , new XAttribute("accordionXml", "<accordion ciexpansion='98765' cirenewnow='98766' cisetup='98767' controlpanelrequiresaccount='false' iconcsscoordinates='-154px,-92px,14px,12px' isproductofferedfree='false' showsetupformanageronly='false' />")
         , new XAttribute("contentXml", "<content><data accountlist='' usercontrol='domains.ascx'/></content>")
-        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='DCCURL' ci='98768' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value'%PID%'/><qskey name='erID' value='-1'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>")
+        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='DCCURL' ci='98768' type='Standard'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='-1'/><qskey name='common_name' value='%CN%'/></linkurl><linkurl link='DCCMGRURL' ci='98768' type='Manager'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='-1'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>")
         , new XAttribute("defaultSortOrder", 1)
         , new XAttribute("namespaces", "pg|30,domain")
         , new XAttribute("workspaceLoginXml", "<workspace/>"));
@@ -83,7 +83,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
         , new XAttribute("accordionTitle", "Domains By Proxy")
         , new XAttribute("accordionXml", "<accordion ciexpansion='' cirenewnow='58766' cisetup='' controlpanelrequiresaccount='false' iconcsscoordinates='-104px,-22px,14px,12px' isproductofferedfree='false' showsetupformanageronly='false' />")
         , new XAttribute("contentXml", "<content/>")
-        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='DBPURL' ci='58768' type='std'><qskey name='rID' value='%RID%'/><qskey name='pID' value'%PID%'/><qskey name='erID' value='-1'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>")
+        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='DBPURL' ci='58768' type='Standard'><qskey name='rID' value='%RID%'/><qskey name='pID' value='%PID%'/><qskey name='erID' value='-1'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>")
         , new XAttribute("defaultSortOrder", 19)
         , new XAttribute("namespaces", "pg|9, dbp")
         , new XAttribute("workspaceLoginXml", "<workspace/>"));

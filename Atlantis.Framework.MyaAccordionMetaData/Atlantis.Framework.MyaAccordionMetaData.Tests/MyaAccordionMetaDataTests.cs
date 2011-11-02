@@ -110,7 +110,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
                 break;
               case "Content":
                 AccordionMetaData.ContentData inner = p.GetValue(accordion, null) as AccordionMetaData.ContentData;
-                Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("AccountList: {0} | UserControl: {1}", inner.AccountList, inner.UserControl)));
+                Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("AccountList: {0} | JsonPage: {1}", inner.AccountList, inner.UserControl)));
                 break;
               case "WorkspaceLogin":
                 AccordionMetaData.WorkspaceLoginData wsl = p.GetValue(accordion, null) as AccordionMetaData.WorkspaceLoginData;

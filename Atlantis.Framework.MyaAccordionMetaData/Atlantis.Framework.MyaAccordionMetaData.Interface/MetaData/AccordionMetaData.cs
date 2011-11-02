@@ -295,7 +295,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     }
     public ContentData Content
     {
-      get { return new ContentData(ParseContentXml("accountlist"), ParseContentXml("usercontrol")); }
+      get { return new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage")); }
     }
     #endregion
 

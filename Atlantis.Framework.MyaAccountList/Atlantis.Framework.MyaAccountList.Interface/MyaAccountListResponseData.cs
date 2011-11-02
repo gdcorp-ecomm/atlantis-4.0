@@ -51,6 +51,11 @@ namespace Atlantis.Framework.MyaAccountList.Interface
       return writer.ToString();
     }
 
+    public string AlsoToXML()
+    {
+      return _productList.GetXml();
+    }
+
     #endregion
 
     public AtlantisException GetException()

@@ -1,21 +1,62 @@
 ﻿using System;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.MyaAccordionMetaData.Interface;
 using Atlantis.Framework.MyaAccountList.Interface.Abstract;
 using Atlantis.Framework.MyaAccountList.Interface.Concrete;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.MyaAccountList.Interface
 {
   public class MyaAccountListRequestData : RequestData
   {
+    #region Properties
+
+    public AccordionMetaData AccordionData { get; private set; }
+    public int? DaysTillExpiration { get; private set; }
+    public string Filter { get; private set; }
+    public IPageInfo PageInfo { get; private set; }
+    public int ReturnAll { get; private set; }
+    public int ReturnFreeListOnly { get; private set; }
+    public string SortColumn { get; private set; }
+    public string SortDirection { get; private set; }
+    public string StoredProcName
+    {
+      get
+      {
+        string proc;
+        try
+        {
+          XDocument contentXml = XDocument.Parse(AccordionData.ContentXml);
+          XElement content = contentXml.Element("content");
+          proc = content.Element("data").Attribute("accountlist").Value;
+        }
+        catch
+        {
+          proc = string.Empty;
+        }
+
+        return proc;
+      }
+    }
     
-    public MyaAccountListRequestData(string shopperId, string sourceURL, string orderId, string pathway,
-                                       int pageCount, string storedProcName, int pageSize = 5, 
-                                       int currentPage = 1, string sortDirection = "asc",
-                                       int? daysTillExpiration = null, int returnFreeListOnly = 0, int returnAllFlag = 0,  
-                                       string filter = null)
+    #endregion
+
+    public MyaAccountListRequestData(string shopperId
+      , string sourceURL
+      , string orderId
+      , string pathway
+      , int pageCount
+      , AccordionMetaData accordionData
+      , int pageSize = 5
+      , int currentPage = 1
+      , string sortDirection = "asc"
+      , int? daysTillExpiration = null
+      , int returnFreeListOnly = 0
+      , int returnAllFlag = 0
+      , string filter = null)
       : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
-      StoredProcName = storedProcName;
+      AccordionData = accordionData;
       PageInfo = new AccountListPagingInfo();
       PageInfo.PageSize = pageSize;
       PageInfo.CurrentPage = currentPage;
@@ -24,28 +65,12 @@ namespace Atlantis.Framework.MyaAccountList.Interface
       ReturnFreeListOnly = returnFreeListOnly;
       DaysTillExpiration = daysTillExpiration;
       ReturnAll = returnAllFlag;
+      RequestTimeout = TimeSpan.FromSeconds(5);
     }
-
-    public IPageInfo PageInfo { get; set; }
-
-    public string SortColumn { get; set; }
-
-    public string SortDirection { get; set; }
-
-    public string Filter { get; set; }
-    
-    public string StoredProcName { get; set; }
-
-    public int ReturnFreeListOnly { get; set; }
-
-    public int? DaysTillExpiration { get; set; }
-
-    public int ReturnAll { get; set; }
 
     public override string GetCacheMD5()
     {
       throw new Exception("MyaAccountList is not a cacheable request.");
     }
-
   }
 }

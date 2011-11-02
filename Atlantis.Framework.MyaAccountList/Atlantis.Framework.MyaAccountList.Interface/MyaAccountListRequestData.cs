@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MyaAccordionMetaData.Interface;
 using Atlantis.Framework.MyaAccountList.Interface.Abstract;
 using Atlantis.Framework.MyaAccountList.Interface.Concrete;
-using System.Xml.Linq;
 
 namespace Atlantis.Framework.MyaAccountList.Interface
 {

@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Text;
-using System.Data;
 using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.MyaAccountList.Interface;
+using System.Data;
 using System.Diagnostics;
-using Atlantis.Framework.MyaAccordionMetaData.Interface;
+using System.Linq;
 using System.Xml.Linq;
+using Atlantis.Framework.MyaAccordionMetaData.Interface;
+using Atlantis.Framework.MyaAccountList.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.MyaAccountList.Tests
 {

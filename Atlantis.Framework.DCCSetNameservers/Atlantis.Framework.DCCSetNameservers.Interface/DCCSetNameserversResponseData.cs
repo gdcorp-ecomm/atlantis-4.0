@@ -43,7 +43,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
       _exception = new AtlantisException(oRequestData,
                                    "DCCSetNameserversResponseData",
                                    ex.Message,
-                                   oRequestData.ToXML());
+                                   ex.StackTrace);
     }
 
     private static string ParseValidationDesc(string validationDoc)
@@ -52,7 +52,11 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
       oDoc.LoadXml(validationDoc);
 
       XmlElement oEle = (XmlElement)oDoc.SelectSingleNode("/VALIDATION/ACTIONRESULTS/ACTIONRESULT");
-      string sResult = oEle.Attributes["Description"].Value;
+      string sResult = string.Empty;
+      if (oEle != null && oEle.Attributes["Description"] != null)
+      {
+        sResult = oEle.Attributes["Description"].Value;
+      }
       return sResult;
     }
 

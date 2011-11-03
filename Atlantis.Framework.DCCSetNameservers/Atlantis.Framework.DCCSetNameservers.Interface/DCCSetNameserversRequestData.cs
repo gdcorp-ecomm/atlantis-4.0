@@ -27,7 +27,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
 
     public int PrivateLabelID { get; private set; }
 
-    public string DccDomainUser { get; private set; }
+    public string AppName { get; private set; }
 
     public bool IsPremium
     {
@@ -42,14 +42,14 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
                                         NameserverType requestType,
                                         int privateLabelID,
                                         int domainID,
-                                        string dccDomainUser) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+                                        string applicationName) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       PrivateLabelID = privateLabelID;
       DomainID = domainID;
       RequestType = requestType;
       CustomNameservers = new Dictionary<string, string>(16);
       PremiumNameservers = new List<string>(16);
-      DccDomainUser = dccDomainUser;
+      AppName = applicationName;
       RequestTimeout = _requestTimeout;
     }
 
@@ -120,6 +120,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
       AddAttribute(oRoot, "ActionName", "NameServerUpdate");
       AddAttribute(oRoot, "ShopperId", ShopperID);
       AddAttribute(oRoot, "PrivateLabelId", PrivateLabelID.ToString());
+      AddAttribute(oRoot, "RequestingApplication", AppName);
 
       XmlElement oNameservers = (XmlElement)AddNode(oRoot, "NAMESERVERS");
       AddAttribute(oNameservers, "NameServerType", NameserverTypeToString(RequestType));
@@ -152,6 +153,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Interface
       AddAttribute(oAction, "UserId", ShopperID);
       AddAttribute(oAction, "PrivateLabelId", PrivateLabelID.ToString());
       AddAttribute(oAction, "RequestingServer", Environment.MachineName);
+      AddAttribute(oAction, "RequestingApplication", AppName);
       AddAttribute(oAction, "RequestedByIp", System.Net.Dns.GetHostEntry(Environment.MachineName).AddressList[0].ToString());
       AddAttribute(oAction, "ModifiedBy", "1");
 

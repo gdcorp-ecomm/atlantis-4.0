@@ -44,8 +44,7 @@ namespace Atlantis.Framework.DCCSetNameservers.Impl
 
         oRequest.XmlToVerify(out verifyAction, out verifyDomains);
         DsWebValidate.RegDCCValidateWebSvc oDsWebValidate = new DsWebValidate.RegDCCValidateWebSvc();
-        string sValidateUrl = ((WsConfigElement)oConfig).WSURL.Replace("RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll", "RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx");
-        oDsWebValidate.Url = sValidateUrl;
+        oDsWebValidate.Url = oConfig.GetConfigValue("ValidateUrl"); ;
         oDsWebValidate.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
         string validateResponseXml = oDsWebValidate.ValidateNameserverUpdate(verifyAction, verifyDomains);
 
@@ -56,14 +55,14 @@ namespace Atlantis.Framework.DCCSetNameservers.Impl
         else if (validateResponseXml.Contains("<ACTIONRESULTS></ACTIONRESULTS>"))
         {
 
-          DsWebVerify.RegDCCVerifyWebSvcService oDsWebVerify = new DsWebVerify.RegDCCVerifyWebSvcService();
-          oDsWebVerify.Url = ((WsConfigElement)oConfig).WSURL.Replace("RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll", "RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll");
+          DsWebVerify.RegDCCVerifyWS oDsWebVerify = new DsWebVerify.RegDCCVerifyWS();
+          oDsWebVerify.Url = oConfig.GetConfigValue("VerifyUrl");
           oDsWebVerify.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
           verifyResponseXml = oDsWebVerify.VerifyNameServerUpdate(verifyAction, verifyDomains);
 
           if (verifyResponseXml.Contains("ActionResultID=\"0\""))
           {
-            DsWebSubmit.RegDCCRequestWebSvcService oDsWeb = new DsWebSubmit.RegDCCRequestWebSvcService();
+            DsWebSubmit.RegDCCRequestWS oDsWeb = new DsWebSubmit.RegDCCRequestWS();
             oDsWeb.Url = ((WsConfigElement)oConfig).WSURL;
             oDsWeb.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
 

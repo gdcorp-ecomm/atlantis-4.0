@@ -8,7 +8,7 @@ namespace Atlantis.Framework.DCCForwardingDelete.Interface
   {
     int _privateLabelID;
     int _domainId;
-    string _dccDomainUser;
+    string AppName;
     private TimeSpan _requestTimeout = TimeSpan.FromSeconds(20);
 
     public DCCForwardingDeleteRequestData(string shopperId,
@@ -18,12 +18,12 @@ namespace Atlantis.Framework.DCCForwardingDelete.Interface
                                     int pageCount,
                                     int privateLabelID,
                                     int domainId,
-                                    string dccDomainUser)
+                                    string applicationName)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       _privateLabelID = privateLabelID;
       _domainId = domainId;
-      _dccDomainUser = dccDomainUser;
+      AppName = applicationName;
       RequestTimeout = _requestTimeout;
     }
 
@@ -74,6 +74,7 @@ namespace Atlantis.Framework.DCCForwardingDelete.Interface
       AddAttribute(oAction, "UserType", "Shopper");
       AddAttribute(oAction, "UserId", ShopperID);
       AddAttribute(oAction, "PrivateLabelId", _privateLabelID.ToString());
+      AddAttribute(oAction, "RequestingApplication", AppName);
       AddAttribute(oAction, "RequestingServer", Environment.MachineName);
       AddAttribute(oAction, "RequestedByIp", System.Net.Dns.GetHostEntry(Environment.MachineName).AddressList[0].ToString());
       AddAttribute(oAction, "ModifiedBy", "1");
@@ -103,6 +104,7 @@ namespace Atlantis.Framework.DCCForwardingDelete.Interface
       AddAttribute(oRoot, "UserType", "Shopper");
       AddAttribute(oRoot, "UserId", ShopperID);
       AddAttribute(oRoot, "PrivateLabelId", _privateLabelID.ToString());
+      AddAttribute(oRoot, "RequestingApplication", AppName);
 
       XmlDocument domainDoc = new XmlDocument();
       domainDoc.LoadXml("<DOMAINS/>");

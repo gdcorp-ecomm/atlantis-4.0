@@ -26,7 +26,7 @@ namespace Atlantis.Framework.DCCForwardingDelete.Impl.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://devdsweb:80/RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll?Handler=Default")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://dccapp-general.dev.intranet.gdg/RegDCCVerifyWS/RegDCCVerifyWS.asmx")]
         public string Atlantis_Framework_DCCForwardingDelete_Impl_DsWebVerify_RegDCCVerifyWebSvcService {
             get {
                 return ((string)(this["Atlantis_Framework_DCCForwardingDelete_Impl_DsWebVerify_RegDCCVerifyWebSvcService" +
@@ -37,7 +37,7 @@ namespace Atlantis.Framework.DCCForwardingDelete.Impl.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://devdsweb:80/RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll?Handler=Default")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://dccapp-general.dev.intranet.gdg/RegDCCRequestWS/RegDCCRequestWS.asmx")]
         public string Atlantis_Framework_DCCForwardingDelete_Impl_DsWebSubmit_RegDCCRequestWebSvcService {
             get {
                 return ((string)(this["Atlantis_Framework_DCCForwardingDelete_Impl_DsWebSubmit_RegDCCRequestWebSvcServic" +

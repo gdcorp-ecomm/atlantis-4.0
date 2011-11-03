@@ -29,7 +29,7 @@ namespace Atlantis.Framework.DCCForwardingDelete.Interface
       _exception = new AtlantisException(oRequestData,
                                    "DCCForwardingDeleteResponseData",
                                    ex.Message,
-                                   oRequestData.ToXML());
+                                   ex.StackTrace);
     }
 
      public DCCForwardingDeleteResponseData(string responseXML, RequestData oRequestData)
@@ -53,7 +53,10 @@ namespace Atlantis.Framework.DCCForwardingDelete.Interface
       oDoc.LoadXml(inXML);
 
       XmlElement oEle = (XmlElement)oDoc.SelectSingleNode("/VERIFICATION/ACTIONRESULTS/ACTIONRESULT");
-      sResult = oEle.Attributes["Description"].Value;
+      if (oEle != null && oEle.Attributes["Description"] != null)
+      {
+        sResult = oEle.Attributes["Description"].Value;
+      }
       return sResult;
     }
 

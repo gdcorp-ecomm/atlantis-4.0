@@ -10,30 +10,27 @@ namespace Atlantis.Framework.DCCForwardingDelete.Impl
 
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
-      DCCForwardingDeleteResponseData responseData = null;
+      DCCForwardingDeleteResponseData responseData;
       string responseXml = string.Empty;
       string verifyResponseXml = string.Empty;
 
-      DsWebVerify.RegDCCVerifyWebSvcService oDsWebVerify = new DsWebVerify.RegDCCVerifyWebSvcService();
+      DsWebVerify.RegDCCVerifyWS oDsWebVerify = new DsWebVerify.RegDCCVerifyWS();
 
       try
       {
         DCCForwardingDeleteRequestData oRequest = (DCCForwardingDeleteRequestData)oRequestData;
 
-        string verifyAction = "";
-        string verifyDomains = "";
+        string verifyAction = string.Empty;
+        string verifyDomains = string.Empty;
         oRequest.XmlToVerify(out verifyAction, out verifyDomains);
 
-
-        string sVerifyUrl = ((WsConfigElement)oConfig).WSURL.Replace("RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll", "RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll");
-
-        oDsWebVerify.Url = sVerifyUrl;
+        oDsWebVerify.Url = oConfig.GetConfigValue("VerifyUrl"); ;
         oDsWebVerify.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
         verifyResponseXml = oDsWebVerify.VerifyDomainForwardingDelete(verifyAction, verifyDomains);
 
         if (verifyResponseXml.Contains("ActionResultID=\"0\""))
         {
-          using (DsWebSubmit.RegDCCRequestWebSvcService oDsWeb = new DsWebSubmit.RegDCCRequestWebSvcService())
+          using (DsWebSubmit.RegDCCRequestWS oDsWeb = new DsWebSubmit.RegDCCRequestWS())
           {
             oDsWeb.Url = ((WsConfigElement) oConfig).WSURL;
             oDsWeb.Timeout = (int) oRequest.RequestTimeout.TotalMilliseconds;

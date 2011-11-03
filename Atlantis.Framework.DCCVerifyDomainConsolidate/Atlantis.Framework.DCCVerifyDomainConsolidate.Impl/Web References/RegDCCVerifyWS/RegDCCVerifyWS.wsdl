@@ -1,0 +1,3673 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="getServiceStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="getServiceStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getServiceStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainSetLock">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainSetLockResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainSetLockResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDnsSecUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDnsSecUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDnsSecUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainMobilizerUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainMobilizerUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainMobilizerUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainMobilizerRemove">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainMobilizerRemoveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainMobilizerRemoveResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainConsolidate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainConsolidateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainConsolidateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyAppraisalUpgrade">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sAppraisalsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyAppraisalUpgradeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyAppraisalUpgradeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySmartDomainsAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySmartDomainsAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifySmartDomainsAddResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySmartDomainsRenew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySmartDomainsRenewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifySmartDomainsRenewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyWebsiteTonightAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyWebsiteTonightAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyWebsiteTonightAddResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyWebsiteTonightRenew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyWebsiteTonightRenewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyWebsiteTonightRenewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProfileDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sProfilesXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProfileDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainProfileDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyProfileSetAttribute">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sProfilesXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyProfileSetAttributeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyProfileSetAttributeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProfileCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sProfilesXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProfileCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainProfileCreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProfileAssign">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProfileAssignResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainProfileAssignResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProfileUnassign">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProfileUnassignResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainProfileUnassignResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProfileUnassignAll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProfileUnassignAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainProfileUnassignAllResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyPremiumDomainUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPremiumDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyPremiumDomainUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyPremiumDomainUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyPremiumDomainRemove">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPremiumDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyPremiumDomainRemoveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyPremiumDomainRemoveResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTDNAMAuctionSetup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTDNAMAuctionSetupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyTDNAMAuctionSetupResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTDNAMAuctionCancel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTDNAMAuctionCancelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyTDNAMAuctionCancelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyBackorderAgreementsUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyBackorderAgreementsUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyBackorderAgreementsUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyBackorderPrivacyUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyBackorderPrivacyUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyBackorderPrivacyUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyPremiumDomainSetup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyPremiumDomainSetupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyPremiumDomainSetupResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyPremiumDomainSetAutoRelist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPremiumDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyPremiumDomainSetAutoRelistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyPremiumDomainSetAutoRelistResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMonitorUpgrade">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMonitorUpgradeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyMonitorUpgradeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMonitorEmailUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMonitorEmailUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyMonitorEmailUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMonitorResendEmails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMonitorResendEmailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyMonitorResendEmailsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyBackorderContactUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyBackorderContactUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyBackorderContactUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMonitorBackorderCancel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMonitorBackorderCancelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyMonitorBackorderCancelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainDownloadList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainDownloadListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainDownloadListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMonitorBackorderSetup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMonitorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMonitorBackorderSetupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyMonitorBackorderSetupResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainFolderAssign">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainFolderAssignResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainFolderAssignResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainFolderUnassign">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainFolderUnassignResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainFolderUnassignResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainFolderUnassignAll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainFolderUnassignAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainFolderUnassignAllResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProtectionUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProtectionUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainProtectionUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToRetry">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToRetryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyTransferToRetryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToCancel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToCancelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyTransferToCancelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferFromAck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferFromAckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyTransferFromAckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferFromNack">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferFromNackResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyTransferFromNackResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToAuthInfoChange">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToAuthInfoChangeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyTransferToAuthInfoChangeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToRestart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToRestartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyTransferToRestartResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToAck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToAckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyTransferToAckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToNack">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToNackResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyTransferToNackResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeValidate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeValidateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyRegistrantChangeValidateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeAccept">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeAcceptResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyRegistrantChangeAcceptResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeInstant">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeInstantResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyRegistrantChangeInstantResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToSendEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyTransferToSendEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyTransferToSendEmailResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyAuthCodeSendEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyAuthCodeSendEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyAuthCodeSendEmailResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeInsert">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeInsertResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyRegistrantChangeInsertResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyRegistrantChangeDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeSendEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantChangeSendEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyRegistrantChangeSendEmailResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainForwardingDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainForwardingDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainForwardingDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySubDomainUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySubDomainUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifySubDomainUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySubDomainDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySubDomainDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifySubDomainDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyCashParkingUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyCashParkingUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyCashParkingUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProximaRenew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProximaRenewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainProximaRenewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainExpirationProtectionAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainExpirationProtectionAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainExpirationProtectionAddResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainExpirationProtectionRenew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainExpirationProtectionRenewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainExpirationProtectionRenewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainForwardingUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainForwardingUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainForwardingUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyAccountPrivacyUpdateEmailPreferences">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDBPAccountsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyAccountPrivacyUpdateEmailPreferencesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyAccountPrivacyUpdateEmailPreferencesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyCancel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyCancelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainPrivacyCancelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProximaAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainProximaAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainProximaAddResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyUpdateEmailForwarding">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyUpdateEmailForwardingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainPrivacyUpdateEmailForwardingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacySendAuthorizationLetter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacySendAuthorizationLetterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainPrivacySendAuthorizationLetterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyAccountPrivacyUpdateContact">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDBPAccountsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyAccountPrivacyUpdateContactResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyAccountPrivacyUpdateContactResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainPrivacyAddResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyRenew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyRenewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainPrivacyRenewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyUpdatePrivateContacts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyUpdatePrivateContactsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainPrivacyUpdatePrivateContactsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainRenewal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainRenewalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainRenewalResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainExtAutoRenewal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainExtAutoRenewalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainExtAutoRenewalResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainRedemption">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainRedemptionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainRedemptionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainCertificationAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainCertificationAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainCertificationAddResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainCEDUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainCEDUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainCEDUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainCancellation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainCancellationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainCancellationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainSetAutoRenew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainSetAutoRenewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainSetAutoRenewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainEmailForwardingUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainEmailForwardingUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainEmailForwardingUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainCASelectionsUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainCASelectionsUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainCASelectionsUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainNexusUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainNexusUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainNexusUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyContactUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyContactUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyContactUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyLocalizedContactUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyLocalizedContactUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyLocalizedContactUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyHostUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyHostUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyHostUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyNameServerUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyNameServerUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyNameServerUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyPlusAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyPlusAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainPrivacyPlusAddResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyPlusRenew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sActionXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyDomainPrivacyPlusRenewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyDomainPrivacyPlusRenewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getServiceStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:getServiceStatus" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:getServiceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainSetLockSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainSetLock" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainSetLockSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainSetLockResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDnsSecUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDnsSecUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDnsSecUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDnsSecUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainMobilizerUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainMobilizerUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainMobilizerUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainMobilizerUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainMobilizerRemoveSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainMobilizerRemove" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainMobilizerRemoveSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainMobilizerRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainConsolidateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainConsolidate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainConsolidateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainConsolidateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAppraisalUpgradeSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyAppraisalUpgrade" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAppraisalUpgradeSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyAppraisalUpgradeResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifySmartDomainsAddSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifySmartDomainsAdd" />
+  </wsdl:message>
+  <wsdl:message name="VerifySmartDomainsAddSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifySmartDomainsAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifySmartDomainsRenewSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifySmartDomainsRenew" />
+  </wsdl:message>
+  <wsdl:message name="VerifySmartDomainsRenewSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifySmartDomainsRenewResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyWebsiteTonightAddSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyWebsiteTonightAdd" />
+  </wsdl:message>
+  <wsdl:message name="VerifyWebsiteTonightAddSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyWebsiteTonightAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyWebsiteTonightRenewSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyWebsiteTonightRenew" />
+  </wsdl:message>
+  <wsdl:message name="VerifyWebsiteTonightRenewSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyWebsiteTonightRenewResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProfileDelete" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProfileDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyProfileSetAttributeSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyProfileSetAttribute" />
+  </wsdl:message>
+  <wsdl:message name="VerifyProfileSetAttributeSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyProfileSetAttributeResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProfileCreate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProfileCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileAssignSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProfileAssign" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileAssignSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProfileAssignResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileUnassignSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProfileUnassign" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileUnassignSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProfileUnassignResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileUnassignAllSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProfileUnassignAll" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProfileUnassignAllSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProfileUnassignAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyPremiumDomainUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyPremiumDomainUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainRemoveSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyPremiumDomainRemove" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainRemoveSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyPremiumDomainRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTDNAMAuctionSetupSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyTDNAMAuctionSetup" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTDNAMAuctionSetupSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyTDNAMAuctionSetupResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTDNAMAuctionCancelSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyTDNAMAuctionCancel" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTDNAMAuctionCancelSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyTDNAMAuctionCancelResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderAgreementsUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyBackorderAgreementsUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderAgreementsUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyBackorderAgreementsUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderPrivacyUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyBackorderPrivacyUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderPrivacyUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyBackorderPrivacyUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainSetupSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyPremiumDomainSetup" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainSetupSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyPremiumDomainSetupResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainSetAutoRelistSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyPremiumDomainSetAutoRelist" />
+  </wsdl:message>
+  <wsdl:message name="VerifyPremiumDomainSetAutoRelistSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyPremiumDomainSetAutoRelistResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorUpgradeSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyMonitorUpgrade" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorUpgradeSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyMonitorUpgradeResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorEmailUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyMonitorEmailUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorEmailUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyMonitorEmailUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorResendEmailsSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyMonitorResendEmails" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorResendEmailsSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyMonitorResendEmailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderContactUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyBackorderContactUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyBackorderContactUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyBackorderContactUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorBackorderCancelSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyMonitorBackorderCancel" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorBackorderCancelSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyMonitorBackorderCancelResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainDownloadListSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainDownloadList" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainDownloadListSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainDownloadListResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorBackorderSetupSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyMonitorBackorderSetup" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMonitorBackorderSetupSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyMonitorBackorderSetupResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderAssignSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainFolderAssign" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderAssignSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainFolderAssignResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderUnassignSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainFolderUnassign" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderUnassignSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainFolderUnassignResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderUnassignAllSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainFolderUnassignAll" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainFolderUnassignAllSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainFolderUnassignAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProtectionUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProtectionUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProtectionUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProtectionUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToRetrySoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToRetry" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToRetrySoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToRetryResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToCancelSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToCancel" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToCancelSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToCancelResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferFromAckSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyTransferFromAck" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferFromAckSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyTransferFromAckResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferFromNackSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyTransferFromNack" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferFromNackSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyTransferFromNackResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToAuthInfoChangeSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToAuthInfoChange" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToAuthInfoChangeSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToAuthInfoChangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToRestartSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToRestart" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToRestartSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToRestartResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToAckSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToAck" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToAckSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToAckResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToNackSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToNack" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToNackSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToNackResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeValidateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeValidate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeValidateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeValidateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeAcceptSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeAccept" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeAcceptSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeAcceptResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeInstantSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeInstant" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeInstantSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeInstantResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToSendEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToSendEmail" />
+  </wsdl:message>
+  <wsdl:message name="VerifyTransferToSendEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyTransferToSendEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAuthCodeSendEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyAuthCodeSendEmail" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAuthCodeSendEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyAuthCodeSendEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeInsertSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeInsert" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeInsertSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeDelete" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeSendEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeSendEmail" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantChangeSendEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantChangeSendEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainForwardingDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainForwardingDelete" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainForwardingDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainForwardingDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifySubDomainUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifySubDomainUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifySubDomainUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifySubDomainUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifySubDomainDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifySubDomainDelete" />
+  </wsdl:message>
+  <wsdl:message name="VerifySubDomainDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifySubDomainDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyCashParkingUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyCashParkingUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyCashParkingUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyCashParkingUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProximaRenewSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProximaRenew" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProximaRenewSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProximaRenewResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainExpirationProtectionAddSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainExpirationProtectionAdd" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainExpirationProtectionAddSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainExpirationProtectionAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainExpirationProtectionRenewSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainExpirationProtectionRenew" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainExpirationProtectionRenewSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainExpirationProtectionRenewResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainForwardingUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainForwardingUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainForwardingUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainForwardingUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAccountPrivacyUpdateEmailPreferencesSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyAccountPrivacyUpdateEmailPreferences" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAccountPrivacyUpdateEmailPreferencesSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyAccountPrivacyUpdateEmailPreferencesResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyCancelSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyCancel" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyCancelSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyCancelResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProximaAddSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProximaAdd" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainProximaAddSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainProximaAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyUpdateEmailForwardingSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyUpdateEmailForwarding" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyUpdateEmailForwardingSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyUpdateEmailForwardingResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacySendAuthorizationLetterSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacySendAuthorizationLetter" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacySendAuthorizationLetterSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacySendAuthorizationLetterResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAccountPrivacyUpdateContactSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyAccountPrivacyUpdateContact" />
+  </wsdl:message>
+  <wsdl:message name="VerifyAccountPrivacyUpdateContactSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyAccountPrivacyUpdateContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyAddSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyAdd" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyAddSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyRenewSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyRenew" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyRenewSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyRenewResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyUpdatePrivateContactsSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyUpdatePrivateContacts" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyUpdatePrivateContactsSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyUpdatePrivateContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainRenewalSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainRenewal" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainRenewalSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainRenewalResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainExtAutoRenewalSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainExtAutoRenewal" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainExtAutoRenewalSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainExtAutoRenewalResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainRedemptionSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainRedemption" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainRedemptionSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainRedemptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCertificationAddSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainCertificationAdd" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCertificationAddSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainCertificationAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCEDUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainCEDUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCEDUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainCEDUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCancellationSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainCancellation" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCancellationSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainCancellationResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainSetAutoRenewSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainSetAutoRenew" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainSetAutoRenewSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainSetAutoRenewResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainEmailForwardingUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainEmailForwardingUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainEmailForwardingUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainEmailForwardingUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCASelectionsUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainCASelectionsUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainCASelectionsUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainCASelectionsUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainNexusUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainNexusUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainNexusUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainNexusUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyContactUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyContactUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyContactUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyContactUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyLocalizedContactUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyLocalizedContactUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyLocalizedContactUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyLocalizedContactUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyHostUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyHostUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyHostUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyHostUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyNameServerUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyNameServerUpdate" />
+  </wsdl:message>
+  <wsdl:message name="VerifyNameServerUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyNameServerUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyPlusAddSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyPlusAdd" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyPlusAddSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyPlusAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyPlusRenewSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyPlusRenew" />
+  </wsdl:message>
+  <wsdl:message name="VerifyDomainPrivacyPlusRenewSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyDomainPrivacyPlusRenewResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegDCCVerifyWSSoap">
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusSoapIn" />
+      <wsdl:output message="tns:getServiceStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainSetLock">
+      <wsdl:input message="tns:VerifyDomainSetLockSoapIn" />
+      <wsdl:output message="tns:VerifyDomainSetLockSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDnsSecUpdate">
+      <wsdl:input message="tns:VerifyDnsSecUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyDnsSecUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainMobilizerUpdate">
+      <wsdl:input message="tns:VerifyDomainMobilizerUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyDomainMobilizerUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainMobilizerRemove">
+      <wsdl:input message="tns:VerifyDomainMobilizerRemoveSoapIn" />
+      <wsdl:output message="tns:VerifyDomainMobilizerRemoveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainConsolidate">
+      <wsdl:input message="tns:VerifyDomainConsolidateSoapIn" />
+      <wsdl:output message="tns:VerifyDomainConsolidateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAppraisalUpgrade">
+      <wsdl:input message="tns:VerifyAppraisalUpgradeSoapIn" />
+      <wsdl:output message="tns:VerifyAppraisalUpgradeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifySmartDomainsAdd">
+      <wsdl:input message="tns:VerifySmartDomainsAddSoapIn" />
+      <wsdl:output message="tns:VerifySmartDomainsAddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifySmartDomainsRenew">
+      <wsdl:input message="tns:VerifySmartDomainsRenewSoapIn" />
+      <wsdl:output message="tns:VerifySmartDomainsRenewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyWebsiteTonightAdd">
+      <wsdl:input message="tns:VerifyWebsiteTonightAddSoapIn" />
+      <wsdl:output message="tns:VerifyWebsiteTonightAddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyWebsiteTonightRenew">
+      <wsdl:input message="tns:VerifyWebsiteTonightRenewSoapIn" />
+      <wsdl:output message="tns:VerifyWebsiteTonightRenewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileDelete">
+      <wsdl:input message="tns:VerifyDomainProfileDeleteSoapIn" />
+      <wsdl:output message="tns:VerifyDomainProfileDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyProfileSetAttribute">
+      <wsdl:input message="tns:VerifyProfileSetAttributeSoapIn" />
+      <wsdl:output message="tns:VerifyProfileSetAttributeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileCreate">
+      <wsdl:input message="tns:VerifyDomainProfileCreateSoapIn" />
+      <wsdl:output message="tns:VerifyDomainProfileCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileAssign">
+      <wsdl:input message="tns:VerifyDomainProfileAssignSoapIn" />
+      <wsdl:output message="tns:VerifyDomainProfileAssignSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileUnassign">
+      <wsdl:input message="tns:VerifyDomainProfileUnassignSoapIn" />
+      <wsdl:output message="tns:VerifyDomainProfileUnassignSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileUnassignAll">
+      <wsdl:input message="tns:VerifyDomainProfileUnassignAllSoapIn" />
+      <wsdl:output message="tns:VerifyDomainProfileUnassignAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainUpdate">
+      <wsdl:input message="tns:VerifyPremiumDomainUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyPremiumDomainUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainRemove">
+      <wsdl:input message="tns:VerifyPremiumDomainRemoveSoapIn" />
+      <wsdl:output message="tns:VerifyPremiumDomainRemoveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTDNAMAuctionSetup">
+      <wsdl:input message="tns:VerifyTDNAMAuctionSetupSoapIn" />
+      <wsdl:output message="tns:VerifyTDNAMAuctionSetupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTDNAMAuctionCancel">
+      <wsdl:input message="tns:VerifyTDNAMAuctionCancelSoapIn" />
+      <wsdl:output message="tns:VerifyTDNAMAuctionCancelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderAgreementsUpdate">
+      <wsdl:input message="tns:VerifyBackorderAgreementsUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyBackorderAgreementsUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderPrivacyUpdate">
+      <wsdl:input message="tns:VerifyBackorderPrivacyUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyBackorderPrivacyUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainSetup">
+      <wsdl:input message="tns:VerifyPremiumDomainSetupSoapIn" />
+      <wsdl:output message="tns:VerifyPremiumDomainSetupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainSetAutoRelist">
+      <wsdl:input message="tns:VerifyPremiumDomainSetAutoRelistSoapIn" />
+      <wsdl:output message="tns:VerifyPremiumDomainSetAutoRelistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorUpgrade">
+      <wsdl:input message="tns:VerifyMonitorUpgradeSoapIn" />
+      <wsdl:output message="tns:VerifyMonitorUpgradeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorEmailUpdate">
+      <wsdl:input message="tns:VerifyMonitorEmailUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyMonitorEmailUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorResendEmails">
+      <wsdl:input message="tns:VerifyMonitorResendEmailsSoapIn" />
+      <wsdl:output message="tns:VerifyMonitorResendEmailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderContactUpdate">
+      <wsdl:input message="tns:VerifyBackorderContactUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyBackorderContactUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorBackorderCancel">
+      <wsdl:input message="tns:VerifyMonitorBackorderCancelSoapIn" />
+      <wsdl:output message="tns:VerifyMonitorBackorderCancelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainDownloadList">
+      <wsdl:input message="tns:VerifyDomainDownloadListSoapIn" />
+      <wsdl:output message="tns:VerifyDomainDownloadListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorBackorderSetup">
+      <wsdl:input message="tns:VerifyMonitorBackorderSetupSoapIn" />
+      <wsdl:output message="tns:VerifyMonitorBackorderSetupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderAssign">
+      <wsdl:input message="tns:VerifyDomainFolderAssignSoapIn" />
+      <wsdl:output message="tns:VerifyDomainFolderAssignSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderUnassign">
+      <wsdl:input message="tns:VerifyDomainFolderUnassignSoapIn" />
+      <wsdl:output message="tns:VerifyDomainFolderUnassignSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderUnassignAll">
+      <wsdl:input message="tns:VerifyDomainFolderUnassignAllSoapIn" />
+      <wsdl:output message="tns:VerifyDomainFolderUnassignAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProtectionUpdate">
+      <wsdl:input message="tns:VerifyDomainProtectionUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyDomainProtectionUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToRetry">
+      <wsdl:input message="tns:VerifyTransferToRetrySoapIn" />
+      <wsdl:output message="tns:VerifyTransferToRetrySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToCancel">
+      <wsdl:input message="tns:VerifyTransferToCancelSoapIn" />
+      <wsdl:output message="tns:VerifyTransferToCancelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferFromAck">
+      <wsdl:input message="tns:VerifyTransferFromAckSoapIn" />
+      <wsdl:output message="tns:VerifyTransferFromAckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferFromNack">
+      <wsdl:input message="tns:VerifyTransferFromNackSoapIn" />
+      <wsdl:output message="tns:VerifyTransferFromNackSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToAuthInfoChange">
+      <wsdl:input message="tns:VerifyTransferToAuthInfoChangeSoapIn" />
+      <wsdl:output message="tns:VerifyTransferToAuthInfoChangeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToRestart">
+      <wsdl:input message="tns:VerifyTransferToRestartSoapIn" />
+      <wsdl:output message="tns:VerifyTransferToRestartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToAck">
+      <wsdl:input message="tns:VerifyTransferToAckSoapIn" />
+      <wsdl:output message="tns:VerifyTransferToAckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToNack">
+      <wsdl:input message="tns:VerifyTransferToNackSoapIn" />
+      <wsdl:output message="tns:VerifyTransferToNackSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeValidate">
+      <wsdl:input message="tns:VerifyRegistrantChangeValidateSoapIn" />
+      <wsdl:output message="tns:VerifyRegistrantChangeValidateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeAccept">
+      <wsdl:input message="tns:VerifyRegistrantChangeAcceptSoapIn" />
+      <wsdl:output message="tns:VerifyRegistrantChangeAcceptSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeInstant">
+      <wsdl:input message="tns:VerifyRegistrantChangeInstantSoapIn" />
+      <wsdl:output message="tns:VerifyRegistrantChangeInstantSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToSendEmail">
+      <wsdl:input message="tns:VerifyTransferToSendEmailSoapIn" />
+      <wsdl:output message="tns:VerifyTransferToSendEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAuthCodeSendEmail">
+      <wsdl:input message="tns:VerifyAuthCodeSendEmailSoapIn" />
+      <wsdl:output message="tns:VerifyAuthCodeSendEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeInsert">
+      <wsdl:input message="tns:VerifyRegistrantChangeInsertSoapIn" />
+      <wsdl:output message="tns:VerifyRegistrantChangeInsertSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeDelete">
+      <wsdl:input message="tns:VerifyRegistrantChangeDeleteSoapIn" />
+      <wsdl:output message="tns:VerifyRegistrantChangeDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeSendEmail">
+      <wsdl:input message="tns:VerifyRegistrantChangeSendEmailSoapIn" />
+      <wsdl:output message="tns:VerifyRegistrantChangeSendEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainForwardingDelete">
+      <wsdl:input message="tns:VerifyDomainForwardingDeleteSoapIn" />
+      <wsdl:output message="tns:VerifyDomainForwardingDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifySubDomainUpdate">
+      <wsdl:input message="tns:VerifySubDomainUpdateSoapIn" />
+      <wsdl:output message="tns:VerifySubDomainUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifySubDomainDelete">
+      <wsdl:input message="tns:VerifySubDomainDeleteSoapIn" />
+      <wsdl:output message="tns:VerifySubDomainDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyCashParkingUpdate">
+      <wsdl:input message="tns:VerifyCashParkingUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyCashParkingUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProximaRenew">
+      <wsdl:input message="tns:VerifyDomainProximaRenewSoapIn" />
+      <wsdl:output message="tns:VerifyDomainProximaRenewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExpirationProtectionAdd">
+      <wsdl:input message="tns:VerifyDomainExpirationProtectionAddSoapIn" />
+      <wsdl:output message="tns:VerifyDomainExpirationProtectionAddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExpirationProtectionRenew">
+      <wsdl:input message="tns:VerifyDomainExpirationProtectionRenewSoapIn" />
+      <wsdl:output message="tns:VerifyDomainExpirationProtectionRenewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainForwardingUpdate">
+      <wsdl:input message="tns:VerifyDomainForwardingUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyDomainForwardingUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccountPrivacyUpdateEmailPreferences">
+      <wsdl:input message="tns:VerifyAccountPrivacyUpdateEmailPreferencesSoapIn" />
+      <wsdl:output message="tns:VerifyAccountPrivacyUpdateEmailPreferencesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyCancel">
+      <wsdl:input message="tns:VerifyDomainPrivacyCancelSoapIn" />
+      <wsdl:output message="tns:VerifyDomainPrivacyCancelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProximaAdd">
+      <wsdl:input message="tns:VerifyDomainProximaAddSoapIn" />
+      <wsdl:output message="tns:VerifyDomainProximaAddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyUpdateEmailForwarding">
+      <wsdl:input message="tns:VerifyDomainPrivacyUpdateEmailForwardingSoapIn" />
+      <wsdl:output message="tns:VerifyDomainPrivacyUpdateEmailForwardingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacySendAuthorizationLetter">
+      <wsdl:input message="tns:VerifyDomainPrivacySendAuthorizationLetterSoapIn" />
+      <wsdl:output message="tns:VerifyDomainPrivacySendAuthorizationLetterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccountPrivacyUpdateContact">
+      <wsdl:input message="tns:VerifyAccountPrivacyUpdateContactSoapIn" />
+      <wsdl:output message="tns:VerifyAccountPrivacyUpdateContactSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyAdd">
+      <wsdl:input message="tns:VerifyDomainPrivacyAddSoapIn" />
+      <wsdl:output message="tns:VerifyDomainPrivacyAddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyRenew">
+      <wsdl:input message="tns:VerifyDomainPrivacyRenewSoapIn" />
+      <wsdl:output message="tns:VerifyDomainPrivacyRenewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyUpdatePrivateContacts">
+      <wsdl:input message="tns:VerifyDomainPrivacyUpdatePrivateContactsSoapIn" />
+      <wsdl:output message="tns:VerifyDomainPrivacyUpdatePrivateContactsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainRenewal">
+      <wsdl:input message="tns:VerifyDomainRenewalSoapIn" />
+      <wsdl:output message="tns:VerifyDomainRenewalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExtAutoRenewal">
+      <wsdl:input message="tns:VerifyDomainExtAutoRenewalSoapIn" />
+      <wsdl:output message="tns:VerifyDomainExtAutoRenewalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainRedemption">
+      <wsdl:input message="tns:VerifyDomainRedemptionSoapIn" />
+      <wsdl:output message="tns:VerifyDomainRedemptionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCertificationAdd">
+      <wsdl:input message="tns:VerifyDomainCertificationAddSoapIn" />
+      <wsdl:output message="tns:VerifyDomainCertificationAddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCEDUpdate">
+      <wsdl:input message="tns:VerifyDomainCEDUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyDomainCEDUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCancellation">
+      <wsdl:input message="tns:VerifyDomainCancellationSoapIn" />
+      <wsdl:output message="tns:VerifyDomainCancellationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainSetAutoRenew">
+      <wsdl:input message="tns:VerifyDomainSetAutoRenewSoapIn" />
+      <wsdl:output message="tns:VerifyDomainSetAutoRenewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainEmailForwardingUpdate">
+      <wsdl:input message="tns:VerifyDomainEmailForwardingUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyDomainEmailForwardingUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCASelectionsUpdate">
+      <wsdl:input message="tns:VerifyDomainCASelectionsUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyDomainCASelectionsUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainNexusUpdate">
+      <wsdl:input message="tns:VerifyDomainNexusUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyDomainNexusUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyContactUpdate">
+      <wsdl:input message="tns:VerifyContactUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyContactUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyLocalizedContactUpdate">
+      <wsdl:input message="tns:VerifyLocalizedContactUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyLocalizedContactUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyHostUpdate">
+      <wsdl:input message="tns:VerifyHostUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyHostUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyNameServerUpdate">
+      <wsdl:input message="tns:VerifyNameServerUpdateSoapIn" />
+      <wsdl:output message="tns:VerifyNameServerUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyPlusAdd">
+      <wsdl:input message="tns:VerifyDomainPrivacyPlusAddSoapIn" />
+      <wsdl:output message="tns:VerifyDomainPrivacyPlusAddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyPlusRenew">
+      <wsdl:input message="tns:VerifyDomainPrivacyPlusRenewSoapIn" />
+      <wsdl:output message="tns:VerifyDomainPrivacyPlusRenewSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegDCCVerifyWSSoap" type="tns:RegDCCVerifyWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServiceStatus">
+      <soap:operation soapAction="http://tempuri.org/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainSetLock">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainSetLock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDnsSecUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyDnsSecUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainMobilizerUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainMobilizerUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainMobilizerRemove">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainMobilizerRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainConsolidate">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainConsolidate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAppraisalUpgrade">
+      <soap:operation soapAction="http://tempuri.org/VerifyAppraisalUpgrade" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySmartDomainsAdd">
+      <soap:operation soapAction="http://tempuri.org/VerifySmartDomainsAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySmartDomainsRenew">
+      <soap:operation soapAction="http://tempuri.org/VerifySmartDomainsRenew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyWebsiteTonightAdd">
+      <soap:operation soapAction="http://tempuri.org/VerifyWebsiteTonightAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyWebsiteTonightRenew">
+      <soap:operation soapAction="http://tempuri.org/VerifyWebsiteTonightRenew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileDelete">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainProfileDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyProfileSetAttribute">
+      <soap:operation soapAction="http://tempuri.org/VerifyProfileSetAttribute" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileCreate">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainProfileCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileAssign">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainProfileAssign" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileUnassign">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainProfileUnassign" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileUnassignAll">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainProfileUnassignAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyPremiumDomainUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainRemove">
+      <soap:operation soapAction="http://tempuri.org/VerifyPremiumDomainRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTDNAMAuctionSetup">
+      <soap:operation soapAction="http://tempuri.org/VerifyTDNAMAuctionSetup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTDNAMAuctionCancel">
+      <soap:operation soapAction="http://tempuri.org/VerifyTDNAMAuctionCancel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderAgreementsUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyBackorderAgreementsUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderPrivacyUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyBackorderPrivacyUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainSetup">
+      <soap:operation soapAction="http://tempuri.org/VerifyPremiumDomainSetup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainSetAutoRelist">
+      <soap:operation soapAction="http://tempuri.org/VerifyPremiumDomainSetAutoRelist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorUpgrade">
+      <soap:operation soapAction="http://tempuri.org/VerifyMonitorUpgrade" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorEmailUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyMonitorEmailUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorResendEmails">
+      <soap:operation soapAction="http://tempuri.org/VerifyMonitorResendEmails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderContactUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyBackorderContactUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorBackorderCancel">
+      <soap:operation soapAction="http://tempuri.org/VerifyMonitorBackorderCancel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainDownloadList">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainDownloadList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorBackorderSetup">
+      <soap:operation soapAction="http://tempuri.org/VerifyMonitorBackorderSetup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderAssign">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainFolderAssign" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderUnassign">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainFolderUnassign" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderUnassignAll">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainFolderUnassignAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProtectionUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainProtectionUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToRetry">
+      <soap:operation soapAction="http://tempuri.org/VerifyTransferToRetry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToCancel">
+      <soap:operation soapAction="http://tempuri.org/VerifyTransferToCancel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferFromAck">
+      <soap:operation soapAction="http://tempuri.org/VerifyTransferFromAck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferFromNack">
+      <soap:operation soapAction="http://tempuri.org/VerifyTransferFromNack" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToAuthInfoChange">
+      <soap:operation soapAction="http://tempuri.org/VerifyTransferToAuthInfoChange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToRestart">
+      <soap:operation soapAction="http://tempuri.org/VerifyTransferToRestart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToAck">
+      <soap:operation soapAction="http://tempuri.org/VerifyTransferToAck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToNack">
+      <soap:operation soapAction="http://tempuri.org/VerifyTransferToNack" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeValidate">
+      <soap:operation soapAction="http://tempuri.org/VerifyRegistrantChangeValidate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeAccept">
+      <soap:operation soapAction="http://tempuri.org/VerifyRegistrantChangeAccept" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeInstant">
+      <soap:operation soapAction="http://tempuri.org/VerifyRegistrantChangeInstant" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToSendEmail">
+      <soap:operation soapAction="http://tempuri.org/VerifyTransferToSendEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAuthCodeSendEmail">
+      <soap:operation soapAction="http://tempuri.org/VerifyAuthCodeSendEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeInsert">
+      <soap:operation soapAction="http://tempuri.org/VerifyRegistrantChangeInsert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeDelete">
+      <soap:operation soapAction="http://tempuri.org/VerifyRegistrantChangeDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeSendEmail">
+      <soap:operation soapAction="http://tempuri.org/VerifyRegistrantChangeSendEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainForwardingDelete">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainForwardingDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySubDomainUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifySubDomainUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySubDomainDelete">
+      <soap:operation soapAction="http://tempuri.org/VerifySubDomainDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyCashParkingUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyCashParkingUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProximaRenew">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainProximaRenew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExpirationProtectionAdd">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainExpirationProtectionAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExpirationProtectionRenew">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainExpirationProtectionRenew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainForwardingUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainForwardingUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccountPrivacyUpdateEmailPreferences">
+      <soap:operation soapAction="http://tempuri.org/VerifyAccountPrivacyUpdateEmailPreferences" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyCancel">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainPrivacyCancel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProximaAdd">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainProximaAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyUpdateEmailForwarding">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainPrivacyUpdateEmailForwarding" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacySendAuthorizationLetter">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainPrivacySendAuthorizationLetter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccountPrivacyUpdateContact">
+      <soap:operation soapAction="http://tempuri.org/VerifyAccountPrivacyUpdateContact" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyAdd">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainPrivacyAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyRenew">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainPrivacyRenew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyUpdatePrivateContacts">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainPrivacyUpdatePrivateContacts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainRenewal">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainRenewal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExtAutoRenewal">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainExtAutoRenewal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainRedemption">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainRedemption" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCertificationAdd">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainCertificationAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCEDUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainCEDUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCancellation">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainCancellation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainSetAutoRenew">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainSetAutoRenew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainEmailForwardingUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainEmailForwardingUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCASelectionsUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainCASelectionsUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainNexusUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainNexusUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyContactUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyContactUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyLocalizedContactUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyLocalizedContactUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyHostUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyHostUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyNameServerUpdate">
+      <soap:operation soapAction="http://tempuri.org/VerifyNameServerUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyPlusAdd">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainPrivacyPlusAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyPlusRenew">
+      <soap:operation soapAction="http://tempuri.org/VerifyDomainPrivacyPlusRenew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegDCCVerifyWSSoap12" type="tns:RegDCCVerifyWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServiceStatus">
+      <soap12:operation soapAction="http://tempuri.org/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainSetLock">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainSetLock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDnsSecUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDnsSecUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainMobilizerUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainMobilizerUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainMobilizerRemove">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainMobilizerRemove" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainConsolidate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainConsolidate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAppraisalUpgrade">
+      <soap12:operation soapAction="http://tempuri.org/VerifyAppraisalUpgrade" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySmartDomainsAdd">
+      <soap12:operation soapAction="http://tempuri.org/VerifySmartDomainsAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySmartDomainsRenew">
+      <soap12:operation soapAction="http://tempuri.org/VerifySmartDomainsRenew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyWebsiteTonightAdd">
+      <soap12:operation soapAction="http://tempuri.org/VerifyWebsiteTonightAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyWebsiteTonightRenew">
+      <soap12:operation soapAction="http://tempuri.org/VerifyWebsiteTonightRenew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileDelete">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainProfileDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyProfileSetAttribute">
+      <soap12:operation soapAction="http://tempuri.org/VerifyProfileSetAttribute" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileCreate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainProfileCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileAssign">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainProfileAssign" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileUnassign">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainProfileUnassign" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProfileUnassignAll">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainProfileUnassignAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyPremiumDomainUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainRemove">
+      <soap12:operation soapAction="http://tempuri.org/VerifyPremiumDomainRemove" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTDNAMAuctionSetup">
+      <soap12:operation soapAction="http://tempuri.org/VerifyTDNAMAuctionSetup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTDNAMAuctionCancel">
+      <soap12:operation soapAction="http://tempuri.org/VerifyTDNAMAuctionCancel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderAgreementsUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyBackorderAgreementsUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderPrivacyUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyBackorderPrivacyUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainSetup">
+      <soap12:operation soapAction="http://tempuri.org/VerifyPremiumDomainSetup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyPremiumDomainSetAutoRelist">
+      <soap12:operation soapAction="http://tempuri.org/VerifyPremiumDomainSetAutoRelist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorUpgrade">
+      <soap12:operation soapAction="http://tempuri.org/VerifyMonitorUpgrade" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorEmailUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyMonitorEmailUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorResendEmails">
+      <soap12:operation soapAction="http://tempuri.org/VerifyMonitorResendEmails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyBackorderContactUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyBackorderContactUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorBackorderCancel">
+      <soap12:operation soapAction="http://tempuri.org/VerifyMonitorBackorderCancel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainDownloadList">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainDownloadList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMonitorBackorderSetup">
+      <soap12:operation soapAction="http://tempuri.org/VerifyMonitorBackorderSetup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderAssign">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainFolderAssign" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderUnassign">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainFolderUnassign" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainFolderUnassignAll">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainFolderUnassignAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProtectionUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainProtectionUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToRetry">
+      <soap12:operation soapAction="http://tempuri.org/VerifyTransferToRetry" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToCancel">
+      <soap12:operation soapAction="http://tempuri.org/VerifyTransferToCancel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferFromAck">
+      <soap12:operation soapAction="http://tempuri.org/VerifyTransferFromAck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferFromNack">
+      <soap12:operation soapAction="http://tempuri.org/VerifyTransferFromNack" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToAuthInfoChange">
+      <soap12:operation soapAction="http://tempuri.org/VerifyTransferToAuthInfoChange" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToRestart">
+      <soap12:operation soapAction="http://tempuri.org/VerifyTransferToRestart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToAck">
+      <soap12:operation soapAction="http://tempuri.org/VerifyTransferToAck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToNack">
+      <soap12:operation soapAction="http://tempuri.org/VerifyTransferToNack" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeValidate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyRegistrantChangeValidate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeAccept">
+      <soap12:operation soapAction="http://tempuri.org/VerifyRegistrantChangeAccept" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeInstant">
+      <soap12:operation soapAction="http://tempuri.org/VerifyRegistrantChangeInstant" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyTransferToSendEmail">
+      <soap12:operation soapAction="http://tempuri.org/VerifyTransferToSendEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAuthCodeSendEmail">
+      <soap12:operation soapAction="http://tempuri.org/VerifyAuthCodeSendEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeInsert">
+      <soap12:operation soapAction="http://tempuri.org/VerifyRegistrantChangeInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeDelete">
+      <soap12:operation soapAction="http://tempuri.org/VerifyRegistrantChangeDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRegistrantChangeSendEmail">
+      <soap12:operation soapAction="http://tempuri.org/VerifyRegistrantChangeSendEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainForwardingDelete">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainForwardingDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySubDomainUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifySubDomainUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifySubDomainDelete">
+      <soap12:operation soapAction="http://tempuri.org/VerifySubDomainDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyCashParkingUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyCashParkingUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProximaRenew">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainProximaRenew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExpirationProtectionAdd">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainExpirationProtectionAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExpirationProtectionRenew">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainExpirationProtectionRenew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainForwardingUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainForwardingUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccountPrivacyUpdateEmailPreferences">
+      <soap12:operation soapAction="http://tempuri.org/VerifyAccountPrivacyUpdateEmailPreferences" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyCancel">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainPrivacyCancel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainProximaAdd">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainProximaAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyUpdateEmailForwarding">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainPrivacyUpdateEmailForwarding" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacySendAuthorizationLetter">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainPrivacySendAuthorizationLetter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAccountPrivacyUpdateContact">
+      <soap12:operation soapAction="http://tempuri.org/VerifyAccountPrivacyUpdateContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyAdd">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainPrivacyAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyRenew">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainPrivacyRenew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyUpdatePrivateContacts">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainPrivacyUpdatePrivateContacts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainRenewal">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainRenewal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainExtAutoRenewal">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainExtAutoRenewal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainRedemption">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainRedemption" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCertificationAdd">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainCertificationAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCEDUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainCEDUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCancellation">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainCancellation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainSetAutoRenew">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainSetAutoRenew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainEmailForwardingUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainEmailForwardingUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainCASelectionsUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainCASelectionsUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainNexusUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainNexusUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyContactUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyContactUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyLocalizedContactUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyLocalizedContactUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyHostUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyHostUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyNameServerUpdate">
+      <soap12:operation soapAction="http://tempuri.org/VerifyNameServerUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyPlusAdd">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainPrivacyPlusAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyDomainPrivacyPlusRenew">
+      <soap12:operation soapAction="http://tempuri.org/VerifyDomainPrivacyPlusRenew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegDCCVerifyWS">
+    <wsdl:port name="RegDCCVerifyWSSoap" binding="tns:RegDCCVerifyWSSoap">
+      <soap:address location="https://dccapp-general.dev.intranet.gdg/RegDCCVerifyWS/RegDCCVerifyWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegDCCVerifyWSSoap12" binding="tns:RegDCCVerifyWSSoap12">
+      <soap12:address location="https://dccapp-general.dev.intranet.gdg/RegDCCVerifyWS/RegDCCVerifyWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

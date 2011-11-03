@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="https://dccapp-general.dev.intranet.gdg/RegDCCVerifyWS/RegDCCVerifyWS.asmx?disco" filename="RegDCCVerifyWS.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="https://dccapp-general.dev.intranet.gdg/RegDCCVerifyWS/RegDCCVerifyWS.asmx?wsdl" filename="RegDCCVerifyWS.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>

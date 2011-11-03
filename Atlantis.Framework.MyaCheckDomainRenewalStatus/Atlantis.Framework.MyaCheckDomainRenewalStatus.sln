@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1F842005-C690-4385-93A3-7A2D84805C18}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.MyaCheckDomainRenewalStatus.vsmdi = Atlantis.Framework.MyaCheckDomainRenewalStatus.vsmdi
+		Atlantis.Framework.MyaCheckDomainRenewalStatus1.vsmdi = Atlantis.Framework.MyaCheckDomainRenewalStatus1.vsmdi
+		Atlantis.Framework.MyaCheckDomainRenewalStatus2.vsmdi = Atlantis.Framework.MyaCheckDomainRenewalStatus2.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaCheckDomainRenewalStatus.Impl", "Atlantis.Framework.MyaCheckDomainRenewalStatus.Impl\Atlantis.Framework.MyaCheckDomainRenewalStatus.Impl.csproj", "{0D66BDD6-6DC0-45B5-AD9B-B58FBB046D7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaCheckDomainRenewalStatus.Interface", "Atlantis.Framework.MyaCheckDomainRenewalStatus.Interface\Atlantis.Framework.MyaCheckDomainRenewalStatus.Interface.csproj", "{E4F0CDB3-6FB1-4592-9441-FA05A6DD9732}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaCheckDomainRenewalStatus.Tests", "Atlantis.Framework.MyaCheckDomainRenewalStatus.Tests\Atlantis.Framework.MyaCheckDomainRenewalStatus.Tests.csproj", "{EB101CB6-D7EE-4D2C-8373-71C3BE4D8155}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{00E9779C-C46D-41DD-AF11-670D027156E8}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.MyaCheckDomainRenewalStatus.Impl\\Atlantis.Framework.MyaCheckDomainRenewalStatus.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.MyaCheckDomainRenewalStatus.Impl
+		SccLocalPath1 = Atlantis.Framework.MyaCheckDomainRenewalStatus.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.MyaCheckDomainRenewalStatus.Interface\\Atlantis.Framework.MyaCheckDomainRenewalStatus.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.MyaCheckDomainRenewalStatus.Interface
+		SccLocalPath2 = Atlantis.Framework.MyaCheckDomainRenewalStatus.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.MyaCheckDomainRenewalStatus.sln
+		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.MyaCheckDomainRenewalStatus.sln
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.MyaCheckDomainRenewalStatus.Tests\\Atlantis.Framework.MyaCheckDomainRenewalStatus.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.MyaCheckDomainRenewalStatus.Tests
+		SccLocalPath5 = Atlantis.Framework.MyaCheckDomainRenewalStatus.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.MyaCheckDomainRenewalStatus2.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D66BDD6-6DC0-45B5-AD9B-B58FBB046D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D66BDD6-6DC0-45B5-AD9B-B58FBB046D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D66BDD6-6DC0-45B5-AD9B-B58FBB046D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D66BDD6-6DC0-45B5-AD9B-B58FBB046D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4F0CDB3-6FB1-4592-9441-FA05A6DD9732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4F0CDB3-6FB1-4592-9441-FA05A6DD9732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4F0CDB3-6FB1-4592-9441-FA05A6DD9732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4F0CDB3-6FB1-4592-9441-FA05A6DD9732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB101CB6-D7EE-4D2C-8373-71C3BE4D8155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB101CB6-D7EE-4D2C-8373-71C3BE4D8155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB101CB6-D7EE-4D2C-8373-71C3BE4D8155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB101CB6-D7EE-4D2C-8373-71C3BE4D8155}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {00E9779C-C46D-41DD-AF11-670D027156E8}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {00E9779C-C46D-41DD-AF11-670D027156E8}
+	EndGlobalSection
+EndGlobal

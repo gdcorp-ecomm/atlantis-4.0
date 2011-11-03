@@ -19,7 +19,7 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Tests
     [DeploymentItem("atlantis.config")]
     public void DCCSetAutoRenewForDomainThatShopperDoesNotOwn()
     {
-      DCCSetAutoRenewRequestData request = new DCCSetAutoRenewRequestData("847235", string.Empty, string.Empty, string.Empty, 0, 1, 1666955, 1, "MOBILE_CSA_DCC");
+      DCCSetAutoRenewRequestData request = new DCCSetAutoRenewRequestData("840820", string.Empty, string.Empty, string.Empty, 0, 1, 1666955, 1, "MOBILE_CSA_DCC");
       DCCSetAutoRenewResponseData response = (DCCSetAutoRenewResponseData)Engine.Engine.ProcessRequest(request, 101);
       // Success is coming back true, DCC Team will be fixing this
       Assert.IsFalse(response.IsSuccess);

@@ -10,7 +10,7 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Impl
     {
       DCCSetAutoRenewResponseData responseData;
       string responseXml = string.Empty;
-      DsWebVerify.RegDCCVerifyWebSvcService regDccVerifyWebService = null;
+      DsWebVerify.RegDCCVerifyWS regDccVerifyWebService = null;
 
       try
       {
@@ -19,15 +19,14 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Impl
         string verifyAction;
         string verifyDomains;
         oRequest.XmlToVerify(out verifyAction, out verifyDomains);
-
-        regDccVerifyWebService = new DsWebVerify.RegDCCVerifyWebSvcService();
-        regDccVerifyWebService.Url = ((WsConfigElement)oConfig).WSURL.Replace("RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll", "RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll");
+        regDccVerifyWebService = new DsWebVerify.RegDCCVerifyWS();
+        regDccVerifyWebService.Url = oConfig.GetConfigValue("VerifyUrl");
         regDccVerifyWebService.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
         responseXml = regDccVerifyWebService.VerifyDomainSetAutoRenew(verifyAction, verifyDomains);
 
         if (responseXml.Contains("ActionResultID=\"0\""))
         {
-          DsWebSubmit.RegDCCRequestWebSvcService oDsWeb = new DsWebSubmit.RegDCCRequestWebSvcService();
+          DsWebSubmit.RegDCCRequestWS oDsWeb = new DsWebSubmit.RegDCCRequestWS();
           oDsWeb.Url = ((WsConfigElement)oConfig).WSURL;
           oDsWeb.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
 

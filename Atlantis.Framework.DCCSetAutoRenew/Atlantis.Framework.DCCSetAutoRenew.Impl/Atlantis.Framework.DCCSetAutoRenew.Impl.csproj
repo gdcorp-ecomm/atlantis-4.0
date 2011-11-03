@@ -108,27 +108,27 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://devdsweb/RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll%3fHandler=GenRegDCCRequestWebSvcWSDL">
+    <WebReferenceUrl Include="https://dccapp-general.dev.intranet.gdg/RegDCCRequestWS/RegDCCRequestWS.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\DsWebSubmit\</RelPath>
-      <UpdateFromURL>http://devdsweb/RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll%3fHandler=GenRegDCCRequestWebSvcWSDL</UpdateFromURL>
+      <UpdateFromURL>https://dccapp-general.dev.intranet.gdg/RegDCCRequestWS/RegDCCRequestWS.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Atlantis_Framework_DCCSetAutoRenew_Impl_DsWebSubmit_RegDCCRequestWebSvcService</CachedSettingsPropName>
+      <CachedSettingsPropName>Atlantis_Framework_DCCSetAutoRenew_Impl_DsWebSubmit_RegDCCRequestWS</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://devdsweb/RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll%3fHandler=GenRegDCCVerifyWebSvcWSDL">
+    <WebReferenceUrl Include="https://dccapp-general.dev.intranet.gdg/RegDCCVerifyWS/RegDCCVerifyWS.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\DsWebVerify\</RelPath>
-      <UpdateFromURL>http://devdsweb/RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll%3fHandler=GenRegDCCVerifyWebSvcWSDL</UpdateFromURL>
+      <UpdateFromURL>https://dccapp-general.dev.intranet.gdg/RegDCCVerifyWS/RegDCCVerifyWS.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Atlantis_Framework_DCCSetAutoRenew_Impl_DsWebVerify_RegDCCVerifyWebSvcService</CachedSettingsPropName>
+      <CachedSettingsPropName>Atlantis_Framework_DCCSetAutoRenew_Impl_DsWebVerify_RegDCCVerifyWS</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
@@ -141,12 +141,12 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\DsWebSubmit\RegDCCRequestWebSvc.wsdl" />
+    <None Include="Web References\DsWebSubmit\RegDCCRequestWS.wsdl" />
     <None Include="Web References\DsWebVerify\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\DsWebVerify\RegDCCVerifyWebSvc.wsdl" />
+    <None Include="Web References\DsWebVerify\RegDCCVerifyWS.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -164,6 +164,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\DsWebSubmit\RegDCCRequestWS.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\DsWebVerify\RegDCCVerifyWS.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

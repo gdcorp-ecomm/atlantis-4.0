@@ -16,13 +16,14 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
                                             int privateLabelID,
                                             int domainId,
                                             int autoRenewValue,
-                                            string dccDomainUser)
+                                            string applicationName)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       _privateLabelID = privateLabelID;
       _domainId = domainId;
       _autoRenewValue = autoRenewValue;
       RequestTimeout = _requestTimeout;
+      AppName = applicationName;
     }
 
     
@@ -43,6 +44,8 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
     {
       get { return _privateLabelID; }
     }
+
+    private string AppName { get; set;}
 
     private XmlNode AddNode(XmlNode parentNode, string sChildNodeName)
     {
@@ -69,6 +72,7 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
       AddAttribute(oRoot, "UserType", "Shopper");
       AddAttribute(oRoot, "UserId", ShopperID);
       AddAttribute(oRoot, "PrivateLabelId", _privateLabelID.ToString());
+      AddAttribute(oRoot, "RequestingApplication", AppName);
 
       XmlElement oAutoRenew = (XmlElement)AddNode(oRoot, "AUTORENEW");
       AddAttribute(oAutoRenew, "Status", _autoRenewValue.ToString());
@@ -97,6 +101,7 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
       AddAttribute(oAction, "UserId", ShopperID);
       AddAttribute(oAction, "PrivateLabelId", _privateLabelID.ToString());
       AddAttribute(oAction, "RequestingServer", Environment.MachineName);
+      AddAttribute(oAction, "RequestingApplication", AppName);
       AddAttribute(oAction, "RequestedByIp", System.Net.Dns.GetHostEntry(Environment.MachineName).AddressList[0].ToString());
       AddAttribute(oAction, "ModifiedBy", "1");
 

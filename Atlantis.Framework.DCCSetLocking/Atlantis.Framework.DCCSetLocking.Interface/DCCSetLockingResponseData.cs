@@ -32,16 +32,22 @@ namespace Atlantis.Framework.DCCSetLocking.Interface
     {
       _responseXml = validationXml;
       _isSuccess = isSuccess;
-      _validationMsg = parseVerificationDesc(validationXml);
+      _validationMsg = ParseVerificationDesc(validationXml);
     }
 
-    string parseVerificationDesc(string verificaitonDoc)
+    string ParseVerificationDesc(string verificaitonDoc)
     {
       XmlDocument oDoc = new XmlDocument();
       oDoc.LoadXml(verificaitonDoc);
 
       XmlElement oEle = (XmlElement)oDoc.SelectSingleNode("/VERIFICATION/ACTIONRESULTS/ACTIONRESULT");
-      return (oEle != null) ? oEle.Attributes["Description"].Value : "";
+      string sResult = string.Empty;
+      if (oEle != null && oEle.Attributes["Description"] != null)
+      {
+        sResult = oEle.Attributes["Description"].Value;
+      }
+
+      return sResult;
     }
 
     public DCCSetLockingResponseData(string responseXml, RequestData oRequestData, Exception ex)
@@ -50,25 +56,15 @@ namespace Atlantis.Framework.DCCSetLocking.Interface
       _exception = new AtlantisException(oRequestData,
                                    "DCCSetLockingResponseData",
                                    ex.Message,
-                                   oRequestData.ToXML());
+                                   ex.StackTrace);
     }
 
     private void PopulateFromXml(string resultXml)
     {
-      //ResultID52 == "Already in specified Status"
       if (resultXml.Contains("<success") )
       {
         _isSuccess = true;
       }
-        /*
-      else if (resultXML.Contains("<error"))
-      {
-        XmlDocument responseDoc = new XmlDocument();
-        responseDoc.LoadXml(resultXML);
-        responseDoc.Attributes["desc"].Value
-
-      }
-         * */
     }
 
     public bool IsSuccess

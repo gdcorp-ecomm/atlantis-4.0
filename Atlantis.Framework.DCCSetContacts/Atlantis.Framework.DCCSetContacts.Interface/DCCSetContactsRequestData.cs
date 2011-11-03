@@ -21,7 +21,8 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
 
     private int _privateLabelID;
     private int _domainId;
-    private string _dccDomainUser;
+    private string AppName { get; set; }
+
     Dictionary<int, Dictionary<string, string>> _contacts = new Dictionary<int, Dictionary<string, string>>();
     //(registrant = 0, technical = 1, admin = 2, billing = 3)
 
@@ -33,12 +34,12 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
                                     int pageCount,
                                     int privateLabelID,
                                     int domainId,
-                                    string dccDomainUser)
+                                    string applicationName)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       _privateLabelID = privateLabelID;
       _domainId = domainId;
-      _dccDomainUser = dccDomainUser;
+      AppName = applicationName;
       RequestTimeout = _requestTimeout;
     }
 
@@ -133,6 +134,7 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
       AddAttribute(oAction, "UserId", ShopperID);
       AddAttribute(oAction, "PrivateLabelId", _privateLabelID.ToString());
       AddAttribute(oAction, "RequestingServer", Environment.MachineName);
+      AddAttribute(oAction, "RequestingApplication", AppName);
       AddAttribute(oAction, "RequestedByIp", System.Net.Dns.GetHostEntry(Environment.MachineName).AddressList[0].ToString());
       AddAttribute(oAction, "ModifiedBy", "1");
 
@@ -170,6 +172,7 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
         AddAttribute(oRoot, "UserType", "Shopper");
         AddAttribute(oRoot, "UserId", ShopperID);
         AddAttribute(oRoot, "PrivateLabelId", _privateLabelID.ToString());
+        AddAttribute(oRoot, "RequestingApplication", AppName);
 
         XmlElement oContacts = (XmlElement)AddNode(oRoot, "Contacts");
         BuildContactXml(oContacts);

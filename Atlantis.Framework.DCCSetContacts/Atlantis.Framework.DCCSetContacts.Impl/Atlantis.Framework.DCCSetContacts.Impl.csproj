@@ -113,10 +113,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://devdsweb/RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll%3fHandler=GenRegDCCRequestWebSvcWSDL">
+    <WebReferenceUrl Include="https://dccapp-general.dev.intranet.gdg/RegDCCRequestWS/RegDCCRequestWS.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\DsWebSubmit\</RelPath>
-      <UpdateFromURL>http://devdsweb/RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll%3fHandler=GenRegDCCRequestWebSvcWSDL</UpdateFromURL>
+      <UpdateFromURL>https://dccapp-general.dev.intranet.gdg/RegDCCRequestWS/RegDCCRequestWS.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -124,10 +124,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Atlantis_Framework_DCCSetContacts_Impl_DsWebSubmit_RegDCCRequestWebSvcService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://devdsweb/RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx">
+    <WebReferenceUrl Include="https://dccapp-general.dev.intranet.gdg/RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\DsWebValidate\</RelPath>
-      <UpdateFromURL>http://devdsweb/RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx</UpdateFromURL>
+      <UpdateFromURL>https://dccapp-general.dev.intranet.gdg/RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -135,10 +135,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Atlantis_Framework_DCCSetContacts_Impl_DsWebValidate_RegDCCValidateWebSvc</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://devdsweb/RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll%3fHandler=GenRegDCCVerifyWebSvcWSDL">
+    <WebReferenceUrl Include="https://dccapp-general.dev.intranet.gdg/RegDCCVerifyWS/RegDCCVerifyWS.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\DsWebVerify\</RelPath>
-      <UpdateFromURL>http://devdsweb/RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll%3fHandler=GenRegDCCVerifyWebSvcWSDL</UpdateFromURL>
+      <UpdateFromURL>https://dccapp-general.dev.intranet.gdg/RegDCCVerifyWS/RegDCCVerifyWS.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -157,13 +157,13 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\DsWebSubmit\RegDCCRequestWebSvc.wsdl" />
+    <None Include="Web References\DsWebSubmit\RegDCCRequestWS.wsdl" />
     <None Include="Web References\DsWebValidate\RegDCCValidateWebSvc.wsdl" />
     <None Include="Web References\DsWebVerify\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\DsWebVerify\RegDCCVerifyWebSvc.wsdl" />
+    <None Include="Web References\DsWebVerify\RegDCCVerifyWS.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\DsWebValidate\Reference.map">
@@ -188,6 +188,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\DsWebSubmit\RegDCCRequestWS.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\DsWebVerify\RegDCCVerifyWS.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

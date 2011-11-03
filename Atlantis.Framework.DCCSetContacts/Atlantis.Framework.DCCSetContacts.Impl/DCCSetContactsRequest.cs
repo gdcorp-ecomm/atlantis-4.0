@@ -22,21 +22,20 @@ namespace Atlantis.Framework.DCCSetContacts.Impl
         oRequest.XmlToVerify(out verifyAction, out verifyDomains);
 
         validationService = new DsWebValidate.RegDCCValidateWebSvc();
-        string sValidateUrl = ((WsConfigElement)oConfig).WSURL.Replace("RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll", "RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx");
-        validationService.Url = sValidateUrl;
+        validationService.Url = oConfig.GetConfigValue("ValidateUrl");
         validationService.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
         string validateResponseXml = validationService.ValidateContactUpdate(verifyAction, verifyDomains);
 
         if (validateResponseXml.Contains("<ACTIONRESULTS></ACTIONRESULTS>"))
         {
-          DsWebVerify.RegDCCVerifyWebSvcService oDsWebVerify = new DsWebVerify.RegDCCVerifyWebSvcService();
-          oDsWebVerify.Url = ((WsConfigElement)oConfig).WSURL.Replace("RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll", "RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll");
+          DsWebVerify.RegDCCVerifyWS oDsWebVerify = new DsWebVerify.RegDCCVerifyWS();
+          oDsWebVerify.Url = oConfig.GetConfigValue("VerifyUrl");
           oDsWebVerify.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
           verifyResponseXml = oDsWebVerify.VerifyContactUpdate(verifyAction, verifyDomains);
 
           if (verifyResponseXml.Contains("ActionResultID=\"0\""))
           {
-            DsWebSubmit.RegDCCRequestWebSvcService oDsWeb = new DsWebSubmit.RegDCCRequestWebSvcService();
+            DsWebSubmit.RegDCCRequestWS oDsWeb = new DsWebSubmit.RegDCCRequestWS();
             oDsWeb.Url = ((WsConfigElement)oConfig).WSURL;
             oDsWeb.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
 

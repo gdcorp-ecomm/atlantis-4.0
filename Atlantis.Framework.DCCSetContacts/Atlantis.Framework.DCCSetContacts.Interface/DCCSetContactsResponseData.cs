@@ -21,7 +21,7 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
     {
       _responseXml = validationXml;
       _isSuccess = isSuccess;
-      _validationMsg = parseValidationDesc(validationXml);
+      _validationMsg = ParseValidationDesc(validationXml);
     }
 
     public DCCSetContactsResponseData(string responseXml, AtlantisException exAtlantis)
@@ -32,12 +32,11 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
 
     public DCCSetContactsResponseData(string responseXml, RequestData oRequestData, Exception ex)
     {
-      _validationMsg = ParseVerificationDesc(responseXml);
       _responseXml = responseXml;
       _exception = new AtlantisException(oRequestData,
-                                   "DCCSetContactsResponseData",
-                                   ex.Message,
-                                   oRequestData.ToXML());
+                                         "DCCSetContactsResponseData",
+                                         ex.Message,
+                                         string.Format("Request: {0}, Response: {1}", oRequestData.ToXML(), responseXml));
     }
 
 
@@ -55,18 +54,24 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
       oDoc.LoadXml(xml);
 
       XmlElement oEle = (XmlElement)oDoc.SelectSingleNode("/VERIFICATION/ACTIONRESULTS/ACTIONRESULT");
-      sResult = oEle.Attributes["Description"].Value;
+      if (oEle != null && oEle.Attributes["Description"] != null)
+      {
+        sResult = oEle.Attributes["Description"].Value;
+      }
       return sResult;
     }
 
-    string parseValidationDesc(string validationDoc)
+    string ParseValidationDesc(string validationDoc)
     {
       string sResult = "";
       XmlDocument oDoc = new XmlDocument();
       oDoc.LoadXml(validationDoc);
 
       XmlElement oEle = (XmlElement)oDoc.SelectSingleNode("/VALIDATION/ACTIONRESULTS/ACTIONRESULT");
-      sResult = oEle.Attributes["Description"].Value;
+      if (oEle != null && oEle.Attributes["Description"] != null)
+      {
+        sResult = oEle.Attributes["Description"].Value;
+      }
       return sResult;
     }
 
@@ -76,15 +81,6 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
       {
         _isSuccess = true;
       }
-        /*
-      else if (resultXML.Contains("<error"))
-      {
-        XmlDocument responseDoc = new XmlDocument();
-        responseDoc.LoadXml(resultXML);
-        responseDoc.Attributes["desc"].Value
-
-      }
-         * */
     }
 
     public bool IsSuccess

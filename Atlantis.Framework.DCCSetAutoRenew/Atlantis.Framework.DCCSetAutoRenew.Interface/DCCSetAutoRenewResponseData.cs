@@ -20,7 +20,7 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
     {
       _validationMsg = "";
       _responseXml = responseXml;
-      PopulateFromXML(responseXml);
+      PopulateFromXml(responseXml);
     }
 
     public DCCSetAutoRenewResponseData(string responseXml, AtlantisException exAtlantis)
@@ -46,7 +46,7 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
                                    ex.StackTrace);
     }
 
-    string ParseVerificationDesc(string verificaitonDoc)
+    private string ParseVerificationDesc(string verificaitonDoc)
     {
       XmlDocument oDoc = new XmlDocument();
       oDoc.LoadXml(verificaitonDoc);
@@ -60,9 +60,9 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
       return sResult;
     }
 
-    void PopulateFromXML(string resultXML)
+    private void PopulateFromXml(string resultXml)
     {
-      if (resultXML.Contains("<success"))
+      if (resultXml.Contains("<success"))
       {
         _isSuccess = true;
       }

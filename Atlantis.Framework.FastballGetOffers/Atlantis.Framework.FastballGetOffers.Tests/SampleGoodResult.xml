@@ -1,0 +1,12 @@
+﻿<OfferResultXml>
+  <OfferResult>
+    <ResultCode>0</ResultCode>
+    <CandidateAttributesXml>
+      <Shopper personaID="2123">
+      </Shopper>
+    </CandidateAttributesXml>
+    <SelectedOffers>
+      <Offer fbiOfferId="40001" />
+    </SelectedOffers>
+  </OfferResult>
+</OfferResultXml>

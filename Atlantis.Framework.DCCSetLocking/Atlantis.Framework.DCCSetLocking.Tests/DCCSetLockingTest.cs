@@ -22,7 +22,7 @@ namespace Atlantis.Framework.DCCSetLocking.Tests
     [DeploymentItem("atlantis.config")]
     public void DCCSetLockingForDomainThatShopperDoesNotOwn()
     {
-      DCCSetLockingRequestData request = new DCCSetLockingRequestData("847235", string.Empty, string.Empty, string.Empty, 0, 1, 1666955, 1, "MOBILE_CSA_DCC");
+      DCCSetLockingRequestData request = new DCCSetLockingRequestData("840820", string.Empty, string.Empty, string.Empty, 0, 1, 1666955, 1, "MOBILE_CSA_DCC");
       DCCSetLockingResponseData response = (DCCSetLockingResponseData)Engine.Engine.ProcessRequest(request, 102);
 
       // Pending updates by the DCC team.  They are returning success in this case.

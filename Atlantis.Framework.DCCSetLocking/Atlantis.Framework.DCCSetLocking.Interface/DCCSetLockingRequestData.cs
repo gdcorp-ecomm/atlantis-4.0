@@ -7,9 +7,7 @@ namespace Atlantis.Framework.DCCSetLocking.Interface
   public class DCCSetLockingRequestData: RequestData
   {
     private static readonly TimeSpan _requestTimeout = TimeSpan.FromSeconds(12);
-
-    private string _dccDomainUser;
-
+    
     public DCCSetLockingRequestData(string shopperId,
                                     string sourceUrl,
                                     string orderId,
@@ -18,16 +16,18 @@ namespace Atlantis.Framework.DCCSetLocking.Interface
                                     int privateLabelID,
                                     int domainId,
                                     int lockingValue,
-                                    string dccDomainUser)
+                                    string applicationName)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       _privateLabelID = privateLabelID;
       _domainId = domainId;
       _lockingValue = lockingValue;
-      _dccDomainUser = dccDomainUser;
+      AppName = applicationName;
       RequestTimeout = _requestTimeout;
     }
     
+    private string AppName { get; set; }
+
     private int _domainId;
     public int DomainID
     {
@@ -71,6 +71,7 @@ namespace Atlantis.Framework.DCCSetLocking.Interface
         AddAttribute(oRoot, "UserType", "Shopper");
         AddAttribute(oRoot, "UserId", ShopperID);
         AddAttribute(oRoot, "PrivateLabelId", _privateLabelID.ToString());
+        AddAttribute(oRoot, "RequestingApplication", AppName);
 
         XmlElement oLock = (XmlElement)AddNode(oRoot, "LOCK");
         AddAttribute(oLock, "Status", _lockingValue.ToString() );
@@ -98,6 +99,7 @@ namespace Atlantis.Framework.DCCSetLocking.Interface
       AddAttribute(oAction, "UserType", "Shopper");
       AddAttribute(oAction, "UserId", ShopperID);
       AddAttribute(oAction, "PrivateLabelId", _privateLabelID.ToString());
+      AddAttribute(oRoot, "RequestingApplication", AppName);
       AddAttribute(oAction, "RequestingServer", Environment.MachineName);
       AddAttribute(oAction, "RequestedByIp", System.Net.Dns.GetHostEntry(Environment.MachineName).AddressList[0].ToString());
       AddAttribute(oAction, "ModifiedBy", "1");

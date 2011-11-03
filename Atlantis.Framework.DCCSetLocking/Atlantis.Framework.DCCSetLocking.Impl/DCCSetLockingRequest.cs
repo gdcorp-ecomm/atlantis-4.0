@@ -10,7 +10,7 @@ namespace Atlantis.Framework.DCCSetLocking.Impl
     {
       DCCSetLockingResponseData responseData;
       string responseXml = string.Empty;
-      DsWebVerify.RegDCCVerifyWebSvcService verifyWebService = null;
+      DsWebVerify.RegDCCVerifyWS verifyWebService = null;
 
       try
       {
@@ -20,14 +20,14 @@ namespace Atlantis.Framework.DCCSetLocking.Impl
         string verifyDomains;
         oRequest.XmlToVerify(out verifyAction, out verifyDomains);
 
-        verifyWebService = new DsWebVerify.RegDCCVerifyWebSvcService();
-        verifyWebService.Url = ((WsConfigElement)oConfig).WSURL.Replace("RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll", "RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll");
+        verifyWebService = new DsWebVerify.RegDCCVerifyWS();
+        verifyWebService.Url = oConfig.GetConfigValue("VerifyUrl");
         verifyWebService.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
         responseXml = verifyWebService.VerifyDomainSetLock(verifyAction, verifyDomains);
 
         if (responseXml.Contains("ActionResultID=\"0\""))
         {
-          DsWebSubmit.RegDCCRequestWebSvcService oDsWeb = new DsWebSubmit.RegDCCRequestWebSvcService();
+          DsWebSubmit.RegDCCRequestWS oDsWeb = new DsWebSubmit.RegDCCRequestWS();
           oDsWeb.Url = ((WsConfigElement)oConfig).WSURL;
           oDsWeb.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
 

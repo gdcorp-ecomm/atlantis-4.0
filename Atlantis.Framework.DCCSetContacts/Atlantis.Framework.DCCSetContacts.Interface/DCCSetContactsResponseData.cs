@@ -49,7 +49,7 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
 
     private string ParseVerificationDesc(string xml)
     {
-      string sResult = "";
+      string sResult = string.Empty;
       XmlDocument oDoc = new XmlDocument();
       oDoc.LoadXml(xml);
 
@@ -63,7 +63,7 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
 
     string ParseValidationDesc(string validationDoc)
     {
-      string sResult = "";
+      string sResult = string.Empty;
       XmlDocument oDoc = new XmlDocument();
       oDoc.LoadXml(validationDoc);
 

@@ -25,8 +25,8 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl
         string verifyDomains;
 
         oRequest.XmlToVerify(out verifyAction, out verifyDomains);
-        
-        string sValidateUrl = ((WsConfigElement)oConfig).WSURL.Replace("RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll", "RegDCCValidateWebSvc/RegDCCValidateWebSvc.asmx");
+
+        string sValidateUrl = oConfig.GetConfigValue("ValidateUrl");
         oDsWebValidate.Url = sValidateUrl;
         oDsWebValidate.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
         validateResponseXml = oDsWebValidate.ValidateDomainForwardingUpdate(verifyAction, verifyDomains);
@@ -36,17 +36,14 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl
         {
           string verifyResponseXml;
 
-          DsWebVerify.RegDCCVerifyWebSvcService oDsWebVerify = new DsWebVerify.RegDCCVerifyWebSvcService();
-          string sVerifyUrl = ((WsConfigElement)oConfig).WSURL.Replace("RegDCCRequestWebSvc/RegDCCRequestWebSvc.dll",
-                                                                        "RegDCCVerifyWebSvc/RegDCCVerifyWebSvc.dll");
-
-          oDsWebVerify.Url = sVerifyUrl;
+          DsWebVerify.RegDCCVerifyWS oDsWebVerify = new DsWebVerify.RegDCCVerifyWS();
+          oDsWebVerify.Url = oConfig.GetConfigValue("VerifyUrl"); ;
           oDsWebVerify.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
           verifyResponseXml = oDsWebVerify.VerifyDomainForwardingUpdate(verifyAction, verifyDomains);
 
           if (verifyResponseXml.Contains("ActionResultID=\"0\""))
           {
-            using (DsWebSubmit.RegDCCRequestWebSvcService oDsWeb = new DsWebSubmit.RegDCCRequestWebSvcService())
+            using (DsWebSubmit.RegDCCRequestWS oDsWeb = new DsWebSubmit.RegDCCRequestWS())
             {
               oDsWeb.Url = ((WsConfigElement) oConfig).WSURL;
               oDsWeb.Timeout = (int) oRequest.RequestTimeout.TotalMilliseconds;

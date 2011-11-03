@@ -33,15 +33,17 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl.DsWebValidate {
         
         private System.Threading.SendOrPostCallback ValidateDomainSetAutoRenewOperationCompleted;
         
-        private System.Threading.SendOrPostCallback ValidateDomainForwardingUpdateOperationCompleted;
-        
         private System.Threading.SendOrPostCallback ValidateDomainForwardingDeleteOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ValidateDomainForwardingUpdateOperationCompleted;
         
         private System.Threading.SendOrPostCallback ValidateContactUpdateOperationCompleted;
         
         private System.Threading.SendOrPostCallback ValidateNameserverUpdateOperationCompleted;
         
         private System.Threading.SendOrPostCallback ValidateDomainRenewalOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback LoggingHeartBeatOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -88,10 +90,10 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl.DsWebValidate {
         public event ValidateDomainSetAutoRenewCompletedEventHandler ValidateDomainSetAutoRenewCompleted;
         
         /// <remarks/>
-        public event ValidateDomainForwardingUpdateCompletedEventHandler ValidateDomainForwardingUpdateCompleted;
+        public event ValidateDomainForwardingDeleteCompletedEventHandler ValidateDomainForwardingDeleteCompleted;
         
         /// <remarks/>
-        public event ValidateDomainForwardingDeleteCompletedEventHandler ValidateDomainForwardingDeleteCompleted;
+        public event ValidateDomainForwardingUpdateCompletedEventHandler ValidateDomainForwardingUpdateCompleted;
         
         /// <remarks/>
         public event ValidateContactUpdateCompletedEventHandler ValidateContactUpdateCompleted;
@@ -101,6 +103,9 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl.DsWebValidate {
         
         /// <remarks/>
         public event ValidateDomainRenewalCompletedEventHandler ValidateDomainRenewalCompleted;
+        
+        /// <remarks/>
+        public event LoggingHeartBeatCompletedEventHandler LoggingHeartBeatCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ValidateDomainSetLock", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -165,37 +170,6 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl.DsWebValidate {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ValidateDomainForwardingUpdate", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string ValidateDomainForwardingUpdate(string action, string domains) {
-            object[] results = this.Invoke("ValidateDomainForwardingUpdate", new object[] {
-                        action,
-                        domains});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ValidateDomainForwardingUpdateAsync(string action, string domains) {
-            this.ValidateDomainForwardingUpdateAsync(action, domains, null);
-        }
-        
-        /// <remarks/>
-        public void ValidateDomainForwardingUpdateAsync(string action, string domains, object userState) {
-            if ((this.ValidateDomainForwardingUpdateOperationCompleted == null)) {
-                this.ValidateDomainForwardingUpdateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnValidateDomainForwardingUpdateOperationCompleted);
-            }
-            this.InvokeAsync("ValidateDomainForwardingUpdate", new object[] {
-                        action,
-                        domains}, this.ValidateDomainForwardingUpdateOperationCompleted, userState);
-        }
-        
-        private void OnValidateDomainForwardingUpdateOperationCompleted(object arg) {
-            if ((this.ValidateDomainForwardingUpdateCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ValidateDomainForwardingUpdateCompleted(this, new ValidateDomainForwardingUpdateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ValidateDomainForwardingDelete", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string ValidateDomainForwardingDelete(string action, string domains) {
             object[] results = this.Invoke("ValidateDomainForwardingDelete", new object[] {
@@ -223,6 +197,37 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl.DsWebValidate {
             if ((this.ValidateDomainForwardingDeleteCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ValidateDomainForwardingDeleteCompleted(this, new ValidateDomainForwardingDeleteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ValidateDomainForwardingUpdate", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string ValidateDomainForwardingUpdate(string action, string domains) {
+            object[] results = this.Invoke("ValidateDomainForwardingUpdate", new object[] {
+                        action,
+                        domains});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ValidateDomainForwardingUpdateAsync(string action, string domains) {
+            this.ValidateDomainForwardingUpdateAsync(action, domains, null);
+        }
+        
+        /// <remarks/>
+        public void ValidateDomainForwardingUpdateAsync(string action, string domains, object userState) {
+            if ((this.ValidateDomainForwardingUpdateOperationCompleted == null)) {
+                this.ValidateDomainForwardingUpdateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnValidateDomainForwardingUpdateOperationCompleted);
+            }
+            this.InvokeAsync("ValidateDomainForwardingUpdate", new object[] {
+                        action,
+                        domains}, this.ValidateDomainForwardingUpdateOperationCompleted, userState);
+        }
+        
+        private void OnValidateDomainForwardingUpdateOperationCompleted(object arg) {
+            if ((this.ValidateDomainForwardingUpdateCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ValidateDomainForwardingUpdateCompleted(this, new ValidateDomainForwardingUpdateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -320,6 +325,33 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl.DsWebValidate {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/LoggingHeartBeat", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string LoggingHeartBeat() {
+            object[] results = this.Invoke("LoggingHeartBeat", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void LoggingHeartBeatAsync() {
+            this.LoggingHeartBeatAsync(null);
+        }
+        
+        /// <remarks/>
+        public void LoggingHeartBeatAsync(object userState) {
+            if ((this.LoggingHeartBeatOperationCompleted == null)) {
+                this.LoggingHeartBeatOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoggingHeartBeatOperationCompleted);
+            }
+            this.InvokeAsync("LoggingHeartBeat", new object[0], this.LoggingHeartBeatOperationCompleted, userState);
+        }
+        
+        private void OnLoggingHeartBeatOperationCompleted(object arg) {
+            if ((this.LoggingHeartBeatCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.LoggingHeartBeatCompleted(this, new LoggingHeartBeatCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -392,17 +424,17 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl.DsWebValidate {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void ValidateDomainForwardingUpdateCompletedEventHandler(object sender, ValidateDomainForwardingUpdateCompletedEventArgs e);
+    public delegate void ValidateDomainForwardingDeleteCompletedEventHandler(object sender, ValidateDomainForwardingDeleteCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ValidateDomainForwardingUpdateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class ValidateDomainForwardingDeleteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal ValidateDomainForwardingUpdateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal ValidateDomainForwardingDeleteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -418,17 +450,17 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl.DsWebValidate {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void ValidateDomainForwardingDeleteCompletedEventHandler(object sender, ValidateDomainForwardingDeleteCompletedEventArgs e);
+    public delegate void ValidateDomainForwardingUpdateCompletedEventHandler(object sender, ValidateDomainForwardingUpdateCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ValidateDomainForwardingDeleteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class ValidateDomainForwardingUpdateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal ValidateDomainForwardingDeleteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal ValidateDomainForwardingUpdateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -507,6 +539,32 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Impl.DsWebValidate {
         private object[] results;
         
         internal ValidateDomainRenewalCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void LoggingHeartBeatCompletedEventHandler(object sender, LoggingHeartBeatCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class LoggingHeartBeatCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal LoggingHeartBeatCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

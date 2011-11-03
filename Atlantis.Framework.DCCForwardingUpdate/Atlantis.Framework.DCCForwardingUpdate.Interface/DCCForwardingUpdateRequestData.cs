@@ -8,7 +8,7 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Interface
   {
     private TimeSpan _requestTimeout = TimeSpan.FromSeconds(30);
     
-    public string DCCDomainUser { get; private set; }
+    string AppName { get; set; }
 
     public int DomainId { get; private set; }
 
@@ -37,7 +37,7 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Interface
                                     int pageCount,
                                     int privateLabelId,
                                     int domainId,
-                                    string dccDomainUser,
+                                    string applicationName,
                                     string redirectUrl,
                                     RedirectType redirectType,
                                     bool updateNameServers)
@@ -46,7 +46,7 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Interface
     {
       PrivateLabelId = privateLabelId;
       DomainId = domainId;
-      DCCDomainUser = dccDomainUser;
+      AppName = applicationName;
       RedirectURL = redirectUrl;
       RedirectType = redirectType;
       UpdateNameServers = updateNameServers;
@@ -91,6 +91,7 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Interface
       AddAttribute(oAction, "UserId", ShopperID);
       AddAttribute(oAction, "PrivateLabelId", PrivateLabelId.ToString());
       AddAttribute(oAction, "RequestingServer", Environment.MachineName);
+      AddAttribute(oAction, "RequestingApplication", AppName);
       AddAttribute(oAction, "RequestedByIp", System.Net.Dns.GetHostEntry(Environment.MachineName).AddressList[0].ToString());
       AddAttribute(oAction, "ModifiedBy", "1");
 
@@ -130,6 +131,7 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Interface
       AddAttribute(oRoot, "UserType", "Shopper");
       AddAttribute(oRoot, "UserId", ShopperID);
       AddAttribute(oRoot, "PrivateLabelId", PrivateLabelId.ToString());
+      AddAttribute(oRoot, "RequestingApplication", AppName);
 
       XmlElement oForward = (XmlElement)AddNode(oRoot, "FORWARDING");
       AddAttribute(oForward, "RedirectUrl", RedirectURL);

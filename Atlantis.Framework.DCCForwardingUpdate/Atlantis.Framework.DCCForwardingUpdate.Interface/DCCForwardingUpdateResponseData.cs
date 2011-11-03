@@ -41,14 +41,14 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Interface
     {
       ResponseXml = responseXML;
       _exception = new AtlantisException(oRequestData,
-                                   "DCCForwardingUpdateResponseData",
-                                   ex.Message,
-                                   oRequestData.ToXML());
+                                         "DCCForwardingUpdateResponseData",
+                                         ex.Message,
+                                         string.Empty);
     }
 
     public DCCForwardingUpdateResponseData(string responseXML, RequestData oRequestData)
     {
-      ValidationMsg = parseVerificationDesc(responseXML);
+      ValidationMsg = ParseVerificationDesc(responseXML);
       ResponseXml = responseXML;      
     }
 
@@ -60,25 +60,32 @@ namespace Atlantis.Framework.DCCForwardingUpdate.Interface
       }
     }
 
-    string parseVerificationDesc(string inXML)
+    string ParseVerificationDesc(string inXML)
     {
-      string sResult = "";
+      string sResult = string.Empty;
       XmlDocument oDoc = new XmlDocument();
       oDoc.LoadXml(inXML);
 
       XmlElement oEle = (XmlElement)oDoc.SelectSingleNode("/VERIFICATION/ACTIONRESULTS/ACTIONRESULT");
-      sResult = oEle.Attributes["Description"].Value;
+      if (oEle != null && oEle.Attributes["Description"] != null)
+      {
+        sResult = oEle.Attributes["Description"].Value;
+      }
       return sResult;
     }
 
     private static string ParseValidationDesc(string validationDoc)
     {
-      string sResult;
+      string sResult = string.Empty;
       XmlDocument oDoc = new XmlDocument();
       oDoc.LoadXml(validationDoc);
 
       XmlElement oEle = (XmlElement)oDoc.SelectSingleNode("/VALIDATION/ACTIONRESULTS/ACTIONRESULT");
-      sResult = oEle.Attributes["Description"].Value;
+      if (oEle != null && oEle.Attributes["Description"] != null)
+      {
+        sResult = oEle.Attributes["Description"].Value;
+      }
+
       return sResult;
     }
 

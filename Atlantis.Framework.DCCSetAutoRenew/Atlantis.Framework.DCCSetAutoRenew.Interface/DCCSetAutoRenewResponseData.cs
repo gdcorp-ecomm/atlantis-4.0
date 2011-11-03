@@ -33,7 +33,7 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
     {
       _responseXml = validationXml;
       _isSuccess = isSuccess;
-      _validationMsg = parseVerificationDesc(validationXml);
+      _validationMsg = ParseVerificationDesc(validationXml);
     }
 
 
@@ -43,16 +43,21 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
       _exception = new AtlantisException(oRequestData,
                                    "DCCSetAutoRenewResponseData",
                                    ex.Message,
-                                   oRequestData.ToXML());
+                                   ex.StackTrace);
     }
 
-    string parseVerificationDesc(string verificaitonDoc)
+    string ParseVerificationDesc(string verificaitonDoc)
     {
       XmlDocument oDoc = new XmlDocument();
       oDoc.LoadXml(verificaitonDoc);
 
       XmlElement oEle = (XmlElement)oDoc.SelectSingleNode("/VERIFICATION/ACTIONRESULTS/ACTIONRESULT");
-      return (oEle != null) ? oEle.Attributes["Description"].Value : "";
+      string sResult = string.Empty;
+      if (oEle != null && oEle.Attributes["Description"] != null)
+      {
+        sResult = oEle.Attributes["Description"].Value;
+      }
+      return sResult;
     }
 
     void PopulateFromXML(string resultXML)
@@ -61,15 +66,6 @@ namespace Atlantis.Framework.DCCSetAutoRenew.Interface
       {
         _isSuccess = true;
       }
-      /*
-    else if (resultXML.Contains("<error"))
-    {
-      XmlDocument responseDoc = new XmlDocument();
-      responseDoc.LoadXml(resultXML);
-      responseDoc.Attributes["desc"].Value
-
-    }
-       * */
     }
 
     public bool IsSuccess

@@ -1,0 +1,87 @@
+﻿
+namespace SiteConstants
+{
+  public static class LinkTypes
+  {
+    public const string SiteRoot = "SITEURL";
+    public const string Image = "EXTERNALIMAGEURL";
+    public const string ExternalCSS = "EXTERNALCSSURL";
+    public const string ExternalScript = "EXTERNALJSURL";
+    public const string ExternalBigImage1 = "EXTERNALBIGIMAGE1URL";
+    public const string ExternalBigImage2 = "EXTERNALBIGIMAGE2URL";
+    public const string Cart = "CARTURL";
+    public const string MyAccount = "MYAURL";
+    public const string DomainsByProxy = "DBPURL";
+    public const string DomainControlCenter = "DCCURL";
+    public const string GoDaddyRacing = "RACINGURL";
+    public const string GoDaddyGirls = "GIRLSURL";
+    public const string GoDaddyLive = "LIVEURL";
+    public const string LifeOnline = "BOBPARSONSURL";
+    public const string GoDaddyConnextions = "CONNECTIONSURL";
+    public const string GoDaddyConnextionsForum = "CONNECTIONSFORUMSURL";
+    public const string TDNAM = "TDNAMURL"; //Auctions
+    public const string WildWestDomains = "WWDURL";
+    public const string SupportPage = "SUPPORTPAGE";
+    public const string WhoIsPage = "WHOISPAGE";
+    public const string SSOLoginPage = "SSOLOGINPAGE";
+    public const string SSOLogoutPage = "SSOLOGOUTPAGE";
+    public const string SSOKeepAlivePage = "SSOKEEPALIVEPAGE";
+    public const string Help = "HELPURL";
+    public const string Starfield = "STARFIELDURL";
+    public const string StarfieldSeal = "STARFIELDSEALURL";
+    public const string DccManageDomainsPage = "DCCMANAGEDOMAINSPAGE";
+    public const string MyaAccountListPage = "MYAACCOUNTLISTPAGE";
+    public const string MyaHostingPage = "MYAHOSTINGPAGE";
+    public const string MyaSiteBuilderPage = "MYASITEBUILDERPAGE";
+    public const string MyaOnlineFileFolderPage = "MYAONLINEFILEFOLDERPAGE";
+    public const string MyaExpressEmailMarketingPage = "MYAEXPRESSEMAILMARKETINGPAGE";
+    public const string MyaSslPage = "MYASSLPAGE";
+    public const string MyaDedicatedHostingPage = "MYADEDICATEDHOSTINGPAGE";
+    public const string MyaCustomDesignPage = "MYACUSTOMDESIGNPAGE";
+    public const string MyaTrafficBlazerPage = "MYATRAFFICBLAZERPAGE";
+    public const string TrafficImage = "TRAFFICIMAGE";
+    public const string Mobile = "MOBILEURL";
+    public const string GoDaddyTV = "VIDEOURL";
+    public const string GoDaddyRadio = "RADIOURL";
+    public const string ResellerControlCenter = "RCCURL";
+    public const string Marketplace = "MARKETPLACEURL";
+    public const string CartMarketplace = "CARTMARKETPLACEURL";
+    public const string VideoAkamai = "VIDEOAKAMAIURL";
+    public const string VideoLimeLight = "VIDEOLIMELIGHTURL";
+    public const string VideoLocal = "VIDEOLOCALURL";
+    public const string BobParsonsTV = "BOBPARSONSMEURL";
+    public const string HostingConnections = "HOSTINGCONNECTIONSURL";
+    public const string CommonProfile = "COMMONPROFILEURL";
+    public const string GoDaddyGuyTwitterRSS = "GODADDYGUYTWITTERRSSURL";
+    public const string DomainsBlog = "DOMAINSGDBLOGURL";
+    public const string AftermarketBlog = "AFTERMARKETGDBLOGURL";
+    public const string MarketingBlog = "MARKETINGGDBLOGURL";
+    public const string SiteBuildersBlog = "SITEBUILDERSGDBLOGURL";
+    public const string HostingBlog = "HOSTINGGDBLOGURL";
+    public const string WorkspaceBlog = "WORKSPACEGDBLOGURL";
+    public const string TwitterGoDaddyGuy = "TWITTERGODADDYGUYURL";
+    public const string FacebookGoDaddy = "GODADDYFACEBOOKURL";
+    public const string YouTubeGoDaddy = "GODADDYYOUTUBEURL";
+    public const string GoDaddySaves = "GODADDYSAVESURL";
+    public const string LinkedIn = "LINKEDINURL";
+    public const string TrafficRedirectPage = "TRAFFICREDIRECTPAGE";
+    public const string GeoDomain = "GEODOMAINURL";
+    public const string BobParsonsbBlogRedirect = "BOBPARSONSMEBLOGREDIRECTPAGE";
+    public const string Affiliates = "AFFILIATEURL";
+    public const string CommissionJunctionMembers = "COMMISSIONJUNCTIONMEMBERSURL";
+    public const string CommissionJunctionSignup = "COMMISSIONJUNCTIONSIGNUPURL";
+    public const string Community = "COMMUNITYURL";
+    public const string Manager = "MANAGERURL";
+    public const string ManagerCatalog = "MANAGERCATALOGURL";
+    public const string ManagerCart = "MANAGERCARTURL";
+    public const string ManagerMya = "MANAGERMYAURL";
+    public const string ManagerDcc = "MANAGERDCCURL";
+    public const string VideoMe = "VIDEOMEURL";
+    public const string ManagerLegacyCartUrl = "MANAGERLEGACYCARTURL";
+    public const string ChannelIntegrationUrl = "CHANNELINTEGRATIONURL";
+    public const string SupportCenterUrl = "SUPPORTCENTERURL";
+    public const string PresentationCentral = "PRESENTATIONCENTRALURL";
+    public const string CloudHosting = "CLOUDHOSTINGURL";
+    public const string CloudHostingManager = "CLOUDHOSTINGMANAGERURL";
+  }
+}

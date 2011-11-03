@@ -5,17 +5,18 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</ProjectGuid>
+    <ProjectGuid>{D63D703C-4459-446A-9F05-3FBC0074BB24}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.Providers.Interface</RootNamespace>
-    <AssemblyName>Atlantis.Framework.Providers.Interface</AssemblyName>
+    <RootNamespace>Atlantis.Framework.CDS.Tokenizer</RootNamespace>
+    <AssemblyName>Atlantis.Framework.CDS.Tokenizer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,43 +36,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.Providers.Interface">
+      <HintPath>..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\bin\Debug\Atlantis.Framework.Providers.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CDS\ICDSProvider.cs" />
-    <Compile Include="Currency\CurrencyNegativeFormat.cs" />
-    <Compile Include="Currency\CurrencyPriceType.cs" />
-    <Compile Include="Currency\CurrencySymbolPositionType.cs" />
-    <Compile Include="Currency\ICurrencyInfo.cs" />
-    <Compile Include="Currency\ICurrencyPrice.cs" />
-    <Compile Include="Currency\ICurrencyProvider.cs" />
-    <Compile Include="Links\ILinkProvider.cs" />
-    <Compile Include="Links\QueryParamMode.cs" />
-    <Compile Include="Preferences\IShopperPreferencesProvider.cs" />
-    <Compile Include="Products\IProduct.cs" />
-    <Compile Include="Products\IProductInfo.cs" />
-    <Compile Include="Products\IProductProvider.cs" />
-    <Compile Include="Products\IProductView.cs" />
-    <Compile Include="Products\PriceRoundingType.cs" />
-    <Compile Include="Products\RecurringPaymentUnitType.cs" />
-    <Compile Include="Products\SavingsRoundingType.cs" />
-    <Compile Include="PromoData\IPromoData.cs" />
-    <Compile Include="PromoData\IPromoDataProvider.cs" />
+    <Compile Include="CDSTokenizer.cs" />
+    <Compile Include="Interfaces\ITokenizerStrategy.cs" />
+    <Compile Include="Interfaces\IUniversalToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProviderContainer\HttpProviderContainer.cs" />
-    <Compile Include="ProviderContainer\ProviderContainerHelper.cs" />
+    <Compile Include="Strategy\LinkTokenizer.cs" />
+    <Compile Include="Strategy\PriceTokenizer.cs" />
+    <Compile Include="Strategy\ProductDescriptionTokenizer.cs" />
+    <Compile Include="Strategy\ProductPriceTokenizer.cs" />
+    <Compile Include="Strategy\QuickHelpTokenizer.cs" />
+    <Compile Include="Tokens\BaseToken.cs" />
+    <Compile Include="Tokens\LinkToken.cs" />
+    <Compile Include="Tokens\PriceToken.cs" />
+    <Compile Include="Tokens\ProductToken.cs" />
+    <Compile Include="Tokens\QuickHelpToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
+      <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency.csproj">
+      <Project>{7EB0E12F-F1DB-49B0-B87D-918BD6950151}</Project>
+      <Name>Atlantis.Framework.Providers.Currency</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

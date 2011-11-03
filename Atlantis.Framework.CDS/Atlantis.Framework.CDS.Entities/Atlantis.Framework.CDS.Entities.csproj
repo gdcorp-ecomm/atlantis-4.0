@@ -5,17 +5,18 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</ProjectGuid>
+    <ProjectGuid>{70E74CBB-1079-4EFF-AE95-5B6542C5DA80}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.Providers.Interface</RootNamespace>
-    <AssemblyName>Atlantis.Framework.Providers.Interface</AssemblyName>
+    <RootNamespace>Atlantis.Framework.CDS.Entities</RootNamespace>
+    <AssemblyName>Atlantis.Framework.CDS.Entities</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,42 +38,16 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CDS\ICDSProvider.cs" />
-    <Compile Include="Currency\CurrencyNegativeFormat.cs" />
-    <Compile Include="Currency\CurrencyPriceType.cs" />
-    <Compile Include="Currency\CurrencySymbolPositionType.cs" />
-    <Compile Include="Currency\ICurrencyInfo.cs" />
-    <Compile Include="Currency\ICurrencyPrice.cs" />
-    <Compile Include="Currency\ICurrencyProvider.cs" />
-    <Compile Include="Links\ILinkProvider.cs" />
-    <Compile Include="Links\QueryParamMode.cs" />
-    <Compile Include="Preferences\IShopperPreferencesProvider.cs" />
-    <Compile Include="Products\IProduct.cs" />
-    <Compile Include="Products\IProductInfo.cs" />
-    <Compile Include="Products\IProductProvider.cs" />
-    <Compile Include="Products\IProductView.cs" />
-    <Compile Include="Products\PriceRoundingType.cs" />
-    <Compile Include="Products\RecurringPaymentUnitType.cs" />
-    <Compile Include="Products\SavingsRoundingType.cs" />
-    <Compile Include="PromoData\IPromoData.cs" />
-    <Compile Include="PromoData\IPromoDataProvider.cs" />
+    <Compile Include="DefaultVideo.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProviderContainer\HttpProviderContainer.cs" />
-    <Compile Include="ProviderContainer\ProviderContainerHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
+    <Compile Include="Video.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

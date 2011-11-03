@@ -5,17 +5,18 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</ProjectGuid>
+    <ProjectGuid>{52F92D36-69D4-447E-91E0-E155C4EE7DC6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.Providers.Interface</RootNamespace>
-    <AssemblyName>Atlantis.Framework.Providers.Interface</AssemblyName>
+    <RootNamespace>Atlantis.Framework.Providers.CDS</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Providers.CDS</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,41 +38,45 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CDS\ICDSProvider.cs" />
-    <Compile Include="Currency\CurrencyNegativeFormat.cs" />
-    <Compile Include="Currency\CurrencyPriceType.cs" />
-    <Compile Include="Currency\CurrencySymbolPositionType.cs" />
-    <Compile Include="Currency\ICurrencyInfo.cs" />
-    <Compile Include="Currency\ICurrencyPrice.cs" />
-    <Compile Include="Currency\ICurrencyProvider.cs" />
-    <Compile Include="Links\ILinkProvider.cs" />
-    <Compile Include="Links\QueryParamMode.cs" />
-    <Compile Include="Preferences\IShopperPreferencesProvider.cs" />
-    <Compile Include="Products\IProduct.cs" />
-    <Compile Include="Products\IProductInfo.cs" />
-    <Compile Include="Products\IProductProvider.cs" />
-    <Compile Include="Products\IProductView.cs" />
-    <Compile Include="Products\PriceRoundingType.cs" />
-    <Compile Include="Products\RecurringPaymentUnitType.cs" />
-    <Compile Include="Products\SavingsRoundingType.cs" />
-    <Compile Include="PromoData\IPromoData.cs" />
-    <Compile Include="PromoData\IPromoDataProvider.cs" />
+    <Compile Include="CDSProvider.cs" />
+    <Compile Include="ErrorEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProviderContainer\HttpProviderContainer.cs" />
-    <Compile Include="ProviderContainer\ProviderContainerHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.Impl\Atlantis.Framework.CDS.Impl.csproj">
+      <Project>{813511AE-2721-4A3B-9894-E1FB6AC41449}</Project>
+      <Name>Atlantis.Framework.CDS.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.Interface\Atlantis.Framework.CDS.Interface.csproj">
+      <Project>{43ECC9F8-C897-4AE0-8C53-22B2691D6995}</Project>
+      <Name>Atlantis.Framework.CDS.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.Tokenizer\Atlantis.Framework.CDS.Tokenizer.csproj">
+      <Project>{D63D703C-4459-446A-9F05-3FBC0074BB24}</Project>
+      <Name>Atlantis.Framework.CDS.Tokenizer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
+      <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
+      <Name>Atlantis.Framework.DataCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+      <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>
+      <Name>Atlantis.Framework.Engine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
+      <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
+      <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>
+      <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

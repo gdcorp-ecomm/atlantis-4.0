@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.CDS", "Atlantis.Framework.Providers.CDS\Atlantis.Framework.Providers.CDS.csproj", "{52F92D36-69D4-447E-91E0-E155C4EE7DC6}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.Providers.CDS\\Atlantis.Framework.Providers.CDS.csproj
+		SccProjectName1 = Atlantis.Framework.Providers.CDS
+		SccLocalPath1 = Atlantis.Framework.Providers.CDS
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52F92D36-69D4-447E-91E0-E155C4EE7DC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52F92D36-69D4-447E-91E0-E155C4EE7DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52F92D36-69D4-447E-91E0-E155C4EE7DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52F92D36-69D4-447E-91E0-E155C4EE7DC6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -36,7 +36,7 @@ namespace Atlantis.Framework.DCCSetContacts.Interface
       _exception = new AtlantisException(oRequestData,
                                          "DCCSetContactsResponseData",
                                          ex.Message,
-                                         string.Format("Request: {0}, Response: {1}", oRequestData.ToXML(), responseXml));
+                                         ex.StackTrace);
     }
 
 

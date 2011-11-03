@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8D3CA314-7621-48E3-9624-746DA67A4003}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RenewalPeriods.Impl", "Atlantis.Framework.RenewalPeriods.Impl\Atlantis.Framework.RenewalPeriods.Impl.csproj", "{1C6FB98B-8200-4DDB-B4A6-2C0BDDDF4CE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RenewalPeriods.Interface", "Atlantis.Framework.RenewalPeriods.Interface\Atlantis.Framework.RenewalPeriods.Interface.csproj", "{B73CF926-4483-4C21-81D7-EA937B66A785}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RenewalPeriods.Test", "Atlantis.Framework.RenewalPeriods.Test\Atlantis.Framework.RenewalPeriods.Test.csproj", "{A2198796-FBC1-4D3E-8BBC-B9D71B94E643}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.RenewalPeriods.Impl\\Atlantis.Framework.RenewalPeriods.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.RenewalPeriods.Impl
+		SccLocalPath1 = Atlantis.Framework.RenewalPeriods.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.RenewalPeriods.Interface\\Atlantis.Framework.RenewalPeriods.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.RenewalPeriods.Interface
+		SccLocalPath2 = Atlantis.Framework.RenewalPeriods.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.RenewalPeriods.Test\\Atlantis.Framework.RenewalPeriods.Test.csproj
+		SccProjectName3 = Atlantis.Framework.RenewalPeriods.Test
+		SccLocalPath3 = Atlantis.Framework.RenewalPeriods.Test
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.RenewalPeriods.sln
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.RenewalPeriods.sln
+		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.RenewalPeriods.sln
+		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C6FB98B-8200-4DDB-B4A6-2C0BDDDF4CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C6FB98B-8200-4DDB-B4A6-2C0BDDDF4CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C6FB98B-8200-4DDB-B4A6-2C0BDDDF4CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C6FB98B-8200-4DDB-B4A6-2C0BDDDF4CE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B73CF926-4483-4C21-81D7-EA937B66A785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B73CF926-4483-4C21-81D7-EA937B66A785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B73CF926-4483-4C21-81D7-EA937B66A785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B73CF926-4483-4C21-81D7-EA937B66A785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2198796-FBC1-4D3E-8BBC-B9D71B94E643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2198796-FBC1-4D3E-8BBC-B9D71B94E643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2198796-FBC1-4D3E-8BBC-B9D71B94E643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2198796-FBC1-4D3E-8BBC-B9D71B94E643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {8D3CA314-7621-48E3-9624-746DA67A4003}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {8D3CA314-7621-48E3-9624-746DA67A4003}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {8D3CA314-7621-48E3-9624-746DA67A4003}
+	EndGlobalSection
+EndGlobal

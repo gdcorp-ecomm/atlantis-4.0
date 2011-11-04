@@ -42,7 +42,7 @@ namespace Atlantis.Framework.GetRemainPLDur.Impl
 
     private static decimal GetDuration(GetRemainPLDurRequestData requestData, ConfigElement config)
     {
-      decimal duration = 1;
+      decimal duration = 1M;
 
       using (var cn = new SqlConnection(Nimitz.NetConnect.LookupConnectInfo(config)))
       {
@@ -56,6 +56,8 @@ namespace Atlantis.Framework.GetRemainPLDur.Impl
           cmd.Parameters.Add(new SqlParameter(RECURRING_ID_PARAM, requestData.EntityId));
           SqlParameter durationParam = cmd.Parameters.Add(DURATION_PARAM, SqlDbType.Decimal);
           durationParam.Direction = ParameterDirection.Output;
+          durationParam.Precision = 18;
+          durationParam.Scale = 3;
 
           using (SqlDataAdapter adp = new SqlDataAdapter(cmd))
           {

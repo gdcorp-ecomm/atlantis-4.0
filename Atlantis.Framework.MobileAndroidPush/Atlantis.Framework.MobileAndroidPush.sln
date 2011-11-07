@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3F7F2DED-607A-4206-8560-88CBB56D9EC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobileAndroidPush.Impl", "Atlantis.Framework.MobileAndroidPush.Impl\Atlantis.Framework.MobileAndroidPush.Impl.csproj", "{E10F3DC5-B710-4693-99C5-1D7E38612E63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobileAndroidPush.Interface", "Atlantis.Framework.MobileAndroidPush.Interface\Atlantis.Framework.MobileAndroidPush.Interface.csproj", "{72FFF067-D9EC-4D75-9901-9380E22EB967}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobileAndroidPush.Tests", "Atlantis.Framework.MobileAndroidPush.Tests\Atlantis.Framework.MobileAndroidPush.Tests.csproj", "{FB0D61CF-E439-4EC1-971A-716896239C2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5650672B-8E6F-4964-BE0D-1E4FB19B3BF4}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.MobileAndroidPush.vsmdi = Atlantis.Framework.MobileAndroidPush.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.MobileAndroidPush.Impl\\Atlantis.Framework.MobileAndroidPush.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.MobileAndroidPush.Impl
+		SccLocalPath1 = Atlantis.Framework.MobileAndroidPush.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.MobileAndroidPush.Interface\\Atlantis.Framework.MobileAndroidPush.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.MobileAndroidPush.Interface
+		SccLocalPath2 = Atlantis.Framework.MobileAndroidPush.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.MobileAndroidPush.sln
+		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.MobileAndroidPush.sln
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.MobileAndroidPush.Tests\\Atlantis.Framework.MobileAndroidPush.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.MobileAndroidPush.Tests
+		SccLocalPath5 = Atlantis.Framework.MobileAndroidPush.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.MobileAndroidPush.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E10F3DC5-B710-4693-99C5-1D7E38612E63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E10F3DC5-B710-4693-99C5-1D7E38612E63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E10F3DC5-B710-4693-99C5-1D7E38612E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E10F3DC5-B710-4693-99C5-1D7E38612E63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72FFF067-D9EC-4D75-9901-9380E22EB967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72FFF067-D9EC-4D75-9901-9380E22EB967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72FFF067-D9EC-4D75-9901-9380E22EB967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72FFF067-D9EC-4D75-9901-9380E22EB967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB0D61CF-E439-4EC1-971A-716896239C2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB0D61CF-E439-4EC1-971A-716896239C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB0D61CF-E439-4EC1-971A-716896239C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB0D61CF-E439-4EC1-971A-716896239C2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {3F7F2DED-607A-4206-8560-88CBB56D9EC9}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {3F7F2DED-607A-4206-8560-88CBB56D9EC9}
+	EndGlobalSection
+EndGlobal

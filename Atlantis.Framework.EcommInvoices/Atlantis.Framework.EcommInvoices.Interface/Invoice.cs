@@ -14,12 +14,13 @@ namespace Atlantis.Framework.EcommInvoices.Interface
     private string _orderNumber { get; set; }
     private int _status { get; set; }
 
-    public int ProcessorStatus { get; private set; }
-    public DateTime OrderDate { get; private set; }
-    public DateTime LastModifiedDate { get; private set; }
-    public string PaymentType { get; private set; }
-    public string Currency { get; private set; }
-    public int Amount { get; private set; }
+    public string UID { get; protected set; }
+    public int ProcessorStatus { get; protected set; }
+    public DateTime OrderDate { get; protected set; }
+    public DateTime LastModifiedDate { get; protected set; }
+    public string PaymentType { get; protected set; }
+    public string Currency { get; protected set; }
+    public int Amount { get; protected set; }
 
     public string Status
     {
@@ -28,7 +29,7 @@ namespace Atlantis.Framework.EcommInvoices.Interface
         string statusText = string.Empty;
 
 
-        if (OrderDate > ExpiresDate)
+        if (OrderDate > ExpiresDate || (_status == InvoiceStatus.Cancelled || _status == InvoiceStatus.Completed))
         {
           switch (_status)
           {
@@ -62,7 +63,7 @@ namespace Atlantis.Framework.EcommInvoices.Interface
     {
       get
       {
-        if (_status != InvoiceStatus.Created)  //if status is created then the order number is now a receipt number.
+        if (_status != InvoiceStatus.Completed)  //if status is completed then the order number is now a receipt number.
         {
           return _orderNumber;
         }
@@ -78,7 +79,7 @@ namespace Atlantis.Framework.EcommInvoices.Interface
     {
       get
       {
-        if (_status != InvoiceStatus.Created)  //if status is created then the order number is now a receipt number.
+        if (_status != InvoiceStatus.Completed)  //if status is completed then the order number is now a receipt number.
         {
           return "N/A";
         }
@@ -132,12 +133,13 @@ namespace Atlantis.Framework.EcommInvoices.Interface
 
     #endregion
 
-    public Invoice(string orderNumber, int status, int processorStatus, DateTime orderDate, DateTime lastModifiedDate, string paymentType, string currency, int amount)
+    public Invoice(string uid, string orderNumber, int status, int processorStatus, DateTime orderDate, DateTime lastModifiedDate, string paymentType, string currency, int amount)
     {
       _orderNumber = orderNumber;
       _status = status;
       ExpiresDate = orderDate.AddDays(30);
 
+      UID = uid;
       ProcessorStatus = processorStatus;
       OrderDate = orderDate;
       LastModifiedDate = lastModifiedDate;

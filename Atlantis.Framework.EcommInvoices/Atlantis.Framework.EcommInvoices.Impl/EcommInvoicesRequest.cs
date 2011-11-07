@@ -13,11 +13,11 @@ namespace Atlantis.Framework.EcommInvoices.Impl
   class EcommInvoicesRequest : IRequest
   {
     private string _xmlInvoices { get; set; }
-    private EcommInvoicesResponseData _response { get; set; }
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      _response = null;
+      
+      EcommInvoicesResponseData resposne = null;
       string xmlError = string.Empty;
       try
       {
@@ -39,20 +39,20 @@ namespace Atlantis.Framework.EcommInvoices.Impl
 
             int totalPages = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(totalRecords) / Convert.ToDecimal(request.RetrievalAttributes.PageSize)));
 
-            _response = new EcommInvoicesResponseData(invoices, totalPages, totalRecords);
+            resposne = new EcommInvoicesResponseData(invoices, totalPages, totalRecords);
           }
           else
           {
-            _response = new EcommInvoicesResponseData(requestData, new Exception(xmlError));
+            resposne = new EcommInvoicesResponseData(requestData, new Exception(xmlError));
           }
         }
       }
       catch (Exception ex)
       {
-        _response = new EcommInvoicesResponseData(requestData, ex);
+        resposne = new EcommInvoicesResponseData(requestData, ex);
       }
 
-      return _response;
+      return resposne;
 
     }
 
@@ -88,7 +88,7 @@ namespace Atlantis.Framework.EcommInvoices.Impl
     private Invoice CreateInvoice(XElement element)
     {
       Invoice invoice = new Invoice(
-        element.Attribute(InvoiceFieldNames.OrderId).Value, Convert.ToInt32(element.Attribute(InvoiceFieldNames.Status).Value)
+        element.Attribute(InvoiceFieldNames.UID).Value, element.Attribute(InvoiceFieldNames.OrderId).Value, Convert.ToInt32(element.Attribute(InvoiceFieldNames.Status).Value)
         , Convert.ToInt32(element.Attribute(InvoiceFieldNames.ProcessorStatus).Value), Convert.ToDateTime(element.Attribute(InvoiceFieldNames.CreateDate).Value)
         , Convert.ToDateTime(element.Attribute(InvoiceFieldNames.LastModifiedDate).Value), element.Attribute(InvoiceFieldNames.ProcessorType).Value
         , element.Attribute(InvoiceFieldNames.Currency).Value, Convert.ToInt32(element.Attribute(InvoiceFieldNames.Amount).Value)

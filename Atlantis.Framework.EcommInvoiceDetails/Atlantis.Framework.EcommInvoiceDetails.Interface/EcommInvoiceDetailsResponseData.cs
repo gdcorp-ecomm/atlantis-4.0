@@ -3,19 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Atlantis.Framework.Interface;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Atlantis.Framework.EcommInvoiceDetails.Interface
 {
-  class EcommInvoiceDetailsResponseData: IResponseData
+  public class EcommInvoiceDetailsResponseData: IResponseData
   {
+    private AtlantisException _atlException = null;
+
+    public string InvoiceDetails = null;
+    public bool IsSuccess { get; set; }
+
+    public EcommInvoiceDetailsResponseData(string invoiceDetails)
+    {
+      InvoiceDetails = invoiceDetails;
+      IsSuccess = !string.IsNullOrEmpty(invoiceDetails);
+    }
+
+    public EcommInvoiceDetailsResponseData(RequestData request, Exception ex)
+    {
+      IsSuccess = false;
+      _atlException = new AtlantisException(request, "EcommInvoiceDetailsResponseData", ex.Message, string.Empty);
+    }
     public string ToXML()
     {
-      throw new NotImplementedException();
+      return InvoiceDetails;
     }
 
     public AtlantisException GetException()
     {
-      throw new NotImplementedException();
+      return _atlException;
     }
   }
 }

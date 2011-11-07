@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("Atlantis.Framework.EcommInvoices.TestWeb")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy 2011")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

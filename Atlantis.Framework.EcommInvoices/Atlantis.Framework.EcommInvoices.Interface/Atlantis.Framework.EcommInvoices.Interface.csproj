@@ -44,8 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Invoice.cs" />
     <Compile Include="EcommInvoicesRequestData.cs" />
     <Compile Include="EcommInvoicesResponseData.cs" />
+    <Compile Include="InvoiceFieldNames.cs" />
+    <Compile Include="StatusValues.cs" />
+    <Compile Include="RetreivalAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

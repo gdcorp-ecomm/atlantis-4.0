@@ -37,6 +37,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +50,16 @@
   <ItemGroup>
     <Compile Include="EcommInvoicesRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\BasketWs\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
@@ -56,6 +70,41 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.EcommInvoices.Interface\Atlantis.Framework.EcommInvoices.Interface.csproj">
+      <Project>{FE68A48E-E664-465B-9DF1-A62FBB085B51}</Project>
+      <Name>Atlantis.Framework.EcommInvoices.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\BasketWs\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\BasketWs\WscgdBasket.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://gdcomm.dev.glbt1.gdg/WscgdBasket/WscgdBasket.dll%3fHandler=GenWscgdBasketWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\BasketWs\</RelPath>
+      <UpdateFromURL>http://gdcomm.dev.glbt1.gdg/WscgdBasket/WscgdBasket.dll%3fHandler=GenWscgdBasketWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Atlantis_Framework_EcommInvoices_Impl_BasketWs_WscgdBasketService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

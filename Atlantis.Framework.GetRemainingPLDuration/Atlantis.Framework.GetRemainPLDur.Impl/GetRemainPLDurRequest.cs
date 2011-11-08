@@ -12,7 +12,7 @@ namespace Atlantis.Framework.GetRemainPLDur.Impl
     #region Parameter Constants
 
     private const string CONFIG_STORED_PROCEDURE = "rex_getRemainingPrivateLabelDuration_sp";
-    private const string RECURRING_ID_PARAM = "@n_recurring_id";
+    private const string RECURRING_ID_PARAM = "@n_entity_id";
     private const string DURATION_PARAM = "@n_duration";
 
     #endregion Parameter Constants

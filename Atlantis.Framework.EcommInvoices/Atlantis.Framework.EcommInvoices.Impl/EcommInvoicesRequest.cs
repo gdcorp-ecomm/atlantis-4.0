@@ -17,7 +17,7 @@ namespace Atlantis.Framework.EcommInvoices.Impl
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       
-      EcommInvoicesResponseData resposne = null;
+      EcommInvoicesResponseData response = null;
       string xmlError = string.Empty;
       try
       {
@@ -39,20 +39,20 @@ namespace Atlantis.Framework.EcommInvoices.Impl
 
             int totalPages = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(totalRecords) / Convert.ToDecimal(request.RetrievalAttributes.PageSize)));
 
-            resposne = new EcommInvoicesResponseData(invoices, totalPages, totalRecords);
+            response = new EcommInvoicesResponseData(invoices, totalPages, totalRecords);
           }
           else
           {
-            resposne = new EcommInvoicesResponseData(requestData, new Exception(xmlError));
+            response = new EcommInvoicesResponseData(requestData, new Exception(xmlError));
           }
         }
       }
       catch (Exception ex)
       {
-        resposne = new EcommInvoicesResponseData(requestData, ex);
+        response = new EcommInvoicesResponseData(requestData, ex);
       }
 
-      return resposne;
+      return response;
 
     }
 

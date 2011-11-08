@@ -1,6 +1,6 @@
 ﻿using System;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.DCCGetTransfersInProgress.Interface;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DCCGetTransfersInProgress.Impl
 {

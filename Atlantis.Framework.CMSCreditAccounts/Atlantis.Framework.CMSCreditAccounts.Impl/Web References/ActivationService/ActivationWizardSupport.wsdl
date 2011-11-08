@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://services.godaddy.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://services.godaddy.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://services.godaddy.com/">
+      <s:element name="DomainLists">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cmsCreditDomainsRequestXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainListsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DomainListsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsDomainValidForInstantPage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domainValidityRequestXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsDomainValidForInstantPageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsDomainValidForInstantPageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DomainListsSoapIn">
+    <wsdl:part name="parameters" element="tns:DomainLists" />
+  </wsdl:message>
+  <wsdl:message name="DomainListsSoapOut">
+    <wsdl:part name="parameters" element="tns:DomainListsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainValidForInstantPageSoapIn">
+    <wsdl:part name="parameters" element="tns:IsDomainValidForInstantPage" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainValidForInstantPageSoapOut">
+    <wsdl:part name="parameters" element="tns:IsDomainValidForInstantPageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ActivationWizardSupportSoap">
+    <wsdl:operation name="DomainLists">
+      <wsdl:input message="tns:DomainListsSoapIn" />
+      <wsdl:output message="tns:DomainListsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainValidForInstantPage">
+      <wsdl:input message="tns:IsDomainValidForInstantPageSoapIn" />
+      <wsdl:output message="tns:IsDomainValidForInstantPageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ActivationWizardSupportSoap" type="tns:ActivationWizardSupportSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DomainLists">
+      <soap:operation soapAction="http://services.godaddy.com/DomainLists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainValidForInstantPage">
+      <soap:operation soapAction="http://services.godaddy.com/IsDomainValidForInstantPage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ActivationWizardSupportSoap12" type="tns:ActivationWizardSupportSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DomainLists">
+      <soap12:operation soapAction="http://services.godaddy.com/DomainLists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainValidForInstantPage">
+      <soap12:operation soapAction="http://services.godaddy.com/IsDomainValidForInstantPage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ActivationWizardSupport">
+    <wsdl:port name="ActivationWizardSupportSoap" binding="tns:ActivationWizardSupportSoap">
+      <soap:address location="http://services.dev.godaddy-com.ide/mya/ActivationWizardSupport.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ActivationWizardSupportSoap12" binding="tns:ActivationWizardSupportSoap12">
+      <soap12:address location="http://services.dev.godaddy-com.ide/mya/ActivationWizardSupport.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

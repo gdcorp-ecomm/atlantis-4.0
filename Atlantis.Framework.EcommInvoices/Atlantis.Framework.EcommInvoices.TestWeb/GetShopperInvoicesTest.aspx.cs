@@ -20,7 +20,7 @@ namespace Atlantis.Framework.EcommInvoices.TestWeb
     {
       RetrievalAttributes retAttr = new RetrievalAttributes();
       retAttr.SortColumn = "expireDate";
-      retAttr.PageSize = 1000000;
+      retAttr.PageSize = 3;
       retAttr.CurrentPage = 1;
       retAttr.SortDirection = "desc";
       EcommInvoicesRequestData request = new EcommInvoicesRequestData("830398", string.Empty, string.Empty, string.Empty, 0, retAttr);

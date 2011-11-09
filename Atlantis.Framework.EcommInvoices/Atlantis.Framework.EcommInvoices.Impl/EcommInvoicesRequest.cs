@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Xml;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.EcommInvoices.Impl.BasketWs;
 using Atlantis.Framework.EcommInvoices.Interface;
@@ -16,7 +14,10 @@ namespace Atlantis.Framework.EcommInvoices.Impl
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      
+
+      //TODO: WS doesn't page/filter yet so because we're getting all records we're just going to return them all to the markup.
+      //TODO: Once/if the ws pages/filters then uncomment filter and paging functionality.
+
       EcommInvoicesResponseData response = null;
       string xmlError = string.Empty;
       try
@@ -35,9 +36,10 @@ namespace Atlantis.Framework.EcommInvoices.Impl
             int totalRecords = -1;
 
             List<Invoice> invoices =  FetchInvoiceList(request.RetrievalAttributes.Filter, out totalRecords);
-            ParseInvoices(request.RetrievalAttributes, ref invoices);
+           // ParseInvoices(request.RetrievalAttributes, ref invoices);
 
-            int totalPages = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(totalRecords) / Convert.ToDecimal(request.RetrievalAttributes.PageSize)));
+           // int totalPages = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(totalRecords) / Convert.ToDecimal(request.RetrievalAttributes.PageSize)));
+            int totalPages = 1;
 
             response = new EcommInvoicesResponseData(invoices, totalPages, totalRecords);
           }
@@ -65,10 +67,10 @@ namespace Atlantis.Framework.EcommInvoices.Impl
       {
         IEnumerable<XElement> descendants = (IEnumerable<XElement>)xml.Descendants("INVOICE");
 
-        if (filter != InvoiceStatus.All)
-        {
-          descendants = descendants.Where(f => Convert.ToInt32(f.Attribute(InvoiceFieldNames.Status).Value) == filter);
-        }
+        //if (filter != InvoiceStatus.All)
+        //{
+        //  descendants = descendants.Where(f => Convert.ToInt32(f.Attribute(InvoiceFieldNames.Status).Value) == filter);
+        //}
 
         totalRecords = descendants.Count();
 

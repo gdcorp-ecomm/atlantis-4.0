@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Atlantis.Framework.EcommInvoices.Impl
+﻿namespace Atlantis.Framework.EcommInvoices.Impl
 {
   public class InvoiceFieldNames
   {

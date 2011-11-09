@@ -84,7 +84,8 @@ namespace Atlantis.Framework.EcommInvoices.Impl
         totalRecords = 0;
       }
 
-      return invoices;
+      //TODO: remove default sort when sorting comes from ws
+      return invoices.OrderBy(i => i.Status).ToList(); 
     }
 
     private Invoice CreateInvoice(XElement element)

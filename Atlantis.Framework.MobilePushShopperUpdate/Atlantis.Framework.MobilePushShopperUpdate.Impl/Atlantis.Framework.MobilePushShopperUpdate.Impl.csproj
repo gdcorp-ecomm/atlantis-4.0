@@ -53,9 +53,9 @@
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.MobilePush.Interface\Atlantis.Framework.MobilePush.Interface\Atlantis.Framework.MobilePush.Interface.csproj">
-      <Project>{93B3C80A-84E1-4278-95CC-E63A1D055E50}</Project>
-      <Name>Atlantis.Framework.MobilePush.Interface</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.MobilePushShopper\Atlantis.Framework.MobilePushShopper.Impl\Atlantis.Framework.MobilePushShopper.Impl.csproj">
+      <Project>{026E41EF-EF43-4884-827B-6760D6270607}</Project>
+      <Name>Atlantis.Framework.MobilePushShopper.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.MobilePushShopperUpdate.Interface\Atlantis.Framework.MobilePushShopperUpdate.Interface.csproj">
       <Project>{A1AD1F11-521B-4ACF-81B6-E8BF9471A405}</Project>

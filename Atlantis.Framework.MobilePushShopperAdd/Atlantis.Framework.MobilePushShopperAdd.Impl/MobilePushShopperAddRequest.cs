@@ -1,6 +1,6 @@
 ﻿using System;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.MobilePush.Interface;
+using Atlantis.Framework.MobilePushShopper.Impl;
 using Atlantis.Framework.MobilePushShopperAdd.Interface;
 
 namespace Atlantis.Framework.MobilePushShopperAdd.Impl
@@ -12,7 +12,7 @@ namespace Atlantis.Framework.MobilePushShopperAdd.Impl
       IResponseData responseData;
 
       MobilePushShopperAddRequestData mobilePushShopperAddRequestData = (MobilePushShopperAddRequestData) requestData;
-      MobilePush.Interface.ShopperMobilePushService.Service1 shopperMobilePushService = null;
+      MobilePushShopper.Impl.ShopperMobilePushService.Service1 shopperMobilePushService = null;
 
       try
       {

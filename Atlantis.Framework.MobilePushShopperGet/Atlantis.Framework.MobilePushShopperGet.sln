@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePush.Interface", "..\Atlantis.Framework.MobilePush.Interface\Atlantis.Framework.MobilePush.Interface\Atlantis.Framework.MobilePush.Interface.csproj", "{93B3C80A-84E1-4278-95CC-E63A1D055E50}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushShopperGet.Impl", "Atlantis.Framework.MobilePushShopperGet.Impl\Atlantis.Framework.MobilePushShopperGet.Impl.csproj", "{E02BF6D5-146F-408D-960A-3EC0D1A5ADA4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushShopperGet.Interface", "Atlantis.Framework.MobilePushShopperGet.Interface\Atlantis.Framework.MobilePushShopperGet.Interface.csproj", "{0CF8112D-9DED-4DFB-9606-4C2B6C4CA589}"
@@ -21,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Local.testsettings = Local.testsettings
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushShopper.Impl", "..\Atlantis.Framework.MobilePushShopper\Atlantis.Framework.MobilePushShopper.Impl\Atlantis.Framework.MobilePushShopper.Impl.csproj", "{026E41EF-EF43-4884-827B-6760D6270607}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -36,18 +36,18 @@ Global
 		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.MobilePushShopperGet.sln
 		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
 		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = ..\\Atlantis.Framework.MobilePush.Interface\\Atlantis.Framework.MobilePush.Interface\\Atlantis.Framework.MobilePush.Interface.csproj
-		SccProjectName3 = ../Atlantis.Framework.MobilePush.Interface/Atlantis.Framework.MobilePush.Interface
-		SccLocalPath3 = ..\\Atlantis.Framework.MobilePush.Interface\\Atlantis.Framework.MobilePush.Interface
-		SccProjectUniqueName4 = Atlantis.Framework.MobilePushShopperGet.Impl\\Atlantis.Framework.MobilePushShopperGet.Impl.csproj
-		SccProjectName4 = Atlantis.Framework.MobilePushShopperGet.Impl
-		SccLocalPath4 = Atlantis.Framework.MobilePushShopperGet.Impl
-		SccProjectUniqueName5 = Atlantis.Framework.MobilePushShopperGet.Interface\\Atlantis.Framework.MobilePushShopperGet.Interface.csproj
-		SccProjectName5 = Atlantis.Framework.MobilePushShopperGet.Interface
-		SccLocalPath5 = Atlantis.Framework.MobilePushShopperGet.Interface
-		SccProjectUniqueName6 = MobilePushShopperGet.Tests\\MobilePushShopperGet.Tests.csproj
-		SccProjectName6 = MobilePushShopperGet.Tests
-		SccLocalPath6 = MobilePushShopperGet.Tests
+		SccProjectUniqueName3 = Atlantis.Framework.MobilePushShopperGet.Impl\\Atlantis.Framework.MobilePushShopperGet.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.MobilePushShopperGet.Impl
+		SccLocalPath3 = Atlantis.Framework.MobilePushShopperGet.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.MobilePushShopperGet.Interface\\Atlantis.Framework.MobilePushShopperGet.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.MobilePushShopperGet.Interface
+		SccLocalPath4 = Atlantis.Framework.MobilePushShopperGet.Interface
+		SccProjectUniqueName5 = MobilePushShopperGet.Tests\\MobilePushShopperGet.Tests.csproj
+		SccProjectName5 = MobilePushShopperGet.Tests
+		SccLocalPath5 = MobilePushShopperGet.Tests
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.MobilePushShopper\\Atlantis.Framework.MobilePushShopper.Impl\\Atlantis.Framework.MobilePushShopper.Impl.csproj
+		SccProjectName6 = ../Atlantis.Framework.MobilePushShopper/Atlantis.Framework.MobilePushShopper.Impl
+		SccLocalPath6 = ..\\Atlantis.Framework.MobilePushShopper\\Atlantis.Framework.MobilePushShopper.Impl
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.MobilePushShopperGet.vsmdi
@@ -65,10 +65,6 @@ Global
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{93B3C80A-84E1-4278-95CC-E63A1D055E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93B3C80A-84E1-4278-95CC-E63A1D055E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93B3C80A-84E1-4278-95CC-E63A1D055E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93B3C80A-84E1-4278-95CC-E63A1D055E50}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E02BF6D5-146F-408D-960A-3EC0D1A5ADA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E02BF6D5-146F-408D-960A-3EC0D1A5ADA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E02BF6D5-146F-408D-960A-3EC0D1A5ADA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -81,6 +77,10 @@ Global
 		{41392F2A-3232-466E-A082-9CBA2832A515}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41392F2A-3232-466E-A082-9CBA2832A515}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41392F2A-3232-466E-A082-9CBA2832A515}.Release|Any CPU.Build.0 = Release|Any CPU
+		{026E41EF-EF43-4884-827B-6760D6270607}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{026E41EF-EF43-4884-827B-6760D6270607}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{026E41EF-EF43-4884-827B-6760D6270607}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{026E41EF-EF43-4884-827B-6760D6270607}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

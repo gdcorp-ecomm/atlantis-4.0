@@ -17,6 +17,23 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     {
       get { return _exception == null; }
     }
+
+    public bool NoXmlParsingErrors
+    {
+      get
+      {
+        bool isValid = true;
+        foreach (AccordionMetaData amd in AccordionMetaDataList)
+        {
+          if (amd.IsAllInnerXmlValid.HasValue)
+          {
+            isValid = false;
+            break;
+          }
+        }
+        return isValid;
+      }
+    }
     #endregion 
 
     public MyaAccordionMetaDataResponseData(string metaDataXml)
@@ -90,21 +107,6 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
       return accordions;
     }
-
-    private AccordionMetaData.CssSpriteCoordinate SetCoordinates(string iconnCssCoordinates)
-    {
-      string[] coordintatePoints = iconnCssCoordinates.Split(',');
-
-      try
-      {
-        return new AccordionMetaData.CssSpriteCoordinate(coordintatePoints[0], coordintatePoints[1], coordintatePoints[2], coordintatePoints[3]);
-      }
-      catch
-      {
-        return new AccordionMetaData.CssSpriteCoordinate("0px", "0px", "0px", "0px");
-      }
-    }
-
     #endregion
 
     #region Sorting & Filtering

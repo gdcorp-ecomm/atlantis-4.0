@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using Atlantis.Framework.Interface;
-using System.Reflection;
 
 namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
 {
@@ -18,7 +18,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
       {
         if (_accordionSchemas.Count.Equals(0))
         {
-          _accordionSchemas.Add("Accordion", XmlReader.Create(new StringReader(GetSchema("Accordion.xsd"))));
+          _accordionSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("Accordion.xsd"))));
         }
         return _accordionSchemas;
       }
@@ -31,7 +31,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
       {
         if (_contentSchemas.Count.Equals(0))
         {
-          _contentSchemas.Add("Content", XmlReader.Create(new StringReader(GetSchema("Content.xsd"))));
+          _contentSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("Content.xsd"))));
         }
         return _contentSchemas;
       }
@@ -44,8 +44,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
       {
         if (_controlPanelSchemas.Count.Equals(0))
         {
-          _controlPanelSchemas.Add("ControlPanel", XmlReader.Create(new StringReader(GetSchema("ControlPanel.xsd"))));
-          _controlPanelSchemas.Add("LinkUrl", XmlReader.Create(new StringReader(GetSchema("LinkUrl.xsd"))));
+          _controlPanelSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("ControlPanel.xsd"))));
         }
         return _controlPanelSchemas;
       }
@@ -58,7 +57,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
       {
         if (_workspaceLoginSchemas.Count.Equals(0))
         {
-          _workspaceLoginSchemas.Add("WorkspaceLogin", XmlReader.Create(new StringReader(GetSchema("WorkspaceLogin.xsd"))));
+          _workspaceLoginSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("WorkspaceLogin.xsd"))));
         }
         return _workspaceLoginSchemas;
       }
@@ -71,7 +70,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
       {
         if (_linkUrlSchemas.Count.Equals(0))
         {
-          _linkUrlSchemas.Add("LinkUrl", XmlReader.Create(new StringReader(GetSchema("LinkUrl.xsd"))));
+          _linkUrlSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("LinkUrl.xsd"))));
         }
         return _linkUrlSchemas;
       }
@@ -107,8 +106,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
       bool isValid = false;
       string msg = string.Empty;
 
-      xml.Validate(xmlSchemas,
-        (obj, err) =>
+      xml.Validate(xmlSchemas,(obj, err) =>
         {
           msg = err.Message;
         });

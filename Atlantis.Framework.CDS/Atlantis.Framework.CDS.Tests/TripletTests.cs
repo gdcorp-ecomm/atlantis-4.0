@@ -19,7 +19,7 @@ namespace Atlantis.Framework.CDS.Tests
       //Arrange
       string shopperId = "860316";
       int requestType = 424;
-      string query = "sales/lp/email";
+      string query = "sales/1/lp/email";
       CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, string.Empty, 1, query);
 
       //Act
@@ -37,7 +37,7 @@ namespace Atlantis.Framework.CDS.Tests
       //Arrange
       string shopperId = "860316";
       int requestType = 424;
-      string query = "sales/lp/email";
+      string query = "sales/1/lp/email";
       CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, string.Empty, 1, query);
 
       //Act

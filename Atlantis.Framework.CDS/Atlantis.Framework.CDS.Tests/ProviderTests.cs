@@ -117,10 +117,12 @@ namespace Atlantis.Framework.CDS.Tests
 
 
       //Act
-      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>(); 
+      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+      var data = provider.GetJSON("gdtv/celebs/leeann-dearing/", null);
       PageData model = provider.GetModel<PageData>("gdtv/celebs/leeann-dearing/");
 
       //Assert
+      Assert.IsNotNull(data);
       Assert.IsNotNull(model);
       Assert.AreEqual("this is stuff", model.Stuff);
       Assert.AreEqual("this is noise", model.Noise);

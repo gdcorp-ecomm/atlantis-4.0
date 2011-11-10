@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://hx.godaddy.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://hx.godaddy.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://hx.godaddy.org/">
+      <s:element name="getInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="uid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getInfoResult" type="tns:EmailAccountInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EmailAccountInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MailboxesTotal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MailboxesAllocated" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsActiveSyncEnabled" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsBlackBerryEnabled" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DiskSpaceTotal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DiskSpaceAllocated" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SharePointDiskSpaceTotal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SharePointDiskSpaceAllocated" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EmailForwardsTotal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EmailForwardsAllocated" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BlackBerryDevicesTotal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BlackBerryDevicesAllocated" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SharePointSitesTotal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SharePointSitesAllocated" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="free" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ret" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getInfo" />
+  </wsdl:message>
+  <wsdl:message name="getInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="HxUsageSoap">
+    <wsdl:operation name="getInfo">
+      <wsdl:input message="tns:getInfoSoapIn" />
+      <wsdl:output message="tns:getInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HxUsageSoap" type="tns:HxUsageSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getInfo">
+      <soap:operation soapAction="http://hx.godaddy.org/getInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="HxUsageSoap12" type="tns:HxUsageSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getInfo">
+      <soap12:operation soapAction="http://hx.godaddy.org/getInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HxUsage">
+    <wsdl:port name="HxUsageSoap" binding="tns:HxUsageSoap">
+      <soap:address location="http://g1twhmc013/Hx.Business.services.host/hxusage.asmx" />
+    </wsdl:port>
+    <wsdl:port name="HxUsageSoap12" binding="tns:HxUsageSoap12">
+      <soap12:address location="http://g1twhmc013/Hx.Business.services.host/hxusage.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

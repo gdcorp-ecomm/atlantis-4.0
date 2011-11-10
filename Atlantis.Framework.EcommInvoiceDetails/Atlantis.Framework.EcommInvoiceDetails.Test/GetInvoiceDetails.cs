@@ -10,7 +10,7 @@ namespace Atlantis.Framework.EcommInvoiceDetails.Test
   [TestClass]
   public class GetInvoiceDetails
   {
-    string invoiceId = "B0016156-9DA8-49E6-8B4A-16D4649EBFA6";
+    string invoiceId = "E02DFC75-4CC9-4C2D-A8F1-97B6ABFD5B29";
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]

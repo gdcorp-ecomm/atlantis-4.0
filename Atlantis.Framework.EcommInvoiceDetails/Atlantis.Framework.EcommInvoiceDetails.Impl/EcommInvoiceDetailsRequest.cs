@@ -25,7 +25,7 @@ namespace Atlantis.Framework.EcommInvoiceDetails.Impl
 
           if (string.IsNullOrEmpty(xmlError))
           {
-            response = new EcommInvoiceDetailsResponseData(xmlInvoiceDetails);
+            response = new EcommInvoiceDetailsResponseData(xmlInvoiceDetails.Replace("&gt;", ">").Replace("&lt;", "<"));
           } 
           else
           {

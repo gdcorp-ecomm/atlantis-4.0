@@ -1,9 +1,0 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.AuctionMostActiveByPrice.Impl.Properties" GeneratedClassName="Settings">
-  <Profiles />
-  <Settings>
-    <Setting Name="Atlantis_Framework_AuctionMostActiveByPrice_Impl_g1dwdnaweb01_trpLandingDomainsService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://g1dwdnaweb01/trpLandingDomainsService/trpLandingDomains.asmx</Value>
-    </Setting>
-  </Settings>
-</SettingsFile>

@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="tdnam.com/trpLandingDomains" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="tdnam.com/trpLandingDomains" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="tdnam.com/trpLandingDomains">
+      <s:element name="GetCounts">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCountsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCountsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveDomains">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iRows" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveDomainsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetrieveDomainsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuperBowlRetrieveDomains">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iRows" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuperBowlRetrieveDomainsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuperBowlRetrieveDomainsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveMostActiveByPrice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iRows" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveMostActiveByPriceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetrieveMostActiveByPriceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveGDListings">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iRows" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveGDListingsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetrieveGDListingsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRecentSales">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iRows" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRecentSalesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRecentSalesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GDListingCountOK">
+        <s:complexType />
+      </s:element>
+      <s:element name="GDListingCountOKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GDListingCountOKResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCountsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCounts" />
+  </wsdl:message>
+  <wsdl:message name="GetCountsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveDomainsSoapIn">
+    <wsdl:part name="parameters" element="tns:RetrieveDomains" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveDomainsSoapOut">
+    <wsdl:part name="parameters" element="tns:RetrieveDomainsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuperBowlRetrieveDomainsSoapIn">
+    <wsdl:part name="parameters" element="tns:SuperBowlRetrieveDomains" />
+  </wsdl:message>
+  <wsdl:message name="SuperBowlRetrieveDomainsSoapOut">
+    <wsdl:part name="parameters" element="tns:SuperBowlRetrieveDomainsResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveMostActiveByPriceSoapIn">
+    <wsdl:part name="parameters" element="tns:RetrieveMostActiveByPrice" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveMostActiveByPriceSoapOut">
+    <wsdl:part name="parameters" element="tns:RetrieveMostActiveByPriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveGDListingsSoapIn">
+    <wsdl:part name="parameters" element="tns:RetrieveGDListings" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveGDListingsSoapOut">
+    <wsdl:part name="parameters" element="tns:RetrieveGDListingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRecentSalesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRecentSales" />
+  </wsdl:message>
+  <wsdl:message name="GetRecentSalesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRecentSalesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GDListingCountOKSoapIn">
+    <wsdl:part name="parameters" element="tns:GDListingCountOK" />
+  </wsdl:message>
+  <wsdl:message name="GDListingCountOKSoapOut">
+    <wsdl:part name="parameters" element="tns:GDListingCountOKResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCountsHttpGetIn" />
+  <wsdl:message name="GetCountsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveDomainsHttpGetIn">
+    <wsdl:part name="iRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveDomainsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="SuperBowlRetrieveDomainsHttpGetIn">
+    <wsdl:part name="iRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SuperBowlRetrieveDomainsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveMostActiveByPriceHttpGetIn">
+    <wsdl:part name="iRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveMostActiveByPriceHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveGDListingsHttpGetIn">
+    <wsdl:part name="iRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveGDListingsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetRecentSalesHttpGetIn">
+    <wsdl:part name="iRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRecentSalesHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GDListingCountOKHttpGetIn" />
+  <wsdl:message name="GDListingCountOKHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCountsHttpPostIn" />
+  <wsdl:message name="GetCountsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveDomainsHttpPostIn">
+    <wsdl:part name="iRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveDomainsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="SuperBowlRetrieveDomainsHttpPostIn">
+    <wsdl:part name="iRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SuperBowlRetrieveDomainsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveMostActiveByPriceHttpPostIn">
+    <wsdl:part name="iRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveMostActiveByPriceHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveGDListingsHttpPostIn">
+    <wsdl:part name="iRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveGDListingsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetRecentSalesHttpPostIn">
+    <wsdl:part name="iRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRecentSalesHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GDListingCountOKHttpPostIn" />
+  <wsdl:message name="GDListingCountOKHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="trpLandingDomainsServiceSoap">
+    <wsdl:operation name="GetCounts">
+      <wsdl:input message="tns:GetCountsSoapIn" />
+      <wsdl:output message="tns:GetCountsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveDomains">
+      <wsdl:input message="tns:RetrieveDomainsSoapIn" />
+      <wsdl:output message="tns:RetrieveDomainsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuperBowlRetrieveDomains">
+      <wsdl:input message="tns:SuperBowlRetrieveDomainsSoapIn" />
+      <wsdl:output message="tns:SuperBowlRetrieveDomainsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveMostActiveByPrice">
+      <wsdl:input message="tns:RetrieveMostActiveByPriceSoapIn" />
+      <wsdl:output message="tns:RetrieveMostActiveByPriceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveGDListings">
+      <wsdl:input message="tns:RetrieveGDListingsSoapIn" />
+      <wsdl:output message="tns:RetrieveGDListingsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentSales">
+      <wsdl:input message="tns:GetRecentSalesSoapIn" />
+      <wsdl:output message="tns:GetRecentSalesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GDListingCountOK">
+      <wsdl:input message="tns:GDListingCountOKSoapIn" />
+      <wsdl:output message="tns:GDListingCountOKSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="trpLandingDomainsServiceHttpGet">
+    <wsdl:operation name="GetCounts">
+      <wsdl:input message="tns:GetCountsHttpGetIn" />
+      <wsdl:output message="tns:GetCountsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveDomains">
+      <wsdl:input message="tns:RetrieveDomainsHttpGetIn" />
+      <wsdl:output message="tns:RetrieveDomainsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuperBowlRetrieveDomains">
+      <wsdl:input message="tns:SuperBowlRetrieveDomainsHttpGetIn" />
+      <wsdl:output message="tns:SuperBowlRetrieveDomainsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveMostActiveByPrice">
+      <wsdl:input message="tns:RetrieveMostActiveByPriceHttpGetIn" />
+      <wsdl:output message="tns:RetrieveMostActiveByPriceHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveGDListings">
+      <wsdl:input message="tns:RetrieveGDListingsHttpGetIn" />
+      <wsdl:output message="tns:RetrieveGDListingsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentSales">
+      <wsdl:input message="tns:GetRecentSalesHttpGetIn" />
+      <wsdl:output message="tns:GetRecentSalesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GDListingCountOK">
+      <wsdl:input message="tns:GDListingCountOKHttpGetIn" />
+      <wsdl:output message="tns:GDListingCountOKHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="trpLandingDomainsServiceHttpPost">
+    <wsdl:operation name="GetCounts">
+      <wsdl:input message="tns:GetCountsHttpPostIn" />
+      <wsdl:output message="tns:GetCountsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveDomains">
+      <wsdl:input message="tns:RetrieveDomainsHttpPostIn" />
+      <wsdl:output message="tns:RetrieveDomainsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuperBowlRetrieveDomains">
+      <wsdl:input message="tns:SuperBowlRetrieveDomainsHttpPostIn" />
+      <wsdl:output message="tns:SuperBowlRetrieveDomainsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveMostActiveByPrice">
+      <wsdl:input message="tns:RetrieveMostActiveByPriceHttpPostIn" />
+      <wsdl:output message="tns:RetrieveMostActiveByPriceHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveGDListings">
+      <wsdl:input message="tns:RetrieveGDListingsHttpPostIn" />
+      <wsdl:output message="tns:RetrieveGDListingsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentSales">
+      <wsdl:input message="tns:GetRecentSalesHttpPostIn" />
+      <wsdl:output message="tns:GetRecentSalesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GDListingCountOK">
+      <wsdl:input message="tns:GDListingCountOKHttpPostIn" />
+      <wsdl:output message="tns:GDListingCountOKHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="trpLandingDomainsServiceSoap" type="tns:trpLandingDomainsServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCounts">
+      <soap:operation soapAction="tdnam.com/trpLandingDomains/GetCounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveDomains">
+      <soap:operation soapAction="tdnam.com/trpLandingDomains/RetrieveDomains" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuperBowlRetrieveDomains">
+      <soap:operation soapAction="tdnam.com/trpLandingDomains/SuperBowlRetrieveDomains" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveMostActiveByPrice">
+      <soap:operation soapAction="tdnam.com/trpLandingDomains/RetrieveMostActiveByPrice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveGDListings">
+      <soap:operation soapAction="tdnam.com/trpLandingDomains/RetrieveGDListings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentSales">
+      <soap:operation soapAction="tdnam.com/trpLandingDomains/GetRecentSales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GDListingCountOK">
+      <soap:operation soapAction="tdnam.com/trpLandingDomains/GDListingCountOK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="trpLandingDomainsServiceSoap12" type="tns:trpLandingDomainsServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCounts">
+      <soap12:operation soapAction="tdnam.com/trpLandingDomains/GetCounts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveDomains">
+      <soap12:operation soapAction="tdnam.com/trpLandingDomains/RetrieveDomains" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuperBowlRetrieveDomains">
+      <soap12:operation soapAction="tdnam.com/trpLandingDomains/SuperBowlRetrieveDomains" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveMostActiveByPrice">
+      <soap12:operation soapAction="tdnam.com/trpLandingDomains/RetrieveMostActiveByPrice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveGDListings">
+      <soap12:operation soapAction="tdnam.com/trpLandingDomains/RetrieveGDListings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentSales">
+      <soap12:operation soapAction="tdnam.com/trpLandingDomains/GetRecentSales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GDListingCountOK">
+      <soap12:operation soapAction="tdnam.com/trpLandingDomains/GDListingCountOK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="trpLandingDomainsServiceHttpGet" type="tns:trpLandingDomainsServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetCounts">
+      <http:operation location="/GetCounts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveDomains">
+      <http:operation location="/RetrieveDomains" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuperBowlRetrieveDomains">
+      <http:operation location="/SuperBowlRetrieveDomains" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveMostActiveByPrice">
+      <http:operation location="/RetrieveMostActiveByPrice" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveGDListings">
+      <http:operation location="/RetrieveGDListings" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentSales">
+      <http:operation location="/GetRecentSales" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GDListingCountOK">
+      <http:operation location="/GDListingCountOK" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="trpLandingDomainsServiceHttpPost" type="tns:trpLandingDomainsServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetCounts">
+      <http:operation location="/GetCounts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveDomains">
+      <http:operation location="/RetrieveDomains" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuperBowlRetrieveDomains">
+      <http:operation location="/SuperBowlRetrieveDomains" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveMostActiveByPrice">
+      <http:operation location="/RetrieveMostActiveByPrice" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveGDListings">
+      <http:operation location="/RetrieveGDListings" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentSales">
+      <http:operation location="/GetRecentSales" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GDListingCountOK">
+      <http:operation location="/GDListingCountOK" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="trpLandingDomainsService">
+    <wsdl:port name="trpLandingDomainsServiceSoap" binding="tns:trpLandingDomainsServiceSoap">
+      <soap:address location="http://testdnaweb01/trpLandingDomainsService/trpLandingDomains.asmx" />
+    </wsdl:port>
+    <wsdl:port name="trpLandingDomainsServiceSoap12" binding="tns:trpLandingDomainsServiceSoap12">
+      <soap12:address location="http://testdnaweb01/trpLandingDomainsService/trpLandingDomains.asmx" />
+    </wsdl:port>
+    <wsdl:port name="trpLandingDomainsServiceHttpGet" binding="tns:trpLandingDomainsServiceHttpGet">
+      <http:address location="http://testdnaweb01/trpLandingDomainsService/trpLandingDomains.asmx" />
+    </wsdl:port>
+    <wsdl:port name="trpLandingDomainsServiceHttpPost" binding="tns:trpLandingDomainsServiceHttpPost">
+      <http:address location="http://testdnaweb01/trpLandingDomainsService/trpLandingDomains.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -65,7 +65,7 @@ namespace Atlantis.Framework.BuyerProxyAccountsGet.Tests
 
       BuyerProxyAccountsGetRequestData requestData = new BuyerProxyAccountsGetRequestData("856907", string.Empty, string.Empty, string.Empty, 0);
 
-      BuyerProxyAccountsGetResponseData response = (BuyerProxyAccountsGetResponseData)Engine.Engine.ProcessRequest(requestData, 448);
+      BuyerProxyAccountsGetResponseData response = (BuyerProxyAccountsGetResponseData)Engine.Engine.ProcessRequest(requestData, 447);
 
       List<string> shopperList = response.GetDBPShopperIdList;
       Assert.IsTrue(response.IsSuccess);

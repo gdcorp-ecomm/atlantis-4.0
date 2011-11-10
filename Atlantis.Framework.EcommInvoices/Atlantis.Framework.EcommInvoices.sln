@@ -22,9 +22,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommInvoices.TestWeb", "Atlantis.Framework.EcommInvoices.TestWeb\Atlantis.Framework.EcommInvoices.TestWeb.csproj", "{7FB03773-17DC-4C85-84D1-BFC24EC2ECC1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Currency", "..\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency.csproj", "{8581EB6C-5093-473E-AB04-318CE071E7FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Interface", "..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj", "{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
 		SccLocalPath0 = .
@@ -48,6 +52,14 @@ Global
 		SccProjectUniqueName6 = Atlantis.Framework.EcommInvoices.TestWeb\\Atlantis.Framework.EcommInvoices.TestWeb.csproj
 		SccProjectName6 = Atlantis.Framework.EcommInvoices.TestWeb
 		SccLocalPath6 = Atlantis.Framework.EcommInvoices.TestWeb
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.Providers.Currency\\Atlantis.Framework.Providers.Currency\\Atlantis.Framework.Providers.Currency.csproj
+		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.EcommInvoices.sln
+		SccProjectName7 = ../Atlantis.Framework.Providers.Currency/Atlantis.Framework.Providers.Currency
+		SccLocalPath7 = ..\\Atlantis.Framework.Providers.Currency\\Atlantis.Framework.Providers.Currency
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface.csproj
+		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.EcommInvoices.sln
+		SccProjectName8 = ../Atlantis.Framework.Providers.Interface/Atlantis.Framework.Providers.Interface
+		SccLocalPath8 = ..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.EcommInvoices.vsmdi
@@ -81,6 +93,14 @@ Global
 		{7FB03773-17DC-4C85-84D1-BFC24EC2ECC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FB03773-17DC-4C85-84D1-BFC24EC2ECC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FB03773-17DC-4C85-84D1-BFC24EC2ECC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8581EB6C-5093-473E-AB04-318CE071E7FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8581EB6C-5093-473E-AB04-318CE071E7FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8581EB6C-5093-473E-AB04-318CE071E7FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8581EB6C-5093-473E-AB04-318CE071E7FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,5 +108,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {E5C17338-9194-47EB-BE61-A32DB6B7EA5A}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {E5C17338-9194-47EB-BE61-A32DB6B7EA5A}
+		{8581EB6C-5093-473E-AB04-318CE071E7FD} = {E5C17338-9194-47EB-BE61-A32DB6B7EA5A}
+		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE} = {E5C17338-9194-47EB-BE61-A32DB6B7EA5A}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,6 @@
 ﻿using System;
+using Atlantis.Framework.Providers.Currency;
+using Atlantis.Framework.Providers.Interface.Currency;
 
 namespace Atlantis.Framework.EcommInvoices.Interface
 {
@@ -18,6 +20,13 @@ namespace Atlantis.Framework.EcommInvoices.Interface
     public string PaymentType { get; protected set; }
     public string Currency { get; protected set; }
     public int Amount { get; protected set; }
+    public ICurrencyPrice Total
+    {
+      get
+      {
+        return new CurrencyPrice(this.Amount, CurrencyData.GetCurrencyInfo(this.Currency), CurrencyPriceType.Transactional);
+      }
+    }
 
     public string Status
     {

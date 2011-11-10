@@ -99,6 +99,20 @@ namespace Atlantis.Framework.BonsaiPlanFeatures.Tests
       Assert.IsTrue(VerifyExpectedResult(expectedResult, response.PlanFeatures));
     }
 
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void GetPlanFeatures()
+    {
+      int unifiedProductId = 60729;
+      string productNamespace = "outlook";
+      bool isFree = false;
+
+      var request = new BonsaiPlanFeaturesRequestData("shopperId", "sourceUrl", "orderId", "pathway", 1, unifiedProductId,
+                                                      productNamespace, isFree, null);
+      var response = Engine.Engine.ProcessRequest(request, 392) as BonsaiPlanFeaturesResponseData;
+
+      Assert.IsNotNull(response);
+    }
 
     private static bool VerifyExpectedResult(Dictionary<string, string> expectedResult, Dictionary<string, string> actualResult)
     {

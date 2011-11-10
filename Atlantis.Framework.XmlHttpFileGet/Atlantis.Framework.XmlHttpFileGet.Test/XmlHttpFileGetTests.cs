@@ -12,7 +12,7 @@ namespace Atlantis.Framework.XmlHttpFileGet.Test
   [TestClass]
   public class GetXmlHttpFileGetTests
   {
-    private const string ShopperId = "12530";
+    private const string ShopperId = "840820";
 
 
     /// <summary>
@@ -56,9 +56,9 @@ namespace Atlantis.Framework.XmlHttpFileGet.Test
                                                   , string.Empty
                                                   , string.Empty
                                                   , 0
-                                                  , "http://localhost/TestLab/media.xml");
+                                                  , "http://presentationcentral.dev.glbt1.gdg/atlantis/media/mobile_commercials.xml");
 
-      var response = (XmlHttpFileGetResponseData) DataCache.DataCache.GetProcessRequest(request, 310);
+      var response = Engine.Engine.ProcessRequest(request, 310) as XmlHttpFileGetResponseData; //(XmlHttpFileGetResponseData)DataCache.DataCache.GetProcessRequest(request, 310);
 
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
@@ -75,7 +75,7 @@ namespace Atlantis.Framework.XmlHttpFileGet.Test
                                                   , string.Empty
                                                   , string.Empty
                                                   , 0
-                                                  , "http://localhost/TestLab/media.xml");
+                                                  , "http://presentationcentral.dev.glbt1.gdg/atlantis/media/mobile_commercials.xml");
 
       var response = (XmlHttpFileGetResponseData)DataCache.DataCache.GetProcessRequest(request, 310);
 
@@ -84,7 +84,7 @@ namespace Atlantis.Framework.XmlHttpFileGet.Test
                                                   , string.Empty
                                                   , string.Empty
                                                   , 0
-                                                  , "http://localhost/TestLab/media.xml");
+                                                  , "http://presentationcentral.dev.glbt1.gdg/atlantis/media/mobile_commercials.xml");
 
       var response2 = (XmlHttpFileGetResponseData)DataCache.DataCache.GetProcessRequest(request2, 310);
 

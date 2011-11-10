@@ -15,7 +15,7 @@ namespace Atlantis.Framework.XmlHttpFileGet.Interface
                                      int pageCount,
                                      string xmlUrlPath) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      CacheLevel = RequestCacheLevel.Default;
+      CacheLevel = RequestCacheLevel.BypassCache;
       XmlUrlPath = xmlUrlPath;
       RequestTimeout = TimeSpan.FromSeconds(20);
     }

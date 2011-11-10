@@ -35,4 +35,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 
 [assembly: AssemblyVersion("4.0.0.0")] // DO NOT CHANGE THE AssemblyVersion
-[assembly: AssemblyFileVersion("4.11.10.20")] // YOU CAN EDIT AssemblyFileVersion
+[assembly: AssemblyFileVersion("4.11.11.10")] // YOU CAN EDIT AssemblyFileVersion

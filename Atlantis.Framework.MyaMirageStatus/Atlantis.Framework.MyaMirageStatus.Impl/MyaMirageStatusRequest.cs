@@ -21,23 +21,26 @@ namespace Atlantis.Framework.MyaMirageStatus.Impl
       {
         DateTime? lastMirageBuild = null;
 
-        string connectionString = Nimitz.NetConnect.LookupConnectInfo(oConfig);
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        if (!string.IsNullOrEmpty(mirageRequest.ShopperID))
         {
-          using (SqlCommand command = new SqlCommand(_PROCNAME, connection))
+          string connectionString = Nimitz.NetConnect.LookupConnectInfo(oConfig);
+          using (SqlConnection connection = new SqlConnection(connectionString))
           {
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.Add(new SqlParameter("shopper_id", mirageRequest.ShopperID));
-            command.CommandTimeout = (int)mirageRequest.RequestTimeout.TotalSeconds;
-            connection.Open();
-            using (SqlDataReader reader = command.ExecuteReader())
+            using (SqlCommand command = new SqlCommand(_PROCNAME, connection))
             {
-              if (reader.Read())
+              command.CommandType = CommandType.StoredProcedure;
+              command.Parameters.Add(new SqlParameter("shopper_id", mirageRequest.ShopperID));
+              command.CommandTimeout = (int)mirageRequest.RequestTimeout.TotalSeconds;
+              connection.Open();
+              using (SqlDataReader reader = command.ExecuteReader())
               {
-                object mirageLastBuildDate = reader[0];
-                if ((mirageLastBuildDate != null) && (mirageLastBuildDate.GetType() != typeof(DateTime)))
+                if (reader.Read())
                 {
-                  lastMirageBuild = (DateTime)mirageLastBuildDate;
+                  object mirageLastBuildDate = reader[0];
+                  if ((mirageLastBuildDate != null) && (mirageLastBuildDate.GetType() != typeof(DateTime)))
+                  {
+                    lastMirageBuild = (DateTime)mirageLastBuildDate;
+                  }
                 }
               }
             }

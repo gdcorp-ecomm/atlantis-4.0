@@ -52,7 +52,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
     private string ParseAccordionXml(string attribute)
     {
-      return IsWellFormedAccordionXml ? AccordionXDoc.Element("accordion").Attribute(attribute).Value : string.Empty;
+      return IsWellFormedAccordionXml ? (AccordionXDoc.Element("accordion").Attribute(attribute) != null ? AccordionXDoc.Element("accordion").Attribute(attribute).Value : string.Empty) : string.Empty;
     }
     #endregion
 
@@ -101,7 +101,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
       if (IsWellFormedContentXml && ContentXDoc.Element("content").HasElements)
       {
-        attrib = ContentXDoc.Element("content").Element("data").Attribute(attribute).Value;
+        attrib = ContentXDoc.Element("content").Element("data").Attribute(attribute) != null ? ContentXDoc.Element("content").Element("data").Attribute(attribute).Value : string.Empty;
       }
 
       return attrib;
@@ -248,9 +248,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       if (IsWellFormedLinkUrlXml(linkUrlXml))
       {
         linkUrl = new LinkUrlData();
-        linkUrl.CiCode = linkUrlXml.Attribute("ci").Value;
         linkUrl.Link = linkUrlXml.Attribute("link").Value;
+        linkUrl.Page = linkUrlXml.Attribute("page") != null ? linkUrlXml.Attribute("page").Value : string.Empty;
         linkUrl.Type = (LinkUrlData.TypeOfLink)Enum.Parse(typeof(LinkUrlData.TypeOfLink), linkUrlXml.Attribute("type").Value);
+        linkUrl.IdentificationRule = linkUrlXml.Attribute("identificationrule") != null ? linkUrlXml.Attribute("identificationrule").Value : string.Empty;
+        linkUrl.IdentificationValue = linkUrlXml.Attribute("identificationvalue") != null ? linkUrlXml.Attribute("identificationvalue").Value : string.Empty;
         if (linkUrlXml.HasElements)
         {
           foreach (XElement qsKey in linkUrlXml.Elements("qskey"))
@@ -357,15 +359,20 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     public class ControlPanelData
     {
       public List<LinkUrlData> LinkUrls { get; private set; }
-      public bool HasManagerLink
+      public bool HasManagerLink(string identificationValue)
       {
-        get { return LinkUrls.Count.Equals(2); }
+        return LinkUrls.Exists(new Predicate<LinkUrlData>(url => url.Type.Equals(LinkUrlData.TypeOfLink.Manager) && url.IdentificationValue.Equals(identificationValue)));
       }
 
       public ControlPanelData(List<LinkUrlData> linkUrls)
       {
         LinkUrls = linkUrls;
       }
+    }
+
+    public ControlPanelData ControlPanels
+    {
+      get { return new ControlPanelData(ParseControlPanelXml(ControlPanelXDoc.Element("controlpanels"))); }
     }
     #endregion
 
@@ -378,17 +385,14 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
         Manager = 1
       }
       public string Link { get; set; }
-      public string CiCode { get; set; }
+      public string Page { get; set; }
       public TypeOfLink Type { get; set; }
+      public string IdentificationRule { get; set; }
+      public string IdentificationValue { get; set; }
       public NameValueCollection QsKeys { get; set; }
 
       public LinkUrlData()
       { }
-    }
-
-    public ControlPanelData ControlPanels
-    {
-      get { return new ControlPanelData(ParseControlPanelXml(ControlPanelXDoc.Element("controlpanels"))); }
     }
     #endregion
 

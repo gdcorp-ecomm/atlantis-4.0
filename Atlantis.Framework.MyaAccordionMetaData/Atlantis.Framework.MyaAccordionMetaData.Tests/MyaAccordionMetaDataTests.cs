@@ -71,6 +71,8 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 				namespaces.Add("dbp");
 				namespaces.Add("bogus");
 				namespaces.Add("domain");
+				namespaces.Add("wst");
+				namespaces.Add("busaccl");
 				IList<AccordionMetaData> myAccordions = response.GetMyAccordions(namespaces);
 
 				Debug.WriteLine("********************** GET MY ACCORDIONS **********************");
@@ -112,7 +114,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 								if (wsl.HasLink)
 								{
 									StringBuilder sb = new StringBuilder();
-									Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Ci: {1} | Type: {2}", wsl.LinkUrl.Link, wsl.LinkUrl.CiCode, wsl.LinkUrl.Type)));
+									Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2}", wsl.LinkUrl.Link, wsl.LinkUrl.Page, wsl.LinkUrl.Type)));
 									foreach (string key in wsl.LinkUrl.QsKeys)
 									{
 										sb.Append(string.Format("{0}: {1}", key, wsl.LinkUrl.QsKeys[key]));
@@ -132,17 +134,30 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 								foreach(AccordionMetaData.LinkUrlData link in cp.LinkUrls)
 								{
 									StringBuilder sb = new StringBuilder();
-									Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Ci: {1} | Type: {2}", link.Link, link.CiCode, link.Type)));
+									Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2} | IdentificationRule: {3} | IdentificationValue: {4}", link.Link, link.Page, link.Type, link.IdentificationRule, link.IdentificationValue)));
 									foreach (string key in link.QsKeys)
 									{
-										sb.Append(string.Format("{0}: {1}", key, link.QsKeys[key]));
+										sb.Append(string.Format("{0}: {1} | ", key, link.QsKeys[key]));
 									}
 									if (sb.Length > 0)
 									{
-										Debug.WriteLine(string.Format("{0} QsKeys: {1}", p.Name, sb.ToString()));
+										Debug.WriteLine(string.Format("{0} QsKeys: {1}", p.Name, sb.ToString().TrimEnd(' ').TrimEnd('|')));
 									}
 								}
-								Debug.WriteLine(string.Format("{0} - HasManagerLink: {1}", p.Name, cp.HasManagerLink));
+								if (cp.LinkUrls.Exists(new System.Predicate<AccordionMetaData.LinkUrlData>(url => url.IdentificationRule != string.Empty)))
+								{
+									foreach (AccordionMetaData.LinkUrlData link in cp.LinkUrls)
+									{
+										Debug.WriteLine(string.Format("{0} - IdentificationRule: {1} = {2} - HasManagerLink: {3}", p.Name, link.IdentificationRule, link.IdentificationValue, cp.HasManagerLink(link.IdentificationValue)));
+									}
+								}
+								else 
+								{
+									Debug.WriteLine(string.Format("{0} - HasManagerLink: {1}", p.Name, cp.HasManagerLink(string.Empty)));									
+								}
+								break;
+							case "AccordionTitle":
+								Debug.WriteLine(string.Format("{0}: {1}", p.Name, HttpUtility.HtmlDecode(p.GetValue(accordion, null).ToString())));
 								break;
 							default:
 								Debug.WriteLine(string.Format("{0}: {1}", p.Name, p.GetValue(accordion, null)));

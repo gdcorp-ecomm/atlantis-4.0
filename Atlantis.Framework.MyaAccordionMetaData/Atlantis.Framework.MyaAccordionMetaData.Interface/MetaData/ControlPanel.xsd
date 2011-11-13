@@ -3,7 +3,7 @@
   <xs:element name="controlpanels">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="1" maxOccurs="2" name="linkurl">
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="linkurl">
           <xs:complexType>
             <xs:sequence minOccurs="0">
               <xs:element maxOccurs="unbounded" name="qskey">
@@ -14,8 +14,10 @@
               </xs:element>
             </xs:sequence>
             <xs:attribute name="link" type="xs:string" use="required" />
-            <xs:attribute name="ci" type="xs:string" use="required" />
+            <xs:attribute name="page" type="xs:string" use="optional" />
             <xs:attribute name="type" type="xs:string" use="required" />
+            <xs:attribute name="identificationrule" type="xs:string" use="optional" />
+            <xs:attribute name="identificationvalue" type="xs:string" use="optional" />
           </xs:complexType>
         </xs:element>
       </xs:sequence>

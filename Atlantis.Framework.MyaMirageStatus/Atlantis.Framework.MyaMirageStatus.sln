@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{93658C83-F4EB-49F9-8647-7E67EF6BAE8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaMirageStatus.Interface", "Atlantis.Framework.MyaMirageStatus.Interface\Atlantis.Framework.MyaMirageStatus.Interface.csproj", "{714D675D-326C-485F-B756-9ED2A931A2DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaMirageStatus.Impl", "Atlantis.Framework.MyaMirageStatus.Impl\Atlantis.Framework.MyaMirageStatus.Impl.csproj", "{0DDDEC9B-FA49-47CF-AFDA-347D46E2ACDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaMirageStatus.Tests", "Atlantis.Framework.MyaMirageStatus.Tests\Atlantis.Framework.MyaMirageStatus.Tests.csproj", "{EF5E2099-881C-4A11-9E52-B2AB3A61BE9E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{534A24DE-0201-421F-86DE-A0FF7EFA2BB4}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.MyaMirageStatus.vsmdi = Atlantis.Framework.MyaMirageStatus.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.MyaMirageStatus.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.MyaMirageStatus.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = Atlantis.Framework.MyaMirageStatus.Interface\\Atlantis.Framework.MyaMirageStatus.Interface.csproj
+		SccProjectName3 = Atlantis.Framework.MyaMirageStatus.Interface
+		SccLocalPath3 = Atlantis.Framework.MyaMirageStatus.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.MyaMirageStatus.Impl\\Atlantis.Framework.MyaMirageStatus.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.MyaMirageStatus.Impl
+		SccLocalPath4 = Atlantis.Framework.MyaMirageStatus.Impl
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.MyaMirageStatus.sln
+		SccProjectName5 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath5 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName6 = Atlantis.Framework.MyaMirageStatus.Tests\\Atlantis.Framework.MyaMirageStatus.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.MyaMirageStatus.Tests
+		SccLocalPath6 = Atlantis.Framework.MyaMirageStatus.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.MyaMirageStatus.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{714D675D-326C-485F-B756-9ED2A931A2DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{714D675D-326C-485F-B756-9ED2A931A2DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{714D675D-326C-485F-B756-9ED2A931A2DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{714D675D-326C-485F-B756-9ED2A931A2DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DDDEC9B-FA49-47CF-AFDA-347D46E2ACDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DDDEC9B-FA49-47CF-AFDA-347D46E2ACDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DDDEC9B-FA49-47CF-AFDA-347D46E2ACDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DDDEC9B-FA49-47CF-AFDA-347D46E2ACDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF5E2099-881C-4A11-9E52-B2AB3A61BE9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF5E2099-881C-4A11-9E52-B2AB3A61BE9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF5E2099-881C-4A11-9E52-B2AB3A61BE9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF5E2099-881C-4A11-9E52-B2AB3A61BE9E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {93658C83-F4EB-49F9-8647-7E67EF6BAE8A}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {93658C83-F4EB-49F9-8647-7E67EF6BAE8A}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {93658C83-F4EB-49F9-8647-7E67EF6BAE8A}
+	EndGlobalSection
+EndGlobal

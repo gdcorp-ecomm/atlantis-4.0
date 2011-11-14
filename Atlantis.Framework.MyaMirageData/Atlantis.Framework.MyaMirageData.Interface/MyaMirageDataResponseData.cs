@@ -9,7 +9,7 @@ namespace Atlantis.Framework.MyaMirageData.Interface
 {
   public class MyaMirageDataResponseData : IResponseData, ISessionSerializableResponse
   {
-    private readonly HashSet<string> _mirageKeySet;
+    private HashSet<string> _mirageKeySet;
     private Dictionary<string, int> _mirageData;
     bool _success = true;
     AtlantisException _exception;
@@ -110,6 +110,7 @@ namespace Atlantis.Framework.MyaMirageData.Interface
 
     public void DeserializeSessionData(string sessionData)
     {
+      _mirageKeySet = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
       _mirageData = new Dictionary<string, int>(StringComparer.InvariantCultureIgnoreCase);
 
       try
@@ -124,6 +125,7 @@ namespace Atlantis.Framework.MyaMirageData.Interface
           if ((!string.IsNullOrEmpty(key)) && (Int32.TryParse(value, out quantity)))
           {
             _mirageData[key] = quantity;
+            _mirageKeySet.Add(key);
           }
         }
       }

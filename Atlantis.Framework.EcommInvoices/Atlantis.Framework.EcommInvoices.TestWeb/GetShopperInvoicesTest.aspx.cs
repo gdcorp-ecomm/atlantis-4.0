@@ -23,7 +23,7 @@ namespace Atlantis.Framework.EcommInvoices.TestWeb
       retAttr.PageSize = 3;
       retAttr.CurrentPage = 1;
       retAttr.SortDirection = "desc";
-      EcommInvoicesRequestData request = new EcommInvoicesRequestData("830398", string.Empty, string.Empty, string.Empty, 0, retAttr);
+      EcommInvoicesRequestData request = new EcommInvoicesRequestData("867900", string.Empty, string.Empty, string.Empty, 0, retAttr);
       EcommInvoicesResponseData response = (EcommInvoicesResponseData)Engine.Engine.ProcessRequest(request, 439);
 
 

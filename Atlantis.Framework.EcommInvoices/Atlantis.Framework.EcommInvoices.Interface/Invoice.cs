@@ -35,7 +35,7 @@ namespace Atlantis.Framework.EcommInvoices.Interface
         string statusText = string.Empty;
 
 
-        if (OrderDate > ExpiresDate || (_status == InvoiceStatus.Cancelled || _status == InvoiceStatus.Completed))
+        if (ExpiresDate > DateTime.Now || (_status == InvoiceStatus.Cancelled || _status == InvoiceStatus.Completed))
         {
           switch (_status)
           {
@@ -52,7 +52,7 @@ namespace Atlantis.Framework.EcommInvoices.Interface
               statusText = "Failed";
               break;
             case InvoiceStatus.Active:
-              statusText = "Active";
+              statusText = "Pending";
               break;
           }
         }

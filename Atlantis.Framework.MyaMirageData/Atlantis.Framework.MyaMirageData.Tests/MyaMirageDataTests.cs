@@ -84,12 +84,12 @@ namespace Atlantis.Framework.MyaMirageData.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    public void OwnedNamespaces()
+    public void AllMirageDataKeys()
     {
-      MyaMirageDataRequestData request = new MyaMirageDataRequestData("856907", string.Empty, string.Empty, string.Empty, 0);
+      MyaMirageDataRequestData request = new MyaMirageDataRequestData("832652", string.Empty, string.Empty, string.Empty, 0);
       MyaMirageDataResponseData response = (MyaMirageDataResponseData)Engine.Engine.ProcessRequest(request, 386);
 
-      foreach (string namespacekey in response.GetOwnedNamespaceList())
+      foreach (string namespacekey in response.AllMirageDataKeys)
       {
         Debug.WriteLine(namespacekey);
       }

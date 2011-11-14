@@ -10,7 +10,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
   {
     #region Properties
     private AtlantisException _exception = null;
-    private IList<AccordionMetaData> AccordionMetaDataList { get; set; }
+
+    private Dictionary<int, AccordionMetaData> _accordionMetaDataDictionary;
+    private List<AccordionMetaData> _accordionMetaDataList;
+
     private string _resultXml = string.Empty;
 
     public bool IsSuccess
@@ -23,7 +26,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       get
       {
         bool isValid = true;
-        foreach (AccordionMetaData amd in AccordionMetaDataList)
+        foreach (AccordionMetaData amd in _accordionMetaDataList)
         {
           if (amd.IsAllInnerXmlValid.HasValue)
           {
@@ -34,12 +37,18 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
         return isValid;
       }
     }
+
+    public IEnumerable<AccordionMetaData> AccordionMetaDataItems
+    {
+      get { return _accordionMetaDataList; }
+    }
+
     #endregion 
 
     public MyaAccordionMetaDataResponseData(string metaDataXml)
     {
       _resultXml = metaDataXml;
-      AccordionMetaDataList = DeserializeAccordionMetaData(metaDataXml);
+      DeserializeAccordionMetaData(metaDataXml);
     }
 
     public MyaAccordionMetaDataResponseData(AtlantisException atlantisException)
@@ -56,41 +65,29 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     }
 
     #region Public Methods
-    public IList<AccordionMetaData> GetMyAccordions(List<string> namespaces)
-    {
-      List<AccordionMetaData> allAccordions = new List<AccordionMetaData>(AccordionMetaDataList);
-      List<AccordionMetaData> ownedAccordions = new List<AccordionMetaData>();
-
-      foreach (string nameSpace in namespaces)
-      {
-        AccordionMetaData accordion = allAccordions.Find(new Predicate<AccordionMetaData>(ad => ad.Namespaces.Contains(nameSpace)));
-        if (accordion != null)
-        {
-          ownedAccordions.Add(accordion);
-        }
-      }
-
-      return SortedAndFilteredAccordionMetaDataList(ownedAccordions);
-    }
 
     public AccordionMetaData GetAccordionById(int accordionId)
     {
-      List<AccordionMetaData> allAccordions = new List<AccordionMetaData>(AccordionMetaDataList);
-      return allAccordions.Find(new Predicate<AccordionMetaData>(ad => ad.AccordionId.Equals(accordionId)));
+      AccordionMetaData result = null;
+      _accordionMetaDataDictionary.TryGetValue(accordionId, out result);
+      return result;
     }
+
     #endregion
 
     #region Private Methods
 
     #region Deserialization
-    private IList<AccordionMetaData> DeserializeAccordionMetaData(string metaDataXml)
+
+    private void DeserializeAccordionMetaData(string metaDataXml)
     {
-      var accordions = new List<AccordionMetaData>();
+      _accordionMetaDataList = new List<AccordionMetaData>();
+      _accordionMetaDataDictionary = new Dictionary<int, AccordionMetaData>();
 
       if (!string.IsNullOrWhiteSpace(metaDataXml))
       {
         XDocument xDoc = XDocument.Parse(metaDataXml);
-        accordions = (from accordion in xDoc.Element("data").Elements()
+        _accordionMetaDataList = (from accordion in xDoc.Element("data").Elements()
                       select new AccordionMetaData()
                       {
                         AccordionId = Convert.ToInt32(accordion.Attribute("accordionId").Value),
@@ -99,14 +96,22 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
                         ContentXml = accordion.Attribute("contentXml").Value,
                         ControlPanelXml = accordion.Attribute("controlPanelXml").Value,
                         DefaultSortOrder = Convert.ToInt32(accordion.Attribute("defaultSortOrder").Value),
-                        Namespaces = Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", "").Split(',').ToList<string>(),
+                        Namespaces = new HashSet<string>(Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", string.Empty).Split(','), StringComparer.InvariantCultureIgnoreCase),
                         WorkspaceLoginXml = accordion.Attribute("workspaceLoginXml").Value
                       }
                     ).ToList<AccordionMetaData>();
       }
 
-      return accordions;
+      _accordionMetaDataList.Sort();
+
+      _accordionMetaDataList.ForEach(
+        delegate(AccordionMetaData metadata)
+        {
+          _accordionMetaDataDictionary[metadata.AccordionId] = metadata;
+        }
+      );
     }
+
     #endregion
 
     #region Sorting & Filtering

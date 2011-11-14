@@ -9,6 +9,7 @@ namespace Atlantis.Framework.MyaMirageData.Interface
 {
   public class MyaMirageDataResponseData : IResponseData, ISessionSerializableResponse
   {
+    private readonly HashSet<string> _mirageKeySet;
     private Dictionary<string, int> _mirageData;
     bool _success = true;
     AtlantisException _exception;
@@ -16,13 +17,20 @@ namespace Atlantis.Framework.MyaMirageData.Interface
     public MyaMirageDataResponseData()
     {
       _mirageData = new Dictionary<string, int>(StringComparer.InvariantCultureIgnoreCase);
+      _mirageKeySet = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
     }
 
     public MyaMirageDataResponseData(IDictionary<string, int> mirageData)
     {
+      _mirageKeySet = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+
       if (mirageData != null)
       {
         _mirageData = new Dictionary<string,int>(mirageData, StringComparer.InvariantCultureIgnoreCase);
+        foreach (string key in _mirageData.Keys)
+        {
+          _mirageKeySet.Add(key);
+        }
       }
       else
       {
@@ -57,23 +65,9 @@ namespace Atlantis.Framework.MyaMirageData.Interface
       return result;
     }
 
-    public List<string> GetOwnedNamespaceList()
+    public HashSet<string> AllMirageDataKeys
     {
-      List<string> ownedNamespaces = new List<string>();
-
-      foreach (string key in _mirageData.Keys)
-      {
-        int temp = 0;
-        if (!int.TryParse(key, out temp))
-        {
-          if (!key.Contains("pg|") && key != "net_total")
-          {
-            ownedNamespaces.Add(key);
-          }
-        }
-      }
-
-      return ownedNamespaces; 
+      get { return _mirageKeySet; }
     }
 
     #region IResponseData Members

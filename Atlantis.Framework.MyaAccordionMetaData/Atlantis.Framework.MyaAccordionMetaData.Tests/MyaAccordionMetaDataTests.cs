@@ -63,26 +63,8 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 			Assert.IsTrue(response.IsSuccess);
 			if (response.IsSuccess)
 			{
-				List<string> namespaces = new List<string>();
-				namespaces.Add("hosting");
-				namespaces.Add("pg|4");
-				namespaces.Add("campblazer");
-				namespaces.Add("pg|1");
-				namespaces.Add("dbp");
-				namespaces.Add("bogus");
-				namespaces.Add("domain");
-				namespaces.Add("wst");
-				namespaces.Add("busaccl");
-				IList<AccordionMetaData> myAccordions = response.GetMyAccordions(namespaces);
 
-				Debug.WriteLine("********************** GET MY ACCORDIONS **********************");
-				Debug.WriteLine("");
-				foreach (AccordionMetaData amd in myAccordions)
-				{
-					Debug.WriteLine(string.Format("{0}: (ID={1}, DefaultSortOrder={2})", amd.AccordionTitle, amd.AccordionId, amd.DefaultSortOrder));
-				}
-
-				foreach (AccordionMetaData accordion in myAccordions)
+				foreach (AccordionMetaData accordion in response.AccordionMetaDataItems)
 				{
 					Debug.WriteLine("");
 					Debug.WriteLine(string.Format("********************** GET ACCORDION BY ID ({0}) **********************", accordion.AccordionTitle));
@@ -93,7 +75,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 						{
 							case "Namespaces":
 								string list = string.Empty;
-								List<string> nss = p.GetValue(accordion, null) as List<string>;
+								HashSet<string> nss = p.GetValue(accordion, null) as HashSet<string>;
 								foreach (string ns in nss)
 								{
 									list = list + string.Format("{0},", ns);

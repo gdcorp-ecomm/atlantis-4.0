@@ -7,7 +7,7 @@ using Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData;
 
 namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 {
-  public class AccordionMetaData
+  public class AccordionMetaData : IComparable<AccordionMetaData>
   {
     #region Private XML Validation Properties & Methods
 
@@ -280,7 +280,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     public string ContentXml { get; set; }
     public string ControlPanelXml { get; set; }
     public int DefaultSortOrder { get; set; }
-    public List<string> Namespaces { get; set; }
+    public HashSet<string> Namespaces { get; set; }
     public string WorkspaceLoginXml { get; set; }
     #endregion
 
@@ -493,5 +493,17 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       return show;
     }
     #endregion
+
+    public int CompareTo(AccordionMetaData other)
+    {
+      if (other == null)
+      {
+        return -1;
+      }
+      else
+      {
+        return this.DefaultSortOrder.CompareTo(other.DefaultSortOrder);
+      }
+    }
   }
 }

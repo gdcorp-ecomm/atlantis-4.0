@@ -227,7 +227,7 @@ namespace Atlantis.Framework.MyaAccountList.Tests
                       ContentXml = accordion.Attribute("contentXml").Value,
                       ControlPanelXml = accordion.Attribute("controlPanelXml").Value,
                       DefaultSortOrder = Convert.ToInt32(accordion.Attribute("defaultSortOrder").Value),
-                      Namespaces = Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", "").Split(',').ToList<string>(),
+                      Namespaces = new HashSet<string>(Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", string.Empty).Split(','), StringComparer.InvariantCultureIgnoreCase),
                       WorkspaceLoginXml = accordion.Attribute("workspaceLoginXml").Value
                     }
                   ).ToList<AccordionMetaData>();

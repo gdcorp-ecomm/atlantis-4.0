@@ -88,5 +88,41 @@ namespace Atlantis.Framework.MyaProductGetByRid.Tests
       }
     }
 
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void GetMyaHostedExchangeProduct()
+    {
+      var requestData = new MyaProductGetByRidRequestData("832652"
+         , string.Empty
+         , string.Empty
+         , string.Empty
+         , 0
+         , 1
+         , 429176
+         , 305);
+
+
+      MyaProductGetByRidResponseData responseData;
+
+      try
+      {
+        responseData = (MyaProductGetByRidResponseData)Engine.Engine.ProcessRequest(requestData, _requestType);
+
+        Debug.WriteLine(string.Format("CommonName: {0}, ProductTypeId: {4}, ProductType: {5}, Is Free: {1}, Account Expiration: {2}, IsRenwable: {3}", responseData.ProductAccount.CommonName, responseData.ProductAccount.IsFree, responseData.ProductAccount.AccountExpirationDate.ToLongDateString(), responseData.ProductAccount.IsRenewable, responseData.ProductAccount.ProductTypeId, responseData.ProductAccount.ProductType));
+        Debug.WriteLine(string.Format("Dedicated Hosting property count: {0}", responseData.ProductAccount.PropertiesDictionary.Count));
+        foreach (KeyValuePair<string, object> property in responseData.ProductAccount.PropertiesDictionary)
+        {
+          Debug.WriteLine(property.ToString());
+        }
+
+        Assert.IsTrue(responseData.IsSuccess);
+      }
+      catch (Exception ex)
+      {
+        Assert.Fail(ex.Message);
+      }
+    }
+
+
   }
 }

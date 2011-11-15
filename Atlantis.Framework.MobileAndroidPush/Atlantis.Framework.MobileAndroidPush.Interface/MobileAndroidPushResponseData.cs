@@ -14,15 +14,8 @@ namespace Atlantis.Framework.MobileAndroidPush.Interface
 
     public bool IsSuccess { get; private set; }
 
-    public bool AuthenticationError { get; private set; }
-
-    public bool ServiceUnavailable { get; private set; }
-
-    public MobileAndroidPushResponseData(string response, bool authError, bool serviceUnavailable)
+    public MobileAndroidPushResponseData(string response)
     {
-      AuthenticationError = authError;
-      ServiceUnavailable = serviceUnavailable;
-
       if(!string.IsNullOrEmpty(response))
       {
         string[] responsePair = response.Split('=');
@@ -44,6 +37,7 @@ namespace Atlantis.Framework.MobileAndroidPush.Interface
 
     public MobileAndroidPushResponseData(MobileAndroidPushRequestData requestData, Exception ex)
     {
+      IsSuccess = false;
       AtlantisException = new AtlantisException(requestData,
                                                 MethodBase.GetCurrentMethod().DeclaringType.FullName,
                                                 ex.Message,

@@ -3,15 +3,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E10F3DC5-B710-4693-99C5-1D7E38612E63}</ProjectGuid>
+    <ProjectGuid>{4F92D1CA-7CC6-4E08-B943-47444ADA808D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.MobileAndroidPush.Impl</RootNamespace>
-    <AssemblyName>Atlantis.Framework.MobileAndroidPush.Impl</AssemblyName>
+    <RootNamespace>Atlantis.Framework.GoogleClientAuth.Tests</RootNamespace>
+    <AssemblyName>Atlantis.Framework.GoogleClientAuth.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -35,21 +37,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GoogleCertificatePolicy.cs" />
-    <Compile Include="GoogleClientAuthCache.cs" />
-    <Compile Include="MobileAndroidPushRequest.cs" />
-    <Compile Include="MonitorLock.cs" />
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GoogleClientAuthTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
@@ -60,24 +61,25 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.GoogleClientAuth\Atlantis.Framework.GoogleClientAuth.Impl\Atlantis.Framework.GoogleClientAuth.Impl.csproj">
+    <ProjectReference Include="..\Atlantis.Framework.GoogleClientAuth.Impl\Atlantis.Framework.GoogleClientAuth.Impl.csproj">
       <Project>{F7F40914-3CCD-43CA-9053-6E82DFAFE7B4}</Project>
       <Name>Atlantis.Framework.GoogleClientAuth.Impl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.GoogleClientAuth\Atlantis.Framework.GoogleClientAuth.Interface\Atlantis.Framework.GoogleClientAuth.Interface.csproj">
+    <ProjectReference Include="..\Atlantis.Framework.GoogleClientAuth.Interface\Atlantis.Framework.GoogleClientAuth.Interface.csproj">
       <Project>{1CE06156-DA87-4AA8-9254-72A14B014000}</Project>
       <Name>Atlantis.Framework.GoogleClientAuth.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
-      <Project>{3213E6DB-F026-4F17-A46A-7127F79F6620}</Project>
-      <Name>Atlantis.Framework.Nimitz</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.MobileAndroidPush.Interface\Atlantis.Framework.MobileAndroidPush.Interface.csproj">
-      <Project>{72FFF067-D9EC-4D75-9901-9380E22EB967}</Project>
-      <Name>Atlantis.Framework.MobileAndroidPush.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

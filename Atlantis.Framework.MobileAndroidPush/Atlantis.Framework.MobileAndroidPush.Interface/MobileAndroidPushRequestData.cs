@@ -5,14 +5,14 @@ namespace Atlantis.Framework.MobileAndroidPush.Interface
 {
   public class MobileAndroidPushRequestData : RequestData
   {
-    public string AuthToken { get; private set; }
+    private static readonly TimeSpan _defaultRequestTimeout = TimeSpan.FromSeconds(5);
 
     public MobileAndroidPushNotification Notification { get; private set; }
 
-    public MobileAndroidPushRequestData(string authToken, string registrationId, string message, string messageNamespace, string shopperId, string sourceUrl, string orderId, string pathway, int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public MobileAndroidPushRequestData(string registrationId, string message, string messageNamespace, string shopperId, string sourceUrl, string orderId, string pathway, int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      AuthToken = authToken;
       Notification = new MobileAndroidPushNotification(registrationId, message, messageNamespace);
+      RequestTimeout = _defaultRequestTimeout;
     }
 
     public override string GetCacheMD5()

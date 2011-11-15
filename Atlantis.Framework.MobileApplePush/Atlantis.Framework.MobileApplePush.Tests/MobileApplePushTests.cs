@@ -32,12 +32,14 @@ namespace Atlantis.Framework.MobileApplePush.Tests
       // View mapping "v" key, 4 digit mapping max
       requestData.Notification.Payload.AddCustomInt("v", 1234);
 
-      // ISC code, 15 characters max OR fbiOfferId (fastball), 15 digit max
-      //requestData.Notification.Payload.AddCustomString("i", "danica123456789");
-      requestData.Notification.Payload.AddCustomInt("f", 123456789012345);
+      // ISC code, 12 characters max
+      requestData.Notification.Payload.AddCustomString("i", "danica123456");
 
-      // ci (click impression), 15 digit max
-      requestData.Notification.Payload.AddCustomInt("c", 123456789012345);
+      // fbiOfferId (fastball), 12 digit max
+      requestData.Notification.Payload.AddCustomInt("f", 123456789012);
+
+      // ci (click impression), 12 digit max
+      requestData.Notification.Payload.AddCustomInt("c", 123456789012);
 
       try
       {
@@ -65,9 +67,11 @@ namespace Atlantis.Framework.MobileApplePush.Tests
       // View mapping "v" key, 4 digit mapping max
       requestData2.Notification.Payload.AddCustomInt("v", 1234);
 
-      // ISC code, 12 characters max OR fbiOfferId (fastball), 15 digit max
+      // ISC code, 12 characters max
       requestData2.Notification.Payload.AddCustomString("i", "danica123456");
-      //requestData2.Notification.Payload.AddCustomInt("f", 123456789012);
+
+      // fbiOfferId (fastball), 12 digit max
+      requestData2.Notification.Payload.AddCustomInt("f", 123456789012);
 
       // ci (click impression), 12 digit max
       requestData2.Notification.Payload.AddCustomInt("c", 123456789012);
@@ -96,12 +100,14 @@ namespace Atlantis.Framework.MobileApplePush.Tests
       // View mapping "v" key, 4 digit mapping max
       requestData3.Notification.Payload.AddCustomInt("v", 1234);
 
-      // ISC code, 15 characters max OR fbiOfferId (fastball), 15 digit max
-      requestData3.Notification.Payload.AddCustomString("i", "danica123456789");
-      //requestData3.Notification.Payload.AddCustomInt("f", 123456789012345);
+      // ISC code, 12 characters max
+      requestData3.Notification.Payload.AddCustomString("i", "danica123456");
+      
+      // fbiOfferId (fastball), 12 digit max
+      requestData3.Notification.Payload.AddCustomInt("f", 123456789012);
 
-      // ci (click impression), 15 digit max
-      requestData3.Notification.Payload.AddCustomInt("c", 123456789012345);
+      // ci (click impression), 12 digit max
+      requestData3.Notification.Payload.AddCustomInt("c", 123456789012);
 
       try
       {

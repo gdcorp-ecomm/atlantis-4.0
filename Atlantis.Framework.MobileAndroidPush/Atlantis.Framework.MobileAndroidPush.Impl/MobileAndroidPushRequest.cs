@@ -11,10 +11,11 @@ namespace Atlantis.Framework.MobileAndroidPush.Impl
     public const string CLIENT_AUTH_HEADER = "Authorization"; 
     public const string CLIENT_AUTH_HEADER_VALUE_FORMAT = "GoogleLogin auth={0}";
 
-    private static string PostNotification(string url, TimeSpan requestTimeout, string authToken, byte[] postData, out HttpStatusCode httpStatusCode)
+    private GoogleClientAuthCache _googleClientAuthCache = new GoogleClientAuthCache();
+
+    private static string PostNotification(string url, string authToken, TimeSpan requestTimeout, byte[] postData)
     {
       string response = string.Empty;
-      httpStatusCode = HttpStatusCode.BadRequest;
 
       ServicePointManager.ServerCertificateValidationCallback += GoogleCertificatePolicy.ValidateRemoteCertificate;
 
@@ -34,8 +35,6 @@ namespace Atlantis.Framework.MobileAndroidPush.Impl
 
         using (HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse())
         {
-          httpStatusCode = httpResponse.StatusCode;
-
           using (Stream responseStream = httpResponse.GetResponseStream())
           {
             if (responseStream != null)
@@ -52,49 +51,51 @@ namespace Atlantis.Framework.MobileAndroidPush.Impl
       return response;
     }
 
-    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
+    private IResponseData SendNotification(MobileAndroidPushRequestData mobileAndroidPushRequestData, WsConfigElement wsConfig)
+    {
+      return SendNotification(mobileAndroidPushRequestData, wsConfig, false);
+    }
+
+    private IResponseData SendNotification(MobileAndroidPushRequestData mobileAndroidPushRequestData, WsConfigElement wsConfig, bool clearClientAuthCache)
     {
       IResponseData responseData;
 
-      MobileAndroidPushRequestData mobileAndroidPushRequestData = (MobileAndroidPushRequestData) requestData;
-      WsConfigElement wsConfig = (WsConfigElement)config;
-
       try
       {
-        HttpStatusCode statusCode;
-        string response = PostNotification(wsConfig.WSURL, 
-                                           mobileAndroidPushRequestData.RequestTimeout, 
-                                           mobileAndroidPushRequestData.AuthToken, 
-                                           mobileAndroidPushRequestData.Notification.GetPostData(),
-                                           out statusCode);
+        _googleClientAuthCache.ClearCache = clearClientAuthCache;
+        string authToken = _googleClientAuthCache.GetClientAuthToken(mobileAndroidPushRequestData);
+        
+        string response = PostNotification(wsConfig.WSURL,
+                                           authToken,
+                                           mobileAndroidPushRequestData.RequestTimeout,
+                                           mobileAndroidPushRequestData.Notification.GetPostData());
 
 
-        responseData = new MobileAndroidPushResponseData(response, false, false);
+        responseData = new MobileAndroidPushResponseData(response);
       }
-      catch(WebException webException)
+      catch (WebException webException)
       {
-        bool authError = false;
-        bool serviceUnavailable = false;
-
         HttpWebResponse response = webException.Response as HttpWebResponse;
-        if(response == null)
+        if (response == null)
         {
           throw;
         }
-        
+
         switch (response.StatusCode)
         {
           case HttpStatusCode.Unauthorized:
-            authError = true;
-            break;
-          case HttpStatusCode.ServiceUnavailable:
-            serviceUnavailable = true;
+            if (!clearClientAuthCache)
+            {
+              responseData = SendNotification(mobileAndroidPushRequestData, wsConfig, true);
+            }
+            else
+            {
+              throw new Exception("Google Client Authentication failed.", webException);
+            }
             break;
           default:
             throw;
         }
-
-        responseData = new MobileAndroidPushResponseData(string.Empty, authError, serviceUnavailable);
       }
       catch (Exception ex)
       {
@@ -102,6 +103,14 @@ namespace Atlantis.Framework.MobileAndroidPush.Impl
       }
 
       return responseData;
+    }
+
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
+    {
+      MobileAndroidPushRequestData mobileAndroidPushRequestData = (MobileAndroidPushRequestData) requestData;
+      WsConfigElement wsConfig = (WsConfigElement)config;
+
+      return SendNotification(mobileAndroidPushRequestData, wsConfig);
     }
   }
 }

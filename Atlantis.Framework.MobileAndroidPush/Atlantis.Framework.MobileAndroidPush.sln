@@ -20,9 +20,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GoogleClientAuth.Impl", "..\Atlantis.Framework.GoogleClientAuth\Atlantis.Framework.GoogleClientAuth.Impl\Atlantis.Framework.GoogleClientAuth.Impl.csproj", "{F7F40914-3CCD-43CA-9053-6E82DFAFE7B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GoogleClientAuth.Interface", "..\Atlantis.Framework.GoogleClientAuth\Atlantis.Framework.GoogleClientAuth.Interface\Atlantis.Framework.GoogleClientAuth.Interface.csproj", "{1CE06156-DA87-4AA8-9254-72A14B014000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
 		SccLocalPath0 = .
@@ -43,6 +49,18 @@ Global
 		SccProjectUniqueName5 = Atlantis.Framework.MobileAndroidPush.Tests\\Atlantis.Framework.MobileAndroidPush.Tests.csproj
 		SccProjectName5 = Atlantis.Framework.MobileAndroidPush.Tests
 		SccLocalPath5 = Atlantis.Framework.MobileAndroidPush.Tests
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.GoogleClientAuth\\Atlantis.Framework.GoogleClientAuth.Impl\\Atlantis.Framework.GoogleClientAuth.Impl.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.MobileAndroidPush.sln
+		SccProjectName6 = ../Atlantis.Framework.GoogleClientAuth/Atlantis.Framework.GoogleClientAuth.Impl
+		SccLocalPath6 = ..\\Atlantis.Framework.GoogleClientAuth\\Atlantis.Framework.GoogleClientAuth.Impl
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.GoogleClientAuth\\Atlantis.Framework.GoogleClientAuth.Interface\\Atlantis.Framework.GoogleClientAuth.Interface.csproj
+		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.MobileAndroidPush.sln
+		SccProjectName7 = ../Atlantis.Framework.GoogleClientAuth/Atlantis.Framework.GoogleClientAuth.Interface
+		SccLocalPath7 = ..\\Atlantis.Framework.GoogleClientAuth\\Atlantis.Framework.GoogleClientAuth.Interface
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.MobileAndroidPush.sln
+		SccProjectName8 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath8 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.MobileAndroidPush.vsmdi
@@ -72,6 +90,18 @@ Global
 		{FB0D61CF-E439-4EC1-971A-716896239C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB0D61CF-E439-4EC1-971A-716896239C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB0D61CF-E439-4EC1-971A-716896239C2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7F40914-3CCD-43CA-9053-6E82DFAFE7B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7F40914-3CCD-43CA-9053-6E82DFAFE7B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7F40914-3CCD-43CA-9053-6E82DFAFE7B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7F40914-3CCD-43CA-9053-6E82DFAFE7B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE06156-DA87-4AA8-9254-72A14B014000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE06156-DA87-4AA8-9254-72A14B014000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE06156-DA87-4AA8-9254-72A14B014000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE06156-DA87-4AA8-9254-72A14B014000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,5 +109,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {3F7F2DED-607A-4206-8560-88CBB56D9EC9}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {3F7F2DED-607A-4206-8560-88CBB56D9EC9}
+		{F7F40914-3CCD-43CA-9053-6E82DFAFE7B4} = {3F7F2DED-607A-4206-8560-88CBB56D9EC9}
+		{1CE06156-DA87-4AA8-9254-72A14B014000} = {3F7F2DED-607A-4206-8560-88CBB56D9EC9}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {3F7F2DED-607A-4206-8560-88CBB56D9EC9}
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,6 @@
 ﻿using System;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.OFFUsageByUsername.Impl.OFFService;
 using Atlantis.Framework.OFFUsageByUsername.Interface;
 
 namespace Atlantis.Framework.OFFUsageByUsername.Impl
@@ -17,9 +18,11 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl
         {
           offWs.Url = ((WsConfigElement) config).WSURL;
           offWs.Timeout = (int) offUsageRequest.RequestTimeout.TotalMilliseconds;
+          string key = config.GetConfigValue("OffKey");
 
-          int usagePercent = offWs.getSpaceUsedPercentage(offUsageRequest.Username);
-          offUsageResponse = new OFFUsageByUsernameResponseData(usagePercent);
+          User offUser = offWs.WorkspaceSoapServicegetUserByUserID(key, offUsageRequest.Username);
+
+          offUsageResponse = new OFFUsageByUsernameResponseData(offUser.quota_bytes, offUser.used_bytes);
         }
       }
       catch (Exception ex)

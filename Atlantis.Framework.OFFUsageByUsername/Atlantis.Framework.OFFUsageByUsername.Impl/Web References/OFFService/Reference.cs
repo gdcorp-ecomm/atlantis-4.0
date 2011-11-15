@@ -26,47 +26,36 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl.OFFService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="OFFSoapBinding", Namespace="OFFSoapNS")]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(AccessedFile))]
+    [System.Web.Services.WebServiceBindingAttribute(Name="OFFSoapBinding", Namespace="urn:OFFSoapNS")]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(File))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(Folder))]
     public partial class OFFSoap : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback getUserNumByEmailOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicegetUserByEmailOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getUserNumByUserIDOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicegetUserByUserIDOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getUserNumWithCredentialsOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicegetUserByCredentialsOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getFileOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicegetUserByUserNumOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getBackdoorOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicegetLoginURLOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getSharedFileInfoOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicegetUploadWindowURLOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getSaveToOFFURLOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicecreateFolderOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getSaveToOFFURLPodOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicerenameFolderOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getAssociatedEmailOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicegetFileFromOFFOperationCompleted;
         
-        private System.Threading.SendOrPostCallback setAssociatedEmailOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicesendFileToOFFOperationCompleted;
         
-        private System.Threading.SendOrPostCallback removeAssociatedEmailOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicemakeFilePublicOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getSpaceUsedPercentageOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicegetFolderListOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getQuotaInfoOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getQuotaInfoByUserNumOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback setVersionPreferenceOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getAppVersionOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getScriptVersionOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getMostRecentlyAccessedFilesOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getMostCommonlyAccessedFilesOperationCompleted;
+        private System.Threading.SendOrPostCallback WorkspaceSoapServicegetFileListOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -107,643 +96,479 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl.OFFService {
         }
         
         /// <remarks/>
-        public event getUserNumByEmailCompletedEventHandler getUserNumByEmailCompleted;
+        public event WorkspaceSoapServicegetUserByEmailCompletedEventHandler WorkspaceSoapServicegetUserByEmailCompleted;
         
         /// <remarks/>
-        public event getUserNumByUserIDCompletedEventHandler getUserNumByUserIDCompleted;
+        public event WorkspaceSoapServicegetUserByUserIDCompletedEventHandler WorkspaceSoapServicegetUserByUserIDCompleted;
         
         /// <remarks/>
-        public event getUserNumWithCredentialsCompletedEventHandler getUserNumWithCredentialsCompleted;
+        public event WorkspaceSoapServicegetUserByCredentialsCompletedEventHandler WorkspaceSoapServicegetUserByCredentialsCompleted;
         
         /// <remarks/>
-        public event getFileCompletedEventHandler getFileCompleted;
+        public event WorkspaceSoapServicegetUserByUserNumCompletedEventHandler WorkspaceSoapServicegetUserByUserNumCompleted;
         
         /// <remarks/>
-        public event getBackdoorCompletedEventHandler getBackdoorCompleted;
+        public event WorkspaceSoapServicegetLoginURLCompletedEventHandler WorkspaceSoapServicegetLoginURLCompleted;
         
         /// <remarks/>
-        public event getSharedFileInfoCompletedEventHandler getSharedFileInfoCompleted;
+        public event WorkspaceSoapServicegetUploadWindowURLCompletedEventHandler WorkspaceSoapServicegetUploadWindowURLCompleted;
         
         /// <remarks/>
-        public event getSaveToOFFURLCompletedEventHandler getSaveToOFFURLCompleted;
+        public event WorkspaceSoapServicecreateFolderCompletedEventHandler WorkspaceSoapServicecreateFolderCompleted;
         
         /// <remarks/>
-        public event getSaveToOFFURLPodCompletedEventHandler getSaveToOFFURLPodCompleted;
+        public event WorkspaceSoapServicerenameFolderCompletedEventHandler WorkspaceSoapServicerenameFolderCompleted;
         
         /// <remarks/>
-        public event getAssociatedEmailCompletedEventHandler getAssociatedEmailCompleted;
+        public event WorkspaceSoapServicegetFileFromOFFCompletedEventHandler WorkspaceSoapServicegetFileFromOFFCompleted;
         
         /// <remarks/>
-        public event setAssociatedEmailCompletedEventHandler setAssociatedEmailCompleted;
+        public event WorkspaceSoapServicesendFileToOFFCompletedEventHandler WorkspaceSoapServicesendFileToOFFCompleted;
         
         /// <remarks/>
-        public event removeAssociatedEmailCompletedEventHandler removeAssociatedEmailCompleted;
+        public event WorkspaceSoapServicemakeFilePublicCompletedEventHandler WorkspaceSoapServicemakeFilePublicCompleted;
         
         /// <remarks/>
-        public event getSpaceUsedPercentageCompletedEventHandler getSpaceUsedPercentageCompleted;
+        public event WorkspaceSoapServicegetFolderListCompletedEventHandler WorkspaceSoapServicegetFolderListCompleted;
         
         /// <remarks/>
-        public event getQuotaInfoCompletedEventHandler getQuotaInfoCompleted;
+        public event WorkspaceSoapServicegetFileListCompletedEventHandler WorkspaceSoapServicegetFileListCompleted;
         
         /// <remarks/>
-        public event getQuotaInfoByUserNumCompletedEventHandler getQuotaInfoByUserNumCompleted;
-        
-        /// <remarks/>
-        public event setVersionPreferenceCompletedEventHandler setVersionPreferenceCompleted;
-        
-        /// <remarks/>
-        public event getAppVersionCompletedEventHandler getAppVersionCompleted;
-        
-        /// <remarks/>
-        public event getScriptVersionCompletedEventHandler getScriptVersionCompleted;
-        
-        /// <remarks/>
-        public event getMostRecentlyAccessedFilesCompletedEventHandler getMostRecentlyAccessedFilesCompleted;
-        
-        /// <remarks/>
-        public event getMostCommonlyAccessedFilesCompletedEventHandler getMostCommonlyAccessedFilesCompleted;
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getUserNumByEmail", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("user_num")]
-        public int getUserNumByEmail(string email) {
-            object[] results = this.Invoke("getUserNumByEmail", new object[] {
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#getUserByEmail", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
+        [return: System.Xml.Serialization.SoapElementAttribute("user")]
+        public User WorkspaceSoapServicegetUserByEmail(string key, string email) {
+            object[] results = this.Invoke("WorkspaceSoapServicegetUserByEmail", new object[] {
+                        key,
                         email});
-            return ((int)(results[0]));
+            return ((User)(results[0]));
         }
         
         /// <remarks/>
-        public void getUserNumByEmailAsync(string email) {
-            this.getUserNumByEmailAsync(email, null);
+        public void WorkspaceSoapServicegetUserByEmailAsync(string key, string email) {
+            this.WorkspaceSoapServicegetUserByEmailAsync(key, email, null);
         }
         
         /// <remarks/>
-        public void getUserNumByEmailAsync(string email, object userState) {
-            if ((this.getUserNumByEmailOperationCompleted == null)) {
-                this.getUserNumByEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetUserNumByEmailOperationCompleted);
+        public void WorkspaceSoapServicegetUserByEmailAsync(string key, string email, object userState) {
+            if ((this.WorkspaceSoapServicegetUserByEmailOperationCompleted == null)) {
+                this.WorkspaceSoapServicegetUserByEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicegetUserByEmailOperationCompleted);
             }
-            this.InvokeAsync("getUserNumByEmail", new object[] {
-                        email}, this.getUserNumByEmailOperationCompleted, userState);
+            this.InvokeAsync("WorkspaceSoapServicegetUserByEmail", new object[] {
+                        key,
+                        email}, this.WorkspaceSoapServicegetUserByEmailOperationCompleted, userState);
         }
         
-        private void OngetUserNumByEmailOperationCompleted(object arg) {
-            if ((this.getUserNumByEmailCompleted != null)) {
+        private void OnWorkspaceSoapServicegetUserByEmailOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicegetUserByEmailCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getUserNumByEmailCompleted(this, new getUserNumByEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.WorkspaceSoapServicegetUserByEmailCompleted(this, new WorkspaceSoapServicegetUserByEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getUserNumByUserID", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("user_num")]
-        public int getUserNumByUserID(string user_id) {
-            object[] results = this.Invoke("getUserNumByUserID", new object[] {
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#getUserByUserID", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
+        [return: System.Xml.Serialization.SoapElementAttribute("user")]
+        public User WorkspaceSoapServicegetUserByUserID(string key, string user_id) {
+            object[] results = this.Invoke("WorkspaceSoapServicegetUserByUserID", new object[] {
+                        key,
                         user_id});
-            return ((int)(results[0]));
+            return ((User)(results[0]));
         }
         
         /// <remarks/>
-        public void getUserNumByUserIDAsync(string user_id) {
-            this.getUserNumByUserIDAsync(user_id, null);
+        public void WorkspaceSoapServicegetUserByUserIDAsync(string key, string user_id) {
+            this.WorkspaceSoapServicegetUserByUserIDAsync(key, user_id, null);
         }
         
         /// <remarks/>
-        public void getUserNumByUserIDAsync(string user_id, object userState) {
-            if ((this.getUserNumByUserIDOperationCompleted == null)) {
-                this.getUserNumByUserIDOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetUserNumByUserIDOperationCompleted);
+        public void WorkspaceSoapServicegetUserByUserIDAsync(string key, string user_id, object userState) {
+            if ((this.WorkspaceSoapServicegetUserByUserIDOperationCompleted == null)) {
+                this.WorkspaceSoapServicegetUserByUserIDOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicegetUserByUserIDOperationCompleted);
             }
-            this.InvokeAsync("getUserNumByUserID", new object[] {
-                        user_id}, this.getUserNumByUserIDOperationCompleted, userState);
+            this.InvokeAsync("WorkspaceSoapServicegetUserByUserID", new object[] {
+                        key,
+                        user_id}, this.WorkspaceSoapServicegetUserByUserIDOperationCompleted, userState);
         }
         
-        private void OngetUserNumByUserIDOperationCompleted(object arg) {
-            if ((this.getUserNumByUserIDCompleted != null)) {
+        private void OnWorkspaceSoapServicegetUserByUserIDOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicegetUserByUserIDCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getUserNumByUserIDCompleted(this, new getUserNumByUserIDCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.WorkspaceSoapServicegetUserByUserIDCompleted(this, new WorkspaceSoapServicegetUserByUserIDCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getUserNumWithCredentials", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("user_num")]
-        public int getUserNumWithCredentials(string user_id, string password) {
-            object[] results = this.Invoke("getUserNumWithCredentials", new object[] {
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#getUserByCredentials", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
+        [return: System.Xml.Serialization.SoapElementAttribute("user")]
+        public User WorkspaceSoapServicegetUserByCredentials(string key, string user_id, string password) {
+            object[] results = this.Invoke("WorkspaceSoapServicegetUserByCredentials", new object[] {
+                        key,
                         user_id,
                         password});
-            return ((int)(results[0]));
+            return ((User)(results[0]));
         }
         
         /// <remarks/>
-        public void getUserNumWithCredentialsAsync(string user_id, string password) {
-            this.getUserNumWithCredentialsAsync(user_id, password, null);
+        public void WorkspaceSoapServicegetUserByCredentialsAsync(string key, string user_id, string password) {
+            this.WorkspaceSoapServicegetUserByCredentialsAsync(key, user_id, password, null);
         }
         
         /// <remarks/>
-        public void getUserNumWithCredentialsAsync(string user_id, string password, object userState) {
-            if ((this.getUserNumWithCredentialsOperationCompleted == null)) {
-                this.getUserNumWithCredentialsOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetUserNumWithCredentialsOperationCompleted);
+        public void WorkspaceSoapServicegetUserByCredentialsAsync(string key, string user_id, string password, object userState) {
+            if ((this.WorkspaceSoapServicegetUserByCredentialsOperationCompleted == null)) {
+                this.WorkspaceSoapServicegetUserByCredentialsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicegetUserByCredentialsOperationCompleted);
             }
-            this.InvokeAsync("getUserNumWithCredentials", new object[] {
+            this.InvokeAsync("WorkspaceSoapServicegetUserByCredentials", new object[] {
+                        key,
                         user_id,
-                        password}, this.getUserNumWithCredentialsOperationCompleted, userState);
+                        password}, this.WorkspaceSoapServicegetUserByCredentialsOperationCompleted, userState);
         }
         
-        private void OngetUserNumWithCredentialsOperationCompleted(object arg) {
-            if ((this.getUserNumWithCredentialsCompleted != null)) {
+        private void OnWorkspaceSoapServicegetUserByCredentialsOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicegetUserByCredentialsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getUserNumWithCredentialsCompleted(this, new getUserNumWithCredentialsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.WorkspaceSoapServicegetUserByCredentialsCompleted(this, new WorkspaceSoapServicegetUserByCredentialsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getFile", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("fileInfo")]
-        public File getFile(int user_num, int file_num) {
-            object[] results = this.Invoke("getFile", new object[] {
-                        user_num,
-                        file_num});
-            return ((File)(results[0]));
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#getUserByUserNum", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
+        [return: System.Xml.Serialization.SoapElementAttribute("user")]
+        public User WorkspaceSoapServicegetUserByUserNum(string key, int user_num) {
+            object[] results = this.Invoke("WorkspaceSoapServicegetUserByUserNum", new object[] {
+                        key,
+                        user_num});
+            return ((User)(results[0]));
         }
         
         /// <remarks/>
-        public void getFileAsync(int user_num, int file_num) {
-            this.getFileAsync(user_num, file_num, null);
+        public void WorkspaceSoapServicegetUserByUserNumAsync(string key, int user_num) {
+            this.WorkspaceSoapServicegetUserByUserNumAsync(key, user_num, null);
         }
         
         /// <remarks/>
-        public void getFileAsync(int user_num, int file_num, object userState) {
-            if ((this.getFileOperationCompleted == null)) {
-                this.getFileOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetFileOperationCompleted);
+        public void WorkspaceSoapServicegetUserByUserNumAsync(string key, int user_num, object userState) {
+            if ((this.WorkspaceSoapServicegetUserByUserNumOperationCompleted == null)) {
+                this.WorkspaceSoapServicegetUserByUserNumOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicegetUserByUserNumOperationCompleted);
             }
-            this.InvokeAsync("getFile", new object[] {
-                        user_num,
-                        file_num}, this.getFileOperationCompleted, userState);
+            this.InvokeAsync("WorkspaceSoapServicegetUserByUserNum", new object[] {
+                        key,
+                        user_num}, this.WorkspaceSoapServicegetUserByUserNumOperationCompleted, userState);
         }
         
-        private void OngetFileOperationCompleted(object arg) {
-            if ((this.getFileCompleted != null)) {
+        private void OnWorkspaceSoapServicegetUserByUserNumOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicegetUserByUserNumCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getFileCompleted(this, new getFileCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.WorkspaceSoapServicegetUserByUserNumCompleted(this, new WorkspaceSoapServicegetUserByUserNumCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getBackdoor", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#getLoginURL", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
         [return: System.Xml.Serialization.SoapElementAttribute("url")]
-        public string getBackdoor(int user_num) {
-            object[] results = this.Invoke("getBackdoor", new object[] {
+        public string WorkspaceSoapServicegetLoginURL(string key, int user_num) {
+            object[] results = this.Invoke("WorkspaceSoapServicegetLoginURL", new object[] {
+                        key,
                         user_num});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void getBackdoorAsync(int user_num) {
-            this.getBackdoorAsync(user_num, null);
+        public void WorkspaceSoapServicegetLoginURLAsync(string key, int user_num) {
+            this.WorkspaceSoapServicegetLoginURLAsync(key, user_num, null);
         }
         
         /// <remarks/>
-        public void getBackdoorAsync(int user_num, object userState) {
-            if ((this.getBackdoorOperationCompleted == null)) {
-                this.getBackdoorOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetBackdoorOperationCompleted);
+        public void WorkspaceSoapServicegetLoginURLAsync(string key, int user_num, object userState) {
+            if ((this.WorkspaceSoapServicegetLoginURLOperationCompleted == null)) {
+                this.WorkspaceSoapServicegetLoginURLOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicegetLoginURLOperationCompleted);
             }
-            this.InvokeAsync("getBackdoor", new object[] {
-                        user_num}, this.getBackdoorOperationCompleted, userState);
+            this.InvokeAsync("WorkspaceSoapServicegetLoginURL", new object[] {
+                        key,
+                        user_num}, this.WorkspaceSoapServicegetLoginURLOperationCompleted, userState);
         }
         
-        private void OngetBackdoorOperationCompleted(object arg) {
-            if ((this.getBackdoorCompleted != null)) {
+        private void OnWorkspaceSoapServicegetLoginURLOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicegetLoginURLCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getBackdoorCompleted(this, new getBackdoorCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.WorkspaceSoapServicegetLoginURLCompleted(this, new WorkspaceSoapServicegetLoginURLCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getSharedFileInfo", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("info")]
-        public File getSharedFileInfo(int user_num, int file_num) {
-            object[] results = this.Invoke("getSharedFileInfo", new object[] {
-                        user_num,
-                        file_num});
-            return ((File)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getSharedFileInfoAsync(int user_num, int file_num) {
-            this.getSharedFileInfoAsync(user_num, file_num, null);
-        }
-        
-        /// <remarks/>
-        public void getSharedFileInfoAsync(int user_num, int file_num, object userState) {
-            if ((this.getSharedFileInfoOperationCompleted == null)) {
-                this.getSharedFileInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetSharedFileInfoOperationCompleted);
-            }
-            this.InvokeAsync("getSharedFileInfo", new object[] {
-                        user_num,
-                        file_num}, this.getSharedFileInfoOperationCompleted, userState);
-        }
-        
-        private void OngetSharedFileInfoOperationCompleted(object arg) {
-            if ((this.getSharedFileInfoCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getSharedFileInfoCompleted(this, new getSharedFileInfoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getSaveToOFFURL", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#getUploadWindowURL", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
         [return: System.Xml.Serialization.SoapElementAttribute("url")]
-        public string getSaveToOFFURL(int user_num, string path) {
-            object[] results = this.Invoke("getSaveToOFFURL", new object[] {
-                        user_num,
-                        path});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getSaveToOFFURLAsync(int user_num, string path) {
-            this.getSaveToOFFURLAsync(user_num, path, null);
-        }
-        
-        /// <remarks/>
-        public void getSaveToOFFURLAsync(int user_num, string path, object userState) {
-            if ((this.getSaveToOFFURLOperationCompleted == null)) {
-                this.getSaveToOFFURLOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetSaveToOFFURLOperationCompleted);
-            }
-            this.InvokeAsync("getSaveToOFFURL", new object[] {
-                        user_num,
-                        path}, this.getSaveToOFFURLOperationCompleted, userState);
-        }
-        
-        private void OngetSaveToOFFURLOperationCompleted(object arg) {
-            if ((this.getSaveToOFFURLCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getSaveToOFFURLCompleted(this, new getSaveToOFFURLCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getSaveToOFFURLPod", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("url")]
-        public string getSaveToOFFURLPod(int user_num, string[] urls) {
-            object[] results = this.Invoke("getSaveToOFFURLPod", new object[] {
-                        user_num,
-                        urls});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getSaveToOFFURLPodAsync(int user_num, string[] urls) {
-            this.getSaveToOFFURLPodAsync(user_num, urls, null);
-        }
-        
-        /// <remarks/>
-        public void getSaveToOFFURLPodAsync(int user_num, string[] urls, object userState) {
-            if ((this.getSaveToOFFURLPodOperationCompleted == null)) {
-                this.getSaveToOFFURLPodOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetSaveToOFFURLPodOperationCompleted);
-            }
-            this.InvokeAsync("getSaveToOFFURLPod", new object[] {
-                        user_num,
-                        urls}, this.getSaveToOFFURLPodOperationCompleted, userState);
-        }
-        
-        private void OngetSaveToOFFURLPodOperationCompleted(object arg) {
-            if ((this.getSaveToOFFURLPodCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getSaveToOFFURLPodCompleted(this, new getSaveToOFFURLPodCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getAssociatedEmail", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("email")]
-        public string getAssociatedEmail(string user_id) {
-            object[] results = this.Invoke("getAssociatedEmail", new object[] {
-                        user_id});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getAssociatedEmailAsync(string user_id) {
-            this.getAssociatedEmailAsync(user_id, null);
-        }
-        
-        /// <remarks/>
-        public void getAssociatedEmailAsync(string user_id, object userState) {
-            if ((this.getAssociatedEmailOperationCompleted == null)) {
-                this.getAssociatedEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetAssociatedEmailOperationCompleted);
-            }
-            this.InvokeAsync("getAssociatedEmail", new object[] {
-                        user_id}, this.getAssociatedEmailOperationCompleted, userState);
-        }
-        
-        private void OngetAssociatedEmailOperationCompleted(object arg) {
-            if ((this.getAssociatedEmailCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getAssociatedEmailCompleted(this, new getAssociatedEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/setAssociatedEmail", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("successful")]
-        public bool setAssociatedEmail(string user_id, string email) {
-            object[] results = this.Invoke("setAssociatedEmail", new object[] {
-                        user_id,
-                        email});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void setAssociatedEmailAsync(string user_id, string email) {
-            this.setAssociatedEmailAsync(user_id, email, null);
-        }
-        
-        /// <remarks/>
-        public void setAssociatedEmailAsync(string user_id, string email, object userState) {
-            if ((this.setAssociatedEmailOperationCompleted == null)) {
-                this.setAssociatedEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetAssociatedEmailOperationCompleted);
-            }
-            this.InvokeAsync("setAssociatedEmail", new object[] {
-                        user_id,
-                        email}, this.setAssociatedEmailOperationCompleted, userState);
-        }
-        
-        private void OnsetAssociatedEmailOperationCompleted(object arg) {
-            if ((this.setAssociatedEmailCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.setAssociatedEmailCompleted(this, new setAssociatedEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/removeAssociatedEmail", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("successful")]
-        public bool removeAssociatedEmail(string email) {
-            object[] results = this.Invoke("removeAssociatedEmail", new object[] {
-                        email});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void removeAssociatedEmailAsync(string email) {
-            this.removeAssociatedEmailAsync(email, null);
-        }
-        
-        /// <remarks/>
-        public void removeAssociatedEmailAsync(string email, object userState) {
-            if ((this.removeAssociatedEmailOperationCompleted == null)) {
-                this.removeAssociatedEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnremoveAssociatedEmailOperationCompleted);
-            }
-            this.InvokeAsync("removeAssociatedEmail", new object[] {
-                        email}, this.removeAssociatedEmailOperationCompleted, userState);
-        }
-        
-        private void OnremoveAssociatedEmailOperationCompleted(object arg) {
-            if ((this.removeAssociatedEmailCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.removeAssociatedEmailCompleted(this, new removeAssociatedEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getSpaceUsedPercentage", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("space_used")]
-        public int getSpaceUsedPercentage(string user_id) {
-            object[] results = this.Invoke("getSpaceUsedPercentage", new object[] {
-                        user_id});
-            return ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getSpaceUsedPercentageAsync(string user_id) {
-            this.getSpaceUsedPercentageAsync(user_id, null);
-        }
-        
-        /// <remarks/>
-        public void getSpaceUsedPercentageAsync(string user_id, object userState) {
-            if ((this.getSpaceUsedPercentageOperationCompleted == null)) {
-                this.getSpaceUsedPercentageOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetSpaceUsedPercentageOperationCompleted);
-            }
-            this.InvokeAsync("getSpaceUsedPercentage", new object[] {
-                        user_id}, this.getSpaceUsedPercentageOperationCompleted, userState);
-        }
-        
-        private void OngetSpaceUsedPercentageOperationCompleted(object arg) {
-            if ((this.getSpaceUsedPercentageCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getSpaceUsedPercentageCompleted(this, new getSpaceUsedPercentageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getQuotaInfo", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("quota_info")]
-        public QuotaInfo getQuotaInfo(string user_id) {
-            object[] results = this.Invoke("getQuotaInfo", new object[] {
-                        user_id});
-            return ((QuotaInfo)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getQuotaInfoAsync(string user_id) {
-            this.getQuotaInfoAsync(user_id, null);
-        }
-        
-        /// <remarks/>
-        public void getQuotaInfoAsync(string user_id, object userState) {
-            if ((this.getQuotaInfoOperationCompleted == null)) {
-                this.getQuotaInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetQuotaInfoOperationCompleted);
-            }
-            this.InvokeAsync("getQuotaInfo", new object[] {
-                        user_id}, this.getQuotaInfoOperationCompleted, userState);
-        }
-        
-        private void OngetQuotaInfoOperationCompleted(object arg) {
-            if ((this.getQuotaInfoCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getQuotaInfoCompleted(this, new getQuotaInfoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getQuotaInfoByUserNum", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("quota_info")]
-        public QuotaInfo getQuotaInfoByUserNum(int user_num) {
-            object[] results = this.Invoke("getQuotaInfoByUserNum", new object[] {
+        public string WorkspaceSoapServicegetUploadWindowURL(string key, int user_num) {
+            object[] results = this.Invoke("WorkspaceSoapServicegetUploadWindowURL", new object[] {
+                        key,
                         user_num});
-            return ((QuotaInfo)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getQuotaInfoByUserNumAsync(int user_num) {
-            this.getQuotaInfoByUserNumAsync(user_num, null);
-        }
-        
-        /// <remarks/>
-        public void getQuotaInfoByUserNumAsync(int user_num, object userState) {
-            if ((this.getQuotaInfoByUserNumOperationCompleted == null)) {
-                this.getQuotaInfoByUserNumOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetQuotaInfoByUserNumOperationCompleted);
-            }
-            this.InvokeAsync("getQuotaInfoByUserNum", new object[] {
-                        user_num}, this.getQuotaInfoByUserNumOperationCompleted, userState);
-        }
-        
-        private void OngetQuotaInfoByUserNumOperationCompleted(object arg) {
-            if ((this.getQuotaInfoByUserNumCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getQuotaInfoByUserNumCompleted(this, new getQuotaInfoByUserNumCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/setVersionPreference", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("successful")]
-        public bool setVersionPreference(int user_num, int use_new_version) {
-            object[] results = this.Invoke("setVersionPreference", new object[] {
-                        user_num,
-                        use_new_version});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void setVersionPreferenceAsync(int user_num, int use_new_version) {
-            this.setVersionPreferenceAsync(user_num, use_new_version, null);
-        }
-        
-        /// <remarks/>
-        public void setVersionPreferenceAsync(int user_num, int use_new_version, object userState) {
-            if ((this.setVersionPreferenceOperationCompleted == null)) {
-                this.setVersionPreferenceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetVersionPreferenceOperationCompleted);
-            }
-            this.InvokeAsync("setVersionPreference", new object[] {
-                        user_num,
-                        use_new_version}, this.setVersionPreferenceOperationCompleted, userState);
-        }
-        
-        private void OnsetVersionPreferenceOperationCompleted(object arg) {
-            if ((this.setVersionPreferenceCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.setVersionPreferenceCompleted(this, new setVersionPreferenceCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getAppVersion", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("version")]
-        public string getAppVersion() {
-            object[] results = this.Invoke("getAppVersion", new object[0]);
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void getAppVersionAsync() {
-            this.getAppVersionAsync(null);
+        public void WorkspaceSoapServicegetUploadWindowURLAsync(string key, int user_num) {
+            this.WorkspaceSoapServicegetUploadWindowURLAsync(key, user_num, null);
         }
         
         /// <remarks/>
-        public void getAppVersionAsync(object userState) {
-            if ((this.getAppVersionOperationCompleted == null)) {
-                this.getAppVersionOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetAppVersionOperationCompleted);
+        public void WorkspaceSoapServicegetUploadWindowURLAsync(string key, int user_num, object userState) {
+            if ((this.WorkspaceSoapServicegetUploadWindowURLOperationCompleted == null)) {
+                this.WorkspaceSoapServicegetUploadWindowURLOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicegetUploadWindowURLOperationCompleted);
             }
-            this.InvokeAsync("getAppVersion", new object[0], this.getAppVersionOperationCompleted, userState);
+            this.InvokeAsync("WorkspaceSoapServicegetUploadWindowURL", new object[] {
+                        key,
+                        user_num}, this.WorkspaceSoapServicegetUploadWindowURLOperationCompleted, userState);
         }
         
-        private void OngetAppVersionOperationCompleted(object arg) {
-            if ((this.getAppVersionCompleted != null)) {
+        private void OnWorkspaceSoapServicegetUploadWindowURLOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicegetUploadWindowURLCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getAppVersionCompleted(this, new getAppVersionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.WorkspaceSoapServicegetUploadWindowURLCompleted(this, new WorkspaceSoapServicegetUploadWindowURLCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getScriptVersion", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("version")]
-        public string getScriptVersion() {
-            object[] results = this.Invoke("getScriptVersion", new object[0]);
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#createFolder", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
+        public void WorkspaceSoapServicecreateFolder(string key, int user_num, ref string folder_id, string folder_name) {
+            object[] results = this.Invoke("WorkspaceSoapServicecreateFolder", new object[] {
+                        key,
+                        user_num,
+                        folder_id,
+                        folder_name});
+            folder_id = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WorkspaceSoapServicecreateFolderAsync(string key, int user_num, string folder_id, string folder_name) {
+            this.WorkspaceSoapServicecreateFolderAsync(key, user_num, folder_id, folder_name, null);
+        }
+        
+        /// <remarks/>
+        public void WorkspaceSoapServicecreateFolderAsync(string key, int user_num, string folder_id, string folder_name, object userState) {
+            if ((this.WorkspaceSoapServicecreateFolderOperationCompleted == null)) {
+                this.WorkspaceSoapServicecreateFolderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicecreateFolderOperationCompleted);
+            }
+            this.InvokeAsync("WorkspaceSoapServicecreateFolder", new object[] {
+                        key,
+                        user_num,
+                        folder_id,
+                        folder_name}, this.WorkspaceSoapServicecreateFolderOperationCompleted, userState);
+        }
+        
+        private void OnWorkspaceSoapServicecreateFolderOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicecreateFolderCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WorkspaceSoapServicecreateFolderCompleted(this, new WorkspaceSoapServicecreateFolderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#renameFolder", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
+        public void WorkspaceSoapServicerenameFolder(string key, int user_num, string folder_id, ref string folder_name) {
+            object[] results = this.Invoke("WorkspaceSoapServicerenameFolder", new object[] {
+                        key,
+                        user_num,
+                        folder_id,
+                        folder_name});
+            folder_name = ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WorkspaceSoapServicerenameFolderAsync(string key, int user_num, string folder_id, string folder_name) {
+            this.WorkspaceSoapServicerenameFolderAsync(key, user_num, folder_id, folder_name, null);
+        }
+        
+        /// <remarks/>
+        public void WorkspaceSoapServicerenameFolderAsync(string key, int user_num, string folder_id, string folder_name, object userState) {
+            if ((this.WorkspaceSoapServicerenameFolderOperationCompleted == null)) {
+                this.WorkspaceSoapServicerenameFolderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicerenameFolderOperationCompleted);
+            }
+            this.InvokeAsync("WorkspaceSoapServicerenameFolder", new object[] {
+                        key,
+                        user_num,
+                        folder_id,
+                        folder_name}, this.WorkspaceSoapServicerenameFolderOperationCompleted, userState);
+        }
+        
+        private void OnWorkspaceSoapServicerenameFolderOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicerenameFolderCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WorkspaceSoapServicerenameFolderCompleted(this, new WorkspaceSoapServicerenameFolderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#getFileFromOFF", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
+        [return: System.Xml.Serialization.SoapElementAttribute("download_url")]
+        public string WorkspaceSoapServicegetFileFromOFF(string key, int user_num, string file_id) {
+            object[] results = this.Invoke("WorkspaceSoapServicegetFileFromOFF", new object[] {
+                        key,
+                        user_num,
+                        file_id});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void getScriptVersionAsync() {
-            this.getScriptVersionAsync(null);
+        public void WorkspaceSoapServicegetFileFromOFFAsync(string key, int user_num, string file_id) {
+            this.WorkspaceSoapServicegetFileFromOFFAsync(key, user_num, file_id, null);
         }
         
         /// <remarks/>
-        public void getScriptVersionAsync(object userState) {
-            if ((this.getScriptVersionOperationCompleted == null)) {
-                this.getScriptVersionOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetScriptVersionOperationCompleted);
+        public void WorkspaceSoapServicegetFileFromOFFAsync(string key, int user_num, string file_id, object userState) {
+            if ((this.WorkspaceSoapServicegetFileFromOFFOperationCompleted == null)) {
+                this.WorkspaceSoapServicegetFileFromOFFOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicegetFileFromOFFOperationCompleted);
             }
-            this.InvokeAsync("getScriptVersion", new object[0], this.getScriptVersionOperationCompleted, userState);
+            this.InvokeAsync("WorkspaceSoapServicegetFileFromOFF", new object[] {
+                        key,
+                        user_num,
+                        file_id}, this.WorkspaceSoapServicegetFileFromOFFOperationCompleted, userState);
         }
         
-        private void OngetScriptVersionOperationCompleted(object arg) {
-            if ((this.getScriptVersionCompleted != null)) {
+        private void OnWorkspaceSoapServicegetFileFromOFFOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicegetFileFromOFFCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getScriptVersionCompleted(this, new getScriptVersionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.WorkspaceSoapServicegetFileFromOFFCompleted(this, new WorkspaceSoapServicegetFileFromOFFCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getMostRecentlyAccessedFiles", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#sendFileToOFF", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
+        [return: System.Xml.Serialization.SoapElementAttribute("file_id")]
+        public string WorkspaceSoapServicesendFileToOFF(string key, int user_num, string folder_id, string file_name, string file_url) {
+            object[] results = this.Invoke("WorkspaceSoapServicesendFileToOFF", new object[] {
+                        key,
+                        user_num,
+                        folder_id,
+                        file_name,
+                        file_url});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WorkspaceSoapServicesendFileToOFFAsync(string key, int user_num, string folder_id, string file_name, string file_url) {
+            this.WorkspaceSoapServicesendFileToOFFAsync(key, user_num, folder_id, file_name, file_url, null);
+        }
+        
+        /// <remarks/>
+        public void WorkspaceSoapServicesendFileToOFFAsync(string key, int user_num, string folder_id, string file_name, string file_url, object userState) {
+            if ((this.WorkspaceSoapServicesendFileToOFFOperationCompleted == null)) {
+                this.WorkspaceSoapServicesendFileToOFFOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicesendFileToOFFOperationCompleted);
+            }
+            this.InvokeAsync("WorkspaceSoapServicesendFileToOFF", new object[] {
+                        key,
+                        user_num,
+                        folder_id,
+                        file_name,
+                        file_url}, this.WorkspaceSoapServicesendFileToOFFOperationCompleted, userState);
+        }
+        
+        private void OnWorkspaceSoapServicesendFileToOFFOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicesendFileToOFFCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WorkspaceSoapServicesendFileToOFFCompleted(this, new WorkspaceSoapServicesendFileToOFFCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#makeFilePublic", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
+        [return: System.Xml.Serialization.SoapElementAttribute("public_url")]
+        public string WorkspaceSoapServicemakeFilePublic(string key, int user_num, string file_id) {
+            object[] results = this.Invoke("WorkspaceSoapServicemakeFilePublic", new object[] {
+                        key,
+                        user_num,
+                        file_id});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WorkspaceSoapServicemakeFilePublicAsync(string key, int user_num, string file_id) {
+            this.WorkspaceSoapServicemakeFilePublicAsync(key, user_num, file_id, null);
+        }
+        
+        /// <remarks/>
+        public void WorkspaceSoapServicemakeFilePublicAsync(string key, int user_num, string file_id, object userState) {
+            if ((this.WorkspaceSoapServicemakeFilePublicOperationCompleted == null)) {
+                this.WorkspaceSoapServicemakeFilePublicOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicemakeFilePublicOperationCompleted);
+            }
+            this.InvokeAsync("WorkspaceSoapServicemakeFilePublic", new object[] {
+                        key,
+                        user_num,
+                        file_id}, this.WorkspaceSoapServicemakeFilePublicOperationCompleted, userState);
+        }
+        
+        private void OnWorkspaceSoapServicemakeFilePublicOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicemakeFilePublicCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WorkspaceSoapServicemakeFilePublicCompleted(this, new WorkspaceSoapServicemakeFilePublicCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#getFolderList", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
+        [return: System.Xml.Serialization.SoapElementAttribute("folders")]
+        public Folder[] WorkspaceSoapServicegetFolderList(string key, int user_num, string folder_id) {
+            object[] results = this.Invoke("WorkspaceSoapServicegetFolderList", new object[] {
+                        key,
+                        user_num,
+                        folder_id});
+            return ((Folder[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WorkspaceSoapServicegetFolderListAsync(string key, int user_num, string folder_id) {
+            this.WorkspaceSoapServicegetFolderListAsync(key, user_num, folder_id, null);
+        }
+        
+        /// <remarks/>
+        public void WorkspaceSoapServicegetFolderListAsync(string key, int user_num, string folder_id, object userState) {
+            if ((this.WorkspaceSoapServicegetFolderListOperationCompleted == null)) {
+                this.WorkspaceSoapServicegetFolderListOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicegetFolderListOperationCompleted);
+            }
+            this.InvokeAsync("WorkspaceSoapServicegetFolderList", new object[] {
+                        key,
+                        user_num,
+                        folder_id}, this.WorkspaceSoapServicegetFolderListOperationCompleted, userState);
+        }
+        
+        private void OnWorkspaceSoapServicegetFolderListOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicegetFolderListCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WorkspaceSoapServicegetFolderListCompleted(this, new WorkspaceSoapServicegetFolderListCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:OFFSoapNS#getFileList", RequestNamespace="urn:OFFSoapNS", ResponseNamespace="urn:OFFSoapNS")]
         [return: System.Xml.Serialization.SoapElementAttribute("files")]
-        public AccessedFile[] getMostRecentlyAccessedFiles(int user_num, int limit) {
-            object[] results = this.Invoke("getMostRecentlyAccessedFiles", new object[] {
+        public File[] WorkspaceSoapServicegetFileList(string key, int user_num, string folder_id) {
+            object[] results = this.Invoke("WorkspaceSoapServicegetFileList", new object[] {
+                        key,
                         user_num,
-                        limit});
-            return ((AccessedFile[])(results[0]));
+                        folder_id});
+            return ((File[])(results[0]));
         }
         
         /// <remarks/>
-        public void getMostRecentlyAccessedFilesAsync(int user_num, int limit) {
-            this.getMostRecentlyAccessedFilesAsync(user_num, limit, null);
+        public void WorkspaceSoapServicegetFileListAsync(string key, int user_num, string folder_id) {
+            this.WorkspaceSoapServicegetFileListAsync(key, user_num, folder_id, null);
         }
         
         /// <remarks/>
-        public void getMostRecentlyAccessedFilesAsync(int user_num, int limit, object userState) {
-            if ((this.getMostRecentlyAccessedFilesOperationCompleted == null)) {
-                this.getMostRecentlyAccessedFilesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetMostRecentlyAccessedFilesOperationCompleted);
+        public void WorkspaceSoapServicegetFileListAsync(string key, int user_num, string folder_id, object userState) {
+            if ((this.WorkspaceSoapServicegetFileListOperationCompleted == null)) {
+                this.WorkspaceSoapServicegetFileListOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWorkspaceSoapServicegetFileListOperationCompleted);
             }
-            this.InvokeAsync("getMostRecentlyAccessedFiles", new object[] {
+            this.InvokeAsync("WorkspaceSoapServicegetFileList", new object[] {
+                        key,
                         user_num,
-                        limit}, this.getMostRecentlyAccessedFilesOperationCompleted, userState);
+                        folder_id}, this.WorkspaceSoapServicegetFileListOperationCompleted, userState);
         }
         
-        private void OngetMostRecentlyAccessedFilesOperationCompleted(object arg) {
-            if ((this.getMostRecentlyAccessedFilesCompleted != null)) {
+        private void OnWorkspaceSoapServicegetFileListOperationCompleted(object arg) {
+            if ((this.WorkspaceSoapServicegetFileListCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getMostRecentlyAccessedFilesCompleted(this, new getMostRecentlyAccessedFilesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://dev.stgoff.com/soap/private/OFFService.php/getMostCommonlyAccessedFiles", RequestNamespace="OFFSoapNS", ResponseNamespace="OFFSoapNS")]
-        [return: System.Xml.Serialization.SoapElementAttribute("files")]
-        public AccessedFile[] getMostCommonlyAccessedFiles(int user_num, int limit) {
-            object[] results = this.Invoke("getMostCommonlyAccessedFiles", new object[] {
-                        user_num,
-                        limit});
-            return ((AccessedFile[])(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getMostCommonlyAccessedFilesAsync(int user_num, int limit) {
-            this.getMostCommonlyAccessedFilesAsync(user_num, limit, null);
-        }
-        
-        /// <remarks/>
-        public void getMostCommonlyAccessedFilesAsync(int user_num, int limit, object userState) {
-            if ((this.getMostCommonlyAccessedFilesOperationCompleted == null)) {
-                this.getMostCommonlyAccessedFilesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetMostCommonlyAccessedFilesOperationCompleted);
-            }
-            this.InvokeAsync("getMostCommonlyAccessedFiles", new object[] {
-                        user_num,
-                        limit}, this.getMostCommonlyAccessedFilesOperationCompleted, userState);
-        }
-        
-        private void OngetMostCommonlyAccessedFilesOperationCompleted(object arg) {
-            if ((this.getMostCommonlyAccessedFilesCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getMostCommonlyAccessedFilesCompleted(this, new getMostCommonlyAccessedFilesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.WorkspaceSoapServicegetFileListCompleted(this, new WorkspaceSoapServicegetFileListCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -771,273 +596,101 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl.OFFService {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="OFFSoapNS")]
-    public partial class File {
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:OFFSoapNS")]
+    public partial class User {
         
-        private int file_numField;
+        private float user_numField;
         
-        private int folder_numField;
+        private string user_idField;
         
-        private string file_nameField;
+        private string typeField;
         
-        private string file_sizeField;
+        private string statusField;
         
-        private string modifiedField;
+        private string associated_emailField;
         
-        private int flagsField;
+        private string expiration_dateField;
         
-        private string hashField;
+        private string deletion_dateField;
         
-        private string share_idField;
+        private float quota_bytesField;
         
-        private int file_size_trueField;
+        private float used_bytesField;
         
-        private string urlField;
-        
-        private string expirationField;
-        
-        private int remaining_downloadsField;
+        private float home_folder_idField;
         
         /// <remarks/>
-        public int file_num {
+        public float user_num {
             get {
-                return this.file_numField;
+                return this.user_numField;
             }
             set {
-                this.file_numField = value;
+                this.user_numField = value;
             }
         }
         
         /// <remarks/>
-        public int folder_num {
+        public string user_id {
             get {
-                return this.folder_numField;
+                return this.user_idField;
             }
             set {
-                this.folder_numField = value;
+                this.user_idField = value;
             }
         }
         
         /// <remarks/>
-        public string file_name {
+        public string type {
             get {
-                return this.file_nameField;
+                return this.typeField;
             }
             set {
-                this.file_nameField = value;
+                this.typeField = value;
             }
         }
         
         /// <remarks/>
-        public string file_size {
+        public string status {
             get {
-                return this.file_sizeField;
+                return this.statusField;
             }
             set {
-                this.file_sizeField = value;
+                this.statusField = value;
             }
         }
         
         /// <remarks/>
-        public string modified {
+        public string associated_email {
             get {
-                return this.modifiedField;
+                return this.associated_emailField;
             }
             set {
-                this.modifiedField = value;
+                this.associated_emailField = value;
             }
         }
         
         /// <remarks/>
-        public int flags {
+        public string expiration_date {
             get {
-                return this.flagsField;
+                return this.expiration_dateField;
             }
             set {
-                this.flagsField = value;
+                this.expiration_dateField = value;
             }
         }
         
         /// <remarks/>
-        public string hash {
+        public string deletion_date {
             get {
-                return this.hashField;
+                return this.deletion_dateField;
             }
             set {
-                this.hashField = value;
+                this.deletion_dateField = value;
             }
         }
         
         /// <remarks/>
-        public string share_id {
-            get {
-                return this.share_idField;
-            }
-            set {
-                this.share_idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int file_size_true {
-            get {
-                return this.file_size_trueField;
-            }
-            set {
-                this.file_size_trueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string url {
-            get {
-                return this.urlField;
-            }
-            set {
-                this.urlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string expiration {
-            get {
-                return this.expirationField;
-            }
-            set {
-                this.expirationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int remaining_downloads {
-            get {
-                return this.remaining_downloadsField;
-            }
-            set {
-                this.remaining_downloadsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="OFFSoapNS")]
-    public partial class AccessedFile {
-        
-        private int file_numField;
-        
-        private int folder_numField;
-        
-        private string file_nameField;
-        
-        private string file_sizeField;
-        
-        private string modifiedField;
-        
-        private int flagsField;
-        
-        private int access_countField;
-        
-        private string access_timeField;
-        
-        /// <remarks/>
-        public int file_num {
-            get {
-                return this.file_numField;
-            }
-            set {
-                this.file_numField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int folder_num {
-            get {
-                return this.folder_numField;
-            }
-            set {
-                this.folder_numField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string file_name {
-            get {
-                return this.file_nameField;
-            }
-            set {
-                this.file_nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string file_size {
-            get {
-                return this.file_sizeField;
-            }
-            set {
-                this.file_sizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string modified {
-            get {
-                return this.modifiedField;
-            }
-            set {
-                this.modifiedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int flags {
-            get {
-                return this.flagsField;
-            }
-            set {
-                this.flagsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int access_count {
-            get {
-                return this.access_countField;
-            }
-            set {
-                this.access_countField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string access_time {
-            get {
-                return this.access_timeField;
-            }
-            set {
-                this.access_timeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="OFFSoapNS")]
-    public partial class QuotaInfo {
-        
-        private string quota_bytesField;
-        
-        private string used_bytesField;
-        
-        /// <remarks/>
-        public string quota_bytes {
+        public float quota_bytes {
             get {
                 return this.quota_bytesField;
             }
@@ -1047,7 +700,7 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl.OFFService {
         }
         
         /// <remarks/>
-        public string used_bytes {
+        public float used_bytes {
             get {
                 return this.used_bytesField;
             }
@@ -1055,125 +708,333 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl.OFFService {
                 this.used_bytesField = value;
             }
         }
+        
+        /// <remarks/>
+        public float home_folder_id {
+            get {
+                return this.home_folder_idField;
+            }
+            set {
+                this.home_folder_idField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getUserNumByEmailCompletedEventHandler(object sender, getUserNumByEmailCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getUserNumByEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:OFFSoapNS")]
+    public partial class File {
         
-        private object[] results;
+        private string file_idField;
         
-        internal getUserNumByEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
+        private string folder_idField;
+        
+        private string file_nameField;
+        
+        private string file_sizeField;
+        
+        private string modifiedField;
+        
+        private float flagsField;
+        
+        private string large_iconField;
+        
+        private string small_iconField;
+        
+        /// <remarks/>
+        public string file_id {
+            get {
+                return this.file_idField;
+            }
+            set {
+                this.file_idField = value;
+            }
         }
         
         /// <remarks/>
-        public int Result {
+        public string folder_id {
             get {
-                this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
+                return this.folder_idField;
+            }
+            set {
+                this.folder_idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string file_name {
+            get {
+                return this.file_nameField;
+            }
+            set {
+                this.file_nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string file_size {
+            get {
+                return this.file_sizeField;
+            }
+            set {
+                this.file_sizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string modified {
+            get {
+                return this.modifiedField;
+            }
+            set {
+                this.modifiedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public float flags {
+            get {
+                return this.flagsField;
+            }
+            set {
+                this.flagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string large_icon {
+            get {
+                return this.large_iconField;
+            }
+            set {
+                this.large_iconField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string small_icon {
+            get {
+                return this.small_iconField;
+            }
+            set {
+                this.small_iconField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:OFFSoapNS")]
+    public partial class Folder {
+        
+        private string folder_idField;
+        
+        private string parent_folder_idField;
+        
+        private string folder_nameField;
+        
+        private string modifiedField;
+        
+        private float used_countField;
+        
+        private string large_iconField;
+        
+        private string small_iconField;
+        
+        /// <remarks/>
+        public string folder_id {
+            get {
+                return this.folder_idField;
+            }
+            set {
+                this.folder_idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string parent_folder_id {
+            get {
+                return this.parent_folder_idField;
+            }
+            set {
+                this.parent_folder_idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string folder_name {
+            get {
+                return this.folder_nameField;
+            }
+            set {
+                this.folder_nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string modified {
+            get {
+                return this.modifiedField;
+            }
+            set {
+                this.modifiedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public float used_count {
+            get {
+                return this.used_countField;
+            }
+            set {
+                this.used_countField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string large_icon {
+            get {
+                return this.large_iconField;
+            }
+            set {
+                this.large_iconField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string small_icon {
+            get {
+                return this.small_iconField;
+            }
+            set {
+                this.small_iconField = value;
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getUserNumByUserIDCompletedEventHandler(object sender, getUserNumByUserIDCompletedEventArgs e);
+    public delegate void WorkspaceSoapServicegetUserByEmailCompletedEventHandler(object sender, WorkspaceSoapServicegetUserByEmailCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getUserNumByUserIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WorkspaceSoapServicegetUserByEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getUserNumByUserIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WorkspaceSoapServicegetUserByEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public int Result {
+        public User Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
+                return ((User)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getUserNumWithCredentialsCompletedEventHandler(object sender, getUserNumWithCredentialsCompletedEventArgs e);
+    public delegate void WorkspaceSoapServicegetUserByUserIDCompletedEventHandler(object sender, WorkspaceSoapServicegetUserByUserIDCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getUserNumWithCredentialsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WorkspaceSoapServicegetUserByUserIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getUserNumWithCredentialsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WorkspaceSoapServicegetUserByUserIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public int Result {
+        public User Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
+                return ((User)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getFileCompletedEventHandler(object sender, getFileCompletedEventArgs e);
+    public delegate void WorkspaceSoapServicegetUserByCredentialsCompletedEventHandler(object sender, WorkspaceSoapServicegetUserByCredentialsCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getFileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WorkspaceSoapServicegetUserByCredentialsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getFileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WorkspaceSoapServicegetUserByCredentialsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public File Result {
+        public User Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((File)(this.results[0]));
+                return ((User)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getBackdoorCompletedEventHandler(object sender, getBackdoorCompletedEventArgs e);
+    public delegate void WorkspaceSoapServicegetUserByUserNumCompletedEventHandler(object sender, WorkspaceSoapServicegetUserByUserNumCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getBackdoorCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WorkspaceSoapServicegetUserByUserNumCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getBackdoorCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WorkspaceSoapServicegetUserByUserNumCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public User Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((User)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void WorkspaceSoapServicegetLoginURLCompletedEventHandler(object sender, WorkspaceSoapServicegetLoginURLCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WorkspaceSoapServicegetLoginURLCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WorkspaceSoapServicegetLoginURLCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -1189,43 +1050,17 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl.OFFService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getSharedFileInfoCompletedEventHandler(object sender, getSharedFileInfoCompletedEventArgs e);
+    public delegate void WorkspaceSoapServicegetUploadWindowURLCompletedEventHandler(object sender, WorkspaceSoapServicegetUploadWindowURLCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getSharedFileInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WorkspaceSoapServicegetUploadWindowURLCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getSharedFileInfoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public File Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((File)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getSaveToOFFURLCompletedEventHandler(object sender, getSaveToOFFURLCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getSaveToOFFURLCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getSaveToOFFURLCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WorkspaceSoapServicegetUploadWindowURLCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -1241,17 +1076,69 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl.OFFService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getSaveToOFFURLPodCompletedEventHandler(object sender, getSaveToOFFURLPodCompletedEventArgs e);
+    public delegate void WorkspaceSoapServicecreateFolderCompletedEventHandler(object sender, WorkspaceSoapServicecreateFolderCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getSaveToOFFURLPodCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WorkspaceSoapServicecreateFolderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getSaveToOFFURLPodCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WorkspaceSoapServicecreateFolderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string folder_id {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void WorkspaceSoapServicerenameFolderCompletedEventHandler(object sender, WorkspaceSoapServicerenameFolderCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WorkspaceSoapServicerenameFolderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WorkspaceSoapServicerenameFolderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string folder_name {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void WorkspaceSoapServicegetFileFromOFFCompletedEventHandler(object sender, WorkspaceSoapServicegetFileFromOFFCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WorkspaceSoapServicegetFileFromOFFCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WorkspaceSoapServicegetFileFromOFFCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -1267,17 +1154,17 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl.OFFService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getAssociatedEmailCompletedEventHandler(object sender, getAssociatedEmailCompletedEventArgs e);
+    public delegate void WorkspaceSoapServicesendFileToOFFCompletedEventHandler(object sender, WorkspaceSoapServicesendFileToOFFCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getAssociatedEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WorkspaceSoapServicesendFileToOFFCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getAssociatedEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WorkspaceSoapServicesendFileToOFFCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -1293,173 +1180,17 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl.OFFService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void setAssociatedEmailCompletedEventHandler(object sender, setAssociatedEmailCompletedEventArgs e);
+    public delegate void WorkspaceSoapServicemakeFilePublicCompletedEventHandler(object sender, WorkspaceSoapServicemakeFilePublicCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class setAssociatedEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WorkspaceSoapServicemakeFilePublicCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal setAssociatedEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void removeAssociatedEmailCompletedEventHandler(object sender, removeAssociatedEmailCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class removeAssociatedEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal removeAssociatedEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getSpaceUsedPercentageCompletedEventHandler(object sender, getSpaceUsedPercentageCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getSpaceUsedPercentageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getSpaceUsedPercentageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public int Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getQuotaInfoCompletedEventHandler(object sender, getQuotaInfoCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getQuotaInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getQuotaInfoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public QuotaInfo Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((QuotaInfo)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getQuotaInfoByUserNumCompletedEventHandler(object sender, getQuotaInfoByUserNumCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getQuotaInfoByUserNumCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getQuotaInfoByUserNumCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public QuotaInfo Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((QuotaInfo)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void setVersionPreferenceCompletedEventHandler(object sender, setVersionPreferenceCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class setVersionPreferenceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal setVersionPreferenceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getAppVersionCompletedEventHandler(object sender, getAppVersionCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getAppVersionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getAppVersionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WorkspaceSoapServicemakeFilePublicCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -1475,78 +1206,52 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl.OFFService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getScriptVersionCompletedEventHandler(object sender, getScriptVersionCompletedEventArgs e);
+    public delegate void WorkspaceSoapServicegetFolderListCompletedEventHandler(object sender, WorkspaceSoapServicegetFolderListCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getScriptVersionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WorkspaceSoapServicegetFolderListCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getScriptVersionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WorkspaceSoapServicegetFolderListCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public string Result {
+        public Folder[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((Folder[])(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getMostRecentlyAccessedFilesCompletedEventHandler(object sender, getMostRecentlyAccessedFilesCompletedEventArgs e);
+    public delegate void WorkspaceSoapServicegetFileListCompletedEventHandler(object sender, WorkspaceSoapServicegetFileListCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getMostRecentlyAccessedFilesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WorkspaceSoapServicegetFileListCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getMostRecentlyAccessedFilesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WorkspaceSoapServicegetFileListCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public AccessedFile[] Result {
+        public File[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((AccessedFile[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getMostCommonlyAccessedFilesCompletedEventHandler(object sender, getMostCommonlyAccessedFilesCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getMostCommonlyAccessedFilesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getMostCommonlyAccessedFilesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public AccessedFile[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((AccessedFile[])(this.results[0]));
+                return ((File[])(this.results[0]));
             }
         }
     }

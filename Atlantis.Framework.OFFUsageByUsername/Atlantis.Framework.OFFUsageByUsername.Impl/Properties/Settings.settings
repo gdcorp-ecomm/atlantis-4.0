@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Atlantis_Framework_OFFUsageByUsername_Impl_OFFService_OFFSoap" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://dev.stgoff.com/soap/private/OFFService.php?version=1</Value>
+      <Value Profile="(Default)">http://devoff.com/internal/workspace_soap.php</Value>
     </Setting>
   </Settings>
 </SettingsFile>

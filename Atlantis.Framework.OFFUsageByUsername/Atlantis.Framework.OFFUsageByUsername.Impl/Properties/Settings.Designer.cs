@@ -26,7 +26,7 @@ namespace Atlantis.Framework.OFFUsageByUsername.Impl.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://dev.stgoff.com/soap/private/OFFService.php?version=1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://devoff.com/internal/workspace_soap.php")]
         public string Atlantis_Framework_OFFUsageByUsername_Impl_OFFService_OFFSoap {
             get {
                 return ((string)(this["Atlantis_Framework_OFFUsageByUsername_Impl_OFFService_OFFSoap"]));

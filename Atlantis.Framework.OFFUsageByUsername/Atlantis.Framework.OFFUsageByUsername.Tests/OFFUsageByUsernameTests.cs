@@ -28,7 +28,8 @@ namespace Atlantis.Framework.OFFUsageByUsername.Tests
 
       Assert.IsNotNull(response);
       Assert.IsNull(response.GetException());
-      Assert.IsTrue(response.UsagePercent >= 0);
+      Assert.IsTrue(response.SpaceAvailable >= 0);
+      Assert.IsTrue(response.SpaceUsed >= 0);
     }
   }
 }

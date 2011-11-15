@@ -5,7 +5,8 @@ namespace Atlantis.Framework.OFFUsageByUsername.Interface
 {
   public class OFFUsageByUsernameResponseData : IResponseData
   {
-    public int UsagePercent { get; private set; }
+    public float SpaceAvailable { get; private set; }
+    public float SpaceUsed { get; private set; }
     public AtlantisException AtlantisException { get; private set; }
 
     public OFFUsageByUsernameResponseData() { }
@@ -13,12 +14,14 @@ namespace Atlantis.Framework.OFFUsageByUsername.Interface
     public OFFUsageByUsernameResponseData(AtlantisException atlEx)
     {
       AtlantisException = atlEx;
-      UsagePercent = -1;
+      SpaceAvailable = -1;
+      SpaceUsed = -1;
     }
 
-    public OFFUsageByUsernameResponseData(int usagePercent)
+    public OFFUsageByUsernameResponseData(float spaceAvailable, float spaceUsed)
     {
-      UsagePercent = usagePercent;
+      SpaceAvailable = spaceAvailable;
+      SpaceUsed = spaceUsed;
     }
     
     public string ToXML()

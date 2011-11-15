@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:OFFSoapNS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:OFFSoapNS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:OFFSoapNS">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+      <xsd:complexType name="StringArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="User">
+        <xsd:all>
+          <xsd:element name="user_num" type="xsd:float" />
+          <xsd:element name="user_id" type="xsd:string" />
+          <xsd:element name="type" type="xsd:string" />
+          <xsd:element name="status" type="xsd:string" />
+          <xsd:element name="associated_email" type="xsd:string" />
+          <xsd:element name="expiration_date" type="xsd:string" />
+          <xsd:element name="deletion_date" type="xsd:string" />
+          <xsd:element name="quota_bytes" type="xsd:float" />
+          <xsd:element name="used_bytes" type="xsd:float" />
+          <xsd:element name="home_folder_id" type="xsd:float" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="File">
+        <xsd:all>
+          <xsd:element name="file_id" type="xsd:string" />
+          <xsd:element name="folder_id" type="xsd:string" />
+          <xsd:element name="file_name" type="xsd:string" />
+          <xsd:element name="file_size" type="xsd:string" />
+          <xsd:element name="modified" type="xsd:string" />
+          <xsd:element name="flags" type="xsd:float" />
+          <xsd:element name="large_icon" type="xsd:string" />
+          <xsd:element name="small_icon" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="FileArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:File[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Folder">
+        <xsd:all>
+          <xsd:element name="folder_id" type="xsd:string" />
+          <xsd:element name="parent_folder_id" type="xsd:string" />
+          <xsd:element name="folder_name" type="xsd:string" />
+          <xsd:element name="modified" type="xsd:string" />
+          <xsd:element name="used_count" type="xsd:float" />
+          <xsd:element name="large_icon" type="xsd:string" />
+          <xsd:element name="small_icon" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="FolderArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:Folder[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="WorkspaceSoapService..getUserByEmailRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="email" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getUserByEmailResponse">
+    <wsdl:part name="user" type="tns:User" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getUserByUserIDRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getUserByUserIDResponse">
+    <wsdl:part name="user" type="tns:User" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getUserByCredentialsRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_id" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getUserByCredentialsResponse">
+    <wsdl:part name="user" type="tns:User" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getUserByUserNumRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_num" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getUserByUserNumResponse">
+    <wsdl:part name="user" type="tns:User" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getLoginURLRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_num" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getLoginURLResponse">
+    <wsdl:part name="url" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getUploadWindowURLRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_num" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getUploadWindowURLResponse">
+    <wsdl:part name="url" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..createFolderRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_num" type="xsd:int" />
+    <wsdl:part name="folder_id" type="xsd:string" />
+    <wsdl:part name="folder_name" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..createFolderResponse">
+    <wsdl:part name="folder_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..renameFolderRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_num" type="xsd:int" />
+    <wsdl:part name="folder_id" type="xsd:string" />
+    <wsdl:part name="folder_name" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..renameFolderResponse">
+    <wsdl:part name="folder_name" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getFileFromOFFRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_num" type="xsd:int" />
+    <wsdl:part name="file_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getFileFromOFFResponse">
+    <wsdl:part name="download_url" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..sendFileToOFFRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_num" type="xsd:int" />
+    <wsdl:part name="folder_id" type="xsd:string" />
+    <wsdl:part name="file_name" type="xsd:string" />
+    <wsdl:part name="file_url" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..sendFileToOFFResponse">
+    <wsdl:part name="file_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..makeFilePublicRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_num" type="xsd:int" />
+    <wsdl:part name="file_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..makeFilePublicResponse">
+    <wsdl:part name="public_url" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getFolderListRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_num" type="xsd:int" />
+    <wsdl:part name="folder_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getFolderListResponse">
+    <wsdl:part name="folders" type="tns:FolderArray" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getFileListRequest">
+    <wsdl:part name="key" type="xsd:string" />
+    <wsdl:part name="user_num" type="xsd:int" />
+    <wsdl:part name="folder_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="WorkspaceSoapService..getFileListResponse">
+    <wsdl:part name="files" type="tns:FileArray" />
+  </wsdl:message>
+  <wsdl:portType name="OFFSoapPortType">
+    <wsdl:operation name="WorkspaceSoapService..getUserByEmail">
+      <documentation>This function gets a user object based on a provided email address.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..getUserByEmailRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..getUserByEmailResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getUserByUserID">
+      <documentation>This function gets a user object based on a provided user id (i.e. user name).</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..getUserByUserIDRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..getUserByUserIDResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getUserByCredentials">
+      <documentation>This function gets a user object based on a provided user id (i.e. user name) and password.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..getUserByCredentialsRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..getUserByCredentialsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getUserByUserNum">
+      <documentation>This function gets a user object based on a user number.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..getUserByUserNumRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..getUserByUserNumResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getLoginURL">
+      <documentation>This function gets a direct login / transfer URL when given a user number. The URL allows a user to bypass the login page. It is useful for switching between apps for example.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..getLoginURLRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..getLoginURLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getUploadWindowURL">
+      <documentation>This function provides Javascript to load an OFF upload window popup when given a user number. The window provides full file browsing and upload services to OFF and closes itself upon completion.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..getUploadWindowURLRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..getUploadWindowURLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..createFolder">
+      <documentation>This function creates a folder in OFF for a given user number. The folder is created in the given folder_id using the given folder_name. If successful a folder_id is returned.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..createFolderRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..createFolderResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..renameFolder">
+      <documentation>This function renames a folder in OFF for a given user number. The folder_id given is renamed to the provided folder_name value. If successful the new folder_name is returned.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..renameFolderRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..renameFolderResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getFileFromOFF">
+      <documentation>This function returns a direct download URL for a given user number and file number. It is intended to be internal only, meaning that the download URL is NOT supposed to customer facing. This is for internal tools/sites to consume only. The download URL is a direct reference to our REST service.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..getFileFromOFFRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..getFileFromOFFResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..sendFileToOFF">
+      <documentation>This function sends a file to OFF. A user number, folder id of the file destination, file name and a URL location of the file must be provided. If successful the newly created file id is returned.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..sendFileToOFFRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..sendFileToOFFResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..makeFilePublic">
+      <documentation>This function makes a file publicly accessible in OFF. A user number and file id are required as input. If successful the public URL is returned. This URL should be passed on to the user.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..makeFilePublicRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..makeFilePublicResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getFolderList">
+      <documentation>This function retrieves an array of folder objects (and not files) within a provided folder id / user number combo.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..getFolderListRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..getFolderListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getFileList">
+      <documentation>This function retrieves an array of file objects (and not folders) within a provided folder id / user number combo.</documentation>
+      <wsdl:input message="tns:WorkspaceSoapService..getFileListRequest" />
+      <wsdl:output message="tns:WorkspaceSoapService..getFileListResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OFFSoapBinding" type="tns:OFFSoapPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="WorkspaceSoapService..getUserByEmail">
+      <soap:operation soapAction="urn:OFFSoapNS#getUserByEmail" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getUserByUserID">
+      <soap:operation soapAction="urn:OFFSoapNS#getUserByUserID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getUserByCredentials">
+      <soap:operation soapAction="urn:OFFSoapNS#getUserByCredentials" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getUserByUserNum">
+      <soap:operation soapAction="urn:OFFSoapNS#getUserByUserNum" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getLoginURL">
+      <soap:operation soapAction="urn:OFFSoapNS#getLoginURL" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getUploadWindowURL">
+      <soap:operation soapAction="urn:OFFSoapNS#getUploadWindowURL" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..createFolder">
+      <soap:operation soapAction="urn:OFFSoapNS#createFolder" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..renameFolder">
+      <soap:operation soapAction="urn:OFFSoapNS#renameFolder" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getFileFromOFF">
+      <soap:operation soapAction="urn:OFFSoapNS#getFileFromOFF" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..sendFileToOFF">
+      <soap:operation soapAction="urn:OFFSoapNS#sendFileToOFF" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..makeFilePublic">
+      <soap:operation soapAction="urn:OFFSoapNS#makeFilePublic" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getFolderList">
+      <soap:operation soapAction="urn:OFFSoapNS#getFolderList" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WorkspaceSoapService..getFileList">
+      <soap:operation soapAction="urn:OFFSoapNS#getFileList" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:OFFSoapNS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OFFSoap">
+    <wsdl:port name="OFFSoapPort" binding="tns:OFFSoapBinding">
+      <soap:address location="http://devoff.com/internal/workspace_soap.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

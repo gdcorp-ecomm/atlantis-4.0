@@ -9,7 +9,14 @@ namespace Atlantis.Framework.EcommClientCertCheck.Impl
 {
   public class EcommClientCertCheckRequest : IRequest
   {
+    private const string CACHE_KEY = "Atlantis.Framework.EcommClientCertCheck.EcommClientCertCheckResponseData|{0}|{1}|{2}|{3}";
     private const string CERT_SUBJECT_FORMAT = "O={0}, OU={1}, CN={2}";
+    private const string APPLICATION_NAME_FORMAT = "{0}:{1}";
+
+
+    private EcommClientCertCheckRequestData RequestData { get; set; }
+
+    private WsConfigElement ConfigElement { get; set; }
 
     /// <summary>
     /// The certificates are always entered in the database in the O={0}, OU={1}, CN={2} order.  We must make sure to pass the subject this way.
@@ -88,12 +95,9 @@ namespace Atlantis.Framework.EcommClientCertCheck.Impl
       return clientCertificate;
     }
 
-    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
+    private IResponseData GetRequestForCache(string cacheKey)
     {
       IResponseData responseData;
-
-      EcommClientCertCheckRequestData ecommClientCertCheckRequestData = (EcommClientCertCheckRequestData) requestData;
-      WsConfigElement wsConfig = (WsConfigElement)config;
 
       Service clientCertCheckService = null;
 
@@ -101,15 +105,15 @@ namespace Atlantis.Framework.EcommClientCertCheck.Impl
       {
         clientCertCheckService = new Service();
 
-        if(!wsConfig.WSURL.ToLower().StartsWith("https:"))
+        if (!ConfigElement.WSURL.ToLower().StartsWith("https:"))
         {
           throw new Exception("You must call EcommClientCertCheck over https");
         }
 
-        clientCertCheckService.Url = wsConfig.WSURL;
-        clientCertCheckService.Timeout = (int) ecommClientCertCheckRequestData.RequestTimeout.TotalMilliseconds;
+        clientCertCheckService.Url = ConfigElement.WSURL;
+        clientCertCheckService.Timeout = (int)RequestData.RequestTimeout.TotalMilliseconds;
 
-        X509Certificate2 clientCertificate = GetClientCertificate(config.GetConfigValue("CertificateName"));
+        X509Certificate2 clientCertificate = GetClientCertificate(ConfigElement.GetConfigValue("CertificateName"));
         if (clientCertificate == null)
         {
           throw new Exception("Certificate not found.");
@@ -117,28 +121,42 @@ namespace Atlantis.Framework.EcommClientCertCheck.Impl
 
         clientCertCheckService.ClientCertificates.Add(clientCertificate);
 
-        string formattedCertSubject = GetCertSubjectInCorrectOrder(ecommClientCertCheckRequestData.CertificateSubject);
+        string formattedCertSubject = GetCertSubjectInCorrectOrder(RequestData.CertificateSubject);
 
         bool isAuthorized = clientCertCheckService.Check(formattedCertSubject,
-                                                         ecommClientCertCheckRequestData.ApplicationName,
-                                                         ecommClientCertCheckRequestData.MethodName,
+                                                         string.Format(APPLICATION_NAME_FORMAT, RequestData.ApplicationTeam, RequestData.ApplicationName),
+                                                         RequestData.MethodName,
                                                          IPAddress.Loopback.ToString());
 
         responseData = new EcommClientCertCheckResponeData(isAuthorized);
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
-        responseData = new EcommClientCertCheckResponeData(ecommClientCertCheckRequestData, ex);
+        responseData = new EcommClientCertCheckResponeData(RequestData, ex);
       }
       finally
       {
-        if(clientCertCheckService != null)
+        if (clientCertCheckService != null)
         {
           clientCertCheckService.Dispose();
         }
       }
 
       return responseData;
+    }
+
+    private IResponseData ProcessRequestFromCache()
+    {
+      string cacheKey = string.Format(CACHE_KEY, RequestData.ApplicationTeam, RequestData.ApplicationName, RequestData.MethodName, RequestData.CertificateSubject);
+      return DataCache.DataCache.GetCustomCacheData(cacheKey, GetRequestForCache);
+    }
+
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
+    {
+      RequestData = (EcommClientCertCheckRequestData) requestData;
+      ConfigElement = (WsConfigElement) config;
+
+      return ProcessRequestFromCache();
     }
   }
 }

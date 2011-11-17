@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://orion.starfieldtech.com.dev.sdl1.gdg/security/security.asmx?wsdl" docRef="https://orion.starfieldtech.com.dev.sdl1.gdg/security/security.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://orion.starfieldtech.com.dev.sdl1.gdg/security/security.asmx" xmlns:q1="http://schemas.orion.starfieldtech.com/security" binding="q1:SecuritySoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://orion.starfieldtech.com.dev.sdl1.gdg/security/security.asmx" xmlns:q2="http://schemas.orion.starfieldtech.com/security" binding="q2:SecuritySoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

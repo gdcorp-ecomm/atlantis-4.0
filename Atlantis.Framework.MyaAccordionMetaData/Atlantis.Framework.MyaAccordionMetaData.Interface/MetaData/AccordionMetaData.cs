@@ -106,6 +106,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
       return attrib;
     }
+
+    private LinkUrlData ParseContentBuyLinkXml(XElement link)
+    {
+      return IsWellFormedWorkspaceLoginXml ? ParseLinkUrlXml(link) : null;
+    }
     #endregion
 
     #region ControlPanel XML
@@ -328,6 +333,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     {
       get { return string.Compare(ParseAccordionXml("showsetupformanageronly"), "true", true) == 0; }
     }
+    public string OrionProductName
+    {
+      get { return ParseAccordionXml("orionproductname"); }
+    }
     #endregion
 
     #region Derived Content Xml Properties
@@ -336,22 +345,59 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       public string AccountList { get; private set; }
       public string JsonPage { get; private set; }
       public string CiOptions { get; private set; }
+      public LinkUrlData LinkUrl { get; private set; }
 
       public bool ShowOptionsLink
       {
         get { return !string.IsNullOrWhiteSpace(CiOptions); }
       }
 
+      public bool ShowBuyLink
+      {
+        get { return LinkUrl != null; }
+      }
+
+      public ContentData(string accountList, string jsonPage, string ciOptions, LinkUrlData linkUrl)
+      {
+        AccountList = accountList;
+        JsonPage = jsonPage;
+        CiOptions = ciOptions;
+        LinkUrl = linkUrl;
+      }
+      
       public ContentData(string accountList, string jsonPage, string ciOptions)
       {
         AccountList = accountList;
         JsonPage = jsonPage;
         CiOptions = ciOptions;
+        LinkUrl = null;
       }
     }
     public ContentData Content
     {
-      get { return new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions")); }
+      get 
+      { 
+        ContentData content;
+        XElement link;
+        try
+        {
+          link = ContentXDoc.Element("content").Element("data").Element("linkurl");
+        }
+        catch
+        {
+          link = null;
+        }
+        if (link == null)
+        {
+          content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"));
+        }
+        else
+        {
+          content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentBuyLinkXml(link));
+        }
+
+        return content;
+      }
     }
     #endregion
 

@@ -90,6 +90,19 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 							case "Content":
 								AccordionMetaData.ContentData inner = p.GetValue(accordion, null) as AccordionMetaData.ContentData;
 								Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("AccountList: {0} | JsonPage: {1} | CiOptions: {2}", inner.AccountList, inner.JsonPage, inner.CiOptions)));
+								if (inner.ShowBuyLink)
+								{
+									StringBuilder sb = new StringBuilder();
+									Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2}", inner.LinkUrl.Link, inner.LinkUrl.Page, inner.LinkUrl.Type)));
+									foreach (string key in inner.LinkUrl.QsKeys)
+									{
+										sb.Append(string.Format("{0}: {1}", key, inner.LinkUrl.QsKeys[key]));
+									}
+									if (sb.Length > 0)
+									{
+										Debug.WriteLine(string.Format("{0} QsKeys: {1}", p.Name, sb.ToString()));
+									}
+								}
 								break;
 							case "WorkspaceLogin":
 								AccordionMetaData.WorkspaceLoginData wsl = p.GetValue(accordion, null) as AccordionMetaData.WorkspaceLoginData;

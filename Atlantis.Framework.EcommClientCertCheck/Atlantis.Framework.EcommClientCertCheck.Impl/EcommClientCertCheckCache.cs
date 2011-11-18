@@ -5,20 +5,17 @@ namespace Atlantis.Framework.EcommClientCertCheck.Impl
 {
   internal class EcommClientCertCheckCache
   {
-    private readonly IDictionary<string, bool> _cache;
-    private readonly TimeSpan _cacheDuration;
+    private readonly IDictionary<string, EcommClientCertCheckCacheItem> _cache;
+    private readonly TimeSpan _cacheItemDuration;
     private readonly SlimLock _cacheLock;
 
-    private long _cacheExpirationTicks;
-    private bool _isCacheExpired;
+    internal delegate bool IsClientCertAuthorizedRequestDelegate(out bool isAuthorized, out string errorMessage);
 
     public EcommClientCertCheckCache()
     {
-      _cache = new Dictionary<string, bool>(32);
-      _cacheDuration = TimeSpan.FromMinutes(10);
+      _cache = new Dictionary<string, EcommClientCertCheckCacheItem>(32);
+      _cacheItemDuration = TimeSpan.FromMinutes(10);
       _cacheLock = new SlimLock();
-
-      _cacheExpirationTicks = DateTime.UtcNow.Add(_cacheDuration).Ticks;
     }
 
     ~EcommClientCertCheckCache()
@@ -26,43 +23,44 @@ namespace Atlantis.Framework.EcommClientCertCheck.Impl
       _cacheLock.Dispose();
     }
 
-    public void Insert(string cacheKey, bool isAuthorized)
+    public bool TryGetValue(string cacheKey, IsClientCertAuthorizedRequestDelegate isClientCertAuthorized, out bool isAuthorized, out string errorMessage)
     {
-      using(_cacheLock.GetWriteLock())
-      {
-        _cache[cacheKey] = isAuthorized;
-      }
-    }
+      bool cacheItemExists;
+      isAuthorized = false;
+      errorMessage = string.Empty;
 
-    public bool TryGetValue(string cacheKey, out bool isAuthorized)
-    {
-      bool found;
+      bool cacheItemExpired = false;
+
+      EcommClientCertCheckCacheItem cacheItem;
 
       using(_cacheLock.GetReadLock())
       {
-        if(DateTime.UtcNow.Ticks > _cacheExpirationTicks)
+        cacheItemExists = _cache.TryGetValue(cacheKey, out cacheItem);
+        if (cacheItemExists)
         {
-          _isCacheExpired = true;
+          isAuthorized = cacheItem.IsAuthorized;
+          cacheItemExpired = DateTime.UtcNow.Ticks > cacheItem.ExpirationTicks;
         }
-
-        // Even if the cache is expired, it should be ok to grab an expired value if it exists
-        found = _cache.TryGetValue(cacheKey, out isAuthorized);
       }
 
-      if (_isCacheExpired)
+      if (!cacheItemExists || cacheItemExpired)
       {
         using (_cacheLock.GetWriteLock())
         {
-          if(_isCacheExpired)
+          if(!_cache.ContainsKey(cacheKey) || DateTime.UtcNow.Ticks > cacheItem.ExpirationTicks)
           {
-            _isCacheExpired = false;
-            _cacheExpirationTicks = DateTime.UtcNow.Add(_cacheDuration).Ticks;
-            _cache.Clear();
+            bool isAuthorizedFromRequest;
+            if(isClientCertAuthorized(out isAuthorizedFromRequest, out errorMessage))
+            {
+              isAuthorized = isAuthorizedFromRequest;
+              cacheItemExists = true;
+              _cache[cacheKey] = new EcommClientCertCheckCacheItem { IsAuthorized = isAuthorized, ExpirationTicks = DateTime.UtcNow.Add(_cacheItemDuration).Ticks };
+            }
           }
         }
       }
 
-      return found;
+      return cacheItemExists;
     }
   }
 }

@@ -16,7 +16,7 @@ namespace Atlantis.Framework.EcommClientCertCheck.Impl
     private static readonly object _lockSync = new object();
     private static volatile EcommClientCertCheckCache _cacheInstance;
 
-    private static EcommClientCertCheckCache CacheInstance
+    private EcommClientCertCheckCache CacheInstance
     {
       get
       {
@@ -33,6 +33,10 @@ namespace Atlantis.Framework.EcommClientCertCheck.Impl
         return _cacheInstance;
       }
     }
+
+    private EcommClientCertCheckRequestData RequestData { get; set; }
+
+    private WsConfigElement WsConfig { get; set; }
 
     /// <summary>
     /// The certificates are always entered in the database in the O={0}, OU={1}, CN={2} order.  We must make sure to pass the subject this way.
@@ -111,9 +115,11 @@ namespace Atlantis.Framework.EcommClientCertCheck.Impl
       return clientCertificate;
     }
 
-    private EcommClientCertCheckResponeData GetRequestFromService(EcommClientCertCheckRequestData requestData, WsConfigElement wsConfig)
+    private bool GetRequestFromService(out bool isAuthorized, out string errorMessage)
     {
-      EcommClientCertCheckResponeData responseData;
+      bool success;
+      isAuthorized = false;
+      errorMessage = string.Empty;
 
       Service clientCertCheckService = null;
 
@@ -121,34 +127,35 @@ namespace Atlantis.Framework.EcommClientCertCheck.Impl
       {
         clientCertCheckService = new Service();
 
-        if (!wsConfig.WSURL.ToLower().StartsWith("https:"))
+        if (!WsConfig.WSURL.ToLower().StartsWith("https:"))
         {
-          throw new Exception("You must call EcommClientCertCheck over https");
+          errorMessage = "You must call EcommClientCertCheck over https";
         }
 
-        clientCertCheckService.Url = wsConfig.WSURL;
-        clientCertCheckService.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+        clientCertCheckService.Url = WsConfig.WSURL;
+        clientCertCheckService.Timeout = (int)RequestData.RequestTimeout.TotalMilliseconds;
 
-        X509Certificate2 clientCertificate = GetClientCertificate(wsConfig.GetConfigValue("CertificateName"));
+        X509Certificate2 clientCertificate = GetClientCertificate(WsConfig.GetConfigValue("CertificateName"));
         if (clientCertificate == null)
         {
-          throw new Exception("Certificate not found.");
+          errorMessage = "Certificate not found.";
         }
 
         clientCertCheckService.ClientCertificates.Add(clientCertificate);
 
-        string formattedCertSubject = GetCertSubjectInCorrectOrder(requestData.CertificateSubject);
+        string formattedCertSubject = GetCertSubjectInCorrectOrder(RequestData.CertificateSubject);
 
-        bool isAuthorized = clientCertCheckService.Check(formattedCertSubject,
-                                                         string.Format(APPLICATION_NAME_FORMAT, requestData.ApplicationTeam, requestData.ApplicationName),
-                                                         requestData.MethodName,
-                                                         IPAddress.Loopback.ToString());
+        isAuthorized = clientCertCheckService.Check(formattedCertSubject,
+                                                    string.Format(APPLICATION_NAME_FORMAT, RequestData.ApplicationTeam, RequestData.ApplicationName),
+                                                    RequestData.MethodName,
+                                                    IPAddress.Loopback.ToString());
 
-        responseData = new EcommClientCertCheckResponeData(isAuthorized);
+        success = true;
       }
       catch (Exception ex)
       {
-        responseData = new EcommClientCertCheckResponeData(requestData, ex);
+        errorMessage = ex.Message;
+        success = false;
       }
       finally
       {
@@ -158,30 +165,27 @@ namespace Atlantis.Framework.EcommClientCertCheck.Impl
         }
       }
 
-      return responseData;
+      return success;
     }
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       EcommClientCertCheckResponeData responseData;
 
-      EcommClientCertCheckRequestData ecommClientCertCheckRequestData = (EcommClientCertCheckRequestData) requestData;
-      WsConfigElement wsConfig = (WsConfigElement) config;
+      RequestData = (EcommClientCertCheckRequestData) requestData;
+      WsConfig = (WsConfigElement) config;
 
-      string cacheKey = string.Format(CACHE_KEY, ecommClientCertCheckRequestData.ApplicationTeam, ecommClientCertCheckRequestData.ApplicationName, ecommClientCertCheckRequestData.MethodName, ecommClientCertCheckRequestData.CertificateSubject);
+      string cacheKey = string.Format(CACHE_KEY, RequestData.ApplicationTeam, RequestData.ApplicationName, RequestData.MethodName, RequestData.CertificateSubject);
+      
       bool isAuthorized;
-
-      if (CacheInstance.TryGetValue(cacheKey, out isAuthorized))
+      string errorMessage;
+      if (CacheInstance.TryGetValue(cacheKey, GetRequestFromService, out isAuthorized, out errorMessage))
       {
         responseData = new EcommClientCertCheckResponeData(isAuthorized);
       }
       else
       {
-        responseData = GetRequestFromService(ecommClientCertCheckRequestData, wsConfig);
-        if (responseData.IsSuccess)
-        {
-          CacheInstance.Insert(cacheKey, responseData.IsAuthorized);
-        }
+        responseData = new EcommClientCertCheckResponeData(RequestData, new Exception(errorMessage));
       }
 
       return responseData;

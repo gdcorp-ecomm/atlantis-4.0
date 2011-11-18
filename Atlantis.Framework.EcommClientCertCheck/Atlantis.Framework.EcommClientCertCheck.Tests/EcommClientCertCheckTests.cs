@@ -41,6 +41,31 @@ namespace Atlantis.Framework.EcommClientCertCheck.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    public void AuthorizedClientCheckMultipleRequests()
+    {
+      EcommClientCertCheckRequestData request = new EcommClientCertCheckRequestData(CERTIFICATE_SUBJECT,
+                                                                                    APPLICATION_TEAM,
+                                                                                    APPLICATION_NAME,
+                                                                                    METHOD_NAME,
+                                                                                    "847235",
+                                                                                    "http://www.EcommClientCertCheckTests.com/",
+                                                                                    string.Empty,
+                                                                                    Guid.NewGuid().ToString(),
+                                                                                    1);
+
+      EcommClientCertCheckResponeData responeData = (EcommClientCertCheckResponeData)Engine.Engine.ProcessRequest(request, 450);
+
+      EcommClientCertCheckResponeData responeData2 = (EcommClientCertCheckResponeData)Engine.Engine.ProcessRequest(request, 450);
+
+      Assert.IsTrue(responeData.IsSuccess);
+      Assert.IsTrue(responeData.IsAuthorized);
+
+      Assert.IsTrue(responeData2.IsSuccess);
+      Assert.IsTrue(responeData2.IsAuthorized);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
     public void UnAuthorizedClientCertCheck()
     {
       EcommClientCertCheckRequestData request = new EcommClientCertCheckRequestData(UN_AUTH_CERTIFICATE_SUBJECT,

@@ -9,6 +9,7 @@
       <xs:attribute name="iconcsscoordinates" type="xs:string" use="required" />
       <xs:attribute name="isproductofferedfree" type="xs:string" use="required" />
       <xs:attribute name="showsetupformanageronly" type="xs:string" use="required" />
+      <xs:attribute name="productgroup" type="xs:string" use="required" />
       <xs:attribute name="orionproductname" type="xs:string" use="optional" />
     </xs:complexType>
   </xs:element>

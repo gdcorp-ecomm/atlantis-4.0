@@ -325,6 +325,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     {
       get { return string.Compare(ParseAccordionXml("isproductofferedfree"), "true", true) == 0; }
     }
+    public int ProductGroup
+    {
+      get { return Convert.ToInt32(ParseAccordionXml("productgroup")); }
+    }
     public bool ShowControlPanel
     {
       get { return string.Compare(ParseAccordionXml("controlpanelrequiresaccount"), "false", true) == 0; }
@@ -408,6 +412,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       public bool HasManagerLink(string identificationValue)
       {
         return LinkUrls.Exists(new Predicate<LinkUrlData>(url => url.Type.Equals(LinkUrlData.TypeOfLink.Manager) && url.IdentificationValue.Equals(identificationValue)));
+      }
+
+      public bool DoLinkUrlsContainIdentificationRules
+      {
+        get { return LinkUrls.Exists(new Predicate<LinkUrlData>(url => !string.IsNullOrWhiteSpace(url.IdentificationRule))); }
       }
 
       public ControlPanelData(List<LinkUrlData> linkUrls)

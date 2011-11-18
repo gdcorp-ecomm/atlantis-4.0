@@ -126,6 +126,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 								break;
 							case "ControlPanels":
 								AccordionMetaData.ControlPanelData cp = p.GetValue(accordion, null) as AccordionMetaData.ControlPanelData;
+								Debug.WriteLine(string.Format("Do Any Links Contain Identification Rules: {0}", cp.DoLinkUrlsContainIdentificationRules));
 								foreach(AccordionMetaData.LinkUrlData link in cp.LinkUrls)
 								{
 									StringBuilder sb = new StringBuilder();

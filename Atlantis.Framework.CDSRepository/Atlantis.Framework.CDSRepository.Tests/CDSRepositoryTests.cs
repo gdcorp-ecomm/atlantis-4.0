@@ -83,6 +83,60 @@ namespace Atlantis.Framework.CDSRepository.Tests
       Assert.AreEqual(responseData.ResponseData, responseData2.ResponseData);
     }
 
+
+
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void CDSRepository_GetCacheMD5()
+    {
+      //Arrange
+      string shopperId = "860316";     
+      string query = "sales/1/lp/email";
+      string expectedHash = "866D4C948747FC7816B111B8AB6739A6";
+      CDSRepositoryRequestData requestData = new CDSRepositoryRequestData(shopperId, string.Empty, string.Empty, string.Empty, 1, query);
+            
+      //Act
+      string result = requestData.GetCacheMD5();
+      
+      //Assert
+      Assert.AreEqual(expectedHash, result);
+    }
+
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void CDSRepository_GetCacheMD5_On_Empty_Query()
+    {
+      //Arrange
+      string expectedHash = "515DFED62F7510FA572FE0D9E7776CE9";
+      CDSRepositoryRequestData requestData = new CDSRepositoryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 1, string.Empty);
+
+      //Act
+      string result = requestData.GetCacheMD5();
+
+      //Assert
+      Assert.AreEqual(expectedHash, result);
+    }
+    
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void CDSRepository_Check_RequestTimesout_Default()
+    {
+      //Arrange
+      string shopperId = "860316";     
+      string query = "sales/1/lp/email";
+
+      //Act
+      CDSRepositoryRequestData requestData = new CDSRepositoryRequestData(shopperId, string.Empty, string.Empty, string.Empty, 1, query);
+      
+      //Assert
+      Assert.AreEqual(20, requestData.RequestTimeout.Seconds);     
+    }
+
+
+
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     [ExpectedException(typeof(AtlantisException))]

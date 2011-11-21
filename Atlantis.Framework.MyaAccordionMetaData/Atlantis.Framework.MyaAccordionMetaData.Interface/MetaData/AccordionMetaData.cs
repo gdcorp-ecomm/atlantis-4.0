@@ -317,6 +317,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     {
       get { return ParseAccordionXml("cisetup"); }    
     }
+    public List<int> CmsDisplayGroups
+    {
+      get { return SetCmsDisplayGroups(ParseAccordionXml("cmsdisplaygroupidlist")); }
+    }
     public CssSpriteCoordinate IconCssCoordinates 
     { 
       get { return SetCoordinates(ParseAccordionXml("iconcsscoordinates")); }
@@ -480,7 +484,6 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     #endregion
 
     #region Private Methods
-
     private CssSpriteCoordinate SetCoordinates(string iconnCssCoordinates)
     {
       string[] coordintatePoints = iconnCssCoordinates.Split(',');
@@ -495,7 +498,27 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       }
     }
 
+    private List<int> SetCmsDisplayGroups(string cmsDisplayGroups)
+    {
+      List<int> cmsDisplayGroupList = new List<int>();
 
+      if (!string.IsNullOrWhiteSpace(cmsDisplayGroups))
+      {
+        try
+        {
+          string[] listArr = cmsDisplayGroups.Split(',');
+          foreach (string cmsGroup in listArr)
+          {
+            cmsDisplayGroupList.Add(Convert.ToInt32(cmsGroup));
+          }
+        }
+        catch
+        {
+          cmsDisplayGroupList = new List<int>();
+        }
+      }
+      return cmsDisplayGroupList;
+    }
     #endregion
 
     #region Public Methods

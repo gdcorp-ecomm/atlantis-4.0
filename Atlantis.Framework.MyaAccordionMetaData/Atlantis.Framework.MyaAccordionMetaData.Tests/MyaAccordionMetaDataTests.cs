@@ -155,6 +155,14 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 							case "AccordionTitle":
 								Debug.WriteLine(string.Format("{0}: {1}", p.Name, HttpUtility.HtmlDecode(p.GetValue(accordion, null).ToString())));
 								break;
+							case "CmsDisplayGroups":
+								StringBuilder sb2 = new StringBuilder();
+								foreach (int group in accordion.CmsDisplayGroups)
+								{
+									sb2.AppendFormat("{0} | ", group);
+								}
+								Debug.WriteLine(string.Format("{0}: {1}", p.Name, sb2.ToString().TrimEnd(' ').TrimEnd('|')));
+								break;
 							default:
 								Debug.WriteLine(string.Format("{0}: {1}", p.Name, p.GetValue(accordion, null)));
 								break;

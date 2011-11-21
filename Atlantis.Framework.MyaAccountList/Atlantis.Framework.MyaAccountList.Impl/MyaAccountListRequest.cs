@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -129,33 +130,44 @@ namespace Atlantis.Framework.MyaAccountList.Impl
     private DataSet UpdateSEVAccountListData(MyaAccountListRequestData request, ConfigElement config, DataSet ds)
     {
       string connectionString = NetConnect.LookupConnectInfo(config.GetConfigValue("TB_DataSourceName"), config.GetConfigValue("CertificateName"), config.GetConfigValue("ApplicationName"), "::UpdateSEVData", ConnectLookupType.NetConnectionString);
-
-      using (SqlConnection connection = new SqlConnection(connectionString))
+      List<int> missingRowIndexList = new List<int>();
+      for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
       {
-        using (SqlCommand command = new SqlCommand("dbo.tba_userwebsiteStatusGetForMYA_sp", connection))
-        {
-          command.CommandType = CommandType.StoredProcedure;
-          command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
-          command.Parameters.Add(new SqlParameter("@shopper_id", request.ShopperID));
-          connection.Open();
+        missingRowIndexList.Add(i);
+      }
 
-          using (SqlDataReader dr = command.ExecuteReader())
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+          using (SqlCommand command = new SqlCommand("dbo.tba_userwebsiteStatusGetForMYA_sp", connection))
           {
-            while (dr.Read())
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
+            command.Parameters.Add(new SqlParameter("@shopper_id", request.ShopperID));
+            connection.Open();
+
+            using (SqlDataReader dr = command.ExecuteReader())
             {
-              foreach (DataRow row in ds.Tables[0].Rows)
+              while (dr.Read())
               {
-                if (row["resource_id"].Equals(dr["recurring_id"]))
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                  row["externalResourceID"] = dr["userwebsite_id"] == DBNull.Value ? "new" : dr["userwebsite_id"];
-                  row["commonName"] = dr["websiteurl"] == DBNull.Value ? "New Account" : dr["websiteurl"].ToString().Trim();
-                  break;
+                  DataRow row = ds.Tables[0].Rows[i];
+                  if (row["resource_id"].Equals(dr["recurring_id"]))
+                  {
+                    row["externalResourceID"] = dr["userwebsite_id"] == DBNull.Value ? "new" : dr["userwebsite_id"];
+                    row["commonName"] = dr["websiteurl"] == DBNull.Value ? "New Account" : dr["websiteurl"].ToString().Trim();
+                    missingRowIndexList.Remove(i);
+                    break;
+                  }
                 }
+              }
+              foreach (int rowIndex in missingRowIndexList)
+              {
+                ds.Tables[0].Rows[rowIndex]["externalResourceID"] = "new";
               }
             }
           }
         }
-      }
       return ds;
     }
     #endregion

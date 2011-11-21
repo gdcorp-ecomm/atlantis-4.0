@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.IO;
-using System.Xml.Serialization;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MyaAccountList.Interface.Abstract;
 using Atlantis.Framework.MyaAccountList.Interface.Concrete;
@@ -23,6 +21,11 @@ namespace Atlantis.Framework.MyaAccountList.Interface
       _success = (returnAccountList != null);
     }
 
+    public MyaAccountListResponseData(AtlantisException atlantisException)
+    {
+      _atlException = atlantisException;
+    }
+
     public MyaAccountListResponseData(RequestData oRequestData, Exception ex)
     {
       _success = false;
@@ -42,16 +45,6 @@ namespace Atlantis.Framework.MyaAccountList.Interface
     #region IResponseData Members
 
     public string ToXML()
-    {
-      XmlSerializer xmlSerializer = new XmlSerializer(typeof(DataSet));
-      StringWriter writer = new StringWriter();
-
-      xmlSerializer.Serialize(writer, _productList);
-
-      return writer.ToString();
-    }
-
-    public string AlsoToXML()
     {
       return _productList.GetXml();
     }

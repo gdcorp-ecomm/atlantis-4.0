@@ -1,0 +1,1171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ecm.com/webservices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ecm.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ecm.com/webservices/">
+      <s:element name="GetAuthenticationGuid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="customerId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAuthenticationGuidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAuthenticationGuidResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Reset">
+        <s:complexType />
+      </s:element>
+      <s:element name="ResetResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateNewAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="newAccountXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateNewAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateNewAccountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResellerOptIn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResellerOptInXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResellerOptInResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ResellerOptOut">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResellerOptOutXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResellerOptOutResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateNewCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="billingDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="customerBillingTypeId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="emailLimit" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateNewCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateNewCustomerResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RenewAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RenewAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RenewAccountResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RenewCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="customerId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="baseEmailLimit" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RenewCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RenewCustomerResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customerXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCustomerResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RemoveCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="customerId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveCustomerResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCustomerIdNamePairs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCustomerIdNamePairsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCustomerIdNamePairsResult" type="tns:ArrayOfSerializableIdNamePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSerializableIdNamePair">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SerializableIdNamePair" type="tns:SerializableIdNamePair" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SerializableIdNamePair">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCustomerInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="customerId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCustomerInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetCustomerInfoResult" type="tns:CustomerInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CustomerInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PrivateLabelId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShopperId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdateFrequencyId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RequestCountId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TimezoneId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCustomerSummary">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customerXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCustomerSummaryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCustomerSummaryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecCreateNewInternalCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="windowsLogin" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecCreateNewInternalCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExecCreateNewInternalCustomerResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecRemoveInternalCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="windowsLogin" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecRemoveInternalCustomerResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExecAccountOptIn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="subscriberXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecAccountOptInResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExecAccountOptOut">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="subscriberXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecAccountOptOutResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExecDoesSubscriberExist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="subscriberXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecDoesSubscriberExistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExecDoesSubscriberExistResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecDoesInternalCustomerExist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="windowsLogin" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecDoesInternalCustomerExistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExecDoesInternalCustomerExistResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfSerializableIdNamePair" nillable="true" type="tns:ArrayOfSerializableIdNamePair" />
+      <s:element name="CustomerInfo" type="tns:CustomerInfo" />
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAuthenticationGuidSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAuthenticationGuid" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthenticationGuidSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAuthenticationGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetSoapIn">
+    <wsdl:part name="parameters" element="tns:Reset" />
+  </wsdl:message>
+  <wsdl:message name="ResetSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateNewAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateNewAccount" />
+  </wsdl:message>
+  <wsdl:message name="CreateNewAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateNewAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResellerOptInSoapIn">
+    <wsdl:part name="parameters" element="tns:ResellerOptIn" />
+  </wsdl:message>
+  <wsdl:message name="ResellerOptInSoapOut">
+    <wsdl:part name="parameters" element="tns:ResellerOptInResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResellerOptOutSoapIn">
+    <wsdl:part name="parameters" element="tns:ResellerOptOut" />
+  </wsdl:message>
+  <wsdl:message name="ResellerOptOutSoapOut">
+    <wsdl:part name="parameters" element="tns:ResellerOptOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateNewCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateNewCustomer" />
+  </wsdl:message>
+  <wsdl:message name="CreateNewCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateNewCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="RenewAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:RenewAccount" />
+  </wsdl:message>
+  <wsdl:message name="RenewAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:RenewAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="RenewCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:RenewCustomer" />
+  </wsdl:message>
+  <wsdl:message name="RenewCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:RenewCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveCustomer" />
+  </wsdl:message>
+  <wsdl:message name="RemoveCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerIdNamePairsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomerIdNamePairs" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerIdNamePairsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCustomerIdNamePairsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomerInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCustomerInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerSummarySoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomerSummary" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerSummarySoapOut">
+    <wsdl:part name="parameters" element="tns:GetCustomerSummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecCreateNewInternalCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecCreateNewInternalCustomer" />
+  </wsdl:message>
+  <wsdl:message name="ExecCreateNewInternalCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecCreateNewInternalCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecRemoveInternalCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecRemoveInternalCustomer" />
+  </wsdl:message>
+  <wsdl:message name="ExecRemoveInternalCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecRemoveInternalCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecAccountOptInSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecAccountOptIn" />
+  </wsdl:message>
+  <wsdl:message name="ExecAccountOptInSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecAccountOptInResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecAccountOptOutSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecAccountOptOut" />
+  </wsdl:message>
+  <wsdl:message name="ExecAccountOptOutSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecAccountOptOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecDoesSubscriberExistSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecDoesSubscriberExist" />
+  </wsdl:message>
+  <wsdl:message name="ExecDoesSubscriberExistSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecDoesSubscriberExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecDoesInternalCustomerExistSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecDoesInternalCustomerExist" />
+  </wsdl:message>
+  <wsdl:message name="ExecDoesInternalCustomerExistSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecDoesInternalCustomerExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthenticationGuidHttpPostIn">
+    <wsdl:part name="customerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthenticationGuidHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ResetHttpPostIn" />
+  <wsdl:message name="ResetHttpPostOut" />
+  <wsdl:message name="CreateNewAccountHttpPostIn">
+    <wsdl:part name="newAccountXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateNewAccountHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ResellerOptInHttpPostIn">
+    <wsdl:part name="ResellerOptInXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResellerOptInHttpPostOut" />
+  <wsdl:message name="ResellerOptOutHttpPostIn">
+    <wsdl:part name="ResellerOptOutXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResellerOptOutHttpPostOut" />
+  <wsdl:message name="CreateNewCustomerHttpPostIn">
+    <wsdl:part name="privateLabelId" type="s:string" />
+    <wsdl:part name="billingDate" type="s:string" />
+    <wsdl:part name="customerBillingTypeId" type="s:string" />
+    <wsdl:part name="emailLimit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateNewCustomerHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="RenewAccountHttpPostIn">
+    <wsdl:part name="accountXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RenewAccountHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RenewCustomerHttpPostIn">
+    <wsdl:part name="customerId" type="s:string" />
+    <wsdl:part name="baseEmailLimit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RenewCustomerHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerHttpPostIn">
+    <wsdl:part name="customerXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerHttpPostOut" />
+  <wsdl:message name="RemoveCustomerHttpPostIn">
+    <wsdl:part name="customerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveCustomerHttpPostOut" />
+  <wsdl:message name="GetCustomerIdNamePairsHttpPostIn">
+    <wsdl:part name="shopperId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerIdNamePairsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSerializableIdNamePair" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerInfoHttpPostIn">
+    <wsdl:part name="customerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:CustomerInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerSummaryHttpPostIn">
+    <wsdl:part name="customerXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerSummaryHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ExecCreateNewInternalCustomerHttpPostIn">
+    <wsdl:part name="token" type="s:string" />
+    <wsdl:part name="firstName" type="s:string" />
+    <wsdl:part name="lastName" type="s:string" />
+    <wsdl:part name="windowsLogin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExecCreateNewInternalCustomerHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ExecRemoveInternalCustomerHttpPostIn">
+    <wsdl:part name="token" type="s:string" />
+    <wsdl:part name="windowsLogin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExecRemoveInternalCustomerHttpPostOut" />
+  <wsdl:message name="ExecAccountOptInHttpPostIn">
+    <wsdl:part name="token" type="s:string" />
+    <wsdl:part name="subscriberXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExecAccountOptInHttpPostOut" />
+  <wsdl:message name="ExecAccountOptOutHttpPostIn">
+    <wsdl:part name="token" type="s:string" />
+    <wsdl:part name="subscriberXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExecAccountOptOutHttpPostOut" />
+  <wsdl:message name="ExecDoesSubscriberExistHttpPostIn">
+    <wsdl:part name="token" type="s:string" />
+    <wsdl:part name="subscriberXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExecDoesSubscriberExistHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ExecDoesInternalCustomerExistHttpPostIn">
+    <wsdl:part name="token" type="s:string" />
+    <wsdl:part name="windowsLogin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExecDoesInternalCustomerExistHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="CampaignBlazerSoap">
+    <wsdl:operation name="GetAuthenticationGuid">
+      <wsdl:input message="tns:GetAuthenticationGuidSoapIn" />
+      <wsdl:output message="tns:GetAuthenticationGuidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Reset">
+      <wsdl:input message="tns:ResetSoapIn" />
+      <wsdl:output message="tns:ResetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewAccount">
+      <wsdl:input message="tns:CreateNewAccountSoapIn" />
+      <wsdl:output message="tns:CreateNewAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResellerOptIn">
+      <wsdl:input message="tns:ResellerOptInSoapIn" />
+      <wsdl:output message="tns:ResellerOptInSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResellerOptOut">
+      <wsdl:input message="tns:ResellerOptOutSoapIn" />
+      <wsdl:output message="tns:ResellerOptOutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewCustomer">
+      <wsdl:input message="tns:CreateNewCustomerSoapIn" />
+      <wsdl:output message="tns:CreateNewCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RenewAccount">
+      <wsdl:input message="tns:RenewAccountSoapIn" />
+      <wsdl:output message="tns:RenewAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RenewCustomer">
+      <wsdl:input message="tns:RenewCustomerSoapIn" />
+      <wsdl:output message="tns:RenewCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <wsdl:input message="tns:UpdateCustomerSoapIn" />
+      <wsdl:output message="tns:UpdateCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCustomer">
+      <wsdl:input message="tns:RemoveCustomerSoapIn" />
+      <wsdl:output message="tns:RemoveCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerIdNamePairs">
+      <wsdl:input message="tns:GetCustomerIdNamePairsSoapIn" />
+      <wsdl:output message="tns:GetCustomerIdNamePairsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerInfo">
+      <wsdl:input message="tns:GetCustomerInfoSoapIn" />
+      <wsdl:output message="tns:GetCustomerInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerSummary">
+      <wsdl:input message="tns:GetCustomerSummarySoapIn" />
+      <wsdl:output message="tns:GetCustomerSummarySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecCreateNewInternalCustomer">
+      <wsdl:input message="tns:ExecCreateNewInternalCustomerSoapIn" />
+      <wsdl:output message="tns:ExecCreateNewInternalCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecRemoveInternalCustomer">
+      <wsdl:input message="tns:ExecRemoveInternalCustomerSoapIn" />
+      <wsdl:output message="tns:ExecRemoveInternalCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecAccountOptIn">
+      <wsdl:input message="tns:ExecAccountOptInSoapIn" />
+      <wsdl:output message="tns:ExecAccountOptInSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecAccountOptOut">
+      <wsdl:input message="tns:ExecAccountOptOutSoapIn" />
+      <wsdl:output message="tns:ExecAccountOptOutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecDoesSubscriberExist">
+      <wsdl:input message="tns:ExecDoesSubscriberExistSoapIn" />
+      <wsdl:output message="tns:ExecDoesSubscriberExistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecDoesInternalCustomerExist">
+      <wsdl:input message="tns:ExecDoesInternalCustomerExistSoapIn" />
+      <wsdl:output message="tns:ExecDoesInternalCustomerExistSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CampaignBlazerHttpPost">
+    <wsdl:operation name="GetAuthenticationGuid">
+      <wsdl:input message="tns:GetAuthenticationGuidHttpPostIn" />
+      <wsdl:output message="tns:GetAuthenticationGuidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Reset">
+      <wsdl:input message="tns:ResetHttpPostIn" />
+      <wsdl:output message="tns:ResetHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewAccount">
+      <wsdl:input message="tns:CreateNewAccountHttpPostIn" />
+      <wsdl:output message="tns:CreateNewAccountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResellerOptIn">
+      <wsdl:input message="tns:ResellerOptInHttpPostIn" />
+      <wsdl:output message="tns:ResellerOptInHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResellerOptOut">
+      <wsdl:input message="tns:ResellerOptOutHttpPostIn" />
+      <wsdl:output message="tns:ResellerOptOutHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewCustomer">
+      <wsdl:input message="tns:CreateNewCustomerHttpPostIn" />
+      <wsdl:output message="tns:CreateNewCustomerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RenewAccount">
+      <wsdl:input message="tns:RenewAccountHttpPostIn" />
+      <wsdl:output message="tns:RenewAccountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RenewCustomer">
+      <wsdl:input message="tns:RenewCustomerHttpPostIn" />
+      <wsdl:output message="tns:RenewCustomerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <wsdl:input message="tns:UpdateCustomerHttpPostIn" />
+      <wsdl:output message="tns:UpdateCustomerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCustomer">
+      <wsdl:input message="tns:RemoveCustomerHttpPostIn" />
+      <wsdl:output message="tns:RemoveCustomerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerIdNamePairs">
+      <wsdl:input message="tns:GetCustomerIdNamePairsHttpPostIn" />
+      <wsdl:output message="tns:GetCustomerIdNamePairsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerInfo">
+      <wsdl:input message="tns:GetCustomerInfoHttpPostIn" />
+      <wsdl:output message="tns:GetCustomerInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerSummary">
+      <wsdl:input message="tns:GetCustomerSummaryHttpPostIn" />
+      <wsdl:output message="tns:GetCustomerSummaryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecCreateNewInternalCustomer">
+      <wsdl:input message="tns:ExecCreateNewInternalCustomerHttpPostIn" />
+      <wsdl:output message="tns:ExecCreateNewInternalCustomerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecRemoveInternalCustomer">
+      <wsdl:input message="tns:ExecRemoveInternalCustomerHttpPostIn" />
+      <wsdl:output message="tns:ExecRemoveInternalCustomerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecAccountOptIn">
+      <wsdl:input message="tns:ExecAccountOptInHttpPostIn" />
+      <wsdl:output message="tns:ExecAccountOptInHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecAccountOptOut">
+      <wsdl:input message="tns:ExecAccountOptOutHttpPostIn" />
+      <wsdl:output message="tns:ExecAccountOptOutHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecDoesSubscriberExist">
+      <wsdl:input message="tns:ExecDoesSubscriberExistHttpPostIn" />
+      <wsdl:output message="tns:ExecDoesSubscriberExistHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecDoesInternalCustomerExist">
+      <wsdl:input message="tns:ExecDoesInternalCustomerExistHttpPostIn" />
+      <wsdl:output message="tns:ExecDoesInternalCustomerExistHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CampaignBlazerSoap" type="tns:CampaignBlazerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAuthenticationGuid">
+      <soap:operation soapAction="http://ecm.com/webservices/GetAuthenticationGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Reset">
+      <soap:operation soapAction="http://ecm.com/webservices/Reset" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewAccount">
+      <soap:operation soapAction="http://ecm.com/webservices/CreateNewAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResellerOptIn">
+      <soap:operation soapAction="http://ecm.com/webservices/ResellerOptIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResellerOptOut">
+      <soap:operation soapAction="http://ecm.com/webservices/ResellerOptOut" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewCustomer">
+      <soap:operation soapAction="http://ecm.com/webservices/CreateNewCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenewAccount">
+      <soap:operation soapAction="http://ecm.com/webservices/RenewAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenewCustomer">
+      <soap:operation soapAction="http://ecm.com/webservices/RenewCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <soap:operation soapAction="http://ecm.com/webservices/UpdateCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCustomer">
+      <soap:operation soapAction="http://ecm.com/webservices/RemoveCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerIdNamePairs">
+      <soap:operation soapAction="http://ecm.com/webservices/GetCustomerIdNamePairs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerInfo">
+      <soap:operation soapAction="http://ecm.com/webservices/GetCustomerInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerSummary">
+      <soap:operation soapAction="http://ecm.com/webservices/GetCustomerSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecCreateNewInternalCustomer">
+      <soap:operation soapAction="http://ecm.com/webservices/ExecCreateNewInternalCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecRemoveInternalCustomer">
+      <soap:operation soapAction="http://ecm.com/webservices/ExecRemoveInternalCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecAccountOptIn">
+      <soap:operation soapAction="http://ecm.com/webservices/ExecAccountOptIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecAccountOptOut">
+      <soap:operation soapAction="http://ecm.com/webservices/ExecAccountOptOut" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecDoesSubscriberExist">
+      <soap:operation soapAction="http://ecm.com/webservices/ExecDoesSubscriberExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecDoesInternalCustomerExist">
+      <soap:operation soapAction="http://ecm.com/webservices/ExecDoesInternalCustomerExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CampaignBlazerSoap12" type="tns:CampaignBlazerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAuthenticationGuid">
+      <soap12:operation soapAction="http://ecm.com/webservices/GetAuthenticationGuid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Reset">
+      <soap12:operation soapAction="http://ecm.com/webservices/Reset" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewAccount">
+      <soap12:operation soapAction="http://ecm.com/webservices/CreateNewAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResellerOptIn">
+      <soap12:operation soapAction="http://ecm.com/webservices/ResellerOptIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResellerOptOut">
+      <soap12:operation soapAction="http://ecm.com/webservices/ResellerOptOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewCustomer">
+      <soap12:operation soapAction="http://ecm.com/webservices/CreateNewCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenewAccount">
+      <soap12:operation soapAction="http://ecm.com/webservices/RenewAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenewCustomer">
+      <soap12:operation soapAction="http://ecm.com/webservices/RenewCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <soap12:operation soapAction="http://ecm.com/webservices/UpdateCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCustomer">
+      <soap12:operation soapAction="http://ecm.com/webservices/RemoveCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerIdNamePairs">
+      <soap12:operation soapAction="http://ecm.com/webservices/GetCustomerIdNamePairs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerInfo">
+      <soap12:operation soapAction="http://ecm.com/webservices/GetCustomerInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerSummary">
+      <soap12:operation soapAction="http://ecm.com/webservices/GetCustomerSummary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecCreateNewInternalCustomer">
+      <soap12:operation soapAction="http://ecm.com/webservices/ExecCreateNewInternalCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecRemoveInternalCustomer">
+      <soap12:operation soapAction="http://ecm.com/webservices/ExecRemoveInternalCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecAccountOptIn">
+      <soap12:operation soapAction="http://ecm.com/webservices/ExecAccountOptIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecAccountOptOut">
+      <soap12:operation soapAction="http://ecm.com/webservices/ExecAccountOptOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecDoesSubscriberExist">
+      <soap12:operation soapAction="http://ecm.com/webservices/ExecDoesSubscriberExist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecDoesInternalCustomerExist">
+      <soap12:operation soapAction="http://ecm.com/webservices/ExecDoesInternalCustomerExist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CampaignBlazerHttpPost" type="tns:CampaignBlazerHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetAuthenticationGuid">
+      <http:operation location="/GetAuthenticationGuid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Reset">
+      <http:operation location="/Reset" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewAccount">
+      <http:operation location="/CreateNewAccount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResellerOptIn">
+      <http:operation location="/ResellerOptIn" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="ResellerOptOut">
+      <http:operation location="/ResellerOptOut" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewCustomer">
+      <http:operation location="/CreateNewCustomer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenewAccount">
+      <http:operation location="/RenewAccount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenewCustomer">
+      <http:operation location="/RenewCustomer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <http:operation location="/UpdateCustomer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCustomer">
+      <http:operation location="/RemoveCustomer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerIdNamePairs">
+      <http:operation location="/GetCustomerIdNamePairs" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerInfo">
+      <http:operation location="/GetCustomerInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerSummary">
+      <http:operation location="/GetCustomerSummary" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecCreateNewInternalCustomer">
+      <http:operation location="/ExecCreateNewInternalCustomer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecRemoveInternalCustomer">
+      <http:operation location="/ExecRemoveInternalCustomer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="ExecAccountOptIn">
+      <http:operation location="/ExecAccountOptIn" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="ExecAccountOptOut">
+      <http:operation location="/ExecAccountOptOut" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="ExecDoesSubscriberExist">
+      <http:operation location="/ExecDoesSubscriberExist" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecDoesInternalCustomerExist">
+      <http:operation location="/ExecDoesInternalCustomerExist" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CampaignBlazer">
+    <wsdl:port name="CampaignBlazerSoap" binding="tns:CampaignBlazerSoap">
+      <soap:address location="http://ws.dev.quicksizzle.com/campaignblazer.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CampaignBlazerSoap12" binding="tns:CampaignBlazerSoap12">
+      <soap12:address location="http://ws.dev.quicksizzle.com/campaignblazer.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CampaignBlazerHttpPost" binding="tns:CampaignBlazerHttpPost">
+      <http:address location="http://ws.dev.quicksizzle.com/campaignblazer.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

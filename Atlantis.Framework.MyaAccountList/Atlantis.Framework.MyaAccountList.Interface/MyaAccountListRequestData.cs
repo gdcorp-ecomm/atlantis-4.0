@@ -10,6 +10,11 @@ namespace Atlantis.Framework.MyaAccountList.Interface
   public class MyaAccountListRequestData : RequestData
   {
     #region Properties
+    public class AccordionIds
+    {
+      public const int SearchEngineVisibility = 7;
+      public const int ExpressEmailMarketing = 21;
+    }
 
     public AccordionMetaData AccordionData { get; private set; }
     public int? DaysTillExpiration { get; private set; }
@@ -65,7 +70,7 @@ namespace Atlantis.Framework.MyaAccountList.Interface
       ReturnFreeListOnly = returnFreeListOnly;
       DaysTillExpiration = daysTillExpiration;
       ReturnAll = returnAllFlag;
-      RequestTimeout = TimeSpan.FromSeconds(5);
+      RequestTimeout = TimeSpan.FromSeconds(10);
     }
 
     public override string GetCacheMD5()

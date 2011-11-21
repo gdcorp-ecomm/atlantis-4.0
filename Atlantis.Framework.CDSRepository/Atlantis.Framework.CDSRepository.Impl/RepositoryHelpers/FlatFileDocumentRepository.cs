@@ -22,9 +22,7 @@ namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
     public FlatFileDocumentRepository(string rootPath)
     {
       _rootPath = rootPath;
-    }
-
-    private FlatFileDocumentRepository() { }
+    }   
 
     public bool Exists(string query)
     {

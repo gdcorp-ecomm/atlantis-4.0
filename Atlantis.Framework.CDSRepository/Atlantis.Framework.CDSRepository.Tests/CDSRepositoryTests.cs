@@ -74,10 +74,13 @@ namespace Atlantis.Framework.CDSRepository.Tests
 
       //Act
       CDSRepositoryResponseData responseData = (CDSRepositoryResponseData)DataCache.DataCache.GetProcessRequest(requestData, requestType);
+      // this second call pulls from cache but not sure how to capture in the unit test to prove it without debugging into datacache.getprocessrequest
+      var responseData2 = (CDSRepositoryResponseData)DataCache.DataCache.GetProcessRequest(requestData, requestType);
 
       //Assert
       Assert.IsTrue(responseData.IsSuccess);
       Assert.IsNotNull(responseData.ResponseData);
+      Assert.AreEqual(responseData.ResponseData, responseData2.ResponseData);
     }
 
     [TestMethod]

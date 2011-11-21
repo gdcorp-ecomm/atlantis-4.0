@@ -49,6 +49,8 @@ namespace Atlantis.Framework.MyaAccountList.Impl
     }
 
     #region Get Account List Data
+
+    #region Base Account List Data
     private DataSet GetAccountList(ConfigElement config, MyaAccountListRequestData request, DataSet ds, out int totalRecords, out int totalPages)
     {
       string connectionString = NetConnect.LookupConnectInfo(config);
@@ -114,6 +116,7 @@ namespace Atlantis.Framework.MyaAccountList.Impl
       }
       return ds;
     }
+    #endregion
 
     #region Special Search Engine Visibility Functionality
     /// <summary>
@@ -144,8 +147,8 @@ namespace Atlantis.Framework.MyaAccountList.Impl
               {
                 if (row["resource_id"].Equals(dr["recurring_id"]))
                 {
-                  row["externalResourceID"] = dr["userwebsite_id"] == DBNull.Value ? "0" : dr["userwebsite_id"];
-                  row["commonName"] = dr["websiteurl"] == DBNull.Value ? string.Empty : dr["websiteurl"].ToString().Trim();
+                  row["externalResourceID"] = dr["userwebsite_id"] == DBNull.Value ? "new" : dr["userwebsite_id"];
+                  row["commonName"] = dr["websiteurl"] == DBNull.Value ? "New Account" : dr["websiteurl"].ToString().Trim();
                   break;
                 }
               }

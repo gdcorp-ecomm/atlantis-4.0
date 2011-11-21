@@ -3,8 +3,11 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.CDSRepository.Impl;
 using Atlantis.Framework.CDSRepository.Interface;
 using Atlantis.Framework.Interface;
+
+
 
 namespace Atlantis.Framework.CDSRepository.Tests
 {
@@ -84,6 +87,28 @@ namespace Atlantis.Framework.CDSRepository.Tests
     }
 
 
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void CDSRepository_FlatFile_Test2()
+    {
+      //Arrange
+      string shopperId = "860316";
+      int requestType = 452;
+      string query = "sales/1/lp/email";
+      CDSRepositoryRequestData requestData = new CDSRepositoryRequestData(shopperId, string.Empty, string.Empty, string.Empty, 1, query);
+     
+      //Act
+      CDSRepositoryResponseData responseData = (CDSRepositoryResponseData)DataCache.DataCache.GetProcessRequest(requestData, requestType);
+     
+
+      //Assert
+      Assert.IsTrue(responseData.IsSuccess);
+      Assert.IsNotNull(responseData.ResponseData);
+      
+    }
+
+
+
 
 
     [TestMethod]
@@ -147,7 +172,7 @@ namespace Atlantis.Framework.CDSRepository.Tests
       int requestType = 452;
       string query = "sales/1/lp/nonexistent";
       CDSRepositoryRequestData requestData = new CDSRepositoryRequestData(shopperId, string.Empty, string.Empty, string.Empty, 1, query);
-      //requestData.RequestTimeout = TimeSpan.FromSeconds(20);
+     
 
       //Act
       try
@@ -160,5 +185,53 @@ namespace Atlantis.Framework.CDSRepository.Tests
         throw;
       }
     }
+
+
+    /// <summary>
+    ///A test for RequestHandler
+    ///</summary>
+    [TestMethod()]
+    [DeploymentItem("atlantis.config")]
+    public void RequestHandlerTestRequestData()
+    {
+      //Arrange
+      CDSRepositoryRequest target = new CDSRepositoryRequest();
+      string shopperId = "860316";
+      string query = "sales/1/lp/email";
+      CDSRepositoryRequestData requestData = new CDSRepositoryRequestData(shopperId, "test.com/test","12345", string.Empty, 1, query);
+      ConfigElement config = new ConfigElement("12345", "test.dll", true);
+      IResponseData expected = null; // TODO: Initialize to an appropriate value
+      IResponseData actual;
+
+
+      actual = target.RequestHandler(requestData, config);
+      Assert.AreEqual(expected, actual);
+
+    }
+
+
+    /// <summary>
+    ///A test for RequestHandler
+    ///</summary>
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [ExpectedException(typeof(NullReferenceException))]
+    public void RequestHandlerTestRequestDataIsNull()
+    {
+      //Arrange
+      CDSRepositoryRequest target = new CDSRepositoryRequest();      
+      ConfigElement config = new ConfigElement("12345", "test.dll", true);      
+      IResponseData actual;
+
+      //Act
+      actual = target.RequestHandler(null, config);
+    }
+
+
+
+
+
+
+
   }
 }

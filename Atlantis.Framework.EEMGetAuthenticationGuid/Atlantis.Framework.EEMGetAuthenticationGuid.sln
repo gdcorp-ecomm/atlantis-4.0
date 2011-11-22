@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E2E4EC8A-5C4C-43B8-847B-5B2853D50935}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMGetAuthenticationGuid.Impl", "Atlantis.Framework.EEMGetAuthenticationGuid.Impl\Atlantis.Framework.EEMGetAuthenticationGuid.Impl.csproj", "{93DA5C0F-DD1C-4270-86C7-9857D2EEC662}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMGetAuthenticationGuid.Interface", "Atlantis.Framework.EEMGetAuthenticationGuid.Interface\Atlantis.Framework.EEMGetAuthenticationGuid.Interface.csproj", "{BBA8502F-2761-4D7C-A976-6B49A1CBABF9}"
+EndProject
+Project("{00000000-0000-0000-0000-000000000000}") = "Atlantis.Framework.EEMGetAuthenticationGuid.Tests", "Atlantis.Framework.EEMGetAuthenticationGuid.Tests\Atlantis.Framework.EEMGetAuthenticationGuid.Tests.csproj", "{68AF255C-4FFD-4670-A5B5-76D7D9079103}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.EEMGetAuthenticationGuid.sln
+		SccProjectName0 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.EEMGetAuthenticationGuid.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = Atlantis.Framework.EEMGetAuthenticationGuid.Impl\\Atlantis.Framework.EEMGetAuthenticationGuid.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.EEMGetAuthenticationGuid.Impl
+		SccLocalPath3 = Atlantis.Framework.EEMGetAuthenticationGuid.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.EEMGetAuthenticationGuid.Interface\\Atlantis.Framework.EEMGetAuthenticationGuid.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.EEMGetAuthenticationGuid.Interface
+		SccLocalPath4 = Atlantis.Framework.EEMGetAuthenticationGuid.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.EEMGetAuthenticationGuid.Tests\\Atlantis.Framework.EEMGetAuthenticationGuid.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.EEMGetAuthenticationGuid.Tests
+		SccLocalPath5 = Atlantis.Framework.EEMGetAuthenticationGuid.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93DA5C0F-DD1C-4270-86C7-9857D2EEC662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93DA5C0F-DD1C-4270-86C7-9857D2EEC662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93DA5C0F-DD1C-4270-86C7-9857D2EEC662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93DA5C0F-DD1C-4270-86C7-9857D2EEC662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBA8502F-2761-4D7C-A976-6B49A1CBABF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA8502F-2761-4D7C-A976-6B49A1CBABF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA8502F-2761-4D7C-A976-6B49A1CBABF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA8502F-2761-4D7C-A976-6B49A1CBABF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68AF255C-4FFD-4670-A5B5-76D7D9079103}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68AF255C-4FFD-4670-A5B5-76D7D9079103}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68AF255C-4FFD-4670-A5B5-76D7D9079103}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68AF255C-4FFD-4670-A5B5-76D7D9079103}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {E2E4EC8A-5C4C-43B8-847B-5B2853D50935}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {E2E4EC8A-5C4C-43B8-847B-5B2853D50935}
+	EndGlobalSection
+EndGlobal

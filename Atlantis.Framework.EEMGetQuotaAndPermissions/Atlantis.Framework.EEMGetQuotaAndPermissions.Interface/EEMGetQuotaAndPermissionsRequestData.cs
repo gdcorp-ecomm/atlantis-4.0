@@ -6,7 +6,16 @@ namespace Atlantis.Framework.EEMGetQuotaAndPermissions.Interface
 {
   public class EEMGetQuotaAndPermissionsRequestData : RequestData
   {
+    #region Properites
+    private int _requestType = 454;
+    public int EEMQuotaAndPermissionsRequestType
+    {
+      get { return _requestType; }
+      set { _requestType = value; }
+    }
     public int Pfid { get; private set; }
+    #endregion
+
 
     public EEMGetQuotaAndPermissionsRequestData(string shopperId
       , string sourceUrl

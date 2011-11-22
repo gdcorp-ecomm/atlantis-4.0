@@ -1,0 +1,117 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{23042D99-ACA1-4A6F-A99B-FE85D67CA293}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMGetQuotaAndPermissions.Interface", "..\Atlantis.Framework.EEMGetQuotaAndPermissions\Atlantis.Framework.EEMGetQuotaAndPermissions.Interface\Atlantis.Framework.EEMGetQuotaAndPermissions.Interface.csproj", "{DC0510F5-6314-4A18-96E3-B33AA50E3199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMGetQuotaAndPermissions.Impl", "..\Atlantis.Framework.EEMGetQuotaAndPermissions\Atlantis.Framework.EEMGetQuotaAndPermissions.Impl\Atlantis.Framework.EEMGetQuotaAndPermissions.Impl.csproj", "{6500F006-8078-4D87-AAC4-D8D96001CE6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMCreateNewAccount.Impl", "Atlantis.Framework.EEMCreateNewAccount.Impl\Atlantis.Framework.EEMCreateNewAccount.Impl.csproj", "{51AD72CF-2BF0-4379-8F12-9870DD8BB64B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMCreateNewAccount.Interface", "Atlantis.Framework.EEMCreateNewAccount.Interface\Atlantis.Framework.EEMCreateNewAccount.Interface.csproj", "{F3A9BD06-A598-4010-B3BD-4D2E67CC8C7A}"
+EndProject
+Project("{00000000-0000-0000-0000-000000000000}") = "Atlantis.Framework.EEMCreateNewAccount.Tests", "Atlantis.Framework.EEMCreateNewAccount.Tests\Atlantis.Framework.EEMCreateNewAccount.Tests.csproj", "{84F20372-FFEE-4BA3-A41B-D1017920D2BD}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccProjectUniqueName0 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.EEMCreateNewAccount.sln
+		SccProjectName0 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath0 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.EEMCreateNewAccount.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.EEMCreateNewAccount.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.EEMGetQuotaAndPermissions\\Atlantis.Framework.EEMGetQuotaAndPermissions.Interface\\Atlantis.Framework.EEMGetQuotaAndPermissions.Interface.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.EEMCreateNewAccount.sln
+		SccProjectName3 = ../Atlantis.Framework.EEMGetQuotaAndPermissions/Atlantis.Framework.EEMGetQuotaAndPermissions.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.EEMGetQuotaAndPermissions\\Atlantis.Framework.EEMGetQuotaAndPermissions.Interface
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.EEMGetQuotaAndPermissions\\Atlantis.Framework.EEMGetQuotaAndPermissions.Impl\\Atlantis.Framework.EEMGetQuotaAndPermissions.Impl.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.EEMCreateNewAccount.sln
+		SccProjectName4 = ../Atlantis.Framework.EEMGetQuotaAndPermissions/Atlantis.Framework.EEMGetQuotaAndPermissions.Impl
+		SccLocalPath4 = ..\\Atlantis.Framework.EEMGetQuotaAndPermissions\\Atlantis.Framework.EEMGetQuotaAndPermissions.Impl
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.EEMCreateNewAccount.sln
+		SccProjectName5 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
+		SccLocalPath5 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
+		SccLocalPath6 = .
+		SccProjectUniqueName7 = Atlantis.Framework.EEMCreateNewAccount.Impl\\Atlantis.Framework.EEMCreateNewAccount.Impl.csproj
+		SccProjectName7 = Atlantis.Framework.EEMCreateNewAccount.Impl
+		SccLocalPath7 = Atlantis.Framework.EEMCreateNewAccount.Impl
+		SccProjectUniqueName8 = Atlantis.Framework.EEMCreateNewAccount.Interface\\Atlantis.Framework.EEMCreateNewAccount.Interface.csproj
+		SccProjectName8 = Atlantis.Framework.EEMCreateNewAccount.Interface
+		SccLocalPath8 = Atlantis.Framework.EEMCreateNewAccount.Interface
+		SccProjectUniqueName9 = Atlantis.Framework.EEMCreateNewAccount.Tests\\Atlantis.Framework.EEMCreateNewAccount.Tests.csproj
+		SccProjectName9 = Atlantis.Framework.EEMCreateNewAccount.Tests
+		SccLocalPath9 = Atlantis.Framework.EEMCreateNewAccount.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC0510F5-6314-4A18-96E3-B33AA50E3199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC0510F5-6314-4A18-96E3-B33AA50E3199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC0510F5-6314-4A18-96E3-B33AA50E3199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC0510F5-6314-4A18-96E3-B33AA50E3199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6500F006-8078-4D87-AAC4-D8D96001CE6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6500F006-8078-4D87-AAC4-D8D96001CE6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6500F006-8078-4D87-AAC4-D8D96001CE6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6500F006-8078-4D87-AAC4-D8D96001CE6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51AD72CF-2BF0-4379-8F12-9870DD8BB64B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51AD72CF-2BF0-4379-8F12-9870DD8BB64B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51AD72CF-2BF0-4379-8F12-9870DD8BB64B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51AD72CF-2BF0-4379-8F12-9870DD8BB64B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A9BD06-A598-4010-B3BD-4D2E67CC8C7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A9BD06-A598-4010-B3BD-4D2E67CC8C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A9BD06-A598-4010-B3BD-4D2E67CC8C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A9BD06-A598-4010-B3BD-4D2E67CC8C7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84F20372-FFEE-4BA3-A41B-D1017920D2BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84F20372-FFEE-4BA3-A41B-D1017920D2BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84F20372-FFEE-4BA3-A41B-D1017920D2BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84F20372-FFEE-4BA3-A41B-D1017920D2BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {23042D99-ACA1-4A6F-A99B-FE85D67CA293}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {23042D99-ACA1-4A6F-A99B-FE85D67CA293}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {23042D99-ACA1-4A6F-A99B-FE85D67CA293}
+		{DC0510F5-6314-4A18-96E3-B33AA50E3199} = {23042D99-ACA1-4A6F-A99B-FE85D67CA293}
+		{6500F006-8078-4D87-AAC4-D8D96001CE6A} = {23042D99-ACA1-4A6F-A99B-FE85D67CA293}
+		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {23042D99-ACA1-4A6F-A99B-FE85D67CA293}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,927 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://schemas.orion.starfieldtech.com/account" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" targetNamespace="http://schemas.orion.starfieldtech.com/account" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://schemas.orion.starfieldtech.com/account">
+      <s:element name="Test">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TestResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Requests" type="tns:ArrayOfCreateAccountRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCreateAccountRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CreateAccountRequest" nillable="true" type="tns:CreateAccountRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CreateAccountRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="acct" type="tns:Account" />
+          <s:element minOccurs="1" maxOccurs="1" name="startDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestedByLogin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="requestItems" type="tns:ArrayOfRequestItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Account">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SystemNamespace" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResellerId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProductTemplateId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductTemplateName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductUid" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrionCustomerId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpireDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CanBeModified" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsActive" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsRemoved" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountAttributes" type="tns:ArrayOfAccountAttribute" />
+          <s:element minOccurs="0" maxOccurs="1" name="Quotas" type="tns:ArrayOfAccountQuota" />
+          <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:ArrayOfAccountInternalData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAccountAttribute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountAttribute" nillable="true" type="tns:AccountAttribute" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountAttribute">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AttributeId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AttributeUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductAttributeUid" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsTemplateAttribute" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TemplateInternalName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayStatus" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReadOnly" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CanBeModified" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountElements" type="tns:ArrayOfAccountElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAccountElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountElement" nillable="true" type="tns:AccountElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ElementId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ElementUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductAttributeElementUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayStatus" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReadOnly" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CanBeModified" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChildElements" type="tns:ArrayOfAccountElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAccountQuota">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountQuota" nillable="true" type="tns:AccountQuota" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountQuota">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="objType" type="tns:ObjectType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ObjectUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuotaType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaUsage" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaBeginPeriod" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaEndPeriod" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:ArrayOfAccountQuotaDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ObjectType">
+        <s:restriction base="s:string">
+          <s:enumeration value="ACCOUNT" />
+          <s:enumeration value="ATTRIBUTE" />
+          <s:enumeration value="ELEMENT" />
+          <s:enumeration value="SERVER" />
+          <s:enumeration value="RESELLER" />
+          <s:enumeration value="APPLICATION" />
+          <s:enumeration value="PRODUCT" />
+          <s:enumeration value="PRODUCT_ATTRIBUTE" />
+          <s:enumeration value="PRODUCT_ATTRIBUTE_ELEMENT" />
+          <s:enumeration value="ACCOUNT_ATTRIBUTE" />
+          <s:enumeration value="ACCOUNT_ATTRIBUTE_ELEMENT" />
+          <s:enumeration value="MODIFIED_ELEMENT" />
+          <s:enumeration value="NEW_ATTRIBUTE" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfAccountQuotaDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountQuotaDetail" nillable="true" type="tns:AccountQuotaDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountQuotaDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AccountAttributeName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuotaType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaUsage" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaBeginPeriod" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaEndPeriod" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAccountInternalData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountInternalData" nillable="true" type="tns:AccountInternalData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountInternalData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemValue" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRequestItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RequestItem" nillable="true" type="tns:RequestItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RequestItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemValue" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateAccountMethodResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateAccountResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfCreateAccountResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCreateAccountResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CreateAccountResponse" nillable="true" type="tns:CreateAccountResponse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CreateAccountResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="result" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="messages" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SecureHeader" type="tns:SecureHeader" />
+      <s:complexType name="SecureHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ModifyAttributeElement">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Requests" type="tns:ArrayOfModifyElementRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfModifyElementRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ModifyElementRequest" nillable="true" type="tns:ModifyElementRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ModifyElementRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="tns:AccountIdentifier" />
+          <s:element minOccurs="0" maxOccurs="1" name="ElementUid" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RelatedRequestIdx" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountElementNewValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestedByLogin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="requestItems" type="tns:ArrayOfRequestItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountIdentifier">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SystemNamespace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResellerId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountUid" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ModifyAttributeElementResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ModifyAttributeElementResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfOperationResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfOperationResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OperationResponse" nillable="true" type="tns:OperationResponse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OperationResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Result" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="messages" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="items" type="tns:ArrayOfResponseItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfResponseItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ResponseItem" nillable="true" type="tns:ResponseItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ResponseItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemValue" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ModifyProperty">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Requests" type="tns:ArrayOfModifyItemRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfModifyItemRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ModifyItemRequest" nillable="true" type="tns:ModifyItemRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ModifyItemRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="tns:AccountIdentifier" />
+          <s:element minOccurs="1" maxOccurs="1" name="objType" type="tns:ObjectType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResourceUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NewItemValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="detail" type="tns:RequestDetail" />
+          <s:element minOccurs="0" maxOccurs="1" name="requestItems" type="tns:ArrayOfRequestItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RequestDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RequestedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestedByLoginName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReasonForRequest" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Messages" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ModifyPropertyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ModifyPropertyResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfOperationResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAttribute">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Requests" type="tns:ArrayOfAddAttributeRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAddAttributeRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AddAttributeRequest" nillable="true" type="tns:AddAttributeRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AddAttributeRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="tns:AccountIdentifier" />
+          <s:element minOccurs="0" maxOccurs="1" name="Attr" type="tns:AccountAttribute" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestedByLogin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="requestItems" type="tns:ArrayOfRequestItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddAttributeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddAttributeResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfOperationResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAttributeElement">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Requests" type="tns:ArrayOfAddElementRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAddElementRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AddElementRequest" nillable="true" type="tns:AddElementRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AddElementRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="tns:AccountIdentifier" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParentAttributeUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParentElementUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Elements" type="tns:ArrayOfAccountElement" />
+          <s:element minOccurs="0" maxOccurs="1" name="dtl" type="tns:RequestDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddAttributeElementResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddAttributeElementResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfOperationResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModifyAccountExpireDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Requests" type="tns:ArrayOfModifyExpireDateRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfModifyExpireDateRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ModifyExpireDateRequest" nillable="true" type="tns:ModifyExpireDateRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ModifyExpireDateRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="tns:AccountIdentifier" />
+          <s:element minOccurs="1" maxOccurs="1" name="NewExpireDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReinstateAccount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="dtl" type="tns:RequestDetail" />
+          <s:element minOccurs="0" maxOccurs="1" name="requestItems" type="tns:ArrayOfRequestItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ModifyAccountExpireDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ModifyAccountExpireDateResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfOperationResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Remove">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Requests" type="tns:ArrayOfOperationRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfOperationRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OperationRequest" nillable="true" type="tns:OperationRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OperationRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="tns:AccountIdentifier" />
+          <s:element minOccurs="0" maxOccurs="1" name="dtl" type="tns:RequestDetail" />
+          <s:element minOccurs="1" maxOccurs="1" name="objType" type="tns:ObjectType" />
+          <s:element minOccurs="1" maxOccurs="1" name="opType" type="tns:OperationType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ObjectUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="items" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="requestItems" type="tns:ArrayOfRequestItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="OperationType">
+        <s:restriction base="s:string">
+          <s:enumeration value="CREATE" />
+          <s:enumeration value="REMOVE" />
+          <s:enumeration value="SUSPEND" />
+          <s:enumeration value="CHANGE" />
+          <s:enumeration value="REINSTATE" />
+          <s:enumeration value="ADD_ATTRIBUTE" />
+          <s:enumeration value="ADD_ELEMENT" />
+          <s:enumeration value="MODIFY_ACCOUNT_ELEMENT" />
+          <s:enumeration value="CREATE_PRODUCT" />
+          <s:enumeration value="REMOVE_PRODUCT" />
+          <s:enumeration value="CREATE_ACCOUNT" />
+          <s:enumeration value="REMOVE_ACCOUNT" />
+          <s:enumeration value="ADD_ACCOUNT_ATTRIBUTE" />
+          <s:enumeration value="ADD_ACCOUNT_ATTRIBUTE_ELEMENT" />
+          <s:enumeration value="REMOVE_ACCOUNT_ATTRIBUTE" />
+          <s:enumeration value="REMOVE_ACCOUNT_ATTRIBUTE_ELEMENT" />
+          <s:enumeration value="SET_STATUS" />
+          <s:enumeration value="MODIFY_PARENT_ACCOUNT_ELEMENT" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="RemoveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RemoveResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfOperationResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Suspend">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Requests" type="tns:ArrayOfOperationRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuspendResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SuspendResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfOperationResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Reinstate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Requests" type="tns:ArrayOfOperationRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReinstateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReinstateResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfOperationResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Renew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="req" type="tns:ArrayOfRenewalRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRenewalRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RenewalRequest" nillable="true" type="tns:RenewalRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RenewalRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SystemNamespace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResellerId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResourceType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResourceUid" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RenewalDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpirationDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Features" type="tns:ArrayOfAccountAttribute" />
+          <s:element minOccurs="0" maxOccurs="1" name="dtl" type="tns:RequestDetail" />
+          <s:element minOccurs="0" maxOccurs="1" name="items" type="tns:ArrayOfRequestItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RenewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RenewResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="resp" type="tns:ArrayOfOperationResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangePlan">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="req" type="tns:ArrayOfPlanChangeRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPlanChangeRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PlanChangeRequest" nillable="true" type="tns:PlanChangeRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PlanChangeRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="tns:AccountIdentifier" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlanFeatureAttribute" type="tns:AccountAttribute" />
+          <s:element minOccurs="0" maxOccurs="1" name="dtl" type="tns:RequestDetail" />
+          <s:element minOccurs="0" maxOccurs="1" name="items" type="tns:ArrayOfRequestItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ChangePlanResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangePlanResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="resp" type="tns:ArrayOfOperationResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunDMC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="req" type="tns:ArrayOfRequestParameter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRequestParameter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RequestParameter" nillable="true" type="tns:RequestParameter" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RequestParameter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ParameterType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParameterCategory" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="identifier" type="tns:AccountIdentifier" />
+          <s:element minOccurs="1" maxOccurs="1" name="RequestIdx" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResourceType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResourceUid" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpireDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProcessAtDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestParameterName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParameterValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="items" type="tns:ArrayOfRequestParameterItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="dtl" type="tns:RequestDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRequestParameterItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RequestParameterItem" nillable="true" type="tns:RequestParameterItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RequestParameterItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemCategory" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemValue" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RunDMCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RunDMCResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="resp" type="tns:ArrayOfOperationResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TestSoapIn">
+    <wsdl:part name="parameters" element="tns:Test" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapOut">
+    <wsdl:part name="parameters" element="tns:TestResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateAccount" />
+  </wsdl:message>
+  <wsdl:message name="CreateAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateAccountMethodResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateAccountSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="ModifyAttributeElementSoapIn">
+    <wsdl:part name="parameters" element="tns:ModifyAttributeElement" />
+  </wsdl:message>
+  <wsdl:message name="ModifyAttributeElementSoapOut">
+    <wsdl:part name="parameters" element="tns:ModifyAttributeElementResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifyAttributeElementSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="ModifyPropertySoapIn">
+    <wsdl:part name="parameters" element="tns:ModifyProperty" />
+  </wsdl:message>
+  <wsdl:message name="ModifyPropertySoapOut">
+    <wsdl:part name="parameters" element="tns:ModifyPropertyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifyPropertySecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="AddAttributeSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAttribute" />
+  </wsdl:message>
+  <wsdl:message name="AddAttributeSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAttributeResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAttributeSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="AddAttributeElementSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAttributeElement" />
+  </wsdl:message>
+  <wsdl:message name="AddAttributeElementSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAttributeElementResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAttributeElementSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="ModifyAccountExpireDateSoapIn">
+    <wsdl:part name="parameters" element="tns:ModifyAccountExpireDate" />
+  </wsdl:message>
+  <wsdl:message name="ModifyAccountExpireDateSoapOut">
+    <wsdl:part name="parameters" element="tns:ModifyAccountExpireDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifyAccountExpireDateSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="RemoveSoapIn">
+    <wsdl:part name="parameters" element="tns:Remove" />
+  </wsdl:message>
+  <wsdl:message name="RemoveSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="SuspendSoapIn">
+    <wsdl:part name="parameters" element="tns:Suspend" />
+  </wsdl:message>
+  <wsdl:message name="SuspendSoapOut">
+    <wsdl:part name="parameters" element="tns:SuspendResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuspendSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="ReinstateSoapIn">
+    <wsdl:part name="parameters" element="tns:Reinstate" />
+  </wsdl:message>
+  <wsdl:message name="ReinstateSoapOut">
+    <wsdl:part name="parameters" element="tns:ReinstateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReinstateSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="RenewSoapIn">
+    <wsdl:part name="parameters" element="tns:Renew" />
+  </wsdl:message>
+  <wsdl:message name="RenewSoapOut">
+    <wsdl:part name="parameters" element="tns:RenewResponse" />
+  </wsdl:message>
+  <wsdl:message name="RenewSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="ChangePlanSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangePlan" />
+  </wsdl:message>
+  <wsdl:message name="ChangePlanSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangePlanResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangePlanSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:message name="RunDMCSoapIn">
+    <wsdl:part name="parameters" element="tns:RunDMC" />
+  </wsdl:message>
+  <wsdl:message name="RunDMCSoapOut">
+    <wsdl:part name="parameters" element="tns:RunDMCResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunDMCSecureHeader">
+    <wsdl:part name="SecureHeader" element="tns:SecureHeader" />
+  </wsdl:message>
+  <wsdl:portType name="AccountOperationsSoap">
+    <wsdl:operation name="Test">
+      <wsdl:input message="tns:TestSoapIn" />
+      <wsdl:output message="tns:TestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateAccount">
+      <wsdl:input message="tns:CreateAccountSoapIn" />
+      <wsdl:output message="tns:CreateAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyAttributeElement">
+      <wsdl:input message="tns:ModifyAttributeElementSoapIn" />
+      <wsdl:output message="tns:ModifyAttributeElementSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyProperty">
+      <wsdl:input message="tns:ModifyPropertySoapIn" />
+      <wsdl:output message="tns:ModifyPropertySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAttribute">
+      <wsdl:input message="tns:AddAttributeSoapIn" />
+      <wsdl:output message="tns:AddAttributeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAttributeElement">
+      <wsdl:input message="tns:AddAttributeElementSoapIn" />
+      <wsdl:output message="tns:AddAttributeElementSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyAccountExpireDate">
+      <wsdl:input message="tns:ModifyAccountExpireDateSoapIn" />
+      <wsdl:output message="tns:ModifyAccountExpireDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <wsdl:input message="tns:RemoveSoapIn" />
+      <wsdl:output message="tns:RemoveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Suspend">
+      <wsdl:input message="tns:SuspendSoapIn" />
+      <wsdl:output message="tns:SuspendSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Reinstate">
+      <wsdl:input message="tns:ReinstateSoapIn" />
+      <wsdl:output message="tns:ReinstateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Renew">
+      <wsdl:input message="tns:RenewSoapIn" />
+      <wsdl:output message="tns:RenewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePlan">
+      <wsdl:input message="tns:ChangePlanSoapIn" />
+      <wsdl:output message="tns:ChangePlanSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunDMC">
+      <wsdl:input message="tns:RunDMCSoapIn" />
+      <wsdl:output message="tns:RunDMCSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AccountOperationsSoap" type="tns:AccountOperationsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Test">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/Test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAccount">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/CreateAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateAccountSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyAttributeElement">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/ModifyAttributeElement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ModifyAttributeElementSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyProperty">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/ModifyProperty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ModifyPropertySecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAttribute">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/AddAttribute" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AddAttributeSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAttributeElement">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/AddAttributeElement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AddAttributeElementSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyAccountExpireDate">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/ModifyAccountExpireDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ModifyAccountExpireDateSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/Remove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RemoveSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Suspend">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/Suspend" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SuspendSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Reinstate">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/Reinstate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ReinstateSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Renew">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/Renew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RenewSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePlan">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/ChangePlan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ChangePlanSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunDMC">
+      <soap:operation soapAction="http://schemas.orion.starfieldtech.com/account/RunDMC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RunDMCSecureHeader" part="SecureHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AccountOperations">
+    <wsdl:port name="AccountOperationsSoap" binding="tns:AccountOperationsSoap">
+      <soap:address location="http://orion.starfieldtech.com.dev.sdl1.gdg/account/accountoperations.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

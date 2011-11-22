@@ -1,0 +1,127 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionAddAttribute.Interface", "Atlantis.Framework.OrionAddAttribute.Interface\Atlantis.Framework.OrionAddAttribute.Interface.csproj", "{CBA61939-71F9-4F62-82A6-3C22847D5F3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F2EB9EB5-C291-46B1-9593-C0B54FC856CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionSecurityAuth.Interface", "..\Atlantis.Framework.OrionSecurityAuth\Atlantis.Framework.OrionSecurityAuth.Interface\Atlantis.Framework.OrionSecurityAuth.Interface.csproj", "{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionSecurityAuth.Impl", "..\Atlantis.Framework.OrionSecurityAuth\Atlantis.Framework.OrionSecurityAuth.Impl\Atlantis.Framework.OrionSecurityAuth.Impl.csproj", "{23973B8C-0EDB-4001-8FAA-ED0930971D5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionAddAttribute.Impl", "Atlantis.Framework.OrionAddAttribute.Impl\Atlantis.Framework.OrionAddAttribute.Impl.csproj", "{78C0BDEB-7242-431B-B04C-61F1906E08FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionAddAttribute.Tests", "Atlantis.Framework.OrionAddAttribute.Tests\Atlantis.Framework.OrionAddAttribute.Tests.csproj", "{01CEE7D7-BA3A-4C51-A581-762584BA0061}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{50E1909A-236B-4F3E-8FF6-A30AF5535EE6}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.OrionAddAttribute.vsmdi = Atlantis.Framework.OrionAddAttribute.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.OrionAddAttribute.Interface\\Atlantis.Framework.OrionAddAttribute.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.OrionAddAttribute.Interface
+		SccLocalPath1 = Atlantis.Framework.OrionAddAttribute.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.OrionAddAttribute.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.OrionAddAttribute.sln
+		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.OrionSecurityAuth\\Atlantis.Framework.OrionSecurityAuth.Interface\\Atlantis.Framework.OrionSecurityAuth.Interface.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.OrionAddAttribute.sln
+		SccProjectName4 = ../Atlantis.Framework.OrionSecurityAuth/Atlantis.Framework.OrionSecurityAuth.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.OrionSecurityAuth\\Atlantis.Framework.OrionSecurityAuth.Interface
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.OrionSecurityAuth\\Atlantis.Framework.OrionSecurityAuth.Impl\\Atlantis.Framework.OrionSecurityAuth.Impl.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.OrionAddAttribute.sln
+		SccProjectName5 = ../Atlantis.Framework.OrionSecurityAuth/Atlantis.Framework.OrionSecurityAuth.Impl
+		SccLocalPath5 = ..\\Atlantis.Framework.OrionSecurityAuth\\Atlantis.Framework.OrionSecurityAuth.Impl
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.OrionAddAttribute.sln
+		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
+		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.OrionAddAttribute.sln
+		SccProjectName7 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
+		SccLocalPath7 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
+		SccProjectUniqueName8 = Atlantis.Framework.OrionAddAttribute.Impl\\Atlantis.Framework.OrionAddAttribute.Impl.csproj
+		SccProjectName8 = Atlantis.Framework.OrionAddAttribute.Impl
+		SccLocalPath8 = Atlantis.Framework.OrionAddAttribute.Impl
+		SccProjectUniqueName9 = Atlantis.Framework.OrionAddAttribute.Tests\\Atlantis.Framework.OrionAddAttribute.Tests.csproj
+		SccProjectName9 = Atlantis.Framework.OrionAddAttribute.Tests
+		SccLocalPath9 = Atlantis.Framework.OrionAddAttribute.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.OrionAddAttribute.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBA61939-71F9-4F62-82A6-3C22847D5F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBA61939-71F9-4F62-82A6-3C22847D5F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBA61939-71F9-4F62-82A6-3C22847D5F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBA61939-71F9-4F62-82A6-3C22847D5F3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78C0BDEB-7242-431B-B04C-61F1906E08FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78C0BDEB-7242-431B-B04C-61F1906E08FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78C0BDEB-7242-431B-B04C-61F1906E08FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78C0BDEB-7242-431B-B04C-61F1906E08FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01CEE7D7-BA3A-4C51-A581-762584BA0061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01CEE7D7-BA3A-4C51-A581-762584BA0061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01CEE7D7-BA3A-4C51-A581-762584BA0061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01CEE7D7-BA3A-4C51-A581-762584BA0061}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {F2EB9EB5-C291-46B1-9593-C0B54FC856CD}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {F2EB9EB5-C291-46B1-9593-C0B54FC856CD}
+		{DCFF9FB9-6B2B-45F9-8053-9D46CD40399D} = {F2EB9EB5-C291-46B1-9593-C0B54FC856CD}
+		{23973B8C-0EDB-4001-8FAA-ED0930971D5A} = {F2EB9EB5-C291-46B1-9593-C0B54FC856CD}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {F2EB9EB5-C291-46B1-9593-C0B54FC856CD}
+		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {F2EB9EB5-C291-46B1-9593-C0B54FC856CD}
+	EndGlobalSection
+EndGlobal

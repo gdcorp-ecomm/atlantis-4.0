@@ -16,7 +16,6 @@ namespace Atlantis.Framework.EEMGetQuotaAndPermissions.Interface
     public int Pfid { get; private set; }
     #endregion
 
-
     public EEMGetQuotaAndPermissionsRequestData(string shopperId
       , string sourceUrl
       , string orderId

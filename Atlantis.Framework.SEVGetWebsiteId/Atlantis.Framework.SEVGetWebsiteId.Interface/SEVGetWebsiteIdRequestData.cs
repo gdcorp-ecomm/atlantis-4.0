@@ -5,6 +5,12 @@ namespace Atlantis.Framework.SEVGetWebsiteId.Interface
 {
   public class SEVGetWebsiteIdRequestData : RequestData
   {
+    private int _sevGetWebsiteIdRequestType = 457;
+    public int SEVGetWebsiteIdRequestType
+    {
+      get { return _sevGetWebsiteIdRequestType; }
+      set { _sevGetWebsiteIdRequestType = value; }
+    }
 
     public SEVGetWebsiteIdRequestData(string shopperId
       , string sourceUrl

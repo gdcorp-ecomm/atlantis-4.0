@@ -11,7 +11,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Release Build")]
 #endif
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.EEMCreateNewAccount.Interface")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2011")]

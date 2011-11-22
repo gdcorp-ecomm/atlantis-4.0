@@ -28,6 +28,7 @@ namespace Atlantis.Framework.AuthChangePassword.Interface
     public const int ValidateLoginRequired = -120;
     public const int ValidateLoginMaxLength = -121;
     public const int ValidateLoginInvalidCharacters = -122;
+    public const int ValidateLoginMustBeEqualToId = -133;
     public const int ValidateHintRequired = -130;
     public const int ValidateHintMaxLength = -131;
     public const int ValidateHintInvalidCharacters = -132;

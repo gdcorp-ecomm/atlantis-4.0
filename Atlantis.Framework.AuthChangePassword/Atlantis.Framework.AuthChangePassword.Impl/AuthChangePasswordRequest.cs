@@ -10,7 +10,6 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
   public class AuthChangePasswordRequest : IRequest
   {
     private static readonly Regex _newPasswordInvalidCharactersRegex = new Regex("[^\x20-\x7E]", RegexOptions.Compiled);
-    private static readonly Regex _newLoginInvalidCharactersRegex = new Regex(@"[^\-A-Za-z0-9]", RegexOptions.Compiled);
     private static readonly Regex _newHintInvalidCharactersRegex = new Regex("[^\x20-\x3b\x3f-\x7e]", RegexOptions.Compiled);
     private static readonly Regex _meetsStrongPwReqs = new Regex("(?=.*[A-Z])(?=.{8,})(?=.*\\d).*$");
 
@@ -82,9 +81,13 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
           result.Add(AuthChangePasswordStatusCodes.ValidateLoginMaxLength);
         }
 
-        if (_newLoginInvalidCharactersRegex.Match(request.NewLogin).Success)
+        int login = 0; //if login is all numbers then it MUST BE equal to shopper id
+        if (int.TryParse(request.NewLogin, out login))
         {
-          result.Add(AuthChangePasswordStatusCodes.ValidateLoginInvalidCharacters);
+          if (request.ShopperID != request.NewLogin)
+          {
+            result.Add(AuthChangePasswordStatusCodes.ValidateLoginMustBeEqualToId);
+          }
         }
       }
 

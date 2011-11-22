@@ -84,13 +84,7 @@ namespace Atlantis.Framework.EEMCreateNewAccount.Interface
 
     public override string GetCacheMD5()
     {
-      MD5 oMD5 = new MD5CryptoServiceProvider();
-      oMD5.Initialize();
-
-      byte[] stringBytes = System.Text.Encoding.ASCII.GetBytes(string.Format("{0}", Pfid));
-      byte[] md5Bytes = oMD5.ComputeHash(stringBytes);
-      string sValue = BitConverter.ToString(md5Bytes, 0);
-      return sValue.Replace("-", "");
+      throw new NotImplementedException("GetCacheMD5 not implemented in EEMCreateNewAccountRequestData");
     }
   }
 }

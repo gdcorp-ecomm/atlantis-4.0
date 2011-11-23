@@ -13,11 +13,11 @@ namespace Atlantis.Framework.MyaAccountList.Tests
   [TestClass]
   public class MyaAccountListTest
   {
-    private const string shopperId = "842749";
+    private const string shopperId = "842103";
     public AccordionMetaData AMD
     {
       //3=Hosting, 1=Domain, 4=Email, 19=DBP, 21=EEM, 7=SEV
-      get { return GetAccordionMetaData(7); }
+      get { return GetAccordionMetaData(21); }
     }
 
     public MyaAccountListTest()

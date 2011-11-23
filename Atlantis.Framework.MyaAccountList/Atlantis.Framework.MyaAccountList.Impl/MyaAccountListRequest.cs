@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Xml.Linq;
+using Atlantis.Framework.EEMGetCustomerSummary.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MyaAccountList.Interface;
 using Atlantis.Framework.Nimitz;
+using Atlantis.Framework.SEVGetWebsiteId.Interface;
 
 namespace Atlantis.Framework.MyaAccountList.Impl
 {
@@ -128,46 +128,50 @@ namespace Atlantis.Framework.MyaAccountList.Impl
     /// <param name="ds"></param>
     /// <returns></returns>
     private DataSet UpdateSEVAccountListData(MyaAccountListRequestData request, ConfigElement config, DataSet ds)
-    {
-      string connectionString = NetConnect.LookupConnectInfo(config.GetConfigValue("TB_DataSourceName"), config.GetConfigValue("CertificateName"), config.GetConfigValue("ApplicationName"), "::UpdateSEVData", ConnectLookupType.NetConnectionString);
-      List<int> missingRowIndexList = new List<int>();
-      for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+    {      
+      var sevRequest = new SEVGetWebsiteIdRequestData(request.ShopperID
+        , request.SourceURL
+        , request.OrderID
+        , request.Pathway
+        , request.PageCount);
+
+      int requestType = request.OverrideSEVWebsiteIdRequestType.HasValue ? request.OverrideSEVWebsiteIdRequestType.Value : sevRequest.SEVGetWebsiteIdRequestType;
+      var response = Engine.Engine.ProcessRequest(sevRequest, requestType) as SEVGetWebsiteIdResponseData;
+
+      if (response.IsSuccess)
       {
-        missingRowIndexList.Add(i);
-      }
-
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        if (response.ReplacementDataDictionary.Count > 0)
         {
-          using (SqlCommand command = new SqlCommand("dbo.tba_userwebsiteStatusGetForMYA_sp", connection))
+          foreach (DataRow row in ds.Tables[0].Rows)
           {
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
-            command.Parameters.Add(new SqlParameter("@shopper_id", request.ShopperID));
-            connection.Open();
-
-            using (SqlDataReader dr = command.ExecuteReader())
+            try
             {
-              while (dr.Read())
+              SEVReplacementData srd;              
+              response.ReplacementDataDictionary.TryGetValue(Convert.ToInt32(row["resource_id"]), out srd);
+              if (srd == null)
               {
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                  DataRow row = ds.Tables[0].Rows[i];
-                  if (row["resource_id"].Equals(dr["recurring_id"]))
-                  {
-                    row["externalResourceID"] = dr["userwebsite_id"] == DBNull.Value ? "new" : dr["userwebsite_id"];
-                    row["commonName"] = dr["websiteurl"] == DBNull.Value ? "New Account" : dr["websiteurl"].ToString().Trim();
-                    missingRowIndexList.Remove(i);
-                    break;
-                  }
-                }
+                row["externalResourceID"] = "new";
               }
-              foreach (int rowIndex in missingRowIndexList)
+              else
               {
-                ds.Tables[0].Rows[rowIndex]["externalResourceID"] = "new";
+                row["externalResourceID"] = srd.UserWebsiteId;
+                row["commonName"] = srd.WebsiteUrl;
               }
+            }
+            catch (Exception ex)
+            {
+              throw new AtlantisException(sevRequest, "MyaAccountListRequest::UpdateSEVAccountListData", ex.Message, ex.StackTrace);
             }
           }
         }
+        else
+        {
+          foreach (DataRow row in ds.Tables[0].Rows)
+          {
+            row["externalResourceID"] = "new";
+          }
+        }
+      }
       return ds;
     }
     #endregion
@@ -182,53 +186,58 @@ namespace Atlantis.Framework.MyaAccountList.Impl
     /// <returns></returns>
     private DataSet UpdateEEMAccountListData(MyaAccountListRequestData request, ConfigElement config, DataSet ds)
     {
-      using (CampaignBlazerWS.CampaignBlazer eemWs = new CampaignBlazerWS.CampaignBlazer())
+      List<int> customerIds = new List<int>();
+
+      foreach (DataRow row in ds.Tables[0].Rows)
       {
-        eemWs.Url = ((WsConfigElement)config).WSURL;
-        eemWs.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
-        string xmlData = eemWs.GetCustomerSummary(GetCustomerXml(ds));
-
-        if (!string.IsNullOrWhiteSpace(xmlData))
+        if (row["externalResourceID"] != DBNull.Value)
         {
-          XDocument xDoc = new XDocument();
-          xDoc = XDocument.Parse(xmlData);
+          customerIds.Add(Convert.ToInt32(row["externalResourceID"]));
+        }        
+      }
 
+      var eemRequest = new EEMGetCustomerSummaryRequestData(request.ShopperID
+        , request.SourceURL
+        , request.OrderID
+        , request.Pathway
+        , request.PageCount
+        , customerIds);
+
+      int requestType = request.OverrideEEMGetCustomerSummaryRequestType.HasValue ? request.OverrideEEMGetCustomerSummaryRequestType.Value : eemRequest.EEMGetCustomerSummaryRequestType;
+      var response = Engine.Engine.ProcessRequest(eemRequest, requestType) as EEMGetCustomerSummaryResponseData;
+
+      if (response.IsSuccess)
+      {
+        if (response.ReplacementDataDictionary.Count > 0)
+        {
           foreach (DataRow row in ds.Tables[0].Rows)
           {
-            if (row["commonName"].ToString().ToLowerInvariant() != "new account")
+            try
             {
-              XElement sourceOfChangeElement = (from c in xDoc.Element("Customers").Elements("Customer")
-                                                where c.Element("customer_id").Value == row["commonName"].ToString()
-                                                select c).Single().Element("company_name");
-              if (sourceOfChangeElement == null)
+              if (row["commonName"].ToString().ToLowerInvariant() != "new account")
               {
-                row["commonName"] = "New Account";
+                string commonName = string.Empty;
+                response.ReplacementDataDictionary.TryGetValue(Convert.ToInt32(row["externalResourceID"]), out commonName);
+
+                if (string.IsNullOrWhiteSpace(commonName))
+                {
+                  row["commonName"] = "New Account";
+                }
+                else
+                {
+                  row["commonName"] = commonName;
+                }
               }
-              else
-              {
-                row["commonName"] = (sourceOfChangeElement != null && !string.IsNullOrWhiteSpace(sourceOfChangeElement.Value)) ? sourceOfChangeElement.Value : "New Account";
-              }
+            }
+            catch (Exception ex)
+            {
+              throw new AtlantisException(eemRequest, "MyaAccountListRequest::UpdateEEMAccountListData", ex.Message, ex.StackTrace);
             }
           }
         }
       }
 
       return ds;
-    }
-
-    private string GetCustomerXml(DataSet ds)
-    {
-      XElement customers = new XElement("Customers");
-      foreach (DataRow row in ds.Tables[0].Rows)
-      {
-        if (row["externalResourceID"] != DBNull.Value)
-        {
-          XElement customer = new XElement("Customer",
-            new XElement("customer_id", row["externalResourceID"]));
-          customers.Add(customer);
-        }
-      }
-      return customers.ToString();
     }
     #endregion
     #endregion

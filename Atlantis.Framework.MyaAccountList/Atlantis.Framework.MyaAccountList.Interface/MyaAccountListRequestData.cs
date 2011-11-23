@@ -16,6 +16,9 @@ namespace Atlantis.Framework.MyaAccountList.Interface
       public const int ExpressEmailMarketing = 21;
     }
 
+    public int? OverrideSEVWebsiteIdRequestType { get; set; }
+    public int? OverrideEEMGetCustomerSummaryRequestType { get; set; }
+
     public AccordionMetaData AccordionData { get; private set; }
     public int? DaysTillExpiration { get; private set; }
     public string Filter { get; private set; }

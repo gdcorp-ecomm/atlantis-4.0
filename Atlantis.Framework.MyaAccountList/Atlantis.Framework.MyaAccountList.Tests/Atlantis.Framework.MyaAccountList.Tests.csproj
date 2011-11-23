@@ -56,6 +56,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.EEMGetCustomerSummary\Atlantis.Framework.EEMGetCustomerSummary.Impl\Atlantis.Framework.EEMGetCustomerSummary.Impl.csproj">
+      <Project>{DB38C86F-BBCD-4556-97C2-8028CAD81BF3}</Project>
+      <Name>Atlantis.Framework.EEMGetCustomerSummary.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.EEMGetCustomerSummary\Atlantis.Framework.EEMGetCustomerSummary.Interface\Atlantis.Framework.EEMGetCustomerSummary.Interface.csproj">
+      <Project>{5C287A5B-4A67-4AF0-89E5-B9617A2AE350}</Project>
+      <Name>Atlantis.Framework.EEMGetCustomerSummary.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{D30157B2-C1B3-4073-BA5E-632E2337A997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -71,6 +79,14 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
       <Project>{3213E6DB-F026-4F17-A46A-7127F79F6620}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.SEVGetWebsiteId\Atlantis.Framework.SEVGetWebsiteId.Impl\Atlantis.Framework.SEVGetWebsiteId.Impl.csproj">
+      <Project>{52AFD253-147A-43CC-A983-A38146340F97}</Project>
+      <Name>Atlantis.Framework.SEVGetWebsiteId.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.SEVGetWebsiteId\Atlantis.Framework.SEVGetWebsiteId.Interface\Atlantis.Framework.SEVGetWebsiteId.Interface.csproj">
+      <Project>{951CDD46-A3EC-4232-98DF-363A6841D170}</Project>
+      <Name>Atlantis.Framework.SEVGetWebsiteId.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.MyaAccountList.Impl\Atlantis.Framework.MyaAccountList.Impl.csproj">
       <Project>{50623C93-3292-42AC-A92C-1FB86D3A00D0}</Project>

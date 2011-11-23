@@ -24,9 +24,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaAccordionMetaData.Interface", "..\Atlantis.Framework.MyaAccordionMetaData\Atlantis.Framework.MyaAccordionMetaData.Interface\Atlantis.Framework.MyaAccordionMetaData.Interface.csproj", "{964C8203-A5CE-47D7-B3CD-C7408A961614}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SEVGetWebsiteId.Impl", "..\Atlantis.Framework.SEVGetWebsiteId\Atlantis.Framework.SEVGetWebsiteId.Impl\Atlantis.Framework.SEVGetWebsiteId.Impl.csproj", "{52AFD253-147A-43CC-A983-A38146340F97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SEVGetWebsiteId.Interface", "..\Atlantis.Framework.SEVGetWebsiteId\Atlantis.Framework.SEVGetWebsiteId.Interface\Atlantis.Framework.SEVGetWebsiteId.Interface.csproj", "{951CDD46-A3EC-4232-98DF-363A6841D170}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMGetCustomerSummary.Impl", "..\Atlantis.Framework.EEMGetCustomerSummary\Atlantis.Framework.EEMGetCustomerSummary.Impl\Atlantis.Framework.EEMGetCustomerSummary.Impl.csproj", "{DB38C86F-BBCD-4556-97C2-8028CAD81BF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMGetCustomerSummary.Interface", "..\Atlantis.Framework.EEMGetCustomerSummary\Atlantis.Framework.EEMGetCustomerSummary.Interface\Atlantis.Framework.EEMGetCustomerSummary.Interface.csproj", "{5C287A5B-4A67-4AF0-89E5-B9617A2AE350}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 12
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
 		SccLocalPath0 = .
@@ -55,6 +63,22 @@ Global
 		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.MyaAccountList.sln
 		SccProjectName7 = ../Atlantis.Framework.MyaAccordionMetaData/Atlantis.Framework.MyaAccordionMetaData.Interface
 		SccLocalPath7 = ..\\Atlantis.Framework.MyaAccordionMetaData\\Atlantis.Framework.MyaAccordionMetaData.Interface
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.SEVGetWebsiteId\\Atlantis.Framework.SEVGetWebsiteId.Impl\\Atlantis.Framework.SEVGetWebsiteId.Impl.csproj
+		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.MyaAccountList.sln
+		SccProjectName8 = ../Atlantis.Framework.SEVGetWebsiteId/Atlantis.Framework.SEVGetWebsiteId.Impl
+		SccLocalPath8 = ..\\Atlantis.Framework.SEVGetWebsiteId\\Atlantis.Framework.SEVGetWebsiteId.Impl
+		SccProjectUniqueName9 = ..\\Atlantis.Framework.SEVGetWebsiteId\\Atlantis.Framework.SEVGetWebsiteId.Interface\\Atlantis.Framework.SEVGetWebsiteId.Interface.csproj
+		SccProjectTopLevelParentUniqueName9 = Atlantis.Framework.MyaAccountList.sln
+		SccProjectName9 = ../Atlantis.Framework.SEVGetWebsiteId/Atlantis.Framework.SEVGetWebsiteId.Interface
+		SccLocalPath9 = ..\\Atlantis.Framework.SEVGetWebsiteId\\Atlantis.Framework.SEVGetWebsiteId.Interface
+		SccProjectUniqueName10 = ..\\Atlantis.Framework.EEMGetCustomerSummary\\Atlantis.Framework.EEMGetCustomerSummary.Impl\\Atlantis.Framework.EEMGetCustomerSummary.Impl.csproj
+		SccProjectTopLevelParentUniqueName10 = Atlantis.Framework.MyaAccountList.sln
+		SccProjectName10 = ../Atlantis.Framework.EEMGetCustomerSummary/Atlantis.Framework.EEMGetCustomerSummary.Impl
+		SccLocalPath10 = ..\\Atlantis.Framework.EEMGetCustomerSummary\\Atlantis.Framework.EEMGetCustomerSummary.Impl
+		SccProjectUniqueName11 = ..\\Atlantis.Framework.EEMGetCustomerSummary\\Atlantis.Framework.EEMGetCustomerSummary.Interface\\Atlantis.Framework.EEMGetCustomerSummary.Interface.csproj
+		SccProjectTopLevelParentUniqueName11 = Atlantis.Framework.MyaAccountList.sln
+		SccProjectName11 = ../Atlantis.Framework.EEMGetCustomerSummary/Atlantis.Framework.EEMGetCustomerSummary.Interface
+		SccLocalPath11 = ..\\Atlantis.Framework.EEMGetCustomerSummary\\Atlantis.Framework.EEMGetCustomerSummary.Interface
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.MyaAccountList.vsmdi
@@ -92,6 +116,22 @@ Global
 		{964C8203-A5CE-47D7-B3CD-C7408A961614}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{964C8203-A5CE-47D7-B3CD-C7408A961614}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{964C8203-A5CE-47D7-B3CD-C7408A961614}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52AFD253-147A-43CC-A983-A38146340F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52AFD253-147A-43CC-A983-A38146340F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52AFD253-147A-43CC-A983-A38146340F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52AFD253-147A-43CC-A983-A38146340F97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{951CDD46-A3EC-4232-98DF-363A6841D170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{951CDD46-A3EC-4232-98DF-363A6841D170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{951CDD46-A3EC-4232-98DF-363A6841D170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{951CDD46-A3EC-4232-98DF-363A6841D170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB38C86F-BBCD-4556-97C2-8028CAD81BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB38C86F-BBCD-4556-97C2-8028CAD81BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB38C86F-BBCD-4556-97C2-8028CAD81BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB38C86F-BBCD-4556-97C2-8028CAD81BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C287A5B-4A67-4AF0-89E5-B9617A2AE350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C287A5B-4A67-4AF0-89E5-B9617A2AE350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C287A5B-4A67-4AF0-89E5-B9617A2AE350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C287A5B-4A67-4AF0-89E5-B9617A2AE350}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,5 +141,9 @@ Global
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {C1C2E019-738C-43C6-8BB5-FCD19CA3FDA0}
 		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {C1C2E019-738C-43C6-8BB5-FCD19CA3FDA0}
 		{964C8203-A5CE-47D7-B3CD-C7408A961614} = {C1C2E019-738C-43C6-8BB5-FCD19CA3FDA0}
+		{52AFD253-147A-43CC-A983-A38146340F97} = {C1C2E019-738C-43C6-8BB5-FCD19CA3FDA0}
+		{951CDD46-A3EC-4232-98DF-363A6841D170} = {C1C2E019-738C-43C6-8BB5-FCD19CA3FDA0}
+		{DB38C86F-BBCD-4556-97C2-8028CAD81BF3} = {C1C2E019-738C-43C6-8BB5-FCD19CA3FDA0}
+		{5C287A5B-4A67-4AF0-89E5-B9617A2AE350} = {C1C2E019-738C-43C6-8BB5-FCD19CA3FDA0}
 	EndGlobalSection
 EndGlobal

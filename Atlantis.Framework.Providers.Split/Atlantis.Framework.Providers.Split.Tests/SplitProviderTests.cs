@@ -62,5 +62,21 @@ namespace Atlantis.Framework.Providers.Split.Tests
       Assert.IsTrue(split.SplitValue > 0);
       Assert.IsTrue(split.SplitValue <= 100);
     }
+
+    [TestMethod]
+    [DeploymentItem("Interop.gdDataCacheLib.dll")]
+    public void StandardAndPCSplits()
+    {
+      MockHttpContext.SetMockHttpContext("default.aspx", "http://www.godaddy.com/default.aspx", String.Empty);
+      ISplitProvider split = NewSplitProvider(1, "858884");
+
+      Assert.IsNotNull(split);
+      Assert.IsTrue(split.SplitValue > 0);
+      Assert.IsTrue(split.SplitValue <= 100);
+
+      Assert.IsTrue(split.PCSplitValue > 0);
+      Assert.IsTrue(split.PCSplitValue <= 4);
+    }
+
   }
 }

@@ -66,7 +66,7 @@ namespace Atlantis.Framework.OrionAddAttribute.Impl
       attributeRequest.Identifier = new AccountIdentifier();
       attributeRequest.Identifier.AccountUid = request.OrionResourceId;
       attributeRequest.Identifier.CustomerNum = request.ShopperID;
-      attributeRequest.Identifier.ResellerId = request.PrivateLableId.ToString();
+      attributeRequest.Identifier.ResellerId = request.PrivateLabelId.ToString();
       attributeRequest.Identifier.SystemNamespace = _systemNamespace;
 
       attributeRequest.Attr = new AccountAttribute();

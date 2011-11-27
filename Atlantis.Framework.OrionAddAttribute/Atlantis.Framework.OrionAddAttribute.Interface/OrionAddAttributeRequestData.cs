@@ -6,7 +6,7 @@ namespace Atlantis.Framework.OrionAddAttribute.Interface
 {
   public class OrionAddAttributeRequestData : RequestData
   {
-    public int PrivateLableId { get; private set; }
+    public int PrivateLabelId { get; private set; }
     public string OrionResourceId { get; private set; }
     public OrionAttribute Attribute { get; private set; }
     public string RequestedBy { get; private set; }
@@ -30,7 +30,7 @@ namespace Atlantis.Framework.OrionAddAttribute.Interface
       if (attribute == null || attribute.Elements == null || attribute.Elements.Count == 0)
         throw new ArgumentException("attribute", "Orion Attribute and elements cannot be null or empty");
 
-      PrivateLableId = privateLabelId;
+      PrivateLabelId = privateLabelId;
       OrionResourceId = orionResourceId;
       Attribute = attribute;
       RequestedBy = requestedBy;

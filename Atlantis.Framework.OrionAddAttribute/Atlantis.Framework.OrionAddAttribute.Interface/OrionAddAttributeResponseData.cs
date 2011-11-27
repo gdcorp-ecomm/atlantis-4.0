@@ -4,13 +4,15 @@ namespace Atlantis.Framework.OrionAddAttribute.Interface
 {
   public class OrionAddAttributeResponseData : IResponseData
   {
+    public string AttributeUid { get; private set; }
     public AtlantisException AtlantisException { get; private set; }
     public bool IsSuccess { get; private set; }
     public string Error { get; private set; }
 
-    public OrionAddAttributeResponseData(int responseCode, string error)
+    public OrionAddAttributeResponseData(int responseCode, string attributeUid, string error)
     {
-      IsSuccess = responseCode == 0;
+      AttributeUid = attributeUid;
+      IsSuccess = responseCode == 0 && !string.IsNullOrEmpty(attributeUid);
       Error = error;
     }
 

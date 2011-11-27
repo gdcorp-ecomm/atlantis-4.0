@@ -20,6 +20,7 @@ namespace Atlantis.Framework.OrionAddAttribute.Impl
       try
       {
         string error = string.Empty;
+        string attributeUid = string.Empty;
         OrionSecurityAuthResponseData responseSecurityData = GetOrionAuthToken(requestData);
         if (responseSecurityData.IsSuccess && !string.IsNullOrEmpty(responseSecurityData.AuthToken))
         {
@@ -35,12 +36,17 @@ namespace Atlantis.Framework.OrionAddAttribute.Impl
 
             int returnCode = accountOperationsWs.AddAttribute(new AddAttributeRequest[1] {addAttributeRequest}, out addAttributeResponse, out errors);
 
-            responseCode = addAttributeResponse == null || addAttributeResponse.Length == 0 ? returnCode : addAttributeResponse[0].Result;
+            responseCode = addAttributeResponse == null || addAttributeResponse.Length == 0
+                             ? returnCode
+                             : addAttributeResponse[0].Result;
+            attributeUid = addAttributeResponse == null || addAttributeResponse.Length == 0
+                             ? string.Empty
+                             : addAttributeResponse[0].items[0].ItemValue;
             error = errors == null || errors.Length < 1 ? string.Empty : errors[0];
           }
         }
 
-        response = new OrionAddAttributeResponseData(responseCode, error);
+        response = new OrionAddAttributeResponseData(responseCode, attributeUid, error);
       }
       catch (AtlantisException atlEx)
       {

@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CDS\ICDSProvider.cs" />
     <Compile Include="Currency\CurrencyNegativeFormat.cs" />
     <Compile Include="Currency\CurrencyPriceType.cs" />
     <Compile Include="Currency\CurrencySymbolPositionType.cs" />

@@ -59,7 +59,7 @@ namespace Atlantis.Framework.HXGetAccountInfo.Impl
       info.IsBlackBerryEnabled = response.IsBlackBerryEnabled;
       info.MailboxesAllocated = response.MailboxesAllocated;
       info.MailboxesTotal = response.MailboxesTotal;
-      info.SharePointDiskSpaceAllocate = response.SharePointDiskSpaceAllocated;
+      info.SharePointDiskSpaceAllocated = response.SharePointDiskSpaceAllocated;
       info.SharePointDiskSpaceTotal = response.SharePointDiskSpaceTotal;
       info.SharePointSitesAllocated = response.SharePointSitesAllocated;
       info.SharePointSitesTotal = response.SharePointSitesTotal;

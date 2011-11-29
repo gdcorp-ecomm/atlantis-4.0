@@ -10,7 +10,7 @@ namespace Atlantis.Framework.HXGetAccountInfo.Interface
     public int DiskSpaceTotal { get; set; }
     public int DiskSpaceAllocated { get; set; }
     public int SharePointDiskSpaceTotal { get; set; }
-    public int SharePointDiskSpaceAllocate { get; set; }
+    public int SharePointDiskSpaceAllocated { get; set; }
     public int EmailForwardsTotal { get; set; }
     public int EmailForwardsAllocated { get; set; }
     public int BlackBerryDevicesTotal { get; set; }

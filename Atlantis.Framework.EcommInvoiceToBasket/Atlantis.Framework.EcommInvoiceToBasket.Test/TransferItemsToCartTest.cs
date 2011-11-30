@@ -1,18 +1,11 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Atlantis.Framework.EcommInvoiceToBasket.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.EcommInvoiceToBasket.Interface;
 
 namespace Atlantis.Framework.EcommInvoiceToBasket.Test
 {
   [TestClass]
   public class TransferItemsToCartTest
   {
-
-    #warning Test will never work because the shopper id 830398 does not have any invoices with order item details.
-
     string uid = "3484CABE-A2B1-4947-8C3B-6E487C74D79F";
     [TestMethod]
     [DeploymentItem("atlantis.config")]

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Xml.Linq;
 using Atlantis.Framework.EcommInvoiceDetails.Interface;
-using System.Xml.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.EcommInvoiceDetails.Test
 {
@@ -32,7 +28,6 @@ namespace Atlantis.Framework.EcommInvoiceDetails.Test
 
       XDocument xd = new XDocument();
       xd = XDocument.Parse(response.ToXML());
-      string s = "hi";
       Assert.IsTrue(response.IsSuccess);
     }
   }

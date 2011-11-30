@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Text;
-using Atlantis.Framework.Interface;
-using System.Xml;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Xml;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DCCGetAppTrusteeInfoByDomainId.Interface
 {
@@ -16,7 +16,6 @@ namespace Atlantis.Framework.DCCGetAppTrusteeInfoByDomainId.Interface
     }
 
     public List<string> DomainIds { get; set; }
-    public TimeSpan RequestTimeout { get; set; }
 
     #region RequestData Members
 

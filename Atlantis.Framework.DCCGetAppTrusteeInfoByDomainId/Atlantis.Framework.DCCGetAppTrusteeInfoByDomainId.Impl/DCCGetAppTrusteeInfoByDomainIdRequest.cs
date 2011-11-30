@@ -1,8 +1,7 @@
 ﻿using System;
-
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.DCCGetAppTrusteeInfoByDomainId.Interface;
 using Atlantis.Framework.DCCGetAppTrusteeInfoByDomainId.Impl.AppTrusteeInfoWS;
+using Atlantis.Framework.DCCGetAppTrusteeInfoByDomainId.Interface;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DCCGetAppTrusteeInfoByDomainId.Impl
 {
@@ -15,11 +14,12 @@ namespace Atlantis.Framework.DCCGetAppTrusteeInfoByDomainId.Impl
       IResponseData result = null;
       string responseXml = null;
 
+      RegCheckDomainStatusWebSvcService service = null;
       try
       {
         DCCGetAppTrusteeInfoByDomainIdRequestData request = (DCCGetAppTrusteeInfoByDomainIdRequestData)oRequestData;
 
-        RegCheckDomainStatusWebSvcService service = new RegCheckDomainStatusWebSvcService();
+        service = new RegCheckDomainStatusWebSvcService();
         service.Url = ((WsConfigElement)oConfig).WSURL;
         service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
@@ -29,6 +29,13 @@ namespace Atlantis.Framework.DCCGetAppTrusteeInfoByDomainId.Impl
       catch (Exception ex)
       {
         result = new DCCGetAppTrusteeInfoByDomainIdResponseData(responseXml, oRequestData, ex);
+      }
+      finally
+      {
+        if (service != null)
+        {
+          service.Dispose();
+        }
       }
 
       return result;

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+﻿using System.Collections.Generic;
 using Atlantis.Framework.DCCGetAppTrusteeInfoByDomainId.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.DCCGetAppTrusteeInfoByDomainId.Tests
 {

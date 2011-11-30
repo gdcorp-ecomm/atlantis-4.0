@@ -1,7 +1,7 @@
 ﻿using System;
-using Atlantis.Framework.Interface;
-using System.Xml;
 using System.Collections.Generic;
+using System.Xml;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DCCGetAppTrusteeInfoByDomainId.Interface
 {

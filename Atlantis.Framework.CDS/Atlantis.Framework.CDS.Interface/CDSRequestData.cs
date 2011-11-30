@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Cache;
 using System.Security.Cryptography;
 using Atlantis.Framework.Interface;
 
@@ -17,9 +18,11 @@ namespace Atlantis.Framework.CDS.Interface
       : base(shopperId, sourceUrl, orderIo, pathway, pageCount)
     {
       Query = query;
+      RequestTimeout = TimeSpan.FromSeconds(20);
     }
 
     public string Query { get; set; }
+    public TimeSpan RequestTimeout { get; set; }
 
     public override string GetCacheMD5()
     {

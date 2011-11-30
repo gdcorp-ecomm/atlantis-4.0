@@ -105,13 +105,46 @@ namespace Atlantis.Framework.CDS.Tests
       CDSTokenizer t = new CDSTokenizer();
 
       //Act
-      var result = t.Parse("{{links::full::/default.aspx::false::ci|1234556|var2|true}}");
+      var result = t.Parse("{{link::full::/default.aspx::false::ci|1234556|var2|true}}");
       var expected = Links.GetFullUrl("/default.aspx", QueryParamMode.ExplicitParameters, new NameValueCollection { { "ci", "1234556" }, { "var2", "true" } });
 
       //Assert
       Assert.IsNotNull(result);
       Assert.AreEqual(expected, result);
     }
+
+
+    [TestMethod]
+    public void Tokenizer_Invalid_Link_Type_Returns_Default()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{link::blah::/default.aspx::false::ci|1234556|var2|true}}");
+      var expected = Links.GetFullUrl("//default.aspx", QueryParamMode.ExplicitParameters, new NameValueCollection { { "ci", "1234556" }, { "var2", "true" } });
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+
+    [TestMethod]
+    public void Tokenizer_Malformed_Link_Token()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{link::full::/default.aspx::false::ci|1234556|var2|true");
+      string expected = "{{link::full::/default.aspx::false::ci|1234556|var2|true";
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
@@ -243,8 +276,186 @@ namespace Atlantis.Framework.CDS.Tests
       CDSTokenizer t = new CDSTokenizer();
 
       //Act
-      var result = t.Parse("{{quickhelp::notifier::Desktop Notifier}}");
-      var expected = "<span class=\"ndash\" onmouseover=\"atl_ShowQuickHelp(event, 'notifier');\" onmouseout=\"atl_HideQuickHelp();\">desktop notifier</span>";
+      var result = t.Parse("{{quickhelp::100::POP3}}");
+      var expected = "<span data-qh=\\\"100\\\">POP3</span>";
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+
+    [TestMethod]
+    public void Tokenizer_Link_Null_QueryString_Parameter()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{link::full::/default.aspx::false::|1234556|var2|true}}");
+      var expected = Links.GetFullUrl("/default.aspx", QueryParamMode.ExplicitParameters, new NameValueCollection { { null, "1234556" }, { "var2", "true" } });
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_CompanyName()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{companyname}}", CustomTokens);
+      var expected = "Go Daddy";
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_CompanyDotComName()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{companydotcomname}}", CustomTokens);
+      var expected = "GoDaddy.com";
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_StyleId()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{styleid}}", CustomTokens);
+      var expected = "1";
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_ImageRoot()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{imageroot}}", CustomTokens);
+      var expected = Links.ImageRoot;
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_ICANNFee()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{icannfee}}", CustomTokens);
+      var expected = "18¢/yr";
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_Negative_Unknown_WithCustom()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{Bogus}}", CustomTokens);
+      var expected = "[ERROR, Unhandled Token: {{Bogus}}]";
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_Negative_Unknown()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{Bogus}}");
+      var expected = "[ERROR, Unhandled Token: {{Bogus}}]";
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [ExpectedException(typeof(InvalidProgramException), "The Link Type  was invalid.")] 
+    [TestMethod]
+    public void Tokenizer_Negative_Unknown_InvalidArgument()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{link::}}");
+
+      //no need for Assert, will throw:
+      //the first part is recognized as a token {{link but not as a multipart token, which is what the link token is
+    }
+
+    [ExpectedException(typeof(InvalidProgramException), "The quick help item  was not found.")]
+    [TestMethod]
+    public void Tokenizer_Negative_Unknown_NotFound()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{quickhelp::}}");
+
+      //no need for Assert, will throw:
+    }
+
+    [ExpectedException(typeof(ArgumentOutOfRangeException), "Index was out of range. Must be non-negative and less than the size of the collection.")]
+    [TestMethod]
+    public void Tokenizer_Negative_Unknown_InvalidArgument2()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{quickhelp::crap}}");
+
+      //no need for Assert, will throw:
+    }
+
+    [TestMethod]
+    public void Tokenizer_Negative_Unknown_InvalidToken()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{link]]");
+
+      // no replacement will occur, not recognized as a token
+      var expected = "{{link]]";
 
       //Assert
       Assert.IsNotNull(result);
@@ -328,6 +539,32 @@ namespace Atlantis.Framework.CDS.Tests
     {
       IProduct p = Products.GetProduct(productId);
       return p.Info.Name;
+    }
+
+    private Dictionary<string, string> customTokens = null;
+    private Dictionary<string, string> CustomTokens
+    {
+      get
+      {
+        if (customTokens == null)
+        {
+          customTokens = GetCustomTokens();
+        }
+        return customTokens;
+      }
+    }
+
+    private Dictionary<string, string> GetCustomTokens()
+    {
+      Dictionary<string, string> tokenList = new Dictionary<string, string>();
+
+      tokenList.Add("{{companyname}}", "Go Daddy");
+      tokenList.Add("{{companydotcomname}}", "GoDaddy.com");
+      tokenList.Add("{{styleid}}", "1");
+      tokenList.Add("{{imageroot}}", Links.ImageRoot);
+      tokenList.Add("{{icannfee}}", "18¢/yr");
+
+      return tokenList;
     }
 
     #endregion

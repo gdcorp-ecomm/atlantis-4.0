@@ -11,6 +11,7 @@ using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Links;
 using Atlantis.Framework.Providers.Products;
 using Atlantis.Framework.Providers.Currency;
+using JsonCheckerTool;
 
 namespace Atlantis.Framework.CDS.Tests
 {
@@ -102,8 +103,8 @@ namespace Atlantis.Framework.CDS.Tests
       //Arrange
 
       //Act
-      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>(); 
-      PageData model = provider.GetModel<PageData>("gdtv/celebs/leeann-dearing/");
+      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+      PageData model = provider.GetModel<PageData>("sales/1/lp/email");
 
       //Assert
       Assert.IsNotNull(model);      
@@ -118,7 +119,7 @@ namespace Atlantis.Framework.CDS.Tests
 
       //Act
       ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
-      var data = provider.GetJSON("gdtv/celebs/leeann-dearing/", null);
+      var data = provider.GetJSON("gdtv/celebs/leeann-dearing/",null);
       PageData model = provider.GetModel<PageData>("gdtv/celebs/leeann-dearing/");
 
       //Assert
@@ -126,6 +127,32 @@ namespace Atlantis.Framework.CDS.Tests
       Assert.IsNotNull(model);
       Assert.AreEqual("this is stuff", model.Stuff);
       Assert.AreEqual("this is noise", model.Noise);
+    }
+
+    [TestMethod]
+    public void Validate_JSON_From_CDS_Valid()
+    {
+      //Arrange
+
+      //Act
+      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+      var data = provider.GetJSON("sales/1/lp/email", null);
+
+      //Assert
+      Assert.IsTrue(JSONValidator.Validate(data));
+    }
+
+    [TestMethod]
+    public void Validate_JSON_From_CDS_InValid()
+    {
+      //Arrange
+
+      //Act
+      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+      var data = provider.GetJSON("test/invalid/PoorlyFormed", null);
+
+      //Assert
+      Assert.IsFalse(JSONValidator.Validate(data));
     }
   }
 }

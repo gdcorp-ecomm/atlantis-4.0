@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CDSProvider.cs" />
     <Compile Include="ErrorEnums.cs" />
+    <Compile Include="ICDSProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

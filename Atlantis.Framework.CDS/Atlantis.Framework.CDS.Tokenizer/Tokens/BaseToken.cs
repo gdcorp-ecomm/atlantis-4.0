@@ -6,6 +6,7 @@ namespace Atlantis.Framework.CDS.Tokenizer.Tokens
 {
   public class BaseToken : IUniversalToken
   {
+    protected const string SEPARATOR = "::";
     protected const string OFFER = "offer";
     protected const string PROMO = "promo";
     protected const string PRODUCT = "product";
@@ -28,23 +29,23 @@ namespace Atlantis.Framework.CDS.Tokenizer.Tokens
     public BaseToken(string originalToken)
     {
       _originalToken = originalToken;
-      tokens.AddRange(originalToken.ToLowerInvariant().Replace("{{", "").Replace("}}", "").Split(new string[] { "::" }, StringSplitOptions.None));
+      tokens.AddRange(originalToken.Replace("{{", "").Replace("}}", "").Split(new string[] { SEPARATOR }, StringSplitOptions.None));
     }
 
     public static IUniversalToken GetUniversalToken(string originalToken)
     {
       string tempToken = originalToken.Replace("{{", "").Replace("}}", "");
 
-      if (tempToken.StartsWith(PRODUCT))
+      if (tempToken.StartsWith(PRODUCT + SEPARATOR))
         return new ProductToken(originalToken);
 
-      if (tempToken.StartsWith(PRICE))
+      if (tempToken.StartsWith(PRICE + SEPARATOR))
         return new PriceToken(originalToken);
 
-      if (tempToken.StartsWith(QUICKHELP, StringComparison.InvariantCultureIgnoreCase))
+      if (tempToken.StartsWith(QUICKHELP + SEPARATOR, StringComparison.InvariantCultureIgnoreCase))
         return new QuickHelpToken(originalToken);
 
-      if (tempToken.StartsWith(LINK))
+      if (tempToken.StartsWith(LINK + SEPARATOR))
         return new LinkToken(originalToken);
 
       return null;

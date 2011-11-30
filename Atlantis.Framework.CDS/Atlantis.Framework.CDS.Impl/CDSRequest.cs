@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Cache;
 using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.Interface;
 
@@ -11,35 +12,46 @@ namespace Atlantis.Framework.CDS.Impl
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       CDSResponseData result = null;
-      HttpWebResponse response = null;
       var cdsRequestData = requestData as CDSRequestData;
-      string responseText;
+      string responseText = string.Empty;
 
       var wsConfig = ((WsConfigElement)config);
       var webRequest = WebRequest.Create(wsConfig.WSURL + cdsRequestData.Query) as HttpWebRequest;
-
+      HttpWebResponse webResponse = null;
       try
       {
         if (webRequest != null)
         {
           webRequest.Method = "GET";
-          response = (HttpWebResponse)webRequest.GetResponse();
+          webRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
+          webResponse = webRequest.GetResponse() as HttpWebResponse;
 
-          
-          using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+          if (webResponse != null)
           {
-            responseText = reader.ReadToEnd();
+            using (Stream webResponseData = webResponse.GetResponseStream())
+            {
+              if (webResponseData != null)
+              {
+                using (StreamReader responseReader = new StreamReader(webResponseData))
+                {
+                  responseText = responseReader.ReadToEnd();
+                  responseReader.Close();
+                }
+              }
+            }
           }
-          result = new CDSResponseData(responseText, response.StatusCode); 
+          result = new CDSResponseData(responseText, webResponse.StatusCode); 
         }
       }
       catch (WebException ex)
       {
         result = new CDSResponseData(ex.Message, ((HttpWebResponse)ex.Response).StatusCode);
+        throw;
       }
       catch (Exception ex)
       {
-        result = new CDSResponseData(requestData, response.StatusCode, ex);
+        result = new CDSResponseData(requestData, webResponse.StatusCode, ex);
+        throw;
       }
       return result;
     }

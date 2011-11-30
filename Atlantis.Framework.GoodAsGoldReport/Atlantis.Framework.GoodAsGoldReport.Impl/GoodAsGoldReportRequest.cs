@@ -76,12 +76,10 @@ namespace Atlantis.Framework.GoodAsGoldReport.Impl
             totalPages = Convert.ToInt32(prmTotalPages.Value.ToString());
             begBal = prmBegBalance.Value.ToString();
             endBal = prmEndBalance.Value.ToString();
-
+           
             if (prmCurBalance.Value != System.DBNull.Value)
             {
-              //money is formatted incorrectly so need to change it.
-              decimal tmpCurBal = Convert.ToDecimal(prmCurBalance.Value.ToString().Replace("$", "")) / 100;
-              curBal = tmpCurBal.ToString("c");
+              curBal = prmCurBalance.Value.ToString();
             }
             else
             {

@@ -71,7 +71,7 @@ namespace Atlantis.Framework.LinkInfo.Tests
     [ExpectedException(typeof(AtlantisException))]
     public void LinkInfoMissingCacheEmpty()
     {
-      DataCache.DataCache.ClearAllInProcessCachedData();
+      DataCache.DataCache.ClearInProcessCachedData("GetProcessRequest" + 12.ToString());
       LinkInfoRequestData request = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, -1);
       LinkInfoResponseData response = (LinkInfoResponseData)DataCache.DataCache.GetProcessRequest(request, 12);
       Assert.AreNotEqual(0, response.Links.Count);
@@ -81,7 +81,7 @@ namespace Atlantis.Framework.LinkInfo.Tests
     [DeploymentItem("atlantis.config")]
     public void LinkInfoMissingCacheEmptyAllowed()
     {
-      DataCache.DataCache.ClearAllInProcessCachedData();
+      DataCache.DataCache.ClearInProcessCachedData("GetProcessRequest" + 12.ToString());
       LinkInfoRequestData request = new LinkInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, -1);
       request.AllowEmptyLinkSet = true;
       LinkInfoResponseData response = (LinkInfoResponseData)DataCache.DataCache.GetProcessRequest(request, 12);

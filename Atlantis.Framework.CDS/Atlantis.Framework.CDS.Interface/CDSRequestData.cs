@@ -22,7 +22,6 @@ namespace Atlantis.Framework.CDS.Interface
     }
 
     public string Query { get; set; }
-    public TimeSpan RequestTimeout { get; set; }
 
     public override string GetCacheMD5()
     {

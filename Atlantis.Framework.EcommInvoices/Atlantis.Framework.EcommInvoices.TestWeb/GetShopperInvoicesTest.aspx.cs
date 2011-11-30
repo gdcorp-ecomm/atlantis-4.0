@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Atlantis.Framework.EcommInvoices.Interface;
-using Atlantis.Framework.EcommInvoices.Impl;
 
 namespace Atlantis.Framework.EcommInvoices.TestWeb
 {
@@ -23,14 +17,13 @@ namespace Atlantis.Framework.EcommInvoices.TestWeb
       retAttr.PageSize = 3;
       retAttr.CurrentPage = 1;
       retAttr.SortDirection = "desc";
+      retAttr.DaysBack = 18;
       EcommInvoicesRequestData request = new EcommInvoicesRequestData("867900", string.Empty, string.Empty, string.Empty, 0, retAttr);
       EcommInvoicesResponseData response = (EcommInvoicesResponseData)Engine.Engine.ProcessRequest(request, 439);
 
 
       GridView1.DataSource = response.Invoices;// OrderByDescending(x => x.Amount).Skip(5).Take(5);
       GridView1.DataBind();
-
-    
     }  
   }
 }

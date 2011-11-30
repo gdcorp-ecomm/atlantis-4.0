@@ -1,10 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Atlantis.Framework.EcommInvoices.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.EcommInvoices.Interface;
-using Atlantis.Framework.EcommInvoices.Impl;
 namespace Atlantis.Framework.EcommInvoices.Test
 {
   [TestClass]

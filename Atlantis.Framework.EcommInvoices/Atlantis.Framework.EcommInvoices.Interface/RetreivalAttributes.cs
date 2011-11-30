@@ -7,6 +7,7 @@
     public int CurrentPage { get; set; }
     public string SortColumn {get;set;}
     public string SortDirection { get; set; }
+    public int DaysBack { get; set; }
 
     public RetrievalAttributes(int filter = InvoiceStatus.All, int pageSize = 5, int currentPage = 1, string sortColumn = "create_date", string sortDirection = "desc")
     {
@@ -15,6 +16,7 @@
       CurrentPage = currentPage;
       SortColumn = sortColumn;
       SortDirection = sortDirection;
+      DaysBack = 30;
     }
   }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Atlantis.Framework.Interface;
-using System.Xml.Serialization;
 using System.IO;
+using System.Xml.Serialization;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.EcommInvoices.Interface
 {

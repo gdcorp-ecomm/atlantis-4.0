@@ -468,6 +468,14 @@
     <wsdl:part name="return" type="s:short" />
     <wsdl:part name="pbstrErrorXML" type="s:string" />
   </wsdl:message>
+  <wsdl:message name="GetInvoicesForShopperDisplayIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lDaysBack" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoicesForShopperDisplayOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrErrorXML" type="s:string" />
+  </wsdl:message>
   <wsdl:portType name="WscgdBasketServiceSoap">
     <wsdl:operation name="GetBasketXMLByType">
       <wsdl:input message="s0:GetBasketXMLByTypeIn" />
@@ -708,6 +716,10 @@
     <wsdl:operation name="CancelInvoice">
       <wsdl:input message="s0:CancelInvoiceIn" />
       <wsdl:output message="s0:CancelInvoiceOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoicesForShopperDisplay">
+      <wsdl:input message="s0:GetInvoicesForShopperDisplayIn" />
+      <wsdl:output message="s0:GetInvoicesForShopperDisplayOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WscgdBasketServiceSoap" type="s0:WscgdBasketServiceSoap">
@@ -1245,6 +1257,15 @@
     </wsdl:operation>
     <wsdl:operation name="CancelInvoice">
       <soap:operation soapAction="#CancelInvoice" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoicesForShopperDisplay">
+      <soap:operation soapAction="#GetInvoicesForShopperDisplay" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

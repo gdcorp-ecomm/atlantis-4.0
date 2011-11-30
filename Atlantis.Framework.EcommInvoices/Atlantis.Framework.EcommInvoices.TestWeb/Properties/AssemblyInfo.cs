@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Release Build")]
 #endif
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("GoDaddy.com")]
 [assembly: AssemblyProduct("Atlantis.Framework.EcommInvoices.TestWeb")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com 2011")]
 [assembly: AssemblyTrademark("")]

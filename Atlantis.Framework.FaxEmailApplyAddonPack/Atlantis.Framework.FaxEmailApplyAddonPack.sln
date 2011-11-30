@@ -1,0 +1,138 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FaxEmailApplyAddonPack.Interface", "Atlantis.Framework.FaxEmailApplyAddonPack.Interface\Atlantis.Framework.FaxEmailApplyAddonPack.Interface.csproj", "{E5BE6CCE-13B8-4192-8086-AE44217870D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FaxEmailApplyAddonPack.Impl", "Atlantis.Framework.FaxEmailApplyAddonPack.Impl\Atlantis.Framework.FaxEmailApplyAddonPack.Impl.csproj", "{9E571931-ACF5-4B9F-9CE0-058DD99D7C45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FaxEmailApplyAddonPack.Tests", "Atlantis.Framework.FaxEmailApplyAddonPack.Tests\Atlantis.Framework.FaxEmailApplyAddonPack.Tests.csproj", "{ACB4C642-3483-4E59-8D4E-BC4070E4C922}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5456E99F-253B-4B36-BE25-A128B9DC0442}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.FaxEmailApplyAddonPack.vsmdi = Atlantis.Framework.FaxEmailApplyAddonPack.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{55FDE2CB-A132-4230-8CDF-354538C391D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionAddAttribute.Interface", "..\Atlantis.Framework.OrionAddAttribute\Atlantis.Framework.OrionAddAttribute.Interface\Atlantis.Framework.OrionAddAttribute.Interface.csproj", "{CBA61939-71F9-4F62-82A6-3C22847D5F3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FaxEmailAddonPacks.Interface", "..\Atlantis.Framework.FaxEmailAddonPacks\Atlantis.Framework.FaxEmailAddonPacks.Interface\Atlantis.Framework.FaxEmailAddonPacks.Interface.csproj", "{BDBD243B-9A9C-4FF1-A0CB-62FC10891076}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionAddAttribute.Impl", "..\Atlantis.Framework.OrionAddAttribute\Atlantis.Framework.OrionAddAttribute.Impl\Atlantis.Framework.OrionAddAttribute.Impl.csproj", "{78C0BDEB-7242-431B-B04C-61F1906E08FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.OrionSecurityAuth.Impl", "..\Atlantis.Framework.OrionSecurityAuth\Atlantis.Framework.OrionSecurityAuth.Impl\Atlantis.Framework.OrionSecurityAuth.Impl.csproj", "{23973B8C-0EDB-4001-8FAA-ED0930971D5A}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.FaxEmailApplyAddonPack.Interface\\Atlantis.Framework.FaxEmailApplyAddonPack.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.FaxEmailApplyAddonPack.Interface
+		SccLocalPath1 = Atlantis.Framework.FaxEmailApplyAddonPack.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.FaxEmailApplyAddonPack.Impl\\Atlantis.Framework.FaxEmailApplyAddonPack.Impl.csproj
+		SccProjectName2 = Atlantis.Framework.FaxEmailApplyAddonPack.Impl
+		SccLocalPath2 = Atlantis.Framework.FaxEmailApplyAddonPack.Impl
+		SccProjectUniqueName3 = Atlantis.Framework.FaxEmailApplyAddonPack.Tests\\Atlantis.Framework.FaxEmailApplyAddonPack.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.FaxEmailApplyAddonPack.Tests
+		SccLocalPath3 = Atlantis.Framework.FaxEmailApplyAddonPack.Tests
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.FaxEmailApplyAddonPack.sln
+		SccProjectName4 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath4 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.FaxEmailApplyAddonPack.sln
+		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.FaxEmailApplyAddonPack.sln
+		SccProjectName6 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath6 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.OrionAddAttribute\\Atlantis.Framework.OrionAddAttribute.Interface\\Atlantis.Framework.OrionAddAttribute.Interface.csproj
+		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.FaxEmailApplyAddonPack.sln
+		SccProjectName7 = ../Atlantis.Framework.OrionAddAttribute/Atlantis.Framework.OrionAddAttribute.Interface
+		SccLocalPath7 = ..\\Atlantis.Framework.OrionAddAttribute\\Atlantis.Framework.OrionAddAttribute.Interface
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.FaxEmailAddonPacks\\Atlantis.Framework.FaxEmailAddonPacks.Interface\\Atlantis.Framework.FaxEmailAddonPacks.Interface.csproj
+		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.FaxEmailApplyAddonPack.sln
+		SccProjectName8 = ../Atlantis.Framework.FaxEmailAddonPacks/Atlantis.Framework.FaxEmailAddonPacks.Interface
+		SccLocalPath8 = ..\\Atlantis.Framework.FaxEmailAddonPacks\\Atlantis.Framework.FaxEmailAddonPacks.Interface
+		SccProjectUniqueName9 = ..\\Atlantis.Framework.OrionAddAttribute\\Atlantis.Framework.OrionAddAttribute.Impl\\Atlantis.Framework.OrionAddAttribute.Impl.csproj
+		SccProjectTopLevelParentUniqueName9 = Atlantis.Framework.FaxEmailApplyAddonPack.sln
+		SccProjectName9 = ../Atlantis.Framework.OrionAddAttribute/Atlantis.Framework.OrionAddAttribute.Impl
+		SccLocalPath9 = ..\\Atlantis.Framework.OrionAddAttribute\\Atlantis.Framework.OrionAddAttribute.Impl
+		SccProjectUniqueName10 = ..\\Atlantis.Framework.OrionSecurityAuth\\Atlantis.Framework.OrionSecurityAuth.Impl\\Atlantis.Framework.OrionSecurityAuth.Impl.csproj
+		SccProjectTopLevelParentUniqueName10 = Atlantis.Framework.FaxEmailApplyAddonPack.sln
+		SccProjectName10 = ../Atlantis.Framework.OrionSecurityAuth/Atlantis.Framework.OrionSecurityAuth.Impl
+		SccLocalPath10 = ..\\Atlantis.Framework.OrionSecurityAuth\\Atlantis.Framework.OrionSecurityAuth.Impl
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.FaxEmailApplyAddonPack.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5BE6CCE-13B8-4192-8086-AE44217870D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5BE6CCE-13B8-4192-8086-AE44217870D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5BE6CCE-13B8-4192-8086-AE44217870D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5BE6CCE-13B8-4192-8086-AE44217870D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E571931-ACF5-4B9F-9CE0-058DD99D7C45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E571931-ACF5-4B9F-9CE0-058DD99D7C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E571931-ACF5-4B9F-9CE0-058DD99D7C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E571931-ACF5-4B9F-9CE0-058DD99D7C45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACB4C642-3483-4E59-8D4E-BC4070E4C922}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACB4C642-3483-4E59-8D4E-BC4070E4C922}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACB4C642-3483-4E59-8D4E-BC4070E4C922}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACB4C642-3483-4E59-8D4E-BC4070E4C922}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBA61939-71F9-4F62-82A6-3C22847D5F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBA61939-71F9-4F62-82A6-3C22847D5F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBA61939-71F9-4F62-82A6-3C22847D5F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBA61939-71F9-4F62-82A6-3C22847D5F3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDBD243B-9A9C-4FF1-A0CB-62FC10891076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDBD243B-9A9C-4FF1-A0CB-62FC10891076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDBD243B-9A9C-4FF1-A0CB-62FC10891076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDBD243B-9A9C-4FF1-A0CB-62FC10891076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78C0BDEB-7242-431B-B04C-61F1906E08FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78C0BDEB-7242-431B-B04C-61F1906E08FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78C0BDEB-7242-431B-B04C-61F1906E08FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78C0BDEB-7242-431B-B04C-61F1906E08FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23973B8C-0EDB-4001-8FAA-ED0930971D5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {55FDE2CB-A132-4230-8CDF-354538C391D8}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {55FDE2CB-A132-4230-8CDF-354538C391D8}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {55FDE2CB-A132-4230-8CDF-354538C391D8}
+		{CBA61939-71F9-4F62-82A6-3C22847D5F3A} = {55FDE2CB-A132-4230-8CDF-354538C391D8}
+		{BDBD243B-9A9C-4FF1-A0CB-62FC10891076} = {55FDE2CB-A132-4230-8CDF-354538C391D8}
+		{78C0BDEB-7242-431B-B04C-61F1906E08FF} = {55FDE2CB-A132-4230-8CDF-354538C391D8}
+		{23973B8C-0EDB-4001-8FAA-ED0930971D5A} = {55FDE2CB-A132-4230-8CDF-354538C391D8}
+	EndGlobalSection
+EndGlobal

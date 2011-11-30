@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="urn:WSCmyaActionService" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSCmyaActionService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WSCmyaActionService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="QueueActionEventIn">
+    <wsdl:part name="bstrBody" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueueActionEventOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueueActionIn">
+    <wsdl:part name="bstrBody" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueueActionOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WSCmyaActionServiceSoap">
+    <wsdl:operation name="QueueActionEvent">
+      <wsdl:input message="s0:QueueActionEventIn" />
+      <wsdl:output message="s0:QueueActionEventOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueAction">
+      <wsdl:input message="s0:QueueActionIn" />
+      <wsdl:output message="s0:QueueActionOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSCmyaActionServiceSoap" type="s0:WSCmyaActionServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="QueueActionEvent">
+      <soap:operation soapAction="#QueueActionEvent" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCmyaActionService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCmyaActionService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueAction">
+      <soap:operation soapAction="#QueueAction" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCmyaActionService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCmyaActionService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCmyaActionService">
+    <wsdl:port name="WSCmyaActionServiceSoap" binding="s0:WSCmyaActionServiceSoap">
+      <soap:address location="http://commgtwyws.dev.glbt1.gdg:80/wscmyaAction/WSCmyaAction.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

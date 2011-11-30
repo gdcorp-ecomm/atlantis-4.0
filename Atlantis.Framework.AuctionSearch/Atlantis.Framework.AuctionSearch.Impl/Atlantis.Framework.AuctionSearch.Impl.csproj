@@ -36,9 +36,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.Auction.Interface">
-      <HintPath>..\..\Atlantis.Framework.Auction.Interface\Atlantis.Framework.Auction.Interface\bin\Debug\Atlantis.Framework.Auction.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.EnterpriseServices" />
@@ -78,6 +75,10 @@
     <None Include="Web References\AuctionSearchWS\trpAdminUtilsService.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.Auction.Interface\Atlantis.Framework.Auction.Interface\Atlantis.Framework.Auction.Interface.csproj">
+      <Project>{F6601CD9-BFBC-40DC-9FE0-65DDB1A58B8A}</Project>
+      <Name>Atlantis.Framework.Auction.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>

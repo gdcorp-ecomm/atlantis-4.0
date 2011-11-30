@@ -1,9 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Atlantis.Framework.EcommInvoiceCancel.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.EcommInvoiceCancel.Interface;
 
 namespace Atlantis.Framework.EcommInvoiceCancel.Test
 {

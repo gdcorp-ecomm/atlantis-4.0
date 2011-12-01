@@ -53,6 +53,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Types\Action.cs" />
+    <Compile Include="Types\ActionRoot.cs" />
+    <Compile Include="Types\ActionNote.cs" />
+    <Compile Include="Types\FaxEmail.cs" />
+    <Compile Include="Types\Notes.cs" />
+    <Compile Include="Types\ShopperNote.cs" />
     <Compile Include="Web References\MyaAction\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,9 +122,7 @@
     </None>
     <None Include="Web References\MyaAction\WSCmyaAction.wsdl" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Types\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

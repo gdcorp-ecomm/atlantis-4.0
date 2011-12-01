@@ -50,8 +50,8 @@ namespace Atlantis.Framework.FaxEmailApplyAddonPack.Tests
     {
       const string fteAccountUid = "411ceae2-193d-11e1-a564-0050569575d8";
       const int fteResourceId = 431774; //must be the resourceid for the fteAccountUid acct
-      const int addonPackResourceId = 999999; // must be for the fte type (standard or tollfree) of the fte acct
-      DateTime addonPackExpireDate = DateTime.Today;
+      const int addonPackResourceId = 431771; // must be for the fte type (standard or tollfree) of the fte acct
+      DateTime addonPackExpireDate = DateTime.Parse("2012-11-27 00:00:00.000");
       var packDetails = new Dictionary<string, string> {{FaxEmailAddonPack.Minutes, "100"}};
 
       var request = new FaxEmailApplyAddonPackRequestData("857527",

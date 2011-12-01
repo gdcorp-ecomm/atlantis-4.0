@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://guestbook.starfieldtech.com.gdg/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://guestbook.starfieldtech.com.gdg/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://guestbook.starfieldtech.com.gdg/">
+      <s:element name="AddGuestbookEntry">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="guestbookId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="wsComment" type="tns:WsComment" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WsComment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" default="-1" name="CommentId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" default="-1" name="GuestbookId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" default="user" name="GuestName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" default="guestEmail" name="GuestEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" default="guestComment" name="GuestComment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreateDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CommentStatusId" type="tns:CommentStatusEnum" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="CommentStatusEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="Approved" />
+          <s:enumeration value="Pending" />
+          <s:enumeration value="Deleted" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AddGuestbookEntryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddGuestbookEntryResult" type="tns:GuestbookResultEnum" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="GuestbookResultEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="GeneralException" />
+          <s:enumeration value="CreateWSTGuestbookException" />
+          <s:enumeration value="UpdateWSTGuestbookException" />
+          <s:enumeration value="NotNewGuestbookException" />
+          <s:enumeration value="InvalidGuestbookOrionAccountUidException" />
+          <s:enumeration value="GuestbookDomainInUseException" />
+          <s:enumeration value="GuestbookDomainInvalid" />
+          <s:enumeration value="GuestbookNotFoundException" />
+          <s:enumeration value="UnableToSetCssResourcesException" />
+          <s:enumeration value="UnableToSetWSTResourcesException" />
+          <s:enumeration value="UnableToSetGuestbookStatusException" />
+          <s:enumeration value="UnableToSetCommentStatusException" />
+          <s:enumeration value="WSTAuthenticationException" />
+          <s:enumeration value="UpdateGuestbookContentFilterException" />
+          <s:enumeration value="NotNewCommentException" />
+          <s:enumeration value="AddNewCommentException" />
+          <s:enumeration value="CommentStatusChangeException" />
+          <s:enumeration value="NotNewUserException" />
+          <s:enumeration value="NewUserException" />
+          <s:enumeration value="LoginNameInUseException" />
+          <s:enumeration value="EmailAddressInUseException" />
+          <s:enumeration value="LoginNotUpdatedException" />
+          <s:enumeration value="OldGuestbookActivated" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetGuestbookPage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="guestbookId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="commentStatusId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="startRowIndex" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="entriesPerPage" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGuestbookPageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetGuestbookPageResult" type="tns:GuestbookResultEnum" />
+            <s:element minOccurs="1" maxOccurs="1" name="totalPages" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="totalEntries" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="commentList" type="tns:ArrayOfWsComment" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfWsComment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="WsComment" nillable="true" type="tns:WsComment" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TestServerIP">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestServerIPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestServerIPResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddGuestbookEntrySoapIn">
+    <wsdl:part name="parameters" element="tns:AddGuestbookEntry" />
+  </wsdl:message>
+  <wsdl:message name="AddGuestbookEntrySoapOut">
+    <wsdl:part name="parameters" element="tns:AddGuestbookEntryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGuestbookPageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGuestbookPage" />
+  </wsdl:message>
+  <wsdl:message name="GetGuestbookPageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGuestbookPageResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestServerIPSoapIn">
+    <wsdl:part name="parameters" element="tns:TestServerIP" />
+  </wsdl:message>
+  <wsdl:message name="TestServerIPSoapOut">
+    <wsdl:part name="parameters" element="tns:TestServerIPResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GuestbookServiceSoap">
+    <wsdl:operation name="AddGuestbookEntry">
+      <wsdl:input message="tns:AddGuestbookEntrySoapIn" />
+      <wsdl:output message="tns:AddGuestbookEntrySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGuestbookPage">
+      <wsdl:input message="tns:GetGuestbookPageSoapIn" />
+      <wsdl:output message="tns:GetGuestbookPageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestServerIP">
+      <wsdl:input message="tns:TestServerIPSoapIn" />
+      <wsdl:output message="tns:TestServerIPSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GuestbookServiceSoap" type="tns:GuestbookServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddGuestbookEntry">
+      <soap:operation soapAction="http://guestbook.starfieldtech.com.gdg/AddGuestbookEntry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGuestbookPage">
+      <soap:operation soapAction="http://guestbook.starfieldtech.com.gdg/GetGuestbookPage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestServerIP">
+      <soap:operation soapAction="http://guestbook.starfieldtech.com.gdg/TestServerIP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GuestbookServiceSoap12" type="tns:GuestbookServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddGuestbookEntry">
+      <soap12:operation soapAction="http://guestbook.starfieldtech.com.gdg/AddGuestbookEntry" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGuestbookPage">
+      <soap12:operation soapAction="http://guestbook.starfieldtech.com.gdg/GetGuestbookPage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestServerIP">
+      <soap12:operation soapAction="http://guestbook.starfieldtech.com.gdg/TestServerIP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GuestbookService">
+    <wsdl:port name="GuestbookServiceSoap" binding="tns:GuestbookServiceSoap">
+      <soap:address location="http://guestbook.dev.websitetonight-com.ide/services/GuestbookService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GuestbookServiceSoap12" binding="tns:GuestbookServiceSoap12">
+      <soap12:address location="http://guestbook.dev.websitetonight-com.ide/services/GuestbookService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

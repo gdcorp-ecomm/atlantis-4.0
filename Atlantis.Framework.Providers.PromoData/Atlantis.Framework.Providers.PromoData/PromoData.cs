@@ -38,7 +38,6 @@ namespace Atlantis.Framework.Providers.PromoData
       get { return this._promoProduct.PromoCode; }
     }
 
-    private bool _isPromoActive = false;
     public bool IsPromoActive
     {
       get { return this._promoProduct.IsPromoActive; }

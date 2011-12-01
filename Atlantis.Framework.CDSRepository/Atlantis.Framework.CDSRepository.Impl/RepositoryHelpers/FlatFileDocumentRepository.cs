@@ -31,9 +31,13 @@ namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
 
     public string GetDocument(string query)
     {
-
+      string json = string.Empty;
       string file = filePath(query);
-      string json = File.ReadAllText(file);
+      if (File.Exists(file))
+      {
+        json = File.ReadAllText(file);
+      }
+
       return json;
     }
 

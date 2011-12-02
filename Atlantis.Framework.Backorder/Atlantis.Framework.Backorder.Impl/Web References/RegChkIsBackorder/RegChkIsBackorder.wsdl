@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:RegChkIsBackorderService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:RegChkIsBackorderService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:RegChkIsBackorderService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="IsDomainBackorderableBulkIn">
+    <wsdl:part name="domainXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainBackorderableBulkOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsMultipleDomainBackorderAllowedIn">
+    <wsdl:part name="requestXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsMultipleDomainBackorderAllowedOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="RegChkIsBackorderServiceSoap">
+    <wsdl:operation name="IsDomainBackorderableBulk">
+      <wsdl:input message="s0:IsDomainBackorderableBulkIn" />
+      <wsdl:output message="s0:IsDomainBackorderableBulkOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsMultipleDomainBackorderAllowed">
+      <wsdl:input message="s0:IsMultipleDomainBackorderAllowedIn" />
+      <wsdl:output message="s0:IsMultipleDomainBackorderAllowedOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegChkIsBackorderServiceSoap" type="s0:RegChkIsBackorderServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="IsDomainBackorderableBulk">
+      <soap:operation soapAction="#IsDomainBackorderableBulk" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegChkIsBackorderService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegChkIsBackorderService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsMultipleDomainBackorderAllowed">
+      <soap:operation soapAction="#IsMultipleDomainBackorderAllowed" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:RegChkIsBackorderService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:RegChkIsBackorderService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegChkIsBackorderService">
+    <wsdl:port name="RegChkIsBackorderServiceSoap" binding="s0:RegChkIsBackorderServiceSoap">
+      <soap:address location="http://check.test.secureserver.net:80/RegChkIsBackorder/RegChkIsBackorder.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

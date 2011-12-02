@@ -1,12 +1,6 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Data;
 using Atlantis.Framework.ManagerGetProductDetail.Interface;
-using Atlantis.Framework.Engine;
-using Atlantis.Framework.Interface;
-using System.Data;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.ManagerGetProductDetail.Tests
 {

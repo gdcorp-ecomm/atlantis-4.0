@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.CDSRepository.Impl;
 using Atlantis.Framework.CDSRepository.Interface;
 using Atlantis.Framework.Interface;
-
+using Should;
 
 
 namespace Atlantis.Framework.CDSRepository.Tests
@@ -164,7 +164,6 @@ namespace Atlantis.Framework.CDSRepository.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    [ExpectedException(typeof(AtlantisException))]
     public void CDSRepository_FlatFile_DoesntExist()
     {
       //Arrange
@@ -175,15 +174,10 @@ namespace Atlantis.Framework.CDSRepository.Tests
      
 
       //Act
-      try
-      {
-        CDSRepositoryResponseData responseData = (CDSRepositoryResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
-      }
-      catch (AtlantisException ex)
-      {
-        Assert.IsTrue(ex.Message.StartsWith(@"Could not find file"));
-        throw;
-      }
+      CDSRepositoryResponseData responseData = (CDSRepositoryResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
+        responseData.ResponseData.ShouldEqual(@"{'error':'file not found', 'status':'404'}");
+        responseData.IsSuccess.ShouldBeFalse();
+      
     }
 
 

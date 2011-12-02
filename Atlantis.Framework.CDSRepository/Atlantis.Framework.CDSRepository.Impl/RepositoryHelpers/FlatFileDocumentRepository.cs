@@ -37,6 +37,10 @@ namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
       {
         json = File.ReadAllText(file);
       }
+      else
+      {
+        json = @"{'error':'file not found', 'status':'404'}";
+      }
 
       return json;
     }

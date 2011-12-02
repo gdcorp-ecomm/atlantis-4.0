@@ -17,8 +17,8 @@ namespace Atlantis.Framework.CDSRepository.Interface
 
     public CDSRepositoryResponseData(string responseData)
     {
-      _success = true;
       _responseData = responseData;
+      _success = !responseData.Contains(@"{'error':'file not found', 'status':'404'}");
     }
 
     public CDSRepositoryResponseData(AtlantisException atlantisException)

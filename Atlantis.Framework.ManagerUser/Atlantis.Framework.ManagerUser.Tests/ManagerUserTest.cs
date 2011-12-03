@@ -1,8 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.ManagerUser.Interface;
 using Atlantis.Framework.DataCache;
 
@@ -12,7 +8,7 @@ namespace TestProject1
   public class UnitTest1
   {
     public string shopperId = "859147";
-    public string userId = "mbenzel";
+    public string userId = "mmicco";
     public string domain = "jomax";
        
     [TestMethod]

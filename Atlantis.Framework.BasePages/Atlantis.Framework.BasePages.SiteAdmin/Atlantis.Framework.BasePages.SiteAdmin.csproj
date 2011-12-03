@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Providers\DebugProvider.cs" />
     <Compile Include="Providers\SiteAdminUserProvider.cs" />
+    <Compile Include="Providers\WindowsManagerProvider.cs" />
     <Compile Include="Security\SiteAdminSecurity.cs" />
     <Compile Include="SiteAdminBaseEngineRequests.cs" />
     <Compile Include="ContextIds.cs" />
@@ -62,7 +63,6 @@
     </Compile>
     <Compile Include="Json\JsonContent.cs" />
     <Compile Include="Json\JsonContentPlaceholder.cs" />
-    <Compile Include="Providers\WindowsManagerProvider.cs" />
     <Compile Include="Providers\RequestHelper.cs" />
     <Compile Include="Providers\SiteAdminContextProvider.cs" />
     <Compile Include="SiteAdminBaseControl.cs">

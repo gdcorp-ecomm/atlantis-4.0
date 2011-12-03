@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://iris-ws.dev.godaddy-com.ide/iris/IrisWebservice.asmx?wsdl" docRef="https://iris-ws.dev.godaddy-com.ide/iris/IrisWebservice.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://iris-ws.dev.godaddy-com.ide/iris/IrisWebservice.asmx" xmlns:q1="http://tempuri.org/" binding="q1:IrisWebServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://iris-ws.dev.godaddy-com.ide/iris/IrisWebservice.asmx" xmlns:q2="http://tempuri.org/" binding="q2:IrisWebServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

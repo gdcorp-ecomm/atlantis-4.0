@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CreateIncidentInIRIS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerEmailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="originalIPAddress" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="groupID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="serviceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdBy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateIncidentInIRISResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateIncidentInIRISResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateIncidentInIRISByType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerEmailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="originalIPAddress" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="groupID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="serviceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="incidentType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateIncidentInIRISByTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateIncidentInIRISByTypeResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateIncidentInIRISByEmployee">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerEmailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="originalIPAddress" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="groupID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="serviceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="employeeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateIncidentInIRISByEmployeeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateIncidentInIRISByEmployeeResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateIncidentInIRISByPriority">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerEmailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="originalIPAddress" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="groupID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="serviceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="incidentType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="employeeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="priority" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateIncidentInIRISByPriorityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateIncidentInIRISByPriorityResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateQuickIncidentinIRIS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerEmailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="originalIPAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateQuickIncidentinIRISResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateQuickIncidentinIRISResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOfferingsListBySubscriberID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOfferingsListBySubscriberIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOfferingsListBySubscriberIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDashboardReportByGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="groupID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDashboardReportByGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDashboardReportByGroupResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServiceGroupLookUp">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetServiceGroupLookUpResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetServiceGroupLookUpResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddIncidentNote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="incidentID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NTLogin" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddIncidentNoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddIncidentNoteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetStaticData">
+        <s:complexType />
+      </s:element>
+      <s:element name="ResetStaticDataResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="QuickResolveIncident">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="subscriberID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="note" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerEmailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="originalIPAddress" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="groupID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="serviceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="privateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="employeeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QuickResolveIncidentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="QuickResolveIncidentResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePriority">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="incidentID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="updatedBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="newPriority" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePriorityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdatePriorityResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllPriorities">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllPrioritiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllPrioritiesResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrioritiesByDocumentType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="documentTypeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrioritiesByDocumentTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPrioritiesByDocumentTypeResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVersion">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVersionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateIncidentInIRISSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateIncidentInIRIS" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncidentInIRISSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateIncidentInIRISResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncidentInIRISByTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateIncidentInIRISByType" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncidentInIRISByTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateIncidentInIRISByTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncidentInIRISByEmployeeSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateIncidentInIRISByEmployee" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncidentInIRISByEmployeeSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateIncidentInIRISByEmployeeResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncidentInIRISByPrioritySoapIn">
+    <wsdl:part name="parameters" element="tns:CreateIncidentInIRISByPriority" />
+  </wsdl:message>
+  <wsdl:message name="CreateIncidentInIRISByPrioritySoapOut">
+    <wsdl:part name="parameters" element="tns:CreateIncidentInIRISByPriorityResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateQuickIncidentinIRISSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateQuickIncidentinIRIS" />
+  </wsdl:message>
+  <wsdl:message name="CreateQuickIncidentinIRISSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateQuickIncidentinIRISResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOfferingsListBySubscriberIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOfferingsListBySubscriberID" />
+  </wsdl:message>
+  <wsdl:message name="GetOfferingsListBySubscriberIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOfferingsListBySubscriberIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDashboardReportByGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDashboardReportByGroup" />
+  </wsdl:message>
+  <wsdl:message name="GetDashboardReportByGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDashboardReportByGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetServiceGroupLookUpSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServiceGroupLookUp" />
+  </wsdl:message>
+  <wsdl:message name="GetServiceGroupLookUpSoapOut">
+    <wsdl:part name="parameters" element="tns:GetServiceGroupLookUpResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddIncidentNoteSoapIn">
+    <wsdl:part name="parameters" element="tns:AddIncidentNote" />
+  </wsdl:message>
+  <wsdl:message name="AddIncidentNoteSoapOut">
+    <wsdl:part name="parameters" element="tns:AddIncidentNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetStaticDataSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetStaticData" />
+  </wsdl:message>
+  <wsdl:message name="ResetStaticDataSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetStaticDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="QuickResolveIncidentSoapIn">
+    <wsdl:part name="parameters" element="tns:QuickResolveIncident" />
+  </wsdl:message>
+  <wsdl:message name="QuickResolveIncidentSoapOut">
+    <wsdl:part name="parameters" element="tns:QuickResolveIncidentResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePrioritySoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePriority" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePrioritySoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePriorityResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllPrioritiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllPriorities" />
+  </wsdl:message>
+  <wsdl:message name="GetAllPrioritiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllPrioritiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrioritiesByDocumentTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrioritiesByDocumentType" />
+  </wsdl:message>
+  <wsdl:message name="GetPrioritiesByDocumentTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrioritiesByDocumentTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVersion" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVersionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IrisWebServiceSoap">
+    <wsdl:operation name="CreateIncidentInIRIS">
+      <wsdl:input message="tns:CreateIncidentInIRISSoapIn" />
+      <wsdl:output message="tns:CreateIncidentInIRISSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateIncidentInIRISByType">
+      <wsdl:input message="tns:CreateIncidentInIRISByTypeSoapIn" />
+      <wsdl:output message="tns:CreateIncidentInIRISByTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateIncidentInIRISByEmployee">
+      <wsdl:input message="tns:CreateIncidentInIRISByEmployeeSoapIn" />
+      <wsdl:output message="tns:CreateIncidentInIRISByEmployeeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateIncidentInIRISByPriority">
+      <wsdl:input message="tns:CreateIncidentInIRISByPrioritySoapIn" />
+      <wsdl:output message="tns:CreateIncidentInIRISByPrioritySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuickIncidentinIRIS">
+      <wsdl:input message="tns:CreateQuickIncidentinIRISSoapIn" />
+      <wsdl:output message="tns:CreateQuickIncidentinIRISSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOfferingsListBySubscriberID">
+      <wsdl:input message="tns:GetOfferingsListBySubscriberIDSoapIn" />
+      <wsdl:output message="tns:GetOfferingsListBySubscriberIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDashboardReportByGroup">
+      <wsdl:input message="tns:GetDashboardReportByGroupSoapIn" />
+      <wsdl:output message="tns:GetDashboardReportByGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceGroupLookUp">
+      <wsdl:input message="tns:GetServiceGroupLookUpSoapIn" />
+      <wsdl:output message="tns:GetServiceGroupLookUpSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddIncidentNote">
+      <wsdl:input message="tns:AddIncidentNoteSoapIn" />
+      <wsdl:output message="tns:AddIncidentNoteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetStaticData">
+      <wsdl:input message="tns:ResetStaticDataSoapIn" />
+      <wsdl:output message="tns:ResetStaticDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QuickResolveIncident">
+      <wsdl:input message="tns:QuickResolveIncidentSoapIn" />
+      <wsdl:output message="tns:QuickResolveIncidentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePriority">
+      <wsdl:input message="tns:UpdatePrioritySoapIn" />
+      <wsdl:output message="tns:UpdatePrioritySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPriorities">
+      <wsdl:input message="tns:GetAllPrioritiesSoapIn" />
+      <wsdl:output message="tns:GetAllPrioritiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrioritiesByDocumentType">
+      <wsdl:input message="tns:GetPrioritiesByDocumentTypeSoapIn" />
+      <wsdl:output message="tns:GetPrioritiesByDocumentTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion">
+      <wsdl:input message="tns:GetVersionSoapIn" />
+      <wsdl:output message="tns:GetVersionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IrisWebServiceSoap" type="tns:IrisWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateIncidentInIRIS">
+      <soap:operation soapAction="http://tempuri.org/CreateIncidentInIRIS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateIncidentInIRISByType">
+      <soap:operation soapAction="http://tempuri.org/CreateIncidentInIRISByType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateIncidentInIRISByEmployee">
+      <soap:operation soapAction="http://tempuri.org/CreateIncidentInIRISByEmployee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateIncidentInIRISByPriority">
+      <soap:operation soapAction="http://tempuri.org/CreateIncidentInIRISByPriority" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuickIncidentinIRIS">
+      <soap:operation soapAction="http://tempuri.org/CreateQuickIncidentinIRIS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOfferingsListBySubscriberID">
+      <soap:operation soapAction="http://tempuri.org/GetOfferingsListBySubscriberID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDashboardReportByGroup">
+      <soap:operation soapAction="http://tempuri.org/GetDashboardReportByGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceGroupLookUp">
+      <soap:operation soapAction="http://tempuri.org/GetServiceGroupLookUp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddIncidentNote">
+      <soap:operation soapAction="http://tempuri.org/AddIncidentNote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetStaticData">
+      <soap:operation soapAction="http://tempuri.org/ResetStaticData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QuickResolveIncident">
+      <soap:operation soapAction="http://tempuri.org/QuickResolveIncident" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePriority">
+      <soap:operation soapAction="http://tempuri.org/UpdatePriority" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPriorities">
+      <soap:operation soapAction="http://tempuri.org/GetAllPriorities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrioritiesByDocumentType">
+      <soap:operation soapAction="http://tempuri.org/GetPrioritiesByDocumentType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion">
+      <soap:operation soapAction="http://tempuri.org/GetVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IrisWebServiceSoap12" type="tns:IrisWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateIncidentInIRIS">
+      <soap12:operation soapAction="http://tempuri.org/CreateIncidentInIRIS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateIncidentInIRISByType">
+      <soap12:operation soapAction="http://tempuri.org/CreateIncidentInIRISByType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateIncidentInIRISByEmployee">
+      <soap12:operation soapAction="http://tempuri.org/CreateIncidentInIRISByEmployee" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateIncidentInIRISByPriority">
+      <soap12:operation soapAction="http://tempuri.org/CreateIncidentInIRISByPriority" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuickIncidentinIRIS">
+      <soap12:operation soapAction="http://tempuri.org/CreateQuickIncidentinIRIS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOfferingsListBySubscriberID">
+      <soap12:operation soapAction="http://tempuri.org/GetOfferingsListBySubscriberID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDashboardReportByGroup">
+      <soap12:operation soapAction="http://tempuri.org/GetDashboardReportByGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceGroupLookUp">
+      <soap12:operation soapAction="http://tempuri.org/GetServiceGroupLookUp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddIncidentNote">
+      <soap12:operation soapAction="http://tempuri.org/AddIncidentNote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetStaticData">
+      <soap12:operation soapAction="http://tempuri.org/ResetStaticData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QuickResolveIncident">
+      <soap12:operation soapAction="http://tempuri.org/QuickResolveIncident" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePriority">
+      <soap12:operation soapAction="http://tempuri.org/UpdatePriority" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPriorities">
+      <soap12:operation soapAction="http://tempuri.org/GetAllPriorities" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrioritiesByDocumentType">
+      <soap12:operation soapAction="http://tempuri.org/GetPrioritiesByDocumentType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion">
+      <soap12:operation soapAction="http://tempuri.org/GetVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IrisWebService">
+    <wsdl:port name="IrisWebServiceSoap" binding="tns:IrisWebServiceSoap">
+      <soap:address location="https://iris-ws.dev.godaddy-com.ide/iris/IrisWebservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IrisWebServiceSoap12" binding="tns:IrisWebServiceSoap12">
+      <soap12:address location="https://iris-ws.dev.godaddy-com.ide/iris/IrisWebservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

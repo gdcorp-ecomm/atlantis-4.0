@@ -14,7 +14,7 @@ public partial class Global : System.Web.HttpApplication
     HttpProviderContainer.Instance.RegisterProvider<ISiteContext, SiteAdminContextProvider>();
     HttpProviderContainer.Instance.RegisterProvider<IShopperContext, SiteAdminUserProvider>();
     HttpProviderContainer.Instance.RegisterProvider<IDebugContext, DebugProvider>();
-    HttpProviderContainer.Instance.RegisterProvider<IManagerContext, NoManagerProvider>();
+    HttpProviderContainer.Instance.RegisterProvider<IManagerContext, WindowsManagerProvider>();
   }
 
   void Application_End(object sender, EventArgs e)

@@ -20,7 +20,7 @@ namespace Atlantis.Framework.BasePages.SiteAdmin.Providers
         if (HttpContext.Current != null)
         {
           WindowsIdentity windowsUser = HttpContext.Current.User.Identity as WindowsIdentity;
-          if (windowsUser != null)
+          if ((windowsUser != null) && (windowsUser.IsAuthenticated))
           {
             result = windowsUser.Name;
           }

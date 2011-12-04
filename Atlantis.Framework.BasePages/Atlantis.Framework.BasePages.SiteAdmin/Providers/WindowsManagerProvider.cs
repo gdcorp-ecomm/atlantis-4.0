@@ -1,18 +1,33 @@
 ﻿using Atlantis.Framework.Interface;
+using System;
+using Atlantis.Framework.ManagerUser.Interface;
+using System.Security.Principal;
 
 namespace Atlantis.Framework.BasePages.SiteAdmin.Providers
 {
-  public class NoManagerProvider : ProviderBase, IManagerContext
+  public class WindowsManagerProvider : ProviderBase, IManagerContext
   {
-    public NoManagerProvider(IProviderContainer container) : base(container)
+    Lazy<IShopperContext> _shopperContext;
+    Lazy<ISiteContext> _siteContext;
+
+    public WindowsManagerProvider(IProviderContainer container) : base(container)
     {
+      _siteContext = new Lazy<ISiteContext>(() =>
+      {
+        return Container.Resolve<ISiteContext>();
+      });
+
+      _shopperContext = new Lazy<IShopperContext>(() =>
+      {
+        return Container.Resolve<IShopperContext>();
+      });
     }
 
     #region IManagerContext Members
 
     public bool IsManager
     {
-      get { return false; }
+      get { return true; }
     }
 
     public string ManagerUserId
@@ -32,7 +47,7 @@ namespace Atlantis.Framework.BasePages.SiteAdmin.Providers
 
     public string ManagerShopperId
     {
-      get { return string.Empty; }
+      get { return _shopperContext.Value.ShopperId; }
     }
 
     public int ManagerPrivateLabelId
@@ -46,5 +61,29 @@ namespace Atlantis.Framework.BasePages.SiteAdmin.Providers
     }
 
     #endregion
+
+    private bool GetWindowsUserAndDomain(out string domain, out string userId)
+    {
+      bool result = false;
+      domain = null;
+      userId = null;
+
+      string[] nameParts = _shopperContext.Value.ShopperId.Split('\\');
+      if (nameParts.Length == 2)
+      {
+        domain = nameParts[0];
+        userId = nameParts[1];
+        result = true;
+      }
+      else
+      {
+        AtlantisException managerException = new AtlantisException(
+          "WindowsManagerProvider.GetWindowsUserAndDomain", "403", "Windows identity cannot be determined.", _shopperContext.Value.ShopperId, _siteContext.Value, _shopperContext.Value);
+        Engine.Engine.LogAtlantisException(managerException);
+      }
+
+      return result;
+    }
+
   }
 }

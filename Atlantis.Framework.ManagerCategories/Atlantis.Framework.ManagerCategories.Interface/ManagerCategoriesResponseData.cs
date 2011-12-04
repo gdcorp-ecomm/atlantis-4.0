@@ -43,12 +43,22 @@ namespace Atlantis.Framework.ManagerCategories.Interface
 
     public bool HasAllManagerCategories(IEnumerable<int> categories)
     {
-      return _managerCategories.IsSupersetOf(categories);
+      bool result = false;
+      if (categories != null)
+      {
+        result = _managerCategories.IsSupersetOf(categories);
+      }
+      return result;
     }
 
     public bool HasAnyManagerCategories(IEnumerable<int> categoies)
     {
-      return _managerCategories.Overlaps(categoies);
+      bool result = false;
+      if (categoies != null)
+      {
+        result = _managerCategories.Overlaps(categoies);
+      }
+      return result;
     }
 
     public string ToXML()

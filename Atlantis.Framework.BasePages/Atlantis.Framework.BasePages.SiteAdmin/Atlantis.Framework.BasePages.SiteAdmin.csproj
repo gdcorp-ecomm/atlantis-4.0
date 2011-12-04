@@ -50,7 +50,7 @@
     <Compile Include="Providers\DebugProvider.cs" />
     <Compile Include="Providers\SiteAdminUserProvider.cs" />
     <Compile Include="Providers\WindowsManagerProvider.cs" />
-    <Compile Include="Security\SiteAdminSecurity.cs" />
+    <Compile Include="Security\SiteAdminSecurityProvider.cs" />
     <Compile Include="SiteAdminBaseEngineRequests.cs" />
     <Compile Include="ContextIds.cs" />
     <Compile Include="Cookies\CookieCryptWrapper.cs" />
@@ -89,6 +89,14 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.ManagerCategories\Atlantis.Framework.ManagerCategories.Interface\Atlantis.Framework.ManagerCategories.Interface.csproj">
+      <Project>{FD52CDBE-0BA5-4EED-BB0D-184F96F23011}</Project>
+      <Name>Atlantis.Framework.ManagerCategories.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.ManagerUser\Atlantis.Framework.ManagerUser.Interface\Atlantis.Framework.ManagerUser.Interface.csproj">
+      <Project>{55F48501-FE1B-441B-A786-A14001AD2F04}</Project>
+      <Name>Atlantis.Framework.ManagerUser.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
       <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>

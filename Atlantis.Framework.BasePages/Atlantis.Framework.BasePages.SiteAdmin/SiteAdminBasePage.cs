@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.Interface;
 using System.Web.UI;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.BasePages.SiteAdmin.Security;
 
 namespace Atlantis.Framework.BasePages.SiteAdmin
 {
@@ -29,6 +30,19 @@ namespace Atlantis.Framework.BasePages.SiteAdmin
           _userContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
         }
         return _userContext;
+      }
+    }
+
+    private SiteAdminSecurityProvider _securityContext;
+    protected SiteAdminSecurityProvider SecurityContext
+    {
+      get
+      {
+        if (_securityContext == null)
+        {
+          _securityContext = HttpProviderContainer.Instance.Resolve<SiteAdminSecurityProvider>();
+        }
+        return _securityContext;
       }
     }
   }

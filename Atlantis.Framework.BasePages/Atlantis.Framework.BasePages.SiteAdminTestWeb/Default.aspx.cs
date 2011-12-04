@@ -34,7 +34,7 @@ public partial class _Default : SiteAdminBasePage
 
     DebugHelper.LogDebugTrackingData("WindowsUser", User.Identity.Name);
 
-    bool isUserSystemAdmin = SiteAdminSecurity.IsCurrentUserInRole(SiteContext, 1);
+    bool isUserSystemAdmin = SecurityContext.IsCurrentUserInRole(1);
     DebugHelper.LogDebugTrackingData("IsUserSystemAdmin", isUserSystemAdmin.ToString());
 
     DebugHelper.LogDebugTrackingData("IsManager", SiteContext.Manager.IsManager.ToString());

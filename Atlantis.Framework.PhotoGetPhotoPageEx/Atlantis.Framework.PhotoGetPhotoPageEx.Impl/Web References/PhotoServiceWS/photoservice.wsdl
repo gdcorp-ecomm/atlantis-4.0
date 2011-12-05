@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://app.onlinephotofiler.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://app.onlinephotofiler.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://app.onlinephotofiler.com/">
+      <s:element name="GetSlideshowUrlEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="galleryId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSlideshowUrlExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSlideshowUrlExResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="response" type="tns:PhotoServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PhotoServiceResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResponseCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSlideshowUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="galleryId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSlideshowUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSlideshowUrlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="response" type="tns:PhotoServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGalleryBadgeListEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGalleryBadgeListExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGalleryBadgeListExResult" type="tns:ArrayOfGalleryBadge" />
+            <s:element minOccurs="0" maxOccurs="1" name="response" type="tns:PhotoServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGalleryBadge">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GalleryBadge" nillable="true" type="tns:GalleryBadge" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GalleryBadge">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BadgeId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetBadgeScriptEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="badgeId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBadgeScriptExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBadgeScriptExResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="response" type="tns:PhotoServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGalleryBadgeScriptEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="galleryId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="sequenceType" type="tns:GalleryBadgePhotoSequenceType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="GalleryBadgePhotoSequenceType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Default" />
+          <s:enumeration value="NameAscending" />
+          <s:enumeration value="NameDescending" />
+          <s:enumeration value="UploadDateAscending" />
+          <s:enumeration value="UploadDateDescending" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetGalleryBadgeScriptExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGalleryBadgeScriptExResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="response" type="tns:PhotoServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGalleryListEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGalleryListExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGalleryListExResult" type="tns:ArrayOfGallery" />
+            <s:element minOccurs="0" maxOccurs="1" name="response" type="tns:PhotoServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGallery">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Gallery" nillable="true" type="tns:Gallery" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Gallery">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="GalleryId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPhotos" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetGalleryList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetGalleryListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGalleryListResult" type="tns:ArrayOfGallery" />
+            <s:element minOccurs="0" maxOccurs="1" name="response" type="tns:PhotoServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPhotoPageEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="galleryId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="photosPerPage" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageNumber" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPhotoPageExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPhotoPageExResult" type="tns:GalleryPhotoPage" />
+            <s:element minOccurs="0" maxOccurs="1" name="response" type="tns:PhotoServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GalleryPhotoPage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PageNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPhotos" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPages" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Photos" type="tns:ArrayOfGalleryPhoto" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGalleryPhoto">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GalleryPhoto" nillable="true" type="tns:GalleryPhoto" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GalleryPhoto">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PhotoId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UploadedDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Width" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Height" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Url" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UrlSmall" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UrlLarge" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UrlThumbnail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SSLUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SSLUrlSmall" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SSLUrlLarge" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SSLUrlThumbnail" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMediaPageEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="galleryId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="photosPerPage" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageNumber" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="selectedMediaType" type="tns:MediaTypeSelection" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="MediaTypeSelection">
+        <s:restriction base="s:string">
+          <s:enumeration value="Photo" />
+          <s:enumeration value="Video" />
+          <s:enumeration value="Any" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetMediaPageExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMediaPageExResult" type="tns:GalleryPhotoPage" />
+            <s:element minOccurs="0" maxOccurs="1" name="response" type="tns:PhotoServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPhotoPage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="galleryId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="photosPerPage" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageNumber" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPhotoPageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPhotoPageResult" type="tns:GalleryPhotoPage" />
+            <s:element minOccurs="0" maxOccurs="1" name="response" type="tns:PhotoServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSlideshowUrlExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSlideshowUrlEx" />
+  </wsdl:message>
+  <wsdl:message name="GetSlideshowUrlExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSlideshowUrlExResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSlideshowUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSlideshowUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetSlideshowUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSlideshowUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGalleryBadgeListExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGalleryBadgeListEx" />
+  </wsdl:message>
+  <wsdl:message name="GetGalleryBadgeListExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGalleryBadgeListExResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBadgeScriptExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBadgeScriptEx" />
+  </wsdl:message>
+  <wsdl:message name="GetBadgeScriptExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBadgeScriptExResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGalleryBadgeScriptExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGalleryBadgeScriptEx" />
+  </wsdl:message>
+  <wsdl:message name="GetGalleryBadgeScriptExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGalleryBadgeScriptExResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGalleryListExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGalleryListEx" />
+  </wsdl:message>
+  <wsdl:message name="GetGalleryListExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGalleryListExResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGalleryListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGalleryList" />
+  </wsdl:message>
+  <wsdl:message name="GetGalleryListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGalleryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPhotoPageExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPhotoPageEx" />
+  </wsdl:message>
+  <wsdl:message name="GetPhotoPageExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPhotoPageExResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMediaPageExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMediaPageEx" />
+  </wsdl:message>
+  <wsdl:message name="GetMediaPageExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMediaPageExResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPhotoPageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPhotoPage" />
+  </wsdl:message>
+  <wsdl:message name="GetPhotoPageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPhotoPageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PhotoServiceSoap">
+    <wsdl:operation name="GetSlideshowUrlEx">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the url to the slideshow for a given gallery</wsdl:documentation>
+      <wsdl:input message="tns:GetSlideshowUrlExSoapIn" />
+      <wsdl:output message="tns:GetSlideshowUrlExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSlideshowUrl">
+      <wsdl:input message="tns:GetSlideshowUrlSoapIn" />
+      <wsdl:output message="tns:GetSlideshowUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryBadgeListEx">
+      <wsdl:input message="tns:GetGalleryBadgeListExSoapIn" />
+      <wsdl:output message="tns:GetGalleryBadgeListExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBadgeScriptEx">
+      <wsdl:input message="tns:GetBadgeScriptExSoapIn" />
+      <wsdl:output message="tns:GetBadgeScriptExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryBadgeScriptEx">
+      <wsdl:input message="tns:GetGalleryBadgeScriptExSoapIn" />
+      <wsdl:output message="tns:GetGalleryBadgeScriptExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryListEx">
+      <wsdl:input message="tns:GetGalleryListExSoapIn" />
+      <wsdl:output message="tns:GetGalleryListExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryList">
+      <wsdl:input message="tns:GetGalleryListSoapIn" />
+      <wsdl:output message="tns:GetGalleryListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPhotoPageEx">
+      <wsdl:input message="tns:GetPhotoPageExSoapIn" />
+      <wsdl:output message="tns:GetPhotoPageExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaPageEx">
+      <wsdl:input message="tns:GetMediaPageExSoapIn" />
+      <wsdl:output message="tns:GetMediaPageExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPhotoPage">
+      <wsdl:input message="tns:GetPhotoPageSoapIn" />
+      <wsdl:output message="tns:GetPhotoPageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PhotoServiceHttpGet" />
+  <wsdl:portType name="PhotoServiceHttpPost" />
+  <wsdl:binding name="PhotoServiceSoap" type="tns:PhotoServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSlideshowUrlEx">
+      <soap:operation soapAction="http://app.onlinephotofiler.com/GetSlideshowUrlEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSlideshowUrl">
+      <soap:operation soapAction="http://app.onlinephotofiler.com/GetSlideshowUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryBadgeListEx">
+      <soap:operation soapAction="http://app.onlinephotofiler.com/GetGalleryBadgeListEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBadgeScriptEx">
+      <soap:operation soapAction="http://app.onlinephotofiler.com/GetBadgeScriptEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryBadgeScriptEx">
+      <soap:operation soapAction="http://app.onlinephotofiler.com/GetGalleryBadgeScriptEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryListEx">
+      <soap:operation soapAction="http://app.onlinephotofiler.com/GetGalleryListEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryList">
+      <soap:operation soapAction="http://app.onlinephotofiler.com/GetGalleryList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhotoPageEx">
+      <soap:operation soapAction="http://app.onlinephotofiler.com/GetPhotoPageEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaPageEx">
+      <soap:operation soapAction="http://app.onlinephotofiler.com/GetMediaPageEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhotoPage">
+      <soap:operation soapAction="http://app.onlinephotofiler.com/GetPhotoPage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PhotoServiceSoap12" type="tns:PhotoServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSlideshowUrlEx">
+      <soap12:operation soapAction="http://app.onlinephotofiler.com/GetSlideshowUrlEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSlideshowUrl">
+      <soap12:operation soapAction="http://app.onlinephotofiler.com/GetSlideshowUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryBadgeListEx">
+      <soap12:operation soapAction="http://app.onlinephotofiler.com/GetGalleryBadgeListEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBadgeScriptEx">
+      <soap12:operation soapAction="http://app.onlinephotofiler.com/GetBadgeScriptEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryBadgeScriptEx">
+      <soap12:operation soapAction="http://app.onlinephotofiler.com/GetGalleryBadgeScriptEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryListEx">
+      <soap12:operation soapAction="http://app.onlinephotofiler.com/GetGalleryListEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGalleryList">
+      <soap12:operation soapAction="http://app.onlinephotofiler.com/GetGalleryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhotoPageEx">
+      <soap12:operation soapAction="http://app.onlinephotofiler.com/GetPhotoPageEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaPageEx">
+      <soap12:operation soapAction="http://app.onlinephotofiler.com/GetMediaPageEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhotoPage">
+      <soap12:operation soapAction="http://app.onlinephotofiler.com/GetPhotoPage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PhotoServiceHttpGet" type="tns:PhotoServiceHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="PhotoServiceHttpPost" type="tns:PhotoServiceHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="PhotoService">
+    <wsdl:port name="PhotoServiceSoap" binding="tns:PhotoServiceSoap">
+      <soap:address location="http://app.onlinephotofiler.com/services/photoservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PhotoServiceSoap12" binding="tns:PhotoServiceSoap12">
+      <soap12:address location="http://app.onlinephotofiler.com/services/photoservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PhotoServiceHttpGet" binding="tns:PhotoServiceHttpGet">
+      <http:address location="http://app.onlinephotofiler.com/services/photoservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PhotoServiceHttpPost" binding="tns:PhotoServiceHttpPost">
+      <http:address location="http://app.onlinephotofiler.com/services/photoservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

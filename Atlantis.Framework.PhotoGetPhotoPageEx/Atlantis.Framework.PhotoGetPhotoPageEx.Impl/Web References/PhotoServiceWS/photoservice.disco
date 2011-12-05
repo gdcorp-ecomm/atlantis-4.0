@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://app.onlinephotofiler.com/services/photoservice.asmx?wsdl" docRef="http://app.onlinephotofiler.com/services/photoservice.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://app.onlinephotofiler.com/services/photoservice.asmx" xmlns:q1="http://app.onlinephotofiler.com/" binding="q1:PhotoServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://app.onlinephotofiler.com/services/photoservice.asmx" xmlns:q2="http://app.onlinephotofiler.com/" binding="q2:PhotoServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

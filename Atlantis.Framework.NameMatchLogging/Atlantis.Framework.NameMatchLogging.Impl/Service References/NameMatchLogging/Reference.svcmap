@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6593b954-d285-46b6-a0f6-abbdafca714b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://fastball.dev.glbt1.gdg/fbiDomainTokenization/DomainTokenization.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DomainTokenization.wsdl" MetadataType="Wsdl" ID="b4b2b503-1063-40aa-aca8-4571104365aa" SourceId="1" SourceUrl="http://fastball.dev.glbt1.gdg/fbiDomainTokenization/DomainTokenization.svc?wsdl" />
+    <MetadataFile FileName="DomainTokenization.disco" MetadataType="Disco" ID="c6190ae1-99d3-4fbd-8ed4-3c663aecdba8" SourceId="1" SourceUrl="http://fastball.dev.glbt1.gdg/fbiDomainTokenization/DomainTokenization.svc?disco" />
+    <MetadataFile FileName="DomainTokenization.xsd" MetadataType="Schema" ID="2cb536ef-a121-4dbc-b281-5843541f48ad" SourceId="1" SourceUrl="http://fastball.dev.glbt1.gdg/fbiDomainTokenization/DomainTokenization.svc?xsd=xsd0" />
+    <MetadataFile FileName="DomainTokenization1.xsd" MetadataType="Schema" ID="729c7584-f789-4815-b5f4-3c8ee464eadf" SourceId="1" SourceUrl="http://fastball.dev.glbt1.gdg/fbiDomainTokenization/DomainTokenization.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

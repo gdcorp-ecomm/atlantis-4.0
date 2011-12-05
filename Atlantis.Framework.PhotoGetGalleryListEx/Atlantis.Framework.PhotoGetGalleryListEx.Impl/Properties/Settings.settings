@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.PhotoGetGalleryListEx.Impl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Atlantis_Framework_PhotoGetGalleryListEx_Impl_PhotoServiceWS_PhotoService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://app.onlinephotofiler.com/services/photoservice.asmx</Value>
+    </Setting>
+    <Setting Name="Atlantis_Framework_PhotoGetGalleryListEx_Impl_com_onlinephotofiler_app_PhotoService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://app.onlinephotofiler.com/services/photoservice.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

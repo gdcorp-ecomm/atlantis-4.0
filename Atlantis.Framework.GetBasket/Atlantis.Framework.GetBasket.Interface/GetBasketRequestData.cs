@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.GetBasket.Interface
@@ -14,7 +11,7 @@ namespace Atlantis.Framework.GetBasket.Interface
                                 string sOrderID,
                                 string sPathway,
                                 int iPageCount)
-                                : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount) 
+      : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
     {
       RequestTimeout = TimeSpan.FromSeconds(3);
       DeleteRefund = false;
@@ -26,7 +23,7 @@ namespace Atlantis.Framework.GetBasket.Interface
                                 string sPathway,
                                 int iPageCount,
                                 bool bDeleteRefund)
-                                : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
+      : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
     {
       RequestTimeout = TimeSpan.FromSeconds(3);
       DeleteRefund = bDeleteRefund;
@@ -41,7 +38,8 @@ namespace Atlantis.Framework.GetBasket.Interface
 
     public bool DeleteRefund
     {
-      get; set;
+      get;
+      set;
     }
 
     #region RequestData Members

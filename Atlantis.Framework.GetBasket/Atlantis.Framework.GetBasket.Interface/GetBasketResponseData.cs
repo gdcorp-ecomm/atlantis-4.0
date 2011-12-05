@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml;
 using Atlantis.Framework.Interface;
 
@@ -30,12 +29,12 @@ namespace Atlantis.Framework.GetBasket.Interface
     public GetBasketResponseData(string sResponseXML, RequestData oRequestData, Exception ex)
     {
       _ResponseXML = sResponseXML;
-      _exception = new AtlantisException(oRequestData, 
-                                   "GetBasketResponseData", 
-                                   ex.Message, 
+      _exception = new AtlantisException(oRequestData,
+                                   "GetBasketResponseData",
+                                   ex.Message,
                                    oRequestData.ToXML());
     }
-    
+
     public string GetItemAttribute(int index, string sName)
     {
       return _basketItems[index].GetAttribute(sName);
@@ -107,7 +106,7 @@ namespace Atlantis.Framework.GetBasket.Interface
     {
       return _exception;
     }
-    
+
     #endregion
 
   }

@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.GetBasket.Interface;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.GetBasket.Impl
 {
@@ -15,7 +13,7 @@ namespace Atlantis.Framework.GetBasket.Impl
       GetBasketRequestData basketRequestData = (GetBasketRequestData)requestData;
       WSCgdBasket.WscgdBasketService basketWS = new WSCgdBasket.WscgdBasketService();
       basketWS.Url = ((WsConfigElement)config).WSURL;
-      basketWS.Timeout = (int)basketRequestData.RequestTimeout.TotalMilliseconds;
+      basketWS.Timeout = (int)Math.Truncate(basketRequestData.RequestTimeout.TotalMilliseconds);
 
       state = basketRequestData.BasketType;
       AsyncState asyncState = new AsyncState(requestData, config, basketWS, state);

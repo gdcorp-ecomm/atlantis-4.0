@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml;
 
 namespace Atlantis.Framework.GetBasket.Interface
 {
   class BasketItem
   {
-    
+
     Dictionary<string, string> _dictItemAttrs = new Dictionary<string, string>();
     string customXML = "";
 

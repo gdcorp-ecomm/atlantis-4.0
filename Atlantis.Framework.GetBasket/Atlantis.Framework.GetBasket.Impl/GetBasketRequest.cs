@@ -1,14 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.GetBasket.Interface;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.GetBasket.Impl
 {
   public class GetBasketRequest : IRequest
   {
-  
+
     #region IRequest Members
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
@@ -16,12 +14,13 @@ namespace Atlantis.Framework.GetBasket.Impl
       IResponseData responseData = null;
       string responseXML = "";
 
+      WSCgdBasket.WscgdBasketService basketWS = null;
       try
       {
         GetBasketRequestData basketRequestData = (GetBasketRequestData)requestData;
-        WSCgdBasket.WscgdBasketService basketWS = new WSCgdBasket.WscgdBasketService();
+        basketWS = new WSCgdBasket.WscgdBasketService();
         basketWS.Url = ((WsConfigElement)config).WSURL;
-        basketWS.Timeout = (int)basketRequestData.RequestTimeout.TotalMilliseconds;
+        basketWS.Timeout = (int)Math.Truncate(basketRequestData.RequestTimeout.TotalMilliseconds);
 
         if (!string.IsNullOrEmpty(basketRequestData.BasketType))
         {
@@ -47,14 +46,21 @@ namespace Atlantis.Framework.GetBasket.Impl
       {
         responseData = new GetBasketResponseData(responseXML, requestData, ex);
       }
+      finally
+      {
+        if (basketWS != null)
+        {
+          basketWS.Dispose();
+        }
+      }
 
       return responseData;
     }
 
-    
+
 
     #endregion
 
-    
+
   }
 }

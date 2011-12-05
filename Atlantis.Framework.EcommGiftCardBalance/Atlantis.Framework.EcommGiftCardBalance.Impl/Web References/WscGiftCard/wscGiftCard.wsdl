@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:wscGiftCardService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:wscGiftCardService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:wscGiftCardService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetGiftCardIDIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrGiftCardNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGiftCardIDOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSeriesNumberIn">
+    <wsdl:part name="bstrPrefix" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSeriesNumberOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateSeriesNumberIn">
+    <wsdl:part name="bstrSeriesNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateSeriesNumberOut">
+    <wsdl:part name="return" type="s:short" />
+  </wsdl:message>
+  <wsdl:message name="GetGiftCardBalanceIn">
+    <wsdl:part name="bstrGCNumber" type="s:string" />
+    <wsdl:part name="bstrOrderID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGiftCardBalanceOut">
+    <wsdl:part name="return" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetGiftCardUsageIn">
+    <wsdl:part name="bstrOrderID" type="s:string" />
+    <wsdl:part name="lRowID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetGiftCardUsageOut">
+    <wsdl:part name="return" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetGiftCardResourceIDIn">
+    <wsdl:part name="bstrOrderID" type="s:string" />
+    <wsdl:part name="lRowID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetGiftCardResourceIDOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="wscGiftCardServiceSoap">
+    <wsdl:operation name="GetGiftCardID">
+      <wsdl:input message="s0:GetGiftCardIDIn" />
+      <wsdl:output message="s0:GetGiftCardIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSeriesNumber">
+      <wsdl:input message="s0:GetSeriesNumberIn" />
+      <wsdl:output message="s0:GetSeriesNumberOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSeriesNumber">
+      <wsdl:input message="s0:ValidateSeriesNumberIn" />
+      <wsdl:output message="s0:ValidateSeriesNumberOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGiftCardBalance">
+      <wsdl:input message="s0:GetGiftCardBalanceIn" />
+      <wsdl:output message="s0:GetGiftCardBalanceOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGiftCardUsage">
+      <wsdl:input message="s0:GetGiftCardUsageIn" />
+      <wsdl:output message="s0:GetGiftCardUsageOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGiftCardResourceID">
+      <wsdl:input message="s0:GetGiftCardResourceIDIn" />
+      <wsdl:output message="s0:GetGiftCardResourceIDOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wscGiftCardServiceSoap" type="s0:wscGiftCardServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="GetGiftCardID">
+      <soap:operation soapAction="#GetGiftCardID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSeriesNumber">
+      <soap:operation soapAction="#GetSeriesNumber" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSeriesNumber">
+      <soap:operation soapAction="#ValidateSeriesNumber" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGiftCardBalance">
+      <soap:operation soapAction="#GetGiftCardBalance" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGiftCardUsage">
+      <soap:operation soapAction="#GetGiftCardUsage" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGiftCardResourceID">
+      <soap:operation soapAction="#GetGiftCardResourceID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscGiftCardService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wscGiftCardService">
+    <wsdl:port name="wscGiftCardServiceSoap" binding="s0:wscGiftCardServiceSoap">
+      <soap:address location="http://devgdcomm02:80/wscGiftCard/wscGiftCard.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

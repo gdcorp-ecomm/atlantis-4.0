@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EEMCustomerSummary.cs" />
     <Compile Include="EEMGetCustomerSummaryRequestData.cs" />
     <Compile Include="EEMGetCustomerSummaryResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

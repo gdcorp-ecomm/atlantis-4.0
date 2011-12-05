@@ -12,7 +12,7 @@ namespace Atlantis.Framework.EEMGetCustomerSummary.Impl
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       EEMGetCustomerSummaryResponseData responseData = null;
-      Dictionary<int, string> replacementDataDictionary = new Dictionary<int, string>();
+      Dictionary<int, EEMCustomerSummary> replacementDataDictionary = new Dictionary<int, EEMCustomerSummary>();
 
       try
       {
@@ -31,8 +31,15 @@ namespace Atlantis.Framework.EEMGetCustomerSummary.Impl
 
             foreach (XElement customer in xDoc.Element("Customers").Elements("Customer"))
             {
-              string name = string.IsNullOrWhiteSpace(customer.Element("company_name").Value.ToString()) ? "New Account" : customer.Element("company_name").Value.ToString();
-              replacementDataDictionary.Add(Convert.ToInt32(customer.Element("customer_id").Value), name);
+              int customerId = Convert.ToInt32(customer.Element("customer_id").Value);
+              string companyName = string.IsNullOrWhiteSpace(customer.Element("company_name").Value.ToString()) ? "New Account" : customer.Element("company_name").Value.ToString();
+              int emailsSent = Convert.ToInt32(customer.Element("emails_sent").Value);
+
+              EEMCustomerSummary custSummary = new EEMCustomerSummary();
+              custSummary.companyName = companyName;
+              custSummary.emailsSent = emailsSent;
+
+              replacementDataDictionary.Add(customerId, custSummary); 
             }
           }
         }

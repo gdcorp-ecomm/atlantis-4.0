@@ -7,13 +7,13 @@ namespace Atlantis.Framework.EEMGetCustomerSummary.Interface
   public class EEMGetCustomerSummaryResponseData : IResponseData
   {
     private AtlantisException _exception = null;
-    public Dictionary<int, string> ReplacementDataDictionary {get; private set; }
+    public Dictionary<int, EEMCustomerSummary> ReplacementDataDictionary {get; private set; }
     public bool IsSuccess
     {
       get { return _exception == null; }
     }
 
-    public EEMGetCustomerSummaryResponseData(Dictionary<int, string> replacementDataDictionary)
+    public EEMGetCustomerSummaryResponseData(Dictionary<int, EEMCustomerSummary> replacementDataDictionary)
     {
       ReplacementDataDictionary = replacementDataDictionary;
     }

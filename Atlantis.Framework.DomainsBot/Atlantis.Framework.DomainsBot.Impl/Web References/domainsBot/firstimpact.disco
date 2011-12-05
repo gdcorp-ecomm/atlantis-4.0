@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://xml.domainsbot.com/xmlservices/firstimpact.asmx?wsdl" docRef="http://xml.domainsbot.com/xmlservices/firstimpact.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://xml.domainsbot.com/xmlservices/firstimpact.asmx" xmlns:q1="DomainsBot.FirstImpact" binding="q1:FirstImpactSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://xml.domainsbot.com/xmlservices/firstimpact.asmx" xmlns:q2="DomainsBot.FirstImpact" binding="q2:FirstImpactSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

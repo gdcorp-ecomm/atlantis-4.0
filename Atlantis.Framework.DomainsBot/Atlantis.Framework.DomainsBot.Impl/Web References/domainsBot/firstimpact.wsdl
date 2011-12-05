@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="DomainsBot.FirstImpact" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="DomainsBot.FirstImpact" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">DomainsBot FirstImpact XML WebService</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="DomainsBot.FirstImpact">
+      <s:element name="GetDomains">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainsResult" type="tns:ArrayOfDomain" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDomain">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Domain" nillable="true" type="tns:Domain" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Domain">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Rate" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsTypedName" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDomainsSimplified">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MaxResults" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="AddDashes" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainsSimplifiedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainsSimplifiedResult" type="tns:ArrayOfDomain" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainsEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MaxResults" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExcludeTaken" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="Tlds" type="tns:ArrayOfTld" />
+            <s:element minOccurs="1" maxOccurs="1" name="AddPref" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="AddSuff" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="AddDashes" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="AddRelated" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="AdvancedSplit" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="BaseOnTop" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTld">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Tld" nillable="true" type="tns:Tld" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Tld">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Extension" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Factor" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDomainsExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainsExResult" type="tns:SearchResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SearchResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Domains" type="tns:ArrayOfDomain" />
+          <s:element minOccurs="1" maxOccurs="1" name="AvailableResults" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ArrayOfDomain" nillable="true" type="tns:ArrayOfDomain" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetDomainsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomains" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsSimplifiedSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainsSimplified" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsSimplifiedSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainsSimplifiedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainsEx" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainsExResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsHttpGetIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDomain" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsSimplifiedHttpGetIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="MaxResults" type="s:string" />
+    <wsdl:part name="AddDashes" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsSimplifiedHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDomain" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsHttpPostIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDomain" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsSimplifiedHttpPostIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="MaxResults" type="s:string" />
+    <wsdl:part name="AddDashes" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsSimplifiedHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDomain" />
+  </wsdl:message>
+  <wsdl:portType name="FirstImpactSoap">
+    <wsdl:operation name="GetDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate alternative domains based on the specified term using default settings</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainsSoapIn" />
+      <wsdl:output message="tns:GetDomainsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsSimplified">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate alternative domains using simplified settings</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainsSimplifiedSoapIn" />
+      <wsdl:output message="tns:GetDomainsSimplifiedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsEx">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate alternative domains based on the specified term using custom settings</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainsExSoapIn" />
+      <wsdl:output message="tns:GetDomainsExSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FirstImpactHttpGet">
+    <wsdl:operation name="GetDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate alternative domains based on the specified term using default settings</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainsHttpGetIn" />
+      <wsdl:output message="tns:GetDomainsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsSimplified">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate alternative domains using simplified settings</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainsSimplifiedHttpGetIn" />
+      <wsdl:output message="tns:GetDomainsSimplifiedHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FirstImpactHttpPost">
+    <wsdl:operation name="GetDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate alternative domains based on the specified term using default settings</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainsHttpPostIn" />
+      <wsdl:output message="tns:GetDomainsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsSimplified">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate alternative domains using simplified settings</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainsSimplifiedHttpPostIn" />
+      <wsdl:output message="tns:GetDomainsSimplifiedHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FirstImpactSoap" type="tns:FirstImpactSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDomains">
+      <soap:operation soapAction="DomainsBot.FirstImpact/GetDomains" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsSimplified">
+      <soap:operation soapAction="DomainsBot.FirstImpact/GetDomainsSimplified" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsEx">
+      <soap:operation soapAction="DomainsBot.FirstImpact/GetDomainsEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FirstImpactSoap12" type="tns:FirstImpactSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDomains">
+      <soap12:operation soapAction="DomainsBot.FirstImpact/GetDomains" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsSimplified">
+      <soap12:operation soapAction="DomainsBot.FirstImpact/GetDomainsSimplified" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsEx">
+      <soap12:operation soapAction="DomainsBot.FirstImpact/GetDomainsEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FirstImpactHttpGet" type="tns:FirstImpactHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetDomains">
+      <http:operation location="/GetDomains" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsSimplified">
+      <http:operation location="/GetDomainsSimplified" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FirstImpactHttpPost" type="tns:FirstImpactHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetDomains">
+      <http:operation location="/GetDomains" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainsSimplified">
+      <http:operation location="/GetDomainsSimplified" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FirstImpact">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">DomainsBot FirstImpact XML WebService</wsdl:documentation>
+    <wsdl:port name="FirstImpactSoap" binding="tns:FirstImpactSoap">
+      <soap:address location="http://xml.domainsbot.com/xmlservices/firstimpact.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FirstImpactSoap12" binding="tns:FirstImpactSoap12">
+      <soap12:address location="http://xml.domainsbot.com/xmlservices/firstimpact.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FirstImpactHttpGet" binding="tns:FirstImpactHttpGet">
+      <http:address location="http://xml.domainsbot.com/xmlservices/firstimpact.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FirstImpactHttpPost" binding="tns:FirstImpactHttpPost">
+      <http:address location="http://xml.domainsbot.com/xmlservices/firstimpact.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

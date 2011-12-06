@@ -1,0 +1,1234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="AddClaim">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddClaimResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddClaimResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestPostPurchaseRules">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="claimid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestPostPurchaseRulesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestPostPurchaseRulesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsDomainDbsCapable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsDomainDbsCapableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsDomainDbsCapableResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelResourceClaim">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelResourceClaimResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CancelResourceClaimResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DBSShopperMerge">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="losingShopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gainingShopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DBSShopperMergeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DBSShopperMergeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DBSShopperUnMerge">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parentShopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="restoreShopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DBSShopperUnMergeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DBSShopperUnMergeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainBuy_UpdateAmountsbyResource">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iResourceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iMinAmount" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iMaxAmount" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iModifiedBy" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainBuy_UpdateAmountsbyResourceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DomainBuy_UpdateAmountsbyResourceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainBuy_UpdateAppraisalComplete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="appraisalID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainBuy_UpdateAppraisalCompleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DomainBuy_UpdateAppraisalCompleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateSiteSellerNotInterested">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateSiteSellerNotInterestedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Status_UpdateSiteSellerNotInterestedResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateSiteSellerInterested">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateSiteSellerInterestedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Status_UpdateSiteSellerInterestedResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateTdnamAuctionCreated">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateTdnamAuctionCreatedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Status_UpdateTdnamAuctionCreatedResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateTdnamAuctionToSeller">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateTdnamAuctionToSellerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Status_UpdateTdnamAuctionToSellerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateTdnamAuctionToDbs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateTdnamAuctionToDbsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Status_UpdateTdnamAuctionToDbsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateClosedNoDeal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdateClosedNoDealResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Status_UpdateClosedNoDealResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdatePendingRefund">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdatePendingRefundResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Status_UpdatePendingRefundResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdatePaymentReceived">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="tdnamAuctionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Status_UpdatePaymentReceivedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Status_UpdatePaymentReceivedResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSuperClaimByMemberItemId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="memberItemId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSuperClaimByMemberItemIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSuperClaimByMemberItemIdResult" type="tns:SuperClaim" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SuperClaim">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:DbsClaim">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CommunicationList_AllItems">
+                <s:complexType>
+                  <s:sequence>
+                    <s:element ref="s:schema" />
+                    <s:any />
+                  </s:sequence>
+                </s:complexType>
+              </s:element>
+              <s:element minOccurs="0" maxOccurs="1" name="CommunicationList_FlatNoDuplicates">
+                <s:complexType>
+                  <s:sequence>
+                    <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                    <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                  </s:sequence>
+                </s:complexType>
+              </s:element>
+              <s:element minOccurs="1" maxOccurs="1" name="HasUnreadEmail" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DbsClaim">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ClaimId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClaimTypeId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClaimTypeDepartmentId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClaimRowId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClaimTypeStatusId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinutesUsed" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClaimModifiedDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClaimCreateDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClaimEnteredBy" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClaimCheckedOutBy" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClaimCheckoutDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClaimFollowUpDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DbsResourceId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResourceId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NameSpaceId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShopperId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DomainName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RowId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Cancelled" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DbsDomainBuyStatusId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinAmount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxAmount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppraisalId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PurchaseDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastStatusUpdateDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResourceCreateDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResourceCreateBy" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResourceModifyDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResourceModifyBy" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AgreedAmount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OfferPrice" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SellerShopperId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TdnamAuctionId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasUnreadMail" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Alerts" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DccDomainId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateFortKnoxShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateFortKnoxShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateFortKnoxShopperResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateFortKnoxShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateFortKnoxShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateFortKnoxShopperResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateTdnamAuction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateTdnamAuctionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateTdnamAuctionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceBidOnTdnamAuction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlaceBidOnTdnamAuctionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PlaceBidOnTdnamAuctionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CounterTdnamAuction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CounterTdnamAuctionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CounterTdnamAuctionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AcceptTdnamAuctionBid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AcceptTdnamAuctionBidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AcceptTdnamAuctionBidResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainBuy_CreateTdnamAuction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainBuy_CreateTdnamAuctionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DomainBuy_CreateTdnamAuctionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainBuy_SellerCancelledTdnamAuctionByMemberItemId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="tdnamMemberItemId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainBuy_SellerCancelledTdnamAuctionByMemberItemIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DomainBuy_SellerCancelledTdnamAuctionByMemberItemIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainBuy_SellerNotInterestedByResourceId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="resourceId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DomainBuy_SellerNotInterestedByResourceIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DomainBuy_SellerNotInterestedByResourceIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StoreLeadData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="first_name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="last_name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StoreLeadDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StoreLeadDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddClaimSoapIn">
+    <wsdl:part name="parameters" element="tns:AddClaim" />
+  </wsdl:message>
+  <wsdl:message name="AddClaimSoapOut">
+    <wsdl:part name="parameters" element="tns:AddClaimResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestPostPurchaseRulesSoapIn">
+    <wsdl:part name="parameters" element="tns:TestPostPurchaseRules" />
+  </wsdl:message>
+  <wsdl:message name="TestPostPurchaseRulesSoapOut">
+    <wsdl:part name="parameters" element="tns:TestPostPurchaseRulesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainDbsCapableSoapIn">
+    <wsdl:part name="parameters" element="tns:IsDomainDbsCapable" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainDbsCapableSoapOut">
+    <wsdl:part name="parameters" element="tns:IsDomainDbsCapableResponse" />
+  </wsdl:message>
+  <wsdl:message name="CancelResourceClaimSoapIn">
+    <wsdl:part name="parameters" element="tns:CancelResourceClaim" />
+  </wsdl:message>
+  <wsdl:message name="CancelResourceClaimSoapOut">
+    <wsdl:part name="parameters" element="tns:CancelResourceClaimResponse" />
+  </wsdl:message>
+  <wsdl:message name="DBSShopperMergeSoapIn">
+    <wsdl:part name="parameters" element="tns:DBSShopperMerge" />
+  </wsdl:message>
+  <wsdl:message name="DBSShopperMergeSoapOut">
+    <wsdl:part name="parameters" element="tns:DBSShopperMergeResponse" />
+  </wsdl:message>
+  <wsdl:message name="DBSShopperUnMergeSoapIn">
+    <wsdl:part name="parameters" element="tns:DBSShopperUnMerge" />
+  </wsdl:message>
+  <wsdl:message name="DBSShopperUnMergeSoapOut">
+    <wsdl:part name="parameters" element="tns:DBSShopperUnMergeResponse" />
+  </wsdl:message>
+  <wsdl:message name="DomainBuy_UpdateAmountsbyResourceSoapIn">
+    <wsdl:part name="parameters" element="tns:DomainBuy_UpdateAmountsbyResource" />
+  </wsdl:message>
+  <wsdl:message name="DomainBuy_UpdateAmountsbyResourceSoapOut">
+    <wsdl:part name="parameters" element="tns:DomainBuy_UpdateAmountsbyResourceResponse" />
+  </wsdl:message>
+  <wsdl:message name="DomainBuy_UpdateAppraisalCompleteSoapIn">
+    <wsdl:part name="parameters" element="tns:DomainBuy_UpdateAppraisalComplete" />
+  </wsdl:message>
+  <wsdl:message name="DomainBuy_UpdateAppraisalCompleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DomainBuy_UpdateAppraisalCompleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateSiteSellerNotInterestedSoapIn">
+    <wsdl:part name="parameters" element="tns:Status_UpdateSiteSellerNotInterested" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateSiteSellerNotInterestedSoapOut">
+    <wsdl:part name="parameters" element="tns:Status_UpdateSiteSellerNotInterestedResponse" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateSiteSellerInterestedSoapIn">
+    <wsdl:part name="parameters" element="tns:Status_UpdateSiteSellerInterested" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateSiteSellerInterestedSoapOut">
+    <wsdl:part name="parameters" element="tns:Status_UpdateSiteSellerInterestedResponse" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateTdnamAuctionCreatedSoapIn">
+    <wsdl:part name="parameters" element="tns:Status_UpdateTdnamAuctionCreated" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateTdnamAuctionCreatedSoapOut">
+    <wsdl:part name="parameters" element="tns:Status_UpdateTdnamAuctionCreatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateTdnamAuctionToSellerSoapIn">
+    <wsdl:part name="parameters" element="tns:Status_UpdateTdnamAuctionToSeller" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateTdnamAuctionToSellerSoapOut">
+    <wsdl:part name="parameters" element="tns:Status_UpdateTdnamAuctionToSellerResponse" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateTdnamAuctionToDbsSoapIn">
+    <wsdl:part name="parameters" element="tns:Status_UpdateTdnamAuctionToDbs" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateTdnamAuctionToDbsSoapOut">
+    <wsdl:part name="parameters" element="tns:Status_UpdateTdnamAuctionToDbsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateClosedNoDealSoapIn">
+    <wsdl:part name="parameters" element="tns:Status_UpdateClosedNoDeal" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdateClosedNoDealSoapOut">
+    <wsdl:part name="parameters" element="tns:Status_UpdateClosedNoDealResponse" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdatePendingRefundSoapIn">
+    <wsdl:part name="parameters" element="tns:Status_UpdatePendingRefund" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdatePendingRefundSoapOut">
+    <wsdl:part name="parameters" element="tns:Status_UpdatePendingRefundResponse" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdatePaymentReceivedSoapIn">
+    <wsdl:part name="parameters" element="tns:Status_UpdatePaymentReceived" />
+  </wsdl:message>
+  <wsdl:message name="Status_UpdatePaymentReceivedSoapOut">
+    <wsdl:part name="parameters" element="tns:Status_UpdatePaymentReceivedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSuperClaimByMemberItemIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSuperClaimByMemberItemId" />
+  </wsdl:message>
+  <wsdl:message name="GetSuperClaimByMemberItemIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSuperClaimByMemberItemIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateFortKnoxShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateFortKnoxShopper" />
+  </wsdl:message>
+  <wsdl:message name="CreateFortKnoxShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateFortKnoxShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFortKnoxShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateFortKnoxShopper" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFortKnoxShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateFortKnoxShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateTdnamAuctionSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateTdnamAuction" />
+  </wsdl:message>
+  <wsdl:message name="CreateTdnamAuctionSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateTdnamAuctionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBidOnTdnamAuctionSoapIn">
+    <wsdl:part name="parameters" element="tns:PlaceBidOnTdnamAuction" />
+  </wsdl:message>
+  <wsdl:message name="PlaceBidOnTdnamAuctionSoapOut">
+    <wsdl:part name="parameters" element="tns:PlaceBidOnTdnamAuctionResponse" />
+  </wsdl:message>
+  <wsdl:message name="CounterTdnamAuctionSoapIn">
+    <wsdl:part name="parameters" element="tns:CounterTdnamAuction" />
+  </wsdl:message>
+  <wsdl:message name="CounterTdnamAuctionSoapOut">
+    <wsdl:part name="parameters" element="tns:CounterTdnamAuctionResponse" />
+  </wsdl:message>
+  <wsdl:message name="AcceptTdnamAuctionBidSoapIn">
+    <wsdl:part name="parameters" element="tns:AcceptTdnamAuctionBid" />
+  </wsdl:message>
+  <wsdl:message name="AcceptTdnamAuctionBidSoapOut">
+    <wsdl:part name="parameters" element="tns:AcceptTdnamAuctionBidResponse" />
+  </wsdl:message>
+  <wsdl:message name="DomainBuy_CreateTdnamAuctionSoapIn">
+    <wsdl:part name="parameters" element="tns:DomainBuy_CreateTdnamAuction" />
+  </wsdl:message>
+  <wsdl:message name="DomainBuy_CreateTdnamAuctionSoapOut">
+    <wsdl:part name="parameters" element="tns:DomainBuy_CreateTdnamAuctionResponse" />
+  </wsdl:message>
+  <wsdl:message name="DomainBuy_SellerCancelledTdnamAuctionByMemberItemIdSoapIn">
+    <wsdl:part name="parameters" element="tns:DomainBuy_SellerCancelledTdnamAuctionByMemberItemId" />
+  </wsdl:message>
+  <wsdl:message name="DomainBuy_SellerCancelledTdnamAuctionByMemberItemIdSoapOut">
+    <wsdl:part name="parameters" element="tns:DomainBuy_SellerCancelledTdnamAuctionByMemberItemIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="DomainBuy_SellerNotInterestedByResourceIdSoapIn">
+    <wsdl:part name="parameters" element="tns:DomainBuy_SellerNotInterestedByResourceId" />
+  </wsdl:message>
+  <wsdl:message name="DomainBuy_SellerNotInterestedByResourceIdSoapOut">
+    <wsdl:part name="parameters" element="tns:DomainBuy_SellerNotInterestedByResourceIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="StoreLeadDataSoapIn">
+    <wsdl:part name="parameters" element="tns:StoreLeadData" />
+  </wsdl:message>
+  <wsdl:message name="StoreLeadDataSoapOut">
+    <wsdl:part name="parameters" element="tns:StoreLeadDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DomainServicesSoap">
+    <wsdl:operation name="AddClaim">
+      <wsdl:input message="tns:AddClaimSoapIn" />
+      <wsdl:output message="tns:AddClaimSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestPostPurchaseRules">
+      <wsdl:input message="tns:TestPostPurchaseRulesSoapIn" />
+      <wsdl:output message="tns:TestPostPurchaseRulesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainDbsCapable">
+      <wsdl:input message="tns:IsDomainDbsCapableSoapIn" />
+      <wsdl:output message="tns:IsDomainDbsCapableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelResourceClaim">
+      <wsdl:input message="tns:CancelResourceClaimSoapIn" />
+      <wsdl:output message="tns:CancelResourceClaimSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DBSShopperMerge">
+      <wsdl:input message="tns:DBSShopperMergeSoapIn" />
+      <wsdl:output message="tns:DBSShopperMergeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DBSShopperUnMerge">
+      <wsdl:input message="tns:DBSShopperUnMergeSoapIn" />
+      <wsdl:output message="tns:DBSShopperUnMergeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_UpdateAmountsbyResource">
+      <wsdl:input message="tns:DomainBuy_UpdateAmountsbyResourceSoapIn" />
+      <wsdl:output message="tns:DomainBuy_UpdateAmountsbyResourceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_UpdateAppraisalComplete">
+      <wsdl:input message="tns:DomainBuy_UpdateAppraisalCompleteSoapIn" />
+      <wsdl:output message="tns:DomainBuy_UpdateAppraisalCompleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateSiteSellerNotInterested">
+      <wsdl:input message="tns:Status_UpdateSiteSellerNotInterestedSoapIn" />
+      <wsdl:output message="tns:Status_UpdateSiteSellerNotInterestedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateSiteSellerInterested">
+      <wsdl:input message="tns:Status_UpdateSiteSellerInterestedSoapIn" />
+      <wsdl:output message="tns:Status_UpdateSiteSellerInterestedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateTdnamAuctionCreated">
+      <wsdl:input message="tns:Status_UpdateTdnamAuctionCreatedSoapIn" />
+      <wsdl:output message="tns:Status_UpdateTdnamAuctionCreatedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateTdnamAuctionToSeller">
+      <wsdl:input message="tns:Status_UpdateTdnamAuctionToSellerSoapIn" />
+      <wsdl:output message="tns:Status_UpdateTdnamAuctionToSellerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateTdnamAuctionToDbs">
+      <wsdl:input message="tns:Status_UpdateTdnamAuctionToDbsSoapIn" />
+      <wsdl:output message="tns:Status_UpdateTdnamAuctionToDbsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateClosedNoDeal">
+      <wsdl:input message="tns:Status_UpdateClosedNoDealSoapIn" />
+      <wsdl:output message="tns:Status_UpdateClosedNoDealSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdatePendingRefund">
+      <wsdl:input message="tns:Status_UpdatePendingRefundSoapIn" />
+      <wsdl:output message="tns:Status_UpdatePendingRefundSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdatePaymentReceived">
+      <wsdl:input message="tns:Status_UpdatePaymentReceivedSoapIn" />
+      <wsdl:output message="tns:Status_UpdatePaymentReceivedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSuperClaimByMemberItemId">
+      <wsdl:input message="tns:GetSuperClaimByMemberItemIdSoapIn" />
+      <wsdl:output message="tns:GetSuperClaimByMemberItemIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateFortKnoxShopper">
+      <wsdl:input message="tns:CreateFortKnoxShopperSoapIn" />
+      <wsdl:output message="tns:CreateFortKnoxShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFortKnoxShopper">
+      <wsdl:input message="tns:UpdateFortKnoxShopperSoapIn" />
+      <wsdl:output message="tns:UpdateFortKnoxShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTdnamAuction">
+      <wsdl:input message="tns:CreateTdnamAuctionSoapIn" />
+      <wsdl:output message="tns:CreateTdnamAuctionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBidOnTdnamAuction">
+      <wsdl:input message="tns:PlaceBidOnTdnamAuctionSoapIn" />
+      <wsdl:output message="tns:PlaceBidOnTdnamAuctionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CounterTdnamAuction">
+      <wsdl:input message="tns:CounterTdnamAuctionSoapIn" />
+      <wsdl:output message="tns:CounterTdnamAuctionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptTdnamAuctionBid">
+      <wsdl:input message="tns:AcceptTdnamAuctionBidSoapIn" />
+      <wsdl:output message="tns:AcceptTdnamAuctionBidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_CreateTdnamAuction">
+      <wsdl:input message="tns:DomainBuy_CreateTdnamAuctionSoapIn" />
+      <wsdl:output message="tns:DomainBuy_CreateTdnamAuctionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_SellerCancelledTdnamAuctionByMemberItemId">
+      <wsdl:input message="tns:DomainBuy_SellerCancelledTdnamAuctionByMemberItemIdSoapIn" />
+      <wsdl:output message="tns:DomainBuy_SellerCancelledTdnamAuctionByMemberItemIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_SellerNotInterestedByResourceId">
+      <wsdl:input message="tns:DomainBuy_SellerNotInterestedByResourceIdSoapIn" />
+      <wsdl:output message="tns:DomainBuy_SellerNotInterestedByResourceIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StoreLeadData">
+      <wsdl:input message="tns:StoreLeadDataSoapIn" />
+      <wsdl:output message="tns:StoreLeadDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DomainServicesSoap" type="tns:DomainServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddClaim">
+      <soap:operation soapAction="http://tempuri.org/AddClaim" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestPostPurchaseRules">
+      <soap:operation soapAction="http://tempuri.org/TestPostPurchaseRules" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainDbsCapable">
+      <soap:operation soapAction="http://tempuri.org/IsDomainDbsCapable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelResourceClaim">
+      <soap:operation soapAction="http://tempuri.org/CancelResourceClaim" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DBSShopperMerge">
+      <soap:operation soapAction="http://tempuri.org/DBSShopperMerge" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DBSShopperUnMerge">
+      <soap:operation soapAction="http://tempuri.org/DBSShopperUnMerge" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_UpdateAmountsbyResource">
+      <soap:operation soapAction="http://tempuri.org/DomainBuy_UpdateAmountsbyResource" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_UpdateAppraisalComplete">
+      <soap:operation soapAction="http://tempuri.org/DomainBuy_UpdateAppraisalComplete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateSiteSellerNotInterested">
+      <soap:operation soapAction="http://tempuri.org/Status_UpdateSiteSellerNotInterested" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateSiteSellerInterested">
+      <soap:operation soapAction="http://tempuri.org/Status_UpdateSiteSellerInterested" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateTdnamAuctionCreated">
+      <soap:operation soapAction="http://tempuri.org/Status_UpdateTdnamAuctionCreated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateTdnamAuctionToSeller">
+      <soap:operation soapAction="http://tempuri.org/Status_UpdateTdnamAuctionToSeller" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateTdnamAuctionToDbs">
+      <soap:operation soapAction="http://tempuri.org/Status_UpdateTdnamAuctionToDbs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateClosedNoDeal">
+      <soap:operation soapAction="http://tempuri.org/Status_UpdateClosedNoDeal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdatePendingRefund">
+      <soap:operation soapAction="http://tempuri.org/Status_UpdatePendingRefund" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdatePaymentReceived">
+      <soap:operation soapAction="http://tempuri.org/Status_UpdatePaymentReceived" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSuperClaimByMemberItemId">
+      <soap:operation soapAction="http://tempuri.org/GetSuperClaimByMemberItemId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFortKnoxShopper">
+      <soap:operation soapAction="http://tempuri.org/CreateFortKnoxShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFortKnoxShopper">
+      <soap:operation soapAction="http://tempuri.org/UpdateFortKnoxShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTdnamAuction">
+      <soap:operation soapAction="http://tempuri.org/CreateTdnamAuction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBidOnTdnamAuction">
+      <soap:operation soapAction="http://tempuri.org/PlaceBidOnTdnamAuction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CounterTdnamAuction">
+      <soap:operation soapAction="http://tempuri.org/CounterTdnamAuction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptTdnamAuctionBid">
+      <soap:operation soapAction="http://tempuri.org/AcceptTdnamAuctionBid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_CreateTdnamAuction">
+      <soap:operation soapAction="http://tempuri.org/DomainBuy_CreateTdnamAuction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_SellerCancelledTdnamAuctionByMemberItemId">
+      <soap:operation soapAction="http://tempuri.org/DomainBuy_SellerCancelledTdnamAuctionByMemberItemId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_SellerNotInterestedByResourceId">
+      <soap:operation soapAction="http://tempuri.org/DomainBuy_SellerNotInterestedByResourceId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StoreLeadData">
+      <soap:operation soapAction="http://tempuri.org/StoreLeadData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DomainServicesSoap12" type="tns:DomainServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddClaim">
+      <soap12:operation soapAction="http://tempuri.org/AddClaim" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestPostPurchaseRules">
+      <soap12:operation soapAction="http://tempuri.org/TestPostPurchaseRules" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainDbsCapable">
+      <soap12:operation soapAction="http://tempuri.org/IsDomainDbsCapable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelResourceClaim">
+      <soap12:operation soapAction="http://tempuri.org/CancelResourceClaim" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DBSShopperMerge">
+      <soap12:operation soapAction="http://tempuri.org/DBSShopperMerge" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DBSShopperUnMerge">
+      <soap12:operation soapAction="http://tempuri.org/DBSShopperUnMerge" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_UpdateAmountsbyResource">
+      <soap12:operation soapAction="http://tempuri.org/DomainBuy_UpdateAmountsbyResource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_UpdateAppraisalComplete">
+      <soap12:operation soapAction="http://tempuri.org/DomainBuy_UpdateAppraisalComplete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateSiteSellerNotInterested">
+      <soap12:operation soapAction="http://tempuri.org/Status_UpdateSiteSellerNotInterested" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateSiteSellerInterested">
+      <soap12:operation soapAction="http://tempuri.org/Status_UpdateSiteSellerInterested" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateTdnamAuctionCreated">
+      <soap12:operation soapAction="http://tempuri.org/Status_UpdateTdnamAuctionCreated" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateTdnamAuctionToSeller">
+      <soap12:operation soapAction="http://tempuri.org/Status_UpdateTdnamAuctionToSeller" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateTdnamAuctionToDbs">
+      <soap12:operation soapAction="http://tempuri.org/Status_UpdateTdnamAuctionToDbs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdateClosedNoDeal">
+      <soap12:operation soapAction="http://tempuri.org/Status_UpdateClosedNoDeal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdatePendingRefund">
+      <soap12:operation soapAction="http://tempuri.org/Status_UpdatePendingRefund" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Status_UpdatePaymentReceived">
+      <soap12:operation soapAction="http://tempuri.org/Status_UpdatePaymentReceived" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSuperClaimByMemberItemId">
+      <soap12:operation soapAction="http://tempuri.org/GetSuperClaimByMemberItemId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFortKnoxShopper">
+      <soap12:operation soapAction="http://tempuri.org/CreateFortKnoxShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFortKnoxShopper">
+      <soap12:operation soapAction="http://tempuri.org/UpdateFortKnoxShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTdnamAuction">
+      <soap12:operation soapAction="http://tempuri.org/CreateTdnamAuction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceBidOnTdnamAuction">
+      <soap12:operation soapAction="http://tempuri.org/PlaceBidOnTdnamAuction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CounterTdnamAuction">
+      <soap12:operation soapAction="http://tempuri.org/CounterTdnamAuction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptTdnamAuctionBid">
+      <soap12:operation soapAction="http://tempuri.org/AcceptTdnamAuctionBid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_CreateTdnamAuction">
+      <soap12:operation soapAction="http://tempuri.org/DomainBuy_CreateTdnamAuction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_SellerCancelledTdnamAuctionByMemberItemId">
+      <soap12:operation soapAction="http://tempuri.org/DomainBuy_SellerCancelledTdnamAuctionByMemberItemId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainBuy_SellerNotInterestedByResourceId">
+      <soap12:operation soapAction="http://tempuri.org/DomainBuy_SellerNotInterestedByResourceId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StoreLeadData">
+      <soap12:operation soapAction="http://tempuri.org/StoreLeadData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DomainServices">
+    <wsdl:port name="DomainServicesSoap" binding="tns:DomainServicesSoap">
+      <soap:address location="http://devisgweb01/DBS_CoreWS/DbsWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DomainServicesSoap12" binding="tns:DomainServicesSoap12">
+      <soap12:address location="http://devisgweb01/DBS_CoreWS/DbsWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

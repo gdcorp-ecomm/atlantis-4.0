@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:wscgdPrivacyAppService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:wscgdPrivacyAppService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:wscgdPrivacyAppService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InsertRecordIn">
+    <wsdl:part name="bstrXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertRecordOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrOutput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRecordIn">
+    <wsdl:part name="bstrXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRecordOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrOutput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRecordIn">
+    <wsdl:part name="bstrHash" type="s:string" />
+    <wsdl:part name="lAppID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRecordOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrOutput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertUpdateIn">
+    <wsdl:part name="bstrXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertUpdateOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrOutput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeleteIn">
+    <wsdl:part name="bstrXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeleteOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrOutput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRecordIn">
+    <wsdl:part name="bstrHash" type="s:string" />
+    <wsdl:part name="lAppID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetRecordOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrOutput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertEmailAddressIn">
+    <wsdl:part name="bstrEmailAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertEmailAddressOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEmailAddressByHashIn">
+    <wsdl:part name="bstrEmailHash" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEmailAddressByHashOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="wscgdPrivacyAppServiceSoap">
+    <wsdl:operation name="InsertRecord">
+      <wsdl:input message="s0:InsertRecordIn" />
+      <wsdl:output message="s0:InsertRecordOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecord">
+      <wsdl:input message="s0:UpdateRecordIn" />
+      <wsdl:output message="s0:UpdateRecordOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecord">
+      <wsdl:input message="s0:DeleteRecordIn" />
+      <wsdl:output message="s0:DeleteRecordOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertUpdate">
+      <wsdl:input message="s0:InsertUpdateIn" />
+      <wsdl:output message="s0:InsertUpdateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDelete">
+      <wsdl:input message="s0:UpdateDeleteIn" />
+      <wsdl:output message="s0:UpdateDeleteOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecord">
+      <wsdl:input message="s0:GetRecordIn" />
+      <wsdl:output message="s0:GetRecordOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertEmailAddress">
+      <wsdl:input message="s0:InsertEmailAddressIn" />
+      <wsdl:output message="s0:InsertEmailAddressOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmailAddressByHash">
+      <wsdl:input message="s0:GetEmailAddressByHashIn" />
+      <wsdl:output message="s0:GetEmailAddressByHashOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wscgdPrivacyAppServiceSoap" type="s0:wscgdPrivacyAppServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="InsertRecord">
+      <soap:operation soapAction="#InsertRecord" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecord">
+      <soap:operation soapAction="#UpdateRecord" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecord">
+      <soap:operation soapAction="#DeleteRecord" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertUpdate">
+      <soap:operation soapAction="#InsertUpdate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDelete">
+      <soap:operation soapAction="#UpdateDelete" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecord">
+      <soap:operation soapAction="#GetRecord" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertEmailAddress">
+      <soap:operation soapAction="#InsertEmailAddress" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmailAddressByHash">
+      <soap:operation soapAction="#GetEmailAddressByHash" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdPrivacyAppService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wscgdPrivacyAppService">
+    <wsdl:port name="wscgdPrivacyAppServiceSoap" binding="s0:wscgdPrivacyAppServiceSoap">
+      <soap:address location="http://devsbeapp01.jomax.paholdings.com:80/wscgdPrivacyApp/wscgdPrivacyApp.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

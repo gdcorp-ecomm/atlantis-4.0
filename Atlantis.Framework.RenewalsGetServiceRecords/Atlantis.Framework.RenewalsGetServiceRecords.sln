@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7780DB94-6434-4F8C-9683-B17026134C5A}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.RenewalsGetServiceRecords.vsmdi = Atlantis.Framework.RenewalsGetServiceRecords.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RenewalsGetServiceRecords.Interface", "Atlantis.Framework.RenewalsGetServiceRecords.Interface\Atlantis.Framework.RenewalsGetServiceRecords.Interface.csproj", "{ED27C23E-AB97-4EE4-B42A-EA3480EFAAB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RenewalsGetServiceRecords.Impl", "Atlantis.Framework.RenewalsGetServiceRecords.Impl\Atlantis.Framework.RenewalsGetServiceRecords.Impl.csproj", "{158545CC-324C-4905-8712-C6E520999A62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenewalsGetServiceRecords.Tests", "RenewalsGetServiceRecords.Tests\RenewalsGetServiceRecords.Tests.csproj", "{41A8FEE7-9FE5-4560-8983-383E9D5C3F9A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A0934B7E-C7BC-4815-80D9-BB22788CE68B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.RenewalsGetServiceRecords.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.RenewalsGetServiceRecords.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.RenewalsGetServiceRecords.Interface\\Atlantis.Framework.RenewalsGetServiceRecords.Interface.csproj
+		SccProjectName3 = Atlantis.Framework.RenewalsGetServiceRecords.Interface
+		SccLocalPath3 = Atlantis.Framework.RenewalsGetServiceRecords.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.RenewalsGetServiceRecords.Impl\\Atlantis.Framework.RenewalsGetServiceRecords.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.RenewalsGetServiceRecords.Impl
+		SccLocalPath4 = Atlantis.Framework.RenewalsGetServiceRecords.Impl
+		SccProjectUniqueName5 = RenewalsGetServiceRecords.Tests\\RenewalsGetServiceRecords.Tests.csproj
+		SccProjectName5 = RenewalsGetServiceRecords.Tests
+		SccLocalPath5 = RenewalsGetServiceRecords.Tests
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.RenewalsGetServiceRecords.sln
+		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.RenewalsGetServiceRecords.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED27C23E-AB97-4EE4-B42A-EA3480EFAAB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED27C23E-AB97-4EE4-B42A-EA3480EFAAB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED27C23E-AB97-4EE4-B42A-EA3480EFAAB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED27C23E-AB97-4EE4-B42A-EA3480EFAAB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{158545CC-324C-4905-8712-C6E520999A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{158545CC-324C-4905-8712-C6E520999A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{158545CC-324C-4905-8712-C6E520999A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{158545CC-324C-4905-8712-C6E520999A62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41A8FEE7-9FE5-4560-8983-383E9D5C3F9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41A8FEE7-9FE5-4560-8983-383E9D5C3F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41A8FEE7-9FE5-4560-8983-383E9D5C3F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41A8FEE7-9FE5-4560-8983-383E9D5C3F9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A0934B7E-C7BC-4815-80D9-BB22788CE68B}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {A0934B7E-C7BC-4815-80D9-BB22788CE68B}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {A0934B7E-C7BC-4815-80D9-BB22788CE68B}
+	EndGlobalSection
+EndGlobal

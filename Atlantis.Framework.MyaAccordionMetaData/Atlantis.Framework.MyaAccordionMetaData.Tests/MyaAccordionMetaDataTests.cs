@@ -130,15 +130,23 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 								foreach(AccordionMetaData.LinkUrlData link in cp.LinkUrls)
 								{
 									StringBuilder sb = new StringBuilder();
+									StringBuilder sb3 = new StringBuilder();
 									Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2} | IdentificationRule: {3} | IdentificationValue: {4}", link.Link, link.Page, link.Type, link.IdentificationRule, link.IdentificationValue)));
 									foreach (string key in link.QsKeys)
 									{
 										sb.Append(string.Format("{0}: {1} | ", key, link.QsKeys[key]));
-									}
+									}           
 									if (sb.Length > 0)
 									{
 										Debug.WriteLine(string.Format("{0} QsKeys: {1}", p.Name, sb.ToString().TrimEnd(' ').TrimEnd('|')));
 									}
+									bool isSecure = false;
+									for (int i = 1; i < 5; i++)
+									{
+										link.EnvironmentHttpsRequirements.TryGetValue(i, out isSecure);
+										sb3.Append(string.Format("Env #{0} : {1} | ", i, isSecure));
+									}
+									Debug.WriteLine(string.Format("{0} Environment Security: {1}", p.Name, sb3.ToString().TrimEnd(' ').TrimEnd('|')));
 								}
 								if (cp.LinkUrls.Exists(new System.Predicate<AccordionMetaData.LinkUrlData>(url => url.IdentificationRule != string.Empty)))
 								{

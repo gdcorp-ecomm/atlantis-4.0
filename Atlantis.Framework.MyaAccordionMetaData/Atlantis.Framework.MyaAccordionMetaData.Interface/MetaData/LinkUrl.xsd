@@ -15,6 +15,7 @@
       <xs:attribute name="type" type="xs:string" use="required" />
       <xs:attribute name="identificationrule" type="xs:string" use="optional" />
       <xs:attribute name="identificationvalue" type="xs:string" use="optional" />
+      <xs:attribute name="isenvsecure" type="xs:string" use="optional" />
     </xs:complexType>    
   </xs:element>
 </xs:schema>

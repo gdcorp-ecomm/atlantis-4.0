@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData;
+using System.Linq;
 
 namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 {
@@ -258,6 +259,8 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
         linkUrl.Type = (LinkUrlData.TypeOfLink)Enum.Parse(typeof(LinkUrlData.TypeOfLink), linkUrlXml.Attribute("type").Value);
         linkUrl.IdentificationRule = linkUrlXml.Attribute("identificationrule") != null ? linkUrlXml.Attribute("identificationrule").Value : string.Empty;
         linkUrl.IdentificationValue = linkUrlXml.Attribute("identificationvalue") != null ? linkUrlXml.Attribute("identificationvalue").Value : string.Empty;
+        linkUrl.EnvironmentHttpsRequirements = BuildEnvironmentHttpsDictionary(linkUrlXml.Attribute("isenvsecure") != null ? linkUrlXml.Attribute("isenvsecure").Value : string.Empty);
+
         if (linkUrlXml.HasElements)
         {
           foreach (XElement qsKey in linkUrlXml.Elements("qskey"))
@@ -344,6 +347,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     public string OrionProductName
     {
       get { return ParseAccordionXml("orionproductname"); }
+    }
+    public bool IsBundleProduct
+    {
+      get { return string.Compare(ParseAccordionXml("isbundle"), "true", true) == 0; }
     }
     #endregion
 
@@ -448,7 +455,19 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       public TypeOfLink Type { get; set; }
       public string IdentificationRule { get; set; }
       public string IdentificationValue { get; set; }
+      public Dictionary<int, bool> EnvironmentHttpsRequirements { get; set; }
       public NameValueCollection QsKeys { get; set; }
+
+      public bool DoesEnvironmentRequireSecureLink(int environment)
+      {
+        bool isSecure = false;
+        if (!EnvironmentHttpsRequirements.TryGetValue(environment, out isSecure))
+        {
+          isSecure = false;
+        }
+
+        return isSecure;
+      }
 
       public LinkUrlData()
       { }
@@ -518,6 +537,33 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
         }
       }
       return cmsDisplayGroupList;
+    }
+    private enum ServerLocationType
+    {
+      Undetermined = 0,
+      Dev = 1,
+      Test = 2,
+      Ote = 3,
+      Prod = 4,
+    }
+    private Dictionary<int,bool> BuildEnvironmentHttpsDictionary(string secureEnvironmentString)
+    {
+      Dictionary<int, bool> envDict = new Dictionary<int, bool>();
+      List<string> envs = string.IsNullOrWhiteSpace(secureEnvironmentString) ? new List<string>() : secureEnvironmentString.Split(',').ToList<string>();
+
+      envDict.Add((int)ServerLocationType.Dev, false);
+      envDict.Add((int)ServerLocationType.Ote, false);
+      envDict.Add((int)ServerLocationType.Prod, false);
+      envDict.Add((int)ServerLocationType.Test, false);
+
+      if (envs.Count > 0)
+      {
+        foreach (string env in envs)
+        {
+          envDict[(int)Enum.Parse(typeof(ServerLocationType), env)] = true;
+        }
+      }
+      return envDict;
     }
     #endregion
 

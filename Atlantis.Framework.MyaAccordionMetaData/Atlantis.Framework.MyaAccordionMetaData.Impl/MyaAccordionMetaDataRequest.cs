@@ -34,7 +34,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
     private string BuildDebugMetaDataXml()
     {
       XElement root = new XElement("data",
-        new XAttribute("count", "5"));
+        new XAttribute("count", "7"));
 
       XElement accordiondata1 = new XElement("item"
         , new XAttribute("accordionId", 1)
@@ -81,7 +81,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
         , new XAttribute("accordionTitle", "Domains By Proxy")
         , new XAttribute("accordionXml", "<accordion cirenewnow='58766' controlpanelrequiresaccount='false' iconcsscoordinates='-104px,-22px,14px,12px' isproductofferedfree='false' showsetupformanageronly='false' productgroup='9'/>")
         , new XAttribute("contentXml", "<content/>")
-        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='DBPURL' page='Login.aspx' type='Standard'><qskey name='ci' value='54105'/></linkurl></controlpanels>")
+        , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='DBPURL' page='Login.aspx' type='Standard' isenvsecure='Test,Prod'><qskey name='ci' value='54105'/></linkurl></controlpanels>")
         , new XAttribute("defaultSortOrder", 19)
         , new XAttribute("namespaces", "pg|9, dbp")
         , new XAttribute("workspaceLoginXml", "<workspace/>"));
@@ -99,7 +99,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
       XElement accordiondata7 = new XElement("item"
         , new XAttribute("accordionId", 8)
         , new XAttribute("accordionTitle", "Business Accelerator")
-        , new XAttribute("accordionXml", "<accordion ciexpansion='54068' cirenewnow='54070' controlpanelrequiresaccount='true' iconcsscoordinates='31px,0px,30px,30px' isproductofferedfree='false' showsetupformanageronly='false' productgroup='81'/>")
+        , new XAttribute("accordionXml", "<accordion ciexpansion='54068' cirenewnow='54070' controlpanelrequiresaccount='true' iconcsscoordinates='31px,0px,30px,30px' isproductofferedfree='false' showsetupformanageronly='false' productgroup='81' isbundle='true'/>")
         , new XAttribute("contentXml", "<content><data accountlist='mya_accountListGetBusinessAcceleratorBundles_sp' jsonpage='GetProductsContainer.aspx' cioptions='54069'/></content>")
         , new XAttribute("controlPanelXml", "<controlpanels><linkurl link='LOGOURL' type='Standard' identificationrule='ProductTypeId' identificationvalue='187'><qskey name='ci' value='54095'/></linkurl><linkurl link='HCCURL' page='accountlist.aspx' type='Standard' identificationrule='ProductTypeId' identificationvalue='307'><qskey name='ci' value='54095'/><qskey name='account_uid' value='%ERID%'/><qskey name='common_name' value='%CN%'/><qskey name='auth_guid' value='%AUTHGUID%'/></linkurl><linkurl link='WSTURL' page='launch.aspx' type='Standard' identificationrule='ProductTypeId' identificationvalue='130'><qskey name='ci' value='54058'/><qskey name='account_Uid' value='%ERID%'/><qskey name='common_name' value='%CN%'/></linkurl></controlpanels>")
         , new XAttribute("defaultSortOrder", 8)

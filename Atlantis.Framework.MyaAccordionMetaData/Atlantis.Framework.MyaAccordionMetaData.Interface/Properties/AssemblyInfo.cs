@@ -10,7 +10,6 @@ using System.Runtime.InteropServices;
 #else
 [assembly: AssemblyDescription("Release Build")]
 #endif
-
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.MyaAccordionMetaData.Interface")]
@@ -37,4 +36,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.11.11.21")]
+[assembly: AssemblyFileVersion("4.11.12.6")]

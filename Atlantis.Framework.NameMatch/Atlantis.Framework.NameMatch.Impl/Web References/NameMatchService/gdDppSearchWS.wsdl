@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://auctions.godaddy.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="Domainsbot.FirstImpact" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://auctions.godaddy.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://auctions.godaddy.com">
+      <s:import namespace="Domainsbot.FirstImpact" />
+      <s:element name="getServiceStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="getServiceStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getServiceStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getServiceStatistics">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getServiceStatisticsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getServiceStatisticsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dppDomainSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="requestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dppDomainSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dppDomainSearchResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="exactMatchDomainSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="requestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="exactMatchDomainSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="exactMatchDomainSearchResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="keywordSpinDomainSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="requestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="keywordSpinDomainSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keywordSpinDomainSearchResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dppAvailableDomains">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="requestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dppAvailableDomainsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dppAvailableDomainsResult" type="tns:ArrayOfAvailableDomain" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAvailableDomain">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AvailableDomain" nillable="true" type="tns:AvailableDomain" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AvailableDomain">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Domain">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="AnchorWord" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SearchMethod" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AvailCheckPerformed" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="DomainAvailable" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FullDomainName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TLD" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SLD" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfAvailableDomain" nillable="true" type="tns:ArrayOfAvailableDomain" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="Domainsbot.FirstImpact">
+      <s:complexType name="Domain">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Name">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Extension" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DomainName" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Name">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="NameWithoutExtension" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Keys" type="s1:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="s1:ArrayOfArrayOfDomainData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfArrayOfDomainData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfDomainData" nillable="true" type="s1:ArrayOfDomainData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDomainData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DomainData" nillable="true" type="s1:DomainData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DomainData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GridDomain">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Name">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Extensions" type="s1:ArrayOfGridExtension" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfGridExtension">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GridExtension" nillable="true" type="s1:GridExtension" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GridExtension">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s1:DomainStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="s1:ArrayOfArrayOfDomainData" />
+          <s:element minOccurs="0" maxOccurs="1" name="Extension" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DomainStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Available" />
+          <s:enumeration value="Registered" />
+          <s:enumeration value="Database" />
+          <s:enumeration value="Unknown" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getServiceStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:getServiceStatus" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:getServiceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsSoapIn">
+    <wsdl:part name="parameters" element="tns:getServiceStatistics" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsSoapOut">
+    <wsdl:part name="parameters" element="tns:getServiceStatisticsResponse" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:dppDomainSearch" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:dppDomainSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="exactMatchDomainSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:exactMatchDomainSearch" />
+  </wsdl:message>
+  <wsdl:message name="exactMatchDomainSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:exactMatchDomainSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="keywordSpinDomainSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:keywordSpinDomainSearch" />
+  </wsdl:message>
+  <wsdl:message name="keywordSpinDomainSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:keywordSpinDomainSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="dppAvailableDomainsSoapIn">
+    <wsdl:part name="parameters" element="tns:dppAvailableDomains" />
+  </wsdl:message>
+  <wsdl:message name="dppAvailableDomainsSoapOut">
+    <wsdl:part name="parameters" element="tns:dppAvailableDomainsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusHttpGetIn" />
+  <wsdl:message name="getServiceStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsHttpGetIn">
+    <wsdl:part name="token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchHttpGetIn">
+    <wsdl:part name="requestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="exactMatchDomainSearchHttpGetIn">
+    <wsdl:part name="requestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="exactMatchDomainSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="keywordSpinDomainSearchHttpGetIn">
+    <wsdl:part name="requestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="keywordSpinDomainSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="dppAvailableDomainsHttpGetIn">
+    <wsdl:part name="requestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dppAvailableDomainsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAvailableDomain" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatusHttpPostIn" />
+  <wsdl:message name="getServiceStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsHttpPostIn">
+    <wsdl:part name="token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceStatisticsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchHttpPostIn">
+    <wsdl:part name="requestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dppDomainSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="exactMatchDomainSearchHttpPostIn">
+    <wsdl:part name="requestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="exactMatchDomainSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="keywordSpinDomainSearchHttpPostIn">
+    <wsdl:part name="requestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="keywordSpinDomainSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="dppAvailableDomainsHttpPostIn">
+    <wsdl:part name="requestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dppAvailableDomainsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAvailableDomain" />
+  </wsdl:message>
+  <wsdl:portType name="gdDppSearchWSSoap">
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusSoapIn" />
+      <wsdl:output message="tns:getServiceStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <wsdl:input message="tns:getServiceStatisticsSoapIn" />
+      <wsdl:output message="tns:getServiceStatisticsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <wsdl:input message="tns:dppDomainSearchSoapIn" />
+      <wsdl:output message="tns:dppDomainSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="exactMatchDomainSearch">
+      <wsdl:input message="tns:exactMatchDomainSearchSoapIn" />
+      <wsdl:output message="tns:exactMatchDomainSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="keywordSpinDomainSearch">
+      <wsdl:input message="tns:keywordSpinDomainSearchSoapIn" />
+      <wsdl:output message="tns:keywordSpinDomainSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dppAvailableDomains">
+      <wsdl:input message="tns:dppAvailableDomainsSoapIn" />
+      <wsdl:output message="tns:dppAvailableDomainsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="gdDppSearchWSHttpGet">
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusHttpGetIn" />
+      <wsdl:output message="tns:getServiceStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <wsdl:input message="tns:getServiceStatisticsHttpGetIn" />
+      <wsdl:output message="tns:getServiceStatisticsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <wsdl:input message="tns:dppDomainSearchHttpGetIn" />
+      <wsdl:output message="tns:dppDomainSearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="exactMatchDomainSearch">
+      <wsdl:input message="tns:exactMatchDomainSearchHttpGetIn" />
+      <wsdl:output message="tns:exactMatchDomainSearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="keywordSpinDomainSearch">
+      <wsdl:input message="tns:keywordSpinDomainSearchHttpGetIn" />
+      <wsdl:output message="tns:keywordSpinDomainSearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dppAvailableDomains">
+      <wsdl:input message="tns:dppAvailableDomainsHttpGetIn" />
+      <wsdl:output message="tns:dppAvailableDomainsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="gdDppSearchWSHttpPost">
+    <wsdl:operation name="getServiceStatus">
+      <wsdl:input message="tns:getServiceStatusHttpPostIn" />
+      <wsdl:output message="tns:getServiceStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <wsdl:input message="tns:getServiceStatisticsHttpPostIn" />
+      <wsdl:output message="tns:getServiceStatisticsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <wsdl:input message="tns:dppDomainSearchHttpPostIn" />
+      <wsdl:output message="tns:dppDomainSearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="exactMatchDomainSearch">
+      <wsdl:input message="tns:exactMatchDomainSearchHttpPostIn" />
+      <wsdl:output message="tns:exactMatchDomainSearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="keywordSpinDomainSearch">
+      <wsdl:input message="tns:keywordSpinDomainSearchHttpPostIn" />
+      <wsdl:output message="tns:keywordSpinDomainSearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dppAvailableDomains">
+      <wsdl:input message="tns:dppAvailableDomainsHttpPostIn" />
+      <wsdl:output message="tns:dppAvailableDomainsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="gdDppSearchWSSoap" type="tns:gdDppSearchWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServiceStatus">
+      <soap:operation soapAction="http://auctions.godaddy.com/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <soap:operation soapAction="http://auctions.godaddy.com/getServiceStatistics" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <soap:operation soapAction="http://auctions.godaddy.com/dppDomainSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="exactMatchDomainSearch">
+      <soap:operation soapAction="http://auctions.godaddy.com/exactMatchDomainSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="keywordSpinDomainSearch">
+      <soap:operation soapAction="http://auctions.godaddy.com/keywordSpinDomainSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppAvailableDomains">
+      <soap:operation soapAction="http://auctions.godaddy.com/dppAvailableDomains" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="gdDppSearchWSSoap12" type="tns:gdDppSearchWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getServiceStatus">
+      <soap12:operation soapAction="http://auctions.godaddy.com/getServiceStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <soap12:operation soapAction="http://auctions.godaddy.com/getServiceStatistics" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <soap12:operation soapAction="http://auctions.godaddy.com/dppDomainSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="exactMatchDomainSearch">
+      <soap12:operation soapAction="http://auctions.godaddy.com/exactMatchDomainSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="keywordSpinDomainSearch">
+      <soap12:operation soapAction="http://auctions.godaddy.com/keywordSpinDomainSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppAvailableDomains">
+      <soap12:operation soapAction="http://auctions.godaddy.com/dppAvailableDomains" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="gdDppSearchWSHttpGet" type="tns:gdDppSearchWSHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="getServiceStatus">
+      <http:operation location="/getServiceStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <http:operation location="/getServiceStatistics" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <http:operation location="/dppDomainSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="exactMatchDomainSearch">
+      <http:operation location="/exactMatchDomainSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="keywordSpinDomainSearch">
+      <http:operation location="/keywordSpinDomainSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppAvailableDomains">
+      <http:operation location="/dppAvailableDomains" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="gdDppSearchWSHttpPost" type="tns:gdDppSearchWSHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getServiceStatus">
+      <http:operation location="/getServiceStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceStatistics">
+      <http:operation location="/getServiceStatistics" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppDomainSearch">
+      <http:operation location="/dppDomainSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="exactMatchDomainSearch">
+      <http:operation location="/exactMatchDomainSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="keywordSpinDomainSearch">
+      <http:operation location="/keywordSpinDomainSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dppAvailableDomains">
+      <http:operation location="/dppAvailableDomains" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="gdDppSearchWS">
+    <wsdl:port name="gdDppSearchWSSoap" binding="tns:gdDppSearchWSSoap">
+      <soap:address location="http://g1dwlep001/gdDppSearch/gdDppSearchWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="gdDppSearchWSSoap12" binding="tns:gdDppSearchWSSoap12">
+      <soap12:address location="http://g1dwlep001/gdDppSearch/gdDppSearchWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="gdDppSearchWSHttpGet" binding="tns:gdDppSearchWSHttpGet">
+      <http:address location="http://g1dwlep001/gdDppSearch/gdDppSearchWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="gdDppSearchWSHttpPost" binding="tns:gdDppSearchWSHttpPost">
+      <http:address location="http://g1dwlep001/gdDppSearch/gdDppSearchWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

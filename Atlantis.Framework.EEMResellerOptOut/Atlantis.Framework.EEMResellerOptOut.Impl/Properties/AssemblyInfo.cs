@@ -5,11 +5,15 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.EEMResellerOptOut.Impl")]
-[assembly: AssemblyDescription("")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+#endif
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com")]
+[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.EEMResellerOptOut.Impl")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy 2010")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2010-2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

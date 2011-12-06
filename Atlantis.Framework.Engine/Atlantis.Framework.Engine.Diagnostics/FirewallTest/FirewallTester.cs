@@ -52,7 +52,7 @@ namespace Atlantis.Framework.Engine.Diagnostics.FirewallTest
         else 
         {
           ipAddress = addresses[0];
-          if (serviceUrl.Scheme == "https://")
+          if (serviceUrl.ToString().StartsWith("https:", StringComparison.InvariantCultureIgnoreCase))
           {
             port = 443;
           }

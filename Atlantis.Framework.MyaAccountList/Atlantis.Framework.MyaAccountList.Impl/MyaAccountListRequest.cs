@@ -216,16 +216,16 @@ namespace Atlantis.Framework.MyaAccountList.Impl
             {
               if (row["commonName"].ToString().ToLowerInvariant() != "new account")
               {
-                string commonName = string.Empty;
-                response.ReplacementDataDictionary.TryGetValue(Convert.ToInt32(row["externalResourceID"]), out commonName);
+                EEMCustomerSummary erd;
+                response.ReplacementDataDictionary.TryGetValue(Convert.ToInt32(row["externalResourceID"]), out erd);
 
-                if (string.IsNullOrWhiteSpace(commonName))
+                if (erd == null)
                 {
                   row["commonName"] = "New Account";
                 }
                 else
                 {
-                  row["commonName"] = commonName;
+                  row["commonName"] = erd.companyName;
                 }
               }
             }

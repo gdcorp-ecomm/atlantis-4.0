@@ -2,6 +2,7 @@
 using System;
 using Atlantis.Framework.ManagerUser.Interface;
 using System.Security.Principal;
+using System.Web;
 
 namespace Atlantis.Framework.BasePages.SiteAdmin.Providers
 {
@@ -32,12 +33,12 @@ namespace Atlantis.Framework.BasePages.SiteAdmin.Providers
 
     public string ManagerUserId
     {
-      get { return string.Empty; }
+      get { return (ManagerUserLookup != null) ? ManagerUserLookup.ManagerUserId : "unknown"; }
     }
 
     public string ManagerUserName
     {
-      get { return string.Empty; }
+      get { return (ManagerUserLookup != null) ? ManagerUserLookup.ManagerLoginName : "unknown"; }
     }
 
     public System.Collections.Specialized.NameValueCollection ManagerQuery
@@ -61,6 +62,37 @@ namespace Atlantis.Framework.BasePages.SiteAdmin.Providers
     }
 
     #endregion
+
+    private ManagerUserLookupResponseData _managerUserLookupResponse = null;
+    private bool _attemptedLookup = false;
+    private ManagerUserLookupResponseData ManagerUserLookup
+    {
+      get
+      {
+        if ((_managerUserLookupResponse == null) && (!_attemptedLookup))
+        {
+          _attemptedLookup = true;
+          try
+          {
+            string domain;
+            string userid;
+            if (GetWindowsUserAndDomain(out domain, out userid))
+            {
+              ManagerUserLookupRequestData request = new ManagerUserLookupRequestData(
+                _shopperContext.Value.ShopperId, HttpContext.Current.Request.Url.ToString(), string.Empty, string.Empty, 0, domain, userid);
+              _managerUserLookupResponse = (ManagerUserLookupResponseData)DataCache.DataCache.GetProcessRequest(request, SiteAdminBaseEngineRequests.ManagerUserLookup);
+            }
+          }
+          catch(Exception ex)
+          {
+            AtlantisException managerException = new AtlantisException(
+              "WindowsManagerProvider.ManagerUserLookup", "403", "Error Looking up Manager User.", _shopperContext.Value.ShopperId, _siteContext.Value, _shopperContext.Value);
+            Engine.Engine.LogAtlantisException(managerException);
+          }
+        }
+        return _managerUserLookupResponse;
+      }
+    }
 
     private bool GetWindowsUserAndDomain(out string domain, out string userId)
     {

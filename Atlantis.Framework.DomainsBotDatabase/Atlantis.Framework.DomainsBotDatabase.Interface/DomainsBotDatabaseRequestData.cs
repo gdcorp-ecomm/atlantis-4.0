@@ -7,7 +7,7 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DomainsBotDatabase.Interface
 {
-  public class DomainsBotDatabaseRequestData  : RequestData
+  public class DomainsBotDatabaseRequestData : RequestData
   {
     #region Properties
 
@@ -45,7 +45,7 @@ namespace Atlantis.Framework.DomainsBotDatabase.Interface
       get { return _maxResults; }
       set { _maxResults = value; }
     }
-    #endregion 
+    #endregion
 
     #region Constructors
 
@@ -56,6 +56,7 @@ namespace Atlantis.Framework.DomainsBotDatabase.Interface
                                          int iPageCount)
       : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
     {
+      RequestTimeout = TimeSpan.FromMilliseconds(2500);
     }
 
     public DomainsBotDatabaseRequestData(string sShopperID,
@@ -84,6 +85,7 @@ namespace Atlantis.Framework.DomainsBotDatabase.Interface
                                          int maxResults)
       : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
     {
+      RequestTimeout = TimeSpan.FromMilliseconds(2500);
       this._domainNameToSearch = domainNameToSearch;
       AddDotType(dotTypeToSearch);
       this._maxResults = maxResults;
@@ -137,28 +139,28 @@ namespace Atlantis.Framework.DomainsBotDatabase.Interface
     }
 
     public override string ToXML()
-		{
-			StringBuilder sbRequest = new StringBuilder();
-			XmlTextWriter xtwRequest = new XmlTextWriter(new StringWriter(sbRequest));
+    {
+      StringBuilder sbRequest = new StringBuilder();
+      XmlTextWriter xtwRequest = new XmlTextWriter(new StringWriter(sbRequest));
 
-			xtwRequest.WriteStartElement("INFO");
-			xtwRequest.WriteAttributeString("ShopperID", this.ShopperID);
-			xtwRequest.WriteAttributeString("SourceURL", this.SourceURL);
-			xtwRequest.WriteAttributeString("OrderID", this.OrderID);
-			xtwRequest.WriteAttributeString("Pathway", this.Pathway);
+      xtwRequest.WriteStartElement("INFO");
+      xtwRequest.WriteAttributeString("ShopperID", this.ShopperID);
+      xtwRequest.WriteAttributeString("SourceURL", this.SourceURL);
+      xtwRequest.WriteAttributeString("OrderID", this.OrderID);
+      xtwRequest.WriteAttributeString("Pathway", this.Pathway);
       xtwRequest.WriteAttributeString("PageCount", this.PageCount.ToString());
       xtwRequest.WriteAttributeString("databaseToUse", this._databaseToUse);
       xtwRequest.WriteAttributeString("domainNameToSearch", this._domainNameToSearch);
       xtwRequest.WriteAttributeString("dotTypesToSearch", GetDotTypesString());
       xtwRequest.WriteAttributeString("removeKeys", this._removeKeys.ToString());
       xtwRequest.WriteAttributeString("maxResults", this._maxResults.ToString());
-      xtwRequest.WriteAttributeString("timeout", this.RequestTimeout.TotalMilliseconds.ToString());
-			xtwRequest.WriteEndElement();
+      xtwRequest.WriteAttributeString("timeout", RequestTimeout.TotalMilliseconds.ToString());
+      xtwRequest.WriteEndElement();
 
-			return sbRequest.ToString();
+      return sbRequest.ToString();
 
-		}
-	
+    }
+
     #endregion
 
     #region Private Methods

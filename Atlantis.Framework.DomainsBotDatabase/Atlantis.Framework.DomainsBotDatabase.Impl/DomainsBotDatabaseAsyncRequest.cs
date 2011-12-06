@@ -11,7 +11,7 @@ namespace Atlantis.Framework.DomainsBotDatabase.Impl
     {
       DomainsBotDatabaseRequestData requestData = (DomainsBotDatabaseRequestData)domainsDatabaseRequestData;
       FirstImpact3 firstImpact = new FirstImpact3();
-      firstImpact.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+      firstImpact.Timeout = (int)Math.Truncate(requestData.RequestTimeout.TotalMilliseconds);
       firstImpact.Url = ((WsConfigElement)configElement).WSURL;
       AsyncState asyncState = new AsyncState(domainsDatabaseRequestData, configElement, firstImpact, state);
       IAsyncResult asyncResult = firstImpact.BeginSearchDatabaseDomains(requestData.DatabaseToUse,
@@ -30,11 +30,11 @@ namespace Atlantis.Framework.DomainsBotDatabase.Impl
     public IResponseData EndHandleRequest(IAsyncResult asyncResult)
     {
       IResponseData responseData = null;
-      AsyncState asyncState = (AsyncState)asyncResult.AsyncState; 
+      AsyncState asyncState = (AsyncState)asyncResult.AsyncState;
       try
       {
         FirstImpact3 firstImpact = (FirstImpact3)asyncState.Request;
-        Domain[] searchResponse = firstImpact.EndSearchDatabaseDomains(asyncResult);        
+        Domain[] searchResponse = firstImpact.EndSearchDatabaseDomains(asyncResult);
         responseData = new DomainsBotDatabaseResponseData(searchResponse.Length);
 
         foreach (Domain domain in searchResponse)

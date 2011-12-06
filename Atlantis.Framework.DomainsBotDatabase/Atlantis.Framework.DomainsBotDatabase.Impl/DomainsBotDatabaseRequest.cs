@@ -7,19 +7,19 @@ namespace Atlantis.Framework.DomainsBotDatabase.Impl
 {
   public class DomainsBotDatabaseRequest : IRequest
   {
-    public IResponseData RequestHandler(RequestData domainsBotDatabaseRequestData, 
+    public IResponseData RequestHandler(RequestData domainsBotDatabaseRequestData,
       ConfigElement configElement)
     {
       IResponseData responseData = null;
       try
       {
-        DomainsBotDatabaseRequestData requestData 
+        DomainsBotDatabaseRequestData requestData
           = (DomainsBotDatabaseRequestData)domainsBotDatabaseRequestData;
         Domain[] searchResponse;
         using (FirstImpact3 firstImpact = new FirstImpact3())
         {
           firstImpact.Url = ((WsConfigElement)configElement).WSURL;
-          firstImpact.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+          firstImpact.Timeout = (int)Math.Truncate(requestData.RequestTimeout.TotalMilliseconds);
           searchResponse = firstImpact.SearchDatabaseDomains(requestData.DatabaseToUse,
                                                              requestData.DomainNameToSearch,
                                                              requestData.GetDotTypesString(),

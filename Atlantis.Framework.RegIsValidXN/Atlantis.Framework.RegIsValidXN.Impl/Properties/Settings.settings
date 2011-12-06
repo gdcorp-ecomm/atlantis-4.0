@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.RegIsValidXN.Impl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Atlantis_Framework_RegIsValidXN_Impl_RegIDNCheckerWebSvc" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://g1dwregcheck01/RegIDNCheckerWebSvc/RegIDNCheckerWebSvc.asmx</Value>
+    </Setting>
+    <Setting Name="Atlantis_Framework_RegIsValidXN_Impl_RegIDNCheckerWS_RegIDNCheckerWebSvc" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://g1dwregcheck01/RegIDNCheckerWebSvc/RegIDNCheckerWebSvc.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

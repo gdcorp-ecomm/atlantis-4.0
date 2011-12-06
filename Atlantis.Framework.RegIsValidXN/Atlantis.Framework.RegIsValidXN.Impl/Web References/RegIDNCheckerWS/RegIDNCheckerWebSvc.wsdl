@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://regcheck.prod.mesa1.gdg/RegIDNCheckerWebSvc" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://regcheck.prod.mesa1.gdg/RegIDNCheckerWebSvc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://regcheck.prod.mesa1.gdg/RegIDNCheckerWebSvc">
+      <s:element name="IsValidXN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strRequestXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsValidXNResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsValidXNResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsValidIDN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strRequestXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsValidIDNResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsValidIDNResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="IsValidXNSoapIn">
+    <wsdl:part name="parameters" element="tns:IsValidXN" />
+  </wsdl:message>
+  <wsdl:message name="IsValidXNSoapOut">
+    <wsdl:part name="parameters" element="tns:IsValidXNResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsValidIDNSoapIn">
+    <wsdl:part name="parameters" element="tns:IsValidIDN" />
+  </wsdl:message>
+  <wsdl:message name="IsValidIDNSoapOut">
+    <wsdl:part name="parameters" element="tns:IsValidIDNResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegIDNCheckerWebSvcSoap">
+    <wsdl:operation name="IsValidXN">
+      <wsdl:input message="tns:IsValidXNSoapIn" />
+      <wsdl:output message="tns:IsValidXNSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidIDN">
+      <wsdl:input message="tns:IsValidIDNSoapIn" />
+      <wsdl:output message="tns:IsValidIDNSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegIDNCheckerWebSvcSoap" type="tns:RegIDNCheckerWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IsValidXN">
+      <soap:operation soapAction="http://regcheck.prod.mesa1.gdg/RegIDNCheckerWebSvc/IsValidXN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidIDN">
+      <soap:operation soapAction="http://regcheck.prod.mesa1.gdg/RegIDNCheckerWebSvc/IsValidIDN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegIDNCheckerWebSvcSoap12" type="tns:RegIDNCheckerWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IsValidXN">
+      <soap12:operation soapAction="http://regcheck.prod.mesa1.gdg/RegIDNCheckerWebSvc/IsValidXN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidIDN">
+      <soap12:operation soapAction="http://regcheck.prod.mesa1.gdg/RegIDNCheckerWebSvc/IsValidIDN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegIDNCheckerWebSvc">
+    <wsdl:port name="RegIDNCheckerWebSvcSoap" binding="tns:RegIDNCheckerWebSvcSoap">
+      <soap:address location="http://g1dwregcheck01/RegIDNCheckerWebSvc/RegIDNCheckerWebSvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegIDNCheckerWebSvcSoap12" binding="tns:RegIDNCheckerWebSvcSoap12">
+      <soap12:address location="http://g1dwregcheck01/RegIDNCheckerWebSvc/RegIDNCheckerWebSvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

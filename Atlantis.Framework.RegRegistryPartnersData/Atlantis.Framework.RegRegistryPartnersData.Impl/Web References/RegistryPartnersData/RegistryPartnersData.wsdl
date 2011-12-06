@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetCurrentTldSnapshotList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sXMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentTldSnapshotListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrentTldSnapshotListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCurrentTldSnapshotListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCurrentTldSnapshotList" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentTldSnapshotListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCurrentTldSnapshotListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegistryPartnersDataSoap">
+    <wsdl:operation name="GetCurrentTldSnapshotList">
+      <wsdl:input message="tns:GetCurrentTldSnapshotListSoapIn" />
+      <wsdl:output message="tns:GetCurrentTldSnapshotListSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegistryPartnersDataSoap" type="tns:RegistryPartnersDataSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCurrentTldSnapshotList">
+      <soap:operation soapAction="http://tempuri.org/GetCurrentTldSnapshotList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegistryPartnersDataSoap12" type="tns:RegistryPartnersDataSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCurrentTldSnapshotList">
+      <soap12:operation soapAction="http://tempuri.org/GetCurrentTldSnapshotList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegistryPartnersData">
+    <wsdl:port name="RegistryPartnersDataSoap" binding="tns:RegistryPartnersDataSoap">
+      <soap:address location="https://g1twdtvapp01.dc1.corp.gd/RegistryPartnersDataWebSvc/RegistryPartnersData.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegistryPartnersDataSoap12" binding="tns:RegistryPartnersDataSoap12">
+      <soap12:address location="https://g1twdtvapp01.dc1.corp.gd/RegistryPartnersDataWebSvc/RegistryPartnersData.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

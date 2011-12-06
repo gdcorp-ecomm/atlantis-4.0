@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://check.secureserver.net/RegCaDataWebSvc" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://check.secureserver.net/RegCaDataWebSvc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://check.secureserver.net/RegCaDataWebSvc">
+      <s:element name="VerifyRegistrantProfileMerge">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyRegistrantProfileMergeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyRegistrantProfileMergeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProfileDataFromShopperId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProfileDataFromShopperIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProfileDataFromShopperIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrantCompare">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrantCompareResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegistrantCompareResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsActiveProcessOpen">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsActiveProcessOpenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsActiveProcessOpenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRantInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRantInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRantInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAgreement">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAgreementResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAgreementResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InternalGetAgreement">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InternalGetAgreementResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InternalGetAgreementResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InternalCheckAgreement">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InternalCheckAgreementResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InternalCheckAgreementResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrivateWhois">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrivateWhoisResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPrivateWhoisResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainAndContactsCA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDomainAndContactsCAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateDomainAndContactsCAResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateContactsCA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateContactsCAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateContactsCAResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCAProfileId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCAProfileIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCAProfileIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="VerifyRegistrantProfileMergeSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantProfileMerge" />
+  </wsdl:message>
+  <wsdl:message name="VerifyRegistrantProfileMergeSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyRegistrantProfileMergeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProfileDataFromShopperIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProfileDataFromShopperId" />
+  </wsdl:message>
+  <wsdl:message name="GetProfileDataFromShopperIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProfileDataFromShopperIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistrantCompareSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistrantCompare" />
+  </wsdl:message>
+  <wsdl:message name="RegistrantCompareSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistrantCompareResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsActiveProcessOpenSoapIn">
+    <wsdl:part name="parameters" element="tns:IsActiveProcessOpen" />
+  </wsdl:message>
+  <wsdl:message name="IsActiveProcessOpenSoapOut">
+    <wsdl:part name="parameters" element="tns:IsActiveProcessOpenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRantInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRantInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetRantInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRantInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAgreementSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAgreement" />
+  </wsdl:message>
+  <wsdl:message name="GetAgreementSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAgreementResponse" />
+  </wsdl:message>
+  <wsdl:message name="InternalGetAgreementSoapIn">
+    <wsdl:part name="parameters" element="tns:InternalGetAgreement" />
+  </wsdl:message>
+  <wsdl:message name="InternalGetAgreementSoapOut">
+    <wsdl:part name="parameters" element="tns:InternalGetAgreementResponse" />
+  </wsdl:message>
+  <wsdl:message name="InternalCheckAgreementSoapIn">
+    <wsdl:part name="parameters" element="tns:InternalCheckAgreement" />
+  </wsdl:message>
+  <wsdl:message name="InternalCheckAgreementSoapOut">
+    <wsdl:part name="parameters" element="tns:InternalCheckAgreementResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrivateWhoisSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrivateWhois" />
+  </wsdl:message>
+  <wsdl:message name="GetPrivateWhoisSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrivateWhoisResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainAndContactsCASoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateDomainAndContactsCA" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDomainAndContactsCASoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateDomainAndContactsCAResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateContactsCASoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateContactsCA" />
+  </wsdl:message>
+  <wsdl:message name="ValidateContactsCASoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateContactsCAResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCAProfileIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCAProfileId" />
+  </wsdl:message>
+  <wsdl:message name="GetCAProfileIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCAProfileIdResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegCaDataWebSvcSoap">
+    <wsdl:operation name="VerifyRegistrantProfileMerge">
+      <wsdl:input message="tns:VerifyRegistrantProfileMergeSoapIn" />
+      <wsdl:output message="tns:VerifyRegistrantProfileMergeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProfileDataFromShopperId">
+      <wsdl:input message="tns:GetProfileDataFromShopperIdSoapIn" />
+      <wsdl:output message="tns:GetProfileDataFromShopperIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrantCompare">
+      <wsdl:input message="tns:RegistrantCompareSoapIn" />
+      <wsdl:output message="tns:RegistrantCompareSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsActiveProcessOpen">
+      <wsdl:input message="tns:IsActiveProcessOpenSoapIn" />
+      <wsdl:output message="tns:IsActiveProcessOpenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRantInfo">
+      <wsdl:input message="tns:GetRantInfoSoapIn" />
+      <wsdl:output message="tns:GetRantInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAgreement">
+      <wsdl:input message="tns:GetAgreementSoapIn" />
+      <wsdl:output message="tns:GetAgreementSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InternalGetAgreement">
+      <wsdl:input message="tns:InternalGetAgreementSoapIn" />
+      <wsdl:output message="tns:InternalGetAgreementSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InternalCheckAgreement">
+      <wsdl:input message="tns:InternalCheckAgreementSoapIn" />
+      <wsdl:output message="tns:InternalCheckAgreementSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateWhois">
+      <wsdl:input message="tns:GetPrivateWhoisSoapIn" />
+      <wsdl:output message="tns:GetPrivateWhoisSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainAndContactsCA">
+      <wsdl:input message="tns:ValidateDomainAndContactsCASoapIn" />
+      <wsdl:output message="tns:ValidateDomainAndContactsCASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateContactsCA">
+      <wsdl:input message="tns:ValidateContactsCASoapIn" />
+      <wsdl:output message="tns:ValidateContactsCASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCAProfileId">
+      <wsdl:input message="tns:GetCAProfileIdSoapIn" />
+      <wsdl:output message="tns:GetCAProfileIdSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegCaDataWebSvcSoap" type="tns:RegCaDataWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VerifyRegistrantProfileMerge">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/VerifyRegistrantProfileMerge" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfileDataFromShopperId">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/GetProfileDataFromShopperId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrantCompare">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/RegistrantCompare" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsActiveProcessOpen">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/IsActiveProcessOpen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRantInfo">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/GetRantInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgreement">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/GetAgreement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InternalGetAgreement">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/InternalGetAgreement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InternalCheckAgreement">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/InternalCheckAgreement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateWhois">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/GetPrivateWhois" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainAndContactsCA">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/ValidateDomainAndContactsCA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateContactsCA">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/ValidateContactsCA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCAProfileId">
+      <soap:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/GetCAProfileId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegCaDataWebSvcSoap12" type="tns:RegCaDataWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VerifyRegistrantProfileMerge">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/VerifyRegistrantProfileMerge" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfileDataFromShopperId">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/GetProfileDataFromShopperId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrantCompare">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/RegistrantCompare" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsActiveProcessOpen">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/IsActiveProcessOpen" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRantInfo">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/GetRantInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgreement">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/GetAgreement" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InternalGetAgreement">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/InternalGetAgreement" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InternalCheckAgreement">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/InternalCheckAgreement" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateWhois">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/GetPrivateWhois" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDomainAndContactsCA">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/ValidateDomainAndContactsCA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateContactsCA">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/ValidateContactsCA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCAProfileId">
+      <soap12:operation soapAction="http://check.secureserver.net/RegCaDataWebSvc/GetCAProfileId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegCaDataWebSvc">
+    <wsdl:port name="RegCaDataWebSvcSoap" binding="tns:RegCaDataWebSvcSoap">
+      <soap:address location="http://g1dwregcheck01/RegCaDataWebSvc/RegCaDataWebSvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegCaDataWebSvcSoap12" binding="tns:RegCaDataWebSvcSoap12">
+      <soap12:address location="http://g1dwregcheck01/RegCaDataWebSvc/RegCaDataWebSvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

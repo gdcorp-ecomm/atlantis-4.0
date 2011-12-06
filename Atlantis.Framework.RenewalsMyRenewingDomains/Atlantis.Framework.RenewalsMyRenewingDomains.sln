@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{349A5201-CC73-421C-8C86-2C3ABF144940}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.RenewalsMyRenewingDomains.vsmdi = Atlantis.Framework.RenewalsMyRenewingDomains.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RenewalsMyRenewingDomains.Interface", "Atlantis.Framework.RenewalsMyRenewingDomains.Interface\Atlantis.Framework.RenewalsMyRenewingDomains.Interface.csproj", "{2A456CC7-7B87-45E5-B150-5A67EB1AD610}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RenewalsMyRenewingDomains.Impl", "Atlantis.Framework.RenewalsMyRenewingDomains.Impl\Atlantis.Framework.RenewalsMyRenewingDomains.Impl.csproj", "{554E1DD6-4C02-49BE-AE28-FC0CB8EA9961}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.RenewalsMyRenewingDomains.Tests", "Atlantis.Framework.RenewalsMyRenewingDomains.Tests\Atlantis.Framework.RenewalsMyRenewingDomains.Tests.csproj", "{50E53F40-0754-43C4-821C-19A06685B7DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2F19067F-8F67-4143-9BCC-FE3AEE7B819B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.RenewalsMyRenewingDomains.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.RenewalsMyRenewingDomains.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.RenewalsMyRenewingDomains.Interface\\Atlantis.Framework.RenewalsMyRenewingDomains.Interface.csproj
+		SccProjectName3 = Atlantis.Framework.RenewalsMyRenewingDomains.Interface
+		SccLocalPath3 = Atlantis.Framework.RenewalsMyRenewingDomains.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.RenewalsMyRenewingDomains.Impl\\Atlantis.Framework.RenewalsMyRenewingDomains.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.RenewalsMyRenewingDomains.Impl
+		SccLocalPath4 = Atlantis.Framework.RenewalsMyRenewingDomains.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.RenewalsMyRenewingDomains.Tests\\Atlantis.Framework.RenewalsMyRenewingDomains.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.RenewalsMyRenewingDomains.Tests
+		SccLocalPath5 = Atlantis.Framework.RenewalsMyRenewingDomains.Tests
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.RenewalsMyRenewingDomains.sln
+		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.RenewalsMyRenewingDomains.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A456CC7-7B87-45E5-B150-5A67EB1AD610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A456CC7-7B87-45E5-B150-5A67EB1AD610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A456CC7-7B87-45E5-B150-5A67EB1AD610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A456CC7-7B87-45E5-B150-5A67EB1AD610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{554E1DD6-4C02-49BE-AE28-FC0CB8EA9961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{554E1DD6-4C02-49BE-AE28-FC0CB8EA9961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{554E1DD6-4C02-49BE-AE28-FC0CB8EA9961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{554E1DD6-4C02-49BE-AE28-FC0CB8EA9961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50E53F40-0754-43C4-821C-19A06685B7DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50E53F40-0754-43C4-821C-19A06685B7DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50E53F40-0754-43C4-821C-19A06685B7DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50E53F40-0754-43C4-821C-19A06685B7DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {2F19067F-8F67-4143-9BCC-FE3AEE7B819B}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {2F19067F-8F67-4143-9BCC-FE3AEE7B819B}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {2F19067F-8F67-4143-9BCC-FE3AEE7B819B}
+	EndGlobalSection
+EndGlobal

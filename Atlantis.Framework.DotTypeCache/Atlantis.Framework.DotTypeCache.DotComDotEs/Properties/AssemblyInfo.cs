@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.DotTypeCache.DotComDotEs")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Go Daddy, Inc.")]
+[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.DotTypeCache.DotComDotEs")]
-[assembly: AssemblyCopyright("Copyright © Go Daddy, Inc. 2010-2011")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2010-2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

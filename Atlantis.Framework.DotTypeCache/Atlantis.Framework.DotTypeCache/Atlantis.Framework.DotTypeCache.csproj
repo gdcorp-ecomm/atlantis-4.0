@@ -357,6 +357,10 @@
       <Project>{B2C562E3-95E6-46A3-9A81-2A44746B8E96}</Project>
       <Name>Atlantis.Framework.DotTypeCache.DotSc</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotSe\Atlantis.Framework.DotTypeCache.DotSe.csproj">
+      <Project>{F3812476-48E2-495B-9B71-BD4EF9CBABC3}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotSe</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotTc\Atlantis.Framework.DotTypeCache.DotTc.csproj">
       <Project>{54F3F6FF-F5AC-467D-A979-EC49F1645C2B}</Project>
       <Name>Atlantis.Framework.DotTypeCache.DotTc</Name>

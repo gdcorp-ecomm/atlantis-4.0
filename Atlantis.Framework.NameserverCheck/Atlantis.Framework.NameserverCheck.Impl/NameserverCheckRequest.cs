@@ -14,14 +14,14 @@ namespace Atlantis.Framework.NameserverCheck.Impl
       IResponseData response = null;
       string responseXml = string.Empty;
 
+      AvailCheckWebSvc availCheckService = null;
       try
       {
-        NameserverCheckRequestData nameServerRequestData = (NameserverCheckRequestData)oRequestData;
-        AvailCheckWebSvc availCheckService = new AvailCheckWebSvc();
+        availCheckService = new AvailCheckWebSvc();
         availCheckService.Url = ((WsConfigElement)oConfig).WSURL;
-        availCheckService.Timeout = (int)nameServerRequestData.RequestTimeout.TotalMilliseconds;
+        availCheckService.Timeout = (int)Math.Truncate(oRequestData.RequestTimeout.TotalMilliseconds);
 
-        responseXml = availCheckService.Check(nameServerRequestData.ToXML());
+        responseXml = availCheckService.Check(oRequestData.ToXML());
         if (responseXml == null)
         {
           throw new Exception("AvailCheck returned null response.");
@@ -36,6 +36,13 @@ namespace Atlantis.Framework.NameserverCheck.Impl
       catch (Exception ex)
       {
         response = new NameserverCheckResponseData(responseXml, oRequestData, ex);
+      }
+      finally
+      {
+        if (availCheckService != null)
+        {
+          availCheckService.Dispose();
+        }
       }
 
       return response;

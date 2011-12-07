@@ -19,6 +19,7 @@ namespace Atlantis.Framework.CostcoSetMemberInfo.Impl
     {
       CostcoSetMemberInfoResponseData responseData;
       CostcoSetMemberInfoRequestData requestData = null;
+      GdCostcoMembershipWS.Service1 ws = null;
       try
       {
         requestData = (CostcoSetMemberInfoRequestData)oRequestData;
@@ -26,8 +27,8 @@ namespace Atlantis.Framework.CostcoSetMemberInfo.Impl
         string response;
         if (requestData.ResellerId == PrivateLabelId_GoDaddy)
         {
-          var ws = new GdCostcoMembershipWS.Service1();
-          ws.Timeout = Convert.ToInt32(requestData.RequestTimeout.TotalMilliseconds);
+          ws = new GdCostcoMembershipWS.Service1();
+          ws.Timeout = (int)Math.Truncate(requestData.RequestTimeout.TotalMilliseconds);
           ws.Url = ((WsConfigElement)oConfig).WSURL;
           AddClientCertificate(ws, oConfig);
           response = ws.SetMember(requestData.ShopperID, requestData.CostcoMembershipId, String.Concat("<Validation zip=\"", requestData.ShopperPostalCode, "\"/>"));
@@ -56,6 +57,13 @@ namespace Atlantis.Framework.CostcoSetMemberInfo.Impl
         else
         {
           throw BuildException(oRequestData, "RequestHandler", ex, null);
+        }
+      }
+      finally
+      {
+        if (ws != null)
+        {
+          ws.Dispose();
         }
       }
 

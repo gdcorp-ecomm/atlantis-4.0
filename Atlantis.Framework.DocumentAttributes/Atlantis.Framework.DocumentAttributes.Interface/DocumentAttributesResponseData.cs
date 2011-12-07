@@ -54,7 +54,7 @@ namespace Atlantis.Framework.DocumentAttributes.Interface
           {
             if (reader.NodeType == XmlNodeType.Element)
             {
-              if (reader.Name.Equals("document",StringComparison.InvariantCultureIgnoreCase))
+              if (reader.Name.Equals("document", StringComparison.InvariantCultureIgnoreCase))
               {
                 DocumentAttributes docAttr = new DocumentAttributes();
                 docAttr.Id = reader.GetAttribute("id");

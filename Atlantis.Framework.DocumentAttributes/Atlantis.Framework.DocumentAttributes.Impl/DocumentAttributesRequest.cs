@@ -21,7 +21,7 @@ namespace Atlantis.Framework.DocumentAttributes.Impl
         using (DocumentService documentService = new DocumentService())
         {
           documentService.Url = ((WsConfigElement)config).WSURL;
-          documentService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+          documentService.Timeout = (int)Math.Truncate(request.RequestTimeout.TotalMilliseconds);
           xml = documentService.documentAttributes(request.ToXML());
         }
 

@@ -60,7 +60,10 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
           // Validate password strength
           int strengthResult = service.IsStrongPassword(request.ShopperID, request.NewPassword);
 
-          if (strengthResult != AuthChangePasswordStatusCodes.Success)
+          //we need to strip out the 30 day password reuse error if the user is not changing their pw
+          bool ignoreReusePwError = (!isPasswordChange && strengthResult == AuthChangePasswordStatusCodes.PasswordStrengthAlreadyUsed);
+
+          if (strengthResult != AuthChangePasswordStatusCodes.Success && !ignoreReusePwError)
           {
             result.Add(strengthResult);
           }
@@ -161,7 +164,8 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
           string errorOutput = null;
           bool isPasswordChange = !(request.CurrentPassword == request.NewPassword); //when current = new we aren't changing password
 
-          HashSet<int> responseCodes = ValidateRequest(request, authenticationService, isPasswordChange);
+          HashSet<int> responseCodes = ValidateRequest(request, authenticationService, isPasswordChange);          
+
           if (responseCodes.Count > 0)
           {
             errorOutput = "Request not valid.";
@@ -179,13 +183,17 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
               request.NewHint, request.NewLogin, useStrongPasswordValue, out errorOutput);
 
             responseCodes.Add(resultCode);
-          }
 
-          //we need to strip out the 30 day password reuse error if the user is not changing their pw
-          if (!isPasswordChange)
-          {
-            responseCodes.Remove(AuthChangePasswordStatusCodes.PasswordStrengthAlreadyUsed);
-          }
+            //we need to strip out the 30 day password reuse error if the user is not changing their pw
+            if (!isPasswordChange)
+            {
+              responseCodes.Remove(AuthChangePasswordStatusCodes.PasswordStrengthAlreadyUsed);
+              if (responseCodes.Count == 0)
+              {
+                responseCodes.Add(AuthChangePasswordStatusCodes.Success);
+              }
+            }
+          }       
           
           responseData = new AuthChangePasswordResponseData(responseCodes, errorOutput);
         }

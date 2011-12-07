@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Net;
-using System.Net.Sockets;
-
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.FabDomains.Interface;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.FabDomains.Impl
 {

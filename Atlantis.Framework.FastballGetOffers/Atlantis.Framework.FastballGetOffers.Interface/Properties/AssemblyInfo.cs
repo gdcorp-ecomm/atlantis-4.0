@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 #endif
 
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Godaddy.com, Inc.")]
+[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.FastballGetOffers.Interface")]
-[assembly: AssemblyCopyright("Copyright © Godaddy.com, Inc. 2010-2011")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2010-2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

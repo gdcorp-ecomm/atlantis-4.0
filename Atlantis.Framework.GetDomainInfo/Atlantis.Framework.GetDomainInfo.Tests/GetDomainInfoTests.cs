@@ -1,9 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Atlantis.Framework.GetDomainInfo.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.GetDomainInfo.Interface;
 
 namespace Atlantis.Framework.GetDomainInfo.Test
 {
@@ -66,7 +62,7 @@ namespace Atlantis.Framework.GetDomainInfo.Test
     {
       GetDomainInfoRequestData request = new GetDomainInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "849362", "BATHRAKAALI.COM");
 
-      GetDomainInfoResponseData response = (GetDomainInfoResponseData) Engine.Engine.ProcessRequest(request, 93);
+      GetDomainInfoResponseData response = (GetDomainInfoResponseData)Engine.Engine.ProcessRequest(request, 93);
 
       Assert.IsTrue(response.IsSuccess);
     }

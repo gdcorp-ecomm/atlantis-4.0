@@ -1,13 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
+using System.Text;
 using System.Xml;
-using System.Net;
-
 using Atlantis.Framework.Interface;
-using System.Security.Cryptography;
-using System.Xml.Linq;
 
 namespace Atlantis.Framework.GetDomainInfo.Interface
 {
@@ -26,13 +21,13 @@ namespace Atlantis.Framework.GetDomainInfo.Interface
       get { return _domainName; }
       set { _domainName = value; }
     }
-    
+
     public GetDomainInfoRequestData(string sShopperID,
                   string sSourceURL,
                   string sOrderID,
                   string sPathway,
-                  int iPageCount, 
-                  string shopperId, 
+                  int iPageCount,
+                  string shopperId,
                   string domainName
                   )
       : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
@@ -49,7 +44,7 @@ namespace Atlantis.Framework.GetDomainInfo.Interface
       const string GROUP_NAME = "Dev-Web-Sales";
 
       writer.WriteStartElement("request");
-      
+
       writer.WriteStartElement("username");
       writer.WriteString(GROUP_NAME);
       writer.WriteEndElement();

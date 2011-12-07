@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
-using System.Xml;
 
 using Atlantis.Framework.Interface;
 
@@ -14,7 +10,7 @@ namespace Atlantis.Framework.GetDomainInfo.Interface
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
     private bool _success = false;
-    
+
 
     public GetDomainInfoResponseData(string resultXML)
     {
@@ -41,7 +37,7 @@ namespace Atlantis.Framework.GetDomainInfo.Interface
     {
       return _resultXML;
     }
-    
+
     public AtlantisException GetException()
     {
       return _exception;

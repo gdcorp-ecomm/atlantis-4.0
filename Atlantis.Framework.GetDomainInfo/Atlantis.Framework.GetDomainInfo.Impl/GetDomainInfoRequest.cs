@@ -1,12 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.GetDomainInfo.Interface;
-using System.Xml;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.GetDomainInfo.Impl
 {
@@ -18,10 +12,11 @@ namespace Atlantis.Framework.GetDomainInfo.Impl
       GetDomainInfoResponseData getDomainInfoResponse = null;
 
       DomainInfoWS.RegCheckDomainStatusWebSvcService regCheckService = new DomainInfoWS.RegCheckDomainStatusWebSvcService();
-      regCheckService.Url = ((WsConfigElement)oConfig).WSURL;
 
       try
       {
+        regCheckService.Url = ((WsConfigElement)oConfig).WSURL;
+        regCheckService.Timeout = (int)Math.Truncate(oRequestData.RequestTimeout.TotalMilliseconds);
         string requestXML = getDomainInfoRequest.ToXML();
         string response = regCheckService.GetDomainInfoByNameWithContacts(requestXML);
 
@@ -30,7 +25,7 @@ namespace Atlantis.Framework.GetDomainInfo.Impl
           getDomainInfoResponse = new GetDomainInfoResponseData(response);
         }
         else
-        { 
+        {
           //Unknown error
           getDomainInfoResponse = new GetDomainInfoResponseData(getDomainInfoRequest, new Exception("Unknown error occurred in the GetDomainInfoByNameWithContacts webmethod. ResultCode is null."));
         }
@@ -43,7 +38,13 @@ namespace Atlantis.Framework.GetDomainInfo.Impl
       {
         getDomainInfoResponse = new GetDomainInfoResponseData(oRequestData, ex);
       }
-
+      finally
+      {
+        if (regCheckService != null)
+        {
+          regCheckService.Dispose();
+        }
+      }
       return getDomainInfoResponse;
     }
   }

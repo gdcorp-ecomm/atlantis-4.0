@@ -13,7 +13,7 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
     private static readonly Regex _newHintInvalidCharactersRegex = new Regex("[^\x20-\x3b\x3f-\x7e]", RegexOptions.Compiled);
     private static readonly Regex _meetsStrongPwReqs = new Regex("(?=.*[A-Z])(?=.{8,})(?=.*\\d).*$");
 
-    private HashSet<int> ValidateRequest(AuthChangePasswordRequestData request, WScgdAuthenticateService service)
+    private HashSet<int> ValidateRequest(AuthChangePasswordRequestData request, WScgdAuthenticateService service, bool isPasswordChange)
     {
       HashSet<int> result = new HashSet<int>();
 
@@ -27,7 +27,7 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
       {
         result.Add(AuthChangePasswordStatusCodes.ValidateCurrentPasswordToShort);
       }
-      else if (request.UseStrongPassword && !_meetsStrongPwReqs.IsMatch(request.CurrentPassword) && request.CurrentPassword == request.NewPassword) //when new = current we aren't changing pw
+      else if (request.UseStrongPassword && !_meetsStrongPwReqs.IsMatch(request.CurrentPassword) && !isPasswordChange)
       {
         result.Add(AuthChangePasswordStatusCodes.ValidateCurrentPasswordMeetsRequirements);
       }
@@ -59,6 +59,7 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
         {
           // Validate password strength
           int strengthResult = service.IsStrongPassword(request.ShopperID, request.NewPassword);
+
           if (strengthResult != AuthChangePasswordStatusCodes.Success)
           {
             result.Add(strengthResult);
@@ -158,8 +159,9 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
                                                            })
         {
           string errorOutput = null;
+          bool isPasswordChange = !(request.CurrentPassword == request.NewPassword); //when current = new we aren't changing password
 
-          HashSet<int> responseCodes = ValidateRequest(request, authenticationService);
+          HashSet<int> responseCodes = ValidateRequest(request, authenticationService, isPasswordChange);
           if (responseCodes.Count > 0)
           {
             errorOutput = "Request not valid.";
@@ -179,6 +181,12 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
             responseCodes.Add(resultCode);
           }
 
+          //we need to strip out the 30 day password reuse error if the user is not changing their pw
+          if (!isPasswordChange)
+          {
+            responseCodes.Remove(AuthChangePasswordStatusCodes.PasswordStrengthAlreadyUsed);
+          }
+          
           responseData = new AuthChangePasswordResponseData(responseCodes, errorOutput);
         }
 

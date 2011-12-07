@@ -6,11 +6,15 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.DCCCreateBlogRecord.Interface")]
-[assembly: AssemblyDescription("")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+#endif
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Godaddy.com")]
+[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.DCCCreateBlogRecord.Interface")]
-[assembly: AssemblyCopyright("Copyright © Godaddy.com 2011")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

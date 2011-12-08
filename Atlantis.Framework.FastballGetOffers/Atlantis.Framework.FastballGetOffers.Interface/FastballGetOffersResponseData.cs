@@ -119,6 +119,26 @@ namespace Atlantis.Framework.FastballGetOffers.Interface
       }
     }
 
+    public string LcaCode
+    {
+      get
+      {
+        string result = string.Empty;
+
+        XElement shopper = OfferResultXml.Descendants("Shopper").FirstOrDefault();
+        if (shopper != null)
+        {
+          XAttribute lcaCode = shopper.Attribute("lcaCode");
+          if (lcaCode != null)
+          {
+            result = lcaCode.Value;
+          }
+        }
+
+        return result;
+      }
+    }
+
     public string FirstFbiOfferId
     {
       get

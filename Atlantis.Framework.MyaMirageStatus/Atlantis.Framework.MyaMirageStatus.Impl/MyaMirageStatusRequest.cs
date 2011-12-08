@@ -37,7 +37,7 @@ namespace Atlantis.Framework.MyaMirageStatus.Impl
                 if (reader.Read())
                 {
                   object mirageLastBuildDate = reader[0];
-                  if ((mirageLastBuildDate != null) && (mirageLastBuildDate.GetType() != typeof(DateTime)))
+                  if ((mirageLastBuildDate != null) && (mirageLastBuildDate.GetType() == typeof(DateTime)))
                   {
                     lastMirageBuild = (DateTime)mirageLastBuildDate;
                   }

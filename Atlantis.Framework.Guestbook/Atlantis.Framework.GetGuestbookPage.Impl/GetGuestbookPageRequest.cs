@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.GetGuestbookPage.Interface;
 using Atlantis.Framework.GetGuestbookPage.Impl.GuestBookWebService;
+using Atlantis.Framework.GetGuestbookPage.Interface;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.GetGuestbookPage.Impl
 {

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Atlantis.Framework.Interface;
-using System.Security.Cryptography;
-using System.Xml;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using System.Xml;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.GetGuestbookPage.Interface
 {

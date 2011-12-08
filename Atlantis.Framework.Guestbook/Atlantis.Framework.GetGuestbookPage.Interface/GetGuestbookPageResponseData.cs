@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.GetGuestbookPage.Interface
@@ -11,7 +10,7 @@ namespace Atlantis.Framework.GetGuestbookPage.Interface
     private int _totalPages = 0;
     private int _totalComments = 0;
     List<GuestbookComment> _comments = new List<GuestbookComment>();
-    
+
     public GetGuestbookPageResponseData(AtlantisException exception)
     {
       _exception = exception;

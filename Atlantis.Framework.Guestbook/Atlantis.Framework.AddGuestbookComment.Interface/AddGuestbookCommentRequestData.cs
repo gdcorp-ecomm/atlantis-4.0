@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.AddGuestbookComment.Interface
@@ -54,7 +51,7 @@ namespace Atlantis.Framework.AddGuestbookComment.Interface
     }
 
     public AddGuestbookCommentRequestData(
-      string sShopperID, string sSourceURL, string sOrderID, string sPathway, int iPageCount, 
+      string sShopperID, string sSourceURL, string sOrderID, string sPathway, int iPageCount,
       int guestbookId, string domain, string guestName, string guestEmail, string comment)
       : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
     {

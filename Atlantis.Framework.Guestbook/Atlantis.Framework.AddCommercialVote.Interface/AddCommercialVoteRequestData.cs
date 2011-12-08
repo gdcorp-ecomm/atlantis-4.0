@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.AddCommercialVote.Interface
@@ -22,9 +19,9 @@ namespace Atlantis.Framework.AddCommercialVote.Interface
     }
 
     public AddCommercialVoteRequestData(
-    string sShopperID, string sSourceURL, string sOrderID, string sPathway, int iPageCount, 
+    string sShopperID, string sSourceURL, string sOrderID, string sPathway, int iPageCount,
     string commercial, string clientIp)
-    : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
+      : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
     {
       _commercial = commercial;
       _clientip = clientIp;
@@ -34,5 +31,5 @@ namespace Atlantis.Framework.AddCommercialVote.Interface
     {
       throw new NotImplementedException("AddCommercialVote is not cacheable.");
     }
-}
+  }
 }

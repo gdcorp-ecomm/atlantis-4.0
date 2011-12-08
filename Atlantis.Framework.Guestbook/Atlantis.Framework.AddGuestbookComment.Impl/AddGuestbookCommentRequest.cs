@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.AddGuestbookComment.Interface;
 using Atlantis.Framework.AddGuestbookComment.Impl.GuestbookAddWS;
+using Atlantis.Framework.AddGuestbookComment.Interface;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.AddGuestbookComment.Impl
 {

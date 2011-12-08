@@ -10,6 +10,6 @@ namespace Atlantis.Framework.Interface
     void ClearShopper();
     bool SetLoggedInShopper(string shopperId);
     bool SetLoggedInShopperWithCookieOverride(string shopperId);
-    void SetNewShopper(string shopperId);    
+    void SetNewShopper(string shopperId);
   }
 }

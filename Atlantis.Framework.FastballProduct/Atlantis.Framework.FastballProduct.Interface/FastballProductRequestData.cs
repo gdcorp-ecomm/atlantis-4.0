@@ -8,12 +8,14 @@ namespace Atlantis.Framework.FastballProduct.Interface
   {
     public string Placement { get; set; }
     static TimeSpan _twoSeconds = TimeSpan.FromSeconds(2.0);
+    public int ApplicationId { get; set; }
 
-    public FastballProductRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, string placement)
+    public FastballProductRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, string placement, int applicationId)
       :base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       Placement = placement;
       RequestTimeout = _twoSeconds;
+      ApplicationId = applicationId;
     }
 
     /// <summary>
@@ -25,7 +27,7 @@ namespace Atlantis.Framework.FastballProduct.Interface
     {
       MD5 oMD5 = new MD5CryptoServiceProvider();
       oMD5.Initialize();
-      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(Placement);
+      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(Placement + ":" + ApplicationId.ToString());
       byte[] md5Bytes = oMD5.ComputeHash(stringBytes);
       string sValue = BitConverter.ToString(md5Bytes, 0);
       return sValue.Replace("-", "");

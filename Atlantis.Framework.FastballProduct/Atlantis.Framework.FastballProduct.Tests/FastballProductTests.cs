@@ -11,8 +11,8 @@ namespace Atlantis.Framework.FastballProduct.Tests
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void SameMD5Hash()
     {
-      FastballProductRequestData request1 = new FastballProductRequestData("shoppera", "urla", "ordera", Guid.NewGuid().ToString(), 1, "SamePlacement");
-      FastballProductRequestData request2 = new FastballProductRequestData("shopperb", "urlb", "orderb", Guid.NewGuid().ToString(), 2, "SamePlacement");
+      FastballProductRequestData request1 = new FastballProductRequestData("shoppera", "urla", "ordera", Guid.NewGuid().ToString(), 1, "SamePlacement", 2);
+      FastballProductRequestData request2 = new FastballProductRequestData("shopperb", "urlb", "orderb", Guid.NewGuid().ToString(), 2, "SamePlacement", 2);
       Assert.AreEqual(request1.GetCacheMD5(), request2.GetCacheMD5());
     }
   }

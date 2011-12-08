@@ -59,6 +59,8 @@ namespace Atlantis.Framework.FastballProduct.Impl
               service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
               // make the call
 
+              service.GetOffersAndMessageData(string.Empty, string.Empty);
+
               // if Response says no test
               {
                 _donotCallUntil = DateTime.Now.Add(_tenMinutes);

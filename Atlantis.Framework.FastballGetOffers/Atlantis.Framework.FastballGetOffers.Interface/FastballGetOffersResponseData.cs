@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.SessionCache;
-using System.Xml.Linq;
-using System.Linq;
 
 namespace Atlantis.Framework.FastballGetOffers.Interface
 {
@@ -24,7 +24,7 @@ namespace Atlantis.Framework.FastballGetOffers.Interface
     public FastballGetOffersResponseData(string xmlResponse)
     {
       _xmlResponse = xmlResponse;
-      ResetResultXml();  
+      ResetResultXml();
     }
 
     private void ResetResultXml()
@@ -70,7 +70,7 @@ namespace Atlantis.Framework.FastballGetOffers.Interface
 
     public bool IsSuccess
     {
-      get 
+      get
       {
         bool result = false;
 

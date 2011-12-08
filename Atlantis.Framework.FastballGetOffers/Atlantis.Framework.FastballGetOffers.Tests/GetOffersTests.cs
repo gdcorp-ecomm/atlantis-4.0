@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.FastballGetOffers.Interface;
-using System.Reflection;
 using System.IO;
+using System.Reflection;
+using Atlantis.Framework.FastballGetOffers.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.FastballGetOffers.Tests
 {

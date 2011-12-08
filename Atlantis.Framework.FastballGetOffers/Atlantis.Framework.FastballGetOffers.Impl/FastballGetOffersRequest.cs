@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.FastballGetOffers.Interface;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.FastballGetOffers.Impl
 {
@@ -15,13 +12,13 @@ namespace Atlantis.Framework.FastballGetOffers.Impl
     {
       IResponseData result = null;
 
+      OffersAPIWS.Service offersWS = null;
       try
       {
         FastballGetOffersRequestData requestData = (FastballGetOffersRequestData)oRequestData;
-
-        OffersAPIWS.Service offersWS = new OffersAPIWS.Service();
+        offersWS = new OffersAPIWS.Service();
         offersWS.Url = ((WsConfigElement)oConfig).WSURL;
-        offersWS.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+        offersWS.Timeout = (int)Math.Truncate(oRequestData.RequestTimeout.TotalMilliseconds);
 
         string offersResponse = offersWS.GetOffers(requestData.ChannelRequestXml, requestData.CandidateRequestXml);
         result = new FastballGetOffersResponseData(offersResponse);
@@ -29,6 +26,13 @@ namespace Atlantis.Framework.FastballGetOffers.Impl
       catch (Exception ex)
       {
         result = new FastballGetOffersResponseData(oRequestData, ex);
+      }
+      finally
+      {
+        if (offersWS != null)
+        {
+          offersWS.Dispose();
+        }
       }
 
       return result;

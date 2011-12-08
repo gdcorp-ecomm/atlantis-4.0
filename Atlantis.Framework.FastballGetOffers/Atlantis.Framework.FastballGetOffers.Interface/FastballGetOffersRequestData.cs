@@ -7,8 +7,6 @@ namespace Atlantis.Framework.FastballGetOffers.Interface
 {
   public class FastballGetOffersRequestData : RequestData
   {
-    public TimeSpan RequestTimeout { get; set; }
-
     private int _privateLabelId = 0;
     private int _appId = 0;
     private string _placement = string.Empty;

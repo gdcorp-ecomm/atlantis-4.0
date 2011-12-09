@@ -13,7 +13,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       this.Add(EmailTemplateType.GDShopsPurchaseReceipt, new EmailTemplate(EmailTemplateType.GDShopsPurchaseReceipt, "GDShopsPurchaseReceipt", "GDShops"));
       this.Add(EmailTemplateType.CustomerAccountLocked, new EmailTemplate(EmailTemplateType.CustomerAccountLocked, "CustomerAccountLocked", "Fraud"));
       this.Add(EmailTemplateType.AdminFeesConfirmation, new EmailTemplate(EmailTemplateType.AdminFeesConfirmation, "AdminFeesConfirmation", ORDER_PROCESSING));
-      this.Add(EmailTemplateType.GDWelcome, new EmailTemplate(EmailTemplateType.GDWelcome, "GDWelcome", ORDER_PROCESSING));
+      this.Add(EmailTemplateType.GDWelcome, new EmailTemplate(EmailTemplateType.GDWelcome, "GDWelcomeAlt", ORDER_PROCESSING));
       this.Add(EmailTemplateType.RecurringHostingConfirmation, new EmailTemplate(EmailTemplateType.RecurringHostingConfirmation, "RecurringHostingConfirmation", ORDER_PROCESSING));
       this.Add(EmailTemplateType.OrderConfirmation, new EmailTemplate(EmailTemplateType.OrderConfirmation, "OrderConfirmationAlt", ORDER_PROCESSING));
       this.Add(EmailTemplateType.MiscFeesConfirmation, new EmailTemplate(EmailTemplateType.MiscFeesConfirmation, "FeeProcessed", ORDER_PROCESSING));

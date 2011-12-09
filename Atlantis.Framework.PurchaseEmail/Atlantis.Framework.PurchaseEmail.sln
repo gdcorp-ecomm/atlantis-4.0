@@ -85,9 +85,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PromoDat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.PromoData", "..\Atlantis.Framework.Providers.PromoData\Atlantis.Framework.Providers.PromoData\Atlantis.Framework.Providers.PromoData.csproj", "{D67BE3FC-BB67-4ADC-A368-98B04B395396}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 39
+		SccNumberOfProjects = 40
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
 		SccLocalPath0 = .
@@ -240,6 +242,10 @@ Global
 		SccProjectTopLevelParentUniqueName38 = Atlantis.Framework.PurchaseEmail.sln
 		SccProjectName38 = ../Atlantis.Framework.Providers.PromoData/Atlantis.Framework.Providers.PromoData
 		SccLocalPath38 = ..\\Atlantis.Framework.Providers.PromoData\\Atlantis.Framework.Providers.PromoData
+		SccProjectUniqueName39 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
+		SccProjectTopLevelParentUniqueName39 = Atlantis.Framework.PurchaseEmail.sln
+		SccProjectName39 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
+		SccLocalPath39 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.PurchaseEmail.vsmdi
@@ -633,6 +639,16 @@ Global
 		{D67BE3FC-BB67-4ADC-A368-98B04B395396}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D67BE3FC-BB67-4ADC-A368-98B04B395396}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D67BE3FC-BB67-4ADC-A368-98B04B395396}.Release|x86.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -673,5 +689,6 @@ Global
 		{42E827B4-1E98-453B-8A36-009C201DD85A} = {B3FCB122-EC77-42DB-97ED-9006EDF85204}
 		{8EB9D6B2-C2B6-4CD3-BEAE-2C22347A81DA} = {B3FCB122-EC77-42DB-97ED-9006EDF85204}
 		{D67BE3FC-BB67-4ADC-A368-98B04B395396} = {B3FCB122-EC77-42DB-97ED-9006EDF85204}
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {B3FCB122-EC77-42DB-97ED-9006EDF85204}
 	EndGlobalSection
 EndGlobal

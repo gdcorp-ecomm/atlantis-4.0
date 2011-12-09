@@ -20,7 +20,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     private bool _isAZHumane;
     private bool _isDevServer;
-    private RequestData _requestData;
+    private RequestData _requestData; 
 
     public GDConfirmationEmail(OrderData orderData, EmailRequired emailRequired, bool isAZHumane, bool isDevServer, RequestData rd, ObjectProviderContainer objectContainer)
       : base(orderData, emailRequired,objectContainer)
@@ -34,7 +34,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     {
       SetParam(EmailTokenNames.OrderId, Order.OrderId);
 
-      if (EmailTemplate.Id == EmailTemplateType.OrderConfirmation)
+      if (EmailTemplate.Id == EmailTemplateType.OrderConfirmation || EmailTemplate.Id == EmailTemplateType.GDWelcome)
       {
         string xmlParam;
         using (var ms = new MemoryStream())

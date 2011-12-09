@@ -58,6 +58,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     OutlookMail,
     WebStore,
     BusinessAccel,
-    AdSpace
+    AdSpace,
+    XXX
   }
 }

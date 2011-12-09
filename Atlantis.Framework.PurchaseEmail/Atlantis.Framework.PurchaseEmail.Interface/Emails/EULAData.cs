@@ -14,7 +14,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       _departmentIds = departmentIds;
       _orderData = orderData;
       _links = links;
-    }
+    } 
 
     public EULAItem GetEULAData(EULARuleType EULARule, string isc)
     {
@@ -28,6 +28,10 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       EULAType agreementType = EULAType.Legal;
       switch (EULARule)
       {
+        case EULARuleType.XXX:
+          productName = ".XXX Domain Registration";
+          productInfoURL = _links.GetUrl(LinkTypes.Help, ARTICLE_RELATIVE_PATH + "7333", QueryParamMode.CommonParameters, false, queryStringArgs);
+          break;
         case EULARuleType.BusinessAccel:
           productName = "Business Accelerator";
           productInfoURL = _links.GetUrl(LinkTypes.Help, ARTICLE_RELATIVE_PATH + "5864", QueryParamMode.CommonParameters, false, queryStringArgs);
@@ -98,7 +102,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
           break;
         case EULARuleType.Starter:
           productName = "Starter Web Page or For Sale Page";
-          productInfoURL = _links.GetUrl(LinkTypes.Help, TOPIC_RELATIVE_PATH + "231", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = _links.GetUrl(LinkTypes.Help, ARTICLE_RELATIVE_PATH + "825", QueryParamMode.CommonParameters, false, queryStringArgs);
 
           break;
         case EULARuleType.FreeHosting:

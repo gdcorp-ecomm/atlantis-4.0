@@ -15,7 +15,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     OrderData _orderData;
     DepartmentIds _departmentIds;
-    IProductProvider _products;
+    IProductProvider _products; 
 
     public EULARules(OrderData orderData, DepartmentIds departmentIds, IProductProvider products)
     {
@@ -62,6 +62,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             case 4:
             case 5:
               _applicableEULADictionary[EULARuleType.Reg] = true;
+              string domain = itemElement.GetAttribute("domain");
+              if (domain.Contains(".XXX"))
+              {
+                _applicableEULADictionary[EULARuleType.XXX] = true;
+              }
               if (FreeBlogWithDomain)
               {
                 _applicableEULADictionary[EULARuleType.QB] = true;

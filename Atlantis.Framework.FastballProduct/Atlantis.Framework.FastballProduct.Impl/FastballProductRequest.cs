@@ -2,6 +2,7 @@
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.FastballProduct.Interface;
 using System.Collections.Generic;
+using Atlantis.Framework.FastballProduct.Impl.offersApiWS;
 
 namespace Atlantis.Framework.FastballProduct.Impl
 {
@@ -18,6 +19,41 @@ namespace Atlantis.Framework.FastballProduct.Impl
       _emptyResult = new Dictionary<string, string>();
     }
 
+    private bool MasterSwitchOn
+    {
+      get 
+      {
+        string fastballProductOn = DataCache.DataCache.GetAppSetting("ATLANTIS_FRAMEWORK_FASTBALLPRODUCT_ON");
+        return ("true".Equals(fastballProductOn, StringComparison.InvariantCultureIgnoreCase));
+      }
+    }
+
+    private bool NotOnDelay
+    {
+      get { return DateTime.Now < _donotCallUntil; }
+    }
+
+    private void DelayAllCalls(FastballProductRequestData request)
+    {
+      // only set delay if its not a spoof call
+      if (string.IsNullOrEmpty(request.SpoofOfferId))
+      {
+        _donotCallUntil = DateTime.Now.Add(_tenMinutes);
+      }
+    }
+
+    private bool CallCanBeMade(FastballProductRequestData request)
+    {
+      if (!string.IsNullOrEmpty(request.SpoofOfferId))
+      {
+        return true;
+      }
+      else
+      {
+        return (MasterSwitchOn && NotOnDelay);
+      }
+    }
+
     /// <summary>
     /// This request data is designed to not fail, and always return something that can be cached into the users session
     /// 0. If appsetting is not 'true' we don't call at all.
@@ -32,56 +68,54 @@ namespace Atlantis.Framework.FastballProduct.Impl
 
       try
       {
-        if (DateTime.Now > _donotCallUntil)
+        FastballProductRequestData request = (FastballProductRequestData)requestData;
+        if (CallCanBeMade(request))
         {
-          // Check for service switch override
-          string fastballProductOn = DataCache.DataCache.GetAppSetting("ATLANTIS_FRAMEWORK_FASTBALLPRODUCT_ON");
-          if ("true".Equals(fastballProductOn, StringComparison.InvariantCultureIgnoreCase))
+          // Validate request
+          placement = request.Placement;
+
+          if (string.IsNullOrEmpty(placement))
           {
-            FastballProductRequestData request = (FastballProductRequestData)requestData;
+            throw new ArgumentException("Placement is empty or null.");
+          }
 
-            // Validate request
-            placement = request.Placement;
+          using (offersApiWS.Service service = new offersApiWS.Service())
+          {
+            service.Url = ((WsConfigElement)config).WSURL;
+            service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+            var offerResult = service.GetOffersAndMessageData(request.GetChannelRequestXml(), request.GetCandidateRequestXml());
 
-            if (string.IsNullOrEmpty(placement))
+            OfferMessageDataItem offerMessageDataItem = GetFirstDataItemFromFirstOffer(offerResult);
+            if (offerMessageDataItem == null)
             {
-              throw new ArgumentException("Placement is empty or null.");
+              DelayAllCalls(request);
             }
-
-            if (string.IsNullOrEmpty(requestData.Pathway))
+            else
             {
-              throw new ArgumentException("Pathway is empty or null.");
-            }
-
-            using (offersApiWS.Service service = new offersApiWS.Service())
-            {
-              service.Url = ((WsConfigElement)config).WSURL;
-              service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
-              // make the call
-
-              service.GetOffersAndMessageData(string.Empty, string.Empty);
-
-              // if Response says no test
+              if ((offerMessageDataItem.Attributes != null) && (offerMessageDataItem.Attributes.Length > 0))
               {
-                _donotCallUntil = DateTime.Now.Add(_tenMinutes);
+                Dictionary<string, string> messageData = new Dictionary<string, string>(offerMessageDataItem.Attributes.Length);
+                {
+                  foreach(var attribute in offerMessageDataItem.Attributes)
+                  {
+                    if ((attribute.Values != null) && (attribute.Values.Length > 0))
+                    {
+                      messageData[attribute.key] = attribute.Values[0];
+                    }
+                  }
+                }
+                result = new FastballProductResponseData(messageData);
               }
-              // else
-              {
-                // parse the data to a dictionary and set the result;
-              }
-
             }
-
           }
         }
-
       }
       catch (Exception ex)
       {
         result = new FastballProductResponseData(_emptyResult);
         try
         {
-          string data = "Placement" + (placement ?? "null") + ":Pathway" + (requestData.Pathway ?? "null");
+          string data = "Placement" + (placement ?? "null");
           AtlantisException aex = new AtlantisException(requestData, "FastballProduct.RequestHandler", ex.Message + ex.StackTrace, data);
           Engine.Engine.LogAtlantisException(aex);
         }
@@ -90,5 +124,22 @@ namespace Atlantis.Framework.FastballProduct.Impl
 
       return result;
     }
+
+    private OfferMessageDataItem GetFirstDataItemFromFirstOffer(OfferResult offerResult)
+    {
+      OfferMessageDataItem result = null;
+
+      if ((offerResult.SelectedOffers != null) && (offerResult.SelectedOffers.Length > 0))
+      {
+        Offer offer = offerResult.SelectedOffers[0];
+        if ((offer != null) && (offer.MessageData != null) && (offer.MessageData.DataItems != null) && (offer.MessageData.DataItems.Length > 0))
+        {
+          result = offer.MessageData.DataItems[0];
+        }
+      }
+
+      return result;
+    }
+
   }
 }

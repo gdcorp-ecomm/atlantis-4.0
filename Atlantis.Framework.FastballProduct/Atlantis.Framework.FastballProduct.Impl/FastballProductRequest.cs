@@ -28,7 +28,7 @@ namespace Atlantis.Framework.FastballProduct.Impl
       }
     }
 
-    private bool NotOnDelay
+    private bool DelayIsInEffect
     {
       get { return DateTime.Now < _donotCallUntil; }
     }
@@ -42,16 +42,28 @@ namespace Atlantis.Framework.FastballProduct.Impl
       }
     }
 
-    private bool CallCanBeMade(FastballProductRequestData request)
+    private bool CallCanBeMade(FastballProductRequestData request, out int status)
     {
       if (!string.IsNullOrEmpty(request.SpoofOfferId))
       {
+        status = FastballProductStatus.Valid;
         return true;
       }
-      else
+
+      if (!MasterSwitchOn)
       {
-        return (MasterSwitchOn && NotOnDelay);
+        status = FastballProductStatus.AppSettingOff;
+        return false;
       }
+
+      if (DelayIsInEffect)
+      {
+        status = FastballProductStatus.DelayedOff;
+        return false;
+      }
+
+      status = FastballProductStatus.Valid;
+      return true;
     }
 
     /// <summary>
@@ -63,13 +75,18 @@ namespace Atlantis.Framework.FastballProduct.Impl
     /// </summary>
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      FastballProductResponseData result = new FastballProductResponseData(_emptyResult);
+      FastballProductResponseData result = new FastballProductResponseData(_emptyResult, FastballProductStatus.Failed);
       string placement = string.Empty;
 
       try
       {
         FastballProductRequestData request = (FastballProductRequestData)requestData;
-        if (CallCanBeMade(request))
+        int status;
+        if (!CallCanBeMade(request, out status))
+        {
+          result.Status = status;
+        }
+        else // make the call
         {
           // Validate request
           placement = request.Placement;
@@ -85,7 +102,8 @@ namespace Atlantis.Framework.FastballProduct.Impl
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
             var offerResult = service.GetOffersAndMessageData(request.GetChannelRequestXml(), request.GetCandidateRequestXml());
 
-            OfferMessageDataItem offerMessageDataItem = GetFirstDataItemFromFirstOffer(offerResult);
+            string offerId;
+            OfferMessageDataItem offerMessageDataItem = GetFirstDataItemFromFirstOffer(offerResult, out offerId);
             if (offerMessageDataItem == null)
             {
               DelayAllCalls(request);
@@ -104,7 +122,7 @@ namespace Atlantis.Framework.FastballProduct.Impl
                     }
                   }
                 }
-                result = new FastballProductResponseData(messageData);
+                result = new FastballProductResponseData(messageData, FastballProductStatus.Valid, offerId);
               }
             }
           }
@@ -112,7 +130,7 @@ namespace Atlantis.Framework.FastballProduct.Impl
       }
       catch (Exception ex)
       {
-        result = new FastballProductResponseData(_emptyResult);
+        result = new FastballProductResponseData(_emptyResult, FastballProductStatus.Failed);
         try
         {
           string data = "Placement" + (placement ?? "null");
@@ -125,8 +143,9 @@ namespace Atlantis.Framework.FastballProduct.Impl
       return result;
     }
 
-    private OfferMessageDataItem GetFirstDataItemFromFirstOffer(OfferResult offerResult)
+    private OfferMessageDataItem GetFirstDataItemFromFirstOffer(OfferResult offerResult, out string offerId)
     {
+      offerId = string.Empty;      
       OfferMessageDataItem result = null;
 
       if ((offerResult.SelectedOffers != null) && (offerResult.SelectedOffers.Length > 0))
@@ -134,6 +153,7 @@ namespace Atlantis.Framework.FastballProduct.Impl
         Offer offer = offerResult.SelectedOffers[0];
         if ((offer != null) && (offer.MessageData != null) && (offer.MessageData.DataItems != null) && (offer.MessageData.DataItems.Length > 0))
         {
+          offerId = offer.fbiOfferID;
           result = offer.MessageData.DataItems[0];
         }
       }

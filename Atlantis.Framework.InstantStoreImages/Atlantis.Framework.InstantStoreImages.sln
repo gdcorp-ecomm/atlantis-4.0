@@ -1,0 +1,124 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.InstantStoreImages.Impl", "Atlanitis.Framework.InstantStoreImages.Impl\Atlantis.Framework.InstantStoreImages.Impl.csproj", "{1F858277-030D-4C34-BBC3-5B6222B7E286}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.InstantStoreImages.Interface", "Atlanitis.Framework.InstantStoreImages.Interface\Atlantis.Framework.InstantStoreImages.Interface.csproj", "{BE0C84A6-D983-43CB-94D2-3BAA85CB6A38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.InstantStoreImages.Tests", "Atlanitis.Framework.InstantStoreImages.Tests\Atlantis.Framework.InstantStoreImages.Tests.csproj", "{332E31CF-9D0E-44BF-BEBD-01F9C75A177D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{702FA137-2D7E-4419-9432-123E08EE0D8D}"
+	ProjectSection(SolutionItems) = preProject
+		Atlanitis.Framework.InstantStoreImages.vsmdi = Atlanitis.Framework.InstantStoreImages.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = Atlanitis.Framework.InstantStoreImages.Impl\\Atlantis.Framework.InstantStoreImages.Impl.csproj
+		SccProjectName3 = Atlanitis.Framework.InstantStoreImages.Impl
+		SccLocalPath3 = Atlanitis.Framework.InstantStoreImages.Impl
+		SccProjectUniqueName4 = Atlanitis.Framework.InstantStoreImages.Interface\\Atlantis.Framework.InstantStoreImages.Interface.csproj
+		SccProjectName4 = Atlanitis.Framework.InstantStoreImages.Interface
+		SccLocalPath4 = Atlanitis.Framework.InstantStoreImages.Interface
+		SccProjectUniqueName5 = Atlanitis.Framework.InstantStoreImages.Tests\\Atlantis.Framework.InstantStoreImages.Tests.csproj
+		SccProjectName5 = Atlanitis.Framework.InstantStoreImages.Tests
+		SccLocalPath5 = Atlanitis.Framework.InstantStoreImages.Tests
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlanitis.Framework.InstantStoreImages.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F858277-030D-4C34-BBC3-5B6222B7E286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F858277-030D-4C34-BBC3-5B6222B7E286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F858277-030D-4C34-BBC3-5B6222B7E286}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1F858277-030D-4C34-BBC3-5B6222B7E286}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1F858277-030D-4C34-BBC3-5B6222B7E286}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1F858277-030D-4C34-BBC3-5B6222B7E286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F858277-030D-4C34-BBC3-5B6222B7E286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F858277-030D-4C34-BBC3-5B6222B7E286}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1F858277-030D-4C34-BBC3-5B6222B7E286}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1F858277-030D-4C34-BBC3-5B6222B7E286}.Release|x86.ActiveCfg = Release|Any CPU
+		{BE0C84A6-D983-43CB-94D2-3BAA85CB6A38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE0C84A6-D983-43CB-94D2-3BAA85CB6A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE0C84A6-D983-43CB-94D2-3BAA85CB6A38}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BE0C84A6-D983-43CB-94D2-3BAA85CB6A38}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BE0C84A6-D983-43CB-94D2-3BAA85CB6A38}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BE0C84A6-D983-43CB-94D2-3BAA85CB6A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0C84A6-D983-43CB-94D2-3BAA85CB6A38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE0C84A6-D983-43CB-94D2-3BAA85CB6A38}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BE0C84A6-D983-43CB-94D2-3BAA85CB6A38}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BE0C84A6-D983-43CB-94D2-3BAA85CB6A38}.Release|x86.ActiveCfg = Release|Any CPU
+		{332E31CF-9D0E-44BF-BEBD-01F9C75A177D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{332E31CF-9D0E-44BF-BEBD-01F9C75A177D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{332E31CF-9D0E-44BF-BEBD-01F9C75A177D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{332E31CF-9D0E-44BF-BEBD-01F9C75A177D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{332E31CF-9D0E-44BF-BEBD-01F9C75A177D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{332E31CF-9D0E-44BF-BEBD-01F9C75A177D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{332E31CF-9D0E-44BF-BEBD-01F9C75A177D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{332E31CF-9D0E-44BF-BEBD-01F9C75A177D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{332E31CF-9D0E-44BF-BEBD-01F9C75A177D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{332E31CF-9D0E-44BF-BEBD-01F9C75A177D}.Release|x86.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|x86.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|x86.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

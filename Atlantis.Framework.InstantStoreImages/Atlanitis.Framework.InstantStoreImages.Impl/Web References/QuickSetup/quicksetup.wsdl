@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SetupApplication">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="simpleSiteDefinitions" type="tns:ArrayOfSimpleSiteQuickSetupModel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSimpleSiteQuickSetupModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimpleSiteQuickSetupModel" nillable="true" type="tns:SimpleSiteQuickSetupModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimpleSiteQuickSetupModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OrionAccountUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DomainName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmailHash" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BackgroundId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryIds" type="tns:ArrayOfLong" />
+          <s:element minOccurs="0" maxOccurs="1" name="PromoCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLong">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="long" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetupApplicationResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBackgroundImages">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBackgroundImagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBackgroundImagesResult" type="tns:ArrayOfBackgroundImageQuickSetupModel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBackgroundImageQuickSetupModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BackgroundImageQuickSetupModel" nillable="true" type="tns:BackgroundImageQuickSetupModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BackgroundImageQuickSetupModel">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BackgroundId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Src" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ThumbnailSrc" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetThemes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetThemesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetThemesResult" type="tns:ArrayOfThemeQuickSetupModel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfThemeQuickSetupModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ThemeQuickSetupModel" nillable="true" type="tns:ThemeQuickSetupModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ThemeQuickSetupModel">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BackgroundId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Src" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ThumbnailSrc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DefaultTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DefaultDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Categories" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SetupApplicationSoapIn">
+    <wsdl:part name="parameters" element="tns:SetupApplication" />
+  </wsdl:message>
+  <wsdl:message name="SetupApplicationSoapOut">
+    <wsdl:part name="parameters" element="tns:SetupApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBackgroundImagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBackgroundImages" />
+  </wsdl:message>
+  <wsdl:message name="GetBackgroundImagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBackgroundImagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetThemesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetThemes" />
+  </wsdl:message>
+  <wsdl:message name="GetThemesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetThemesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="QuickSetupSoap">
+    <wsdl:operation name="SetupApplication">
+      <wsdl:input message="tns:SetupApplicationSoapIn" />
+      <wsdl:output message="tns:SetupApplicationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBackgroundImages">
+      <wsdl:input message="tns:GetBackgroundImagesSoapIn" />
+      <wsdl:output message="tns:GetBackgroundImagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetThemes">
+      <wsdl:input message="tns:GetThemesSoapIn" />
+      <wsdl:output message="tns:GetThemesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="QuickSetupSoap" type="tns:QuickSetupSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SetupApplication">
+      <soap:operation soapAction="http://tempuri.org/SetupApplication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBackgroundImages">
+      <soap:operation soapAction="http://tempuri.org/GetBackgroundImages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetThemes">
+      <soap:operation soapAction="http://tempuri.org/GetThemes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="QuickSetupSoap12" type="tns:QuickSetupSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SetupApplication">
+      <soap12:operation soapAction="http://tempuri.org/SetupApplication" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBackgroundImages">
+      <soap12:operation soapAction="http://tempuri.org/GetBackgroundImages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetThemes">
+      <soap12:operation soapAction="http://tempuri.org/GetThemes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="QuickSetup">
+    <wsdl:port name="QuickSetupSoap" binding="tns:QuickSetupSoap">
+      <soap:address location="http://services.dev.simplesite-me.ide/quicksetup.asmx" />
+    </wsdl:port>
+    <wsdl:port name="QuickSetupSoap12" binding="tns:QuickSetupSoap12">
+      <soap12:address location="http://services.dev.simplesite-me.ide/quicksetup.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

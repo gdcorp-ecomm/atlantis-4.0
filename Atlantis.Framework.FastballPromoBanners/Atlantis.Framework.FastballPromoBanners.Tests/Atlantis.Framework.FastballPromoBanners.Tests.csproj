@@ -53,6 +53,10 @@
     <Compile Include="FastballPromoBannersTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Main\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
+      <Project>{5B0E8D0F-247E-4937-8177-48EA5E267CAB}</Project>
+      <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>
       <Name>Atlantis.Framework.Engine</Name>

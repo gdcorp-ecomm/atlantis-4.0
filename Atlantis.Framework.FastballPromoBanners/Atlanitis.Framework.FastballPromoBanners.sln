@@ -22,9 +22,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Fastball
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FastballPromoBanners.Tests", "Atlantis.Framework.FastballPromoBanners.Tests\Atlantis.Framework.FastballPromoBanners.Tests.csproj", "{13FDC64E-B1F4-4C6A-B907-F13E7E0093B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockHttpContext", "..\..\Main\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj", "{5B0E8D0F-247E-4937-8177-48EA5E267CAB}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
 		SccLocalPath0 = .
@@ -49,6 +51,10 @@ Global
 		SccProjectUniqueName6 = Atlantis.Framework.FastballPromoBanners.Tests\\Atlantis.Framework.FastballPromoBanners.Tests.csproj
 		SccProjectName6 = Atlantis.Framework.FastballPromoBanners.Tests
 		SccLocalPath6 = Atlantis.Framework.FastballPromoBanners.Tests
+		SccProjectUniqueName7 = ..\\..\\Main\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
+		SccProjectTopLevelParentUniqueName7 = Atlanitis.Framework.FastballPromoBanners.sln
+		SccProjectName7 = ../../Main/Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
+		SccLocalPath7 = ..\\..\\Main\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlanitis.Framework.FastballPromoBanners.vsmdi
@@ -82,6 +88,10 @@ Global
 		{13FDC64E-B1F4-4C6A-B907-F13E7E0093B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13FDC64E-B1F4-4C6A-B907-F13E7E0093B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13FDC64E-B1F4-4C6A-B907-F13E7E0093B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B0E8D0F-247E-4937-8177-48EA5E267CAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B0E8D0F-247E-4937-8177-48EA5E267CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B0E8D0F-247E-4937-8177-48EA5E267CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B0E8D0F-247E-4937-8177-48EA5E267CAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,5 +100,6 @@ Global
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {C77A471F-7980-4338-8208-5D3AE8FFFB4C}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {C77A471F-7980-4338-8208-5D3AE8FFFB4C}
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {C77A471F-7980-4338-8208-5D3AE8FFFB4C}
+		{5B0E8D0F-247E-4937-8177-48EA5E267CAB} = {C77A471F-7980-4338-8208-5D3AE8FFFB4C}
 	EndGlobalSection
 EndGlobal

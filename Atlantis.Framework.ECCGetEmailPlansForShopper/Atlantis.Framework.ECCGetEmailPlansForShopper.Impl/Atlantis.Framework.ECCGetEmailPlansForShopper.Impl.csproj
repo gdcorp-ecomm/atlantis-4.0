@@ -36,12 +36,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.ECC.Interface">
-      <HintPath>..\..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\bin\Debug\Atlantis.Framework.ECC.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.ECCGetEmailPlansForShopper.Interface">
-      <HintPath>..\Atlantis.Framework.ECCGetEmailPlansForShopper.Interface\bin\Debug\Atlantis.Framework.ECCGetEmailPlansForShopper.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\bin\Debug\Atlantis.Framework.Engine.dll</HintPath>
@@ -68,6 +62,10 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\Atlantis.Framework.ECC.Interface.csproj">
+      <Project>{35A2F607-EB94-4A71-9A01-2285357D3A61}</Project>
+      <Name>Atlantis.Framework.ECC.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
       <Project>{17EBED78-9469-4678-96B1-A175AB221916}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>
@@ -75,6 +73,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
       <Project>{8B9AA4D9-B932-40EB-9F36-52C55F2D3D09}</Project>
       <Name>Atlantis.Framework.SessionCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.ECCGetEmailPlansForShopper.Interface\Atlantis.Framework.ECCGetEmailPlansForShopper.Interface.csproj">
+      <Project>{54C591DA-30E4-4D52-A4C8-E60DCB4E7243}</Project>
+      <Name>Atlantis.Framework.ECCGetEmailPlansForShopper.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

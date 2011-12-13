@@ -37,9 +37,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.ECC.Interface">
-      <HintPath>..\..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\bin\Debug\Atlantis.Framework.ECC.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\bin\Debug\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
@@ -77,6 +74,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\Atlantis.Framework.ECC.Interface.csproj">
+      <Project>{35A2F607-EB94-4A71-9A01-2285357D3A61}</Project>
+      <Name>Atlantis.Framework.ECC.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
       <Project>{8B9AA4D9-B932-40EB-9F36-52C55F2D3D09}</Project>
       <Name>Atlantis.Framework.SessionCache</Name>

@@ -37,7 +37,7 @@ namespace Atlantis.Framework.GetRemCampBlazDur.Tests
     [DeploymentItem("bin/netconnect.dll")]
     public void MYAEEMUpgradesTest()
     {
-      const int entityId = 1173;
+      const int entityId = 5079;
       GetRemCampBlazDurRequestData request = new GetRemCampBlazDurRequestData(_shopperId
          , string.Empty
          , string.Empty

@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CRMTaskCreation.Impl", "Atlantis.Framework.CRMTaskCreation.Impl\Atlantis.Framework.CRMTaskCreation.Impl.csproj", "{54F1B37A-FFAB-4A91-849C-91C1AA806F7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{48C564CD-CCAD-47A4-9E80-1D7DAF19E4CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B419B82-A95F-47C2-9EB9-242092610B55}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.CRMTaskCreation.vsmdi = Atlantis.Framework.CRMTaskCreation.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CRMTaskCreation.Interface", "Atlantis.Framework.CRMTaskCreation.Interface\Atlantis.Framework.CRMTaskCreation.Interface.csproj", "{29D46427-949D-4E69-BFD9-E61084493C56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CRMTaskCreation.Tests", "Atlantis.Framework.CRMTaskCreation.Tests\Atlantis.Framework.CRMTaskCreation.Tests.csproj", "{8B165419-7274-4B95-9F00-5F0992BF939B}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.CRMTaskCreation.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.CRMTaskCreation.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.CRMTaskCreation.Impl\\Atlantis.Framework.CRMTaskCreation.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.CRMTaskCreation.Impl
+		SccLocalPath3 = Atlantis.Framework.CRMTaskCreation.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.CRMTaskCreation.Interface\\Atlantis.Framework.CRMTaskCreation.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.CRMTaskCreation.Interface
+		SccLocalPath4 = Atlantis.Framework.CRMTaskCreation.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.CRMTaskCreation.Tests\\Atlantis.Framework.CRMTaskCreation.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.CRMTaskCreation.Tests
+		SccLocalPath5 = Atlantis.Framework.CRMTaskCreation.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.CRMTaskCreation.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54F1B37A-FFAB-4A91-849C-91C1AA806F7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F1B37A-FFAB-4A91-849C-91C1AA806F7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F1B37A-FFAB-4A91-849C-91C1AA806F7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F1B37A-FFAB-4A91-849C-91C1AA806F7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D46427-949D-4E69-BFD9-E61084493C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D46427-949D-4E69-BFD9-E61084493C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D46427-949D-4E69-BFD9-E61084493C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D46427-949D-4E69-BFD9-E61084493C56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B165419-7274-4B95-9F00-5F0992BF939B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B165419-7274-4B95-9F00-5F0992BF939B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B165419-7274-4B95-9F00-5F0992BF939B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B165419-7274-4B95-9F00-5F0992BF939B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {48C564CD-CCAD-47A4-9E80-1D7DAF19E4CA}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {48C564CD-CCAD-47A4-9E80-1D7DAF19E4CA}
+	EndGlobalSection
+EndGlobal

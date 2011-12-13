@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using Atlantis.Framework.GetRemainPLDur.Interface;
+using Atlantis.Framework.GetRemCampBlazDur.Interface;
 using Atlantis.Framework.Interface;
 using System.Collections.Generic;
 
-namespace Atlantis.Framework.GetRemainPLDur.Impl
+namespace Atlantis.Framework.GetRemCampBlazDur.Impl
 {
   public class GetRemainPLDurRequest : IRequest
   {
@@ -19,28 +19,28 @@ namespace Atlantis.Framework.GetRemainPLDur.Impl
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      GetRemainPLDurResponseData responseData;
+      GetRemCampBlazDurResponseData responseData;
 
       try
       {
-        GetRemainPLDurRequestData remainingPLDurationRequestData = (GetRemainPLDurRequestData)requestData;
-        decimal duration = GetDuration(remainingPLDurationRequestData, config);
-        responseData = new GetRemainPLDurResponseData(duration);
+        GetRemCampBlazDurRequestData remainingCampBlazDurationRequestData = (GetRemCampBlazDurRequestData)requestData;
+        decimal duration = GetDuration(remainingCampBlazDurationRequestData, config);
+        responseData = new GetRemCampBlazDurResponseData(duration);
         
       }
       catch (AtlantisException atlantisException)
       {
-        responseData = new GetRemainPLDurResponseData(atlantisException);
+        responseData = new GetRemCampBlazDurResponseData(atlantisException);
       }
       catch (Exception ex)
       {
-        responseData = new GetRemainPLDurResponseData(requestData, ex);
+        responseData = new GetRemCampBlazDurResponseData(requestData, ex);
       }
 
       return responseData;
     }
 
-    private static decimal GetDuration(GetRemainPLDurRequestData requestData, ConfigElement config)
+    private static decimal GetDuration(GetRemCampBlazDurRequestData requestData, ConfigElement config)
     {
       decimal duration = 1M;
 

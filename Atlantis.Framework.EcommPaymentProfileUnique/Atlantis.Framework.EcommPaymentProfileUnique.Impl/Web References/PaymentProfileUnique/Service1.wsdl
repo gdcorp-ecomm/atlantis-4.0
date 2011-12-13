@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ecommrestricted.intranet.gdg/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ecommrestricted.intranet.gdg/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ecommrestricted.intranet.gdg/">
+      <s:element name="GetOrderXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOrderID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrderXMLResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sErrorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMgrOrderXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOrderID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMgrOrderXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMgrOrderXMLResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sErrorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PurchaseBasket">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PurchaseBasketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PurchaseBasketResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sErrorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsUniquePaymentProfile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOrderID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsUniquePaymentProfileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsUniquePaymentProfileResult" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="bUsesNonUniquePaymentType" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="sErrorXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetOrderXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderXML" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMgrOrderXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMgrOrderXML" />
+  </wsdl:message>
+  <wsdl:message name="GetMgrOrderXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMgrOrderXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="PurchaseBasketSoapIn">
+    <wsdl:part name="parameters" element="tns:PurchaseBasket" />
+  </wsdl:message>
+  <wsdl:message name="PurchaseBasketSoapOut">
+    <wsdl:part name="parameters" element="tns:PurchaseBasketResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsUniquePaymentProfileSoapIn">
+    <wsdl:part name="parameters" element="tns:IsUniquePaymentProfile" />
+  </wsdl:message>
+  <wsdl:message name="IsUniquePaymentProfileSoapOut">
+    <wsdl:part name="parameters" element="tns:IsUniquePaymentProfileResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service1Soap">
+    <wsdl:operation name="GetOrderXML">
+      <wsdl:input message="tns:GetOrderXMLSoapIn" />
+      <wsdl:output message="tns:GetOrderXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMgrOrderXML">
+      <wsdl:input message="tns:GetMgrOrderXMLSoapIn" />
+      <wsdl:output message="tns:GetMgrOrderXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PurchaseBasket">
+      <wsdl:input message="tns:PurchaseBasketSoapIn" />
+      <wsdl:output message="tns:PurchaseBasketSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsUniquePaymentProfile">
+      <wsdl:input message="tns:IsUniquePaymentProfileSoapIn" />
+      <wsdl:output message="tns:IsUniquePaymentProfileSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOrderXML">
+      <soap:operation soapAction="http://ecommrestricted.intranet.gdg/GetOrderXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMgrOrderXML">
+      <soap:operation soapAction="http://ecommrestricted.intranet.gdg/GetMgrOrderXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PurchaseBasket">
+      <soap:operation soapAction="http://ecommrestricted.intranet.gdg/PurchaseBasket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUniquePaymentProfile">
+      <soap:operation soapAction="http://ecommrestricted.intranet.gdg/IsUniquePaymentProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOrderXML">
+      <soap12:operation soapAction="http://ecommrestricted.intranet.gdg/GetOrderXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMgrOrderXML">
+      <soap12:operation soapAction="http://ecommrestricted.intranet.gdg/GetMgrOrderXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PurchaseBasket">
+      <soap12:operation soapAction="http://ecommrestricted.intranet.gdg/PurchaseBasket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUniquePaymentProfile">
+      <soap12:operation soapAction="http://ecommrestricted.intranet.gdg/IsUniquePaymentProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
+      <soap:address location="http://ecommrestricted.dev.intranet.gdg/WSgdECommRestricted/Service1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
+      <soap12:address location="http://ecommrestricted.dev.intranet.gdg/WSgdECommRestricted/Service1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

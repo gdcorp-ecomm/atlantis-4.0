@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.CMSDomainAvail.Impl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Atlantis_Framework_CMSDomainAvail_Impl_cmsValidateDomain_CmsCreditSupport" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://services.dev.godaddy-com.ide/mya/cmscreditsupport.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

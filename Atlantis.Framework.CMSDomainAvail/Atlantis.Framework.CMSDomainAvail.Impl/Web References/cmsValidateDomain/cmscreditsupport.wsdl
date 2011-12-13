@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://services.godaddy.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://services.godaddy.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://services.godaddy.com/">
+      <s:element name="CmsCreditDomainLists">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cmsCreditDomainsRequestXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CmsCreditDomainListsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CmsCreditDomainListsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsDomainValidForInstantPage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domainValidityRequestXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsDomainValidForInstantPageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsDomainValidForInstantPageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CmsCreditDomainListsSoapIn">
+    <wsdl:part name="parameters" element="tns:CmsCreditDomainLists" />
+  </wsdl:message>
+  <wsdl:message name="CmsCreditDomainListsSoapOut">
+    <wsdl:part name="parameters" element="tns:CmsCreditDomainListsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainValidForInstantPageSoapIn">
+    <wsdl:part name="parameters" element="tns:IsDomainValidForInstantPage" />
+  </wsdl:message>
+  <wsdl:message name="IsDomainValidForInstantPageSoapOut">
+    <wsdl:part name="parameters" element="tns:IsDomainValidForInstantPageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CmsCreditSupportSoap">
+    <wsdl:operation name="CmsCreditDomainLists">
+      <wsdl:input message="tns:CmsCreditDomainListsSoapIn" />
+      <wsdl:output message="tns:CmsCreditDomainListsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainValidForInstantPage">
+      <wsdl:input message="tns:IsDomainValidForInstantPageSoapIn" />
+      <wsdl:output message="tns:IsDomainValidForInstantPageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CmsCreditSupportSoap" type="tns:CmsCreditSupportSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CmsCreditDomainLists">
+      <soap:operation soapAction="http://services.godaddy.com/CmsCreditDomainLists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainValidForInstantPage">
+      <soap:operation soapAction="http://services.godaddy.com/IsDomainValidForInstantPage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CmsCreditSupportSoap12" type="tns:CmsCreditSupportSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CmsCreditDomainLists">
+      <soap12:operation soapAction="http://services.godaddy.com/CmsCreditDomainLists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDomainValidForInstantPage">
+      <soap12:operation soapAction="http://services.godaddy.com/IsDomainValidForInstantPage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CmsCreditSupport">
+    <wsdl:port name="CmsCreditSupportSoap" binding="tns:CmsCreditSupportSoap">
+      <soap:address location="http://services.dev.godaddy-com.ide/mya/cmscreditsupport.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CmsCreditSupportSoap12" binding="tns:CmsCreditSupportSoap12">
+      <soap12:address location="http://services.dev.godaddy-com.ide/mya/cmscreditsupport.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

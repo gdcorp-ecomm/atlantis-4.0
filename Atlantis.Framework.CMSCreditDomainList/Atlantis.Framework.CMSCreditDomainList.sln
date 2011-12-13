@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CMSCreditDomainList.Interface", "Atlantis.Framework.CMSCreditDomainList.Interface\Atlantis.Framework.CMSCreditDomainList.Interface.csproj", "{BE9D54E9-169C-4DCD-8490-48C6D9CA3DE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CMSCreditDomainList.Impl", "Atlantis.Framework.CMSCreditDomainList.Impl\Atlantis.Framework.CMSCreditDomainList.Impl.csproj", "{7DD10AD1-AE8D-4F96-8DEE-AB046A93EFC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5ABD21C7-7B32-4E50-8B84-1397DA2AD304}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CMSCreditDomainList.Tests", "Atlantis.Framework.CMSCreditDomainList.Tests\Atlantis.Framework.CMSCreditDomainList.Tests.csproj", "{DF63EE3C-F1C0-4BCC-B5C1-E78F1C3864C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{821D7EF7-3333-4211-9602-EDC61D7853B3}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.CMSCreditDomainList.vsmdi = Atlantis.Framework.CMSCreditDomainList.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.CMSCreditDomainList.Impl\\Atlantis.Framework.CMSCreditDomainList.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.CMSCreditDomainList.Impl
+		SccLocalPath1 = Atlantis.Framework.CMSCreditDomainList.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.CMSCreditDomainList.Interface\\Atlantis.Framework.CMSCreditDomainList.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.CMSCreditDomainList.Interface
+		SccLocalPath2 = Atlantis.Framework.CMSCreditDomainList.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.CMSCreditDomainList.sln
+		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.CMSCreditDomainList.sln
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.CMSCreditDomainList.Tests\\Atlantis.Framework.CMSCreditDomainList.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.CMSCreditDomainList.Tests
+		SccLocalPath5 = Atlantis.Framework.CMSCreditDomainList.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.CMSCreditDomainList.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE9D54E9-169C-4DCD-8490-48C6D9CA3DE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE9D54E9-169C-4DCD-8490-48C6D9CA3DE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE9D54E9-169C-4DCD-8490-48C6D9CA3DE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE9D54E9-169C-4DCD-8490-48C6D9CA3DE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD10AD1-AE8D-4F96-8DEE-AB046A93EFC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD10AD1-AE8D-4F96-8DEE-AB046A93EFC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD10AD1-AE8D-4F96-8DEE-AB046A93EFC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD10AD1-AE8D-4F96-8DEE-AB046A93EFC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF63EE3C-F1C0-4BCC-B5C1-E78F1C3864C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF63EE3C-F1C0-4BCC-B5C1-E78F1C3864C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF63EE3C-F1C0-4BCC-B5C1-E78F1C3864C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF63EE3C-F1C0-4BCC-B5C1-E78F1C3864C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {5ABD21C7-7B32-4E50-8B84-1397DA2AD304}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {5ABD21C7-7B32-4E50-8B84-1397DA2AD304}
+	EndGlobalSection
+EndGlobal

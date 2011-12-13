@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.fastshoppingcart.com/xfws/accountSetup" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="FOSService" targetNamespace="http://ws.fastshoppingcart.com/xfws/accountSetup" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://ws.fastshoppingcart.com/xfws/accountSetup">
+      <xsd:complexType name="template">
+        <xsd:sequence>
+          <xsd:element name="backgroundID" type="xsd:string" />
+          <xsd:element name="src" type="xsd:string" />
+          <xsd:element name="thumbnailSrc" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="acountSetup">
+        <xsd:sequence>
+          <xsd:element name="responseCode" type="xsd:int" />
+          <xsd:element name="responseMessage" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfTemplate">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="template" type="tns:template" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getThemeInformation" type="tns:getThemeInformation" />
+      <xsd:complexType name="getThemeInformation">
+        <xsd:sequence />
+      </xsd:complexType>
+      <xsd:element name="getThemeInformationResponse" type="tns:getThemeInformationResponse" />
+      <xsd:complexType name="getThemeInformationResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="themeInformation" type="tns:ArrayOfTemplate" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="setupAccount" type="tns:setupAccount" />
+      <xsd:complexType name="setupAccount">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="orionGUID" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="domainName" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="emailAddress" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="companyName" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="themeID" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="setupAccountResponse" type="tns:setupAccountResponse" />
+      <xsd:complexType name="setupAccountResponse">
+        <xsd:sequence>
+          <xsd:element name="acountSetup" type="tns:acountSetup" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="setupAccount">
+    <wsdl:part name="parameters" element="tns:setupAccount" />
+  </wsdl:message>
+  <wsdl:message name="setupAccountResponse">
+    <wsdl:part name="parameters" element="tns:setupAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="getThemeInformationResponse">
+    <wsdl:part name="parameters" element="tns:getThemeInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="getThemeInformation">
+    <wsdl:part name="parameters" element="tns:getThemeInformation" />
+  </wsdl:message>
+  <wsdl:portType name="FOSService">
+    <wsdl:operation name="getThemeInformation">
+      <wsdl:input name="getThemeInformation" message="tns:getThemeInformation" />
+      <wsdl:output name="getThemeInformationResponse" message="tns:getThemeInformationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setupAccount">
+      <wsdl:input name="setupAccount" message="tns:setupAccount" />
+      <wsdl:output name="setupAccountResponse" message="tns:setupAccountResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FOSServiceSoapBinding" type="tns:FOSService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getThemeInformation">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getThemeInformation">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getThemeInformationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setupAccount">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="setupAccount">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setupAccountResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FOSService">
+    <wsdl:port name="FOSServicePort" binding="tns:FOSServiceSoapBinding">
+      <soap:address location="http://app.dev.fastshoppingcart-com.ide/xfws/FOSService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

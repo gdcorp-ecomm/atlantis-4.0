@@ -114,11 +114,5 @@ namespace Atlantis.Framework.AddBasketBilling.Interface
       return result.ToString();
     }
 
-    public TimeSpan RequestTimeout
-    {
-      get { return _requestTimeout; }
-      set { _requestTimeout = value; }
-    }
-
   }
 }

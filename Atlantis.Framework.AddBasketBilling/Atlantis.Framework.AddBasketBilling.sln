@@ -5,13 +5,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AddBaske
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AddBasketBilling.Interface", "Atlantis.Framework.AddBasketBilling.Interface\Atlantis.Framework.AddBasketBilling.Interface.csproj", "{DD16A311-0D7C-45FF-A3CF-F347EAFAB95B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{97DC20E9-B998-420C-9D81-D11008D49CC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AddBasketBilling.Tests", "Atlantis.Framework.AddBasketBilling.Tests\Atlantis.Framework.AddBasketBilling.Tests.csproj", "{C329A91D-044F-487E-AEF8-3A35FB4D8D2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{29C4CA1C-6B60-4AB6-BD1E-3D435C9226CE}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.AddBasketBilling.vsmdi = Atlantis.Framework.AddBasketBilling.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs:8080/
 		SccLocalPath0 = .
@@ -25,6 +34,12 @@ Global
 		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.AddBasketBilling.sln
 		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
 		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.AddBasketBilling.Tests\\Atlantis.Framework.AddBasketBilling.Tests.csproj
+		SccProjectName4 = Atlantis.Framework.AddBasketBilling.Tests
+		SccLocalPath4 = Atlantis.Framework.AddBasketBilling.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.AddBasketBilling.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,15 +54,19 @@ Global
 		{DD16A311-0D7C-45FF-A3CF-F347EAFAB95B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD16A311-0D7C-45FF-A3CF-F347EAFAB95B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD16A311-0D7C-45FF-A3CF-F347EAFAB95B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C329A91D-044F-487E-AEF8-3A35FB4D8D2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C329A91D-044F-487E-AEF8-3A35FB4D8D2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C329A91D-044F-487E-AEF8-3A35FB4D8D2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C329A91D-044F-487E-AEF8-3A35FB4D8D2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13} = {97DC20E9-B998-420C-9D81-D11008D49CC6}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {97DC20E9-B998-420C-9D81-D11008D49CC6}
 	EndGlobalSection
 EndGlobal

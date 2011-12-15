@@ -15,12 +15,14 @@ namespace Atlantis.Framework.DCCGetDomainByShopper.Impl
 
       try
       {
-        DsWeb.RegCheckDomainStatusWebSvcService oDsWeb = new DsWeb.RegCheckDomainStatusWebSvcService();
-        DCCGetDomainByShopperRequestData oRequest = (DCCGetDomainByShopperRequestData)oRequestData;
-        oDsWeb.Url = ((WsConfigElement)oConfig).WSURL;
-        oDsWeb.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
-        responseXml = oDsWeb.GetDCCDomainList(oRequest.ToXML());
-        responseData = new DCCGetDomainByShopperResponseData(responseXml, oRequest.UseMaxdateAsDefaultForExpirationDate);
+        using (DsWeb.RegCheckDomainStatusWebSvcService oDsWeb = new DsWeb.RegCheckDomainStatusWebSvcService())
+        {
+          DCCGetDomainByShopperRequestData oRequest = (DCCGetDomainByShopperRequestData)oRequestData;
+          oDsWeb.Url = ((WsConfigElement)oConfig).WSURL;
+          oDsWeb.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
+          responseXml = oDsWeb.GetDCCDomainList(oRequest.ToXML());
+          responseData = new DCCGetDomainByShopperResponseData(responseXml, oRequest.UseMaxdateAsDefaultForExpirationDate);
+        }
       }
       catch (AtlantisException exAtlantis)
       {

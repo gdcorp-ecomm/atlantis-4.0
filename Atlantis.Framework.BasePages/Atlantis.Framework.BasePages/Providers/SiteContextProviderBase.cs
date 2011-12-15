@@ -124,6 +124,11 @@ namespace Atlantis.Framework.BasePages.Providers
         if (_isc == null)
         {
           string isc = HttpContext.Current.Request[PARAM_ISC] ?? string.Empty;
+          if (Manager.IsManager)
+          {
+            isc = HttpContext.Current.Request.QueryString[PARAM_ISC] ?? string.Empty;
+          }
+
           if (isc.Contains(","))
             isc = isc.Substring(0, isc.IndexOf(','));
           if (isc.Length > 10)

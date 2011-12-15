@@ -19,17 +19,18 @@ namespace Atlantis.Framework.DeleteItem.Impl
       try
       {
         DeleteItemRequestData oDeleteItemRequestData = (DeleteItemRequestData)oRequestData;
-        WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService();
-        oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
+        using (WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService())
+        {
+          oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
+          oBasketWS.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
+          int lockingMode = oDeleteItemRequestData.IsManager ? LOCKMANAGER : LOCKCUSTOMER;
 
-        int lockingMode = oDeleteItemRequestData.IsManager ? LOCKMANAGER : LOCKCUSTOMER;
-
-        sResponseXML = oBasketWS.DeleteItemsByPairWithType(
-          oDeleteItemRequestData.ShopperID,
-          oDeleteItemRequestData.BasketType,
-          oDeleteItemRequestData.ItemKeysToDelete, 
-          lockingMode);
-
+          sResponseXML = oBasketWS.DeleteItemsByPairWithType(
+            oDeleteItemRequestData.ShopperID,
+            oDeleteItemRequestData.BasketType,
+            oDeleteItemRequestData.ItemKeysToDelete,
+            lockingMode);
+        }
         if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
         {
           AtlantisException exAtlantis = new AtlantisException(oRequestData,

@@ -16,21 +16,23 @@ namespace Atlantis.Framework.GetPaymentProfiles.Impl
       try
       {
         GetPaymentProfilesRequestData oGetPaymentProfilesRequestData = (GetPaymentProfilesRequestData)oRequestData;
-        WsgdCPPSvc.PPWebSvcService oSvc = new Atlantis.Framework.GetPaymentProfiles.Impl.WsgdCPPSvc.PPWebSvcService();
-        oSvc.Url = ((WsConfigElement)oConfig).WSURL;
-        sResponseXML = string.Empty;
-        sResponseXML = oSvc.GetInfoByShopperID(string.Empty, oRequestData.ShopperID);
-        if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+        using (WsgdCPPSvc.PPWebSvcService oSvc = new Atlantis.Framework.GetPaymentProfiles.Impl.WsgdCPPSvc.PPWebSvcService())
         {
-          AtlantisException exAtlantis = new AtlantisException(oRequestData,
-                                                               "GetPaymentProfilesRequest.RequestHandler",
-                                                               sResponseXML,
-                                                               oRequestData.ToXML());
+          oSvc.Url = ((WsConfigElement)oConfig).WSURL;
+          sResponseXML = string.Empty;
+          sResponseXML = oSvc.GetInfoByShopperID(string.Empty, oRequestData.ShopperID);
+          if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+          {
+            AtlantisException exAtlantis = new AtlantisException(oRequestData,
+                                                                 "GetPaymentProfilesRequest.RequestHandler",
+                                                                 sResponseXML,
+                                                                 oRequestData.ToXML());
 
-          oResponseData = new GetPaymentProfilesResponseData(sResponseXML, exAtlantis);
+            oResponseData = new GetPaymentProfilesResponseData(sResponseXML, exAtlantis);
+          }
+          else
+            oResponseData = new GetPaymentProfilesResponseData(sResponseXML);
         }
-        else
-          oResponseData = new GetPaymentProfilesResponseData(sResponseXML);
       }
       catch (AtlantisException exAtlantis)
       {

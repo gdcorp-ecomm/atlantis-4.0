@@ -15,16 +15,17 @@ namespace Atlantis.Framework.AddBasketBilling.Impl
       AddBasketBillingResponseData oResponseData = null;
       string requestXML = addBillingRequest.ToXML();
       string sResponseXML = string.Empty;
+      WscgdBasket.WscgdBasketService wsBasket = new WscgdBasket.WscgdBasketService();
 
       try
       {
-        WscgdBasket.WscgdBasketService wsBasket = new WscgdBasket.WscgdBasketService();
+        
         wsBasket.Url = ((WsConfigElement)oConfig).WSURL;
         wsBasket.Timeout = (int)addBillingRequest.RequestTimeout.TotalMilliseconds;
 
         sResponseXML = wsBasket.AddBillingToBasket(addBillingRequest.ShopperID, requestXML);
 
-        if (sResponseXML.IndexOf("<MESSAGE>Success</MESSAGE>", StringComparison.OrdinalIgnoreCase)==-1)
+        if (sResponseXML.IndexOf("<MESSAGE>Success</MESSAGE>", StringComparison.OrdinalIgnoreCase) == -1)
         {
           AtlantisException exAtlantis = new AtlantisException(oRequestData,
                                                                "AddBasketBilling.RequestHandler",
@@ -42,7 +43,13 @@ namespace Atlantis.Framework.AddBasketBilling.Impl
       {
         oResponseData = new AddBasketBillingResponseData(oRequestData, exAtlantis);
       }
-
+      finally
+      {
+        if (wsBasket != null)
+        {
+          wsBasket.Dispose();
+        }
+      }
       return oResponseData;
     }
 

@@ -17,10 +17,12 @@ namespace Atlantis.Framework.CMSCreditDomainList.Impl
       try
       {
         CMSCreditDomainListRequestData cmsRequest = (CMSCreditDomainListRequestData)requestData;
-        cmsCreditDomainLists.CmsCreditSupport service = new cmsCreditDomainLists.CmsCreditSupport();
-        service.Url = ((WsConfigElement)config).WSURL;
-        service.Timeout = (int)cmsRequest.RequestTimeout.TotalMilliseconds;
-        responseText = service.CmsCreditDomainLists(cmsRequest.ToXML());
+        using (cmsCreditDomainLists.CmsCreditSupport service = new cmsCreditDomainLists.CmsCreditSupport())
+        {
+          service.Url = ((WsConfigElement)config).WSURL;
+          service.Timeout = (int)cmsRequest.RequestTimeout.TotalMilliseconds;
+          responseText = service.CmsCreditDomainLists(cmsRequest.ToXML());
+        }
         result = new CMSCreditDomainListResponseData(responseText);
       }
       catch (AtlantisException aex)

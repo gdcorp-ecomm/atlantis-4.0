@@ -14,30 +14,31 @@ namespace Atlantis.Framework.FastballLogOrder.Impl
       try
       {
         FastballLogOrderRequestData oLogRequest = (FastballLogOrderRequestData)oRequestData;
-        FastballOrderTracking.Order oSvc = new FastballOrderTracking.Order();
-        oSvc.Url = ((WsConfigElement)oConfig).WSURL;
-        Guid newGuid;
-        try
+        using (FastballOrderTracking.Order oSvc = new FastballOrderTracking.Order())
         {
-          if (string.IsNullOrEmpty(oLogRequest.Pathway))
+          oSvc.Url = ((WsConfigElement)oConfig).WSURL;
+          Guid newGuid;
+          try
+          {
+            if (string.IsNullOrEmpty(oLogRequest.Pathway))
+              newGuid = new Guid();
+            else
+              newGuid = new Guid(oLogRequest.Pathway);
+          }
+          catch
+          {
             newGuid = new Guid();
-          else
-            newGuid = new Guid(oLogRequest.Pathway);
-        }
-        catch
-        {
-          newGuid = new Guid();
-        }
+          }
 
-        if(string.IsNullOrEmpty((oLogRequest.BasketType)))
-        {
-          oSvc.LogOrder(newGuid, oLogRequest.OrderID, oLogRequest.PageCount);
+          if (string.IsNullOrEmpty((oLogRequest.BasketType)))
+          {
+            oSvc.LogOrder(newGuid, oLogRequest.OrderID, oLogRequest.PageCount);
+          }
+          else
+          {
+            oSvc.LogOrderWithType(newGuid, oLogRequest.OrderID, oLogRequest.PageCount, oLogRequest.BasketType);
+          }
         }
-        else
-        {
-          oSvc.LogOrderWithType(newGuid, oLogRequest.OrderID, oLogRequest.PageCount, oLogRequest.BasketType);
-        }
-        
         oResponseData = new FastballLogOrderResponseData(true);
       }
       catch (AtlantisException exAtlantis)

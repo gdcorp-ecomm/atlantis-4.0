@@ -17,6 +17,7 @@ namespace Atlantis.Framework.GiftCardBalance.Impl
         using (WscGiftCard.wscGiftCardService oSvc = new WscGiftCard.wscGiftCardService())
         {
           oSvc.Url = ((WsConfigElement)oConfig).WSURL;
+          oSvc.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
           string resultXML = string.Empty;
           int result = oSvc.GetGiftCardBalance(getBalance.AccountNumber, getBalance.OrderID);
           oResponseData = new GiftCardBalanceResponseData(result);

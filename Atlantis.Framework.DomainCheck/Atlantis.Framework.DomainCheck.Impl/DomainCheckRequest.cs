@@ -21,25 +21,26 @@ namespace Atlantis.Framework.DomainCheck.Impl
       {
         DomainCheckRequestData oDomainCheckRequestData = (DomainCheckRequestData)oRequestData;
 
-        AvailCheckWebSvc availCheckService = new AvailCheckWebSvc();
-        availCheckService.Url = ((WsConfigElement)oConfig).WSURL;
-        if (oDomainCheckRequestData.RequestTimeout.TotalMilliseconds > _MAX_SERVICETIMEOUT_MILLISECONDS)
+        using (AvailCheckWebSvc availCheckService = new AvailCheckWebSvc())
         {
-          availCheckService.Timeout = _MAX_SERVICETIMEOUT_MILLISECONDS;
-        }
-        else
-        {
-          availCheckService.Timeout = (int)oDomainCheckRequestData.RequestTimeout.TotalMilliseconds;
-        }
+          availCheckService.Url = ((WsConfigElement)oConfig).WSURL;
+          if (oDomainCheckRequestData.RequestTimeout.TotalMilliseconds > _MAX_SERVICETIMEOUT_MILLISECONDS)
+          {
+            availCheckService.Timeout = _MAX_SERVICETIMEOUT_MILLISECONDS;
+          }
+          else
+          {
+            availCheckService.Timeout = (int)oDomainCheckRequestData.RequestTimeout.TotalMilliseconds;
+          }
 
-        string XML = oDomainCheckRequestData.ToXML();
-        sResponseXML = availCheckService.Check(XML);
-        if (sResponseXML == null)
-        {
-          throw new Exception("AvailCheck returned null response.");
+          string XML = oDomainCheckRequestData.ToXML();
+          sResponseXML = availCheckService.Check(XML);
+          if (sResponseXML == null)
+          {
+            throw new Exception("AvailCheck returned null response.");
+          }
+          oResponseData = new DomainCheckResponseData(sResponseXML);
         }
-
-        oResponseData = new DomainCheckResponseData(sResponseXML);
       }
       catch (AtlantisException exAtlantis)
       {

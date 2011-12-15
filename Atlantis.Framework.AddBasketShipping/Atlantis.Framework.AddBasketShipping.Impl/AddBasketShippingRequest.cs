@@ -16,10 +16,12 @@ namespace Atlantis.Framework.AddBasketShipping.Impl
       string sResponseXML = string.Empty;
       try
       {
-        WscgdBasket.WscgdBasketService oBasketWS = new WscgdBasket.WscgdBasketService();
-        oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
-        oBasketWS.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
-        sResponseXML = oBasketWS.AddShippingToBasket(addShippingRequest.ShopperID, requestXML);
+        using (WscgdBasket.WscgdBasketService oBasketWS = new WscgdBasket.WscgdBasketService())
+        {
+          oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
+          oBasketWS.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
+          sResponseXML = oBasketWS.AddShippingToBasket(addShippingRequest.ShopperID, requestXML);
+        }
         if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
         {
           AtlantisException exAtlantis = new AtlantisException(oRequestData,

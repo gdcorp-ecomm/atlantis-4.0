@@ -34,6 +34,7 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Impl
           rootNode.SetAttribute("xCardNo", mktgRequest.CreditCardNumber);
           rootNode.SetAttribute("privateLabelID", mktgRequest.PrivateLabelId.ToString());
           rootNode.SetAttribute("basket_type", "gdshop");
+          rootNode.SetAttribute("currency", mktgRequest.Currency);
           xmlDoc.AppendChild(rootNode);
           StringWriter sw = new StringWriter();
           XmlTextWriter xw = new XmlTextWriter(sw);

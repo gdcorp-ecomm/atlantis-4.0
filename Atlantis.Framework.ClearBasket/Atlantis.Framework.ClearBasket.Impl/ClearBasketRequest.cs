@@ -20,7 +20,7 @@ namespace Atlantis.Framework.ClearBasket.Impl
                 using (WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService())
                 {
                   oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
-                  
+                  oBasketWS.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
                   sResponseXML = oBasketWS.ClearByType(oClearBasketRequestData.ShopperID, oClearBasketRequestData.BasketType);
                 }
                 if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)

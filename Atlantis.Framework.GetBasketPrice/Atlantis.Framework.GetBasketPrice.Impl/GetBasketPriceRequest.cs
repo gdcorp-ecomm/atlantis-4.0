@@ -20,27 +20,29 @@ namespace Atlantis.Framework.GetBasketPrice.Impl
       try
       {
         GetBasketPriceRequestData oBasketPriceRequestData = (GetBasketPriceRequestData)oRequestData;
-        WscgdBasket.WscgdBasketService oBasketWS = new WscgdBasket.WscgdBasketService();
-        oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
-        oBasketWS.Timeout = (int)oBasketPriceRequestData.RequestTimeout.TotalMilliseconds;
-
-        if (!string.IsNullOrEmpty(oBasketPriceRequestData.BasketType))
+        using (WscgdBasket.WscgdBasketService oBasketWS = new WscgdBasket.WscgdBasketService())
         {
-          sResponseXML = oBasketWS.GetBasketPriceXMLByType(
-            oBasketPriceRequestData.ShopperID,
-            oBasketPriceRequestData.PaymentType,
-            (short)(oBasketPriceRequestData.DeleteRefund ? -1 : 0),
-            oBasketPriceRequestData.BasketType);
-        }
-        else
-        {
-          sResponseXML = oBasketWS.GetBasketPriceXML(
-            oBasketPriceRequestData.ShopperID,
-            oBasketPriceRequestData.PaymentType,
-            (short)(oBasketPriceRequestData.DeleteRefund ? -1 : 0));
-        }
+          oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
+          oBasketWS.Timeout = (int)oBasketPriceRequestData.RequestTimeout.TotalMilliseconds;
 
-        oResponseData = new GetBasketPriceResponseData(sResponseXML);
+          if (!string.IsNullOrEmpty(oBasketPriceRequestData.BasketType))
+          {
+            sResponseXML = oBasketWS.GetBasketPriceXMLByType(
+              oBasketPriceRequestData.ShopperID,
+              oBasketPriceRequestData.PaymentType,
+              (short)(oBasketPriceRequestData.DeleteRefund ? -1 : 0),
+              oBasketPriceRequestData.BasketType);
+          }
+          else
+          {
+            sResponseXML = oBasketWS.GetBasketPriceXML(
+              oBasketPriceRequestData.ShopperID,
+              oBasketPriceRequestData.PaymentType,
+              (short)(oBasketPriceRequestData.DeleteRefund ? -1 : 0));
+          }
+
+          oResponseData = new GetBasketPriceResponseData(sResponseXML);
+        }
       }
       catch (AtlantisException exAtlantis)
       {

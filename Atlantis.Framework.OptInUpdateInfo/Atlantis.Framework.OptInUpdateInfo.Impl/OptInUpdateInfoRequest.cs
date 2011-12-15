@@ -76,24 +76,27 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
         catch (Exception exT)
         {
           _problems.Add(exT);
-        }        
+        }
 
-        try
-        {
-          if (((OptInUpdateInfoRequestData)requestData).IsReseller)
-          {
-            bSuccess = SaveResellerOptIns((OptInUpdateInfoRequestData)requestData, out currentException);
-            results.Add("Reseller", bSuccess);
-            if (currentException != null)
-            {
-              _problems.Add(currentException);
-            }
-          }
-        }
-        catch (Exception ex3)
-        {
-          _problems.Add(ex3);
-        }
+
+        // Will revist this. Sri, Tim and Paul talked about this and found that the triplet uses appsetting EEM_UNSUB_SVC instead of the config ws_url.
+        // The appsetting url is old and could be problematic.
+        //try
+        //{
+        //  if (((OptInUpdateInfoRequestData)requestData).IsReseller)
+        //  {
+        //    bSuccess = SaveResellerOptIns((OptInUpdateInfoRequestData)requestData, out currentException);
+        //    results.Add("Reseller", bSuccess);
+        //    if (currentException != null)
+        //    {
+        //      _problems.Add(currentException);
+        //    }
+        //  }
+        //}
+        //catch (Exception ex3)
+        //{
+        //  _problems.Add(ex3);
+        //}
 
         try
         {
@@ -404,39 +407,46 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
     {
       bool bSuccess = false;
       exception = null;
-
+      bool isModified = false;
+      bool relatedOfferOptInStatus = false;
       try
       {
 
         var relatedOfferOptIn = request.OptIns.FirstOrDefault(x => x.Type == OptInPublicationTypes.RelatedOffers);
 
-        if (relatedOfferOptIn.IsModified)
+        if (relatedOfferOptIn != null)
         {
-          if (relatedOfferOptIn.Status)
-          {
-            var resellerOptInRequest = new EEMResellerOptInRequestData(request.ShopperID, request.SourceURL,
-                                                                       request.OrderID,
-                                                                       request.Pathway, request.PageCount,
-                                                                       request.PrivateLabelId, request.EmailTypeId,
-                                                                       request.EmailAddress, request.FirstName,
-                                                                       request.LastName) { RequestTimeout = request.RequestTimeout };
+          isModified = relatedOfferOptIn.IsModified;
 
-            var resellerOptInResponse =
-              (EEMResellerOptInResponseData)
-              Engine.Engine.ProcessRequest(resellerOptInRequest, OptInUpdateInfoEngineRequests.ResellerOptIn);
-            bSuccess = resellerOptInResponse.IsSuccess;
-          }
-          else
+          if (isModified)
           {
-            var resellerOptOutRequest = new EEMResellerOptOutRequestData(request.ShopperID, request.SourceURL,
+            relatedOfferOptInStatus = relatedOfferOptIn.Status;
+            if (relatedOfferOptInStatus)
+            {
+              var resellerOptInRequest = new EEMResellerOptInRequestData(request.ShopperID, request.SourceURL,
                                                                          request.OrderID,
                                                                          request.Pathway, request.PageCount,
-                                                                         request.PrivateLabelId, request.EmailAddress) { RequestTimeout = request.RequestTimeout };
+                                                                         request.PrivateLabelId, request.EmailTypeId,
+                                                                         request.EmailAddress, request.FirstName,
+                                                                         request.LastName) { RequestTimeout = request.RequestTimeout };
 
-            var resellerOptOutResponse =
-              (EEMResellerOptInResponseData)
-              Engine.Engine.ProcessRequest(resellerOptOutRequest, OptInUpdateInfoEngineRequests.ResellerOptIn);
-            bSuccess = resellerOptOutResponse.IsSuccess;
+              var resellerOptInResponse =
+                (EEMResellerOptInResponseData)
+                Engine.Engine.ProcessRequest(resellerOptInRequest, OptInUpdateInfoEngineRequests.ResellerOptIn);
+              bSuccess = resellerOptInResponse != null && resellerOptInResponse.IsSuccess;
+            }
+            else
+            {
+              var resellerOptOutRequest = new EEMResellerOptOutRequestData(request.ShopperID, request.SourceURL,
+                                                                           request.OrderID,
+                                                                           request.Pathway, request.PageCount,
+                                                                           request.PrivateLabelId, request.EmailAddress) { RequestTimeout = request.RequestTimeout };
+
+              var resellerOptOutResponse =
+                (EEMResellerOptInResponseData)
+                Engine.Engine.ProcessRequest(resellerOptOutRequest, OptInUpdateInfoEngineRequests.ResellerOptIn);
+              bSuccess = resellerOptOutResponse != null && resellerOptOutResponse.IsSuccess;
+            }
           }
         }
       }
@@ -444,7 +454,7 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
       {
         exception = ex;
         string message = "Error saving reseller results: " + ex.Message + " " + ex.StackTrace;
-        var aex = new AtlantisException(request, "OptInUpdateInfoRequest.SaveResellerOptIns", message, string.Empty, ex);
+        var aex = new AtlantisException(request, "OptInUpdateInfoRequest.SaveResellerOptIns", message, string.Format("isModified:{0}, relatedOfferOptInStatus:{1}", isModified, relatedOfferOptInStatus), ex);
         Engine.Engine.LogAtlantisException(aex);
         bSuccess = false;
       }

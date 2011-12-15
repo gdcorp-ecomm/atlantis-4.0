@@ -16,16 +16,18 @@ namespace Atlantis.Framework.EcommDelayedPayment.Impl
       try
       {
         EcommDelayedPaymentRequestData ecomRequest = (EcommDelayedPaymentRequestData)requestData;
-        BasketService.WscgdBasketService oSvc = new BasketService.WscgdBasketService();
-        oSvc.Url = ((WsConfigElement)config).WSURL;
-        oSvc.Timeout = (int)ecomRequest.RequestTimeout.TotalMilliseconds;
-        string invoiceID = string.Empty;
-        string redirectDataXML = string.Empty;
-        string errorXML = string.Empty;
-        oSvc.RequestDelayedPurchase(ecomRequest.ToXML(), out invoiceID, out redirectDataXML, out errorXML);
-        System.Diagnostics.Debug.WriteLine(errorXML);
-        System.Diagnostics.Debug.WriteLine(redirectDataXML);
-        responseData = new EcommDelayedPaymentResponseData(requestData,redirectDataXML, errorXML, invoiceID);       
+        using (BasketService.WscgdBasketService oSvc = new BasketService.WscgdBasketService())
+        {
+          oSvc.Url = ((WsConfigElement)config).WSURL;
+          oSvc.Timeout = (int)ecomRequest.RequestTimeout.TotalMilliseconds;
+          string invoiceID = string.Empty;
+          string redirectDataXML = string.Empty;
+          string errorXML = string.Empty;
+          oSvc.RequestDelayedPurchase(ecomRequest.ToXML(), out invoiceID, out redirectDataXML, out errorXML);
+          System.Diagnostics.Debug.WriteLine(errorXML);
+          System.Diagnostics.Debug.WriteLine(redirectDataXML);
+          responseData = new EcommDelayedPaymentResponseData(requestData, redirectDataXML, errorXML, invoiceID);
+        }
       } 
     
       catch (AtlantisException exAtlantis)

@@ -16,18 +16,20 @@ namespace Atlantis.Framework.EcommDelayedProcess.Impl
       try
       {
         EcommDelayedProcessRequestData ecomRequest = (EcommDelayedProcessRequestData)requestData;
-        BasketService.WscgdBasketService oSvc = new BasketService.WscgdBasketService();
-        oSvc.Url = ((WsConfigElement)config).WSURL;
-        oSvc.Timeout = (int)ecomRequest.RequestTimeout.TotalMilliseconds;
-        short result = 0;
-        int callResult = oSvc.ProcessDelayedPurchaseResponse(ecomRequest.InvoiceID, ecomRequest.EncryptedResult, out result);
-        if (result != 1)
+        using (BasketService.WscgdBasketService oSvc = new BasketService.WscgdBasketService())
         {
-          throw new AtlantisException(requestData, "Delayed Payment Processing", "Could not process Order", ecomRequest.InvoiceID);
-        }
-        else
-        {
-          responseData = new EcommDelayedProcessResponseData(result, callResult);
+          oSvc.Url = ((WsConfigElement)config).WSURL;
+          oSvc.Timeout = (int)ecomRequest.RequestTimeout.TotalMilliseconds;
+          short result = 0;
+          int callResult = oSvc.ProcessDelayedPurchaseResponse(ecomRequest.InvoiceID, ecomRequest.EncryptedResult, out result);
+          if (result != 1)
+          {
+            throw new AtlantisException(requestData, "Delayed Payment Processing", "Could not process Order", ecomRequest.InvoiceID);
+          }
+          else
+          {
+            responseData = new EcommDelayedProcessResponseData(result, callResult);
+          }
         }
       }
 

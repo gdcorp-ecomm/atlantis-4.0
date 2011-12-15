@@ -8,9 +8,9 @@ using Atlantis.Framework.EcommPaymentProfileUnique.Interface;
 
 namespace Atlantis.Framework.EcommPaymentProfileUnique.Impl
 {
-    public class EcommPaymentProfileUniqueRequest : IRequest
-    {
-        public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
+  public class EcommPaymentProfileUniqueRequest : IRequest
+  {
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
         {
             EcommPaymentProfileUniqueResponseData responseData = null;
 
@@ -23,13 +23,12 @@ namespace Atlantis.Framework.EcommPaymentProfileUnique.Impl
                     !String.IsNullOrEmpty(taskRequest.OrderID))
                 {
 
-                    var service = new PaymentProfileUnique.Service1()
-                    {
-                        Url = ((WsConfigElement)config).WSURL,
-                        Timeout =
-                            (int)
-                            taskRequest.RequestTimeout.TotalMilliseconds
-                    };
+                  using (var service = new PaymentProfileUnique.Service1())
+                  {
+                    service.Url = ((WsConfigElement)config).WSURL;
+                    service.Timeout =
+                        (int)
+                        taskRequest.RequestTimeout.TotalMilliseconds;
                     bool bUsesNonUniquePaymentType = false;
                     string sErrorXml;
                     X509Certificate2 cert = FindCertificate(StoreLocation.LocalMachine, StoreName.My, X509FindType.FindBySubjectName, config.GetConfigValue("CertificateName"));
@@ -40,6 +39,7 @@ namespace Atlantis.Framework.EcommPaymentProfileUnique.Impl
                     bool response = service.IsUniquePaymentProfile(requestData.ShopperID, requestData.OrderID,
                                                                      out bUsesNonUniquePaymentType, out sErrorXml);
                     responseData = new EcommPaymentProfileUniqueResponseData(response, bUsesNonUniquePaymentType, sErrorXml);
+                  }
                 }
                 else
                 {
@@ -58,29 +58,29 @@ namespace Atlantis.Framework.EcommPaymentProfileUnique.Impl
             {
                 responseData = new EcommPaymentProfileUniqueResponseData(requestData, ex);
             }
-
+            
             return responseData;
         }
-        private X509Certificate2 FindCertificate(StoreLocation location, StoreName name, X509FindType findType, string findValue)
-        {
-            X509Store store = new X509Store(name, location);
+    private X509Certificate2 FindCertificate(StoreLocation location, StoreName name, X509FindType findType, string findValue)
+    {
+      X509Store store = new X509Store(name, location);
 
-            try
-            {
-                // create and open store for read-only access
-                store.Open(OpenFlags.ReadOnly);
+      try
+      {
+        // create and open store for read-only access
+        store.Open(OpenFlags.ReadOnly);
 
-                // search store
-                X509Certificate2Collection col = store.Certificates.Find(findType, findValue, true);
+        // search store
+        X509Certificate2Collection col = store.Certificates.Find(findType, findValue, true);
 
-                // return first certificate found
-                return col[0];
-            }
-            // always close the store
-            finally
-            {
-                store.Close();
-            }
-        }
+        // return first certificate found
+        return col[0];
+      }
+      // always close the store
+      finally
+      {
+        store.Close();
+      }
     }
+  }
 }

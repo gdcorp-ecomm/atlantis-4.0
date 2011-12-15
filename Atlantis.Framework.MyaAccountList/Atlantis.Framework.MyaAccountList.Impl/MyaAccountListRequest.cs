@@ -87,6 +87,10 @@ namespace Atlantis.Framework.MyaAccountList.Impl
           {
             command.Parameters.Add(new SqlParameter("@commonNameFilter", request.Filter));
           }
+          if (request.SortColumn != null)
+          {
+            command.Parameters.Add(new SqlParameter("@sortcol", request.SortColumn));
+          }
           if (request.ReturnAll != 0)
           {
             command.Parameters.Add(new SqlParameter("@returnAllFlag", 1));

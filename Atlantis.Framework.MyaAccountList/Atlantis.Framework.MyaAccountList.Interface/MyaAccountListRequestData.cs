@@ -61,7 +61,8 @@ namespace Atlantis.Framework.MyaAccountList.Interface
       , int? daysTillExpiration = null
       , int returnFreeListOnly = 0
       , int returnAllFlag = 0
-      , string filter = null)
+      , string filter = null
+      , string sortColumn = null)
       : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
       AccordionData = accordionData;
@@ -70,6 +71,7 @@ namespace Atlantis.Framework.MyaAccountList.Interface
       PageInfo.CurrentPage = currentPage;
       SortDirection = sortDirection;
       Filter = string.IsNullOrWhiteSpace(filter) ? null : filter;
+      SortColumn = string.IsNullOrWhiteSpace(sortColumn) ? null : sortColumn;
       ReturnFreeListOnly = returnFreeListOnly;
       DaysTillExpiration = daysTillExpiration;
       ReturnAll = returnAllFlag;

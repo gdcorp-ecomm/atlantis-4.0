@@ -13,6 +13,7 @@ namespace Atlantis.Framework.DataProvider.Interface
                              int iPageCount)
                              : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount) 
     {
+      RequestTimeout = TimeSpan.FromSeconds(5d);
     }
 
     public DataProviderRequestData(string sShopperID,
@@ -26,6 +27,7 @@ namespace Atlantis.Framework.DataProvider.Interface
     {
       RequestName = requestName;
       Params = parameters;
+      RequestTimeout = TimeSpan.FromSeconds(5d);
     }
 
     public string RequestName { get; set; }

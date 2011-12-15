@@ -32,7 +32,10 @@ namespace Atlantis.Framework.CMSCreditAccounts.Impl
       }
       finally
       {
-        service.Dispose();
+        if (service != null)
+        {
+          service.Dispose();
+        }
       }
 
       return result;

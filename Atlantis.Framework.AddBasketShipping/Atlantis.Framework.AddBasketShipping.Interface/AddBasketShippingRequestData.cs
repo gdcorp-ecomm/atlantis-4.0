@@ -20,6 +20,7 @@ namespace Atlantis.Framework.AddBasketShipping.Interface
 			: base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
 		{
       _basketType = basketType;
+      RequestTimeout = TimeSpan.FromSeconds(10d);
 		}
 
     public AddBasketShippingRequestData(string sShopperID,
@@ -33,6 +34,7 @@ namespace Atlantis.Framework.AddBasketShipping.Interface
     {
       _basketType = basketType;
       AddAttributes(basketShippingInfo);
+      RequestTimeout = TimeSpan.FromSeconds(10d);
     }
 
     public void AddAttribute(string name, string value)

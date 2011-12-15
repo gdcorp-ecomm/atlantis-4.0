@@ -37,6 +37,7 @@ namespace Atlantis.Framework.GetShopper.Interface
     {
       RequestedBy = "";
       this._IPAddress = GetLocalAddress();
+      RequestTimeout = TimeSpan.FromSeconds(14d);
     }
 
     public GetShopperRequestData(string sShopperID, 
@@ -49,6 +50,7 @@ namespace Atlantis.Framework.GetShopper.Interface
     {
       RequestedBy = sRequestedBy;
       this._IPAddress = GetLocalAddress();
+      RequestTimeout = TimeSpan.FromSeconds(14d);
     }
 
     public GetShopperRequestData(string sShopperID, 
@@ -63,6 +65,7 @@ namespace Atlantis.Framework.GetShopper.Interface
       RequestedBy = sRequestedBy;
       this._IPAddress = GetLocalAddress();
       AddFields(fields);
+      RequestTimeout = TimeSpan.FromSeconds(14d);
     }
 
     public GetShopperRequestData(string sShopperID, 
@@ -76,6 +79,7 @@ namespace Atlantis.Framework.GetShopper.Interface
     {
       RequestedBy = sRequestedBy;
       this.IPAddress = sIPAddress;
+      RequestTimeout = TimeSpan.FromSeconds(14d);
     }
 
     public GetShopperRequestData(string sShopperID, 
@@ -91,6 +95,7 @@ namespace Atlantis.Framework.GetShopper.Interface
       RequestedBy = sRequestedBy;
       this.IPAddress = sIPAddress;
       AddFields(fields);
+      RequestTimeout = TimeSpan.FromSeconds(14d);
     }
 
     public void AddFields(IEnumerable<string> fields)

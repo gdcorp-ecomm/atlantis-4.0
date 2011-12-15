@@ -16,11 +16,13 @@ namespace Atlantis.Framework.ClearBasket.Impl
             try
             {
                 ClearBasketRequestData oClearBasketRequestData = (ClearBasketRequestData)oRequestData;
-                WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService();
-                oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
-
                 sResponseXML = string.Empty;
-                sResponseXML = oBasketWS.ClearByType(oClearBasketRequestData.ShopperID,oClearBasketRequestData.BasketType);
+                using (WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService())
+                {
+                  oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
+                  
+                  sResponseXML = oBasketWS.ClearByType(oClearBasketRequestData.ShopperID, oClearBasketRequestData.BasketType);
+                }
                 if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
                 {
                     AtlantisException exAtlantis = new AtlantisException(oRequestData,

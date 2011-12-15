@@ -14,11 +14,13 @@ namespace Atlantis.Framework.GiftCardBalance.Impl
       string sResponseXML = string.Empty;
       try
       {
-        WscGiftCard.wscGiftCardService oSvc = new WscGiftCard.wscGiftCardService();
-        oSvc.Url = ((WsConfigElement)oConfig).WSURL;
-        string resultXML = string.Empty;
-        int result = oSvc.GetGiftCardBalance(getBalance.AccountNumber,getBalance.OrderID);
-        oResponseData = new GiftCardBalanceResponseData(result);
+        using (WscGiftCard.wscGiftCardService oSvc = new WscGiftCard.wscGiftCardService())
+        {
+          oSvc.Url = ((WsConfigElement)oConfig).WSURL;
+          string resultXML = string.Empty;
+          int result = oSvc.GetGiftCardBalance(getBalance.AccountNumber, getBalance.OrderID);
+          oResponseData = new GiftCardBalanceResponseData(result);
+        }
       }
       catch (AtlantisException exAtlantis)
       {

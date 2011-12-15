@@ -18,11 +18,13 @@ namespace Atlantis.Framework.CMSDomainAvail.Impl
       try
       {
         CMSDomainAvailRequestData cmsRequest = (CMSDomainAvailRequestData)requestData;
-        cmsValidateDomain.CmsCreditSupport service = new cmsValidateDomain.CmsCreditSupport();
-        service.Url = ((WsConfigElement)config).WSURL;
-        service.Timeout = (int)cmsRequest.RequestTimeout.TotalMilliseconds;
-        System.Diagnostics.Debug.WriteLine(cmsRequest.ToXML());
-        responseText = service.IsDomainValidForInstantPage(cmsRequest.ToXML());
+        using (cmsValidateDomain.CmsCreditSupport service = new cmsValidateDomain.CmsCreditSupport())
+        {
+          service.Url = ((WsConfigElement)config).WSURL;
+          service.Timeout = (int)cmsRequest.RequestTimeout.TotalMilliseconds;
+          System.Diagnostics.Debug.WriteLine(cmsRequest.ToXML());
+          responseText = service.IsDomainValidForInstantPage(cmsRequest.ToXML());
+        }
         System.Diagnostics.Debug.WriteLine(responseText);
         result = new CMSDomainAvailResponseData(responseText);
       }

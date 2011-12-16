@@ -18,23 +18,25 @@ namespace Atlantis.Framework.InstantStoreImages.Impl
       InstantStoreImageResponseData oResponseData = null;
       try
       {
-        QuickSetup.QuickSetup oSvc = new QuickSetup.QuickSetup();
-        oSvc.Url = ((WsConfigElement)config).WSURL;
-        oSvc.Timeout = (int)getBalance.RequestTimeout.TotalMilliseconds;
-        string nimitzAuthXml = NetConnect.LookupConnectInfo(config, ConnectLookupType.Xml);
-        string username=string.Empty;
-        string password=string.Empty;
-        bool isAuth= GetConnectionCredentials(nimitzAuthXml,out username,out password);
-        oSvc.Credentials = new System.Net.NetworkCredential(username, password);
-        //BackgroundImageQuickSetupModel[] results = oSvc.GetBackgroundImages();
-        ThemeQuickSetupModel[] results= oSvc.GetThemes();
-        List<ImageData> resultData = new List<ImageData>();
-        foreach (ThemeQuickSetupModel currentModel in results)
+        using (QuickSetup.QuickSetup oSvc = new QuickSetup.QuickSetup())
         {
-          resultData.Add(new ImageData(currentModel.BackgroundId, currentModel.Src, currentModel.ThumbnailSrc,currentModel.DefaultTitle,
-            currentModel.DefaultDescription,currentModel.Categories));
+          oSvc.Url = ((WsConfigElement)config).WSURL;
+          oSvc.Timeout = (int)getBalance.RequestTimeout.TotalMilliseconds;
+          string nimitzAuthXml = NetConnect.LookupConnectInfo(config, ConnectLookupType.Xml);
+          string username = string.Empty;
+          string password = string.Empty;
+          bool isAuth = GetConnectionCredentials(nimitzAuthXml, out username, out password);
+          oSvc.Credentials = new System.Net.NetworkCredential(username, password);
+          //BackgroundImageQuickSetupModel[] results = oSvc.GetBackgroundImages();
+          ThemeQuickSetupModel[] results = oSvc.GetThemes();
+          List<ImageData> resultData = new List<ImageData>();
+          foreach (ThemeQuickSetupModel currentModel in results)
+          {
+            resultData.Add(new ImageData(currentModel.BackgroundId, currentModel.Src, currentModel.ThumbnailSrc, currentModel.DefaultTitle,
+              currentModel.DefaultDescription, currentModel.Categories));
+          }
+          oResponseData = new InstantStoreImageResponseData(resultData);
         }
-        oResponseData = new InstantStoreImageResponseData(resultData);
       }
       catch (AtlantisException exAtlantis)
       {

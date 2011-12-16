@@ -20,35 +20,37 @@ namespace Atlantis.Framework.InstantStoreSetup.Impl
       InstantStoreSetupResponseData oResponseData = null;
       try
       {
-        QuickSetup.QuickSetup oSvc = new QuickSetup.QuickSetup();
-        oSvc.Url = ((WsConfigElement)config).WSURL;
-        oSvc.Timeout = (int)stupAccount.RequestTimeout.TotalMilliseconds;
-        string nimitzAuthXml = NetConnect.LookupConnectInfo(config, ConnectLookupType.Xml);
-        string username = string.Empty;
-        string password = string.Empty;
-        bool isAuth = GetConnectionCredentials(nimitzAuthXml, out username, out password);
-        oSvc.Credentials = new System.Net.NetworkCredential(username, password);
-        List<SimpleSiteQuickSetupModel> storesToSetup = new List<SimpleSiteQuickSetupModel>();
-        foreach (InstantStoreSetupInfo currentInfo in stupAccount.StoresToSetup)
+        using (QuickSetup.QuickSetup oSvc = new QuickSetup.QuickSetup())
         {
-          if (!string.IsNullOrEmpty(currentInfo.OrionAccountUID))
+          oSvc.Url = ((WsConfigElement)config).WSURL;
+          oSvc.Timeout = (int)stupAccount.RequestTimeout.TotalMilliseconds;
+          string nimitzAuthXml = NetConnect.LookupConnectInfo(config, ConnectLookupType.Xml);
+          string username = string.Empty;
+          string password = string.Empty;
+          bool isAuth = GetConnectionCredentials(nimitzAuthXml, out username, out password);
+          oSvc.Credentials = new System.Net.NetworkCredential(username, password);
+          List<SimpleSiteQuickSetupModel> storesToSetup = new List<SimpleSiteQuickSetupModel>();
+          foreach (InstantStoreSetupInfo currentInfo in stupAccount.StoresToSetup)
           {
-            SimpleSiteQuickSetupModel omodel = new SimpleSiteQuickSetupModel();
-            omodel.BackgroundId = currentInfo.BackgroundID;
-            omodel.CategoryIds = currentInfo.CategoryID;
-            omodel.DomainName = currentInfo.DomainName;
-            omodel.EmailAddress = currentInfo.EmailHash;
-            omodel.OrionAccountUid = currentInfo.OrionAccountUID;
-            omodel.SiteDescription = currentInfo.SiteDescription;
-            omodel.SiteTitle = currentInfo.SiteTitle;
-            omodel.PromoCode = currentInfo.PromoCode;
-            storesToSetup.Add(omodel);
+            if (!string.IsNullOrEmpty(currentInfo.OrionAccountUID))
+            {
+              SimpleSiteQuickSetupModel omodel = new SimpleSiteQuickSetupModel();
+              omodel.BackgroundId = currentInfo.BackgroundID;
+              omodel.CategoryIds = currentInfo.CategoryID;
+              omodel.DomainName = currentInfo.DomainName;
+              omodel.EmailAddress = currentInfo.EmailHash;
+              omodel.OrionAccountUid = currentInfo.OrionAccountUID;
+              omodel.SiteDescription = currentInfo.SiteDescription;
+              omodel.SiteTitle = currentInfo.SiteTitle;
+              omodel.PromoCode = currentInfo.PromoCode;
+              storesToSetup.Add(omodel);
+            }
           }
-        }
-        if (storesToSetup.Count >= 1)
-        {
-          oSvc.SetupApplication(storesToSetup.ToArray());
-          oResponseData = new InstantStoreSetupResponseData();
+          if (storesToSetup.Count >= 1)
+          {
+            oSvc.SetupApplication(storesToSetup.ToArray());
+            oResponseData = new InstantStoreSetupResponseData();
+          }
         }
       }
       catch (AtlantisException exAtlantis)

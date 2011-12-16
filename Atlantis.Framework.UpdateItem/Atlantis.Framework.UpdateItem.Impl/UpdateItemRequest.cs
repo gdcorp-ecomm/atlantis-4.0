@@ -21,25 +21,27 @@ namespace Atlantis.Framework.UpdateItem.Impl
       try
       {
         UpdateItemRequestData oUpdateItemRequestData = (UpdateItemRequestData)oRequestData;
-        WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService();
-        oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
-
-        int lockingMode = oUpdateItemRequestData.IsManager ? LOCKMANAGER : LOCKCUSTOMER;
-        sResponseXML = string.Empty;
-        
-        sResponseXML=oBasketWS.UpdateItemByType(oUpdateItemRequestData.ShopperID, oUpdateItemRequestData.BasketType,
-              oUpdateItemRequestData.RowID, oUpdateItemRequestData.ItemID, oUpdateItemRequestData.ItemXML());
-        if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+        using (WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService())
         {
-          AtlantisException exAtlantis = new AtlantisException(oRequestData,
-                                                               "UpdateItemRequest.RequestHandler",
-                                                               sResponseXML,
-                                                               oRequestData.ToXML());
+          oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
+          oBasketWS.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
+          int lockingMode = oUpdateItemRequestData.IsManager ? LOCKMANAGER : LOCKCUSTOMER;
+          sResponseXML = string.Empty;
 
-          oResponseData = new UpdateItemResponseData(sResponseXML, exAtlantis);
+          sResponseXML = oBasketWS.UpdateItemByType(oUpdateItemRequestData.ShopperID, oUpdateItemRequestData.BasketType,
+                oUpdateItemRequestData.RowID, oUpdateItemRequestData.ItemID, oUpdateItemRequestData.ItemXML());
+          if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+          {
+            AtlantisException exAtlantis = new AtlantisException(oRequestData,
+                                                                 "UpdateItemRequest.RequestHandler",
+                                                                 sResponseXML,
+                                                                 oRequestData.ToXML());
+
+            oResponseData = new UpdateItemResponseData(sResponseXML, exAtlantis);
+          }
+          else
+            oResponseData = new UpdateItemResponseData(sResponseXML);
         }
-        else
-          oResponseData = new UpdateItemResponseData(sResponseXML);
       }
       catch (AtlantisException exAtlantis)
       {

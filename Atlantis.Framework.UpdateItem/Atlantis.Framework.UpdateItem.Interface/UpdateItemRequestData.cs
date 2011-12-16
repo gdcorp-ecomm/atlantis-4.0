@@ -21,6 +21,7 @@ namespace Atlantis.Framework.UpdateItem.Interface
       : base(shopperID, sourceURL, orderID, pathway, pageCount)
     {
       _privateLabelID = privateLabelId;
+      RequestTimeout = new TimeSpan(0, 0, 5);
     }
     public UpdateItemRequestData(string shopperID,
                             string sourceURL,
@@ -42,6 +43,7 @@ namespace Atlantis.Framework.UpdateItem.Interface
       RowID = rowID;
       ItemID = itemID;
       _updateParameters.AddRange(parmList);
+      RequestTimeout = new TimeSpan(0, 0, 5);
     }
     public UpdateItemRequestData(string shopperID,
                             string sourceURL,
@@ -54,6 +56,7 @@ namespace Atlantis.Framework.UpdateItem.Interface
     {
       _privateLabelID = privateLabelId;
       _updateParameters.AddRange(itemKeys);
+      RequestTimeout = new TimeSpan(0, 0, 5);
     }
     public string ItemXML()
     {

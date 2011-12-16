@@ -22,31 +22,33 @@ namespace Atlantis.Framework.ModifyItem.Impl
       try
       {
         ModifyItemRequestData oModifyItemRequestData = (ModifyItemRequestData)oRequestData;
-        WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService();
-        oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
-        oBasketWS.Timeout = oModifyItemRequestData.RequestTimeout.Milliseconds;
-        if (oModifyItemRequestData.ItemCount == 0)
+        using (WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService())
         {
+          oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
+          oBasketWS.Timeout = oModifyItemRequestData.RequestTimeout.Milliseconds;
+          if (oModifyItemRequestData.ItemCount == 0)
+          {
             if (!string.IsNullOrEmpty(oModifyItemRequestData.BasketType))
             {
-                sResponseXML = oBasketWS.ModifyItemByType(
-                  oModifyItemRequestData.ShopperID,
-                  oModifyItemRequestData.BasketType,
-                  oModifyItemRequestData.Index,
-                  oModifyItemRequestData.Quantity);
+              sResponseXML = oBasketWS.ModifyItemByType(
+                oModifyItemRequestData.ShopperID,
+                oModifyItemRequestData.BasketType,
+                oModifyItemRequestData.Index,
+                oModifyItemRequestData.Quantity);
             }
             else
             {
-                sResponseXML = oBasketWS.ModifyItem(oModifyItemRequestData.ShopperID,
-                                                    oModifyItemRequestData.Index,
-                                                    oModifyItemRequestData.Quantity);
+              sResponseXML = oBasketWS.ModifyItem(oModifyItemRequestData.ShopperID,
+                                                  oModifyItemRequestData.Index,
+                                                  oModifyItemRequestData.Quantity);
             }
-        }
-        else
-        {
+          }
+          else
+          {
             string requestXML = oModifyItemRequestData.ItemXML();
             sResponseXML = oBasketWS.ModifyItemsByType(oModifyItemRequestData.ShopperID,
                 oModifyItemRequestData.BasketType, requestXML);
+          }
         }
         if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
         {

@@ -23,6 +23,7 @@ namespace Atlantis.Framework.UpdateShopper.Impl
         using (WscgdShopper.WSCgdShopperService shopperWS = new WscgdShopper.WSCgdShopperService())
         {
           shopperWS.Url = ((WsConfigElement)oConfig).WSURL;
+          shopperWS.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
           sResponseXML = shopperWS.UpdateShopper(oSearchRequestData.ToXML());
           if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
           {

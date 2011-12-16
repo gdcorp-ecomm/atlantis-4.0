@@ -48,6 +48,7 @@ namespace Atlantis.Framework.UpdateShopper.Interface
     {
       m_sRequestedBy = sRequestedBy;
       m_sIPAddress = "";
+      RequestTimeout = new TimeSpan(0, 0, 10);
     }
 
 
@@ -63,6 +64,7 @@ namespace Atlantis.Framework.UpdateShopper.Interface
       m_sRequestedBy = sRequestedBy;
       m_sIPAddress = "";
       AddUpdateFields(UpdateFields);
+      RequestTimeout = new TimeSpan(0, 0, 10);
     }
 
 
@@ -77,6 +79,7 @@ namespace Atlantis.Framework.UpdateShopper.Interface
     {
       m_sRequestedBy = sRequestedBy;
       this.IPAddress = sIPAddress;
+      RequestTimeout = new TimeSpan(0, 0, 10);
     }
 
 
@@ -93,6 +96,7 @@ namespace Atlantis.Framework.UpdateShopper.Interface
       m_sRequestedBy = sRequestedBy;
       this.IPAddress = sIPAddress;
       AddUpdateFields(UpdateFields);
+      RequestTimeout = new TimeSpan(0, 0, 10);
     }
 
     public void AddUpdateField(string sFieldName, string sMatchValue)

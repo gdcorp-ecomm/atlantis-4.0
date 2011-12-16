@@ -16,10 +16,12 @@ namespace Atlantis.Framework.ShopperPinSet.Impl
       try
       {
         ShopperPinSetRequestData oShopperPinSetRequestData = (ShopperPinSetRequestData)oRequestData;
-        WscgdShopper.WSCgdShopperService oSvc = new Atlantis.Framework.ShopperPinSet.Impl.WscgdShopper.WSCgdShopperService();
-        oSvc.Url = ((WsConfigElement)oConfig).WSURL;
+        using (WscgdShopper.WSCgdShopperService oSvc = new Atlantis.Framework.ShopperPinSet.Impl.WscgdShopper.WSCgdShopperService())
+        {
+          oSvc.Url = ((WsConfigElement)oConfig).WSURL;
 
-        isSet = oSvc.IsShopperPINSet(oShopperPinSetRequestData.ShopperID);
+          isSet = oSvc.IsShopperPINSet(oShopperPinSetRequestData.ShopperID);
+        }
         if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
         {
           AtlantisException exAtlantis = new AtlantisException(oRequestData,

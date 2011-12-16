@@ -22,6 +22,7 @@
           </xs:complexType>
         </xs:element>
       </xs:sequence>
+      <xs:attribute name="buttontext" type="xs:string" use="optional" />
     </xs:complexType>
   </xs:element>
 </xs:schema>

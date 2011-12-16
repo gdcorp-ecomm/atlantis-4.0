@@ -7,7 +7,6 @@
       <xs:attribute name="cisetup" type="xs:string" use="optional" />
       <xs:attribute name="controlpanelrequiresaccount" type="xs:string" use="required" />
       <xs:attribute name="iconcsscoordinates" type="xs:string" use="required" />
-      <xs:attribute name="isproductofferedfree" type="xs:string" use="required" />
       <xs:attribute name="showsetupformanageronly" type="xs:string" use="required" />
       <xs:attribute name="productgroup" type="xs:string" use="required" />
       <xs:attribute name="cmsdisplaygroupidlist" type="xs:string" use="optional" />

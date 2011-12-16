@@ -108,6 +108,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 								AccordionMetaData.WorkspaceLoginData wsl = p.GetValue(accordion, null) as AccordionMetaData.WorkspaceLoginData;
 								if (wsl.HasLink)
 								{
+									Debug.WriteLine(string.Format("{0}-ButtonText: {1}", p.Name, wsl.ButtonText));
 									StringBuilder sb = new StringBuilder();
 									Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2}", wsl.LinkUrl.Link, wsl.LinkUrl.Page, wsl.LinkUrl.Type)));
 									foreach (string key in wsl.LinkUrl.QsKeys)

@@ -203,12 +203,20 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
     private bool IsWellFormedWorkspaceLoginXml
     {
-      get { return !WorkspaceLoginXDoc.Element("workspace").HasAttributes; }
+      get { return (WorkspaceLoginXDoc.Element("workspace").FirstAttribute == null || !WorkspaceLoginXDoc.Element("workspace").FirstAttribute.Name.Equals("error")); }
     }
 
-    private LinkUrlData ParseWorkspaceLoginXml(XElement workspaceLogin)
+    private LinkUrlData ParseWorkspaceLoginXml(XElement workspaceLoginXml, out string buttonText)
     {
-      return IsWellFormedWorkspaceLoginXml ? (workspaceLogin.HasElements ? ParseLinkUrlXml(workspaceLogin.Element("linkurl")) : null) : null;
+      LinkUrlData linkUrlData = null;
+      buttonText = string.Empty;
+
+      if (IsWellFormedWorkspaceLoginXml && workspaceLoginXml.HasElements)
+      {
+        buttonText = workspaceLoginXml.Attribute("buttontext").Value;
+        linkUrlData = ParseLinkUrlXml(workspaceLoginXml.Element("linkurl"));
+      }
+      return linkUrlData;
     }
     #endregion
 
@@ -327,10 +335,6 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     public CssSpriteCoordinate IconCssCoordinates 
     { 
       get { return SetCoordinates(ParseAccordionXml("iconcsscoordinates")); }
-    }
-    public bool IsProductOfferedFree
-    {
-      get { return string.Compare(ParseAccordionXml("isproductofferedfree"), "true", true) == 0; }
     }
     public int ProductGroup
     {
@@ -483,15 +487,24 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
         get { return LinkUrl != null; }
       }
 
-      public WorkspaceLoginData(LinkUrlData linkUrl)
+      public string ButtonText { get; set; }
+
+      public WorkspaceLoginData(LinkUrlData linkUrl, string buttonText)
       {
         LinkUrl = linkUrl;
+        ButtonText = buttonText;
       }
     }
 
     public WorkspaceLoginData WorkspaceLogin
     {
-      get { return new WorkspaceLoginData(ParseWorkspaceLoginXml(WorkspaceLoginXDoc.Element("workspace"))); }
+      get
+      {
+        string buttonText = string.Empty;
+        LinkUrlData linkUrl = ParseWorkspaceLoginXml(WorkspaceLoginXDoc.Element("workspace"), out buttonText);
+
+        return new WorkspaceLoginData(linkUrl, buttonText);
+      }
     }
     #endregion
 

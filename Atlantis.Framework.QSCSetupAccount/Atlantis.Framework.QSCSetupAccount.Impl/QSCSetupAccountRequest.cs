@@ -17,11 +17,13 @@ namespace Atlantis.Framework.QSCSetupAccount.Impl
       try
       {
         QSCSetupAccountRequestData request = (QSCSetupAccountRequestData)requestData;
-        QSCService.FOSService service = new QSCService.FOSService();
-        service.Url = ((WsConfigElement)config).WSURL;
-        service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
-        acountSetup result = service.setupAccount(request.AccountUID, request.DomainName,request.EmailAddress,request.CompanyName,request.ThemeID);
-        responseData = new QSCSetupAccountResponseData(result.responseCode, result.responseMessage);
+        using (QSCService.FOSService service = new QSCService.FOSService())
+        {
+          service.Url = ((WsConfigElement)config).WSURL;
+          service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+          acountSetup result = service.setupAccount(request.AccountUID, request.DomainName, request.EmailAddress, request.CompanyName, request.ThemeID);
+          responseData = new QSCSetupAccountResponseData(result.responseCode, result.responseMessage);
+        }
       } 
     
       catch (AtlantisException exAtlantis)

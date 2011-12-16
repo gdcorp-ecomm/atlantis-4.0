@@ -15,29 +15,31 @@ namespace Atlantis.Framework.TransferBasket.Impl
       TransferBasketResponseData oResponseData = null;
       string sResponseXML = "";
 
-			WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService();
+			
 
       try
       {
         TransferBasketRequestData oTransferBasketRequestData = (TransferBasketRequestData)oRequestData;
-        
-        oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
-      	oBasketWS.Timeout = (int) oRequestData.RequestTimeout.TotalMilliseconds;
-
-        sResponseXML = string.Empty;
-
-        sResponseXML = oBasketWS.TransferBasket(oTransferBasketRequestData.FromShopperId, oTransferBasketRequestData.ToShopperId);
-        if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+        using (WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService())
         {
-          AtlantisException exAtlantis = new AtlantisException(oRequestData,
-                                                               "TransferBasketRequest.RequestHandler",
-                                                               sResponseXML,
-                                                               oRequestData.ToXML());
+          oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
+          oBasketWS.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
 
-          oResponseData = new TransferBasketResponseData(sResponseXML, exAtlantis);
+          sResponseXML = string.Empty;
+
+          sResponseXML = oBasketWS.TransferBasket(oTransferBasketRequestData.FromShopperId, oTransferBasketRequestData.ToShopperId);
+          if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+          {
+            AtlantisException exAtlantis = new AtlantisException(oRequestData,
+                                                                 "TransferBasketRequest.RequestHandler",
+                                                                 sResponseXML,
+                                                                 oRequestData.ToXML());
+
+            oResponseData = new TransferBasketResponseData(sResponseXML, exAtlantis);
+          }
+          else
+            oResponseData = new TransferBasketResponseData(sResponseXML);
         }
-        else
-          oResponseData = new TransferBasketResponseData(sResponseXML);
       }
       catch (AtlantisException exAtlantis)
       {
@@ -47,10 +49,6 @@ namespace Atlantis.Framework.TransferBasket.Impl
       {
         oResponseData = new TransferBasketResponseData(sResponseXML, oRequestData, ex);
       }
-			finally
-    	{
-    		oBasketWS.Dispose();
-    	}
 			
 
       return oResponseData;

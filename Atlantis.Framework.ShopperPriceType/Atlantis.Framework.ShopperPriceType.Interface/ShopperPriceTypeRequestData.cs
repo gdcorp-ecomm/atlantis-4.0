@@ -18,6 +18,7 @@ namespace Atlantis.Framework.ShopperPriceType.Interface
                                        : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       _privateLabelId = privateLabelId;
+      RequestTimeout = new TimeSpan(0, 0, 5);
     }
 
     public int PrivateLabelID

@@ -17,23 +17,26 @@ namespace Atlantis.Framework.ShopperCreditLine.Impl
       try
       {
         ShopperCreditLineRequestData oShopperCreditRequest = (ShopperCreditLineRequestData)oRequestData;
-        gdLoc.Service oSvc = new gdLoc.Service();
-        oSvc.Url = ((WsConfigElement)oConfig).WSURL;
-        oSvc.Timeout = (int)oShopperCreditRequest.RequestTimeout.TotalMilliseconds;
-        bool shopperLOC;
-        sResponseXML = oSvc.ShopperHasLOC(oShopperCreditRequest.ShopperID, out shopperLOC);
-        if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+        using (gdLoc.Service oSvc = new gdLoc.Service())
         {
-          AtlantisException exAtlantis = new AtlantisException(oRequestData,
-                                                               "ShopperCreditLine.RequestHandler",
-                                                               sResponseXML,
-                                                               oRequestData.ToXML());
+          oSvc.Url = ((WsConfigElement)oConfig).WSURL;
+          oSvc.Timeout = (int)oShopperCreditRequest.RequestTimeout.TotalMilliseconds;
+          bool shopperLOC;
+          sResponseXML = oSvc.ShopperHasLOC(oShopperCreditRequest.ShopperID, out shopperLOC);
 
-          oResponseData = new ShopperCreditLineResponseData(sResponseXML, exAtlantis);
-        }
-        else
-        {
-          oResponseData = new ShopperCreditLineResponseData(sResponseXML, shopperLOC);
+          if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+          {
+            AtlantisException exAtlantis = new AtlantisException(oRequestData,
+                                                                 "ShopperCreditLine.RequestHandler",
+                                                                 sResponseXML,
+                                                                 oRequestData.ToXML());
+
+            oResponseData = new ShopperCreditLineResponseData(sResponseXML, exAtlantis);
+          }
+          else
+          {
+            oResponseData = new ShopperCreditLineResponseData(sResponseXML, shopperLOC);
+          }
         }
       }
       catch (AtlantisException exAtlantis)

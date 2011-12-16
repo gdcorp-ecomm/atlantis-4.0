@@ -11,38 +11,41 @@ namespace Atlantis.Framework.RegGetDotTypeRegistrar.Impl
       IResponseData responseData = null;
       string responseXML = String.Empty;
 
-      RegistrationApiWebSvc.RegistrationApiWebSvc ws = new RegistrationApiWebSvc.RegistrationApiWebSvc();
-
+ 
       try
       {
-        RegGetDotTypeRegistrarRequestData request = (RegGetDotTypeRegistrarRequestData)requestData;
-
-        if (request.IsValid)
+        using (RegistrationApiWebSvc.RegistrationApiWebSvc ws = new RegistrationApiWebSvc.RegistrationApiWebSvc())
         {
-          WsConfigElement ce = (WsConfigElement)configElement;
-          string requestXml = request.ToXML();
-          ws.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
-          ws.Url = ((WsConfigElement)ce).WSURL;
-          responseXML = ws.GetTLDAPI(requestXml);
 
-          if (!string.IsNullOrEmpty(responseXML))
+          RegGetDotTypeRegistrarRequestData request = (RegGetDotTypeRegistrarRequestData)requestData;
+
+          if (request.IsValid)
           {
-            responseData = new RegGetDotTypeRegistrarResponseData(responseXML);
+            WsConfigElement ce = (WsConfigElement)configElement;
+            string requestXml = request.ToXML();
+            ws.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+            ws.Url = ((WsConfigElement)ce).WSURL;
+            responseXML = ws.GetTLDAPI(requestXml);
+
+            if (!string.IsNullOrEmpty(responseXML))
+            {
+              responseData = new RegGetDotTypeRegistrarResponseData(responseXML);
+            }
+            else
+            {
+              throw new AtlantisException(requestData,
+                                          "Framework: RegGetDotTypeRegistrarRequest.RequestHandler",
+                                          "Invalid request, null or empty string returned.",
+                                          string.Empty);
+            }
           }
           else
           {
             throw new AtlantisException(requestData,
                                         "Framework: RegGetDotTypeRegistrarRequest.RequestHandler",
-                                        "Invalid request, null or empty string returned.",
+                                        "Invalid request. DotTypes list cannot be empty.",
                                         string.Empty);
           }
-        }
-        else
-        {
-          throw new AtlantisException(requestData,
-                                      "Framework: RegGetDotTypeRegistrarRequest.RequestHandler",
-                                      "Invalid request. DotTypes list cannot be empty.",
-                                      string.Empty);
         }
       }
       catch (AtlantisException exAtlantis)
@@ -52,10 +55,6 @@ namespace Atlantis.Framework.RegGetDotTypeRegistrar.Impl
       catch (Exception ex)
       {
         responseData = new RegGetDotTypeRegistrarResponseData(requestData, ex);
-      }
-      finally
-      {
-        ws.Dispose();
       }
 
       return responseData;

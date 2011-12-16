@@ -47,6 +47,7 @@ namespace Atlantis.Framework.EEMCreateNewAccount.Impl
     private string CreateNewAccountInputXml(EEMCreateNewAccountRequestData request, int quota, int permissions)
     {
       XElement customer = new XElement("Customer",
+        new XElement("shopper_id", request.ShopperID),
         new XElement("private_label_id", request.PrivateLabelId.ToString()),
         new XElement("billing_date", request.StartDate.ToString()),
         new XElement("customer_billing_type_id", request.BillingType.ToString()),

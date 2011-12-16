@@ -75,6 +75,7 @@ namespace Atlantis.Framework.EEMCreateNewAccount.Tests
 	  
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(response.CustomerId > 0);
     }
   }
 }

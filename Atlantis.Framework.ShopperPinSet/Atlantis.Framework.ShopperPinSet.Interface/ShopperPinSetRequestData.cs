@@ -13,7 +13,7 @@ namespace Atlantis.Framework.ShopperPinSet.Interface
                             int pageCount)
       : base(shopperID, sourceURL, orderID, pathway, pageCount)
     {
-
+      RequestTimeout = new TimeSpan(0, 0, 5);
     }
 
     public override string GetCacheMD5()

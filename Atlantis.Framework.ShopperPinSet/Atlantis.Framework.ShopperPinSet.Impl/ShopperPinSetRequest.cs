@@ -19,7 +19,7 @@ namespace Atlantis.Framework.ShopperPinSet.Impl
         using (WscgdShopper.WSCgdShopperService oSvc = new Atlantis.Framework.ShopperPinSet.Impl.WscgdShopper.WSCgdShopperService())
         {
           oSvc.Url = ((WsConfigElement)oConfig).WSURL;
-
+          oSvc.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
           isSet = oSvc.IsShopperPINSet(oShopperPinSetRequestData.ShopperID);
         }
         if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)

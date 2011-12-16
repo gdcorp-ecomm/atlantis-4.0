@@ -13,7 +13,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
 
       try
       {
-        string metaDataXml = BuildDebugMetaDataXml(); //DataCache.DataCache.GetCacheData("<MyaAccordionMetadata/>");   // = BuildDebugMetaDataXml();
+        string metaDataXml = DataCache.DataCache.GetCacheData("<MyaAccordionMetadata/>");   // = BuildDebugMetaDataXml();
         responseData = new MyaAccordionMetaDataResponseData(metaDataXml);
       }
 

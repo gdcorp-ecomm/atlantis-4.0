@@ -373,5 +373,21 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
       Assert.IsTrue(response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "5300" && plan.IsCurrent) != -1, "ProductPlans 5300 owned failed");
       Assert.IsTrue(response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "5304") != -1, "ProductPlans 5304 failed");
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void GetPlanOptionsOFF1()
+    {
+      var request = new BonsaiGetPlanOptionsRequestData("17874", "http://localhost", string.Empty, string.Empty,
+                                                        0, "OFF1", "onlinestor", "billing", 0, 1);
+
+      var response = Engine.Engine.ProcessRequest(request, 357) as BonsaiGetPlanOptionsResponseData;
+
+      Assert.IsTrue(response != null && response.AtlantisException == null, "Request failed");
+      Assert.IsTrue(response.ProductPlans != null && response.ProductPlans.Count == 2, "ProductPlans count failed");
+
+      Assert.IsTrue(response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "5300" && plan.IsCurrent) != -1, "ProductPlans 5300 owned failed");
+      Assert.IsTrue(response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "5304") != -1, "ProductPlans 5304 failed");
+    }
   }
 }

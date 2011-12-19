@@ -97,6 +97,7 @@
     <Content Include="TestData\LegacyVph1JSON.txt" />
     <Content Include="TestData\LegacyVph2.txt" />
     <Content Include="TestData\LegacyVphEU1.txt" />
+    <Content Include="TestData\OFF1.txt" />
     <Content Include="TestData\SharedHosting1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

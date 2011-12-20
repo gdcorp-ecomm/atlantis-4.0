@@ -11,7 +11,7 @@ namespace Atlantis.Framework.MyaMirageStatus.Tests
     [DeploymentItem("atlantis.config")]
     public void BasicTest()
     {
-      string shopperId = "869270";
+      string shopperId = "alr";
       MyaMirageStatusRequestData request = new MyaMirageStatusRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0);
       MyaMirageStatusResponseData response = Engine.Engine.ProcessRequest(request, 448) as MyaMirageStatusResponseData;
       Assert.IsTrue(response.LastMirageBuild > DateTime.MinValue);

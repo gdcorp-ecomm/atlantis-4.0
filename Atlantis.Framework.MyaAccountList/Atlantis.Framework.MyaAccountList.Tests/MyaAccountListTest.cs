@@ -17,7 +17,7 @@ namespace Atlantis.Framework.MyaAccountList.Tests
     public AccordionMetaData AMD
     {
       //3=Hosting, 1=Domain, 4=Email, 19=DBP, 21=EEM, 7=SEV
-      get { return GetAccordionMetaData(21); }
+      get { return GetAccordionMetaData(7); }
     }
 
     public MyaAccountListTest()

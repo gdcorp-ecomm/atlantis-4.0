@@ -148,23 +148,26 @@ namespace Atlantis.Framework.MyaAccountList.Impl
         {
           foreach (DataRow row in ds.Tables[0].Rows)
           {
-            try
+            if (row["gdshop_product_typeID"].ToString() == "39")
             {
-              SEVReplacementData srd;              
-              response.ReplacementDataDictionary.TryGetValue(Convert.ToInt32(row["resource_id"]), out srd);
-              if (srd == null)
+              try
               {
-                row["externalResourceID"] = "new";
+                SEVReplacementData srd;
+                response.ReplacementDataDictionary.TryGetValue(Convert.ToInt32(row["resource_id"]), out srd);
+                if (srd == null)
+                {
+                  row["externalResourceID"] = "new";
+                }
+                else
+                {
+                  row["externalResourceID"] = srd.UserWebsiteId;
+                  row["commonName"] = srd.WebsiteUrl;
+                }
               }
-              else
+              catch (Exception ex)
               {
-                row["externalResourceID"] = srd.UserWebsiteId;
-                row["commonName"] = srd.WebsiteUrl;
+                throw new AtlantisException(sevRequest, "MyaAccountListRequest::UpdateSEVAccountListData", ex.Message, ex.StackTrace);
               }
-            }
-            catch (Exception ex)
-            {
-              throw new AtlantisException(sevRequest, "MyaAccountListRequest::UpdateSEVAccountListData", ex.Message, ex.StackTrace);
             }
           }
         }
@@ -172,7 +175,10 @@ namespace Atlantis.Framework.MyaAccountList.Impl
         {
           foreach (DataRow row in ds.Tables[0].Rows)
           {
-            row["externalResourceID"] = "new";
+            if (row["gdshop_product_typeID"].ToString() == "39")
+            {
+              row["externalResourceID"] = "new";
+            }
           }
         }
       }

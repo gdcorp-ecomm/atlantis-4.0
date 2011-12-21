@@ -21,6 +21,19 @@ namespace Atlantis.Framework.DomainContactCheck.Interface
       _errorElement.SetAttribute(DomainContactErrorAttributes.Code, iCode.ToString());
       _errorElement.SetAttribute(DomainContactErrorAttributes.Description, sDescription);
       _errorElement.SetAttribute(DomainContactErrorAttributes.ContactType, contactType.ToString());
+      _errorElement.SetAttribute(DomainContactErrorAttributes.DisplayString, String.Empty);
+      _errorElement.SetAttribute(DomainContactErrorAttributes.DotType, String.Empty);
+    }
+
+    public DomainContactError(string sAttribute, int iCode, string sDescription, string displayString, string dotType, int contactType)
+      : this()
+    {
+      _errorElement.SetAttribute(DomainContactErrorAttributes.Attribute, sAttribute);
+      _errorElement.SetAttribute(DomainContactErrorAttributes.Code, iCode.ToString());
+      _errorElement.SetAttribute(DomainContactErrorAttributes.Description, sDescription);
+      _errorElement.SetAttribute(DomainContactErrorAttributes.ContactType, contactType.ToString());
+      _errorElement.SetAttribute(DomainContactErrorAttributes.DisplayString, displayString);
+      _errorElement.SetAttribute(DomainContactErrorAttributes.DotType, dotType);
     }
 
     public DomainContactError(XmlElement errorXml)
@@ -30,6 +43,8 @@ namespace Atlantis.Framework.DomainContactCheck.Interface
       _errorElement.SetAttribute(DomainContactErrorAttributes.Code, errorXml.GetAttribute(DomainContactErrorAttributes.Code));
       _errorElement.SetAttribute(DomainContactErrorAttributes.Description, errorXml.GetAttribute(DomainContactErrorAttributes.Description));
       _errorElement.SetAttribute(DomainContactErrorAttributes.ContactType, errorXml.GetAttribute(DomainContactErrorAttributes.ContactType));
+      _errorElement.SetAttribute(DomainContactErrorAttributes.DisplayString, errorXml.GetAttribute(DomainContactErrorAttributes.DisplayString));
+      _errorElement.SetAttribute(DomainContactErrorAttributes.DotType, errorXml.GetAttribute(DomainContactErrorAttributes.DotType));
     }
 
     #region Properties
@@ -64,13 +79,23 @@ namespace Atlantis.Framework.DomainContactCheck.Interface
       }
     }
 
+    public string DisplayString
+    {
+      get { return _errorElement.GetAttribute(DomainContactErrorAttributes.DisplayString); }
+    }
+    
+    public string DotType
+    {
+      get { return _errorElement.GetAttribute(DomainContactErrorAttributes.DotType); }
+    }
+    
     #endregion
 
     #region ICloneable Members
 
     public override XmlNode Clone()
     {
-      var result = new DomainContactError(Attribute, Code, Description, ContactType);
+      var result = new DomainContactError(Attribute, Code, Description, DisplayString, DotType, ContactType);
       return result;
     }
 

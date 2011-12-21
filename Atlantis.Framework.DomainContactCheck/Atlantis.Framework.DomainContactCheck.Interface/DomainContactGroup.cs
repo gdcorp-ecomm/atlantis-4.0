@@ -238,6 +238,23 @@ namespace Atlantis.Framework.DomainContactCheck.Interface
       return SetContactInt(contactType, domainContact, false);
     }
 
+    public bool SetContacts(DomainContact registrantContact, DomainContact technicalContact, DomainContact administrativeContact, DomainContact billingContact)
+    {
+      if (!this.SkipValidation)
+      {
+        string tldString = GetTldString(Tlds);
+        ValidateContact(registrantContact, tldString, DomainContactCheckRequestData.DomainCheckType.Other, DomainContact.DomainContactType.Registrant, true);
+        ValidateContact(technicalContact, tldString, DomainContactCheckRequestData.DomainCheckType.Other, DomainContact.DomainContactType.Technical, true);
+        ValidateContact(administrativeContact, tldString, DomainContactCheckRequestData.DomainCheckType.Other, DomainContact.DomainContactType.Administrative, true);
+        ValidateContact(billingContact, tldString, DomainContactCheckRequestData.DomainCheckType.Other, DomainContact.DomainContactType.Billing, true);
+      }
+      _domainContactGroup[DomainContact.DomainContactType.Registrant] = registrantContact;
+      _domainContactGroup[DomainContact.DomainContactType.Administrative] = administrativeContact;
+      _domainContactGroup[DomainContact.DomainContactType.Billing] = billingContact;
+      _domainContactGroup[DomainContact.DomainContactType.Technical] = technicalContact;
+      return (((registrantContact.IsValid && technicalContact.IsValid) && administrativeContact.IsValid) && billingContact.IsValid);
+    }
+
     /************************************************************************************/
     /// <summary>
     /// The SetContact (overloaded) function performs a validation of the contact against

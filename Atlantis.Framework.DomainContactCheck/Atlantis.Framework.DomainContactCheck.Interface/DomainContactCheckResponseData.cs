@@ -72,8 +72,10 @@ namespace Atlantis.Framework.DomainContactCheck.Interface
         int iCode;
         int.TryParse(xlError.GetAttribute("code"), out iCode);
         string sDescription = xlError.GetAttribute("desc");
+        string sDisplayString = xlError.GetAttribute("displaystring");
+        string sDotType = xlError.GetAttribute("tld");
 
-        Errors.Add( new DomainContactError(sAttribute, iCode, sDescription, contactType));
+        Errors.Add( new DomainContactError(sAttribute, iCode, sDescription, sDisplayString, sDotType, contactType));
       }
 
       XmlNodeList trusteeNodes = xdDoc.SelectNodes("/contact/trustee");

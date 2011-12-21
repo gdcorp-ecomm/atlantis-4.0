@@ -116,13 +116,18 @@ namespace Atlantis.Framework.DomainCheck.Interface
         int iSyntaxResult = 0;
         string sSyntaxDescription = String.Empty;
         string sResult = String.Empty;
-
+        bool wasTyped = false;
         string sFullName = xlDomain.GetAttribute("name");
 
         sResult = xlDomain.GetAttribute("result");
         Int32.TryParse(sResult, out iAvailable);
         sResult = String.Empty;
 
+        string strTyped = xlDomain.GetAttribute("wasTyped");
+        if (!string.IsNullOrEmpty(strTyped))
+        {
+          wasTyped = strTyped == "1";
+        }
         XmlElement xlSyntax = xlDomain.SelectSingleNode("./syntax") as XmlElement;
         if (xlSyntax != null)
         {
@@ -133,7 +138,7 @@ namespace Atlantis.Framework.DomainCheck.Interface
           sSyntaxDescription = xlSyntax.GetAttribute("description");
         }
 
-        _domainsDictionary[sFullName.ToUpper()] = new DomainAttributes(iAvailable, iSyntaxResult, sSyntaxDescription);
+        _domainsDictionary[sFullName.ToUpper()] = new DomainAttributes(iAvailable, iSyntaxResult, sSyntaxDescription, wasTyped);
       }
     }
 

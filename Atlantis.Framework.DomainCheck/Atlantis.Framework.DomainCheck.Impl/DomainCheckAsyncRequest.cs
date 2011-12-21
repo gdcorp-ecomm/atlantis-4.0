@@ -12,12 +12,12 @@ namespace Atlantis.Framework.DomainCheck.Impl
 
     public IAsyncResult BeginHandleRequest(RequestData oRequestData, ConfigElement oConfig, AsyncCallback oCallback, object oState)
     {
-      DomainCheckRequestData oDomainCheckRequestData = (DomainCheckRequestData)oRequestData;
       AvailCheckWebSvc availCheckService = new AvailCheckWebSvc();
       availCheckService.Url = ((WsConfigElement)oConfig).WSURL;
+      availCheckService.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
 
       AsyncState asyncState = new AsyncState(oRequestData, oConfig, availCheckService, oState);
-      IAsyncResult asyncResult = availCheckService.BeginCheck(oDomainCheckRequestData.ToXML(), oCallback, asyncState);
+      IAsyncResult asyncResult = availCheckService.BeginCheck(oRequestData.ToXML(), oCallback, asyncState);
       return asyncResult;
     }
 

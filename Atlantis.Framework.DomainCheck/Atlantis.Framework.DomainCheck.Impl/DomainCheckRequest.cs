@@ -19,21 +19,19 @@ namespace Atlantis.Framework.DomainCheck.Impl
 
       try
       {
-        DomainCheckRequestData oDomainCheckRequestData = (DomainCheckRequestData)oRequestData;
-
         using (AvailCheckWebSvc availCheckService = new AvailCheckWebSvc())
         {
           availCheckService.Url = ((WsConfigElement)oConfig).WSURL;
-          if (oDomainCheckRequestData.RequestTimeout.TotalMilliseconds > _MAX_SERVICETIMEOUT_MILLISECONDS)
+          if (oRequestData.RequestTimeout.TotalMilliseconds > _MAX_SERVICETIMEOUT_MILLISECONDS)
           {
             availCheckService.Timeout = _MAX_SERVICETIMEOUT_MILLISECONDS;
           }
           else
           {
-            availCheckService.Timeout = (int)oDomainCheckRequestData.RequestTimeout.TotalMilliseconds;
+            availCheckService.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
           }
 
-          string XML = oDomainCheckRequestData.ToXML();
+          string XML = oRequestData.ToXML();
           sResponseXML = availCheckService.Check(XML);
           if (sResponseXML == null)
           {

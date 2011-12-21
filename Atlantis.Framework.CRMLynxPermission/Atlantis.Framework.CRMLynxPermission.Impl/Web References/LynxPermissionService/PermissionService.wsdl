@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetPermissionLevel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="permissionKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="mgrUserId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPermissionLevelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetPermissionLevelResult" type="tns:PermissionLevel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="PermissionLevel">
+        <s:restriction base="s:string">
+          <s:enumeration value="Default" />
+          <s:enumeration value="Restricted" />
+          <s:enumeration value="ReadOnly" />
+          <s:enumeration value="ModifyWithPartialValidation" />
+          <s:enumeration value="ModifyWithValidation" />
+          <s:enumeration value="Modify" />
+          <s:enumeration value="FullAccess" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="UserHasAccess">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="permissionKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="mgrUserId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserHasAccessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserHasAccessResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPermissionLevelSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPermissionLevel" />
+  </wsdl:message>
+  <wsdl:message name="GetPermissionLevelSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPermissionLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserHasAccessSoapIn">
+    <wsdl:part name="parameters" element="tns:UserHasAccess" />
+  </wsdl:message>
+  <wsdl:message name="UserHasAccessSoapOut">
+    <wsdl:part name="parameters" element="tns:UserHasAccessResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PermissionServiceSoap">
+    <wsdl:operation name="GetPermissionLevel">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns permission level for a specific Manager User ID, for a unique permission key.</wsdl:documentation>
+      <wsdl:input message="tns:GetPermissionLevelSoapIn" />
+      <wsdl:output message="tns:GetPermissionLevelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserHasAccess">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns true if a user has full access for the given key.  False otherwise</wsdl:documentation>
+      <wsdl:input message="tns:UserHasAccessSoapIn" />
+      <wsdl:output message="tns:UserHasAccessSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PermissionServiceSoap" type="tns:PermissionServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPermissionLevel">
+      <soap:operation soapAction="http://tempuri.org/GetPermissionLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserHasAccess">
+      <soap:operation soapAction="http://tempuri.org/UserHasAccess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PermissionServiceSoap12" type="tns:PermissionServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPermissionLevel">
+      <soap12:operation soapAction="http://tempuri.org/GetPermissionLevel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserHasAccess">
+      <soap12:operation soapAction="http://tempuri.org/UserHasAccess" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PermissionService">
+    <wsdl:port name="PermissionServiceSoap" binding="tns:PermissionServiceSoap">
+      <soap:address location="http://devcrmapp/LynxWS/PermissionService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PermissionServiceSoap12" binding="tns:PermissionServiceSoap12">
+      <soap12:address location="http://devcrmapp/LynxWS/PermissionService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

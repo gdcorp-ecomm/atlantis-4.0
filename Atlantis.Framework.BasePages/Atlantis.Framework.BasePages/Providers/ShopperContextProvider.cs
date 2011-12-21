@@ -448,7 +448,16 @@ namespace Atlantis.Framework.BasePages.Providers
       {
         if (!_shopperPriceType.HasValue)
         {
-          _shopperPriceType = GetShopperPriceTypeFromSessionCache();
+          if (HttpContext.Current.Session != null)
+          {
+            _shopperPriceType = GetShopperPriceTypeFromSessionCache();
+          }
+          else
+          {
+            //ShopperPriceType won't be cached since "session is null".  The application needs to implement its own caching.
+            //For example, CIF is a WCF service and it doesn't have "session".  So, CIF needs to implement its own caching for this data.
+            _shopperPriceType = GetShopperPriceType();
+          }
         }
         return _shopperPriceType.Value;
       }
@@ -467,6 +476,33 @@ namespace Atlantis.Framework.BasePages.Providers
         {
           ShopperPriceTypeResponseData response =
             SessionCache.SessionCache.GetProcessRequest<ShopperPriceTypeResponseData>(request, BasePageEngineRequests.ShopperPriceType, ShopperPriceTypeCacheTime);
+          result = response.ActivePriceType;
+        }
+        catch (Exception ex)
+        {
+          string msg = "Error getting pricetype for " + ShopperId + ":" + SiteContext.PrivateLabelId.ToString() + Environment.NewLine +
+            ex.Message + Environment.NewLine + ex.StackTrace;
+          AtlantisException aex = new AtlantisException(request, "ShopperContextProvider.GetShopperPriceTypeFromService", msg, request.ToXML());
+          Engine.Engine.LogAtlantisException(aex);
+        }
+      }
+
+      return result;
+    }
+
+    private int GetShopperPriceType()
+    {
+      int result = 0; //ShopperPriceTypes.Standard;
+
+      if (!string.IsNullOrEmpty(ShopperId))
+      {
+        ShopperPriceTypeRequestData request = new ShopperPriceTypeRequestData(
+          ShopperId, HttpContext.Current.Request.Url.ToString(),
+          string.Empty, SiteContext.Pathway, SiteContext.PageCount, SiteContext.PrivateLabelId);
+        try
+        {
+          ShopperPriceTypeResponseData response = (ShopperPriceTypeResponseData)
+            Engine.Engine.ProcessRequest(request, BasePageEngineRequests.ShopperPriceType);
           result = response.ActivePriceType;
         }
         catch (Exception ex)

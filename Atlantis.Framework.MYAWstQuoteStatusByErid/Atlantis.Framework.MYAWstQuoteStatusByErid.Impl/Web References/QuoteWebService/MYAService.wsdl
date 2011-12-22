@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://GoDaddy.Quote.WebService" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://GoDaddy.Quote.WebService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://GoDaddy.Quote.WebService">
+      <s:element name="HealthCheck">
+        <s:complexType />
+      </s:element>
+      <s:element name="HealthCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HealthCheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatusByAccountId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatusByAccountIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStatusByAccountIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HealthCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:HealthCheck" />
+  </wsdl:message>
+  <wsdl:message name="HealthCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:HealthCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusByAccountIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStatusByAccountId" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusByAccountIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStatusByAccountIdResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MYAServiceSoap">
+    <wsdl:operation name="HealthCheck">
+      <wsdl:input message="tns:HealthCheckSoapIn" />
+      <wsdl:output message="tns:HealthCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusByAccountId">
+      <wsdl:input message="tns:GetStatusByAccountIdSoapIn" />
+      <wsdl:output message="tns:GetStatusByAccountIdSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MYAServiceSoap" type="tns:MYAServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HealthCheck">
+      <soap:operation soapAction="http://GoDaddy.Quote.WebService/HealthCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusByAccountId">
+      <soap:operation soapAction="http://GoDaddy.Quote.WebService/GetStatusByAccountId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MYAServiceSoap12" type="tns:MYAServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HealthCheck">
+      <soap12:operation soapAction="http://GoDaddy.Quote.WebService/HealthCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusByAccountId">
+      <soap12:operation soapAction="http://GoDaddy.Quote.WebService/GetStatusByAccountId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MYAService">
+    <wsdl:port name="MYAServiceSoap" binding="tns:MYAServiceSoap">
+      <soap:address location="http://quote-ws.dev.godaddy-com.ide/MYAService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MYAServiceSoap12" binding="tns:MYAServiceSoap12">
+      <soap12:address location="http://quote-ws.dev.godaddy-com.ide/MYAService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

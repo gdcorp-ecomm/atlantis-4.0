@@ -6,7 +6,6 @@ namespace Atlantis.Framework.GuestbookSurveyResults.Interface
 {
   public class GuestbookSurveyResultsRequestData : RequestData
   {
-    public TimeSpan RequestTimeout { get; set; }
     public int SurveyId { get; private set; }
 
     public GuestbookSurveyResultsRequestData(

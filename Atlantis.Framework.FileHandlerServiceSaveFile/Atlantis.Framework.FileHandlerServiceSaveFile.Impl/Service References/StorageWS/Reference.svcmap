@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="037fb7d0-f925-4f35-a771-0f11521a2fb4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="IntakeService.wsdl" MetadataType="Wsdl" ID="0f0a6b67-3dfc-4386-927e-7a6cebe21048" SourceId="1" SourceUrl="http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc?wsdl" />
+    <MetadataFile FileName="FileIntake.xsd" MetadataType="Schema" ID="9b5dcc27-c5d3-4e3d-ae60-0fb0013c109a" SourceId="1" SourceUrl="http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc?xsd=xsd2" />
+    <MetadataFile FileName="FileIntake1.xsd" MetadataType="Schema" ID="a9a3fcc5-07c4-4b01-b9ac-bbc2ec08bdcb" SourceId="1" SourceUrl="http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc?xsd=xsd0" />
+    <MetadataFile FileName="FileIntake2.xsd" MetadataType="Schema" ID="4e99a788-e393-46bf-a5ea-6d13bcf4f814" SourceId="1" SourceUrl="http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

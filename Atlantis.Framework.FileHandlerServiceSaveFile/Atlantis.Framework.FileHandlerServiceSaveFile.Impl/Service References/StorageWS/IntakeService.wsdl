@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:tns="http://tempuri.org/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="IntakeService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IIntakeEcho_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SymmetricBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:ProtectionToken>
+              <wsp:Policy>
+                <sp:SecureConversationToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                  <wsp:Policy>
+                    <sp:RequireDerivedKeys />
+                    <sp:BootstrapPolicy>
+                      <wsp:Policy>
+                        <sp:SignedParts>
+                          <sp:Body />
+                          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+                        </sp:SignedParts>
+                        <sp:EncryptedParts>
+                          <sp:Body />
+                        </sp:EncryptedParts>
+                        <sp:SymmetricBinding>
+                          <wsp:Policy>
+                            <sp:ProtectionToken>
+                              <wsp:Policy>
+                                <sp:SpnegoContextToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                                  <wsp:Policy>
+                                    <sp:RequireDerivedKeys />
+                                  </wsp:Policy>
+                                </sp:SpnegoContextToken>
+                              </wsp:Policy>
+                            </sp:ProtectionToken>
+                            <sp:AlgorithmSuite>
+                              <wsp:Policy>
+                                <sp:Basic256 />
+                              </wsp:Policy>
+                            </sp:AlgorithmSuite>
+                            <sp:Layout>
+                              <wsp:Policy>
+                                <sp:Strict />
+                              </wsp:Policy>
+                            </sp:Layout>
+                            <sp:IncludeTimestamp />
+                            <sp:EncryptSignature />
+                            <sp:OnlySignEntireHeadersAndBody />
+                          </wsp:Policy>
+                        </sp:SymmetricBinding>
+                        <sp:Wss11>
+                          <wsp:Policy>
+                            <sp:MustSupportRefKeyIdentifier />
+                            <sp:MustSupportRefIssuerSerial />
+                            <sp:MustSupportRefThumbprint />
+                            <sp:MustSupportRefEncryptedKey />
+                          </wsp:Policy>
+                        </sp:Wss11>
+                        <sp:Trust10>
+                          <wsp:Policy>
+                            <sp:MustSupportIssuedTokens />
+                            <sp:RequireClientEntropy />
+                            <sp:RequireServerEntropy />
+                          </wsp:Policy>
+                        </sp:Trust10>
+                      </wsp:Policy>
+                    </sp:BootstrapPolicy>
+                  </wsp:Policy>
+                </sp:SecureConversationToken>
+              </wsp:Policy>
+            </sp:ProtectionToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp />
+            <sp:EncryptSignature />
+            <sp:OnlySignEntireHeadersAndBody />
+          </wsp:Policy>
+        </sp:SymmetricBinding>
+        <sp:Wss11 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:MustSupportRefKeyIdentifier />
+            <sp:MustSupportRefIssuerSerial />
+            <sp:MustSupportRefThumbprint />
+            <sp:MustSupportRefEncryptedKey />
+          </wsp:Policy>
+        </sp:Wss11>
+        <sp:Trust10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:MustSupportIssuedTokens />
+            <sp:RequireClientEntropy />
+            <sp:RequireServerEntropy />
+          </wsp:Policy>
+        </sp:Trust10>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IIntakeEcho_Echo_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IIntakeEcho_Echo_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BasicHttpBinding_IIntakeService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsoma:OptimizedMimeSerialization xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BasicHttpBinding_IIntakeServiceRemoteFile_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsoma:OptimizedMimeSerialization xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/Message" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IIntakeEcho_Echo_InputMessage">
+    <wsdl:part name="parameters" element="tns:Echo" />
+  </wsdl:message>
+  <wsdl:message name="IIntakeEcho_Echo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IntakeMessage">
+    <wsdl:part name="parameters" element="tns:IntakeMessage" />
+  </wsdl:message>
+  <wsdl:message name="IntakeMessage_Headers">
+    <wsdl:part name="ApplicationData" element="tns:ApplicationData" />
+    <wsdl:part name="ApplicationKey" element="tns:ApplicationKey" />
+    <wsdl:part name="FileName" element="tns:FileName" />
+    <wsdl:part name="SettingsSet" element="tns:SettingsSet" />
+    <wsdl:part name="SubscriberId" element="tns:SubscriberId" />
+  </wsdl:message>
+  <wsdl:message name="IntakeResponse">
+    <wsdl:part name="parameters" element="tns:IntakeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IntakeResponse_Headers">
+    <wsdl:part name="Success" element="tns:Success" />
+  </wsdl:message>
+  <wsdl:message name="IntakeMessageFilePath">
+    <wsdl:part name="parameters" element="tns:IntakeMessageFilePath" />
+  </wsdl:message>
+  <wsdl:message name="IntakeMessageFilePath_Headers">
+    <wsdl:part name="ApplicationData" element="tns:ApplicationData" />
+    <wsdl:part name="ApplicationKey" element="tns:ApplicationKey" />
+    <wsdl:part name="FileName" element="tns:FileName" />
+    <wsdl:part name="SettingsSet" element="tns:SettingsSet" />
+    <wsdl:part name="SubscriberId" element="tns:SubscriberId" />
+  </wsdl:message>
+  <wsdl:portType name="IIntakeEcho">
+    <wsdl:operation name="Echo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntakeEcho/Echo" message="tns:IIntakeEcho_Echo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntakeEcho/EchoResponse" message="tns:IIntakeEcho_Echo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IIntakeService">
+    <wsdl:operation name="SaveFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntakeService/SaveFile" name="IntakeMessage" message="tns:IntakeMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntakeService/SaveFileResponse" name="IntakeResponse" message="tns:IntakeResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IIntakeServiceRemoteFile">
+    <wsdl:operation name="AcceptFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntakeServiceRemoteFile/AcceptFile" name="IntakeMessageFilePath" message="tns:IntakeMessageFilePath" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntakeServiceRemoteFile/AcceptFileResponse" name="IntakeResponse" message="tns:IntakeResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IIntakeEcho" type="tns:IIntakeEcho">
+    <wsp:PolicyReference URI="#WSHttpBinding_IIntakeEcho_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Echo">
+      <soap12:operation soapAction="http://tempuri.org/IIntakeEcho/Echo" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IIntakeEcho_Echo_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IIntakeEcho_Echo_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IIntakeService" type="tns:IIntakeService">
+    <wsp:PolicyReference URI="#BasicHttpBinding_IIntakeService_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveFile">
+      <soap:operation soapAction="http://tempuri.org/IIntakeService/SaveFile" style="document" />
+      <wsdl:input name="IntakeMessage">
+        <soap:header message="tns:IntakeMessage_Headers" part="ApplicationData" use="literal" />
+        <soap:header message="tns:IntakeMessage_Headers" part="ApplicationKey" use="literal" />
+        <soap:header message="tns:IntakeMessage_Headers" part="FileName" use="literal" />
+        <soap:header message="tns:IntakeMessage_Headers" part="SettingsSet" use="literal" />
+        <soap:header message="tns:IntakeMessage_Headers" part="SubscriberId" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="IntakeResponse">
+        <soap:header message="tns:IntakeResponse_Headers" part="Success" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IIntakeServiceRemoteFile" type="tns:IIntakeServiceRemoteFile">
+    <wsp:PolicyReference URI="#BasicHttpBinding_IIntakeServiceRemoteFile_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AcceptFile">
+      <soap:operation soapAction="http://tempuri.org/IIntakeServiceRemoteFile/AcceptFile" style="document" />
+      <wsdl:input name="IntakeMessageFilePath">
+        <soap:header message="tns:IntakeMessageFilePath_Headers" part="ApplicationData" use="literal" />
+        <soap:header message="tns:IntakeMessageFilePath_Headers" part="ApplicationKey" use="literal" />
+        <soap:header message="tns:IntakeMessageFilePath_Headers" part="FileName" use="literal" />
+        <soap:header message="tns:IntakeMessageFilePath_Headers" part="SettingsSet" use="literal" />
+        <soap:header message="tns:IntakeMessageFilePath_Headers" part="SubscriberId" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="IntakeResponse">
+        <soap:header message="tns:IntakeResponse_Headers" part="Success" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IntakeService">
+    <wsdl:port name="WSHttpBinding_IIntakeEcho" binding="tns:WSHttpBinding_IIntakeEcho">
+      <soap12:address location="http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc/Echo" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc/Echo</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Spn>host/G1DWDVWEB01.jomax.paholdings.com</Spn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IIntakeService" binding="tns:BasicHttpBinding_IIntakeService">
+      <soap:address location="http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IIntakeServiceRemoteFile" binding="tns:BasicHttpBinding_IIntakeServiceRemoteFile">
+      <soap:address location="http://quote-ws.dev.godaddy-com.ide/FileIntake/FileIntake.svc/RemoteFile" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

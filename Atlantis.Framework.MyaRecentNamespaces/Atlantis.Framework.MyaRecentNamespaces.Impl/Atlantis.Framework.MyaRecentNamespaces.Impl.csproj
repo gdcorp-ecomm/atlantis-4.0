@@ -56,6 +56,10 @@
       <Project>{3213E6DB-F026-4F17-A46A-7127F79F6620}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
+      <Project>{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}</Project>
+      <Name>Atlantis.Framework.SessionCache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.MyaRecentNamespaces.Interface\Atlantis.Framework.MyaRecentNamespaces.Interface.csproj">
       <Project>{7DBCB185-DF3C-495B-BD0F-C33E75355006}</Project>
       <Name>Atlantis.Framework.MyaRecentNamespaces.Interface</Name>

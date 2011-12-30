@@ -386,8 +386,8 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Tests
       Assert.IsTrue(response != null && response.AtlantisException == null, "Request failed");
       Assert.IsTrue(response.ProductPlans != null && response.ProductPlans.Count == 2, "ProductPlans count failed");
 
-      Assert.IsTrue(response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "5300" && plan.IsCurrent) != -1, "ProductPlans 5300 owned failed");
-      Assert.IsTrue(response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "5304") != -1, "ProductPlans 5304 failed");
+      Assert.IsTrue(response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "3810" && plan.IsCurrent) != -1, "ProductPlans 3810 owned failed");
+      Assert.IsTrue(response.ProductPlans.FindIndex(plan => plan.UnifiedProductId == "3830") != -1, "ProductPlans 3830 failed");
     }
   }
 }

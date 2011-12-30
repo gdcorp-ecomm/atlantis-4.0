@@ -40,7 +40,7 @@ namespace Atlantis.Framework.BonsaiGetPlanOptions.Impl.Types
       {
         string nodeId = node.Attribute("NodeID").Value;
 
-        if (nodeId != RootNodeId && !reachableNodes.Contains(nodeId))
+        if (nodeId != RootNodeId && !reachableNodes.Contains(nodeId) && node.Attribute("Path").Value != "True")
         {
           continue;
         }

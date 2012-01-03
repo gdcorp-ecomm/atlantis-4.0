@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.GetDomainInfo.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2009-2012"]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2009-2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

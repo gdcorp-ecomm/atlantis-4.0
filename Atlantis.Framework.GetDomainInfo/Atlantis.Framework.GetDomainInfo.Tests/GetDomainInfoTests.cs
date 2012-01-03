@@ -1,5 +1,7 @@
 ﻿using Atlantis.Framework.GetDomainInfo.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.SessionCache;
+using Atlantis.Framework.Testing.MockHttpContext;
 
 namespace Atlantis.Framework.GetDomainInfo.Test
 {
@@ -60,9 +62,11 @@ namespace Atlantis.Framework.GetDomainInfo.Test
     [DeploymentItem("atlantis.config")]
     public void GetDomainInfoTypeBasic()
     {
+      MockHttpContext.SetMockHttpContext("test.aspx", "http://127.0.0.1/test.aspx", string.Empty);
+
       GetDomainInfoRequestData request = new GetDomainInfoRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "849362", "BATHRAKAALI.COM");
 
-      GetDomainInfoResponseData response = (GetDomainInfoResponseData)Engine.Engine.ProcessRequest(request, 93);
+      GetDomainInfoResponseData response = SessionCache.SessionCache.GetProcessRequest<GetDomainInfoResponseData>(request, 93);
 
       Assert.IsTrue(response.IsSuccess);
     }

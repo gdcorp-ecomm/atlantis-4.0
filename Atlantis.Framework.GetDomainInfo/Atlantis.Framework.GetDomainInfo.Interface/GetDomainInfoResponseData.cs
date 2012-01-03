@@ -1,16 +1,19 @@
 using System;
-
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.SessionCache;
 
 
 namespace Atlantis.Framework.GetDomainInfo.Interface
 {
-  public class GetDomainInfoResponseData : IResponseData
+  public class GetDomainInfoResponseData : IResponseData, ISessionSerializableResponse
   {
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
     private bool _success = false;
 
+    public GetDomainInfoResponseData()
+    {
+    }
 
     public GetDomainInfoResponseData(string resultXML)
     {
@@ -51,6 +54,23 @@ namespace Atlantis.Framework.GetDomainInfo.Interface
       }
     }
     #endregion
+
+    #region Implementation of ISessionSerializableResponse
+
+    public string SerializeSessionData()
+    {
+      return ToXML();
+    }
+
+    public void DeserializeSessionData(string sessionData)
+    {
+      _success = true;
+      _resultXML = sessionData;
+    }
+
+
+    #endregion
+
 
   }
 }

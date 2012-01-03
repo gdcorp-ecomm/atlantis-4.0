@@ -75,6 +75,10 @@
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
+      <Project>{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}</Project>
+      <Name>Atlantis.Framework.SessionCache</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

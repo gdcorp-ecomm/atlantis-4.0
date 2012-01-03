@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using Atlantis.Framework.Interface;
+using System.Security.Cryptography;
 
 namespace Atlantis.Framework.GetDomainInfo.Interface
 {
@@ -76,7 +77,13 @@ namespace Atlantis.Framework.GetDomainInfo.Interface
 
     public override string GetCacheMD5()
     {
-      throw new Exception("GetDomainInfo is not a chacheable request.");
+      MD5 md5 = new MD5CryptoServiceProvider();
+
+      byte[] data = Encoding.UTF8.GetBytes("GetDomainInfoRequestData::" + _shopperId + ":" + _domainName);
+
+      byte[] hash = md5.ComputeHash(data);
+      string result = Encoding.UTF8.GetString(hash);
+      return result;
     }
   }
 }

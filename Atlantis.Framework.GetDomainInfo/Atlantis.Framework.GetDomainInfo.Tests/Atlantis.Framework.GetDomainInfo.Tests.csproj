@@ -84,6 +84,14 @@
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
+      <Project>{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}</Project>
+      <Name>Atlantis.Framework.SessionCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
+      <Project>{2F8983B4-801B-461A-9D76-26A58A496261}</Project>
+      <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.GetDomainInfo.Impl\Atlantis.Framework.GetDomainInfo.Impl.csproj">
       <Project>{5B6DA637-BEFD-4E21-BC69-AF1AEA96428B}</Project>
       <Name>Atlantis.Framework.GetDomainInfo.Impl</Name>

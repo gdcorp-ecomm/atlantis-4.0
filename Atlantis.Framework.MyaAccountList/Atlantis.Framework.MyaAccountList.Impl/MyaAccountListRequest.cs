@@ -37,13 +37,9 @@ namespace Atlantis.Framework.MyaAccountList.Impl
 
         responseData = new MyaAccountListResponseData(ds, totalPages, totalRecords);
       }
-      catch (AtlantisException exAtlantis)
-      {
-        responseData = new MyaAccountListResponseData(exAtlantis);
-      }
       catch (Exception ex)
-        {
-        responseData = new MyaAccountListResponseData(requestData, ex);
+      {
+        responseData = new MyaAccountListResponseData(request, ex);
       }
 
       return responseData;

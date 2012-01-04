@@ -21,15 +21,11 @@ namespace Atlantis.Framework.MyaAccountList.Interface
       _success = (returnAccountList != null);
     }
 
-    public MyaAccountListResponseData(AtlantisException atlantisException)
-    {
-      _atlException = atlantisException;
-    }
-
-    public MyaAccountListResponseData(RequestData oRequestData, Exception ex)
+    public MyaAccountListResponseData(MyaAccountListRequestData requestData, Exception ex)
     {
       _success = false;
-      _atlException = new AtlantisException(oRequestData, "MyaAccountListResponseData", ex.Message, string.Empty);
+      string data = string.Format("StoredProc: {0} | FreeOnly: {1} | ReturnAll: {2} | Filter: {3} | DaysToExpire: {4}", requestData.StoredProcName, requestData.ReturnFreeListOnly, requestData.ReturnAll, requestData.Filter, requestData.DaysTillExpiration);
+      _atlException = new AtlantisException(requestData, "MyaAccountListResponseData", ex.Message, data);
     }
 
     public bool IsSuccess

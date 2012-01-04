@@ -1,0 +1,34 @@
+﻿<Bonsai xmlns="#Bonsai">
+  <Bonsai PrivateLabelID="1" ResourceID="89912a94-c51d-11e0-873c-842b2bfb08b7" IsPastDue="False" IsFree="False" CurrentTreeID="617" CurrentUnifiedProductID="759" xmlns="">
+    <Tree TreeID="617" NodeID="1026" UnifiedProductID="759" IsFree="False">
+      <Transition NodeID="1030" NodeName="Personal Email (1 GB Total/1 Box)" UnifiedProductID="1865" TreeID="621" IsFree="False" />
+      <Transition NodeID="1008" NodeName="Deluxe Email (2 GB Total/5 Boxes)" UnifiedProductID="1866" TreeID="599" IsFree="False" />
+      <Transition NodeID="1199" NodeName="Personal EU Email (1 GB Total/1 Box)" UnifiedProductID="6413" TreeID="774" IsFree="False" />
+      <Transition NodeID="1201" NodeName="Deluxe EU Email (2 GB Total/5 Boxes)" UnifiedProductID="6414" TreeID="775" IsFree="False" />
+      <Transition NodeID="1179" NodeName="Unlimited EU Email (Unlimited Storage/10 Boxes)" UnifiedProductID="6401" TreeID="759" IsFree="False" />
+      <Transition NodeID="1402" NodeName="Unlimited AP Email (Unlimited Storage/10 Boxes)" UnifiedProductID="7401" TreeID="882" IsFree="False" />
+      <Transition NodeID="1415" NodeName="Personal AP Email (1 GB Total/1 Box)" UnifiedProductID="7413" TreeID="895" IsFree="False" />
+      <Transition NodeID="1416" NodeName="Deluxe AP Email (2 GB Total/5 Boxes)" UnifiedProductID="7414" TreeID="896" IsFree="False" />
+      <Branch BranchID="686" Index="0">
+        <Node NodeID="1066" NodeName="Additional Users" CategoryName="Email Users - Addon" CategoryID="44" MinQty="1" MaxQty="-1" Path="True" CurrentQty="1" MinDuration="1" MaxDuration="-1" IsQuantityBased="False" Increment="1" Final="False" Start="False" Default="False" UnifiedProductID="">
+          <Transition NodeID="1067" NodeName="No Additional Users" />
+          <Transition NodeID="1068" NodeName="Additional Users" />
+        </Node>
+        <Node NodeID="1067" NodeName="No Additional Users" CategoryName="Email Users - Addon" CategoryID="44" MinQty="0" MaxQty="-1" Path="True" CurrentQty="0" MinDuration="1" MaxDuration="-1" IsQuantityBased="True" Increment="0" Final="True" Start="True" Default="True" UnifiedProductID="">
+          <Transition NodeID="1066" NodeName="Additional Users" />
+        </Node>
+        <Node NodeID="1068" NodeName="Additional Users" CategoryName="Email Users - Addon" CategoryID="44" MinQty="1" MaxQty="100" Path="False" CurrentQty="0" MinDuration="1" MaxDuration="-1" IsQuantityBased="True" Increment="5" Final="True" Start="False" Default="False" UnifiedProductID="774">
+          <Transition NodeID="1066" NodeName="Additional Users" />
+        </Node>
+      </Branch>
+      <Branch BranchID="834" Index="0">
+        <Node NodeID="1223" NodeName="Additional Storage" CategoryName="Email Storage - Addon" CategoryID="45" MinQty="1" MaxQty="-1" Path="True" CurrentQty="1" MinDuration="1" MaxDuration="-1" IsQuantityBased="False" Increment="1" Final="False" Start="False" Default="False" UnifiedProductID="">
+          <Transition NodeID="1224" NodeName="No Additional Storage" />
+        </Node>
+        <Node NodeID="1224" NodeName="No Additional Storage" CategoryName="Email Storage - Addon" CategoryID="45" MinQty="0" MaxQty="-1" Path="True" CurrentQty="0" MinDuration="1" MaxDuration="-1" IsQuantityBased="True" Increment="0" Final="True" Start="True" Default="True" UnifiedProductID="">
+          <Transition NodeID="1223" NodeName="Additional Storage" />
+        </Node>
+      </Branch>
+    </Tree>
+  </Bonsai>
+</Bonsai>

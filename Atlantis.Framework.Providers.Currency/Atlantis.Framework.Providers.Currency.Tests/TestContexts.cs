@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Atlantis.Framework.Interface;
 using System.Web;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Providers.Currency.Tests
 {
@@ -17,7 +14,8 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       : base(providerContainer)
     {
       _privateLabelId = 1;
-      _shopperId = "aq8";
+      //_shopperId = "865129";
+      _shopperId = "77311";
     }
 
     public TestContexts(IProviderContainer providerContainer, int privateLabelId, string shopperId, System.Web.HttpContext httpContext)
@@ -166,7 +164,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests
 
     public ShopperStatusType ShopperStatus
     {
-      get { return ShopperStatusType.Public; }
+      get { return ShopperStatusType.Authenticated; }
     }
 
     public void ClearShopper()
@@ -193,7 +191,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests
 
     public int ShopperPriceType
     {
-      get { return 0; }
+      get { return 0; }// 8; }
     }
 
     #endregion

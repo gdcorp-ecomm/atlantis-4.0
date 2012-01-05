@@ -1,11 +1,14 @@
 ﻿using System;
-using Atlantis.Framework.Providers.Interface.Preferences;
-using Atlantis.Framework.Providers.Preferences;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.Providers.Interface.Currency;
-using Atlantis.Framework.Testing.MockHttpContext;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Interface.Currency;
+using Atlantis.Framework.Providers.Interface.Preferences;
+using Atlantis.Framework.Providers.Interface.Products;
+using Atlantis.Framework.Providers.Interface.PromoData;
+using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Providers.Preferences;
+using Atlantis.Framework.Providers.PromoData;
+using Atlantis.Framework.Testing.MockHttpContext;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.Providers.Currency.Tests
 {
@@ -22,11 +25,15 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       HttpProviderContainer.Instance.RegisterProvider<IShopperContext, TestContexts>();
       HttpProviderContainer.Instance.RegisterProvider<IManagerContext, TestContexts>();
       HttpProviderContainer.Instance.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<IPromoDataProvider, PromoDataProvider>();
       HttpProviderContainer.Instance.RegisterProvider<IShopperPreferencesProvider, ShopperPreferencesProvider>();
 
       ISiteContext siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
       TestContexts testContexts = (TestContexts)siteContext;
       testContexts.SetContext(privateLabelId, shopperId);
+
+      IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
+      shopperContext.SetLoggedInShopper(shopperId);
     }
 
     private void SetContextsWithoutShopperPreferences(int privateLabelId, string shopperId)
@@ -36,10 +43,11 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       HttpProviderContainer.Instance.RegisterProvider<IShopperContext, TestContexts>();
       HttpProviderContainer.Instance.RegisterProvider<IManagerContext, TestContexts>();
       HttpProviderContainer.Instance.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<IPromoDataProvider, PromoDataProvider>();
 
       ISiteContext siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
       TestContexts testContexts = (TestContexts)siteContext;
-      testContexts.SetContext(privateLabelId, shopperId);
+      testContexts.SetContext(privateLabelId, shopperId); 
     }
 
     [TestMethod]
@@ -85,12 +93,30 @@ namespace Atlantis.Framework.Providers.Currency.Tests
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
     [DeploymentItem("Interop.gdMiniEncryptLib.dll")]
     [DeploymentItem("atlantis.config")]
+    public void ConvertingIcannFees()
+    {
+      SetContexts(1, "");
+
+      ICurrencyPrice usd18 = new CurrencyPrice(18, CurrencyData.GetCurrencyInfo("USD"), CurrencyPriceType.Transactional);
+      ICurrencyPrice converted = CurrencyProvider.ConvertPrice(usd18, CurrencyData.GetCurrencyInfo("EUR"));
+      Console.WriteLine("EUR=" + converted.Price.ToString());
+
+      converted = CurrencyProvider.ConvertPrice(usd18, CurrencyData.GetCurrencyInfo("AUD"));
+      Console.WriteLine("AUD=" + converted.Price.ToString());
+
+      converted = CurrencyProvider.ConvertPrice(usd18, CurrencyData.GetCurrencyInfo("GBP"));
+      Console.WriteLine("GBP=" + converted.Price.ToString());
+    }
+
+    [TestMethod]
+    [DeploymentItem("Interop.gdDataCacheLib.dll")]
+    [DeploymentItem("Interop.gdMiniEncryptLib.dll")]
+    [DeploymentItem("atlantis.config")]
     public void MultiCurrencyCatalogBasic()
     {
       SetContexts(1, "832652");
       ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
 
-      
       currency.SelectedDisplayCurrencyType = "EUR";
       ICurrencyPrice euroPrice = currency.GetCurrentPrice(101);
       Assert.AreEqual(CurrencyPriceType.Transactional, euroPrice.Type);
@@ -110,21 +136,35 @@ namespace Atlantis.Framework.Providers.Currency.Tests
 
     [TestMethod]
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
-    [DeploymentItem("Interop.gdMiniEncryptLib.dll")]
     [DeploymentItem("atlantis.config")]
-    public void ConvertingIcannFees()
+    public void GetPromoPrice()
     {
-      SetContexts(1, "");
+      SetContextsWithoutShopperPreferences(1, "77311");// regular shopper
+      //SetContextsWithoutShopperPreferences(1, "865129");// ddc shopper
+      IPromoDataProvider promoData = HttpProviderContainer.Instance.Resolve<IPromoDataProvider>();
+      promoData.AddPromoCode("9999testa", "discountCode");
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+      IProductProvider productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
 
-      ICurrencyPrice usd18 = new CurrencyPrice(18, CurrencyData.GetCurrencyInfo("USD"), CurrencyPriceType.Transactional);
-      ICurrencyPrice converted = CurrencyProvider.ConvertPrice(usd18, CurrencyData.GetCurrencyInfo("EUR"));
-      Console.WriteLine("EUR=" + converted.Price.ToString());
+      ICurrencyPrice currentPrice = currency.GetCurrentPrice(101);
+      Assert.IsTrue(currentPrice.Price > 0);
 
-      converted = CurrencyProvider.ConvertPrice(usd18, CurrencyData.GetCurrencyInfo("AUD"));
-      Console.WriteLine("AUD=" + converted.Price.ToString());
+      ICurrencyPrice currentPrice2 = currency.GetCurrentPrice(102);
+      Assert.IsTrue(currentPrice2.Price > 0);
 
-      converted = CurrencyProvider.ConvertPrice(usd18, CurrencyData.GetCurrencyInfo("GBP"));
-      Console.WriteLine("GBP=" + converted.Price.ToString());
+      bool sale = currency.IsProductOnSale(101);
+      Assert.IsTrue(sale);
+
+      ICurrencyPrice currentPriceStd = currency.GetCurrentPrice(101, 0);
+      Assert.IsTrue(currentPriceStd.Price > 0);
+
+      ICurrencyPrice currentPriceByQuantity = currency.GetCurrentPriceByQuantity(101, 1);
+      Assert.IsTrue(currentPriceByQuantity.Price > 0);
+
+      IProduct product = productProvider.GetProduct(101);
+      IProductView productView = productProvider.NewProductView(product);
+      ICurrencyPrice yearlyCurrentPrice = productView.YearlyCurrentPrice;
+      Assert.IsTrue(yearlyCurrentPrice.Price > 0);
     }
 
     [TestMethod]

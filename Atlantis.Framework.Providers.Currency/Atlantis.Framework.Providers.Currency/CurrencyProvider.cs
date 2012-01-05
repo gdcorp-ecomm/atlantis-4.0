@@ -5,6 +5,7 @@ using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Preferences;
+using Atlantis.Framework.Providers.Interface.PromoData;
 
 namespace Atlantis.Framework.Providers.Currency
 {
@@ -340,20 +341,31 @@ namespace Atlantis.Framework.Providers.Currency
     /// <returns></returns>
     public ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType)
     {
+      CurrencyPriceType type;
+      int currentPrice = GetProductCurrentPrice(unifiedProductId, shopperPriceType, out type);
+      int promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
+      ICurrencyPrice result = new CurrencyPrice(promoPrice, SelectedTransactionalCurrencyInfo, type);
+      return result;
+    }
+
+    private int GetProductCurrentPrice(int unifiedProductId, int shopperPriceType, out CurrencyPriceType currencyPriceType)
+    {
       int currentPrice;
       bool wasConverted;
 
-      bool success = DataCache.DataCache.GetPromoPriceEx(SiteContext.PrivateLabelId, unifiedProductId, shopperPriceType, SelectedTransactionalCurrencyType, out currentPrice, out wasConverted);
+      bool success = DataCache.DataCache.GetPromoPriceEx(SiteContext.PrivateLabelId, unifiedProductId, 
+        shopperPriceType, SelectedTransactionalCurrencyType, out currentPrice, out wasConverted);
 
-      CurrencyPriceType type = CurrencyPriceType.Transactional;
+      currencyPriceType = CurrencyPriceType.Transactional;
+
       if (wasConverted)
       {
-        type = CurrencyPriceType.Converted;
-        LogMissingCatalogPrice("CurrencyProvider.GetPromoPriceEx", unifiedProductId, shopperPriceType, 1, SiteContext.PrivateLabelId, SelectedTransactionalCurrencyType);
+        currencyPriceType = CurrencyPriceType.Converted;
+        LogMissingCatalogPrice("CurrencyProvider.GetPromoPriceEx", unifiedProductId, shopperPriceType, 1, 
+          SiteContext.PrivateLabelId, SelectedTransactionalCurrencyType);
       }
 
-      ICurrencyPrice result = new CurrencyPrice(currentPrice, SelectedTransactionalCurrencyInfo, type);
-      return result;
+      return currentPrice;
     }
 
     /// <summary>
@@ -375,20 +387,30 @@ namespace Atlantis.Framework.Providers.Currency
     /// <returns></returns>
     public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType)
     {
+      CurrencyPriceType type;
+      int currentPrice = GetProductCurrentPriceByQuantity(unifiedProductId, quantity, shopperPriceType,  out type);
+      int promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
+      ICurrencyPrice result = new CurrencyPrice(promoPrice, SelectedTransactionalCurrencyInfo, type);
+      return result;
+    }
+
+    private int GetProductCurrentPriceByQuantity(int unifiedProductId, int quantity, 
+      int shopperPriceType, out CurrencyPriceType currencyPriceType)
+    {
       int currentPrice;
       bool wasConverted;
 
       bool success = DataCache.DataCache.GetPromoPriceByQtyEx(SiteContext.PrivateLabelId, unifiedProductId, shopperPriceType, quantity, SelectedTransactionalCurrencyType, out currentPrice, out wasConverted);
 
-      CurrencyPriceType type = CurrencyPriceType.Transactional;
+      currencyPriceType = CurrencyPriceType.Transactional;
+
       if (wasConverted)
       {
-        type = CurrencyPriceType.Converted;
+        currencyPriceType = CurrencyPriceType.Converted;
         LogMissingCatalogPrice("CurrencyProvider.GetPromoPriceByQtyEx", unifiedProductId, shopperPriceType, quantity, SiteContext.PrivateLabelId, SelectedTransactionalCurrencyType);
       }
 
-      ICurrencyPrice result = new CurrencyPrice(currentPrice, SelectedTransactionalCurrencyInfo, type);
-      return result;
+      return currentPrice;
     }
 
     /// <summary>
@@ -409,8 +431,13 @@ namespace Atlantis.Framework.Providers.Currency
     /// <returns>true of the product is on sale for the selected currency type</returns>
     public bool IsProductOnSale(int unifiedProductId)
     {
-      bool result = DataCache.DataCache.IsProductOnSaleForCurrency(
-        SiteContext.PrivateLabelId, unifiedProductId, SelectedTransactionalCurrencyType);
+      bool result = DataCache.DataCache.IsProductOnSaleForCurrency(SiteContext.PrivateLabelId, 
+        unifiedProductId, SelectedTransactionalCurrencyType);
+
+      if ((!result) && (HasPromoData))
+      {
+        result = IsPromoSale(unifiedProductId, ShopperContext.ShopperPriceType);
+      }
       return result;
     }
 
@@ -638,7 +665,6 @@ namespace Atlantis.Framework.Providers.Currency
             {
               convertedDouble = Math.Round(priceToConvert.Price / targetCurrencyInfo.ExchangeRatePricing);
             }
-
             int convertedPrice = Int32.MaxValue;
             if (convertedDouble < Int32.MaxValue)
             {
@@ -652,8 +678,143 @@ namespace Atlantis.Framework.Providers.Currency
       return result;
     }
 
-
     #endregion
 
+    #region Promo Pricing
+
+    private bool _skipPromoDataProviderCheck = false;
+
+    private IPromoDataProvider _promoData;
+    private IPromoDataProvider PromoData
+    {
+      get
+      {
+        if (!_skipPromoDataProviderCheck && _promoData == null && Container.CanResolve<IPromoDataProvider>())
+        {
+          _promoData = Container.Resolve<IPromoDataProvider>();
+        }
+        else
+        {
+          _skipPromoDataProviderCheck = true;
+        }
+
+        return _promoData;
+      }
+    }
+
+    private bool? _hasPromoData;
+    protected bool HasPromoData
+    {
+      get
+      {
+        if (!_hasPromoData.HasValue)
+        {
+          _hasPromoData = (PromoData != null && PromoData.HasPromoCodes);
+        }
+
+        return _hasPromoData.Value;
+      }
+    }
+
+    private Dictionary<int, string> _ProductPromoCodes = new Dictionary<int, string>();
+
+    private int GetPromoPrice(int unifiedProductId, int currentPrice, int shopperPriceType)
+    {
+      int? promoPrice = GetProductPromoPrice(unifiedProductId, currentPrice, shopperPriceType);
+
+      if (!promoPrice.HasValue)
+      {
+        return currentPrice;
+      }
+      else
+      {
+        return promoPrice.Value;
+      }
+    }
+
+    private int? GetProductPromoPrice(int unifiedProductId, int currentPrice, int shopperPriceType)
+    {
+      string key = string.Concat(unifiedProductId.ToString(),
+        "|", shopperPriceType.ToString(),
+        "|", SelectedTransactionalCurrencyType);
+
+      return GetPromoPriceFromDictionary(unifiedProductId, currentPrice, key);
+    }
+
+    private int? GetPromoPriceFromDictionary(int unifiedProductId, int currentPrice, string key)
+    {
+      int? promoPrice;
+
+      if (!this._productPromoPriceByShopperAndCurrencyTypes.TryGetValue(key, out promoPrice))
+      {
+        promoPrice = CalculatePromoPrice(unifiedProductId, currentPrice);
+
+        if (promoPrice.HasValue && (promoPrice < currentPrice))
+        {
+          this._productPromoPriceByShopperAndCurrencyTypes[key] = promoPrice;
+        }
+        else
+        {
+          this._productPromoPriceByShopperAndCurrencyTypes[key] = null;
+        }
+      }
+
+      return promoPrice;
+    }
+
+    private Dictionary<string, int?> _productPromoPriceByShopperAndCurrencyTypes
+      = new Dictionary<string, int?>(StringComparer.InvariantCultureIgnoreCase);
+
+    private bool IsPromoSale(int unifiedProductId, int shopperPriceType)
+    {
+      int? promoPrice;
+      string key = string.Concat(unifiedProductId.ToString(), 
+        "|", shopperPriceType.ToString(), 
+        "|", SelectedTransactionalCurrencyType);
+
+      if (!this._productPromoPriceByShopperAndCurrencyTypes.TryGetValue(key, out promoPrice))
+      {
+        CurrencyPriceType type;
+        int currentPrice = GetProductCurrentPrice(unifiedProductId, ShopperContext.ShopperPriceType, out type);
+        promoPrice = GetPromoPriceFromDictionary(unifiedProductId, currentPrice, key);
+      }
+
+      return promoPrice.HasValue;
+    }
+
+    private int? CalculatePromoPrice(int unifiedProductId, int currentPrice)
+    {
+      string awardType;
+      int? price = null;
+
+      if (PromoData != null)
+      {
+        IPromoData pd = PromoData.GetProductPromoData();
+
+        if (pd != null)
+        {
+          int awardAmound = pd.GetAwardAmount(unifiedProductId,
+            SelectedTransactionalCurrencyType, out awardType);
+
+          if (awardType.Equals("AmountOff", StringComparison.InvariantCultureIgnoreCase))
+          {
+            price = currentPrice - awardAmound;
+          }
+          else if (awardType.Equals("PercentOff", StringComparison.InvariantCultureIgnoreCase))
+          {
+            price = Convert.ToInt32(currentPrice * (100 - awardAmound) / 100);
+          }
+          else if (awardType.Equals("SetAmount", StringComparison.InvariantCultureIgnoreCase)
+            && (currentPrice > awardAmound))
+          {
+            price = awardAmound;
+          }
+        }
+      }
+
+      return price;
+    }
+
+    #endregion Promo Pricing
   }
 }

@@ -40,7 +40,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -66,9 +65,21 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PromoData\Atlantis.Framework.PromoData.Impl\Atlantis.Framework.PromoData.Impl.csproj">
+      <Project>{8EB9D6B2-C2B6-4CD3-BEAE-2C22347A81DA}</Project>
+      <Name>Atlantis.Framework.PromoData.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PromoData\Atlantis.Framework.PromoData.Interface\Atlantis.Framework.PromoData.Interface.csproj">
+      <Project>{42E827B4-1E98-453B-8A36-009C201DD85A}</Project>
+      <Name>Atlantis.Framework.PromoData.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
       <Project>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.PromoData\Atlantis.Framework.Providers.PromoData\Atlantis.Framework.Providers.PromoData.csproj">
+      <Project>{D67BE3FC-BB67-4ADC-A368-98B04B395396}</Project>
+      <Name>Atlantis.Framework.Providers.PromoData</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

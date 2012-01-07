@@ -25,7 +25,7 @@ namespace Atlantis.Framework.BasePages.Providers
     {
       get
       {
-        if(_siteContext == null)
+        if (_siteContext == null)
         {
           _siteContext = Container.Resolve<ISiteContext>();
         }
@@ -33,11 +33,12 @@ namespace Atlantis.Framework.BasePages.Providers
         return _siteContext;
       }
     }
-    
+
     private string _shopperId;
     private ShopperStatusType _status;
 
-    public ShopperContextProvider(IProviderContainer providerContainer) : base(providerContainer)
+    public ShopperContextProvider(IProviderContainer providerContainer)
+      : base(providerContainer)
     {
       DetermineShopperId();
     }
@@ -326,7 +327,7 @@ namespace Atlantis.Framework.BasePages.Providers
     /// <summary>
     /// Sets the cookies AND the logged in shopper.  This should ONLY be used by SSO or when you
     /// are logging in a shopper via SSO and the hosts do not match so the cookies from SSO will not
-    /// be readable by your app. Currently used for DomainsByProxy
+    /// be readable by your app. Ensure you get a design review if you are using this method.
     /// </summary>
     public bool SetLoggedInShopperWithCookieOverride(string shopperId)
     {
@@ -340,22 +341,6 @@ namespace Atlantis.Framework.BasePages.Providers
         _shopperId = shopperId;
         _status = ShopperStatusType.Authenticated;
         _shopperPriceType = null;
-
-        try
-        {
-          // Log the logged in status update
-          string auditMessage = "Shopper " + shopperId + " set to logged in.";
-          AtlantisException auditLog = new AtlantisException(
-            "ShopperContextProvider.SetLoggedInShopperAndCookies", HttpContext.Current.Request.Url.ToString(), "111",
-            auditMessage, string.Empty, shopperId, string.Empty, HttpContext.Current.Request.UserHostAddress,
-            SiteContext.Pathway, SiteContext.PageCount);
-          Engine.Engine.LogAtlantisException(auditLog);
-        }
-        catch
-        {
-          // eaten, check logging status of Engine.
-        }
-
         result = true;
       }
 

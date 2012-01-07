@@ -113,5 +113,22 @@ namespace Atlantis.Framework.GetShopper.Tests
 
     }
 
+    [TestMethod]
+    [DeploymentItem("Atlantis.Config")]
+    public void NoDuplicateFields()
+    {
+      GetShopperRequestData request = new GetShopperRequestData(
+        "832652", string.Empty, string.Empty, string.Empty, 0);
+      request.AddField("first_name");
+      request.AddField("first_name");
+      request.AddField("firsT_name");
+      request.AddField("last_name");
+
+      string requestXml = request.ToXML().ToLowerInvariant();
+      int first = requestXml.IndexOf("first_name");
+      int last = requestXml.LastIndexOf("first_name");
+      Assert.AreEqual(first, last);
+    }
+
   }
 }

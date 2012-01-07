@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.GetShopper.Interface")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
+[assembly: AssemblyCompany("GoDaddy.com")]
 [assembly: AssemblyProduct("Atlantis.Framework.GetShopper.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2009-2011")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2009-2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,4 +31,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.11.12.15")]
+[assembly: AssemblyFileVersion("4.12.1.6")]

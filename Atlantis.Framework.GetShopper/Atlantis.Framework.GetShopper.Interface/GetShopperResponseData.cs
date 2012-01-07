@@ -6,129 +6,101 @@ namespace Atlantis.Framework.GetShopper.Interface
 {
   public class GetShopperResponseData : IResponseData
   {
-    // **************************************************************** //
+    string _responseXml = null;
+    AtlantisException _exception;
 
-    XmlDocument m_xdResponse = null;
-    string m_sResponseXML = null;
-    AtlantisException m_ex;
-
-    // **************************************************************** //
-
-    public GetShopperResponseData(string sResponseXML)
+    public GetShopperResponseData(string responseXml)
     {
-      m_sResponseXML = sResponseXML;
-      m_ex = null;
+      _responseXml = responseXml;
+      _exception = null;
     }
 
-    // **************************************************************** //
-
-    public GetShopperResponseData(string sResponseXML, AtlantisException ex)
+    public GetShopperResponseData(string responseXml, AtlantisException ex)
     {
-      m_sResponseXML = sResponseXML;
-      m_ex = ex;
+      _responseXml = responseXml;
+      _exception = ex;
     }
 
-    // **************************************************************** //
-
-    public GetShopperResponseData(string sResponseXML, RequestData oRequestData, Exception ex)
+    public GetShopperResponseData(string responseXml, RequestData requestData, Exception ex)
     {
-      m_sResponseXML = sResponseXML;
-      m_ex = new AtlantisException(oRequestData,
+      _responseXml = responseXml;
+      _exception = new AtlantisException(requestData,
                                    "GetShopperResponseData", 
                                    ex.Message.ToString(), 
-                                   oRequestData.ToXML());
+                                   requestData.ToXML());
     }
 
-    // **************************************************************** //
-
-    public string GetField(string sName)
+    XmlDocument _responseDoc = null;    
+    XmlDocument ShopperXmlDoc
     {
-      PopulateFromXML();
+      get
+      {
+        if (_responseDoc == null)
+        {
+          _responseDoc = new XmlDocument();
+          _responseDoc.LoadXml(_responseXml);
+        }
+        return _responseDoc;
+      }
+    }
 
-      string sValue = "";
-      string sXPath = String.Format("/Shopper/Fields/Field[@Name='{0}']", sName);
-      XmlNode xnField = m_xdResponse.SelectSingleNode(sXPath);
+    public string GetField(string fieldName)
+    {
+      string result = string.Empty;
+      string sXPath = String.Format("/Shopper/Fields/Field[@Name='{0}']", fieldName);
+      XmlNode xnField = ShopperXmlDoc.SelectSingleNode(sXPath);
 
       if (xnField != null)
-        sValue = xnField.InnerText;
+        result = xnField.InnerText;
 
-      return sValue;
+      return result;
     }
-
-    // **************************************************************** //
 
     public long GetInterestPref(long lCommTypeID, long lInterestTypeID)
     {
-      PopulateFromXML();
-
-      long lValue = 0;
+      long result = 0;
       string sXPath = String.Format("/Shopper/Preferences/Interest[@CommTypeID='{0}' and @InterestTypeID='{1}']",
                                     lCommTypeID,
                                     lInterestTypeID);
-      XmlElement xlInterest = m_xdResponse.SelectSingleNode(sXPath) as XmlElement;
+      XmlElement xlInterest = ShopperXmlDoc.SelectSingleNode(sXPath) as XmlElement;
 
       if (xlInterest != null)
-        lValue = XmlConvert.ToInt32(xlInterest.GetAttribute("OptIn"));
+        result = XmlConvert.ToInt32(xlInterest.GetAttribute("OptIn"));
 
-      return lValue;
+      return result;
     }
-
-    // **************************************************************** //
 
     public long GetCommunicationPref(long lCommTypeID)
     {
-      PopulateFromXML();
-
-      long lValue = 0;
+      long result = 0;
       string sXPath = String.Format("/Shopper/Preferences/Communication[@CommTypeID='{0}']",
                                     lCommTypeID);
-      XmlElement xlComm = m_xdResponse.SelectSingleNode(sXPath) as XmlElement;
+      XmlElement xlComm = ShopperXmlDoc.SelectSingleNode(sXPath) as XmlElement;
 
       if (xlComm != null)
-        lValue = XmlConvert.ToInt32(xlComm.GetAttribute("OptIn"));
+        result = XmlConvert.ToInt32(xlComm.GetAttribute("OptIn"));
 
-      return lValue;
-    }
-
-    /******************************************************************************/
-
-    private void PopulateFromXML()
-    {
-      if (null != m_xdResponse)
-        return;
-
-      m_xdResponse = new XmlDocument();
-
-      m_xdResponse.LoadXml(m_sResponseXML);
+      return result;
     }
 
     public bool IsSuccess
     {
-      get { return m_sResponseXML.IndexOf("success", StringComparison.OrdinalIgnoreCase) > -1; }
+      get { return _responseXml.IndexOf("success", StringComparison.OrdinalIgnoreCase) > -1; }
     }
-
-    // **************************************************************** //
 
     #region IResponseData Members
 
-    // **************************************************************** //
-
     public string ToXML()
     {
-      return m_sResponseXML;
+      return _responseXml;
     }
-
-    // **************************************************************** //
 
     public AtlantisException GetException()
     {
-      return m_ex;
+      return _exception;
     }
-
-    // **************************************************************** //
 
     #endregion
 
-    // **************************************************************** //
   }
 }

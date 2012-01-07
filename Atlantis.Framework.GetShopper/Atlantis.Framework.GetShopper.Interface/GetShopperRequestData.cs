@@ -13,54 +13,54 @@ namespace Atlantis.Framework.GetShopper.Interface
 
     struct InterestPref
     {
-      public InterestPref(int lComm, int lInterest)
+      public InterestPref(int communicationTypeId, int interestTypeId)
       {
-        this.lCommTypeID = lComm;
-        this.lInterestTypeID = lInterest;
+        this.CommunicationTypeId = communicationTypeId;
+        this.InterestTypeId = interestTypeId;
       }
 
-      public int lCommTypeID;
-      public int lInterestTypeID;
+      public int CommunicationTypeId;
+      public int InterestTypeId;
     }
 
     string _IPAddress;
-    List<string> _fields = new List<string>();
+    HashSet<string> _fields = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
     List<int> _communictionPrefs = new List<int>();
     List<InterestPref> _interestPrefs = new List<InterestPref>();
 
-    public GetShopperRequestData(string sShopperID, 
-                              string sSourceURL, 
-                              string sOrderID, 
-                              string sPathway, 
-                              int iPageCount) 
-                              : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
+    public GetShopperRequestData(string shopperId,
+                              string sourceUrl,
+                              string orderId,
+                              string pathway,
+                              int pageCount)
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      RequestedBy = "";
+      RequestedBy = string.Empty;
       this._IPAddress = GetLocalAddress();
       RequestTimeout = TimeSpan.FromSeconds(14d);
     }
 
-    public GetShopperRequestData(string sShopperID, 
-                              string sSourceURL, 
-                              string sOrderID, 
-                              string sPathway, 
-                              int iPageCount, 
-                              string sRequestedBy) 
-                              : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount) 
+    public GetShopperRequestData(string shopperId,
+                              string sourceUrl,
+                              string orderId,
+                              string pathway,
+                              int pageCount,
+                              string sRequestedBy)
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestedBy = sRequestedBy;
       this._IPAddress = GetLocalAddress();
       RequestTimeout = TimeSpan.FromSeconds(14d);
     }
 
-    public GetShopperRequestData(string sShopperID, 
-                              string sSourceURL, 
-                              string sOrderID, 
-                              string sPathway, 
-                              int iPageCount, 
+    public GetShopperRequestData(string shopperId,
+                              string sourceUrl,
+                              string orderId,
+                              string pathway,
+                              int pageCount,
                               string sRequestedBy,
                               IEnumerable<string> fields)
-                              : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount) 
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestedBy = sRequestedBy;
       this._IPAddress = GetLocalAddress();
@@ -68,29 +68,29 @@ namespace Atlantis.Framework.GetShopper.Interface
       RequestTimeout = TimeSpan.FromSeconds(14d);
     }
 
-    public GetShopperRequestData(string sShopperID, 
-                              string sSourceURL, 
-                              string sOrderID, 
-                              string sPathway, 
-                              int iPageCount, 
-                              string sRequestedBy, 
+    public GetShopperRequestData(string shopperId,
+                              string sourceUrl,
+                              string orderId,
+                              string pathway,
+                              int pageCount,
+                              string sRequestedBy,
                               string sIPAddress)
-                              : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount) 
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestedBy = sRequestedBy;
       this.IPAddress = sIPAddress;
       RequestTimeout = TimeSpan.FromSeconds(14d);
     }
 
-    public GetShopperRequestData(string sShopperID, 
-                              string sSourceURL, 
-                              string sOrderID, 
-                              string sPathway, 
-                              int iPageCount, 
-                              string sRequestedBy, 
+    public GetShopperRequestData(string shopperId,
+                              string sourceUrl,
+                              string orderId,
+                              string pathway,
+                              int pageCount,
+                              string sRequestedBy,
                               string sIPAddress,
                               IEnumerable<string> fields)
-                              : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount) 
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestedBy = sRequestedBy;
       this.IPAddress = sIPAddress;
@@ -100,22 +100,25 @@ namespace Atlantis.Framework.GetShopper.Interface
 
     public void AddFields(IEnumerable<string> fields)
     {
-      _fields.AddRange(fields);
+      foreach (string fieldName in fields)
+      {
+        _fields.Add(fieldName);
+      }
     }
 
-    public void AddField(string sField)
+    public void AddField(string fieldName)
     {
-      _fields.Add(sField);
+      _fields.Add(fieldName);
     }
 
-    public void AddInterestPref(int lCommTypeID, int lInterestTypeID)
+    public void AddInterestPref(int communicationTypeId, int interestTypeId)
     {
-      _interestPrefs.Add(new InterestPref(lCommTypeID, lInterestTypeID));
+      _interestPrefs.Add(new InterestPref(communicationTypeId, interestTypeId));
     }
 
-    public void AddCommunicationPref(int lCommTypeID)
+    public void AddCommunicationPref(int communicationTypeId)
     {
-      _communictionPrefs.Add(lCommTypeID);
+      _communictionPrefs.Add(communicationTypeId);
     }
 
     public string IPAddress
@@ -123,7 +126,7 @@ namespace Atlantis.Framework.GetShopper.Interface
       get { return _IPAddress; }
       set
       {
-        _IPAddress = "";
+        _IPAddress = string.Empty;
         IPAddress address = null;
         if (System.Net.IPAddress.TryParse(value, out address))
           _IPAddress = address.ToString();
@@ -134,24 +137,23 @@ namespace Atlantis.Framework.GetShopper.Interface
 
     string GetLocalAddress()
     {
-      string sLocalAddress = "";
+      string result = string.Empty;
 
       IPAddress[] addresses = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
-
       if (addresses.Length > 0)
-        sLocalAddress = addresses[0].ToString();
+        result = addresses[0].ToString();
 
-      return sLocalAddress;
+      return result;
     }
 
     #region RequestData Members
-    
-    public override string  GetCacheMD5()
+
+    public override string GetCacheMD5()
     {
-      throw new  Exception("GetShopper is not a cacheable request.");
+      throw new Exception("GetShopper is not a cacheable request.");
     }
 
-    public override  string ToXML()
+    public override string ToXML()
     {
       StringBuilder sbRequest = new StringBuilder();
       XmlTextWriter xtwRequest = new XmlTextWriter(new StringWriter(sbRequest));
@@ -174,8 +176,8 @@ namespace Atlantis.Framework.GetShopper.Interface
       foreach (InterestPref interest in _interestPrefs)
       {
         xtwRequest.WriteStartElement("Interest");
-        xtwRequest.WriteAttributeString("CommTypeID", interest.lCommTypeID.ToString());
-        xtwRequest.WriteAttributeString("InterestTypeID", interest.lInterestTypeID.ToString());
+        xtwRequest.WriteAttributeString("CommTypeID", interest.CommunicationTypeId.ToString());
+        xtwRequest.WriteAttributeString("InterestTypeID", interest.InterestTypeId.ToString());
         xtwRequest.WriteEndElement(); // Interest
       }
       foreach (int lCommTypeID in _communictionPrefs)

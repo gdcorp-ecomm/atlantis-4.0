@@ -7,8 +7,7 @@ namespace Atlantis.Framework.EEMResellerOptIn.Impl
 {
   public class EEMResellerOptInRequest : IRequest
   {
-    private const string EEM_WS_APP_SETTING = "EEM_UNSUB_SVC";
-
+ 
     #region Implementation of IRequest
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
@@ -18,7 +17,7 @@ namespace Atlantis.Framework.EEMResellerOptIn.Impl
       try
       {
         EemWs.CampaignBlazer eem = new CampaignBlazer();
-        eem.Url = DataCache.DataCache.GetAppSetting(EEM_WS_APP_SETTING);
+        eem.Url = ((WsConfigElement)config).WSURL;
         eem.Timeout = (int)((EEMResellerOptInRequestData)requestData).RequestTimeout.TotalMilliseconds;
         eem.ResellerOptIn(requestData.ToXML());
         

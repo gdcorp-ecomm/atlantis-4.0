@@ -290,14 +290,14 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     public bool? IsAllInnerXmlValid { get; private set; }
 
     #region Stored Database Properties
-    public int AccordionId { get; set; }
-    public string AccordionTitle { get; set; }
-    public string AccordionXml { get; set; }
-    public string ContentXml { get; set; }
-    public string ControlPanelXml { get; set; }
-    public int DefaultSortOrder { get; set; }
-    public HashSet<string> Namespaces { get; set; }
-    public string WorkspaceLoginXml { get; set; }
+    public int AccordionId { get; private set; }
+    public string AccordionTitle { get; private set; }
+    private string AccordionXml { get; set; }
+    private string ContentXml { get; set; }
+    private string ControlPanelXml { get; set; }
+    public int DefaultSortOrder { get; private set; }
+    public HashSet<string> Namespaces { get; private set; }
+    private string WorkspaceLoginXml { get; set; }
     #endregion
 
     #region Derived Accordion Xml Properties
@@ -316,46 +316,16 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
         Height = height;
       }
     }
-    public string CiExpansion 
-    {
-      get { return ParseAccordionXml("ciexpansion"); }
-    }
-    public string CiRenewNow
-    {
-      get { return ParseAccordionXml("cirenewnow"); }
-    }
-    public string CiSetup
-    {
-      get { return ParseAccordionXml("cisetup"); }    
-    }
-    public List<int> CmsDisplayGroups
-    {
-      get { return SetCmsDisplayGroups(ParseAccordionXml("cmsdisplaygroupidlist")); }
-    }
-    public CssSpriteCoordinate IconCssCoordinates 
-    { 
-      get { return SetCoordinates(ParseAccordionXml("iconcsscoordinates")); }
-    }
-    public int ProductGroup
-    {
-      get { return Convert.ToInt32(ParseAccordionXml("productgroup")); }
-    }
-    public bool ShowControlPanel
-    {
-      get { return string.Compare(ParseAccordionXml("controlpanelrequiresaccount"), "false", true) == 0; }
-    }
-    public bool ShowSetupForManagerOnly
-    {
-      get { return string.Compare(ParseAccordionXml("showsetupformanageronly"), "true", true) == 0; }
-    }
-    public string OrionProductName
-    {
-      get { return ParseAccordionXml("orionproductname"); }
-    }
-    public bool IsBundleProduct
-    {
-      get { return string.Compare(ParseAccordionXml("isbundle"), "true", true) == 0; }
-    }
+    public string CiExpansion { get; private set; }
+    public string CiRenewNow { get; private set; }
+    public string CiSetup { get; private set; }
+    public List<int> CmsDisplayGroups { get; private set; }
+    public CssSpriteCoordinate IconCssCoordinates { get; private set; }
+    public int ProductGroup { get; private set; }
+    public bool ShowControlPanel { get; private set; }
+    public bool ShowSetupForManagerOnly { get; private set; }
+    public string OrionProductName { get; private set; }
+    public bool IsBundleProduct { get; private set; }
     #endregion
 
     #region Derived Content Xml Properties
@@ -392,32 +362,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
         LinkUrl = null;
       }
     }
-    public ContentData Content
-    {
-      get 
-      { 
-        ContentData content;
-        XElement link;
-        try
-        {
-          link = ContentXDoc.Element("content").Element("data").Element("linkurl");
-        }
-        catch
-        {
-          link = null;
-        }
-        if (link == null)
-        {
-          content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"));
-        }
-        else
-        {
-          content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentBuyLinkXml(link));
-        }
-
-        return content;
-      }
-    }
+    public ContentData Content { get; private set; }
     #endregion
 
     #region Derived ControlPanel Xml Properties
@@ -440,10 +385,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       }
     }
 
-    public ControlPanelData ControlPanels
-    {
-      get { return new ControlPanelData(ParseControlPanelXml(ControlPanelXDoc.Element("controlpanels"))); }
-    }
+    public ControlPanelData ControlPanels { get; private set; }
     #endregion
 
     #region Derived LinkUrl Xml Properties
@@ -496,23 +438,78 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       }
     }
 
-    public WorkspaceLoginData WorkspaceLogin
-    {
-      get
-      {
-        string buttonText = string.Empty;
-        LinkUrlData linkUrl = ParseWorkspaceLoginXml(WorkspaceLoginXDoc.Element("workspace"), out buttonText);
-
-        return new WorkspaceLoginData(linkUrl, buttonText);
-      }
-    }
+    public WorkspaceLoginData WorkspaceLogin { get; private set; }
     #endregion
 
     #endregion
 
     #region Constructor
-    public AccordionMetaData()
-    { }
+    public AccordionMetaData(XElement accordion)
+    {
+      AccordionId = Convert.ToInt32(accordion.Attribute("accordionId").Value);
+      AccordionTitle = accordion.Attribute("accordionTitle").Value;
+      AccordionXml = accordion.Attribute("accordionXml").Value;
+      ContentXml = accordion.Attribute("contentXml").Value;
+      ControlPanelXml = accordion.Attribute("controlPanelXml").Value;
+      DefaultSortOrder = Convert.ToInt32(accordion.Attribute("defaultSortOrder").Value);
+      Namespaces = new HashSet<string>(Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", string.Empty).Split(','), StringComparer.InvariantCultureIgnoreCase);
+      WorkspaceLoginXml = accordion.Attribute("workspaceLoginXml").Value;
+      SetAccordionXmlAttributes();
+      Content = SetContentProperty();
+      ControlPanels = SetControlPanelProperty();
+      WorkspaceLogin = SetWorkspaceLoginProperty();
+    }
+
+    private void SetAccordionXmlAttributes()
+    {
+      CiExpansion = ParseAccordionXml("ciexpansion");
+      CiRenewNow = ParseAccordionXml("cirenewnow");
+      CiSetup = ParseAccordionXml("cisetup");
+      CmsDisplayGroups = SetCmsDisplayGroups(ParseAccordionXml("cmsdisplaygroupidlist"));
+      IconCssCoordinates = SetCoordinates(ParseAccordionXml("iconcsscoordinates"));
+      ProductGroup = Convert.ToInt32(ParseAccordionXml("productgroup"));
+      ShowControlPanel = string.Compare(ParseAccordionXml("controlpanelrequiresaccount"), "false", true) == 0;
+      ShowSetupForManagerOnly = string.Compare(ParseAccordionXml("showsetupformanageronly"), "true", true) == 0;
+      OrionProductName = ParseAccordionXml("orionproductname");
+      IsBundleProduct = string.Compare(ParseAccordionXml("isbundle"), "true", true) == 0;
+    }
+
+    private ContentData SetContentProperty()
+    {
+      ContentData content;
+      XElement link;
+      try
+      {
+        link = ContentXDoc.Element("content").Element("data").Element("linkurl");
+      }
+      catch
+      {
+        link = null;
+      }
+      if (link == null)
+      {
+        content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"));
+      }
+      else
+      {
+        content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentBuyLinkXml(link));
+      }
+
+      return content;
+    }
+    
+    private ControlPanelData SetControlPanelProperty()
+    {
+      return new ControlPanelData(ParseControlPanelXml(ControlPanelXDoc.Element("controlpanels")));
+    }
+
+    private WorkspaceLoginData SetWorkspaceLoginProperty()
+    {
+      string buttonText = string.Empty;
+      LinkUrlData linkUrl = ParseWorkspaceLoginXml(WorkspaceLoginXDoc.Element("workspace"), out buttonText);
+
+      return new WorkspaceLoginData(linkUrl, buttonText);
+    }
     #endregion
 
     #region Private Methods

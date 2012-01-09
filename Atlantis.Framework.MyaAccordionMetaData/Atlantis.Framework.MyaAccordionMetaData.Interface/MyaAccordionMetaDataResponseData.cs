@@ -88,17 +88,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       {
         XDocument xDoc = XDocument.Parse(metaDataXml);
         _accordionMetaDataList = (from accordion in xDoc.Element("data").Elements()
-                      select new AccordionMetaData()
-                      {
-                        AccordionId = Convert.ToInt32(accordion.Attribute("accordionId").Value),
-                        AccordionTitle = accordion.Attribute("accordionTitle").Value,
-                        AccordionXml = accordion.Attribute("accordionXml").Value,
-                        ContentXml = accordion.Attribute("contentXml").Value,
-                        ControlPanelXml = accordion.Attribute("controlPanelXml").Value,
-                        DefaultSortOrder = Convert.ToInt32(accordion.Attribute("defaultSortOrder").Value),
-                        Namespaces = new HashSet<string>(Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", string.Empty).Split(','), StringComparer.InvariantCultureIgnoreCase),
-                        WorkspaceLoginXml = accordion.Attribute("workspaceLoginXml").Value
-                      }
+                      select new AccordionMetaData(accordion) {}
                     ).ToList<AccordionMetaData>();
       }
 

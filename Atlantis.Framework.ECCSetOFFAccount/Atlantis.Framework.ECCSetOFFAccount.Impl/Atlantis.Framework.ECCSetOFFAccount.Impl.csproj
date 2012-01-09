@@ -39,9 +39,6 @@
     <Reference Include="Atlantis.Framework.ECC.Interface">
       <HintPath>..\..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\bin\Debug\Atlantis.Framework.ECC.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.ECCSetOFFAccount.Interface">
-      <HintPath>..\Atlantis.Framework.ECCSetOFFAccount.Interface\bin\Debug\Atlantis.Framework.ECCSetOFFAccount.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\bin\Debug\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
@@ -67,6 +64,12 @@
     <Compile Include="ECCSetOFFAccountRequest.cs" />
     <Compile Include="Json\ECCJsonSetOFFAccountRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.ECCSetOFFAccount.Interface\Atlantis.Framework.ECCSetOFFAccount.Interface.csproj">
+      <Project>{A05F753C-A723-4507-9119-6890BA440877}</Project>
+      <Name>Atlantis.Framework.ECCSetOFFAccount.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

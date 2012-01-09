@@ -60,9 +60,6 @@
     <Reference Include="Atlantis.Framework.ECC.Interface">
       <HintPath>..\..\..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\bin\Debug\Atlantis.Framework.ECC.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Atlantis.Framework.ECCGetOFFPlanInfo.Interface">
-      <HintPath>..\Atlantis.Framework.ECCGetOFFPlanInfo.Int\bin\Debug\Atlantis.Framework.ECCGetOFFPlanInfo.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Atlantis.Framework.Engine">
       <HintPath>..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\bin\Debug\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
@@ -130,7 +127,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.ECCGetOFFPlanInfo.Int\Atlantis.Framework.ECCGetOFFPlanInfo.Interface.csproj">
+      <Project>{72A12714-50D4-4FCB-A98B-3EE21509FB6B}</Project>
+      <Name>Atlantis.Framework.ECCGetOFFPlanInfo.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

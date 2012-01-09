@@ -14,95 +14,33 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
     #region Accordion XML
     private XDocument _accordionXDoc;
-    private XDocument AccordionXDoc
-    {
-      get
-      {
-        string msg = string.Empty;
-        if (_accordionXDoc == null)
-        {
-          try
-          {
-            _accordionXDoc = XDocument.Parse(AccordionXml);
-            XmlValidator.ValidateAccordionXml(_accordionXDoc, out msg);
-
-            if (!string.IsNullOrWhiteSpace(msg))
-            {
-              AtlantisException aex = new AtlantisException("AccordionMetaData::AccordionXDoc", "0", msg, string.Empty, null, null);
-              Engine.Engine.LogAtlantisException(aex);
-              _accordionXDoc = XDocument.Parse("<accordion error='AccordionXml Malformed'/>");
-              IsAllInnerXmlValid = false;
-            }
-          }
-          catch (Exception ex)
-          {
-            AtlantisException aex = new AtlantisException("AccordionMetaData::AccordionXDoc", "0", ex.Message, string.Empty, null, null);
-            Engine.Engine.LogAtlantisException(aex);
-            _accordionXDoc = XDocument.Parse("<accordion error='AccordionXml Malformed'/>");
-            IsAllInnerXmlValid = false;
-          }
-        }
-        return _accordionXDoc;
-      }
-    }
 
     private bool IsWellFormedAccordionXml
     {
-      get { return !AccordionXDoc.Element("accordion").FirstAttribute.Name.Equals("error"); }
+      get { return !_accordionXDoc.Element("accordion").FirstAttribute.Name.Equals("error"); }
     }
 
     private string ParseAccordionXml(string attribute)
     {
-      return IsWellFormedAccordionXml ? (AccordionXDoc.Element("accordion").Attribute(attribute) != null ? AccordionXDoc.Element("accordion").Attribute(attribute).Value : string.Empty) : string.Empty;
+      return IsWellFormedAccordionXml ? (_accordionXDoc.Element("accordion").Attribute(attribute) != null ? _accordionXDoc.Element("accordion").Attribute(attribute).Value : string.Empty) : string.Empty;
     }
     #endregion
 
     #region Content XML
     private XDocument _contentXDoc;
-    private XDocument ContentXDoc
-    {
-      get
-      {
-        string msg = string.Empty;
-        if (_contentXDoc == null)
-        {
-          try
-          {
-            _contentXDoc = XDocument.Parse(ContentXml);
-            XmlValidator.ValidateContentXml(_contentXDoc, out msg);
-
-            if (!string.IsNullOrWhiteSpace(msg))
-            {
-              AtlantisException aex = new AtlantisException("AccordionMetaData::ContentXDoc", "0", msg, string.Empty, null, null);
-              Engine.Engine.LogAtlantisException(aex);
-              _contentXDoc = XDocument.Parse("<content error='ContentXml Malformed'/>");
-              IsAllInnerXmlValid = false;
-            }
-          }
-          catch (Exception ex)
-          {
-            AtlantisException aex = new AtlantisException("AccordionMetaData::ContentXDoc", "0", ex.Message, string.Empty, null, null);
-            Engine.Engine.LogAtlantisException(aex);
-            _contentXDoc = XDocument.Parse("<content error='ContentXml Malformed'/>");
-            IsAllInnerXmlValid = false;
-          }
-        }
-        return _contentXDoc;
-      }
-    }
 
     private bool IsWellFormedContentXml
     {
-      get { return !ContentXDoc.Element("content").HasAttributes; }
+      get { return !_contentXDoc.Element("content").HasAttributes; }
     }
 
     private string ParseContentXml(string attribute)
     {
       string attrib = string.Empty;
 
-      if (IsWellFormedContentXml && ContentXDoc.Element("content").HasElements)
+      if (IsWellFormedContentXml && _contentXDoc.Element("content").HasElements)
       {
-        attrib = ContentXDoc.Element("content").Element("data").Attribute(attribute) != null ? ContentXDoc.Element("content").Element("data").Attribute(attribute).Value : string.Empty;
+        attrib = _contentXDoc.Element("content").Element("data").Attribute(attribute) != null ? _contentXDoc.Element("content").Element("data").Attribute(attribute).Value : string.Empty;
       }
 
       return attrib;
@@ -110,47 +48,16 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
     private LinkUrlData ParseContentBuyLinkXml(XElement link)
     {
-      return IsWellFormedWorkspaceLoginXml ? ParseLinkUrlXml(link) : null;
+      return IsWellFormedContentXml ? ParseLinkUrlXml(link) : null;
     }
     #endregion
 
     #region ControlPanel XML
     private XDocument _controlPanelXDoc;
-    private XDocument ControlPanelXDoc
-    {
-      get
-      {
-        string msg = string.Empty;
-        if (_controlPanelXDoc == null)
-        {
-          try
-          {
-            _controlPanelXDoc = XDocument.Parse(ControlPanelXml);
-            XmlValidator.ValidateControlPanelXml(_controlPanelXDoc, out msg);
-
-            if (!string.IsNullOrWhiteSpace(msg))
-            {
-              AtlantisException aex = new AtlantisException("AccordionMetaData::ControlPanelXDoc", "0", msg, string.Empty, null, null);
-              Engine.Engine.LogAtlantisException(aex);
-              _controlPanelXDoc = XDocument.Parse("<controlpanels error='ControlPanelXml Malformed'/>");
-              IsAllInnerXmlValid = false;
-            }
-          }
-          catch (Exception ex)
-          {
-            AtlantisException aex = new AtlantisException("AccordionMetaData::ControlPanelXDoc", "0", ex.Message, string.Empty, null, null);
-            Engine.Engine.LogAtlantisException(aex);
-            _controlPanelXDoc = XDocument.Parse("<controlpanels error='ControlPanelXml Malformed'/>");
-            IsAllInnerXmlValid = false;
-          }
-        }
-        return _controlPanelXDoc;
-      }
-    }
 
     private bool IsWellFormedControlPanelXml
     {
-      get { return !ControlPanelXDoc.Element("controlpanels").HasAttributes; }
+      get { return !_controlPanelXDoc.Element("controlpanels").HasAttributes; }
     }
 
     private List<LinkUrlData> ParseControlPanelXml(XElement controlpanels)
@@ -169,41 +76,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
     #region WorkspaceLogin XML
     private XDocument _workspaceLoginXDoc;
-    private XDocument WorkspaceLoginXDoc
-    {
-      get
-      {
-        string msg = string.Empty;
-        if (_workspaceLoginXDoc == null)
-        {
-          try
-          {
-            _workspaceLoginXDoc = XDocument.Parse(WorkspaceLoginXml);
-            XmlValidator.ValidateWorkspaceLoginXml(_workspaceLoginXDoc, out msg);
-
-            if (!string.IsNullOrWhiteSpace(msg))
-            {
-              AtlantisException aex = new AtlantisException("AccordionMetaData::WorkspaceLoginXDoc", "0", msg, string.Empty, null, null);
-              Engine.Engine.LogAtlantisException(aex);
-              _workspaceLoginXDoc = XDocument.Parse("<workspace error='WorkspaceLoginXml Malformed'/>");
-              IsAllInnerXmlValid = false;
-            }
-          }
-          catch (Exception ex)
-          {
-            AtlantisException aex = new AtlantisException("AccordionMetaData::WorkspaceLoginXDoc", "0", ex.Message, string.Empty, null, null);
-            Engine.Engine.LogAtlantisException(aex);
-            _workspaceLoginXDoc = XDocument.Parse("<workspace error='WorkspaceLoginXml Malformed'/>");
-            IsAllInnerXmlValid = false;
-          }
-        }
-        return _workspaceLoginXDoc;
-      }
-    }
 
     private bool IsWellFormedWorkspaceLoginXml
     {
-      get { return (WorkspaceLoginXDoc.Element("workspace").FirstAttribute == null || !WorkspaceLoginXDoc.Element("workspace").FirstAttribute.Name.Equals("error")); }
+      get { return (_workspaceLoginXDoc.Element("workspace").FirstAttribute == null || !_workspaceLoginXDoc.Element("workspace").FirstAttribute.Name.Equals("error")); }
     }
 
     private LinkUrlData ParseWorkspaceLoginXml(XElement workspaceLoginXml, out string buttonText)
@@ -462,37 +338,89 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
     private void SetAccordionXmlAttributes()
     {
-      CiExpansion = ParseAccordionXml("ciexpansion");
-      CiRenewNow = ParseAccordionXml("cirenewnow");
-      CiSetup = ParseAccordionXml("cisetup");
-      CmsDisplayGroups = SetCmsDisplayGroups(ParseAccordionXml("cmsdisplaygroupidlist"));
-      IconCssCoordinates = SetCoordinates(ParseAccordionXml("iconcsscoordinates"));
-      ProductGroup = Convert.ToInt32(ParseAccordionXml("productgroup"));
-      ShowControlPanel = string.Compare(ParseAccordionXml("controlpanelrequiresaccount"), "false", true) == 0;
-      ShowSetupForManagerOnly = string.Compare(ParseAccordionXml("showsetupformanageronly"), "true", true) == 0;
-      OrionProductName = ParseAccordionXml("orionproductname");
-      IsBundleProduct = string.Compare(ParseAccordionXml("isbundle"), "true", true) == 0;
+      string msg = string.Empty;
+      _accordionXDoc = XDocument.Parse(AccordionXml);
+
+      try
+      {
+        if (XmlValidator.ValidateAccordionXml(_accordionXDoc, out msg))
+        {
+          CiExpansion = ParseAccordionXml("ciexpansion");
+          CiRenewNow = ParseAccordionXml("cirenewnow");
+          CiSetup = ParseAccordionXml("cisetup");
+          CmsDisplayGroups = SetCmsDisplayGroups(ParseAccordionXml("cmsdisplaygroupidlist"));
+          IconCssCoordinates = SetCoordinates(ParseAccordionXml("iconcsscoordinates"));
+          ProductGroup = Convert.ToInt32(ParseAccordionXml("productgroup"));
+          ShowControlPanel = string.Compare(ParseAccordionXml("controlpanelrequiresaccount"), "false", true) == 0;
+          ShowSetupForManagerOnly = string.Compare(ParseAccordionXml("showsetupformanageronly"), "true", true) == 0;
+          OrionProductName = ParseAccordionXml("orionproductname");
+          IsBundleProduct = string.Compare(ParseAccordionXml("isbundle"), "true", true) == 0;
+        }
+        else
+        {
+          IsAllInnerXmlValid = false;
+          AtlantisException aex = new AtlantisException("AccordionMetaData::AccordionXDoc", "0", msg, string.Empty, null, null);
+          _accordionXDoc = XDocument.Parse("<accordion error='AccordionXml Malformed'/>");
+          Engine.Engine.LogAtlantisException(aex);
+        }
+      }
+      catch (Exception ex)
+      {
+        IsAllInnerXmlValid = false;
+        AtlantisException aex = new AtlantisException("AccordionMetaData::AccordionXDoc", "0", ex.Message, string.Empty, null, null);
+        _accordionXDoc = XDocument.Parse("<accordion error='AccordionXml Malformed'/>");
+        Engine.Engine.LogAtlantisException(aex);
+      }
     }
 
     private ContentData SetContentProperty()
     {
-      ContentData content;
-      XElement link;
+      bool isValid = false;
+      string msg = string.Empty;
+      ContentData content = null;
+      XElement link = null;
+
       try
       {
-        link = ContentXDoc.Element("content").Element("data").Element("linkurl");
+        _contentXDoc = XDocument.Parse(ContentXml);
+        isValid = XmlValidator.ValidateContentXml(_contentXDoc, out msg);
+        if (isValid)
+        {
+          try
+          {
+            link = _contentXDoc.Element("content").Element("data").Element("linkurl");
+          }
+          catch
+          {
+            link = null;
+          }
+        }
+        else
+        {
+          IsAllInnerXmlValid = false;
+          AtlantisException aex = new AtlantisException("AccordionMetaData::ContentXDoc", "0", msg, string.Empty, null, null);
+          _contentXDoc = XDocument.Parse("<content error='ContentXml Malformed'/>");
+          Engine.Engine.LogAtlantisException(aex);
+        }
       }
-      catch
+      catch (Exception ex)
       {
         link = null;
+        IsAllInnerXmlValid = false;
+        AtlantisException aex = new AtlantisException("AccordionMetaData::ContentXDoc", "0", ex.Message, string.Empty, null, null);
+        _contentXDoc = XDocument.Parse("<content error='ContentXml Malformed'/>");
+        Engine.Engine.LogAtlantisException(aex);
       }
-      if (link == null)
+      if (isValid)
       {
-        content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"));
-      }
-      else
-      {
-        content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentBuyLinkXml(link));
+        if (link == null)
+        {
+          content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"));
+        }
+        else
+        {
+          content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentBuyLinkXml(link));
+        }
       }
 
       return content;
@@ -500,13 +428,63 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     
     private ControlPanelData SetControlPanelProperty()
     {
-      return new ControlPanelData(ParseControlPanelXml(ControlPanelXDoc.Element("controlpanels")));
+      ControlPanelData cpd = null;
+      string msg = string.Empty;
+
+      _controlPanelXDoc = XDocument.Parse(ControlPanelXml);
+      try
+      {
+        if (XmlValidator.ValidateControlPanelXml(_controlPanelXDoc, out msg))
+        {
+          cpd = new ControlPanelData(ParseControlPanelXml(_controlPanelXDoc.Element("controlpanels")));
+        }
+        else
+        {
+          AtlantisException aex = new AtlantisException("AccordionMetaData::ControlPanelXDoc", "0", msg, string.Empty, null, null);
+          Engine.Engine.LogAtlantisException(aex);
+          _controlPanelXDoc = XDocument.Parse("<controlpanels error='ControlPanelXml Malformed'/>");
+          IsAllInnerXmlValid = false;
+        }
+      }
+      catch (Exception ex)
+      {
+        AtlantisException aex = new AtlantisException("AccordionMetaData::ControlPanelXDoc", "0", ex.Message, string.Empty, null, null);
+        Engine.Engine.LogAtlantisException(aex);
+        _controlPanelXDoc = XDocument.Parse("<controlpanels error='ControlPanelXml Malformed'/>");
+        IsAllInnerXmlValid = false;
+      }
+      return cpd;
     }
 
     private WorkspaceLoginData SetWorkspaceLoginProperty()
     {
       string buttonText = string.Empty;
-      LinkUrlData linkUrl = ParseWorkspaceLoginXml(WorkspaceLoginXDoc.Element("workspace"), out buttonText);
+      string msg = string.Empty;
+      LinkUrlData linkUrl = null;
+
+      try
+      {
+        _workspaceLoginXDoc = XDocument.Parse(WorkspaceLoginXml);
+
+        if (XmlValidator.ValidateWorkspaceLoginXml(_workspaceLoginXDoc, out msg))
+        {
+          linkUrl = ParseWorkspaceLoginXml(_workspaceLoginXDoc.Element("workspace"), out buttonText);
+        }
+        else
+        {
+          AtlantisException aex = new AtlantisException("AccordionMetaData::WorkspaceLoginXDoc", "0", msg, string.Empty, null, null);
+          Engine.Engine.LogAtlantisException(aex);
+          _workspaceLoginXDoc = XDocument.Parse("<workspace error='WorkspaceLoginXml Malformed'/>");
+          IsAllInnerXmlValid = false;
+        }
+      }
+      catch (Exception ex)
+      {
+        AtlantisException aex = new AtlantisException("AccordionMetaData::WorkspaceLoginXDoc", "0", ex.Message, string.Empty, null, null);
+        Engine.Engine.LogAtlantisException(aex);
+        _workspaceLoginXDoc = XDocument.Parse("<workspace error='WorkspaceLoginXml Malformed'/>");
+        IsAllInnerXmlValid = false;
+      }
 
       return new WorkspaceLoginData(linkUrl, buttonText);
     }

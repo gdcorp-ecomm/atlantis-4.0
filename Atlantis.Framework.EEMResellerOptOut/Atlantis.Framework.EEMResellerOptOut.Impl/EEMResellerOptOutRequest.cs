@@ -8,8 +8,6 @@ namespace Atlantis.Framework.EEMResellerOptOut.Impl
   public class EEMResellerOptOutRequest : IRequest 
   {
 
-    private const string EEM_WS_APP_SETTING = "EEM_UNSUB_SVC";
-
     #region Implementation of IRequest
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
@@ -18,11 +16,13 @@ namespace Atlantis.Framework.EEMResellerOptOut.Impl
 
       try
       {
-        EemWs.CampaignBlazer eem = new CampaignBlazer();
-        eem.Url = DataCache.DataCache.GetAppSetting(EEM_WS_APP_SETTING);
-        eem.Timeout = (int)((EEMResellerOptOutRequestData)requestData).RequestTimeout.TotalMilliseconds;
-        eem.ResellerOptOut(requestData.ToXML());
-
+        EEMResellerOptOutRequestData request = (EEMResellerOptOutRequestData)requestData;
+        using(EemWs.CampaignBlazer eem = new CampaignBlazer())
+        {
+          eem.Url = ((WsConfigElement)config).WSURL;
+          eem.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+          eem.ResellerOptOut(request.ToXML());
+        }
         response = new EEMResellerOptOutResponseData(true);
       }
       catch (Exception ex)

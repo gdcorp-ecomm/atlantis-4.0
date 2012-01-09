@@ -31,19 +31,7 @@ namespace Atlantis.Framework.MyaAccountList.Interface
     {
       get
       {
-        string proc;
-        try
-        {
-          XDocument contentXml = XDocument.Parse(AccordionData.ContentXml);
-          XElement content = contentXml.Element("content");
-          proc = content.Element("data").Attribute("accountlist").Value;
-        }
-        catch
-        {
-          proc = string.Empty;
-        }
-
-        return proc;
+        return string.IsNullOrWhiteSpace(AccordionData.Content.AccountList) ? string.Empty : AccordionData.Content.AccountList;
       }
     }
     

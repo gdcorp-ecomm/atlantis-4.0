@@ -123,7 +123,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
     private static string GetSchema(string filename)
     {
       string schema = string.Empty;
-      string defaultNamespace = "Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData";
+      string defaultNamespace = "Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData.XSDs";
       string streampath = string.Format("{0}.{1}", defaultNamespace, filename);
 
       try

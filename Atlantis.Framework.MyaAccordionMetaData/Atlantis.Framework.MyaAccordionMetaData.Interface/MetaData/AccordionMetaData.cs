@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData;
@@ -97,65 +95,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     #endregion
 
     #region LinkUrl XML
-    private XDocument LinkUrlXDoc(XElement linkUrlXml)
-    {
-      XDocument linkUrlXDoc;
-      string msg = string.Empty;
-      try
-      {
-        linkUrlXDoc = XDocument.Parse(linkUrlXml.ToString());
-        XmlValidator.ValidateLinkXml(linkUrlXDoc, out msg);
-
-        if (!string.IsNullOrWhiteSpace(msg))
-        {
-          AtlantisException aex = new AtlantisException("AccordionMetaData::LinkUrlXDoc", "0", msg, string.Empty, null, null);
-          Engine.Engine.LogAtlantisException(aex);
-          linkUrlXDoc = XDocument.Parse("<linkurl error='LinkUrl Malformed'/>");
-          IsAllInnerXmlValid = false;
-        }
-      }
-      catch (Exception ex)
-      {
-        AtlantisException aex = new AtlantisException("AccordionMetaData::LinkUrlXDoc", "0", ex.Message, string.Empty, null, null);
-        Engine.Engine.LogAtlantisException(aex);
-        linkUrlXDoc = XDocument.Parse("<linkurl error='LinkUrl Malformed'/>");
-        IsAllInnerXmlValid = false;
-      }
-
-      return linkUrlXDoc;
-    }
-
-    private bool IsWellFormedLinkUrlXml(XElement linkUrlXml)
-    {
-      return !LinkUrlXDoc(linkUrlXml).Element("linkurl").FirstAttribute.Name.Equals("error"); 
-    }
 
     private LinkUrlData ParseLinkUrlXml(XElement linkUrlXml)
     {
-      LinkUrlData linkUrl = null;
-      NameValueCollection nvc = new NameValueCollection();
-
-      if (IsWellFormedLinkUrlXml(linkUrlXml))
-      {
-        linkUrl = new LinkUrlData();
-        linkUrl.Link = linkUrlXml.Attribute("link").Value;
-        linkUrl.Page = linkUrlXml.Attribute("page") != null ? linkUrlXml.Attribute("page").Value : string.Empty;
-        linkUrl.Type = (LinkUrlData.TypeOfLink)Enum.Parse(typeof(LinkUrlData.TypeOfLink), linkUrlXml.Attribute("type").Value);
-        linkUrl.IdentificationRule = linkUrlXml.Attribute("identificationrule") != null ? linkUrlXml.Attribute("identificationrule").Value : string.Empty;
-        linkUrl.IdentificationValue = linkUrlXml.Attribute("identificationvalue") != null ? linkUrlXml.Attribute("identificationvalue").Value : string.Empty;
-        linkUrl.EnvironmentHttpsRequirements = BuildEnvironmentHttpsDictionary(linkUrlXml.Attribute("isenvsecure") != null ? linkUrlXml.Attribute("isenvsecure").Value : string.Empty);
-
-        if (linkUrlXml.HasElements)
-        {
-          foreach (XElement qsKey in linkUrlXml.Elements("qskey"))
-          {
-            nvc.Add(qsKey.Attribute("name").Value, qsKey.Attribute("value").Value);
-          }
-          linkUrl.QsKeys = nvc;
-        }
-      }
-
-      return linkUrl;
+      return new LinkUrlData(linkUrlXml);
     }
     #endregion
 
@@ -166,155 +109,150 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     public bool? IsAllInnerXmlValid { get; private set; }
 
     #region Stored Database Properties
-    public int AccordionId { get; private set; }
-    public string AccordionTitle { get; private set; }
+    private readonly int _accordionId;
+    public int AccordionId
+    {
+      get { return _accordionId; }
+    }
+    private readonly string _accordionTitle;
+    public string AccordionTitle
+    {
+      get { return _accordionTitle; }
+    }
     private string AccordionXml { get; set; }
     private string ContentXml { get; set; }
     private string ControlPanelXml { get; set; }
-    public int DefaultSortOrder { get; private set; }
-    public HashSet<string> Namespaces { get; private set; }
+    private readonly int _defaultSortOrder;
+    public int DefaultSortOrder
+    {
+      get { return _defaultSortOrder; }
+    }
+    private readonly HashSet<string> _namespaces;
+    public HashSet<string> Namespaces
+    {
+      get { return _namespaces; }
+    }
     private string WorkspaceLoginXml { get; set; }
     #endregion
 
     #region Derived Accordion Xml Properties
-    public class CssSpriteCoordinate
+    private readonly string _ciExpansion;
+    public string CiExpansion
     {
-      public string X { get; private set; }
-      public string Y { get; private set; }
-      public string Width { get; private set; }
-      public string Height { get; private set; }
-
-      public CssSpriteCoordinate(string x, string y, string width, string height)
-      {
-        X = x;
-        Y = y;
-        Width = width;
-        Height = height;
-      }
+      get { return _ciExpansion; }
     }
-    public string CiExpansion { get; private set; }
-    public string CiRenewNow { get; private set; }
-    public string CiSetup { get; private set; }
-    public List<int> CmsDisplayGroups { get; private set; }
-    public CssSpriteCoordinate IconCssCoordinates { get; private set; }
-    public int ProductGroup { get; private set; }
-    public bool ShowControlPanel { get; private set; }
-    public bool ShowSetupForManagerOnly { get; private set; }
-    public string OrionProductName { get; private set; }
-    public bool IsBundleProduct { get; private set; }
+    private readonly string _ciRenewNow;
+    public string CiRenewNow
+    {
+      get { return _ciRenewNow; }
+    }
+    private readonly string _ciSetup;
+    public string CiSetup
+    {
+      get { return _ciSetup; }
+    }
+    private readonly List<int> _cmsDisplayGroups;
+    public List<int> CmsDisplayGroups
+    {
+      get { return _cmsDisplayGroups; }
+    }
+    private readonly CssSpriteCoordinate _iconCssCoordinates;
+    public CssSpriteCoordinate IconCssCoordinates
+    {
+      get { return _iconCssCoordinates; }
+    }
+    private readonly int _productGroup;
+    public int ProductGroup
+    {
+      get { return _productGroup; }
+    }
+    private readonly bool _showControlPanel;
+    public bool ShowControlPanel
+    {
+      get { return _showControlPanel; }
+    }
+    private readonly bool _showSetupForManagerOnly;
+    public bool ShowSetupForManagerOnly
+    {
+      get { return _showSetupForManagerOnly; }
+    }
+    private readonly string _orionProductName;
+    public string OrionProductName
+    {
+      get { return _orionProductName; }
+    }
+    private readonly bool _isBundleProduct;
+    public bool IsBundleProduct
+    {
+      get { return _isBundleProduct; }
+    }
     #endregion
 
     #region Derived Content Xml Properties
-    public class ContentData
+
+    internal ContentData Content { get; private set; }
+
+    public string ContentAccountList
     {
-      public string AccountList { get; private set; }
-      public string JsonPage { get; private set; }
-      public string CiOptions { get; private set; }
-      public LinkUrlData LinkUrl { get; private set; }
-
-      public bool ShowOptionsLink
-      {
-        get { return !string.IsNullOrWhiteSpace(CiOptions); }
-      }
-
-      public bool ShowBuyLink
-      {
-        get { return LinkUrl != null; }
-      }
-
-      public ContentData(string accountList, string jsonPage, string ciOptions, LinkUrlData linkUrl)
-      {
-        AccountList = accountList;
-        JsonPage = jsonPage;
-        CiOptions = ciOptions;
-        LinkUrl = linkUrl;
-      }
-      
-      public ContentData(string accountList, string jsonPage, string ciOptions)
-      {
-        AccountList = accountList;
-        JsonPage = jsonPage;
-        CiOptions = ciOptions;
-        LinkUrl = null;
-      }
+      get { return Content.AccountList; }
     }
-    public ContentData Content { get; private set; }
+    public string ContentCiOptions
+    {
+      get { return Content.CiOptions; }
+    }
+    public string ContentJsonPage
+    {
+      get { return Content.JsonPage; }
+    }
+    public LinkUrlData ContentBuyMoreLink
+    {
+      get { return Content.LinkUrl; }
+    }
+    public bool ContentShowBuyMoreLink
+    {
+      get { return Content.ShowBuyLink; }
+    }
+    public bool ContentShowOptionsButton
+    {
+      get { return Content.ShowOptionsButton; }
+    }
+
     #endregion
 
     #region Derived ControlPanel Xml Properties
-    public class ControlPanelData
+
+    internal ControlPanelData ControlPanels { get; private set; }
+
+    public List<LinkUrlData> ControlPanelLinks
     {
-      public List<LinkUrlData> LinkUrls { get; private set; }
-      public bool HasManagerLink(string identificationValue)
-      {
-        return LinkUrls.Exists(new Predicate<LinkUrlData>(url => url.Type.Equals(LinkUrlData.TypeOfLink.Manager) && url.IdentificationValue.Equals(identificationValue)));
-      }
-
-      public bool DoLinkUrlsContainIdentificationRules
-      {
-        get { return LinkUrls.Exists(new Predicate<LinkUrlData>(url => !string.IsNullOrWhiteSpace(url.IdentificationRule))); }
-      }
-
-      public ControlPanelData(List<LinkUrlData> linkUrls)
-      {
-        LinkUrls = linkUrls;
-      }
+      get { return ControlPanels.LinkUrls; }
     }
-
-    public ControlPanelData ControlPanels { get; private set; }
-    #endregion
-
-    #region Derived LinkUrl Xml Properties
-    public class LinkUrlData
+    public bool ControlPanelHasManagerLink(string identificationValue)
     {
-      public enum TypeOfLink : int
-      {
-        Standard = 0,
-        Manager = 1
-      }
-      public string Link { get; set; }
-      public string Page { get; set; }
-      public TypeOfLink Type { get; set; }
-      public string IdentificationRule { get; set; }
-      public string IdentificationValue { get; set; }
-      public Dictionary<int, bool> EnvironmentHttpsRequirements { get; set; }
-      public NameValueCollection QsKeys { get; set; }
-
-      public bool DoesEnvironmentRequireSecureLink(int environment)
-      {
-        bool isSecure = false;
-        if (!EnvironmentHttpsRequirements.TryGetValue(environment, out isSecure))
-        {
-          isSecure = false;
-        }
-
-        return isSecure;
-      }
-
-      public LinkUrlData()
-      { }
+      return ControlPanels.HasManagerLink(identificationValue);
+    }
+    public bool ControlPanelLinksContainIdentificationRules
+    {
+      get { return ControlPanels.DoLinkUrlsContainIdentificationRules; }
     }
     #endregion
 
     #region Derived WorkspaceLogin Xml Properties
-    public class WorkspaceLoginData
+
+    internal WorkspaceLoginData WorkspaceLogin { get; private set; }
+
+    public bool WorkspaceHasLink
     {
-      public LinkUrlData LinkUrl { get; private set; }
-      public bool HasLink
-      {
-        get { return LinkUrl != null; }
-      }
-
-      public string ButtonText { get; set; }
-
-      public WorkspaceLoginData(LinkUrlData linkUrl, string buttonText)
-      {
-        LinkUrl = linkUrl;
-        ButtonText = buttonText;
-      }
+      get { return WorkspaceLogin.HasLink; }
     }
-
-    public WorkspaceLoginData WorkspaceLogin { get; private set; }
+    public string WorkspaceButtonText
+    {
+      get { return WorkspaceLogin.ButtonText; }
+    }
+    public LinkUrlData WorkspaceLink
+    {
+      get { return WorkspaceLogin.LinkUrl; }
+    }
     #endregion
 
     #endregion
@@ -322,22 +260,16 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     #region Constructor
     public AccordionMetaData(XElement accordion)
     {
-      AccordionId = Convert.ToInt32(accordion.Attribute("accordionId").Value);
-      AccordionTitle = accordion.Attribute("accordionTitle").Value;
+      _accordionId = Convert.ToInt32(accordion.Attribute("accordionId").Value);
+      _accordionTitle = accordion.Attribute("accordionTitle").Value;
       AccordionXml = accordion.Attribute("accordionXml").Value;
       ContentXml = accordion.Attribute("contentXml").Value;
       ControlPanelXml = accordion.Attribute("controlPanelXml").Value;
-      DefaultSortOrder = Convert.ToInt32(accordion.Attribute("defaultSortOrder").Value);
-      Namespaces = new HashSet<string>(Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", string.Empty).Split(','), StringComparer.InvariantCultureIgnoreCase);
+      _defaultSortOrder = Convert.ToInt32(accordion.Attribute("defaultSortOrder").Value);
+      _namespaces = new HashSet<string>(Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", string.Empty).Split(','), StringComparer.InvariantCultureIgnoreCase);
       WorkspaceLoginXml = accordion.Attribute("workspaceLoginXml").Value;
-      SetAccordionXmlAttributes();
-      Content = SetContentProperty();
-      ControlPanels = SetControlPanelProperty();
-      WorkspaceLogin = SetWorkspaceLoginProperty();
-    }
 
-    private void SetAccordionXmlAttributes()
-    {
+      #region SetAccordionXmlAttributes
       string msg = string.Empty;
       _accordionXDoc = XDocument.Parse(AccordionXml);
 
@@ -345,16 +277,16 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       {
         if (XmlValidator.ValidateAccordionXml(_accordionXDoc, out msg))
         {
-          CiExpansion = ParseAccordionXml("ciexpansion");
-          CiRenewNow = ParseAccordionXml("cirenewnow");
-          CiSetup = ParseAccordionXml("cisetup");
-          CmsDisplayGroups = SetCmsDisplayGroups(ParseAccordionXml("cmsdisplaygroupidlist"));
-          IconCssCoordinates = SetCoordinates(ParseAccordionXml("iconcsscoordinates"));
-          ProductGroup = Convert.ToInt32(ParseAccordionXml("productgroup"));
-          ShowControlPanel = string.Compare(ParseAccordionXml("controlpanelrequiresaccount"), "false", true) == 0;
-          ShowSetupForManagerOnly = string.Compare(ParseAccordionXml("showsetupformanageronly"), "true", true) == 0;
-          OrionProductName = ParseAccordionXml("orionproductname");
-          IsBundleProduct = string.Compare(ParseAccordionXml("isbundle"), "true", true) == 0;
+          _ciExpansion = ParseAccordionXml("ciexpansion");
+          _ciRenewNow = ParseAccordionXml("cirenewnow");
+          _ciSetup = ParseAccordionXml("cisetup");
+          _cmsDisplayGroups = SetCmsDisplayGroups(ParseAccordionXml("cmsdisplaygroupidlist"));
+          _iconCssCoordinates = SetCoordinates(ParseAccordionXml("iconcsscoordinates"));
+          _productGroup = Convert.ToInt32(ParseAccordionXml("productgroup"));
+          _showControlPanel = string.Compare(ParseAccordionXml("controlpanelrequiresaccount"), "false", true) == 0;
+          _showSetupForManagerOnly = string.Compare(ParseAccordionXml("showsetupformanageronly"), "true", true) == 0;
+          _orionProductName = ParseAccordionXml("orionproductname");
+          _isBundleProduct = string.Compare(ParseAccordionXml("isbundle"), "true", true) == 0;
         }
         else
         {
@@ -371,6 +303,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
         _accordionXDoc = XDocument.Parse("<accordion error='AccordionXml Malformed'/>");
         Engine.Engine.LogAtlantisException(aex);
       }
+      #endregion
+      
+      Content = SetContentProperty();
+      ControlPanels = SetControlPanelProperty();
+      WorkspaceLogin = SetWorkspaceLoginProperty();
     }
 
     private ContentData SetContentProperty()
@@ -525,33 +462,6 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
         }
       }
       return cmsDisplayGroupList;
-    }
-    private enum ServerLocationType
-    {
-      Undetermined = 0,
-      Dev = 1,
-      Test = 2,
-      Ote = 3,
-      Prod = 4,
-    }
-    private Dictionary<int,bool> BuildEnvironmentHttpsDictionary(string secureEnvironmentString)
-    {
-      Dictionary<int, bool> envDict = new Dictionary<int, bool>();
-      List<string> envs = string.IsNullOrWhiteSpace(secureEnvironmentString) ? new List<string>() : secureEnvironmentString.Split(',').ToList<string>();
-
-      envDict.Add((int)ServerLocationType.Dev, false);
-      envDict.Add((int)ServerLocationType.Ote, false);
-      envDict.Add((int)ServerLocationType.Prod, false);
-      envDict.Add((int)ServerLocationType.Test, false);
-
-      if (envs.Count > 0)
-      {
-        foreach (string env in envs)
-        {
-          envDict[(int)Enum.Parse(typeof(ServerLocationType), env)] = true;
-        }
-      }
-      return envDict;
     }
     #endregion
 

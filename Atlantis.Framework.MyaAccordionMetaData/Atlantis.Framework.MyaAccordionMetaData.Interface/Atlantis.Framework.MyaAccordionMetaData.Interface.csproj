@@ -73,6 +73,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MetaData\AccordionMetaData.cs" />
+    <Compile Include="MetaData\ContentData.cs" />
+    <Compile Include="MetaData\ControlPanelData.cs" />
+    <Compile Include="MetaData\CssSpriteCoordinate.cs" />
+    <Compile Include="MetaData\LinkUrlData.cs" />
+    <Compile Include="MetaData\WorkspaceLoginData.cs" />
     <Compile Include="MetaData\XmlValidator.cs" />
     <Compile Include="MyaAccordionMetaDataRequestData.cs" />
     <Compile Include="MyaAccordionMetaDataResponseData.cs" />
@@ -106,19 +111,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MetaData\Accordion.xsd">
+    <EmbeddedResource Include="MetaData\XSDs\Accordion.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MetaData\Content.xsd">
+    <EmbeddedResource Include="MetaData\XSDs\Content.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MetaData\ControlPanel.xsd">
+    <EmbeddedResource Include="MetaData\XSDs\ControlPanel.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MetaData\LinkUrl.xsd">
+    <EmbeddedResource Include="MetaData\XSDs\LinkUrl.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MetaData\WorkspaceLogin.xsd">
+    <EmbeddedResource Include="MetaData\XSDs\WorkspaceLogin.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

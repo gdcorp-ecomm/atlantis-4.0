@@ -5,6 +5,8 @@ using System.Text;
 using System.Web;
 using Atlantis.Framework.MyaAccordionMetaData.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData;
+using System.Collections.Specialized;
 
 namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 {
@@ -84,19 +86,17 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 								Debug.WriteLine(string.Format("{0}: {1}", p.Name, list));
 								break;
 							case "IconCssCoordinates":
-								AccordionMetaData.CssSpriteCoordinate coords = p.GetValue(accordion, null) as AccordionMetaData.CssSpriteCoordinate;
+								CssSpriteCoordinate coords = p.GetValue(accordion, null) as CssSpriteCoordinate;
 								Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("X:{0},Y:{1},Width:{2},Height:{3}", coords.X, coords.Y, coords.Width, coords.Height)));
 								break;
-							case "Content":
-								AccordionMetaData.ContentData inner = p.GetValue(accordion, null) as AccordionMetaData.ContentData;
-								Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("AccountList: {0} | JsonPage: {1} | CiOptions: {2}", inner.AccountList, inner.JsonPage, inner.CiOptions)));
-								if (inner.ShowBuyLink)
+							case "ContentBuyMoreLink":
+								if (accordion.ContentShowBuyMoreLink)
 								{
 									StringBuilder sb = new StringBuilder();
-									Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2}", inner.LinkUrl.Link, inner.LinkUrl.Page, inner.LinkUrl.Type)));
-									foreach (string key in inner.LinkUrl.QsKeys)
+									Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2}", accordion.ContentBuyMoreLink.Link, accordion.ContentBuyMoreLink.Page, accordion.ContentBuyMoreLink.Type)));
+									foreach (string key in accordion.ContentBuyMoreLink.QsKeys)
 									{
-										sb.Append(string.Format("{0}: {1}", key, inner.LinkUrl.QsKeys[key]));
+										sb.Append(string.Format("{0}: {1}", key, accordion.ContentBuyMoreLink.QsKeys[key]));
 									}
 									if (sb.Length > 0)
 									{
@@ -104,16 +104,15 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 									}
 								}
 								break;
-							case "WorkspaceLogin":
-								AccordionMetaData.WorkspaceLoginData wsl = p.GetValue(accordion, null) as AccordionMetaData.WorkspaceLoginData;
-								if (wsl.HasLink)
+							case "WorkspaceLink":								
+								if (accordion.WorkspaceHasLink)
 								{
-									Debug.WriteLine(string.Format("{0}-ButtonText: {1}", p.Name, wsl.ButtonText));
+									Debug.WriteLine(string.Format("{0}-ButtonText: {1}", p.Name, accordion.WorkspaceButtonText));
 									StringBuilder sb = new StringBuilder();
-									Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2}", wsl.LinkUrl.Link, wsl.LinkUrl.Page, wsl.LinkUrl.Type)));
-									foreach (string key in wsl.LinkUrl.QsKeys)
+									Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2}", accordion.WorkspaceLink.Link, accordion.WorkspaceLink.Page, accordion.WorkspaceLink.Type)));
+									foreach (string key in accordion.WorkspaceLink.QsKeys)
 									{
-										sb.Append(string.Format("{0}: {1}", key, wsl.LinkUrl.QsKeys[key]));
+										sb.Append(string.Format("{0}: {1}", key, accordion.WorkspaceLink.QsKeys[key]));
 									}
 									if (sb.Length > 0)
 									{
@@ -125,10 +124,9 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 									Debug.WriteLine(string.Format("{0}: N/A", p.Name));
 								}
 								break;
-							case "ControlPanels":
-								AccordionMetaData.ControlPanelData cp = p.GetValue(accordion, null) as AccordionMetaData.ControlPanelData;
-								Debug.WriteLine(string.Format("Do Any Links Contain Identification Rules: {0}", cp.DoLinkUrlsContainIdentificationRules));
-								foreach(AccordionMetaData.LinkUrlData link in cp.LinkUrls)
+							case "ControlPanelLinks":
+								Debug.WriteLine(string.Format("Do Any Links Contain Identification Rules: {0}", accordion.ControlPanelLinksContainIdentificationRules));
+								foreach(LinkUrlData link in accordion.ControlPanelLinks)
 								{
 									StringBuilder sb = new StringBuilder();
 									StringBuilder sb3 = new StringBuilder();
@@ -149,16 +147,16 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 									}
 									Debug.WriteLine(string.Format("{0} Environment Security: {1}", p.Name, sb3.ToString().TrimEnd(' ').TrimEnd('|')));
 								}
-								if (cp.LinkUrls.Exists(new System.Predicate<AccordionMetaData.LinkUrlData>(url => url.IdentificationRule != string.Empty)))
+								if (accordion.ControlPanelLinks.Exists(new System.Predicate<LinkUrlData>(url => url.IdentificationRule != string.Empty)))
 								{
-									foreach (AccordionMetaData.LinkUrlData link in cp.LinkUrls)
+									foreach (LinkUrlData link in accordion.ControlPanelLinks)
 									{
-										Debug.WriteLine(string.Format("{0} - IdentificationRule: {1} = {2} - HasManagerLink: {3}", p.Name, link.IdentificationRule, link.IdentificationValue, cp.HasManagerLink(link.IdentificationValue)));
+										Debug.WriteLine(string.Format("{0} - IdentificationRule: {1} = {2} - HasManagerLink: {3}", p.Name, link.IdentificationRule, link.IdentificationValue, accordion.ControlPanelHasManagerLink(link.IdentificationValue)));
 									}
 								}
 								else 
 								{
-									Debug.WriteLine(string.Format("{0} - HasManagerLink: {1}", p.Name, cp.HasManagerLink(string.Empty)));									
+									Debug.WriteLine(string.Format("{0} - HasManagerLink: {1}", p.Name, accordion.ControlPanelHasManagerLink(string.Empty)));
 								}
 								break;
 							case "AccordionTitle":
@@ -189,6 +187,55 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 				Debug.WriteLine("********************** ToXML() **********************");
 				Debug.WriteLine(HttpUtility.HtmlDecode(response.ToXML()));
 			}
+		}
+
+		[TestMethod]
+		[DeploymentItem("atlantis.config")]
+		public void CacheSoilTest()
+		{
+			MyaAccordionMetaDataRequestData request = new MyaAccordionMetaDataRequestData("856907"
+				, string.Empty
+				, string.Empty
+				, string.Empty
+				, 0);
+
+			MyaAccordionMetaDataResponseData response1 = (MyaAccordionMetaDataResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
+			AccordionMetaData amd1 = response1.GetAccordionById(3);  // Web Hosting
+
+			NameValueCollection qsKeysCopy1 = new NameValueCollection(amd1.ControlPanelLinks[0].QsKeys);
+			NameValueCollection qsKeysCopy2 = new NameValueCollection(amd1.ControlPanelLinks[0].QsKeys);
+			foreach (string key in qsKeysCopy1)
+			{
+				switch (amd1.ControlPanelLinks[0].QsKeys[key])
+				{
+					case "%AUTHGUID%":
+						qsKeysCopy2[key] = "20ak0a09d022095j15g0u8";
+						amd1.ControlPanelLinks[0].QsKeys[key] = "20ak0a09d022095j15g0u8";
+						break;
+					case "%CN%":
+						qsKeysCopy2[key] = "TESTING_1_2_3";
+						amd1.ControlPanelLinks[0].QsKeys[key] = "TESTING_1_2_3";
+						break;
+					case "%ERID%":
+						qsKeysCopy2[key] = "1111122222333334444455555"; 
+						amd1.ControlPanelLinks[0].QsKeys[key] = "1111122222333334444455555";
+						break;
+				}
+			}
+      Debug.WriteLine(string.Format("Orig:{0}, Copy1:{1}, Copy2:{2}", amd1.ControlPanelLinks[0].QsKeys.GetHashCode(), qsKeysCopy1.GetHashCode(), qsKeysCopy2.GetHashCode()));
+			Debug.WriteLine(string.Format("First Call Hosting QsKey Cache Properties: auth_guid={0} | account_uid={1} | common_name={2}", amd1.ControlPanelLinks[0].QsKeys["auth_guid"], amd1.ControlPanelLinks[0].QsKeys["account_uid"], amd1.ControlPanelLinks[0].QsKeys["common_name"]));
+			Debug.WriteLine(string.Format("First Call Hosting Copy Properties: auth_guid={0} | account_uid={1} | common_name={2}", qsKeysCopy2["auth_guid"], qsKeysCopy2["account_uid"], qsKeysCopy2["common_name"]));
+
+			Assert.AreNotEqual(amd1.ControlPanelLinks[0].QsKeys["account_uid"], qsKeysCopy2["account_uid"]);
+
+			MyaAccordionMetaDataResponseData response2 = (MyaAccordionMetaDataResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
+			AccordionMetaData amd2 = response2.GetAccordionById(3);  // Web Hosting
+			qsKeysCopy2 = new NameValueCollection(amd1.ControlPanelLinks[0].QsKeys);
+
+			Debug.WriteLine(string.Format("Second Call Hosting QsKey Cache Properties: auth_guid={0} | account_uid={1} | common_name={2}", amd2.ControlPanelLinks[0].QsKeys["auth_guid"], amd2.ControlPanelLinks[0].QsKeys["account_uid"], amd2.ControlPanelLinks[0].QsKeys["common_name"]));
+			Debug.WriteLine(string.Format("Second Call Hosting Copy Properties (unset): auth_guid={0} | account_uid={1} | common_name={2}", qsKeysCopy2["auth_guid"], qsKeysCopy2["account_uid"], qsKeysCopy2["common_name"]));
+
+			Assert.AreEqual(amd1.ControlPanelLinks[0].QsKeys["account_uid"], amd2.ControlPanelLinks[0].QsKeys["account_uid"]);
 		}
 	}
 }

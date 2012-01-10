@@ -52,5 +52,17 @@ namespace Atlantis.Framework.Ecc.Interface
         return expDate;
       }
     }
+
+    [DataMember(Name = "pf_id")]
+    public int Pf_Id { get; set; }
+
+    [DataMember(Name = "disk_space_mb")]
+    public int Disk_Space_MB { get; set; }
+
+    [DataMember(Name = "addl_disk_space_mb")]
+    public int Addl_Disk_Space_MB { get; set; }
+
+    [DataMember(Name = "total_quota")]
+    public int Total_Quota { get; set; }
   }
 }

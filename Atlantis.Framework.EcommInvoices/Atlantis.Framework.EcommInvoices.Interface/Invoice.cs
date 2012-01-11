@@ -34,8 +34,11 @@ namespace Atlantis.Framework.EcommInvoices.Interface
       {
         string statusText = string.Empty;
 
-
-        if (ExpiresDate > DateTime.Now || (_status == InvoiceStatus.Cancelled || _status == InvoiceStatus.Completed))
+        if (ProcessorStatus == InvoiceProcessorStatus.Declined) // need to check for this first the InoviceStatus may be anything if the ProcessStatus is declined.
+        {
+          statusText = "Declined";
+        }
+        else if (ExpiresDate > DateTime.Now || (_status == InvoiceStatus.Cancelled || _status == InvoiceStatus.Completed))
         {
           switch (_status)
           {

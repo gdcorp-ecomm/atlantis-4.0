@@ -1,7 +1,7 @@
 ﻿
 namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
 {
-  internal class WorkspaceLoginData
+  public class WorkspaceLoginData
   {
     #region ReadOnly Properties
     private readonly LinkUrlData _linkUrl;
@@ -14,19 +14,18 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
     {
       get { return _buttonText; }
     }
-    #endregion
-
-    #region Convenience Accessor Properties
+    private bool _hasLink;
     public bool HasLink
     {
-      get { return LinkUrl != null; }
+      get { return _hasLink; }
     }
     #endregion
 
-    public WorkspaceLoginData(LinkUrlData linkUrl, string buttonText)
+    internal WorkspaceLoginData(LinkUrlData linkUrl, string buttonText)
     {
       _linkUrl = linkUrl;
       _buttonText = buttonText;
+      _hasLink = LinkUrl != null;
     }
   }
 }

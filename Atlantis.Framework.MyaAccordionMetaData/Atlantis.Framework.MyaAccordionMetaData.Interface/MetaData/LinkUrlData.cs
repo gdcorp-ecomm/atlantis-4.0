@@ -58,9 +58,9 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
       get { return _environmentHttpsRequirements; }
     }
     private readonly NameValueCollection _qsKeys;
-    public NameValueCollection QsKeys
+    public NameValueCollection GetNewQsKeys()
     {
-      get { return new NameValueCollection(_qsKeys); }
+      return new NameValueCollection(_qsKeys);
     }
     #endregion
 
@@ -77,8 +77,8 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
     }
     #endregion
 
-    #region Constructor
-    public LinkUrlData(XElement linkUrlXml)
+    #region Constructors
+    internal LinkUrlData(XElement linkUrlXml)
     {
       NameValueCollection nvc = new NameValueCollection();
 
@@ -113,7 +113,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
         linkUrlXDoc = XDocument.Parse(linkUrlXml.ToString());
         XmlValidator.ValidateLinkXml(linkUrlXDoc, out msg);
 
-        if (!string.IsNullOrWhiteSpace(msg))
+        if (!string.IsNullOrEmpty(msg))
         {
           AtlantisException aex = new AtlantisException("AccordionMetaData::LinkUrlXDoc", "0", msg, string.Empty, null, null);
           Engine.Engine.LogAtlantisException(aex);
@@ -140,7 +140,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
     private Dictionary<int, bool> BuildEnvironmentHttpsDictionary(string secureEnvironmentString)
     {
       Dictionary<int, bool> envDict = new Dictionary<int, bool>();
-      List<string> envs = string.IsNullOrWhiteSpace(secureEnvironmentString) ? new List<string>() : secureEnvironmentString.Split(',').ToList<string>();
+      List<string> envs = string.IsNullOrEmpty(secureEnvironmentString) ? new List<string>() : secureEnvironmentString.Split(',').ToList<string>();
 
       envDict.Add((int)ServerLocationType.Dev, false);
       envDict.Add((int)ServerLocationType.Ote, false);

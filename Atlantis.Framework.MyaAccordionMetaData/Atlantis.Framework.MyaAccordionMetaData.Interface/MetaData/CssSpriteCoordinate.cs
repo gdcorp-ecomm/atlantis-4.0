@@ -14,19 +14,19 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
     {
       get { return _y; }
     }
-    private string _width;
+    private readonly string _width;
     public string Width
     {
       get { return _width; }
     }
-    private string _height;
+    private readonly string _height;
     public string Height
     {
       get { return _height; }
     }
     #endregion
 
-    public CssSpriteCoordinate(string x, string y, string width, string height)
+    internal CssSpriteCoordinate(string x, string y, string width, string height)
     {
       _x = x;
       _y = y;

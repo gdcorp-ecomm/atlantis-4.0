@@ -84,7 +84,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       _accordionMetaDataList = new List<AccordionMetaData>();
       _accordionMetaDataDictionary = new Dictionary<int, AccordionMetaData>();
 
-      if (!string.IsNullOrWhiteSpace(metaDataXml))
+      if (!string.IsNullOrEmpty(metaDataXml))
       {
         XDocument xDoc = XDocument.Parse(metaDataXml);
         _accordionMetaDataList = (from accordion in xDoc.Element("data").Elements()

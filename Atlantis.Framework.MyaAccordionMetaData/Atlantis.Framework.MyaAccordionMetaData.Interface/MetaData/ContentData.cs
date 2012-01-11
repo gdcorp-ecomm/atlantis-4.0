@@ -1,7 +1,7 @@
 ﻿
 namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
 {
-  internal class ContentData
+  public class ContentData
   {
     #region ReadOnly Properites
     private readonly string _accountList;
@@ -24,36 +24,33 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
     {
       get { return _linkUrl; }
     }
-    #endregion
-
-    #region Convenience Accessor Properties
+    private readonly bool _showOptionsButton;
     public bool ShowOptionsButton
     {
-      get { return !string.IsNullOrWhiteSpace(CiOptions); }
+      get { return _showOptionsButton; }
     }
-
+    private readonly bool _showBuyLink;
     public bool ShowBuyLink
     {
-      get { return LinkUrl != null; }
+      get { return _showBuyLink; }
     }
+
     #endregion
 
     #region Constructors
-    public ContentData(string accountList, string jsonPage, string ciOptions, LinkUrlData linkUrl)
+    internal ContentData(string accountList, string jsonPage, string ciOptions, LinkUrlData linkUrl)
     {
       _accountList = accountList;
       _jsonPage = jsonPage;
       _ciOptions = ciOptions;
       _linkUrl = linkUrl;
+      _showOptionsButton = !string.IsNullOrEmpty(CiOptions);
+      _showBuyLink = LinkUrl != null;
     }
 
-    public ContentData(string accountList, string jsonPage, string ciOptions)
-    {
-      _accountList = accountList;
-      _jsonPage = jsonPage;
-      _ciOptions = ciOptions;
-      _linkUrl = null;
-    }
+    internal ContentData(string accountList, string jsonPage, string ciOptions)
+      : this(accountList, jsonPage, ciOptions, null)
+    { }
     #endregion
   }
 }

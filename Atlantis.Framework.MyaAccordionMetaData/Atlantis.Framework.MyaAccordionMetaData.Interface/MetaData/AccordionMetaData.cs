@@ -104,8 +104,6 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
     #endregion
 
-    #region Public Properties
-
     public bool? IsAllInnerXmlValid { get; private set; }
 
     #region Stored Database Properties
@@ -188,72 +186,25 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     }
     #endregion
 
-    #region Derived Content Xml Properties
+    #region Derived Content, Control Panel & WorkspaceLogin Accessors
 
-    internal ContentData Content { get; private set; }
-
-    public string ContentAccountList
+    private readonly ContentData _content;
+    public ContentData Content
     {
-      get { return Content.AccountList; }
-    }
-    public string ContentCiOptions
-    {
-      get { return Content.CiOptions; }
-    }
-    public string ContentJsonPage
-    {
-      get { return Content.JsonPage; }
-    }
-    public LinkUrlData ContentBuyMoreLink
-    {
-      get { return Content.LinkUrl; }
-    }
-    public bool ContentShowBuyMoreLink
-    {
-      get { return Content.ShowBuyLink; }
-    }
-    public bool ContentShowOptionsButton
-    {
-      get { return Content.ShowOptionsButton; }
+      get { return _content; }
     }
 
-    #endregion
-
-    #region Derived ControlPanel Xml Properties
-
-    internal ControlPanelData ControlPanels { get; private set; }
-
-    public List<LinkUrlData> ControlPanelLinks
+    private readonly ControlPanelData _controlPanels;
+    public ControlPanelData ControlPanels
     {
-      get { return ControlPanels.LinkUrls; }
+      get { return _controlPanels; }
     }
-    public bool ControlPanelHasManagerLink(string identificationValue)
-    {
-      return ControlPanels.HasManagerLink(identificationValue);
-    }
-    public bool ControlPanelLinksContainIdentificationRules
-    {
-      get { return ControlPanels.DoLinkUrlsContainIdentificationRules; }
-    }
-    #endregion
 
-    #region Derived WorkspaceLogin Xml Properties
-
-    internal WorkspaceLoginData WorkspaceLogin { get; private set; }
-
-    public bool WorkspaceHasLink
+    private WorkspaceLoginData _workspaceLogin;
+    public WorkspaceLoginData WorkspaceLogin
     {
-      get { return WorkspaceLogin.HasLink; }
+      get { return _workspaceLogin; }
     }
-    public string WorkspaceButtonText
-    {
-      get { return WorkspaceLogin.ButtonText; }
-    }
-    public LinkUrlData WorkspaceLink
-    {
-      get { return WorkspaceLogin.LinkUrl; }
-    }
-    #endregion
 
     #endregion
 
@@ -305,9 +256,9 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       }
       #endregion
       
-      Content = SetContentProperty();
-      ControlPanels = SetControlPanelProperty();
-      WorkspaceLogin = SetWorkspaceLoginProperty();
+      _content = SetContentProperty();
+      _controlPanels = SetControlPanelProperty();
+      _workspaceLogin = SetWorkspaceLoginProperty();
     }
 
     private ContentData SetContentProperty()
@@ -446,7 +397,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     {
       List<int> cmsDisplayGroupList = new List<int>();
 
-      if (!string.IsNullOrWhiteSpace(cmsDisplayGroups))
+      if (!string.IsNullOrEmpty(cmsDisplayGroups))
       {
         try
         {
@@ -471,7 +422,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     {
       bool hasProductList;
 
-      if (string.IsNullOrWhiteSpace(ContentXml))
+      if (string.IsNullOrEmpty(ContentXml))
       {
         hasProductList = false;
       }
@@ -495,7 +446,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     public bool ShowWorkspaceLogin()
     {
       bool show;
-      if (string.IsNullOrWhiteSpace(WorkspaceLoginXml))
+      if (string.IsNullOrEmpty(WorkspaceLoginXml))
       {
         show = false;
       }

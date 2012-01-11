@@ -112,7 +112,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
         });
 
       errorMsg = msg;
-      if (string.IsNullOrWhiteSpace(msg))
+      if (string.IsNullOrEmpty(msg))
       {
         isValid = true;
       }

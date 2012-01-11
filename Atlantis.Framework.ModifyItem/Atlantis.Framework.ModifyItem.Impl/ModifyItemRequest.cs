@@ -25,7 +25,7 @@ namespace Atlantis.Framework.ModifyItem.Impl
         using (WSCgdBasket.WscgdBasketService oBasketWS = new WSCgdBasket.WscgdBasketService())
         {
           oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
-          oBasketWS.Timeout = oModifyItemRequestData.RequestTimeout.Milliseconds;
+          oBasketWS.Timeout = (int)oModifyItemRequestData.RequestTimeout.TotalMilliseconds;
           if (oModifyItemRequestData.ItemCount == 0)
           {
             if (!string.IsNullOrEmpty(oModifyItemRequestData.BasketType))

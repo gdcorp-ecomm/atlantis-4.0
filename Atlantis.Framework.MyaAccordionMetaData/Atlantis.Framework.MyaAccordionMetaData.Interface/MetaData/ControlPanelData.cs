@@ -31,6 +31,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
     {
       return _linkUrls.Find(p);
     }
+
+    public LinkUrlData FirstLinkUrl()
+    {
+      return _linkUrls[0];
+    }
     #endregion
 
     internal ControlPanelData(List<LinkUrlData> linkUrls)

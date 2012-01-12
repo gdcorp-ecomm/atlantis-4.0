@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MyaAccordionMetaData.Interface;
+using Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder;
 
 namespace Atlantis.Framework.MyaAccordionMetaData.Impl
 {
@@ -13,8 +15,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
 
       try
       {
-        string metaDataXml = DataCache.DataCache.GetCacheData("<MyaAccordionMetadata/>");   // = BuildDebugMetaDataXml();
-        responseData = new MyaAccordionMetaDataResponseData(metaDataXml);
+        string xml = GetMetaDataXml();
+        var metadataBuilder = new XmlBuilder();
+        List<AccordionMetaData> metaDataDictionary = metadataBuilder.BuildMetaDataList(xml);
+        responseData = new MyaAccordionMetaDataResponseData(metaDataDictionary);
       }
 
       catch (AtlantisException exAtlantis)
@@ -30,7 +34,15 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
       return responseData;
     }
 
+    private string GetMetaDataXml()
+    {
+      return DataCache.DataCache.GetCacheData("<MyaAccordionMetadata/>");
+    }
+
     #region Debug Data
+
+    #if DEBUG
+
     private string BuildDebugMetaDataXml()
     {
       XElement root = new XElement("data",
@@ -116,6 +128,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
 
       return root.ToString();
     }
+
+    #endif
+
     #endregion
+
   }
 }

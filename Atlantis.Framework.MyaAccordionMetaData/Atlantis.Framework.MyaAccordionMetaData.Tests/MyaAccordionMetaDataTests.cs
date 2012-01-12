@@ -180,11 +180,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 					}
 					Debug.WriteLine(string.Format("HasProductList: {0}", accordion.HasProductList()));
 					Debug.WriteLine(string.Format("ShowWorkspaceLogin: {0}", accordion.ShowWorkspaceLogin()));
-					Debug.WriteLine(string.Format("IsAllInnerXmlValid: {0}", accordion.IsAllInnerXmlValid.HasValue ? "False" : "True"));
+					//Debug.WriteLine(string.Format("IsAllInnerXmlValid: {0}", accordion.IsAllInnerXmlValid.HasValue ? "False" : "True"));
 				}
 				Debug.WriteLine("");
 				Debug.WriteLine("Response.IsSuccess: {0}", response.IsSuccess);
-				Debug.WriteLine("Response.NoXmlParsingErrors: {0}", response.NoXmlParsingErrors);
+        //Debug.WriteLine("Response.NoXmlParsingErrors: {0}", response.NoXmlParsingErrors);
 				Debug.WriteLine("");
 								
 				Debug.WriteLine("********************** ToXML() **********************");

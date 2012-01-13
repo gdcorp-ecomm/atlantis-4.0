@@ -9,6 +9,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
 {
   public class MyaAccordionMetaDataRequest : IRequest
   {
+
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       MyaAccordionMetaDataResponseData responseData = null;
@@ -18,6 +19,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Impl
         string xml = GetMetaDataXml();
         var metadataBuilder = new XmlBuilder();
         List<AccordionMetaData> metaDataDictionary = metadataBuilder.BuildMetaDataList(xml);
+        if (metaDataDictionary.Count < MyaAccordionMetaDataRequestData.MinimumAccordionMetaDataCount)
+        {
+          throw new AtlantisException("MyaAccordionMetaDataRequest::RequestHandler", "0", string.Format("AccordionMetaData count is below minimim of {0}", MyaAccordionMetaDataRequestData.MinimumAccordionMetaDataCount), string.Empty, null, null);
+        }
         responseData = new MyaAccordionMetaDataResponseData(metaDataDictionary);
       }
 

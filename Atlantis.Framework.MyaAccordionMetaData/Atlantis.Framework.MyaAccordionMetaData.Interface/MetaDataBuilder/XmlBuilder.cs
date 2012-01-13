@@ -15,86 +15,83 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
     public List<AccordionMetaData> BuildMetaDataList(string metadataXml)
     {
       string metaDataXml = metadataXml;
-      var metaDataList = BuildList(metaDataXml);
-      return metaDataList;
-    }
+      if (string.IsNullOrEmpty(metaDataXml))
+      {
+        throw new ArgumentException("Cannot be null or empty. ", metaDataXml);
+      }
 
-    private List<AccordionMetaData> BuildList(string metaDataXml)
-    {
       var accordionMetaDataList = new List<AccordionMetaData>();
 
-      if (!string.IsNullOrEmpty(metaDataXml))
+      _xDoc = XDocument.Parse(metaDataXml);
+
+      var accordionsXml = _xDoc.Element("data").Elements();
+      foreach (var accordion in accordionsXml)
       {
-        _xDoc = XDocument.Parse(metaDataXml);
-        var accordionsXml = _xDoc.Element("data").Elements();
-        foreach (var accordion in accordionsXml)
+        try
         {
-          try
-          {
-            var contentXml = accordion.Attribute("contentXml").Value;
-            ContentData contentData = CreateContentData(contentXml);
+          var contentXml = accordion.Attribute("contentXml").Value;
+          ContentData contentData = CreateContentData(contentXml);
 
-            var controlPanelXml = accordion.Attribute("controlPanelXml").Value;
-            ControlPanelData controlPanelData = CreateControlPanelData(controlPanelXml);
+          var controlPanelXml = accordion.Attribute("controlPanelXml").Value;
+          ControlPanelData controlPanelData = CreateControlPanelData(controlPanelXml);
 
-            var workspaceLoginXml = accordion.Attribute("workspaceLoginXml").Value;
-            WorkspaceLoginData workspaceLoginData = CreateWorkspaceLoginData(workspaceLoginXml);
+          var workspaceLoginXml = accordion.Attribute("workspaceLoginXml").Value;
+          WorkspaceLoginData workspaceLoginData = CreateWorkspaceLoginData(workspaceLoginXml);
 
+          AccordionMetaData amd = CreateAccordionMetaData(accordion, contentData, controlPanelData, workspaceLoginData);
 
-            var accordionId = Convert.ToInt32(accordion.Attribute("accordionId").Value);
-            var accordionTitle = accordion.Attribute("accordionTitle").Value;
-            var defaultSortOrder = Convert.ToInt32(accordion.Attribute("defaultSortOrder").Value);
-            var namespaces =
-              new HashSet<string>(
-                Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", string.Empty).
-                  Split(','), StringComparer.InvariantCultureIgnoreCase);
-            var accordionXml = accordion.Attribute("accordionXml").Value;
-
-            _accordionXDoc = XDocument.Parse(accordionXml);
-
-            string ciExpansion;
-            string ciRenewNow;
-            string ciSetup;
-            List<int> cmsDisplayGroups;
-            CssSpriteCoordinate iconCssCoordinates;
-            int productGroup;
-            bool showControlPanel;
-            bool showSetupForManagerOnly;
-            string orionProductName;
-            bool isBundleProduct;
-            GetAccordionAttributes(out ciExpansion, out ciRenewNow, out ciSetup, out cmsDisplayGroups,
-                                   out iconCssCoordinates, out productGroup,
-                                   out showControlPanel, out showSetupForManagerOnly, out orionProductName,
-                                   out isBundleProduct);
-
-            var amd = new AccordionMetaData(accordionId, accordionTitle, defaultSortOrder, namespaces,
-                                            ciExpansion, ciRenewNow, ciSetup, cmsDisplayGroups,
-                                            iconCssCoordinates,
-                                            productGroup, showControlPanel, showSetupForManagerOnly,
-                                            orionProductName, isBundleProduct,
-                                            contentData, controlPanelData, workspaceLoginData);
-
-            accordionMetaDataList.Add(amd);
-          }
-          catch (AtlantisException aex)
-          {
-            Engine.Engine.LogAtlantisException(aex);
-          }
-          catch (Exception ex)
-          {
-            var aex = new AtlantisException("XmlBuilder::BuildList", "0", "Exception: " + ex.Message, ex.StackTrace, null, null);
-            Engine.Engine.LogAtlantisException(aex);
-          }
+          accordionMetaDataList.Add(amd);
         }
+        catch (AtlantisException aex)
+        {
+          Engine.Engine.LogAtlantisException(aex);
+        }
+        catch (Exception ex)
+        {
+          var aex = new AtlantisException("XmlBuilder::BuildList", "0", "Exception: " + ex.Message, ex.StackTrace, null, null);
+          Engine.Engine.LogAtlantisException(aex);
+        }
+      }
 
-        accordionMetaDataList.Sort();
-      }
-      else
-      {
-        //throw Exception that metaDataXml was empty?
-      }
+      accordionMetaDataList.Sort();
 
       return accordionMetaDataList;
+    }
+
+    private AccordionMetaData CreateAccordionMetaData(XElement accordion, ContentData contentData, ControlPanelData controlPanelData, WorkspaceLoginData workspaceLoginData)
+    {
+      var accordionId = Convert.ToInt32(accordion.Attribute("accordionId").Value);
+      var accordionTitle = accordion.Attribute("accordionTitle").Value;
+      var defaultSortOrder = Convert.ToInt32(accordion.Attribute("defaultSortOrder").Value);
+      var namespaces =
+        new HashSet<string>(
+          Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", string.Empty).
+            Split(','), StringComparer.InvariantCultureIgnoreCase);
+      var accordionXml = accordion.Attribute("accordionXml").Value;
+
+      _accordionXDoc = XDocument.Parse(accordionXml);
+
+      string ciExpansion;
+      string ciRenewNow;
+      string ciSetup;
+      List<int> cmsDisplayGroups;
+      CssSpriteCoordinate iconCssCoordinates;
+      int productGroup;
+      bool showControlPanel;
+      bool showSetupForManagerOnly;
+      string orionProductName;
+      bool isBundleProduct;
+      GetAccordionAttributes(out ciExpansion, out ciRenewNow, out ciSetup, out cmsDisplayGroups,
+                             out iconCssCoordinates, out productGroup,
+                             out showControlPanel, out showSetupForManagerOnly, out orionProductName,
+                             out isBundleProduct);
+
+      return new AccordionMetaData(accordionId, accordionTitle, defaultSortOrder, namespaces,
+                                   ciExpansion, ciRenewNow, ciSetup, cmsDisplayGroups,
+                                   iconCssCoordinates,
+                                   productGroup, showControlPanel, showSetupForManagerOnly,
+                                   orionProductName, isBundleProduct,
+                                   contentData, controlPanelData, workspaceLoginData);
     }
 
     public bool? IsAllInnerXmlValid { get; private set; }
@@ -300,7 +297,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
 
     private WorkspaceLoginData CreateWorkspaceLoginData(string workspaceLoginXml)
     {
-      string buttonText = string.Empty;
+      string buttonText;
       string msg = string.Empty;
       LinkUrlData linkUrl = null;
 

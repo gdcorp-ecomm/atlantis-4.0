@@ -53,6 +53,9 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 		[DeploymentItem("atlantis.config")]
 		public void MyaAccordionMetaDataTest()
 		{
+
+		  MyaAccordionMetaDataRequestData.MinimumAccordionMetaDataCount = 30;
+
 			MyaAccordionMetaDataRequestData request = new MyaAccordionMetaDataRequestData("856907"
 				, string.Empty
 				, string.Empty

@@ -6,6 +6,14 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 {
   public class MyaAccordionMetaDataRequestData : RequestData
   {
+
+    private static int _minimumAccordionMetaDataCount = 30;
+    static public int MinimumAccordionMetaDataCount
+    {
+      get { return _minimumAccordionMetaDataCount; }
+      set { _minimumAccordionMetaDataCount = value; }
+    }
+
     public MyaAccordionMetaDataRequestData(string shopperId
       , string sourceUrl
       , string orderId

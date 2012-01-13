@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.MyaProduct.Interface;
 using Atlantis.Framework.MyaProduct.Interface.Enums;
 using Atlantis.Framework.MyaProductCashParking.Interface;
 using Atlantis.Framework.Nimitz;

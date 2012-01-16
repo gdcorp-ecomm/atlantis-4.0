@@ -14,6 +14,7 @@ namespace Atlantis.Framework.CostcoGetMemberInfo.Tests
     private int _requestType = 368;
 
     [TestMethod]
+    [DeploymentItem("atlantis.config")]
     public void TestCostcoGetMemberInfoRequest_ValidShopperCostcoMember()
     {
       var requestdata = new CostcoGetMemberInfoRequestData("855302", string.Empty, string.Empty, string.Empty, 0);
@@ -21,7 +22,9 @@ namespace Atlantis.Framework.CostcoGetMemberInfo.Tests
       Assert.IsTrue(response.MemberLevelId == 1);
     }
 
+
     [TestMethod]
+    [DeploymentItem("atlantis.config")]
     public void TestCostcoGetMemberInfoRequest_ValidShopperNotMember()
     {
       var requestdata = new CostcoGetMemberInfoRequestData("855552", string.Empty, string.Empty, string.Empty, 0);
@@ -30,6 +33,7 @@ namespace Atlantis.Framework.CostcoGetMemberInfo.Tests
     }
 
     [TestMethod]
+    [DeploymentItem("atlantis.config")]
     public void TestCostcoGetMemberInfoRequest_InvalidShopper()
     {
       // service does not validate shopper input.
@@ -38,7 +42,9 @@ namespace Atlantis.Framework.CostcoGetMemberInfo.Tests
       Assert.IsTrue(response.MemberLevelId == 0);
     }
 
+
     [TestMethod]
+    [DeploymentItem("atlantis.config")]
     [ExpectedException(typeof(ArgumentException))]
     public void TestCostcoGetMemberInfoRequest_NullShopperId()
     {
@@ -46,7 +52,9 @@ namespace Atlantis.Framework.CostcoGetMemberInfo.Tests
       var response = (CostcoGetMemberInfoResponseData)Engine.Engine.ProcessRequest(requestdata, _requestType);
     }
 
+
     [TestMethod]
+    [DeploymentItem("atlantis.config")]
     [ExpectedException(typeof(ArgumentException))]
     public void TestCostcoGetMemberInfoRequest_EmptyShopperId()
     {

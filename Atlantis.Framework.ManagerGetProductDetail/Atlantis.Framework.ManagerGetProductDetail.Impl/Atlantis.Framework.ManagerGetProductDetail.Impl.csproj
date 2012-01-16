@@ -37,16 +37,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Atlantis.Framework.Engine">
-      <HintPath>..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\bin\Release\Atlantis.Framework.Engine.dll</HintPath>
+      <HintPath>..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\bin\Debug\Atlantis.Framework.Engine.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\bin\Release\Atlantis.Framework.Interface.dll</HintPath>
+      <HintPath>..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\bin\Debug\Atlantis.Framework.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.ManagerGetProductDetail.Interface">
-      <HintPath>..\Atlantis.Framework.ManagerGetProductDetail.Interface\bin\Release\Atlantis.Framework.ManagerGetProductDetail.Interface.dll</HintPath>
+      <HintPath>..\Atlantis.Framework.ManagerGetProductDetail.Interface\obj\Debug\Atlantis.Framework.ManagerGetProductDetail.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Atlantis.Framework.Nimitz">
-      <HintPath>..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\bin\Release\Atlantis.Framework.Nimitz.dll</HintPath>
+      <HintPath>..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\bin\Debug\Atlantis.Framework.Nimitz.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

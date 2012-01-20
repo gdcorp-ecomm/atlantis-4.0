@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Atlantis.Framework.PayeeProfile.Interface
+namespace Atlantis.Framework.PayeeProfileClass.Interface
 {
   public class PayeeProfile : Dictionary<string, string>
   {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Atlantis.Framework.GetPayeeProfile.Interface
+namespace Atlantis.Framework.PayeeProfileGet.Interface
 {
   public class PayeeProfile : Dictionary<string, string>
   {
@@ -41,7 +41,7 @@ namespace Atlantis.Framework.GetPayeeProfile.Interface
     public string TaxStatusText
     {
       get { return GetStringProperty(PayeeProfileFields.TaxStatusText, string.Empty); }
-      set { this[PayeeProfileFields.TaxStatusText] = value; }     
+      set { this[PayeeProfileFields.TaxStatusText] = value; }
     }
 
     public string TaxID
@@ -191,7 +191,7 @@ namespace Atlantis.Framework.GetPayeeProfile.Interface
       public const string AccountTypeID = "accounttypeid";
       public const string PaymentUpdateDate = "paymentupdatedate";
       public const string CreateDate = "createdate";
-      
+
       public const string ShopperID = "shopperid";
     }
 
@@ -243,7 +243,7 @@ namespace Atlantis.Framework.GetPayeeProfile.Interface
         get { return GetStringProperty(ACHFields.AchPrenoteStatusID, string.Empty); }
         set { this[ACHFields.AchPrenoteStatusID] = value; }
       }
-      
+
       private class ACHFields
       {
         public const string AchPrenoteDate = "achprenotedate";
@@ -253,7 +253,7 @@ namespace Atlantis.Framework.GetPayeeProfile.Interface
         public const string AccountTypeID = "accounttypeid";
         public const string PaymentUpdateDate = "paymentupdatedate";
         public const string AchPrenoteStatusID = "achprenotestatusid";
-        
+
       }
 
     }

@@ -2,30 +2,29 @@
 using System.Xml;
 using Atlantis.Framework.Interface;
 
-namespace Atlantis.Framework.GetPayeeProfile.Interface
+namespace Atlantis.Framework.PayeeProfileGet.Interface
 {
-  public class GetPayeeProfileResponseData : IResponseData
+  public class PayeeProfileGetResponseData : IResponseData
   {
-
     private AtlantisException _exception = null;
     private string _responseXml;
     private PayeeProfile _profile = new PayeeProfile();
     bool _isSuccess = false;
 
-    public GetPayeeProfileResponseData(string responseXml)
+    public PayeeProfileGetResponseData(string responseXml)
     {
       _responseXml = responseXml;
       PopulateProfile();
       _isSuccess = true;
     }
 
-    public GetPayeeProfileResponseData(string responseXml, AtlantisException exAtlantis)
+    public PayeeProfileGetResponseData(string responseXml, AtlantisException exAtlantis)
     {
       _responseXml = responseXml;
       _exception = exAtlantis;
     }
 
-    public GetPayeeProfileResponseData(string responseXml, RequestData oRequestData, Exception ex)
+    public PayeeProfileGetResponseData(string responseXml, RequestData oRequestData, Exception ex)
     {
       _responseXml = responseXml;
       _exception = new AtlantisException(oRequestData, oRequestData.GetType().ToString(), ex.Message, ex.StackTrace, ex);

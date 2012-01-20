@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Atlantis.Framework.GetPayeeProfile.Impl.Properties {
+namespace Atlantis.Framework.PayeeProfileGet.Impl.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -27,19 +27,9 @@ namespace Atlantis.Framework.GetPayeeProfile.Impl.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://customerap.dev.glbt1.gdg:443/WSCgdCAP/WSCgdCAP.dll?Handler=Default")]
-        public string Atlantis_Framework_GetPayeeProfile_Impl_PayeeProfileWS_WSCgdCAPService {
+        public string Atlantis_Framework_PayeeProfileGet_Impl_PayeeProfileWS_WSCgdCAPService {
             get {
-                return ((string)(this["Atlantis_Framework_GetPayeeProfile_Impl_PayeeProfileWS_WSCgdCAPService"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://customerap.dev.glbt1.gdg:443/WSCgdCAP/WSCgdCAP.dll?Handler=Default")]
-        public string Atlantis_Framework_GetPayeeInformation_Impl_PayeeProfileWS_WSCgdCAPService {
-            get {
-                return ((string)(this["Atlantis_Framework_GetPayeeInformation_Impl_PayeeProfileWS_WSCgdCAPService"]));
+                return ((string)(this["Atlantis_Framework_PayeeProfileGet_Impl_PayeeProfileWS_WSCgdCAPService"]));
             }
         }
     }

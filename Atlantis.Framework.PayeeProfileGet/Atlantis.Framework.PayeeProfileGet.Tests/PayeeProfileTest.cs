@@ -3,17 +3,17 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.GetPayeeProfile.Interface;
+using Atlantis.Framework.PayeeProfileGet.Interface;
 
-namespace Atlantis.Framework.GetPayeeProfile.Tests
+namespace Atlantis.Framework.PayeeProfileGet.Tests
 {
   /// <summary>
   /// Summary description for UnitTest1
   /// </summary>
   [TestClass]
-  public class GetPayeeProfileTests
+  public class PayeeProfileTest
   {
-    public GetPayeeProfileTests()
+    public PayeeProfileTest()
     {
       //
       // TODO: Add constructor logic here
@@ -64,10 +64,10 @@ namespace Atlantis.Framework.GetPayeeProfile.Tests
     [DeploymentItem("atlantis.config")]
     public void TestMethod1()
     {
-      GetPayeeProfileRequestData request = new GetPayeeProfileRequestData(
+      PayeeProfileGetRequestData request = new PayeeProfileGetRequestData(
          "856045", string.Empty, string.Empty, string.Empty, 0, 1000389);
-      GetPayeeProfileResponseData response =
-        (GetPayeeProfileResponseData)Engine.Engine.ProcessRequest(request, 395);
+      PayeeProfileGetResponseData response =
+        (PayeeProfileGetResponseData)Engine.Engine.ProcessRequest(request, 477);
       Assert.IsTrue(response.IsSuccess);
 
     }

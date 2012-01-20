@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.GetPayeeProfile.Tests")]
+[assembly: AssemblyTitle("Atlantis.Framework.PayeeProfileGet.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Atlantis.Framework.GetPayeeProfile.Tests")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
+[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
+[assembly: AssemblyProduct("Atlantis.Framework.PayeeProfileGet.Tests")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1c07ba12-814b-49a3-a3e7-1140ee32d794")]
+[assembly: Guid("57ffd30f-0a6a-4cef-9b19-8dcf389b3e50")]
 
 // Version information for an assembly consists of the following four values:
 //

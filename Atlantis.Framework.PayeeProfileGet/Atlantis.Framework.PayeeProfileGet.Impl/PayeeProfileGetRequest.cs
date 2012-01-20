@@ -1,15 +1,15 @@
 ﻿using System;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.GetPayeeProfile.Interface;
 using System.Security.Cryptography.X509Certificates;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.PayeeProfileGet.Interface;
 
-namespace Atlantis.Framework.GetPayeeProfile.Impl
+namespace Atlantis.Framework.PayeeProfileGet.Impl
 {
-  public class GetPayeeProfileRequest : IRequest
+  public class PayeeProfileGetRequest : IRequest
   {
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
-      GetPayeeProfileResponseData oResponseData = null;
+      PayeeProfileGetResponseData oResponseData = null;
       string sResponseXML = string.Empty;
 
       try
@@ -17,7 +17,7 @@ namespace Atlantis.Framework.GetPayeeProfile.Impl
         X509Certificate2 cert = FindCertificate(StoreLocation.LocalMachine, StoreName.My, X509FindType.FindBySubjectName, oConfig.GetConfigValue("CertificateName"));
         cert.Verify();
 
-        GetPayeeProfileRequestData oGetPayeeProfileRequestData = (GetPayeeProfileRequestData)oRequestData;
+        PayeeProfileGetRequestData oGetPayeeProfileRequestData = (PayeeProfileGetRequestData)oRequestData;
         using (PayeeProfileWS.WSCgdCAPService oSvc = new PayeeProfileWS.WSCgdCAPService())
         {
           oSvc.Url = ((WsConfigElement)oConfig).WSURL;
@@ -29,24 +29,24 @@ namespace Atlantis.Framework.GetPayeeProfile.Impl
         if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
         {
           AtlantisException exAtlantis = new AtlantisException(oRequestData,
-                                                               "GetPayeeProfileRequest.RequestHandler",
+                                                               "PayeeProfileRequestGet.RequestHandler",
                                                                sResponseXML,
                                                                oRequestData.ToXML());
 
-          oResponseData = new GetPayeeProfileResponseData(sResponseXML, exAtlantis);
+          oResponseData = new PayeeProfileGetResponseData(sResponseXML, exAtlantis);
         }
         else
         {
-          oResponseData = new GetPayeeProfileResponseData(sResponseXML);
+          oResponseData = new PayeeProfileGetResponseData(sResponseXML);
         }
       }
       catch (AtlantisException exAtlantis)
       {
-        oResponseData = new GetPayeeProfileResponseData(sResponseXML, exAtlantis);
+        oResponseData = new PayeeProfileGetResponseData(sResponseXML, exAtlantis);
       }
       catch (Exception ex)
       {
-        oResponseData = new GetPayeeProfileResponseData(sResponseXML, oRequestData, ex);
+        oResponseData = new PayeeProfileGetResponseData(sResponseXML, oRequestData, ex);
       }
 
       return oResponseData;

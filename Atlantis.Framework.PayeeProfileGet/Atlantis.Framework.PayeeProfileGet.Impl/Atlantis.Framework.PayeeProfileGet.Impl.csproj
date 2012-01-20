@@ -5,18 +5,17 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F4CAE3A9-6C3F-46D1-9088-514032B08DDB}</ProjectGuid>
+    <ProjectGuid>{FA5C8097-B3D5-4319-B656-6052E607D599}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.GetPayeeProfile.Impl</RootNamespace>
-    <AssemblyName>Atlantis.Framework.GetPayeeProfile.Impl</AssemblyName>
+    <RootNamespace>Atlantis.Framework.PayeeProfileGet.Impl</RootNamespace>
+    <AssemblyName>Atlantis.Framework.PayeeProfileGet.Impl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetPayeeProfileRequest.cs" />
+    <Compile Include="PayeeProfileGetRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -59,6 +58,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.PayeeProfileGet.Interface\Atlantis.Framework.PayeeProfileGet.Interface.csproj">
+      <Project>{46C0590E-4EBD-41C6-B175-DDDB91FBB136}</Project>
+      <Name>Atlantis.Framework.PayeeProfileGet.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -76,7 +85,7 @@
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Atlantis_Framework_GetPayeeInformation_Impl_PayeeProfileWS_WSCgdCAPService</CachedSettingsPropName>
+      <CachedSettingsPropName>Atlantis_Framework_PayeeProfileGet_Impl_PayeeProfileWS_WSCgdCAPService</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
@@ -90,16 +99,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\PayeeProfileWS\WSCgdCAP.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.GetPayeeProfile.Interface\Atlantis.Framework.GetPayeeProfile.Interface.csproj">
-      <Project>{E0FAA454-756D-4D82-B6B4-23DA0D99ADAA}</Project>
-      <Name>Atlantis.Framework.GetPayeeProfile.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

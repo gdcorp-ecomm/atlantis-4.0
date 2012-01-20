@@ -13,16 +13,11 @@
 // 
 #pragma warning disable 1591
 
-namespace Atlantis.Framework.GetPayeeProfile.Impl.PayeeProfileWS {
-    using System;
-    using System.Web.Services;
-    using System.Diagnostics;
-    using System.Web.Services.Protocols;
-    using System.ComponentModel;
-    using System.Xml.Serialization;
-    
-    
-    /// <remarks/>
+namespace Atlantis.Framework.PayeeProfileGet.Impl.PayeeProfileWS
+{
+
+
+  /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -43,7 +38,7 @@ namespace Atlantis.Framework.GetPayeeProfile.Impl.PayeeProfileWS {
         
         /// <remarks/>
         public WSCgdCAPService() {
-            this.Url = global::Atlantis.Framework.GetPayeeProfile.Impl.Properties.Settings.Default.Atlantis_Framework_GetPayeeInformation_Impl_PayeeProfileWS_WSCgdCAPService;
+            this.Url = global::Atlantis.Framework.PayeeProfileGet.Impl.Properties.Settings.Default.Atlantis_Framework_PayeeProfileGet_Impl_PayeeProfileWS_WSCgdCAPService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

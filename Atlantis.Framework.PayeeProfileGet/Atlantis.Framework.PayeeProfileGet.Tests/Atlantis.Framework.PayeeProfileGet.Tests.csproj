@@ -66,6 +66,10 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PayeeProfile\Atlantis.Framework.PayeeProfile.Interface\Atlantis.Framework.PayeeProfile.Interface.csproj">
+      <Project>{9913F741-D65D-41D1-9BFE-634C8779FFE0}</Project>
+      <Name>Atlantis.Framework.PayeeProfile.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.PayeeProfileGet.Impl\Atlantis.Framework.PayeeProfileGet.Impl.csproj">
       <Project>{FA5C8097-B3D5-4319-B656-6052E607D599}</Project>
       <Name>Atlantis.Framework.PayeeProfileGet.Impl</Name>

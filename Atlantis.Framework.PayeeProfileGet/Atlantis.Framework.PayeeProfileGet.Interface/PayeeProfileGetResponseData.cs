@@ -1,21 +1,34 @@
 ﻿using System;
 using System.Xml;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.PayeeProfileClass.Interface;
 
 namespace Atlantis.Framework.PayeeProfileGet.Interface
 {
   public class PayeeProfileGetResponseData : IResponseData
   {
+    #region Properties
+
     private AtlantisException _exception = null;
     private string _responseXml;
     private PayeeProfile _profile = new PayeeProfile();
     bool _isSuccess = false;
 
+    public PayeeProfile Profile
+    {
+      get { return _profile; }
+    }
+
+    public bool IsSuccess
+    {
+      get { return _exception == null; }
+    }
+    #endregion
+
     public PayeeProfileGetResponseData(string responseXml)
     {
       _responseXml = responseXml;
       PopulateProfile();
-      _isSuccess = true;
     }
 
     public PayeeProfileGetResponseData(string responseXml, AtlantisException exAtlantis)
@@ -24,26 +37,20 @@ namespace Atlantis.Framework.PayeeProfileGet.Interface
       _exception = exAtlantis;
     }
 
-    public PayeeProfileGetResponseData(string responseXml, RequestData oRequestData, Exception ex)
+    public PayeeProfileGetResponseData(string responseXml, RequestData requestData, Exception ex)
     {
       _responseXml = responseXml;
-      _exception = new AtlantisException(oRequestData, oRequestData.GetType().ToString(), ex.Message, ex.StackTrace, ex);
+      _exception = new AtlantisException(requestData, requestData.GetType().ToString(), ex.Message, ex.StackTrace, ex);
     }
 
-    public PayeeProfile Profile
-    {
-      get
-      {
-        return _profile;
-      }
-    }
+    #region Payee Profile Population
 
     private void PopulateProfile()
     {
-      XmlDocument oDoc = new XmlDocument();
-      oDoc.LoadXml(_responseXml);
+      XmlDocument xDoc = new XmlDocument();
+      xDoc.LoadXml(_responseXml);
 
-      XmlNodeList dataNodes = oDoc.SelectNodes("//ACCOUNT");
+      XmlNodeList dataNodes = xDoc.SelectNodes("//ACCOUNT");
       foreach (XmlNode dataNode in dataNodes)
       {
         XmlElement dataElement = dataNode as XmlElement;
@@ -83,14 +90,7 @@ namespace Atlantis.Framework.PayeeProfileGet.Interface
         }
       }
     }
-
-    public bool IsSuccess
-    {
-      get
-      {
-        return _isSuccess;
-      }
-    }
+    #endregion
 
     #region IResponseData Members
 

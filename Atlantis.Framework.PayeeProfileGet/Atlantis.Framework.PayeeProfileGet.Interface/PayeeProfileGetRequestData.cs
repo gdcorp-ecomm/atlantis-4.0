@@ -5,22 +5,17 @@ namespace Atlantis.Framework.PayeeProfileGet.Interface
 {
   public class PayeeProfileGetRequestData : RequestData
   {
-
-    private int _iCAPID = 0;
-    public int ICAPID
-    {
-      get { return _iCAPID; }
-      set { _iCAPID = value; }
-    }
+    public int CapId { get; private set; }
 
     public PayeeProfileGetRequestData(string shopperID,
                             string sourceURL,
                             string orderID,
                             string pathway,
-                            int pageCount, int iCAPID)
+                            int pageCount, int capId)
       : base(shopperID, sourceURL, orderID, pathway, pageCount)
     {
-      this._iCAPID = iCAPID;
+      CapId = capId;
+      RequestTimeout = TimeSpan.FromSeconds(5);
     }
 
     public override string GetCacheMD5()

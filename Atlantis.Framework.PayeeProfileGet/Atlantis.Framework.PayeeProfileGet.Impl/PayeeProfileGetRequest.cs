@@ -7,51 +7,52 @@ namespace Atlantis.Framework.PayeeProfileGet.Impl
 {
   public class PayeeProfileGetRequest : IRequest
   {
-    public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      PayeeProfileGetResponseData oResponseData = null;
-      string sResponseXML = string.Empty;
+      PayeeProfileGetResponseData responseData = null;
+      string responseXML = string.Empty;
 
       try
       {
-        X509Certificate2 cert = FindCertificate(StoreLocation.LocalMachine, StoreName.My, X509FindType.FindBySubjectName, oConfig.GetConfigValue("CertificateName"));
+        X509Certificate2 cert = FindCertificate(StoreLocation.LocalMachine, StoreName.My, X509FindType.FindBySubjectName, config.GetConfigValue("CertificateName"));
         cert.Verify();
 
-        PayeeProfileGetRequestData oGetPayeeProfileRequestData = (PayeeProfileGetRequestData)oRequestData;
-        using (PayeeProfileWS.WSCgdCAPService oSvc = new PayeeProfileWS.WSCgdCAPService())
+        PayeeProfileGetRequestData payeeProfileRequestData = (PayeeProfileGetRequestData)requestData;
+        using (PayeeProfileWS.WSCgdCAPService svc = new PayeeProfileWS.WSCgdCAPService())
         {
-          oSvc.Url = ((WsConfigElement)oConfig).WSURL;
-          oSvc.Timeout = (int)oGetPayeeProfileRequestData.RequestTimeout.TotalMilliseconds;
-          oSvc.ClientCertificates.Add(cert);
-          sResponseXML = oSvc.GetAccountDetail(oRequestData.ShopperID, oGetPayeeProfileRequestData.ICAPID);
+          svc.Url = ((WsConfigElement)config).WSURL;
+          svc.Timeout = (int)payeeProfileRequestData.RequestTimeout.TotalMilliseconds;
+          svc.ClientCertificates.Add(cert);
+          responseXML = svc.GetAccountDetail(requestData.ShopperID, payeeProfileRequestData.CapId);
         }
 
-        if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+        if (responseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
         {
-          AtlantisException exAtlantis = new AtlantisException(oRequestData,
-                                                               "PayeeProfileRequestGet.RequestHandler",
-                                                               sResponseXML,
-                                                               oRequestData.ToXML());
+          AtlantisException exAtlantis = new AtlantisException(requestData
+            , "PayeeProfileRequestGet.RequestHandler"
+            , responseXML
+            , requestData.ToXML());
 
-          oResponseData = new PayeeProfileGetResponseData(sResponseXML, exAtlantis);
+          responseData = new PayeeProfileGetResponseData(responseXML, exAtlantis);
         }
         else
         {
-          oResponseData = new PayeeProfileGetResponseData(sResponseXML);
+          responseData = new PayeeProfileGetResponseData(responseXML);
         }
       }
       catch (AtlantisException exAtlantis)
       {
-        oResponseData = new PayeeProfileGetResponseData(sResponseXML, exAtlantis);
+        responseData = new PayeeProfileGetResponseData(responseXML, exAtlantis);
       }
       catch (Exception ex)
       {
-        oResponseData = new PayeeProfileGetResponseData(sResponseXML, oRequestData, ex);
+        responseData = new PayeeProfileGetResponseData(responseXML, requestData, ex);
       }
 
-      return oResponseData;
+      return responseData;
     }
 
+    #region Find Certificate
     private static X509Certificate2 FindCertificate(StoreLocation location, StoreName name, X509FindType findType, string findValue)
     {
       X509Store store = new X509Store(name, location);
@@ -73,5 +74,6 @@ namespace Atlantis.Framework.PayeeProfileGet.Impl
         store.Close();
       }
     }
+    #endregion
   }
 }

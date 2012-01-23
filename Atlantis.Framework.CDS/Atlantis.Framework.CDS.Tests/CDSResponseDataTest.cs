@@ -1,8 +1,8 @@
-﻿using Atlantis.Framework.CDS.Interface;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using Atlantis.Framework.Interface;
+﻿using System;
 using System.Net;
+using Atlantis.Framework.CDS.Interface;
+using Atlantis.Framework.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.CDS.Tests
 {   

@@ -80,6 +80,12 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
       set { this[PayeeProfileFields.SubmitterTitle] = value; }
     }
 
+    public string PayPalEmail
+    {
+      get { return GetStringProperty(PayeeProfileFields.PayPalEmail, string.Empty); }
+      set { this[PayeeProfileFields.PayPalEmail] = value; }
+    }
+
     public string TaxUpdateDate
     {
       get { return GetStringProperty(PayeeProfileFields.TaxUpdateDate, string.Empty); }
@@ -191,6 +197,7 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
       public const string AccountTypeID = "accounttypeid";
       public const string PaymentUpdateDate = "paymentupdatedate";
       public const string CreateDate = "createdate";
+      public const string PayPalEmail = "email";
       
       public const string ShopperID = "shopperid";
     }

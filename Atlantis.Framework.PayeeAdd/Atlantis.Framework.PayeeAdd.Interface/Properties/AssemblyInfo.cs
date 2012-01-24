@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.PayeeProfile.Interface")]
+[assembly: AssemblyTitle("Atlantis.Framework.PayeeAdd.Interface")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
 #else
@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 #endif
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
-[assembly: AssemblyProduct("Atlantis.Framework.PayeeProfile.Interface")]
+[assembly: AssemblyProduct("Atlantis.Framework.PayeeAdd.Interface")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

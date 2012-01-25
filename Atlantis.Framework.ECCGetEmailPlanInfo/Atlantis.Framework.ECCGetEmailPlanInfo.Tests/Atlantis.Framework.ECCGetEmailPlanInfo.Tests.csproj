@@ -65,6 +65,10 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
+      <Project>{3213E6DB-F026-4F17-A46A-7127F79F6620}</Project>
+      <Name>Atlantis.Framework.Nimitz</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.ECCGetEmailPlanInfo.Impl\Atlantis.Framework.ECCGetEmailPlanInfo.Impl.csproj">
       <Project>{9269035C-D4AC-4CB8-A9F7-806DE98344E0}</Project>
       <Name>Atlantis.Framework.ECCGetEmailPlanInfo.Impl</Name>
@@ -75,6 +79,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

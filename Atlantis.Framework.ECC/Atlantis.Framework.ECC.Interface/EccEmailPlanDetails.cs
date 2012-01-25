@@ -34,6 +34,12 @@ namespace Atlantis.Framework.Ecc.Interface
     [DataMember(Name="quota_remaining")]
     public long QuotaRemaning { get; set; }
 
+    [DataMember(Name="total_used")]
+    public long DiskSpaceMbUsed { get; set; }
+
+    [DataMember(Name = "total_remain")]
+    public long DiskSpaceMbRemaining { get; set; }
+
     [DataMember(Name = "imap")]
     private string isImap { get; set; }
     public bool IsImap { 

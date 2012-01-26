@@ -6,17 +6,18 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.FastballGetOffersList.Interface
 {
-  public class FastballGetOffersListRequest : RequestData
+  public class FastballGetOffersListRequestData : RequestData
   {
-
     readonly TimeSpan TWO_MINUTES = TimeSpan.FromMinutes(2);
+
+    public bool ReturnStubbedData { get; set; }
 
     public int PrivateLabelId { get; set; }
     public int AppId { get; set; }
     public string Placement { get; set; }
     public string RepId { get; set; }
 
-    public FastballGetOffersListRequest(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
+    public FastballGetOffersListRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
       int privateLabelId, int applicationId, string placement, IManagerContext managerContext)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {

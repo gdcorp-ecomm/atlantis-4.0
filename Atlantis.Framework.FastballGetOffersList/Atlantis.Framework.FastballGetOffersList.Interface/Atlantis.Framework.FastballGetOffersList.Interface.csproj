@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FastballGetOffersListRequest.cs" />
+    <Compile Include="FastballGetOffersListRequestData.cs" />
     <Compile Include="FastballGetOffersListResponse.cs" />
     <Compile Include="LocationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

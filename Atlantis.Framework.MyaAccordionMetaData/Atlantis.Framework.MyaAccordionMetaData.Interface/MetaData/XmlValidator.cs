@@ -11,92 +11,52 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
   public class XmlValidator
   {
     #region Properties
-    private static XmlSchemaSet _accordionSchemas = new XmlSchemaSet();
-    private static XmlSchemaSet AccordionSchemas
-    {
-      get
-      {
-        if (_accordionSchemas.Count.Equals(0))
-        {
-          _accordionSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("Accordion.xsd"))));
-        }
-        return _accordionSchemas;
-      }
-    }
 
-    private static XmlSchemaSet _contentSchemas = new XmlSchemaSet();
-    private static XmlSchemaSet ContentSchemas
-    {
-      get
-      {
-        if (_contentSchemas.Count.Equals(0))
-        {
-          _contentSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("Content.xsd"))));
-        }
-        return _contentSchemas;
-      }
-    }
+    private static XmlSchemaSet _accordionSchemas;
+    private static XmlSchemaSet _contentSchemas;
+    private static XmlSchemaSet _controlPanelSchemas;
+    private static XmlSchemaSet _workspaceLoginSchemas;
+    private static XmlSchemaSet _linkUrlSchemas;
 
-    private static XmlSchemaSet _controlPanelSchemas = new XmlSchemaSet();
-    private static XmlSchemaSet ControlPanelSchemas
-    {
-      get
-      {
-        if (_controlPanelSchemas.Count.Equals(0))
-        {
-          _controlPanelSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("ControlPanel.xsd"))));
-        }
-        return _controlPanelSchemas;
-      }
-    }
+    #endregion
 
-    private static XmlSchemaSet _workspaceLoginSchemas = new XmlSchemaSet();
-    private static XmlSchemaSet WorkspaceLoginSchemas
+    #region Constructor
+    static XmlValidator()
     {
-      get
-      {
-        if (_workspaceLoginSchemas.Count.Equals(0))
-        {
-          _workspaceLoginSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("WorkspaceLogin.xsd"))));
-        }
-        return _workspaceLoginSchemas;
-      }
+      _accordionSchemas = new XmlSchemaSet();
+      _contentSchemas = new XmlSchemaSet();
+      _controlPanelSchemas = new XmlSchemaSet();
+      _workspaceLoginSchemas = new XmlSchemaSet();
+      _linkUrlSchemas = new XmlSchemaSet();
+      _accordionSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("Accordion.xsd"))));
+      _contentSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("Content.xsd"))));
+      _controlPanelSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("ControlPanel.xsd"))));
+      _workspaceLoginSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("WorkspaceLogin.xsd"))));
+      _linkUrlSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("LinkUrl.xsd"))));
     }
-
-    private static XmlSchemaSet _linkUrlSchemas = new XmlSchemaSet();
-    private static XmlSchemaSet LinkUrlSchemas
-    {
-      get
-      {
-        if (_linkUrlSchemas.Count.Equals(0))
-        {
-          _linkUrlSchemas.Add("", XmlReader.Create(new StringReader(GetSchema("LinkUrl.xsd"))));
-        }
-        return _linkUrlSchemas;
-      }
-    }
+  
     #endregion
 
     #region Public Methods
     public static bool ValidateAccordionXml(XDocument accordionXml, out string errorMsg)
     {
-      return ValidateXml(AccordionSchemas, accordionXml, out errorMsg);
+      return ValidateXml(_accordionSchemas, accordionXml, out errorMsg);
     }
     public static bool ValidateContentXml(XDocument contentXml, out string errorMsg)
     {
-      return ValidateXml(ContentSchemas, contentXml, out errorMsg);
+      return ValidateXml(_contentSchemas, contentXml, out errorMsg);
     }
     public static bool ValidateControlPanelXml(XDocument controlPanelXml, out string errorMsg)
     {
-      return ValidateXml(ControlPanelSchemas, controlPanelXml, out errorMsg);
+      return ValidateXml(_controlPanelSchemas, controlPanelXml, out errorMsg);
     }
     public static bool ValidateLinkXml(XDocument linkXml, out string errorMsg)
     {
-      return ValidateXml(LinkUrlSchemas, linkXml, out errorMsg);
+      return ValidateXml(_linkUrlSchemas, linkXml, out errorMsg);
     }
     public static bool ValidateWorkspaceLoginXml(XDocument workspaceLoginXml, out string errorMsg)
     {
-      return ValidateXml(WorkspaceLoginSchemas, workspaceLoginXml, out errorMsg);
+      return ValidateXml(_workspaceLoginSchemas, workspaceLoginXml, out errorMsg);
     }
     #endregion
 
@@ -147,6 +107,5 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
       return schema;
     }
     #endregion
-
   }
 }

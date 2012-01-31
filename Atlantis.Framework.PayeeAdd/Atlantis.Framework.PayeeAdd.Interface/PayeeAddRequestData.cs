@@ -6,7 +6,7 @@ namespace Atlantis.Framework.PayeeAdd.Interface
 {
   public class PayeeAddRequestData : RequestData
   {
-    public PayeeProfile Payee { get; private set; }
+    private PayeeProfile Payee { get; set; }
 
     public PayeeAddRequestData(string shopperId
       , string sourceUrl

@@ -28,9 +28,9 @@ namespace Atlantis.Framework.NameMatch.Impl
           oResponse = GetAvailableDomains(oRequest.dppAvailableDomains(GetRequestXML(oNameMatchRequestData)), oRequestData);
         }
 
-        if (oResponse != null)
+        if (oResponse != null && oResponse.Length > 0)
         {
-          Dictionary<string, List<KeyValuePair<string, string>>> _domainList = new Dictionary<string, List<KeyValuePair<string, string>>>(); ;
+          Dictionary<string, List<KeyValuePair<string, string>>> _domainList = new Dictionary<string, List<KeyValuePair<string, string>>>();
 
           foreach (AvailableDomain domainSuggestion in oResponse)
           {
@@ -40,10 +40,6 @@ namespace Atlantis.Framework.NameMatch.Impl
               {
                 _domainList[domainSuggestion.DomainName] = GetData(domainSuggestion.Data[0]);
               }
-            }
-            else
-            {
-              throw new ArgumentException("No DomainsBotData");
             }
           }
 

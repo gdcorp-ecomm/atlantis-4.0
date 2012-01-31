@@ -74,11 +74,6 @@ namespace Atlantis.Framework.NameMatch.Impl
           arrayOfDomains[i] = availableDomain[i].ConvertAvailableDomain();
         }
       }
-      else
-      {
-        Interface.NameMatchRequestData rqd = (NameMatchRequestData)rqData;
-        throw new ArgumentException("No AvailableDomains from NameMatch service | " + GetRequestXML(rqd));
-      }
 
       return arrayOfDomains;
     }

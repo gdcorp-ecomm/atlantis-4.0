@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace Atlantis.Framework.PayeeProfileClass.Interface
 {
@@ -32,36 +28,86 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
         new XAttribute("submitterTitle", payee.SubmitterTitle),
         new XAttribute("paymentMethodTypeID", payee.PaymentMethodTypeID));
 
-      foreach (PayeeProfile.AddressClass addr in payee.Address)
+      foreach (PayeeProfile.AddressClass address in payee.Address)
       {
-        XElement addressXml = new XElement("Address",
-          new XAttribute("type", addr.AddressType),
-          new XAttribute("contactName", addr.ContactName),
-          new XAttribute("address1", addr.Address1),
-          new XAttribute("address2", addr.Address2),
-          new XAttribute("city", addr.City),
-          new XAttribute("stateOrProvince", addr.StateOrProvince),
-          new XAttribute("postalCode", addr.PostalCode),
-          new XAttribute("country", addr.Country),
-          new XAttribute("phone1", addr.Phone1));
-
-        if (addr.AddressType == PaymentAddressType)
-        {
-          addressXml.Add(new XAttribute("phone2", addr.Phone2),
-            new XAttribute("fax", addr.Fax));
-        }
-        payeeXml.Add(addressXml);
+        payeeXml.Add(BuildAddressXml(address));
       }
 
+      BuildPaymentMethodXml(shopperId, payee, ref payeeXml);
+
+      return payeeXml.ToString();
+    }
+
+    public static string BuildUpdatePayeeXml(string shopperId, PayeeProfile originalPayee, PayeeProfile updatedPayee)
+    {
+      XElement payeeXml = new XElement("AcctPayable",
+        new XAttribute("shopperID", shopperId),
+        new XAttribute("capID", originalPayee.CapID));
+
+      if (originalPayee.FriendlyName != updatedPayee.FriendlyName)
+      {
+        payeeXml.Add(new XAttribute("friendlyName", updatedPayee.FriendlyName));
+      }
+      if (originalPayee.TaxDeclarationTypeID != updatedPayee.TaxDeclarationTypeID)
+      {
+        payeeXml.Add(new XAttribute("taxDeclarationTypeID", updatedPayee.TaxDeclarationTypeID));
+      }
+      if (originalPayee.TaxStatusTypeID != updatedPayee.TaxStatusTypeID)
+      {
+        payeeXml.Add(new XAttribute("taxStatusTypeID", updatedPayee.TaxStatusTypeID));
+      }
+      if (originalPayee.TaxStatusText != updatedPayee.TaxStatusText)
+      {
+        payeeXml.Add(new XAttribute("taxStatusText", updatedPayee.TaxStatusText));
+      }
+      if (originalPayee.TaxID != updatedPayee.TaxID && updatedPayee.TaxID != null)
+      {
+        payeeXml.Add(new XAttribute("taxID", updatedPayee.TaxID));
+      }
+      if (originalPayee.TaxIDTypeID != updatedPayee.TaxIDTypeID || (originalPayee.TaxID != updatedPayee.TaxID && updatedPayee.TaxID != null))
+      {
+        payeeXml.Add(new XAttribute("taxIDTypeID", updatedPayee.TaxIDTypeID));
+      }
+      if (originalPayee.TaxExemptTypeID != updatedPayee.TaxExemptTypeID || (originalPayee.TaxID != updatedPayee.TaxID && updatedPayee.TaxID != null))
+      {
+        payeeXml.Add(new XAttribute("taxExemptTypeID", updatedPayee.TaxExemptTypeID));
+      }
+      if (originalPayee.TaxCertificationTypeID != updatedPayee.TaxCertificationTypeID || (originalPayee.TaxID != updatedPayee.TaxID && updatedPayee.TaxID != null))
+      {
+        payeeXml.Add(new XAttribute("taxCertificationTypeID", updatedPayee.TaxCertificationTypeID));
+      }
+      if (originalPayee.SubmitterName != updatedPayee.SubmitterName)
+      {
+        payeeXml.Add(new XAttribute("submitterName", updatedPayee.SubmitterName));
+      }
+      if (originalPayee.SubmitterTitle != updatedPayee.SubmitterTitle)
+      {
+        payeeXml.Add(new XAttribute("submitterTitle", updatedPayee.SubmitterTitle));
+      }
+
+      // Per Ecomm - Always update PaymentMethodTypeId
+      payeeXml.Add(new XAttribute("paymentMethodTypeID", updatedPayee.PaymentMethodTypeID));
+
+      foreach (PayeeProfile.AddressClass address in updatedPayee.Address)
+      {
+        payeeXml.Add(BuildAddressXml(address));
+      }
+
+      BuildPaymentMethodXml(shopperId, originalPayee, updatedPayee, ref payeeXml);
+
+      return payeeXml.ToString();
+    }
+
+    #region Xml Component Builders
+    private static void BuildPaymentMethodXml(string shopperId, PayeeProfile payee, ref XElement payeeXml)
+    {
+      BuildPaymentMethodXml(shopperId, new PayeeProfile(), payee, ref payeeXml);
+    }
+
+    private static void BuildPaymentMethodXml(string shopperId, PayeeProfile originalPayee, PayeeProfile payee, ref XElement payeeXml)
+    {
       switch (payee.PaymentMethodTypeID)
       {
-        case CheckingPaymentType:
-          payeeXml.Add(new XAttribute("achBankName", payee.AchBankName),
-            new XAttribute("achRTN", payee.AchRTN),
-            new XAttribute("accountNumber", payee.AccountNumber),
-            new XAttribute("accountOrganizationTypeID", payee.AccountOrganizationTypeID),
-            new XAttribute("accountTypeID", payee.AccountTypeID));
-          break;
         case GAGPaymentType:
           XElement gag = new XElement("GAG",
             new XAttribute("shopperID", shopperId));
@@ -72,9 +118,63 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
             new XAttribute("email", payee.PayPalEmail));
           payeeXml.Add(paypal);
           break;
+        case CheckingPaymentType:
+          if (string.IsNullOrEmpty(originalPayee.TaxID))  // Add Payee Scenario
+          {
+            payeeXml.Add(new XAttribute("achBankName", payee.AchBankName),
+              new XAttribute("achRTN", payee.AchRTN),
+              new XAttribute("accountNumber", payee.AccountNumber),
+              new XAttribute("accountOrganizationTypeID", payee.AccountOrganizationTypeID),
+              new XAttribute("accountTypeID", payee.AccountTypeID));
+          }
+          else
+          {
+            if (originalPayee.AchBankName != payee.AchBankName)
+            {
+              payeeXml.Add(new XAttribute("achBankName", payee.AchBankName));
+            }
+            if (originalPayee.AchRTN != payee.AchRTN)
+            {
+              payeeXml.Add(new XAttribute("achRTN", payee.AchRTN));
+            }
+            if (originalPayee.AccountNumber != payee.AccountNumber)
+            {
+              payeeXml.Add(new XAttribute("accountNumber", payee.AccountNumber));
+            }
+            if (originalPayee.AccountOrganizationTypeID != payee.AccountOrganizationTypeID)
+            {
+              payeeXml.Add(new XAttribute("accountOrganizationTypeID", payee.AccountOrganizationTypeID));
+            }
+            if (originalPayee.AccountTypeID != payee.AccountTypeID)
+            {
+              payeeXml.Add(new XAttribute("accountTypeID", payee.AccountTypeID));
+            }
+          }
+          break;
+      }
+    }
+
+    private static XElement BuildAddressXml(PayeeProfile.AddressClass address)
+    {
+      XElement addressXml = new XElement("Address",
+        new XAttribute("type", address.AddressType),
+        new XAttribute("contactName", address.ContactName),
+        new XAttribute("address1", address.Address1),
+        new XAttribute("address2", address.Address2),
+        new XAttribute("city", address.City),
+        new XAttribute("stateOrProvince", address.StateOrProvince),
+        new XAttribute("postalCode", address.PostalCode),
+        new XAttribute("country", address.Country),
+        new XAttribute("phone1", address.Phone1));
+
+      if (address.AddressType == PaymentAddressType)
+      {
+        addressXml.Add(new XAttribute("phone2", address.Phone2),
+          new XAttribute("fax", address.Fax));
       }
 
-      return payeeXml.ToString();
+      return addressXml;
     }
+    #endregion
   }
 }

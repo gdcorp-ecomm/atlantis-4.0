@@ -62,6 +62,20 @@ namespace Atlantis.Framework.PayeeProfileGet.Interface
             profile[currentAtt.Name.ToLowerInvariant()] = currentAtt.Value;
           }
 
+          XmlNodeList paypalNodes = dataNode.SelectNodes("//PayPal");
+          if (paypalNodes != null)
+          {
+            foreach (XmlNode ppNode in paypalNodes)
+            {
+              XmlElement ppElement = ppNode as XmlElement;
+              XmlAttribute paypalEmail = ppElement.Attributes.Count > 0 ? ppElement.Attributes[0] : null;
+              if (paypalEmail != null)
+              {
+                profile[paypalEmail.Name.ToLowerInvariant()] = paypalEmail.Value;
+              }
+            }
+          }
+
           XmlNodeList achNodes = dataNode.SelectNodes("//ACH");
           foreach(XmlNode achNode in achNodes)
           {

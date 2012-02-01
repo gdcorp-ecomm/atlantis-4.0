@@ -16,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{850D2278-09E1-45E3-8028-525EB1377C10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{092618E1-1F37-422C-82AF-17A1337B8986}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVD.Interface", "..\Atlantis.Framework.HDVD.Interface\Atlantis.Framework.HDVD.Interface\Atlantis.Framework.HDVD.Interface.csproj", "{3F2F129C-4E26-461C-96F6-BFC6BD918054}"
 EndProject
@@ -26,7 +26,7 @@ Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Atlantis.Framework.HDVDRequestAddIP.Interface\\Atlantis.Framework.HDVDRequestAddIP.Interface.csproj
 		SccProjectName1 = Atlantis.Framework.HDVDRequestAddIP.Interface
@@ -69,14 +69,14 @@ Global
 		{E21F9813-C0C0-4FD9-8E7D-258226ADC041}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E21F9813-C0C0-4FD9-8E7D-258226ADC041}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E21F9813-C0C0-4FD9-8E7D-258226ADC041}.Release|Any CPU.Build.0 = Release|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -86,7 +86,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{092618E1-1F37-422C-82AF-17A1337B8986} = {850D2278-09E1-45E3-8028-525EB1377C10}
-		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13} = {850D2278-09E1-45E3-8028-525EB1377C10}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {850D2278-09E1-45E3-8028-525EB1377C10}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {850D2278-09E1-45E3-8028-525EB1377C10}
 	EndGlobalSection
 EndGlobal

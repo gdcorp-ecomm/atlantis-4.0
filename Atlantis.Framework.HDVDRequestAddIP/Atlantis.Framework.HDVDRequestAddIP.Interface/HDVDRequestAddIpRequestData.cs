@@ -6,7 +6,6 @@ namespace Atlantis.Framework.HDVDRequestAddIP.Interface
   public class HDVDRequestAddIpRequestData : RequestData 
   {
     public Guid AccountUid { get; set; }
-    public TimeSpan RequestTimeout { get; set; }
 
     public HDVDRequestAddIpRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, Guid accountUid) : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {

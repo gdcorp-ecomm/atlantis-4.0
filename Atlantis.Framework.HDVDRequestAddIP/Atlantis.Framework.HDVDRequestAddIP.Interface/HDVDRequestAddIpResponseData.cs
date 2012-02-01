@@ -55,7 +55,7 @@ namespace Atlantis.Framework.HDVDRequestAddIP.Interface
           xml = backing.ToString();
         }
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         xml = string.Empty;
       }

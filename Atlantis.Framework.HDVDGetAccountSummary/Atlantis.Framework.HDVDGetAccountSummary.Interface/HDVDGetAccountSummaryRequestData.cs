@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Atlantis.Framework.Interface;
@@ -20,7 +18,6 @@ namespace Atlantis.Framework.HDVDGetAccountSummary.Interface
       AccountGuid = accountGuid;
     }
 
-    public TimeSpan RequestTimeout { get; set; }
     
     private string CacheKey
     {

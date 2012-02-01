@@ -1,9 +1,9 @@
 ﻿using System;
 using Atlantis.Framework.HDVD.Interface;
 using Atlantis.Framework.HDVD.Interface.Helpers;
+using Atlantis.Framework.HDVDGetAccountSummary.Impl.Aries;
 using Atlantis.Framework.HDVDGetAccountSummary.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.HDVDGetAccountSummary.Impl.Aries;
 
 namespace Atlantis.Framework.HDVDGetAccountSummary.Impl
 {

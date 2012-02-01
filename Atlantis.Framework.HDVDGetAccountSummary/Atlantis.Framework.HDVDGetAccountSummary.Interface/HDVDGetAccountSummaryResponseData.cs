@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using Atlantis.Framework.HDVD.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.SessionCache;
-using Atlantis.Framework.HDVD.Interface;
 
 namespace Atlantis.Framework.HDVDGetAccountSummary.Interface
 {
@@ -77,7 +75,7 @@ namespace Atlantis.Framework.HDVDGetAccountSummary.Interface
           xml = backing.ToString();
         }
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         xml = string.Empty;
       }

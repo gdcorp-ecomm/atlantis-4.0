@@ -1,0 +1,1135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Mobile API for the Aries products (Ded/Vded).</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetAccountList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="productType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopper" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageNumber" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="filter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sortField" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sortOrder" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountListResult" type="tns:AriesAccountListResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AriesAccountListResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AriesHostingResponse">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ResellerID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TotalRowCount" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="AccountList" type="tns:ArrayOfAriesAccountListItem" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="AriesHostingResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:HostingResponse" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="HostingResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StatusCode" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAriesAccountListItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AriesAccountListItem" nillable="true" type="tns:AriesAccountListItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AriesAccountListItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AccountUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HostingType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OperatingSystem" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AuthenticationSoapHeader" type="tns:AuthenticationSoapHeader" />
+      <s:complexType name="AuthenticationSoapHeader">
+        <s:attribute name="User" type="s:string" />
+        <s:attribute name="Password" type="s:string" />
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GetAccountSummary">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountSummaryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountSummaryResult" type="tns:AriesAccountSummaryResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AriesAccountSummaryResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AriesHostingResponse">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ResellerID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="AccountSummary" type="tns:AriesAccountSummaryInfo" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="AriesAccountSummaryInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="isDedicated" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isVirtualDedicated" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="hasFTPBackup" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isAssisted" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="hasMSSQL" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isPlesk" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isSBP" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="hasPleskPowerPack" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="hasFirewall" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isInBillingSystem" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="hasOSUpgradeAvailable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="hasUpcomingScheduledOp" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="needsFirewallSetup" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OperatingSystem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Processor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RAM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalDiskSpace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RAID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DiskDrives" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsBandwidthOverageProtectionEnabled" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="BandwidthQuota" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BandwidthQuotaUsed" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BandwidthQuotaUsedExact" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BandwidthPercentUsed" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BandwidthUnderQuota" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ScheduledOperationMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Firewall" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirewallAdminURL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ControlPanelType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ControlPanelLaunchURL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParallelsLicenseType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PleskPackage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMTPService" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryIPAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IPAddressList" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="FTPBackupUsername" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FTPBackupIPAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FTPBackupDiskQuota" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FTPBackupQuotaUsed" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MSSQLDatabase" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssistedServicePlan" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="ManagedBackupServices" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetBandwidthUsage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBandwidthUsageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBandwidthUsageResult" type="tns:AriesBandwidthUsageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AriesBandwidthUsageResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AriesHostingResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PreviousMonthUsage" type="tns:ArrayOfAriesBandwidthRecord" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentMonthUsage" type="tns:ArrayOfAriesBandwidthRecord" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfAriesBandwidthRecord">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AriesBandwidthRecord" nillable="true" type="tns:AriesBandwidthRecord" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AriesBandwidthRecord">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TotalUsage" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="MeasurementUnit" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetContextHelp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contextHelpPage" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contextHelpField" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContextHelpResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetContextHelpResult" type="tns:AriesContextHelpResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AriesContextHelpResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AriesHostingResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetEmailUsage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmailUsageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmailUsageResult" type="tns:AriesEmailUsageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AriesEmailUsageResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AriesHostingResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PreviousMonthUsage" type="tns:ArrayOfAriesEmailRecord" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentMonthUsage" type="tns:ArrayOfAriesEmailRecord" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfAriesEmailRecord">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AriesEmailRecord" nillable="true" type="tns:AriesEmailRecord" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AriesEmailRecord">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RelayDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumRelaysSent" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumRelaysAllowed" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetFTPDiskSpaceUsage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFTPDiskSpaceUsageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFTPDiskSpaceUsageResult" type="tns:AriesFTPUsageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AriesFTPUsageResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AriesHostingResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PreviousMonthUsage" type="tns:ArrayOfAriesFTPRecord" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentMonthUsage" type="tns:ArrayOfAriesFTPRecord" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfAriesFTPRecord">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AriesFTPRecord" nillable="true" type="tns:AriesFTPRecord" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AriesFTPRecord">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="MeasurementUnit" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSupportedOperatingSystems">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSupportedOperatingSystemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSupportedOperatingSystemsResult" type="tns:AriesOperatingSystemResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AriesOperatingSystemResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AriesHostingResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="OperatingSystems" type="tns:ArrayOfString" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="RequestAdditionalIPAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RequestAdditionalIPAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RequestAdditionalIPAddressResult" type="tns:AriesHostingResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResetPasswordResult" type="tns:AriesHostingResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitRebootRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitRebootRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitRebootRequestResult" type="tns:AriesHostingResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitReprovision">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="hostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operatingSystemVersion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitReprovisionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitReprovisionResult" type="tns:AriesHostingResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitTroubleTicket">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerPhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ticketTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ticketBody" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="hasServerBeenRebooted" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="permissionForSupportAccess" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitTroubleTicketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitTroubleTicketResult" type="tns:AriesHostingResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncPasswords">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rootPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firewallPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncPasswordsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncPasswordsResult" type="tns:AriesHostingResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBandwidthOverageProtection">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="enabled" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="suspend" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBandwidthOverageProtectionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateBandwidthOverageProtectionResult" type="tns:AriesHostingResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateFTPBackupInformation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userNameIfAcctDoesntExist" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateFTPBackupInformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateFTPBackupInformationResult" type="tns:AriesHostingResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateFormUsernamePassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="hostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="validateFtp" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="ftpUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ftpPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firewallPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateFormUsernamePasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateFormUsernamePasswordResult" type="tns:AriesValidationResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AriesValidationResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AriesHostingResponse">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="HasErrors" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ValidateFormSubmitTroubleTicket">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="firstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="summary" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="details" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateFormSubmitTroubleTicketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateFormSubmitTroubleTicketResult" type="tns:AriesValidationResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateFormUpdateFTPBackupInformation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountGuid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ftpUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ftpPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateFormUpdateFTPBackupInformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateFormUpdateFTPBackupInformationResult" type="tns:AriesValidationResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAccountListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountList" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountListAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSummarySoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountSummary" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSummarySoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountSummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSummaryAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetBandwidthUsageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBandwidthUsage" />
+  </wsdl:message>
+  <wsdl:message name="GetBandwidthUsageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBandwidthUsageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBandwidthUsageAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetContextHelpSoapIn">
+    <wsdl:part name="parameters" element="tns:GetContextHelp" />
+  </wsdl:message>
+  <wsdl:message name="GetContextHelpSoapOut">
+    <wsdl:part name="parameters" element="tns:GetContextHelpResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetContextHelpAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetEmailUsageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmailUsage" />
+  </wsdl:message>
+  <wsdl:message name="GetEmailUsageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmailUsageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmailUsageAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetFTPDiskSpaceUsageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFTPDiskSpaceUsage" />
+  </wsdl:message>
+  <wsdl:message name="GetFTPDiskSpaceUsageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFTPDiskSpaceUsageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFTPDiskSpaceUsageAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetSupportedOperatingSystemsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSupportedOperatingSystems" />
+  </wsdl:message>
+  <wsdl:message name="GetSupportedOperatingSystemsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSupportedOperatingSystemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSupportedOperatingSystemsAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="RequestAdditionalIPAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:RequestAdditionalIPAddress" />
+  </wsdl:message>
+  <wsdl:message name="RequestAdditionalIPAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:RequestAdditionalIPAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="RequestAdditionalIPAddressAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="ResetPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetPassword" />
+  </wsdl:message>
+  <wsdl:message name="ResetPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetPasswordAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="SubmitRebootRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitRebootRequest" />
+  </wsdl:message>
+  <wsdl:message name="SubmitRebootRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitRebootRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitRebootRequestAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="SubmitReprovisionSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitReprovision" />
+  </wsdl:message>
+  <wsdl:message name="SubmitReprovisionSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitReprovisionResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitReprovisionAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="SubmitTroubleTicketSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitTroubleTicket" />
+  </wsdl:message>
+  <wsdl:message name="SubmitTroubleTicketSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitTroubleTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitTroubleTicketAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="SyncPasswordsSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncPasswords" />
+  </wsdl:message>
+  <wsdl:message name="SyncPasswordsSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncPasswordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncPasswordsAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBandwidthOverageProtectionSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateBandwidthOverageProtection" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBandwidthOverageProtectionSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateBandwidthOverageProtectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBandwidthOverageProtectionAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFTPBackupInformationSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateFTPBackupInformation" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFTPBackupInformationSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateFTPBackupInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFTPBackupInformationAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="ValidateFormUsernamePasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateFormUsernamePassword" />
+  </wsdl:message>
+  <wsdl:message name="ValidateFormUsernamePasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateFormUsernamePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateFormUsernamePasswordAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="ValidateFormSubmitTroubleTicketSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateFormSubmitTroubleTicket" />
+  </wsdl:message>
+  <wsdl:message name="ValidateFormSubmitTroubleTicketSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateFormSubmitTroubleTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateFormSubmitTroubleTicketAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="ValidateFormUpdateFTPBackupInformationSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateFormUpdateFTPBackupInformation" />
+  </wsdl:message>
+  <wsdl:message name="ValidateFormUpdateFTPBackupInformationSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateFormUpdateFTPBackupInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateFormUpdateFTPBackupInformationAuthenticationSoapHeader">
+    <wsdl:part name="AuthenticationSoapHeader" element="tns:AuthenticationSoapHeader" />
+  </wsdl:message>
+  <wsdl:portType name="HCCAPIServiceAriesSoap">
+    <wsdl:operation name="GetAccountList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get a list of hosting accounts for a given shopper id.</wsdl:documentation>
+      <wsdl:input message="tns:GetAccountListSoapIn" />
+      <wsdl:output message="tns:GetAccountListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSummary">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the Account Summary information for a given account.</wsdl:documentation>
+      <wsdl:input message="tns:GetAccountSummarySoapIn" />
+      <wsdl:output message="tns:GetAccountSummarySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBandwidthUsage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get current/previous billing cycle data for Bandwidth usage.</wsdl:documentation>
+      <wsdl:input message="tns:GetBandwidthUsageSoapIn" />
+      <wsdl:output message="tns:GetBandwidthUsageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextHelp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get text for one context help item that should be shown on a page. These are question mark image buttons in the current Web UI. Call with only the account guid to get the list of supported page names. Call with only the account guid and page name to get all the fields for that page.</wsdl:documentation>
+      <wsdl:input message="tns:GetContextHelpSoapIn" />
+      <wsdl:output message="tns:GetContextHelpSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmailUsage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get current/previous billing cycle data for Email usage.</wsdl:documentation>
+      <wsdl:input message="tns:GetEmailUsageSoapIn" />
+      <wsdl:output message="tns:GetEmailUsageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFTPDiskSpaceUsage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get current/previous billing cycle data for FTP disk space usage.</wsdl:documentation>
+      <wsdl:input message="tns:GetFTPDiskSpaceUsageSoapIn" />
+      <wsdl:output message="tns:GetFTPDiskSpaceUsageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedOperatingSystems">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get all supported operating systems for a given account. Used for reprovisions and new account setup.</wsdl:documentation>
+      <wsdl:input message="tns:GetSupportedOperatingSystemsSoapIn" />
+      <wsdl:output message="tns:GetSupportedOperatingSystemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestAdditionalIPAddress">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Customers can have up to 3 IPs for free. This will attempt to request another one.</wsdl:documentation>
+      <wsdl:input message="tns:RequestAdditionalIPAddressSoapIn" />
+      <wsdl:output message="tns:RequestAdditionalIPAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Reset both user and root passwords for a virtual dedicated account.</wsdl:documentation>
+      <wsdl:input message="tns:ResetPasswordSoapIn" />
+      <wsdl:output message="tns:ResetPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitRebootRequest">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Request a power cycle (reboot).</wsdl:documentation>
+      <wsdl:input message="tns:SubmitRebootRequestSoapIn" />
+      <wsdl:output message="tns:SubmitRebootRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitReprovision">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Request a reprovision for a customer account. This will erase everything.</wsdl:documentation>
+      <wsdl:input message="tns:SubmitReprovisionSoapIn" />
+      <wsdl:output message="tns:SubmitReprovisionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitTroubleTicket">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Open a trouble ticket for the customer.</wsdl:documentation>
+      <wsdl:input message="tns:SubmitTroubleTicketSoapIn" />
+      <wsdl:output message="tns:SubmitTroubleTicketSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncPasswords">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Allows the customer to update their user/password on file. Useful for when they need troubleshooting help.</wsdl:documentation>
+      <wsdl:input message="tns:SyncPasswordsSoapIn" />
+      <wsdl:output message="tns:SyncPasswordsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBandwidthOverageProtection">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update customer's preference for bandwidth overage protection.</wsdl:documentation>
+      <wsdl:input message="tns:UpdateBandwidthOverageProtectionSoapIn" />
+      <wsdl:output message="tns:UpdateBandwidthOverageProtectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFTPBackupInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update credentials for a customers FTP backup account.</wsdl:documentation>
+      <wsdl:input message="tns:UpdateFTPBackupInformationSoapIn" />
+      <wsdl:output message="tns:UpdateFTPBackupInformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateFormUsernamePassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Validates user/pass for account, user/pass for FTP (if applicable), and pass for firewall (if applicable)</wsdl:documentation>
+      <wsdl:input message="tns:ValidateFormUsernamePasswordSoapIn" />
+      <wsdl:output message="tns:ValidateFormUsernamePasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateFormSubmitTroubleTicket">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Validate form input for a trouble ticket</wsdl:documentation>
+      <wsdl:input message="tns:ValidateFormSubmitTroubleTicketSoapIn" />
+      <wsdl:output message="tns:ValidateFormSubmitTroubleTicketSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateFormUpdateFTPBackupInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Validate form input for updating an FTP backup account</wsdl:documentation>
+      <wsdl:input message="tns:ValidateFormUpdateFTPBackupInformationSoapIn" />
+      <wsdl:output message="tns:ValidateFormUpdateFTPBackupInformationSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HCCAPIServiceAriesSoap" type="tns:HCCAPIServiceAriesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAccountList">
+      <soap:operation soapAction="http://tempuri.org/GetAccountList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAccountListAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSummary">
+      <soap:operation soapAction="http://tempuri.org/GetAccountSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAccountSummaryAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBandwidthUsage">
+      <soap:operation soapAction="http://tempuri.org/GetBandwidthUsage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetBandwidthUsageAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextHelp">
+      <soap:operation soapAction="http://tempuri.org/GetContextHelp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetContextHelpAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmailUsage">
+      <soap:operation soapAction="http://tempuri.org/GetEmailUsage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetEmailUsageAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFTPDiskSpaceUsage">
+      <soap:operation soapAction="http://tempuri.org/GetFTPDiskSpaceUsage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetFTPDiskSpaceUsageAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedOperatingSystems">
+      <soap:operation soapAction="http://tempuri.org/GetSupportedOperatingSystems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSupportedOperatingSystemsAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestAdditionalIPAddress">
+      <soap:operation soapAction="http://tempuri.org/RequestAdditionalIPAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RequestAdditionalIPAddressAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap:operation soapAction="http://tempuri.org/ResetPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ResetPasswordAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitRebootRequest">
+      <soap:operation soapAction="http://tempuri.org/SubmitRebootRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SubmitRebootRequestAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitReprovision">
+      <soap:operation soapAction="http://tempuri.org/SubmitReprovision" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SubmitReprovisionAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitTroubleTicket">
+      <soap:operation soapAction="http://tempuri.org/SubmitTroubleTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SubmitTroubleTicketAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncPasswords">
+      <soap:operation soapAction="http://tempuri.org/SyncPasswords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SyncPasswordsAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBandwidthOverageProtection">
+      <soap:operation soapAction="http://tempuri.org/UpdateBandwidthOverageProtection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateBandwidthOverageProtectionAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFTPBackupInformation">
+      <soap:operation soapAction="http://tempuri.org/UpdateFTPBackupInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateFTPBackupInformationAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateFormUsernamePassword">
+      <soap:operation soapAction="http://tempuri.org/ValidateFormUsernamePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ValidateFormUsernamePasswordAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateFormSubmitTroubleTicket">
+      <soap:operation soapAction="http://tempuri.org/ValidateFormSubmitTroubleTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ValidateFormSubmitTroubleTicketAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateFormUpdateFTPBackupInformation">
+      <soap:operation soapAction="http://tempuri.org/ValidateFormUpdateFTPBackupInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ValidateFormUpdateFTPBackupInformationAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="HCCAPIServiceAriesSoap12" type="tns:HCCAPIServiceAriesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAccountList">
+      <soap12:operation soapAction="http://tempuri.org/GetAccountList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAccountListAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountSummary">
+      <soap12:operation soapAction="http://tempuri.org/GetAccountSummary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAccountSummaryAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBandwidthUsage">
+      <soap12:operation soapAction="http://tempuri.org/GetBandwidthUsage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetBandwidthUsageAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextHelp">
+      <soap12:operation soapAction="http://tempuri.org/GetContextHelp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetContextHelpAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmailUsage">
+      <soap12:operation soapAction="http://tempuri.org/GetEmailUsage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetEmailUsageAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFTPDiskSpaceUsage">
+      <soap12:operation soapAction="http://tempuri.org/GetFTPDiskSpaceUsage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetFTPDiskSpaceUsageAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedOperatingSystems">
+      <soap12:operation soapAction="http://tempuri.org/GetSupportedOperatingSystems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetSupportedOperatingSystemsAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestAdditionalIPAddress">
+      <soap12:operation soapAction="http://tempuri.org/RequestAdditionalIPAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RequestAdditionalIPAddressAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap12:operation soapAction="http://tempuri.org/ResetPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ResetPasswordAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitRebootRequest">
+      <soap12:operation soapAction="http://tempuri.org/SubmitRebootRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SubmitRebootRequestAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitReprovision">
+      <soap12:operation soapAction="http://tempuri.org/SubmitReprovision" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SubmitReprovisionAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitTroubleTicket">
+      <soap12:operation soapAction="http://tempuri.org/SubmitTroubleTicket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SubmitTroubleTicketAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncPasswords">
+      <soap12:operation soapAction="http://tempuri.org/SyncPasswords" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SyncPasswordsAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBandwidthOverageProtection">
+      <soap12:operation soapAction="http://tempuri.org/UpdateBandwidthOverageProtection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateBandwidthOverageProtectionAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFTPBackupInformation">
+      <soap12:operation soapAction="http://tempuri.org/UpdateFTPBackupInformation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateFTPBackupInformationAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateFormUsernamePassword">
+      <soap12:operation soapAction="http://tempuri.org/ValidateFormUsernamePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ValidateFormUsernamePasswordAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateFormSubmitTroubleTicket">
+      <soap12:operation soapAction="http://tempuri.org/ValidateFormSubmitTroubleTicket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ValidateFormSubmitTroubleTicketAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateFormUpdateFTPBackupInformation">
+      <soap12:operation soapAction="http://tempuri.org/ValidateFormUpdateFTPBackupInformation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ValidateFormUpdateFTPBackupInformationAuthenticationSoapHeader" part="AuthenticationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HCCAPIServiceAries">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Mobile API for the Aries products (Ded/Vded).</wsdl:documentation>
+    <wsdl:port name="HCCAPIServiceAriesSoap" binding="tns:HCCAPIServiceAriesSoap">
+      <soap:address location="http://aries-mobilehccwebservices.test.secureserver-net.ide:8090/HCCAPIServiceAries.asmx" />
+    </wsdl:port>
+    <wsdl:port name="HCCAPIServiceAriesSoap12" binding="tns:HCCAPIServiceAriesSoap12">
+      <soap12:address location="http://aries-mobilehccwebservices.test.secureserver-net.ide:8090/HCCAPIServiceAries.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

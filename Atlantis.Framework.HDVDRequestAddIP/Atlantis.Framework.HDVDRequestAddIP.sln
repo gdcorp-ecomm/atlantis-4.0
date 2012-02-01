@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDRequestAddIP.Interface", "Atlantis.Framework.HDVDRequestAddIP.Interface\Atlantis.Framework.HDVDRequestAddIP.Interface.csproj", "{7FB2DD44-9730-4398-A9A9-8E339938C8FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDRequestAddIP.Impl", "Atlantis.Framework.HDVDRequestAddIP.Impl\Atlantis.Framework.HDVDRequestAddIP.Impl.csproj", "{15C5FE97-722B-4A5B-99CF-669F3B00455F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDRequestAddIP.Tests", "Atlantis.Framework.HDVDRequestAddIP.Tests\Atlantis.Framework.HDVDRequestAddIP.Tests.csproj", "{E21F9813-C0C0-4FD9-8E7D-258226ADC041}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B44B8A72-5840-443A-BC8A-566E73B727A7}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.HDVDRequestAddIP.vsmdi = Atlantis.Framework.HDVDRequestAddIP.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{850D2278-09E1-45E3-8028-525EB1377C10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{092618E1-1F37-422C-82AF-17A1337B8986}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVD.Interface", "..\Atlantis.Framework.HDVD.Interface\Atlantis.Framework.HDVD.Interface\Atlantis.Framework.HDVD.Interface.csproj", "{3F2F129C-4E26-461C-96F6-BFC6BD918054}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.HDVDRequestAddIP.Interface\\Atlantis.Framework.HDVDRequestAddIP.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.HDVDRequestAddIP.Interface
+		SccLocalPath1 = Atlantis.Framework.HDVDRequestAddIP.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.HDVDRequestAddIP.Impl\\Atlantis.Framework.HDVDRequestAddIP.Impl.csproj
+		SccProjectName2 = Atlantis.Framework.HDVDRequestAddIP.Impl
+		SccLocalPath2 = Atlantis.Framework.HDVDRequestAddIP.Impl
+		SccProjectUniqueName3 = Atlantis.Framework.HDVDRequestAddIP.Tests\\Atlantis.Framework.HDVDRequestAddIP.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.HDVDRequestAddIP.Tests
+		SccLocalPath3 = Atlantis.Framework.HDVDRequestAddIP.Tests
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.HDVDRequestAddIP.sln
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.HDVDRequestAddIP.sln
+		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.HDVD.Interface\\Atlantis.Framework.HDVD.Interface\\Atlantis.Framework.HDVD.Interface.csproj
+		SccProjectName6 = ../Atlantis.Framework.HDVD.Interface/Atlantis.Framework.HDVD.Interface
+		SccLocalPath6 = ..\\Atlantis.Framework.HDVD.Interface\\Atlantis.Framework.HDVD.Interface
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.HDVDRequestAddIP.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FB2DD44-9730-4398-A9A9-8E339938C8FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FB2DD44-9730-4398-A9A9-8E339938C8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FB2DD44-9730-4398-A9A9-8E339938C8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FB2DD44-9730-4398-A9A9-8E339938C8FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C5FE97-722B-4A5B-99CF-669F3B00455F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C5FE97-722B-4A5B-99CF-669F3B00455F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C5FE97-722B-4A5B-99CF-669F3B00455F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C5FE97-722B-4A5B-99CF-669F3B00455F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E21F9813-C0C0-4FD9-8E7D-258226ADC041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E21F9813-C0C0-4FD9-8E7D-258226ADC041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E21F9813-C0C0-4FD9-8E7D-258226ADC041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E21F9813-C0C0-4FD9-8E7D-258226ADC041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{092618E1-1F37-422C-82AF-17A1337B8986} = {850D2278-09E1-45E3-8028-525EB1377C10}
+		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13} = {850D2278-09E1-45E3-8028-525EB1377C10}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDGetSupportedOS.Interface", "Atlantis.Framework.HDVDGetSupportedOS.Interface\Atlantis.Framework.HDVDGetSupportedOS.Interface.csproj", "{F3C50227-1874-4C93-B159-C5B64EA8C7D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDGetSupportedOS.Impl", "Atlantis.Framework.HDVDGetSupportedOS.Impl\Atlantis.Framework.HDVDGetSupportedOS.Impl.csproj", "{8B3919E9-BE15-4412-84D6-8E38BE8A790A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDGetSupportedOS.Tests", "Atlantis.Framework.HDVDGetSupportedOS.Tests\Atlantis.Framework.HDVDGetSupportedOS.Tests.csproj", "{EF9E97C5-431F-4FA1-94AE-0BEBFF718517}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1DA63DD0-455C-4EAC-94DF-3F4B7E24AA97}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.HDVDGetSupportedOS.vsmdi = Atlantis.Framework.HDVDGetSupportedOS.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{24BEC6AF-BC7D-40C5-AA4B-19BA3F0E1DEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{092618E1-1F37-422C-82AF-17A1337B8986}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.HDVDGetSupportedOS.Interface\\Atlantis.Framework.HDVDGetSupportedOS.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.HDVDGetSupportedOS.Interface
+		SccLocalPath1 = Atlantis.Framework.HDVDGetSupportedOS.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.HDVDGetSupportedOS.Impl\\Atlantis.Framework.HDVDGetSupportedOS.Impl.csproj
+		SccProjectName2 = Atlantis.Framework.HDVDGetSupportedOS.Impl
+		SccLocalPath2 = Atlantis.Framework.HDVDGetSupportedOS.Impl
+		SccProjectUniqueName3 = Atlantis.Framework.HDVDGetSupportedOS.Tests\\Atlantis.Framework.HDVDGetSupportedOS.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.HDVDGetSupportedOS.Tests
+		SccLocalPath3 = Atlantis.Framework.HDVDGetSupportedOS.Tests
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.HDVDGetSupportedOS.sln
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.HDVDGetSupportedOS.sln
+		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.HDVDGetSupportedOS.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3C50227-1874-4C93-B159-C5B64EA8C7D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3C50227-1874-4C93-B159-C5B64EA8C7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3C50227-1874-4C93-B159-C5B64EA8C7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3C50227-1874-4C93-B159-C5B64EA8C7D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B3919E9-BE15-4412-84D6-8E38BE8A790A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B3919E9-BE15-4412-84D6-8E38BE8A790A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B3919E9-BE15-4412-84D6-8E38BE8A790A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B3919E9-BE15-4412-84D6-8E38BE8A790A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9E97C5-431F-4FA1-94AE-0BEBFF718517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9E97C5-431F-4FA1-94AE-0BEBFF718517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9E97C5-431F-4FA1-94AE-0BEBFF718517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9E97C5-431F-4FA1-94AE-0BEBFF718517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13} = {24BEC6AF-BC7D-40C5-AA4B-19BA3F0E1DEB}
+		{092618E1-1F37-422C-82AF-17A1337B8986} = {24BEC6AF-BC7D-40C5-AA4B-19BA3F0E1DEB}
+	EndGlobalSection
+EndGlobal

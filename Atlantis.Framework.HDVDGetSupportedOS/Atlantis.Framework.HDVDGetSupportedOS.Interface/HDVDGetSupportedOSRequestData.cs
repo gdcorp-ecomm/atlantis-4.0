@@ -11,8 +11,6 @@ namespace Atlantis.Framework.HDVDGetSupportedOS.Interface
       AccountUid = accountUid;
     }
 
-    public TimeSpan RequestTimeout { get; set; }
-
     public Guid AccountUid { get; private set; }
 
     #region Overrides of RequestData

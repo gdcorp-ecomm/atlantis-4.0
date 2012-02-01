@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.HDVDGetSupportedOS.Interface
@@ -62,7 +60,7 @@ namespace Atlantis.Framework.HDVDGetSupportedOS.Interface
           xml = backing.ToString();
         }
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         xml = string.Empty;
       }

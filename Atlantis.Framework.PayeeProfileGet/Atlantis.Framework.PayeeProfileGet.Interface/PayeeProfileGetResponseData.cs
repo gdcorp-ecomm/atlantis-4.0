@@ -2,6 +2,8 @@
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.PayeeProfileClass.Interface;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Atlantis.Framework.PayeeProfileGet.Interface
 {
@@ -54,6 +56,7 @@ namespace Atlantis.Framework.PayeeProfileGet.Interface
       XElement ach = xDoc.Element("RESPONSE").Element("ACCOUNT").Element("ACH");
       XElement paypal = xDoc.Element("RESPONSE").Element("ACCOUNT").Element("PayPal");
       XElement gag = xDoc.Element("RESPONSE").Element("ACCOUNT").Element("GAG");
+      List<XElement> addresses = xDoc.Element("RESPONSE").Element("ACCOUNT").Elements("ADDRESS").ToList<XElement>();
 
       if (account != null)
       {
@@ -91,6 +94,19 @@ namespace Atlantis.Framework.PayeeProfileGet.Interface
           gagProfile[attr.Name.ToString().ToLowerInvariant()] = attr.Value;
         }
         profile.GAG = gagProfile;
+      }
+
+      if (addresses != null)
+      {
+        foreach (XElement address in addresses)
+        {
+          PayeeProfile.AddressClass addressProfile = new PayeeProfile.AddressClass();
+          foreach (XAttribute attr in address.Attributes())
+          {
+            addressProfile[attr.Name.ToString().ToLowerInvariant()] = attr.Value;
+          }
+          profile.Address.Add(addressProfile);
+        }
       }
 
       _profile = profile;

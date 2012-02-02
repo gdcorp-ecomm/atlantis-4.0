@@ -14,6 +14,7 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
       return result;
     }
 
+    #region Account
     public string CapID
     {
       get { return GetStringProperty(PayeeProfileFields.CapID, string.Empty); }
@@ -80,12 +81,6 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
       set { this[PayeeProfileFields.SubmitterTitle] = value; }
     }
 
-    public string PayPalEmail
-    {
-      get { return GetStringProperty(PayeeProfileFields.PayPalEmail, string.Empty); }
-      set { this[PayeeProfileFields.PayPalEmail] = value; }
-    }
-
     public string TaxUpdateDate
     {
       get { return GetStringProperty(PayeeProfileFields.TaxUpdateDate, string.Empty); }
@@ -98,58 +93,10 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
       set { this[PayeeProfileFields.PaymentMethodTypeID] = value; }
     }
 
-    public string AchPrenoteStatusID
-    {
-      get { return GetStringProperty(PayeeProfileFields.AchPrenoteStatusID, string.Empty); }
-      set { this[PayeeProfileFields.AchPrenoteStatusID] = value; }
-    }
-
     public string TaxIDContactNameChangeDate
     {
       get { return GetStringProperty(PayeeProfileFields.TaxIDContactNameChangeDate, string.Empty); }
       set { this[PayeeProfileFields.TaxIDContactNameChangeDate] = value; }
-    }
-
-    public string AchPrenoteDate
-    {
-      get { return GetStringProperty(PayeeProfileFields.AchPrenoteDate, string.Empty); }
-      set { this[PayeeProfileFields.AchPrenoteDate] = value; }
-    }
-
-    public string AchBankName
-    {
-      get { return GetStringProperty(PayeeProfileFields.AchBankName, string.Empty); }
-      set { this[PayeeProfileFields.AchBankName] = value; }
-    }
-
-    public string AchRTN
-    {
-      get { return GetStringProperty(PayeeProfileFields.AchRTN, string.Empty); }
-      set { this[PayeeProfileFields.AchRTN] = value; }
-    }
-
-    public string AccountNumber
-    {
-      get { return GetStringProperty(PayeeProfileFields.AccountNumber, string.Empty); }
-      set { this[PayeeProfileFields.AccountNumber] = value; }
-    }
-
-    public string AccountOrganizationTypeID
-    {
-      get { return GetStringProperty(PayeeProfileFields.AccountOrganizationTypeID, string.Empty); }
-      set { this[PayeeProfileFields.AccountOrganizationTypeID] = value; }
-    }
-
-    public string AccountTypeID
-    {
-      get { return GetStringProperty(PayeeProfileFields.AccountTypeID, string.Empty); }
-      set { this[PayeeProfileFields.AccountTypeID] = value; }
-    }
-
-    public string PaymentUpdateDate
-    {
-      get { return GetStringProperty(PayeeProfileFields.PaymentUpdateDate, string.Empty); }
-      set { this[PayeeProfileFields.PaymentUpdateDate] = value; }
     }
 
     public string CreateDate
@@ -158,8 +105,8 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
       set { this[PayeeProfileFields.CreateDate] = value; }
     }
 
-    private List<ACHClass> _ach = new List<ACHClass>();
-    public List<ACHClass> ACH
+    private ACHClass _ach = new ACHClass();
+    public ACHClass ACH
     {
       get { return _ach; }
       set { _ach = value; }
@@ -170,6 +117,20 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
     {
       get { return _address; }
       set { _address = value; }
+    }
+
+    private PayPalClass _paypal = new PayPalClass();
+    public PayPalClass PayPal
+    {
+      get { return _paypal; }
+      set { _paypal = value; }
+    }
+
+    private GAGClass _gag = new GAGClass();
+    public GAGClass GAG
+    {
+      get { return _gag; }
+      set { _gag = value; }
     }
 
     private class PayeeProfileFields
@@ -187,21 +148,13 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
       public const string SubmitterTitle = "submittertitle";
       public const string TaxUpdateDate = "taxupdatedate";
       public const string PaymentMethodTypeID = "paymentmethodtypeid";
-      public const string AchPrenoteStatusID = "achprenotestatusid";
       public const string TaxIDContactNameChangeDate = "taxidcontactnamechangedate";
-      public const string AchPrenoteDate = "achprenotedate";
-      public const string AchBankName = "achbankname";
-      public const string AchRTN = "achrtn";
-      public const string AccountNumber = "accountnumber";
-      public const string AccountOrganizationTypeID = "accountorganizationtypeid";
-      public const string AccountTypeID = "accounttypeid";
-      public const string PaymentUpdateDate = "paymentupdatedate";
-      public const string CreateDate = "createdate";
-      public const string PayPalEmail = "email";
-      
+      public const string CreateDate = "createdate";    
       public const string ShopperID = "shopperid";
     }
+    #endregion
 
+    #region ACH
     public class ACHClass : Dictionary<string, string>
     {
       public string GetStringProperty(string key, string defaultValue)
@@ -238,6 +191,12 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
         set { this[ACHFields.AccountOrganizationTypeID] = value; }
       }
 
+      public string AccountTypeID
+      {
+        get { return GetStringProperty(ACHFields.AccountTypeID, string.Empty); }
+        set { this[ACHFields.AccountTypeID] = value; }
+      }
+
       public string PaymentUpdateDate
       {
         get { return GetStringProperty(ACHFields.PaymentUpdateDate, string.Empty); }
@@ -250,6 +209,12 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
         get { return GetStringProperty(ACHFields.AchPrenoteStatusID, string.Empty); }
         set { this[ACHFields.AchPrenoteStatusID] = value; }
       }
+
+      public string AchRTN
+      {
+        get { return GetStringProperty(ACHFields.AchRTN, string.Empty); }
+        set { this[ACHFields.AchRTN] = value; }
+      }
       
       private class ACHFields
       {
@@ -260,11 +225,13 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
         public const string AccountTypeID = "accounttypeid";
         public const string PaymentUpdateDate = "paymentupdatedate";
         public const string AchPrenoteStatusID = "achprenotestatusid";
-        
+        public const string AchRTN = "achrtn";        
       }
 
     }
+    #endregion
 
+    #region Address
     public class AddressClass : Dictionary<string, string>
     {
       public string GetStringProperty(string key, string defaultValue)
@@ -357,5 +324,58 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
         public const string Fax = "fax";
       }
     }
+    #endregion
+
+    #region PayPal
+    public class PayPalClass : Dictionary<string, string>
+    {
+      public string GetStringProperty(string key, string defaultValue)
+      {
+        string result;
+        if (!TryGetValue(key, out result))
+        {
+          result = defaultValue;
+        }
+        return result;
+      }
+
+      public string Email
+      {
+        get { return GetStringProperty(PayPalFields.Email, string.Empty); }
+        set { this[PayPalFields.Email] = value; }
+      }
+
+      private class PayPalFields
+      {
+        public const string Email = "email";
+      }
+    }
+    #endregion
+
+    #region GoodAsGold
+    public class GAGClass : Dictionary<string, string>
+    {
+      public string GetStringProperty(string key, string defaultValue)
+      {
+        string result;
+        if (!TryGetValue(key, out result))
+        {
+          result = defaultValue;
+        }
+        return result;
+      }
+
+      public string AchPrenoteDate
+      {
+        get { return GetStringProperty(GAGFields.ShopperID, string.Empty); }
+        set { this[GAGFields.ShopperID] = value; }
+      }
+
+      private class GAGFields
+      {
+        public const string ShopperID = "shopperid";
+      }
+    }
+    #endregion
   }
 }

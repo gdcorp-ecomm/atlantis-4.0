@@ -93,18 +93,13 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
         payeeXml.Add(BuildAddressXml(address));
       }
 
-      BuildPaymentMethodXml(shopperId, originalPayee, updatedPayee, ref payeeXml);
+      BuildPaymentMethodXml(shopperId, updatedPayee, ref payeeXml);
 
       return payeeXml.ToString();
     }
 
     #region Xml Component Builders
     private static void BuildPaymentMethodXml(string shopperId, PayeeProfile payee, ref XElement payeeXml)
-    {
-      BuildPaymentMethodXml(shopperId, new PayeeProfile(), payee, ref payeeXml);
-    }
-
-    private static void BuildPaymentMethodXml(string shopperId, PayeeProfile originalPayee, PayeeProfile payee, ref XElement payeeXml)
     {
       switch (payee.PaymentMethodTypeID)
       {
@@ -115,41 +110,17 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
           break;
         case PayPalPaymentType:
           XElement paypal = new XElement("PayPal",
-            new XAttribute("email", payee.PayPalEmail));
+            new XAttribute("email", payee.PayPal.Email));
           payeeXml.Add(paypal);
           break;
         case CheckingPaymentType:
-          if (string.IsNullOrEmpty(originalPayee.TaxID))  // Add Payee Scenario
-          {
-            payeeXml.Add(new XAttribute("achBankName", payee.AchBankName),
-              new XAttribute("achRTN", payee.AchRTN),
-              new XAttribute("accountNumber", payee.AccountNumber),
-              new XAttribute("accountOrganizationTypeID", payee.AccountOrganizationTypeID),
-              new XAttribute("accountTypeID", payee.AccountTypeID));
-          }
-          else
-          {
-            if (originalPayee.AchBankName != payee.AchBankName)
-            {
-              payeeXml.Add(new XAttribute("achBankName", payee.AchBankName));
-            }
-            if (originalPayee.AchRTN != payee.AchRTN)
-            {
-              payeeXml.Add(new XAttribute("achRTN", payee.AchRTN));
-            }
-            if (originalPayee.AccountNumber != payee.AccountNumber)
-            {
-              payeeXml.Add(new XAttribute("accountNumber", payee.AccountNumber));
-            }
-            if (originalPayee.AccountOrganizationTypeID != payee.AccountOrganizationTypeID)
-            {
-              payeeXml.Add(new XAttribute("accountOrganizationTypeID", payee.AccountOrganizationTypeID));
-            }
-            if (originalPayee.AccountTypeID != payee.AccountTypeID)
-            {
-              payeeXml.Add(new XAttribute("accountTypeID", payee.AccountTypeID));
-            }
-          }
+          XElement ach = new XElement("ACH",
+            new XAttribute("achBankName", payee.ACH.AchBankName),
+            new XAttribute("achRTN", payee.ACH.AchRTN),
+            new XAttribute("accountNumber", payee.ACH.AccountNumber),
+            new XAttribute("accountOrganizationTypeID", payee.ACH.AccountOrganizationTypeID),
+            new XAttribute("accountTypeID", payee.ACH.AccountTypeID));
+          payeeXml.Add(ach);
           break;
       }
     }

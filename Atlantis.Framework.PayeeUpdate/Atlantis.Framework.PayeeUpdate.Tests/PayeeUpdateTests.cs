@@ -60,8 +60,8 @@ namespace Atlantis.Framework.PayeeUpdate.Tests
 			PayeeProfile originalPayee = getResponse.Profile;
 			PayeeProfile updatedPayee = CopyPayee(originalPayee);
 
-			updatedPayee.FriendlyName = "UpdateTest3";
-			updatedPayee.PayPalEmail = "ksearle@godaddy.com";
+			updatedPayee.FriendlyName = "UpdateTest4";
+			updatedPayee.PayPal.Email = "asearle@godaddy.com";
 
 			PayeeUpdateRequestData request = new PayeeUpdateRequestData(_shopperId
 				, string.Empty
@@ -85,9 +85,28 @@ namespace Atlantis.Framework.PayeeUpdate.Tests
 				newPayee[key] = originalPayee[key];
 			}
 
-			foreach (PayeeProfile.ACHClass achItem in originalPayee.ACH)
+			if (originalPayee.ACH.Count > 0)
 			{
-				newPayee.ACH.Add(achItem);
+				foreach (string key in originalPayee.ACH.Keys)
+				{
+					newPayee.ACH[key] = originalPayee.ACH[key];
+				}
+			}
+
+			if (originalPayee.PayPal.Count > 0)
+			{
+				foreach (string key in originalPayee.PayPal.Keys)
+				{
+					newPayee.PayPal[key] = originalPayee.PayPal[key];
+				}
+			}
+
+			if (originalPayee.GAG.Count > 0)
+			{
+				foreach (string key in originalPayee.GAG.Keys)
+				{
+					newPayee.GAG[key] = originalPayee.GAG[key];
+				}
 			}
 
 			foreach (PayeeProfile.AddressClass address in originalPayee.Address)

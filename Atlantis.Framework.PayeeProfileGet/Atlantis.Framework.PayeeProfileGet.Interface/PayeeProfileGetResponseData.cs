@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Xml;
+using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.PayeeProfileClass.Interface;
 
@@ -47,62 +47,53 @@ namespace Atlantis.Framework.PayeeProfileGet.Interface
 
     private void PopulateProfile()
     {
-      XmlDocument xDoc = new XmlDocument();
-      xDoc.LoadXml(_responseXml);
+      PayeeProfile profile = new PayeeProfile();
 
-      XmlNodeList dataNodes = xDoc.SelectNodes("//ACCOUNT");
-      foreach (XmlNode dataNode in dataNodes)
+      XDocument xDoc = XDocument.Parse(_responseXml);
+      XElement account = xDoc.Element("RESPONSE").Element("ACCOUNT");
+      XElement ach = xDoc.Element("RESPONSE").Element("ACCOUNT").Element("ACH");
+      XElement paypal = xDoc.Element("RESPONSE").Element("ACCOUNT").Element("PayPal");
+      XElement gag = xDoc.Element("RESPONSE").Element("ACCOUNT").Element("GAG");
+
+      if (account != null)
       {
-        XmlElement dataElement = dataNode as XmlElement;
-        if (dataElement != null)
+        foreach (XAttribute attr in account.Attributes())
         {
-          PayeeProfile profile = new PayeeProfile();
-          foreach (XmlAttribute currentAtt in dataElement.Attributes)
-          {
-            profile[currentAtt.Name.ToLowerInvariant()] = currentAtt.Value;
-          }
-
-          XmlNodeList paypalNodes = dataNode.SelectNodes("//PayPal");
-          if (paypalNodes != null)
-          {
-            foreach (XmlNode ppNode in paypalNodes)
-            {
-              XmlElement ppElement = ppNode as XmlElement;
-              XmlAttribute paypalEmail = ppElement.Attributes.Count > 0 ? ppElement.Attributes[0] : null;
-              if (paypalEmail != null)
-              {
-                profile[paypalEmail.Name.ToLowerInvariant()] = paypalEmail.Value;
-              }
-            }
-          }
-
-          XmlNodeList achNodes = dataNode.SelectNodes("//ACH");
-          foreach(XmlNode achNode in achNodes)
-          {
-            XmlElement achElement = achNode as XmlElement;
-            PayeeProfile.ACHClass achProfile = new PayeeProfile.ACHClass();
-            foreach (XmlAttribute currentAtt in achElement.Attributes)
-            {
-              achProfile[currentAtt.Name.ToLowerInvariant()] = currentAtt.Value;
-            }
-            profile.ACH.Add(achProfile);
-          }
-
-          XmlNodeList addressNodes = dataNode.SelectNodes("//ADDRESS");
-          foreach (XmlNode addressNode in addressNodes)
-          {
-            XmlElement addressElement = addressNode as XmlElement;
-            PayeeProfile.AddressClass addressProfile = new PayeeProfile.AddressClass();
-            foreach (XmlAttribute currentAtt in addressElement.Attributes)
-            {
-              addressProfile[currentAtt.Name.ToLowerInvariant()] = currentAtt.Value;
-            }
-            profile.Address.Add(addressProfile);
-          }
-
-          _profile = profile;
+          profile[attr.Name.ToString().ToLowerInvariant()] = attr.Value;
         }
       }
+
+      if (ach != null)
+      {
+        PayeeProfile.ACHClass achProfile = new PayeeProfile.ACHClass();
+        foreach (XAttribute attr in ach.Attributes())
+        {
+          achProfile[attr.Name.ToString().ToLowerInvariant()] = attr.Value;
+        }
+        profile.ACH = achProfile;
+      }
+
+      if (paypal != null)
+      {
+        PayeeProfile.PayPalClass paypalProfile = new PayeeProfile.PayPalClass();
+        foreach (XAttribute attr in paypal.Attributes())
+        {
+          paypalProfile[attr.Name.ToString().ToLowerInvariant()] = attr.Value;
+        }
+        profile.PayPal = paypalProfile;
+      }
+
+      if (gag != null)
+      {
+        PayeeProfile.GAGClass gagProfile = new PayeeProfile.GAGClass();
+        foreach (XAttribute attr in ach.Attributes())
+        {
+          gagProfile[attr.Name.ToString().ToLowerInvariant()] = attr.Value;
+        }
+        profile.GAG = gagProfile;
+      }
+
+      _profile = profile;
     }
     #endregion
 

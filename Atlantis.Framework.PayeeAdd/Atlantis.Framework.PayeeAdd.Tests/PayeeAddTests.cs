@@ -8,7 +8,7 @@ namespace Atlantis.Framework.PayeeAdd.Tests
   [TestClass]
   public class GetPayeeAddTests
   {
-    private const string _shopperId = "856907";
+    private const string _shopperId = "";
     private const int _requestType = 478;
 
 
@@ -68,7 +68,7 @@ namespace Atlantis.Framework.PayeeAdd.Tests
     private PayeeProfile BuildPayee()
     {
       PayeeProfile payee = new PayeeProfile();
-      payee.FriendlyName = "PayeeACHTest";
+      payee.FriendlyName = "PayeeACHTest2";
       payee.TaxDeclarationTypeID = "1";
       payee.TaxStatusTypeID = "1";
       payee.TaxStatusText = string.Empty;
@@ -79,12 +79,12 @@ namespace Atlantis.Framework.PayeeAdd.Tests
       payee.SubmitterName = "Kent Searle";
       payee.SubmitterTitle = "";
       payee.PaymentMethodTypeID = "2";
-      payee.AchBankName = "Peoples Bank";
-      payee.AchRTN = "155487005";
-      payee.AccountNumber = "8227333331";
-      payee.AccountOrganizationTypeID = "1";
-      payee.AccountTypeID = "1";
-      payee.PayPalEmail = "ksearle@godaddy.com";
+      payee.ACH.AchBankName = "Kent Searle";
+      payee.ACH.AchRTN = "155487006";
+      payee.ACH.AccountNumber = "8227444441";
+      payee.ACH.AccountOrganizationTypeID = "1";
+      payee.ACH.AccountTypeID = "1";
+      //payee.PayPal.PayPalEmail = "ksearle@godaddy.com";
 
       PayeeProfile.AddressClass w9 = new PayeeProfile.AddressClass();
       PayeeProfile.AddressClass payment = new PayeeProfile.AddressClass();

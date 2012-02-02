@@ -54,14 +54,18 @@ namespace Atlantis.Framework.PayeeUpdate.Tests
 				, string.Empty
 				, string.Empty
 				, 0
-				, 1000576);
+				, 1000579);
 
 			PayeeProfileGetResponseData getResponse = (PayeeProfileGetResponseData)Engine.Engine.ProcessRequest(getRequest, 477);
 			PayeeProfile originalPayee = getResponse.Profile;
 			PayeeProfile updatedPayee = CopyPayee(originalPayee);
 
-			updatedPayee.FriendlyName = "UpdateTest4";
-			updatedPayee.PayPal.Email = "asearle@godaddy.com";
+			//updatedPayee.FriendlyName = "UpdateTest4";
+			//updatedPayee.PayPal.Email = "asearle@godaddy.com";
+			updatedPayee.ACH.AchBankName = "Kent Searle";
+			updatedPayee.Address[0].Country = "US";
+			updatedPayee.ACH.AchRTN = "155487006";
+			updatedPayee.ACH.AccountNumber = "8227444441";
 
 			PayeeUpdateRequestData request = new PayeeUpdateRequestData(_shopperId
 				, string.Empty

@@ -315,6 +315,17 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Impl
         {
           product.UnifiedProductID = null;
         }
+
+        if ((row["externalResourceID"] as DBNull) == null)
+        {
+          product.ExternalResourceId = (string)row["externalResourceID"];
+        }
+        else
+        {
+          product.ExternalResourceId = null;
+        }
+
+        
         
 
         productList.Add(product);

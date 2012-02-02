@@ -69,5 +69,8 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Interface
 
     [DataMember(Name = "atren")]
     public bool AutoRenewFlag { get; set; }
+
+    [DataMember(Name="erid")]
+    public string ExternalResourceId { get; set; }
   }
 }

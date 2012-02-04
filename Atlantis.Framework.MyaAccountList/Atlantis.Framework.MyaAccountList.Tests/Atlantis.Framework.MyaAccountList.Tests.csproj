@@ -72,6 +72,10 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MyaAccordionMetaData\Atlantis.Framework.MyaAccordionMetaData.Impl\Atlantis.Framework.MyaAccordionMetaData.Impl.csproj">
+      <Project>{80EECC6E-B092-44DA-8E57-9DBDF98C2666}</Project>
+      <Name>Atlantis.Framework.MyaAccordionMetaData.Impl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.MyaAccordionMetaData\Atlantis.Framework.MyaAccordionMetaData.Interface\Atlantis.Framework.MyaAccordionMetaData.Interface.csproj">
       <Project>{964C8203-A5CE-47D7-B3CD-C7408A961614}</Project>
       <Name>Atlantis.Framework.MyaAccordionMetaData.Interface</Name>

@@ -32,11 +32,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMGetCu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EEMGetCustomerSummary.Interface", "..\Atlantis.Framework.EEMGetCustomerSummary\Atlantis.Framework.EEMGetCustomerSummary.Interface\Atlantis.Framework.EEMGetCustomerSummary.Interface.csproj", "{5C287A5B-4A67-4AF0-89E5-B9617A2AE350}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MyaAccordionMetaData.Impl", "..\Atlantis.Framework.MyaAccordionMetaData\Atlantis.Framework.MyaAccordionMetaData.Impl\Atlantis.Framework.MyaAccordionMetaData.Impl.csproj", "{80EECC6E-B092-44DA-8E57-9DBDF98C2666}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
+		SccNumberOfProjects = 13
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
 		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.MyaAccountList.sln
@@ -79,6 +81,10 @@ Global
 		SccProjectTopLevelParentUniqueName11 = Atlantis.Framework.MyaAccountList.sln
 		SccProjectName11 = ../Atlantis.Framework.EEMGetCustomerSummary/Atlantis.Framework.EEMGetCustomerSummary.Interface
 		SccLocalPath11 = ..\\Atlantis.Framework.EEMGetCustomerSummary\\Atlantis.Framework.EEMGetCustomerSummary.Interface
+		SccProjectUniqueName12 = ..\\Atlantis.Framework.MyaAccordionMetaData\\Atlantis.Framework.MyaAccordionMetaData.Impl\\Atlantis.Framework.MyaAccordionMetaData.Impl.csproj
+		SccProjectTopLevelParentUniqueName12 = Atlantis.Framework.MyaAccountList.sln
+		SccProjectName12 = ../Atlantis.Framework.MyaAccordionMetaData/Atlantis.Framework.MyaAccordionMetaData.Impl
+		SccLocalPath12 = ..\\Atlantis.Framework.MyaAccordionMetaData\\Atlantis.Framework.MyaAccordionMetaData.Impl
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.MyaAccountList.vsmdi
@@ -132,6 +138,10 @@ Global
 		{5C287A5B-4A67-4AF0-89E5-B9617A2AE350}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C287A5B-4A67-4AF0-89E5-B9617A2AE350}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C287A5B-4A67-4AF0-89E5-B9617A2AE350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80EECC6E-B092-44DA-8E57-9DBDF98C2666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80EECC6E-B092-44DA-8E57-9DBDF98C2666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80EECC6E-B092-44DA-8E57-9DBDF98C2666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80EECC6E-B092-44DA-8E57-9DBDF98C2666}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,5 +155,6 @@ Global
 		{951CDD46-A3EC-4232-98DF-363A6841D170} = {C1C2E019-738C-43C6-8BB5-FCD19CA3FDA0}
 		{DB38C86F-BBCD-4556-97C2-8028CAD81BF3} = {C1C2E019-738C-43C6-8BB5-FCD19CA3FDA0}
 		{5C287A5B-4A67-4AF0-89E5-B9617A2AE350} = {C1C2E019-738C-43C6-8BB5-FCD19CA3FDA0}
+		{80EECC6E-B092-44DA-8E57-9DBDF98C2666} = {C1C2E019-738C-43C6-8BB5-FCD19CA3FDA0}
 	EndGlobalSection
 EndGlobal

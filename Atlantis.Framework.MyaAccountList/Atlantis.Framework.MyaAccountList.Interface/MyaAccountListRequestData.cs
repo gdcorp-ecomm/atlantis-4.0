@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MyaAccordionMetaData.Interface;
 using Atlantis.Framework.MyaAccountList.Interface.Abstract;

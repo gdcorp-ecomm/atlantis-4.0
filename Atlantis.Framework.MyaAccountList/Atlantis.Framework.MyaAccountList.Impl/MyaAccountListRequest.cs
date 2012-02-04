@@ -193,51 +193,63 @@ namespace Atlantis.Framework.MyaAccountList.Impl
     private DataSet UpdateEEMAccountListData(MyaAccountListRequestData request, ConfigElement config, DataSet ds)
     {
       List<int> customerIds = new List<int>();
+      int erid;
 
       foreach (DataRow row in ds.Tables[0].Rows)
       {
-        if (row["externalResourceID"] != DBNull.Value)
+        if (int.TryParse(row["externalResourceID"].ToString(), out erid))
         {
-          customerIds.Add(Convert.ToInt32(row["externalResourceID"]));
+          customerIds.Add(erid);
         }        
       }
 
-      var eemRequest = new EEMGetCustomerSummaryRequestData(request.ShopperID
-        , request.SourceURL
-        , request.OrderID
-        , request.Pathway
-        , request.PageCount
-        , customerIds);
-
-      int requestType = request.OverrideEEMGetCustomerSummaryRequestType.HasValue ? request.OverrideEEMGetCustomerSummaryRequestType.Value : eemRequest.EEMGetCustomerSummaryRequestType;
-      var response = Engine.Engine.ProcessRequest(eemRequest, requestType) as EEMGetCustomerSummaryResponseData;
-
-      if (response.IsSuccess)
+      if (customerIds.Count > 0)
       {
-        if (response.ReplacementDataDictionary.Count > 0)
+        try
         {
-          foreach (DataRow row in ds.Tables[0].Rows)
-          {
-            try
-            {
-              if (row["commonName"].ToString().ToLowerInvariant() != "new account")
-              {
-                EEMCustomerSummary erd;
-                response.ReplacementDataDictionary.TryGetValue(Convert.ToInt32(row["externalResourceID"]), out erd);
+          var eemRequest = new EEMGetCustomerSummaryRequestData(request.ShopperID
+            , request.SourceURL
+            , request.OrderID
+            , request.Pathway
+            , request.PageCount
+            , customerIds);
 
-                if (erd == null)
+          int requestType = request.OverrideEEMGetCustomerSummaryRequestType.HasValue ? request.OverrideEEMGetCustomerSummaryRequestType.Value : eemRequest.EEMGetCustomerSummaryRequestType;
+          var response = Engine.Engine.ProcessRequest(eemRequest, requestType) as EEMGetCustomerSummaryResponseData;
+
+          if (response.IsSuccess)
+          {
+            if (response.ReplacementDataDictionary.Count > 0)
+            {
+              foreach (DataRow row in ds.Tables[0].Rows)
+              {
+                if (int.TryParse(row["externalResourceID"].ToString(), out erid))
                 {
-                  row["commonName"] = "New Account";
-                }
-                else
-                {
-                  row["commonName"] = erd.companyName;
+                  EEMCustomerSummary erd;
+                  response.ReplacementDataDictionary.TryGetValue(erid, out erd);
+
+                  if (erd == null)
+                  {
+                    row["commonName"] = "New Account";
+                  }
+                  else
+                  {
+                    row["commonName"] = erd.companyName;
+                  }
                 }
               }
             }
-            catch (Exception ex)
+          }
+        }
+        catch
+        {
+          // Value of this web service call is cosmetic.  Swallow error so account list is still returned.        
+          foreach (DataRow row in ds.Tables[0].Rows)
+          {
+            // Set the account names of rows with set CustomerId value to "New Account" to hide CustomerId returned from billing table.
+            if (int.TryParse(row["externalResourceID"].ToString(), out erid))
             {
-              throw new AtlantisException(eemRequest, "MyaAccountListRequest::UpdateEEMAccountListData", ex.Message, ex.StackTrace);
+              row["commonName"] = "New Account";
             }
           }
         }

@@ -40,6 +40,7 @@ namespace Atlantis.Framework.EEMGetCustomerSummary.Interface
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       CustomerIds = customerIds;
+      RequestTimeout = TimeSpan.FromSeconds(5);
     }
 
     public override string GetCacheMD5()

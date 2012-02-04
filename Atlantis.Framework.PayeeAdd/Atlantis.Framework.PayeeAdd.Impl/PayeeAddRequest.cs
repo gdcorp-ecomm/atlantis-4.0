@@ -30,10 +30,16 @@ namespace Atlantis.Framework.PayeeAdd.Impl
         if (responseXml.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
         {
           string data = string.Format("Response XML: {0} | Request XML: {1}", responseXml, requestData.ToXML());
-          AtlantisException exAtlantis = new AtlantisException(requestData
-            , "PayeeAdd::RequestHandler"
+          AtlantisException exAtlantis = new AtlantisException("PayeeAdd::RequestHandler"
+            , requestData.SourceURL
+            , "0"
             , "Payee Add WebService Failed"
-            , data);
+            , data
+            , requestData.ShopperID
+            , requestData.OrderID
+            , string.Empty
+            , requestData.Pathway
+            , requestData.PageCount);
 
           responseData = new PayeeAddResponseData(exAtlantis);
         }

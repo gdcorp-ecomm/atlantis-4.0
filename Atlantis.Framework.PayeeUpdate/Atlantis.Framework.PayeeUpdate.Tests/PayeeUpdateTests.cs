@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.PayeeProfileClass.Interface;
 using Atlantis.Framework.PayeeProfileGet.Interface;
 using Atlantis.Framework.PayeeUpdate.Interface;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.PayeeUpdate.Tests
@@ -56,16 +57,36 @@ namespace Atlantis.Framework.PayeeUpdate.Tests
 				, 0
 				, 1000579);
 
-			PayeeProfileGetResponseData getResponse = (PayeeProfileGetResponseData)Engine.Engine.ProcessRequest(getRequest, 477);
+			
+      PayeeProfileGetResponseData getResponse = (PayeeProfileGetResponseData)Engine.Engine.ProcessRequest(getRequest, 477);
 			PayeeProfile originalPayee = getResponse.Profile;
-			PayeeProfile updatedPayee = CopyPayee(originalPayee);
-
-			//updatedPayee.FriendlyName = "UpdateTest4";
+			//PayeeProfile updatedPayee = CopyPayee(originalPayee);
+      
+      PayeeProfile updatedPayee = new PayeeProfile();
+      List<PayeeProfile.AddressClass> _address = new List<PayeeProfile.AddressClass>();
+      updatedPayee.CapID = originalPayee.CapID;
+      updatedPayee.FriendlyName = originalPayee.FriendlyName;
+      updatedPayee.TaxDeclarationTypeID = originalPayee.TaxDeclarationTypeID;
+      updatedPayee.TaxStatusTypeID = originalPayee.TaxStatusTypeID;
+      updatedPayee.TaxID = originalPayee.TaxID;
+      updatedPayee.TaxIDTypeID = originalPayee.TaxIDTypeID;
+      updatedPayee.TaxExemptTypeID = originalPayee.TaxExemptTypeID;
+      updatedPayee.TaxCertificationTypeID = originalPayee.TaxCertificationTypeID;
+      updatedPayee.SubmitterName = originalPayee.SubmitterName;
+      updatedPayee.SubmitterTitle = originalPayee.SubmitterTitle;
+      updatedPayee.PaymentMethodTypeID = originalPayee.PaymentMethodTypeID;
+      _address.Add(originalPayee.Address[0]);
+      updatedPayee.Address = _address;
+      updatedPayee.ACH.AccountOrganizationTypeID = originalPayee.ACH.AccountOrganizationTypeID;
+      updatedPayee.ACH.AccountTypeID = originalPayee.ACH.AccountTypeID;
+      //updatedPayee.FriendlyName = "UpdateTest4";
 			//updatedPayee.PayPal.Email = "asearle@godaddy.com";
-			updatedPayee.ACH.AchBankName = "Kent Searle";
-			updatedPayee.Address[0].Country = "US";
+      updatedPayee.ACH.AchBankName = "Kent Searle1";
+			//updatedPayee.Address[0].Country = "US";
 			updatedPayee.ACH.AchRTN = "155487006";
-			updatedPayee.ACH.AccountNumber = "8227444441";
+			updatedPayee.ACH.AccountNumber = "8227444443";
+      //updatedPayee.ACH.AchRTN = originalPayee.ACH.AchRTN;
+      //updatedPayee.ACH.AccountNumber = originalPayee.ACH.AccountNumber;
 
 			PayeeUpdateRequestData request = new PayeeUpdateRequestData(_shopperId
 				, string.Empty

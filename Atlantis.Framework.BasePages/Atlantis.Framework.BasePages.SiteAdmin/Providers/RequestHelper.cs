@@ -33,28 +33,21 @@ namespace Atlantis.Framework.BasePages.SiteAdmin.Providers
       ServerLocationType result = ServerLocationType.Prod;
 
       string hostName = HttpContext.Current.Request.Url.Host.ToLowerInvariant();
-
       if (hostName.Contains(".ote."))
       {
         result = ServerLocationType.Ote;
       }
-      else if (isRequestInternal)
+      else if (hostName.Contains(".test."))
       {
-        if (hostName.EndsWith(".ide"))
-        {
-          if (hostName.Contains(".test."))
-          {
-            result = ServerLocationType.Test;
-          }
-          else if (hostName.Contains(".dev.") || hostName.Contains(".debug."))
-          {
-            result = ServerLocationType.Dev;
-          }
-        }
-        else if (hostName.StartsWith("localhost"))
-        {
-          result = ServerLocationType.Dev;
-        }
+        result = ServerLocationType.Test;
+      }
+      else if (hostName.Contains(".dev.") || hostName.Contains(".debug."))
+      {
+        result = ServerLocationType.Dev;
+      }
+      else if (hostName.StartsWith("localhost"))
+      {
+        result = ServerLocationType.Dev;
       }
 
       return result;

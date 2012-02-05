@@ -86,7 +86,7 @@ namespace Atlantis.Framework.BasePages.SiteAdmin.Providers
           catch(Exception ex)
           {
             AtlantisException managerException = new AtlantisException(
-              "WindowsManagerProvider.ManagerUserLookup", "403", "Error Looking up Manager User.", _shopperContext.Value.ShopperId, _siteContext.Value, _shopperContext.Value);
+              "WindowsManagerProvider.ManagerUserLookup", "403", "Error Looking up Manager User. " + ex.Message, _shopperContext.Value.ShopperId, _siteContext.Value, _shopperContext.Value);
             Engine.Engine.LogAtlantisException(managerException);
           }
         }

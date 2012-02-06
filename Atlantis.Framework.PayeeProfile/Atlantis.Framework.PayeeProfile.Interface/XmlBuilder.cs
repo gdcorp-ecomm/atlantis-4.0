@@ -99,7 +99,7 @@ namespace Atlantis.Framework.PayeeProfileClass.Interface
     }
 
     #region Xml Component Builders
-    private static void BuildPaymentMethodXml(string shopperId, PayeeProfile payee, ref XElement payeeXml)
+    private static void BuildPaymentMethodXml(string shopperId, PayeeProfile payee, ref XElement payeeXml, bool isUpdate)
     {
       BuildPaymentMethodXml(shopperId, new PayeeProfile(), payee, ref payeeXml, false);
     }

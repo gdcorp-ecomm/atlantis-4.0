@@ -49,7 +49,7 @@ namespace Atlantis.Framework.PayeeAdd.Tests
     [DeploymentItem("atlantis.config")]
     public void PayeeAddTest()
     {
-      PayeeProfile payee = BuildPayee();
+      PayeeProfile payee = BuildForeignPayee();// BuildGAGPayee(); // BuildPaypalPayee();// BuildPayee();
 
       PayeeAddRequestData request = new PayeeAddRequestData(_shopperId
         , string.Empty
@@ -72,7 +72,7 @@ namespace Atlantis.Framework.PayeeAdd.Tests
       payee.TaxDeclarationTypeID = "1";
       payee.TaxStatusTypeID = "1";
       payee.TaxStatusText = string.Empty;
-      payee.TaxID = "123456789";
+      payee.TaxID = "123-45-6789";
       payee.TaxIDTypeID = "1";
       payee.TaxExemptTypeID = "3";
       payee.TaxCertificationTypeID = "7";
@@ -116,6 +116,150 @@ namespace Atlantis.Framework.PayeeAdd.Tests
 
       return payee;
     }
+
+    private PayeeProfile BuildPaypalPayee()
+    {
+      PayeeProfile payee = new PayeeProfile();
+      payee.FriendlyName = "PayeePayalTest22";
+      payee.TaxDeclarationTypeID = "1";
+      payee.TaxStatusTypeID = "1";
+      payee.TaxStatusText = string.Empty;
+      payee.TaxID = "123-45-6789";
+      payee.TaxIDTypeID = "1";
+      payee.TaxExemptTypeID = "0";
+      payee.TaxCertificationTypeID = "5";
+      payee.SubmitterName = "Kent Searle";
+      payee.SubmitterTitle = "";
+      payee.PaymentMethodTypeID = "4";
+      //payee.ACH.AchBankName = "Kent Searle";
+      //payee.ACH.AchRTN = "155487006";
+      //payee.ACH.AccountNumber = "8227444441";
+      //payee.ACH.AccountOrganizationTypeID = "1";
+      //payee.ACH.AccountTypeID = "1";
+      payee.PayPal.Email = "sthota@godaddy.com";
+
+      PayeeProfile.AddressClass w9 = new PayeeProfile.AddressClass();
+      PayeeProfile.AddressClass payment = new PayeeProfile.AddressClass();
+
+      w9.AddressType = "W9";
+      w9.ContactName = "Joe Blow";
+      w9.Address1 = "123 Main St";
+      w9.Address2 = "Apt. 25B";
+      w9.City = "Scottsdale";
+      w9.StateOrProvince = "AZ";
+      w9.PostalCode = "85260";
+      w9.Country = "USA";
+      w9.Phone1 = "480-505-8888";
+
+      payment.AddressType = "Payment";
+      payment.ContactName = "";
+      payment.Address1 = "";
+      payment.Address2 = string.Empty;
+      payment.City = "";
+      payment.StateOrProvince = "";
+      payment.PostalCode = "";
+      payment.Country = "";
+      payment.Phone1 = "";
+      payment.Phone2 = "";
+      payment.Fax = "";
+
+      payee.Address.Add(payment);
+      payee.Address.Add(w9);
+
+      return payee;
+    }
+
+    private PayeeProfile BuildGAGPayee()
+    {
+      PayeeProfile payee = new PayeeProfile();
+      payee.FriendlyName = "GAG12";
+      payee.TaxDeclarationTypeID = "1";
+      payee.TaxStatusTypeID = "1";
+      payee.TaxStatusText = string.Empty;
+      payee.TaxID = "123-45-6789";
+      payee.TaxIDTypeID = "1";
+      payee.TaxExemptTypeID = "0";
+      payee.TaxCertificationTypeID = "5";
+      payee.SubmitterName = "Kent Searle";
+      payee.SubmitterTitle = "";
+      payee.PaymentMethodTypeID = "3";
+
+      PayeeProfile.AddressClass w9 = new PayeeProfile.AddressClass();
+      PayeeProfile.AddressClass payment = new PayeeProfile.AddressClass();
+
+      w9.AddressType = "W9";
+      w9.ContactName = "Joe Blow";
+      w9.Address1 = "123 Main St";
+      w9.Address2 = "Apt. 25B";
+      w9.City = "Scottsdale";
+      w9.StateOrProvince = "AZ";
+      w9.PostalCode = "85260";
+      w9.Country = "USA";
+      w9.Phone1 = "480-505-8888";
+
+      payment.AddressType = "Payment";
+      payment.ContactName = "";
+      payment.Address1 = "";
+      payment.Address2 = string.Empty;
+      payment.City = "";
+      payment.StateOrProvince = "";
+      payment.PostalCode = "";
+      payment.Country = "";
+      payment.Phone1 = "";
+      payment.Phone2 = "";
+      payment.Fax = "";
+
+      payee.Address.Add(payment);
+      payee.Address.Add(w9);
+
+      return payee;
+    }
+
+    private PayeeProfile BuildForeignPayee()
+    {
+      PayeeProfile payee = new PayeeProfile();
+      payee.FriendlyName = "ForeignCheck";
+      payee.TaxDeclarationTypeID = "2";
+      payee.TaxStatusTypeID = "0";
+      payee.TaxIDTypeID = "1";
+      payee.TaxCertificationTypeID = "0";
+      payee.TaxExemptTypeID = "0";
+
+      payee.PaymentMethodTypeID = "1";
+
+      PayeeProfile.AddressClass w9 = new PayeeProfile.AddressClass();
+      PayeeProfile.AddressClass payment = new PayeeProfile.AddressClass();
+
+      w9.AddressType = "W9";
+      w9.ContactName = "";
+      w9.Address1 = "";
+      w9.Address2 = "";
+      w9.City = "";
+      w9.StateOrProvince = "";
+      w9.PostalCode = "";
+      w9.Country = "";
+      w9.Phone1 = "";
+
+      payment.AddressType = "Payment";
+      payment.ContactName = "Jane Doe";
+      payment.Address1 = "32123 Main St";
+      payment.Address2 = string.Empty;
+      payment.City = "Phoenix";
+      payment.StateOrProvince = "AZ";
+      payment.PostalCode = "85255";
+      payment.Country = "USA";
+      payment.Phone1 = "480-505-8888";
+      payment.Phone2 = "480-255-9992";
+      payment.Fax = "480-255-9993";
+
+
+      payee.Address.Add(payment);
+      //payee.Address.Add(w9);
+
+      return payee;
+    }
+
+
     #endregion
   }
 }

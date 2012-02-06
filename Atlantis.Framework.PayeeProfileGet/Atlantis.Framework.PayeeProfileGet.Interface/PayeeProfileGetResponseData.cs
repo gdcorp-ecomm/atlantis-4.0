@@ -14,7 +14,6 @@ namespace Atlantis.Framework.PayeeProfileGet.Interface
     private AtlantisException _exception = null;
     private string _responseXml;
     private PayeeProfile _profile = new PayeeProfile();
-    bool _isSuccess = false;
 
     public PayeeProfile Profile
     {

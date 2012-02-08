@@ -1,7 +1,7 @@
 ﻿using System;
 using Atlantis.Framework.HDVD.Interface;
+using Atlantis.Framework.HDVD.Interface.Aries;
 using Atlantis.Framework.HDVD.Interface.Helpers;
-using Atlantis.Framework.HDVDGetAccountList.Impl.Aries;
 using Atlantis.Framework.HDVDGetAccountList.Interface;
 
 using Atlantis.Framework.Interface;
@@ -21,13 +21,12 @@ namespace Atlantis.Framework.HDVDGetAccountList.Impl
       HDVDGetAccountListResponseData responseData = null;
       HDVDGetAccountListRequestData request = requestData as HDVDGetAccountListRequestData;
 
-      HCCAPIServiceAries service = new HCCAPIServiceAries();
-      try
+      HCCAPIServiceAries service = SerivceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+
+      try 
       {
         using (service)
         {
-
-          service.Url = ((WsConfigElement)config).WSURL;
           if (request != null)
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
@@ -36,11 +35,7 @@ namespace Atlantis.Framework.HDVDGetAccountList.Impl
                                               request.Filter, request.SortField, request.SortOrder);
 
             if (response != null)
-              responseData = new HDVDGetAccountListResponseData(
-                HDVDObjectConverter<HDVDAccountListItem>.ConvertAll(response.AccountList, typeof(HDVDAccountListItem)),
-                response.ResellerID,
-                response.TotalRowCount
-                );
+              responseData = new HDVDGetAccountListResponseData((response as AriesAccountListResponse));
 
           }
         }

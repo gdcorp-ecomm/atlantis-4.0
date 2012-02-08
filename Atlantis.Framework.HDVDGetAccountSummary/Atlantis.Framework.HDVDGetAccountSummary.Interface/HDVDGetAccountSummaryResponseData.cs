@@ -6,59 +6,65 @@ using System.Text;
 using Atlantis.Framework.HDVD.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.SessionCache;
+using Atlantis.Framework.HDVD.Interface.Aries;
 
 namespace Atlantis.Framework.HDVDGetAccountSummary.Interface
 {
   [DataContract]
   public class HDVDGetAccountSummaryResponseData : IResponseData, ISessionSerializableResponse
   {
+    private AriesAccountSummaryResponse _response;
     private const string STATUS_SUCCESS = "success";
+
+    public  AriesAccountSummaryResponse Response
+    {
+      get { return _response; }
+    }
 
     private AtlantisException _ex = null;
 
     [DataMember]
-    public bool IsSuccess { get; private set; }
+    public bool IsSuccess { 
+      get
+      {
+        bool bSuccess = false;
+        if (this._response != null)
+        {
+          bSuccess = (this._response.StatusCode == 0);
+        }
+
+        return bSuccess;
+      }
+    }
 
     [DataMember]
     public int ResellerId { get; private set; }
 
-    [DataMember]
-    public int StatusCode { get; private set; }
 
     [DataMember]
-    public string StatusMessage { get; private set; }
-
-    [DataMember]
-    public HDVDAccountSummaryInfo AccountSummary { get; private set; }
+    public AriesAccountSummaryInfo AccountSummary { get; private set; }
 
     public HDVDGetAccountSummaryResponseData(RequestData requestData, Exception ex)
     {
       ResellerId = -1;
-      StatusCode = -1;
-      StatusMessage = string.Empty;
       AccountSummary = null;
-      IsSuccess = false;
       _ex = new AtlantisException(requestData, ex.Source + ":HDVDGetAccountSummaryRequest", ex.Message, string.Empty, ex);
     }
     
     public HDVDGetAccountSummaryResponseData(AtlantisException ex)
     {
       ResellerId = -1;
-      StatusCode = -1;
-      StatusMessage = string.Empty;
       AccountSummary = null;
-      IsSuccess = false;
       _ex = ex;
     }
 
-    public HDVDGetAccountSummaryResponseData(string status, int statusCode, string message, HDVDAccountSummaryInfo summary, int resellerId)
+    public HDVDGetAccountSummaryResponseData(AriesAccountSummaryResponse response)
     {
-      AccountSummary = summary;
-      ResellerId = resellerId;
-      StatusCode = statusCode;
-      StatusMessage = message;
-      IsSuccess = (status == STATUS_SUCCESS);
+      this._response = response;
+      this.ResellerId = response.ResellerID;
+      this.AccountSummary = response.AccountSummary;
     }
+
 
     #region Implementation of IResponseData
 
@@ -99,8 +105,8 @@ namespace Atlantis.Framework.HDVDGetAccountSummary.Interface
 
       try
       {
-        ser = new DataContractJsonSerializer(typeof(HDVDAccountSummaryInfo));
-        ser.WriteObject(ms, AccountSummary);
+        ser = new DataContractJsonSerializer(typeof(AriesAccountSummaryResponse));
+        ser.WriteObject(ms, this._response);
         sessionString = Encoding.Default.GetString(ms.ToArray());
         ms.Close();
       }
@@ -120,9 +126,8 @@ namespace Atlantis.Framework.HDVDGetAccountSummary.Interface
       try
       {
         ms = new MemoryStream(Encoding.Unicode.GetBytes(sessionData));
-        ser = new DataContractJsonSerializer(typeof(HDVDAccountSummaryInfo));
-        AccountSummary = ser.ReadObject(ms) as HDVDAccountSummaryInfo;
-        IsSuccess = true;
+        ser = new DataContractJsonSerializer(typeof(AriesAccountSummaryResponse));
+        this._response = ser.ReadObject(ms) as AriesAccountSummaryResponse;
         ms.Close();
       }
       finally

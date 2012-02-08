@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Atlantis.Framework.HDVDGetAccountList.Impl.Properties {
+namespace Atlantis.Framework.HDVD.Interface.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -20,6 +20,17 @@ namespace Atlantis.Framework.HDVDGetAccountList.Impl.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://aries-mobilehccwebservices.dev.secureserver-net.ide/HCCAPIServiceAries.asm" +
+            "x")]
+        public string Atlantis_Framework_HDVD_Interface_Aries_HCCAPIServiceAries {
+            get {
+                return ((string)(this["Atlantis_Framework_HDVD_Interface_Aries_HCCAPIServiceAries"]));
             }
         }
     }

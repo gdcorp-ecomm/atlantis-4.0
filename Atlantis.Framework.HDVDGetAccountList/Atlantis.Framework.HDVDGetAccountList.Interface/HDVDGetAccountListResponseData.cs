@@ -4,43 +4,57 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 using Atlantis.Framework.HDVD.Interface;
+using Atlantis.Framework.HDVD.Interface.Aries;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.SessionCache;
 
 namespace Atlantis.Framework.HDVDGetAccountList.Interface
 {
   [DataContract]
-  public class HDVDGetAccountListResponseData : IResponseData, ISessionSerializableResponse {
+  public class HDVDGetAccountListResponseData :  IResponseData, ISessionSerializableResponse {
 
     private readonly AtlantisException _ex;
-    private IList<HDVDAccountListItem> _accountList;
+    private IList<AriesAccountListItem> _accountList;
     private int _resellerId = -1;
     private int _totalRowCount = -1;
+    private HDVD.Interface.Aries.AriesAccountListResponse response;
 
     public HDVDGetAccountListResponseData(RequestData request, Exception ex)
     {
       _ex = new AtlantisException(request, ex.Source, ex.Message, ex.StackTrace, ex);
-      IsSuccess = false;
     }
 
     public HDVDGetAccountListResponseData(AtlantisException aex)
     {
       _ex = aex;
-      IsSuccess = false;
     }
 
-    public HDVDGetAccountListResponseData(IList<HDVDAccountListItem> accountList, int resellerId, int totalRowCount)
+
+    public HDVDGetAccountListResponseData(AriesAccountListResponse response)
     {
-      AccountList = accountList ?? new List<HDVDAccountListItem>();
-      ResellerId = resellerId;
-      TotalRowCount = totalRowCount;
-      IsSuccess = true;
+      this.response = response;
+      _resellerId = response.ResellerID;
+      _totalRowCount = response.TotalRowCount;
+      _accountList = response.AccountList;
     }
 
     [DataMember]
-    public bool IsSuccess { get; private set; }
+    public bool IsSuccess {
+      get
+      {
+        bool bSuccess = false;
+        if (this.response != null)
+        {
+          bSuccess =(this.response.StatusCode == 0);
+        }
+        
+        return bSuccess;
+
+      }
+    }
+    
     [DataMember]
-    public IList<HDVDAccountListItem> AccountList
+    public IList<AriesAccountListItem> AccountList
     {
       get { return _accountList; }
       set { _accountList = value; }
@@ -99,7 +113,7 @@ namespace Atlantis.Framework.HDVDGetAccountList.Interface
       try
       {
         ser = new DataContractSerializer(this.GetType());
-        ser.WriteObject(ms, this.AccountList);
+        ser.WriteObject(ms, this.response);
         sessionString = Encoding.Default.GetString(ms.ToArray());
         ms.Close();
       }
@@ -120,8 +134,7 @@ namespace Atlantis.Framework.HDVDGetAccountList.Interface
       {
         ms = new MemoryStream(Encoding.Unicode.GetBytes(sessionData));
         ser = new DataContractSerializer(this.GetType());
-        AccountList = ser.ReadObject(ms) as IList<HDVDAccountListItem>;
-        IsSuccess = true;
+        this.response = ser.ReadObject(ms) as AriesAccountListResponse;
         ms.Close();
       }
       finally

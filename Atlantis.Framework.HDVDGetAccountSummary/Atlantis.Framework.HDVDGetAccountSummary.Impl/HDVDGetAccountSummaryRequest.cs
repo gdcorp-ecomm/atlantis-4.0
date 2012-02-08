@@ -1,7 +1,7 @@
 ﻿using System;
 using Atlantis.Framework.HDVD.Interface;
+using Atlantis.Framework.HDVD.Interface.Aries;
 using Atlantis.Framework.HDVD.Interface.Helpers;
-using Atlantis.Framework.HDVDGetAccountSummary.Impl.Aries;
 using Atlantis.Framework.HDVDGetAccountSummary.Interface;
 using Atlantis.Framework.Interface;
 
@@ -20,14 +20,12 @@ namespace Atlantis.Framework.HDVDGetAccountSummary.Impl
       HDVDGetAccountSummaryRequestData request = requestData as HDVDGetAccountSummaryRequestData;
 
 
- HCCAPIServiceAries service = new HCCAPIServiceAries();
+      HCCAPIServiceAries service = SerivceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
        
       try
       {
         using (service)
         {
-
-          service.Url = ((WsConfigElement)config).WSURL;
           if (request != null)
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
@@ -37,24 +35,8 @@ namespace Atlantis.Framework.HDVDGetAccountSummary.Impl
 
               if (response != null)
               {
-                AriesAccountSummaryInfo asi = response.AccountSummary;
-                var convertedAsi =
-                  (HDVDAccountSummaryInfo)
-                  HDVDObjectConverter<HDVD.Interface.HDVDAccountSummaryInfo>.Convert(asi, typeof(HDVDAccountSummaryInfo));
-                responseData = new HDVDGetAccountSummaryResponseData(response.Status,
-                                                                     response.StatusCode,
-                                                                     response.Message,
-                                                                     convertedAsi,
-                                                                     response.ResellerID);
+                responseData = new HDVDGetAccountSummaryResponseData(response);
 
-              }
-              else
-              {
-                responseData = new HDVDGetAccountSummaryResponseData("error",
-                                                                     -1,
-                                                                     "Invalid response object recieved.",
-                                                                     null,
-                                                                     -1);
               }
             }
             else

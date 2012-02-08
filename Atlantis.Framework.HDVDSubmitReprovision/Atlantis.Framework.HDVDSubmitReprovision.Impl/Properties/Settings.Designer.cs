@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Atlantis.Framework.HDVDGetAccountList.Impl.Properties {
+namespace Atlantis.Framework.HDVDSubmitReprovision.Impl.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

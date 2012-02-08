@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -911,7 +912,7 @@ namespace Atlantis.Framework.DataCache
             sMgrCategories = oCacheWrapper.COMAccessClass.GetMgrCategoriesForUser(iManagerUserID);
           }
 
-          oMgrValues = GetMgrAttrsAndCategoriesFromXML(sMgrCategories);
+          oMgrValues = GetMgrAttrsAndCategoriesFromXML(sMgrCategories, iManagerUserID);
 
           oCache.AddValue(sKey, oMgrValues, oValue);
         }
@@ -2534,7 +2535,7 @@ namespace Atlantis.Framework.DataCache
       return dictResult;
     }
 
-    private static Structs.GetMgrCategoriesForUserValues GetMgrAttrsAndCategoriesFromXML(string sMgrXML)
+    private static Structs.GetMgrCategoriesForUserValues GetMgrAttrsAndCategoriesFromXML(string sMgrXML, int iManagerUserID)
     {
       Structs.GetMgrCategoriesForUserValues oMgrValues = new Structs.GetMgrCategoriesForUserValues();
       Dictionary<string, string> dictMgrAttributes = new Dictionary<string, string>();
@@ -2550,7 +2551,19 @@ namespace Atlantis.Framework.DataCache
 
       XmlNodeList xnlCategories = xdDoc.SelectNodes("/user/category");
       foreach (XmlElement xlCategory in xnlCategories)
-        lstMgrCategories.Add(Convert.ToInt32(xlCategory.InnerText));
+      {
+        int category = 0;
+        if (Int32.TryParse(xlCategory.InnerText, out category))
+        {
+          lstMgrCategories.Add(category);
+        }
+        else
+        {
+          LogError("GetMgrCategoriesForUserValues:" + iManagerUserID , "DataCache", 
+            new InvalidDataException("Invalid category, could not parse to integer: " + (String.IsNullOrEmpty(xlCategory.InnerText) ? "<empty>" : xlCategory.InnerText)
+            ));
+        }
+      }
 
       oMgrValues.ManagerAttributes = dictMgrAttributes;
       oMgrValues.ManagerCategories = lstMgrCategories;

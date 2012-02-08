@@ -1,9 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.HDVDGetSupportedOS.Impl.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
   <Profiles />
-  <Settings>
-    <Setting Name="Atlantis_Framework_HDVDGetSupportedOS_Impl_Aries_HCCAPIServiceAries" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://aries-mobilehccwebservices.test.secureserver-net.ide:8090/HCCAPIServiceAries.asmx</Value>
-    </Setting>
-  </Settings>
+  <Settings />
 </SettingsFile>

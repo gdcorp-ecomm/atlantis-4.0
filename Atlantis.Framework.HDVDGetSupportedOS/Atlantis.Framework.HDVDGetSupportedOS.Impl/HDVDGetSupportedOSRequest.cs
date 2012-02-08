@@ -1,5 +1,6 @@
 ﻿using System;
-using Atlantis.Framework.HDVDGetSupportedOS.Impl.Aries;
+using Atlantis.Framework.HDVD.Interface.Aries;
+using Atlantis.Framework.HDVD.Interface.Helpers;
 using Atlantis.Framework.HDVDGetSupportedOS.Interface;
 using Atlantis.Framework.Interface;
 
@@ -12,9 +13,9 @@ namespace Atlantis.Framework.HDVDGetSupportedOS.Impl
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       var request = requestData as HDVDGetSupportedOSRequestData;
-      HDVDGetSupportedOSResponseData responseData = null; 
-      
-      HCCAPIServiceAries service = new HCCAPIServiceAries();
+      HDVDGetSupportedOSResponseData responseData = null;
+
+      HCCAPIServiceAries service = SerivceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
       try
       {
         if (request.AccountUid == Guid.Empty)

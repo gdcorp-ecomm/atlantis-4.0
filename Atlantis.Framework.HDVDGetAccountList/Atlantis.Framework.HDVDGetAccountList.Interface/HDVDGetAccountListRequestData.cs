@@ -40,7 +40,7 @@ namespace Atlantis.Framework.HDVDGetAccountList.Interface
     
     private string CacheKey
     {
-      get { return "HDVDGetAccountList:" +  _appId + ":" + ShopperID + ":" + ShopperID; }
+      get { return "HDVDGetAccountList:" + _appId + ":" + ShopperID + ":" + ProductType; }
     }
 
     public override string GetCacheMD5()

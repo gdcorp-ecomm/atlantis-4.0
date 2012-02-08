@@ -22,16 +22,5 @@ namespace Atlantis.Framework.HDVDSubmitRebootRequest.Impl.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://aries-mobilehccwebservices.test.secureserver-net.ide:8090/HCCAPIServiceAri" +
-            "es.asmx")]
-        public string Atlantis_Framework_HDVDSubmitRebootRequest_Impl_Aries_HCCAPIServiceAries {
-            get {
-                return ((string)(this["Atlantis_Framework_HDVDSubmitRebootRequest_Impl_Aries_HCCAPIServiceAries"]));
-            }
-        }
     }
 }

@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Text;
 using Atlantis.Framework.HDVD.Interface;
+using Atlantis.Framework.HDVD.Interface.Aries;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.HDVDSubmitRebootRequest.Interface
 {
-  public class HDVDSubmitRebootResponseData : HDVDHostingResponse, IResponseData
+  public class HDVDSubmitRebootResponseData :  IResponseData
   {
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
-   
+    private AriesHostingResponse _response;
+
+    public AriesHostingResponse Response { get { return _response; } }
+
     public bool IsSuccess
     {
       get
       {
-        return (StatusCode == 0);
+        return (_response.StatusCode == 0);
       }
     }
 
@@ -31,11 +35,9 @@ namespace Atlantis.Framework.HDVDSubmitRebootRequest.Interface
                                    requestData.ToXML());
     }
 
-    public HDVDSubmitRebootResponseData(string status, string message, int statusCode)
+    public HDVDSubmitRebootResponseData(AriesHostingResponse response)
     {
-      Status = status;
-      Message = message;
-      StatusCode = statusCode;
+      _response = response;
     }
 
     #region IResponseData Members
@@ -45,9 +47,9 @@ namespace Atlantis.Framework.HDVDSubmitRebootRequest.Interface
       StringBuilder sb = new StringBuilder();
 
       sb.Append("<HDVDSubmitRebootResponseData>");
-      sb.AppendFormat("<Status>{0}</Status>", Status);
-      sb.AppendFormat("<StatusCode>{0}</StatusCode>", StatusCode);
-      sb.AppendFormat("<Message>{0}</Message>", Message);
+      sb.AppendFormat("<Status>{0}</Status>", _response.Status);
+      sb.AppendFormat("<StatusCode>{0}</StatusCode>", _response.StatusCode);
+      sb.AppendFormat("<Message>{0}</Message>", _response.Message);
       sb.Append("</HDVDSubmitRebootResponseData>");
 
       return sb.ToString();

@@ -1,4 +1,6 @@
 ﻿using System;
+using Atlantis.Framework.HDVD.Interface.Aries;
+using Atlantis.Framework.HDVD.Interface.Helpers;
 using Atlantis.Framework.HDVDSubmitRebootRequest.Interface;
 using Atlantis.Framework.Interface;
 
@@ -18,10 +20,11 @@ namespace Atlantis.Framework.HDVDSubmitRebootRequest.Impl
           throw new ArgumentNullException("requestData", "requestData cannot be null.");
         }
 
-        var service = new Aries.HCCAPIServiceAries();
+        HCCAPIServiceAries service = SerivceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+
         var response = service.SubmitRebootRequest(_requestData.AccountUid.ToString());
 
-        responseData = new HDVDSubmitRebootResponseData(response.Status, response.Message, response.StatusCode);
+        responseData = new HDVDSubmitRebootResponseData(response);
 
       } 
     

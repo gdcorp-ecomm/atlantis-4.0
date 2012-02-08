@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using Atlantis.Framework.HDVD.Interface;
+using Atlantis.Framework.HDVD.Interface.Aries;
 using Atlantis.Framework.HDVD.Interface.Interfaces;
 using Atlantis.Framework.Interface;
 
@@ -14,25 +15,25 @@ namespace Atlantis.Framework.HDVDRequestAddIP.Interface
     private AtlantisException _aex;
 
     [DataMember]
-    public HDVDHostingResponse Result { get; set; }
+    public AriesHostingResponse Response { get; set; }
 
-    private bool? _isSuccess = false;
+    private bool? _isSuccess = null;
     
     [DataMember] 
     public bool IsSuccess { get
     {
       if (!_isSuccess.HasValue)
       {
-        _isSuccess = (Result.Status == STATUS_SUCCESS);
+        _isSuccess = (Response.StatusCode == 0);
       }
       return _isSuccess.Value;
     }
       private set { _isSuccess = value; }
     }
 
-    public HDVDRequestAddIpResponseData(IHDVDHostingResponse hostingResponse)
+    public HDVDRequestAddIpResponseData(AriesHostingResponse response)
     {
-      Result = hostingResponse as HDVDHostingResponse;
+      Response = response;
     }
 
     public HDVDRequestAddIpResponseData(HDVDRequestAddIpRequestData request, Exception ex)

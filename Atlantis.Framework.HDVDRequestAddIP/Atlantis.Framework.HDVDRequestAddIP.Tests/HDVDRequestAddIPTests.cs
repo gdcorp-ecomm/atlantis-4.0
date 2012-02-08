@@ -12,10 +12,10 @@ namespace Atlantis.Framework.HDVDRequestAddIP.Tests
     [TestMethod]
     public void CreateValidRequest()
     {
-      string _shopperId = "12530";
+      string _shopperId = "858421";
 
       //Guid accountUid = new Guid("ad10814e-b345-4a30-9871-46dca4e61d3a");
-      Guid accountUid = new Guid("f48be517-e0ab-45f7-8766-ad761f241f5d");
+      Guid accountUid = new Guid("d11319d0-4d10-11e1-83a0-0050569575d8");
       //Guid accountUid = new Guid("99a77cac-c7f2-11de-8ec2-005056952fd6");
 
       try
@@ -32,7 +32,7 @@ namespace Atlantis.Framework.HDVDRequestAddIP.Tests
 
         Assert.IsInstanceOfType(request, typeof(HDVDRequestAddIpRequestData));
 
-        Assert.IsTrue(request.AccountUid == new Guid("f48be517-e0ab-45f7-8766-ad761f241f5d"));
+        Assert.IsTrue(request.AccountUid == new Guid("d11319d0-4d10-11e1-83a0-0050569575d8"));
         Assert.IsTrue(request.RequestTimeout == TimeSpan.FromSeconds(30));
       }
       catch (Exception ex)
@@ -45,10 +45,10 @@ namespace Atlantis.Framework.HDVDRequestAddIP.Tests
     [TestMethod]
     public void CreateValidRequestAndExecute()
     {
-      string _shopperId = "12530";
+      string _shopperId = "858421";
 
       //Guid accountUid = new Guid("ad10814e-b345-4a30-9871-46dca4e61d3a");
-      Guid accountUid = new Guid("f48be517-e0ab-45f7-8766-ad761f241f5d");
+      Guid accountUid = new Guid("d11319d0-4d10-11e1-83a0-0050569575d8");
       //Guid accountUid = new Guid("99a77cac-c7f2-11de-8ec2-005056952fd6");
 
      
@@ -64,16 +64,15 @@ namespace Atlantis.Framework.HDVDRequestAddIP.Tests
 
         Assert.IsInstanceOfType(request, typeof(HDVDRequestAddIpRequestData));
 
-        Assert.IsTrue(request.AccountUid == new Guid("f48be517-e0ab-45f7-8766-ad761f241f5d"));
+        Assert.IsTrue(request.AccountUid == new Guid("d11319d0-4d10-11e1-83a0-0050569575d8"));
         Assert.IsTrue(request.RequestTimeout == TimeSpan.FromSeconds(30));
 
         var response = Engine.Engine.ProcessRequest(request, 999) as HDVDRequestAddIpResponseData;
 
         Assert.IsNotNull(response);
         Assert.IsInstanceOfType(response, typeof(HDVDRequestAddIpResponseData));
-        Assert.IsNotNull(response.Result);
-        Assert.IsInstanceOfType(response.Result, typeof(IHDVDHostingResponse));
-
+        Assert.IsNotNull(response.Response);
+        
         Assert.IsNotNull(response.ToXML());
         Debug.WriteLine(response.ToXML());
 

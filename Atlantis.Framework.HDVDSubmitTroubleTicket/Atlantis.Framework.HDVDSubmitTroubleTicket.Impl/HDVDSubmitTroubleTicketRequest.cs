@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Atlantis.Framework.HDVD.Interface.Aries;
 using Atlantis.Framework.HDVD.Interface.Helpers;
 using Atlantis.Framework.HDVDSubmitTroubleTicket.Interface;

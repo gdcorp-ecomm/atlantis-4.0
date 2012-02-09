@@ -19,7 +19,7 @@ namespace Atlantis.Framework.HDVDSubmitTroubleTicket.Impl
       HDVDSubmitTroubleTicketResponseData responseData = null;
       HDVDSubmitTroubleTicketRequestData request = requestData as HDVDSubmitTroubleTicketRequestData;
 
-      HCCAPIServiceAries service = SerivceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      HCCAPIServiceAries service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {

@@ -70,7 +70,7 @@ namespace Atlantis.Framework.PresentationCentral.Interface
 
     public bool IsSuccess
     {
-      get { return _presentationCentralReturnedNode.InnerXml.IndexOf("-ok-", StringComparison.OrdinalIgnoreCase) > -1; }
+      get { return _presentationCentralReturnedNode.InnerXml.IndexOf("-- pageok --", StringComparison.OrdinalIgnoreCase) > -1; }
     }
 
     #endregion

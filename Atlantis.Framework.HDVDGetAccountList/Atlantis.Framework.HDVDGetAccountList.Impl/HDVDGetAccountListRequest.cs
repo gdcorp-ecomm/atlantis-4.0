@@ -21,7 +21,7 @@ namespace Atlantis.Framework.HDVDGetAccountList.Impl
       HDVDGetAccountListResponseData responseData = null;
       HDVDGetAccountListRequestData request = requestData as HDVDGetAccountListRequestData;
 
-      HCCAPIServiceAries service = SerivceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      HCCAPIServiceAries service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try 
       {

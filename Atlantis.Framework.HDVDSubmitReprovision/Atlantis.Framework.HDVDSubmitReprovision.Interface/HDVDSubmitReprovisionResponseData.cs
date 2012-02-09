@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.HDVDSubmitReprovision.Interface
@@ -10,13 +7,19 @@ namespace Atlantis.Framework.HDVDSubmitReprovision.Interface
   {
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
-    private bool _success = false;
+
+    private HDVD.Interface.Aries.AriesHostingResponse response;
 
     public bool IsSuccess
     {
       get
       {
-        return _success;
+        bool bSuccess = false;
+        if (response != null)
+        {
+          bSuccess = (response.StatusCode == 0);
+        }
+        return bSuccess;
       }
     }
 
@@ -36,6 +39,12 @@ namespace Atlantis.Framework.HDVDSubmitReprovision.Interface
                                    "HDVDSubmitReprovisionResponseData",
                                    exception.Message,
                                    requestData.ToXML());
+    }
+
+    public HDVDSubmitReprovisionResponseData(HDVD.Interface.Aries.AriesHostingResponse response)
+    {
+      // TODO: Complete member initialization
+      this.response = response;
     }
 
 

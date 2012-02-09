@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Atlantis.Framework.HDVDSubmitTroubleTicket.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

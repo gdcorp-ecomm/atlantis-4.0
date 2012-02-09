@@ -15,7 +15,7 @@ namespace Atlantis.Framework.HDVDGetSupportedOS.Impl
       var request = requestData as HDVDGetSupportedOSRequestData;
       HDVDGetSupportedOSResponseData responseData = null;
 
-      HCCAPIServiceAries service = SerivceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      HCCAPIServiceAries service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
       try
       {
         if (request.AccountUid == Guid.Empty)

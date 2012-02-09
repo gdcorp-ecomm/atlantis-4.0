@@ -15,7 +15,7 @@ namespace Atlantis.Framework.HDVDRequestAddIP.Impl
 
       var request = requestData as HDVDRequestAddIpRequestData;
       HDVDRequestAddIpResponseData responseData;
-      HCCAPIServiceAries service = SerivceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      HCCAPIServiceAries service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {

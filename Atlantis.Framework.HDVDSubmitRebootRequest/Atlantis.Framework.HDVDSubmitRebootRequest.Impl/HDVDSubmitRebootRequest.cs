@@ -20,7 +20,7 @@ namespace Atlantis.Framework.HDVDSubmitRebootRequest.Impl
           throw new ArgumentNullException("requestData", "requestData cannot be null.");
         }
 
-        HCCAPIServiceAries service = SerivceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+        HCCAPIServiceAries service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
         var response = service.SubmitRebootRequest(_requestData.AccountUid.ToString());
 

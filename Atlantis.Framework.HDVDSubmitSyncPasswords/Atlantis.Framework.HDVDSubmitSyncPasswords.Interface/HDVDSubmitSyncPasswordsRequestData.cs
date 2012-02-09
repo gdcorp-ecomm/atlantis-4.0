@@ -21,6 +21,7 @@ namespace Atlantis.Framework.HDVDSubmitSyncPasswords.Interface
       UserPassword = password;
       RootPassword = password;
       FirewallPassword = password;
+      RequestTimeout = _requestTimeout;
     }
 
     public HDVDSubmitSyncPasswordsRequestData(string shopperId,
@@ -40,6 +41,7 @@ namespace Atlantis.Framework.HDVDSubmitSyncPasswords.Interface
       UserPassword = userPassword;
       RootPassword = rootPassword;
       FirewallPassword = firewallPassword;
+      RequestTimeout = _requestTimeout;
     }
 
     public string AccountGuid { get; set; }

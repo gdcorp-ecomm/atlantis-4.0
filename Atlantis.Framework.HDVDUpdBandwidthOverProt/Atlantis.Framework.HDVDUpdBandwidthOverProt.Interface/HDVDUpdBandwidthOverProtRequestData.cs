@@ -8,14 +8,18 @@ namespace Atlantis.Framework.HDVDUpdBandwidthOverProt.Interface
 {
   public class HDVDUpdBandwidthOverProtRequestData : RequestData
   {
+    public HDVDUpdBandwidthOverProtRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, bool suspend, bool isEnabled, string accountUid) : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    {
+      Suspend = suspend;
+      IsEnabled = isEnabled;
+      AccountUid = accountUid;
+    }
 
-    public HDVDUpdBandwidthOverProtRequestData(string shopperId,
-                                  string sourceUrl,
-                                  string orderIo,
-                                  string pathway,
-                                  int pageCount)
-      : base(shopperId, sourceUrl, orderIo, pathway, pageCount)
-    { }
+    public string AccountUid { get; set; }
+
+    public bool IsEnabled { get; set; }
+
+    public bool Suspend { get; set; }
 
     public override string GetCacheMD5()
     {

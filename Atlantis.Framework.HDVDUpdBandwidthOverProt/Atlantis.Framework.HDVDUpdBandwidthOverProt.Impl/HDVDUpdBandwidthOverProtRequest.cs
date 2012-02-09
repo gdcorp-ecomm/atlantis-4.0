@@ -11,20 +11,22 @@ namespace Atlantis.Framework.HDVDUpdBandwidthOverProt.Impl
 {
   public class HDVDUpdBandwidthOverProtRequest : IRequest
   {
-   public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       HDVDUpdBandwidthOverProtResponseData responseData = null;
+      var request = requestData as HDVDUpdBandwidthOverProtRequestData;
 
       try
       {
-        var service = ServiceHelper.GetServiceReference();
+        HCCAPIServiceAries service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
-        AriesHostingResponse response2 = service.UpdateBandwidthOverageProtection(_AccountGuid.ToString(), bwOp.IsEnabled, bwOp.Suspend);
+        AriesHostingResponse response = service.UpdateBandwidthOverageProtection(request.AccountUid, request.IsEnabled, request.Suspend);
+
+        responseData = new HDVDUpdBandwidthOverProtResponseData(response);
 
 
-       
-      } 
-    
+      }
+
       catch (AtlantisException exAtlantis)
       {
         responseData = new HDVDUpdBandwidthOverProtResponseData(exAtlantis);
@@ -34,7 +36,7 @@ namespace Atlantis.Framework.HDVDUpdBandwidthOverProt.Impl
       {
         responseData = new HDVDUpdBandwidthOverProtResponseData(requestData, ex);
       }
-       
+
       return responseData;
     }
   }

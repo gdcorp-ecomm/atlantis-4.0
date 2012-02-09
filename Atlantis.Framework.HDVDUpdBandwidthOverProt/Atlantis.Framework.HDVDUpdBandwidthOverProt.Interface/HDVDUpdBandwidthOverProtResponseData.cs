@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
+using Atlantis.Framework.HDVD.Interface.Aries;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.HDVDUpdBandwidthOverProt.Interface
 {
   public class HDVDUpdBandwidthOverProtResponseData : IResponseData
   {
+    public AriesHostingResponse Response { get; private set; }
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
-    private bool _success = false;
 
     public bool IsSuccess
     {
       get
       {
-        return _success;
+        bool bSuccess = false;
+        if (Response != null)
+        {
+          bSuccess = (Response.StatusCode == 0);
+        }
+        return bSuccess;
       }
-    }
-
-    public HDVDUpdBandwidthOverProtResponseData(string xml)
-    {
-
     }
 
      public HDVDUpdBandwidthOverProtResponseData(AtlantisException atlantisException)
@@ -38,12 +40,31 @@ namespace Atlantis.Framework.HDVDUpdBandwidthOverProt.Interface
                                    requestData.ToXML());
     }
 
+    public HDVDUpdBandwidthOverProtResponseData(AriesHostingResponse response)
+    {
+      Response = response;
+    }
 
     #region IResponseData Members
 
     public string ToXML()
     {
-      return _resultXML;
+      string xml = string.Empty;
+      try
+      {
+        var serializer = new DataContractSerializer(this.Response.GetType());
+        using (var backing = new System.IO.StringWriter())
+        using (var writer = new System.Xml.XmlTextWriter(backing))
+        {
+          serializer.WriteObject(writer, this.Response);
+          xml = backing.ToString();
+        }
+      }
+      catch (Exception)
+      {
+        xml = string.Empty;
+      }
+      return xml;
     }
 
     public AtlantisException GetException()

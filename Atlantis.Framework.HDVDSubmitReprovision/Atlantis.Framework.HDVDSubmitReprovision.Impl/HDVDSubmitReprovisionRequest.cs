@@ -15,7 +15,7 @@ namespace Atlantis.Framework.HDVDSubmitReprovision.Impl
 
       try
       {
-        HCCAPIServiceAries service = SerivceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+        HCCAPIServiceAries service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
         if (request != null)
         {

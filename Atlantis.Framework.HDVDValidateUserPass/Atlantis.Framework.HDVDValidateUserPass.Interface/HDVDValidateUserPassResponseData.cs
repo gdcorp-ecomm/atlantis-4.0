@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using Atlantis.Framework.HDVD.Interface.Aries;
 using Atlantis.Framework.Interface;
@@ -51,10 +52,7 @@ namespace Atlantis.Framework.HDVDValidateUserPass.Interface
       {
         if (this.response != null && this.response.HasErrors)
         {
-          foreach (var error in this.response.Errors)
-          {
-            _errors.Add(error);
-          }
+          _errors = response.Errors.ToList();
         }
         return _errors;
       }

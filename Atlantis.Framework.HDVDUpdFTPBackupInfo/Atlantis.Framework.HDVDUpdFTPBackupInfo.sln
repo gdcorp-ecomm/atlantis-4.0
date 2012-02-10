@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{DBFE9253-64B7-49F1-9CE6-ED8C2DED13B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDUpdFTPBackupInfo.Impl", "Atlantis.Framework.HDVDUpdFTPBackupInfo.Impl\Atlantis.Framework.HDVDUpdFTPBackupInfo.Impl.csproj", "{54517765-A6A7-4AE3-8FE6-F2342716D09A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDUpdFTPBackupInfo.Interface", "Atlantis.Framework.HDVDUpdFTPBackupInfo.Interface\Atlantis.Framework.HDVDUpdFTPBackupInfo.Interface.csproj", "{67476FBE-F709-4C3F-A285-965C1FA544C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDUpdFTPBackupInfo.Test", "Atlantis.Framework.HDVDUpdFTPBackupInfo.Test\Atlantis.Framework.HDVDUpdFTPBackupInfo.Test.csproj", "{A2FFA00D-1F19-4A11-B8C3-E82269EB4144}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVD.Interface", "..\Atlantis.Framework.HDVD.Interface\Atlantis.Framework.HDVD.Interface\Atlantis.Framework.HDVD.Interface.csproj", "{3F2F129C-4E26-461C-96F6-BFC6BD918054}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccProjectUniqueName0 = Atlantis.Framework.HDVDUpdFTPBackupInfo.Impl\\Atlantis.Framework.HDVDUpdFTPBackupInfo.Impl.csproj
+		SccProjectName0 = Atlantis.Framework.HDVDUpdFTPBackupInfo.Impl
+		SccLocalPath0 = Atlantis.Framework.HDVDUpdFTPBackupInfo.Impl
+		SccProjectUniqueName1 = Atlantis.Framework.HDVDUpdFTPBackupInfo.Interface\\Atlantis.Framework.HDVDUpdFTPBackupInfo.Interface.csproj
+		SccProjectName1 = Atlantis.Framework.HDVDUpdFTPBackupInfo.Interface
+		SccLocalPath1 = Atlantis.Framework.HDVDUpdFTPBackupInfo.Interface
+		SccProjectUniqueName2 = Atlantis.Framework.HDVDUpdFTPBackupInfo.Test\\Atlantis.Framework.HDVDUpdFTPBackupInfo.Test.csproj
+		SccProjectName2 = Atlantis.Framework.HDVDUpdFTPBackupInfo.Test
+		SccLocalPath2 = Atlantis.Framework.HDVDUpdFTPBackupInfo.Test
+		SccLocalPath3 = ..
+		SccProjectFilePathRelativizedFromConnection3 = Atlantis.Framework.HDVDUpdFTPBackupInfo\\
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.HDVD.Interface\\Atlantis.Framework.HDVD.Interface\\Atlantis.Framework.HDVD.Interface.csproj
+		SccProjectName4 = ../Atlantis.Framework.HDVD.Interface/Atlantis.Framework.HDVD.Interface
+		SccLocalPath4 = ..\\Atlantis.Framework.HDVD.Interface\\Atlantis.Framework.HDVD.Interface
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.HDVDUpdFTPBackupInfo.sln
+		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.HDVDUpdFTPBackupInfo.sln
+		SccProjectName6 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath6 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54517765-A6A7-4AE3-8FE6-F2342716D09A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54517765-A6A7-4AE3-8FE6-F2342716D09A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54517765-A6A7-4AE3-8FE6-F2342716D09A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54517765-A6A7-4AE3-8FE6-F2342716D09A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67476FBE-F709-4C3F-A285-965C1FA544C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67476FBE-F709-4C3F-A285-965C1FA544C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67476FBE-F709-4C3F-A285-965C1FA544C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67476FBE-F709-4C3F-A285-965C1FA544C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2FFA00D-1F19-4A11-B8C3-E82269EB4144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2FFA00D-1F19-4A11-B8C3-E82269EB4144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2FFA00D-1F19-4A11-B8C3-E82269EB4144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2FFA00D-1F19-4A11-B8C3-E82269EB4144}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {DBFE9253-64B7-49F1-9CE6-ED8C2DED13B9}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {DBFE9253-64B7-49F1-9CE6-ED8C2DED13B9}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{6CD03261-E73B-4024-A063-9CA9F5F42D08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVD.Interface", "..\Atlantis.Framework.HDVD.Interface\Atlantis.Framework.HDVD.Interface\Atlantis.Framework.HDVD.Interface.csproj", "{3F2F129C-4E26-461C-96F6-BFC6BD918054}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDValidateTroubleTicket.Impl", "Atlantis.Framework.HDVDValidateTroubleTicket.Impl\Atlantis.Framework.HDVDValidateTroubleTicket.Impl.csproj", "{A60AA4B5-9825-4502-ACCC-EC511BB56CB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDValidateTroubleTicket.Interface", "Atlantis.Framework.HDVDValidateTroubleTicket.Interface\Atlantis.Framework.HDVDValidateTroubleTicket.Interface.csproj", "{2224677A-D3E8-4C46-8A79-FE2988F847DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.HDVDValidateTroubleTicket.Tests", "Atlantis.Framework.HDVDValidateTroubleTicket.Tests\Atlantis.Framework.HDVDValidateTroubleTicket.Tests.csproj", "{0B1C5B0B-6F08-4DC3-8DCB-925E0DEC94FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4BAE283-F97C-4EFC-A4C4-ED9A928E6A18}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.HDVDValidateTroubleTicket.vsmdi = Atlantis.Framework.HDVDValidateTroubleTicket.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.HDVDValidateTroubleTicket.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.HDVDValidateTroubleTicket.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.HDVD.Interface\\Atlantis.Framework.HDVD.Interface\\Atlantis.Framework.HDVD.Interface.csproj
+		SccProjectName3 = ../Atlantis.Framework.HDVD.Interface/Atlantis.Framework.HDVD.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.HDVD.Interface\\Atlantis.Framework.HDVD.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.HDVDValidateTroubleTicket.Impl\\Atlantis.Framework.HDVDValidateTroubleTicket.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.HDVDValidateTroubleTicket.Impl
+		SccLocalPath4 = Atlantis.Framework.HDVDValidateTroubleTicket.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.HDVDValidateTroubleTicket.Interface\\Atlantis.Framework.HDVDValidateTroubleTicket.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.HDVDValidateTroubleTicket.Interface
+		SccLocalPath5 = Atlantis.Framework.HDVDValidateTroubleTicket.Interface
+		SccProjectUniqueName6 = Atlantis.Framework.HDVDValidateTroubleTicket.Tests\\Atlantis.Framework.HDVDValidateTroubleTicket.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.HDVDValidateTroubleTicket.Tests
+		SccLocalPath6 = Atlantis.Framework.HDVDValidateTroubleTicket.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.HDVDValidateTroubleTicket.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F2F129C-4E26-461C-96F6-BFC6BD918054}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A60AA4B5-9825-4502-ACCC-EC511BB56CB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A60AA4B5-9825-4502-ACCC-EC511BB56CB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A60AA4B5-9825-4502-ACCC-EC511BB56CB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A60AA4B5-9825-4502-ACCC-EC511BB56CB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2224677A-D3E8-4C46-8A79-FE2988F847DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2224677A-D3E8-4C46-8A79-FE2988F847DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2224677A-D3E8-4C46-8A79-FE2988F847DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2224677A-D3E8-4C46-8A79-FE2988F847DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B1C5B0B-6F08-4DC3-8DCB-925E0DEC94FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B1C5B0B-6F08-4DC3-8DCB-925E0DEC94FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B1C5B0B-6F08-4DC3-8DCB-925E0DEC94FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B1C5B0B-6F08-4DC3-8DCB-925E0DEC94FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {6CD03261-E73B-4024-A063-9CA9F5F42D08}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {6CD03261-E73B-4024-A063-9CA9F5F42D08}
+	EndGlobalSection
+EndGlobal

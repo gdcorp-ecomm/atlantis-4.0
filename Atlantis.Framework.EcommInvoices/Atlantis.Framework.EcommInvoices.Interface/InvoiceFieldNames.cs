@@ -9,7 +9,7 @@
     public const string ProcessorType = "processor";
     public const string Status = "status";
     public const string ProcessorStatus = "processor_status";
-    public const string CreateDate = "create_date";
-    public const string LastModifiedDate = "modify_date";
+    public const string CreateDate = "date_entered";
+    public const string LastModifiedDate = "date_changed";
   }
 }

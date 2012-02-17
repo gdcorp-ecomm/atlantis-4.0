@@ -316,7 +316,7 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Impl
           product.UnifiedProductID = null;
         }
 
-        if ((row["externalResourceID"] as DBNull) == null)
+        if (ds.Tables[0].Columns.Contains("externalResourceID") && (row["externalResourceID"] as DBNull) == null)
         {
           product.ExternalResourceId = (string)row["externalResourceID"];
         }
@@ -324,9 +324,6 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Impl
         {
           product.ExternalResourceId = null;
         }
-
-        
-        
 
         productList.Add(product);
       }

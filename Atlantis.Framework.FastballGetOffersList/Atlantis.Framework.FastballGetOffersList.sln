@@ -11,9 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Fastball
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FastballGetOffersList.Interface", "Atlantis.Framework.FastballGetOffersList.Interface\Atlantis.Framework.FastballGetOffersList.Interface.csproj", "{5559DF69-D3EE-4315-8BA1-F6DEA6BD4B30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FastballGetOffersList.Tests", "Atlantis.Framework.FastballGetOffersList.Tests\Atlantis.Framework.FastballGetOffersList.Tests.csproj", "{E5C7F0EC-CF80-49A1-9E9F-6D3E75018D95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B9634C3-5F6D-4566-B1ED-D0CB3199A6DC}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.FastballGetOffersList.vsmdi = Atlantis.Framework.FastballGetOffersList.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -31,6 +40,12 @@ Global
 		SccProjectUniqueName4 = Atlantis.Framework.FastballGetOffersList.Interface\\Atlantis.Framework.FastballGetOffersList.Interface.csproj
 		SccProjectName4 = Atlantis.Framework.FastballGetOffersList.Interface
 		SccLocalPath4 = Atlantis.Framework.FastballGetOffersList.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.FastballGetOffersList.Tests\\Atlantis.Framework.FastballGetOffersList.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.FastballGetOffersList.Tests
+		SccLocalPath5 = Atlantis.Framework.FastballGetOffersList.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.FastballGetOffersList.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +68,10 @@ Global
 		{5559DF69-D3EE-4315-8BA1-F6DEA6BD4B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5559DF69-D3EE-4315-8BA1-F6DEA6BD4B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5559DF69-D3EE-4315-8BA1-F6DEA6BD4B30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5C7F0EC-CF80-49A1-9E9F-6D3E75018D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5C7F0EC-CF80-49A1-9E9F-6D3E75018D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5C7F0EC-CF80-49A1-9E9F-6D3E75018D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5C7F0EC-CF80-49A1-9E9F-6D3E75018D95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

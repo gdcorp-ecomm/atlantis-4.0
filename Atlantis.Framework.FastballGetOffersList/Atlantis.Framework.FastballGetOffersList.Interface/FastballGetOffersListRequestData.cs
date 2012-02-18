@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
+using System.Xml;
 
 namespace Atlantis.Framework.FastballGetOffersList.Interface
 {
@@ -10,29 +11,14 @@ namespace Atlantis.Framework.FastballGetOffersList.Interface
   {
     readonly TimeSpan TWO_MINUTES = TimeSpan.FromMinutes(2);
 
-    public bool ReturnStubbedData { get; set; }
-
-    public int PrivateLabelId { get; set; }
-    public int AppId { get; set; }
-    public string Placement { get; set; }
-    public string RepId { get; set; }
+    public OapiStandardParams OAPIParams { get; private set; }
 
     public FastballGetOffersListRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
-      int privateLabelId, int applicationId, string placement, IManagerContext managerContext)
+      OapiStandardParams oapiParams)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestTimeout = TWO_MINUTES;
-      PrivateLabelId = privateLabelId;
-      AppId = applicationId;
-      Placement = placement;
-
-      if (managerContext != null)
-      {
-        if (managerContext.IsManager)
-        {
-          RepId = managerContext.ManagerUserId;
-        }
-      }
+      OAPIParams = oapiParams;
     }
 
     private string _candidateRequest;
@@ -42,10 +28,15 @@ namespace Atlantis.Framework.FastballGetOffersList.Interface
       {
         if (_candidateRequest == null)
         {
-          XElement candidateData = new XElement("CandidateData");
-          candidateData.SetAttributeValue("PrivateLabelID", PrivateLabelId.ToString());
-          candidateData.SetAttributeValue("ShopperID", ShopperID);
-          _candidateRequest = candidateData.ToString(SaveOptions.DisableFormatting);
+          string iscCode = !string.IsNullOrEmpty(OAPIParams.OptionalIscCode) ? string.Format("ISC=\"{0}\" ", OAPIParams.OptionalIscCode) : string.Empty;
+          string dispCurrency = !string.IsNullOrEmpty(OAPIParams.DisplayCurrency) ? string.Format("DisplayCurrency=\"{0}\" ", OAPIParams.DisplayCurrency) : string.Empty;
+          string tranCurrency = !string.IsNullOrEmpty(OAPIParams.TransactionalCurrency) ? string.Format("TransactionalCurrency=\"{0}\" ", OAPIParams.TransactionalCurrency) : string.Empty;
+
+          //CRM Deal of the Day
+          if (!string.IsNullOrEmpty(OAPIParams.RepVersion)) tranCurrency = string.Format("TransactionalCurrency=\"{0}\" ", OAPIParams.TransactionalCurrency);
+
+          _candidateRequest = string.Format("<CandidateData PrivateLabelID=\"{0}\" ShopperID=\"{1}\" {2} {3} {4}", OAPIParams.PrivateLabelId, OAPIParams.ShopperId, iscCode, dispCurrency, tranCurrency);
+          _candidateRequest += ((!OAPIParams.QaSpoofDate.HasValue) ? @"/>" : string.Format("><SpoofData><SpoofDataItem Name=\"qaspoofdate\" Value=\"{0}\" /></SpoofData></CandidateData>", XmlConvert.ToString(OAPIParams.QaSpoofDate.Value, XmlDateTimeSerializationMode.Unspecified)));
         }
         return _candidateRequest;
       }
@@ -58,14 +49,7 @@ namespace Atlantis.Framework.FastballGetOffersList.Interface
       {
         if (_channelRequest == null)
         {
-          XElement request = new XElement("RequestXml");
-
-          XElement clientData = new XElement("ClientData");
-          clientData.SetAttributeValue("AppID", AppId.ToString());
-          clientData.SetAttributeValue("Placement", Placement);
-          request.Add(clientData);
-
-          _channelRequest = request.ToString(SaveOptions.DisableFormatting);
+          _channelRequest = string.Format("<RequestXml><ClientData AppID=\"{0}\" Placement=\"{1}\" /></RequestXml>", OAPIParams.ApplicationId, OAPIParams.Placement);
         }
         return _channelRequest;
       }

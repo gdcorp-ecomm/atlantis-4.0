@@ -18,16 +18,16 @@ namespace Atlantis.Framework.FastballGetOffersList.Interface
     {
     }
 
-    public FastballGetOffersListResponse(RequestData requestData, Exception ex)
-    {
-      _exception = new AtlantisException(
-        requestData, "Atlantis.Framework.FastballGetOffersList", ex.Message, ex.StackTrace, ex);
-      IsSuccess = false;
-    }
-
     public FastballGetOffersListResponse(LocationResult locationResult)
     {
+      IsSuccess = true;
       LocationResult = locationResult;
+    }
+
+    public FastballGetOffersListResponse(RequestData requestData, Exception ex)
+    {
+      IsSuccess = false;
+      _exception = new AtlantisException(requestData, requestData.GetType().ToString(), ex.Message, ex.StackTrace, ex);
     }
 
     public string ToXML()

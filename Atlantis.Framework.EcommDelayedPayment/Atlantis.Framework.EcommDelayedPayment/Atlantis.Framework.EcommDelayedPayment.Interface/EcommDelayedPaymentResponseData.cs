@@ -31,6 +31,7 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
         ErrorOccured = string.Empty;
         RedirectURL = string.Empty;
         InvoiceID = string.Empty;
+        _success = true;
         if (!string.IsNullOrEmpty(redirectXML))
         {
           XmlDocument redirectDoc = new XmlDocument();
@@ -44,12 +45,17 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
           errorsDoc.LoadXml(errorXML);
           XmlNode errorNode = errorsDoc.SelectSingleNode("//ERRORS/ERROR");
           ErrorOccured = errorNode.InnerText;
+          _success = false;
         }
         if (!string.IsNullOrEmpty(invoiceID))
         {
           InvoiceID = invoiceID;
         }
-        _success = true;
+        else
+        {
+          _success = false;
+        }
+        
       }
       catch (System.Exception ex)
       {

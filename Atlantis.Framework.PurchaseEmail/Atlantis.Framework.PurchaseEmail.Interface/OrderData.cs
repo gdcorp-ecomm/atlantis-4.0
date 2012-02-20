@@ -56,7 +56,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       //Set transactionCurrency first 
       //Then set display currency... sometimes it doesn't take - do it twice
 
-      if (IsRefund)
+      if (IsManager && IsRefund)
       {
         _currency.SelectedDisplayCurrencyType = transactionCurrency;
       }
@@ -386,17 +386,17 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public bool IsManager
     {
-      get { return false; }
+      get { return Manager.IsManager; }
     }
 
     public string ManagerUserId
     {
-      get { return string.Empty; }
+      get { return Manager.ManagerUserId; }
     }
 
     public string ManagerUserName
     {
-      get { return string.Empty; }
+      get { return Manager.ManagerUserName; }
     }
 
     public System.Collections.Specialized.NameValueCollection ManagerQuery
@@ -406,7 +406,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public string ManagerShopperId
     {
-      get { return string.Empty; }
+      get { return Manager.ManagerShopperId; }
     }
 
     public int ManagerPrivateLabelId

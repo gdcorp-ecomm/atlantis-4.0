@@ -23,14 +23,7 @@ namespace Atlantis.Framework.EcommDelayedProcess.Impl
           short result = 0;
           string receiptXML = string.Empty;
           int callResult = oSvc.ProcessDelayedPurchaseResponseEx(ecomRequest.InvoiceID, ecomRequest.EncryptedResult, out result, out receiptXML);
-          if (result != 1)
-          {
-            throw new AtlantisException(requestData, "Delayed Payment Processing", "Could not process Order", ecomRequest.InvoiceID);
-          }
-          else
-          {
-            responseData = new EcommDelayedProcessResponseData(result, callResult, receiptXML);
-          }
+          responseData = new EcommDelayedProcessResponseData(result, callResult, receiptXML);
         }
       }
 

@@ -56,7 +56,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       //Set transactionCurrency first 
       //Then set display currency... sometimes it doesn't take - do it twice
 
-      if (IsManager && IsRefund)
+      if (IsRefund)
       {
         _currency.SelectedDisplayCurrencyType = transactionCurrency;
       }

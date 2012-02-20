@@ -21,14 +21,15 @@ namespace Atlantis.Framework.EcommDelayedProcess.Impl
           oSvc.Url = ((WsConfigElement)config).WSURL;
           oSvc.Timeout = (int)ecomRequest.RequestTimeout.TotalMilliseconds;
           short result = 0;
-          int callResult = oSvc.ProcessDelayedPurchaseResponse(ecomRequest.InvoiceID, ecomRequest.EncryptedResult, out result);
+          string receiptXML = string.Empty;
+          int callResult = oSvc.ProcessDelayedPurchaseResponseEx(ecomRequest.InvoiceID, ecomRequest.EncryptedResult, out result, out receiptXML);
           if (result != 1)
           {
             throw new AtlantisException(requestData, "Delayed Payment Processing", "Could not process Order", ecomRequest.InvoiceID);
           }
           else
           {
-            responseData = new EcommDelayedProcessResponseData(result, callResult);
+            responseData = new EcommDelayedProcessResponseData(result, callResult, receiptXML);
           }
         }
       }

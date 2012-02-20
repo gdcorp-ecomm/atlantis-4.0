@@ -22,8 +22,9 @@ namespace Atlantis.Framework.EcommDelayedProcess.Interface
 
     public short Result { get; set; }
     public int CallResult { get; set; }
+    public string ReceiptXML { get; set; }
 
-    public EcommDelayedProcessResponseData(short result,int callresult)
+    public EcommDelayedProcessResponseData(short result,int callresult,string receiptXML)
     {
       Result = result;
       CallResult = callresult;
@@ -31,11 +32,13 @@ namespace Atlantis.Framework.EcommDelayedProcess.Interface
       {
         _success = true;
       }
+      ReceiptXML = receiptXML;
     }
 
      public EcommDelayedProcessResponseData(AtlantisException atlantisException)
     {
       this._exception = atlantisException;
+      ReceiptXML = string.Empty;
     }
 
     public EcommDelayedProcessResponseData(RequestData requestData, Exception exception)
@@ -44,6 +47,7 @@ namespace Atlantis.Framework.EcommDelayedProcess.Interface
                                    "EcommDelayedProcessResponseData",
                                    exception.Message,
                                    requestData.ToXML());
+      ReceiptXML = string.Empty;
     }
 
 

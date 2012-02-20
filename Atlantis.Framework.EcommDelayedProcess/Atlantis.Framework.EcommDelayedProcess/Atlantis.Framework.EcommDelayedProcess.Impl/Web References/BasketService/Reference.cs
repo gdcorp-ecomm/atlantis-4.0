@@ -139,6 +139,8 @@ namespace Atlantis.Framework.EcommDelayedProcess.Impl.BasketService {
         
         private System.Threading.SendOrPostCallback ProcessDelayedPurchaseResponseOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ProcessDelayedPurchaseResponseExOperationCompleted;
+        
         private System.Threading.SendOrPostCallback TransferInvoiceToBasketOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetInvoicesForShopperOperationCompleted;
@@ -146,6 +148,10 @@ namespace Atlantis.Framework.EcommDelayedProcess.Impl.BasketService {
         private System.Threading.SendOrPostCallback GetInvoiceDetailOperationCompleted;
         
         private System.Threading.SendOrPostCallback CancelInvoiceOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetInvoicesForShopperDisplayOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetInStoreCreditOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -351,6 +357,9 @@ namespace Atlantis.Framework.EcommDelayedProcess.Impl.BasketService {
         public event ProcessDelayedPurchaseResponseCompletedEventHandler ProcessDelayedPurchaseResponseCompleted;
         
         /// <remarks/>
+        public event ProcessDelayedPurchaseResponseExCompletedEventHandler ProcessDelayedPurchaseResponseExCompleted;
+        
+        /// <remarks/>
         public event TransferInvoiceToBasketCompletedEventHandler TransferInvoiceToBasketCompleted;
         
         /// <remarks/>
@@ -361,6 +370,12 @@ namespace Atlantis.Framework.EcommDelayedProcess.Impl.BasketService {
         
         /// <remarks/>
         public event CancelInvoiceCompletedEventHandler CancelInvoiceCompleted;
+        
+        /// <remarks/>
+        public event GetInvoicesForShopperDisplayCompletedEventHandler GetInvoicesForShopperDisplayCompleted;
+        
+        /// <remarks/>
+        public event GetInStoreCreditCompletedEventHandler GetInStoreCreditCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("#GetBasketXMLByType", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
@@ -2199,6 +2214,40 @@ namespace Atlantis.Framework.EcommDelayedProcess.Impl.BasketService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#ProcessDelayedPurchaseResponseEx", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public int ProcessDelayedPurchaseResponseEx(string bstrInvoiceID, string bstrProcessorResponse, out short pvbOrderProcessed, out string pbstrOrderXML) {
+            object[] results = this.Invoke("ProcessDelayedPurchaseResponseEx", new object[] {
+                        bstrInvoiceID,
+                        bstrProcessorResponse});
+            pvbOrderProcessed = ((short)(results[1]));
+            pbstrOrderXML = ((string)(results[2]));
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ProcessDelayedPurchaseResponseExAsync(string bstrInvoiceID, string bstrProcessorResponse) {
+            this.ProcessDelayedPurchaseResponseExAsync(bstrInvoiceID, bstrProcessorResponse, null);
+        }
+        
+        /// <remarks/>
+        public void ProcessDelayedPurchaseResponseExAsync(string bstrInvoiceID, string bstrProcessorResponse, object userState) {
+            if ((this.ProcessDelayedPurchaseResponseExOperationCompleted == null)) {
+                this.ProcessDelayedPurchaseResponseExOperationCompleted = new System.Threading.SendOrPostCallback(this.OnProcessDelayedPurchaseResponseExOperationCompleted);
+            }
+            this.InvokeAsync("ProcessDelayedPurchaseResponseEx", new object[] {
+                        bstrInvoiceID,
+                        bstrProcessorResponse}, this.ProcessDelayedPurchaseResponseExOperationCompleted, userState);
+        }
+        
+        private void OnProcessDelayedPurchaseResponseExOperationCompleted(object arg) {
+            if ((this.ProcessDelayedPurchaseResponseExCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ProcessDelayedPurchaseResponseExCompleted(this, new ProcessDelayedPurchaseResponseExCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("#TransferInvoiceToBasket", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
         public int TransferInvoiceToBasket(string bstrInvoiceID, string bstrAlternateShopperID, out string pbstrErrorXML) {
@@ -2321,6 +2370,71 @@ namespace Atlantis.Framework.EcommDelayedProcess.Impl.BasketService {
             if ((this.CancelInvoiceCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.CancelInvoiceCompleted(this, new CancelInvoiceCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#GetInvoicesForShopperDisplay", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string GetInvoicesForShopperDisplay(string bstrShopperID, int lDaysBack, out string pbstrErrorXML) {
+            object[] results = this.Invoke("GetInvoicesForShopperDisplay", new object[] {
+                        bstrShopperID,
+                        lDaysBack});
+            pbstrErrorXML = ((string)(results[1]));
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetInvoicesForShopperDisplayAsync(string bstrShopperID, int lDaysBack) {
+            this.GetInvoicesForShopperDisplayAsync(bstrShopperID, lDaysBack, null);
+        }
+        
+        /// <remarks/>
+        public void GetInvoicesForShopperDisplayAsync(string bstrShopperID, int lDaysBack, object userState) {
+            if ((this.GetInvoicesForShopperDisplayOperationCompleted == null)) {
+                this.GetInvoicesForShopperDisplayOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetInvoicesForShopperDisplayOperationCompleted);
+            }
+            this.InvokeAsync("GetInvoicesForShopperDisplay", new object[] {
+                        bstrShopperID,
+                        lDaysBack}, this.GetInvoicesForShopperDisplayOperationCompleted, userState);
+        }
+        
+        private void OnGetInvoicesForShopperDisplayOperationCompleted(object arg) {
+            if ((this.GetInvoicesForShopperDisplayCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetInvoicesForShopperDisplayCompleted(this, new GetInvoicesForShopperDisplayCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#GetInStoreCredit", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string GetInStoreCredit(string bstrShopperID, string bstrCurrency) {
+            object[] results = this.Invoke("GetInStoreCredit", new object[] {
+                        bstrShopperID,
+                        bstrCurrency});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetInStoreCreditAsync(string bstrShopperID, string bstrCurrency) {
+            this.GetInStoreCreditAsync(bstrShopperID, bstrCurrency, null);
+        }
+        
+        /// <remarks/>
+        public void GetInStoreCreditAsync(string bstrShopperID, string bstrCurrency, object userState) {
+            if ((this.GetInStoreCreditOperationCompleted == null)) {
+                this.GetInStoreCreditOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetInStoreCreditOperationCompleted);
+            }
+            this.InvokeAsync("GetInStoreCredit", new object[] {
+                        bstrShopperID,
+                        bstrCurrency}, this.GetInStoreCreditOperationCompleted, userState);
+        }
+        
+        private void OnGetInStoreCreditOperationCompleted(object arg) {
+            if ((this.GetInStoreCreditCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetInStoreCreditCompleted(this, new GetInStoreCreditCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3807,6 +3921,48 @@ namespace Atlantis.Framework.EcommDelayedProcess.Impl.BasketService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void ProcessDelayedPurchaseResponseExCompletedEventHandler(object sender, ProcessDelayedPurchaseResponseExCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ProcessDelayedPurchaseResponseExCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ProcessDelayedPurchaseResponseExCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public short pvbOrderProcessed {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((short)(this.results[1]));
+            }
+        }
+        
+        /// <remarks/>
+        public string pbstrOrderXML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[2]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void TransferInvoiceToBasketCompletedEventHandler(object sender, TransferInvoiceToBasketCompletedEventArgs e);
     
     /// <remarks/>
@@ -3937,6 +4093,66 @@ namespace Atlantis.Framework.EcommDelayedProcess.Impl.BasketService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetInvoicesForShopperDisplayCompletedEventHandler(object sender, GetInvoicesForShopperDisplayCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetInvoicesForShopperDisplayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetInvoicesForShopperDisplayCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string pbstrErrorXML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetInStoreCreditCompletedEventHandler(object sender, GetInStoreCreditCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetInStoreCreditCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetInStoreCreditCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }

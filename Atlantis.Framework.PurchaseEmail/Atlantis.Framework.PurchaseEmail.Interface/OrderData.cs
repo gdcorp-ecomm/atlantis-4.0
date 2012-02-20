@@ -62,7 +62,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       }
       else
       {
-        _currency.SelectedDisplayCurrencyType = transactionCurrency;
         _currency.SelectedDisplayCurrencyType = displayCurrency;
       }
       //Log status...

@@ -20,9 +20,14 @@ namespace Atlantis.Framework.EcommDelayedProcess.Interface
       }
     }
 
+    public short Result { get; set; }
+    public int CallResult { get; set; }
+
     public EcommDelayedProcessResponseData(short result,int callresult)
     {
-      if (result == 1)
+      Result = result;
+      CallResult = callresult;
+      if (result == -1)
       {
         _success = true;
       }

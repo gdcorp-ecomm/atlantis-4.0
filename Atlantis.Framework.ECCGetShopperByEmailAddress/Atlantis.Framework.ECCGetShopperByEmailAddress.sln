@@ -1,0 +1,117 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A6374745-A203-4C6C-8FCD-F479DB3B27B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetShopperByEmailAddress.Impl", "Atlantis.Framework.ECCGetShopperByEmailAddress.Impl\Atlantis.Framework.ECCGetShopperByEmailAddress.Impl.csproj", "{C4F8BDEA-3F83-4C88-B9FA-E58C4CC255DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetShopperByEmailAddress.Interface", "Atlantis.Framework.ECCGetShopperByEmailAddress.Interface\Atlantis.Framework.ECCGetShopperByEmailAddress.Interface.csproj", "{275D8156-0122-43DC-8E07-4C24068A2B80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetShopperByEmailAddress.Test", "Atlantis.Framework.ECCGetShopperByEmailAddress.Test\Atlantis.Framework.ECCGetShopperByEmailAddress.Test.csproj", "{31205399-B8BD-4F92-BD9C-2A12506E73EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE6653B9-D7A3-458A-B1F1-9DF8C71E1507}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.ECCGetShopperByEmailAddress.vsmdi = Atlantis.Framework.ECCGetShopperByEmailAddress.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.ECCGetShopperByEmailAddress.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.ECCGetShopperByEmailAddress.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.ECCGetShopperByEmailAddress.Impl\\Atlantis.Framework.ECCGetShopperByEmailAddress.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.ECCGetShopperByEmailAddress.Impl
+		SccLocalPath3 = Atlantis.Framework.ECCGetShopperByEmailAddress.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.ECCGetShopperByEmailAddress.Interface\\Atlantis.Framework.ECCGetShopperByEmailAddress.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.ECCGetShopperByEmailAddress.Interface
+		SccLocalPath4 = Atlantis.Framework.ECCGetShopperByEmailAddress.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.ECCGetShopperByEmailAddress.Test\\Atlantis.Framework.ECCGetShopperByEmailAddress.Test.csproj
+		SccProjectName5 = Atlantis.Framework.ECCGetShopperByEmailAddress.Test
+		SccLocalPath5 = Atlantis.Framework.ECCGetShopperByEmailAddress.Test
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.ECCGetShopperByEmailAddress.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|x86.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|x86.ActiveCfg = Release|Any CPU
+		{C4F8BDEA-3F83-4C88-B9FA-E58C4CC255DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F8BDEA-3F83-4C88-B9FA-E58C4CC255DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F8BDEA-3F83-4C88-B9FA-E58C4CC255DE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C4F8BDEA-3F83-4C88-B9FA-E58C4CC255DE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C4F8BDEA-3F83-4C88-B9FA-E58C4CC255DE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C4F8BDEA-3F83-4C88-B9FA-E58C4CC255DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F8BDEA-3F83-4C88-B9FA-E58C4CC255DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4F8BDEA-3F83-4C88-B9FA-E58C4CC255DE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C4F8BDEA-3F83-4C88-B9FA-E58C4CC255DE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C4F8BDEA-3F83-4C88-B9FA-E58C4CC255DE}.Release|x86.ActiveCfg = Release|Any CPU
+		{275D8156-0122-43DC-8E07-4C24068A2B80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{275D8156-0122-43DC-8E07-4C24068A2B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{275D8156-0122-43DC-8E07-4C24068A2B80}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{275D8156-0122-43DC-8E07-4C24068A2B80}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{275D8156-0122-43DC-8E07-4C24068A2B80}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{275D8156-0122-43DC-8E07-4C24068A2B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{275D8156-0122-43DC-8E07-4C24068A2B80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{275D8156-0122-43DC-8E07-4C24068A2B80}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{275D8156-0122-43DC-8E07-4C24068A2B80}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{275D8156-0122-43DC-8E07-4C24068A2B80}.Release|x86.ActiveCfg = Release|Any CPU
+		{31205399-B8BD-4F92-BD9C-2A12506E73EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31205399-B8BD-4F92-BD9C-2A12506E73EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31205399-B8BD-4F92-BD9C-2A12506E73EB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{31205399-B8BD-4F92-BD9C-2A12506E73EB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{31205399-B8BD-4F92-BD9C-2A12506E73EB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{31205399-B8BD-4F92-BD9C-2A12506E73EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31205399-B8BD-4F92-BD9C-2A12506E73EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31205399-B8BD-4F92-BD9C-2A12506E73EB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{31205399-B8BD-4F92-BD9C-2A12506E73EB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{31205399-B8BD-4F92-BD9C-2A12506E73EB}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {A6374745-A203-4C6C-8FCD-F479DB3B27B8}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A6374745-A203-4C6C-8FCD-F479DB3B27B8}
+	EndGlobalSection
+EndGlobal

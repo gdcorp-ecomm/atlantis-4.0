@@ -13,6 +13,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
   {
     private const int WWD_PLID = 1387;
     private ICurrencyProvider _currency;
+    private ISiteContext _siteContext;
     private XmlDocument _orderXmlDoc;
     private bool _isNewShopper;
     private bool _isFraudRefund;
@@ -29,6 +30,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       providerContainer.RegisterProvider<IShopperContext, OrderData>(this);
       providerContainer.RegisterProvider<ISiteContext, OrderData>(this);
       _currency = providerContainer.Resolve<ICurrencyProvider>();
+      _siteContext = providerContainer.Resolve<ISiteContext>();
       ProcessOrderXml();
     }
 
@@ -329,7 +331,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     // TODO: return THIS for manager
     public IManagerContext Manager
     {
-      get { return (IManagerContext)this; }
+      get { return _siteContext.Manager; }
     }
 
     #endregion
@@ -386,17 +388,17 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public bool IsManager
     {
-      get { return Manager.IsManager; }
+      get { return _siteContext.Manager.IsManager; }
     }
 
     public string ManagerUserId
     {
-      get { return Manager.ManagerUserId; }
+      get { return _siteContext.Manager.ManagerUserId; }
     }
 
     public string ManagerUserName
     {
-      get { return Manager.ManagerUserName; }
+      get { return _siteContext.Manager.ManagerUserName; }
     }
 
     public System.Collections.Specialized.NameValueCollection ManagerQuery
@@ -406,17 +408,17 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public string ManagerShopperId
     {
-      get { return Manager.ManagerShopperId; }
+      get { return _siteContext.Manager.ManagerShopperId; }
     }
 
     public int ManagerPrivateLabelId
     {
-      get { return this.PrivateLabelId; }
+      get { return _siteContext.Manager.ManagerPrivateLabelId; }
     }
 
     public int ManagerContextId
     {
-      get { return this.ContextId; }
+      get { return _siteContext.Manager.ManagerContextId; }
     }
   }
 }

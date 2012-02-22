@@ -9,7 +9,7 @@ using Atlantis.Framework.Providers.ProviderContainer.Impl;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface
 {
-  public class OrderData : ProviderBase,ISiteContext, IShopperContext,IManagerContext
+  public class OrderData : ProviderBase, ISiteContext, IShopperContext, IManagerContext
   {
     private const int WWD_PLID = 1387;
     private ICurrencyProvider _currency;
@@ -58,7 +58,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       //Set transactionCurrency first 
       //Then set display currency... sometimes it doesn't take - do it twice
 
-      if (IsManager && IsRefund)
+      if (IsRefund)
       {
         _currency.SelectedDisplayCurrencyType = transactionCurrency;
       }
@@ -68,16 +68,16 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       }
       //Log status...
 
-       if (_currency.SelectedTransactionalCurrencyType != "USD" && (ServerLocation == ServerLocationType.Test|| ServerLocation == ServerLocationType.Dev ))
-       {
-         //Log status
-         AtlantisException aex = new AtlantisException(
-             "PurchaseEmail", string.Empty,
-             "123", "SelectedTransactionCurrency:" + _currency.SelectedTransactionalCurrencyType, "SelectedDisplayCurrency:" + _currency.SelectedDisplayCurrencyType, _shopperId, OrderId,
-             string.Empty, Pathway, PageCount);
-         Engine.Engine.LogAtlantisException(aex);
-       }
-      
+      if (_currency.SelectedTransactionalCurrencyType != "USD" && (ServerLocation == ServerLocationType.Test || ServerLocation == ServerLocationType.Dev))
+      {
+        //Log status
+        AtlantisException aex = new AtlantisException(
+            "PurchaseEmail", string.Empty,
+            "123", "SelectedTransactionCurrency:" + _currency.SelectedTransactionalCurrencyType, "SelectedDisplayCurrency:" + _currency.SelectedDisplayCurrencyType, _shopperId, OrderId,
+            string.Empty, Pathway, PageCount);
+        Engine.Engine.LogAtlantisException(aex);
+      }
+
     }
 
     private string LoadRequiredDetailAttribute(string attributeName)
@@ -128,10 +128,10 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public bool ShowVATId
     {
-      get 
+      get
       {
         bool result = false;
-        if ((TotalTax.Price > 0) && (Detail.GetAttribute("order_billing").ToLowerInvariant() != "domestic" ))
+        if ((TotalTax.Price > 0) && (Detail.GetAttribute("order_billing").ToLowerInvariant() != "domestic"))
         {
           result = true;
         }
@@ -141,7 +141,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public ICurrencyPrice SubTotal
     {
-      get 
+      get
       {
         int subTotal = 0;
         int.TryParse(Detail.GetAttribute("_oadjust_subtotal"), out subTotal);
@@ -161,7 +161,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public ICurrencyPrice TotalTax
     {
-      get 
+      get
       {
         int taxTotal = 0;
         int.TryParse(Detail.GetAttribute("_tax_total"), out taxTotal);
@@ -201,14 +201,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       {
         return ContextId == ContextIds.GoDaddy;
       }
-    } 
+    }
 
     #region ISiteContext Members
 
     private int? _contextId = null;
     public int ContextId
     {
-      get 
+      get
       {
         if (!_contextId.HasValue)
         {
@@ -226,14 +226,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
             _contextId = ContextIds.WildWestDomains;
           }
         }
-        return _contextId.Value; 
+        return _contextId.Value;
       }
     }
 
     private string _styleId = null;
     public string StyleId
     {
-      get 
+      get
       {
         if (_styleId == null)
         {
@@ -259,7 +259,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public string ProgId
     {
-      get 
+      get
       {
         return DataCache.DataCache.GetProgID(PrivateLabelId);
       }
@@ -371,7 +371,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public int ShopperPriceType
     {
-        get { return ShopperPriceTypes.Standard; }
+      get { return ShopperPriceTypes.Standard; }
     }
 
     private class ShopperPriceTypes
@@ -388,17 +388,22 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public bool IsManager
     {
-      get { return _siteContext.Manager.IsManager; }
+      get
+      {
+        bool hasmgrShopper = false;
+        hasmgrShopper = System.Web.HttpContext.Current.Request.QueryString["mgrshopper"] != null;
+        return hasmgrShopper;
+      }
     }
 
     public string ManagerUserId
     {
-      get { return _siteContext.Manager.ManagerUserId; }
+      get { return string.Empty; }
     }
 
     public string ManagerUserName
     {
-      get { return _siteContext.Manager.ManagerUserName; }
+      get { return string.Empty; }
     }
 
     public System.Collections.Specialized.NameValueCollection ManagerQuery
@@ -408,17 +413,17 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public string ManagerShopperId
     {
-      get { return _siteContext.Manager.ManagerShopperId; }
+      get { return string.Empty; }
     }
 
     public int ManagerPrivateLabelId
     {
-      get { return _siteContext.Manager.ManagerPrivateLabelId; }
+      get { return this.PrivateLabelId; }
     }
 
     public int ManagerContextId
     {
-      get { return _siteContext.Manager.ManagerContextId; }
+      get { return this.ContextId; }
     }
   }
 }

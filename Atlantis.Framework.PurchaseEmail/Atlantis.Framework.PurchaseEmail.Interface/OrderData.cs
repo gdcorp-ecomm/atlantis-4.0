@@ -331,7 +331,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     // TODO: return THIS for manager
     public IManagerContext Manager
     {
-      get { return _siteContext.Manager; }
+      get { return (IManagerContext)this; }
     }
 
     #endregion

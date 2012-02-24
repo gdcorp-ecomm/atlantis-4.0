@@ -76,7 +76,6 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
               StringBuilder deposits = new StringBuilder();
               StringBuilder withdrawls = new StringBuilder();
 
-
               foreach (DataRow dr in drc)
               {
                 int.TryParse(dr["rowType"].ToString(), out rowType);
@@ -105,6 +104,9 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
                     sb.Append("</withdrawls>");
 
                     sb.Append("</currency>");
+
+                    deposits.Clear();
+                    withdrawls.Clear();
                   }
                   sb.Append("<currency type=\"");
                   sb.Append(currency);

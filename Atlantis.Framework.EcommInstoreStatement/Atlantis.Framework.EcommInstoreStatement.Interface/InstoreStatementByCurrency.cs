@@ -15,7 +15,8 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
     public InstoreStatementByCurrency(string currency)
     {
       Currency = currency;
-      Deposits = Withdrawls = new List<CreditInfo>();
+      Deposits = new List<CreditInfo>();
+      Withdrawls = new List<CreditInfo>();
     }
 
     public void AddItem(string date, string description, int amount, int rowType)

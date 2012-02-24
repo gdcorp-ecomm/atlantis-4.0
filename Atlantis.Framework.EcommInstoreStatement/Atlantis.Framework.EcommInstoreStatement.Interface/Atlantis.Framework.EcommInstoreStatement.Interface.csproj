@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="EcommInstoreStatementRequestData.cs" />
     <Compile Include="EcommInstoreStatementResponseData.cs" />
+    <Compile Include="InstoreStatementByCurrency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

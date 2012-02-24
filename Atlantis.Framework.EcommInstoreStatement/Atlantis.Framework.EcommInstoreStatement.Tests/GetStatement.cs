@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Xml;
+using System.Collections.Generic;
 using Atlantis.Framework.EcommInstoreStatement.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -68,8 +68,8 @@ namespace Atlantis.Framework.EcommInstoreStatement.Tests
       EcommInstoreStatementRequestData request = new EcommInstoreStatementRequestData("840748", string.Empty, string.Empty, string.Empty, 0, startDate, endDate);
       EcommInstoreStatementResponseData response = (EcommInstoreStatementResponseData)Engine.Engine.ProcessRequest(request, 496);
 
-      XmlDocument xml = new XmlDocument();
-      xml = response.InstoreProcessedXML;
+      string xml = response.ProcessedToXMLString;
+      List<InstoreStatementByCurrency> list = response.StatementByCurrencyList;
       Assert.IsTrue(response.IsSuccess);
     }
   }

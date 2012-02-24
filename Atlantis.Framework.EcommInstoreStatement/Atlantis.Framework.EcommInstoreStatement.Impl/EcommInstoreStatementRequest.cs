@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Atlantis.Framework.EcommInstoreStatement.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Nimitz;
+using Atlantis.Framework.Nimitz; 
 
 namespace Atlantis.Framework.EcommInstoreStatement.Impl
 {

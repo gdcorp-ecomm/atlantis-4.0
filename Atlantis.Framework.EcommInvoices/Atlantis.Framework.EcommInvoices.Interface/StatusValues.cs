@@ -11,10 +11,12 @@
   }
   public static class InvoiceProcessorStatus
   {
-    public const int Approved = 1;
-    public const int Declined = 2;
-    public const int Pending = 3;
+    public const int Approved = 0;
+    public const int Declined = 1;
+    public const int UserCancel = 2;
+    public const int Timeout = 3;
     public const int Error = 4;
-    public const int NoResponse = 5;
+    public const int Pending = 5;
+    public const int NoResponse = 6;
   }
 }

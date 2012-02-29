@@ -46,7 +46,7 @@ namespace Atlantis.Framework.CDS.Impl
       catch (WebException ex)
       {
         result = new CDSResponseData(ex.Message, ((HttpWebResponse)ex.Response).StatusCode);
-        throw;
+        if (((HttpWebResponse)ex.Response).StatusCode != HttpStatusCode.NotFound) { throw; }        
       }
       catch (Exception ex)
       {

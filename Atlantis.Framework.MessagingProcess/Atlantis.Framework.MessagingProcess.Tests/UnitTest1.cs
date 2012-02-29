@@ -1,59 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Reflection;
-using System.IO;
 using Atlantis.Framework.MessagingProcess.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.MessagingProcess.Tests
 {
-  /// <summary>
-  /// Summary description for UnitTest1
-  /// </summary>
   [TestClass]
   public class UnitTest1
   {
-    public UnitTest1()
-    {
-      //
-      // TODO: Add constructor logic here
-      //
-    }
-
-    private TestContext testContextInstance;
-
-    /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
-    {
-      get { return testContextInstance; }
-      set { testContextInstance = value; }
-    }
-
-    #region Additional test attributes
-
-    //
-    // You can use the following additional attributes as you write your tests:
-    //
-    // Use ClassInitialize to run code before running the first test in the class
-    // [ClassInitialize()]
-    // public static void MyClassInitialize(TestContext testContext) { }
-    //
-    // Use ClassCleanup to run code after all tests in a class have run
-    // [ClassCleanup()]
-    // public static void MyClassCleanup() { }
-    //
-    // Use TestInitialize to run code before running each test 
-    // [TestInitialize()]
-    // public void MyTestInitialize() { }
-    //
-    // Use TestCleanup to run code after each test has run
-    // [TestCleanup()]
-    // public void MyTestCleanup() { }
-    //
-
-    #endregion
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
@@ -88,11 +41,12 @@ namespace Atlantis.Framework.MessagingProcess.Tests
     public void ResetPasswordEmail()
     {
       var UserName = "855307";
+      //var UserName = "76609"; // test
 
       MessagingProcessRequestData request = new MessagingProcessRequestData(UserName, string.Empty, string.Empty, string.Empty, 0, 1,
                                                                             "PasswordReset", "MYA");
 
-      request.AddDictionaryItem("LocalizationCode", "ES");
+      //request.AddDictionaryItem("LocalizationCode", "ES");
 
       ResourceItem resource = new ResourceItem("Shopper", UserName);
       resource["AuthToken"] = new AttributeValue(Guid.NewGuid().ToString());
@@ -115,7 +69,8 @@ namespace Atlantis.Framework.MessagingProcess.Tests
     [DeploymentItem("atlantis.config")]
     public void WelcomeEmail()
     {
-      var UserName = "855307";
+      var UserName = "855307"; // dev
+      //var UserName = "76609"; // test
 
       MessagingProcessRequestData request = new MessagingProcessRequestData(UserName, string.Empty, string.Empty, string.Empty, 0, 1,
                                                                             "AccountCreation", "OrderProcessing");
@@ -142,6 +97,7 @@ namespace Atlantis.Framework.MessagingProcess.Tests
     public void RetrieveShopperNum()
     {
       var UserName = "855307";
+      //var UserName = "76609"; // test
 
       MessagingProcessRequestData request = new MessagingProcessRequestData(UserName, string.Empty, string.Empty, string.Empty, 0, 1,
                                                                             "LoginInformation", "MYA");

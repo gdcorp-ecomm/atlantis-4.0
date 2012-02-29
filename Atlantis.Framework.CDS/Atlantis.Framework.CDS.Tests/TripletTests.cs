@@ -53,7 +53,6 @@ namespace Atlantis.Framework.CDS.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    [ExpectedException(typeof(AtlantisException))]
     public void Triplet_Receives_404_If_Document_Does_Not_Exist()
     {
       //Arrange
@@ -64,15 +63,8 @@ namespace Atlantis.Framework.CDS.Tests
       //requestData.RequestTimeout = TimeSpan.FromSeconds(20);
 
       //Act 
-      try
-      {
-        CDSResponseData responseData = (CDSResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
-      }
-      catch (AtlantisException ex)
-      {
-        Assert.AreEqual("The remote server returned an error: (404) Not Found.", ex.Message);
-        throw;
-      }
+      CDSResponseData responseData = (CDSResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
+      Assert.IsFalse(responseData.IsSuccess);
     }
   }
 }

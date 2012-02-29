@@ -111,6 +111,20 @@ namespace Atlantis.Framework.CDS.Tests
     }
 
     [TestMethod]
+    public void Provider_Returns_Blank_Model_With_404()
+    {
+
+        //Arrange
+
+        //Act
+        ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+        PageData model = provider.GetModel<PageData>("sales/1/danica");
+
+        //Assert
+        Assert.IsNull(model);
+    }
+
+    [TestMethod]
     public void Provider_Deserializes_Json()
     {
 

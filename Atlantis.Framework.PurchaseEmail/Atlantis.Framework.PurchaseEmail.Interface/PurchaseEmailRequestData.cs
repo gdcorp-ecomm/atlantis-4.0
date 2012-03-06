@@ -22,7 +22,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     }
 
     private string _orderXml;
-    private string _localizationCode = "ES";
+    private string _localizationCode = "EN";
     private Dictionary<string, string> _options = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
 
     public PurchaseEmailRequestData(

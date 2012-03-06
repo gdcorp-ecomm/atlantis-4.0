@@ -13,7 +13,7 @@ namespace Atlantis.Framework.MessagingProcess.Interface
     private const string _SHOPPERIDKEY = "ShopperID";
     private const string _LOCALIZATIONCODE = "LocalizationCode";
 
-    private string _localizationCode = "ES";
+    private string _localizationCode = "EN";
     private int _privateLabelId;
     private string _templateType;
     private string _templateNamespace;

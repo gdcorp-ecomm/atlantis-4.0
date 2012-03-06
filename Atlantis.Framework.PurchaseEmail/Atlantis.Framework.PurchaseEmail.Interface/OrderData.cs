@@ -18,7 +18,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     private bool _isNewShopper;
     private bool _isFraudRefund;
 
-    public OrderData(string orderXml, bool isNewShopper, bool isFraudRefund, ObjectProviderContainer providerContainer)
+    public OrderData(string orderXml, bool isNewShopper, bool isFraudRefund, ObjectProviderContainer providerContainer,string localizationCode)
       : base(providerContainer)
     {
       _isFraudRefund = isFraudRefund;
@@ -32,6 +32,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       _currency = providerContainer.Resolve<ICurrencyProvider>();
       _siteContext = providerContainer.Resolve<ISiteContext>();
       ProcessOrderXml();
+      _localizationCode = localizationCode;
     }
 
     private void ProcessOrderXml()
@@ -95,6 +96,12 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     public string OrderId
     {
       get { return _orderId; }
+    }
+
+    private string _localizationCode;
+    public string LocalizationCode
+    {
+      get { return _localizationCode; }
     }
 
     public XmlDocument OrderXmlDoc

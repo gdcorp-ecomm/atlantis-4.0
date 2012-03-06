@@ -252,11 +252,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     public virtual List<MessagingProcessRequestData> GetMessageRequests()
     {
-      return GetMessageRequests("ES");
-    }
-
-    public virtual List<MessagingProcessRequestData> GetMessageRequests(string localizationCode)
-    {
       List<MessagingProcessRequestData> result = new List<MessagingProcessRequestData>();
 
       if (EmailTemplate == null || EmailTemplate.Name == null || EmailTemplate.Namespace == null)
@@ -266,7 +261,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       MessagingProcessRequestData request = new MessagingProcessRequestData(
         _orderData.ShopperId, string.Empty, _orderData.OrderId, string.Empty, 0,
-        _orderData.PrivateLabelId, EmailTemplate.Name, EmailTemplate.Namespace,localizationCode);
+        _orderData.PrivateLabelId, EmailTemplate.Name, EmailTemplate.Namespace,_orderData.LocalizationCode);
 
       ResourceItem resourceItem = new ResourceItem(ResourceType, ResourceId);
 

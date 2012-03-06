@@ -22,6 +22,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     }
 
     private string _orderXml;
+    private string _localizationCode = "ES";
     private Dictionary<string, string> _options = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
 
     public PurchaseEmailRequestData(
@@ -34,8 +35,17 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     public PurchaseEmailRequestData(
       string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
-      string orderXml, IDictionary<string, string> options)
-      : this(shopperId, sourceUrl, orderId, pathway, pageCount, orderXml)
+      string orderXml,string localizationCode)
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    {
+      _orderXml = orderXml;
+      _localizationCode = localizationCode;
+    }
+
+    public PurchaseEmailRequestData(
+      string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
+      string orderXml, IDictionary<string, string> options, string localizationCode)
+      : this(shopperId, sourceUrl, orderId, pathway, pageCount, orderXml,localizationCode)
     {
       if (options != null)
       {
@@ -178,7 +188,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
           if (confirmationEmail != null)
           {
-            result = confirmationEmail.GetMessageRequests();
+            result = confirmationEmail.GetMessageRequests(_localizationCode);
           }
         }
       }

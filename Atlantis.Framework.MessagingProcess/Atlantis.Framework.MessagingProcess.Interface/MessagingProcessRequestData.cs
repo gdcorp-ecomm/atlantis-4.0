@@ -11,7 +11,9 @@ namespace Atlantis.Framework.MessagingProcess.Interface
   {
     private const string _PRIVATELABELIDKEY = "PrivateLabelID";
     private const string _SHOPPERIDKEY = "ShopperID";
+    private const string _LOCALIZATIONCODE = "LocalizationCode";
 
+    private string _localizationCode = "ES";
     private int _privateLabelId;
     private string _templateType;
     private string _templateNamespace;
@@ -53,6 +55,17 @@ namespace Atlantis.Framework.MessagingProcess.Interface
       _templateNamespace = templateNamespace;
     }
 
+    public MessagingProcessRequestData(
+      string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
+      int privateLabelId, string templateType, string templateNamespace, string localizationCode)
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    {
+      _privateLabelId = privateLabelId;
+      _templateType = templateType;
+      _templateNamespace = templateNamespace;
+      _localizationCode = localizationCode;
+    }
+
     public override string ToXML()
     {
       StringBuilder sbRequest = new StringBuilder();
@@ -72,6 +85,11 @@ namespace Atlantis.Framework.MessagingProcess.Interface
       xtwRequest.WriteStartElement("item");
       xtwRequest.WriteAttributeString("name", _SHOPPERIDKEY);
       xtwRequest.WriteValue(ShopperID);
+      xtwRequest.WriteEndElement(); // item
+
+      xtwRequest.WriteStartElement("item");
+      xtwRequest.WriteAttributeString("name", _LOCALIZATIONCODE);
+      xtwRequest.WriteValue(_localizationCode);
       xtwRequest.WriteEndElement(); // item
 
       foreach (string key in _dictionaryItems.Keys)

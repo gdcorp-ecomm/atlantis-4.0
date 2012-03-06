@@ -77,7 +77,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
       Engine.Engine.ReloadConfig();
       string orderXml = LoadSampleOrderXml("DomainWithNoAutoRenewViaAlipay.xml");
       PurchaseEmailRequestData request =
-        new PurchaseEmailRequestData("70364", string.Empty, string.Empty, string.Empty, 0, orderXml);
+        new PurchaseEmailRequestData("70364", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
       PurchaseEmailResponseData response =
        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
     }
@@ -92,7 +92,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
       Engine.Engine.ReloadConfig();
       string orderXml = LoadSampleOrderXml("DomainWithAutoRenewViaAlipay.xml");
       PurchaseEmailRequestData request =
-        new PurchaseEmailRequestData("70364", string.Empty, string.Empty, string.Empty, 0, orderXml);
+        new PurchaseEmailRequestData("70364", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
       PurchaseEmailResponseData response =
        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
     }
@@ -107,7 +107,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
       Engine.Engine.ReloadConfig();
       string orderXml = LoadSampleOrderXml("DomainWithAutoRenewViaAlipayWithVisaBackupSource.xml");
       PurchaseEmailRequestData request =
-        new PurchaseEmailRequestData("122508", string.Empty, string.Empty, string.Empty, 0, orderXml);
+        new PurchaseEmailRequestData("122508", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
       PurchaseEmailResponseData response =
        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
     }
@@ -121,7 +121,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
       Engine.Engine.ReloadConfig();
       string orderXml = LoadSampleOrderXml("GiftCard.xml");
       PurchaseEmailRequestData request =
-        new PurchaseEmailRequestData("832652", string.Empty, string.Empty, string.Empty, 0, orderXml);
+        new PurchaseEmailRequestData("832652", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
       PurchaseEmailResponseData response =
        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
     }
@@ -134,7 +134,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     {
       string orderXml = LoadSampleOrderXml("sampleorder1min.xml");
       PurchaseEmailRequestData request =
-        new PurchaseEmailRequestData("832652", string.Empty, string.Empty, string.Empty, 0, orderXml);
+        new PurchaseEmailRequestData("832652", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
       request.AddOption("IsDevServer", "true");
 
       PurchaseEmailResponseData response =
@@ -151,7 +151,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     {
         string orderXml = LoadSampleOrderXml("HostingOrder.xml");
         PurchaseEmailRequestData request =
-          new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml);
+          new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml,"ES");
         request.AddOption("IsDevServer", "true");
 
         PurchaseEmailResponseData response =
@@ -168,7 +168,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     {
         string orderXml = LoadSampleOrderXml("HostingOrder2.xml");
         PurchaseEmailRequestData request =
-          new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml);
+          new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
         request.AddOption("IsDevServer", "true");
 
         PurchaseEmailResponseData response =
@@ -185,7 +185,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     {
         string orderXml = LoadSampleOrderXml("HostingDomainOrder.xml");
         PurchaseEmailRequestData request =
-          new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml);
+          new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
         request.AddOption("IsDevServer", "true");
 
         PurchaseEmailResponseData response =
@@ -202,7 +202,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     {
         string orderXml = LoadSampleOrderXml("HostingDomainOrder.xml");
         PurchaseEmailRequestData request =
-          new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml);
+          new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
         request.AddOption("IsDevServer", "true");
         request.AddOption("IsNewShopper", "true");
 
@@ -220,7 +220,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     {
         string orderXml = LoadSampleOrderXml("WSTOrder.xml");
         PurchaseEmailRequestData request =
-          new PurchaseEmailRequestData("121079", string.Empty, string.Empty, string.Empty, 0, orderXml);
+          new PurchaseEmailRequestData("121079", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
         //request.AddOption("IsDevServer", "true");
         //request.AddOption("IsNewShopper", "true");
 
@@ -238,7 +238,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     {
         string orderXml = LoadSampleOrderXml("DomainWithDBPOrder.xml");
         PurchaseEmailRequestData request =
-          new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml);
+          new PurchaseEmailRequestData("861796", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
         request.AddOption("IsDevServer", "true");
         //request.AddOption("IsNewShopper", "true");
 
@@ -258,7 +258,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     {
       string orderXml = LoadSampleOrderXml("samplebadshopperorder.xml");
       PurchaseEmailRequestData request =
-        new PurchaseEmailRequestData("nothere", string.Empty, string.Empty, string.Empty, 0, orderXml);
+        new PurchaseEmailRequestData("nothere", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
       request.AddOption("IsDevServer", "true");
 
       PurchaseEmailResponseData response =
@@ -275,7 +275,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     {
       string orderXml = LoadSampleOrderXml("sampleorder1min.xml");
       PurchaseEmailRequestData request =
-        new PurchaseEmailRequestData("832652", string.Empty, string.Empty, string.Empty, 0, orderXml);
+        new PurchaseEmailRequestData("832652", string.Empty, string.Empty, string.Empty, 0, orderXml, "ES");
       request.AddOption("CoolEmail", "true");
     }
 

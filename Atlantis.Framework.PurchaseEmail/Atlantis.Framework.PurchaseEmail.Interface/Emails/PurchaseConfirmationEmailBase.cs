@@ -447,7 +447,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       if (DomainsByProxyInOrder)
       {
-        itemsTextBuilder.Append("<br/><span style=\"font-weight:bold\">Because you just purchased Private Registration, watch for an email from <span style=\"text-decoration:underline\">Support@DomainsByProxy.com</span>. It contains important information about logging in to your Domains By Proxy account.</span>");
+        itemsTextBuilder.Append("<br/><span style=\"font-weight:bold\">[%%LCST.REQ.UTOS_DBP_EMAIL%%] <span style=\"text-decoration:underline\">Support@DomainsByProxy.com</span>[%%LCST.REQ.UTOS_DBP_LOGIN%%]</span>");
       }
     }
 
@@ -514,9 +514,9 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         {
           if (longText)
           {
-            conciergeText.Append("Priority hosting setup help for 30 days! ");
+            conciergeText.Append("[%%LCST.REQ.UTOS_PRIORITY%%] ");
           }
-          conciergeText.Append("Call ");
+          conciergeText.Append("[%%LCST.REQ.UTOS_CALL%%] ");
           if (boldPhoneNumbers)
           {
             conciergeText.Append("<span style='font-weight:bolder'>");
@@ -526,7 +526,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
           {
             conciergeText.Append("</span>");
           }
-          conciergeText.Append(" (US only) or ");
+          conciergeText.Append(" [%%LCST.REQ.UTOS_USONLY%%] ");
           if (boldPhoneNumbers)
           {
             conciergeText.Append("<span style='font-weight:bolder'>");
@@ -538,7 +538,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
           }
           if (!longText)
           {
-            conciergeText.Append(" for setup help!");
+            conciergeText.Append(" [%%LCST.REQ.UTOS_SETUP_HELP%%]");
           }
         }
       }
@@ -646,17 +646,17 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     private void BuildCurrencyWarning_PlainText(StringBuilder itemsTextBuilder)
     {
-      itemsTextBuilder.AppendLine(Environment.NewLine + "Pricing displayed in Australian dollars, British pounds, Canadian dollars, European Euros, Indian rupees, Brazilian Real, Japanese Yen, Swiss Franc, or Mexican dollars is estimated. The transaction, and any subsequent refunds, will occur in US dollars and due to the time delay between purchase and payment settlement, the actual price charged may fluctuate.");
+      itemsTextBuilder.AppendLine(Environment.NewLine + "[%%LCST.REQ.UTOS_TRANSPRICE%%]");
     }
     private void BuildCurrencyWarning_Html(StringBuilder itemsTextBuilder)
     {
       itemsTextBuilder.AppendLine("<table width='300' cellspacing='0' cellpadding='0' border='0'><tr><td colspan='3' align='center' class='bodyText'><hr></td></tr>");
-      itemsTextBuilder.AppendLine("<tr><td class='subText' style='white-space:normal'>Pricing displayed in Australian dollars, British pounds, Canadian dollars, European Euros, Indian rupees, Brazilian Real, Japanese Yen, Swiss Franc, or Mexican dollars is estimated. The transaction, and any subsequent refunds, will occur in US dollars and due to the time delay between purchase and payment settlement, the actual price charged may fluctuate.</td></tr></table>");
+      itemsTextBuilder.AppendLine("<tr><td class='subText' style='white-space:normal'>[%%LCST.REQ.UTOS_TRANSPRICE%%]</td></tr></table>");
     }
 
     private void BuildCATaxInfo_PlainText(StringBuilder itemsTextBuilder, string caName, string caNumber)
     {
-      itemsTextBuilder.AppendLine(Environment.NewLine + "Canadian GST Information:");
+      itemsTextBuilder.AppendLine(Environment.NewLine + "[%%LCST.REQ.UTOS_CAN_GST%%]:");
       itemsTextBuilder.AppendLine("Business Name: " + caName);
       itemsTextBuilder.AppendLine("Business Number: " + caNumber);
     }
@@ -664,12 +664,12 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     {
       itemsTextBuilder.AppendLine("<br/><table cellspacing='1' cellpadding='0' border='0' class='bodyText'>");
       itemsTextBuilder.AppendLine("<tr><td colspan='3' style='line-height:5px'>&nbsp;</td></tr>");
-      itemsTextBuilder.AppendLine("<tr><td colspan='3' class='bodyText'><b>Canadian GST Information:</b></td></tr>");
+      itemsTextBuilder.AppendLine("<tr><td colspan='3' class='bodyText'><b>[%%LCST.REQ.UTOS_CAN_GST%%]:</b></td></tr>");
       itemsTextBuilder.AppendLine("<tr><td style='line-height:5px'>&nbsp;</td></tr>");
-      itemsTextBuilder.AppendLine("<tr><td class='bodyText' style='padding-left:3px'>Business Name: </td>");
+      itemsTextBuilder.AppendLine("<tr><td class='bodyText' style='padding-left:3px'>[%%LCST.REQ.UTOS_BUS_NAME%%]: </td>");
       itemsTextBuilder.AppendLine("<td class='bodyText'>" + caName + "</td>");
       itemsTextBuilder.AppendLine("</tr>");
-      itemsTextBuilder.AppendLine("<tr><td class='bodyText' style='padding-left:3px'>Business Number: </td>");
+      itemsTextBuilder.AppendLine("<tr><td class='bodyText' style='padding-left:3px'>[%%LCST.REQ.UTOS_BUS_NUMBER%%]: </td>");
       itemsTextBuilder.AppendLine("<td class='bodyText'>" + caNumber + "</td>");
       itemsTextBuilder.AppendLine("</tr>");
       itemsTextBuilder.AppendLine("<tr><td style='line-height:5px'>&nbsp;</td></tr></table>");
@@ -678,12 +678,12 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     private void BuildVATInfo_PlainText(StringBuilder itemsTextBuilder, string vatId)
     {
       itemsTextBuilder.AppendLine();
-      itemsTextBuilder.AppendLine("VALUE ADDED TAX ID: " + vatId);
+      itemsTextBuilder.AppendLine("[%%LCST.REQ.UTOS_VAT%%]: " + vatId);
     }
     private void BuildVATInfo_Html(StringBuilder itemsTextBuilder, string vatId)
     {
       itemsTextBuilder.AppendLine("<br/><table cellspacing='1' cellpadding='0' border='0' class='bodyText'>");
-      itemsTextBuilder.AppendLine("<tr><td class='bodyText' style='padding-left:3px'>VALUE ADDED TAX ID: </td>");
+      itemsTextBuilder.AppendLine("<tr><td class='bodyText' style='padding-left:3px'>[%%LCST.REQ.UTOS_VAT%%]: </td>");
       itemsTextBuilder.AppendLine("<td class='bodyText'>" + vatId + "</td>");
       itemsTextBuilder.AppendLine("</tr>");
       itemsTextBuilder.AppendLine("<tr><td style='line-height:5px'>&nbsp;</td></tr></table>");
@@ -718,12 +718,12 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         {
           pmBuilder.Append("<div>");
           pmBuilder.Append("<img src='" + Links.ImageRoot + "cart/img_video_me.gif' width='88' height='37' align='left' hspace='4'/>");
-          pmBuilder.Append("P.S. Share your videos online with customers, family and friends for FREE! <a href='http://www.video.me/Default.aspx'>Log in</a> now with your GoDaddy username and password.");
+          pmBuilder.Append("[%%LCST.REQ.UTOS_PS%%] <a href='http://www.video.me/Default.aspx'>[%%LCST.REQ.UTOS_LOGIN%%]</a> [%%LCST.REQ.UTOS_GD_USERNAME%%]");
           pmBuilder.Append("</div>");
         }
         else
         {
-          pmBuilder.Append("P.S. Share your videos online with customers, family and friends for FREE! Log in now with your GoDaddy username and password. : http://www.video.me/Default.aspx");
+          pmBuilder.Append("[%%LCST.REQ.UTOS_PS%%] [%%LCST.REQ.UTOS_LOGIN%%] [%%LCST.REQ.UTOS_GD_USERNAME%%] : http://www.video.me/Default.aspx");
         }
       }
       return pmBuilder.ToString();

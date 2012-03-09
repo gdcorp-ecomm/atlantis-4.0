@@ -179,7 +179,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
                 "<tbody><tr> <td><table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\"> <tbody><tr> ");
             banner.Append("<td align=\"center\"><img height=\"" + hostingHeight);
             banner.Append("\" border=\"0\" width=\"" + hostingWidth + "\" src=\"");
-            banner.Append(hostingImage + "\" alt=\"GoDaddy Hosting Concierge\"></a>");
+            banner.Append(hostingImage + "\" alt=\"[%%LCST.REQ.UTOS_CONCIERGE%%]\"></a>");
             banner.Append("</td> </tr> <tr> <td align=\"left\" style=\"padding:3px 5px 5px 5px;\">");
             banner.Append(
                 "<font style=\"font-size: 11px; color: black; font-family: arial,sans serif;\">");

@@ -678,12 +678,12 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     private void BuildVATInfo_PlainText(StringBuilder itemsTextBuilder, string vatId)
     {
       itemsTextBuilder.AppendLine();
-      itemsTextBuilder.AppendLine("[%%LCST.REQ.UTOS_VAT%%]: " + vatId);
+      itemsTextBuilder.AppendLine(" [%%LCST.REQ.UTOS_VAT%%]: " + vatId);
     }
     private void BuildVATInfo_Html(StringBuilder itemsTextBuilder, string vatId)
     {
       itemsTextBuilder.AppendLine("<br/><table cellspacing='1' cellpadding='0' border='0' class='bodyText'>");
-      itemsTextBuilder.AppendLine("<tr><td class='bodyText' style='padding-left:3px'>[%%LCST.REQ.UTOS_VAT%%]: </td>");
+      itemsTextBuilder.AppendLine("<tr><td class='bodyText' style='padding-left:3px'> [%%LCST.REQ.UTOS_VAT%%]: </td>");
       itemsTextBuilder.AppendLine("<td class='bodyText'>" + vatId + "</td>");
       itemsTextBuilder.AppendLine("</tr>");
       itemsTextBuilder.AppendLine("<tr><td style='line-height:5px'>&nbsp;</td></tr></table>");

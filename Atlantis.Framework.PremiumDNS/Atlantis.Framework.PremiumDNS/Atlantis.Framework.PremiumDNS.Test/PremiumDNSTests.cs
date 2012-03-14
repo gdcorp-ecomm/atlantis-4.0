@@ -3,7 +3,6 @@ using System.Diagnostics;
 using Atlantis.Framework.PremiumDNS.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
 namespace Atlantis.Framework.PremiumDNS.Test
 {
   [TestClass]
@@ -15,24 +14,11 @@ namespace Atlantis.Framework.PremiumDNS.Test
 	  [DeploymentItem("atlantis.config")]
     public void PremiumDNSTestStatus()
     {
-      TimeSpan requestTimeout = new TimeSpan(0, 0, 0, 2, 500);
-
-     GetPremiumDNSStatusRequestData request = new GetPremiumDNSStatusRequestData(_shopperId
-        , string.Empty
-        , string.Empty
-        , string.Empty
-        , 0
-        , 1);
-
-      request.RequestTimeout = requestTimeout;
-
-      int _requestType = 288;
-
-      GetPremiumDNSStatusResponseData response = (GetPremiumDNSStatusResponseData)Engine.Engine.ProcessRequest(request, _requestType);
-      
-
-
-	  
+     GetPremiumDNSStatusRequestData request = new GetPremiumDNSStatusRequestData(_shopperId, 
+       string.Empty, string.Empty, string.Empty, 0, 1);
+     request.RequestTimeout = new TimeSpan(0, 0, 0, 2, 500);
+      GetPremiumDNSStatusResponseData response
+        = (GetPremiumDNSStatusResponseData)Engine.Engine.ProcessRequest(request, 288);
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
       Assert.IsTrue(response.HasPremiumDNS);
@@ -42,26 +28,15 @@ namespace Atlantis.Framework.PremiumDNS.Test
     [DeploymentItem("atlantis.config")]
     public void PremiumDNSTestNameservers()
     {
-
-      TimeSpan requestTimeout = new TimeSpan(0, 0, 0, 2, 500);
-
-      GetPremiumDNSDefaultNameServersRequestData request = new GetPremiumDNSDefaultNameServersRequestData(_shopperId
-         , string.Empty
-         , string.Empty
-         , string.Empty
-         , 0
-         , 1);
-
-      request.RequestTimeout = requestTimeout;
-
-      int _requestType = 289;
-
-      GetPremiumDNSDefaultNameServersResponseData response = (GetPremiumDNSDefaultNameServersResponseData)Engine.Engine.ProcessRequest(request, _requestType);
-
-      Assert.IsTrue(response.Nameservers.Count > 0);
-
+      GetPremiumDNSDefaultNameServersRequestData request = new GetPremiumDNSDefaultNameServersRequestData(_shopperId, 
+        string.Empty, string.Empty, string.Empty, 0, 1);
+      request.RequestTimeout = new TimeSpan(0, 0, 0, 2, 500);
+      GetPremiumDNSDefaultNameServersResponseData response
+        = (GetPremiumDNSDefaultNameServersResponseData)Engine.Engine.ProcessRequest(request, 289);
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(response.NameserversByTld.Count > 0);
+      Assert.IsTrue(response.Nameservers.Count > 0);
     }
   }
 }

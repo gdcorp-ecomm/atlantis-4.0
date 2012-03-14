@@ -6,6 +6,7 @@
         <xsd:sequence>
           <xsd:element minOccurs="1" maxOccurs="1" name="shopperid" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="resellerid" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="parentshopperid" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="execshopperid" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="execresellerid" type="xsd:int" />
           <xsd:element minOccurs="1" maxOccurs="1" name="origin" type="xsd:string" />
@@ -40,6 +41,7 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="migrationstatus" type="xsd:int" />
           <xsd:element minOccurs="0" maxOccurs="1" name="lastmodified" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="sourcetype" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="offsitetransfertemplate" type="xsd:int" />
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="transferkeys" type="tns:transferKeyType" />
           <xsd:element minOccurs="0" maxOccurs="1" name="status" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="soa" type="tns:soaType" />
@@ -91,6 +93,7 @@
           <xsd:element minOccurs="1" maxOccurs="1" name="retry" type="xsd:int" />
           <xsd:element minOccurs="1" maxOccurs="1" name="expire" type="xsd:int" />
           <xsd:element minOccurs="0" maxOccurs="1" name="minimum" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="status" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="booleanResponseType">
@@ -117,6 +120,13 @@
       </xsd:complexType>
       <xsd:complexType name="nameserverArrayType">
         <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="nameservers" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="tldnameservers" type="tns:nameserversByTldType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="nameserversByTldType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="tld" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="nameservers" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>
@@ -182,6 +192,14 @@
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="nameservers" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>
+      <xsd:complexType name="zoneHealthDiffArrayType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="source" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="uid" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="type" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="namedata" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
       <xsd:complexType name="zoneHealthCheckResponseType">
         <xsd:sequence>
           <xsd:element minOccurs="1" maxOccurs="1" name="domain" type="xsd:string" />
@@ -191,6 +209,9 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="recommendedFix" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="fixPerformed" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="flags" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="difforion" type="tns:zoneHealthDiffArrayType" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="diffdnsdb" type="tns:zoneHealthDiffArrayType" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="uids" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="errors" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="debug" type="xsd:string" />
         </xsd:sequence>
@@ -311,6 +332,9 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="master" type="xsd:int" />
           <xsd:element minOccurs="0" maxOccurs="1" name="slave" type="xsd:int" />
           <xsd:element minOccurs="0" maxOccurs="1" name="dnssec" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="offsitetransfertemplate" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="vanityns1" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="vanityns2" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="accountListType">
@@ -394,9 +418,30 @@
         <xsd:sequence>
           <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:int" />
           <xsd:element minOccurs="0" maxOccurs="1" name="uid" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="auditMessage" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="eventType" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="eventTypeDescription" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="requestor" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="requestorDescription" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="status" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="statusDescription" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="dateCreated" type="xsd:dateTime" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="dateModified" type="xsd:dateTime" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="dateCompleted" type="xsd:dateTime" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="processDate" type="xsd:dateTime" />
           <xsd:element minOccurs="1" maxOccurs="unbounded" name="eventItems" type="tns:orionEventItemsType" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="auditItems" type="tns:orionEventAuditItemsType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="orionEventAuditItemsType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="ID" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="EventID" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="StatusID" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="StatusDescription" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Message" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="DateCreated" type="xsd:dateTime" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="DateModified" type="xsd:dateTime" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="orionEventQueueType">
@@ -545,6 +590,7 @@
       <xsd:complexType name="getVanityNameServersResponseType">
         <xsd:sequence>
           <xsd:element minOccurs="1" maxOccurs="1" name="response" type="tns:simpleResponseType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="assigned" type="xsd:int" />
           <xsd:element minOccurs="0" maxOccurs="1" name="default" type="xsd:int" />
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="aliasmap" type="tns:vanityNameServerAliasMapType" />
         </xsd:sequence>
@@ -564,11 +610,35 @@
           <xsd:element minOccurs="1" maxOccurs="unbounded" name="results" type="tns:tdnsHealthCheckDataType" />
         </xsd:sequence>
       </xsd:complexType>
+      <xsd:complexType name="dsRecordType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="dsData" type="tns:dsDataType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="keyData" type="tns:dsKeyType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="dsDataType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="keyTag" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="alg" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="digestType" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="digest" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="record" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="dsKeyType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="flags" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="protocol" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="alg" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="pubKey" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="record" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
       <xsd:complexType name="dsSubmissionType">
         <xsd:sequence>
           <xsd:element minOccurs="1" maxOccurs="1" name="zone_uid" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="zone_name" type="xsd:string" />
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="dsrecs" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="dsrecs" type="tns:dsRecordType" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="dnssecRequestType">
@@ -796,6 +866,47 @@
       <xsd:complexType name="getMainARecordsForDomainsResponseType">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="domains" type="tns:domainIPAddressType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getPremiumFeaturesResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="xfer" type="tns:getXferStatusResponseType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="dnssec" type="tns:dnssecStatusType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="vanity" type="tns:getVanityNameServersResponseType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="auditNameServerType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="nameserver" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="flags" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="auditNameServersType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="dnsdomains" type="tns:auditNameServerType" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="dnszonenameservers" type="tns:auditNameServerType" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="registrar" type="tns:auditNameServerType" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="zonedbns" type="tns:auditNameServerType" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="zonedns" type="tns:auditNameServerType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="hostedResourceInputType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="targetAccountUID" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="uniqueName" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="ip" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="ttl" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="hostedResourceOutputType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="type" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="apiVersion" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="stat" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="fqdnHostName" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="netErrorCode" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="comErrorCode" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="reason" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:element name="clientAuth" type="tns:authDataType" />
@@ -1279,6 +1390,52 @@
   <message name="getQueryReportDateRangeOut">
     <part name="result" type="tns:queryReportResponseType" />
   </message>
+  <message name="checkZoneOwnerOut">
+    <part name="result" type="xsd:int" />
+  </message>
+  <message name="applyTemplateToNewZoneIn">
+    <part name="domain" type="xsd:string" />
+    <part name="templateid" type="xsd:int" />
+  </message>
+  <message name="notifyDNSSECZoneUpdateIn">
+    <part name="uid" type="xsd:string" />
+  </message>
+  <message name="getPremiumFeaturesOut">
+    <part name="result" type="tns:getPremiumFeaturesResponseType" />
+  </message>
+  <message name="createOffsiteZoneIn">
+    <part name="domain" type="xsd:string" />
+    <part name="transfertemplate" type="xsd:int" />
+  </message>
+  <message name="getBindFileIn">
+    <part name="domain" type="xsd:string" />
+    <part name="format" type="xsd:int" />
+  </message>
+  <message name="createSubdomainBlogRecordsIn">
+    <part name="domain" type="xsd:string" />
+    <part name="subdomain" type="xsd:string" />
+  </message>
+  <message name="getAuditNameServersOut">
+    <part name="result" type="tns:auditNameServersType" />
+  </message>
+  <message name="removeZoneByUidIn">
+    <part name="uid" type="xsd:string" />
+  </message>
+  <message name="removeZoneByUidOut">
+    <part name="result" type="tns:simpleResponseType" />
+  </message>
+  <message name="addUniqueDNSIn">
+    <part name="request" type="tns:hostedResourceInputType" />
+  </message>
+  <message name="addUniqueDNSOut">
+    <part name="result" type="tns:hostedResourceOutputType" />
+  </message>
+  <message name="deleteUniqueDNSIn">
+    <part name="request" type="tns:hostedResourceInputType" />
+  </message>
+  <message name="deleteUniqueDNSOut">
+    <part name="result" type="tns:hostedResourceOutputType" />
+  </message>
   <message name="empty" />
   <portType name="dnsapiPortType">
     <operation name="returnTime">
@@ -1378,7 +1535,7 @@
     </operation>
     <operation name="getBindFile">
       <documentation>getBindFile</documentation>
-      <input message="tns:getDomainIn" />
+      <input message="tns:getBindFileIn" />
       <output message="tns:getStringOut" />
     </operation>
     <operation name="getZone">
@@ -1652,13 +1809,18 @@
       <output message="tns:createZoneFolderOut" />
     </operation>
     <operation name="getZoneFolder">
-      <documentation>getZoneFolders</documentation>
+      <documentation>getZoneFolder</documentation>
       <input message="tns:getZoneFolderIn" />
       <output message="tns:getZoneFoldersOut" />
     </operation>
     <operation name="getZoneFolders">
       <documentation>getZoneFolders</documentation>
       <input message="tns:empty" />
+      <output message="tns:getZoneFoldersOut" />
+    </operation>
+    <operation name="getZoneFoldersByDomain">
+      <documentation>getZoneFoldersByDomain</documentation>
+      <input message="tns:getDomainIn" />
       <output message="tns:getZoneFoldersOut" />
     </operation>
     <operation name="getZonesInFolder">
@@ -1675,6 +1837,16 @@
       <documentation>createCustomTemplate</documentation>
       <input message="tns:createCustomTemplateIn" />
       <output message="tns:createCustomTemplateOut" />
+    </operation>
+    <operation name="createOffsiteTransferTemplate">
+      <documentation>createOffsiteTransferTemplate</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:createCustomTemplateOut" />
+    </operation>
+    <operation name="deleteOffsiteTransferTemplate">
+      <documentation>deleteOffsiteTransferTemplate</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:simpleResponseTypeOut" />
     </operation>
     <operation name="modifyCustomTemplate">
       <documentation>modifyCustomTemplate</documentation>
@@ -1863,7 +2035,7 @@
     </operation>
     <operation name="createOffsiteZone">
       <documentation>createOffsiteZone</documentation>
-      <input message="tns:getDomainIn" />
+      <input message="tns:createOffsiteZoneIn" />
       <output message="tns:simpleResponseTypeOut" />
     </operation>
     <operation name="deleteOffsiteZone">
@@ -1872,7 +2044,7 @@
       <output message="tns:simpleResponseTypeOut" />
     </operation>
     <operation name="getDefaultSoaValues">
-      <documentation>createOffsiteZone</documentation>
+      <documentation>getDefaultSoaValues</documentation>
       <input message="tns:empty" />
       <output message="tns:getDefaultSoaValuesOut" />
     </operation>
@@ -1900,6 +2072,76 @@
       <documentation>getQueryReportHourlyDateRange</documentation>
       <input message="tns:getQueryReportDateRangeIn" />
       <output message="tns:getQueryReportDateRangeOut" />
+    </operation>
+    <operation name="checkZoneOwner">
+      <documentation>checkZoneOwner</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:checkZoneOwnerOut" />
+    </operation>
+    <operation name="applyTemplateToNewZone">
+      <documentation>applyTemplateToNewZone</documentation>
+      <input message="tns:applyTemplateToNewZoneIn" />
+      <output message="tns:booleanResponseTypeOut" />
+    </operation>
+    <operation name="notifyDNSSECZoneUpdate">
+      <documentation>notifyDNSSECZoneUpdate</documentation>
+      <input message="tns:notifyDNSSECZoneUpdateIn" />
+      <output message="tns:simpleResponseTypeOut" />
+    </operation>
+    <operation name="getPremiumFeatures">
+      <documentation>getPremiumFeatures</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:getPremiumFeaturesOut" />
+    </operation>
+    <operation name="createBlogRecords">
+      <documentation>createBlogRecords</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:booleanResponseTypeOut" />
+    </operation>
+    <operation name="createSubdomainBlogRecords">
+      <documentation>createBlogRecords</documentation>
+      <input message="tns:createSubdomainBlogRecordsIn" />
+      <output message="tns:booleanResponseTypeOut" />
+    </operation>
+    <operation name="getAuditNameServers">
+      <documentation>getAuditNameServers</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:getAuditNameServersOut" />
+    </operation>
+    <operation name="removeZoneByUid">
+      <documentation>removeZoneByUid</documentation>
+      <input message="tns:removeZoneByUidIn" />
+      <output message="tns:removeZoneByUidOut" />
+    </operation>
+    <operation name="cancelDomain">
+      <documentation>cancelDomain</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:simpleResponseTypeOut" />
+    </operation>
+    <operation name="removeZoneCheckNS">
+      <documentation>removeZoneCheckNS</documentation>
+      <input message="tns:removeZoneByUidIn" />
+      <output message="tns:removeZoneByUidOut" />
+    </operation>
+    <operation name="expireDomain">
+      <documentation>expireDomain</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:simpleResponseTypeOut" />
+    </operation>
+    <operation name="unExpireDomain">
+      <documentation>unExpireDomain</documentation>
+      <input message="tns:getDomainIn" />
+      <output message="tns:simpleResponseTypeOut" />
+    </operation>
+    <operation name="addUniqueDNS">
+      <documentation>addUniqueDNS</documentation>
+      <input message="tns:addUniqueDNSIn" />
+      <output message="tns:addUniqueDNSOut" />
+    </operation>
+    <operation name="deleteUniqueDNS">
+      <documentation>deleteUniqueDNS</documentation>
+      <input message="tns:deleteUniqueDNSIn" />
+      <output message="tns:deleteUniqueDNSOut" />
     </operation>
   </portType>
   <binding name="dnsapiSoap" type="tns:dnsapiPortType">
@@ -2617,6 +2859,17 @@
         <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
       </output>
     </operation>
+    <operation name="getZoneFoldersByDomain">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
     <operation name="getZoneFolder">
       <soap:operation soapAction="" style="rpc" />
       <input>
@@ -2750,6 +3003,28 @@
       </output>
     </operation>
     <operation name="createCustomTemplate">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="createOffsiteTransferTemplate">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="deleteOffsiteTransferTemplate">
       <soap:operation soapAction="" style="rpc" />
       <input>
         <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
@@ -3231,6 +3506,159 @@
       </output>
     </operation>
     <operation name="getQueryReportHourlyDateRange">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="checkZoneOwner">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="applyTemplateToNewZone">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="notifyDNSSECZoneUpdate">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getPremiumFeatures">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="createBlogRecords">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="createSubdomainBlogRecords">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="getAuditNameServers">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="removeZoneByUid">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="cancelDomain">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="removeZoneCheckNS">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="expireDomain">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="unExpireDomain">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="addUniqueDNS">
+      <soap:operation soapAction="" style="rpc" />
+      <input>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+        <soap:header message="tns:authHeader" part="clientAuth" use="literal" />
+        <soap:header message="tns:custHeader" part="custInfo" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />
+      </output>
+    </operation>
+    <operation name="deleteUniqueDNS">
       <soap:operation soapAction="" style="rpc" />
       <input>
         <soap:body use="literal" namespace="http://dnsapi.domaincontrol.com/dnsapi" />

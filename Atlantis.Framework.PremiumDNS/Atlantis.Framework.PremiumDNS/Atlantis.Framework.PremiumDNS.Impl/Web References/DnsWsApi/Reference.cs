@@ -13,11 +13,16 @@
 // 
 #pragma warning disable 1591
 
-namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
-{
-
-
-  /// <remarks/>
+namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi {
+    using System;
+    using System.Web.Services;
+    using System.Diagnostics;
+    using System.Web.Services.Protocols;
+    using System.ComponentModel;
+    using System.Xml.Serialization;
+    
+    
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -180,11 +185,17 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         
         private System.Threading.SendOrPostCallback getZoneFoldersOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getZoneFoldersByDomainOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getZonesInFolderOperationCompleted;
         
         private System.Threading.SendOrPostCallback getCustomTemplateDataOperationCompleted;
         
         private System.Threading.SendOrPostCallback createCustomTemplateOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback createOffsiteTransferTemplateOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback deleteOffsiteTransferTemplateOperationCompleted;
         
         private System.Threading.SendOrPostCallback modifyCustomTemplateOperationCompleted;
         
@@ -275,6 +286,34 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         private System.Threading.SendOrPostCallback getQueryReportDailyDateRangeOperationCompleted;
         
         private System.Threading.SendOrPostCallback getQueryReportHourlyDateRangeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback checkZoneOwnerOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback applyTemplateToNewZoneOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback notifyDNSSECZoneUpdateOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getPremiumFeaturesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback createBlogRecordsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback createSubdomainBlogRecordsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getAuditNameServersOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback removeZoneByUidOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback cancelDomainOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback removeZoneCheckNSOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback expireDomainOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback unExpireDomainOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback addUniqueDNSOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback deleteUniqueDNSOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -561,6 +600,9 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         public event getZoneFoldersCompletedEventHandler getZoneFoldersCompleted;
         
         /// <remarks/>
+        public event getZoneFoldersByDomainCompletedEventHandler getZoneFoldersByDomainCompleted;
+        
+        /// <remarks/>
         public event getZonesInFolderCompletedEventHandler getZonesInFolderCompleted;
         
         /// <remarks/>
@@ -568,6 +610,12 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         
         /// <remarks/>
         public event createCustomTemplateCompletedEventHandler createCustomTemplateCompleted;
+        
+        /// <remarks/>
+        public event createOffsiteTransferTemplateCompletedEventHandler createOffsiteTransferTemplateCompleted;
+        
+        /// <remarks/>
+        public event deleteOffsiteTransferTemplateCompletedEventHandler deleteOffsiteTransferTemplateCompleted;
         
         /// <remarks/>
         public event modifyCustomTemplateCompletedEventHandler modifyCustomTemplateCompleted;
@@ -703,6 +751,48 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         
         /// <remarks/>
         public event getQueryReportHourlyDateRangeCompletedEventHandler getQueryReportHourlyDateRangeCompleted;
+        
+        /// <remarks/>
+        public event checkZoneOwnerCompletedEventHandler checkZoneOwnerCompleted;
+        
+        /// <remarks/>
+        public event applyTemplateToNewZoneCompletedEventHandler applyTemplateToNewZoneCompleted;
+        
+        /// <remarks/>
+        public event notifyDNSSECZoneUpdateCompletedEventHandler notifyDNSSECZoneUpdateCompleted;
+        
+        /// <remarks/>
+        public event getPremiumFeaturesCompletedEventHandler getPremiumFeaturesCompleted;
+        
+        /// <remarks/>
+        public event createBlogRecordsCompletedEventHandler createBlogRecordsCompleted;
+        
+        /// <remarks/>
+        public event createSubdomainBlogRecordsCompletedEventHandler createSubdomainBlogRecordsCompleted;
+        
+        /// <remarks/>
+        public event getAuditNameServersCompletedEventHandler getAuditNameServersCompleted;
+        
+        /// <remarks/>
+        public event removeZoneByUidCompletedEventHandler removeZoneByUidCompleted;
+        
+        /// <remarks/>
+        public event cancelDomainCompletedEventHandler cancelDomainCompleted;
+        
+        /// <remarks/>
+        public event removeZoneCheckNSCompletedEventHandler removeZoneCheckNSCompleted;
+        
+        /// <remarks/>
+        public event expireDomainCompletedEventHandler expireDomainCompleted;
+        
+        /// <remarks/>
+        public event unExpireDomainCompletedEventHandler unExpireDomainCompleted;
+        
+        /// <remarks/>
+        public event addUniqueDNSCompletedEventHandler addUniqueDNSCompleted;
+        
+        /// <remarks/>
+        public event deleteUniqueDNSCompletedEventHandler deleteUniqueDNSCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
@@ -1236,13 +1326,12 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
         [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
-        [return: System.Xml.Serialization.XmlArrayAttribute("result")]
-        [return: System.Xml.Serialization.XmlArrayItemAttribute("nameservers", Namespace="http://dnsapi.domaincontrol.com/dnsapi", IsNullable=false)]
-        public string[] getNameServers(string domain, int even) {
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public nameserverArrayType getNameServers(string domain, int even) {
             object[] results = this.Invoke("getNameServers", new object[] {
                         domain,
                         even});
-            return ((string[])(results[0]));
+            return ((nameserverArrayType)(results[0]));
         }
         
         /// <remarks/>
@@ -1271,11 +1360,10 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
         [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
-        [return: System.Xml.Serialization.XmlArrayAttribute("result")]
-        [return: System.Xml.Serialization.XmlArrayItemAttribute("nameservers", Namespace="http://dnsapi.domaincontrol.com/dnsapi", IsNullable=false)]
-        public string[] getDefaultNameServers() {
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public nameserverArrayType getDefaultNameServers() {
             object[] results = this.Invoke("getDefaultNameServers", new object[0]);
-            return ((string[])(results[0]));
+            return ((nameserverArrayType)(results[0]));
         }
         
         /// <remarks/>
@@ -1302,11 +1390,10 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
         [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
-        [return: System.Xml.Serialization.XmlArrayAttribute("result")]
-        [return: System.Xml.Serialization.XmlArrayItemAttribute("nameservers", Namespace="http://dnsapi.domaincontrol.com/dnsapi", IsNullable=false)]
-        public string[] getAllNameServers() {
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public nameserverArrayType getAllNameServers() {
             object[] results = this.Invoke("getAllNameServers", new object[0]);
-            return ((string[])(results[0]));
+            return ((nameserverArrayType)(results[0]));
         }
         
         /// <remarks/>
@@ -1334,24 +1421,26 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
         [return: System.Xml.Serialization.XmlElementAttribute("result")]
-        public string getBindFile(string domain) {
+        public string getBindFile(string domain, int format) {
             object[] results = this.Invoke("getBindFile", new object[] {
-                        domain});
+                        domain,
+                        format});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void getBindFileAsync(string domain) {
-            this.getBindFileAsync(domain, null);
+        public void getBindFileAsync(string domain, int format) {
+            this.getBindFileAsync(domain, format, null);
         }
         
         /// <remarks/>
-        public void getBindFileAsync(string domain, object userState) {
+        public void getBindFileAsync(string domain, int format, object userState) {
             if ((this.getBindFileOperationCompleted == null)) {
                 this.getBindFileOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetBindFileOperationCompleted);
             }
             this.InvokeAsync("getBindFile", new object[] {
-                        domain}, this.getBindFileOperationCompleted, userState);
+                        domain,
+                        format}, this.getBindFileOperationCompleted, userState);
         }
         
         private void OngetBindFileOperationCompleted(object arg) {
@@ -3188,6 +3277,39 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
         [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlArrayAttribute("result")]
+        [return: System.Xml.Serialization.XmlArrayItemAttribute("folders", Namespace="http://dnsapi.domaincontrol.com/dnsapi", IsNullable=false)]
+        public zoneFolderType[] getZoneFoldersByDomain(string domain) {
+            object[] results = this.Invoke("getZoneFoldersByDomain", new object[] {
+                        domain});
+            return ((zoneFolderType[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getZoneFoldersByDomainAsync(string domain) {
+            this.getZoneFoldersByDomainAsync(domain, null);
+        }
+        
+        /// <remarks/>
+        public void getZoneFoldersByDomainAsync(string domain, object userState) {
+            if ((this.getZoneFoldersByDomainOperationCompleted == null)) {
+                this.getZoneFoldersByDomainOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetZoneFoldersByDomainOperationCompleted);
+            }
+            this.InvokeAsync("getZoneFoldersByDomain", new object[] {
+                        domain}, this.getZoneFoldersByDomainOperationCompleted, userState);
+        }
+        
+        private void OngetZoneFoldersByDomainOperationCompleted(object arg) {
+            if ((this.getZoneFoldersByDomainCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getZoneFoldersByDomainCompleted(this, new getZoneFoldersByDomainCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
         [return: System.Xml.Serialization.XmlElementAttribute("result")]
         public accountListType getZonesInFolder(getZonesInFolderRequestType request) {
             object[] results = this.Invoke("getZonesInFolder", new object[] {
@@ -3279,6 +3401,70 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             if ((this.createCustomTemplateCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.createCustomTemplateCompleted(this, new createCustomTemplateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public int createOffsiteTransferTemplate(string domain) {
+            object[] results = this.Invoke("createOffsiteTransferTemplate", new object[] {
+                        domain});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void createOffsiteTransferTemplateAsync(string domain) {
+            this.createOffsiteTransferTemplateAsync(domain, null);
+        }
+        
+        /// <remarks/>
+        public void createOffsiteTransferTemplateAsync(string domain, object userState) {
+            if ((this.createOffsiteTransferTemplateOperationCompleted == null)) {
+                this.createOffsiteTransferTemplateOperationCompleted = new System.Threading.SendOrPostCallback(this.OncreateOffsiteTransferTemplateOperationCompleted);
+            }
+            this.InvokeAsync("createOffsiteTransferTemplate", new object[] {
+                        domain}, this.createOffsiteTransferTemplateOperationCompleted, userState);
+        }
+        
+        private void OncreateOffsiteTransferTemplateOperationCompleted(object arg) {
+            if ((this.createOffsiteTransferTemplateCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.createOffsiteTransferTemplateCompleted(this, new createOffsiteTransferTemplateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public simpleResponseType deleteOffsiteTransferTemplate(string domain) {
+            object[] results = this.Invoke("deleteOffsiteTransferTemplate", new object[] {
+                        domain});
+            return ((simpleResponseType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void deleteOffsiteTransferTemplateAsync(string domain) {
+            this.deleteOffsiteTransferTemplateAsync(domain, null);
+        }
+        
+        /// <remarks/>
+        public void deleteOffsiteTransferTemplateAsync(string domain, object userState) {
+            if ((this.deleteOffsiteTransferTemplateOperationCompleted == null)) {
+                this.deleteOffsiteTransferTemplateOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeleteOffsiteTransferTemplateOperationCompleted);
+            }
+            this.InvokeAsync("deleteOffsiteTransferTemplate", new object[] {
+                        domain}, this.deleteOffsiteTransferTemplateOperationCompleted, userState);
+        }
+        
+        private void OndeleteOffsiteTransferTemplateOperationCompleted(object arg) {
+            if ((this.deleteOffsiteTransferTemplateCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.deleteOffsiteTransferTemplateCompleted(this, new deleteOffsiteTransferTemplateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -4483,24 +4669,26 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
         [return: System.Xml.Serialization.XmlElementAttribute("result")]
-        public simpleResponseType createOffsiteZone(string domain) {
+        public simpleResponseType createOffsiteZone(string domain, int transfertemplate) {
             object[] results = this.Invoke("createOffsiteZone", new object[] {
-                        domain});
+                        domain,
+                        transfertemplate});
             return ((simpleResponseType)(results[0]));
         }
         
         /// <remarks/>
-        public void createOffsiteZoneAsync(string domain) {
-            this.createOffsiteZoneAsync(domain, null);
+        public void createOffsiteZoneAsync(string domain, int transfertemplate) {
+            this.createOffsiteZoneAsync(domain, transfertemplate, null);
         }
         
         /// <remarks/>
-        public void createOffsiteZoneAsync(string domain, object userState) {
+        public void createOffsiteZoneAsync(string domain, int transfertemplate, object userState) {
             if ((this.createOffsiteZoneOperationCompleted == null)) {
                 this.createOffsiteZoneOperationCompleted = new System.Threading.SendOrPostCallback(this.OncreateOffsiteZoneOperationCompleted);
             }
             this.InvokeAsync("createOffsiteZone", new object[] {
-                        domain}, this.createOffsiteZoneOperationCompleted, userState);
+                        domain,
+                        transfertemplate}, this.createOffsiteZoneOperationCompleted, userState);
         }
         
         private void OncreateOffsiteZoneOperationCompleted(object arg) {
@@ -4732,6 +4920,457 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public int checkZoneOwner(string domain) {
+            object[] results = this.Invoke("checkZoneOwner", new object[] {
+                        domain});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void checkZoneOwnerAsync(string domain) {
+            this.checkZoneOwnerAsync(domain, null);
+        }
+        
+        /// <remarks/>
+        public void checkZoneOwnerAsync(string domain, object userState) {
+            if ((this.checkZoneOwnerOperationCompleted == null)) {
+                this.checkZoneOwnerOperationCompleted = new System.Threading.SendOrPostCallback(this.OncheckZoneOwnerOperationCompleted);
+            }
+            this.InvokeAsync("checkZoneOwner", new object[] {
+                        domain}, this.checkZoneOwnerOperationCompleted, userState);
+        }
+        
+        private void OncheckZoneOwnerOperationCompleted(object arg) {
+            if ((this.checkZoneOwnerCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.checkZoneOwnerCompleted(this, new checkZoneOwnerCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public booleanResponseType applyTemplateToNewZone(string domain, int templateid) {
+            object[] results = this.Invoke("applyTemplateToNewZone", new object[] {
+                        domain,
+                        templateid});
+            return ((booleanResponseType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void applyTemplateToNewZoneAsync(string domain, int templateid) {
+            this.applyTemplateToNewZoneAsync(domain, templateid, null);
+        }
+        
+        /// <remarks/>
+        public void applyTemplateToNewZoneAsync(string domain, int templateid, object userState) {
+            if ((this.applyTemplateToNewZoneOperationCompleted == null)) {
+                this.applyTemplateToNewZoneOperationCompleted = new System.Threading.SendOrPostCallback(this.OnapplyTemplateToNewZoneOperationCompleted);
+            }
+            this.InvokeAsync("applyTemplateToNewZone", new object[] {
+                        domain,
+                        templateid}, this.applyTemplateToNewZoneOperationCompleted, userState);
+        }
+        
+        private void OnapplyTemplateToNewZoneOperationCompleted(object arg) {
+            if ((this.applyTemplateToNewZoneCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.applyTemplateToNewZoneCompleted(this, new applyTemplateToNewZoneCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public simpleResponseType notifyDNSSECZoneUpdate(string uid) {
+            object[] results = this.Invoke("notifyDNSSECZoneUpdate", new object[] {
+                        uid});
+            return ((simpleResponseType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void notifyDNSSECZoneUpdateAsync(string uid) {
+            this.notifyDNSSECZoneUpdateAsync(uid, null);
+        }
+        
+        /// <remarks/>
+        public void notifyDNSSECZoneUpdateAsync(string uid, object userState) {
+            if ((this.notifyDNSSECZoneUpdateOperationCompleted == null)) {
+                this.notifyDNSSECZoneUpdateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnnotifyDNSSECZoneUpdateOperationCompleted);
+            }
+            this.InvokeAsync("notifyDNSSECZoneUpdate", new object[] {
+                        uid}, this.notifyDNSSECZoneUpdateOperationCompleted, userState);
+        }
+        
+        private void OnnotifyDNSSECZoneUpdateOperationCompleted(object arg) {
+            if ((this.notifyDNSSECZoneUpdateCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.notifyDNSSECZoneUpdateCompleted(this, new notifyDNSSECZoneUpdateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public getPremiumFeaturesResponseType getPremiumFeatures(string domain) {
+            object[] results = this.Invoke("getPremiumFeatures", new object[] {
+                        domain});
+            return ((getPremiumFeaturesResponseType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getPremiumFeaturesAsync(string domain) {
+            this.getPremiumFeaturesAsync(domain, null);
+        }
+        
+        /// <remarks/>
+        public void getPremiumFeaturesAsync(string domain, object userState) {
+            if ((this.getPremiumFeaturesOperationCompleted == null)) {
+                this.getPremiumFeaturesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetPremiumFeaturesOperationCompleted);
+            }
+            this.InvokeAsync("getPremiumFeatures", new object[] {
+                        domain}, this.getPremiumFeaturesOperationCompleted, userState);
+        }
+        
+        private void OngetPremiumFeaturesOperationCompleted(object arg) {
+            if ((this.getPremiumFeaturesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getPremiumFeaturesCompleted(this, new getPremiumFeaturesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public booleanResponseType createBlogRecords(string domain) {
+            object[] results = this.Invoke("createBlogRecords", new object[] {
+                        domain});
+            return ((booleanResponseType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void createBlogRecordsAsync(string domain) {
+            this.createBlogRecordsAsync(domain, null);
+        }
+        
+        /// <remarks/>
+        public void createBlogRecordsAsync(string domain, object userState) {
+            if ((this.createBlogRecordsOperationCompleted == null)) {
+                this.createBlogRecordsOperationCompleted = new System.Threading.SendOrPostCallback(this.OncreateBlogRecordsOperationCompleted);
+            }
+            this.InvokeAsync("createBlogRecords", new object[] {
+                        domain}, this.createBlogRecordsOperationCompleted, userState);
+        }
+        
+        private void OncreateBlogRecordsOperationCompleted(object arg) {
+            if ((this.createBlogRecordsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.createBlogRecordsCompleted(this, new createBlogRecordsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public booleanResponseType createSubdomainBlogRecords(string domain, string subdomain) {
+            object[] results = this.Invoke("createSubdomainBlogRecords", new object[] {
+                        domain,
+                        subdomain});
+            return ((booleanResponseType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void createSubdomainBlogRecordsAsync(string domain, string subdomain) {
+            this.createSubdomainBlogRecordsAsync(domain, subdomain, null);
+        }
+        
+        /// <remarks/>
+        public void createSubdomainBlogRecordsAsync(string domain, string subdomain, object userState) {
+            if ((this.createSubdomainBlogRecordsOperationCompleted == null)) {
+                this.createSubdomainBlogRecordsOperationCompleted = new System.Threading.SendOrPostCallback(this.OncreateSubdomainBlogRecordsOperationCompleted);
+            }
+            this.InvokeAsync("createSubdomainBlogRecords", new object[] {
+                        domain,
+                        subdomain}, this.createSubdomainBlogRecordsOperationCompleted, userState);
+        }
+        
+        private void OncreateSubdomainBlogRecordsOperationCompleted(object arg) {
+            if ((this.createSubdomainBlogRecordsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.createSubdomainBlogRecordsCompleted(this, new createSubdomainBlogRecordsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public auditNameServersType getAuditNameServers(string domain) {
+            object[] results = this.Invoke("getAuditNameServers", new object[] {
+                        domain});
+            return ((auditNameServersType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getAuditNameServersAsync(string domain) {
+            this.getAuditNameServersAsync(domain, null);
+        }
+        
+        /// <remarks/>
+        public void getAuditNameServersAsync(string domain, object userState) {
+            if ((this.getAuditNameServersOperationCompleted == null)) {
+                this.getAuditNameServersOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetAuditNameServersOperationCompleted);
+            }
+            this.InvokeAsync("getAuditNameServers", new object[] {
+                        domain}, this.getAuditNameServersOperationCompleted, userState);
+        }
+        
+        private void OngetAuditNameServersOperationCompleted(object arg) {
+            if ((this.getAuditNameServersCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getAuditNameServersCompleted(this, new getAuditNameServersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public simpleResponseType removeZoneByUid(string uid) {
+            object[] results = this.Invoke("removeZoneByUid", new object[] {
+                        uid});
+            return ((simpleResponseType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void removeZoneByUidAsync(string uid) {
+            this.removeZoneByUidAsync(uid, null);
+        }
+        
+        /// <remarks/>
+        public void removeZoneByUidAsync(string uid, object userState) {
+            if ((this.removeZoneByUidOperationCompleted == null)) {
+                this.removeZoneByUidOperationCompleted = new System.Threading.SendOrPostCallback(this.OnremoveZoneByUidOperationCompleted);
+            }
+            this.InvokeAsync("removeZoneByUid", new object[] {
+                        uid}, this.removeZoneByUidOperationCompleted, userState);
+        }
+        
+        private void OnremoveZoneByUidOperationCompleted(object arg) {
+            if ((this.removeZoneByUidCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.removeZoneByUidCompleted(this, new removeZoneByUidCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public simpleResponseType cancelDomain(string domain) {
+            object[] results = this.Invoke("cancelDomain", new object[] {
+                        domain});
+            return ((simpleResponseType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void cancelDomainAsync(string domain) {
+            this.cancelDomainAsync(domain, null);
+        }
+        
+        /// <remarks/>
+        public void cancelDomainAsync(string domain, object userState) {
+            if ((this.cancelDomainOperationCompleted == null)) {
+                this.cancelDomainOperationCompleted = new System.Threading.SendOrPostCallback(this.OncancelDomainOperationCompleted);
+            }
+            this.InvokeAsync("cancelDomain", new object[] {
+                        domain}, this.cancelDomainOperationCompleted, userState);
+        }
+        
+        private void OncancelDomainOperationCompleted(object arg) {
+            if ((this.cancelDomainCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.cancelDomainCompleted(this, new cancelDomainCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public simpleResponseType removeZoneCheckNS(string uid) {
+            object[] results = this.Invoke("removeZoneCheckNS", new object[] {
+                        uid});
+            return ((simpleResponseType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void removeZoneCheckNSAsync(string uid) {
+            this.removeZoneCheckNSAsync(uid, null);
+        }
+        
+        /// <remarks/>
+        public void removeZoneCheckNSAsync(string uid, object userState) {
+            if ((this.removeZoneCheckNSOperationCompleted == null)) {
+                this.removeZoneCheckNSOperationCompleted = new System.Threading.SendOrPostCallback(this.OnremoveZoneCheckNSOperationCompleted);
+            }
+            this.InvokeAsync("removeZoneCheckNS", new object[] {
+                        uid}, this.removeZoneCheckNSOperationCompleted, userState);
+        }
+        
+        private void OnremoveZoneCheckNSOperationCompleted(object arg) {
+            if ((this.removeZoneCheckNSCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.removeZoneCheckNSCompleted(this, new removeZoneCheckNSCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public simpleResponseType expireDomain(string domain) {
+            object[] results = this.Invoke("expireDomain", new object[] {
+                        domain});
+            return ((simpleResponseType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void expireDomainAsync(string domain) {
+            this.expireDomainAsync(domain, null);
+        }
+        
+        /// <remarks/>
+        public void expireDomainAsync(string domain, object userState) {
+            if ((this.expireDomainOperationCompleted == null)) {
+                this.expireDomainOperationCompleted = new System.Threading.SendOrPostCallback(this.OnexpireDomainOperationCompleted);
+            }
+            this.InvokeAsync("expireDomain", new object[] {
+                        domain}, this.expireDomainOperationCompleted, userState);
+        }
+        
+        private void OnexpireDomainOperationCompleted(object arg) {
+            if ((this.expireDomainCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.expireDomainCompleted(this, new expireDomainCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public simpleResponseType unExpireDomain(string domain) {
+            object[] results = this.Invoke("unExpireDomain", new object[] {
+                        domain});
+            return ((simpleResponseType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void unExpireDomainAsync(string domain) {
+            this.unExpireDomainAsync(domain, null);
+        }
+        
+        /// <remarks/>
+        public void unExpireDomainAsync(string domain, object userState) {
+            if ((this.unExpireDomainOperationCompleted == null)) {
+                this.unExpireDomainOperationCompleted = new System.Threading.SendOrPostCallback(this.OnunExpireDomainOperationCompleted);
+            }
+            this.InvokeAsync("unExpireDomain", new object[] {
+                        domain}, this.unExpireDomainOperationCompleted, userState);
+        }
+        
+        private void OnunExpireDomainOperationCompleted(object arg) {
+            if ((this.unExpireDomainCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.unExpireDomainCompleted(this, new unExpireDomainCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public hostedResourceOutputType addUniqueDNS(hostedResourceInputType request) {
+            object[] results = this.Invoke("addUniqueDNS", new object[] {
+                        request});
+            return ((hostedResourceOutputType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void addUniqueDNSAsync(hostedResourceInputType request) {
+            this.addUniqueDNSAsync(request, null);
+        }
+        
+        /// <remarks/>
+        public void addUniqueDNSAsync(hostedResourceInputType request, object userState) {
+            if ((this.addUniqueDNSOperationCompleted == null)) {
+                this.addUniqueDNSOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddUniqueDNSOperationCompleted);
+            }
+            this.InvokeAsync("addUniqueDNS", new object[] {
+                        request}, this.addUniqueDNSOperationCompleted, userState);
+        }
+        
+        private void OnaddUniqueDNSOperationCompleted(object arg) {
+            if ((this.addUniqueDNSCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.addUniqueDNSCompleted(this, new addUniqueDNSCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("clientAuth")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("custInfo")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace="http://dnsapi.domaincontrol.com/dnsapi", ResponseNamespace="http://dnsapi.domaincontrol.com/dnsapi", Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+        [return: System.Xml.Serialization.XmlElementAttribute("result")]
+        public hostedResourceOutputType deleteUniqueDNS(hostedResourceInputType request) {
+            object[] results = this.Invoke("deleteUniqueDNS", new object[] {
+                        request});
+            return ((hostedResourceOutputType)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void deleteUniqueDNSAsync(hostedResourceInputType request) {
+            this.deleteUniqueDNSAsync(request, null);
+        }
+        
+        /// <remarks/>
+        public void deleteUniqueDNSAsync(hostedResourceInputType request, object userState) {
+            if ((this.deleteUniqueDNSOperationCompleted == null)) {
+                this.deleteUniqueDNSOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeleteUniqueDNSOperationCompleted);
+            }
+            this.InvokeAsync("deleteUniqueDNS", new object[] {
+                        request}, this.deleteUniqueDNSOperationCompleted, userState);
+        }
+        
+        private void OndeleteUniqueDNSOperationCompleted(object arg) {
+            if ((this.deleteUniqueDNSCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.deleteUniqueDNSCompleted(this, new deleteUniqueDNSCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -4792,6 +5431,1044 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             }
             set {
                 this.clientipField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class hostedResourceOutputType {
+        
+        private string typeField;
+        
+        private string apiVersionField;
+        
+        private string statField;
+        
+        private string fqdnHostNameField;
+        
+        private string netErrorCodeField;
+        
+        private string comErrorCodeField;
+        
+        private string reasonField;
+        
+        /// <remarks/>
+        public string type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string apiVersion {
+            get {
+                return this.apiVersionField;
+            }
+            set {
+                this.apiVersionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string stat {
+            get {
+                return this.statField;
+            }
+            set {
+                this.statField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fqdnHostName {
+            get {
+                return this.fqdnHostNameField;
+            }
+            set {
+                this.fqdnHostNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string netErrorCode {
+            get {
+                return this.netErrorCodeField;
+            }
+            set {
+                this.netErrorCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string comErrorCode {
+            get {
+                return this.comErrorCodeField;
+            }
+            set {
+                this.comErrorCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string reason {
+            get {
+                return this.reasonField;
+            }
+            set {
+                this.reasonField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class hostedResourceInputType {
+        
+        private string targetAccountUIDField;
+        
+        private string uniqueNameField;
+        
+        private string ipField;
+        
+        private string ttlField;
+        
+        /// <remarks/>
+        public string targetAccountUID {
+            get {
+                return this.targetAccountUIDField;
+            }
+            set {
+                this.targetAccountUIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string uniqueName {
+            get {
+                return this.uniqueNameField;
+            }
+            set {
+                this.uniqueNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ip {
+            get {
+                return this.ipField;
+            }
+            set {
+                this.ipField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ttl {
+            get {
+                return this.ttlField;
+            }
+            set {
+                this.ttlField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class auditNameServerType {
+        
+        private string nameserverField;
+        
+        private string[] flagsField;
+        
+        /// <remarks/>
+        public string nameserver {
+            get {
+                return this.nameserverField;
+            }
+            set {
+                this.nameserverField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("flags")]
+        public string[] flags {
+            get {
+                return this.flagsField;
+            }
+            set {
+                this.flagsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class auditNameServersType {
+        
+        private auditNameServerType[] dnsdomainsField;
+        
+        private auditNameServerType[] dnszonenameserversField;
+        
+        private auditNameServerType[] registrarField;
+        
+        private auditNameServerType[] zonedbnsField;
+        
+        private auditNameServerType[] zonednsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("dnsdomains")]
+        public auditNameServerType[] dnsdomains {
+            get {
+                return this.dnsdomainsField;
+            }
+            set {
+                this.dnsdomainsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("dnszonenameservers")]
+        public auditNameServerType[] dnszonenameservers {
+            get {
+                return this.dnszonenameserversField;
+            }
+            set {
+                this.dnszonenameserversField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("registrar")]
+        public auditNameServerType[] registrar {
+            get {
+                return this.registrarField;
+            }
+            set {
+                this.registrarField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("zonedbns")]
+        public auditNameServerType[] zonedbns {
+            get {
+                return this.zonedbnsField;
+            }
+            set {
+                this.zonedbnsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("zonedns")]
+        public auditNameServerType[] zonedns {
+            get {
+                return this.zonednsField;
+            }
+            set {
+                this.zonednsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class getPremiumFeaturesResponseType {
+        
+        private getXferStatusResponseType xferField;
+        
+        private dnssecStatusType dnssecField;
+        
+        private getVanityNameServersResponseType vanityField;
+        
+        /// <remarks/>
+        public getXferStatusResponseType xfer {
+            get {
+                return this.xferField;
+            }
+            set {
+                this.xferField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public dnssecStatusType dnssec {
+            get {
+                return this.dnssecField;
+            }
+            set {
+                this.dnssecField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public getVanityNameServersResponseType vanity {
+            get {
+                return this.vanityField;
+            }
+            set {
+                this.vanityField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class getXferStatusResponseType {
+        
+        private int masterField;
+        
+        private bool masterFieldSpecified;
+        
+        private int slaveField;
+        
+        private bool slaveFieldSpecified;
+        
+        private int lastxferstatusField;
+        
+        private bool lastxferstatusFieldSpecified;
+        
+        private string lastxfermsgField;
+        
+        private string lastxferdateField;
+        
+        private xferMasterType[] xfermastersField;
+        
+        private allowNotifyIpAddressRangeType[] allownotifyField;
+        
+        private xferSlaveType[] xferslavesField;
+        
+        private string[] sendnotifyField;
+        
+        /// <remarks/>
+        public int master {
+            get {
+                return this.masterField;
+            }
+            set {
+                this.masterField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool masterSpecified {
+            get {
+                return this.masterFieldSpecified;
+            }
+            set {
+                this.masterFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int slave {
+            get {
+                return this.slaveField;
+            }
+            set {
+                this.slaveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool slaveSpecified {
+            get {
+                return this.slaveFieldSpecified;
+            }
+            set {
+                this.slaveFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int lastxferstatus {
+            get {
+                return this.lastxferstatusField;
+            }
+            set {
+                this.lastxferstatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool lastxferstatusSpecified {
+            get {
+                return this.lastxferstatusFieldSpecified;
+            }
+            set {
+                this.lastxferstatusFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string lastxfermsg {
+            get {
+                return this.lastxfermsgField;
+            }
+            set {
+                this.lastxfermsgField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string lastxferdate {
+            get {
+                return this.lastxferdateField;
+            }
+            set {
+                this.lastxferdateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("xfermasters")]
+        public xferMasterType[] xfermasters {
+            get {
+                return this.xfermastersField;
+            }
+            set {
+                this.xfermastersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("allownotify")]
+        public allowNotifyIpAddressRangeType[] allownotify {
+            get {
+                return this.allownotifyField;
+            }
+            set {
+                this.allownotifyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("xferslaves")]
+        public xferSlaveType[] xferslaves {
+            get {
+                return this.xferslavesField;
+            }
+            set {
+                this.xferslavesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("sendnotify")]
+        public string[] sendnotify {
+            get {
+                return this.sendnotifyField;
+            }
+            set {
+                this.sendnotifyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class xferMasterType {
+        
+        private int idField;
+        
+        private bool idFieldSpecified;
+        
+        private string ipaddressField;
+        
+        private tsigKeyType tsigkeyField;
+        
+        /// <remarks/>
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idSpecified {
+            get {
+                return this.idFieldSpecified;
+            }
+            set {
+                this.idFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ipaddress {
+            get {
+                return this.ipaddressField;
+            }
+            set {
+                this.ipaddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tsigKeyType tsigkey {
+            get {
+                return this.tsigkeyField;
+            }
+            set {
+                this.tsigkeyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class tsigKeyType {
+        
+        private string nameField;
+        
+        private string algorithmField;
+        
+        private string keyField;
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string algorithm {
+            get {
+                return this.algorithmField;
+            }
+            set {
+                this.algorithmField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string key {
+            get {
+                return this.keyField;
+            }
+            set {
+                this.keyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class allowNotifyIpAddressRangeType {
+        
+        private int idField;
+        
+        private bool idFieldSpecified;
+        
+        private string startipaddressField;
+        
+        private string endipaddressField;
+        
+        /// <remarks/>
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idSpecified {
+            get {
+                return this.idFieldSpecified;
+            }
+            set {
+                this.idFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string startipaddress {
+            get {
+                return this.startipaddressField;
+            }
+            set {
+                this.startipaddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string endipaddress {
+            get {
+                return this.endipaddressField;
+            }
+            set {
+                this.endipaddressField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class xferSlaveType {
+        
+        private int idField;
+        
+        private bool idFieldSpecified;
+        
+        private string startipaddressField;
+        
+        private string endipaddressField;
+        
+        private tsigKeyType tsigkeyField;
+        
+        /// <remarks/>
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idSpecified {
+            get {
+                return this.idFieldSpecified;
+            }
+            set {
+                this.idFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string startipaddress {
+            get {
+                return this.startipaddressField;
+            }
+            set {
+                this.startipaddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string endipaddress {
+            get {
+                return this.endipaddressField;
+            }
+            set {
+                this.endipaddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tsigKeyType tsigkey {
+            get {
+                return this.tsigkeyField;
+            }
+            set {
+                this.tsigkeyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class dnssecStatusType {
+        
+        private int enabledField;
+        
+        private string emailField;
+        
+        private string enabledateField;
+        
+        private string signdateField;
+        
+        private int totalzonesField;
+        
+        private bool totalzonesFieldSpecified;
+        
+        private int usedzonesField;
+        
+        private bool usedzonesFieldSpecified;
+        
+        private int availablezonesField;
+        
+        private bool availablezonesFieldSpecified;
+        
+        private string[] dsrecordField;
+        
+        /// <remarks/>
+        public int enabled {
+            get {
+                return this.enabledField;
+            }
+            set {
+                this.enabledField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string enabledate {
+            get {
+                return this.enabledateField;
+            }
+            set {
+                this.enabledateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string signdate {
+            get {
+                return this.signdateField;
+            }
+            set {
+                this.signdateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int totalzones {
+            get {
+                return this.totalzonesField;
+            }
+            set {
+                this.totalzonesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool totalzonesSpecified {
+            get {
+                return this.totalzonesFieldSpecified;
+            }
+            set {
+                this.totalzonesFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int usedzones {
+            get {
+                return this.usedzonesField;
+            }
+            set {
+                this.usedzonesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool usedzonesSpecified {
+            get {
+                return this.usedzonesFieldSpecified;
+            }
+            set {
+                this.usedzonesFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int availablezones {
+            get {
+                return this.availablezonesField;
+            }
+            set {
+                this.availablezonesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool availablezonesSpecified {
+            get {
+                return this.availablezonesFieldSpecified;
+            }
+            set {
+                this.availablezonesFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("dsrecord")]
+        public string[] dsrecord {
+            get {
+                return this.dsrecordField;
+            }
+            set {
+                this.dsrecordField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class getVanityNameServersResponseType {
+        
+        private simpleResponseType responseField;
+        
+        private int assignedField;
+        
+        private bool assignedFieldSpecified;
+        
+        private int defaultField;
+        
+        private bool defaultFieldSpecified;
+        
+        private vanityNameServerAliasMapType[] aliasmapField;
+        
+        /// <remarks/>
+        public simpleResponseType response {
+            get {
+                return this.responseField;
+            }
+            set {
+                this.responseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int assigned {
+            get {
+                return this.assignedField;
+            }
+            set {
+                this.assignedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool assignedSpecified {
+            get {
+                return this.assignedFieldSpecified;
+            }
+            set {
+                this.assignedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int @default {
+            get {
+                return this.defaultField;
+            }
+            set {
+                this.defaultField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool defaultSpecified {
+            get {
+                return this.defaultFieldSpecified;
+            }
+            set {
+                this.defaultFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("aliasmap")]
+        public vanityNameServerAliasMapType[] aliasmap {
+            get {
+                return this.aliasmapField;
+            }
+            set {
+                this.aliasmapField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class simpleResponseType {
+        
+        private int resultField;
+        
+        private int errorcodeField;
+        
+        private bool errorcodeFieldSpecified;
+        
+        private string errortextField;
+        
+        /// <remarks/>
+        public int result {
+            get {
+                return this.resultField;
+            }
+            set {
+                this.resultField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int errorcode {
+            get {
+                return this.errorcodeField;
+            }
+            set {
+                this.errorcodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool errorcodeSpecified {
+            get {
+                return this.errorcodeFieldSpecified;
+            }
+            set {
+                this.errorcodeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string errortext {
+            get {
+                return this.errortextField;
+            }
+            set {
+                this.errortextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class vanityNameServerAliasMapType {
+        
+        private string vanitynameField;
+        
+        private string realnameField;
+        
+        private string realipv4Field;
+        
+        private string realipv6Field;
+        
+        /// <remarks/>
+        public string vanityname {
+            get {
+                return this.vanitynameField;
+            }
+            set {
+                this.vanitynameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string realname {
+            get {
+                return this.realnameField;
+            }
+            set {
+                this.realnameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string realipv4 {
+            get {
+                return this.realipv4Field;
+            }
+            set {
+                this.realipv4Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string realipv6 {
+            get {
+                return this.realipv6Field;
+            }
+            set {
+                this.realipv6Field = value;
             }
         }
     }
@@ -5196,121 +6873,6 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
-    public partial class xferSlaveType {
-        
-        private int idField;
-        
-        private bool idFieldSpecified;
-        
-        private string startipaddressField;
-        
-        private string endipaddressField;
-        
-        private tsigKeyType tsigkeyField;
-        
-        /// <remarks/>
-        public int id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string startipaddress {
-            get {
-                return this.startipaddressField;
-            }
-            set {
-                this.startipaddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string endipaddress {
-            get {
-                return this.endipaddressField;
-            }
-            set {
-                this.endipaddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tsigKeyType tsigkey {
-            get {
-                return this.tsigkeyField;
-            }
-            set {
-                this.tsigkeyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
-    public partial class tsigKeyType {
-        
-        private string nameField;
-        
-        private string algorithmField;
-        
-        private string keyField;
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string algorithm {
-            get {
-                return this.algorithmField;
-            }
-            set {
-                this.algorithmField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string key {
-            get {
-                return this.keyField;
-            }
-            set {
-                this.keyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
     public partial class updateXferSlaveRequestType {
         
         private string domainField;
@@ -5407,282 +6969,6 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             }
             set {
                 this.allownotifyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
-    public partial class xferMasterType {
-        
-        private int idField;
-        
-        private bool idFieldSpecified;
-        
-        private string ipaddressField;
-        
-        private tsigKeyType tsigkeyField;
-        
-        /// <remarks/>
-        public int id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ipaddress {
-            get {
-                return this.ipaddressField;
-            }
-            set {
-                this.ipaddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tsigKeyType tsigkey {
-            get {
-                return this.tsigkeyField;
-            }
-            set {
-                this.tsigkeyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
-    public partial class allowNotifyIpAddressRangeType {
-        
-        private int idField;
-        
-        private bool idFieldSpecified;
-        
-        private string startipaddressField;
-        
-        private string endipaddressField;
-        
-        /// <remarks/>
-        public int id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string startipaddress {
-            get {
-                return this.startipaddressField;
-            }
-            set {
-                this.startipaddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string endipaddress {
-            get {
-                return this.endipaddressField;
-            }
-            set {
-                this.endipaddressField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
-    public partial class getXferStatusResponseType {
-        
-        private int masterField;
-        
-        private bool masterFieldSpecified;
-        
-        private int slaveField;
-        
-        private bool slaveFieldSpecified;
-        
-        private int lastxferstatusField;
-        
-        private bool lastxferstatusFieldSpecified;
-        
-        private string lastxfermsgField;
-        
-        private string lastxferdateField;
-        
-        private xferMasterType[] xfermastersField;
-        
-        private allowNotifyIpAddressRangeType[] allownotifyField;
-        
-        private xferSlaveType[] xferslavesField;
-        
-        private string[] sendnotifyField;
-        
-        /// <remarks/>
-        public int master {
-            get {
-                return this.masterField;
-            }
-            set {
-                this.masterField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool masterSpecified {
-            get {
-                return this.masterFieldSpecified;
-            }
-            set {
-                this.masterFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int slave {
-            get {
-                return this.slaveField;
-            }
-            set {
-                this.slaveField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool slaveSpecified {
-            get {
-                return this.slaveFieldSpecified;
-            }
-            set {
-                this.slaveFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int lastxferstatus {
-            get {
-                return this.lastxferstatusField;
-            }
-            set {
-                this.lastxferstatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool lastxferstatusSpecified {
-            get {
-                return this.lastxferstatusFieldSpecified;
-            }
-            set {
-                this.lastxferstatusFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string lastxfermsg {
-            get {
-                return this.lastxfermsgField;
-            }
-            set {
-                this.lastxfermsgField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string lastxferdate {
-            get {
-                return this.lastxferdateField;
-            }
-            set {
-                this.lastxferdateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("xfermasters")]
-        public xferMasterType[] xfermasters {
-            get {
-                return this.xfermastersField;
-            }
-            set {
-                this.xfermastersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("allownotify")]
-        public allowNotifyIpAddressRangeType[] allownotify {
-            get {
-                return this.allownotifyField;
-            }
-            set {
-                this.allownotifyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("xferslaves")]
-        public xferSlaveType[] xferslaves {
-            get {
-                return this.xferslavesField;
-            }
-            set {
-                this.xferslavesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("sendnotify")]
-        public string[] sendnotify {
-            get {
-                return this.sendnotifyField;
-            }
-            set {
-                this.sendnotifyField = value;
             }
         }
     }
@@ -6479,151 +7765,6 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
-    public partial class dnssecStatusType {
-        
-        private int enabledField;
-        
-        private string emailField;
-        
-        private string enabledateField;
-        
-        private string signdateField;
-        
-        private int totalzonesField;
-        
-        private bool totalzonesFieldSpecified;
-        
-        private int usedzonesField;
-        
-        private bool usedzonesFieldSpecified;
-        
-        private int availablezonesField;
-        
-        private bool availablezonesFieldSpecified;
-        
-        private string[] dsrecordField;
-        
-        /// <remarks/>
-        public int enabled {
-            get {
-                return this.enabledField;
-            }
-            set {
-                this.enabledField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string enabledate {
-            get {
-                return this.enabledateField;
-            }
-            set {
-                this.enabledateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string signdate {
-            get {
-                return this.signdateField;
-            }
-            set {
-                this.signdateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int totalzones {
-            get {
-                return this.totalzonesField;
-            }
-            set {
-                this.totalzonesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool totalzonesSpecified {
-            get {
-                return this.totalzonesFieldSpecified;
-            }
-            set {
-                this.totalzonesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int usedzones {
-            get {
-                return this.usedzonesField;
-            }
-            set {
-                this.usedzonesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool usedzonesSpecified {
-            get {
-                return this.usedzonesFieldSpecified;
-            }
-            set {
-                this.usedzonesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int availablezones {
-            get {
-                return this.availablezonesField;
-            }
-            set {
-                this.availablezonesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool availablezonesSpecified {
-            get {
-                return this.availablezonesFieldSpecified;
-            }
-            set {
-                this.availablezonesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("dsrecord")]
-        public string[] dsrecord {
-            get {
-                return this.dsrecordField;
-            }
-            set {
-                this.dsrecordField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
     public partial class dnssecRequestType {
         
         private string domainField;
@@ -6682,13 +7823,184 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class dsKeyType {
+        
+        private int flagsField;
+        
+        private int protocolField;
+        
+        private int algField;
+        
+        private string pubKeyField;
+        
+        private string recordField;
+        
+        /// <remarks/>
+        public int flags {
+            get {
+                return this.flagsField;
+            }
+            set {
+                this.flagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int protocol {
+            get {
+                return this.protocolField;
+            }
+            set {
+                this.protocolField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int alg {
+            get {
+                return this.algField;
+            }
+            set {
+                this.algField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string pubKey {
+            get {
+                return this.pubKeyField;
+            }
+            set {
+                this.pubKeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string record {
+            get {
+                return this.recordField;
+            }
+            set {
+                this.recordField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class dsDataType {
+        
+        private int keyTagField;
+        
+        private int algField;
+        
+        private int digestTypeField;
+        
+        private string digestField;
+        
+        private string recordField;
+        
+        /// <remarks/>
+        public int keyTag {
+            get {
+                return this.keyTagField;
+            }
+            set {
+                this.keyTagField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int alg {
+            get {
+                return this.algField;
+            }
+            set {
+                this.algField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int digestType {
+            get {
+                return this.digestTypeField;
+            }
+            set {
+                this.digestTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string digest {
+            get {
+                return this.digestField;
+            }
+            set {
+                this.digestField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string record {
+            get {
+                return this.recordField;
+            }
+            set {
+                this.recordField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class dsRecordType {
+        
+        private dsDataType dsDataField;
+        
+        private dsKeyType keyDataField;
+        
+        /// <remarks/>
+        public dsDataType dsData {
+            get {
+                return this.dsDataField;
+            }
+            set {
+                this.dsDataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public dsKeyType keyData {
+            get {
+                return this.keyDataField;
+            }
+            set {
+                this.keyDataField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
     public partial class dsSubmissionType {
         
         private string zone_uidField;
         
         private string zone_nameField;
         
-        private string[] dsrecsField;
+        private dsRecordType[] dsrecsField;
         
         /// <remarks/>
         public string zone_uid {
@@ -6712,7 +8024,7 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("dsrecs")]
-        public string[] dsrecs {
+        public dsRecordType[] dsrecs {
             get {
                 return this.dsrecsField;
             }
@@ -6822,180 +8134,6 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             }
             set {
                 this.responseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("aliasmap")]
-        public vanityNameServerAliasMapType[] aliasmap {
-            get {
-                return this.aliasmapField;
-            }
-            set {
-                this.aliasmapField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
-    public partial class simpleResponseType {
-        
-        private int resultField;
-        
-        private int errorcodeField;
-        
-        private bool errorcodeFieldSpecified;
-        
-        private string errortextField;
-        
-        /// <remarks/>
-        public int result {
-            get {
-                return this.resultField;
-            }
-            set {
-                this.resultField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int errorcode {
-            get {
-                return this.errorcodeField;
-            }
-            set {
-                this.errorcodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool errorcodeSpecified {
-            get {
-                return this.errorcodeFieldSpecified;
-            }
-            set {
-                this.errorcodeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string errortext {
-            get {
-                return this.errortextField;
-            }
-            set {
-                this.errortextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
-    public partial class vanityNameServerAliasMapType {
-        
-        private string vanitynameField;
-        
-        private string realnameField;
-        
-        private string realipv4Field;
-        
-        private string realipv6Field;
-        
-        /// <remarks/>
-        public string vanityname {
-            get {
-                return this.vanitynameField;
-            }
-            set {
-                this.vanitynameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string realname {
-            get {
-                return this.realnameField;
-            }
-            set {
-                this.realnameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string realipv4 {
-            get {
-                return this.realipv4Field;
-            }
-            set {
-                this.realipv4Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string realipv6 {
-            get {
-                return this.realipv6Field;
-            }
-            set {
-                this.realipv6Field = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
-    public partial class getVanityNameServersResponseType {
-        
-        private simpleResponseType responseField;
-        
-        private int defaultField;
-        
-        private bool defaultFieldSpecified;
-        
-        private vanityNameServerAliasMapType[] aliasmapField;
-        
-        /// <remarks/>
-        public simpleResponseType response {
-            get {
-                return this.responseField;
-            }
-            set {
-                this.responseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int @default {
-            get {
-                return this.defaultField;
-            }
-            set {
-                this.defaultField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool defaultSpecified {
-            get {
-                return this.defaultFieldSpecified;
-            }
-            set {
-                this.defaultFieldSpecified = value;
             }
         }
         
@@ -7421,6 +8559,8 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         
         private bool minimumFieldSpecified;
         
+        private string statusField;
+        
         /// <remarks/>
         public string origin {
             get {
@@ -7530,6 +8670,16 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             }
             set {
                 this.minimumFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
             }
         }
     }
@@ -7942,17 +9092,130 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class orionEventAuditItemsType {
+        
+        private int idField;
+        
+        private int eventIDField;
+        
+        private int statusIDField;
+        
+        private string statusDescriptionField;
+        
+        private string messageField;
+        
+        private System.DateTime dateCreatedField;
+        
+        private System.DateTime dateModifiedField;
+        
+        /// <remarks/>
+        public int ID {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int EventID {
+            get {
+                return this.eventIDField;
+            }
+            set {
+                this.eventIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int StatusID {
+            get {
+                return this.statusIDField;
+            }
+            set {
+                this.statusIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StatusDescription {
+            get {
+                return this.statusDescriptionField;
+            }
+            set {
+                this.statusDescriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateCreated {
+            get {
+                return this.dateCreatedField;
+            }
+            set {
+                this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateModified {
+            get {
+                return this.dateModifiedField;
+            }
+            set {
+                this.dateModifiedField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
     public partial class orionEventType {
         
         private int idField;
         
         private string uidField;
         
+        private string auditMessageField;
+        
         private string eventTypeField;
+        
+        private string eventTypeDescriptionField;
         
         private string requestorField;
         
+        private string requestorDescriptionField;
+        
+        private string statusField;
+        
+        private string statusDescriptionField;
+        
+        private System.DateTime dateCreatedField;
+        
+        private System.DateTime dateModifiedField;
+        
+        private System.DateTime dateCompletedField;
+        
+        private System.DateTime processDateField;
+        
         private orionEventItemsType[] eventItemsField;
+        
+        private orionEventAuditItemsType[] auditItemsField;
         
         /// <remarks/>
         public int id {
@@ -7975,12 +9238,32 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         }
         
         /// <remarks/>
+        public string auditMessage {
+            get {
+                return this.auditMessageField;
+            }
+            set {
+                this.auditMessageField = value;
+            }
+        }
+        
+        /// <remarks/>
         public string eventType {
             get {
                 return this.eventTypeField;
             }
             set {
                 this.eventTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string eventTypeDescription {
+            get {
+                return this.eventTypeDescriptionField;
+            }
+            set {
+                this.eventTypeDescriptionField = value;
             }
         }
         
@@ -7995,6 +9278,76 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         }
         
         /// <remarks/>
+        public string requestorDescription {
+            get {
+                return this.requestorDescriptionField;
+            }
+            set {
+                this.requestorDescriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string statusDescription {
+            get {
+                return this.statusDescriptionField;
+            }
+            set {
+                this.statusDescriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime dateCreated {
+            get {
+                return this.dateCreatedField;
+            }
+            set {
+                this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime dateModified {
+            get {
+                return this.dateModifiedField;
+            }
+            set {
+                this.dateModifiedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime dateCompleted {
+            get {
+                return this.dateCompletedField;
+            }
+            set {
+                this.dateCompletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime processDate {
+            get {
+                return this.processDateField;
+            }
+            set {
+                this.processDateField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("eventItems")]
         public orionEventItemsType[] eventItems {
             get {
@@ -8002,6 +9355,17 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             }
             set {
                 this.eventItemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("auditItems")]
+        public orionEventAuditItemsType[] auditItems {
+            get {
+                return this.auditItemsField;
+            }
+            set {
+                this.auditItemsField = value;
             }
         }
     }
@@ -8401,6 +9765,14 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         
         private bool dnssecFieldSpecified;
         
+        private int offsitetransfertemplateField;
+        
+        private bool offsitetransfertemplateFieldSpecified;
+        
+        private string vanityns1Field;
+        
+        private string vanityns2Field;
+        
         /// <remarks/>
         public string domain {
             get {
@@ -8615,6 +9987,47 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             }
             set {
                 this.dnssecFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int offsitetransfertemplate {
+            get {
+                return this.offsitetransfertemplateField;
+            }
+            set {
+                this.offsitetransfertemplateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool offsitetransfertemplateSpecified {
+            get {
+                return this.offsitetransfertemplateFieldSpecified;
+            }
+            set {
+                this.offsitetransfertemplateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string vanityns1 {
+            get {
+                return this.vanityns1Field;
+            }
+            set {
+                this.vanityns1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string vanityns2 {
+            get {
+                return this.vanityns2Field;
+            }
+            set {
+                this.vanityns2Field = value;
             }
         }
     }
@@ -9853,6 +11266,63 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class zoneHealthDiffArrayType {
+        
+        private string sourceField;
+        
+        private string uidField;
+        
+        private string typeField;
+        
+        private string namedataField;
+        
+        /// <remarks/>
+        public string source {
+            get {
+                return this.sourceField;
+            }
+            set {
+                this.sourceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string uid {
+            get {
+                return this.uidField;
+            }
+            set {
+                this.uidField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string namedata {
+            get {
+                return this.namedataField;
+            }
+            set {
+                this.namedataField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
     public partial class zoneHealthCheckResponseType {
         
         private string domainField;
@@ -9868,6 +11338,12 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         private string fixPerformedField;
         
         private int flagsField;
+        
+        private zoneHealthDiffArrayType[] difforionField;
+        
+        private zoneHealthDiffArrayType[] diffdnsdbField;
+        
+        private string[] uidsField;
         
         private string[] errorsField;
         
@@ -9941,6 +11417,39 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             }
             set {
                 this.flagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("difforion")]
+        public zoneHealthDiffArrayType[] difforion {
+            get {
+                return this.difforionField;
+            }
+            set {
+                this.difforionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("diffdnsdb")]
+        public zoneHealthDiffArrayType[] diffdnsdb {
+            get {
+                return this.diffdnsdbField;
+            }
+            set {
+                this.diffdnsdbField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("uids")]
+        public string[] uids {
+            get {
+                return this.uidsField;
+            }
+            set {
+                this.uidsField = value;
             }
         }
         
@@ -10185,6 +11694,10 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         
         private string sourcetypeField;
         
+        private int offsitetransfertemplateField;
+        
+        private bool offsitetransfertemplateFieldSpecified;
+        
         private transferKeyType[] transferkeysField;
         
         private string statusField;
@@ -10317,6 +11830,27 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         }
         
         /// <remarks/>
+        public int offsitetransfertemplate {
+            get {
+                return this.offsitetransfertemplateField;
+            }
+            set {
+                this.offsitetransfertemplateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool offsitetransfertemplateSpecified {
+            get {
+                return this.offsitetransfertemplateFieldSpecified;
+            }
+            set {
+                this.offsitetransfertemplateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("transferkeys")]
         public transferKeyType[] transferkeys {
             get {
@@ -10355,6 +11889,75 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             }
             set {
                 this.rrecordsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class nameserversByTldType {
+        
+        private string tldField;
+        
+        private string[] nameserversField;
+        
+        /// <remarks/>
+        public string tld {
+            get {
+                return this.tldField;
+            }
+            set {
+                this.tldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("nameservers")]
+        public string[] nameservers {
+            get {
+                return this.nameserversField;
+            }
+            set {
+                this.nameserversField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dnsapi.domaincontrol.com/dnsapi")]
+    public partial class nameserverArrayType {
+        
+        private string[] nameserversField;
+        
+        private nameserversByTldType[] tldnameserversField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("nameservers")]
+        public string[] nameservers {
+            get {
+                return this.nameserversField;
+            }
+            set {
+                this.nameserversField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("tldnameservers")]
+        public nameserversByTldType[] tldnameservers {
+            get {
+                return this.tldnameserversField;
+            }
+            set {
+                this.tldnameserversField = value;
             }
         }
     }
@@ -10585,6 +12188,8 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         
         private int reselleridField;
         
+        private string parentshopperidField;
+        
         private string execshopperidField;
         
         private int execreselleridField;
@@ -10620,6 +12225,16 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             }
             set {
                 this.reselleridField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string parentshopperid {
+            get {
+                return this.parentshopperidField;
+            }
+            set {
+                this.parentshopperidField = value;
             }
         }
         
@@ -11151,10 +12766,10 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         }
         
         /// <remarks/>
-        public string[] Result {
+        public nameserverArrayType Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string[])(this.results[0]));
+                return ((nameserverArrayType)(this.results[0]));
             }
         }
     }
@@ -11177,10 +12792,10 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         }
         
         /// <remarks/>
-        public string[] Result {
+        public nameserverArrayType Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string[])(this.results[0]));
+                return ((nameserverArrayType)(this.results[0]));
             }
         }
     }
@@ -11203,10 +12818,10 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
         }
         
         /// <remarks/>
-        public string[] Result {
+        public nameserverArrayType Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string[])(this.results[0]));
+                return ((nameserverArrayType)(this.results[0]));
             }
         }
     }
@@ -12695,6 +14310,32 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getZoneFoldersByDomainCompletedEventHandler(object sender, getZoneFoldersByDomainCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getZoneFoldersByDomainCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getZoneFoldersByDomainCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public zoneFolderType[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((zoneFolderType[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void getZonesInFolderCompletedEventHandler(object sender, getZonesInFolderCompletedEventArgs e);
     
     /// <remarks/>
@@ -12767,6 +14408,58 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void createOffsiteTransferTemplateCompletedEventHandler(object sender, createOffsiteTransferTemplateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class createOffsiteTransferTemplateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal createOffsiteTransferTemplateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void deleteOffsiteTransferTemplateCompletedEventHandler(object sender, deleteOffsiteTransferTemplateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class deleteOffsiteTransferTemplateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal deleteOffsiteTransferTemplateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public simpleResponseType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((simpleResponseType)(this.results[0]));
             }
         }
     }
@@ -13915,6 +15608,370 @@ namespace Atlantis.Framework.PremiumDNS.Impl.DnsWsApi
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((queryReportResponseType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void checkZoneOwnerCompletedEventHandler(object sender, checkZoneOwnerCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class checkZoneOwnerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal checkZoneOwnerCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void applyTemplateToNewZoneCompletedEventHandler(object sender, applyTemplateToNewZoneCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class applyTemplateToNewZoneCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal applyTemplateToNewZoneCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public booleanResponseType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((booleanResponseType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void notifyDNSSECZoneUpdateCompletedEventHandler(object sender, notifyDNSSECZoneUpdateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class notifyDNSSECZoneUpdateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal notifyDNSSECZoneUpdateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public simpleResponseType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((simpleResponseType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getPremiumFeaturesCompletedEventHandler(object sender, getPremiumFeaturesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getPremiumFeaturesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getPremiumFeaturesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public getPremiumFeaturesResponseType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((getPremiumFeaturesResponseType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void createBlogRecordsCompletedEventHandler(object sender, createBlogRecordsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class createBlogRecordsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal createBlogRecordsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public booleanResponseType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((booleanResponseType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void createSubdomainBlogRecordsCompletedEventHandler(object sender, createSubdomainBlogRecordsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class createSubdomainBlogRecordsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal createSubdomainBlogRecordsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public booleanResponseType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((booleanResponseType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getAuditNameServersCompletedEventHandler(object sender, getAuditNameServersCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getAuditNameServersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getAuditNameServersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public auditNameServersType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((auditNameServersType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void removeZoneByUidCompletedEventHandler(object sender, removeZoneByUidCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class removeZoneByUidCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal removeZoneByUidCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public simpleResponseType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((simpleResponseType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void cancelDomainCompletedEventHandler(object sender, cancelDomainCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class cancelDomainCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal cancelDomainCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public simpleResponseType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((simpleResponseType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void removeZoneCheckNSCompletedEventHandler(object sender, removeZoneCheckNSCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class removeZoneCheckNSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal removeZoneCheckNSCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public simpleResponseType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((simpleResponseType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void expireDomainCompletedEventHandler(object sender, expireDomainCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class expireDomainCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal expireDomainCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public simpleResponseType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((simpleResponseType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void unExpireDomainCompletedEventHandler(object sender, unExpireDomainCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class unExpireDomainCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal unExpireDomainCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public simpleResponseType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((simpleResponseType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void addUniqueDNSCompletedEventHandler(object sender, addUniqueDNSCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class addUniqueDNSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal addUniqueDNSCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public hostedResourceOutputType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((hostedResourceOutputType)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void deleteUniqueDNSCompletedEventHandler(object sender, deleteUniqueDNSCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class deleteUniqueDNSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal deleteUniqueDNSCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public hostedResourceOutputType Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((hostedResourceOutputType)(this.results[0]));
             }
         }
     }

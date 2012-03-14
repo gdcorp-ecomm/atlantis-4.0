@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.PremiumDNS.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
+[assembly: AssemblyCompany("GoDaddy.com, LLC.")]
 [assembly: AssemblyProduct("Atlantis.Framework.PremiumDNS.Test")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2010")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC. 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

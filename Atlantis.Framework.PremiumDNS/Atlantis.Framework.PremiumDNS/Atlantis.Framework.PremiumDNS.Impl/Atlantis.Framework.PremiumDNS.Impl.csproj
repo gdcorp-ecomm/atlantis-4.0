@@ -110,6 +110,9 @@
     <None Include="Web References\DnsWsApi\auditLogType.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\DnsWsApi\auditNameServersType.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\DnsWsApi\authDataType.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -156,6 +159,9 @@
     <None Include="Web References\DnsWsApi\getHCCZoneInfoResponseType.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\DnsWsApi\getPremiumFeaturesResponseType.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\DnsWsApi\getPremiumStatusResponseType.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -165,7 +171,13 @@
     <None Include="Web References\DnsWsApi\getXferStatusResponseType.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\DnsWsApi\hostedResourceOutputType.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\DnsWsApi\insertOrionEventResponseType.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\DnsWsApi\nameserverArrayType.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\DnsWsApi\protectedDomainResponseType.datasource">
@@ -239,10 +251,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://dnsapi.dev.domaincontrol.com/webroot/wsdl/dnsapi.wsdl">
+    <WebReferenceUrl Include="http://dnsapi.test.secureserver-net.ide/dnsapi.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\DnsWsApi\</RelPath>
-      <UpdateFromURL>http://dnsapi.dev.domaincontrol.com/webroot/wsdl/dnsapi.wsdl</UpdateFromURL>
+      <UpdateFromURL>http://dnsapi.test.secureserver-net.ide/dnsapi.php%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

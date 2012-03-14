@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="transferKeyType" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Atlantis.Framework.PremiumDNS.Impl.DnsWsApi.transferKeyType</TypeInfo>
+   <TypeInfo>Atlantis.Framework.PremiumDNS.Impl.DnsWsApi.transferKeyType, Web References.DnsWsApi.Reference.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

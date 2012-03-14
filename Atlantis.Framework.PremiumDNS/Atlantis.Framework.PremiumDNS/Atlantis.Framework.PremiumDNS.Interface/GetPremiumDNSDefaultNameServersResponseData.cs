@@ -11,6 +11,14 @@ namespace Atlantis.Framework.PremiumDNS.Interface
     private string _resultXML = string.Empty;
     private bool _success = false;
 
+    public List<string> Nameservers { get; set; }
+
+    private Dictionary<string, string[]> _nameserversByTld = new Dictionary<string, string[]>();
+    public Dictionary<string, string[]> NameserversByTld
+    {
+      get { return _nameserversByTld; }
+    }
+
     public bool IsSuccess
     {
       get
@@ -19,33 +27,29 @@ namespace Atlantis.Framework.PremiumDNS.Interface
       }
     }
 
-    public GetPremiumDNSDefaultNameServersResponseData(IEnumerable<string> results)
+    public GetPremiumDNSDefaultNameServersResponseData(IEnumerable<string> defaultNameserver, 
+      Dictionary<string, string[]> nameserversByTld)
     {
       try
       {
-        Nameservers = results.ToList();
+        Nameservers = defaultNameserver.ToList();
+        _nameserversByTld = nameserversByTld;
         _success = true;
-      } catch
+      } 
+      catch
       {
         _success = false;
       }
     }
 
-    public List<string> Nameservers { get; set; }
-
     public GetPremiumDNSDefaultNameServersResponseData(AtlantisException atlantisException)
     {
       this._exception = atlantisException;
-      _success = false;
     }
 
     public GetPremiumDNSDefaultNameServersResponseData(RequestData requestData, Exception exception)
     {
-      _success = false;
-      this._exception = new AtlantisException(requestData,
-                                   "GetPremiumDNSDefaultNameServersResponseData",
-                                   exception.Message,
-                                   requestData.ToXML());
+      this._exception = new AtlantisException(requestData,"GetPremiumDNSDefaultNameServersResponseData", exception.Message,requestData.ToXML());
     }
 
     #region Implementation of IResponseData

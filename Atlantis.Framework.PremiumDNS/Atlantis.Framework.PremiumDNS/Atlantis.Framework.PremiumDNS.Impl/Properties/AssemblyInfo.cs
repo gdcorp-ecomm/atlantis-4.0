@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.PremiumDNS.Impl")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
+[assembly: AssemblyCompany("GoDaddy.com, LLC.")]
 [assembly: AssemblyProduct("Atlantis.Framework.PremiumDNS.Impl")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2010-2011")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC. 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,4 +31,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("4.0.0.0")] // DO NOT CHANGE THE AssemblyVersion
-[assembly: AssemblyFileVersion("4.11.10.25")] // YOU CAN EDIT AssemblyFileVersion
+[assembly: AssemblyFileVersion("4.12.3.14")] // YOU CAN EDIT AssemblyFileVersion

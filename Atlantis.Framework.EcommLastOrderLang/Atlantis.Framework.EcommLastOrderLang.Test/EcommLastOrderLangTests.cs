@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
-using Atlantis.Framework.[TRIPLET].Impl;
-using Atlantis.Framework.[TRIPLET].Interface;
+using Atlantis.Framework.EcommLastOrderLang.Impl;
+using Atlantis.Framework.EcommLastOrderLang.Interface;
 
 
 namespace Atlantis.Framework.EcommLastOrderLang.Test
@@ -10,13 +10,13 @@ namespace Atlantis.Framework.EcommLastOrderLang.Test
   /// Summary description for UnitTest1
   /// </summary>
   [TestClass]
-  public class Get[TRIPLET]Tests
+  public class EcommLastOrderLangTests
   {
   
     private const string _shopperId = "";
 	
 	
-    public Get[TRIPLET]Tests()
+    public EcommLastOrderLangTests()
     {
       //
       // TODO: Add constructor logic here
@@ -65,18 +65,18 @@ namespace Atlantis.Framework.EcommLastOrderLang.Test
 
     [TestMethod]
 	[DeploymentItem("atlantis.config")]
-    public void [TRIPLET]Test()
+    public void EcommLastOrderLangTest()
     {
-     [TRIPLET]RequestData request = new [TRIPLET]RequestData(_shopperId
+     EcommLastOrderLangRequestData request = new EcommLastOrderLangRequestData(_shopperId
         , string.Empty
         , string.Empty
         , string.Empty
         , 0 );
 
-      [TRIPLET]ResponseData response = ([TRIPLET]ResponseData)Engine.Engine.ProcessRequest(request, _requestType);
+      EcommLastOrderLangResponseData response = (EcommLastOrderLangResponseData)Engine.Engine.ProcessRequest(request, _requestType);
       
 	  // Cache call
-	  //[TRIPLET]ResponseData response = ([TRIPLET]ResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
+	  //EcommLastOrderLangResponseData response = (EcommLastOrderLangResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
 
       //
       // TODO: Add test logic here

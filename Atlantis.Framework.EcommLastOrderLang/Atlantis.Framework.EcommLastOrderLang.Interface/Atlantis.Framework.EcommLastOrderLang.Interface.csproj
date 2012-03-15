@@ -71,8 +71,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetOffersWithPlIdRequestData.cs" />
-    <Compile Include="GetOffersWithPlIdResponseData.cs" />
+    <Compile Include="EcommLastOrderLangRequestData.cs" />
+    <Compile Include="EcommLastOrderLangResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

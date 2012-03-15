@@ -6,7 +6,7 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.EcommLastOrderLang.Interface
 {
-  public class [TRIPLET]ResponseData : IResponseData
+  public class EcommLastOrderLangResponseData : IResponseData
   {
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
@@ -20,20 +20,20 @@ namespace Atlantis.Framework.EcommLastOrderLang.Interface
       }
     }
 
-    public [TRIPLET]ResponseData(string xml)
+    public EcommLastOrderLangResponseData(string xml)
     {
 
     }
 
-     public [TRIPLET]ResponseData(AtlantisException atlantisException)
+     public EcommLastOrderLangResponseData(AtlantisException atlantisException)
     {
       this._exception = atlantisException;
     }
 
-    public [TRIPLET]ResponseData(RequestData requestData, Exception exception)
+    public EcommLastOrderLangResponseData(RequestData requestData, Exception exception)
     {
       this._exception = new AtlantisException(requestData,
-                                   "[TRIPLET]ResponseData",
+                                   "EcommLastOrderLangResponseData",
                                    exception.Message,
                                    requestData.ToXML());
     }

@@ -6,10 +6,10 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.EcommLastOrderLang.Interface
 {
-  public class [TRIPLET]RequestData : RequestData
+  public class EcommLastOrderLangRequestData : RequestData
   {
 
-    public [TRIPLET]RequestData(string shopperId,
+    public EcommLastOrderLangRequestData(string shopperId,
                                   string sourceUrl,
                                   string orderId,
                                   string pathway,
@@ -19,7 +19,7 @@ namespace Atlantis.Framework.EcommLastOrderLang.Interface
 
     public override string GetCacheMD5()
     {
-      throw new NotImplementedException("GetCacheMD5 not implemented in [TRIPLET]RequestData");     
+      throw new NotImplementedException("GetCacheMD5 not implemented in EcommLastOrderLangRequestData");     
     }
 
 

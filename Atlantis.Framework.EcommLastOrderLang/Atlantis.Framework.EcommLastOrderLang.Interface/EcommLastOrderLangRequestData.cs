@@ -8,14 +8,26 @@ namespace Atlantis.Framework.EcommLastOrderLang.Interface
 {
   public class EcommLastOrderLangRequestData : RequestData
   {
+    private string _cookieValue = string.Empty;
 
     public EcommLastOrderLangRequestData(string shopperId,
                                   string sourceUrl,
                                   string orderId,
                                   string pathway,
-                                  int pageCount)
+                                  int pageCount,
+                                  string languageCookieValue)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
-    { }
+    {
+      _cookieValue = languageCookieValue;
+      RequestTimout = TimeSpan.FromSeconds(5);
+    
+    }
+
+    public string CookieValue
+    {
+      get { return _cookieValue; }
+      set { _cookieValue = value; }
+    }
 
     public override string GetCacheMD5()
     {

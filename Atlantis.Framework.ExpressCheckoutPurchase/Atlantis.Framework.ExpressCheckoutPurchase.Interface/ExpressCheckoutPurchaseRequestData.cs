@@ -21,7 +21,9 @@ namespace Atlantis.Framework.ExpressCheckoutPurchase.Interface
                                   bool sendConfirmEmail,
                                   string enteredBy,
                                   string orderSource,
-                                  AddItemRequestData itemRequestData)
+                                  AddItemRequestData itemRequestData,
+                                  string translationIP,
+                                  string translationLanguage)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       
@@ -35,6 +37,12 @@ namespace Atlantis.Framework.ExpressCheckoutPurchase.Interface
           new XAttribute("order_source", orderSource)
         )
       );
+
+      if (!string.IsNullOrEmpty(translationIP))
+      {
+        WebServiceRequestXml.Element("instantPurchase").Add(new XAttribute("translationIP", translationIP));
+        WebServiceRequestXml.Element("instantPurchase").Add(new XAttribute("translationLanguage", translationLanguage));
+      }
 
       try
       {
@@ -62,7 +70,9 @@ namespace Atlantis.Framework.ExpressCheckoutPurchase.Interface
                                   AddItemRequestData itemRequestData,
                                   string expectedTotalInPennies,
                                   bool estimateOnly,
-                                  string transactionCurrency)
+                                  string transactionCurrency,
+                                  string translationIP,
+                                  string translationLanguage)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       WebServiceRequestXml = new XDocument(
@@ -78,6 +88,12 @@ namespace Atlantis.Framework.ExpressCheckoutPurchase.Interface
           new XAttribute("transactionCurrency", transactionCurrency)
         )
       );
+
+      if (!string.IsNullOrEmpty(translationIP))
+      {
+        WebServiceRequestXml.Element("instantPurchase").Add(new XAttribute("translationIP", translationIP));
+        WebServiceRequestXml.Element("instantPurchase").Add(new XAttribute("translationLanguage", translationLanguage));
+      }
 
       try
       {

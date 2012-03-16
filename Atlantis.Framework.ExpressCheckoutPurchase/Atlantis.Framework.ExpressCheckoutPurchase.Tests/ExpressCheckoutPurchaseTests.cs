@@ -46,7 +46,9 @@ namespace Atlantis.Framework.ExpressCheckoutPurchase.Tests
         , false
         , "Customer"
         , "Online"
-        , addItemRequest);
+        , addItemRequest
+        , string.Empty
+        , string.Empty);
 
       var response = (ExpressCheckoutPurchaseResponseData)Engine.Engine.ProcessRequest(request, _xcRequestType);
 
@@ -77,7 +79,9 @@ namespace Atlantis.Framework.ExpressCheckoutPurchase.Tests
         , false
         , "Customer"
         , "Online"
-        , addItemRequest);
+        , addItemRequest
+        , string.Empty
+        , string.Empty);
 
       var response = (ExpressCheckoutPurchaseResponseData)Engine.Engine.ProcessRequest(request, _xcRequestType);
 
@@ -105,7 +109,9 @@ namespace Atlantis.Framework.ExpressCheckoutPurchase.Tests
         , false
         , "Customer"
         , "Online"
-        , addItemRequest);
+        , addItemRequest
+        , string.Empty
+        , string.Empty);
 
       var response = (ExpressCheckoutPurchaseResponseData)Engine.Engine.ProcessRequest(request, _xcRequestType);
 

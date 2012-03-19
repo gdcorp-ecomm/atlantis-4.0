@@ -96,5 +96,20 @@ namespace Atlantis.Framework.MyaMirageData.Tests
 
       Assert.IsTrue(response.IsSuccess);
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void AllMirageDataKeys2()
+    {
+      MyaMirageDataRequestData request = new MyaMirageDataRequestData("859012", string.Empty, string.Empty, string.Empty, 0);
+      MyaMirageDataResponseData response = (MyaMirageDataResponseData)Engine.Engine.ProcessRequest(request, 386);
+
+      foreach (string namespacekey in response.AllMirageDataKeys)
+      {
+        Debug.WriteLine(namespacekey);
+      }
+
+      Assert.IsTrue(response.IsSuccess);
+    }
   }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.Serialization;
 using Atlantis.Framework.HDVDGetAccountList.Interface;
+using Atlantis.Framework.Testing.MockHttpContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.HDVDGetAccountList.Tests
@@ -62,6 +64,46 @@ namespace Atlantis.Framework.HDVDGetAccountList.Tests
       Assert.IsTrue(response.IsSuccess);
       Debug.WriteLine(response.ToXML());
 
+    }
+
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+
+    public void GetAccountListFromSession()
+    {
+      MockHttpContext.SetMockHttpContext("default.aspx", "http://localhost/default.aspx", string.Empty);
+
+      const string APP_NAME = "HDVDGetAccountList_UNITTESTS";
+      string _shopperId = "858421";
+      int requestId = 400;
+      HDVDGetAccountListRequestData request = new HDVDGetAccountListRequestData(
+        _shopperId,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        1,
+        "all",
+        15,
+        1,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        APP_NAME
+      );
+
+      request.RequestTimeout = TimeSpan.FromSeconds(30);
+
+      var response = SessionCache.SessionCache.GetProcessRequest<HDVDGetAccountListResponseData>(request, requestId);
+      Assert.IsTrue(response.IsSuccess);
+      Debug.WriteLine(response.ToXML());
+
+
+      var response2 = SessionCache.SessionCache.GetProcessRequest<HDVDGetAccountListResponseData>(request, requestId);
+      Assert.IsTrue(response2.IsSuccess);
+      Debug.WriteLine(response2.ToXML());
+
+      Assert.AreEqual(response.ToXML(), response2.ToXML());
     }
 
   }

@@ -11,13 +11,23 @@ using Atlantis.Framework.SessionCache;
 namespace Atlantis.Framework.HDVDGetAccountList.Interface
 {
   [DataContract]
-  public class HDVDGetAccountListResponseData :  IResponseData, ISessionSerializableResponse {
+  [KnownType(typeof(AriesAccountListResponse))]
+  [KnownType(typeof(AriesAccountListItem))]
+  [KnownType(typeof(AriesHostingResponse))]
+  [KnownType(typeof(HostingResponse))]
+  public class HDVDGetAccountListResponseData : IResponseData, ISessionSerializableResponse
+  {
 
     private readonly AtlantisException _ex;
     private IList<AriesAccountListItem> _accountList;
     private int _resellerId = -1;
     private int _totalRowCount = -1;
     private HDVD.Interface.Aries.AriesAccountListResponse response;
+
+    //required for session cache
+    public HDVDGetAccountListResponseData()
+    {
+    }
 
     public HDVDGetAccountListResponseData(RequestData request, Exception ex)
     {
@@ -29,7 +39,6 @@ namespace Atlantis.Framework.HDVDGetAccountList.Interface
       _ex = aex;
     }
 
-
     public HDVDGetAccountListResponseData(AriesAccountListResponse response)
     {
       this.response = response;
@@ -38,38 +47,34 @@ namespace Atlantis.Framework.HDVDGetAccountList.Interface
       _accountList = response.AccountList;
     }
 
-    [DataMember]
-    public bool IsSuccess {
+    public bool IsSuccess
+    {
       get
       {
         bool bSuccess = false;
         if (this.response != null)
         {
-          bSuccess =(this.response.StatusCode == 0);
+          bSuccess = (this.response.StatusCode == 0);
         }
-        
+
         return bSuccess;
 
       }
     }
-    
-    [DataMember]
+
     public IList<AriesAccountListItem> AccountList
     {
-      get { return _accountList; }
-      set { _accountList = value; }
+      get { return response.AccountList; }
     }
-    [DataMember]
+
     public int ResellerId
     {
-      get { return _resellerId; }
-      set { _resellerId = value; }
+      get { return response.ResellerID; }
     }
-    [DataMember]
+
     public int TotalRowCount
     {
-      get { return _totalRowCount; }
-      set { _totalRowCount = value; }
+      get { return response.TotalRowCount; }
     }
 
     #region Implementation of IResponseData
@@ -112,10 +117,14 @@ namespace Atlantis.Framework.HDVDGetAccountList.Interface
 
       try
       {
-        ser = new DataContractSerializer(this.GetType());
+        ser = new DataContractSerializer(typeof(AriesAccountListResponse));
         ser.WriteObject(ms, this.response);
-        sessionString = Encoding.Default.GetString(ms.ToArray());
+        sessionString = Encoding.UTF8.GetString(ms.ToArray());
         ms.Close();
+      }
+      catch (Exception ex)
+      {
+        throw;
       }
       finally
       {
@@ -132,10 +141,15 @@ namespace Atlantis.Framework.HDVDGetAccountList.Interface
 
       try
       {
-        ms = new MemoryStream(Encoding.Unicode.GetBytes(sessionData));
-        ser = new DataContractSerializer(this.GetType());
-        this.response = ser.ReadObject(ms) as AriesAccountListResponse;
+        ms = new MemoryStream(Encoding.UTF8.GetBytes(sessionData));
+        ser = new DataContractSerializer(typeof(AriesAccountListResponse));
+        var accountListResponse = ser.ReadObject(ms) as AriesAccountListResponse;
+        this.response = accountListResponse;
         ms.Close();
+      }
+      catch (Exception ex)
+      {
+        throw;
       }
       finally
       {

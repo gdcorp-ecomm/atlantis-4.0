@@ -42,6 +42,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -68,6 +69,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
       <Project>{8B9AA4D9-B932-40EB-9F36-52C55F2D3D09}</Project>
       <Name>Atlantis.Framework.SessionCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
+      <Project>{2F8983B4-801B-461A-9D76-26A58A496261}</Project>
+      <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.HDVDGetAccountList.Impl\Atlantis.Framework.HDVDGetAccountList.Impl.csproj">
       <Project>{DEEED793-AEEB-4FFA-A4BC-2F574D949B97}</Project>

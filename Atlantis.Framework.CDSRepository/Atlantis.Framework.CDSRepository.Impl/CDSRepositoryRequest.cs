@@ -23,8 +23,18 @@ namespace Atlantis.Framework.CDSRepository.Impl
 
         var result = string.Empty;
 
-        string rootPath = config.GetConfigValue("RootPath");
-        DocumentRepository = new FlatFileDocumentRepository(rootPath);
+        bool useMongoDB = (config.GetConfigValue("Primary") == "MongoDB");
+        if (useMongoDB)
+        {
+          string connectionString = config.GetConfigValue("MongoDBConnection");
+          DocumentRepository = new MongoDBDocumentRepository(connectionString);
+        }
+        else
+        {
+          string rootPath = config.GetConfigValue("RootPath");
+          DocumentRepository = new FlatFileDocumentRepository(rootPath);
+        }
+
         result = DocumentRepository.GetDocument(cdsRequestData.Query);
 
         if (!string.IsNullOrWhiteSpace(result))

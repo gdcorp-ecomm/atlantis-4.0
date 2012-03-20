@@ -5,7 +5,6 @@ using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.CDS.Tokenizer;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.CDS;
-using MongoDB.Bson;
 
 namespace Atlantis.Framework.Providers.CDS
 {
@@ -84,12 +83,12 @@ namespace Atlantis.Framework.Providers.CDS
       return data;
     }
 
-    public string GetJSON(string query, ObjectId objectId, DateTime activeDate)
+    public string GetJSON(string query, string objectId, DateTime activeDate)
     {
       return GetJSON(query, null, objectId, activeDate);
     }
 
-    public string GetJSON(string query, Dictionary<string, string> customTokens, ObjectId objectId, DateTime activeDate)
+    public string GetJSON(string query, Dictionary<string, string> customTokens, string objectId, DateTime activeDate)
     {
       string data = string.Empty;
       CDSResponseData responseData;

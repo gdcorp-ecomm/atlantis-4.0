@@ -5,11 +5,14 @@ using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.CDS.Tokenizer;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.CDS;
+using MongoDB.Bson;
 
 namespace Atlantis.Framework.Providers.CDS
 {
   public class CDSProvider : ProviderBase, ICDSProvider
   {
+    private const int _REQUEST_TYPE = 424;
+
     private readonly ISiteContext _siteContext;
     private readonly IShopperContext _shopperContext;
 
@@ -40,7 +43,7 @@ namespace Atlantis.Framework.Providers.CDS
 
       try
       {
-        responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, 424);
+        responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, _REQUEST_TYPE);
         if (responseData.IsSuccess)
         {
           data = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
@@ -49,7 +52,7 @@ namespace Atlantis.Framework.Providers.CDS
       }
       catch (Exception ex)
       {
-        Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+        Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, _shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount));
       }
       return model;
     }
@@ -63,16 +66,15 @@ namespace Atlantis.Framework.Providers.CDS
     {
       var data = string.Empty;
       CDSResponseData responseData;
-      CDSTokenizer tokenizer = new CDSTokenizer();
 
       CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query);
 
       try
       {
-        responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, 424);
+        responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, _REQUEST_TYPE);
         if (responseData.IsSuccess)
         {
-          data = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
+          data = GetResponseData(responseData, customTokens);
         }
       }
       catch (Exception ex)
@@ -82,11 +84,44 @@ namespace Atlantis.Framework.Providers.CDS
       return data;
     }
 
+    public string GetJSON(string query, ObjectId objectId, DateTime activeDate)
+    {
+      return GetJSON(query, null, objectId, activeDate);
+    }
+
+    public string GetJSON(string query, Dictionary<string, string> customTokens, ObjectId objectId, DateTime activeDate)
+    {
+      string data = string.Empty;
+      CDSResponseData responseData;
+
+      CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query, objectId, activeDate);
+
+      try
+      {
+        responseData = (CDSResponseData)Engine.Engine.ProcessRequest(requestData, 424);
+        if (responseData.IsSuccess)
+        {
+          data = GetResponseData(responseData, customTokens);
+        }
+      }
+      catch (Exception ex)
+      {
+        Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+      }
+
+      return data;
+    }
+
+    private string GetResponseData(CDSResponseData responseData, Dictionary<string, string> customTokens)
+    {
+      CDSTokenizer tokenizer = new CDSTokenizer();
+      return (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
+    }
+
     public string GetUnparsedJSON(string query)
     {
       var data = string.Empty;
       CDSResponseData responseData;
-      CDSTokenizer tokenizer = new CDSTokenizer();
 
       CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query);
 

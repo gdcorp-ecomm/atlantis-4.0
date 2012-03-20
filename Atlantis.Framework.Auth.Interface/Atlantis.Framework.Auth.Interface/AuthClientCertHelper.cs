@@ -6,6 +6,20 @@ namespace Atlantis.Framework.Auth.Interface
 {
   public static class AuthClientCertHelper
   {
+    private static bool IsCertificateExpired(X509Certificate2 certificate)
+    {
+      bool isExpired = false;
+
+      DateTime expirationDate = DateTime.Parse(certificate.GetExpirationDateString());
+
+      if(expirationDate < DateTime.Now)
+      {
+        isExpired = true;
+      }
+
+      return isExpired;
+    }
+
     public static X509Certificate2 GetClientCertificate(ConfigElement config)
     {
       X509Certificate2 clientCertificate = null;
@@ -22,7 +36,8 @@ namespace Atlantis.Framework.Auth.Interface
 
           foreach (X509Certificate2 certificate in store.Certificates)
           {
-            if (certificate.FriendlyName.Equals(certificateName, StringComparison.CurrentCultureIgnoreCase))
+            if (certificate.FriendlyName.Equals(certificateName, StringComparison.CurrentCultureIgnoreCase) &&
+                !IsCertificateExpired(certificate))
             {
               clientCertificate = certificate;
               break;

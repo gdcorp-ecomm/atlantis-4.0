@@ -1,27 +1,42 @@
 ﻿using System;
 using System.Security.Cryptography;
 using Atlantis.Framework.Interface;
+using MongoDB.Bson;
 
 namespace Atlantis.Framework.CDSRepository.Interface
 {
 
   public class CDSRepositoryRequestData : RequestData
   {
-
     public CDSRepositoryRequestData(string shopperId,
                                   string sourceUrl,
-                                  string orderIo,
+                                  string orderId,
                                   string pathway,
                                   int pageCount,
                                   string query)
-      : base(shopperId, sourceUrl, orderIo, pathway, pageCount)
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       Query = query;
       RequestTimeout = TimeSpan.FromSeconds(20);
     }
 
-    public string Query { get; set; }
-    //public TimeSpan RequestTimeout { get; set; }
+    public CDSRepositoryRequestData(string shopperId,
+      string sourceUrl,
+      string orderId,
+      string pathway,
+      int pageCount,
+      string query,
+      ObjectId objectId,
+      DateTime activeDate)
+      : this(shopperId, sourceUrl, orderId, pathway, pageCount, query)
+    {
+      ObjectID = objectId;
+      ActiveDate = activeDate;
+    }
+
+    public string Query { get; private set; }
+    public ObjectId ObjectID { get; private set; }
+    public DateTime ActiveDate { get; private set; }
 
     public override string GetCacheMD5()
     {

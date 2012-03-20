@@ -1,10 +1,9 @@
 ﻿using System.Xml.Serialization;
-using XmlSerializer = Atlantis.Framework.Auth.Interface.Serializers.XmlSerializer;
 
 namespace Atlantis.Framework.Auth.Interface
 {
   [XmlRoot(ElementName = "Phone")]
-  public class AuthTwoFactorPhoneXml
+  public class AuthTwoFactorPhone
   {
     [XmlAttribute(AttributeName = "number")]
     public string PhoneNumber { get; set; }
@@ -12,11 +11,11 @@ namespace Atlantis.Framework.Auth.Interface
     [XmlAttribute(AttributeName = "carrier")]
     public string Carrier { get; set; }
 
-    public AuthTwoFactorPhoneXml()
+    public AuthTwoFactorPhone()
     {
     }
 
-    public AuthTwoFactorPhoneXml(string xml)
+    public AuthTwoFactorPhone(string xml)
     {
       if (!string.IsNullOrEmpty(xml))
       {
@@ -24,9 +23,9 @@ namespace Atlantis.Framework.Auth.Interface
 
         try
         {
-          AuthTwoFactorPhoneXml authTwoFactorPhoneXml = xmlSerializer.Deserialize<AuthTwoFactorPhoneXml>(xml);
-          PhoneNumber = authTwoFactorPhoneXml.PhoneNumber;
-          Carrier = authTwoFactorPhoneXml.Carrier;
+          AuthTwoFactorPhone authTwoFactorPhone = xmlSerializer.Deserialize<AuthTwoFactorPhone>(xml);
+          PhoneNumber = authTwoFactorPhone.PhoneNumber;
+          Carrier = authTwoFactorPhone.Carrier;
         }
         catch
         {

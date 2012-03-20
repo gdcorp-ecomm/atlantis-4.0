@@ -3,7 +3,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Atlantis.Framework.Auth.Interface.Serializers
+namespace Atlantis.Framework.Auth.Interface
 {
   internal class XmlSerializer
   {

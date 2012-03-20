@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthAuthorize.Impl.AuthenticationWS;
 using Atlantis.Framework.AuthAuthorize.Interface;
 using Atlantis.Framework.Interface;
@@ -22,26 +24,35 @@ namespace Atlantis.Framework.AuthAuthorize.Impl
 
         using (WScgdAuthenticateService authenticationService = new WScgdAuthenticateService())
         {
-          authenticationService.Url = authServiceUrl;
+          int statusCode = AuthAuthorizeStatusCodes.Error;
 
           AuthAuthorizeRequestData request = (AuthAuthorizeRequestData)requestData;
-          authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-          HashSet<int> responseCodes = ValidateRequest(request);
+          HashSet<int> validationCodes = ValidateRequest(request);
           string resultXml = string.Empty;
           string errorOutput;
 
-          if (responseCodes.Count > 0)
+          if (validationCodes.Count > 0)
           {
             errorOutput = "Request not valid.";
           }
           else
           {
-            int resultCode = authenticationService.Authorize(request.LoginName, request.Password, request.PrivateLabelId, request.IpAddress, out resultXml, out errorOutput);
-            responseCodes.Add(resultCode);
+            authenticationService.Url = authServiceUrl;
+            authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+
+            X509Certificate2 clientCertificate = AuthClientCertHelper.GetClientCertificate(config);
+            if(clientCertificate == null)
+            {
+              throw new AtlantisException(requestData, "AuthAuthorize.RequestHandler", "Unable to find client certificate for web service call.", string.Empty);
+            }
+
+            authenticationService.ClientCertificates.Add(clientCertificate);
+
+            statusCode = authenticationService.Authorize(request.LoginName, request.Password, request.PrivateLabelId, request.IpAddress, out resultXml, out errorOutput);
           }
 
-          responseData = new AuthAuthorizeResponseData(resultXml, responseCodes, errorOutput);
+          responseData = new AuthAuthorizeResponseData(resultXml, statusCode, validationCodes, errorOutput);
         }
       }
       catch (Exception ex)
@@ -61,21 +72,21 @@ namespace Atlantis.Framework.AuthAuthorize.Impl
       #region LoginName
       if (string.IsNullOrEmpty(request.LoginName))
       {
-        result.Add(AuthAuthorizeStatusCodes.ValidateLoginNameRequired);
+        result.Add(AuthValidationCodes.ValidateLoginNameRequired);
       }
       #endregion
 
       #region IpAddress
       if (string.IsNullOrEmpty(request.IpAddress))
       {
-        result.Add(AuthAuthorizeStatusCodes.ValidateIpAddressRequired);
+        result.Add(AuthValidationCodes.ValidateIpAddressRequired);
       }
       #endregion
 
       #region Password
       if (string.IsNullOrEmpty(request.Password))
       {
-        result.Add(AuthAuthorizeStatusCodes.ValidatePasswordRequired);
+        result.Add(AuthValidationCodes.ValidatePasswordRequired);
       }
       #endregion
 

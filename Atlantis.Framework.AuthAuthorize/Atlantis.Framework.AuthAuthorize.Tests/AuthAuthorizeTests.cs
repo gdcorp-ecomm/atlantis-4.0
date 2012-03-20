@@ -13,7 +13,7 @@ namespace Atlantis.Framework.AuthAuthorize.Tests
       AuthAuthorizeRequestData request = new AuthAuthorizeRequestData("832652", string.Empty, string.Empty, string.Empty, 0,
         "832652", "Password71", 1, "127.0.0.1");
       AuthAuthorizeResponseData response = (AuthAuthorizeResponseData)Engine.Engine.ProcessRequest(request, 396);
-      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(response.StatusCode == AuthAuthorizeStatusCodes.Success);
     }
 
     [TestMethod]
@@ -23,7 +23,7 @@ namespace Atlantis.Framework.AuthAuthorize.Tests
       AuthAuthorizeRequestData request = new AuthAuthorizeRequestData("832652", string.Empty, string.Empty, string.Empty, 0,
         "832652", "nottherigtpassword", 1, "127.0.0.1");
       AuthAuthorizeResponseData response = (AuthAuthorizeResponseData)Engine.Engine.ProcessRequest(request, 396);
-      Assert.IsFalse(response.IsSuccess);
+      Assert.IsFalse(response.StatusCode != AuthAuthorizeStatusCodes.Success);
     }
   }
 }

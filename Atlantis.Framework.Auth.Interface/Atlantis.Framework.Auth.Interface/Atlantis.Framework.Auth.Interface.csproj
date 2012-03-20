@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="AuthValidationCodes.cs" />
     <Compile Include="AuthTwoFactorPhone.cs" />
-    <Compile Include="AuthClientCertHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serializers\XmlSerializer.cs" />
   </ItemGroup>

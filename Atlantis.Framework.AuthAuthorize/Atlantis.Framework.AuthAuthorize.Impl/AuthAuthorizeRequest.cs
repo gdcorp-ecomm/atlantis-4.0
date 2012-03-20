@@ -5,6 +5,7 @@ using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthAuthorize.Impl.AuthenticationWS;
 using Atlantis.Framework.AuthAuthorize.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.ServiceHelper;
 
 namespace Atlantis.Framework.AuthAuthorize.Impl
 {
@@ -41,7 +42,7 @@ namespace Atlantis.Framework.AuthAuthorize.Impl
             authenticationService.Url = authServiceUrl;
             authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            X509Certificate2 clientCertificate = AuthClientCertHelper.GetClientCertificate(config);
+            X509Certificate2 clientCertificate = ClientCertHelper.GetClientCertificate(config);
             if(clientCertificate == null)
             {
               throw new AtlantisException(requestData, "AuthAuthorize.RequestHandler", "Unable to find client certificate for web service call.", string.Empty);

@@ -77,6 +77,11 @@ namespace Atlantis.Framework.HDVDGetAccountList.Interface
       get { return response.TotalRowCount; }
     }
 
+    public AriesAccountListResponse Response
+    {
+      get { return response; } 
+    }
+
     #region Implementation of IResponseData
 
     public string ToXML()

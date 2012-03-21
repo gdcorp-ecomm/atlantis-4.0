@@ -19,7 +19,7 @@ namespace Atlantis.Framework.EcommLastOrderLang.Interface
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       _cookieValue = languageCookieValue;
-      RequestTimout = TimeSpan.FromSeconds(5);
+      RequestTimeout = TimeSpan.FromSeconds(5);
     
     }
 

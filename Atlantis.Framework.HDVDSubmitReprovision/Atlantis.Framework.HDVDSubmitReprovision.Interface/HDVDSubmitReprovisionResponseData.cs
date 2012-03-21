@@ -1,4 +1,5 @@
 ﻿using System;
+using Atlantis.Framework.HDVD.Interface.Aries;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.HDVDSubmitReprovision.Interface
@@ -8,8 +9,12 @@ namespace Atlantis.Framework.HDVDSubmitReprovision.Interface
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
 
-    private HDVD.Interface.Aries.AriesHostingResponse response;
-
+    private AriesHostingResponse response;
+    public AriesHostingResponse Response
+    {
+      get { return response; }
+    }
+    
     public bool IsSuccess
     {
       get

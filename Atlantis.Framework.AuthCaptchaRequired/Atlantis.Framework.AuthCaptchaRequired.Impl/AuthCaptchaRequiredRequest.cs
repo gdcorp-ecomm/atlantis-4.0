@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.AuthCaptchaRequired.Interface;
-using Atlantis.Framework.AuthCaptchaRequired.Impl.AuthWS;
-using Atlantis.Framework.ServiceHelper;
 using System.Security.Cryptography.X509Certificates;
+using Atlantis.Framework.Auth.Interface;
+using Atlantis.Framework.AuthCaptchaRequired.Impl.AuthWS;
+using Atlantis.Framework.AuthCaptchaRequired.Interface;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.ServiceHelper;
 
 namespace Atlantis.Framework.AuthCaptchaRequired.Impl
 {
-  public class AuthCaptchaRequiredRequest: IRequest
+  public class AuthCaptchaRequiredRequest : IRequest
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
@@ -27,21 +26,33 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Impl
         using (Authentication authService = new Authentication())
         {
           var request = (AuthCaptchaRequiredRequestData)requestData;
+          var isRequired = false;
 
-          authService.Url = wsUrl;
-          authService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+          HashSet<int> validationCodes = ValidateRequest(request);
+          string resultXml = string.Empty;
+          string errorOutput = string.Empty;
 
-          X509Certificate2 clientCert = ClientCertHelper.GetClientCertificate(config);
-          if (clientCert == null)
-          { 
-            throw new AtlantisException(requestData, "AuthCaptchaRequired::RequestHandler", "Unable to find client cert for web service call", string.Empty);
+          if (validationCodes.Count > 0)
+          {
+            errorOutput = "Request not valid.";
           }
-          authService.ClientCertificates.Add(clientCert);
+          else
+          {
+            authService.Url = wsUrl;
+            authService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-          var retVal = (int)authService.CaptchaRequired(request.IPAddress);
-          var isRequired = retVal == 1;
+            X509Certificate2 clientCert = ClientCertHelper.GetClientCertificate(config);
+            if (clientCert == null)
+            {
+              throw new AtlantisException(requestData, "AuthCaptchaRequired::RequestHandler", "Unable to find client cert for web service call", string.Empty);
+            }
+            authService.ClientCertificates.Add(clientCert);
 
-          responseData = new AuthCaptchaRequiredResponseData(isRequired);
+            var retVal = (int)authService.CaptchaRequired(request.IPAddress);
+            isRequired = retVal == 1;
+          }
+
+          responseData = new AuthCaptchaRequiredResponseData(isRequired, validationCodes, errorOutput);
         }
       }
       catch (Exception ex)
@@ -52,6 +63,21 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Impl
       }
 
       return responseData;
+    }
+
+
+    private static HashSet<int> ValidateRequest(AuthCaptchaRequiredRequestData request)
+    {
+      HashSet<int> result = new HashSet<int>();
+
+      #region IpAddress
+      if (string.IsNullOrEmpty(request.IPAddress))
+      {
+        result.Add(AuthValidationCodes.ValidateIpAddressRequired);
+      }
+      #endregion
+
+      return result;
     }
   }
 }

@@ -29,5 +29,22 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Test
       Assert.IsFalse(string.IsNullOrEmpty(response.ToXML()));
       Debug.WriteLine(response.ToXML());
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void CaptchaRequiredNoIP()
+    {
+      string shopperId = "867900";
+      string ipLoopback = "127.0.0.1";
+      //  string ipAddress = "172.23.45.65";
+
+      var request = new AuthCaptchaRequiredRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, string.Empty);
+      var response = (AuthCaptchaRequiredResponseData)Engine.Engine.ProcessRequest(request, 508);
+
+      Assert.IsFalse(response.IsSuccess);
+      Assert.IsFalse(response.IsCaptchaRequired);
+      Assert.IsTrue(response.ValidationCodes.Count > 0);
+      Assert.IsTrue(response.ValidationCodes.Contains(Auth.Interface.AuthValidationCodes.ValidateIpAddressRequired));
+    }
   }
 }

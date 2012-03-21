@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Atlantis.Framework.Interface;
 using System.IO;
 using System.Xml.Serialization;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.AuthCaptchaRequired.Interface
 {
@@ -14,19 +12,18 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Interface
     public bool IsSuccess { get; set; }
     private AtlantisException _aex;
 
-    private readonly bool _isRequired;
-    public bool IsCaptchaRequired
-    {
-      get
-      {
-        return _isRequired;
-      }
-    }
+    public bool IsCaptchaRequired { get; private set; }
 
-    public AuthCaptchaRequiredResponseData(bool isCaptchaRequired)
+    public HashSet<int> ValidationCodes { get; private set; }
+
+    public string StatusMessage { get; private set; }
+
+    public AuthCaptchaRequiredResponseData(bool isCaptchaRequired, HashSet<int> validationCodes, string statusMessage)
     {
-      _isRequired = isCaptchaRequired;
-      IsSuccess = true;
+      IsCaptchaRequired = isCaptchaRequired;
+      ValidationCodes = validationCodes;
+      IsSuccess = validationCodes.Count == 0;
+      StatusMessage = statusMessage;  
     }
 
     public AuthCaptchaRequiredResponseData(AtlantisException ex)
@@ -51,9 +48,9 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Interface
         xmlSerializer.Serialize(writer, IsCaptchaRequired);
         xmlValue = writer.ToString();
       }
-      catch (Exception) {}
+      catch (Exception) { }
 
-      return xmlValue;      
+      return xmlValue;
     }
 
     public AtlantisException GetException()

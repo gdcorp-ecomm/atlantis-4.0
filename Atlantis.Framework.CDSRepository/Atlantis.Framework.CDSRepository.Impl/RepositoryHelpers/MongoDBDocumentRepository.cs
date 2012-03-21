@@ -48,5 +48,34 @@ namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
 
       return json;
     }
+
+    public string GetDocument(string query, ObjectId objectId, DateTime activeDate)
+    {
+      string json = string.Empty;
+
+      MongoDatabase db = server.GetDatabase("cds");
+      MongoCollection<BsonDocument> lps = db.GetCollection<BsonDocument>("pages");
+
+      QueryComplete mongoQuery;
+
+      if (objectId == null)
+      {
+        mongoQuery = Query.And(Query.EQ("url", query), Query.LTE("activeDate", activeDate));
+      }
+      else
+      {
+        mongoQuery = Query.EQ("_id", objectId);
+      }
+
+      var doc = lps.Find(mongoQuery).SetFields(Fields.Exclude("_id", "pageId", "activeDate")).SetLimit(1).FirstOrDefault();
+      json = doc.ToJson<MongoDB.Bson.BsonDocument>();
+
+      if (string.IsNullOrWhiteSpace(json) || json == "null")
+      {
+        json = @"{'error':'file not found', 'status':'404'}";
+      }
+
+      return json;
+    }
   }
 }

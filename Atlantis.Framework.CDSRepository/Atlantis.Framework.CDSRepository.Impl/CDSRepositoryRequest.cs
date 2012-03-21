@@ -2,6 +2,7 @@
 using Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers;
 using Atlantis.Framework.CDSRepository.Interface;
 using Atlantis.Framework.Interface;
+using MongoDB.Bson;
 
 namespace Atlantis.Framework.CDSRepository.Impl
 {
@@ -35,7 +36,15 @@ namespace Atlantis.Framework.CDSRepository.Impl
           DocumentRepository = new FlatFileDocumentRepository(rootPath);
         }
 
-        result = DocumentRepository.GetDocument(cdsRequestData.Query);
+        bool bypassCache = (cdsRequestData.ObjectID != ObjectId.Empty) || (cdsRequestData.ActiveDate > default(DateTime));
+        if (bypassCache)
+        {
+          result = DocumentRepository.GetDocument(cdsRequestData.Query, cdsRequestData.ObjectID, cdsRequestData.ActiveDate);
+        }
+        else
+        {
+          result = DocumentRepository.GetDocument(cdsRequestData.Query);
+        }
 
         if (!string.IsNullOrWhiteSpace(result))
         {

@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using Atlantis.Framework.CDSRepository.Interface;
+using System;
+using MongoDB.Bson;
 
 namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
 {
@@ -27,6 +29,11 @@ namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
     public bool Exists(string query)
     {
       return File.Exists(filePath(query));
+    }
+
+    public string GetDocument(string query, ObjectId objectId, DateTime activeDate)
+    {
+      throw new Exception("Not Implemented");
     }
 
     public string GetDocument(string query)

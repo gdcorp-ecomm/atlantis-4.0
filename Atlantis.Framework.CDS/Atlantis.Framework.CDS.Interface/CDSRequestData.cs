@@ -20,14 +20,14 @@ namespace Atlantis.Framework.CDS.Interface
       RequestTimeout = TimeSpan.FromSeconds(20);
     }
 
-    public CDSRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, string query, string objectId, DateTime activeDate)
+    public CDSRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, string query, string docId, DateTime activeDate)
       : this(shopperId, sourceUrl, orderId, pathway, pageCount, query)
     {
-      ObjectID = objectId;
+      DocumentId = docId;
       ActiveDate = activeDate;
     }
 
-    public string ObjectID { get; private set; }
+    public string DocumentId { get; private set; }
     public DateTime ActiveDate { get; private set; }
     public string Query { get; private set; }
 

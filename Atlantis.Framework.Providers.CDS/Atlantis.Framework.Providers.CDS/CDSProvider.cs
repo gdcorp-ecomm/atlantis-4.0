@@ -23,39 +23,6 @@ namespace Atlantis.Framework.Providers.CDS
 
     #region Implementation of ICDSProvider
 
-    public T GetModel<T>(string query) where T : new()
-    {
-      return GetModel<T>(query, null);
-    }
-
-    public T GetModel<T>(string query, Dictionary<string, string> customTokens) where T : new()
-    {
-
-      var data = string.Empty;
-      CDSResponseData responseData;
-      CDSTokenizer tokenizer = new CDSTokenizer();
-
-      T model = new T();
-      var serializer = new JavaScriptSerializer();
-
-      CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query);
-
-      try
-      {
-        responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, _REQUEST_TYPE);
-        if (responseData.IsSuccess)
-        {
-          data = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
-        }
-        model = serializer.Deserialize<T>(data);
-      }
-      catch (Exception ex)
-      {
-        Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, _shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount));
-      }
-      return model;
-    }
-
     public string GetJSON(string query)
     {
       return GetJSON(query, null);
@@ -83,17 +50,17 @@ namespace Atlantis.Framework.Providers.CDS
       return data;
     }
 
-    public string GetJSON(string query, string objectId, DateTime activeDate)
+    public string GetJSON(string query, string docId, DateTime activeDate)
     {
-      return GetJSON(query, null, objectId, activeDate);
+      return GetJSON(query, null, docId, activeDate);
     }
 
-    public string GetJSON(string query, Dictionary<string, string> customTokens, string objectId, DateTime activeDate)
+    public string GetJSON(string query, Dictionary<string, string> customTokens, string docId, DateTime activeDate)
     {
       string data = string.Empty;
       CDSResponseData responseData;
 
-      CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query, objectId, activeDate);
+      CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query, docId, activeDate);
 
       try
       {
@@ -115,28 +82,6 @@ namespace Atlantis.Framework.Providers.CDS
     {
       CDSTokenizer tokenizer = new CDSTokenizer();
       return (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
-    }
-
-    public string GetUnparsedJSON(string query)
-    {
-      var data = string.Empty;
-      CDSResponseData responseData;
-
-      CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query);
-
-      try
-      {
-        responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, 424);
-        if (responseData.IsSuccess)
-        {
-          data = responseData.ResponseData;
-        }
-      }
-      catch (Exception ex)
-      {
-        Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
-      }
-      return data;
     }
 
     #endregion

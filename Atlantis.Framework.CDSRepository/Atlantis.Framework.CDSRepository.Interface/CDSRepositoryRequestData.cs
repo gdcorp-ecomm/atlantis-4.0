@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
 using Atlantis.Framework.Interface;
-using MongoDB.Bson;
 
 namespace Atlantis.Framework.CDSRepository.Interface
 {
@@ -26,16 +25,16 @@ namespace Atlantis.Framework.CDSRepository.Interface
       string pathway,
       int pageCount,
       string query,
-      ObjectId objectId,
+      string docId,
       DateTime activeDate)
       : this(shopperId, sourceUrl, orderId, pathway, pageCount, query)
     {
-      ObjectID = objectId;
+      DocumentId = docId;
       ActiveDate = activeDate;
     }
 
     public string Query { get; private set; }
-    public ObjectId ObjectID { get; private set; }
+    public string DocumentId { get; private set; }
     public DateTime ActiveDate { get; private set; }
 
     public override string GetCacheMD5()

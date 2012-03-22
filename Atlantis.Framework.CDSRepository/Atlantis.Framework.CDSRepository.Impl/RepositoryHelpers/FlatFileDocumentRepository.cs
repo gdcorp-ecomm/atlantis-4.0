@@ -33,7 +33,7 @@ namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
 
     public string GetDocument(string query, ObjectId objectId, DateTime activeDate)
     {
-      throw new Exception("Not Implemented");
+      throw new NotImplementedException();
     }
 
     public string GetDocument(string query)

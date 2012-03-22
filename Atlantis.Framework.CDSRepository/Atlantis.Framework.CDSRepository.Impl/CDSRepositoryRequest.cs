@@ -36,10 +36,13 @@ namespace Atlantis.Framework.CDSRepository.Impl
           DocumentRepository = new FlatFileDocumentRepository(rootPath);
         }
 
-        bool bypassCache = (cdsRequestData.ObjectID != ObjectId.Empty) || (cdsRequestData.ActiveDate > default(DateTime));
+        ObjectId docId;
+        bool isValidObjectId = ObjectId.TryParse(cdsRequestData.DocumentId, out docId);
+
+        bool bypassCache = isValidObjectId || cdsRequestData.ActiveDate > default(DateTime);
         if (bypassCache)
         {
-          result = DocumentRepository.GetDocument(cdsRequestData.Query, cdsRequestData.ObjectID, cdsRequestData.ActiveDate);
+          result = DocumentRepository.GetDocument(cdsRequestData.Query, docId, cdsRequestData.ActiveDate);
         }
         else
         {

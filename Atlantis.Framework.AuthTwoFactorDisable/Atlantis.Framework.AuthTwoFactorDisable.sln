@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1AABC8D2-70EA-418A-9858-07051A9F929E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Auth.Interface", "..\Atlantis.Framework.Auth.Interface\Atlantis.Framework.Auth.Interface\Atlantis.Framework.Auth.Interface.csproj", "{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthTwoFactorDisable.Impl", "Atlantis.Framework.AuthTwoFactorDisable.Impl\Atlantis.Framework.AuthTwoFactorDisable.Impl.csproj", "{738339E7-16ED-4418-8892-1EF64950DDBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthTwoFactorDisable.Interface", "Atlantis.Framework.AuthTwoFactorDisable.Interface\Atlantis.Framework.AuthTwoFactorDisable.Interface.csproj", "{6A6FE272-AA4A-4357-821A-F78AEE8B4E72}"
+EndProject
+Project("{00000000-0000-0000-0000-000000000000}") = "Atlantis.Framework.AuthTwoFactorDisable.Tests", "Atlantis.Framework.AuthTwoFactorDisable.Tests\Atlantis.Framework.AuthTwoFactorDisable.Tests.csproj", "{D6B190A5-961C-4412-8F53-0304F4969C1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ServiceHelper", "..\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper.csproj", "{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.AuthTwoFactorDisable.sln
+		SccProjectName0 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.AuthTwoFactorDisable.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface.csproj
+		SccProjectName2 = ../Atlantis.Framework.Auth.Interface/Atlantis.Framework.Auth.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.AuthTwoFactorDisable.sln
+		SccProjectName3 = ../Atlantis.Framework.ServiceHelper/Atlantis.Framework.ServiceHelper
+		SccLocalPath3 = ..\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper
+		SccLocalPath4 = .
+		SccProjectUniqueName5 = Atlantis.Framework.AuthTwoFactorDisable.Impl\\Atlantis.Framework.AuthTwoFactorDisable.Impl.csproj
+		SccProjectName5 = Atlantis.Framework.AuthTwoFactorDisable.Impl
+		SccLocalPath5 = Atlantis.Framework.AuthTwoFactorDisable.Impl
+		SccProjectUniqueName6 = Atlantis.Framework.AuthTwoFactorDisable.Interface\\Atlantis.Framework.AuthTwoFactorDisable.Interface.csproj
+		SccProjectName6 = Atlantis.Framework.AuthTwoFactorDisable.Interface
+		SccLocalPath6 = Atlantis.Framework.AuthTwoFactorDisable.Interface
+		SccProjectUniqueName7 = Atlantis.Framework.AuthTwoFactorDisable.Tests\\Atlantis.Framework.AuthTwoFactorDisable.Tests.csproj
+		SccProjectName7 = Atlantis.Framework.AuthTwoFactorDisable.Tests
+		SccLocalPath7 = Atlantis.Framework.AuthTwoFactorDisable.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{738339E7-16ED-4418-8892-1EF64950DDBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{738339E7-16ED-4418-8892-1EF64950DDBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{738339E7-16ED-4418-8892-1EF64950DDBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{738339E7-16ED-4418-8892-1EF64950DDBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A6FE272-AA4A-4357-821A-F78AEE8B4E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A6FE272-AA4A-4357-821A-F78AEE8B4E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A6FE272-AA4A-4357-821A-F78AEE8B4E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A6FE272-AA4A-4357-821A-F78AEE8B4E72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6B190A5-961C-4412-8F53-0304F4969C1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B190A5-961C-4412-8F53-0304F4969C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B190A5-961C-4412-8F53-0304F4969C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B190A5-961C-4412-8F53-0304F4969C1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {1AABC8D2-70EA-418A-9858-07051A9F929E}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {1AABC8D2-70EA-418A-9858-07051A9F929E}
+		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6} = {1AABC8D2-70EA-418A-9858-07051A9F929E}
+	EndGlobalSection
+EndGlobal

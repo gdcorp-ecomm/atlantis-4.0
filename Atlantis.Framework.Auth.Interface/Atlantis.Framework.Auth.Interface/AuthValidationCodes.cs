@@ -9,5 +9,6 @@
     public const int ValidateHostNameRequired = -150;
     public const int ValidatePhoneRequired = -160;
     public const int ValidateCarrierRequired = -170;
+    public const int ValidateAuthTokenRequired = -180;
   }
 }

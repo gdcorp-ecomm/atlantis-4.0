@@ -1,0 +1,103 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A92A7D2A-331A-442D-BDE3-3F124F516452}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthTwoFactorSendToken.Impl", "Atlantis.Framework.AuthTwoFactorSendToken.Impl\Atlantis.Framework.AuthTwoFactorSendToken.Impl.csproj", "{351E6922-8AD6-43B9-AFCE-E0CC7E1A7B88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthTwoFactorSendToken.Interface", "Atlantis.Framework.AuthTwoFactorSendToken.Interface\Atlantis.Framework.AuthTwoFactorSendToken.Interface.csproj", "{51C90913-61D5-4799-B8B5-FE6707AADD7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthTwoFactorSendToken.Test", "Atlantis.Framework.AuthTwoFactorSendToken.Test\Atlantis.Framework.AuthTwoFactorSendToken.Test.csproj", "{E936BC9E-E258-40D9-9440-7210063B4D31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3CDEF5C9-01EB-415F-96A1-54D7721FF2F5}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.AuthTwoFactorSendToken.vsmdi = Atlantis.Framework.AuthTwoFactorSendToken.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ServiceHelper", "..\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper.csproj", "{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Auth.Interface", "..\Atlantis.Framework.Auth.Interface\Atlantis.Framework.Auth.Interface\Atlantis.Framework.Auth.Interface.csproj", "{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.AuthTwoFactorSendToken.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.AuthTwoFactorSendToken.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = Atlantis.Framework.AuthTwoFactorSendToken.Impl\\Atlantis.Framework.AuthTwoFactorSendToken.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.AuthTwoFactorSendToken.Impl
+		SccLocalPath3 = Atlantis.Framework.AuthTwoFactorSendToken.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.AuthTwoFactorSendToken.Interface\\Atlantis.Framework.AuthTwoFactorSendToken.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.AuthTwoFactorSendToken.Interface
+		SccLocalPath4 = Atlantis.Framework.AuthTwoFactorSendToken.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.AuthTwoFactorSendToken.Test\\Atlantis.Framework.AuthTwoFactorSendToken.Test.csproj
+		SccProjectName5 = Atlantis.Framework.AuthTwoFactorSendToken.Test
+		SccLocalPath5 = Atlantis.Framework.AuthTwoFactorSendToken.Test
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.AuthTwoFactorSendToken.sln
+		SccProjectName6 = ../Atlantis.Framework.ServiceHelper/Atlantis.Framework.ServiceHelper
+		SccLocalPath6 = ..\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface.csproj
+		SccProjectName7 = ../Atlantis.Framework.Auth.Interface/Atlantis.Framework.Auth.Interface
+		SccLocalPath7 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.AuthTwoFactorSendToken.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{351E6922-8AD6-43B9-AFCE-E0CC7E1A7B88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{351E6922-8AD6-43B9-AFCE-E0CC7E1A7B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{351E6922-8AD6-43B9-AFCE-E0CC7E1A7B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{351E6922-8AD6-43B9-AFCE-E0CC7E1A7B88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51C90913-61D5-4799-B8B5-FE6707AADD7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51C90913-61D5-4799-B8B5-FE6707AADD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51C90913-61D5-4799-B8B5-FE6707AADD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51C90913-61D5-4799-B8B5-FE6707AADD7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E936BC9E-E258-40D9-9440-7210063B4D31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E936BC9E-E258-40D9-9440-7210063B4D31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E936BC9E-E258-40D9-9440-7210063B4D31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E936BC9E-E258-40D9-9440-7210063B4D31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF0607A1-7EF3-423A-BB64-597FA2EC1DD5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A92A7D2A-331A-442D-BDE3-3F124F516452}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {A92A7D2A-331A-442D-BDE3-3F124F516452}
+		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6} = {A92A7D2A-331A-442D-BDE3-3F124F516452}
+	EndGlobalSection
+EndGlobal

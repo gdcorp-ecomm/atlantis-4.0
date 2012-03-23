@@ -16,7 +16,7 @@ namespace Atlantis.Framework.ValidateField.Impl.Data
 
     private static void LoadFieldValidation(string key)
     {
-      string resourcePath = "Atlantis.Framework.ValidateField.Impl." + key + ".xml";
+      string resourcePath = "Atlantis.Framework.ValidateField.Impl.Data." + key + ".xml";
       Assembly assembly = Assembly.GetExecutingAssembly();
       using (StreamReader textReader = new StreamReader(assembly.GetManifestResourceStream(resourcePath)))
       {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Atlantis.Framework.Interface;
 using System.Xml.Linq;
 
@@ -22,7 +21,7 @@ namespace Atlantis.Framework.ValidateField.Interface
       LengthRule = null;
       ExpressionRule = null;
 
-      if (string.IsNullOrEmpty(fieldValidationXml))
+      if (!string.IsNullOrEmpty(fieldValidationXml))
       {
         _fieldValidationDoc = XDocument.Parse(fieldValidationXml);
 

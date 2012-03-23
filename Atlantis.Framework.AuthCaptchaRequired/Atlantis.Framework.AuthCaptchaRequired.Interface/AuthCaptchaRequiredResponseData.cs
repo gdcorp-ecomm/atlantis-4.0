@@ -9,7 +9,6 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Interface
   [Serializable]
   public class AuthCaptchaRequiredResponseData : IResponseData
   {
-    public bool IsSuccess { get; set; }
     private AtlantisException _aex;
 
     public bool IsCaptchaRequired { get; private set; }
@@ -18,24 +17,24 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Interface
 
     public string StatusMessage { get; private set; }
 
-    public AuthCaptchaRequiredResponseData(bool isCaptchaRequired, HashSet<int> validationCodes, string statusMessage)
+    public long StatusCode { get; set; }
+
+    public AuthCaptchaRequiredResponseData(bool isCaptchaRequired, HashSet<int> validationCodes, long statusCode, string statusMessage)
     {
       IsCaptchaRequired = isCaptchaRequired;
       ValidationCodes = validationCodes;
-      IsSuccess = validationCodes.Count == 0;
-      StatusMessage = statusMessage;  
+      StatusMessage = statusMessage;
+      StatusCode = statusCode;
     }
 
     public AuthCaptchaRequiredResponseData(AtlantisException ex)
     {
       _aex = ex;
-      IsSuccess = false;
     }
 
     public AuthCaptchaRequiredResponseData(Exception ex, RequestData request)
     {
       _aex = new AtlantisException(request, "AuthCaptchaRequiredResponseData", ex.Message, string.Empty, ex);
-      IsSuccess = false;
     }
 
     public string ToXML()

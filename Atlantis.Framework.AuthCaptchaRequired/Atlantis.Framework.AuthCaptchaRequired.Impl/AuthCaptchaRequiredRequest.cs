@@ -27,6 +27,7 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Impl
         {
           var request = (AuthCaptchaRequiredRequestData)requestData;
           var isRequired = false;
+          long statusCode = TwoFactorWebserviceResponseCodes.Error;
 
           HashSet<int> validationCodes = ValidateRequest(request);
           string resultXml = string.Empty;
@@ -48,11 +49,11 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Impl
             }
             authService.ClientCertificates.Add(clientCert);
 
-            var retVal = (int)authService.CaptchaRequired(request.IPAddress);
-            isRequired = retVal == 1;
+           statusCode = authService.CaptchaRequired(request.IPAddress);
+           isRequired = statusCode == TwoFactorWebserviceResponseCodes.Success;
           }
 
-          responseData = new AuthCaptchaRequiredResponseData(isRequired, validationCodes, errorOutput);
+          responseData = new AuthCaptchaRequiredResponseData(isRequired, validationCodes, statusCode, errorOutput);
         }
       }
       catch (Exception ex)

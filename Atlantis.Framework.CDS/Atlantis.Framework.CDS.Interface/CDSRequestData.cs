@@ -38,7 +38,7 @@ namespace Atlantis.Framework.CDS.Interface
       if (nvc.Count > 0)
       {
         string appendChar = Query.Contains("?") ? "&" : "?";
-        Query = string.Format("{0}{1}{2}", Query, appendChar, ToQueryString(nvc));
+        Query += string.Concat(appendChar, ToQueryString(nvc));
       }
     }
 

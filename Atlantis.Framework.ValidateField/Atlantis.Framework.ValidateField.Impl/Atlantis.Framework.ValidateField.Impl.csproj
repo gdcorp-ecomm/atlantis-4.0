@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Resources.cs" />
+    <Compile Include="Data\FieldValidationData.cs" />
     <Compile Include="ValidateFieldRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

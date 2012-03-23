@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Atlantis.Framework.ValidateField.Impl.Data
 {
-  internal static class Resources
+  internal static class FieldValidationData
   {
     static Dictionary<string, string> _fieldValidations = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
 
-    static Resources()
+    static FieldValidationData()
     {
       LoadFieldValidation("password");
     }

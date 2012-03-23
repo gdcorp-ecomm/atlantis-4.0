@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 using Atlantis.Framework.Interface;
+using System.Collections.Concurrent;
 
 namespace Atlantis.Framework.Engine
 {
@@ -22,11 +23,17 @@ namespace Atlantis.Framework.Engine
 
     static Exception _lastLoggingException;
     static LoggingStatusType _loggingStatus;
+    static ConcurrentBag<AtlantisException> _recentExceptions;
+    static volatile int _maxRecentExceptions = 20;
 
     // Thread-safe class initializer
     // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnbda/html/singletondespatt.asp
     static Engine()
     {
+      _lastLoggingException = null;
+      _loggingStatus = LoggingStatusType.WorkingNormally;
+      _recentExceptions = new ConcurrentBag<AtlantisException>();
+
       _requestLock = new EngineLock();
       _requestItems = new Dictionary<string, IRequest>();
 
@@ -34,8 +41,6 @@ namespace Atlantis.Framework.Engine
       _asyncRequestItems = new Dictionary<string, IAsyncRequest>();
 
       _engineConfig = new EngineConfig();
-      _lastLoggingException = null;
-      _loggingStatus = LoggingStatusType.WorkingNormally;
     }
 
     #region Standard Requests
@@ -274,6 +279,14 @@ namespace Atlantis.Framework.Engine
                           exAtlantis.ClientIP, exAtlantis.Pathway, exAtlantis.PageCount);
           _loggingStatus = LoggingStatusType.WorkingNormally;
         }
+
+        // Capture Recent Exceptions
+        if (_recentExceptions.Count >= _maxRecentExceptions)
+        {
+          AtlantisException removed;
+          _recentExceptions.TryTake(out removed);
+        }
+        _recentExceptions.Add(exAtlantis);
       }
       catch (Exception ex)
       {
@@ -290,6 +303,18 @@ namespace Atlantis.Framework.Engine
     public static Exception LastLoggingError
     {
       get { return _lastLoggingException; }
+    }
+
+    public static List<AtlantisException> GetRecentExceptions()
+    {
+      List<AtlantisException> result = new List<AtlantisException>(_recentExceptions);
+      return result;
+    }
+
+    public static int MaxRecentExceptions
+    {
+      get { return _maxRecentExceptions; }
+      set { _maxRecentExceptions = value; }
     }
 
     #endregion

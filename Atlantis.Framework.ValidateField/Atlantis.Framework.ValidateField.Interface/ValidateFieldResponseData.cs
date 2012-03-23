@@ -12,36 +12,71 @@ namespace Atlantis.Framework.ValidateField.Interface
     AtlantisException _exception = null;
     XDocument _fieldValidationDoc;
 
-    public bool HasLengthRules { get; private set; }
-    public bool HasExpressionRules { get; private set; }
+    public ValidationRuleLength LengthRule { get; private set; }
+    public ValidationRuleRegEx ExpressionRule { get; private set; }
     public string FieldType { get; private set; }
-    public int MinLength { get; private set; }
-    public int MaxLenght { get; private set; }
 
-    private ValidateFieldResponseData()
+    public ValidateFieldResponseData(string fieldValidationXml)
     {
-      HasLengthRules = false;
-      HasExpressionRules = false;
-    }
+      FieldType = "none";
+      LengthRule = null;
+      ExpressionRule = null;
 
-    public ValidateFieldResponseData(string fieldValidationXml) : this()
-    {
       if (string.IsNullOrEmpty(fieldValidationXml))
       {
         _fieldValidationDoc = XDocument.Parse(fieldValidationXml);
+
+        XAttribute fieldTypeAttribute = _fieldValidationDoc.Root.Attribute("type");
+        if (fieldTypeAttribute != null)
+        {
+          FieldType = fieldTypeAttribute.Value;
+        }
+
+        XElement lengthRuleElement = _fieldValidationDoc.Root.Descendants("length").FirstOrDefault();
+        if (lengthRuleElement != null)
+        {
+          LengthRule = new ValidationRuleLength(lengthRuleElement);
+        }
+
+        XElement expressionRuleElement = _fieldValidationDoc.Root.Descendants("regex").FirstOrDefault();
+        if (expressionRuleElement != null)
+        {
+          ExpressionRule = new ValidationRuleRegEx(expressionRuleElement);
+        }
+      }
+      else
+      {
+        _fieldValidationDoc = XDocument.Parse("<validatefield type=\"none\" />");
       }
     }
 
-    public ValidateFieldResponseData(RequestData requestData, Exception ex) : this()
+    public ValidateFieldResponseData(RequestData requestData, Exception ex)
     {
       _exception = new AtlantisException(requestData, "ValidateFieldResponse", ex.Message, ex.StackTrace, ex);
+    }
+
+    public bool ValidateStringField(string valueToValidate, out List<ValidationFailure> failures)
+    {
+      failures = new List<ValidationFailure>();
+
+      if ((LengthRule != null) && (!LengthRule.IsValid(valueToValidate)))
+      {
+        failures.Add(LengthRule.FailureInfo);
+      }
+
+      if ((ExpressionRule != null) && (!ExpressionRule.IsValid(valueToValidate)))
+      {
+        failures.Add(ExpressionRule.FailureInfo);
+      }
+
+      return (failures.Count == 0);
     }
 
     #region IResponseData Members
 
     public string ToXML()
     {
-      throw new NotImplementedException();
+      return _fieldValidationDoc.ToString(SaveOptions.DisableFormatting);
     }
 
     public AtlantisException GetException()

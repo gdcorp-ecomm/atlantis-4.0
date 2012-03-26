@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using Atlantis.Framework.EcommActivationData.Interface;
 using Atlantis.Framework.Interface;
 
@@ -13,6 +14,7 @@ namespace Atlantis.Framework.EcommActivationData.Impl
       try
       {
         string sResponseXML = "";
+        XmlDocument responseDoc = new XmlDocument();
         try
         {
           EcommActivationDataRequestData ecommActivationDataRequestData = (EcommActivationDataRequestData)requestData;
@@ -23,6 +25,7 @@ namespace Atlantis.Framework.EcommActivationData.Impl
             activationSvc.Timeout = (int)ecommActivationDataRequestData.RequestTimeout.TotalMilliseconds;
             activationSvc.ClientCertificates.Add(requestData.GetCertificateByConfig(config));
             sResponseXML = activationSvc.GetSetupData(requestData.ShopperID, requestData.OrderID);
+            responseDoc.LoadXml(sResponseXML);
           }
           if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
           {
@@ -34,7 +37,9 @@ namespace Atlantis.Framework.EcommActivationData.Impl
             responseData = new EcommActivationDataResponseData(sResponseXML, exAtlantis);
           }
           else
-            responseData = new EcommActivationDataResponseData(sResponseXML);
+          {
+            responseData = new EcommActivationDataResponseData(responseDoc);
+          }
         }
         catch (AtlantisException exAtlantis)
         {

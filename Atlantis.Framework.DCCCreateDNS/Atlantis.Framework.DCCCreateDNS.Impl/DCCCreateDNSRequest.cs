@@ -10,19 +10,23 @@ namespace Atlantis.Framework.DCCCreateDNS.Impl
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
       DCCCreateDNSResponseData responseData;
+
       string responseXml = string.Empty;
       DnsApi.dnssoapapi dnsApi = null;
 
       try
       {
         DCCCreateDNSRequestData oRequest = (DCCCreateDNSRequestData)oRequestData;
-        
+
         dnsApi = new DnsApi.dnssoapapi();
         dnsApi.Url = ((WsConfigElement)oConfig).WSURL;
         dnsApi.Timeout = (int)oRequest.RequestTimeout.TotalMilliseconds;
-        
+
+        //changed 3/22/2012 to make client id configurable 
+        //Add the following value to the atlantis.config file
+        //<ConfigValue key="DnsApi.Clientid" value="gdmobile" />
         DnsApi.authDataType oAuth = new DnsApi.authDataType();
-        oAuth.clientid = "gdmobile";
+        oAuth.clientid = oConfig.GetConfigValue("DnsApi.Clientid");
         dnsApi.clientAuth = oAuth;
 
         DnsApi.custDataType oCust = new DnsApi.custDataType();
@@ -31,7 +35,7 @@ namespace Atlantis.Framework.DCCCreateDNS.Impl
         oCust.origin = oRequest.Origin;
         dnsApi.custInfo = oCust;
 
-        DnsApi.booleanResponseType oResult = dnsApi.createRecords(oRequest.DomainName, CreateDnsRecordArray( oRequest ) );
+        DnsApi.booleanResponseType oResult = dnsApi.createRecords(oRequest.DomainName, CreateDnsRecordArray(oRequest));
 
         if (oResult.errorcode == 0)
         {
@@ -60,7 +64,7 @@ namespace Atlantis.Framework.DCCCreateDNS.Impl
       }
       finally
       {
-        if(dnsApi != null)
+        if (dnsApi != null)
         {
           dnsApi.Dispose();
         }
@@ -84,31 +88,31 @@ namespace Atlantis.Framework.DCCCreateDNS.Impl
         dnsRecord.protocol = record.Protocol;
         dnsRecord.service = record.Service;
         dnsRecord.status = record.Status;
-        
-        if(record.Weight > 0)
+
+        if (record.Weight > 0)
         {
           dnsRecord.weightSpecified = true;
           dnsRecord.weight = record.Weight;
         }
 
-        if(record.Port > 0)
+        if (record.Port > 0)
         {
           dnsRecord.portSpecified = true;
           dnsRecord.port = record.Port;
         }
-        
-        if(record.Priority > 0)
+
+        if (record.Priority > 0)
         {
           dnsRecord.prioritySpecified = true;
           dnsRecord.priority = record.Priority;
         }
-        
+
         if (record.TTL > 0)
         {
           dnsRecord.ttl = record.TTL;
           dnsRecord.ttlSpecified = true;
         }
-        
+
         oRecords.Add(dnsRecord);
       }
 

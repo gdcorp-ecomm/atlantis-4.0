@@ -123,7 +123,7 @@ gdshop_activationStatusID="1">
       sampleResponse.Append("<item row_id=\"0\" gdshop_product_typeID=\"130\" pf_id=\"70761\" resource_id=\"440806\" externalResourceID=\"{E56292FE-748D-11E1-A754-14FEB5E7B468}\" gdshop_activationStatusID=\"3\">");
       sampleResponse.Append("<InstantPageSetup domain=\"mydomain.com\" title=\"mydomain.com Instant Page.\" description=\"mydomain.com Instant Page.\" backgroundID=\"109\" email=\"info@mydomain.com\" promoCode=\"MyPromo\"/>");
       sampleResponse.Append("</item>");
-      sampleResponse.Append("<item row_id=\"0\" gdshop_product_typeID=\"16\" pf_id=\"1865\" resource_id=\"440807\" externalResourceID=\"{3ACF2160-034D-4F35-94CA-CA612A4B1ABF}\" gdshop_activationStatusID=\"4\">");
+      sampleResponse.Append("<item row_id=\"0\" gdshop_product_typeID=\"16\" pf_id=\"1865\" resource_id=\"440807\" externalResourceID=\"{3ACF2160-034D-4F35-94CA-CA612A4B1ABF}\" gdshop_activationStatusID=\"1\">");
       sampleResponse.Append("<Setup domain=\"mydomain.com\" email=\"info@mydomain.com\" password=\"MyP3QYUds\" diskspaceMB=\"1024000\" smtpRelays=\"250\" hasSpamFilter=\"1\"/>");
       sampleResponse.Append("</item> ");
       sampleResponse.Append("</FreeProducts>");
@@ -132,16 +132,8 @@ gdshop_activationStatusID="1">
       result.LoadXml(sampleResponse.ToString());
       EcommActivationDataResponseData response1 = new EcommActivationDataResponseData(result);
       System.Diagnostics.Debug.WriteLine(response1.IsAllActivated);
-      foreach (ProductInfo currentProduct in response1.FreeProducts)
-      {
-        foreach (ActivatedProducts currentFree in currentProduct.ActivatedProducts)
-        {
-          if (currentFree.ProductType == ProductInfo.PRODUCT_TYPE_EMAIL)
-          {
-            System.Diagnostics.Debug.WriteLine(currentFree.Password);
-          }
-        }
-      }
+      System.Diagnostics.Debug.WriteLine(response1.IsAllTypeActivated(ProductInfo.PRODUCT_TYPE_EMAIL));
+      System.Diagnostics.Debug.WriteLine(response1.IsAllTypeActivated(ProductInfo.PRODUCT_TYPE_INSTANTPAGE));
     }
   }
 }

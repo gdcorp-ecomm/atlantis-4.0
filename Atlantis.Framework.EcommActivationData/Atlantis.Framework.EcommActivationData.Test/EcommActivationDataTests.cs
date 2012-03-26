@@ -12,10 +12,11 @@ namespace Atlantis.Framework.EcommActivationData.Test
   [TestClass]
   public class GetEcommActivationDataTests
   {
-  
-    private const string _shopperId = "";
-	
-	
+
+    private const string _shopperId = "853392";
+    private const string _orderId = "1464901";
+    private const int _requestType = 518;
+
     public GetEcommActivationDataTests()
     {
       //
@@ -64,24 +65,23 @@ namespace Atlantis.Framework.EcommActivationData.Test
     #endregion
 
     [TestMethod]
-	[DeploymentItem("atlantis.config")]
+    [DeploymentItem("atlantis.config")]
     public void EcommActivationDataTest()
     {
-     EcommActivationDataRequestData request = new EcommActivationDataRequestData(_shopperId
-        , string.Empty
-        , string.Empty
-        , string.Empty
-        , 0 );
-     int _requestType = 0;
+      EcommActivationDataRequestData request = new EcommActivationDataRequestData(_shopperId
+         , string.Empty
+         ,_orderId
+         , string.Empty
+         , 0);      
       EcommActivationDataResponseData response = (EcommActivationDataResponseData)Engine.Engine.ProcessRequest(request, _requestType);
-      
-	  // Cache call
-	  //EcommActivationDataResponseData response = (EcommActivationDataResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
+
+      // Cache call
+      //EcommActivationDataResponseData response = (EcommActivationDataResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
 
       //
       // TODO: Add test logic here
       //
-	  
+
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
     }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.EcommActivationData.Interface
@@ -11,15 +8,15 @@ namespace Atlantis.Framework.EcommActivationData.Interface
 
     public EcommActivationDataRequestData(string shopperId,
                                   string sourceUrl,
-                                  string orderIo,
+                                  string orderId,
                                   string pathway,
                                   int pageCount)
-      : base(shopperId, sourceUrl, orderIo, pathway, pageCount)
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     { }
 
     public override string GetCacheMD5()
     {
-      throw new NotImplementedException("GetCacheMD5 not implemented in EcommActivationDataRequestData");     
+      throw new NotImplementedException("Do not Implement Caching on Activation Data");
     }
 
 

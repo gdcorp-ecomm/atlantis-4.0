@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.EcommActivationData.Interface
@@ -20,14 +17,21 @@ namespace Atlantis.Framework.EcommActivationData.Interface
       }
     }
 
-    public EcommActivationDataResponseData(string xml)
+    public EcommActivationDataResponseData(string responseXML)
     {
-
+      this._success = true;
+      this._resultXML = responseXML;
     }
 
-     public EcommActivationDataResponseData(AtlantisException atlantisException)
+    public EcommActivationDataResponseData(AtlantisException atlantisException)
+    {
+      this._exception = atlantisException;      
+    }
+
+    public EcommActivationDataResponseData(string responseXML, AtlantisException atlantisException)
     {
       this._exception = atlantisException;
+      this._resultXML = responseXML;
     }
 
     public EcommActivationDataResponseData(RequestData requestData, Exception exception)

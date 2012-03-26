@@ -86,7 +86,7 @@ namespace Atlantis.Framework.EcommActivationData.Test
         {
           foreach (ActivatedProducts currentFree in currentProduct.ActivatedProducts)
           {
-            if (currentFree.ProductType == ProductInfo.EmailType)
+            if (currentFree.ProductType == ProductInfo.PRODUCT_TYPE_EMAIL)
             {
               System.Diagnostics.Debug.WriteLine(currentFree.Password);
             }

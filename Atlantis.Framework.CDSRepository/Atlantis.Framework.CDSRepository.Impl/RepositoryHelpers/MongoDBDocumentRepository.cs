@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Atlantis.Framework.CDSRepository.Interface;
-using MongoDB.Driver;
 using MongoDB.Bson;
+using MongoDB.Bson.IO;
+using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
 namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
@@ -37,9 +36,9 @@ namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
       MongoDatabase db = server.GetDatabase("cds");
       MongoCollection<BsonDocument> lps = db.GetCollection<BsonDocument>("pages");
       var mongoQuery = Query.EQ("url", query);
-      var doc = lps.Find(mongoQuery).SetFields(Fields.Exclude("_id", "pageId", "activeDate")).SetLimit(1).FirstOrDefault();
-      //var doc = lps.FindOne(mongoQuery); // this returns json with the ObjectId NOT in proper JSON format
-      json = doc.ToJson<MongoDB.Bson.BsonDocument>();
+      var doc = lps.FindOne(mongoQuery);
+      var jsonWriterSettings = new JsonWriterSettings { OutputMode = JsonOutputMode.Strict };
+      json = doc.ToJson<MongoDB.Bson.BsonDocument>(jsonWriterSettings);
 
       if (string.IsNullOrWhiteSpace(json) || json=="null")
       {
@@ -67,8 +66,9 @@ namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
         mongoQuery = Query.EQ("_id", objectId);
       }
 
-      var doc = lps.Find(mongoQuery).SetFields(Fields.Exclude("_id", "pageId", "activeDate")).SetLimit(1).FirstOrDefault();
-      json = doc.ToJson<MongoDB.Bson.BsonDocument>();
+      var doc = lps.Find(mongoQuery).SetLimit(1).FirstOrDefault();
+      var jsonWriterSettings = new JsonWriterSettings { OutputMode = JsonOutputMode.Strict };
+      json = doc.ToJson<MongoDB.Bson.BsonDocument>(jsonWriterSettings);
 
       if (string.IsNullOrWhiteSpace(json) || json == "null")
       {

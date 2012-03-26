@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ElementBase.cs" />
+    <Compile Include="PaymentSplitTestData.cs" />
     <Compile Include="PaymentUseLineOfCredit.cs" />
     <Compile Include="PaymentUseNetGiro.cs" />
     <Compile Include="PurchaseBasketRequestData.cs" />

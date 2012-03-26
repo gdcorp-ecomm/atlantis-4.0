@@ -51,8 +51,8 @@ namespace Atlantis.Framework.AuthTwoFactorValidateToken.Impl
             }
             authService.ClientCertificates.Add(clientCert);
 
-            statusCode = (int)authService.ValidateToken(request.ShopperID, request.AuthToken, request.PhoneNumber, request.HostName, request.IPAddress, out errorOutput);
-            isValidToken = statusCode == 1;
+            statusCode = authService.ValidateToken(request.ShopperID, request.AuthToken, request.PhoneNumber, request.HostName, request.IPAddress, out errorOutput);
+            isValidToken = statusCode == TwoFactorWebserviceResponseCodes.Success;
           }
 
           responseData = new AuthTwoFactorValidateTokenResponseData(isValidToken, validationCodes, statusCode, errorOutput);
@@ -75,8 +75,7 @@ namespace Atlantis.Framework.AuthTwoFactorValidateToken.Impl
       #region AuthToken
       if (string.IsNullOrEmpty(request.AuthToken))
       {
-        //TODO: Add the following validation code.
-       // result.Add(AuthValidationCodes.ValidateTokenRequired)
+        result.Add(AuthValidationCodes.ValidateAuthTokenRequired);
       }
       #endregion
 

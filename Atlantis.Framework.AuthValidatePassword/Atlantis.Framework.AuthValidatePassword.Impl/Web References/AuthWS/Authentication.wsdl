@@ -1,0 +1,1220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetHint">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sStreet" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHintResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetHintResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPwdHint" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Verify">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="VerifyResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sValidationSource" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAuthToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAuthTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetAuthTokenResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sGUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sNewPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sNewHint" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ResetPasswordResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LookupNamespace">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sNamespace" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LookupNamespaceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Authorize">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthorizeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AuthorizeResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsStrongPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsStrongPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsStrongPasswordResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangePassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sCurrentPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sNewPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sNewHint" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sNewLogin" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lStrong" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangePasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangePasswordResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDigestAuth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRealm" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sURI" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sNonce" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sQOP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sClientNonce" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sNonceCount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sResponse" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateDigestAuthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidateDigestAuthResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthorizeAPIReseller">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthorizeAPIResellerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AuthorizeAPIResellerResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidatePIN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPIN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidatePINResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidatePINResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrievePIN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrievePINResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RetrievePINResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPIN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendPasswordResetEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendPasswordResetEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendPasswordResetEmailResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sResultXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendPasswordResetEmailIntl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sLocalizationCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendPasswordResetEmailIntlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendPasswordResetEmailIntlResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sResultXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CaptchaRequired">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CaptchaRequiredResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CaptchaRequiredResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnableTwoFactor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPhoneXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnableTwoFactorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EnableTwoFactorResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DisableTwoFactor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DisableTwoFactorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DisableTwoFactorResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingTwoFactor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lPrivateLabelID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingTwoFactorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeletePendingTwoFactorResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StopPhone">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPhoneNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StopPhoneResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeletePhone">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePhoneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeletePhoneResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPhone">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPhoneXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPhoneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddPhoneResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPhones">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPhonesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetPhonesResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPhonesXML" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidateTokenResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActivatePhone">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActivatePhoneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActivatePhoneResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIPAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendTokenResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidatePassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidatePasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidatePasswordResult" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="sError" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetHintSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHint" />
+  </wsdl:message>
+  <wsdl:message name="GetHintSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHintResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifySoapIn">
+    <wsdl:part name="parameters" element="tns:Verify" />
+  </wsdl:message>
+  <wsdl:message name="VerifySoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAuthToken" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAuthTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetPassword" />
+  </wsdl:message>
+  <wsdl:message name="ResetPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="LookupNamespaceSoapIn">
+    <wsdl:part name="parameters" element="tns:LookupNamespace" />
+  </wsdl:message>
+  <wsdl:message name="LookupNamespaceSoapOut">
+    <wsdl:part name="parameters" element="tns:LookupNamespaceResponse" />
+  </wsdl:message>
+  <wsdl:message name="AuthorizeSoapIn">
+    <wsdl:part name="parameters" element="tns:Authorize" />
+  </wsdl:message>
+  <wsdl:message name="AuthorizeSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthorizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsStrongPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:IsStrongPassword" />
+  </wsdl:message>
+  <wsdl:message name="IsStrongPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:IsStrongPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangePassword" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDigestAuthSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateDigestAuth" />
+  </wsdl:message>
+  <wsdl:message name="ValidateDigestAuthSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateDigestAuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="AuthorizeAPIResellerSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthorizeAPIReseller" />
+  </wsdl:message>
+  <wsdl:message name="AuthorizeAPIResellerSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthorizeAPIResellerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePINSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidatePIN" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePINSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidatePINResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetrievePINSoapIn">
+    <wsdl:part name="parameters" element="tns:RetrievePIN" />
+  </wsdl:message>
+  <wsdl:message name="RetrievePINSoapOut">
+    <wsdl:part name="parameters" element="tns:RetrievePINResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:SendPasswordResetEmail" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:SendPasswordResetEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailIntlSoapIn">
+    <wsdl:part name="parameters" element="tns:SendPasswordResetEmailIntl" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailIntlSoapOut">
+    <wsdl:part name="parameters" element="tns:SendPasswordResetEmailIntlResponse" />
+  </wsdl:message>
+  <wsdl:message name="CaptchaRequiredSoapIn">
+    <wsdl:part name="parameters" element="tns:CaptchaRequired" />
+  </wsdl:message>
+  <wsdl:message name="CaptchaRequiredSoapOut">
+    <wsdl:part name="parameters" element="tns:CaptchaRequiredResponse" />
+  </wsdl:message>
+  <wsdl:message name="EnableTwoFactorSoapIn">
+    <wsdl:part name="parameters" element="tns:EnableTwoFactor" />
+  </wsdl:message>
+  <wsdl:message name="EnableTwoFactorSoapOut">
+    <wsdl:part name="parameters" element="tns:EnableTwoFactorResponse" />
+  </wsdl:message>
+  <wsdl:message name="DisableTwoFactorSoapIn">
+    <wsdl:part name="parameters" element="tns:DisableTwoFactor" />
+  </wsdl:message>
+  <wsdl:message name="DisableTwoFactorSoapOut">
+    <wsdl:part name="parameters" element="tns:DisableTwoFactorResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingTwoFactorSoapIn">
+    <wsdl:part name="parameters" element="tns:DeletePendingTwoFactor" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingTwoFactorSoapOut">
+    <wsdl:part name="parameters" element="tns:DeletePendingTwoFactorResponse" />
+  </wsdl:message>
+  <wsdl:message name="StopPhoneSoapIn">
+    <wsdl:part name="parameters" element="tns:StopPhone" />
+  </wsdl:message>
+  <wsdl:message name="StopPhoneSoapOut">
+    <wsdl:part name="parameters" element="tns:StopPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeletePhoneSoapIn">
+    <wsdl:part name="parameters" element="tns:DeletePhone" />
+  </wsdl:message>
+  <wsdl:message name="DeletePhoneSoapOut">
+    <wsdl:part name="parameters" element="tns:DeletePhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddPhoneSoapIn">
+    <wsdl:part name="parameters" element="tns:AddPhone" />
+  </wsdl:message>
+  <wsdl:message name="AddPhoneSoapOut">
+    <wsdl:part name="parameters" element="tns:AddPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPhonesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPhones" />
+  </wsdl:message>
+  <wsdl:message name="GetPhonesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPhonesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateToken" />
+  </wsdl:message>
+  <wsdl:message name="ValidateTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActivatePhoneSoapIn">
+    <wsdl:part name="parameters" element="tns:ActivatePhone" />
+  </wsdl:message>
+  <wsdl:message name="ActivatePhoneSoapOut">
+    <wsdl:part name="parameters" element="tns:ActivatePhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:SendToken" />
+  </wsdl:message>
+  <wsdl:message name="SendTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:SendTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidatePassword" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidatePasswordResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AuthenticationSoap">
+    <wsdl:operation name="GetHint">
+      <wsdl:input message="tns:GetHintSoapIn" />
+      <wsdl:output message="tns:GetHintSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Verify">
+      <wsdl:input message="tns:VerifySoapIn" />
+      <wsdl:output message="tns:VerifySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthToken">
+      <wsdl:input message="tns:GetAuthTokenSoapIn" />
+      <wsdl:output message="tns:GetAuthTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <wsdl:input message="tns:ResetPasswordSoapIn" />
+      <wsdl:output message="tns:ResetPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupNamespace">
+      <wsdl:input message="tns:LookupNamespaceSoapIn" />
+      <wsdl:output message="tns:LookupNamespaceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Authorize">
+      <wsdl:input message="tns:AuthorizeSoapIn" />
+      <wsdl:output message="tns:AuthorizeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsStrongPassword">
+      <wsdl:input message="tns:IsStrongPasswordSoapIn" />
+      <wsdl:output message="tns:IsStrongPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:input message="tns:ChangePasswordSoapIn" />
+      <wsdl:output message="tns:ChangePasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDigestAuth">
+      <wsdl:input message="tns:ValidateDigestAuthSoapIn" />
+      <wsdl:output message="tns:ValidateDigestAuthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizeAPIReseller">
+      <wsdl:input message="tns:AuthorizeAPIResellerSoapIn" />
+      <wsdl:output message="tns:AuthorizeAPIResellerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePIN">
+      <wsdl:input message="tns:ValidatePINSoapIn" />
+      <wsdl:output message="tns:ValidatePINSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrievePIN">
+      <wsdl:input message="tns:RetrievePINSoapIn" />
+      <wsdl:output message="tns:RetrievePINSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <wsdl:input message="tns:SendPasswordResetEmailSoapIn" />
+      <wsdl:output message="tns:SendPasswordResetEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmailIntl">
+      <wsdl:input message="tns:SendPasswordResetEmailIntlSoapIn" />
+      <wsdl:output message="tns:SendPasswordResetEmailIntlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CaptchaRequired">
+      <wsdl:input message="tns:CaptchaRequiredSoapIn" />
+      <wsdl:output message="tns:CaptchaRequiredSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EnableTwoFactor">
+      <wsdl:input message="tns:EnableTwoFactorSoapIn" />
+      <wsdl:output message="tns:EnableTwoFactorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DisableTwoFactor">
+      <wsdl:input message="tns:DisableTwoFactorSoapIn" />
+      <wsdl:output message="tns:DisableTwoFactorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingTwoFactor">
+      <wsdl:input message="tns:DeletePendingTwoFactorSoapIn" />
+      <wsdl:output message="tns:DeletePendingTwoFactorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StopPhone">
+      <wsdl:input message="tns:StopPhoneSoapIn" />
+      <wsdl:output message="tns:StopPhoneSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePhone">
+      <wsdl:input message="tns:DeletePhoneSoapIn" />
+      <wsdl:output message="tns:DeletePhoneSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPhone">
+      <wsdl:input message="tns:AddPhoneSoapIn" />
+      <wsdl:output message="tns:AddPhoneSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPhones">
+      <wsdl:input message="tns:GetPhonesSoapIn" />
+      <wsdl:output message="tns:GetPhonesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateToken">
+      <wsdl:input message="tns:ValidateTokenSoapIn" />
+      <wsdl:output message="tns:ValidateTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActivatePhone">
+      <wsdl:input message="tns:ActivatePhoneSoapIn" />
+      <wsdl:output message="tns:ActivatePhoneSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendToken">
+      <wsdl:input message="tns:SendTokenSoapIn" />
+      <wsdl:output message="tns:SendTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePassword">
+      <wsdl:input message="tns:ValidatePasswordSoapIn" />
+      <wsdl:output message="tns:ValidatePasswordSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AuthenticationSoap" type="tns:AuthenticationSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetHint">
+      <soap:operation soapAction="http://tempuri.org/GetHint" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Verify">
+      <soap:operation soapAction="http://tempuri.org/Verify" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthToken">
+      <soap:operation soapAction="http://tempuri.org/GetAuthToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap:operation soapAction="http://tempuri.org/ResetPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupNamespace">
+      <soap:operation soapAction="http://tempuri.org/LookupNamespace" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authorize">
+      <soap:operation soapAction="http://tempuri.org/Authorize" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsStrongPassword">
+      <soap:operation soapAction="http://tempuri.org/IsStrongPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap:operation soapAction="http://tempuri.org/ChangePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDigestAuth">
+      <soap:operation soapAction="http://tempuri.org/ValidateDigestAuth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizeAPIReseller">
+      <soap:operation soapAction="http://tempuri.org/AuthorizeAPIReseller" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePIN">
+      <soap:operation soapAction="http://tempuri.org/ValidatePIN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrievePIN">
+      <soap:operation soapAction="http://tempuri.org/RetrievePIN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <soap:operation soapAction="http://tempuri.org/SendPasswordResetEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmailIntl">
+      <soap:operation soapAction="http://tempuri.org/SendPasswordResetEmailIntl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CaptchaRequired">
+      <soap:operation soapAction="http://tempuri.org/CaptchaRequired" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnableTwoFactor">
+      <soap:operation soapAction="http://tempuri.org/EnableTwoFactor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableTwoFactor">
+      <soap:operation soapAction="http://tempuri.org/DisableTwoFactor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingTwoFactor">
+      <soap:operation soapAction="http://tempuri.org/DeletePendingTwoFactor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StopPhone">
+      <soap:operation soapAction="http://tempuri.org/StopPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePhone">
+      <soap:operation soapAction="http://tempuri.org/DeletePhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPhone">
+      <soap:operation soapAction="http://tempuri.org/AddPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhones">
+      <soap:operation soapAction="http://tempuri.org/GetPhones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateToken">
+      <soap:operation soapAction="http://tempuri.org/ValidateToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivatePhone">
+      <soap:operation soapAction="http://tempuri.org/ActivatePhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendToken">
+      <soap:operation soapAction="http://tempuri.org/SendToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePassword">
+      <soap:operation soapAction="http://tempuri.org/ValidatePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AuthenticationSoap12" type="tns:AuthenticationSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetHint">
+      <soap12:operation soapAction="http://tempuri.org/GetHint" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Verify">
+      <soap12:operation soapAction="http://tempuri.org/Verify" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthToken">
+      <soap12:operation soapAction="http://tempuri.org/GetAuthToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap12:operation soapAction="http://tempuri.org/ResetPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupNamespace">
+      <soap12:operation soapAction="http://tempuri.org/LookupNamespace" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authorize">
+      <soap12:operation soapAction="http://tempuri.org/Authorize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsStrongPassword">
+      <soap12:operation soapAction="http://tempuri.org/IsStrongPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap12:operation soapAction="http://tempuri.org/ChangePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDigestAuth">
+      <soap12:operation soapAction="http://tempuri.org/ValidateDigestAuth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizeAPIReseller">
+      <soap12:operation soapAction="http://tempuri.org/AuthorizeAPIReseller" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePIN">
+      <soap12:operation soapAction="http://tempuri.org/ValidatePIN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrievePIN">
+      <soap12:operation soapAction="http://tempuri.org/RetrievePIN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <soap12:operation soapAction="http://tempuri.org/SendPasswordResetEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmailIntl">
+      <soap12:operation soapAction="http://tempuri.org/SendPasswordResetEmailIntl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CaptchaRequired">
+      <soap12:operation soapAction="http://tempuri.org/CaptchaRequired" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnableTwoFactor">
+      <soap12:operation soapAction="http://tempuri.org/EnableTwoFactor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableTwoFactor">
+      <soap12:operation soapAction="http://tempuri.org/DisableTwoFactor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingTwoFactor">
+      <soap12:operation soapAction="http://tempuri.org/DeletePendingTwoFactor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StopPhone">
+      <soap12:operation soapAction="http://tempuri.org/StopPhone" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePhone">
+      <soap12:operation soapAction="http://tempuri.org/DeletePhone" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPhone">
+      <soap12:operation soapAction="http://tempuri.org/AddPhone" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhones">
+      <soap12:operation soapAction="http://tempuri.org/GetPhones" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateToken">
+      <soap12:operation soapAction="http://tempuri.org/ValidateToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivatePhone">
+      <soap12:operation soapAction="http://tempuri.org/ActivatePhone" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendToken">
+      <soap12:operation soapAction="http://tempuri.org/SendToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePassword">
+      <soap12:operation soapAction="http://tempuri.org/ValidatePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Authentication">
+    <wsdl:port name="AuthenticationSoap" binding="tns:AuthenticationSoap">
+      <soap:address location="https://authentication.dev.glbt1.gdg/WSgdAuthentication/Authentication.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AuthenticationSoap12" binding="tns:AuthenticationSoap12">
+      <soap12:address location="https://authentication.dev.glbt1.gdg/WSgdAuthentication/Authentication.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

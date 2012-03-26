@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Atlantis.Framework.Interface;
 using System.IO;
 using System.Xml.Serialization;
-namespace Atlantis.Framework.AuthTwoFactorValidateToken.Interface
+using Atlantis.Framework.Interface;
+
+namespace Atlantis.Framework.AuthValidatePassword.Interface
 {
-  public class AuthTwoFactorValidateTokenResponseData:IResponseData
+  public class AuthValidatePasswordResponseData : IResponseData
   {
-    public bool IsAuthTokenValid { get; private set; }
+    public bool IsPasswordValid { get; private set; }
 
     public long StatusCode { get; private set; }
 
@@ -19,24 +18,24 @@ namespace Atlantis.Framework.AuthTwoFactorValidateToken.Interface
 
     public string StatusMessage { get; private set; }
 
-    public AuthTwoFactorValidateTokenResponseData(bool tokenIsValid, HashSet<int> validationCodes, long statusCode, string statusMessage)
+    public AuthValidatePasswordResponseData(bool isPasswordValid, HashSet<int> validationCodes, long statusCode, string statusMessage)
     {
       ValidationCodes = validationCodes;
       StatusMessage = statusMessage;
-      IsAuthTokenValid = tokenIsValid;
+      IsPasswordValid = isPasswordValid;
       StatusCode = statusCode;
     }
 
-    public AuthTwoFactorValidateTokenResponseData(AtlantisException ex)
+    public AuthValidatePasswordResponseData(AtlantisException ex)
     {
       _aex = ex;
     }
 
-    public AuthTwoFactorValidateTokenResponseData(Exception ex, RequestData request)
+    public AuthValidatePasswordResponseData(Exception ex, RequestData request)
     {
-      _aex = new AtlantisException(request, "AuthTwoFactorValidateTokenResponseData", ex.Message, string.Empty, ex);
+      _aex = new AtlantisException(request, "AuthValidatePasswordResponseData", ex.Message, string.Empty, ex);
     }
-    
+
     public string ToXML()
     {
       var xmlValue = string.Empty;
@@ -44,7 +43,7 @@ namespace Atlantis.Framework.AuthTwoFactorValidateToken.Interface
       {
         var writer = new StringWriter();
         var xmlSerializer = new XmlSerializer(typeof(bool));
-        xmlSerializer.Serialize(writer, IsAuthTokenValid);
+        xmlSerializer.Serialize(writer, IsPasswordValid);
         xmlValue = writer.ToString();
       }
       catch (Exception) { }

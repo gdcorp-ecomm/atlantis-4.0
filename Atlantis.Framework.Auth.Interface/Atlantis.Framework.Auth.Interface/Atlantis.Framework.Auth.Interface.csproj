@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthPasswordCodes.cs" />
     <Compile Include="AuthValidationCodes.cs" />
     <Compile Include="AuthTwoFactorPhone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

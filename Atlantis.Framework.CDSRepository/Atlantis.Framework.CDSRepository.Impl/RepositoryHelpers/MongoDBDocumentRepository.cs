@@ -33,9 +33,9 @@ namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
     {
       string json = string.Empty;
 
-      MongoDatabase db = server.GetDatabase("cds");
-      MongoCollection<BsonDocument> lps = db.GetCollection<BsonDocument>("pages");
-      var mongoQuery = Query.EQ("url", query);
+      MongoDatabase db = server.GetDatabase("contentmanager");
+      MongoCollection<BsonDocument> lps = db.GetCollection<BsonDocument>("pages.versions");
+      var mongoQuery = Query.EQ("Url", query);
       var doc = lps.FindOne(mongoQuery);
       var jsonWriterSettings = new JsonWriterSettings { OutputMode = JsonOutputMode.Strict };
       json = doc.ToJson<MongoDB.Bson.BsonDocument>(jsonWriterSettings);
@@ -52,14 +52,14 @@ namespace Atlantis.Framework.CDSRepository.Impl.RepositoryHelpers
     {
       string json = string.Empty;
 
-      MongoDatabase db = server.GetDatabase("cds");
-      MongoCollection<BsonDocument> lps = db.GetCollection<BsonDocument>("pages");
+      MongoDatabase db = server.GetDatabase("contentmanager");
+      MongoCollection<BsonDocument> lps = db.GetCollection<BsonDocument>("pages.versions");
 
       QueryComplete mongoQuery;
 
       if (objectId == null)
       {
-        mongoQuery = Query.And(Query.EQ("url", query), Query.LTE("activeDate", activeDate));
+        mongoQuery = Query.And(Query.EQ("Url", query), Query.LTE("ActiveDate", activeDate));
       }
       else
       {

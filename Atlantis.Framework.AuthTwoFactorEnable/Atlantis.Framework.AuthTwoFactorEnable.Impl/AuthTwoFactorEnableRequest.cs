@@ -30,7 +30,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Impl
         validationCodes.Add(AuthValidationCodes.ValidatePhoneRequired);
       }
 
-      if(string.IsNullOrEmpty(request.Phone.Carrier))
+      if(string.IsNullOrEmpty(request.Phone.CarrierId))
       {
         validationCodes.Add(AuthValidationCodes.ValidateCarrierRequired);
       }

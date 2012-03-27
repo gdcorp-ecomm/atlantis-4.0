@@ -9,7 +9,7 @@ namespace Atlantis.Framework.Auth.Interface
     public string PhoneNumber { get; set; }
 
     [XmlAttribute(AttributeName = "carrier")]
-    public string Carrier { get; set; }
+    public string CarrierId { get; set; }
 
     public AuthTwoFactorPhone()
     {
@@ -25,12 +25,12 @@ namespace Atlantis.Framework.Auth.Interface
         {
           AuthTwoFactorPhone authTwoFactorPhone = xmlSerializer.Deserialize<AuthTwoFactorPhone>(xml);
           PhoneNumber = authTwoFactorPhone.PhoneNumber;
-          Carrier = authTwoFactorPhone.Carrier;
+          CarrierId = authTwoFactorPhone.CarrierId;
         }
         catch
         {
           PhoneNumber = string.Empty;
-          Carrier = string.Empty;
+          CarrierId = string.Empty;
         }
       }
     }

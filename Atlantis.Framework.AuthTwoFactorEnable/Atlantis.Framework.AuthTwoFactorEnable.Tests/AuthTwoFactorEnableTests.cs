@@ -14,7 +14,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
     private const string VALID_IP = "172.16.44.792";
     private const string VALID_HOSTNAME = "idp.godaddy.com";
     private const string VALID_PHONE = "14807605267";
-    private const string VALID_CARRIER = "1";
+    private const string VALID_CARRIER_ID = "1";
 
 
     [TestMethod]
@@ -25,7 +25,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
                                                                                       VALID_DEV_SHOPPER_PASSWORD,
                                                                                       1,
                                                                                       VALID_PHONE,
-                                                                                      VALID_CARRIER,
+                                                                                      VALID_CARRIER_ID,
                                                                                       VALID_HOSTNAME,
                                                                                       VALID_IP,
                                                                                       "wwww.authtwofactorenabletests.com",
@@ -47,7 +47,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
                                                                                       string.Empty,
                                                                                       1,
                                                                                       VALID_PHONE,
-                                                                                      VALID_CARRIER,
+                                                                                      VALID_CARRIER_ID,
                                                                                       VALID_HOSTNAME,
                                                                                       VALID_IP,
                                                                                       "wwww.authtwofactorenabletests.com",
@@ -69,7 +69,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
                                                                                       VALID_DEV_SHOPPER_PASSWORD,
                                                                                       1,
                                                                                       string.Empty,
-                                                                                      VALID_CARRIER,
+                                                                                      VALID_CARRIER_ID,
                                                                                       VALID_HOSTNAME,
                                                                                       VALID_IP,
                                                                                       "wwww.authtwofactorenabletests.com",
@@ -113,7 +113,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
                                                                                       VALID_DEV_SHOPPER_PASSWORD,
                                                                                       1,
                                                                                       VALID_PHONE,
-                                                                                      VALID_CARRIER,
+                                                                                      VALID_CARRIER_ID,
                                                                                       string.Empty,
                                                                                       VALID_IP,
                                                                                       "wwww.authtwofactorenabletests.com",
@@ -135,7 +135,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
                                                                                       VALID_DEV_SHOPPER_PASSWORD,
                                                                                       1,
                                                                                       VALID_PHONE,
-                                                                                      VALID_CARRIER,
+                                                                                      VALID_CARRIER_ID,
                                                                                       VALID_HOSTNAME,
                                                                                       string.Empty,
                                                                                       "wwww.authtwofactorenabletests.com",
@@ -157,7 +157,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
                                                                                       VALID_DEV_SHOPPER_PASSWORD,
                                                                                       1,
                                                                                       VALID_PHONE,
-                                                                                      VALID_CARRIER,
+                                                                                      VALID_CARRIER_ID,
                                                                                       VALID_HOSTNAME,
                                                                                       VALID_IP,
                                                                                       "wwww.authtwofactorenabletests.com",

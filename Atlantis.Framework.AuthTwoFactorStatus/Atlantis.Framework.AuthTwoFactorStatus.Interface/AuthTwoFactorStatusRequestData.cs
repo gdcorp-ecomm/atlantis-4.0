@@ -13,7 +13,7 @@ namespace Atlantis.Framework.AuthTwoFactorStatus.Interface
                                   int pageCount)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-
+      RequestTimeout = TimeSpan.FromSeconds(6);
     }
 
 

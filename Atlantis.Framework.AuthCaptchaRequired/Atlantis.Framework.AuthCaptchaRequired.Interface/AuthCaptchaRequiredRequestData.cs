@@ -15,6 +15,7 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Interface
       : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
       IPAddress = ipAddress;
+      RequestTimeout = TimeSpan.FromSeconds(6);
     }
 
     public override string GetCacheMD5()

@@ -11,6 +11,7 @@ namespace Atlantis.Framework.AuthValidatePassword.Interface
       : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
       Password = password;
+      RequestTimeout = TimeSpan.FromSeconds(6);
     }
 
     public override string GetCacheMD5()

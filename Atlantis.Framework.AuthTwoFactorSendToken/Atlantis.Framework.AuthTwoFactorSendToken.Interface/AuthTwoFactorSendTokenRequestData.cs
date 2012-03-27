@@ -14,7 +14,8 @@ namespace Atlantis.Framework.AuthTwoFactorSendToken.Interface
     {
       IPAddress = ipAddress;
       HostName = hostName;
-      PhoneNumber = phoneNumber;     
+      PhoneNumber = phoneNumber;
+      RequestTimeout = TimeSpan.FromSeconds(6);
     }
 
     public override string GetCacheMD5()

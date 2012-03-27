@@ -20,6 +20,7 @@ namespace Atlantis.Framework.AuthTwoFactorValidateToken.Interface
       HostName = hostName;
       PhoneNumber = phoneNumber;
       AuthToken = authToken;
+      RequestTimeout = TimeSpan.FromSeconds(6);
     }
 
     public override string GetCacheMD5()

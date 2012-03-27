@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Atlantis.Framework.PurchaseBasket.Interface
 {
-  public class PaymentSplitTestData : PaymentElement
+  public class PaymentSplitTestData : PurchaseElement
   {
 
     public override string ElementName

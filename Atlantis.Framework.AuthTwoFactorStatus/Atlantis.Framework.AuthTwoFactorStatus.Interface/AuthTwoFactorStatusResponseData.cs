@@ -81,7 +81,7 @@ namespace Atlantis.Framework.AuthTwoFactorStatus.Interface
           _isPending = true;
           break;
         case "enabled":
-          _isSuccess = true;
+          _isEnabled = true;
           break;
       }
     }

@@ -14,7 +14,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
     private const string VALID_IP = "172.16.44.792";
     private const string VALID_HOSTNAME = "idp.godaddy.com";
     private const string VALID_PHONE = "14807605267";
-    private const string VALID_CARRIER = "verizon";
+    private const string VALID_CARRIER = "1";
 
 
     [TestMethod]

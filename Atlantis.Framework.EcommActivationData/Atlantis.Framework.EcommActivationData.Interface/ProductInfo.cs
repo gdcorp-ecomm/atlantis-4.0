@@ -10,7 +10,7 @@ namespace Atlantis.Framework.EcommActivationData.Interface
   public class ProductInfo
   {
     public const string PRODUCT_TYPE_INSTANTPAGE = "InstantPageSetup";
-    public const string PRODUCT_TYPE_EMAIL = "Setup";
+    public const string PRODUCT_TYPE_EMAIL = "EmailSetup";
 
     public const int ACTIVATION_STATUS_PREPROCESS = 1;
     public const int ACTIVATION_STATUS_ACCOUNT_CREATED = 2;

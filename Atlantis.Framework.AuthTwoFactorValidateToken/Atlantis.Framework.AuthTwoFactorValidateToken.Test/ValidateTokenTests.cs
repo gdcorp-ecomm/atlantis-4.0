@@ -28,7 +28,7 @@ namespace Atlantis.Framework.AuthTwoFactorValidateToken.Test
 
       Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.Error);
       Assert.IsTrue(response.ValidationCodes.Count == 0);
-      Assert.IsFalse(response.IsTokenValid);
+      Assert.IsFalse(response.IsAuthTokenValid);
       
     }
 
@@ -47,7 +47,7 @@ namespace Atlantis.Framework.AuthTwoFactorValidateToken.Test
 
       Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.Success);
       Assert.IsTrue(response.ValidationCodes.Count == 0);
-      Assert.IsTrue(response.IsTokenValid);
+      Assert.IsTrue(response.IsAuthTokenValid);
 
     }
   }

@@ -35,7 +35,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Interface
       Password = password;
       AuthToken = authToken;
       PrivateLableId = privateLabelId;
-      Phone = new AuthTwoFactorPhone { PhoneNumber = phoneNumber, Carrier = carrier };
+      Phone = new AuthTwoFactorPhone { PhoneNumber = phoneNumber, CarrierId = carrier };
       HostName = hostName;
       IpAddress = ipAddress;
     }

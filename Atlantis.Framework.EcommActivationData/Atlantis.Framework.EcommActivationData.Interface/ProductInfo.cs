@@ -13,9 +13,10 @@ namespace Atlantis.Framework.EcommActivationData.Interface
     public const string PRODUCT_TYPE_EMAIL = "EmailSetup";
 
     public const int ACTIVATION_STATUS_PREPROCESS = 1;
-    public const int ACTIVATION_STATUS_ACCOUNT_CREATED = 2;
-    public const int ACTIVATION_STATUS_ACCOUNT_ACTIVATED = 3;
-    public const int ACTIVATION_STATUS_BILLING_CONSOLIDATED = 4;
+    public const int ACTIVATION_STATUS_CHILD_INSERTED = 2;
+    public const int ACTIVATION_STATUS_ACCOUNT_CREATED = 3;
+    public const int ACTIVATION_STATUS_ACCOUNT_ACTIVATED = 4;
+    public const int ACTIVATION_STATUS_BILLING_CONSOLIDATED = 5;
     private XmlNode _itemData;
     private List<ActivatedProducts> _products = new List<ActivatedProducts>();
 

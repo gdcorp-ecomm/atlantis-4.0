@@ -21,6 +21,9 @@ namespace Atlantis.Framework.AuthResetPassword.Tests
     private const string hint2 = "weak pw";
     private const string ipAddress = "0.0.0.0";
 
+    private const string strongShopperId = "870937";
+    private const string strongPw = "New1pass";
+
     /// <summary>
     ///Gets or sets the test context which provides
     ///information about and functionality for the current test run.
@@ -114,6 +117,23 @@ namespace Atlantis.Framework.AuthResetPassword.Tests
         1, ipAddress, pw1, hint1, authToken );
       AuthResetPasswordResponseData response = (AuthResetPasswordResponseData)Engine.Engine.ProcessRequest( request, 206 );
       Assert.IsTrue( response.IsSuccess );
+    }
+
+    [TestMethod]
+    [DeploymentItem( "atlantis.config" )]
+    public void FailReset_PreviouslyUsedPassword()
+    {
+      var authenticationService = new WScgdAuthenticateService();
+      string authToken, error;
+      int result = authenticationService.GetAuthToken( shopperId, 1, out authToken, out error );
+      Assert.IsTrue( result == 1 );
+
+      var request = new AuthResetPasswordRequestData(strongShopperId, String.Empty, String.Empty, String.Empty, 0, 1, ipAddress, strongPw, hint1, authToken);
+      var response = (AuthResetPasswordResponseData)Engine.Engine.ProcessRequest( request, 206 );
+      Assert.IsTrue(response != null, "respone is null");
+      Assert.IsFalse(response.IsSuccess, "response.IsSuccess is true when it should be false.");
+      Assert.IsTrue(response.StatusCodes.Contains(AuthResetPasswordStatusCodes.PasswordPreviouslyUsed), string.Format("Missing status code returned. Should be: {0}. Found: {1}", AuthResetPasswordStatusCodes.PasswordPreviouslyUsed, string.Join(",", response.StatusCodes)));
+
     }
   }
 }

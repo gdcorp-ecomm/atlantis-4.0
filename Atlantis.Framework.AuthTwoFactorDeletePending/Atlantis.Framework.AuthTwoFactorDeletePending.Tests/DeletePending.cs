@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Atlantis.Framework.AuthTwoFactorDeletePending.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.Auth.Interface;
 
 namespace Atlantis.Framework.AuthTwoFactorDeletePending.Tests
 {
@@ -65,7 +66,7 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePending.Tests
       AuthTwoFactorDeletePendingRequestData request = new AuthTwoFactorDeletePendingRequestData("850774", string.Empty, string.Empty, string.Empty, 0, 1, "Host", "127.0.0.1");
       AuthTwoFactorDeletePendingResponseData response = (AuthTwoFactorDeletePendingResponseData)Engine.Engine.ProcessRequest(request, 514);
       Debug.WriteLine("StatusCode: " + response.StatusCode);
-      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.Success);
 
     }
   }

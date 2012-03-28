@@ -29,43 +29,31 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePending.Impl
 
         using (Authentication authenticationService = new Authentication())
         {
+          string statusMessage = string.Empty;
+          long statusCode = TwoFactorWebserviceResponseCodes.Error;          
+          
           var request = (AuthTwoFactorDeletePendingRequestData)requestData;
-
-          authenticationService.Url = authServiceUrl;
-          authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
-          authenticationService.ClientCertificates.Add(cert);
 
           HashSet<int> validationCodes = ValidateRequest(request);
 
           if (validationCodes.Count > 0)
           {
-            string data = string.Empty;
-            foreach (int code in validationCodes)
-            {
-              data += string.Format("{0},", code);
-            }
-            data.TrimEnd(',');
-            AtlantisException aex = new AtlantisException(request, "AuthTwoFactorDeletePendingRequest::RequestHandler", "0", "DeletePending request contained invalid data", data, request.IpAddress);
-            responseData = new AuthTwoFactorDeletePendingResponseData(aex);
+            statusMessage = "Request failed validation.";
+            responseData = new AuthTwoFactorDeletePendingResponseData(statusCode, statusMessage, validationCodes);
           }
           else
           {
-            string err = string.Empty;
-            long wsResponseCode = authenticationService.DeletePendingTwoFactor(request.ShopperID
+            authenticationService.Url = authServiceUrl;
+            authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+            authenticationService.ClientCertificates.Add(cert);
+            
+            statusCode = authenticationService.DeletePendingTwoFactor(request.ShopperID
               , request.PrivateLableId
               , request.HostName
               , request.IpAddress
-              , out err);
+              , out statusMessage);
+            responseData = new AuthTwoFactorDeletePendingResponseData(statusCode, statusMessage, validationCodes);
 
-            if (wsResponseCode == TwoFactorWebserviceResponseCodes.Success)
-            {
-              responseData = new AuthTwoFactorDeletePendingResponseData();
-            }
-            else
-            {
-              AtlantisException aex = new AtlantisException("AuthTwoFactorDeletePendingRequest::RequestHandler", request.SourceURL, wsResponseCode.ToString(), "DeletePending request failed", err, request.ShopperID, request.OrderID, request.IpAddress, request.Pathway, request.PageCount);
-              responseData = new AuthTwoFactorDeletePendingResponseData(aex);
-            }
           }
         }
       }

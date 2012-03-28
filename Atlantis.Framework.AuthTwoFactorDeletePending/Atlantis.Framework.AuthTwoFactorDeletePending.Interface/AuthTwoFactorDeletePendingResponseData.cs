@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.Interface;
 
@@ -8,22 +9,15 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePending.Interface
   {
     private AtlantisException _exception = null;
 
-    public AuthTwoFactorDeletePendingResponseData()
-    {
-      StatusCode = TwoFactorWebserviceResponseCodes.Success;
-      StatusMessage = "Success";
-    }
+    public long StatusCode { get; private set; }
+    public string StatusMessage { get; private set; }
+    public HashSet<int> ValidationCodes { get; private set; }
 
-    public AuthTwoFactorDeletePendingResponseData(AtlantisException atlantisException)
+    public AuthTwoFactorDeletePendingResponseData(long statusCode, string statusMessage, HashSet<int> validationCodes)
     {
-      _exception = atlantisException;
-      int x;
-      if (!int.TryParse(atlantisException.ErrorNumber, out x))
-      {
-        x = -1;
-      }
-      StatusCode = x;
-      StatusMessage = atlantisException.ExData;
+      StatusCode = statusCode;
+      ValidationCodes = validationCodes;
+      StatusMessage = statusMessage ?? string.Empty;
     }
 
     public AuthTwoFactorDeletePendingResponseData(RequestData requestData, Exception exception)
@@ -33,15 +27,6 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePending.Interface
         , exception.Message
         , requestData.ToXML());
     }
-
-    public bool IsSuccess
-    {
-      get { return _exception == null; }
-    }
-
-    public int StatusCode { get; private set; }
-    public string StatusMessage { get; private set; }
-
 
     #region IResponseData Members
 

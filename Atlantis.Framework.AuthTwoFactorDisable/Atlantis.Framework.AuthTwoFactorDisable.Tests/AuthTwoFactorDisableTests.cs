@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Atlantis.Framework.AuthTwoFactorDisable.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.Auth.Interface;
 
 namespace Atlantis.Framework.AuthTwoFactorDisable.Tests
 {
@@ -64,7 +65,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Tests
       AuthTwoFactorDisableResponseData response = (AuthTwoFactorDisableResponseData)Engine.Engine.ProcessRequest(request, _requestType);
 
       Debug.WriteLine(response.ToXML());
-      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.Success);
     }
   }
 }

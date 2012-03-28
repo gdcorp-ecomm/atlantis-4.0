@@ -72,46 +72,34 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Impl
 
         using (Authentication authenticationService = new Authentication())
         {
-          var request = (AuthTwoFactorDisableRequestData) requestData;
+          string statusMessage = string.Empty;
+          long statusCode = TwoFactorWebserviceResponseCodes.Error;          
 
-          authenticationService.Url = authServiceUrl;
-          authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
-          authenticationService.ClientCertificates.Add(cert);
+          var request = (AuthTwoFactorDisableRequestData) requestData;
 
           HashSet<int> validationCodes = ValidateRequest(request);
 
           if (validationCodes.Count > 0)
           {
-            string data = string.Empty;
-            foreach (int code in validationCodes)
-            {
-              data += string.Format("{0},", code);
-            }
-            data.TrimEnd(',');
-            AtlantisException aex = new AtlantisException(request, "AuthTwoFactorDisableRequest::RequestHandler", "0", "DisableTwoFactor request contained invalid data", data, request.IpAddress);
-            responseData = new AuthTwoFactorDisableResponseData(aex);
+            statusMessage = "Request failed validation.";
+            responseData = new AuthTwoFactorDisableResponseData(statusCode, statusMessage, validationCodes);
           }
           else
           {
-            string err = string.Empty;
-            long wsResponseCode = authenticationService.DisableTwoFactor(request.ShopperID
+            authenticationService.Url = authServiceUrl;
+            authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+            authenticationService.ClientCertificates.Add(cert);
+
+            statusCode = authenticationService.DisableTwoFactor(request.ShopperID
               , request.Password
               , request.PrivateLableId
               , request.AuthToken
               , request.Phone.ToXml()
               , request.HostName
               , request.IpAddress
-              , out err);
+              , out statusMessage);
+            responseData = new AuthTwoFactorDisableResponseData(statusCode, statusMessage, validationCodes);
 
-            if (wsResponseCode == TwoFactorWebserviceResponseCodes.Success)
-            {
-              responseData = new AuthTwoFactorDisableResponseData();
-            }
-            else
-            {
-              AtlantisException aex = new AtlantisException("AuthTwoFactorDisableRequest::RequestHandler", request.SourceURL, wsResponseCode.ToString(), "DisableTwoFactor request failed", err, request.ShopperID, request.OrderID, request.IpAddress, request.Pathway, request.PageCount);
-              responseData = new AuthTwoFactorDisableResponseData(aex);
-            }
           }
         }
       }

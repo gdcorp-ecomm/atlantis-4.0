@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Atlantis.Framework.AuthTwoFactorAddPhone.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.Auth.Interface;
 
 namespace Atlantis.Framework.AuthTwoFactorAddPhone.Tests
 {
@@ -61,7 +62,7 @@ namespace Atlantis.Framework.AuthTwoFactorAddPhone.Tests
       AuthTwoFactorAddPhoneResponseData response = (AuthTwoFactorAddPhoneResponseData)Engine.Engine.ProcessRequest(request, _requestType);      
     
       Debug.WriteLine(response.ToXML());
-      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.Success);
     }
   }
 }

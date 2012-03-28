@@ -26,7 +26,7 @@ namespace Atlantis.Framework.AuthTwoFactorAddPhone.Impl
         validationCodes.Add(AuthValidationCodes.ValidatePhoneRequired);
       }
 
-      if (string.IsNullOrEmpty(request.Phone.Carrier))
+      if (string.IsNullOrEmpty(request.Phone.CarrierId))
       {
         validationCodes.Add(AuthValidationCodes.ValidateCarrierRequired);
       }
@@ -62,46 +62,29 @@ namespace Atlantis.Framework.AuthTwoFactorAddPhone.Impl
 
         using (Authentication authenticationService = new Authentication())
         {
-          var request = (AuthTwoFactorAddPhoneRequestData)requestData;
+          string statusMessage = string.Empty;
+          long statusCode = TwoFactorWebserviceResponseCodes.Error;
 
-          authenticationService.Url = authServiceUrl;
-          authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
-          authenticationService.ClientCertificates.Add(cert);
+          var request = (AuthTwoFactorAddPhoneRequestData)requestData;
 
           HashSet<int> validationCodes = ValidateRequest(request);
 
           if (validationCodes.Count > 0)
           {
-            string data = string.Empty;
-            foreach (int code in validationCodes)
-            {
-              data += string.Format("{0},", code);
-            }
-            data.TrimEnd(',');
-            AtlantisException aex = new AtlantisException(request, "AuthTwoFactorAddPhoneRequest::RequestHandler", "0", "AddPhone request contained invalid data", data, request.IpAddress);
-            responseData = new AuthTwoFactorAddPhoneResponseData(aex);
+            statusMessage = "Request failed validation.";
+            responseData = new AuthTwoFactorAddPhoneResponseData(statusCode, statusMessage, validationCodes);
           }
           else
           {
-            string err = string.Empty;
-            long wsResponseCode = authenticationService.AddPhone(request.ShopperID, request.Phone.ToXml(), request.HostName, request.IpAddress, out err);
+            authenticationService.Url = authServiceUrl;
+            authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+            authenticationService.ClientCertificates.Add(cert);
 
-            if (wsResponseCode == TwoFactorWebserviceResponseCodes.Success)
-            {
-              responseData = new AuthTwoFactorAddPhoneResponseData();
-            }
-            else
-            {
-              AtlantisException aex = new AtlantisException("AuthTwoFactorAddPhoneRequest::RequestHandler", request.SourceURL, wsResponseCode.ToString(), "AddPhone request failed", err, request.ShopperID, request.OrderID, request.IpAddress, request.Pathway, request.PageCount);
-              responseData = new AuthTwoFactorAddPhoneResponseData(aex);
-            }
+            statusCode = authenticationService.AddPhone(request.ShopperID, request.Phone.ToXml(), request.HostName, request.IpAddress, out statusMessage);
+            responseData = new AuthTwoFactorAddPhoneResponseData(statusCode, statusMessage, validationCodes);
+
           }
         }
-      }
-
-      catch (AtlantisException exAtlantis)
-      {
-        responseData = new AuthTwoFactorAddPhoneResponseData(exAtlantis);
       }
 
       catch (Exception ex)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.Interface;
 
@@ -6,32 +7,19 @@ namespace Atlantis.Framework.AuthTwoFactorAddPhone.Interface
 {
   public class AuthTwoFactorAddPhoneResponseData : IResponseData
   {
-    private AtlantisException _exception = null;
-    public bool IsSuccess
-    {
-      get { return _exception == null; }
-    }
+    private readonly AtlantisException _exception;
 
-    public int StatusCode { get; private set; }
+    public HashSet<int> ValidationCodes { get; private set; }
+
+    public long StatusCode { get; private set; }
+
     public string StatusMessage { get; private set; }
 
-
-    public AuthTwoFactorAddPhoneResponseData()
+    public AuthTwoFactorAddPhoneResponseData(long statusCode, string statusMessage, HashSet<int> validationCodes)
     {
-      StatusCode = TwoFactorWebserviceResponseCodes.Success;
-      StatusMessage = "Success";
-    }
-
-     public AuthTwoFactorAddPhoneResponseData(AtlantisException atlantisException)
-    {
-      _exception = atlantisException;
-      int x;
-      if (!int.TryParse(atlantisException.ErrorNumber, out x))
-      {
-        x = -1;
-      }
-      StatusCode = x;
-      StatusMessage = atlantisException.ExData;
+      StatusCode = statusCode;
+      ValidationCodes = validationCodes;
+      StatusMessage = statusMessage ?? string.Empty;
     }
 
     public AuthTwoFactorAddPhoneResponseData(RequestData requestData, Exception exception)

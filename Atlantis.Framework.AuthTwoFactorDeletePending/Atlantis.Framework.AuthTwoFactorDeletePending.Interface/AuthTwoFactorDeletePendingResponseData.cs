@@ -23,7 +23,7 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePending.Interface
     public AuthTwoFactorDeletePendingResponseData(RequestData requestData, Exception exception)
     {
       _exception = new AtlantisException(requestData
-        , "AuthTwoFactorDisableResponseData"
+        , "AuthTwoFactorDeletePendingResponseData"
         , exception.Message
         , requestData.ToXML());
     }

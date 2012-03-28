@@ -54,7 +54,7 @@ namespace Atlantis.Framework.AuthTwoFactorAddPhone.Impl
         string authServiceUrl = ((WsConfigElement)config).WSURL;
         if (!authServiceUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
         {
-          throw new AtlantisException(requestData, "AuthTwoFactorDisableRequest.RequestHandler", "AuthTwoFactorDisable WS URL in atlantis.config must use https.", string.Empty);
+          throw new AtlantisException(requestData, "AuthTwoFactorAddPhoneRequest.RequestHandler", "AuthTwoFactorDisable WS URL in atlantis.config must use https.", string.Empty);
         }
 
         X509Certificate2 cert = ClientCertHelper.GetClientCertificate(config);

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Atlantis.Framework.AuthTwoFactorDeletePhone.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using Atlantis.Framework.Auth.Interface;
 
 namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Tests
 {
@@ -62,7 +62,7 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Tests
       AuthTwoFactorDeletePhoneResponseData response = (AuthTwoFactorDeletePhoneResponseData)Engine.Engine.ProcessRequest(request, _requestType);
 
       Debug.WriteLine(response.ToXML());
-      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.Success);
     }
   }
 }

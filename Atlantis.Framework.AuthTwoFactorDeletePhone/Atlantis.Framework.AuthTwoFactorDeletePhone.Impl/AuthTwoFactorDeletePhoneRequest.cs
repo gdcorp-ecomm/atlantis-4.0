@@ -26,7 +26,7 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Impl
         validationCodes.Add(AuthValidationCodes.ValidatePhoneRequired);
       }
 
-      if (string.IsNullOrEmpty(request.Phone.Carrier))
+      if (string.IsNullOrEmpty(request.Phone.CarrierId))
       {
         validationCodes.Add(AuthValidationCodes.ValidateCarrierRequired);
       }
@@ -62,46 +62,29 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Impl
 
         using (Authentication authenticationService = new Authentication())
         {
+          string statusMessage = string.Empty;
+          long statusCode = TwoFactorWebserviceResponseCodes.Error;
+          
           var request = (AuthTwoFactorDeletePhoneRequestData)requestData;
-
-          authenticationService.Url = authServiceUrl;
-          authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
-          authenticationService.ClientCertificates.Add(cert);
 
           HashSet<int> validationCodes = ValidateRequest(request);
 
           if (validationCodes.Count > 0)
           {
-            string data = string.Empty;
-            foreach (int code in validationCodes)
-            {
-              data += string.Format("{0},", code);
-            }
-            data.TrimEnd(',');
-            AtlantisException aex = new AtlantisException(request, "AuthTwoFactorDeletePhoneRequest::RequestHandler", "0", "DeletePhone request contained invalid data", data, request.IpAddress);
-            responseData = new AuthTwoFactorDeletePhoneResponseData(aex);
+            statusMessage = "Request failed validation.";
+            responseData = new AuthTwoFactorDeletePhoneResponseData(statusCode, statusMessage, validationCodes);
           }
           else
           {
-            string err = string.Empty;
-            long wsResponseCode = authenticationService.DeletePhone(request.ShopperID, request.Phone.ToXml(), request.HostName, request.IpAddress, out err);
+            authenticationService.Url = authServiceUrl;
+            authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+            authenticationService.ClientCertificates.Add(cert);
+            
+            statusCode = authenticationService.DeletePhone(request.ShopperID, request.Phone.ToXml(), request.HostName, request.IpAddress, out statusMessage);
+            responseData = new AuthTwoFactorDeletePhoneResponseData(statusCode, statusMessage, validationCodes);
 
-            if (wsResponseCode == TwoFactorWebserviceResponseCodes.Success)
-            {
-              responseData = new AuthTwoFactorDeletePhoneResponseData();
-            }
-            else
-            {
-              AtlantisException aex = new AtlantisException("AuthTwoFactorDeletePhoneRequest::RequestHandler", request.SourceURL, wsResponseCode.ToString(), "DeletePhone request failed", err, request.ShopperID, request.OrderID, request.IpAddress, request.Pathway, request.PageCount);
-              responseData = new AuthTwoFactorDeletePhoneResponseData(aex);
-            }
           }
         }
-      }
-
-      catch (AtlantisException exAtlantis)
-      {
-        responseData = new AuthTwoFactorDeletePhoneResponseData(exAtlantis);
       }
 
       catch (Exception ex)

@@ -20,13 +20,13 @@ namespace Atlantis.Framework.AuthTwoFactorAddPhone.Interface
       , string pathway
       , int pageCount
       , string phoneNumber
-      , string carrier
+      , string carrierId
       , string hostName
       , string ipAddress)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestTimeout = TimeSpan.FromSeconds(5);
-      Phone = new AuthTwoFactorPhone { PhoneNumber = phoneNumber, CarrierId = carrier };
+      Phone = new AuthTwoFactorPhone { PhoneNumber = phoneNumber, CarrierId = carrierId };
       HostName = hostName;
       IpAddress = ipAddress;
     }

@@ -398,8 +398,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       get
       {
         bool hasmgrShopper = false;
-        hasmgrShopper = System.Web.HttpContext.Current.Request.QueryString["mgrshopper"] != null;
-        return hasmgrShopper;
+        if (System.Web.HttpContext.Current != null)
+        {
+          if (System.Web.HttpContext.Current.Request != null)
+          {
+            hasmgrShopper = System.Web.HttpContext.Current.Request.QueryString["mgrshopper"] != null;
+          }
+        }
+       return hasmgrShopper;
       }
     }
 

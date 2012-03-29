@@ -26,7 +26,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Interface
       , string authToken
       , int privateLabelId
       , string phoneNumber
-      , string carrier
+      , string carrierId
       , string hostName
       , string ipAddress)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
@@ -35,7 +35,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Interface
       Password = password;
       AuthToken = authToken;
       PrivateLableId = privateLabelId;
-      Phone = new AuthTwoFactorPhone { PhoneNumber = phoneNumber, CarrierId = carrier };
+      Phone = new AuthTwoFactorPhone { PhoneNumber = phoneNumber, CarrierId = carrierId };
       HostName = hostName;
       IpAddress = ipAddress;
     }

@@ -23,9 +23,9 @@ namespace Atlantis.Framework.AuthAuthorize.Impl
           throw new AtlantisException(requestData, "AuthAuthorize.RequestHandler", "AuthAuthorize WS URL in atlantis.config must use https.", string.Empty);
         }
 
-        using (WScgdAuthenticateService authenticationService = new WScgdAuthenticateService())
+        using (Authentication authenticationService = new Authentication())
         {
-          int statusCode = AuthAuthorizeStatusCodes.Error;
+          long statusCode = AuthAuthorizeStatusCodes.Error;
 
           AuthAuthorizeRequestData request = (AuthAuthorizeRequestData)requestData;
 

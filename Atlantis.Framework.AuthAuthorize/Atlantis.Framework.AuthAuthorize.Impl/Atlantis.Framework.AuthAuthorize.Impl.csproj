@@ -84,10 +84,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="https://authentication.dev.glbt1.gdg/WScgdAuthentication/WScgdAuthenticate.dll%3fHandler=GenWScgdAuthenticateWSDL">
+    <WebReferenceUrl Include="http://authentication.debug.glbt1.gdg/WSgdAuthentication/Authentication.wsdl">
       <UrlBehavior>Static</UrlBehavior>
       <RelPath>Web References\AuthenticationWS\</RelPath>
-      <UpdateFromURL>https://authentication.dev.glbt1.gdg/WScgdAuthentication/WScgdAuthenticate.dll%3fHandler=GenWScgdAuthenticateWSDL</UpdateFromURL>
+      <UpdateFromURL>http://authentication.debug.glbt1.gdg/WSgdAuthentication/Authentication.wsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -102,11 +102,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Web References\AuthenticationWS\Authentication.wsdl" />
     <None Include="Web References\AuthenticationWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\AuthenticationWS\WScgdAuthenticate.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

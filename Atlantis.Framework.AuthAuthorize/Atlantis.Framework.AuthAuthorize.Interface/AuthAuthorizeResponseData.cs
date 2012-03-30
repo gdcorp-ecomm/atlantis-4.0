@@ -12,11 +12,11 @@ namespace Atlantis.Framework.AuthAuthorize.Interface
 
     public HashSet<int> ValidationCodes { get; private set; }
 
-    public int StatusCode { get; private set; }
+    public long StatusCode { get; private set; }
     
     public string StatusMessage { get; private set; }
 
-    public AuthAuthorizeResponseData(string responseXml, int statusCode, HashSet<int> validationCodes, string statusMessage)
+    public AuthAuthorizeResponseData(string responseXml, long statusCode, HashSet<int> validationCodes, string statusMessage)
     {
       ResponseXml = responseXml;
       StatusCode = statusCode;

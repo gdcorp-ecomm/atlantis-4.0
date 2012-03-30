@@ -92,6 +92,10 @@ namespace Atlantis.Framework.BasePages.Providers
         {
           result = "dev";
         }
+        else if (SiteContext.ServerLocation == ServerLocationType.Ote)
+        {
+          result = "ote";
+        }
         return result;
       }
     }

@@ -70,8 +70,7 @@ namespace Atlantis.Framework.ValidateField.Interface
       }
       else if (itemToValidate != null)
       {
-        bool match = _validationExpression.IsMatch(itemToValidate);
-        result = (match && MatchIsValid) || (!match && !MatchIsValid);
+        result = bool.Equals(_validationExpression.IsMatch(itemToValidate), MatchIsValid);
       }
 
       return result;

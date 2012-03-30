@@ -97,10 +97,9 @@ namespace Atlantis.Framework.AuthValidatePassword.Test
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    [Ignore]
-    public void PasswordMatchesHint()   //("Not currently working because this auth WS method may be shopperid agonstic")]
+    public void PasswordMatchesHint()  
     {
-      string password = "This is my hint.  There are many like it, but this one is mine. 03892";
+      string password = "this is my hint.  There are many like it, but this one is mine. 38820";
 
       var request = new AuthValidatePasswordRequestData(_shopperId, string.Empty, string.Empty, string.Empty, 0, password);
       var response = Engine.Engine.ProcessRequest(request, 517) as AuthValidatePasswordResponseData;

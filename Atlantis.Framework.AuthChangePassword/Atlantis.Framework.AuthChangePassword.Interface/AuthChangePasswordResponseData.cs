@@ -1,55 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.ValidateField.Interface;
 
 namespace Atlantis.Framework.AuthChangePassword.Interface
 {
   public class AuthChangePasswordResponseData : IResponseData
   {
     private AtlantisException _ex;
-    private HashSet<int> _statusCodes = new HashSet<int>();
-    private string _statusMessage = null;
 
-    public HashSet<int> StatusCodes
-    {
-      get { return _statusCodes; }
-    }
+    public List<ValidationFailure> RegexErrors { get; private set; }
+    
+    public HashSet<int> ValidationCodes { get; private set; }
 
-    public string StatusMessage
-    {
-      get
-      {
-        string result = string.Empty;
-        if (_statusMessage != null)
-        {
-          result = _statusMessage;
-        }
-        return result;
-      }
-    }
+    public long StatusCode { get; private set; }
 
-    public bool IsSuccess
-    {
-      get { return (_statusCodes.Count == 1) && (_statusCodes.Contains(AuthChangePasswordStatusCodes.Success)); }
-    }
+    public string StatusMessage { get; private set; }
 
-    public AuthChangePasswordResponseData(IEnumerable<int> statusCodes, string statusMessage)
+    public AuthChangePasswordResponseData(long statusCode, string statusMessage, HashSet<int> validationCodes, List<ValidationFailure> regexErrors)
     {
-      _statusCodes = new HashSet<int>(statusCodes);
-      _statusMessage = statusMessage;
-    }
-
-    public AuthChangePasswordResponseData(AtlantisException ex)
-    {
-      _ex = ex;
-      _statusCodes.Add(AuthChangePasswordStatusCodes.Error);
+      StatusCode = statusCode;
+      ValidationCodes = validationCodes;
+      StatusMessage = statusMessage ?? string.Empty;
+      RegexErrors = new List<ValidationFailure>();
+      RegexErrors = regexErrors;
     }
 
     public AuthChangePasswordResponseData(RequestData requestData, Exception ex)
     {
       _ex = new AtlantisException(
-        requestData, "AuthChangePasswordResponseData", "Exception when Changing Password", string.Empty);
-      _statusCodes.Add(AuthChangePasswordStatusCodes.Error);
+        requestData, "AuthChangePasswordResponseData", "Exception when Changing Password", ex.Message);
     }
 
     #region IResponseData Members

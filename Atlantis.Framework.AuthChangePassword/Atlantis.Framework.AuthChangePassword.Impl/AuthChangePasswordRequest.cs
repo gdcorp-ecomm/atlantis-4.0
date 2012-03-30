@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
-using Atlantis.Framework.AuthChangePassword.Impl.AuthenticationWS;
+using Atlantis.Framework.Auth.Interface;
+using Atlantis.Framework.AuthChangePassword.Impl.WSgdAuthentication;
 using Atlantis.Framework.AuthChangePassword.Interface;
+using Atlantis.Framework.AuthValidatePassword.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.ServiceHelper;
+using Atlantis.Framework.ValidateField.Interface;
 
 namespace Atlantis.Framework.AuthChangePassword.Impl
 {
   public class AuthChangePasswordRequest : IRequest
   {
-    private static readonly Regex _newPasswordInvalidCharactersRegex = new Regex("[^\x20-\x7E]", RegexOptions.Compiled);
     private static readonly Regex _newHintInvalidCharactersRegex = new Regex("[^\x20-\x3b\x3f-\x7e]", RegexOptions.Compiled);
     private static readonly Regex _meetsStrongPwReqs = new Regex("(?=.*[A-Z])(?=.{8,})(?=.*\\d).*$");
 
-    private HashSet<int> ValidateRequest(AuthChangePasswordRequestData request, WScgdAuthenticateService service, bool isPasswordChange)
+    private HashSet<int> ValidateRequest(AuthChangePasswordRequestData request, Authentication service, bool isPasswordChange, out List<ValidationFailure> regexErrors)
     {
       HashSet<int> result = new HashSet<int>();
 
@@ -21,53 +25,20 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
 
       if (string.IsNullOrEmpty(request.CurrentPassword))
       {
-        result.Add(AuthChangePasswordStatusCodes.ValidateCurrentPasswordRequired);
+        result.Add(AuthChangePasswordStatusCodes.ValidatePasswordRequired);
       }
       else if (request.CurrentPassword.Length < 5)
       {
         result.Add(AuthChangePasswordStatusCodes.ValidateCurrentPasswordToShort);
-      }
-      else if (request.UseStrongPassword && !_meetsStrongPwReqs.IsMatch(request.CurrentPassword) && !isPasswordChange)
-      {
-        result.Add(AuthChangePasswordStatusCodes.ValidateCurrentPasswordMeetsRequirements);
       }
 
       #endregion
 
       #region NewPassword
 
-      if (string.IsNullOrEmpty(request.NewPassword))
+      if (!ValidatePasswordFieldRegEx(request.NewPassword, request, out regexErrors))
       {
-        result.Add(AuthChangePasswordStatusCodes.ValidatePasswordRequired);
-      }
-      else
-      {
-        if (request.NewPassword.Length > 25)
-        {
-          result.Add(AuthChangePasswordStatusCodes.PasswordToLong);
-        }
-        else if (request.NewPassword.Length < 5)
-        {
-          result.Add(AuthChangePasswordStatusCodes.PasswordToShort);
-        }
-
-        if (_newPasswordInvalidCharactersRegex.Match(request.NewPassword).Success)
-        {
-          result.Add(AuthChangePasswordStatusCodes.ValidatePasswordInvalidCharacters);
-        }
-        else if (request.UseStrongPassword)
-        {
-          // Validate password strength
-          int strengthResult = service.IsStrongPassword(request.ShopperID, request.NewPassword);
-
-          //we need to strip out the 30 day password reuse error if the user is not changing their pw
-          bool ignoreReusePwError = (!isPasswordChange && strengthResult == AuthChangePasswordStatusCodes.PasswordStrengthAlreadyUsed);
-
-          if (strengthResult != AuthChangePasswordStatusCodes.Success && !ignoreReusePwError)
-          {
-            result.Add(strengthResult);
-          }
-        }
+        result.Add(AuthChangePasswordStatusCodes.PasswordStrengthWeak);
       }
 
       #endregion
@@ -155,53 +126,59 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
         }
 
         AuthChangePasswordRequestData request = (AuthChangePasswordRequestData)oRequestData;
-        using (WScgdAuthenticateService authenticationService = new WScgdAuthenticateService()
+
+        X509Certificate2 cert = ClientCertHelper.GetClientCertificate(oConfig);
+        cert.Verify();
+        
+        using (Authentication authenticationService = new Authentication()
                                                            {
                                                              Url = authServiceUrl,
                                                              Timeout = (int)request.RequestTimeout.TotalMilliseconds
                                                            })
         {
-          string errorOutput = null;
+          string statusMessage = string.Empty;
+          long statusCode = TwoFactorWebserviceResponseCodes.Error;
+
           bool isPasswordChange = !(request.CurrentPassword == request.NewPassword); //when current = new we aren't changing password
 
-          HashSet<int> responseCodes = ValidateRequest(request, authenticationService, isPasswordChange);          
+          List<ValidationFailure> regexErrors; 
 
-          if (responseCodes.Count > 0)
+          HashSet<int> responseCodes = ValidateRequest(request, authenticationService, isPasswordChange, out regexErrors);
+
+          if (responseCodes.Count > 0 || regexErrors.Count > 0)
           {
-            errorOutput = "Request not valid.";
+            statusMessage = "Request not valid.";
+            responseData = new AuthChangePasswordResponseData(statusCode, statusMessage, responseCodes, regexErrors);
           }
           else
           {
-            int useStrongPasswordValue = 0;
-            if (request.UseStrongPassword)
+            if (!ValidatePassword(request.NewPassword, request, ref responseCodes, ref statusMessage, ref statusCode))
             {
-              useStrongPasswordValue = 1;
+              if (statusMessage.Length == 0) { statusMessage = "Request not valid."; }
+              responseData = new AuthChangePasswordResponseData(statusCode, statusMessage, responseCodes, regexErrors);
             }
-
-            int resultCode = authenticationService.ChangePassword(
-              request.ShopperID, request.PrivateLabelId, request.CurrentPassword, request.NewPassword,
-              request.NewHint, request.NewLogin, useStrongPasswordValue, out errorOutput);
-
-            responseCodes.Add(resultCode);
-
-            //we need to strip out the 30 day password reuse error if the user is not changing their pw
-            if (!isPasswordChange)
+            else
             {
-              responseCodes.Remove(AuthChangePasswordStatusCodes.PasswordStrengthAlreadyUsed);
-              if (responseCodes.Count == 0)
+
+              authenticationService.Url =  authServiceUrl;
+              authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+              authenticationService.ClientCertificates.Add(cert);
+
+              statusCode = authenticationService.ChangePassword(
+                request.ShopperID, request.PrivateLabelId, request.CurrentPassword, request.NewPassword, request.AuthToken, request.PhoneNumber, request.HostName, request.IpAddress,
+                request.NewHint, request.NewLogin, 1, out statusMessage);
+
+              //we need to strip out the 30 day password reuse error if the user is not changing their pw
+              if (!isPasswordChange)
               {
-                responseCodes.Add(AuthChangePasswordStatusCodes.Success);
+                responseCodes.Remove(AuthChangePasswordStatusCodes.PasswordStrengthAlreadyUsed);
               }
+
+              responseData = new AuthChangePasswordResponseData(statusCode, statusMessage, responseCodes, regexErrors);
             }
-          }       
-          
-          responseData = new AuthChangePasswordResponseData(responseCodes, errorOutput);
+          }
         }
 
-      }
-      catch (AtlantisException exAtlantis)
-      {
-        responseData = new AuthChangePasswordResponseData(exAtlantis);
       }
       catch (Exception ex)
       {
@@ -212,5 +189,55 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
     }
 
     #endregion
+
+    private bool ValidatePasswordFieldRegEx(string password, AuthChangePasswordRequestData oRequestData, out List<ValidationFailure> regexErrors)
+    {
+
+      regexErrors = new List<ValidationFailure>();
+      bool isValid = false;
+      try
+      {
+        ValidateFieldRequestData request = new ValidateFieldRequestData(oRequestData.ShopperID, oRequestData.SourceURL, oRequestData.OrderID, oRequestData.Pathway, oRequestData.PageCount, "password");
+
+        //ValidateFieldResponseData response = (ValidateFieldResponseData)Engine.Engine.ProcessRequest(request, 507); //use this when debugging the framework item
+        ValidateFieldResponseData response = (ValidateFieldResponseData)DataCache.DataCache.GetProcessRequest(request, 507); // use this for release version for your code
+        
+        isValid = response.ValidateStringField(password, out regexErrors);
+
+      }
+      catch
+      {
+
+      }
+
+      return isValid;
+
+    }
+
+    private bool ValidatePassword(string password, AuthChangePasswordRequestData oRequestData, ref HashSet<int> responseCodes, ref string statusMessage, ref long statusCode)
+    {
+
+      bool isValid = false;
+      try
+      {
+        AuthValidatePasswordRequestData request = new AuthValidatePasswordRequestData(oRequestData.ShopperID, oRequestData.SourceURL, oRequestData.OrderID, oRequestData.Pathway, oRequestData.PageCount, password);
+
+        AuthValidatePasswordResponseData response = (AuthValidatePasswordResponseData)Engine.Engine.ProcessRequest(request, 517);
+
+        isValid = response.IsPasswordValid;
+        statusCode = response.StatusCode;
+        responseCodes = response.ValidationCodes;
+        statusMessage = response.StatusMessage;
+
+      }
+      catch
+      {
+
+      }
+
+      return isValid;
+
+    }
+
   }
 }

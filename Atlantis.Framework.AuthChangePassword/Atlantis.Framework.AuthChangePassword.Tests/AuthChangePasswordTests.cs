@@ -2,6 +2,8 @@
 using Atlantis.Framework.AuthChangePassword.Interface;
 using Atlantis.Framework.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.Auth.Interface;
+using Atlantis.Framework.DataCache;
 
 namespace Atlantis.Framework.AuthChangePassword.Tests
 {
@@ -47,139 +49,17 @@ namespace Atlantis.Framework.AuthChangePassword.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    public void ChangePasswordNoCapital()
+    public void ChangePasswordCheck()
     {
       AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
-        _shopperId, string.Empty, string.Empty, string.Empty, 0,
-        1, _pw1, "weakpassword", "weak pw", _userName1, true);
+        "856151", string.Empty, string.Empty, string.Empty, 0,
+        1, "123456789", "JasonGerek101", _hint1, "srd101", string.Empty, string.Empty, "myhost", "127.0.0.1");
       AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
-      Assert.IsFalse(response.IsSuccess);
-      Assert.IsTrue(response.StatusCodes.Contains(AuthChangePasswordStatusCodes.PasswordStrengthNoCapital));
-    }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void ChangePasswordNoNumber()
-    {
-      AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
-        _shopperId, string.Empty, string.Empty, string.Empty, 0,
-        1, _pw1, "Weakpassword", "weak pw", _userName1, true);
-      AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
-      Assert.IsFalse(response.IsSuccess);
-      Assert.IsTrue(response.StatusCodes.Contains(AuthChangePasswordStatusCodes.PasswordStrengthNoNumeric));
-    }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    [ExpectedException(typeof(AtlantisException))]
-    public void ChangePasswordNonsecureWSInConfig()
-    {
-      AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
-        _shopperId, string.Empty, string.Empty, string.Empty, 0,
-        1, _pw1, "weakpassword", "weak pw", _userName1, true);
-      AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 1071);
-    }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void ChangePasswordMinLength()
-    {
-      AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
-        _shopperId, string.Empty, string.Empty, string.Empty, 0,
-        1, _pw1, "Wkpw5", "weak pw", _userName1, true);
-      AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
-      Assert.IsFalse(response.IsSuccess);
-      Assert.IsTrue(response.StatusCodes.Contains(AuthChangePasswordStatusCodes.PasswordToShort));
-    }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void ChangePasswordLoginNameUsed()
-    {
-      AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
-        _shopperId, string.Empty, string.Empty, string.Empty, 0,
-        1, _pw1, _pw1, _hint1, "testarvind", false);
-      AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
-      Assert.IsFalse(response.IsSuccess);
-      Assert.IsTrue(response.StatusCodes.Contains(AuthChangePasswordStatusCodes.LoginAlreadyTaken));
-    }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void ChangePasswordInvalidAuthentication()
-    {
-      AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
-        _shopperId, string.Empty, string.Empty, string.Empty, 0,
-        1, "password7", _pw1, _hint1, _userName1, false);
-      AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
-      Assert.IsFalse(response.IsSuccess);
-      Assert.IsTrue(response.StatusCodes.Contains(AuthChangePasswordStatusCodes.Failure));
-    }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void ChangePasswordInvalidHintPassword()
-    {
-      AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
-        _shopperId, string.Empty, string.Empty, string.Empty, 0,
-        1, _userName1, _pw1, _pw1, _userName1, false);
-      AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
-      Assert.IsFalse(response.IsSuccess);
-      Assert.IsTrue(response.StatusCodes.Contains(AuthChangePasswordStatusCodes.PasswordHintMatch));
-    }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void ChangePasswordInvalidHintLogin()
-    {
-      AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
-        _shopperId, string.Empty, string.Empty, string.Empty, 0,
-        1, _pw1, _pw1, _userName1, _userName1, false);
-      AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
-      Assert.IsFalse(response.IsSuccess);
-      Assert.IsTrue(response.StatusCodes.Contains(AuthChangePasswordStatusCodes.LoginHintMatch));
-    }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void ChangePasswordInvalidLoginPassword()
-    {
-      AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
-        _shopperId, string.Empty, string.Empty, string.Empty, 0,
-        1, _pw1, _userName1, _hint1, _userName1, false);
-      AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
-      Assert.IsFalse(response.IsSuccess);
-      Assert.IsTrue(response.StatusCodes.Contains(AuthChangePasswordStatusCodes.LoginPasswordMatch));
-    }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void VerifyCurrentPasswordMeetsRequirements()
-    {
-      AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
-        "867900", string.Empty, string.Empty, string.Empty, 0,
-        1, "007scy", "Ww!11111", "goldeneys", "syukna", true);
-      AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
-      Assert.IsTrue(response.IsSuccess);     
-    }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void ChangePasswordValid()
-    {
-      AuthChangePasswordRequestData request = new AuthChangePasswordRequestData(
-        _shopperId, string.Empty, string.Empty, string.Empty, 0,
-        1, _pw1, _pw2, _hint1, _userName1, false);
-      AuthChangePasswordResponseData response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
-      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.Success);
 
       Thread.Sleep(500);
 
-      request = new AuthChangePasswordRequestData(
-        _shopperId, string.Empty, string.Empty, string.Empty, 0,
-        1, _pw2, _pw1, _hint1, _userName1, false);
-      response = (AuthChangePasswordResponseData)Engine.Engine.ProcessRequest(request, 71);
-      Assert.IsTrue(response.IsSuccess);
     }
+
   }
 }

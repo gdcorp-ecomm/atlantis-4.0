@@ -8,7 +8,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Tests
   [TestClass]
   public class GetAuthTwoFactorDisableTests
   {
-    private const string _shopperId = "856907";
+    private const string _shopperId = "Disable_Your_Own_$hit";
     private const int _requestType = 511;
 
 
@@ -54,11 +54,10 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Tests
         , string.Empty
         , string.Empty
         , 0
-        , "kjs12"
-        , "2342j3kj234k2j"
+        , "password"
+        , "token"
         , 1
-        , "4805351234"
-        , "Verizon Wireless"
+        , "phonenumber"
         , "MeHost"
         , "127.0.0.1");
 

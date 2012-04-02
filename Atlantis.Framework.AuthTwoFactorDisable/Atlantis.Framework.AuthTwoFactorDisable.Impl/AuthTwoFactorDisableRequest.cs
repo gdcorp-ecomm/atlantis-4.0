@@ -31,16 +31,11 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Impl
         validationCodes.Add(AuthValidationCodes.ValidateAuthTokenRequired);
       }
 
-      if (string.IsNullOrEmpty(request.Phone.PhoneNumber))
+      if (string.IsNullOrEmpty(request.PhoneNumber))
       {
         validationCodes.Add(AuthValidationCodes.ValidatePhoneRequired);
       }
-
-      if (string.IsNullOrEmpty(request.Phone.CarrierId))
-      {
-        validationCodes.Add(AuthValidationCodes.ValidateCarrierRequired);
-      }
-
+      
       if (string.IsNullOrEmpty(request.IpAddress))
       {
         validationCodes.Add(AuthValidationCodes.ValidateIpAddressRequired);
@@ -94,7 +89,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Impl
               , request.Password
               , request.PrivateLableId
               , request.AuthToken
-              , request.Phone.ToXml()
+              , request.PhoneNumber
               , request.HostName
               , request.IpAddress
               , out statusMessage);

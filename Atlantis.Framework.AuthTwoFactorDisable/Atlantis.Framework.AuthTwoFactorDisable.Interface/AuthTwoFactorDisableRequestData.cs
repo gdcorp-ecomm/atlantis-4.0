@@ -1,5 +1,4 @@
 ﻿using System;
-using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.AuthTwoFactorDisable.Interface
@@ -11,7 +10,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Interface
     public string Password { get; private set; }
     public string AuthToken { get; private set; }
     public int PrivateLableId { get; private set; }
-    public AuthTwoFactorPhone Phone { get; private set; }
+    public string PhoneNumber { get; private set; }
     public string HostName { get; private set; }
     public string IpAddress { get; private set; }
 
@@ -26,7 +25,6 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Interface
       , string authToken
       , int privateLabelId
       , string phoneNumber
-      , string carrierId
       , string hostName
       , string ipAddress)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
@@ -35,7 +33,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Interface
       Password = password;
       AuthToken = authToken;
       PrivateLableId = privateLabelId;
-      Phone = new AuthTwoFactorPhone { PhoneNumber = phoneNumber, CarrierId = carrierId };
+      PhoneNumber = phoneNumber;
       HostName = hostName;
       IpAddress = ipAddress;
     }

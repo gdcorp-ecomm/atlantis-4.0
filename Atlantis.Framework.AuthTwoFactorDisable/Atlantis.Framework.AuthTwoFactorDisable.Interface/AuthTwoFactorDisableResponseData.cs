@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.AuthTwoFactorDisable.Interface

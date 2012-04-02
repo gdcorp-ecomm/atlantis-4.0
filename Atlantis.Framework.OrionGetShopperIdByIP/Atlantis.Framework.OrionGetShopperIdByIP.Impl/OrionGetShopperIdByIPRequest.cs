@@ -50,8 +50,13 @@ namespace Atlantis.Framework.OrionGetShopperIdByIP.Impl
 
             List<Account> accounts = accountList.AccountList.Where(a => a.Status.ToLower().Equals("setup")).ToList();
 
-            if (accounts.Count <= 1)
+            if (accounts.Count == 0)
             {
+              response = new OrionGetShopperIdByIPResponseData(shopperId: null);
+            }
+            else if (accounts.Count == 1)
+            {
+              
               var shopperId = accounts[0].CustomerNum ?? string.Empty;
               response = new OrionGetShopperIdByIPResponseData(shopperId);
             }

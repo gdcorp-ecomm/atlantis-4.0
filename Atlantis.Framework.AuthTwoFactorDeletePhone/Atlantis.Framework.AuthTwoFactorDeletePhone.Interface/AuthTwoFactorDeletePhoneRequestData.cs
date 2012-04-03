@@ -1,5 +1,4 @@
 ﻿using System;
-using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Interface
@@ -8,7 +7,7 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Interface
   {
     #region Properties
 
-    public AuthTwoFactorPhone Phone { get; private set; }
+    public string PhoneNumber { get; private set; }
     public string HostName { get; private set; }
     public string IpAddress { get; private set; }
 
@@ -20,13 +19,12 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Interface
       , string pathway
       , int pageCount
       , string phoneNumber
-      , string carrierId
       , string hostName
       , string ipAddress)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestTimeout = TimeSpan.FromSeconds(5);
-      Phone = new AuthTwoFactorPhone { PhoneNumber = phoneNumber, CarrierId = carrierId };
+      PhoneNumber = phoneNumber;
       HostName = hostName;
       IpAddress = ipAddress;
     }

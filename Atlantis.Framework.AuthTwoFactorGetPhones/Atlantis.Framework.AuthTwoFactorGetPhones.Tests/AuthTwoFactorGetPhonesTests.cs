@@ -37,6 +37,7 @@ namespace Atlantis.Framework.AuthTwoFactorGetPhones.Tests
       AuthTwoFactorGetPhonesResponseData responseData = (AuthTwoFactorGetPhonesResponseData)Engine.Engine.ProcessRequest(requestData, 520);
 
       Assert.IsTrue(responseData.StatusCode == TwoFactorWebserviceResponseCodes.Success);
+      Assert.IsTrue(responseData.PrimaryPhone != null);
     }
   }
 }

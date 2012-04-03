@@ -22,7 +22,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Interface
     {
       Password = password;
       PrivateLableId = privateLabelId;
-      Phone = new AuthTwoFactorPhone { PhoneNumber = phoneNumber, CarrierId = carrierId };
+      Phone = new AuthTwoFactorPhone(phoneNumber, carrierId);
       HostName = hostName;
       IpAddress = ipAddress;
 

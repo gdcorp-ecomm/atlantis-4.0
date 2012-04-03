@@ -19,6 +19,26 @@ namespace Atlantis.Framework.AuthTwoFactorGetPhones.Interface
 
     public IList<AuthTwoFactorPhone> Phones { get; private set; }
 
+    private AuthTwoFactorPhone _primaryPhone;
+    public AuthTwoFactorPhone PrimaryPhone
+    {
+      get
+      {
+        if(_primaryPhone == null)
+        {
+          foreach (AuthTwoFactorPhone authTwoFactorPhone in Phones)
+          {
+            if(authTwoFactorPhone.StatusCode == AuthTwoFactorPhoneStatusCodes.Active)
+            {
+              _primaryPhone = authTwoFactorPhone;
+              break;
+            }
+          }
+        }
+        return _primaryPhone;
+      }
+    }
+
     public AuthTwoFactorGetPhonesResponseData(long statusCode, HashSet<int> validationCodes, string phonesXml, string statusMessage)
     {
       ValidationCodes = validationCodes;
@@ -56,7 +76,10 @@ namespace Atlantis.Framework.AuthTwoFactorGetPhones.Interface
               if(!string.IsNullOrEmpty(phone.PhoneNumber) &&
                  !string.IsNullOrEmpty(phone.CarrierId))
               {
-                phoneList.Add(phone);
+                if (phone.StatusCode > -1)
+                {
+                  phoneList.Add(phone);
+                }
               }
             }
           }

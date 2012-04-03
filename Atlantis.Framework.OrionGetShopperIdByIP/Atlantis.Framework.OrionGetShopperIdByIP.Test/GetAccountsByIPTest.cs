@@ -16,7 +16,7 @@ namespace Atlantis.Framework.OrionGetShopperIdByIP.Test
     public void GetAccountByIp()
     {
       /* NOTE - ALL CONFIG FILES ARE USING TEST SERVERS */
-      var request = new OrionGetShopperIdByIPRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "127.0.0.1");
+      var request = new OrionGetShopperIdByIPRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "172.19.92.115");
       var response = (OrionGetShopperIdByIPResponseData)Engine.Engine.ProcessRequest(request, 497);
 
       Assert.AreEqual("124917", response.ShopperId);

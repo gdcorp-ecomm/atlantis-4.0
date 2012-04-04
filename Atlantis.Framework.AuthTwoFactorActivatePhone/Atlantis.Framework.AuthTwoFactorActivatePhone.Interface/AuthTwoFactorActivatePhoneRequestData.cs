@@ -7,7 +7,7 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Interface
   {
     private static readonly TimeSpan _defaultRequestTimeout = TimeSpan.FromSeconds(6);
 
-    public string PhoneNumber { get; set; }
+    public string FullPhoneNumber { get; set; }
 
     public string AuthToken { get; set; }
 
@@ -15,9 +15,9 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Interface
 
     public string HostName { get; set; }
 
-    public AuthTwoFactorActivatePhoneRequestData(string shopperId, string phoneNumber, string authToken, string ipAddress, string hostName, string sourceUrl, string orderId, string pathway, int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public AuthTwoFactorActivatePhoneRequestData(string shopperId, string countryCode, string phoneNumber, string authToken, string ipAddress, string hostName, string sourceUrl, string orderId, string pathway, int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      PhoneNumber = phoneNumber;
+      FullPhoneNumber = countryCode + phoneNumber;
       AuthToken = authToken;
       IpAddress = ipAddress;
       HostName = hostName;

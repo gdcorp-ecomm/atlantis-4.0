@@ -9,7 +9,8 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Tests
   public class AuthTwoFactorActivatePhoneTests
   {
     private const string VALID_SHOPPER_ID = "847235";
-    private const string VALID_PHONE = "14807605267";
+    private const string VALID_COUNTRY_CODE = "1";
+    private const string VALID_PHONE = "4807605267";
     private const string VALID_AUTH_TOKEN = "2893X2"; // techincally this is not valid, for these unit test, we can't spin up a new one each time
     private const string VALID_IP = "172.23.45.65";
     private const string VALID_HOST = "www.AuthTwoFactorActivatePhoneTests.com";
@@ -20,6 +21,7 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Tests
     public void AuthTwoFactorActivatePhoneValid()
     {
       AuthTwoFactorActivatePhoneRequestData requestData = new AuthTwoFactorActivatePhoneRequestData(VALID_SHOPPER_ID,
+                                                                                                    VALID_COUNTRY_CODE,
                                                                                                     VALID_PHONE,
                                                                                                     VALID_AUTH_TOKEN,
                                                                                                     VALID_IP,
@@ -40,6 +42,7 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Tests
     public void AuthTwoFactorActivatePhoneInValidShopper()
     {
       AuthTwoFactorActivatePhoneRequestData requestData = new AuthTwoFactorActivatePhoneRequestData(string.Empty,
+                                                                                                    VALID_COUNTRY_CODE,
                                                                                                     VALID_PHONE,
                                                                                                     VALID_AUTH_TOKEN,
                                                                                                     VALID_IP,
@@ -60,6 +63,7 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Tests
     public void AuthTwoFactorActivatePhoneInValidPhone()
     {
       AuthTwoFactorActivatePhoneRequestData requestData = new AuthTwoFactorActivatePhoneRequestData(VALID_SHOPPER_ID,
+                                                                                                    VALID_COUNTRY_CODE,
                                                                                                     string.Empty,
                                                                                                     VALID_AUTH_TOKEN,
                                                                                                     VALID_IP,
@@ -80,6 +84,7 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Tests
     public void AuthTwoFactorActivatePhoneInValidAuthToken()
     {
       AuthTwoFactorActivatePhoneRequestData requestData = new AuthTwoFactorActivatePhoneRequestData(VALID_SHOPPER_ID,
+                                                                                                    VALID_COUNTRY_CODE,
                                                                                                     VALID_PHONE,
                                                                                                     string.Empty,
                                                                                                     VALID_IP,
@@ -100,6 +105,7 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Tests
     public void AuthTwoFactorActivatePhoneInValidIpAddress()
     {
       AuthTwoFactorActivatePhoneRequestData requestData = new AuthTwoFactorActivatePhoneRequestData(VALID_SHOPPER_ID,
+                                                                                                    VALID_COUNTRY_CODE,
                                                                                                     VALID_PHONE,
                                                                                                     VALID_PHONE,
                                                                                                     string.Empty,
@@ -120,6 +126,7 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Tests
     public void AuthTwoFactorActivatePhoneInValidHost()
     {
       AuthTwoFactorActivatePhoneRequestData requestData = new AuthTwoFactorActivatePhoneRequestData(VALID_SHOPPER_ID,
+                                                                                                    VALID_COUNTRY_CODE,
                                                                                                     VALID_PHONE,
                                                                                                     VALID_PHONE,
                                                                                                     VALID_IP,

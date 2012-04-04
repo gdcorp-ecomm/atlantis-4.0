@@ -30,7 +30,7 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Impl
         result.Add(AuthValidationCodes.ValidateHostNameRequired);
       }
 
-      if (string.IsNullOrEmpty(request.PhoneNumber))
+      if (string.IsNullOrEmpty(request.FullPhoneNumber))
       {
         result.Add(AuthValidationCodes.ValidatePhoneRequired);
       }
@@ -80,7 +80,7 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Impl
             }
             authService.ClientCertificates.Add(clientCert);
 
-            statusCode = authService.ActivatePhone(request.ShopperID, request.AuthToken, request.PhoneNumber, request.HostName, request.IpAddress, out errorOutput);
+            statusCode = authService.ActivatePhone(request.ShopperID, request.AuthToken, request.FullPhoneNumber, request.HostName, request.IpAddress, out errorOutput);
           }
 
           responseData = new AuthTwoFactorActivatePhoneResponseData(statusCode, validationCodes, errorOutput);

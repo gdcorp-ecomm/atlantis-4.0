@@ -155,6 +155,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
           productInfoURL = _links.GetUrl(LinkTypes.Help, TOPIC_RELATIVE_PATH + "154", QueryParamMode.CommonParameters, false, queryStringArgs);
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", "WEBMAIL_EULA", "isc", isc, "prog_id", _orderData.ProgId);
           break;
+        case EULARuleType.InstantPage:
+          productName = "InstantPage&#174;";
+          productInfoURL = _links.GetUrl(LinkTypes.Help, TOPIC_RELATIVE_PATH + "category/instantpage/866", QueryParamMode.CommonParameters, false, queryStringArgs);
+          legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", "InstantPage_TOS", "isc", isc, "prog_id", _orderData.ProgId);
+          break;
         case EULARuleType.QB:
           productName = ProductNames.QuickBlogcast;
           productInfoURL = _links.GetUrl(LinkTypes.Help, TOPIC_RELATIVE_PATH + "477", QueryParamMode.CommonParameters, false, queryStringArgs);

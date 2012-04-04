@@ -59,6 +59,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     WebStore,
     BusinessAccel,
     AdSpace,
-    XXX
+    XXX,
+    InstantPage
   }
 }

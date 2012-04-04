@@ -34,10 +34,32 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       }
     }
 
+    private void BuildEULADictionaryAutoActivate()
+    {
+      XmlNode detailNode = _orderData.OrderXmlDoc.SelectSingleNode("/ORDER/ORDERDETAIL");
+      XmlElement detailElement = (XmlElement)detailNode;
+      string pfidList = detailElement.GetAttribute("_auto_activate_pfids");
+      string[] uniquePFids = pfidList.Split(',');
+      foreach (string uniquepfid in uniquePFids)
+      {
+        switch (uniquepfid)
+        {
+          case "1865":
+          case "6413":
+          case "7413":
+            _applicableEULADictionary[EULARuleType.WebMail] = true;
+            break;
+          case "70761":
+            _applicableEULADictionary[EULARuleType.InstantPage] = true;
+            break;
+        }
+      }
+    }
+
     private void BuildApplicableEULADictionary()
     {
       _applicableEULADictionary = new Dictionary<EULARuleType, bool>();
-
+      BuildEULADictionaryAutoActivate();
       XmlNodeList itemNodes = _orderData.OrderXmlDoc.SelectNodes("/ORDER/ITEMS/ITEM");
       foreach (XmlElement itemElement in itemNodes)
       {

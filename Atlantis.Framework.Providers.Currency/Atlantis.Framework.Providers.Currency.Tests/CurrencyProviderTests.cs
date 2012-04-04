@@ -270,5 +270,23 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       string text = currency.PriceText(icann, false);
       Console.WriteLine(text);
     }
+
+    [TestMethod]
+    [DeploymentItem("Interop.gdDataCacheLib.dll")]
+    [DeploymentItem("Interop.gdMiniEncryptLib.dll")]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.PLSignupInfo.Impl.dll")]
+    public void TestResellerMCP()
+    {
+      SetContexts(281896, "");
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+      ICurrencyInfo euros = CurrencyData.GetCurrencyInfo("EUR");
+      bool isEurMCP = currency.IsCurrencyTransactionalForContext(euros);
+      string defaultCurrencyType = currency.SelectedDisplayCurrencyType;
+
+      Console.WriteLine(isEurMCP);
+      Console.WriteLine(defaultCurrencyType);
+    }
+
   }
 }

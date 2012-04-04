@@ -48,6 +48,7 @@
     <Compile Include="CurrencyInfo.cs" />
     <Compile Include="CurrencyPrice.cs" />
     <Compile Include="CurrencyProvider.cs" />
+    <Compile Include="CurrencyProviderEngineRequests.cs" />
     <Compile Include="CurrencyProviderOptions.cs" />
     <Compile Include="MultiCurrencyContexts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,12 +66,12 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.PromoData\Atlantis.Framework.PromoData.Impl\Atlantis.Framework.PromoData.Impl.csproj">
-      <Project>{8EB9D6B2-C2B6-4CD3-BEAE-2C22347A81DA}</Project>
-      <Name>Atlantis.Framework.PromoData.Impl</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Interface\Atlantis.Framework.PLSignupInfo.Interface.csproj">
+      <Project>{3c228090-226d-435d-ac13-be073ccdfae2}</Project>
+      <Name>Atlantis.Framework.PLSignupInfo.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.PromoData\Atlantis.Framework.PromoData.Interface\Atlantis.Framework.PromoData.Interface.csproj">
-      <Project>{42E827B4-1E98-453B-8A36-009C201DD85A}</Project>
+      <Project>{42e827b4-1e98-453b-8a36-009c201dd85a}</Project>
       <Name>Atlantis.Framework.PromoData.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">

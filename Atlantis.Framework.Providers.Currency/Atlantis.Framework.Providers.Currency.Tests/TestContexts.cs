@@ -71,12 +71,14 @@ namespace Atlantis.Framework.Providers.Currency.Tests
 
     public System.Web.HttpCookie NewCrossDomainCookie(string cookieName, DateTime expiration)
     {
-      throw new NotImplementedException();
+      HttpCookie result = new HttpCookie(cookieName);
+      result.Expires = expiration;
+      return result;
     }
 
     public System.Web.HttpCookie NewCrossDomainMemCookie(string cookieName)
     {
-      throw new NotImplementedException();
+      return new HttpCookie(cookieName);
     }
 
     public int PageCount

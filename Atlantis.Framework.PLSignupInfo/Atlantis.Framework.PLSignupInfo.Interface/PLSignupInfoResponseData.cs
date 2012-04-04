@@ -41,7 +41,7 @@ namespace Atlantis.Framework.PLSignupInfo.Interface
       XAttribute isMultiCurrencyAttribute = itemElement.Attribute("isMCPReseller");
       if (isMultiCurrencyAttribute != null)
       {
-        IsMultiCurrencyReseller = "1".Equals(isMultiCurrencyAttribute.Value);
+        IsMultiCurrencyReseller = !"0".Equals(isMultiCurrencyAttribute.Value);
       }
 
       XAttribute defaultTransactionCurrencyTypeAttribute = itemElement.Attribute("defaultTransactionCurrencyType");
@@ -62,6 +62,7 @@ namespace Atlantis.Framework.PLSignupInfo.Interface
     {
       string message = ex.Message + ex.StackTrace;
       string data = request.PrivateLabelId.ToString();
+      _exception = new AtlantisException(request, "PLSignupInfoResponseData", message, data, ex);
     }
 
     public string ToXML()

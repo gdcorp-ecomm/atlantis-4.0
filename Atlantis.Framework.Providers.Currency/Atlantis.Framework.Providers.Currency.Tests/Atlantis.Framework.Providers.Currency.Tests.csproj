@@ -112,6 +112,14 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Impl\Atlantis.Framework.PLSignupInfo.Impl.csproj">
+      <Project>{4dfb1615-1204-4095-b56e-c697a4ea6e03}</Project>
+      <Name>Atlantis.Framework.PLSignupInfo.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Interface\Atlantis.Framework.PLSignupInfo.Interface.csproj">
+      <Project>{3c228090-226d-435d-ac13-be073ccdfae2}</Project>
+      <Name>Atlantis.Framework.PLSignupInfo.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.PromoData\Atlantis.Framework.PromoData.Impl\Atlantis.Framework.PromoData.Impl.csproj">
       <Project>{8EB9D6B2-C2B6-4CD3-BEAE-2C22347A81DA}</Project>
       <Name>Atlantis.Framework.PromoData.Impl</Name>
@@ -158,7 +166,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="atlantis.config" />
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QA\" />

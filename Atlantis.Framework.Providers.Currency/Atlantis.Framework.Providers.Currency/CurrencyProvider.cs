@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.PLSignupInfo.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Preferences;
 using Atlantis.Framework.Providers.Interface.PromoData;
@@ -61,6 +62,7 @@ namespace Atlantis.Framework.Providers.Currency
     private const string NOT_OFFERED_MSG_DEFAULT = "Product not offered.";
     private const string CURRENCY_PREFERENCE_KEY = "gdshop_currencyType";
     private const string LEGACY_CURRENCY_COOKIE_PREFIX = "currency";
+
     protected const string LEGACY_CURRENCY_COOKIE_PORTABLE_SOURCE_STR_KEY = "potableSourceStr";
 
     private ISiteContext _siteContext;
@@ -153,6 +155,7 @@ namespace Atlantis.Framework.Providers.Currency
     private ICurrencyInfo _selectedDisplayCurrencyInfo;
     private ICurrencyInfo _selectedTransactionalCurrencyInfo;
     private string _selectedTransactionalCurrencyType;
+    private string _selectedDisplayCurrencyType = null;
 
     public CurrencyProvider(IProviderContainer providerContainer) : base(providerContainer)
     {
@@ -168,26 +171,36 @@ namespace Atlantis.Framework.Providers.Currency
     {
       get
       {
-        string result = null;
-
-        if (ShopperPreferences != null)
+        if (_selectedDisplayCurrencyType == null)
         {
-          if (ShopperPreferences.HasPreference(CURRENCY_PREFERENCE_KEY))
+          if (ShopperPreferences != null)
           {
-            result = ShopperPreferences.GetPreference(CURRENCY_PREFERENCE_KEY, string.Empty);
+            if (ShopperPreferences.HasPreference(CURRENCY_PREFERENCE_KEY))
+            {
+              _selectedDisplayCurrencyType = ShopperPreferences.GetPreference(CURRENCY_PREFERENCE_KEY, string.Empty);
+            }
+          }
+          else if (UseLegacyCookies)
+          {
+            // If the ShopperPreferences provider could not be resolved, we have to manually grab the legacy cookie value
+            _selectedDisplayCurrencyType = LegacyCurrencyCookieValue;
+          }
+
+          if ((string.IsNullOrEmpty(_selectedDisplayCurrencyType)) || (!IsValidCurrencyType(_selectedDisplayCurrencyType)))
+          {
+            _selectedDisplayCurrencyType = CURRENCY_TYPE_USD;
+
+            if ((IsMultiCurrencyActiveForContext) && (SiteContext.ContextId == 6))
+            {
+              if ((PLSignupInfoData != null) && (IsValidCurrencyType(PLSignupInfoData.DefaultTransactionCurrencyType)))
+              {
+                _selectedDisplayCurrencyType = PLSignupInfoData.DefaultTransactionCurrencyType;
+              }
+            }
           }
         }
-        else if (UseLegacyCookies)
-        {
-          // If the ShopperPreferences provider could not be resolved, we have to manually grab the legacy cookie value
-          result = LegacyCurrencyCookieValue;
-        }
 
-        if ((string.IsNullOrEmpty(result)) || (!IsValidCurrencyType(result)))
-        {
-          result = CURRENCY_TYPE_USD;
-        }
-        return result;
+        return _selectedDisplayCurrencyType;
       }
       set
       {
@@ -206,6 +219,7 @@ namespace Atlantis.Framework.Providers.Currency
           _selectedDisplayCurrencyInfo = null;
           _selectedTransactionalCurrencyType = null;
           _selectedTransactionalCurrencyInfo = null;
+          _selectedDisplayCurrencyType = value;
         }
       }
     }
@@ -232,9 +246,42 @@ namespace Atlantis.Framework.Providers.Currency
       {
         if (!_isMultiCurrencyActiveForContext.HasValue)
         {
-          _isMultiCurrencyActiveForContext = MultiCurrencyContexts.GetIsContextIdActive(SiteContext.ContextId);
+          if (SiteContext.ContextId == 6)
+          {
+            _isMultiCurrencyActiveForContext = 
+              MultiCurrencyContexts.GetIsContextIdActive(SiteContext.ContextId) && 
+              ((PLSignupInfoData != null) && (PLSignupInfoData.IsMultiCurrencyReseller));
+          }
+          else
+          {
+            _isMultiCurrencyActiveForContext = MultiCurrencyContexts.GetIsContextIdActive(SiteContext.ContextId);
+          }
         }
         return _isMultiCurrencyActiveForContext.Value;
+      }
+    }
+
+    private PLSignupInfoResponseData _plSignupInfoData = null;
+    private bool plSignupInfoCalled = false;
+    private PLSignupInfoResponseData PLSignupInfoData
+    {
+      get
+      {
+        if ((_plSignupInfoData == null) && (!plSignupInfoCalled))
+        {
+          plSignupInfoCalled = true;
+          try
+          {
+            PLSignupInfoRequestData request = new PLSignupInfoRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, SiteContext.Pathway, SiteContext.PageCount, SiteContext.PrivateLabelId);
+            _plSignupInfoData = (PLSignupInfoResponseData)DataCache.DataCache.GetProcessRequest(request, CurrencyProviderEngineRequests.PLSignupInfo);
+          }
+          catch 
+          {
+            _plSignupInfoData = null; // Engine will log the error once. 
+          }
+        }
+
+        return _plSignupInfoData;
       }
     }
 

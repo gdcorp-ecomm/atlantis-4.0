@@ -18,11 +18,11 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Interface
 
     public string IpAddress { get; private set; }
 
-    public AuthTwoFactorEnableRequestData(string shopperId, string password, int privateLabelId, string phoneNumber, string carrierId, string hostName, string ipAddress, string sourceUrl, string orderId, string pathway, int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public AuthTwoFactorEnableRequestData(string shopperId, string password, int privateLabelId, string countryCode, string phoneNumber, string carrierId, string hostName, string ipAddress, string sourceUrl, string orderId, string pathway, int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       Password = password;
       PrivateLableId = privateLabelId;
-      Phone = new AuthTwoFactorPhone(phoneNumber, carrierId);
+      Phone = new AuthTwoFactorPhone(countryCode, phoneNumber, carrierId);
       HostName = hostName;
       IpAddress = ipAddress;
 

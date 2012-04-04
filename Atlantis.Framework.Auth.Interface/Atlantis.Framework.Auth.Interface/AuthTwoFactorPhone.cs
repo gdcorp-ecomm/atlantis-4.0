@@ -8,6 +8,9 @@ namespace Atlantis.Framework.Auth.Interface
     [XmlIgnore]
     private int _statusCode = -1;
 
+    [XmlAttribute(AttributeName = "cc")]
+    public string CountryCode { get; set; }
+
     [XmlAttribute(AttributeName = "number")]
     public string PhoneNumber { get; set; }
 
@@ -40,15 +43,13 @@ namespace Atlantis.Framework.Auth.Interface
     {
     }
 
-    public AuthTwoFactorPhone(string phoneNumber, string carrierId)
+    public AuthTwoFactorPhone(string countryCode, string phoneNumber, string carrierId) : this(countryCode, phoneNumber, carrierId, -1)
     {
-      PhoneNumber = phoneNumber;
-      CarrierId = carrierId;
-      StatusCode = -1;
     }
 
-    public AuthTwoFactorPhone(string phoneNumber, string carrierId, int statusCode)
+    public AuthTwoFactorPhone(string countryCode, string phoneNumber, string carrierId, int statusCode)
     {
+      CountryCode = countryCode;
       PhoneNumber = phoneNumber;
       CarrierId = carrierId;
       StatusCode = statusCode;
@@ -63,12 +64,14 @@ namespace Atlantis.Framework.Auth.Interface
         try
         {
           AuthTwoFactorPhone authTwoFactorPhone = xmlSerializer.Deserialize<AuthTwoFactorPhone>(xml);
+          CountryCode = authTwoFactorPhone.CountryCode;
           PhoneNumber = authTwoFactorPhone.PhoneNumber;
           CarrierId = authTwoFactorPhone.CarrierId;
           StatusCode = authTwoFactorPhone.StatusCode;
         }
         catch
         {
+          CountryCode = string.Empty;
           PhoneNumber = string.Empty;
           CarrierId = string.Empty;
           StatusCode = -1;

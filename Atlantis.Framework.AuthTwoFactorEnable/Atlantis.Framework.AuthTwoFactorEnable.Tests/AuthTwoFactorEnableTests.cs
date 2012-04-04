@@ -13,7 +13,8 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
     private const string VALID_DEV_SHOPPER_PASSWORD = "passsword";
     private const string VALID_IP = "172.16.44.792";
     private const string VALID_HOSTNAME = "idp.godaddy.com";
-    private const string VALID_PHONE = "14807605267";
+    private const string VALID_COUNTRY_CODE = "1";
+    private const string VALID_PHONE = "4807605267";
     private const string VALID_CARRIER_ID = "1";
 
 
@@ -24,6 +25,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
       AuthTwoFactorEnableRequestData requestData = new AuthTwoFactorEnableRequestData(string.Empty,
                                                                                       VALID_DEV_SHOPPER_PASSWORD,
                                                                                       1,
+                                                                                      VALID_COUNTRY_CODE,
                                                                                       VALID_PHONE,
                                                                                       VALID_CARRIER_ID,
                                                                                       VALID_HOSTNAME,
@@ -46,6 +48,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
       AuthTwoFactorEnableRequestData requestData = new AuthTwoFactorEnableRequestData(VALID_DEV_SHOPPER,
                                                                                       string.Empty,
                                                                                       1,
+                                                                                      VALID_COUNTRY_CODE,
                                                                                       VALID_PHONE,
                                                                                       VALID_CARRIER_ID,
                                                                                       VALID_HOSTNAME,
@@ -68,6 +71,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
       AuthTwoFactorEnableRequestData requestData = new AuthTwoFactorEnableRequestData(VALID_DEV_SHOPPER,
                                                                                       VALID_DEV_SHOPPER_PASSWORD,
                                                                                       1,
+                                                                                      VALID_COUNTRY_CODE,
                                                                                       string.Empty,
                                                                                       VALID_CARRIER_ID,
                                                                                       VALID_HOSTNAME,
@@ -90,6 +94,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
       AuthTwoFactorEnableRequestData requestData = new AuthTwoFactorEnableRequestData(VALID_DEV_SHOPPER,
                                                                                       VALID_DEV_SHOPPER_PASSWORD,
                                                                                       1,
+                                                                                      VALID_COUNTRY_CODE,
                                                                                       VALID_PHONE,
                                                                                       string.Empty,
                                                                                       VALID_HOSTNAME,
@@ -112,6 +117,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
       AuthTwoFactorEnableRequestData requestData = new AuthTwoFactorEnableRequestData(VALID_DEV_SHOPPER,
                                                                                       VALID_DEV_SHOPPER_PASSWORD,
                                                                                       1,
+                                                                                      VALID_COUNTRY_CODE,
                                                                                       VALID_PHONE,
                                                                                       VALID_CARRIER_ID,
                                                                                       string.Empty,
@@ -134,6 +140,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
       AuthTwoFactorEnableRequestData requestData = new AuthTwoFactorEnableRequestData(VALID_DEV_SHOPPER,
                                                                                       VALID_DEV_SHOPPER_PASSWORD,
                                                                                       1,
+                                                                                      VALID_COUNTRY_CODE,
                                                                                       VALID_PHONE,
                                                                                       VALID_CARRIER_ID,
                                                                                       VALID_HOSTNAME,
@@ -156,6 +163,7 @@ namespace Atlantis.Framework.AuthTwoFactorEnable.Tests
       AuthTwoFactorEnableRequestData requestData = new AuthTwoFactorEnableRequestData(VALID_DEV_SHOPPER,
                                                                                       VALID_DEV_SHOPPER_PASSWORD,
                                                                                       1,
+                                                                                      VALID_COUNTRY_CODE,
                                                                                       VALID_PHONE,
                                                                                       VALID_CARRIER_ID,
                                                                                       VALID_HOSTNAME,

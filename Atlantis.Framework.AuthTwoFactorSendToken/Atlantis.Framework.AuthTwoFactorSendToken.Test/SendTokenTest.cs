@@ -1,10 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.AuthTwoFactorSendToken.Interface;
-using Atlantis.Framework.Engine;
 using Atlantis.Framework.Auth.Interface;
 using System.Diagnostics;
 
@@ -18,11 +13,12 @@ namespace Atlantis.Framework.AuthTwoFactorSendToken.Test
     public void SendTokenFail()
     {
       string shopperId = "867900";
-      string phoneNumber = "5555555555";
+      string countryCode = "1";
+      string phoneNumber = "1234567890";
       string hostName = "host";
       string ipAddress = "172.23.45.65";
 
-      var request = new AuthTwoFactorSendTokenRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, phoneNumber, hostName, ipAddress);
+      var request = new AuthTwoFactorSendTokenRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, countryCode, phoneNumber, hostName, ipAddress);
       var response = Engine.Engine.ProcessRequest(request, 509) as AuthTwoFactorSendTokenResponseData;
 
       Assert.IsFalse(response.StatusCode == TwoFactorWebserviceResponseCodes.Success);
@@ -36,11 +32,12 @@ namespace Atlantis.Framework.AuthTwoFactorSendToken.Test
     public void SendTokenPass()
     {
       string shopperId = "867900";
-      string phoneNumber = "15082415881";
+      string countryCode = "1";
+      string phoneNumber = "5082415881";
       string hostName = "idp.godaddy.com";
       string ipAddress = "172.23.44.65";
 
-      var request = new AuthTwoFactorSendTokenRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, phoneNumber, hostName, ipAddress);
+      var request = new AuthTwoFactorSendTokenRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, countryCode, phoneNumber, hostName, ipAddress);
       var response = Engine.Engine.ProcessRequest(request, 509) as AuthTwoFactorSendTokenResponseData;
 
       Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.Success);
@@ -54,11 +51,12 @@ namespace Atlantis.Framework.AuthTwoFactorSendToken.Test
     public void SendTokenNoPhone()
     {
       string shopperId = "867900";
-      string phoneNumber = "";
+      string countryCode = "1";
+      string phoneNumber = string.Empty;
       string hostName = "host";
       string ipAddress = "172.23.45.65";
 
-      var request = new AuthTwoFactorSendTokenRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, phoneNumber, hostName, ipAddress);
+      var request = new AuthTwoFactorSendTokenRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, countryCode, phoneNumber, hostName, ipAddress);
       var response = Engine.Engine.ProcessRequest(request, 509) as AuthTwoFactorSendTokenResponseData;
 
       Assert.IsFalse(response.StatusCode == TwoFactorWebserviceResponseCodes.Success);

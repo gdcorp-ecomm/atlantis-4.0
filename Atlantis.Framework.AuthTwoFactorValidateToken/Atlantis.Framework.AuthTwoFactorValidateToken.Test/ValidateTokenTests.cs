@@ -1,12 +1,6 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.AuthTwoFactorValidateToken.Interface;
 using Atlantis.Framework.Auth.Interface;
-using Atlantis.Framework.Engine;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.AuthTwoFactorValidateToken.Test
 {
@@ -18,12 +12,13 @@ namespace Atlantis.Framework.AuthTwoFactorValidateToken.Test
     public void InvalidTokenTest()
     {
       string shopperId = "867900";
-      string phoneNumber = "5555555555";
+      string countryCode = "1";
+      string phoneNumber = "1234567890";
       string hostName = "host";
       string ipAddress = "172.23.45.65";
       string authToken = "2893X2";
 
-      var request = new AuthTwoFactorValidateTokenRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, authToken, phoneNumber, hostName, ipAddress);
+      var request = new AuthTwoFactorValidateTokenRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, authToken, countryCode, phoneNumber, hostName, ipAddress);
       var response = Engine.Engine.ProcessRequest(request, 510) as AuthTwoFactorValidateTokenResponseData;
 
       Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.Error);
@@ -37,12 +32,13 @@ namespace Atlantis.Framework.AuthTwoFactorValidateToken.Test
     public void ValidTokenTest()
     {
       string shopperId = "867900";
-      string phoneNumber = "15082415881";
+      string countryCode = "1";
+      string phoneNumber = "5082415881";
       string hostName = "idp.godaddy.com";
       string ipAddress = "172.23.45.65";
       string authToken = "454621";
 
-      var request = new AuthTwoFactorValidateTokenRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, authToken, phoneNumber, hostName, ipAddress);
+      var request = new AuthTwoFactorValidateTokenRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, authToken, countryCode, phoneNumber, hostName, ipAddress);
       var response = Engine.Engine.ProcessRequest(request, 510) as AuthTwoFactorValidateTokenResponseData;
 
       Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.Success);

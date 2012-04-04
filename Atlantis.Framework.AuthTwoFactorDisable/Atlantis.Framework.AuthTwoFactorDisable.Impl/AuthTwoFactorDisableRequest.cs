@@ -31,7 +31,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Impl
         validationCodes.Add(AuthValidationCodes.ValidateAuthTokenRequired);
       }
 
-      if (string.IsNullOrEmpty(request.PhoneNumber))
+      if (string.IsNullOrEmpty(request.FullPhoneNumber))
       {
         validationCodes.Add(AuthValidationCodes.ValidatePhoneRequired);
       }
@@ -89,7 +89,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Impl
               , request.Password
               , request.PrivateLableId
               , request.AuthToken
-              , request.PhoneNumber
+              , request.FullPhoneNumber
               , request.HostName
               , request.IpAddress
               , out statusMessage);

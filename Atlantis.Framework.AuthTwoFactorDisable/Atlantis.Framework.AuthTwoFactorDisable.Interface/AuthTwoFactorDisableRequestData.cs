@@ -10,7 +10,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Interface
     public string Password { get; private set; }
     public string AuthToken { get; private set; }
     public int PrivateLableId { get; private set; }
-    public string PhoneNumber { get; private set; }
+    public string FullPhoneNumber { get; private set; }
     public string HostName { get; private set; }
     public string IpAddress { get; private set; }
 
@@ -24,6 +24,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Interface
       , string password
       , string authToken
       , int privateLabelId
+      , string countryCode
       , string phoneNumber
       , string hostName
       , string ipAddress)
@@ -33,7 +34,7 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Interface
       Password = password;
       AuthToken = authToken;
       PrivateLableId = privateLabelId;
-      PhoneNumber = phoneNumber;
+      FullPhoneNumber = countryCode + phoneNumber;
       HostName = hostName;
       IpAddress = ipAddress;
     }

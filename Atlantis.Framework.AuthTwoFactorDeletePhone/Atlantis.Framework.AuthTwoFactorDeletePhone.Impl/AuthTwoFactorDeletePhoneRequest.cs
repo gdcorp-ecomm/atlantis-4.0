@@ -21,7 +21,7 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Impl
         validationCodes.Add(AuthValidationCodes.ValidateShopperIdRequired);
       }
 
-      if (string.IsNullOrEmpty(request.PhoneNumber))
+      if (string.IsNullOrEmpty(request.FullPhoneNumber))
       {
         validationCodes.Add(AuthValidationCodes.ValidatePhoneRequired);
       }
@@ -75,7 +75,7 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Impl
             authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
             authenticationService.ClientCertificates.Add(cert);
             
-            statusCode = authenticationService.DeletePhone(request.ShopperID, request.PhoneNumber, request.HostName, request.IpAddress, out statusMessage);
+            statusCode = authenticationService.DeletePhone(request.ShopperID, request.FullPhoneNumber, request.HostName, request.IpAddress, out statusMessage);
             responseData = new AuthTwoFactorDeletePhoneResponseData(statusCode, statusMessage, validationCodes);
 
           }

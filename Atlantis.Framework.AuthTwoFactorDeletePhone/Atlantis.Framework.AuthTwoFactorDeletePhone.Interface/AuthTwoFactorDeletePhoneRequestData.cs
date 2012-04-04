@@ -7,7 +7,7 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Interface
   {
     #region Properties
 
-    public string PhoneNumber { get; private set; }
+    public string FullPhoneNumber { get; private set; }
     public string HostName { get; private set; }
     public string IpAddress { get; private set; }
 
@@ -18,13 +18,14 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Interface
       , string orderId
       , string pathway
       , int pageCount
+      , string countryCode
       , string phoneNumber
       , string hostName
       , string ipAddress)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestTimeout = TimeSpan.FromSeconds(5);
-      PhoneNumber = phoneNumber;
+      FullPhoneNumber = countryCode + phoneNumber;
       HostName = hostName;
       IpAddress = ipAddress;
     }

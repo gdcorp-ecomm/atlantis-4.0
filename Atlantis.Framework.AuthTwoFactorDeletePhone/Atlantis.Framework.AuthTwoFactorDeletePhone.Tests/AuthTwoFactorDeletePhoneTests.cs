@@ -20,6 +20,7 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Tests
         , string.Empty
         , string.Empty
         , 0
+        , "1"
         , "4805288819"
         , "MyHost"
         , "127.0.0.1");

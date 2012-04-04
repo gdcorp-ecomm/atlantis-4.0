@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:s0="urn:WscgdBasketService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WscgdBasketService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="urn:WscgdBasketService" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WscgdBasketService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WscgdBasketService">
       <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
@@ -158,6 +158,13 @@
   <wsdl:message name="AddShippingToBasketOut">
     <wsdl:part name="return" type="s:string" />
   </wsdl:message>
+  <wsdl:message name="AddBillingToBasketIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddBillingToBasketOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
   <wsdl:message name="RemoveBulkDomainsByTypeIn">
     <wsdl:part name="bstrShopperID" type="s:string" />
     <wsdl:part name="bstrBasketType" type="s:string" />
@@ -173,6 +180,23 @@
     <wsdl:part name="bstrSLDs" type="s:string" />
   </wsdl:message>
   <wsdl:message name="RemoveBulkDomainsOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveDomainsByItemIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lIndex" type="s:int" />
+    <wsdl:part name="bstrDomains" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveDomainsByItemOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveDomainsByItemWithTypeIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrBasketType" type="s:string" />
+    <wsdl:part name="lIndex" type="s:int" />
+    <wsdl:part name="bstrDomains" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveDomainsByItemWithTypeOut">
     <wsdl:part name="return" type="s:string" />
   </wsdl:message>
   <wsdl:message name="DeleteBasketByTypeIn">
@@ -362,6 +386,113 @@
   <wsdl:message name="GetItemCountsOut">
     <wsdl:part name="return" type="s:string" />
   </wsdl:message>
+  <wsdl:message name="DeleteItemsByPairWithTypeIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrBasketType" type="s:string" />
+    <wsdl:part name="bstrPairs" type="s:string" />
+    <wsdl:part name="lLocking" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemsByPairWithTypeOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyItemByPairWithTypeIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrBasketType" type="s:string" />
+    <wsdl:part name="bstrRowID" type="s:string" />
+    <wsdl:part name="bstrItemID" type="s:string" />
+    <wsdl:part name="bstrQuantity" type="s:string" />
+    <wsdl:part name="lLocking" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="ModifyItemByPairWithTypeOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMiniCartXMLRefreshByTypeIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrBasketType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMiniCartXMLRefreshByTypeOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RequestDelayedPurchaseIn">
+    <wsdl:part name="bstrDelayedPurchaseXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RequestDelayedPurchaseOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrInvoiceID" type="s:string" />
+    <wsdl:part name="pbstrRedirectDataXML" type="s:string" />
+    <wsdl:part name="pbstrErrorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcessDelayedPurchaseResponseIn">
+    <wsdl:part name="bstrInvoiceID" type="s:string" />
+    <wsdl:part name="bstrProcessorResponse" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcessDelayedPurchaseResponseOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pvbOrderProcessed" type="s:short" />
+  </wsdl:message>
+  <wsdl:message name="ProcessDelayedPurchaseResponseExIn">
+    <wsdl:part name="bstrInvoiceID" type="s:string" />
+    <wsdl:part name="bstrProcessorResponse" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcessDelayedPurchaseResponseExOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pvbOrderProcessed" type="s:short" />
+    <wsdl:part name="pbstrOrderXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TransferInvoiceToBasketIn">
+    <wsdl:part name="bstrInvoiceID" type="s:string" />
+    <wsdl:part name="bstrAlternateShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TransferInvoiceToBasketOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrErrorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoicesForShopperIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoicesForShopperOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrErrorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceDetailIn">
+    <wsdl:part name="bstrInvoiceID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoiceDetailOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrErrorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CancelInvoiceIn">
+    <wsdl:part name="bstrInvoiceID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CancelInvoiceOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrErrorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoicesForShopperDisplayIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lDaysBack" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetInvoicesForShopperDisplayOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrErrorXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInStoreCreditIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrCurrency" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInStoreCreditOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketPriceXMLByTypeEx2In">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrPaymentType" type="s:string" />
+    <wsdl:part name="vtDeleteRefund" type="s:short" />
+    <wsdl:part name="bstrBasketType" type="s:string" />
+    <wsdl:part name="bstrBasketAttribs" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBasketPriceXMLByTypeEx2Out">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
   <wsdl:portType name="WscgdBasketServiceSoap">
     <wsdl:operation name="GetBasketXMLByType">
       <wsdl:input message="s0:GetBasketXMLByTypeIn" />
@@ -443,6 +574,10 @@
       <wsdl:input message="s0:AddShippingToBasketIn" />
       <wsdl:output message="s0:AddShippingToBasketOut" />
     </wsdl:operation>
+    <wsdl:operation name="AddBillingToBasket">
+      <wsdl:input message="s0:AddBillingToBasketIn" />
+      <wsdl:output message="s0:AddBillingToBasketOut" />
+    </wsdl:operation>
     <wsdl:operation name="RemoveBulkDomainsByType">
       <wsdl:input message="s0:RemoveBulkDomainsByTypeIn" />
       <wsdl:output message="s0:RemoveBulkDomainsByTypeOut" />
@@ -450,6 +585,14 @@
     <wsdl:operation name="RemoveBulkDomains">
       <wsdl:input message="s0:RemoveBulkDomainsIn" />
       <wsdl:output message="s0:RemoveBulkDomainsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDomainsByItem">
+      <wsdl:input message="s0:RemoveDomainsByItemIn" />
+      <wsdl:output message="s0:RemoveDomainsByItemOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDomainsByItemWithType">
+      <wsdl:input message="s0:RemoveDomainsByItemWithTypeIn" />
+      <wsdl:output message="s0:RemoveDomainsByItemWithTypeOut" />
     </wsdl:operation>
     <wsdl:operation name="DeleteBasketByType">
       <wsdl:input message="s0:DeleteBasketByTypeIn" />
@@ -550,6 +693,58 @@
     <wsdl:operation name="GetItemCounts">
       <wsdl:input message="s0:GetItemCountsIn" />
       <wsdl:output message="s0:GetItemCountsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemsByPairWithType">
+      <wsdl:input message="s0:DeleteItemsByPairWithTypeIn" />
+      <wsdl:output message="s0:DeleteItemsByPairWithTypeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyItemByPairWithType">
+      <wsdl:input message="s0:ModifyItemByPairWithTypeIn" />
+      <wsdl:output message="s0:ModifyItemByPairWithTypeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMiniCartXMLRefreshByType">
+      <wsdl:input message="s0:GetMiniCartXMLRefreshByTypeIn" />
+      <wsdl:output message="s0:GetMiniCartXMLRefreshByTypeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestDelayedPurchase">
+      <wsdl:input message="s0:RequestDelayedPurchaseIn" />
+      <wsdl:output message="s0:RequestDelayedPurchaseOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessDelayedPurchaseResponse">
+      <wsdl:input message="s0:ProcessDelayedPurchaseResponseIn" />
+      <wsdl:output message="s0:ProcessDelayedPurchaseResponseOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessDelayedPurchaseResponseEx">
+      <wsdl:input message="s0:ProcessDelayedPurchaseResponseExIn" />
+      <wsdl:output message="s0:ProcessDelayedPurchaseResponseExOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TransferInvoiceToBasket">
+      <wsdl:input message="s0:TransferInvoiceToBasketIn" />
+      <wsdl:output message="s0:TransferInvoiceToBasketOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoicesForShopper">
+      <wsdl:input message="s0:GetInvoicesForShopperIn" />
+      <wsdl:output message="s0:GetInvoicesForShopperOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceDetail">
+      <wsdl:input message="s0:GetInvoiceDetailIn" />
+      <wsdl:output message="s0:GetInvoiceDetailOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelInvoice">
+      <wsdl:input message="s0:CancelInvoiceIn" />
+      <wsdl:output message="s0:CancelInvoiceOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoicesForShopperDisplay">
+      <wsdl:input message="s0:GetInvoicesForShopperDisplayIn" />
+      <wsdl:output message="s0:GetInvoicesForShopperDisplayOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInStoreCredit">
+      <wsdl:input message="s0:GetInStoreCreditIn" />
+      <wsdl:output message="s0:GetInStoreCreditOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketPriceXMLByTypeEx2">
+      <wsdl:input message="s0:GetBasketPriceXMLByTypeEx2In" />
+      <wsdl:output message="s0:GetBasketPriceXMLByTypeEx2Out" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WscgdBasketServiceSoap" type="s0:WscgdBasketServiceSoap">
@@ -734,6 +929,15 @@
         <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AddBillingToBasket">
+      <soap:operation soapAction="#AddBillingToBasket" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="RemoveBulkDomainsByType">
       <soap:operation soapAction="#RemoveBulkDomainsByType" style="rpc" />
       <wsdl:input>
@@ -745,6 +949,24 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveBulkDomains">
       <soap:operation soapAction="#RemoveBulkDomains" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDomainsByItem">
+      <soap:operation soapAction="#RemoveDomainsByItem" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDomainsByItemWithType">
+      <soap:operation soapAction="#RemoveDomainsByItemWithType" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
@@ -977,10 +1199,127 @@
         <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="DeleteItemsByPairWithType">
+      <soap:operation soapAction="#DeleteItemsByPairWithType" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyItemByPairWithType">
+      <soap:operation soapAction="#ModifyItemByPairWithType" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMiniCartXMLRefreshByType">
+      <soap:operation soapAction="#GetMiniCartXMLRefreshByType" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestDelayedPurchase">
+      <soap:operation soapAction="#RequestDelayedPurchase" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessDelayedPurchaseResponse">
+      <soap:operation soapAction="#ProcessDelayedPurchaseResponse" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessDelayedPurchaseResponseEx">
+      <soap:operation soapAction="#ProcessDelayedPurchaseResponseEx" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransferInvoiceToBasket">
+      <soap:operation soapAction="#TransferInvoiceToBasket" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoicesForShopper">
+      <soap:operation soapAction="#GetInvoicesForShopper" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceDetail">
+      <soap:operation soapAction="#GetInvoiceDetail" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelInvoice">
+      <soap:operation soapAction="#CancelInvoice" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoicesForShopperDisplay">
+      <soap:operation soapAction="#GetInvoicesForShopperDisplay" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInStoreCredit">
+      <soap:operation soapAction="#GetInStoreCredit" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBasketPriceXMLByTypeEx2">
+      <soap:operation soapAction="#GetBasketPriceXMLByTypeEx2" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WscgdBasketService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="WscgdBasketService">
     <wsdl:port name="WscgdBasketServiceSoap" binding="s0:WscgdBasketServiceSoap">
-      <soap:address location="http://devgdcomm02:80/WscgdBasket/WscgdBasket.dll?Handler=Default" />
+      <soap:address location="https://gdcomm.dev.glbt1.gdg:443/WscgdBasket/WscgdBasket.dll?Handler=Default" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

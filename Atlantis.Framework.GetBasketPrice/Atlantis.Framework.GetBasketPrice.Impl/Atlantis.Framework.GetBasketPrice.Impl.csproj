@@ -118,10 +118,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://devgdcomm02/WscgdBasket/WscgdBasket.dll%3fHandler=GenWscgdBasketWSDL">
+    <WebReferenceUrl Include="https://gdcomm.dev.glbt1.gdg/WscgdBasket/WscgdBasket.dll%3fHandler=GenWscgdBasketWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\WscgdBasket\</RelPath>
-      <UpdateFromURL>http://devgdcomm02/WscgdBasket/WscgdBasket.dll%3fHandler=GenWscgdBasketWSDL</UpdateFromURL>
+      <UpdateFromURL>https://gdcomm.dev.glbt1.gdg/WscgdBasket/WscgdBasket.dll%3fHandler=GenWscgdBasketWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

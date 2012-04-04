@@ -46,6 +46,13 @@ namespace Atlantis.Framework.GetBasketPrice.Interface
 
     public string PaymentType { get; set; }
 
+    string _basketAttributes = string.Empty;
+    public string BasketAttributes
+    {
+      get { return _basketAttributes; }
+      set { _basketAttributes = value; }
+    }
+
     private TimeSpan _requestTimeout = TimeSpan.FromSeconds(20);
 
     // **************************************************************** //

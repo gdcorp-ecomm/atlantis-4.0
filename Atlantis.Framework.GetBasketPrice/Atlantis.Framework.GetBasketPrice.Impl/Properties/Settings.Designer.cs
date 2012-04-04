@@ -26,7 +26,7 @@ namespace Atlantis.Framework.GetBasketPrice.Impl.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://devgdcomm02:80/WscgdBasket/WscgdBasket.dll?Handler=Default")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://gdcomm.dev.glbt1.gdg:443/WscgdBasket/WscgdBasket.dll?Handler=Default")]
         public string Atlantis_Framework_GetBasketPrice_Impl_WscgdBasket_WscgdBasketService {
             get {
                 return ((string)(this["Atlantis_Framework_GetBasketPrice_Impl_WscgdBasket_WscgdBasketService"]));

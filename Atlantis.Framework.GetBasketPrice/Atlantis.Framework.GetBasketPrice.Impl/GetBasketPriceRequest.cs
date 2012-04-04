@@ -23,15 +23,15 @@ namespace Atlantis.Framework.GetBasketPrice.Impl
         using (WscgdBasket.WscgdBasketService oBasketWS = new WscgdBasket.WscgdBasketService())
         {
           oBasketWS.Url = ((WsConfigElement)oConfig).WSURL;
-          oBasketWS.Timeout = (int)oBasketPriceRequestData.RequestTimeout.TotalMilliseconds;
-
+          oBasketWS.Timeout = (int)oBasketPriceRequestData.RequestTimeout.TotalMilliseconds;         
           if (!string.IsNullOrEmpty(oBasketPriceRequestData.BasketType))
           {
-            sResponseXML = oBasketWS.GetBasketPriceXMLByType(
+            sResponseXML = oBasketWS.GetBasketPriceXMLByTypeEx2(
               oBasketPriceRequestData.ShopperID,
               oBasketPriceRequestData.PaymentType,
               (short)(oBasketPriceRequestData.DeleteRefund ? -1 : 0),
-              oBasketPriceRequestData.BasketType);
+              oBasketPriceRequestData.BasketType,
+              oBasketPriceRequestData.BasketAttributes);
           }
           else
           {

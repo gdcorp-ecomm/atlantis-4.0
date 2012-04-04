@@ -13,11 +13,16 @@
 // 
 #pragma warning disable 1591
 
-namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket
-{
-
-
-  /// <remarks/>
+namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket {
+    using System;
+    using System.Web.Services;
+    using System.Diagnostics;
+    using System.Web.Services.Protocols;
+    using System.ComponentModel;
+    using System.Xml.Serialization;
+    
+    
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -64,9 +69,15 @@ namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket
         
         private System.Threading.SendOrPostCallback AddShippingToBasketOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AddBillingToBasketOperationCompleted;
+        
         private System.Threading.SendOrPostCallback RemoveBulkDomainsByTypeOperationCompleted;
         
         private System.Threading.SendOrPostCallback RemoveBulkDomainsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RemoveDomainsByItemOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RemoveDomainsByItemWithTypeOperationCompleted;
         
         private System.Threading.SendOrPostCallback DeleteBasketByTypeOperationCompleted;
         
@@ -117,6 +128,32 @@ namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket
         private System.Threading.SendOrPostCallback GetBasketPriceXMLByTypeExOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetItemCountsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback DeleteItemsByPairWithTypeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ModifyItemByPairWithTypeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetMiniCartXMLRefreshByTypeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RequestDelayedPurchaseOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ProcessDelayedPurchaseResponseOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ProcessDelayedPurchaseResponseExOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback TransferInvoiceToBasketOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetInvoicesForShopperOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetInvoiceDetailOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback CancelInvoiceOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetInvoicesForShopperDisplayOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetInStoreCreditOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetBasketPriceXMLByTypeEx2OperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -217,10 +254,19 @@ namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket
         public event AddShippingToBasketCompletedEventHandler AddShippingToBasketCompleted;
         
         /// <remarks/>
+        public event AddBillingToBasketCompletedEventHandler AddBillingToBasketCompleted;
+        
+        /// <remarks/>
         public event RemoveBulkDomainsByTypeCompletedEventHandler RemoveBulkDomainsByTypeCompleted;
         
         /// <remarks/>
         public event RemoveBulkDomainsCompletedEventHandler RemoveBulkDomainsCompleted;
+        
+        /// <remarks/>
+        public event RemoveDomainsByItemCompletedEventHandler RemoveDomainsByItemCompleted;
+        
+        /// <remarks/>
+        public event RemoveDomainsByItemWithTypeCompletedEventHandler RemoveDomainsByItemWithTypeCompleted;
         
         /// <remarks/>
         public event DeleteBasketByTypeCompletedEventHandler DeleteBasketByTypeCompleted;
@@ -296,6 +342,45 @@ namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket
         
         /// <remarks/>
         public event GetItemCountsCompletedEventHandler GetItemCountsCompleted;
+        
+        /// <remarks/>
+        public event DeleteItemsByPairWithTypeCompletedEventHandler DeleteItemsByPairWithTypeCompleted;
+        
+        /// <remarks/>
+        public event ModifyItemByPairWithTypeCompletedEventHandler ModifyItemByPairWithTypeCompleted;
+        
+        /// <remarks/>
+        public event GetMiniCartXMLRefreshByTypeCompletedEventHandler GetMiniCartXMLRefreshByTypeCompleted;
+        
+        /// <remarks/>
+        public event RequestDelayedPurchaseCompletedEventHandler RequestDelayedPurchaseCompleted;
+        
+        /// <remarks/>
+        public event ProcessDelayedPurchaseResponseCompletedEventHandler ProcessDelayedPurchaseResponseCompleted;
+        
+        /// <remarks/>
+        public event ProcessDelayedPurchaseResponseExCompletedEventHandler ProcessDelayedPurchaseResponseExCompleted;
+        
+        /// <remarks/>
+        public event TransferInvoiceToBasketCompletedEventHandler TransferInvoiceToBasketCompleted;
+        
+        /// <remarks/>
+        public event GetInvoicesForShopperCompletedEventHandler GetInvoicesForShopperCompleted;
+        
+        /// <remarks/>
+        public event GetInvoiceDetailCompletedEventHandler GetInvoiceDetailCompleted;
+        
+        /// <remarks/>
+        public event CancelInvoiceCompletedEventHandler CancelInvoiceCompleted;
+        
+        /// <remarks/>
+        public event GetInvoicesForShopperDisplayCompletedEventHandler GetInvoicesForShopperDisplayCompleted;
+        
+        /// <remarks/>
+        public event GetInStoreCreditCompletedEventHandler GetInStoreCreditCompleted;
+        
+        /// <remarks/>
+        public event GetBasketPriceXMLByTypeEx2CompletedEventHandler GetBasketPriceXMLByTypeEx2Completed;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("#GetBasketXMLByType", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
@@ -1237,6 +1322,51 @@ namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#AddBillingToBasket", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string AddBillingToBasket(string bstrShopperID, string bstrRequestXML) {
+            object[] results = this.Invoke("AddBillingToBasket", new object[] {
+                        bstrShopperID,
+                        bstrRequestXML});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginAddBillingToBasket(string bstrShopperID, string bstrRequestXML, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("AddBillingToBasket", new object[] {
+                        bstrShopperID,
+                        bstrRequestXML}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndAddBillingToBasket(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AddBillingToBasketAsync(string bstrShopperID, string bstrRequestXML) {
+            this.AddBillingToBasketAsync(bstrShopperID, bstrRequestXML, null);
+        }
+        
+        /// <remarks/>
+        public void AddBillingToBasketAsync(string bstrShopperID, string bstrRequestXML, object userState) {
+            if ((this.AddBillingToBasketOperationCompleted == null)) {
+                this.AddBillingToBasketOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddBillingToBasketOperationCompleted);
+            }
+            this.InvokeAsync("AddBillingToBasket", new object[] {
+                        bstrShopperID,
+                        bstrRequestXML}, this.AddBillingToBasketOperationCompleted, userState);
+        }
+        
+        private void OnAddBillingToBasketOperationCompleted(object arg) {
+            if ((this.AddBillingToBasketCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddBillingToBasketCompleted(this, new AddBillingToBasketCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("#RemoveBulkDomainsByType", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
         public string RemoveBulkDomainsByType(string bstrShopperID, string bstrBasketType, string bstrIndex, string bstrSLDs) {
@@ -1332,6 +1462,105 @@ namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket
             if ((this.RemoveBulkDomainsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.RemoveBulkDomainsCompleted(this, new RemoveBulkDomainsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#RemoveDomainsByItem", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string RemoveDomainsByItem(string bstrShopperID, int lIndex, string bstrDomains) {
+            object[] results = this.Invoke("RemoveDomainsByItem", new object[] {
+                        bstrShopperID,
+                        lIndex,
+                        bstrDomains});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginRemoveDomainsByItem(string bstrShopperID, int lIndex, string bstrDomains, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("RemoveDomainsByItem", new object[] {
+                        bstrShopperID,
+                        lIndex,
+                        bstrDomains}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndRemoveDomainsByItem(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void RemoveDomainsByItemAsync(string bstrShopperID, int lIndex, string bstrDomains) {
+            this.RemoveDomainsByItemAsync(bstrShopperID, lIndex, bstrDomains, null);
+        }
+        
+        /// <remarks/>
+        public void RemoveDomainsByItemAsync(string bstrShopperID, int lIndex, string bstrDomains, object userState) {
+            if ((this.RemoveDomainsByItemOperationCompleted == null)) {
+                this.RemoveDomainsByItemOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoveDomainsByItemOperationCompleted);
+            }
+            this.InvokeAsync("RemoveDomainsByItem", new object[] {
+                        bstrShopperID,
+                        lIndex,
+                        bstrDomains}, this.RemoveDomainsByItemOperationCompleted, userState);
+        }
+        
+        private void OnRemoveDomainsByItemOperationCompleted(object arg) {
+            if ((this.RemoveDomainsByItemCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RemoveDomainsByItemCompleted(this, new RemoveDomainsByItemCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#RemoveDomainsByItemWithType", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string RemoveDomainsByItemWithType(string bstrShopperID, string bstrBasketType, int lIndex, string bstrDomains) {
+            object[] results = this.Invoke("RemoveDomainsByItemWithType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType,
+                        lIndex,
+                        bstrDomains});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginRemoveDomainsByItemWithType(string bstrShopperID, string bstrBasketType, int lIndex, string bstrDomains, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("RemoveDomainsByItemWithType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType,
+                        lIndex,
+                        bstrDomains}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndRemoveDomainsByItemWithType(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void RemoveDomainsByItemWithTypeAsync(string bstrShopperID, string bstrBasketType, int lIndex, string bstrDomains) {
+            this.RemoveDomainsByItemWithTypeAsync(bstrShopperID, bstrBasketType, lIndex, bstrDomains, null);
+        }
+        
+        /// <remarks/>
+        public void RemoveDomainsByItemWithTypeAsync(string bstrShopperID, string bstrBasketType, int lIndex, string bstrDomains, object userState) {
+            if ((this.RemoveDomainsByItemWithTypeOperationCompleted == null)) {
+                this.RemoveDomainsByItemWithTypeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoveDomainsByItemWithTypeOperationCompleted);
+            }
+            this.InvokeAsync("RemoveDomainsByItemWithType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType,
+                        lIndex,
+                        bstrDomains}, this.RemoveDomainsByItemWithTypeOperationCompleted, userState);
+        }
+        
+        private void OnRemoveDomainsByItemWithTypeOperationCompleted(object arg) {
+            if ((this.RemoveDomainsByItemWithTypeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RemoveDomainsByItemWithTypeCompleted(this, new RemoveDomainsByItemWithTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2497,6 +2726,628 @@ namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#DeleteItemsByPairWithType", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string DeleteItemsByPairWithType(string bstrShopperID, string bstrBasketType, string bstrPairs, int lLocking) {
+            object[] results = this.Invoke("DeleteItemsByPairWithType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType,
+                        bstrPairs,
+                        lLocking});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginDeleteItemsByPairWithType(string bstrShopperID, string bstrBasketType, string bstrPairs, int lLocking, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("DeleteItemsByPairWithType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType,
+                        bstrPairs,
+                        lLocking}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndDeleteItemsByPairWithType(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DeleteItemsByPairWithTypeAsync(string bstrShopperID, string bstrBasketType, string bstrPairs, int lLocking) {
+            this.DeleteItemsByPairWithTypeAsync(bstrShopperID, bstrBasketType, bstrPairs, lLocking, null);
+        }
+        
+        /// <remarks/>
+        public void DeleteItemsByPairWithTypeAsync(string bstrShopperID, string bstrBasketType, string bstrPairs, int lLocking, object userState) {
+            if ((this.DeleteItemsByPairWithTypeOperationCompleted == null)) {
+                this.DeleteItemsByPairWithTypeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteItemsByPairWithTypeOperationCompleted);
+            }
+            this.InvokeAsync("DeleteItemsByPairWithType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType,
+                        bstrPairs,
+                        lLocking}, this.DeleteItemsByPairWithTypeOperationCompleted, userState);
+        }
+        
+        private void OnDeleteItemsByPairWithTypeOperationCompleted(object arg) {
+            if ((this.DeleteItemsByPairWithTypeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DeleteItemsByPairWithTypeCompleted(this, new DeleteItemsByPairWithTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#ModifyItemByPairWithType", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string ModifyItemByPairWithType(string bstrShopperID, string bstrBasketType, string bstrRowID, string bstrItemID, string bstrQuantity, int lLocking) {
+            object[] results = this.Invoke("ModifyItemByPairWithType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType,
+                        bstrRowID,
+                        bstrItemID,
+                        bstrQuantity,
+                        lLocking});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginModifyItemByPairWithType(string bstrShopperID, string bstrBasketType, string bstrRowID, string bstrItemID, string bstrQuantity, int lLocking, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("ModifyItemByPairWithType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType,
+                        bstrRowID,
+                        bstrItemID,
+                        bstrQuantity,
+                        lLocking}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndModifyItemByPairWithType(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ModifyItemByPairWithTypeAsync(string bstrShopperID, string bstrBasketType, string bstrRowID, string bstrItemID, string bstrQuantity, int lLocking) {
+            this.ModifyItemByPairWithTypeAsync(bstrShopperID, bstrBasketType, bstrRowID, bstrItemID, bstrQuantity, lLocking, null);
+        }
+        
+        /// <remarks/>
+        public void ModifyItemByPairWithTypeAsync(string bstrShopperID, string bstrBasketType, string bstrRowID, string bstrItemID, string bstrQuantity, int lLocking, object userState) {
+            if ((this.ModifyItemByPairWithTypeOperationCompleted == null)) {
+                this.ModifyItemByPairWithTypeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnModifyItemByPairWithTypeOperationCompleted);
+            }
+            this.InvokeAsync("ModifyItemByPairWithType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType,
+                        bstrRowID,
+                        bstrItemID,
+                        bstrQuantity,
+                        lLocking}, this.ModifyItemByPairWithTypeOperationCompleted, userState);
+        }
+        
+        private void OnModifyItemByPairWithTypeOperationCompleted(object arg) {
+            if ((this.ModifyItemByPairWithTypeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ModifyItemByPairWithTypeCompleted(this, new ModifyItemByPairWithTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#GetMiniCartXMLRefreshByType", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string GetMiniCartXMLRefreshByType(string bstrShopperID, string bstrBasketType) {
+            object[] results = this.Invoke("GetMiniCartXMLRefreshByType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetMiniCartXMLRefreshByType(string bstrShopperID, string bstrBasketType, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetMiniCartXMLRefreshByType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndGetMiniCartXMLRefreshByType(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetMiniCartXMLRefreshByTypeAsync(string bstrShopperID, string bstrBasketType) {
+            this.GetMiniCartXMLRefreshByTypeAsync(bstrShopperID, bstrBasketType, null);
+        }
+        
+        /// <remarks/>
+        public void GetMiniCartXMLRefreshByTypeAsync(string bstrShopperID, string bstrBasketType, object userState) {
+            if ((this.GetMiniCartXMLRefreshByTypeOperationCompleted == null)) {
+                this.GetMiniCartXMLRefreshByTypeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetMiniCartXMLRefreshByTypeOperationCompleted);
+            }
+            this.InvokeAsync("GetMiniCartXMLRefreshByType", new object[] {
+                        bstrShopperID,
+                        bstrBasketType}, this.GetMiniCartXMLRefreshByTypeOperationCompleted, userState);
+        }
+        
+        private void OnGetMiniCartXMLRefreshByTypeOperationCompleted(object arg) {
+            if ((this.GetMiniCartXMLRefreshByTypeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetMiniCartXMLRefreshByTypeCompleted(this, new GetMiniCartXMLRefreshByTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#RequestDelayedPurchase", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public short RequestDelayedPurchase(string bstrDelayedPurchaseXML, out string pbstrInvoiceID, out string pbstrRedirectDataXML, out string pbstrErrorXML) {
+            object[] results = this.Invoke("RequestDelayedPurchase", new object[] {
+                        bstrDelayedPurchaseXML});
+            pbstrInvoiceID = ((string)(results[1]));
+            pbstrRedirectDataXML = ((string)(results[2]));
+            pbstrErrorXML = ((string)(results[3]));
+            return ((short)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginRequestDelayedPurchase(string bstrDelayedPurchaseXML, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("RequestDelayedPurchase", new object[] {
+                        bstrDelayedPurchaseXML}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public short EndRequestDelayedPurchase(System.IAsyncResult asyncResult, out string pbstrInvoiceID, out string pbstrRedirectDataXML, out string pbstrErrorXML) {
+            object[] results = this.EndInvoke(asyncResult);
+            pbstrInvoiceID = ((string)(results[1]));
+            pbstrRedirectDataXML = ((string)(results[2]));
+            pbstrErrorXML = ((string)(results[3]));
+            return ((short)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void RequestDelayedPurchaseAsync(string bstrDelayedPurchaseXML) {
+            this.RequestDelayedPurchaseAsync(bstrDelayedPurchaseXML, null);
+        }
+        
+        /// <remarks/>
+        public void RequestDelayedPurchaseAsync(string bstrDelayedPurchaseXML, object userState) {
+            if ((this.RequestDelayedPurchaseOperationCompleted == null)) {
+                this.RequestDelayedPurchaseOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRequestDelayedPurchaseOperationCompleted);
+            }
+            this.InvokeAsync("RequestDelayedPurchase", new object[] {
+                        bstrDelayedPurchaseXML}, this.RequestDelayedPurchaseOperationCompleted, userState);
+        }
+        
+        private void OnRequestDelayedPurchaseOperationCompleted(object arg) {
+            if ((this.RequestDelayedPurchaseCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RequestDelayedPurchaseCompleted(this, new RequestDelayedPurchaseCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#ProcessDelayedPurchaseResponse", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public int ProcessDelayedPurchaseResponse(string bstrInvoiceID, string bstrProcessorResponse, out short pvbOrderProcessed) {
+            object[] results = this.Invoke("ProcessDelayedPurchaseResponse", new object[] {
+                        bstrInvoiceID,
+                        bstrProcessorResponse});
+            pvbOrderProcessed = ((short)(results[1]));
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginProcessDelayedPurchaseResponse(string bstrInvoiceID, string bstrProcessorResponse, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("ProcessDelayedPurchaseResponse", new object[] {
+                        bstrInvoiceID,
+                        bstrProcessorResponse}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public int EndProcessDelayedPurchaseResponse(System.IAsyncResult asyncResult, out short pvbOrderProcessed) {
+            object[] results = this.EndInvoke(asyncResult);
+            pvbOrderProcessed = ((short)(results[1]));
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ProcessDelayedPurchaseResponseAsync(string bstrInvoiceID, string bstrProcessorResponse) {
+            this.ProcessDelayedPurchaseResponseAsync(bstrInvoiceID, bstrProcessorResponse, null);
+        }
+        
+        /// <remarks/>
+        public void ProcessDelayedPurchaseResponseAsync(string bstrInvoiceID, string bstrProcessorResponse, object userState) {
+            if ((this.ProcessDelayedPurchaseResponseOperationCompleted == null)) {
+                this.ProcessDelayedPurchaseResponseOperationCompleted = new System.Threading.SendOrPostCallback(this.OnProcessDelayedPurchaseResponseOperationCompleted);
+            }
+            this.InvokeAsync("ProcessDelayedPurchaseResponse", new object[] {
+                        bstrInvoiceID,
+                        bstrProcessorResponse}, this.ProcessDelayedPurchaseResponseOperationCompleted, userState);
+        }
+        
+        private void OnProcessDelayedPurchaseResponseOperationCompleted(object arg) {
+            if ((this.ProcessDelayedPurchaseResponseCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ProcessDelayedPurchaseResponseCompleted(this, new ProcessDelayedPurchaseResponseCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#ProcessDelayedPurchaseResponseEx", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public int ProcessDelayedPurchaseResponseEx(string bstrInvoiceID, string bstrProcessorResponse, out short pvbOrderProcessed, out string pbstrOrderXML) {
+            object[] results = this.Invoke("ProcessDelayedPurchaseResponseEx", new object[] {
+                        bstrInvoiceID,
+                        bstrProcessorResponse});
+            pvbOrderProcessed = ((short)(results[1]));
+            pbstrOrderXML = ((string)(results[2]));
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginProcessDelayedPurchaseResponseEx(string bstrInvoiceID, string bstrProcessorResponse, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("ProcessDelayedPurchaseResponseEx", new object[] {
+                        bstrInvoiceID,
+                        bstrProcessorResponse}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public int EndProcessDelayedPurchaseResponseEx(System.IAsyncResult asyncResult, out short pvbOrderProcessed, out string pbstrOrderXML) {
+            object[] results = this.EndInvoke(asyncResult);
+            pvbOrderProcessed = ((short)(results[1]));
+            pbstrOrderXML = ((string)(results[2]));
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ProcessDelayedPurchaseResponseExAsync(string bstrInvoiceID, string bstrProcessorResponse) {
+            this.ProcessDelayedPurchaseResponseExAsync(bstrInvoiceID, bstrProcessorResponse, null);
+        }
+        
+        /// <remarks/>
+        public void ProcessDelayedPurchaseResponseExAsync(string bstrInvoiceID, string bstrProcessorResponse, object userState) {
+            if ((this.ProcessDelayedPurchaseResponseExOperationCompleted == null)) {
+                this.ProcessDelayedPurchaseResponseExOperationCompleted = new System.Threading.SendOrPostCallback(this.OnProcessDelayedPurchaseResponseExOperationCompleted);
+            }
+            this.InvokeAsync("ProcessDelayedPurchaseResponseEx", new object[] {
+                        bstrInvoiceID,
+                        bstrProcessorResponse}, this.ProcessDelayedPurchaseResponseExOperationCompleted, userState);
+        }
+        
+        private void OnProcessDelayedPurchaseResponseExOperationCompleted(object arg) {
+            if ((this.ProcessDelayedPurchaseResponseExCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ProcessDelayedPurchaseResponseExCompleted(this, new ProcessDelayedPurchaseResponseExCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#TransferInvoiceToBasket", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public int TransferInvoiceToBasket(string bstrInvoiceID, string bstrAlternateShopperID, out string pbstrErrorXML) {
+            object[] results = this.Invoke("TransferInvoiceToBasket", new object[] {
+                        bstrInvoiceID,
+                        bstrAlternateShopperID});
+            pbstrErrorXML = ((string)(results[1]));
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginTransferInvoiceToBasket(string bstrInvoiceID, string bstrAlternateShopperID, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("TransferInvoiceToBasket", new object[] {
+                        bstrInvoiceID,
+                        bstrAlternateShopperID}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public int EndTransferInvoiceToBasket(System.IAsyncResult asyncResult, out string pbstrErrorXML) {
+            object[] results = this.EndInvoke(asyncResult);
+            pbstrErrorXML = ((string)(results[1]));
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void TransferInvoiceToBasketAsync(string bstrInvoiceID, string bstrAlternateShopperID) {
+            this.TransferInvoiceToBasketAsync(bstrInvoiceID, bstrAlternateShopperID, null);
+        }
+        
+        /// <remarks/>
+        public void TransferInvoiceToBasketAsync(string bstrInvoiceID, string bstrAlternateShopperID, object userState) {
+            if ((this.TransferInvoiceToBasketOperationCompleted == null)) {
+                this.TransferInvoiceToBasketOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTransferInvoiceToBasketOperationCompleted);
+            }
+            this.InvokeAsync("TransferInvoiceToBasket", new object[] {
+                        bstrInvoiceID,
+                        bstrAlternateShopperID}, this.TransferInvoiceToBasketOperationCompleted, userState);
+        }
+        
+        private void OnTransferInvoiceToBasketOperationCompleted(object arg) {
+            if ((this.TransferInvoiceToBasketCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.TransferInvoiceToBasketCompleted(this, new TransferInvoiceToBasketCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#GetInvoicesForShopper", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string GetInvoicesForShopper(string bstrShopperID, out string pbstrErrorXML) {
+            object[] results = this.Invoke("GetInvoicesForShopper", new object[] {
+                        bstrShopperID});
+            pbstrErrorXML = ((string)(results[1]));
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetInvoicesForShopper(string bstrShopperID, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetInvoicesForShopper", new object[] {
+                        bstrShopperID}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndGetInvoicesForShopper(System.IAsyncResult asyncResult, out string pbstrErrorXML) {
+            object[] results = this.EndInvoke(asyncResult);
+            pbstrErrorXML = ((string)(results[1]));
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetInvoicesForShopperAsync(string bstrShopperID) {
+            this.GetInvoicesForShopperAsync(bstrShopperID, null);
+        }
+        
+        /// <remarks/>
+        public void GetInvoicesForShopperAsync(string bstrShopperID, object userState) {
+            if ((this.GetInvoicesForShopperOperationCompleted == null)) {
+                this.GetInvoicesForShopperOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetInvoicesForShopperOperationCompleted);
+            }
+            this.InvokeAsync("GetInvoicesForShopper", new object[] {
+                        bstrShopperID}, this.GetInvoicesForShopperOperationCompleted, userState);
+        }
+        
+        private void OnGetInvoicesForShopperOperationCompleted(object arg) {
+            if ((this.GetInvoicesForShopperCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetInvoicesForShopperCompleted(this, new GetInvoicesForShopperCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#GetInvoiceDetail", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string GetInvoiceDetail(string bstrInvoiceID, out string pbstrErrorXML) {
+            object[] results = this.Invoke("GetInvoiceDetail", new object[] {
+                        bstrInvoiceID});
+            pbstrErrorXML = ((string)(results[1]));
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetInvoiceDetail(string bstrInvoiceID, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetInvoiceDetail", new object[] {
+                        bstrInvoiceID}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndGetInvoiceDetail(System.IAsyncResult asyncResult, out string pbstrErrorXML) {
+            object[] results = this.EndInvoke(asyncResult);
+            pbstrErrorXML = ((string)(results[1]));
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetInvoiceDetailAsync(string bstrInvoiceID) {
+            this.GetInvoiceDetailAsync(bstrInvoiceID, null);
+        }
+        
+        /// <remarks/>
+        public void GetInvoiceDetailAsync(string bstrInvoiceID, object userState) {
+            if ((this.GetInvoiceDetailOperationCompleted == null)) {
+                this.GetInvoiceDetailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetInvoiceDetailOperationCompleted);
+            }
+            this.InvokeAsync("GetInvoiceDetail", new object[] {
+                        bstrInvoiceID}, this.GetInvoiceDetailOperationCompleted, userState);
+        }
+        
+        private void OnGetInvoiceDetailOperationCompleted(object arg) {
+            if ((this.GetInvoiceDetailCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetInvoiceDetailCompleted(this, new GetInvoiceDetailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#CancelInvoice", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public short CancelInvoice(string bstrInvoiceID, out string pbstrErrorXML) {
+            object[] results = this.Invoke("CancelInvoice", new object[] {
+                        bstrInvoiceID});
+            pbstrErrorXML = ((string)(results[1]));
+            return ((short)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginCancelInvoice(string bstrInvoiceID, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("CancelInvoice", new object[] {
+                        bstrInvoiceID}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public short EndCancelInvoice(System.IAsyncResult asyncResult, out string pbstrErrorXML) {
+            object[] results = this.EndInvoke(asyncResult);
+            pbstrErrorXML = ((string)(results[1]));
+            return ((short)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CancelInvoiceAsync(string bstrInvoiceID) {
+            this.CancelInvoiceAsync(bstrInvoiceID, null);
+        }
+        
+        /// <remarks/>
+        public void CancelInvoiceAsync(string bstrInvoiceID, object userState) {
+            if ((this.CancelInvoiceOperationCompleted == null)) {
+                this.CancelInvoiceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCancelInvoiceOperationCompleted);
+            }
+            this.InvokeAsync("CancelInvoice", new object[] {
+                        bstrInvoiceID}, this.CancelInvoiceOperationCompleted, userState);
+        }
+        
+        private void OnCancelInvoiceOperationCompleted(object arg) {
+            if ((this.CancelInvoiceCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CancelInvoiceCompleted(this, new CancelInvoiceCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#GetInvoicesForShopperDisplay", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string GetInvoicesForShopperDisplay(string bstrShopperID, int lDaysBack, out string pbstrErrorXML) {
+            object[] results = this.Invoke("GetInvoicesForShopperDisplay", new object[] {
+                        bstrShopperID,
+                        lDaysBack});
+            pbstrErrorXML = ((string)(results[1]));
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetInvoicesForShopperDisplay(string bstrShopperID, int lDaysBack, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetInvoicesForShopperDisplay", new object[] {
+                        bstrShopperID,
+                        lDaysBack}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndGetInvoicesForShopperDisplay(System.IAsyncResult asyncResult, out string pbstrErrorXML) {
+            object[] results = this.EndInvoke(asyncResult);
+            pbstrErrorXML = ((string)(results[1]));
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetInvoicesForShopperDisplayAsync(string bstrShopperID, int lDaysBack) {
+            this.GetInvoicesForShopperDisplayAsync(bstrShopperID, lDaysBack, null);
+        }
+        
+        /// <remarks/>
+        public void GetInvoicesForShopperDisplayAsync(string bstrShopperID, int lDaysBack, object userState) {
+            if ((this.GetInvoicesForShopperDisplayOperationCompleted == null)) {
+                this.GetInvoicesForShopperDisplayOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetInvoicesForShopperDisplayOperationCompleted);
+            }
+            this.InvokeAsync("GetInvoicesForShopperDisplay", new object[] {
+                        bstrShopperID,
+                        lDaysBack}, this.GetInvoicesForShopperDisplayOperationCompleted, userState);
+        }
+        
+        private void OnGetInvoicesForShopperDisplayOperationCompleted(object arg) {
+            if ((this.GetInvoicesForShopperDisplayCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetInvoicesForShopperDisplayCompleted(this, new GetInvoicesForShopperDisplayCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#GetInStoreCredit", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string GetInStoreCredit(string bstrShopperID, string bstrCurrency) {
+            object[] results = this.Invoke("GetInStoreCredit", new object[] {
+                        bstrShopperID,
+                        bstrCurrency});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetInStoreCredit(string bstrShopperID, string bstrCurrency, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetInStoreCredit", new object[] {
+                        bstrShopperID,
+                        bstrCurrency}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndGetInStoreCredit(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetInStoreCreditAsync(string bstrShopperID, string bstrCurrency) {
+            this.GetInStoreCreditAsync(bstrShopperID, bstrCurrency, null);
+        }
+        
+        /// <remarks/>
+        public void GetInStoreCreditAsync(string bstrShopperID, string bstrCurrency, object userState) {
+            if ((this.GetInStoreCreditOperationCompleted == null)) {
+                this.GetInStoreCreditOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetInStoreCreditOperationCompleted);
+            }
+            this.InvokeAsync("GetInStoreCredit", new object[] {
+                        bstrShopperID,
+                        bstrCurrency}, this.GetInStoreCreditOperationCompleted, userState);
+        }
+        
+        private void OnGetInStoreCreditOperationCompleted(object arg) {
+            if ((this.GetInStoreCreditCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetInStoreCreditCompleted(this, new GetInStoreCreditCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("#GetBasketPriceXMLByTypeEx2", RequestNamespace="urn:WscgdBasketService", ResponseNamespace="urn:WscgdBasketService")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string GetBasketPriceXMLByTypeEx2(string bstrShopperID, string bstrPaymentType, short vtDeleteRefund, string bstrBasketType, string bstrBasketAttribs) {
+            object[] results = this.Invoke("GetBasketPriceXMLByTypeEx2", new object[] {
+                        bstrShopperID,
+                        bstrPaymentType,
+                        vtDeleteRefund,
+                        bstrBasketType,
+                        bstrBasketAttribs});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetBasketPriceXMLByTypeEx2(string bstrShopperID, string bstrPaymentType, short vtDeleteRefund, string bstrBasketType, string bstrBasketAttribs, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetBasketPriceXMLByTypeEx2", new object[] {
+                        bstrShopperID,
+                        bstrPaymentType,
+                        vtDeleteRefund,
+                        bstrBasketType,
+                        bstrBasketAttribs}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public string EndGetBasketPriceXMLByTypeEx2(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetBasketPriceXMLByTypeEx2Async(string bstrShopperID, string bstrPaymentType, short vtDeleteRefund, string bstrBasketType, string bstrBasketAttribs) {
+            this.GetBasketPriceXMLByTypeEx2Async(bstrShopperID, bstrPaymentType, vtDeleteRefund, bstrBasketType, bstrBasketAttribs, null);
+        }
+        
+        /// <remarks/>
+        public void GetBasketPriceXMLByTypeEx2Async(string bstrShopperID, string bstrPaymentType, short vtDeleteRefund, string bstrBasketType, string bstrBasketAttribs, object userState) {
+            if ((this.GetBasketPriceXMLByTypeEx2OperationCompleted == null)) {
+                this.GetBasketPriceXMLByTypeEx2OperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetBasketPriceXMLByTypeEx2OperationCompleted);
+            }
+            this.InvokeAsync("GetBasketPriceXMLByTypeEx2", new object[] {
+                        bstrShopperID,
+                        bstrPaymentType,
+                        vtDeleteRefund,
+                        bstrBasketType,
+                        bstrBasketAttribs}, this.GetBasketPriceXMLByTypeEx2OperationCompleted, userState);
+        }
+        
+        private void OnGetBasketPriceXMLByTypeEx2OperationCompleted(object arg) {
+            if ((this.GetBasketPriceXMLByTypeEx2Completed != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetBasketPriceXMLByTypeEx2Completed(this, new GetBasketPriceXMLByTypeEx2CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -3037,6 +3888,32 @@ namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void AddBillingToBasketCompletedEventHandler(object sender, AddBillingToBasketCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AddBillingToBasketCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AddBillingToBasketCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void RemoveBulkDomainsByTypeCompletedEventHandler(object sender, RemoveBulkDomainsByTypeCompletedEventArgs e);
     
     /// <remarks/>
@@ -3074,6 +3951,58 @@ namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket
         private object[] results;
         
         internal RemoveBulkDomainsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void RemoveDomainsByItemCompletedEventHandler(object sender, RemoveDomainsByItemCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class RemoveDomainsByItemCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal RemoveDomainsByItemCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void RemoveDomainsByItemWithTypeCompletedEventHandler(object sender, RemoveDomainsByItemWithTypeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class RemoveDomainsByItemWithTypeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal RemoveDomainsByItemWithTypeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -3724,6 +4653,432 @@ namespace Atlantis.Framework.GetBasketPrice.Impl.WscgdBasket
         private object[] results;
         
         internal GetItemCountsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void DeleteItemsByPairWithTypeCompletedEventHandler(object sender, DeleteItemsByPairWithTypeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DeleteItemsByPairWithTypeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DeleteItemsByPairWithTypeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void ModifyItemByPairWithTypeCompletedEventHandler(object sender, ModifyItemByPairWithTypeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ModifyItemByPairWithTypeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ModifyItemByPairWithTypeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetMiniCartXMLRefreshByTypeCompletedEventHandler(object sender, GetMiniCartXMLRefreshByTypeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetMiniCartXMLRefreshByTypeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetMiniCartXMLRefreshByTypeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void RequestDelayedPurchaseCompletedEventHandler(object sender, RequestDelayedPurchaseCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class RequestDelayedPurchaseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal RequestDelayedPurchaseCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public short Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((short)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string pbstrInvoiceID {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+        
+        /// <remarks/>
+        public string pbstrRedirectDataXML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[2]));
+            }
+        }
+        
+        /// <remarks/>
+        public string pbstrErrorXML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[3]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void ProcessDelayedPurchaseResponseCompletedEventHandler(object sender, ProcessDelayedPurchaseResponseCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ProcessDelayedPurchaseResponseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ProcessDelayedPurchaseResponseCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public short pvbOrderProcessed {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((short)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void ProcessDelayedPurchaseResponseExCompletedEventHandler(object sender, ProcessDelayedPurchaseResponseExCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ProcessDelayedPurchaseResponseExCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ProcessDelayedPurchaseResponseExCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public short pvbOrderProcessed {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((short)(this.results[1]));
+            }
+        }
+        
+        /// <remarks/>
+        public string pbstrOrderXML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[2]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void TransferInvoiceToBasketCompletedEventHandler(object sender, TransferInvoiceToBasketCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class TransferInvoiceToBasketCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal TransferInvoiceToBasketCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string pbstrErrorXML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetInvoicesForShopperCompletedEventHandler(object sender, GetInvoicesForShopperCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetInvoicesForShopperCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetInvoicesForShopperCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string pbstrErrorXML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetInvoiceDetailCompletedEventHandler(object sender, GetInvoiceDetailCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetInvoiceDetailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetInvoiceDetailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string pbstrErrorXML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void CancelInvoiceCompletedEventHandler(object sender, CancelInvoiceCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CancelInvoiceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CancelInvoiceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public short Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((short)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string pbstrErrorXML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetInvoicesForShopperDisplayCompletedEventHandler(object sender, GetInvoicesForShopperDisplayCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetInvoicesForShopperDisplayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetInvoicesForShopperDisplayCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string pbstrErrorXML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetInStoreCreditCompletedEventHandler(object sender, GetInStoreCreditCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetInStoreCreditCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetInStoreCreditCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetBasketPriceXMLByTypeEx2CompletedEventHandler(object sender, GetBasketPriceXMLByTypeEx2CompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetBasketPriceXMLByTypeEx2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetBasketPriceXMLByTypeEx2CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

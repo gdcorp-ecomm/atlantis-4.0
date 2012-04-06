@@ -12,6 +12,7 @@ namespace Atlantis.Framework.EcommActivationData.Interface
     public const string PRODUCT_TYPE_INSTANTPAGE = "InstantPageSetup";
     public const string PRODUCT_TYPE_EMAIL = "EmailSetup";
 
+    public const int ACTIVATION_STATUS_FAILURE = 0;
     public const int ACTIVATION_STATUS_PREPROCESS = 1;
     public const int ACTIVATION_STATUS_CHILD_INSERTED = 2;
     public const int ACTIVATION_STATUS_ACCOUNT_CREATED = 3;

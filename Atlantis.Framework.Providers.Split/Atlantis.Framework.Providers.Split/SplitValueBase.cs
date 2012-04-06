@@ -37,71 +37,42 @@ namespace Atlantis.Framework.Providers.Split
       }
     }
 
-    private int _sessionSplitValue = -1;
-    private int SessionSplitValue
-    {
-      get
-      {
-        if (_sessionSplitValue == -1)
-        {
-          if (HttpContext.Current.Session[CookieName] != null)
-          {
-            _sessionSplitValue = Convert.ToInt32(HttpContext.Current.Session[CookieName]);
-          }
-        }
-        return _sessionSplitValue;
-      }
-      set
-      {
-        _sessionSplitValue = value;
-        HttpContext.Current.Session[CookieName] = value;
-      }
-    }
-
     private int GetSplitValue()
     {
-      int splitValue = 0;
+      int cookieValue;
 
       try
       {
-        if (SessionSplitValue != -1)
-        {
-          splitValue = _sessionSplitValue;
-        }
-        else
-        {
-          HttpCookie splitValueCookie = HttpContext.Current.Request.Cookies != null ? HttpContext.Current.Request.Cookies[CookieName] : null;
+        HttpCookie splitValueCookie = HttpContext.Current.Request.Cookies[CookieName];
 
-          if (splitValueCookie != null && !string.IsNullOrEmpty(splitValueCookie.Value) && splitValueCookie.Value.Length <= "100".Length)
+        if (splitValueCookie != null && !string.IsNullOrEmpty(splitValueCookie.Value))
+        {
+          if (Int32.TryParse(splitValueCookie.Value, out cookieValue))
           {
-            Int32.TryParse(splitValueCookie.Value, out splitValue);
-          }
-
-          if (splitValue > MaxValue || splitValue < MinValue)
-          {
-            splitValue = rand.Next(MinValue, MaxValue);
-            SetCookie(splitValue, splitValueCookie);
-            SessionSplitValue = splitValue;
+            if (!IsOutOfRange(cookieValue))
+            {
+              return cookieValue; // valid cookie means we don't have to set it.
+            }
           }
         }
+
+        cookieValue = GetNewSplitValue();
+        SetCookie(cookieValue);
       }
       catch (Exception ex)
       {
-        splitValue = 0;
+        cookieValue = MinValue;
         LogError(GetType().Name + ".GetSplitValue", ex);
       }
 
-      return splitValue;
+      return cookieValue;
     }
 
-    private void SetCookie(int splitValue, HttpCookie splitValueCookie)
+    private void SetCookie(int splitValue)
     {
       try
       {
-        splitValue = splitValue > MaxValue ? MaxValue : splitValue;
-        splitValue = splitValue < MinValue ? MinValue : splitValue;
-
-        splitValueCookie = _siteContext.NewCrossDomainMemCookie(CookieName);
+        HttpCookie splitValueCookie = _siteContext.NewCrossDomainMemCookie(CookieName);
         splitValueCookie.Value = splitValue.ToString();
         splitValueCookie.Expires = CookieExpirationDate();
 
@@ -115,7 +86,7 @@ namespace Atlantis.Framework.Providers.Split
 
     private DateTime CookieExpirationDate()
     {
-      int expiration = _MAX_EXPIRATION_HOURS;
+      int expiration;
       string expirationHours = DataCache.DataCache.GetAppSetting(SplitProvider.SplitCookieLifeAppsettingName);
       if (int.TryParse(expirationHours, out expiration))
       {
@@ -144,10 +115,23 @@ namespace Atlantis.Framework.Providers.Split
       }
       set
       {
+        if (IsOutOfRange(value))
+        {
+          value = GetNewSplitValue();
+        }
         _splitValue = value;
-        SessionSplitValue = value;
-        SetCookie(value, null);
+        SetCookie(value);
       }
+    }
+
+    private bool IsOutOfRange(int splitValue)
+    {
+      return (splitValue > MaxValue || splitValue < MinValue);
+    }
+
+    private int GetNewSplitValue()
+    {
+      return rand.Next(MinValue, MaxValue);
     }
 
     private static void LogError(string methodName, Exception ex)

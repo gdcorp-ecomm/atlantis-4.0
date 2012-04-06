@@ -58,6 +58,7 @@ namespace Atlantis.Framework.Providers.Currency
 
     #endregion
 
+    const int RESELLER_CONTEXT = 6;
     private const string CURRENCY_TYPE_USD = "USD";
     private const string NOT_OFFERED_MSG_DEFAULT = "Product not offered.";
     private const string CURRENCY_PREFERENCE_KEY = "gdshop_currencyType";
@@ -190,7 +191,7 @@ namespace Atlantis.Framework.Providers.Currency
           {
             _selectedDisplayCurrencyType = CURRENCY_TYPE_USD;
 
-            if ((IsMultiCurrencyActiveForContext) && (SiteContext.ContextId == 6))
+            if ((IsMultiCurrencyActiveForContext) && (SiteContext.ContextId == RESELLER_CONTEXT))
             {
               if ((PLSignupInfoData != null) && (IsValidCurrencyType(PLSignupInfoData.DefaultTransactionCurrencyType)))
               {
@@ -246,7 +247,7 @@ namespace Atlantis.Framework.Providers.Currency
       {
         if (!_isMultiCurrencyActiveForContext.HasValue)
         {
-          if (SiteContext.ContextId == 6)
+          if (SiteContext.ContextId == RESELLER_CONTEXT)
           {
             _isMultiCurrencyActiveForContext = 
               MultiCurrencyContexts.GetIsContextIdActive(SiteContext.ContextId) && 

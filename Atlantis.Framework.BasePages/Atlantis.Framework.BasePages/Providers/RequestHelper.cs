@@ -50,22 +50,25 @@ namespace Atlantis.Framework.BasePages.Providers
       }
       bool result = false;
       string originalHostAddress = GetOriginUserHostAddress();
-      string[] ipsplits = originalHostAddress.Split('.');
-      if (ipsplits.Length == 4)
-      {
-        if ((originalHostAddress == "127.0.0.1") ||
-          (ipsplits[0] == "10") ||
-          ((ipsplits[0] == "192") && (ipsplits[1] == "168")))
-        {
-          result = true;
-        }
-        else if (ipsplits[0] == "172")
-        {
-          int second = Convert.ToInt32(ipsplits[1]);
-          if ((second >= 16) && (second <= 31))
-            result = true;
-        }
-      }
+			if (originalHostAddress != null)
+			{
+				string[] ipsplits = originalHostAddress.Split('.');
+				if (ipsplits.Length == 4)
+				{
+					if ((originalHostAddress == "127.0.0.1") ||
+						(ipsplits[0] == "10") ||
+						((ipsplits[0] == "192") && (ipsplits[1] == "168")))
+					{
+						result = true;
+					}
+					else if (ipsplits[0] == "172")
+					{
+						int second = Convert.ToInt32(ipsplits[1]);
+						if ((second >= 16) && (second <= 31))
+							result = true;
+					}
+				}
+			}
       return result && !IsInternalRequestExcluded(originalHostAddress);
     }
 

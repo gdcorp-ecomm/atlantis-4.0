@@ -81,18 +81,13 @@ namespace Atlantis.Framework.AuthResetPassword.Impl
       }
       else
       {
-        if (request.NewPassword.Length > 25)
+        if (request.NewPassword.Length > 255)
         {
           result.Add( AuthResetPasswordStatusCodes.PasswordTooLong );
         }
-        else if (request.NewPassword.Length < 5)
+        else if (request.NewPassword.Length < 9)
         {
           result.Add( AuthResetPasswordStatusCodes.PasswordTooShort );
-        }
-
-        if (Regex.Match( request.NewPassword, "[^\x20-\x7E]" ).Success)
-        {
-          result.Add(AuthResetPasswordStatusCodes.ValidatePasswordInvalidCharacters);
         }
       }
       #endregion

@@ -13,7 +13,7 @@ namespace Atlantis.Framework.AuthValidatePassword.Test
   [TestClass]
   public class ValidatePasswordTests
   {
-    public const string _shopperId = "867900";
+    public const string _shopperId = "";
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
@@ -34,7 +34,7 @@ namespace Atlantis.Framework.AuthValidatePassword.Test
     {
       string password = "Password1234";
       var request = new AuthValidatePasswordRequestData(_shopperId, string.Empty, string.Empty, string.Empty, 0, password);
-      var response = Engine.Engine.ProcessRequest(request, 517) as AuthValidatePasswordResponseData;
+      var response = DataCache.DataCache.GetProcessRequest(request, 517) as AuthValidatePasswordResponseData;
 
       Assert.IsFalse(response.IsPasswordValid);
       Assert.IsTrue(response.StatusCode == AuthPasswordCodes.PasswordFailBlacklisted);

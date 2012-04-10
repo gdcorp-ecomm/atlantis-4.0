@@ -282,6 +282,12 @@ namespace Atlantis.Framework.DotTypeCache
       return dotTypeInfo.MaxRenewalLength;
     }
 
+    public static int GetMaxRenewalMonthsOut(string dotType)
+    {
+      IDotTypeInfo dotTypeInfo = Instance.GetDotTypeInfoInt(dotType);
+      return dotTypeInfo.MaxRenewalMonthsOut;
+    }
+
 
     public static Dictionary<string, string> GetAdditionalInfo(string dotType)
     {

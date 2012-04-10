@@ -532,6 +532,11 @@ namespace Atlantis.Framework.DotTypeCache
       get { return this._dotTypeInfo.MaxRenewalLength; }
     }
 
+    public int MaxRenewalMonthsOut
+    {
+      get { return this._dotTypeInfo.MaxRenewalMonthsOut; }
+    }
+
     public bool HasExpiredAuctionRegIds
     {
       get { return this._dotTypeInfo.HasExpiredAuctionRegIds; }

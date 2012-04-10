@@ -82,6 +82,11 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       get { return 10; }
     }
 
+    public virtual int MaxRenewalMonthsOut
+    {
+      get { return 120; }
+    }
+
     public virtual int MinExpiredAuctionRegLength
     {
       get { return 1; }

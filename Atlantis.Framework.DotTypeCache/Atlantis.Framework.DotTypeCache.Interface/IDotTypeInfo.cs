@@ -16,6 +16,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     int MaxTransferLength { get; }
     int MinRenewalLength { get; }
     int MaxRenewalLength { get; }
+    int MaxRenewalMonthsOut { get; }
     bool HasExpiredAuctionRegIds { get; }
     bool HasPreRegIds { get; }
     bool HasRegistrationIds { get; }

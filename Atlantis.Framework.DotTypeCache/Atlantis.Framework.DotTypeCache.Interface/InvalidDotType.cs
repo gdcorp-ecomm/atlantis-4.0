@@ -68,6 +68,11 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       get { return 10; }
     }
 
+    public int MaxRenewalMonthsOut
+    {
+      get { return 120; }
+    }
+
     public Dictionary<string, string> AdditionalInfo
     {
       get { return new Dictionary<string, string>(); }

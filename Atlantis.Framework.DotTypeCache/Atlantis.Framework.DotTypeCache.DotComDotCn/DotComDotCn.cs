@@ -53,10 +53,5 @@ namespace Atlantis.Framework.DotTypeCache.DotComDotCn
     {
       get { return 5; }
     }
-
-    public override int MaxRenewalLength
-    {
-      get { return 5; }
-    }
   }
 }

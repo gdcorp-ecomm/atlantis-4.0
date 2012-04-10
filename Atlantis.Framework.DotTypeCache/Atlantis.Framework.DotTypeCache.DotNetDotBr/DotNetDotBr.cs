@@ -54,6 +54,11 @@ namespace Atlantis.Framework.DotTypeCache.DotNetDotBr
       get { return 1; }
     }
 
+    public override int MaxRenewalMonthsOut
+    {
+      get { return 24; }
+    }
+
     public override string DotType
     {
       get { return "NET.BR"; }

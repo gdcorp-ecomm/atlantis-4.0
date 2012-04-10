@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobileSaveSecurityAgreement.Impl", "Atlantis.Framework.MobileSaveSecurityAgreement.Impl\Atlantis.Framework.MobileSaveSecurityAgreement.Impl.csproj", "{8ACB5A85-B7CE-4EC0-B1FA-B81DC7C42C79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobileSaveSecurityAgreement.Interface", "Atlantis.Framework.MobileSaveSecurityAgreement.Interface\Atlantis.Framework.MobileSaveSecurityAgreement.Interface.csproj", "{1202BC28-B490-494D-9CFD-29FE066B0A81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobileSaveSecurityAgreement.Tests", "Atlantis.Framework.MobileSaveSecurityAgreement.Tests\Atlantis.Framework.MobileSaveSecurityAgreement.Tests.csproj", "{573EC82D-5BC1-403E-B81C-A725FCB033D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5A9CC6B2-3970-490E-9B1E-CE38BA76E0FE}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.MobileSaveSecurityAgreement.vsmdi = Atlantis.Framework.MobileSaveSecurityAgreement.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3D2D6741-852E-4D8F-AFB8-D7945A5B7755}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ExternalReferences.vs2010", "..\Atlantis.Framework.ExternalReferences\Atlantis.Framework.ExternalReferences.vs2010.csproj", "{97FDB84B-02BD-4174-9942-812663DC1B0B}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.MobileSaveSecurityAgreement.Impl\\Atlantis.Framework.MobileSaveSecurityAgreement.Impl.csproj
+		SccProjectName1 = Atlantis.Framework.MobileSaveSecurityAgreement.Impl
+		SccLocalPath1 = Atlantis.Framework.MobileSaveSecurityAgreement.Impl
+		SccProjectUniqueName2 = Atlantis.Framework.MobileSaveSecurityAgreement.Interface\\Atlantis.Framework.MobileSaveSecurityAgreement.Interface.csproj
+		SccProjectName2 = Atlantis.Framework.MobileSaveSecurityAgreement.Interface
+		SccLocalPath2 = Atlantis.Framework.MobileSaveSecurityAgreement.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.MobileSaveSecurityAgreement.Tests\\Atlantis.Framework.MobileSaveSecurityAgreement.Tests.csproj
+		SccProjectName3 = Atlantis.Framework.MobileSaveSecurityAgreement.Tests
+		SccLocalPath3 = Atlantis.Framework.MobileSaveSecurityAgreement.Tests
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.MobileSaveSecurityAgreement.sln
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.MobileSaveSecurityAgreement.sln
+		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.ExternalReferences\\Atlantis.Framework.ExternalReferences.vs2010.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.MobileSaveSecurityAgreement.sln
+		SccProjectName6 = ../Atlantis.Framework.ExternalReferences
+		SccLocalPath6 = ..\\Atlantis.Framework.ExternalReferences
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.MobileSaveSecurityAgreement.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8ACB5A85-B7CE-4EC0-B1FA-B81DC7C42C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ACB5A85-B7CE-4EC0-B1FA-B81DC7C42C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ACB5A85-B7CE-4EC0-B1FA-B81DC7C42C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ACB5A85-B7CE-4EC0-B1FA-B81DC7C42C79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1202BC28-B490-494D-9CFD-29FE066B0A81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1202BC28-B490-494D-9CFD-29FE066B0A81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1202BC28-B490-494D-9CFD-29FE066B0A81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1202BC28-B490-494D-9CFD-29FE066B0A81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{573EC82D-5BC1-403E-B81C-A725FCB033D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{573EC82D-5BC1-403E-B81C-A725FCB033D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{573EC82D-5BC1-403E-B81C-A725FCB033D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{573EC82D-5BC1-403E-B81C-A725FCB033D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97FDB84B-02BD-4174-9942-812663DC1B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {3D2D6741-852E-4D8F-AFB8-D7945A5B7755}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {3D2D6741-852E-4D8F-AFB8-D7945A5B7755}
+		{97FDB84B-02BD-4174-9942-812663DC1B0B} = {3D2D6741-852E-4D8F-AFB8-D7945A5B7755}
+	EndGlobalSection
+EndGlobal

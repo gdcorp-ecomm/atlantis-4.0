@@ -107,5 +107,16 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       //List<int> renewProductIds = dotTypeInfo.GetValidRenewalProductIdList(1, regLengths.ToArray());
       Assert.IsTrue(productId != 0);
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("dottypecache.config")]
+    [DeploymentItem("Interop.gdDataCacheLib.dll")]
+    public void GetDotTypeProductIdsCoUk()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("CO.UK");
+      string registrarId = ((IMultiRegDotTypeInfo)dotType).GetRegistrarIdByPfid(67323);
+      Assert.IsTrue(!string.IsNullOrEmpty(registrarId));
+    }
   }
 }

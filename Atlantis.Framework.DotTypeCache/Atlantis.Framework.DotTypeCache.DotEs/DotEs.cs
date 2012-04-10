@@ -63,5 +63,10 @@ namespace Atlantis.Framework.DotTypeCache.DotEs
     {
       get { return 1; }
     }
+
+    public override int MaxRenewalMonthsOut
+    {
+      get { return 24; }
+    }
   }
 }

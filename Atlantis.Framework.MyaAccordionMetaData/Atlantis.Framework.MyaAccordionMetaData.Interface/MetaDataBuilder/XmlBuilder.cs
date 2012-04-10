@@ -61,7 +61,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
     private AccordionMetaData CreateAccordionMetaData(XElement accordion, ContentData contentData, ControlPanelData controlPanelData, WorkspaceLoginData workspaceLoginData)
     {
       var accordionId = Convert.ToInt32(accordion.Attribute("accordionId").Value);
-      var accordionTitle = accordion.Attribute("accordionTitle").Value;
+
+      string accordionTitleDefault;
+      string accordionTitleGoDaddy;
+      GetAccordionTitle(accordion, accordionId, out accordionTitleDefault, out accordionTitleGoDaddy);
+
       var defaultSortOrder = Convert.ToInt32(accordion.Attribute("defaultSortOrder").Value);
       var namespaces =
         new HashSet<string>(
@@ -86,7 +90,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
                              out showControlPanel, out showSetupForManagerOnly, out orionProductName,
                              out isBundleProduct);
 
-      return new AccordionMetaData(accordionId, accordionTitle, defaultSortOrder, namespaces,
+      return new AccordionMetaData(accordionId, accordionTitleDefault, accordionTitleGoDaddy, defaultSortOrder, namespaces,
                                    ciExpansion, ciRenewNow, ciSetup, cmsDisplayGroups,
                                    iconCssCoordinates,
                                    productGroup, showControlPanel, showSetupForManagerOnly,
@@ -94,6 +98,36 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
                                    contentData, controlPanelData, workspaceLoginData);
     }
 
+    private static void GetAccordionTitle(XElement accordion, int accordionId, out string accordionTitleDefault, out string accordionTitleGoDaddy) {
+      var accrdTitleAttr = accordion.Attribute("accordionTitle");
+      if (accrdTitleAttr != null && !string.IsNullOrWhiteSpace(accrdTitleAttr.Value))
+      {
+        var accordionTitleXDoc = XDocument.Parse(accrdTitleAttr.Value);
+        var titleElement = accordionTitleXDoc.Element("title");
+        accordionTitleDefault = GetAttributeValue(titleElement, "default");
+        if (string.IsNullOrWhiteSpace(accordionTitleDefault)) { throw new Exception("No default title provided."); }
+        accordionTitleGoDaddy = GetAttributeValue(titleElement, "context1");
+      }
+      else
+      {
+        throw new Exception(string.Format("Accordion Title is missing or empty in xml. AccordianId: {0}", accordionId));
+      }
+    }
+
+    private static string GetAttributeValue(XElement xElem, string attrName)
+    {
+      string attrValue = null;
+      if (xElem != null)
+      {
+        var attr = xElem.Attribute(attrName);
+        if (attr != null)
+        {
+          attrValue = attr.Value;
+        }
+      }
+      return attrValue;
+    }
+    
     public bool? IsAllInnerXmlValid { get; private set; }
 
     #region AccordianMetaData

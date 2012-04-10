@@ -4,9 +4,8 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 using Atlantis.Framework.MyaAccordionMetaData.Interface;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData;
-using System.Collections.Specialized;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 {
@@ -54,6 +53,8 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 		public void MyaAccordionMetaDataTest()
 		{
 
+		  var gdContextId = 1;
+
 		  MyaAccordionMetaDataRequestData.MinimumAccordionMetaDataCount = 30;
 
 			MyaAccordionMetaDataRequestData request = new MyaAccordionMetaDataRequestData("856907"
@@ -72,7 +73,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 				foreach (AccordionMetaData accordion in response.AccordionMetaDataItems)
 				{
 					Debug.WriteLine("");
-					Debug.WriteLine(string.Format("********************** GET ACCORDION BY ID ({0}) **********************", accordion.AccordionTitle));
+					Debug.WriteLine(string.Format("********************** GET ACCORDION BY ID ({0}) **********************", accordion.GetAccordionTitle(gdContextId)));
 					PropertyInfo[] properties = accordion.GetType().GetProperties();
 					foreach (PropertyInfo p in properties)
 					{

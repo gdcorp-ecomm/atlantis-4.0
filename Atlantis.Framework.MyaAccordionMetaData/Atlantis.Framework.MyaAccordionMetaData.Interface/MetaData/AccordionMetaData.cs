@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Atlantis.Framework.BasePages;
 using Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData;
 
 namespace Atlantis.Framework.MyaAccordionMetaData.Interface
@@ -13,10 +14,15 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     {
       get { return _accordionId; }
     }
-    private readonly string _accordionTitle;
-    public string AccordionTitle
+    private readonly string _accordionTitleDefault;
+    private readonly string _accordionTitleGoDaddy;
+    public string GetAccordionTitle(int contextId)
     {
-      get { return _accordionTitle; }
+      if (contextId == ContextIds.GoDaddy && !string.IsNullOrEmpty(_accordionTitleGoDaddy))
+      {
+        return _accordionTitleGoDaddy;
+      }
+      return _accordionTitleDefault;
     }
     private readonly int _defaultSortOrder;
     public int DefaultSortOrder
@@ -108,13 +114,14 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
     #endregion
 
-    internal AccordionMetaData(int accordionId, string accordionTitle, int defaultSortOrder, HashSet<string> namespaces, 
+    internal AccordionMetaData(int accordionId, string accordionTitleDefault, string accordionTitleGoDaddy, int defaultSortOrder, HashSet<string> namespaces, 
           string ciExpansion, string ciRenewNow, string ciSetup, List<int> cmsDisplayGroups, CssSpriteCoordinate iconCssCoordinates, 
           int productGroup, bool showControlPanel, bool showSetupForManagerOnly, string orionProductName, bool isBundleProduct,
           ContentData contentData, ControlPanelData controlPanelData, WorkspaceLoginData workspaceLoginData)
     {
       _accordionId = accordionId;
-      _accordionTitle = accordionTitle;
+      _accordionTitleDefault = accordionTitleDefault;
+      _accordionTitleGoDaddy = accordionTitleGoDaddy;
       _defaultSortOrder = defaultSortOrder;
       _namespaces = namespaces;
       _ciExpansion = ciExpansion;

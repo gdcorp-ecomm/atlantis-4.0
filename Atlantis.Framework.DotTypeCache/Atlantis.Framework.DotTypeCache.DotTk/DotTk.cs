@@ -53,7 +53,12 @@ namespace Atlantis.Framework.DotTypeCache.DotTk
 
     public override int MaxRenewalLength
     {
-      get { return 2; }
+      get { return 1; }
+    }
+
+    public override int MaxRenewalMonthsOut
+    {
+      get { return 24; }
     }
   }
 }

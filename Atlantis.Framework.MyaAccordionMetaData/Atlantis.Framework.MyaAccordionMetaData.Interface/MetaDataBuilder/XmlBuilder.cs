@@ -105,12 +105,12 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
         var accordionTitleXDoc = XDocument.Parse(accrdTitleAttr.Value);
         var titleElement = accordionTitleXDoc.Element("title");
         accordionTitleDefault = GetAttributeValue(titleElement, "default");
-        if (string.IsNullOrWhiteSpace(accordionTitleDefault)) { throw new Exception("No default title provided."); }
+        if (string.IsNullOrWhiteSpace(accordionTitleDefault)) { throw new Exception(string.Format("No default title provided. AccordionId: {0}", accordionId)); }
         accordionTitleGoDaddy = GetAttributeValue(titleElement, "context1");
       }
       else
       {
-        throw new Exception(string.Format("Accordion Title is missing or empty in xml. AccordianId: {0}", accordionId));
+        throw new Exception(string.Format("AccordionTitle is missing or empty in xml. AccordianId: {0}", accordionId));
       }
     }
 

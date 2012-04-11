@@ -5,7 +5,6 @@ using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthAuthorize.Impl.AuthenticationWS;
 using Atlantis.Framework.AuthAuthorize.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.ServiceHelper;
 
 namespace Atlantis.Framework.AuthAuthorize.Impl
 {
@@ -17,7 +16,8 @@ namespace Atlantis.Framework.AuthAuthorize.Impl
 
       try
       {
-        string authServiceUrl = ((WsConfigElement)config).WSURL;
+        WsConfigElement wsConfigElement = ((WsConfigElement) config);
+        string authServiceUrl = wsConfigElement.WSURL;
         if (!authServiceUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
         {
           throw new AtlantisException(requestData, "AuthAuthorize.RequestHandler", "AuthAuthorize WS URL in atlantis.config must use https.", string.Empty);
@@ -42,7 +42,7 @@ namespace Atlantis.Framework.AuthAuthorize.Impl
             authenticationService.Url = authServiceUrl;
             authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            X509Certificate2 clientCertificate = ClientCertHelper.GetClientCertificate(config);
+            X509Certificate2 clientCertificate = wsConfigElement.GetClientCertificate();
             if(clientCertificate == null)
             {
               throw new AtlantisException(requestData, "AuthAuthorize.RequestHandler", "Unable to find client certificate for web service call.", string.Empty);

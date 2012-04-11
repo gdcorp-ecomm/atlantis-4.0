@@ -38,6 +38,10 @@ namespace Atlantis.Framework.Interface
       return isExpired;
     }
 
+    /// <summary>
+    /// Retrieves the friendly name to look up from a ConfigValue element with a key of "ClientCertificateName"
+    /// </summary>
+    /// <returns></returns>
     public X509Certificate2 GetClientCertificate()
     {
       return GetClientCertificate(GetConfigValue("ClientCertificateName"));

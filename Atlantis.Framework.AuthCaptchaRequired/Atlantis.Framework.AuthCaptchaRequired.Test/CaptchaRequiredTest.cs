@@ -1,11 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.AuthCaptchaRequired.Interface;
-using Atlantis.Framework.Engine;
-using Atlantis.Framework.Interface;
 using System.Diagnostics;
 using Atlantis.Framework.Auth.Interface;
 
@@ -45,7 +39,7 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Test
       Assert.IsFalse(response.StatusCode == TwoFactorWebserviceResponseCodes.Success);
       Assert.IsFalse(response.IsCaptchaRequired);
       Assert.IsTrue(response.ValidationCodes.Count > 0);
-      Assert.IsTrue(response.ValidationCodes.Contains(Auth.Interface.AuthValidationCodes.ValidateIpAddressRequired));
+      Assert.IsTrue(response.ValidationCodes.Contains(AuthValidationCodes.ValidateIpAddressRequired));
     }
   }
 }

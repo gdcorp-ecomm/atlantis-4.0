@@ -5,7 +5,6 @@ using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthCaptchaRequired.Impl.AuthWS;
 using Atlantis.Framework.AuthCaptchaRequired.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.ServiceHelper;
 
 namespace Atlantis.Framework.AuthCaptchaRequired.Impl
 {
@@ -17,7 +16,8 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Impl
 
       try
       {
-        string wsUrl = ((WsConfigElement)config).WSURL;
+        WsConfigElement wsConfigElement = ((WsConfigElement) config);
+        string wsUrl = wsConfigElement.WSURL;
         if (!wsUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
         {
           throw new AtlantisException(requestData, "AuthCaptchaRequired::RequestHandler", "AuthCaptchaRequired WS URL in atlantis.config must use https.", string.Empty);
@@ -42,7 +42,7 @@ namespace Atlantis.Framework.AuthCaptchaRequired.Impl
             authService.Url = wsUrl;
             authService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            X509Certificate2 clientCert = ClientCertHelper.GetClientCertificate(config);
+            X509Certificate2 clientCert = wsConfigElement.GetClientCertificate();
             if (clientCert == null)
             {
               throw new AtlantisException(requestData, "AuthCaptchaRequired::RequestHandler", "Unable to find client cert for web service call", string.Empty);

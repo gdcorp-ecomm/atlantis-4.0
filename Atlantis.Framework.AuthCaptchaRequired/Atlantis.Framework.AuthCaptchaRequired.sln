@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ServiceHelper", "..\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper.csproj", "{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthCaptchaRequired.Interface", "Atlantis.Framework.AuthCaptchaRequired.Interface\Atlantis.Framework.AuthCaptchaRequired.Interface.csproj", "{44E9D4A9-645F-4F69-B2A6-29900D2BE5AF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthCaptchaRequired.Impl", "Atlantis.Framework.AuthCaptchaRequired.Impl\Atlantis.Framework.AuthCaptchaRequired.Impl.csproj", "{C52897ED-811B-471D-9237-27F70781CB45}"
@@ -26,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Auth.Int
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -38,22 +36,18 @@ Global
 		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.AuthCaptchaRequired.sln
 		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
 		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = ..\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper.csproj
-		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.AuthCaptchaRequired.sln
-		SccProjectName3 = ../Atlantis.Framework.ServiceHelper/Atlantis.Framework.ServiceHelper
-		SccLocalPath3 = ..\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper
-		SccProjectUniqueName4 = Atlantis.Framework.AuthCaptchaRequired.Interface\\Atlantis.Framework.AuthCaptchaRequired.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.AuthCaptchaRequired.Interface
-		SccLocalPath4 = Atlantis.Framework.AuthCaptchaRequired.Interface
-		SccProjectUniqueName5 = Atlantis.Framework.AuthCaptchaRequired.Impl\\Atlantis.Framework.AuthCaptchaRequired.Impl.csproj
-		SccProjectName5 = Atlantis.Framework.AuthCaptchaRequired.Impl
-		SccLocalPath5 = Atlantis.Framework.AuthCaptchaRequired.Impl
-		SccProjectUniqueName6 = Atlantis.Framework.AuthCaptchaRequired.Test\\Atlantis.Framework.AuthCaptchaRequired.Test.csproj
-		SccProjectName6 = Atlantis.Framework.AuthCaptchaRequired.Test
-		SccLocalPath6 = Atlantis.Framework.AuthCaptchaRequired.Test
-		SccProjectUniqueName7 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface.csproj
-		SccProjectName7 = ../Atlantis.Framework.Auth.Interface/Atlantis.Framework.Auth.Interface
-		SccLocalPath7 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.AuthCaptchaRequired.Interface\\Atlantis.Framework.AuthCaptchaRequired.Interface.csproj
+		SccProjectName3 = Atlantis.Framework.AuthCaptchaRequired.Interface
+		SccLocalPath3 = Atlantis.Framework.AuthCaptchaRequired.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.AuthCaptchaRequired.Impl\\Atlantis.Framework.AuthCaptchaRequired.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.AuthCaptchaRequired.Impl
+		SccLocalPath4 = Atlantis.Framework.AuthCaptchaRequired.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.AuthCaptchaRequired.Test\\Atlantis.Framework.AuthCaptchaRequired.Test.csproj
+		SccProjectName5 = Atlantis.Framework.AuthCaptchaRequired.Test
+		SccLocalPath5 = Atlantis.Framework.AuthCaptchaRequired.Test
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface.csproj
+		SccProjectName6 = ../Atlantis.Framework.Auth.Interface/Atlantis.Framework.Auth.Interface
+		SccLocalPath6 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.AuthCaptchaRequired.vsmdi
@@ -71,10 +65,6 @@ Global
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{44E9D4A9-645F-4F69-B2A6-29900D2BE5AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{44E9D4A9-645F-4F69-B2A6-29900D2BE5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44E9D4A9-645F-4F69-B2A6-29900D2BE5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -98,6 +88,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {90BE3DC9-1AD4-4568-9F1D-ABFA77D6D4D6}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {90BE3DC9-1AD4-4568-9F1D-ABFA77D6D4D6}
-		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6} = {90BE3DC9-1AD4-4568-9F1D-ABFA77D6D4D6}
 	EndGlobalSection
 EndGlobal

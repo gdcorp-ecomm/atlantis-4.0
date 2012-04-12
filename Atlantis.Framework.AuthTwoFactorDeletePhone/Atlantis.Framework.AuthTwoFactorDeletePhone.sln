@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{BDED08DB-CEF4-4796-8BAE-2B3EFB5B31AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ServiceHelper", "..\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper.csproj", "{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
@@ -15,17 +13,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthTwoF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthTwoFactorDeletePhone.Interface", "Atlantis.Framework.AuthTwoFactorDeletePhone.Interface\Atlantis.Framework.AuthTwoFactorDeletePhone.Interface.csproj", "{C9C5E33C-8E1A-4A21-AF75-9E540E05CF8B}"
 EndProject
-Project("{00000000-0000-0000-0000-000000000000}") = "Atlantis.Framework.AuthTwoFactorDeletePhone.Tests", "Atlantis.Framework.AuthTwoFactorDeletePhone.Tests\Atlantis.Framework.AuthTwoFactorDeletePhone.Tests.csproj", "{519A65C7-000A-429A-AFF3-4E2C7EDB7C81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthTwoFactorDeletePhone.Tests", "Atlantis.Framework.AuthTwoFactorDeletePhone.Tests\Atlantis.Framework.AuthTwoFactorDeletePhone.Tests.csproj", "{519A65C7-000A-429A-AFF3-4E2C7EDB7C81}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper.csproj
-		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.AuthTwoFactorDeletePhone.sln
-		SccProjectName0 = ../Atlantis.Framework.ServiceHelper/Atlantis.Framework.ServiceHelper
-		SccLocalPath0 = ..\\Atlantis.Framework.ServiceHelper\\Atlantis.Framework.ServiceHelper
+		SccLocalPath0 = .
 		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
 		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.AuthTwoFactorDeletePhone.sln
 		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
@@ -37,26 +32,21 @@ Global
 		SccProjectUniqueName3 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface.csproj
 		SccProjectName3 = ../Atlantis.Framework.Auth.Interface/Atlantis.Framework.Auth.Interface
 		SccLocalPath3 = ..\\Atlantis.Framework.Auth.Interface\\Atlantis.Framework.Auth.Interface
-		SccLocalPath4 = .
-		SccProjectUniqueName5 = Atlantis.Framework.AuthTwoFactorDeletePhone.Impl\\Atlantis.Framework.AuthTwoFactorDeletePhone.Impl.csproj
-		SccProjectName5 = Atlantis.Framework.AuthTwoFactorDeletePhone.Impl
-		SccLocalPath5 = Atlantis.Framework.AuthTwoFactorDeletePhone.Impl
-		SccProjectUniqueName6 = Atlantis.Framework.AuthTwoFactorDeletePhone.Interface\\Atlantis.Framework.AuthTwoFactorDeletePhone.Interface.csproj
-		SccProjectName6 = Atlantis.Framework.AuthTwoFactorDeletePhone.Interface
-		SccLocalPath6 = Atlantis.Framework.AuthTwoFactorDeletePhone.Interface
-		SccProjectUniqueName7 = Atlantis.Framework.AuthTwoFactorDeletePhone.Tests\\Atlantis.Framework.AuthTwoFactorDeletePhone.Tests.csproj
-		SccProjectName7 = Atlantis.Framework.AuthTwoFactorDeletePhone.Tests
-		SccLocalPath7 = Atlantis.Framework.AuthTwoFactorDeletePhone.Tests
+		SccProjectUniqueName4 = Atlantis.Framework.AuthTwoFactorDeletePhone.Impl\\Atlantis.Framework.AuthTwoFactorDeletePhone.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.AuthTwoFactorDeletePhone.Impl
+		SccLocalPath4 = Atlantis.Framework.AuthTwoFactorDeletePhone.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.AuthTwoFactorDeletePhone.Interface\\Atlantis.Framework.AuthTwoFactorDeletePhone.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.AuthTwoFactorDeletePhone.Interface
+		SccLocalPath5 = Atlantis.Framework.AuthTwoFactorDeletePhone.Interface
+		SccProjectUniqueName6 = Atlantis.Framework.AuthTwoFactorDeletePhone.Tests\\Atlantis.Framework.AuthTwoFactorDeletePhone.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.AuthTwoFactorDeletePhone.Tests
+		SccLocalPath6 = Atlantis.Framework.AuthTwoFactorDeletePhone.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -86,7 +76,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6} = {BDED08DB-CEF4-4796-8BAE-2B3EFB5B31AF}
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {BDED08DB-CEF4-4796-8BAE-2B3EFB5B31AF}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {BDED08DB-CEF4-4796-8BAE-2B3EFB5B31AF}
 	EndGlobalSection

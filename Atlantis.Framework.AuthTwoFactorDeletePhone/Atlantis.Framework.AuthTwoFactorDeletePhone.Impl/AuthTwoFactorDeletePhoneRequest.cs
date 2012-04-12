@@ -5,7 +5,6 @@ using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthTwoFactorDeletePhone.Impl.WsgdAuthentication;
 using Atlantis.Framework.AuthTwoFactorDeletePhone.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.ServiceHelper;
 
 namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Impl
 {
@@ -42,22 +41,23 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Impl
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      AuthTwoFactorDeletePhoneResponseData responseData = null;
+      AuthTwoFactorDeletePhoneResponseData responseData;
 
       try
       {
-        string authServiceUrl = ((WsConfigElement)config).WSURL;
+        WsConfigElement wsConfigElement = (WsConfigElement) config;
+        string authServiceUrl = wsConfigElement.WSURL;
         if (!authServiceUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
         {
           throw new AtlantisException(requestData, "AuthTwoFactorDeletePhoneRequest.RequestHandler", "AuthTwoFactorDeletePhone WS URL in atlantis.config must use https.", string.Empty);
         }
 
-        X509Certificate2 cert = ClientCertHelper.GetClientCertificate(config);
+        X509Certificate2 cert = wsConfigElement.GetClientCertificate();
         cert.Verify();
 
         using (Authentication authenticationService = new Authentication())
         {
-          string statusMessage = string.Empty;
+          string statusMessage;
           long statusCode = TwoFactorWebserviceResponseCodes.Error;
           
           var request = (AuthTwoFactorDeletePhoneRequestData)requestData;
@@ -77,7 +77,6 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePhone.Impl
             
             statusCode = authenticationService.DeletePhone(request.ShopperID, request.FullPhoneNumber, request.HostName, request.IpAddress, out statusMessage);
             responseData = new AuthTwoFactorDeletePhoneResponseData(statusCode, statusMessage, validationCodes);
-
           }
         }
       }

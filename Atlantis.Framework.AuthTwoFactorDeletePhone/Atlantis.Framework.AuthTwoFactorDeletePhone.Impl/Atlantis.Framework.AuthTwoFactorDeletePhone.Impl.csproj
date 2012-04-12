@@ -130,10 +130,6 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper.csproj">
-      <Project>{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}</Project>
-      <Name>Atlantis.Framework.ServiceHelper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.AuthTwoFactorDeletePhone.Interface\Atlantis.Framework.AuthTwoFactorDeletePhone.Interface.csproj">
       <Project>{C9C5E33C-8E1A-4A21-AF75-9E540E05CF8B}</Project>
       <Name>Atlantis.Framework.AuthTwoFactorDeletePhone.Interface</Name>

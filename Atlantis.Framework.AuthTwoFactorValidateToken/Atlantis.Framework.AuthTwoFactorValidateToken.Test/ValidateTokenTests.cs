@@ -21,7 +21,7 @@ namespace Atlantis.Framework.AuthTwoFactorValidateToken.Test
       var request = new AuthTwoFactorValidateTokenRequestData(shopperId, string.Empty, string.Empty, string.Empty, 0, authToken, countryCode, phoneNumber, hostName, ipAddress);
       var response = Engine.Engine.ProcessRequest(request, 510) as AuthTwoFactorValidateTokenResponseData;
 
-      Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.Error);
+      Assert.IsTrue(response.StatusCode == TwoFactorWebserviceResponseCodes.AuthTokenInvalid);
       Assert.IsTrue(response.ValidationCodes.Count == 0);
       Assert.IsFalse(response.IsAuthTokenValid);
       

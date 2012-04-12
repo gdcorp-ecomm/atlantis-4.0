@@ -2,7 +2,6 @@
 using System.Security.Cryptography.X509Certificates;
 using Atlantis.Framework.AuthTwoFactorStatus.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.ServiceHelper;
 
 namespace Atlantis.Framework.AuthTwoFactorStatus.Impl
 {
@@ -14,43 +13,44 @@ namespace Atlantis.Framework.AuthTwoFactorStatus.Impl
 
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
-      AuthTwoFactorStatusResponseData oResponseData = null;
-      string sResponseXML = "";
+      AuthTwoFactorStatusResponseData oResponseData;
+      string sResponseXml = string.Empty;
 
       try
       {
+        WsConfigElement wsConfigElement = (WsConfigElement) oConfig;
         AuthTwoFactorStatusRequestData requestData = (AuthTwoFactorStatusRequestData)oRequestData;
 
-        X509Certificate2 cert = ClientCertHelper.GetClientCertificate(oConfig);
+        X509Certificate2 cert = wsConfigElement.GetClientCertificate();
         cert.Verify();
 
-        using (WSCgdShopper.WSCgdShopperService shopperWS = new WSCgdShopper.WSCgdShopperService())
+        using (WSCgdShopper.WSCgdShopperService shopperWs = new WSCgdShopper.WSCgdShopperService())
         {
-          shopperWS.Url = ((WsConfigElement)oConfig).WSURL;
-          shopperWS.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
-          shopperWS.ClientCertificates.Add(cert);
-          sResponseXML = shopperWS.TwoFactorStatus(requestData.ShopperID);
-          if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
+          shopperWs.Url = wsConfigElement.WSURL;
+          shopperWs.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
+          shopperWs.ClientCertificates.Add(cert);
+          sResponseXml = shopperWs.TwoFactorStatus(requestData.ShopperID);
+          if (sResponseXml.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
           {
             AtlantisException exAtlantis = new AtlantisException(oRequestData,
                                                                  "ShopperRequest.RequestHandler",
-                                                                 sResponseXML, string.Empty);
+                                                                 sResponseXml, string.Empty);
 
-            oResponseData = new AuthTwoFactorStatusResponseData(sResponseXML, exAtlantis);
+            oResponseData = new AuthTwoFactorStatusResponseData(sResponseXml, exAtlantis);
           }
           else
           {
-            oResponseData = new AuthTwoFactorStatusResponseData(sResponseXML);
+            oResponseData = new AuthTwoFactorStatusResponseData(sResponseXml);
           }
         }
       }
       catch (AtlantisException exAtlantis)
       {
-        oResponseData = new AuthTwoFactorStatusResponseData(sResponseXML, exAtlantis);
+        oResponseData = new AuthTwoFactorStatusResponseData(sResponseXml, exAtlantis);
       }
       catch (Exception ex)
       {
-        oResponseData = new AuthTwoFactorStatusResponseData(sResponseXML,
+        oResponseData = new AuthTwoFactorStatusResponseData(sResponseXml,
                                                        oRequestData,
                                                        ex);
       }

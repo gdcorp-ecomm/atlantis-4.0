@@ -5,13 +5,11 @@ using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthTwoFactorAddPhone.Impl.WsgdAuthentication;
 using Atlantis.Framework.AuthTwoFactorAddPhone.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.ServiceHelper;
 
 namespace Atlantis.Framework.AuthTwoFactorAddPhone.Impl
 {
   public class AuthTwoFactorAddPhoneRequest : IRequest
   {
-    #region Validate Request
     private HashSet<int> ValidateRequest(AuthTwoFactorAddPhoneRequestData request)
     {
       HashSet<int> validationCodes = new HashSet<int>();
@@ -43,26 +41,26 @@ namespace Atlantis.Framework.AuthTwoFactorAddPhone.Impl
 
       return validationCodes;
     }
-    #endregion
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      AuthTwoFactorAddPhoneResponseData responseData = null;
+      AuthTwoFactorAddPhoneResponseData responseData;
 
       try
       {
-        string authServiceUrl = ((WsConfigElement)config).WSURL;
+        WsConfigElement wsConfigElement = (WsConfigElement) config;
+        string authServiceUrl = wsConfigElement.WSURL;
         if (!authServiceUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
         {
           throw new AtlantisException(requestData, "AuthTwoFactorAddPhoneRequest.RequestHandler", "AuthTwoFactorAddPhone WS URL in atlantis.config must use https.", string.Empty);
         }
 
-        X509Certificate2 cert = ClientCertHelper.GetClientCertificate(config);
+        X509Certificate2 cert = wsConfigElement.GetClientCertificate();
         cert.Verify();
 
         using (Authentication authenticationService = new Authentication())
         {
-          string statusMessage = string.Empty;
+          string statusMessage;
           long statusCode = TwoFactorWebserviceResponseCodes.Error;
 
           var request = (AuthTwoFactorAddPhoneRequestData)requestData;

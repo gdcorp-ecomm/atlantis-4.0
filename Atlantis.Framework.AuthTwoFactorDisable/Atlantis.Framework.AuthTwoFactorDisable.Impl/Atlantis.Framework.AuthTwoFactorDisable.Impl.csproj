@@ -143,10 +143,6 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper.csproj">
-      <Project>{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}</Project>
-      <Name>Atlantis.Framework.ServiceHelper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.AuthTwoFactorDisable.Interface\Atlantis.Framework.AuthTwoFactorDisable.Interface.csproj">
       <Project>{6A6FE272-AA4A-4357-821A-F78AEE8B4E72}</Project>
       <Name>Atlantis.Framework.AuthTwoFactorDisable.Interface</Name>

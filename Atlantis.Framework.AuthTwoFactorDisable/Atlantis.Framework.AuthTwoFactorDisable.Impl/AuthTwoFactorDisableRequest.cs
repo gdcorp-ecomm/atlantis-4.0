@@ -5,13 +5,11 @@ using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthTwoFactorDisable.Impl.WsGdAuthentication;
 using Atlantis.Framework.AuthTwoFactorDisable.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.ServiceHelper;
 
 namespace Atlantis.Framework.AuthTwoFactorDisable.Impl
 {
   public class AuthTwoFactorDisableRequest : IRequest
   {
-    #region Validate Request
     private HashSet<int> ValidateRequest(AuthTwoFactorDisableRequestData request)
     {
       HashSet<int> validationCodes = new HashSet<int>();
@@ -48,26 +46,26 @@ namespace Atlantis.Framework.AuthTwoFactorDisable.Impl
 
       return validationCodes;
     }
-    #endregion
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      AuthTwoFactorDisableResponseData responseData = null;
+      AuthTwoFactorDisableResponseData responseData;
 
       try
       {
-        string authServiceUrl = ((WsConfigElement)config).WSURL;
+        WsConfigElement wsConfigElement = (WsConfigElement) config;
+        string authServiceUrl = wsConfigElement.WSURL;
         if (!authServiceUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
         {
           throw new AtlantisException(requestData, "AuthTwoFactorDisableRequest.RequestHandler", "AuthTwoFactorDisable WS URL in atlantis.config must use https.", string.Empty);
         }
 
-        X509Certificate2 cert = ClientCertHelper.GetClientCertificate(config);
+        X509Certificate2 cert = wsConfigElement.GetClientCertificate();
         cert.Verify();
 
         using (Authentication authenticationService = new Authentication())
         {
-          string statusMessage = string.Empty;
+          string statusMessage;
           long statusCode = TwoFactorWebserviceResponseCodes.Error;          
 
           var request = (AuthTwoFactorDisableRequestData) requestData;

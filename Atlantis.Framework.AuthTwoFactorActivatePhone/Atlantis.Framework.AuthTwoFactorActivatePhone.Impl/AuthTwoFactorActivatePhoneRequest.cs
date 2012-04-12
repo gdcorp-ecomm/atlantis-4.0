@@ -5,7 +5,6 @@ using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthTwoFactorActivatePhone.Impl.AuthService;
 using Atlantis.Framework.AuthTwoFactorActivatePhone.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.ServiceHelper;
 
 namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Impl
 {
@@ -49,7 +48,8 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Impl
 
       try
       {
-        string wsUrl = ((WsConfigElement)config).WSURL;
+        WsConfigElement wsConfigElement = (WsConfigElement) config;
+        string wsUrl = wsConfigElement.WSURL;
         if (!wsUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
         {
           throw new AtlantisException(requestData, "AuthTwoFactorActivatePhone::RequestHandler", "AuthTwoFactorActivatePhone WS URL in atlantis.config must use https.", string.Empty);
@@ -73,7 +73,7 @@ namespace Atlantis.Framework.AuthTwoFactorActivatePhone.Impl
             authService.Url = wsUrl;
             authService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            X509Certificate2 clientCert = ClientCertHelper.GetClientCertificate(config);
+            X509Certificate2 clientCert = wsConfigElement.GetClientCertificate();
             if (clientCert == null)
             {
               throw new AtlantisException(requestData, "AuthTwoFactorActivatePhone::RequestHandler", "Unable to find client cert for web service call", string.Empty);

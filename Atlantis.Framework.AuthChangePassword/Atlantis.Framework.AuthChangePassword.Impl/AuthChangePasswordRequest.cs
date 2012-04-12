@@ -7,7 +7,6 @@ using Atlantis.Framework.AuthChangePassword.Impl.WSgdAuthentication;
 using Atlantis.Framework.AuthChangePassword.Interface;
 using Atlantis.Framework.AuthValidatePassword.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.ServiceHelper;
 using Atlantis.Framework.ValidateField.Interface;
 
 namespace Atlantis.Framework.AuthChangePassword.Impl
@@ -15,9 +14,8 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
   public class AuthChangePasswordRequest : IRequest
   {
     private static readonly Regex _newHintInvalidCharactersRegex = new Regex("[^\x20-\x3b\x3f-\x7e]", RegexOptions.Compiled);
-    private static readonly Regex _meetsStrongPwReqs = new Regex("(?=.*[A-Z])(?=.{8,})(?=.*\\d).*$");
 
-    private HashSet<int> ValidateRequest(AuthChangePasswordRequestData request, Authentication service, bool isPasswordChange, out List<ValidationFailure> regexErrors)
+    private HashSet<int> ValidateRequest(AuthChangePasswordRequestData request, out List<ValidationFailure> regexErrors)
     {
       HashSet<int> result = new HashSet<int>();
 
@@ -56,7 +54,7 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
           result.Add(AuthChangePasswordStatusCodes.ValidateLoginMaxLength);
         }
 
-        int login = 0; //if login is all numbers then it MUST BE equal to shopper id
+        int login; //if login is all numbers then it MUST BE equal to shopper id
         if (int.TryParse(request.NewLogin, out login))
         {
           if (request.ShopperID != request.NewLogin)
@@ -115,11 +113,12 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
 
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
-      AuthChangePasswordResponseData responseData = null;
+      AuthChangePasswordResponseData responseData;
 
       try
       {
-        string authServiceUrl = ((WsConfigElement)oConfig).WSURL;
+        WsConfigElement wsConfigElement = (WsConfigElement) oConfig;
+        string authServiceUrl = wsConfigElement.WSURL;
         if (!authServiceUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
         {
           throw new AtlantisException(oRequestData, "AuthChangePassword.RequestHandler", "ChangePassword WS URL in atlantis.config must use https.", string.Empty);
@@ -127,14 +126,10 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
 
         AuthChangePasswordRequestData request = (AuthChangePasswordRequestData)oRequestData;
 
-        X509Certificate2 cert = ClientCertHelper.GetClientCertificate(oConfig);
+        X509Certificate2 cert = wsConfigElement.GetClientCertificate();
         cert.Verify();
         
-        using (Authentication authenticationService = new Authentication()
-                                                           {
-                                                             Url = authServiceUrl,
-                                                             Timeout = (int)request.RequestTimeout.TotalMilliseconds
-                                                           })
+        using (Authentication authenticationService = new Authentication { Url = authServiceUrl, Timeout = (int)request.RequestTimeout.TotalMilliseconds})
         {
           string statusMessage = string.Empty;
           long statusCode = TwoFactorWebserviceResponseCodes.Error;
@@ -143,7 +138,7 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
 
           List<ValidationFailure> regexErrors; 
 
-          HashSet<int> responseCodes = ValidateRequest(request, authenticationService, isPasswordChange, out regexErrors);
+          HashSet<int> responseCodes = ValidateRequest(request, out regexErrors);
 
           if (responseCodes.Count > 0 || regexErrors.Count > 0)
           {
@@ -194,7 +189,8 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
     {
 
       regexErrors = new List<ValidationFailure>();
-      bool isValid = false;
+      bool isValid;
+
       try
       {
         ValidateFieldRequestData request = new ValidateFieldRequestData(oRequestData.ShopperID, oRequestData.SourceURL, oRequestData.OrderID, oRequestData.Pathway, oRequestData.PageCount, "password");
@@ -203,21 +199,19 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
         ValidateFieldResponseData response = (ValidateFieldResponseData)DataCache.DataCache.GetProcessRequest(request, 507); // use this for release version for your code
         
         isValid = response.ValidateStringField(password, out regexErrors);
-
       }
       catch
       {
-
+        isValid = false;
       }
 
       return isValid;
-
     }
 
     private bool ValidatePassword(string password, AuthChangePasswordRequestData oRequestData, ref HashSet<int> responseCodes, ref string statusMessage, ref long statusCode)
     {
+      bool isValid;
 
-      bool isValid = false;
       try
       {
         AuthValidatePasswordRequestData request = new AuthValidatePasswordRequestData(oRequestData.ShopperID, oRequestData.SourceURL, oRequestData.OrderID, oRequestData.Pathway, oRequestData.PageCount, password);
@@ -228,16 +222,13 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
         statusCode = response.StatusCode;
         responseCodes = response.ValidationCodes;
         statusMessage = response.StatusMessage;
-
       }
       catch
       {
-
+        isValid = false;
       }
 
       return isValid;
-
     }
-
   }
 }

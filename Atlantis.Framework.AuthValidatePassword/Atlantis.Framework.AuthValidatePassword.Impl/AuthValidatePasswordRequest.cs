@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Atlantis.Framework.AuthValidatePassword.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.AuthValidatePassword.Impl.AuthWS;
-using Atlantis.Framework.ServiceHelper;
 using System.Security.Cryptography.X509Certificates;
 using Atlantis.Framework.Auth.Interface;
 
@@ -19,7 +16,8 @@ namespace Atlantis.Framework.AuthValidatePassword.Impl
 
       try
       {
-        string wsUrl = ((WsConfigElement)config).WSURL;
+        WsConfigElement wsConfigElement = (WsConfigElement) config;
+        string wsUrl = wsConfigElement.WSURL;
         if (!wsUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
         {
           throw new AtlantisException(requestData, "AuthValidatePassword::RequestHandler", "AuthValidatePassword WS URL in atlantis.config must use https.", string.Empty);
@@ -32,8 +30,7 @@ namespace Atlantis.Framework.AuthValidatePassword.Impl
           long statusCode = TwoFactorWebserviceResponseCodes.Error;
 
           HashSet<int> validationCodes = ValidateRequest(request);
-          string resultXml = string.Empty;
-          string errorOutput = string.Empty;
+          string errorOutput;
 
           if (validationCodes.Count > 0)
           {
@@ -44,7 +41,7 @@ namespace Atlantis.Framework.AuthValidatePassword.Impl
             authService.Url = wsUrl;
             authService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            X509Certificate2 clientCert = ClientCertHelper.GetClientCertificate(config);
+            X509Certificate2 clientCert = wsConfigElement.GetClientCertificate();
             if (clientCert == null)
             {
               throw new AtlantisException(requestData, "AuthValidatePassword::RequestHandler", "Unable to find client cert for web service call", string.Empty);

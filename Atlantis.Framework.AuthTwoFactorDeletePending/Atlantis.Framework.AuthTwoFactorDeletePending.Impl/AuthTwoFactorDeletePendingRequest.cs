@@ -5,7 +5,6 @@ using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthTwoFactorDeletePending.Impl.wsGdAuthentication;
 using Atlantis.Framework.AuthTwoFactorDeletePending.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.ServiceHelper;
 
 namespace Atlantis.Framework.AuthTwoFactorDeletePending.Impl
 {
@@ -14,22 +13,23 @@ namespace Atlantis.Framework.AuthTwoFactorDeletePending.Impl
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      AuthTwoFactorDeletePendingResponseData responseData = null;
+      AuthTwoFactorDeletePendingResponseData responseData;
 
       try
       {
-        string authServiceUrl = ((WsConfigElement)config).WSURL;
+        WsConfigElement wsConfigElement = (WsConfigElement) config;
+        string authServiceUrl = wsConfigElement.WSURL;
         if (!authServiceUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
         {
           throw new AtlantisException(requestData, "AuthTwoFactorDeletePendingRequest.RequestHandler", "AuthTwoFactorDeletePending WS URL in atlantis.config must use https.", string.Empty);
         }
 
-        X509Certificate2 cert = ClientCertHelper.GetClientCertificate(config);
+        X509Certificate2 cert = wsConfigElement.GetClientCertificate();
         cert.Verify();
 
         using (Authentication authenticationService = new Authentication())
         {
-          string statusMessage = string.Empty;
+          string statusMessage;
           long statusCode = TwoFactorWebserviceResponseCodes.Error;          
           
           var request = (AuthTwoFactorDeletePendingRequestData)requestData;

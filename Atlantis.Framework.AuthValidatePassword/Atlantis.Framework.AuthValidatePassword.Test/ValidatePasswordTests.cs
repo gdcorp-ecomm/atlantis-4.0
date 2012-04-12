@@ -1,10 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.Engine;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthValidatePassword.Interface;
 

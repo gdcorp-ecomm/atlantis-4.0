@@ -68,10 +68,6 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper\Atlantis.Framework.ServiceHelper.csproj">
-      <Project>{1BCD949D-3C1C-4918-BE26-55B6F32BFAF6}</Project>
-      <Name>Atlantis.Framework.ServiceHelper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.AuthTwoFactorSendToken.Interface\Atlantis.Framework.AuthTwoFactorSendToken.Interface.csproj">
       <Project>{51C90913-61D5-4799-B8B5-FE6707AADD7F}</Project>
       <Name>Atlantis.Framework.AuthTwoFactorSendToken.Interface</Name>

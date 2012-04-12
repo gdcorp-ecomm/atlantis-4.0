@@ -31,9 +31,9 @@ namespace Atlantis.Framework.AuthTwoFactorSendToken.Test
     [DeploymentItem("atlantis.config")]
     public void SendTokenPass()
     {
-      string shopperId = "867900";
+      string shopperId = "847235";
       string countryCode = "1";
-      string phoneNumber = "5082415881";
+      string phoneNumber = "4807605267";
       string hostName = "idp.godaddy.com";
       string ipAddress = "172.23.44.65";
 

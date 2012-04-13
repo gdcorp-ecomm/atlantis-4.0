@@ -67,7 +67,7 @@
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.HDVD.Interface\Atlantis.Framework.HDVD.Interface\Atlantis.Framework.HDVD.Interface.csproj">
-      <Project>{3F2F129C-4E26-461C-96F6-BFC6BD918054}</Project>
+      <Project>{3f2f129c-4e26-461c-96f6-bfc6bd918054}</Project>
       <Name>Atlantis.Framework.HDVD.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
@@ -75,11 +75,11 @@
       <Name>Atlantis.Framework.SessionCache</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.HDVDGetAccountSummary.Impl\Atlantis.Framework.HDVDGetAccountSummary.Impl.csproj">
-      <Project>{239DA520-D6C5-41B8-8889-B2B4E3F07B58}</Project>
+      <Project>{239da520-d6c5-41b8-8889-b2b4e3f07b58}</Project>
       <Name>Atlantis.Framework.HDVDGetAccountSummary.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.HDVDGetAccountSummary.Interface\Atlantis.Framework.HDVDGetAccountSummary.Interface.csproj">
-      <Project>{32080D2A-EEAA-405D-BDFE-7FC1ADD48594}</Project>
+      <Project>{32080d2a-eeaa-405d-bdfe-7fc1add48594}</Project>
       <Name>Atlantis.Framework.HDVDGetAccountSummary.Interface</Name>
     </ProjectReference>
   </ItemGroup>

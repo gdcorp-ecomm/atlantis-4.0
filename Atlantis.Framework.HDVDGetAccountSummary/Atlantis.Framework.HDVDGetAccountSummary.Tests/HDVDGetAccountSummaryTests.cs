@@ -18,8 +18,8 @@ namespace Atlantis.Framework.HDVDGetAccountSummary.Tests
     {
       const string APPID = "HDVDACCOUNTSUMMARY_UNITTEST";
       //Guid theguid = new Guid("ad10814e-b345-4a30-9871-46dca4e61d3a");
-      Guid theguid = new Guid("d11319d0-4d10-11e1-83a0-0050569575d8");
-      //Guid theguid = new Guid("99a77cac-c7f2-11de-8ec2-005056952fd6");
+      //Guid theguid = new Guid("d11319d0-4d10-11e1-83a0-0050569575d8");
+      Guid theguid = new Guid("87dcb01a-79d0-11e1-a38b-0050569575d8");
       string _shopperId = "858421";
       int requestId = 399;
       HDVDGetAccountSummaryRequestData request = new HDVDGetAccountSummaryRequestData(

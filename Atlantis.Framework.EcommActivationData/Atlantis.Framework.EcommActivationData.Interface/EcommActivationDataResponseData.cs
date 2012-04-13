@@ -38,6 +38,24 @@ namespace Atlantis.Framework.EcommActivationData.Interface
       }
     }
 
+    public bool IsAllTerminalFailure()
+    {
+      bool isAllFailed = true;
+      foreach (ProductInfo currentProduct in _products)
+      {
+        foreach (ActivatedProducts activationInfo in currentProduct.ActivatedProducts)
+        {
+          bool isNotFailed = currentProduct.ActivationStatusID != ProductInfo.ACTIVATION_STATUS_FAILURE;
+          if (isNotFailed)
+          {
+            isAllFailed = false;
+            break;
+          }
+        }
+      }
+      return isAllFailed;
+    }
+
     public bool IsAllTypeActivated(string activationType)
     {
       bool isAllActive = true;

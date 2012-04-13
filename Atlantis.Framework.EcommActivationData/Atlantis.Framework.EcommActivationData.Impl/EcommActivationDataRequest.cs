@@ -23,7 +23,8 @@ namespace Atlantis.Framework.EcommActivationData.Impl
           {
             activationSvc.Url = ((WsConfigElement)config).WSURL;
             activationSvc.Timeout = (int)ecommActivationDataRequestData.RequestTimeout.TotalMilliseconds;
-            activationSvc.ClientCertificates.Add(requestData.GetCertificateByConfig(config));
+            WsConfigElement configElement = (WsConfigElement)config;
+            activationSvc.ClientCertificates.Add(configElement.GetClientCertificate("CertificateName"));
             sResponseXML = activationSvc.GetSetupData(requestData.ShopperID, requestData.OrderID);
             responseDoc.LoadXml(sResponseXML);
           }

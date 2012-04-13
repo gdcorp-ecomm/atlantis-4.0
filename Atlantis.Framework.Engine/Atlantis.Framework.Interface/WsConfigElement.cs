@@ -44,7 +44,7 @@ namespace Atlantis.Framework.Interface
     /// <returns></returns>
     public X509Certificate2 GetClientCertificate()
     {
-      return GetClientCertificate(GetConfigValue("ClientCertificateName"));
+      return GetClientCertificate("ClientCertificateName");
     }    
 
     public X509Certificate2 GetClientCertificate(string friendlyName)

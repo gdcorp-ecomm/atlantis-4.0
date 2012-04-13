@@ -45,14 +45,14 @@ namespace Atlantis.Framework.Interface
     public X509Certificate2 GetClientCertificate()
     {
       return GetClientCertificate(GetConfigValue("ClientCertificateName"));
-    }
+    }    
 
     public X509Certificate2 GetClientCertificate(string friendlyName)
     {
       X509Certificate2 clientCertificate = null;
       X509Store store = null;
-
-      if (!string.IsNullOrEmpty(friendlyName))
+      string certName = GetConfigValue(friendlyName);
+      if (!string.IsNullOrEmpty(certName))
       {
         try
         {
@@ -61,7 +61,7 @@ namespace Atlantis.Framework.Interface
 
           foreach (X509Certificate2 certificate in store.Certificates)
           {
-            if (certificate.FriendlyName.Equals(friendlyName, StringComparison.CurrentCultureIgnoreCase) &&
+            if (certificate.FriendlyName.Equals(certName, StringComparison.CurrentCultureIgnoreCase) &&
                 !IsCertificateExpired(certificate))
             {
               clientCertificate = certificate;

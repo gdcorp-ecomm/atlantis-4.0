@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.RegVendorDomainSearch.Interface")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
+[assembly: AssemblyCompany("GoDaddy.com, LLC")]
 [assembly: AssemblyProduct("Atlantis.Framework.RegVendorDomainSearch.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2011")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC. 2011-2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,4 +33,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.11.10.20")]
+[assembly: AssemblyFileVersion("4.12.4.16")]

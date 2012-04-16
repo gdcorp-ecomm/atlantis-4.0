@@ -17,6 +17,7 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
     private int _maxDomainsPerVendor;
     private string _tlds;
     private string _searchDatabase = string.Empty;
+    private string _supportedLanguages = string.Empty;
 
     public TimeSpan _requestTimeout = TimeSpan.FromMilliseconds(2500);
 
@@ -53,6 +54,23 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
       this._tlds = tlds;
     }
 
+    public RegVendorDomainSearchRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount,
+        string searchDatabase, string domainName, string requestingServer, string customerIp,
+        int privateLabelID, string sourceCode, int maxDomainsPerVendor, string tlds, string supportedLanguages)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    {
+      this._searchDatabase = searchDatabase;
+      this._domainName = domainName;
+      this._requestingServer = requestingServer;
+      this._customerIp = customerIp;
+      this._privateLabelID = privateLabelID;
+      this._sourceCode = sourceCode;
+      this._visitingId = pathway;
+      this._maxDomainsPerVendor = maxDomainsPerVendor;
+      this._tlds = tlds;
+      this._supportedLanguages = supportedLanguages;
+    }
+
     public override string GetCacheMD5()
     {
       throw new System.NotImplementedException();
@@ -72,7 +90,8 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
           visitingid="" 
           searchdatabase="premium,auctions"
           maxdomainspervendor="5" 
-          tlds="com,net,org" />
+          tlds="com,net,org" 
+          supportedLanguages=="en,es,it,fr,de,pt"
       */
       using (StringWriter sw = new StringWriter())
       {
@@ -94,9 +113,9 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
           writer.WriteAttributeString("visitingid", this._visitingId);
           writer.WriteAttributeString("searchdatabase", this._searchDatabase);
           writer.WriteAttributeString("maxdomainspervendor", this._maxDomainsPerVendor.ToString());
-          writer.WriteAttributeString("searchtimeoutmilliseconds", 
-            this._requestTimeout.Subtract(new TimeSpan(0, 0, 1)).TotalMilliseconds.ToString());
+          writer.WriteAttributeString("searchtimeoutmilliseconds", this._requestTimeout.Subtract(new TimeSpan(0, 0, 1)).TotalMilliseconds.ToString());
           writer.WriteAttributeString("tlds", this._tlds);
+          writer.WriteAttributeString("supportedLanguages", this._supportedLanguages);
           writer.WriteEndElement();
         }
 

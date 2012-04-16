@@ -51,6 +51,19 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Tests
       Assert.IsTrue(response.IsSuccess);
     }
 
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void PremiumsSearchTestWithLanguages()
+    {
+      RegVendorDomainSearchRequestData request = new RegVendorDomainSearchRequestData("839627", string.Empty, string.Empty,
+        string.Empty, 0, "premium, auctions", "mudmud.com", "c1wsdv-rphil", "172.18.172.26", 1, 
+        "DoDomainSearch.BeginRegVendorDomainSearch", 50, "COM,NET,ORG,CO", "en,es,it,fr,de,pt");
+      request.RequestTimeout = new TimeSpan(0, 0, 10);
+      RegVendorDomainSearchResponseData response 
+        = (RegVendorDomainSearchResponseData)Engine.Engine.ProcessRequest(request, 323);
+      Assert.IsTrue(response.IsSuccess);
+    }
+
 
     private volatile bool _asyncSearchComplete = false;
     private RegVendorDomainSearchResponseData _asyncResponse = null;

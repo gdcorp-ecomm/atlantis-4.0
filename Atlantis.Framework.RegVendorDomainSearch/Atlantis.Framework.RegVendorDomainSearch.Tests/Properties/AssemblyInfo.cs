@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.RegVendorDomainSearch.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
+[assembly: AssemblyCompany("GoDaddy.com, LLC.")]
 [assembly: AssemblyProduct("Atlantis.Framework.RegVendorDomainSearch.Tests")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2011")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC. 2011-2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,4 +32,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.11.07.25")]
+[assembly: AssemblyFileVersion("4.12.4.16")]

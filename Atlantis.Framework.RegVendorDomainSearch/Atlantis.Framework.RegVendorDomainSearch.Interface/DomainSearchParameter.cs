@@ -14,6 +14,7 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
         public string VisitingId { get; set; }
         public string MaxDomainsPerVendor { get; set; }
         public string Tlds { get; set; }
+        public string SupportedLanguages { get; set; }
 
         public DomainSearchParam()
         {
@@ -21,7 +22,7 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
         }
 
         public DomainSearchParam(string vendorId, string domainName, string requestingServer, string customerIp,
-            string privateLabel, string sourceCode, string visitingId, string maxDomainsPerVendor, string tlds)
+            string privateLabel, string sourceCode, string visitingId, string maxDomainsPerVendor, string tlds, string supportedLanguages)
         {
             VendorId = vendorId;
             DomainName = domainName;
@@ -32,6 +33,7 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
             VisitingId = visitingId;
             MaxDomainsPerVendor = maxDomainsPerVendor;
             Tlds = tlds;
+            SupportedLanguages = supportedLanguages;
         }
 
         public string ToXml()
@@ -50,6 +52,7 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
                     writer.WriteAttributeString("visitingid", VisitingId);
                     writer.WriteAttributeString("maxdomainspervendor", MaxDomainsPerVendor);
                     writer.WriteAttributeString("tlds", Tlds);
+                    writer.WriteAttributeString("supportedLanguages", SupportedLanguages);
                     writer.WriteEndElement();
                 }
 

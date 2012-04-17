@@ -24,28 +24,33 @@ namespace Atlantis.Framework.CDSRepository.Impl
 
         var result = string.Empty;
 
-        bool useMongoDB = (config.GetConfigValue("Primary") == "MongoDB");
-        if (useMongoDB)
-        {
-          string connectionString = config.GetConfigValue("MongoDBConnection");
-          DocumentRepository = new MongoDBDocumentRepository(connectionString);
-        }
-        else
-        {
-          string rootPath = config.GetConfigValue("RootPath");
-          DocumentRepository = new FlatFileDocumentRepository(rootPath);
-        }
+        //Setup and attemp PRIMARY
+        DocumentRepository = GetPrimaryDocumentRepository(config);
 
         ObjectId docId;
         bool isValidObjectId = ObjectId.TryParse(cdsRequestData.DocumentId, out docId);
-
         bool bypassCache = isValidObjectId || cdsRequestData.ActiveDate > default(DateTime);
-        if (bypassCache)
+
+        try
         {
-          result = DocumentRepository.GetDocument(cdsRequestData.Query, docId, cdsRequestData.ActiveDate);
+          if (bypassCache)
+          {
+            // allows for non-cached preview type request
+            result = DocumentRepository.GetDocument(cdsRequestData.Query, docId, cdsRequestData.ActiveDate);
+          }
+          else
+          {
+            result = DocumentRepository.GetDocument(cdsRequestData.Query);
+          }
         }
-        else
+        catch(Exception ex)
         {
+          // log that Primary bombed
+          string message = ex.Message + Environment.NewLine + ex.StackTrace;
+          Engine.Engine.LogAtlantisException(new AtlantisException(cdsRequestData, "CDSRepositoryRequest.RequestHandler", message, cdsRequestData.Query, ex));
+
+          // When Primary bombs, failover to SECONDARY
+          DocumentRepository = GetSecondaryDocumentRepository(config);
           result = DocumentRepository.GetDocument(cdsRequestData.Query);
         }
 
@@ -71,5 +76,17 @@ namespace Atlantis.Framework.CDSRepository.Impl
 
       return responseData;
     }
+
+    private IDocumentRepository GetPrimaryDocumentRepository(ConfigElement config)
+    {
+      string connectionString = config.GetConfigValue("MongoDBConnection");
+      return new MongoDBDocumentRepository(connectionString);
+    }
+    private IDocumentRepository GetSecondaryDocumentRepository(ConfigElement config)
+    {
+      string rootPath = config.GetConfigValue("RootPath");
+      return new FlatFileDocumentRepository(rootPath);
+    }
+
   }
 }

@@ -116,6 +116,9 @@ namespace Atlantis.Framework.Providers.Links.Tests
       LinkProvider.LowerCaseRelativeUrlsForSEO = true;
       string lowerCaseLink = links.GetRelativeUrl("/tesT.aspx");
       Assert.AreEqual(lowerCaseLink.ToLowerInvariant(), lowerCaseLink);
+
+      string mixedCaseQuery = links.GetRelativeUrl("/test.aspx", "ISC", "Blue");
+      Assert.IsTrue(mixedCaseQuery.Contains("ISC=Blue"));
     }
 
 

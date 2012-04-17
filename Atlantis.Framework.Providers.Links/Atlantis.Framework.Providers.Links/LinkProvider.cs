@@ -23,6 +23,16 @@ namespace Atlantis.Framework.Providers.Links
       set { _allowRelativeUrls = value; }
     }
 
+    private static bool _lowerCaseRelativeUrlsForSEO = false;
+    /// <summary>
+    /// Setting this to true will lowercase all urls that don't use GetURL (same site urls) to improve SEO
+    /// </summary>
+    public static bool LowerCaseRelativeUrlsForSEO
+    {
+      get { return _lowerCaseRelativeUrlsForSEO; }
+      set { _lowerCaseRelativeUrlsForSEO = value; }
+    }
+
     private const int _RESELLERCONTEXTID = 6;
     
     /// <summary>
@@ -198,6 +208,11 @@ namespace Atlantis.Framework.Providers.Links
               _defaultRootLink = _defaultRootLink + HttpContext.Current.Request.Url.Segments[0] +
                 HttpContext.Current.Request.Url.Segments[1];
             }
+
+            if (LowerCaseRelativeUrlsForSEO)
+            {
+              _defaultRootLink = _defaultRootLink.ToLowerInvariant();
+            }
           }
           else
           {
@@ -238,6 +253,12 @@ namespace Atlantis.Framework.Providers.Links
       {
         result = VirtualPathUtility.ToAbsolute(url);
       }
+
+      if (LowerCaseRelativeUrlsForSEO)
+      {
+        result = result.ToLowerInvariant();
+      }
+
       return result;
     }
 

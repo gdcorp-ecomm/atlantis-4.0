@@ -89,6 +89,37 @@ namespace Atlantis.Framework.Providers.Links.Tests
     }
 
     [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Interop.gdDataCacheLib.dll")]
+    [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
+    public void LowerCaseForSEOFullUrlIgnored()
+    {
+      MockHttpContext.SetMockHttpContext("default.aspx", "http://WWW.GODADDY.COM/default.aspx", string.Empty);
+      ILinkProvider links = NewLinkProvider(1, "832652");
+      LinkProvider.LowerCaseRelativeUrlsForSEO = true;
+
+      string mixedCaseLink = links.GetUrl("SITEROOT", "TEST.AsPx");
+      Assert.AreNotEqual(mixedCaseLink.ToLowerInvariant(), mixedCaseLink);
+    }
+
+    [TestMethod]
+    [DeploymentItem("Interop.gdDataCacheLib.dll")]
+    public void LowerCaseForSEO()
+    {
+      MockHttpContext.SetMockHttpContext("default.aspx", "http://WWW.GODADDY.COM/default.aspx", string.Empty);
+      ILinkProvider links = NewLinkProvider(1, "832652");
+      LinkProvider.LowerCaseRelativeUrlsForSEO = false;
+
+      string mixedCaseLink = links.GetRelativeUrl("/tesT.aspx");
+      Assert.AreNotEqual(mixedCaseLink.ToLowerInvariant(), mixedCaseLink);
+
+      LinkProvider.LowerCaseRelativeUrlsForSEO = true;
+      string lowerCaseLink = links.GetRelativeUrl("/tesT.aspx");
+      Assert.AreEqual(lowerCaseLink.ToLowerInvariant(), lowerCaseLink);
+    }
+
+
+    [TestMethod]
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void IsDebugInternal()
     {
@@ -98,6 +129,8 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.IsTrue(links.IsDebugInternal());
 
       MockHttpContext.SetMockHttpContext("default.aspx", "http://siteadmin.dev.intranet.gdg/default.aspx", string.Empty);
+      links = NewLinkProvider(1, "832652");
+
       Assert.IsFalse(links.IsDebugInternal());
     }
 

@@ -87,11 +87,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PLSignupInfo.Interface", "..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Interface\Atlantis.Framework.PLSignupInfo.Interface.csproj", "{3C228090-226D-435D-AC13-BE073CCDFAE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PLSignupInfo.Impl", "..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Impl\Atlantis.Framework.PLSignupInfo.Impl.csproj", "{4DFB1615-1204-4095-B56E-C697A4EA6E03}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 40
+		SccNumberOfProjects = 42
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.PurchaseEmail.sln
@@ -246,6 +250,14 @@ Global
 		SccProjectTopLevelParentUniqueName39 = Atlantis.Framework.PurchaseEmail.sln
 		SccProjectName39 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
 		SccLocalPath39 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
+		SccProjectUniqueName40 = ..\\Atlantis.Framework.PLSignupInfo\\Atlantis.Framework.PLSignupInfo.Interface\\Atlantis.Framework.PLSignupInfo.Interface.csproj
+		SccProjectTopLevelParentUniqueName40 = Atlantis.Framework.PurchaseEmail.sln
+		SccProjectName40 = ../Atlantis.Framework.PLSignupInfo/Atlantis.Framework.PLSignupInfo.Interface
+		SccLocalPath40 = ..\\Atlantis.Framework.PLSignupInfo\\Atlantis.Framework.PLSignupInfo.Interface
+		SccProjectUniqueName41 = ..\\Atlantis.Framework.PLSignupInfo\\Atlantis.Framework.PLSignupInfo.Impl\\Atlantis.Framework.PLSignupInfo.Impl.csproj
+		SccProjectTopLevelParentUniqueName41 = Atlantis.Framework.PurchaseEmail.sln
+		SccProjectName41 = ../Atlantis.Framework.PLSignupInfo/Atlantis.Framework.PLSignupInfo.Impl
+		SccLocalPath41 = ..\\Atlantis.Framework.PLSignupInfo\\Atlantis.Framework.PLSignupInfo.Impl
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.PurchaseEmail.vsmdi
@@ -649,6 +661,26 @@ Global
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Release|x86.ActiveCfg = Release|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -690,5 +722,7 @@ Global
 		{8EB9D6B2-C2B6-4CD3-BEAE-2C22347A81DA} = {B3FCB122-EC77-42DB-97ED-9006EDF85204}
 		{D67BE3FC-BB67-4ADC-A368-98B04B395396} = {B3FCB122-EC77-42DB-97ED-9006EDF85204}
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {B3FCB122-EC77-42DB-97ED-9006EDF85204}
+		{3C228090-226D-435D-AC13-BE073CCDFAE2} = {B3FCB122-EC77-42DB-97ED-9006EDF85204}
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03} = {B3FCB122-EC77-42DB-97ED-9006EDF85204}
 	EndGlobalSection
 EndGlobal

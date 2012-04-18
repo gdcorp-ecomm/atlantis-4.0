@@ -159,9 +159,18 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
               authenticationService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
               authenticationService.ClientCertificates.Add(cert);
 
-              statusCode = authenticationService.ChangePassword(
-                request.ShopperID, request.PrivateLabelId, request.CurrentPassword, request.NewPassword, request.AuthToken, request.PhoneNumber, request.HostName, request.IpAddress,
-                request.NewHint, request.NewLogin, 1, out statusMessage);
+              statusCode = authenticationService.ChangePassword(request.ShopperID, 
+                                                                request.PrivateLabelId, 
+                                                                request.CurrentPassword, 
+                                                                request.NewPassword, 
+                                                                request.TwoFactorAuthToken, 
+                                                                request.TwoFactorCountryCode + request.TwoFactorPhoneNumber,
+                                                                request.HostName, 
+                                                                request.IpAddress,
+                                                                request.NewHint, 
+                                                                request.NewLogin, 
+                                                                1, 
+                                                                out statusMessage);
 
               //we need to strip out the 30 day password reuse error if the user is not changing their pw
               if (!isPasswordChange)

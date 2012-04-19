@@ -69,7 +69,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
       var defaultSortOrder = Convert.ToInt32(accordion.Attribute("defaultSortOrder").Value);
       var namespaces =
         new HashSet<string>(
-          Convert.ToString(accordion.Attribute("namespaces").Value).ToLowerInvariant().Replace(" ", string.Empty).
+          Convert.ToString(accordion.Attribute("namespaces").Value).Replace(" ", string.Empty).
             Split(','), StringComparer.InvariantCultureIgnoreCase);
       var accordionXml = accordion.Attribute("accordionXml").Value;
 

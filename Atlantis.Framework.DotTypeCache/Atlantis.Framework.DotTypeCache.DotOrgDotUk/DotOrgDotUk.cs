@@ -48,5 +48,35 @@ namespace Atlantis.Framework.DotTypeCache.DotOrgDotUk
     {
       get { return "ORG.UK"; }
     }
+
+    public override int MinRegistrationLength
+    {
+      get { return 2; }
+    }
+
+    public override int MaxRegistrationLength
+    {
+      get { return 2; }
+    }
+
+    public virtual int MinTransferLength
+    {
+      get { return 1; }
+    }
+
+    public virtual int MaxTransferLength
+    {
+      get { return 9; }
+    }
+
+    public override int MinRenewalLength
+    {
+      get { return 2; }
+    }
+
+    public override int MaxRenewalLength
+    {
+      get { return 2; }
+    }
   }
 }

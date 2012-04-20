@@ -59,12 +59,12 @@ namespace Atlantis.Framework.DotTypeCache.DotOrgDotUk
       get { return 2; }
     }
 
-    public virtual int MinTransferLength
+    public override int MinTransferLength
     {
       get { return 1; }
     }
 
-    public virtual int MaxTransferLength
+    public override int MaxTransferLength
     {
       get { return 9; }
     }

@@ -107,5 +107,33 @@ namespace Atlantis.Framework.ValidateField.Tests
       Assert.IsTrue(HasFailureCode(errors, 2));
     }
 
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.ValidateField.Impl.dll")]
+    public void PasswordLeadingWhiteSpace()
+    {
+      var request = new ValidateFieldRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "password");
+      ValidateFieldResponseData validator = (ValidateFieldResponseData)DataCache.DataCache.GetProcessRequest(request, 507);
+
+      List<ValidationFailure> errors;
+      bool isValid = validator.ValidateStringField("   1234Adj29", out errors);
+      Assert.IsFalse(isValid);
+      Assert.IsTrue(HasFailureCode(errors, 10));
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.ValidateField.Impl.dll")]
+    public void PasswordTrailingWhiteSpace()
+    {
+      var request = new ValidateFieldRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "password");
+      ValidateFieldResponseData validator = (ValidateFieldResponseData)DataCache.DataCache.GetProcessRequest(request, 507);
+
+      List<ValidationFailure> errors;
+      bool isValid = validator.ValidateStringField("1234Adj29   ", out errors);
+      Assert.IsFalse(isValid);
+      Assert.IsTrue(HasFailureCode(errors, 10));
+    }
+
   }
 }

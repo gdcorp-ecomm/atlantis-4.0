@@ -16,7 +16,7 @@ namespace Atlantis.Framework.ValidateField.Tests
       ValidateFieldResponseData validator = (ValidateFieldResponseData)DataCache.DataCache.GetProcessRequest(request, 507);
 
       List<ValidationFailure> errors;
-      bool isValid = validator.ValidateStringField("#abkd uZei8k<k>ej%-_", out errors);
+      bool isValid = validator.ValidateStringField("Abasdf 9980", out errors);
       Assert.IsTrue(isValid);
       Assert.AreEqual(0, errors.Count);
     }

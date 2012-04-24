@@ -69,6 +69,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     {
       get { return _productGroup; }
     }
+    private HashSet<int> _productTypes;
+    public HashSet<int> ProductTypes
+    {
+      get { return _productTypes; }
+    }
     private readonly bool _showControlPanel;
     public bool ShowControlPanel
     {
@@ -116,7 +121,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
 
     internal AccordionMetaData(int accordionId, string accordionTitleDefault, string accordionTitleGoDaddy, int defaultSortOrder, HashSet<string> namespaces, 
           string ciExpansion, string ciRenewNow, string ciSetup, List<int> cmsDisplayGroups, CssSpriteCoordinate iconCssCoordinates, 
-          int productGroup, bool showControlPanel, bool showSetupForManagerOnly, string orionProductName, bool isBundleProduct,
+          int productGroup, HashSet<int> productTypes, bool showControlPanel, bool showSetupForManagerOnly, string orionProductName, bool isBundleProduct,
           ContentData contentData, ControlPanelData controlPanelData, WorkspaceLoginData workspaceLoginData)
     {
       _accordionId = accordionId;
@@ -130,6 +135,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       _cmsDisplayGroups = cmsDisplayGroups;
       _iconCssCoordinates = iconCssCoordinates;
       _productGroup = productGroup;
+      _productTypes = productTypes;
       _showControlPanel = showControlPanel;
       _showSetupForManagerOnly = showSetupForManagerOnly;
       _orionProductName = orionProductName;

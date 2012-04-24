@@ -81,19 +81,20 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
       List<int> cmsDisplayGroups;
       CssSpriteCoordinate iconCssCoordinates;
       int productGroup;
+      HashSet<int> productTypes;
       bool showControlPanel;
       bool showSetupForManagerOnly;
       string orionProductName;
       bool isBundleProduct;
       GetAccordionAttributes(out ciExpansion, out ciRenewNow, out ciSetup, out cmsDisplayGroups,
-                             out iconCssCoordinates, out productGroup,
+                             out iconCssCoordinates, out productGroup, out productTypes,
                              out showControlPanel, out showSetupForManagerOnly, out orionProductName,
                              out isBundleProduct);
 
       return new AccordionMetaData(accordionId, accordionTitleDefault, accordionTitleGoDaddy, defaultSortOrder, namespaces,
                                    ciExpansion, ciRenewNow, ciSetup, cmsDisplayGroups,
                                    iconCssCoordinates,
-                                   productGroup, showControlPanel, showSetupForManagerOnly,
+                                   productGroup, productTypes, showControlPanel, showSetupForManagerOnly,
                                    orionProductName, isBundleProduct,
                                    contentData, controlPanelData, workspaceLoginData);
     }
@@ -136,7 +137,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
 
     private void GetAccordionAttributes(out string ciExpansion, out string ciRenewNow, out string ciSetup,
                                         out List<int> cmsDisplayGroups, out CssSpriteCoordinate iconCssCoordinates,
-                                        out int productGroup,
+                                        out int productGroup, out HashSet<int> productTypes,
                                         out bool showControlPanel, out bool showSetupForManagerOnly,
                                         out string orionProductName, out bool isBundleProduct)
     {
@@ -160,6 +161,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
         cmsDisplayGroups = SetCmsDisplayGroups(ParseAccordionXml("cmsdisplaygroupidlist"));
         iconCssCoordinates = SetCoordinates(ParseAccordionXml("iconcsscoordinates"));
         productGroup = Convert.ToInt32(ParseAccordionXml("productgroup"));
+        productTypes = SetProductTypes(ParseAccordionXml("producttypes"));
         showControlPanel = string.Compare(ParseAccordionXml("controlpanelrequiresaccount"), "false", true) == 0;
         showSetupForManagerOnly = string.Compare(ParseAccordionXml("showsetupformanageronly"), "true", true) == 0;
         orionProductName = ParseAccordionXml("orionproductname");
@@ -216,6 +218,28 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
         }
       }
       return cmsDisplayGroupList;
+    }
+
+    private HashSet<int> SetProductTypes(string typesStr) 
+    { 
+      var set = new HashSet<int>();
+      if (string.IsNullOrWhiteSpace(typesStr)) { return null; }
+      var split = typesStr.Split(',');
+      foreach (string typeStr in split)
+      {
+        int type;
+        if (int.TryParse(typeStr, out type))
+        {
+          set.Add(type);
+        }
+        else
+        {
+          var data = string.Format("value unable to parse: '{0}', ", typeStr);
+          var aex = new AtlantisException("XmlBuilder::SetProductTypes", "0", "Unable to parse an Accordion Metadata Product Type value", data, null, null);
+          Engine.Engine.LogAtlantisException(aex);
+        }
+      }
+      return set.Count == 0 ? null : set;
     }
 
     #endregion

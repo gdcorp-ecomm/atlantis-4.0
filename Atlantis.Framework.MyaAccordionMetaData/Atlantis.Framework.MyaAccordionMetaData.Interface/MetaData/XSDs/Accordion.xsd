@@ -12,6 +12,7 @@
       <xs:attribute name="cmsdisplaygroupidlist" type="xs:string" use="optional" />
       <xs:attribute name="orionproductname" type="xs:string" use="optional" />
       <xs:attribute name="isbundle" type="xs:string" use="optional" />
+      <xs:attribute name="producttypes" type="xs:string" use="optional" />
     </xs:complexType>
   </xs:element>
 </xs:schema>

@@ -1,9 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
-using Atlantis.Framework.EcommActivationData.Impl;
-using Atlantis.Framework.EcommActivationData.Interface;
-using Atlantis.Framework.Interface;
-using System.Xml;
+﻿using Atlantis.Framework.EcommActivationData.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.EcommActivationData.Test
 {
@@ -18,8 +14,11 @@ namespace Atlantis.Framework.EcommActivationData.Test
     //private const string _orderId = "1464901";
     //private const string _orderId = "1466042";
 
-    private const string _shopperId = "4321";
-    private const string _orderId = "12345678";
+    //private const string _shopperId = "4321";
+    //private const string _orderId = "12345678";
+
+    private const string _shopperId = "855307";
+    private const string _orderId = "1466738";
 
     private const int _requestType = 518;
 
@@ -30,58 +29,36 @@ namespace Atlantis.Framework.EcommActivationData.Test
       //
     }
 
-    private TestContext testContextInstance;
 
-    /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void No_Bracets_On_ERID()
     {
-      get
+      EcommActivationDataRequestData request = new EcommActivationDataRequestData(_shopperId
+                                                                                  , string.Empty
+                                                                                  , _orderId
+                                                                                  , string.Empty
+                                                                                  , 0);
+      EcommActivationDataResponseData response = (EcommActivationDataResponseData) Engine.Engine.ProcessRequest(request, _requestType);
+      Assert.IsTrue(response.IsSuccess && response.FreeProducts.Count > 0, "Service call did not work or did not return any data.");
+      foreach (ProductInfo currentProduct in response.FreeProducts)
       {
-        return testContextInstance;
-      }
-      set
-      {
-        testContextInstance = value;
+        Assert.IsTrue(!currentProduct.ExternalResourceID.StartsWith("{") && !currentProduct.ExternalResourceID.EndsWith("}"), "Brackets were found on either end of ERID");
       }
     }
 
-    #region Additional test attributes
-    //
-    // You can use the following additional attributes as you write your tests:
-    //
-    // Use ClassInitialize to run code before running the first test in the class
-    // [ClassInitialize()]
-    // public static void MyClassInitialize(TestContext testContext) { }
-    //
-    // Use ClassCleanup to run code after all tests in a class have run
-    // [ClassCleanup()]
-    // public static void MyClassCleanup() { }
-    //
-    // Use TestInitialize to run code before running each test 
-    // [TestInitialize()]
-    // public void MyTestInitialize() { }
-    //
-    // Use TestCleanup to run code after each test has run
-    // [TestCleanup()]
-    // public void MyTestCleanup() { }
-    //
-    #endregion
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void EcommActivationDataTest()
     {
-      try
-      {
-        EcommActivationDataRequestData request = new EcommActivationDataRequestData(_shopperId
+      EcommActivationDataRequestData request = new EcommActivationDataRequestData(_shopperId
            , string.Empty
            , _orderId
            , string.Empty
            , 0);
         EcommActivationDataResponseData response = (EcommActivationDataResponseData)Engine.Engine.ProcessRequest(request, _requestType);
+        Assert.IsTrue(response.IsSuccess && response.FreeProducts.Count > 0, "Service call did not work or did not return any data.");
         foreach (ProductInfo currentProduct in response.FreeProducts)
         {
           foreach (ActivatedProducts currentFree in currentProduct.ActivatedProducts)
@@ -92,11 +69,6 @@ namespace Atlantis.Framework.EcommActivationData.Test
             }
           }
         }
-      }
-      catch (System.Exception ex)
-      {
-        System.Diagnostics.Debug.WriteLine(ex.ToString());
-      }
 
       /*
        * 

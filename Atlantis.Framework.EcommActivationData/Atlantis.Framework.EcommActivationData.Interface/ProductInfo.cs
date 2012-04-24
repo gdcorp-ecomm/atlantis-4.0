@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Xml;
 
 namespace Atlantis.Framework.EcommActivationData.Interface
@@ -75,7 +72,7 @@ namespace Atlantis.Framework.EcommActivationData.Interface
     {
       get
       {
-        return _itemData.GetAttribute<string>("externalResourceID", string.Empty);
+        return _itemData.GetAttribute<string>("externalResourceID", string.Empty).Trim(new char[] { '{', '}' });
       }
     }
 

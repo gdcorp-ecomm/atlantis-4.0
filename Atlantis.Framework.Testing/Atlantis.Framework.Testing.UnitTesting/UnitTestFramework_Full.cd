@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Atlantis.Framework.Testing.UnitTesting.TestAttribute" Collapsed="true">
+    <Position X="0.5" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAACAAAAAAAAAAAAAQAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Attributes\TestAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.Framework.Testing.UnitTesting.TestTeardownAttribute" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\TestTeardownAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.Framework.Testing.UnitTesting.TestExpectedException" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\TestExpectedException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.Framework.Testing.UnitTesting.TestFixtureSetupAttribute" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\TestFixtureSetupAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.Framework.Testing.UnitTesting.TestFixtureTeardownAttribute" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\TestFixtureTeardownAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.Framework.Testing.UnitTesting.TestSetupAttribute" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\TestSetupAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.Framework.Testing.UnitTesting.AssertionFailedException" Collapsed="true">
+    <Position X="3.25" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\AssertionFailedException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.Framework.Testing.UnitTesting.UnitTestBasePage" BaseTypeListCollapsed="true">
+    <Position X="6" Y="2.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AQQBAQAFAAAAAABABEBAFAACIQAAgQAACBAAAAAADSA=</HashCode>
+      <FileName>BaseClasses\UnitTestBasePage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Atlantis.Framework.Testing.UnitTesting.TestResultBase">
+    <Position X="8.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAQAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BaseClasses\TestResultBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.Framework.Testing.UnitTesting.Assert">
+    <Position X="3.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AABCACAAAAAAAAgAAAQAAIhAAAAAAAAIAAAAEQAQAAA=</HashCode>
+      <FileName>Asserts\Assert_AreEqual.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Atlantis.Framework.Testing.UnitTesting.ITestResults">
+    <Position X="6" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ITestResults.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

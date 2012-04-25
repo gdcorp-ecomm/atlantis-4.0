@@ -49,5 +49,9 @@ namespace Atlantis.Framework.DotTypeCache.DotOrgDotUk
       get { return "ORG.UK"; }
     }
 
+    public override int MaxTransferLength
+    {
+      get { return 1; }
+    }
   }
 }

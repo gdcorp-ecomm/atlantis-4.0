@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.UnitTesting", "Atlantis.Framework.Testing.UnitTesting.csproj", "{12A3E764-8984-4486-ACB6-25942F148DCB}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.Testing.UnitTesting.csproj
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12A3E764-8984-4486-ACB6-25942F148DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12A3E764-8984-4486-ACB6-25942F148DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12A3E764-8984-4486-ACB6-25942F148DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12A3E764-8984-4486-ACB6-25942F148DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

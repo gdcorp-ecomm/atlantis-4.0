@@ -172,12 +172,6 @@ namespace Atlantis.Framework.AuthChangePassword.Impl
                                                                 1, 
                                                                 out statusMessage);
 
-              //we need to strip out the 30 day password reuse error if the user is not changing their pw
-              if (!isPasswordChange)
-              {
-                responseCodes.Remove(AuthChangePasswordStatusCodes.PasswordStrengthAlreadyUsed);
-              }
-
               responseData = new AuthChangePasswordResponseData(statusCode, statusMessage, responseCodes, regexErrors);
             }
           }

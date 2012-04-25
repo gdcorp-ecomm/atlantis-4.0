@@ -47,12 +47,12 @@ namespace Atlantis.Framework.Interface
       return GetClientCertificate("ClientCertificateName");
     }    
 
-    public X509Certificate2 GetClientCertificate(string friendlyName)
+    public X509Certificate2 GetClientCertificate(string configKey)
     {
       X509Certificate2 clientCertificate = null;
       X509Store store = null;
-      string certName = GetConfigValue(friendlyName);
-      if (!string.IsNullOrEmpty(certName))
+      string friendlyName = GetConfigValue(configKey);
+      if (!string.IsNullOrEmpty(friendlyName))
       {
         try
         {
@@ -61,12 +61,16 @@ namespace Atlantis.Framework.Interface
 
           foreach (X509Certificate2 certificate in store.Certificates)
           {
-            if (certificate.FriendlyName.Equals(certName, StringComparison.CurrentCultureIgnoreCase) &&
+            if (certificate.FriendlyName.Equals(friendlyName, StringComparison.CurrentCultureIgnoreCase) &&
                 !IsCertificateExpired(certificate))
             {
               clientCertificate = certificate;
               break;
             }
+          }
+          if (clientCertificate == null)
+          {
+            throw new AtlantisException("WsConfigElement::GetClientCertificate", "0", "Unable to find Client Certificate in  cert store.", string.Format("friendlyName: '{0}'", friendlyName), null, null);
           }
         }
         finally
@@ -77,7 +81,10 @@ namespace Atlantis.Framework.Interface
           }
         }
       }
-
+      else
+      {
+        throw new AtlantisException("WsConfigElement::GetClientCertificate", "0", "Unable to find Client Certificate config key.", string.Format("configKey: '{0}'", configKey), null, null);
+      }
       return clientCertificate;
     }
   }

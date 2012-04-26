@@ -6,7 +6,7 @@ namespace Atlantis.Framework.MyaAvailableProductNamespaces.Interface
   [DataContract]
   public class ProductNamespace
   {
-    internal ProductNamespace(string name, string descrption, string example, string note, string sortOrder, string productGroupId)
+    public ProductNamespace(string name, string descrption, string example, string note, string sortOrder, string productGroupId)
     {
       Namespace = name;
       Description = descrption;

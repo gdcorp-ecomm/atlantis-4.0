@@ -42,11 +42,11 @@ namespace Atlantis.Framework.BasePages.Providers
 
             if (sHost.Contains("godaddy.com") || sHost.Contains("godaddy-com.ide") || sHost.Contains("godaddymobile.com") || sHost.Contains("godaddymobile-com.ide"))
               _contextId = ContextIds.GoDaddy;
-            else if (sHost.Contains("bluerazor.com") || sHost.Contains("bluerazor-com.ide") || sHost.Contains("bluerazormobile.com") || sHost.Contains("bluerazormobile-com.ide"))
+            else if (sHost.Contains("bluerazor.com") || sHost.Contains("bluerazor-com.ide"))
               _contextId = ContextIds.BlueRazor;
             else if (sHost.Contains("wildwestdomains.com") || sHost.Contains("wildwestdomains-com.ide"))
               _contextId = ContextIds.WildWestDomains;
-            else if (sHost.Contains("securepaynet.net") || sHost.Contains("securepaynet-net.ide") || sHost.Contains("securepaynetmobile.net") || sHost.Contains("securepaynetmobile-net.ide"))
+            else if (sHost.Contains("securepaynet.net") || sHost.Contains("securepaynet-net.ide"))
               _contextId = ContextIds.Reseller;
           }
         }

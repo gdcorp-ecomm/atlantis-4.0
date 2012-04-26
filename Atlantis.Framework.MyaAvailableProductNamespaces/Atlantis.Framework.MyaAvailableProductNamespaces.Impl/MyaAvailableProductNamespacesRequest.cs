@@ -7,27 +7,27 @@ using Atlantis.Framework.Nimitz;
 
 namespace Atlantis.Framework.MyaAvailableProductNamespaces.Impl
 {
- public class MyaAvailableProductNamespacesRequest: IRequest
+  public class MyaAvailableProductNamespacesRequest : IRequest
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      MyaAvailableProductNamespacesResponseData response = null;
+      MyaAvailableProductNamespacesResponseData response;
 
       try
       {
+        var data = new DataTable();
         string connectionString = NetConnect.LookupConnectInfo(config);
-
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        using (var connection = new SqlConnection(connectionString))
         {
-          using (SqlCommand command = new SqlCommand("mya_GetAvailableProductNamespaces_sp", connection))
+          using (var command = new SqlCommand("mya_GetAvailableProductNamespaces_sp", connection))
           {
-            SqlDataAdapter da = new SqlDataAdapter(command);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-
-            response = new MyaAvailableProductNamespacesResponseData(dt);
+            var da = new SqlDataAdapter(command);
+            da.Fill(data);
           }
         }
+
+        response = new MyaAvailableProductNamespacesResponseData(data);
+        data.Dispose();
       }
       catch (AtlantisException ex)
       {
@@ -40,5 +40,8 @@ namespace Atlantis.Framework.MyaAvailableProductNamespaces.Impl
 
       return response;
     }
+
+    
+
   }
 }

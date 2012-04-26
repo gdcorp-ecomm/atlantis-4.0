@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Text;
 using Atlantis.Framework.MyaAvailableProductNamespaces.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,7 +17,14 @@ namespace Atlantis.Framework.MyaAvailableProductNamespaces.Test
       var request = new MyaAvailableProductNamespacesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
       var response = (MyaAvailableProductNamespacesResponseData)Engine.Engine.ProcessRequest(request, 494);
 
-      Debug.WriteLine(response.Namespaces.Rows.Count.ToString());
+      var namespaceList = new StringBuilder();
+      foreach(ProductNamespace productNamespace in response.ProductNamespaces)
+      {
+        namespaceList.AppendFormat("Name: {0} - ProductGroupId: {1}, ", productNamespace.Namespace, productNamespace.ProductGroupId);
+      }
+
+      Debug.WriteLine(namespaceList.ToString());
+      Console.WriteLine(namespaceList.ToString());
       Assert.IsTrue(response.IsSuccess);
 
     }

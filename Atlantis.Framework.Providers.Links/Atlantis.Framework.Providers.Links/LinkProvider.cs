@@ -56,7 +56,6 @@ namespace Atlantis.Framework.Providers.Links
 
     private readonly Dictionary<int, Dictionary<string, string>> _linkMaps;
     private readonly ISiteContext _siteContext;
-    private readonly IShopperContext _shopperContext;
 
     private enum UrlRootMode
     {
@@ -71,7 +70,6 @@ namespace Atlantis.Framework.Providers.Links
     {
       _linkMaps = new Dictionary<int, Dictionary<string, string>>(1);
       _siteContext = container.Resolve<ISiteContext>();
-      _shopperContext = container.Resolve<IShopperContext>();
     }
 
     private string _contextHost;
@@ -139,7 +137,7 @@ namespace Atlantis.Framework.Providers.Links
           }
         }
         LinkInfoRequestData request = new LinkInfoRequestData(
-          _shopperContext.ShopperId, requestURL,
+          string.Empty, requestURL,
           string.Empty, _siteContext.Pathway, _siteContext.PageCount, contextId);
 
         LinkInfoResponseData response = (LinkInfoResponseData)DataCache.DataCache.GetProcessRequest(

@@ -7,7 +7,5 @@ namespace Atlantis.Framework.Providers.Interface.CDS
   {
     string GetJSON(string query);
     string GetJSON(string query, Dictionary<string, string> customTokens);
-    string GetJSON(string query, string docId, DateTime activeDate);
-    string GetJSON(string query, Dictionary<string, string> customTokens, string docId, DateTime activeDate);
   }
 }

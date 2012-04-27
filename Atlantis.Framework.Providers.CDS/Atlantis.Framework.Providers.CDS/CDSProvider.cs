@@ -5,6 +5,10 @@ using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.CDS.Tokenizer;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.CDS;
+using System.Web;
+using System.Collections.Specialized;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Atlantis.Framework.Providers.CDS
 {
@@ -33,14 +37,42 @@ namespace Atlantis.Framework.Providers.CDS
       var data = string.Empty;
       CDSResponseData responseData;
 
+      bool bypassCache = false;
+      if (HttpContext.Current != null)
+      {
+        DateTime activeDate;
+        NameValueCollection queryString = HttpContext.Current.Request.QueryString;
+        string docId = queryString["docid"];
+        string qsDate = queryString["activedate"];
+        if ((DateTime.TryParse(qsDate, out activeDate) || IsValidMongoObjectId(docId)) && _siteContext.IsRequestInternal)
+        {
+          bypassCache = true;
+          NameValueCollection queryParams = new NameValueCollection();
+          if (activeDate != default(DateTime))
+          {
+            queryParams.Add("activedate", activeDate.ToString("O"));
+          }
+          if (IsValidMongoObjectId(docId))
+          {
+            queryParams.Add("docid", docId);
+          }
+          if (queryParams.Count > 0)
+          {
+            string appendChar = query.Contains("?") ? "&" : "?";
+            query += string.Concat(appendChar, ToQueryString(queryParams));
+          }
+        }
+      }
+
       CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query);
 
       try
       {
-        responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, _REQUEST_TYPE);
+        responseData = bypassCache ? (CDSResponseData)Engine.Engine.ProcessRequest(requestData, 424) : (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, _REQUEST_TYPE);
         if (responseData.IsSuccess)
         {
-          data = GetResponseData(responseData, customTokens);
+          CDSTokenizer tokenizer = new CDSTokenizer();
+          data = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
         }
       }
       catch (Exception ex)
@@ -50,38 +82,20 @@ namespace Atlantis.Framework.Providers.CDS
       return data;
     }
 
-    public string GetJSON(string query, string docId, DateTime activeDate)
+    private bool IsValidMongoObjectId(string text)
     {
-      return GetJSON(query, null, docId, activeDate);
+      bool result = false;
+      if (text != null)
+      {
+        string pattern = @"^[0-9a-fA-F]{24}$";
+        result = Regex.IsMatch(text, pattern);
+      }
+      return result;
     }
 
-    public string GetJSON(string query, Dictionary<string, string> customTokens, string docId, DateTime activeDate)
+    private string ToQueryString(NameValueCollection nvc)
     {
-      string data = string.Empty;
-      CDSResponseData responseData;
-
-      CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query, docId, activeDate);
-
-      try
-      {
-        responseData = (CDSResponseData)Engine.Engine.ProcessRequest(requestData, 424);
-        if (responseData.IsSuccess)
-        {
-          data = GetResponseData(responseData, customTokens);
-        }
-      }
-      catch (Exception ex)
-      {
-        Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
-      }
-
-      return data;
-    }
-
-    private string GetResponseData(CDSResponseData responseData, Dictionary<string, string> customTokens)
-    {
-      CDSTokenizer tokenizer = new CDSTokenizer();
-      return (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
+      return string.Join("&", nvc.AllKeys.SelectMany(key => nvc.GetValues(key).Select(value => string.Format("{0}={1}", key, value))).ToArray());
     }
 
     #endregion

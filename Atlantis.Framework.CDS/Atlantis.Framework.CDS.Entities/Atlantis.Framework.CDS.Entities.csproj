@@ -44,10 +44,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\FriendlyNameAttribute.cs" />
+    <Compile Include="Attributes\HideInManagementUIAttribute.cs" />
+    <Compile Include="Attributes\SectionContainerAttribute.cs" />
     <Compile Include="DefaultVideo.cs" />
     <Compile Include="Image.cs" />
+    <Compile Include="Interfaces\ICDSWidget.cs" />
+    <Compile Include="Interfaces\IWidget.cs" />
+    <Compile Include="Interfaces\IWidgetModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Video.cs" />
+    <Compile Include="Widgets\ElementBase.cs" />
+    <Compile Include="Widgets\Features.cs" />
+    <Compile Include="Widgets\Footer.cs" />
+    <Compile Include="Widgets\FooterBase.cs" />
+    <Compile Include="Widgets\HowItWorks.cs" />
+    <Compile Include="Widgets\List.cs" />
+    <Compile Include="Widgets\Literal.cs" />
+    <Compile Include="Widgets\ManageNow.cs" />
+    <Compile Include="Widgets\ManagerUpSellProducts.cs" />
+    <Compile Include="Widgets\Meta.cs" />
+    <Compile Include="Widgets\MiniPlanBox.cs" />
+    <Compile Include="Widgets\OnePlanMini.cs" />
+    <Compile Include="Widgets\PlanBox.cs" />
+    <Compile Include="Widgets\PlanBoxContainer.cs" />
+    <Compile Include="Widgets\QuickHelp.cs" />
+    <Compile Include="Widgets\SalesHeader.cs" />
+    <Compile Include="Widgets\SalesScript.cs" />
+    <Compile Include="Widgets\Support.cs" />
+    <Compile Include="Widgets\TabContent.cs" />
+    <Compile Include="Widgets\TabsContainer.cs" />
+    <Compile Include="Widgets\Widget.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Plugins\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

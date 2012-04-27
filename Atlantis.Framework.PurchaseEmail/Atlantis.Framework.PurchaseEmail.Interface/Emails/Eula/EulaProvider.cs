@@ -122,6 +122,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
         {
           try
           {
+            pagIdsUsed = new List<string>();
             _usedEulaItems = new List<EULAItem>();
             BuildItemEulaList(ref _usedEulaItems);
             BuildAutoActivationEulaList(ref _usedEulaItems);
@@ -159,10 +160,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           string pageID = agreeElement.GetAttribute("pageid");
           string title = agreeElement.GetAttribute("agreementName");
           EULAItem currentItem = GetEULAData(pageID);
-          if (!string.IsNullOrEmpty(currentItem.PageId))
+          if (currentItem.RuleType == EULARuleType.Unknown)
           {
-            AddUniqueEULAItem(ref eulaList, currentItem);
+            string legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageID, "isc", "{isc}", "prog_id", _orderData.ProgId);
+            currentItem.PageId = pageID;
+            currentItem.LegalAgreementURL = legalAgreementURL;
+            currentItem.ProductName = title;
           }
+          AddUniqueEULAItem(ref eulaList, currentItem);
         }
       }
     }
@@ -191,6 +196,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
               string legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageID, "isc", "{isc}", "prog_id", _orderData.ProgId);
               currentItem.PageId = pageID;
               currentItem.LegalAgreementURL = legalAgreementURL;
+              currentItem.ProductName = title;
             }
             AddUniqueEULAItem(ref eulaList, currentItem);
           }
@@ -524,13 +530,16 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
     private bool AddUniqueEULAItem(ref List<EULAItem> eulaList, EULAItem currentItem)
     {
       bool added = false;
-      if (!eulaList.Contains(currentItem))
+      if (pagIdsUsed.Contains(currentItem.PageId.ToLower()))
       {
         eulaList.Add(currentItem);
         added = true;
+        pagIdsUsed.Add(currentItem.PageId.ToLower());
       }
       return added;
     }
+
+    private List<string> pagIdsUsed = new List<string>();
 
     private bool AddUniqueEULAItem(ref List<EULAItem> eulaList, EULAItem currentItem, bool logCustomRule, int productPfid)
     {
@@ -556,7 +565,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
       EULAItem tempItem = new EULAItem(string.Empty, string.Empty, string.Empty);
       if (ListPageIds.ContainsKey(pageId.ToLower()))
       {
-        tempItem = ListPageIds[pageId];
+        tempItem = ListPageIds[pageId.ToLower()];
       }
       return tempItem;
     }

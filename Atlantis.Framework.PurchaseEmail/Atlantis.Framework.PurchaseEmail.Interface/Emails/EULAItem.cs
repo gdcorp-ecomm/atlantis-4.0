@@ -15,6 +15,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     public string ProductName
     {
       get { return _productName; }
+      set { _productName = value; }
     }
     public string ProductInfoURL
     {

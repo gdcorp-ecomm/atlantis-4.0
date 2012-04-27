@@ -6,6 +6,11 @@ using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Preferences;
 using Atlantis.Framework.Providers.Preferences;
 using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Providers.Interface.Links;
+using Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula;
+using Atlantis.Framework.Providers.Links;
+using Atlantis.Framework.Providers.Interface.Products;
+using Atlantis.Framework.Providers.Products;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface
 {
@@ -17,6 +22,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     private XmlDocument _orderXmlDoc;
     private bool _isNewShopper;
     private bool _isFraudRefund;
+    private ILinkProvider _linkProvider;
+    private EulaProvider _eulaProvider;
 
     public OrderData(string orderXml, bool isNewShopper, bool isFraudRefund, ObjectProviderContainer providerContainer,string localizationCode)
       : base(providerContainer)
@@ -29,10 +36,24 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       providerContainer.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
       providerContainer.RegisterProvider<IShopperContext, OrderData>(this);
       providerContainer.RegisterProvider<ISiteContext, OrderData>(this);
+      providerContainer.RegisterProvider<ILinkProvider, LinkProvider>();
+      providerContainer.RegisterProvider<IProductProvider, ProductProvider>();
+
+      _linkProvider = providerContainer.Resolve<ILinkProvider>();
+      _eulaProvider=new EulaProvider(this, _linkProvider, providerContainer);
+
       _currency = providerContainer.Resolve<ICurrencyProvider>();
       _siteContext = providerContainer.Resolve<ISiteContext>();
       ProcessOrderXml();
-      _localizationCode = localizationCode;
+      _localizationCode = localizationCode;      
+    }
+
+    public EulaProvider EulaProv
+    {
+      get
+      {
+        return _eulaProvider;
+      }
     }
 
     private void ProcessOrderXml()

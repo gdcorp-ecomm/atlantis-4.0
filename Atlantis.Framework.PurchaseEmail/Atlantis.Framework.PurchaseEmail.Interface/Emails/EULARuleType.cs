@@ -60,6 +60,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     BusinessAccel,
     AdSpace,
     XXX,
-    InstantPage
+    InstantPage,
+    Unknown
   }
 }

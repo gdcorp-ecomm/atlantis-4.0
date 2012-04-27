@@ -8,6 +8,7 @@ using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.Interface.Products;
+using Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 {
@@ -25,7 +26,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       _currency = currency;
       _departmentIds = departmentIds;
       _links = links;
-      _products = products;     
+      _products = products;
     }
 
     #region ItemText Functions - Blue Razor
@@ -99,7 +100,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       itemTextBuilder.Append("  </tr>");
       itemTextBuilder.Append("  <tr>");
       itemTextBuilder.Append("    <td colspan='2' align='right' valign='top' class='bodyText'>[%%LCST.REQ.SUBTOTAL%%]:</td>");
-      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.SubTotal,false, CurrencyNegativeFormat.Parentheses) + "</td>");
+      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.SubTotal, false, CurrencyNegativeFormat.Parentheses) + "</td>");
       itemTextBuilder.Append("  </tr>");
       itemTextBuilder.Append("  <tr>");
       itemTextBuilder.Append("    <td colspan='2' align='right' valign='top' class='bodyText'>[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:</td>");
@@ -111,7 +112,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       itemTextBuilder.Append("  </tr>");
       itemTextBuilder.Append("  <tr>");
       itemTextBuilder.Append("    <td colspan='2' align='right' valign='top' class='bodyText'>[%%LCST.REQ.TOTAL%%]:</td>");
-      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.TotalTotal,false, CurrencyNegativeFormat.Parentheses) + "</td>");
+      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.TotalTotal, false, CurrencyNegativeFormat.Parentheses) + "</td>");
       itemTextBuilder.Append("  </tr>");
       itemTextBuilder.Append("</table>");
     }
@@ -175,7 +176,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.SUBTOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.SubTotal,false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.SubTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
       itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
@@ -190,7 +191,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.TOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.TotalTotal,false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.TotalTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
     }
 
@@ -346,7 +347,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.SUBTOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.SubTotal,false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.SubTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
       itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
@@ -361,7 +362,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.TOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.TotalTotal,false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.TotalTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
     }
 
@@ -549,31 +550,30 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     #region EULA Text Functions
 
-    public void BuildEULAText(Dictionary<EULARuleType, bool> eulaDictionary, StringBuilder itemsTextBuilder, bool debug, string iscCode)
+    public void BuildEULAText(EulaProvider eulaProvider, StringBuilder itemsTextBuilder, bool debug, string iscCode)
     {
-      if (eulaDictionary.Count > 0)
+      if (eulaProvider.ConfiguredEULA.Count > 0)
       {
         itemsTextBuilder.AppendLine(Environment.NewLine + Environment.NewLine + "[%%LCST.REQ.UTOS_IMPORTANT_INFO%%]:");
         if (debug) itemsTextBuilder.Append("<br/>");
 
-        EULAData eulaDataProvider = new EULAData(_orderData, _departmentIds, _links);
-        if (eulaDictionary.ContainsKey(EULARuleType.GiftCard))
+        if (eulaProvider.ConfiguredEULA.Contains(eulaProvider.GetEULAData(EULARuleType.GiftCard)))
         {
-          EULAItem eulaData = eulaDataProvider.GetEULAData(EULARuleType.GiftCard, iscCode);
+          EULAItem eulaData = eulaProvider.GetEULAData(EULARuleType.GiftCard);
           if (eulaData != null)
           {
             itemsTextBuilder.Append("[%%LCST.REQ.UTOS_GIFT_EMAIL%%] ");
             itemsTextBuilder.Append("[%%LCST.REQ.UTOS_GIFT_RECIP%%]");
           }
         }
-        foreach (EULARuleType eulaRuleKey in eulaDictionary.Keys)
+        foreach (EULAItem eulaData in eulaProvider.ConfiguredEULA)
         {
-          EULAItem eulaData = eulaDataProvider.GetEULAData(eulaRuleKey, iscCode);
+          string legalInfoURL = eulaData.LegalAgreementURL.Replace("{isc}", iscCode);
+
           if (eulaData != null)
           {
             string productName = eulaData.ProductName;
             string productInfoURL = eulaData.ProductInfoURL;
-            string legalInfoURL = eulaData.LegalAgreementURL;
 
             if (!string.IsNullOrEmpty(productName))
             {
@@ -593,19 +593,18 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       }
     }
 
-    public void BuildEULAHTML(Dictionary<EULARuleType, bool> eulaDictionary, StringBuilder itemsTextBuilder, string hostingConcierge, string iscCode)
+    public void BuildEULAHTML(EulaProvider eulaProvider, StringBuilder itemsTextBuilder, string hostingConcierge, string iscCode)
     {
-      if (eulaDictionary.Count > 0)
+      if (eulaProvider.ConfiguredEULA.Count > 0)
       {
-        EULAData eulaDataProvider = new EULAData(_orderData, _departmentIds, _links);
-        
         itemsTextBuilder.Append("<br /><br /><table width='370' cellspacing='1' cellpadding='0' border='0' class='bodyText' bgcolor='#EEEEEE' ");
         itemsTextBuilder.Append("style=\"font-size: 12px; color: black; font-family: arial,sans serif;\">");
         itemsTextBuilder.Append("<tr><td colspan='3' style='line-height:5px'>&nbsp;</td></tr>");
         itemsTextBuilder.Append("<tr><td colspan='3' class='bodyText'><b>[%%LCST.REQ.UTOS_IMPORTANT_INFO%%]:</b></td></tr>");
-        if (eulaDictionary.ContainsKey(EULARuleType.GiftCard))
+        if (eulaProvider.ConfiguredEULA.Contains(eulaProvider.GetEULAData(EULARuleType.GiftCard)))
         {
-          EULAItem eulaData = eulaDataProvider.GetEULAData(EULARuleType.GiftCard, iscCode);
+          EULAItem eulaData = eulaProvider.GetEULAData(EULARuleType.GiftCard);
+          string agreementURL = eulaData.LegalAgreementURL.Replace("{isc}", iscCode);
           if (eulaData != null)
           {
             itemsTextBuilder.Append("<tr><td colspan='3' class='bodyText'>");
@@ -618,14 +617,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
 
         bool hostingConciergeHasShown = false;
-        foreach (EULARuleType eulaRuleKey in eulaDictionary.Keys)
+        foreach (EULAItem eulaData in eulaProvider.ConfiguredEULA)
         {
-          EULAItem eulaData = eulaDataProvider.GetEULAData(eulaRuleKey, iscCode);
+          string legalInfoURL = eulaData.LegalAgreementURL.Replace("{isc}", iscCode);
+
           if (eulaData != null)
           {
             string productName = eulaData.ProductName;
             string productInfoURL = eulaData.ProductInfoURL;
-            string legalInfoURL = eulaData.LegalAgreementURL;
 
             itemsTextBuilder.Append("<tr>");
             if (!string.IsNullOrEmpty(productName))
@@ -644,19 +643,19 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
             if (!String.IsNullOrEmpty(hostingConcierge) && !hostingConciergeHasShown)
             {
-                switch (eulaRuleKey)
-                {
-                    case EULARuleType.Hosting:
-                    case EULARuleType.DedHosting:
-                    case EULARuleType.DedVirtHosting:
-                        {
-                            hostingConciergeHasShown = true;
-                            itemsTextBuilder.Append("<tr><td colspan='3' class='bodyText' style='padding-left:3px'>");
-                            itemsTextBuilder.Append(hostingConcierge);
-                            itemsTextBuilder.Append("</td></tr>");
-                        }
-                        break;
-                }
+              switch (eulaData.RuleType)
+              {
+                case EULARuleType.Hosting:
+                case EULARuleType.DedHosting:
+                case EULARuleType.DedVirtHosting:
+                  {
+                    hostingConciergeHasShown = true;
+                    itemsTextBuilder.Append("<tr><td colspan='3' class='bodyText' style='padding-left:3px'>");
+                    itemsTextBuilder.Append(hostingConcierge);
+                    itemsTextBuilder.Append("</td></tr>");
+                  }
+                  break;
+              }
             }
             itemsTextBuilder.Append("<tr><td style='line-height:5px'>&nbsp;</td></tr>");
 
@@ -750,16 +749,16 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       foreach (CrossSellConfigProductId productId in crossSellProductIdList)
       {
         CrossSellProduct product = xsellProductProvider.GetCrossSellProduct(productId, iscCode);
-        if (product != null && (!string.IsNullOrEmpty(product.ProductName) 
+        if (product != null && (!string.IsNullOrEmpty(product.ProductName)
             || !string.IsNullOrEmpty(product.ProductDescription)))
         {
-            if (!tableAdded)
-            {
-                tableAdded = true;
-                itemsTextBuilder.Append("<table border=\"0\" cellpadding=\"1\" cellspacing=\"0\" " +
-                     "style=\"border: 1px solid #999999\" bgcolor=\"#FDFFDA\" width=\"100%\">");
-            }
-      
+          if (!tableAdded)
+          {
+            tableAdded = true;
+            itemsTextBuilder.Append("<table border=\"0\" cellpadding=\"1\" cellspacing=\"0\" " +
+                 "style=\"border: 1px solid #999999\" bgcolor=\"#FDFFDA\" width=\"100%\">");
+          }
+
           if (++index > 1)
           {
             itemsTextBuilder.AppendLine("<tr><td style=\"padding:6px\"><hr size=\"1\"></td></tr>");

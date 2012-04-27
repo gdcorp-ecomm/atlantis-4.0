@@ -28,6 +28,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     private ICurrencyProvider _currency;
     private ILinkProvider _linkProvider;
     private IProductProvider _products;
+
     ObjectProviderContainer _objectContainer;
 
     public PurchaseConfirmationEmailBase(OrderData orderData, EmailRequired emailRequired, ObjectProviderContainer objectContainer)
@@ -35,10 +36,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       _objectContainer = objectContainer;
       _objectContainer.RegisterProvider<ISiteContext, OrderData>(orderData);
       _objectContainer.RegisterProvider<IShopperContext, OrderData>(orderData);
-      _objectContainer.RegisterProvider<ILinkProvider, LinkProvider>();
       _objectContainer.RegisterProvider<IShopperPreferencesProvider, ShopperPreferencesProvider>();
       _objectContainer.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
-      _objectContainer.RegisterProvider<IProductProvider, ProductProvider>();
 
       _orderData = orderData;
       _shopperData = LoadShopper();
@@ -49,6 +48,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       _linkProvider = _objectContainer.Resolve<ILinkProvider>();
       _currency = _objectContainer.Resolve<ICurrencyProvider>();
       _products = _objectContainer.Resolve<IProductProvider>();
+
     }
 
     private GetShopperResponseData LoadShopper()
@@ -434,15 +434,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       string hostingConcierge = _orderData.ContextId == ContextIds.GoDaddy && IsHTMLEmail ?
               HostingConciergeHtmlGet() :
               String.Empty;
-      EULARules eulaRulesProvider = new EULARules(_orderData, _departmentIds, _products);
-      string isc = GetISC();
+     string isc = GetISC();
       if (IsHTMLEmail)
       {
-        emailCustomTextProvider.BuildEULAHTML(eulaRulesProvider.ApplicableEULADictionary, itemsTextBuilder, hostingConcierge, isc);
+        emailCustomTextProvider.BuildEULAHTML(_orderData.EulaProv, itemsTextBuilder, hostingConcierge, isc);
       }
       else
       {
-        emailCustomTextProvider.BuildEULAText(eulaRulesProvider.ApplicableEULADictionary, itemsTextBuilder, false, isc);
+        emailCustomTextProvider.BuildEULAText(_orderData.EulaProv, itemsTextBuilder, false, isc);
       }
 
       if (DomainsByProxyInOrder)

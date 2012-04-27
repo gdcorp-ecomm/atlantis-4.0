@@ -1,7 +1,7 @@
 ﻿
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 {
-  internal enum EULAType
+  public enum EULAType
   {
     Legal,
     Service,

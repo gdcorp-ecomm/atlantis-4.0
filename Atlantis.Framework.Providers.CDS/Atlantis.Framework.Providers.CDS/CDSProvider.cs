@@ -14,8 +14,6 @@ namespace Atlantis.Framework.Providers.CDS
 {
   public class CDSProvider : ProviderBase, ICDSProvider
   {
-    private const int _REQUEST_TYPE = 424;
-
     private readonly ISiteContext _siteContext;
     private readonly IShopperContext _shopperContext;
 
@@ -68,7 +66,7 @@ namespace Atlantis.Framework.Providers.CDS
 
       try
       {
-        responseData = bypassCache ? (CDSResponseData)Engine.Engine.ProcessRequest(requestData, 424) : (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, _REQUEST_TYPE);
+        responseData = bypassCache ? (CDSResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType) : (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType);
         if (responseData.IsSuccess)
         {
           CDSTokenizer tokenizer = new CDSTokenizer();

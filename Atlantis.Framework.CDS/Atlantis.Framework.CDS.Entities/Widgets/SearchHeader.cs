@@ -14,7 +14,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string HeaderText { get; set; }
     public string SearchCi { get; set; }
     public string BulkCi { get; set; }
-    public string SubHeaderText { get; set; }
+    public string SubheaderText { get; set; }
     public SocialMediaData SocialData { get; set; }
     public Banner OptionalBanner { get; set; }
 

@@ -7,6 +7,7 @@ using Atlantis.Framework.CDS.Entities.Attributes;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
+  [SectionContainer("Features")]
   public class Features : IWidgetModel
   {
     public Features()

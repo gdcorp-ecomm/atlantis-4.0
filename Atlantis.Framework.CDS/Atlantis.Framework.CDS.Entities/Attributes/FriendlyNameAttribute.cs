@@ -6,7 +6,7 @@ using System.Text;
 namespace Atlantis.Framework.CDS.Entities.Attributes
 {
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
-  public class FriendlyNameAttribute : System.Attribute
+  public sealed class FriendlyNameAttribute : System.Attribute
   {
     public FriendlyNameAttribute(string friendlyName)
     {

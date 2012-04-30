@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Interfaces;
+using Newtonsoft.Json;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
@@ -27,7 +28,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       }
     }
 
-    public List<Widget<object>> Widgets { get; set; }
+    [JsonIgnore]
+    public List<Widget<IWidgetModel>> Widgets { get; set; }
 
     public bool HideBorder { get; set; }
   }

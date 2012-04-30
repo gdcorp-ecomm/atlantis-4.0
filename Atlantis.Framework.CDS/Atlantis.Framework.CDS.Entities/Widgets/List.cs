@@ -21,6 +21,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       set { _numColumns = value; }
     }
 
-    public List<ElementBase> Items { get; set; }
+    public class FooterListItem : ElementBase { }
+
+    public List<FooterListItem> Items { get; set; }
   }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Interfaces;
 using Atlantis.Framework.CDS.Entities.Attributes;
+using Newtonsoft.Json;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
@@ -26,8 +27,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
         return _tabs;
       }
     }
-
-    public List<Widget<object>> Widgets { get; set; }
+    [JsonIgnore]
+    public List<Widget<IWidgetModel>> Widgets { get; set; }
 
     public class Tab
     {

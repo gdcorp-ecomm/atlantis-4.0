@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\Delta\Web Applications\Sales\Web\Main\Sales\Bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,6 +57,8 @@
     <Compile Include="Interfaces\IWidgetModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Video.cs" />
+    <Compile Include="Widgets\Detail.cs" />
+    <Compile Include="Widgets\Disclaimer.cs" />
     <Compile Include="Widgets\ElementBase.cs" />
     <Compile Include="Widgets\Features.cs" />
     <Compile Include="Widgets\Footer.cs" />
@@ -65,12 +70,15 @@
     <Compile Include="Widgets\ManagerUpSellProducts.cs" />
     <Compile Include="Widgets\Meta.cs" />
     <Compile Include="Widgets\MiniPlanBox.cs" />
+    <Compile Include="Widgets\NonCDS.cs" />
+    <Compile Include="Widgets\NonCDSWidgets.cs" />
     <Compile Include="Widgets\OnePlanMini.cs" />
     <Compile Include="Widgets\PlanBox.cs" />
     <Compile Include="Widgets\PlanBoxContainer.cs" />
     <Compile Include="Widgets\QuickHelp.cs" />
     <Compile Include="Widgets\SalesHeader.cs" />
     <Compile Include="Widgets\SalesScript.cs" />
+    <Compile Include="Widgets\SearchHeader.cs" />
     <Compile Include="Widgets\Support.cs" />
     <Compile Include="Widgets\TabContent.cs" />
     <Compile Include="Widgets\TabsContainer.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Atlantis.Framework.CDS.Entities.Attributes
 {
-  public class SectionContainerAttribute : System.Attribute
+  public sealed class SectionContainerAttribute : System.Attribute
   {
     public SectionContainerAttribute(string displayName)
     {

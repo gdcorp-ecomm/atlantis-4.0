@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Interfaces;
 using Atlantis.Framework.CDS.Entities.Attributes;
+using Newtonsoft.Json;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
@@ -21,6 +22,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public bool SkipDomainerCheck { get; set; }
     public bool UseNewCrossSellPage { get; set; }
     public bool FromDPP { get; set; }
-    public List<Widget<object>> Widgets { get; set; }
+    [JsonIgnore]
+    public List<Widget<IWidgetModel>> Widgets { get; set; }
   }
 }

@@ -6,14 +6,14 @@ using Atlantis.Framework.CDS.Entities.Interfaces;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
-  public class QuickHelp : IWidgetModel
+  public class Detail : IWidgetModel
   {
-    public List<QuickHelpItem> QuickHelpItems { get; set; }
+    public List<DetailItem> Details { get; set; }
 
-    public class QuickHelpItem
+    public class DetailItem
     {
-      public string QhId { get; set; }
       public string Text { get; set; }
+      public string Title { get; set; }
     }
   }
 }

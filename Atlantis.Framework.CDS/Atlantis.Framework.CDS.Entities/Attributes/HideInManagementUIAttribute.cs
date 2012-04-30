@@ -6,7 +6,7 @@ using System.Text;
 namespace Atlantis.Framework.CDS.Entities.Attributes
 {
   [AttributeUsage(AttributeTargets.Property)]
-  public class HideInManagementUIAttribute : System.Attribute
+  public sealed class HideInManagementUIAttribute : System.Attribute
   {
     public HideInManagementUIAttribute()
     {

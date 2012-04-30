@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Attributes;
 using Atlantis.Framework.CDS.Entities.Interfaces;
+using Newtonsoft.Json;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
@@ -17,7 +18,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public bool HasSCAwards { get; set; }
     public int TwoZonesLeftWidth { get; set; }
     public int TwoZonesRightWidth { get; set; }
-    public List<Widget<object>> Widgets { get; set; }
+    [JsonIgnore]
+    public List<Widget<IWidgetModel>> Widgets { get; set; }
     public CurrentTab Tab { get; set; }
 
     public class CurrentTab

@@ -13,11 +13,16 @@
 // 
 #pragma warning disable 1591
 
-namespace Atlantis.Framework.EcommCreditCardReqs.Impl.WSgdCreditCardRequirements
-{
-
-
-  /// <remarks/>
+namespace Atlantis.Framework.EcommCreditCardReqs.Impl.WSgdCreditCardRequirements {
+    using System;
+    using System.Web.Services;
+    using System.Diagnostics;
+    using System.Web.Services.Protocols;
+    using System.ComponentModel;
+    using System.Xml.Serialization;
+    
+    
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -29,6 +34,8 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Impl.WSgdCreditCardRequirements
         private System.Threading.SendOrPostCallback GetRequirementsExOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetRequirementsByProfileOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetRequirementsByProfileExOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -76,6 +83,9 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Impl.WSgdCreditCardRequirements
         
         /// <remarks/>
         public event GetRequirementsByProfileCompletedEventHandler GetRequirementsByProfileCompleted;
+        
+        /// <remarks/>
+        public event GetRequirementsByProfileExCompletedEventHandler GetRequirementsByProfileExCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://WSgdCardRequirements.godaddy.com/GetRequirements", RequestNamespace="http://WSgdCardRequirements.godaddy.com/", ResponseNamespace="http://WSgdCardRequirements.godaddy.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -166,6 +176,40 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Impl.WSgdCreditCardRequirements
             if ((this.GetRequirementsByProfileCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetRequirementsByProfileCompleted(this, new GetRequirementsByProfileCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://WSgdCardRequirements.godaddy.com/GetRequirementsByProfileEx", RequestNamespace="http://WSgdCardRequirements.godaddy.com/", ResponseNamespace="http://WSgdCardRequirements.godaddy.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool GetRequirementsByProfileEx(string sShopperID, int nProfileID, string sCurrency, out string sRequirementXML) {
+            object[] results = this.Invoke("GetRequirementsByProfileEx", new object[] {
+                        sShopperID,
+                        nProfileID,
+                        sCurrency});
+            sRequirementXML = ((string)(results[1]));
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetRequirementsByProfileExAsync(string sShopperID, int nProfileID, string sCurrency) {
+            this.GetRequirementsByProfileExAsync(sShopperID, nProfileID, sCurrency, null);
+        }
+        
+        /// <remarks/>
+        public void GetRequirementsByProfileExAsync(string sShopperID, int nProfileID, string sCurrency, object userState) {
+            if ((this.GetRequirementsByProfileExOperationCompleted == null)) {
+                this.GetRequirementsByProfileExOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetRequirementsByProfileExOperationCompleted);
+            }
+            this.InvokeAsync("GetRequirementsByProfileEx", new object[] {
+                        sShopperID,
+                        nProfileID,
+                        sCurrency}, this.GetRequirementsByProfileExOperationCompleted, userState);
+        }
+        
+        private void OnGetRequirementsByProfileExOperationCompleted(object arg) {
+            if ((this.GetRequirementsByProfileExCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetRequirementsByProfileExCompleted(this, new GetRequirementsByProfileExCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -269,6 +313,40 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Impl.WSgdCreditCardRequirements
         private object[] results;
         
         internal GetRequirementsByProfileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string sRequirementXML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetRequirementsByProfileExCompletedEventHandler(object sender, GetRequirementsByProfileExCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetRequirementsByProfileExCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetRequirementsByProfileExCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

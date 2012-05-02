@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Atlantis_Framework_EcommCreditCardReqs_Impl_WSgdCreditCardRequirements_CardRequirements" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx</Value>
+      <Value Profile="(Default)">https://gdcomm.test.glbt1.gdg/WSgdCardRequirements/Requirements.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

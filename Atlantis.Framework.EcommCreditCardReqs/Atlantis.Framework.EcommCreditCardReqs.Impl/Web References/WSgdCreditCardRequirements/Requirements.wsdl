@@ -48,6 +48,23 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetRequirementsByProfileEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nProfileID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sCurrency" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRequirementsByProfileExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRequirementsByProfileExResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRequirementXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetRequirementsSoapIn">
@@ -68,6 +85,12 @@
   <wsdl:message name="GetRequirementsByProfileSoapOut">
     <wsdl:part name="parameters" element="tns:GetRequirementsByProfileResponse" />
   </wsdl:message>
+  <wsdl:message name="GetRequirementsByProfileExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRequirementsByProfileEx" />
+  </wsdl:message>
+  <wsdl:message name="GetRequirementsByProfileExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRequirementsByProfileExResponse" />
+  </wsdl:message>
   <wsdl:portType name="CardRequirementsSoap">
     <wsdl:operation name="GetRequirements">
       <wsdl:input message="tns:GetRequirementsSoapIn" />
@@ -80,6 +103,10 @@
     <wsdl:operation name="GetRequirementsByProfile">
       <wsdl:input message="tns:GetRequirementsByProfileSoapIn" />
       <wsdl:output message="tns:GetRequirementsByProfileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRequirementsByProfileEx">
+      <wsdl:input message="tns:GetRequirementsByProfileExSoapIn" />
+      <wsdl:output message="tns:GetRequirementsByProfileExSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CardRequirementsSoap" type="tns:CardRequirementsSoap">
@@ -104,6 +131,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetRequirementsByProfile">
       <soap:operation soapAction="http://WSgdCardRequirements.godaddy.com/GetRequirementsByProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequirementsByProfileEx">
+      <soap:operation soapAction="http://WSgdCardRequirements.godaddy.com/GetRequirementsByProfileEx" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -141,13 +177,22 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetRequirementsByProfileEx">
+      <soap12:operation soapAction="http://WSgdCardRequirements.godaddy.com/GetRequirementsByProfileEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="CardRequirements">
     <wsdl:port name="CardRequirementsSoap" binding="tns:CardRequirementsSoap">
-      <soap:address location="https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx" />
+      <soap:address location="https://gdcomm.test.glbt1.gdg/WSgdCardRequirements/Requirements.asmx" />
     </wsdl:port>
     <wsdl:port name="CardRequirementsSoap12" binding="tns:CardRequirementsSoap12">
-      <soap12:address location="https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx" />
+      <soap12:address location="https://gdcomm.test.glbt1.gdg/WSgdCardRequirements/Requirements.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

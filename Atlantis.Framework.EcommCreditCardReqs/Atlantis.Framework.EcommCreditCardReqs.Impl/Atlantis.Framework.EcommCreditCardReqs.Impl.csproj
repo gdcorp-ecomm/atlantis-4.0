@@ -77,10 +77,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx">
+    <WebReferenceUrl Include="https://gdcomm.test.glbt1.gdg/WSgdCardRequirements/Requirements.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\WSgdCreditCardRequirements\</RelPath>
-      <UpdateFromURL>https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx</UpdateFromURL>
+      <UpdateFromURL>https://gdcomm.test.glbt1.gdg/WSgdCardRequirements/Requirements.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

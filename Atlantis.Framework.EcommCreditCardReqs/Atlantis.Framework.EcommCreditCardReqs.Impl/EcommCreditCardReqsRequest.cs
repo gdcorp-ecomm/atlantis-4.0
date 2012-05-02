@@ -45,7 +45,7 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Impl
         }
         else
         {
-          success = service.GetRequirementsByProfile(mktgRequest.ShopperID, mktgRequest.ProfileId, out responseText);
+          success = service.GetRequirementsByProfileEx(mktgRequest.ShopperID, mktgRequest.ProfileId,mktgRequest.Currency, out responseText);
         }
         result = new EcommCreditCardReqsResponseData(responseText, success);
       }

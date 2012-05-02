@@ -26,7 +26,7 @@ namespace Atlantis.Framework.EcommCreditCardReqs.Impl.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://devgdcomm02.jomax.paholdings.com/WSgdCardRequirements/Requirements.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://gdcomm.test.glbt1.gdg/WSgdCardRequirements/Requirements.asmx")]
         public string Atlantis_Framework_EcommCreditCardReqs_Impl_WSgdCreditCardRequirements_CardRequirements {
             get {
                 return ((string)(this["Atlantis_Framework_EcommCreditCardReqs_Impl_WSgdCreditCardRequirements_CardRequir" +

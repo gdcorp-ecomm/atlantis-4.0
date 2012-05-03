@@ -40,14 +40,21 @@ namespace Atlantis.Framework.AccountExecContactInfo.Interface
 
     public string ToXML()
     {
-      XElement vipInfoXml = new XElement("vipInfo" 
-        , new XAttribute("name", VipRepInfo.RepName)
-        , new XAttribute("email", VipRepInfo.RepEmail)
-        , new XAttribute("portfoliotype", VipRepInfo.RepPortfolioType)
-        , new XAttribute("phone", VipRepInfo.RepExternalContactPhone)
-        , new XAttribute("extension", VipRepInfo.RepPhoneExtension));
+      string xml = string.Empty; ;
 
-      return vipInfoXml.ToString();
+      if (VipRepInfo != null)
+      {
+        XElement vipInfoXml = new XElement("vipInfo"
+          , new XAttribute("name", VipRepInfo.RepName)
+          , new XAttribute("email", VipRepInfo.RepEmail)
+          , new XAttribute("portfoliotype", VipRepInfo.RepPortfolioType)
+          , new XAttribute("phone", VipRepInfo.RepExternalContactPhone)
+          , new XAttribute("extension", VipRepInfo.RepPhoneExtension));
+
+        xml = vipInfoXml.ToString();
+      }
+
+      return xml;
     }
 
     public AtlantisException GetException()

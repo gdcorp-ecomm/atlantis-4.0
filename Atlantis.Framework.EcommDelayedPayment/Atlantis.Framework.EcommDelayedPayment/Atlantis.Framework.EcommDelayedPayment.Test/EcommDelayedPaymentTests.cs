@@ -67,7 +67,7 @@ namespace Atlantis.Framework.EcommDelayedPayment.Test
     [DeploymentItem("atlantis.config")]
     public void EcommDelayedPaymentTest()
     {
-      EcommDelayedPaymentRequestData request = new EcommDelayedPaymentRequestData("75866", string.Empty, "373735", string.Empty, 0, "https://cart.test.godaddy-com.ide/NetGiroPaymentReturn.aspx", "AliPay");
+      EcommDelayedPaymentRequestData request = new EcommDelayedPaymentRequestData("75866", string.Empty, "443734", string.Empty, 0, "https://cart.test.godaddy-com.ide/NetGiroPaymentReturn.aspx", "AliPay");
       EcommDelayedPaymentResponseData response = (EcommDelayedPaymentResponseData)Engine.Engine.ProcessRequest(request, 432);
       System.Diagnostics.Debug.WriteLine(response.InvoiceID);
       System.Diagnostics.Debug.WriteLine(response.RedirectURL);

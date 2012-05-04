@@ -11,10 +11,19 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
     private bool _success = false;
+    private Dictionary<string, string> _formValues = new Dictionary<string, string>();
 
     public string RedirectURL { get; set; }
     public string ErrorOccured { get; set; }
     public string InvoiceID { get; set; }
+
+    public Dictionary<string, string> FormValues
+    {
+      get
+      {
+        return _formValues;
+      }
+    }
 
     public bool IsSuccess
     {
@@ -32,11 +41,14 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
         RedirectURL = string.Empty;
         InvoiceID = string.Empty;
         _success = true;
+        _resultXML = redirectXML;
         if (!string.IsNullOrEmpty(redirectXML))
         {
           XmlDocument redirectDoc = new XmlDocument();
           redirectDoc.LoadXml(redirectXML);
           XmlNode redirectURL = redirectDoc.SelectSingleNode("//Redirect/URL");
+          XmlNode formNode = redirectDoc.SelectSingleNode("//Redirect/Form");
+          PopulateFormValues(formNode);
           RedirectURL = redirectURL.InnerText;
         }
         else if (!string.IsNullOrEmpty(errorXML))
@@ -64,6 +76,17 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
                                     ex.Message,
                                     requestData.ToXML());
         _success = false;
+      }
+    }
+
+    private void PopulateFormValues(XmlNode formNode)
+    {
+      if (formNode != null)
+      {
+        foreach (XmlNode fieldValue in formNode.ChildNodes)
+        {
+          _formValues[fieldValue.Attributes["name"].Value]= fieldValue.InnerText;
+        }
       }
     }
 

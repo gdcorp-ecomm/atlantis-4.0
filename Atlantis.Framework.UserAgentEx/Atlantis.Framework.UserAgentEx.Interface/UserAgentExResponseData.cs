@@ -23,26 +23,32 @@ namespace Atlantis.Framework.UserAgentEx.Interface
     public bool IsMatch(string userAgent)
     {
       bool result = false;
-      foreach (Regex expression in _expressions)
+      if (!string.IsNullOrEmpty(userAgent))
       {
-        if (expression.IsMatch(userAgent))
+        foreach (Regex expression in _expressions)
         {
-          result = true;
-          break;
+          if (expression.IsMatch(userAgent))
+          {
+            result = true;
+            break;
+          }
         }
       }
       return result;
     }
 
-    public Match Macth(string userAgent)
+    public Match FindMatch(string userAgent)
     {
       Match result = Match.Empty;
-      foreach (Regex expression in _expressions)
+      if (!string.IsNullOrEmpty(userAgent))
       {
-        if (expression.IsMatch(userAgent))
+        foreach (Regex expression in _expressions)
         {
-          result = expression.Match(userAgent);
-          break;
+          if (expression.IsMatch(userAgent))
+          {
+            result = expression.Match(userAgent);
+            break;
+          }
         }
       }
       return result;

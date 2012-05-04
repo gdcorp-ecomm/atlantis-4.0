@@ -104,13 +104,7 @@ namespace Atlantis.Framework.Providers.ProviderContainer.Impl
     public bool CanResolve<T>()
     {
       Type providerInterfaceType = typeof(T);
-      string key = GetObjectKey(providerInterfaceType);
-      bool isResolvable = false;
-      if (_providerInterfaces.ContainsKey(key))
-      {
-        isResolvable = true;
-      }
-      return isResolvable;
+      return _registeredProvidersDictionary.ContainsKey(providerInterfaceType);
     }
   }
 }

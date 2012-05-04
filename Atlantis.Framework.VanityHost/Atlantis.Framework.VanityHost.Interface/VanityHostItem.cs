@@ -37,9 +37,23 @@ namespace Atlantis.Framework.VanityHost.Interface
       }
     }
 
-    public NameValueCollection GetQueryMap()
+    public void SetQueryItems(NameValueCollection queryMap)
     {
-      return new NameValueCollection(_queryMap);
+      if ((queryMap != null) && (_queryMap.Count > 0))
+      {
+        foreach (string key in _queryMap.Keys)
+        {
+          queryMap[key] = _queryMap[key];
+        }
+      }
+    }
+
+    public bool HasQueryItems
+    {
+      get
+      {
+        return (_queryMap.Count > 0);
+      }
     }
 
   }

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\VanityHostData.cs" />
     <Compile Include="VanityHostRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,12 +62,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="VanityHost.xml" />
+    <EmbeddedResource Include="Data\vanityhost.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="VanityHost.xsd">
+    <EmbeddedResource Include="Data\vanityhost.xsd">
       <SubType>Designer</SubType>
-    </None>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

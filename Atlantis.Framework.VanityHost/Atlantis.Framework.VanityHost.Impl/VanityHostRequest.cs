@@ -1,39 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.IO;
-using System.Reflection;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.VanityHost.Impl.Data;
 using Atlantis.Framework.VanityHost.Interface;
 
 namespace Atlantis.Framework.VanityHost.Impl
 {
   public class VanityHostRequest : IRequest
   {
-    private readonly static XDocument _vanityHostXml;
-
-    static VanityHostRequest()
-    {
-      _vanityHostXml = null;
-
-      try
-      {
-        string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        string vanityXmlPath = Path.Combine(assemblyFolder, "VanityHost.xml");
-        if (File.Exists(vanityXmlPath))
-        {
-          string vanityXml = File.ReadAllText(vanityXmlPath);
-          _vanityHostXml = XDocument.Parse(vanityXml);
-        }
-      }
-      catch (Exception ex)
-      {
-        AtlantisException aex = new AtlantisException("VanityHostRequest.LoadXml", "0", ex.Message, ex.StackTrace, null, null);
-        Engine.Engine.LogAtlantisException(aex);
-      }
-    }
-
     // <VanityHost domain="supportwebsite" dottype="com" linkcontext="1" linkname="SITEURL" redirect="gdshop/support.asp" redirecttype="302" />
     //   <VanityHost domain="godaddy" dottype="biz" linkcontext="1" linkname="SITEURL" redirect="tlds/biz.aspx">
     //    <queryitem name="tld" value="biz" />
@@ -57,7 +33,8 @@ namespace Atlantis.Framework.VanityHost.Impl
 
       try
       {
-        if (_vanityHostXml == null)
+        string vanityHostXml = VanityHostData.VanityHostXml;
+        if (string.IsNullOrEmpty(vanityHostXml))
         {
           result = new VanityHostResponseData(null);
         }
@@ -65,7 +42,8 @@ namespace Atlantis.Framework.VanityHost.Impl
         {
           List<VanityHostItem> items = new List<VanityHostItem>();
 
-          foreach (XElement vanityHostElement in _vanityHostXml.Descendants("VanityHost"))
+          XDocument vanityHostDoc = XDocument.Parse(vanityHostXml);
+          foreach (XElement vanityHostElement in vanityHostDoc.Descendants("VanityHost"))
           {
             string domain = GetValue(vanityHostElement, "domain");
             string dottype = GetValue(vanityHostElement, "dottype");

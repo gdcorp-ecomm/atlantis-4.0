@@ -27,8 +27,8 @@
   <VanityHost domain="droid.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="business/mobile-app.aspx" />
   <VanityHost domain="android.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="business/mobile-app.aspx" />
   <VanityHost domain="blackberry.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="business/mobile-app.aspx" />
-  <VanityHost domain="cloud.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="hosting/cloud-computing.aspx" redirecttype="302" />
-  <VanityHost domain="tech.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="technology/product-technology.aspx" redirecttype="301" />
+  <VanityHost domain="cloud.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="hosting/cloud-computing.aspx" />
+  <VanityHost domain="tech.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="technology/product-technology.aspx" />
 </VanityHosts>
 
 

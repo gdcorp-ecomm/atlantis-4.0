@@ -11,7 +11,6 @@ namespace Atlantis.Framework.VanityHost.Tests
   {
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    [DeploymentItem("VanityHost.xml")]
     [DeploymentItem("Atlantis.Framework.VanityHost.Impl.dll")]
     public void GetVanityHosts()
     {
@@ -23,7 +22,6 @@ namespace Atlantis.Framework.VanityHost.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    [DeploymentItem("VanityHost.xml")]
     [DeploymentItem("Atlantis.Framework.VanityHost.Impl.dll")]
     public void SetQueryItems()
     {

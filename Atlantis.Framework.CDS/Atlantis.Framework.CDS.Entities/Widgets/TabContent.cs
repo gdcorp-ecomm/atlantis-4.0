@@ -8,6 +8,12 @@ using Newtonsoft.Json;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
+  public enum TabContainerTemplates
+  {
+    OneMainZone = 0,
+    TwoZonesSideBySide = 1
+  }
+
   [SectionContainer("Tab Content")]
   public class TabContent : IWidgetModel
   {

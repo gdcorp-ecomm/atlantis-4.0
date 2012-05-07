@@ -566,8 +566,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
         if (logPFIDEulaNotFound == "true")
         {
           //Log Custom Rule Fired
-          string message = "Product EULA Not Found for:" + productPfid;
-          AtlantisException aex = new AtlantisException("Product Email: EULANotFound", string.Empty, "0", message, string.Empty,
+          string message = string.Concat("Product EULA Not Found for:", productPfid, " PageID:", currentItem.PageId);
+          AtlantisException aex = new AtlantisException("Product Email: EULA NotFound", string.Empty, "0", message, string.Empty,
             _orderData.ShopperId, _orderData.OrderId, string.Empty, string.Empty, 0);
           Engine.Engine.LogAtlantisException(aex);
           System.Diagnostics.Debug.WriteLine(message);

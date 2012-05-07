@@ -253,10 +253,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
             {
               AddUniqueEULAItem(ref eulaList, GetEULAData(EULARuleType.QB), true, productId);
             }
-            if (DataCache.DataCache.GetPLData(_orderData.PrivateLabelId, PLDataCategory.HostingOnlyOffer) == "1")
-            {
-              AddUniqueEULAItem(ref eulaList, GetEULAData(EULARuleType.FreeHosting), true, productId);
-            }
             if (DataCache.DataCache.GetPLData(_orderData.PrivateLabelId, PLDataCategory.HostingOffer) == "1")
             {
               AddUniqueEULAItem(ref eulaList, GetEULAData(EULARuleType.Starter), true, productId);

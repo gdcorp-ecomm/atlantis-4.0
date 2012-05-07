@@ -124,6 +124,22 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           {
             pagIdsUsed = new List<string>();
             _usedEulaItems = new List<EULAItem>();
+            string pageID = string.Empty;
+            if (_orderData.PrivateLabelId == 1695)
+            {
+              pageID = "domain_nameproxy";
+              
+            }
+            else
+            {
+              pageID = "UTOS";
+            }
+            EULAItem currentItem = GetEULAData(pageID);
+            string legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageID, "isc", "{isc}", "prog_id", _orderData.ProgId);
+            currentItem.PageId = pageID;
+            currentItem.LegalAgreementURL = legalAgreementURL;
+            currentItem.ProductName = "Universal Terms of Service";
+            AddUniqueEULAItem(ref _usedEulaItems, currentItem);
             BuildItemEulaList(ref _usedEulaItems);
             BuildAutoActivationEulaList(ref _usedEulaItems);
             isConfigured = true;
@@ -530,7 +546,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
     private bool AddUniqueEULAItem(ref List<EULAItem> eulaList, EULAItem currentItem)
     {
       bool added = false;
-      if (pagIdsUsed.Contains(currentItem.PageId.ToLower()))
+      if (!pagIdsUsed.Contains(currentItem.PageId.ToLower()))
       {
         eulaList.Add(currentItem);
         added = true;

@@ -70,12 +70,12 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     {
       Engine.Engine.ReloadConfig();
       //Load Test order from Test and Re-Send Purchase Email
-      string orderID = "440735";
-      string shopperid = "151672";
+      string orderID = "446492";
+      string shopperid = "75866";
 
       string orderXml = GetOrderXml(orderID, shopperid, 1);
       PurchaseEmailRequestData request =
-        new PurchaseEmailRequestData(shopperid, string.Empty,orderID, string.Empty, 0, orderXml, "ES");
+        new PurchaseEmailRequestData(shopperid, string.Empty,orderID, string.Empty, 0, orderXml, "EN");
       PurchaseEmailResponseData response =
        (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
       System.Diagnostics.Debug.WriteLine(request.ToXML());

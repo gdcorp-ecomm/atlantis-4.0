@@ -17,6 +17,7 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
 
   public class UnitTestHandler : BaseHttpHandler
   {
+    private TestRunner LocalTestRunner { get; set; }
     private AvailableContentReturnTypes ResponseOutputType
     {
       get
@@ -39,6 +40,33 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
     {
       get { return SiteContext.IsRequestInternal; }
     }
+
+    private ISiteContext _siteContext;
+    protected virtual ISiteContext SiteContext
+    {
+      get
+      {
+        if (_siteContext == null)
+        {
+          _siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
+        }
+        return _siteContext;
+      }
+    }
+
+    private IShopperContext _shopperContext;
+    protected virtual IShopperContext ShopperContext
+    {
+      get
+      {
+        if (_shopperContext == null)
+        {
+          _shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
+        }
+        return _shopperContext;
+      }
+    }
+
 
     #region Overrides of BaseHttpHandler
 
@@ -85,34 +113,6 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
     }
 
     #endregion
-
-
-    private ISiteContext _siteContext;
-    protected virtual ISiteContext SiteContext
-    {
-      get
-      {
-        if (_siteContext == null)
-        {
-          _siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
-        }
-        return _siteContext;
-      }
-    }
-
-    private IShopperContext _shopperContext;
-    protected virtual IShopperContext ShopperContext
-    {
-      get
-      {
-        if (_shopperContext == null)
-        {
-          _shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
-        }
-        return _shopperContext;
-      }
-    }
-
 
     private void ResponseOutput(HttpContextBase context, TestResultData results)
     {
@@ -267,6 +267,5 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
       context.Response.End();
     }
 
-    private TestRunner LocalTestRunner { get; set; }
   }
 }

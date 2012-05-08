@@ -63,12 +63,12 @@
     <Compile Include="Widgets\CDSJsonContent.cs" />
     <Compile Include="Widgets\Detail.cs" />
     <Compile Include="Widgets\Disclaimer.cs" />
+    <Compile Include="Widgets\DisclaimerModal.cs" />
     <Compile Include="Widgets\ElementBase.cs" />
     <Compile Include="Widgets\Features.cs" />
     <Compile Include="Widgets\Footer.cs" />
     <Compile Include="Widgets\FooterBase.cs" />
     <Compile Include="Widgets\HowItWorks.cs" />
-    <Compile Include="Widgets\JsonCreationConverter.cs" />
     <Compile Include="Widgets\List.cs" />
     <Compile Include="Widgets\Literal.cs" />
     <Compile Include="Widgets\ManageNow.cs" />

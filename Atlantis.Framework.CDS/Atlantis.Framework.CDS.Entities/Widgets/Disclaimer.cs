@@ -16,7 +16,23 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     {
       public string Symbols { get; set; }
       public string Url { get; set; }
-      public string Text { get; set; }
+
+      private string _text;
+      public string Text
+      {
+        get
+        {
+          if (_text == default(string))
+          {
+            _text = "Click here for product disclaimers and legal policies.";
+          }
+          return _text;
+        }
+        set
+        {
+          _text = value;
+        }
+      }
 
       public int TargetDivWidth { get; set; }
     }

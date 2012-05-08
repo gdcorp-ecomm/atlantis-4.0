@@ -40,7 +40,7 @@ namespace Atlantis.Framework.Testing.UnitTesting
     {
       if (expected.Equals(actual))
       {
-        throw new AssertionFailedException(String.Format("Assertion Failed. Expected ({0})  matches Actual ({1}). {2}", expected, actual));
+        throw new AssertionFailedException(String.Format("Assertion Failed. Expected ({0})  matches Actual ({1}).", expected, actual));
       }
     }
     public static void AreNotEqual(decimal expected, decimal actual, string message)

@@ -10,6 +10,7 @@ namespace Atlantis.Framework.Testing.UnitTesting
   /// <summary>
   /// Summary description for AssertionFailedException
   /// </summary>
+  [Serializable]
   public class AssertionFailedException : Exception
   {
     

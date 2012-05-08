@@ -28,7 +28,7 @@ namespace Atlantis.Framework.Providers.ProxyContext
         {
           // For the Local ARR request to be Valid, the header values must exist
           // and the IPAddress must be a valid loopback.
-          _status = IsLoopBack(ipAddress) ? HeaderValueStatus.Valid : HeaderValueStatus.Invalid;
+          _status = IsAddressThisMachine(ipAddress) ? HeaderValueStatus.Valid : HeaderValueStatus.Invalid;
         }
       }
       return _status;

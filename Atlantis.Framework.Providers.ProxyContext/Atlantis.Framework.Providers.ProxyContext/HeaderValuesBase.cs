@@ -5,6 +5,13 @@ namespace Atlantis.Framework.Providers.ProxyContext
 {
   internal abstract class HeaderValuesBase
   {
+    private static IPAddress[] _localAddresses = null;
+
+    static HeaderValuesBase()
+    {
+      _localAddresses = Dns.GetHostAddresses(string.Empty);
+    }
+
     public abstract HeaderValueStatus GetStatus(string ipAddress);
 
     protected static string GetFirstHeaderValue(string name)
@@ -23,14 +30,29 @@ namespace Atlantis.Framework.Providers.ProxyContext
       return result;
     }
 
-    protected static bool IsLoopBack(string ipAddress)
+    protected static bool IsAddressThisMachine(string ipAddress)
     {
       bool result = false;
 
       IPAddress ip;
       if (IPAddress.TryParse(ipAddress, out ip))
       {
-        result = IPAddress.IsLoopback(ip);
+        if (IPAddress.IsLoopback(ip))
+        {
+          result = true;
+        }
+        else if (_localAddresses != null)
+        {
+          foreach (IPAddress machineAddress in _localAddresses)
+          {
+            if (machineAddress.Equals(ipAddress))
+            {
+              result = true;
+              break;
+            }
+          }
+
+        }
       }
 
       return result;

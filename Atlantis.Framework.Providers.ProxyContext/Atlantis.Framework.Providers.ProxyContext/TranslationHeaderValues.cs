@@ -27,7 +27,7 @@ namespace Atlantis.Framework.Providers.ProxyContext
         {
           // Empty is only valid if it comes from a not whitelisted ipAddress that or its the loopback
           _status = HeaderValueStatus.Empty;
-          if (isWhiteListed && !IsLoopBack(ipAddress))
+          if (isWhiteListed && !IsAddressThisMachine(ipAddress))
           {
             _status = HeaderValueStatus.Invalid;
           }

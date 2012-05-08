@@ -30,12 +30,12 @@ namespace Atlantis.Framework.Providers.ProxyContext
       return result;
     }
 
-    protected static bool IsAddressThisMachine(string ipAddress)
+    protected static bool IsAddressThisMachine(string textIpAddress)
     {
       bool result = false;
 
       IPAddress ip;
-      if (IPAddress.TryParse(ipAddress, out ip))
+      if (IPAddress.TryParse(textIpAddress, out ip))
       {
         if (IPAddress.IsLoopback(ip))
         {
@@ -45,7 +45,7 @@ namespace Atlantis.Framework.Providers.ProxyContext
         {
           foreach (IPAddress machineAddress in _localAddresses)
           {
-            if (machineAddress.Equals(ipAddress))
+            if (ip.Equals(machineAddress))
             {
               result = true;
               break;

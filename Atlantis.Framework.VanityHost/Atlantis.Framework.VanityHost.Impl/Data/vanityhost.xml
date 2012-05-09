@@ -10,18 +10,14 @@
   <VanityHost domain="godaddy" dottype="ca" linkcontext="1" linkname="SITEURL" redirect="tlds/ca.aspx">
     <queryitem name="tld" value="ca" />
   </VanityHost>
-  <VanityHost domain="supportwebsite" dottype="com" linkcontext="1" linkname="SITEURL" redirect="gdshop/support.asp" />
-  <VanityHost domain="wildwestdomains" dottype="net" linkcontext="6" linkname="SITEURL" redirect="gdshop/default.asp" />
-  <VanityHost domain="bluerazordomains" dottype="com" linkcontext="5" linkname="SITEURL" redirect="gdshop/default.asp" />
+  <VanityHost domain="supportwebsite" dottype="com" linkcontext="1" linkname="COMMUNITYURL" redirect="help/" />
+  <VanityHost domain="wildwestdomains" dottype="net" linkcontext="6" linkname="SITEURL" redirect="/" />
+  <VanityHost domain="bluerazordomains" dottype="com" linkcontext="5" linkname="SITEURL" redirect="/" />
   <VanityHost domain="radiogodaddy" dottype="com" linkcontext="1" linkname="LIVEURL" redirect="gdshop/live/default.asp" />
-  <VanityHost domain="godaddylive" dottype="com" linkcontext="1" linkname="LIVEURL" redirect="gdshop/live/default.asp" />
-  <VanityHost domain="lifeonline" dottype="com" linkcontext="1" linkname="LIVEURL" redirect="gdshop/live/default.asp" />
-  <VanityHost domain="lifeonlinewithbobparsons" dottype="tv" linkcontext="1" linkname="LIVEURL" redirect="gdshop/live/default.asp" />
   <VanityHost domain="godaddyradio" dottype="com" linkcontext="1" linkname="LIVEURL" redirect="gdshop/live/default.asp" />
-  <VanityHost domain="bobparsons" dottype="com" linkcontext="1" linkname="BOBPARSONSURL" redirect="gdshop/bp/show.asp" />
   <!-- NOTE! sub-domain redirects like the following only currently work in production -->
-  <VanityHost domain="jobs.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="gdshop/jobs.asp" />
-  <VanityHost domain="hosting.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="default.aspx" />
+  <VanityHost domain="jobs.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="jobs/" />
+  <VanityHost domain="hosting.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="hosting/web-hosting.aspx" />
   <VanityHost domain="iphone.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="business/mobile-app.aspx" />
   <VanityHost domain="ipad.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="business/mobile-app.aspx" />
   <VanityHost domain="droid.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="business/mobile-app.aspx" />

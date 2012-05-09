@@ -11,7 +11,7 @@
     <queryitem name="tld" value="ca" />
   </VanityHost>
   <VanityHost domain="supportwebsite" dottype="com" linkcontext="1" linkname="COMMUNITYURL" redirect="help/" />
-  <VanityHost domain="wildwestdomains" dottype="net" linkcontext="6" linkname="SITEURL" redirect="/" />
+  <VanityHost domain="wildwestdomains" dottype="net" linkcontext="2" linkname="SITEURL" redirect="/" />
   <VanityHost domain="bluerazordomains" dottype="com" linkcontext="5" linkname="SITEURL" redirect="/" />
   <VanityHost domain="radiogodaddy" dottype="com" linkcontext="1" linkname="LIVEURL" redirect="gdshop/live/default.asp" />
   <VanityHost domain="godaddyradio" dottype="com" linkcontext="1" linkname="LIVEURL" redirect="gdshop/live/default.asp" />

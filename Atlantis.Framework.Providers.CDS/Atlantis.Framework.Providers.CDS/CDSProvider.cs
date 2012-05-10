@@ -25,6 +25,41 @@ namespace Atlantis.Framework.Providers.CDS
 
     #region Implementation of ICDSProvider
 
+    public T GetModel<T>(string query) where T : new()
+    {
+      return GetModel<T>(query, null);
+    }
+
+    public T GetModel<T>(string query, Dictionary<string, string> customTokens) where T : new()
+    {
+
+      var data = string.Empty;
+      CDSResponseData responseData;
+      CDSTokenizer tokenizer = new CDSTokenizer();
+
+      T model = new T();
+      var serializer = new JavaScriptSerializer();
+
+      CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query);
+
+      try
+      {
+        responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType );
+        if (responseData.IsSuccess)
+        {
+          data = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
+        }
+        model = serializer.Deserialize<T>(data);
+      }
+      catch (Exception ex)
+      {
+        Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, _shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount));
+      }
+      return model;
+    }
+
+
+
     public string GetJSON(string query)
     {
       return GetJSON(query, null);

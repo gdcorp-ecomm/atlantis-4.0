@@ -157,6 +157,10 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
               }
 
             }
+            else
+            {
+              sb.Append(BuildInvalidDateRangeXml());
+            }
           }
           sb.Append("</instorecredits>");
 
@@ -210,6 +214,35 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
     }
 
     #region Private Methods
+
+    private string BuildInvalidDateRangeXml()
+    {
+      XElement currencyType = new XElement("currency", 
+        new XAttribute("type", "USD"));
+
+      XElement description = new XElement("description");
+      description.Add(new XCData(""));
+
+      XElement beginBal = new XElement("beginbalance", 
+        new XElement("date", "This date range is outside your in-store credit history."),
+        new XElement(description),
+        new XElement("amount", 0));
+
+      XElement endBal = new XElement("endbalance",
+        new XElement("date", "This date range is outside your in-store credit history."),
+        new XElement(description),
+        new XElement("amount", 0));
+
+      XElement deposits = new XElement("deposits");
+      XElement withdrawal = new XElement("withdrawls");
+
+      currencyType.Add(beginBal);
+      currencyType.Add(endBal);
+      currencyType.Add(deposits);
+      currencyType.Add(withdrawal);
+
+      return currencyType.ToString();    
+    }
 
     private void ProcessSubElements(IEnumerable<XElement> elements, ref InstoreStatementByCurrency statement, int rowtype)
     {

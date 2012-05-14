@@ -34,18 +34,17 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       _orderXmlDoc.LoadXml(orderXml);
       providerContainer.RegisterProvider<IShopperPreferencesProvider, ShopperPreferencesProvider>(new ShopperPreferencesProvider(providerContainer));
       providerContainer.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
-      providerContainer.RegisterProvider<IShopperContext, OrderData>(this);
-      providerContainer.RegisterProvider<ISiteContext, OrderData>(this);
       providerContainer.RegisterProvider<ILinkProvider, LinkProvider>();
       providerContainer.RegisterProvider<IProductProvider, ProductProvider>();
-
-      _linkProvider = providerContainer.Resolve<ILinkProvider>();
-      _eulaProvider=new EulaProvider(this, _linkProvider, providerContainer);
-
       _currency = providerContainer.Resolve<ICurrencyProvider>();
+      providerContainer.RegisterProvider<IShopperContext, OrderData>(this);
+      providerContainer.RegisterProvider<ISiteContext, OrderData>(this);
+      _linkProvider = providerContainer.Resolve<ILinkProvider>();
       _siteContext = providerContainer.Resolve<ISiteContext>();
+      _localizationCode = localizationCode;
       ProcessOrderXml();
-      _localizationCode = localizationCode;      
+      //Process order before Processing EULA's
+      _eulaProvider=new EulaProvider(this, _linkProvider, providerContainer);
     }
 
     public EulaProvider EulaProv

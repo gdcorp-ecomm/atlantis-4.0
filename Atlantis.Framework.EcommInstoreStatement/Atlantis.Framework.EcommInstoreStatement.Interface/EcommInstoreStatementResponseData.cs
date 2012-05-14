@@ -157,10 +157,6 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
               }
 
             }
-            else
-            {
-              sb.Append(BuildInvalidDateRangeXml());
-            }
           }
           sb.Append("</instorecredits>");
 
@@ -168,6 +164,53 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
         }
 
         return _processedToXMLString;
+      }
+    }
+
+    public List<InstoreStatementByCurrency> EmptyStatement
+    {
+      get
+      {
+        List<InstoreStatementByCurrency> statementList = new List<InstoreStatementByCurrency>();
+
+        StringBuilder sb = new StringBuilder();
+        sb.Append(@"<instorecredits>");
+        sb.Append(BuildInvalidDateRangeXml());
+        sb.Append("</instorecredits>");
+
+        XDocument xdoc = XDocument.Parse(sb.ToString());
+
+        if (xdoc != null)
+        {
+          var currencyList = xdoc.Elements("instorecredits").Elements("currency");
+          if (currencyList != null)
+          {
+
+            string currency = string.Empty;
+
+            foreach (XElement currencyElement in currencyList)
+            {
+              currency = GetAttributeValue(currencyElement, "type");
+              InstoreStatementByCurrency statement = new InstoreStatementByCurrency(currency);
+
+              IEnumerable<XElement> beginingBalance = currencyElement.Elements("beginbalance");
+              ProcessSubElements(beginingBalance, ref statement, 1);
+
+              IEnumerable<XElement> endBalance = currencyElement.Elements("endbalance");
+              ProcessSubElements(endBalance, ref statement, 4);
+
+              IEnumerable<XElement> deposits = currencyElement.Elements("deposits").Elements("deposit");
+              ProcessSubElements(deposits, ref statement, 2);
+
+              IEnumerable<XElement> withdrawls = currencyElement.Elements("withdrawls").Elements("withdrawl");
+              ProcessSubElements(withdrawls, ref statement, 3);
+
+              statementList.Add(statement);
+            }
+          }
+        }
+
+        return statementList;
       }
     }
 

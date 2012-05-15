@@ -9,7 +9,10 @@ namespace Atlantis.Framework.GadgetsVote.Interface
   {
     public string ResponseString;
 
-    public bool HasError { get; private set; }
+    public bool HasError
+    {
+      get { return !string.IsNullOrEmpty(ErrorMessage); }
+    }
 
     public string ErrorMessage { get; private set; }
 
@@ -24,7 +27,6 @@ namespace Atlantis.Framework.GadgetsVote.Interface
 
       if (VotingResults.ContainsKey("Error"))
       {
-        HasError = true;
         ErrorMessage = VotingResults["Error"];
       }
     }

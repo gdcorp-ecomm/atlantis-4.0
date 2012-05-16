@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetSetupData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOrderID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSetupDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSetupDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSetupStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOrderID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSetupStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSetupStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSetupDataLite">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOrderID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSetupDataLiteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSetupDataLiteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSetupDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSetupData" />
+  </wsdl:message>
+  <wsdl:message name="GetSetupDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSetupDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSetupStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSetupStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetSetupStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSetupStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSetupDataLiteSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSetupDataLite" />
+  </wsdl:message>
+  <wsdl:message name="GetSetupDataLiteSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSetupDataLiteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service1Soap">
+    <wsdl:operation name="GetSetupData">
+      <wsdl:input message="tns:GetSetupDataSoapIn" />
+      <wsdl:output message="tns:GetSetupDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSetupStatus">
+      <wsdl:input message="tns:GetSetupStatusSoapIn" />
+      <wsdl:output message="tns:GetSetupStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSetupDataLite">
+      <wsdl:input message="tns:GetSetupDataLiteSoapIn" />
+      <wsdl:output message="tns:GetSetupDataLiteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSetupData">
+      <soap:operation soapAction="http://tempuri.org/GetSetupData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSetupStatus">
+      <soap:operation soapAction="http://tempuri.org/GetSetupStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSetupDataLite">
+      <soap:operation soapAction="http://tempuri.org/GetSetupDataLite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSetupData">
+      <soap12:operation soapAction="http://tempuri.org/GetSetupData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSetupStatus">
+      <soap12:operation soapAction="http://tempuri.org/GetSetupStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSetupDataLite">
+      <soap12:operation soapAction="http://tempuri.org/GetSetupDataLite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
+      <soap:address location="https://gdcomm.dev.glbt1.gdg/WsgdActivation/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
+      <soap12:address location="https://gdcomm.dev.glbt1.gdg/WsgdActivation/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

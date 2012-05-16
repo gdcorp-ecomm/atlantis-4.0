@@ -31,7 +31,7 @@ namespace Atlantis.Framework.EcommPrunedActivationData.Impl
           if (sResponseXML.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
           {
             AtlantisException exAtlantis = new AtlantisException(requestData,
-                                                                 "EcommActivationDataRequest.RequestHandler",
+                                                                 "EcommPrunedActivationDataRequest.RequestHandler",
                                                                  sResponseXML,
                                                                  requestData.ToXML());
 

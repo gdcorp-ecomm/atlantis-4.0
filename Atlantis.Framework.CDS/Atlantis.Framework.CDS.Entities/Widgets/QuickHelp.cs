@@ -8,6 +8,11 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 {
   public class QuickHelp : IWidgetModel
   {
+    public QuickHelp()
+    {
+      QuickHelpItems = new List<QuickHelpItem>();
+    }
+
     public List<QuickHelpItem> QuickHelpItems { get; set; }
 
     public class QuickHelpItem

@@ -8,6 +8,12 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 {
   public class SearchHeader : IWidgetModel
   {
+    public SearchHeader()
+    {
+      SocialData = new SocialMediaData();
+      OptionalBanner = new Banner();
+    }
+
     public string Title { get; set; }
     public string Tld { get; set; }
     public string BgImage { get; set; }

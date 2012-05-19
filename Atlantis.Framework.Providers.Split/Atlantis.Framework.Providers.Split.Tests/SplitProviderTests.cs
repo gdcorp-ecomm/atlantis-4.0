@@ -78,5 +78,18 @@ namespace Atlantis.Framework.Providers.Split.Tests
       Assert.IsTrue(split.PCSplitValue <= 4);
     }
 
+    [TestMethod]
+    [DeploymentItem("Interop.gdDataCacheLib.dll")]
+    public void StandardAndPCSplitsToConsole()
+    {
+      for (int x = 0; x < 100; x++)
+      {
+        MockHttpContext.SetMockHttpContext("default.aspx", "http://www.godaddy.com/default.aspx", String.Empty);
+        ISplitProvider split = NewSplitProvider(1, "858884");
+        Console.WriteLine(split.SplitValue.ToString() + " : " + split.PCSplitValue.ToString());
+      }
+    }
+
+
   }
 }

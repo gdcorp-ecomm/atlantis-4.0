@@ -8,6 +8,8 @@ namespace Atlantis.Framework.Providers.Split
 {
   internal abstract class SplitValueBase
   {
+    private static Random rand = new Random();
+
     private const int _MIN_EXPIRATION_HOURS = 1;
     private const int _MAX_EXPIRATION_HOURS = 168;
     private const int _STD_EXPIRATION_HOURS = 24;
@@ -17,7 +19,6 @@ namespace Atlantis.Framework.Providers.Split
     protected abstract string CookieNameFormat { get; }
 
     ISiteContext _siteContext;
-    Random rand = new Random();
 
     public SplitValueBase(ISiteContext siteContext)
     {
@@ -131,7 +132,7 @@ namespace Atlantis.Framework.Providers.Split
 
     private int GetNewSplitValue()
     {
-      return rand.Next(MinValue, MaxValue);
+      return rand.Next(MinValue, MaxValue + 1);
     }
 
     private static void LogError(string methodName, Exception ex)

@@ -568,12 +568,12 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         }
         foreach (EULAItem eulaData in eulaProvider.ConfiguredEULA)
         {
-          string legalInfoURL = eulaData.LegalAgreementURL.Replace("{isc}", iscCode);
+          string legalInfoURL = eulaData.LegalAgreementURL.Replace("%7bisc%7d", iscCode);
 
           if (eulaData != null)
           {
             string productName = eulaData.ProductName;
-            string productInfoURL = eulaData.ProductInfoURL;
+            string productInfoURL = eulaData.ProductInfoURL.Replace("%7bisc%7d", iscCode);
 
             if (!string.IsNullOrEmpty(productName))
             {
@@ -604,7 +604,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         if (eulaProvider.ConfiguredEULA.Contains(eulaProvider.GetEULAData(EULARuleType.GiftCard)))
         {
           EULAItem eulaData = eulaProvider.GetEULAData(EULARuleType.GiftCard);
-          string agreementURL = eulaData.LegalAgreementURL.Replace("{isc}", iscCode);
+          string agreementURL = eulaData.LegalAgreementURL.Replace("%7bisc%7d", iscCode);
           if (eulaData != null)
           {
             itemsTextBuilder.Append("<tr><td colspan='3' class='bodyText'>");
@@ -619,12 +619,12 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         bool hostingConciergeHasShown = false;
         foreach (EULAItem eulaData in eulaProvider.ConfiguredEULA)
         {
-          string legalInfoURL = eulaData.LegalAgreementURL.Replace("{isc}", iscCode);
+          string legalInfoURL = eulaData.LegalAgreementURL.Replace("%7bisc%7d", iscCode);
 
           if (eulaData != null)
           {
             string productName = eulaData.ProductName;
-            string productInfoURL = eulaData.ProductInfoURL;
+            string productInfoURL = eulaData.ProductInfoURL.Replace("%7bisc%7d", iscCode);
 
             itemsTextBuilder.Append("<tr>");
             if (!string.IsNullOrEmpty(productName))

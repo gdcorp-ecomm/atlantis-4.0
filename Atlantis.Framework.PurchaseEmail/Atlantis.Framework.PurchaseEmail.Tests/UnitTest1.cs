@@ -70,7 +70,7 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     {
       Engine.Engine.ReloadConfig();
       //Load Test order from Test and Re-Send Purchase Email
-      string orderID = "446520";
+      string orderID = "455126";
       string shopperid = "75866";
 
       string orderXml = GetOrderXml(orderID, shopperid, 1);

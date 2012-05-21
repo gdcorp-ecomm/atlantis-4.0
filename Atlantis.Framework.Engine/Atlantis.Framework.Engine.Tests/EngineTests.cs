@@ -87,22 +87,5 @@ namespace Atlantis.Framework.Engine.Tests
       AtlantisException ex = new AtlantisException("EngineTests.LogException", "911", "Test log message only.", string.Empty, null, null);
       Engine.LogAtlantisException(ex);
     }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void RecentExceptions()
-    {
-      Engine.MaxRecentExceptions = 3;
-
-      Parallel.For(1, 6, i =>
-        {
-          AtlantisException ex = new AtlantisException("EngineTests.RecentException" + i.ToString(), "911", "Test log message only. #" + i.ToString(), string.Empty, null, null);
-          Engine.LogAtlantisException(ex);
-        }
-        );
-
-      List<AtlantisException> recents = Engine.GetRecentExceptions();
-      Assert.AreEqual(3, recents.Count);
-    }
   }
 }

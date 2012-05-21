@@ -209,7 +209,7 @@ namespace Atlantis.Framework.Interface
         {
           if (HttpContext.Current.Request != null)
           {
-            result = HttpContext.Current.Request.Url.OriginalString;
+            result = HttpContext.Current.Request.Url.ToString();
           }
 
           IProviderContainer container = WebRequestProviderContainer;

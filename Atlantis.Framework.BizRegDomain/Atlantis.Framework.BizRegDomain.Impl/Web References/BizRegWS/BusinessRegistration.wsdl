@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.godaddy.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.godaddy.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.godaddy.com/">
+      <s:element name="GetBusiness">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBusinessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBusinessResult" type="tns:BusinessDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BusinessDTO">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BusinessID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GDShopperID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BusinessName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BusinessDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BusinessRegistrationTypeCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BusinessRegistrationName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BusinessRatingTypeID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BusinessRatingName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsReviewEnabled" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsFlagEnabled" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsRatingEnabled" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReviewCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FavoriteCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FlagCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ViewCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BusinessStatusCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BusinessStatus" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsFlaggedByUserID" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="BusinessStatusByUserID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ModifyByUserID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsUpgrade" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MarketplaceShopID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MarketplaceStatusMask" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsNotPublic" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsPersonal" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Categories" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tags" type="tns:ArrayOfBusinessTag" />
+          <s:element minOccurs="0" maxOccurs="1" name="BusinessFlag" type="tns:BusinessFlag" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location" type="tns:BusinessLocation" />
+          <s:element minOccurs="0" maxOccurs="1" name="Rating" type="tns:BusinessRating" />
+          <s:element minOccurs="0" maxOccurs="1" name="BizData" type="tns:ArrayOfBizDataExtended" />
+          <s:element minOccurs="0" maxOccurs="1" name="Domain" type="tns:BusinessDomain" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBusinessTag">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BusinessTag" nillable="true" type="tns:BusinessTag" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BusinessTag">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BusinessBaseOfBusinessTag">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessTagID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TagID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ViewableTag" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BusinessBaseOfBusinessTag" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BusinessBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BusinessBase" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UndoableBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="BrokenRulesCollection" type="tns:ArrayOfBrokenRule" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UndoableBase" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BindableBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BindableBase" abstract="true" />
+      <s:complexType name="ArrayOfBrokenRule">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BrokenRule" nillable="true" type="tns:BrokenRule" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BrokenRule" />
+      <s:complexType name="BusinessBaseOfBusinessDomain" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BusinessBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BusinessDomain">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BusinessBaseOfBusinessDomain">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessDomainID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="DomainID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="PrivateLabelID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="DomainName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TopLevelDomain" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SecondLevelDomain" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateDateString" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BusinessBaseOfBusinessRating" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BusinessBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BusinessRating">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BusinessBaseOfBusinessRating">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessRatingID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessRatingTypeID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="BusinessRatingType" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="RatingVotes" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TotalRating" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BusinessBaseOfBusinessLocation" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BusinessBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BusinessLocation">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BusinessBaseOfBusinessLocation">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessLocationID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsHQ" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="AddressLine1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AddressLine2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Phone1CallingCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Phone2CallingCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FaxNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FaxCallingCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="WebSiteURL" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
+              <s:element minOccurs="0" maxOccurs="1" name="BusinessHours" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsShowMap" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModifyByUserID" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BusinessBaseOfBusinessFlag" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BusinessBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BusinessFlag">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BusinessBaseOfBusinessFlag">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessFlagID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserScreenName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsUserAvatarAvailable" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="FlagTypeID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="FlagType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FlagReason" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsCleared" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModeratedByUserID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ModeratedByUserScreenName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ModeratedByManagerUserName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsModeratedByUserAvatarAvailable" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="ModeratedDateString" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CreateDateString" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModifyByUserID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ModifyDateString" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfBizDataExtended">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BizDataExtended" nillable="true" type="tns:BizDataExtended" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BizDataExtended">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BusinessDataID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BusinessID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="URL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Position" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ModifyByUserID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImageFile" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImagePath" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImageHeight" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImageWidth" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImageURL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsImageAvailable" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetBusinessSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBusiness" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBusinessResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BusinessRegistrationSoap">
+    <wsdl:operation name="GetBusiness">
+      <wsdl:input message="tns:GetBusinessSoapIn" />
+      <wsdl:output message="tns:GetBusinessSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BusinessRegistrationSoap" type="tns:BusinessRegistrationSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBusiness">
+      <soap:operation soapAction="http://www.godaddy.com/GetBusiness" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BusinessRegistrationSoap12" type="tns:BusinessRegistrationSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBusiness">
+      <soap12:operation soapAction="http://www.godaddy.com/GetBusiness" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BusinessRegistration">
+    <wsdl:port name="BusinessRegistrationSoap" binding="tns:BusinessRegistrationSoap">
+      <soap:address location="http://g1dwproxima01:9002/BusinessRegistration.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BusinessRegistrationSoap12" binding="tns:BusinessRegistrationSoap12">
+      <soap12:address location="http://g1dwproxima01:9002/BusinessRegistration.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

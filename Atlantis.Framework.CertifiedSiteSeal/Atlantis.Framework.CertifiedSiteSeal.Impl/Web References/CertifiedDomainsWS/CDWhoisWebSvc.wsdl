@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc">
+      <s:element name="WebSvcHealthCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WebSvcHealthCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WebSvcHealthCheckResult" type="tns:StandardResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StandardResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="WebServiceResponseBase" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Server" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ProcessingResults" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="tns:WebServiceError" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ProcessingResults">
+        <s:restriction base="s:string">
+          <s:enumeration value="UNDEFINED" />
+          <s:enumeration value="NOTFOUND" />
+          <s:enumeration value="SUCCESS" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="FATAL" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="WebServiceError">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Code" type="tns:WebServiceErrorCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Detail" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="WebServiceErrorCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="UNKNOWN" />
+          <s:enumeration value="VALUE_NOT_FOUND" />
+          <s:enumeration value="REQUEST_IN_USE" />
+          <s:enumeration value="CREDIT_NOT_FOUND" />
+          <s:enumeration value="REQUEST_ALREADY_EXISTS" />
+          <s:enumeration value="VALIDATION_DOMAIN_NAME" />
+          <s:enumeration value="VALIDATION_PHONE_DELAY" />
+          <s:enumeration value="QUEUED_REQUEST_EXCEPTION" />
+          <s:enumeration value="NO_SUCH_REQUEST" />
+          <s:enumeration value="UNAVAILABLE_OPERATION" />
+          <s:enumeration value="MESSAGING_FAILURE" />
+          <s:enumeration value="TELEVERIFY_INVALID_LANGUAGE" />
+          <s:enumeration value="TELEVERIFY_OVER_QUOTA" />
+          <s:enumeration value="TELEVERIFY_OVER_DAILY_LIMIT" />
+          <s:enumeration value="TELEVERIFY_INVALID_VOIP_NUMBER" />
+          <s:enumeration value="TELEVERIFY_INVALID_EXTENSION" />
+          <s:enumeration value="TELEVERIFY_INVALID_PIN" />
+          <s:enumeration value="TELEVERIFY_WEBSERVICE_ERROR" />
+          <s:enumeration value="TELEVERIFY_UNKNOWN_ERROR" />
+          <s:enumeration value="WHOIS_DATA_INCONSISTENT" />
+          <s:enumeration value="WHOIS_CONTACT_NOT_FOUND" />
+          <s:enumeration value="REMOTE_EXCEPTION" />
+          <s:enumeration value="TOO_MANY_RESULTS" />
+          <s:enumeration value="REGISTRATION_SYSTEM_FAILURE" />
+          <s:enumeration value="NUMBER_FORMAT_ERROR" />
+          <s:enumeration value="ORION_ERROR" />
+          <s:enumeration value="HIBERNATE_STALE_OBJECT_STATE" />
+          <s:enumeration value="CREDITLESS_CONSUMED_CREDIT" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="WhoisChanged">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WhoisChangedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WhoisChangedResult" type="tns:StandardResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessDomainEvent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="eventCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessDomainEventResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcessDomainEventResult" type="tns:StandardResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSiteSealHtmlForAccountResult" type="tns:StringResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StringResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Results" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetSiteSealHtmlForAccountAndSealType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountUid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sealType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForAccountAndSealTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSiteSealHtmlForAccountAndSealTypeResult" type="tns:StringResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForDomain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForDomainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSiteSealHtmlForDomainResult" type="tns:StringResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForDomainAndSealType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domainName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sealType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteSealHtmlForDomainAndSealTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSiteSealHtmlForDomainAndSealTypeResult" type="tns:StringResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessShopperChange">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="callingApplicationName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="domainId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="oldResellerId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="oldShopperId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="newResellerId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="newShopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessShopperChangeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcessShopperChangeResult" type="tns:StandardResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="WebSvcHealthCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:WebSvcHealthCheck" />
+  </wsdl:message>
+  <wsdl:message name="WebSvcHealthCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:WebSvcHealthCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="WhoisChangedSoapIn">
+    <wsdl:part name="parameters" element="tns:WhoisChanged" />
+  </wsdl:message>
+  <wsdl:message name="WhoisChangedSoapOut">
+    <wsdl:part name="parameters" element="tns:WhoisChangedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcessDomainEventSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcessDomainEvent" />
+  </wsdl:message>
+  <wsdl:message name="ProcessDomainEventSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcessDomainEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForAccount" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForAccountAndSealTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForAccountAndSealType" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForAccountAndSealTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForAccountAndSealTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForDomain" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForDomainAndSealTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForDomainAndSealType" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteSealHtmlForDomainAndSealTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSiteSealHtmlForDomainAndSealTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcessShopperChangeSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcessShopperChange" />
+  </wsdl:message>
+  <wsdl:message name="ProcessShopperChangeSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcessShopperChangeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CDWhoisWebSvcSoap">
+    <wsdl:operation name="WebSvcHealthCheck">
+      <wsdl:input message="tns:WebSvcHealthCheckSoapIn" />
+      <wsdl:output message="tns:WebSvcHealthCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WhoisChanged">
+      <wsdl:input message="tns:WhoisChangedSoapIn" />
+      <wsdl:output message="tns:WhoisChangedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessDomainEvent">
+      <wsdl:input message="tns:ProcessDomainEventSoapIn" />
+      <wsdl:output message="tns:ProcessDomainEventSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccount">
+      <wsdl:input message="tns:GetSiteSealHtmlForAccountSoapIn" />
+      <wsdl:output message="tns:GetSiteSealHtmlForAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccountAndSealType">
+      <wsdl:input message="tns:GetSiteSealHtmlForAccountAndSealTypeSoapIn" />
+      <wsdl:output message="tns:GetSiteSealHtmlForAccountAndSealTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomain">
+      <wsdl:input message="tns:GetSiteSealHtmlForDomainSoapIn" />
+      <wsdl:output message="tns:GetSiteSealHtmlForDomainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomainAndSealType">
+      <wsdl:input message="tns:GetSiteSealHtmlForDomainAndSealTypeSoapIn" />
+      <wsdl:output message="tns:GetSiteSealHtmlForDomainAndSealTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessShopperChange">
+      <wsdl:input message="tns:ProcessShopperChangeSoapIn" />
+      <wsdl:output message="tns:ProcessShopperChangeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CDWhoisWebSvcSoap" type="tns:CDWhoisWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WebSvcHealthCheck">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/WebSvcHealthCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WhoisChanged">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/WhoisChanged" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessDomainEvent">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/ProcessDomainEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccount">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/GetSiteSealHtmlForAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccountAndSealType">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/GetSiteSealHtmlForAccountAndSealType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomain">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/GetSiteSealHtmlForDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomainAndSealType">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/GetSiteSealHtmlForDomainAndSealType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessShopperChange">
+      <soap:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/ProcessShopperChange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CDWhoisWebSvcSoap12" type="tns:CDWhoisWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WebSvcHealthCheck">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/WebSvcHealthCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WhoisChanged">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/WhoisChanged" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessDomainEvent">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/ProcessDomainEvent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccount">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/GetSiteSealHtmlForAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForAccountAndSealType">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/GetSiteSealHtmlForAccountAndSealType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomain">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/GetSiteSealHtmlForDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteSealHtmlForDomainAndSealType">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/GetSiteSealHtmlForDomainAndSealType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessShopperChange">
+      <soap12:operation soapAction="http://starfieldtech.com/webservices/CertifiedDomains/CDWhoisWebSvc/ProcessShopperChange" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CDWhoisWebSvc">
+    <wsdl:port name="CDWhoisWebSvcSoap" binding="tns:CDWhoisWebSvcSoap">
+      <soap:address location="https://certifieddomains.dev.intranet.gdg/CDWhoIsWebSvc/CDWhoisWebSvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CDWhoisWebSvcSoap12" binding="tns:CDWhoisWebSvcSoap12">
+      <soap12:address location="https://certifieddomains.dev.intranet.gdg/CDWhoIsWebSvc/CDWhoisWebSvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

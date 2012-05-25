@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="urn:WSCgdProximaService" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSCgdProximaService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WSCgdProximaService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetProximaOptionsByOrionGUIDIn">
+    <wsdl:part name="bstrOrionGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProximaOptionsByOrionGUIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProximaOptionsByDomainNameIn">
+    <wsdl:part name="bstrDomainName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProximaOptionsByDomainNameOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProximaOptionsByDomainIDIn">
+    <wsdl:part name="lDomainID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetProximaOptionsByDomainIDOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetProximaOptionsIn">
+    <wsdl:part name="bstrOrionGUID" type="s:string" />
+    <wsdl:part name="bstrOptionXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetProximaOptionsOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="bstrErrors" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WSCgdProximaServiceSoap">
+    <wsdl:operation name="GetProximaOptionsByOrionGUID">
+      <wsdl:input message="s0:GetProximaOptionsByOrionGUIDIn" />
+      <wsdl:output message="s0:GetProximaOptionsByOrionGUIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProximaOptionsByDomainName">
+      <wsdl:input message="s0:GetProximaOptionsByDomainNameIn" />
+      <wsdl:output message="s0:GetProximaOptionsByDomainNameOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProximaOptionsByDomainID">
+      <wsdl:input message="s0:GetProximaOptionsByDomainIDIn" />
+      <wsdl:output message="s0:GetProximaOptionsByDomainIDOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetProximaOptions">
+      <wsdl:input message="s0:SetProximaOptionsIn" />
+      <wsdl:output message="s0:SetProximaOptionsOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSCgdProximaServiceSoap" type="s0:WSCgdProximaServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="GetProximaOptionsByOrionGUID">
+      <soap:operation soapAction="#GetProximaOptionsByOrionGUID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdProximaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdProximaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProximaOptionsByDomainName">
+      <soap:operation soapAction="#GetProximaOptionsByDomainName" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdProximaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdProximaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProximaOptionsByDomainID">
+      <soap:operation soapAction="#GetProximaOptionsByDomainID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdProximaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdProximaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetProximaOptions">
+      <soap:operation soapAction="#SetProximaOptions" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdProximaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdProximaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCgdProximaService">
+    <wsdl:port name="WSCgdProximaServiceSoap" binding="s0:WSCgdProximaServiceSoap">
+      <soap:address location="http://commgtwyws.dev.glbt1.gdg:80/WSCgdProxima/WSCgdProxima.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

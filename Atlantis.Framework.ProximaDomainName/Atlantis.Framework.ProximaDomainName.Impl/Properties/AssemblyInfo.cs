@@ -5,12 +5,16 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.BizRegImageGet.Impl")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Atlantis.Framework.ProximaDomainName.Impl")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+#endif
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com, LLC")]
-[assembly: AssemblyProduct("Atlantis.Framework.BizRegImageGet.Impl")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2012")]
+[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
+[assembly: AssemblyProduct("Atlantis.Framework.ProximaDomainName.Impl")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3752557a-57b5-4edb-bdfc-a3ffb2be814b")]
+[assembly: Guid("60bb0fd4-c04a-4102-90f9-58dd2f615939")]
 
 // Version information for an assembly consists of the following four values:
 //

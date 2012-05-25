@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1A20BC2B-D4E5-42F0-A67B-BE9C8B160BA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.WhoIsStatsLogger.Impl", "Atlantis.Framework.WhoIsStatsLogger.Impl\Atlantis.Framework.WhoIsStatsLogger.Impl.csproj", "{0ECC09B5-4CC7-4742-8C71-0CA84CFABC04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.WhoIsStatsLogger.Interface", "Atlantis.Framework.WhoIsStatsLogger.Interface\Atlantis.Framework.WhoIsStatsLogger.Interface.csproj", "{BBC00095-D368-464A-884C-0EED8238404A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.WhoIsStatsLogger.Tests", "Atlantis.Framework.WhoIsStatsLogger.Test\Atlantis.Framework.WhoIsStatsLogger.Tests.csproj", "{72D56914-44CD-4380-898E-EF6D593B6A96}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{81587ECF-0F68-40C3-A592-E950751A29B1}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.WhoIsStatsLogger.vsmdi = Atlantis.Framework.WhoIsStatsLogger.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccLocalPath0 = .
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccLocalPath3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccLocalPath4 = Atlantis.Framework.WhoIsStatsLogger.Impl
+		SccLocalPath5 = Atlantis.Framework.WhoIsStatsLogger.Interface
+		SccLocalPath6 = Atlantis.Framework.WhoIsStatsLogger.Test
+		SccNumberOfProjects = 7
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccProjectName3 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccProjectName4 = Atlantis.Framework.WhoIsStatsLogger.Impl
+		SccProjectName5 = Atlantis.Framework.WhoIsStatsLogger.Interface
+		SccProjectName6 = Atlantis.Framework.WhoIsStatsLogger.Test
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.WhoIsStatsLogger.sln
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.WhoIsStatsLogger.sln
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.WhoIsStatsLogger.sln
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectUniqueName4 = Atlantis.Framework.WhoIsStatsLogger.Impl\\Atlantis.Framework.WhoIsStatsLogger.Impl.csproj
+		SccProjectUniqueName5 = Atlantis.Framework.WhoIsStatsLogger.Interface\\Atlantis.Framework.WhoIsStatsLogger.Interface.csproj
+		SccProjectUniqueName6 = Atlantis.Framework.WhoIsStatsLogger.Test\\Atlantis.Framework.WhoIsStatsLogger.Tests.csproj
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.WhoIsStatsLogger.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0ECC09B5-4CC7-4742-8C71-0CA84CFABC04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ECC09B5-4CC7-4742-8C71-0CA84CFABC04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ECC09B5-4CC7-4742-8C71-0CA84CFABC04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ECC09B5-4CC7-4742-8C71-0CA84CFABC04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D56914-44CD-4380-898E-EF6D593B6A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D56914-44CD-4380-898E-EF6D593B6A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D56914-44CD-4380-898E-EF6D593B6A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D56914-44CD-4380-898E-EF6D593B6A96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBC00095-D368-464A-884C-0EED8238404A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBC00095-D368-464A-884C-0EED8238404A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBC00095-D368-464A-884C-0EED8238404A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBC00095-D368-464A-884C-0EED8238404A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {1A20BC2B-D4E5-42F0-A67B-BE9C8B160BA1}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {1A20BC2B-D4E5-42F0-A67B-BE9C8B160BA1}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {1A20BC2B-D4E5-42F0-A67B-BE9C8B160BA1}
+	EndGlobalSection
+EndGlobal

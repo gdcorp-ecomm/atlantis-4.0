@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://commgtwyws.dev.glbt1.gdg/WSgdSSOGet/RetrieveAuth.asmx?wsdl" docRef="https://commgtwyws.dev.glbt1.gdg/WSgdSSOGet/RetrieveAuth.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://commgtwyws.dev.glbt1.gdg/WSgdSSOGet/RetrieveAuth.asmx" xmlns:q1="http://authretrieval.sso.secureserver.net/" binding="q1:RetrieveAuthSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://commgtwyws.dev.glbt1.gdg/WSgdSSOGet/RetrieveAuth.asmx" xmlns:q2="http://authretrieval.sso.secureserver.net/" binding="q2:RetrieveAuthSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

@@ -71,10 +71,14 @@ namespace Atlantis.Framework.AuthRetrieve.Test
         , string.Empty
         , string.Empty
         , string.Empty
-        , 0 );
+        , 0 
+        ,string.Empty
+        ,string.Empty);
      int _requestType = 0;
       AuthRetrieveResponseData response = (AuthRetrieveResponseData)Engine.Engine.ProcessRequest(request, _requestType);
-      
+      /* Sample artifact call
+    https://cart.test.godaddy-com.ide/sso/redirectlogin.aspx?artifact=wbcaaNQKYaJCcdVzwNxCoLnZnNAeBTnj&transferCart=true&shopper_id_old=75866&page=Basket
+       * */
 	  // Cache call
 	  //AuthRetrieveResponseData response = (AuthRetrieveResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
 

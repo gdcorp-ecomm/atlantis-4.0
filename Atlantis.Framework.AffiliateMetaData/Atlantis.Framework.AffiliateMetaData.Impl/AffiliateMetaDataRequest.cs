@@ -13,7 +13,7 @@ namespace Atlantis.Framework.AffiliateMetaData.Impl
 
       try
       {
-        Dictionary<string, AffiliateData> affiliateMetaDataList = BuildAffiliateMetaDataList();
+        List<AffiliateData> affiliateMetaDataList = BuildAffiliateMetaDataList();
 
         responseData = new AffiliateMetaDataResponseData(affiliateMetaDataList);
       }
@@ -31,17 +31,17 @@ namespace Atlantis.Framework.AffiliateMetaData.Impl
       return responseData;
     }
 
-    private Dictionary<string, AffiliateData> BuildAffiliateMetaDataList()
+    private List<AffiliateData> BuildAffiliateMetaDataList()
     {
       string affiliateString = DataCache.DataCache.GetAppSetting("GLOBAL.AFFILIATE.PREFIX.ASSIGNMENT");
       string[] affiliateArray = affiliateString.Split('|');
 
-      Dictionary<string, AffiliateData> affiliateList = new Dictionary<string, AffiliateData>(affiliateArray.Length);
+      List<AffiliateData> affiliateList = new List<AffiliateData>(affiliateArray.Length);
 
       foreach (string affiliate in affiliateArray)
       {
         string[] affiliateData = affiliate.Split(':');
-        affiliateList.Add(affiliateData[0].ToUpperInvariant(), new AffiliateData(affiliateData[0].ToUpperInvariant(), affiliateData[1]));
+        affiliateList.Add(new AffiliateData(affiliateData[0].ToUpperInvariant(), affiliateData[1]));
       }
 
       return affiliateList;

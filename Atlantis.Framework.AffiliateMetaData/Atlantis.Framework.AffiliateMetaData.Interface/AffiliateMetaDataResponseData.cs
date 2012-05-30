@@ -6,17 +6,28 @@ namespace Atlantis.Framework.AffiliateMetaData.Interface
 {
   public class AffiliateMetaDataResponseData : IResponseData
   {
+    #region Properties
+
     private AtlantisException _exception = null;
     private readonly Dictionary<string, AffiliateData> _affiliateMetaDataDictionary;
+    private readonly List<AffiliateData> _affiliateMetaDataList;
 
     public bool IsSuccess
     {
       get { return _exception == null; }
     }
 
-    public AffiliateMetaDataResponseData(Dictionary<string, AffiliateData> affiliateMetaDataDictionary)
+    public IEnumerable<AffiliateData> AffiliateMetaDataItems
     {
-      _affiliateMetaDataDictionary = affiliateMetaDataDictionary;
+      get { return _affiliateMetaDataList; }
+    }
+    #endregion
+
+    public AffiliateMetaDataResponseData(List<AffiliateData> affiliateMetaDataList)
+    {
+      _affiliateMetaDataList = affiliateMetaDataList;
+      _affiliateMetaDataDictionary = new Dictionary<string,AffiliateData>(affiliateMetaDataList.Capacity);
+      _affiliateMetaDataList.ForEach(md => _affiliateMetaDataDictionary.Add(md.Prefix, md));
     }
 
     public AffiliateMetaDataResponseData(AtlantisException atlantisException)

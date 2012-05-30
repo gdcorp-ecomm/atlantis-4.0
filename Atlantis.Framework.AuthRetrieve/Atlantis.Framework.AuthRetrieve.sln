@@ -7,11 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthRetr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthRetrieve.Interface", "Atlantis.Framework.AuthRetrieve\Atlantis.Framework.AuthRetrieve.Interface\Atlantis.Framework.AuthRetrieve.Interface.csproj", "{AC16510F-D152-42F9-BC5E-119888C5204F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthRetrieve.Test", "Atlantis.Framework.AuthRetrieve\Atlantis.Framework.AuthRetrieve.Test\Atlantis.Framework.AuthRetrieve.Test.csproj", "{B9EF4F75-3CB0-4BA9-ACEB-911BC1DAED7D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.AuthRetrieve.Test", "Atlantis.Framework.AuthRetrieve.Test\Atlantis.Framework.AuthRetrieve.Test.csproj", "{93D36600-2120-4C83-A298-878CB4F38714}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5A19D7F-BAC9-4224-ABFD-2569EA6FBD93}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.AuthRetrieve.vsmdi = Atlantis.Framework.AuthRetrieve.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -25,17 +32,20 @@ Global
 		SccProjectUniqueName2 = Atlantis.Framework.AuthRetrieve\\Atlantis.Framework.AuthRetrieve.Interface\\Atlantis.Framework.AuthRetrieve.Interface.csproj
 		SccProjectName2 = Atlantis.Framework.AuthRetrieve/Atlantis.Framework.AuthRetrieve.Interface
 		SccLocalPath2 = Atlantis.Framework.AuthRetrieve\\Atlantis.Framework.AuthRetrieve.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.AuthRetrieve\\Atlantis.Framework.AuthRetrieve.Test\\Atlantis.Framework.AuthRetrieve.Test.csproj
-		SccProjectName3 = Atlantis.Framework.AuthRetrieve/Atlantis.Framework.AuthRetrieve.Test
-		SccLocalPath3 = Atlantis.Framework.AuthRetrieve\\Atlantis.Framework.AuthRetrieve.Test
-		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.AuthRetrieve.sln
+		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
 		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.AuthRetrieve.sln
-		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.AuthRetrieve.sln
-		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName5 = Atlantis.Framework.AuthRetrieve.Test\\Atlantis.Framework.AuthRetrieve.Test.csproj
+		SccProjectName5 = Atlantis.Framework.AuthRetrieve.Test
+		SccLocalPath5 = Atlantis.Framework.AuthRetrieve.Test
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.AuthRetrieve.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,10 +60,6 @@ Global
 		{AC16510F-D152-42F9-BC5E-119888C5204F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC16510F-D152-42F9-BC5E-119888C5204F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC16510F-D152-42F9-BC5E-119888C5204F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9EF4F75-3CB0-4BA9-ACEB-911BC1DAED7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9EF4F75-3CB0-4BA9-ACEB-911BC1DAED7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9EF4F75-3CB0-4BA9-ACEB-911BC1DAED7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9EF4F75-3CB0-4BA9-ACEB-911BC1DAED7D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -62,6 +68,10 @@ Global
 		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93D36600-2120-4C83-A298-878CB4F38714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D36600-2120-4C83-A298-878CB4F38714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D36600-2120-4C83-A298-878CB4F38714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D36600-2120-4C83-A298-878CB4F38714}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

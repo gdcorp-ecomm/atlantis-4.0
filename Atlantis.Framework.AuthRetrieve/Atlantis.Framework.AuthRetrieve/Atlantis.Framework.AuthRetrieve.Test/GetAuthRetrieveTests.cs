@@ -67,14 +67,16 @@ namespace Atlantis.Framework.AuthRetrieve.Test
 	[DeploymentItem("atlantis.config")]
     public void AuthRetrieveTest()
     {
-     AuthRetrieveRequestData request = new AuthRetrieveRequestData(_shopperId
+      string shopperid = "871984";
+      int _requestType = 533;
+
+      AuthRetrieveRequestData request = new AuthRetrieveRequestData(shopperid
         , string.Empty
         , string.Empty
         , string.Empty
         , 0 
-        ,string.Empty
-        ,string.Empty);
-     int _requestType = 0;
+        ,"GDCARTNET-G1DWCARTWEB001"
+        ,"WRSzDbPuVNmvDhadLPojnSPTJMFNSfXH");
       AuthRetrieveResponseData response = (AuthRetrieveResponseData)Engine.Engine.ProcessRequest(request, _requestType);
       /* Sample artifact call
     https://cart.test.godaddy-com.ide/sso/redirectlogin.aspx?artifact=wbcaaNQKYaJCcdVzwNxCoLnZnNAeBTnj&transferCart=true&shopper_id_old=75866&page=Basket
@@ -82,6 +84,8 @@ namespace Atlantis.Framework.AuthRetrieve.Test
 	  // Cache call
 	  //AuthRetrieveResponseData response = (AuthRetrieveResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
 
+      //https://cart.dev.godaddy-com.ide/Basket.aspx
+      //https://cart.dev.godaddy-com.ide/sso/redirectlogin.aspx?artifact=WRSzDbPuVNmvDhadLPojnSPTJMFNSfXH&transferCart=true&shopper_id_old=871984&page=Basket
       //
       // TODO: Add test logic here
       //

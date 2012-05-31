@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="HCContent" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="HCContent" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="HCContent">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+      <xsd:complexType name="UnsignedInts">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="xsd:unsignedInt[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Strings">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Pair">
+        <xsd:all>
+          <xsd:element name="key" type="xsd:string" />
+          <xsd:element name="value" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Dictionary">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:Pair[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArticleOptions">
+        <xsd:all>
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="isc" type="xsd:string" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="locale" type="xsd:string" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="product_version" type="xsd:string" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="format" type="tns:ContentFormat" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="absolute_uris" type="xsd:boolean" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="channel" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Guide">
+        <xsd:all>
+          <xsd:element name="type" type="tns:GuideType" />
+          <xsd:element name="text" type="xsd:string" />
+          <xsd:element name="link" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Guides">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:Guide[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Topic">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:unsignedInt" />
+          <xsd:element name="locale" type="xsd:string" />
+          <xsd:element name="locales" type="tns:Strings" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="description" type="xsd:string" />
+          <xsd:element name="internal_description" type="xsd:string" />
+          <xsd:element name="category_type" type="xsd:string" />
+          <xsd:element name="guides" type="tns:Guides" />
+          <xsd:element name="product_group_id" type="xsd:unsignedInt" />
+          <xsd:element name="active_location" type="tns:ActiveLocation" />
+          <xsd:element name="parent_topic_id" type="xsd:unsignedInt" />
+          <xsd:element name="sub_topic_ids" type="tns:UnsignedInts" />
+          <xsd:element name="article_ids" type="tns:UnsignedInts" />
+          <xsd:element name="redirecttype" type="xsd:string" />
+          <xsd:element name="redirecttarget" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Topics">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:Topic[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Article">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:unsignedInt" />
+          <xsd:element name="locale" type="xsd:string" />
+          <xsd:element name="locales" type="tns:Strings" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="tags" type="tns:Strings" />
+          <xsd:element name="description" type="xsd:string" />
+          <xsd:element name="content" type="xsd:string" />
+          <xsd:element name="copyrightyears" type="xsd:string" />
+          <xsd:element name="copyrightby" type="xsd:string" />
+          <xsd:element name="type" type="tns:ArticleType" />
+          <xsd:element name="active_location" type="tns:ActiveLocation" />
+          <xsd:element name="topic_ids" type="tns:UnsignedInts" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="top_article_position" type="xsd:unsignedInt" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="is_hidden" type="xsd:boolean" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="hide_company_name" type="xsd:boolean" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="show_last_revised" type="xsd:boolean" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="has_client_side_redirect" type="xsd:boolean" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="redirect_url" type="xsd:string" />
+          <xsd:element use="optional" minOccurs="0" maxOccurs="1" name="revision_id" type="xsd:unsignedInt" />
+          <xsd:element name="redirecttype" type="xsd:string" />
+          <xsd:element name="redirecttarget" type="xsd:string" />
+          <xsd:element name="created_at" type="xsd:dateTime" />
+          <xsd:element name="created_by" type="xsd:string" />
+          <xsd:element name="updated_at" type="xsd:dateTime" />
+          <xsd:element name="updated_by" type="xsd:string" />
+          <xsd:element use="optional" name="audited_at" type="xsd:dateTime" />
+          <xsd:element name="audited_by" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Articles">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:Article[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="NewsItem">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="links" type="tns:Strings" />
+          <xsd:element name="tags" type="tns:Strings" />
+          <xsd:element name="content" type="xsd:string" />
+          <xsd:element name="author" type="xsd:string" />
+          <xsd:element name="product_group_id" type="xsd:unsignedInt" />
+          <xsd:element name="published_at" type="xsd:dateTime" />
+          <xsd:element name="updated_at" type="xsd:dateTime" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="NewsItems">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:NewsItem[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Notice">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:unsignedInt" />
+          <xsd:element name="description" type="xsd:string" />
+          <xsd:element name="product_group_id" type="xsd:unsignedInt" />
+          <xsd:element name="active_location" type="tns:ActiveLocation" />
+          <xsd:element name="is_resolved" type="xsd:boolean" />
+          <xsd:element name="severity" type="tns:NoticeSeverities" />
+          <xsd:element name="created_at" type="xsd:dateTime" />
+          <xsd:element name="created_by" type="xsd:string" />
+          <xsd:element name="updated_at" type="xsd:dateTime" />
+          <xsd:element name="updated_by" type="xsd:string" />
+          <xsd:element use="optional" name="resolved_at" type="xsd:dateTime" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Notices">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:Notice[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:simpleType name="ActiveLocation">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Archive" />
+          <xsd:enumeration value="Draft" />
+          <xsd:enumeration value="Internal" />
+          <xsd:enumeration value="Public" />
+          <xsd:enumeration value="GD" />
+          <xsd:enumeration value="BR" />
+          <xsd:enumeration value="PL" />
+          <xsd:enumeration value="GDBR" />
+          <xsd:enumeration value="GDPL" />
+          <xsd:enumeration value="PLBR" />
+          <xsd:enumeration value="WWD" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ContentFormat">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="html" />
+          <xsd:enumeration value="plaintext" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="GuideType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Document" />
+          <xsd:enumeration value="PDF" />
+          <xsd:enumeration value="Video" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ArticleType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="FAQ" />
+          <xsd:enumeration value="HOWTO" />
+          <xsd:enumeration value="Guide" />
+          <xsd:enumeration value="Tutorial" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="NoticeSeverities">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Low" />
+          <xsd:enumeration value="Medium" />
+          <xsd:enumeration value="High" />
+          <xsd:enumeration value="Critical" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="get_base_uriRequest">
+    <wsdl:part name="prog_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="get_base_uriResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="get_stylesheet_uriRequest" />
+  <wsdl:message name="get_stylesheet_uriResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="last_modifiedRequest" />
+  <wsdl:message name="last_modifiedResponse">
+    <wsdl:part name="return" type="xsd:dateTime" />
+  </wsdl:message>
+  <wsdl:message name="get_article_ids_modified_sinceRequest">
+    <wsdl:part name="time" type="xsd:dateTime" />
+  </wsdl:message>
+  <wsdl:message name="get_article_ids_modified_sinceResponse">
+    <wsdl:part name="return" type="tns:UnsignedInts" />
+  </wsdl:message>
+  <wsdl:message name="get_topic_ids_modified_sinceRequest">
+    <wsdl:part name="time" type="xsd:dateTime" />
+  </wsdl:message>
+  <wsdl:message name="get_topic_ids_modified_sinceResponse">
+    <wsdl:part name="return" type="tns:UnsignedInts" />
+  </wsdl:message>
+  <wsdl:message name="documentRequest">
+    <wsdl:part name="xmlcmd" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="documentResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="get_legal_agreementRequest">
+    <wsdl:part name="article_id" type="xsd:unsignedInt" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:ArticleOptions" />
+  </wsdl:message>
+  <wsdl:message name="get_legal_agreementResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="get_legal_agreement_last_modifiedRequest">
+    <wsdl:part name="pageid" type="xsd:string" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="get_legal_agreement_last_modifiedResponse">
+    <wsdl:part name="return" type="xsd:dateTime" />
+  </wsdl:message>
+  <wsdl:message name="get_articleRequest">
+    <wsdl:part name="article_id" type="xsd:unsignedInt" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:ArticleOptions" />
+  </wsdl:message>
+  <wsdl:message name="get_articleResponse">
+    <wsdl:part name="return" type="tns:Article" />
+  </wsdl:message>
+  <wsdl:message name="get_articlesRequest">
+    <wsdl:part name="article_ids" type="tns:UnsignedInts" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:ArticleOptions" />
+  </wsdl:message>
+  <wsdl:message name="get_articlesResponse">
+    <wsdl:part name="return" type="tns:Articles" />
+  </wsdl:message>
+  <wsdl:message name="get_random_articleRequest">
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:ArticleOptions" />
+  </wsdl:message>
+  <wsdl:message name="get_random_articleResponse">
+    <wsdl:part name="return" type="tns:Article" />
+  </wsdl:message>
+  <wsdl:message name="get_top_articlesRequest">
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:ArticleOptions" />
+  </wsdl:message>
+  <wsdl:message name="get_top_articlesResponse">
+    <wsdl:part name="return" type="tns:Articles" />
+  </wsdl:message>
+  <wsdl:message name="get_top_articles_by_topic_idRequest">
+    <wsdl:part name="topic_id" type="xsd:unsignedInt" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:ArticleOptions" />
+    <wsdl:part name="count" type="xsd:unsignedInt" />
+  </wsdl:message>
+  <wsdl:message name="get_top_articles_by_topic_idResponse">
+    <wsdl:part name="return" type="tns:Articles" />
+  </wsdl:message>
+  <wsdl:message name="get_articles_related_to_article_idRequest">
+    <wsdl:part name="article_id" type="xsd:unsignedInt" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:ArticleOptions" />
+  </wsdl:message>
+  <wsdl:message name="get_articles_related_to_article_idResponse">
+    <wsdl:part name="return" type="tns:Articles" />
+  </wsdl:message>
+  <wsdl:message name="get_articles_related_to_topic_idRequest">
+    <wsdl:part name="topic_id" type="xsd:unsignedInt" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:ArticleOptions" />
+  </wsdl:message>
+  <wsdl:message name="get_articles_related_to_topic_idResponse">
+    <wsdl:part name="return" type="tns:Articles" />
+  </wsdl:message>
+  <wsdl:message name="get_recently_updated_articlesRequest">
+    <wsdl:part name="count" type="xsd:unsignedInt" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:ArticleOptions" />
+  </wsdl:message>
+  <wsdl:message name="get_recently_updated_articlesResponse">
+    <wsdl:part name="return" type="tns:Articles" />
+  </wsdl:message>
+  <wsdl:message name="searchRequest">
+    <wsdl:part name="query" type="xsd:string" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:Dictionary" />
+  </wsdl:message>
+  <wsdl:message name="searchResponse">
+    <wsdl:part name="return" type="tns:UnsignedInts" />
+  </wsdl:message>
+  <wsdl:message name="__search_topicRequest">
+    <wsdl:part name="query" type="xsd:string" />
+    <wsdl:part name="topic_id" type="xsd:unsignedInt" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:Dictionary" />
+  </wsdl:message>
+  <wsdl:message name="__search_topicResponse">
+    <wsdl:part name="return" type="tns:UnsignedInts" />
+  </wsdl:message>
+  <wsdl:message name="get_root_topicRequest">
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:Dictionary" />
+  </wsdl:message>
+  <wsdl:message name="get_root_topicResponse">
+    <wsdl:part name="return" type="tns:Topic" />
+  </wsdl:message>
+  <wsdl:message name="get_topicRequest">
+    <wsdl:part name="topic_id" type="xsd:unsignedInt" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:Dictionary" />
+  </wsdl:message>
+  <wsdl:message name="get_topicResponse">
+    <wsdl:part name="return" type="tns:Topic" />
+  </wsdl:message>
+  <wsdl:message name="get_topicsRequest">
+    <wsdl:part name="topic_ids" type="tns:UnsignedInts" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:Dictionary" />
+  </wsdl:message>
+  <wsdl:message name="get_topicsResponse">
+    <wsdl:part name="return" type="tns:Topics" />
+  </wsdl:message>
+  <wsdl:message name="get_all_topicsRequest">
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:Dictionary" />
+  </wsdl:message>
+  <wsdl:message name="get_all_topicsResponse">
+    <wsdl:part name="return" type="tns:Topics" />
+  </wsdl:message>
+  <wsdl:message name="get_topics_by_product_groupRequest">
+    <wsdl:part name="product_group_id" type="xsd:unsignedInt" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:Dictionary" />
+  </wsdl:message>
+  <wsdl:message name="get_topics_by_product_groupResponse">
+    <wsdl:part name="return" type="tns:Topics" />
+  </wsdl:message>
+  <wsdl:message name="get_news_itemsRequest">
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:Dictionary" />
+  </wsdl:message>
+  <wsdl:message name="get_news_itemsResponse">
+    <wsdl:part name="return" type="tns:NewsItems" />
+  </wsdl:message>
+  <wsdl:message name="get_noticesRequest">
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:Dictionary" />
+  </wsdl:message>
+  <wsdl:message name="get_noticesResponse">
+    <wsdl:part name="return" type="tns:Notices" />
+  </wsdl:message>
+  <wsdl:message name="get_notices_by_product_groupRequest">
+    <wsdl:part name="product_group_id" type="xsd:unsignedInt" />
+    <wsdl:part name="prog_id" type="xsd:string" />
+    <wsdl:part name="options" type="tns:Dictionary" />
+  </wsdl:message>
+  <wsdl:message name="get_notices_by_product_groupResponse">
+    <wsdl:part name="return" type="tns:Notices" />
+  </wsdl:message>
+  <wsdl:portType name="HelpCenterPortType">
+    <wsdl:operation name="get_base_uri">
+      <documentation>&lt;p&gt;Returns the base URI for relative resources included in (especially) article content. For non-Help Center consumers, this can be used along with the &amp;lt;base /&amp;gt; tag when using content with external links.&lt;/p&gt;&lt;p&gt;For example:&lt;/p&gt;&lt;code&gt;&lt;pre&gt;&amp;lt;base href="http://help.godaddy.com/" /&amp;gt;&lt;/pre&gt;&lt;/code&gt;</documentation>
+      <wsdl:input message="tns:get_base_uriRequest" />
+      <wsdl:output message="tns:get_base_uriResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_stylesheet_uri">
+      <documentation>&lt;p&gt;Returns a URI for the stylesheet used by Help Center articles. To utilize this stylesheet, article content should be wrapped in a &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; tag with &lt;code&gt;id&lt;/code&gt; set to &lt;code&gt;article&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;A template for the rendered article block may look like: &lt;pre&gt;&lt;code&gt;
+&amp;lt;div id="article"&amp;gt;
+    &amp;lt;%= article.content %&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;</documentation>
+      <wsdl:input message="tns:get_stylesheet_uriRequest" />
+      <wsdl:output message="tns:get_stylesheet_uriResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="last_modified">
+      <documentation>Returns the timestamp for the last database or software update. This should be used by remote systems to keep a consistent cache of Help Center content</documentation>
+      <wsdl:input message="tns:last_modifiedRequest" />
+      <wsdl:output message="tns:last_modifiedResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_article_ids_modified_since">
+      <documentation>Returns ids for articles which have been updated or created since the time passed in. This should be used by remote systems to keep a consistent cache of Help Center content</documentation>
+      <wsdl:input message="tns:get_article_ids_modified_sinceRequest" />
+      <wsdl:output message="tns:get_article_ids_modified_sinceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_topic_ids_modified_since">
+      <documentation>Returns ids for topics which have been updated or created since the time passed in. This should be used by remote systems to keep a consistent cache of Help Center content</documentation>
+      <wsdl:input message="tns:get_topic_ids_modified_sinceRequest" />
+      <wsdl:output message="tns:get_topic_ids_modified_sinceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="document">
+      <documentation>Retrieves a single legal agreement. The following xml may be passed in:
+				&lt;d3s privateLabelID="x"&gt;&lt;document name="x" showError="true" TransformType="generic" /&gt;&lt;/d3s&gt;</documentation>
+      <wsdl:input message="tns:documentRequest" />
+      <wsdl:output message="tns:documentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_legal_agreement">
+      <documentation>Retrieves a single legal agreement. The following options may be passed in:
+				&lt;blockquote&gt;&lt;dl&gt;
+					&lt;dt&gt;isc&lt;/dt&gt;&lt;dd&gt;An isc code to embed in the article links.&lt;/dd&gt;
+					&lt;dt&gt;locale&lt;/dt&gt;&lt;dd&gt;The article locale to retrieve.&lt;/dd&gt;
+					&lt;dt&gt;product_version&lt;/dt&gt;&lt;dd&gt;A specific version of your product.&lt;/dd&gt;
+					&lt;dt&gt;format&lt;/dt&gt;&lt;dd&gt;setting format to &lt;code&gt;plaintext&lt;/code&gt; will return the article in plaintext format (no markup).&lt;/dd&gt;
+					&lt;dt&gt;absolute_uris&lt;/dt&gt;&lt;dd&gt;Setting to true will replace any relative URIs in Help Center content to absolute URIs.&lt;/dd&gt;
+				&lt;/dl&gt;&lt;/blockquote&gt;</documentation>
+      <wsdl:input message="tns:get_legal_agreementRequest" />
+      <wsdl:output message="tns:get_legal_agreementResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_legal_agreement_last_modified">
+      <documentation>Retrieves the last modified date for a legal agreement.</documentation>
+      <wsdl:input message="tns:get_legal_agreement_last_modifiedRequest" />
+      <wsdl:output message="tns:get_legal_agreement_last_modifiedResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_article">
+      <documentation>Retrieves a single article. The following options may be passed in:
+				&lt;blockquote&gt;&lt;dl&gt;
+					&lt;dt&gt;isc&lt;/dt&gt;&lt;dd&gt;An isc code to embed in the article links.&lt;/dd&gt;
+					&lt;dt&gt;locale&lt;/dt&gt;&lt;dd&gt;The article locale to retrieve.&lt;/dd&gt;
+					&lt;dt&gt;product_version&lt;/dt&gt;&lt;dd&gt;A specific version of your product.&lt;/dd&gt;
+					&lt;dt&gt;format&lt;/dt&gt;&lt;dd&gt;setting format to &lt;code&gt;plaintext&lt;/code&gt; will return the article in plaintext format (no markup).&lt;/dd&gt;
+					&lt;dt&gt;absolute_uris&lt;/dt&gt;&lt;dd&gt;Setting to true will replace any relative URIs in Help Center content to absolute URIs.&lt;/dd&gt;
+                    &lt;dt&gt;channel&lt;/dt&gt;&lt;dd&gt;The channel of content to obtain from the article&lt;/dd&gt;
+				&lt;/dl&gt;&lt;/blockquote&gt;</documentation>
+      <wsdl:input message="tns:get_articleRequest" />
+      <wsdl:output message="tns:get_articleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_articles">
+      <documentation>Retreive a collection of articles. See get_article for available options.</documentation>
+      <wsdl:input message="tns:get_articlesRequest" />
+      <wsdl:output message="tns:get_articlesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_random_article">
+      <documentation>Retrieves a single, random article. The following options may be passed in:
+				&lt;blockquote&gt;&lt;dl&gt;
+					&lt;dt&gt;isc&lt;/dt&gt;&lt;dd&gt;An isc code to embed in the article links.&lt;/dd&gt;
+					&lt;dt&gt;locale&lt;/dt&gt;&lt;dd&gt;The article locale to retrieve.&lt;/dd&gt;
+					&lt;dt&gt;product_version&lt;/dt&gt;&lt;dd&gt;A specific version of your product.&lt;/dd&gt;
+					&lt;dt&gt;format&lt;/dt&gt;&lt;dd&gt;setting format to &lt;code&gt;plaintext&lt;/code&gt; will return the article in plaintext format (no markup). [UNIMPLEMENTED]&lt;/dd&gt;
+					&lt;dt&gt;absolute_uris&lt;/dt&gt;&lt;dd&gt;Setting to true will replace any relative URIs in Help Center content to absolute URIs.&lt;/dd&gt;
+				&lt;/dl&gt;&lt;/blockquote&gt;
+			</documentation>
+      <wsdl:input message="tns:get_random_articleRequest" />
+      <wsdl:output message="tns:get_random_articleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_top_articles">
+      <documentation>Retrieves a collection of "top" articles.</documentation>
+      <wsdl:input message="tns:get_top_articlesRequest" />
+      <wsdl:output message="tns:get_top_articlesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_top_articles_by_topic_id">
+      <documentation>Retrieves a collection of "top" count  of articles by topic. Defaults to 10.</documentation>
+      <wsdl:input message="tns:get_top_articles_by_topic_idRequest" />
+      <wsdl:output message="tns:get_top_articles_by_topic_idResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_articles_related_to_article_id">
+      <documentation>Retrieves articles which are related to the article id passed in.</documentation>
+      <wsdl:input message="tns:get_articles_related_to_article_idRequest" />
+      <wsdl:output message="tns:get_articles_related_to_article_idResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_articles_related_to_topic_id">
+      <documentation>Retreives articles which are related to the topic id passed in.</documentation>
+      <wsdl:input message="tns:get_articles_related_to_topic_idRequest" />
+      <wsdl:output message="tns:get_articles_related_to_topic_idResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_recently_updated_articles">
+      <documentation>Retrieves a list of articles which were most recently updated. Returns a
+			maximum of 100 articles, but may return less than &lt;em&gt;count&lt;/em&gt; if there
+			are less available for the prog_id provided.</documentation>
+      <wsdl:input message="tns:get_recently_updated_articlesRequest" />
+      <wsdl:output message="tns:get_recently_updated_articlesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="search">
+      <documentation>Retrieves article ids which match the search query.</documentation>
+      <wsdl:input message="tns:searchRequest" />
+      <wsdl:output message="tns:searchResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="__search_topic">
+      <documentation>Deprecated, do not use. Retrieves article ids which match the search query within the subtopic tree.</documentation>
+      <wsdl:input message="tns:__search_topicRequest" />
+      <wsdl:output message="tns:__search_topicResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_root_topic">
+      <documentation>Retrieves the root topic. Identical to calling &lt;code&gt;get_topic&lt;/code&gt; with &lt;code&gt;topic_id&lt;/code&gt; set to 0.</documentation>
+      <wsdl:input message="tns:get_root_topicRequest" />
+      <wsdl:output message="tns:get_root_topicResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_topic">
+      <documentation>Retreives a topic</documentation>
+      <wsdl:input message="tns:get_topicRequest" />
+      <wsdl:output message="tns:get_topicResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_topics">
+      <documentation>Retreives a collection of topics.</documentation>
+      <wsdl:input message="tns:get_topicsRequest" />
+      <wsdl:output message="tns:get_topicsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_all_topics">
+      <documentation>Retreives all topics.</documentation>
+      <wsdl:input message="tns:get_all_topicsRequest" />
+      <wsdl:output message="tns:get_all_topicsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_topics_by_product_group">
+      <documentation>Returns a list of topics which are associated with the product offering id provided.</documentation>
+      <wsdl:input message="tns:get_topics_by_product_groupRequest" />
+      <wsdl:output message="tns:get_topics_by_product_groupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_news_items">
+      <documentation>Retreives a collection of news items.</documentation>
+      <wsdl:input message="tns:get_news_itemsRequest" />
+      <wsdl:output message="tns:get_news_itemsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_notices">
+      <documentation>Retreives a collection of notices.</documentation>
+      <wsdl:input message="tns:get_noticesRequest" />
+      <wsdl:output message="tns:get_noticesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_notices_by_product_group">
+      <documentation>Returns a list of notices which are associated with the product offering id provided.</documentation>
+      <wsdl:input message="tns:get_notices_by_product_groupRequest" />
+      <wsdl:output message="tns:get_notices_by_product_groupResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HelpCenterBinding" type="tns:HelpCenterPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="get_base_uri">
+      <soap:operation soapAction="urn:HCContent#get_base_uri" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_stylesheet_uri">
+      <soap:operation soapAction="urn:HCContent#get_stylesheet_uri" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="last_modified">
+      <soap:operation soapAction="urn:HCContent#last_modified" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_article_ids_modified_since">
+      <soap:operation soapAction="urn:HCContent#get_articles_modified_since" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_topic_ids_modified_since">
+      <soap:operation soapAction="urn:HCContent#get_topics_modified_since" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="document">
+      <soap:operation soapAction="urn:HCContent#document" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_legal_agreement">
+      <soap:operation soapAction="urn:HCContent#get_legal_agreement" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_legal_agreement_last_modified">
+      <soap:operation soapAction="urn:HCContent#get_legal_agreement_last_modified" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_article">
+      <soap:operation soapAction="urn:HCContent#get_article" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_articles">
+      <soap:operation soapAction="urn:HCContent#get_articles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_random_article">
+      <soap:operation soapAction="urn:HCContent#get_article" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_top_articles">
+      <soap:operation soapAction="urn:HCContent#get_top_articles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_top_articles_by_topic_id">
+      <soap:operation soapAction="urn:HCContent#get_top_articles_by_topic_id" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_articles_related_to_article_id">
+      <soap:operation soapAction="urn:HCContent#get_articles_related_to_article_id" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_articles_related_to_topic_id">
+      <soap:operation soapAction="urn:HCContent#get_articles_related_to_topic_id" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_recently_updated_articles">
+      <soap:operation soapAction="urn:HCContent#get_recently_updated_articles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="search">
+      <soap:operation soapAction="urn:HCContent#search" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="__search_topic">
+      <soap:operation soapAction="urn:HCContent#__search_topic" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_root_topic">
+      <soap:operation soapAction="urn:HCContent#get_root_topic" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_topic">
+      <soap:operation soapAction="urn:HCContent#get_topic" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_topics">
+      <soap:operation soapAction="urn:HCContent#get_topics" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_all_topics">
+      <soap:operation soapAction="urn:HCContent#get_all_topics" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_topics_by_product_group">
+      <soap:operation soapAction="urn:HCContent#get_topics_by_product_offering" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_news_items">
+      <soap:operation soapAction="urn:HCContent#get_news_items" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_notices">
+      <soap:operation soapAction="urn:HCContent#get_notices" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_notices_by_product_group">
+      <soap:operation soapAction="urn:HCContent#get_notices_by_product_group" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="HCContent" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HelpCenter">
+    <wsdl:port name="HelpCenterPort" binding="tns:HelpCenterBinding">
+      <soap:address location="http://api.gdhelp.dev.intranet.gdg/content" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.LegalLastModifiedDate.Impl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Atlantis_Framework_LegalLastModifiedDate_Impl_DocumentWS_DocumentService" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://api.gdhelp.dev.intranet.gdg/content</Value>
+    </Setting>
+    <Setting Name="Atlantis_Framework_LegalLastModifiedDate_Impl_DocumentWS_HelpCenter" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://api.gdhelp.dev.intranet.gdg/content</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

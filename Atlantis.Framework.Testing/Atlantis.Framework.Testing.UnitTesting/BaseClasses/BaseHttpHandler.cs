@@ -1,8 +1,9 @@
 ﻿using System.Web;
+using System.Web.SessionState;
 
 namespace Atlantis.Framework.Testing.UnitTesting.BaseClasses
 {
-  public abstract class BaseHttpHandler : IHttpHandler
+  public abstract class BaseHttpHandler : IHttpHandler, IRequiresSessionState
   {
     public bool IsReusable
     {

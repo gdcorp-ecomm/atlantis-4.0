@@ -59,9 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\FriendlyNameAttribute.cs" />
-    <Compile Include="Attributes\HideInManagementUIAttribute.cs" />
-    <Compile Include="Attributes\SectionContainerAttribute.cs" />
     <Compile Include="DefaultVideo.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="Interfaces\ICDSWidget.cs" />
@@ -106,6 +103,7 @@
     <Compile Include="Widgets\Widget.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Attributes\" />
     <Folder Include="Plugins\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

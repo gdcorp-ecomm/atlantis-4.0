@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Interfaces;
+using System.ComponentModel;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
@@ -13,7 +14,9 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       ProductsToDisplay = string.Empty;
     }
 
+    [DisplayName("Products To Display")]
     public string ProductsToDisplay { get; set; }
+    [DisplayName("Include Form")]
     public bool IncludeForm { get; set; }
   }
 }

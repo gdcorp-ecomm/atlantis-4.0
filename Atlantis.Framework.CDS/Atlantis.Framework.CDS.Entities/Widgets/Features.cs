@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Interfaces;
-using Atlantis.Framework.CDS.Entities.Attributes;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
-  [SectionContainer("Features")]
   public class Features : IWidgetModel
   {
     public Features()
@@ -16,7 +14,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public string FeatureSpriteImage { get; set; }
     public int RightBoxFeatureWidth { get; set; }
-    [HideInManagementUI]
     public bool Filtered { get; set; }
 
     public class Feature: ElementBase
@@ -30,7 +27,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
       public string Title { get; set; }
       public string SpritePosition { get; set; }
-      [HideInManagementUI]
       public bool Filtered { get; set; }
 
       public class FeatureListItem : ElementBase

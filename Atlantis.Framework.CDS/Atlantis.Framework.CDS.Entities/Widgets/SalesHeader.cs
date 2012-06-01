@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Interfaces;
-using Atlantis.Framework.CDS.Entities.Attributes;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
@@ -58,22 +57,15 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public int BottomRightTextLeft { get; set; }
     public bool Show99PercentBanner { get; set; }
     public bool HasMobileCorner { get; set; }
-    [FriendlyName("Sub Heading")]
     public List<SubHeadingItem> SubHeadings { get; set; }
-    [SectionContainer("Marketing Buttons")]
     public List<MarketingButton> ButtonList { get; set; }
-    [SectionContainer("Social Media")]
     public SocialMediaData SocialData { get; set; }
-    [FriendlyName("Bottom Right Text")]
     public List<BottomRightText> CurrentBottomRightText { get; set; }
-    [SectionContainer("Right List")]
     public List<RightListItem> CurrentRightList { get; set; }
     public bool HideCloudIcon { get; set; }
     public bool HasSupportBanner { get; set; }
     public string SupportBannerText { get; set; }
-    [HideInManagementUI]
     public bool Filtered { get; set; }
-    [HideInManagementUI]
     public int MainHeaderHeight { get; set; }
 
     public class MarketingButton
@@ -103,7 +95,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       public bool IsGoldText { get; set; }
     }
 
-    [FriendlyName("Sub Heading")]
     public class SubHeadingItem : ElementBase
     {
       public SubHeadingItem()

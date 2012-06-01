@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Interfaces;
-using Atlantis.Framework.CDS.Entities.Attributes;
 using Newtonsoft.Json;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
-  [SectionContainer("Footer")]
   public class Footer : IWidgetModel
   {
     public Footer()

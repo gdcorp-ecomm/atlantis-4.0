@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Atlantis.Framework.CDS.Entities.Attributes;
 using Atlantis.Framework.CDS.Entities.Interfaces;
 using Newtonsoft.Json;
 
@@ -14,7 +13,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     TwoZonesSideBySide = 1
   }
 
-  [SectionContainer("Tab Content")]
   public class TabContent : IWidgetModel
   {
     public string TabHeaderText { get; set; }

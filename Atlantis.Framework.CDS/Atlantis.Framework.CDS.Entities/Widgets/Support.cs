@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Atlantis.Framework.CDS.Entities.Attributes;
 using Atlantis.Framework.CDS.Entities.Interfaces;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
-  [SectionContainer("Support Footer")]
   public class Support : FooterBase, IWidgetModel
   {
     private string _title = "Support";

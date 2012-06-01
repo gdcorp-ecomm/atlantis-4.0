@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Atlantis.Framework.CDS.Entities.Attributes;
 using Atlantis.Framework.CDS.Entities.Interfaces;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
-  [SectionContainer("Plan Box")]
   public class PlanBox : IWidgetModel
   {
     public PlanBox()

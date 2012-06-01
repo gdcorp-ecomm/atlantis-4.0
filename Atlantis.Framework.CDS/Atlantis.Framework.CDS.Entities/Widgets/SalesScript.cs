@@ -22,23 +22,25 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     [DisplayName("IPad Video Url")]
     public string IPadVideoUrl { get; set; }
+    [DisplayName("Has Quick Tour")]
     public bool HasQuickTour { get; set; }
+    [DisplayName("Has Video")]
     public bool HasVideo { get; set; }
+    [DisplayName("Has Popup")]
     public bool HasPopup { get; set; }
-    [DisplayName("Quick Tour")]
     public ModalData CurrentQuickTour { get; set; }
-    [DisplayName("Product Video")]
     public VideoData CurrentVideo { get; set; }
-    [DisplayName("Popup")]
     public PopupData CurrentPopup { get; set; }
     public int[] ProductGroupFilters { get; set; }
 
     public class ModalData
     {
       public string Url { get; set; }
+      [DisplayName("Target Width")]
       public int TargetDivWidth { get; set; }
 
       private string _associatedMktgBtn;
+      [DisplayName("Associated Marketing Button")]
       public string AssociatedMktgBtn
       {
         get
@@ -66,7 +68,9 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public class PopupData : ModalData
     {
+      [DisplayName("Window Name")]
       public string WindowName { get; set; }
+      [DisplayName("Window Params")]
       public string WindowParams { get; set; }
     }
   }

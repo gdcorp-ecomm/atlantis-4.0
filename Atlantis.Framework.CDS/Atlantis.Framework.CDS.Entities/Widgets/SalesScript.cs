@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Interfaces;
+using System.ComponentModel;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
@@ -23,8 +24,11 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public bool HasQuickTour { get; set; }
     public bool HasVideo { get; set; }
     public bool HasPopup { get; set; }
+    [DisplayName("Quick Tour")]
     public ModalData CurrentQuickTour { get; set; }
+    [DisplayName("Product Video")]
     public VideoData CurrentVideo { get; set; }
+    [DisplayName("Popup")]
     public PopupData CurrentPopup { get; set; }
     public int[] ProductGroupFilters { get; set; }
 

@@ -20,6 +20,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     {
     }
 
+    [DisplayName("IPad Video Url")]
     public string IPadVideoUrl { get; set; }
     public bool HasQuickTour { get; set; }
     public bool HasVideo { get; set; }

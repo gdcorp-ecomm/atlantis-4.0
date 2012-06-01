@@ -19,8 +19,7 @@ namespace Atlantis.Framework.AuthRetrieve.Interface
     private string _ipid = string.Empty;
 
     XDocument _artifactDoc = new XDocument();
-    private DateTime _expires = DateTime.MinValue;
-    private DateTime _expiresGMT = DateTime.MinValue;
+
 
     public string ResultXML
     {
@@ -70,22 +69,6 @@ namespace Atlantis.Framework.AuthRetrieve.Interface
       }
     }
 
-    public DateTime Expires
-    {
-      get
-      {
-        return _expires;
-      }
-    }
-
-    public DateTime ExpiresGMT
-    {
-      get
-      {
-        return _expiresGMT;
-      }
-    }
-
     public AuthRetrieveResponseData(string xml)
     {
       this._success = true;
@@ -93,32 +76,28 @@ namespace Atlantis.Framework.AuthRetrieve.Interface
       _artifactDoc = XDocument.Load(new StringReader(xml));
       foreach (XElement currentElement in _artifactDoc.Descendants("Request"))
       {
-        if (currentElement.Name == "ShopperID")
+        foreach (XNode currentNode in currentElement.Nodes())
         {
-          _shopperId = currentElement.Value;
-          break;
+          if (currentNode is XElement)
+          {
+            XElement currAttrib = (XElement)currentNode;
+            if (currAttrib.Name == "ShopperID")
+            {
+              _shopperId = currAttrib.Value;
+              break;
+            }
+          }
         }
+
       }
       XElement rootNode = _artifactDoc.Root;
-      if (rootNode.Attribute("ipid") != null)
+      if (rootNode.Attribute("idpid") != null)
       {
-        _ipid = _artifactDoc.Root.Attribute("ipid").Value;
+        _ipid = _artifactDoc.Root.Attribute("idpid").Value;
       }
       if (rootNode.Attribute("spid") != null)
       {
         _spid = _artifactDoc.Root.Attribute("spid").Value;
-      }
-
-      if (rootNode.Attribute("expires") != null)
-      {
-        string expires = _artifactDoc.Root.Attribute("expires").Value;
-        DateTime.TryParse(expires,out _expires);
-      }
-
-      if (rootNode.Attribute("expiresGMT") != null)
-      {
-        string expiresGMT = _artifactDoc.Root.Attribute("expiresGMT").Value;
-        DateTime.TryParse(expiresGMT, out _expiresGMT);
       }
 
     }

@@ -13,7 +13,8 @@ namespace Atlantis.Framework.AffiliateMetaData.Impl
 
       try
       {
-        List<AffiliateData> affiliateMetaDataList = BuildAffiliateMetaDataList();
+        AffiliateMetaDataRequestData request = (AffiliateMetaDataRequestData)requestData;
+        HashSet<string> affiliateMetaDataList = BuildAffiliateMetaDataList(request.PrivateLabelId);
 
         responseData = new AffiliateMetaDataResponseData(affiliateMetaDataList);
       }
@@ -31,20 +32,22 @@ namespace Atlantis.Framework.AffiliateMetaData.Impl
       return responseData;
     }
 
-    private List<AffiliateData> BuildAffiliateMetaDataList()
+    private HashSet<string> BuildAffiliateMetaDataList(int privateLabelId)
     {
       string affiliateString = DataCache.DataCache.GetAppSetting("GLOBAL.AFFILIATE.PREFIX.ASSIGNMENT");
       string[] affiliateArray = affiliateString.Split('|');
 
-      List<AffiliateData> affiliateList = new List<AffiliateData>(affiliateArray.Length);
+      HashSet<string> affiliateSet = new HashSet<string>();
 
       foreach (string affiliate in affiliateArray)
       {
         string[] affiliateData = affiliate.Split(':');
-        affiliateList.Add(new AffiliateData(affiliateData[0].ToUpperInvariant(), affiliateData[1]));
+        if (affiliateData[1].Equals("0") || affiliateData[1].Equals(privateLabelId.ToString()))
+        {
+          affiliateSet.Add(affiliateData[0].ToUpperInvariant());
+        }
       }
-
-      return affiliateList;
+      return affiliateSet;
     }
   }
 }

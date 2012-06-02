@@ -47,35 +47,17 @@ namespace Atlantis.Framework.AffiliateMetaData.Tests
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("atlantis.framework.affiliatemetadata.impl.dll")]
-    public void AffiliateMetaDataValidPrefixTest()
+    public void AffiliateMetaDataTest()
     {
       AffiliateMetaDataRequestData request = new AffiliateMetaDataRequestData(_shopperId
         , string.Empty
         , string.Empty
         , string.Empty
-        , 0);
-
-      AffiliateMetaDataResponseData response = (AffiliateMetaDataResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
-      
-      AffiliateData ad = response.GetAffiliateByPrefix("cjm");
-      Debug.WriteLine(string.Format("Prefix: {0} | PrivateLabelId: {1} | IsGlobalAffiliate: {2}", ad.Prefix, ad.PrivateLabelId, ad.IsGlobalPrefix));
-      Assert.IsTrue(response.IsSuccess);
-    }
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    [DeploymentItem("atlantis.framework.affiliatemetadata.impl.dll")]
-    public void AffiliateMetaDataInvalidPrefixTest()
-    {
-      AffiliateMetaDataRequestData request = new AffiliateMetaDataRequestData(_shopperId
-        , string.Empty
-        , string.Empty
-        , string.Empty
-        , 0);
+        , 0
+        , 1);
 
       AffiliateMetaDataResponseData response = (AffiliateMetaDataResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
 
-      AffiliateData ad = response.GetAffiliateByPrefix("uuq");
       Assert.IsTrue(response.IsSuccess);
     }
   }

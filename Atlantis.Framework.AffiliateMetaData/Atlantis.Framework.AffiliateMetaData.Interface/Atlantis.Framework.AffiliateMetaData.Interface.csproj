@@ -71,7 +71,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AffiliateData.cs" />
     <Compile Include="AffiliateMetaDataRequestData.cs" />
     <Compile Include="AffiliateMetaDataResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

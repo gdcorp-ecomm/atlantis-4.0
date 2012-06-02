@@ -6,14 +6,28 @@ namespace Atlantis.Framework.AffiliateMetaData.Interface
 {
   public class AffiliateMetaDataRequestData : RequestData
   {
+    #region Properties
+    private int _affiliateMetaDataRequestType = 532;
+    public int AffiliateMetaDataRequestType
+    {
+      get { return _affiliateMetaDataRequestType; }
+      set { _affiliateMetaDataRequestType = value; }
+    }
+
+    public int PrivateLabelId { get; private set; }
+
+    #endregion
+
     public AffiliateMetaDataRequestData(string shopperId
       , string sourceUrl
       , string orderId
       , string pathway
-      , int pageCount)
+      , int pageCount
+      , int privateLabelId)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestTimeout = TimeSpan.FromSeconds(5);
+      PrivateLabelId = privateLabelId;
     }
 
     public override string GetCacheMD5()

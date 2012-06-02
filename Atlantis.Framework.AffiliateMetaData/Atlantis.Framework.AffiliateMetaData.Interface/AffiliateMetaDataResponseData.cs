@@ -9,25 +9,21 @@ namespace Atlantis.Framework.AffiliateMetaData.Interface
     #region Properties
 
     private AtlantisException _exception = null;
-    private readonly Dictionary<string, AffiliateData> _affiliateMetaDataDictionary;
-    private readonly List<AffiliateData> _affiliateMetaDataList;
 
     public bool IsSuccess
     {
       get { return _exception == null; }
     }
-
-    public IEnumerable<AffiliateData> AffiliateMetaDataItems
+    private readonly HashSet<string> _affiliateMetaDataItems;
+    public HashSet<string> AffiliateMetaDataItems
     {
-      get { return _affiliateMetaDataList; }
+      get { return _affiliateMetaDataItems; }
     }
     #endregion
 
-    public AffiliateMetaDataResponseData(List<AffiliateData> affiliateMetaDataList)
+    public AffiliateMetaDataResponseData(HashSet<string> affiliateMetaDataList)
     {
-      _affiliateMetaDataList = affiliateMetaDataList;
-      _affiliateMetaDataDictionary = new Dictionary<string,AffiliateData>(affiliateMetaDataList.Capacity);
-      _affiliateMetaDataList.ForEach(md => _affiliateMetaDataDictionary.Add(md.Prefix, md));
+      _affiliateMetaDataItems = affiliateMetaDataList;
     }
 
     public AffiliateMetaDataResponseData(AtlantisException atlantisException)
@@ -41,12 +37,6 @@ namespace Atlantis.Framework.AffiliateMetaData.Interface
         , "AffiliateMetaDataResponseData"
         , exception.Message
         , requestData.ToXML());
-    }
-
-    public AffiliateData GetAffiliateByPrefix(string prefix)
-    {
-      AffiliateData result;
-      return _affiliateMetaDataDictionary.TryGetValue(prefix.ToUpperInvariant(), out result) ? result : null;
     }
 
     #region IResponseData Members

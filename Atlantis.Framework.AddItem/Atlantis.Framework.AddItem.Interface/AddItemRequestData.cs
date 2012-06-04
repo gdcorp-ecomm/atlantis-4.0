@@ -1,99 +1,149 @@
 using System;
 using System.Collections.Generic;
-using System.Xml;
-
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.DomainContactCheck.Interface;
+using System.Xml.Linq;
+using System.Linq;
 
 namespace Atlantis.Framework.AddItem.Interface
 {
   public class AddItemRequestData : RequestData
   {
-    private readonly XmlDocument m_xdRequest = new XmlDocument();
-    private readonly XmlElement m_xlItemRequest;
+    private readonly XDocument _requestDoc = new XDocument();
+    private readonly XElement _itemRequestElement;
 
-    public AddItemRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount)
+    public AddItemRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, string clientIP)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      m_xlItemRequest = m_xdRequest.CreateElement("itemRequest");
-      m_xdRequest.AppendChild(m_xlItemRequest);
-      RequestTimeout = TimeSpan.FromSeconds(2d);
+      _itemRequestElement = new XElement("itemRequest");
+      _requestDoc.Add(_itemRequestElement);
+
+      SetDefaults(clientIP);
     }
 
-    public AddItemRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, string initialItemRequestXml)
+    public AddItemRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, string initialItemRequestXml, string clientIP)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      m_xdRequest = new XmlDocument();
-      m_xdRequest.LoadXml(initialItemRequestXml);
+      _requestDoc = XDocument.Parse(initialItemRequestXml);
 
-      m_xlItemRequest = m_xdRequest.SelectSingleNode("//itemRequest") as XmlElement;
+      if (_requestDoc.Root.Name == "itemRequest")
+      {
+        _itemRequestElement = _requestDoc.Root;
+      }
+      else
+      {
+        _itemRequestElement = _requestDoc.Descendants("itemRequest").FirstOrDefault();
+      }
 
+      SetDefaults(clientIP);
+    }
+
+    private void SetDefaults(string clientIP)
+    {
       RequestTimeout = TimeSpan.FromSeconds(2d);
+
+      if (!string.IsNullOrEmpty(clientIP))
+      {
+        SetItemRequestAttribute("addClientIP", clientIP);
+      }
     }
 
-    public void SetItemRequestAttribute(string sName, string sValue)
+    public void SetItemRequestAttribute(string name, string value)
     {
-      m_xlItemRequest.SetAttribute(sName, sValue);
+      XAttribute attribute = _itemRequestElement.Attribute(name);
+      if (attribute != null)
+      {
+        attribute.Value = value;
+      }
+      else
+      {
+        _itemRequestElement.Add(new XAttribute(name, value));
+      }
     }
 
-    public void AddContactInfo(DomainContactGroup oContactGroup)
+    public void AddContactInfo(DomainContactGroup contactGroup)
     {
-      if (!oContactGroup.IsValid)
+      if (!contactGroup.IsValid)
         throw new ArgumentException("Domain contact group has not been validated.");
 
-      string xmlContactInfo = oContactGroup.GetContactXml();
-      var xmlDoc = new XmlDocument();
-      xmlDoc.LoadXml(xmlContactInfo);
-      XmlNode m_ContactInfoNode = xmlDoc.SelectSingleNode("//" + DomainContactGroup.ContactInfoElementName);
-      m_ContactInfoNode = m_xdRequest.ImportNode(m_ContactInfoNode, true);
-      m_xlItemRequest.AppendChild(m_ContactInfoNode);
+      string xmlContactInfo = contactGroup.GetContactXml();
+      XElement contactElement = XElement.Parse(xmlContactInfo);
+      if (contactElement.Name != DomainContactGroup.ContactInfoElementName)
+      {
+        contactElement = contactElement.Descendants(DomainContactGroup.ContactInfoElementName).FirstOrDefault();
+      }
+
+      _itemRequestElement.Add(contactElement);
     }
 
-    public void AddItem(IEnumerable<KeyValuePair<string, string>> oAttributes)
+    private void AddItemInt(IEnumerable<KeyValuePair<string, string>> attributes, XElement customXmlElement)
     {
-      AddItem(oAttributes, string.Empty);
+      XElement itemElement = new XElement("item");
+      foreach (KeyValuePair<string, string> attr in attributes)
+      {
+        itemElement.Add(new XAttribute(attr.Key, attr.Value));
+      }
+
+      if (customXmlElement != null)
+      {
+        itemElement.Add(customXmlElement);
+      }
+
+      _itemRequestElement.Add(itemElement);
+    }
+
+    public void AddItem(IEnumerable<KeyValuePair<string, string>> attributes)
+    {
+      AddItemInt(attributes, null);
+    }
+
+    public void AddItem(IEnumerable<KeyValuePair<string, string>> attributes, XElement customXmlElement)
+    {
+      AddItemInt(attributes, customXmlElement);
     }
 
     public void AddItem(IEnumerable<KeyValuePair<string, string>> attributes, string customXml)
     {
-      XmlElement xlItem = m_xdRequest.CreateElement("item");
-      foreach (KeyValuePair<string, string> attr in attributes)
+      XElement customXmlElement = null;
+      if (!string.IsNullOrEmpty(customXml))
       {
-        xlItem.SetAttribute(attr.Key, attr.Value);
+        customXmlElement = XElement.Parse(customXml);
+      }
+      AddItemInt(attributes, customXmlElement);
+    }
+
+    private IEnumerable<KeyValuePair<string, string>> GetAttributes(string unifiedProductId, string quantity, IEnumerable<KeyValuePair<string, string>> otherAttributes)
+    {
+      var result = new List<KeyValuePair<string, string>>
+        {
+          new KeyValuePair<string, string>("unifiedProductID", unifiedProductId),
+          new KeyValuePair<string, string>("quantity", quantity)
+        };
+
+      if (otherAttributes != null)
+      {
+        result.AddRange(otherAttributes);
       }
 
-      if (customXml.Length > 0)
-      {
-        xlItem.InnerXml = customXml;
-      }
-
-      m_xlItemRequest.AppendChild(xlItem);
+      return result;
     }
 
     public void AddItem(string unifiedProductId, string quantity)
     {
-      AddItem(unifiedProductId, quantity, null, string.Empty);
+      var attributes = GetAttributes(unifiedProductId, quantity, null);
+      AddItemInt(attributes, null);
     }
 
     public void AddItem(string unifiedProductId, string quantity, string customXml)
     {
-      AddItem(unifiedProductId, quantity, null, customXml);
+      var attributes = GetAttributes(unifiedProductId, quantity, null);
+      AddItem(attributes, customXml);
     }
 
     public void AddItem(string unifiedProductId, string quantity, IEnumerable<KeyValuePair<string, string>> attributes, string customXml)
     {
-      var lstAttributes = new List<KeyValuePair<string, string>>
-                            {
-                              new KeyValuePair<string, string>("unifiedProductID", unifiedProductId),
-                              new KeyValuePair<string, string>("quantity", quantity)
-                            };
-
-      if (attributes != null)
-      {
-        lstAttributes.AddRange(attributes);
-      }
-
-      AddItem(lstAttributes, customXml);
+      var allAttributes = GetAttributes(unifiedProductId, quantity, attributes);
+      AddItem(allAttributes, customXml);
     }
 
     #region RequestData Members
@@ -105,7 +155,7 @@ namespace Atlantis.Framework.AddItem.Interface
 
     public override string ToXML()
     {
-      return m_xdRequest.InnerXml;
+      return _itemRequestElement.ToString(SaveOptions.DisableFormatting);
     }
 
     #endregion

@@ -48,6 +48,30 @@ namespace Atlantis.Framework.AddItem.Interface
       }
     }
 
+    public void AddSplitTestItem(XElement testElement)
+    {
+      if (testElement == null)
+      {
+        throw new ArgumentNullException("testElement can not be NULL");
+      }
+
+      XElement splitElement = _itemRequestElement.Element("splitTest");
+      if (splitElement == null)
+      {
+        splitElement = new XElement("splitTest");
+        _itemRequestElement.Add(splitElement);
+      }
+      else
+      {
+        XElement existingTest = splitElement.Descendants(testElement.Name).FirstOrDefault();
+        if (existingTest != null)
+        {
+          existingTest.Remove();
+        }
+      }
+      splitElement.Add(testElement);
+    }
+
     public void SetItemRequestAttribute(string name, string value)
     {
       XAttribute attribute = _itemRequestElement.Attribute(name);

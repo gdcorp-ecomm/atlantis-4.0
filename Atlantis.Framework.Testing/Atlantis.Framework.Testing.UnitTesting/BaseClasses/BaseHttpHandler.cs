@@ -3,7 +3,7 @@ using System.Web.SessionState;
 
 namespace Atlantis.Framework.Testing.UnitTesting.BaseClasses
 {
-  public abstract class BaseHttpHandler : IHttpHandler, IRequiresSessionState
+  public abstract class UnitTestBaseHttpHandler : IHttpHandler, IRequiresSessionState
   {
     public bool IsReusable
     {

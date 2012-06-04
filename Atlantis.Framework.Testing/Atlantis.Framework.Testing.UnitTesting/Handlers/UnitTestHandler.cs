@@ -15,7 +15,7 @@ using Atlantis.Framework.Testing.UnitTesting.Enums;
 namespace Atlantis.Framework.Testing.UnitTesting.Handlers
 {
 
-  public class UnitTestHandler : BaseHttpHandler
+  public class UnitTestHandler : UnitTestBaseHttpHandler
   {
     private TestRunner LocalTestRunner { get; set; }
     private AvailableContentReturnTypes ResponseOutputType

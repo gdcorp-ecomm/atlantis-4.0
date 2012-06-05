@@ -6,53 +6,23 @@ using Atlantis.Framework.CDS.Entities.Interfaces;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
-  public class SalesHeader : IWidgetModel
+  public class SalesHeader2 : IWidgetModel
   {
-    public SalesHeader()
+    public SalesHeader2()
     {
+      MainHeadingWidth = 416;
+      RightListTop = 52;
+      HasSupportBanner = false;
     }
 
     public string HeaderImageFile { get; set; }
+    public string HeaderSpriteFile { get; set; }
     public string MainHeading { get; set; }
-
-    private int _mainHeadingWidth;
-    public int MainHeadingWidth
-    {
-      get
-      {
-        if (_mainHeadingWidth == default(int))
-        {
-          _mainHeadingWidth = 416;
-        }
-        return _mainHeadingWidth;
-      }
-      set
-      {
-        _mainHeadingWidth = value;
-      }
-    }
-
+    public int MainHeadingWidth { get; set; }
     public int SubHeadingWidth { get; set; }
     public bool MainHeadingOn2Lines { get; set; }
     public int RightListLeft { get; set; }
-
-    private int _rightListTop;
-    public int RightListTop
-    {
-      get
-      {
-        if (_rightListTop == default(int))
-        {
-          _rightListTop = 52;
-        }
-        return _rightListTop;
-      }
-      set
-      {
-        _rightListTop = value;
-      }
-    }
-
+    public int RightListTop { get; set; }
     public int BottomRightTextTop { get; set; }
     public int BottomRightTextLeft { get; set; }
     public bool Show99PercentBanner { get; set; }
@@ -65,7 +35,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public bool HasSupportBanner { get; set; }
     public string SupportBannerText { get; set; }
     public bool Filtered { get; set; }
-    public int MainHeaderHeight { get; set; }
 
     public class MarketingButton
     {

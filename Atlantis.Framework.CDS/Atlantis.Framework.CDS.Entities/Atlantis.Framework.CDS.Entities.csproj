@@ -71,6 +71,7 @@
     <Compile Include="Widgets\Disclaimer.cs" />
     <Compile Include="Widgets\DisclaimerModal.cs" />
     <Compile Include="Widgets\ElementBase.cs" />
+    <Compile Include="Widgets\FAQ.cs" />
     <Compile Include="Widgets\Features.cs" />
     <Compile Include="Widgets\Footer.cs" />
     <Compile Include="Widgets\FooterBase.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Widgets\QuickHelp.cs" />
     <Compile Include="Widgets\QuickTour.cs" />
     <Compile Include="Widgets\SalesHeader.cs" />
+    <Compile Include="Widgets\SalesHeader2.cs" />
     <Compile Include="Widgets\SalesScript.cs" />
     <Compile Include="Widgets\SearchHeader.cs" />
     <Compile Include="Widgets\SearchHeader_001.cs" />

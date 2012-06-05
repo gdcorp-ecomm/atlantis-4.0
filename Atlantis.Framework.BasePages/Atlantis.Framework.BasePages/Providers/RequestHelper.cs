@@ -44,31 +44,31 @@ namespace Atlantis.Framework.BasePages.Providers
     internal static bool IsRequestInternal()
     {
       IProxyContext proxyContext = GetProxyContext();
-      if ((proxyContext != null) && (proxyContext.Status == ProxyStatusType.Invalid)) 
+      if ((proxyContext != null) && (proxyContext.Status == ProxyStatusType.Invalid))
       {
         return false; // If the proxy status is invalid for any reason, treat as external
       }
       bool result = false;
       string originalHostAddress = GetOriginUserHostAddress();
-			if (originalHostAddress != null)
-			{
-				string[] ipsplits = originalHostAddress.Split('.');
-				if (ipsplits.Length == 4)
-				{
-					if ((originalHostAddress == "127.0.0.1") ||
-						(ipsplits[0] == "10") ||
-						((ipsplits[0] == "192") && (ipsplits[1] == "168")))
-					{
-						result = true;
-					}
-					else if (ipsplits[0] == "172")
-					{
-						int second = Convert.ToInt32(ipsplits[1]);
-						if ((second >= 16) && (second <= 31))
-							result = true;
-					}
-				}
-			}
+      if (originalHostAddress != null)
+      {
+        string[] ipsplits = originalHostAddress.Split('.');
+        if (ipsplits.Length == 4)
+        {
+          if ((originalHostAddress == "127.0.0.1") ||
+            (ipsplits[0] == "10") ||
+            ((ipsplits[0] == "192") && (ipsplits[1] == "168")))
+          {
+            result = true;
+          }
+          else if (ipsplits[0] == "172")
+          {
+            int second = Convert.ToInt32(ipsplits[1]);
+            if ((second >= 16) && (second <= 31))
+              result = true;
+          }
+        }
+      }
       return result && !IsInternalRequestExcluded(originalHostAddress);
     }
 
@@ -107,27 +107,20 @@ namespace Atlantis.Framework.BasePages.Providers
       }
       else if (isRequestInternal)
       {
-        if (hostName.EndsWith(".ide"))
+        if (hostName.Contains(".test."))
         {
-          if (hostName.Contains(".test."))
+          result = ServerLocationType.Test;
+        }
+        else if (hostName.Contains(".dev.") || hostName.Contains(".debug."))
+        {
+          if (WebConfigurationManager.AppSettings["EnvironmentOverride"] == "Test")
           {
             result = ServerLocationType.Test;
           }
-          else if (hostName.Contains(".dev.") || hostName.Contains(".debug."))
+          else
           {
-            if (WebConfigurationManager.AppSettings["EnvironmentOverride"] == "Test")
-            {
-              result = ServerLocationType.Test;
-            }
-            else
-            {
-              result = ServerLocationType.Dev;
-            }
+            result = ServerLocationType.Dev;
           }
-        }
-        else if (hostName.StartsWith("localhost"))
-        {
-          result = ServerLocationType.Dev;
         }
       }
 

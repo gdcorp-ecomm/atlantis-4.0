@@ -31,6 +31,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public ModalData CurrentQuickTour { get; set; }
     public VideoData CurrentVideo { get; set; }
     public PopupData CurrentPopup { get; set; }
+    public SocialMediaData SocialData { get; set; }
     public int[] ProductGroupFilters { get; set; }
 
     public class ModalData
@@ -72,6 +73,11 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       public string WindowName { get; set; }
       [DisplayName("Window Params")]
       public string WindowParams { get; set; }
+    }
+
+    public class SocialMediaData
+    {
+      public string TweetText { get; set; }
     }
   }
 }

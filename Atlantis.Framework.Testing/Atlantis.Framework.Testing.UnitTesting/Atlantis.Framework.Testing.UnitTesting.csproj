@@ -51,9 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\TestFixtureAttribute.cs" />
-    <Compile Include="BaseClasses\BaseHttpHandler.cs" />
+    <Compile Include="BaseClasses\UnitTestBaseHttpHandler.cs" />
     <Compile Include="BaseClasses\TestExtendedLogData.cs" />
     <Compile Include="BaseClasses\TestResultData.cs" />
+    <Compile Include="BaseClasses\UnitTestHttpHandlerExtensions.cs" />
+    <Compile Include="BaseClasses\UnitTestHttpHandlerRouteHandler.cs" />
     <Compile Include="BaseClasses\UnitTestLogDataEventArgs.cs" />
     <Compile Include="Enums\AvailableContentReturnTypes.cs" />
     <Compile Include="Exceptions\AssertionFailedException.cs" />

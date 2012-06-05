@@ -18,7 +18,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public int RightImageHeight { get; set; }
     public bool Filtered { get; set; }
 
-    public List<FAQItem> FAQTabItems { get; set; }
+    public List<FAQItem> FAQItems { get; set; }
 
     public class FAQItem : ElementBase
     {

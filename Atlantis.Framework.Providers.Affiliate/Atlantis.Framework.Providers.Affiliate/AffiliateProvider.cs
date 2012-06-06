@@ -25,18 +25,6 @@ namespace Atlantis.Framework.Providers.Affiliate
     Lazy<ISiteContext> _siteContext;
     Lazy<string> _cookieName;
     Lazy<AffiliateMetaDataResponseData> _affiliateMetaDataResponse;
-    AffiliateMetaDataResponseData AffiliateMetaData
-    {
-      get
-      {
-        AffiliateMetaDataResponseData response = null;
-        if (_affiliateMetaDataResponse != null && _affiliateMetaDataResponse.Value.IsSuccess)
-        {
-          response = _affiliateMetaDataResponse.Value;
-        }
-        return response;
-      }
-    }
 
     private bool _isCookieValid = false;
     private bool _valuesLoaded = false;
@@ -216,7 +204,7 @@ namespace Atlantis.Framework.Providers.Affiliate
       {
         if ((!string.IsNullOrEmpty(isc)) && (isc.Length > 2))
         {
-          if (AffiliateMetaData != null && AffiliateMetaData.AffiliateItemsContains(isc.ToUpperInvariant().Substring(0, 3)))
+          if (MatchAffiliateType(isc.ToUpperInvariant().Substring(0, 3)))
           {
             affiliateType = isc.ToUpperInvariant().Substring(0, 3);
           }
@@ -325,6 +313,18 @@ namespace Atlantis.Framework.Providers.Affiliate
         _valuesLoaded = false;
       }
     }
+
+    private bool MatchAffiliateType(string affiliateType)
+    {
+      bool matchFound = false;
+
+      if (_affiliateMetaDataResponse != null && _affiliateMetaDataResponse.Value.IsSuccess)
+      {
+        matchFound = _affiliateMetaDataResponse.Value.AffiliateItemsContains(affiliateType);
+      }
+
+      return matchFound;
+    }
     #endregion
 
     #region Public Properties & Methods
@@ -337,7 +337,7 @@ namespace Atlantis.Framework.Providers.Affiliate
 
       if (!string.IsNullOrEmpty(affiliateType))
       {
-        if (AffiliateMetaData != null && AffiliateMetaData.AffiliateItemsContains(affiliateType.ToUpperInvariant()))
+        if (MatchAffiliateType(affiliateType.ToUpperInvariant()))
         {
           isValid = true;
         }

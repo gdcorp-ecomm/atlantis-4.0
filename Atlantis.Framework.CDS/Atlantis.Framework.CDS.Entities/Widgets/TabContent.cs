@@ -15,6 +15,11 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
   public class TabContent : IWidgetModel
   {
+    public TabContent()
+    {
+      this.Tab = new CurrentTab();
+    }
+
     public string TabHeaderText { get; set; }
     public string TabSubHeaderText { get; set; }
     public string TabContainerTemplate { get; set; }

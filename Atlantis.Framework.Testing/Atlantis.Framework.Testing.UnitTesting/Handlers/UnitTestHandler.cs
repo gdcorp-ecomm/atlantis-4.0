@@ -15,7 +15,7 @@ using Atlantis.Framework.Testing.UnitTesting.Enums;
 namespace Atlantis.Framework.Testing.UnitTesting.Handlers
 {
 
-  public class UnitTestHandler : UnitTestBaseHttpHandler
+  public sealed class UnitTestHandler : UnitTestBaseHttpHandler
   {
     private TestRunner LocalTestRunner { get; set; }
     private AvailableContentReturnTypes ResponseOutputType
@@ -36,13 +36,13 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
       get { return HttpContext.Current.Request["xsltpath"] ?? string.Empty ; }
     }
 
-    protected virtual bool IsInternal
+    private bool IsInternal
     {
       get { return SiteContext.IsRequestInternal; }
     }
 
     private ISiteContext _siteContext;
-    protected virtual ISiteContext SiteContext
+    private ISiteContext SiteContext
     {
       get
       {
@@ -54,26 +54,12 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
       }
     }
 
-    private IShopperContext _shopperContext;
-    protected virtual IShopperContext ShopperContext
-    {
-      get
-      {
-        if (_shopperContext == null)
-        {
-          _shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
-        }
-        return _shopperContext;
-      }
-    }
-
 
     #region Overrides of BaseHttpHandler
 
     public override void ProcessRequest(HttpContextBase context)
     {
       string methodName = MethodBase.GetCurrentMethod().Name;
-      var result = string.Empty;
       var routeValues = context.Request.RequestContext.RouteData.Values;
       var query = (routeValues["routeQuery"] != null) ? routeValues["routeQuery"].ToString() : string.Empty;
 
@@ -116,7 +102,7 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
 
     private void ResponseOutput(HttpContextBase context, TestResultData results)
     {
-      string json;
+      string json = string.Empty;
       string xmlData = string.Empty;
 
       var jsonSer = new DataContractJsonSerializer(typeof(TestResultData));

@@ -1,4 +1,5 @@
 ﻿using System;
+using Atlantis.Framework.Testing.UnitTesting.Enums;
 
 
 namespace Atlantis.Framework.Testing.UnitTesting
@@ -19,7 +20,8 @@ namespace Atlantis.Framework.Testing.UnitTesting
     }
 
     public bool Ignore { get; set; }
-    public bool IsDestructive { get; set; }
+    
+    public TestOptions Options { get; set; }
 
     public TestAttribute() { }
 

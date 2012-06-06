@@ -4,6 +4,7 @@ using System.Reflection;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Testing.UnitTesting.BaseClasses;
+using Atlantis.Framework.Testing.UnitTesting.Enums;
 using Atlantis.Framework.Testing.UnitTesting.Exceptions;
 
 namespace Atlantis.Framework.Testing.UnitTesting
@@ -11,13 +12,10 @@ namespace Atlantis.Framework.Testing.UnitTesting
 
   public sealed class TestRunner
   {
-    //private const string OUTPUT_XML_BASE = "<UnitTestData> <TestResults /> <ExtendedTestData /> </UnitTestData>";
-
 
     #region Properties
 
     public bool RunDestructiveTests { get; set; }
-    public bool IsInternal { get { return SiteContext.IsRequestInternal; } }
 
     private TestResultData _testData;
     public TestResultData TestData
@@ -123,76 +121,6 @@ namespace Atlantis.Framework.Testing.UnitTesting
 
     }
 
-    //public string GetResultsXml()
-    //{
-    //  var doc = new XmlDocument();
-
-    //  doc.LoadXml(OUTPUT_XML_BASE);
-
-    //  if (TestData.TestResults != null && TestData.TestResults.Count > 0)
-    //  {
-    //    var resultsNode = doc.SelectSingleNode("//TestResults");
-    //    if (resultsNode == null)
-    //    {
-    //      resultsNode = doc.CreateElement("TestResults");
-    //      doc.AppendChild(resultsNode);
-    //      resultsNode = doc.SelectSingleNode("//TestResults");
-    //    }
-
-    //    foreach (var result in TestData.TestResults)
-    //    {
-    //      var resultNode = doc.CreateElement("TestResult");
-    //      var successAttr = doc.CreateAttribute("Success");
-    //      var testNameAttr = doc.CreateAttribute("Name");
-
-    //      successAttr.Value = result.Success.ToString();
-    //      testNameAttr.Value = result.TestName;
-
-    //      if (resultsNode != null)
-    //      {
-    //        resultNode.Attributes.Append(testNameAttr);
-    //        resultNode.Attributes.Append(successAttr);
-    //        resultNode.InnerText = result.Result;
-
-    //        resultsNode.AppendChild(resultNode);
-    //      }
-    //    }
-    //  }
-
-    //  if (TestData.ExtendedLogData != null && TestData.ExtendedLogData.Count > 0)
-    //  {
-    //    var logDataResultsNode = doc.SelectSingleNode("//ExtendedTestData");
-    //    if (logDataResultsNode == null)
-    //    {
-    //      logDataResultsNode = doc.CreateElement("ExtendedTestData");
-    //      doc.AppendChild(logDataResultsNode);
-    //      logDataResultsNode = doc.SelectSingleNode("//ExtendedTestData");
-    //    }
-
-    //    foreach (var result in TestData.ExtendedLogData)
-    //    {
-    //      var logDataResultNode = doc.CreateElement("TestDataItem");
-    //      var testNameAttr = doc.CreateAttribute("Name");
-
-    //      testNameAttr.Value = result.ToString();
-
-    //      if (logDataResultsNode != null)
-    //      {
-    //        logDataResultNode.Attributes.Append(testNameAttr);
-    //        logDataResultNode.InnerText = TestData.ExtendedLogData[result].ToString();
-
-    //        logDataResultsNode.AppendChild(logDataResultNode);
-    //      }
-    //    }
-    //  }
-
-    //  if (string.IsNullOrEmpty(doc.InnerXml))
-    //  {
-    //    return OUTPUT_XML_BASE;
-    //  }
-    //  return doc.InnerXml;
-    //}
-
     #endregion
 
 
@@ -214,7 +142,8 @@ namespace Atlantis.Framework.Testing.UnitTesting
       if (TestData.ExtendedLogData.ContainsKey(e.MethodName))
       {
         TestData.ExtendedLogData[e.MethodName].Add(e.Data);
-      } else
+      }
+      else
       {
         TestData.ExtendedLogData.Add(e.MethodName, new TestExtendedLogDataEntries() { e.Data });
       }
@@ -286,8 +215,6 @@ namespace Atlantis.Framework.Testing.UnitTesting
       if (testFixtureSetup != null)
       {
         testFixtureSetup.Invoke(CurrentTestClass, BindingFlags.Default | BindingFlags.InvokeMethod, null, new object[] { }, null);
-
-        //testType.InvokeMember(testFixtureSetup.Name, BindingFlags.Default | BindingFlags.InvokeMethod, null, this, new object[] { });
       }
     }
 
@@ -299,7 +226,6 @@ namespace Atlantis.Framework.Testing.UnitTesting
       {
         testSetup.Invoke(CurrentTestClass, BindingFlags.Default | BindingFlags.InvokeMethod, null, new object[] { }, null);
 
-        //testType.InvokeMember(testSetup.Name, BindingFlags.Default | BindingFlags.InvokeMethod, null, this, new object[] { });
       }
     }
 
@@ -308,8 +234,14 @@ namespace Atlantis.Framework.Testing.UnitTesting
       var testType = CurrentTestClass.GetType();
       var currentTestAttr = (TestAttribute)Attribute.GetCustomAttribute(test, typeof(TestAttribute));
       var expectedException = (TestExpectedException)Attribute.GetCustomAttribute(test, typeof(TestExpectedException));
-      var isDestructive = currentTestAttr == null ? false : currentTestAttr.IsDestructive;
+      var isDestructive = currentTestAttr == null ? false : currentTestAttr.Options.HasFlag(TestOptions.Destructive);
       var ignore = currentTestAttr == null ? false : currentTestAttr.Ignore;
+      var isProductionEnv = SiteContext.ServerLocation == ServerLocationType.Ote ||
+                            SiteContext.ServerLocation == ServerLocationType.Prod;
+
+      var canRunInProd = (!isDestructive && 
+                         (currentTestAttr == null ? false : currentTestAttr.Options.HasFlag(TestOptions.Production)) && 
+                         isProductionEnv);
 
       try
       {
@@ -318,15 +250,17 @@ namespace Atlantis.Framework.Testing.UnitTesting
         {
           AddTestResult(null, test.Name, "IGNORE - This test was flagged to be ignored by the test suite runner.");
         }
-        else if (!RunDestructiveTests && isDestructive)
+        else if ((!RunDestructiveTests && isDestructive) || (RunDestructiveTests && !canRunInProd))
         {
-          AddTestResult(null, test.Name, "DESTRUCTIVE - This test was flagged as destructive and the test suite is not set to run destructive tests.");
+          AddTestResult(null, test.Name, "DESTRUCTIVE - This test was flagged as destructive and the test suite is not set to run destructive tests or the enviornment you are trying to execute this test in is not allowed.");
         }
         else
         {
-          ((MethodInfo)test).Invoke(CurrentTestClass, BindingFlags.Default | BindingFlags.InvokeMethod, null, new object[] { }, null);
-          //testType.InvokeMember(test.Name, BindingFlags.Default | BindingFlags.InvokeMethod, null, this, new object[] { });
-          AddTestResult(true, test.Name, "Test completed successfully.");
+          if (!isProductionEnv || canRunInProd)
+          {
+            ((MethodInfo)test).Invoke(CurrentTestClass, BindingFlags.Default | BindingFlags.InvokeMethod, null, new object[] { }, null);
+            AddTestResult(true, test.Name, "Test completed successfully.");
+          }
         }
 
       }
@@ -356,8 +290,6 @@ namespace Atlantis.Framework.Testing.UnitTesting
       if (testTeardown != null)
       {
         testTeardown.Invoke(CurrentTestClass, BindingFlags.Default | BindingFlags.InvokeMethod, null, new object[] { }, null);
-         
-        //testType.InvokeMember(testTeardown.Name, BindingFlags.Default | BindingFlags.InvokeMethod, null, this, new object[] { });
       }
     }
 
@@ -367,8 +299,6 @@ namespace Atlantis.Framework.Testing.UnitTesting
       if (testFixtureTeardown != null)
       {
         testFixtureTeardown.Invoke(CurrentTestClass, BindingFlags.Default | BindingFlags.InvokeMethod, null, new object[] { }, null);
-
-        //testType.InvokeMember(testFixtureTeardown.Name, BindingFlags.Default | BindingFlags.InvokeMethod, null, this, new object[] { });
       }
     }
 

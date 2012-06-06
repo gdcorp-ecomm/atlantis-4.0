@@ -58,6 +58,7 @@
     <Compile Include="BaseClasses\UnitTestHttpHandlerRouteHandler.cs" />
     <Compile Include="BaseClasses\UnitTestLogDataEventArgs.cs" />
     <Compile Include="Enums\AvailableContentReturnTypes.cs" />
+    <Compile Include="Enums\TestOptions.cs" />
     <Compile Include="Exceptions\AssertionFailedException.cs" />
     <Compile Include="Asserts\Assert_AreEqual.cs" />
     <Compile Include="Asserts\Assert_AreNotEqual.cs" />

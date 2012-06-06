@@ -8,7 +8,7 @@ namespace Atlantis.Framework.Testing.UnitTesting.BaseClasses
   {
     public static void MapUnitTestsHandler(this RouteCollection routes)
     {
-      routes.MapHttpHandler<UnitTestHandler>("unittests/{*routeQuery}");
+      routes.MapHttpHandler<UnitTestHandler>("_unittests/{*routeQuery}");
     }
 
     private static void MapHttpHandler<THandler>(this RouteCollection routes, string url) where THandler : IHttpHandler, new()

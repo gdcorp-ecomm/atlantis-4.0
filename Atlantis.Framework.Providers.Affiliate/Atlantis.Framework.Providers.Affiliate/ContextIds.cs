@@ -1,7 +1,7 @@
 
 namespace Atlantis.Framework.Providers.Affiliate
 {
-  public static class ContextIds
+  internal static class ContextIds
   {
     public const int Unknown = 0;
     public const int GoDaddy = 1;

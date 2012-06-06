@@ -12,12 +12,32 @@ namespace Atlantis.Framework.Providers.Affiliate
   {
     #region Private Properties & Constants
 
+    private static int _affiliateMetaDataRequestType = 532;
+    public static int AffiliateMetaDataRequestType
+    {
+      get { return _affiliateMetaDataRequestType; }
+      set { _affiliateMetaDataRequestType = value; }
+    }
+
     private const int MADDOG_PL = 1941;
     private const string COOKIENAMEFORMAT = "Affiliates{0}";
 
     Lazy<ISiteContext> _siteContext;
-    HashSet<string> _validAffiliateTypes;
-    private string _cookieName;
+    Lazy<string> _cookieName;
+    Lazy<AffiliateMetaDataResponseData> _affiliateMetaDataResponse;
+    AffiliateMetaDataResponseData AffiliateMetaData
+    {
+      get
+      {
+        AffiliateMetaDataResponseData response = null;
+        if (_affiliateMetaDataResponse != null && _affiliateMetaDataResponse.Value.IsSuccess)
+        {
+          response = _affiliateMetaDataResponse.Value;
+        }
+        return response;
+      }
+    }
+
     private bool _isCookieValid = false;
     private bool _valuesLoaded = false;
     private DateTime _affiliateStartDate;
@@ -36,13 +56,21 @@ namespace Atlantis.Framework.Providers.Affiliate
         });
 
       _affiliateStartDate = DateTime.Now;
-      _cookieName = string.Format(CultureInfo.InvariantCulture, COOKIENAMEFORMAT, _siteContext.Value.PrivateLabelId.ToString());
-      _validAffiliateTypes = _validAffiliateTypes ?? BuildValidAffiliateTypeSet();
+
+      _cookieName = new Lazy<string>(() =>
+        {
+          return string.Format(CultureInfo.InvariantCulture, COOKIENAMEFORMAT, _siteContext.Value.PrivateLabelId.ToString());
+        });
+
+      _affiliateMetaDataResponse = new Lazy<AffiliateMetaDataResponseData>(() =>
+        {
+          return BuildAffiliateMetaData();
+        });
     }
 
-    private HashSet<string> BuildValidAffiliateTypeSet()
+    private AffiliateMetaDataResponseData BuildAffiliateMetaData()
     {
-      HashSet<string> tempSet = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+      AffiliateMetaDataResponseData response = null;
 
       try
       {
@@ -53,19 +81,12 @@ namespace Atlantis.Framework.Providers.Affiliate
           , _siteContext.Value.PageCount
           , _siteContext.Value.PrivateLabelId);
 
-        int requestType = UpdatedAffiliateMetaDataRequest.HasValue ? UpdatedAffiliateMetaDataRequest.Value : request.AffiliateMetaDataRequestType;
-
-        AffiliateMetaDataResponseData response = DataCache.DataCache.GetProcessRequest(request, requestType) as AffiliateMetaDataResponseData;
-
-        if (response.IsSuccess)
-        {
-          tempSet = response.AffiliateMetaDataItems;
-        }
+        response = DataCache.DataCache.GetProcessRequest(request, AffiliateMetaDataRequestType) as AffiliateMetaDataResponseData;
       }
       catch (Exception ex)
       {
         AtlantisException aex = new AtlantisException(
-          "A.F.P.Affiliate.BuildValidAffiliateTypeSet",
+          "A.F.P.Affiliate.BuildAffiliateMetaData",
           HttpContext.Current.Request.Url.ToString(),
           "0",
           ex.Message,
@@ -74,15 +95,16 @@ namespace Atlantis.Framework.Providers.Affiliate
           _siteContext.Value.Pathway, _siteContext.Value.PageCount);
         Engine.Engine.LogAtlantisException(aex);
       }
-      return tempSet;
+
+      return response;
     }
 
     private void ExpireAffiliateCookie()
     {
-      HttpCookie cookie = HttpContext.Current.Request.Cookies[_cookieName];
+      HttpCookie cookie = HttpContext.Current.Request.Cookies[_cookieName.Value];
       if (cookie != null)
       {
-        HttpCookie expireCookie = _siteContext.Value.NewCrossDomainMemCookie(_cookieName);
+        HttpCookie expireCookie = _siteContext.Value.NewCrossDomainMemCookie(_cookieName.Value);
         expireCookie.Expires = DateTime.Now.AddDays(-7);
         expireCookie.Value = string.Empty;
         HttpContext.Current.Response.Cookies.Set(expireCookie);
@@ -95,7 +117,7 @@ namespace Atlantis.Framework.Providers.Affiliate
       {
         string tempCookieValue = null;
         string tempAffiliateType = string.Empty;
-        HttpCookie cookie = HttpContext.Current.Request.Cookies[_cookieName];
+        HttpCookie cookie = HttpContext.Current.Request.Cookies[_cookieName.Value];
         if (cookie != null)
         {
           if (!string.IsNullOrEmpty(cookie.Value))
@@ -180,9 +202,9 @@ namespace Atlantis.Framework.Providers.Affiliate
 
     private void SetCookie()
     {
-      HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[_cookieName];
+      HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[_cookieName.Value];
       int _cookieExpirationDays = GetCookieExpirationDays();
-      cookie = _siteContext.Value.NewCrossDomainCookie(_cookieName, _affiliateStartDate.AddDays(_cookieExpirationDays));
+      cookie = _siteContext.Value.NewCrossDomainCookie(_cookieName.Value, _affiliateStartDate.AddDays(_cookieExpirationDays));
       cookie.Value = HttpUtility.UrlEncode(string.Format("{0}|{1}", _affiliateType.ToLowerInvariant(), _affiliateStartDate.ToString("M/d/yyyy")));
       HttpContext.Current.Response.Cookies.Set(cookie);
     }
@@ -194,7 +216,7 @@ namespace Atlantis.Framework.Providers.Affiliate
       {
         if ((!string.IsNullOrEmpty(isc)) && (isc.Length > 2))
         {
-          if (_validAffiliateTypes.Contains(isc.ToUpperInvariant().Substring(0, 3)))
+          if (AffiliateMetaData != null && AffiliateMetaData.AffiliateItemsContains(isc.ToUpperInvariant().Substring(0, 3)))
           {
             affiliateType = isc.ToUpperInvariant().Substring(0, 3);
           }
@@ -315,7 +337,7 @@ namespace Atlantis.Framework.Providers.Affiliate
 
       if (!string.IsNullOrEmpty(affiliateType))
       {
-        if (_validAffiliateTypes.Contains(affiliateType.ToUpperInvariant()))
+        if (AffiliateMetaData != null && AffiliateMetaData.AffiliateItemsContains(affiliateType.ToUpperInvariant()))
         {
           isValid = true;
         }

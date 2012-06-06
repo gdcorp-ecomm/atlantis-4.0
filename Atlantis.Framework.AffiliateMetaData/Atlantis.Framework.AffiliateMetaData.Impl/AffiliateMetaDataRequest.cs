@@ -37,14 +37,17 @@ namespace Atlantis.Framework.AffiliateMetaData.Impl
       string affiliateString = DataCache.DataCache.GetAppSetting("GLOBAL.AFFILIATE.PREFIX.ASSIGNMENT");
       string[] affiliateArray = affiliateString.Split('|');
 
-      HashSet<string> affiliateSet = new HashSet<string>();
+      HashSet<string> affiliateSet = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
 
       foreach (string affiliate in affiliateArray)
       {
         string[] affiliateData = affiliate.Split(':');
-        if (affiliateData[1].Equals("0") || affiliateData[1].Equals(privateLabelId.ToString()))
+        if (affiliateData != null && affiliateData.Length.Equals(2))
         {
-          affiliateSet.Add(affiliateData[0].ToUpperInvariant());
+          if (affiliateData[1].Equals("0") || affiliateData[1].Equals(privateLabelId.ToString()))
+          {
+            affiliateSet.Add(affiliateData[0].ToUpperInvariant());
+          }
         }
       }
       return affiliateSet;

@@ -60,5 +60,27 @@ namespace Atlantis.Framework.AffiliateMetaData.Tests
 
       Assert.IsTrue(response.IsSuccess);
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("atlantis.framework.affiliatemetadata.impl.dll")]
+    public void AffiliateMetaDataMD5Test()
+    {
+      AffiliateMetaDataRequestData request1 = new AffiliateMetaDataRequestData(_shopperId
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , 1);
+
+      AffiliateMetaDataRequestData request2 = new AffiliateMetaDataRequestData(_shopperId
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , 2);
+
+      Assert.AreNotEqual(request1.GetCacheMD5(), request2.GetCacheMD5());
+    }
   }
 }

@@ -15,10 +15,7 @@ namespace Atlantis.Framework.AffiliateMetaData.Interface
       get { return _exception == null; }
     }
     private readonly HashSet<string> _affiliateMetaDataItems;
-    public HashSet<string> AffiliateMetaDataItems
-    {
-      get { return _affiliateMetaDataItems; }
-    }
+
     #endregion
 
     public AffiliateMetaDataResponseData(HashSet<string> affiliateMetaDataList)
@@ -37,6 +34,11 @@ namespace Atlantis.Framework.AffiliateMetaData.Interface
         , "AffiliateMetaDataResponseData"
         , exception.Message
         , requestData.ToXML());
+    }
+
+    public bool AffiliateItemsContains(string affiliateType)
+    {
+      return _affiliateMetaDataItems.Contains(affiliateType);
     }
 
     #region IResponseData Members

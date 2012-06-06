@@ -7,12 +7,6 @@ namespace Atlantis.Framework.AffiliateMetaData.Interface
   public class AffiliateMetaDataRequestData : RequestData
   {
     #region Properties
-    private int _affiliateMetaDataRequestType = 532;
-    public int AffiliateMetaDataRequestType
-    {
-      get { return _affiliateMetaDataRequestType; }
-      set { _affiliateMetaDataRequestType = value; }
-    }
 
     public int PrivateLabelId { get; private set; }
 
@@ -35,10 +29,10 @@ namespace Atlantis.Framework.AffiliateMetaData.Interface
       MD5 oMD5 = new MD5CryptoServiceProvider();
       oMD5.Initialize();
 
-      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(string.Empty);
+      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(PrivateLabelId.ToString());
       byte[] md5Bytes = oMD5.ComputeHash(stringBytes);
       string sValue = BitConverter.ToString(md5Bytes, 0);
-      return sValue.Replace("-", "");  
+      return sValue.Replace("-", string.Empty);  
     }
   }
 }

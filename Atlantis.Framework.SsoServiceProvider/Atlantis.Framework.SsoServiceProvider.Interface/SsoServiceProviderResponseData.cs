@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
@@ -25,13 +26,7 @@ namespace Atlantis.Framework.SsoServiceProvider.Interface
       ServiceProviderName = serviceProviderName;
       XDocument serviceProviderDoc = XDocument.Parse(serviceProviderXml);
 
-      XElement itemElement = null;
-      foreach (XElement item in serviceProviderDoc.Descendants("item"))
-      {
-        itemElement = item;
-        break;
-      }
-
+      XElement itemElement = serviceProviderDoc.Descendants("item").FirstOrDefault();
       if (itemElement != null)
       {
         LoginReceive = GetAttributeValue(itemElement, "loginReceive", string.Empty);
@@ -53,21 +48,10 @@ namespace Atlantis.Framework.SsoServiceProvider.Interface
       _exception = new AtlantisException(requestData, "SsoServiceProviderResponsData", ex.Message + ex.StackTrace, requestData.ToXML());
     }
 
-    private string GetAttributeValue(XElement element, string name, string defaultValue)
-    {
-      string result = defaultValue;
-      XAttribute attribute = element.Attribute(name);
-      if (attribute != null)
-      {
-        result = attribute.Value;
-      }
-      return result;
-    }
-
     public string ToXML()
     {
       XElement result = new XElement("SsoServiceProvider",
-        new XAttribute("ServiceProviderName", ServiceProviderName),
+        new XAttribute("ServiceProviderName", ServiceProviderName ?? string.Empty),
         new XAttribute("Status", Status.ToString()),
         new XAttribute("loginReceive", LoginReceive ?? string.Empty),
         new XAttribute("loginReceiveType", LoginReceiveType ?? string.Empty),
@@ -84,6 +68,17 @@ namespace Atlantis.Framework.SsoServiceProvider.Interface
     public AtlantisException GetException()
     {
       return _exception;
+    }
+
+    private static string GetAttributeValue(XElement element, string name, string defaultValue)
+    {
+      string result = defaultValue;
+      XAttribute attribute = element.Attribute(name);
+      if (attribute != null)
+      {
+        result = attribute.Value;
+      }
+      return result;
     }
   }
 }

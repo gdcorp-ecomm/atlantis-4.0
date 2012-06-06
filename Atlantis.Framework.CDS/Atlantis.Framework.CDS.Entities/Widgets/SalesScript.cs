@@ -51,7 +51,10 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
         {
           try
           {
-            MarketingButtons buttonType = (MarketingButtons)Enum.Parse(typeof(MarketingButtons), value);
+            if (value != null)
+            {
+              MarketingButtons buttonType = (MarketingButtons)Enum.Parse(typeof(MarketingButtons), value);
+            }
           }
           catch (Exception ex)
           {

@@ -85,7 +85,7 @@ namespace Atlantis.Framework.Providers.Affiliate
         HttpCookie expireCookie = _siteContext.Value.NewCrossDomainMemCookie(_cookieName);
         expireCookie.Expires = DateTime.Now.AddDays(-7);
         expireCookie.Value = string.Empty;
-        HttpContext.Current.Response.Cookies.Add(expireCookie);
+        HttpContext.Current.Response.Cookies.Set(expireCookie);
       }
     }
 
@@ -184,7 +184,7 @@ namespace Atlantis.Framework.Providers.Affiliate
       int _cookieExpirationDays = GetCookieExpirationDays();
       cookie = _siteContext.Value.NewCrossDomainCookie(_cookieName, _affiliateStartDate.AddDays(_cookieExpirationDays));
       cookie.Value = HttpUtility.UrlEncode(string.Format("{0}|{1}", _affiliateType.ToLowerInvariant(), _affiliateStartDate.ToString("M/d/yyyy")));
-      HttpContext.Current.Response.Cookies.Add(cookie);
+      HttpContext.Current.Response.Cookies.Set(cookie);
     }
 
     private string DetermineAffiliateType(string isc)

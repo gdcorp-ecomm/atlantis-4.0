@@ -9,7 +9,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
   public class SearchHeader : IWidgetModel
   {
     public SearchHeader()
-    {     
+    {
+      SocialData = new SocialMediaData();
       OptionalBanner = new Banner();
     }
 
@@ -19,9 +20,19 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string HeaderText { get; set; }
     public string SearchCi { get; set; }
     public string BulkCi { get; set; }
-    public string SubheaderText { get; set; }    
+    public string SubheaderText { get; set; }
+    public SocialMediaData SocialData { get; set; }
     public Banner OptionalBanner { get; set; }
-    public bool ShowSocialMedia { get; set; }
+
+    public class SocialMediaData
+    {
+      public string Description { get; set; }
+      public string ImageUrl { get; set; }
+      public string ItemType { get; set; }
+      public string Title { get; set; }
+      public string TweetText { get; set; }
+      public bool UseGooglePlus { get; set; }
+    }
 
     public class Banner
     {

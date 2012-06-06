@@ -32,7 +32,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public VideoData CurrentVideo { get; set; }
     public PopupData CurrentPopup { get; set; }
     public SocialMediaData SocialData { get; set; }
-    public int[] ProductGroupFilters { get; set; }
 
     public class ModalData
     {

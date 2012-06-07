@@ -94,8 +94,6 @@ namespace Atlantis.Framework.Providers.Affiliate.Tests
     {
       MockHttpContext.SetMockHttpContext("default.aspx", "http://mya.godaddy.com/default.aspx?isc=cju667", String.Empty);
       IAffiliateProvider affiliate = NewAffiliateProvider(1);
- //     ISiteContext siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
- //     ((TestContexts)siteContext).SetContextInfo(1, _shopperId);
       
       string affiliateType = string.Empty;
       DateTime affiliateStartDate = DateTime.MinValue;
@@ -103,7 +101,22 @@ namespace Atlantis.Framework.Providers.Affiliate.Tests
       Assert.IsTrue(affiliate.ProcessAffiliateSourceCode("cju667", out affiliateType, out affiliateStartDate));
 
       Debug.WriteLine(string.Format("Affilitate: {0} | StartDate: {1}", affiliateType, affiliateStartDate));
+    }
 
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.AffiliateMetaData.Impl.dll")]
+    public void GetInvalidAffiliateInfoTest()
+    {
+      MockHttpContext.SetMockHttpContext("default.aspx", "http://mya.godaddy.com/default.aspx?isc=foofoo", String.Empty);
+      IAffiliateProvider affiliate = NewAffiliateProvider(1);
+
+      string affiliateType = string.Empty;
+      DateTime affiliateStartDate = DateTime.MinValue;
+
+      Assert.IsFalse(affiliate.ProcessAffiliateSourceCode("foofoo", out affiliateType, out affiliateStartDate));
+
+      Debug.WriteLine(string.Format("Affilitate: {0} | StartDate: {1}", affiliateType, affiliateStartDate));
     }
   }
 }

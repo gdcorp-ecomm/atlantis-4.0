@@ -364,7 +364,7 @@ namespace Atlantis.Framework.Providers.Affiliate
       affiliateStartDate = _affiliateStartDate;
       affiliateType = _affiliateType;
 
-      return _valuesLoaded;
+      return !string.IsNullOrEmpty(affiliateType);
     }
     #endregion
   }

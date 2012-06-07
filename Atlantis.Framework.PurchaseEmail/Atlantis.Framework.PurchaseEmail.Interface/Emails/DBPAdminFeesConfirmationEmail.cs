@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Providers.ProviderContainer.Impl;
+﻿using Atlantis.Framework.Providers.Interface.Links;
+using Atlantis.Framework.Providers.ProviderContainer.Impl;
 using Atlantis.Framework.PurchaseEmail.Interface.Providers;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
@@ -14,7 +15,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     {
       get
       {
-        return Links.GetUrl(LinkTypes.DomainsByProxy, "popup/popup/ShowDoc.aspx", "pageid", "domain_nameproxy"); ;
+        return Links.GetUrl(LinkTypes.DomainsByProxy, "policy/ShowDoc.aspx", QueryParamMode.ExplicitParameters, "pageid", "domain_nameproxy"); ;
       }
     }
 

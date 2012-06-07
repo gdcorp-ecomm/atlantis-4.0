@@ -1,85 +1,41 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
-using Atlantis.Framework.PurchaseEmail.Interface;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Atlantis.Framework.DataProvider.Interface;
+using Atlantis.Framework.PurchaseEmail.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.PurchaseEmail.Tests
 {
-  /// <summary>
-  /// Summary description for UnitTest1
-  /// </summary>
   [TestClass]
   public class UnitTest1
   {
-    public UnitTest1()
-    {
-      //
-      // TODO: Add constructor logic here
-      //
-    }
-
-    private TestContext testContextInstance;
-
-    /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
-    {
-      get
-      {
-        return testContextInstance;
-      }
-      set
-      {
-        testContextInstance = value;
-      }
-    }
-
-    #region Additional test attributes
-    //
-    // You can use the following additional attributes as you write your tests:
-    //
-    // Use ClassInitialize to run code before running the first test in the class
-    // [ClassInitialize()]
-    // public static void MyClassInitialize(TestContext testContext) { }
-    //
-    // Use ClassCleanup to run code after all tests in a class have run
-    // [ClassCleanup()]
-    // public static void MyClassCleanup() { }
-    //
-    // Use TestInitialize to run code before running each test 
-    // [TestInitialize()]
-    // public void MyTestInitialize() { }
-    //
-    // Use TestCleanup to run code after each test has run
-    // [TestCleanup()]
-    // public void MyTestCleanup() { }
-    //
-    #endregion
+    public TestContext TestContext { get; set; }
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("dataprovider.xml")]
-    [DeploymentItem("DomainWithNoAutoRenewViaAlipay.xml")]
     public void ProcessTestOrder()
     {
       Engine.Engine.ReloadConfig();
-      //Load Test order from Test and Re-Send Purchase Email
-      string orderID = "455126";
-      string shopperid = "75866";
 
-      string orderXml = GetOrderXml(orderID, shopperid, 1);
-      PurchaseEmailRequestData request =
-        new PurchaseEmailRequestData(shopperid, string.Empty,orderID, string.Empty, 0, orderXml, "EN");
-      PurchaseEmailResponseData response =
-       (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
-      System.Diagnostics.Debug.WriteLine(request.ToXML());
-      System.Diagnostics.Debug.WriteLine(response.ToXML());
+      // DBP Misc Fee - e-mails tfemiani@godaddy.com
+      // const string ORDER_ID = "463641";
+      // const string SHOPPER_ID = "128561";
+
+      //Load Test order from Test and Re-Send Purchase Email
+      const string ORDER_ID = "455126";
+      const string SHOPPER_ID = "75866";
+
+      string orderXml = GetOrderXml(ORDER_ID, SHOPPER_ID, 1);
+      PurchaseEmailRequestData request = new PurchaseEmailRequestData(SHOPPER_ID, string.Empty, ORDER_ID, string.Empty, 0, orderXml, "EN");
+      PurchaseEmailResponseData response = (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
+
+      TestContext.WriteLine("Request:");
+      TestContext.WriteLine(request.ToXML());
+      TestContext.WriteLine("");
+      TestContext.WriteLine("Response:");
+      TestContext.WriteLine(response.ToXML());
     }
 
     //private string LoadSampleOrderXml(string filename)
@@ -302,52 +258,48 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     //  request.AddOption("CoolEmail", "true");
     //}
 
-    
-    private string GetOrderXml(string orderId, string shopperId,int privateLabelID)
+
+    private static string GetOrderXml(string orderId, string shopperId, int privateLabelID)
     {
-      string _orderXML = string.Empty;
-      if (string.IsNullOrEmpty(_orderXML))
+      string orderXML = string.Empty;
+      try
       {
-        try
-        {
-          Dictionary<string, object> parameters = new Dictionary<string, object>(2);
-          parameters["bstrOrderID"] = orderId;
-          parameters["bstrShopperID"] = shopperId;
-          //Cache Order XML
-          CartGetOrderXML request = new CartGetOrderXML(shopperId, string.Empty, orderId, string.Empty, 0, "WsceCommerce_GetOrderXML", parameters, privateLabelID);
-          request.RequestTimeout = new TimeSpan(0, 0, 4);
-          DataProviderResponseData response = (DataProviderResponseData)DataCache.DataCache.GetProcessRequest(request, 35);
-          object responseObject = response.GetResponseObject();
+        Dictionary<string, object> parameters = new Dictionary<string, object>(2);
+        parameters["bstrOrderID"] = orderId;
+        parameters["bstrShopperID"] = shopperId;
+        //Cache Order XML
+        CartGetOrderXML request = new CartGetOrderXML(shopperId, string.Empty, orderId, string.Empty, 0, "WsceCommerce_GetOrderXML", parameters, privateLabelID);
+        request.RequestTimeout = TimeSpan.FromSeconds(4);
+        DataProviderResponseData response = (DataProviderResponseData)DataCache.DataCache.GetProcessRequest(request, 35);
+        object responseObject = response.GetResponseObject();
 
-          //object responseObject = PageHelpers.ActionHelpers.DataProviderCall(parameters, "WsceCommerce_GetOrderXML", _siteContext, _shopperContext);
-          //null or unknown response
-          if (responseObject == null)
-          {
-            throw new ApplicationException("WsceCommerce webservice returned a NULL or unknown response.");
-          }
-          _orderXML = (string)responseObject;
-        }
-        catch (Exception ex)
+        //object responseObject = PageHelpers.ActionHelpers.DataProviderCall(parameters, "WsceCommerce_GetOrderXML", _siteContext, _shopperContext);
+        //null or unknown response
+        if (responseObject == null)
         {
-          System.Diagnostics.Debug.WriteLine(ex.ToString());
-
+          throw new ApplicationException("WsceCommerce webservice returned a NULL or unknown response.");
         }
+        orderXML = (string)responseObject;
       }
-      return _orderXML;
+      catch (Exception ex)
+      {
+        System.Diagnostics.Debug.WriteLine(ex.ToString());
+      }
+      return orderXML;
     }
 
-    private class CartGetOrderXML : Atlantis.Framework.DataProvider.Interface.DataProviderRequestData
+    private class CartGetOrderXML : DataProviderRequestData
     {
       private int _privateLabelID = 1;
 
       public CartGetOrderXML(string shopperID,
-                                string sourceURL,
-                                string orderID,
-                                string pathway,
-                                int pageCount,
-                                string requestName,
-                                Dictionary<string, object> parms,
-                                int privateLabelID)
+                             string sourceURL,
+                             string orderID,
+                             string pathway,
+                             int pageCount,
+                             string requestName,
+                             Dictionary<string, object> parms,
+                             int privateLabelID)
         : base(shopperID, sourceURL, orderID, pathway, pageCount, requestName, parms)
       {
         _privateLabelID = privateLabelID;
@@ -355,26 +307,15 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
 
       public override string GetCacheMD5()
       {
-        MD5 oMD5 = new MD5CryptoServiceProvider();
+        MD5 md5Encryptor = new MD5CryptoServiceProvider();
+        md5Encryptor.Initialize();
 
-        oMD5.Initialize();
-
-        byte[] stringBytes
-
-        = System.Text.ASCIIEncoding.ASCII.GetBytes("ACOS_ORDER_XML:" + _privateLabelID.ToString() + ":" + ShopperID + ":" + OrderID);
-
-        byte[] md5Bytes = oMD5.ComputeHash(stringBytes);
-
+        byte[] stringBytes = System.Text.Encoding.ASCII.GetBytes("ACOS_ORDER_XML:" + _privateLabelID + ":" + ShopperID + ":" + OrderID);
+        byte[] md5Bytes = md5Encryptor.ComputeHash(stringBytes);
         string sValue = BitConverter.ToString(md5Bytes, 0);
 
         return sValue.Replace("-", "");
-
       }
     }
-
   }
-
-
-  
-
 }

@@ -1,62 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt"  xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays" exclude-result-prefixes="msxsl">
-  <xsl:output method="html" indent="yes" />
 
   <xsl:template match="/">
-    <html xmlns="http://www.w3.org/1999/xhtml">
+    <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>
+    <html>
       <head id="Head1" runat="server">
         <title>Unit Test Results</title>
         <style type="text/css" media="screen">
-          .success_True
-          {
-          color: Green;
-          font-weight: bold;
-          }
-          .success_False
-          {
-          color: Red;
-          font-weight: bold;
-          }
-          .success_Ignore
-          {
-          color: Gold;
-          font-weight: bold;
-          }
-          .rounded
-          {
-          height: 16px;
-          width: 16px;
-          -moz-border-radius: 8px;
-          border-radius: 8px;
-          }
-          .pass
-          {
-          background-color: Green;
-          }
-          .fail
-          {
-          background-color: Red;
-          }
-          .ignore
-          {
-          background-color: Gold;
-          }
-          table
-          {
-          border: solid thin black;
-          }
-          th
-          {
-          border-bottom: solid thin black;
-          }
-          td
-          {
-          border-right: solid thin black;
-          }
-          tfoot tr td
-          {
-          border-top: solid thin black;
-          }
+          .success_True { color: Green; font-weight: bold; }
+          .success_False { color: Red; font-weight: bold; }
+          .success_Ignore { color: Gold; font-weight: bold; }
+          .rounded { height: 16px; width: 16px; -moz-border-radius: 8px; border-radius: 8px; }
+          .pass { background-color: Green; }
+          .fail { background-color: Red; }
+          .ignore { background-color: Gold; }
+          table { border: solid thin black; }
+          th { border-bottom: solid thin black; }
+          td { border-right: solid thin black; }
+          tfoot tr td { border-top: solid thin black; }
         </style>
       </head>
       <body>
@@ -197,6 +158,10 @@
   </xsl:template>
 
   <xsl:template match="//TestResults" mode="summary">
+    <xsl:variable name="totalRun" select="count(//TestResult)"></xsl:variable>
+    <xsl:variable name="totalPassed" select="count(//TestResult[Success ='true'])"></xsl:variable>
+    <xsl:variable name="totalFailed" select="count(//TestResult[Success ='false'])"></xsl:variable>
+    <xsl:variable name="totalIgnored" select="count(//TestResult[Success =''])"></xsl:variable>
     <table cellpadding="2" cellspacing="0" border="0" width="98%">
       <tbody>
         <tr>
@@ -208,20 +173,20 @@
         </tr>
       </tbody>
       <tfoot>
-        <tr>
+        <tr data-totalrun="{$totalRun}" data-totalpassed="{$totalPassed}" data-totalfailed="{$totalFailed}" data-totalignored="{$totalIgnored}">
           <td width="25%" align="center">
             <strong>
-              <xsl:value-of select="count(//TestResult)"  /> Tests Run
+              <xsl:value-of select="$totalRun"  /> Tests Run
             </strong>
           </td>
           <td class="success_True" width="25%" align="center">
-            <xsl:value-of select="count(//TestResult[Success ='true'])"  />   Tests Passed
+            <xsl:value-of select="$totalPassed"  /> Tests Passed
           </td>
           <td class="success_False" width="25%" align="center">
-            <xsl:value-of select="count(//TestResult[Success ='false'])"  />  Tests Failed
+            <xsl:value-of select="$totalFailed"  /> Tests Failed
           </td>
           <td class="success_Ignore" width="25%" align="center">
-            <xsl:value-of select="count(//TestResult[Success =  ''])"  />  Tests Ignored
+            <xsl:value-of select="$totalIgnored"  /> Tests Ignored
           </td>
         </tr>
       </tfoot>

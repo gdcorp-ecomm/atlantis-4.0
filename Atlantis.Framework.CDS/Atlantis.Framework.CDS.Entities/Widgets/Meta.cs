@@ -16,7 +16,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string ShortCutIcon { get; set; }
     public string Description { get; set; }
     public string Keywords { get; set; }
-    public bool Cache { get; set; }
     public bool Robots { get; set; }
   }
 }

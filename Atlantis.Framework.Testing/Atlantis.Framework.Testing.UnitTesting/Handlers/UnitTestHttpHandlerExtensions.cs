@@ -1,8 +1,8 @@
 ﻿using System.Web;
 using System.Web.Routing;
-using Atlantis.Framework.Testing.UnitTesting.Handlers;
+using Atlantis.Framework.Testing.UnitTesting.BaseClasses;
 
-namespace Atlantis.Framework.Testing.UnitTesting.BaseClasses
+namespace Atlantis.Framework.Testing.UnitTesting.Handlers
 {
   public static class UnitTestHttpHandlerExtensions
   {

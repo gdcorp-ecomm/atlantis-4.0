@@ -1,6 +1,4 @@
 ﻿using System;
-using Atlantis.Framework.Testing.UnitTesting.Enums;
-
 
 namespace Atlantis.Framework.Testing.UnitTesting
 {

@@ -4,7 +4,6 @@ using System.Reflection;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Testing.UnitTesting.BaseClasses;
-using Atlantis.Framework.Testing.UnitTesting.Enums;
 using Atlantis.Framework.Testing.UnitTesting.Exceptions;
 
 namespace Atlantis.Framework.Testing.UnitTesting
@@ -41,20 +40,6 @@ namespace Atlantis.Framework.Testing.UnitTesting
           _siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
         }
         return _siteContext;
-      }
-    }
-
-    private IShopperContext _shopperContext;
-
-    private IShopperContext ShopperContext
-    {
-      get
-      {
-        if (_shopperContext == null)
-        {
-          _shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
-        }
-        return _shopperContext;
       }
     }
 

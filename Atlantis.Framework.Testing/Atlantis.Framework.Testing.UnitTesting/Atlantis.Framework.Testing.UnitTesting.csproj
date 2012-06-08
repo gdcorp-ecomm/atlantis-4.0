@@ -34,12 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.Interface">
-      <HintPath>..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\bin\Debug\Atlantis.Framework.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\bin\Debug\Atlantis.Framework.Providers.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -54,7 +48,7 @@
     <Compile Include="BaseClasses\UnitTestBaseHttpHandler.cs" />
     <Compile Include="BaseClasses\TestExtendedLogData.cs" />
     <Compile Include="BaseClasses\TestResultData.cs" />
-    <Compile Include="BaseClasses\UnitTestHttpHandlerExtensions.cs" />
+    <Compile Include="Handlers\UnitTestHttpHandlerExtensions.cs" />
     <Compile Include="BaseClasses\UnitTestHttpHandlerRouteHandler.cs" />
     <Compile Include="BaseClasses\UnitTestLogDataEventArgs.cs" />
     <Compile Include="Enums\AvailableContentReturnTypes.cs" />
@@ -97,6 +91,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\default.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
+      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
+      <Name>Atlantis.Framework.Providers.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

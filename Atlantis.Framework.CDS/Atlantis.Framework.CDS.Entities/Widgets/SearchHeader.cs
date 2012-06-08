@@ -26,7 +26,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public class SocialMediaData
     {
-      public string CanonicalUrl { get; set; }
+      public string FacebookUrl { get; set; }
       public string Description { get; set; }
       public string ImageUrl { get; set; }
       public string ItemType { get; set; }

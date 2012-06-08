@@ -66,6 +66,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string SupportBannerText { get; set; }
     public bool Filtered { get; set; }
     public int MainHeaderHeight { get; set; }
+    public SocialMediaData SocialData { get; set; }
 
     public class MarketingButton
     {
@@ -90,6 +91,21 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       {
         this.Text = string.Empty;
       }
+    }
+
+    public class SocialMediaData
+    {
+      public string CanonicalUrl { get; set; }
+      public string Description { get; set; }
+      public string ImageUrl { get; set; }
+      public string ItemType { get; set; }
+      public string Title { get; set; }
+      public string TweetText { get; set; }
+      public string TweetUrl { get; set; }
+      public string TweetRelated { get; set; }
+      public bool UseFacebook { get; set; }
+      public bool UseTwitter { get; set; }
+      public bool UseGooglePlus { get; set; }
     }
   }
 }

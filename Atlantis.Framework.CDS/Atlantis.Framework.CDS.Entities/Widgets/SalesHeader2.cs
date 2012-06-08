@@ -10,19 +10,14 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
   {
     public SalesHeader2()
     {
-      MainHeadingWidth = 416;
-      RightListTop = 52;
-      HasSupportBanner = false;
     }
 
     public string HeaderImageFile { get; set; }
     public string HeaderSpriteFile { get; set; }
     public string MainHeading { get; set; }
-    public int MainHeadingWidth { get; set; }
     public int SubHeadingWidth { get; set; }
     public bool MainHeadingOn2Lines { get; set; }
     public int RightListLeft { get; set; }
-    public int RightListTop { get; set; }
     public int BottomRightTextTop { get; set; }
     public int BottomRightTextLeft { get; set; }
     public bool Show99PercentBanner { get; set; }
@@ -36,6 +31,68 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string SupportBannerText { get; set; }
     public bool Filtered { get; set; }
     public SocialMediaData SocialData { get; set; }
+
+    private int _headerImageWidth;
+    public int HeaderImageWidth
+    {
+      get 
+      {
+        if (_headerImageWidth == default(int))
+        {
+          _headerImageWidth = 425;
+        }
+        return _headerImageWidth; 
+      }
+      set { _headerImageWidth = value; }
+    }
+
+    private int _headerImageHeight;
+    public int HeaderImageHeight
+    {
+      get 
+      {
+        if (_headerImageHeight == default(int))
+        {
+          _headerImageHeight = 200;
+        }
+        return _headerImageHeight; 
+      }
+      set { _headerImageHeight = value; }
+    }
+
+    private int _mainHeadingWidth;
+    public int MainHeadingWidth
+    {
+      get
+      {
+        if (_mainHeadingWidth == default(int))
+        {
+          _mainHeadingWidth = 416;
+        }
+        return _mainHeadingWidth;
+      }
+      set
+      {
+        _mainHeadingWidth = value;
+      }
+    }
+
+    private int _rightListTop;
+    public int RightListTop
+    {
+      get
+      {
+        if (_rightListTop == default(int))
+        {
+          _rightListTop = 52;
+        }
+        return _rightListTop;
+      }
+      set
+      {
+        _rightListTop = value;
+      }
+    }
 
     public class MarketingButton
     {

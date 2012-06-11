@@ -79,8 +79,8 @@ namespace Atlantis.Framework.WebSecurity
 
           results.AppendFormat("Path={0}  Source={1} Name={2}\n",
                             pageSection.Pages[i].Path, 
-                            pageSection.Pages[i].Name,
-                            pageSection.Pages[i].Source);
+                            pageSection.Pages[i].Source, // Not used for now.
+                            pageSection.Pages[i].Name);
 
         }
       }

@@ -99,10 +99,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages.csproj">
-      <Project>{69A90C5C-706C-49DD-8F1C-78B8FFB67EA3}</Project>
-      <Name>Atlantis.Framework.BasePages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
       <Project>{7F2738F8-683C-49E7-88CD-E986C70F0321}</Project>
       <Name>Atlantis.Framework.DataCache</Name>

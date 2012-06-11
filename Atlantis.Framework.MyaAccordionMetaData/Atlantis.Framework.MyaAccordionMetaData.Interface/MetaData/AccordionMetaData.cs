@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Atlantis.Framework.BasePages;
 using Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData;
 
 namespace Atlantis.Framework.MyaAccordionMetaData.Interface

@@ -72,7 +72,9 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
         });
 
       errorMsg = msg;
-      if (string.IsNullOrEmpty(msg))
+
+      //P84389 - Allow/Ignore superfluous attributes in XML - this will allow Data change to precede supporting DLL changes
+      if (string.IsNullOrEmpty(msg) || msg.Contains("attribute is not declared"))
       {
         isValid = true;
       }

@@ -94,6 +94,34 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       }
     }
 
+    private int _headerImageTopSpacing;
+    public int HeaderImageTopSpacing
+    {
+      get
+      {
+        if (_headerImageTopSpacing == default(int))
+        {
+          _headerImageTopSpacing = 10;
+        }
+        return _headerImageTopSpacing; 
+      }
+      set { _headerImageTopSpacing = value; }
+    }
+
+    private int _headerImageRightSpacing;
+    public int HeaderImageRightSpacing
+    {
+      get 
+      {
+        if (_headerImageRightSpacing == default(int))
+        {
+          _headerImageRightSpacing = 10;
+        }
+        return _headerImageRightSpacing; 
+      }
+      set { _headerImageRightSpacing = value; }
+    }
+
     public class MarketingButton
     {
       public string LargeText { get; set; }
@@ -121,7 +149,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public class SocialMediaData
     {
-      public string CanonicalUrl { get; set; }
+      public string FacebookUrl { get; set; }
       public string Description { get; set; }
       public string ImageUrl { get; set; }
       public string ItemType { get; set; }

@@ -37,13 +37,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public class ModalData
     {
-      public ModalData()
-      {
-        this.TargetDivWidth = 0;
-      }
-
       public string Url { get; set; }
-      [DisplayName("Target Width")]
       public int TargetDivWidth { get; set; }
 
       private string _associatedMktgBtn;
@@ -74,13 +68,10 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public class VideoData : ModalData
     {
-      public VideoData() : base() { }
     }
 
     public class PopupData : ModalData
     {
-      public PopupData() : base() { }
-
       [DisplayName("Window Name")]
       public string WindowName { get; set; }
       [DisplayName("Window Params")]

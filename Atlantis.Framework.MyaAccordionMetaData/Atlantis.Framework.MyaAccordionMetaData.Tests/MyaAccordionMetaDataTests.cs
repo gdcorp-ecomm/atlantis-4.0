@@ -95,7 +95,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
                 Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("X:{0},Y:{1},Width:{2},Height:{3}", coords.X, coords.Y, coords.Width, coords.Height)));
                 break;
               case "Content":
-                Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("AccountList: {0} | JsonPage: {1} | CiOptions: {2}", accordion.Content.AccountList, accordion.Content.JsonPage, accordion.Content.CiOptions)));
+                Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("AccountList: {0} | JsonPage: {1} | CiOptions: {2} | ShowOptionsMgrOnly: {3}", accordion.Content.AccountList, accordion.Content.JsonPage, accordion.Content.CiOptions, accordion.Content.ShowOptionsButtonForManagerOnly)));
                 if (accordion.Content.ShowBuyLink)
                 {
                   StringBuilder sb = new StringBuilder();

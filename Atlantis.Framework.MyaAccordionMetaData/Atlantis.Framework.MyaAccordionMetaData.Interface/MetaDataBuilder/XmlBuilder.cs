@@ -250,10 +250,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
 
     private ContentData CreateContentData(string contentXml)
     {
-
       string msg = string.Empty;
       ContentData content = null;
       XElement link = null;
+      string showOptionsForMgrOnly = string.Empty;
 
       _contentXDoc = XDocument.Parse(contentXml);
       if (XmlValidator.ValidateContentXml(_contentXDoc, out msg))
@@ -266,13 +266,38 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
         {
           link = null;
         }
-        if (link == null)
+
+        try
         {
-          content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"));
+          showOptionsForMgrOnly = _contentXDoc.Element("content").Element("data").Attribute("optionsmgronly").Value;
         }
-        else
+        catch
         {
-          content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentBuyLinkXml(link));
+          showOptionsForMgrOnly = string.Empty;
+        }
+
+        switch (link == null)
+        {
+          case true:
+            if (string.IsNullOrEmpty(showOptionsForMgrOnly))
+            {
+              content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"));            
+            }
+            else
+            {
+              content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentXml("optionsmgronly"));            
+            }
+            break;
+          case false:
+            if (string.IsNullOrEmpty(showOptionsForMgrOnly))
+            {
+              content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentBuyLinkXml(link));            
+            }
+            else
+            {
+              content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentXml("optionsmgronly"), ParseContentBuyLinkXml(link));            
+            }
+            break;        
         }
       }
       else

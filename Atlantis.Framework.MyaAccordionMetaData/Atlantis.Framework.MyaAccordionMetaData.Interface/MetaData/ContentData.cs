@@ -34,11 +34,15 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
     {
       get { return _showBuyLink; }
     }
-
+    private readonly bool _showOptionsButtonForManagerOnly;
+    public bool ShowOptionsButtonForManagerOnly
+    {
+      get { return _showOptionsButtonForManagerOnly; }
+    }
     #endregion
 
     #region Constructors
-    internal ContentData(string accountList, string jsonPage, string ciOptions, LinkUrlData linkUrl)
+    internal ContentData(string accountList, string jsonPage, string ciOptions, string optionsMgrOnly, LinkUrlData linkUrl)
     {
       _accountList = accountList;
       _jsonPage = jsonPage;
@@ -46,10 +50,19 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
       _linkUrl = linkUrl;
       _showOptionsButton = !string.IsNullOrEmpty(CiOptions);
       _showBuyLink = LinkUrl != null;
+      _showOptionsButtonForManagerOnly = !string.IsNullOrEmpty(optionsMgrOnly);
     }
 
     internal ContentData(string accountList, string jsonPage, string ciOptions)
-      : this(accountList, jsonPage, ciOptions, null)
+      : this(accountList, jsonPage, ciOptions, null, null)
+    { }
+
+    internal ContentData(string accountList, string jsonPage, string ciOptions, string optionsMgrOnly)
+      : this(accountList, jsonPage, ciOptions, optionsMgrOnly, null)
+    { }
+
+    internal ContentData(string accountList, string jsonPage, string ciOptions, LinkUrlData linkUrl)
+      : this(accountList, jsonPage, ciOptions, null, linkUrl)
     { }
     #endregion
   }

@@ -39,7 +39,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     {
       public string Url { get; set; }
       [DisplayName("Target Width")]
-      [DefaultValue(0)]
       public int TargetDivWidth { get; set; }
 
       private string _associatedMktgBtn;

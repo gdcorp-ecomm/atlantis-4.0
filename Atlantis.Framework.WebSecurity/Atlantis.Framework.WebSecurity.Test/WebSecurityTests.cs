@@ -74,10 +74,11 @@ namespace Atlantis.Framework.WebSecurity
         for (int i = 0; i < pageSection.Pages.Count; i++)
         {
 
-          results.AppendFormat("Path={0}  Source={1} Name={2}\n",
+          results.AppendFormat("key={0} name={1} path={2}{3}",
+                            pageSection.Pages[i].Key,
                             pageSection.Pages[i].RelativePath, 
-                            pageSection.Pages[i].Source, // Not used for now.
-                            pageSection.Pages[i].Name);
+                            pageSection.Pages[i].Name,
+                            Environment.NewLine);
 
         }
       }

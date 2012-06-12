@@ -65,10 +65,6 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
-      <Project>{2F8983B4-801B-461A-9D76-26A58A496261}</Project>
-      <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.WebSecurity\Atlantis.Framework.WebSecurity.csproj">
       <Project>{AD7B259F-883D-4F92-BAF6-84DE18C2BDB1}</Project>
       <Name>Atlantis.Framework.WebSecurity</Name>

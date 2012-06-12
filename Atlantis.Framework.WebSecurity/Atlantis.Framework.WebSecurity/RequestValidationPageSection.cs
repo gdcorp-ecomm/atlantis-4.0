@@ -21,20 +21,12 @@ namespace Atlantis.Framework.WebSecurity
     {
       return new PageConfigElement();
     }
-
-
-    protected override
-        ConfigurationElement CreateNewElement(
-        string elementName)
-    {
-      return new PageConfigElement(elementName);
-    }
-
+    
 
     protected override Object
         GetElementKey(ConfigurationElement element)
     {
-      return ((PageConfigElement)element).Name;
+      return ((PageConfigElement)element).Key;
     }
 
 
@@ -168,39 +160,60 @@ namespace Atlantis.Framework.WebSecurity
 
   public class PageConfigElement : ConfigurationElement
   {
-    public PageConfigElement(){}
+    // Constructor allowing path, source, and key to be specified.
+    public PageConfigElement(String path, String source, String name)
+    {
+      RelativePath = path;
+      Source = source;
+      Name = name;
+      this["key"] = Guid.NewGuid().ToString();
+    }
 
-    [ConfigurationProperty("path",
+    public PageConfigElement()
+    {
+      this["key"] = Guid.NewGuid().ToString();
+    }
+
+    /// <summary>
+    /// Dynamically add a key, otherwise there is a possibility that web config attributes might not be unique.
+    /// </summary>
+    [ConfigurationProperty("key",
        DefaultValue = "",
        IsRequired = true,
        IsKey = true)]
-    public string Path
+    public string Key
     {
 
       get
       {
-        return (string)this["path"];
+        return (string)this["key"];
       }
       set
       {
-        this["path"] = value;
+        this["key"] = value;
       }
 
     }
 
-    // Constructor allowing path, source, and key to be specified.
-    public PageConfigElement(String path, String source, String name)
+    [ConfigurationProperty("relativePath",
+       DefaultValue = "",
+       IsRequired = true,
+       IsKey = false)]
+    public string RelativePath
     {
-      Path = path;
-      Source = source;
-      Name = name;
+
+      get
+      {
+        return (string)this["relativePath"];
+      }
+      set
+      {
+        this["relativePath"] = value;
+      }
+
     }
 
-    public PageConfigElement(string elementName)
-    {
-      Path = elementName;
-    }
-
+    
     [ConfigurationProperty("name",
         IsRequired = true,
         IsKey = false)]
@@ -240,7 +253,6 @@ namespace Atlantis.Framework.WebSecurity
       return ret;
 
     }
-
 
     protected override bool IsModified()
     {

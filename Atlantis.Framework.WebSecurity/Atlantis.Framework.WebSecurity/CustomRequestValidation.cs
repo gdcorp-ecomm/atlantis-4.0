@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Configuration;
-using System.IO;
 using System.Web;
 using System.Web.Util;
 
 namespace Atlantis.Framework.WebSecurity
 {
+  /// <summary>
+  /// Custom validate pages in the web config if found; otherwise, let the base validate the request.
+  /// </summary>
   public class CustomRequestValidator : RequestValidator
   {
     protected override bool IsValidRequestString(HttpContext context, string value,
@@ -16,17 +18,20 @@ namespace Atlantis.Framework.WebSecurity
 
       bool? isValid = null;
 
+      // Custom validate only form content requests.
       if (requestValidationSource == RequestValidationSource.Form)
       {
+        // Get the section with all the pages to validate.
         var pageSection = (RequestValidationPageSection) ConfigurationManager.GetSection("atlantis/security");
         if (pageSection != null)
         {
           for (int i = 0; i < pageSection.Pages.Count; i++)
           {
-            var currentPage = Path.GetFileName(context.Request.PhysicalPath) ?? string.Empty;
-            var path = pageSection.Pages[i].Path;
+            var contextRelativePath = context.Request.Url.AbsolutePath;
+            var pageSectionRelativePath = pageSection.Pages[i].RelativePath;
 
-            if (!string.IsNullOrEmpty(path) && currentPage.Equals(path, StringComparison.OrdinalIgnoreCase) && pageSection.Pages[i].Name == collectionKey)
+            // If config relative path and input name matches the request, skip the validation.
+            if (!string.IsNullOrEmpty(pageSectionRelativePath) && contextRelativePath.Equals(pageSectionRelativePath, StringComparison.OrdinalIgnoreCase) && pageSection.Pages[i].Name == collectionKey)
             {
               isValid = true;
               break;

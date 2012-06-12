@@ -2,7 +2,6 @@
 using System.Configuration;
 using System.Diagnostics;
 using System.Text;
-using Atlantis.Framework.Testing.MockHttpContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.WebSecurity
@@ -68,8 +67,6 @@ namespace Atlantis.Framework.WebSecurity
 	[DeploymentItem("App.config")]
     public void WebSecurityTest()
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://localhost/default.aspx", string.Empty);
-
       var pageSection = (RequestValidationPageSection)ConfigurationManager.GetSection("atlantis/security");
       var results = new StringBuilder();
       if (pageSection != null)
@@ -78,7 +75,7 @@ namespace Atlantis.Framework.WebSecurity
         {
 
           results.AppendFormat("Path={0}  Source={1} Name={2}\n",
-                            pageSection.Pages[i].Path, 
+                            pageSection.Pages[i].RelativePath, 
                             pageSection.Pages[i].Source, // Not used for now.
                             pageSection.Pages[i].Name);
 

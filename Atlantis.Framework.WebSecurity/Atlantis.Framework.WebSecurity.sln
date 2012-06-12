@@ -11,11 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockHttpContext", "..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj", "{2F8983B4-801B-461A-9D76-26A58A496261}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
@@ -26,16 +24,13 @@ Global
 		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.WebSecurity.sln
 		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
 		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
-		SccProjectName2 = ../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
-		SccLocalPath2 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
-		SccLocalPath3 = .
-		SccProjectUniqueName4 = Atlantis.Framework.WebSecurity.Test\\Atlantis.Framework.WebSecurity.Test.csproj
-		SccProjectName4 = Atlantis.Framework.WebSecurity.Test
-		SccLocalPath4 = Atlantis.Framework.WebSecurity.Test
-		SccProjectUniqueName5 = Atlantis.Framework.WebSecurity\\Atlantis.Framework.WebSecurity.csproj
-		SccProjectName5 = Atlantis.Framework.WebSecurity
-		SccLocalPath5 = Atlantis.Framework.WebSecurity
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = Atlantis.Framework.WebSecurity.Test\\Atlantis.Framework.WebSecurity.Test.csproj
+		SccProjectName3 = Atlantis.Framework.WebSecurity.Test
+		SccLocalPath3 = Atlantis.Framework.WebSecurity.Test
+		SccProjectUniqueName4 = Atlantis.Framework.WebSecurity\\Atlantis.Framework.WebSecurity.csproj
+		SccProjectName4 = Atlantis.Framework.WebSecurity
+		SccLocalPath4 = Atlantis.Framework.WebSecurity
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,10 +53,6 @@ Global
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

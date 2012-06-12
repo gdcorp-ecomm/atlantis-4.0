@@ -88,7 +88,7 @@ namespace Atlantis.Framework.PayeeProfileGet.Interface
       if (gag != null)
       {
         PayeeProfile.GAGClass gagProfile = new PayeeProfile.GAGClass();
-        foreach (XAttribute attr in ach.Attributes())
+        foreach (XAttribute attr in gag.Attributes())
         {
           gagProfile[attr.Name.ToString().ToLowerInvariant()] = attr.Value;
         }

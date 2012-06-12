@@ -97,7 +97,6 @@
     <Compile Include="Widgets\SalesHeader2.cs" />
     <Compile Include="Widgets\SalesScript.cs" />
     <Compile Include="Widgets\SearchHeader.cs" />
-    <Compile Include="Widgets\SearchHeader_001.cs" />
     <Compile Include="Widgets\Support.cs" />
     <Compile Include="Widgets\TabContent.cs" />
     <Compile Include="Widgets\TabsContainer.cs" />

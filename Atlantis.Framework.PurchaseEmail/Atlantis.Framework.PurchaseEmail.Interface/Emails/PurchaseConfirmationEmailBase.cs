@@ -511,34 +511,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         HostPhoneUsaIntlGet(out hostPhoneUsa, out hostPhoneIntl);
         if (HostingConciergeEnabled && !String.IsNullOrEmpty(hostPhoneIntl) && !String.IsNullOrEmpty(hostPhoneUsa))
         {
-          if (longText)
-          {
-            conciergeText.Append("[%%LCST.REQ.UTOS_PRIORITY%%] ");
-          }
-          conciergeText.Append("[%%LCST.REQ.UTOS_CALL%%] ");
-          if (boldPhoneNumbers)
-          {
-            conciergeText.Append("<span style='font-weight:bolder'>");
-          }
-          conciergeText.Append(hostPhoneUsa);
-          if (boldPhoneNumbers)
-          {
-            conciergeText.Append("</span>");
-          }
-          conciergeText.Append(" [%%LCST.REQ.UTOS_USONLY%%] ");
-          if (boldPhoneNumbers)
-          {
-            conciergeText.Append("<span style='font-weight:bolder'>");
-          }
-          conciergeText.Append(hostPhoneIntl);
-          if (boldPhoneNumbers)
-          {
-            conciergeText.Append("</span>");
-          }
-          if (!longText)
-          {
-            conciergeText.Append(" [%%LCST.REQ.UTOS_SETUP_HELP%%]");
-          }
+          conciergeText.Append("<b>");
+          conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT1%%]<br /><br />");
+          conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT2%%]<br /><br />");
+          conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT3%%]<br />");
+          conciergeText.Append("</b>");          
         }
       }
       return conciergeText.ToString();

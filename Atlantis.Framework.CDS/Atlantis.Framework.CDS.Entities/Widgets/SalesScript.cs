@@ -18,9 +18,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
   {
     public SalesScript()
     {
-      this.CurrentPopup = new PopupData();
-      this.CurrentQuickTour = new ModalData();
-      this.CurrentVideo = new VideoData();
     }
 
     [DisplayName("IPad Video Url")]

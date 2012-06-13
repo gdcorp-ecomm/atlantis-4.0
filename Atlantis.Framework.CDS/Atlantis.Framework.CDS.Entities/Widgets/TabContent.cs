@@ -17,7 +17,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
   {
     public TabContent()
     {
-      this.Tab = new CurrentTab();
     }
 
     public string TabHeaderText { get; set; }
@@ -29,7 +28,20 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public int TwoZonesRightWidth { get; set; }
     [JsonIgnore]
     public List<Widget<IWidgetModel>> Widgets { get; set; }
-    public CurrentTab Tab { get; set; }
+
+    private CurrentTab _tab;
+    public CurrentTab Tab
+    {
+      get 
+      {
+        if (_tab == null)
+        {
+          _tab = new CurrentTab();
+        }
+        return _tab; 
+      }
+      set { _tab = value; }
+    }
 
     public class CurrentTab
     {

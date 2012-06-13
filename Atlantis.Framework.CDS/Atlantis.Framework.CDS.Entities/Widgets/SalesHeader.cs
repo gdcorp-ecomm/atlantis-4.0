@@ -66,7 +66,20 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string SupportBannerText { get; set; }
     public bool Filtered { get; set; }
     public int MainHeaderHeight { get; set; }
-    public SocialMediaData SocialData { get; set; }
+
+    private SocialMediaData _socialData;
+    public SocialMediaData SocialData
+    {
+      get 
+      {
+        if (_socialData == null)
+        {
+          _socialData = new SocialMediaData();
+        }
+        return _socialData; 
+      }
+      set { _socialData = value; }
+    }
 
     public class MarketingButton
     {

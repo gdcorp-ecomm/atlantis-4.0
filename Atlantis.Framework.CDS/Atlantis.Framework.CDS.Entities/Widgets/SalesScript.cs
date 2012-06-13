@@ -31,9 +31,48 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public bool HasVideo { get; set; }
     [DisplayName("Has Popup")]
     public bool HasPopup { get; set; }
-    public ModalData CurrentQuickTour { get; set; }
-    public VideoData CurrentVideo { get; set; }
-    public PopupData CurrentPopup { get; set; }
+
+    private ModalData _currentQuickTour;
+    public ModalData CurrentQuickTour
+    {
+      get 
+      {
+        if (_currentQuickTour == null)
+        {
+          _currentQuickTour = new ModalData();
+        }
+        return _currentQuickTour; 
+      }
+      set { _currentQuickTour = value; }
+    }
+
+    private VideoData _currentVideo;
+    public VideoData CurrentVideo
+    {
+      get
+      {
+        if (_currentVideo == null)
+        {
+          _currentVideo = new VideoData();
+        }
+        return _currentVideo; 
+      }
+      set { _currentVideo = value; }
+    }
+
+    private PopupData _currentPopup;
+    public PopupData CurrentPopup
+    {
+      get 
+      {
+        if (_currentPopup == null)
+        {
+          _currentPopup = new PopupData();
+        }
+        return _currentPopup; 
+      }
+      set { _currentPopup = value; }
+    }
 
     public class ModalData
     {

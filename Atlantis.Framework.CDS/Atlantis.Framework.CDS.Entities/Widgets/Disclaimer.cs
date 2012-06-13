@@ -10,7 +10,20 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
   {
     public List<string> Disclaimers { get; set; }
     public bool HasModal { get; set; }
-    public ModalData CurrentModal { get; set; }
+
+    private ModalData _currentModal;
+    public ModalData CurrentModal
+    {
+      get 
+      {
+        if (_currentModal == null)
+        {
+          _currentModal = new ModalData();
+        }
+        return _currentModal; 
+      }
+      set { _currentModal = value; }
+    }
 
     public class ModalData
     {

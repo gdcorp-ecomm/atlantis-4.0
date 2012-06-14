@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B47E10DB-F819-472C-8293-C511B8CFFACA}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 6
@@ -34,9 +36,11 @@ Global
 		SccProjectName3 = Atlantis.Framework.FastballLogImpressions.Tests
 		SccLocalPath3 = Atlantis.Framework.FastballLogImpressions.Tests
 		SccProjectUniqueName4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.FastballLogImpressions.sln
 		SccProjectName4 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
 		SccLocalPath4 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
 		SccProjectUniqueName5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.FastballLogImpressions.sln
 		SccProjectName5 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
 		SccLocalPath5 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
 	EndGlobalSection
@@ -71,5 +75,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {B47E10DB-F819-472C-8293-C511B8CFFACA}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {B47E10DB-F819-472C-8293-C511B8CFFACA}
 	EndGlobalSection
 EndGlobal

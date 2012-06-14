@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Security;
+using System.Web;
 using System.Xml;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.FastballLogImpressions.Interface;
@@ -112,8 +113,9 @@ namespace Atlantis.Framework.FastballLogImpressions.Impl
       wsHttpBinding.Security.Message.AlgorithmSuite = SecurityAlgorithmSuite.Default;
       wsHttpBinding.Security.Message.EstablishSecurityContext = true;
 
+
       EndpointAddressBuilder endpointAddressBuilder = new EndpointAddressBuilder();
-      endpointAddressBuilder.Identity = EndpointIdentity.CreateDnsIdentity("localhost");
+      endpointAddressBuilder.Identity = EndpointIdentity.CreateDnsIdentity(webServiceUrl);
       endpointAddressBuilder.Uri = new Uri(webServiceUrl);
 
       return new DynamicTrafficClient(wsHttpBinding, endpointAddressBuilder.ToEndpointAddress());

@@ -16,10 +16,15 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     }
     public string CustomSupportNumber { get; set; }
 
-    private string _communityGroup = "product group of your choice";
+    private string _communityGroup;
     public string CommunityGroup
     {
-      get { return _communityGroup; }
+      get {
+        if (string.IsNullOrWhiteSpace(_communityGroup))
+        {
+          _communityGroup = "product group of your choice";
+        }
+        return _communityGroup; }
       set { _communityGroup = value; }
     }
 

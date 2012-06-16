@@ -70,6 +70,7 @@
     <Compile Include="Widgets\Detail.cs" />
     <Compile Include="Widgets\Disclaimer.cs" />
     <Compile Include="Widgets\DisclaimerModal.cs" />
+    <Compile Include="Widgets\DPPFreeExtras.cs" />
     <Compile Include="Widgets\ElementBase.cs" />
     <Compile Include="Widgets\FAQ.cs" />
     <Compile Include="Widgets\Features.cs" />

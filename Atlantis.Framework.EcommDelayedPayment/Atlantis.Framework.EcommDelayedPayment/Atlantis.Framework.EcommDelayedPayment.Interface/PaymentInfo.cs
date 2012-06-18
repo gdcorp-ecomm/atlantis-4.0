@@ -23,6 +23,7 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
     public string TranslationLanguage { get; set; }
     public string CurrencyDisplay { get; set; }
     public string Default_DataCenter { get; set; }
+    public string ReqISCAmount { get; set; }
 
     private void AddAttribute(string attributeName, string value, XmlTextWriter xmlWriter)
     {
@@ -50,6 +51,8 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
       AddAttribute("translationLanguage", TranslationLanguage, xtwRequest);
       AddAttribute("currencyDisplay", CurrencyDisplay, xtwRequest);
       AddAttribute("default_datacenter", Default_DataCenter, xtwRequest);
+
+      xtwRequest.WriteAttributeString("reqISCAmount", ReqISCAmount); // Write the attribute with possibly empty string.
       xtwRequest.WriteEndElement();
     }
   }

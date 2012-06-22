@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
-
+using Atlantis.Framework.Auth.Interface;
 using Atlantis.Framework.AuthResetPassword.Impl.AuthenticationWS;
 using Atlantis.Framework.AuthResetPassword.Interface;
 using Atlantis.Framework.Interface;
@@ -16,41 +17,55 @@ namespace Atlantis.Framework.AuthResetPassword.Impl
 
       try
       {
-        string authServiceUrl = ((WsConfigElement)oConfig).WSURL;
-        if (!authServiceUrl.StartsWith( "https://", StringComparison.InvariantCultureIgnoreCase ))
+        WsConfigElement wsConfigElement = (WsConfigElement) oConfig;
+        string authServiceUrl = wsConfigElement.WSURL;
+
+        if (!authServiceUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
         {
           throw new AtlantisException( oRequestData, "AuthResetPassword.RequestHandler", "AuthResetPassword WS URL in atlantis.config must use https.", string.Empty );
         }
 
-        using (WScgdAuthenticateService authenticationService = new WScgdAuthenticateService())
+        using (Authentication authenticationService = new Authentication())
         {
-          authenticationService.Url = authServiceUrl;
-          authenticationService.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
+          long statusCode = AuthResetPasswordStatusCodes.Error;
 
-          AuthResetPasswordRequestData request = (AuthResetPasswordRequestData)oRequestData;
-          HashSet<int> responseCodes = ValidateRequest(request);
-          string errorOutput;
-
-          if (responseCodes.Count > 0)
+          AuthResetPasswordRequestData requestData = (AuthResetPasswordRequestData)oRequestData;
+          HashSet<int> validationCodes = ValidateRequest(requestData);
+          
+          string statusMessage;
+          if (validationCodes.Count > 0)
           {
-            errorOutput = "Request not valid.";
+            statusMessage = "Validation errors.";
           }
           else
           {
-            int resultCode = authenticationService.ResetPassword(request.ShopperID, request.PrivateLabelId, request.IpAddress, request.NewPassword, request.NewHint, request.AuthToken, out errorOutput);
-            responseCodes.Add(resultCode);
+            authenticationService.Url = authServiceUrl;
+            authenticationService.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
+
+            X509Certificate2 clientCertificate = wsConfigElement.GetClientCertificate();
+            if (clientCertificate == null)
+            {
+              throw new AtlantisException(requestData, "AuthResetPassword.RequestHandler", "Unable to find client certificate for web service call.", string.Empty);
+            }
+
+            authenticationService.ClientCertificates.Add(clientCertificate);
+
+            if(!string.IsNullOrEmpty(requestData.TwoFactorAuthToken))
+            {
+              statusCode = authenticationService.ResetPasswordWithToken(requestData.ShopperID, requestData.PrivateLabelId, requestData.IpAddress, requestData.NewPassword, requestData.NewHint, requestData.EmailAuthToken, requestData.TwoFactorAuthToken, string.Empty, requestData.HostName, out statusMessage);  
+            }
+            else
+            {
+              statusCode = authenticationService.ResetPassword(requestData.ShopperID, requestData.PrivateLabelId, requestData.IpAddress, requestData.NewPassword, requestData.NewHint, requestData.EmailAuthToken, out statusMessage);  
+            }
           }
 
-          responseData = new AuthResetPasswordResponseData(responseCodes, errorOutput);
+          responseData = new AuthResetPasswordResponseData(statusCode, validationCodes, statusMessage);
         }
-      }
-      catch (AtlantisException exAtlantis)
-      {
-        responseData = new AuthResetPasswordResponseData( exAtlantis );
       }
       catch (Exception ex)
       {
-        responseData = new AuthResetPasswordResponseData( oRequestData, ex );
+        responseData = new AuthResetPasswordResponseData(oRequestData, ex);
       }
 
       return responseData;
@@ -60,69 +75,70 @@ namespace Atlantis.Framework.AuthResetPassword.Impl
     {
       HashSet<int> result = new HashSet<int>();
 
-      #region ShopperID
-      if (string.IsNullOrEmpty( request.ShopperID ))
+      #region ShopperId
+
+      if (string.IsNullOrEmpty(request.ShopperID))
       {
-        result.Add(AuthResetPasswordStatusCodes.ValidateShopperIdRequired);
+        result.Add(AuthValidationCodes.ValidateShopperIdRequired);
       }
+
       #endregion
 
       #region IpAddress
-      if (string.IsNullOrEmpty( request.IpAddress ))
+
+      if (string.IsNullOrEmpty(request.IpAddress))
       {
-        result.Add(AuthResetPasswordStatusCodes.ValidateIpAddressRequired);
+        result.Add(AuthValidationCodes.ValidateIpAddressRequired);
       }
+
       #endregion
 
       #region NewPassword
-      if (string.IsNullOrEmpty( request.NewPassword ))
+
+      if (string.IsNullOrEmpty(request.NewPassword))
       {
-        result.Add(AuthResetPasswordStatusCodes.ValidatePasswordRequired);
+        result.Add(AuthValidationCodes.ValidatePasswordRequired);
       }
-      else
-      {
-        if (request.NewPassword.Length > 255)
-        {
-          result.Add( AuthResetPasswordStatusCodes.PasswordTooLong );
-        }
-        else if (request.NewPassword.Length < 9)
-        {
-          result.Add( AuthResetPasswordStatusCodes.PasswordTooShort );
-        }
-      }
+
       #endregion
 
       #region NewHint
-      if (string.IsNullOrEmpty( request.NewHint ))
+
+      if (string.IsNullOrEmpty(request.NewHint))
       {
-        result.Add(AuthResetPasswordStatusCodes.ValidateHintRequired);
+        result.Add(AuthValidationCodes.ValidateHintRequired);
       }
       else
       {
         if (request.NewHint.Length > 255)
         {
-          result.Add(AuthResetPasswordStatusCodes.ValidateHintMaxLength);
+          result.Add(AuthValidationCodes.ValidateHintMaxLength);
         }
 
         if (Regex.Match( request.NewHint, "[^\x20-\x3b\x3f-\x7e]" ).Success)
         {
-          result.Add(AuthResetPasswordStatusCodes.ValidateHintInvalidCharacters);
+          result.Add(AuthValidationCodes.ValidateHintInvalidCharacters);
         }
       }
+
       #endregion
 
       #region AuthToken
-      if (String.IsNullOrEmpty( request.AuthToken ))
+
+      if (string.IsNullOrEmpty(request.EmailAuthToken))
       {
-        result.Add(AuthResetPasswordStatusCodes.ValidateAuthTokenRequired);
+        result.Add(AuthValidationCodes.ValidateEmailAuthTokenRequired);
       }
+
       #endregion
 
       #region Cross-Field Rules
+
       if (request.NewHint == request.NewPassword)
       {
-        result.Add( AuthResetPasswordStatusCodes.PasswordHintMatch );
+        result.Add(AuthValidationCodes.ValidatePasswordHintMatch);
       }
+
       #endregion
 
       return result;

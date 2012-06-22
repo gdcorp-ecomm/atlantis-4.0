@@ -7,54 +7,34 @@ namespace Atlantis.Framework.AuthResetPassword.Interface
 {
   public class AuthResetPasswordResponseData : IResponseData
   {
-    private readonly AtlantisException m_ex;
+    private readonly AtlantisException _atlantisException;
 
-    private AuthResetPasswordResponseData( int statusCode, string statusMessage )
-    {
-      StatusCodes = new HashSet<int> { statusCode };
-      StatusMessage = statusMessage ?? String.Empty;
-    }
+    public HashSet<int> ValidationCodes { get; private set; }
 
-    public AuthResetPasswordResponseData( IEnumerable<int> statusCodes, string statusMessage )
-    {
-      StatusCodes = new HashSet<int>( statusCodes );
-      StatusMessage = statusMessage ?? String.Empty;
-    }
-
-    public AuthResetPasswordResponseData( AtlantisException ex )
-      : this( AuthResetPasswordStatusCodes.Error, null )
-    {
-      m_ex = ex;
-    }
-
-    public AuthResetPasswordResponseData( RequestData requestData, Exception ex )
-      : this( AuthResetPasswordStatusCodes.Error, null )
-    {
-      m_ex = new AtlantisException( requestData, "AuthResetPasswordResponseData",
-        "Exception when Resetting Password", String.Empty, ex );
-    }
-
-    public HashSet<int> StatusCodes { get; private set; }
+    public long StatusCode { get; private set; }
 
     public string StatusMessage { get; private set; }
 
-    public bool IsSuccess
+    public AuthResetPasswordResponseData(long statusCode, HashSet<int> validationCodes, string statusMessage)
     {
-      get { return (StatusCodes.Count == 1) && (StatusCodes.Contains( AuthResetPasswordStatusCodes.Success )); }
+      StatusCode = statusCode;
+      ValidationCodes = validationCodes;
+      StatusMessage = statusMessage ?? string.Empty;
     }
 
-    #region IResponseData Members
+    public AuthResetPasswordResponseData(RequestData requestData, Exception ex) : this(AuthResetPasswordStatusCodes.Error, new HashSet<int>(), string.Empty)
+    {
+      _atlantisException = new AtlantisException(requestData, "AuthResetPasswordResponseData", string.Format("Unhandled exception reseting password.|{0}|{1}", ex.Message, ex.StackTrace), string.Empty, ex);
+    }
 
     public string ToXML()
     {
-      throw new NotImplementedException();
+      return string.Empty;
     }
 
     public AtlantisException GetException()
     {
-      return m_ex;
+      return _atlantisException;
     }
-
-    #endregion
   }
 }

@@ -12,9 +12,6 @@ namespace Atlantis.Framework.AuthResetPassword.Interface
     public const long LoginHintMatch = -4;
     public const long LoginPasswordMatch = -5;
     public const long PasswordHintMatch = -6;
-    public const long PasswordHasNoNumeric = -12;
-    public const long PasswordHasNoCapitals = -13;
-    public const long PasswordPreviouslyUsed = -14;
     public const long PasswordFailBlacklisted = -101;
     public const long PasswordFailMinLength = -102;
     public const long PasswordFailMaxLength = -103;
@@ -22,6 +19,8 @@ namespace Atlantis.Framework.AuthResetPassword.Interface
     public const long PasswordFailNoNumber = -105;
     public const long PasswordFailMatchesHint = -106;
     public const long PasswordFailThirtyDay = -107;
-    public const long PasswordFailLastFive = -108;  
+    public const long PasswordFailLastFive = -108;
+    public const long TwoFactorValidationFailed = -201;
+    public const long TwoFactorTokenRequired = -202;
   }
 }

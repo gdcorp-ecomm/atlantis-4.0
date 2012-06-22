@@ -33,7 +33,7 @@ namespace Atlantis.Framework.Providers.ProxyContext
         }
         else if ((OriginalHost != null) && (OriginalIP != null))
         {
-          _status = isWhiteListed ? HeaderValueStatus.Valid : HeaderValueStatus.Invalid;
+          _status = isWhiteListed || IsAddressThisMachine(ipAddress) ? HeaderValueStatus.Valid : HeaderValueStatus.Invalid;
         }
       }
       return _status;

@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.AuthResetPassword.Interface
@@ -20,14 +19,14 @@ namespace Atlantis.Framework.AuthResetPassword.Interface
 
     public string TwoFactorAuthToken { get; private set; }
 
-    public string TwoFactorPhoneNumber { get; private set; }
+    public string TwoFactorFullPhoneNumber { get; private set; }
 
     public AuthResetPasswordRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, int privateLabelId, string ipAddress, string hostName, string newPassword, string newHint, string emailAuthToken)
-                                        : this(shopperId, sourceUrl, orderId, pathway, pageCount, privateLabelId, ipAddress, hostName, newPassword, newHint, emailAuthToken, string.Empty, string.Empty)
+                                        : this(shopperId, sourceUrl, orderId, pathway, pageCount, privateLabelId, ipAddress, hostName, newPassword, newHint, emailAuthToken, string.Empty, string.Empty, string.Empty)
     {
     }
 
-    public AuthResetPasswordRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, int privateLabelId, string ipAddress, string hostName, string newPassword, string newHint, string emailAuthToken, string twoFactorAuthToken, string twoFactorPhoneNumber)
+    public AuthResetPasswordRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, int privateLabelId, string ipAddress, string hostName, string newPassword, string newHint, string emailAuthToken, string twoFactorAuthToken, string twoFactorCountryCode, string twoFactorPhoneNumber)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       PrivateLabelId = privateLabelId;
@@ -37,7 +36,7 @@ namespace Atlantis.Framework.AuthResetPassword.Interface
       NewHint = newHint;
       EmailAuthToken = emailAuthToken;
       TwoFactorAuthToken = twoFactorAuthToken;
-      TwoFactorPhoneNumber = twoFactorPhoneNumber;
+      TwoFactorFullPhoneNumber = twoFactorCountryCode + twoFactorPhoneNumber;
     }
 
     public override string GetCacheMD5()

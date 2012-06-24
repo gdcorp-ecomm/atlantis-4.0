@@ -50,9 +50,10 @@ namespace Atlantis.Framework.AuthResetPassword.Impl
 
             authenticationService.ClientCertificates.Add(clientCertificate);
 
-            if(!string.IsNullOrEmpty(requestData.TwoFactorAuthToken) && !string.IsNullOrEmpty(requestData.TwoFactorPhoneNumber))
+            if(!string.IsNullOrEmpty(requestData.TwoFactorFullPhoneNumber) &&
+               !string.IsNullOrEmpty(requestData.TwoFactorAuthToken))
             {
-              statusCode = authenticationService.ResetPasswordWithToken(requestData.ShopperID, requestData.PrivateLabelId, requestData.IpAddress, requestData.NewPassword, requestData.NewHint, requestData.EmailAuthToken, requestData.TwoFactorAuthToken, requestData.TwoFactorPhoneNumber, requestData.HostName, out statusMessage);  
+              statusCode = authenticationService.ResetPasswordWithToken(requestData.ShopperID, requestData.PrivateLabelId, requestData.IpAddress, requestData.NewPassword, requestData.NewHint, requestData.EmailAuthToken, requestData.TwoFactorAuthToken, requestData.TwoFactorFullPhoneNumber, requestData.HostName, out statusMessage);  
             }
             else
             {

@@ -181,7 +181,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
           totalPrice = -1;
         }
 
-        string totalPriceText= Currency.PriceText(new CurrencyPrice(totalPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional), false, CurrencyNegativeFormat.Parentheses);
+        string totalPriceText = Currency.PriceText(new CurrencyPrice(totalPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional), false, CurrencyNegativeFormat.Parentheses);
         return totalPriceText;
       }
     }
@@ -261,7 +261,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       MessagingProcessRequestData request = new MessagingProcessRequestData(
         _orderData.ShopperId, string.Empty, _orderData.OrderId, string.Empty, 0,
-        _orderData.PrivateLabelId, EmailTemplate.Name, EmailTemplate.Namespace,_orderData.LocalizationCode);
+        _orderData.PrivateLabelId, EmailTemplate.Name, EmailTemplate.Namespace, _orderData.LocalizationCode);
 
       ResourceItem resourceItem = new ResourceItem(ResourceType, ResourceId);
 
@@ -284,7 +284,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         string emailAddress = ShopperData.GetField("email").ToLower();
         string debugPurchaseConfirmEmails = DataCache.DataCache.GetAppSetting("DEBUG_PURCHASE_CONFIRM_EMAILS");
 
-        if ( debugPurchaseConfirmEmails.Equals("true", StringComparison.OrdinalIgnoreCase) )
+        if (debugPurchaseConfirmEmails.Equals("true", StringComparison.OrdinalIgnoreCase))
         {
           try
           {
@@ -334,7 +334,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       }
       return String.Empty;
     }
-	
+
     protected string GetItemsText()
     {
       string hostingConcierge = String.Empty;
@@ -434,7 +434,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       string hostingConcierge = _orderData.ContextId == ContextIds.GoDaddy && IsHTMLEmail ?
               HostingConciergeHtmlGet() :
               String.Empty;
-     string isc = GetISC();
+      string isc = GetISC();
       if (IsHTMLEmail)
       {
         emailCustomTextProvider.BuildEULAHTML(_orderData.EulaProv, itemsTextBuilder, hostingConcierge, isc);
@@ -511,15 +511,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         HostPhoneUsaIntlGet(out hostPhoneUsa, out hostPhoneIntl);
         if (HostingConciergeEnabled && !String.IsNullOrEmpty(hostPhoneIntl) && !String.IsNullOrEmpty(hostPhoneUsa))
         {
-          if (_parsedHosting)
-          {
-            conciergeText.Append("<b>");
-            conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT1%%]<br /><br />");
-            conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT2%%]<br /><br />");
-            conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT3%%]<br />");
-            conciergeText.Append("</b>");
-          }
-          else if (_parsedWordPress)
+          if (_parsedWordPress)
           {
             conciergeText.Append("<b>");
             conciergeText.Append("[%%LCST.REQ.UTOS_WP_HOSTING_SUPPLE_PT1%%]<br /><br />");
@@ -535,6 +527,15 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             conciergeText.Append("[%%LCST.REQ.UTOS_CLD_INFRA_SUPPLE_PT3%%]<br />");
             conciergeText.Append("</b>");
           }
+          else if (_parsedHosting)
+          {
+            conciergeText.Append("<b>");
+            conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT1%%]<br /><br />");
+            conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT2%%]<br /><br />");
+            conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT3%%]<br />");
+            conciergeText.Append("</b>");
+          }
+
         }
       }
       return conciergeText.ToString();
@@ -586,7 +587,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
               }
               if (ProductIds.isCloudServer(pfIdInt))
               {
-                _parsedCloud=true;
+                _parsedCloud = true;
               }
             }
           }
@@ -602,7 +603,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         ParseOrderItems();
         if (_parsedHosting || _parsedWordPress || _parsedCloud)
         {
-          hostingInOrder=true;
+          hostingInOrder = true;
         }
         return hostingInOrder;
       }

@@ -21,14 +21,17 @@ namespace Atlantis.Framework.AuthTwoFactorStatus.Impl
         WsConfigElement wsConfigElement = (WsConfigElement) oConfig;
         AuthTwoFactorStatusRequestData requestData = (AuthTwoFactorStatusRequestData)oRequestData;
 
-        X509Certificate2 cert = wsConfigElement.GetClientCertificate();
-        cert.Verify();
+        X509Certificate2 clientCertificate = wsConfigElement.GetClientCertificate();
+        if (clientCertificate == null)
+        {
+          throw new AtlantisException(requestData, "AuthTwoFactorStatus.RequestHandler", "Unable to find client certificate for web service call.", string.Empty);
+        }
 
         using (WSCgdShopper.WSCgdShopperService shopperWs = new WSCgdShopper.WSCgdShopperService())
         {
           shopperWs.Url = wsConfigElement.WSURL;
           shopperWs.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
-          shopperWs.ClientCertificates.Add(cert);
+          shopperWs.ClientCertificates.Add(clientCertificate);
           sResponseXml = shopperWs.TwoFactorStatus(requestData.ShopperID);
           if (sResponseXml.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
           {

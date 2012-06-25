@@ -382,18 +382,92 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     public const int AdSpacePremiumRecurringYear = 101047;
     public const int AdSpacePremiumRecurringTwoYears = 101048;
     public const int AdSpacePremiumRecurringThreeYears = 101049;
-      public static List<int> productIds = null;
 
-      public static bool isDomainsByProxy(int productId)
-      {
-          return productId == DomainsByProxy;
-      }
+    public const int UtilityCloudServer1Month = 1588;
+    public const int UtilityCloudServer1Year = 1597;
+    public const int UtilityCloudServer2Year = 1599;
+    public const int UtilityCloudServer3Year = 1608;
+    public const int UtilityCloudServer5Year = 1618;
+    public const int UtilityCloudServer10Year = 1620;
+    public const int EconomyCloudServer1Month = 22001;
+    public const int EconomyCloudServer1Year = 22002;
+    public const int EconomyCloudServer2Year = 22003;
+    public const int EconomyCloudServer3Year = 22004;
+    public const int EconomyCloudServer5Year = 22005;
+    public const int EconomyCloudServer10Year = 22006;
+    public const int DeluxeCloudServer1Month = 22011;
+    public const int DeluxeCloudServer1Year = 22012;
+    public const int DeluxeCloudServer2Year = 22013;
+    public const int DeluxeCloudServer3Year = 22014;
+    public const int DeluxeCloudServer5Year = 22015;
+    public const int DeluxeCloudServer10Year = 22016;
+    public const int UltimateCloudServer1Month = 22021;
+    public const int UltimateCloudServer1Year = 22022;
+    public const int UltimateCloudServer2Year = 22023;
+    public const int UltimateCloudServer3Year = 22024;
+    public const int UltimateCloudServer5Year = 22025;
+    public const int UltimateCloudServer10Year = 22026;
+    public const int CloudServer10Month = 21911;
+    public const int CloudServer101Year = 21912;
+    public const int CloudServer102Year = 21913;
+    public const int CloudServer103Year = 21914;
+    public const int CloudServer105Year = 21915;
+    public const int CloudServer1010Year = 21916;
+    public const int CloudServer20Month = 21921;
+    public const int CloudServer201Year = 21922;
+    public const int CloudServer202Year = 21923;
+    public const int CloudServer203Year = 21924;
+    public const int CloudServer205Year = 21925;
+    public const int CloudServer2010Year = 21926;
+    public const int CloudServer30Month = 21931;
+    public const int CloudServer301Year = 21932;
+    public const int CloudServer302Year = 21933;
+    public const int CloudServer303Year = 21934;
+    public const int CloudServer305Year = 21935;
+    public const int CloudServer3010Year = 21936;
+    public const int CloudServer40Month = 21941;
+    public const int CloudServer401Year = 21942;
+    public const int CloudServer402Year = 21943;
+    public const int CloudServer403Year = 21944;
+    public const int CloudServer405Year = 21945;
+    public const int CloudServer4010Year = 21946;
+    public const int CloudServer50Month = 21951;
+    public const int CloudServer501Year = 21952;
+    public const int CloudServer502Year = 21953;
+    public const int CloudServer503Year = 21954;
+    public const int CloudServer505Year = 21955;
+    public const int CloudServer5010Year = 21956;
+    public const int CloudServer60Month = 21961;
+    public const int CloudServer601Year = 21962;
+    public const int CloudServer602Year = 21963;
+    public const int CloudServer603Year = 21964;
+    public const int CloudServer605Year = 21965;
+    public const int CloudServer6010Year = 21966;
+    public const int CloudServer70Month = 21971;
+    public const int CloudServer701Year = 21972;
+    public const int CloudServer702Year = 21973;
+    public const int CloudServer703Year = 21974;
+    public const int CloudServer705Year = 21975;
+    public const int CloudServer7010Year = 21976;
+    public const int CloudServer80Month = 21981;
+    public const int CloudServer801Year = 21982;
+    public const int CloudServer802Year = 21983;
+    public const int CloudServer803Year = 21984;
+    public const int CloudServer805Year = 21985;
+    public const int CloudServer8010Year = 21986;
 
-      public static bool isHostingProduct(int productId)
+    public static List<int> productIds = null;
+
+    public static bool isDomainsByProxy(int productId)
+    {
+      return productId == DomainsByProxy;
+    }
+
+    public static bool isHostingProduct(int productId)
+    {
+      if (productIds == null)
       {
-          if (productIds == null)
-          {
-            productIds = new List<int>(new[]
+        productIds = new List<int>(new[]
                                                          {   
                                                              ProductIds.HostingSharedEconomyLinuxMonthly,
                                                              ProductIds.HostingSharedEconomyWindowsMonthly,
@@ -584,9 +658,121 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
                                                              ProductIds.HostingGridUltimateWindowsAPRegion4Years,
                                                              ProductIds.HostingGridUltimateWindowsAPRegion5Years,
                                                          });
-              }
-
-          return productIds.Contains(productId);
       }
+
+      return productIds.Contains(productId);
+    }
+
+    public static bool isWordPressHosting(int productId)
+    {
+      if (productIds == null)
+      {
+        productIds = new List<int>(new[]
+                                                         {   
+                                                             ProductIds.HostingWordPressEconomyMonthly,
+                                                             ProductIds.HostingWordPressEconomy1Year,
+                                                             ProductIds.HostingWordPressEconomy2Years,
+                                                             ProductIds.HostingWordPressEconomy3Years,
+                                                             ProductIds.HostingWordPressEconomy4Years,
+                                                             ProductIds.HostingWordPressEconomy5Years,
+                                                             ProductIds.HostingWordPressDeluxeMonthly,
+                                                             ProductIds.HostingWordPressDeluxe1year,
+                                                             ProductIds.HostingWordPressDeluxe2Years,
+                                                             ProductIds.HostingWordPressDeluxe3Years,
+                                                             ProductIds.HostingWordPressDeluxe4Years,
+                                                             ProductIds.HostingWordPressDeluxe5Years,
+                                                             ProductIds.HostingWordPressUltimateMonthly,
+                                                             ProductIds.HostingWordPressUltimate1year,
+                                                             ProductIds.HostingWordPressUltimate2Years,
+                                                             ProductIds.HostingWordPressUltimate3Years,
+                                                             ProductIds.HostingWordPressUltimate4Years,
+                                                             ProductIds.HostingWordPressUltimate5Years
+                                                         });
+      }
+
+      return productIds.Contains(productId);
+    }
+
+    public static bool isCloudServer(int productId)
+    {
+      if (productIds == null)
+      {
+        productIds = new List<int>(new[]
+                                                         {   
+    UtilityCloudServer1Month,
+    UtilityCloudServer1Year,
+    UtilityCloudServer2Year,
+    UtilityCloudServer3Year,
+    UtilityCloudServer5Year,
+    UtilityCloudServer10Year,
+    EconomyCloudServer1Month,
+    EconomyCloudServer1Year,
+    EconomyCloudServer2Year,
+    EconomyCloudServer3Year,
+    EconomyCloudServer5Year,
+    EconomyCloudServer10Year,
+    DeluxeCloudServer1Month,
+    DeluxeCloudServer1Year,
+    DeluxeCloudServer2Year,
+    DeluxeCloudServer3Year,
+    DeluxeCloudServer5Year,
+    DeluxeCloudServer10Year,
+    UltimateCloudServer1Month,
+    UltimateCloudServer1Year,
+    UltimateCloudServer2Year,
+    UltimateCloudServer3Year,
+    UltimateCloudServer5Year,
+    UltimateCloudServer10Year,
+    CloudServer10Month,
+    CloudServer101Year,
+    CloudServer102Year,
+    CloudServer103Year,
+    CloudServer105Year,
+    CloudServer1010Year,
+    CloudServer20Month,
+    CloudServer201Year,
+    CloudServer202Year,
+    CloudServer203Year,
+    CloudServer205Year,
+    CloudServer2010Year,
+    CloudServer30Month,
+    CloudServer301Year,
+    CloudServer302Year,
+    CloudServer303Year,
+    CloudServer305Year,
+    CloudServer3010Year,
+    CloudServer40Month,
+    CloudServer401Year,
+    CloudServer402Year,
+    CloudServer403Year,
+    CloudServer405Year,
+    CloudServer4010Year,
+    CloudServer50Month,
+    CloudServer501Year,
+    CloudServer502Year,
+    CloudServer503Year,
+    CloudServer505Year,
+    CloudServer5010Year,
+    CloudServer60Month,
+    CloudServer601Year,
+    CloudServer602Year,
+    CloudServer603Year,
+    CloudServer605Year,
+    CloudServer6010Year,
+    CloudServer70Month,
+    CloudServer701Year,
+    CloudServer702Year,
+    CloudServer703Year,
+    CloudServer705Year,
+    CloudServer7010Year,
+    CloudServer80Month,
+    CloudServer801Year,
+    CloudServer802Year,
+    CloudServer803Year,
+    CloudServer805Year,
+    CloudServer8010Year});
+      }
+      return productIds.Contains(productId);
+    }
   }
 }

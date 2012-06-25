@@ -511,11 +511,30 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         HostPhoneUsaIntlGet(out hostPhoneUsa, out hostPhoneIntl);
         if (HostingConciergeEnabled && !String.IsNullOrEmpty(hostPhoneIntl) && !String.IsNullOrEmpty(hostPhoneUsa))
         {
-          conciergeText.Append("<b>");
-          conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT1%%]<br /><br />");
-          conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT2%%]<br /><br />");
-          conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT3%%]<br />");
-          conciergeText.Append("</b>");          
+          if (_parsedHosting)
+          {
+            conciergeText.Append("<b>");
+            conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT1%%]<br /><br />");
+            conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT2%%]<br /><br />");
+            conciergeText.Append("[%%LCST.REQ.UTOS_HOSTING_SUPPLE_PT3%%]<br />");
+            conciergeText.Append("</b>");
+          }
+          else if (_parsedWordPress)
+          {
+            conciergeText.Append("<b>");
+            conciergeText.Append("[%%LCST.REQ.UTOS_WP_HOSTING_SUPPLE_PT1%%]<br /><br />");
+            conciergeText.Append("[%%LCST.REQ.UTOS_WP_HOSTING_SUPPLE_PT2%%]<br /><br />");
+            conciergeText.Append("[%%LCST.REQ.UTOS_WP_HOSTING_SUPPLE_PT3%%]<br />");
+            conciergeText.Append("</b>");
+          }
+          else if (_parsedCloud)
+          {
+            conciergeText.Append("<b>");
+            conciergeText.Append("[%%LCST.REQ.UTOS_CLD_INFRA_SUPPLE_PT1%%]<br /><br />");
+            conciergeText.Append("[%%LCST.REQ.UTOS_CLD_INFRA_SUPPLE_PT2%%]<br /><br />");
+            conciergeText.Append("[%%LCST.REQ.UTOS_CLD_INFRA_SUPPLE_PT3%%]<br />");
+            conciergeText.Append("</b>");
+          }
         }
       }
       return conciergeText.ToString();
@@ -525,17 +544,19 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     {
       get
       {
-        bool domainsByProxyInOrder = false;
-        bool hostingInOrder = false;
-        ParseOrderItems(out hostingInOrder, out domainsByProxyInOrder);
-        return domainsByProxyInOrder;
+        ParseOrderItems();
+        return _parsedDomainsByProxy;
       }
     }
 
     private bool _parsedHosting = false;
     private bool _parsedDomainsByProxy = false;
     private bool _parsedItems = false;
-    private void ParseOrderItems(out bool hosting, out bool domainsByProxy)
+
+    private bool _parsedCloud = false;
+    private bool _parsedWordPress = false;
+
+    private void ParseOrderItems()
     {
       if (!_parsedItems)
       {
@@ -559,21 +580,30 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
               {
                 _parsedDomainsByProxy = true;
               }
+              if (ProductIds.isWordPressHosting(pfIdInt))
+              {
+                _parsedWordPress = true;
+              }
+              if (ProductIds.isCloudServer(pfIdInt))
+              {
+                _parsedCloud=true;
+              }
             }
           }
         }
       }
-      hosting = _parsedHosting;
-      domainsByProxy = _parsedDomainsByProxy;
     }
 
     protected bool HostingConciergeEnabled
     {
       get
       {
-        bool domainsByProxyInOrder = false;
         bool hostingInOrder = false;
-        ParseOrderItems(out hostingInOrder, out domainsByProxyInOrder);
+        ParseOrderItems();
+        if (_parsedHosting || _parsedWordPress || _parsedCloud)
+        {
+          hostingInOrder=true;
+        }
         return hostingInOrder;
       }
     }

@@ -20,9 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSC.Interface", "Atlantis.Framework.QSC.Interface\Atlantis.Framework.QSC.Interface.csproj", "{A5D5AEB8-498A-487E-835A-A1262CBBC747}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSC.Interface", "..\Atlantis.Framework.QSC.Interface\Atlantis.Framework.QSC.Interface.csproj", "{A5D5AEB8-498A-487E-835A-A1262CBBC747}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -47,13 +47,13 @@ Global
 		SccProjectUniqueName5 = Atlantis.Framework.QSCGetAccounts.Tests\\Atlantis.Framework.QSCGetAccounts.Tests.csproj
 		SccProjectName5 = Atlantis.Framework.QSCGetAccounts.Tests
 		SccLocalPath5 = Atlantis.Framework.QSCGetAccounts.Tests
-		SccProjectUniqueName6 = Atlantis.Framework.QSC.Interface\\Atlantis.Framework.QSC.Interface.csproj
-		SccProjectName6 = Atlantis.Framework.QSC.Interface
-		SccLocalPath6 = Atlantis.Framework.QSC.Interface
-		SccProjectUniqueName7 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
-		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.QSCGetAccounts.sln
-		SccProjectName7 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
-		SccLocalPath7 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.QSCGetAccounts.sln
+		SccProjectName6 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
+		SccLocalPath6 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.QSC.Interface\\Atlantis.Framework.QSC.Interface.csproj
+		SccProjectName7 = ../Atlantis.Framework.QSC.Interface
+		SccLocalPath7 = ..\\Atlantis.Framework.QSC.Interface
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.QSCGetAccounts.vsmdi
@@ -83,14 +83,14 @@ Global
 		{95730437-CC04-4E9F-862B-16E9527FEEA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95730437-CC04-4E9F-862B-16E9527FEEA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95730437-CC04-4E9F-862B-16E9527FEEA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.Build.0 = Release|Any CPU
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MobilePushShopper.Impl;
 using Atlantis.Framework.MobilePushShopperGet.Interface;
@@ -19,18 +18,21 @@ namespace Atlantis.Framework.MobilePushShopperGet.Impl
       {
         shopperMobilePushService = ShopperMobilePushServiceClient.GetWebServiceInstance((WsConfigElement)config, mobilePushShopperGetRequestData.RequestTimeout);
 
-        string responseXml; 
-        if(!string.IsNullOrEmpty(mobilePushShopperGetRequestData.RegistrationId))
+        string responseXml;
+
+        switch (mobilePushShopperGetRequestData.PushGetType)
         {
-          responseXml = shopperMobilePushService.PushNotificationGetByRegistrationID(mobilePushShopperGetRequestData.RegistrationId);
-        }
-        else if(!string.IsNullOrEmpty(mobilePushShopperGetRequestData.ShopperID))
-        {
-          responseXml = shopperMobilePushService.PushNotificationGetByShopper(mobilePushShopperGetRequestData.ShopperID);
-        }
-        else
-        {
-          throw new Exception("You must provide either RegistrationId or ShopperId.");
+          case MobilePushShopperGetType.Shopper:
+            responseXml = shopperMobilePushService.PushNotificationGetByShopper(mobilePushShopperGetRequestData.Identifier);
+            break;
+          case MobilePushShopperGetType.RegistrationId:
+            responseXml = shopperMobilePushService.PushNotificationGetByRegistrationID(mobilePushShopperGetRequestData.Identifier);
+            break;
+          case MobilePushShopperGetType.Email:
+            responseXml = shopperMobilePushService.PushNotificationGetByPushEmail(mobilePushShopperGetRequestData.Identifier);
+            break;
+          default:
+            throw new Exception("Invalid MobilePushShopperGetType.");
         }
 
         responseData = new MobilePushShopperGetResponseData(mobilePushShopperGetRequestData, responseXml);

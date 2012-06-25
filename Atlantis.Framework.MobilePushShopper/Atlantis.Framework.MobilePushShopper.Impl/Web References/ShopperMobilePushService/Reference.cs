@@ -13,24 +13,35 @@
 // 
 #pragma warning disable 1591
 
-namespace Atlantis.Framework.MobilePushShopper.Impl.ShopperMobilePushService
-{
-
-
-  /// <remarks/>
+namespace Atlantis.Framework.MobilePushShopper.Impl.ShopperMobilePushService {
+    using System;
+    using System.Web.Services;
+    using System.Diagnostics;
+    using System.Web.Services.Protocols;
+    using System.ComponentModel;
+    using System.Xml.Serialization;
+    
+    
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="ServiceSoap", Namespace="http://tempuri.org/")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="Service1Soap", Namespace="http://tempuri.org/")]
     public partial class Service1 : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback PushNotificationGetByShopperOperationCompleted;
         
         private System.Threading.SendOrPostCallback PushNotificationGetByRegistrationIDOperationCompleted;
         
+        private System.Threading.SendOrPostCallback PushNotificationGetByPushEmailOperationCompleted;
+        
         private System.Threading.SendOrPostCallback PushNotificationInsertOperationCompleted;
         
+        private System.Threading.SendOrPostCallback PushNotificationInsertExOperationCompleted;
+        
         private System.Threading.SendOrPostCallback PushNotificationUpdateOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback PushNotificationUpdateExOperationCompleted;
         
         private System.Threading.SendOrPostCallback PushNotificationDeleteOperationCompleted;
         
@@ -81,10 +92,19 @@ namespace Atlantis.Framework.MobilePushShopper.Impl.ShopperMobilePushService
         public event PushNotificationGetByRegistrationIDCompletedEventHandler PushNotificationGetByRegistrationIDCompleted;
         
         /// <remarks/>
+        public event PushNotificationGetByPushEmailCompletedEventHandler PushNotificationGetByPushEmailCompleted;
+        
+        /// <remarks/>
         public event PushNotificationInsertCompletedEventHandler PushNotificationInsertCompleted;
         
         /// <remarks/>
+        public event PushNotificationInsertExCompletedEventHandler PushNotificationInsertExCompleted;
+        
+        /// <remarks/>
         public event PushNotificationUpdateCompletedEventHandler PushNotificationUpdateCompleted;
+        
+        /// <remarks/>
+        public event PushNotificationUpdateExCompletedEventHandler PushNotificationUpdateExCompleted;
         
         /// <remarks/>
         public event PushNotificationDeleteCompletedEventHandler PushNotificationDeleteCompleted;
@@ -151,6 +171,35 @@ namespace Atlantis.Framework.MobilePushShopper.Impl.ShopperMobilePushService
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/PushNotificationGetByPushEmail", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string PushNotificationGetByPushEmail(string sPushEmail) {
+            object[] results = this.Invoke("PushNotificationGetByPushEmail", new object[] {
+                        sPushEmail});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void PushNotificationGetByPushEmailAsync(string sPushEmail) {
+            this.PushNotificationGetByPushEmailAsync(sPushEmail, null);
+        }
+        
+        /// <remarks/>
+        public void PushNotificationGetByPushEmailAsync(string sPushEmail, object userState) {
+            if ((this.PushNotificationGetByPushEmailOperationCompleted == null)) {
+                this.PushNotificationGetByPushEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnPushNotificationGetByPushEmailOperationCompleted);
+            }
+            this.InvokeAsync("PushNotificationGetByPushEmail", new object[] {
+                        sPushEmail}, this.PushNotificationGetByPushEmailOperationCompleted, userState);
+        }
+        
+        private void OnPushNotificationGetByPushEmailOperationCompleted(object arg) {
+            if ((this.PushNotificationGetByPushEmailCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.PushNotificationGetByPushEmailCompleted(this, new PushNotificationGetByPushEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/PushNotificationInsert", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string PushNotificationInsert(string sRegistrationID, string sShopperMobileAppID, string sDeviceID, string sShopperID) {
             object[] results = this.Invoke("PushNotificationInsert", new object[] {
@@ -182,6 +231,35 @@ namespace Atlantis.Framework.MobilePushShopper.Impl.ShopperMobilePushService
             if ((this.PushNotificationInsertCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.PushNotificationInsertCompleted(this, new PushNotificationInsertCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/PushNotificationInsertEx", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string PushNotificationInsertEx(string sRequestXML) {
+            object[] results = this.Invoke("PushNotificationInsertEx", new object[] {
+                        sRequestXML});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void PushNotificationInsertExAsync(string sRequestXML) {
+            this.PushNotificationInsertExAsync(sRequestXML, null);
+        }
+        
+        /// <remarks/>
+        public void PushNotificationInsertExAsync(string sRequestXML, object userState) {
+            if ((this.PushNotificationInsertExOperationCompleted == null)) {
+                this.PushNotificationInsertExOperationCompleted = new System.Threading.SendOrPostCallback(this.OnPushNotificationInsertExOperationCompleted);
+            }
+            this.InvokeAsync("PushNotificationInsertEx", new object[] {
+                        sRequestXML}, this.PushNotificationInsertExOperationCompleted, userState);
+        }
+        
+        private void OnPushNotificationInsertExOperationCompleted(object arg) {
+            if ((this.PushNotificationInsertExCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.PushNotificationInsertExCompleted(this, new PushNotificationInsertExCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -219,6 +297,35 @@ namespace Atlantis.Framework.MobilePushShopper.Impl.ShopperMobilePushService
             if ((this.PushNotificationUpdateCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.PushNotificationUpdateCompleted(this, new PushNotificationUpdateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/PushNotificationUpdateEx", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string PushNotificationUpdateEx(string sRequestXML) {
+            object[] results = this.Invoke("PushNotificationUpdateEx", new object[] {
+                        sRequestXML});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void PushNotificationUpdateExAsync(string sRequestXML) {
+            this.PushNotificationUpdateExAsync(sRequestXML, null);
+        }
+        
+        /// <remarks/>
+        public void PushNotificationUpdateExAsync(string sRequestXML, object userState) {
+            if ((this.PushNotificationUpdateExOperationCompleted == null)) {
+                this.PushNotificationUpdateExOperationCompleted = new System.Threading.SendOrPostCallback(this.OnPushNotificationUpdateExOperationCompleted);
+            }
+            this.InvokeAsync("PushNotificationUpdateEx", new object[] {
+                        sRequestXML}, this.PushNotificationUpdateExOperationCompleted, userState);
+        }
+        
+        private void OnPushNotificationUpdateExOperationCompleted(object arg) {
+            if ((this.PushNotificationUpdateExCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.PushNotificationUpdateExCompleted(this, new PushNotificationUpdateExCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -351,6 +458,32 @@ namespace Atlantis.Framework.MobilePushShopper.Impl.ShopperMobilePushService
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void PushNotificationGetByPushEmailCompletedEventHandler(object sender, PushNotificationGetByPushEmailCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class PushNotificationGetByPushEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal PushNotificationGetByPushEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void PushNotificationInsertCompletedEventHandler(object sender, PushNotificationInsertCompletedEventArgs e);
     
     /// <remarks/>
@@ -377,6 +510,32 @@ namespace Atlantis.Framework.MobilePushShopper.Impl.ShopperMobilePushService
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void PushNotificationInsertExCompletedEventHandler(object sender, PushNotificationInsertExCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class PushNotificationInsertExCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal PushNotificationInsertExCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void PushNotificationUpdateCompletedEventHandler(object sender, PushNotificationUpdateCompletedEventArgs e);
     
     /// <remarks/>
@@ -388,6 +547,32 @@ namespace Atlantis.Framework.MobilePushShopper.Impl.ShopperMobilePushService
         private object[] results;
         
         internal PushNotificationUpdateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void PushNotificationUpdateExCompletedEventHandler(object sender, PushNotificationUpdateExCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class PushNotificationUpdateExCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal PushNotificationUpdateExCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

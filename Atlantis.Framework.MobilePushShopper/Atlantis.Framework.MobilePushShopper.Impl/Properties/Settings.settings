@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Atlantis_Framework_MobilePushShopper_Impl_ShopperMobilePushService_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://shopper.mobilepush.debug.glbt1.gdg/Service.asmx</Value>
+      <Value Profile="(Default)">https://shopper.dev.glbt1.gdg/WSgdMobileAppData/Service1.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

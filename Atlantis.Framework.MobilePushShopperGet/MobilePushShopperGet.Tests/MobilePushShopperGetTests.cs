@@ -20,6 +20,8 @@ namespace MobilePushShopperGet.Tests
     public void ValidShopperGetNotificationByShopperId()
     {
       MobilePushShopperGetRequestData requestData = new MobilePushShopperGetRequestData("847235",
+                                                                                        MobilePushShopperGetType.Shopper,
+                                                                                        "847235",
                                                                                         "http://www.MobilePushShopperAddTests.com",
                                                                                         string.Empty,
                                                                                         Guid.NewGuid().ToString(),
@@ -43,9 +45,10 @@ namespace MobilePushShopperGet.Tests
     [DeploymentItem("atlantis.config")]
     public void ValidShopperGetNotificationByRegistrationId()
     {
-      string registrationId = "d3d4d197-638d-47b3-a379-1a9f094cf502";
+      string registrationId = "ad4d631c9574beac6781ae2dceb58eca6047db91dea43981d9e0a27afd8902e8";
 
       MobilePushShopperGetRequestData requestData = new MobilePushShopperGetRequestData(registrationId,
+                                                                                        MobilePushShopperGetType.RegistrationId,
                                                                                         "847235",
                                                                                         "http://www.MobilePushShopperAddTests.com",
                                                                                         string.Empty,
@@ -71,6 +74,8 @@ namespace MobilePushShopperGet.Tests
     public void InValidShopperGetNotificationByShopperId()
     {
       MobilePushShopperGetRequestData requestData = new MobilePushShopperGetRequestData("56984521",
+                                                                                        MobilePushShopperGetType.Shopper,
+                                                                                        "56984521",
                                                                                         "http://www.MobilePushShopperAddTests.com",
                                                                                         string.Empty,
                                                                                         Guid.NewGuid().ToString(),
@@ -97,6 +102,7 @@ namespace MobilePushShopperGet.Tests
       string registrationId = "asdf";
 
       MobilePushShopperGetRequestData requestData = new MobilePushShopperGetRequestData(registrationId,
+                                                                                        MobilePushShopperGetType.RegistrationId,
                                                                                         "847235",
                                                                                         "http://www.MobilePushShopperAddTests.com",
                                                                                         string.Empty,
@@ -124,6 +130,7 @@ namespace MobilePushShopperGet.Tests
       string registrationId = "asdf";
 
       MobilePushShopperGetRequestData requestData = new MobilePushShopperGetRequestData(string.Empty,
+                                                                                        MobilePushShopperGetType.Shopper,
                                                                                         string.Empty,
                                                                                         "http://www.MobilePushShopperAddTests.com",
                                                                                         string.Empty,
@@ -148,6 +155,8 @@ namespace MobilePushShopperGet.Tests
     public void BadDataShopperGetNotification()
     {
       MobilePushShopperGetRequestData requestData = new MobilePushShopperGetRequestData("sfkjsjklfsal",
+                                                                                        MobilePushShopperGetType.Shopper,
+                                                                                        "sfkjsjklfsal",
                                                                                         "http://www.MobilePushShopperAddTests.com",
                                                                                         string.Empty,
                                                                                         Guid.NewGuid().ToString(),

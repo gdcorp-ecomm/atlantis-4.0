@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="MobilePushShopperGetRequestData.cs" />
     <Compile Include="MobilePushShopperGetResponseData.cs" />
+    <Compile Include="MobilePushShopperGetType.cs" />
     <Compile Include="MobilePushShopperRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

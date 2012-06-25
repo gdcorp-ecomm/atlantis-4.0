@@ -26,7 +26,7 @@ namespace Atlantis.Framework.MobilePushShopper.Impl.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://shopper.mobilepush.debug.glbt1.gdg/Service.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://shopper.dev.glbt1.gdg/WSgdMobileAppData/Service1.asmx")]
         public string Atlantis_Framework_MobilePushShopper_Impl_ShopperMobilePushService_Service {
             get {
                 return ((string)(this["Atlantis_Framework_MobilePushShopper_Impl_ShopperMobilePushService_Service"]));

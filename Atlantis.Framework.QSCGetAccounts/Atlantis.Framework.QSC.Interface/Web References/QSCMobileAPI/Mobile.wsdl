@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.fastshoppingcart.com/xfws/mobile-v0_1" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="Mobile" targetNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="addPackage" type="tns:addPackage" />
+      <xs:element name="addPackageResponse" type="tns:addPackageResponse" />
+      <xs:element name="blockIP" type="tns:blockIP" />
+      <xs:element name="blockIPResponse" type="tns:blockIPResponse" />
+      <xs:element name="captureAllPayments" type="tns:captureAllPayments" />
+      <xs:element name="captureAllPaymentsResponse" type="tns:captureAllPaymentsResponse" />
+      <xs:element name="capturePayment" type="tns:capturePayment" />
+      <xs:element name="capturePaymentResponse" type="tns:capturePaymentResponse" />
+      <xs:element name="editOrderEmail" type="tns:editOrderEmail" />
+      <xs:element name="editOrderEmailResponse" type="tns:editOrderEmailResponse" />
+      <xs:element name="getAccounts" type="tns:getAccounts" />
+      <xs:element name="getAccountsResponse" type="tns:getAccountsResponse" />
+      <xs:element name="getBlockedIPAddresses" type="tns:getBlockedIPAddresses" />
+      <xs:element name="getBlockedIPAddressesResponse" type="tns:getBlockedIPAddressesResponse" />
+      <xs:element name="getOrder" type="tns:getOrder" />
+      <xs:element name="getOrderResponse" type="tns:getOrderResponse" />
+      <xs:element name="getOrderSearchParameters" type="tns:getOrderSearchParameters" />
+      <xs:element name="getOrderSearchParametersResponse" type="tns:getOrderSearchParametersResponse" />
+      <xs:element name="getOrders" type="tns:getOrders" />
+      <xs:element name="getOrdersResponse" type="tns:getOrdersResponse" />
+      <xs:element name="ping" type="tns:ping" />
+      <xs:element name="pingResponse" type="tns:pingResponse" />
+      <xs:element name="refundOrder" type="tns:refundOrder" />
+      <xs:element name="refundOrderResponse" type="tns:refundOrderResponse" />
+      <xs:element name="removePackage" type="tns:removePackage" />
+      <xs:element name="removePackageResponse" type="tns:removePackageResponse" />
+      <xs:element name="resendOrderEmail" type="tns:resendOrderEmail" />
+      <xs:element name="resendOrderEmailResponse" type="tns:resendOrderEmailResponse" />
+      <xs:element name="unblockIP" type="tns:unblockIP" />
+      <xs:element name="unblockIPResponse" type="tns:unblockIPResponse" />
+      <xs:element name="updateContact" type="tns:updateContact" />
+      <xs:element name="updateContactResponse" type="tns:updateContactResponse" />
+      <xs:element name="updateOrderNotes" type="tns:updateOrderNotes" />
+      <xs:element name="updateOrderNotesResponse" type="tns:updateOrderNotesResponse" />
+      <xs:element name="updateOrderStatus" type="tns:updateOrderStatus" />
+      <xs:element name="updateOrderStatusResponse" type="tns:updateOrderStatusResponse" />
+      <xs:element name="updatePackage" type="tns:updatePackage" />
+      <xs:element name="updatePackageResponse" type="tns:updatePackageResponse" />
+      <xs:element name="voiceAuthCapture" type="tns:voiceAuthCapture" />
+      <xs:element name="voiceAuthCaptureResponse" type="tns:voiceAuthCaptureResponse" />
+      <xs:complexType name="getOrder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrderResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="orderResponse" type="tns:getOrderResponseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrderResponseDetail">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:responseDetail">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="order" type="tns:order" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="responseDetail">
+        <xs:sequence>
+          <xs:element name="responseStatus" type="tns:responseStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="order">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:orderSummary">
+            <xs:sequence>
+              <xs:element name="allowedNextStatuses">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="orderStatus" type="tns:orderStatus" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="orderItems">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="orderItem" type="tns:orderLineItem" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="itemTotalOriginal" type="tns:money" />
+              <xs:element name="itemTotal" type="tns:money" />
+              <xs:element minOccurs="0" name="packages">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="package" type="tns:package" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="unpackedItems">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="itemPackingRef" type="tns:itemReference" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="shippingContact" type="tns:orderContact" />
+              <xs:element minOccurs="0" name="shippings">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="shipping" type="tns:shipping" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="shippingTotal" type="tns:money" />
+              <xs:element name="shippingSubtotal" type="tns:money" />
+              <xs:element name="billingContact" type="tns:orderContact" />
+              <xs:element minOccurs="0" name="payments">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="payment" type="tns:orderPayment" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="taxAmount" type="tns:money" />
+              <xs:element minOccurs="0" name="orderNotes" type="xs:string" />
+              <xs:element minOccurs="0" name="customerNotes" type="xs:string" />
+              <xs:element minOccurs="0" name="orderCoupons">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="orderCoupon" type="tns:orderCoupon" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="allowedResendEmailTypes">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="emailType" type="tns:orderEmailType" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="orderSummary">
+        <xs:sequence>
+          <xs:element name="invoiceId" type="xs:string" />
+          <xs:element name="orderStatus" type="tns:orderStatus" />
+          <xs:element name="email" type="xs:string" />
+          <xs:element name="orderDate" type="xs:string" />
+          <xs:element name="captureStatus" type="xs:string" />
+          <xs:element name="name" type="xs:string" />
+          <xs:element name="total" type="tns:money" />
+          <xs:element minOccurs="0" name="ipAddress" type="tns:IPAddress" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="orderStatus">
+        <xs:sequence>
+          <xs:element name="displayText" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="key" type="xs:string" use="required" />
+      </xs:complexType>
+      <xs:complexType name="orderLineItem">
+        <xs:sequence>
+          <xs:element name="quantity" type="xs:int" />
+          <xs:element name="partNumber" type="xs:string" />
+          <xs:element name="label" type="xs:string" />
+          <xs:element name="description" type="xs:string" />
+          <xs:element minOccurs="0" name="options">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="selectedOption" type="tns:optionValue" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="unitPrice" type="tns:money" />
+          <xs:element minOccurs="0" name="extendedPrice" type="tns:money" />
+          <xs:element minOccurs="0" name="supplyingWarehouse" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="itemId" type="xs:int" use="required" />
+      </xs:complexType>
+      <xs:complexType name="optionValue">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string" />
+          <xs:element name="value" type="xs:string" />
+          <xs:element minOccurs="0" name="optionPrice" type="tns:money" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="money">
+        <xs:sequence />
+        <xs:attribute name="value" type="xs:decimal" use="required" />
+        <xs:attribute name="currencyCode" type="xs:string" use="required" />
+      </xs:complexType>
+      <xs:complexType name="package">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="trackingNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="shipDate" type="xs:date" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="itemPackingRef" type="tns:itemReference" />
+          <xs:element minOccurs="0" name="packageCost" type="tns:money" />
+        </xs:sequence>
+        <xs:attribute name="packageId" type="xs:int" use="required" />
+      </xs:complexType>
+      <xs:complexType name="itemReference">
+        <xs:sequence />
+        <xs:attribute name="itemIdRef" type="xs:int" use="required" />
+        <xs:attribute name="quantity" type="xs:int" use="required" />
+      </xs:complexType>
+      <xs:complexType name="orderContact">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="nickName" type="xs:string" />
+          <xs:element name="firstName" type="xs:string" />
+          <xs:element minOccurs="0" name="midInit" type="xs:string" />
+          <xs:element name="lastName" type="xs:string" />
+          <xs:element minOccurs="0" name="companyName" type="xs:string" />
+          <xs:element name="addressLine1" type="xs:string" />
+          <xs:element minOccurs="0" name="addressLine2" type="xs:string" />
+          <xs:element name="city" type="xs:string" />
+          <xs:element minOccurs="0" name="regionCode" type="xs:string" />
+          <xs:element minOccurs="0" name="postalCode" type="xs:string" />
+          <xs:element name="countryCode" type="xs:string" />
+          <xs:element minOccurs="0" name="email" type="xs:string" />
+          <xs:element minOccurs="0" name="phoneNumber" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="contactType" type="xs:string" use="required" />
+      </xs:complexType>
+      <xs:complexType name="shipping">
+        <xs:sequence>
+          <xs:element name="selectedShipMethodLabel" type="xs:string" />
+          <xs:element name="shippingTotal" type="tns:money" />
+          <xs:element name="shippingCharge" type="tns:money" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="orderPayment">
+        <xs:sequence>
+          <xs:element name="paymentMethod" type="xs:string" />
+          <xs:element name="amountBeforeRefunds" type="tns:money" />
+          <xs:element name="amountAfterRefunds" type="tns:money" />
+          <xs:element minOccurs="0" name="paymentNote" type="xs:string" />
+          <xs:element name="paymentTypeLabel" type="xs:string" />
+          <xs:element minOccurs="0" name="transactionToken" type="xs:string" />
+          <xs:element minOccurs="0" name="authorizationCode" type="xs:string" />
+          <xs:element minOccurs="0" name="refunds">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="refund" type="tns:refund" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="paymentId" type="xs:int" use="required" />
+      </xs:complexType>
+      <xs:complexType name="refund">
+        <xs:sequence>
+          <xs:element name="amount" type="tns:money" />
+          <xs:element minOccurs="0" name="transactionToken" type="xs:string" />
+          <xs:element minOccurs="0" name="authorizationCode" type="xs:string" />
+          <xs:element name="successful" type="xs:boolean" />
+          <xs:element minOccurs="0" name="note" type="xs:string" />
+          <xs:element minOccurs="0" name="createDate" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="refundId" type="xs:int" use="required" />
+      </xs:complexType>
+      <xs:complexType name="orderCoupon">
+        <xs:sequence>
+          <xs:element name="discountedAmount" type="tns:money" />
+          <xs:element name="code" type="xs:string" />
+          <xs:element name="type" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="orderEmailType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="label" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="emailType" type="xs:string" use="required" />
+      </xs:complexType>
+      <xs:complexType name="IPAddress">
+        <xs:sequence />
+        <xs:attribute name="ipAddress" type="xs:string" use="required" />
+        <xs:attribute name="status" type="tns:ipAddressStatus" />
+      </xs:complexType>
+      <xs:complexType name="responseStatus">
+        <xs:sequence>
+          <xs:element form="qualified" name="statusCode" type="tns:statusCode" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="successMessages" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="errorMessages" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="warningMessages" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="infoMessages" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateOrderNotes">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+          <xs:element minOccurs="0" name="orderNotes" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateOrderNotesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="blockIP">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="ipAddress" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="blockIPResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="resendOrderEmail">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+          <xs:element minOccurs="0" name="emailToResend" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="selectedPackageIds" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="selectedUnpackedContentIds" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="resendOrderEmailResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="editOrderEmail">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+          <xs:element minOccurs="0" name="emailAddress" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="editOrderEmailResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateOrderStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+          <xs:element minOccurs="0" name="orderStatus" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateOrderStatusResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="refundOrder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="refundOrderResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAccounts">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="shopperId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAccountsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="accountsResponse" type="tns:getAccountResponseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAccountResponseDetail">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:responseDetail">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="accounts">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="account" type="tns:account" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="account">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="domain" type="xs:string" />
+          <xs:element name="accountUID" type="xs:string" />
+          <xs:element name="status" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="unblockIP">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="ipAddress" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="unblockIPResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="captureAllPayments">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="captureAllPaymentsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBlockedIPAddresses">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBlockedIPAddressesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="blockedIPAddressResponse" type="tns:getIPAddressResponseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getIPAddressResponseDetail">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:responseDetail">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ipAddresses">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="ipAddress" type="tns:IPAddress" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="removePackage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+          <xs:element name="packageId" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="removePackageResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ping">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="pingResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="pong" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrders">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element name="pageNumber" type="xs:int" />
+          <xs:element name="pageSize" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="orderSearchField" type="tns:orderSearchField" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="orderSearchField">
+        <xs:sequence>
+          <xs:element name="property" type="xs:string" />
+          <xs:element default="" name="value" type="xs:string" />
+          <xs:element minOccurs="0" name="label" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrdersResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="ordersResponse" type="tns:getOrdersResponseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrdersResponseDetail">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:responseDetail">
+            <xs:sequence>
+              <xs:element name="resultSize" type="xs:long" />
+              <xs:element minOccurs="0" name="orders">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="order" type="tns:orderSummary" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="voiceAuthCapture">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+          <xs:element minOccurs="0" name="paymentId" type="xs:int" />
+          <xs:element minOccurs="0" name="voiceAuthCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="voiceAuthCaptureResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="capturePayment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+          <xs:element minOccurs="0" name="paymentId" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="capturePaymentResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addPackage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="itemPackingReference" type="tns:itemReference" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addPackageResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateContact">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+          <xs:element minOccurs="0" name="orderContact" type="tns:orderContact" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateContactResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updatePackage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+          <xs:element minOccurs="0" name="package" type="tns:package" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updatePackageResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrderSearchParameters">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getOrderSearchParametersResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="searchableOrderStatusesResponse" type="tns:getOrderSearchParametersResponseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrderSearchParametersResponseDetail">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:responseDetail">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="searchableFields">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="orderSearchFieldDef" type="tns:orderSearchFieldDef" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="orderSearchFieldDef">
+        <xs:sequence>
+          <xs:element name="property" type="xs:string" />
+          <xs:element name="type" type="xs:string" />
+          <xs:element name="fieldLabel" type="xs:string" />
+          <xs:element minOccurs="0" name="allowedValues">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="fieldValue" type="tns:orderSearchField" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="ipAddressStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="BLOCKED" />
+          <xs:enumeration value="ALLOWED" />
+          <xs:enumeration value="UNKNOWN" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="statusCode">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SUCCESS" />
+          <xs:enumeration value="SUCCESS_WITH_WARNINGS" />
+          <xs:enumeration value="VALIDATION_ERROR" />
+          <xs:enumeration value="FAILURE" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="capturePaymentResponse">
+    <wsdl:part name="parameters" element="tns:capturePaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="voiceAuthCaptureResponse">
+    <wsdl:part name="parameters" element="tns:voiceAuthCaptureResponse" />
+  </wsdl:message>
+  <wsdl:message name="removePackage">
+    <wsdl:part name="parameters" element="tns:removePackage" />
+  </wsdl:message>
+  <wsdl:message name="getBlockedIPAddressesResponse">
+    <wsdl:part name="parameters" element="tns:getBlockedIPAddressesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOrderSearchParameters">
+    <wsdl:part name="parameters" element="tns:getOrderSearchParameters" />
+  </wsdl:message>
+  <wsdl:message name="editOrderEmail">
+    <wsdl:part name="parameters" element="tns:editOrderEmail" />
+  </wsdl:message>
+  <wsdl:message name="getOrderResponse">
+    <wsdl:part name="parameters" element="tns:getOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="refundOrderResponse">
+    <wsdl:part name="parameters" element="tns:refundOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="capturePayment">
+    <wsdl:part name="parameters" element="tns:capturePayment" />
+  </wsdl:message>
+  <wsdl:message name="updateContactResponse">
+    <wsdl:part name="parameters" element="tns:updateContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="refundOrder">
+    <wsdl:part name="parameters" element="tns:refundOrder" />
+  </wsdl:message>
+  <wsdl:message name="updatePackageResponse">
+    <wsdl:part name="parameters" element="tns:updatePackageResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAccountsResponse">
+    <wsdl:part name="parameters" element="tns:getAccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOrders">
+    <wsdl:part name="parameters" element="tns:getOrders" />
+  </wsdl:message>
+  <wsdl:message name="pingResponse">
+    <wsdl:part name="parameters" element="tns:pingResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOrder">
+    <wsdl:part name="parameters" element="tns:getOrder" />
+  </wsdl:message>
+  <wsdl:message name="captureAllPayments">
+    <wsdl:part name="parameters" element="tns:captureAllPayments" />
+  </wsdl:message>
+  <wsdl:message name="voiceAuthCapture">
+    <wsdl:part name="parameters" element="tns:voiceAuthCapture" />
+  </wsdl:message>
+  <wsdl:message name="getOrdersResponse">
+    <wsdl:part name="parameters" element="tns:getOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateOrderNotesResponse">
+    <wsdl:part name="parameters" element="tns:updateOrderNotesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOrderSearchParametersResponse">
+    <wsdl:part name="parameters" element="tns:getOrderSearchParametersResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateOrderStatus">
+    <wsdl:part name="parameters" element="tns:updateOrderStatus" />
+  </wsdl:message>
+  <wsdl:message name="addPackage">
+    <wsdl:part name="parameters" element="tns:addPackage" />
+  </wsdl:message>
+  <wsdl:message name="unblockIP">
+    <wsdl:part name="parameters" element="tns:unblockIP" />
+  </wsdl:message>
+  <wsdl:message name="getBlockedIPAddresses">
+    <wsdl:part name="parameters" element="tns:getBlockedIPAddresses" />
+  </wsdl:message>
+  <wsdl:message name="captureAllPaymentsResponse">
+    <wsdl:part name="parameters" element="tns:captureAllPaymentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateContact">
+    <wsdl:part name="parameters" element="tns:updateContact" />
+  </wsdl:message>
+  <wsdl:message name="addPackageResponse">
+    <wsdl:part name="parameters" element="tns:addPackageResponse" />
+  </wsdl:message>
+  <wsdl:message name="ping">
+    <wsdl:part name="parameters" element="tns:ping" />
+  </wsdl:message>
+  <wsdl:message name="resendOrderEmail">
+    <wsdl:part name="parameters" element="tns:resendOrderEmail" />
+  </wsdl:message>
+  <wsdl:message name="getAccounts">
+    <wsdl:part name="parameters" element="tns:getAccounts" />
+  </wsdl:message>
+  <wsdl:message name="editOrderEmailResponse">
+    <wsdl:part name="parameters" element="tns:editOrderEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateOrderStatusResponse">
+    <wsdl:part name="parameters" element="tns:updateOrderStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="blockIP">
+    <wsdl:part name="parameters" element="tns:blockIP" />
+  </wsdl:message>
+  <wsdl:message name="removePackageResponse">
+    <wsdl:part name="parameters" element="tns:removePackageResponse" />
+  </wsdl:message>
+  <wsdl:message name="updatePackage">
+    <wsdl:part name="parameters" element="tns:updatePackage" />
+  </wsdl:message>
+  <wsdl:message name="updateOrderNotes">
+    <wsdl:part name="parameters" element="tns:updateOrderNotes" />
+  </wsdl:message>
+  <wsdl:message name="resendOrderEmailResponse">
+    <wsdl:part name="parameters" element="tns:resendOrderEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="blockIPResponse">
+    <wsdl:part name="parameters" element="tns:blockIPResponse" />
+  </wsdl:message>
+  <wsdl:message name="unblockIPResponse">
+    <wsdl:part name="parameters" element="tns:unblockIPResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MobileManagementService">
+    <wsdl:documentation>A web service that serves up methods for integration with mobile apps.</wsdl:documentation>
+    <wsdl:operation name="getOrder">
+      <wsdl:documentation>Gets a detailed order provided account (rqd) and invoiceId(rqd). This method returns an order when found and a SUCCESS_WARNING when the invoice could not be found.</wsdl:documentation>
+      <wsdl:input name="getOrder" message="tns:getOrder" />
+      <wsdl:output name="getOrderResponse" message="tns:getOrderResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateOrderNotes">
+      <wsdl:documentation>Update the admin notes for an order. The submitted note will replace the existing note. It will not be appended to the note. So, ensure that you are sending the entire note.</wsdl:documentation>
+      <wsdl:input name="updateOrderNotes" message="tns:updateOrderNotes" />
+      <wsdl:output name="updateOrderNotesResponse" message="tns:updateOrderNotesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="blockIP">
+      <wsdl:documentation>Call to block an IP address from placing orders.</wsdl:documentation>
+      <wsdl:input name="blockIP" message="tns:blockIP" />
+      <wsdl:output name="blockIPResponse" message="tns:blockIPResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="resendOrderEmail">
+      <wsdl:documentation>Re-sends an email for the supplied information.</wsdl:documentation>
+      <wsdl:input name="resendOrderEmail" message="tns:resendOrderEmail" />
+      <wsdl:output name="resendOrderEmailResponse" message="tns:resendOrderEmailResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="editOrderEmail">
+      <wsdl:documentation>Modifies the email address associated with this order.</wsdl:documentation>
+      <wsdl:input name="editOrderEmail" message="tns:editOrderEmail" />
+      <wsdl:output name="editOrderEmailResponse" message="tns:editOrderEmailResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateOrderStatus">
+      <wsdl:documentation>Updates the order status to the supplied order status (orderStatus key).  The allowed values come from the allowed statuses returned in the getOrder call. This method internally progresses the order through workflow steps to get this order into this status.</wsdl:documentation>
+      <wsdl:input name="updateOrderStatus" message="tns:updateOrderStatus" />
+      <wsdl:output name="updateOrderStatusResponse" message="tns:updateOrderStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="refundOrder">
+      <wsdl:documentation>Refunds the the specified invoice (if applicable).</wsdl:documentation>
+      <wsdl:input name="refundOrder" message="tns:refundOrder" />
+      <wsdl:output name="refundOrderResponse" message="tns:refundOrderResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAccounts">
+      <wsdl:documentation>Returns a list of QSC accounts associated with supplied shopperId.</wsdl:documentation>
+      <wsdl:input name="getAccounts" message="tns:getAccounts" />
+      <wsdl:output name="getAccountsResponse" message="tns:getAccountsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="unblockIP">
+      <wsdl:documentation>Call to unblock an IP address from placing orders.</wsdl:documentation>
+      <wsdl:input name="unblockIP" message="tns:unblockIP" />
+      <wsdl:output name="unblockIPResponse" message="tns:unblockIPResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="captureAllPayments">
+      <wsdl:documentation>Attempts to capture all payments for the specified invoice.</wsdl:documentation>
+      <wsdl:input name="captureAllPayments" message="tns:captureAllPayments" />
+      <wsdl:output name="captureAllPaymentsResponse" message="tns:captureAllPaymentsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getBlockedIPAddresses">
+      <wsdl:documentation>Returns a list of blocked IP addresses by account UID</wsdl:documentation>
+      <wsdl:input name="getBlockedIPAddresses" message="tns:getBlockedIPAddresses" />
+      <wsdl:output name="getBlockedIPAddressesResponse" message="tns:getBlockedIPAddressesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="removePackage">
+      <wsdl:documentation>Removes the package identified by the packageId from the order.</wsdl:documentation>
+      <wsdl:input name="removePackage" message="tns:removePackage" />
+      <wsdl:output name="removePackageResponse" message="tns:removePackageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ping">
+      <wsdl:documentation>Quick monitoring method to determine whether this service is responding. Will return 'SUCCESS' when ok. Otherwise fails.</wsdl:documentation>
+      <wsdl:input name="ping" message="tns:ping" />
+      <wsdl:output name="pingResponse" message="tns:pingResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrders">
+      <wsdl:documentation>Gets a list of order summaries for the provided account (rqd). When either pageNumber or pageSize is zero, the API returns the defaults of 1st page with 20 results. For search Fields, you can send at most one of each of the search fields supplied in getOrderSearchParemeters(). When any of these is excluded from the search, no filter for that field is applied.</wsdl:documentation>
+      <wsdl:input name="getOrders" message="tns:getOrders" />
+      <wsdl:output name="getOrdersResponse" message="tns:getOrdersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="voiceAuthCapture">
+      <wsdl:documentation>Performs a capture for a payment based on the code supplied voice authorization code.</wsdl:documentation>
+      <wsdl:input name="voiceAuthCapture" message="tns:voiceAuthCapture" />
+      <wsdl:output name="voiceAuthCaptureResponse" message="tns:voiceAuthCaptureResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="capturePayment">
+      <wsdl:documentation>Attempts to capture the payment specified for the specified invoice.</wsdl:documentation>
+      <wsdl:input name="capturePayment" message="tns:capturePayment" />
+      <wsdl:output name="capturePaymentResponse" message="tns:capturePaymentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addPackage">
+      <wsdl:documentation>Adds a new package to the list of ACTUAL packages for this order. It must contain items (at least one) from the order.</wsdl:documentation>
+      <wsdl:input name="addPackage" message="tns:addPackage" />
+      <wsdl:output name="addPackageResponse" message="tns:addPackageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateContact">
+      <wsdl:input name="updateContact" message="tns:updateContact" />
+      <wsdl:output name="updateContactResponse" message="tns:updateContactResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updatePackage">
+      <wsdl:documentation>Updates the information regarding the supplied package.</wsdl:documentation>
+      <wsdl:input name="updatePackage" message="tns:updatePackage" />
+      <wsdl:output name="updatePackageResponse" message="tns:updatePackageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrderSearchParameters">
+      <wsdl:documentation>A call to get a list of searchable order statuses. The list returned can be used in the getOrders() call to specify what order status the search should be limited to. This list should be pretty static and web service clients are encouraged to cache the result.</wsdl:documentation>
+      <wsdl:input name="getOrderSearchParameters" message="tns:getOrderSearchParameters" />
+      <wsdl:output name="getOrderSearchParametersResponse" message="tns:getOrderSearchParametersResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MobileSoapBinding" type="tns:MobileManagementService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getOrder">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getOrder">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getOrderResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="blockIP">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="blockIP">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="blockIPResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateOrderNotes">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="updateOrderNotes">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateOrderNotesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editOrderEmail">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="editOrderEmail">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="editOrderEmailResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resendOrderEmail">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="resendOrderEmail">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="resendOrderEmailResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateOrderStatus">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="updateOrderStatus">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateOrderStatusResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAccounts">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getAccounts">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAccountsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="refundOrder">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="refundOrder">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="refundOrderResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="captureAllPayments">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="captureAllPayments">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="captureAllPaymentsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="unblockIP">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="unblockIP">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="unblockIPResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBlockedIPAddresses">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getBlockedIPAddresses">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getBlockedIPAddressesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removePackage">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="removePackage">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="removePackageResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ping">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ping">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="pingResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrders">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getOrders">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getOrdersResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="voiceAuthCapture">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="voiceAuthCapture">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="voiceAuthCaptureResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addPackage">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="addPackage">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="addPackageResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="capturePayment">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="capturePayment">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="capturePaymentResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateContact">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="updateContact">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateContactResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrderSearchParameters">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getOrderSearchParameters">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getOrderSearchParametersResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updatePackage">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="updatePackage">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updatePackageResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Mobile">
+    <wsdl:port name="MobilePort" binding="tns:MobileSoapBinding">
+      <soap:address location="http://app.dev.fastshoppingcart-com.ide/xfws/Mobile" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

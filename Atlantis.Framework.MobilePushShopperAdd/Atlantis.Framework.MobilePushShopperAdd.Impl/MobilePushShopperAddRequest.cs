@@ -16,14 +16,26 @@ namespace Atlantis.Framework.MobilePushShopperAdd.Impl
 
       try
       {
-        shopperMobilePushService = ShopperMobilePushServiceClient.GetWebServiceInstance((WsConfigElement)config, mobilePushShopperAddRequestData.RequestTimeout);
+        if (!string.IsNullOrEmpty(mobilePushShopperAddRequestData.RegistrationId) &&
+            !string.IsNullOrEmpty(mobilePushShopperAddRequestData.MobileAppId))
+        {
+          shopperMobilePushService = ShopperMobilePushServiceClient.GetWebServiceInstance((WsConfigElement)config, mobilePushShopperAddRequestData.RequestTimeout);
 
-        string responseXml = shopperMobilePushService.PushNotificationInsert(mobilePushShopperAddRequestData.RegistrationId,
-                                                                             mobilePushShopperAddRequestData.MobileAppId,
-                                                                             mobilePushShopperAddRequestData.MobileDeviceId,
-                                                                             mobilePushShopperAddRequestData.ShopperID);
+          MobilePushShopperAddXml mobilePushShopperAddXml = new MobilePushShopperAddXml { RegistrationId = mobilePushShopperAddRequestData.RegistrationId,
+                                                                                          MobileAppId = mobilePushShopperAddRequestData.MobileAppId,
+                                                                                          MobileDeviceId = mobilePushShopperAddRequestData.MobileDeviceId,
+                                                                                          ShopperId = mobilePushShopperAddRequestData.ShopperID,
+                                                                                          PushEmail = mobilePushShopperAddRequestData.PushEmail,
+                                                                                          PushEmailSubscriptionId = mobilePushShopperAddRequestData.PushEmailSubscriptionId };
 
-        responseData = new MobilePushShopperAddResponseData(mobilePushShopperAddRequestData, responseXml);
+          string responseXml = shopperMobilePushService.PushNotificationInsertEx(mobilePushShopperAddXml.ToXml());
+
+          responseData = new MobilePushShopperAddResponseData(mobilePushShopperAddRequestData, responseXml);
+        }
+        else
+        {
+          throw new Exception("RegistrationId and MobileAppId are required");
+        }
       }
       catch (Exception ex)
       {

@@ -1,0 +1,53 @@
+﻿using System;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.QSC.Interface.Helpers;
+using Atlantis.Framework.QSC.Interface.QSCMobileAPI;
+using Atlantis.Framework.QSCUpdateOrderNotes.Interface;
+
+namespace Atlantis.Framework.QSCUpdateOrderNotes.Impl
+{
+  public class QSCUpdateOrderNotesRequest : IRequest
+  {
+    #region Implementation of IRequest
+
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
+    {
+      responseDetail response = null;
+      QSCUpdateOrderNotesResponseData responseData = null;
+      QSCUpdateOrderNotesRequestData request = requestData as QSCUpdateOrderNotesRequestData;
+
+      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+
+      try
+      {
+        using (service)
+        {
+          if (request != null)
+          {
+            service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+
+            response = service.updateOrderNotes(request.AccountUid, request.InvoiceId, request.OrderNotes);
+
+            if (response != null)
+              responseData = new QSCUpdateOrderNotesResponseData((response as responseDetail));
+
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        responseData = new QSCUpdateOrderNotesResponseData(request, ex);
+      }
+      finally
+      {
+        if (service != null)
+        {
+          service.Dispose();
+        }
+      }
+      return responseData;
+    }
+
+    #endregion
+  }
+}

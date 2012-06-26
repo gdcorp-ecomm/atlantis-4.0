@@ -13,16 +13,11 @@
 // 
 #pragma warning disable 1591
 
-namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
-    using System;
-    using System.Web.Services;
-    using System.Diagnostics;
-    using System.Web.Services.Protocols;
-    using System.Xml.Serialization;
-    using System.ComponentModel;
-    
-    
-    /// <remarks/>
+namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI
+{
+
+
+  /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17626")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]

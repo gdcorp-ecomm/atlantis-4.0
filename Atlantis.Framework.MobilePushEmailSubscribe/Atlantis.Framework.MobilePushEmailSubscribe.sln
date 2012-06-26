@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C7AD9606-4D95-4DE7-A226-3480AD77DF36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushEmailSubscribe.Impl", "Atlantis.Framework.MobilePushEmailSubscribe.Impl\Atlantis.Framework.MobilePushEmailSubscribe.Impl.csproj", "{7EACE185-2E62-4ECF-B590-BE166977C031}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushEmailSubscribe.Interface", "Atlantis.Framework.MobilePushEmailSubscribe.Interface\Atlantis.Framework.MobilePushEmailSubscribe.Interface.csproj", "{DB832872-FA14-4591-9014-277BFEFE071A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushEmailSubscribe.Tests", "Atlantis.Framework.MobilePushEmailSubscribe.Tests\Atlantis.Framework.MobilePushEmailSubscribe.Tests.csproj", "{8FCFA637-296C-48ED-AA8C-26D6947ACD7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{415EC04C-916F-44A2-AE0B-01A51EAF49D2}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.MobilePushEmailSubscribe.vsmdi = Atlantis.Framework.MobilePushEmailSubscribe.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.MobilePushEmailSubscribe.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.MobilePushEmailSubscribe.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.MobilePushEmailSubscribe.Impl\\Atlantis.Framework.MobilePushEmailSubscribe.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.MobilePushEmailSubscribe.Impl
+		SccLocalPath3 = Atlantis.Framework.MobilePushEmailSubscribe.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.MobilePushEmailSubscribe.Interface\\Atlantis.Framework.MobilePushEmailSubscribe.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.MobilePushEmailSubscribe.Interface
+		SccLocalPath4 = Atlantis.Framework.MobilePushEmailSubscribe.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.MobilePushEmailSubscribe.Tests\\Atlantis.Framework.MobilePushEmailSubscribe.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.MobilePushEmailSubscribe.Tests
+		SccLocalPath5 = Atlantis.Framework.MobilePushEmailSubscribe.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.MobilePushEmailSubscribe.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EACE185-2E62-4ECF-B590-BE166977C031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EACE185-2E62-4ECF-B590-BE166977C031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EACE185-2E62-4ECF-B590-BE166977C031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EACE185-2E62-4ECF-B590-BE166977C031}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB832872-FA14-4591-9014-277BFEFE071A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB832872-FA14-4591-9014-277BFEFE071A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB832872-FA14-4591-9014-277BFEFE071A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB832872-FA14-4591-9014-277BFEFE071A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FCFA637-296C-48ED-AA8C-26D6947ACD7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FCFA637-296C-48ED-AA8C-26D6947ACD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FCFA637-296C-48ED-AA8C-26D6947ACD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FCFA637-296C-48ED-AA8C-26D6947ACD7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {C7AD9606-4D95-4DE7-A226-3480AD77DF36}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {C7AD9606-4D95-4DE7-A226-3480AD77DF36}
+	EndGlobalSection
+EndGlobal

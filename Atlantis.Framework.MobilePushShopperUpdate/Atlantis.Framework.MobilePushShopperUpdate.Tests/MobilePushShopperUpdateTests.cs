@@ -18,7 +18,7 @@ namespace Atlantis.Framework.MobilePushShopperUpdate.Tests
     [DeploymentItem("atlantis.config")]
     public void ValidShopperUpdateNotification()
     {
-      int shopperPushId = 13;
+      int shopperPushId = 63;
       string registrationId = "d3d4d197-638d-47b3-a379-1a9f094cf502";
       string deviceId = "5d022bdf-e080-45b2-8712-4f12eef79922";
       string mobileAppId = "1"; //iPhone
@@ -27,6 +27,8 @@ namespace Atlantis.Framework.MobilePushShopperUpdate.Tests
                                                                                               registrationId,
                                                                                               mobileAppId,
                                                                                               deviceId,
+                                                                                              "trwalker@godaddy.com",
+                                                                                              177,
                                                                                               "847235",
                                                                                               "http://www.MobilePushShopperAddTests.com",
                                                                                               string.Empty,
@@ -59,6 +61,8 @@ namespace Atlantis.Framework.MobilePushShopperUpdate.Tests
                                                                                               registrationId,
                                                                                               mobileAppId,
                                                                                               deviceId,
+                                                                                              string.Empty,
+                                                                                              0,
                                                                                               string.Empty,
                                                                                               "http://www.MobilePushShopperAddTests.com",
                                                                                               string.Empty,

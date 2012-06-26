@@ -1,9 +1,11 @@
 ﻿using System.Xml.Linq;
 
-namespace Atlantis.Framework.MobilePushShopperAdd.Impl
+namespace Atlantis.Framework.MobilePushShopperUpdate.Impl
 {
-  internal class MobilePushShopperAddXml
+  internal class MobilePushShopperUpdateXml
   {
+    public int ShopperPushId { get; set; }
+
     public string RegistrationId { get; set; }
 
     public string MobileAppId { get; set; }
@@ -18,36 +20,39 @@ namespace Atlantis.Framework.MobilePushShopperAdd.Impl
 
     public string ToXml()
     {
-      XElement mpnInsertElement = new XElement("MPNInsert");
+      XElement mpnUpdateElement = new XElement("MPNUpdate");
+
+      XAttribute shopperPushNotificationIdAttribute = new XAttribute("ShopperMobilePushNotificationID", ShopperPushId);
+      mpnUpdateElement.Add(shopperPushNotificationIdAttribute);
 
       XAttribute registrationIdAttribute = new XAttribute("RegistrationID", RegistrationId);
-      mpnInsertElement.Add(registrationIdAttribute);
+      mpnUpdateElement.Add(registrationIdAttribute);
 
       XAttribute mobileAppIdAttribute = new XAttribute("ShopperMobileAppID", MobileAppId);
-      mpnInsertElement.Add(mobileAppIdAttribute);
-      
+      mpnUpdateElement.Add(mobileAppIdAttribute);
+
       XAttribute mobileDeviceIdAttribute = new XAttribute("DeviceID", MobileDeviceId);
-      mpnInsertElement.Add(mobileDeviceIdAttribute);
-      
-      if(!string.IsNullOrEmpty(ShopperId))
+      mpnUpdateElement.Add(mobileDeviceIdAttribute);
+
+      if (!string.IsNullOrEmpty(ShopperId))
       {
         XAttribute shopperIdAttribute = new XAttribute("ShopperID", ShopperId);
-        mpnInsertElement.Add(shopperIdAttribute);
+        mpnUpdateElement.Add(shopperIdAttribute);
       }
 
       if (!string.IsNullOrEmpty(PushEmail))
       {
         XAttribute pushEmailAttribute = new XAttribute("PushEmail", PushEmail);
-        mpnInsertElement.Add(pushEmailAttribute);
+        mpnUpdateElement.Add(pushEmailAttribute);
       }
 
       if (PushEmailSubscriptionId > 0)
       {
         XAttribute pushEmailSubscriptionIdAttribute = new XAttribute("PushEmailSubscriptionID", PushEmailSubscriptionId);
-        mpnInsertElement.Add(pushEmailSubscriptionIdAttribute);
+        mpnUpdateElement.Add(pushEmailSubscriptionIdAttribute);
       }
 
-      return mpnInsertElement.ToString();
+      return mpnUpdateElement.ToString();
     }
   }
 }

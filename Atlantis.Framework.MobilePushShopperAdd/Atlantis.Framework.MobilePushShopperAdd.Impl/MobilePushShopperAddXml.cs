@@ -1,5 +1,4 @@
 ﻿using System.Xml.Linq;
-using System.Xml.Serialization;
 
 namespace Atlantis.Framework.MobilePushShopperAdd.Impl
 {
@@ -15,7 +14,6 @@ namespace Atlantis.Framework.MobilePushShopperAdd.Impl
 
     public string PushEmail { get; set; }
 
-    [XmlAttribute(AttributeName = "PushEmailSubscriptionID")]
     public long PushEmailSubscriptionId { get; set; }
 
     public string ToXml()

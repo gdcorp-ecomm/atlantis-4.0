@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1B1D4B5C-6F9E-4445-855F-A2ADB1FE4553}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushEmailUnsubscribe.Impl", "Atlantis.Framework.MobilePushEmailUnsubscribe.Impl\Atlantis.Framework.MobilePushEmailUnsubscribe.Impl.csproj", "{9DD594E5-0420-41DD-9619-399A0722C8F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushEmailUnsubscribe.Interface", "Atlantis.Framework.MobilePushEmailUnsubscribe.Interface\Atlantis.Framework.MobilePushEmailUnsubscribe.Interface.csproj", "{1AD310AE-4FA1-4EFA-91AD-23DA09930187}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobilePushEmailUnsubscribe.Tests", "Atlantis.Framework.MobilePushEmailUnsubscribe.Tests\Atlantis.Framework.MobilePushEmailUnsubscribe.Tests.csproj", "{117DC229-5F4D-4C2A-967E-90A78F871A36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2E11E791-FAF1-4AEB-BEA3-D9C65BFC06B0}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.MobilePushEmailUnsubscribe.vsmdi = Atlantis.Framework.MobilePushEmailUnsubscribe.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.MobilePushEmailUnsubscribe.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.MobilePushEmailUnsubscribe.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.MobilePushEmailUnsubscribe.Impl\\Atlantis.Framework.MobilePushEmailUnsubscribe.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.MobilePushEmailUnsubscribe.Impl
+		SccLocalPath3 = Atlantis.Framework.MobilePushEmailUnsubscribe.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.MobilePushEmailUnsubscribe.Interface\\Atlantis.Framework.MobilePushEmailUnsubscribe.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.MobilePushEmailUnsubscribe.Interface
+		SccLocalPath4 = Atlantis.Framework.MobilePushEmailUnsubscribe.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.MobilePushEmailUnsubscribe.Tests\\Atlantis.Framework.MobilePushEmailUnsubscribe.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.MobilePushEmailUnsubscribe.Tests
+		SccLocalPath5 = Atlantis.Framework.MobilePushEmailUnsubscribe.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.MobilePushEmailUnsubscribe.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DD594E5-0420-41DD-9619-399A0722C8F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DD594E5-0420-41DD-9619-399A0722C8F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DD594E5-0420-41DD-9619-399A0722C8F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DD594E5-0420-41DD-9619-399A0722C8F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AD310AE-4FA1-4EFA-91AD-23DA09930187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AD310AE-4FA1-4EFA-91AD-23DA09930187}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AD310AE-4FA1-4EFA-91AD-23DA09930187}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AD310AE-4FA1-4EFA-91AD-23DA09930187}.Release|Any CPU.Build.0 = Release|Any CPU
+		{117DC229-5F4D-4C2A-967E-90A78F871A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{117DC229-5F4D-4C2A-967E-90A78F871A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{117DC229-5F4D-4C2A-967E-90A78F871A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{117DC229-5F4D-4C2A-967E-90A78F871A36}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {1B1D4B5C-6F9E-4445-855F-A2ADB1FE4553}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {1B1D4B5C-6F9E-4445-855F-A2ADB1FE4553}
+	EndGlobalSection
+EndGlobal

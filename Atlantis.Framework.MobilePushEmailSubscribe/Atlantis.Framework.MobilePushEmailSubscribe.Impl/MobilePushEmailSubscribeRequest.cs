@@ -30,7 +30,6 @@ namespace Atlantis.Framework.MobilePushEmailSubscribe.Impl
           {
             webRequest.Headers.Add(customRequestHeader.Key, customRequestHeader.Value);
           }
-
         }
 
         if (webRequest != null)

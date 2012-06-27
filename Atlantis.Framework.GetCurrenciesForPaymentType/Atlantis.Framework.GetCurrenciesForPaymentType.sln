@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{084050C4-ED17-4B42-A01C-D00C76FC633A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetCurrenciesForPaymentType.Interface", "Atlantis.Framework.GetCurrenciesForPaymentType.Interface\Atlantis.Framework.GetCurrenciesForPaymentType.Interface.csproj", "{B84A3EBB-D213-45FA-808E-66E518769414}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetCurrenciesForPaymentType.Impl", "Atlantis.Framework.GetCurrenciesForPaymentType.Impl\Atlantis.Framework.GetCurrenciesForPaymentType.Impl.csproj", "{7D78543F-4DBA-4CE4-9DE0-BDC5CDE026E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetCurrenciesForPaymentType.Tests", "Atlantis.Framework.GetCurrenciesForPaymentType.Tests\Atlantis.Framework.GetCurrenciesForPaymentType.Tests.csproj", "{67C0B55F-5B74-4C6A-8E50-030D3885D2B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{76347E38-2CFC-4A01-9C4B-7219C407DAF5}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.GetCurrenciesForPaymentType.vsmdi = Atlantis.Framework.GetCurrenciesForPaymentType.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.GetCurrenciesForPaymentType.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.GetCurrenciesForPaymentType.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.GetCurrenciesForPaymentType.Interface\\Atlantis.Framework.GetCurrenciesForPaymentType.Interface.csproj
+		SccProjectName3 = Atlantis.Framework.GetCurrenciesForPaymentType.Interface
+		SccLocalPath3 = Atlantis.Framework.GetCurrenciesForPaymentType.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.GetCurrenciesForPaymentType.Impl\\Atlantis.Framework.GetCurrenciesForPaymentType.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.GetCurrenciesForPaymentType.Impl
+		SccLocalPath4 = Atlantis.Framework.GetCurrenciesForPaymentType.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.GetCurrenciesForPaymentType.Tests\\Atlantis.Framework.GetCurrenciesForPaymentType.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.GetCurrenciesForPaymentType.Tests
+		SccLocalPath5 = Atlantis.Framework.GetCurrenciesForPaymentType.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.GetCurrenciesForPaymentType.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B84A3EBB-D213-45FA-808E-66E518769414}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B84A3EBB-D213-45FA-808E-66E518769414}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B84A3EBB-D213-45FA-808E-66E518769414}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B84A3EBB-D213-45FA-808E-66E518769414}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D78543F-4DBA-4CE4-9DE0-BDC5CDE026E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D78543F-4DBA-4CE4-9DE0-BDC5CDE026E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D78543F-4DBA-4CE4-9DE0-BDC5CDE026E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D78543F-4DBA-4CE4-9DE0-BDC5CDE026E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67C0B55F-5B74-4C6A-8E50-030D3885D2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C0B55F-5B74-4C6A-8E50-030D3885D2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C0B55F-5B74-4C6A-8E50-030D3885D2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C0B55F-5B74-4C6A-8E50-030D3885D2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {084050C4-ED17-4B42-A01C-D00C76FC633A}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {084050C4-ED17-4B42-A01C-D00C76FC633A}
+	EndGlobalSection
+EndGlobal

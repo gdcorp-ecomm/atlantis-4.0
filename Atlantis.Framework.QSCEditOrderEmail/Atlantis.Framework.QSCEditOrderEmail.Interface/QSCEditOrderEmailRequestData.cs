@@ -15,6 +15,8 @@ namespace Atlantis.Framework.QSCEditOrderEmail.Interface
       string emailAddress
       ) : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
+      RequestTimeout = TimeSpan.FromSeconds(5);
+
       AccountUid = accountUid;
       InvoiceId = invoiceId;
       EmailAddress = emailAddress;

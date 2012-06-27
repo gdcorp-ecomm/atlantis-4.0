@@ -28,7 +28,7 @@ namespace Atlantis.Framework.QSCGetOrderSearchParameters.Tests
       Assert.IsTrue(response.IsSuccess);
       Assert.IsTrue(response.Response.searchableFields.Count() > 0);
 
-      Debug.WriteLine(response.ToXML());
+      Console.WriteLine(response.ToXML());
     }
   }
 }

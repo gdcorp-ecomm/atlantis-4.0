@@ -9,6 +9,7 @@ using Atlantis.Framework.SessionCache;
 
 namespace Atlantis.Framework.QSCGetOrderSearchParameters.Interface
 {
+  [DataContract]
   public class QSCGetOrderSearchParametersResponseData : IResponseData, ISessionSerializableResponse
   {
     private readonly AtlantisException _ex;
@@ -34,9 +35,11 @@ namespace Atlantis.Framework.QSCGetOrderSearchParameters.Interface
       this.response = response;
     }
 
+    [DataMember]
     public getOrderSearchParametersResponseDetail Response
     {
       get { return response; }
+      set { response = value; }
     }
 
     private QSCStatusCodes responseStatus
@@ -54,18 +57,21 @@ namespace Atlantis.Framework.QSCGetOrderSearchParameters.Interface
       }
     }
 
+    private bool _isSuccess;
+    [DataMember]
     public bool IsSuccess
     {
       get
       {
-        bool bSuccess = false;
+        bool _isSuccess = false;
         if (this.response != null)
         {
-          bSuccess = (responseStatus == QSCStatusCodes.SUCCESS);
+          _isSuccess = (responseStatus == QSCStatusCodes.SUCCESS);
         }
 
-        return bSuccess;
+        return _isSuccess;
       }
+      set { _isSuccess = value; }
     }
 
 

@@ -13,6 +13,7 @@ namespace Atlantis.Framework.QSCGetOrderSearchParameters.Interface
                                                   string pathway, 
                                                   int pageCount) : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
+      RequestTimeout = TimeSpan.FromSeconds(5);
     }
 
     private string CacheKey

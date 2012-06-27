@@ -269,9 +269,8 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
                                                                       request.PageCount, request.EmailAddress,
                                                                       optIn.OptInId, request.PrivateLabelId,
                                                                       request.EmailTypeId, request.FirstName,
-                                                                      request.LastName, true, savedBy)
+                                                                      request.LastName, true, savedBy, request.UserHostAddress)
                                                                       {
-                                                                        IPAddress = request.UserHostAddress,
                                                                         RequestTimeout = request.RequestTimeout
                                                                       };
 
@@ -291,9 +290,8 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
                                                                             request.OrderID, request.Pathway,
                                                                             request.PageCount, request.EmailAddress,
                                                                             optIn.OptInId, request.PrivateLabelId,
-                                                                            savedBy)
+                                                                            savedBy, request.UserHostAddress)
                                                                            {
-                                                                             IPAddress = request.UserHostAddress,
                                                                              RequestTimeout = request.RequestTimeout
                                                                            };
 

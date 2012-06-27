@@ -4,6 +4,7 @@ namespace Atlantis.Framework.AuthVerify.Interface
   public static class AuthVerifyStatusCodes
   {
     public const int Success = 1;
+    public const int SuccessTwoFactorEnabled = 6;
     public const int Failure = 0;
     public const int Locked = 3;
     public const int SuccessMixed = 2;

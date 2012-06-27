@@ -6,14 +6,15 @@ namespace Atlantis.Framework.MktgSubscribeAdd.Interface
 {
   public class MktgSubscribeAddResponseData : IResponseData
   {
-    private AtlantisException _exception = null;
-    private bool _isSuccess = false;
-    private string _responseXml = string.Empty;
-    
+    private readonly AtlantisException _exception;
+    private readonly string _responseXml = string.Empty;
+
+    public bool IsSuccess { get; private set; }
+
     public MktgSubscribeAddResponseData(string responseXml)
     {
       _responseXml = responseXml;
-      _isSuccess = ParseResponse();
+      IsSuccess = ParseResponse();
     }
 
     private bool ParseResponse()
@@ -21,9 +22,9 @@ namespace Atlantis.Framework.MktgSubscribeAdd.Interface
       bool result = false;
       if (!string.IsNullOrEmpty(_responseXml))
       {
-        XmlDocument _xmlDoc = new XmlDocument();
-        _xmlDoc.LoadXml(_responseXml);
-        string output = _xmlDoc.InnerText;
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.LoadXml(_responseXml);
+        string output = xmlDoc.InnerText;
         result = output == "SUCCESS" ? true : false;
       }
       return result;
@@ -39,13 +40,6 @@ namespace Atlantis.Framework.MktgSubscribeAdd.Interface
       _exception = new AtlantisException(requestData, "MktgSubscribeAddResponseData", ex.Message, ex.StackTrace);
     }
 
-    public bool IsSuccess
-    {
-      get { return _isSuccess; }
-    }
-
-    #region IResponseData Members
-
     public string ToXML()
     {
       return _responseXml;
@@ -55,7 +49,5 @@ namespace Atlantis.Framework.MktgSubscribeAdd.Interface
     {
       return _exception;
     }
-
-    #endregion
   }
 }

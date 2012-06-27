@@ -456,7 +456,9 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     public const int CloudServer805Year = 21985;
     public const int CloudServer8010Year = 21986;
 
-    public static List<int> productIds = null;
+    public static List<int> hostingProductIds = null;
+    public static List<int> wordPressProductIds = null;
+    public static List<int> cloudProductIds = null;
 
     public static bool isDomainsByProxy(int productId)
     {
@@ -465,9 +467,9 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     public static bool isHostingProduct(int productId)
     {
-      if (productIds == null)
+      if (hostingProductIds == null)
       {
-        productIds = new List<int>(new[]
+        hostingProductIds = new List<int>(new[]
                                                          {   
                                                              ProductIds.HostingSharedEconomyLinuxMonthly,
                                                              ProductIds.HostingSharedEconomyWindowsMonthly,
@@ -660,14 +662,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
                                                          });
       }
 
-      return productIds.Contains(productId);
+      return hostingProductIds.Contains(productId);
     }
 
     public static bool isWordPressHosting(int productId)
     {
-      if (productIds == null)
+      if (wordPressProductIds == null)
       {
-        productIds = new List<int>(new[]
+        wordPressProductIds = new List<int>(new[]
                                                          {   
                                                              ProductIds.HostingWordPressEconomyMonthly,
                                                              ProductIds.HostingWordPressEconomy1Year,
@@ -690,14 +692,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
                                                          });
       }
 
-      return productIds.Contains(productId);
+      return wordPressProductIds.Contains(productId);
     }
 
     public static bool isCloudServer(int productId)
     {
-      if (productIds == null)
+      if (cloudProductIds == null)
       {
-        productIds = new List<int>(new[]
+        cloudProductIds = new List<int>(new[]
                                                          {   
     UtilityCloudServer1Month,
     UtilityCloudServer1Year,
@@ -772,7 +774,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     CloudServer805Year,
     CloudServer8010Year});
       }
-      return productIds.Contains(productId);
+      return cloudProductIds.Contains(productId);
     }
   }
 }

@@ -22,6 +22,7 @@ namespace Atlantis.Framework.QSCRefundOrder.Tests
       QSCRefundOrderResponseData response = Engine.Engine.ProcessRequest(request, requestId) as QSCRefundOrderResponseData;
 
       Assert.IsFalse(response.IsSuccess);
+      Console.WriteLine(response.ToXML());
     }
 
     [TestMethod]
@@ -41,6 +42,7 @@ namespace Atlantis.Framework.QSCRefundOrder.Tests
       QSCRefundOrderResponseData response = Engine.Engine.ProcessRequest(request, requestId) as QSCRefundOrderResponseData;
 
       Assert.IsTrue(response.IsSuccess);
+      Console.WriteLine(response.ToXML());
     }
   }
 }

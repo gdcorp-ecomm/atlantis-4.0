@@ -14,6 +14,7 @@ namespace Atlantis.Framework.QSCRefundOrder.Interface
       string invoiceId) : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
       RequestTimeout = TimeSpan.FromSeconds(5);
+      
       AccountUid = accountUid;
       InvoiceId = invoiceId;
     }

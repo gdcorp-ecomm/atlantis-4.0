@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Atlantis.Framework.QSC.Interface.QSCMobileAPI;
 using Atlantis.Framework.QSCGetAccounts.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -25,7 +24,7 @@ namespace Atlantis.Framework.QSCGetAccounts.Tests
       Assert.IsFalse(response.IsSuccess);
       Assert.IsTrue(response.Response.responseStatus.statusCode == statusCode.SUCCESS_WITH_WARNINGS);
 
-      Debug.WriteLine(response.ToXML());
+      Console.WriteLine(response.ToXML());
     }
 
     [TestMethod]
@@ -44,7 +43,7 @@ namespace Atlantis.Framework.QSCGetAccounts.Tests
       Assert.IsTrue(response.IsSuccess);
       Assert.IsTrue(response.AccountList.Count >= 1);
 
-      Debug.WriteLine(response.ToXML());
+      Console.WriteLine(response.ToXML());
     }
   }
 }

@@ -62,28 +62,35 @@ namespace Atlantis.Framework.QSCGetAccounts.Interface
       }
     }
 
+    private bool _isSuccess;
     public bool IsSuccess
     {
       get
       {
-        bool bSuccess = false;
+        bool _isSuccess = false;
         if (this.response != null)
         {
-          bSuccess = (responseStatus == QSCStatusCodes.SUCCESS);
+          _isSuccess = (responseStatus == QSCStatusCodes.SUCCESS);
         }
 
-        return bSuccess;
+        return _isSuccess;
       }
+
+      set { _isSuccess = value; }
     }
 
+    [DataMember]
     public IList<account> AccountList
     {
       get { return _accountList; }
+      set { _accountList = value; }
     }
 
+    [DataMember]
     public getAccountResponseDetail Response
     {
       get { return response; }
+      set { response = value; }
     }
 
     #region Implementation of IResponseData

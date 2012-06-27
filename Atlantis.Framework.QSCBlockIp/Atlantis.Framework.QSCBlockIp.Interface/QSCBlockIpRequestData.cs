@@ -13,6 +13,7 @@ namespace Atlantis.Framework.QSCBlockIp.Interface
       string accountUid,
       string ipAddress) : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
+      RequestTimeout = TimeSpan.FromSeconds(5);
       AccountUid = accountUid;
       IpAddress = ipAddress;
     }

@@ -24,7 +24,7 @@ namespace Atlantis.Framework.QSCBlockIp.Tests
 
       Assert.IsTrue(response.IsSuccess);
 
-      Debug.WriteLine(response.ToXML());
+      Console.WriteLine(response.ToXML());
     }
 
     [TestMethod]
@@ -43,7 +43,7 @@ namespace Atlantis.Framework.QSCBlockIp.Tests
 
       Assert.IsFalse(response.IsSuccess);
 
-      Debug.WriteLine(response.ToXML());
+      Console.WriteLine(response.ToXML());
     }
   }
 }

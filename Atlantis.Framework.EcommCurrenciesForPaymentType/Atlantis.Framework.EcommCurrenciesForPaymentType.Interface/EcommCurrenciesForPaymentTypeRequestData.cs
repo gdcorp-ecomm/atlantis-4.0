@@ -1,16 +1,15 @@
 ﻿using System;
 using Atlantis.Framework.Interface;
 
-namespace Atlantis.Framework.GetCurrenciesForPaymentType.Interface
+namespace Atlantis.Framework.EcommCurrenciesForPaymentType.Interface
 {
-  public class GetCurrenciesForPaymentTypeRequestData : RequestData
+  public class EcommCurrenciesForPaymentTypeRequestData : RequestData
   {
-
     private string _basketType = "gdshop";
     private string _paymentType = "credit_card";
     private string _paymentSubType = string.Empty;
 
-    public GetCurrenciesForPaymentTypeRequestData(string shopperID,
+    public EcommCurrenciesForPaymentTypeRequestData(string shopperID,
                             string sourceURL,
                             string orderID,
                             string pathway,
@@ -73,7 +72,7 @@ namespace Atlantis.Framework.GetCurrenciesForPaymentType.Interface
 
     public override string GetCacheMD5()
     {
-      throw new Exception("GetCurrenciesForPaymentType is not a cacheable request.");
+      throw new Exception("EcommCurrenciesForPaymentType is not a cacheable request.");
     }
 
   }

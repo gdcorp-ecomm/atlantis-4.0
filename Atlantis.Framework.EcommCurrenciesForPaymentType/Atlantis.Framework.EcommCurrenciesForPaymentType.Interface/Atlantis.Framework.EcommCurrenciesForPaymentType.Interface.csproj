@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B84A3EBB-D213-45FA-808E-66E518769414}</ProjectGuid>
+    <ProjectGuid>{98F41E6D-9490-4C78-A7FB-CC449C958B06}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.GetCurrenciesForPaymentType.Interface</RootNamespace>
-    <AssemblyName>Atlantis.Framework.GetCurrenciesForPaymentType.Interface</AssemblyName>
+    <RootNamespace>Atlantis.Framework.EcommCurrenciesForPaymentType.Interface</RootNamespace>
+    <AssemblyName>Atlantis.Framework.EcommCurrenciesForPaymentType.Interface</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetCurrenciesForPaymentTypeRequestData.cs" />
-    <Compile Include="GetCurrenciesForPaymentTypeResponseData.cs" />
+    <Compile Include="EcommCurrenciesForPaymentTypeRequestData.cs" />
+    <Compile Include="EcommCurrenciesForPaymentTypeResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

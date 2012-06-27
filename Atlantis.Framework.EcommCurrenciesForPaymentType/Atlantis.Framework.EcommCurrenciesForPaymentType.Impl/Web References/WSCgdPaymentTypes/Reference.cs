@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace Atlantis.Framework.GetCurrenciesForPaymentType.Impl.WSCgdPaymentTypes
+namespace Atlantis.Framework.EcommCurrenciesForPaymentType.Impl.WSCgdPaymentTypes
 {
 
 
@@ -36,7 +36,7 @@ namespace Atlantis.Framework.GetCurrenciesForPaymentType.Impl.WSCgdPaymentTypes
         
         /// <remarks/>
         public WSCgdPaymentTypesService() {
-            this.Url = global::Atlantis.Framework.GetCurrenciesForPaymentType.Impl.Properties.Settings.Default.Atlantis_Framework_GetCurrenciesForPaymentType_Impl_WSCgdPaymentTypes_WSCgdPaymentTypesService;
+            this.Url = global::Atlantis.Framework.EcommCurrenciesForPaymentType.Impl.Properties.Settings.Default.Atlantis_Framework_EcommCurrenciesForPaymentType_Impl_WSCgdPaymentTypes_WSCgdPaymentTypesService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

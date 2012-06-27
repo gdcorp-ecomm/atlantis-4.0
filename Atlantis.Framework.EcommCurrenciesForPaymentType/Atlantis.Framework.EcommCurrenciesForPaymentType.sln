@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D3B35177-CCF0-4EA5-9885-F8D70A4FCC5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommCurrenciesForPaymentType.Interface", "Atlantis.Framework.EcommCurrenciesForPaymentType.Interface\Atlantis.Framework.EcommCurrenciesForPaymentType.Interface.csproj", "{98F41E6D-9490-4C78-A7FB-CC449C958B06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommCurrenciesForPaymentType.Impl", "Atlantis.Framework.EcommCurrenciesForPaymentType.Impl\Atlantis.Framework.EcommCurrenciesForPaymentType.Impl.csproj", "{53E1B0FE-0DD3-4447-BD55-48FC33846B7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommCurrenciesForPaymentType.Tests", "Atlantis.Framework.EcommCurrenciesForPaymentType.Tests\Atlantis.Framework.EcommCurrenciesForPaymentType.Tests.csproj", "{10CF8C9E-3DF4-4EB7-898E-3E2FF563FB46}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CCEDDB5E-D4F5-4A57-B6D7-29AE73D35FD3}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.EcommCurrenciesForPaymentType.vsmdi = Atlantis.Framework.EcommCurrenciesForPaymentType.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.EcommCurrenciesForPaymentType.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.EcommCurrenciesForPaymentType.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.EcommCurrenciesForPaymentType.Interface\\Atlantis.Framework.EcommCurrenciesForPaymentType.Interface.csproj
+		SccProjectName3 = Atlantis.Framework.EcommCurrenciesForPaymentType.Interface
+		SccLocalPath3 = Atlantis.Framework.EcommCurrenciesForPaymentType.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.EcommCurrenciesForPaymentType.Impl\\Atlantis.Framework.EcommCurrenciesForPaymentType.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.EcommCurrenciesForPaymentType.Impl
+		SccLocalPath4 = Atlantis.Framework.EcommCurrenciesForPaymentType.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.EcommCurrenciesForPaymentType.Tests\\Atlantis.Framework.EcommCurrenciesForPaymentType.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.EcommCurrenciesForPaymentType.Tests
+		SccLocalPath5 = Atlantis.Framework.EcommCurrenciesForPaymentType.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.EcommCurrenciesForPaymentType.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98F41E6D-9490-4C78-A7FB-CC449C958B06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98F41E6D-9490-4C78-A7FB-CC449C958B06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98F41E6D-9490-4C78-A7FB-CC449C958B06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98F41E6D-9490-4C78-A7FB-CC449C958B06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53E1B0FE-0DD3-4447-BD55-48FC33846B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53E1B0FE-0DD3-4447-BD55-48FC33846B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53E1B0FE-0DD3-4447-BD55-48FC33846B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53E1B0FE-0DD3-4447-BD55-48FC33846B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10CF8C9E-3DF4-4EB7-898E-3E2FF563FB46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10CF8C9E-3DF4-4EB7-898E-3E2FF563FB46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10CF8C9E-3DF4-4EB7-898E-3E2FF563FB46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10CF8C9E-3DF4-4EB7-898E-3E2FF563FB46}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D3B35177-CCF0-4EA5-9885-F8D70A4FCC5C}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {D3B35177-CCF0-4EA5-9885-F8D70A4FCC5C}
+	EndGlobalSection
+EndGlobal

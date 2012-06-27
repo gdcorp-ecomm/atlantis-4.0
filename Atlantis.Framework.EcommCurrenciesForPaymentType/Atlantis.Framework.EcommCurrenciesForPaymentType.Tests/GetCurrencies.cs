@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
-using Atlantis.Framework.GetCurrenciesForPaymentType.Interface;
+using Atlantis.Framework.EcommCurrenciesForPaymentType.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Atlantis.Framework.GetCurrenciesForPaymentType.Tests
+namespace Atlantis.Framework.EcommCurrenciesForPaymentType.Tests
 {
   /// <summary>
   /// Summary description for UnitTest1
   /// </summary>
   [TestClass]
-  public class GetAvailableCurrencies
+  public class GetCurrencies
   {
-    public GetAvailableCurrencies()
+    public GetCurrencies()
     {
       //
       // TODO: Add constructor logic here
@@ -60,19 +60,17 @@ namespace Atlantis.Framework.GetCurrenciesForPaymentType.Tests
     [TestMethod]
     public void TestMethod1()
     {
-
-      GetCurrenciesForPaymentTypeRequestData request = new GetCurrenciesForPaymentTypeRequestData("850774", string.Empty, string.Empty, string.Empty, 0);
+      EcommCurrenciesForPaymentTypeRequestData request = new EcommCurrenciesForPaymentTypeRequestData("850774", string.Empty, string.Empty, string.Empty, 0);
       //request.BasketType = "gdshop"; //default value "gdshop". See method description onhover
       //request.PaymentType = "credit_card"; //default value credit_card. See method description onhover
       request.PaymentSubType = "visa";
 
-      GetCurrenciesForPaymentTypeResponseData response = (GetCurrenciesForPaymentTypeResponseData)Engine.Engine.ProcessRequest(request, 553);
+      EcommCurrenciesForPaymentTypeResponseData response = (EcommCurrenciesForPaymentTypeResponseData)Engine.Engine.ProcessRequest(request, 553);
 
       List<string> currencyList = new List<string>();
       currencyList = response.AvaiblableCurrencyList;
 
       Assert.IsTrue(response.IsSuccess);
-
     }
   }
 }

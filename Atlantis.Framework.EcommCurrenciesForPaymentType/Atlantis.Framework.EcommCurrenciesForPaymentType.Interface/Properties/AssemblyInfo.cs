@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.GetCurrenciesForPaymentType.Interface")]
+[assembly: AssemblyTitle("Atlantis.Framework.EcommCurrenciesForPaymentType.Interface")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
 #else
@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 #endif
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
-[assembly: AssemblyProduct("Atlantis.Framework.GetCurrenciesForPaymentType.Interface")]
+[assembly: AssemblyProduct("Atlantis.Framework.EcommCurrenciesForPaymentType.Interface")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7a919bdb-e6c6-45ee-b5ef-4f8fa55031f8")]
+[assembly: Guid("a2cfc426-a039-4506-8681-5aec9293c741")]
 
 // Version information for an assembly consists of the following four values:
 //

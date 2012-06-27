@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using System.Xml;
 using Atlantis.Framework.Interface;
 
-namespace Atlantis.Framework.GetCurrenciesForPaymentType.Interface
+namespace Atlantis.Framework.EcommCurrenciesForPaymentType.Interface
 {
-  public class GetCurrenciesForPaymentTypeResponseData : IResponseData
+  public class EcommCurrenciesForPaymentTypeResponseData : IResponseData
   {
     private AtlantisException _exception = null;
     private string _responseXml;
     bool _isSuccess = false;
 
-    public GetCurrenciesForPaymentTypeResponseData(string responseXml)
+    public EcommCurrenciesForPaymentTypeResponseData(string responseXml)
     {
       _responseXml = responseXml;
       _isSuccess = true;
     }
 
-    public GetCurrenciesForPaymentTypeResponseData(string responseXml, AtlantisException exAtlantis)
+    public EcommCurrenciesForPaymentTypeResponseData(string responseXml, AtlantisException exAtlantis)
     {
       _responseXml = responseXml;
       _exception = exAtlantis;
     }
 
-    public GetCurrenciesForPaymentTypeResponseData(string responseXml, RequestData oRequestData, Exception ex)
+    public EcommCurrenciesForPaymentTypeResponseData(string responseXml, RequestData oRequestData, Exception ex)
     {
       _responseXml = responseXml;
       _exception = new AtlantisException(oRequestData, oRequestData.GetType().ToString(), ex.Message, ex.StackTrace, ex);

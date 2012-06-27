@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7D78543F-4DBA-4CE4-9DE0-BDC5CDE026E1}</ProjectGuid>
+    <ProjectGuid>{53E1B0FE-0DD3-4447-BD55-48FC33846B7C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.GetCurrenciesForPaymentType.Impl</RootNamespace>
-    <AssemblyName>Atlantis.Framework.GetCurrenciesForPaymentType.Impl</AssemblyName>
+    <RootNamespace>Atlantis.Framework.EcommCurrenciesForPaymentType.Impl</RootNamespace>
+    <AssemblyName>Atlantis.Framework.EcommCurrenciesForPaymentType.Impl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetCurrenciesForPaymentTypeRequest.cs" />
+    <Compile Include="EcommCurrenciesForPaymentTypeRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -64,9 +64,9 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.GetCurrenciesForPaymentType.Interface\Atlantis.Framework.GetCurrenciesForPaymentType.Interface.csproj">
-      <Project>{B84A3EBB-D213-45FA-808E-66E518769414}</Project>
-      <Name>Atlantis.Framework.GetCurrenciesForPaymentType.Interface</Name>
+    <ProjectReference Include="..\Atlantis.Framework.EcommCurrenciesForPaymentType.Interface\Atlantis.Framework.EcommCurrenciesForPaymentType.Interface.csproj">
+      <Project>{98F41E6D-9490-4C78-A7FB-CC449C958B06}</Project>
+      <Name>Atlantis.Framework.EcommCurrenciesForPaymentType.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -85,7 +85,7 @@
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Atlantis_Framework_GetCurrenciesForPaymentType_Impl_WSCgdPaymentTypes_WSCgdPaymentTypesService</CachedSettingsPropName>
+      <CachedSettingsPropName>Atlantis_Framework_EcommCurrenciesForPaymentType_Impl_WSCgdPaymentTypes_WSCgdPaymentTypesService</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>

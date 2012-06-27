@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Atlantis.Framework.GetCurrenciesForPaymentType.Impl.Properties {
+namespace Atlantis.Framework.EcommCurrenciesForPaymentType.Impl.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -28,10 +28,10 @@ namespace Atlantis.Framework.GetCurrenciesForPaymentType.Impl.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://gdcomm.dev.glbt1.gdg:80/WSCgdPaymentTypes/WSCgdPaymentTypes.dll?Handler=De" +
             "fault")]
-        public string Atlantis_Framework_GetCurrenciesForPaymentType_Impl_WSCgdPaymentTypes_WSCgdPaymentTypesService {
+        public string Atlantis_Framework_EcommCurrenciesForPaymentType_Impl_WSCgdPaymentTypes_WSCgdPaymentTypesService {
             get {
-                return ((string)(this["Atlantis_Framework_GetCurrenciesForPaymentType_Impl_WSCgdPaymentTypes_WSCgdPaymen" +
-                    "tTypesService"]));
+                return ((string)(this["Atlantis_Framework_EcommCurrenciesForPaymentType_Impl_WSCgdPaymentTypes_WSCgdPaym" +
+                    "entTypesService"]));
             }
         }
     }

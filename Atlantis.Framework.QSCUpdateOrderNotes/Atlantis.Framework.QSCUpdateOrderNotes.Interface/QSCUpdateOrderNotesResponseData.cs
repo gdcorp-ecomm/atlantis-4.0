@@ -42,24 +42,28 @@ namespace Atlantis.Framework.QSCUpdateOrderNotes.Interface
       }
     }
 
+    private bool _isSuccess;
     [DataMember]
     public bool IsSuccess
     {
       get
       {
-        bool bSuccess = false;
+        _isSuccess = false;
         if (this.response != null)
         {
-          bSuccess = (responseStatus == QSCStatusCodes.SUCCESS);
+          _isSuccess = (responseStatus == QSCStatusCodes.SUCCESS);
         }
 
-        return bSuccess;
+        return _isSuccess;
       }
+      set { _isSuccess = value; }
     }
 
+    [DataMember]
     public responseDetail Response
     {
       get { return response; }
+      set { response = value; }
     }
 
     #region Implementation of IResponseData
@@ -77,7 +81,7 @@ namespace Atlantis.Framework.QSCUpdateOrderNotes.Interface
           xml = backing.ToString();
         }
       }
-      catch (Exception)
+      catch (Exception ex)
       {
         xml = string.Empty;
       }

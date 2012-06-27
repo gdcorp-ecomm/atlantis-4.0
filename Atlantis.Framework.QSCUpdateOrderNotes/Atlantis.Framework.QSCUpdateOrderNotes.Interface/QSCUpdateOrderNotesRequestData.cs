@@ -15,6 +15,8 @@ namespace Atlantis.Framework.QSCUpdateOrderNotes.Interface
                                           string orderNotes
       ) : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
+      RequestTimeout = TimeSpan.FromSeconds(5);
+      
       AccountUid = accountUid;
       InvoiceId = invoiceId;
       OrderNotes = orderNotes;

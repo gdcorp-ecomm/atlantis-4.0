@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCUpdateOrderNotes.Tests
 
       Assert.IsTrue(response.IsSuccess);
 
-      Debug.WriteLine(response.ToXML());
+      Console.WriteLine(response.ToXML());
     }
 
     [TestMethod]
@@ -47,7 +47,7 @@ namespace Atlantis.Framework.QSCUpdateOrderNotes.Tests
       Assert.IsFalse(response.IsSuccess);
       Assert.IsTrue(response.Response.responseStatus.statusCode == statusCode.FAILURE);
 
-      Debug.WriteLine(response.ToXML());
+      Console.WriteLine(response.ToXML());
     }
   }
 }

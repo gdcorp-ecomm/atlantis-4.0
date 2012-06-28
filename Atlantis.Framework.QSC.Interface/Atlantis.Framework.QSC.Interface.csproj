@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\QSCContactTypes.cs" />
     <Compile Include="Constants\QSCEmailTypes.cs" />
     <Compile Include="Enums\QSCStatusCodes.cs" />
     <Compile Include="Helpers\ServiceHelper.cs" />

@@ -5,7 +5,17 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.QSCUpdateOrderNotes.Interface")]
-[assembly: AssemblyDescription("")]
+
+#if DEBUG
+
+[assembly: AssemblyDescription("Debug")]
+
+#else
+
+[assembly: AssemblyDescription("Release")]
+
+#endif
+
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, LLC")]
 [assembly: AssemblyProduct("Atlantis.Framework.QSCUpdateOrderNotes.Interface")]

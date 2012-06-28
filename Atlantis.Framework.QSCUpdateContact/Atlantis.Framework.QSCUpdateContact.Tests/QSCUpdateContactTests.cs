@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
 using Atlantis.Framework.QSC.Interface.Constants;
 using Atlantis.Framework.QSCUpdateContact.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

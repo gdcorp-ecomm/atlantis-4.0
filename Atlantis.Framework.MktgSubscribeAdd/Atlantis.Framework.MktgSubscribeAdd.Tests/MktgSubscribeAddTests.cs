@@ -15,8 +15,16 @@ namespace Atlantis.Framework.MktgSubscribeAdd.Tests
                                                                             "http://www.MktgSubscribeAddTests.com/", 
                                                                             string.Empty, 
                                                                             Guid.NewGuid().ToString(),
-
-                                             0, "sthota@godaddy.com", 25, 1, 0, "Sridhar", "Thota", false, "172.68.2.12", "Atlantis Unit Tests");
+                                                                            0, 
+                                                                            "sthota@godaddy.com", 
+                                                                            25, 
+                                                                            1, 
+                                                                            0, 
+                                                                            "Sridhar", 
+                                                                            "Thota", 
+                                                                            false, 
+                                                                            "172.68.2.12", 
+                                                                            "Atlantis Unit Tests");
 
       MktgSubscribeAddResponseData response = (MktgSubscribeAddResponseData)Engine.Engine.ProcessRequest(request, 169);
       Assert.IsTrue(response.IsSuccess);

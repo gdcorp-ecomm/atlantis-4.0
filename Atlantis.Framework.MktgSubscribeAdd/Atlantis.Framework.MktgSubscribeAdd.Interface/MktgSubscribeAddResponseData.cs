@@ -30,11 +30,6 @@ namespace Atlantis.Framework.MktgSubscribeAdd.Interface
       return result;
     }
 
-    public MktgSubscribeAddResponseData(AtlantisException exception)
-    {
-      _exception = exception;
-    }
-
     public MktgSubscribeAddResponseData(RequestData requestData, Exception ex)
     {
       _exception = new AtlantisException(requestData, "MktgSubscribeAddResponseData", ex.Message, ex.StackTrace);

@@ -43,6 +43,32 @@ namespace MobilePushShopperGet.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    public void ValidShopperGetNotificationByPushEmail()
+    {
+      MobilePushShopperGetRequestData requestData = new MobilePushShopperGetRequestData("trwalker@godaddy.com",
+                                                                                        MobilePushShopperGetType.Email,
+                                                                                        "847235",
+                                                                                        "http://www.MobilePushShopperAddTests.com",
+                                                                                        string.Empty,
+                                                                                        Guid.NewGuid().ToString(),
+                                                                                        1);
+
+      try
+      {
+        MobilePushShopperGetResponseData responseData = (MobilePushShopperGetResponseData)Engine.ProcessRequest(requestData, 429);
+        WriteMessageToConsole(responseData.Xml);
+        Assert.IsTrue(responseData.IsSuccess);
+        Assert.IsTrue(responseData.Records.Count > 0);
+      }
+      catch (Exception ex)
+      {
+        WriteMessageToConsole(ex.Message + " " + ex.StackTrace);
+        Assert.Fail();
+      }
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
     public void ValidShopperGetNotificationByRegistrationId()
     {
       string registrationId = "ad4d631c9574beac6781ae2dceb58eca6047db91dea43981d9e0a27afd8902e8";

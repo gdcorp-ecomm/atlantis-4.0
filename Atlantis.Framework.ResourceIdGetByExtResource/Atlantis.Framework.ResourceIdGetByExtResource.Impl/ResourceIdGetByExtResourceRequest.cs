@@ -54,7 +54,7 @@ namespace Atlantis.Framework.ResourceIdGetByExtResource.Impl
                 }
               }
 
-              responseData = new ResourceIdGetByExtResourceResponseData(resourceId);
+              responseData = new ResourceIdGetByExtResourceResponseData(resourceId, configItem.ProductTypeId);
             }
             cn.Close();
           }

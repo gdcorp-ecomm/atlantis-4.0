@@ -67,7 +67,7 @@ namespace Atlantis.Framework.QSCGetAccounts.Interface
     {
       get
       {
-        bool _isSuccess = false;
+        _isSuccess = false;
         if (this.response != null)
         {
           _isSuccess = (responseStatus == QSCStatusCodes.SUCCESS);

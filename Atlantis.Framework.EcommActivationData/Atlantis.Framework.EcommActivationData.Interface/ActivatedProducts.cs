@@ -89,5 +89,30 @@ namespace Atlantis.Framework.EcommActivationData.Interface
         return _productData.GetAttribute<int>("diskspaceMB",24000);
       }
     }
+
+    public string HostingType
+    {
+      get
+      {
+        return _productData.GetAttribute<string>("hosting_type", string.Empty);
+      }
+    }
+
+    public string WordPressAdminEmail
+    {
+      get
+      {
+        return _productData.GetAttribute<string>("wordPressAdminEmail", string.Empty);
+      }
+    }
+
+    public string WordPressBlogName
+    {
+      get
+      {
+        return _productData.GetAttribute<string>("wordPressBlogName", string.Empty);
+      }
+    }
+
   }
 }

@@ -84,7 +84,7 @@ namespace Atlantis.Framework.EcommActivationData.Interface
       {
         this._resultXML = responseDoc.OuterXml;
       }
-      XmlNodeList freeProducts= responseDoc.SelectNodes("//Activation/FreeProducts/item");
+      XmlNodeList freeProducts= responseDoc.SelectNodes("//Activation/*/item");
       if (freeProducts.Count > 0)
       {
         foreach (XmlNode currentNode in freeProducts)

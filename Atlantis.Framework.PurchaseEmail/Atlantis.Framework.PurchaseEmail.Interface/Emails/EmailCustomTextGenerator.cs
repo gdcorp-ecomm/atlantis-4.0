@@ -119,15 +119,42 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     #endregion
 
     #region ItemText Functions - Private Label
+    public string BuildPadStringFunction(string tagValue, int columnWidth, HorizontalAlign justification)
+    {
+      string result = string.Empty;
+      System.Text.StringBuilder functionBuilder = new StringBuilder(200);
+      functionBuilder.Append("[%%FUNC.REQ.PAD.");
+      functionBuilder.Append(columnWidth.ToString());
+      functionBuilder.Append(". .");
+      switch (justification)
+      {
+        case HorizontalAlign.Center:
+          functionBuilder.Append("2");
+          break;
+        case HorizontalAlign.Justify:
+        case HorizontalAlign.Left:
+        default:
+          functionBuilder.Append("0");
+          break;
+        case HorizontalAlign.Right:
+          functionBuilder.Append("1");
+          break;
+      }
+      functionBuilder.Append(".1.");
+      functionBuilder.Append(tagValue);
+      functionBuilder.Append("%%]");
+      return functionBuilder.ToString();
+    }
+
     public void BuildItemsText_PL_PlainText(StringBuilder itemsTextBuilder, bool debug)
     {
       itemsTextBuilder.AppendLine(
-          PadStringForColumn("[%%LCST.REQ.QTY%%]", PlainTextPadding.QTY_COL_WIDTH, HorizontalAlign.Center)
+          BuildPadStringFunction("[%%LCST.REQ.QTY%%]", PlainTextPadding.QTY_COL_WIDTH, HorizontalAlign.Center)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn("[%%LCST.REQ.ITEM%%]", PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Center)
+        + BuildPadStringFunction("[%%LCST.REQ.ITEM%%]", PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Center)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
         + string.Empty.PadLeft(PlainTextPadding.DOLLAR_COL_WIDTH)
-        + PadStringForColumn("[%%LCST.REQ.PRICE%%]", PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Center)
+        + BuildPadStringFunction("[%%LCST.REQ.PRICE%%]", PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Center)
         );
       if (debug) itemsTextBuilder.Append("<br/>");
       itemsTextBuilder.AppendLine(string.Empty.PadLeft(PlainTextPadding.TOT_COLS_WIDTH, '-') + " ");
@@ -174,22 +201,22 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       itemsTextBuilder.AppendLine(string.Empty.PadLeft(PlainTextPadding.TOT_COLS_WIDTH, '-') + " ");
       if (debug) itemsTextBuilder.Append("<br/>");
 
-      itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.SUBTOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
+      itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.SUBTOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
         + PadStringForColumn(_currency.PriceText(_orderData.SubTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
-      itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
+      itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
         + PadStringForColumn(_currency.PriceText(_orderData.TotalShipping, false), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
-      itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.TAX%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
+      itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.TAX%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
         + PadStringForColumn(_currency.PriceText(_orderData.TotalTax, false), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
-      itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.TOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
+      itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.TOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
         + PadStringForColumn(_currency.PriceText(_orderData.TotalTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
@@ -267,12 +294,12 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     public void BuildItemsText_GD_PlainText(StringBuilder itemsTextBuilder, bool debug)
     {
       itemsTextBuilder.AppendLine(
-          PadStringForColumn("[%%LCST.REQ.QTY%%]", PlainTextPadding.QTY_COL_WIDTH, HorizontalAlign.Center)
+          BuildPadStringFunction("[%%LCST.REQ.QTY%%]", PlainTextPadding.QTY_COL_WIDTH, HorizontalAlign.Center)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn("[%%LCST.REQ.ITEM%%]", PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Center)
+        + BuildPadStringFunction("[%%LCST.REQ.ITEM%%]", PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Center)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
         + string.Empty.PadLeft(PlainTextPadding.DOLLAR_COL_WIDTH)
-        + PadStringForColumn("[%%LCST.REQ.PRICE%%]", PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Center)
+        + BuildPadStringFunction("[%%LCST.REQ.PRICE%%]", PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Center)
         );
 
       if (debug) itemsTextBuilder.Append("<br/>");
@@ -339,28 +366,28 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       if (_orderData.OrderDiscountAmount.Price != 0)
       {
-        itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.SPECIAL_SAVINGS%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
+        itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.SPECIAL_SAVINGS%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
           + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
           + PadStringForColumn(_currency.PriceText(_orderData.OrderDiscountAmount, false), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
         if (debug) itemsTextBuilder.Append("<br/>");
       }
 
-      itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.SUBTOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
+      itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.SUBTOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
         + PadStringForColumn(_currency.PriceText(_orderData.SubTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
-      itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
+      itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
         + PadStringForColumn(_currency.PriceText(_orderData.TotalShipping, false), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
-      itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.TAX%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
+      itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.TAX%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
         + PadStringForColumn(_currency.PriceText(_orderData.TotalTax, false), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
-      itemsTextBuilder.AppendLine(PadStringForColumn("[%%LCST.REQ.TOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
+      itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.TOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
         + PadStringForColumn(_currency.PriceText(_orderData.TotalTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");

@@ -1,15 +1,20 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.Auth.Interface")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Atlantis.Framework.AuthSendPasswordResetEmail.Impl")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+#endif
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
-[assembly: AssemblyProduct("Atlantis.Framework.Auth.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2012")]
+[assembly: AssemblyCompany("GoDaddy")]
+[assembly: AssemblyProduct("Atlantis.Framework.AuthSendPasswordResetEmail.Impl")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8297362a-9fdf-404f-b116-4965727ad086")]
+[assembly: Guid("59ba01dd-9453-4295-b842-ec9b93a91739")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -3,6 +3,7 @@
   public static class AuthValidationCodes
   {
     public const int ValidateShopperIdRequired = -100;
+    public const int ValidatePrivateLabelIdRequired = -105;
     public const int ValidatePasswordRequired = -110;
     public const int ValidateLoginNameRequired = -120;
     public const int ValidateHintRequired = -130;

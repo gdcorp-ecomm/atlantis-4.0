@@ -26,10 +26,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       public string Header { get; set; }
       public List<ListItem> ListItems { get; set; }
 
-      public class ListItem : ElementBase
-      {
-        public string BoldText { get; set; }
-      }
+      public class ListItem : ElementBase { }
     }
   }
 }

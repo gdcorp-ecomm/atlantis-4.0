@@ -14,6 +14,12 @@ namespace Atlantis.Framework.ResourceIdGetByExtResource.Impl
 
     private const string CONFIG_STORED_PROCEDURE = "gdshop_product_typeOrionGetExternalResourceProcedureName_sp";
     private const string EXTERNAL_RESOURCE_ID_PARAM = "@s_externalResourceID";
+    private const string COLUMN_RESOURCE_ID = "resource_id";
+    private const string COLUMN_PRODUCT_TYPE_ID = "gdshop_product_typeId";
+    private const string COLUMN_NAMESPACE = "nameSpace";
+    private const string COLUMN_ORION_NAMESPACE = "OrionNamespace";
+    private const string COLUMN_EXTERNAL_RESOURCE_PROC = "getByExternalResourceProcedureName";
+    private const string COLUMN_EXTERNAL_RESOURCE_CONN_STR = "getByExternalResourceConnectionString";
 
     #endregion
 
@@ -30,7 +36,7 @@ namespace Atlantis.Framework.ResourceIdGetByExtResource.Impl
         var request = (ResourceIdGetByExtResourceRequestData)requestData;
 
         //Get proc to execute
-        ProcConfigItem configItem = ProcConfigList[request.OrionNamespace];
+        ProcConfigItem configItem = ProcConfigList[request.OrionNamespace.ToLowerInvariant()];
         if (configItem != null)
         {
 
@@ -81,9 +87,7 @@ namespace Atlantis.Framework.ResourceIdGetByExtResource.Impl
       int resourceId = 0;
 
       if (reader.FieldCount > 0)
-      {
-        resourceId = reader.GetInt32(0);
-      }
+        resourceId = Convert.ToInt32(reader[COLUMN_RESOURCE_ID]);
 
       return resourceId;
     }
@@ -124,8 +128,13 @@ namespace Atlantis.Framework.ResourceIdGetByExtResource.Impl
           {
             while (reader.Read())
             {
-              if(!procConfigList.ContainsKey(reader.GetString(2)))
-                procConfigList.Add(reader.GetString(2), new ProcConfigItem(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4)));
+              var orionNamespace = Convert.ToString(reader["OrionNamespace"]).ToLowerInvariant();
+              if (!procConfigList.ContainsKey(orionNamespace))
+                procConfigList.Add(orionNamespace, new ProcConfigItem(Convert.ToInt32(reader[COLUMN_PRODUCT_TYPE_ID]), 
+                                                                      Convert.ToString(reader[COLUMN_NAMESPACE]), 
+                                                                      Convert.ToString(reader[COLUMN_ORION_NAMESPACE]), 
+                                                                      Convert.ToString(reader[COLUMN_EXTERNAL_RESOURCE_PROC]), 
+                                                                      Convert.ToString(reader[COLUMN_EXTERNAL_RESOURCE_CONN_STR])));
             }
           }
         }

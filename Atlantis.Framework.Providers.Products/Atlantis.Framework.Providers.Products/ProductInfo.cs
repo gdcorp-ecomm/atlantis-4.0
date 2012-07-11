@@ -92,7 +92,7 @@ namespace Atlantis.Framework.Providers.Products
       }
     }
 
-    public string Description2
+    public string FriendlyDescription
     {
       get { return _description2; }
     }

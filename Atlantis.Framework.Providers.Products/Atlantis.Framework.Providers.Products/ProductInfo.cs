@@ -13,6 +13,7 @@ namespace Atlantis.Framework.Providers.Products
     private int _numberOfPeriods;
     private int _gdshop_product_typeID;
     private string _name;
+    private string _description2= string.Empty;
 
     public ProductInfo(int productId, int privateLabelId)
     {
@@ -73,6 +74,9 @@ namespace Atlantis.Framework.Providers.Products
                     case "name":
                       _name = reader.Value;
                       break;
+                    case "description2":
+                      _description2 = reader.Value;
+                      break;
 
                   }
                 }
@@ -86,6 +90,11 @@ namespace Atlantis.Framework.Providers.Products
       {
         _name = _productId.ToString();
       }
+    }
+
+    public string Description2
+    {
+      get { return _description2; }
     }
 
     public string Name

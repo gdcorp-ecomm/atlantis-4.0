@@ -90,6 +90,10 @@ namespace Atlantis.Framework.Providers.Products
       {
         _name = _productId.ToString();
       }
+      if (string.IsNullOrEmpty(_description2))
+      {
+        _description2 = _name;
+      }
     }
 
     public string FriendlyDescription

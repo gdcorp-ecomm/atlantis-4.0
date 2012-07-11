@@ -22,15 +22,15 @@ namespace Atlantis.Framework.MobilePushShopperUpdate.Impl
           shopperMobilePushService = ShopperMobilePushServiceClient.GetWebServiceInstance((WsConfigElement)config, mobilePushShopperUpdateRequestData.RequestTimeout);
 
 
-          MobilePushShopperUpdateXml mobilePushShopperAddXml = new MobilePushShopperUpdateXml { ShopperPushId = mobilePushShopperUpdateRequestData.ShopperPushId,
-                                                                                                RegistrationId = mobilePushShopperUpdateRequestData.RegistrationId,
-                                                                                                MobileAppId = mobilePushShopperUpdateRequestData.MobileAppId,
-                                                                                                MobileDeviceId = mobilePushShopperUpdateRequestData.MobileDeviceId,
-                                                                                                ShopperId = mobilePushShopperUpdateRequestData.ShopperID,
-                                                                                                PushEmail = mobilePushShopperUpdateRequestData.PushEmail,
-                                                                                                PushEmailSubscriptionId = mobilePushShopperUpdateRequestData.PushEmailSubscriptionId };
+          MobilePushShopperUpdateXml mobilePushShopperUpdateXml = new MobilePushShopperUpdateXml { ShopperPushId = mobilePushShopperUpdateRequestData.ShopperPushId,
+                                                                                                   RegistrationId = mobilePushShopperUpdateRequestData.RegistrationId,
+                                                                                                   MobileAppId = mobilePushShopperUpdateRequestData.MobileAppId,
+                                                                                                   MobileDeviceId = mobilePushShopperUpdateRequestData.MobileDeviceId,
+                                                                                                   ShopperId = mobilePushShopperUpdateRequestData.ShopperID,
+                                                                                                   PushEmail = mobilePushShopperUpdateRequestData.PushEmail,
+                                                                                                   PushEmailSubscriptionId = mobilePushShopperUpdateRequestData.PushEmailSubscriptionId };
 
-          string responseXml = shopperMobilePushService.PushNotificationUpdateEx(mobilePushShopperAddXml.ToXml());
+          string responseXml = shopperMobilePushService.PushNotificationUpdateEx(mobilePushShopperUpdateXml.ToXml());
 
           responseData = new MobilePushShopperUpdateResponseData(mobilePushShopperUpdateRequestData, responseXml);
         }

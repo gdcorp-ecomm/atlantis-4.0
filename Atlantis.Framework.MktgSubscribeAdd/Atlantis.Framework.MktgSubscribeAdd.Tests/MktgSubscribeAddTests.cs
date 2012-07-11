@@ -29,5 +29,28 @@ namespace Atlantis.Framework.MktgSubscribeAdd.Tests
       MktgSubscribeAddResponseData response = (MktgSubscribeAddResponseData)Engine.Engine.ProcessRequest(request, 169);
       Assert.IsTrue(response.IsSuccess);
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void AddEmailPushSubscriber()
+    {
+      MktgSubscribeAddRequestData request = new MktgSubscribeAddRequestData("847235",
+                                                                            "http://www.MktgSubscribeAddTests.com/",
+                                                                            string.Empty,
+                                                                            Guid.NewGuid().ToString(),
+                                                                            0,
+                                                                            "trwalker@godaddy.com",
+                                                                            44,
+                                                                            1,
+                                                                            0,
+                                                                            "Tim",
+                                                                            "Walker",
+                                                                            true,
+                                                                            "172.68.2.12",
+                                                                            "Atlantis Unit Tests");
+
+      MktgSubscribeAddResponseData response = (MktgSubscribeAddResponseData)Engine.Engine.ProcessRequest(request, 169);
+      Assert.IsTrue(response.IsSuccess);
+    }
   }
 }

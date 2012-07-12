@@ -30,5 +30,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     public const string HostingConciergeText = "XSELLTEXT";
     public const string AlipayRenewalText = "ALIPAYRENEWAL";
     public const string CartXml = "CART_XML";
+    public const string PLCustomMessage = "CUSTOMRESELLERMESSAGE";
   }
 }

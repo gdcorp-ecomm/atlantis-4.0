@@ -19,7 +19,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     OrderConfirmation_WWD,
     OrderConfirmation_SuperReseller,
     OrderConfirmation_DBP,
-    OrderConfirmation_ProductOnlyReseller,
-    OrderConfirmation_WelcomeTellAFriend
+    OrderConfirmation_ProductOnlyReseller
   }
 }

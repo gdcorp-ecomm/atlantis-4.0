@@ -75,7 +75,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       string notice = String.Empty;
       switch (EmailTemplate.Id)
       {
-        case EmailTemplateType.OrderConfirmation_WelcomeTellAFriend:
         case EmailTemplateType.GDWelcome:
         case EmailTemplateType.OrderConfirmation:
           var xmlPaymentMethod = Order.OrderXmlDoc.SelectSingleNode("/ORDER/ORDERDETAIL[@cc_type='AliPay']");
@@ -161,8 +160,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             string hostingImage = String.Empty;
             switch (EmailTemplate.Id)
             {
-                case EmailTemplateType.OrderConfirmation_WelcomeTellAFriend:
-                case EmailTemplateType.GDWelcome:
+               case EmailTemplateType.GDWelcome:
                     hostingImage = Links.GetUrl(LinkTypes.Image, "promos/htmlemails/bbtemplate/52345_hosting_01c.jpg",
                                                QueryParamMode.ExplicitParameters, false);
                     hostingHeight = 106;
@@ -221,27 +219,27 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       {
         if (DoRecurringHostingExists())
         {
-          temp = EmailTemplates[EmailTemplateType.RecurringHostingConfirmation];
+          if (IsNewShopper)
+          {
+            temp = EmailTemplates[EmailTemplateType.GDWelcome];
+          }
+          else
+          {
+            temp = EmailTemplates[EmailTemplateType.OrderConfirmation];
+          }
+          
         }
         else
         {
           if (EmailRequired.ProcessFee && EmailRequired.OtherProductIdsExist)
           {
-            if (HttpContext.Current != null && HttpContext.Current.Session != null &&
-              HttpContext.Current.Session["CreateShopperReferredByFriend"] != null)
+            if (IsShopperFirstOrder)
             {
-              temp = EmailTemplates[EmailTemplateType.OrderConfirmation_WelcomeTellAFriend];
+              temp = EmailTemplates[EmailTemplateType.GDWelcome];
             }
             else
             {
-              if (IsNewShopper)
-              {
-                temp = EmailTemplates[EmailTemplateType.GDWelcome];
-              }
-              else
-              {
-                temp = EmailTemplates[EmailTemplateType.OrderConfirmation];
-              }
+              temp = EmailTemplates[EmailTemplateType.OrderConfirmation];
             }
           }
           else
@@ -252,21 +250,13 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             }
             else
             {
-              if (HttpContext.Current != null && HttpContext.Current.Session != null &&
-              HttpContext.Current.Session["CreateShopperReferredByFriend"] != null)
+              if (IsShopperFirstOrder)
               {
-                temp = EmailTemplates[EmailTemplateType.OrderConfirmation_WelcomeTellAFriend];
+                temp = EmailTemplates[EmailTemplateType.GDWelcome];
               }
               else
               {
-                if (IsNewShopper)
-                {
-                  temp = EmailTemplates[EmailTemplateType.GDWelcome];
-                }
-                else
-                {
-                  temp = EmailTemplates[EmailTemplateType.OrderConfirmation];
-                }
+                temp = EmailTemplates[EmailTemplateType.OrderConfirmation];
               }
             }
           }

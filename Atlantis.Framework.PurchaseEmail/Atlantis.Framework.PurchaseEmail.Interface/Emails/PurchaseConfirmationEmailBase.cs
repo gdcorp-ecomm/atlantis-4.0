@@ -15,6 +15,7 @@ using Atlantis.Framework.Providers.Links;
 using Atlantis.Framework.Providers.Preferences;
 using Atlantis.Framework.Providers.Products;
 using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.ShopperFirstOrderGet.Interface;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 {
@@ -66,6 +67,33 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       get
       {
         return _orderData.ShowVATId;
+      }
+    }
+
+    bool? _isShopperFirstOrder;
+    public bool IsShopperFirstOrder
+    {
+      get
+      {
+        if (!_isShopperFirstOrder.HasValue)
+        {
+          _isShopperFirstOrder = false;
+          ShopperFirstOrderGetRequestData request = new ShopperFirstOrderGetRequestData(_orderData.ShopperId, string.Empty, _orderData.OrderId, _orderData.Pathway, _orderData.PageCount);
+          try
+          {
+            ShopperFirstOrderGetResponseData response = Engine.Engine.ProcessRequest(request, PurchaseEmailEngineRequests.ShopperFirstOrderGet) as ShopperFirstOrderGetResponseData;
+            if (response.IsSuccess && response.IsShopperNew)
+            {
+              _isShopperFirstOrder = true;
+            }
+          }
+          catch (System.Exception ex)
+          {
+            AtlantisException aex = new AtlantisException(request, "IsShopperFirstOrder", "Exception caught. ", String.Empty, ex);
+            Engine.Engine.LogAtlantisException(aex);
+          }
+        }
+        return _isShopperFirstOrder.Value;
       }
     }
 
@@ -470,9 +498,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             {
               case EmailTemplateType.RecurringHostingConfirmation:
                 isc = "gdbb46";
-                break;
-              case EmailTemplateType.OrderConfirmation_WelcomeTellAFriend:
-                isc = "gdbb1673";
                 break;
               case EmailTemplateType.GDWelcome:
                 isc = "bb120720";

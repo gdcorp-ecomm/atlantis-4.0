@@ -20,6 +20,22 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     {
     }
 
+    private string ResellerCustomMessage
+    {
+      get
+      {
+        string customMessage = string.Empty;
+        string customAction = DataCache.DataCache.GetPLData(SiteContext.PrivateLabelId, PLDataCategory.ResellerCustomReceiptOption);
+        switch (customAction)
+        {
+          case "1":
+            customMessage = DataCache.DataCache.GetPLData(SiteContext.PrivateLabelId, PLDataCategory.ResellerCustomReceiptText);
+            break;          
+        }
+        return customMessage;
+      }
+    }
+
     private bool IsSuperReseller
     {
       get
@@ -55,6 +71,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       SetParam(EmailTokenNames.ShopperId, ShopperContext.ShopperId);
       SetParam(EmailTokenNames.OrderTime, OrderTime);
       SetParam(EmailTokenNames.VATId, VATId);
+      SetParam(EmailTokenNames.PLCustomMessage, ResellerCustomMessage);
 
       string accountInfoText = string.Empty;
       if (EmailTemplate.Id != EmailTemplateType.RefundConfirmation_ME)

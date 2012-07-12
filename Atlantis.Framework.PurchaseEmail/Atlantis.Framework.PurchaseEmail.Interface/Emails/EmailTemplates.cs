@@ -25,7 +25,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       this.Add(EmailTemplateType.OrderConfirmation_SuperReseller, new EmailTemplate(EmailTemplateType.OrderConfirmation_SuperReseller, "SRInstantResellerOrderConfirmation", ORDER_PROCESSING));
       this.Add(EmailTemplateType.OrderConfirmation_DBP, new EmailTemplate(EmailTemplateType.OrderConfirmation_DBP, "DBPOrderConfirmation", ORDER_PROCESSING));
       this.Add(EmailTemplateType.OrderConfirmation_ProductOnlyReseller, new EmailTemplate(EmailTemplateType.OrderConfirmation_ProductOnlyReseller, "ProductOnlyResellerOrderConfirmation", ORDER_PROCESSING));
-	    this.Add(EmailTemplateType.OrderConfirmation_WelcomeTellAFriend, new EmailTemplate(EmailTemplateType.OrderConfirmation_WelcomeTellAFriend, "WelcomeTellAFriend", ORDER_PROCESSING));
     }
   }
 }

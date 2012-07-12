@@ -89,9 +89,7 @@
     <Compile Include="Emails\EmailTemplateType.cs" />
     <Compile Include="Emails\EmailTemplates.cs" />
     <Compile Include="Emails\EmailTokenNames.cs" />
-    <Compile Include="Emails\EULAData.cs" />
     <Compile Include="Emails\EULAItem.cs" />
-    <Compile Include="Emails\EULARules.cs" />
     <Compile Include="Emails\EULARuleType.cs" />
     <Compile Include="Emails\EULAType.cs" />
     <Compile Include="Emails\Eula\EulaProvider.cs" />
@@ -186,6 +184,14 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer.Impl.csproj">
       <Project>{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}</Project>
       <Name>Atlantis.Framework.Providers.ProviderContainer.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.ShopperFirstOrderGet\Atlantis.Framework.ShopperFirstOrderGet.Impl\Atlantis.Framework.ShopperFirstOrderGet.Impl.csproj">
+      <Project>{A97FE745-78C7-4184-91AE-89543CB8DE0D}</Project>
+      <Name>Atlantis.Framework.ShopperFirstOrderGet.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.ShopperFirstOrderGet\Atlantis.Framework.ShopperFirstOrderGet.Interface\Atlantis.Framework.ShopperFirstOrderGet.Interface.csproj">
+      <Project>{89210EF0-715A-4B27-ACB4-1F98C0EF773B}</Project>
+      <Name>Atlantis.Framework.ShopperFirstOrderGet.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Interface\Atlantis.Framework.ShopperPriceType.Interface.csproj">
       <Project>{7B5DE027-416D-4D07-8177-4F80A5767FB8}</Project>

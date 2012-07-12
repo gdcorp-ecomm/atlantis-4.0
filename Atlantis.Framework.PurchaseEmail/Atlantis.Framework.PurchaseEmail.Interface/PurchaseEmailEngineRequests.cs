@@ -10,6 +10,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     private static int _shopperPriceType = 25;
     private static int _dataProvider = 35;
 
+    public const int ShopperFirstOrderGet = 348;
+
     public static int GetShopper
     {
       get { return _getShopper; }

@@ -78,30 +78,65 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
             xmlWriter.WriteEndElement();
           }
         }
-
-        xmlWriter.WriteStartElement("Payments");
-
-        foreach (PaymentElement paymentElement in _paymentElements)
-        {
-          if (paymentElement != null)
-          {
-            xmlWriter.WriteStartElement(paymentElement.ElementName);
-            foreach (KeyValuePair<string, string> pair in paymentElement)
-            {
-              if (!string.IsNullOrEmpty(pair.Key))
-              {
-                xmlWriter.WriteAttributeString(pair.Key, pair.Value);
-              }
-            }
-            xmlWriter.WriteEndElement();
-          }
-        }
-
-        xmlWriter.WriteEndElement();
+        
+        ProcessPayments(xmlWriter, _paymentElements);        
+        
         xmlWriter.WriteEndElement();
       }
 
       return result.ToString();
+    }
+
+    /// <summary>
+    /// Place Payments in proper order in the XML
+    /// Profile
+    /// ISCPayment
+    /// GiftCard
+    /// CreditLine
+    /// CCPayment
+    /// ACHPersonall
+    /// ACHBusiness
+    /// NetGiro
+    /// PaypalPayment
+    /// PrepaidPayment
+    /// ZeroPayment
+    /// </summary>
+    /// <param name="xmlWriter"></param>
+    /// <param name="pymentElements"></param>
+    private void ProcessPayments(XmlTextWriter xmlWriter, List<PaymentElement> paymentElements)
+    {
+      xmlWriter.WriteStartElement("Payments");
+      ProcessPayment(xmlWriter, "Profile", paymentElements);
+      ProcessPayment(xmlWriter, "ISCPayment", paymentElements);
+      ProcessPayment(xmlWriter, "GiftCardPayment", paymentElements);
+      ProcessPayment(xmlWriter, "CreditLinePayment", paymentElements);
+      ProcessPayment(xmlWriter, "CCPayment", paymentElements);
+      ProcessPayment(xmlWriter, "ACHPersonalPayment", paymentElements);
+      ProcessPayment(xmlWriter, "ACHBusinessPayment", paymentElements);
+      ProcessPayment(xmlWriter, "NetGiroPayment", paymentElements);
+      ProcessPayment(xmlWriter, "PaypalPayment", paymentElements);
+      ProcessPayment(xmlWriter, "PrepaidPayment", paymentElements);
+      ProcessPayment(xmlWriter, "ZeroPayment", paymentElements);
+      xmlWriter.WriteEndElement();
+    }
+
+    private void ProcessPayment(XmlTextWriter xmlWriter, string PaymentType, List<PaymentElement> paymentElements)
+    {
+      foreach (PaymentElement paymentElement in paymentElements)
+      {
+        if (paymentElement != null && paymentElement.ElementName==PaymentType)
+        {
+          xmlWriter.WriteStartElement(paymentElement.ElementName);
+          foreach (KeyValuePair<string, string> pair in paymentElement)
+          {
+            if (!string.IsNullOrEmpty(pair.Key))
+            {
+              xmlWriter.WriteAttributeString(pair.Key, pair.Value);
+            }
+          }
+          xmlWriter.WriteEndElement();
+        }
+      }
     }
 
     public override string ToXML()

@@ -32,7 +32,7 @@ namespace Atlantis.Framework.EcommLOCAccounts.Impl
           }
           else
           {
-            var ex = new AtlantisException(requestData, "EcommHasLineOfCreditRequest", status, string.Empty);
+            var ex = new AtlantisException(requestData, "EcommLOCAccountsRequest", status, string.Empty);
             response = new EcommLOCAccountsResponseData(ex);
           }
         }

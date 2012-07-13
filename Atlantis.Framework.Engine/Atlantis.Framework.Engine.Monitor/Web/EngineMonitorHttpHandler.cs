@@ -14,16 +14,17 @@ namespace Atlantis.Framework.Engine.Monitor.Web
 {
   public class EngineMonitorHttpHandler : IHttpHandler
   {
-    private static bool _allowExternalRequestsToRunTests = false;
+    private static bool _skipInternalRequestCheck = false;
     /// <summary>
-    /// If set to true ALL unit tests will be runable from external requests.  This is NOT a setting for single tests.
+    /// If set to true ALL monitors will be runnable without making an internal request check.
     /// Do NOT set this to true on public facing websites. It is an override for internal sites only that 
     /// cannot set ISiteContext.IsRequestInternal = true.
     /// </summary>
-    public static bool AllowExternalRequestsToRunTests
+    [Obsolete("Do NOT set this value to true for externally facing sites and applications")]
+    public static bool SkipInternalRequestCheck
     {
-      get { return _allowExternalRequestsToRunTests; }
-      set { _allowExternalRequestsToRunTests = value; }
+      get { return _skipInternalRequestCheck; }
+      set { _skipInternalRequestCheck = value; }
     }
 
     public bool IsReusable
@@ -80,7 +81,7 @@ namespace Atlantis.Framework.Engine.Monitor.Web
     {
       try
       {
-        if ((AllowExternalRequestsToRunTests) || (IsRequestInternal))
+        if ((SkipInternalRequestCheck) || (IsRequestInternal))
         {
           string methodName = MethodBase.GetCurrentMethod().Name;
           var routeValues = context.Request.RequestContext.RouteData.Values;

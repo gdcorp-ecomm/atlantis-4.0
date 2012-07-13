@@ -50,6 +50,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
       }
     }
 
+    public Dictionary<EULARuleType, EULAItem> PossibleEulaItems
+    {
+      get
+      {
+        return _possibleEulaItems;
+      }
+    }
+
     private void SetupEulaItems()
     {
       _possibleEulaItems[EULARuleType.Reg] = SetupEulaData(EULARuleType.Reg);

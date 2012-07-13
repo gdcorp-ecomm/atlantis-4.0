@@ -103,6 +103,7 @@
     <Compile Include="Emails\PurchaseConfirmationEmailBase.cs" />
     <Compile Include="ContextIds.cs" />
     <Compile Include="Emails\StringExtensions.cs" />
+    <Compile Include="ErrorHelper.cs" />
     <Compile Include="PLDataCategory.cs" />
     <Compile Include="Providers\LinkTypes.cs" />
     <Compile Include="Providers\ProductGroups.cs" />

@@ -190,6 +190,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
           if (confirmationEmail != null)
           {
             result = confirmationEmail.GetMessageRequests();
+            string logMessageRequests = DataCache.DataCache.GetAppSetting("EMAIL_LOG_EMAIL_REQUESTS").ToLowerInvariant();
+            if (logMessageRequests == "true")
+            {
+              foreach (MessagingProcessRequestData currentRequest in result)
+              {
+                ErrorHelper.Log(currentRequest.ToXML(),string.Empty, "PurchaseEmailSend", orderData.OrderId,orderData, orderData);
+              }
+            }
           }
         }
       }

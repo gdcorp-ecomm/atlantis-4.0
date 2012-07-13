@@ -120,6 +120,43 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       }
     }
 
+    private void ProcessConfirmationType(PurchaseConfirmationEmailBase confirmationEmail,Dictionary<string, MessagingProcessRequestData> uniqueRequests)
+    {
+      foreach (MessagingProcessRequestData currentRequest in confirmationEmail.GetMessageRequests())
+      {
+        if (!uniqueRequests.ContainsKey(currentRequest.TemplateType))
+        {
+          uniqueRequests.Add(currentRequest.TemplateType, currentRequest);
+        }
+      }
+    }   
+
+    public List<MessagingProcessRequestData> AllPossibleMessageTypes()
+    {
+      List<MessagingProcessRequestData> result = new List<MessagingProcessRequestData>();
+      ObjectProviderContainer _objectContainer = new ObjectProviderContainer();
+      OrderData orderData = new OrderData(_orderXml, IsNewShopper, IsFraudRefund, _objectContainer, _localizationCode);
+      EmailRequired emailRequired = new EmailRequired(orderData);
+
+      Dictionary<string, MessagingProcessRequestData> uniqueRequests = new Dictionary<string, MessagingProcessRequestData>();
+      PurchaseConfirmationEmailBase confirmationEmail = new DBPAdminFeesConfirmationEmail(orderData, emailRequired, _objectContainer);
+      ProcessConfirmationType(confirmationEmail, uniqueRequests);
+
+      confirmationEmail = new AdminFeeConfirmationEmail(orderData, emailRequired, _objectContainer);
+      ProcessConfirmationType(confirmationEmail, uniqueRequests);
+
+      confirmationEmail = new GDConfirmationEmail(orderData, emailRequired, IsAZHumane,IsDevServer,this,_objectContainer);
+      ProcessConfirmationType(confirmationEmail, uniqueRequests);
+
+      confirmationEmail = new BRConfirmationEmail(orderData, emailRequired, IsDevServer, _objectContainer);
+      ProcessConfirmationType(confirmationEmail, uniqueRequests);
+
+      confirmationEmail = new PLConfirmationEmail(orderData, emailRequired, _objectContainer);
+      ProcessConfirmationType(confirmationEmail, uniqueRequests);      
+
+      return result;
+    }
+
     public List<MessagingProcessRequestData> GetPurchaseConfirmationEmailRequests()
     {
       AtlantisException exception;

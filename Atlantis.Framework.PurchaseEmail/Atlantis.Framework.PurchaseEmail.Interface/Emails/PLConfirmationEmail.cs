@@ -32,6 +32,10 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             customMessage = DataCache.DataCache.GetPLData(SiteContext.PrivateLabelId, PLDataCategory.ResellerCustomReceiptText);
             break;          
         }
+        if (IsHTMLEmail)
+        {
+          customMessage = customMessage + "<br/>";
+        }
         return customMessage;
       }
     }

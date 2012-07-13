@@ -122,11 +122,15 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
 
     private void ProcessConfirmationType(PurchaseConfirmationEmailBase confirmationEmail,Dictionary<string, MessagingProcessRequestData> uniqueRequests)
     {
-      foreach (MessagingProcessRequestData currentRequest in confirmationEmail.GetMessageRequests())
+      List<MessagingProcessRequestData> requestSet=confirmationEmail.GetMessageRequests();
+      if (requestSet != null)
       {
-        if (!uniqueRequests.ContainsKey(currentRequest.TemplateType))
+        foreach (MessagingProcessRequestData currentRequest in requestSet)
         {
-          uniqueRequests.Add(currentRequest.TemplateType, currentRequest);
+          if (!uniqueRequests.ContainsKey(currentRequest.TemplateType))
+          {
+            uniqueRequests.Add(currentRequest.TemplateType, currentRequest);
+          }
         }
       }
     }   
@@ -152,8 +156,12 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       ProcessConfirmationType(confirmationEmail, uniqueRequests);
 
       confirmationEmail = new PLConfirmationEmail(orderData, emailRequired, _objectContainer);
-      ProcessConfirmationType(confirmationEmail, uniqueRequests);      
+      ProcessConfirmationType(confirmationEmail, uniqueRequests);
 
+      foreach (KeyValuePair<string, MessagingProcessRequestData> currentItem in uniqueRequests)
+      {
+        result.Add(currentItem.Value);
+      }
       return result;
     }
 

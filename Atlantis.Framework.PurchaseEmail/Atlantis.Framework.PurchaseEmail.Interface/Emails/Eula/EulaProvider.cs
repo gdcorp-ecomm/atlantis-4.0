@@ -29,7 +29,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
     private const string LEGAL_RELATIVE_PATH = "agreements/ShowDoc.aspx";
     private const string TOPIC_RELATIVE_PATH = "topic/";
     private const string ARTICLE_RELATIVE_PATH = "article/";
-    private const string HELP_ARTICLE_RELATIVE_PATH = "help/article/";
 
     public EulaProvider(OrderData orderData, ILinkProvider links, ObjectProviderContainer providerContainer)
     {
@@ -605,7 +604,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
       string helpLink = string.Empty;
       if (_orderData.IsGodaddy)
       {
-        helpLink = _links.GetUrl(LinkTypes.Community, TOPIC_RELATIVE_PATH + pageid, QueryParamMode.CommonParameters, false, additionalQueryParameters);
+        if (!relativepath.Contains("help/"))
+        {
+          helpLink = _links.GetUrl(LinkTypes.Community,"help/"+ relativepath + pageid, QueryParamMode.CommonParameters, false, additionalQueryParameters);
+        }
+        else
+        {
+          helpLink = _links.GetUrl(LinkTypes.Community, relativepath + pageid, QueryParamMode.CommonParameters, false, additionalQueryParameters);
+        }
       }
       else
       {
@@ -973,7 +979,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           break;
         case EULARuleType.AdSpace:
           productName = "Ad Space";
-          productInfoURL = DetermineHelpURL(HELP_ARTICLE_RELATIVE_PATH , "6161",
+          productInfoURL = DetermineHelpURL("help/" + ARTICLE_RELATIVE_PATH, "6161",
                                          QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "AdSpace_TOS";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);

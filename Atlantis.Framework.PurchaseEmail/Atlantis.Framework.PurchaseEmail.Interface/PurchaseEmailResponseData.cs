@@ -11,7 +11,13 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
   public class PurchaseEmailResponseData : IResponseData
   {
     List<MessagingProcessResponseData> _messageResponses;
+    private List<string> _requestedEmails = new List<string>();    
     List<Exception> _exceptions;
+
+    public List<string> GetRequestedEmails()
+    {
+      return _requestedEmails;
+    }
 
     public PurchaseEmailResponseData()
     {
@@ -32,6 +38,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     public void AddMessageResponse(MessagingProcessResponseData response)
     {
       _messageResponses.Add(response);
+    }
+
+    public void AddRequestedEmail(string requestedMessage)
+    {
+      _requestedEmails.Add(requestedMessage);
     }
 
     public void AddException(Exception ex)

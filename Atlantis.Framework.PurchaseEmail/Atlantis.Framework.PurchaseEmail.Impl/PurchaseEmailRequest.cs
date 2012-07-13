@@ -30,6 +30,7 @@ namespace Atlantis.Framework.PurchaseEmail.Impl
             MessagingProcessResponseData response =
               (MessagingProcessResponseData)Engine.Engine.ProcessRequest(messageRequest, PurchaseEmailEngineRequests.MessagingProcess);
             result.AddMessageResponse(response);
+            result.AddRequestedEmail(messageRequest.ToXML());
           }
           catch (Exception ex)
           {

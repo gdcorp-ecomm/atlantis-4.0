@@ -48,8 +48,10 @@
     <Compile Include="AsyncState.cs" />
     <Compile Include="AtlantisException.cs" />
     <Compile Include="ConfigElement.cs" />
+    <Compile Include="ConfigElementStats.cs" />
     <Compile Include="IAsyncRequest.cs" />
     <Compile Include="IDebugContext.cs" />
+    <Compile Include="IErrorLogger.cs" />
     <Compile Include="IManagerContext.cs" />
     <Compile Include="IProviderContainer.cs" />
     <Compile Include="IProxyContext.cs" />

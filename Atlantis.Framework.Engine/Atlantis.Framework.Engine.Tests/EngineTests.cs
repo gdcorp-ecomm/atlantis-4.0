@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Engine.Tests.MockTriplet;
 using Atlantis.Framework.Interface;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.Engine.Tests
 {
@@ -86,6 +87,96 @@ namespace Atlantis.Framework.Engine.Tests
     {
       AtlantisException ex = new AtlantisException("EngineTests.LogException", "911", "Test log message only.", string.Empty, null, null);
       Engine.LogAtlantisException(ex);
+
+      Assert.AreEqual(LoggingStatusType.WorkingNormally, Engine.LoggingStatus);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void EngineStats()
+    {
+      for (int i = 0; i < 500; i++)
+      {
+        try
+        {
+          ConfigTestRequestData request = new ConfigTestRequestData("832652", string.Empty, string.Empty, string.Empty, 0);
+          ConfigTestResponseData response = (ConfigTestResponseData)Engine.ProcessRequest(request, 9997);
+        }
+        catch { }
+      }
+
+      ConfigElement config;
+      if (Engine.TryGetConfigElement(9997, out config))
+      {
+        Console.WriteLine(config.ProgID);
+        Console.WriteLine("File Version = " + config.AssemblyFileVersion);
+        Console.WriteLine("Description = " + config.AssemblyDescription);
+        Console.WriteLine("Succeeded: " + config.Stats.Succeeded.ToString());
+        Console.WriteLine("Failed: " + config.Stats.Failed.ToString());
+
+        TimeSpan averageSuccessTime = config.Stats.CalculateAverageSuccessTime();
+        Console.WriteLine("Success Avg ms: " + averageSuccessTime.TotalMilliseconds.ToString());
+
+        TimeSpan averageFailTime = config.Stats.CalculateAvarageFailTime();
+        Console.WriteLine("Fail Avg ms: " + averageFailTime.TotalMilliseconds.ToString());
+      }
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void MonitorData()
+    {
+      for (int i = 0; i < 500; i++)
+      {
+        try
+        {
+          ConfigTestRequestData request = new ConfigTestRequestData("832652", string.Empty, string.Empty, string.Empty, 0);
+          ConfigTestResponseData response = (ConfigTestResponseData)Engine.ProcessRequest(request, 9997);
+        }
+        catch { }
+      }
+
+      XDocument stats = Monitor.MonitorData.GetMonitorData(Monitor.MonitorDataTypes.Stats);
+      Assert.IsNotNull(stats);
+    }
+
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void LogExceptionOverriddenLogger()
+    {
+      TestLogger testLogger = new TestLogger();
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+
+      try
+      {
+        EngineLogging.EngineLogger = testLogger;
+
+        AtlantisException ex = new AtlantisException("EngineTests.LogException", "911", "Test log message only.", string.Empty, null, null);
+        Engine.LogAtlantisException(ex);
+
+        Assert.AreEqual(LoggingStatusType.WorkingNormally, Engine.LoggingStatus);
+        Assert.IsTrue(testLogger.IGotLogged);
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    private class TestLogger : IErrorLogger
+    {
+      public bool IGotLogged { get; set; }
+
+      public TestLogger()
+      {
+        IGotLogged = false;
+      }
+
+      public void LogAtlantisException(AtlantisException atlantisException)
+      {
+        IGotLogged = atlantisException != null;
+      }
     }
   }
 }

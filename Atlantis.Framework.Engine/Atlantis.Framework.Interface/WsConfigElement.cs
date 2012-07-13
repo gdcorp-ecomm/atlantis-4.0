@@ -12,14 +12,14 @@ namespace Atlantis.Framework.Interface
       get { return _webServiceUrl; }
     }
 
-    public WsConfigElement(string progId, string assembly, bool LPC, string webServiceUrl)
-      : base(progId, assembly, LPC)
+    public WsConfigElement(int requestType, string progId, string assembly, bool LPC, string webServiceUrl)
+      : base(requestType, progId, assembly, LPC)
     {
       _webServiceUrl = webServiceUrl;
     }
 
-    public WsConfigElement(string progId, string assembly, bool LPC, string webServiceUrl, Dictionary<string, string> configValues)
-      : base(progId, assembly, LPC, configValues)
+    public WsConfigElement(int requestType, string progId, string assembly, bool LPC, string webServiceUrl, Dictionary<string, string> configValues)
+      : base(requestType, progId, assembly, LPC, configValues)
     {
       _webServiceUrl = webServiceUrl;
     }

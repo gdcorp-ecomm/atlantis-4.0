@@ -1,9 +1,9 @@
-﻿
-namespace Atlantis.Framework.Engine
+﻿namespace Atlantis.Framework.Engine
 {
   public enum LoggingStatusType
   {
     WorkingNormally = 0,
-    Error = 1
+    Error = 1,
+    NullLogger = 2
   }
 }

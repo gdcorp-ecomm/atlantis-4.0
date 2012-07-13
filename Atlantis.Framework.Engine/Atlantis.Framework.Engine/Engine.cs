@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using Atlantis.Framework.Interface;
@@ -14,10 +15,9 @@ namespace Atlantis.Framework.Engine
     public static event ProcessRequestStartDelegate OnProcessRequestStart;
     public static event ProcessRequestCompleteDelegate OnProcessRequestComplete;
 
-    static EngineLock _requestLock;
-    static Dictionary<string, IRequest> _requestItems;
-    static EngineLock _asyncRequestLock;
-    static Dictionary<string, IAsyncRequest> _asyncRequestItems;
+    static EngineRequestCache<IRequest> _requestCache;
+    static EngineRequestCache<IAsyncRequest> _asyncRequestCache;
+
     static EngineConfig _engineConfig;
 
     static Exception _lastLoggingException;
@@ -27,11 +27,8 @@ namespace Atlantis.Framework.Engine
     // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnbda/html/singletondespatt.asp
     static Engine()
     {
-      _requestLock = new EngineLock();
-      _requestItems = new Dictionary<string, IRequest>();
-
-      _asyncRequestLock = new EngineLock();
-      _asyncRequestItems = new Dictionary<string, IAsyncRequest>();
+      _requestCache = new EngineRequestCache<IRequest>();
+      _asyncRequestCache = new EngineRequestCache<IAsyncRequest>();
 
       _engineConfig = new EngineConfig();
       _lastLoggingException = null;
@@ -44,34 +41,58 @@ namespace Atlantis.Framework.Engine
     {
       IResponseData response = null;
       ConfigElement configItem = null;
+      Stopwatch callTimer = null;
 
       try
       {
         configItem = _engineConfig.GetConfig(requestType);
 
-        IRequest oIRequest = GetRequestObject(configItem);
-
+        IRequest oIRequest = _requestCache.GetRequestObject(configItem);
         Guid requestId = Guid.NewGuid();
 
-        if (OnProcessRequestStart != null)
+        ProcessRequestStartDelegate startDelegate = OnProcessRequestStart;
+        if (startDelegate != null)
         {
-          OnProcessRequestStart.Invoke(request, requestType, requestId);
+          startDelegate(request, requestType, requestId);
         }
 
+        callTimer = Stopwatch.StartNew();
         response = oIRequest.RequestHandler((RequestData)request, configItem);
+        callTimer.Stop();
 
-        if (OnProcessRequestComplete != null)
+        ProcessRequestCompleteDelegate completeDelegate = OnProcessRequestComplete;
+        if (completeDelegate != null)
         {
-          OnProcessRequestComplete(request, requestType, requestId, response);
+          completeDelegate(request, requestType, requestId, response);
         }
       }
       catch (AtlantisException ex)
       {
+        if (callTimer != null)
+        {
+          callTimer.Stop();
+        }
+
+        if (configItem != null)
+        {
+          configItem.Stats.LogFailure(callTimer);
+        }
+
         LogAtlantisException(ex);
         throw ex;
       }
       catch (Exception ex)
       {
+        if (callTimer != null)
+        {
+          callTimer.Stop();
+        }
+
+        if (configItem != null)
+        {
+          configItem.Stats.LogFailure(callTimer);
+        }
+
         System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(0, false);
         System.Diagnostics.StackFrame sf = st.GetFrame(0);
 
@@ -88,37 +109,21 @@ namespace Atlantis.Framework.Engine
       AtlantisException exTest = response.GetException();
       if (exTest != null)
       {
+        if (configItem != null)
+        {
+          configItem.Stats.LogFailure(callTimer);
+        }
+
         LogAtlantisException(exTest);
         throw exTest;
       }
 
-      return response;
-    }
-
-    private static IRequest GetRequestObject(ConfigElement configItem)
-    {
-      IRequest request = null;
-
-      // Avoid writer lock...check to see if value exist in cache
-      _requestLock.GetReaderLock();
-      bool requestFound = _requestItems.TryGetValue(configItem.ProgID, out request);
-      _requestLock.ReleaseReaderLock();
-
-      if (!requestFound)
+      if (configItem != null)
       {
-        Assembly loadedAssembly = Assembly.LoadFrom(configItem.Assembly);
-        request = (IRequest)loadedAssembly.CreateInstance(configItem.ProgID);
-
-        _requestLock.GetWriterLock();
-        // Someone else could have put value in cache while waiting
-        if (!_requestItems.ContainsKey(configItem.ProgID))
-        {
-          _requestItems.Add(configItem.ProgID, request);
-        }
-        _requestLock.ReleaseWriterLock();
+        configItem.Stats.LogSuccess(callTimer);
       }
 
-      return request;
+      return response;
     }
 
     #endregion
@@ -135,11 +140,16 @@ namespace Atlantis.Framework.Engine
       try
       {
         configItem = _engineConfig.GetConfig(requestType);
-        asyncRequest = GetAsyncRequestObject(configItem);
+        asyncRequest = _asyncRequestCache.GetRequestObject(configItem);
         asyncResult = asyncRequest.BeginHandleRequest(request, configItem, callback, state);
       }
       catch (AtlantisException ex)
       {
+        if (configItem != null)
+        {
+          configItem.Stats.LogFailure(null);
+        }
+
         LogAtlantisException(ex);
         throw ex;
       }
@@ -148,6 +158,11 @@ namespace Atlantis.Framework.Engine
       }
       catch (Exception ex)
       {
+        if (configItem != null)
+        {
+          configItem.Stats.LogFailure(null);
+        }
+
         System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(0, false);
         System.Diagnostics.StackFrame sf = st.GetFrame(0);
 
@@ -174,8 +189,9 @@ namespace Atlantis.Framework.Engine
 
         if (asyncState != null)
         {
-          asyncRequest = GetAsyncRequestObject(asyncState.Config);
+          asyncRequest = _asyncRequestCache.GetRequestObject(asyncState.Config);
           response = asyncRequest.EndHandleRequest(asyncResult);
+          asyncState.CallTimer.Stop();
         }
         else
         {
@@ -186,11 +202,23 @@ namespace Atlantis.Framework.Engine
       }
       catch (AtlantisException ex)
       {
+        if ((asyncState != null) && (asyncState.Config != null))
+        {
+          asyncState.CallTimer.Stop();
+          asyncState.Config.Stats.LogFailure(asyncState.CallTimer);
+        }
+
         LogAtlantisException(ex);
         throw ex;
       }
       catch (Exception ex)
       {
+        if ((asyncState != null) && (asyncState.Config != null))
+        {
+          asyncState.CallTimer.Stop();
+          asyncState.Config.Stats.LogFailure(asyncState.CallTimer);
+        }
+
         System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(0, false);
         System.Diagnostics.StackFrame sf = st.GetFrame(0);
 
@@ -206,37 +234,21 @@ namespace Atlantis.Framework.Engine
       AtlantisException exTest = response.GetException();
       if (exTest != null)
       {
+        if ((asyncState != null) && (asyncState.Config != null))
+        {
+          asyncState.Config.Stats.LogFailure(asyncState.CallTimer);
+        }
+
         LogAtlantisException(exTest);
         throw exTest;
       }
 
-      return response;
-    }
-
-    private static IAsyncRequest GetAsyncRequestObject(ConfigElement configItem)
-    {
-      IAsyncRequest asyncRequest = null;
-
-      // Avoid writer lock...check to see if value exist in cache
-      _asyncRequestLock.GetReaderLock();
-      bool asyncRequestFound = _asyncRequestItems.TryGetValue(configItem.ProgID, out asyncRequest);
-      _asyncRequestLock.ReleaseReaderLock();
-
-      if (!asyncRequestFound)
+      if ((asyncState != null) && (asyncState.Config != null))
       {
-        Assembly loadedAssembly = Assembly.LoadFrom(configItem.Assembly);
-        asyncRequest = (IAsyncRequest)loadedAssembly.CreateInstance(configItem.ProgID);
-
-        _asyncRequestLock.GetWriterLock();
-        // Someone else could have put value in cache while waiting
-        if (!_asyncRequestItems.ContainsKey(configItem.ProgID))
-        {
-          _asyncRequestItems.Add(configItem.ProgID, asyncRequest);
-        }
-        _asyncRequestLock.ReleaseWriterLock();
+        asyncState.Config.Stats.LogSuccess(asyncState.CallTimer);
       }
 
-      return asyncRequest;
+      return response;
     }
 
     #endregion
@@ -247,35 +259,16 @@ namespace Atlantis.Framework.Engine
     {
       try
       {
-        using (gdSiteLog.WSCgdSiteLogService oLog = new Atlantis.Framework.Engine.gdSiteLog.WSCgdSiteLogService())
+        IErrorLogger errorLogger = EngineLogging.EngineLogger;
+        if (errorLogger != null)
         {
-          oLog.Url = _engineConfig.LogWebServiceUrl;
-
-          // Get some defaults
-          string sourceServer = exAtlantis.SourceServer;
-          if (string.IsNullOrEmpty(sourceServer))
-          {
-            sourceServer = Environment.MachineName;
-          }
-
-          string errorDescription = exAtlantis.ErrorDescription;
-          if (string.IsNullOrEmpty(errorDescription))
-          {
-            Exception ex = exAtlantis.GetBaseException();
-            if (ex != null)
-            {
-              errorDescription = ex.Message + Environment.NewLine + ex.StackTrace;
-            }
-          }
-
-          oLog.LogErrorEx(sourceServer, exAtlantis.SourceFunction, exAtlantis.SourceURL,
-                          uint.Parse(exAtlantis.ErrorNumber), errorDescription,
-                          exAtlantis.ExData, exAtlantis.ShopperID, exAtlantis.OrderID,
-                          exAtlantis.ClientIP, exAtlantis.Pathway, exAtlantis.PageCount);
+          errorLogger.LogAtlantisException(exAtlantis);
           _loggingStatus = LoggingStatusType.WorkingNormally;
         }
-
-        // Capture Recent Exceptions
+        else
+        {
+          _loggingStatus = LoggingStatusType.NullLogger;
+        }
       }
       catch (Exception ex)
       {
@@ -304,13 +297,8 @@ namespace Atlantis.Framework.Engine
 
     private static void ClearAssemblyCache()
     {
-      _asyncRequestLock.GetWriterLock();
-      _asyncRequestItems.Clear();
-      _asyncRequestLock.ReleaseWriterLock();
-
-      _requestLock.GetWriterLock();
-      _requestItems.Clear();
-      _requestLock.ReleaseWriterLock();
+      _requestCache.Clear();
+      _asyncRequestCache.Clear();
     }
 
     public static IList<ConfigElement> GetConfigElements()
@@ -318,6 +306,10 @@ namespace Atlantis.Framework.Engine
       return _engineConfig.GetAllConfigs();
     }
 
+    public static bool TryGetConfigElement(int requestType, out ConfigElement configElement)
+    {
+      return _engineConfig.TryGetConfigElement(requestType, out configElement);
+    }
   }
 
 }

@@ -1,23 +1,32 @@
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Atlantis.Framework.Interface
 {
   public class ConfigElement
   {
+    private int _requestType;
     private string _progId;
     private string _assembly;
     private bool _lpc;
     private Dictionary<string, string> _configValues = null;
 
-    public ConfigElement(string progId, string assembly, bool lpc)
+    private volatile string _assemblyFileVersion = "0.0.0.0";
+    private volatile string _assemblyDescription = string.Empty;
+
+    ConfigElementStats _stats;
+
+    public ConfigElement(int requestType, string progId, string assembly, bool lpc)
     {
+      _requestType = requestType;
       _progId = progId;
       _assembly = assembly;
       _lpc = lpc;
+      _stats = new ConfigElementStats();
     }
 
-    public ConfigElement(string progId, string assembly, bool lpc, Dictionary<string, string> configValues)
-      : this(progId, assembly, lpc)
+    public ConfigElement(int requestType, string progId, string assembly, bool lpc, Dictionary<string, string> configValues)
+      : this(requestType, progId, assembly, lpc)
     {
       if ((configValues != null) && (configValues.Count > 0))
       {
@@ -36,6 +45,11 @@ namespace Atlantis.Framework.Interface
       return result;
     }
 
+    public int RequestType
+    {
+      get { return _requestType; }
+    }
+
     public string ProgID
     {
       get { return _progId; }
@@ -49,6 +63,29 @@ namespace Atlantis.Framework.Interface
     public bool LPC
     {
       get { return _lpc; }
+    }
+
+    public string AssemblyFileVersion
+    {
+      get { return _assemblyFileVersion; }
+      set { _assemblyFileVersion = value; }
+    }
+
+    public string AssemblyDescription
+    {
+      get { return _assemblyDescription; }
+      set { _assemblyDescription = value; }
+    }
+
+    public ConfigElementStats Stats
+    {
+      get { return _stats; }
+    }
+
+    public ConfigElementStats ResetStats()
+    {
+      ConfigElementStats newStats = new ConfigElementStats();
+      return Interlocked.Exchange<ConfigElementStats>(ref _stats, newStats);
     }
   }
 }

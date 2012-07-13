@@ -1,3 +1,4 @@
+using System.Diagnostics;
 
 namespace Atlantis.Framework.Interface
 {
@@ -7,6 +8,7 @@ namespace Atlantis.Framework.Interface
     private ConfigElement _config;
     private object _requestObject;
     private object _state;
+    private Stopwatch _callTimer;
 
     public AsyncState(RequestData requestData, ConfigElement config, object request, object state)
     {
@@ -14,6 +16,7 @@ namespace Atlantis.Framework.Interface
       _config = config;
       _requestObject = request;
       _state = state;
+      _callTimer = Stopwatch.StartNew();
     }
 
     public RequestData RequestData
@@ -34,6 +37,11 @@ namespace Atlantis.Framework.Interface
     public object State
     {
       get { return _state; }
+    }
+
+    public Stopwatch CallTimer
+    {
+      get { return _callTimer; }
     }
   }
 }

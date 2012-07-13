@@ -15,6 +15,24 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
     public IEnumerable<SurveyItem> AllSurveyTypes { get; private set; }
     public bool IsSuccess { get; private set; }
 
+    private List<SurveyItem> _tvSurveyTypes;
+    public List<SurveyItem> TvSurveyTypes
+    {
+      get
+      {
+        return _tvSurveyTypes;
+      }
+    }
+
+    private List<SurveyItem> _otherSurveyTypes;
+    public List<SurveyItem> OtherSurveyTypes
+    {
+      get
+      {
+        return _otherSurveyTypes;
+      }
+    }
+
     public ReceiptSurveyTypesGetResponseData(IEnumerable<SurveyItem> surveyTypes)
     {
       AllSurveyTypes = surveyTypes;
@@ -36,20 +54,30 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
     #region Filter And Randomize
     public List<SurveyItem> RandomizeSurveyItems(bool addPositionValue = false)
     {
-      List<SurveyItem> tvTypes = new List<SurveyItem>();
+      _tvSurveyTypes = new List<SurveyItem>();
+      _otherSurveyTypes = new List<SurveyItem>();
       List<SurveyItem> tvTypesRacing = new List<SurveyItem>();
-      List<SurveyItem> otherTypes = new List<SurveyItem>();
+      List<SurveyItem> allSurveyTypes = new List<SurveyItem>();
+
       Random rnd = new Random();
       int max = 100;
+      int position = 1;
 
       foreach (SurveyItem item in AllSurveyTypes)
       {
         SurveyItem clonedItem = item.Clone(rnd.Next(max)) as SurveyItem;
-        if (item.IsTVItem) // does item contain TV in the text
+
+        if (addPositionValue)
         {
-          if (!item.IsRacingItem)  //this item doesn't have a racing context
+          clonedItem.Value += "," + position.ToString();
+          position++;
+        }
+
+        if (item.IsTVItem) // is item part of TV group
+        {
+          if (!item.IsRacingItem)  //if it's not a racing item in the TV group
           {
-            tvTypes.Add(clonedItem);
+            _tvSurveyTypes.Add(clonedItem);
           }
           else
           {
@@ -58,32 +86,21 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
         }
         else
         {
-          otherTypes.Add(clonedItem);
+          _otherSurveyTypes.Add(clonedItem);
         }
       }
 
-      tvTypes.Sort(); //sorts by random value
-      tvTypesRacing.Sort(); //sorts by random value
-      otherTypes.Sort(); //sorts by random value
-
-      int insertIndex = new Random().Next(tvTypes.Count - 1);
-      tvTypes.InsertRange(insertIndex, tvTypesRacing);
-      tvTypes.AddRange(otherTypes);
-
-      if (addPositionValue)
-      {
-        int position = 1;
-        tvTypes.ForEach(si => AddPositionToSurveyItem(ref si, ref position));
-      }
-
-      return tvTypes;
+      _tvSurveyTypes.Sort(); //sorts by random value
+      _otherSurveyTypes.Sort(); //sorts by random value
+      
+      int insertIndex = new Random().Next(_tvSurveyTypes.Count - 1);
+      _tvSurveyTypes.InsertRange(insertIndex, tvTypesRacing);
+      allSurveyTypes.AddRange(_tvSurveyTypes);
+      allSurveyTypes.AddRange(_otherSurveyTypes);
+      
+      return allSurveyTypes;
     }
 
-    private void AddPositionToSurveyItem(ref SurveyItem item, ref int position)
-    {
-      item.Value += "," + position.ToString();
-      position++;
-    }
     #endregion
 
     #region Interface Methods
@@ -93,7 +110,7 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
       string xml = string.Empty;
       try
       {
-        XmlSerializer serializer = new XmlSerializer(typeof(SurveyItem));
+        XmlSerializer serializer = new XmlSerializer(typeof(IEnumerable<SurveyItem>));
         StringWriter writer = new StringWriter();
 
         serializer.Serialize(writer, AllSurveyTypes);

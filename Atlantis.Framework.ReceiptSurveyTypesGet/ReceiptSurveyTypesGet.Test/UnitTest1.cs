@@ -29,24 +29,19 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Test
     [DeploymentItem("app.config")]
     public void GetAll()
     {
-      var request = new ReceiptSurveyTypesGetRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "cn");
+      var request = new ReceiptSurveyTypesGetRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "us");
       var response = DataCache.DataCache.GetProcessRequest(request, 562) as ReceiptSurveyTypesGetResponseData;
       //var response = Engine.Engine.ProcessRequest(request, 562) as ReceiptSurveyTypesGetResponseData;
       Assert.IsTrue(response.IsSuccess);
       var filteredItems = response.RandomizeSurveyItems(true);
 
       WriteValuesToDebug(filteredItems);
-      Debug.WriteLine("NEW");
-      
-      var request2 = new ReceiptSurveyTypesGetRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "us");
-      var response2 = DataCache.DataCache.GetProcessRequest(request2, 562) as ReceiptSurveyTypesGetResponseData;
-      //var response = Engine.Engine.ProcessRequest(request, 562) as ReceiptSurveyTypesGetResponseData;
-      Assert.IsTrue(response2.IsSuccess);
-      var filteredItems2 = response2.RandomizeSurveyItems(true);
-      WriteValuesToDebug(filteredItems2);
-      string x = "asdf";
-      //var p = "pause";
+      Debug.WriteLine("---- TV ITEMS ---- ");
+      WriteValuesToDebug(response.TvSurveyTypes);
+      Debug.WriteLine("---- OTHER ITEMS ----");
+      WriteValuesToDebug(response.OtherSurveyTypes);
 
+      string p = "pause";
     }
 
     private void WriteValuesToDebug(List<SurveyItem> items)

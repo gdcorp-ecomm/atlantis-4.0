@@ -195,7 +195,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
             {
               foreach (MessagingProcessRequestData currentRequest in result)
               {
-                ErrorHelper.Log(currentRequest.ToXML(),string.Empty, "PurchaseEmailSend", orderData.OrderId,orderData, orderData);
+                ErrorHelper.LogSilent(currentRequest.ToXML(),string.Empty, "PurchaseEmailSend", orderData.OrderId,orderData, orderData);
               }
             }
           }

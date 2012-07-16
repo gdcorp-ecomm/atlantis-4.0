@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="EcommLOCAccountDetailsRequestData.cs" />
     <Compile Include="EcommLOCAccountDetailsResponseData.cs" />
+    <Compile Include="LineOfCreditAccountDetail.cs" />
+    <Compile Include="LineOfCreditTransaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

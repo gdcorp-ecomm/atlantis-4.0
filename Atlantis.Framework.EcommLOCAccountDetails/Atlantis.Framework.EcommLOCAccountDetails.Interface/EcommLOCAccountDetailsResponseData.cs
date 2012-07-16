@@ -45,6 +45,16 @@ namespace Atlantis.Framework.EcommLOCAccountDetails.Interface
       _exception = new AtlantisException(request, "EcommLOCAccountDetailsResponseData", ex.Message, string.Empty);
     }
 
+    public LineOfCreditAccountDetail LOCDetail()
+    {
+      LineOfCreditAccountDetail accountDetail = null;
+      if (IsSuccess && !string.IsNullOrWhiteSpace(ResponseXML))
+      {
+        accountDetail = new LineOfCreditAccountDetail(ResponseXML);
+      }
+      return accountDetail;
+    }
+
 
     #region IResponseData Members
     public string ToXML()

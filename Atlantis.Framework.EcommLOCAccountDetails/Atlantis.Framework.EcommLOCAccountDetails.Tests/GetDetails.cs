@@ -61,11 +61,13 @@ namespace Atlantis.Framework.EcommLOCAccountDetails.Tests
     public void TestMethod1()
     {
       DateTime startDate = new DateTime(2012, 7, 1);
-      DateTime endDate = new DateTime(2012, 7, 30);
+      DateTime endDate = new DateTime(2012, 7, 2);
       int accountId = 1375; //1376
 
       EcommLOCAccountDetailsRequestData request = new EcommLOCAccountDetailsRequestData("856907", string.Empty, string.Empty, string.Empty, 0, startDate, endDate, accountId);
       EcommLOCAccountDetailsResponseData response = (EcommLOCAccountDetailsResponseData)Engine.Engine.ProcessRequest(request, 565);
+      LineOfCreditAccountDetail detail = new LineOfCreditAccountDetail(response.ResponseXML);
+      detail = response.LOCDetail();
 
       Assert.IsTrue(response.IsSuccess);
 

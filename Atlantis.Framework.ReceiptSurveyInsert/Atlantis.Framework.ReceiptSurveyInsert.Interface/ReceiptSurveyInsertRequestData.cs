@@ -19,6 +19,7 @@ namespace Atlantis.Framework.ReceiptSurveyInsert.Interface
       CountryCode = countryCode;
       SurveyTypeId = surveyTypeId;
       SurveySelectionPosition = surveySelectionPosition;
+      RequestTimeout = TimeSpan.FromSeconds(6);
     }
 
     public override string GetCacheMD5()

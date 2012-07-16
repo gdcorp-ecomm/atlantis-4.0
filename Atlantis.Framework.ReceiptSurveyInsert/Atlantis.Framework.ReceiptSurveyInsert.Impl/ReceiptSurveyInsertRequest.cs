@@ -46,11 +46,6 @@ namespace Atlantis.Framework.ReceiptSurveyInsert.Impl
               bool isSuccess = true;
 
               responseData = new ReceiptSurveyInsertResponseData(isSuccess);
-
-              if (connection.State == System.Data.ConnectionState.Open)
-              {
-                connection.Close();
-              }
             }
           }
 

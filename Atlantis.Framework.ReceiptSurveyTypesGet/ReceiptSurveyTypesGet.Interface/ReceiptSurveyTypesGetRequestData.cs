@@ -17,6 +17,7 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
       base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
       CountryCode = countryCode;
+      RequestTimeout = TimeSpan.FromSeconds(6);
     }
 
     public override string GetCacheMD5()

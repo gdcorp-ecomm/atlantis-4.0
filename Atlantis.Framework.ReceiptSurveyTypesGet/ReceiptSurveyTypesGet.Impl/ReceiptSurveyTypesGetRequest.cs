@@ -32,11 +32,6 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Impl
             SqlDataReader dataReader = command.ExecuteReader();
             IEnumerable<SurveyItem> surveyItems = CreateSurveyItemsFromReader(dataReader);
             responseData = new ReceiptSurveyTypesGetResponseData(surveyItems);
-
-            if (connection.State == System.Data.ConnectionState.Open)
-            {
-              connection.Close();
-            }
           }
         }
       }
@@ -54,11 +49,11 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Impl
 
     #region Create Survey Items
 
-    public const string _TYPEID = "gdshop_shopper_survey_typeID";
-    public const string _DESCRIPTION = "typeDescription";
-    public const string _GROUPID = "gdshop_shopper_survey_groupID";
+    private const string _TYPEID = "gdshop_shopper_survey_typeID";
+    private const string _DESCRIPTION = "typeDescription";
+    private const string _GROUPID = "gdshop_shopper_survey_groupID";
 
-    public IEnumerable<SurveyItem> CreateSurveyItemsFromReader(SqlDataReader reader)
+    private IEnumerable<SurveyItem> CreateSurveyItemsFromReader(SqlDataReader reader)
     {
       List<SurveyItem> items = new List<SurveyItem>();
 

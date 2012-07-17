@@ -83,15 +83,14 @@ namespace Atlantis.Framework.MobilePushEmailSubscribe.Impl
           throw new Exception("Email cannot be empty.");
         }
 
-        string callBackUrl = string.Format("{0}?action=Notification&login={1}&registrationId={2}", callBackBaseUrl,
-                                                                                                   mobilePushEmailSubscribeRequestData.Email,
-                                                                                                   mobilePushEmailSubscribeRequestData.PushRegistrationId);
+        string callBackUrl = string.Format("{0}?action=Notification&login={1}", callBackBaseUrl,
+                                                                                mobilePushEmailSubscribeRequestData.Email);
 
         string subscriptionUrl = string.Format("{0}?action=SUBSCRIBE&login={1}", wsConfigElement.WSURL, mobilePushEmailSubscribeRequestData.Email);
 
         ICollection<KeyValuePair<string, string>> requestHeaders = new Collection<KeyValuePair<string, string>>();
         requestHeaders.Add(new KeyValuePair<string, string>("X-Call-Back", callBackUrl));
-        requestHeaders.Add(new KeyValuePair<string, string>("X-Notification-Info", string.Empty));
+        requestHeaders.Add(new KeyValuePair<string, string>("X-Notification-Info", mobilePushEmailSubscribeRequestData.PushRegistrationId));
 
         IDictionary<string, string> responseHeaders;
         PostRequest(subscriptionUrl, requestData.RequestTimeout, requestHeaders, out responseHeaders);

@@ -61,18 +61,11 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
 
       Random rnd = new Random();
       int max = 100;
-      int position = 1;
 
       foreach (SurveyItem item in AllSurveyTypes)
       {
         SurveyItem clonedItem = item.Clone(rnd.Next(max)) as SurveyItem;
-
-        if (addPositionValue)
-        {
-          clonedItem.Value += "," + position.ToString();
-          position++;
-        }
-
+        
         if (item.IsTVItem) // is item part of TV group
         {
           if (!item.IsRacingItem)  //if it's not a racing item in the TV group
@@ -98,7 +91,19 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
       allSurveyTypes.AddRange(_tvSurveyTypes);
       allSurveyTypes.AddRange(_otherSurveyTypes);
       
+      if (addPositionValue)
+      {
+        int position = 1;
+        allSurveyTypes.ForEach(si => AddPositionToSurveyItem(ref si, ref position));
+      }
+      
       return allSurveyTypes;
+    }
+
+    private void AddPositionToSurveyItem(ref SurveyItem item, ref int position)
+    {
+      item.Value += "," + position.ToString();
+      position++;
     }
 
     #endregion

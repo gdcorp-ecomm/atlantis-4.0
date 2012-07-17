@@ -1,6 +1,7 @@
 ﻿using System.Web.UI;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using System.Text.RegularExpressions;
 
 namespace Atlantis.Framework.BasePages
 {
@@ -29,6 +30,37 @@ namespace Atlantis.Framework.BasePages
           _shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
         }
         return _shopperContext;
+      }
+    }
+
+    public static bool StripWhitespaceOnRenderDefault = false;
+
+    private bool _stripWhitespaceOnRender = StripWhitespaceOnRenderDefault;
+    protected bool StripWhitespaceOnRender
+    {
+      get { return _stripWhitespaceOnRender; }
+      set { _stripWhitespaceOnRender = value; }
+    }
+
+    private static readonly Regex REGEX_LINE_BREAKS = new Regex(@"(\s*(\r)?\n\s*)+", RegexOptions.Compiled);
+
+    protected override void Render(HtmlTextWriter writer)
+    {
+      if(StripWhitespaceOnRender)
+      {
+        using (HtmlTextWriter htmlwriter = new HtmlTextWriter(new System.IO.StringWriter()))
+        {
+          base.Render(htmlwriter);
+          string html = htmlwriter.InnerWriter.ToString();
+
+          html = REGEX_LINE_BREAKS.Replace(html, "\n");
+
+          writer.Write(html.Trim());
+        }
+      }
+      else
+      {
+        base.Render(writer);
       }
     }
   }

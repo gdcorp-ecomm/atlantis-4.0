@@ -144,6 +144,7 @@
         <xs:sequence>
           <xs:element name="invoiceId" type="xs:string" />
           <xs:element name="orderStatus" type="tns:orderStatus" />
+          <xs:element name="currencyCode" type="xs:string" />
           <xs:element name="email" type="xs:string" />
           <xs:element name="orderDate" type="xs:string" />
           <xs:element name="captureStatus" type="xs:string" />
@@ -192,7 +193,7 @@
       <xs:complexType name="package">
         <xs:sequence>
           <xs:element minOccurs="0" name="trackingNumber" type="xs:string" />
-          <xs:element minOccurs="0" name="shipDate" type="xs:date" />
+          <xs:element minOccurs="0" name="shipDate" type="xs:string" />
           <xs:element minOccurs="0" maxOccurs="unbounded" name="itemPackingRef" type="tns:itemReference" />
           <xs:element minOccurs="0" name="packageCost" type="tns:money" />
         </xs:sequence>
@@ -387,6 +388,13 @@
           <xs:element minOccurs="0" name="domain" type="xs:string" />
           <xs:element name="accountUID" type="xs:string" />
           <xs:element name="status" type="xs:string" />
+          <xs:element minOccurs="0" name="storeName" type="xs:string" />
+          <xs:element minOccurs="0" name="dedicatedIP" type="xs:string" />
+          <xs:element minOccurs="0" name="ipAddress" type="xs:string" />
+          <xs:element minOccurs="0" name="sslEnabled" type="xs:string" />
+          <xs:element minOccurs="0" name="sslPurchased" type="xs:string" />
+          <xs:element minOccurs="0" name="sslCreditAvailable" type="xs:string" />
+          <xs:element minOccurs="0" name="sslSetupInProgress" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="unblockIP">

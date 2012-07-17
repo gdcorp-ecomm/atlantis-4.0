@@ -12,7 +12,7 @@ namespace Atlantis.Framework.QSCGetAccounts.Tests
     [DeploymentItem("atlantis.config")]
     public void GetAccountListWithShopperIdThatDoesNotHaveQsc()
     {
-      string _shopperId = "859775";
+      string _shopperId = "847235";
       int requestId = 541;
 
       QSCGetAccountsRequestData request = new QSCGetAccountsRequestData(_shopperId, "", string.Empty, string.Empty, 1);
@@ -31,7 +31,7 @@ namespace Atlantis.Framework.QSCGetAccounts.Tests
     [DeploymentItem("atlantis.config")]
     public void GetAccountListWithShopperIdThatHasQsc()
     {
-      string _shopperId = "837435";
+      string _shopperId = "859775";
       int requestId = 541;
 
       QSCGetAccountsRequestData request = new QSCGetAccountsRequestData(_shopperId, "", string.Empty, string.Empty, 1);

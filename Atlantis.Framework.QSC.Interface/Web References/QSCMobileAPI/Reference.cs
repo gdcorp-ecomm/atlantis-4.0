@@ -13,11 +13,16 @@
 // 
 #pragma warning disable 1591
 
-namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI
-{
-
-
-  /// <remarks/>
+namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
+    using System;
+    using System.Web.Services;
+    using System.Diagnostics;
+    using System.Web.Services.Protocols;
+    using System.Xml.Serialization;
+    using System.ComponentModel;
+    
+    
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17626")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1273,6 +1278,20 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI
         
         private string statusField;
         
+        private string storeNameField;
+        
+        private string dedicatedIPField;
+        
+        private string ipAddressField;
+        
+        private string sslEnabledField;
+        
+        private string sslPurchasedField;
+        
+        private string sslCreditAvailableField;
+        
+        private string sslSetupInProgressField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string domain {
@@ -1303,6 +1322,83 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI
             }
             set {
                 this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string storeName {
+            get {
+                return this.storeNameField;
+            }
+            set {
+                this.storeNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string dedicatedIP {
+            get {
+                return this.dedicatedIPField;
+            }
+            set {
+                this.dedicatedIPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ipAddress {
+            get {
+                return this.ipAddressField;
+            }
+            set {
+                this.ipAddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string sslEnabled {
+            get {
+                return this.sslEnabledField;
+            }
+            set {
+                this.sslEnabledField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string sslPurchased {
+            get {
+                return this.sslPurchasedField;
+            }
+            set {
+                this.sslPurchasedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string sslCreditAvailable {
+            get {
+                return this.sslCreditAvailableField;
+            }
+            set {
+                this.sslCreditAvailableField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string sslSetupInProgress {
+            get {
+                return this.sslSetupInProgressField;
+            }
+            set {
+                this.sslSetupInProgressField = value;
             }
         }
     }
@@ -1936,9 +2032,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI
         
         private string trackingNumberField;
         
-        private System.DateTime shipDateField;
-        
-        private bool shipDateFieldSpecified;
+        private string shipDateField;
         
         private itemReference[] itemPackingRefField;
         
@@ -1958,24 +2052,13 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date")]
-        public System.DateTime shipDate {
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string shipDate {
             get {
                 return this.shipDateField;
             }
             set {
                 this.shipDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool shipDateSpecified {
-            get {
-                return this.shipDateFieldSpecified;
-            }
-            set {
-                this.shipDateFieldSpecified = value;
             }
         }
         
@@ -2265,6 +2348,8 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI
         
         private orderStatus orderStatusField;
         
+        private string currencyCodeField;
+        
         private string emailField;
         
         private string orderDateField;
@@ -2296,6 +2381,17 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI
             }
             set {
                 this.orderStatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string currencyCode {
+            get {
+                return this.currencyCodeField;
+            }
+            set {
+                this.currencyCodeField = value;
             }
         }
         

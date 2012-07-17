@@ -16,7 +16,6 @@ namespace Atlantis.Framework.QSCGetAccounts.Interface
   public class QSCGetAccountsResponseData : IResponseData, ISessionSerializableResponse
   {
     private readonly AtlantisException _ex;
-    private IList<account> _accountList;
     private getAccountResponseDetail response;
 
     // required for session cache
@@ -37,14 +36,6 @@ namespace Atlantis.Framework.QSCGetAccounts.Interface
     public QSCGetAccountsResponseData(getAccountResponseDetail response)
     {
       this.response = response;
-      if (response.accounts != null)
-      {
-        _accountList = response.accounts.ToList();
-      }
-      else
-      {
-        _accountList = new List<account>(1);
-      }
     }
 
     private QSCStatusCodes responseStatus
@@ -79,11 +70,9 @@ namespace Atlantis.Framework.QSCGetAccounts.Interface
       set { _isSuccess = value; }
     }
 
-    [DataMember]
     public IList<account> AccountList
     {
-      get { return _accountList; }
-      set { _accountList = value; }
+      get { return response.accounts.ToList(); }
     }
 
     [DataMember]

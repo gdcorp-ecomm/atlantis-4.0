@@ -209,7 +209,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
       {
         currentItem.ProductName = "WordPress Hosting";
       }
-      if (ProductIds.isHostingProduct(productID))
+      else if (ProductIds.isHostingProduct(productID))
       {
         currentItem.ProductName = "Hosting";
       }

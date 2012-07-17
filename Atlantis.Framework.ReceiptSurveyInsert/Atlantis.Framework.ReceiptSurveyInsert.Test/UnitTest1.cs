@@ -15,7 +15,7 @@ namespace Atlantis.Framework.ReceiptSurveyInsert.Test
     [DeploymentItem("app.config")]
     public void AddReceiptSurvey()
     {
-      var request = new ReceiptSurveyInsertRequestData("9997789", string.Empty, string.Empty, string.Empty, 0, "es", 1, 12);
+      var request = new ReceiptSurveyInsertRequestData("99907789", string.Empty, string.Empty, string.Empty, 0, "es", 1, 12);
       var response = Engine.Engine.ProcessRequest(request, 564) as ReceiptSurveyInsertResponseData;
       Assert.IsTrue(response.IsSuccess);
     }

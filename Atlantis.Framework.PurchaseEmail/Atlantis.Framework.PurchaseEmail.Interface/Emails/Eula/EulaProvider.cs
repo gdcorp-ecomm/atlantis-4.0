@@ -135,7 +135,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
             if (_orderData.PrivateLabelId == 1695)
             {
               pageID = "domain_nameproxy";
-              
+
             }
             else
             {
@@ -190,9 +190,30 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
             currentItem.LegalAgreementURL = legalAgreementURL;
             currentItem.ProductName = title;
           }
+          if (currentItem.RuleType == EULARuleType.DedVirtHosting)
+          {
+            currentItem = DetermineNameOverride(productId, currentItem);
+          }
           AddUniqueEULAItem(ref eulaList, currentItem);
         }
       }
+    }
+
+    private EULAItem DetermineNameOverride(int productID, EULAItem currentItem)
+    {
+      if (ProductIds.isCloudServer(productID))
+      {
+        currentItem.ProductName = "Cloud Server";
+      }
+      else if (ProductIds.isWordPressHosting(productID))
+      {
+        currentItem.ProductName = "WordPress Hosting";
+      }
+      else if (ProductIds.isHostingProduct(productID))
+      {
+        currentItem.ProductName = "Hosting";
+      }
+      return currentItem;
     }
 
     private void BuildItemEulaList(ref List<EULAItem> eulaList)
@@ -220,6 +241,10 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
               currentItem.PageId = pageID;
               currentItem.LegalAgreementURL = legalAgreementURL;
               currentItem.ProductName = title;
+            }
+            if (currentItem.RuleType == EULARuleType.DedVirtHosting)
+            {
+              currentItem = DetermineNameOverride(productId, currentItem);
             }
             AddUniqueEULAItem(ref eulaList, currentItem);
           }
@@ -599,14 +624,14 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
       return tempItem;
     }
 
-    private string DetermineHelpURL(string relativepath,string pageid, QueryParamMode queryParamMode, bool isSecure, params string[] additionalQueryParameters)
+    private string DetermineHelpURL(string relativepath, string pageid, QueryParamMode queryParamMode, bool isSecure, params string[] additionalQueryParameters)
     {
       string helpLink = string.Empty;
       if (_orderData.IsGodaddy)
       {
         if (!relativepath.Contains("help/"))
         {
-          helpLink = _links.GetUrl(LinkTypes.Community,"help/"+ relativepath + pageid, QueryParamMode.CommonParameters, false, additionalQueryParameters);
+          helpLink = _links.GetUrl(LinkTypes.Community, "help/" + relativepath + pageid, QueryParamMode.CommonParameters, false, additionalQueryParameters);
         }
         else
         {
@@ -635,61 +660,61 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
         case EULARuleType.XXX:
           productName = ".XXX Domain Registration";
           pageid = "7333";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
           ruleType = "Article";
           break;
         case EULARuleType.BusinessAccel:
           productName = "Business Accelerator";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH ,"5864", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, "5864", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "Business_Accelerator";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.Reg:
           productName = "Domain Registration";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "158", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "158", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "REG_SA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.Transfer:
           productName = "Domain Transfer";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "160", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "160", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "TRANSFER_SA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.Dbp:
           productName = "Private Registration";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "248", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "248", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "DOMAIN_NAMEPROXY";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.Hosting:
           productName = "Hosting";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , "4", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, "4", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "HOSTING_SA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.QSC:
           productName = ProductNames.ShoppingCart;
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "267", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "267", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "QSC_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.Csite:
           productName = "Online Copyright Registration";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "182", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "182", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "CSITE_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.EmailCounts:
           productName = "Express Email Marketing";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "185", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "185", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "QS_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.StealthRay: break;
         case EULARuleType.TB:
           productName = "Search Engine Visibility";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "736", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "736", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "TB_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
@@ -697,19 +722,19 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           break;
         case EULARuleType.WST:
           productName = "WebSite Tonight&#174;";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "178", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "178", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "WST_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.DedHostingIP:
           productName = "Dedicated Hosting IP";
           pageid = "1057";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
           ruleType = "Article";
           break;
         case EULARuleType.FaxThruEmail:
           productName = "Fax Thru Email";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "175", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "175", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "FAXEMAIL_SA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
@@ -717,108 +742,108 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           productName = "SMTP Relay";
           pageid = "345";
           ruleType = "Article";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.Starter:
           productName = "Starter Web Page or For Sale Page";
           pageid = "825";
           ruleType = "Article";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.FreeHosting:
           productName = "Free Hosting w/Web Site Builder";
           pageid = "243";
           ruleType = "Article";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.TrafficFacts:
           productName = "Site Analytics";
           pageid = "233";
           ruleType = "Article";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.SSLCerts:
           productName = "SSL Certificates";
           pageid = "186";
           ruleType = "Article";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.Merchant:
           productName = "Merchant Account";
           pageid = "237";
           ruleType = "Article";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.DedVirtHosting:
           productName = "Virtual Dedicated Server";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , "1122", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, "1122", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "hosting_sa";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.DedHosting:
           productName = "Dedicated Server";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , "1122", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, "1122", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "Dedicated Hosting SA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.FreeWebmail:
           productName = "Free Personal Email";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "154", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "154", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "WEBMAIL_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.Spam: break;
         case EULARuleType.VSDB:
           productName = "Online File Folder";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "261", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "261", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "VSDB_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.DA:
           productName = "DomainAlert&#174;";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "247", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "247", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "DOMAIN_BACK";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.WebMail:
           productName = "Webmail";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "154", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "154", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "WEBMAIL_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.InstantPage:
           productName = "InstantPage&#174;";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "category/instantpage/866", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "category/instantpage/866", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "InstantPage_TOS";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.QB:
           productName = ProductNames.QuickBlogcast;
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "477", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "477", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "QUICKBLOG_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.Whois:
           productName = "Business Registration";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "255", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "255", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "Deluxe_WhoIs_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.DOP:
           productName = "Domain Ownership Protection";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "614", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "614", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "Domain_Protect_SA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.CashPark:
           productName = "CashParking";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "285", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "285", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "Cash_Park_SA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.CashParkHdr:
           productName = "CashParking Custom Header";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "659", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "659", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "Custom_Header_SA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
@@ -826,18 +851,18 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           productName = "Certified Domain";
           pageid = "297";
           ruleType = "Article";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "297", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "297", QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.GiftCard:
           productName = "Gift Card";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "302", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "302", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "gift_card";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           agreementType = EULAType.Service;
           break;
         case EULARuleType.Broker:
           productName = "Domain Buy Service";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "304", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "304", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "Domain_Brokerage_SA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           agreementType = EULAType.Service;
@@ -846,24 +871,24 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           productName = "FTP Backup";
           pageid = "1686";
           ruleType = "Article";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , "1686", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, "1686", QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.EZPrint:
           productName = "Photo Store";
           pageid = "305";
           ruleType = "Article";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "305", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "305", QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.Photo:
           productName = (_orderData.IsGodaddy) ? "Go Daddy Photo Album" : "Photo Album";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "340", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "340", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "Photo_Prod_SA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           agreementType = EULAType.Service;
           break;
         case EULARuleType.Club:
           productName = "Discount Domain Club";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , "2398", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, "2398", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "discountclub";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           agreementType = EULAType.Service;
@@ -871,39 +896,39 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
         case EULARuleType.AssistedServices:
           productName = "Assisted Service Plan";
           pageid = "2466";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , "2466", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, "2466", QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.Logo:
           productName = "Logo Design";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "475", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "475", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "logo_design_sa";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           agreementType = EULAType.Service;
           break;
         case EULARuleType.Banner:
           productName = "Web Banner Design";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "475", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "475", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "web_banner_design_sa";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           agreementType = EULAType.Service;
           break;
         case EULARuleType.CustomWST:
           productName = "Dream Website Design";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "449", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "449", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "custom_website";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           agreementType = EULAType.Service;
           break;
         case EULARuleType.WST_WithMaint:
           productName = "Website Tonight w/Maintenance";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "449", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "449", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "WST_maintenance_eula";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           agreementType = EULAType.Service;
           break;
         case EULARuleType.WST_Update:
           productName = "Website Update";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "449", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "449", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "website_update_sa";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           agreementType = EULAType.Service;
@@ -921,7 +946,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           }
           else
           {
-            productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , "3340", QueryParamMode.CommonParameters, false, queryStringArgs);
+            productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, "3340", QueryParamMode.CommonParameters, false, queryStringArgs);
           }
           pageid = "superreseller_eula";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
@@ -929,51 +954,51 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           break;
         case EULARuleType.Reseller:
           productName = "Reseller Plans";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "220", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "220", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "reseller_sa";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           agreementType = EULAType.Service;
           break;
         case EULARuleType.premListing:
           productName = "Premium Domain Name";
-          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH , "3497", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, "3497", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "Premium_Domain";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           agreementType = EULAType.Membership;
           break;
         case EULARuleType.loadedDomain:
           productName = "SmartSpace&#174;";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "686", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "686", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "LOADED_DOMAIN";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.dad:
           productName = "Power Content Plans";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "680", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "680", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "Domain_Development";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.crm:
           productName = (_orderData.IsGodaddy) ? "Go Daddy Contact Manager" : "Contact Manager";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "717", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "717", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "Customer_Manager_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.survey_EULA:
           productName = (_orderData.IsGodaddy) ? "Go Daddy Site Surveys" : "Site Surveys";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "725", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "725", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "site_survey_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.OutlookMail:
           productName = "Hosted Exchange Email";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "663", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "663", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "hosted_exchange";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.WebStore:
           productName = "Web Store Design";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH , "735", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "735", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "webstore_design_svc_and_mtce_agmt";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;

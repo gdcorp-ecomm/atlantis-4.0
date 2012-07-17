@@ -660,7 +660,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             }
             if (!string.IsNullOrEmpty(productInfoURL))
             {
-              itemsTextBuilder.AppendFormat("<td width=100px class='bodyText'><a href='{0}'>[%%LCST.REQ.UTOS_PRODUCT_INFO%%]</a></td>", productInfoURL);
+              itemsTextBuilder.AppendFormat("<td width=130px class='bodyText'><a href='{0}'>[%%LCST.REQ.UTOS_PRODUCT_INFO%%]</a></td>", productInfoURL);
             }
             if (!string.IsNullOrEmpty(legalInfoURL))
             {

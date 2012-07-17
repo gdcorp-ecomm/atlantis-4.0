@@ -205,11 +205,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
       {
         currentItem.ProductName = "Cloud Server";
       }
-      else if (ProductIds.isWordPressHosting(productID))
+      if (ProductIds.isWordPressHosting(productID))
       {
         currentItem.ProductName = "WordPress Hosting";
       }
-      else if (ProductIds.isHostingProduct(productID))
+      if (ProductIds.isHostingProduct(productID))
       {
         currentItem.ProductName = "Hosting";
       }

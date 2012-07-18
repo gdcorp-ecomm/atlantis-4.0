@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt"  xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays" exclude-result-prefixes="msxsl">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl">
 
   <xsl:template match="/">
     <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>
@@ -8,9 +8,8 @@
         <title>Atlantis Framework Engine Statistics</title>
         <style type="text/css" media="screen">
           table { border: solid thin black; }
-          th { border-bottom: solid thin black; }
-          td { border-right: solid thin black; vertical-align: top; text-align: left; }
-          tfoot tr td { border-top: solid thin black; }
+          th { border: solid thin black; }
+          td { border: solid thin black; vertical-align: top; text-align: left; padding: 2px; }
         </style>
       </head>
       <body>
@@ -47,7 +46,7 @@
 
   <xsl:template name="ConfigElementsTable">
     <xsl:param name="elementsList"></xsl:param>
-    <table cellpadding="2" cellspacing="0" border="0" width="98%">
+    <table>
       <tr>
         <th>Type</th>
         <th>Handler</th>

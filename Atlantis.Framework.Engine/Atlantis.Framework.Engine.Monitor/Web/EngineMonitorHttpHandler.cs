@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Web;
+using System.Web.UI;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Xsl;
@@ -163,7 +165,7 @@ namespace Atlantis.Framework.Engine.Monitor.Web
 
       using (var stringWriter = new StringWriter())
       {
-        using (var outputWriter = new XmlTextWriter(stringWriter))
+        using (var outputWriter = new XmlHtmlWriter(stringWriter))
         {
           transform.Transform(monitorData.CreateReader(), outputWriter);
         }
@@ -175,5 +177,31 @@ namespace Atlantis.Framework.Engine.Monitor.Web
       context.Response.StatusCode = 200;
       context.Response.Write(output);
     }
+
+    private class XmlHtmlWriter : XmlTextWriter
+    {
+      string _openingElement = string.Empty;
+      HashSet<string> _fullyClosedElements = new HashSet<string>(new string[] { "br", "hr" } );
+
+      public XmlHtmlWriter(TextWriter writer)
+        : base(writer)
+      {
+      }
+
+      public override void WriteEndElement()
+      {
+        if (!_fullyClosedElements.Contains(_openingElement))
+          WriteFullEndElement();
+        else
+          base.WriteEndElement();
+      }
+
+      public override void WriteStartElement(string prefix, string localName, string ns)
+      {
+        base.WriteStartElement(prefix, localName, ns);
+        _openingElement = localName;
+      }
+    } 
+
   }
 }

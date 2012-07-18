@@ -4,53 +4,71 @@
   <xsl:template match="/">
     <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>
     <html>
-      <head id="Head1" runat="server">
+      <head>
         <title>Unit Test Results</title>
         <style type="text/css" media="screen">
-          .success_True { color: Green; font-weight: bold; }
-          .success_False { color: Red; font-weight: bold; }
-          .success_Ignore { color: Gold; font-weight: bold; }
-          .rounded { height: 16px; width: 16px; -moz-border-radius: 8px; border-radius: 8px; }
-          .pass { background-color: Green; }
-          .fail { background-color: Red; }
-          .ignore { background-color: Gold; }
-          table { border: solid thin black; }
-          th { border-bottom: solid thin black; }
-          td { border-right: solid thin black; }
-          tfoot tr td { border-top: solid thin black; }
+          .bold { font-weight: bold; }
+          .pass { color: Green;  }
+          .fail { color: Red; }
+          .ignore { color: Gold; }
+          .rounded {  height: 16px; width: 16px; -moz-border-radius: 8px; border-radius: 8px; }
+          .rounded.pass { background-color: Green; }
+          .rounded.fail { background-color: Red; }
+          .rounded.ignore { background-color: Gold; }
+          .row{ min-width:100%;}
+          .col {display: table-cell; width:100px; margin:0px; padding:0px;}
+          .col-sm {display: table-cell; width:40px;}
+          .col-lg {display: table-cell; width:400px;}
+          .border {border:solid thin black;}
+          .border-lt {border-left:solid thin black;}
+          .border-rt {border-right:solid thin black;}
+          .border-bt {border-bottom:solid thin black;}
+          .border-tp {border-top:solid thin black;}
+          .testDetailItem {display:none; margin-top:15px; color:black; font-weight:normal; font-size:.9em;}
+          .toggleText {font-size:.5em;color:blue;cursor:pointer;}
+          .test { border-bottom: solid thin black; }
+          .no-margin {margin:0;}
+          .pad-lt { padding-left:60px; }
+          .pad-lt-sm { padding-left:10px; }
+          .pad-tp-sm { padding-top:5px; }
+          #summary{ width:100%; margin-top:25px;}
+          #summary .col { width: 250px; }
         </style>
       </head>
       <body>
-        <div>
-          <xsl:apply-templates select="//TestResults" />
-        </div>
-        <div>
-          <xsl:apply-templates select="//TestResults" mode="summary"  />
-        </div>
-        <div style="padding-top:20px;">
-          <xsl:apply-templates select="//ExtendedLogData" />
-        </div>
+        <xsl:apply-templates select="//TestResults" />
+        <xsl:apply-templates select="//TestResults" mode="summary"  />
+
+
+        <script type="text/javascript">
+
+          function toggleTestDetails(item) {
+          if (item.getElementsByClassName('toggleText')[0].innerText == "Show Details") {
+          item.getElementsByClassName('toggleText')[0].innerText="Hide Details";
+          item.getElementsByClassName('testDetailItem')[0].style.display = "block";
+          } else {
+          item.getElementsByClassName('toggleText')[0].innerText="Show Details";
+          item.getElementsByClassName('testDetailItem')[0].style.display = "none";
+          }
+          }
+
+        </script>
 
       </body>
     </html>
+
+
   </xsl:template>
 
   <xsl:template match="//TestResults">
-    <table cellpadding="2" cellspacing="0" border="0" width="98%">
-      <tr>
-        <th>
 
-        </th>
-        <th>
-          Test Name
-        </th>
-        <th>
-          Pass/Fail
-        </th>
-        <th>
-          Results
-        </th>
-      </tr>
+    <div id="testResults" class="border">
+      <div class="row border-bt no-margin">
+        <div class="col-lg bold pad-lt">Test Name</div>
+        <div class="col bold pad-lt-sm">Status</div>
+        <div class="col-lg bold">Results</div>
+      </div>
+
       <xsl:for-each select="./TestResult">
         <xsl:variable name="status">
           <xsl:choose>
@@ -59,102 +77,86 @@
             <xsl:otherwise>Ignore</xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
-        <tr>
-          <xsl:attribute name="class">
-            <xsl:choose>
-              <xsl:when test="$status = 'Ignore'">
-                <xsl:text>success_Ignore</xsl:text>
-              </xsl:when>
-              <xsl:when test="$status = 'Pass'">
-                <xsl:text>success_True</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>success_False</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-          <xsl:attribute name="style">
-            <xsl:choose>
-              <xsl:when test="(position() mod 2) != 1">
-                <xsl:text>background-color: #CCC;</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>background-color: #FFF;</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
 
-          <td style="vertical-align: top;">
-            <div>
-              <xsl:attribute name="class">
-                <xsl:choose>
-                  <xsl:when test="$status = 'Ignore'">
-                    <xsl:text>ignore rounded</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$status = 'Pass'">
-                    <xsl:text>pass rounded</xsl:text>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:text>fail rounded</xsl:text>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </xsl:attribute>
+        <div class="test">
+          <div>
+            <xsl:attribute name="class">
+              <xsl:choose>
+                <xsl:when test="$status = 'Ignore'">
+                  <xsl:text>row ignore bold</xsl:text>
+                </xsl:when>
+                <xsl:when test="$status = 'Pass'">
+                  <xsl:text>row pass bold</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>row fail bold</xsl:text>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:attribute>
 
+            <xsl:attribute name="style">
+              <xsl:choose>
+                <xsl:when test="(position() mod 2) != 1">
+                  <xsl:text>background-color: #CCC;</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>background-color: #FFF;</xsl:text>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:attribute>
+
+            <div class="col-sm pad-tp-sm pad-lt-sm">
+              <div>
+                <xsl:attribute name="class">
+                  <xsl:choose>
+                    <xsl:when test="$status = 'Ignore'">
+                      <xsl:text>ignore rounded</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$status = 'Pass'">
+                      <xsl:text>pass rounded</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <xsl:text>fail rounded</xsl:text>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:attribute>
+                <xsl:text disable-output-escaping="yes"> </xsl:text>
+              </div>
             </div>
-          </td>
-          <td valign="top" align="left">
-            <xsl:value-of select="./TestName/text()"/>
-          </td>
-          <td valign="top" align="center">
-            <xsl:value-of select="$status"/>
-          </td>
-          <td valign="top" align="left">
-            <xsl:value-of select="./Result/text()"/>
-          </td>
-        </tr>
 
+            <div class="col-lg pad-lt-sm border-lt">
+              <xsl:value-of select="./TestName/text()"/>
+            </div>
+            <div class="col pad-lt-sm border-lt">
+              <xsl:value-of select="$status"/>
+            </div>
+            <div class="col-lg pad-lt-sm border-lt">
+              <xsl:value-of select="./Result/text()"/>
+              <xsl:call-template  name="extLogData">
+                <xsl:with-param name="test-name" select="./TestName/text()"/>
+              </xsl:call-template>
+            </div>
+          </div>
+        </div>
       </xsl:for-each>
-    </table>
+    </div>
   </xsl:template>
 
+  <xsl:template name="extLogData" match="//ExtendedLogData">
+    <xsl:param name="test-name" />
+    <xsl:variable name="log" select="//ExtendedLogData/LogItem[Key=$test-name]"/>
 
-  <xsl:template match="//ExtendedLogData">
-    <table cellpadding="2" cellspacing="0" border="0" width="98%">
-      <tr>
-        <th>
-          Test Name
-        </th>
-        <th>
-          Results
-        </th>
-      </tr>
-      <xsl:for-each select="./LogItem">
-        <tr>
-          <xsl:attribute name="style">
-            <xsl:choose>
-              <xsl:when test="(position() mod 2) != 1">
-                <xsl:text>background-color: #CCC;</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>background-color: #FFF;</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-
-          <td valign="top" align="left">
-            <xsl:value-of select="./Key/text()"/>
-          </td>
-
-          <td valign="top" align="left">
-            <xsl:for-each select="./Value/Entry">
-              <xsl:value-of select="./text()"/>
-              <br />
-            </xsl:for-each>
-          </td>
-        </tr>
-
-      </xsl:for-each>
-    </table>
+    <xsl:if test="count($log) > 0">
+      <div class="testDetails" onclick="toggleTestDetails(this);">
+        <span class="toggleText">Show Details</span>
+        <div class="testDetailItem" style="overflow:auto;width:550px;height:200px;">
+          <xsl:for-each select="$log/Value/Entry">
+            <xsl:value-of select="./text()"/>
+            <br />
+          </xsl:for-each>
+        </div>
+      </div>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template match="//TestResults" mode="summary">
@@ -162,36 +164,26 @@
     <xsl:variable name="totalPassed" select="count(//TestResult[Success ='true'])"></xsl:variable>
     <xsl:variable name="totalFailed" select="count(//TestResult[Success ='false'])"></xsl:variable>
     <xsl:variable name="totalIgnored" select="count(//TestResult[Success =''])"></xsl:variable>
-    <table cellpadding="2" cellspacing="0" border="0" width="98%">
-      <tbody>
-        <tr>
-          <td colspan="4" style="border-top:solid thin black;" align="left">
-            <br />
-            <br />
-            <strong>Test Summary:</strong>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr data-totalrun="{$totalRun}" data-totalpassed="{$totalPassed}" data-totalfailed="{$totalFailed}" data-totalignored="{$totalIgnored}">
-          <td width="25%" align="center">
-            <strong>
-              <xsl:value-of select="$totalRun"  /> Tests Run
-            </strong>
-          </td>
-          <td class="success_True" width="25%" align="center">
-            <xsl:value-of select="$totalPassed"  /> Tests Passed
-          </td>
-          <td class="success_False" width="25%" align="center">
-            <xsl:value-of select="$totalFailed"  /> Tests Failed
-          </td>
-          <td class="success_Ignore" width="25%" align="center">
-            <xsl:value-of select="$totalIgnored"  /> Tests Ignored
-          </td>
-        </tr>
-      </tfoot>
 
-    </table>
+    <div id="summary" data-totalrun="{$totalRun}" data-totalpassed="{$totalPassed}" data-totalfailed="{$totalFailed}" data-totalignored="{$totalIgnored}" class="border">
+      <div class="row">
+        <div class="col-lg bold pad-lt-sm">Test Summary</div>
+      </div>
+      <div class="row border-tp">
+        <div class="col bold pad-lt-sm">
+          <xsl:value-of select="$totalRun"  /> Tests Run
+        </div>
+        <div class="col pass bold border-lt pad-lt-sm">
+          <xsl:value-of select="$totalPassed"  /> Tests Passed
+        </div>
+        <div class="col fail bold border-lt pad-lt-sm">
+          <xsl:value-of select="$totalFailed"  /> Tests Failed
+        </div>
+        <div class="col ignore bold border-lt pad-lt-sm">
+          <xsl:value-of select="$totalIgnored"  /> Tests Ignored
+        </div>
+      </div>
+    </div>
   </xsl:template>
 
 </xsl:stylesheet>

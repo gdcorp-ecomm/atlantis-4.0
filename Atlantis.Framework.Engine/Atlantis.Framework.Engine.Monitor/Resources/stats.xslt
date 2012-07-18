@@ -19,14 +19,34 @@
           Process Id: <xsl:value-of select="//ConfigElements/@processid"/><br />
         </div>
         <br />
+        <div>Calls with Failures</div>
         <div>
-          <xsl:apply-templates select="//ConfigElements" />
+          <xsl:call-template name="ConfigElementsTable">
+            <xsl:with-param name="elementsList" select="//ConfigElements/ConfigElement[@failed != '0']"></xsl:with-param>
+          </xsl:call-template>
+        </div>
+        <br />
+        <br />
+        <div>Calls with No Failures</div>
+        <div>
+          <xsl:call-template name="ConfigElementsTable">
+            <xsl:with-param name="elementsList" select="//ConfigElements/ConfigElement[@failed = '0' and @succeeded != '0']"></xsl:with-param>
+          </xsl:call-template>
+        </div>
+        <br />
+        <br />
+        <div>Not Called</div>
+        <div>
+          <xsl:call-template name="ConfigElementsTable">
+            <xsl:with-param name="elementsList" select="//ConfigElements/ConfigElement[@failed = '0' and @succeeded = '0']"></xsl:with-param>
+          </xsl:call-template>
         </div>
       </body>
     </html>
   </xsl:template>
 
-  <xsl:template match="//ConfigElements">
+  <xsl:template name="ConfigElementsTable">
+    <xsl:param name="elementsList"></xsl:param>
     <table cellpadding="2" cellspacing="0" border="0" width="98%">
       <tr>
         <th>Type</th>
@@ -42,7 +62,7 @@
         <th>Avg Fail (ms)</th>
         <th>TimeFrame (min)</th>
       </tr>
-      <xsl:for-each select="./ConfigElement">
+      <xsl:for-each select="$elementsList/.">
         <tr>
           <xsl:attribute name="style">
             <xsl:choose>
@@ -95,6 +115,10 @@
 
       </xsl:for-each>
     </table>
+  </xsl:template>
+
+  <xsl:template match="//ConfigElement">
+    
   </xsl:template>
 
 </xsl:stylesheet>

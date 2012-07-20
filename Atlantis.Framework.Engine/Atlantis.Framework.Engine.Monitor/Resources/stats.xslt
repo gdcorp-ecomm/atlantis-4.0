@@ -16,7 +16,7 @@
         <div>
           Machine Name: <xsl:value-of select="//ConfigElements/@machinename"/><br />
           Process Id: <xsl:value-of select="//ConfigElements/@processid"/><br />
-          Inteface Version: <xsl:value-of select="//ConfigElements/@interfaceversion"/><br />
+          Interface Version: <xsl:value-of select="//ConfigElements/@interfaceversion"/><br />
           Engine Version: <xsl:value-of select="//ConfigElements/@engineversion"/><br />
         </div>
         <br />

@@ -117,7 +117,7 @@ namespace Atlantis.Framework.Engine.Tests
         TimeSpan averageSuccessTime = config.Stats.CalculateAverageSuccessTime();
         Console.WriteLine("Success Avg ms: " + averageSuccessTime.TotalMilliseconds.ToString());
 
-        TimeSpan averageFailTime = config.Stats.CalculateAvarageFailTime();
+        TimeSpan averageFailTime = config.Stats.CalculateAverageFailTime();
         Console.WriteLine("Fail Avg ms: " + averageFailTime.TotalMilliseconds.ToString());
       }
     }

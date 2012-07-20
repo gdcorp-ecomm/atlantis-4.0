@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
@@ -14,7 +13,7 @@ namespace Atlantis.Framework.Engine.Monitor
       XDocument result = new XDocument();
       XElement root = new XElement("ConfigElements");
 
-      root.Add(GetProcessId(), GetMachineName());
+      root.Add(GetProcessId(), GetMachineName(), GetEngineVersion(), GetInterfaceVersion());
 
       var configElements = Engine.GetConfigElements();
       foreach (ConfigElement configItem in configElements)
@@ -38,6 +37,16 @@ namespace Atlantis.Framework.Engine.Monitor
       catch { }
 
       return result;
+    }
+
+    private XAttribute GetEngineVersion()
+    {
+      return new XAttribute("engineversion", Engine.EngineVersion);
+    }
+
+    private XAttribute GetInterfaceVersion()
+    {
+      return new XAttribute("interfaceversion", Engine.InterfaceVersion);
     }
 
     private XAttribute GetMachineName()
@@ -86,7 +95,7 @@ namespace Atlantis.Framework.Engine.Monitor
         Failed = stats.Failed;
         Succeeded = stats.Succeeded;
 
-        AverageFailTime = stats.CalculateAvarageFailTime();
+        AverageFailTime = stats.CalculateAverageFailTime();
         AverageSuccessTime = stats.CalculateAverageSuccessTime();
 
         RunTime = DateTime.Now.Subtract(stats.StartTime);

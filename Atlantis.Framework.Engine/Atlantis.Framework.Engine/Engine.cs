@@ -23,6 +23,9 @@ namespace Atlantis.Framework.Engine
     static Exception _lastLoggingException;
     static LoggingStatusType _loggingStatus;
 
+    public static string EngineVersion { get; private set; }
+    public static string InterfaceVersion { get; private set; }
+
     // Thread-safe class initializer
     // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnbda/html/singletondespatt.asp
     static Engine()
@@ -33,6 +36,35 @@ namespace Atlantis.Framework.Engine
       _engineConfig = new EngineConfig();
       _lastLoggingException = null;
       _loggingStatus = LoggingStatusType.WorkingNormally;
+
+      EngineVersion = "0.0.0.0";
+      InterfaceVersion = "0.0.0.0";
+
+      try
+      {
+        object[] engineFileVersions = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
+        if ((engineFileVersions != null) && (engineFileVersions.Length > 0))
+        {
+          AssemblyFileVersionAttribute engineFileVersion = engineFileVersions[0] as AssemblyFileVersionAttribute;
+          if (engineFileVersion != null)
+          {
+            EngineVersion = engineFileVersion.Version;
+          }
+        }
+
+        Type configElementType = typeof(Atlantis.Framework.Interface.ConfigElement);
+        object[] interfaceFileVersions = configElementType.Assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
+        if ((interfaceFileVersions != null) && (interfaceFileVersions.Length > 0))
+        {
+          AssemblyFileVersionAttribute interfaceFileVersion = interfaceFileVersions[0] as AssemblyFileVersionAttribute;
+          if (interfaceFileVersion != null)
+          {
+            InterfaceVersion = interfaceFileVersion.Version;
+          }
+        }
+      }
+      catch { }
+
     }
 
     #region Standard Requests

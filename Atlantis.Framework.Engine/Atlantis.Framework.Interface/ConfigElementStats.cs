@@ -80,7 +80,7 @@ namespace Atlantis.Framework.Interface
       return result;
     }
 
-    public TimeSpan CalculateAvarageFailTime()
+    public TimeSpan CalculateAverageFailTime()
     {
       return CalculateAvereage(_failMilliseconds);
     }

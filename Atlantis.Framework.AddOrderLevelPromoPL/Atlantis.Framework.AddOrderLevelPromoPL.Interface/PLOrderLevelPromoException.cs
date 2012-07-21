@@ -13,7 +13,8 @@ namespace Atlantis.Framework.AddOrderLevelPromoPL.Interface
     InvalidDateRange = 5,
     AwardValueGreaterThanAllowed = 6,
     InvalidOrUnspecifiedAward = 7,
-    InvalidCurrencySpecification = 8
+    InvalidCurrencySpecification = 8,
+    InvalidPromoGeneric = 9
   }
 
   [Serializable]

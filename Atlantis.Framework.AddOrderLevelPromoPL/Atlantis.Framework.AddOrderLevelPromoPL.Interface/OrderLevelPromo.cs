@@ -88,12 +88,12 @@ namespace Atlantis.Framework.AddOrderLevelPromoPL.Interface
       set{ this._endDate = value; }
     }
 
-    internal int ServerGroupId
+    protected internal int ServerGroupId
     {
       get { return _PROMO_SERVER_GROUP_ID; }
     }
 
-    internal int ColumnType
+    protected internal int ColumnType
     {
       get { return _PROMO_COLUMN_TYPE; }
     }

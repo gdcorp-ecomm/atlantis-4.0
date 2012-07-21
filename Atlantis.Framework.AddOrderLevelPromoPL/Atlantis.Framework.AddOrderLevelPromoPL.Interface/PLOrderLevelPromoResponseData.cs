@@ -15,7 +15,8 @@ namespace Atlantis.Framework.AddOrderLevelPromoPL.Interface
       FailedInvalidRequestFormat = 3,
       FailedInvalidDateSpecification = 4,
       FailedInvalidAwardSpecification = 5,
-      FailedInvalidCurrencySpecification = 6
+      FailedInvalidCurrencySpecification = 6,
+      FailedInvalidPromoIdOrVersion = 7
     }
 
     private string _responseXml = string.Empty;
@@ -95,6 +96,9 @@ namespace Atlantis.Framework.AddOrderLevelPromoPL.Interface
             break;
           case PLOrderLevelPromoExceptionReason.InvalidOrUnspecifiedAward:
             result = RequestSuccessCode.FailedInvalidAwardSpecification;
+            break;
+          case PLOrderLevelPromoExceptionReason.InvalidPromoGeneric:
+            result = RequestSuccessCode.FailedInvalidPromoIdOrVersion;
             break;
           case PLOrderLevelPromoExceptionReason.Unknown:
           case  PLOrderLevelPromoExceptionReason.Other:

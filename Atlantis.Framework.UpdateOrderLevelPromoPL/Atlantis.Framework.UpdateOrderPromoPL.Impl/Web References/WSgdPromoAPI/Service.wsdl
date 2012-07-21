@@ -1,0 +1,1451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://masterapi.godaddy.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://masterapi.godaddy.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://masterapi.godaddy.com/">
+      <s:element name="AddStandardPromoXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddStandardPromoXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddStandardPromoXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateStandardPromoXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateStandardPromoXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateStandardPromoXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStandardPromoByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPromoID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStandardPromoByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStandardPromoByIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteStandardPromoByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPromoID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iVersionID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteStandardPromoByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteStandardPromoByIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateStandardPromoDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateStandardPromoDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateStandardPromoDetailsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddOrderPromoXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddOrderPromoXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddOrderPromoXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateOrderPromoXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateOrderPromoXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateOrderPromoXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderPromoByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sISCCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderPromoByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrderPromoByIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResellerOrderPromosByPLID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPrivateLabelID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResellerOrderPromosByPLIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetResellerOrderPromosByPLIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteOrderPromoByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sISCCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iVersionID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteOrderPromoByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteOrderPromoByIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateOrderPromoDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateOrderPromoDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateOrderPromoDetailsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddStandardPromoShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddStandardPromoShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddStandardPromoShopperResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStandardPromoShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPromoID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStandardPromoShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStandardPromoShopperResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteStandardPromoShopper">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteStandardPromoShopperResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteStandardPromoShopperResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddStandardPromoPrivateLabel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddStandardPromoPrivateLabelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddStandardPromoPrivateLabelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStandardPromoPrivateLabel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPromoID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStandardPromoPrivateLabelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStandardPromoPrivateLabelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteStandardPromoPrivateLabel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteStandardPromoPrivateLabelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteStandardPromoPrivateLabelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddOrderPromoPrivateLabel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddOrderPromoPrivateLabelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddOrderPromoPrivateLabelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderPromoPrivateLabel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sISCCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderPromoPrivateLabelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrderPromoPrivateLabelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteOrderPromoPrivateLabel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteOrderPromoPrivateLabelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteOrderPromoPrivateLabelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUpdateViralPromoXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUpdateViralPromoXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddUpdateViralPromoXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViralPromoXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPromoCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViralPromoXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViralPromoXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetEmailMarketingOptInsOrderLevel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPromoOrderID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetEmailMarketingOptInsOrderLevelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetEmailMarketingOptInsOrderLevelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViralBYIDXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPromoCode" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViralBYIDXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViralBYIDXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViralCouponBYIDXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPromoCode" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="lCouponCountsOnly" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViralCouponBYIDXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViralCouponBYIDXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViralCouponPromoXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPromoCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViralCouponPromoXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViralCouponPromoXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewRestrictedOfferConfigID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iNumToGet" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewRestrictedOfferConfigIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewRestrictedOfferConfigIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUpdatePromoCouponXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUpdatePromoCouponXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddUpdatePromoCouponXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewRestrictedOfferConfigYardValueID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iNumToGet" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewRestrictedOfferConfigYardValueIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewRestrictedOfferConfigYardValueIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveViralPromoCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iConfigID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPromoCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveViralPromoCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveViralPromoCodeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllPLSalePromoXML">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllPLSalePromoXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllPLSalePromoXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewPLSalePromoID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iNumToGet" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewPLSalePromoIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewPLSalePromoIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPLSalePromoByIDXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPromoID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPLSalePromoByIDXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPLSalePromoByIDXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUpdateSalePromoXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sRequestXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUpdateSalePromoXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddUpdateSalePromoXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddStandardPromoXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:AddStandardPromoXML" />
+  </wsdl:message>
+  <wsdl:message name="AddStandardPromoXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:AddStandardPromoXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStandardPromoXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateStandardPromoXML" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStandardPromoXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateStandardPromoXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStandardPromoByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStandardPromoByID" />
+  </wsdl:message>
+  <wsdl:message name="GetStandardPromoByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStandardPromoByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteStandardPromoByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteStandardPromoByID" />
+  </wsdl:message>
+  <wsdl:message name="DeleteStandardPromoByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteStandardPromoByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStandardPromoDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateStandardPromoDetails" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStandardPromoDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateStandardPromoDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddOrderPromoXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:AddOrderPromoXML" />
+  </wsdl:message>
+  <wsdl:message name="AddOrderPromoXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:AddOrderPromoXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderPromoXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateOrderPromoXML" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderPromoXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateOrderPromoXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderPromoByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderPromoByID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderPromoByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderPromoByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetResellerOrderPromosByPLIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetResellerOrderPromosByPLID" />
+  </wsdl:message>
+  <wsdl:message name="GetResellerOrderPromosByPLIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResellerOrderPromosByPLIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteOrderPromoByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteOrderPromoByID" />
+  </wsdl:message>
+  <wsdl:message name="DeleteOrderPromoByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteOrderPromoByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderPromoDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateOrderPromoDetails" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderPromoDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateOrderPromoDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddStandardPromoShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:AddStandardPromoShopper" />
+  </wsdl:message>
+  <wsdl:message name="AddStandardPromoShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:AddStandardPromoShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStandardPromoShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStandardPromoShopper" />
+  </wsdl:message>
+  <wsdl:message name="GetStandardPromoShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStandardPromoShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteStandardPromoShopperSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteStandardPromoShopper" />
+  </wsdl:message>
+  <wsdl:message name="DeleteStandardPromoShopperSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteStandardPromoShopperResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddStandardPromoPrivateLabelSoapIn">
+    <wsdl:part name="parameters" element="tns:AddStandardPromoPrivateLabel" />
+  </wsdl:message>
+  <wsdl:message name="AddStandardPromoPrivateLabelSoapOut">
+    <wsdl:part name="parameters" element="tns:AddStandardPromoPrivateLabelResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStandardPromoPrivateLabelSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStandardPromoPrivateLabel" />
+  </wsdl:message>
+  <wsdl:message name="GetStandardPromoPrivateLabelSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStandardPromoPrivateLabelResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteStandardPromoPrivateLabelSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteStandardPromoPrivateLabel" />
+  </wsdl:message>
+  <wsdl:message name="DeleteStandardPromoPrivateLabelSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteStandardPromoPrivateLabelResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddOrderPromoPrivateLabelSoapIn">
+    <wsdl:part name="parameters" element="tns:AddOrderPromoPrivateLabel" />
+  </wsdl:message>
+  <wsdl:message name="AddOrderPromoPrivateLabelSoapOut">
+    <wsdl:part name="parameters" element="tns:AddOrderPromoPrivateLabelResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderPromoPrivateLabelSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderPromoPrivateLabel" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderPromoPrivateLabelSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderPromoPrivateLabelResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteOrderPromoPrivateLabelSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteOrderPromoPrivateLabel" />
+  </wsdl:message>
+  <wsdl:message name="DeleteOrderPromoPrivateLabelSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteOrderPromoPrivateLabelResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUpdateViralPromoXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUpdateViralPromoXML" />
+  </wsdl:message>
+  <wsdl:message name="AddUpdateViralPromoXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUpdateViralPromoXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViralPromoXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViralPromoXML" />
+  </wsdl:message>
+  <wsdl:message name="GetViralPromoXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViralPromoXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetEmailMarketingOptInsOrderLevelSoapIn">
+    <wsdl:part name="parameters" element="tns:SetEmailMarketingOptInsOrderLevel" />
+  </wsdl:message>
+  <wsdl:message name="SetEmailMarketingOptInsOrderLevelSoapOut">
+    <wsdl:part name="parameters" element="tns:SetEmailMarketingOptInsOrderLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViralBYIDXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViralBYIDXML" />
+  </wsdl:message>
+  <wsdl:message name="GetViralBYIDXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViralBYIDXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViralCouponBYIDXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViralCouponBYIDXML" />
+  </wsdl:message>
+  <wsdl:message name="GetViralCouponBYIDXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViralCouponBYIDXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViralCouponPromoXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViralCouponPromoXML" />
+  </wsdl:message>
+  <wsdl:message name="GetViralCouponPromoXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViralCouponPromoXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewRestrictedOfferConfigIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewRestrictedOfferConfigID" />
+  </wsdl:message>
+  <wsdl:message name="GetNewRestrictedOfferConfigIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewRestrictedOfferConfigIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUpdatePromoCouponXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUpdatePromoCouponXML" />
+  </wsdl:message>
+  <wsdl:message name="AddUpdatePromoCouponXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUpdatePromoCouponXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewRestrictedOfferConfigYardValueIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewRestrictedOfferConfigYardValueID" />
+  </wsdl:message>
+  <wsdl:message name="GetNewRestrictedOfferConfigYardValueIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewRestrictedOfferConfigYardValueIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveViralPromoCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveViralPromoCode" />
+  </wsdl:message>
+  <wsdl:message name="RemoveViralPromoCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveViralPromoCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllPLSalePromoXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllPLSalePromoXML" />
+  </wsdl:message>
+  <wsdl:message name="GetAllPLSalePromoXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllPLSalePromoXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewPLSalePromoIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewPLSalePromoID" />
+  </wsdl:message>
+  <wsdl:message name="GetNewPLSalePromoIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewPLSalePromoIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPLSalePromoByIDXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPLSalePromoByIDXML" />
+  </wsdl:message>
+  <wsdl:message name="GetPLSalePromoByIDXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPLSalePromoByIDXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUpdateSalePromoXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUpdateSalePromoXML" />
+  </wsdl:message>
+  <wsdl:message name="AddUpdateSalePromoXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUpdateSalePromoXMLResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="AddStandardPromoXML">
+      <wsdl:input message="tns:AddStandardPromoXMLSoapIn" />
+      <wsdl:output message="tns:AddStandardPromoXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStandardPromoXML">
+      <wsdl:input message="tns:UpdateStandardPromoXMLSoapIn" />
+      <wsdl:output message="tns:UpdateStandardPromoXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardPromoByID">
+      <wsdl:input message="tns:GetStandardPromoByIDSoapIn" />
+      <wsdl:output message="tns:GetStandardPromoByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStandardPromoByID">
+      <wsdl:input message="tns:DeleteStandardPromoByIDSoapIn" />
+      <wsdl:output message="tns:DeleteStandardPromoByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStandardPromoDetails">
+      <wsdl:input message="tns:UpdateStandardPromoDetailsSoapIn" />
+      <wsdl:output message="tns:UpdateStandardPromoDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddOrderPromoXML">
+      <wsdl:input message="tns:AddOrderPromoXMLSoapIn" />
+      <wsdl:output message="tns:AddOrderPromoXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderPromoXML">
+      <wsdl:input message="tns:UpdateOrderPromoXMLSoapIn" />
+      <wsdl:output message="tns:UpdateOrderPromoXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoByID">
+      <wsdl:input message="tns:GetOrderPromoByIDSoapIn" />
+      <wsdl:output message="tns:GetOrderPromoByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResellerOrderPromosByPLID">
+      <wsdl:input message="tns:GetResellerOrderPromosByPLIDSoapIn" />
+      <wsdl:output message="tns:GetResellerOrderPromosByPLIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrderPromoByID">
+      <wsdl:input message="tns:DeleteOrderPromoByIDSoapIn" />
+      <wsdl:output message="tns:DeleteOrderPromoByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderPromoDetails">
+      <wsdl:input message="tns:UpdateOrderPromoDetailsSoapIn" />
+      <wsdl:output message="tns:UpdateOrderPromoDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddStandardPromoShopper">
+      <wsdl:input message="tns:AddStandardPromoShopperSoapIn" />
+      <wsdl:output message="tns:AddStandardPromoShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardPromoShopper">
+      <wsdl:input message="tns:GetStandardPromoShopperSoapIn" />
+      <wsdl:output message="tns:GetStandardPromoShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStandardPromoShopper">
+      <wsdl:input message="tns:DeleteStandardPromoShopperSoapIn" />
+      <wsdl:output message="tns:DeleteStandardPromoShopperSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddStandardPromoPrivateLabel">
+      <wsdl:input message="tns:AddStandardPromoPrivateLabelSoapIn" />
+      <wsdl:output message="tns:AddStandardPromoPrivateLabelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardPromoPrivateLabel">
+      <wsdl:input message="tns:GetStandardPromoPrivateLabelSoapIn" />
+      <wsdl:output message="tns:GetStandardPromoPrivateLabelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStandardPromoPrivateLabel">
+      <wsdl:input message="tns:DeleteStandardPromoPrivateLabelSoapIn" />
+      <wsdl:output message="tns:DeleteStandardPromoPrivateLabelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddOrderPromoPrivateLabel">
+      <wsdl:input message="tns:AddOrderPromoPrivateLabelSoapIn" />
+      <wsdl:output message="tns:AddOrderPromoPrivateLabelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoPrivateLabel">
+      <wsdl:input message="tns:GetOrderPromoPrivateLabelSoapIn" />
+      <wsdl:output message="tns:GetOrderPromoPrivateLabelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrderPromoPrivateLabel">
+      <wsdl:input message="tns:DeleteOrderPromoPrivateLabelSoapIn" />
+      <wsdl:output message="tns:DeleteOrderPromoPrivateLabelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUpdateViralPromoXML">
+      <wsdl:input message="tns:AddUpdateViralPromoXMLSoapIn" />
+      <wsdl:output message="tns:AddUpdateViralPromoXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViralPromoXML">
+      <wsdl:input message="tns:GetViralPromoXMLSoapIn" />
+      <wsdl:output message="tns:GetViralPromoXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetEmailMarketingOptInsOrderLevel">
+      <wsdl:input message="tns:SetEmailMarketingOptInsOrderLevelSoapIn" />
+      <wsdl:output message="tns:SetEmailMarketingOptInsOrderLevelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViralBYIDXML">
+      <wsdl:input message="tns:GetViralBYIDXMLSoapIn" />
+      <wsdl:output message="tns:GetViralBYIDXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViralCouponBYIDXML">
+      <wsdl:input message="tns:GetViralCouponBYIDXMLSoapIn" />
+      <wsdl:output message="tns:GetViralCouponBYIDXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViralCouponPromoXML">
+      <wsdl:input message="tns:GetViralCouponPromoXMLSoapIn" />
+      <wsdl:output message="tns:GetViralCouponPromoXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRestrictedOfferConfigID">
+      <wsdl:input message="tns:GetNewRestrictedOfferConfigIDSoapIn" />
+      <wsdl:output message="tns:GetNewRestrictedOfferConfigIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUpdatePromoCouponXML">
+      <wsdl:input message="tns:AddUpdatePromoCouponXMLSoapIn" />
+      <wsdl:output message="tns:AddUpdatePromoCouponXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRestrictedOfferConfigYardValueID">
+      <wsdl:input message="tns:GetNewRestrictedOfferConfigYardValueIDSoapIn" />
+      <wsdl:output message="tns:GetNewRestrictedOfferConfigYardValueIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveViralPromoCode">
+      <wsdl:input message="tns:RemoveViralPromoCodeSoapIn" />
+      <wsdl:output message="tns:RemoveViralPromoCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPLSalePromoXML">
+      <wsdl:input message="tns:GetAllPLSalePromoXMLSoapIn" />
+      <wsdl:output message="tns:GetAllPLSalePromoXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewPLSalePromoID">
+      <wsdl:input message="tns:GetNewPLSalePromoIDSoapIn" />
+      <wsdl:output message="tns:GetNewPLSalePromoIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPLSalePromoByIDXML">
+      <wsdl:input message="tns:GetPLSalePromoByIDXMLSoapIn" />
+      <wsdl:output message="tns:GetPLSalePromoByIDXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUpdateSalePromoXML">
+      <wsdl:input message="tns:AddUpdateSalePromoXMLSoapIn" />
+      <wsdl:output message="tns:AddUpdateSalePromoXMLSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddStandardPromoXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/AddStandardPromoXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStandardPromoXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/UpdateStandardPromoXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardPromoByID">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetStandardPromoByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStandardPromoByID">
+      <soap:operation soapAction="http://masterapi.godaddy.com/DeleteStandardPromoByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStandardPromoDetails">
+      <soap:operation soapAction="http://masterapi.godaddy.com/UpdateStandardPromoDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOrderPromoXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/AddOrderPromoXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderPromoXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/UpdateOrderPromoXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoByID">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetOrderPromoByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResellerOrderPromosByPLID">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetResellerOrderPromosByPLID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrderPromoByID">
+      <soap:operation soapAction="http://masterapi.godaddy.com/DeleteOrderPromoByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderPromoDetails">
+      <soap:operation soapAction="http://masterapi.godaddy.com/UpdateOrderPromoDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddStandardPromoShopper">
+      <soap:operation soapAction="http://masterapi.godaddy.com/AddStandardPromoShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardPromoShopper">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetStandardPromoShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStandardPromoShopper">
+      <soap:operation soapAction="http://masterapi.godaddy.com/DeleteStandardPromoShopper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddStandardPromoPrivateLabel">
+      <soap:operation soapAction="http://masterapi.godaddy.com/AddStandardPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardPromoPrivateLabel">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetStandardPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStandardPromoPrivateLabel">
+      <soap:operation soapAction="http://masterapi.godaddy.com/DeleteStandardPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOrderPromoPrivateLabel">
+      <soap:operation soapAction="http://masterapi.godaddy.com/AddOrderPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoPrivateLabel">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetOrderPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrderPromoPrivateLabel">
+      <soap:operation soapAction="http://masterapi.godaddy.com/DeleteOrderPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUpdateViralPromoXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/AddUpdateViralPromoXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralPromoXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetViralPromoXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetEmailMarketingOptInsOrderLevel">
+      <soap:operation soapAction="http://masterapi.godaddy.com/SetEmailMarketingOptInsOrderLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralBYIDXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetViralBYIDXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralCouponBYIDXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetViralCouponBYIDXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralCouponPromoXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetViralCouponPromoXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRestrictedOfferConfigID">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetNewRestrictedOfferConfigID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUpdatePromoCouponXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/AddUpdatePromoCouponXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRestrictedOfferConfigYardValueID">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetNewRestrictedOfferConfigYardValueID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveViralPromoCode">
+      <soap:operation soapAction="http://masterapi.godaddy.com/RemoveViralPromoCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPLSalePromoXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetAllPLSalePromoXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewPLSalePromoID">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetNewPLSalePromoID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPLSalePromoByIDXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/GetPLSalePromoByIDXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUpdateSalePromoXML">
+      <soap:operation soapAction="http://masterapi.godaddy.com/AddUpdateSalePromoXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddStandardPromoXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/AddStandardPromoXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStandardPromoXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/UpdateStandardPromoXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardPromoByID">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetStandardPromoByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStandardPromoByID">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/DeleteStandardPromoByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStandardPromoDetails">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/UpdateStandardPromoDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOrderPromoXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/AddOrderPromoXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderPromoXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/UpdateOrderPromoXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoByID">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetOrderPromoByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResellerOrderPromosByPLID">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetResellerOrderPromosByPLID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrderPromoByID">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/DeleteOrderPromoByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderPromoDetails">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/UpdateOrderPromoDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddStandardPromoShopper">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/AddStandardPromoShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardPromoShopper">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetStandardPromoShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStandardPromoShopper">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/DeleteStandardPromoShopper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddStandardPromoPrivateLabel">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/AddStandardPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardPromoPrivateLabel">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetStandardPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStandardPromoPrivateLabel">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/DeleteStandardPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOrderPromoPrivateLabel">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/AddOrderPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoPrivateLabel">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetOrderPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrderPromoPrivateLabel">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/DeleteOrderPromoPrivateLabel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUpdateViralPromoXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/AddUpdateViralPromoXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralPromoXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetViralPromoXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetEmailMarketingOptInsOrderLevel">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/SetEmailMarketingOptInsOrderLevel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralBYIDXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetViralBYIDXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralCouponBYIDXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetViralCouponBYIDXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralCouponPromoXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetViralCouponPromoXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRestrictedOfferConfigID">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetNewRestrictedOfferConfigID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUpdatePromoCouponXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/AddUpdatePromoCouponXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRestrictedOfferConfigYardValueID">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetNewRestrictedOfferConfigYardValueID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveViralPromoCode">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/RemoveViralPromoCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPLSalePromoXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetAllPLSalePromoXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewPLSalePromoID">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetNewPLSalePromoID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPLSalePromoByIDXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/GetPLSalePromoByIDXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUpdateSalePromoXML">
+      <soap12:operation soapAction="http://masterapi.godaddy.com/AddUpdateSalePromoXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="https://gdmasterapi.dev.glbt1.gdg/WSgdPromoAPI/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="https://gdmasterapi.dev.glbt1.gdg/WSgdPromoAPI/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

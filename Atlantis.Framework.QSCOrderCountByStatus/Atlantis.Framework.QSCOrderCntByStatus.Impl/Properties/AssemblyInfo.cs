@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.QSC.Interface")]
+[assembly: AssemblyTitle("Atlantis.Framework.QSCOrderCntByStatus.Impl")]
 
 #if DEBUG
 
@@ -16,9 +17,10 @@ using System.Runtime.InteropServices;
 
 #endif
 
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, LLC")]
-[assembly: AssemblyProduct("Atlantis.Framework.QSC.Interface")]
+[assembly: AssemblyProduct("Atlantis.Framework.QSCOrderCntByStatus.Impl")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -29,7 +31,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("df5b8f0c-7733-44ba-b0ec-00a09fe067a9")]
+[assembly: Guid("17c1f534-2d88-4147-bac3-2714aa84e1a9")]
 
 // Version information for an assembly consists of the following four values:
 //

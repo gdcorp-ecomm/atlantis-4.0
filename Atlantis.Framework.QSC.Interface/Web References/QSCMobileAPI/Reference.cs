@@ -52,6 +52,8 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         
         private System.Threading.SendOrPostCallback getAccountsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getOrderCountByStatusOperationCompleted;
+        
         private System.Threading.SendOrPostCallback unblockIPOperationCompleted;
         
         private System.Threading.SendOrPostCallback captureAllPaymentsOperationCompleted;
@@ -137,6 +139,9 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         
         /// <remarks/>
         public event getAccountsCompletedEventHandler getAccountsCompleted;
+        
+        /// <remarks/>
+        public event getOrderCountByStatusCompletedEventHandler getOrderCountByStatusCompleted;
         
         /// <remarks/>
         public event unblockIPCompletedEventHandler unblockIPCompleted;
@@ -437,6 +442,38 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             if ((this.getAccountsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getAccountsCompleted(this, new getAccountsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("orderCountByStatusResponse")]
+        public getOrderCountByStatusResponseDetail getOrderCountByStatus([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] bool onlyDashboardStatusTypes) {
+            object[] results = this.Invoke("getOrderCountByStatus", new object[] {
+                        accountUId,
+                        onlyDashboardStatusTypes});
+            return ((getOrderCountByStatusResponseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getOrderCountByStatusAsync(string accountUId, bool onlyDashboardStatusTypes) {
+            this.getOrderCountByStatusAsync(accountUId, onlyDashboardStatusTypes, null);
+        }
+        
+        /// <remarks/>
+        public void getOrderCountByStatusAsync(string accountUId, bool onlyDashboardStatusTypes, object userState) {
+            if ((this.getOrderCountByStatusOperationCompleted == null)) {
+                this.getOrderCountByStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetOrderCountByStatusOperationCompleted);
+            }
+            this.InvokeAsync("getOrderCountByStatus", new object[] {
+                        accountUId,
+                        onlyDashboardStatusTypes}, this.getOrderCountByStatusOperationCompleted, userState);
+        }
+        
+        private void OngetOrderCountByStatusOperationCompleted(object arg) {
+            if ((this.getOrderCountByStatusCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getOrderCountByStatusCompleted(this, new getOrderCountByStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1116,6 +1153,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(orderStatusCount))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17626")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2558,6 +2596,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrderSearchParametersResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrdersResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getIPAddressResponseDetail))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrderCountByStatusResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getAccountResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrderResponseDetail))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17626")]
@@ -2659,6 +2698,64 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             }
             set {
                 this.ipAddressesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17626")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    public partial class getOrderCountByStatusResponseDetail : responseDetail {
+        
+        private int totalOrderCountField;
+        
+        private orderStatusCount[] orderCountByStatusField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int totalOrderCount {
+            get {
+                return this.totalOrderCountField;
+            }
+            set {
+                this.totalOrderCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("orderStatus", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public orderStatusCount[] orderCountByStatus {
+            get {
+                return this.orderCountByStatusField;
+            }
+            set {
+                this.orderCountByStatusField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17626")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    public partial class orderStatusCount : orderStatus {
+        
+        private int orderCountField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int orderCount {
+            get {
+                return this.orderCountField;
+            }
+            set {
+                this.orderCountField = value;
             }
         }
     }
@@ -2890,6 +2987,32 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((getAccountResponseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17626")]
+    public delegate void getOrderCountByStatusCompletedEventHandler(object sender, getOrderCountByStatusCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17626")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getOrderCountByStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getOrderCountByStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public getOrderCountByStatusResponseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((getOrderCountByStatusResponseDetail)(this.results[0]));
             }
         }
     }

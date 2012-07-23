@@ -17,11 +17,14 @@
       <xs:element name="getBlockedIPAddresses" type="tns:getBlockedIPAddresses" />
       <xs:element name="getBlockedIPAddressesResponse" type="tns:getBlockedIPAddressesResponse" />
       <xs:element name="getOrder" type="tns:getOrder" />
+      <xs:element name="getOrderCountByStatus" type="tns:getOrderCountByStatus" />
+      <xs:element name="getOrderCountByStatusResponse" type="tns:getOrderCountByStatusResponse" />
       <xs:element name="getOrderResponse" type="tns:getOrderResponse" />
       <xs:element name="getOrderSearchParameters" type="tns:getOrderSearchParameters" />
       <xs:element name="getOrderSearchParametersResponse" type="tns:getOrderSearchParametersResponse" />
       <xs:element name="getOrders" type="tns:getOrders" />
       <xs:element name="getOrdersResponse" type="tns:getOrdersResponse" />
+      <xs:element name="orderCount" type="tns:getOrderCountByStatusResponseDetail" />
       <xs:element name="ping" type="tns:ping" />
       <xs:element name="pingResponse" type="tns:pingResponse" />
       <xs:element name="refundOrder" type="tns:refundOrder" />
@@ -397,6 +400,42 @@
           <xs:element minOccurs="0" name="sslSetupInProgress" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="getOrderCountByStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element name="onlyDashboardStatusTypes" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrderCountByStatusResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="orderCountByStatusResponse" type="tns:getOrderCountByStatusResponseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrderCountByStatusResponseDetail">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:responseDetail">
+            <xs:sequence>
+              <xs:element name="totalOrderCount" type="xs:int" />
+              <xs:element minOccurs="0" name="orderCountByStatus">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="orderStatus" type="tns:orderStatusCount" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="orderStatusCount">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:orderStatus">
+            <xs:sequence>
+              <xs:element name="orderCount" type="xs:int" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
       <xs:complexType name="unblockIP">
         <xs:sequence>
           <xs:element minOccurs="0" name="accountUId" type="xs:string" />
@@ -726,6 +765,12 @@
   <wsdl:message name="updateOrderNotes">
     <wsdl:part name="parameters" element="tns:updateOrderNotes" />
   </wsdl:message>
+  <wsdl:message name="getOrderCountByStatus">
+    <wsdl:part name="parameters" element="tns:getOrderCountByStatus" />
+  </wsdl:message>
+  <wsdl:message name="getOrderCountByStatusResponse">
+    <wsdl:part name="parameters" element="tns:getOrderCountByStatusResponse" />
+  </wsdl:message>
   <wsdl:message name="resendOrderEmailResponse">
     <wsdl:part name="parameters" element="tns:resendOrderEmailResponse" />
   </wsdl:message>
@@ -776,6 +821,11 @@
       <wsdl:documentation>Returns a list of QSC accounts associated with supplied shopperId.</wsdl:documentation>
       <wsdl:input name="getAccounts" message="tns:getAccounts" />
       <wsdl:output name="getAccountsResponse" message="tns:getAccountsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrderCountByStatus">
+      <wsdl:documentation>Returns a list of blocked IP addresses by account UID</wsdl:documentation>
+      <wsdl:input name="getOrderCountByStatus" message="tns:getOrderCountByStatus" />
+      <wsdl:output name="getOrderCountByStatusResponse" message="tns:getOrderCountByStatusResponse" />
     </wsdl:operation>
     <wsdl:operation name="unblockIP">
       <wsdl:documentation>Call to unblock an IP address from placing orders.</wsdl:documentation>
@@ -908,6 +958,15 @@
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="refundOrderResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrderCountByStatus">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getOrderCountByStatus">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getOrderCountByStatusResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

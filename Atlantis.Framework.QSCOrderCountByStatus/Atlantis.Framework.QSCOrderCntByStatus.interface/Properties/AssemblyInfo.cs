@@ -17,7 +17,6 @@ using System.Runtime.InteropServices;
 
 #endif
 
-[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, LLC")]
 [assembly: AssemblyProduct("Atlantis.Framework.QSCOrderCntByStatus.Interface")]

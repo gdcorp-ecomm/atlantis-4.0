@@ -49,6 +49,7 @@
       <HintPath>..\..\..\..\ContentService\ContentManager\ContentManager.Dependencies\Json.Net\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />

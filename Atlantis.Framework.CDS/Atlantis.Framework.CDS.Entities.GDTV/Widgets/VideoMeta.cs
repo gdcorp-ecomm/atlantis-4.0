@@ -1,12 +1,13 @@
-﻿using Atlantis.Framework.CDS.Entities.Common.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.GDTV.Widgets
 {
-  public class Meta : IWidgetModel
+  public class VideoMeta : IWidgetModel
   {
-    public Meta()
-    {
-    }
     public string Title { get; set; }
     public string Canonical { get; set; }
     public string ShortCutIcon { get; set; }

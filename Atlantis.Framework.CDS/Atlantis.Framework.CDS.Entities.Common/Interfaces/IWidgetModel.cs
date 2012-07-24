@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Atlantis.Framework.CDS.Entities.Interfaces
+namespace Atlantis.Framework.CDS.Entities.Common.Interfaces
 {
   public interface IWidgetModel
   {

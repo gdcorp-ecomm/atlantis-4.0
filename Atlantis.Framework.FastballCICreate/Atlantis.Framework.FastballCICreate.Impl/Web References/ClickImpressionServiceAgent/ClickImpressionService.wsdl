@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://godaddy.com/fbiClickImpressionService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://godaddy.com/fbiClickImpressionService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://godaddy.com/fbiClickImpressionService">
+      <s:element name="CreateCICodesForItems">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="itemXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateCICodesForItemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateCICodesForItemsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateCICodesForItemsSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateCICodesForItems" />
+  </wsdl:message>
+  <wsdl:message name="CreateCICodesForItemsSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateCICodesForItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateCICodesForItemsHttpGetIn">
+    <wsdl:part name="itemXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateCICodesForItemsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateCICodesForItemsHttpPostIn">
+    <wsdl:part name="itemXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateCICodesForItemsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="ClickImpressionServiceSoap">
+    <wsdl:operation name="CreateCICodesForItems">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This web method takes XML in the following format to generate CICodes for each item given.</wsdl:documentation>
+      <wsdl:input message="tns:CreateCICodesForItemsSoapIn" />
+      <wsdl:output message="tns:CreateCICodesForItemsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ClickImpressionServiceHttpGet">
+    <wsdl:operation name="CreateCICodesForItems">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This web method takes XML in the following format to generate CICodes for each item given.</wsdl:documentation>
+      <wsdl:input message="tns:CreateCICodesForItemsHttpGetIn" />
+      <wsdl:output message="tns:CreateCICodesForItemsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ClickImpressionServiceHttpPost">
+    <wsdl:operation name="CreateCICodesForItems">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This web method takes XML in the following format to generate CICodes for each item given.</wsdl:documentation>
+      <wsdl:input message="tns:CreateCICodesForItemsHttpPostIn" />
+      <wsdl:output message="tns:CreateCICodesForItemsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClickImpressionServiceSoap" type="tns:ClickImpressionServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateCICodesForItems">
+      <soap:operation soapAction="http://godaddy.com/fbiClickImpressionService/CreateCICodesForItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ClickImpressionServiceSoap12" type="tns:ClickImpressionServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateCICodesForItems">
+      <soap12:operation soapAction="http://godaddy.com/fbiClickImpressionService/CreateCICodesForItems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ClickImpressionServiceHttpGet" type="tns:ClickImpressionServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="CreateCICodesForItems">
+      <http:operation location="/CreateCICodesForItems" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ClickImpressionServiceHttpPost" type="tns:ClickImpressionServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="CreateCICodesForItems">
+      <http:operation location="/CreateCICodesForItems" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClickImpressionService">
+    <wsdl:port name="ClickImpressionServiceSoap" binding="tns:ClickImpressionServiceSoap">
+      <soap:address location="http://sitetracking.dev.glbt1.gdg/fbiClickImpressionService/ClickImpressionService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ClickImpressionServiceSoap12" binding="tns:ClickImpressionServiceSoap12">
+      <soap12:address location="http://sitetracking.dev.glbt1.gdg/fbiClickImpressionService/ClickImpressionService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ClickImpressionServiceHttpGet" binding="tns:ClickImpressionServiceHttpGet">
+      <http:address location="http://sitetracking.dev.glbt1.gdg/fbiClickImpressionService/ClickImpressionService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ClickImpressionServiceHttpPost" binding="tns:ClickImpressionServiceHttpPost">
+      <http:address location="http://sitetracking.dev.glbt1.gdg/fbiClickImpressionService/ClickImpressionService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

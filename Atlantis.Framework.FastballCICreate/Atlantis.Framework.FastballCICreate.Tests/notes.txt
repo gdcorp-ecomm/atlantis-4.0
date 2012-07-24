@@ -1,0 +1,6 @@
+﻿Per Ryan Flowers, here are the DEV/TEST/PROD service URLs.
+No authentication is necessary at this time in any environment.
+
+DEV:http://sitetracking.dev.glbt1.gdg/fbiClickImpressionService/ClickImpressionService.asmx
+TEST: http://sitetracking.test.glbt1.gdg/fbiClickImpressionService/ClickImpressionService.asmx
+PROD:http://sitetracking.prod.mesa1.gdg/fbiClickImpressionService/ClickImpressionService.asmx?op=CreateCICodesForItems

@@ -58,7 +58,7 @@ namespace Atlantis.Framework.CDS.Tests
       //Arrange
       string shopperId = "860316";
       int requestType = 424;
-      string query = "sales/1/lp/nonexistent";
+      string query = "sales/1/lp/nonexistent|";
       CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, string.Empty, 1, query);
       //requestData.RequestTimeout = TimeSpan.FromSeconds(20);
 

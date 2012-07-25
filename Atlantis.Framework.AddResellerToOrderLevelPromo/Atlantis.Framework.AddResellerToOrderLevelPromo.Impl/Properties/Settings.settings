@@ -1,9 +1,0 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Atlantis.Framework.CreatePLOrderLevelPromo.Impl.Properties" GeneratedClassName="Settings">
-  <Profiles />
-  <Settings>
-    <Setting Name="Atlantis_Framework_CreatePLOrderLevelPromo_Impl_WSgdPromoAPI_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://gdmasterapi.dev.glbt1.gdg/WSgdPromoAPI/Service.asmx</Value>
-    </Setting>
-  </Settings>
-</SettingsFile>

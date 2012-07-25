@@ -19,6 +19,10 @@ namespace Atlantis.Framework.CDS.Entities.GDTV.Widgets
   {
     public string Title { get; set; }
     public List<Version> Versions { get; set; }
+    public Video()
+    {
+      Versions = new List<Version>();
+    }
   }
 
   public class Version

@@ -34,7 +34,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         }
         if (IsHTMLEmail)
         {
-          customMessage = customMessage + "<br/>";
+          customMessage = customMessage + "<br/><br/>";
         }
         return customMessage;
       }

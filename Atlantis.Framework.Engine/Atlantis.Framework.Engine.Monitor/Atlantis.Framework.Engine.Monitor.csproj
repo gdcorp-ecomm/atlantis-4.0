@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FirewallTest.cs" />
+    <Compile Include="Firewall\FirewallResult.cs" />
+    <Compile Include="Firewall\TimeoutSocket.cs" />
     <Compile Include="MonitorData.cs" />
     <Compile Include="MonitorDataTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,7 +70,9 @@
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\firewalltest.xslt" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\stats.xslt" />
   </ItemGroup>

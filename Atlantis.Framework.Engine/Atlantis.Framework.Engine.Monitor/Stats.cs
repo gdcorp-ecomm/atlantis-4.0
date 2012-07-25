@@ -15,11 +15,18 @@ namespace Atlantis.Framework.Engine.Monitor
 
       root.Add(GetProcessId(), GetMachineName(), GetEngineVersion(), GetInterfaceVersion());
 
-      var configElements = Engine.GetConfigElements();
-      foreach (ConfigElement configItem in configElements)
+      try
       {
-        XElement configItemData = GetStatsElement(configItem);
-        root.Add(configItemData);
+        var configElements = Engine.GetConfigElements();
+        foreach (ConfigElement configItem in configElements)
+        {
+          XElement configItemData = GetStatsElement(configItem);
+          root.Add(configItemData);
+        }
+      }
+      catch (Exception ex)
+      {
+        root.Add(new XElement("error", ex.Message));
       }
 
       result.Add(root);

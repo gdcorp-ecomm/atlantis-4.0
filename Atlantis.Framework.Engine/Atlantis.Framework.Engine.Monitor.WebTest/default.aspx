@@ -9,7 +9,9 @@
 <body>
   <div>
     <a href="/_engine/monitor/Stats?responsetype=html">Engine Stats Html</a><br />
-    <a href="/_engine/monitor/Stats?responsetype=xml">Engine Stats Xml</a>
+    <a href="/_engine/monitor/Stats?responsetype=xml">Engine Stats Xml</a><br />
+    <a href="/_engine/monitor/FirewallTest?responsetype=html">Firewall Test Html</a><br />
+    <a href="/_engine/monitor/FirewallTest?responsetype=xml">Firewall Test Xml</a><br />
   </div>
 </body>
 </html>

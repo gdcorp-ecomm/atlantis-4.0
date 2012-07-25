@@ -178,5 +178,38 @@ namespace Atlantis.Framework.Engine.Tests
         IGotLogged = atlantisException != null;
       }
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void EngineStatsReset()
+    {
+      for (int i = 0; i < 500; i++)
+      {
+        try
+        {
+          ConfigTestRequestData request = new ConfigTestRequestData("832652", string.Empty, string.Empty, string.Empty, 0);
+          ConfigTestResponseData response = (ConfigTestResponseData)Engine.ProcessRequest(request, 9997);
+        }
+        catch { }
+      }
+
+      ConfigElement config;
+      if (Engine.TryGetConfigElement(9997, out config))
+      {
+        ConfigElementStats existingStats = config.ResetStats();
+        Assert.AreNotEqual(0, existingStats.Succeeded);
+        Assert.AreEqual(0, config.Stats.Succeeded);
+      }
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void FirewallTest()
+    {
+      XDocument firewalldata = Monitor.MonitorData.GetMonitorData(Monitor.MonitorDataTypes.FirewallTest);
+      Assert.IsNotNull(firewalldata);
+    }
+
+
   }
 }

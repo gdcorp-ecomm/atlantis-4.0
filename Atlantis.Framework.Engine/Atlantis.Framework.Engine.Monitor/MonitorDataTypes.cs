@@ -2,6 +2,7 @@
 {
   public enum MonitorDataTypes
   {
-    Stats
+    Stats,
+    FirewallTest
   }
 }

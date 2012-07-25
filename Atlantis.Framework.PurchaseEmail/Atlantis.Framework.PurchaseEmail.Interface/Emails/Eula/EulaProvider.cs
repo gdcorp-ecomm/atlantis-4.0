@@ -190,7 +190,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
             currentItem.LegalAgreementURL = legalAgreementURL;
             currentItem.ProductName = title;
           }
-          if (currentItem.RuleType == EULARuleType.DedVirtHosting)
+          if (ProductIds.isCloudServer(productId) || ProductIds.isHostingProduct(productId) || ProductIds.isWordPressHosting(productId))
           {
             currentItem = DetermineNameOverride(productId, currentItem);
           }
@@ -242,7 +242,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
               currentItem.LegalAgreementURL = legalAgreementURL;
               currentItem.ProductName = title;
             }
-            if (currentItem.RuleType == EULARuleType.DedVirtHosting)
+            if (ProductIds.isCloudServer(productId) || ProductIds.isHostingProduct(productId) || ProductIds.isWordPressHosting(productId))
             {
               currentItem = DetermineNameOverride(productId, currentItem);
             }

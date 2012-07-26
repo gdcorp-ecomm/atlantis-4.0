@@ -813,7 +813,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           break;
         case EULARuleType.InstantPage:
           productName = "InstantPage&#174;";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "category/instantpage/866", QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "866", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "InstantPage_TOS";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;

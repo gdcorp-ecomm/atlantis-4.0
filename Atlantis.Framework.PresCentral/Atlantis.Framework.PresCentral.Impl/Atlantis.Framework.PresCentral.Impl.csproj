@@ -43,7 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PCRequest2012.cs" />
+    <Compile Include="DetermineCacheKeyRequest.cs" />
+    <Compile Include="GenerateContentNoCacheRequest.cs" />
+    <Compile Include="GenerateContentRequest.cs" />
+    <Compile Include="PCRequest2012Base.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

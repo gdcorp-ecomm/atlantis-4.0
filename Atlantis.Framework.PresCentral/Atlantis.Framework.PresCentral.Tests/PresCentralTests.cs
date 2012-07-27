@@ -85,6 +85,18 @@ namespace Atlantis.Framework.PresCentral.Tests
     }
 
     [TestMethod]
+    public void GenerateContentNoCacheBasic()
+    {
+      PCGenerateContentNoCacheRequestData request2 = new PCGenerateContentNoCacheRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      request2.AddQueryParameters(GetRequestParams2());
+
+      PCGenerateContentNoCacheResponseData response2 = (PCGenerateContentNoCacheResponseData)Engine.Engine.ProcessRequest(request2, 544);
+
+      PCContentItem item = response2.Data.FindContentByName("header");
+      Assert.IsNotNull(item);
+    }
+
+    [TestMethod]
     public void GenerateContentBasic()
     {
       PCDetermineCacheKeyRequestData request1 = new PCDetermineCacheKeyRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);

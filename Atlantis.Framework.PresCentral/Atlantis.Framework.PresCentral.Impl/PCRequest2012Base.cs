@@ -8,13 +8,15 @@ using Atlantis.Framework.PresCentral.Interface;
 
 namespace Atlantis.Framework.PresCentral.Impl
 {
-  public class PCRequest2012 : IRequest
+  public abstract class PCRequest2012Base<T, U> : IRequest 
+    where T: PCRequestDataBase 
+    where U: IResponseData
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       IResponseData result = null;
 
-      PCRequestDataBase pcRequestData = (PCRequestDataBase)requestData;
+      T pcRequestData = (T)requestData;
       WsConfigElement serviceConfig = (WsConfigElement)config;
       WebRequest request = GetWebRequest(serviceConfig, pcRequestData);
 
@@ -68,7 +70,7 @@ namespace Atlantis.Framework.PresCentral.Impl
       return result;
     }
 
-    private WebRequest GetWebRequest(WsConfigElement config, PCRequestDataBase requestData)
+    private WebRequest GetWebRequest(WsConfigElement config, T requestData)
     {
       WebRequest result;
       UriBuilder urlBuilder = new UriBuilder(config.WSURL);

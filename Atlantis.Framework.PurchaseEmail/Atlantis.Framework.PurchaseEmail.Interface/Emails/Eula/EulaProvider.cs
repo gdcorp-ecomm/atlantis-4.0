@@ -754,7 +754,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           productName = "Free Hosting w/Web Site Builder";
           pageid = "6304";
           ruleType = "Article";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
+          productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.TrafficFacts:
           productName = "Site Analytics";

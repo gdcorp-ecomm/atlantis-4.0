@@ -752,7 +752,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           break;
         case EULARuleType.FreeHosting:
           productName = "Free Hosting w/Web Site Builder";
-          pageid = "243";
+          pageid = "6304";
           ruleType = "Article";
           productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
@@ -844,7 +844,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
         case EULARuleType.CashParkHdr:
           productName = "CashParking Custom Header";
           productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "659", QueryParamMode.CommonParameters, false, queryStringArgs);
-          pageid = "Custom_Header_SA";
+          pageid = "Cash_Park_SA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.DotCert:

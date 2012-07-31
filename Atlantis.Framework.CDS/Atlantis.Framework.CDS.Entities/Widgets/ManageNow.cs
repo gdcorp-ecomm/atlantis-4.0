@@ -5,13 +5,14 @@ using System.Text;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Atlantis.Framework.Providers.Interface.Links;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
   public class ManageNow : IWidgetModel
   {
     private string _linkText;
-    [DisplayName("Link Text")]
+    [Required(ErrorMessage="Link Text is required")]
     public string LinkText 
     { 
       get
@@ -45,23 +46,37 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       }
     }
 
-    [DisplayName("Product Name")]
+    private string _queryParamModeValue;
+    public string QueryParamModeValue
+    {
+      get
+      {
+        return _queryParamModeValue;
+      }
+      set
+      {
+        QueryParamMode result;
+        if (Enum.TryParse<QueryParamMode>(value, out result))
+        {
+          _queryParamModeValue = value;
+        }
+        else
+        {
+          throw new ArgumentException("Invalid QueryParamMode value");
+        }
+      }
+    }
+
     public string ProductName { get; set; }
-    [DisplayName("CI Code")]
     [Required(ErrorMessage="CI Code is required.")]
     [RegularExpression(@"^\d+$", ErrorMessage="CI code must contain only digits.")]
     public string CiCode { get; set; }
-    [DisplayName("Link Type")]
     public string LinkType { get; set; }
-    [DisplayName("Relative Url")]
     [Required(ErrorMessage="Relative Url is required. Use \"default.aspx\" for the MYA home page.")]
     [RegularExpression(@"^([A-Za-z0-9_\-]+/?)*\.[A-Za-z]+$", ErrorMessage="Invalid Relative Url. Relative Url can contain letters, digits, underscores, dashes, forward slashes as directory separators, and a dot followed by a file extension")]
     public string RelativeUrl { get; set; }
-    [DisplayName("QueryParamMode Value")]
-    public string QueryParamModeValue { get; set; }
     public bool Secure { get; set; }
     public int Group { get; set; }
-    [DisplayName("Account Id")]
     public int AccId { get; set; }
   }
 }

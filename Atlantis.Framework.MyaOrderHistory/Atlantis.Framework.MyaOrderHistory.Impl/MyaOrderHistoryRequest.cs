@@ -16,7 +16,7 @@ namespace Atlantis.Framework.MyaOrderHistory.Impl
     {
       IResponseData oResponseData = null;
       DataSet ds = null;
-
+      string procName = string.Empty;
       try
       {
         string connectionString = NetConnect.LookupConnectInfo(oConfig, ConnectLookupType.NetConnectionString);
@@ -29,13 +29,14 @@ namespace Atlantis.Framework.MyaOrderHistory.Impl
 
         MyaOrderHistoryRequestData request = (MyaOrderHistoryRequestData)oRequestData;
 
+        List<SqlParameter> _params = BuildSqlParametersForProc(request, out procName);
+
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-          using (SqlCommand command = new SqlCommand(request.StoredProcedureName, connection))
+          using (SqlCommand command = new SqlCommand(procName, connection))
           {
             command.CommandType = CommandType.StoredProcedure;
 
-            List<SqlParameter> _params = BuildSqlParametersForProc(request);
             foreach (SqlParameter param in _params)
             {
               command.Parameters.Add(param);
@@ -66,35 +67,57 @@ namespace Atlantis.Framework.MyaOrderHistory.Impl
 
     #endregion
 
-    private List<SqlParameter> BuildSqlParametersForProc(MyaOrderHistoryRequestData request)
+    private List<SqlParameter> BuildSqlParametersForProc(MyaOrderHistoryRequestData request, out string procName)
     {
       List<SqlParameter> _paramList = new List<SqlParameter>(8);
-      _paramList.Add(new SqlParameter("@shopperId", request.ShopperID));
-      switch (request.StoredProcedureName)
+
+      string sDate = new DateTime(1995,1,1).ToShortDateString();
+      if (request.StartDate != null && request.StartDate.Year > DateTime.MinValue.Year)
       {
-        case StoredProcedure.ReceiptByDate:
-          _paramList.Add(new SqlParameter("@startDate", request.StartDate.ToShortDateString()));
-          _paramList.Add(new SqlParameter("@endDate", request.EndDate.ToShortDateString()));
-          break;
-        case StoredProcedure.ReceiptByDomain:
-          _paramList.Add(new SqlParameter("@domain", request.DomainName));
-          break;
-        case StoredProcedure.ReceiptByProductGroupId:
-          _paramList.Add(new SqlParameter("@startDate", request.StartDate.ToShortDateString()));
-          _paramList.Add(new SqlParameter("@endDate", request.EndDate.ToShortDateString()));
-          _paramList.Add(new SqlParameter("@productGroupID", request.ProductGroupId));
-          break;
-        case StoredProcedure.ReceiptByProductTypeId:
-          _paramList.Add(new SqlParameter("@startDate", request.StartDate.ToShortDateString()));
-          _paramList.Add(new SqlParameter("@endDate", request.EndDate.ToShortDateString()));
-          _paramList.Add(new SqlParameter("@gdshop_product_typeID", request.ProductTypeId));
-          break;
-        case StoredProcedure.ReceiptByPaymentProfileId:
-          _paramList.Add(new SqlParameter("@startDate", request.StartDate.ToShortDateString()));
-          _paramList.Add(new SqlParameter("@endDate", request.EndDate.ToShortDateString()));
-          _paramList.Add(new SqlParameter("@pp_shopperProfileID", request.PaymentProfileId));
-          break;
+        sDate = request.StartDate.ToShortDateString();
       }
+
+      string eDate = DateTime.Now.ToShortDateString();
+      if (request.EndDate != null && request.EndDate.Year > DateTime.MinValue.Year)
+      {
+        eDate = request.EndDate.ToShortDateString();
+      }
+
+      _paramList.Add(new SqlParameter("@shopperId", request.ShopperID));
+
+      if (!string.IsNullOrWhiteSpace(request.DomainName))
+      {
+        _paramList.Add(new SqlParameter("@domain", request.DomainName));
+        procName = StoredProcedure.ReceiptByDomain;
+      }
+      else if (request.ProductGroupId > 0)
+      {
+        _paramList.Add(new SqlParameter("@startDate", sDate));
+        _paramList.Add(new SqlParameter("@endDate", eDate));
+        _paramList.Add(new SqlParameter("@productGroupID", request.ProductGroupId));
+        procName = StoredProcedure.ReceiptByProductGroupId;
+      }
+      else if (request.PaymentProfileId > 0)
+      {
+        _paramList.Add(new SqlParameter("@startDate", sDate));
+        _paramList.Add(new SqlParameter("@endDate", eDate));
+        _paramList.Add(new SqlParameter("@pp_shopperProfileID", request.PaymentProfileId));
+        procName = StoredProcedure.ReceiptByPaymentProfileId;
+      }
+      else if (request.ProductTypeId > 0)
+      {
+        _paramList.Add(new SqlParameter("@startDate", sDate));
+        _paramList.Add(new SqlParameter("@endDate", eDate));
+        _paramList.Add(new SqlParameter("@gdshop_product_typeID", request.ProductTypeId));
+        procName = StoredProcedure.ReceiptByProductTypeId;
+      }
+      else
+      {
+        _paramList.Add(new SqlParameter("@startDate", sDate));
+        _paramList.Add(new SqlParameter("@endDate", eDate));
+        procName = StoredProcedure.ReceiptByDate;
+      }
+
       _paramList.Add(new SqlParameter("@pageno", request.PageNumber));
       _paramList.Add(new SqlParameter("@rowsperpage", request.RowsPerPage));
       _paramList.Add(new SqlParameter("@sortcol", request.SortByColumn));
@@ -103,5 +126,15 @@ namespace Atlantis.Framework.MyaOrderHistory.Impl
 
       return _paramList;
     }
+
+    private class StoredProcedure
+    {
+      public const string ReceiptByDate = "mya_receiptByShopperAndDate_sp";
+      public const string ReceiptByDomain = "mya_receiptByShopperAndDomain_sp";
+      public const string ReceiptByProductGroupId = "mya_receiptByShopperAndProductGroup_sp";
+      public const string ReceiptByProductTypeId = "mya_receiptByShopperAndProductType_sp";
+      public const string ReceiptByPaymentProfileId = "mya_receiptByShopperAndProfileID_sp";
+    }
+
   }
 }

@@ -8,7 +8,6 @@ namespace Atlantis.Framework.MyaOrderHistory.Interface
 
     #region Properties
 
-    public string StoredProcedureName { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public string DomainName { get; set; }

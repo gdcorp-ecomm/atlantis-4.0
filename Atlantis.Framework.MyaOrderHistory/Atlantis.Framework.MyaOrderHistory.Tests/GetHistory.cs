@@ -66,18 +66,13 @@ namespace Atlantis.Framework.MyaOrderHistory.Tests
       request.StartDate = DateTime.Now.AddYears(-1);
       request.EndDate = DateTime.Now;
 
-      //request.StoredProcedureName = StoredProcedure.ReceiptByDate;
-
-      request.StoredProcedureName = StoredProcedure.ReceiptByPaymentProfileId;
       request.PaymentProfileId = 58628;
 
 
-      //request.StoredProcedureName = StoredProcedure.ReceiptByProductGroupId;
-      //request.ProductGroupId = 1
+      //request.ProductGroupId = 1;
 
 
-      //request.StoredProcedureName = StoredProcedure.ReceiptByDomain;
-      //request.DomainName = "needaboatloadofdomains10.biz"
+      //request.DomainName = "needaboatloadofdomains10.biz";
 
       MyaOrderHistoryResponseData response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
       

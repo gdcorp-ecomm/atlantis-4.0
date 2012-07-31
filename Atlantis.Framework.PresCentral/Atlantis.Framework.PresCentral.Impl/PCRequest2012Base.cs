@@ -8,9 +8,8 @@ using Atlantis.Framework.PresCentral.Interface;
 
 namespace Atlantis.Framework.PresCentral.Impl
 {
-  public abstract class PCRequest2012Base<T, U> : IRequest 
+  public abstract class PCRequest2012Base<T> : IRequest 
     where T: PCRequestDataBase 
-    where U: IResponseData
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {

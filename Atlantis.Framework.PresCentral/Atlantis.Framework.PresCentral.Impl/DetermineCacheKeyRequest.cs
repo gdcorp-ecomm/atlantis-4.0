@@ -2,7 +2,7 @@
 
 namespace Atlantis.Framework.PresCentral.Impl
 {
-  public class DetermineCacheKeyRequest : PCRequest2012Base<PCDetermineCacheKeyRequestData, PCDetermineCacheKeyResponseData>
+  public class DetermineCacheKeyRequest : PCRequest2012Base<PCDetermineCacheKeyRequestData>
   {
   }
 }

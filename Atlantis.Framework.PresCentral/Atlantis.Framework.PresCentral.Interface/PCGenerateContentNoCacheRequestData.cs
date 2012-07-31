@@ -11,12 +11,12 @@ namespace Atlantis.Framework.PresCentral.Interface
 
     public override IResponseData CreateResponse(PCResponse responseData)
     {
-      return new PCDetermineCacheKeyResponseData(responseData);
+      return new PCGenerateContentNoCacheResponseData(responseData);
     }
 
     public override IResponseData CreateResponse(AtlantisException ex)
     {
-      return new PCDetermineCacheKeyResponseData(ex);
+      return new PCGenerateContentNoCacheResponseData(ex);
     }
 
     public override string GetCacheMD5()

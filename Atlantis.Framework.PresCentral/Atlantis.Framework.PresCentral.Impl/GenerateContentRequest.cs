@@ -2,7 +2,7 @@
 
 namespace Atlantis.Framework.PresCentral.Impl
 {
-  public class GenerateContentRequest : PCRequest2012Base<PCGenerateContentRequestData, PCGenerateContentResponseData>
+  public class GenerateContentRequest : PCRequest2012Base<PCGenerateContentRequestData>
   {
   }
 }

@@ -2,7 +2,7 @@
 
 namespace Atlantis.Framework.PresCentral.Impl
 {
-  public class GenerateContentNoCacheRequest : PCRequest2012Base<PCGenerateContentNoCacheRequestData, PCGenerateContentNoCacheResponseData>
+  public class GenerateContentNoCacheRequest : PCRequest2012Base<PCGenerateContentNoCacheRequestData>
   {
   }
 }

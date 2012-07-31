@@ -21,11 +21,19 @@ namespace Atlantis.Framework.Document.Impl
         using (var documentService = new DocumentService())
         {
           documentService.Url = ((WsConfigElement)oConfig).WSURL;
-          documentService.Timeout = (int) request.RequestTimeout.TotalMilliseconds;
+          documentService.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
           html = documentService.document(request.ToXML());
         }
 
-        oResponseData = new DocumentResponseData(html);
+        if (string.IsNullOrWhiteSpace(html))
+        {
+          AtlantisException exAtlantis = new AtlantisException(oRequestData, "DocumentRequest.RequestHandler", "Document Service response html was empty or null.", request.ToXML());
+          oResponseData = new DocumentResponseData(html, exAtlantis);
+        }
+        else
+        {
+          oResponseData = new DocumentResponseData(html);
+        }
       }
       catch (AtlantisException exAtlantis)
       {

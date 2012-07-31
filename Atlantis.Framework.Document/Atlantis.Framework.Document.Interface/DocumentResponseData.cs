@@ -28,14 +28,12 @@ namespace Atlantis.Framework.Document.Interface
     }
 
     public DocumentResponseData(string html, AtlantisException exAtlantis)
-      : this(html)
     {
       Html = html;
       _exception = exAtlantis;
     }
 
     public DocumentResponseData(string html, RequestData requestData, Exception ex)
-      : this(html)
     {
       Html = html;
       _exception = new AtlantisException(requestData, "DocumentResponseData", ex.Message, requestData.ToXML());

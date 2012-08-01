@@ -56,7 +56,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       set
       {
         QueryParamMode result;
-        if (Enum.TryParse<QueryParamMode>(value, out result))
+        if (Enum.TryParse<QueryParamMode>(value, true, out result))
         {
           _queryParamModeValue = value;
         }

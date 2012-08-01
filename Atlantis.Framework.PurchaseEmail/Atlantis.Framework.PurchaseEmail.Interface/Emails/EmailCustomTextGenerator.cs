@@ -672,6 +672,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             {
               switch (eulaData.RuleType)
               {
+                case EULARuleType.Unknown:
                 case EULARuleType.Hosting:
                 case EULARuleType.DedHosting:
                 case EULARuleType.DedVirtHosting:

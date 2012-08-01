@@ -11,7 +11,7 @@ namespace Atlantis.Framework.ProductOfferingFreeOffers.Impl
   public class ProductOfferingFreeOffersRequest : IRequest
   {
 
-    private const string PROCNAME = "rex_getProductOfferingFreeOffers_sp";
+    private const string PROCNAME = "rex_getFreeProductOffering_sp";
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
@@ -36,7 +36,6 @@ namespace Atlantis.Framework.ProductOfferingFreeOffers.Impl
             {
               if (reader.HasRows)
               {
-                int CATEGORY_ID = reader.GetOrdinal("categoryid");
                 int DESCRIPTION = reader.GetOrdinal("description");
                 int ISCHECKED = reader.GetOrdinal("ischecked");
                 int CHECKED_VALUE = reader.GetOrdinal("checkedValue");
@@ -45,10 +44,6 @@ namespace Atlantis.Framework.ProductOfferingFreeOffers.Impl
                 while (reader.Read())
                 {
                   ResellerFreeProductItem item = new ResellerFreeProductItem();
-                  if (!reader.IsDBNull(CATEGORY_ID))
-                  {
-                    item.PLCateogryId = reader.GetInt32(CATEGORY_ID);
-                  }
                   if (!reader.IsDBNull(DESCRIPTION))
                   {
                     item.Description = reader.GetString(DESCRIPTION);

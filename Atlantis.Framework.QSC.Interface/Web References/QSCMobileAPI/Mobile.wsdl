@@ -19,6 +19,8 @@
       <xs:element name="getOrder" type="tns:getOrder" />
       <xs:element name="getOrderCountByStatus" type="tns:getOrderCountByStatus" />
       <xs:element name="getOrderCountByStatusResponse" type="tns:getOrderCountByStatusResponse" />
+      <xs:element name="getOrderHistory" type="tns:getOrderHistory" />
+      <xs:element name="getOrderHistoryResponse" type="tns:getOrderHistoryResponse" />
       <xs:element name="getOrderResponse" type="tns:getOrderResponse" />
       <xs:element name="getOrderSearchParameters" type="tns:getOrderSearchParameters" />
       <xs:element name="getOrderSearchParametersResponse" type="tns:getOrderSearchParametersResponse" />
@@ -74,6 +76,11 @@
         <xs:complexContent mixed="false">
           <xs:extension base="tns:orderSummary">
             <xs:sequence>
+              <xs:element name="hasHistory" type="tns:hasHistory" />
+              <xs:element name="shippableItems" type="xs:boolean" />
+              <xs:element name="isCapturable" type="xs:boolean" />
+              <xs:element name="isVoiceAuthCapturable" type="xs:boolean" />
+              <xs:element name="isRefundable" type="xs:boolean" />
               <xs:element name="allowedNextStatuses">
                 <xs:complexType>
                   <xs:sequence>
@@ -151,10 +158,23 @@
           <xs:element name="email" type="xs:string" />
           <xs:element name="orderDate" type="xs:string" />
           <xs:element name="captureStatus" type="xs:string" />
+          <xs:element name="voiceAuthCaptureStatus" type="xs:string" />
           <xs:element name="name" type="xs:string" />
           <xs:element name="total" type="tns:money" />
+          <xs:element minOccurs="0" name="totalSummary">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="totalSummaryItem" type="tns:orderTotalItem" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
           <xs:element minOccurs="0" name="ipAddress" type="tns:IPAddress" />
         </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="hasHistory">
+        <xs:sequence />
+        <xs:attribute name="value" type="xs:boolean" use="required" />
+        <xs:attribute name="rowCount" type="xs:int" use="required" />
       </xs:complexType>
       <xs:complexType name="orderStatus">
         <xs:sequence>
@@ -234,6 +254,7 @@
       </xs:complexType>
       <xs:complexType name="orderPayment">
         <xs:sequence>
+          <xs:element minOccurs="0" name="paymentStatus" type="xs:string" />
           <xs:element name="paymentMethod" type="xs:string" />
           <xs:element name="amountBeforeRefunds" type="tns:money" />
           <xs:element name="amountAfterRefunds" type="tns:money" />
@@ -254,6 +275,8 @@
       <xs:complexType name="refund">
         <xs:sequence>
           <xs:element name="amount" type="tns:money" />
+          <xs:element minOccurs="0" name="refundMethod" type="xs:string" />
+          <xs:element minOccurs="0" name="refundStatus" type="xs:string" />
           <xs:element minOccurs="0" name="transactionToken" type="xs:string" />
           <xs:element minOccurs="0" name="authorizationCode" type="xs:string" />
           <xs:element name="successful" type="xs:boolean" />
@@ -274,6 +297,13 @@
           <xs:element minOccurs="0" name="label" type="xs:string" />
         </xs:sequence>
         <xs:attribute name="emailType" type="xs:string" use="required" />
+      </xs:complexType>
+      <xs:complexType name="orderTotalItem">
+        <xs:sequence>
+          <xs:element name="amount" type="tns:money" />
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="displayText" type="xs:string" use="required" />
       </xs:complexType>
       <xs:complexType name="IPAddress">
         <xs:sequence />
@@ -350,6 +380,42 @@
           <xs:element minOccurs="0" form="qualified" name="responseDetail" type="tns:responseDetail" />
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="getOrderHistory">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrderHistoryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="orderResponse" type="tns:getOrderHistoryResponseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrderHistoryResponseDetail">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:responseDetail">
+            <xs:sequence>
+              <xs:element name="resultSize" type="xs:long" />
+              <xs:element minOccurs="0" name="history">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="historyItem" type="tns:orderEditChangeItem" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="orderEditChangeItem">
+        <xs:sequence>
+          <xs:element name="timeOfChange" type="xs:string" />
+          <xs:element name="changedBy" type="xs:string" />
+          <xs:element name="field" type="xs:string" />
+          <xs:element name="previousValue" type="xs:string" />
+          <xs:element name="newValue" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="refundOrder">
         <xs:sequence>
           <xs:element minOccurs="0" name="accountUId" type="xs:string" />
@@ -390,15 +456,21 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="domain" type="xs:string" />
           <xs:element name="accountUID" type="xs:string" />
-          <xs:element name="status" type="xs:string" />
+          <xs:element name="status" type="tns:accountStatus" />
           <xs:element minOccurs="0" name="storeName" type="xs:string" />
           <xs:element minOccurs="0" name="dedicatedIP" type="xs:string" />
           <xs:element minOccurs="0" name="ipAddress" type="xs:string" />
-          <xs:element minOccurs="0" name="sslEnabled" type="xs:string" />
-          <xs:element minOccurs="0" name="sslPurchased" type="xs:string" />
-          <xs:element minOccurs="0" name="sslCreditAvailable" type="xs:string" />
-          <xs:element minOccurs="0" name="sslSetupInProgress" type="xs:string" />
+          <xs:element name="sslEnabled" type="xs:boolean" />
+          <xs:element name="sslPurchased" type="xs:boolean" />
+          <xs:element name="sslCreditAvailable" type="xs:boolean" />
+          <xs:element name="sslSetupInProgress" type="xs:boolean" />
         </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="accountStatus">
+        <xs:sequence>
+          <xs:element name="displayText" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="key" type="xs:string" use="required" />
       </xs:complexType>
       <xs:complexType name="getOrderCountByStatus">
         <xs:sequence>
@@ -663,6 +735,9 @@
   <wsdl:message name="removePackage">
     <wsdl:part name="parameters" element="tns:removePackage" />
   </wsdl:message>
+  <wsdl:message name="getOrderHistoryResponse">
+    <wsdl:part name="parameters" element="tns:getOrderHistoryResponse" />
+  </wsdl:message>
   <wsdl:message name="getBlockedIPAddressesResponse">
     <wsdl:part name="parameters" element="tns:getBlockedIPAddressesResponse" />
   </wsdl:message>
@@ -689,6 +764,9 @@
   </wsdl:message>
   <wsdl:message name="updatePackageResponse">
     <wsdl:part name="parameters" element="tns:updatePackageResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOrderHistory">
+    <wsdl:part name="parameters" element="tns:getOrderHistory" />
   </wsdl:message>
   <wsdl:message name="getAccountsResponse">
     <wsdl:part name="parameters" element="tns:getAccountsResponse" />
@@ -811,6 +889,11 @@
       <wsdl:documentation>Updates the order status to the supplied order status (orderStatus key).  The allowed values come from the allowed statuses returned in the getOrder call. This method internally progresses the order through workflow steps to get this order into this status.</wsdl:documentation>
       <wsdl:input name="updateOrderStatus" message="tns:updateOrderStatus" />
       <wsdl:output name="updateOrderStatusResponse" message="tns:updateOrderStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrderHistory">
+      <wsdl:documentation>Gets a detailed order provided account (rqd) and invoiceId(rqd). This method returns an order when found and a SUCCESS_WARNING when the invoice could not be found.</wsdl:documentation>
+      <wsdl:input name="getOrderHistory" message="tns:getOrderHistory" />
+      <wsdl:output name="getOrderHistoryResponse" message="tns:getOrderHistoryResponse" />
     </wsdl:operation>
     <wsdl:operation name="refundOrder">
       <wsdl:documentation>Refunds the the specified invoice (if applicable).</wsdl:documentation>
@@ -940,6 +1023,15 @@
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="updateOrderStatusResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrderHistory">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getOrderHistory">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getOrderHistoryResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

@@ -93,6 +93,12 @@
     <None Include="Web References\QSCMobileAPI\getIPAddressResponseDetail.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\QSCMobileAPI\getOrderCountByStatusResponseDetail1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\QSCMobileAPI\getOrderHistoryResponseDetail.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\QSCMobileAPI\getOrderResponseDetail.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>

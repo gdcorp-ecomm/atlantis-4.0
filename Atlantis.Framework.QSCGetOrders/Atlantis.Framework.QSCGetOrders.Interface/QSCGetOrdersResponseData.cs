@@ -15,7 +15,7 @@ namespace Atlantis.Framework.QSCGetOrders.Interface
     private IList<orderSummary> _orderList;
     private getOrdersResponseDetail _response;
 
-    // required for session cache
+    //required for session cache
     public QSCGetOrdersResponseData()
     {
     }

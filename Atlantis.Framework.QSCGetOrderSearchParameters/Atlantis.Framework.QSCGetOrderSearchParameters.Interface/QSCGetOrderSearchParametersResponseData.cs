@@ -10,12 +10,11 @@ using Atlantis.Framework.SessionCache;
 namespace Atlantis.Framework.QSCGetOrderSearchParameters.Interface
 {
   [DataContract]
-  public class QSCGetOrderSearchParametersResponseData : IResponseData, ISessionSerializableResponse
+  public class QSCGetOrderSearchParametersResponseData : IResponseData
   {
     private readonly AtlantisException _ex;
     private getOrderSearchParametersResponseDetail response;
 
-    // required for session cache
     public QSCGetOrderSearchParametersResponseData()
     {
     }
@@ -101,61 +100,6 @@ namespace Atlantis.Framework.QSCGetOrderSearchParameters.Interface
     public AtlantisException GetException()
     {
       return _ex;
-    }
-
-    #endregion
-
-    #region Implementation of ISessionSerializableResponse
-
-    public string SerializeSessionData()
-    {
-      string sessionString = string.Empty;
-      MemoryStream ms = new MemoryStream();
-      DataContractSerializer ser;
-
-      try
-      {
-        ser = new DataContractSerializer(typeof(getOrderSearchParametersResponseDetail));
-        ser.WriteObject(ms, this.response);
-        sessionString = Encoding.UTF8.GetString(ms.ToArray());
-        ms.Close();
-      }
-      catch (Exception ex)
-      {
-        throw;
-      }
-      finally
-      {
-        ms.Dispose();
-      }
-
-      return sessionString;
-    }
-
-    public void DeserializeSessionData(string sessionData)
-    {
-      MemoryStream ms = null;
-      DataContractSerializer ser;
-
-      try
-      {
-        ms = new MemoryStream(Encoding.UTF8.GetBytes(sessionData));
-        ser = new DataContractSerializer(typeof(getOrderSearchParametersResponseDetail));
-        var optionListResponse = ser.ReadObject(ms) as getOrderSearchParametersResponseDetail;
-        this.response = optionListResponse;
-        ms.Close();
-      }
-      catch (Exception ex)
-      {
-        throw;
-      }
-      finally
-      {
-        if (ms != null)
-        {
-          ms.Dispose();
-        }
-      }
     }
 
     #endregion

@@ -8,7 +8,7 @@ namespace Atlantis.Framework.Web.IeEdge
   public class IeEdge : HtmlControl
   {
     private const string EDGE_META_TAG = "<meta http-equiv=\"X-UA-Compatible\" content=\"IE-Edge\" />";
-    private const string ENABLE_APPLICATION_SETTING = "Atlantis.Web.IeEdge.Enabled";
+    private const string ENABLE_APPLICATION_SETTING = "ATLANTIS_WEB_IEEDGE_ENABLED";
     private const string IS_IE_USER_AGENT_COOKIE_NAME = "atlantis.web.ieedge.isieuseragent";
 
     private static readonly Regex _ieUserAgentRegex = new Regex(@".*MSIE\s[0-9].*", RegexOptions.Compiled);

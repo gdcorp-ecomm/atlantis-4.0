@@ -80,7 +80,7 @@ namespace Atlantis.Framework.MyaOrderHistory.Interface
         {
           foreach (DataRow row in _ds.Tables[2].Rows)
           {
-            int receiptId;
+            string  receiptId;
             DateTime receiptDate = DateTime.Now;
             string transactionCurrency = string.Empty;
             int transactionTotal = 0;
@@ -88,10 +88,7 @@ namespace Atlantis.Framework.MyaOrderHistory.Interface
             string orderSource = string.Empty;
             string detailsXML = string.Empty;
 
-            if (!int.TryParse(row["order_id"].ToString(), out receiptId))
-            {
-              receiptId = 0;
-            }
+            receiptId = row["order_id"].ToString();
 
             if (!DateTime.TryParse(row["date_entered"].ToString(), out receiptDate))
             {

@@ -6,7 +6,7 @@ namespace Atlantis.Framework.MyaOrderHistory.Interface
 {
   public class ReceiptItem
   {
-    public int ReceiptId { get; set; }
+    public string ReceiptId { get; set; }
     public DateTime ReceiptDate { get; set; }
     public string TransactionCurrency { get; set; }
     public int TransactionTotal { get; set; }
@@ -14,7 +14,7 @@ namespace Atlantis.Framework.MyaOrderHistory.Interface
     public string OrderSource { get; set; }
     public List<string> ReceiptDetails { get; set; }
 
-    public ReceiptItem(int receiptId, DateTime receiptDate, string transactionCurrency, int transactionTotal, bool isRefunded, string orderSource, string detailsXml)
+    public ReceiptItem(string receiptId, DateTime receiptDate, string transactionCurrency, int transactionTotal, bool isRefunded, string orderSource, string detailsXml)
     {
       ReceiptId = receiptId;
       ReceiptDate = receiptDate;

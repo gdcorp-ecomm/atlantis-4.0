@@ -383,6 +383,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     public const int AdSpacePremiumRecurringTwoYears = 101048;
     public const int AdSpacePremiumRecurringThreeYears = 101049;
 
+    public const int UtilityPlusCloudServer1Month = 1741;
     public const int UtilityCloudServer1Month = 1588;
     public const int UtilityCloudServer1Year = 1597;
     public const int UtilityCloudServer2Year = 1599;
@@ -700,7 +701,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       if (cloudProductIds == null)
       {
         cloudProductIds = new List<int>(new[]
-                                                         {   
+                                                         { 
+    UtilityPlusCloudServer1Month,
     UtilityCloudServer1Month,
     UtilityCloudServer1Year,
     UtilityCloudServer2Year,

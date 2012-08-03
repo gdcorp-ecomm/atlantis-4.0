@@ -111,7 +111,11 @@ namespace Atlantis.Framework.MyaOrderHistory.Interface
             }
 
             transactionCurrency = row["transactionCurrency"].ToString();
-            detailsXML = row["detail"].ToString();
+            if (!row.IsNull("detail"))
+            {
+              detailsXML = row["detail"].ToString();
+            }
+            
 
             ReceiptItem item = new ReceiptItem(receiptId, receiptDate, transactionCurrency, transactionTotal, isRefunded, orderSource, detailsXML);
             receiptList.Add(item);

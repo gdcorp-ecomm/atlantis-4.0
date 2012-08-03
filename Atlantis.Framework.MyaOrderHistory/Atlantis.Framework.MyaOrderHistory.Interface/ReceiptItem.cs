@@ -28,12 +28,14 @@ namespace Atlantis.Framework.MyaOrderHistory.Interface
     private List<string> ReceiptDescriptionList(string xml)
     {
       List<string> _items = new List<string>(5);
-      XmlDocument xmlDoc = new XmlDocument();
-      xmlDoc.LoadXml(xml);
-      XmlNodeList nodeList = xmlDoc.SelectNodes("items/item");
-      if(nodeList != null && nodeList.Count > 0)
+      if (xml.Length > 0)
       {
-          foreach(XmlNode node in nodeList)
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.LoadXml(xml);
+        XmlNodeList nodeList = xmlDoc.SelectNodes("items/item");
+        if (nodeList != null && nodeList.Count > 0)
+        {
+          foreach (XmlNode node in nodeList)
           {
             string description = node.Attributes["detail"].Value;
             if (description.Length > 0)
@@ -41,6 +43,7 @@ namespace Atlantis.Framework.MyaOrderHistory.Interface
               _items.Add(description);
             }
           }
+        }
       }
 
       return _items;

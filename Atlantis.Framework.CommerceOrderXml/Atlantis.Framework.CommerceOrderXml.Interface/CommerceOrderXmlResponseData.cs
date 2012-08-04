@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.CommerceOrderXml.Interface
@@ -9,15 +10,9 @@ namespace Atlantis.Framework.CommerceOrderXml.Interface
     private string _resultXML = string.Empty;
     private bool _success = false;
 
-    public bool IsSuccess
-    {
-      get { return _success; }
-    }
-
     public CommerceOrderXmlResponseData(string xml)
     {
       _resultXML = xml;
-      _success = true;
     }
 
     public CommerceOrderXmlResponseData(AtlantisException atlantisException)
@@ -31,6 +26,33 @@ namespace Atlantis.Framework.CommerceOrderXml.Interface
                                    "MYAOrderDetailResponseData",
                                    exception.Message,
                                    requestData.ToXML());
+    }
+
+    public bool IsSuccess
+    {
+      get
+      {
+        XmlNode node = OrderXML.SelectSingleNode("ERRORS");
+        if (node == null)
+        {
+          _success = true;
+        }
+        return _success;
+      }
+    }
+
+    private XmlDocument _orderXML = null;
+    public XmlDocument OrderXML
+    {
+      get
+      {
+        if (_orderXML == null)
+        {
+          _orderXML = new XmlDocument();
+          _orderXML.LoadXml(_resultXML);
+        }
+        return _orderXML;
+      }
     }
 
     #region IResponseData Members

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s0="urn:WsceCommerceService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WsceCommerceService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WsceCommerceService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetOrderXMLIn">
+    <wsdl:part name="bstrOrderID" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderXMLOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMgrOrderXMLIn">
+    <wsdl:part name="bstrOrderID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMgrOrderXMLOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMgrOrderXMLExIn">
+    <wsdl:part name="bstrOrderID" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMgrOrderXMLExOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PurchaseIn">
+    <wsdl:part name="bstrOrderForm" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PurchaseOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePricesIn">
+    <wsdl:part name="bstrOrderForm" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePricesOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WsceCommerceServiceSoap">
+    <wsdl:operation name="GetOrderXML">
+      <wsdl:input message="s0:GetOrderXMLIn" />
+      <wsdl:output message="s0:GetOrderXMLOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMgrOrderXML">
+      <wsdl:input message="s0:GetMgrOrderXMLIn" />
+      <wsdl:output message="s0:GetMgrOrderXMLOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMgrOrderXMLEx">
+      <wsdl:input message="s0:GetMgrOrderXMLExIn" />
+      <wsdl:output message="s0:GetMgrOrderXMLExOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Purchase">
+      <wsdl:input message="s0:PurchaseIn" />
+      <wsdl:output message="s0:PurchaseOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePrices">
+      <wsdl:input message="s0:UpdatePricesIn" />
+      <wsdl:output message="s0:UpdatePricesOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WsceCommerceServiceSoap" type="s0:WsceCommerceServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="GetOrderXML">
+      <soap:operation soapAction="#GetOrderXML" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WsceCommerceService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WsceCommerceService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMgrOrderXML">
+      <soap:operation soapAction="#GetMgrOrderXML" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WsceCommerceService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WsceCommerceService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMgrOrderXMLEx">
+      <soap:operation soapAction="#GetMgrOrderXMLEx" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WsceCommerceService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WsceCommerceService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Purchase">
+      <soap:operation soapAction="#Purchase" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WsceCommerceService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WsceCommerceService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePrices">
+      <soap:operation soapAction="#UpdatePrices" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WsceCommerceService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WsceCommerceService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WsceCommerceService">
+    <wsdl:port name="WsceCommerceServiceSoap" binding="s0:WsceCommerceServiceSoap">
+      <soap:address location="http://devgdcomm02:80/WsceCommerce/WsceCommerce.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -86,16 +86,17 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
       bool showSetupForManagerOnly;
       string orionProductName;
       bool isBundleProduct;
+      Dictionary<int, ProductMap> productMaps;
       GetAccordionAttributes(out ciExpansion, out ciRenewNow, out ciSetup, out cmsDisplayGroups,
                              out iconCssCoordinates, out productGroup, out productTypes,
                              out showControlPanel, out showSetupForManagerOnly, out orionProductName,
-                             out isBundleProduct);
+                             out isBundleProduct, out productMaps);
 
       return new AccordionMetaData(accordionId, accordionTitleDefault, accordionTitleGoDaddy, defaultSortOrder, namespaces,
                                    ciExpansion, ciRenewNow, ciSetup, cmsDisplayGroups,
                                    iconCssCoordinates,
                                    productGroup, productTypes, showControlPanel, showSetupForManagerOnly,
-                                   orionProductName, isBundleProduct,
+                                   orionProductName, isBundleProduct, productMaps,
                                    contentData, controlPanelData, workspaceLoginData);
     }
 
@@ -139,7 +140,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
                                         out List<int> cmsDisplayGroups, out CssSpriteCoordinate iconCssCoordinates,
                                         out int productGroup, out HashSet<int> productTypes,
                                         out bool showControlPanel, out bool showSetupForManagerOnly,
-                                        out string orionProductName, out bool isBundleProduct)
+                                        out string orionProductName, out bool isBundleProduct, out Dictionary<int, ProductMap> productMaps)
     {
       ciExpansion = string.Empty;
       ciRenewNow = string.Empty;
@@ -166,6 +167,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
         showSetupForManagerOnly = string.Compare(ParseAccordionXml("showsetupformanageronly"), "true", true) == 0;
         orionProductName = ParseAccordionXml("orionproductname");
         isBundleProduct = string.Compare(ParseAccordionXml("isbundle"), "true", true) == 0;
+        productMaps = SetProductMaps(ParseAccordionXmlProductMaps());
       }
       else
       {
@@ -182,6 +184,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
     private string ParseAccordionXml(string attribute)
     {
       return IsWellFormedAccordionXml ? (_accordionXDoc.Element("accordion").Attribute(attribute) != null ? _accordionXDoc.Element("accordion").Attribute(attribute).Value : string.Empty) : string.Empty;
+    }
+
+    private XElement ParseAccordionXmlProductMaps()
+    {
+      return IsWellFormedAccordionXml ? (_accordionXDoc.Element("accordion").Element("productmaps") != null ? _accordionXDoc.Element("accordion").Element("productmaps") : null) : null;
     }
 
     private CssSpriteCoordinate SetCoordinates(string iconnCssCoordinates)
@@ -218,6 +225,28 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
         }
       }
       return cmsDisplayGroupList;
+    }
+
+    private Dictionary<int, ProductMap> SetProductMaps(XElement productMaps)
+    {
+      Dictionary<int, ProductMap> prodMapDict = new Dictionary<int, ProductMap>();
+      int group = 0;
+      HashSet<int> types = new HashSet<int>();
+      string description = string.Empty;
+
+      if (productMaps != null)
+      {
+        foreach (XElement pm in productMaps.Elements())
+        {
+          group = Convert.ToInt32(pm.Attribute("group").Value);
+          types = SetProductTypes(pm.Attribute("typelist").Value);
+          description = pm.Attribute("description").Value;
+
+          ProductMap productMap = new ProductMap(group, types, description);
+          prodMapDict.Add(group, productMap);
+        }
+      }
+      return prodMapDict;
     }
 
     private HashSet<int> SetProductTypes(string typesStr) 

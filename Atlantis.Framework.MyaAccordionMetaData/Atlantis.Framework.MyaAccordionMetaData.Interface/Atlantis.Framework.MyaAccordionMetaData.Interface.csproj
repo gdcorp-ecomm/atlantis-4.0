@@ -79,6 +79,7 @@
     <Compile Include="MetaData\ControlPanelData.cs" />
     <Compile Include="MetaData\CssSpriteCoordinate.cs" />
     <Compile Include="MetaData\LinkUrlData.cs" />
+    <Compile Include="MetaData\ProductMap.cs" />
     <Compile Include="MetaData\WorkspaceLoginData.cs" />
     <Compile Include="MetaData\XmlValidator.cs" />
     <Compile Include="MyaAccordionMetaDataRequestData.cs" />

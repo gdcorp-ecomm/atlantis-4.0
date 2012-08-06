@@ -93,7 +93,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     {
       get { return _isBundleProduct; }
     }
-
+    private readonly Dictionary<int, ProductMap> _productMaps;
+    public Dictionary<int, ProductMap> ProductMaps
+    {
+      get { return _productMaps; }
+    }
     #endregion
 
     #region Derived Content, Control Panel & WorkspaceLogin Accessors
@@ -121,7 +125,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     internal AccordionMetaData(int accordionId, string accordionTitleDefault, string accordionTitleGoDaddy, int defaultSortOrder, HashSet<string> namespaces, 
           string ciExpansion, string ciRenewNow, string ciSetup, List<int> cmsDisplayGroups, CssSpriteCoordinate iconCssCoordinates, 
           int productGroup, HashSet<int> productTypes, bool showControlPanel, bool showSetupForManagerOnly, string orionProductName, bool isBundleProduct,
-          ContentData contentData, ControlPanelData controlPanelData, WorkspaceLoginData workspaceLoginData)
+          Dictionary<int, ProductMap> productMaps, ContentData contentData, ControlPanelData controlPanelData, WorkspaceLoginData workspaceLoginData)
     {
       _accordionId = accordionId;
       _accordionTitleDefault = accordionTitleDefault;
@@ -142,6 +146,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       _content = contentData;
       _controlPanels = controlPanelData;
       _workspaceLogin = workspaceLoginData;
+      _productMaps = productMaps;
     }
 
     #region Public Methods
@@ -155,6 +160,13 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     {
       return !string.IsNullOrEmpty(WorkspaceLogin.ButtonText);
     }
+
+    public bool ContainsProductMapForGroup(int group, out ProductMap map)
+    {
+      map = new ProductMap();
+      return ProductMaps.TryGetValue(group, out map);
+    }
+
 
     #endregion
 

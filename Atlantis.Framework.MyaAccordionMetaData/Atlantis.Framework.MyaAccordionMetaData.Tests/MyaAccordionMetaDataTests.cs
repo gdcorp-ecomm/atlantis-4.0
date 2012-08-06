@@ -178,6 +178,16 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
                 }
                 Debug.WriteLine(string.Format("{0}: {1}", p.Name, sb2.ToString().TrimEnd(' ').TrimEnd('|')));
                 break;
+              case "ProductMaps":
+                ProductMap pmap = new ProductMap();
+                accordion.ContainsProductMapForGroup(25, out pmap);
+                StringBuilder sb4 = new StringBuilder();
+                foreach (ProductMap pm in accordion.ProductMaps.Values)
+                {
+                  sb4.AppendFormat("group: {0}, types: {1}, desc: {2}\n", pm.Group, string.Join("* ", pm.TypeList), pm.Description);
+                }
+                Debug.WriteLine(string.Format("{0}: {1}", p.Name, sb4.ToString()));
+                break;
               default:
                 Debug.WriteLine(string.Format("{0}: {1}", p.Name, p.GetValue(accordion, null)));
                 break;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.ProductOfferingFreeOffers.Interface
@@ -21,7 +22,12 @@ namespace Atlantis.Framework.ProductOfferingFreeOffers.Interface
     #region Overridden Methods
     public override string GetCacheMD5()
     {
-      throw new NotImplementedException("GetCacheMD5 not implemented in ProductOfferingFreeOffersRequestData");
+      MD5 oMD5 = new MD5CryptoServiceProvider();
+      oMD5.Initialize();
+      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(ResellerId.ToString());
+      byte[] md5Bytes = oMD5.ComputeHash(stringBytes);
+      string sValue = BitConverter.ToString(md5Bytes, 0);
+      return sValue.Replace("-", string.Empty);
     }
     #endregion
   }

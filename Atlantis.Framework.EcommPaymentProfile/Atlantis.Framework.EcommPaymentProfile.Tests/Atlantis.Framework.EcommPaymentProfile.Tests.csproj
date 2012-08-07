@@ -77,10 +77,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.EcommPaymentProfiles\Atlantis.Framework.EcommPaymentProfiles.Interface\Atlantis.Framework.EcommPaymentProfiles.Interface.csproj">
-      <Project>{8558F10D-B8DF-49FB-AACC-759B1118F2CB}</Project>
-      <Name>Atlantis.Framework.EcommPaymentProfiles.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -96,6 +92,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.KiwiLogger\Atlantis.Framework.KiwiLogger.Interface\Atlantis.Framework.KiwiLogger.Interface.csproj">
       <Project>{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}</Project>
       <Name>Atlantis.Framework.KiwiLogger.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PaymentProfile\Atlantis.Framework.PaymentProfile.Interface\Atlantis.Framework.PaymentProfile.Interface.csproj">
+      <Project>{8B540B38-34E0-4136-B409-1DC7B322AA63}</Project>
+      <Name>Atlantis.Framework.PaymentProfile.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.EcommPaymentProfile.Impl\Atlantis.Framework.EcommPaymentProfile.Impl.csproj">
       <Project>{7456CF05-8A16-4A40-964F-0D56EFEBB78E}</Project>

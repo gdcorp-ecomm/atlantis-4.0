@@ -73,8 +73,6 @@
   <ItemGroup>
     <Compile Include="EcommPaymentProfilesRequestData.cs" />
     <Compile Include="EcommPaymentProfilesResponseData.cs" />
-    <Compile Include="EngineRequests.cs" />
-    <Compile Include="PaymentProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +91,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.KiwiLogger\Atlantis.Framework.KiwiLogger.Interface\Atlantis.Framework.KiwiLogger.Interface.csproj">
       <Project>{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}</Project>
       <Name>Atlantis.Framework.KiwiLogger.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PaymentProfile\Atlantis.Framework.PaymentProfile.Interface\Atlantis.Framework.PaymentProfile.Interface.csproj">
+      <Project>{8B540B38-34E0-4136-B409-1DC7B322AA63}</Project>
+      <Name>Atlantis.Framework.PaymentProfile.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

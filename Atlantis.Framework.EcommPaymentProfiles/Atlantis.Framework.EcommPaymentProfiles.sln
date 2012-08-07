@@ -17,11 +17,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPay
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPaymentProfiles.Tests", "Atlantis.Framework.EcommPaymentProfiles.Tests\Atlantis.Framework.EcommPaymentProfiles.Tests.csproj", "{017A74F6-EC20-4210-B263-3C78A1DA52D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PaymentProfile.Interface", "..\Atlantis.Framework.PaymentProfile\Atlantis.Framework.PaymentProfile.Interface\Atlantis.Framework.PaymentProfile.Interface.csproj", "{8B540B38-34E0-4136-B409-1DC7B322AA63}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
 		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.EcommPaymentProfiles.sln
@@ -48,6 +50,10 @@ Global
 		SccProjectUniqueName7 = Atlantis.Framework.EcommPaymentProfiles.Tests\\Atlantis.Framework.EcommPaymentProfiles.Tests.csproj
 		SccProjectName7 = Atlantis.Framework.EcommPaymentProfiles.Tests
 		SccLocalPath7 = Atlantis.Framework.EcommPaymentProfiles.Tests
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.PaymentProfile\\Atlantis.Framework.PaymentProfile.Interface\\Atlantis.Framework.PaymentProfile.Interface.csproj
+		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.EcommPaymentProfiles.sln
+		SccProjectName8 = ../Atlantis.Framework.PaymentProfile/Atlantis.Framework.PaymentProfile.Interface
+		SccLocalPath8 = ..\\Atlantis.Framework.PaymentProfile\\Atlantis.Framework.PaymentProfile.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +88,10 @@ Global
 		{017A74F6-EC20-4210-B263-3C78A1DA52D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{017A74F6-EC20-4210-B263-3C78A1DA52D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{017A74F6-EC20-4210-B263-3C78A1DA52D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B540B38-34E0-4136-B409-1DC7B322AA63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B540B38-34E0-4136-B409-1DC7B322AA63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B540B38-34E0-4136-B409-1DC7B322AA63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B540B38-34E0-4136-B409-1DC7B322AA63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,5 +101,6 @@ Global
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {2ED28770-DFCF-47D1-A9EC-C3C821AEEA5B}
 		{B25FA241-4ABE-4183-8C50-2DC6B684D0BD} = {2ED28770-DFCF-47D1-A9EC-C3C821AEEA5B}
 		{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A} = {2ED28770-DFCF-47D1-A9EC-C3C821AEEA5B}
+		{8B540B38-34E0-4136-B409-1DC7B322AA63} = {2ED28770-DFCF-47D1-A9EC-C3C821AEEA5B}
 	EndGlobalSection
 EndGlobal

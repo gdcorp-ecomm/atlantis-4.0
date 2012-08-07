@@ -109,6 +109,10 @@
       <Project>{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}</Project>
       <Name>Atlantis.Framework.KiwiLogger.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PaymentProfile\Atlantis.Framework.PaymentProfile.Interface\Atlantis.Framework.PaymentProfile.Interface.csproj">
+      <Project>{8B540B38-34E0-4136-B409-1DC7B322AA63}</Project>
+      <Name>Atlantis.Framework.PaymentProfile.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.EcommPaymentProfiles.Impl\Atlantis.Framework.EcommPaymentProfiles.Impl.csproj">
       <Project>{952EF493-224A-4272-910D-5CA6EDAA8817}</Project>
       <Name>Atlantis.Framework.EcommPaymentProfiles.Impl</Name>

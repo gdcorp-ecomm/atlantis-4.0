@@ -22,9 +22,9 @@ namespace Atlantis.Framework.EcommPaymentProfile.Tests
     [DeploymentItem("atlantis.config")]
     public void EcommPaymentProfileBasic()
     {
-      const string shopperId = "840420";
+      const string shopperId = "856907";
       var request = new EcommPaymentProfileRequestData(
-        shopperId, string.Empty, string.Empty, string.Empty, 0, 58071);
+        shopperId, string.Empty, string.Empty, string.Empty, 0, 61459);
       var response = (EcommPaymentProfileResponseData)Engine.Engine.ProcessRequest(request, 379);
       Debug.WriteLine(string.Format("CardType: {0}", response.AccessProfile(shopperId, string.Empty, string.Empty, "EcommPaymentProfileBasic").CreditCardType));
       Assert.IsTrue(response.IsSuccess);

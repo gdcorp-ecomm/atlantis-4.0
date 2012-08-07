@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
-
+using Atlantis.Framework.PaymentProfileClass.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.KiwiLogger.Interface;
 
@@ -15,6 +15,7 @@ namespace Atlantis.Framework.EcommPaymentProfiles.Interface
     private List<PaymentProfile> _profiles = new List<PaymentProfile>();
     private RequestData _request;
     public int PaymentProfileCount { get; private set; }
+    private const int _ENGINE_REQUEST_KIWILOGGER = 53;
 
     public bool IsSuccess { get; private set; }
 
@@ -96,7 +97,7 @@ namespace Atlantis.Framework.EcommPaymentProfiles.Interface
         kiwiRequest.MessageSuffix = string.Empty;
         kiwiRequest.AddItems(logParameters);
 
-        KiwiLoggerResponseData kiwiResponse = (KiwiLoggerResponseData)Engine.Engine.ProcessRequest(kiwiRequest, EngineRequests.KiwiLogger);
+        KiwiLoggerResponseData kiwiResponse = (KiwiLoggerResponseData)Engine.Engine.ProcessRequest(kiwiRequest, _ENGINE_REQUEST_KIWILOGGER);
       }
       catch (Exception ex)
       {

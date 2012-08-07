@@ -17,13 +17,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.KiwiLogg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.KiwiLogger.Interface", "..\Atlantis.Framework.KiwiLogger\Atlantis.Framework.KiwiLogger.Interface\Atlantis.Framework.KiwiLogger.Interface.csproj", "{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPaymentProfiles.Interface", "..\Atlantis.Framework.EcommPaymentProfiles\Atlantis.Framework.EcommPaymentProfiles.Interface\Atlantis.Framework.EcommPaymentProfiles.Interface.csproj", "{8558F10D-B8DF-49FB-AACC-759B1118F2CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PaymentProfile.Interface", "..\Atlantis.Framework.PaymentProfile\Atlantis.Framework.PaymentProfile.Interface\Atlantis.Framework.PaymentProfile.Interface.csproj", "{8B540B38-34E0-4136-B409-1DC7B322AA63}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.EcommPaymentProfile.sln
@@ -50,10 +50,10 @@ Global
 		SccProjectUniqueName7 = Atlantis.Framework.EcommPaymentProfile.Tests\\Atlantis.Framework.EcommPaymentProfile.Tests.csproj
 		SccProjectName7 = Atlantis.Framework.EcommPaymentProfile.Tests
 		SccLocalPath7 = Atlantis.Framework.EcommPaymentProfile.Tests
-		SccProjectUniqueName8 = ..\\Atlantis.Framework.EcommPaymentProfiles\\Atlantis.Framework.EcommPaymentProfiles.Interface\\Atlantis.Framework.EcommPaymentProfiles.Interface.csproj
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.PaymentProfile\\Atlantis.Framework.PaymentProfile.Interface\\Atlantis.Framework.PaymentProfile.Interface.csproj
 		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.EcommPaymentProfile.sln
-		SccProjectName8 = ../Atlantis.Framework.EcommPaymentProfiles/Atlantis.Framework.EcommPaymentProfiles.Interface
-		SccLocalPath8 = ..\\Atlantis.Framework.EcommPaymentProfiles\\Atlantis.Framework.EcommPaymentProfiles.Interface
+		SccProjectName8 = ../Atlantis.Framework.PaymentProfile/Atlantis.Framework.PaymentProfile.Interface
+		SccLocalPath8 = ..\\Atlantis.Framework.PaymentProfile\\Atlantis.Framework.PaymentProfile.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,10 +88,10 @@ Global
 		{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8558F10D-B8DF-49FB-AACC-759B1118F2CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8558F10D-B8DF-49FB-AACC-759B1118F2CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8558F10D-B8DF-49FB-AACC-759B1118F2CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8558F10D-B8DF-49FB-AACC-759B1118F2CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B540B38-34E0-4136-B409-1DC7B322AA63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B540B38-34E0-4136-B409-1DC7B322AA63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B540B38-34E0-4136-B409-1DC7B322AA63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B540B38-34E0-4136-B409-1DC7B322AA63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +101,6 @@ Global
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {2885E6F5-7B2C-4838-BB1E-CD07BBCF773E}
 		{B25FA241-4ABE-4183-8C50-2DC6B684D0BD} = {2885E6F5-7B2C-4838-BB1E-CD07BBCF773E}
 		{5A01EC44-56C6-4216-8CF4-575B4AC4FD5A} = {2885E6F5-7B2C-4838-BB1E-CD07BBCF773E}
-		{8558F10D-B8DF-49FB-AACC-759B1118F2CB} = {2885E6F5-7B2C-4838-BB1E-CD07BBCF773E}
+		{8B540B38-34E0-4136-B409-1DC7B322AA63} = {2885E6F5-7B2C-4838-BB1E-CD07BBCF773E}
 	EndGlobalSection
 EndGlobal

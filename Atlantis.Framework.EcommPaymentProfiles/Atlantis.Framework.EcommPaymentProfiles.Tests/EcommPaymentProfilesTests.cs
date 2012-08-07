@@ -2,6 +2,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using Atlantis.Framework.PaymentProfileClass.Interface;
 using Atlantis.Framework.EcommPaymentProfiles.Interface;
 
 namespace Atlantis.Framework.EcommPaymentProfiles.Tests

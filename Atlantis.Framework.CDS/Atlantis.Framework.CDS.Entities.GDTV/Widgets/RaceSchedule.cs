@@ -14,6 +14,7 @@ namespace Atlantis.Framework.CDS.Entities.GDTV.Widgets
       this.Schedules = new List<Schedule>();
     }
     public string Title { get; set; }
+    public string RaceScheduleLink { get; set; }
     public IList<Schedule> Schedules { get; set; }
   }
 

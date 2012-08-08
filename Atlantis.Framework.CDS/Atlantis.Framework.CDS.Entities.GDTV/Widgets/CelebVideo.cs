@@ -13,6 +13,7 @@ namespace Atlantis.Framework.CDS.Entities.GDTV.Widgets
       Videos = new List<Video>();
     }
     public List<Video> Videos { get; set; }
+    public string AllVideosLink { get; set; }
   }
 
   public class Video
@@ -33,6 +34,9 @@ namespace Atlantis.Framework.CDS.Entities.GDTV.Widgets
     public string Description { get; set; }
     public string Twitter { get; set; }
     public string Facebook { get; set; }
+    public string FacebookLink { get; set; }
+    public string FacebookTitle { get; set; }
+    public string PageLink { get; set; }
     public bool Hot { get; set; }
     public int SurveyId { get; set; }
     public string EndSlate { get; set; }

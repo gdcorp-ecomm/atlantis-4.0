@@ -46,5 +46,44 @@ namespace Atlantis.Framework.DotTypeCache.DotNetDotAu
       get { return "NET.AU"; }
     }
 
+    public override int MinRegistrationLength
+    {
+      get { return 2; }
+    }
+
+    public override int MaxRegistrationLength
+    {
+      get { return 2; }
+    }
+
+    public override int MinRenewalLength
+    {
+      get { return 2; }
+    }
+
+    public override int MaxRenewalLength
+    {
+      get { return 2; }
+    }
+
+    public override int MaxTransferLength
+    {
+      get { return 1; }
+    }
+
+    public override int MaxExpiredAuctionRegLength
+    {
+      get { return 0; }
+    }
+
+    public override int MinExpiredAuctionRegLength
+    {
+      get { return 0; }
+    }
+
+    public override int MaxRenewalMonthsOut
+    {
+      get { return 27; } //max 90 days out plus 2 year renewal
+    }
   }
 }

@@ -190,11 +190,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeCache.DotXxx", "Atlantis.Framework.DotTypeCache.DotXXX\Atlantis.Framework.DotTypeCache.DotXxx.csproj", "{159D2700-A51E-47E8-BC16-A31931AC5D66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeCache.DotComDotAu", "Atlantis.Framework.DotTypeCache.DotComDotAu\Atlantis.Framework.DotTypeCache.DotComDotAu.csproj", "{D56220D9-04A8-44E3-B1C3-2054049995A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeCache.DotNetDotAu", "Atlantis.Framework.DotTypeCache.DotNetDotAu\Atlantis.Framework.DotTypeCache.DotNetDotAu.csproj", "{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeCache.DotOrgDotAu", "Atlantis.Framework.DotTypeCache.DotOrgDotAu\Atlantis.Framework.DotTypeCache.DotOrgDotAu.csproj", "{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 90
+		SccNumberOfProjects = 93
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Atlantis.Framework.DotTypeCache.Tests\\Atlantis.Framework.DotTypeCache.Tests.csproj
 		SccProjectName1 = Atlantis.Framework.DotTypeCache.Tests
@@ -549,6 +555,18 @@ Global
 		SccProjectTopLevelParentUniqueName89 = Atlantis.Framework.DotTypeCache.sln
 		SccProjectName89 = Atlantis.Framework.DotTypeCache.DotXXX
 		SccLocalPath89 = Atlantis.Framework.DotTypeCache.DotXXX
+		SccProjectUniqueName90 = Atlantis.Framework.DotTypeCache.DotComDotAu\\Atlantis.Framework.DotTypeCache.DotComDotAu.csproj
+		SccProjectTopLevelParentUniqueName90 = Atlantis.Framework.DotTypeCache.sln
+		SccProjectName90 = Atlantis.Framework.DotTypeCache.DotComDotAu
+		SccLocalPath90 = Atlantis.Framework.DotTypeCache.DotComDotAu
+		SccProjectUniqueName91 = Atlantis.Framework.DotTypeCache.DotNetDotAu\\Atlantis.Framework.DotTypeCache.DotNetDotAu.csproj
+		SccProjectTopLevelParentUniqueName91 = Atlantis.Framework.DotTypeCache.sln
+		SccProjectName91 = Atlantis.Framework.DotTypeCache.DotNetDotAu
+		SccLocalPath91 = Atlantis.Framework.DotTypeCache.DotNetDotAu
+		SccProjectUniqueName92 = Atlantis.Framework.DotTypeCache.DotOrgDotAu\\Atlantis.Framework.DotTypeCache.DotOrgDotAu.csproj
+		SccProjectTopLevelParentUniqueName92 = Atlantis.Framework.DotTypeCache.sln
+		SccProjectName92 = Atlantis.Framework.DotTypeCache.DotOrgDotAu
+		SccLocalPath92 = Atlantis.Framework.DotTypeCache.DotOrgDotAu
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.DotTypeCache.vsmdi
@@ -1452,6 +1470,36 @@ Global
 		{159D2700-A51E-47E8-BC16-A31931AC5D66}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{159D2700-A51E-47E8-BC16-A31931AC5D66}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{159D2700-A51E-47E8-BC16-A31931AC5D66}.Release|x86.ActiveCfg = Release|Any CPU
+		{D56220D9-04A8-44E3-B1C3-2054049995A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D56220D9-04A8-44E3-B1C3-2054049995A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D56220D9-04A8-44E3-B1C3-2054049995A5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D56220D9-04A8-44E3-B1C3-2054049995A5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D56220D9-04A8-44E3-B1C3-2054049995A5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D56220D9-04A8-44E3-B1C3-2054049995A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D56220D9-04A8-44E3-B1C3-2054049995A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D56220D9-04A8-44E3-B1C3-2054049995A5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D56220D9-04A8-44E3-B1C3-2054049995A5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D56220D9-04A8-44E3-B1C3-2054049995A5}.Release|x86.ActiveCfg = Release|Any CPU
+		{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}.Release|x86.ActiveCfg = Release|Any CPU
+		{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1534,6 +1582,9 @@ Global
 		{11F2B949-1A3A-4D31-B1F2-E366C4017072} = {14AE91DC-CB5E-4630-ADBA-9AAF5A5D268A}
 		{F3812476-48E2-495B-9B71-BD4EF9CBABC3} = {14AE91DC-CB5E-4630-ADBA-9AAF5A5D268A}
 		{159D2700-A51E-47E8-BC16-A31931AC5D66} = {14AE91DC-CB5E-4630-ADBA-9AAF5A5D268A}
+		{D56220D9-04A8-44E3-B1C3-2054049995A5} = {14AE91DC-CB5E-4630-ADBA-9AAF5A5D268A}
+		{2C42DD5B-B19B-4BEA-8609-A7FC808B1240} = {14AE91DC-CB5E-4630-ADBA-9AAF5A5D268A}
+		{F49497AE-3518-49A5-9C7E-5460CFFEDE0F} = {14AE91DC-CB5E-4630-ADBA-9AAF5A5D268A}
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {5305FCCA-9726-4134-A32B-2408A1E59EBD}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {5305FCCA-9726-4134-A32B-2408A1E59EBD}
 		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {5305FCCA-9726-4134-A32B-2408A1E59EBD}

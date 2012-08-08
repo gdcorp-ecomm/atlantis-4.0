@@ -73,7 +73,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       regLengths.Add(8);
       regLengths.Add(9);
       regLengths.Add(10);
-      IDotTypeInfo dotTypeInfo = DotTypeCache.GetDotTypeInfo("CO.UK");
+      string domainTld = "CO.UK";
+      IDotTypeInfo dotTypeInfo = DotTypeCache.GetDotTypeInfo(domainTld);
       List<int> RegistrationProductIds = dotTypeInfo.GetValidRegistrationProductIdList(1, regLengths.ToArray());
       List<int> TransferProductIds = dotTypeInfo.GetValidTransferProductIdList(1, regLengths.ToArray());
       List<int> renewProductIds = dotTypeInfo.GetValidRenewalProductIdList(1, regLengths.ToArray());

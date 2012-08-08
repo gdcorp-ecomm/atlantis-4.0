@@ -147,6 +147,10 @@
       <Project>{58E40473-184F-41F7-933E-4177212A50DC}</Project>
       <Name>Atlantis.Framework.DotTypeCache.DotComDotAg</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotComDotAu\Atlantis.Framework.DotTypeCache.DotComDotAu.csproj">
+      <Project>{D56220D9-04A8-44E3-B1C3-2054049995A5}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotComDotAu</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotComDotBr\Atlantis.Framework.DotTypeCache.DotComDotBr.csproj">
       <Project>{6FD7CF57-A3BF-45A5-AB00-C86B5487E0D6}</Project>
       <Name>Atlantis.Framework.DotTypeCache.DotComDotBr</Name>
@@ -275,6 +279,10 @@
       <Project>{367C08A6-51C6-4249-9810-5368C1F9F67E}</Project>
       <Name>Atlantis.Framework.DotTypeCache.DotNetDotAg</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNetDotAu\Atlantis.Framework.DotTypeCache.DotNetDotAu.csproj">
+      <Project>{2C42DD5B-B19B-4BEA-8609-A7FC808B1240}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotNetDotAu</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotNetDotBr\Atlantis.Framework.DotTypeCache.DotNetDotBr.csproj">
       <Project>{DE7BBC58-C052-4EEF-9E8A-12AAC08C815E}</Project>
       <Name>Atlantis.Framework.DotTypeCache.DotNetDotBr</Name>
@@ -326,6 +334,10 @@
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrgDotAg\Atlantis.Framework.DotTypeCache.DotOrgDotAg.csproj">
       <Project>{32117032-9399-4D01-B1D9-5274EE18F263}</Project>
       <Name>Atlantis.Framework.DotTypeCache.DotOrgDotAg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrgDotAu\Atlantis.Framework.DotTypeCache.DotOrgDotAu.csproj">
+      <Project>{F49497AE-3518-49A5-9C7E-5460CFFEDE0F}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.DotOrgDotAu</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.DotOrgDotCn\Atlantis.Framework.DotTypeCache.DotOrgDotCn.csproj">
       <Project>{4E17F9B2-6967-4932-B3CA-DDFD1AFC00DC}</Project>

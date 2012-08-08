@@ -47,20 +47,5 @@ namespace Atlantis.Framework.DotTypeCache.DotComDotAu
       get { return "COM.AU"; }
     }
 
-    public override int MaxRegistrationLength
-    {
-      get { return 1; }
-    }
-
-    public override int MaxRenewalLength
-    {
-      get { return 1; }
-    }
-
-    public override int MaxRenewalMonthsOut
-    {
-      get { return 24; }
-    }
-
   }
 }

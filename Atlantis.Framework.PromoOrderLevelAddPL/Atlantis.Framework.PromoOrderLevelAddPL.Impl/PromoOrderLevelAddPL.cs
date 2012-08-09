@@ -73,7 +73,7 @@ namespace Atlantis.Framework.PromoOrderLevelAddPL.Impl
           //look for invalid request format
           if (errorDescNode.InnerXml.ToLower().Contains("xml load failed"))
           {
-            responseData = new PromoOrderLevelAddPLResponseData(requestData, responseXml, new PrivateLabelPromoException("Invalid formatting of XML request", PrivateLabelPromoExceptionReason.InvalidRequestFormat));
+            throw new PrivateLabelPromoException("Invalid formatting of XML request", PrivateLabelPromoExceptionReason.InvalidRequestFormat);
           }
           //look for invalid (doesn't exist in db) promo code
           else if (errorDescNode.InnerXml.ToLower().Contains("invalid  promo id"))

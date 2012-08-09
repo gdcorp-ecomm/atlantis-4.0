@@ -44,5 +44,7 @@ namespace Atlantis.Framework.FastballGetOffersMsgData.Interface
 
     [DataMember(Name = "prd")]
     public string Product { get; set; }
+
+    public string LaunchType { get; set; }
   }
 }

@@ -9,21 +9,24 @@ namespace Atlantis.Framework.FastballGetOffersMsgData.Impl
 {
   public class FastballGetOffersMsgDataRequest : IRequest
   {
-    private const string URL_FORMAT = "http://{0}{1}";
+    private const string UrlFormat = "http://{0}{1}";
     
-    private const string ACTION_URL_ID = "actionUrl";
-    private const string OFFER_IMG_ID = "offerImage";
-    private const string LANDING_PAGE_URL = "landingPageUrl";
+    private const string ActionUrlId = "actionUrl";
+    private const string OfferImgId = "offerImage";
+    private const string LandingPageUrl = "landingPageUrl";
 
-    private const string CAPTION = "caption";
-    private const string CI_CODE = "ciCode";
-    private const string NAME = "name";
-    private const string VALUE = "val";
-    private const string VIEW = "view";
-    private const string DOMAIN = "domain";
-    private const string SOURCE = "src";
-    private const string PRODUCT = "productKey";
-    private const string MOBILE_WEB_URL = "mobileweburl";
+    private const string Caption = "caption";
+    private const string CiCode = "ciCode";
+    private const string Name = "name";
+    private const string Value = "val";
+    private const string View = "view";
+    private const string Launch = "launch";
+    private const string Domain = "domain";
+    private const string Source = "src";
+    private const string Product = "productKey";
+    private const string MobileWebUrl = "mobileweburl";
+
+    private const string InternalLaunch = "internal"; // default
 
     #region IRequest Members
 
@@ -62,6 +65,7 @@ namespace Atlantis.Framework.FastballGetOffersMsgData.Impl
           string clickDomain = null;
           string imageDomain = null;
           string product = null;
+          string launchType = InternalLaunch;
 
           foreach (OffersAPIWS.OfferMessageDataItem dataItem in offer.MessageData.DataItems)
           {
@@ -71,52 +75,56 @@ namespace Atlantis.Framework.FastballGetOffersMsgData.Impl
 
               switch (dataItem.ID)
               {
-                case ACTION_URL_ID:
+                case ActionUrlId:
                   switch (attribute.key)
                   {
-                    case VIEW:
+                    case View:
                       view = attVal;
                       break;
-                    case VALUE:
+                    case Value:
                       clickUrl = attVal;
                       break;
-                    case NAME:
+                    case Name:
                       name = attVal;
                       break;
-                    case CAPTION:
+                    case Caption:
                       caption = attVal;
                       break;
-                    case CI_CODE:
+                    case CiCode:
                       ciCode = attVal;
                       break;
-                    case DOMAIN:
+                    case Domain:
                       clickDomain = attVal;
                       break;
+                    case Launch:
+                      launchType = attVal;
+                      break;
+
                   }
                   break;
 
-                case OFFER_IMG_ID:
+                case OfferImgId:
                   switch (attribute.key)
                   {
-                    case SOURCE:
+                    case Source:
                       imageUrl = attVal;
                       break;
-                    case DOMAIN:
+                    case Domain:
                       imageDomain = attVal;
                       break;
                   }
                   break;
                 
-                case LANDING_PAGE_URL:
+                case LandingPageUrl:
                   switch (attribute.key)
                   {
-                    case PRODUCT:
+                    case Product:
                       product = attVal;
                       break;
-                    case MOBILE_WEB_URL:
+                    case MobileWebUrl:
                       clickUrl = attVal;
                       break;
-                    case CI_CODE:
+                    case CiCode:
                       ciCode = attVal;
                       break;
                   }
@@ -132,11 +140,12 @@ namespace Atlantis.Framework.FastballGetOffersMsgData.Impl
           newAd.CICode = ciCode;
           newAd.Order = count.ToString();
           newAd.Product = product;
+          newAd.LaunchType = launchType;
 
           // Do not remove this check, added for backward compatability
           if (!string.IsNullOrEmpty(clickDomain) && !Uri.IsWellFormedUriString(clickUrl, UriKind.Absolute))
           {
-            newAd.ClickUrl = string.Format(URL_FORMAT, clickDomain, clickUrl);
+            newAd.ClickUrl = string.Format(UrlFormat, clickDomain, clickUrl);
           }
           else
           {
@@ -146,7 +155,7 @@ namespace Atlantis.Framework.FastballGetOffersMsgData.Impl
           // Do not remove this check, added for backward compatability
           if(!string.IsNullOrEmpty(imageDomain) && !Uri.IsWellFormedUriString(imageUrl, UriKind.Absolute))
           {
-            newAd.ImageUrl = string.Format(URL_FORMAT, imageDomain, imageUrl);
+            newAd.ImageUrl = string.Format(UrlFormat, imageDomain, imageUrl);
           }
           else
           {

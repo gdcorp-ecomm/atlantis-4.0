@@ -80,7 +80,7 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Interface
       }
 
       // Check if currency exists
-      else if (!promoCurrency.AvailableCurrencies.ContainsKey(promoCurrency.CurrencyType.ToUpper()))
+      else if (promoCurrency.CurrencyType.ToUpper() != "USD" && !promoCurrency.AvailableCurrencies.ContainsKey(promoCurrency.CurrencyType.ToUpper()))
       {
         result = false;
         exception = new OrderLevelPromoException("You cannot specify an invalid currency type. Please check the 'CurrencyType' field.", OrderLevelPromoExceptionReason.InvalidCurrencySpecification);

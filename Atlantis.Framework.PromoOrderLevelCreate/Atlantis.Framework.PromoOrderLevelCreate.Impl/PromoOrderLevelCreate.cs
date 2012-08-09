@@ -23,17 +23,17 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Impl
           //validation for dates
           if (!OrderLevelPromo.IsValidDate(request.PromoCode.StartDate))
           {
-            throw new OrderLevelPromoException("The promo start date format is invalid as it cannot be parsed to datetime format.", new ArgumentException("OrderLevelPromo.StartDate"), OrderLevelPromoExceptionReason.InvalidDateFormat);
+            result = new PromoOrderLevelCreateResponseData(request, new OrderLevelPromoException("The promo start date format is invalid as it cannot be parsed to datetime format.", new ArgumentException("OrderLevelPromo.StartDate"), OrderLevelPromoExceptionReason.InvalidDateFormat));
           }
 
           if (!OrderLevelPromo.IsValidDate(request.PromoCode.EndDate))
           {
-            throw new  OrderLevelPromoException("The promo end date format is invalid as it cannot be parsed to datetime format.", new ArgumentException("OrderLevelPromo.EndDate"), OrderLevelPromoExceptionReason.InvalidDateFormat);
+            result = new PromoOrderLevelCreateResponseData(request, new OrderLevelPromoException("The promo end date format is invalid as it cannot be parsed to datetime format.", new ArgumentException("OrderLevelPromo.EndDate"), OrderLevelPromoExceptionReason.InvalidDateFormat));
           }
 
           if (!OrderLevelPromo.IsDateInFuture(request.PromoCode.EndDate))
           {
-            throw new OrderLevelPromoException("The end date for a promo must be in the future.", new ArgumentOutOfRangeException("OrderLevelPromo.EndDate"), OrderLevelPromoExceptionReason.InvalidDateRange);
+            result = new PromoOrderLevelCreateResponseData(request, new OrderLevelPromoException("The end date for a promo must be in the future.", new ArgumentOutOfRangeException("OrderLevelPromo.EndDate"), OrderLevelPromoExceptionReason.InvalidDateRange));
           }
 
           //Run currency validations
@@ -44,7 +44,7 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Impl
             {
               if (validationException != null)
               {
-                throw validationException;
+                result = new PromoOrderLevelCreateResponseData(request, validationException);
               }
             }
           }
@@ -82,15 +82,15 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Impl
             {
               if (errorDescNode.InnerXml.ToLower().Contains("id specified already exists"))
               {
-                throw new OrderLevelPromoException("TEST", OrderLevelPromoExceptionReason.PromoAlreadyExists);
+                result = new PromoOrderLevelCreateResponseData(request, new OrderLevelPromoException("TEST", OrderLevelPromoExceptionReason.PromoAlreadyExists));
               }
               else if (errorDescNode.InnerXml.ToLower().Contains("xml load failed"))
               {
-                throw new OrderLevelPromoException(errorDescNode.InnerXml, OrderLevelPromoExceptionReason.ImproperRequestFormat);
+                result = new PromoOrderLevelCreateResponseData(request, new OrderLevelPromoException(errorDescNode.InnerXml, OrderLevelPromoExceptionReason.ImproperRequestFormat));
               }
               else
               {
-                throw new OrderLevelPromoException(errorDescNode.InnerXml, OrderLevelPromoExceptionReason.Other);
+                result = new PromoOrderLevelCreateResponseData(request, new OrderLevelPromoException(errorDescNode.InnerXml, OrderLevelPromoExceptionReason.Other));
               }
             }
           }

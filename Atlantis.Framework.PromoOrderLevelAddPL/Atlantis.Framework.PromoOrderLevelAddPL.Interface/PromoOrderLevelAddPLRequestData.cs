@@ -77,6 +77,7 @@ namespace Atlantis.Framework.PromoOrderLevelAddPL.Interface
       : base(string.Empty, sourceUrl, string.Empty, pathway, pageCount)
     {
       this._resellerList = new Dictionary<int, PrivateLabelPromo>();
+      this._promoCode = promoCodeToUse;
       this._resellerList.Add(resellerPromo.PrivateLabelId, resellerPromo);
       this._serverIP = GetHostIpAddress();
       this._clientIP = string.Empty;
@@ -85,6 +86,7 @@ namespace Atlantis.Framework.PromoOrderLevelAddPL.Interface
     public PromoOrderLevelAddPLRequestData(string sourceUrl, string pathway, int pageCount, string promoCodeToUse, PrivateLabelPromo resellerPromo, string clientIP)
       : base(string.Empty, sourceUrl, string.Empty, pathway, pageCount)
     {
+      this._promoCode = promoCodeToUse;
       this._resellerList = new Dictionary<int, PrivateLabelPromo>();
       this._resellerList.Add(resellerPromo.PrivateLabelId, resellerPromo);
       this._serverIP = GetHostIpAddress();

@@ -61,6 +61,38 @@ namespace Atlantis.Framework.PromoOffering.Tests
     //
     #endregion
 
+    [TestMethod()]
+    [DeploymentItem("Atlantis.config")]
+    [DeploymentItem("Interop.gdDataCacheLib.dll")]
+    public void DataCacheRequestTest()
+    {
+      PromoOfferingRequestData request = new PromoOfferingRequestData("858937", string.Empty, string.Empty, string.Empty, 0, 440859);
+      PromoOfferingResponseData response = (PromoOfferingResponseData)DataCache.DataCache.GetProcessRequest(request, 573);
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsNotNull(response.Promotions);
+      Assert.IsTrue(0 < response.Promotions.Count());
+      Assert.IsNotNull(response.ActivePromotions);
+      Assert.IsTrue(0 < response.ActivePromotions.Count());
+      Assert.IsNotNull(response.PromotionsByPromoGroupId);
+      Assert.IsTrue(0 < response.PromotionsByPromoGroupId.Count);
+      Assert.IsNotNull(response.ActivePromotionsByPromoGroupId);
+      Assert.IsTrue(0 < response.ActivePromotionsByPromoGroupId.Count);
+      Assert.IsTrue(response.ActivePromotionsByPromoGroupId.ContainsKey(56));
+      Assert.IsTrue(response.HasActivePromotion(56));
+
+      response = (PromoOfferingResponseData)DataCache.DataCache.GetProcessRequest(request, 573);
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsNotNull(response.Promotions);
+      Assert.IsTrue(0 < response.Promotions.Count());
+      Assert.IsNotNull(response.ActivePromotions);
+      Assert.IsTrue(0 < response.ActivePromotions.Count());
+      Assert.IsNotNull(response.PromotionsByPromoGroupId);
+      Assert.IsTrue(0 < response.PromotionsByPromoGroupId.Count);
+      Assert.IsNotNull(response.ActivePromotionsByPromoGroupId);
+      Assert.IsTrue(0 < response.ActivePromotionsByPromoGroupId.Count);
+      Assert.IsTrue(response.ActivePromotionsByPromoGroupId.ContainsKey(56));
+      Assert.IsTrue(response.HasActivePromotion(56));
+    }
 
     /// <summary>
     ///A test for RequestHandler
@@ -73,13 +105,13 @@ namespace Atlantis.Framework.PromoOffering.Tests
       PromoOfferingResponseData response = (PromoOfferingResponseData)Engine.Engine.ProcessRequest(request, 573);
       Assert.IsTrue(response.IsSuccess);
       Assert.IsNotNull(response.Promotions);
-      Assert.IsTrue(response.Promotions.Count() > 0);
+      Assert.IsTrue(0 < response.Promotions.Count());
       Assert.IsNotNull(response.ActivePromotions);
-      Assert.IsTrue(response.ActivePromotions.Count() > 0);
+      Assert.IsTrue(0 < response.ActivePromotions.Count());
       Assert.IsNotNull(response.PromotionsByPromoGroupId);
-      Assert.IsTrue(response.PromotionsByPromoGroupId.Count > 0);
+      Assert.IsTrue(0 < response.PromotionsByPromoGroupId.Count);
       Assert.IsNotNull(response.ActivePromotionsByPromoGroupId);
-      Assert.IsTrue(response.ActivePromotionsByPromoGroupId.Count > 0);
+      Assert.IsTrue(0 < response.ActivePromotionsByPromoGroupId.Count);
       Assert.IsTrue(response.ActivePromotionsByPromoGroupId.ContainsKey(56));
       Assert.IsTrue(response.HasActivePromotion(56));
     }

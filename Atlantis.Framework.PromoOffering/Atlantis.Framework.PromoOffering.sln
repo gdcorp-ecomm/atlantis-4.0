@@ -22,9 +22,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
@@ -49,6 +51,10 @@ Global
 		SccProjectUniqueName6 = Atlantis.Framework.PromoOffering.Tests\\Atlantis.Framework.PromoOffering.Tests.csproj
 		SccProjectName6 = Atlantis.Framework.PromoOffering.Tests
 		SccLocalPath6 = Atlantis.Framework.PromoOffering.Tests
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
+		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.PromoOffering.sln
+		SccProjectName7 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
+		SccLocalPath7 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.PromoOffering.vsmdi
@@ -82,6 +88,10 @@ Global
 		{F5A09B0F-8495-4BD9-A604-BD149B6E5AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5A09B0F-8495-4BD9-A604-BD149B6E5AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5A09B0F-8495-4BD9-A604-BD149B6E5AB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,5 +100,6 @@ Global
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {32F0D09A-D4B3-4D25-BDDD-8EECAD4E9339}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {32F0D09A-D4B3-4D25-BDDD-8EECAD4E9339}
 		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {32F0D09A-D4B3-4D25-BDDD-8EECAD4E9339}
+		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {32F0D09A-D4B3-4D25-BDDD-8EECAD4E9339}
 	EndGlobalSection
 EndGlobal

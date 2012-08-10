@@ -21,8 +21,8 @@ namespace Atlantis.Framework.PromoOffering.Interface
       if (promotions != null)
       {
         ActivePromotions = promotions.Where(p => p.IsActive);
-        ActivePromotionsByPromoGroupId = ActivePromotions.ToDictionary(p => p.PromoGroupId, p => p);
-        PromotionsByPromoGroupId = promotions.ToDictionary(p => p.PromoGroupId, p => p);
+        ActivePromotionsByPromoGroupId = ActivePromotions.ToDictionary(p => p.PromoGroupId);
+        PromotionsByPromoGroupId = promotions.ToDictionary(p => p.PromoGroupId);
       }
     }
 
@@ -127,7 +127,7 @@ namespace Atlantis.Framework.PromoOffering.Interface
 
     public string ToXML()
     {
-      XmlSerializer xmlSerializer = new XmlSerializer(typeof(IEnumerable<ResellerPromoItem>));
+      XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<ResellerPromoItem>));
       StringWriter writer = new StringWriter();
 
       xmlSerializer.Serialize(writer, Promotions);

@@ -20,14 +20,14 @@ namespace Atlantis.Framework.PromoOffering.Impl
       {
         IList<ResellerPromoItem> promotions = new List<ResellerPromoItem>(5);
 
-        using (SqlConnection connection = new SqlConnection(NetConnect.LookupConnectInfo(config)))
+        PromoOfferingRequestData request = requestData as PromoOfferingRequestData;
+        if (null != request)
         {
-          PromoOfferingRequestData request = requestData as PromoOfferingRequestData;
-          if (null != request)
+          using (SqlConnection connection = new SqlConnection(NetConnect.LookupConnectInfo(config)))
           {
             using (SqlCommand command = new SqlCommand(PROCNAME, connection) { CommandType = CommandType.StoredProcedure, CommandTimeout = (int)request.RequestTimeout.TotalSeconds })
             {
-              command.Parameters.Add(new SqlParameter("@n_privateLabelID", request.ResellerId));
+              command.Parameters.Add(new SqlParameter("@n_privateLabelID", request.PrivateLabelId));
 
               connection.Open();
 
@@ -55,7 +55,7 @@ namespace Atlantis.Framework.PromoOffering.Impl
                 reader.Close();
               }
 
-            } 
+            }
           }
         }
 

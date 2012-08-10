@@ -42,13 +42,11 @@ namespace Atlantis.Framework.PromoOffering.Impl
 
                   while (reader.Read())
                   {
-                    ResellerPromoItem item = new ResellerPromoItem()
-                    {
-                      GroupId = !reader.IsDBNull(groupIdOrdinal) ? reader.GetInt32(groupIdOrdinal) : 0,
-                      Description = !reader.IsDBNull(descOrdinal) ? reader.GetString(descOrdinal) : string.Empty,
-                      IsActive = !reader.IsDBNull(activeOrdinal) ? reader.GetInt32(activeOrdinal) == 1 : false,
-                      PromoGroupId = !reader.IsDBNull(promoGroupIdOrdinal) ? reader.GetInt32(promoGroupIdOrdinal) : 0
-                    };
+                    ResellerPromoItem item = new ResellerPromoItem(
+                      !reader.IsDBNull(descOrdinal) ? reader.GetString(descOrdinal) : string.Empty,
+                      !reader.IsDBNull(groupIdOrdinal) ? reader.GetInt32(groupIdOrdinal) : 0,
+                      !reader.IsDBNull(activeOrdinal) ? reader.GetInt32(activeOrdinal) == 1 : false,
+                      !reader.IsDBNull(promoGroupIdOrdinal) ? reader.GetInt32(promoGroupIdOrdinal) : 0);
                     promotions.Add(item);
                   }
                 }

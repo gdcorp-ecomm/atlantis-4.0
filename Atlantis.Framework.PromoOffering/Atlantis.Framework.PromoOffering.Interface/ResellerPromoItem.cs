@@ -3,33 +3,36 @@ namespace Atlantis.Framework.PromoOffering.Interface
 {
   public class ResellerPromoItem
   {
-    public ResellerPromoItem()
+    public ResellerPromoItem(string description, int groupId, bool isActive, int promoGroupId)
     {
-
-    }
-
-    public int GroupId
-    {
-      get;
-      set;
+      Description = description;
+      GroupId = groupId;
+      IsActive = isActive;
+      PromoGroupId = promoGroupId;
     }
 
     public string Description
     {
       get;
-      set;
+      private set;
+    }
+
+    public int GroupId
+    {
+      get;
+      private set;
     }
 
     public bool IsActive
     {
       get;
-      set;
+      private set;
     }
 
     public int PromoGroupId
     {
       get;
-      set;
+      private set;
     }
   }
 }

@@ -3,26 +3,24 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using Atlantis.Framework.Interface;
-using System.Linq;
 
 namespace Atlantis.Framework.PromoOffering.Interface
 {
   public class PromoOfferingResponseData : IResponseData
   {
     private AtlantisException _exception = null;
-    private IEnumerable<ResellerPromoItem> _activePromotions;
-    private IDictionary<int, ResellerPromoItem> _activePromotionsByPromoGroupId;
     private IEnumerable<ResellerPromoItem> _promotions;
     private IDictionary<int, ResellerPromoItem> _promotionsByPromoGroupId;
-    
+
     public PromoOfferingResponseData(IEnumerable<ResellerPromoItem> promotions)
     {
+      if (promotions == null)
+        throw new ArgumentNullException("promotions", "promotions is null.");
+
       Promotions = promotions;
-      if (promotions != null)
+      foreach (ResellerPromoItem item in promotions)
       {
-        ActivePromotions = promotions.Where(p => p.IsActive);
-        ActivePromotionsByPromoGroupId = ActivePromotions.ToDictionary(p => p.PromoGroupId);
-        PromotionsByPromoGroupId = promotions.ToDictionary(p => p.PromoGroupId);
+        PromotionsByPromoGroupId.Add(item.PromoGroupId, item);
       }
     }
 
@@ -38,39 +36,7 @@ namespace Atlantis.Framework.PromoOffering.Interface
         , exception.Message
         , requestData.ToXML());
     }
-
-    public IEnumerable<ResellerPromoItem> ActivePromotions
-    {
-      get
-      {
-        if (null == _activePromotions)
-        {
-          _activePromotions = new List<ResellerPromoItem>().AsReadOnly();
-        }
-        return _activePromotions;
-      }
-      private set
-      {
-        _activePromotions = value;
-      }
-    }
-
-    public IDictionary<int, ResellerPromoItem> ActivePromotionsByPromoGroupId
-    {
-      get
-      {
-        if (null == _activePromotionsByPromoGroupId)
-        {
-          _activePromotionsByPromoGroupId = new Dictionary<int, ResellerPromoItem>();
-        }
-        return _activePromotionsByPromoGroupId;
-      }
-      private set
-      {
-        _activePromotionsByPromoGroupId = value;
-      }
-    }
-
+    
     public bool IsSuccess
     {
       get
@@ -85,7 +51,7 @@ namespace Atlantis.Framework.PromoOffering.Interface
       {
         if (null == _promotions)
         {
-          _promotions = new List<ResellerPromoItem>().AsReadOnly();
+          _promotions = new List<ResellerPromoItem>();
         }
         return _promotions;
       }
@@ -95,7 +61,7 @@ namespace Atlantis.Framework.PromoOffering.Interface
       }
     }
 
-    public IDictionary<int, ResellerPromoItem> PromotionsByPromoGroupId
+    private IDictionary<int, ResellerPromoItem> PromotionsByPromoGroupId
     {
       get
       {
@@ -105,22 +71,15 @@ namespace Atlantis.Framework.PromoOffering.Interface
         }
         return _promotionsByPromoGroupId;
       }
-      private set
+      set
       {
         _promotionsByPromoGroupId = value;
       }
     }
 
-    public bool HasActivePromotion(int promoGroupId)
+    public bool TryGetPromoItemByPromoGroupId(int promoGroupId, out ResellerPromoItem promoItem)
     {
-      bool returnValue = false;
-
-      if (ActivePromotionsByPromoGroupId != null)
-      {
-        returnValue = ActivePromotionsByPromoGroupId.ContainsKey(promoGroupId);
-      }
-
-      return returnValue;
+      return PromotionsByPromoGroupId.TryGetValue(promoGroupId, out promoItem);
     }
 
     #region IResponseData Members

@@ -23,7 +23,7 @@ namespace Atlantis.Framework.CommerceOrderXml.Interface
     public CommerceOrderXmlResponseData(RequestData requestData, Exception exception)
     {
       _exception = new AtlantisException(requestData,
-                                   "MYAOrderDetailResponseData",
+                                   "CommerceOrderXmlResponseData",
                                    exception.Message,
                                    requestData.ToXML());
     }

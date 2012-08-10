@@ -22,37 +22,40 @@ namespace Atlantis.Framework.PromoOffering.Impl
 
         using (SqlConnection connection = new SqlConnection(NetConnect.LookupConnectInfo(config)))
         {
-          var request = (PromoOfferingRequestData)requestData;
-          using (SqlCommand command = new SqlCommand(PROCNAME, connection) { CommandType = CommandType.StoredProcedure, CommandTimeout = (int)request.RequestTimeout.TotalSeconds })
+          PromoOfferingRequestData request = requestData as PromoOfferingRequestData;
+          if (null != request)
           {
-            command.Parameters.Add(new SqlParameter("@n_privateLabelID", request.ResellerId));
-
-            connection.Open();
-
-            using (SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection))
+            using (SqlCommand command = new SqlCommand(PROCNAME, connection) { CommandType = CommandType.StoredProcedure, CommandTimeout = (int)request.RequestTimeout.TotalSeconds })
             {
-              if (reader.HasRows)
+              command.Parameters.Add(new SqlParameter("@n_privateLabelID", request.ResellerId));
+
+              connection.Open();
+
+              using (SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection))
               {
-                int groupIdOrdinal = reader.GetOrdinal("groupid");
-                int descOrdinal = reader.GetOrdinal("description");
-                int activeOrdinal = reader.GetOrdinal("isactive");
-                int promoGroupIdOrdinal = reader.GetOrdinal("pl_promoGroupid");
-
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                  ResellerPromoItem item = new ResellerPromoItem()
-                  {
-                    GroupId = !reader.IsDBNull(groupIdOrdinal) ? reader.GetInt32(groupIdOrdinal) : 0,
-                    Description = !reader.IsDBNull(descOrdinal) ? reader.GetString(descOrdinal) : string.Empty,
-                    IsActive = !reader.IsDBNull(activeOrdinal) ? reader.GetInt32(activeOrdinal) == 1 : false,
-                    PromoGroupId = !reader.IsDBNull(promoGroupIdOrdinal) ? reader.GetInt32(promoGroupIdOrdinal) : 0
-                  };
-                  promotions.Add(item);
-                }
-              }
-              reader.Close();
-            }
+                  int groupIdOrdinal = reader.GetOrdinal("groupid");
+                  int descOrdinal = reader.GetOrdinal("description");
+                  int activeOrdinal = reader.GetOrdinal("isactive");
+                  int promoGroupIdOrdinal = reader.GetOrdinal("pl_promoGroupid");
 
+                  while (reader.Read())
+                  {
+                    ResellerPromoItem item = new ResellerPromoItem()
+                    {
+                      GroupId = !reader.IsDBNull(groupIdOrdinal) ? reader.GetInt32(groupIdOrdinal) : 0,
+                      Description = !reader.IsDBNull(descOrdinal) ? reader.GetString(descOrdinal) : string.Empty,
+                      IsActive = !reader.IsDBNull(activeOrdinal) ? reader.GetInt32(activeOrdinal) == 1 : false,
+                      PromoGroupId = !reader.IsDBNull(promoGroupIdOrdinal) ? reader.GetInt32(promoGroupIdOrdinal) : 0
+                    };
+                    promotions.Add(item);
+                  }
+                }
+                reader.Close();
+              }
+
+            } 
           }
         }
 

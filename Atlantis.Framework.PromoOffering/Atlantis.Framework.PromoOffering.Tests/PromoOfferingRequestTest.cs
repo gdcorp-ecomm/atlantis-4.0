@@ -2,6 +2,7 @@
 using System;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.PromoOffering.Interface;
+using System.Linq;
 
 namespace Atlantis.Framework.PromoOffering.Tests
 {
@@ -69,8 +70,18 @@ namespace Atlantis.Framework.PromoOffering.Tests
     public void RequestHandlerTest()
     {
       PromoOfferingRequestData request = new PromoOfferingRequestData("858937", string.Empty, string.Empty, string.Empty, 0, 440859);
-      PromoOfferingResponseData response = (PromoOfferingResponseData)Engine.Engine.ProcessRequest(request, 586);
+      PromoOfferingResponseData response = (PromoOfferingResponseData)Engine.Engine.ProcessRequest(request, 573);
       Assert.IsTrue(response.IsSuccess);
+      Assert.IsNotNull(response.Promotions);
+      Assert.IsTrue(response.Promotions.Count() > 0);
+      Assert.IsNotNull(response.ActivePromotions);
+      Assert.IsTrue(response.ActivePromotions.Count() > 0);
+      Assert.IsNotNull(response.PromotionsByPromoGroupId);
+      Assert.IsTrue(response.PromotionsByPromoGroupId.Count > 0);
+      Assert.IsNotNull(response.ActivePromotionsByPromoGroupId);
+      Assert.IsTrue(response.ActivePromotionsByPromoGroupId.Count > 0);
+      Assert.IsTrue(response.ActivePromotionsByPromoGroupId.ContainsKey(56));
+      Assert.IsTrue(response.HasActivePromotion(56));
     }
   }
 }

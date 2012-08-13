@@ -23,11 +23,11 @@ namespace Atlantis.Framework.EcommPaymentProfiles.Interface
 
     public EcommPaymentProfilesResponseData(RequestData request, string responseXml)
     {
+      IsSuccess = true;
       _request = request;
       _responseXml = responseXml;
       PopulateProfiles();
       PaymentProfileCount = _profiles.Count;
-      IsSuccess = true;
     }
 
     public EcommPaymentProfilesResponseData(string responseXml, AtlantisException atlantisException)
@@ -48,22 +48,33 @@ namespace Atlantis.Framework.EcommPaymentProfiles.Interface
     #region Populate Profiles
     private void PopulateProfiles()
     {
-      XmlDocument oDoc = new XmlDocument();
-      oDoc.LoadXml(_responseXml);
-
-      XmlNodeList dataNodes = oDoc.SelectNodes("./profiles/profile");
-      foreach (XmlNode dataNode in dataNodes)
+      try
       {
-        XmlElement dataElement = dataNode as XmlElement;
-        if (dataElement != null)
+        XmlDocument oDoc = new XmlDocument();
+        oDoc.LoadXml(_responseXml);
+
+        XmlNodeList dataNodes = oDoc.SelectNodes("./profiles/profile");
+        foreach (XmlNode dataNode in dataNodes)
         {
-          PaymentProfile profile = new PaymentProfile();
-          foreach (XmlAttribute currentAtt in dataElement.Attributes)
+          XmlElement dataElement = dataNode as XmlElement;
+          if (dataElement != null)
           {
-            profile[currentAtt.Name] = currentAtt.Value;
+            PaymentProfile profile = new PaymentProfile();
+            foreach (XmlAttribute currentAtt in dataElement.Attributes)
+            {
+              profile[currentAtt.Name] = currentAtt.Value;
+            }
+            _profiles.Add(profile);
           }
-          _profiles.Add(profile);
         }
+      }
+      catch (Exception ex)
+      {
+        _exception = new AtlantisException(_request
+          , "EcommPaymentProfilesResponseData::Processing Profile"
+          , ex.Message
+          , _request.ToXML());
+        IsSuccess = false;
       }
     }
     #endregion

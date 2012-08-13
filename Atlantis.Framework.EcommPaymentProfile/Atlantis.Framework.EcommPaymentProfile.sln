@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPaymentProfile.Interface", "Atlantis.Framework.EcommPaymentProfile.Interface\Atlantis.Framework.EcommPaymentProfile.Interface.csproj", "{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPaymentProfile.Impl", "Atlantis.Framework.EcommPaymentProfile.Impl\Atlantis.Framework.EcommPaymentProfile.Impl.csproj", "{7456CF05-8A16-4A40-964F-0D56EFEBB78E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPaymentProfile.Impl", "Atlantis.Framework.EcommPaymentProfile.Impl\Atlantis.Framework.EcommPaymentProfile.Impl.csproj", "{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommPaymentProfile.Tests", "Atlantis.Framework.EcommPaymentProfile.Tests\Atlantis.Framework.EcommPaymentProfile.Tests.csproj", "{EFAEE078-C0CB-49E4-A98C-ABE7D17D2FB5}"
 EndProject
@@ -72,10 +72,10 @@ Global
 		{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7456CF05-8A16-4A40-964F-0D56EFEBB78E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7456CF05-8A16-4A40-964F-0D56EFEBB78E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7456CF05-8A16-4A40-964F-0D56EFEBB78E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7456CF05-8A16-4A40-964F-0D56EFEBB78E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EFAEE078-C0CB-49E4-A98C-ABE7D17D2FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EFAEE078-C0CB-49E4-A98C-ABE7D17D2FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFAEE078-C0CB-49E4-A98C-ABE7D17D2FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU

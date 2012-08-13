@@ -35,7 +35,7 @@
       {
         if (IsWebsiteBuilderNameEnabled)
         {
-          return "WebSite Builder&trade;";
+          return "Website Builder";
         }
         else
         {

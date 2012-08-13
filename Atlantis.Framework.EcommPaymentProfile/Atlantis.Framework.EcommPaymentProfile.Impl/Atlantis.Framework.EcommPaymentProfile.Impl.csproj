@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7456CF05-8A16-4A40-964F-0D56EFEBB78E}</ProjectGuid>
+    <ProjectGuid>{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Atlantis.Framework.EcommPaymentProfile.Impl</RootNamespace>
@@ -92,8 +92,12 @@
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PaymentProfile\Atlantis.Framework.PaymentProfile.Interface\Atlantis.Framework.PaymentProfile.Interface.csproj">
+      <Project>{8B540B38-34E0-4136-B409-1DC7B322AA63}</Project>
+      <Name>Atlantis.Framework.PaymentProfile.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.EcommPaymentProfile.Interface\Atlantis.Framework.EcommPaymentProfile.Interface.csproj">
-      <Project>{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}</Project>
+      <Project>{0066A523-3B95-41DE-96CA-1AC529D1BAA2}</Project>
       <Name>Atlantis.Framework.EcommPaymentProfile.Interface</Name>
     </ProjectReference>
   </ItemGroup>

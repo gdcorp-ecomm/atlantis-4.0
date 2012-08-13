@@ -4,12 +4,13 @@ using System.IO;
 using System.Text;
 using System.Web;
 using Atlantis.Framework.GetPaymentProfileAlternate.Interface;
-using Atlantis.Framework.GetPaymentProfiles.Interface;
+using Atlantis.Framework.EcommPaymentProfile.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MessagingProcess.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.ProviderContainer.Impl;
 using Atlantis.Framework.PurchaseEmail.Interface.Providers;
+using Atlantis.Framework.PaymentProfileClass.Interface;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 {
@@ -111,19 +112,20 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             }
 
             // get all of our payment profiles
-            var reqPaymentProfiles = new GetPaymentProfilesRequestData(ShopperContext.ShopperId, _requestData.SourceURL, Order.OrderId, Order.Pathway, Order.PageCount);
-            var rspPaymentProfiles = (GetPaymentProfilesResponseData)Engine.Engine.ProcessRequest(reqPaymentProfiles, engineGetPaymentProfiles);
-            if (!rspPaymentProfiles.IsSuccess)
+            EcommPaymentProfileRequestData reqPaymentProfiles = new EcommPaymentProfileRequestData(ShopperContext.ShopperId, _requestData.SourceURL, Order.OrderId, Order.Pathway, Order.PageCount, rspAltPaymentProfile.PaymentProfileId);
+            EcommPaymentProfileResponseData rspPaymentProfile = (EcommPaymentProfileResponseData)Engine.Engine.ProcessRequest(reqPaymentProfiles, engineGetPaymentProfiles);
+            if (!rspPaymentProfile.IsSuccess)
             {
               AtlantisException aex = new AtlantisException(_requestData, "GDConfirmationEmail.AliPayRenewalNotice", "GetPaymentProfilesResponseData.IsSuccess<>true", String.Empty);
               Engine.Engine.LogAtlantisException(aex);
               notice = aliPayRenewalMessageOnError;
               break;
             }
-
+            
+            //PaymentProfile altPaymentProfile rspPaymentProfile.AccessProfile(ShopperContext.ShopperId, Order.ManagerUserId, Order.ManagerUserName, "AlipayRenewalNotice");
             // See if the Alternate Payment Profile is not alipay... otherwise send the message
-            string strAltPaymentProfileId = rspAltPaymentProfile.PaymentProfileId.ToString();
-            PaymentProfile altPaymentProfile = rspPaymentProfiles.Profiles.Find(pp => pp.ProfileID.Equals(strAltPaymentProfileId));
+
+            PaymentProfile altPaymentProfile=rspPaymentProfile.AccessProfile(ShopperContext.ShopperId, Order.ManagerUserId, Order.ManagerUserName, "AlipayRenewalNotice");
             if (altPaymentProfile.ProfileType.Equals("alipay", StringComparison.OrdinalIgnoreCase))
             {
               // backup payment method is also alipay... so renewal will fail

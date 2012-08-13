@@ -19,10 +19,10 @@ namespace Atlantis.Framework.EcommPaymentProfile.Interface
 
     public EcommPaymentProfileResponseData(RequestData request, string responseXml)
     {
+      IsSuccess = true;
       _request = request;
       _responseXml = responseXml;
-      PopulateProfile();
-      IsSuccess = true;
+      PopulateProfile();      
     }
 
     public EcommPaymentProfileResponseData(string responseXml, AtlantisException exAtlantis)
@@ -81,26 +81,38 @@ namespace Atlantis.Framework.EcommPaymentProfile.Interface
 
     private void PopulateProfile()
     {
-      var oDoc = new XmlDocument();
-      oDoc.LoadXml(_responseXml);
-
-      XmlNodeList dataNodes = oDoc.SelectNodes("./profiles/profile");
-
-      if (dataNodes == null)
-        return;
-
-      foreach (XmlNode dataNode in dataNodes)
+      try
       {
-        var dataElement = dataNode as XmlElement;
-        if (dataElement != null)
+        var oDoc = new XmlDocument();
+        oDoc.LoadXml(_responseXml);
+
+        XmlNodeList dataNodes = oDoc.SelectNodes("./profiles/profile");
+
+        if (dataNodes == null)
+          return;
+
+        foreach (XmlNode dataNode in dataNodes)
         {
-          var profile = new PaymentProfile();
-          foreach (XmlAttribute currentAtt in dataElement.Attributes)
+          var dataElement = dataNode as XmlElement;
+          if (dataElement != null)
           {
-            profile[currentAtt.Name] = currentAtt.Value;
+            var profile = new PaymentProfile();
+            foreach (XmlAttribute currentAtt in dataElement.Attributes)
+            {
+              profile[currentAtt.Name] = currentAtt.Value;
+            }
+            _profile = profile;
+            break;
           }
-          _profile = profile;
         }
+      }
+      catch (Exception ex)
+      {
+        _exception = new AtlantisException(_request
+          , "EcommPaymentProfileResponseData::Processing Profile"
+          , ex.Message
+          , _request.ToXML());
+        IsSuccess = false;
       }
     }
     

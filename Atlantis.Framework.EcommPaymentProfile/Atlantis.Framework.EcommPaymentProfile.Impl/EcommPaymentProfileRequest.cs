@@ -21,6 +21,7 @@ namespace Atlantis.Framework.EcommPaymentProfile.Impl
         using (var oSvc = new WsgdCPPSvc.PPWebSvcService())
         {
           oSvc.Url = ((WsConfigElement) oConfig).WSURL;
+          oSvc.Timeout = (int)oRequestData.RequestTimeout.TotalMilliseconds;
           responseXml = oSvc.GetInfoByProfileID(string.Empty, oEcommPaymentProfileRequestData.ProfileId, oRequestData.ShopperID);
           if (responseXml.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
           {

@@ -121,6 +121,14 @@
       <Project>{BEE136BA-2908-438B-9033-CCDB137CB5F9}</Project>
       <Name>Atlantis.Framework.DataProvider.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.EcommPaymentProfile\Atlantis.Framework.EcommPaymentProfile.Impl\Atlantis.Framework.EcommPaymentProfile.Impl.csproj">
+      <Project>{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}</Project>
+      <Name>Atlantis.Framework.EcommPaymentProfile.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.EcommPaymentProfile\Atlantis.Framework.EcommPaymentProfile.Interface\Atlantis.Framework.EcommPaymentProfile.Interface.csproj">
+      <Project>{0066A523-3B95-41DE-96CA-1AC529D1BAA2}</Project>
+      <Name>Atlantis.Framework.EcommPaymentProfile.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -137,14 +145,6 @@
       <Project>{91B47589-8892-4643-B1A0-715E6A061879}</Project>
       <Name>Atlantis.Framework.GetPaymentProfileAlternate.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.GetPaymentProfiles\Atlantis.Framework.GetPaymentProfiles.Impl\Atlantis.Framework.GetPaymentProfiles.Impl.csproj">
-      <Project>{7456CF05-8A16-4A40-964F-0D56EFEBB78E}</Project>
-      <Name>Atlantis.Framework.GetPaymentProfiles.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.GetPaymentProfiles\Atlantis.Framework.GetPaymentProfiles.Interface\Atlantis.Framework.GetPaymentProfiles.Interface.csproj">
-      <Project>{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}</Project>
-      <Name>Atlantis.Framework.GetPaymentProfiles.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.GetShopper\Atlantis.Framework.GetShopper.Interface\Atlantis.Framework.GetShopper.Interface.csproj">
       <Project>{4AEB3769-5282-49FC-941B-1AF979BBF39A}</Project>
       <Name>Atlantis.Framework.GetShopper.Interface</Name>
@@ -156,6 +156,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.MessagingProcess\Atlantis.Framework.MessagingProcess.Interface\Atlantis.Framework.MessagingProcess.Interface.csproj">
       <Project>{8D5F838D-A604-4CEF-9F86-FE9A6843584A}</Project>
       <Name>Atlantis.Framework.MessagingProcess.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PaymentProfile\Atlantis.Framework.PaymentProfile.Interface\Atlantis.Framework.PaymentProfile.Interface.csproj">
+      <Project>{8B540B38-34E0-4136-B409-1DC7B322AA63}</Project>
+      <Name>Atlantis.Framework.PaymentProfile.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.ProductOffer\Atlantis.Framework.ProductOffer.Interface\Atlantis.Framework.ProductOffer.Interface.csproj">
       <Project>{D7260EE7-F41C-4AC4-87FF-959BD107A4DE}</Project>

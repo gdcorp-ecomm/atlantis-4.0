@@ -721,7 +721,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
         case EULARuleType.WSC:
           break;
         case EULARuleType.WST:
-          productName = "WebSite Tonight&#174;";
+          productName = ProductNames.WebsiteCreatorName;
           productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "178", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "WST_EULA";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
@@ -920,7 +920,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           agreementType = EULAType.Service;
           break;
         case EULARuleType.WST_WithMaint:
-          productName = "Website Tonight w/Maintenance";
+          productName = ProductNames.WebsiteCreatorName + " w/Maintenance";
           productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "449", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "WST_maintenance_eula";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);

@@ -56,7 +56,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         case CrossSellConfigProductId.WST:
           IProductView wst_d_1year = _products.NewProductView(_products.GetProduct(ProductIds.WST_D_1year));
           productUrl = _links.GetUrl(LinkTypes.SiteRoot, "gdshop/hosting/hosting_build_website.asp", QueryParamMode.CommonParameters, true, queryStringArgs);
-          productName = "WebSite Tonight&#174; Deluxe";
+          productName = ProductNames.WebsiteCreatorName + " Deluxe";
           priceText = string.Format(FORMAT_PRICETEXT, _currency.PriceText(wst_d_1year.MonthlyCurrentPrice, false));
           savingsText = GetSavingsText(wst_d_1year, _products.GetProduct(ProductIds.website10pg));
           productDescription = "Build your site online in minutes!";

@@ -28,5 +28,30 @@
     public const string DeluxeRegistration = "Deluxe Registration";
     public const string TrafficFacts = "Site Analytics";
     public const string TrafficBlazer = "Traffic Blazer";
+
+    public static string WebsiteCreatorName
+    {
+      get
+      {
+        if (IsWebsiteBuilderNameEnabled)
+        {
+          return "WebSite Builder&trade;";
+        }
+        else
+        {
+          return "WebSite Tonight&reg;";
+        }
+      }
+    }
+
+    public static bool IsWebsiteBuilderNameEnabled
+    {
+      get
+      {
+        bool temp;
+        bool.TryParse(DataCache.DataCache.GetAppSetting("CART_WEBSITE_BUILDER_NAME_ENABLE"), out temp);
+        return temp;
+      }
+    }
   }
 }

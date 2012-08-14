@@ -90,6 +90,9 @@
     <None Include="Web References\QSCMobileAPI\getAccountResponseDetail.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\QSCMobileAPI\getCountriesResponseDetail.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\QSCMobileAPI\getIPAddressResponseDetail.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>

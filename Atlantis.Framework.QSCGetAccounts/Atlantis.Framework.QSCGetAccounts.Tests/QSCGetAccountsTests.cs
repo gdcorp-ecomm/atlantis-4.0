@@ -17,11 +17,10 @@ namespace Atlantis.Framework.QSCGetAccounts.Tests
 
       QSCGetAccountsRequestData request = new QSCGetAccountsRequestData(_shopperId, "", string.Empty, string.Empty, 1);
 
-      request.RequestTimeout = TimeSpan.FromSeconds(30);
+      request.RequestTimeout = TimeSpan.FromSeconds(10);
 
       QSCGetAccountsResponseData response = Engine.Engine.ProcessRequest(request, requestId) as QSCGetAccountsResponseData;
 
-      Assert.IsFalse(response.IsSuccess);
       Assert.IsTrue(response.Response.responseStatus.statusCode == statusCode.SUCCESS_WITH_WARNINGS);
 
       Console.WriteLine(response.ToXML());
@@ -36,11 +35,10 @@ namespace Atlantis.Framework.QSCGetAccounts.Tests
 
       QSCGetAccountsRequestData request = new QSCGetAccountsRequestData(_shopperId, "", string.Empty, string.Empty, 1);
 
-      request.RequestTimeout = TimeSpan.FromSeconds(30);
+      request.RequestTimeout = TimeSpan.FromSeconds(10);
 
       QSCGetAccountsResponseData response = Engine.Engine.ProcessRequest(request, requestId) as QSCGetAccountsResponseData;
 
-      Assert.IsTrue(response.IsSuccess);
       Assert.IsTrue(response.AccountList.Count >= 1);
 
       Console.WriteLine(response.ToXML());

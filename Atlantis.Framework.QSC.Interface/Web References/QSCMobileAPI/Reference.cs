@@ -54,6 +54,8 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         
         private System.Threading.SendOrPostCallback getAccountsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getSupportedCountriesOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getOrderCountByStatusOperationCompleted;
         
         private System.Threading.SendOrPostCallback unblockIPOperationCompleted;
@@ -144,6 +146,9 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         
         /// <remarks/>
         public event getAccountsCompletedEventHandler getAccountsCompleted;
+        
+        /// <remarks/>
+        public event getSupportedCountriesCompletedEventHandler getSupportedCountriesCompleted;
         
         /// <remarks/>
         public event getOrderCountByStatusCompletedEventHandler getOrderCountByStatusCompleted;
@@ -479,6 +484,44 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             if ((this.getAccountsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getAccountsCompleted(this, new getAccountsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("countriesResponse")]
+        public getCountriesResponseDetail getSupportedCountries([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] bool includeRegions, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool includeRegionsSpecified, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] bool sortByCountryCode, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool sortByCountryCodeSpecified, [System.Xml.Serialization.XmlElementAttribute("orderSearchField", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] orderSearchField[] orderSearchField) {
+            object[] results = this.Invoke("getSupportedCountries", new object[] {
+                        includeRegions,
+                        includeRegionsSpecified,
+                        sortByCountryCode,
+                        sortByCountryCodeSpecified,
+                        orderSearchField});
+            return ((getCountriesResponseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getSupportedCountriesAsync(bool includeRegions, bool includeRegionsSpecified, bool sortByCountryCode, bool sortByCountryCodeSpecified, orderSearchField[] orderSearchField) {
+            this.getSupportedCountriesAsync(includeRegions, includeRegionsSpecified, sortByCountryCode, sortByCountryCodeSpecified, orderSearchField, null);
+        }
+        
+        /// <remarks/>
+        public void getSupportedCountriesAsync(bool includeRegions, bool includeRegionsSpecified, bool sortByCountryCode, bool sortByCountryCodeSpecified, orderSearchField[] orderSearchField, object userState) {
+            if ((this.getSupportedCountriesOperationCompleted == null)) {
+                this.getSupportedCountriesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetSupportedCountriesOperationCompleted);
+            }
+            this.InvokeAsync("getSupportedCountries", new object[] {
+                        includeRegions,
+                        includeRegionsSpecified,
+                        sortByCountryCode,
+                        sortByCountryCodeSpecified,
+                        orderSearchField}, this.getSupportedCountriesOperationCompleted, userState);
+        }
+        
+        private void OngetSupportedCountriesOperationCompleted(object arg) {
+            if ((this.getSupportedCountriesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getSupportedCountriesCompleted(this, new getSupportedCountriesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1409,6 +1452,194 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    public partial class orderCountryRegion {
+        
+        private string codeField;
+        
+        private string nameField;
+        
+        private string countryCodeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string code {
+            get {
+                return this.codeField;
+            }
+            set {
+                this.codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string countryCode {
+            get {
+                return this.countryCodeField;
+            }
+            set {
+                this.countryCodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    public partial class orderCountry {
+        
+        private bool postalCodeRequiredField;
+        
+        private string postalCodeRegexField;
+        
+        private string postalCodeHintField;
+        
+        private string phoneRegexField;
+        
+        private string phoneHintField;
+        
+        private string phoneMaskField;
+        
+        private orderCountryRegion[] regionsField;
+        
+        private string codeField;
+        
+        private string nameField;
+        
+        private long regionCountField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public bool postalCodeRequired {
+            get {
+                return this.postalCodeRequiredField;
+            }
+            set {
+                this.postalCodeRequiredField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string postalCodeRegex {
+            get {
+                return this.postalCodeRegexField;
+            }
+            set {
+                this.postalCodeRegexField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string postalCodeHint {
+            get {
+                return this.postalCodeHintField;
+            }
+            set {
+                this.postalCodeHintField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string phoneRegex {
+            get {
+                return this.phoneRegexField;
+            }
+            set {
+                this.phoneRegexField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string phoneHint {
+            get {
+                return this.phoneHintField;
+            }
+            set {
+                this.phoneHintField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string phoneMask {
+            get {
+                return this.phoneMaskField;
+            }
+            set {
+                this.phoneMaskField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("region", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public orderCountryRegion[] regions {
+            get {
+                return this.regionsField;
+            }
+            set {
+                this.regionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string code {
+            get {
+                return this.codeField;
+            }
+            set {
+                this.codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public long regionCount {
+            get {
+                return this.regionCountField;
+            }
+            set {
+                this.regionCountField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
     public partial class accountStatus {
         
         private string displayTextField;
@@ -1746,6 +1977,10 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         
         private string currencyCodeField;
         
+        private string currencySymbolField;
+        
+        private string displayTextField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public decimal value {
@@ -1765,6 +2000,28 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             }
             set {
                 this.currencyCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string currencySymbol {
+            get {
+                return this.currencySymbolField;
+            }
+            set {
+                this.currencySymbolField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string displayText {
+            get {
+                return this.displayTextField;
+            }
+            set {
+                this.displayTextField = value;
             }
         }
     }
@@ -2979,6 +3236,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrdersResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getIPAddressResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrderCountByStatusResponseDetail))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getCountriesResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getAccountResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrderHistoryResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrderResponseDetail))]
@@ -3117,6 +3375,42 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             }
             set {
                 this.orderCountByStatusField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    public partial class getCountriesResponseDetail : responseDetail {
+        
+        private long resultSizeField;
+        
+        private orderCountry[] countriesField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long resultSize {
+            get {
+                return this.resultSizeField;
+            }
+            set {
+                this.resultSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("country", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public orderCountry[] countries {
+            get {
+                return this.countriesField;
+            }
+            set {
+                this.countriesField = value;
             }
         }
     }
@@ -3410,6 +3704,32 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((getAccountResponseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getSupportedCountriesCompletedEventHandler(object sender, getSupportedCountriesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getSupportedCountriesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getSupportedCountriesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public getCountriesResponseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((getCountriesResponseDetail)(this.results[0]));
             }
         }
     }

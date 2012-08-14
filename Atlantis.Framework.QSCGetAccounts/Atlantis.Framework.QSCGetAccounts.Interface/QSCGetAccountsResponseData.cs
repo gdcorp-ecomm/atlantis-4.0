@@ -53,23 +53,6 @@ namespace Atlantis.Framework.QSCGetAccounts.Interface
       }
     }
 
-    private bool _isSuccess;
-    public bool IsSuccess
-    {
-      get
-      {
-        _isSuccess = false;
-        if (this.response != null)
-        {
-          _isSuccess = (responseStatus == QSCStatusCodes.SUCCESS);
-        }
-
-        return _isSuccess;
-      }
-
-      set { _isSuccess = value; }
-    }
-
     public IList<account> AccountList
     {
       get { return response.accounts.ToList(); }

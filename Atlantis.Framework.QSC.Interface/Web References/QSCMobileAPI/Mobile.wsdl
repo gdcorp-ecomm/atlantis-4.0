@@ -26,6 +26,8 @@
       <xs:element name="getOrderSearchParametersResponse" type="tns:getOrderSearchParametersResponse" />
       <xs:element name="getOrders" type="tns:getOrders" />
       <xs:element name="getOrdersResponse" type="tns:getOrdersResponse" />
+      <xs:element name="getSupportedCountries" type="tns:getSupportedCountries" />
+      <xs:element name="getSupportedCountriesResponse" type="tns:getSupportedCountriesResponse" />
       <xs:element name="orderCount" type="tns:getOrderCountByStatusResponseDetail" />
       <xs:element name="ping" type="tns:ping" />
       <xs:element name="pingResponse" type="tns:pingResponse" />
@@ -212,6 +214,8 @@
         <xs:sequence />
         <xs:attribute name="value" type="xs:decimal" use="required" />
         <xs:attribute name="currencyCode" type="xs:string" use="required" />
+        <xs:attribute name="currencySymbol" type="xs:string" use="required" />
+        <xs:attribute name="displayText" type="xs:string" use="required" />
       </xs:complexType>
       <xs:complexType name="package">
         <xs:sequence>
@@ -472,6 +476,67 @@
         </xs:sequence>
         <xs:attribute name="key" type="xs:string" use="required" />
       </xs:complexType>
+      <xs:complexType name="getSupportedCountries">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="includeRegions" type="xs:boolean" />
+          <xs:element minOccurs="0" name="sortByCountryCode" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="orderSearchField" type="tns:orderSearchField" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="orderSearchField">
+        <xs:sequence>
+          <xs:element name="property" type="xs:string" />
+          <xs:element default="" name="value" type="xs:string" />
+          <xs:element minOccurs="0" name="label" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getSupportedCountriesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="countriesResponse" type="tns:getCountriesResponseDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCountriesResponseDetail">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:responseDetail">
+            <xs:sequence>
+              <xs:element name="resultSize" type="xs:long" />
+              <xs:element minOccurs="0" name="countries">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="country" type="tns:orderCountry" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="orderCountry">
+        <xs:sequence>
+          <xs:element name="postalCodeRequired" type="xs:boolean" />
+          <xs:element name="postalCodeRegex" type="xs:string" />
+          <xs:element name="postalCodeHint" type="xs:string" />
+          <xs:element name="phoneRegex" type="xs:string" />
+          <xs:element name="phoneHint" type="xs:string" />
+          <xs:element name="phoneMask" type="xs:string" />
+          <xs:element minOccurs="0" name="regions">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="region" type="tns:orderCountryRegion" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="code" type="xs:string" use="required" />
+        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="regionCount" type="xs:long" use="required" />
+      </xs:complexType>
+      <xs:complexType name="orderCountryRegion">
+        <xs:sequence />
+        <xs:attribute name="code" type="xs:string" use="required" />
+        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="countryCode" type="xs:string" />
+      </xs:complexType>
       <xs:complexType name="getOrderCountByStatus">
         <xs:sequence>
           <xs:element minOccurs="0" name="accountUId" type="xs:string" />
@@ -581,13 +646,6 @@
           <xs:element name="pageNumber" type="xs:int" />
           <xs:element name="pageSize" type="xs:int" />
           <xs:element minOccurs="0" maxOccurs="unbounded" name="orderSearchField" type="tns:orderSearchField" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="orderSearchField">
-        <xs:sequence>
-          <xs:element name="property" type="xs:string" />
-          <xs:element default="" name="value" type="xs:string" />
-          <xs:element minOccurs="0" name="label" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="getOrdersResponse">
@@ -780,6 +838,9 @@
   <wsdl:message name="getOrder">
     <wsdl:part name="parameters" element="tns:getOrder" />
   </wsdl:message>
+  <wsdl:message name="getSupportedCountries">
+    <wsdl:part name="parameters" element="tns:getSupportedCountries" />
+  </wsdl:message>
   <wsdl:message name="captureAllPayments">
     <wsdl:part name="parameters" element="tns:captureAllPayments" />
   </wsdl:message>
@@ -801,11 +862,11 @@
   <wsdl:message name="addPackage">
     <wsdl:part name="parameters" element="tns:addPackage" />
   </wsdl:message>
-  <wsdl:message name="unblockIP">
-    <wsdl:part name="parameters" element="tns:unblockIP" />
-  </wsdl:message>
   <wsdl:message name="getBlockedIPAddresses">
     <wsdl:part name="parameters" element="tns:getBlockedIPAddresses" />
+  </wsdl:message>
+  <wsdl:message name="unblockIP">
+    <wsdl:part name="parameters" element="tns:unblockIP" />
   </wsdl:message>
   <wsdl:message name="captureAllPaymentsResponse">
     <wsdl:part name="parameters" element="tns:captureAllPaymentsResponse" />
@@ -827,6 +888,9 @@
   </wsdl:message>
   <wsdl:message name="editOrderEmailResponse">
     <wsdl:part name="parameters" element="tns:editOrderEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSupportedCountriesResponse">
+    <wsdl:part name="parameters" element="tns:getSupportedCountriesResponse" />
   </wsdl:message>
   <wsdl:message name="updateOrderStatusResponse">
     <wsdl:part name="parameters" element="tns:updateOrderStatusResponse" />
@@ -904,6 +968,11 @@
       <wsdl:documentation>Returns a list of QSC accounts associated with supplied shopperId.</wsdl:documentation>
       <wsdl:input name="getAccounts" message="tns:getAccounts" />
       <wsdl:output name="getAccountsResponse" message="tns:getAccountsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSupportedCountries">
+      <wsdl:documentation>Returns a list of QSC supported countries</wsdl:documentation>
+      <wsdl:input name="getSupportedCountries" message="tns:getSupportedCountries" />
+      <wsdl:output name="getSupportedCountriesResponse" message="tns:getSupportedCountriesResponse" />
     </wsdl:operation>
     <wsdl:operation name="getOrderCountByStatus">
       <wsdl:documentation>Returns a list of blocked IP addresses by account UID</wsdl:documentation>
@@ -1050,6 +1119,15 @@
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="refundOrderResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSupportedCountries">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getSupportedCountries">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSupportedCountriesResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

@@ -207,6 +207,9 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
           case "nullpayment":
             type = "No associated payment method";
             break;
+          default:
+            type = ProfileType;
+            break;
         }
         return type;
       }

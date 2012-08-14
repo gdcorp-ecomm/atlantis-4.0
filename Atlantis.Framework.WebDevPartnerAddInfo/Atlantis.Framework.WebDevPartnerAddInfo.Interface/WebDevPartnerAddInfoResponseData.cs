@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Atlantis.Framework.Interface;
-using System.Xml.Serialization;
 using System.IO;
+using System.Text;
 using System.Xml;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.WebDevPartnerAddInfo.Interface
 {

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Nimitz;
 using Atlantis.Framework.WebDevPartnerAddInfo.Interface;
 
 namespace Atlantis.Framework.WebDevPartnerAddInfo.Impl

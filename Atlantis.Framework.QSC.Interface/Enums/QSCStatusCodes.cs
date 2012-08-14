@@ -4,6 +4,7 @@
   {
     SUCCESS,
     SUCCESS_WITH_WARNINGS, 
-    FAILURE
+    FAILURE,
+		VALIDATION_ERROR
   }
 }

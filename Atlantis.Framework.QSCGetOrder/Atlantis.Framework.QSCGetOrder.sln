@@ -1,0 +1,132 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7C5872D5-92A6-40AB-AA9E-35EE0D4521E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCGetOrder.Impl", "Atlantis.Framework.QSCGetOrder.Impl\Atlantis.Framework.QSCGetOrder.Impl.csproj", "{AD333AB4-6B04-49FE-B1FF-D6499CBFD898}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCGetOrder.Interface", "Atlantis.Framework.QSCGetOrder.Interface\Atlantis.Framework.QSCGetOrder.Interface.csproj", "{FAC72203-5330-4F7E-A90B-D628BF2F3D25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCGetOrder.Tests", "Atlantis.Framework.QSCGetOrder.Tests\Atlantis.Framework.QSCGetOrder.Tests.csproj", "{3FF6FE14-ADE7-4727-8969-82EC8BA6D4EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6A10F4BD-CC76-4FA4-BD70-490DB9CE5FD3}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.QSCGetOrder.vsmdi = Atlantis.Framework.QSCGetOrder.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSC.Interface", "..\Atlantis.Framework.QSC.Interface\Atlantis.Framework.QSC.Interface.csproj", "{A5D5AEB8-498A-487E-835A-A1262CBBC747}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.QSCGetOrder.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.QSCGetOrder.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.QSCGetOrder.Impl\\Atlantis.Framework.QSCGetOrder.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.QSCGetOrder.Impl
+		SccLocalPath3 = Atlantis.Framework.QSCGetOrder.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.QSCGetOrder.Interface\\Atlantis.Framework.QSCGetOrder.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.QSCGetOrder.Interface
+		SccLocalPath4 = Atlantis.Framework.QSCGetOrder.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.QSCGetOrder.Tests\\Atlantis.Framework.QSCGetOrder.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.QSCGetOrder.Tests
+		SccLocalPath5 = Atlantis.Framework.QSCGetOrder.Tests
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.QSC.Interface\\Atlantis.Framework.QSC.Interface.csproj
+		SccProjectName6 = ../Atlantis.Framework.QSC.Interface
+		SccLocalPath6 = ..\\Atlantis.Framework.QSC.Interface
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.QSCGetOrder.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|x86.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|x86.ActiveCfg = Release|Any CPU
+		{AD333AB4-6B04-49FE-B1FF-D6499CBFD898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD333AB4-6B04-49FE-B1FF-D6499CBFD898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD333AB4-6B04-49FE-B1FF-D6499CBFD898}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AD333AB4-6B04-49FE-B1FF-D6499CBFD898}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AD333AB4-6B04-49FE-B1FF-D6499CBFD898}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AD333AB4-6B04-49FE-B1FF-D6499CBFD898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD333AB4-6B04-49FE-B1FF-D6499CBFD898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD333AB4-6B04-49FE-B1FF-D6499CBFD898}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AD333AB4-6B04-49FE-B1FF-D6499CBFD898}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AD333AB4-6B04-49FE-B1FF-D6499CBFD898}.Release|x86.ActiveCfg = Release|Any CPU
+		{FAC72203-5330-4F7E-A90B-D628BF2F3D25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC72203-5330-4F7E-A90B-D628BF2F3D25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC72203-5330-4F7E-A90B-D628BF2F3D25}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FAC72203-5330-4F7E-A90B-D628BF2F3D25}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FAC72203-5330-4F7E-A90B-D628BF2F3D25}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FAC72203-5330-4F7E-A90B-D628BF2F3D25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAC72203-5330-4F7E-A90B-D628BF2F3D25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAC72203-5330-4F7E-A90B-D628BF2F3D25}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FAC72203-5330-4F7E-A90B-D628BF2F3D25}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FAC72203-5330-4F7E-A90B-D628BF2F3D25}.Release|x86.ActiveCfg = Release|Any CPU
+		{3FF6FE14-ADE7-4727-8969-82EC8BA6D4EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FF6FE14-ADE7-4727-8969-82EC8BA6D4EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FF6FE14-ADE7-4727-8969-82EC8BA6D4EF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3FF6FE14-ADE7-4727-8969-82EC8BA6D4EF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3FF6FE14-ADE7-4727-8969-82EC8BA6D4EF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3FF6FE14-ADE7-4727-8969-82EC8BA6D4EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FF6FE14-ADE7-4727-8969-82EC8BA6D4EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FF6FE14-ADE7-4727-8969-82EC8BA6D4EF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3FF6FE14-ADE7-4727-8969-82EC8BA6D4EF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3FF6FE14-ADE7-4727-8969-82EC8BA6D4EF}.Release|x86.ActiveCfg = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {7C5872D5-92A6-40AB-AA9E-35EE0D4521E1}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {7C5872D5-92A6-40AB-AA9E-35EE0D4521E1}
+	EndGlobalSection
+EndGlobal

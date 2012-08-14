@@ -63,7 +63,7 @@ namespace Atlantis.Framework.CommerceOrderXml.Tests
     [DeploymentItem("atlantis.config")]
     public void CommerceOrderXmlTest()
     {
-      string recentOrderId = "1442138";
+      string recentOrderId = "1467535";
       CommerceOrderXmlRequestData request = new CommerceOrderXmlRequestData(_shopperId
          , string.Empty
          , string.Empty

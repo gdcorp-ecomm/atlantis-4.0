@@ -14,13 +14,16 @@ namespace Atlantis.Framework.CommerceOrderXml.Impl
       try
       {
         CommerceOrderXmlRequestData commerceOrderRequestData = (CommerceOrderXmlRequestData)requestData;
-        WsceCommerce.WsceCommerceService commerceOrderWS = new WsceCommerceService();
-        commerceOrderWS.Url = (((WsConfigElement)config).WSURL);
-        commerceOrderWS.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+        using(WsceCommerce.WsceCommerceService commerceOrderWS = new WsceCommerceService())
+        {
+          commerceOrderWS.Url = (((WsConfigElement)config).WSURL);
+          commerceOrderWS.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
 
-        string responseXml = commerceOrderWS.GetOrderXML(commerceOrderRequestData.RecentOrderId, commerceOrderRequestData.ShopperID);
+          string responseXml = commerceOrderWS.GetOrderXML(commerceOrderRequestData.RecentOrderId, commerceOrderRequestData.ShopperID);
 
-        responseData = new CommerceOrderXmlResponseData(responseXml);
+          responseData = new CommerceOrderXmlResponseData(responseXml);        
+        }
+
       }
 
       catch (AtlantisException exAtlantis)

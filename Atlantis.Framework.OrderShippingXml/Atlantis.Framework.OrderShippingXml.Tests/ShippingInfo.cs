@@ -72,7 +72,7 @@ namespace Atlantis.Framework.OrderShippingXml.Tests
 
       request.RequestTimeout = TimeSpan.FromSeconds(10);
 
-      OrderShippingXmlResponseData response = (OrderShippingXmlResponseData)Engine.Engine.ProcessRequest(request, 575);
+      OrderShippingXmlResponseData response = (OrderShippingXmlResponseData)Engine.Engine.ProcessRequest(request, 576);
       Assert.IsTrue(response.IsSuccess);
  
     }

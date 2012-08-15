@@ -75,10 +75,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetPayme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetPaymentProfileAlternate.Impl", "..\Atlantis.Framework.GetPaymentProfileAlternate\Atlantis.Framework.GetPaymentProfileAlternate.Impl\Atlantis.Framework.GetPaymentProfileAlternate.Impl.csproj", "{201B3981-164A-4563-8454-E8286E988FC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetPaymentProfiles.Interface", "..\Atlantis.Framework.GetPaymentProfiles\Atlantis.Framework.GetPaymentProfiles.Interface\Atlantis.Framework.GetPaymentProfiles.Interface.csproj", "{09E0EE3D-9392-4AB2-B8AE-EFF09749B357}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.GetPaymentProfiles.Impl", "..\Atlantis.Framework.GetPaymentProfiles\Atlantis.Framework.GetPaymentProfiles.Impl\Atlantis.Framework.GetPaymentProfiles.Impl.csproj", "{7456CF05-8A16-4A40-964F-0D56EFEBB78E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PromoData.Interface", "..\Atlantis.Framework.PromoData\Atlantis.Framework.PromoData.Interface\Atlantis.Framework.PromoData.Interface.csproj", "{42E827B4-1E98-453B-8A36-009C201DD85A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PromoData.Impl", "..\Atlantis.Framework.PromoData\Atlantis.Framework.PromoData.Impl\Atlantis.Framework.PromoData.Impl.csproj", "{8EB9D6B2-C2B6-4CD3-BEAE-2C22347A81DA}"

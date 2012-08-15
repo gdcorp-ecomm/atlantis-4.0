@@ -10,9 +10,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 {
   internal class PLConfirmationEmail : PurchaseConfirmationEmailBase
   {
-    private const int _DBPPRIVATELABELID = 1695;
-    private const int _MEPRIVATELABELID = 435560;
-    private const int _WWDPRIVATELABELID = 1387;
     private const int _SUPERRESELLERTYPE = 5;
 
     public PLConfirmationEmail(OrderData orderData, EmailRequired emailRequired, ObjectProviderContainer objectContainer)
@@ -80,7 +77,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       string accountInfoText = string.Empty;
       if (EmailTemplate.Id != EmailTemplateType.RefundConfirmation_ME)
       {
-        if (Order.PrivateLabelId == _DBPPRIVATELABELID)
+        if (Order.PrivateLabelId == PrivateLabelIDs.DBP_PRIVATELABELID)
         {
           accountInfoText = string.Format("Your login name is {0}.\nYour account email is {1}.", LoginName, ShopperData.GetField("email"));
         }
@@ -106,11 +103,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
           }
           else
           {
-            if (Order.PrivateLabelId == _MEPRIVATELABELID) //ME
+            if (Order.PrivateLabelId == PrivateLabelIDs.ME_PRIVATELABELID) //ME
             {
               temp = EmailTemplates[EmailTemplateType.RefundConfirmation_ME];
             }
-            else if (SiteContext.PrivateLabelId == 1695) //DBP
+            else if (SiteContext.PrivateLabelId == PrivateLabelIDs.DBP_PRIVATELABELID) //DBP
             {
               temp = EmailTemplates[EmailTemplateType.RefundConfirmation_DBP];
             }
@@ -128,7 +125,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
           }
           else
           {
-            if (SiteContext.PrivateLabelId == _WWDPRIVATELABELID) //WWD
+            if (SiteContext.PrivateLabelId == PrivateLabelIDs.WWD_PRIVATELABELID) //WWD
             {
               temp = EmailTemplates[EmailTemplateType.OrderConfirmation_WWD];
             }
@@ -140,7 +137,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
               }
               else
               {
-                if (SiteContext.PrivateLabelId == _DBPPRIVATELABELID) // DBP
+                if (SiteContext.PrivateLabelId == PrivateLabelIDs.DBP_PRIVATELABELID) // DBP
                 {
                   temp = EmailTemplates[EmailTemplateType.OrderConfirmation_DBP];
                 }

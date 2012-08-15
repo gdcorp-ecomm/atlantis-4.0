@@ -26,6 +26,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
     private List<EULAItem> _usedEulaItems;
     private Dictionary<string, EULAItem> ListPageIds = new Dictionary<string, EULAItem>();
 
+    private const string POLICY_RELATIVE_PATH = "policy/ShowDoc.aspx";
     private const string LEGAL_RELATIVE_PATH = "agreements/ShowDoc.aspx";
     private const string TOPIC_RELATIVE_PATH = "topic/";
     private const string ARTICLE_RELATIVE_PATH = "article/";
@@ -132,21 +133,16 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
             pagIdsUsed = new List<string>();
             _usedEulaItems = new List<EULAItem>();
             string pageID = string.Empty;
-            if (_orderData.PrivateLabelId == 1695)
-            {
-              pageID = "domain_nameproxy";
-
-            }
-            else
+            if (_orderData.PrivateLabelId != PrivateLabelIDs.DBP_PRIVATELABELID)
             {
               pageID = "UTOS";
+              EULAItem currentItem = GetEULAData(pageID);
+              string legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageID, "isc", "{isc}", "prog_id", _orderData.ProgId);
+              currentItem.PageId = pageID;
+              currentItem.LegalAgreementURL = legalAgreementURL;
+              currentItem.ProductName = "Universal Terms of Service";
+              AddUniqueEULAItem(ref _usedEulaItems, currentItem);
             }
-            EULAItem currentItem = GetEULAData(pageID);
-            string legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageID, "isc", "{isc}", "prog_id", _orderData.ProgId);
-            currentItem.PageId = pageID;
-            currentItem.LegalAgreementURL = legalAgreementURL;
-            currentItem.ProductName = "Universal Terms of Service";
-            AddUniqueEULAItem(ref _usedEulaItems, currentItem);
             BuildItemEulaList(ref _usedEulaItems);
             BuildAutoActivationEulaList(ref _usedEulaItems);
             isConfigured = true;
@@ -682,10 +678,20 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           break;
         case EULARuleType.Dbp:
-          productName = "Private Registration";
-          productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "248", QueryParamMode.CommonParameters, false, queryStringArgs);
-          pageid = "DOMAIN_NAMEPROXY";
-          legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
+          if (_orderData.PrivateLabelId == PrivateLabelIDs.DBP_PRIVATELABELID)
+          {
+            productName = "Private Registration";
+            productInfoURL = _links.GetUrl(LinkTypes.SiteRoot, "FAQ.aspx", QueryParamMode.CommonParameters, true, "prog_id", _orderData.ProgId);
+            pageid = "DOMAIN_NAMEPROXY";
+            legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, POLICY_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
+          }
+          else
+          {
+            productName = "Private Registration";
+            productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, "248", QueryParamMode.CommonParameters, false, queryStringArgs);
+            pageid = "DOMAIN_NAMEPROXY";
+            legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
+          }
           break;
         case EULARuleType.Hosting:
           productName = "Hosting";

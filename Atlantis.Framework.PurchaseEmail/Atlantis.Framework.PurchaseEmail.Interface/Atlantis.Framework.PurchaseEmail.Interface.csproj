@@ -98,6 +98,7 @@
     <Compile Include="Emails\MEConfirmationEmail.cs" />
     <Compile Include="Emails\MerchantInfo.cs" />
     <Compile Include="Emails\PLConfirmationEmail.cs" />
+    <Compile Include="Emails\PrivateLabelIDs.cs" />
     <Compile Include="Emails\ProductIds.cs" />
     <Compile Include="Emails\ProductNames.cs" />
     <Compile Include="Emails\PurchaseConfirmationEmailBase.cs" />

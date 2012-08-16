@@ -681,9 +681,9 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           if (_orderData.PrivateLabelId == PrivateLabelIDs.DBP_PRIVATELABELID)
           {
             productName = "Private Registration";
-            productInfoURL = _links.GetUrl(LinkTypes.SiteRoot, "FAQ.aspx", QueryParamMode.CommonParameters, true, "prog_id", _orderData.ProgId);
+            productInfoURL = _links.GetUrl(LinkTypes.DomainsByProxy, "FAQ.aspx", QueryParamMode.CommonParameters, true, "prog_id", _orderData.ProgId);
             pageid = "DOMAIN_NAMEPROXY";
-            legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, POLICY_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
+            legalAgreementURL = _links.GetUrl(LinkTypes.DomainsByProxy, POLICY_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);
           }
           else
           {

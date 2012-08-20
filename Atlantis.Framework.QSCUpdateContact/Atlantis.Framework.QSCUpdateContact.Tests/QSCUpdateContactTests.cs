@@ -2,6 +2,7 @@
 using Atlantis.Framework.QSC.Interface.Constants;
 using Atlantis.Framework.QSCUpdateContact.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.QSC.Interface.QSCMobileAPI;
 
 namespace Atlantis.Framework.QSCUpdateContact.Tests
 {
@@ -15,6 +16,19 @@ namespace Atlantis.Framework.QSCUpdateContact.Tests
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";
       string _invoiceId = "2074";
       string _contactType = QSCContactTypes.BILL_TO;
+
+			orderContact _contact = new orderContact();
+			_contact.firstName = "Thomas";
+			_contact.lastName = "Riedy";
+			_contact.addressLine1 = "123 Main Street";
+			_contact.addressLine2 = "Apt. 24";
+			_contact.city = "Phoenix";
+			_contact.regionCode = "AZ";
+			_contact.postalCode = "85018";
+			_contact.countryCode = "US";
+			_contact.contactType = QSCContactTypes.BILL_TO;
+			_contact.phoneNumber = "4805058800";
+
       int requestId = 556;
 
       QSCUpdateContactRequestData request = new QSCUpdateContactRequestData(_shopperId, "",
@@ -23,20 +37,7 @@ namespace Atlantis.Framework.QSCUpdateContact.Tests
         1,
         _accountUid,
         _invoiceId,
-        null,
-        "Thomas",
-        null,
-        "Riedy",
-        null,
-        "123 Main Street",
-        "Apt. 24",
-        "Phoenix",
-        "AZ",
-        "85018",
-        "US",
-        "triedy@godaddy.com",
-        "(480) 330-4866",
-        _contactType);
+				_contact);
 
       request.RequestTimeout = TimeSpan.FromSeconds(30);
 
@@ -52,29 +53,28 @@ namespace Atlantis.Framework.QSCUpdateContact.Tests
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";
       string _invoiceId = "2074";
-      string _contactType = QSCContactTypes.BILL_TO ;
       int requestId = 556;
+
+			orderContact _contact = new orderContact();
+			_contact.firstName = "Ed";
+			_contact.lastName = "Testeruser";
+			_contact.addressLine1 = "133 E Hollywood Dr";
+			_contact.addressLine2 = "Apt. 7738";
+			_contact.city = "Hollywood";
+			_contact.regionCode = "CA";
+			_contact.postalCode = "90028";
+			_contact.countryCode = "US";
+			_contact.email = "rmartin@godaddy.com";
+			_contact.phoneNumber = "(778) 555-5555";
+			_contact.contactType = QSCContactTypes.BILL_TO;
 
       QSCUpdateContactRequestData request = new QSCUpdateContactRequestData(_shopperId, "", 
         string.Empty, 
         string.Empty, 
         1, 
         _accountUid, 
-        _invoiceId, 
-        null, 
-        "Ed", 
-        null, 
-        "Testeruser", 
-        null, 
-        "133 E Hollywood Dr", 
-        "Apt. 7738", 
-        "Hollywood", 
-        "CA", 
-        "90028", 
-        "US", 
-        "rmartin@godaddy.com", 
-        "(778) 555-5555", 
-        _contactType);
+        _invoiceId,
+ 				_contact);
 
       request.RequestTimeout = TimeSpan.FromSeconds(30);
 

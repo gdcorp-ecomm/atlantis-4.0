@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCUpdateContact.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.updateContact(request.AccountUid, request.InvoiceId, request.OrderContact);
+            response = service.updateContact(request.AccountUid, request.InvoiceId, request.Contact);
 
             if (response != null)
               responseData = new QSCUpdateContactResponseData((response as responseDetail));

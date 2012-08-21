@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="MobileSoapBinding", Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="Mobile-v1.0SoapBinding", Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(orderStatus[]))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(package[]))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(shipping[]))]
@@ -34,58 +34,58 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(orderCoupon[]))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(account[]))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(orderSearchFieldDef[]))]
-    public partial class Mobile : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    public partial class Mobilev10 : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback getOrderOperationCompleted;
+        private System.Threading.SendOrPostCallback getBlockedIPAddressesOperationCompleted;
         
-        private System.Threading.SendOrPostCallback updateOrderNotesOperationCompleted;
+        private System.Threading.SendOrPostCallback refundOrderOperationCompleted;
         
-        private System.Threading.SendOrPostCallback blockIPOperationCompleted;
+        private System.Threading.SendOrPostCallback getOrderCountByStatusOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getSupportedCountriesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback updateContactOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback pingOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback updatePackageOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getOrdersOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback addPackageOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback unblockIPOperationCompleted;
         
         private System.Threading.SendOrPostCallback resendOrderEmailOperationCompleted;
         
         private System.Threading.SendOrPostCallback editOrderEmailOperationCompleted;
         
-        private System.Threading.SendOrPostCallback updateOrderStatusOperationCompleted;
+        private System.Threading.SendOrPostCallback blockIPOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getOrderOperationCompleted;
         
         private System.Threading.SendOrPostCallback getOrderHistoryOperationCompleted;
         
-        private System.Threading.SendOrPostCallback refundOrderOperationCompleted;
-        
         private System.Threading.SendOrPostCallback getAccountsOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getSupportedCountriesOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getOrderCountByStatusOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback unblockIPOperationCompleted;
         
         private System.Threading.SendOrPostCallback captureAllPaymentsOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getBlockedIPAddressesOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback removePackageOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback pingOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getOrdersOperationCompleted;
+        private System.Threading.SendOrPostCallback capturePaymentOperationCompleted;
         
         private System.Threading.SendOrPostCallback voiceAuthCaptureOperationCompleted;
         
-        private System.Threading.SendOrPostCallback capturePaymentOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback addPackageOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback updateContactOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback updatePackageOperationCompleted;
+        private System.Threading.SendOrPostCallback removePackageOperationCompleted;
         
         private System.Threading.SendOrPostCallback getOrderSearchParametersOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback updateOrderStatusOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback updateOrderNotesOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public Mobile() {
+        public Mobilev10() {
             this.Url = global::Atlantis.Framework.QSC.Interface.Properties.Settings.Default.Atlantis_Framework_QSC_Interface_QSCMobileAPI_Mobile;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
@@ -121,13 +121,34 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        public event getOrderCompletedEventHandler getOrderCompleted;
+        public event getBlockedIPAddressesCompletedEventHandler getBlockedIPAddressesCompleted;
         
         /// <remarks/>
-        public event updateOrderNotesCompletedEventHandler updateOrderNotesCompleted;
+        public event refundOrderCompletedEventHandler refundOrderCompleted;
         
         /// <remarks/>
-        public event blockIPCompletedEventHandler blockIPCompleted;
+        public event getOrderCountByStatusCompletedEventHandler getOrderCountByStatusCompleted;
+        
+        /// <remarks/>
+        public event getSupportedCountriesCompletedEventHandler getSupportedCountriesCompleted;
+        
+        /// <remarks/>
+        public event updateContactCompletedEventHandler updateContactCompleted;
+        
+        /// <remarks/>
+        public event pingCompletedEventHandler pingCompleted;
+        
+        /// <remarks/>
+        public event updatePackageCompletedEventHandler updatePackageCompleted;
+        
+        /// <remarks/>
+        public event getOrdersCompletedEventHandler getOrdersCompleted;
+        
+        /// <remarks/>
+        public event addPackageCompletedEventHandler addPackageCompleted;
+        
+        /// <remarks/>
+        public event unblockIPCompletedEventHandler unblockIPCompleted;
         
         /// <remarks/>
         public event resendOrderEmailCompletedEventHandler resendOrderEmailCompleted;
@@ -136,163 +157,395 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         public event editOrderEmailCompletedEventHandler editOrderEmailCompleted;
         
         /// <remarks/>
-        public event updateOrderStatusCompletedEventHandler updateOrderStatusCompleted;
+        public event blockIPCompletedEventHandler blockIPCompleted;
+        
+        /// <remarks/>
+        public event getOrderCompletedEventHandler getOrderCompleted;
         
         /// <remarks/>
         public event getOrderHistoryCompletedEventHandler getOrderHistoryCompleted;
         
         /// <remarks/>
-        public event refundOrderCompletedEventHandler refundOrderCompleted;
-        
-        /// <remarks/>
         public event getAccountsCompletedEventHandler getAccountsCompleted;
-        
-        /// <remarks/>
-        public event getSupportedCountriesCompletedEventHandler getSupportedCountriesCompleted;
-        
-        /// <remarks/>
-        public event getOrderCountByStatusCompletedEventHandler getOrderCountByStatusCompleted;
-        
-        /// <remarks/>
-        public event unblockIPCompletedEventHandler unblockIPCompleted;
         
         /// <remarks/>
         public event captureAllPaymentsCompletedEventHandler captureAllPaymentsCompleted;
         
         /// <remarks/>
-        public event getBlockedIPAddressesCompletedEventHandler getBlockedIPAddressesCompleted;
-        
-        /// <remarks/>
-        public event removePackageCompletedEventHandler removePackageCompleted;
-        
-        /// <remarks/>
-        public event pingCompletedEventHandler pingCompleted;
-        
-        /// <remarks/>
-        public event getOrdersCompletedEventHandler getOrdersCompleted;
+        public event capturePaymentCompletedEventHandler capturePaymentCompleted;
         
         /// <remarks/>
         public event voiceAuthCaptureCompletedEventHandler voiceAuthCaptureCompleted;
         
         /// <remarks/>
-        public event capturePaymentCompletedEventHandler capturePaymentCompleted;
-        
-        /// <remarks/>
-        public event addPackageCompletedEventHandler addPackageCompleted;
-        
-        /// <remarks/>
-        public event updateContactCompletedEventHandler updateContactCompleted;
-        
-        /// <remarks/>
-        public event updatePackageCompletedEventHandler updatePackageCompleted;
+        public event removePackageCompletedEventHandler removePackageCompleted;
         
         /// <remarks/>
         public event getOrderSearchParametersCompletedEventHandler getOrderSearchParametersCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("orderResponse")]
-        public getOrderResponseDetail getOrder([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId) {
-            object[] results = this.Invoke("getOrder", new object[] {
+        public event updateOrderStatusCompletedEventHandler updateOrderStatusCompleted;
+        
+        /// <remarks/>
+        public event updateOrderNotesCompletedEventHandler updateOrderNotesCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("blockedIPAddressResponse", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public getIPAddressResponseDetail getBlockedIPAddresses([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId) {
+            object[] results = this.Invoke("getBlockedIPAddresses", new object[] {
                         accountUId,
-                        invoiceId});
-            return ((getOrderResponseDetail)(results[0]));
+                        shopperId});
+            return ((getIPAddressResponseDetail)(results[0]));
         }
         
         /// <remarks/>
-        public void getOrderAsync(string accountUId, string invoiceId) {
-            this.getOrderAsync(accountUId, invoiceId, null);
+        public void getBlockedIPAddressesAsync(string accountUId, string shopperId) {
+            this.getBlockedIPAddressesAsync(accountUId, shopperId, null);
         }
         
         /// <remarks/>
-        public void getOrderAsync(string accountUId, string invoiceId, object userState) {
-            if ((this.getOrderOperationCompleted == null)) {
-                this.getOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetOrderOperationCompleted);
+        public void getBlockedIPAddressesAsync(string accountUId, string shopperId, object userState) {
+            if ((this.getBlockedIPAddressesOperationCompleted == null)) {
+                this.getBlockedIPAddressesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetBlockedIPAddressesOperationCompleted);
             }
-            this.InvokeAsync("getOrder", new object[] {
+            this.InvokeAsync("getBlockedIPAddresses", new object[] {
                         accountUId,
-                        invoiceId}, this.getOrderOperationCompleted, userState);
+                        shopperId}, this.getBlockedIPAddressesOperationCompleted, userState);
         }
         
-        private void OngetOrderOperationCompleted(object arg) {
-            if ((this.getOrderCompleted != null)) {
+        private void OngetBlockedIPAddressesOperationCompleted(object arg) {
+            if ((this.getBlockedIPAddressesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getOrderCompleted(this, new getOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getBlockedIPAddressesCompleted(this, new getBlockedIPAddressesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail updateOrderNotes([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string orderNotes) {
-            object[] results = this.Invoke("updateOrderNotes", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail refundOrder([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId) {
+            object[] results = this.Invoke("refundOrder", new object[] {
                         accountUId,
-                        invoiceId,
-                        orderNotes});
+                        shopperId,
+                        invoiceId});
             return ((responseDetail)(results[0]));
         }
         
         /// <remarks/>
-        public void updateOrderNotesAsync(string accountUId, string invoiceId, string orderNotes) {
-            this.updateOrderNotesAsync(accountUId, invoiceId, orderNotes, null);
+        public void refundOrderAsync(string accountUId, string shopperId, string invoiceId) {
+            this.refundOrderAsync(accountUId, shopperId, invoiceId, null);
         }
         
         /// <remarks/>
-        public void updateOrderNotesAsync(string accountUId, string invoiceId, string orderNotes, object userState) {
-            if ((this.updateOrderNotesOperationCompleted == null)) {
-                this.updateOrderNotesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateOrderNotesOperationCompleted);
+        public void refundOrderAsync(string accountUId, string shopperId, string invoiceId, object userState) {
+            if ((this.refundOrderOperationCompleted == null)) {
+                this.refundOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnrefundOrderOperationCompleted);
             }
-            this.InvokeAsync("updateOrderNotes", new object[] {
+            this.InvokeAsync("refundOrder", new object[] {
                         accountUId,
-                        invoiceId,
-                        orderNotes}, this.updateOrderNotesOperationCompleted, userState);
+                        shopperId,
+                        invoiceId}, this.refundOrderOperationCompleted, userState);
         }
         
-        private void OnupdateOrderNotesOperationCompleted(object arg) {
-            if ((this.updateOrderNotesCompleted != null)) {
+        private void OnrefundOrderOperationCompleted(object arg) {
+            if ((this.refundOrderCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.updateOrderNotesCompleted(this, new updateOrderNotesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.refundOrderCompleted(this, new refundOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail blockIP([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string ipAddress) {
-            object[] results = this.Invoke("blockIP", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("orderCountByStatusResponse", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public getOrderCountByStatusResponseDetail getOrderCountByStatus([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] bool onlyDashboardStatusTypes) {
+            object[] results = this.Invoke("getOrderCountByStatus", new object[] {
                         accountUId,
+                        shopperId,
+                        onlyDashboardStatusTypes});
+            return ((getOrderCountByStatusResponseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getOrderCountByStatusAsync(string accountUId, string shopperId, bool onlyDashboardStatusTypes) {
+            this.getOrderCountByStatusAsync(accountUId, shopperId, onlyDashboardStatusTypes, null);
+        }
+        
+        /// <remarks/>
+        public void getOrderCountByStatusAsync(string accountUId, string shopperId, bool onlyDashboardStatusTypes, object userState) {
+            if ((this.getOrderCountByStatusOperationCompleted == null)) {
+                this.getOrderCountByStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetOrderCountByStatusOperationCompleted);
+            }
+            this.InvokeAsync("getOrderCountByStatus", new object[] {
+                        accountUId,
+                        shopperId,
+                        onlyDashboardStatusTypes}, this.getOrderCountByStatusOperationCompleted, userState);
+        }
+        
+        private void OngetOrderCountByStatusOperationCompleted(object arg) {
+            if ((this.getOrderCountByStatusCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getOrderCountByStatusCompleted(this, new getOrderCountByStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("countriesResponse", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public getCountriesResponseDetail getSupportedCountries([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] bool includeRegions, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool includeRegionsSpecified, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] bool sortByCountryCode, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool sortByCountryCodeSpecified, [System.Xml.Serialization.XmlElementAttribute("orderSearchField", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] orderSearchField[] orderSearchField) {
+            object[] results = this.Invoke("getSupportedCountries", new object[] {
+                        accountUId,
+                        shopperId,
+                        includeRegions,
+                        includeRegionsSpecified,
+                        sortByCountryCode,
+                        sortByCountryCodeSpecified,
+                        orderSearchField});
+            return ((getCountriesResponseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getSupportedCountriesAsync(string accountUId, string shopperId, bool includeRegions, bool includeRegionsSpecified, bool sortByCountryCode, bool sortByCountryCodeSpecified, orderSearchField[] orderSearchField) {
+            this.getSupportedCountriesAsync(accountUId, shopperId, includeRegions, includeRegionsSpecified, sortByCountryCode, sortByCountryCodeSpecified, orderSearchField, null);
+        }
+        
+        /// <remarks/>
+        public void getSupportedCountriesAsync(string accountUId, string shopperId, bool includeRegions, bool includeRegionsSpecified, bool sortByCountryCode, bool sortByCountryCodeSpecified, orderSearchField[] orderSearchField, object userState) {
+            if ((this.getSupportedCountriesOperationCompleted == null)) {
+                this.getSupportedCountriesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetSupportedCountriesOperationCompleted);
+            }
+            this.InvokeAsync("getSupportedCountries", new object[] {
+                        accountUId,
+                        shopperId,
+                        includeRegions,
+                        includeRegionsSpecified,
+                        sortByCountryCode,
+                        sortByCountryCodeSpecified,
+                        orderSearchField}, this.getSupportedCountriesOperationCompleted, userState);
+        }
+        
+        private void OngetSupportedCountriesOperationCompleted(object arg) {
+            if ((this.getSupportedCountriesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getSupportedCountriesCompleted(this, new getSupportedCountriesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail updateContact([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] orderContact orderContact) {
+            object[] results = this.Invoke("updateContact", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        orderContact});
+            return ((responseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void updateContactAsync(string accountUId, string shopperId, string invoiceId, orderContact orderContact) {
+            this.updateContactAsync(accountUId, shopperId, invoiceId, orderContact, null);
+        }
+        
+        /// <remarks/>
+        public void updateContactAsync(string accountUId, string shopperId, string invoiceId, orderContact orderContact, object userState) {
+            if ((this.updateContactOperationCompleted == null)) {
+                this.updateContactOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateContactOperationCompleted);
+            }
+            this.InvokeAsync("updateContact", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        orderContact}, this.updateContactOperationCompleted, userState);
+        }
+        
+        private void OnupdateContactOperationCompleted(object arg) {
+            if ((this.updateContactCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.updateContactCompleted(this, new updateContactCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("pong", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ping() {
+            object[] results = this.Invoke("ping", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void pingAsync() {
+            this.pingAsync(null);
+        }
+        
+        /// <remarks/>
+        public void pingAsync(object userState) {
+            if ((this.pingOperationCompleted == null)) {
+                this.pingOperationCompleted = new System.Threading.SendOrPostCallback(this.OnpingOperationCompleted);
+            }
+            this.InvokeAsync("ping", new object[0], this.pingOperationCompleted, userState);
+        }
+        
+        private void OnpingOperationCompleted(object arg) {
+            if ((this.pingCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.pingCompleted(this, new pingCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail updatePackage([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] package package) {
+            object[] results = this.Invoke("updatePackage", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        package});
+            return ((responseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void updatePackageAsync(string accountUId, string shopperId, string invoiceId, package package) {
+            this.updatePackageAsync(accountUId, shopperId, invoiceId, package, null);
+        }
+        
+        /// <remarks/>
+        public void updatePackageAsync(string accountUId, string shopperId, string invoiceId, package package, object userState) {
+            if ((this.updatePackageOperationCompleted == null)) {
+                this.updatePackageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdatePackageOperationCompleted);
+            }
+            this.InvokeAsync("updatePackage", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        package}, this.updatePackageOperationCompleted, userState);
+        }
+        
+        private void OnupdatePackageOperationCompleted(object arg) {
+            if ((this.updatePackageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.updatePackageCompleted(this, new updatePackageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ordersResponse", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public getOrdersResponseDetail getOrders([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int pageNumber, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int pageSize, [System.Xml.Serialization.XmlElementAttribute("orderSearchField", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] orderSearchField[] orderSearchField) {
+            object[] results = this.Invoke("getOrders", new object[] {
+                        accountUId,
+                        shopperId,
+                        pageNumber,
+                        pageSize,
+                        orderSearchField});
+            return ((getOrdersResponseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getOrdersAsync(string accountUId, string shopperId, int pageNumber, int pageSize, orderSearchField[] orderSearchField) {
+            this.getOrdersAsync(accountUId, shopperId, pageNumber, pageSize, orderSearchField, null);
+        }
+        
+        /// <remarks/>
+        public void getOrdersAsync(string accountUId, string shopperId, int pageNumber, int pageSize, orderSearchField[] orderSearchField, object userState) {
+            if ((this.getOrdersOperationCompleted == null)) {
+                this.getOrdersOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetOrdersOperationCompleted);
+            }
+            this.InvokeAsync("getOrders", new object[] {
+                        accountUId,
+                        shopperId,
+                        pageNumber,
+                        pageSize,
+                        orderSearchField}, this.getOrdersOperationCompleted, userState);
+        }
+        
+        private void OngetOrdersOperationCompleted(object arg) {
+            if ((this.getOrdersCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getOrdersCompleted(this, new getOrdersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail addPackage([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute("itemPackingReference", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] itemReference[] itemPackingReference) {
+            object[] results = this.Invoke("addPackage", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        itemPackingReference});
+            return ((responseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void addPackageAsync(string accountUId, string shopperId, string invoiceId, itemReference[] itemPackingReference) {
+            this.addPackageAsync(accountUId, shopperId, invoiceId, itemPackingReference, null);
+        }
+        
+        /// <remarks/>
+        public void addPackageAsync(string accountUId, string shopperId, string invoiceId, itemReference[] itemPackingReference, object userState) {
+            if ((this.addPackageOperationCompleted == null)) {
+                this.addPackageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddPackageOperationCompleted);
+            }
+            this.InvokeAsync("addPackage", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        itemPackingReference}, this.addPackageOperationCompleted, userState);
+        }
+        
+        private void OnaddPackageOperationCompleted(object arg) {
+            if ((this.addPackageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.addPackageCompleted(this, new addPackageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail unblockIP([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string ipAddress) {
+            object[] results = this.Invoke("unblockIP", new object[] {
+                        accountUId,
+                        shopperId,
                         ipAddress});
             return ((responseDetail)(results[0]));
         }
         
         /// <remarks/>
-        public void blockIPAsync(string accountUId, string ipAddress) {
-            this.blockIPAsync(accountUId, ipAddress, null);
+        public void unblockIPAsync(string accountUId, string shopperId, string ipAddress) {
+            this.unblockIPAsync(accountUId, shopperId, ipAddress, null);
         }
         
         /// <remarks/>
-        public void blockIPAsync(string accountUId, string ipAddress, object userState) {
-            if ((this.blockIPOperationCompleted == null)) {
-                this.blockIPOperationCompleted = new System.Threading.SendOrPostCallback(this.OnblockIPOperationCompleted);
+        public void unblockIPAsync(string accountUId, string shopperId, string ipAddress, object userState) {
+            if ((this.unblockIPOperationCompleted == null)) {
+                this.unblockIPOperationCompleted = new System.Threading.SendOrPostCallback(this.OnunblockIPOperationCompleted);
             }
-            this.InvokeAsync("blockIP", new object[] {
+            this.InvokeAsync("unblockIP", new object[] {
                         accountUId,
-                        ipAddress}, this.blockIPOperationCompleted, userState);
+                        shopperId,
+                        ipAddress}, this.unblockIPOperationCompleted, userState);
         }
         
-        private void OnblockIPOperationCompleted(object arg) {
-            if ((this.blockIPCompleted != null)) {
+        private void OnunblockIPOperationCompleted(object arg) {
+            if ((this.unblockIPCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.blockIPCompleted(this, new blockIPCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.unblockIPCompleted(this, new unblockIPCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail resendOrderEmail([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string emailToResend, [System.Xml.Serialization.XmlElementAttribute("selectedPackageIds", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int[] selectedPackageIds, [System.Xml.Serialization.XmlElementAttribute("selectedUnpackedContentIds", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int[] selectedUnpackedContentIds) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail resendOrderEmail([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string emailToResend, [System.Xml.Serialization.XmlElementAttribute("selectedPackageIds", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int[] selectedPackageIds, [System.Xml.Serialization.XmlElementAttribute("selectedUnpackedContentIds", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int[] selectedUnpackedContentIds) {
             object[] results = this.Invoke("resendOrderEmail", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId,
                         emailToResend,
                         selectedPackageIds,
@@ -301,17 +554,18 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        public void resendOrderEmailAsync(string accountUId, string invoiceId, string emailToResend, int[] selectedPackageIds, int[] selectedUnpackedContentIds) {
-            this.resendOrderEmailAsync(accountUId, invoiceId, emailToResend, selectedPackageIds, selectedUnpackedContentIds, null);
+        public void resendOrderEmailAsync(string accountUId, string shopperId, string invoiceId, string emailToResend, int[] selectedPackageIds, int[] selectedUnpackedContentIds) {
+            this.resendOrderEmailAsync(accountUId, shopperId, invoiceId, emailToResend, selectedPackageIds, selectedUnpackedContentIds, null);
         }
         
         /// <remarks/>
-        public void resendOrderEmailAsync(string accountUId, string invoiceId, string emailToResend, int[] selectedPackageIds, int[] selectedUnpackedContentIds, object userState) {
+        public void resendOrderEmailAsync(string accountUId, string shopperId, string invoiceId, string emailToResend, int[] selectedPackageIds, int[] selectedUnpackedContentIds, object userState) {
             if ((this.resendOrderEmailOperationCompleted == null)) {
                 this.resendOrderEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnresendOrderEmailOperationCompleted);
             }
             this.InvokeAsync("resendOrderEmail", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId,
                         emailToResend,
                         selectedPackageIds,
@@ -326,28 +580,30 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail editOrderEmail([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string emailAddress) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail editOrderEmail([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string emailAddress) {
             object[] results = this.Invoke("editOrderEmail", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId,
                         emailAddress});
             return ((responseDetail)(results[0]));
         }
         
         /// <remarks/>
-        public void editOrderEmailAsync(string accountUId, string invoiceId, string emailAddress) {
-            this.editOrderEmailAsync(accountUId, invoiceId, emailAddress, null);
+        public void editOrderEmailAsync(string accountUId, string shopperId, string invoiceId, string emailAddress) {
+            this.editOrderEmailAsync(accountUId, shopperId, invoiceId, emailAddress, null);
         }
         
         /// <remarks/>
-        public void editOrderEmailAsync(string accountUId, string invoiceId, string emailAddress, object userState) {
+        public void editOrderEmailAsync(string accountUId, string shopperId, string invoiceId, string emailAddress, object userState) {
             if ((this.editOrderEmailOperationCompleted == null)) {
                 this.editOrderEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OneditOrderEmailOperationCompleted);
             }
             this.InvokeAsync("editOrderEmail", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId,
                         emailAddress}, this.editOrderEmailOperationCompleted, userState);
         }
@@ -360,61 +616,97 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail updateOrderStatus([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string orderStatus) {
-            object[] results = this.Invoke("updateOrderStatus", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail blockIP([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string ipAddress) {
+            object[] results = this.Invoke("blockIP", new object[] {
                         accountUId,
-                        invoiceId,
-                        orderStatus});
+                        shopperId,
+                        ipAddress});
             return ((responseDetail)(results[0]));
         }
         
         /// <remarks/>
-        public void updateOrderStatusAsync(string accountUId, string invoiceId, string orderStatus) {
-            this.updateOrderStatusAsync(accountUId, invoiceId, orderStatus, null);
+        public void blockIPAsync(string accountUId, string shopperId, string ipAddress) {
+            this.blockIPAsync(accountUId, shopperId, ipAddress, null);
         }
         
         /// <remarks/>
-        public void updateOrderStatusAsync(string accountUId, string invoiceId, string orderStatus, object userState) {
-            if ((this.updateOrderStatusOperationCompleted == null)) {
-                this.updateOrderStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateOrderStatusOperationCompleted);
+        public void blockIPAsync(string accountUId, string shopperId, string ipAddress, object userState) {
+            if ((this.blockIPOperationCompleted == null)) {
+                this.blockIPOperationCompleted = new System.Threading.SendOrPostCallback(this.OnblockIPOperationCompleted);
             }
-            this.InvokeAsync("updateOrderStatus", new object[] {
+            this.InvokeAsync("blockIP", new object[] {
                         accountUId,
-                        invoiceId,
-                        orderStatus}, this.updateOrderStatusOperationCompleted, userState);
+                        shopperId,
+                        ipAddress}, this.blockIPOperationCompleted, userState);
         }
         
-        private void OnupdateOrderStatusOperationCompleted(object arg) {
-            if ((this.updateOrderStatusCompleted != null)) {
+        private void OnblockIPOperationCompleted(object arg) {
+            if ((this.blockIPCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.updateOrderStatusCompleted(this, new updateOrderStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.blockIPCompleted(this, new blockIPCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("orderResponse")]
-        public getOrderHistoryResponseDetail getOrderHistory([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("orderResponse", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public getOrderResponseDetail getOrder([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId) {
+            object[] results = this.Invoke("getOrder", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId});
+            return ((getOrderResponseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getOrderAsync(string accountUId, string shopperId, string invoiceId) {
+            this.getOrderAsync(accountUId, shopperId, invoiceId, null);
+        }
+        
+        /// <remarks/>
+        public void getOrderAsync(string accountUId, string shopperId, string invoiceId, object userState) {
+            if ((this.getOrderOperationCompleted == null)) {
+                this.getOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetOrderOperationCompleted);
+            }
+            this.InvokeAsync("getOrder", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId}, this.getOrderOperationCompleted, userState);
+        }
+        
+        private void OngetOrderOperationCompleted(object arg) {
+            if ((this.getOrderCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getOrderCompleted(this, new getOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("orderResponse", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public getOrderHistoryResponseDetail getOrderHistory([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId) {
             object[] results = this.Invoke("getOrderHistory", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId});
             return ((getOrderHistoryResponseDetail)(results[0]));
         }
         
         /// <remarks/>
-        public void getOrderHistoryAsync(string accountUId, string invoiceId) {
-            this.getOrderHistoryAsync(accountUId, invoiceId, null);
+        public void getOrderHistoryAsync(string accountUId, string shopperId, string invoiceId) {
+            this.getOrderHistoryAsync(accountUId, shopperId, invoiceId, null);
         }
         
         /// <remarks/>
-        public void getOrderHistoryAsync(string accountUId, string invoiceId, object userState) {
+        public void getOrderHistoryAsync(string accountUId, string shopperId, string invoiceId, object userState) {
             if ((this.getOrderHistoryOperationCompleted == null)) {
                 this.getOrderHistoryOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetOrderHistoryOperationCompleted);
             }
             this.InvokeAsync("getOrderHistory", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId}, this.getOrderHistoryOperationCompleted, userState);
         }
         
@@ -426,40 +718,8 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail refundOrder([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId) {
-            object[] results = this.Invoke("refundOrder", new object[] {
-                        accountUId,
-                        invoiceId});
-            return ((responseDetail)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void refundOrderAsync(string accountUId, string invoiceId) {
-            this.refundOrderAsync(accountUId, invoiceId, null);
-        }
-        
-        /// <remarks/>
-        public void refundOrderAsync(string accountUId, string invoiceId, object userState) {
-            if ((this.refundOrderOperationCompleted == null)) {
-                this.refundOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnrefundOrderOperationCompleted);
-            }
-            this.InvokeAsync("refundOrder", new object[] {
-                        accountUId,
-                        invoiceId}, this.refundOrderOperationCompleted, userState);
-        }
-        
-        private void OnrefundOrderOperationCompleted(object arg) {
-            if ((this.refundOrderCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.refundOrderCompleted(this, new refundOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("accountsResponse")]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("accountsResponse", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public getAccountResponseDetail getAccounts([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId) {
             object[] results = this.Invoke("getAccounts", new object[] {
                         shopperId});
@@ -488,129 +748,29 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("countriesResponse")]
-        public getCountriesResponseDetail getSupportedCountries([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] bool includeRegions, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool includeRegionsSpecified, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] bool sortByCountryCode, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool sortByCountryCodeSpecified, [System.Xml.Serialization.XmlElementAttribute("orderSearchField", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] orderSearchField[] orderSearchField) {
-            object[] results = this.Invoke("getSupportedCountries", new object[] {
-                        includeRegions,
-                        includeRegionsSpecified,
-                        sortByCountryCode,
-                        sortByCountryCodeSpecified,
-                        orderSearchField});
-            return ((getCountriesResponseDetail)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getSupportedCountriesAsync(bool includeRegions, bool includeRegionsSpecified, bool sortByCountryCode, bool sortByCountryCodeSpecified, orderSearchField[] orderSearchField) {
-            this.getSupportedCountriesAsync(includeRegions, includeRegionsSpecified, sortByCountryCode, sortByCountryCodeSpecified, orderSearchField, null);
-        }
-        
-        /// <remarks/>
-        public void getSupportedCountriesAsync(bool includeRegions, bool includeRegionsSpecified, bool sortByCountryCode, bool sortByCountryCodeSpecified, orderSearchField[] orderSearchField, object userState) {
-            if ((this.getSupportedCountriesOperationCompleted == null)) {
-                this.getSupportedCountriesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetSupportedCountriesOperationCompleted);
-            }
-            this.InvokeAsync("getSupportedCountries", new object[] {
-                        includeRegions,
-                        includeRegionsSpecified,
-                        sortByCountryCode,
-                        sortByCountryCodeSpecified,
-                        orderSearchField}, this.getSupportedCountriesOperationCompleted, userState);
-        }
-        
-        private void OngetSupportedCountriesOperationCompleted(object arg) {
-            if ((this.getSupportedCountriesCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getSupportedCountriesCompleted(this, new getSupportedCountriesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("orderCountByStatusResponse")]
-        public getOrderCountByStatusResponseDetail getOrderCountByStatus([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] bool onlyDashboardStatusTypes) {
-            object[] results = this.Invoke("getOrderCountByStatus", new object[] {
-                        accountUId,
-                        onlyDashboardStatusTypes});
-            return ((getOrderCountByStatusResponseDetail)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getOrderCountByStatusAsync(string accountUId, bool onlyDashboardStatusTypes) {
-            this.getOrderCountByStatusAsync(accountUId, onlyDashboardStatusTypes, null);
-        }
-        
-        /// <remarks/>
-        public void getOrderCountByStatusAsync(string accountUId, bool onlyDashboardStatusTypes, object userState) {
-            if ((this.getOrderCountByStatusOperationCompleted == null)) {
-                this.getOrderCountByStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetOrderCountByStatusOperationCompleted);
-            }
-            this.InvokeAsync("getOrderCountByStatus", new object[] {
-                        accountUId,
-                        onlyDashboardStatusTypes}, this.getOrderCountByStatusOperationCompleted, userState);
-        }
-        
-        private void OngetOrderCountByStatusOperationCompleted(object arg) {
-            if ((this.getOrderCountByStatusCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getOrderCountByStatusCompleted(this, new getOrderCountByStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail unblockIP([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string ipAddress) {
-            object[] results = this.Invoke("unblockIP", new object[] {
-                        accountUId,
-                        ipAddress});
-            return ((responseDetail)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void unblockIPAsync(string accountUId, string ipAddress) {
-            this.unblockIPAsync(accountUId, ipAddress, null);
-        }
-        
-        /// <remarks/>
-        public void unblockIPAsync(string accountUId, string ipAddress, object userState) {
-            if ((this.unblockIPOperationCompleted == null)) {
-                this.unblockIPOperationCompleted = new System.Threading.SendOrPostCallback(this.OnunblockIPOperationCompleted);
-            }
-            this.InvokeAsync("unblockIP", new object[] {
-                        accountUId,
-                        ipAddress}, this.unblockIPOperationCompleted, userState);
-        }
-        
-        private void OnunblockIPOperationCompleted(object arg) {
-            if ((this.unblockIPCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.unblockIPCompleted(this, new unblockIPCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail captureAllPayments([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail captureAllPayments([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId) {
             object[] results = this.Invoke("captureAllPayments", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId});
             return ((responseDetail)(results[0]));
         }
         
         /// <remarks/>
-        public void captureAllPaymentsAsync(string accountUId, string invoiceId) {
-            this.captureAllPaymentsAsync(accountUId, invoiceId, null);
+        public void captureAllPaymentsAsync(string accountUId, string shopperId, string invoiceId) {
+            this.captureAllPaymentsAsync(accountUId, shopperId, invoiceId, null);
         }
         
         /// <remarks/>
-        public void captureAllPaymentsAsync(string accountUId, string invoiceId, object userState) {
+        public void captureAllPaymentsAsync(string accountUId, string shopperId, string invoiceId, object userState) {
             if ((this.captureAllPaymentsOperationCompleted == null)) {
                 this.captureAllPaymentsOperationCompleted = new System.Threading.SendOrPostCallback(this.OncaptureAllPaymentsOperationCompleted);
             }
             this.InvokeAsync("captureAllPayments", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId}, this.captureAllPaymentsOperationCompleted, userState);
         }
         
@@ -622,139 +782,50 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("blockedIPAddressResponse")]
-        public getIPAddressResponseDetail getBlockedIPAddresses([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId) {
-            object[] results = this.Invoke("getBlockedIPAddresses", new object[] {
-                        accountUId});
-            return ((getIPAddressResponseDetail)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getBlockedIPAddressesAsync(string accountUId) {
-            this.getBlockedIPAddressesAsync(accountUId, null);
-        }
-        
-        /// <remarks/>
-        public void getBlockedIPAddressesAsync(string accountUId, object userState) {
-            if ((this.getBlockedIPAddressesOperationCompleted == null)) {
-                this.getBlockedIPAddressesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetBlockedIPAddressesOperationCompleted);
-            }
-            this.InvokeAsync("getBlockedIPAddresses", new object[] {
-                        accountUId}, this.getBlockedIPAddressesOperationCompleted, userState);
-        }
-        
-        private void OngetBlockedIPAddressesOperationCompleted(object arg) {
-            if ((this.getBlockedIPAddressesCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getBlockedIPAddressesCompleted(this, new getBlockedIPAddressesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail removePackage([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int packageId) {
-            object[] results = this.Invoke("removePackage", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail capturePayment([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int paymentId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool paymentIdSpecified) {
+            object[] results = this.Invoke("capturePayment", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId,
-                        packageId});
+                        paymentId,
+                        paymentIdSpecified});
             return ((responseDetail)(results[0]));
         }
         
         /// <remarks/>
-        public void removePackageAsync(string accountUId, string invoiceId, int packageId) {
-            this.removePackageAsync(accountUId, invoiceId, packageId, null);
+        public void capturePaymentAsync(string accountUId, string shopperId, string invoiceId, int paymentId, bool paymentIdSpecified) {
+            this.capturePaymentAsync(accountUId, shopperId, invoiceId, paymentId, paymentIdSpecified, null);
         }
         
         /// <remarks/>
-        public void removePackageAsync(string accountUId, string invoiceId, int packageId, object userState) {
-            if ((this.removePackageOperationCompleted == null)) {
-                this.removePackageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnremovePackageOperationCompleted);
+        public void capturePaymentAsync(string accountUId, string shopperId, string invoiceId, int paymentId, bool paymentIdSpecified, object userState) {
+            if ((this.capturePaymentOperationCompleted == null)) {
+                this.capturePaymentOperationCompleted = new System.Threading.SendOrPostCallback(this.OncapturePaymentOperationCompleted);
             }
-            this.InvokeAsync("removePackage", new object[] {
+            this.InvokeAsync("capturePayment", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId,
-                        packageId}, this.removePackageOperationCompleted, userState);
+                        paymentId,
+                        paymentIdSpecified}, this.capturePaymentOperationCompleted, userState);
         }
         
-        private void OnremovePackageOperationCompleted(object arg) {
-            if ((this.removePackageCompleted != null)) {
+        private void OncapturePaymentOperationCompleted(object arg) {
+            if ((this.capturePaymentCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.removePackageCompleted(this, new removePackageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.capturePaymentCompleted(this, new capturePaymentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("pong")]
-        public string ping() {
-            object[] results = this.Invoke("ping", new object[0]);
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void pingAsync() {
-            this.pingAsync(null);
-        }
-        
-        /// <remarks/>
-        public void pingAsync(object userState) {
-            if ((this.pingOperationCompleted == null)) {
-                this.pingOperationCompleted = new System.Threading.SendOrPostCallback(this.OnpingOperationCompleted);
-            }
-            this.InvokeAsync("ping", new object[0], this.pingOperationCompleted, userState);
-        }
-        
-        private void OnpingOperationCompleted(object arg) {
-            if ((this.pingCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.pingCompleted(this, new pingCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("ordersResponse")]
-        public getOrdersResponseDetail getOrders([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int pageNumber, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int pageSize, [System.Xml.Serialization.XmlElementAttribute("orderSearchField", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] orderSearchField[] orderSearchField) {
-            object[] results = this.Invoke("getOrders", new object[] {
-                        accountUId,
-                        pageNumber,
-                        pageSize,
-                        orderSearchField});
-            return ((getOrdersResponseDetail)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getOrdersAsync(string accountUId, int pageNumber, int pageSize, orderSearchField[] orderSearchField) {
-            this.getOrdersAsync(accountUId, pageNumber, pageSize, orderSearchField, null);
-        }
-        
-        /// <remarks/>
-        public void getOrdersAsync(string accountUId, int pageNumber, int pageSize, orderSearchField[] orderSearchField, object userState) {
-            if ((this.getOrdersOperationCompleted == null)) {
-                this.getOrdersOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetOrdersOperationCompleted);
-            }
-            this.InvokeAsync("getOrders", new object[] {
-                        accountUId,
-                        pageNumber,
-                        pageSize,
-                        orderSearchField}, this.getOrdersOperationCompleted, userState);
-        }
-        
-        private void OngetOrdersOperationCompleted(object arg) {
-            if ((this.getOrdersCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getOrdersCompleted(this, new getOrdersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail voiceAuthCapture([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int paymentId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool paymentIdSpecified, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string voiceAuthCode) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail voiceAuthCapture([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int paymentId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool paymentIdSpecified, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string voiceAuthCode) {
             object[] results = this.Invoke("voiceAuthCapture", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId,
                         paymentId,
                         paymentIdSpecified,
@@ -763,17 +834,18 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        public void voiceAuthCaptureAsync(string accountUId, string invoiceId, int paymentId, bool paymentIdSpecified, string voiceAuthCode) {
-            this.voiceAuthCaptureAsync(accountUId, invoiceId, paymentId, paymentIdSpecified, voiceAuthCode, null);
+        public void voiceAuthCaptureAsync(string accountUId, string shopperId, string invoiceId, int paymentId, bool paymentIdSpecified, string voiceAuthCode) {
+            this.voiceAuthCaptureAsync(accountUId, shopperId, invoiceId, paymentId, paymentIdSpecified, voiceAuthCode, null);
         }
         
         /// <remarks/>
-        public void voiceAuthCaptureAsync(string accountUId, string invoiceId, int paymentId, bool paymentIdSpecified, string voiceAuthCode, object userState) {
+        public void voiceAuthCaptureAsync(string accountUId, string shopperId, string invoiceId, int paymentId, bool paymentIdSpecified, string voiceAuthCode, object userState) {
             if ((this.voiceAuthCaptureOperationCompleted == null)) {
                 this.voiceAuthCaptureOperationCompleted = new System.Threading.SendOrPostCallback(this.OnvoiceAuthCaptureOperationCompleted);
             }
             this.InvokeAsync("voiceAuthCapture", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId,
                         paymentId,
                         paymentIdSpecified,
@@ -788,168 +860,142 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail capturePayment([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int paymentId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool paymentIdSpecified) {
-            object[] results = this.Invoke("capturePayment", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail removePackage([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int packageId) {
+            object[] results = this.Invoke("removePackage", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId,
-                        paymentId,
-                        paymentIdSpecified});
+                        packageId});
             return ((responseDetail)(results[0]));
         }
         
         /// <remarks/>
-        public void capturePaymentAsync(string accountUId, string invoiceId, int paymentId, bool paymentIdSpecified) {
-            this.capturePaymentAsync(accountUId, invoiceId, paymentId, paymentIdSpecified, null);
+        public void removePackageAsync(string accountUId, string shopperId, string invoiceId, int packageId) {
+            this.removePackageAsync(accountUId, shopperId, invoiceId, packageId, null);
         }
         
         /// <remarks/>
-        public void capturePaymentAsync(string accountUId, string invoiceId, int paymentId, bool paymentIdSpecified, object userState) {
-            if ((this.capturePaymentOperationCompleted == null)) {
-                this.capturePaymentOperationCompleted = new System.Threading.SendOrPostCallback(this.OncapturePaymentOperationCompleted);
+        public void removePackageAsync(string accountUId, string shopperId, string invoiceId, int packageId, object userState) {
+            if ((this.removePackageOperationCompleted == null)) {
+                this.removePackageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnremovePackageOperationCompleted);
             }
-            this.InvokeAsync("capturePayment", new object[] {
+            this.InvokeAsync("removePackage", new object[] {
                         accountUId,
+                        shopperId,
                         invoiceId,
-                        paymentId,
-                        paymentIdSpecified}, this.capturePaymentOperationCompleted, userState);
+                        packageId}, this.removePackageOperationCompleted, userState);
         }
         
-        private void OncapturePaymentOperationCompleted(object arg) {
-            if ((this.capturePaymentCompleted != null)) {
+        private void OnremovePackageOperationCompleted(object arg) {
+            if ((this.removePackageCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.capturePaymentCompleted(this, new capturePaymentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.removePackageCompleted(this, new removePackageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail addPackage([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute("itemPackingReference", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] itemReference[] itemPackingReference) {
-            object[] results = this.Invoke("addPackage", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("searchableOrderStatusesResponse", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public getOrderSearchParametersResponseDetail getOrderSearchParameters([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId) {
+            object[] results = this.Invoke("getOrderSearchParameters", new object[] {
                         accountUId,
-                        invoiceId,
-                        itemPackingReference});
-            return ((responseDetail)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void addPackageAsync(string accountUId, string invoiceId, itemReference[] itemPackingReference) {
-            this.addPackageAsync(accountUId, invoiceId, itemPackingReference, null);
-        }
-        
-        /// <remarks/>
-        public void addPackageAsync(string accountUId, string invoiceId, itemReference[] itemPackingReference, object userState) {
-            if ((this.addPackageOperationCompleted == null)) {
-                this.addPackageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddPackageOperationCompleted);
-            }
-            this.InvokeAsync("addPackage", new object[] {
-                        accountUId,
-                        invoiceId,
-                        itemPackingReference}, this.addPackageOperationCompleted, userState);
-        }
-        
-        private void OnaddPackageOperationCompleted(object arg) {
-            if ((this.addPackageCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.addPackageCompleted(this, new addPackageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public responseDetail updateContact([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] orderContact orderContact) {
-            object[] results = this.Invoke("updateContact", new object[] {
-                        accountUId,
-                        invoiceId,
-                        orderContact});
-            return ((responseDetail)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void updateContactAsync(string accountUId, string invoiceId, orderContact orderContact) {
-            this.updateContactAsync(accountUId, invoiceId, orderContact, null);
-        }
-        
-        /// <remarks/>
-        public void updateContactAsync(string accountUId, string invoiceId, orderContact orderContact, object userState) {
-            if ((this.updateContactOperationCompleted == null)) {
-                this.updateContactOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateContactOperationCompleted);
-            }
-            this.InvokeAsync("updateContact", new object[] {
-                        accountUId,
-                        invoiceId,
-                        orderContact}, this.updateContactOperationCompleted, userState);
-        }
-        
-        private void OnupdateContactOperationCompleted(object arg) {
-            if ((this.updateContactCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.updateContactCompleted(this, new updateContactCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail")]
-        public responseDetail updatePackage([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] package package) {
-            object[] results = this.Invoke("updatePackage", new object[] {
-                        accountUId,
-                        invoiceId,
-                        package});
-            return ((responseDetail)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void updatePackageAsync(string accountUId, string invoiceId, package package) {
-            this.updatePackageAsync(accountUId, invoiceId, package, null);
-        }
-        
-        /// <remarks/>
-        public void updatePackageAsync(string accountUId, string invoiceId, package package, object userState) {
-            if ((this.updatePackageOperationCompleted == null)) {
-                this.updatePackageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdatePackageOperationCompleted);
-            }
-            this.InvokeAsync("updatePackage", new object[] {
-                        accountUId,
-                        invoiceId,
-                        package}, this.updatePackageOperationCompleted, userState);
-        }
-        
-        private void OnupdatePackageOperationCompleted(object arg) {
-            if ((this.updatePackageCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.updatePackageCompleted(this, new updatePackageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("searchableOrderStatusesResponse")]
-        public getOrderSearchParametersResponseDetail getOrderSearchParameters() {
-            object[] results = this.Invoke("getOrderSearchParameters", new object[0]);
+                        shopperId});
             return ((getOrderSearchParametersResponseDetail)(results[0]));
         }
         
         /// <remarks/>
-        public void getOrderSearchParametersAsync() {
-            this.getOrderSearchParametersAsync(null);
+        public void getOrderSearchParametersAsync(string accountUId, string shopperId) {
+            this.getOrderSearchParametersAsync(accountUId, shopperId, null);
         }
         
         /// <remarks/>
-        public void getOrderSearchParametersAsync(object userState) {
+        public void getOrderSearchParametersAsync(string accountUId, string shopperId, object userState) {
             if ((this.getOrderSearchParametersOperationCompleted == null)) {
                 this.getOrderSearchParametersOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetOrderSearchParametersOperationCompleted);
             }
-            this.InvokeAsync("getOrderSearchParameters", new object[0], this.getOrderSearchParametersOperationCompleted, userState);
+            this.InvokeAsync("getOrderSearchParameters", new object[] {
+                        accountUId,
+                        shopperId}, this.getOrderSearchParametersOperationCompleted, userState);
         }
         
         private void OngetOrderSearchParametersOperationCompleted(object arg) {
             if ((this.getOrderSearchParametersCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getOrderSearchParametersCompleted(this, new getOrderSearchParametersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail updateOrderStatus([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string orderStatus) {
+            object[] results = this.Invoke("updateOrderStatus", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        orderStatus});
+            return ((responseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void updateOrderStatusAsync(string accountUId, string shopperId, string invoiceId, string orderStatus) {
+            this.updateOrderStatusAsync(accountUId, shopperId, invoiceId, orderStatus, null);
+        }
+        
+        /// <remarks/>
+        public void updateOrderStatusAsync(string accountUId, string shopperId, string invoiceId, string orderStatus, object userState) {
+            if ((this.updateOrderStatusOperationCompleted == null)) {
+                this.updateOrderStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateOrderStatusOperationCompleted);
+            }
+            this.InvokeAsync("updateOrderStatus", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        orderStatus}, this.updateOrderStatusOperationCompleted, userState);
+        }
+        
+        private void OnupdateOrderStatusOperationCompleted(object arg) {
+            if ((this.updateOrderStatusCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.updateOrderStatusCompleted(this, new updateOrderStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail updateOrderNotes([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string orderNotes) {
+            object[] results = this.Invoke("updateOrderNotes", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        orderNotes});
+            return ((responseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void updateOrderNotesAsync(string accountUId, string shopperId, string invoiceId, string orderNotes) {
+            this.updateOrderNotesAsync(accountUId, shopperId, invoiceId, orderNotes, null);
+        }
+        
+        /// <remarks/>
+        public void updateOrderNotesAsync(string accountUId, string shopperId, string invoiceId, string orderNotes, object userState) {
+            if ((this.updateOrderNotesOperationCompleted == null)) {
+                this.updateOrderNotesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateOrderNotesOperationCompleted);
+            }
+            this.InvokeAsync("updateOrderNotes", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        orderNotes}, this.updateOrderNotesOperationCompleted, userState);
+        }
+        
+        private void OnupdateOrderNotesOperationCompleted(object arg) {
+            if ((this.updateOrderNotesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.updateOrderNotesCompleted(this, new updateOrderNotesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -977,19 +1023,20 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class getOrderResponseDetail : responseDetail {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class getIPAddressResponseDetail : responseDetail {
         
-        private order orderField;
+        private IPAddress[] ipAddressesField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public order order {
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("ipAddress", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public IPAddress[] ipAddresses {
             get {
-                return this.orderField;
+                return this.ipAddressesField;
             }
             set {
-                this.orderField = value;
+                this.ipAddressesField = value;
             }
         }
     }
@@ -999,7 +1046,1661 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class IPAddress {
+        
+        private string ipAddressField;
+        
+        private ipAddressStatus statusField;
+        
+        private bool statusFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ipAddress {
+            get {
+                return this.ipAddressField;
+            }
+            set {
+                this.ipAddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public ipAddressStatus status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool statusSpecified {
+            get {
+                return this.statusFieldSpecified;
+            }
+            set {
+                this.statusFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public enum ipAddressStatus {
+        
+        /// <remarks/>
+        BLOCKED,
+        
+        /// <remarks/>
+        ALLOWED,
+        
+        /// <remarks/>
+        UNKNOWN,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderSearchField {
+        
+        private string propertyField;
+        
+        private string valueField;
+        
+        private string labelField;
+        
+        public orderSearchField() {
+            this.valueField = "";
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string property {
+            get {
+                return this.propertyField;
+            }
+            set {
+                this.propertyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string label {
+            get {
+                return this.labelField;
+            }
+            set {
+                this.labelField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderSearchFieldDef {
+        
+        private string propertyField;
+        
+        private string typeField;
+        
+        private string fieldLabelField;
+        
+        private orderSearchField[] allowedValuesField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string property {
+            get {
+                return this.propertyField;
+            }
+            set {
+                this.propertyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string fieldLabel {
+            get {
+                return this.fieldLabelField;
+            }
+            set {
+                this.fieldLabelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("fieldValue", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public orderSearchField[] allowedValues {
+            get {
+                return this.allowedValuesField;
+            }
+            set {
+                this.allowedValuesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class accountStatus {
+        
+        private string displayTextField;
+        
+        private string keyField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string displayText {
+            get {
+                return this.displayTextField;
+            }
+            set {
+                this.displayTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string key {
+            get {
+                return this.keyField;
+            }
+            set {
+                this.keyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class account {
+        
+        private string domainField;
+        
+        private string accountUIDField;
+        
+        private accountStatus statusField;
+        
+        private string storeNameField;
+        
+        private string dedicatedIPField;
+        
+        private string ipAddressField;
+        
+        private bool sslEnabledField;
+        
+        private bool sslPurchasedField;
+        
+        private bool sslCreditAvailableField;
+        
+        private bool sslSetupInProgressField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string domain {
+            get {
+                return this.domainField;
+            }
+            set {
+                this.domainField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string accountUID {
+            get {
+                return this.accountUIDField;
+            }
+            set {
+                this.accountUIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public accountStatus status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string storeName {
+            get {
+                return this.storeNameField;
+            }
+            set {
+                this.storeNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string dedicatedIP {
+            get {
+                return this.dedicatedIPField;
+            }
+            set {
+                this.dedicatedIPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ipAddress {
+            get {
+                return this.ipAddressField;
+            }
+            set {
+                this.ipAddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public bool sslEnabled {
+            get {
+                return this.sslEnabledField;
+            }
+            set {
+                this.sslEnabledField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public bool sslPurchased {
+            get {
+                return this.sslPurchasedField;
+            }
+            set {
+                this.sslPurchasedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public bool sslCreditAvailable {
+            get {
+                return this.sslCreditAvailableField;
+            }
+            set {
+                this.sslCreditAvailableField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public bool sslSetupInProgress {
+            get {
+                return this.sslSetupInProgressField;
+            }
+            set {
+                this.sslSetupInProgressField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderEditChangeItem {
+        
+        private string timeOfChangeField;
+        
+        private string changedByField;
+        
+        private string fieldField;
+        
+        private string previousValueField;
+        
+        private string newValueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string timeOfChange {
+            get {
+                return this.timeOfChangeField;
+            }
+            set {
+                this.timeOfChangeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string changedBy {
+            get {
+                return this.changedByField;
+            }
+            set {
+                this.changedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string field {
+            get {
+                return this.fieldField;
+            }
+            set {
+                this.fieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string previousValue {
+            get {
+                return this.previousValueField;
+            }
+            set {
+                this.previousValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string newValue {
+            get {
+                return this.newValueField;
+            }
+            set {
+                this.newValueField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderEmailType {
+        
+        private string labelField;
+        
+        private string emailTypeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string label {
+            get {
+                return this.labelField;
+            }
+            set {
+                this.labelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string emailType {
+            get {
+                return this.emailTypeField;
+            }
+            set {
+                this.emailTypeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderCoupon {
+        
+        private money discountedAmountField;
+        
+        private string codeField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money discountedAmount {
+            get {
+                return this.discountedAmountField;
+            }
+            set {
+                this.discountedAmountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string code {
+            get {
+                return this.codeField;
+            }
+            set {
+                this.codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class money {
+        
+        private decimal valueField;
+        
+        private string currencyCodeField;
+        
+        private string currencySymbolField;
+        
+        private string displayTextField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public decimal value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string currencyCode {
+            get {
+                return this.currencyCodeField;
+            }
+            set {
+                this.currencyCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string currencySymbol {
+            get {
+                return this.currencySymbolField;
+            }
+            set {
+                this.currencySymbolField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string displayText {
+            get {
+                return this.displayTextField;
+            }
+            set {
+                this.displayTextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class refund {
+        
+        private money amountField;
+        
+        private string refundMethodField;
+        
+        private string refundStatusField;
+        
+        private string transactionTokenField;
+        
+        private string authorizationCodeField;
+        
+        private bool successfulField;
+        
+        private string noteField;
+        
+        private string createDateField;
+        
+        private int refundIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string refundMethod {
+            get {
+                return this.refundMethodField;
+            }
+            set {
+                this.refundMethodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string refundStatus {
+            get {
+                return this.refundStatusField;
+            }
+            set {
+                this.refundStatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string transactionToken {
+            get {
+                return this.transactionTokenField;
+            }
+            set {
+                this.transactionTokenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string authorizationCode {
+            get {
+                return this.authorizationCodeField;
+            }
+            set {
+                this.authorizationCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public bool successful {
+            get {
+                return this.successfulField;
+            }
+            set {
+                this.successfulField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string note {
+            get {
+                return this.noteField;
+            }
+            set {
+                this.noteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string createDate {
+            get {
+                return this.createDateField;
+            }
+            set {
+                this.createDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int refundId {
+            get {
+                return this.refundIdField;
+            }
+            set {
+                this.refundIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderPayment {
+        
+        private string paymentStatusField;
+        
+        private string paymentMethodField;
+        
+        private money amountBeforeRefundsField;
+        
+        private money amountAfterRefundsField;
+        
+        private string paymentNoteField;
+        
+        private string paymentTypeLabelField;
+        
+        private string transactionTokenField;
+        
+        private string authorizationCodeField;
+        
+        private refund[] refundsField;
+        
+        private int paymentIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string paymentStatus {
+            get {
+                return this.paymentStatusField;
+            }
+            set {
+                this.paymentStatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string paymentMethod {
+            get {
+                return this.paymentMethodField;
+            }
+            set {
+                this.paymentMethodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money amountBeforeRefunds {
+            get {
+                return this.amountBeforeRefundsField;
+            }
+            set {
+                this.amountBeforeRefundsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money amountAfterRefunds {
+            get {
+                return this.amountAfterRefundsField;
+            }
+            set {
+                this.amountAfterRefundsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string paymentNote {
+            get {
+                return this.paymentNoteField;
+            }
+            set {
+                this.paymentNoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string paymentTypeLabel {
+            get {
+                return this.paymentTypeLabelField;
+            }
+            set {
+                this.paymentTypeLabelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string transactionToken {
+            get {
+                return this.transactionTokenField;
+            }
+            set {
+                this.transactionTokenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string authorizationCode {
+            get {
+                return this.authorizationCodeField;
+            }
+            set {
+                this.authorizationCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public refund[] refunds {
+            get {
+                return this.refundsField;
+            }
+            set {
+                this.refundsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int paymentId {
+            get {
+                return this.paymentIdField;
+            }
+            set {
+                this.paymentIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class shipping {
+        
+        private string selectedShipMethodLabelField;
+        
+        private money shippingTotalField;
+        
+        private money shippingChargeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string selectedShipMethodLabel {
+            get {
+                return this.selectedShipMethodLabelField;
+            }
+            set {
+                this.selectedShipMethodLabelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money shippingTotal {
+            get {
+                return this.shippingTotalField;
+            }
+            set {
+                this.shippingTotalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money shippingCharge {
+            get {
+                return this.shippingChargeField;
+            }
+            set {
+                this.shippingChargeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderContact {
+        
+        private string nickNameField;
+        
+        private string firstNameField;
+        
+        private string midInitField;
+        
+        private string lastNameField;
+        
+        private string companyNameField;
+        
+        private string addressLine1Field;
+        
+        private string addressLine2Field;
+        
+        private string cityField;
+        
+        private string regionCodeField;
+        
+        private string postalCodeField;
+        
+        private string countryCodeField;
+        
+        private string emailField;
+        
+        private string phoneNumberField;
+        
+        private string contactTypeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string nickName {
+            get {
+                return this.nickNameField;
+            }
+            set {
+                this.nickNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string firstName {
+            get {
+                return this.firstNameField;
+            }
+            set {
+                this.firstNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string midInit {
+            get {
+                return this.midInitField;
+            }
+            set {
+                this.midInitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string lastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                this.lastNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string companyName {
+            get {
+                return this.companyNameField;
+            }
+            set {
+                this.companyNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string addressLine1 {
+            get {
+                return this.addressLine1Field;
+            }
+            set {
+                this.addressLine1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string addressLine2 {
+            get {
+                return this.addressLine2Field;
+            }
+            set {
+                this.addressLine2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string city {
+            get {
+                return this.cityField;
+            }
+            set {
+                this.cityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string regionCode {
+            get {
+                return this.regionCodeField;
+            }
+            set {
+                this.regionCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string postalCode {
+            get {
+                return this.postalCodeField;
+            }
+            set {
+                this.postalCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string countryCode {
+            get {
+                return this.countryCodeField;
+            }
+            set {
+                this.countryCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string phoneNumber {
+            get {
+                return this.phoneNumberField;
+            }
+            set {
+                this.phoneNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string contactType {
+            get {
+                return this.contactTypeField;
+            }
+            set {
+                this.contactTypeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class itemReference {
+        
+        private int itemIdRefField;
+        
+        private int quantityField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int itemIdRef {
+            get {
+                return this.itemIdRefField;
+            }
+            set {
+                this.itemIdRefField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class package {
+        
+        private string trackingNumberField;
+        
+        private string shipDateField;
+        
+        private itemReference[] itemPackingRefField;
+        
+        private money packageCostField;
+        
+        private int packageIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string trackingNumber {
+            get {
+                return this.trackingNumberField;
+            }
+            set {
+                this.trackingNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string shipDate {
+            get {
+                return this.shipDateField;
+            }
+            set {
+                this.shipDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("itemPackingRef", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public itemReference[] itemPackingRef {
+            get {
+                return this.itemPackingRefField;
+            }
+            set {
+                this.itemPackingRefField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money packageCost {
+            get {
+                return this.packageCostField;
+            }
+            set {
+                this.packageCostField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int packageId {
+            get {
+                return this.packageIdField;
+            }
+            set {
+                this.packageIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class optionValue {
+        
+        private string nameField;
+        
+        private string valueField;
+        
+        private money optionPriceField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money optionPrice {
+            get {
+                return this.optionPriceField;
+            }
+            set {
+                this.optionPriceField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderLineItem {
+        
+        private int quantityField;
+        
+        private string partNumberField;
+        
+        private string labelField;
+        
+        private string descriptionField;
+        
+        private optionValue[] optionsField;
+        
+        private money unitPriceField;
+        
+        private money extendedPriceField;
+        
+        private string supplyingWarehouseField;
+        
+        private int itemIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string partNumber {
+            get {
+                return this.partNumberField;
+            }
+            set {
+                this.partNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string label {
+            get {
+                return this.labelField;
+            }
+            set {
+                this.labelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("selectedOption", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public optionValue[] options {
+            get {
+                return this.optionsField;
+            }
+            set {
+                this.optionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money unitPrice {
+            get {
+                return this.unitPriceField;
+            }
+            set {
+                this.unitPriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money extendedPrice {
+            get {
+                return this.extendedPriceField;
+            }
+            set {
+                this.extendedPriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string supplyingWarehouse {
+            get {
+                return this.supplyingWarehouseField;
+            }
+            set {
+                this.supplyingWarehouseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int itemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class hasHistory {
+        
+        private bool valueField;
+        
+        private int rowCountField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int rowCount {
+            get {
+                return this.rowCountField;
+            }
+            set {
+                this.rowCountField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderTotalItem {
+        
+        private money amountField;
+        
+        private string nameField;
+        
+        private string displayTextField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string displayText {
+            get {
+                return this.displayTextField;
+            }
+            set {
+                this.displayTextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(order))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderSummary {
+        
+        private string invoiceIdField;
+        
+        private orderStatus orderStatusField;
+        
+        private string currencyCodeField;
+        
+        private string emailField;
+        
+        private string orderDateField;
+        
+        private string captureStatusField;
+        
+        private string voiceAuthCaptureStatusField;
+        
+        private string nameField;
+        
+        private money totalField;
+        
+        private orderTotalItem[] totalSummaryField;
+        
+        private IPAddress ipAddressField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string invoiceId {
+            get {
+                return this.invoiceIdField;
+            }
+            set {
+                this.invoiceIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public orderStatus orderStatus {
+            get {
+                return this.orderStatusField;
+            }
+            set {
+                this.orderStatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string currencyCode {
+            get {
+                return this.currencyCodeField;
+            }
+            set {
+                this.currencyCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string orderDate {
+            get {
+                return this.orderDateField;
+            }
+            set {
+                this.orderDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string captureStatus {
+            get {
+                return this.captureStatusField;
+            }
+            set {
+                this.captureStatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string voiceAuthCaptureStatus {
+            get {
+                return this.voiceAuthCaptureStatusField;
+            }
+            set {
+                this.voiceAuthCaptureStatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public money total {
+            get {
+                return this.totalField;
+            }
+            set {
+                this.totalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("totalSummaryItem", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public orderTotalItem[] totalSummary {
+            get {
+                return this.totalSummaryField;
+            }
+            set {
+                this.totalSummaryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public IPAddress ipAddress {
+            get {
+                return this.ipAddressField;
+            }
+            set {
+                this.ipAddressField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(orderStatusCount))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderStatus {
+        
+        private string displayTextField;
+        
+        private string keyField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string displayText {
+            get {
+                return this.displayTextField;
+            }
+            set {
+                this.displayTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string key {
+            get {
+                return this.keyField;
+            }
+            set {
+                this.keyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderStatusCount : orderStatus {
+        
+        private int orderCountField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int orderCount {
+            get {
+                return this.orderCountField;
+            }
+            set {
+                this.orderCountField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     public partial class order : orderSummary {
         
         private hasHistory hasHistoryField;
@@ -1302,156 +3003,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class hasHistory {
-        
-        private bool valueField;
-        
-        private int rowCountField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int rowCount {
-            get {
-                return this.rowCountField;
-            }
-            set {
-                this.rowCountField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderSearchField {
-        
-        private string propertyField;
-        
-        private string valueField;
-        
-        private string labelField;
-        
-        public orderSearchField() {
-            this.valueField = "";
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string property {
-            get {
-                return this.propertyField;
-            }
-            set {
-                this.propertyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string label {
-            get {
-                return this.labelField;
-            }
-            set {
-                this.labelField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderSearchFieldDef {
-        
-        private string propertyField;
-        
-        private string typeField;
-        
-        private string fieldLabelField;
-        
-        private orderSearchField[] allowedValuesField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string property {
-            get {
-                return this.propertyField;
-            }
-            set {
-                this.propertyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string fieldLabel {
-            get {
-                return this.fieldLabelField;
-            }
-            set {
-                this.fieldLabelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("fieldValue", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public orderSearchField[] allowedValues {
-            get {
-                return this.allowedValuesField;
-            }
-            set {
-                this.allowedValuesField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     public partial class orderCountryRegion {
         
         private string codeField;
@@ -1499,7 +3051,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     public partial class orderCountry {
         
         private bool postalCodeRequiredField;
@@ -1639,1512 +3191,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class accountStatus {
-        
-        private string displayTextField;
-        
-        private string keyField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string displayText {
-            get {
-                return this.displayTextField;
-            }
-            set {
-                this.displayTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string key {
-            get {
-                return this.keyField;
-            }
-            set {
-                this.keyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class account {
-        
-        private string domainField;
-        
-        private string accountUIDField;
-        
-        private accountStatus statusField;
-        
-        private string storeNameField;
-        
-        private string dedicatedIPField;
-        
-        private string ipAddressField;
-        
-        private bool sslEnabledField;
-        
-        private bool sslPurchasedField;
-        
-        private bool sslCreditAvailableField;
-        
-        private bool sslSetupInProgressField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string domain {
-            get {
-                return this.domainField;
-            }
-            set {
-                this.domainField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string accountUID {
-            get {
-                return this.accountUIDField;
-            }
-            set {
-                this.accountUIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public accountStatus status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string storeName {
-            get {
-                return this.storeNameField;
-            }
-            set {
-                this.storeNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string dedicatedIP {
-            get {
-                return this.dedicatedIPField;
-            }
-            set {
-                this.dedicatedIPField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ipAddress {
-            get {
-                return this.ipAddressField;
-            }
-            set {
-                this.ipAddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public bool sslEnabled {
-            get {
-                return this.sslEnabledField;
-            }
-            set {
-                this.sslEnabledField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public bool sslPurchased {
-            get {
-                return this.sslPurchasedField;
-            }
-            set {
-                this.sslPurchasedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public bool sslCreditAvailable {
-            get {
-                return this.sslCreditAvailableField;
-            }
-            set {
-                this.sslCreditAvailableField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public bool sslSetupInProgress {
-            get {
-                return this.sslSetupInProgressField;
-            }
-            set {
-                this.sslSetupInProgressField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderEditChangeItem {
-        
-        private string timeOfChangeField;
-        
-        private string changedByField;
-        
-        private string fieldField;
-        
-        private string previousValueField;
-        
-        private string newValueField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string timeOfChange {
-            get {
-                return this.timeOfChangeField;
-            }
-            set {
-                this.timeOfChangeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string changedBy {
-            get {
-                return this.changedByField;
-            }
-            set {
-                this.changedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string field {
-            get {
-                return this.fieldField;
-            }
-            set {
-                this.fieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string previousValue {
-            get {
-                return this.previousValueField;
-            }
-            set {
-                this.previousValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string newValue {
-            get {
-                return this.newValueField;
-            }
-            set {
-                this.newValueField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderEmailType {
-        
-        private string labelField;
-        
-        private string emailTypeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string label {
-            get {
-                return this.labelField;
-            }
-            set {
-                this.labelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string emailType {
-            get {
-                return this.emailTypeField;
-            }
-            set {
-                this.emailTypeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderCoupon {
-        
-        private money discountedAmountField;
-        
-        private string codeField;
-        
-        private string typeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money discountedAmount {
-            get {
-                return this.discountedAmountField;
-            }
-            set {
-                this.discountedAmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string code {
-            get {
-                return this.codeField;
-            }
-            set {
-                this.codeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class money {
-        
-        private decimal valueField;
-        
-        private string currencyCodeField;
-        
-        private string currencySymbolField;
-        
-        private string displayTextField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public decimal value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string currencyCode {
-            get {
-                return this.currencyCodeField;
-            }
-            set {
-                this.currencyCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string currencySymbol {
-            get {
-                return this.currencySymbolField;
-            }
-            set {
-                this.currencySymbolField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string displayText {
-            get {
-                return this.displayTextField;
-            }
-            set {
-                this.displayTextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class refund {
-        
-        private money amountField;
-        
-        private string refundMethodField;
-        
-        private string refundStatusField;
-        
-        private string transactionTokenField;
-        
-        private string authorizationCodeField;
-        
-        private bool successfulField;
-        
-        private string noteField;
-        
-        private string createDateField;
-        
-        private int refundIdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money amount {
-            get {
-                return this.amountField;
-            }
-            set {
-                this.amountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string refundMethod {
-            get {
-                return this.refundMethodField;
-            }
-            set {
-                this.refundMethodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string refundStatus {
-            get {
-                return this.refundStatusField;
-            }
-            set {
-                this.refundStatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string transactionToken {
-            get {
-                return this.transactionTokenField;
-            }
-            set {
-                this.transactionTokenField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string authorizationCode {
-            get {
-                return this.authorizationCodeField;
-            }
-            set {
-                this.authorizationCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public bool successful {
-            get {
-                return this.successfulField;
-            }
-            set {
-                this.successfulField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string note {
-            get {
-                return this.noteField;
-            }
-            set {
-                this.noteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string createDate {
-            get {
-                return this.createDateField;
-            }
-            set {
-                this.createDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int refundId {
-            get {
-                return this.refundIdField;
-            }
-            set {
-                this.refundIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderPayment {
-        
-        private string paymentStatusField;
-        
-        private string paymentMethodField;
-        
-        private money amountBeforeRefundsField;
-        
-        private money amountAfterRefundsField;
-        
-        private string paymentNoteField;
-        
-        private string paymentTypeLabelField;
-        
-        private string transactionTokenField;
-        
-        private string authorizationCodeField;
-        
-        private refund[] refundsField;
-        
-        private int paymentIdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string paymentStatus {
-            get {
-                return this.paymentStatusField;
-            }
-            set {
-                this.paymentStatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string paymentMethod {
-            get {
-                return this.paymentMethodField;
-            }
-            set {
-                this.paymentMethodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money amountBeforeRefunds {
-            get {
-                return this.amountBeforeRefundsField;
-            }
-            set {
-                this.amountBeforeRefundsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money amountAfterRefunds {
-            get {
-                return this.amountAfterRefundsField;
-            }
-            set {
-                this.amountAfterRefundsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string paymentNote {
-            get {
-                return this.paymentNoteField;
-            }
-            set {
-                this.paymentNoteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string paymentTypeLabel {
-            get {
-                return this.paymentTypeLabelField;
-            }
-            set {
-                this.paymentTypeLabelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string transactionToken {
-            get {
-                return this.transactionTokenField;
-            }
-            set {
-                this.transactionTokenField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string authorizationCode {
-            get {
-                return this.authorizationCodeField;
-            }
-            set {
-                this.authorizationCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public refund[] refunds {
-            get {
-                return this.refundsField;
-            }
-            set {
-                this.refundsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int paymentId {
-            get {
-                return this.paymentIdField;
-            }
-            set {
-                this.paymentIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class shipping {
-        
-        private string selectedShipMethodLabelField;
-        
-        private money shippingTotalField;
-        
-        private money shippingChargeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string selectedShipMethodLabel {
-            get {
-                return this.selectedShipMethodLabelField;
-            }
-            set {
-                this.selectedShipMethodLabelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money shippingTotal {
-            get {
-                return this.shippingTotalField;
-            }
-            set {
-                this.shippingTotalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money shippingCharge {
-            get {
-                return this.shippingChargeField;
-            }
-            set {
-                this.shippingChargeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderContact {
-        
-        private string nickNameField;
-        
-        private string firstNameField;
-        
-        private string midInitField;
-        
-        private string lastNameField;
-        
-        private string companyNameField;
-        
-        private string addressLine1Field;
-        
-        private string addressLine2Field;
-        
-        private string cityField;
-        
-        private string regionCodeField;
-        
-        private string postalCodeField;
-        
-        private string countryCodeField;
-        
-        private string emailField;
-        
-        private string phoneNumberField;
-        
-        private string contactTypeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string nickName {
-            get {
-                return this.nickNameField;
-            }
-            set {
-                this.nickNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string firstName {
-            get {
-                return this.firstNameField;
-            }
-            set {
-                this.firstNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string midInit {
-            get {
-                return this.midInitField;
-            }
-            set {
-                this.midInitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string lastName {
-            get {
-                return this.lastNameField;
-            }
-            set {
-                this.lastNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string companyName {
-            get {
-                return this.companyNameField;
-            }
-            set {
-                this.companyNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string addressLine1 {
-            get {
-                return this.addressLine1Field;
-            }
-            set {
-                this.addressLine1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string addressLine2 {
-            get {
-                return this.addressLine2Field;
-            }
-            set {
-                this.addressLine2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string city {
-            get {
-                return this.cityField;
-            }
-            set {
-                this.cityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string regionCode {
-            get {
-                return this.regionCodeField;
-            }
-            set {
-                this.regionCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string postalCode {
-            get {
-                return this.postalCodeField;
-            }
-            set {
-                this.postalCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string countryCode {
-            get {
-                return this.countryCodeField;
-            }
-            set {
-                this.countryCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string phoneNumber {
-            get {
-                return this.phoneNumberField;
-            }
-            set {
-                this.phoneNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string contactType {
-            get {
-                return this.contactTypeField;
-            }
-            set {
-                this.contactTypeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class itemReference {
-        
-        private int itemIdRefField;
-        
-        private int quantityField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int itemIdRef {
-            get {
-                return this.itemIdRefField;
-            }
-            set {
-                this.itemIdRefField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int quantity {
-            get {
-                return this.quantityField;
-            }
-            set {
-                this.quantityField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class package {
-        
-        private string trackingNumberField;
-        
-        private string shipDateField;
-        
-        private itemReference[] itemPackingRefField;
-        
-        private money packageCostField;
-        
-        private int packageIdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string trackingNumber {
-            get {
-                return this.trackingNumberField;
-            }
-            set {
-                this.trackingNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string shipDate {
-            get {
-                return this.shipDateField;
-            }
-            set {
-                this.shipDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("itemPackingRef", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public itemReference[] itemPackingRef {
-            get {
-                return this.itemPackingRefField;
-            }
-            set {
-                this.itemPackingRefField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money packageCost {
-            get {
-                return this.packageCostField;
-            }
-            set {
-                this.packageCostField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int packageId {
-            get {
-                return this.packageIdField;
-            }
-            set {
-                this.packageIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class optionValue {
-        
-        private string nameField;
-        
-        private string valueField;
-        
-        private money optionPriceField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money optionPrice {
-            get {
-                return this.optionPriceField;
-            }
-            set {
-                this.optionPriceField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderLineItem {
-        
-        private int quantityField;
-        
-        private string partNumberField;
-        
-        private string labelField;
-        
-        private string descriptionField;
-        
-        private optionValue[] optionsField;
-        
-        private money unitPriceField;
-        
-        private money extendedPriceField;
-        
-        private string supplyingWarehouseField;
-        
-        private int itemIdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int quantity {
-            get {
-                return this.quantityField;
-            }
-            set {
-                this.quantityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string partNumber {
-            get {
-                return this.partNumberField;
-            }
-            set {
-                this.partNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string label {
-            get {
-                return this.labelField;
-            }
-            set {
-                this.labelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                this.descriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("selectedOption", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public optionValue[] options {
-            get {
-                return this.optionsField;
-            }
-            set {
-                this.optionsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money unitPrice {
-            get {
-                return this.unitPriceField;
-            }
-            set {
-                this.unitPriceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money extendedPrice {
-            get {
-                return this.extendedPriceField;
-            }
-            set {
-                this.extendedPriceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string supplyingWarehouse {
-            get {
-                return this.supplyingWarehouseField;
-            }
-            set {
-                this.supplyingWarehouseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int itemId {
-            get {
-                return this.itemIdField;
-            }
-            set {
-                this.itemIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class IPAddress {
-        
-        private string ipAddressField;
-        
-        private ipAddressStatus statusField;
-        
-        private bool statusFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ipAddress {
-            get {
-                return this.ipAddressField;
-            }
-            set {
-                this.ipAddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ipAddressStatus status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool statusSpecified {
-            get {
-                return this.statusFieldSpecified;
-            }
-            set {
-                this.statusFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public enum ipAddressStatus {
-        
-        /// <remarks/>
-        BLOCKED,
-        
-        /// <remarks/>
-        ALLOWED,
-        
-        /// <remarks/>
-        UNKNOWN,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderTotalItem {
-        
-        private money amountField;
-        
-        private string nameField;
-        
-        private string displayTextField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money amount {
-            get {
-                return this.amountField;
-            }
-            set {
-                this.amountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string displayText {
-            get {
-                return this.displayTextField;
-            }
-            set {
-                this.displayTextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(orderStatusCount))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderStatus {
-        
-        private string displayTextField;
-        
-        private string keyField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string displayText {
-            get {
-                return this.displayTextField;
-            }
-            set {
-                this.displayTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string key {
-            get {
-                return this.keyField;
-            }
-            set {
-                this.keyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderStatusCount : orderStatus {
-        
-        private int orderCountField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int orderCount {
-            get {
-                return this.orderCountField;
-            }
-            set {
-                this.orderCountField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(order))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class orderSummary {
-        
-        private string invoiceIdField;
-        
-        private orderStatus orderStatusField;
-        
-        private string currencyCodeField;
-        
-        private string emailField;
-        
-        private string orderDateField;
-        
-        private string captureStatusField;
-        
-        private string voiceAuthCaptureStatusField;
-        
-        private string nameField;
-        
-        private money totalField;
-        
-        private orderTotalItem[] totalSummaryField;
-        
-        private IPAddress ipAddressField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string invoiceId {
-            get {
-                return this.invoiceIdField;
-            }
-            set {
-                this.invoiceIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public orderStatus orderStatus {
-            get {
-                return this.orderStatusField;
-            }
-            set {
-                this.orderStatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string currencyCode {
-            get {
-                return this.currencyCodeField;
-            }
-            set {
-                this.currencyCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string orderDate {
-            get {
-                return this.orderDateField;
-            }
-            set {
-                this.orderDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string captureStatus {
-            get {
-                return this.captureStatusField;
-            }
-            set {
-                this.captureStatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string voiceAuthCaptureStatus {
-            get {
-                return this.voiceAuthCaptureStatusField;
-            }
-            set {
-                this.voiceAuthCaptureStatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public money total {
-            get {
-                return this.totalField;
-            }
-            set {
-                this.totalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("totalSummaryItem", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public orderTotalItem[] totalSummary {
-            get {
-                return this.totalSummaryField;
-            }
-            set {
-                this.totalSummaryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public IPAddress ipAddress {
-            get {
-                return this.ipAddressField;
-            }
-            set {
-                this.ipAddressField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     public partial class responseStatus {
         
         private statusCode statusCodeField;
@@ -3158,6 +3205,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         private string[] infoMessagesField;
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public statusCode statusCode {
             get {
                 return this.statusCodeField;
@@ -3168,7 +3216,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("successMessages")]
+        [System.Xml.Serialization.XmlElementAttribute("successMessages", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string[] successMessages {
             get {
                 return this.successMessagesField;
@@ -3179,7 +3227,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("errorMessages")]
+        [System.Xml.Serialization.XmlElementAttribute("errorMessages", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string[] errorMessages {
             get {
                 return this.errorMessagesField;
@@ -3190,7 +3238,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("warningMessages")]
+        [System.Xml.Serialization.XmlElementAttribute("warningMessages", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string[] warningMessages {
             get {
                 return this.warningMessagesField;
@@ -3201,7 +3249,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("infoMessages")]
+        [System.Xml.Serialization.XmlElementAttribute("infoMessages", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string[] infoMessages {
             get {
                 return this.infoMessagesField;
@@ -3215,7 +3263,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     public enum statusCode {
         
         /// <remarks/>
@@ -3233,18 +3281,18 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrderSearchParametersResponseDetail))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrdersResponseDetail))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getIPAddressResponseDetail))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrderCountByStatusResponseDetail))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getCountriesResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getAccountResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrderHistoryResponseDetail))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrderResponseDetail))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrdersResponseDetail))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getCountriesResponseDetail))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getOrderCountByStatusResponseDetail))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getIPAddressResponseDetail))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     public partial class responseDetail {
         
         private responseStatus responseStatusField;
@@ -3266,7 +3314,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     public partial class getOrderSearchParametersResponseDetail : responseDetail {
         
         private orderSearchFieldDef[] searchableFieldsField;
@@ -3289,7 +3337,88 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class getAccountResponseDetail : responseDetail {
+        
+        private account[] accountsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public account[] accounts {
+            get {
+                return this.accountsField;
+            }
+            set {
+                this.accountsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class getOrderHistoryResponseDetail : responseDetail {
+        
+        private long resultSizeField;
+        
+        private orderEditChangeItem[] historyField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long resultSize {
+            get {
+                return this.resultSizeField;
+            }
+            set {
+                this.resultSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("historyItem", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public orderEditChangeItem[] history {
+            get {
+                return this.historyField;
+            }
+            set {
+                this.historyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class getOrderResponseDetail : responseDetail {
+        
+        private order orderField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public order order {
+            get {
+                return this.orderField;
+            }
+            set {
+                this.orderField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     public partial class getOrdersResponseDetail : responseDetail {
         
         private long resultSizeField;
@@ -3325,66 +3454,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class getIPAddressResponseDetail : responseDetail {
-        
-        private IPAddress[] ipAddressesField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("ipAddress", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public IPAddress[] ipAddresses {
-            get {
-                return this.ipAddressesField;
-            }
-            set {
-                this.ipAddressesField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class getOrderCountByStatusResponseDetail : responseDetail {
-        
-        private int totalOrderCountField;
-        
-        private orderStatusCount[] orderCountByStatusField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int totalOrderCount {
-            get {
-                return this.totalOrderCountField;
-            }
-            set {
-                this.totalOrderCountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("orderStatus", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public orderStatusCount[] orderCountByStatus {
-            get {
-                return this.orderCountByStatusField;
-            }
-            set {
-                this.orderCountByStatusField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     public partial class getCountriesResponseDetail : responseDetail {
         
         private long resultSizeField;
@@ -3420,99 +3490,76 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class getAccountResponseDetail : responseDetail {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class getOrderCountByStatusResponseDetail : responseDetail {
         
-        private account[] accountsField;
+        private int totalOrderCountField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public account[] accounts {
-            get {
-                return this.accountsField;
-            }
-            set {
-                this.accountsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.225")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile-v0_1")]
-    public partial class getOrderHistoryResponseDetail : responseDetail {
-        
-        private long resultSizeField;
-        
-        private orderEditChangeItem[] historyField;
+        private orderStatusCount[] orderCountByStatusField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public long resultSize {
+        public int totalOrderCount {
             get {
-                return this.resultSizeField;
+                return this.totalOrderCountField;
             }
             set {
-                this.resultSizeField = value;
+                this.totalOrderCountField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("historyItem", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public orderEditChangeItem[] history {
+        [System.Xml.Serialization.XmlArrayItemAttribute("orderStatus", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public orderStatusCount[] orderCountByStatus {
             get {
-                return this.historyField;
+                return this.orderCountByStatusField;
             }
             set {
-                this.historyField = value;
+                this.orderCountByStatusField = value;
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getOrderCompletedEventHandler(object sender, getOrderCompletedEventArgs e);
+    public delegate void getBlockedIPAddressesCompletedEventHandler(object sender, getBlockedIPAddressesCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class getBlockedIPAddressesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal getBlockedIPAddressesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public getOrderResponseDetail Result {
+        public getIPAddressResponseDetail Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((getOrderResponseDetail)(this.results[0]));
+                return ((getIPAddressResponseDetail)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void updateOrderNotesCompletedEventHandler(object sender, updateOrderNotesCompletedEventArgs e);
+    public delegate void refundOrderCompletedEventHandler(object sender, refundOrderCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class updateOrderNotesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class refundOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal updateOrderNotesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal refundOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -3528,17 +3575,199 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void blockIPCompletedEventHandler(object sender, blockIPCompletedEventArgs e);
+    public delegate void getOrderCountByStatusCompletedEventHandler(object sender, getOrderCountByStatusCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class blockIPCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class getOrderCountByStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal blockIPCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal getOrderCountByStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public getOrderCountByStatusResponseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((getOrderCountByStatusResponseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getSupportedCountriesCompletedEventHandler(object sender, getSupportedCountriesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getSupportedCountriesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getSupportedCountriesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public getCountriesResponseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((getCountriesResponseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void updateContactCompletedEventHandler(object sender, updateContactCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class updateContactCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal updateContactCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public responseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((responseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void pingCompletedEventHandler(object sender, pingCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class pingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal pingCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void updatePackageCompletedEventHandler(object sender, updatePackageCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class updatePackageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal updatePackageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public responseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((responseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getOrdersCompletedEventHandler(object sender, getOrdersCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getOrdersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getOrdersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public getOrdersResponseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((getOrdersResponseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void addPackageCompletedEventHandler(object sender, addPackageCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class addPackageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal addPackageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public responseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((responseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void unblockIPCompletedEventHandler(object sender, unblockIPCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class unblockIPCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal unblockIPCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -3606,17 +3835,17 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void updateOrderStatusCompletedEventHandler(object sender, updateOrderStatusCompletedEventArgs e);
+    public delegate void blockIPCompletedEventHandler(object sender, blockIPCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class updateOrderStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class blockIPCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal updateOrderStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal blockIPCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -3626,6 +3855,32 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((responseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getOrderCompletedEventHandler(object sender, getOrderCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public getOrderResponseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((getOrderResponseDetail)(this.results[0]));
             }
         }
     }
@@ -3658,32 +3913,6 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void refundOrderCompletedEventHandler(object sender, refundOrderCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class refundOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal refundOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public responseDetail Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((responseDetail)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void getAccountsCompletedEventHandler(object sender, getAccountsCompletedEventArgs e);
     
     /// <remarks/>
@@ -3710,84 +3939,6 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getSupportedCountriesCompletedEventHandler(object sender, getSupportedCountriesCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getSupportedCountriesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getSupportedCountriesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public getCountriesResponseDetail Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((getCountriesResponseDetail)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getOrderCountByStatusCompletedEventHandler(object sender, getOrderCountByStatusCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getOrderCountByStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getOrderCountByStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public getOrderCountByStatusResponseDetail Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((getOrderCountByStatusResponseDetail)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void unblockIPCompletedEventHandler(object sender, unblockIPCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class unblockIPCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal unblockIPCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public responseDetail Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((responseDetail)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void captureAllPaymentsCompletedEventHandler(object sender, captureAllPaymentsCompletedEventArgs e);
     
     /// <remarks/>
@@ -3799,136 +3950,6 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         private object[] results;
         
         internal captureAllPaymentsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public responseDetail Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((responseDetail)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getBlockedIPAddressesCompletedEventHandler(object sender, getBlockedIPAddressesCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getBlockedIPAddressesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getBlockedIPAddressesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public getIPAddressResponseDetail Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((getIPAddressResponseDetail)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void removePackageCompletedEventHandler(object sender, removePackageCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class removePackageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal removePackageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public responseDetail Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((responseDetail)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void pingCompletedEventHandler(object sender, pingCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class pingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal pingCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void getOrdersCompletedEventHandler(object sender, getOrdersCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getOrdersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getOrdersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public getOrdersResponseDetail Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((getOrdersResponseDetail)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void voiceAuthCaptureCompletedEventHandler(object sender, voiceAuthCaptureCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class voiceAuthCaptureCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal voiceAuthCaptureCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -3970,17 +3991,17 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void addPackageCompletedEventHandler(object sender, addPackageCompletedEventArgs e);
+    public delegate void voiceAuthCaptureCompletedEventHandler(object sender, voiceAuthCaptureCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class addPackageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class voiceAuthCaptureCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal addPackageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal voiceAuthCaptureCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -3996,43 +4017,17 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void updateContactCompletedEventHandler(object sender, updateContactCompletedEventArgs e);
+    public delegate void removePackageCompletedEventHandler(object sender, removePackageCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class updateContactCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class removePackageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal updateContactCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public responseDetail Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((responseDetail)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void updatePackageCompletedEventHandler(object sender, updatePackageCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class updatePackageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal updatePackageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal removePackageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -4068,6 +4063,58 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((getOrderSearchParametersResponseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void updateOrderStatusCompletedEventHandler(object sender, updateOrderStatusCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class updateOrderStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal updateOrderStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public responseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((responseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void updateOrderNotesCompletedEventHandler(object sender, updateOrderNotesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class updateOrderNotesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal updateOrderNotesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public responseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((responseDetail)(this.results[0]));
             }
         }
     }

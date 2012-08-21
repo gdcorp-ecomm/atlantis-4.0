@@ -16,10 +16,11 @@ namespace Atlantis.Framework.QSCGetOrderSearchParameters.Tests
     [DeploymentItem("atlantis.config")]
     public void GetOrderSearchParameterList()
     {
-      string _shopperId = "859775";
+			string _shopperId = "837435";
       int requestId = 545;
+			string accountUid = "265ddd62-2f88-11de-baa9-005056956427";
 
-      QSCGetOrderSearchParametersRequestData request = new QSCGetOrderSearchParametersRequestData(_shopperId, "", string.Empty, string.Empty, 1);
+      QSCGetOrderSearchParametersRequestData request = new QSCGetOrderSearchParametersRequestData(_shopperId, "", string.Empty, string.Empty, 1, accountUid);
 
       request.RequestTimeout = TimeSpan.FromSeconds(30);
 

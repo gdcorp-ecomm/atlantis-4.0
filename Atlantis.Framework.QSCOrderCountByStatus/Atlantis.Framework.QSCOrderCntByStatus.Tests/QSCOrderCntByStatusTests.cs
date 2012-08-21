@@ -10,7 +10,7 @@ namespace Atlantis.Framework.QSCOrderCntByStatus.Tests
     [TestMethod]
     public void GetOrderStatusesForShopAccount()
     {
-      string _shopperId = "847235";
+			string _shopperId = "837435";
       string _shopUid = "265ddd62-2f88-11de-baa9-005056956427";
       int requestId = 567;
 

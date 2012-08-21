@@ -69,10 +69,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://app.dev.fastshoppingcart-com.ide/xfws/Mobile%3fwsdl">
+    <WebReferenceUrl Include="http://app.dev.fastshoppingcart-com.ide/xfws/Mobile-v1.0%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\QSCMobileAPI\</RelPath>
-      <UpdateFromURL>http://app.dev.fastshoppingcart-com.ide/xfws/Mobile%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>http://app.dev.fastshoppingcart-com.ide/xfws/Mobile-v1.0%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -111,7 +111,7 @@
     <None Include="Web References\QSCMobileAPI\getOrdersResponseDetail.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\QSCMobileAPI\Mobile.wsdl" />
+    <None Include="Web References\QSCMobileAPI\Mobile-v1.wsdl" />
     <None Include="Web References\QSCMobileAPI\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

@@ -8,13 +8,19 @@ namespace Atlantis.Framework.QSCGetOrderSearchParameters.Interface
   public class QSCGetOrderSearchParametersRequestData : RequestData
   {
     public QSCGetOrderSearchParametersRequestData(string shopperId, 
-                                                  string sourceURL, 
-                                                  string orderId, 
-                                                  string pathway, 
-                                                  int pageCount) : base(shopperId, sourceURL, orderId, pathway, pageCount)
+        string sourceURL, 
+        string orderId, 
+        string pathway, 
+        int pageCount,
+				string accountUid)
+			: base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
+			AccountUid = accountUid;
+
       RequestTimeout = TimeSpan.FromSeconds(5);
     }
+
+		public string AccountUid { get; set; }
 
     private string CacheKey
     {

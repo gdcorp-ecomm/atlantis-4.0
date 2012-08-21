@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCGetOrderSearchParameters.Impl
       QSCGetOrderSearchParametersResponseData responseData = null;
       QSCGetOrderSearchParametersRequestData request = requestData as QSCGetOrderSearchParametersRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCGetOrderSearchParameters.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.getOrderSearchParameters();
+            response = service.getOrderSearchParameters(request.AccountUid, request.ShopperID);
 
             if (response != null)
               responseData = new QSCGetOrderSearchParametersResponseData((response as getOrderSearchParametersResponseDetail));

@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCGetAccounts.Impl
       QSCGetAccountsResponseData responseData = null;
       QSCGetAccountsRequestData request = requestData as QSCGetAccountsRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement) config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement) config).WSURL);
 
       try 
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCGetAccounts.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.getAccounts(request.ShopperID);
+						response = service.getAccounts(request.ShopperID);
 
             if (response != null)
               responseData = new QSCGetAccountsResponseData((response as getAccountResponseDetail));

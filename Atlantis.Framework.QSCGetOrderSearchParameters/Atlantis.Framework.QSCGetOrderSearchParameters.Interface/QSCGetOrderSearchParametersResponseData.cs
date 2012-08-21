@@ -5,7 +5,6 @@ using System.Text;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.QSC.Interface.Enums;
 using Atlantis.Framework.QSC.Interface.QSCMobileAPI;
-using Atlantis.Framework.SessionCache;
 
 namespace Atlantis.Framework.QSCGetOrderSearchParameters.Interface
 {

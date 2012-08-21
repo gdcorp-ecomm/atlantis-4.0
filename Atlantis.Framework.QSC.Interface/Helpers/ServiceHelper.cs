@@ -4,9 +4,9 @@ namespace Atlantis.Framework.QSC.Interface.Helpers
 {
   public static class ServiceHelper
   {
-    public static Mobile GetServiceReference(string wsUrl)
+    public static Mobilev10 GetServiceReference(string wsUrl)
     {
-      return new Mobile() { Url = wsUrl };
+      return new Mobilev10() { Url = wsUrl };
     }
   }
 }

@@ -61,10 +61,6 @@
       <Project>{A5D5AEB8-498A-487E-835A-A1262CBBC747}</Project>
       <Name>Atlantis.Framework.QSC.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
-      <Project>{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}</Project>
-      <Name>Atlantis.Framework.SessionCache</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.QSCGetOrderSearchParameters.Interface\Atlantis.Framework.QSCGetOrderSearchParameters.Interface.csproj">
       <Project>{11088273-7559-471E-8044-7C4107A8451F}</Project>
       <Name>Atlantis.Framework.QSCGetOrderSearchParameters.Interface</Name>

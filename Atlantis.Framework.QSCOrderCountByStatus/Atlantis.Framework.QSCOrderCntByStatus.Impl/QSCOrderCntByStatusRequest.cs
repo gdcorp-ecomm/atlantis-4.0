@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCOrderCntByStatus.Impl
       QSCOrderCntByStatusResponseData responseData = null;
       QSCOrderCntByStatusRequestData request = requestData as QSCOrderCntByStatusRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCOrderCntByStatus.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.getOrderCountByStatus(request.AccountUid, request.OnlyDashboardStatusTypes);
+            response = service.getOrderCountByStatus(request.AccountUid, request.ShopperID, request.OnlyDashboardStatusTypes);
 
             if (response != null)
               responseData = new QSCOrderCntByStatusResponseData((response as getOrderCountByStatusResponseDetail));

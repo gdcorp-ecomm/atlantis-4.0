@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCUpdateContact.Impl
       QSCUpdateContactResponseData responseData = null;
       QSCUpdateContactRequestData request = requestData as QSCUpdateContactRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCUpdateContact.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.updateContact(request.AccountUid, request.InvoiceId, request.Contact);
+            response = service.updateContact(request.AccountUid, request.ShopperID, request.InvoiceId, request.Contact);
 
             if (response != null)
               responseData = new QSCUpdateContactResponseData((response as responseDetail));

@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCUpdateOrderStatus.Impl
       QSCUpdateOrderStatusResponseData responseData = null;
       QSCUpdateOrderStatusRequestData request = requestData as QSCUpdateOrderStatusRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCUpdateOrderStatus.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.updateOrderStatus(request.AccountUid, request.InvoiceId, request.OrderStatus);
+            response = service.updateOrderStatus(request.AccountUid, request.ShopperID, request.InvoiceId, request.OrderStatus);
 
             if (response != null)
               responseData = new QSCUpdateOrderStatusResponseData((response as responseDetail));

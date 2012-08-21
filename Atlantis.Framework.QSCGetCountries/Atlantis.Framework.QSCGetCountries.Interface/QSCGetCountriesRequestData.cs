@@ -13,10 +13,13 @@ namespace Atlantis.Framework.QSCGetCountries.Interface
 			string sourceURL,
 			string orderId,
 			string pathway,
-			int pageCount
+			int pageCount,
+			string accountUid
 			)
 			: base(shopperId, sourceURL, orderId, pathway, pageCount)
 		{
+			AccountUid = accountUid;
+
 			IncludeRegions = false;
 			IncludeRegionsSpecified = false;
 			SortByCountryCode = false;
@@ -29,11 +32,14 @@ namespace Atlantis.Framework.QSCGetCountries.Interface
 			string orderId,
 			string pathway,
 			int pageCount,
+			string accountUid,
 			bool includeRegions,
 			bool sortByCountryCode
 			)
 			: base(shopperId, sourceURL, orderId, pathway, pageCount)
 		{
+			AccountUid = accountUid;
+
 			IncludeRegions = includeRegions;
 			IncludeRegionsSpecified = true;
 			SortByCountryCode = sortByCountryCode;
@@ -41,6 +47,7 @@ namespace Atlantis.Framework.QSCGetCountries.Interface
 			OrderSearchFields = new List<orderSearchField>();
 		}
 
+		public string AccountUid { get; set; }
 		public bool IncludeRegions { get; set; }
 		public bool IncludeRegionsSpecified { get; set; }
 		public bool SortByCountryCode { get; set; }

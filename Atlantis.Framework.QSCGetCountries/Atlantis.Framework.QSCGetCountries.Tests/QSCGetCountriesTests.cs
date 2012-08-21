@@ -13,14 +13,14 @@ namespace Atlantis.Framework.QSCGetCountries.Tests
 		public void GetCountries()
 		{
 			string _shopperId = "837435";
-			//string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";
+			string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";
 			int requestId = 581;
 
 			orderSearchField orderSearchField = new orderSearchField();
 			orderSearchField.property = "countryCode";
 			orderSearchField.value = string.Empty;
 
-			QSCGetCountriesRequestData request = new QSCGetCountriesRequestData(_shopperId, "", string.Empty, string.Empty, 1, true, false);
+			QSCGetCountriesRequestData request = new QSCGetCountriesRequestData(_shopperId, "", string.Empty, string.Empty, 1, _accountUid, true, false);
 
 			// add the search criteria to the request
 			request.OrderSearchFields.Add(orderSearchField);

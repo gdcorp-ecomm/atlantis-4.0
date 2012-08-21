@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCGetCountries.Impl
 			QSCGetCountriesResponseData responseData = null;
 			QSCGetCountriesRequestData request = requestData as QSCGetCountriesRequestData;
 
-			Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+			Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
 			try
 			{
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCGetCountries.Impl
 					{
 						service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-						response = service.getSupportedCountries(request.IncludeRegions, request.IncludeRegionsSpecified, request.SortByCountryCode, request.SortByCountryCodeSpecified, request.OrderSearchFields.ToArray() );
+						response = service.getSupportedCountries(request.AccountUid, request.ShopperID, request.IncludeRegions, request.IncludeRegionsSpecified, request.SortByCountryCode, request.SortByCountryCodeSpecified, request.OrderSearchFields.ToArray() );
 
 						if (response != null)
 							responseData = new QSCGetCountriesResponseData((response as getCountriesResponseDetail));

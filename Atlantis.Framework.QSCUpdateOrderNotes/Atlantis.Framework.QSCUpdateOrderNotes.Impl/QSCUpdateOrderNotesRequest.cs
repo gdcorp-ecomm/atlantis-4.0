@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCUpdateOrderNotes.Impl
       QSCUpdateOrderNotesResponseData responseData = null;
       QSCUpdateOrderNotesRequestData request = requestData as QSCUpdateOrderNotesRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCUpdateOrderNotes.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.updateOrderNotes(request.AccountUid, request.InvoiceId, request.OrderNotes);
+            response = service.updateOrderNotes(request.AccountUid, request.ShopperID, request.InvoiceId, request.OrderNotes);
 
             if (response != null)
               responseData = new QSCUpdateOrderNotesResponseData((response as responseDetail));

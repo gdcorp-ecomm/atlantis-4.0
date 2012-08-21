@@ -19,7 +19,7 @@ namespace Atlantis.Framework.QSCGetOrder.Impl
 			QSCGetOrderResponseData responseData = null;
 			QSCGetOrderRequestData request = requestData as QSCGetOrderRequestData;
 
-			Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+			Mobilev10	service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
 			try
 			{
@@ -29,7 +29,7 @@ namespace Atlantis.Framework.QSCGetOrder.Impl
 					{
 						service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-						response = service.getOrder(request.AccountUid, request.InvoiceId);
+						response = service.getOrder(request.AccountUid, request.ShopperID, request.InvoiceId);
 
 						if (response != null)
 							responseData = new QSCGetOrderResponseData((response as getOrderResponseDetail));

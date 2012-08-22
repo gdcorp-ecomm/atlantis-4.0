@@ -107,30 +107,30 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       }
     }
 
-    private int _headerImageTopSpacing;
+    private int? _headerImageTopSpacing;
     public int HeaderImageTopSpacing
     {
       get
       {
-        if (_headerImageTopSpacing == default(int))
+        if (!_headerImageTopSpacing.HasValue)
         {
           _headerImageTopSpacing = 10;
         }
-        return _headerImageTopSpacing; 
+        return _headerImageTopSpacing.Value; 
       }
       set { _headerImageTopSpacing = value; }
     }
 
-    private int _headerImageRightSpacing;
+    private int? _headerImageRightSpacing;
     public int HeaderImageRightSpacing
     {
       get 
       {
-        if (_headerImageRightSpacing == default(int))
+        if (!_headerImageRightSpacing.HasValue)
         {
           _headerImageRightSpacing = 10;
         }
-        return _headerImageRightSpacing; 
+        return _headerImageRightSpacing.Value; 
       }
       set { _headerImageRightSpacing = value; }
     }

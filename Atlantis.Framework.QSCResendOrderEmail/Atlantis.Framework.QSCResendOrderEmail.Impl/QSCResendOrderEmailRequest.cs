@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCResendOrderEmail.Impl
       QSCResendOrderEmailResponseData responseData = null;
       QSCResendOrderEmailRequestData request = requestData as QSCResendOrderEmailRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCResendOrderEmail.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.resendOrderEmail(request.AccountUid, request.InvoiceId, request.EmailToResend, request.PackageIds.ToArray(), request.UnpackedContentIds.ToArray());
+            response = service.resendOrderEmail(request.AccountUid, request.ShopperID, request.InvoiceId, request.EmailToResend, request.PackageIds.ToArray(), request.UnpackedContentIds.ToArray());
 
             if (response != null)
               responseData = new QSCResendOrderEmailResponseData((response as responseDetail));

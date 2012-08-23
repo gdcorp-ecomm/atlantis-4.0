@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCRefundOrder.Impl
       QSCRefundOrderResponseData responseData = null;
       QSCRefundOrderRequestData request = requestData as QSCRefundOrderRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCRefundOrder.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.refundOrder(request.AccountUid, request.InvoiceId);
+            response = service.refundOrder(request.AccountUid, request.ShopperID, request.InvoiceId);
 
             if (response != null)
               responseData = new QSCRefundOrderResponseData((response as responseDetail));

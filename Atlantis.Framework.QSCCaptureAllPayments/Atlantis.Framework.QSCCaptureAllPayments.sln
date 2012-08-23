@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{11780AEA-F438-4A0A-80AC-E880B1FC49E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSC.Interface", "..\Atlantis.Framework.QSC.Interface\Atlantis.Framework.QSC.Interface.csproj", "{A5D5AEB8-498A-487E-835A-A1262CBBC747}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCCaptureAllPayments.Impl", "Atlantis.Framework.QSCCaptureAllPayments.Impl\Atlantis.Framework.QSCCaptureAllPayments.Impl.csproj", "{90ED47B0-B632-4738-B3FC-02D5D3252A9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCCaptureAllPayments.Interface", "Atlantis.Framework.QSCCaptureAllPayments.Interface\Atlantis.Framework.QSCCaptureAllPayments.Interface.csproj", "{CAEADA56-B3B3-48D1-BC77-EA96BDFD9202}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCCaptureAllPayments.Tests", "Atlantis.Framework.QSCCaptureAllPayments.Tests\Atlantis.Framework.QSCCaptureAllPayments.Tests.csproj", "{68D9CC75-FF3F-4D06-BA1F-0920CA61C4A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD0DB52A-65FE-49C5-83AC-D305271DC8E0}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.QSCCaptureAllPayments.vsmdi = Atlantis.Framework.QSCCaptureAllPayments.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.QSCCaptureAllPayments.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.QSCCaptureAllPayments.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.QSC.Interface\\Atlantis.Framework.QSC.Interface.csproj
+		SccProjectName3 = ../Atlantis.Framework.QSC.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.QSC.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.QSCCaptureAllPayments.Impl\\Atlantis.Framework.QSCCaptureAllPayments.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.QSCCaptureAllPayments.Impl
+		SccLocalPath4 = Atlantis.Framework.QSCCaptureAllPayments.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.QSCCaptureAllPayments.Interface\\Atlantis.Framework.QSCCaptureAllPayments.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.QSCCaptureAllPayments.Interface
+		SccLocalPath5 = Atlantis.Framework.QSCCaptureAllPayments.Interface
+		SccProjectUniqueName6 = Atlantis.Framework.QSCCaptureAllPayments.Tests\\Atlantis.Framework.QSCCaptureAllPayments.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.QSCCaptureAllPayments.Tests
+		SccLocalPath6 = Atlantis.Framework.QSCCaptureAllPayments.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.QSCCaptureAllPayments.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90ED47B0-B632-4738-B3FC-02D5D3252A9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90ED47B0-B632-4738-B3FC-02D5D3252A9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90ED47B0-B632-4738-B3FC-02D5D3252A9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90ED47B0-B632-4738-B3FC-02D5D3252A9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAEADA56-B3B3-48D1-BC77-EA96BDFD9202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAEADA56-B3B3-48D1-BC77-EA96BDFD9202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAEADA56-B3B3-48D1-BC77-EA96BDFD9202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAEADA56-B3B3-48D1-BC77-EA96BDFD9202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D9CC75-FF3F-4D06-BA1F-0920CA61C4A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D9CC75-FF3F-4D06-BA1F-0920CA61C4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D9CC75-FF3F-4D06-BA1F-0920CA61C4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D9CC75-FF3F-4D06-BA1F-0920CA61C4A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {11780AEA-F438-4A0A-80AC-E880B1FC49E0}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {11780AEA-F438-4A0A-80AC-E880B1FC49E0}
+	EndGlobalSection
+EndGlobal

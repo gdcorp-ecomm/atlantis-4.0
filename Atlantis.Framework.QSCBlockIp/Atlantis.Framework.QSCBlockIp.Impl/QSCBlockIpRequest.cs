@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCBlockIp.Impl
       QSCBlockIpResponseData responseData = null;
       QSCBlockIpRequestData request = requestData as QSCBlockIpRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCBlockIp.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.blockIP(request.AccountUid, request.IpAddress);
+            response = service.blockIP(request.AccountUid, request.ShopperID, request.IpAddress);
 
             if (response != null)
               responseData = new QSCBlockIpResponseData((response as responseDetail));

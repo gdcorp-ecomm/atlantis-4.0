@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A883EEBC-6086-49C3-B684-83C00A922500}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSC.Interface", "..\Atlantis.Framework.QSC.Interface\Atlantis.Framework.QSC.Interface.csproj", "{A5D5AEB8-498A-487E-835A-A1262CBBC747}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCVoiceAuthCapture.Impl", "Atlantis.Framework.QSCVoiceAuthCapture.Impl\Atlantis.Framework.QSCVoiceAuthCapture.Impl.csproj", "{CD2E1470-F048-4C9B-8C23-C2D0C5244369}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCVoiceAuthCapture.Interface", "Atlantis.Framework.QSCVoiceAuthCapture.Interface\Atlantis.Framework.QSCVoiceAuthCapture.Interface.csproj", "{2EE93BA0-AA32-4DD2-9427-848DE226666B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCVoiceAuthCapture.Tests", "Atlantis.Framework.QSCVoiceAuthCapture.Tests\Atlantis.Framework.QSCVoiceAuthCapture.Tests.csproj", "{8186E7D4-E3D8-43F9-B72B-E1DA2E45E8FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{799EE9A7-5223-41A5-A49D-F2ACA4584B7B}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.QSCVoiceAuthCapture.vsmdi = Atlantis.Framework.QSCVoiceAuthCapture.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.QSCVoiceAuthCapture.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.QSCVoiceAuthCapture.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.QSC.Interface\\Atlantis.Framework.QSC.Interface.csproj
+		SccProjectName3 = ../Atlantis.Framework.QSC.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.QSC.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.QSCVoiceAuthCapture.Impl\\Atlantis.Framework.QSCVoiceAuthCapture.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.QSCVoiceAuthCapture.Impl
+		SccLocalPath4 = Atlantis.Framework.QSCVoiceAuthCapture.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.QSCVoiceAuthCapture.Interface\\Atlantis.Framework.QSCVoiceAuthCapture.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.QSCVoiceAuthCapture.Interface
+		SccLocalPath5 = Atlantis.Framework.QSCVoiceAuthCapture.Interface
+		SccProjectUniqueName6 = Atlantis.Framework.QSCVoiceAuthCapture.Tests\\Atlantis.Framework.QSCVoiceAuthCapture.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.QSCVoiceAuthCapture.Tests
+		SccLocalPath6 = Atlantis.Framework.QSCVoiceAuthCapture.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.QSCVoiceAuthCapture.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD2E1470-F048-4C9B-8C23-C2D0C5244369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD2E1470-F048-4C9B-8C23-C2D0C5244369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD2E1470-F048-4C9B-8C23-C2D0C5244369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD2E1470-F048-4C9B-8C23-C2D0C5244369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EE93BA0-AA32-4DD2-9427-848DE226666B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE93BA0-AA32-4DD2-9427-848DE226666B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE93BA0-AA32-4DD2-9427-848DE226666B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE93BA0-AA32-4DD2-9427-848DE226666B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8186E7D4-E3D8-43F9-B72B-E1DA2E45E8FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8186E7D4-E3D8-43F9-B72B-E1DA2E45E8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8186E7D4-E3D8-43F9-B72B-E1DA2E45E8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8186E7D4-E3D8-43F9-B72B-E1DA2E45E8FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {A883EEBC-6086-49C3-B684-83C00A922500}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {A883EEBC-6086-49C3-B684-83C00A922500}
+	EndGlobalSection
+EndGlobal

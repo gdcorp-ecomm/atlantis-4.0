@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCEditOrderEmail.Impl
       QSCEditOrderEmailResponseData responseData = null;
       QSCEditOrderEmailRequestData request = requestData as QSCEditOrderEmailRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCEditOrderEmail.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.editOrderEmail(request.AccountUid, request.InvoiceId, request.EmailAddress);
+            response = service.editOrderEmail(request.AccountUid, request.ShopperID, request.InvoiceId, request.EmailAddress);
 
             if (response != null)
               responseData = new QSCEditOrderEmailResponseData((response as responseDetail));

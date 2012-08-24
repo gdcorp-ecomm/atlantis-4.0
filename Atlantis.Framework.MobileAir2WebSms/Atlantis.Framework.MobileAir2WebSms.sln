@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{47E92067-61E9-4B65-ABEF-574F7E879319}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{092618E1-1F37-422C-82AF-17A1337B8986}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{29E7CCC1-0F54-45F9-8492-62145046C625}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{17EBED78-9469-4678-96B1-A175AB221916}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobileAir2WebSms.Impl", "Atlantis.Framework.MobileAir2WebSms.Impl\Atlantis.Framework.MobileAir2WebSms.Impl.csproj", "{2B38AF62-870D-4797-A040-86EFDFCA745C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobileAir2WebSms.Interface", "Atlantis.Framework.MobileAir2WebSms.Interface\Atlantis.Framework.MobileAir2WebSms.Interface.csproj", "{953A2D2A-8C7F-4D43-A969-F3BB9DB6B03E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MobileAir2WebSms.Tests", "Atlantis.Framework.MobileAir2WebSms.Tests\Atlantis.Framework.MobileAir2WebSms.Tests.csproj", "{ECEB453E-AF19-4856-A18B-EE6641A38A89}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E5F7A878-AFF1-4C7A-90D5-C7C223590B96}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.MobileAir2WebSms.vsmdi = Atlantis.Framework.MobileAir2WebSms.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.MobileAir2WebSms.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.MobileAir2WebSms.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.MobileAir2WebSms.sln
+		SccProjectName3 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath3 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName4 = Atlantis.Framework.MobileAir2WebSms.Impl\\Atlantis.Framework.MobileAir2WebSms.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.MobileAir2WebSms.Impl
+		SccLocalPath4 = Atlantis.Framework.MobileAir2WebSms.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.MobileAir2WebSms.Interface\\Atlantis.Framework.MobileAir2WebSms.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.MobileAir2WebSms.Interface
+		SccLocalPath5 = Atlantis.Framework.MobileAir2WebSms.Interface
+		SccProjectUniqueName6 = Atlantis.Framework.MobileAir2WebSms.Tests\\Atlantis.Framework.MobileAir2WebSms.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.MobileAir2WebSms.Tests
+		SccLocalPath6 = Atlantis.Framework.MobileAir2WebSms.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.MobileAir2WebSms.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29E7CCC1-0F54-45F9-8492-62145046C625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29E7CCC1-0F54-45F9-8492-62145046C625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29E7CCC1-0F54-45F9-8492-62145046C625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29E7CCC1-0F54-45F9-8492-62145046C625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B38AF62-870D-4797-A040-86EFDFCA745C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B38AF62-870D-4797-A040-86EFDFCA745C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B38AF62-870D-4797-A040-86EFDFCA745C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B38AF62-870D-4797-A040-86EFDFCA745C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{953A2D2A-8C7F-4D43-A969-F3BB9DB6B03E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{953A2D2A-8C7F-4D43-A969-F3BB9DB6B03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{953A2D2A-8C7F-4D43-A969-F3BB9DB6B03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{953A2D2A-8C7F-4D43-A969-F3BB9DB6B03E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECEB453E-AF19-4856-A18B-EE6641A38A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECEB453E-AF19-4856-A18B-EE6641A38A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECEB453E-AF19-4856-A18B-EE6641A38A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECEB453E-AF19-4856-A18B-EE6641A38A89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{092618E1-1F37-422C-82AF-17A1337B8986} = {47E92067-61E9-4B65-ABEF-574F7E879319}
+		{29E7CCC1-0F54-45F9-8492-62145046C625} = {47E92067-61E9-4B65-ABEF-574F7E879319}
+		{17EBED78-9469-4678-96B1-A175AB221916} = {47E92067-61E9-4B65-ABEF-574F7E879319}
+	EndGlobalSection
+EndGlobal

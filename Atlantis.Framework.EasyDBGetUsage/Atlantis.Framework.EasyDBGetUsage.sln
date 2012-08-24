@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7AF2DAE2-9B93-46D1-9278-BE4E137BACE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EasyDBGetUsage.Impl", "Atlantis.Framework.EasyDBGetUsage.Impl\Atlantis.Framework.EasyDBGetUsage.Impl.csproj", "{446ACEA7-6547-4FBE-B53B-D8C92E2914C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EasyDBGetUsage.Interface", "Atlantis.Framework.EasyDBGetUsage.Interface\Atlantis.Framework.EasyDBGetUsage.Interface.csproj", "{05D10873-AB44-4B94-845D-7477D07AB08D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EasyDBGetUsage.Tests", "Atlantis.Framework.EasyDBGetUsage.Tests\Atlantis.Framework.EasyDBGetUsage.Tests.csproj", "{BA07788F-922F-4D63-AAD0-253C989CC5F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{15CC630F-6527-4B16-A1BF-9421D86D2DFA}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.EasyDBGetUsage.vsmdi = Atlantis.Framework.EasyDBGetUsage.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.EasyDBGetUsage.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.EasyDBGetUsage.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.EasyDBGetUsage.Impl\\Atlantis.Framework.EasyDBGetUsage.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.EasyDBGetUsage.Impl
+		SccLocalPath3 = Atlantis.Framework.EasyDBGetUsage.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.EasyDBGetUsage.Interface\\Atlantis.Framework.EasyDBGetUsage.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.EasyDBGetUsage.Interface
+		SccLocalPath4 = Atlantis.Framework.EasyDBGetUsage.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.EasyDBGetUsage.Tests\\Atlantis.Framework.EasyDBGetUsage.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.EasyDBGetUsage.Tests
+		SccLocalPath5 = Atlantis.Framework.EasyDBGetUsage.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.EasyDBGetUsage.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{446ACEA7-6547-4FBE-B53B-D8C92E2914C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{446ACEA7-6547-4FBE-B53B-D8C92E2914C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{446ACEA7-6547-4FBE-B53B-D8C92E2914C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446ACEA7-6547-4FBE-B53B-D8C92E2914C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05D10873-AB44-4B94-845D-7477D07AB08D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05D10873-AB44-4B94-845D-7477D07AB08D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05D10873-AB44-4B94-845D-7477D07AB08D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05D10873-AB44-4B94-845D-7477D07AB08D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA07788F-922F-4D63-AAD0-253C989CC5F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA07788F-922F-4D63-AAD0-253C989CC5F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA07788F-922F-4D63-AAD0-253C989CC5F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA07788F-922F-4D63-AAD0-253C989CC5F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {7AF2DAE2-9B93-46D1-9278-BE4E137BACE5}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {7AF2DAE2-9B93-46D1-9278-BE4E137BACE5}
+	EndGlobalSection
+EndGlobal

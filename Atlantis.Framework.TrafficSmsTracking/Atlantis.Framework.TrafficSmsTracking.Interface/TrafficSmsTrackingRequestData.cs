@@ -7,6 +7,11 @@ namespace Atlantis.Framework.TrafficSmsTracking.Interface
 {
   public class TrafficSmsTrackingRequestData : RequestData
   {
+    /// <summary>
+    /// Default Timeout is 8 seconds
+    /// </summary>
+    private static readonly TimeSpan _requestTimout = TimeSpan.FromSeconds(8);
+
     public Guid SmsId { get; set; }
 
     public Guid MessageId { get; set; }
@@ -53,16 +58,6 @@ namespace Atlantis.Framework.TrafficSmsTracking.Interface
 
     public string ProposedTld { get; set; }
 
-    /// <summary>
-    /// Default Timeout is 8 seconds
-    /// </summary>
-    private TimeSpan _requestTimout = TimeSpan.FromSeconds(8);
-    public TimeSpan RequestTimeout
-    {
-      get { return _requestTimout; }
-      set { _requestTimout = value; }
-    }
-
     public TrafficSmsTrackingRequestData(Guid smsId,
                                          Guid messageId,
                                          string phoneNumber,
@@ -97,6 +92,7 @@ namespace Atlantis.Framework.TrafficSmsTracking.Interface
       IsAvailable = isAvailable;
       ProposedSld = proposedSld;
       ProposedTld = proposedTld;
+      RequestTimeout = _requestTimout;
     }
 
     public override string GetCacheMD5()

@@ -3,20 +3,21 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D50083F7-3444-4C34-AADE-FA02B731F54C}</ProjectGuid>
+    <ProjectGuid>{6477619B-032D-411F-852E-6D636FAF634B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.TrafficSmsTracking.Impl</RootNamespace>
-    <AssemblyName>Atlantis.Framework.TrafficSmsTracking.Impl</AssemblyName>
+    <RootNamespace>Atlantis.Framework.ShortUrl.Tests</RootNamespace>
+    <AssemblyName>Atlantis.Framework.ShortUrl.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,23 +37,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service References\FbiSmsTrackingService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="TrafficSmsTrackingRequest.cs" />
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShortUrlTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
@@ -63,43 +61,21 @@
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.TrafficSmsTracking.Interface\Atlantis.Framework.TrafficSmsTracking.Interface.csproj">
-      <Project>{AF6202CA-B610-437D-95A8-C5142834308B}</Project>
-      <Name>Atlantis.Framework.TrafficSmsTracking.Interface</Name>
+    <ProjectReference Include="..\Atlantis.Framework.ShortUrl.Impl\Atlantis.Framework.ShortUrl.Impl.csproj">
+      <Project>{AAD3FFCC-81B7-4CBB-8A1F-A944A076ED25}</Project>
+      <Name>Atlantis.Framework.ShortUrl.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.ShortUrl.Interface\Atlantis.Framework.ShortUrl.Interface.csproj">
+      <Project>{90D4F81A-390E-4887-ACDA-7150038BF2B6}</Project>
+      <Name>Atlantis.Framework.ShortUrl.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Service References\FbiSmsTrackingService\fbiSmsTracking.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\FbiSmsTrackingService\fbiSmsTracking1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\FbiSmsTrackingService\fbiSmsTrackingService.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\FbiSmsTrackingService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\FbiSmsTrackingService\fbiSmsTracking.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\FbiSmsTrackingService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\FbiSmsTrackingService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\FbiSmsTrackingService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

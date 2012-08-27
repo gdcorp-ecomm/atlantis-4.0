@@ -62,11 +62,11 @@
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.TrafficSmsTracking.Impl\Atlantis.Framework.TrafficSmsTracking.Impl.csproj">
-      <Project>{D50083F7-3444-4C34-AADE-FA02B731F54C}</Project>
+      <Project>{d50083f7-3444-4c34-aade-fa02b731f54c}</Project>
       <Name>Atlantis.Framework.TrafficSmsTracking.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.TrafficSmsTracking.Interface\Atlantis.Framework.TrafficSmsTracking.Interface.csproj">
-      <Project>{AF6202CA-B610-437D-95A8-C5142834308B}</Project>
+      <Project>{af6202ca-b610-437d-95a8-c5142834308b}</Project>
       <Name>Atlantis.Framework.TrafficSmsTracking.Interface</Name>
     </ProjectReference>
   </ItemGroup>

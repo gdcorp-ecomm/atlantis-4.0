@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5f8cef36-6f9e-4a3c-83a4-dd5e6a6dcb47" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://sitetracking.dev.glbt1.gdg/fbiMobileTrackingSvc/fbiSmsTracking.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="fbiSmsTrackingService.wsdl" MetadataType="Wsdl" ID="0bd252b4-f511-453e-a9d5-4deda233022a" SourceId="1" SourceUrl="http://sitetracking.dev.glbt1.gdg/fbiMobileTrackingSvc/fbiSmsTracking.svc?wsdl" />
+    <MetadataFile FileName="fbiSmsTracking.xsd" MetadataType="Schema" ID="bb627ac4-a31e-4456-b3a3-27d277009168" SourceId="1" SourceUrl="http://sitetracking.dev.glbt1.gdg/fbiMobileTrackingSvc/fbiSmsTracking.svc?xsd=xsd0" />
+    <MetadataFile FileName="fbiSmsTracking.disco" MetadataType="Disco" ID="2c18d94e-c5f4-4f8b-81a4-9bba1845d03d" SourceId="1" SourceUrl="http://sitetracking.dev.glbt1.gdg/fbiMobileTrackingSvc/fbiSmsTracking.svc?disco" />
+    <MetadataFile FileName="fbiSmsTracking1.xsd" MetadataType="Schema" ID="e924eb18-f976-489e-a607-55000a5de689" SourceId="1" SourceUrl="http://sitetracking.dev.glbt1.gdg/fbiMobileTrackingSvc/fbiSmsTracking.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

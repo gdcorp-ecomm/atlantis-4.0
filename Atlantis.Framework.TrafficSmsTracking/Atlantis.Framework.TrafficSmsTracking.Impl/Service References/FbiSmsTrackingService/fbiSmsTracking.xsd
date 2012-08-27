@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://sitetracking.dev.glbt1.gdg/fbiMobileTrackingSvc/fbiSmsTracking.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:element name="SendData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="smsID" type="q1:guid" />
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="air2WebID" type="q2:guid" />
+        <xs:element minOccurs="0" name="phoneNumberHash" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobileCarrier" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="inboundTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="inboundMessage" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="searchedSld" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="searchedTld" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isAvailable" type="xs:boolean" />
+        <xs:element minOccurs="0" name="outboundTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="outboundMessage" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="actionPerformed" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sentSld" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sentTld" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobileServer" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDataResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

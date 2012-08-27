@@ -11,7 +11,7 @@ namespace Atlantis.Framework.EasyDBGetUsage.Tests
   [TestClass]
   public class EasyDBGetUsageTests
   {
-    private const string _shopperId = "858346";
+    private const string _shopperId = "842904";
     private const int _privateLabelId = 1;
     private const int _requestType = 294;
 
@@ -58,7 +58,7 @@ namespace Atlantis.Framework.EasyDBGetUsage.Tests
          , string.Empty
          , 0
          , _privateLabelId
-         , "0766fd0e-1f6c-11e0-9353-0050569575d8");
+         , "c0381b67-ed3a-11e1-8695-0050569575d8");
 
       request.RequestTimeout = TimeSpan.FromSeconds(30);
 
@@ -90,7 +90,7 @@ namespace Atlantis.Framework.EasyDBGetUsage.Tests
          , string.Empty
          , 0
          , _privateLabelId
-         , "0766fd0e-1f6c-11e0-9353-0050569575d8");
+         , "c0381b67-ed3a-11e1-8695-0050569575d8");
 
       request.RequestTimeout = TimeSpan.FromSeconds(30);
 
@@ -122,7 +122,7 @@ namespace Atlantis.Framework.EasyDBGetUsage.Tests
          , string.Empty
          , 0
          , _privateLabelId
-         , "0766fd0e-1f6c-11e0-9353-0050569575d8");
+         , "c0381b67-ed3a-11e1-8695-0050569575d8");
 
       request.RequestTimeout = TimeSpan.FromSeconds(30);
 
@@ -155,7 +155,7 @@ namespace Atlantis.Framework.EasyDBGetUsage.Tests
          , string.Empty
          , 0
          , _privateLabelId
-         , "0766fd0e-1f6c-11e0-9353-0050569575d8");
+         , "c0381b67-ed3a-11e1-8695-0050569575d8");
 
       request.RequestTimeout = TimeSpan.FromSeconds(30);
 

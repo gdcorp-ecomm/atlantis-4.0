@@ -74,16 +74,22 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
       set { this[PaymentProfileFields.FirstName] = value; }
     }
 
-    public string Address1
+    public string MiddleName
     {
-      get { return GetStringProperty(PaymentProfileFields.Address1, string.Empty); }
-      set { this[PaymentProfileFields.Address1] = value; }
+      get { return GetStringProperty(PaymentProfileFields.MiddleName, string.Empty); }
+      set { this[PaymentProfileFields.MiddleName] = value; }
     }
 
     public string LastName
     {
       get { return GetStringProperty(PaymentProfileFields.LastName, string.Empty); }
       set { this[PaymentProfileFields.LastName] = value; }
+    }
+
+    public string Address1
+    {
+      get { return GetStringProperty(PaymentProfileFields.Address1, string.Empty); }
+      set { this[PaymentProfileFields.Address1] = value; }
     }
 
     public string Address2
@@ -170,10 +176,10 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
       set { this[PaymentProfileFields.LicenseState] = value; }
     }
 
-    public string DatOfBirth
+    public string DateOfBirth
     {
-      get { return GetStringProperty(PaymentProfileFields.DatOfBirth, string.Empty); }
-      set { this[PaymentProfileFields.DatOfBirth] = value; }
+      get { return GetStringProperty(PaymentProfileFields.DateOfBirth, string.Empty); }
+      set { this[PaymentProfileFields.DateOfBirth] = value; }
     }
 
     public string DisplayFriendlyName
@@ -235,6 +241,7 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
       public const string ExpirationYear = "cc_expyear";
       public const string Company = "company";
       public const string FirstName = "firstName";
+      public const string MiddleName = "middleName";
       public const string LastName = "lastName";
       public const string Address1 = "street1";
       public const string Address2 = "street2";
@@ -252,7 +259,7 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
       public const string AccountType = "account_type";
       public const string LicenseNo = "license_no";
       public const string LicenseState = "license_state";
-      public const string DatOfBirth = "dob";
+      public const string DateOfBirth = "dob";
 
       public const string ShopperID = "shopper_id";
     }

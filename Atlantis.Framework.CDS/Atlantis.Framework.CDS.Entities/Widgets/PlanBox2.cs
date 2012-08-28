@@ -128,6 +128,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       public string DropDownItemDisplayText { get; set; }
       public string TextBoxLabel { get; set; }
       public string BelowCheckBoxText { get; set; }
+      public string CheckBoxDurationText { get; set; }
 
       private bool? _matchPlanDuration;
       public bool? MatchPlanDuration

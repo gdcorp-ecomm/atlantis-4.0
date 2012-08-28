@@ -149,5 +149,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public class PlanDetail : ElementBase { }
     public class PlanFeature : ElementBase { }
+
+    public bool Filtered { get; set; }
   }
 }

@@ -12,6 +12,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string FormName { get; set; }
     public bool IsDefaultPlanBox { get; set; }
     public int BasePFID { get; set; }
+    public int PlanHeadingPFID { get; set; }
     public string PlanPricePrefix { get; set; }
     public int Width { get; set; }
     public string Title { get; set; }

@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{832733F5-33F6-4CAC-8858-3893391140D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSC.Interface", "..\Atlantis.Framework.QSC.Interface\Atlantis.Framework.QSC.Interface.csproj", "{A5D5AEB8-498A-487E-835A-A1262CBBC747}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCCapturePayment.Impl", "Atlantis.Framework.QSCCapturePayment.Impl\Atlantis.Framework.QSCCapturePayment.Impl.csproj", "{E1FF4B27-AE73-43C6-92A5-159D9BDD5CAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCCapturePayment.Interface", "Atlantis.Framework.QSCCapturePayment.Interface\Atlantis.Framework.QSCCapturePayment.Interface.csproj", "{4CCA4C15-6508-4698-93A6-8D07F6D108D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.QSCCapturePayment.Tests", "Atlantis.Framework.QSCCapturePayment.Tests\Atlantis.Framework.QSCCapturePayment.Tests.csproj", "{19C0C86F-1A81-4696-A605-93BAE3BCB4AE}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.QSCCapturePayment.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.QSCCapturePayment.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.QSC.Interface\\Atlantis.Framework.QSC.Interface.csproj
+		SccProjectName3 = ../Atlantis.Framework.QSC.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.QSC.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.QSCCapturePayment.Impl\\Atlantis.Framework.QSCCapturePayment.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.QSCCapturePayment.Impl
+		SccLocalPath4 = Atlantis.Framework.QSCCapturePayment.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.QSCCapturePayment.Interface\\Atlantis.Framework.QSCCapturePayment.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.QSCCapturePayment.Interface
+		SccLocalPath5 = Atlantis.Framework.QSCCapturePayment.Interface
+		SccProjectUniqueName6 = Atlantis.Framework.QSCCapturePayment.Tests\\Atlantis.Framework.QSCCapturePayment.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.QSCCapturePayment.Tests
+		SccLocalPath6 = Atlantis.Framework.QSCCapturePayment.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5D5AEB8-498A-487E-835A-A1262CBBC747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1FF4B27-AE73-43C6-92A5-159D9BDD5CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1FF4B27-AE73-43C6-92A5-159D9BDD5CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1FF4B27-AE73-43C6-92A5-159D9BDD5CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1FF4B27-AE73-43C6-92A5-159D9BDD5CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CCA4C15-6508-4698-93A6-8D07F6D108D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CCA4C15-6508-4698-93A6-8D07F6D108D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CCA4C15-6508-4698-93A6-8D07F6D108D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CCA4C15-6508-4698-93A6-8D07F6D108D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19C0C86F-1A81-4696-A605-93BAE3BCB4AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19C0C86F-1A81-4696-A605-93BAE3BCB4AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19C0C86F-1A81-4696-A605-93BAE3BCB4AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19C0C86F-1A81-4696-A605-93BAE3BCB4AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {832733F5-33F6-4CAC-8858-3893391140D1}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {832733F5-33F6-4CAC-8858-3893391140D1}
+	EndGlobalSection
+EndGlobal

@@ -270,14 +270,14 @@
       </xs:complexType>
       <xs:complexType name="itemReference">
         <xs:sequence />
+        <xs:attribute name="itemId" type="xs:int" use="required" />
         <xs:attribute name="itemIdRef" type="xs:int" use="required" />
         <xs:attribute name="quantity" type="xs:int" use="required" />
       </xs:complexType>
       <xs:complexType name="money">
         <xs:sequence />
+        <xs:attribute name="currencyCode" type="xs:string" />
         <xs:attribute name="value" type="xs:decimal" use="required" />
-        <xs:attribute name="currencyCode" type="xs:string" use="required" />
-        <xs:attribute name="currencySymbol" type="xs:string" use="required" />
         <xs:attribute name="displayText" type="xs:string" use="required" />
       </xs:complexType>
       <xs:complexType name="updatePackageResponse">
@@ -319,11 +319,10 @@
         <xs:sequence>
           <xs:element name="invoiceId" type="xs:string" />
           <xs:element name="orderStatus" type="tns:orderStatus" />
-          <xs:element name="currencyCode" type="xs:string" />
+          <xs:element name="orderCurrency" type="tns:orderCurrency" />
           <xs:element name="email" type="xs:string" />
           <xs:element name="orderDate" type="xs:string" />
           <xs:element name="captureStatus" type="xs:string" />
-          <xs:element name="voiceAuthCaptureStatus" type="xs:string" />
           <xs:element name="name" type="xs:string" />
           <xs:element name="total" type="tns:money" />
           <xs:element minOccurs="0" name="totalSummary">
@@ -335,6 +334,12 @@
           </xs:element>
           <xs:element minOccurs="0" name="ipAddress" type="tns:IPAddress" />
         </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="orderCurrency">
+        <xs:sequence />
+        <xs:attribute name="currencyCode" type="xs:string" use="required" />
+        <xs:attribute name="currencySymbol" type="xs:string" use="required" />
+        <xs:attribute name="currencyFormat" type="xs:string" use="required" />
       </xs:complexType>
       <xs:complexType name="orderTotalItem">
         <xs:sequence>
@@ -438,6 +443,7 @@
               <xs:element name="isCapturable" type="xs:boolean" />
               <xs:element name="isVoiceAuthCapturable" type="xs:boolean" />
               <xs:element name="isRefundable" type="xs:boolean" />
+              <xs:element name="totalRefunds" type="tns:money" />
               <xs:element name="allowedNextStatuses">
                 <xs:complexType>
                   <xs:sequence>
@@ -549,8 +555,14 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="paymentStatus" type="xs:string" />
           <xs:element name="paymentMethod" type="xs:string" />
+          <xs:element name="billingStatus" type="xs:string" />
+          <xs:element name="isCapturable" type="xs:boolean" />
+          <xs:element name="isVoiceAuthCapturable" type="xs:boolean" />
+          <xs:element name="captureStatus" type="xs:string" />
+          <xs:element name="voiceAuthCaptureStatus" type="xs:string" />
           <xs:element name="amountBeforeRefunds" type="tns:money" />
           <xs:element name="amountAfterRefunds" type="tns:money" />
+          <xs:element minOccurs="0" name="amountTotalRefunds" type="tns:money" />
           <xs:element minOccurs="0" name="paymentNote" type="xs:string" />
           <xs:element name="paymentTypeLabel" type="xs:string" />
           <xs:element minOccurs="0" name="transactionToken" type="xs:string" />

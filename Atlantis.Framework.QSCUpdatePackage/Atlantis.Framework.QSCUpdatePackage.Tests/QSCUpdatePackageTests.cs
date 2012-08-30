@@ -21,8 +21,7 @@ namespace Atlantis.Framework.QSCUpdatePackage.Tests
 
       _updatePackage.packageId = 4118;
       _updatePackage.trackingNumber = string.Empty;
-      _updatePackage.shipDateSpecified = true;
-      _updatePackage.shipDate = DateTime.Now;
+      _updatePackage.shipDate = DateTime.Now.ToShortDateString();
 
       List<itemReference> items = new List<itemReference>(1);
 

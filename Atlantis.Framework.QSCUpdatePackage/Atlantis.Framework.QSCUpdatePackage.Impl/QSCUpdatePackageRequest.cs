@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCUpdatePackage.Impl
       QSCUpdatePackageResponseData responseData = null;
       QSCUpdatePackageRequestData request = requestData as QSCUpdatePackageRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCUpdatePackage.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.updatePackage(request.AccountUid, request.InvoiceId, request.Package);
+            response = service.updatePackage(request.AccountUid, request.ShopperID, request.InvoiceId, request.Package);
 
             if (response != null)
               responseData = new QSCUpdatePackageResponseData((response as responseDetail));

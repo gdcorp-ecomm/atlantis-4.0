@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCRemovePackage.Impl
       QSCRemovePackageResponseData responseData = null;
       QSCRemovePackageRequestData request = requestData as QSCRemovePackageRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCRemovePackage.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.removePackage(request.AccountUid, request.InvoiceId, request.PackageId);
+            response = service.removePackage(request.AccountUid, request.ShopperID, request.InvoiceId, request.PackageId);
 
             if (response != null)
               responseData = new QSCRemovePackageResponseData((response as responseDetail));

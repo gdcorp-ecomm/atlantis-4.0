@@ -16,7 +16,7 @@ namespace Atlantis.Framework.QSCAddPackage.Impl
       QSCAddPackageResponseData responseData = null;
       QSCAddPackageRequestData request = requestData as QSCAddPackageRequestData;
 
-      Mobile service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
 
       try
       {
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.QSCAddPackage.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.addPackage(request.AccountUid, request.InvoiceId, request.Items.ToArray());
+            response = service.addPackage(request.AccountUid, request.ShopperID, request.InvoiceId, request.Items.ToArray());
 
             if (response != null)
               responseData = new QSCAddPackageResponseData((response as responseDetail));

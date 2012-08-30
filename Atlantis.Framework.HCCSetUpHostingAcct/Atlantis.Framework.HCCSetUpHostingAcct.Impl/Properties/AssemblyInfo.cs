@@ -5,8 +5,13 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.HCCSetUpHostingAcct.Impl")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+#if DEBUG 
+[assembly: AssemblyDescription("Debug Build")] 
+[assembly: AssemblyConfiguration("Debug")] 
+#else
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release")]
+#endif 
 [assembly: AssemblyCompany("GoDaddy.com")]
 [assembly: AssemblyProduct("Atlantis.Framework.HCCSetUpHostingAcct.Impl")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com 2010-2011")]
@@ -32,4 +37,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.11.9.24")]
+[assembly: AssemblyFileVersion("4.12.8.30")]

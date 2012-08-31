@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="IISSettingsResponse" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Atlantis.Framework.HCCSetupOptions.Impl.HCCAPIWebService.IISSettingsResponse</TypeInfo>
+   <TypeInfo>Atlantis.Framework.HCCSetupOptions.Impl.HCCAPIWebService.IISSettingsResponse, Web References.HCCAPIWebService.Reference.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

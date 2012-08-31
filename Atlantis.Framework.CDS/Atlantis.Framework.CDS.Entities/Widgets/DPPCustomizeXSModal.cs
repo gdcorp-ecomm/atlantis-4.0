@@ -3,9 +3,9 @@ using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
-  public class DPPCustomizeXSModal : IWidgetModel
+  public class DPPCrossSellModal : IWidgetModel
   {
-    public DPPCustomizeXSModal()
+    public DPPCrossSellModal()
     {
     }
 
@@ -46,12 +46,12 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       {
         public int ProductGroupID { get; set; }
         public int ProductID { get; set; }
-        public string Text { get; set; }
         public PopIn Details { get; set; }
       }
 
     }
 
+    // Possibly this could be added to PageSharedData via a Plugin or previous widget - need more details.
     public class Disclaimer : ElementBase  // Needs to be filterable based on whether or not the symbols are added.  IE, if hosting is not displayed, don't display the hosting products  
     {
       public Disclaimer(string symbol, string text)
@@ -61,7 +61,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       }
 
       public string Symbol { get; set; }
-      public string Text { get; set; }
     }
 
     public class PopIn
@@ -74,13 +73,16 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
       public string Title { get; set; }
       public string Text { get; set; }
+
+      // Should be in code-behind of widget:
+      /*
       public string Display
       {
         get
         {
           return string.Format("<span class=\"g-hover\">{0} <div class=\"g-hover-bubble\" style=\"display:none;\">{1}</div></span>", Title, Text);
         }
-      }
+      }*/
     }
   }
 }

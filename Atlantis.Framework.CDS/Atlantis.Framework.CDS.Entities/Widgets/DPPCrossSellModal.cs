@@ -11,11 +11,11 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public string Title { get; set; }
     public string ButtonText { get; set; }
-    public List<Grouped_Product> GroupedProducts { get; set; }
+    public List<GroupedProduct> GroupedProducts { get; set; }
     public List<Disclaimer> Disclaimers { get; set; }
     public string DisclaimerText { get; set; }
 
-    public class Grouped_Product
+    public class GroupedProduct
     {
       public string Title { get; set; }
       public List<Product> Products { get; set; } // Needs to be filterable by if the product group is offered

@@ -7833,6 +7833,9 @@ namespace Atlantis.Framework.HCCSetUpHostingAcct.Impl.HCCAPIWebService {
         
         /// <remarks/>
         PHP5,
+        
+        /// <remarks/>
+        PHP53,
     }
     
     /// <remarks/>

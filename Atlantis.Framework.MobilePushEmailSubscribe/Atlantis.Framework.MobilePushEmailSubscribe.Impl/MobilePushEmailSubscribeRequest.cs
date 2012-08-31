@@ -67,10 +67,9 @@ namespace Atlantis.Framework.MobilePushEmailSubscribe.Impl
 
       try
       {
-        string callBackBaseUrl = wsConfigElement.GetConfigValue("NotificationServiceUrl");
-        if (string.IsNullOrEmpty(callBackBaseUrl))
+        if (string.IsNullOrEmpty(mobilePushEmailSubscribeRequestData.CallbackUrl))
         {
-          throw new Exception("NotificationServiceUrl must be set in the atlantis.config as a config value");
+          throw new Exception("CallbackUrl cannot be empty.");
         }
 
         if(string.IsNullOrEmpty(mobilePushEmailSubscribeRequestData.PushRegistrationId))
@@ -83,7 +82,7 @@ namespace Atlantis.Framework.MobilePushEmailSubscribe.Impl
           throw new Exception("Email cannot be empty.");
         }
 
-        string callBackUrl = string.Format("{0}?action=Notification&login={1}", callBackBaseUrl,
+        string callBackUrl = string.Format("{0}?action=Notification&login={1}", mobilePushEmailSubscribeRequestData.CallbackUrl,
                                                                                 mobilePushEmailSubscribeRequestData.Email);
 
         string subscriptionUrl = string.Format("{0}?action=SUBSCRIBE&login={1}", wsConfigElement.WSURL, mobilePushEmailSubscribeRequestData.Email);

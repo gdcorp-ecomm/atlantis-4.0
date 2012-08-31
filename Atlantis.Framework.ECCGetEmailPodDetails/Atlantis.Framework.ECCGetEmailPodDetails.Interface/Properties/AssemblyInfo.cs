@@ -4,15 +4,15 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.ECC.Interface")]
-#if DEBUG
-[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyTitle("Atlantis.Framework.ECCGetEmailPodDetails.Interface")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug")]
 #else
-[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyDescription("Release")]
 #endif
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, LLC")]
-[assembly: AssemblyProduct("Atlantis.Framework.ECC.Interface")]
+[assembly: AssemblyProduct("Atlantis.Framework.ECCGetEmailPodDetails.Interface")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2010-2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f9251e32-5146-4fd2-9af8-ae87deb214d0")]
+[assembly: Guid("82cab5bc-0e92-4269-8817-23ced314bf65")]
 
 // Version information for an assembly consists of the following four values:
 //

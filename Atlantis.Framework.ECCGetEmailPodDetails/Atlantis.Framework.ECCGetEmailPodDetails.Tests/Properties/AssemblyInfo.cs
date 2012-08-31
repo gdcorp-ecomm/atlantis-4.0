@@ -1,19 +1,16 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.ECC.Interface")]
-#if DEBUG
-[assembly: AssemblyDescription("Debug Build")]
-#else
-[assembly: AssemblyDescription("Release Build")]
-#endif
+[assembly: AssemblyTitle("Atlantis.Framework.ECCGetEmailPodDetails.Tests")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com, LLC")]
-[assembly: AssemblyProduct("Atlantis.Framework.ECC.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2010-2012")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("Atlantis.Framework.ECCGetEmailPodDetails.Tests")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -23,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f9251e32-5146-4fd2-9af8-ae87deb214d0")]
+[assembly: Guid("350fce44-e83a-4ef8-9f49-6e244aecda58")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -35,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.12.8.30")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

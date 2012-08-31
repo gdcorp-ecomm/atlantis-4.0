@@ -7,7 +7,7 @@ namespace Atlantis.Framework.HCCGetAccountList.Interface
 {
   public class HCCGetAccountListRequestData : RequestData
   {
-    static readonly TimeSpan _requestTimeout = TimeSpan.FromSeconds(20);
+    static readonly TimeSpan _requestTimeout = TimeSpan.FromSeconds(30);
     public HCCGetAccountListRequestData(string shopperId,
 								                        string sourceUrl,
 								                        string orderId,

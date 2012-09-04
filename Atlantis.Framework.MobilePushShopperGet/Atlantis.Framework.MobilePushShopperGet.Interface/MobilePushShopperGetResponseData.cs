@@ -95,7 +95,27 @@ namespace Atlantis.Framework.MobilePushShopperGet.Interface
                   mobileDeviceId = deviceIdAttribute.Value;
                 }
 
-                Records.Add(new MobilePushShopperRecord(shopperPushId, registrationId, mobileAppId, mobileDeviceId));
+                string shopperId = string.Empty;
+                XmlAttribute shopperIdAttribute = itemNode.Attributes["shopper_id"];
+                if (shopperIdAttribute != null)
+                {
+                  shopperId = shopperIdAttribute.Value;
+                }
+
+                string pushEmail = string.Empty;
+                XmlAttribute pushEmailAttribute = itemNode.Attributes["push_email"];
+                if (shopperIdAttribute != null)
+                {
+                  pushEmail = pushEmailAttribute.Value;
+                }
+
+                int pushEmailSubscriptionId = 0;
+                XmlAttribute pushEmailSubscriptionIdAttribute = itemNode.Attributes["push_email_subscriptionID"];
+                if (shopperPushIdAttribute != null)
+                {
+                  int.TryParse(pushEmailSubscriptionIdAttribute.Value, out pushEmailSubscriptionId);
+                }
+                Records.Add(new MobilePushShopperRecord(shopperPushId, registrationId, mobileAppId, mobileDeviceId, shopperId, pushEmail, pushEmailSubscriptionId));
               }
             }
           }

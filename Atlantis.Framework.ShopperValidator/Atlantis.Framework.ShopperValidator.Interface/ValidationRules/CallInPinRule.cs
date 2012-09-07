@@ -39,7 +39,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
 
         if (isCallInPinSequential || isCallInPinSameFour)
         {
-          base.RulesToValidate.Add(new BlankRule(false, string.Concat(_fieldName, " must be 4 non-sequential digits")));
+          base.RulesToValidate.Add(new BlankRule(false, string.Concat(_fieldName, " cannot be any straight numerical sequence of digits.")));
         }
       }
     }

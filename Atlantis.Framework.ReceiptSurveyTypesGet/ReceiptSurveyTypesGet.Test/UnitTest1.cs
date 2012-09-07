@@ -44,6 +44,26 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Test
       string p = "pause";
     }
 
+    //[TestMethod]
+    //[DeploymentItem("atlantis.config")]
+    //[DeploymentItem("app.config")]
+    //public void GetAllPopuldate()
+    //{
+    //  var request = new ReceiptSurveyTypesGetRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "us");
+    //  var response = DataCache.DataCache.GetProcessRequest(request, 562) as ReceiptSurveyTypesGetResponseData;
+    //  //var response = Engine.Engine.ProcessRequest(request, 562) as ReceiptSurveyTypesGetResponseData;
+    //  Assert.IsTrue(response.IsSuccess);
+    //  var filteredItems = response.PopulateSurveyItems(true, true, false);
+
+    //  WriteValuesToDebug(filteredItems);
+    //  Debug.WriteLine("---- TV ITEMS ---- ");
+    //  WriteValuesToDebug(response.TvSurveyTypes);
+    //  Debug.WriteLine("---- OTHER ITEMS ----");
+    //  WriteValuesToDebug(response.OtherSurveyTypes);
+
+    //  string p = "pause";
+    //}
+
     private void WriteValuesToDebug(List<SurveyItem> items)
     {
       foreach (SurveyItem item in items)

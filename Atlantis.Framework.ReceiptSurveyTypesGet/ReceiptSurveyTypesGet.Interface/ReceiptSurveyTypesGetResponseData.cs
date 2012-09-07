@@ -51,8 +51,14 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
       IsSuccess = false;
     }
 
-    #region Filter And Randomize
-    public List<SurveyItem> RandomizeSurveyItems(bool addPositionValue = false)
+    #region Populate survey item list.
+    [Obsolete("Use PopulateSurveyItems instead")]
+    public List<SurveyItem> RandomizeSurveyItems(bool addPositionValue)
+    {
+      return PopulateSurveyItems(addPositionValue, true);
+    }
+
+    public List<SurveyItem> PopulateSurveyItems(bool addPositionValue = false, bool randomizeItems = true, bool removeTvText = false)
     {
       _tvSurveyTypes = new List<SurveyItem>();
       _otherSurveyTypes = new List<SurveyItem>();
@@ -65,9 +71,14 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
       foreach (SurveyItem item in AllSurveyTypes)
       {
         SurveyItem clonedItem = item.Clone(rnd.Next(max)) as SurveyItem;
-        
+
         if (item.IsTVItem) // is item part of TV group
         {
+          if (removeTvText)
+          {
+            clonedItem.Text = clonedItem.Text.Replace("TV - ", string.Empty);
+          }
+
           if (!item.IsRacingItem)  //if it's not a racing item in the TV group
           {
             _tvSurveyTypes.Add(clonedItem);
@@ -83,19 +94,31 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
         }
       }
 
-      _tvSurveyTypes.Sort(); //sorts by random value
-      _otherSurveyTypes.Sort(); //sorts by random value
-      
+      if (randomizeItems)
+      {
+        _tvSurveyTypes.Sort(); //sorts by random value
+        _otherSurveyTypes.Sort(); //sorts by random value
+      }
+
       int insertIndex = new Random().Next(_tvSurveyTypes.Count - 1);
       _tvSurveyTypes.InsertRange(insertIndex, tvTypesRacing);
+
+      if (!randomizeItems) //sort alphabetically
+      {
+        _tvSurveyTypes = _tvSurveyTypes.OrderBy(si => si.Text).ToList();
+        _otherSurveyTypes = _otherSurveyTypes.OrderBy(si => si.Text).ToList();
+      }
+
       allSurveyTypes.AddRange(_tvSurveyTypes);
       allSurveyTypes.AddRange(_otherSurveyTypes);
-      
+
       if (addPositionValue)
       {
         int position = 1;
         allSurveyTypes.ForEach(si => AddPositionToSurveyItem(ref si, ref position));
       }
+
+      _tvSurveyTypes.Insert(0, new SurveyItem("1", "Select One...", string.Empty));
       
       return allSurveyTypes;
     }

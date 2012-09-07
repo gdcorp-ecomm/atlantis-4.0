@@ -16,21 +16,23 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
     private string _requestUrl = string.Empty;
     private string _pathway = string.Empty;
     private int _pageCount = 0;
+    private bool _isNewShopper;
 
     /// <summary>
     /// Should ONLY be used when requestUrl, pathway, and pageCount are undefined.  Otherwise use constructor which accepts these parameters.
     /// </summary>
-    public PasswordRule(string value, string username = "", string passwordHint = "", string fieldName = FieldNames.Password)
+    public PasswordRule(string value, bool isNewShopper, string username = "", string passwordHint = "", string fieldName = FieldNames.Password)
       : base()
     {
       _fieldName = fieldName;
       _username = username ?? string.Empty;
       _password = value ?? string.Empty;
+      _isNewShopper = isNewShopper;
 
       base.RulesToValidate.Add(new RequiredRule(fieldName, value));
 
       #region Not match username
-      if (!string.IsNullOrEmpty(username))
+      if (!string.IsNullOrEmpty(_username))
       {
         base.RulesToValidate.Add(new NotMatchRule(fieldName, value, "Username", _username));
       }
@@ -46,9 +48,9 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
       BuildCustomRules();
     }
 
-    public PasswordRule(string value, string requestUrl, string pathway, int pageCount, string username = "",
+    public PasswordRule(string value, bool isNewShopper, string requestUrl, string pathway, int pageCount, string username = "",
       string passwordHint = "", string fieldName = FieldNames.Password)
-      : this(value, username, passwordHint, fieldName)
+      : this(value, isNewShopper, username, passwordHint, fieldName)
     {
       _requestUrl = requestUrl;
       _pageCount = pageCount;
@@ -86,7 +88,11 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
 
     private void DoAuthValidatePasswordRequest()
     {
-      var request = new AuthValidatePasswordRequestData(_username, _requestUrl, string.Empty, _pathway, _pageCount, _password);
+      //we do NOT want to pass a shopper/username into this method b/c  it's a new shopper. 
+      //Ecomm's WS will fail b/c it can't find the _username b/c it hasn't been inserted yet..
+      string temporaryUserName = _isNewShopper ? string.Empty : _username;
+      
+      var request = new AuthValidatePasswordRequestData(temporaryUserName, _requestUrl, string.Empty, _pathway, _pageCount, _password);
       var response = Engine.Engine.ProcessRequest(request, EngineRequestValues.AuthValidatePassword) as AuthValidatePasswordResponseData;
 
       if (response.StatusCode != TwoFactorWebserviceResponseCodes.Success)

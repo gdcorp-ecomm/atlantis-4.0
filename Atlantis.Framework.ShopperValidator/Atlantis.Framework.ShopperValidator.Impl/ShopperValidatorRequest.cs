@@ -76,8 +76,8 @@ namespace Atlantis.Framework.ShopperValidator.Impl
       #region Password Rules
       shopperToValidate.Username.RuleContainer = new UsernameRule(shopperToValidate.Username.Value, requestData.SourceURL, 
         requestData.Pathway, requestData.PageCount, requestData.IsNewShopper);
-      shopperToValidate.Password.RuleContainer = new PasswordRule(shopperToValidate.Password.Value, requestData.SourceURL,
-        requestData.Pathway, requestData.PageCount, shopperToValidate.Username.Value, shopperToValidate.PasswordHint.Value);
+      shopperToValidate.Password.RuleContainer = new PasswordRule(shopperToValidate.Password.Value, requestData.IsNewShopper,
+        requestData.SourceURL, requestData.Pathway, requestData.PageCount, shopperToValidate.Username.Value, shopperToValidate.PasswordHint.Value);
       shopperToValidate.PasswordConfirm.RuleContainer = new PasswordConfirmRule(shopperToValidate.PasswordConfirm.Value, shopperToValidate.Password.Value);
       shopperToValidate.CallInPin.RuleContainer = new CallInPinRule(shopperToValidate.CallInPin.Value);
       #endregion

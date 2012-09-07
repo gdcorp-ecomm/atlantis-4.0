@@ -30,6 +30,8 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
         string forward = "0123456789012";
         string backward = "0987654321098";
         int firstNumber = Convert.ToInt16(_callInPin.Substring(0, 1));
+        
+        if (firstNumber == 0) { firstNumber = 1; }  //prevents division by zero
 
         //cannot be same four digits or in any numerically ascending/descending order 
         bool isCallInPinSameFour = callInPin == 0 || (callInPin / firstNumber == 1111);

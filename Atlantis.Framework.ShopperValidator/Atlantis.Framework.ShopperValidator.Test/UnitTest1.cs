@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using Atlantis.Framework.ShopperValidator.Interface.ValidationRules;
-using Atlantis.Framework.ShopperValidator.Interface.Validator;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.ShopperValidator.Interface.ShopperValidation;
 using Atlantis.Framework.ShopperValidator.Interface;
+using Atlantis.Framework.ShopperValidator.Interface.ShopperValidation;
+using Atlantis.Framework.ShopperValidator.Interface.ValidationRules;
 using Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRules;
 using Atlantis.Framework.ShopperValidator.Interface.Validator;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.ShopperValidator.Test
 {
@@ -62,16 +61,16 @@ namespace Atlantis.Framework.ShopperValidator.Test
       AnyPhoneRule workPhoneIntl = new AnyPhoneRule(_workPhoneValidIntl, true, "aj");
       AnyPhoneRule workPhoneMissing = new AnyPhoneRule(string.Empty, true);
       AnyPhoneRule workPhoneMissingValid = new AnyPhoneRule(string.Empty, "work phone missing valid");
-      PasswordRule passwordruleBlacklist = new PasswordRule("Password1234");
-      PasswordRule passwordruleNoCapital = new PasswordRule("thisisnotvalid1234");
-      PasswordRule passwordruleNoNumber = new PasswordRule("Thisisnotvalid");
-      PasswordRule passwordruleMinLength = new PasswordRule("short");
-      PasswordRule passwordruleMaxLength = new PasswordRule(_overMaxLength);
-      PasswordRule passwordruleNotMatchCurrentHint = new PasswordRule("Seth456sethseth", "867900");
+      PasswordRule passwordruleBlacklist = new PasswordRule("Password1234", false);
+      PasswordRule passwordruleNoCapital = new PasswordRule("thisisnotvalid1234", false);
+      PasswordRule passwordruleNoNumber = new PasswordRule("Thisisnotvalid", false);
+      PasswordRule passwordruleMinLength = new PasswordRule("short", false);
+      PasswordRule passwordruleMaxLength = new PasswordRule(_overMaxLength, false);
+      PasswordRule passwordruleNotMatchCurrentHint = new PasswordRule("Seth456sethseth", false, "867900");
 
       BlankRule mybr = new BlankRule(false, "error");
 
-      PasswordRule passwordRuleNotMatchNewHint = new PasswordRule("shouldstopbeforeothervalidations", string.Empty, "shouldstopbeforeothervalidations");
+      PasswordRule passwordRuleNotMatchNewHint = new PasswordRule("shouldstopbeforeothervalidations", false, string.Empty, "shouldstopbeforeothervalidations");
 
       AddAllRules(emailRule, zipRuleUs, zipRuleOther, lastName, firstName, address1, address2, stateRule,
         workInvalidStart, workPhoneInvalidChars, workPhoneValid, workPhoneUsFail, workPhoneIntl, workPhoneMissing, workPhoneMissingValid,
@@ -96,6 +95,10 @@ namespace Atlantis.Framework.ShopperValidator.Test
       cipr.Validate();
       UsernameRule unr = new UsernameRule("myusername");
       unr.Validate();
+
+      PasswordRule pwRule = new PasswordRule("Seth1seth", true, "jasdfj29nask3", "asdf");
+      pwRule.Validate();
+      bool b = pwRule.IsValid;
 
     }
 

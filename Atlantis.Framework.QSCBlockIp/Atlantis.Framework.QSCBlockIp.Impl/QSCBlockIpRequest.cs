@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCBlockIp.Impl
       {
         responseData = new QSCBlockIpResponseData(request, ex);
       }
-      finally
-      {
-        if (service != null)
-        {
-          service.Dispose();
-        }
-      }
       return responseData;
     }
 

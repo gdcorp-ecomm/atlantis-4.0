@@ -8,19 +8,16 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.QSCGetOrderSearchParameters.Interface")]
 
 #if DEBUG
-
-[assembly: AssemblyDescription("Debug")]
-
+[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug")]
 #else
-
-[assembly: AssemblyDescription("Release")]
-
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release")]
 #endif
 
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("GoDaddy.com, LLC")]
 [assembly: AssemblyProduct("Atlantis.Framework.QSCGetOrderSearchParameters.Interface")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -42,5 +39,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.12.9.7")]

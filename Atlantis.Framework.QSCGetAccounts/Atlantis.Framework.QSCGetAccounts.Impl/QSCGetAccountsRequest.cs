@@ -30,20 +30,12 @@ namespace Atlantis.Framework.QSCGetAccounts.Impl
 
             if (response != null)
               responseData = new QSCGetAccountsResponseData((response as getAccountResponseDetail));
-
           }
         }
       }
       catch (Exception ex)
       {
         responseData = new QSCGetAccountsResponseData(request, ex);
-      }
-      finally
-      {
-        if (service != null)
-        {
-          service.Dispose();
-        }
       }
       return responseData;
     }

@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCUnblockIP.Impl
 			{
 				responseData = new QSCUnblockIPResponseData(request, ex);
 			}
-			finally
-			{
-				if (service != null)
-				{
-					service.Dispose();
-				}
-			}
 			return responseData;
 		}
 

@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCVoiceAuthCapture.Impl
 			{
 				responseData = new QSCVoiceAuthCaptureResponseData(request, ex);
 			}
-			finally
-			{
-				if (service != null)
-				{
-					service.Dispose();
-				}
-			}
 			return responseData;
 		}
 

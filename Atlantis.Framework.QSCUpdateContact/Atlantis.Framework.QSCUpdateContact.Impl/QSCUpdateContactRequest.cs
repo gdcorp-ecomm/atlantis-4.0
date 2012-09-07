@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCUpdateContact.Impl
       {
         responseData = new QSCUpdateContactResponseData(request, ex);
       }
-      finally
-      {
-        if (service != null)
-        {
-          service.Dispose();
-        }
-      }
       return responseData;
     }
 

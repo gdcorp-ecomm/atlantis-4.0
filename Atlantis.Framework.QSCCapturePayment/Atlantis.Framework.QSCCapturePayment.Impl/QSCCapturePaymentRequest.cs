@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCCapturePayment.Impl
 			{
 				responseData = new QSCCapturePaymentResponseData(request, ex);
 			}
-			finally
-			{
-				if (service != null)
-				{
-					service.Dispose();
-				}
-			}
 			return responseData;
 		}
 

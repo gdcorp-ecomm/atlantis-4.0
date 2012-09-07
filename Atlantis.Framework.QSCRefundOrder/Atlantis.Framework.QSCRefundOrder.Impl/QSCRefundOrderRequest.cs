@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCRefundOrder.Impl
       {
         responseData = new QSCRefundOrderResponseData(request, ex);
       }
-      finally
-      {
-        if (service != null)
-        {
-          service.Dispose();
-        }
-      }
       return responseData;
     }
 

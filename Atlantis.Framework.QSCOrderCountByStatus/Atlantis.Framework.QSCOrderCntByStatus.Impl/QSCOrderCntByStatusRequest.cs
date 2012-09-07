@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCOrderCntByStatus.Impl
       {
         responseData = new QSCOrderCntByStatusResponseData(request, ex);
       }
-      finally
-      {
-        if (service != null)
-        {
-          service.Dispose();
-        }
-      }
       return responseData;
     }
 

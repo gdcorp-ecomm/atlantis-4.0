@@ -40,13 +40,6 @@ namespace Atlantis.Framework.QSCGetOrder.Impl
 			{
 				responseData = new QSCGetOrderResponseData(request, ex);
 			}
-			finally
-			{
-				if (service != null)
-				{
-					service.Dispose();
-				}
-			}
 			return responseData;
 		}
 

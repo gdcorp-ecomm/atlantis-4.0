@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCUpdateOrderStatus.Impl
       {
         responseData = new QSCUpdateOrderStatusResponseData(request, ex);
       }
-      finally
-      {
-        if (service != null)
-        {
-          service.Dispose();
-        }
-      }
       return responseData;
     }
 

@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCGetCountries.Impl
 			{
 				responseData = new QSCGetCountriesResponseData(request, ex);
 			}
-			finally
-			{
-				if (service != null)
-				{
-					service.Dispose();
-				}
-			}
 			return responseData;
 		}
 

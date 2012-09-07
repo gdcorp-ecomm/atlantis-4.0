@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCEditOrderEmail.Impl
       {
         responseData = new QSCEditOrderEmailResponseData(request, ex);
       }
-      finally
-      {
-        if (service != null)
-        {
-          service.Dispose();
-        }
-      }
       return responseData;
     }
 

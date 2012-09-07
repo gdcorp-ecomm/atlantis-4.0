@@ -9,15 +9,14 @@ using System.Runtime.InteropServices;
 
 #if DEBUG
 
-[assembly: AssemblyDescription("Debug")]
-
+[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug")]
 #else
 
-[assembly: AssemblyDescription("Release")]
-
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Debug")]
 #endif
 
-[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, LLC")]
 [assembly: AssemblyProduct("Atlantis.Framework.QSCAddPackage.Impl")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2012")]

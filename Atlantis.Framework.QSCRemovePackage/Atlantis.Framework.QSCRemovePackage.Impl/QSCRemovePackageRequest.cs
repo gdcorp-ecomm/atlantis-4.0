@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCRemovePackage.Impl
       {
         responseData = new QSCRemovePackageResponseData(request, ex);
       }
-      finally
-      {
-        if (service != null)
-        {
-          service.Dispose();
-        }
-      }
       return responseData;
     }
 

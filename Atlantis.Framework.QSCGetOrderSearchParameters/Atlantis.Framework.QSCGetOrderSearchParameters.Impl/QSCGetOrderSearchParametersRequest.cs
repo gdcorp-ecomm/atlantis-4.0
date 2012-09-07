@@ -38,13 +38,6 @@ namespace Atlantis.Framework.QSCGetOrderSearchParameters.Impl
       {
         responseData = new QSCGetOrderSearchParametersResponseData(request, ex);
       }
-      finally
-      {
-        if (service != null)
-        {
-          service.Dispose();
-        }
-      }
       return responseData;
     }
 

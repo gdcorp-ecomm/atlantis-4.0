@@ -8,16 +8,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.QSCUpdateContact.Impl")]
 
 #if DEBUG
-
-[assembly: AssemblyDescription("Debug")]
-
+[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug")]
 #else
-
-[assembly: AssemblyDescription("Release")]
-
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release")]
 #endif
 
-[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, LLC")]
 [assembly: AssemblyProduct("Atlantis.Framework.QSCUpdateContact.Impl")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2012")]

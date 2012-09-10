@@ -28,7 +28,7 @@ namespace Atlantis.Framework.GeoByIP.Interface
     {
       if (otherLocation == null)
       {
-        throw new NullReferenceException();
+        throw new ArgumentException("Other location cannot be null.");
       }
 
       double delta_lat, delta_lon;

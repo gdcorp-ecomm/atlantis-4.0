@@ -423,7 +423,5 @@ namespace Atlantis.Framework.GeoByIP.Impl
 
       return result;
     }
-
-
   }
 }

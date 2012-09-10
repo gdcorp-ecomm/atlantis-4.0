@@ -12,12 +12,14 @@ namespace Atlantis.Framework.GeoByIP.Impl
 
     public GeoLocation GetLocation(string ipAddress)
     {
+      // TODO: Handle Internal IP mappings and Known Proxy mappings
+
       GeoLocation result = null;
 
       IPAddress address;
       if (IPAddress.TryParse(ipAddress, out address))
       {
-        result = GetLocationV6(address);
+        result = GetLocationV6(address.TryConvertToIPv6());
       }
 
       return result;

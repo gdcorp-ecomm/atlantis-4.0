@@ -13,12 +13,14 @@ namespace Atlantis.Framework.GeoByIP.Impl
 
     public GeoCountry GetCountry(string ipAddress)
     {
+      // TODO: Handle Internal IP mappings and Known Proxy mappings
+
       GeoCountry result = GeoCountry.UnknownCountry;
 
       IPAddress address;
       if (IPAddress.TryParse(ipAddress, out address))
       {
-        result = GetCountryV6(address);
+        result = GetCountryV6(address.TryConvertToIPv6());
       }
 
       return result;

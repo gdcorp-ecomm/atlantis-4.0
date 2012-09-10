@@ -66,6 +66,7 @@
     <Compile Include="ValidationRules\BirthDayRule.cs" />
     <Compile Include="ValidationRules\CallInPinRule.cs" />
     <Compile Include="ValidationRules\CityRule.cs" />
+    <Compile Include="ValidationRules\PasswordHintRule.cs" />
     <Compile Include="ValidationRules\PasswordConfirmRule.cs" />
     <Compile Include="ValidationRules\CountryRule.cs" />
     <Compile Include="ValidationRules\EmailRule.cs" />

@@ -100,6 +100,10 @@ namespace Atlantis.Framework.ShopperValidator.Test
       pwRule.Validate();
       bool b = pwRule.IsValid;
 
+      PasswordHintRule pwHintrule = new PasswordHintRule("lert");
+      pwHintrule.Validate();
+      Debug.WriteLine("pwHintrule.Isvalid:     " + pwHintrule.IsValid.ToString());
+
     }
 
     [TestMethod]

@@ -15,6 +15,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.RuleConstants
     public const string LastName = "Last name";
     public const string Password = "Password";
     public const string PasswordConfirm = "Confirm password";
+    public const string PasswordHint = "Password hint";
     public const string PhoneExtension = "Ext";
     public const string State = "State / Province";
     public const string Username = "Username";

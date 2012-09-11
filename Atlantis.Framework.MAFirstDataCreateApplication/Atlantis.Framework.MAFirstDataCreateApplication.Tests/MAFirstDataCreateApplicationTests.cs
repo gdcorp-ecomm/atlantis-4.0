@@ -45,9 +45,28 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    public void MAFirstDataCreateApplicationTest()
+    public void MAFirstDataCreateApplicationFailTest()
     {
-      int merchantAccountId = 1;
+      int merchantAccountId = 35000; //currently DEV has only 788+ rows so anything greater (like 35,000) will fail
+
+      MAFirstDataCreateApplicationRequestData request = new MAFirstDataCreateApplicationRequestData(_shopperId
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , merchantAccountId);
+
+      MAFirstDataCreateApplicationResponseData response = (MAFirstDataCreateApplicationResponseData)Engine.Engine.ProcessRequest(request, _requestType);
+
+      Assert.IsFalse(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void MAFirstDataCreateApplicationPassTest()
+    {
+      int merchantAccountId = 788;
+
       MAFirstDataCreateApplicationRequestData request = new MAFirstDataCreateApplicationRequestData(_shopperId
         , string.Empty
         , string.Empty

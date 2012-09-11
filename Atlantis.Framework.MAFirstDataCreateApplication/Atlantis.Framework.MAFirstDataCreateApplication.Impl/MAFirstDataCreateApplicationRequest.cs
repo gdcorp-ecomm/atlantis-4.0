@@ -8,8 +8,19 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
 {
   public class MAFirstDataCreateApplicationRequest : IRequest
   {
-    private const string PROC_NAME = "dbo.ma_??????????????_sp";
+    #region Constants
+    private const string PROC_NAME = "dbo.ma_merchantAccountUpdateApplicationDate_sp";
     private const string MERCHANT_ACCOUNT_ID_PARAM = "@merchantaccountid";
+    private const string RETVAL = "@return_value";
+    private const string ERROR_MSG = "Error attempting to update application date for MerchantAccountId: {0}";
+    private const int SUCCESS = 0;
+    #endregion
+
+    #region Properties
+    private int MerchantId { get; set; }
+    private string ErrorMessage { get; set; }
+    private Exception Error { get; set; }
+    #endregion
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
@@ -17,7 +28,9 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
 
       try
       {
+        int sqlResponse = -1;
         var request = (MAFirstDataCreateApplicationRequestData)requestData;
+        MerchantId = request.MerchantAccountId;
 
         using (var cn = new SqlConnection(Nimitz.NetConnect.LookupConnectInfo(config)))
         {
@@ -25,18 +38,32 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
           {
             cmd.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter(MERCHANT_ACCOUNT_ID_PARAM, request.MerchantAccountId));
+            cmd.Parameters.Add(new SqlParameter(MERCHANT_ACCOUNT_ID_PARAM, MerchantId));
+            SqlParameter returnParam = new SqlParameter(RETVAL, SqlDbType.Int);
+            returnParam.Direction = ParameterDirection.ReturnValue;
+            cmd.Parameters.Add(returnParam);
             cn.Open();
-            int x = cmd.ExecuteNonQuery();
+            try
+            {
+              cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+              ErrorMessage = ex.Message.Contains("No rows updated") ? "No rows updated.  " + string.Format(ERROR_MSG, MerchantId) : string.Format(ERROR_MSG, MerchantId);
+            }
+            sqlResponse = (int)cmd.Parameters[RETVAL].Value;
           }
         }
-        responseData = new MAFirstDataCreateApplicationResponseData();
-
-      }
-
-      catch (AtlantisException exAtlantis)
-      {
-        responseData = new MAFirstDataCreateApplicationResponseData(exAtlantis);
+        if (sqlResponse.Equals(SUCCESS) && string.IsNullOrEmpty(ErrorMessage))
+        {
+          responseData = new MAFirstDataCreateApplicationResponseData();
+        }
+        else
+        {
+          ErrorMessage = string.IsNullOrEmpty(ErrorMessage) ? string.Format(ERROR_MSG, MerchantId) : ErrorMessage;
+          Exception ex = new Exception(ErrorMessage);
+          responseData = new MAFirstDataCreateApplicationResponseData(requestData, ex);
+        }       
       }
 
       catch (Exception ex)

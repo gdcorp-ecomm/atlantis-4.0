@@ -15,11 +15,6 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Interface
     public MAFirstDataCreateApplicationResponseData()
     { }
 
-     public MAFirstDataCreateApplicationResponseData(AtlantisException atlantisException)
-    {
-      _exception = atlantisException;
-    }
-
     public MAFirstDataCreateApplicationResponseData(RequestData requestData, Exception exception)
     {
       _exception = new AtlantisException(requestData

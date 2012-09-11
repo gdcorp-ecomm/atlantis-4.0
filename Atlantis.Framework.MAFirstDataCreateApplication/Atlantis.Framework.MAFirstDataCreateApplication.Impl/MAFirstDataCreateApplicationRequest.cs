@@ -23,6 +23,7 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       MAFirstDataCreateApplicationResponseData responseData = null;
+      ErrorMessage = string.Empty;
 
       try
       {

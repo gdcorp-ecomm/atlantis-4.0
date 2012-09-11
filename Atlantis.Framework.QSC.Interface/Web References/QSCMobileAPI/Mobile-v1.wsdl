@@ -474,6 +474,13 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
+              <xs:element minOccurs="0" name="overpackedItems">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="itemPackingRef" type="tns:itemReference" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element name="shippingContact" type="tns:orderContact" />
               <xs:element minOccurs="0" name="shippings">
                 <xs:complexType>

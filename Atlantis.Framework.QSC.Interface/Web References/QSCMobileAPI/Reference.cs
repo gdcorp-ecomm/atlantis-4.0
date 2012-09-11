@@ -2840,6 +2840,8 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         
         private itemReference[] unpackedItemsField;
         
+        private itemReference[] overpackedItemsField;
+        
         private orderContact shippingContactField;
         
         private shipping[] shippingsField;
@@ -2995,6 +2997,18 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             }
             set {
                 this.unpackedItemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("itemPackingRef", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public itemReference[] overpackedItems {
+            get {
+                return this.overpackedItemsField;
+            }
+            set {
+                this.overpackedItemsField = value;
             }
         }
         

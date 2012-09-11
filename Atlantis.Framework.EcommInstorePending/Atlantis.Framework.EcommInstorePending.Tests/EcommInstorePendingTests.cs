@@ -15,7 +15,7 @@ namespace Atlantis.Framework.EcommInstorePending.Tests
       EcommInstorePendingRequestData request = new EcommInstorePendingRequestData("855503", string.Empty, string.Empty, string.Empty, 0, "USD");
       EcommInstorePendingResponseData response = (EcommInstorePendingResponseData)Engine.Engine.ProcessRequest(request, 596);
       Assert.AreEqual(0, response.Amount);
-      Assert.AreEqual(InstorePendingResult.UnknownResult, response.Result);
+      Assert.AreEqual(InstorePendingResult.NoCreditsToConsume, response.Result);
     }
 
     [TestMethod]

@@ -53,6 +53,7 @@ namespace Atlantis.Framework.EcommInstorePending.Interface
     public string ToXML()
     {
       XElement xml = new XElement("EcommInstorePendingResponseData",
+        new XAttribute("resultcode", ResultCode),
         new XAttribute("amount", Amount),
         new XAttribute("transactionalcurrencytype", TransactionalCurrencyType));
       return xml.ToString();

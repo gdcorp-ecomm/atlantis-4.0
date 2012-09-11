@@ -11,7 +11,7 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
     #region Constants
     private const string PROC_NAME = "dbo.ma_merchantAccountUpdateApplicationDate_sp";
     private const string MERCHANT_ACCOUNT_ID_PARAM = "@merchantaccountid";
-    private const string RETVAL = "@return_value";
+    private const string RETVAL_PARAM = "@return_value";
     private const string ERROR_MSG = "Error attempting to update application date for MerchantAccountId: {0}";
     private const int SUCCESS = 0;
     #endregion
@@ -39,7 +39,7 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
             cmd.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter(MERCHANT_ACCOUNT_ID_PARAM, MerchantId));
-            SqlParameter returnParam = new SqlParameter(RETVAL, SqlDbType.Int);
+            SqlParameter returnParam = new SqlParameter(RETVAL_PARAM, SqlDbType.Int);
             returnParam.Direction = ParameterDirection.ReturnValue;
             cmd.Parameters.Add(returnParam);
             cn.Open();
@@ -51,7 +51,7 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
             {
               ErrorMessage = ex.Message.Contains("No rows updated") ? "No rows updated.  " + string.Format(ERROR_MSG, MerchantId) : string.Format(ERROR_MSG, MerchantId);
             }
-            sqlResponse = (int)cmd.Parameters[RETVAL].Value;
+            sqlResponse = (int)cmd.Parameters[RETVAL_PARAM].Value;
           }
         }
         if (sqlResponse.Equals(SUCCESS) && string.IsNullOrEmpty(ErrorMessage))

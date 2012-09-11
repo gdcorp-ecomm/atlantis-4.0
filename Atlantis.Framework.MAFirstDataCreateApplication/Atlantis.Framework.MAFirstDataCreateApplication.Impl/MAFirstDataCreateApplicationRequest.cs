@@ -17,9 +17,7 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
     #endregion
 
     #region Properties
-    private int MerchantId { get; set; }
     private string ErrorMessage { get; set; }
-    private Exception Error { get; set; }
     #endregion
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
@@ -30,7 +28,6 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
       {
         int sqlResponse = -1;
         var request = (MAFirstDataCreateApplicationRequestData)requestData;
-        MerchantId = request.MerchantAccountId;
 
         using (var cn = new SqlConnection(Nimitz.NetConnect.LookupConnectInfo(config)))
         {
@@ -38,7 +35,7 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
           {
             cmd.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter(MERCHANT_ACCOUNT_ID_PARAM, MerchantId));
+            cmd.Parameters.Add(new SqlParameter(MERCHANT_ACCOUNT_ID_PARAM, request.MerchantAccountId));
             SqlParameter returnParam = new SqlParameter(RETVAL_PARAM, SqlDbType.Int);
             returnParam.Direction = ParameterDirection.ReturnValue;
             cmd.Parameters.Add(returnParam);
@@ -49,7 +46,7 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
             }
             catch (Exception ex)
             {
-              ErrorMessage = ex.Message.Contains("No rows updated") ? "No rows updated.  " + string.Format(ERROR_MSG, MerchantId) : string.Format(ERROR_MSG, MerchantId);
+              ErrorMessage = ex.Message.Contains("No rows updated") ? "No rows updated.  " + string.Format(ERROR_MSG, request.MerchantAccountId) : string.Format(ERROR_MSG, request.MerchantAccountId);
             }
             sqlResponse = (int)cmd.Parameters[RETVAL_PARAM].Value;
           }
@@ -60,7 +57,7 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
         }
         else
         {
-          ErrorMessage = string.IsNullOrEmpty(ErrorMessage) ? string.Format(ERROR_MSG, MerchantId) : ErrorMessage;
+          ErrorMessage = string.IsNullOrEmpty(ErrorMessage) ? string.Format(ERROR_MSG, request.MerchantAccountId) : ErrorMessage;
           Exception ex = new Exception(ErrorMessage);
           responseData = new MAFirstDataCreateApplicationResponseData(requestData, ex);
         }       

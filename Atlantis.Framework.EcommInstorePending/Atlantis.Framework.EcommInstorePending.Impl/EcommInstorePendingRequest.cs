@@ -55,6 +55,7 @@ namespace Atlantis.Framework.EcommInstorePending.Impl
           if (resultCode == -1)
           {
             string message = "Unexpected error: " + xmlResult;
+            throw new Exception(message);
           }
 
           string currency = (currencyAtt != null) ? currencyAtt.Value : "USD";

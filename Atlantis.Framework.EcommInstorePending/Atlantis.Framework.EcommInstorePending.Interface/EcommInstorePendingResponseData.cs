@@ -13,6 +13,8 @@ namespace Atlantis.Framework.EcommInstorePending.Interface
     public int Amount { get; set; }
     public string TransactionalCurrencyType { get; set; }
     public string ResultMessage { get; set; }
+    public bool HasExpiration { get; set; }
+    public DateTime Expires { get; set; }
 
     private void SetResult()
     {
@@ -23,11 +25,14 @@ namespace Atlantis.Framework.EcommInstorePending.Interface
       }
     }
 
-    public EcommInstorePendingResponseData(int resultCode, string resultMessage, int amount, string transactionalCurrencyType)
+    public EcommInstorePendingResponseData(int resultCode, string resultMessage, int amount, string transactionalCurrencyType, DateTime expires)
     {
       Amount = amount;
       ResultCode = resultCode;
       ResultMessage = resultMessage;
+      Expires = expires;
+      HasExpiration = (Expires != DateTime.MaxValue) && (Expires != DateTime.MinValue);
+
       if (!string.IsNullOrEmpty(transactionalCurrencyType))
       {
         TransactionalCurrencyType = transactionalCurrencyType;
@@ -46,6 +51,8 @@ namespace Atlantis.Framework.EcommInstorePending.Interface
       TransactionalCurrencyType = "USD";
       ResultCode = -1;
       ResultMessage = string.Empty;
+      Expires = DateTime.MinValue;
+      HasExpiration = false;
       SetResult();
       _exception = new AtlantisException(requestData, "EcommInstorePendingResponseData.ctor", ex.Message + ex.StackTrace, requestData.ToXML(), ex);
     }

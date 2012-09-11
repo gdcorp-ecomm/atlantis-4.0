@@ -25,6 +25,7 @@ namespace Atlantis.Framework.EcommInstoreAccept.Interface
     {
       ResultCode = resultCode;
       ResultMessage = resultMessage;
+
       SetResult();
     }
 

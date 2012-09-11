@@ -16,11 +16,11 @@ namespace Atlantis.Framework.EcommInstorePending.Impl
 
         if (string.IsNullOrEmpty(pendingRequest.ShopperID))
         {
-          result = new EcommInstorePendingResponseData((int)InstorePendingResult.EmptyShopper, "ShopperId missing", 0, "USD");
+          result = new EcommInstorePendingResponseData((int)InstorePendingResult.EmptyShopper, "ShopperId missing", 0, "USD", DateTime.MaxValue);
         }
         else if (string.IsNullOrEmpty(pendingRequest.TransactionalCurrencyType))
         {
-          result = new EcommInstorePendingResponseData((int)InstorePendingResult.EmptyCurrency, "Currency missing", 0, "USD");
+          result = new EcommInstorePendingResponseData((int)InstorePendingResult.EmptyCurrency, "Currency missing", 0, "USD", DateTime.MaxValue);
         }
         else
         {
@@ -37,6 +37,7 @@ namespace Atlantis.Framework.EcommInstorePending.Impl
           XAttribute currencyAtt = resultElement.Attribute("currency");
           XAttribute amountAtt = resultElement.Attribute("amount");
           XAttribute messageAtt = resultElement.Attribute("errorDesc");
+          XAttribute expiresAtt = resultElement.Attribute("expires");
 
           if (resultAtt == null)
           {
@@ -72,7 +73,13 @@ namespace Atlantis.Framework.EcommInstorePending.Impl
             }
           }
 
-          result = new EcommInstorePendingResponseData(resultCode, errorDesc, amount, currency);
+          DateTime expires;
+          if ((expiresAtt == null) || (!DateTime.TryParse(expiresAtt.Value, out expires)))
+          {
+            expires = DateTime.MaxValue;
+          }
+
+          result = new EcommInstorePendingResponseData(resultCode, errorDesc, amount, currency, expires);
         }
 
       }

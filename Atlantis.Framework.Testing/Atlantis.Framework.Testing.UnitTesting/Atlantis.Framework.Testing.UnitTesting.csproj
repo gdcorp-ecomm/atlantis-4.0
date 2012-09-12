@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\TestFixtureAttribute.cs" />
+    <Compile Include="BaseClasses\TestResultSummary.cs" />
     <Compile Include="BaseClasses\UnitTestBaseHttpHandler.cs" />
     <Compile Include="BaseClasses\TestExtendedLogData.cs" />
     <Compile Include="BaseClasses\TestResultData.cs" />

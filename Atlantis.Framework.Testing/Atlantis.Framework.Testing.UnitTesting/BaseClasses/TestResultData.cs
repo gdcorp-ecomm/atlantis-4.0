@@ -4,37 +4,60 @@ using System.Runtime.Serialization;
 
 namespace Atlantis.Framework.Testing.UnitTesting.BaseClasses
 {
-  [DataContract(IsReference = false, Name = "TestResultData", Namespace = "")]
-  public class TestResultData : ITestResults
-  {
-    private TestExtendedLogData _extLogData;
-    private List<TestResultBase> _testResults;
-
-    [DataMember]
-    public List<TestResultBase> TestResults
+    [DataContract(IsReference = false, Name = "TestResultData", Namespace = "")]
+    public class TestResultData : ITestResults
     {
-      get
-      {
-        if (_testResults == null)
-        {
-          _testResults = new List<TestResultBase>();
-        }
-        return _testResults;
-      }
-      set { _testResults = value; }
-    }
+        private TestExtendedLogData _extLogData;
+        private List<TestResultBase> _testResults;
+        private TestResultSummary _summary;
 
-    [DataMember]
-    public TestExtendedLogData ExtendedLogData
-    {
-      get
-      {
-        if (_extLogData == null)
+        [DataMember]
+        public List<TestResultBase> TestResults
         {
-          _extLogData = new TestExtendedLogData();
+            get
+            {
+                if (_testResults == null)
+                {
+                    _testResults = new List<TestResultBase>();
+                }
+                return _testResults;
+            }
+            set { _testResults = value; }
         }
-        return _extLogData;
-      }
+
+        [DataMember]
+        public TestExtendedLogData ExtendedLogData
+        {
+            get
+            {
+                if (_extLogData == null)
+                {
+                    _extLogData = new TestExtendedLogData();
+                }
+                return _extLogData;
+            }
+        }
+
+        [DataMember]
+        public int ProcessId { get; set; }
+
+        [DataMember]
+        public string AssemblyFileVersion { get; set; }
+
+        [DataMember]
+        public string ExecutingServerName { get; set; }
+
+        [DataMember]
+        public TestResultSummary Summary { 
+            get { 
+                if (_summary == null)
+                {
+                    _summary = new TestResultSummary();
+                }
+                return _summary;
+            }
+            set { _summary = value; }
+        }
+
     }
-  }
 }

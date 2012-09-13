@@ -9,6 +9,8 @@ namespace Atlantis.Framework.QSCAddPackage.Tests
   public class QSCAddPackageTests
   {
     [TestMethod]
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCAddPackage.Impl.dll")]
     public void AddPackageWithOneItemToOrderIsSuccessful()
     {
       string _shopperId = "837435";
@@ -36,6 +38,8 @@ namespace Atlantis.Framework.QSCAddPackage.Tests
     }
 
     [TestMethod]
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCAddPackage.Impl.dll")]
     public void AddPackageWithItemNotOnOrderFails()
     {
       string _shopperId = "837435";

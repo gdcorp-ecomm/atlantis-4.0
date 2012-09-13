@@ -9,6 +9,8 @@ namespace Atlantis.Framework.QSCUnblockIP.Tests
 	public class QSCUnblockIPTests
 	{
 		[TestMethod]
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCUnblockIP.Impl.dll")]
 		public void UnblockValidIPAddress()
 		{
 			string _shopperId = "837435";
@@ -28,6 +30,8 @@ namespace Atlantis.Framework.QSCUnblockIP.Tests
 		}
 
 		[TestMethod]
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCUnblockIP.Impl.dll")]
 		public void UnblockInvalidIPAddress()
 		{
 			string _shopperId = "837435";

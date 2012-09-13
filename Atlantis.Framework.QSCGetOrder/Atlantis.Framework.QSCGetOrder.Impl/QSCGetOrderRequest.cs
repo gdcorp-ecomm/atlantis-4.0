@@ -6,6 +6,7 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.QSC.Interface.QSCMobileAPI;
 using Atlantis.Framework.QSCGetOrder.Interface;
 using Atlantis.Framework.QSC.Interface.Helpers;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Atlantis.Framework.QSCGetOrder.Impl
 {
@@ -19,7 +20,8 @@ namespace Atlantis.Framework.QSCGetOrder.Impl
 			QSCGetOrderResponseData responseData = null;
 			QSCGetOrderRequestData request = requestData as QSCGetOrderRequestData;
 
-			Mobilev10	service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+			WsConfigElement wsConfigElement = ((WsConfigElement)config);
+			Mobilev10 service = ServiceHelper.GetServiceReference(wsConfigElement.WSURL);
 
 			try
 			{
@@ -29,6 +31,11 @@ namespace Atlantis.Framework.QSCGetOrder.Impl
 					{
 						service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
+						if (!string.IsNullOrEmpty(wsConfigElement.GetConfigValue("ClientCertificateName")))
+						{
+							X509Certificate2 clientCertificate = wsConfigElement.GetClientCertificate();
+							service.ClientCertificates.Add(clientCertificate);
+						}
 						response = service.getOrder(request.AccountUid, request.ShopperID, request.InvoiceId);
 
 						if (response != null)

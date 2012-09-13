@@ -10,6 +10,7 @@ namespace Atlantis.Framework.QSCGetOrderHistory.Tests
 	{
 		[TestMethod]
 		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCGetOrderHistory.Impl.dll")]
 		public void GetOrderHistory()
 		{
 			string _shopperId = "837435";

@@ -10,6 +10,7 @@ namespace Atlantis.Framework.QSCGetCountries.Tests
 	{
 		[TestMethod]
 		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCGetCountries.Impl.dll")]
 		public void GetCountries()
 		{
 			string _shopperId = "837435";

@@ -13,6 +13,7 @@ namespace Atlantis.Framework.QSCGetOrder.Tests
 	{
 		[TestMethod]
 		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCGetOrder.Impl.dll")]
 		public void GetOrderForValidInvoiceId()
 		{
 			string _shopperId = "837435";
@@ -30,6 +31,7 @@ namespace Atlantis.Framework.QSCGetOrder.Tests
 
 		[TestMethod]
 		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCGetOrder.Impl.dll")]
 		public void GetOrderForInvalidInvoiceId()
 		{
 			string _shopperId = "837435";
@@ -47,6 +49,7 @@ namespace Atlantis.Framework.QSCGetOrder.Tests
 
 		[TestMethod]
 		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCGetOrder.Impl.dll")]
 		public void GetNonExistingOrderForValidInvoiceId()
 		{
 			string _shopperId = "837435";

@@ -10,7 +10,9 @@ namespace Atlantis.Framework.QSCUpdateOrderNotes.Tests
   public class QSCUpdateOrderNotesTests
   {
     [TestMethod]
-    public void UpdateValidInvoiceId()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCUpdateOrderNotes.Impl.dll")]
+		public void UpdateValidInvoiceId()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";
@@ -30,7 +32,9 @@ namespace Atlantis.Framework.QSCUpdateOrderNotes.Tests
     }
 
     [TestMethod]
-    public void UpdateInvalidInvoiceId()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCUpdateOrderNotes.Impl.dll")]
+		public void UpdateInvalidInvoiceId()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";

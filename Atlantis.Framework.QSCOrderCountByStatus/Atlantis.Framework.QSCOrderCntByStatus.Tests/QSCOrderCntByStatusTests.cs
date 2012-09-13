@@ -8,6 +8,8 @@ namespace Atlantis.Framework.QSCOrderCntByStatus.Tests
   public class QSCOrderCntByStatusTests
   {
     [TestMethod]
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCOrderCntByStatus.Impl.dll")]
     public void GetOrderStatusesForShopAccount()
     {
 			string _shopperId = "837435";

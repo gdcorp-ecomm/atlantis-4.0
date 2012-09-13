@@ -7,7 +7,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.QSCResendOrderEmail.Tests
 {
   [TestClass]
-  public class QSCResendOrderEmailTests
+	[DeploymentItem("atlantis.config")]
+	[DeploymentItem("Atlantis.Framework.QSCResendOrderEmail.Impl.dll")]
+	public class QSCResendOrderEmailTests
   {
     [TestMethod]
     public void ResendOrderConfirmationForValidInvoice()
@@ -30,7 +32,9 @@ namespace Atlantis.Framework.QSCResendOrderEmail.Tests
     }
 
     [TestMethod]
-    public void ResendOrderConfirmationForInvalidInvoice()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCResendOrderEmail.Impl.dll")]
+		public void ResendOrderConfirmationForInvalidInvoice()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";
@@ -50,6 +54,8 @@ namespace Atlantis.Framework.QSCResendOrderEmail.Tests
     }
 
     [TestMethod]
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCResendOrderEmail.Impl.dll")]
     public void ResendShippingNoticeForValidInvoice()
     {
       string _shopperId = "837435";
@@ -71,7 +77,9 @@ namespace Atlantis.Framework.QSCResendOrderEmail.Tests
     }
 
     [TestMethod]
-    public void ResendShippingNoticeForValidInvoiceFailsWithoutShipmentId()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCResendOrderEmail.Impl.dll")]
+		public void ResendShippingNoticeForValidInvoiceFailsWithoutShipmentId()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";
@@ -92,7 +100,9 @@ namespace Atlantis.Framework.QSCResendOrderEmail.Tests
     }
 
     [TestMethod]
-    public void ResendOrderEditNoticeForValidInvoice()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCResendOrderEmail.Impl.dll")]
+		public void ResendOrderEditNoticeForValidInvoice()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";
@@ -112,7 +122,9 @@ namespace Atlantis.Framework.QSCResendOrderEmail.Tests
     }
 
     [TestMethod]
-    public void ResendRefundNoticeForValidInvoice()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCResendOrderEmail.Impl.dll")]
+		public void ResendRefundNoticeForValidInvoice()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";

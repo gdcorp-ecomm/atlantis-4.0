@@ -10,7 +10,8 @@ namespace Atlantis.Framework.QSCEditOrderEmail.Tests
   {
     [TestMethod]
 		[DeploymentItem("atlantis.config")]
-    public void ChangeValidInvoiceEmailAddress()
+		[DeploymentItem("Atlantis.Framework.QSCEditOrderEmail.Impl.dll")]
+		public void ChangeValidInvoiceEmailAddress()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";
@@ -31,6 +32,7 @@ namespace Atlantis.Framework.QSCEditOrderEmail.Tests
 
     [TestMethod]
 		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCEditOrderEmail.Impl.dll")]
 		public void ChangeInvalidInvoiceEmailAddress()
     {
       string _shopperId = "837435";

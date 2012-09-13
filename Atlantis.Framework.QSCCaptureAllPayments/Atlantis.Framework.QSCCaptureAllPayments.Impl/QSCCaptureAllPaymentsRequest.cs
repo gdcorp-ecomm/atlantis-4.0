@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.QSC.Interface.Helpers;
 using Atlantis.Framework.QSC.Interface.QSCMobileAPI;
@@ -16,7 +17,8 @@ namespace Atlantis.Framework.QSCCaptureAllPayments.Impl
 			QSCCaptureAllPaymentsResponseData responseData = null;
 			QSCCaptureAllPaymentsRequestData request = requestData as QSCCaptureAllPaymentsRequestData;
 
-			Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+			WsConfigElement wsConfigElement = ((WsConfigElement)config);
+			Mobilev10 service = ServiceHelper.GetServiceReference(wsConfigElement.WSURL);
 
 			try
 			{
@@ -25,6 +27,12 @@ namespace Atlantis.Framework.QSCCaptureAllPayments.Impl
 					if (request != null)
 					{
 						service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+
+						if (!string.IsNullOrEmpty(wsConfigElement.GetConfigValue("ClientCertificateName")))
+						{
+							X509Certificate2 clientCertificate = wsConfigElement.GetClientCertificate();
+							service.ClientCertificates.Add(clientCertificate);
+						}
 
 						response = service.captureAllPayments(request.AccountUid, request.ShopperID, request.InvoiceId);
 
@@ -37,13 +45,6 @@ namespace Atlantis.Framework.QSCCaptureAllPayments.Impl
 			catch (Exception ex)
 			{
 				responseData = new QSCCaptureAllPaymentsResponseData(request, ex);
-			}
-			finally
-			{
-				if (service != null)
-				{
-					service.Dispose();
-				}
 			}
 			return responseData;
 		}

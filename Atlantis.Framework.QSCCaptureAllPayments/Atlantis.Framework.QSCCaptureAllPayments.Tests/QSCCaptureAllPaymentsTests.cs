@@ -10,6 +10,7 @@ namespace Atlantis.Framework.QSCCaptureAllPayments.Tests
 	{
 		[TestMethod]
 		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCCaptureAllPayments.Impl.dll")]
 		public void CaptureAllPaymentsFailure()
 		{
 			string _shopperId = "837435";

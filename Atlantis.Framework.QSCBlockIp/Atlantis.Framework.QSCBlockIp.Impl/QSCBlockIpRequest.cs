@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.QSC.Interface.Helpers;
 using Atlantis.Framework.QSC.Interface.QSCMobileAPI;
@@ -16,7 +17,8 @@ namespace Atlantis.Framework.QSCBlockIp.Impl
       QSCBlockIpResponseData responseData = null;
       QSCBlockIpRequestData request = requestData as QSCBlockIpRequestData;
 
-      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+			WsConfigElement wsConfigElement = ((WsConfigElement)config);
+			Mobilev10 service = ServiceHelper.GetServiceReference(wsConfigElement.WSURL);
 
       try
       {
@@ -26,7 +28,13 @@ namespace Atlantis.Framework.QSCBlockIp.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.blockIP(request.AccountUid, request.ShopperID, request.IpAddress);
+						if (!string.IsNullOrEmpty(wsConfigElement.GetConfigValue("ClientCertificateName")))
+						{
+							X509Certificate2 clientCertificate = wsConfigElement.GetClientCertificate();
+							service.ClientCertificates.Add(clientCertificate);
+						}
+
+						response = service.blockIP(request.AccountUid, request.ShopperID, request.IpAddress);
 
             if (response != null)
               responseData = new QSCBlockIpResponseData((response as responseDetail));

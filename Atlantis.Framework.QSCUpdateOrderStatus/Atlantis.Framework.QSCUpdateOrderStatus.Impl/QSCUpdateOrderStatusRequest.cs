@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.QSC.Interface.Helpers;
 using Atlantis.Framework.QSC.Interface.QSCMobileAPI;
@@ -16,7 +17,8 @@ namespace Atlantis.Framework.QSCUpdateOrderStatus.Impl
       QSCUpdateOrderStatusResponseData responseData = null;
       QSCUpdateOrderStatusRequestData request = requestData as QSCUpdateOrderStatusRequestData;
 
-      Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+			WsConfigElement wsConfigElement = ((WsConfigElement)config);
+			Mobilev10 service = ServiceHelper.GetServiceReference(wsConfigElement.WSURL);
 
       try
       {
@@ -26,7 +28,12 @@ namespace Atlantis.Framework.QSCUpdateOrderStatus.Impl
           {
             service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
-            response = service.updateOrderStatus(request.AccountUid, request.ShopperID, request.InvoiceId, request.OrderStatus);
+						if (!string.IsNullOrEmpty(wsConfigElement.GetConfigValue("ClientCertificateName")))
+						{
+							X509Certificate2 clientCertificate = wsConfigElement.GetClientCertificate();
+							service.ClientCertificates.Add(clientCertificate);
+						}
+						response = service.updateOrderStatus(request.AccountUid, request.ShopperID, request.InvoiceId, request.OrderStatus);
 
             if (response != null)
               responseData = new QSCUpdateOrderStatusResponseData((response as responseDetail));

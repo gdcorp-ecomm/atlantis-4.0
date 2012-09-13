@@ -13,8 +13,9 @@ namespace Atlantis.Framework.QSCGetOrderSearchParameters.Tests
   public class QSCGetOrderSearchParametersTests
   {
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void GetOrderSearchParameterList()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCGetOrderSearchParameters.Impl.dll")]
+		public void GetOrderSearchParameterList()
     {
 			string _shopperId = "837435";
       int requestId = 545;

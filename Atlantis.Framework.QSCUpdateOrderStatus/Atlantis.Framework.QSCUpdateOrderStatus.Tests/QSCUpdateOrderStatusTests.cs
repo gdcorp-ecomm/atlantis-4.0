@@ -8,7 +8,9 @@ namespace Atlantis.Framework.QSCUpdateOrderStatus.Tests
   public class QSCUpdateOrderStatusTests
   {
     [TestMethod]
-    public void ChangeOrderStatusToAllowedStatus()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCUpdateOrderStatus.Impl.dll")]
+		public void ChangeOrderStatusToAllowedStatus()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";
@@ -27,7 +29,9 @@ namespace Atlantis.Framework.QSCUpdateOrderStatus.Tests
     }
 
     [TestMethod]
-    public void ChangeOrderStatusFailsIfNewStatusIsNotAllowed()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCUpdateOrderStatus.Impl.dll")]
+		public void ChangeOrderStatusFailsIfNewStatusIsNotAllowed()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";

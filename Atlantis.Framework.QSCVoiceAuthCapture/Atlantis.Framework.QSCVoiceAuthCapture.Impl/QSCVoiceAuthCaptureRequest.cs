@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.QSC.Interface.Helpers;
 using Atlantis.Framework.QSC.Interface.QSCMobileAPI;
@@ -16,7 +17,8 @@ namespace Atlantis.Framework.QSCVoiceAuthCapture.Impl
 			QSCVoiceAuthCaptureResponseData responseData = null;
 			QSCVoiceAuthCaptureRequestData request = requestData as QSCVoiceAuthCaptureRequestData;
 
-			Mobilev10 service = ServiceHelper.GetServiceReference(((WsConfigElement)config).WSURL);
+			WsConfigElement wsConfigElement = ((WsConfigElement)config);
+			Mobilev10 service = ServiceHelper.GetServiceReference(wsConfigElement.WSURL);
 
 			try
 			{
@@ -26,6 +28,11 @@ namespace Atlantis.Framework.QSCVoiceAuthCapture.Impl
 					{
 						service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
 
+						if (!string.IsNullOrEmpty(wsConfigElement.GetConfigValue("ClientCertificateName")))
+						{
+							X509Certificate2 clientCertificate = wsConfigElement.GetClientCertificate();
+							service.ClientCertificates.Add(clientCertificate);
+						}
 						response = service.voiceAuthCapture(request.AccountUid, request.ShopperID, request.InvoiceId, request.PaymentId, request.PaymentIdSpecified, request.VoiceAuthCode);
 
 						if (response != null)

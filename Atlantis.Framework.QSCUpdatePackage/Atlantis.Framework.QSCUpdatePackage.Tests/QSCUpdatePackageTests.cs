@@ -10,7 +10,9 @@ namespace Atlantis.Framework.QSCUpdatePackage.Tests
   public class QSCUpdatePackageTests
   {
     [TestMethod]
-    public void AddPackageWithOneItemToOrderIsSuccessful()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCUpdatePackage.Impl.dll")]
+		public void AddPackageWithOneItemToOrderIsSuccessful()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";

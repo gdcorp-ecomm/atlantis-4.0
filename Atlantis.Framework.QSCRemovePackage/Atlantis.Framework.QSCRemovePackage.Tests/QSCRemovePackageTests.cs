@@ -8,7 +8,9 @@ namespace Atlantis.Framework.QSCRemovePackage.Tests
   public class QSCRemovePackageTests
   {
     [TestMethod]
-    public void RemoveInvalidPackageIdFromOrderFails()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCRemovePackage.Impl.dll")]
+		public void RemoveInvalidPackageIdFromOrderFails()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";
@@ -29,7 +31,9 @@ namespace Atlantis.Framework.QSCRemovePackage.Tests
 
     // This test must have a valid EXISTING package id specified below in order to pass...
     [TestMethod]
-    public void RemoveValidPackageIdFromOrderPasses()
+		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCRemovePackage.Impl.dll")]
+		public void RemoveValidPackageIdFromOrderPasses()
     {
       string _shopperId = "837435";
       string _accountUid = "265ddd62-2f88-11de-baa9-005056956427";

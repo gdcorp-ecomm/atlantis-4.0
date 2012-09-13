@@ -10,6 +10,7 @@ namespace Atlantis.Framework.QSCVoiceAuthCapture.Tests
 	{
 		[TestMethod]
 		[DeploymentItem("atlantis.config")]
+		[DeploymentItem("Atlantis.Framework.QSCVoiceAuthCapture.Impl.dll")]
 		public void VoiceAuthCaptureFailure()
 		{
 			string _shopperId = "837435";

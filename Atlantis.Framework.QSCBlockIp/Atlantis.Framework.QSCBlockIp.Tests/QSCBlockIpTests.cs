@@ -9,6 +9,7 @@ namespace Atlantis.Framework.QSCBlockIp.Tests
   public class QSCBlockIpTests
   {
     [TestMethod]
+		[DeploymentItem("Atlantis.Framework.QSCBlockIp.Impl.dll")]
     public void BlockValidIPAddress()
     {
       string _shopperId = "837435";
@@ -28,6 +29,7 @@ namespace Atlantis.Framework.QSCBlockIp.Tests
     }
 
     [TestMethod]
+		[DeploymentItem("Atlantis.Framework.QSCBlockIp.Impl.dll")]
     public void BlockInvalidIPAddress()
     {
       string _shopperId = "837435";

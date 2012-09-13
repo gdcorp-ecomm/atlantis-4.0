@@ -23,7 +23,6 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       MAFirstDataCreateApplicationResponseData responseData = null;
-      ErrorMessage = string.Empty;
 
       try
       {
@@ -43,6 +42,7 @@ namespace Atlantis.Framework.MAFirstDataCreateApplication.Impl
             cn.Open();
             try
             {
+              ErrorMessage = string.Empty;
               cmd.ExecuteNonQuery();
             }
             catch (Exception ex)

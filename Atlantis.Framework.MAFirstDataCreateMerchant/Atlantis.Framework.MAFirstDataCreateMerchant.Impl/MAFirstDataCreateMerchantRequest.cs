@@ -24,7 +24,6 @@ namespace Atlantis.Framework.MAFirstDataCreateMerchant.Impl
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       MAFirstDataCreateMerchantResponseData responseData = null;
-      ErrorMessage = string.Empty;
 
       try
       {
@@ -45,6 +44,7 @@ namespace Atlantis.Framework.MAFirstDataCreateMerchant.Impl
             cn.Open();
             try
             {
+              ErrorMessage = string.Empty;
               cmd.ExecuteNonQuery();
             }
             catch (Exception ex)

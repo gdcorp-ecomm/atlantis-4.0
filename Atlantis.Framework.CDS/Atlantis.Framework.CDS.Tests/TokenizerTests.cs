@@ -208,14 +208,28 @@ namespace Atlantis.Framework.CDS.Tests
     }
 
     [TestMethod]
-    public void Tokenizer_Can_Replace_Product_Yearly_Price()
+    [ExpectedException(typeof(InvalidProgramException))]
+    public void Tokenizer_Invalid_Product_Pricing_Token_Exception()
     {
       //Arrange
       CDSTokenizer t = new CDSTokenizer();
 
       //Act
-      var result = t.Parse("{{product::101::price::keepdecimal::yearly}}");
-      var expected = GetYearlyPrice(101, false);
+      var result = t.Parse("{{product::42002::poop::keepdecimal::yearly}}");
+
+      //Assert
+      //System.InvalidProgramException: The operator poop was not in the list of valid operators.
+    }
+
+    [TestMethod]
+    public void Tokenizer_Can_Replace_Product_Current_Price_Yearly()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{product::42002::price::keepdecimal::yearly}}");
+      var expected = GetProductYearlyCurrentPrice(42002, false);
 
       //Assert
       Assert.IsNotNull(result);
@@ -223,14 +237,59 @@ namespace Atlantis.Framework.CDS.Tests
     }
 
     [TestMethod]
-    public void Tokenizer_Can_Replace_Product_Monthly_Price()
+    public void Tokenizer_Can_Replace_Product_Current_Price_Monthly()
     {
       //Arrange
       CDSTokenizer t = new CDSTokenizer();
 
       //Act
-      var result = t.Parse("{{product::775::price::keepdecimal::yearly}}");
-      var expected = GetYearlyPrice(775, false);
+      var result = t.Parse("{{product::42002::price::keepdecimal::monthly}}");
+      var expected = GetProductMonthlyCurrentPrice(42002, false);
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_Can_Replace_Product_Current_Price_Monthly_New()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{product::42002::price_current::keepdecimal::monthly}}");
+      var expected = GetProductMonthlyCurrentPrice(42002, false);
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_Can_Replace_Product_List_Price_Monthly()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{product::42002::price_list::keepdecimal::monthly}}");
+      var expected = GetProductMonthlyListPrice(42002, false);
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_Can_Replace_Product_List_Price_Yearly()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{product::42002::price_list::keepdecimal::yearly}}");
+      var expected = GetProductYearlyListPrice(42002, false);
 
       //Assert
       Assert.IsNotNull(result);
@@ -521,18 +580,29 @@ namespace Atlantis.Framework.CDS.Tests
       return Currency.PriceText(CurrencyHelper.GetTransactionalPriceFromUSD(price), false, dropDecimal);
     }
 
-    private string GetYearlyPrice(int productId, bool dropDecimal)
+    private string GetProductYearlyCurrentPrice(int productId, bool dropDecimal)
     {
       IProduct p = Products.GetProduct(productId);
       return Currency.PriceText(p.CurrentPrice, false, dropDecimal);
     }
 
-    private string GetMonthlyPrice(int productId, bool dropDecimal)
+    private string GetProductYearlyListPrice(int productId, bool dropDecimal)
+    {
+      IProduct p = Products.GetProduct(productId);
+      return Currency.PriceText(p.ListPrice, false, dropDecimal);
+    }
+
+    private string GetProductMonthlyCurrentPrice(int productId, bool dropDecimal)
     {
       IProductView p = Products.NewProductView(Products.GetProduct(productId));
       return Currency.PriceText(p.MonthlyCurrentPrice, false, dropDecimal);
     }
 
+    private string GetProductMonthlyListPrice(int productId, bool dropDecimal)
+    {
+      IProductView p = Products.NewProductView(Products.GetProduct(productId));
+      return Currency.PriceText(p.MonthlyListPrice, false, dropDecimal);
+    }
     private string ProductDescription(int productId)
     {
       IProduct p = Products.GetProduct(productId);

@@ -104,7 +104,7 @@ namespace Atlantis.Framework.CDS.Tests
 
       //Act
       ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
-      PageData model = provider.GetModel<PageData>("sales/1/lp/email|");
+      PageData model = provider.GetModel<PageData>("en/sales/1/domainaddon/domain-backorders.aspx");
 
       //Assert
       Assert.IsNotNull(model);      

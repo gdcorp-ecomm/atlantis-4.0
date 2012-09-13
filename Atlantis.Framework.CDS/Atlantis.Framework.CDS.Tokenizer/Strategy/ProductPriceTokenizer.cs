@@ -19,10 +19,34 @@ namespace Atlantis.Framework.CDS.Tokenizer.Strategy
       Int32.TryParse(tokens[ProductToken.PRODUCT_ID], out productId);
 
       IProductView view = products.NewProductView(products.GetProduct(productId));
-      ICurrencyPrice price = view.MonthlyCurrentPrice;
+      ICurrencyPrice price;
 
-      if (tokens[ProductToken.TERM_LABEL] == "yearly")
-        price = view.YearlyCurrentPrice;
+      // CURRENT PRICE
+      if (tokens[ProductToken.OPERATOR] == "price" || tokens[ProductToken.OPERATOR] == "price_current")
+      {
+        if (tokens[ProductToken.TERM_LABEL] == "yearly")
+        {
+          price = view.YearlyCurrentPrice;
+        }
+        else
+        {
+        price = view.MonthlyCurrentPrice;
+        }
+      }
+      else // LIST PRICE
+      {
+        if (tokens[ProductToken.TERM_LABEL] == "yearly")
+        {
+          price = view.YearlyListPrice;
+        }
+        else
+        {
+        price = view.MonthlyListPrice;
+        }
+      }
+
+      //if (tokens[ProductToken.TERM_LABEL] == "yearly" && (tokens[ProductToken.OPERATOR] == "price" || tokens[ProductToken.OPERATOR] == "price_current"))
+      //  price = view.YearlyCurrentPrice;
 
       return currency.PriceText(price, false, tokens[ProductToken.DROP_DECIMAL] == "dropdecimal");
     }

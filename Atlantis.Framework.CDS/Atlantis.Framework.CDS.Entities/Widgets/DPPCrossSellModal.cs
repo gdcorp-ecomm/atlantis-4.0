@@ -12,8 +12,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string Title { get; set; }
     public string ButtonText { get; set; }
     public List<GroupedProduct> GroupedProducts { get; set; }
-    public List<Disclaimer> Disclaimers { get; set; }
     public string DisclaimerText { get; set; }
+    public string DisclaimerTitle { get; set; }
 
     public class GroupedProduct
     {
@@ -23,7 +23,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
       public class Product : ElementBase
       {
-        public int ProductGroupID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string AltText { get; set; }
@@ -31,12 +30,14 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
         public string SpritePosition { get; set; }
         public List<SubProduct> SubProducts { get; set; }  // Needs to be filterable and changed based on datacenter
         public List<PopIn> PopIns { get; set; }
+        public List<Disclaimer> Disclaimers { get; set; }
 
         public class SubProduct : ElementBase
         {
-          public int ProductID { get; set; }
+          public string ProductID { get; set; }
           public string Title { get; set; }
           public string Price { get; set; }
+          public string ListPrice { get; set; }
           public string SelectedText { get; set; }
           public List<string> Features { get; set; }
         }
@@ -44,9 +45,9 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
       public class AltProduct : ElementBase
       {
-        public int ProductGroupID { get; set; }
-        public int ProductID { get; set; }
+        public string ProductID { get; set; }
         public PopIn Details { get; set; }
+        public List<Disclaimer> Disclaimers { get; set; }
       }
 
     }
@@ -74,15 +75,14 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       public string Title { get; set; }
       public string Text { get; set; }
 
-      // Should be in code-behind of widget:
-      /*
+      //TODO: Should be in code-behind of widget:
       public string Display
       {
         get
         {
           return string.Format("<span class=\"g-hover\">{0} <div class=\"g-hover-bubble\" style=\"display:none;\">{1}</div></span>", Title, Text);
         }
-      }*/
+      }
     }
   }
 }

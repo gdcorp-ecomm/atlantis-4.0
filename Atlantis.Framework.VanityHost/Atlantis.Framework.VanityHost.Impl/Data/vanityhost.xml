@@ -25,6 +25,7 @@
   <VanityHost domain="blackberry.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="business/mobile-app.aspx" />
   <VanityHost domain="cloud.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="hosting/cloud-computing.aspx" />
   <VanityHost domain="tech.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="technology/product-technology.aspx" />
+  <VanityHost domain="smallbusiness.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="business/small-business.aspx" />
 </VanityHosts>
 
 

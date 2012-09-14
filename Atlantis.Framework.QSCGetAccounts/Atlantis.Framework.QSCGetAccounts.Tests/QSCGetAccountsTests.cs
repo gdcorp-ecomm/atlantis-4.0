@@ -18,7 +18,7 @@ namespace Atlantis.Framework.QSCGetAccounts.Tests
 
       QSCGetAccountsRequestData request = new QSCGetAccountsRequestData(_shopperId, "", string.Empty, string.Empty, 1);
 
-      request.RequestTimeout = TimeSpan.FromSeconds(10);
+      request.RequestTimeout = TimeSpan.FromSeconds(32);
 
       QSCGetAccountsResponseData response = Engine.Engine.ProcessRequest(request, requestId) as QSCGetAccountsResponseData;
 
@@ -37,7 +37,7 @@ namespace Atlantis.Framework.QSCGetAccounts.Tests
 
       QSCGetAccountsRequestData request = new QSCGetAccountsRequestData(_shopperId, "", string.Empty, string.Empty, 1);
 
-      request.RequestTimeout = TimeSpan.FromSeconds(10);
+      request.RequestTimeout = TimeSpan.FromSeconds(32);
 
       QSCGetAccountsResponseData response = Engine.Engine.ProcessRequest(request, requestId) as QSCGetAccountsResponseData;
 

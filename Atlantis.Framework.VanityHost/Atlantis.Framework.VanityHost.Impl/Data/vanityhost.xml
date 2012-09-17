@@ -15,6 +15,7 @@
   <VanityHost domain="bluerazordomains" dottype="com" linkcontext="5" linkname="SITEURL" redirect="/" />
   <VanityHost domain="radiogodaddy" dottype="com" linkcontext="1" linkname="LIVEURL" redirect="gdshop/live/default.asp" />
   <VanityHost domain="godaddyradio" dottype="com" linkcontext="1" linkname="LIVEURL" redirect="gdshop/live/default.asp" />
+  <VanityHost domain="hotfortechnology" dottype="com" linkcontext="1" linkname="SITEURL" redirect="testimonial/inside-story.aspx" />
   <!-- NOTE! sub-domain redirects like the following only currently work in production -->
   <VanityHost domain="jobs.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="jobs/" />
   <VanityHost domain="hosting.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="hosting/web-hosting.aspx" />
@@ -27,6 +28,3 @@
   <VanityHost domain="tech.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="technology/product-technology.aspx" />
   <VanityHost domain="smallbusiness.godaddy" dottype="com" linkcontext="1" linkname="SITEURL" redirect="business/small-business.aspx" />
 </VanityHosts>
-
-
-

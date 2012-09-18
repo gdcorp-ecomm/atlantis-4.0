@@ -33,7 +33,7 @@ namespace Atlantis.Framework.EcommInvoices.Test
     {
       RetrievalAttributes retAttr = new RetrievalAttributes();
       retAttr.SortColumn = "amount";
-      EcommInvoicesRequestData request = new EcommInvoicesRequestData("830398", string.Empty, string.Empty, string.Empty, 0, retAttr);
+      EcommInvoicesRequestData request = new EcommInvoicesRequestData("857623", string.Empty, string.Empty, string.Empty, 0, retAttr);
       EcommInvoicesResponseData response = (EcommInvoicesResponseData)Engine.Engine.ProcessRequest(request, 439);
 
       Assert.IsTrue(response.IsSuccess);

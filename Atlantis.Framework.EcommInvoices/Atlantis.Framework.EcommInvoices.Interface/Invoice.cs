@@ -1,6 +1,4 @@
 ﻿using System;
-using Atlantis.Framework.Providers.Currency;
-using Atlantis.Framework.Providers.Interface.Currency;
 
 namespace Atlantis.Framework.EcommInvoices.Interface
 {
@@ -20,11 +18,12 @@ namespace Atlantis.Framework.EcommInvoices.Interface
     public string PaymentType { get; protected set; }
     public string Currency { get; protected set; }
     public int Amount { get; protected set; }
-    public ICurrencyPrice Total
+
+    public int Total
     {
       get
       {
-        return new CurrencyPrice(this.Amount, CurrencyData.GetCurrencyInfo(this.Currency), CurrencyPriceType.Transactional);
+        return this.Amount;
       }
     }
 
@@ -36,7 +35,22 @@ namespace Atlantis.Framework.EcommInvoices.Interface
 
         if (ProcessorStatus == InvoiceProcessorStatus.Declined) // need to check for this first the InoviceStatus may be anything if the ProcessStatus is declined.
         {
-          statusText = "Declined";
+          if (_status == InvoiceStatus.Created || _status == InvoiceStatus.Active)
+          {
+            switch (_status)
+            {
+              case InvoiceStatus.Created:
+                statusText = "Pending";
+                break;
+              case InvoiceStatus.Active:
+                statusText = "Pending";
+                break;
+            }
+          }
+          else
+          {
+            statusText = "Declined";
+          }
         }
         else if (ExpiresDate > DateTime.Now || (_status == InvoiceStatus.Cancelled || _status == InvoiceStatus.Completed))
         {

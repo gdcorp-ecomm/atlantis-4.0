@@ -10,7 +10,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     }
 
     public string Title { get; set; }
-    public string ButtonText { get; set; }
+    public string ButtonTextNoSelection { get; set; }
+    public string ButtonTextSelected { get; set; }
     public List<GroupedProduct> GroupedProducts { get; set; }
     public string DisclaimerText { get; set; }
     public string DisclaimerTitle { get; set; }

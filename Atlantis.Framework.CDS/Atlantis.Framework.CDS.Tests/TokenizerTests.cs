@@ -28,6 +28,12 @@ namespace Atlantis.Framework.CDS.Tests
     const bool DROPDECIMAL = true;
     const bool KEEPDECIMAL = false;
 
+    const bool MONTHLY = true;
+    const bool YEARLY = false;
+
+    const bool CURRENT_PRICE = true;
+    const bool LIST_PRICE = false;
+
     public TokenizerTests()
     {
       //
@@ -201,6 +207,66 @@ namespace Atlantis.Framework.CDS.Tests
       //Act
       var result = t.Parse("{{product::101::description}}");
       var expected = ProductDescription(101);
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_Can_Replace_Product_Package_Monthly_Current_Price()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{productpackage::759|807|3802|42002::monthly::price_current::keepdecimal}}");
+      var expected = GetProductPackagePrice(new List<int> { 759, 807, 3802, 42002 }, MONTHLY, CURRENT_PRICE, KEEPDECIMAL);
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_Can_Replace_Product_Package_Monthly_List_Price()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{productpackage::759|807|3802|42002::monthly::price_list::keepdecimal}}");
+      var expected = GetProductPackagePrice(new List<int> { 759, 807, 3802, 42002 }, MONTHLY, LIST_PRICE, KEEPDECIMAL);
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_Can_Replace_Product_Package_Yearly_Current_Price()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{productpackage::759|807|3802|42002::yearly::price_current::keepdecimal}}");
+      var expected = GetProductPackagePrice(new List<int> { 759, 807, 3802, 42002 }, YEARLY, CURRENT_PRICE, KEEPDECIMAL);
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void Tokenizer_Can_Replace_Product_Package_Yearly_List_Price()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{productpackage::759|807|3802|42002::yearly::price_list::keepdecimal}}");
+      var expected = GetProductPackagePrice(new List<int> { 759, 807, 3802, 42002 }, YEARLY, LIST_PRICE, KEEPDECIMAL);
 
       //Assert
       Assert.IsNotNull(result);
@@ -607,6 +673,28 @@ namespace Atlantis.Framework.CDS.Tests
     {
       IProduct p = Products.GetProduct(productId);
       return p.Info.Name;
+    }
+
+    private string GetProductPackagePrice(List<int> pfids, bool monthly, bool current, bool dropDecimal)
+    {
+      IProductView pv;
+      ICurrencyPrice price;
+      int totalPrice = 0;
+
+      foreach (int pfid in pfids)
+      {
+        pv = Products.NewProductView(Products.GetProduct(pfid));
+        if (current)
+        {
+          totalPrice = totalPrice + (monthly ? pv.MonthlyCurrentPrice.Price : pv.YearlyCurrentPrice.Price);
+        }
+        else // list
+        {
+          totalPrice = totalPrice + (monthly ? pv.MonthlyListPrice.Price : pv.YearlyListPrice.Price);
+        }
+      }
+      price = new CurrencyPrice(totalPrice, Currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional);
+      return Currency.PriceText(price, false, dropDecimal);
     }
 
     private Dictionary<string, string> customTokens = null;

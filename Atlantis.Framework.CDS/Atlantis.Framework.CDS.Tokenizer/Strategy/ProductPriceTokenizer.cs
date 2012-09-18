@@ -45,9 +45,6 @@ namespace Atlantis.Framework.CDS.Tokenizer.Strategy
         }
       }
 
-      //if (tokens[ProductToken.TERM_LABEL] == "yearly" && (tokens[ProductToken.OPERATOR] == "price" || tokens[ProductToken.OPERATOR] == "price_current"))
-      //  price = view.YearlyCurrentPrice;
-
       return currency.PriceText(price, false, tokens[ProductToken.DROP_DECIMAL] == "dropdecimal");
     }
   }

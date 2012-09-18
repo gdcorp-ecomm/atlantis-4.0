@@ -10,6 +10,7 @@ namespace Atlantis.Framework.CDS.Tokenizer.Tokens
     protected const string OFFER = "offer";
     protected const string PROMO = "promo";
     protected const string PRODUCT = "product";
+    protected const string PRODUCTPACKAGE = "productpackage";
     protected const string PRICE = "price";
     protected const string PRICE_CURRENT = "price_current";
     protected const string PRICE_LIST = "price_list";
@@ -40,6 +41,9 @@ namespace Atlantis.Framework.CDS.Tokenizer.Tokens
 
       if (tempToken.StartsWith(PRODUCT + SEPARATOR))
         return new ProductToken(originalToken);
+
+      if (tempToken.StartsWith(PRODUCTPACKAGE + SEPARATOR))
+        return new ProductPackageToken(originalToken);
 
       if (tempToken.StartsWith(PRICE + SEPARATOR) || tempToken.StartsWith(PRICE_CURRENT + SEPARATOR) || tempToken.StartsWith(PRICE_LIST + SEPARATOR))
         return new PriceToken(originalToken);

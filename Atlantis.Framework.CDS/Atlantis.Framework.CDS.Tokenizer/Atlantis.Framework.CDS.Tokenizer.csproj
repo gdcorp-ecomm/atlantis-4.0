@@ -51,11 +51,13 @@
     <Compile Include="Strategy\LinkTokenizer.cs" />
     <Compile Include="Strategy\PriceTokenizer.cs" />
     <Compile Include="Strategy\ProductDescriptionTokenizer.cs" />
+    <Compile Include="Strategy\ProductPackageTokenizer.cs" />
     <Compile Include="Strategy\ProductPriceTokenizer.cs" />
     <Compile Include="Strategy\QuickHelpTokenizer.cs" />
     <Compile Include="Tokens\BaseToken.cs" />
     <Compile Include="Tokens\LinkToken.cs" />
     <Compile Include="Tokens\PriceToken.cs" />
+    <Compile Include="Tokens\ProductPackageToken.cs" />
     <Compile Include="Tokens\ProductToken.cs" />
     <Compile Include="Tokens\QuickHelpToken.cs" />
   </ItemGroup>

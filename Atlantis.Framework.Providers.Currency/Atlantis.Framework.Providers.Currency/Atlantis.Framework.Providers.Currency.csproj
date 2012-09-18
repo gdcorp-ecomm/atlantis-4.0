@@ -70,17 +70,9 @@
       <Project>{3c228090-226d-435d-ac13-be073ccdfae2}</Project>
       <Name>Atlantis.Framework.PLSignupInfo.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.PromoData\Atlantis.Framework.PromoData.Interface\Atlantis.Framework.PromoData.Interface.csproj">
-      <Project>{42e827b4-1e98-453b-8a36-009c201dd85a}</Project>
-      <Name>Atlantis.Framework.PromoData.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
       <Project>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.PromoData\Atlantis.Framework.Providers.PromoData\Atlantis.Framework.Providers.PromoData.csproj">
-      <Project>{D67BE3FC-BB67-4ADC-A368-98B04B395396}</Project>
-      <Name>Atlantis.Framework.Providers.PromoData</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

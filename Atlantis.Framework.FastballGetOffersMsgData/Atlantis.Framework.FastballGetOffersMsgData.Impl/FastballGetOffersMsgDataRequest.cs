@@ -33,7 +33,7 @@ namespace Atlantis.Framework.FastballGetOffersMsgData.Impl
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
       IResponseData result;
-      List<FastBallBannerAd> adList = new List<FastBallBannerAd>();
+      List<FastBallBannerAd> adList = new List<FastBallBannerAd>(32);
 
       if (String.IsNullOrEmpty(((FastballGetOffersMsgDataRequestData)oRequestData).ISC))
       {

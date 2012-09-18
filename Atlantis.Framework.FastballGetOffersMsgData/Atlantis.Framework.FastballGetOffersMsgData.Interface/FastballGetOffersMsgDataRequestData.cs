@@ -15,13 +15,14 @@ namespace Atlantis.Framework.FastballGetOffersMsgData.Interface
 
     public FastballGetOffersMsgDataRequestData(
       string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
-      int privateLabelId, int applicationId, string placement, IManagerContext managerContext)
+      int privateLabelId, int applicationId, string placement, IManagerContext managerContext, String isc)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestTimeout = TimeSpan.FromSeconds(6);
       _privateLabelId = privateLabelId;
       _appId = applicationId;
       _placement = placement;
+      _isc = isc;
 
       if (managerContext != null)
       {
@@ -30,6 +31,12 @@ namespace Atlantis.Framework.FastballGetOffersMsgData.Interface
           _repId = managerContext.ManagerUserId;
         }
       }
+    }
+
+    private string _isc;
+    public string ISC
+    {
+      get { return _isc; }
     }
 
     private string _candidateRequest;

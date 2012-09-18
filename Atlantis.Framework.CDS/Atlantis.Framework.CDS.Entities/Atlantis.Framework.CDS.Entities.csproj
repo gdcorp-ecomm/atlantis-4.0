@@ -64,6 +64,7 @@
     <Compile Include="Widgets\CDSJsonContent.cs" />
     <Compile Include="Widgets\CheckedList.cs" />
     <Compile Include="Widgets\DPPCrossSellModal.cs" />
+    <Compile Include="Widgets\DPPPrivacyModal.cs" />
     <Compile Include="Widgets\PlanBoxContainer2.cs" />
     <Compile Include="Widgets\PlanBox2.cs" />
     <Compile Include="Widgets\Detail.cs" />

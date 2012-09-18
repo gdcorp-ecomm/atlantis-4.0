@@ -53,7 +53,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     }
 
-    // Possibly this could be added to PageSharedData via a Plugin or previous widget - need more details.
     public class Disclaimer : ElementBase  // Needs to be filterable based on whether or not the symbols are added.  IE, if hosting is not displayed, don't display the hosting products  
     {
       public Disclaimer(string symbol, string text)

@@ -33,10 +33,6 @@ namespace Atlantis.Framework.QSCUpdatePaymentStatus.Impl
 							X509Certificate2 clientCertificate = wsConfigElement.GetClientCertificate();
 							service.ClientCertificates.Add(clientCertificate);
 						}
-						else
-						{
-							throw new Exception("ClientCertificateName config element not found");
-						}
 
 						//response = service.UpdatePaymentStatus(request.AccountUid, request.ShopperID, request.InvoiceId, request.PaymentId, request.PaymentStatus);
 						response = new responseDetail();

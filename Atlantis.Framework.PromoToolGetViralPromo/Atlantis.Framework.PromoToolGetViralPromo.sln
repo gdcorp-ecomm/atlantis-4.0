@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D1450A06-20B9-4BD9-816F-0846CBA8F150}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PromoToolGetViralPromo.Impl", "Atlantis.Framework.PromoToolGetViralPromo.Impl\Atlantis.Framework.PromoToolGetViralPromo.Impl.csproj", "{2E8DE1D0-1F31-48D9-B23F-D6E90E92F8DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PromoToolGetViralPromo.Interface", "Atlantis.Framework.PromoToolGetViralPromo.Interface\Atlantis.Framework.PromoToolGetViralPromo.Interface.csproj", "{BAEBF381-3AC7-49ED-9ABE-20AA75301553}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromoToolGetViralPromoTests", "PromoToolGetViralPromoTests\PromoToolGetViralPromoTests.csproj", "{D9C33C74-143F-4A9D-ADBC-48F816EA99DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FF747EC3-C0C0-48D3-9391-5E4F2AEFFDF8}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.PromoToolGetViralPromo.vsmdi = Atlantis.Framework.PromoToolGetViralPromo.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.PromoToolGetViralPromo.sln
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.PromoToolGetViralPromo.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName3 = Atlantis.Framework.PromoToolGetViralPromo.Impl\\Atlantis.Framework.PromoToolGetViralPromo.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.PromoToolGetViralPromo.Impl
+		SccLocalPath3 = Atlantis.Framework.PromoToolGetViralPromo.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.PromoToolGetViralPromo.Interface\\Atlantis.Framework.PromoToolGetViralPromo.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.PromoToolGetViralPromo.Interface
+		SccLocalPath4 = Atlantis.Framework.PromoToolGetViralPromo.Interface
+		SccProjectUniqueName5 = PromoToolGetViralPromoTests\\PromoToolGetViralPromoTests.csproj
+		SccProjectName5 = PromoToolGetViralPromoTests
+		SccLocalPath5 = PromoToolGetViralPromoTests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.PromoToolGetViralPromo.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E8DE1D0-1F31-48D9-B23F-D6E90E92F8DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E8DE1D0-1F31-48D9-B23F-D6E90E92F8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E8DE1D0-1F31-48D9-B23F-D6E90E92F8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E8DE1D0-1F31-48D9-B23F-D6E90E92F8DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAEBF381-3AC7-49ED-9ABE-20AA75301553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAEBF381-3AC7-49ED-9ABE-20AA75301553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAEBF381-3AC7-49ED-9ABE-20AA75301553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAEBF381-3AC7-49ED-9ABE-20AA75301553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9C33C74-143F-4A9D-ADBC-48F816EA99DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9C33C74-143F-4A9D-ADBC-48F816EA99DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9C33C74-143F-4A9D-ADBC-48F816EA99DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9C33C74-143F-4A9D-ADBC-48F816EA99DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D1450A06-20B9-4BD9-816F-0846CBA8F150}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {D1450A06-20B9-4BD9-816F-0846CBA8F150}
+	EndGlobalSection
+EndGlobal

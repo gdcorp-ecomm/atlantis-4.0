@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace Atlantis.Framework.PromoOrderLevelCreate.Interface
 {
@@ -96,7 +97,7 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Interface
       else if (promoCurrency.TypeOfAward == AwardType.DollarOff)
       {
 
-        int actualPrice = (promoCurrency.MinSubtotal = promoCurrency.AwardValue);
+        int actualPrice = (promoCurrency.MinSubtotal - promoCurrency.AwardValue);
         double actualPctOff = (actualPrice / promoCurrency.MinSubtotal) * 10000;
 
         if (actualPctOff > promoCurrency.MaxAwardValuePercentOff)
@@ -133,7 +134,7 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Interface
         try
         {
           int result = 0;
-          string cacheValue = DataCache.DataCache.GetAppSetting("RCC_ORDLEVEL_PROMO_MAX_DISCOUNT");
+          string cacheValue = DataCache.DataCache.GetAppSetting("ORDLEVEL_PROMO_MAX_DISCOUNT");
 
           if (!string.IsNullOrEmpty(cacheValue))
           {

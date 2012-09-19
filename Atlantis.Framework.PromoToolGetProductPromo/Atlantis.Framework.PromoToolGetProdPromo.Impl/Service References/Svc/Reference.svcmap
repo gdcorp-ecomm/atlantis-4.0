@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="05c5cf9a-4643-4b9e-b516-68451703fb41" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PromoTool.xsd" MetadataType="Schema" ID="45f5da8f-5a37-4443-ab6b-651e2817a251" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd3" />
+    <MetadataFile FileName="PromoTool1.xsd" MetadataType="Schema" ID="62c0b0fd-2053-422f-a719-4672414db60a" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd0" />
+    <MetadataFile FileName="PromoTool2.xsd" MetadataType="Schema" ID="e597a64e-23c7-45a1-95e4-8590023d26e3" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd1" />
+    <MetadataFile FileName="PromoTool3.xsd" MetadataType="Schema" ID="0cd03763-d9be-40fe-a0de-abdf03f1eca5" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd6" />
+    <MetadataFile FileName="PromoTool4.xsd" MetadataType="Schema" ID="19dae231-5e3f-4e5c-af84-6563b0bfd4ae" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd7" />
+    <MetadataFile FileName="PromoTool5.xsd" MetadataType="Schema" ID="ae94a046-5c02-438e-852c-698dae7195c3" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd4" />
+    <MetadataFile FileName="PromoTool6.xsd" MetadataType="Schema" ID="302b1fc2-3745-426d-8f3d-687a73eb559a" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd5" />
+    <MetadataFile FileName="PromoToolDomainService.wsdl" MetadataType="Wsdl" ID="50569a03-e5ad-4534-a13a-333672a31508" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?wsdl" />
+    <MetadataFile FileName="PromoTool.disco" MetadataType="Disco" ID="1855bf58-2773-4127-ba23-13c9ea962cc5" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?disco" />
+    <MetadataFile FileName="PromoTool7.xsd" MetadataType="Schema" ID="33943106-86fb-4448-8985-f345a9e6b0e0" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

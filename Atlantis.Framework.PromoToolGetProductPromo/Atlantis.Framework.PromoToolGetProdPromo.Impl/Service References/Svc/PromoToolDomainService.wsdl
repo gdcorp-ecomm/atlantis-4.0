@@ -1,0 +1,2270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PromoToolDomainService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpBinding_PromoToolDomainServiceSOAP_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <http:NegotiateAuthentication xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BasicHttpBinding_PromoToolDomainServiceSOAP1_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <http:NegotiateAuthentication xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd5" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd6" namespace="DomainServices" />
+      <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+      <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PromoTool.Data" />
+      <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Fastball.Commons.GDDataCacheFacade" />
+      <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/PromoTool.Data.Services.ServiceModel" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllOrderPromosBySearchCriteria_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrderPromosBySearchCriteria" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllOrderPromosBySearchCriteria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrderPromosBySearchCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllOrderPromosBySearchCriteria_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q1="DomainServices" name="detail" element="q1:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllOrderPromosByAdvSearchCriteria_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrderPromosByAdvSearchCriteria" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllOrderPromosByAdvSearchCriteria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOrderPromosByAdvSearchCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllOrderPromosByAdvSearchCriteria_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q2="DomainServices" name="detail" element="q2:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetOrderPromoByPromoCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderPromoByPromoCode" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetOrderPromoByPromoCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderPromoByPromoCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetOrderPromoByPromoCode_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q3="DomainServices" name="detail" element="q3:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateOrderPromo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderPromo" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateOrderPromo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderPromoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateOrderPromo_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q4="DomainServices" name="detail" element="q4:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertOrderPromo_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertOrderPromo" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertOrderPromo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertOrderPromoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertOrderPromo_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q5="DomainServices" name="detail" element="q5:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_SubmitMarketingOptInOrderPromo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitMarketingOptInOrderPromo" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_SubmitMarketingOptInOrderPromo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitMarketingOptInOrderPromoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_SubmitMarketingOptInOrderPromo_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q6="DomainServices" name="detail" element="q6:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_CopyOrderPromo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CopyOrderPromo" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_CopyOrderPromo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CopyOrderPromoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_CopyOrderPromo_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q7="DomainServices" name="detail" element="q7:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetOrderPromoStats_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderPromoStats" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetOrderPromoStats_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderPromoStatsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetOrderPromoStats_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q8="DomainServices" name="detail" element="q8:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetResellers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetResellers" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetResellers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetResellersResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetResellers_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q9="DomainServices" name="detail" element="q9:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductResellers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductResellers" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductResellers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductResellersResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductResellers_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q10="DomainServices" name="detail" element="q10:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetCampaignTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCampaignTypes" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetCampaignTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCampaignTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetCampaignTypes_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q11="DomainServices" name="detail" element="q11:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByFastballDiscount" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByFastballDiscountResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscount_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q12="DomainServices" name="detail" element="q12:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscountAdvanced_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByFastballDiscountAdvanced" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscountAdvanced_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByFastballDiscountAdvancedResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscountAdvanced_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q13="DomainServices" name="detail" element="q13:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByDiscountCode" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByDiscountCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCode_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q14="DomainServices" name="detail" element="q14:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCodeAdvanced_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByDiscountCodeAdvanced" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCodeAdvanced_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByDiscountCodeAdvancedResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCodeAdvanced_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q15="DomainServices" name="detail" element="q15:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByItemTrackingCode" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByItemTrackingCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingCode_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q16="DomainServices" name="detail" element="q16:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingAdvanced_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByItemTrackingAdvanced" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingAdvanced_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByItemTrackingAdvancedResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingAdvanced_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q17="DomainServices" name="detail" element="q17:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByAllShoppers" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByAllShoppersResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppers_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q18="DomainServices" name="detail" element="q18:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppersAdvanced_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByAllShoppersAdvanced" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppersAdvanced_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByAllShoppersAdvancedResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppersAdvanced_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q19="DomainServices" name="detail" element="q19:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosBySearchCriteria_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosBySearchCriteria" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosBySearchCriteria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosBySearchCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosBySearchCriteria_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q20="DomainServices" name="detail" element="q20:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByAdvSearchCriteria_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByAdvSearchCriteria" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByAdvSearchCriteria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByAdvSearchCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByAdvSearchCriteria_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q21="DomainServices" name="detail" element="q21:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByPromoCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByPromoCode" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByPromoCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductPromosByPromoCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllProductPromosByPromoCode_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q22="DomainServices" name="detail" element="q22:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductPromoTypes" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductPromoTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoTypes_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q23="DomainServices" name="detail" element="q23:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoStats_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductPromoStats" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoStats_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductPromoStatsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoStats_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q24="DomainServices" name="detail" element="q24:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStandardProductPromoByPromoId" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStandardProductPromoByPromoIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q25="DomainServices" name="detail" element="q25:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoByPromoId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductPromoByPromoId" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoByPromoId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductPromoByPromoIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoByPromoId_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q26="DomainServices" name="detail" element="q26:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromosByCurrencyAndSearchTerm_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductPromosByCurrencyAndSearchTerm" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromosByCurrencyAndSearchTerm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductPromosByCurrencyAndSearchTermResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromosByCurrencyAndSearchTerm_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q27="DomainServices" name="detail" element="q27:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoBulk_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProductPromoBulk" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoBulk_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProductPromoBulkResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoBulk_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q28="DomainServices" name="detail" element="q28:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_OrderPromoBulkUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:OrderPromoBulkUpdate" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_OrderPromoBulkUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OrderPromoBulkUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_OrderPromoBulkUpdate_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q29="DomainServices" name="detail" element="q29:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProductPromoRestriction" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProductPromoRestrictionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q30="DomainServices" name="detail" element="q30:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProductPromoShopperRestriction" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProductPromoShopperRestrictionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q31="DomainServices" name="detail" element="q31:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertProductPromo_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertProductPromo" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertProductPromo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertProductPromoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertProductPromo_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q32="DomainServices" name="detail" element="q32:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductRanks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductRanks" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductRanks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductRanksResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductRanks_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q33="DomainServices" name="detail" element="q33:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabels_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateLabels" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabels_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateLabelsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabels_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q34="DomainServices" name="detail" element="q34:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabelsForProductCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateLabelsForProductCount" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabelsForProductCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateLabelsForProductCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabelsForProductCount_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q35="DomainServices" name="detail" element="q35:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabelResellerAssocations_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateLabelResellerAssocations" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabelResellerAssocations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateLabelResellerAssocationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabelResellerAssocations_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q36="DomainServices" name="detail" element="q36:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertProductPromoPrivateLabels" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertProductPromoPrivateLabelsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q37="DomainServices" name="detail" element="q37:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosBySearchCriteria_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllViralPromosBySearchCriteria" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosBySearchCriteria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllViralPromosBySearchCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosBySearchCriteria_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q38="DomainServices" name="detail" element="q38:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosByAdvSearchCriteria_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllViralPromosByAdvSearchCriteria" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosByAdvSearchCriteria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllViralPromosByAdvSearchCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosByAdvSearchCriteria_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q39="DomainServices" name="detail" element="q39:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllCouponViralPromosBySearchCriteria_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCouponViralPromosBySearchCriteria" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllCouponViralPromosBySearchCriteria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCouponViralPromosBySearchCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllCouponViralPromosBySearchCriteria_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q40="DomainServices" name="detail" element="q40:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllCouponViralPromosByAdvSearchCriteria_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCouponViralPromosByAdvSearchCriteria" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllCouponViralPromosByAdvSearchCriteria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCouponViralPromosByAdvSearchCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllCouponViralPromosByAdvSearchCriteria_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q41="DomainServices" name="detail" element="q41:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosByPromoCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllViralPromosByPromoCode" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosByPromoCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllViralPromosByPromoCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosByPromoCode_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q42="DomainServices" name="detail" element="q42:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetViralPromoByPromoId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetViralPromoByPromoId" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetViralPromoByPromoId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetViralPromoByPromoIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetViralPromoByPromoId_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q43="DomainServices" name="detail" element="q43:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCouponViralPromoByPromoId" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCouponViralPromoByPromoIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoId_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q44="DomainServices" name="detail" element="q44:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCouponViralPromoByPromoCode" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCouponViralPromoByPromoCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoCode_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q45="DomainServices" name="detail" element="q45:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateViralPromo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateViralPromo" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateViralPromo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateViralPromoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateViralPromo_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q46="DomainServices" name="detail" element="q46:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertViralPromo_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertViralPromo" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertViralPromo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertViralPromoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_InsertViralPromo_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q47="DomainServices" name="detail" element="q47:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetViralPromoStats_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetViralPromoStats" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetViralPromoStats_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetViralPromoStatsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetViralPromoStats_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q48="DomainServices" name="detail" element="q48:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralYardValues_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllViralYardValues" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralYardValues_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllViralYardValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralYardValues_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q49="DomainServices" name="detail" element="q49:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductTypes" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypes_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q50="DomainServices" name="detail" element="q50:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypesBySearchCriteria_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductTypesBySearchCriteria" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypesBySearchCriteria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductTypesBySearchCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypesBySearchCriteria_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q51="DomainServices" name="detail" element="q51:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypesRequiringTlds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductTypesRequiringTlds" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypesRequiringTlds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductTypesRequiringTldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypesRequiringTlds_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q52="DomainServices" name="detail" element="q52:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypeNameSpaces_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductTypeNameSpaces" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypeNameSpaces_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductTypeNameSpacesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypeNameSpaces_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q53="DomainServices" name="detail" element="q53:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypeOverrideTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductTypeOverrideTypes" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypeOverrideTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductTypeOverrideTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypeOverrideTypes_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q54="DomainServices" name="detail" element="q54:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPaymentExclusions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentExclusions" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPaymentExclusions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentExclusionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetPaymentExclusions_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q55="DomainServices" name="detail" element="q55:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetTlds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTlds" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetTlds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_GetTlds_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q56="DomainServices" name="detail" element="q56:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_PublishPromo_InputMessage">
+    <wsdl:part name="parameters" element="tns:PublishPromo" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_PublishPromo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PublishPromoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_PublishPromo_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q57="DomainServices" name="detail" element="q57:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_SubmitChanges_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitChanges" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_SubmitChanges_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitChangesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_SubmitChanges_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q58="DomainServices" name="detail" element="q58:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:portType name="PromoToolDomainServiceSOAP">
+    <wsdl:operation name="GetAllOrderPromosBySearchCriteria">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllOrderPromosBySearchCriteria" message="tns:PromoToolDomainServiceSOAP_GetAllOrderPromosBySearchCriteria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllOrderPromosBySearchCriteriaResponse" message="tns:PromoToolDomainServiceSOAP_GetAllOrderPromosBySearchCriteria_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllOrderPromosBySearchCriteriaDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllOrderPromosBySearchCriteria_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderPromosByAdvSearchCriteria">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllOrderPromosByAdvSearchCriteria" message="tns:PromoToolDomainServiceSOAP_GetAllOrderPromosByAdvSearchCriteria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllOrderPromosByAdvSearchCriteriaResponse" message="tns:PromoToolDomainServiceSOAP_GetAllOrderPromosByAdvSearchCriteria_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllOrderPromosByAdvSearchCriteriaDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllOrderPromosByAdvSearchCriteria_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoByPromoCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetOrderPromoByPromoCode" message="tns:PromoToolDomainServiceSOAP_GetOrderPromoByPromoCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetOrderPromoByPromoCodeResponse" message="tns:PromoToolDomainServiceSOAP_GetOrderPromoByPromoCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetOrderPromoByPromoCodeDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetOrderPromoByPromoCode_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderPromo">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateOrderPromo" message="tns:PromoToolDomainServiceSOAP_UpdateOrderPromo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateOrderPromoResponse" message="tns:PromoToolDomainServiceSOAP_UpdateOrderPromo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateOrderPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_UpdateOrderPromo_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertOrderPromo">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertOrderPromo" message="tns:PromoToolDomainServiceSOAP_InsertOrderPromo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertOrderPromoResponse" message="tns:PromoToolDomainServiceSOAP_InsertOrderPromo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertOrderPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_InsertOrderPromo_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMarketingOptInOrderPromo">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/SubmitMarketingOptInOrderPromo" message="tns:PromoToolDomainServiceSOAP_SubmitMarketingOptInOrderPromo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/SubmitMarketingOptInOrderPromoResponse" message="tns:PromoToolDomainServiceSOAP_SubmitMarketingOptInOrderPromo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/SubmitMarketingOptInOrderPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_SubmitMarketingOptInOrderPromo_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyOrderPromo">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/CopyOrderPromo" message="tns:PromoToolDomainServiceSOAP_CopyOrderPromo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/CopyOrderPromoResponse" message="tns:PromoToolDomainServiceSOAP_CopyOrderPromo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/CopyOrderPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_CopyOrderPromo_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoStats">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetOrderPromoStats" message="tns:PromoToolDomainServiceSOAP_GetOrderPromoStats_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetOrderPromoStatsResponse" message="tns:PromoToolDomainServiceSOAP_GetOrderPromoStats_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetOrderPromoStatsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetOrderPromoStats_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResellers">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetResellers" message="tns:PromoToolDomainServiceSOAP_GetResellers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetResellersResponse" message="tns:PromoToolDomainServiceSOAP_GetResellers_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetResellersDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetResellers_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductResellers">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductResellers" message="tns:PromoToolDomainServiceSOAP_GetProductResellers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductResellersResponse" message="tns:PromoToolDomainServiceSOAP_GetProductResellers_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductResellersDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductResellers_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCampaignTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetCampaignTypes" message="tns:PromoToolDomainServiceSOAP_GetCampaignTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetCampaignTypesResponse" message="tns:PromoToolDomainServiceSOAP_GetCampaignTypes_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetCampaignTypesDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetCampaignTypes_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByFastballDiscount">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByFastballDiscount" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByFastballDiscountResponse" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscount_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByFastballDiscountDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscount_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByFastballDiscountAdvanced">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByFastballDiscountAdvanced" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscountAdvanced_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByFastballDiscountAdvancedResponse" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscountAdvanced_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByFastballDiscountAdvancedDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByFastballDiscountAdvanced_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByDiscountCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByDiscountCode" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByDiscountCodeResponse" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByDiscountCodeDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCode_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByDiscountCodeAdvanced">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByDiscountCodeAdvanced" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCodeAdvanced_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByDiscountCodeAdvancedResponse" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCodeAdvanced_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByDiscountCodeAdvancedDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByDiscountCodeAdvanced_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByItemTrackingCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByItemTrackingCode" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByItemTrackingCodeResponse" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByItemTrackingCodeDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingCode_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByItemTrackingAdvanced">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByItemTrackingAdvanced" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingAdvanced_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByItemTrackingAdvancedResponse" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingAdvanced_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByItemTrackingAdvancedDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByItemTrackingAdvanced_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByAllShoppers">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAllShoppers" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAllShoppersResponse" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppers_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAllShoppersDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppers_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByAllShoppersAdvanced">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAllShoppersAdvanced" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppersAdvanced_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAllShoppersAdvancedResponse" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppersAdvanced_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAllShoppersAdvancedDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByAllShoppersAdvanced_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosBySearchCriteria">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosBySearchCriteria" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosBySearchCriteria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosBySearchCriteriaResponse" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosBySearchCriteria_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosBySearchCriteriaDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosBySearchCriteria_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByAdvSearchCriteria">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAdvSearchCriteria" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByAdvSearchCriteria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAdvSearchCriteriaResponse" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByAdvSearchCriteria_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAdvSearchCriteriaDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByAdvSearchCriteria_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByPromoCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByPromoCode" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByPromoCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByPromoCodeResponse" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByPromoCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByPromoCodeDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllProductPromosByPromoCode_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromoTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoTypes" message="tns:PromoToolDomainServiceSOAP_GetProductPromoTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoTypesResponse" message="tns:PromoToolDomainServiceSOAP_GetProductPromoTypes_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoTypesDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductPromoTypes_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromoStats">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoStats" message="tns:PromoToolDomainServiceSOAP_GetProductPromoStats_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoStatsResponse" message="tns:PromoToolDomainServiceSOAP_GetProductPromoStats_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoStatsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductPromoStats_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardProductPromoByPromoId">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetStandardProductPromoByPromoId" message="tns:PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetStandardProductPromoByPromoIdResponse" message="tns:PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetStandardProductPromoByPromoIdDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromoByPromoId">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoByPromoId" message="tns:PromoToolDomainServiceSOAP_GetProductPromoByPromoId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoByPromoIdResponse" message="tns:PromoToolDomainServiceSOAP_GetProductPromoByPromoId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoByPromoIdDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductPromoByPromoId_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromosByCurrencyAndSearchTerm">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromosByCurrencyAndSearchTerm" message="tns:PromoToolDomainServiceSOAP_GetProductPromosByCurrencyAndSearchTerm_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromosByCurrencyAndSearchTermResponse" message="tns:PromoToolDomainServiceSOAP_GetProductPromosByCurrencyAndSearchTerm_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromosByCurrencyAndSearchTermDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductPromosByCurrencyAndSearchTerm_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromoBulk">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoBulk" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoBulk_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoBulkResponse" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoBulk_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoBulkDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoBulk_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderPromoBulkUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/OrderPromoBulkUpdate" message="tns:PromoToolDomainServiceSOAP_OrderPromoBulkUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/OrderPromoBulkUpdateResponse" message="tns:PromoToolDomainServiceSOAP_OrderPromoBulkUpdate_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/OrderPromoBulkUpdateDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_OrderPromoBulkUpdate_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromoRestriction">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoRestriction" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoRestrictionResponse" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoRestrictionDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromoShopperRestriction">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoShopperRestriction" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoShopperRestrictionResponse" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoShopperRestrictionDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertProductPromo">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromo" message="tns:PromoToolDomainServiceSOAP_InsertProductPromo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoResponse" message="tns:PromoToolDomainServiceSOAP_InsertProductPromo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_InsertProductPromo_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductRanks">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductRanks" message="tns:PromoToolDomainServiceSOAP_GetProductRanks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductRanksResponse" message="tns:PromoToolDomainServiceSOAP_GetProductRanks_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductRanksDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductRanks_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateLabels">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabels" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabels_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelsResponse" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabels_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabels_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateLabelsForProductCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelsForProductCount" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabelsForProductCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelsForProductCountResponse" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabelsForProductCount_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelsForProductCountDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabelsForProductCount_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateLabelResellerAssocations">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelResellerAssocations" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabelResellerAssocations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelResellerAssocationsResponse" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabelResellerAssocations_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelResellerAssocationsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabelResellerAssocations_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertProductPromoPrivateLabels">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoPrivateLabels" message="tns:PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoPrivateLabelsResponse" message="tns:PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoPrivateLabelsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralPromosBySearchCriteria">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosBySearchCriteria" message="tns:PromoToolDomainServiceSOAP_GetAllViralPromosBySearchCriteria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosBySearchCriteriaResponse" message="tns:PromoToolDomainServiceSOAP_GetAllViralPromosBySearchCriteria_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosBySearchCriteriaDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllViralPromosBySearchCriteria_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralPromosByAdvSearchCriteria">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosByAdvSearchCriteria" message="tns:PromoToolDomainServiceSOAP_GetAllViralPromosByAdvSearchCriteria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosByAdvSearchCriteriaResponse" message="tns:PromoToolDomainServiceSOAP_GetAllViralPromosByAdvSearchCriteria_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosByAdvSearchCriteriaDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllViralPromosByAdvSearchCriteria_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCouponViralPromosBySearchCriteria">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllCouponViralPromosBySearchCriteria" message="tns:PromoToolDomainServiceSOAP_GetAllCouponViralPromosBySearchCriteria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllCouponViralPromosBySearchCriteriaResponse" message="tns:PromoToolDomainServiceSOAP_GetAllCouponViralPromosBySearchCriteria_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllCouponViralPromosBySearchCriteriaDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllCouponViralPromosBySearchCriteria_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCouponViralPromosByAdvSearchCriteria">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllCouponViralPromosByAdvSearchCriteria" message="tns:PromoToolDomainServiceSOAP_GetAllCouponViralPromosByAdvSearchCriteria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllCouponViralPromosByAdvSearchCriteriaResponse" message="tns:PromoToolDomainServiceSOAP_GetAllCouponViralPromosByAdvSearchCriteria_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllCouponViralPromosByAdvSearchCriteriaDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllCouponViralPromosByAdvSearchCriteria_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralPromosByPromoCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosByPromoCode" message="tns:PromoToolDomainServiceSOAP_GetAllViralPromosByPromoCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosByPromoCodeResponse" message="tns:PromoToolDomainServiceSOAP_GetAllViralPromosByPromoCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosByPromoCodeDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllViralPromosByPromoCode_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViralPromoByPromoId">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetViralPromoByPromoId" message="tns:PromoToolDomainServiceSOAP_GetViralPromoByPromoId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetViralPromoByPromoIdResponse" message="tns:PromoToolDomainServiceSOAP_GetViralPromoByPromoId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetViralPromoByPromoIdDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetViralPromoByPromoId_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCouponViralPromoByPromoId">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetCouponViralPromoByPromoId" message="tns:PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetCouponViralPromoByPromoIdResponse" message="tns:PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetCouponViralPromoByPromoIdDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoId_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCouponViralPromoByPromoCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetCouponViralPromoByPromoCode" message="tns:PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetCouponViralPromoByPromoCodeResponse" message="tns:PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetCouponViralPromoByPromoCodeDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoCode_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViralPromo">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateViralPromo" message="tns:PromoToolDomainServiceSOAP_UpdateViralPromo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateViralPromoResponse" message="tns:PromoToolDomainServiceSOAP_UpdateViralPromo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateViralPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_UpdateViralPromo_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertViralPromo">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertViralPromo" message="tns:PromoToolDomainServiceSOAP_InsertViralPromo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertViralPromoResponse" message="tns:PromoToolDomainServiceSOAP_InsertViralPromo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertViralPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_InsertViralPromo_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViralPromoStats">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetViralPromoStats" message="tns:PromoToolDomainServiceSOAP_GetViralPromoStats_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetViralPromoStatsResponse" message="tns:PromoToolDomainServiceSOAP_GetViralPromoStats_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetViralPromoStatsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetViralPromoStats_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralYardValues">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralYardValues" message="tns:PromoToolDomainServiceSOAP_GetAllViralYardValues_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralYardValuesResponse" message="tns:PromoToolDomainServiceSOAP_GetAllViralYardValues_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralYardValuesDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetAllViralYardValues_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypes" message="tns:PromoToolDomainServiceSOAP_GetProductTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesResponse" message="tns:PromoToolDomainServiceSOAP_GetProductTypes_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductTypes_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesBySearchCriteria">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesBySearchCriteria" message="tns:PromoToolDomainServiceSOAP_GetProductTypesBySearchCriteria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesBySearchCriteriaResponse" message="tns:PromoToolDomainServiceSOAP_GetProductTypesBySearchCriteria_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesBySearchCriteriaDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductTypesBySearchCriteria_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesRequiringTlds">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesRequiringTlds" message="tns:PromoToolDomainServiceSOAP_GetProductTypesRequiringTlds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesRequiringTldsResponse" message="tns:PromoToolDomainServiceSOAP_GetProductTypesRequiringTlds_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesRequiringTldsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductTypesRequiringTlds_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypeNameSpaces">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypeNameSpaces" message="tns:PromoToolDomainServiceSOAP_GetProductTypeNameSpaces_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypeNameSpacesResponse" message="tns:PromoToolDomainServiceSOAP_GetProductTypeNameSpaces_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypeNameSpacesDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductTypeNameSpaces_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypeOverrideTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypeOverrideTypes" message="tns:PromoToolDomainServiceSOAP_GetProductTypeOverrideTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypeOverrideTypesResponse" message="tns:PromoToolDomainServiceSOAP_GetProductTypeOverrideTypes_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypeOverrideTypesDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductTypeOverrideTypes_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentExclusions">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPaymentExclusions" message="tns:PromoToolDomainServiceSOAP_GetPaymentExclusions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPaymentExclusionsResponse" message="tns:PromoToolDomainServiceSOAP_GetPaymentExclusions_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPaymentExclusionsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetPaymentExclusions_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTlds">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetTlds" message="tns:PromoToolDomainServiceSOAP_GetTlds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetTldsResponse" message="tns:PromoToolDomainServiceSOAP_GetTlds_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetTldsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetTlds_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PublishPromo">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/PublishPromo" message="tns:PromoToolDomainServiceSOAP_PublishPromo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/PublishPromoResponse" message="tns:PromoToolDomainServiceSOAP_PublishPromo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/PublishPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_PublishPromo_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitChanges">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/SubmitChanges" message="tns:PromoToolDomainServiceSOAP_SubmitChanges_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/SubmitChangesResponse" message="tns:PromoToolDomainServiceSOAP_SubmitChanges_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/SubmitChangesDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_SubmitChanges_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_PromoToolDomainServiceSOAP" type="tns:PromoToolDomainServiceSOAP">
+    <wsp:PolicyReference URI="#BasicHttpBinding_PromoToolDomainServiceSOAP_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllOrderPromosBySearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllOrderPromosBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderPromosByAdvSearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllOrderPromosByAdvSearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoByPromoCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetOrderPromoByPromoCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateOrderPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="InsertOrderPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertOrderPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMarketingOptInOrderPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/SubmitMarketingOptInOrderPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CopyOrderPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/CopyOrderPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoStats">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetOrderPromoStats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetResellers">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetResellers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductResellers">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductResellers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCampaignTypes">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetCampaignTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByFastballDiscount">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByFastballDiscount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByFastballDiscountAdvanced">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByFastballDiscountAdvanced" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByDiscountCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByDiscountCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByDiscountCodeAdvanced">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByDiscountCodeAdvanced" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByItemTrackingCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByItemTrackingCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByItemTrackingAdvanced">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByItemTrackingAdvanced" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByAllShoppers">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAllShoppers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByAllShoppersAdvanced">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAllShoppersAdvanced" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosBySearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByAdvSearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAdvSearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByPromoCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByPromoCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromoTypes">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromoStats">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoStats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardProductPromoByPromoId">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetStandardProductPromoByPromoId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromoByPromoId">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoByPromoId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromosByCurrencyAndSearchTerm">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromosByCurrencyAndSearchTerm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromoBulk">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoBulk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="OrderPromoBulkUpdate">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/OrderPromoBulkUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromoRestriction">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoRestriction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromoShopperRestriction">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoShopperRestriction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="InsertProductPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductRanks">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductRanks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateLabels">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabels" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateLabelsForProductCount">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelsForProductCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateLabelResellerAssocations">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelResellerAssocations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="InsertProductPromoPrivateLabels">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoPrivateLabels" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralPromosBySearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralPromosByAdvSearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosByAdvSearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCouponViralPromosBySearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllCouponViralPromosBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCouponViralPromosByAdvSearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllCouponViralPromosByAdvSearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralPromosByPromoCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosByPromoCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralPromoByPromoId">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetViralPromoByPromoId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCouponViralPromoByPromoId">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetCouponViralPromoByPromoId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCouponViralPromoByPromoCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetCouponViralPromoByPromoCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViralPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateViralPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="InsertViralPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertViralPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralPromoStats">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetViralPromoStats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralYardValues">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralYardValues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypes">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesBySearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesRequiringTlds">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesRequiringTlds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypeNameSpaces">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypeNameSpaces" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypeOverrideTypes">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypeOverrideTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentExclusions">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetPaymentExclusions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetTlds">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetTlds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PublishPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/PublishPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitChanges">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/SubmitChanges" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_PromoToolDomainServiceSOAP1" type="tns:PromoToolDomainServiceSOAP">
+    <wsp:PolicyReference URI="#BasicHttpBinding_PromoToolDomainServiceSOAP1_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllOrderPromosBySearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllOrderPromosBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderPromosByAdvSearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllOrderPromosByAdvSearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoByPromoCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetOrderPromoByPromoCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateOrderPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="InsertOrderPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertOrderPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMarketingOptInOrderPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/SubmitMarketingOptInOrderPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CopyOrderPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/CopyOrderPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderPromoStats">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetOrderPromoStats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetResellers">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetResellers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductResellers">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductResellers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCampaignTypes">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetCampaignTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByFastballDiscount">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByFastballDiscount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByFastballDiscountAdvanced">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByFastballDiscountAdvanced" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByDiscountCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByDiscountCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByDiscountCodeAdvanced">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByDiscountCodeAdvanced" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByItemTrackingCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByItemTrackingCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByItemTrackingAdvanced">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByItemTrackingAdvanced" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByAllShoppers">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAllShoppers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByAllShoppersAdvanced">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAllShoppersAdvanced" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosBySearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByAdvSearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByAdvSearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProductPromosByPromoCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllProductPromosByPromoCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromoTypes">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromoStats">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoStats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardProductPromoByPromoId">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetStandardProductPromoByPromoId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromoByPromoId">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoByPromoId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPromosByCurrencyAndSearchTerm">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromosByCurrencyAndSearchTerm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromoBulk">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoBulk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="OrderPromoBulkUpdate">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/OrderPromoBulkUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromoRestriction">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoRestriction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromoShopperRestriction">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoShopperRestriction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="InsertProductPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductRanks">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductRanks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateLabels">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabels" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateLabelsForProductCount">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelsForProductCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateLabelResellerAssocations">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelResellerAssocations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="InsertProductPromoPrivateLabels">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoPrivateLabels" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralPromosBySearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralPromosByAdvSearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosByAdvSearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCouponViralPromosBySearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllCouponViralPromosBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCouponViralPromosByAdvSearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllCouponViralPromosByAdvSearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralPromosByPromoCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosByPromoCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralPromoByPromoId">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetViralPromoByPromoId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCouponViralPromoByPromoId">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetCouponViralPromoByPromoId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCouponViralPromoByPromoCode">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetCouponViralPromoByPromoCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViralPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateViralPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="InsertViralPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertViralPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetViralPromoStats">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetViralPromoStats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllViralYardValues">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralYardValues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypes">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesBySearchCriteria">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesBySearchCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesRequiringTlds">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypesRequiringTlds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypeNameSpaces">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypeNameSpaces" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypeOverrideTypes">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductTypeOverrideTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentExclusions">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetPaymentExclusions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetTlds">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetTlds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PublishPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/PublishPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitChanges">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/SubmitChanges" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PromoToolDomainService">
+    <wsdl:port name="BasicHttpBinding_PromoToolDomainServiceSOAP" binding="tns:BasicHttpBinding_PromoToolDomainServiceSOAP">
+      <soap:address location="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc/SOAP" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_PromoToolDomainServiceSOAP1" binding="tns:BasicHttpBinding_PromoToolDomainServiceSOAP1">
+      <soap:address location="https://g1dwsalesweb001.dc1.corp.gd/PromoTool/PromoTool.svc/SOAP" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

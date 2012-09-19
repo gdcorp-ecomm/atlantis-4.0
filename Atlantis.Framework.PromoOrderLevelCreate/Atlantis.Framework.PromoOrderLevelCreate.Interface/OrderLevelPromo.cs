@@ -109,6 +109,8 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Interface
     }
 
     private bool _isActive = false;
+
+      private bool _skipvalidation = false;
     /// <summary>
     /// Gets or sets whether the promo is to be activated upon creation.
     /// </summary>
@@ -138,6 +140,11 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Interface
       set { this._iscDescription = value; }
     }
 
+    public bool SkipValidation
+    {
+        get { return this._skipvalidation; }
+        set { this._skipvalidation = value; }
+    }
     private Dictionary<ResellerType, bool> _resellerTypeList = new Dictionary<ResellerType, bool>();
 
     /// <summary>

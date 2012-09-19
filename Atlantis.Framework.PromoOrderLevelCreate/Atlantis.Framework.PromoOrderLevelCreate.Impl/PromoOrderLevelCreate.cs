@@ -21,35 +21,44 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Impl
           request = requestData as PromoOrderLevelCreateRequestData;
 
           //validation for dates
-          if (!OrderLevelPromo.IsValidDate(request.PromoCode.StartDate))
+          if (!request.PromoCode.SkipValidation)
           {
-            throw new OrderLevelPromoException("The promo start date format is invalid as it cannot be parsed to datetime format.", new ArgumentException("OrderLevelPromo.StartDate"), OrderLevelPromoExceptionReason.InvalidDateFormat);
-          }
-
-          if (!OrderLevelPromo.IsValidDate(request.PromoCode.EndDate))
-          {
-            throw new OrderLevelPromoException("The promo end date format is invalid as it cannot be parsed to datetime format.", new ArgumentException("OrderLevelPromo.EndDate"), OrderLevelPromoExceptionReason.InvalidDateFormat);
-          }
-
-          if (!OrderLevelPromo.IsDateInFuture(request.PromoCode.EndDate))
-          {
-            throw new OrderLevelPromoException("The end date for a promo must be in the future.", new ArgumentOutOfRangeException("OrderLevelPromo.EndDate"), OrderLevelPromoExceptionReason.InvalidDateRange);
-          }
-
-          //Run currency validations
-          OrderLevelPromoException validationException = null;
-          foreach (PrivateLabelPromoCurrency currency in request.PromoCode.Currencies)
-          {
-            if (!PrivateLabelPromoCurrency.IsPromoCurrencyValid(currency, ref validationException))
-            {
-              if (validationException != null)
+              if (!OrderLevelPromo.IsValidDate(request.PromoCode.StartDate))
               {
-                throw validationException;
+                  throw new OrderLevelPromoException(
+                      "The promo start date format is invalid as it cannot be parsed to datetime format.",
+                      new ArgumentException("OrderLevelPromo.StartDate"),
+                      OrderLevelPromoExceptionReason.InvalidDateFormat);
               }
-            }
-          }
 
-          Service service = new Service();
+              if (!OrderLevelPromo.IsValidDate(request.PromoCode.EndDate))
+              {
+                  throw new OrderLevelPromoException(
+                      "The promo end date format is invalid as it cannot be parsed to datetime format.",
+                      new ArgumentException("OrderLevelPromo.EndDate"), OrderLevelPromoExceptionReason.InvalidDateFormat);
+              }
+
+              if (!OrderLevelPromo.IsDateInFuture(request.PromoCode.EndDate))
+              {
+                  throw new OrderLevelPromoException("The end date for a promo must be in the future.",
+                                                     new ArgumentOutOfRangeException("OrderLevelPromo.EndDate"),
+                                                     OrderLevelPromoExceptionReason.InvalidDateRange);
+              }
+
+              //Run currency validations
+              OrderLevelPromoException validationException = null;
+              foreach (PrivateLabelPromoCurrency currency in request.PromoCode.Currencies)
+              {
+                  if (!PrivateLabelPromoCurrency.IsPromoCurrencyValid(currency, ref validationException))
+                  {
+                      if (validationException != null)
+                      {
+                          throw validationException;
+                      }
+                  }
+              }
+          }
+            Service service = new Service();
           service.Url = ((WsConfigElement)config).WSURL;
           service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
           X509Certificate2 clientCert = ((WsConfigElement)config).GetClientCertificate();

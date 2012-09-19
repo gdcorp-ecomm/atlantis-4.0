@@ -55,6 +55,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public class Disclaimer : ElementBase  // Needs to be filterable based on whether or not the symbols are added.  IE, if hosting is not displayed, don't display the hosting products  
     {
+      public Disclaimer() { }
+
       public Disclaimer(string symbol, string text)
       {
         Symbol = symbol;
@@ -66,6 +68,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public class PopIn
     {
+      public PopIn() { }
+
       public PopIn(string title, string text)
       {
         Title = title;
@@ -74,15 +78,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
       public string Title { get; set; }
       public string Text { get; set; }
-
-      //TODO: Should be in code-behind of widget:
-      public string Display
-      {
-        get
-        {
-          return string.Format("<span class=\"g-hover\">{0} <div class=\"g-hover-bubble\" style=\"display:none;\">{1}</div></span>", Title, Text);
-        }
-      }
     }
   }
 }

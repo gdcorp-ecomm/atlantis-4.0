@@ -49,6 +49,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
         public string ProductID { get; set; }
         public PopIn Details { get; set; }
         public List<Disclaimer> Disclaimers { get; set; }
+        public bool Hide { get; set; }
       }
 
     }

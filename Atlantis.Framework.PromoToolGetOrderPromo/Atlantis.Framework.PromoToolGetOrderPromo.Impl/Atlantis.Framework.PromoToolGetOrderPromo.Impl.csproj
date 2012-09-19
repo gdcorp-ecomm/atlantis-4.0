@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{952622BE-E570-4F03-BE0A-60AF7EE4E335}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atlantis.Framework.PromoToolGetOrderPromo.Impl</RootNamespace>
+    <AssemblyName>Atlantis.Framework.PromoToolGetOrderPromo.Impl</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PromoToolGetOrderPromoRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Svc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.ChangeSetEntry.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.Namespaces.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.OperationResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.OrderPromoV2.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.PaymentTypeExclusionList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.ProductPromo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.ProductRanks.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfCampaignType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfOrderPromoStats.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfOrderPromoV2.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfPrivateLabel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfPrivateLabelCount.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfPrivateLabelResellerAssociation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfProductPromo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfProductPromoSearchItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfProductPromoStats.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfProductPromoType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfProductType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfProductTypeOverride.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfResellerType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfViralPromo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfViralPromoStats.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.QueryResultOfViralYardValue.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.StandardProductPromo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.TldList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetOrderPromo.Impl.Svc.ViralPromo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Svc\PromoTool.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Svc\PromoTool1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Svc\PromoTool2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Svc\PromoTool3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Svc\PromoTool4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Svc\PromoTool5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Svc\PromoTool6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Svc\PromoTool7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Svc\PromoToolDomainService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+      <Project>{D30157B2-C1B3-4073-BA5E-632E2337A997}</Project>
+      <Name>Atlantis.Framework.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.PromoToolGetOrderPromo.Interface\Atlantis.Framework.PromoToolGetOrderPromo.Interface.csproj">
+      <Project>{8A690D22-3AD7-4A68-8FA7-9BD0068A1154}</Project>
+      <Name>Atlantis.Framework.PromoToolGetOrderPromo.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Svc\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Svc\PromoTool.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Svc\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Svc\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Svc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

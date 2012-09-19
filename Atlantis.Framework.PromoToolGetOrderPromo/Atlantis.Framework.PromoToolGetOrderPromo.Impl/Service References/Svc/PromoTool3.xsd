@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="DomainServices" elementFormDefault="qualified" targetNamespace="DomainServices" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+  <xs:complexType name="QueryResultOfOrderPromoV2">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="OrderPromoV2" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q1:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q2:ArrayOfOrderPromoV2">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfOrderPromoV2" nillable="true" type="tns:QueryResultOfOrderPromoV2" />
+  <xs:complexType name="QueryResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TotalCount" type="xs:int">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueryResult" nillable="true" type="tns:QueryResult" />
+  <xs:complexType name="DomainServiceFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" type="xs:int">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDomainException" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OperationErrors" nillable="true" type="tns:ArrayOfValidationResultInfo">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="StackTrace" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DomainServiceFault" nillable="true" type="tns:DomainServiceFault" />
+  <xs:complexType name="ArrayOfValidationResultInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ValidationResultInfo" nillable="true" type="tns:ValidationResultInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfValidationResultInfo" nillable="true" type="tns:ArrayOfValidationResultInfo" />
+  <xs:complexType name="ValidationResultInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" type="xs:int">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SourceMemberNames" nillable="true" type="q3:ArrayOfstring">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="StackTrace" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValidationResultInfo" nillable="true" type="tns:ValidationResultInfo" />
+  <xs:complexType name="QueryResultOfOrderPromoStats">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="OrderPromoStats" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q4:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q5:ArrayOfOrderPromoStats">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfOrderPromoStats" nillable="true" type="tns:QueryResultOfOrderPromoStats" />
+  <xs:complexType name="QueryResultOfResellerType">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ResellerType" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q6:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q7:ArrayOfResellerType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfResellerType" nillable="true" type="tns:QueryResultOfResellerType" />
+  <xs:complexType name="QueryResultOfCampaignType">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="CampaignType" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q8:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q9:ArrayOfCampaignType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfCampaignType" nillable="true" type="tns:QueryResultOfCampaignType" />
+  <xs:complexType name="QueryResultOfProductPromo">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ProductPromo" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q10:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q11:ArrayOfProductPromo">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfProductPromo" nillable="true" type="tns:QueryResultOfProductPromo" />
+  <xs:complexType name="QueryResultOfProductPromoType">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ProductPromoType" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q12:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q13:ArrayOfProductPromoType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfProductPromoType" nillable="true" type="tns:QueryResultOfProductPromoType" />
+  <xs:complexType name="QueryResultOfProductPromoStats">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ProductPromoStats" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q14:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q15:ArrayOfProductPromoStats">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfProductPromoStats" nillable="true" type="tns:QueryResultOfProductPromoStats" />
+  <xs:complexType name="QueryResultOfProductPromoSearchItem">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ProductPromoSearchItem" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q16:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q17:ArrayOfProductPromoSearchItem">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfProductPromoSearchItem" nillable="true" type="tns:QueryResultOfProductPromoSearchItem" />
+  <xs:complexType name="QueryResultOfPrivateLabel">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="PrivateLabel" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q18:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q19:ArrayOfPrivateLabel">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfPrivateLabel" nillable="true" type="tns:QueryResultOfPrivateLabel" />
+  <xs:complexType name="QueryResultOfPrivateLabelCount">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="PrivateLabelCount" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q20:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q21:ArrayOfPrivateLabelCount">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfPrivateLabelCount" nillable="true" type="tns:QueryResultOfPrivateLabelCount" />
+  <xs:complexType name="QueryResultOfPrivateLabelResellerAssociation">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="PrivateLabelResellerAssociation" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q22:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q23:ArrayOfPrivateLabelResellerAssociation">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfPrivateLabelResellerAssociation" nillable="true" type="tns:QueryResultOfPrivateLabelResellerAssociation" />
+  <xs:complexType name="QueryResultOfViralPromo">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ViralPromo" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q24:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q25:ArrayOfViralPromo">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfViralPromo" nillable="true" type="tns:QueryResultOfViralPromo" />
+  <xs:complexType name="QueryResultOfViralPromoStats">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ViralPromoStats" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q26:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q27:ArrayOfViralPromoStats">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfViralPromoStats" nillable="true" type="tns:QueryResultOfViralPromoStats" />
+  <xs:complexType name="QueryResultOfViralYardValue">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ViralYardValue" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q28:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q29:ArrayOfViralYardValue">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfViralYardValue" nillable="true" type="tns:QueryResultOfViralYardValue" />
+  <xs:complexType name="QueryResultOfProductType">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ProductType" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q30="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q30:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q31:ArrayOfProductType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfProductType" nillable="true" type="tns:QueryResultOfProductType" />
+  <xs:complexType name="QueryResultOfProductTypeOverride">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ProductTypeOverride" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:QueryResult">
+        <xs:sequence>
+          <xs:element xmlns:q32="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IncludedResults" nillable="true" type="q32:ArrayOfanyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q33:ArrayOfProductTypeOverride">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryResultOfProductTypeOverride" nillable="true" type="tns:QueryResultOfProductTypeOverride" />
+  <xs:complexType name="ArrayOfChangeSetEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ChangeSetEntry" nillable="true" type="tns:ChangeSetEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfChangeSetEntry" nillable="true" type="tns:ArrayOfChangeSetEntry" />
+  <xs:complexType name="ChangeSetEntry">
+    <xs:sequence>
+      <xs:element xmlns:q34="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Associations" nillable="true" type="q34:ArrayOfKeyValueOfstringArrayOfintty7Ep6D1">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element xmlns:q35="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ConflictMembers" nillable="true" type="q35:ArrayOfstring">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Entity" nillable="true" type="xs:anyType" />
+      <xs:element xmlns:q36="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="EntityActions" nillable="true" type="q36:ArrayOfKeyValueOfstringArrayOfanyTypety7Ep6D1" />
+      <xs:element minOccurs="0" name="HasMemberChanges" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsDeleteConflict" type="xs:boolean">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Operation" type="tns:DomainOperation" />
+      <xs:element xmlns:q37="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="OriginalAssociations" nillable="true" type="q37:ArrayOfKeyValueOfstringArrayOfintty7Ep6D1">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="OriginalEntity" nillable="true" type="xs:anyType">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="StoreEntity" nillable="true" type="xs:anyType">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ValidationErrors" nillable="true" type="tns:ArrayOfValidationResultInfo">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ChangeSetEntry" nillable="true" type="tns:ChangeSetEntry" />
+  <xs:simpleType name="DomainOperation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Query" />
+      <xs:enumeration value="Insert" />
+      <xs:enumeration value="Update" />
+      <xs:enumeration value="Delete" />
+      <xs:enumeration value="Custom" />
+      <xs:enumeration value="Invoke" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DomainOperation" nillable="true" type="tns:DomainOperation" />
+</xs:schema>

@@ -11,8 +11,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string Title { get; set; }
     public string ButtonTextNoSelection { get; set; }
     public string ButtonTextSelected { get; set; }
-    public List<Grouped_Product> GroupedProducts { get; set; }
-    public class Grouped_Product
+    public List<GroupedProduct> GroupedProducts { get; set; }
+    public class GroupedProduct : ElementBase
     {
       public string Title { get; set; }
       public List<Product> Products { get; set; }

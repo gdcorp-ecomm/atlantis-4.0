@@ -9,6 +9,7 @@ namespace Atlantis.Framework.EcommActivationData.Interface
     public const string PRODUCT_TYPE_INSTANTPAGE = "InstantPageSetup";
     public const string PRODUCT_TYPE_EMAIL = "EmailSetup";
     public const string PRODUCT_TYPE_HOSTING = "HostingSetup";
+    public const string PRODUCT_TYPE_BUILDER = "SiteBuilderSetup";
 
     public const int ACTIVATION_STATUS_FAILURE = 0;
     public const int ACTIVATION_STATUS_PREPROCESS = 1;

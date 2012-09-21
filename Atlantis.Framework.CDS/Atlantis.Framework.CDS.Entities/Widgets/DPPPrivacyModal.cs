@@ -11,6 +11,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string Title { get; set; }
     public string ButtonTextNoSelection { get; set; }
     public string ButtonTextSelected { get; set; }
+    public string DisclaimerText { get; set; }
+    public string DisclaimerTitle { get; set; }
     public List<GroupedProduct> GroupedProducts { get; set; }
     public class GroupedProduct : ElementBase
     {
@@ -33,6 +35,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
         public string SpritePosition { get; set; }
         public List<SubProduct> SubProducts { get; set; }
         public List<PopIn> PopIns { get; set; }
+        public List<Disclaimer> Disclaimers { get; set; }
 
         public class SubProduct
         {
@@ -85,6 +88,19 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       }
     }
 
+    public class Disclaimer : ElementBase  // Needs to be filterable based on whether or not the symbols are added.  IE, if hosting is not displayed, don't display the hosting products  
+    {
+      public Disclaimer() { }
+
+      public Disclaimer(string symbol, string text)
+      {
+        Symbol = symbol;
+        Text = text;
+      }
+
+      public string Symbol { get; set; }
+    }
+
     public class PopIn
     {
       public PopIn(string title, string text)
@@ -95,13 +111,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
       public string Title { get; set; }
       public string Text { get; set; }
-      public string Display
-      {
-        get
-        {
-          return string.Format("<span class=\"g-hover\">{0} <div class=\"g-hover-bubble\" style=\"display:none;\">{1}</div></span>", Title, Text);
-        }
-      }
+
     }
   }
 }

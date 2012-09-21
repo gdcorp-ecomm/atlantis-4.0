@@ -15,6 +15,7 @@ namespace Atlantis.Framework.CDS.Tests
   {
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
     public void Triplet_Receives_Content()
     {
       //Arrange
@@ -34,6 +35,7 @@ namespace Atlantis.Framework.CDS.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
     public void Triplet_Receives_200_If_Document_Does_Exist()
     {
       //Arrange
@@ -53,6 +55,7 @@ namespace Atlantis.Framework.CDS.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
     public void Triplet_Receives_404_If_Document_Does_Not_Exist()
     {
       //Arrange

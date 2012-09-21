@@ -102,6 +102,8 @@ namespace Atlantis.Framework.CDS.Tests
       shopperContext.SetLoggedInShopper(shopperId);
     }
 
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
     [TestMethod]
     public void Tokenizer_Can_Replace_Links_Full_Relative()
     {
@@ -117,7 +119,8 @@ namespace Atlantis.Framework.CDS.Tests
       Assert.AreEqual(expected, result);
     }
 
-
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
     [TestMethod]
     public void Tokenizer_Invalid_Link_Type_Returns_Default()
     {
@@ -133,7 +136,8 @@ namespace Atlantis.Framework.CDS.Tests
       Assert.AreEqual(expected, result);
     }
 
-
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
     [TestMethod]
     public void Tokenizer_Malformed_Link_Token()
     {
@@ -149,7 +153,8 @@ namespace Atlantis.Framework.CDS.Tests
       Assert.AreEqual(expected, result);
     }
 
-
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void Tokenizer_Can_Replace_LinkType_Secure()
@@ -166,6 +171,8 @@ namespace Atlantis.Framework.CDS.Tests
       Assert.AreEqual(expected, result);
     }
 
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void Tokenizer_Can_Replace_Links_Help()
@@ -182,6 +189,8 @@ namespace Atlantis.Framework.CDS.Tests
       Assert.AreEqual(expected, result);
     }
 
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void Tokenizer_Can_Replace_Links_External()
@@ -198,6 +207,7 @@ namespace Atlantis.Framework.CDS.Tests
       Assert.AreEqual(expected, result);
     }
 
+    [DeploymentItem("atlantis.config")]
     [TestMethod]
     public void Tokenizer_Can_Replace_Product_Description()
     {

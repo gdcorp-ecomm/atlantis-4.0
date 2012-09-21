@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://wsgdpricingdata.godaddy.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://wsgdpricingdata.godaddy.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://wsgdpricingdata.godaddy.com/">
+      <s:element name="GetResourcePricing">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sResourceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sResourceType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIDType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sCurrency" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sAddlUnifiedProductIDList" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResourcePricingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetResourcePricingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResourceStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sResourceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sResourceType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIDType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResourceStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetResourceStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BillResource">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sResourceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sResourceType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sIDType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BillResourceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BillResourceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetResourcePricingSoapIn">
+    <wsdl:part name="parameters" element="tns:GetResourcePricing" />
+  </wsdl:message>
+  <wsdl:message name="GetResourcePricingSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResourcePricingResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetResourceStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetResourceStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetResourceStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResourceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="BillResourceSoapIn">
+    <wsdl:part name="parameters" element="tns:BillResource" />
+  </wsdl:message>
+  <wsdl:message name="BillResourceSoapOut">
+    <wsdl:part name="parameters" element="tns:BillResourceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service1Soap">
+    <wsdl:operation name="GetResourcePricing">
+      <wsdl:input message="tns:GetResourcePricingSoapIn" />
+      <wsdl:output message="tns:GetResourcePricingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResourceStatus">
+      <wsdl:input message="tns:GetResourceStatusSoapIn" />
+      <wsdl:output message="tns:GetResourceStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BillResource">
+      <wsdl:input message="tns:BillResourceSoapIn" />
+      <wsdl:output message="tns:BillResourceSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetResourcePricing">
+      <soap:operation soapAction="http://wsgdpricingdata.godaddy.com/GetResourcePricing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResourceStatus">
+      <soap:operation soapAction="http://wsgdpricingdata.godaddy.com/GetResourceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BillResource">
+      <soap:operation soapAction="http://wsgdpricingdata.godaddy.com/BillResource" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetResourcePricing">
+      <soap12:operation soapAction="http://wsgdpricingdata.godaddy.com/GetResourcePricing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResourceStatus">
+      <soap12:operation soapAction="http://wsgdpricingdata.godaddy.com/GetResourceStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BillResource">
+      <soap12:operation soapAction="http://wsgdpricingdata.godaddy.com/BillResource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
+      <soap:address location="https://commgtwyws.dev.glbt1.gdg/WSgdPricingData/Service1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
+      <soap12:address location="https://commgtwyws.dev.glbt1.gdg/WSgdPricingData/Service1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

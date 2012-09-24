@@ -608,12 +608,23 @@ namespace Atlantis.Framework.GetBasketObjects.Interface
       get { return _totalDomains; }
     }
 
+    private List<CartBasketOrderItem> _domainsInCart = new List<CartBasketOrderItem>();
+
+    public List<CartBasketOrderItem> DomainsInCart
+    {
+      get
+      {
+        return _domainsInCart;
+      }
+    }
+
     private void DomainProcessing(CartBasketOrderItem orderItem)
     {
       if (orderItem.DomainInfo.IsDomain)
       {
         if (!orderItem.DomainInfo.IsProxy)
         {
+          _domainsInCart.Add(orderItem);
           if (orderItem.DomainInfo.DomainType == CartDomainItemTypes.BulkDomain || orderItem.DomainInfo.DomainType == CartDomainItemTypes.DomainTransfer ||
                (orderItem.DomainInfo.DomainType == CartDomainItemTypes.DomainBackorder && orderItem.ProductId == ExpiredAuctionPFID))
           {

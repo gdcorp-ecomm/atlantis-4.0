@@ -67,6 +67,7 @@ namespace Atlantis.Framework.GetBasketObjects.Test
 	[DeploymentItem("atlantis.config")]
     public void GetBasketObjectsTest()
     {
+      string _shopperId = "853392";
      GetBasketObjectsRequestData request = new GetBasketObjectsRequestData(_shopperId
         , string.Empty
         , string.Empty
@@ -74,13 +75,6 @@ namespace Atlantis.Framework.GetBasketObjects.Test
         , 0 );
 
       GetBasketObjectsResponseData response = (GetBasketObjectsResponseData)Engine.Engine.ProcessRequest(request, 121);
-      
-	  // Cache call
-	  //GetBasketObjectsResponseData response = (GetBasketObjectsResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
-
-      //
-      // TODO: Add test logic here
-      //
 	  
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);

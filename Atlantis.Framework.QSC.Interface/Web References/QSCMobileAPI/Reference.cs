@@ -42,6 +42,8 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         
         private System.Threading.SendOrPostCallback getOrderCountByStatusOperationCompleted;
         
+        private System.Threading.SendOrPostCallback updatePaymentStatusOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getSupportedCountriesOperationCompleted;
         
         private System.Threading.SendOrPostCallback updateContactOperationCompleted;
@@ -128,6 +130,9 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         
         /// <remarks/>
         public event getOrderCountByStatusCompletedEventHandler getOrderCountByStatusCompleted;
+        
+        /// <remarks/>
+        public event updatePaymentStatusCompletedEventHandler updatePaymentStatusCompleted;
         
         /// <remarks/>
         public event getSupportedCountriesCompletedEventHandler getSupportedCountriesCompleted;
@@ -286,6 +291,46 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             if ((this.getOrderCountByStatusCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getOrderCountByStatusCompleted(this, new getOrderCountByStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://ws.fastshoppingcart.com/xfws/mobile", ResponseNamespace="http://ws.fastshoppingcart.com/xfws/mobile", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("responseDetail", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public responseDetail updatePaymentStatus([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string accountUId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string shopperId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string invoiceId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int paymentId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] [System.Xml.Serialization.XmlIgnoreAttribute()] bool paymentIdSpecified, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string paymentStatus) {
+            object[] results = this.Invoke("updatePaymentStatus", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        paymentId,
+                        paymentIdSpecified,
+                        paymentStatus});
+            return ((responseDetail)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void updatePaymentStatusAsync(string accountUId, string shopperId, string invoiceId, int paymentId, bool paymentIdSpecified, string paymentStatus) {
+            this.updatePaymentStatusAsync(accountUId, shopperId, invoiceId, paymentId, paymentIdSpecified, paymentStatus, null);
+        }
+        
+        /// <remarks/>
+        public void updatePaymentStatusAsync(string accountUId, string shopperId, string invoiceId, int paymentId, bool paymentIdSpecified, string paymentStatus, object userState) {
+            if ((this.updatePaymentStatusOperationCompleted == null)) {
+                this.updatePaymentStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdatePaymentStatusOperationCompleted);
+            }
+            this.InvokeAsync("updatePaymentStatus", new object[] {
+                        accountUId,
+                        shopperId,
+                        invoiceId,
+                        paymentId,
+                        paymentIdSpecified,
+                        paymentStatus}, this.updatePaymentStatusOperationCompleted, userState);
+        }
+        
+        private void OnupdatePaymentStatusOperationCompleted(object arg) {
+            if ((this.updatePaymentStatusCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.updatePaymentStatusCompleted(this, new updatePaymentStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1730,9 +1775,46 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
+    public partial class orderPaymentStatus {
+        
+        private string displayTextField;
+        
+        private string keyField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string displayText {
+            get {
+                return this.displayTextField;
+            }
+            set {
+                this.displayTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string key {
+            get {
+                return this.keyField;
+            }
+            set {
+                this.keyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17929")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     public partial class orderPayment {
         
         private string paymentStatusField;
+        
+        private orderPaymentStatus[] allowedNextPaymentStatusesField;
         
         private string paymentMethodField;
         
@@ -1772,6 +1854,18 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             }
             set {
                 this.paymentStatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("paymentStatus", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public orderPaymentStatus[] allowedNextPaymentStatuses {
+            get {
+                return this.allowedNextPaymentStatusesField;
+            }
+            set {
+                this.allowedNextPaymentStatusesField = value;
             }
         }
         
@@ -3735,6 +3829,32 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((getOrderCountByStatusResponseDetail)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void updatePaymentStatusCompletedEventHandler(object sender, updatePaymentStatusCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class updatePaymentStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal updatePaymentStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public responseDetail Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((responseDetail)(this.results[0]));
             }
         }
     }

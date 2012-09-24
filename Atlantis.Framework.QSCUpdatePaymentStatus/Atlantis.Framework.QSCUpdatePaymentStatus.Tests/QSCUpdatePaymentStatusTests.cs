@@ -17,7 +17,7 @@ namespace Atlantis.Framework.QSCUpdatePaymentStatus.Tests
 			string _invoiceId = "2219";
 			string _paymentStatus = "cancel";
 			int _paymentId = 1246;
-			int requestId = 557;
+			int requestId = 601;
 
 			QSCUpdatePaymentStatusRequestData request = new QSCUpdatePaymentStatusRequestData(_shopperId, "", string.Empty, string.Empty, 1, _accountUid, _invoiceId, _paymentId, _paymentStatus);
 
@@ -39,7 +39,7 @@ namespace Atlantis.Framework.QSCUpdatePaymentStatus.Tests
 			string _invoiceId = "2219";
 			string _paymentStatus = "new";
 			int _paymentId = 1246;
-			int requestId = 557;
+			int requestId = 601;
 
 			QSCUpdatePaymentStatusRequestData request = new QSCUpdatePaymentStatusRequestData(_shopperId, "", string.Empty, string.Empty, 1, _accountUid, _invoiceId, _paymentId, _paymentStatus);
 

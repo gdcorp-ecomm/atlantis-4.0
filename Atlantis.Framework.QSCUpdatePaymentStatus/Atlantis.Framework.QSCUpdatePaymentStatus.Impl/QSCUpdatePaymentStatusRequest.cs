@@ -34,8 +34,7 @@ namespace Atlantis.Framework.QSCUpdatePaymentStatus.Impl
 							service.ClientCertificates.Add(clientCertificate);
 						}
 
-						//response = service.UpdatePaymentStatus(request.AccountUid, request.ShopperID, request.InvoiceId, request.PaymentId, request.PaymentStatus);
-						response = new responseDetail();
+						response = service.updatePaymentStatus(request.AccountUid, request.ShopperID, request.InvoiceId, request.PaymentId, true, request.PaymentStatus);
 
 						if (response != null)
 							responseData = new QSCUpdatePaymentStatusResponseData((response as responseDetail));

@@ -47,6 +47,8 @@
       <xs:element name="updateOrderStatusResponse" type="tns:updateOrderStatusResponse" />
       <xs:element name="updatePackage" type="tns:updatePackage" />
       <xs:element name="updatePackageResponse" type="tns:updatePackageResponse" />
+      <xs:element name="updatePaymentStatus" type="tns:updatePaymentStatus" />
+      <xs:element name="updatePaymentStatusResponse" type="tns:updatePaymentStatusResponse" />
       <xs:element name="voiceAuthCapture" type="tns:voiceAuthCapture" />
       <xs:element name="voiceAuthCaptureResponse" type="tns:voiceAuthCaptureResponse" />
       <xs:complexType name="getBlockedIPAddresses">
@@ -148,6 +150,20 @@
           <xs:element name="displayText" type="xs:string" />
         </xs:sequence>
         <xs:attribute name="key" type="xs:string" use="required" />
+      </xs:complexType>
+      <xs:complexType name="updatePaymentStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="accountUId" type="xs:string" />
+          <xs:element minOccurs="0" name="shopperId" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceId" type="xs:string" />
+          <xs:element minOccurs="0" name="paymentId" type="xs:int" />
+          <xs:element minOccurs="0" name="paymentStatus" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updatePaymentStatusResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="responseDetail" type="tns:responseDetail" />
+        </xs:sequence>
       </xs:complexType>
       <xs:complexType name="getSupportedCountries">
         <xs:sequence>
@@ -561,6 +577,13 @@
       <xs:complexType name="orderPayment">
         <xs:sequence>
           <xs:element minOccurs="0" name="paymentStatus" type="xs:string" />
+          <xs:element name="allowedNextPaymentStatuses">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="paymentStatus" type="tns:orderPaymentStatus" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
           <xs:element name="paymentMethod" type="xs:string" />
           <xs:element name="billingStatus" type="xs:string" />
           <xs:element name="isCapturable" type="xs:boolean" />
@@ -583,6 +606,12 @@
           </xs:element>
         </xs:sequence>
         <xs:attribute name="paymentId" type="xs:int" use="required" />
+      </xs:complexType>
+      <xs:complexType name="orderPaymentStatus">
+        <xs:sequence>
+          <xs:element name="displayText" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="key" type="xs:string" use="required" />
       </xs:complexType>
       <xs:complexType name="refund">
         <xs:sequence>
@@ -899,6 +928,9 @@
   <wsdl:message name="updateOrderNotes">
     <wsdl:part name="parameters" element="tns:updateOrderNotes" />
   </wsdl:message>
+  <wsdl:message name="updatePaymentStatus">
+    <wsdl:part name="parameters" element="tns:updatePaymentStatus" />
+  </wsdl:message>
   <wsdl:message name="getOrderCountByStatusResponse">
     <wsdl:part name="parameters" element="tns:getOrderCountByStatusResponse" />
   </wsdl:message>
@@ -947,6 +979,9 @@
   <wsdl:message name="updateContact">
     <wsdl:part name="parameters" element="tns:updateContact" />
   </wsdl:message>
+  <wsdl:message name="updatePaymentStatusResponse">
+    <wsdl:part name="parameters" element="tns:updatePaymentStatusResponse" />
+  </wsdl:message>
   <wsdl:message name="updateOrderNotesResponse">
     <wsdl:part name="parameters" element="tns:updateOrderNotesResponse" />
   </wsdl:message>
@@ -981,6 +1016,11 @@
       <wsdl:documentation>Returns a list of blocked IP addresses by account UID</wsdl:documentation>
       <wsdl:input name="getOrderCountByStatus" message="tns:getOrderCountByStatus" />
       <wsdl:output name="getOrderCountByStatusResponse" message="tns:getOrderCountByStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updatePaymentStatus">
+      <wsdl:documentation>Updates the order payment status to the supplied order status (paymentStatus key).  The allowed values come from the allowed statuses returned in the getOrder call. This method internally progresses the order through workflow steps to get this order into this status.</wsdl:documentation>
+      <wsdl:input name="updatePaymentStatus" message="tns:updatePaymentStatus" />
+      <wsdl:output name="updatePaymentStatusResponse" message="tns:updatePaymentStatusResponse" />
     </wsdl:operation>
     <wsdl:operation name="getSupportedCountries">
       <wsdl:documentation>Returns a list of QSC supported countries</wsdl:documentation>
@@ -1108,6 +1148,15 @@
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="getOrderCountByStatusResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updatePaymentStatus">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="updatePaymentStatus">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updatePaymentStatusResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

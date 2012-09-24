@@ -1,24 +1,50 @@
 ﻿using System;
 using System.Web;
+using System.Xml;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.GetBasketObjects.Interface
 {
   public class CartBasketOrderDetail : CartBaseDictionary
   {
-        
+
     private string _domainContactXml;
+    private Dictionary<string, List<DomainContact>> _domainContactGroups = new Dictionary<string, List<DomainContact>>();
 
     public string DomainContactXml
     {
       get { return _domainContactXml; }
-      set { _domainContactXml = value; }
+      set
+      {
+        _domainContactXml = value;
+        LoadDomainContacts(_domainContactXml);
+      }
+    }
+
+    private void LoadDomainContacts(string contactXML)
+    {
+      XmlDocument customXML = new XmlDocument();
+      customXML.LoadXml(contactXML);
+
+      XmlNodeList contactGroups = customXML.SelectNodes("//contacts");
+      foreach (XmlNode currentGroup in contactGroups)
+      {
+        string crc32 = currentGroup.Attributes["crc32"].Value;
+        List<DomainContact> groupContacts = new List<DomainContact>();
+        foreach (XmlNode currentContact in currentGroup.ChildNodes)
+        {
+          DomainContact domContact= new DomainContact(currentContact);
+          groupContacts.Add(domContact);
+        }
+        _domainContactGroups[crc32] = groupContacts;
+      }
     }
 
     public int TotalShipping
     {
       get
       {
-        int thirdPartyShipping=GetIntProperty(CartBasketOrderDetailProperty.ThirdPartyAmnt, 0);
+        int thirdPartyShipping = GetIntProperty(CartBasketOrderDetailProperty.ThirdPartyAmnt, 0);
         int handling = GetIntProperty(CartBasketOrderDetailProperty.HandlingTotal, 0);
         int shipTotal = GetIntProperty(CartBasketOrderDetailProperty.ShippingTotal, 0);
         int totalAmount = shipTotal + handling + thirdPartyShipping + MarketPlaceShippingTotal;
@@ -33,7 +59,7 @@ namespace Atlantis.Framework.GetBasketObjects.Interface
 
     public int ShippingPrice
     {
-      get { return  GetIntProperty(CartBasketOrderDetailProperty.ShippingPrice, 0); }
+      get { return GetIntProperty(CartBasketOrderDetailProperty.ShippingPrice, 0); }
     }
 
     public int TotalTotal

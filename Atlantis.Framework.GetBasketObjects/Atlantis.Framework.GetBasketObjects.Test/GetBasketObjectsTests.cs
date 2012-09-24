@@ -65,16 +65,18 @@ namespace Atlantis.Framework.GetBasketObjects.Test
 
     [TestMethod]
 	[DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.GetBasketObjects.Impl")]
     public void GetBasketObjectsTest()
     {
       string _shopperId = "853392";
+      GetBasketObjectsRequest oRequest;
      GetBasketObjectsRequestData request = new GetBasketObjectsRequestData(_shopperId
         , string.Empty
         , string.Empty
         , string.Empty
         , 0 );
 
-      GetBasketObjectsResponseData response = (GetBasketObjectsResponseData)Engine.Engine.ProcessRequest(request, 121);
+     GetBasketObjectsResponseData response = (GetBasketObjectsResponseData)Engine.Engine.ProcessRequest(request, 603);
 	  
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);

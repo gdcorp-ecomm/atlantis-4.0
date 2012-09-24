@@ -570,8 +570,9 @@ namespace Atlantis.Framework.GetBasketObjects.Interface
       else if (reader.Name == CartBasketElementTypes.DomainContactXml)
       {
         Detail.DomainContactXml = reader.ReadInnerXml();
+       
       }
-    }
+    }    
 
     public bool IsEzPrintShipping()
     {

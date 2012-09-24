@@ -6,6 +6,11 @@ namespace Atlantis.Framework.GetBasketObjects.Interface
 {
   public class CartDomainEntry : CartBaseDictionary
   {
+    public string CRC32
+    {
+      get { return GetStringProperty("crc32", string.Empty); }
+    }
+
     public string SecondLevelDomain
     {
       get { return GetStringProperty("sld", string.Empty); }

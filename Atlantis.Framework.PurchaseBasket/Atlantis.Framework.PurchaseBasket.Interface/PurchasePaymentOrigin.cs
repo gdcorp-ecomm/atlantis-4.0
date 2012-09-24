@@ -73,5 +73,17 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
       get { return GetStringProperty("currencyDisplay", string.Empty); }
       set { this["currencyDisplay"] = value; }
     }
+
+    public string ReferralTransactionId
+    {
+      get { return GetStringProperty("referral_transaction_id", string.Empty); }
+      set { this["referral_transaction_id"] = value; }
+    }
+
+    public string ReferralProvider
+    {
+      get { return GetStringProperty("referral_provider", string.Empty); }
+      set { this["referral_provider"] = value; }
+    }
   }
 }

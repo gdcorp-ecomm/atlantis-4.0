@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{17EBED78-9469-4678-96B1-A175AB221916}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommInstoreStatement.Impl", "Atlantis.Framework.EcommInstoreStatement.Impl\Atlantis.Framework.EcommInstoreStatement.Impl.csproj", "{6523C94D-D2C5-487D-BB75-9E00856FA16D}"
 EndProject
@@ -66,10 +66,10 @@ Global
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6523C94D-D2C5-487D-BB75-9E00856FA16D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6523C94D-D2C5-487D-BB75-9E00856FA16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6523C94D-D2C5-487D-BB75-9E00856FA16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -89,6 +89,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {C8C89D55-2CA9-4704-98AE-2B4FBC85C99A}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {C8C89D55-2CA9-4704-98AE-2B4FBC85C99A}
-		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {C8C89D55-2CA9-4704-98AE-2B4FBC85C99A}
+		{17EBED78-9469-4678-96B1-A175AB221916} = {C8C89D55-2CA9-4704-98AE-2B4FBC85C99A}
 	EndGlobalSection
 EndGlobal

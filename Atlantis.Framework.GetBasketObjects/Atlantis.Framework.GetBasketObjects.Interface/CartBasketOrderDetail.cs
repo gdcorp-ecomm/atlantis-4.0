@@ -9,7 +9,7 @@ namespace Atlantis.Framework.GetBasketObjects.Interface
   {
 
     private string _domainContactXml;
-    private Dictionary<string, List<DomainContact>> _domainContactGroups = new Dictionary<string, List<DomainContact>>();
+    private Dictionary<string, List<CartDomainContact>> _domainContactGroups = new Dictionary<string, List<CartDomainContact>>();
 
     public string DomainContactXml
     {
@@ -30,10 +30,10 @@ namespace Atlantis.Framework.GetBasketObjects.Interface
       foreach (XmlNode currentGroup in contactGroups)
       {
         string crc32 = currentGroup.Attributes["crc32"].Value;
-        List<DomainContact> groupContacts = new List<DomainContact>();
+        List<CartDomainContact> groupContacts = new List<CartDomainContact>();
         foreach (XmlNode currentContact in currentGroup.ChildNodes)
         {
-          DomainContact domContact= new DomainContact(currentContact);
+          CartDomainContact domContact= new CartDomainContact(currentContact);
           groupContacts.Add(domContact);
         }
         _domainContactGroups[crc32] = groupContacts;

@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace Atlantis.Framework.GetBasketObjects.Interface
 {
-  public class DomainContact : CartBaseDictionary
+  public class CartDomainContact : CartBaseDictionary
   {
 
     public string ContactType
@@ -54,11 +54,11 @@ namespace Atlantis.Framework.GetBasketObjects.Interface
       get { return GetStringProperty("phone", string.Empty); }
     }
 
-    public DomainContact()
+    public CartDomainContact()
     {
     }
 
-    public DomainContact(XmlNode currentContact)
+    public CartDomainContact(XmlNode currentContact)
     {
       foreach (XmlAttribute regAtt in currentContact.Attributes)
       {

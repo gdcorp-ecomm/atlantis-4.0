@@ -82,7 +82,7 @@
     <Compile Include="CartDomainEntry.cs" />
     <Compile Include="CartDomainItem.cs" />
     <Compile Include="CartDomainItemTypes.cs" />
-    <Compile Include="DomainContact.cs" />
+    <Compile Include="CartDomainContact.cs" />
     <Compile Include="GetBasketObjectsRequestData.cs" />
     <Compile Include="GetBasketObjectsResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

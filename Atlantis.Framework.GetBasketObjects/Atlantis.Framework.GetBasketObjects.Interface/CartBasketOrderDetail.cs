@@ -10,6 +10,7 @@ namespace Atlantis.Framework.GetBasketObjects.Interface
 
     private string _domainContactXml;
     private Dictionary<string, List<CartDomainContact>> _domainContactGroups = new Dictionary<string, List<CartDomainContact>>();
+    public Dictionary<string, List<CartDomainContact>> DomainContactGroups { get { return _domainContactGroups; } }
 
     public string DomainContactXml
     {

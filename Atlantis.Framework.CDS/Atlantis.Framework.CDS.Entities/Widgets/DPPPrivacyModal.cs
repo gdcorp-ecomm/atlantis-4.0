@@ -44,6 +44,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
           public string Price { get; set; }
           public string ListPrice { get; set; }
           public string SelectedText { get; set; }
+          public bool Selected { get; set; }
           public List<string> Features { get; set; }
         }
       }

@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F858365E-6392-4440-BF49-D18CAC1F41AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{17EBED78-9469-4678-96B1-A175AB221916}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PaymentAlternateDelete.Impl", "Atlantis.Framework.PaymentAlternateDelete.Impl\Atlantis.Framework.PaymentAlternateDelete.Impl.csproj", "{25C90270-205E-44A6-8906-F0E39FFB4932}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PaymentAlternateDelete.Interface", "Atlantis.Framework.PaymentAlternateDelete.Interface\Atlantis.Framework.PaymentAlternateDelete.Interface.csproj", "{3D7F5BC7-891A-4DC9-9F5F-3DB4010629AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PaymentAlternateDelete.Tests", "Atlantis.Framework.PaymentAlternateDelete.Tests\Atlantis.Framework.PaymentAlternateDelete.Tests.csproj", "{0949C48A-960A-4EC9-9B3D-26D930A663CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{465A96E8-17EC-471A-9847-3FDEB76C028C}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Framework.PaymentAlternateDelete.vsmdi = Atlantis.Framework.PaymentAlternateDelete.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.PaymentAlternateDelete.sln
+		SccProjectName1 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath1 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.PaymentAlternateDelete.sln
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.PaymentAlternateDelete.sln
+		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName4 = Atlantis.Framework.PaymentAlternateDelete.Impl\\Atlantis.Framework.PaymentAlternateDelete.Impl.csproj
+		SccProjectName4 = Atlantis.Framework.PaymentAlternateDelete.Impl
+		SccLocalPath4 = Atlantis.Framework.PaymentAlternateDelete.Impl
+		SccProjectUniqueName5 = Atlantis.Framework.PaymentAlternateDelete.Interface\\Atlantis.Framework.PaymentAlternateDelete.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.PaymentAlternateDelete.Interface
+		SccLocalPath5 = Atlantis.Framework.PaymentAlternateDelete.Interface
+		SccProjectUniqueName6 = Atlantis.Framework.PaymentAlternateDelete.Tests\\Atlantis.Framework.PaymentAlternateDelete.Tests.csproj
+		SccProjectName6 = Atlantis.Framework.PaymentAlternateDelete.Tests
+		SccLocalPath6 = Atlantis.Framework.PaymentAlternateDelete.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Atlantis.Framework.PaymentAlternateDelete.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25C90270-205E-44A6-8906-F0E39FFB4932}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25C90270-205E-44A6-8906-F0E39FFB4932}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25C90270-205E-44A6-8906-F0E39FFB4932}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25C90270-205E-44A6-8906-F0E39FFB4932}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D7F5BC7-891A-4DC9-9F5F-3DB4010629AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D7F5BC7-891A-4DC9-9F5F-3DB4010629AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D7F5BC7-891A-4DC9-9F5F-3DB4010629AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D7F5BC7-891A-4DC9-9F5F-3DB4010629AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0949C48A-960A-4EC9-9B3D-26D930A663CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0949C48A-960A-4EC9-9B3D-26D930A663CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0949C48A-960A-4EC9-9B3D-26D930A663CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0949C48A-960A-4EC9-9B3D-26D930A663CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{17EBED78-9469-4678-96B1-A175AB221916} = {F858365E-6392-4440-BF49-D18CAC1F41AC}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {F858365E-6392-4440-BF49-D18CAC1F41AC}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {F858365E-6392-4440-BF49-D18CAC1F41AC}
+	EndGlobalSection
+EndGlobal

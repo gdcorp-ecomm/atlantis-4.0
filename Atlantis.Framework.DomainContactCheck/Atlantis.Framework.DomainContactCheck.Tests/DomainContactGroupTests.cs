@@ -246,6 +246,44 @@ namespace Atlantis.Framework.DomainContactCheck.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    public void TestHongKong()
+    {
+      var tlds = new List<string> { ".COM" };
+      var contactGroup = new DomainContactGroup(tlds, 1);
+
+      var registrantContact = new DomainContact(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           string.Empty, false,
+          "101 N Street", "Suite 100", "Littleton", "Colorado",
+          string.Empty, "HK", "(303)-555-1213", "(303)-555-2213");
+
+      var adminContact = new DomainContact(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           string.Empty, false,
+          "101 N Street", "Suite 100", "Littleton", "Colorado",
+          string.Empty, "HK", "(303)-555-1213", "(303)-555-2213");
+
+      var billingContact = new DomainContact(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           string.Empty, false,
+          "101 N Street", "Suite 100", "Littleton", "Colorado",
+          string.Empty, "HK", "(303)-555-1213", "(303)-555-2213");
+
+      var techContact = new DomainContact(
+         "Bill", "Registrant", "bregistrant@bongo.com",
+           string.Empty, false,
+          "101 N Street", "Suite 100", "Littleton", "Colorado",
+          string.Empty, "HK", "(303)-555-1213", "(303)-555-2213");
+
+      contactGroup.SetContacts(registrantContact, techContact, adminContact, billingContact);
+      int trusteesCount = registrantContact.TrusteeVendorIds.Count;
+      DomainContact reg = contactGroup.GetContact(DomainContact.DomainContactType.Registrant);
+      int regTrusteesCount = reg.TrusteeVendorIds.Count;
+      Assert.AreEqual(true, contactGroup.GetAllErrors().Count == 0);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
     public void TestDotCaContact()
     {
       var tlds = new List<string> {".CA"};

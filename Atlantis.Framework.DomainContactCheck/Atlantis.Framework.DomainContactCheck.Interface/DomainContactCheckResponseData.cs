@@ -61,7 +61,14 @@ namespace Atlantis.Framework.DomainContactCheck.Interface
       var contactNode = xdDoc.SelectSingleNode("/contact") as XmlElement;
       string contactTypeValue = contactNode.GetAttribute(DomainContactAttributes.DomainContactType);
       int contactType;
-      Int32.TryParse(contactTypeValue, out contactType);
+      if (contactTypeValue.Equals("billing", StringComparison.OrdinalIgnoreCase))
+        contactType = 3;
+      else if (contactTypeValue.Equals("technical", StringComparison.OrdinalIgnoreCase))
+        contactType = 1;
+      else if(contactTypeValue.Equals("administrative", StringComparison.OrdinalIgnoreCase))
+        contactType = 2;
+      else
+        contactType =0;
       ResponseAttributes = contactNode.Attributes;
 
       XmlNodeList xnlErrors = xdDoc.SelectNodes("/contact/error");

@@ -54,6 +54,11 @@ namespace Atlantis.Framework.GetBasketObjects.Interface
       get { return GetStringProperty("phone", string.Empty); }
     }
 
+    public string Fax
+    {
+      get { return GetStringProperty("fax", string.Empty); }
+    }
+
     public string PreferredLanguage
     {
       get { return GetStringProperty("preferredLanguage", string.Empty); }

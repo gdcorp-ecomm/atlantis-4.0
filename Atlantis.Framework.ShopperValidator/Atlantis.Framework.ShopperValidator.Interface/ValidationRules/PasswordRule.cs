@@ -29,6 +29,11 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
       _password = value ?? string.Empty;
       _isNewShopper = isNewShopper;
 
+      if (_password.Length > 255) //we never want to display a pw max length error of 255 so we truncate it.
+      {
+       _password = _password.Substring(0, 255);
+      }
+
       base.RulesToValidate.Add(new RequiredRule(fieldName, value));
 
       #region Not match username

@@ -54,6 +54,31 @@ namespace Atlantis.Framework.GetBasketObjects.Interface
       get { return GetStringProperty("phone", string.Empty); }
     }
 
+    public string PreferredLanguage
+    {
+      get { return GetStringProperty("preferredLanguage", string.Empty); }
+    }
+
+    public string State
+    {
+      get { return GetStringProperty("sp", string.Empty); }
+    }
+
+    public string PostalCode
+    {
+      get { return GetStringProperty("pc", string.Empty); }
+    }
+
+    public string Country
+    {
+      get { return GetStringProperty("cc", string.Empty); }
+    }
+
+    public string LegalRegistrant
+    {
+      get { return GetStringProperty("co", string.Empty); }
+    }
+
     public CartDomainContact()
     {
     }

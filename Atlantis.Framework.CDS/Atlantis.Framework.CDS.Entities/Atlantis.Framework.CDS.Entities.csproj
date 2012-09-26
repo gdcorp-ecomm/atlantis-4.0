@@ -63,8 +63,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Widgets\CDSJsonContent.cs" />
     <Compile Include="Widgets\CheckedList.cs" />
+    <Compile Include="Widgets\StackedPod.cs" />
     <Compile Include="Widgets\TabContent2.cs" />
     <Compile Include="Widgets\DPPCrossSellModal.cs" />
+    <Compile Include="Widgets\PanelBulkSearch.cs" />
+    <Compile Include="Widgets\PanelContainer.cs" />
     <Compile Include="Widgets\DPPPrivacyModal.cs" />
     <Compile Include="Widgets\PlanBoxContainer2.cs" />
     <Compile Include="Widgets\PlanBox2.cs" />
@@ -94,6 +97,8 @@
     <Compile Include="Widgets\OnePlanMini.cs" />
     <Compile Include="Widgets\PlanBox.cs" />
     <Compile Include="Widgets\PlanBoxContainer.cs" />
+    <Compile Include="Widgets\PodContainer.cs" />
+    <Compile Include="Widgets\BannerPod.cs" />
     <Compile Include="Widgets\QuickHelp.cs" />
     <Compile Include="Widgets\QuickTour.cs" />
     <Compile Include="Widgets\SalesHeader.cs" />

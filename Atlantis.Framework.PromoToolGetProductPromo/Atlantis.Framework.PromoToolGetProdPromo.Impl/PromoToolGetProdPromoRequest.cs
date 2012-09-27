@@ -52,11 +52,16 @@ namespace Atlantis.Framework.PromoToolGetProdPromo.Impl
 
 				  ProductPromo productPromo = promos.RootResults[i];
 
-					int rankValue;
-					if (int.TryParse(productPromo.RankValue, out rankValue))
-					{
-						promo.RankValue = rankValue;
-					}
+          int rankValue;
+          if (int.TryParse(productPromo.RankValue, out rankValue))
+          {
+            promo.RankValue = rankValue;
+          }
+          else
+          {
+            rankValue = 10; //use 10 as the default
+          }
+
 					promo.Description = productPromo.Description;
 					promo.StartDate = productPromo.StartDate;
 					promo.ExpirationDate = productPromo.ExpirationDate;
@@ -74,10 +79,6 @@ namespace Atlantis.Framework.PromoToolGetProdPromo.Impl
 
 					responseData.ProductPromos[i] = promo;
 				}
-			}
-			else
-			{
-				responseData = new PromoToolGetProdPromoResponseData(requestData, new Exception("Web method GetAllProductPromosByPromoCode returned a null or empty response."));
 			}
 			return responseData;
 		}

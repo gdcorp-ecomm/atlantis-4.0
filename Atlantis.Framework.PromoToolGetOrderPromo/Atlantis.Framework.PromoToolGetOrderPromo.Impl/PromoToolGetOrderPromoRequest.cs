@@ -62,10 +62,7 @@ namespace Atlantis.Framework.PromoToolGetOrderPromo.Impl
 				if (promo.Restriction == OrderPromoV2.RestrictedOneUseOnly.RestrictedNewShoppersOnly)
 					responseData.Restriction = RestrictionType.NewShopperOnly;
 			}
-			else
-			{
-				responseData = new PromoToolGetOrderPromoResponseData(requestData, new Exception("Web method GetOrderPromoByPromoCode returned a null response."));
-			}
+
 			return responseData;
 		}
 

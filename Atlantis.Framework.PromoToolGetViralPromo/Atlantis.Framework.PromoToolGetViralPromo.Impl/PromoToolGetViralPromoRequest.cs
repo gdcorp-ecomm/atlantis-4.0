@@ -53,7 +53,7 @@ namespace Atlantis.Framework.PromoToolGetViralPromo.Impl
 					ViralPromo viralPromo = promos.RootResults[i];
 					promo.Description = viralPromo.Description;
 					promo.StartDate = viralPromo.StartDate;
-					promo.ExpirationDate = viralPromo.ExpirationDate;
+					promo.ExpirationDate = viralPromo.EndDateOptional.HasValue ? viralPromo.EndDateOptional.Value : DateTime.MaxValue;
 					promo.IsActive = viralPromo.IsActive;
 					promo.Currencies = viralPromo.Currencies;
 					promo.NewShopperOnly = viralPromo.NewShoppersOnly;
@@ -67,10 +67,7 @@ namespace Atlantis.Framework.PromoToolGetViralPromo.Impl
 					responseData.ViralPromos[i] = promo;
 				}
 			}
-			else
-			{
-				responseData = new PromoToolGetViralPromoResponseData(requestData, new Exception("Web method GetAllViralPromosByPromoCode returned a null or empty response."));
-			}
+
 			return responseData;
 		}
 

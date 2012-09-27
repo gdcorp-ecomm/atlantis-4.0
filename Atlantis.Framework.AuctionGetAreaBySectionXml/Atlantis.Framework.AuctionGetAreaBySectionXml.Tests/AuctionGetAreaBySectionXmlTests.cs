@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.AuctionGetAreaBySectionXml.Tests
 {
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.AuctionGetAreaBySectionXml.Impl.dll")]
   public class AuctionGetMemberAreaBySectionXmlTests {
     private string _shopperId = "858421";
     private int engineRequestId = 376;

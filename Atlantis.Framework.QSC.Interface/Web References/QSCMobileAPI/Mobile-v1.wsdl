@@ -576,7 +576,7 @@
       </xs:complexType>
       <xs:complexType name="orderPayment">
         <xs:sequence>
-          <xs:element minOccurs="0" name="paymentStatus" type="xs:string" />
+          <xs:element minOccurs="0" name="paymentStatus" type="tns:orderPaymentStatus" />
           <xs:element name="allowedNextPaymentStatuses">
             <xs:complexType>
               <xs:sequence>

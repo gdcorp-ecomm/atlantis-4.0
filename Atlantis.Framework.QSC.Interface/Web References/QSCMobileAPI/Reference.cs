@@ -1812,7 +1812,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.fastshoppingcart.com/xfws/mobile")]
     public partial class orderPayment {
         
-        private string paymentStatusField;
+        private orderPaymentStatus paymentStatusField;
         
         private orderPaymentStatus[] allowedNextPaymentStatusesField;
         
@@ -1848,7 +1848,7 @@ namespace Atlantis.Framework.QSC.Interface.QSCMobileAPI {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string paymentStatus {
+        public orderPaymentStatus paymentStatus {
             get {
                 return this.paymentStatusField;
             }

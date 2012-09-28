@@ -75,6 +75,7 @@ namespace Atlantis.Framework.AuctionGetAreaBySectionXml.Interface
                 CurrentPrice = auction.SelectSingleNode("currentPrice").InnerText ?? string.Empty,
                 DomainName = auction.SelectSingleNode("domainName").InnerText ?? string.Empty,
                 AuctionModel = auction.SelectSingleNode("auctionModel").InnerText ?? string.Empty,
+                MinBid = auction.SelectSingleNode("MinimumBid").InnerText ?? string.Empty,
                 HighestBidderId = auction.SelectSingleNode("highestBidderID").InnerText ?? string.Empty,
                 IsBuyNow = auction.SelectSingleNode("BuyItNowFlag").InnerText ?? string.Empty,
                 OnSalePercent = auction.SelectSingleNode("onSalePercent").InnerText ?? string.Empty,

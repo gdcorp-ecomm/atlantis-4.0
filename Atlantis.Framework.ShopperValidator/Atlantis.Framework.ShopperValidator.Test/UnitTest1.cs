@@ -10,6 +10,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.ShopperValidator.Test
 {
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.ShopperValidator.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.SearchShoppers.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.ValidateField.Impl.dll")]
   public class UnitTest1
   {
     string _emailAddress = "Seth";
@@ -96,7 +99,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
       UsernameRule unr = new UsernameRule("myusername");
       unr.Validate();
 
-      PasswordRule pwRule = new PasswordRule("Seth1seth", true, "jasdfj29nask3", "asdf");
+      PasswordRule pwRule = new PasswordRule(_overMaxLength, true, "jasdfj29nask3", "asdf");
       pwRule.Validate();
       bool b = pwRule.IsValid;
 
@@ -121,7 +124,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
       shopper.City.Value = "Lakewood";
       shopper.Country.Value = "us"; 
       shopper.Email.Value = "seth";
-      shopper.Password.Value = "2134Password!";
+      shopper.Password.Value = _overMaxLength;
       shopper.PasswordConfirm.Value = shopper.Password.Value;
       shopper.PhoneHome.Value = "5";
       shopper.PhoneMobile.Value = "508-241-5881";
@@ -140,7 +143,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
       var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, shopper, isNewShopper);
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
-
+      string xu = response.GetException().Message;
       foreach (ShopperProperty prop in response.ValidatedShopper.AllShopperProperties)
       {
         if (prop.HasValidationRules && !prop.RuleContainer.IsValid)

@@ -29,9 +29,9 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
       _password = value ?? string.Empty;
       _isNewShopper = isNewShopper;
 
-      if (_password.Length > 255) //we never want to display a pw max length error of 255 so we truncate it.
+      if (_password.Length > 255) //passwords greater than 255 characters are invalid, but we cannot display them a message (MP# 90509)
       {
-       _password = _password.Substring(0, 255);
+        throw new System.InvalidOperationException(string.Format("{0} cannot be greater than {1} characters.  Trim {0} before supplying it to the validator.", fieldName, LengthConstants.PasswordMaxLength));
       }
 
       base.RulesToValidate.Add(new RequiredRule(fieldName, value));

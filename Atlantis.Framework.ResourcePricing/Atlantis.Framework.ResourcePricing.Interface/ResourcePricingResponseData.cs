@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.ResourcePricing.Interface
@@ -10,12 +13,28 @@ namespace Atlantis.Framework.ResourcePricing.Interface
     private readonly RequestData _request;
 
     public bool IsSuccess { get; private set; }
+    public Dictionary<int, int> LockedPrices { get; private set; }
 
     public ResourcePricingResponseData(RequestData request, string responseXml) 
     {
       IsSuccess = true;
+
       _request = request;
       _responseXml = responseXml;
+
+      LockedPrices = new Dictionary<int, int>();
+
+      var xml = XDocument.Parse(responseXml);
+      if (xml.Root != null && xml.Root.HasElements)
+      {
+        foreach (XElement element in xml.Descendants("Item"))
+        {
+          int upid = GetIntFromElement(element, "unifiedProductID");
+          int price = GetIntFromElement(element, "price");
+
+          LockedPrices.Add(upid, price);
+        }
+      }
     }
 
     public ResourcePricingResponseData(string responseXml, AtlantisException atlantisException)
@@ -41,6 +60,17 @@ namespace Atlantis.Framework.ResourcePricing.Interface
         , ex);                                   
     }
 
+    private static int GetIntFromElement(XElement element, string xname)
+    {
+      int retVal = 0;
+
+      var xAttribute = element.Attribute(XName.Get(xname));
+      if (xAttribute != null)
+        int.TryParse(xAttribute.Value, out retVal);
+
+      return retVal;
+    }
+
     #region IResponseData Members
 
     public string ToXML()
@@ -54,6 +84,6 @@ namespace Atlantis.Framework.ResourcePricing.Interface
     }
 
     #endregion IResponseData Members
-
+    
   }
 }

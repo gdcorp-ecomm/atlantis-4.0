@@ -49,13 +49,13 @@ namespace Atlantis.Framework.ResourcePricing.Tests
     public void ResourcePricingTest3()
     {
       const string shopperid = "842904";
-      const string resourceid = "1025225";
-      const string resourcetype = "dedhost";
+      const string resourceid = "414825";
+      const string resourcetype = "hosting";
       const string idtype = "billing";
       const string currency = "usd";
-      const string addlupidlist = "612";
+      
 
-      var request = new ResourcePricingRequestData(shopperid, string.Empty, string.Empty, string.Empty, 0, resourceid, resourcetype, idtype, currency, addlupidlist);
+      var request = new ResourcePricingRequestData(shopperid, string.Empty, string.Empty, string.Empty, 0, resourceid, resourcetype, idtype, currency, string.Empty);
       var response = (ResourcePricingResponseData)Engine.Engine.ProcessRequest(request, 602);
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);

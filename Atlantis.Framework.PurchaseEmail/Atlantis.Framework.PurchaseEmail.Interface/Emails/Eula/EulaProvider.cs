@@ -781,7 +781,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula
           productInfoURL = DetermineHelpURL(TOPIC_RELATIVE_PATH, pageid, QueryParamMode.CommonParameters, false, queryStringArgs);
           break;
         case EULARuleType.DedVirtHosting:
-          productName = "Virtual Dedicated Server";
+          productName = "Virtual Dedicated Server / Web Hosting";
           productInfoURL = DetermineHelpURL(ARTICLE_RELATIVE_PATH, "1122", QueryParamMode.CommonParameters, false, queryStringArgs);
           pageid = "hosting_sa";
           legalAgreementURL = _links.GetUrl(LinkTypes.SiteRoot, LEGAL_RELATIVE_PATH, QueryParamMode.CommonParameters, true, "pageid", pageid, "isc", "{isc}", "prog_id", _orderData.ProgId);

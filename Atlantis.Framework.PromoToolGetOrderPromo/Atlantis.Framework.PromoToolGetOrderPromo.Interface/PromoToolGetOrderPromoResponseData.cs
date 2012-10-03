@@ -5,19 +5,16 @@ namespace Atlantis.Framework.PromoToolGetOrderPromo.Interface
 {
 	public class PromoToolGetOrderPromoResponseData : IResponseData
 	{
-		public string Description { get; set; }
-		public DateTime StartDate { get; set; }
-		public DateTime ExpirationDate { get; set; }
-		public bool IsActive { get; set; }
-		public string Currencies { get; set; }
-		public string[] ExcludedPaymentTypes { get; set; }
-		public int? UseLimit { get; set; }
-		public RestrictionType Restriction { get; set; }
-
+    private OutputOrderPromo _promo = null;
 		private AtlantisException _exception = null;
-    
+
     public PromoToolGetOrderPromoResponseData()
+    { 
+    }
+
+    public PromoToolGetOrderPromoResponseData(OutputOrderPromo promo)
     {
+      _promo = promo;
     }
 
 		public PromoToolGetOrderPromoResponseData(RequestData requestData, Exception ex)
@@ -40,6 +37,18 @@ namespace Atlantis.Framework.PromoToolGetOrderPromo.Interface
 
 		#endregion
 	}
+
+  public class OutputOrderPromo
+  {
+    public string Description { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime ExpirationDate { get; set; }
+    public bool IsActive { get; set; }
+    public string Currencies { get; set; }
+    public string[] ExcludedPaymentTypes { get; set; }
+    public int? UseLimit { get; set; }
+    public RestrictionType Restriction { get; set; }
+  }
 
 	public enum RestrictionType
 	{

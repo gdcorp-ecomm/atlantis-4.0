@@ -8,12 +8,17 @@ namespace Atlantis.Framework.PromoToolGetViralPromo.Interface
 {
 	public class PromoToolGetViralPromoResponseData : IResponseData
 	{
-		public OutputViralPromo[] ViralPromos { get; set; }
+		public OutputViralPromo[] ViralPromos { get; private set; }
 		private AtlantisException _exception = null;
 
 		public PromoToolGetViralPromoResponseData()
 		{
 		}
+
+    public PromoToolGetViralPromoResponseData(OutputViralPromo[] promos)
+    {
+      ViralPromos = promos;
+    }
 
 		public PromoToolGetViralPromoResponseData(RequestData requestData, Exception ex)
 		{

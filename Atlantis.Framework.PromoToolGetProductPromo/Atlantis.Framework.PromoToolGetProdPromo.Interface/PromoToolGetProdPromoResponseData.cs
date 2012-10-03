@@ -5,12 +5,17 @@ namespace Atlantis.Framework.PromoToolGetProdPromo.Interface
 {
 	public class PromoToolGetProdPromoResponseData : IResponseData
 	{
-		public ProdPromo[] ProductPromos { get; set; }
+		public ProdPromo[] ProductPromos { get; private set; }
 		private AtlantisException _exception = null;
 
 		public PromoToolGetProdPromoResponseData()
 		{
 		}
+
+    public PromoToolGetProdPromoResponseData(ProdPromo[] Promos)
+    {
+      ProductPromos = Promos;
+    }
 
 		public PromoToolGetProdPromoResponseData(RequestData requestData, Exception ex)
 		{

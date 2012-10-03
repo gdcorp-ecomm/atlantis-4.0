@@ -40,28 +40,34 @@ namespace Atlantis.Framework.PromoToolGetOrderPromo.Impl
 
 		private PromoToolGetOrderPromoResponseData ConvertSourceData(RequestData requestData, OrderPromoV2 promo)
 		{
-			PromoToolGetOrderPromoResponseData responseData = null;
+      PromoToolGetOrderPromoResponseData responseData = null;
 
-			if (promo != null)
-			{
-				responseData = new PromoToolGetOrderPromoResponseData();
+      if (promo != null)
+      {
+        OutputOrderPromo outputPromo = new OutputOrderPromo();
 
-				responseData.Description = promo.CartDescription;
-				responseData.StartDate = promo.StartDate;
-				responseData.ExpirationDate = promo.ExpirationDate;
-				responseData.IsActive = promo.IsActive;
-				responseData.Currencies = promo.Currencies;
-				if (promo.PaymentExclusions != null && promo.PaymentExclusions.Length > 0)
-				{
-					responseData.ExcludedPaymentTypes = (from pe in promo.PaymentExclusions select pe.PaymentExclusionName).ToArray();
-				}
-				responseData.UseLimit = promo.UseLimit;
-				responseData.Restriction = RestrictionType.NoRestriction;
-				if (promo.Restriction == OrderPromoV2.RestrictedOneUseOnly.Restricted)
-					responseData.Restriction = RestrictionType.Restricted;
-				if (promo.Restriction == OrderPromoV2.RestrictedOneUseOnly.RestrictedNewShoppersOnly)
-					responseData.Restriction = RestrictionType.NewShopperOnly;
-			}
+        outputPromo.Description = promo.CartDescription;
+        outputPromo.StartDate = promo.StartDate;
+        outputPromo.ExpirationDate = promo.ExpirationDate;
+        outputPromo.IsActive = promo.IsActive;
+        outputPromo.Currencies = promo.Currencies;
+        if (promo.PaymentExclusions != null && promo.PaymentExclusions.Length > 0)
+        {
+          outputPromo.ExcludedPaymentTypes = (from pe in promo.PaymentExclusions select pe.PaymentExclusionName).ToArray();
+        }
+        outputPromo.UseLimit = promo.UseLimit;
+        outputPromo.Restriction = RestrictionType.NoRestriction;
+        if (promo.Restriction == OrderPromoV2.RestrictedOneUseOnly.Restricted)
+          outputPromo.Restriction = RestrictionType.Restricted;
+        if (promo.Restriction == OrderPromoV2.RestrictedOneUseOnly.RestrictedNewShoppersOnly)
+          outputPromo.Restriction = RestrictionType.NewShopperOnly;
+
+        responseData = new PromoToolGetOrderPromoResponseData(outputPromo);
+      }
+      else
+      {
+        responseData = new PromoToolGetOrderPromoResponseData();
+      }
 
 			return responseData;
 		}

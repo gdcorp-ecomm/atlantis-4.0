@@ -41,16 +41,14 @@ namespace Atlantis.Framework.PromoToolGetProdPromo.Impl
 		{
 			PromoToolGetProdPromoResponseData responseData = null;
 
-			if (promos != null && promos.RootResults != null && promos.RootResults.Length > 0)
-			{
-				responseData = new PromoToolGetProdPromoResponseData();
-				responseData.ProductPromos = new ProdPromo[promos.RootResults.Length];
+      if (promos != null && promos.RootResults != null && promos.RootResults.Length > 0)
+      {
+        ProdPromo[] productPromos = new ProdPromo[promos.RootResults.Length];
 
-				for (int i = 0; i < promos.RootResults.Length; i++)
-				{
-					ProdPromo promo = new ProdPromo();
-
-				  ProductPromo productPromo = promos.RootResults[i];
+        for (int i = 0; i < promos.RootResults.Length; i++)
+        {
+          ProdPromo promo = new ProdPromo();
+          ProductPromo productPromo = promos.RootResults[i];
 
           int rankValue;
           if (int.TryParse(productPromo.RankValue, out rankValue))
@@ -62,24 +60,31 @@ namespace Atlantis.Framework.PromoToolGetProdPromo.Impl
             rankValue = 10; //use 10 as the default
           }
 
-					promo.Description = productPromo.Description;
-					promo.StartDate = productPromo.StartDate;
-					promo.ExpirationDate = productPromo.ExpirationDate;
-					promo.IsActive = productPromo.IsActive;
-					promo.Currencies = productPromo.Currencies;
-					promo.Restriction = RestrictionType.NoRestriction;
-					if (productPromo.Restriction == OrderPromoV2.RestrictedOneUseOnly.Restricted)
-						promo.Restriction = RestrictionType.Restricted;
-					if (productPromo.Restriction == OrderPromoV2.RestrictedOneUseOnly.RestrictedNewShoppersOnly)
-						promo.Restriction = RestrictionType.NewShopperOnly;
-					promo.UseLimit = productPromo.UseLimit;
-					promo.UsePerPurchase = productPromo.NumberOfUses;
-					promo.IsRestrictedByShopperId = (productPromo.ShopperIdRestrictions.Length > 0);
-					promo.ShopperPriceTypeExclusion = productPromo.PromoExclusion;
+          promo.Description = productPromo.Description;
+          promo.StartDate = productPromo.StartDate;
+          promo.ExpirationDate = productPromo.ExpirationDate;
+          promo.IsActive = productPromo.IsActive;
+          promo.Currencies = productPromo.Currencies;
+          promo.Restriction = RestrictionType.NoRestriction;
+          if (productPromo.Restriction == OrderPromoV2.RestrictedOneUseOnly.Restricted)
+            promo.Restriction = RestrictionType.Restricted;
+          if (productPromo.Restriction == OrderPromoV2.RestrictedOneUseOnly.RestrictedNewShoppersOnly)
+            promo.Restriction = RestrictionType.NewShopperOnly;
+          promo.UseLimit = productPromo.UseLimit;
+          promo.UsePerPurchase = productPromo.NumberOfUses;
+          promo.IsRestrictedByShopperId = (productPromo.ShopperIdRestrictions.Length > 0);
+          promo.ShopperPriceTypeExclusion = productPromo.PromoExclusion;
 
-					responseData.ProductPromos[i] = promo;
-				}
-			}
+          productPromos[i] = promo;
+        }
+
+        responseData = new PromoToolGetProdPromoResponseData(productPromos);
+      }
+      else
+      {
+        responseData = new PromoToolGetProdPromoResponseData();
+      }
+
 			return responseData;
 		}
 

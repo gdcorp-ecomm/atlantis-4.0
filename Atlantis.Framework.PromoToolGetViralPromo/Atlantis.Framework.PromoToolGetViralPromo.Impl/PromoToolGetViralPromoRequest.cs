@@ -41,32 +41,37 @@ namespace Atlantis.Framework.PromoToolGetViralPromo.Impl
 		{
 			PromoToolGetViralPromoResponseData responseData = null;
 
-			if (promos != null && promos.RootResults != null && promos.RootResults.Length > 0)
-			{
-				responseData = new PromoToolGetViralPromoResponseData();
-				responseData.ViralPromos = new OutputViralPromo[promos.RootResults.Length];
+      if (promos != null && promos.RootResults != null && promos.RootResults.Length > 0)
+      {
+        OutputViralPromo[] viralPromos = new OutputViralPromo[promos.RootResults.Length];
 
-				for (int i = 0; i < promos.RootResults.Length; i++)
-				{
-					OutputViralPromo promo = new OutputViralPromo();
+        for (int i = 0; i < promos.RootResults.Length; i++)
+        {
+          OutputViralPromo promo = new OutputViralPromo();
 
-					ViralPromo viralPromo = promos.RootResults[i];
-					promo.Description = viralPromo.Description;
-					promo.StartDate = viralPromo.StartDate;
-					promo.ExpirationDate = viralPromo.EndDateOptional.HasValue ? viralPromo.EndDateOptional.Value : DateTime.MaxValue;
-					promo.IsActive = viralPromo.IsActive;
-					promo.Currencies = viralPromo.Currencies;
-					promo.NewShopperOnly = viralPromo.NewShoppersOnly;
-					promo.UseLimit = viralPromo.UseLimit;
-					if (viralPromo.PaymentExclusions != null && viralPromo.PaymentExclusions.Length > 0)
-					{
-						promo.ExcludedPaymentTypes = (from pe in viralPromo.PaymentExclusions select pe.PaymentExclusionName).ToArray();
-					}
-					promo.RequiredYard = viralPromo.RequiredYard;
+          ViralPromo viralPromo = promos.RootResults[i];
+          promo.Description = viralPromo.Description;
+          promo.StartDate = viralPromo.StartDate;
+          promo.ExpirationDate = viralPromo.EndDateOptional.HasValue ? viralPromo.EndDateOptional.Value : DateTime.MaxValue;
+          promo.IsActive = viralPromo.IsActive;
+          promo.Currencies = viralPromo.Currencies;
+          promo.NewShopperOnly = viralPromo.NewShoppersOnly;
+          promo.UseLimit = viralPromo.UseLimit;
+          if (viralPromo.PaymentExclusions != null && viralPromo.PaymentExclusions.Length > 0)
+          {
+            promo.ExcludedPaymentTypes = (from pe in viralPromo.PaymentExclusions select pe.PaymentExclusionName).ToArray();
+          }
+          promo.RequiredYard = viralPromo.RequiredYard;
 
-					responseData.ViralPromos[i] = promo;
-				}
-			}
+          viralPromos[i] = promo;
+        }
+
+        responseData = new PromoToolGetViralPromoResponseData(viralPromos);
+      }
+      else
+      {
+        responseData = new PromoToolGetViralPromoResponseData();
+      }
 
 			return responseData;
 		}

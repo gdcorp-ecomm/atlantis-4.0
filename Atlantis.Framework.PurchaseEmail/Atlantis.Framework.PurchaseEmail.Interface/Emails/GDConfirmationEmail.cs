@@ -21,7 +21,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     private bool _isAZHumane;
     private bool _isDevServer;
-    private RequestData _requestData; 
+    private RequestData _requestData;
+
+    private const string NATIONALBREASTCANCER_TYPE = "PurchasedNCBWebsite";
+    private const string NATIONALBREASTCANCER_NAMESPACE = "FOS";
+    private const string NATIONALBREASTCANCER_ITC_CODE = "dpp_carepkg";
 
     public GDConfirmationEmail(OrderData orderData, EmailRequired emailRequired, bool isAZHumane, bool isDevServer, RequestData rd, ObjectProviderContainer objectContainer)
       : base(orderData, emailRequired,objectContainer)
@@ -276,7 +280,10 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       {
         _emailTemplate = DetermineFirstEmailTemplate();
         result.AddRange(base.GetMessageRequests());
-
+        if (IsITCInOrder(NATIONALBREASTCANCER_ITC_CODE))
+        {
+          result.Add(CreateNationalBreastCancerFoundationRequest());
+        }
         if (_isAZHumane)
         {
           _emailTemplate = EmailTemplates[EmailTemplateType.ArizonaHumaneSociety];
@@ -287,6 +294,36 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       return result;
     }
 
+    private bool IsITCInOrder(string itcCode)
+    {
+      bool result = false;
+      try
+      {
+        if (Order.OrderXmlDoc.SelectNodes(string.Concat("/ORDER/ITEMS/ITEM/[@itemtrackingcode=", itcCode, "]")).Count > 0)
+        {
+          result = true;
+        }
+      }
+      catch { }
+      return result;
+    }
+
+    private MessagingProcessRequestData CreateNationalBreastCancerFoundationRequest()
+    {
+
+      MessagingProcessRequestData request = new MessagingProcessRequestData(ShopperContext.ShopperId, string.Empty, Order.OrderId,
+         SiteContext.Pathway, SiteContext.PageCount, SiteContext.PrivateLabelId, NATIONALBREASTCANCER_TYPE, NATIONALBREASTCANCER_NAMESPACE);
+
+      ResourceItem emailParms = new ResourceItem("CartOrder", Order.OrderId);
+
+      ContactPointItem emailContact = new ContactPointItem("ShopperContact", ContactPointTypes.Shopper);
+      emailContact["id"] = ShopperContext.ShopperId;
+      emailContact["EmailType"] = IsHTMLEmail ? "html" : "plaintext";
+      emailParms.ContactPoints.Add(emailContact);
+      request.AddResource(emailParms);
+
+      return request;
+    }
   }
 
     internal class HostingGodaddy

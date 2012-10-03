@@ -6,7 +6,7 @@ using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
-  public class PanelBulkSearch : IWidgetModel
+  public class BulkPanel : IWidgetModel
   {
     public string BackgroundTopColor { get; set; }
     public string BackgroundBottomColor { get; set; }
@@ -15,34 +15,19 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string PromoDisclaimerText { get; set; }
     public string TeaserMessage { get; set; }
     public string SearchBoxText { get; set; }
-    public IList<BulkLinkItems> BulkLinkItems { get; set; }
+    public IList<BulkLinkItem> BulkLinkItems { get; set; }
     public string TldsOffered { get; set; }
 
-    public PanelBulkSearch()
+    public BulkPanel()
     {
-      BulkLinkItems = new List<BulkLinkItems>();
+      BulkLinkItems = new List<BulkLinkItem>();
     }
   }
 
-  public class BulkLinkItems
+  public class BulkLinkItem
   {
     public string LinkPosition { get; set; }
     public string LinkText { get; set; }
     public string Link { get; set; }
-    public string CiCode { get; set; }
-    public IList<BulkLinkParameter> BulkLinkParams { get; set; }
-    public bool IsPopin { get; set; }
-    public bool IsPanelSwitch { get; set; }
-
-    public BulkLinkItems()
-    {
-      BulkLinkParams = new List<BulkLinkParameter>();
-    }
-  }
-
-  public class BulkLinkParameter
-  {
-    public string Key { get; set; }
-    public string Value { get; set; }
   }
 }

@@ -7,7 +7,15 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 {
   public class PanelContainer : IWidgetModel
   {
+
+    public PanelContainer()
+    {
+      Widgets = new List<Widget<IWidgetModel>>();
+    }
+
     [JsonIgnore]
     public List<Widget<IWidgetModel>> Widgets { get; set; }
+    public string DefaultPanelId { get; set; }
+
   }
 }

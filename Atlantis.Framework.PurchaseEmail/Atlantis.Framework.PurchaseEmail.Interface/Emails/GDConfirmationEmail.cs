@@ -299,12 +299,16 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       bool result = false;
       try
       {
-        if (Order.OrderXmlDoc.SelectNodes(string.Concat("/ORDER/ITEMS/ITEM/[@itemtrackingcode=", itcCode, "]")).Count > 0)
+        string xpath = string.Concat("/ORDER/ITEMS/ITEM[@itemtrackingcode='", itcCode, "']");
+        if (Order.OrderXmlDoc.SelectNodes(xpath).Count > 0)
         {
           result = true;
         }
       }
-      catch { }
+      catch (System.Exception ex)
+      {
+        System.Diagnostics.Debug.WriteLine(ex.ToString());
+      }
       return result;
     }
 

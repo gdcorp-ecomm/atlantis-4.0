@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Atlantis.Framework.ProductUpgradePath.Impl;
 using Atlantis.Framework.ProductUpgradePath.Interface;
 using Atlantis.Framework.Interface;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.ProductUpgradePath.Test
 {
@@ -65,25 +66,72 @@ namespace Atlantis.Framework.ProductUpgradePath.Test
 
     [TestMethod]
 	[DeploymentItem("atlantis.config")]
-    public void ProductUpgradePathTest()
+  [DeploymentItem("Atlantis.Framework.ProductUpgradePath.Impl.dll")]
+    public void ProductUpgradeMonthlyPathTest()
     {
      ProductUpgradePathRequestData request = new ProductUpgradePathRequestData(_shopperId
         , string.Empty
         , string.Empty
         , string.Empty
-        , 0 );
+        , 0, 56950, 1);
 
-      ProductUpgradePathResponseData response = (ProductUpgradePathResponseData)Engine.Engine.ProcessRequest(request, 405);
-      
-	  // Cache call
-	  //ProductUpgradePathResponseData response = (ProductUpgradePathResponseData)DataCache.DataCache.GetProcessRequest(request, _requestType);
+     List<ProductOptions> filterOptions = new List<ProductOptions>();
+     filterOptions.Add(new ProductOptions(3, DurationUnit.Month));
+     filterOptions.Add(new ProductOptions(6, DurationUnit.Month));
+     filterOptions.Add(new ProductOptions(12, DurationUnit.Month));
+     filterOptions.Add(new ProductOptions(24, DurationUnit.Month));
+     filterOptions.Add(new ProductOptions(36, DurationUnit.Month));
+     request.ProductOptions = filterOptions;
+     ProductUpgradePathResponseData response = (ProductUpgradePathResponseData)Engine.Engine.ProcessRequest(request, 607);
 
-      //
-      // TODO: Add test logic here
-      //
-	  
-      Debug.WriteLine(response.ToXML());
-      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.ProductUpgradePath.Impl.dll")]
+    public void ProductYearlyUpgradePath()
+    {
+      ProductUpgradePathRequestData request = new ProductUpgradePathRequestData(_shopperId
+         , string.Empty
+         , string.Empty
+         , string.Empty
+         , 0, 11865, 1);
+
+      List<ProductOptions> filterOptions = new List<ProductOptions>();
+      filterOptions.Add(new ProductOptions(1, DurationUnit.Year));
+      filterOptions.Add(new ProductOptions(2, DurationUnit.Year));
+      filterOptions.Add(new ProductOptions(3, DurationUnit.Year));
+      filterOptions.Add(new ProductOptions(5, DurationUnit.Year));
+      filterOptions.Add(new ProductOptions(10, DurationUnit.Year));
+      request.ProductOptions = filterOptions;
+      ProductUpgradePathResponseData response = (ProductUpgradePathResponseData)Engine.Engine.ProcessRequest(request, 607);
+
+
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.ProductUpgradePath.Impl.dll")]
+    public void ProductYearlyUpgradeMonthlyProductPath()
+    {
+      ProductUpgradePathRequestData request = new ProductUpgradePathRequestData(_shopperId
+         , string.Empty
+         , string.Empty
+         , string.Empty
+         , 0, 56950, 1);
+
+      List<ProductOptions> filterOptions = new List<ProductOptions>();
+      filterOptions.Add(new ProductOptions(3, DurationUnit.Month));
+      filterOptions.Add(new ProductOptions(6, DurationUnit.Month));
+      filterOptions.Add(new ProductOptions(1, DurationUnit.Year));
+      filterOptions.Add(new ProductOptions(2, DurationUnit.Year));
+      filterOptions.Add(new ProductOptions(3, DurationUnit.Year));
+      filterOptions.Add(new ProductOptions(5, DurationUnit.Year));
+      filterOptions.Add(new ProductOptions(10, DurationUnit.Year));
+      request.ProductOptions = filterOptions;
+      ProductUpgradePathResponseData response = (ProductUpgradePathResponseData)Engine.Engine.ProcessRequest(request, 607);
+
+
     }
   }
 }

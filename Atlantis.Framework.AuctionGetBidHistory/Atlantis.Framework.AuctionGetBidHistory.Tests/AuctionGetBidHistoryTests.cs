@@ -6,12 +6,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.AuctionGetBidHistory.Tests
 {
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.AuctionGetBidHistory.Impl.dll")]
   public class AuctionGetBidHistoryTests
   {
-    private string _shopperId = "858421";
-    private string _externalIpAddress = "172.16.38.32";
-    private string _requestingServerIp = "172.16.38.32";
-    private string _requestingServerName = "S1WSDV-TRIED";
+    private string _shopperId = "878145";
+    private string _externalIpAddress = "127.0.0.1";
+    private string _requestingServerIp = "172.16.172.145";
+    private string _requestingServerName = "S1WSDV-JOJOHN";
 
     private string _auctionId = null;
 
@@ -19,7 +20,7 @@ namespace Atlantis.Framework.AuctionGetBidHistory.Tests
     [DeploymentItem("atlantis.config")]
     public void GetBidHistoryForValidAuctionWithMemberArea()
     {
-      _auctionId = "4761763";
+      _auctionId = "5358368";
                                                   
       AuctionGetBidHistoryResponseData responseData = null;
       AuctionGetBidHistoryRequestData requestData = new AuctionGetBidHistoryRequestData(_shopperId, string.Empty, string.Empty, string.Empty, 1, _externalIpAddress, _requestingServerIp, _requestingServerName, _auctionId, true);

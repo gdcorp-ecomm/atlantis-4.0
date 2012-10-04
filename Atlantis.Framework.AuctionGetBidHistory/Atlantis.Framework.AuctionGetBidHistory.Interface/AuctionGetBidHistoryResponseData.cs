@@ -104,9 +104,9 @@ namespace Atlantis.Framework.AuctionGetBidHistory.Interface
                 TimeZone             = (bid.Attribute("TimeZone") != null ? bid.Attribute("TimeZone").Value : string.Empty),
                 StartDate            = (bid.Attribute("BidStartDate") != null ? bid.Attribute("BidStartDate").Value : string.Empty),
                 EndDate              = (bid.Attribute("BidEndDate") != null ? bid.Attribute("BidEndDate").Value : string.Empty),
-                MaskedBidderId       = (bid.Attribute("MaskedBidderId") != null ? bid.Attribute("MaskedBidderId").Value : string.Empty),
+                MaskedBidderId       = (bid.Attribute("MaskedBidderID") != null ? bid.Attribute("MaskedBidderID").Value : string.Empty),
                 BidAmount            = (bid.Attribute("BidAmount") != null ? bid.Attribute("BidAmount").Value : string.Empty),
-                Comment              = (bid.Attribute("BidComment") != null ? bid.Attribute("BidComment").Value : string.Empty),
+                Comment              = (bid.Element("BidComment") != null ? bid.Element("BidComment").Value : string.Empty),
                 
                 SellerMemberId       = _isMemberArea ? (bid.Attribute("SellerMemberId") != null ? bid.Attribute("SellerMemberId").Value : string.Empty) : null,
                 BidderMemberId       = _isMemberArea ? (bid.Attribute("BidderMemberId") != null ? bid.Attribute("BidderMemberId").Value : string.Empty) : null,

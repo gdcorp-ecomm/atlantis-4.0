@@ -11,6 +11,7 @@ using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.ProviderContainer.Impl;
 using Atlantis.Framework.PurchaseEmail.Interface.Providers;
 using Atlantis.Framework.PaymentProfileClass.Interface;
+using System.Xml;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 {
@@ -28,7 +29,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     private const string NATIONALBREASTCANCER_ITC_CODE = "dpp_carepkg";
 
     public GDConfirmationEmail(OrderData orderData, EmailRequired emailRequired, bool isAZHumane, bool isDevServer, RequestData rd, ObjectProviderContainer objectContainer)
-      : base(orderData, emailRequired,objectContainer)
+      : base(orderData, emailRequired, objectContainer)
     {
       _isAZHumane = isAZHumane;
       _isDevServer = isDevServer;
@@ -45,7 +46,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         using (var ms = new MemoryStream())
         {
           Order.OrderXmlDoc.Save(ms);
-          xmlParam = String.Concat("<?xml version=\"1.0\" encoding=\"utf-16\"?>", Encoding.Default.GetString(ms.ToArray()) );
+          xmlParam = String.Concat("<?xml version=\"1.0\" encoding=\"utf-16\"?>", Encoding.Default.GetString(ms.ToArray()));
           ms.Close();
         }
 
@@ -68,7 +69,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       SetParam(EmailTokenNames.VideoMeHTMLLink, GetVideoLink("html"));
       SetParam(EmailTokenNames.VideoMeTextLink, GetVideoLink("text"));
       SetParam(EmailTokenNames.HostingConciergeBanner, HostingConciergeBannerHtmlGet());
-      SetParam(EmailTokenNames.HostingConciergeText, HostingConciergeTextGet((IsHTMLEmail? true : false), true));
+      SetParam(EmailTokenNames.HostingConciergeText, HostingConciergeTextGet((IsHTMLEmail ? true : false), true));
       SetParam(EmailTokenNames.AlipayRenewalText, AliPayRenewalNotice());
     }
 
@@ -103,7 +104,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             if (!rspAltPaymentProfile.IsSuccess)
             {
               AtlantisException aex = new AtlantisException(_requestData, "GDConfirmationEmail.AliPayRenewalNotice", "GetPaymentProfileAlternateResponseData.IsSuccess<>true", String.Empty);
-              Engine.Engine.LogAtlantisException(aex); 
+              Engine.Engine.LogAtlantisException(aex);
               notice = aliPayRenewalMessageOnError;
               break;
             }
@@ -125,11 +126,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
               notice = aliPayRenewalMessageOnError;
               break;
             }
-            
+
             //PaymentProfile altPaymentProfile rspPaymentProfile.AccessProfile(ShopperContext.ShopperId, Order.ManagerUserId, Order.ManagerUserName, "AlipayRenewalNotice");
             // See if the Alternate Payment Profile is not alipay... otherwise send the message
 
-            PaymentProfile altPaymentProfile=rspPaymentProfile.AccessProfile(ShopperContext.ShopperId, Order.ManagerUserId, Order.ManagerUserName, "AlipayRenewalNotice");
+            PaymentProfile altPaymentProfile = rspPaymentProfile.AccessProfile(ShopperContext.ShopperId, Order.ManagerUserId, Order.ManagerUserName, "AlipayRenewalNotice");
             if (altPaymentProfile.ProfileType.Equals("alipay", StringComparison.OrdinalIgnoreCase))
             {
               // backup payment method is also alipay... so renewal will fail
@@ -153,50 +154,50 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     private string HostingConciergeBannerHtmlGet()
     {
-        string hostPhoneUsa;
-        string hostPhoneIntl;
-        HostPhoneUsaIntlGet(out hostPhoneUsa, out hostPhoneIntl);
-        StringBuilder banner = new StringBuilder();
-            
-        if (HostingConciergeEnabled && !String.IsNullOrEmpty(hostPhoneIntl) && !String.IsNullOrEmpty(hostPhoneUsa))
-        {
+      string hostPhoneUsa;
+      string hostPhoneIntl;
+      HostPhoneUsaIntlGet(out hostPhoneUsa, out hostPhoneIntl);
+      StringBuilder banner = new StringBuilder();
 
-            int hostingHeight = 104;
-            int hostingWidth = 196;
-            string hostingImage = String.Empty;
-            switch (EmailTemplate.Id)
-            {
-               case EmailTemplateType.GDWelcome:
-                    hostingImage = Links.GetUrl(LinkTypes.Image, "promos/htmlemails/bbtemplate/52345_hosting_01c.jpg",
-                                               QueryParamMode.ExplicitParameters, false);
-                    hostingHeight = 106;
-                    hostingWidth = 182;
-                    break;
-                default:
-                    hostingImage = Links.GetUrl(LinkTypes.Image, "promos/htmlemails/bbtemplate/52345_hosting_01b.jpg",
-                                               QueryParamMode.ExplicitParameters, false);
-                    break;
-            }
-            banner.Append(
-                "<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" bgcolor=\"white\" width=\"" + hostingWidth + "\" style=\"border: 1px solid black;\">");
-            banner.Append(
-                "<tbody><tr> <td><table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\"> <tbody><tr> ");
-            banner.Append("<td align=\"center\"><img height=\"" + hostingHeight);
-            banner.Append("\" border=\"0\" width=\"" + hostingWidth + "\" src=\"");
-            banner.Append(hostingImage + "\" alt=\"[%%LCST.REQ.UTOS_CONCIERGE%%]\"></a>");
-            banner.Append("</td> </tr> <tr> <td align=\"left\" style=\"padding:3px 5px 5px 5px;\">");
-            banner.Append(
-                "<font style=\"font-size: 11px; color: black; font-family: arial,sans serif;\">");
-            banner.Append(
-                "Call <span style='font-size: 12px; font-weight:bold'>" + hostPhoneUsa + "</span> (US only) or <span style='font-size: 12px; font-weight:bold'>" + hostPhoneIntl + "</span> for the next 30 days.</font></td> </tr> </tbody></table>");
-            string transparentImage = Links.GetUrl(LinkTypes.Image, "promos/std/spc_trans.gif", QueryParamMode.CommonParameters, false);
-            banner.Append("</td> </tr> </tbody></table><img height=\"12\" border=\"0\" src=\"" + transparentImage +
-                          "\"><br>");
+      if (HostingConciergeEnabled && !String.IsNullOrEmpty(hostPhoneIntl) && !String.IsNullOrEmpty(hostPhoneUsa))
+      {
+
+        int hostingHeight = 104;
+        int hostingWidth = 196;
+        string hostingImage = String.Empty;
+        switch (EmailTemplate.Id)
+        {
+          case EmailTemplateType.GDWelcome:
+            hostingImage = Links.GetUrl(LinkTypes.Image, "promos/htmlemails/bbtemplate/52345_hosting_01c.jpg",
+                                       QueryParamMode.ExplicitParameters, false);
+            hostingHeight = 106;
+            hostingWidth = 182;
+            break;
+          default:
+            hostingImage = Links.GetUrl(LinkTypes.Image, "promos/htmlemails/bbtemplate/52345_hosting_01b.jpg",
+                                       QueryParamMode.ExplicitParameters, false);
+            break;
         }
-        return banner.ToString();
+        banner.Append(
+            "<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" bgcolor=\"white\" width=\"" + hostingWidth + "\" style=\"border: 1px solid black;\">");
+        banner.Append(
+            "<tbody><tr> <td><table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\"> <tbody><tr> ");
+        banner.Append("<td align=\"center\"><img height=\"" + hostingHeight);
+        banner.Append("\" border=\"0\" width=\"" + hostingWidth + "\" src=\"");
+        banner.Append(hostingImage + "\" alt=\"[%%LCST.REQ.UTOS_CONCIERGE%%]\"></a>");
+        banner.Append("</td> </tr> <tr> <td align=\"left\" style=\"padding:3px 5px 5px 5px;\">");
+        banner.Append(
+            "<font style=\"font-size: 11px; color: black; font-family: arial,sans serif;\">");
+        banner.Append(
+            "Call <span style='font-size: 12px; font-weight:bold'>" + hostPhoneUsa + "</span> (US only) or <span style='font-size: 12px; font-weight:bold'>" + hostPhoneIntl + "</span> for the next 30 days.</font></td> </tr> </tbody></table>");
+        string transparentImage = Links.GetUrl(LinkTypes.Image, "promos/std/spc_trans.gif", QueryParamMode.CommonParameters, false);
+        banner.Append("</td> </tr> </tbody></table><img height=\"12\" border=\"0\" src=\"" + transparentImage +
+                      "\"><br>");
+      }
+      return banner.ToString();
     }
 
-    
+
     private EmailTemplate _emailTemplate;
     protected override EmailTemplate EmailTemplate
     {
@@ -233,7 +234,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
           {
             temp = EmailTemplates[EmailTemplateType.OrderConfirmation];
           }
-          
+
         }
         else
         {
@@ -324,13 +325,46 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       emailContact["id"] = ShopperContext.ShopperId;
       emailContact["EmailType"] = IsHTMLEmail ? "html" : "plaintext";
       emailParms.ContactPoints.Add(emailContact);
+      emailParms["DOMAINNAME"] = new AttributeValue(FirstDomainInOrder()); 
       request.AddResource(emailParms);
 
       return request;
     }
+
+    private string FirstDomainInOrder()
+    {
+      string domainName = string.Empty;
+      try
+      {
+        string xpath = string.Concat("/ORDER/ITEMS/ITEM/CUSTOMXML/*/domain");
+        XmlNodeList  domainList=Order.OrderXmlDoc.SelectNodes(xpath);
+        if (domainList!=null && domainList.Count>0)
+        {
+          XmlNode firstDomain = domainList[0];
+          string domainSLD = string.Empty;
+          string domainTLD = string.Empty;
+          XmlAttribute domainsld = firstDomain.Attributes["sld"];
+          if (domainsld != null)
+          {
+            domainSLD = domainsld.Value;
+          }
+          XmlAttribute domaintld = firstDomain.Attributes["tld"];
+          if (domaintld != null)
+          {
+            domainTLD = domaintld.Value;
+          }
+          domainName = string.Concat(domainSLD, ".", domainTLD);
+        }        
+      }
+      catch (System.Exception ex)
+      {
+        System.Diagnostics.Debug.WriteLine(ex.ToString());
+      }
+      return domainName;
+    }
   }
 
-    internal class HostingGodaddy
-    {
-    }
+  internal class HostingGodaddy
+  {
+  }
 }

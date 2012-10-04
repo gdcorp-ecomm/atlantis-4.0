@@ -67,6 +67,10 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
+      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
+      <Name>Atlantis.Framework.Providers.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.ResourcePricing.Interface\Atlantis.Framework.ResourcePricing.Interface.csproj">
       <Project>{3a786408-c757-448f-b924-39f1bd8d4612}</Project>
       <Name>Atlantis.Framework.ResourcePricing.Interface</Name>

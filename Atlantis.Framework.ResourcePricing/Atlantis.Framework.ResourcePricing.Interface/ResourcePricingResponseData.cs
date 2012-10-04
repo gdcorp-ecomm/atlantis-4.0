@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Interface.Currency;
 
 namespace Atlantis.Framework.ResourcePricing.Interface
 {
@@ -13,7 +13,7 @@ namespace Atlantis.Framework.ResourcePricing.Interface
     private readonly RequestData _request;
 
     public bool IsSuccess { get; private set; }
-    public Dictionary<int, int> LockedPrices { get; private set; }
+    public Dictionary<int, LockedPrice> LockedPrices { get; private set; }
 
     public ResourcePricingResponseData(RequestData request, string responseXml) 
     {
@@ -22,7 +22,7 @@ namespace Atlantis.Framework.ResourcePricing.Interface
       _request = request;
       _responseXml = responseXml;
 
-      LockedPrices = new Dictionary<int, int>();
+      LockedPrices = new Dictionary<int, LockedPrice>();
 
       var xml = XDocument.Parse(responseXml);
       if (xml.Root != null && xml.Root.HasElements)
@@ -32,7 +32,7 @@ namespace Atlantis.Framework.ResourcePricing.Interface
           int upid = GetIntFromElement(element, "unifiedProductID");
           int price = GetIntFromElement(element, "price");
 
-          LockedPrices.Add(upid, price);
+          LockedPrices[upid] = new LockedPrice(price, ((ResourcePricingRequestData)request).TransactionalCurrencyType, CurrencyPriceType.Transactional);
         }
       }
     }

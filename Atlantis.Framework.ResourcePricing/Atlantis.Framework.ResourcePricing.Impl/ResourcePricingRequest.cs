@@ -29,7 +29,11 @@ namespace Atlantis.Framework.ResourcePricing.Impl
           //attach the client certificate (specified in atlantis.config)
           oSvc.ClientCertificates.Add(clientCertificate);
 
-          responseXml = oSvc.GetResourcePricing(request.ResourceID, request.ResourceType, request.IDType, request.Currency, request.AddlUnifiedProductIDList);
+          var additionalUnifiedProductIds = string.Empty;
+          if (request.AdditionalUnifiedProductIds != null)
+            additionalUnifiedProductIds = string.Join(",", request.AdditionalUnifiedProductIds);
+
+          responseXml = oSvc.GetResourcePricing(request.ResourceId, request.ResourceType, request.IdType, request.TransactionalCurrencyType.CurrencyType, additionalUnifiedProductIds);
           if (responseXml.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
           {
             var exAtlantis = new AtlantisException(request,

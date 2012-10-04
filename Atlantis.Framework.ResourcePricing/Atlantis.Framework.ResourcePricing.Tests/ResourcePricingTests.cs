@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using Atlantis.Framework.Providers.Currency;
+using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.ResourcePricing.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,10 +18,10 @@ namespace Atlantis.Framework.ResourcePricing.Tests
       const string resourceid = "431794";
       const string resourcetype = "dedhost";
       const string idtype = "billing";
-      const string currency = "usd";
-      const string addlupidlist = "13153";
+      ICurrencyInfo currency = CurrencyData.GetCurrencyInfo("usd");
+      var addlupidlist = new int[] { 13153 };
 
-      var request = new ResourcePricingRequestData(shopperid, string.Empty, string.Empty, string.Empty, 0, resourceid, resourcetype, idtype, currency, string.Empty);
+      var request = new ResourcePricingRequestData(shopperid, string.Empty, string.Empty, string.Empty, 0, resourceid, resourcetype, idtype, currency, addlupidlist);
       var response = (ResourcePricingResponseData)Engine.Engine.ProcessRequest(request, 602);
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
@@ -31,11 +33,11 @@ namespace Atlantis.Framework.ResourcePricing.Tests
     public void ResourcePricingTest2()
     {
       const string shopperid = "842904";
-      const string resourceid = "1025223";
-      const string resourcetype = "dedhost";
-      const string idtype = "billing";
-      const string currency = "usd";
-      const string addlupidlist = "937";
+      const string resourceid = "086f7f5d-686f-11e1-ab04-0050569575d8";
+      const string resourcetype = "dhs";
+      const string idtype = "orion";
+      ICurrencyInfo currency = CurrencyData.GetCurrencyInfo("usd");
+      var addlupidlist = new int[] { 937 };
 
       var request = new ResourcePricingRequestData(shopperid, string.Empty, string.Empty, string.Empty, 0, resourceid, resourcetype, idtype, currency, addlupidlist);
       var response = (ResourcePricingResponseData)Engine.Engine.ProcessRequest(request, 602);
@@ -52,10 +54,9 @@ namespace Atlantis.Framework.ResourcePricing.Tests
       const string resourceid = "414825";
       const string resourcetype = "hosting";
       const string idtype = "billing";
-      const string currency = "usd";
-      
+      ICurrencyInfo currency = CurrencyData.GetCurrencyInfo("usd");
 
-      var request = new ResourcePricingRequestData(shopperid, string.Empty, string.Empty, string.Empty, 0, resourceid, resourcetype, idtype, currency, string.Empty);
+      var request = new ResourcePricingRequestData(shopperid, string.Empty, string.Empty, string.Empty, 0, resourceid, resourcetype, idtype, currency);
       var response = (ResourcePricingResponseData)Engine.Engine.ProcessRequest(request, 602);
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);

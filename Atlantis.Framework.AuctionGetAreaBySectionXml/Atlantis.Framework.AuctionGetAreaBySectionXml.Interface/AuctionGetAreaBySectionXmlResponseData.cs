@@ -64,6 +64,7 @@ namespace Atlantis.Framework.AuctionGetAreaBySectionXml.Interface
           {
             var item = new AuctionMemberSection();
             item.SectionName = section.Attributes["SectionName"].Value ?? string.Empty;
+            item.TotalRecords = section.Attributes["TotalRecords"].Value ?? string.Empty;
             XmlNodeList auctionNodes = section.SelectNodes("Auction");
             foreach (XmlNode auction in auctionNodes)
             {
@@ -82,7 +83,9 @@ namespace Atlantis.Framework.AuctionGetAreaBySectionXml.Interface
                 PrivateCode = auction.SelectSingleNode("privateCode").InnerText ?? string.Empty,
                 ReservedPrice = auction.SelectSingleNode("ReservedPriceAmount").InnerText ?? string.Empty,
                 SaleType = auction.SelectSingleNode("saletypeid").InnerText ?? string.Empty,
-                Traffic = auction.SelectSingleNode("monthlyTraffic").InnerText ?? string.Empty
+                Traffic = auction.SelectSingleNode("monthlyTraffic").InnerText ?? string.Empty,
+                BuyNowPrice = auction.SelectSingleNode("BuyNowPrice").InnerText ?? string.Empty,
+                TimeZone = auction.SelectSingleNode("timeZone").InnerText ?? string.Empty
               };
 
               auctionItem.Details = new AuctionDetail

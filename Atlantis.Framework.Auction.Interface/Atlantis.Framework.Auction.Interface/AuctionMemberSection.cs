@@ -11,6 +11,9 @@ namespace Atlantis.Framework.Auction.Interface
     [DataMember(Name = "SectionName")]
     public string SectionName { get; set; }
 
+    [DataMember(Name = "TotalRecords")]
+    public string TotalRecords { get; set; }
+
     private List<Auction> _auctions;
 
     [DataMember(Name = "Auctions")]

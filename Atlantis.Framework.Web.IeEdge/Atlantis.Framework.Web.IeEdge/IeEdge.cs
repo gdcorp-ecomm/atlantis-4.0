@@ -7,7 +7,7 @@ namespace Atlantis.Framework.Web.IeEdge
 {
   public class IeEdge : HtmlControl
   {
-    private const string EDGE_META_TAG = "<meta http-equiv=\"X-UA-Compatible\" content=\"IE-Edge\" />";
+    private const string EDGE_META_TAG = "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\" />";
     private const string ENABLE_APPLICATION_SETTING = "ATLANTIS_WEB_IEEDGE_ENABLED";
     private const string IS_IE_USER_AGENT_COOKIE_NAME = "atlantis.web.ieedge.isieuseragent";
 
@@ -19,7 +19,12 @@ namespace Atlantis.Framework.Web.IeEdge
       {
         bool enabled = false;
 
-        string appSettingValue = DataCache.DataCache.GetAppSetting(ENABLE_APPLICATION_SETTING);
+        string appSettingValue = HttpContext.Current != null ? HttpContext.Current.Request[("QA--" + ENABLE_APPLICATION_SETTING)] : string.Empty;
+
+        if (string.IsNullOrEmpty(appSettingValue))
+        {
+          appSettingValue = DataCache.DataCache.GetAppSetting(ENABLE_APPLICATION_SETTING);
+        }
         if(!string.IsNullOrEmpty(appSettingValue))
         {
           enabled = appSettingValue == "1" || appSettingValue.ToLowerInvariant() == "true";

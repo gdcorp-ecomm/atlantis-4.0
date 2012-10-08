@@ -90,12 +90,9 @@ namespace Atlantis.Framework.PromoToolGetViralPromo.Impl
 			basicHttpBinding.TextEncoding = System.Text.Encoding.UTF8;
 			basicHttpBinding.UseDefaultWebProxy = true;
 
-			basicHttpBinding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
+			basicHttpBinding.Security.Mode = BasicHttpSecurityMode.Transport;
 			basicHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
-			basicHttpBinding.Security.Transport.ProxyCredentialType = HttpProxyCredentialType.None;
-			basicHttpBinding.Security.Transport.Realm = string.Empty;
-			basicHttpBinding.Security.Message.ClientCredentialType = BasicHttpMessageCredentialType.UserName;
-
+			
 			EndpointAddressBuilder endpointAddressBuilder = new EndpointAddressBuilder();
 			endpointAddressBuilder.Identity = EndpointIdentity.CreateDnsIdentity("localhost");
 			endpointAddressBuilder.Uri = new Uri(webServiceUrl);

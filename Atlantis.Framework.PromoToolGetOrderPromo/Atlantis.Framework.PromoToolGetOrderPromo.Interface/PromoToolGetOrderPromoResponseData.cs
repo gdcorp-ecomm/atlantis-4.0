@@ -5,7 +5,7 @@ namespace Atlantis.Framework.PromoToolGetOrderPromo.Interface
 {
 	public class PromoToolGetOrderPromoResponseData : IResponseData
 	{
-    private OutputOrderPromo _promo = null;
+    public OutputOrderPromo OrderPromo { get; private set; }
 		private AtlantisException _exception = null;
 
     public PromoToolGetOrderPromoResponseData()
@@ -14,7 +14,7 @@ namespace Atlantis.Framework.PromoToolGetOrderPromo.Interface
 
     public PromoToolGetOrderPromoResponseData(OutputOrderPromo promo)
     {
-      _promo = promo;
+      OrderPromo = promo;
     }
 
 		public PromoToolGetOrderPromoResponseData(RequestData requestData, Exception ex)

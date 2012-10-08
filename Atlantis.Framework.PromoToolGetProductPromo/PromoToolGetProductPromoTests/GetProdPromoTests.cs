@@ -64,7 +64,7 @@ namespace PromoToolGetProductPromoTests
 		{
 			Guid pathway = Guid.NewGuid();
 			PromoToolGetProdPromoRequestData request = new PromoToolGetProdPromoRequestData(
-				"860427", "http://yuck.com", string.Empty, string.Empty, 0, "GPTESTUT20");
+        "860427", "http://yuck.com", string.Empty, string.Empty, 0, "krProd04");
 
 			PromoToolGetProdPromoResponseData response = (PromoToolGetProdPromoResponseData)Engine.ProcessRequest(request, 599);
 			Assert.IsNotNull(response);

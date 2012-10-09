@@ -62,6 +62,7 @@
     <Compile Include="Widgets\FeaturedDomainsPod.cs" />
     <Compile Include="Widgets\ListPod.cs" />
     <Compile Include="Widgets\PanelBulkSearch.cs" />
+    <Compile Include="Widgets\PlanBox3.cs" />
     <Compile Include="Widgets\SeoContent.cs" />
     <Compile Include="Widgets\SingleVideoPod.cs" />
     <Compile Include="Widgets\MultiVideoPod.cs" />

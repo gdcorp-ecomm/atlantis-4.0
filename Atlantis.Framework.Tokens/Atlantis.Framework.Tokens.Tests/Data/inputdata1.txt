@@ -1,0 +1,9 @@
+﻿If you buy this stuff now, then you can have it for [@T[testsimple:58]@T].  If you want to do something fancy 
+then [@T[testjson:{"glossary": 
+{ "title" : "blah"}}]@T].  Then you are done.
+You may also want to put in some xml with this [@T[testxml:<instruction active="1">Hello</instruction>]@T]
+really?
+This token shows up more than once: [@T[testsimple:58]@T]
+This token is served by a dyamic handler: [@T[testdynamic1:58]@T]
+Another xml token but not a duplicate: [@T[testxml:<instruction active="1">Aloha</instruction>]@T]
+The end.

@@ -17,7 +17,7 @@ namespace Atlantis.Framework.Tokens.Interface
     static DynamicTokenHandlerLoader()
     {
       _assemblySearchPatterns = new List<string>();
-      _assemblySearchPatterns.Add("Atlantis.Framework.TokenHandlers.*");
+      _assemblySearchPatterns.Add("Atlantis.Framework.TH.*");
     }
 
     [ImportMany]

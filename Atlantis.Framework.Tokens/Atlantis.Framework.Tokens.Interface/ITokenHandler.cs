@@ -4,6 +4,9 @@ using System.ComponentModel.Composition;
 
 namespace Atlantis.Framework.Tokens.Interface
 {
+  /// <summary>
+  /// All Token Handlers must implement ITokenHandler
+  /// </summary>
   [InheritedExport]
   public interface ITokenHandler
   {

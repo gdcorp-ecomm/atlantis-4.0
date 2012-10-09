@@ -53,7 +53,6 @@
     <Compile Include="SimpleTokenHandlerBase.cs" />
     <Compile Include="TokenBase.cs" />
     <Compile Include="TokenEvaluationResult.cs" />
-    <Compile Include="TokenHandlerBase.cs" />
     <Compile Include="TokenManager.cs" />
     <Compile Include="XmlToken.cs" />
     <Compile Include="XmlTokenHandlerBase.cs" />

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.TokenHandlers.Tests")]
+[assembly: AssemblyTitle("Atlantis.Framework.TH.TestDynamic")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com")]
-[assembly: AssemblyProduct("Atlantis.Framework.TokenHandlers.Tests")]
+[assembly: AssemblyProduct("Atlantis.Framework.TH.TestDynamic")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e439944d-f3dd-4357-9f27-7d4efd6f0699")]
+[assembly: Guid("a914ba95-4dc4-4a49-938d-2d0b1ba5135c")]
 
 // Version information for an assembly consists of the following four values:
 //

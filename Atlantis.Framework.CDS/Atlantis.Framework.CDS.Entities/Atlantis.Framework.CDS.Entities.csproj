@@ -110,6 +110,7 @@
     <Compile Include="Widgets\TabContent.cs" />
     <Compile Include="Widgets\TabsContainer.cs" />
     <Compile Include="Widgets\Tag.cs" />
+    <Compile Include="Widgets\TechPanel.cs" />
     <Compile Include="Widgets\TldElementBase.cs" />
     <Compile Include="Widgets\TrackingPixel.cs" />
   </ItemGroup>

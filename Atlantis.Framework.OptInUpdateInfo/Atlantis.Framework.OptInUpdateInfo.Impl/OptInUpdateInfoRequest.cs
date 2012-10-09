@@ -78,25 +78,22 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
           _problems.Add(exT);
         }
 
-
-        // Will revist this. Sri, Tim and Paul talked about this and found that the triplet uses appsetting EEM_UNSUB_SVC instead of the config ws_url.
-        // The appsetting url is old and could be problematic.
-        //try
-        //{
-        //  if (((OptInUpdateInfoRequestData)requestData).IsReseller)
-        //  {
-        //    bSuccess = SaveResellerOptIns((OptInUpdateInfoRequestData)requestData, out currentException);
-        //    results.Add("Reseller", bSuccess);
-        //    if (currentException != null)
-        //    {
-        //      _problems.Add(currentException);
-        //    }
-        //  }
-        //}
-        //catch (Exception ex3)
-        //{
-        //  _problems.Add(ex3);
-        //}
+        try
+        {
+          if (((OptInUpdateInfoRequestData)requestData).IsReseller)
+          {
+            bSuccess = SaveResellerOptIns((OptInUpdateInfoRequestData)requestData, out currentException);
+            results.Add("Reseller", bSuccess);
+            if (currentException != null)
+            {
+              _problems.Add(currentException);
+            }
+          }
+        }
+        catch (Exception ex3)
+        {
+          _problems.Add(ex3);
+        }
 
         try
         {
@@ -441,8 +438,8 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
                                                                            request.PrivateLabelId, request.EmailAddress) { RequestTimeout = request.RequestTimeout };
 
               var resellerOptOutResponse =
-                (EEMResellerOptInResponseData)
-                Engine.Engine.ProcessRequest(resellerOptOutRequest, OptInUpdateInfoEngineRequests.ResellerOptIn);
+                (EEMResellerOptOutResponseData)
+                Engine.Engine.ProcessRequest(resellerOptOutRequest, OptInUpdateInfoEngineRequests.ResellerOptOut);
               bSuccess = resellerOptOutResponse != null && resellerOptOutResponse.IsSuccess;
             }
           }

@@ -5,7 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.EEMResellerOptIn.Impl")]
-[assembly: AssemblyDescription("")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+#endif
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com")]
 [assembly: AssemblyProduct("Atlantis.Framework.EEMResellerOptIn.Impl")]
@@ -32,4 +36,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.12.1.09")]
+[assembly: AssemblyFileVersion("4.12.10.5")]

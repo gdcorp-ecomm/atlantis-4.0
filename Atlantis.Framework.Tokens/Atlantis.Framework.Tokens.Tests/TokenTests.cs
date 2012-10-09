@@ -13,21 +13,36 @@ namespace Atlantis.Framework.Tokens.Tests
   [TestClass]
   public class TokenTests
   {
+    private List<Match> ParseTokenStrings(string inputText)
+    {
+      MethodInfo method = typeof(TokenManager).GetMethod("ParseTokenStrings", BindingFlags.Static | BindingFlags.NonPublic);
+      object[] parameters = new object[1] { inputText };
+      object result = method.Invoke((object)null, parameters);
+      return result as List<Match>;
+    }
+
+    private void ClearHandlers()
+    {
+      MethodInfo method = typeof(TokenManager).GetMethod("ClearHandlers", BindingFlags.Static | BindingFlags.NonPublic);
+      object[] parameters = new object[0];
+      method.Invoke((object)null, parameters);
+    }
+
     [TestMethod]
     public void TokenParsing()
     {
-      TokenManager.Clear();
+      ClearHandlers();
       TokenManager.RegisterTokenHandler(new SimpleTokenHandler());
       string inputText = TestData.GetTextDataResource("inputdata1.txt");
 
-      List<Match> matches = TokenManager.ParseTokenStrings(inputText);
+      List<Match> matches = ParseTokenStrings(inputText);
       Assert.IsTrue(matches.Count > 0);
     }
 
     [TestMethod]
     public void TokenManagerAutoLoad()
     {
-      TokenManager.Clear();
+      ClearHandlers();
       TokenManager.AutoRegisterTokenHandlers(Assembly.GetExecutingAssembly());
       var handlers = TokenManager.GetRegisteredTokenHandlers();
       Assert.IsTrue(handlers.Count > 0);
@@ -36,7 +51,7 @@ namespace Atlantis.Framework.Tokens.Tests
     [TestMethod]
     public void TokenManagerAutoLoadInputData1()
     {
-      TokenManager.Clear();
+      ClearHandlers();
       TokenManager.AutoRegisterTokenHandlers(Assembly.GetExecutingAssembly());
       string inputText = TestData.GetTextDataResource("inputdata1.txt");
 
@@ -50,7 +65,7 @@ namespace Atlantis.Framework.Tokens.Tests
       Assert.AreEqual(TokenEvaluationResult.Errors, result);
 
       //no more tokens should exist
-      List<Match> matches = TokenManager.ParseTokenStrings(outputText);
+      List<Match> matches = ParseTokenStrings(outputText);
       Assert.IsTrue(matches.Count == 0);
 
       IDebugContext debug = container.Resolve<IDebugContext>();

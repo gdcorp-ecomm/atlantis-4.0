@@ -97,7 +97,7 @@ namespace Atlantis.Framework.Tokens.Interface
       }
     }
 
-    public static List<Match> ParseTokenStrings(string inputText)
+    private static List<Match> ParseTokenStrings(string inputText)
     {
       List<Match> result = new List<Match>();
 
@@ -131,7 +131,7 @@ namespace Atlantis.Framework.Tokens.Interface
     /// <summary>
     /// Clears all token handlers. This is used for unit tests only. This is not a threadsafe operation
     /// </summary>
-    public static void Clear()
+    private static void ClearHandlers()
     {
       _tokenHandlers.Clear();
     }

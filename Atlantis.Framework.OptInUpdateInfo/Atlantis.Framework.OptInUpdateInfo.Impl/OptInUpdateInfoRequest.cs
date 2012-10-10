@@ -78,22 +78,22 @@ namespace Atlantis.Framework.OptInUpdateInfo.Impl
           _problems.Add(exT);
         }
 
-        try
-        {
-          if (((OptInUpdateInfoRequestData)requestData).IsReseller)
-          {
-            bSuccess = SaveResellerOptIns((OptInUpdateInfoRequestData)requestData, out currentException);
-            results.Add("Reseller", bSuccess);
-            if (currentException != null)
-            {
-              _problems.Add(currentException);
-            }
-          }
-        }
-        catch (Exception ex3)
-        {
-          _problems.Add(ex3);
-        }
+        //try
+        //{
+        //  if (((OptInUpdateInfoRequestData)requestData).IsReseller)
+        //  {
+        //    bSuccess = SaveResellerOptIns((OptInUpdateInfoRequestData)requestData, out currentException);
+        //    results.Add("Reseller", bSuccess);
+        //    if (currentException != null)
+        //    {
+        //      _problems.Add(currentException);
+        //    }
+        //  }
+        //}
+        //catch (Exception ex3)
+        //{
+        //  _problems.Add(ex3);
+        //}
 
         try
         {

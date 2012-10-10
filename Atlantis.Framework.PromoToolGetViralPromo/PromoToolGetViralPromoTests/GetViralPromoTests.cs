@@ -67,10 +67,13 @@ namespace PromoToolGetViralPromoTests
 		{
 			Guid pathway = Guid.NewGuid();
 			PromoToolGetViralPromoRequestData request = new PromoToolGetViralPromoRequestData(
-        "860427", "http://yuck.com", string.Empty, string.Empty, 0, "krviral01");
+        "860427", "http://yuck.com", string.Empty, string.Empty, 0, "599coms");
 
-			PromoToolGetViralPromoResponseData response = (PromoToolGetViralPromoResponseData)Engine.ProcessRequest(request, 600);
-			Assert.IsNotNull(response);
+      for (int i = 0; i < 100; i++)
+      {
+        PromoToolGetViralPromoResponseData response = (PromoToolGetViralPromoResponseData)Engine.ProcessRequest(request, 600);
+        Assert.IsNotNull(response);
+      }
 		}
 	}
 }

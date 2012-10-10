@@ -67,10 +67,13 @@ namespace PromoToolGetOrderPromoTests
 		{
 			Guid pathway = Guid.NewGuid();
 			PromoToolGetOrderPromoRequestData request = new PromoToolGetOrderPromoRequestData(
-				"860427", "http://yuck.com", string.Empty, string.Empty, 0, "GPTESTUT2");
+        "860427", "http://yuck.com", string.Empty, string.Empty, 0, "oct2012a");
 
-			PromoToolGetOrderPromoResponseData response = (PromoToolGetOrderPromoResponseData)Engine.ProcessRequest(request, 598);
-			Assert.IsNotNull(response);
+      for (int i = 0; i < 100; i++)
+      {
+        PromoToolGetOrderPromoResponseData response = (PromoToolGetOrderPromoResponseData)Engine.ProcessRequest(request, 598);
+        Assert.IsNotNull(response);
+      }
 		}
 	}
 }

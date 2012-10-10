@@ -6,4 +6,4 @@ really?
 This token shows up more than once: [@T[testsimple:58]@T]
 This token is served by a dyamic handler: [@T[testdynamic1:58]@T]
 Another xml token but not a duplicate: [@T[testxml:<instruction active="1">Aloha</instruction>]@T]
-The end.
+The end. [@T[testerror:data does not matter here]@T]

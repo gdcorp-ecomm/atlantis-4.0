@@ -72,5 +72,25 @@ namespace Atlantis.Framework.Tokens.Tests
       Assert.IsTrue(debug.GetDebugTrackingData().Count > 0);
     }
 
+    [TestMethod]
+    public void TokenManagerEvaluateError()
+    {
+      ClearHandlers();
+      TokenManager.RegisterTokenHandler(new ErrorTokenHandler());
+      string inputText = TestData.GetTextDataResource("inputdata1.txt");
+
+      IProviderContainer container = new ObjectProviderContainer();
+      container.RegisterProvider<IDebugContext, MockDebug>();
+
+      string outputText;
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(inputText, container, out outputText);
+
+      //because we do not have a samplejson handler, we should have errors
+      Assert.AreEqual(TokenEvaluationResult.Errors, result);
+
+      IDebugContext debug = container.Resolve<IDebugContext>();
+      Assert.IsTrue(debug.GetDebugTrackingData().Count > 0);
+    }
+
   }
 }

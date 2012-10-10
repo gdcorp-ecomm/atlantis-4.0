@@ -8,6 +8,8 @@ namespace Atlantis.Framework.Tokens.Interface
   internal class InProcessTokenGroup
   {
     private const string _NOHANDLER = "No handler loaded.";
+    private const string _HANDLERERROR = "Handler Exception running EvaluateTokens";
+
     public ITokenHandler TokenHandler { get; private set; }
 
     List<IToken> _inProcessTokens;
@@ -39,33 +41,50 @@ namespace Atlantis.Framework.Tokens.Interface
       }
     }
 
+    private void SetErrorOnTokens(string errorMessage)
+    {
+      foreach (var inProcessToken in _inProcessTokens)
+      {
+        inProcessToken.TokenError = errorMessage;
+        inProcessToken.TokenResult = string.Empty;
+      }
+    }
+
     public TokenEvaluationResult EvaluateTokens(IProviderContainer container)
     {
-      TokenEvaluationResult result;
+      TokenEvaluationResult result = TokenEvaluationResult.Errors;
 
-      if (TokenHandler != null)
+      IDebugContext debug = null;
+      if (container.CanResolve<IDebugContext>())
       {
-        result = TokenHandler.EvaluateTokens(_inProcessTokens, container);
+        debug = container.Resolve<IDebugContext>();
       }
-      else
+
+      if (_inProcessTokens.Count == 0)
       {
-        result = TokenEvaluationResult.Errors;
-        foreach (var inProcessToken in _inProcessTokens)
+        result = TokenEvaluationResult.Success;
+      }
+      else if (TokenHandler != null)
+      {
+        try
         {
-          if (TokenHandler == null)
+          result = TokenHandler.EvaluateTokens(_inProcessTokens, container);
+        }
+        catch (Exception ex)
+        {
+          SetErrorOnTokens(_HANDLERERROR);
+          if (debug != null)
           {
-            inProcessToken.TokenError = _NOHANDLER;
-            inProcessToken.TokenResult = string.Empty;
+            debug.LogDebugTrackingData("InProcessTokenGroup.EvaluateTokens." + TokenHandler.TokenKey, ex.Message);
           }
         }
-
-        if ((_inProcessTokens.Count > 0) && (container.CanResolve<IDebugContext>()))
-        {
-          IToken first = _inProcessTokens[0];
-          IDebugContext debug = container.Resolve<IDebugContext>();
-          string message = "No ITokenHandler found for tokenkey=" + first.TokenKey;
-          debug.LogDebugTrackingData("InProcessTokenGroup.EvaluateTokens." + first.TokenKey, message);
-        }
+      }
+      else // no handler exists
+      {
+        SetErrorOnTokens(_NOHANDLER);
+        IToken first = _inProcessTokens[0];
+        string message = "No ITokenHandler found for tokenkey=" + first.TokenKey;
+        debug.LogDebugTrackingData("InProcessTokenGroup.EvaluateTokens." + first.TokenKey, message);
       }
 
       return result;

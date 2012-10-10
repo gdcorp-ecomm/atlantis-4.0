@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CDSResponseDataTest.cs" />
+    <Compile Include="EntitiesTest.cs" />
     <Compile Include="Helpers\CurrencyHelper.cs" />
     <Compile Include="Helpers\JsonChecker.cs" />
     <Compile Include="Helpers\LinkTypes.cs" />
@@ -111,6 +112,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
       <Project>{5B0E8D0F-247E-4937-8177-48EA5E267CAB}</Project>
       <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.CDS.Entities.Common\Atlantis.Framework.CDS.Entities.Common.csproj">
+      <Project>{31fbc53c-17ac-48fa-acfb-3512db222f4f}</Project>
+      <Name>Atlantis.Framework.CDS.Entities.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.CDS.Entities\Atlantis.Framework.CDS.Entities.csproj">
       <Project>{70E74CBB-1079-4EFF-AE95-5B6542C5DA80}</Project>

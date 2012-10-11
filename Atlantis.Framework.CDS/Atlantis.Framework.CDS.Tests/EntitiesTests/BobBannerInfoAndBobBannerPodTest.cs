@@ -11,7 +11,7 @@ namespace Atlantis.Framework.CDS.Tests
     ///This is a test class for CDS Entities - BannerInfo And BannerPod 
     ///</summary>
     [TestClass()]
-    public class BannerInfoAndBannerPodTest
+    public class BobBannerInfoAndBobBannerPodTest
     {
         private TestContext testContextInstance;
 
@@ -67,19 +67,19 @@ namespace Atlantis.Framework.CDS.Tests
         [TestMethod()]
         public void BannerPodConstructorTest()
         {
-            BannerPod target = new BannerPod();
-            Assert.IsNotNull(target, "BannerPod is null.");
-            Assert.IsNotNull(target.BannerInfoList, "Banner info list is null");
+            BobBannerPod target = new BobBannerPod();
+            Assert.IsNotNull(target, "BobBannerPod is null.");
+            Assert.IsNotNull(target.BannerInfoList, "Bob banner info list is null");
         }
 
         /// <summary>
         ///A test for BannerInfo Constructor.
         ///</summary>
         [TestMethod()]
-        public void BannerInfoConstructorTest()
+        public void BobBannerInfoConstructorTest()
         {
-            BannerInfo target = new BannerInfo();           
-            Assert.IsNotNull(target, "BannerInfo is null.");
+            BobBannerInfo target = new BobBannerInfo();           
+            Assert.IsNotNull(target, "Bob bannerInfo is null.");
         }
         
         /// <summary>
@@ -88,47 +88,43 @@ namespace Atlantis.Framework.CDS.Tests
         [TestMethod()]
         public void BannerInfoPropertiesTest()
         {
-            BannerInfo target = new BannerInfo();
+            BobBannerInfo target = new BobBannerInfo();
 
             string expectedResult = "small";
             target.Size = expectedResult;
-            Assert.AreEqual(expectedResult, target.Size, "BannerInfo.Size was not set correctly.");
+            Assert.AreEqual(expectedResult, target.Size, "BobBannerInfo.Size was not set correctly.");
 
             expectedResult = "blue";
             target.BackgroundColor = expectedResult;
-            Assert.AreEqual(expectedResult, target.BackgroundColor, "BannerInfo.BackgroundColor was not set correctly.");
+            Assert.AreEqual(expectedResult, target.BackgroundColor, "BobBannerInfo.BackgroundColor was not set correctly.");
 
             expectedResult = "testImage";
             target.IconImage = expectedResult;
-            Assert.AreEqual(expectedResult, target.IconImage, "BannerInfo.IconImage was not set correctly.");
+            Assert.AreEqual(expectedResult, target.IconImage, "BobBannerInfo.IconImage was not set correctly.");
 
             expectedResult = "onRight";
             target.ImagePosition = expectedResult;
-            Assert.AreEqual(expectedResult, target.ImagePosition, "BannerInfo.ImagePosition was not set correctly.");
+            Assert.AreEqual(expectedResult, target.ImagePosition, "BobBannerInfo.ImagePosition was not set correctly.");
 
             expectedResult = "TestTitle";
             target.Title = expectedResult;
-            Assert.AreEqual(expectedResult, target.Title, "BannerInfo.Title was not set correctly.");
+            Assert.AreEqual(expectedResult, target.Title, "BobBannerInfo.Title was not set correctly.");
 
-            expectedResult = "TestText";
-            target.Text = expectedResult;
-            Assert.AreEqual(expectedResult, target.Text, "BannerInfo.Text was not set correctly.");
+            expectedResult = "TestLinkText";
+            target.LinkText = expectedResult;
+            Assert.AreEqual(expectedResult, target.LinkText, "BobBannerInfo.LinkText was not set correctly.");
 
-            expectedResult = "ToLeft";
-            target.TextAlign = expectedResult;
-            Assert.AreEqual(expectedResult, target.TextAlign, "BannerInfo.TextAlign was not set correctly.");
-
-            expectedResult = "VeryBig";
-            target.TextSize = expectedResult;
-            Assert.AreEqual(expectedResult, target.TextSize, "BannerInfo.TextSize was not set correctly.");
-
+            expectedResult = "MyQuoteTitle";
+            target.QuoteTitle = expectedResult;
+            Assert.AreEqual(expectedResult, target.QuoteTitle, "BobBannerInfo.QuoteTitle was not set correctly.");
+                      
             expectedResult = "BigListOfCountriesHere";
             target.CountryCodesList = expectedResult;
-            Assert.AreEqual(expectedResult, target.CountryCodesList, "BannerInfo.CountryCodesList was not set correctly.");
+            Assert.AreEqual(expectedResult, target.CountryCodesList, "BobBannerInfo.CountryCodesList was not set correctly.");
 
             expectedResult = "121";
             target.SplitValue = expectedResult;
-            Assert.AreEqual(expectedResult, target.SplitValue, "BannerInfo.SplitValue was not set correctly.");
+            Assert.AreEqual(expectedResult, target.SplitValue, "BobBannerInfo.SplitValue was not set correctly.");
         }
 
      

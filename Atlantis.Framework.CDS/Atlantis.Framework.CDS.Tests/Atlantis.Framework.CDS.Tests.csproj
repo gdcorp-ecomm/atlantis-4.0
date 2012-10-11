@@ -62,7 +62,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CDSResponseDataTest.cs" />
-    <Compile Include="EntitiesTest.cs" />
+    <Compile Include="EntitiesTests\GeneralEntitiesTest.cs" />
+    <Compile Include="EntitiesTests\BannerInfoAndBannerPodTest.cs" />
     <Compile Include="Helpers\CurrencyHelper.cs" />
     <Compile Include="Helpers\JsonChecker.cs" />
     <Compile Include="Helpers\LinkTypes.cs" />
@@ -140,6 +141,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

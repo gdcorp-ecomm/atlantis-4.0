@@ -12,7 +12,7 @@ namespace Atlantis.Framework.CDS.Tests
     ///to contain all Entities Unit Tests
     ///</summary>
     [TestClass()]
-    public class EntitiesTest
+    public class GeneralEntitiesTest
     {
         private TestContext testContextInstance;
 

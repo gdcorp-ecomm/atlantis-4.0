@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="CDSResponseDataTest.cs" />
     <Compile Include="EntitiesTests\BobBannerInfoAndBobBannerPodTest.cs" />
+    <Compile Include="EntitiesTests\BulkPanelTest.cs" />
     <Compile Include="EntitiesTests\GeneralEntitiesTest.cs" />
     <Compile Include="EntitiesTests\BannerInfoAndBannerPodTest.cs" />
     <Compile Include="Helpers\CurrencyHelper.cs" />

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="fastball.Product" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="fastball.Product" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="fastball.Product">
+      <s:element name="GetProductGroupandPackageData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="productGroupIds" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="packageIds" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetProductGroupandPackageDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductGroupAndPackageData" nillable="true" type="tns:ProductAndPackageData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProductAndPackageData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ProdGroups" type="tns:ArrayOfProductGroup" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProdPackages" type="tns:ProdPackages" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfProductGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProdGroup" nillable="true" type="tns:ProductGroup" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Attribs" type="tns:ArrayOfProductGroupAttribute" />
+          <s:element minOccurs="0" maxOccurs="1" name="Prods" type="tns:ArrayOfProductGroupProducts" />
+        </s:sequence>
+        <s:attribute name="prodGroupCode" type="s:string" />
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="groupType" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfProductGroupAttribute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Attrib" nillable="true" type="tns:ProductGroupAttribute" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductGroupAttribute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AttribVals" type="tns:ArrayOfProductGroupAttribValue" />
+        </s:sequence>
+        <s:attribute name="name" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfProductGroupAttribValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AttribVal" nillable="true" type="tns:ProductGroupAttribValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductGroupAttribValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Prods" type="tns:ArrayOfProductGroupAttributeProducts" />
+        </s:sequence>
+        <s:attribute name="id" type="s:string" />
+        <s:attribute name="disporder" type="s:string" />
+        <s:attribute name="default" type="s:string" />
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="val" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfProductGroupAttributeProducts">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Prod" nillable="true" type="tns:ProductGroupAttributeProducts" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductGroupAttributeProducts">
+        <s:attribute name="pfid" type="s:string" />
+        <s:attribute name="qty" type="s:string" />
+        <s:attribute name="disporder" type="s:string" />
+        <s:attribute name="default" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfProductGroupProducts">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Prod" nillable="true" type="tns:ProductGroupProducts" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductGroupProducts">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Pkgs" type="tns:ArrayOfProductGroupPackage" />
+        </s:sequence>
+        <s:attribute name="pfid" type="s:string" />
+        <s:attribute name="qty" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfProductGroupPackage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Pkg" nillable="true" type="tns:ProductGroupPackage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductGroupPackage">
+        <s:attribute name="pkgid" type="s:string" />
+        <s:attribute name="pkgType" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ProdPackages">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CartPackages" type="tns:ArrayOfCartProdPackage" />
+          <s:element minOccurs="0" maxOccurs="1" name="UpsellPackages" type="tns:ArrayOfUpsellProdPackage" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddonPackages" type="tns:ArrayOfAddOnProdPackage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCartProdPackage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CartPackage" nillable="true" type="tns:CartProdPackage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CartProdPackage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ParentProd" type="tns:CartParentProd" />
+        </s:sequence>
+        <s:attribute name="pkgid" type="s:string" />
+      </s:complexType>
+      <s:complexType name="CartParentProd">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ChildProds" type="tns:ArrayOfCartChildprod" />
+        </s:sequence>
+        <s:attribute name="pfid" type="s:string" />
+        <s:attribute name="qty" type="s:string" />
+        <s:attribute name="parentflag" type="s:string" />
+        <s:attribute name="discountcode" type="s:string" />
+        <s:attribute name="dispoverride" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfCartChildprod">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ChildProd" nillable="true" type="tns:CartChildprod" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CartChildprod">
+        <s:attribute name="pfid" type="s:string" />
+        <s:attribute name="qty" type="s:string" />
+        <s:attribute name="childflag" type="s:string" />
+        <s:attribute name="isfree" type="s:string" />
+        <s:attribute name="discountcode" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfUpsellProdPackage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UpsellPackage" nillable="true" type="tns:UpsellProdPackage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UpsellProdPackage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ParentProd" type="tns:UpsellParentProd" />
+        </s:sequence>
+        <s:attribute name="pkgid" type="s:string" />
+      </s:complexType>
+      <s:complexType name="UpsellParentProd">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ChildProds" type="tns:ArrayOfUpsellChildProd" />
+        </s:sequence>
+        <s:attribute name="pfid" type="s:string" />
+        <s:attribute name="qty" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfUpsellChildProd">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ChildProd" nillable="true" type="tns:UpsellChildProd" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UpsellChildProd">
+        <s:attribute name="pfid" type="s:string" />
+        <s:attribute name="qty" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfAddOnProdPackage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AddonPackage" nillable="true" type="tns:AddOnProdPackage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AddOnProdPackage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ParentProd" type="tns:AddonParentProd" />
+        </s:sequence>
+        <s:attribute name="pkgid" type="s:string" />
+      </s:complexType>
+      <s:complexType name="AddonParentProd">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ChildProds" type="tns:ArrayOfAddonChildProd" />
+        </s:sequence>
+        <s:attribute name="pfid" type="s:string" />
+        <s:attribute name="qty" type="s:string" />
+        <s:attribute name="addonrequired" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfAddonChildProd">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ChildProd" nillable="true" type="tns:AddonChildProd" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AddonChildProd">
+        <s:attribute name="pfid" type="s:string" />
+        <s:attribute name="qty" type="s:string" />
+        <s:attribute name="default" type="s:string" />
+        <s:attribute name="disporder" type="s:string" />
+      </s:complexType>
+      <s:element name="GetProductPackagesByPackageID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="packageIds" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductPackagesByPackageIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="objProdPackages" type="tns:ProdPackages" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductsByProductGroupID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="productGroupIds" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductsByProductGroupIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProductGroupData" nillable="true" type="tns:ProductGroupData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProductGroupData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ProdGroups" type="tns:ArrayOfProductGroup" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetProductGroupandPackageDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductGroupandPackageData" />
+  </wsdl:message>
+  <wsdl:message name="GetProductGroupandPackageDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductGroupandPackageDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductPackagesByPackageIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductPackagesByPackageID" />
+  </wsdl:message>
+  <wsdl:message name="GetProductPackagesByPackageIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductPackagesByPackageIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductsByProductGroupIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductsByProductGroupID" />
+  </wsdl:message>
+  <wsdl:message name="GetProductsByProductGroupIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductsByProductGroupIDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="GetProductGroupandPackageData">
+      <wsdl:input message="tns:GetProductGroupandPackageDataSoapIn" />
+      <wsdl:output message="tns:GetProductGroupandPackageDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPackagesByPackageID">
+      <wsdl:input message="tns:GetProductPackagesByPackageIDSoapIn" />
+      <wsdl:output message="tns:GetProductPackagesByPackageIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductsByProductGroupID">
+      <wsdl:input message="tns:GetProductsByProductGroupIDSoapIn" />
+      <wsdl:output message="tns:GetProductsByProductGroupIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProductGroupandPackageData">
+      <soap:operation soapAction="fastball.Product/GetProductGroupandPackageData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPackagesByPackageID">
+      <soap:operation soapAction="fastball.Product/GetProductPackagesByPackageID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductsByProductGroupID">
+      <soap:operation soapAction="fastball.Product/GetProductsByProductGroupID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProductGroupandPackageData">
+      <soap12:operation soapAction="fastball.Product/GetProductGroupandPackageData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductPackagesByPackageID">
+      <soap12:operation soapAction="fastball.Product/GetProductPackagesByPackageID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductsByProductGroupID">
+      <soap12:operation soapAction="fastball.Product/GetProductsByProductGroupID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://fbapp.dev.glbt1.gdg/ProductPackage/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://fbapp.dev.glbt1.gdg/ProductPackage/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

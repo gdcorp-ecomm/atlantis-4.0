@@ -4,6 +4,7 @@ using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.CDS.Entities.Widgets;
 using Atlantis.Framework.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestSetUpAndSettings;
 
 namespace Atlantis.Framework.CDS.Tests
 {
@@ -60,11 +61,11 @@ namespace Atlantis.Framework.CDS.Tests
         //}
         //
         #endregion
-        
+
         /// <summary>
         ///A test for the BannerPod Constructor.
         ///</summary>
-        [TestMethod()]
+        [TestCategory("CDS"), Priority(0), TestAssertions(2), TestMethod]
         public void BannerPodConstructorTest()
         {
             BobBannerPod target = new BobBannerPod();
@@ -75,17 +76,17 @@ namespace Atlantis.Framework.CDS.Tests
         /// <summary>
         ///A test for BannerInfo Constructor.
         ///</summary>
-        [TestMethod()]
+        [TestCategory("CDS"), Priority(0), TestAssertions(1), TestMethod]
         public void BobBannerInfoConstructorTest()
         {
-            BobBannerInfo target = new BobBannerInfo();           
+            BobBannerInfo target = new BobBannerInfo();
             Assert.IsNotNull(target, "Bob bannerInfo is null.");
         }
-        
+
         /// <summary>
         ///A test for BannerInfo properties.
         ///</summary>
-        [TestMethod()]
+        [TestCategory("CDS"), Priority(0), TestAssertions(9), TestMethod]
         public void BannerInfoPropertiesTest()
         {
             BobBannerInfo target = new BobBannerInfo();
@@ -117,7 +118,7 @@ namespace Atlantis.Framework.CDS.Tests
             expectedResult = "MyQuoteTitle";
             target.QuoteTitle = expectedResult;
             Assert.AreEqual(expectedResult, target.QuoteTitle, "BobBannerInfo.QuoteTitle was not set correctly.");
-                      
+
             expectedResult = "BigListOfCountriesHere";
             target.CountryCodesList = expectedResult;
             Assert.AreEqual(expectedResult, target.CountryCodesList, "BobBannerInfo.CountryCodesList was not set correctly.");
@@ -127,7 +128,7 @@ namespace Atlantis.Framework.CDS.Tests
             Assert.AreEqual(expectedResult, target.SplitValue, "BobBannerInfo.SplitValue was not set correctly.");
         }
 
-     
+
 
     }
 

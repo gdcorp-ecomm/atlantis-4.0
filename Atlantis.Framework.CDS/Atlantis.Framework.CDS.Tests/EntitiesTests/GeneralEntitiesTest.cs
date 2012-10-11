@@ -4,6 +4,7 @@ using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.CDS.Entities.Widgets;
 using Atlantis.Framework.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestSetUpAndSettings;
 
 namespace Atlantis.Framework.CDS.Tests
 {
@@ -66,29 +67,29 @@ namespace Atlantis.Framework.CDS.Tests
         /// <summary>
         ///A test for CDSResponseData Constructor.
         ///</summary>
-        [TestMethod()]
+        [TestCategory("CDS"), Priority(0), TestAssertions(2), TestMethod]
         public void CDSJsonContentConstructorTest()
         {
             CDSJsonContent jsContent = new CDSJsonContent("22", "test");
-            Assert.AreEqual("test", jsContent.Html,"Html string is null and was not initialized by contructor.");
+            Assert.AreEqual("test", jsContent.Html, "Html string is null and was not initialized by contructor.");
             Assert.AreEqual("22", jsContent.TargetDivID, "Target div ID is not 22 and was not initialized by contructor.");
         }
-        
+
         /// <summary>
         ///A test for the disclaimer class.
         ///</summary>
-        [TestMethod()]
+        [TestCategory("CDS"), Priority(0), TestAssertions(1), TestMethod]
         public void DisclaimerTest()
         {
             Atlantis.Framework.CDS.Entities.Widgets.Disclaimer md = new Atlantis.Framework.CDS.Entities.Widgets.Disclaimer();
             Assert.AreEqual(md.CurrentModal.Text, "Click here for product disclaimers and legal policies.", "Default disclaimer text was not correct.");
 
         }
-        
-          /// <summary>
+
+        /// <summary>
         ///A test for the DppFreeExtras class column number.
         ///</summary>
-        [TestMethod()]
+       [TestCategory("CDS"), Priority(0), TestAssertions(1), TestMethod]
         public void DppFreeExtrasColumnNumberTest()
         {
             Atlantis.Framework.CDS.Entities.Widgets.DPPFreeExtras target = new Atlantis.Framework.CDS.Entities.Widgets.DPPFreeExtras();
@@ -98,7 +99,7 @@ namespace Atlantis.Framework.CDS.Tests
         /// <summary>
         ///A test for List class column number.
         ///</summary>
-        [TestMethod()]
+        [TestCategory("CDS"), Priority(0), TestAssertions(1), TestMethod]
         public void ListColumnNumberTest()
         {
             Atlantis.Framework.CDS.Entities.Widgets.List target = new Atlantis.Framework.CDS.Entities.Widgets.List();
@@ -108,7 +109,7 @@ namespace Atlantis.Framework.CDS.Tests
         /// <summary>
         ///A test for the ManageNow class link text and description.
         ///</summary>
-        [TestMethod()]
+        [TestCategory("CDS"), Priority(0), TestAssertions(2), TestMethod]
         public void ManageNowTest()
         {
             Atlantis.Framework.CDS.Entities.Widgets.ManageNow target = new Atlantis.Framework.CDS.Entities.Widgets.ManageNow();
@@ -119,7 +120,7 @@ namespace Atlantis.Framework.CDS.Tests
         /// <summary>
         ///A test for the Support class title and community group text.
         ///</summary>
-        [TestMethod()]
+       [TestCategory("CDS"), Priority(0), TestAssertions(2), TestMethod]
         public void SupportTest()
         {
             Atlantis.Framework.CDS.Entities.Widgets.Support target = new Atlantis.Framework.CDS.Entities.Widgets.Support();
@@ -127,7 +128,7 @@ namespace Atlantis.Framework.CDS.Tests
             Assert.AreEqual(target.CommunityGroup, "product group of your choice", "CommunityGroup text not correct for the Support class.");
         }
 
-     
+
 
     }
 

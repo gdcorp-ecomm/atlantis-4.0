@@ -4,6 +4,7 @@ using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.CDS.Entities.Widgets;
 using Atlantis.Framework.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestSetUpAndSettings;
 
 namespace Atlantis.Framework.CDS.Tests
 {
@@ -60,11 +61,11 @@ namespace Atlantis.Framework.CDS.Tests
         //}
         //
         #endregion
-        
+
         /// <summary>
         ///A test for the BannerPod Constructor.
         ///</summary>
-        [TestMethod()]
+        [TestCategory("CDS"), Priority(0), TestAssertions(2), TestMethod]
         public void BannerPodConstructorTest()
         {
             BannerPod target = new BannerPod();
@@ -75,17 +76,17 @@ namespace Atlantis.Framework.CDS.Tests
         /// <summary>
         ///A test for BannerInfo Constructor.
         ///</summary>
-        [TestMethod()]
+        [TestCategory("CDS"), Priority(0), TestAssertions(1), TestMethod]
         public void BannerInfoConstructorTest()
         {
-            BannerInfo target = new BannerInfo();           
+            BannerInfo target = new BannerInfo();
             Assert.IsNotNull(target, "BannerInfo is null.");
         }
-        
+
         /// <summary>
         ///A test for BannerInfo properties.
         ///</summary>
-        [TestMethod()]
+        [TestCategory("CDS"), Priority(0), TestAssertions(10), TestMethod]
         public void BannerInfoPropertiesTest()
         {
             BannerInfo target = new BannerInfo();
@@ -131,7 +132,7 @@ namespace Atlantis.Framework.CDS.Tests
             Assert.AreEqual(expectedResult, target.SplitValue, "BannerInfo.SplitValue was not set correctly.");
         }
 
-     
+
 
     }
 

@@ -20,6 +20,11 @@ namespace Atlantis.Framework.ProductUpgradePath.Interface
       {
         return _productOptions;
       }
+      set
+      {
+        _productOptions = value;
+        SetupFilteredProducts();
+      }
     }
 
     private Dictionary<int, UpgradeProductInfo> _products = new Dictionary<int, UpgradeProductInfo>();

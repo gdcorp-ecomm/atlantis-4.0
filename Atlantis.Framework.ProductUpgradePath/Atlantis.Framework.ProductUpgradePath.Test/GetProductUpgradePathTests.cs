@@ -95,7 +95,7 @@ namespace Atlantis.Framework.ProductUpgradePath.Test
          , string.Empty
          , string.Empty
          , string.Empty
-         , 0, 11865, 1);
+         , 0, 6601, 1);
 
       List<ProductOptions> filterOptions = new List<ProductOptions>();
       filterOptions.Add(new ProductOptions(1, DurationUnit.Year));
@@ -104,8 +104,12 @@ namespace Atlantis.Framework.ProductUpgradePath.Test
       filterOptions.Add(new ProductOptions(5, DurationUnit.Year));
       filterOptions.Add(new ProductOptions(10, DurationUnit.Year));
       request.ProductOptions = filterOptions;
-      ProductUpgradePathResponseData response = (ProductUpgradePathResponseData)Engine.Engine.ProcessRequest(request, 607);
-
+      ProductUpgradePathResponseData currentresp = (ProductUpgradePathResponseData)Engine.Engine.ProcessRequest(request, 607);
+      System.Diagnostics.Debug.WriteLine(currentresp.Products[6601].DisplayTerm);
+      foreach (KeyValuePair<string, int> currentAttrib in currentresp.Products[6601])
+      {
+        System.Diagnostics.Debug.WriteLine(currentAttrib.Key + ":" + currentAttrib.Value);
+      }
 
     }
 
@@ -130,7 +134,10 @@ namespace Atlantis.Framework.ProductUpgradePath.Test
       filterOptions.Add(new ProductOptions(10, DurationUnit.Year));
       request.ProductOptions = filterOptions;
       ProductUpgradePathResponseData response = (ProductUpgradePathResponseData)Engine.Engine.ProcessRequest(request, 607);
-
+      foreach (KeyValuePair<string, int> currentAttrib in response.Products[56950])
+      {
+        System.Diagnostics.Debug.WriteLine(currentAttrib.Key + ":" + currentAttrib.Value);
+      }
 
     }
   }

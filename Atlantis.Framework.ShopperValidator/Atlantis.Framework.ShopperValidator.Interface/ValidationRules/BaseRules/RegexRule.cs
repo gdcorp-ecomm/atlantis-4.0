@@ -6,10 +6,12 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
   public class RegexRule : ValidationRule
   {
     private Regex _regexPattern;
-    public RegexRule(string fieldName, string textToValidate, Regex regexPattern)
+    private bool _isValidIfDoesntMatchRegex;
+    public RegexRule(string fieldName, string textToValidate, Regex regexPattern, bool isValidIfDoesntMatchRegex = false)
       : base()
     {
       _regexPattern = regexPattern;
+      _isValidIfDoesntMatchRegex = isValidIfDoesntMatchRegex;
       base.ItemToValidate = textToValidate;
       base.ErrorMessage = string.Concat(fieldName, " is an invalid format.");
     }
@@ -19,7 +21,8 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
       base.IsValid = false;
       if (base.ItemToValidate != null && _regexPattern != null)
       {
-        base.IsValid = _regexPattern.IsMatch(base.ItemToValidate);
+        bool regexIsMatch = _regexPattern.IsMatch(base.ItemToValidate);
+        base.IsValid = _isValidIfDoesntMatchRegex ? !regexIsMatch : regexIsMatch;
       }
     }
   }

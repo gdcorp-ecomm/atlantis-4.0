@@ -13,6 +13,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
   [DeploymentItem("Atlantis.Framework.ShopperValidator.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.SearchShoppers.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.ValidateField.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.AuthValidatePassword.Impl.dll")]
   public class UnitTest1
   {
     string _emailAddress = "Seth";
@@ -85,21 +86,20 @@ namespace Atlantis.Framework.ShopperValidator.Test
 
       SendToDebug(rules);
       var p = "a";
-
     }
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void TestOneRule()
     {
-      ZipRule zr = new ZipRule("", "hk");
+      ZipRule zr = new ZipRule("<A<#<A>K", "ca");
       zr.Validate();
       CallInPinRule cipr = new CallInPinRule("1234");
       cipr.Validate();
       UsernameRule unr = new UsernameRule("myusername");
       unr.Validate();
 
-      PasswordRule pwRule = new PasswordRule(_overMaxLength, true, "jasdfj29nask3", "asdf");
+      PasswordRule pwRule = new PasswordRule("PASSWORD12340", true, "jasdfj29nask3", "asdf");
       pwRule.Validate();
       bool b = pwRule.IsValid;
 

@@ -40,6 +40,11 @@ namespace Atlantis.Framework.FTEAreaCodes.Interface
       throw new NotImplementedException();
     }
 
+    public ArrayList AreaCodes
+    {
+      get { return this._areaCodes; }
+    }
+
     #endregion Public Methods
   }
 }

@@ -40,6 +40,11 @@ namespace Atlantis.Framework.FTEAreaCodes.Interface
       throw new NotImplementedException();
     }
 
+    public Dictionary<string, string> States
+    {
+      get { return this._dictionary; }
+    }
+
     #endregion Public Methods
   }
 }

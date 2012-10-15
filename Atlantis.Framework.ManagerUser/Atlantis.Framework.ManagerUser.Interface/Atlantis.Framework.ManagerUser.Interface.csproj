@@ -47,6 +47,7 @@
     <Compile Include="ManagerUserLookupRequestData.cs" />
     <Compile Include="ManagerUserLookupResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">

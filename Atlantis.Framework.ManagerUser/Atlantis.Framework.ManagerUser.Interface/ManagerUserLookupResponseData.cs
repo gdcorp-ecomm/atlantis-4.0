@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Xml;
 using Atlantis.Framework.Interface;
+using System.Xml.Linq;
+using System.Linq;
 
 namespace Atlantis.Framework.ManagerUser.Interface
 {
@@ -8,11 +9,12 @@ namespace Atlantis.Framework.ManagerUser.Interface
   {
     private const string _STATUSSUCCESS = "0";
     private AtlantisException _ex;
-    private string _responseXml;
+    private XDocument _responseXml;
     private string _status = string.Empty;
     private string _error = string.Empty;
     private string _managerUserID = string.Empty;
     private string _managerLoginName = string.Empty;
+    private string _managerFullName = string.Empty;
 
     public string Status
     {
@@ -39,31 +41,50 @@ namespace Atlantis.Framework.ManagerUser.Interface
       get { return _managerLoginName; }
     }
 
+    public string ManagerFullName
+    {
+      get { return _managerFullName; }
+    }
+
+    public XDocument ResultXml
+    {
+      get { return _responseXml; }
+    }
+
     public ManagerUserLookupResponseData(string responseXml)
     {
-      _responseXml = responseXml;
-      ParseXml();
+      try
+      {
+        _responseXml = XDocument.Parse(responseXml);
+        ParseXml();
+      }
+      catch (Exception ex)
+      {
+        _ex = new AtlantisException(
+          "ManagerUserLookup.ctor",
+          string.Empty, string.Empty, ex.Message, responseXml,
+          string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      }
     }
 
     private void ParseXml()
     {
-      XmlDocument responseDoc = new XmlDocument();
       try
       {
-        responseDoc.LoadXml(_responseXml);
-        XmlElement userNode = responseDoc.SelectSingleNode("//User") as XmlElement;
-        if (userNode != null)
+        XElement userElement = _responseXml.Descendants("User").FirstOrDefault();
+        if (userElement != null)
         {
-          _status = userNode.GetAttribute("status");
-          _error = userNode.GetAttribute("error");
+          _status = userElement.GetAttributeValue("status");
+          _error = userElement.GetAttributeValue("error");
 
           if (_status == _STATUSSUCCESS)
           {
-            XmlElement mappingNode = userNode.SelectSingleNode("./Mapping") as XmlElement;
+            XElement mappingNode = userElement.Descendants("Mapping").FirstOrDefault();
             if (mappingNode != null)
             {
-              _managerLoginName = mappingNode.GetAttribute("loginName");
-              _managerUserID = mappingNode.GetAttribute("userID");
+              _managerLoginName = mappingNode.GetAttributeValue("loginName");
+              _managerUserID = mappingNode.GetAttributeValue("userID");
+              _managerFullName = mappingNode.GetAttributeValue("fullName");
             }
             else
             {
@@ -76,20 +97,20 @@ namespace Atlantis.Framework.ManagerUser.Interface
       {
         _ex = new AtlantisException(
           "ManagerUserLookup.ParseXml",
-          string.Empty, string.Empty, ex.Message, _responseXml,
+          string.Empty, string.Empty, ex.Message, _responseXml.ToString(),
           string.Empty, string.Empty, string.Empty, string.Empty, 0);
       }
     }
 
     public ManagerUserLookupResponseData(string responseXml, AtlantisException ex)
     {
-      _responseXml = responseXml;
+      _responseXml = null;
       _ex = ex;
     }
 
     public ManagerUserLookupResponseData(string responseXml, RequestData requestData, Exception ex)
     {
-      _responseXml = responseXml;
+      _responseXml = null;
       _ex = new AtlantisException(requestData,
                                    "ManagerUserLookupResponseData",
                                    ex.Message,
@@ -100,7 +121,8 @@ namespace Atlantis.Framework.ManagerUser.Interface
 
     public string ToXML()
     {
-      return _responseXml;
+      string result = (_responseXml != null) ? _responseXml.ToString() : string.Empty;
+      return result;
     }
 
     public AtlantisException GetException()

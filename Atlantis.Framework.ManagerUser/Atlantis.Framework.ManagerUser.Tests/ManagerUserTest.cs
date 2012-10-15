@@ -13,6 +13,7 @@ namespace TestProject1
        
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.ManagerUser.Impl.dll")]
     public void GetManagerUser()
     {
       ManagerUserLookupRequestData lookupRequest = new ManagerUserLookupRequestData(

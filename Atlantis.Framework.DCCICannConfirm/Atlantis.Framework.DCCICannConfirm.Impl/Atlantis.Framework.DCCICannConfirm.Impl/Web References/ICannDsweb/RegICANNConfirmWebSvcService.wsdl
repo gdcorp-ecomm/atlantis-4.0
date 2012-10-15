@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://godaddy.com" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RegICANNConfirmWebSvcService" targetNamespace="http://godaddy.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="httpsBinding_IRegICANNConfirmWebSvc_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://godaddy.com">
+      <xsd:element name="GetComplianceEmail">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="RequestXml" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetComplianceEmailResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GetComplianceEmailResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetIcannDomainData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="RequestXml" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetIcannDomainDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GetIcannDomainDataResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Test">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TestResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="TestResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetVersion">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetVersionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GetVersionResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IRegICANNConfirmWebSvc_GetComplianceEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplianceEmail" />
+  </wsdl:message>
+  <wsdl:message name="IRegICANNConfirmWebSvc_GetComplianceEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplianceEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegICANNConfirmWebSvc_GetIcannDomainData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIcannDomainData" />
+  </wsdl:message>
+  <wsdl:message name="IRegICANNConfirmWebSvc_GetIcannDomainData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIcannDomainDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegICANNConfirmWebSvc_Test_InputMessage">
+    <wsdl:part name="parameters" element="tns:Test" />
+  </wsdl:message>
+  <wsdl:message name="IRegICANNConfirmWebSvc_Test_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegICANNConfirmWebSvc_GetVersion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVersion" />
+  </wsdl:message>
+  <wsdl:message name="IRegICANNConfirmWebSvc_GetVersion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVersionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IRegICANNConfirmWebSvc">
+    <wsdl:operation name="GetComplianceEmail">
+      <wsdl:input wsaw:Action="http://godaddy.com/IRegICANNConfirmWebSvc/GetComplianceEmail" message="tns:IRegICANNConfirmWebSvc_GetComplianceEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IRegICANNConfirmWebSvc/GetComplianceEmailResponse" message="tns:IRegICANNConfirmWebSvc_GetComplianceEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIcannDomainData">
+      <wsdl:input wsaw:Action="http://godaddy.com/IRegICANNConfirmWebSvc/GetIcannDomainData" message="tns:IRegICANNConfirmWebSvc_GetIcannDomainData_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IRegICANNConfirmWebSvc/GetIcannDomainDataResponse" message="tns:IRegICANNConfirmWebSvc_GetIcannDomainData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <wsdl:input wsaw:Action="http://godaddy.com/IRegICANNConfirmWebSvc/Test" message="tns:IRegICANNConfirmWebSvc_Test_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IRegICANNConfirmWebSvc/TestResponse" message="tns:IRegICANNConfirmWebSvc_Test_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion">
+      <wsdl:input wsaw:Action="http://godaddy.com/IRegICANNConfirmWebSvc/GetVersion" message="tns:IRegICANNConfirmWebSvc_GetVersion_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IRegICANNConfirmWebSvc/GetVersionResponse" message="tns:IRegICANNConfirmWebSvc_GetVersion_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="httpBinding_IRegICANNConfirmWebSvc" type="tns:IRegICANNConfirmWebSvc">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetComplianceEmail">
+      <soap:operation soapAction="http://godaddy.com/IRegICANNConfirmWebSvc/GetComplianceEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIcannDomainData">
+      <soap:operation soapAction="http://godaddy.com/IRegICANNConfirmWebSvc/GetIcannDomainData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap:operation soapAction="http://godaddy.com/IRegICANNConfirmWebSvc/Test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion">
+      <soap:operation soapAction="http://godaddy.com/IRegICANNConfirmWebSvc/GetVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="httpsBinding_IRegICANNConfirmWebSvc" type="tns:IRegICANNConfirmWebSvc">
+    <wsp:PolicyReference URI="#httpsBinding_IRegICANNConfirmWebSvc_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetComplianceEmail">
+      <soap:operation soapAction="http://godaddy.com/IRegICANNConfirmWebSvc/GetComplianceEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIcannDomainData">
+      <soap:operation soapAction="http://godaddy.com/IRegICANNConfirmWebSvc/GetIcannDomainData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap:operation soapAction="http://godaddy.com/IRegICANNConfirmWebSvc/Test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion">
+      <soap:operation soapAction="http://godaddy.com/IRegICANNConfirmWebSvc/GetVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegICANNConfirmWebSvcService">
+    <wsdl:port name="httpBinding_IRegICANNConfirmWebSvc" binding="tns:httpBinding_IRegICANNConfirmWebSvc">
+      <soap:address location="http://dsweb.test.glbt1.gdg/RegICANNConfirmWebSvc/RegICANNConfirmWebSvcService.svc" />
+    </wsdl:port>
+    <wsdl:port name="httpsBinding_IRegICANNConfirmWebSvc" binding="tns:httpsBinding_IRegICANNConfirmWebSvc">
+      <soap:address location="https://g1twdsweb01.dc1.corp.gd/RegICANNConfirmWebSvc/RegICANNConfirmWebSvcService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

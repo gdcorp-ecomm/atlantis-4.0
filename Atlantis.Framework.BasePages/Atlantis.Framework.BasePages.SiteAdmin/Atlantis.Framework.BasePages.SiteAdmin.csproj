@@ -87,7 +87,7 @@
       <Name>Atlantis.Framework.Engine</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
+      <Project>{29e7ccc1-0f54-45f9-8492-62145046c625}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.ManagerCategories\Atlantis.Framework.ManagerCategories.Interface\Atlantis.Framework.ManagerCategories.Interface.csproj">

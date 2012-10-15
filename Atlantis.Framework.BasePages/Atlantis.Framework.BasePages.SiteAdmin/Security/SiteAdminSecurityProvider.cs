@@ -52,12 +52,24 @@ namespace Atlantis.Framework.BasePages.SiteAdmin.Security
       return _managerCategories.Value.HasManagerCategory(managerCategory);
     }
 
+    [Obsolete("Please use the method that does not require ISiteContext")]
     public bool IsCurrentUserInAnyRole(ISiteContext siteContext, params int[] managerCategories)
     {
       return _managerCategories.Value.HasAnyManagerCategories(managerCategories);
     }
 
+    [Obsolete("Please use the method that does not require ISiteContext")]
     public bool IsCurrentUserInAllRoles(ISiteContext siteContext, params int[] managerCategories)
+    {
+      return _managerCategories.Value.HasAllManagerCategories(managerCategories);
+    }
+
+    public bool IsCurrentUserInAnyRole(params int[] managerCategories)
+    {
+      return _managerCategories.Value.HasAnyManagerCategories(managerCategories);
+    }
+
+    public bool IsCurrentUserInAllRoles(params int[] managerCategories)
     {
       return _managerCategories.Value.HasAllManagerCategories(managerCategories);
     }

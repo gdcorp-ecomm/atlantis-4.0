@@ -24,7 +24,7 @@ namespace Atlantis.Framework.PromoOrderLevelUpdate.Impl
         {
           request = requestData as PromoOrderLevelUpdateRequestData;
           promo = request.PromoCode as OrderLevelPromoVersion;
-
+          request.PromoCode.ISCCode = config.GetConfigValue("CustomPromoTrackingCode");
           //Validation for dates
           if (!request.PromoCode.SkipValidation)
           {

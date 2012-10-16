@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 using System.Security.Cryptography.X509Certificates;
 using System.Net;
+using Atlantis.Framework.Engine;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.PromoOrderLevelCreate.Interface;
 using Atlantis.Framework.PromoOrderLevelCreate.Impl.WSgdPromoAPI;
@@ -19,7 +21,7 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Impl
         try
         {
           request = requestData as PromoOrderLevelCreateRequestData;
-
+          request.PromoCode.ISCCode = config.GetConfigValue("CustomPromoTrackingCode");
           //validation for dates
           if (!request.PromoCode.SkipValidation)
           {

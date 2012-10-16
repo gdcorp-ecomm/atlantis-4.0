@@ -62,9 +62,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSetUpAndSettings", "..\..\..\..\QA\AutomationFramework\TestSetUpAndSettings\TestSetUpAndSettings.csproj", "{EA376607-3E0E-4AF3-93B8-8224711D90EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.DPP", "Atlantis.Framework.CDS.Entities.DPP\Atlantis.Framework.CDS.Entities.DPP.csproj", "{65EE47AC-48FB-44EE-BFC7-6088FBB700FB}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 27
+		SccNumberOfProjects = 28
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -162,6 +164,9 @@ Global
 		SccProjectUniqueName26 = ..\\..\\..\\..\\QA\\AutomationFramework\\TestSetUpAndSettings\\TestSetUpAndSettings.csproj
 		SccProjectName26 = ../../../../QA/AutomationFramework/TestSetUpAndSettings
 		SccLocalPath26 = ..\\..\\..\\..\\QA\\AutomationFramework\\TestSetUpAndSettings
+		SccProjectUniqueName27 = Atlantis.Framework.CDS.Entities.DPP\\Atlantis.Framework.CDS.Entities.DPP.csproj
+		SccProjectName27 = Atlantis.Framework.CDS.Entities.DPP
+		SccLocalPath27 = Atlantis.Framework.CDS.Entities.DPP
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.CDS.vsmdi
@@ -435,6 +440,16 @@ Global
 		{EA376607-3E0E-4AF3-93B8-8224711D90EB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EA376607-3E0E-4AF3-93B8-8224711D90EB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EA376607-3E0E-4AF3-93B8-8224711D90EB}.Release|x86.ActiveCfg = Release|Any CPU
+		{65EE47AC-48FB-44EE-BFC7-6088FBB700FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65EE47AC-48FB-44EE-BFC7-6088FBB700FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65EE47AC-48FB-44EE-BFC7-6088FBB700FB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{65EE47AC-48FB-44EE-BFC7-6088FBB700FB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{65EE47AC-48FB-44EE-BFC7-6088FBB700FB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{65EE47AC-48FB-44EE-BFC7-6088FBB700FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65EE47AC-48FB-44EE-BFC7-6088FBB700FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65EE47AC-48FB-44EE-BFC7-6088FBB700FB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{65EE47AC-48FB-44EE-BFC7-6088FBB700FB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{65EE47AC-48FB-44EE-BFC7-6088FBB700FB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -61,7 +61,7 @@ namespace Atlantis.Framework.ShopperValidator.Impl
       shopperToValidate.Email.RuleContainer = new EmailRule(shopperToValidate.Email.Value);
       shopperToValidate.City.RuleContainer = new CityRule(shopperToValidate.City.Value);
       shopperToValidate.State.RuleContainer = new StateRule(shopperToValidate.State.Value);
-      shopperToValidate.Zip.RuleContainer = new ZipRule(shopperToValidate.Zip.Value);
+      shopperToValidate.Zip.RuleContainer = new ZipRule(shopperToValidate.Zip.Value, shopperToValidate.Country.Value, shopperToValidate.State.Value);
       shopperToValidate.Country.RuleContainer = new CountryRule(shopperToValidate.Country.Value);
       #endregion
 

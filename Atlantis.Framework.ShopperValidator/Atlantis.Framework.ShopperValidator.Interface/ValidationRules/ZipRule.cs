@@ -6,7 +6,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
 {
   public class ZipRule : RuleContainer
   {
-    public ZipRule(string value, string countryCode = "us", string state = "", string fieldName = FieldNames.Zip)
+    public ZipRule(string value, string countryCode, string state, string fieldName = FieldNames.Zip)
       : base()
     {
       base.RulesToValidate.Add(new MaxLengthRule(fieldName, value, LengthConstants.ZipMaxLength));

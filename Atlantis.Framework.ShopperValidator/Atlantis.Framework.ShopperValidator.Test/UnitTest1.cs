@@ -51,8 +51,8 @@ namespace Atlantis.Framework.ShopperValidator.Test
     public void TestIndividualRules()
     {
       EmailRule emailRule = new EmailRule(_emailAddress);
-      ZipRule zipRuleUs = new ZipRule(_zip, "us");
-      ZipRule zipRuleOther = new ZipRule(_zip, "aj");
+      ZipRule zipRuleUs = new ZipRule(_zip, "us", "notstate");
+      ZipRule zipRuleOther = new ZipRule(_zip, "aj", "notstate");
       LastNameRule lastName = new LastNameRule(_lastName);
       FirstNameRule firstName = new FirstNameRule(_firstName);
       Address1Rule address1 = new Address1Rule(_address1);
@@ -92,7 +92,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestOneRule()
     {
-      ZipRule zr = new ZipRule("<A<#<A>K", "ca");
+      ZipRule zr = new ZipRule(" E2L 4V8", "ca", "nostate");
       zr.Validate();
       CallInPinRule cipr = new CallInPinRule("1234");
       cipr.Validate();
@@ -122,9 +122,9 @@ namespace Atlantis.Framework.ShopperValidator.Test
       shopper.Address2.Value = _overMaxLength;
       shopper.CallInPin.Value = "1423";
       shopper.City.Value = "Lakewood";
-      shopper.Country.Value = "us"; 
+      shopper.Country.Value = "ca"; 
       shopper.Email.Value = "seth";
-      shopper.Password.Value = _overMaxLength;
+      shopper.Password.Value = "Seth1seth";
       shopper.PasswordConfirm.Value = shopper.Password.Value;
       shopper.PhoneHome.Value = "5";
       shopper.PhoneMobile.Value = "508-241-5881";
@@ -135,7 +135,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
       shopper.BirthMonth.Value = "9";
       shopper.AccountUsageType.Value = "1";
       shopper.Username.Value = "syukna";
-      shopper.Zip.Value = "j";
+      shopper.Zip.Value = "E2L 4V8";
       shopper.BirthDay.Value = "23";
 
 
@@ -143,7 +143,6 @@ namespace Atlantis.Framework.ShopperValidator.Test
       var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, shopper, isNewShopper);
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
-      string xu = response.GetException().Message;
       foreach (ShopperProperty prop in response.ValidatedShopper.AllShopperProperties)
       {
         if (prop.HasValidationRules && !prop.RuleContainer.IsValid)
@@ -151,6 +150,8 @@ namespace Atlantis.Framework.ShopperValidator.Test
           Debug.WriteLine("IsValid: " + prop.RuleContainer.IsValid.ToString() + "   ErrorMessage: " + prop.RuleContainer.ErrorMessage);
         }
       }
+
+      string x = "pause";
     }
     public void AddAllRules(params RuleContainer[] list)
     {

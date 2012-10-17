@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ICDSWidget.cs" />
+    <Compile Include="Interfaces\IContent.cs" />
     <Compile Include="Interfaces\IWidget.cs" />
     <Compile Include="Interfaces\IWidgetModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -64,6 +64,7 @@
     <Compile Include="Widgets\PanelBulkSearch.cs" />
     <Compile Include="Widgets\PlanBox3.cs" />
     <Compile Include="Widgets\PlanBoxContainer3.cs" />
+    <Compile Include="Widgets\SalesHeader3.cs" />
     <Compile Include="Widgets\SeoContent.cs" />
     <Compile Include="Widgets\SingleVideoPod.cs" />
     <Compile Include="Widgets\MultiVideoPod.cs" />

@@ -3,12 +3,12 @@ using Atlantis.Framework.CDS.Entities.Common;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 using Newtonsoft.Json;
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.Homepage.Widgets
 {
-  public class PanelContainer : IWidgetModel
+  public class HPPanelContainer : IWidgetModel
   {
 
-    public PanelContainer()
+    public HPPanelContainer()
     {
       Widgets = new List<Widget<IWidgetModel>>();
     }

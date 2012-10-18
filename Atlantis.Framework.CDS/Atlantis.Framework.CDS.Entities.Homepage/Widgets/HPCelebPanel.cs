@@ -4,29 +4,29 @@ using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.Homepage.Widgets
 {
-  public class CelebPanel : IWidgetModel
+  public class HPCelebPanel : IWidgetModel
   {
-    public IList<CelebInfo> CelebInfoList { get; set; }
+    public IList<HPCelebInfo> CelebInfoList { get; set; }
     public string PanelTitle { get; set; }
     public string BelowSearchTeaser { get; set; }
     public string PanelSwitchLinkTitle { get; set; }
     public string PanelSwitchLinkPanel { get; set; }
     public string DomainSearchTitle { get; set; }
-    public IList<MarketingAd> MarketingAdList { get; set; }
-    public IList<SnipeInfo> SnipeInfoList { get; set; }
-    public SocialMediaData SocialMediaData { get; set; }
-    public CelebPanel()
+    public IList<HPMarketingAd> MarketingAdList { get; set; }
+    public IList<HPSnipeInfo> SnipeInfoList { get; set; }
+    public HPSocialMediaData SocialMediaData { get; set; }
+    public HPCelebPanel()
     {
-      CelebInfoList = new List<CelebInfo>();
-      MarketingAdList = new List<MarketingAd>();
-      SnipeInfoList = new List<SnipeInfo>();
-      SocialMediaData = new SocialMediaData();
+      CelebInfoList = new List<HPCelebInfo>();
+      MarketingAdList = new List<HPMarketingAd>();
+      SnipeInfoList = new List<HPSnipeInfo>();
+      SocialMediaData = new HPSocialMediaData();
     }
   }
 
-  public class CelebInfo : IWidgetModel
+  public class HPCelebInfo : IWidgetModel
   {
     public string BackgroundImage { get; set; }
     public string BackgroundHeight { get; set; }
@@ -38,14 +38,14 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string SplitValue { get; set; }
   }
 
-  public class SnipeInfo : IWidgetModel
+  public class HPSnipeInfo : IWidgetModel
   {
     public string SnipeText { get; set; }
     public string SnipeHoverText { get; set; }
     public string CountryCodesList { get; set; }
   }
 
-  public class MarketingAd : IWidgetModel
+  public class HPMarketingAd : IWidgetModel
   {
     public string AdText { get; set; }
     public string AdLink { get; set; }
@@ -55,7 +55,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string SplitValue { get; set; }
   }
 
-  public class SocialMediaData
+  public class HPSocialMediaData
   {
     public string FacebookUrl { get; set; }
     public string Description { get; set; }

@@ -4,28 +4,26 @@ using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.Homepage.Widgets
 {
-  public class BannerPod : IWidgetModel
+  public class HPBobBannerPod : IWidgetModel
   {
-    public IList<BannerInfo> BannerInfoList { get; set; }
-
-    public BannerPod()
+    public IList<HPBobBannerInfo> BannerInfoList { get; set; }
+    public HPBobBannerPod()
     {
-      BannerInfoList = new List<BannerInfo>();
+      BannerInfoList = new List<HPBobBannerInfo>();
     }
   }
 
-  public class BannerInfo : IWidgetModel
+  public class HPBobBannerInfo : IWidgetModel
   {
     public string Size { get; set; }
     public string BackgroundColor { get; set; }
     public string IconImage { get; set; }
     public string ImagePosition { get; set; }
     public string Title { get; set; }
-    public string Text { get; set; }
-    public string TextAlign { get; set; }
-    public string TextSize { get; set; }
+    public string LinkText { get; set; }
+    public string QuoteTitle { get; set; }
     public string CountryCodesList { get; set; }
     public string SplitValue { get; set; }
   }

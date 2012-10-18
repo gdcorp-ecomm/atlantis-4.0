@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.Homepage.Widgets
 {
-  public class SingleVideoPod : IWidgetModel
+  public class HPSingleVideoPod : IWidgetModel
   {
-    public IList<SingleVideoPodItem> SingleVideoPodItemList { get; set; }
-    public SingleVideoPod()
+    public IList<HPSingleVideoPodItem> SingleVideoPodItemList { get; set; }
+    public HPSingleVideoPod()
     {
-      SingleVideoPodItemList = new List<SingleVideoPodItem>();
+      SingleVideoPodItemList = new List<HPSingleVideoPodItem>();
     }
   }
 
-  public class SingleVideoPodItem : IWidgetModel
+  public class HPSingleVideoPodItem : IWidgetModel
   {
     public string VideoTitle { get; set; }
     public string BackgroundImage { get; set; }

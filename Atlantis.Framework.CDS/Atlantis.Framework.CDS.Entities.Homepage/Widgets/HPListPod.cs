@@ -4,36 +4,36 @@ using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.Homepage.Widgets
 {
-  public class ListPod : IWidgetModel
+  public class HPListPod : IWidgetModel
   {
     public string BackgroundColor { get; set; }
     public string HoverBackgroundColor { get; set; }
     public string BorderColor { get; set; }
     public string HoverBorderColor { get; set; }
-    public IList<ListPodInfo> PodInfoList { get; set; }
-    public ListPod()
+    public IList<HPListPodInfo> PodInfoList { get; set; }
+    public HPListPod()
     {
-      PodInfoList = new List<ListPodInfo>();
+      PodInfoList = new List<HPListPodInfo>();
     }
   }
 
-  public class ListPodInfo : IWidgetModel
+  public class HPListPodInfo : IWidgetModel
   {
     public string PodTitle { get; set; }
-    public IList<ListPodListItem> PodListItems { get; set; }
+    public IList<HPListPodListItem> PodListItems { get; set; }
     public string CountryCodesList { get; set; }
     public string SplitValue { get; set; }
     public string BottomLinkText { get; set; }
     public string BottomLink { get; set; }
-    public ListPodInfo()
+    public HPListPodInfo()
     {
-      PodListItems = new List<ListPodListItem>();
+      PodListItems = new List<HPListPodListItem>();
     }
   }
 
-  public class ListPodListItem : IWidgetModel
+  public class HPListPodListItem : IWidgetModel
   {
     public string ItemText { get; set; }
     public string ItemLink { get; set; }

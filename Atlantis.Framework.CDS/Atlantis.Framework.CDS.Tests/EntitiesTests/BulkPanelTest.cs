@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using Atlantis.Framework.CDS.Interface;
-using Atlantis.Framework.CDS.Entities.Widgets;
+using Atlantis.Framework.CDS.Entities.Homepage.Widgets;
 using Atlantis.Framework.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestSetUpAndSettings;
@@ -68,7 +68,7 @@ namespace Atlantis.Framework.CDS.Tests
         [TestCategory("CDS"), Priority(0), TestAssertions(2), TestMethod]
         public void BulkPanelConstructorTest()
         {
-            BulkPanel target = new BulkPanel();
+          HPBulkPanel target = new HPBulkPanel();
             Assert.IsNotNull(target, "BulkPanel is null.");
             Assert.IsNotNull(target.BulkLinkItems, "BulkLinkItems is null");
         }
@@ -79,7 +79,7 @@ namespace Atlantis.Framework.CDS.Tests
         [TestCategory("CDS"), Priority(0), TestAssertions(8), TestMethod]
         public void BulkPanelPropertiesTest()
         {
-            BulkPanel target = new BulkPanel();
+          HPBulkPanel target = new HPBulkPanel();
 
             string expectedResult = "broncosBlue";
             target.BackgroundTopColor = expectedResult;
@@ -121,7 +121,7 @@ namespace Atlantis.Framework.CDS.Tests
         [TestCategory("CDS"), Priority(0), TestAssertions(1), TestMethod]
         public void BulkLinkItemConstructorTest()
         {
-            BulkLinkItem target = new BulkLinkItem();
+          HPBulkLinkItem target = new HPBulkLinkItem();
             Assert.IsNotNull(target, "BulkLinkItem is null.");
         }
 
@@ -131,7 +131,7 @@ namespace Atlantis.Framework.CDS.Tests
         [TestCategory("CDS"), Priority(0), TestAssertions(3), TestMethod]
         public void BulkLinkItemPropertiesTest()
         {
-            BulkLinkItem target = new BulkLinkItem();
+          HPBulkLinkItem target = new HPBulkLinkItem();
 
             string expectedResult = "right";
             target.LinkPosition = expectedResult;

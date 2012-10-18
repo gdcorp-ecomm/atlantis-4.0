@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using Atlantis.Framework.CDS.Interface;
-using Atlantis.Framework.CDS.Entities.Widgets;
+using Atlantis.Framework.CDS.Entities.Homepage.Widgets;
 using Atlantis.Framework.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestSetUpAndSettings;
@@ -68,7 +68,7 @@ namespace Atlantis.Framework.CDS.Tests
         [TestCategory("CDS"), Priority(0), TestAssertions(2), TestMethod]
         public void BannerPodConstructorTest()
         {
-            BannerPod target = new BannerPod();
+          HPBannerPod target = new HPBannerPod();
             Assert.IsNotNull(target, "BannerPod is null.");
             Assert.IsNotNull(target.BannerInfoList, "Banner info list is null");
         }
@@ -79,7 +79,7 @@ namespace Atlantis.Framework.CDS.Tests
         [TestCategory("CDS"), Priority(0), TestAssertions(1), TestMethod]
         public void BannerInfoConstructorTest()
         {
-            BannerInfo target = new BannerInfo();
+          HPBannerInfo target = new HPBannerInfo();
             Assert.IsNotNull(target, "BannerInfo is null.");
         }
 
@@ -89,7 +89,7 @@ namespace Atlantis.Framework.CDS.Tests
         [TestCategory("CDS"), Priority(0), TestAssertions(10), TestMethod]
         public void BannerInfoPropertiesTest()
         {
-            BannerInfo target = new BannerInfo();
+          HPBannerInfo target = new HPBannerInfo();
 
             string expectedResult = "small";
             target.Size = expectedResult;

@@ -4,42 +4,42 @@ using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.Homepage.Widgets
 {
-  public class TechPanel : IWidgetModel
+  public class HPTechPanel : IWidgetModel
   {
-    public IList<InsideInfo> InsideInfoList { get; set; }
+    public IList<HPInsideInfo> InsideInfoList { get; set; }
     public string BackgroundImage { get; set; }
     public string PanelTitle { get; set; }
     public string BelowSearchTeaser { get; set; }
     public string PanelSwitchLinkTitle { get; set; }
     public string PanelSwitchLinkPanel { get; set; }
     public string DomainSearchTitle { get; set; }
-    public IList<TechMarketingAd> MarketingAdList { get; set; }
-    public IList<TechSnipeInfo> SnipeInfoList { get; set; }
-    public TechSocialMediaData SocialMediaData { get; set; }
-    public TechPanel()
+    public IList<HPTechMarketingAd> MarketingAdList { get; set; }
+    public IList<HPTechSnipeInfo> SnipeInfoList { get; set; }
+    public HPTechSocialMediaData SocialMediaData { get; set; }
+    public HPTechPanel()
     {
-      InsideInfoList = new List<InsideInfo>();
-      MarketingAdList = new List<TechMarketingAd>();
-      SnipeInfoList = new List<TechSnipeInfo>();
-      SocialMediaData = new TechSocialMediaData();
+      InsideInfoList = new List<HPInsideInfo>();
+      MarketingAdList = new List<HPTechMarketingAd>();
+      SnipeInfoList = new List<HPTechSnipeInfo>();
+      SocialMediaData = new HPTechSocialMediaData();
     }
   }
 
-  public class InsideInfo : IWidgetModel
+  public class HPInsideInfo : IWidgetModel
   {
-    public IList<InsideInfoItem> InsideInfoItemList { get; set; }
+    public IList<HPInsideInfoItem> InsideInfoItemList { get; set; }
     public string InsideImage { get; set; }
     public string CountryCodesList { get; set; }
     public string SplitValue { get; set; }
-    public InsideInfo()
+    public HPInsideInfo()
     {
-      InsideInfoItemList = new List<InsideInfoItem>();
+      InsideInfoItemList = new List<HPInsideInfoItem>();
     }
   }
 
-  public class InsideInfoItem : IWidgetModel
+  public class HPInsideInfoItem : IWidgetModel
   {
     public string ImagePosition { get; set; }
     public string Title { get; set; }
@@ -48,14 +48,14 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string LinkName { get; set; }
   }
 
-  public class TechSnipeInfo : IWidgetModel
+  public class HPTechSnipeInfo : IWidgetModel
   {
     public string SnipeText { get; set; }
     public string SnipeHoverText { get; set; }
     public string CountryCodesList { get; set; }
   }
 
-  public class TechMarketingAd : IWidgetModel
+  public class HPTechMarketingAd : IWidgetModel
   {
     public string AdText { get; set; }
     public string AdLink { get; set; }
@@ -65,7 +65,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public string SplitValue { get; set; }
   }
 
-  public class TechSocialMediaData : IWidgetModel
+  public class HPTechSocialMediaData : IWidgetModel
   {
     public string FacebookUrl { get; set; }
     public string Description { get; set; }

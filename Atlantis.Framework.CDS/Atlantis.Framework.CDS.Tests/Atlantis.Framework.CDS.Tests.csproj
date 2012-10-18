@@ -124,6 +124,10 @@
       <Project>{31fbc53c-17ac-48fa-acfb-3512db222f4f}</Project>
       <Name>Atlantis.Framework.CDS.Entities.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.CDS.Entities.Homepage\Atlantis.Framework.CDS.Entities.Homepage.csproj">
+      <Project>{75d18432-b7c7-45cd-8f82-572ccd12a655}</Project>
+      <Name>Atlantis.Framework.CDS.Entities.Homepage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.CDS.Entities\Atlantis.Framework.CDS.Entities.csproj">
       <Project>{70E74CBB-1079-4EFF-AE95-5B6542C5DA80}</Project>
       <Name>Atlantis.Framework.CDS.Entities</Name>

@@ -4,34 +4,34 @@ using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.Homepage.Widgets
 {
-  public class MultiVideoPod : IWidgetModel
+  public class HPMultiVideoPod : IWidgetModel
   {
-    public IList<VideoPodItem> VideoPodItemList { get; set; }
-    public MultiVideoPod()
+    public IList<HPVideoPodItem> VideoPodItemList { get; set; }
+    public HPMultiVideoPod()
     {
-      VideoPodItemList = new List<VideoPodItem>();
+      VideoPodItemList = new List<HPVideoPodItem>();
     }
   }
 
-  public class VideoPodItem : IWidgetModel
+  public class HPVideoPodItem : IWidgetModel
   {
     public string PodTitle { get; set; }
     public string BackgroundColor { get; set; }
     public string HoverBackgroundColor { get; set; }
     public string BorderColor { get; set; }
     public string HoverBorderColor { get; set; }
-    public IList<Video> VideosList { get; set; }
+    public IList<HPVideo> VideosList { get; set; }
     public string CountryCodesList { get; set; }
     public string SplitValue { get; set; }
-    public VideoPodItem()
+    public HPVideoPodItem()
     {
-      VideosList = new List<Video>();
+      VideosList = new List<HPVideo>();
     }
   }
 
-  public class Video : IWidgetModel
+  public class HPVideo : IWidgetModel
   {
     public string IconImage { get; set; }
     public string ImagePositionTop { get; set; }

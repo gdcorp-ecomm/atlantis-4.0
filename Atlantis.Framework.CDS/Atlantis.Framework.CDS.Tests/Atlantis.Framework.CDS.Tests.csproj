@@ -76,10 +76,6 @@
     <Compile Include="TripletTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\QA\AutomationFramework\TestSetUpAndSettings\TestSetUpAndSettings.csproj">
-      <Project>{ea376607-3e0e-4af3-93b8-8224711d90eb}</Project>
-      <Name>TestSetUpAndSettings</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
       <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
       <Name>Atlantis.Framework.DataCache</Name>

@@ -9,7 +9,6 @@ namespace Atlantis.Framework.CDS.Entities.Mobile
     }
 
     public string DefaultBanner { get; set; }
-    public string DefaultBanner { get; set; }
     public string PromoBanner { get; set; }
     public string[] PromoBannerCodeList { get; set; }
 

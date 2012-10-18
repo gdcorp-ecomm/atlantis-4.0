@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Atlantis.Framework.CDS.Entities.Common">
-      <HintPath>..\Atlantis.Framework.CDS.Entities.Common\bin\Release\Atlantis.Framework.CDS.Entities.Common.dll</HintPath>
+      <HintPath>..\Atlantis.Framework.CDS.Entities.Common\obj\Debug\Atlantis.Framework.CDS.Entities.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

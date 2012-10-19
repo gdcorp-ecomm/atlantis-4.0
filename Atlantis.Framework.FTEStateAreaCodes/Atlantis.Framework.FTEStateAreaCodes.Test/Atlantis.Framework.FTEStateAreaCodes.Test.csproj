@@ -3,15 +3,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{47C9AF7B-4E4A-41FD-B844-7BE8A95F8546}</ProjectGuid>
+    <ProjectGuid>{BDCAFEC7-BD9D-4F5E-8DB6-ABD4AF1DF3F9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.FTEAreaCodes.Impl</RootNamespace>
-    <AssemblyName>Atlantis.Framework.FTEAreaCodes.Impl</AssemblyName>
+    <RootNamespace>Atlantis.Framework.FTEStateAreaCodes.Test</RootNamespace>
+    <AssemblyName>Atlantis.Framework.FTEStateAreaCodes.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -35,20 +37,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Atlantis.Framework.FTEAreaCodesRequest.cs" />
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
+      <Project>{7F2738F8-683C-49E7-88CD-E986C70F0321}</Project>
+      <Name>Atlantis.Framework.DataCache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{D30157B2-C1B3-4073-BA5E-632E2337A997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -65,12 +81,16 @@
       <Project>{17EBED78-9469-4678-96B1-A175AB221916}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.FTEAreaCodes.Interface\Atlantis.Framework.FTEAreaCodes.Interface.csproj">
-      <Project>{E12984EE-D12A-4EB5-BF6D-BEC7BCB18E98}</Project>
-      <Name>Atlantis.Framework.FTEAreaCodes.Interface</Name>
+    <ProjectReference Include="..\Atlantis.Framework.FTEStateAreaCodes.Impl\Atlantis.Framework.FTEStateAreaCodes.Impl.csproj">
+      <Project>{6F2A31F5-F545-44BA-973D-BC67E7647D6E}</Project>
+      <Name>Atlantis.Framework.FTEStateAreaCodes.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.FTEStateAreaCodes.Interface\Atlantis.Framework.FTEStateAreaCodes.Interface.csproj">
+      <Project>{81D28799-5A79-414A-9C0E-1E6B4E74BD23}</Project>
+      <Name>Atlantis.Framework.FTEStateAreaCodes.Interface</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -47,10 +47,6 @@
   <ItemGroup>
     <Compile Include="Atlantis.Framework.FTEAreaCodesRequestData.cs" />
     <Compile Include="Atlantis.Framework.FTEAreaCodesResponseData.cs" />
-    <Compile Include="Atlantis.Framework.FTEStateAreaCodesRequestData.cs" />
-    <Compile Include="Atlantis.Framework.FTEStateAreaCodesResponseData.cs" />
-    <Compile Include="FTEWebRequest.cs" />
-    <Compile Include="Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

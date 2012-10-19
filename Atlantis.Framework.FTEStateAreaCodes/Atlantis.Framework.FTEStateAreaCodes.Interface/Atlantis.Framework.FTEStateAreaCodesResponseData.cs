@@ -1,19 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.Interface;
-using System.Collections;
 
-namespace Atlantis.Framework.FTEAreaCodes.Interface
+namespace Atlantis.Framework.FTEStateAreaCodes.Interface
 {
   public class FTEStateAreaCodesResponseData : IResponseData
   {
     #region Properties
 
     private AtlantisException _exception = null;
-    private ArrayList _areaCodes;
+    private List<string> _areaCodes;
 
     #endregion
 
-    public FTEStateAreaCodesResponseData(ArrayList areaCodes)
+    public FTEStateAreaCodesResponseData(List<string> areaCodes)
     {
       this._areaCodes = areaCodes;
     }
@@ -40,7 +40,7 @@ namespace Atlantis.Framework.FTEAreaCodes.Interface
       throw new NotImplementedException();
     }
 
-    public ArrayList AreaCodes
+    public List<string> AreaCodes
     {
       get { return this._areaCodes; }
     }

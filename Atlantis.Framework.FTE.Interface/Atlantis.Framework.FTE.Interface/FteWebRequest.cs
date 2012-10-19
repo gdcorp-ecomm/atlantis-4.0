@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Atlantis.Framework.Interface;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
-using System.IO;
 
-namespace Atlantis.Framework.FTEAreaCodes.Interface
+namespace Atlantis.Framework.FTE.Interface
 {
-  public class FTEWebRequest
+  public class FteWebRequest
   {
-
     public void GetFTEToken(string urlRequest, string admin, string password, Properties getApiProps, out WebResponse webResponse, out HttpWebRequest httpWebRequest)
     {
       httpWebRequest = (HttpWebRequest)WebRequest.Create(urlRequest);
@@ -29,8 +24,10 @@ namespace Atlantis.Framework.FTEAreaCodes.Interface
       getApiProps.GetTokenProps();
     }
 
-    public void StatesAvailable(Properties getAPIProperties, string urlRequest, HttpWebRequest httpWebRequest, WebResponse webResponse)
+    public void StatesAvailable(Properties getAPIProperties, string urlRequest, HttpWebRequest httpWebRequest, WebResponse webResponse, string ccCode)
     {
+      getAPIProperties.GetStateProps(ccCode);
+
       httpWebRequest = (HttpWebRequest)WebRequest.Create(urlRequest);
       httpWebRequest.ContentType = "text/json";
       httpWebRequest.Method = "POST";

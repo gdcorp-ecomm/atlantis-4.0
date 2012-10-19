@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.FTEAreaCodes.Impl")]
+[assembly: AssemblyTitle("Atlantis.Framework.FTEStateAreaCodes.Interface")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
 #else
@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 #endif
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Atlantis.Framework.FTEAreaCodes.Impl")]
+[assembly: AssemblyProduct("Atlantis.Framework.FTEStateAreaCodes.Interface")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e6573348-949b-41de-933d-c4f7488f0959")]
+[assembly: Guid("45f7ca7b-8244-44bb-ba31-6af13188943c")]
 
 // Version information for an assembly consists of the following four values:
 //

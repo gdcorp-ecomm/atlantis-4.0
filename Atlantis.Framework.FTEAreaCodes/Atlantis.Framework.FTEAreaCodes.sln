@@ -22,9 +22,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.FTE.Interface", "..\Atlantis.Framework.FTE.Interface\Atlantis.Framework.FTE.Interface\Atlantis.Framework.FTE.Interface.csproj", "{E9D92B34-AF65-469D-904D-71F431EE3A3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{17EBED78-9469-4678-96B1-A175AB221916}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -49,6 +53,13 @@ Global
 		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.FTEAreaCodes.sln
 		SccProjectName6 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
 		SccLocalPath6 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.FTE.Interface\\Atlantis.Framework.FTE.Interface\\Atlantis.Framework.FTE.Interface.csproj
+		SccProjectName7 = ../Atlantis.Framework.FTE.Interface/Atlantis.Framework.FTE.Interface
+		SccLocalPath7 = ..\\Atlantis.Framework.FTE.Interface\\Atlantis.Framework.FTE.Interface
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.FTEAreaCodes.sln
+		SccProjectName8 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath8 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.FTEAreaCodes.vsmdi
@@ -82,6 +93,14 @@ Global
 		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9D92B34-AF65-469D-904D-71F431EE3A3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9D92B34-AF65-469D-904D-71F431EE3A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9D92B34-AF65-469D-904D-71F431EE3A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9D92B34-AF65-469D-904D-71F431EE3A3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,5 +109,6 @@ Global
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {D42DD548-6EFB-4594-B9DC-FAF90A4AF1C2}
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {D42DD548-6EFB-4594-B9DC-FAF90A4AF1C2}
 		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {D42DD548-6EFB-4594-B9DC-FAF90A4AF1C2}
+		{17EBED78-9469-4678-96B1-A175AB221916} = {D42DD548-6EFB-4594-B9DC-FAF90A4AF1C2}
 	EndGlobalSection
 EndGlobal

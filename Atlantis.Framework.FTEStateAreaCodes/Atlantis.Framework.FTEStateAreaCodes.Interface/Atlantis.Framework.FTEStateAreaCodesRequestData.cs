@@ -1,8 +1,8 @@
 ﻿using System;
-using Atlantis.Framework.Interface;
 using System.Security.Cryptography;
+using Atlantis.Framework.Interface;
 
-namespace Atlantis.Framework.FTEAreaCodes.Interface
+namespace Atlantis.Framework.FTEStateAreaCodes.Interface
 {
   public class FTEStateAreaCodesRequestData : RequestData
   {

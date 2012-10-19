@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{47C9AF7B-4E4A-41FD-B844-7BE8A95F8546}</ProjectGuid>
+    <ProjectGuid>{81D28799-5A79-414A-9C0E-1E6B4E74BD23}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.FTEAreaCodes.Impl</RootNamespace>
-    <AssemblyName>Atlantis.Framework.FTEAreaCodes.Impl</AssemblyName>
+    <RootNamespace>Atlantis.Framework.FTEStateAreaCodes.Interface</RootNamespace>
+    <AssemblyName>Atlantis.Framework.FTEStateAreaCodes.Interface</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -37,7 +37,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,7 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Atlantis.Framework.FTEAreaCodesRequest.cs" />
+    <Compile Include="Atlantis.Framework.FTEStateAreaCodesRequestData.cs" />
+    <Compile Include="Atlantis.Framework.FTEStateAreaCodesResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -56,18 +56,6 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.FTE.Interface\Atlantis.Framework.FTE.Interface\Atlantis.Framework.FTE.Interface.csproj">
-      <Project>{E9D92B34-AF65-469D-904D-71F431EE3A3D}</Project>
-      <Name>Atlantis.Framework.FTE.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
-      <Project>{17EBED78-9469-4678-96B1-A175AB221916}</Project>
-      <Name>Atlantis.Framework.Nimitz</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.FTEAreaCodes.Interface\Atlantis.Framework.FTEAreaCodes.Interface.csproj">
-      <Project>{E12984EE-D12A-4EB5-BF6D-BEC7BCB18E98}</Project>
-      <Name>Atlantis.Framework.FTEAreaCodes.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Net;
+using System.Xml;
+using Atlantis.Framework.FTE.Interface;
 using Atlantis.Framework.FTEAreaCodes.Interface;
 using Atlantis.Framework.Interface;
-
 
 namespace Atlantis.Framework.FTEAreaCodes.Impl
 {
@@ -14,18 +15,22 @@ namespace Atlantis.Framework.FTEAreaCodes.Impl
 
       try
       {
+        var request = (FTEAreaCodesRequestData)requestData;
+
         Properties getAPIProperties = new Properties();
-        FTEWebRequest FteApiRequestStates = new FTEWebRequest();
+        FteWebRequest FteApiRequestStates = new FteWebRequest();
         HttpWebRequest httpWebRequest = null;
         WebResponse webResponse = null;
 
-        string admin = getAPIProperties.RequestToken["admin_user_name"].ToString();
-        string password = getAPIProperties.Password;
+        var nimitzAuthXml = Nimitz.NetConnect.LookupConnectInfo(config, Nimitz.ConnectLookupType.Xml);
+
+        AuthProperties(nimitzAuthXml, getAPIProperties);
+
         string urlRequest = ((WsConfigElement)config).WSURL;
 
-        FteApiRequestStates.GetFTEToken(urlRequest, admin, password, getAPIProperties, out webResponse, out httpWebRequest);
+        FteApiRequestStates.GetFTEToken(urlRequest, getAPIProperties.Admin, getAPIProperties.Password, getAPIProperties, out webResponse, out httpWebRequest);
 
-        FteApiRequestStates.StatesAvailable(getAPIProperties, urlRequest, httpWebRequest, webResponse);
+        FteApiRequestStates.StatesAvailable(getAPIProperties, urlRequest, httpWebRequest, webResponse, request.CcCode);
 
         responseData = new FTEAreaCodesResponseData(getAPIProperties.ListedStates);
       }
@@ -38,6 +43,21 @@ namespace Atlantis.Framework.FTEAreaCodes.Impl
         responseData = new FTEAreaCodesResponseData(requestData, ex);
       }
       return responseData;
+    }
+
+    private void AuthProperties(string nimitzAuthXml, Properties getAPIProperties)
+    {
+
+      XmlDocument xdoc = new XmlDocument();
+      xdoc.LoadXml(nimitzAuthXml);
+
+      XmlNode authNameNode = xdoc.SelectSingleNode("Connect/UserID");
+      XmlNode authPasswordNode = xdoc.SelectSingleNode("Connect/Password");
+
+      string authName = authNameNode.FirstChild.Value;
+      string authToken = authPasswordNode.FirstChild.Value;
+
+      getAPIProperties.GetLoginCred(authName, authToken);
     }
   }
 }

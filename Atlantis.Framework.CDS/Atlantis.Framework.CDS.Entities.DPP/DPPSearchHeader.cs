@@ -1,6 +1,6 @@
 ﻿using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.DPP.Widgets
 {
   public class DPPSearchHeader : IWidgetModel
   {

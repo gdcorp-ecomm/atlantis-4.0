@@ -1,6 +1,6 @@
 ﻿using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
-namespace Atlantis.Framework.CDS.Entities.Mobile
+namespace Atlantis.Framework.CDS.Entities.Mobile.Widgets
 {
   class MobileDomainSearchWidget : IWidgetModel
   {

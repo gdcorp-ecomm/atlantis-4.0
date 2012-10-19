@@ -1,18 +1,18 @@
 ﻿using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
-namespace Atlantis.Framework.CDS.Entities.DPP
+namespace Atlantis.Framework.CDS.Entities.Widgets
 {
   public class DPPSearchHeader : IWidgetModel
+  {
+    public DPPSearchHeader()
     {
-      public DPPSearchHeader()
-      {
-      }
-
-      public string HeaderText { get; set; }
-      public string CSS { get; set; }
-      public string JavaScript { get; set; }
-      public string Markup { get; set; }
-      public string DPPUserControl { get; set; }
-
     }
+
+    public string HeaderText { get; set; }
+    public string CSS { get; set; }
+    public string JavaScript { get; set; }
+    public string Markup { get; set; }
+    public string DPPUserControl { get; set; }
+
+  }
 }

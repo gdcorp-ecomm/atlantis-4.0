@@ -2,15 +2,16 @@
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
-  class SalesMagicBox : IWidgetModel
+  public class SalesMagicBox : IWidgetModel
   {
     public SalesMagicBox()
-      {
-      }
+    {
+    }
 
-      public string HeaderText { get; set; }
-      public string CSS { get; set; }
-      public string JavaScript { get; set; }
-      public string Markup { get; set; }
+    public string HeaderText { get; set; }
+    public string CSS { get; set; }
+    public string JavaScript { get; set; }
+    public string Markup { get; set; }
+
   }
 }

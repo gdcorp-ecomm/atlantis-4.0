@@ -2,7 +2,7 @@
 
 namespace Atlantis.Framework.CDS.Entities.Mobile.Widgets
 {
-  class MobileDomainSearchWidget : IWidgetModel
+  public class MobileDomainSearchWidget : IWidgetModel
   {
     public MobileDomainSearchWidget()
     {

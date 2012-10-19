@@ -60,6 +60,7 @@
     <Compile Include="Widgets\PlanBox3.cs" />
     <Compile Include="Widgets\PlanBoxContainer3.cs" />
     <Compile Include="Widgets\SalesHeader3.cs" />
+    <Compile Include="Widgets\SalesMagicBox.cs" />
     <Compile Include="Widgets\TabContent2.cs" />
     <Compile Include="Widgets\DPPCrossSellModal.cs" />
     <Compile Include="Widgets\DPPPrivacyModal.cs" />

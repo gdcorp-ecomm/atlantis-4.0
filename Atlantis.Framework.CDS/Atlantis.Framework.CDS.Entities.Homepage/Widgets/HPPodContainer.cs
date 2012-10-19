@@ -19,6 +19,7 @@ namespace Atlantis.Framework.CDS.Entities.Homepage.Widgets
     [JsonIgnore]
     public List<Widget<IWidgetModel>> Widgets { get; set; }
     public bool UseRoundedCorners { get; set; }
+    public string PodWidth { get; set; }
   }
 }
 

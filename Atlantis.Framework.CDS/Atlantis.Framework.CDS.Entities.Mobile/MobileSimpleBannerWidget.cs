@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.CDS.Entities.Common.Interfaces;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 
 namespace Atlantis.Framework.CDS.Entities.Mobile.Widgets
 {
@@ -10,7 +11,7 @@ namespace Atlantis.Framework.CDS.Entities.Mobile.Widgets
 
     public string DefaultBanner { get; set; }
     public string PromoBanner { get; set; }
-    public string[] PromoBannerCodeList { get; set; }
+    public List<string> PromoBannerCodeList { get; set; }
 
   }
 }

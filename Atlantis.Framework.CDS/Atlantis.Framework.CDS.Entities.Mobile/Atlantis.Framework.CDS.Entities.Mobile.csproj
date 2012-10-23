@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MobileDomainSearchWidget.cs" />
+    <Compile Include="MobileProductDetailsWidget.cs" />
+    <Compile Include="MobileProductDisclaimersWidget.cs" />
     <Compile Include="MobileSimpleBannerWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,6 +54,10 @@
     <ProjectReference Include="..\Atlantis.Framework.CDS.Entities.Common\Atlantis.Framework.CDS.Entities.Common.csproj">
       <Project>{31fbc53c-17ac-48fa-acfb-3512db222f4f}</Project>
       <Name>Atlantis.Framework.CDS.Entities.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.CDS.Entities\Atlantis.Framework.CDS.Entities.csproj">
+      <Project>{70e74cbb-1079-4eff-ae95-5b6542c5da80}</Project>
+      <Name>Atlantis.Framework.CDS.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

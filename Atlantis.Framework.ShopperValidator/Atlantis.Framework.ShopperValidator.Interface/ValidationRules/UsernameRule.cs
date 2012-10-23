@@ -4,7 +4,7 @@ using Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRules;
 
 namespace Atlantis.Framework.ShopperValidator.Interface.Validator
 {
-  public class UsernameRule : RuleContainer
+  public class UsernameRule : SingleValueRuleContainer
   {
     private string _username;
     private string _fieldName;
@@ -15,13 +15,13 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
     /// <summary>
     /// Should ONLY be used when requestUrl, pathway, and pageCount are undefined.  Otherwise use constructor which accepts these parameters.
     /// </summary>
-    public UsernameRule(string value, bool isNewShopper = false, string fieldName = FieldNames.Username)
-      : base()
+    public UsernameRule(string value, bool isNewShopper = false, string fieldName = FieldNames.Username, bool isRequired = false)
+      : base(value, fieldName, isRequired)
     {
       _username = value;
       _fieldName = fieldName;
 
-      base.RulesToValidate.Add(new RequiredRule(_fieldName, _username));
+      //base.RulesToValidate.Add(new RequiredRule(_fieldName, _username));
       base.RulesToValidate.Add(new InvalidCharactersRule(_fieldName, _username));
       base.RulesToValidate.Add(new MaxLengthRule(_fieldName, _username, LengthConstants.UsernameMaxLength));
 
@@ -31,8 +31,8 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
       }
     }
     
-    public UsernameRule(string value, string requestUrl, string pathway, int pageCount, bool isNewShopper = false, string fieldName = FieldNames.Username)
-      : this(value, isNewShopper, fieldName)
+    public UsernameRule(string value, string requestUrl, string pathway, int pageCount, bool isNewShopper = false, string fieldName = FieldNames.Username, bool isRequired = false)
+      : this(value, isNewShopper, fieldName, isRequired)
     {
       _requestUrl = requestUrl;
       _pageCount = pageCount;

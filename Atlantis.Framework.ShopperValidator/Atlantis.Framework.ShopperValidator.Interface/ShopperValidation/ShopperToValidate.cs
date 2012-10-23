@@ -108,6 +108,52 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ShopperValidation
       return shopperProperty;
     }
 
-    #endregion       
+    #endregion
+
+    #region Shopper required field init methods
+
+    // StandardShopper is the extended account creation requirements before the quick creation initiative
+    public void InitStandardRequiredFields()
+    {
+      // location
+      this.Address1.IsRequired = true;
+      this.City.IsRequired = true;
+      this.Country.IsRequired = true;
+      this.State.IsRequired = true;
+      this.Zip.IsRequired = true;
+
+      // personal
+      this.FirstName.IsRequired = true;
+      this.LastName.IsRequired = true;
+
+      // contact
+      this.Email.IsRequired = true;
+      this.PhoneWork.IsRequired = true;
+
+      // credentials
+      this.Username.IsRequired = true;
+      this.Password.IsRequired = true;
+      this.PasswordHint.IsRequired = true;
+      this.CallInPin.IsRequired = true;
+    }
+
+    // SlimShopper is the limited account creation requirements after the quick creation initiative
+    public void InitSlimRequiredFields()
+    {
+      // personal
+      this.FirstName.IsRequired = true;
+      this.LastName.IsRequired = true;
+
+      // contact
+      this.Email.IsRequired = true;
+
+      // credentials
+      this.Username.IsRequired = true;
+      this.Password.IsRequired = true;
+      this.PasswordHint.IsRequired = true;
+      this.CallInPin.IsRequired = true;
+    }
+
+    #endregion
   }
 }

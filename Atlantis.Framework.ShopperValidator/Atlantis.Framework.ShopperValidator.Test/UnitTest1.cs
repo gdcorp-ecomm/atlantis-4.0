@@ -69,7 +69,18 @@ namespace Atlantis.Framework.ShopperValidator.Test
       PasswordRule passwordruleNoCapital = new PasswordRule("thisisnotvalid1234", false);
       PasswordRule passwordruleNoNumber = new PasswordRule("Thisisnotvalid", false);
       PasswordRule passwordruleMinLength = new PasswordRule("short", false);
-      PasswordRule passwordruleMaxLength = new PasswordRule(_overMaxLength, false);
+
+      bool blewChunks = false;
+      try
+      {
+        PasswordRule passwordruleMaxLength = new PasswordRule(_overMaxLength, false);
+      }
+      catch(System.InvalidOperationException e)
+      {
+        blewChunks = true;
+      }
+      Assert.IsTrue(blewChunks);
+
       PasswordRule passwordruleNotMatchCurrentHint = new PasswordRule("Seth456sethseth", false, "867900");
 
       BlankRule mybr = new BlankRule(false, "error");
@@ -78,7 +89,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
 
       AddAllRules(emailRule, zipRuleUs, zipRuleOther, lastName, firstName, address1, address2, stateRule,
         workInvalidStart, workPhoneInvalidChars, workPhoneValid, workPhoneUsFail, workPhoneIntl, workPhoneMissing, workPhoneMissingValid,
-        passwordruleBlacklist, passwordruleNoCapital, passwordruleNoNumber, passwordruleMinLength, passwordruleMaxLength, passwordruleNotMatchCurrentHint,
+        passwordruleBlacklist, passwordruleNoCapital, passwordruleNoNumber, passwordruleMinLength, passwordruleNotMatchCurrentHint,
         passwordRuleNotMatchNewHint);
 
       ShopperRuleValidator validator = new ShopperRuleValidator(rules);
@@ -153,6 +164,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
 
       string x = "pause";
     }
+
     public void AddAllRules(params RuleContainer[] list)
     {
       foreach (RuleContainer rule in list)
@@ -168,5 +180,193 @@ namespace Atlantis.Framework.ShopperValidator.Test
         Debug.WriteLine("IsValid: " + rule.IsValid.ToString() + "   ErrorMessage: " + rule.ErrorMessage);
       }
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [ExpectedException(typeof(System.InvalidOperationException), "Password cannot be greater than 255 characters.  Trim Password before supplying it to the validator.")]
+    public void TestOverMaxLengthPassword()
+    {
+      PasswordRule passwordruleMaxLength = new PasswordRule(_overMaxLength, false);
+      AddAllRules(passwordruleMaxLength);
+
+      ShopperRuleValidator validator = new ShopperRuleValidator(rules);
+      validator.ValidateAllRules();
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void TestAllRulesBlank()
+    {
+      ShopperToValidate shopper = new ShopperToValidate();
+
+      #region location
+      shopper.Address1.Value = "";
+      shopper.Address2.Value = "";
+      shopper.City.Value = "";
+      shopper.State.Value = "";
+      shopper.Country.Value = "";
+      shopper.Zip.Value = "";
+      #endregion
+
+      #region contact
+      shopper.Email.Value = "";
+      shopper.PhoneHome.Value = "";
+      shopper.PhoneMobile.Value = "";
+      shopper.PhoneMobileSurvey.Value = "";
+      shopper.PhoneWork.Value = "";
+      shopper.PhoneWorkExtension.Value = "";
+      #endregion
+
+      #region personal
+      shopper.FirstName.Value = "";
+      shopper.LastName.Value = "";
+      shopper.BirthDay.Value = "";
+      shopper.BirthMonth.Value = "";
+      shopper.AccountUsageType.Value = "";
+      #endregion
+
+      #region credentials
+      shopper.Username.Value = "";
+      shopper.Password.Value = "";
+      shopper.PasswordConfirm.Value = shopper.Password.Value;
+      shopper.PasswordHint.Value = "";
+      shopper.CallInPin.Value = "";
+      #endregion
+
+      bool isNewShopper = true;
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, shopper, isNewShopper);
+      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+
+      foreach (ShopperProperty prop in response.ValidatedShopper.AllShopperProperties)
+      {
+        if (prop.HasValidationRules && !prop.RuleContainer.IsValid)
+        {
+          Debug.WriteLine("IsValid: " + prop.RuleContainer.IsValid.ToString() + "   ErrorMessage: " + prop.RuleContainer.ErrorMessage);
+        }
+      }
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    #region Tests with Required Fields
+    
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void TestStandardShopperMinimumRequired()
+    {
+      ShopperToValidate shopper = new ShopperToValidate("www.requesturl.com", "pathway", 0);
+      shopper.InitStandardRequiredFields();
+
+      #region location
+      shopper.Address1.Value = "123 any street";
+      //shopper.Address2.Value = "";
+      shopper.City.Value = "Lakewood";
+      shopper.State.Value = "CO";
+      shopper.Country.Value = "ca";
+      shopper.Zip.Value = "E2L 4V8";
+      #endregion
+
+      #region contact
+      shopper.Email.Value = "seth@sdr.coskm";
+      //shopper.PhoneHome.Value = "5";
+      //shopper.PhoneMobile.Value = "508-241-5881";
+      //shopper.PhoneMobileSurvey.Value = "";
+      shopper.PhoneWork.Value = "508-241-5881";
+      //shopper.PhoneWorkExtension.Value = "7";
+      #endregion
+
+      #region personal
+      shopper.FirstName.Value = "Seth";
+      shopper.LastName.Value = "Yukna";
+      //shopper.BirthDay.Value = "23";
+      //shopper.BirthMonth.Value = "9";
+      //shopper.AccountUsageType.Value = "1";
+      #endregion
+
+      #region credentials
+      shopper.Username.Value = "dfewcasdrwq";
+      shopper.Password.Value = "P4ssW0rd!";
+      shopper.PasswordConfirm.Value = shopper.Password.Value;
+      shopper.PasswordHint.Value = "idk this?";
+      shopper.CallInPin.Value = "1423";
+      #endregion
+
+      bool isNewShopper = true;
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, shopper, isNewShopper);
+      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+
+      foreach (ShopperProperty prop in response.ValidatedShopper.AllShopperProperties)
+      {
+        if (prop.HasValidationRules && !prop.RuleContainer.IsValid)
+        {
+          Debug.WriteLine("IsValid: " + prop.RuleContainer.IsValid.ToString() + "   ErrorMessage: " + prop.RuleContainer.ErrorMessage);
+        }
+        if (prop.HasValidationRules)
+          Assert.IsTrue(prop.RuleContainer.IsValid);
+      }
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void TestSlimShopperMinimumRequired()
+    {
+      ShopperToValidate shopper = new ShopperToValidate("www.requesturl.com", "pathway", 0);
+      shopper.InitSlimRequiredFields();
+
+      #region location
+      shopper.Address1.Value = "123 any street";
+      //shopper.Address2.Value = "";
+      //shopper.City.Value = "Lakewood";
+      //shopper.State.Value = "CO";
+      //shopper.Country.Value = "ca";
+      //shopper.Zip.Value = "E2L 4V8";
+      #endregion
+
+      #region contact
+      shopper.Email.Value = "seth@sdr.coskm";
+      //shopper.PhoneHome.Value = "5";
+      //shopper.PhoneMobile.Value = "508-241-5881";
+      //shopper.PhoneMobileSurvey.Value = "";
+      //shopper.PhoneWork.Value = "508-241-5881";
+      //shopper.PhoneWorkExtension.Value = "7";
+      #endregion
+
+      #region personal
+      shopper.FirstName.Value = "Seth";
+      shopper.LastName.Value = "Yukna";
+      //shopper.BirthDay.Value = "23";
+      //shopper.BirthMonth.Value = "9";
+      //shopper.AccountUsageType.Value = "1";
+      #endregion
+
+      #region credentials
+      shopper.Username.Value = "dfewcasdrwq";
+      shopper.Password.Value = "P4ssW0rd!";
+      shopper.PasswordConfirm.Value = shopper.Password.Value;
+      shopper.PasswordHint.Value = "idk this?";
+      shopper.CallInPin.Value = "1423";
+      #endregion
+
+      bool isNewShopper = true;
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, shopper, isNewShopper);
+      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+
+      foreach (ShopperProperty prop in response.ValidatedShopper.AllShopperProperties)
+      {
+        if (prop.HasValidationRules && !prop.RuleContainer.IsValid)
+        {
+          Debug.WriteLine("IsValid: " + prop.RuleContainer.IsValid.ToString() + "   ErrorMessage: " + prop.RuleContainer.ErrorMessage);
+        }
+        if (prop.HasValidationRules)
+          Assert.IsTrue(prop.RuleContainer.IsValid);
+      }
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    #endregion
+
   }
 }

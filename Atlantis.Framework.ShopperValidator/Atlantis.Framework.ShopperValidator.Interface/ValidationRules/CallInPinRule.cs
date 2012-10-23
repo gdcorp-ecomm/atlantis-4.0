@@ -4,13 +4,13 @@ using System;
 
 namespace Atlantis.Framework.ShopperValidator.Interface.Validator
 {
-  public class CallInPinRule : RuleContainer
+  public class CallInPinRule : SingleValueRuleContainer
   {
     private string _callInPin;
     private string _fieldName;
 
-    public CallInPinRule(string value, string fieldName = FieldNames.CallInPin)
-      : base()
+    public CallInPinRule(string value, string fieldName = FieldNames.CallInPin, bool isRequired = false)
+      : base(value, fieldName, isRequired)
     {
       _callInPin = value;
       _fieldName = fieldName;

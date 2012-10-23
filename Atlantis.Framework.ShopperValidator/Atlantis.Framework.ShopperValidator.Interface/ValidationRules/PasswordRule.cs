@@ -8,7 +8,7 @@ using Atlantis.Framework.ValidateField.Interface;
 
 namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
 {
-  public class PasswordRule : RuleContainer
+  public class PasswordRule : SingleValueRuleContainer
   {
     private string _fieldName;
     private string _username;
@@ -21,8 +21,8 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
     /// <summary>
     /// Should ONLY be used when requestUrl, pathway, and pageCount are undefined.  Otherwise use constructor which accepts these parameters.
     /// </summary>
-    public PasswordRule(string value, bool isNewShopper, string username = "", string passwordHint = "", string fieldName = FieldNames.Password)
-      : base()
+    public PasswordRule(string value, bool isNewShopper, string username = "", string passwordHint = "", string fieldName = FieldNames.Password, bool isRequired = false)
+      : base(value, fieldName, isRequired)
     {
       _fieldName = fieldName;
       _username = username ?? string.Empty;
@@ -34,7 +34,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
         throw new System.InvalidOperationException(string.Format("{0} cannot be greater than {1} characters.  Trim {0} before supplying it to the validator.", fieldName, LengthConstants.PasswordMaxLength));
       }
 
-      base.RulesToValidate.Add(new RequiredRule(fieldName, value));
+      //base.RulesToValidate.Add(new RequiredRule(fieldName, value));
 
       #region Not match username
       if (!string.IsNullOrEmpty(_username))
@@ -54,8 +54,8 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
     }
 
     public PasswordRule(string value, bool isNewShopper, string requestUrl, string pathway, int pageCount, string username = "",
-      string passwordHint = "", string fieldName = FieldNames.Password)
-      : this(value, isNewShopper, username, passwordHint, fieldName)
+      string passwordHint = "", string fieldName = FieldNames.Password, bool isRequired = false)
+      : this(value, isNewShopper, username, passwordHint, fieldName, isRequired)
     {
       _requestUrl = requestUrl;
       _pageCount = pageCount;

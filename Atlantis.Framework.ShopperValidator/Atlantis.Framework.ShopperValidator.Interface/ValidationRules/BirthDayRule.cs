@@ -7,10 +7,14 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
 {
   public class BirthDayRule : RuleContainer
   {
-    public BirthDayRule(string birthMonth, string birthDay, string fieldName = FieldNames.BirthDay)
+    public BirthDayRule(string birthMonth, string birthDay, string fieldName = FieldNames.BirthDay, bool dayIsRequired = false, bool monthIsRequired = false)
       : base()
     {
       BuildCustomRule(birthMonth, birthDay, fieldName);
+      if (dayIsRequired)
+        base.RulesToValidate.Add(new RequiredRule(fieldName, birthDay));
+      if (monthIsRequired)
+        base.RulesToValidate.Add(new RequiredRule(fieldName, birthMonth));
     }
 
     #region Custom Rules

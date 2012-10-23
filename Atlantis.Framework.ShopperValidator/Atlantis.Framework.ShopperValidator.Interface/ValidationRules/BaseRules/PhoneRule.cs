@@ -31,8 +31,8 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
       base.IsValid = false;
       if (base.ItemToValidate != null)
       {
-        if (base.ItemToValidate.Length > 0)
-        {
+        /*if (base.ItemToValidate.Length > 0)
+        {*/
           base.ItemToValidate = RegexConstants.SpecialCharacters.Replace(base.ItemToValidate, string.Empty);
           bool isUsOrCanada = _countryCode.Equals("us", StringComparison.InvariantCultureIgnoreCase)
             || _countryCode.Equals("ca", StringComparison.InvariantCultureIgnoreCase);
@@ -62,7 +62,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
           {
             base.ErrorMessage = string.Concat(base.FieldName, " must be numeric");
           }
-        }
+        /*}
         else
         {
           if (!_isRequired)
@@ -73,7 +73,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
           {
             base.ErrorMessage = string.Concat(FieldName, " is required");
           }
-        }
+        }*/
       }
     }
   }

@@ -82,6 +82,7 @@
     <Compile Include="ValidationRules\ZipRule.cs" />
     <Compile Include="Validator\RuleContainer.cs" />
     <Compile Include="ValidationRules\BaseRules\MaxLengthRule.cs" />
+    <Compile Include="Validator\SingleValueRuleContainer.cs" />
     <Compile Include="Validator\ValidationRule.cs" />
     <Compile Include="Validator\ShopperRuleValidator.cs" />
   </ItemGroup>

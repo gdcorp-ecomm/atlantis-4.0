@@ -6,7 +6,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
 {
   public class ZipRule : RuleContainer
   {
-    public ZipRule(string value, string countryCode, string state, string fieldName = FieldNames.Zip)
+    public ZipRule(string value, string countryCode, string state, string fieldName = FieldNames.Zip, bool isRequired = false)
       : base()
     {
       base.RulesToValidate.Add(new MaxLengthRule(fieldName, value, LengthConstants.ZipMaxLength));
@@ -25,7 +25,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
         && state.Trim().Equals("hong kong", StringComparison.InvariantCultureIgnoreCase);
       bool countryIsHongKong = countryCode.Equals("hk", StringComparison.InvariantCultureIgnoreCase);
 
-      if (!(countryIsChinaStateIsHongKong || countryIsHongKong))
+      if (!(countryIsChinaStateIsHongKong || countryIsHongKong) && isRequired)
       {
         base.RulesToValidate.Add(new RequiredRule(fieldName, value));
       }

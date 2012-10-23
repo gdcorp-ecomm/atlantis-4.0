@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.Interface")]
+[assembly: AssemblyTitle("Atlantis.Framework.TemplatePlaceHolders.Interface")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
 [assembly: AssemblyConfiguration("Debug Build")]
@@ -13,8 +13,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("Release Build")]
 #endif
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
-[assembly: AssemblyProduct("Atlantis.Framework.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2011-2012")]
+[assembly: AssemblyProduct("Atlantis.Framework.TemplatePlaceHolders.Interface")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5f648f58-deeb-4dff-8082-fa8ba52154fc")]
+[assembly: Guid("2c1a4b5f-c3be-46ae-b31f-64695c752843")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -36,5 +36,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.12.10.18")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

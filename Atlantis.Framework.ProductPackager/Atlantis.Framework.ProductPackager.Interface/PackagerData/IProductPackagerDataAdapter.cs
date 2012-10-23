@@ -2,7 +2,7 @@
 
 namespace Atlantis.Framework.ProductPackager.Interface
 {
-  public interface IProductPackageDataAdapter
+  public interface IProductPackagerDataAdapter
   {
     IList<IProductGroup> GetProductGroupData<T>(T productGroupDataSource);
 

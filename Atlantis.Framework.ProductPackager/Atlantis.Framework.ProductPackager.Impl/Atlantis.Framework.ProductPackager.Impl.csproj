@@ -51,7 +51,7 @@
     <Compile Include="FbProductGroupAttribute.cs" />
     <Compile Include="FbProductGroupAttributeValue.cs" />
     <Compile Include="FbProductGroupPackageData.cs" />
-    <Compile Include="FbProductPackageDataAdapter.cs" />
+    <Compile Include="FbProductPackagerDataAdapter.cs" />
     <Compile Include="FbProductPackageMapping.cs" />
     <Compile Include="ParseHelper.cs" />
     <Compile Include="ProductPackageServiceHelper.cs" />

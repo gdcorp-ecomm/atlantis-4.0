@@ -11,7 +11,7 @@ namespace Atlantis.Framework.Providers.Interface.ProviderContainer
     private const string KEY_FORMAT = "Atlantis.Framework.Interface.HttpProviderContainer.{0}";
 
     private static readonly object _lockSync = new object();
-    private static readonly IDictionary<Type, Type> _registeredProvidersDictionary = new Dictionary<Type, Type>(64);
+    private static readonly IDictionary<Type, Type> _registeredProvidersDictionary = new Dictionary<Type, Type>(256);
 
     private static readonly IProviderContainer _instance = new HttpProviderContainer();
     public static IProviderContainer Instance
@@ -44,12 +44,14 @@ namespace Atlantis.Framework.Providers.Interface.ProviderContainer
 
     private static Type GetProviderFromRegisteredProviders(Type providerInterface)
     {
-      if(!_registeredProvidersDictionary.ContainsKey(providerInterface))
+      Type providerType;
+      
+      if (!_registeredProvidersDictionary.TryGetValue(providerInterface, out providerType))
       {
         throw new Exception(string.Format("Type {0} is not registered.", providerInterface.Name));
       }
 
-      return _registeredProvidersDictionary[providerInterface];
+      return providerType;
     }
 
     public void RegisterProvider<TProviderInterface, TProvider>() where TProviderInterface : class where TProvider : ProviderBase
@@ -82,7 +84,7 @@ namespace Atlantis.Framework.Providers.Interface.ProviderContainer
         providerInterface = ProviderContainerHelper.ConstructProvider<TProviderInterface>(providerType, this);
         if (HttpContext.Current != null)
         {
-          Debug.WriteLine(string.Format("HttpProviderContainer: {0}:{1} instantiated | Key: {2} | Url: {3}", providerInterfaceType.Name, providerType.Name, key, HttpContext.Current.Request.Url));
+          Debug.WriteLine("HttpProviderContainer: {0}:{1} instantiated | Key: {2} | Url: {3}", providerInterfaceType.Name, providerType.Name, key, HttpContext.Current.Request.Url);
           HttpContext.Current.Items[key] = providerInterface;
         }
       }
@@ -90,9 +92,25 @@ namespace Atlantis.Framework.Providers.Interface.ProviderContainer
       return providerInterface;
     }
 
-    public bool CanResolve<T>()
+    public bool TryResolve<TProviderInterface>(out TProviderInterface providerInterface) where TProviderInterface : class
     {
-      Type providerInterfaceType = typeof(T);
+      bool isRegistered = false;
+      providerInterface = default(TProviderInterface);
+
+      Type providerInterfaceType = typeof(TProviderInterface);
+      Type providerType;
+      if(_registeredProvidersDictionary.TryGetValue(providerInterfaceType, out providerType))
+      {
+        providerInterface = ProviderContainerHelper.ConstructProvider<TProviderInterface>(providerType, this);
+        isRegistered = true;
+      }
+
+      return isRegistered;
+    }
+
+    public bool CanResolve<TProviderInterface>() where TProviderInterface : class
+    {
+      Type providerInterfaceType = typeof(TProviderInterface);
       return _registeredProvidersDictionary.ContainsKey(providerInterfaceType);
     }
   }

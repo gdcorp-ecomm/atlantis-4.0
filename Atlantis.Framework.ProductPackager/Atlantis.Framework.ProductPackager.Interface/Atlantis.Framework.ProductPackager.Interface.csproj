@@ -44,16 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IProductData.cs" />
-    <Compile Include="IProductGroup.cs" />
-    <Compile Include="IProductGroupAttribute.cs" />
-    <Compile Include="IProductGroupAttributeValue.cs" />
-    <Compile Include="IProductGroupPackageData.cs" />
-    <Compile Include="IProductPackageChildProduct.cs" />
-    <Compile Include="IProductPackageData.cs" />
-    <Compile Include="IProductPackageDataAdapter.cs" />
-    <Compile Include="IProductPackageMapping.cs" />
-    <Compile Include="IProductPackageParentProduct.cs" />
+    <Compile Include="PackagerData\IProductData.cs" />
+    <Compile Include="PackagerData\IProductGroup.cs" />
+    <Compile Include="PackagerData\IProductGroupAttribute.cs" />
+    <Compile Include="PackagerData\IProductGroupAttributeValue.cs" />
+    <Compile Include="PackagerData\IProductGroupPackageData.cs" />
+    <Compile Include="PackagerData\IProductPackageChildProduct.cs" />
+    <Compile Include="PackagerData\IProductPackageData.cs" />
+    <Compile Include="PackagerData\IProductPackageDataSourceAdapter.cs" />
+    <Compile Include="PackagerData\IProductPackagerDataAdapter.cs" />
+    <Compile Include="PackagerData\IProductPackageMapping.cs" />
+    <Compile Include="PackagerData\IProductPackageParentProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

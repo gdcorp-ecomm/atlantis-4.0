@@ -5,7 +5,7 @@ using Atlantis.Framework.ProductPackager.Interface;
 
 namespace Atlantis.Framework.ProductPackager.Impl
 {
-  public class FbProductPackageDataAdapter : IProductPackageDataAdapter
+  public class FbProductPackagerDataAdapter : IProductPackagerDataAdapter
   {
     public IList<IProductGroup> GetProductGroupData<T>(T productGroupDataSource)
     {

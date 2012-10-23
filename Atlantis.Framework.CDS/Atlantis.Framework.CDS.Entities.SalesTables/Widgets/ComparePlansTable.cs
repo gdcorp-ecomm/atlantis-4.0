@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
+using Atlantis.Framework.CDS.Entities.Widgets;
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.SalesTables.Widgets
 {
   public class ComparePlansTable : IWidgetModel
   {

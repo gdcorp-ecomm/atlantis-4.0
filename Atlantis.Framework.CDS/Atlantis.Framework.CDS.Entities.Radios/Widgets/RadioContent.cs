@@ -3,7 +3,7 @@ using Atlantis.Framework.CDS.Entities.Common;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 using Newtonsoft.Json;
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.Radios.Widgets
 {
   public class RadioContent : IWidgetModel
   {

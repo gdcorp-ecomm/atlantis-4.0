@@ -66,9 +66,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Homepage", "Atlantis.Framework.CDS.Entities.Homepage\Atlantis.Framework.CDS.Entities.Homepage.csproj", "{75D18432-B7C7-45CD-8F82-572CCD12A655}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.SalesTables", "Atlantis.Framework.CDS.Entities.SalesTables\Atlantis.Framework.CDS.Entities.SalesTables.csproj", "{81C26E74-7065-4826-BED9-6097EE35E110}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Radios", "Atlantis.Framework.CDS.Entities.Radios\Atlantis.Framework.CDS.Entities.Radios.csproj", "{601252BF-0C8A-4F90-A061-0352D253AB09}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 29
+		SccNumberOfProjects = 31
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -172,6 +176,12 @@ Global
 		SccProjectUniqueName28 = Atlantis.Framework.CDS.Entities.Homepage\\Atlantis.Framework.CDS.Entities.Homepage.csproj
 		SccProjectName28 = Atlantis.Framework.CDS.Entities.Homepage
 		SccLocalPath28 = Atlantis.Framework.CDS.Entities.Homepage
+		SccProjectUniqueName29 = Atlantis.Framework.CDS.Entities.SalesTables\\Atlantis.Framework.CDS.Entities.SalesTables.csproj
+		SccProjectName29 = Atlantis.Framework.CDS.Entities.SalesTables
+		SccLocalPath29 = Atlantis.Framework.CDS.Entities.SalesTables
+		SccProjectUniqueName30 = Atlantis.Framework.CDS.Entities.Radios\\Atlantis.Framework.CDS.Entities.Radios.csproj
+		SccProjectName30 = Atlantis.Framework.CDS.Entities.Radios
+		SccLocalPath30 = Atlantis.Framework.CDS.Entities.Radios
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.CDS.vsmdi
@@ -465,6 +475,26 @@ Global
 		{75D18432-B7C7-45CD-8F82-572CCD12A655}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{75D18432-B7C7-45CD-8F82-572CCD12A655}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{75D18432-B7C7-45CD-8F82-572CCD12A655}.Release|x86.ActiveCfg = Release|Any CPU
+		{81C26E74-7065-4826-BED9-6097EE35E110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81C26E74-7065-4826-BED9-6097EE35E110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81C26E74-7065-4826-BED9-6097EE35E110}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{81C26E74-7065-4826-BED9-6097EE35E110}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{81C26E74-7065-4826-BED9-6097EE35E110}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81C26E74-7065-4826-BED9-6097EE35E110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81C26E74-7065-4826-BED9-6097EE35E110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81C26E74-7065-4826-BED9-6097EE35E110}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{81C26E74-7065-4826-BED9-6097EE35E110}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{81C26E74-7065-4826-BED9-6097EE35E110}.Release|x86.ActiveCfg = Release|Any CPU
+		{601252BF-0C8A-4F90-A061-0352D253AB09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{601252BF-0C8A-4F90-A061-0352D253AB09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{601252BF-0C8A-4F90-A061-0352D253AB09}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{601252BF-0C8A-4F90-A061-0352D253AB09}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{601252BF-0C8A-4F90-A061-0352D253AB09}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{601252BF-0C8A-4F90-A061-0352D253AB09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{601252BF-0C8A-4F90-A061-0352D253AB09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{601252BF-0C8A-4F90-A061-0352D253AB09}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{601252BF-0C8A-4F90-A061-0352D253AB09}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{601252BF-0C8A-4F90-A061-0352D253AB09}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

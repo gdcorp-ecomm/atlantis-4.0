@@ -48,6 +48,7 @@
     <Compile Include="Interfaces\ITokenizerStrategy.cs" />
     <Compile Include="Interfaces\IUniversalToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strategy\ProductSavingsTokenizer.cs" />
     <Compile Include="Strategy\LinkTokenizer.cs" />
     <Compile Include="Strategy\PriceTokenizer.cs" />
     <Compile Include="Strategy\ProductDescriptionTokenizer.cs" />

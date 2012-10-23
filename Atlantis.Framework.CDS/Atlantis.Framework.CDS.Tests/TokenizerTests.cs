@@ -373,6 +373,21 @@ namespace Atlantis.Framework.CDS.Tests
     }
 
     [TestMethod]
+    public void Tokenizer_Can_Replace_Product_SavingsPercentage()
+    {
+      //Arrange
+      CDSTokenizer t = new CDSTokenizer();
+
+      //Act
+      var result = t.Parse("{{product::12001::savingspercentage}}");
+      var expected = SavingsPercentage(12001);
+
+      //Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
     public void Tokenizer_Can_Replace_Price_KeepDecimal()
     {
       //Arrange
@@ -705,6 +720,14 @@ namespace Atlantis.Framework.CDS.Tests
       }
       price = new CurrencyPrice(totalPrice, Currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional);
       return Currency.PriceText(price, false, dropDecimal);
+    }
+
+    private string SavingsPercentage(int productId)
+    {
+      IProduct product = Products.GetProduct(productId);
+      IProductView pView = Products.NewProductView(product);
+      pView.CalculateSavings(product);
+      return pView.SavingsPercentage.ToString();
     }
 
     private Dictionary<string, string> customTokens = null;

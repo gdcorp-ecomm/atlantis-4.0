@@ -18,7 +18,7 @@ namespace Atlantis.Framework.CDS.Tokenizer.Tokens
     // price was the original product pricing token which triggered current price,
     // but we needed to add the ability to support list price so "price_list"
     // for consistency sake, we added "price_current" as an option so it more clearly denotes intention; "price" == "price_current"
-    public readonly List<string> VALID_OPERATORS = new List<string> { "price", "price_current", "price_list", "description" };
+    public readonly List<string> VALID_OPERATORS = new List<string> { "price", "price_current", "price_list", "description", "savingspercentage" };
     public readonly List<string> VALID_DECIMAL_OPERATORS = new List<string> { "dropdecimal", "keepdecimal" };
     public readonly List<string> VALID_TERM_OPERATORS = new List<string> { "monthly", "yearly" };
 
@@ -39,6 +39,8 @@ namespace Atlantis.Framework.CDS.Tokenizer.Tokens
         _strategy = new ProductPriceTokenizer();
       else if (tokens[OPERATOR] == "description")
         _strategy = new ProductDescriptionTokenizer();
+      else if (tokens[OPERATOR] == "savingspercentage")
+        _strategy = new ProductSavingsTokenizer();
 
     }
   }

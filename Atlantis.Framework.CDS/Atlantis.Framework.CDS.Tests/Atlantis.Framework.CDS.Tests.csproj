@@ -70,6 +70,7 @@
     <Compile Include="EntitiesTests\BulkPanelTest.cs" />
     <Compile Include="EntitiesTests\GeneralEntitiesTest.cs" />
     <Compile Include="EntitiesTests\BannerInfoAndBannerPodTest.cs" />
+    <Compile Include="EntitiesTests\SalesHeader4Test.cs" />
     <Compile Include="Helpers\CurrencyHelper.cs" />
     <Compile Include="Helpers\JsonChecker.cs" />
     <Compile Include="Helpers\LinkTypes.cs" />

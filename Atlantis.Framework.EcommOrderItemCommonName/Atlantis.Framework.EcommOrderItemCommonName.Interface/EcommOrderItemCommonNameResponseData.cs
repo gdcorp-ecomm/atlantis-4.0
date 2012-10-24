@@ -22,10 +22,14 @@ namespace Atlantis.Framework.EcommOrderItemCommonName.Interface
 
     public EcommOrderItemCommonNameResponseData(RequestData requestData, Exception exception)
     {
-      _exception = new AtlantisException(requestData
-        , "EcommOrderItemCommonNameResponseData"
-        , exception.Message
-        , requestData.ToXML());
+      // These types of error messages are "noise" - don't log, just swallow.  Log others.
+      if (!(exception.Message.Contains("No SQL procedure") || exception.Message.Contains("Could not find stored procedure")))
+      {
+        _exception = new AtlantisException(requestData
+          , "EcommOrderItemCommonNameResponseData"
+          , exception.Message
+          , requestData.ToXML());
+      }
     }
 
     #region IResponseData Members

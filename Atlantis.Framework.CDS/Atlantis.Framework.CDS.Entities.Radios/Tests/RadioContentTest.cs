@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Atlantis.Framework.CDS.Interface;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.CDS.Entities.Radios.Widgets;
+﻿using Atlantis.Framework.CDS.Entities.Radios.Widgets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestSetUpAndSettings;
 

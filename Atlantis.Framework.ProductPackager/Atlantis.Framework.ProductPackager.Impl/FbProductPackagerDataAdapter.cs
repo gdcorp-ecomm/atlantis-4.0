@@ -7,27 +7,53 @@ namespace Atlantis.Framework.ProductPackager.Impl
 {
   public class FbProductPackagerDataAdapter : IProductPackagerDataAdapter
   {
-    public IList<IProductGroup> GetProductGroupData<T>(T productGroupDataSource)
+    public IDictionary<string, IProductGroup> GetProductGroupData<T>(T productGroupDataSource)
     {
       ProductGroupData fbProductGroupData = productGroupDataSource as ProductGroupData;
       if(fbProductGroupData == null)
       {
-        throw new Exception("Type of productGroupDataSource is expect to be ProductGroupData from the ProductPackage soap service.");   
+        throw new Exception("Type of productGroupDataSource is expected to be ProductGroupData from the ProductPackage soap service.");   
       }
 
-      IList<IProductGroup> productGroupList = new List<IProductGroup>(fbProductGroupData.ProdGroups.Length);
+      IDictionary<string, IProductGroup> productGroupList = new Dictionary<string, IProductGroup>(fbProductGroupData.ProdGroups.Length);
 
       foreach (ProductGroup fbProductGroup in fbProductGroupData.ProdGroups)
       {
-        productGroupList.Add(new FbProductGroup(fbProductGroup));
+        FbProductGroup productGroup = new FbProductGroup(fbProductGroup);
+        productGroupList[productGroup.Id] = productGroup;
       }
 
       return productGroupList;
     }
 
-    public IList<IProductPackageData> GetProductPackageData<T>(T productPackageDataSource)
+    public IDictionary<string, IProductPackageData> GetProductPackageData<T>(T productPackageDataSource)
     {
-      throw new NotImplementedException();
+      ProdPackages fbProductPackageData = productPackageDataSource as ProdPackages;
+      if(fbProductPackageData == null)
+      {
+        throw new Exception("Type of productPackageDataSource is expected to be ProdPackages from the ProductPackage soap service.");   
+      }
+
+      IDictionary<string, IProductPackageData> productPackageDictionary = new Dictionary<string, IProductPackageData>(fbProductPackageData.CartPackages.Length + 
+                                                                                                                      fbProductPackageData.AddonPackages.Length +
+                                                                                                                      fbProductPackageData.UpsellPackages.Length);
+
+      foreach (CartProdPackage productPackage in fbProductPackageData.CartPackages)
+      {
+        productPackageDictionary[productPackage.pkgid] = new FbProductPackageData(productPackage);
+      }
+
+      foreach (AddOnProdPackage productPackage in fbProductPackageData.AddonPackages)
+      {
+        productPackageDictionary[productPackage.pkgid] = new FbProductPackageData(productPackage);
+      }
+
+      foreach (UpsellProdPackage productPackage in fbProductPackageData.UpsellPackages)
+      {
+        productPackageDictionary[productPackage.pkgid] = new FbProductPackageData(productPackage);
+      }
+
+      return productPackageDictionary;
     }
   }
 }

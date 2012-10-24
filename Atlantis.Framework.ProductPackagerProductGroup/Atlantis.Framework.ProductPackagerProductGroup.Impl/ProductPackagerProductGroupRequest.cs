@@ -36,7 +36,7 @@ namespace Atlantis.Framework.ProductPackagerProductGroup.Impl
 
         // TODO: In the future allow the IProductPackageDataAdapter to be configured on the config element of the request
         IProductPackagerDataAdapter productPackagerDataAdapter = new FbProductPackagerDataAdapter();
-        IList<IProductGroup> transformedProductGroupData = productPackagerDataAdapter.GetProductGroupData(productGroupData);
+        IDictionary<string, IProductGroup> transformedProductGroupData = productPackagerDataAdapter.GetProductGroupData(productGroupData);
 
         if (transformedProductGroupData != null && transformedProductGroupData.Count > 0)
         {

@@ -4,18 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6B741F84-29BB-43F9-BB12-995C3133CE6D}</ProjectGuid>
+    <ProjectGuid>{E97692F0-A82D-4ECA-B29B-D18130662745}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.ProductPackager.Interface</RootNamespace>
-    <AssemblyName>Atlantis.Framework.ProductPackager.Interface</AssemblyName>
+    <RootNamespace>Atlantis.Framework.ProductPackagerProductPackage.Impl</RootNamespace>
+    <AssemblyName>Atlantis.Framework.ProductPackagerProductPackage.Impl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,22 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IProductData.cs" />
-    <Compile Include="IProductGroup.cs" />
-    <Compile Include="IProductGroupAttribute.cs" />
-    <Compile Include="IProductGroupAttributeValue.cs" />
-    <Compile Include="IProductGroupPackageData.cs" />
-    <Compile Include="IProductPackageChildProduct.cs" />
-    <Compile Include="IProductPackageData.cs" />
-    <Compile Include="IProductPackageDataSourceAdapter.cs" />
-    <Compile Include="IProductPackagerDataAdapter.cs" />
-    <Compile Include="IProductPackageMapping.cs" />
-    <Compile Include="IProductPackageParentProduct.cs" />
-    <Compile Include="ProductPackageTypes.cs" />
+    <Compile Include="ProductPackagerProductPackageRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="PackagerData\" />
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.ProductPackager\Atlantis.Framework.ProductPackager.Impl\Atlantis.Framework.ProductPackager.Impl.csproj">
+      <Project>{c880f5d7-acc0-4cc3-9954-2423e38f8f07}</Project>
+      <Name>Atlantis.Framework.ProductPackager.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.ProductPackager\Atlantis.Framework.ProductPackager.Interface\Atlantis.Framework.ProductPackager.Interface.csproj">
+      <Project>{6b741f84-29bb-43f9-bb12-995c3133ce6d}</Project>
+      <Name>Atlantis.Framework.ProductPackager.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.ProductPackagerProductPackage.Interface\Atlantis.Framework.ProductPackagerProductPackage.Interface.csproj">
+      <Project>{01216953-bf9d-4f41-8ba6-ec90f493aa39}</Project>
+      <Name>Atlantis.Framework.ProductPackagerProductPackage.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,7 +4,7 @@ namespace Atlantis.Framework.ProductPackager.Interface
 {
   public interface IProductGroup
   {
-    int Id { get; }
+    string Id { get; }
 
     string Name { get; }
 

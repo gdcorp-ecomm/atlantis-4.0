@@ -24,8 +24,8 @@ namespace Atlantis.Framework.ProductPackagerProductGroup.Tests
 
       ProductPackagerProductGroupResponseData responseData = (ProductPackagerProductGroupResponseData)Engine.Engine.ProcessRequest(requestData, 609);
 
-      Console.Write(responseData.ProductGroupData[0].Name);
-      Debug.Write(responseData.ProductGroupData[0].Name);
+      Console.Write(responseData.ProductGroupData["137"].Name);
+      Debug.Write(responseData.ProductGroupData["137"].Name);
     }
 
     [TestMethod]

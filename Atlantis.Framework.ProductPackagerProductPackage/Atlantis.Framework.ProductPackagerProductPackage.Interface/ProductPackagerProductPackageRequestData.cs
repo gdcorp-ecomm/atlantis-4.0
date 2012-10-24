@@ -4,9 +4,9 @@ using System.Security.Cryptography;
 using System.Text;
 using Atlantis.Framework.Interface;
 
-namespace Atlantis.Framework.ProductPackagerProductGroup.Interface
+namespace Atlantis.Framework.ProductPackagerProductPackage.Interface
 {
-  public class ProductPackagerProductGroupRequestData : RequestData
+  public class ProductPackagerProductPackageRequestData : RequestData
   {
     private static readonly TimeSpan _defaultRequestTimeout = TimeSpan.FromSeconds(8);
 
@@ -16,22 +16,23 @@ namespace Atlantis.Framework.ProductPackagerProductGroup.Interface
       {
         string cacheKey = string.Empty;
 
-        if(PackageProductGroupIds != null)
+        if (PackageIds != null)
         {
-          cacheKey = string.Join(":", PackageProductGroupIds);
+          cacheKey = string.Join(":", PackageIds);
         }
-        
+
         return cacheKey;
       }
     }
 
-    public IList<string> PackageProductGroupIds { get; private set; }
+    public IList<string> PackageIds { get; private set; }
 
-    public ProductPackagerProductGroupRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, IList<string> packageProductGroupIds) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public ProductPackagerProductPackageRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, IList<string> packageIds) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      PackageProductGroupIds = packageProductGroupIds;
+      PackageIds = packageIds;
       RequestTimeout = _defaultRequestTimeout;
     }
+
 
     public override string GetCacheMD5()
     {

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace Atlantis.Framework.ProductPackager.Interface
 {
-  public interface IProductPackageParentProduct
+  public interface IProductPackageChildProduct
   {
     int ProductId { get; }
 
@@ -10,6 +9,10 @@ namespace Atlantis.Framework.ProductPackager.Interface
 
     double Duration { get; }
 
-    IList<IProductPackageChildProduct> ChildProducts { get; }
+    bool IsChild { get; }
+
+    bool IsFree { get; }
+
+    string DiscountCode { get; }
   }
 }

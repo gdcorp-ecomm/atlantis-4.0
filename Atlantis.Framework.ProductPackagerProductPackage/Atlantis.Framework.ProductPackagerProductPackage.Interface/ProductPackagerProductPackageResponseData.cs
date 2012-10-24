@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.ProductPackager.Interface;
 
-namespace Atlantis.Framework.ProductPackagerProductGroup.Interface
+namespace Atlantis.Framework.ProductPackagerProductPackage.Interface
 {
-  public class ProductPackagerProductGroupResponseData : IResponseData
+  public class ProductPackagerProductPackageResponseData : IResponseData
   {
     private readonly AtlantisException _atlException;
 
-    public IDictionary<string, IProductGroup> ProductGroupData { get; private set; }
+    public IDictionary<string, IProductPackageData> ProductPackageData { get; private set; }
 
-    public ProductPackagerProductGroupResponseData(IDictionary<string, IProductGroup> productGroupData)
+    public ProductPackagerProductPackageResponseData(IDictionary<string, IProductPackageData> productPackageData)
     {
-      ProductGroupData = productGroupData;
+      ProductPackageData = productPackageData;
     }
 
-    public ProductPackagerProductGroupResponseData(RequestData requestData, Exception ex)
+    public ProductPackagerProductPackageResponseData(RequestData requestData, Exception ex)
     {
       _atlException = new AtlantisException(requestData, "Atlantis.Framework.FbProductPackageProductGroupResponseData", ex.Message, ex.StackTrace, ex);
     }

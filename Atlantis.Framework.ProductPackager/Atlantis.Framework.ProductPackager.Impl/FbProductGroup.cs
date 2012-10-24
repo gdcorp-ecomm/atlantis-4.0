@@ -8,16 +8,16 @@ namespace Atlantis.Framework.ProductPackager.Impl
   {
     private readonly ProductGroup _fbProductGroup;
 
-    private int? _id;
-    public int Id
+    private string _id;
+    public string Id
     {
       get
       {
-        if(!_id.HasValue)
+        if(_id == null)
         {
-          _id = ParseHelper.ParseInt(_fbProductGroup.prodGroupCode, "ProductGroup \"prodGroupCode\" is not an integer. Value: {0}");
+          _id = _fbProductGroup.prodGroupCode;
         }
-        return _id.Value;
+        return _id;
       }
     }
 

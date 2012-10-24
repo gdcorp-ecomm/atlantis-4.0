@@ -10,7 +10,7 @@ namespace Atlantis.Framework.CDS.Entities.Mobile.Widgets
 
   public class MobileProductDisclaimerItem
   {
-    public int ProductGroupId { get; set; }
+    public int ProductGroup { get; set; }
     public string Symbol { get; set; }
     public string DisclaimerText { get; set; }
   }

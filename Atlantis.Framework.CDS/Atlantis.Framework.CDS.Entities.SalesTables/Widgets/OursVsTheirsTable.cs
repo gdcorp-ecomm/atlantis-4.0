@@ -6,6 +6,7 @@ namespace Atlantis.Framework.CDS.Entities.SalesTables.Widgets
 {
   public class OursVsTheirsTable : IWidgetModel
   {
+    public string Styles { get; set; }
     public int NumberOfColumns { get; set; }
     public List<OursVsTheirsTableColumn> Columns { get; set; }
     public List<OursVsTheirsTableRow> Rows { get; set; }

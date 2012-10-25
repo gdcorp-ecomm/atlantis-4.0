@@ -30,6 +30,10 @@ namespace Atlantis.Framework.EcommOrderItemCommonName.Interface
           , exception.Message
           , requestData.ToXML());
       }
+      else
+      {
+        CommonName = string.Empty;
+      }
     }
 
     #region IResponseData Members

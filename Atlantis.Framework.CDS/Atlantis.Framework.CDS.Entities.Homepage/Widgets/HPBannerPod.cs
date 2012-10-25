@@ -26,6 +26,7 @@ namespace Atlantis.Framework.CDS.Entities.Homepage.Widgets
     public string Text { get; set; }
     public string TextAlign { get; set; }
     public string TextSize { get; set; }
+    public string Link { get; set; }
     public string CountryCodesList { get; set; }
     public string SplitValue { get; set; }
   }

@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3195E134-DE93-423E-BDED-37C654617B3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{29E7CCC1-0F54-45F9-8492-62145046C625}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{092618E1-1F37-422C-82AF-17A1337B8986}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
 EndProject
@@ -28,7 +28,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Atlantis.Framework.BasePage
 		SccLocalPath = "SAK"
 		SccProvider = "SAK"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}|Atlantis.Framework.Interface.dll;{B23DE506-143A-4709-84FE-8097EB5E4007}|Atlantis.Framework.BasePages.SiteAdmin.dll;{7F2738F8-683C-49E7-88CD-E986C70F0321}|Atlantis.Framework.DataCache.dll;{D30157B2-C1B3-4073-BA5E-632E2337A997}|Atlantis.Framework.Engine.dll;{FD52CDBE-0BA5-4EED-BB0D-184F96F23011}|Atlantis.Framework.ManagerCategories.Interface.dll;{55F48501-FE1B-441B-A786-A14001AD2F04}|Atlantis.Framework.ManagerUser.Interface.dll;{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}|Atlantis.Framework.Providers.Interface.dll;{29E7CCC1-0F54-45F9-8492-62145046C625}|Atlantis.Framework.Interface.dll;{092618E1-1F37-422C-82AF-17A1337B8986}|Atlantis.Framework.Engine.dll;"
+		ProjectReferences = "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}|Atlantis.Framework.Interface.dll;{B23DE506-143A-4709-84FE-8097EB5E4007}|Atlantis.Framework.BasePages.SiteAdmin.dll;{7F2738F8-683C-49E7-88CD-E986C70F0321}|Atlantis.Framework.DataCache.dll;{D30157B2-C1B3-4073-BA5E-632E2337A997}|Atlantis.Framework.Engine.dll;{FD52CDBE-0BA5-4EED-BB0D-184F96F23011}|Atlantis.Framework.ManagerCategories.Interface.dll;{55F48501-FE1B-441B-A786-A14001AD2F04}|Atlantis.Framework.ManagerUser.Interface.dll;{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}|Atlantis.Framework.Providers.Interface.dll;{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}|Atlantis.Framework.Interface.dll;{D30157B2-C1B3-4073-BA5E-632E2337A997}|Atlantis.Framework.Engine.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/Atlantis.Framework.BasePages.SiteAdminTestWeb"
 		Debug.AspNetCompiler.PhysicalPath = "Atlantis.Framework.BasePages.SiteAdminTestWeb\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Atlantis.Framework.BasePages.SiteAdminTestWeb\"
@@ -110,14 +110,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{29E7CCC1-0F54-45F9-8492-62145046C625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29E7CCC1-0F54-45F9-8492-62145046C625}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29E7CCC1-0F54-45F9-8492-62145046C625}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29E7CCC1-0F54-45F9-8492-62145046C625}.Release|Any CPU.Build.0 = Release|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -163,8 +163,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{29E7CCC1-0F54-45F9-8492-62145046C625} = {3195E134-DE93-423E-BDED-37C654617B3A}
-		{092618E1-1F37-422C-82AF-17A1337B8986} = {3195E134-DE93-423E-BDED-37C654617B3A}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {3195E134-DE93-423E-BDED-37C654617B3A}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {3195E134-DE93-423E-BDED-37C654617B3A}
 		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {3195E134-DE93-423E-BDED-37C654617B3A}
 		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {3195E134-DE93-423E-BDED-37C654617B3A}
 		{55F48501-FE1B-441B-A786-A14001AD2F04} = {3195E134-DE93-423E-BDED-37C654617B3A}

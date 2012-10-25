@@ -8,52 +8,46 @@ namespace Atlantis.Framework.WSTService.Impl
 {
   public class WSTTemplateInfoRequest : IRequest
   {
-    public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement configElement)
     {
-      WSTServiceWS.WSTService wstServiceClient = null;
       IResponseData responseData;
 
       try
       {
-        WSTTemplateInfoRequestData wstTemplateInfoRequestData = (WSTTemplateInfoRequestData)oRequestData;
-        WsConfigElement wsConfig = ((WsConfigElement)oConfig);
+        WSTTemplateInfoRequestData wstTemplateInfoRequestData = (WSTTemplateInfoRequestData)requestData;
+        WsConfigElement wsConfig = (WsConfigElement)configElement;
 
-        wstServiceClient = new WSTServiceWS.WSTService();
-        wstServiceClient.Url = wsConfig.WSURL;
-        wstServiceClient.Timeout = (int)Math.Truncate(wstTemplateInfoRequestData.RequestTimeout.TotalMilliseconds);
+        using (WSTServiceWS.WSTService wstServiceClient = new WSTServiceWS.WSTService())
+        {
+          wstServiceClient.Url = wsConfig.WSURL;
+          wstServiceClient.Timeout = (int)Math.Truncate(wstTemplateInfoRequestData.RequestTimeout.TotalMilliseconds);
 
-        ThemeInfo[] themeInfo = null;
-        if (wstTemplateInfoRequestData.CategoryID > 0)
-        {
-          themeInfo = wstServiceClient.GetActiveWSTThemesByCategory(wstTemplateInfoRequestData.CategoryID);
-        }
-        else
-        {
-          themeInfo = wstServiceClient.GetAllActiveWSTThemes();
-        }
+          ThemeInfo[] themeInfo = null;
+          if (wstTemplateInfoRequestData.CategoryId > 0)
+          {
+            themeInfo = wstServiceClient.GetActiveWSTThemesByCategory(wstTemplateInfoRequestData.CategoryId);
+          }
+          else
+          {
+            themeInfo = wstServiceClient.GetAllActiveWSTThemes();
+          }
 
-        List<WSTTemplateInfo> templates = new List<WSTTemplateInfo>();
-        foreach (ThemeInfo theme in themeInfo)
-        {
-          templates.Add(new WSTTemplateInfo(theme.CategoryId,
-                                      theme.ThemeId,
-                                      theme.ThemeLocation,
-                                      theme.ThemeName,
-                                      theme.ThemeThumbnailUrl,
-                                      theme.ThemeUrl));
+          List<WSTTemplateInfo> templates = new List<WSTTemplateInfo>();
+          foreach (ThemeInfo theme in themeInfo)
+          {
+            templates.Add(new WSTTemplateInfo(theme.CategoryId,
+                                        theme.ThemeId,
+                                        theme.ThemeLocation,
+                                        theme.ThemeName,
+                                        theme.ThemeThumbnailUrl,
+                                        theme.ThemeUrl));
+          }
+          responseData = new WSTTemplateInfoResponseData(templates);
         }
-        responseData = new WSTTemplateInfoResponseData(templates);
       }
       catch (Exception ex)
       {
-        responseData = new WSTTemplateInfoResponseData(oRequestData, ex);
-      }
-      finally
-      {
-        if (wstServiceClient != null)
-        {
-          wstServiceClient.Dispose();
-        }
+        responseData = new WSTTemplateInfoResponseData(requestData, ex);
       }
 
       return responseData;

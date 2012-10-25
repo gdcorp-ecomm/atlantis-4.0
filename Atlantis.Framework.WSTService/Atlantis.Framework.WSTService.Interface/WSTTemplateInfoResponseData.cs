@@ -19,16 +19,10 @@ namespace Atlantis.Framework.WSTService.Interface
       Templates = templates;
     }
 
-    public WSTTemplateInfoResponseData(RequestData oRequestData, Exception ex)
+    public WSTTemplateInfoResponseData(RequestData requestData, Exception ex)
     {
       IsSuccess = false;
-      _exception = new AtlantisException(oRequestData, MethodBase.GetCurrentMethod().DeclaringType.FullName, ex.Message, ex.StackTrace, ex);
-    }
-
-    public WSTTemplateInfoResponseData(RequestData oRequestData, string description, string message)
-    {
-      IsSuccess = false;
-      _exception = new AtlantisException(oRequestData, MethodBase.GetCurrentMethod().DeclaringType.FullName, description, message);
+      _exception = new AtlantisException(requestData, MethodBase.GetCurrentMethod().DeclaringType.FullName, ex.Message, ex.StackTrace, ex);
     }
 
     public AtlantisException GetException()

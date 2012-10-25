@@ -19,10 +19,10 @@ namespace Atlantis.Framework.WSTService.Interface
       Categories = categories;
     }
 
-    public WSTCategoryInfoResponseData(RequestData oRequestData, Exception ex)
+    public WSTCategoryInfoResponseData(RequestData requestData, Exception ex)
     {
       IsSuccess = false;
-      _exception = new AtlantisException(oRequestData, MethodBase.GetCurrentMethod().DeclaringType.FullName, ex.Message, ex.StackTrace, ex);
+      _exception = new AtlantisException(requestData, MethodBase.GetCurrentMethod().DeclaringType.FullName, ex.Message, ex.StackTrace, ex);
     }
 
     public AtlantisException GetException()

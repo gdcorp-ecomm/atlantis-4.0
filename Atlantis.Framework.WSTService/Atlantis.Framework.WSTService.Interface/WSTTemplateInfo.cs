@@ -2,12 +2,12 @@
 {
   public class WSTTemplateInfo
   {
-    public int CategoryId { get; set; }
-    public int TemplateId { get; set; }
-    public string TemplateLocation { get; set; }
-    public string TemplateName { get; set; }
-    public string TemplateThumbnailUrl { get; set; }
-    public string TemplateUrl { get; set; }
+    public int CategoryId { get; private set; }
+    public int TemplateId { get; private set; }
+    public string TemplateLocation { get; private set; }
+    public string TemplateName { get; private set; }
+    public string TemplateThumbnailUrl { get; private set; }
+    public string TemplateUrl { get; private set; }
 
     public WSTTemplateInfo(int categoryId, int templateId, string templateLocation, string templateName, string templateThumbnailUrl, string templateUrl)
     {

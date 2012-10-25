@@ -1,49 +1,50 @@
 ﻿using System;
 using System.Security.Cryptography;
+using System.Text;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.WSTService.Interface
 {
   public class WSTTemplateInfoRequestData : RequestData
   {
-    public int CategoryID { get; private set; }
+    public int CategoryId { get; private set; }
 
-    public WSTTemplateInfoRequestData(string sShopperID,
-                                      string sSourceURL,
-                                      string sOrderID,
-                                      string sPathway,
-                                      int iPageCount)
-      : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
+    public WSTTemplateInfoRequestData(string shopperId,
+                                      string sourceURL,
+                                      string orderId,
+                                      string pathway,
+                                      int pageCount)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
-      CategoryID = 0;
+      CategoryId = 0;
       RequestTimeout = new TimeSpan(0, 0, 5);
     }
 
-    public WSTTemplateInfoRequestData(int categoryID,
-                                      string sShopperID,
-                                      string sSourceURL,
-                                      string sOrderID,
-                                      string sPathway,
-                                      int iPageCount)
-      : base(sShopperID, sSourceURL, sOrderID, sPathway, iPageCount)
+    public WSTTemplateInfoRequestData(int categoryId,
+                                      string shopperId,
+                                      string sourceURL,
+                                      string orderId,
+                                      string pathway,
+                                      int pageCount)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
-      CategoryID = categoryID;
+      CategoryId = categoryId;
       RequestTimeout = new TimeSpan(0, 0, 5);
     }
 
     public override string GetCacheMD5()
     {
-      MD5 oMD5 = new MD5CryptoServiceProvider();
-      oMD5.Initialize();
-      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(GetCacheKey());
-      byte[] md5Bytes = oMD5.ComputeHash(stringBytes);
-      string sValue = BitConverter.ToString(md5Bytes, 0);
-      return sValue.Replace("-", string.Empty);
+      MD5 md5 = new MD5CryptoServiceProvider();
+      md5.Initialize();
+      byte[] stringBytes = ASCIIEncoding.ASCII.GetBytes(GetCacheKey());
+      byte[] md5Bytes = md5.ComputeHash(stringBytes);
+      string value = BitConverter.ToString(md5Bytes, 0);
+      return value.Replace("-", string.Empty);
     }
 
     private string GetCacheKey()
     {
-      return string.Format("WSTTemplateInfoRequestData_CategoryID={0}", CategoryID);
+      return string.Format("WSTTemplateInfoRequestData_CategoryId={0}", CategoryId);
     }
   }
 }

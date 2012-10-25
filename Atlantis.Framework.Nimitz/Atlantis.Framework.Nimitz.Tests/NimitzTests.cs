@@ -99,7 +99,14 @@ namespace Atlantis.Framework.Nimitz.Tests
     [TestMethod]
     public void GetDelimitedConnectionBasic()
     {
-      string connectInfo = NetConnect.LookupConnectInfo("corp.web.mya.orion", "corp.web.mya.dev.client.godaddy.com", "MYA", "NimitzTests.Webservice", ConnectLookupType.Delimited);
+      string connectInfo = NetConnect.LookupConnectInfo("corp.web.mya.orion", "corp.web.mya.dev.client.godaddy.com", "MYA", "NimitzTests.Delimited", ConnectLookupType.Delimited);
+      Assert.IsFalse(string.IsNullOrEmpty(connectInfo));
+    }
+
+    [TestMethod]
+    public void GetXmlConnectionMongo()
+    {
+      string connectInfo = NetConnect.LookupConnectInfo("corp.web.siteadmin.mongocontent", "corp.web.siteadmin.dev.client.godaddy.com", "CDSM", "NimitzTests.Xml", ConnectLookupType.Xml);
       Assert.IsFalse(string.IsNullOrEmpty(connectInfo));
     }
 

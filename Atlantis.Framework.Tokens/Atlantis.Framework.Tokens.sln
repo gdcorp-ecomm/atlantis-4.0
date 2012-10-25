@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{231F3310-3BE2-4FC0-AF5F-0367B11BECA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{29E7CCC1-0F54-45F9-8492-62145046C625}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{092618E1-1F37-422C-82AF-17A1337B8986}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Tokens.Interface", "Atlantis.Framework.Tokens.Interface\Atlantis.Framework.Tokens.Interface.csproj", "{79189505-C1C8-4282-83E2-0140A2635624}"
 EndProject
@@ -54,14 +54,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{29E7CCC1-0F54-45F9-8492-62145046C625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29E7CCC1-0F54-45F9-8492-62145046C625}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29E7CCC1-0F54-45F9-8492-62145046C625}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29E7CCC1-0F54-45F9-8492-62145046C625}.Release|Any CPU.Build.0 = Release|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{79189505-C1C8-4282-83E2-0140A2635624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{79189505-C1C8-4282-83E2-0140A2635624}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79189505-C1C8-4282-83E2-0140A2635624}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,8 +87,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{29E7CCC1-0F54-45F9-8492-62145046C625} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
-		{092618E1-1F37-422C-82AF-17A1337B8986} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
 		{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
 		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
 	EndGlobalSection

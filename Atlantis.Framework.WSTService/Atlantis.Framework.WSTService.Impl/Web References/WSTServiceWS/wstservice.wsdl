@@ -1,0 +1,976 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://starfield.websitetonight.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://starfield.websitetonight.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://starfield.websitetonight.com/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="LockWSTProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="quoteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="orionAccountUID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="lockedBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pfId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LockWSTProjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LockWSTProjectResult" type="tns:LockOperationResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="LockOperationResult">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Failed" />
+          <s:enumeration value="ProjectNotFound" />
+          <s:enumeration value="ProjectAlreadyLockedException" />
+          <s:enumeration value="DesignBackupException" />
+          <s:enumeration value="SetOrionAttributeException" />
+          <s:enumeration value="GetCustomTemplateStatusException" />
+          <s:enumeration value="CustomTemplatesNotUsedException" />
+          <s:enumeration value="OrionAccountNotFoundException" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="LockWSTProjectEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="quoteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="orionAccountUID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="lockedBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pfId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="backup" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LockWSTProjectExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LockWSTProjectExResult" type="tns:LockOperationResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UnLockWSTProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="quoteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="orionAccountUID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="unLockedBy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UnLockWSTProjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UnLockWSTProjectResult" type="tns:UnlockOperationResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="UnlockOperationResult">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Failed" />
+          <s:enumeration value="ProjectNotFound" />
+          <s:enumeration value="ProjectAlreadyUnlockedException" />
+          <s:enumeration value="DesignBackupException" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="UnLockWSTProjectEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="quoteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="orionAccountUID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="unLockedBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="backup" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UnLockWSTProjectExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UnLockWSTProjectExResult" type="tns:UnlockOperationResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateWSTProject_1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="apgProject" type="tns:Project" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Project">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OrionUid" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ThemeID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ColorsetIndex" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pages" type="tns:ArrayOfPage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Page" nillable="true" type="tns:Page" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Page">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PageLayoutID" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BrowserTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HeadingTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ButtonTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateWSTProject_1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateWSTProject_1Result" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="resultant" type="tns:Resultant" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Resultant">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResultantBaseOfResult" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="WebServiceResultantBaseOfResult" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Result" type="tns:Result" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Exception" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="Result">
+        <s:restriction base="s:string">
+          <s:enumeration value="Failure" />
+          <s:enumeration value="Success" />
+          <s:enumeration value="Exception" />
+          <s:enumeration value="PreviousSite" />
+          <s:enumeration value="PreviousProject" />
+          <s:enumeration value="PageLayoutInvalid" />
+          <s:enumeration value="BrowserTitleNotSpecified" />
+          <s:enumeration value="InvalidFileName" />
+          <s:enumeration value="OrionUidInvalid" />
+          <s:enumeration value="ColorsetIndexInvalid" />
+          <s:enumeration value="CompanyNameInvalid" />
+          <s:enumeration value="EmailInvalid" />
+          <s:enumeration value="PagesToFew" />
+          <s:enumeration value="ThemeIDInvalid" />
+          <s:enumeration value="XmlProjectNotWellFormed" />
+          <s:enumeration value="XmlProjectInvalid" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="CreateWSTProject_2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlProject" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateWSTProject_2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateWSTProject_2Result" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="resultant" type="tns:Resultant" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStagingPublishLink">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="orionAccountUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStagingPublishLinkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStagingPublishLinkResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsProjectDesignLocked">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="orionAccountUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsProjectDesignLockedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsProjectDesignLockedResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ColorIndexUpperBound_1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="themeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ColorIndexUpperBound_1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ColorIndexUpperBound_1Result" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="resultant" type="tns:ThemeResultant" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ThemeResultant">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WebServiceResultantBaseOfThemeResult" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="WebServiceResultantBaseOfThemeResult" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Result" type="tns:ThemeResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Exception" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ThemeResult">
+        <s:restriction base="s:string">
+          <s:enumeration value="Failure" />
+          <s:enumeration value="Success" />
+          <s:enumeration value="Exception" />
+          <s:enumeration value="CategoryInvalid" />
+          <s:enumeration value="ThemeInvalid" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetAllActiveWSTThemes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllActiveWSTThemesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllActiveWSTThemesResult" type="tns:ArrayOfThemeInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfThemeInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ThemeInfo" nillable="true" type="tns:ThemeInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ThemeInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ThemeLocation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ThemeName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ThemeId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CategoryId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ThemeUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ThemeThumbnailUrl" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllActiveThemes_1">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllActiveThemes_1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllActiveThemes_1Result" type="tns:ArrayOfThemeInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="resultant" type="tns:ThemeResultant" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetQuickSetupThemes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="isXXXDomain" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetQuickSetupThemesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetQuickSetupThemesResult" type="tns:ArrayOfThemeInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActiveDaVinciThemes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="resellerId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActiveDaVinciThemesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetActiveDaVinciThemesResult" type="tns:ArrayOfThemeInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="resultant" type="tns:ThemeResultant" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActiveWSTThemesByCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="categoryId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActiveWSTThemesByCategoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetActiveWSTThemesByCategoryResult" type="tns:ArrayOfThemeInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActiveThemesByCategory_1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="categoryID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActiveThemesByCategory_1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetActiveThemesByCategory_1Result" type="tns:ArrayOfThemeInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="resultant" type="tns:ThemeResultant" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllCategories_1">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllCategories_1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllCategories_1Result" type="tns:ArrayOfCategoryInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="resultant" type="tns:ThemeResultant" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCategoryInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CategoryInfo" nillable="true" type="tns:CategoryInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CategoryInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CategoryId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllWSTCategories">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllWSTCategoriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllWSTCategoriesResult" type="tns:ArrayOfCategoryInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWSTHeaderInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetWSTHeaderInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWSTHeaderInfoResult" type="tns:WSTHeaderInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WSTHeaderInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="newfeatureurl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="feedbackurl" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AccountExecCanAccessWSTAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountExecShopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="orionAccountUid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AccountExecCanAccessWSTAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AccountExecCanAccessWSTAccountResult" type="tns:AECheckResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AECheckResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AccountExecCanAccessWSTAccount" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="tns:AEResultCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="AEResultCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="APIStatusUnknown" />
+          <s:enumeration value="APISuccess" />
+          <s:enumeration value="APIError" />
+          <s:enumeration value="AccountExecFeatureDisabled" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LockWSTProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:LockWSTProject" />
+  </wsdl:message>
+  <wsdl:message name="LockWSTProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:LockWSTProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="LockWSTProjectExSoapIn">
+    <wsdl:part name="parameters" element="tns:LockWSTProjectEx" />
+  </wsdl:message>
+  <wsdl:message name="LockWSTProjectExSoapOut">
+    <wsdl:part name="parameters" element="tns:LockWSTProjectExResponse" />
+  </wsdl:message>
+  <wsdl:message name="UnLockWSTProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:UnLockWSTProject" />
+  </wsdl:message>
+  <wsdl:message name="UnLockWSTProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:UnLockWSTProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="UnLockWSTProjectExSoapIn">
+    <wsdl:part name="parameters" element="tns:UnLockWSTProjectEx" />
+  </wsdl:message>
+  <wsdl:message name="UnLockWSTProjectExSoapOut">
+    <wsdl:part name="parameters" element="tns:UnLockWSTProjectExResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateWSTProject_1SoapIn">
+    <wsdl:part name="parameters" element="tns:CreateWSTProject_1" />
+  </wsdl:message>
+  <wsdl:message name="CreateWSTProject_1SoapOut">
+    <wsdl:part name="parameters" element="tns:CreateWSTProject_1Response" />
+  </wsdl:message>
+  <wsdl:message name="CreateWSTProject_2SoapIn">
+    <wsdl:part name="parameters" element="tns:CreateWSTProject_2" />
+  </wsdl:message>
+  <wsdl:message name="CreateWSTProject_2SoapOut">
+    <wsdl:part name="parameters" element="tns:CreateWSTProject_2Response" />
+  </wsdl:message>
+  <wsdl:message name="GetStagingPublishLinkSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStagingPublishLink" />
+  </wsdl:message>
+  <wsdl:message name="GetStagingPublishLinkSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStagingPublishLinkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsProjectDesignLockedSoapIn">
+    <wsdl:part name="parameters" element="tns:IsProjectDesignLocked" />
+  </wsdl:message>
+  <wsdl:message name="IsProjectDesignLockedSoapOut">
+    <wsdl:part name="parameters" element="tns:IsProjectDesignLockedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ColorIndexUpperBound_1SoapIn">
+    <wsdl:part name="parameters" element="tns:ColorIndexUpperBound_1" />
+  </wsdl:message>
+  <wsdl:message name="ColorIndexUpperBound_1SoapOut">
+    <wsdl:part name="parameters" element="tns:ColorIndexUpperBound_1Response" />
+  </wsdl:message>
+  <wsdl:message name="GetAllActiveWSTThemesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllActiveWSTThemes" />
+  </wsdl:message>
+  <wsdl:message name="GetAllActiveWSTThemesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllActiveWSTThemesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllActiveThemes_1SoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllActiveThemes_1" />
+  </wsdl:message>
+  <wsdl:message name="GetAllActiveThemes_1SoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllActiveThemes_1Response" />
+  </wsdl:message>
+  <wsdl:message name="GetQuickSetupThemesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetQuickSetupThemes" />
+  </wsdl:message>
+  <wsdl:message name="GetQuickSetupThemesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetQuickSetupThemesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveDaVinciThemesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetActiveDaVinciThemes" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveDaVinciThemesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetActiveDaVinciThemesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveWSTThemesByCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetActiveWSTThemesByCategory" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveWSTThemesByCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetActiveWSTThemesByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveThemesByCategory_1SoapIn">
+    <wsdl:part name="parameters" element="tns:GetActiveThemesByCategory_1" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveThemesByCategory_1SoapOut">
+    <wsdl:part name="parameters" element="tns:GetActiveThemesByCategory_1Response" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCategories_1SoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllCategories_1" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCategories_1SoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllCategories_1Response" />
+  </wsdl:message>
+  <wsdl:message name="GetAllWSTCategoriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllWSTCategories" />
+  </wsdl:message>
+  <wsdl:message name="GetAllWSTCategoriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllWSTCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWSTHeaderInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWSTHeaderInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetWSTHeaderInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWSTHeaderInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="AccountExecCanAccessWSTAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:AccountExecCanAccessWSTAccount" />
+  </wsdl:message>
+  <wsdl:message name="AccountExecCanAccessWSTAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:AccountExecCanAccessWSTAccountResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WSTServiceSoap">
+    <wsdl:operation name="LockWSTProject">
+      <wsdl:input message="tns:LockWSTProjectSoapIn" />
+      <wsdl:output message="tns:LockWSTProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LockWSTProjectEx">
+      <wsdl:input message="tns:LockWSTProjectExSoapIn" />
+      <wsdl:output message="tns:LockWSTProjectExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UnLockWSTProject">
+      <wsdl:input message="tns:UnLockWSTProjectSoapIn" />
+      <wsdl:output message="tns:UnLockWSTProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UnLockWSTProjectEx">
+      <wsdl:input message="tns:UnLockWSTProjectExSoapIn" />
+      <wsdl:output message="tns:UnLockWSTProjectExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateWSTProject">
+      <wsdl:input name="CreateWSTProject_1" message="tns:CreateWSTProject_1SoapIn" />
+      <wsdl:output name="CreateWSTProject_1" message="tns:CreateWSTProject_1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateWSTProject">
+      <wsdl:input name="CreateWSTProject_2" message="tns:CreateWSTProject_2SoapIn" />
+      <wsdl:output name="CreateWSTProject_2" message="tns:CreateWSTProject_2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStagingPublishLink">
+      <wsdl:input message="tns:GetStagingPublishLinkSoapIn" />
+      <wsdl:output message="tns:GetStagingPublishLinkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsProjectDesignLocked">
+      <wsdl:input message="tns:IsProjectDesignLockedSoapIn" />
+      <wsdl:output message="tns:IsProjectDesignLockedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ColorsetIndexUpperBound">
+      <wsdl:input name="ColorIndexUpperBound_1" message="tns:ColorIndexUpperBound_1SoapIn" />
+      <wsdl:output name="ColorIndexUpperBound_1" message="tns:ColorIndexUpperBound_1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActiveWSTThemes">
+      <wsdl:input message="tns:GetAllActiveWSTThemesSoapIn" />
+      <wsdl:output message="tns:GetAllActiveWSTThemesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActiveThemes">
+      <wsdl:input name="GetAllActiveThemes_1" message="tns:GetAllActiveThemes_1SoapIn" />
+      <wsdl:output name="GetAllActiveThemes_1" message="tns:GetAllActiveThemes_1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuickSetupThemes">
+      <wsdl:input message="tns:GetQuickSetupThemesSoapIn" />
+      <wsdl:output message="tns:GetQuickSetupThemesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveDaVinciThemes">
+      <wsdl:input message="tns:GetActiveDaVinciThemesSoapIn" />
+      <wsdl:output message="tns:GetActiveDaVinciThemesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveWSTThemesByCategory">
+      <wsdl:input message="tns:GetActiveWSTThemesByCategorySoapIn" />
+      <wsdl:output message="tns:GetActiveWSTThemesByCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveThemesByCategory">
+      <wsdl:input name="GetActiveThemesByCategory_1" message="tns:GetActiveThemesByCategory_1SoapIn" />
+      <wsdl:output name="GetActiveThemesByCategory_1" message="tns:GetActiveThemesByCategory_1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCategories">
+      <wsdl:input name="GetAllCategories_1" message="tns:GetAllCategories_1SoapIn" />
+      <wsdl:output name="GetAllCategories_1" message="tns:GetAllCategories_1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWSTCategories">
+      <wsdl:input message="tns:GetAllWSTCategoriesSoapIn" />
+      <wsdl:output message="tns:GetAllWSTCategoriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWSTHeaderInfo">
+      <wsdl:input message="tns:GetWSTHeaderInfoSoapIn" />
+      <wsdl:output message="tns:GetWSTHeaderInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountExecCanAccessWSTAccount">
+      <wsdl:input message="tns:AccountExecCanAccessWSTAccountSoapIn" />
+      <wsdl:output message="tns:AccountExecCanAccessWSTAccountSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSTServiceSoap" type="tns:WSTServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LockWSTProject">
+      <soap:operation soapAction="http://starfield.websitetonight.com/LockWSTProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LockWSTProjectEx">
+      <soap:operation soapAction="http://starfield.websitetonight.com/LockWSTProjectEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnLockWSTProject">
+      <soap:operation soapAction="http://starfield.websitetonight.com/UnLockWSTProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnLockWSTProjectEx">
+      <soap:operation soapAction="http://starfield.websitetonight.com/UnLockWSTProjectEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWSTProject">
+      <soap:operation soapAction="http://starfield.websitetonight.com/CreateWSTProject_1" style="document" />
+      <wsdl:input name="CreateWSTProject_1">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateWSTProject_1">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWSTProject">
+      <soap:operation soapAction="http://starfield.websitetonight.com/CreateWSTProject_2" style="document" />
+      <wsdl:input name="CreateWSTProject_2">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateWSTProject_2">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStagingPublishLink">
+      <soap:operation soapAction="http://starfield.websitetonight.com/GetStagingPublishLink" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsProjectDesignLocked">
+      <soap:operation soapAction="http://starfield.websitetonight.com/IsProjectDesignLocked" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ColorsetIndexUpperBound">
+      <soap:operation soapAction="http://starfield.websitetonight.com/ColorIndexUpperBound_1" style="document" />
+      <wsdl:input name="ColorIndexUpperBound_1">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ColorIndexUpperBound_1">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActiveWSTThemes">
+      <soap:operation soapAction="http://starfield.websitetonight.com/GetAllActiveWSTThemes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActiveThemes">
+      <soap:operation soapAction="http://starfield.websitetonight.com/GetAllActiveThemes_1" style="document" />
+      <wsdl:input name="GetAllActiveThemes_1">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetAllActiveThemes_1">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuickSetupThemes">
+      <soap:operation soapAction="http://starfield.websitetonight.com/GetQuickSetupThemes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveDaVinciThemes">
+      <soap:operation soapAction="http://starfield.websitetonight.com/GetActiveDaVinciThemes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveWSTThemesByCategory">
+      <soap:operation soapAction="http://starfield.websitetonight.com/GetActiveWSTThemesByCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveThemesByCategory">
+      <soap:operation soapAction="http://starfield.websitetonight.com/GetActiveThemesByCategory_1" style="document" />
+      <wsdl:input name="GetActiveThemesByCategory_1">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetActiveThemesByCategory_1">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCategories">
+      <soap:operation soapAction="http://starfield.websitetonight.com/GetAllCategories_1" style="document" />
+      <wsdl:input name="GetAllCategories_1">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetAllCategories_1">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWSTCategories">
+      <soap:operation soapAction="http://starfield.websitetonight.com/GetAllWSTCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWSTHeaderInfo">
+      <soap:operation soapAction="http://starfield.websitetonight.com/GetWSTHeaderInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountExecCanAccessWSTAccount">
+      <soap:operation soapAction="http://starfield.websitetonight.com/AccountExecCanAccessWSTAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSTServiceSoap12" type="tns:WSTServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LockWSTProject">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/LockWSTProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LockWSTProjectEx">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/LockWSTProjectEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnLockWSTProject">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/UnLockWSTProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnLockWSTProjectEx">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/UnLockWSTProjectEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWSTProject">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/CreateWSTProject_1" style="document" />
+      <wsdl:input name="CreateWSTProject_1">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateWSTProject_1">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWSTProject">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/CreateWSTProject_2" style="document" />
+      <wsdl:input name="CreateWSTProject_2">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateWSTProject_2">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStagingPublishLink">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/GetStagingPublishLink" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsProjectDesignLocked">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/IsProjectDesignLocked" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ColorsetIndexUpperBound">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/ColorIndexUpperBound_1" style="document" />
+      <wsdl:input name="ColorIndexUpperBound_1">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ColorIndexUpperBound_1">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActiveWSTThemes">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/GetAllActiveWSTThemes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActiveThemes">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/GetAllActiveThemes_1" style="document" />
+      <wsdl:input name="GetAllActiveThemes_1">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetAllActiveThemes_1">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuickSetupThemes">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/GetQuickSetupThemes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveDaVinciThemes">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/GetActiveDaVinciThemes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveWSTThemesByCategory">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/GetActiveWSTThemesByCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveThemesByCategory">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/GetActiveThemesByCategory_1" style="document" />
+      <wsdl:input name="GetActiveThemesByCategory_1">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetActiveThemesByCategory_1">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCategories">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/GetAllCategories_1" style="document" />
+      <wsdl:input name="GetAllCategories_1">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetAllCategories_1">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWSTCategories">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/GetAllWSTCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWSTHeaderInfo">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/GetWSTHeaderInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountExecCanAccessWSTAccount">
+      <soap12:operation soapAction="http://starfield.websitetonight.com/AccountExecCanAccessWSTAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSTService">
+    <wsdl:port name="WSTServiceSoap" binding="tns:WSTServiceSoap">
+      <soap:address location="http://wstinternalservices.dev.intranet.gdg/wstservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSTServiceSoap12" binding="tns:WSTServiceSoap12">
+      <soap12:address location="http://wstinternalservices.dev.intranet.gdg/wstservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

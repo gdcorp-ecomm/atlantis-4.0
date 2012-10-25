@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://wstinternalservices.dev.intranet.gdg/wstservice.asmx?wsdl" docRef="http://wstinternalservices.dev.intranet.gdg/wstservice.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://wstinternalservices.dev.intranet.gdg/wstservice.asmx" xmlns:q1="http://starfield.websitetonight.com/" binding="q1:WSTServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://wstinternalservices.dev.intranet.gdg/wstservice.asmx" xmlns:q2="http://starfield.websitetonight.com/" binding="q2:WSTServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

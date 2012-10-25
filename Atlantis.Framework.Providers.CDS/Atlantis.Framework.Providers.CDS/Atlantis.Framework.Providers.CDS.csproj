@@ -81,6 +81,10 @@
       <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Tokens\Atlantis.Framework.Tokens.Interface\Atlantis.Framework.Tokens.Interface.csproj">
+      <Project>{79189505-c1c8-4282-83e2-0140a2635624}</Project>
+      <Name>Atlantis.Framework.Tokens.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

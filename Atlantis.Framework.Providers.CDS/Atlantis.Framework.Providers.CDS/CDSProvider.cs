@@ -9,6 +9,7 @@ using System.Web;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 using System.Linq;
+using Atlantis.Framework.Tokens.Interface;
 
 namespace Atlantis.Framework.Providers.CDS
 {
@@ -33,7 +34,8 @@ namespace Atlantis.Framework.Providers.CDS
     public T GetModel<T>(string query, Dictionary<string, string> customTokens) where T : new()
     {
 
-      var data = string.Empty;
+      var parsedData1 = string.Empty;
+      var parsedData2 = string.Empty;
       CDSResponseData responseData;
       CDSTokenizer tokenizer = new CDSTokenizer();
 
@@ -47,9 +49,14 @@ namespace Atlantis.Framework.Providers.CDS
         responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType );
         if (responseData.IsSuccess)
         {
-          data = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
+          //old token framework - this line will parse tokens that are in old format. Eg. {{product::3604::price::keepdecimal::yearly}}
+          //Eventually after all tokens have been converted into the format, this line would be removed from here.
+          parsedData1 = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
+
+          //new token framework - this line will parse token that are in new format.  Eg. [@T[AdCreditShowHide:{property: "google", html: "some html here..."}]@T]
+          TokenEvaluationResult result = TokenManager.ReplaceTokens(parsedData1, Container, out parsedData2);
         }
-        model = serializer.Deserialize<T>(data);
+        model = serializer.Deserialize<T>(parsedData2);
       }
       catch (Exception ex)
       {
@@ -67,7 +74,8 @@ namespace Atlantis.Framework.Providers.CDS
 
     public string GetJSON(string query, Dictionary<string, string> customTokens)
     {
-      var data = string.Empty;
+      var parsedData1 = string.Empty;
+      var parsedData2 = string.Empty;
       CDSResponseData responseData;
 
       bool bypassCache = false;
@@ -105,14 +113,20 @@ namespace Atlantis.Framework.Providers.CDS
         if (responseData.IsSuccess)
         {
           CDSTokenizer tokenizer = new CDSTokenizer();
-          data = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
+
+          //old token framework - this line will parse tokens that are in old format. Eg. {{product::3604::price::keepdecimal::yearly}}
+          //Eventually after all tokens have been converted into the format, this line would be removed from here.
+          parsedData1 = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
+
+          //new token framework - this line will parse token that are in new format.  Eg. [@T[AdCreditShowHide:{property: "google", html: "some html here..."}]@T]
+          TokenEvaluationResult result = TokenManager.ReplaceTokens(parsedData1, Container, out parsedData2);
         }
       }
       catch (Exception ex)
       {
         Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
       }
-      return data;
+      return parsedData2;
     }
 
     private bool IsValidMongoObjectId(string text)

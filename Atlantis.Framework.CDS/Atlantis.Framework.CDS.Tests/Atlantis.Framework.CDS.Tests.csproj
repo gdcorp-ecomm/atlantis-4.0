@@ -38,6 +38,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atlantis.Framework.CDS.Entities.Radios, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Atlantis.Framework.CDS.Entities.Radios\bin\Release\Atlantis.Framework.CDS.Entities.Radios.dll</HintPath>
+    </Reference>
+    <Reference Include="Atlantis.Framework.CDS.Entities.SalesTables, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Atlantis.Framework.CDS.Entities.SalesTables\bin\Release\Atlantis.Framework.CDS.Entities.SalesTables.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET35\Moq.dll</HintPath>
@@ -68,8 +76,12 @@
     <Compile Include="CDSResponseDataTest.cs" />
     <Compile Include="EntitiesTests\BobBannerInfoAndBobBannerPodTest.cs" />
     <Compile Include="EntitiesTests\BulkPanelTest.cs" />
+    <Compile Include="EntitiesTests\ComparePlansTableTest.cs" />
     <Compile Include="EntitiesTests\GeneralEntitiesTest.cs" />
     <Compile Include="EntitiesTests\BannerInfoAndBannerPodTest.cs" />
+    <Compile Include="EntitiesTests\OursVsTheirsTableTest.cs" />
+    <Compile Include="EntitiesTests\RadioContentTest.cs" />
+    <Compile Include="EntitiesTests\RadiosContainerTest.cs" />
     <Compile Include="EntitiesTests\SalesHeader4Test.cs" />
     <Compile Include="Helpers\CurrencyHelper.cs" />
     <Compile Include="Helpers\JsonChecker.cs" />

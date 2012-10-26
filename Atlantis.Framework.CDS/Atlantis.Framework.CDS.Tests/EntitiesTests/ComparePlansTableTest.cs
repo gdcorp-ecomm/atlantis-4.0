@@ -2,10 +2,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestSetUpAndSettings;
 
-namespace Atlantis.Framework.CDS.Entities.SalesTables.Tests
+namespace Atlantis.Framework.CDS.Tests
 {
   [TestClass()]
-  class OursVsTheirsTableTest
+  public class ComparePlansTableTest
   {
     private TestContext testContextInstance;
 
@@ -52,26 +52,26 @@ namespace Atlantis.Framework.CDS.Entities.SalesTables.Tests
     #endregion
 
     [TestCategory("CDS"), Priority(0), TestAssertions(3), TestMethod]
-    public void OursVsTheirsTableConstructorTest()
+    public void ComparePlansTableConstructorTest()
     {
-      OursVsTheirsTable target = new OursVsTheirsTable();
-      Assert.IsNotNull(target, "OursVsTheirsTable is null.");
-      Assert.IsNull(target.Columns, "OursVsTheirsTable columns default are not null.");
-      Assert.IsNull(target.Rows, "OursVsTheirsTable rows default are not null.");
+      ComparePlansTable target = new ComparePlansTable();
+      Assert.IsNotNull(target, "ComparePlansTable is null.");
+      Assert.IsNull(target.Columns, "ComparePlansTable columns default are not null.");
+      Assert.IsNull(target.Rows, "ComparePlansTable rows default are not null.");
     }
 
     [TestCategory("CDS"), Priority(0), TestAssertions(1), TestMethod]
-    public void OursVsTheirsTableColumnConstructorTest()
+    public void ComparePlansTableColumnConstructorTest()
     {
-      OursVsTheirsTable.OursVsTheirsTableColumn target = new OursVsTheirsTable.OursVsTheirsTableColumn();
-      Assert.IsNotNull(target, "OursVsTheirsTableColumn is null.");
+      ComparePlansTable.ComparePlansTableColumn target = new ComparePlansTable.ComparePlansTableColumn();
+      Assert.IsNotNull(target, "ComparePlansTableColumn is null.");
     }
 
     [TestCategory("CDS"), Priority(0), TestAssertions(1), TestMethod]
-    public void OursVsTheirsTableRowConstructorTest()
+    public void ComparePlansTableRowConstructorTest()
     {
-      OursVsTheirsTable.OursVsTheirsTableRow target = new OursVsTheirsTable.OursVsTheirsTableRow();
-      Assert.IsNotNull(target, "OursVsTheirsTableRow is null.");
+      ComparePlansTable.ComparePlansTableRow target = new ComparePlansTable.ComparePlansTableRow();
+      Assert.IsNotNull(target, "ComparePlansTableRow is null.");
     }
   }
 }

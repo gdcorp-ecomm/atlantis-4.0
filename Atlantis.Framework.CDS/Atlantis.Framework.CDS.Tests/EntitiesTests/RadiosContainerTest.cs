@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestSetUpAndSettings;
 
-namespace Atlantis.Framework.CDS.Entities.Radios.Tests
+namespace Atlantis.Framework.CDS.Tests
 {
 
   [TestClass()]

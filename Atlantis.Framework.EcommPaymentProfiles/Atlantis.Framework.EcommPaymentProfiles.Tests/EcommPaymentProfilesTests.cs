@@ -8,10 +8,11 @@ using Atlantis.Framework.EcommPaymentProfiles.Interface;
 namespace Atlantis.Framework.EcommPaymentProfiles.Tests
 {
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.EcommPaymentProfiles.Impl.dll")]
   public class GetEcommPaymentProfilesTests
   {
 
-    private const string _shopperId = "856907";
+    private const string _shopperId = "867900";
     private const int _requestType = 384;
 
 

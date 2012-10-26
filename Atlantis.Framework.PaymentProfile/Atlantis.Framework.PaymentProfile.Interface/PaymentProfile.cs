@@ -188,6 +188,12 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
       set { this[PaymentProfileFields.Currency] = value; }
     }
 
+    public string TaxID
+    {
+      get { return GetStringProperty(PaymentProfileFields.TaxID, string.Empty); }
+      set { this[PaymentProfileFields.TaxID] = value; }
+    }
+
     public string DisplayFriendlyName
     {
       get
@@ -267,6 +273,7 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
       public const string LicenseState = "license_state";
       public const string DateOfBirth = "dob";
       public const string Currency = "currency";
+      public const string TaxID = "tax_id";
 
       public const string ShopperID = "shopper_id";
     }

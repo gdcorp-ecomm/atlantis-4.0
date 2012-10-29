@@ -47,6 +47,7 @@
     <Compile Include="MobileDomainSearchWidget.cs" />
     <Compile Include="MobileProductDetailsWidget.cs" />
     <Compile Include="MobileProductDisclaimersWidget.cs" />
+    <Compile Include="MobileProductSelectorWidget.cs" />
     <Compile Include="MobileSimpleBannerWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

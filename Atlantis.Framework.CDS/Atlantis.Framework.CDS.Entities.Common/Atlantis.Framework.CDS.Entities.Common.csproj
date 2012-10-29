@@ -47,6 +47,7 @@
     <Compile Include="Interfaces\IAddToCartWidgetModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\ICDSDictionary.cs" />
     <Compile Include="Interfaces\ICDSWidget.cs" />
     <Compile Include="Interfaces\IContent.cs" />
     <Compile Include="Interfaces\IWidget.cs" />

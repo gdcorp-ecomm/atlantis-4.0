@@ -37,15 +37,9 @@ namespace Atlantis.Framework.CDS.Entities.SalesTables.Widgets
 
     public class ComparePlansTableColumn : TldElementBase
     {
-      public ComparePlansTableColumn()
-      {
-        this.ProductOption = new ProductOption();
-      }
-
-      public int Pfid { get; set; }
+      public List<ProductOption> ProductOptions;
       public bool AddToCartButton { get; set; }
       public bool OrangeAddToCartButton { get; set; }
-      public ProductOption ProductOption { get; set; }
 
       public string Heading { get; set; }
       public string Styles { get; set; }

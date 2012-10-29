@@ -107,6 +107,7 @@
     <Compile Include="Widgets\Tag.cs" />
     <Compile Include="Widgets\TldElementBase.cs" />
     <Compile Include="Widgets\TrackingPixel.cs" />
+    <Compile Include="Widgets\UserControlContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\" />

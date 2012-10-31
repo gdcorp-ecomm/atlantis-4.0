@@ -6,13 +6,13 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
 {
   internal class RazorRenderingEngine : IRenderingEngine
   {
-    public string Render<T>(string rawContent, T model)
+    public string Render(string rawContent, dynamic model)
     {
       string html;
 
       try
       {
-        html = Razor.Parse(rawContent, model);
+        html = model == null ? string.Empty : Razor.Parse(rawContent, model);
       }
       catch (Exception ex)
       {

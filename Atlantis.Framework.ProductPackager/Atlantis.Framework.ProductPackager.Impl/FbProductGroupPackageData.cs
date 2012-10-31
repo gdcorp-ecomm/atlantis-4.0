@@ -35,15 +35,15 @@ namespace Atlantis.Framework.ProductPackager.Impl
     }
 
     private double? _duration;
-    public double Duration
+    public double? Duration
     {
       get
       {
         if(!_duration.HasValue)
         {
-          _duration = 1; // TODO: Hard coded until the service returns this
+          _duration = null; // TODO: Hard coded until the service returns this
         }
-        return _duration.Value;
+        return _duration;
       }
     }
 

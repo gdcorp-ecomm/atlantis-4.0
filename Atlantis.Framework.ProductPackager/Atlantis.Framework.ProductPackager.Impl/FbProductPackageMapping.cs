@@ -7,16 +7,16 @@ namespace Atlantis.Framework.ProductPackager.Impl
   {
     private readonly ProductGroupPackage _fbProductPackageMapping;
 
-    private int? _productPackageId;
-    public int ProductPackageId
+    private string _productPackageId;
+    public string ProductPackageId
     {
       get
       {
-        if(!_productPackageId.HasValue)
+        if(_productPackageId == null)
         {
-          _productPackageId = ParseHelper.ParseInt(_fbProductPackageMapping.pkgid, "ProductGroupPackage \"pkgid\" is not an integer. Value: {0}");
+          _productPackageId = _fbProductPackageMapping.pkgid;
         }
-        return _productPackageId.Value;
+        return _productPackageId;
       }
     }
 

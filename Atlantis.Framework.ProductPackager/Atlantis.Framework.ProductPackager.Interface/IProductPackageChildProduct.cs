@@ -7,7 +7,7 @@ namespace Atlantis.Framework.ProductPackager.Interface
 
     int Quantity { get; }
 
-    double Duration { get; }
+    double? Duration { get; }
 
     bool IsChild { get; }
 

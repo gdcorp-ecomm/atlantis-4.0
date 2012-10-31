@@ -4,16 +4,17 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.AddItem.Interface")]
+[assembly: AssemblyTitle("Atlantis.Framework.ProductPackagerAddToCartHandler")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug")]
 #else
 [assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release")]
 #endif
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com")]
-[assembly: AssemblyProduct("Atlantis.Framework.AddItem.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2008-2012")]
+[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
+[assembly: AssemblyProduct("Atlantis.Framework.ProductPackagerAddToCartHandler")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -23,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("71fe4126-6e6f-4b46-8fca-0cd9cf3ffe3a")]
+[assembly: Guid("8c9efb47-b4f0-4a0a-a417-de3d1e8630fb")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,7 +33,8 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Revision and Build Numbers 
+// You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.12.10.25")]
+[assembly: AssemblyFileVersion("4.12.10.30")]

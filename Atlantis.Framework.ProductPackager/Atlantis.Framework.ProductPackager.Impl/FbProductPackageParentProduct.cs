@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.ProductPackager.Impl.ProductPackage;
 using Atlantis.Framework.ProductPackager.Interface;
 
@@ -10,7 +11,7 @@ namespace Atlantis.Framework.ProductPackager.Impl
     
     public int Quantity { get; private set; }
     
-    public double Duration { get; private set; }
+    public double? Duration { get; private set; }
     
     public string DiscountCode { get; private set; }
     
@@ -20,17 +21,22 @@ namespace Atlantis.Framework.ProductPackager.Impl
     
     public IList<IProductPackageChildProduct> ChildProducts { get; private set; }
 
-    private FbProductPackageParentProduct(string productId, string quantity, string duration, string discountCode, string displayOverride, string isParent)
+    private FbProductPackageParentProduct(string productId, string quantity, string duration, string discountCode, string displayOverride, string parentFlag)
     {
       ProductId = ParseHelper.ParseInt(productId, "ParentProd \"pfid\" is not an integer. Value: {0}");
       Quantity = ParseHelper.ParseInt(quantity, "ParentProd \"qty\" is not an integer. Value: {0}");
-      Duration = ParseHelper.ParseDouble(duration, "ParentProd \"duration\" is not an double. Value: {0}");
+
+      if (!string.IsNullOrEmpty(duration))
+      {
+        Duration = ParseHelper.ParseDouble(duration, "ParentProd \"duration\" is not an double. Value: {0}");
+      }
+
       DiscountCode = discountCode;
       DisplayOverride = displayOverride;
-      IsParent = !string.IsNullOrEmpty(isParent) && ParseHelper.ParseBool(isParent, "CartParentProd \"parentflag\" is not an bool. Value: {0}");
+      IsParent = !string.IsNullOrEmpty(parentFlag) && string.Compare(parentFlag, "child", StringComparison.OrdinalIgnoreCase) == 0;
     }
 
-    internal FbProductPackageParentProduct(CartParentProd parentProduct) : this(parentProduct.pfid, parentProduct.qty, "1", parentProduct.discountcode, parentProduct.dispoverride, parentProduct.parentflag)
+    internal FbProductPackageParentProduct(CartParentProd parentProduct) : this(parentProduct.pfid, parentProduct.qty, null, parentProduct.discountcode, parentProduct.dispoverride, parentProduct.parentflag)
     {
       List<FbProductPackageChildProduct> childProducts = new List<FbProductPackageChildProduct>(parentProduct.ChildProds.Length);
 
@@ -42,7 +48,7 @@ namespace Atlantis.Framework.ProductPackager.Impl
       SetChildProducts(childProducts);
     }
 
-    internal FbProductPackageParentProduct(AddonParentProd parentProduct) : this(parentProduct.pfid, parentProduct.qty, "1", string.Empty, string.Empty, "false")
+    internal FbProductPackageParentProduct(AddonParentProd parentProduct) : this(parentProduct.pfid, parentProduct.qty, null, string.Empty, string.Empty, string.Empty)
     {
       List<FbProductPackageChildProduct> childProducts = new List<FbProductPackageChildProduct>(parentProduct.ChildProds.Length);
 
@@ -54,7 +60,7 @@ namespace Atlantis.Framework.ProductPackager.Impl
       SetChildProducts(childProducts);
     }
 
-    internal FbProductPackageParentProduct(UpsellParentProd parentProduct) : this(parentProduct.pfid, parentProduct.qty, "1", string.Empty, string.Empty, "false")
+    internal FbProductPackageParentProduct(UpsellParentProd parentProduct) : this(parentProduct.pfid, parentProduct.qty, null, string.Empty, string.Empty, string.Empty)
     {
       List<FbProductPackageChildProduct> childProducts = new List<FbProductPackageChildProduct>(parentProduct.ChildProds.Length);
 

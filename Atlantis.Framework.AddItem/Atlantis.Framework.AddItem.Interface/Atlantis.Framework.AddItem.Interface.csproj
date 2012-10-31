@@ -70,6 +70,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddItemAttributes.cs" />
     <Compile Include="AddItemRequestData.cs" />
     <Compile Include="AddItemResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

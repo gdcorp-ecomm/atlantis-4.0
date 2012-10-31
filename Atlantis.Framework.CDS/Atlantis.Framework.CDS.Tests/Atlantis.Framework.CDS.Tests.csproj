@@ -38,14 +38,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.CDS.Entities.Radios, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Atlantis.Framework.CDS.Entities.Radios\bin\Release\Atlantis.Framework.CDS.Entities.Radios.dll</HintPath>
-    </Reference>
-    <Reference Include="Atlantis.Framework.CDS.Entities.SalesTables, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Atlantis.Framework.CDS.Entities.SalesTables\bin\Release\Atlantis.Framework.CDS.Entities.SalesTables.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET35\Moq.dll</HintPath>
@@ -140,6 +132,14 @@
     <ProjectReference Include="..\Atlantis.Framework.CDS.Entities.Homepage\Atlantis.Framework.CDS.Entities.Homepage.csproj">
       <Project>{75d18432-b7c7-45cd-8f82-572ccd12a655}</Project>
       <Name>Atlantis.Framework.CDS.Entities.Homepage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.CDS.Entities.Radios\Atlantis.Framework.CDS.Entities.Radios.csproj">
+      <Project>{601252bf-0c8a-4f90-a061-0352d253ab09}</Project>
+      <Name>Atlantis.Framework.CDS.Entities.Radios</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.CDS.Entities.SalesTables\Atlantis.Framework.CDS.Entities.SalesTables.csproj">
+      <Project>{81c26e74-7065-4826-bed9-6097ee35e110}</Project>
+      <Name>Atlantis.Framework.CDS.Entities.SalesTables</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.CDS.Entities\Atlantis.Framework.CDS.Entities.csproj">
       <Project>{70E74CBB-1079-4EFF-AE95-5B6542C5DA80}</Project>

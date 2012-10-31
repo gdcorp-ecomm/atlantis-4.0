@@ -6,14 +6,9 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
   {
     private static readonly ProviderTypeCache _providerTypeCache = new ProviderTypeCache();
 
-    internal static bool GetTemplateDataSourceProvider(string assemblyName, string providerType, IProviderContainer providerContainer, out ITemplateDataSourceProvider templateDataSourceProvider)
+    internal static bool GetProvider<T>(string assemblyName, string providerType, IProviderContainer providerContainer, out T provider) where T : class
     {
-      return _providerTypeCache.GetTemplateDataSourceProvider(assemblyName, providerType, providerContainer, out templateDataSourceProvider);
-    }
-
-    internal static bool GetTemplateContentProvider(string assemblyName, string providerType, IProviderContainer providerContainer, out ITemplateContentProvider templateContentProvider)
-    {
-      return _providerTypeCache.GetTemplateContentProviderProvider(assemblyName, providerType, providerContainer, out templateContentProvider);
+      return _providerTypeCache.GetProvider(assemblyName, providerType, providerContainer, out provider);
     }
   }
 }

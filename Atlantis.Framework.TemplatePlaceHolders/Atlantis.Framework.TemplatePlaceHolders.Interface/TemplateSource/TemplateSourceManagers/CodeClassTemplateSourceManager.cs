@@ -14,7 +14,7 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
       string typeKey = templateRequestKeyHandlerProvider.GetFormattedTemplateRequestKey(templateSource.RequestKey, providerContainer);
 
       ITemplateContentProvider templateContentProvider;
-      if (ProviderTypeCacheManager.GetTemplateContentProvider(templateSource.SourceAssembly, typeKey, providerContainer, out templateContentProvider))
+      if (ProviderTypeCacheManager.GetProvider(templateSource.SourceAssembly, typeKey, providerContainer, out templateContentProvider))
       {
         templateContent = templateContentProvider.Content;
       }

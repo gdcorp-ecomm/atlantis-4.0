@@ -44,8 +44,8 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface.Tests
       Console.WriteLine(string.Empty);
       Debug.WriteLine(string.Empty);
 
-      Console.WriteLine("Output: {0}", output);
-      Debug.WriteLine("Output: {0}", output);
+      Console.WriteLine("Output: {0}", output2);
+      Debug.WriteLine("Output: {0}", output2);
 
       Assert.IsTrue(!string.IsNullOrEmpty(output));
     }

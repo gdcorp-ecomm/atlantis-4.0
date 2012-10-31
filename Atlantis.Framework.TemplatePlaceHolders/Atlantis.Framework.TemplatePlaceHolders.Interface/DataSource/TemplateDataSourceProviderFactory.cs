@@ -8,7 +8,7 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
     {
       ITemplateDataSourceProvider templateDataSourceProvider;
       
-      if(!ProviderTypeCacheManager.GetTemplateDataSourceProvider(dataSource.ProviderAssembly, dataSource.ProviderType, providerContainer, out templateDataSourceProvider))
+      if(!ProviderTypeCacheManager.GetProvider(dataSource.ProviderAssembly, dataSource.ProviderType, providerContainer, out templateDataSourceProvider))
       {
         templateDataSourceProvider = new NullTemplateDataSourceProvider();
       }

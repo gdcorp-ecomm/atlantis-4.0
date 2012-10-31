@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Web;
 using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.Interface;
@@ -9,7 +10,7 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
   {
     public string GetTemplateSource(ITemplateSource templateSource, IProviderContainer providerContainer)
     {
-      string template;
+      string template = string.Empty;
 
       try
       {
@@ -17,21 +18,24 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
         IShopperContext shopperContext = providerContainer.Resolve<IShopperContext>();
         ITemplateRequestKeyHandlerProvider templateRequestKeyHandlerProvider = TemplateRequestKeyHandlerFactory.GetInstance(providerContainer);
 
-        CDSRequestData requestData = new CDSRequestData(shopperContext.ShopperId,
-                                                        HttpContext.Current != null ? HttpContext.Current.Request.Url.ToString() : string.Empty,
-                                                        string.Empty,
-                                                        siteContext.Pathway,
-                                                        siteContext.PageCount,
-                                                        templateRequestKeyHandlerProvider.GetFormattedTemplateRequestKey(templateSource.RequestKey, providerContainer));
+        if (templateRequestKeyHandlerProvider != null)
+        {
+          CDSRequestData requestData = new CDSRequestData(shopperContext.ShopperId,
+                                                          HttpContext.Current != null ? HttpContext.Current.Request.Url.ToString() : string.Empty,
+                                                          string.Empty,
+                                                          siteContext.Pathway,
+                                                          siteContext.PageCount,
+                                                          templateRequestKeyHandlerProvider.GetFormattedTemplateRequestKey(templateSource.RequestKey, providerContainer));
 
-        CDSResponseData responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, 424);
+          CDSResponseData responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, 424);
 
-        template = responseData.ResponseData;
+          template = responseData.ResponseData;
+        }
       }
       catch (Exception ex)
       {
-        // TODO: Log silent and return an empty string?
-        throw new Exception(string.Format("Unable to retreive CDS template. Key: {0}, Exception: {1}", templateSource.RequestKey, ex.Message));
+        template = string.Empty;
+        ErrorLogHelper.LogError(new Exception(string.Format("Unable to retreive CDS template. Key: {0}, Exception: {1}", templateSource.RequestKey, ex.Message)), MethodBase.GetCurrentMethod().DeclaringType.FullName);
       }
 
       return template;

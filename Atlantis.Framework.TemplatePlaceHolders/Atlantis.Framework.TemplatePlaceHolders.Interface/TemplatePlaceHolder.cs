@@ -1,8 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Web;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.TemplatePlaceHolders.Interface
 {
@@ -49,7 +52,7 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
       }
       catch (Exception ex)
       {
-        // TODO: Re-throw or do we want to log silent and continue?
+        ErrorLogHelper.LogError(ex, MethodBase.GetCurrentMethod().DeclaringType.FullName);
       }
 
       return templatePlaceHolder;

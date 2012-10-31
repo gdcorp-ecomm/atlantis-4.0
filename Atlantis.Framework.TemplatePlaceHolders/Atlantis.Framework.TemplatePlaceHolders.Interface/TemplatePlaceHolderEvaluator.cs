@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.TemplatePlaceHolders.Interface
@@ -13,16 +14,19 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
 
     private dynamic GetModel(ITemplatePlaceHolder templatePlaceHolder, IProviderContainer providerContainer)
     {
-      dynamic model;
+      dynamic model = null;
 
       try
       {
         ITemplateDataSourceProvider templateDataSourceProvider = TemplateDataSourceProviderFactory.GetInstance(templatePlaceHolder.DataSource, providerContainer);
-        model = templateDataSourceProvider.GetDataSource(templatePlaceHolder.DataSource);
+        if (templateDataSourceProvider != null)
+        {
+          model = templateDataSourceProvider.GetDataSource(templatePlaceHolder.DataSource);
+        }
       }
       catch(Exception ex)
       {
-        throw new Exception(string.Format("Unable to get model for template. Exception: {0}", ex.Message), ex);
+        ErrorLogHelper.LogError(new Exception(string.Format("Unable to get model for template. Exception: {0}", ex.Message)), MethodBase.GetCurrentMethod().DeclaringType.FullName);
       }
 
       return model;
@@ -34,7 +38,7 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
       dynamic model = GetModel(templatePlaceHolder, providerContainer);
       
       IRenderingEngine renderingEngine = RenderingEngineFactory.GetInstance(templatePlaceHolder.TemplateSource.Format);
-      return renderingEngine.Render(template, model);
+      return renderingEngine.Render(template, model);  
     }
   }
 }

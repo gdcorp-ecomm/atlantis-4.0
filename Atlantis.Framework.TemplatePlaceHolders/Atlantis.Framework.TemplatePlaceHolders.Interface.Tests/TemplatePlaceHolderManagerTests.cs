@@ -32,6 +32,9 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface.Tests
     {
       string rawText = @"<!DOCTYPE html><html><head></head><title>Browser Title</title><body><div>[@TemplatePlaceHolder[{ ""templateSource"": { ""format"":""razor"", ""source"":""codeclass"", ""sourceAssembly"":""Atlantis.Framework.TemplatePlaceHolders.Interface.Tests"", ""requestKey"":""Atlantis.Framework.TemplatePlaceHolders.Interface.Tests.Templates.{0}.{1}._{2}.TestTemplateContentProvider"" }, ""dataSource"":{ ""providerAssembly"":""Atlantis.Framework.TemplatePlaceHolders.Interface.Tests"",""providerType"":""Atlantis.Framework.TemplatePlaceHolders.Interface.Tests.TestTemplateDataSoureProvider"", ""defaultDataSourceId"":""136"",""dataSourceOptions"":[ { ""key"":""us"",""value"":""136"" },{ ""key"":""eu"",""value"":""137"" },{ ""key"":""ap"",""value"":""138"" }]}}]@TemplatePlaceHolder]</div></body></html>";
       string output = TemplatePlaceHolderManager.ReplacePlaceHolders(rawText, ProviderContainer);
+      
+      // Make sure provider cache is working, 2nd try things should be cached
+      string output2 = TemplatePlaceHolderManager.ReplacePlaceHolders(rawText, ProviderContainer);
 
       Console.WriteLine("Original: {0}", rawText);
       Debug.WriteLine("Original: {0}", rawText);

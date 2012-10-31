@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.TemplatePlaceHolders.Interface
@@ -11,7 +12,7 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
 
       if (!providerContainer.TryResolve(out templateRequestKeyHandlerProvider))
       {
-        throw new Exception("Cannot resolve type \"ITemplateRequestKeyHandlerProvider\".  Make sure it is registered by your provider container.");
+        ErrorLogHelper.LogError(new Exception("Cannot resolve type \"ITemplateRequestKeyHandlerProvider\".  Make sure it is registered by your provider container."), MethodBase.GetCurrentMethod().DeclaringType.FullName);
       }
 
       return templateRequestKeyHandlerProvider;

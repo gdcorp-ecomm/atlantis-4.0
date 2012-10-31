@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Web;
 using Atlantis.Framework.Interface;
 
@@ -9,13 +10,13 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
   {
     private string GetTemplateFromFile(string filePath)
     {
-      string template;
+      string template = string.Empty;
 
       try
       {
         if(!File.Exists(filePath))
         {
-          throw new Exception(string.Format("localweb template does not exist. Path: {0}", filePath));
+          ErrorLogHelper.LogError(new Exception(string.Format("localweb template does not exist. Path: {0}", filePath)), MethodBase.GetCurrentMethod().DeclaringType.FullName);
         }
 
         using (StreamReader streamReader = new StreamReader(filePath))
@@ -25,8 +26,7 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
       }
       catch (Exception ex)
       {
-        // Log silent and return empty?
-        throw new Exception(string.Format("Unable to load localweb template. Path: {0}, Exception: {1}", filePath, ex.Message), ex);
+        ErrorLogHelper.LogError(new Exception(string.Format("Unable to load localweb template. Path: {0}, Exception: {1}", filePath, ex.Message)), MethodBase.GetCurrentMethod().DeclaringType.FullName);
       }
 
       return template;
@@ -36,16 +36,18 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
     {
       string template;
 
-      if(HttpContext.Current == null)
+      if (HttpContext.Current == null)
       {
-        // TODO: Log silent instead and return emtpy?
-        throw new Exception("TemplateSource \"source\" value \"localweb\" can only be used in a web context.");
+        template = string.Empty;
+        ErrorLogHelper.LogError(new Exception("TemplateSource \"source\" value \"localweb\" can only be used in a web context."), MethodBase.GetCurrentMethod().DeclaringType.FullName);
       }
+      else
+      {
+        ITemplateRequestKeyHandlerProvider templateRequestKeyHandlerProvider = TemplateRequestKeyHandlerFactory.GetInstance(providerContainer);
+        string filePath = HttpContext.Current.Server.MapPath(templateRequestKeyHandlerProvider.GetFormattedTemplateRequestKey(templateSource.RequestKey, providerContainer));
 
-      ITemplateRequestKeyHandlerProvider templateRequestKeyHandlerProvider = TemplateRequestKeyHandlerFactory.GetInstance(providerContainer);
-      string filePath = HttpContext.Current.Server.MapPath(templateRequestKeyHandlerProvider.GetFormattedTemplateRequestKey(templateSource.RequestKey, providerContainer));
-
-      template = DataCache.DataCache.GetCustomCacheData(filePath, GetTemplateFromFile);
+        template = DataCache.DataCache.GetCustomCacheData(filePath, GetTemplateFromFile);
+      }
 
       return template;
     }

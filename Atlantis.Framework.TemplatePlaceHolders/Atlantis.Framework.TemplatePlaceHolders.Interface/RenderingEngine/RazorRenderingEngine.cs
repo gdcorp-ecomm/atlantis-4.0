@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using RazorEngine;
 
 namespace Atlantis.Framework.TemplatePlaceHolders.Interface
@@ -15,7 +16,8 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
       }
       catch (Exception ex)
       {
-        throw new Exception(string.Format("Unable to render razor template. Exception: {0}", ex.Message), ex);
+        html = string.Empty;
+        ErrorLogHelper.LogError(new Exception(string.Format("Unable to render razor template. Exception: {0}", ex.Message)), MethodBase.GetCurrentMethod().DeclaringType.FullName);
       }
 
       return html;

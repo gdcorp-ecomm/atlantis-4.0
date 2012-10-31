@@ -1,4 +1,6 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System;
+using System.Reflection;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.TemplatePlaceHolders.Interface
 {
@@ -6,7 +8,7 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
   {
     public string GetTemplateSource(ITemplateSource templateSource, IProviderContainer providerContainer)
     {
-      // TODO: Log silent?
+      ErrorLogHelper.LogError(new Exception("NullTemplateSourceManager selected. Please verify you have a valid template source in your placeholder."), MethodBase.GetCurrentMethod().DeclaringType.FullName);
       return string.Empty;
     }
   }

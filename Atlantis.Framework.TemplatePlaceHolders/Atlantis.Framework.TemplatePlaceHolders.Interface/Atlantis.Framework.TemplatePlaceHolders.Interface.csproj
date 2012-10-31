@@ -49,11 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\ProviderTypeCache.cs" />
+    <Compile Include="Cache\ProviderTypeCacheManager.cs" />
     <Compile Include="DataSource\DataSource.cs" />
     <Compile Include="DataSource\DataSourceOption.cs" />
     <Compile Include="DataSource\IDataSource.cs" />
     <Compile Include="DataSource\ITemplateDataSourceProvider.cs" />
+    <Compile Include="DataSource\NullTemplateDataSourceProvider.cs" />
     <Compile Include="DataSource\TemplateDataSourceProviderFactory.cs" />
+    <Compile Include="ErrorLogHelper.cs" />
     <Compile Include="Extensions\AssemblyHelper.cs" />
     <Compile Include="Extensions\IProviderContainerExtensions.cs" />
     <Compile Include="ITemplatePlaceHolder.cs" />

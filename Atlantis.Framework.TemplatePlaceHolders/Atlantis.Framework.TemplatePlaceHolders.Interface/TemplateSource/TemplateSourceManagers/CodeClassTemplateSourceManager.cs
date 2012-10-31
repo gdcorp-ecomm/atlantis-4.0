@@ -8,34 +8,23 @@ namespace Atlantis.Framework.TemplatePlaceHolders.Interface
   {
     public string GetTemplateSource(ITemplateSource templateSource, IProviderContainer providerContainer)
     {
-      // TODO: Cache all of this reflection
-
-      ITemplateContentProvider templateContentProvider;
-
+      string templateContent;
+      
       ITemplateRequestKeyHandlerProvider templateRequestKeyHandlerProvider = TemplateRequestKeyHandlerFactory.GetInstance(providerContainer);
       string typeKey = templateRequestKeyHandlerProvider.GetFormattedTemplateRequestKey(templateSource.RequestKey, providerContainer);
 
-      Assembly assembly = !string.IsNullOrEmpty(templateSource.SourceAssembly) ? Assembly.Load(templateSource.SourceAssembly) : AssemblyHelper.GetApplicationAssembly();
-      Type typeOfTemplateContent = assembly.GetType(typeKey);
-
-      if (typeOfTemplateContent != null)
+      ITemplateContentProvider templateContentProvider;
+      if (ProviderTypeCacheManager.GetTemplateContentProvider(templateSource.SourceAssembly, typeKey, providerContainer, out templateContentProvider))
       {
-        if (typeOfTemplateContent.GetInterface("ITemplateContentProvider") != typeof(ITemplateContentProvider))
-        {
-          throw new Exception(string.Format("Static file type \"{0}\" does not implement \"ITemplateContentProvider\".", typeKey));
-        }
-
-        if(!providerContainer.TryResolve(typeOfTemplateContent, out templateContentProvider))
-        {
-          throw new Exception(string.Format("Unable to resolve ProviderType \"{0}\". Make sure it is registered by your provider container.", typeKey));
-        }
+        templateContent = templateContentProvider.Content;
       }
       else
       {
-        throw new Exception(string.Format("Unable to reflect type of static file \"{0}\".", typeKey));
+        templateContent = string.Empty;
+        ErrorLogHelper.LogError(new Exception(string.Format("Unable to reflect type of static file \"{0}\".", typeKey)), MethodBase.GetCurrentMethod().DeclaringType.FullName);
       }
 
-      return templateContentProvider.Content;
+      return templateContent;
     }
   }
 }

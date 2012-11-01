@@ -8,6 +8,7 @@ namespace Atlantis.Framework.CDS.Entities.Radios.Widgets
   public class RadiosContainer : IWidgetModel
   {
     public string Heading { get; set; }
+    public string Name { get; set; }
 
     [JsonIgnore]
     public List<Widget<IWidgetModel>> Widgets { get; set; }

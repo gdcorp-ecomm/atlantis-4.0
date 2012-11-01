@@ -13,6 +13,7 @@ using System.Diagnostics;
 namespace Atlantis.Framework.ReceiptSurveyTypesGet.Test
 {
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.ReceiptSurveyTypesGet.Impl.dll")]
   public class UnitTest1
   {
     [TestMethod]

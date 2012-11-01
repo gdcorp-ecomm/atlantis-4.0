@@ -109,6 +109,7 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
         _otherSurveyTypes = _otherSurveyTypes.OrderBy(si => si.Text).ToList();
       }
 
+      _tvSurveyTypes.Insert(0, new SurveyItem("1", "Select One...", string.Empty));
       allSurveyTypes.AddRange(_tvSurveyTypes);
       allSurveyTypes.AddRange(_otherSurveyTypes);
 
@@ -118,7 +119,6 @@ namespace Atlantis.Framework.ReceiptSurveyTypesGet.Interface
         allSurveyTypes.ForEach(si => AddPositionToSurveyItem(ref si, ref position));
       }
 
-      _tvSurveyTypes.Insert(0, new SurveyItem("1", "Select One...", string.Empty));
       
       return allSurveyTypes;
     }

@@ -29,6 +29,7 @@ namespace Atlantis.Framework.CDS.Entities.Homepage.Widgets
     public string ImageWidth { get; set; }
     public string PodText { get; set; }
     public string PodLink { get; set; }
+    public bool ShowSaleTag { get; set; }
     public string CountryCodesList { get; set; }
     public string SplitValue { get; set; }
   }

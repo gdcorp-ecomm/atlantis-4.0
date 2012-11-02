@@ -72,7 +72,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     [RegularExpression(@"^\d+$", ErrorMessage="CI code must contain only digits.")]
     public string CiCode { get; set; }
     public string LinkType { get; set; }
-    [Required(ErrorMessage="Relative Url is required. Use \"default.aspx\" for the MYA home page.")]
     [RegularExpression(@"^([A-Za-z0-9_\-]+/?)*\.[A-Za-z]+$", ErrorMessage="Invalid Relative Url. Relative Url can contain letters, digits, underscores, dashes, forward slashes as directory separators, and a dot followed by a file extension")]
     public string RelativeUrl { get; set; }
     public bool Secure { get; set; }

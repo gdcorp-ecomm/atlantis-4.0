@@ -1,10 +1,13 @@
-﻿using System.Web.Routing;
+﻿using System.Collections.Generic;
+using System.Web.Routing;
 
 namespace Atlantis.Framework.Web.DynamicRouteHandler
 {
   public interface IDynamicRoute
   {
-    string RoutePath { get; }
+    DynamicRoutePath RoutePath { get; }
+
+    IEnumerable<DynamicRoutePath> AdditionalRoutePaths { get; }
 
     void RegisterRoute(RouteCollection routeCollection);
   }

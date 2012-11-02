@@ -11,17 +11,28 @@ namespace Atlantis.Framework.Web.DynamicRouteHandler
 
     private static void RegisterRoute(RouteCollection routeCollection, IDynamicRoute dynamicRoute)
     {
-      string routePathFormatted = dynamicRoute.RoutePath.ToLowerInvariant().Trim('/');
+      IList<string> routePaths = new List<string>(32);
+      routePaths.Add(dynamicRoute.RoutePath.Path.ToLowerInvariant().Trim('/'));
+      
+      if(dynamicRoute.AdditionalRoutePaths != null)
+      {
+        foreach (DynamicRoutePath additionalRoutePath in dynamicRoute.AdditionalRoutePaths)
+        {
+          routePaths.Add(additionalRoutePath.Path.ToLowerInvariant().Trim('/'));
+        }
+      }
 
-      if (!_registeredRouteHashSet.Contains(routePathFormatted))
+      foreach (string routePath in routePaths)
       {
-        dynamicRoute.RegisterRoute(routeCollection);
-        _registeredRouteHashSet.Add(routePathFormatted);
+        if(_registeredRouteHashSet.Contains(routePath))
+        {
+          throw new Exception(string.Format("Attempted to register a duplicate route: \"{0}\"", routePath));
+        }
+
+        _registeredRouteHashSet.Add(routePath);
       }
-      else
-      {
-        throw new Exception(string.Format("Attempted to register a duplicate route: \"{0}\"", routePathFormatted));
-      }
+      
+      dynamicRoute.RegisterRoute(routeCollection);
     }
 
     public static void AutoRegisterRouteHandlers(RouteCollection routeCollection)

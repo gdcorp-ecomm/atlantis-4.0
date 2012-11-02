@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DynamicRoutePath.cs" />
     <Compile Include="DynamicRouteHandlerBase.cs" />
     <Compile Include="DynamicRouteHandlerLoader.cs" />
     <Compile Include="DynamicRouteHandlerRegistrationManager.cs" />

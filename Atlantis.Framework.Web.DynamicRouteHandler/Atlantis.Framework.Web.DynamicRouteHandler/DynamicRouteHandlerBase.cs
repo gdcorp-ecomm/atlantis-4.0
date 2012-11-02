@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Web;
 using System.Web.Routing;
@@ -21,7 +22,12 @@ namespace Atlantis.Framework.Web.DynamicRouteHandler
       get { return false; }
     }
 
-    public abstract string RoutePath { get; }
+    public abstract DynamicRoutePath RoutePath { get; }
+
+    public virtual IEnumerable<DynamicRoutePath> AdditionalRoutePaths
+    {
+      get { return null; }
+    }
 
     protected void EndRequest(int statusCode)
     {
@@ -94,8 +100,15 @@ namespace Atlantis.Framework.Web.DynamicRouteHandler
 
     public void RegisterRoute(RouteCollection routeCollection)
     {
-      string routePathFormatted = RoutePath.ToLowerInvariant().Trim('/');
-      routeCollection.Add(new Route(routePathFormatted, this));
+      routeCollection.Add(RoutePath.Name, new Route(RoutePath.Path.ToLowerInvariant().Trim('/'), this));
+
+      if (AdditionalRoutePaths != null)
+      {
+        foreach (DynamicRoutePath additionalRoutePath in AdditionalRoutePaths)
+        {
+          routeCollection.Add(additionalRoutePath.Name, new Route(additionalRoutePath.Path.ToLowerInvariant().Trim('/'), this));
+        }
+      }
     }
   }
 }

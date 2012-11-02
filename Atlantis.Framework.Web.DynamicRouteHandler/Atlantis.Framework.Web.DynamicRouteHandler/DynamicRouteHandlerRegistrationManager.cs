@@ -45,7 +45,7 @@ namespace Atlantis.Framework.Web.DynamicRouteHandler
       }
     }
 
-    public static void RegisterRouteHandlers(RouteCollection routeCollection, params DynamicRouteHandlerBase[] dynamicRouteHandlers)
+    public static void RegisterRouteHandlers(RouteCollection routeCollection, params IDynamicRoute[] dynamicRouteHandlers)
     {
       foreach(DynamicRouteHandlerBase dynamicRouteHandler in dynamicRouteHandlers)
       {

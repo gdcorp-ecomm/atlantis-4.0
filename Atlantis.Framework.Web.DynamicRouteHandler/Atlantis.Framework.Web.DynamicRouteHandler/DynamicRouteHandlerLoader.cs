@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
@@ -13,9 +12,9 @@ namespace Atlantis.Framework.Web.DynamicRouteHandler
   {
     private CompositionContainer _container;
 
-    [ImportMany]
-    IEnumerable<Lazy<DynamicRouteHandlerBase>> _loadedDynamicRouteHandlers;
-    public IEnumerable<Lazy<DynamicRouteHandlerBase>> DynamicRouteHandlersFound
+    [ImportMany(typeof(IDynamicRoute))]
+    private IEnumerable<Lazy<IDynamicRoute>> _loadedDynamicRouteHandlers;
+    public IEnumerable<Lazy<IDynamicRoute>> DynamicRouteHandlersFound
     {
       get { return _loadedDynamicRouteHandlers; }
     }

@@ -29,7 +29,12 @@ namespace Atlantis.Framework.Web.DynamicRouteHandler
       AutoRegisterRouteHandlers(routeCollection, null);
     }
 
-    public static void AutoRegisterRouteHandlers(RouteCollection routeCollection, IEnumerable<string> assemblySearchPatterns, params Assembly[] additionalAssemblies)
+    public static void AutoRegisterRouteHandlers(RouteCollection routeCollection, IEnumerable<Assembly> additionalAssemblies)
+    {
+      AutoRegisterRouteHandlers(routeCollection, null, additionalAssemblies);
+    }
+
+    public static void AutoRegisterRouteHandlers(RouteCollection routeCollection, IEnumerable<string> assemblySearchPatterns, IEnumerable<Assembly> additionalAssemblies)
     {
       using (DynamicRouteHandlerLoader loader = new DynamicRouteHandlerLoader(assemblySearchPatterns, additionalAssemblies))
       {

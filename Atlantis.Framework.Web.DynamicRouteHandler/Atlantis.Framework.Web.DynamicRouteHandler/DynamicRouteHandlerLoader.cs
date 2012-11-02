@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
@@ -50,15 +51,18 @@ namespace Atlantis.Framework.Web.DynamicRouteHandler
       }
       catch { }
     }
-
-    public DynamicRouteHandlerLoader(IEnumerable<string> assemblySearchPatterns, params Assembly[] additionalAssemblies)
+    
+    public DynamicRouteHandlerLoader(IEnumerable<string> assemblySearchPatterns, IEnumerable<Assembly> additionalAssemblies)
     {
       var catalog = new AggregateCatalog();
 
-      // Add from all assemblies matching naming convention
-      foreach (string searchPattern in assemblySearchPatterns)
+      if (assemblySearchPatterns != null)
       {
-        catalog.Catalogs.Add(new DirectoryCatalog(AssemblyPath, searchPattern));
+        // Add from all assemblies matching naming convention
+        foreach (string searchPattern in assemblySearchPatterns)
+        {
+          catalog.Catalogs.Add(new DirectoryCatalog(AssemblyPath, searchPattern));
+        }
       }
 
       if (additionalAssemblies != null)

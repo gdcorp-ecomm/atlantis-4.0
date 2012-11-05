@@ -35,6 +35,7 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Interface
       this._startDate = startDate;
       this._endDate = endDate;
       this._iscCode = iscCode;
+      this._isActive = isActive;
       this._iscDescription = iscDescription;
     }
 

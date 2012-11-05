@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Atlantis.Framework.DataProvider.Interface;
+using Atlantis.Framework.MessagingProcess.Interface;
 using Atlantis.Framework.PurchaseEmail.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,6 +16,12 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("dataprovider.xml")]
+    [DeploymentItem("Atlantis.Framework.PurchaseEmail.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.MessagingProcess.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.DataProvider.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.GetShopper.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.ProductOffer.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
     public void ProcessTestOrder()
     {
       Engine.Engine.ReloadConfig();
@@ -24,18 +31,27 @@ namespace Atlantis.Framework.PurchaseEmail.Tests
       // const string SHOPPER_ID = "128561";
 
       //Load Test order from Test and Re-Send Purchase Email
-      const string ORDER_ID = "455126";
-      const string SHOPPER_ID = "75866";
+      const string ORDER_ID = "502430";
+      const string SHOPPER_ID = "193337";
 
       string orderXml = GetOrderXml(ORDER_ID, SHOPPER_ID, 1);
       PurchaseEmailRequestData request = new PurchaseEmailRequestData(SHOPPER_ID, string.Empty, ORDER_ID, string.Empty, 0, orderXml, "EN");
       PurchaseEmailResponseData response = (PurchaseEmailResponseData)Engine.Engine.ProcessRequest(request, 83);
 
-      TestContext.WriteLine("Request:");
-      TestContext.WriteLine(request.ToXML());
-      TestContext.WriteLine("");
-      TestContext.WriteLine("Response:");
-      TestContext.WriteLine(response.ToXML());
+      System.Diagnostics.Debug.WriteLine("Request:");
+      System.Diagnostics.Debug.WriteLine(request.ToXML());
+      System.Diagnostics.Debug.WriteLine("");
+      System.Diagnostics.Debug.WriteLine("Response:");
+      System.Diagnostics.Debug.WriteLine(response.ToXML());
+      foreach (MessagingProcessResponseData responses in response.MessageResponses)
+      {
+        System.Diagnostics.Debug.WriteLine(responses.ToXML());
+      }
+      List<string> requestedEmails = response.GetRequestedEmails();
+      foreach (string requestedEmail in requestedEmails)
+      {
+        System.Diagnostics.Debug.WriteLine(requestedEmail);
+      }
     }
 
     //private string LoadSampleOrderXml(string filename)

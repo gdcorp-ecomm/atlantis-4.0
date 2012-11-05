@@ -25,7 +25,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
     private ILinkProvider _linkProvider;
     private EulaProvider _eulaProvider;
 
-    public OrderData(string orderXml, bool isNewShopper, bool isFraudRefund, ObjectProviderContainer providerContainer,string localizationCode)
+    public OrderData(string orderXml, bool isNewShopper, bool isFraudRefund, ObjectProviderContainer providerContainer, string localizationCode)
       : base(providerContainer)
     {
       _isFraudRefund = isFraudRefund;
@@ -44,7 +44,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       _localizationCode = localizationCode;
       ProcessOrderXml();
       //Process order before Processing EULA's
-      _eulaProvider=new EulaProvider(this, _linkProvider, providerContainer);
+      _eulaProvider = new EulaProvider(this, _linkProvider, providerContainer);
     }
 
     public EulaProvider EulaProv
@@ -52,6 +52,38 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       get
       {
         return _eulaProvider;
+      }
+    }
+
+    private string _shopperEmail;
+    public string ShopperEmail
+    {
+      get
+      {
+        if (_shopperEmail == null)
+        {
+          _shopperEmail = string.Empty;
+          try
+          {
+            _shopperEmail = Detail.GetAttribute("email");
+            if (string.IsNullOrEmpty(_shopperEmail) || ShopperId == _shopperEmail)
+            {
+              _shopperEmail = Detail.GetAttribute("bill_to_email");
+              if (ShopperId == _shopperEmail)
+              {
+                _shopperEmail = string.Empty;
+              }
+            }
+          }
+          catch (System.Exception ex)
+          {
+            string message = ex.Message + "\n" + ex.StackTrace;
+            AtlantisException aex = new AtlantisException("Error Reading Shopper Email", string.Empty, "0", message, string.Empty,
+                  ShopperId, OrderId, string.Empty, string.Empty, 0);
+            Engine.Engine.LogAtlantisException(aex);
+          }
+        }
+        return _shopperEmail;
       }
     }
 
@@ -425,7 +457,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
             hasmgrShopper = System.Web.HttpContext.Current.Request.QueryString["mgrshopper"] != null;
           }
         }
-       return hasmgrShopper;
+        return hasmgrShopper;
       }
     }
 

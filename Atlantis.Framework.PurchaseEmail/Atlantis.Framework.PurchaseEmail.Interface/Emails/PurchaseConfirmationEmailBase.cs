@@ -303,7 +303,19 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       request.AddResource(resourceItem);
 
       ContactPointItem emailContact = new ContactPointItem("ShopperContact", ContactPointTypes.Shopper);
-      emailContact["id"] = _orderData.ShopperId;
+      string shopperEmail = _orderData.ShopperEmail;
+      if (!string.IsNullOrEmpty(shopperEmail))
+      {
+        emailContact.ExcludeContactPointType = true;
+        emailContact["lastname"] = _orderData.Detail.GetAttribute("lastname");
+        emailContact["firstname"] = _orderData.Detail.GetAttribute("firstname");
+        emailContact["email"] = shopperEmail;
+        emailContact["sendemail"] = "true";
+      }
+      else
+      {
+        emailContact["id"] = _orderData.ShopperId;
+      }
       emailContact["EmailType"] = IsHTMLEmail ? "html" : "plaintext";
       resourceItem.ContactPoints.Add(emailContact);
 

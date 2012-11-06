@@ -7,13 +7,17 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 {
   public class LogoBarContainer : IWidgetModel
   {
-    private List<Widget<IWidgetModel>> _widgets;
+    public string SpriteUri { get; set; }
+
+    private IList<Widget<IWidgetModel>> _widgets;
     [JsonIgnore]
-    public List<Widget<IWidgetModel>> Widgets
+    public IList<Widget<IWidgetModel>> Widgets
     {
       get { return _widgets ?? (_widgets = new List<Widget<IWidgetModel>>()); }
       set { _widgets = value; }
     }
+
+    public string Width { get; set; }
   }
 }
 

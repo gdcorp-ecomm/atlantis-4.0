@@ -6,26 +6,16 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 {
   public class LogoBar : IWidgetModel
   {
-    public enum IconType
+    private IList<Icon> _icons;
+    public IList<Icon> Icons
     {
-      PHP,
-      DotNet,
-      Ruby,
-      Perl,
-      Python,
-      WordPress,
-      Joomla,
-      Drupal,
-      DotNetNuke
+      get { return _icons ?? (_icons = new List<Icon>()); }
+      set { _icons = value; }
     }
 
     public string Title { get; set; }
+    public string PopupActionText { get; set; }
     public string PopupAction { get; set; }
-    private IList<IconType> _icons;
-    public IList<IconType> Icons
-    {
-      get { return _icons ?? (_icons = new List<IconType>()); }
-      set { _icons = value; }
-    }
+
   }
 }

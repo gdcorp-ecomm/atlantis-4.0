@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Icon.cs" />
     <Compile Include="LogoBar.cs" />
     <Compile Include="LogoBarContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

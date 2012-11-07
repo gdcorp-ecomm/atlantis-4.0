@@ -122,7 +122,7 @@ namespace Atlantis.Framework.ProductUpgradePath.Test
          , string.Empty
          , string.Empty
          , string.Empty
-         , 0, 56950, 1);
+         , 0, 7524, 1);
 
       List<ProductOptions> filterOptions = new List<ProductOptions>();
       filterOptions.Add(new ProductOptions(3, DurationUnit.Month));
@@ -134,11 +134,36 @@ namespace Atlantis.Framework.ProductUpgradePath.Test
       filterOptions.Add(new ProductOptions(10, DurationUnit.Year));
       request.ProductOptions = filterOptions;
       ProductUpgradePathResponseData response = (ProductUpgradePathResponseData)Engine.Engine.ProcessRequest(request, 607);
-      foreach (KeyValuePair<string, int> currentAttrib in response.Products[56950])
+      foreach (KeyValuePair<int,UpgradeProductInfo> currentAttrib in response.Products)
       {
-        System.Diagnostics.Debug.WriteLine(currentAttrib.Key + ":" + currentAttrib.Value);
+        System.Diagnostics.Debug.WriteLine(currentAttrib.Key + ":" + currentAttrib.Value.DisplayTerm);
       }
 
+      request = new ProductUpgradePathRequestData(_shopperId
+       , string.Empty
+       , string.Empty
+       , string.Empty
+       , 0, 7502, 1);
+
+      request.ProductOptions = filterOptions;
+      response = (ProductUpgradePathResponseData)Engine.Engine.ProcessRequest(request, 607);
+      foreach (KeyValuePair<int, UpgradeProductInfo> currentAttrib in response.Products)
+      {
+        System.Diagnostics.Debug.WriteLine(currentAttrib.Key + ":" + currentAttrib.Value.DisplayTerm);
+      }
+
+      request = new ProductUpgradePathRequestData(_shopperId
+       , string.Empty
+       , string.Empty
+       , string.Empty
+       , 0, 7503, 1);
+
+      request.ProductOptions = filterOptions;
+      response = (ProductUpgradePathResponseData)Engine.Engine.ProcessRequest(request, 607);
+      foreach (KeyValuePair<int, UpgradeProductInfo> currentAttrib in response.Products)
+      {
+        System.Diagnostics.Debug.WriteLine(currentAttrib.Key + ":" + currentAttrib.Value.DisplayTerm);
+      }
     }
   }
 }

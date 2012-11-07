@@ -59,7 +59,7 @@ namespace Atlantis.Framework.ProductUpgradePath.Impl
               }
             }
           }
-          responseData = new ProductUpgradePathResponseData(productList,currentRequest.ProductOptions);
+          responseData = new ProductUpgradePathResponseData(productList,currentRequest.ProductOptions,currentRequest.ProductID);
         }
         else
         {

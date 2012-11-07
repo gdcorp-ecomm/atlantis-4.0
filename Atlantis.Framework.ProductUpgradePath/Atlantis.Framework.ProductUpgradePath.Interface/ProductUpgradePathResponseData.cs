@@ -23,7 +23,6 @@ namespace Atlantis.Framework.ProductUpgradePath.Interface
       set
       {
         _productOptions = value;
-        SetupFilteredProducts();
       }
     }
 
@@ -41,10 +40,6 @@ namespace Atlantis.Framework.ProductUpgradePath.Interface
     {
       get
       {
-        if (_filteredProducts.Count == 0)
-        {
-          SetupFilteredProducts();
-        }
         return _filteredProducts;
       }
     }
@@ -57,14 +52,14 @@ namespace Atlantis.Framework.ProductUpgradePath.Interface
       }
     }
 
-    public ProductUpgradePathResponseData(Dictionary<int, UpgradeProductInfo> products, List<ProductOptions> filters)
+    public ProductUpgradePathResponseData(Dictionary<int, UpgradeProductInfo> products, List<ProductOptions> filters,int originalPfId)
     {
       _products = products;
       _productOptions = filters;
-      SetupFilteredProducts();
+      SetupFilteredProducts(originalPfId);
     }
 
-    private void SetupFilteredProducts()
+    public void SetupFilteredProducts(int originalPfid)
     {
       _filteredProducts.Clear();
       foreach (ProductOptions currentOption in _productOptions)
@@ -102,6 +97,17 @@ namespace Atlantis.Framework.ProductUpgradePath.Interface
           }
         }
       }
+      if (!_filteredProducts.ContainsKey(originalPfid))
+      {
+        UpgradeProductInfo tempProduct = _products[originalPfid];
+        AddToFilteredProduct(tempProduct);
+      }
+    }
+
+    private void AddToFilteredProduct(UpgradeProductInfo currentProduct)
+    {
+      currentProduct.DisplayTerm = CreateDisplayTerm(currentProduct);
+      _filteredProducts[currentProduct.ProductID] = currentProduct;
     }
 
     private void AddToFilteredProduct(ProductOptions currentOption, UpgradeProductInfo currentProduct)
@@ -109,6 +115,37 @@ namespace Atlantis.Framework.ProductUpgradePath.Interface
       currentProduct.DisplayTerm = CreateDisplayTerm(currentOption);
       _filteredProducts[currentProduct.ProductID] = currentProduct;
       System.Diagnostics.Debug.WriteLine("Add: "+currentProduct.RecurringMethod + ":" + currentProduct.PeriodCount);
+    }
+
+    private string CreateDisplayTerm(UpgradeProductInfo currentProduct)
+    {
+      string displayTerm = string.Empty;
+      switch (currentProduct.RecurringMethod)
+      {
+        case UpgradeProductInfo.MONTHLY:
+        case UpgradeProductInfo.QUARTERLY:
+        case UpgradeProductInfo.SEMIANUUAL:
+          if (currentProduct.PeriodCount == 1)
+          {
+            displayTerm = "1 Month";
+          }
+          else
+          {
+            displayTerm = currentProduct.PeriodCount + " Months";
+          }
+          break;
+        case UpgradeProductInfo.ANNUAL:
+          if (currentProduct.PeriodCount == 1)
+          {
+            displayTerm = "1 Year";
+          }
+          else
+          {
+            displayTerm = currentProduct.PeriodCount + " Years";
+          }
+          break;
+      }
+      return displayTerm;
     }
 
     private string CreateDisplayTerm(ProductOptions currentOption)

@@ -22,7 +22,7 @@ namespace Atlantis.Framework.TH.Products
         string overrideTransactional = overrideCurrencyType.CurrencyType;
         if (!currency.IsCurrencyTransactionalForContext(overrideCurrencyType))
         {
-
+          
         }
       }
 

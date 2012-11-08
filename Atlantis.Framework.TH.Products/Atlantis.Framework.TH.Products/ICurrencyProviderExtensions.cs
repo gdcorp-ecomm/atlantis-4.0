@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,7 @@ namespace Atlantis.Framework.TH.Products
       }
       else 
       {
-        string overrideTransactional = overrideCurrencyType.CurrencyType;
-        if (!currency.IsCurrencyTransactionalForContext(overrideCurrencyType))
-        {
-          
-        }
+        int priceInOverriddenCurrency = 0;
       }
 
       return result;

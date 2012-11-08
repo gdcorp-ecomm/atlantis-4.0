@@ -10,7 +10,12 @@ namespace Atlantis.Framework.TH.Products
     {
       get { return "productcompare"; }
     }
-    
+
+    public override IToken CreateToken(string tokenData, string fullTokenString)
+    {
+      return new ProductCompareToken(TokenKey, tokenData, fullTokenString);
+    }
+
     public override TokenEvaluationResult EvaluateTokens(IEnumerable<IToken> tokens, IProviderContainer container)
     {
       TokenEvaluationResult result = TokenEvaluationResult.Success;

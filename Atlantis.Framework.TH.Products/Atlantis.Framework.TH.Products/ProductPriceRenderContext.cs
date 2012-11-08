@@ -72,7 +72,7 @@ namespace Atlantis.Framework.TH.Products
       return result;
     }
 
-    private ICurrencyPrice GetProductPrice(IProduct product, string renderType)
+    private ICurrencyPrice GetProductPrice(IProduct product, string renderType, string currencyTypeOverride)
     {
       ICurrencyPrice result;
 
@@ -142,7 +142,7 @@ namespace Atlantis.Framework.TH.Products
 
         if (periodType == RecurringPaymentUnitType.Unknown)
         {
-          price = GetProductPrice(product, token.RenderType);
+          price = GetProductPrice(product, token.RenderType, token.CurrencyType);
         }
         else
         {

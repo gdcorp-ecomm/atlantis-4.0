@@ -92,5 +92,25 @@ namespace Atlantis.Framework.Tokens.Tests
       Assert.IsTrue(debug.GetDebugTrackingData().Count > 0);
     }
 
+    [TestMethod]
+    public void TokensInEncodedStrings()
+    {
+      ClearHandlers();
+      TokenManager.RegisterTokenHandler(new XmlTokenHandler());
+      string inputText = TestData.GetTextDataResource("inputdata2.txt");
+
+      IProviderContainer container = new ObjectProviderContainer();
+      container.RegisterProvider<IDebugContext, MockDebug>();
+
+      ITokenEncoding tokenEncoding = new QuoteEncoding();
+
+      string outputText;
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(inputText, container, tokenEncoding, out outputText);
+
+      // output should contain encoded string 
+      Assert.AreEqual("\\\"Success!\\\"", outputText);
+
+    }
+
   }
 }

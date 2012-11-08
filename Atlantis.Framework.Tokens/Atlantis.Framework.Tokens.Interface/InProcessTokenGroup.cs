@@ -90,11 +90,17 @@ namespace Atlantis.Framework.Tokens.Interface
       return result;
     }
 
-    public void ExecuteReplacements(StringBuilder replacementText)
+    public void ExecuteReplacements(StringBuilder replacementText, ITokenEncoding tokenEncoding)
     {
       foreach (IToken token in _inProcessTokens)
       {
-        replacementText.Replace(token.FullTokenString, token.TokenResult);
+        string tokenResult = token.TokenResult;
+        if (tokenEncoding != null)
+        {
+          tokenResult = tokenEncoding.EncodeTokenResult(tokenResult);
+        }
+
+        replacementText.Replace(token.FullTokenString, tokenResult);
       }
     }
 

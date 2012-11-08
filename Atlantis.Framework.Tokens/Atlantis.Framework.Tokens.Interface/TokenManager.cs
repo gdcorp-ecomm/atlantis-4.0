@@ -138,6 +138,11 @@ namespace Atlantis.Framework.Tokens.Interface
 
     public static TokenEvaluationResult ReplaceTokens(string inputText, IProviderContainer container, out string resultText)
     {
+      return ReplaceTokens(inputText, container, null, out resultText);
+    }
+
+    public static TokenEvaluationResult ReplaceTokens(string inputText, IProviderContainer container, ITokenEncoding tokenDataEncoding, out string resultText)
+    {
       TokenEvaluationResult result = TokenEvaluationResult.Success;
 
       // First, we find all the tokens
@@ -152,7 +157,7 @@ namespace Atlantis.Framework.Tokens.Interface
         StringBuilder workingText = new StringBuilder(inputText);
 
         List<string> errors;
-        List<InProcessTokenGroup> groups = InitializeAndGroupTokens(foundTokens, out errors);
+        List<InProcessTokenGroup> groups = InitializeAndGroupTokens(foundTokens, tokenDataEncoding, out errors);
 
         if ((errors != null) && (errors.Count > 0))
         {
@@ -167,7 +172,7 @@ namespace Atlantis.Framework.Tokens.Interface
             result = TokenEvaluationResult.Errors;
           }
 
-          group.ExecuteReplacements(workingText);
+          group.ExecuteReplacements(workingText, tokenDataEncoding);
         }
 
         resultText = workingText.ToString();
@@ -176,7 +181,7 @@ namespace Atlantis.Framework.Tokens.Interface
       return result;
     }
 
-    private static List<InProcessTokenGroup> InitializeAndGroupTokens(IEnumerable<Match> tokenMatches, out List<string> errors)
+    private static List<InProcessTokenGroup> InitializeAndGroupTokens(IEnumerable<Match> tokenMatches, ITokenEncoding tokenEncoding, out List<string> errors)
     {
       List<InProcessTokenGroup> result = new List<InProcessTokenGroup>();
       Dictionary<string, InProcessTokenGroup>  trackingGroups = new Dictionary<string, InProcessTokenGroup>(StringComparer.OrdinalIgnoreCase);
@@ -189,6 +194,11 @@ namespace Atlantis.Framework.Tokens.Interface
           string matchValue = tokenMatch.Value;
           string tokenKey = tokenMatch.Groups[_TOKENKEY].Captures[0].Value;
           string tokenData = tokenMatch.Groups[_TOKENDATA].Captures[0].Value;
+
+          if (tokenEncoding != null)
+          {
+            tokenData = tokenEncoding.DecodeTokenData(tokenData);
+          }
 
           InProcessTokenGroup group;
           if (trackingGroups.TryGetValue(tokenKey, out group))

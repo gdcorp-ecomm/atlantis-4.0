@@ -2,7 +2,7 @@
 
 namespace Atlantis.Framework.CDS.Entities.Mobile.Widgets
 {
-  public class UserControlContainer : IWidgetModel
+  public class MobileUserControlContainer : IWidgetModel
   {
     public string UserControlVirtualPath { get; set; }
   }

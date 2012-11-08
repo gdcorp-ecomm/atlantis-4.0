@@ -13,6 +13,7 @@ namespace Atlantis.Framework.TH.Products
     public int PrimaryProductId { get; private set; }
     public int SecondaryProductId { get; private set; }
     public int SecondaryPrice { get; private set; }
+    public string SecondaryPeriod { get; private set; }
     public int HideBelow { get; private set; }
     public string Html { get; private set; }
 
@@ -22,6 +23,7 @@ namespace Atlantis.Framework.TH.Products
       PrimaryProductId = GetAttributeInt("primaryproductid", 0);
       SecondaryProductId = GetAttributeInt("secondaryproductid", 0);
       SecondaryPrice = GetAttributeInt("secondaryprice", 0);
+      SecondaryPeriod = GetAttributeText("secondaryperiod", string.Empty);
       HideBelow = GetAttributeInt("hidebelow", 0);
 
       if (TokenData.Elements("html").Any())

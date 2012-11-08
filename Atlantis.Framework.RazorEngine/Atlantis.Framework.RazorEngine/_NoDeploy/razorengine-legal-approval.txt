@@ -1,0 +1,7 @@
+﻿There have been major updates and customization to this code, DO NOT attempt to udpate this code with a newer version in codeplex
+
+http://razorengine.codeplex.com/license
+
+http://servicedesk/r/791609
+Approved for use as SaaS.
+Stewart J. Womack

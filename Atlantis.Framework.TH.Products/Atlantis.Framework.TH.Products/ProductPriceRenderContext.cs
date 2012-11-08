@@ -150,8 +150,16 @@ namespace Atlantis.Framework.TH.Products
           price = GetViewPrice(productView, token.RenderType, periodType);
         }
 
-        bool maskPrices = _maskPricesIfAllowed.Value && token.AllowMask;
-        priceText = _currency.PriceText(price,  maskPrices, token.DropDecimal, token.DropSymbol);
+        if (token.CurrencyType == null)
+        {
+          bool maskPrices = _maskPricesIfAllowed.Value && token.AllowMask;
+          priceText = _currency.PriceText(price, maskPrices, token.DropDecimal, token.DropSymbol);
+        }
+        else
+        {
+          priceText = _currency.PriceFormat(price, token.DropDecimal, token.DropSymbol);
+        }
+        
         result = true;
       }
 

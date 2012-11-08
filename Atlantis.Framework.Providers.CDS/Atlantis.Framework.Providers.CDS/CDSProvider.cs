@@ -54,7 +54,8 @@ namespace Atlantis.Framework.Providers.CDS
           parsedData1 = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
 
           //new token framework - this line will parse token that are in new format.  Eg. [@T[AdCreditShowHide:{property: "google", html: "some html here..."}]@T]
-          TokenEvaluationResult result = TokenManager.ReplaceTokens(parsedData1, Container, out parsedData2);
+          ITokenEncoding cdsJsonEncoding = new CDSTokenEncoding();
+          TokenEvaluationResult result = TokenManager.ReplaceTokens(parsedData1, Container, cdsJsonEncoding, out parsedData2);
         }
         model = serializer.Deserialize<T>(parsedData2);
       }

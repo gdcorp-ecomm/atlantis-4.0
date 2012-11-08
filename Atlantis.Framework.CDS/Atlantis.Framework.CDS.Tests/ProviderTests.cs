@@ -1,7 +1,6 @@
 ﻿using Atlantis.Framework.Providers.CDS;
 using Atlantis.Framework.Providers.Interface.CDS;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;

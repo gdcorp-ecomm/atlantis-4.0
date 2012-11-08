@@ -60,6 +60,13 @@ namespace Atlantis.Framework.PromoOrderLevelAddPL.Interface
       set { this._isActive = value; }
     }
 
+    private bool _skipvalidation = false;
+    public bool SkipValidation
+    {
+        get { return this._skipvalidation; }
+        set { this._skipvalidation = value; }
+    }
+
     /// <summary>
     /// Sets the "StartDate" and "EndDate" parameters after first attempting to parse out the strings to
     /// proper DateTime objects.
@@ -75,7 +82,11 @@ namespace Atlantis.Framework.PromoOrderLevelAddPL.Interface
 
       if (!IsDateInFuture(endDate))
       {
-        throw new ArgumentException("The 'endDate' specified for the order-level promo must be in the future.", "endDate");
+          if (this._isActive) //only active promos that have end dates in past. This is to allow the deactivate the expired promos
+          {
+              throw new ArgumentException("The 'endDate' specified for the order-level promo must be in the future.",
+                                          "endDate");
+          }
       }
 
       this._startDate = startDate;

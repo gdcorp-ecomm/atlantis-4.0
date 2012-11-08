@@ -169,7 +169,7 @@ namespace Atlantis.Framework.PromoOrderLevelAddPL.Interface
           {
             if (ValidateDate(promo.StartDate) && ValidateDate(promo.EndDate))
             {
-              if (ValidatePromoEndDate(promo.EndDate))
+              if (ValidatePromoEndDate(promo.EndDate) || !promo.isActive)
               {
                 resellerOrderLevelPromoWriter.WriteStartElement("PrivateLabelAdd");
                 resellerOrderLevelPromoWriter.WriteAttributeString("privateLabelID", promo.PrivateLabelId.ToString());

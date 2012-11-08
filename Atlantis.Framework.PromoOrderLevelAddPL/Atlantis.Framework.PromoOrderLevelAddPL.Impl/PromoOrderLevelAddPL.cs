@@ -24,17 +24,22 @@ namespace Atlantis.Framework.PromoOrderLevelAddPL.Impl
         PrivateLabelPromoException plPromoException = null;
         foreach (PrivateLabelPromo promo in resellerRequestData.ResellerPromoList.Values)
         {
-          if (!PrivateLabelPromo.ValidatePrivateLabelPromo(promo, ref plPromoException))
-          {
-            if (plPromoException != null)
+            if (!promo.SkipValidation)
             {
-              throw plPromoException;
+                if (!PrivateLabelPromo.ValidatePrivateLabelPromo(promo, ref plPromoException))
+                {
+                    if (plPromoException != null)
+                    {
+                        throw plPromoException;
+                    }
+                    else
+                    {
+                        throw new PrivateLabelPromoException(
+                            "The PrivateLabelPromo object for PLID [" + promo.PrivateLabelId + "] has invalid data.",
+                            PrivateLabelPromoExceptionReason.Unknown);
+                    }
+                }
             }
-            else
-            {
-              throw new PrivateLabelPromoException("The PrivateLabelPromo object for PLID [" + promo.PrivateLabelId + "] has invalid data.", PrivateLabelPromoExceptionReason.Unknown);
-            }
-          }
         }
 
         Service service = new Service();

@@ -47,6 +47,8 @@
     <Compile Include="ICurrencyProviderExtensions.cs" />
     <Compile Include="IProductExtensions.cs" />
     <Compile Include="IProductViewExtensions.cs" />
+    <Compile Include="ProductCompareToken.cs" />
+    <Compile Include="ProductCompareTokenHandler.cs" />
     <Compile Include="ProductPriceRenderContext.cs" />
     <Compile Include="ProductPriceToken.cs" />
     <Compile Include="ProductPriceTokenHandler.cs" />

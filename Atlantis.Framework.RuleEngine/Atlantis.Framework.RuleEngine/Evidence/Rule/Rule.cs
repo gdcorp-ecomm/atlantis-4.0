@@ -22,6 +22,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
+using Atlantis.Framework.RuleEngine.Evidence.Expression;
+using Atlantis.Framework.RuleEngine.Model;
+using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine.Evidence
 {
@@ -30,7 +33,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     #region IRule Members
     private readonly bool _chainable;
     protected string Equation { get; set; }
-    private List<ExpressionEvaluator.Symbol> postfixExpression;
+    private List<Symbol> postfixExpression;
     private List<EvidenceSpecifier> _actions;
     #endregion
 
@@ -175,6 +178,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
           RaiseChanged(this, new ChangedArgs());
         }
       }
+      
     }
 
     protected override IEvidence Value_EvidenceLookup(object sender, EvidenceLookupArgs args)
@@ -187,7 +191,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       RaiseChanged(this, args);
     }
 
-    protected override XmlNode Value_ModelLookup(object sender, ModelLookupArgs e)
+    protected override Dictionary<string, string> Value_ModelLookup(object sender, ModelLookupArgs e)
     {
       return RaiseModelLookup(this, e);
     }
@@ -217,7 +221,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     public override object Clone()
     {
       var f = (Rule)base.Clone();
-      f.postfixExpression = new List<ExpressionEvaluator.Symbol>(postfixExpression);
+      f.postfixExpression = new List<Symbol>(postfixExpression);
       f._actions = new List<EvidenceSpecifier>(_actions);
       return f;
     }

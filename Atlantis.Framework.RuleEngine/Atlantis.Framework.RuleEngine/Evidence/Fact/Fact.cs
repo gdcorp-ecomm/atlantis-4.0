@@ -18,114 +18,179 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 using System;
+using System.Collections.Generic;
 using System.Xml;
 using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
+using Atlantis.Framework.RuleEngine.Model;
+using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine.Evidence
 {
-    public class Fact : AEvidence, IFact
+  public class Fact : AEvidence, IFact
+  {
+    #region instance variables
+    #endregion
+    #region constructor
+
+    /// <summary>
+    /// Construct Fact. 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="priority"> </param>
+    /// <param name="value"> </param>
+    /// <param name="valueType"> </param>
+    //[System.Diagnostics.DebuggerHidden]
+    public Fact(string id, int priority, object value, Type valueType)
+      : base(id, priority)
     {
-        #region instance variables
-        #endregion
-        #region constructor
 
-      /// <summary>
-      /// Construct Fact. 
-      /// </summary>
-      /// <param name="ID"></param>
-      /// <param name="priority"> </param>
-      /// <param name="value"> </param>
-      /// <param name="valueType"> </param>
-      //[System.Diagnostics.DebuggerHidden]
-        public Fact(string ID, int priority, object value, Type valueType) : base(ID,priority)
-        {
-
-            //naked
-            IEvidenceValue x = new Naked(value, valueType);
-            EvidenceValue = x;
-        }
-
-      /// <summary>
-      /// Construct Fact
-      /// </summary>
-      /// <param name="ID"></param>
-      /// <param name="priority"> </param>
-      /// <param name="xPath"></param>
-      /// <param name="valueType"></param>
-      /// <param name="modelId"></param>
-      //[System.Diagnostics.DebuggerHidden]
-        public Fact(string ID, int priority, string xPath, Type valueType, string modelId)
-            : base(ID, priority)
-        {
-            //xml
-            IEvidenceValue x = new Xml(xPath, valueType, modelId);
-            EvidenceValue = x;
-        }
-
-        /// <summary>
-        /// Constructor used by clone method. Do not use.
-        /// </summary>
-        //[System.Diagnostics.DebuggerHidden]
-        public Fact()
-        {
-        }
-        #endregion
-        #region core
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        //[System.Diagnostics.DebuggerHidden]
-        public override void Evaluate()
-        {
-          if (IsEvaluatable)
-          {
-            EvidenceValue.Evaluate();
-          }
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        //[System.Diagnostics.DebuggerHidden]
-        public override object Clone()
-        {
-            var f = (Fact)base.Clone();
-            
-            return f;
-        }
-
-        protected override int CalculateInternalPriority(int priority)
-        {
-            return 1000 * 1000 * 1000 * priority;
-        }
-
-        public override string[] ClauseEvidence
-        {
-            get { return null; }
-        }
-
-        #endregion
-        #region events
-        //[System.Diagnostics.DebuggerHidden]
-        protected override IEvidence Value_EvidenceLookup(object sender, EvidenceLookupArgs args)
-        {
-            return RaiseEvidenceLookup(this, args);
-        }
-
-        //[System.Diagnostics.DebuggerHidden]
-        protected override void Value_Changed(object sender, ChangedArgs args)
-        {
-            RaiseChanged(this, args);
-        }
-
-        //[System.Diagnostics.DebuggerHidden]
-        protected override XmlNode Value_ModelLookup(object sender, ModelLookupArgs e)
-        {
-            return RaiseModelLookup(this, e);
-        }
-        #endregion
-
+      //naked
+      IEvidenceValue x = new Naked(value, valueType);
+      EvidenceValue = x;
     }
+
+    ///// <summary>
+    ///// Construct Fact
+    ///// </summary>
+    ///// <param name="id"></param>
+    ///// <param name="priority"> </param>
+    ///// <param name="xPath"></param>
+    ///// <param name="key"> </param>
+    ///// <param name="valueType"></param>
+    ///// <param name="modelId"></param>
+    //[System.Diagnostics.DebuggerHidden]
+    //public Fact(string id, int priority, string xPath, Type valueType, string modelId)
+    //  : base(id, priority)
+    //{
+    //  //xml
+    //  IEvidenceValue x = new Xml(xPath, valueType, modelId);
+    //  EvidenceValue = x;
+    //}
+
+    public Fact(string id, int priority, string key, Type valueType, string modelId, bool isValid)
+      : base(id, priority)
+    {
+      //xml
+      IEvidenceValue x = new Xml(modelId, key, valueType);
+      EvidenceValue = x;
+      IsValid = isValid;
+      _key = key;
+    }
+
+    /// <summary>
+    /// Constructor used by clone method. Do not use.
+    /// </summary>
+    //[System.Diagnostics.DebuggerHidden]
+    public Fact()
+    {
+    }
+    #endregion
+    #region core
+
+    /// <summary>
+    /// 
+    /// </summary>
+    //[System.Diagnostics.DebuggerHidden]
+    public override void Evaluate()
+    {
+      if (IsEvaluatable)
+      {
+        EvidenceValue.Evaluate();
+      }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    //[System.Diagnostics.DebuggerHidden]
+    public override object Clone()
+    {
+      var f = (Fact)base.Clone();
+
+      return f;
+    }
+
+    protected override int CalculateInternalPriority(int priority)
+    {
+      return 1000 * 1000 * 1000 * priority;
+    }
+
+    public override string[] ClauseEvidence
+    {
+      get { return null; }
+    }
+
+    #endregion
+    #region events
+    //[System.Diagnostics.DebuggerHidden]
+    protected override IEvidence Value_EvidenceLookup(object sender, EvidenceLookupArgs args)
+    {
+      return RaiseEvidenceLookup(this, args);
+    }
+
+    //[System.Diagnostics.DebuggerHidden]
+    protected override void Value_Changed(object sender, ChangedArgs args)
+    {
+      RaiseChanged(this, args);
+      //UpdateResults();
+    }
+
+    //[System.Diagnostics.DebuggerHidden]
+    protected override Dictionary<string, string> Value_ModelLookup(object sender, ModelLookupArgs e)
+    {
+      return RaiseModelLookup(this, e);
+    }
+    #endregion
+    
+    public bool IsValid { get; set; }
+
+    public IList<string> _messages;
+    public IList<string> Messages
+    {
+      get
+      {
+        if (_messages == null)
+        {
+          _messages = new List<string>(0);
+        }
+
+        return _messages;
+      }
+    }
+    
+    public string InputValue { get; set; }
+
+    public void UpdateResults()
+    {
+      //if (IsResult)
+      {
+        var resultValue = this.EvidenceValue;
+        //Key = resultValue.EvidenceValueKey;
+        Value = resultValue.Value;
+
+        //Dictionary<string, string> model = resultValue.GetModel(modelId);
+
+        //if (model.ContainsKey(resultValue.EvidenceValueKey))
+        //{
+        //  resultValue.EvidenceValueKey
+        //  validationResult.Status = ValidationResultStatus.Valid;
+
+        //  var valueTemp = Convert.ToString(Value);
+        //  bool isValid;
+        //  if (bool.TryParse(valueTemp, out isValid) && !isValid)
+        //  {
+        //    validationResult.Status = ValidationResultStatus.InValid;
+        //    validationResult.Value = valueTemp;
+        //  }
+        //}
+      }
+    }
+
+    private readonly string _key;
+    public string Key
+    {
+      get { return _key; }
+    }
+  }
 }

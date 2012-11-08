@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RuleEngine>
   <Rules>
-    <Rule id="ruleIsOrgValidForLegalType" desc="" chainable="True"  priority="2">
+    <Rule id="ruleIsOrgValidForLegalType" desc="" chainable="True"  priority="1">
       <Condition>
         <![CDATA[ 
         FACT(factLegalType)=="CCO" OR 
@@ -10,26 +10,22 @@
         FACT(factLegalType)=="EDU" OR
         FACT(factLegalType)=="ASS" ]]>
       </Condition>            
-      <Actions Result="True">
-        <Execute factId="ruleIsOrgNullOrEmpty" />
+      <Actions>
+        <Execute factId="ruleIsOrgNullOrEmpty" result="true" />
       </Actions>
     </Rule>
-    <Rule id="ruleIsOrgNullOrEmpty" desc="" chainable="False"  priority="3">
+    <Rule id="ruleIsOrgNullOrEmpty" desc="" chainable="False"  priority="2">
       <Condition><![CDATA[ ISNULLOREMPTY(FACT(factOrg)) ]]></Condition>
-      <Actions Result="True">
-        <Evaluate factId="factOrgIsValid"><![CDATA[ false ]]></Evaluate>
+      <Actions>
+        <EvaluateIsValid factId="factOrg" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="factOrg" result="True"> <![CDATA[ "Organization is required."]]></EvaluateMessage>
+        <!--<EvaluateValue factId="factOrg" result="True"></EvaluateValue>-->
       </Actions>
     </Rule>
   </Rules>
   <Facts>
-    <Fact id="factOrg" desc="new value" type="string" modelId="mdlOrg">
-      <xpath><![CDATA[ result/org/value ]]></xpath>
-    </Fact>
-    <Fact id="factOrgIsValid" desc="new value" type="boolean" modelId="mdlOrg">
-      <xpath><![CDATA[ result/org/isvalid ]]></xpath>
-    </Fact>
-    <Fact id="factLegalType" desc="new value" type="string" modelId="mdlOrg">
-      <xpath><![CDATA[ result/legaltype/value ]]></xpath>
-    </Fact>
+    <Fact id="factOrg" key="organization" desc="new value" type="string" modelId="mdlOrg" />
+    <Fact id="factLegalType" key="legaltype" desc="new value" type="string" modelId="mdlOrg" />
+    <!--<Fact id="factOrgIsValid" key="ISVALID" desc="new value" type="boolean" modelId="mdlOrg" />-->
   </Facts>
 </RuleEngine>

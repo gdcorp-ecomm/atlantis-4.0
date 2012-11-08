@@ -18,7 +18,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 using System;
+using System.Collections.Generic;
 using System.Xml;
+using Atlantis.Framework.RuleEngine.Model;
+using Atlantis.Framework.RuleEngine.Results;
 
 
 namespace Atlantis.Framework.RuleEngine.Evidence.Actions
@@ -72,7 +75,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
     {
       RaiseChanged(this, args);
     }
-    protected override XmlNode Value_ModelLookup(object sender, ModelLookupArgs e)
+    protected override Dictionary<string, string> Value_ModelLookup(object sender, ModelLookupArgs e)
     {
       return RaiseModelLookup(this, e);
     }
@@ -91,5 +94,10 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
     }
 
     #endregion
+
+    public ActionType ActionExpressionType
+    {
+      get { throw new NotImplementedException(); }
+    }
   }
 }

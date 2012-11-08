@@ -22,5 +22,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
 {
     public interface IAction : IEvidence
     {
+      ActionType ActionExpressionType { get; }
     }
 }

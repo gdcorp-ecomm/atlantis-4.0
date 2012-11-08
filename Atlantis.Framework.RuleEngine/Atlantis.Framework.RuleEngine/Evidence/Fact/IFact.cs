@@ -18,9 +18,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 
+using System.Collections.Generic;
+
 namespace Atlantis.Framework.RuleEngine.Evidence
 {
-    public interface IFact : IEvidence
-    {
-    }
+  public interface IFact : IEvidence
+  {
+    bool IsValid { get; set; }
+    string Key { get; }
+    IList<string> Messages { get; }
+  }
 }

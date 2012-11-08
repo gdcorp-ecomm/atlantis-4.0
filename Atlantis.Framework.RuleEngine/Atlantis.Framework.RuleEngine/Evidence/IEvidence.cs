@@ -22,85 +22,84 @@ using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
 
 namespace Atlantis.Framework.RuleEngine.Evidence
 {
-    public interface IEvidence : IComparable, ICloneable
+  public interface IEvidence : IComparable, ICloneable
+  {
+    event ChangedHandler Changed;
+    event EvidenceLookupHandler EvidenceLookup;
+    event ModelLookupHandler ModelLookup;
+    event CallbackHandler CallbackLookup;
+
+    /// <summary>
+    /// ID of this IEvidence
+    /// </summary>
+    string Id
     {
-        event ChangedHandler Changed;
-        event EvidenceLookupHandler EvidenceLookup;
-        event ModelLookupHandler ModelLookup;
-        event CallbackHandler CallbackLookup;
-
-        /// <summary>
-        /// ID of this IEvidence
-        /// </summary>
-        string Id
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Value of IRuleEngineComparable of this IEvidence
-        /// </summary>
-        object Value
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Value of IRuleEngineComparable of this IEvidence
-        /// </summary>
-        Type ValueType
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Actual object of value
-        /// </summary>
-        IEvidenceValue ValueObject
-        {
-            get;
-        }
-
-        /// <summary>
-        /// States whether or not this evidence can be evaluated
-        /// </summary>
-        bool IsEvaluatable
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// States the priority of this evidence in processing. Lower numbers will be processed first.
-        /// </summary>
-        int Priority
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Returns the truthality of this IEvidence
-        /// </summary>
-        /// <returns></returns>
-        void Evaluate();
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        string[] DependentEvidence
-        {
-            get;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        string[] ClauseEvidence
-        {
-            get;
-        }
-
+      get;
     }
+
+    /// <summary>
+    /// Value of IRuleEngineComparable of this IEvidence
+    /// </summary>
+    object Value
+    {
+      get;
+      set;
+    }
+
+    /// <summary>
+    /// Value of IRuleEngineComparable of this IEvidence
+    /// </summary>
+    Type ValueType
+    {
+      get;
+    }
+
+    /// <summary>
+    /// Actual object of value
+    /// </summary>
+    IEvidenceValue ValueObject
+    {
+      get;
+    }
+
+    /// <summary>
+    /// States whether or not this evidence can be evaluated
+    /// </summary>
+    bool IsEvaluatable
+    {
+      get;
+      set;
+    }
+
+    /// <summary>
+    /// States the priority of this evidence in processing. Lower numbers will be processed first.
+    /// </summary>
+    int Priority
+    {
+      get;
+    }
+
+    /// <summary>
+    /// Returns the truthality of this IEvidence
+    /// </summary>
+    /// <returns></returns>
+    void Evaluate();
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    string[] DependentEvidence
+    {
+      get;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    string[] ClauseEvidence
+    {
+      get;
+    }
+  }
 }

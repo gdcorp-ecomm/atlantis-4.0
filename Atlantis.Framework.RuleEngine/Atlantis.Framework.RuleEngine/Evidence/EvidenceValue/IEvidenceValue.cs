@@ -18,55 +18,51 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 using System;
+using System.Collections.Generic;
+using Atlantis.Framework.RuleEngine.Evidence.Expression;
+using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine.Evidence.EvidenceValue
 {
-    public interface IEvidenceValue : ICloneable
-    {
-        /// <summary>
-        /// Value of this object.
-        /// </summary>
-        /// <returns></returns>
-        object Value
-        {
-            get;
-            set;
-        }
+  public interface IEvidenceValue : ICloneable
+  {
+    /// <summary>
+    /// Value of this object.
+    /// </summary>
+    /// <returns></returns>
+    object Value { get; set; }
 
-        /// <summary>
-        /// Type of this value
-        /// </summary>
-        Type ValueType
-        {
-            get;
-        }
+    /// <summary>
+    /// Type of this value
+    /// </summary>
+    Type ValueType { get; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        void Evaluate();
-      
-        /// <summary>
-        /// 
-        /// </summary>
-        string ModelId
-        {
-            get;
-        }
+    /// <summary>
+    /// 
+    /// </summary>
+    void Evaluate();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        event ModelLookupHandler ModelLookup;
+    /// <summary>
+    /// 
+    /// </summary>
+    string ModelId { get; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        event ChangedHandler Changed;
+    /// <summary>
+    /// 
+    /// </summary>
+    event ModelLookupHandler ModelLookup;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        event EvidenceLookupHandler EvidenceLookup;
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    event ChangedHandler Changed;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    event EvidenceLookupHandler EvidenceLookup;
+
+    Dictionary<string, string> GetModel(string modelId);
+    string EvidenceValueKey { get; }
+  }
 }

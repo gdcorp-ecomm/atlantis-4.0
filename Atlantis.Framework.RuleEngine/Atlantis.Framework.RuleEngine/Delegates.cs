@@ -18,9 +18,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 using System;
+using System.Collections.Generic;
 using System.Xml;
 
 using Atlantis.Framework.RuleEngine.Evidence;
+using Atlantis.Framework.RuleEngine.Model;
+using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine
 {
@@ -54,7 +57,7 @@ namespace Atlantis.Framework.RuleEngine
   /// <param name="sender"></param>
   /// <param name="e"> </param>
   /// <returns></returns>
-  public delegate XmlNode ModelLookupHandler(object sender, ModelLookupArgs e);
+  public delegate  Dictionary<string, string> ModelLookupHandler(object sender, ModelLookupArgs e);
 
     /// <summary>
     /// Specific registered mediator events operate of this type of delegate

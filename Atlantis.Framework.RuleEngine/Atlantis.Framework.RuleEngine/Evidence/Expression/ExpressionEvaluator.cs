@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
+using Atlantis.Framework.RuleEngine.Evidence.Expression;
 
 namespace Atlantis.Framework.RuleEngine.Evidence
 {
@@ -65,16 +66,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       OpenBracket,
       CloseBracket,
       Invalid //states the comparison could not be made and is invalid
-    }
-    public struct Symbol
-    {
-      public string Name;
-      public IEvidenceValue Value;
-      public Type SymbolType;
-      public override string ToString()
-      {
-        return Name;
-      }
     }
 
     #endregion
@@ -132,7 +123,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       Debug.WriteLine("");
     }
 
-    private Symbol ParseToSymbol(string unknownSymbol)
+    private static Symbol ParseToSymbol(string unknownSymbol)
     {
       var sym = new Symbol();
       if (IsOpenParanthesis(unknownSymbol))
@@ -408,7 +399,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     public Symbol Evaluate()
     {
       var operandStack = new Stack();
-
+      var factSymbolKey = string.Empty;
       foreach (var postFix in PostfixSymbol)
       {
         switch (postFix.SymbolType)
@@ -458,6 +449,8 @@ namespace Atlantis.Framework.RuleEngine.Evidence
 
               var fact = GetEvidence(this, new EvidenceLookupArgs(postFix.Name));
 
+              factSymbolKey = fact.ValueObject.EvidenceValueKey;
+
               op3.Value = new Naked(fact.Value, fact.ValueType);
               operandStack.Push(op3);
               Debug.WriteLine(String.Format("ExpressionEvaluator FACT {0} = {1}", fact.Id, fact.Value));
@@ -467,8 +460,9 @@ namespace Atlantis.Framework.RuleEngine.Evidence
             throw new Exception(String.Format("Invalid symbol type: {0} of type {1}", postFix.Name, postFix.SymbolType));
         }
       }
-
+      
       var returnValue = (Symbol)operandStack.Pop();
+      returnValue.ConditionKey = factSymbolKey;
 
       if (operandStack.Count > 0)
       {

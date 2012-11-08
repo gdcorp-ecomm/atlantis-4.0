@@ -18,6 +18,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 using System;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.RuleEngine.Evidence.EvidenceValue
 {
@@ -66,7 +67,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence.EvidenceValue
         }
       }
     }
-
+    
     /// <summary>
     /// 
     /// </summary>
@@ -152,5 +153,29 @@ namespace Atlantis.Framework.RuleEngine.Evidence.EvidenceValue
       }
     }
     #endregion
+
+
+    public void SetResult(IFact fact)
+    {
+      throw new NotImplementedException();
+    }
+
+
+    public void SetStatus(Expression.Symbol result)
+    {
+      throw new NotImplementedException();
+    }
+
+
+    public Dictionary<string, string> GetModel(string modelId)
+    {
+      throw new NotImplementedException();
+    }
+
+
+    public string EvidenceValueKey
+    {
+      get { throw new NotImplementedException(); }
+    }
   }
 }

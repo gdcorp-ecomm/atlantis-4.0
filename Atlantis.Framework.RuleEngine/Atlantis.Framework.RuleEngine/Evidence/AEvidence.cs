@@ -18,8 +18,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 using System;
+using System.Collections.Generic;
 using System.Xml;
 using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
+using Atlantis.Framework.RuleEngine.Model;
+using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine.Evidence
 {
@@ -312,10 +315,13 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     /// <param name="args"></param>
     //[System.Diagnostics.DebuggerHidden]
     protected virtual void RaiseChanged(object sender, ChangedArgs args)
-    {
+    {      
       if (_changed != null)
+      {
         _changed(sender, args);
+      }
     }
+
     /// <summary>
     /// 
     /// </summary>
@@ -323,7 +329,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     /// <param name="args"></param>
     /// <returns></returns>
     //[System.Diagnostics.DebuggerHidden]
-    protected virtual XmlNode RaiseModelLookup(object sender, ModelLookupArgs args)
+    protected virtual Dictionary<string, string> RaiseModelLookup(object sender, ModelLookupArgs args)
     {
       //must always have a model lookup if one is needed
       return _modelLookup(sender, args);
@@ -371,7 +377,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     /// <param name="sender"></param>
     /// <param name="e"></param>
     /// <returns></returns>
-    protected abstract XmlNode Value_ModelLookup(object sender, ModelLookupArgs e);
+    protected abstract Dictionary<string, string> Value_ModelLookup(object sender, ModelLookupArgs e);
     #endregion
     #endregion
 

@@ -21,6 +21,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
 using Atlantis.Framework.RuleEngine.Evidence;
+using Atlantis.Framework.RuleEngine.Model;
+using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine.Decisions
 {
@@ -97,10 +99,10 @@ namespace Atlantis.Framework.RuleEngine.Decisions
       //execute list
       Debug.WriteLine("Iteration");
       Debug.IndentLevel++;
-      const int maxExecutionCount = 1000; // Max relationships.
+      const int maxExecutionCount = 10; // Max relationships.
       int executionCount = 0;
 
-      while (Executions.HasNext && executionCount < maxExecutionCount)
+      while (Executions.HasNext)
       {
         executionCount++;
         Debug.WriteLine("Execution List: " + Executions);
@@ -173,7 +175,7 @@ namespace Atlantis.Framework.RuleEngine.Decisions
     /// </summary>
     /// <returns></returns>
     //[System.Diagnostics.DebuggerHidden]
-    protected virtual XmlNode RaiseModelLookup(object sender, ModelLookupArgs args)
+    protected virtual Dictionary<string, string> RaiseModelLookup(object sender, ModelLookupArgs args)
     {
       //must always have a model lookup if one is needed
       return modelLookup(sender, args);
@@ -217,6 +219,7 @@ namespace Atlantis.Framework.RuleEngine.Decisions
         modelLookup = null;
       }
     }
+
     /// <summary>
     /// 
     /// </summary>

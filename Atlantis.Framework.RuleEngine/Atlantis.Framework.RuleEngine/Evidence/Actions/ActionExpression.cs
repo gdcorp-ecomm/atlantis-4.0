@@ -18,8 +18,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Xml;
 using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
 
 namespace Atlantis.Framework.RuleEngine.Evidence.Actions
@@ -32,9 +32,10 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
     private ExpressionEvaluator _evaluator;
     private string _operatingId;
     #endregion
+
     #region constructor
-    public ActionExpression(string ID, string operatingId, string equation, int priority)
-      : base(ID, priority)
+    public ActionExpression(string id, string operatingId, string equation, int priority)
+      : base(id, priority)
     {
       Equation = equation;
       _operatingId = operatingId;
@@ -65,6 +66,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
     {
     }
     #endregion
+
     #region core
     protected override int CalculateInternalPriority(int priority)
     {
@@ -97,7 +99,17 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
       //set the value
       Trace.WriteLine("FACT " + _operatingId + "=" + result.Value.Value);
 
-      fact.Value = result.Value.Value;
+     // fact.Value = result.Value.Value;
+
+      switch (ActionExpressionType)
+      {
+        case ActionType.EvaluateMessage:
+          fact.Messages.Add(Convert.ToString(result.Value.Value));
+          break;
+        case ActionType.EvaluteIsValid:
+          fact.IsValid = Convert.ToBoolean(result.Value.Value);
+          break;
+      }
     }
 
     /// <summary>
@@ -125,7 +137,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
     /// <param name="sender"></param>
     /// <param name="e"></param>
     /// <returns></returns>
-    protected override XmlNode Value_ModelLookup(object sender, ModelLookupArgs e)
+    protected override Dictionary<string, string> Value_ModelLookup(object sender, ModelLookupArgs e)
     {
       return RaiseModelLookup(this, e);
     }
@@ -155,5 +167,20 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
     }
     #endregion
 
+    public ActionType ActionExpressionType { get; set; }
+
+    private IList<string> _messages;
+    public IList<string> Messages
+    {
+      get
+      {
+        if (_messages == null)
+        {
+          _messages = new List<string>(0);
+        }
+
+        return _messages;
+      }
+    }
   }
 }

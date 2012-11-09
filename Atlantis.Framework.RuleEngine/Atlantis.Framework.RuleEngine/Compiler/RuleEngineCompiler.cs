@@ -76,11 +76,12 @@ namespace Atlantis.Framework.RuleEngine.Compiler
             string id = factNode.Attributes["id"].Value;
             string type = factNode.Attributes["type"].Value;
             string modelId = factNode.Attributes["modelId"].Value;
-            //string property = factNode.Attributes.["property"].Value;
 
             //ensure same rule wont be entered twice
             if (rom[id] != null)
+            {
               throw new Exception("Fact has already been loaded: " + id);
+            }
 
             //determine priority
             int priority = 500;
@@ -97,11 +98,6 @@ namespace Atlantis.Framework.RuleEngine.Compiler
             IFact fact = new Fact(id, priority, key, valueType, modelId, true);
 
             rom.AddEvidence(fact);
-
-            //if (key == "ISVALID")
-            //{
-            //  rom.AddModel(modelId, key, "true");
-            //}
           }
         }
       }

@@ -19,13 +19,11 @@
       <Actions>
         <EvaluateIsValid factId="factOrg" result="True">false</EvaluateIsValid>
         <EvaluateMessage factId="factOrg" result="True"> <![CDATA[ "Organization is required."]]></EvaluateMessage>
-        <!--<EvaluateValue factId="factOrg" result="True"></EvaluateValue>-->
       </Actions>
     </Rule>
   </Rules>
   <Facts>
     <Fact id="factOrg" key="organization" desc="new value" type="string" modelId="mdlOrg" />
     <Fact id="factLegalType" key="legaltype" desc="new value" type="string" modelId="mdlOrg" />
-    <!--<Fact id="factOrgIsValid" key="ISVALID" desc="new value" type="boolean" modelId="mdlOrg" />-->
   </Facts>
 </RuleEngine>

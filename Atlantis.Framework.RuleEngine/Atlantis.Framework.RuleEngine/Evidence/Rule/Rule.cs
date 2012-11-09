@@ -20,11 +20,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
-using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
 using Atlantis.Framework.RuleEngine.Evidence.Expression;
-using Atlantis.Framework.RuleEngine.Model;
-using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine.Evidence
 {
@@ -33,8 +29,8 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     #region IRule Members
     private readonly bool _chainable;
     protected string Equation { get; set; }
-    private List<Symbol> postfixExpression;
-    private List<EvidenceSpecifier> _actions;
+    private readonly List<Symbol> _postfixExpression;
+    private readonly List<EvidenceSpecifier> _actions;
     #endregion
 
     #region constructor
@@ -70,7 +66,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       var e = new ExpressionEvaluator();
       e.Parse(equation); //this method is slow, do it only when needed
       e.InfixToPostfix(); //this method is slow, do it only when needed
-      postfixExpression = e.Postfix; //this method is slow, do it only when needed
+      _postfixExpression = e.Postfix; //this method is slow, do it only when needed
 
       //determine the dependent facts
       var dependents = ExpressionEvaluator.RelatedEvidence(e.Postfix);
@@ -78,7 +74,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
 
       //change event could set its value when a model is attached
       var naked = new Naked(false, typeof(bool));
-      EvidenceValue = naked;
+      EvidenceResult = naked;
     }
 
     /// <summary>
@@ -162,7 +158,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     {
       var e = new ExpressionEvaluator();
       e.GetEvidence += RaiseEvidenceLookup;
-      e.Postfix = postfixExpression;
+      e.Postfix = _postfixExpression;
 
       var expressionResult = e.Evaluate(); //PERFORMANCE: this method is slow.
 
@@ -211,19 +207,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         }
         return list.ToArray();
       }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    //[System.Diagnostics.DebuggerHidden]
-    public override object Clone()
-    {
-      var f = (Rule)base.Clone();
-      f.postfixExpression = new List<Symbol>(postfixExpression);
-      f._actions = new List<EvidenceSpecifier>(_actions);
-      return f;
     }
     #endregion
 

@@ -19,10 +19,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
 using System.Collections.Generic;
-using System.Xml;
-using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
-using Atlantis.Framework.RuleEngine.Model;
-using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine.Evidence
 {
@@ -136,24 +132,14 @@ namespace Atlantis.Framework.RuleEngine.Evidence
 
     protected abstract int CalculateInternalPriority(int priority);
 
-    
 
-    private string _id;
     /// <summary>
     /// Identified of the evidence
     /// </summary>
     //[System.Diagnostics.DebuggerHidden]
-    public string Id
-    {
-      get
-      {
-        return _id;
-      }
-      private set { _id = value; }
+    public string Id { get; private set; }
 
-    }
 
-    
     private IEvidenceValue _value;/// <summary>
     /// Contains the IRuleEngineComparable object that contains the _value for this evidence
     /// </summary>
@@ -201,7 +187,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     /// IRuleEngineComparable thats responsible for the _value
     /// </summary>
     //[System.Diagnostics.DebuggerHidden]
-    internal IEvidenceValue EvidenceValue
+    internal IEvidenceValue EvidenceResult
     {
       get
       {
@@ -262,20 +248,20 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     /// <returns></returns>
     ////[System.Diagnostics.DebuggerHidden]
     //[System.Diagnostics.DebuggerHidden]
-    public virtual object Clone()
-    {
-      Type t = GetType();
-      var x = (AEvidence)Activator.CreateInstance(t);
-      x._id = Id;
-      x._priority = Priority;
-      if (DependentEvidenceItems != null)
-        x.DependentEvidenceItems = (string[])DependentEvidenceItems.Clone();
-      if (ClauseEvidences != null)
-        x.ClauseEvidences = (string[])ClauseEvidences.Clone();
-      if (EvidenceValue != null)
-        x.EvidenceValue = (IEvidenceValue)EvidenceValue.Clone();
-      return x;
-    }
+    //public virtual object Clone()
+    //{
+    //  Type t = GetType();
+    //  var x = (AEvidence)Activator.CreateInstance(t);
+    //  x._id = Id;
+    //  x._priority = Priority;
+    //  if (DependentEvidenceItems != null)
+    //    x.DependentEvidenceItems = (string[])DependentEvidenceItems.Clone();
+    //  if (ClauseEvidences != null)
+    //    x.ClauseEvidences = (string[])ClauseEvidences.Clone();
+    //  if (EvidenceValue != null)
+    //    x.EvidenceValue = (IEvidenceValue)EvidenceValue.Clone();
+    //  return x;
+    //}
 
 
     private bool _isEvaluatable;
@@ -295,16 +281,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       }
     }
 
-    /// <summary>
-    /// Priority of this evidence over other ones. lower _value means it will be executed before higher values.
-    /// </summary>
-    /// 
-    private int _priority;
-    public int Priority
-    {
-      get { return _priority; }
-      private set { _priority = value; }
-    }
+    public int Priority { get; private set; }
 
     #region eventhandlers
 

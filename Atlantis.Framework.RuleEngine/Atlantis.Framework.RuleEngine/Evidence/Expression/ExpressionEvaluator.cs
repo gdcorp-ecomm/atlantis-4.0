@@ -22,7 +22,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
 using Atlantis.Framework.RuleEngine.Evidence.Expression;
 
 namespace Atlantis.Framework.RuleEngine.Evidence
@@ -430,7 +429,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
 
                   operandStack.Push(op3);
 
-                  Debug.WriteLine(String.Format("ExpressionEvaluator ISNULLOREMPTY {0} = {1}", symbol.Name, op3.Value.Value));
+                  Debug.WriteLine("ExpressionEvaluator ISNULLOREMPTY {0} = {1}", symbol.Name, op3.Value.Value);
                   break;
 
                 default:
@@ -453,7 +452,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
 
               op3.Value = new Naked(fact.Value, fact.ValueType);
               operandStack.Push(op3);
-              Debug.WriteLine(String.Format("ExpressionEvaluator FACT {0} = {1}", fact.Id, fact.Value));
+              Debug.WriteLine("ExpressionEvaluator FACT {0} = {1}", fact.Id, fact.Value);
               continue;
             }
           default:
@@ -609,7 +608,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       //  replacement = op3;
       //}
 
-      Debug.WriteLine(String.Format("ExpressionEvaluator {0} + {1} = {2}", o1, o2, replacement));
+      Debug.WriteLine("ExpressionEvaluator {0} + {1} = {2}", o1, o2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -676,7 +675,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       //  replacement = op3;
       //}
 
-      Debug.WriteLine(String.Format("ExpressionEvaluator {0} - {1} = {2}", o1, o2, replacement));
+      Debug.WriteLine("ExpressionEvaluator {0} - {1} = {2}", o1, o2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -744,7 +743,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       //  replacement = op3;
       //}
 
-      Debug.WriteLine(String.Format("ExpressionEvaluator {0} * {1} = {2}", o1, o2, replacement));
+      Debug.WriteLine("ExpressionEvaluator {0} * {1} = {2}", o1, o2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -808,7 +807,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       //  replacement = false;
       //}
 
-      Debug.WriteLine(String.Format("ExpressionEvaluator {0} / {1} = {2}", o1, o2, replacement));
+      Debug.WriteLine("ExpressionEvaluator {0} / {1} = {2}", o1, o2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -857,7 +856,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       //  replacement = op3;
       //}
 
-      Debug.WriteLine(String.Format("ExpressionEvaluator {0} == {1} = {2}", o1, o2, replacement));
+      Debug.WriteLine("ExpressionEvaluator {0} == {1} = {2}", o1, o2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -906,7 +905,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       //  replacement = op3;
       //}
 
-      Debug.WriteLine(String.Format("ExpressionEvaluator {0} != {1} = {2}", o1, o2, replacement));
+      Debug.WriteLine("ExpressionEvaluator {0} != {1} = {2}", o1, o2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -952,7 +951,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       //  replacement = op3;
       //}
 
-      Debug.WriteLine(String.Format("ExpressionEvaluator {0} AND {1} = {2}", b1, b2, replacement));
+      Debug.WriteLine("ExpressionEvaluator {0} AND {1} = {2}", b1, b2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -996,7 +995,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       //  op3.Value = null;
       //  replacement = op3;
       //}
-      Debug.WriteLine(String.Format("ExpressionEvaluator NOT {0} = {1}", b1, replacement));
+      Debug.WriteLine("ExpressionEvaluator NOT {0} = {1}", b1, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -1027,7 +1026,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         replacement = op3;
       }
 
-      Debug.WriteLine(String.Format("ExpressionEvaluator {0} OR {1} = {2}", b1, b2, replacement));
+      Debug.WriteLine("ExpressionEvaluator {0} OR {1} = {2}", b1, b2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -1064,7 +1063,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         op3.Value = null;
         replacement = op3;
       }
-      Debug.WriteLine(String.Format("ExpressionEvaluator {0} > {1} = {2}", o1, o2, replacement));
+      Debug.WriteLine("ExpressionEvaluator {0} > {1} = {2}", o1, o2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -1102,7 +1101,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         op3.Value = null;
         replacement = op3;
       }
-      Debug.WriteLine(String.Format("ExpressionExaluator {0} < {1} = {2}", o1, o2, replacement));
+      Debug.WriteLine("ExpressionExaluator {0} < {1} = {2}", o1, o2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -1139,7 +1138,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         op3.Value = null;
         replacement = op3;
       }
-      Debug.WriteLine(String.Format("ExpressionEvaluator {0} >= {1} = {2}", o1, o2, replacement));
+      Debug.WriteLine("ExpressionEvaluator {0} >= {1} = {2}", o1, o2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;
@@ -1175,7 +1174,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         op3.Value = null;
         replacement = op3;
       }
-      Debug.WriteLine(String.Format("ExpressionExaluator {0} <= {1} = {2}", o1, o2, replacement));
+      Debug.WriteLine("ExpressionExaluator {0} <= {1} = {2}", o1, o2, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;

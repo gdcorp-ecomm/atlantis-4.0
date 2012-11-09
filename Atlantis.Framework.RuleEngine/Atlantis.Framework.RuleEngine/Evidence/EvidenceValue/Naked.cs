@@ -18,9 +18,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 using System;
-using System.Collections.Generic;
 
-namespace Atlantis.Framework.RuleEngine.Evidence.EvidenceValue
+namespace Atlantis.Framework.RuleEngine.Evidence
 {
   /// <summary>
   /// Comparable object that has no reference to the model
@@ -86,19 +85,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence.EvidenceValue
     public void Evaluate()
     {
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    //[System.Diagnostics.DebuggerHidden]
-    public object Clone()
-    {
-      var xml = new Naked(value, _valueType);
-      return xml;
-    }
-
-
+    
 // ReSharper disable EventNeverInvoked
     private event ModelLookupHandler _modelLookup;
 // ReSharper restore EventNeverInvoked
@@ -152,30 +139,11 @@ namespace Atlantis.Framework.RuleEngine.Evidence.EvidenceValue
         return null;
       }
     }
-    #endregion
-
-
-    public void SetResult(IFact fact)
-    {
-      throw new NotImplementedException();
-    }
-
-
-    public void SetStatus(Expression.Symbol result)
-    {
-      throw new NotImplementedException();
-    }
-
-
-    public Dictionary<string, string> GetModel(string modelId)
-    {
-      throw new NotImplementedException();
-    }
-
 
     public string EvidenceValueKey
     {
-      get { throw new NotImplementedException(); }
+      get { return string.Empty; }
     }
+    #endregion
   }
 }

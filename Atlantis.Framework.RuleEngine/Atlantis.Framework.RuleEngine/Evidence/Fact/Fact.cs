@@ -19,10 +19,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
 using System.Collections.Generic;
-using System.Xml;
-using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
-using Atlantis.Framework.RuleEngine.Model;
-using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine.Evidence
 {
@@ -46,33 +42,15 @@ namespace Atlantis.Framework.RuleEngine.Evidence
 
       //naked
       IEvidenceValue x = new Naked(value, valueType);
-      EvidenceValue = x;
+      EvidenceResult = x;
     }
-
-    ///// <summary>
-    ///// Construct Fact
-    ///// </summary>
-    ///// <param name="id"></param>
-    ///// <param name="priority"> </param>
-    ///// <param name="xPath"></param>
-    ///// <param name="key"> </param>
-    ///// <param name="valueType"></param>
-    ///// <param name="modelId"></param>
-    //[System.Diagnostics.DebuggerHidden]
-    //public Fact(string id, int priority, string xPath, Type valueType, string modelId)
-    //  : base(id, priority)
-    //{
-    //  //xml
-    //  IEvidenceValue x = new Xml(xPath, valueType, modelId);
-    //  EvidenceValue = x;
-    //}
 
     public Fact(string id, int priority, string key, Type valueType, string modelId, bool isValid)
       : base(id, priority)
     {
       //xml
-      IEvidenceValue x = new Xml(modelId, key, valueType);
-      EvidenceValue = x;
+      IEvidenceValue x = new EvidenceValue(modelId, key, valueType);
+      EvidenceResult = x;
       IsValid = isValid;
       _key = key;
     }
@@ -95,20 +73,8 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     {
       if (IsEvaluatable)
       {
-        EvidenceValue.Evaluate();
+        EvidenceResult.Evaluate();
       }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    //[System.Diagnostics.DebuggerHidden]
-    public override object Clone()
-    {
-      var f = (Fact)base.Clone();
-
-      return f;
     }
 
     protected override int CalculateInternalPriority(int priority)
@@ -163,27 +129,9 @@ namespace Atlantis.Framework.RuleEngine.Evidence
 
     public void UpdateResults()
     {
-      //if (IsResult)
       {
-        var resultValue = this.EvidenceValue;
-        //Key = resultValue.EvidenceValueKey;
+        var resultValue = EvidenceResult;
         Value = resultValue.Value;
-
-        //Dictionary<string, string> model = resultValue.GetModel(modelId);
-
-        //if (model.ContainsKey(resultValue.EvidenceValueKey))
-        //{
-        //  resultValue.EvidenceValueKey
-        //  validationResult.Status = ValidationResultStatus.Valid;
-
-        //  var valueTemp = Convert.ToString(Value);
-        //  bool isValid;
-        //  if (bool.TryParse(valueTemp, out isValid) && !isValid)
-        //  {
-        //    validationResult.Status = ValidationResultStatus.InValid;
-        //    validationResult.Value = valueTemp;
-        //  }
-        //}
       }
     }
 

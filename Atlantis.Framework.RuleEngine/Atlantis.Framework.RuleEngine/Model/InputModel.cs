@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine.Model
 {
@@ -22,12 +21,5 @@ namespace Atlantis.Framework.RuleEngine.Model
     {
       get { return _models; }
     }
-
-    //ValidationResultStatus _status = ValidationResultStatus.NotSet;
-    //public ValidationResultStatus Status
-    //{
-    //  get { return _status; }
-    //  set { _status = value; }
-    //}
   }
 }

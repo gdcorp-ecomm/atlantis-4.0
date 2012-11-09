@@ -18,11 +18,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 using System;
-using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
 
 namespace Atlantis.Framework.RuleEngine.Evidence
 {
-  public interface IEvidence : IComparable, ICloneable
+  public interface IEvidence : IComparable
   {
     event ChangedHandler Changed;
     event EvidenceLookupHandler EvidenceLookup;

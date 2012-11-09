@@ -19,10 +19,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
 using System.Collections.Generic;
-using System.Xml;
-using Atlantis.Framework.RuleEngine.Model;
-using Atlantis.Framework.RuleEngine.Results;
-
 
 namespace Atlantis.Framework.RuleEngine.Evidence.Actions
 {
@@ -31,7 +27,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
     #region instance variables
 
     protected string Equation { get; set; }
-    private string _operatingId;
+    private readonly string _operatingId;
     #endregion
 
     #region constructor
@@ -78,19 +74,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
     protected override Dictionary<string, string> Value_ModelLookup(object sender, ModelLookupArgs e)
     {
       return RaiseModelLookup(this, e);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    //[System.Diagnostics.DebuggerHidden]
-    public override object Clone()
-    {
-      var f = (ActionExecute)base.Clone();
-      f.Equation = Equation;
-      f._operatingId = _operatingId;
-      return f;
     }
 
     #endregion

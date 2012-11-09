@@ -40,15 +40,6 @@
     <Reference Include="System.Core">
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Data">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -65,9 +56,9 @@
     <Compile Include="Evidence\Actions\IAction.cs" />
     <Compile Include="Evidence\AEvidence.cs" />
     <Compile Include="Evidence\EvidenceSpecifier.cs" />
+    <Compile Include="Evidence\EvidenceValue\EvidenceValue.cs" />
     <Compile Include="Evidence\EvidenceValue\IEvidenceValue.cs" />
     <Compile Include="Evidence\EvidenceValue\Naked.cs" />
-    <Compile Include="Evidence\EvidenceValue\Xml.cs" />
     <Compile Include="Evidence\Expression\ExpressionEvaluator.cs" />
     <Compile Include="Evidence\Expression\Symbol.cs" />
     <Compile Include="Evidence\Fact\Fact.cs" />
@@ -75,7 +66,6 @@
     <Compile Include="Evidence\IEvidence.cs" />
     <Compile Include="Evidence\Rule\IRule.cs" />
     <Compile Include="Evidence\Rule\Rule.cs" />
-    <Compile Include="Model\ResultModels.cs" />
     <Compile Include="Model\InputModel.cs" />
     <Compile Include="Results\IModelResult.cs" />
     <Compile Include="Results\ModelResult.cs" />

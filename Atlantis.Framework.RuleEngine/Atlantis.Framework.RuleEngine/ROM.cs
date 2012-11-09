@@ -20,48 +20,32 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
 using Atlantis.Framework.RuleEngine.Evidence;
-using Atlantis.Framework.RuleEngine.Model;
 using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine
 {
-  public class ROM : ICloneable
+  public class ROM 
   {
     #region instance variables
     /// <summary>
     /// collection of all evidence objects
     /// </summary>
-    private Dictionary<string, IEvidence> _evidenceCollection = new Dictionary<string, IEvidence>();
-    /// <summary>
-    /// specifies the models to be used
-    /// </summary>
-    private Dictionary<string, XmlDocument> _models = new Dictionary<string, XmlDocument>();
-
+    private readonly Dictionary<string, IEvidence> _evidenceCollection = new Dictionary<string, IEvidence>();
+   
     /// <summary>
     /// specifies for a given evidence all evidence thats dependent on it
     /// </summary>
-    private Dictionary<string, List<string>> _dependentEvidence = new Dictionary<string, List<string>>();
+    private readonly Dictionary<string, List<string>> _dependentEvidence = new Dictionary<string, List<string>>();
     /// <summary>
     /// 
     /// </summary>
-    private Dictionary<string, Delegate> _callback = new Dictionary<string, Delegate>();
+    private readonly Dictionary<string, Delegate> _callback = new Dictionary<string, Delegate>();
     #endregion
     #region constructor
 
     #endregion
     #region core
-    /// <summary>
-    /// Add a model to the ROM. The name given to the model must match those specified in the ruleset.
-    /// </summary>
-    /// <param name="modelId"></param>
-    /// <param name="model"></param>
-    //public void AddModel(string modelId, XmlDocument model)
-    //{
-    //  //add model to collection
-    //  _models.Add(modelId, model);
-    //}
 
     public void AddModel(string modelId, Dictionary<string, string> models)
     {
@@ -74,21 +58,7 @@ namespace Atlantis.Framework.RuleEngine
         _inputModels.Add(modelId, models);
       }
     }
-
-    public void AddModel(string modelId, string key, string value)
-    {
-      Dictionary<string, string> facts = null;
-      var hasModel = false;
-      if (_inputModels.ContainsKey(modelId))
-      {
-        _inputModels[modelId].Add(key, value);
-      }
-      else
-      {
-        _inputModels.Add(modelId, new Dictionary<string, string> {{key, value}});
-      }
-    }
-
+    
     private readonly Dictionary<string, Dictionary<string, string>> _inputModels = new Dictionary<string, Dictionary<string, string>>();
 
     readonly IList<IModelResult> _modelResults = new List<IModelResult>(0);
@@ -153,11 +123,6 @@ namespace Atlantis.Framework.RuleEngine
       }
     }
 
-    void SetResults()
-    {
-
-    }
-
     /// <summary>
     /// 
     /// </summary>
@@ -192,7 +157,7 @@ namespace Atlantis.Framework.RuleEngine
           }
           else
           {
-            factModels.Add(modelId, new List<IFactResult>(){result});
+            factModels.Add(modelId, new List<IFactResult> {result});
           }
         }
       }
@@ -210,31 +175,6 @@ namespace Atlantis.Framework.RuleEngine
         ModelResults.Add(modelResult);
       }
 
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public object Clone()
-    {
-      var rom = new ROM { _callback = new Dictionary<string, Delegate>(_callback), _dependentEvidence = new Dictionary<string, List<string>>() };
-
-      foreach (string key in _dependentEvidence.Keys)
-      {
-        rom._dependentEvidence.Add(key, new List<string>(_dependentEvidence[key]));
-      }
-
-      rom._evidenceCollection = new Dictionary<string, IEvidence>();
-      foreach (string key in _evidenceCollection.Keys)
-      {
-        var evidence = (IEvidence)_evidenceCollection[key].Clone();
-        rom._evidenceCollection.Add(key, evidence);
-      }
-
-      rom._models = new Dictionary<string, XmlDocument>(_models);
-
-      return rom;
     }
 
     /// <summary>

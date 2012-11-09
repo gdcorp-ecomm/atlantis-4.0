@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 using Atlantis.Framework.RuleEngine.Compiler;
-using Atlantis.Framework.RuleEngine.Model;
 using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine
@@ -28,11 +27,7 @@ namespace Atlantis.Framework.RuleEngine
       
       rom.Evaluate();
 
-      _ruleEngineResult = new RuleEngineResult(RuleEngineResultStatus.Valid);
-
-      
-      _ruleEngineResult.ValidationResults = rom.ModelResults;
-      
+      _ruleEngineResult = new RuleEngineResult(RuleEngineResultStatus.Valid) {ValidationResults = rom.ModelResults};
     }
 
     public RuleEngineResult GetRuleEngineResult()

@@ -19,10 +19,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Xml;
 using Atlantis.Framework.RuleEngine.Evidence;
-using Atlantis.Framework.RuleEngine.Model;
-using Atlantis.Framework.RuleEngine.Results;
 
 namespace Atlantis.Framework.RuleEngine.Decisions
 {
@@ -99,10 +96,10 @@ namespace Atlantis.Framework.RuleEngine.Decisions
       //execute list
       Debug.WriteLine("Iteration");
       Debug.IndentLevel++;
-      const int maxExecutionCount = 10; // Max relationships.
+      const int maxExecutionCount = 1000; // Max relationships emergency out.
       int executionCount = 0;
 
-      while (Executions.HasNext)
+      while (Executions.HasNext && executionCount < maxExecutionCount)
       {
         executionCount++;
         Debug.WriteLine("Execution List: " + Executions);

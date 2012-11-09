@@ -20,7 +20,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Atlantis.Framework.RuleEngine.Evidence.EvidenceValue;
 
 namespace Atlantis.Framework.RuleEngine.Evidence.Actions
 {
@@ -49,7 +48,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
 
       //assing a value
       var naked = new Naked(null, typeof(string));
-      EvidenceValue = naked;
+      EvidenceResult = naked;
 
       //this is expensive and static, so compute now
       _evaluator = new ExpressionEvaluator();
@@ -157,14 +156,14 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
     /// </summary>
     /// <returns></returns>
     //[System.Diagnostics.DebuggerHidden]
-    public override object Clone()
-    {
-      var f = (ActionExpression)base.Clone();
-      f.Equation = Equation;
-      f._operatingId = _operatingId;
-      f._evaluator = _evaluator;
-      return f;
-    }
+    //public override object Clone()
+    //{
+    //  var f = (ActionExpression)base.Clone();
+    //  f.Equation = Equation;
+    //  f._operatingId = _operatingId;
+    //  f._evaluator = _evaluator;
+    //  return f;
+    //}
     #endregion
 
     public ActionType ActionExpressionType { get; set; }

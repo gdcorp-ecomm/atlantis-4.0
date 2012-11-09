@@ -19,12 +19,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
 using System.Collections.Generic;
-using Atlantis.Framework.RuleEngine.Evidence.Expression;
-using Atlantis.Framework.RuleEngine.Results;
 
-namespace Atlantis.Framework.RuleEngine.Evidence.EvidenceValue
+namespace Atlantis.Framework.RuleEngine.Evidence
 {
-  public interface IEvidenceValue : ICloneable
+  public interface IEvidenceValue 
   {
     /// <summary>
     /// Value of this object.
@@ -62,7 +60,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence.EvidenceValue
     /// </summary>
     event EvidenceLookupHandler EvidenceLookup;
 
-    Dictionary<string, string> GetModel(string modelId);
     string EvidenceValueKey { get; }
   }
 }

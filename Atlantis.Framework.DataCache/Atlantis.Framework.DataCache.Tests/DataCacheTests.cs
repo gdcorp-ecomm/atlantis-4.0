@@ -11,6 +11,7 @@ namespace Atlantis.Framework.DataCache.Tests
   /// Summary description for UnitTest1
   /// </summary>
   [TestClass]
+  [DeploymentItem("Interop.gdDataCacheLib.dll")]
   public class DataCacheTests
   {
     public DataCacheTests()
@@ -58,7 +59,6 @@ namespace Atlantis.Framework.DataCache.Tests
     #endregion
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void GetCurrencyDataAll()
     {
       Dictionary<string, Dictionary<string,string>> currencyInfo = DataCache.GetCurrencyDataAll();
@@ -66,21 +66,18 @@ namespace Atlantis.Framework.DataCache.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void GetRegistryFee()
     {
       //int price = DataCache.GetRegistryFee(101, "USD");
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void ValidDotTypes()
     {
       HashSet<string> dotTypes = DataCache.GetValidDotTypes();
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void CustomClassBasic()
     {
       CustomClass resultFirst = DataCache.GetCustomCacheData<CustomClass>("First", CustomClass.GetCustomClass);
@@ -93,7 +90,6 @@ namespace Atlantis.Framework.DataCache.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void CustomClassStruct()
     {
       int number = DataCache.GetCustomCacheData<int>("1", GetIntValue);
@@ -111,13 +107,42 @@ namespace Atlantis.Framework.DataCache.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void CacheDataLinkInfo()
     {
       string xml = DataCache.GetCacheData("<LinkInfo><param name=\"contextID\" value=\"1\" /></LinkInfo>");
       Assert.IsNotNull(xml);
     }
 
+    [TestMethod]
+    public void GetListPriceEx()
+    {
+      const int mcpOffPlid = 1724;
+      const int mcpOnPlid = 440804;
+
+      int price;
+      bool estimate;
+
+      DataCache.GetListPriceEx(1, 101, 0, "EUR", out price, out estimate);
+      Assert.IsTrue(price > 0);
+      Assert.IsFalse(estimate);
+
+      DataCache.GetListPriceEx(mcpOffPlid, 101, 0, "EUR", out price, out estimate);
+      Assert.IsTrue(price > 0);
+      Assert.IsFalse(estimate);
+
+      DataCache.GetListPriceEx(mcpOnPlid, 101, 0, "EUR", out price, out estimate);
+      Assert.IsTrue(price > 0);
+      Assert.IsFalse(estimate);
+
+      DataCache.GetListPriceEx(2, 101, 0, "EUR", out price, out estimate);
+      Assert.IsTrue(price > 0);
+      Assert.IsFalse(estimate);
+
+      DataCache.GetListPriceEx(1387, 101, 0, "EUR", out price, out estimate);
+      Assert.IsTrue(price < 0);
+      Assert.IsFalse(estimate);
+
+    }
 
   }
 }

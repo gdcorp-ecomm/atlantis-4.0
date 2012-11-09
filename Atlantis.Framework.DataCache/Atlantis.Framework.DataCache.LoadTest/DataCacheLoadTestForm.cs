@@ -26,7 +26,6 @@ namespace Atlantis.Framework.DataCacheLoadTest
       m_iNumSteps = 0;
     }
 
-    int iCount = 0;
     int pfid = 100;
 
     private void WriterBoundHandler(object oState)

@@ -27,7 +27,6 @@ Global
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Atlantis.Framework.PromoToolGetOrderPromo.Impl\\Atlantis.Framework.PromoToolGetOrderPromo.Impl.csproj
-		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.PromoToolGetOrderPromo.sln
 		SccProjectName1 = Atlantis.Framework.PromoToolGetOrderPromo.Impl
 		SccLocalPath1 = Atlantis.Framework.PromoToolGetOrderPromo.Impl
 		SccProjectUniqueName2 = Atlantis.Framework.PromoToolGetOrderPromo.Interface\\Atlantis.Framework.PromoToolGetOrderPromo.Interface.csproj
@@ -80,6 +79,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {78C4F0C5-4DC3-4F21-BB6C-3F2B977C93CD}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {78C4F0C5-4DC3-4F21-BB6C-3F2B977C93CD}
-		{952622BE-E570-4F03-BE0A-60AF7EE4E335} = {25372CDA-262F-4144-A480-0E9A8056023B}
 	EndGlobalSection
 EndGlobal

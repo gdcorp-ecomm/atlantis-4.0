@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PromoToolDomainService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PromoToolDomainService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsp:Policy wsu:Id="BasicHttpBinding_PromoToolDomainServiceSOAP_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -42,7 +42,6 @@
       <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
       <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PromoTool.Data" />
       <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Fastball.Commons.GDDataCacheFacade" />
-      <xsd:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/PromoTool.Data.Services.ServiceModel" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllOrderPromosBySearchCriteria_InputMessage">
@@ -261,15 +260,6 @@
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoStats_DomainServiceFault_FaultMessage">
     <wsdl:part xmlns:q24="DomainServices" name="detail" element="q24:DomainServiceFault" />
   </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetStandardProductPromoByPromoId" />
-  </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetStandardProductPromoByPromoIdResponse" />
-  </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q25="DomainServices" name="detail" element="q25:DomainServiceFault" />
-  </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoByPromoId_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProductPromoByPromoId" />
   </wsdl:message>
@@ -277,7 +267,7 @@
     <wsdl:part name="parameters" element="tns:GetProductPromoByPromoIdResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromoByPromoId_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q26="DomainServices" name="detail" element="q26:DomainServiceFault" />
+    <wsdl:part xmlns:q25="DomainServices" name="detail" element="q25:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromosByCurrencyAndSearchTerm_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProductPromosByCurrencyAndSearchTerm" />
@@ -286,7 +276,7 @@
     <wsdl:part name="parameters" element="tns:GetProductPromosByCurrencyAndSearchTermResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductPromosByCurrencyAndSearchTerm_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q27="DomainServices" name="detail" element="q27:DomainServiceFault" />
+    <wsdl:part xmlns:q26="DomainServices" name="detail" element="q26:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoBulk_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateProductPromoBulk" />
@@ -295,7 +285,7 @@
     <wsdl:part name="parameters" element="tns:UpdateProductPromoBulkResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoBulk_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q28="DomainServices" name="detail" element="q28:DomainServiceFault" />
+    <wsdl:part xmlns:q27="DomainServices" name="detail" element="q27:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_OrderPromoBulkUpdate_InputMessage">
     <wsdl:part name="parameters" element="tns:OrderPromoBulkUpdate" />
@@ -304,25 +294,16 @@
     <wsdl:part name="parameters" element="tns:OrderPromoBulkUpdateResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_OrderPromoBulkUpdate_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q28="DomainServices" name="detail" element="q28:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_CopyProductPromo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CopyProductPromo" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_CopyProductPromo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CopyProductPromoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_CopyProductPromo_DomainServiceFault_FaultMessage">
     <wsdl:part xmlns:q29="DomainServices" name="detail" element="q29:DomainServiceFault" />
-  </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateProductPromoRestriction" />
-  </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateProductPromoRestrictionResponse" />
-  </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q30="DomainServices" name="detail" element="q30:DomainServiceFault" />
-  </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateProductPromoShopperRestriction" />
-  </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateProductPromoShopperRestrictionResponse" />
-  </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q31="DomainServices" name="detail" element="q31:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_InsertProductPromo_InputMessage">
     <wsdl:part name="parameters" element="tns:InsertProductPromo" />
@@ -331,7 +312,16 @@
     <wsdl:part name="parameters" element="tns:InsertProductPromoResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_InsertProductPromo_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q32="DomainServices" name="detail" element="q32:DomainServiceFault" />
+    <wsdl:part xmlns:q30="DomainServices" name="detail" element="q30:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProductPromo" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProductPromoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_UpdateProductPromo_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q31="DomainServices" name="detail" element="q31:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductRanks_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProductRanks" />
@@ -340,7 +330,7 @@
     <wsdl:part name="parameters" element="tns:GetProductRanksResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductRanks_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q33="DomainServices" name="detail" element="q33:DomainServiceFault" />
+    <wsdl:part xmlns:q32="DomainServices" name="detail" element="q32:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabels_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPrivateLabels" />
@@ -349,7 +339,7 @@
     <wsdl:part name="parameters" element="tns:GetPrivateLabelsResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabels_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q34="DomainServices" name="detail" element="q34:DomainServiceFault" />
+    <wsdl:part xmlns:q33="DomainServices" name="detail" element="q33:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabelsForProductCount_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPrivateLabelsForProductCount" />
@@ -358,7 +348,7 @@
     <wsdl:part name="parameters" element="tns:GetPrivateLabelsForProductCountResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabelsForProductCount_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q35="DomainServices" name="detail" element="q35:DomainServiceFault" />
+    <wsdl:part xmlns:q34="DomainServices" name="detail" element="q34:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabelResellerAssocations_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPrivateLabelResellerAssocations" />
@@ -367,16 +357,7 @@
     <wsdl:part name="parameters" element="tns:GetPrivateLabelResellerAssocationsResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetPrivateLabelResellerAssocations_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q36="DomainServices" name="detail" element="q36:DomainServiceFault" />
-  </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_InputMessage">
-    <wsdl:part name="parameters" element="tns:InsertProductPromoPrivateLabels" />
-  </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_OutputMessage">
-    <wsdl:part name="parameters" element="tns:InsertProductPromoPrivateLabelsResponse" />
-  </wsdl:message>
-  <wsdl:message name="PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q37="DomainServices" name="detail" element="q37:DomainServiceFault" />
+    <wsdl:part xmlns:q35="DomainServices" name="detail" element="q35:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosBySearchCriteria_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllViralPromosBySearchCriteria" />
@@ -385,7 +366,7 @@
     <wsdl:part name="parameters" element="tns:GetAllViralPromosBySearchCriteriaResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosBySearchCriteria_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q38="DomainServices" name="detail" element="q38:DomainServiceFault" />
+    <wsdl:part xmlns:q36="DomainServices" name="detail" element="q36:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosByAdvSearchCriteria_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllViralPromosByAdvSearchCriteria" />
@@ -394,7 +375,7 @@
     <wsdl:part name="parameters" element="tns:GetAllViralPromosByAdvSearchCriteriaResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosByAdvSearchCriteria_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q39="DomainServices" name="detail" element="q39:DomainServiceFault" />
+    <wsdl:part xmlns:q37="DomainServices" name="detail" element="q37:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllCouponViralPromosBySearchCriteria_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllCouponViralPromosBySearchCriteria" />
@@ -403,7 +384,7 @@
     <wsdl:part name="parameters" element="tns:GetAllCouponViralPromosBySearchCriteriaResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllCouponViralPromosBySearchCriteria_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q40="DomainServices" name="detail" element="q40:DomainServiceFault" />
+    <wsdl:part xmlns:q38="DomainServices" name="detail" element="q38:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllCouponViralPromosByAdvSearchCriteria_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllCouponViralPromosByAdvSearchCriteria" />
@@ -412,7 +393,7 @@
     <wsdl:part name="parameters" element="tns:GetAllCouponViralPromosByAdvSearchCriteriaResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllCouponViralPromosByAdvSearchCriteria_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q41="DomainServices" name="detail" element="q41:DomainServiceFault" />
+    <wsdl:part xmlns:q39="DomainServices" name="detail" element="q39:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosByPromoCode_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllViralPromosByPromoCode" />
@@ -421,7 +402,7 @@
     <wsdl:part name="parameters" element="tns:GetAllViralPromosByPromoCodeResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralPromosByPromoCode_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q42="DomainServices" name="detail" element="q42:DomainServiceFault" />
+    <wsdl:part xmlns:q40="DomainServices" name="detail" element="q40:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetViralPromoByPromoId_InputMessage">
     <wsdl:part name="parameters" element="tns:GetViralPromoByPromoId" />
@@ -430,7 +411,7 @@
     <wsdl:part name="parameters" element="tns:GetViralPromoByPromoIdResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetViralPromoByPromoId_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q43="DomainServices" name="detail" element="q43:DomainServiceFault" />
+    <wsdl:part xmlns:q41="DomainServices" name="detail" element="q41:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoId_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCouponViralPromoByPromoId" />
@@ -439,7 +420,7 @@
     <wsdl:part name="parameters" element="tns:GetCouponViralPromoByPromoIdResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoId_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q44="DomainServices" name="detail" element="q44:DomainServiceFault" />
+    <wsdl:part xmlns:q42="DomainServices" name="detail" element="q42:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoCode_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCouponViralPromoByPromoCode" />
@@ -448,7 +429,7 @@
     <wsdl:part name="parameters" element="tns:GetCouponViralPromoByPromoCodeResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetCouponViralPromoByPromoCode_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q45="DomainServices" name="detail" element="q45:DomainServiceFault" />
+    <wsdl:part xmlns:q43="DomainServices" name="detail" element="q43:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_UpdateViralPromo_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateViralPromo" />
@@ -457,7 +438,7 @@
     <wsdl:part name="parameters" element="tns:UpdateViralPromoResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_UpdateViralPromo_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q46="DomainServices" name="detail" element="q46:DomainServiceFault" />
+    <wsdl:part xmlns:q44="DomainServices" name="detail" element="q44:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_InsertViralPromo_InputMessage">
     <wsdl:part name="parameters" element="tns:InsertViralPromo" />
@@ -466,7 +447,7 @@
     <wsdl:part name="parameters" element="tns:InsertViralPromoResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_InsertViralPromo_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q47="DomainServices" name="detail" element="q47:DomainServiceFault" />
+    <wsdl:part xmlns:q45="DomainServices" name="detail" element="q45:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetViralPromoStats_InputMessage">
     <wsdl:part name="parameters" element="tns:GetViralPromoStats" />
@@ -475,7 +456,7 @@
     <wsdl:part name="parameters" element="tns:GetViralPromoStatsResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetViralPromoStats_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q48="DomainServices" name="detail" element="q48:DomainServiceFault" />
+    <wsdl:part xmlns:q46="DomainServices" name="detail" element="q46:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralYardValues_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllViralYardValues" />
@@ -484,7 +465,7 @@
     <wsdl:part name="parameters" element="tns:GetAllViralYardValuesResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetAllViralYardValues_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q49="DomainServices" name="detail" element="q49:DomainServiceFault" />
+    <wsdl:part xmlns:q47="DomainServices" name="detail" element="q47:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypes_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProductTypes" />
@@ -493,7 +474,7 @@
     <wsdl:part name="parameters" element="tns:GetProductTypesResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypes_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q50="DomainServices" name="detail" element="q50:DomainServiceFault" />
+    <wsdl:part xmlns:q48="DomainServices" name="detail" element="q48:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypesBySearchCriteria_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProductTypesBySearchCriteria" />
@@ -502,7 +483,7 @@
     <wsdl:part name="parameters" element="tns:GetProductTypesBySearchCriteriaResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypesBySearchCriteria_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q51="DomainServices" name="detail" element="q51:DomainServiceFault" />
+    <wsdl:part xmlns:q49="DomainServices" name="detail" element="q49:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypesRequiringTlds_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProductTypesRequiringTlds" />
@@ -511,7 +492,7 @@
     <wsdl:part name="parameters" element="tns:GetProductTypesRequiringTldsResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypesRequiringTlds_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q52="DomainServices" name="detail" element="q52:DomainServiceFault" />
+    <wsdl:part xmlns:q50="DomainServices" name="detail" element="q50:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypeNameSpaces_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProductTypeNameSpaces" />
@@ -520,7 +501,7 @@
     <wsdl:part name="parameters" element="tns:GetProductTypeNameSpacesResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypeNameSpaces_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q53="DomainServices" name="detail" element="q53:DomainServiceFault" />
+    <wsdl:part xmlns:q51="DomainServices" name="detail" element="q51:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypeOverrideTypes_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProductTypeOverrideTypes" />
@@ -529,7 +510,7 @@
     <wsdl:part name="parameters" element="tns:GetProductTypeOverrideTypesResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetProductTypeOverrideTypes_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q54="DomainServices" name="detail" element="q54:DomainServiceFault" />
+    <wsdl:part xmlns:q52="DomainServices" name="detail" element="q52:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetPaymentExclusions_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPaymentExclusions" />
@@ -538,7 +519,7 @@
     <wsdl:part name="parameters" element="tns:GetPaymentExclusionsResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetPaymentExclusions_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q55="DomainServices" name="detail" element="q55:DomainServiceFault" />
+    <wsdl:part xmlns:q53="DomainServices" name="detail" element="q53:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetTlds_InputMessage">
     <wsdl:part name="parameters" element="tns:GetTlds" />
@@ -547,7 +528,7 @@
     <wsdl:part name="parameters" element="tns:GetTldsResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_GetTlds_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q56="DomainServices" name="detail" element="q56:DomainServiceFault" />
+    <wsdl:part xmlns:q54="DomainServices" name="detail" element="q54:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_PublishPromo_InputMessage">
     <wsdl:part name="parameters" element="tns:PublishPromo" />
@@ -556,7 +537,16 @@
     <wsdl:part name="parameters" element="tns:PublishPromoResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_PublishPromo_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q57="DomainServices" name="detail" element="q57:DomainServiceFault" />
+    <wsdl:part xmlns:q55="DomainServices" name="detail" element="q55:DomainServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_PublishProductPromo_InputMessage">
+    <wsdl:part name="parameters" element="tns:PublishProductPromo" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_PublishProductPromo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PublishProductPromoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PromoToolDomainServiceSOAP_PublishProductPromo_DomainServiceFault_FaultMessage">
+    <wsdl:part xmlns:q56="DomainServices" name="detail" element="q56:DomainServiceFault" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_SubmitChanges_InputMessage">
     <wsdl:part name="parameters" element="tns:SubmitChanges" />
@@ -565,7 +555,7 @@
     <wsdl:part name="parameters" element="tns:SubmitChangesResponse" />
   </wsdl:message>
   <wsdl:message name="PromoToolDomainServiceSOAP_SubmitChanges_DomainServiceFault_FaultMessage">
-    <wsdl:part xmlns:q58="DomainServices" name="detail" element="q58:DomainServiceFault" />
+    <wsdl:part xmlns:q57="DomainServices" name="detail" element="q57:DomainServiceFault" />
   </wsdl:message>
   <wsdl:portType name="PromoToolDomainServiceSOAP">
     <wsdl:operation name="GetAllOrderPromosBySearchCriteria">
@@ -688,11 +678,6 @@
       <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoStatsResponse" message="tns:PromoToolDomainServiceSOAP_GetProductPromoStats_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoStatsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetProductPromoStats_DomainServiceFault_FaultMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetStandardProductPromoByPromoId">
-      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetStandardProductPromoByPromoId" message="tns:PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetStandardProductPromoByPromoIdResponse" message="tns:PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetStandardProductPromoByPromoIdDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetStandardProductPromoByPromoId_DomainServiceFault_FaultMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetProductPromoByPromoId">
       <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoByPromoId" message="tns:PromoToolDomainServiceSOAP_GetProductPromoByPromoId_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoByPromoIdResponse" message="tns:PromoToolDomainServiceSOAP_GetProductPromoByPromoId_OutputMessage" />
@@ -713,20 +698,20 @@
       <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/OrderPromoBulkUpdateResponse" message="tns:PromoToolDomainServiceSOAP_OrderPromoBulkUpdate_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/OrderPromoBulkUpdateDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_OrderPromoBulkUpdate_DomainServiceFault_FaultMessage" />
     </wsdl:operation>
-    <wsdl:operation name="UpdateProductPromoRestriction">
-      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoRestriction" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoRestrictionResponse" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoRestrictionDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoRestriction_DomainServiceFault_FaultMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="UpdateProductPromoShopperRestriction">
-      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoShopperRestriction" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoShopperRestrictionResponse" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoShopperRestrictionDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromoShopperRestriction_DomainServiceFault_FaultMessage" />
+    <wsdl:operation name="CopyProductPromo">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/CopyProductPromo" message="tns:PromoToolDomainServiceSOAP_CopyProductPromo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/CopyProductPromoResponse" message="tns:PromoToolDomainServiceSOAP_CopyProductPromo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/CopyProductPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_CopyProductPromo_DomainServiceFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="InsertProductPromo">
       <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromo" message="tns:PromoToolDomainServiceSOAP_InsertProductPromo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoResponse" message="tns:PromoToolDomainServiceSOAP_InsertProductPromo_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_InsertProductPromo_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromo">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromo" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoResponse" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_UpdateProductPromo_DomainServiceFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetProductRanks">
       <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductRanks" message="tns:PromoToolDomainServiceSOAP_GetProductRanks_InputMessage" />
@@ -747,11 +732,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelResellerAssocations" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabelResellerAssocations_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelResellerAssocationsResponse" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabelResellerAssocations_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelResellerAssocationsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_GetPrivateLabelResellerAssocations_DomainServiceFault_FaultMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="InsertProductPromoPrivateLabels">
-      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoPrivateLabels" message="tns:PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoPrivateLabelsResponse" message="tns:PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoPrivateLabelsDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_InsertProductPromoPrivateLabels_DomainServiceFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllViralPromosBySearchCriteria">
       <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/GetAllViralPromosBySearchCriteria" message="tns:PromoToolDomainServiceSOAP_GetAllViralPromosBySearchCriteria_InputMessage" />
@@ -852,6 +832,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/PublishPromo" message="tns:PromoToolDomainServiceSOAP_PublishPromo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/PublishPromoResponse" message="tns:PromoToolDomainServiceSOAP_PublishPromo_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/PublishPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_PublishPromo_DomainServiceFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PublishProductPromo">
+      <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/PublishProductPromo" message="tns:PromoToolDomainServiceSOAP_PublishProductPromo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/PublishProductPromoResponse" message="tns:PromoToolDomainServiceSOAP_PublishProductPromo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/PublishProductPromoDomainServiceFault" name="DomainServiceFault" message="tns:PromoToolDomainServiceSOAP_PublishProductPromo_DomainServiceFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SubmitChanges">
       <wsdl:input wsaw:Action="http://tempuri.org/PromoToolDomainServiceSOAP/SubmitChanges" message="tns:PromoToolDomainServiceSOAP_SubmitChanges_InputMessage" />
@@ -1150,18 +1135,6 @@
         <soap:fault use="literal" name="DomainServiceFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="GetStandardProductPromoByPromoId">
-      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetStandardProductPromoByPromoId" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="DomainServiceFault">
-        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
     <wsdl:operation name="GetProductPromoByPromoId">
       <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoByPromoId" style="document" />
       <wsdl:input>
@@ -1210,20 +1183,8 @@
         <soap:fault use="literal" name="DomainServiceFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="UpdateProductPromoRestriction">
-      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoRestriction" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="DomainServiceFault">
-        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="UpdateProductPromoShopperRestriction">
-      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoShopperRestriction" style="document" />
+    <wsdl:operation name="CopyProductPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/CopyProductPromo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1236,6 +1197,18 @@
     </wsdl:operation>
     <wsdl:operation name="InsertProductPromo">
       <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1284,18 +1257,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetPrivateLabelResellerAssocations">
       <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelResellerAssocations" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="DomainServiceFault">
-        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="InsertProductPromoPrivateLabels">
-      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoPrivateLabels" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1536,6 +1497,18 @@
     </wsdl:operation>
     <wsdl:operation name="PublishPromo">
       <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/PublishPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PublishProductPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/PublishProductPromo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1850,18 +1823,6 @@
         <soap:fault use="literal" name="DomainServiceFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="GetStandardProductPromoByPromoId">
-      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetStandardProductPromoByPromoId" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="DomainServiceFault">
-        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
     <wsdl:operation name="GetProductPromoByPromoId">
       <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetProductPromoByPromoId" style="document" />
       <wsdl:input>
@@ -1910,20 +1871,8 @@
         <soap:fault use="literal" name="DomainServiceFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="UpdateProductPromoRestriction">
-      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoRestriction" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="DomainServiceFault">
-        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="UpdateProductPromoShopperRestriction">
-      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromoShopperRestriction" style="document" />
+    <wsdl:operation name="CopyProductPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/CopyProductPromo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1936,6 +1885,18 @@
     </wsdl:operation>
     <wsdl:operation name="InsertProductPromo">
       <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/UpdateProductPromo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1984,18 +1945,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetPrivateLabelResellerAssocations">
       <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/GetPrivateLabelResellerAssocations" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="DomainServiceFault">
-        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="InsertProductPromoPrivateLabels">
-      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/InsertProductPromoPrivateLabels" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2236,6 +2185,18 @@
     </wsdl:operation>
     <wsdl:operation name="PublishPromo">
       <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/PublishPromo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DomainServiceFault">
+        <soap:fault use="literal" name="DomainServiceFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PublishProductPromo">
+      <soap:operation soapAction="http://tempuri.org/PromoToolDomainServiceSOAP/PublishProductPromo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

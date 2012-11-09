@@ -25,7 +25,6 @@
     <MetadataFile FileName="PromoTool1.xsd" MetadataType="Schema" ID="6ba94055-c060-494c-b2f4-50fa5b5d2c84" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd0" />
     <MetadataFile FileName="PromoTool2.xsd" MetadataType="Schema" ID="036db145-57d9-4e73-81a7-904f292d22d2" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd1" />
     <MetadataFile FileName="PromoTool3.xsd" MetadataType="Schema" ID="7956d338-4c89-4da3-ae9a-bef306266c65" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd6" />
-    <MetadataFile FileName="PromoTool4.xsd" MetadataType="Schema" ID="0d08b1e1-2f34-4f9d-be1c-81231614d00b" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd7" />
     <MetadataFile FileName="PromoTool5.xsd" MetadataType="Schema" ID="7ff07f4a-448d-49f5-82fa-104f55b61f18" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd4" />
     <MetadataFile FileName="PromoTool6.xsd" MetadataType="Schema" ID="0440b452-66c5-4a5b-bb3b-5f6ca1d3c274" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd5" />
     <MetadataFile FileName="PromoToolDomainService.wsdl" MetadataType="Wsdl" ID="a431c378-86e9-4d92-9b29-9adc68e59eeb" SourceId="1" SourceUrl="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?wsdl" />

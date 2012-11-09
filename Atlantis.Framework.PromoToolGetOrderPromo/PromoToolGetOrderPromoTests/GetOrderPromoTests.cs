@@ -67,7 +67,7 @@ namespace PromoToolGetOrderPromoTests
 		{
 			Guid pathway = Guid.NewGuid();
 			PromoToolGetOrderPromoRequestData request = new PromoToolGetOrderPromoRequestData(
-        "860427", "http://yuck.com", string.Empty, string.Empty, 0, "oct2012a");
+        "860427", "http://yuck.com", string.Empty, string.Empty, 0, "GPTESTUT13");
 
       for (int i = 0; i < 100; i++)
       {

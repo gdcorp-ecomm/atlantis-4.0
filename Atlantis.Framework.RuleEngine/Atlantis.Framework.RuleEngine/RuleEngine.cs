@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.RuleEngine.Compiler;
 using Atlantis.Framework.RuleEngine.Results;
 
@@ -18,16 +21,35 @@ namespace Atlantis.Framework.RuleEngine
 
     private void Evaluate(Dictionary<string, Dictionary<string, string>> inputModels)
     {
-      var rom = RuleEngineCompiler.Compile(_rules);
-
-      foreach (var modelKey in inputModels.Keys)
+      try
       {
-        rom.AddModel(modelKey, inputModels[modelKey]);
-      }
-      
-      rom.Evaluate();
+        var rom = RuleEngineCompiler.Compile(_rules);
 
-      _ruleEngineResult = new RuleEngineResult(RuleEngineResultStatus.Valid) {ValidationResults = rom.ModelResults};
+        foreach (var modelKey in inputModels.Keys)
+        {
+          rom.AddModel(modelKey, inputModels[modelKey]);
+        }
+
+        rom.Evaluate();
+
+        _ruleEngineResult = new RuleEngineResult(RuleEngineResultStatus.Valid) { ValidationResults = rom.ModelResults };
+      }
+      catch (Exception ex)
+      {
+        _ruleEngineResult = new RuleEngineResult(RuleEngineResultStatus.Exception);
+        LogSilent(ex, "RuleEngine.Evaluate");
+      }
+    }
+
+    private void LogSilent(Exception ex, string sourceFunction)
+    {
+      try
+      {
+        var siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
+        var shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
+        Engine.Engine.LogAtlantisException(new AtlantisException(sourceFunction, string.Empty, ex.Message, ex.ToString(), siteContext, shopperContext));
+      }
+      catch{}
     }
 
     public RuleEngineResult GetRuleEngineResult()

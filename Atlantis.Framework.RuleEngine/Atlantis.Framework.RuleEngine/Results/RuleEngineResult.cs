@@ -20,8 +20,7 @@ namespace Atlantis.Framework.RuleEngine.Results
         }
         return _validationResults;
       }
-
-      protected internal set { _validationResults = value; }
+      set { _validationResults = value; }
     }
 
     public RuleEngineResultStatus Status { get; set; }

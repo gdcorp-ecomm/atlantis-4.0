@@ -79,6 +79,20 @@
     <Compile Include="Results\RuleEngineResultStatus.cs" />
     <Compile Include="Results\ValidationResultStatus.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
+      <Name>Atlantis.Framework.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
+      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
+      <Name>Atlantis.Framework.Providers.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

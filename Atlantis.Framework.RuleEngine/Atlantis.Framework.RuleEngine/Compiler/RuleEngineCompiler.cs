@@ -189,68 +189,73 @@ namespace Atlantis.Framework.RuleEngine.Compiler
             }
 
             //expression
-            var xmlElement = ruleNode["Condition"];
-            if (xmlElement != null)
+            string condition;
+            var conditionNode = ruleNode["Condition"];
+            if (conditionNode != null)
             {
-              string condition = xmlElement.InnerText;
+              condition = conditionNode.InnerText;
+            }
+            else
+            {
+              condition = "true";
+            }
 
-              //actions
-              int actionCounter = 0;
-              var actions = new List<EvidenceSpecifier>();
+            //actions
+            int actionCounter = 0;
+            var actions = new List<EvidenceSpecifier>();
 
-              #region Evaluate
+            #region Evaluate
 
-              actionCounter = LoadEvaluation(rom, ruleNode, id, actions, actionCounter, ActionType.EvaluteIsValid);
-              actionCounter = LoadEvaluation(rom, ruleNode, id, actions, actionCounter, ActionType.EvaluateMessage);
+            actionCounter = LoadEvaluation(rom, ruleNode, id, actions, actionCounter, ActionType.EvaluteIsValid);
+            actionCounter = LoadEvaluation(rom, ruleNode, id, actions, actionCounter, ActionType.EvaluateMessage);
 
-              #endregion
+            #endregion
 
-              #region Execute
+            #region Execute
 
-              var executeList = ruleNode.SelectNodes("Actions//Execute");
-              if (executeList != null)
+            var executeList = ruleNode.SelectNodes("Actions//Execute");
+            if (executeList != null)
+            {
+              foreach (XmlNode execute in executeList)
               {
-                foreach (XmlNode execute in executeList)
+                try
                 {
-                  try
+                  if (execute.Attributes != null)
                   {
-                    if (execute.Attributes != null)
+                    string actionOperatingName = execute.Attributes["factId"].Value;
+
+                    bool result = true;
+
+                    int actionPriority = 500;
+
+                    if (execute.Attributes["priority"] != null)
                     {
-                      string actionOperatingName = execute.Attributes["factId"].Value;
-
-                      bool result = true;
-
-                      int actionPriority = 500;
-
-                      if (execute.Attributes["priority"] != null)
-                      {
-                        actionPriority = Int32.Parse(execute.Attributes["priority"].Value);
-                      }
-
-                      if (execute.Attributes["result"] != null)
-                      {
-                        result = Boolean.Parse(execute.Attributes["result"].Value);
-                      }
-
-                      var actionId = string.Format("{0}-{1}-{2}", id, actionOperatingName, actionCounter++);
-
-                      rom.AddEvidence(new ActionExecute(actionId, actionOperatingName, actionPriority));
-                      actions.Add(new EvidenceSpecifier(result, actionId));
+                      actionPriority = Int32.Parse(execute.Attributes["priority"].Value);
                     }
-                  }
-                  catch (Exception e)
-                  {
-                    throw new Exception("Invalid action: " + execute.OuterXml, e);
+
+                    if (execute.Attributes["result"] != null)
+                    {
+                      result = Boolean.Parse(execute.Attributes["result"].Value);
+                    }
+
+                    var actionId = string.Format("{0}-{1}-{2}", id, actionOperatingName, actionCounter++);
+
+                    rom.AddEvidence(new ActionExecute(actionId, actionOperatingName, actionPriority));
+                    actions.Add(new EvidenceSpecifier(result, actionId));
                   }
                 }
+                catch (Exception e)
+                {
+                  throw new Exception("Invalid action: " + execute.OuterXml, e);
+                }
               }
-
-              #endregion
-
-              //now create the rule
-              IRule rule = new Rule(id, condition, actions, priority, hasEvidence);
-              rom.AddEvidence(rule);
             }
+
+            #endregion
+
+            //now create the rule
+            IRule rule = new Rule(id, condition, actions, priority, hasEvidence);
+            rom.AddEvidence(rule);
           }
         }
       }

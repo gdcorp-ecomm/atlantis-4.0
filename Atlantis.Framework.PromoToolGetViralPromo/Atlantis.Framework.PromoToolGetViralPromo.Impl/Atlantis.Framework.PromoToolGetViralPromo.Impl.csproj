@@ -115,7 +115,7 @@
     <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetViralPromo.Impl.Svc.QueryResultOfProductTypeOverride.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetViralPromo.Impl.Svc.QueryResultOfResellerType.datasource">
+    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetViralPromo.Impl.Svc.QueryResultOfResellerTypeWithKey.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetViralPromo.Impl.Svc.QueryResultOfViralPromo.datasource">
@@ -125,9 +125,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetViralPromo.Impl.Svc.QueryResultOfViralYardValue.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetViralPromo.Impl.Svc.StandardProductPromo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\Svc\Atlantis.Framework.PromoToolGetViralPromo.Impl.Svc.TldList.datasource">
@@ -146,9 +143,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Svc\PromoTool3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Svc\PromoTool4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Svc\PromoTool5.xsd">

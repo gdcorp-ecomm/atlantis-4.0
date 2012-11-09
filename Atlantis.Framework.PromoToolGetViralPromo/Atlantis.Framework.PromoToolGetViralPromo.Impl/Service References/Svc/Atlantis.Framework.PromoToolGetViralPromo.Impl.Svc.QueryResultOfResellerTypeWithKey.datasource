@@ -5,6 +5,6 @@
     Renaming the file extension or editing the content of this file may   
     cause the file to be unrecognizable by the program.
 -->
-<GenericObjectDataSource DisplayName="ChangeSetEntry" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Atlantis.Framework.PromoToolGetViralPromo.Impl.Svc.ChangeSetEntry</TypeInfo>
+<GenericObjectDataSource DisplayName="QueryResultOfResellerTypeWithKey" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+   <TypeInfo>Atlantis.Framework.PromoToolGetViralPromo.Impl.Svc.QueryResultOfResellerTypeWithKey</TypeInfo>
 </GenericObjectDataSource>

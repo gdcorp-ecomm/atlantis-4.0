@@ -67,7 +67,7 @@ namespace PromoToolGetViralPromoTests
 		{
 			Guid pathway = Guid.NewGuid();
 			PromoToolGetViralPromoRequestData request = new PromoToolGetViralPromoRequestData(
-        "860427", "http://yuck.com", string.Empty, string.Empty, 0, "599coms");
+        "860427", "http://yuck.com", string.Empty, string.Empty, 0, "GPTESTUT13");
 
       for (int i = 0; i < 100; i++)
       {

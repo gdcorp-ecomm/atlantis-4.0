@@ -3,36 +3,53 @@
   <xs:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Fastball.Commons.GDDataCacheFacade" />
-  <xs:import schemaLocation="http://siteadmin.dev.intranet.gdg/PromoTool/PromoTool.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/PromoTool.Data.Services.ServiceModel" />
   <xs:complexType name="OrderPromoV2">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:OrderPromo">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="ActiveDisplay" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="CampaignTypeID" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="FastballDisplay" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="IsFastball" type="xs:int" />
-          <xs:element minOccurs="0" name="PaymentExclusions" nillable="true" type="tns:ArrayOfPaymentTypeExclusion" />
-          <xs:element minOccurs="0" name="Restriction" type="tns:OrderPromoV2.RestrictedOneUseOnly" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="OrderPromoV2" nillable="true" type="tns:OrderPromoV2" />
-  <xs:complexType name="OrderPromo">
     <xs:sequence>
       <xs:element minOccurs="0" name="Active" type="xs:int" />
+      <xs:element minOccurs="0" name="ActiveDisplay" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CampaignTypeID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CartDescription" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Currencies" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ExpirationDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FastballDisplay" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsFastball" type="xs:int" />
       <xs:element minOccurs="0" name="IsFastballPromo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OrderConditionAwards" nillable="true" type="tns:ArrayOfOrderConditionAward" />
+      <xs:element minOccurs="0" name="PaymentExclusions" nillable="true" type="tns:ArrayOfPaymentTypeExclusion" />
+      <xs:element minOccurs="0" name="PrivateLabels" nillable="true" type="tns:ArrayOfPrivateLabelV2" />
+      <xs:element minOccurs="0" name="PromoCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PromoType" type="xs:int" />
+      <xs:element minOccurs="0" name="ResellerTypes" nillable="true" type="tns:ArrayOfResellerType" />
+      <xs:element minOccurs="0" name="Restriction" type="tns:OrderPromoV2.RestrictedOneUseOnly" />
       <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="UseLimit" nillable="true" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="OrderPromo" nillable="true" type="tns:OrderPromo" />
+  <xs:element name="OrderPromoV2" nillable="true" type="tns:OrderPromoV2" />
+  <xs:complexType name="ArrayOfOrderConditionAward">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderConditionAward" nillable="true" type="tns:OrderConditionAward" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderConditionAward" nillable="true" type="tns:ArrayOfOrderConditionAward" />
+  <xs:complexType name="OrderConditionAward">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AwardAmount" type="xs:double" />
+          <xs:element minOccurs="0" name="AwardType" type="xs:int" />
+          <xs:element minOccurs="0" name="CurrencyType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MinimumCartAmount" type="xs:double" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OrderConditionAward" nillable="true" type="tns:OrderConditionAward" />
+  <xs:complexType name="BaseEntity">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="BaseEntity" nillable="true" type="tns:BaseEntity" />
   <xs:complexType name="ArrayOfPaymentTypeExclusion">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="PaymentTypeExclusion" nillable="true" type="tns:PaymentTypeExclusion" />
@@ -50,10 +67,45 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="PaymentTypeExclusion" nillable="true" type="tns:PaymentTypeExclusion" />
-  <xs:complexType name="BaseEntity">
-    <xs:sequence />
+  <xs:complexType name="ArrayOfPrivateLabelV2">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PrivateLabelV2" nillable="true" type="tns:PrivateLabelV2" />
+    </xs:sequence>
   </xs:complexType>
-  <xs:element name="BaseEntity" nillable="true" type="tns:BaseEntity" />
+  <xs:element name="ArrayOfPrivateLabelV2" nillable="true" type="tns:ArrayOfPrivateLabelV2" />
+  <xs:complexType name="PrivateLabelV2">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+          <xs:element minOccurs="0" name="New" type="xs:boolean" />
+          <xs:element minOccurs="0" name="PrivateLabelID" type="xs:int" />
+          <xs:element minOccurs="0" name="Remove" type="xs:boolean" />
+          <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PrivateLabelV2" nillable="true" type="tns:PrivateLabelV2" />
+  <xs:complexType name="ArrayOfResellerType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ResellerType" nillable="true" type="tns:ResellerType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfResellerType" nillable="true" type="tns:ArrayOfResellerType" />
+  <xs:complexType name="ResellerType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsActive" type="xs:int" />
+          <xs:element minOccurs="0" name="ResellerName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ResellerTypeID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ResellerType" nillable="true" type="tns:ResellerType" />
   <xs:simpleType name="OrderPromoV2.RestrictedOneUseOnly">
     <xs:restriction base="xs:string">
       <xs:enumeration value="NoRestriction" />
@@ -62,16 +114,6 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="OrderPromoV2.RestrictedOneUseOnly" nillable="true" type="tns:OrderPromoV2.RestrictedOneUseOnly" />
-  <xs:complexType name="OrderConditionAward">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AwardAmount" type="xs:double" />
-      <xs:element minOccurs="0" name="AwardType" type="xs:int" />
-      <xs:element minOccurs="0" name="CurrencyType" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="MinimumCartAmount" type="xs:double" />
-      <xs:element minOccurs="0" name="PromoCode" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OrderConditionAward" nillable="true" type="tns:OrderConditionAward" />
   <xs:complexType name="OrderPromoStats">
     <xs:sequence>
       <xs:element minOccurs="0" name="ActiveFBOrderPromosLast7Days" type="xs:int" />
@@ -81,14 +123,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrderPromoStats" nillable="true" type="tns:OrderPromoStats" />
-  <xs:complexType name="ResellerType">
+  <xs:complexType name="ResellerTypeWithKey">
     <xs:sequence>
       <xs:element minOccurs="0" name="IsActive" type="xs:int" />
       <xs:element minOccurs="0" name="ResellerName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ResellerTypeID" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ResellerType" nillable="true" type="tns:ResellerType" />
+  <xs:element name="ResellerTypeWithKey" nillable="true" type="tns:ResellerTypeWithKey" />
   <xs:complexType name="CampaignType">
     <xs:sequence>
       <xs:element minOccurs="0" name="CampaignTypeID" nillable="true" type="xs:string" />
@@ -103,19 +145,20 @@
       <xs:element minOccurs="0" name="CampaignTypeID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CompanyId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Currencies" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeprecatedMatchedAwardPromo" type="xs:boolean" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ExpirationDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NumberOfUses" nillable="true" type="xs:int" />
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PrivateLabels" nillable="true" type="q1:ArrayOfint" />
+      <xs:element minOccurs="0" name="PrivateLabels" nillable="true" type="tns:ArrayOfPrivateLabelV2" />
       <xs:element minOccurs="0" name="PromoCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PromoExclusion" type="xs:int" />
       <xs:element minOccurs="0" name="PromoExclusionValue" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PromoID" type="xs:int" />
       <xs:element minOccurs="0" name="RankValue" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Restriction" type="tns:OrderPromoV2.RestrictedOneUseOnly" />
-      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ShopperIdRestrictions" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element minOccurs="0" name="ShopperIdRestrictions" nillable="true" type="tns:ArrayOfShopperIdRestriction" />
       <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Type" type="tns:ProductPromoType.PromoType" />
       <xs:element minOccurs="0" name="UseLimit" nillable="true" type="xs:int" />
@@ -130,6 +173,20 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ProductPromo.AwardApplyType" nillable="true" type="tns:ProductPromo.AwardApplyType" />
+  <xs:complexType name="ArrayOfShopperIdRestriction">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ShopperIdRestriction" nillable="true" type="tns:ShopperIdRestriction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfShopperIdRestriction" nillable="true" type="tns:ArrayOfShopperIdRestriction" />
+  <xs:complexType name="ShopperIdRestriction">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ShopperIdRestriction" nillable="true" type="tns:ShopperIdRestriction" />
   <xs:simpleType name="ProductPromoType.PromoType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Standard" />
@@ -140,17 +197,6 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ProductPromoType.PromoType" nillable="true" type="tns:ProductPromoType.PromoType" />
-  <xs:complexType name="ProductCondition">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ConditionAmount" type="xs:int" />
-      <xs:element minOccurs="0" name="ConditionName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ConditionType" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ConditionValue" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PromoID" type="xs:int" />
-      <xs:element minOccurs="0" name="Rank" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ProductCondition" nillable="true" type="tns:ProductCondition" />
   <xs:complexType name="ProductPromoType">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />
@@ -216,7 +262,7 @@
       <xs:element minOccurs="0" name="Awards" nillable="true" type="tns:ArrayOfViralAward" />
       <xs:element minOccurs="0" name="ConfigId" type="xs:int" />
       <xs:element minOccurs="0" name="CouponAvailableCount" type="xs:int" />
-      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CouponCodes" nillable="true" type="q3:ArrayOfstring" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CouponCodes" nillable="true" type="q1:ArrayOfstring" />
       <xs:element minOccurs="0" name="CouponTotalCount" type="xs:int" />
       <xs:element minOccurs="0" name="CouponUsedCount" type="xs:int" />
       <xs:element minOccurs="0" name="CouponsToAdd" nillable="true" type="xs:int" />
@@ -226,13 +272,13 @@
       <xs:element minOccurs="0" name="ExpirationDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="FirstYearOnly" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
-      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MappedPromoCodes" nillable="true" type="q4:ArrayOfstring" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MappedPromoCodes" nillable="true" type="q2:ArrayOfstring" />
       <xs:element minOccurs="0" name="MaximumQuantityAllowedBeforeSitePricing" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="MaximumQuantityAllowedToReceivePrimaryDiscount" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="MaximumYearsBeforeFallback" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="NewShoppersOnly" type="xs:boolean" />
       <xs:element minOccurs="0" name="PaymentExclusions" nillable="true" type="tns:ArrayOfPaymentTypeExclusion" />
-      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PrivateLabels" nillable="true" type="q5:ArrayOfint" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PrivateLabels" nillable="true" type="q3:ArrayOfint" />
       <xs:element minOccurs="0" name="PromoCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RequiredYard" type="xs:int" />
       <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
@@ -333,7 +379,7 @@
       <xs:element minOccurs="0" name="DiscountAmount" type="xs:decimal" />
       <xs:element minOccurs="0" name="PromoID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SelectedCurrency" nillable="true" type="xs:string" />
-      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Fastball.Commons.GDDataCacheFacade" minOccurs="0" name="TransactionalCurrencies" nillable="true" type="q6:ArrayOfCurrency" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Fastball.Commons.GDDataCacheFacade" minOccurs="0" name="TransactionalCurrencies" nillable="true" type="q4:ArrayOfCurrency" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ProductPromoBulkUpdateItem" nillable="true" type="tns:ProductPromoBulkUpdateItem" />
@@ -358,12 +404,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfOrderPromoStats" nillable="true" type="tns:ArrayOfOrderPromoStats" />
-  <xs:complexType name="ArrayOfResellerType">
+  <xs:complexType name="ArrayOfResellerTypeWithKey">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ResellerType" nillable="true" type="tns:ResellerType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ResellerTypeWithKey" nillable="true" type="tns:ResellerTypeWithKey" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfResellerType" nillable="true" type="tns:ArrayOfResellerType" />
+  <xs:element name="ArrayOfResellerTypeWithKey" nillable="true" type="tns:ArrayOfResellerTypeWithKey" />
   <xs:complexType name="ArrayOfCampaignType">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="CampaignType" nillable="true" type="tns:CampaignType" />
@@ -388,201 +434,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfProductPromoStats" nillable="true" type="tns:ArrayOfProductPromoStats" />
-  <xs:complexType name="StandardProductPromo">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:BaseEntity">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Awards" nillable="true" type="tns:Award" />
-          <xs:element minOccurs="0" name="CampaignTypeID" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Conditions" nillable="true" type="tns:ArrayOfProductConditionV2" />
-          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="ExcludePriceTypes" type="xs:int" />
-          <xs:element minOccurs="0" name="IncludePriceTypes" type="xs:int" />
-          <xs:element minOccurs="0" name="IsActive" type="xs:int" />
-          <xs:element minOccurs="0" name="ItemOrder" type="xs:int" />
-          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="PrivateLabels" nillable="true" type="tns:ArrayOfPrivateLabelV2" />
-          <xs:element minOccurs="0" name="ProductAwards" nillable="true" type="tns:ArrayOfProductAward" />
-          <xs:element minOccurs="0" name="PromoID" type="xs:int" />
-          <xs:element minOccurs="0" name="Rank" type="xs:int" />
-          <xs:element minOccurs="0" name="ResellerTypes" nillable="true" type="tns:ArrayOfResellerType" />
-          <xs:element minOccurs="0" name="Restriction" type="tns:StandardProductPromo.RestrictedOneUseOnly" />
-          <xs:element minOccurs="0" name="SourceCode" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="UsageType" type="xs:int" />
-          <xs:element minOccurs="0" name="UseLimit" type="xs:int" />
-          <xs:element minOccurs="0" name="Version" type="xs:int" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="StandardProductPromo" nillable="true" type="tns:StandardProductPromo" />
-  <xs:complexType name="Award">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="PercentDiscount" nillable="true" type="tns:PercentDiscount" />
-      <xs:element minOccurs="0" name="PriceDiscount" nillable="true" type="tns:PriceDiscount" />
-      <xs:element minOccurs="0" name="PriceFixed" nillable="true" type="tns:PriceFixed" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Award" nillable="true" type="tns:Award" />
-  <xs:complexType name="PercentDiscount">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:AwardDiscount">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="DiscountAmount" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="PercentDiscount" nillable="true" type="tns:PercentDiscount" />
-  <xs:complexType name="AwardDiscount">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AwardLimit" type="xs:int" />
-      <xs:element minOccurs="0" name="AwardRank" type="xs:int" />
-      <xs:element minOccurs="0" name="FieldName" nillable="true" type="xs:string" />
-      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/PromoTool.Data.Services.ServiceModel" minOccurs="0" name="FieldValues" nillable="true" type="q7:ArrayOfPriceValue" />
-      <xs:element minOccurs="0" name="ServerGroupID" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="AwardDiscount" nillable="true" type="tns:AwardDiscount" />
-  <xs:complexType name="PriceDiscount">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:AwardDiscount">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Discounts" nillable="true" type="tns:ArrayOfDiscount" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="PriceDiscount" nillable="true" type="tns:PriceDiscount" />
-  <xs:complexType name="ArrayOfDiscount">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Discount" nillable="true" type="tns:Discount" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfDiscount" nillable="true" type="tns:ArrayOfDiscount" />
-  <xs:complexType name="Discount">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="DiscountAmount" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Discount" nillable="true" type="tns:Discount" />
-  <xs:complexType name="PriceFixed">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:AwardDiscount">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Prices" nillable="true" type="tns:ArrayOfAwardPrice" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="PriceFixed" nillable="true" type="tns:PriceFixed" />
-  <xs:complexType name="ArrayOfAwardPrice">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="AwardPrice" nillable="true" type="tns:AwardPrice" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfAwardPrice" nillable="true" type="tns:ArrayOfAwardPrice" />
-  <xs:complexType name="AwardPrice">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="AwardPrice" nillable="true" type="tns:AwardPrice" />
-  <xs:complexType name="ArrayOfProductConditionV2">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductConditionV2" nillable="true" type="tns:ProductConditionV2" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfProductConditionV2" nillable="true" type="tns:ArrayOfProductConditionV2" />
-  <xs:complexType name="ProductConditionV2">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:BaseEntity">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="BuyAmount" type="xs:int" />
-          <xs:element minOccurs="0" name="ConditionName" nillable="true" type="xs:string" />
-          <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ConditionValues" nillable="true" type="q8:ArrayOfstring" />
-          <xs:element minOccurs="0" name="PromoId" type="xs:int" />
-          <xs:element minOccurs="0" name="Rank" type="xs:int" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="ProductConditionV2" nillable="true" type="tns:ProductConditionV2" />
-  <xs:complexType name="ArrayOfPrivateLabelV2">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="PrivateLabelV2" nillable="true" type="tns:PrivateLabelV2" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPrivateLabelV2" nillable="true" type="tns:ArrayOfPrivateLabelV2" />
-  <xs:complexType name="PrivateLabelV2">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:BaseEntity">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
-          <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
-          <xs:element minOccurs="0" name="PrivateLabelID" type="xs:int" />
-          <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="PrivateLabelV2" nillable="true" type="tns:PrivateLabelV2" />
-  <xs:complexType name="ArrayOfProductAward">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductAward" nillable="true" type="tns:ProductAward" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfProductAward" nillable="true" type="tns:ArrayOfProductAward" />
-  <xs:complexType name="ProductAward">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AwardCurrencies" nillable="true" type="tns:ArrayOfProductAwardCurrency" />
-      <xs:element minOccurs="0" name="AwardLimit" type="xs:int" />
-      <xs:element minOccurs="0" name="AwardType" nillable="true" type="xs:string" />
-      <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AwardValues" nillable="true" type="q9:ArrayOfstring" />
-      <xs:element minOccurs="0" name="DiscountType" type="tns:ProductAward.DiscountTypes" />
-      <xs:element minOccurs="0" name="MatchedConditionRank" type="xs:int" />
-      <xs:element minOccurs="0" name="PercentOffAward" type="xs:int" />
-      <xs:element minOccurs="0" name="Rank" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ProductAward" nillable="true" type="tns:ProductAward" />
-  <xs:complexType name="ArrayOfProductAwardCurrency">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductAwardCurrency" nillable="true" type="tns:ProductAwardCurrency" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfProductAwardCurrency" nillable="true" type="tns:ArrayOfProductAwardCurrency" />
-  <xs:complexType name="ProductAwardCurrency">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:BaseEntity">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="DiscountAmount" type="xs:double" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="ProductAwardCurrency" nillable="true" type="tns:ProductAwardCurrency" />
-  <xs:simpleType name="ProductAward.DiscountTypes">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="PercentOff" />
-      <xs:enumeration value="AmountOff" />
-      <xs:enumeration value="SetAmount" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="ProductAward.DiscountTypes" nillable="true" type="tns:ProductAward.DiscountTypes" />
-  <xs:simpleType name="StandardProductPromo.RestrictedOneUseOnly">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NoRestriction" />
-      <xs:enumeration value="Restricted" />
-      <xs:enumeration value="RestrictedNewShoppersOnly" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="StandardProductPromo.RestrictedOneUseOnly" nillable="true" type="tns:StandardProductPromo.RestrictedOneUseOnly" />
   <xs:complexType name="ArrayOfProductPromoSearchItem">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductPromoSearchItem" nillable="true" type="tns:ProductPromoSearchItem" />

@@ -136,7 +136,7 @@
   <xs:element name="GetResellersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="DomainServices" minOccurs="0" name="GetResellersResult" nillable="true" type="q11:QueryResultOfResellerType" />
+        <xs:element xmlns:q11="DomainServices" minOccurs="0" name="GetResellersResult" nillable="true" type="q11:QueryResultOfResellerTypeWithKey" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -148,7 +148,7 @@
   <xs:element name="GetProductResellersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="DomainServices" minOccurs="0" name="GetProductResellersResult" nillable="true" type="q12:QueryResultOfResellerType" />
+        <xs:element xmlns:q12="DomainServices" minOccurs="0" name="GetProductResellersResult" nillable="true" type="q12:QueryResultOfResellerTypeWithKey" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -388,20 +388,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetStandardProductPromoByPromoId">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="promoId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetStandardProductPromoByPromoIdResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetStandardProductPromoByPromoIdResult" nillable="true" type="q27:StandardProductPromo" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="GetProductPromoByPromoId">
     <xs:complexType>
       <xs:sequence>
@@ -412,7 +398,7 @@
   <xs:element name="GetProductPromoByPromoIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetProductPromoByPromoIdResult" nillable="true" type="q28:ProductPromo" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetProductPromoByPromoIdResult" nillable="true" type="q27:ProductPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -428,73 +414,82 @@
   <xs:element name="GetProductPromosByCurrencyAndSearchTermResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="DomainServices" minOccurs="0" name="GetProductPromosByCurrencyAndSearchTermResult" nillable="true" type="q29:QueryResultOfProductPromoSearchItem" />
+        <xs:element xmlns:q28="DomainServices" minOccurs="0" name="GetProductPromosByCurrencyAndSearchTermResult" nillable="true" type="q28:QueryResultOfProductPromoSearchItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateProductPromoBulk">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="productPromoBulkUpdateItem" nillable="true" type="q30:ProductPromoBulkUpdateItem" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="productPromoBulkUpdateItem" nillable="true" type="q29:ProductPromoBulkUpdateItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateProductPromoBulkResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="UpdateProductPromoBulkResult" nillable="true" type="q31:OperationResult" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="UpdateProductPromoBulkResult" nillable="true" type="q30:OperationResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OrderPromoBulkUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="orderPromoBulkUpdateItem" nillable="true" type="q32:OrderPromoBulkUpdateItem" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="orderPromoBulkUpdateItem" nillable="true" type="q31:OrderPromoBulkUpdateItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OrderPromoBulkUpdateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="OrderPromoBulkUpdateResult" nillable="true" type="q33:OperationResult" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="OrderPromoBulkUpdateResult" nillable="true" type="q32:OperationResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UpdateProductPromoRestriction">
+  <xs:element name="CopyProductPromo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q34:StandardProductPromo" />
+        <xs:element minOccurs="0" name="oldPromoId" type="xs:int" />
+        <xs:element minOccurs="0" name="newPromoCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="startOn" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endsOn" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="campaignTypeId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ignoreDuplicates" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UpdateProductPromoRestrictionResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateProductPromoShopperRestriction">
+  <xs:element name="CopyProductPromoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q35:StandardProductPromo" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="CopyProductPromoResult" nillable="true" type="q33:OperationResult" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateProductPromoShopperRestrictionResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertProductPromo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q36:ProductPromo" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q34:ProductPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertProductPromoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="InsertProductPromoResult" nillable="true" type="q37:OperationResult" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="InsertProductPromoResult" nillable="true" type="q35:OperationResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateProductPromo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q36:ProductPromo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateProductPromoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="UpdateProductPromoResult" nillable="true" type="q37:OperationResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -548,18 +543,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InsertProductPromoPrivateLabels">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q42:StandardProductPromo" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InsertProductPromoPrivateLabelsResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="GetAllViralPromosBySearchCriteria">
     <xs:complexType>
       <xs:sequence>
@@ -572,7 +555,7 @@
   <xs:element name="GetAllViralPromosBySearchCriteriaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q43="DomainServices" minOccurs="0" name="GetAllViralPromosBySearchCriteriaResult" nillable="true" type="q43:QueryResultOfViralPromo" />
+        <xs:element xmlns:q42="DomainServices" minOccurs="0" name="GetAllViralPromosBySearchCriteriaResult" nillable="true" type="q42:QueryResultOfViralPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -591,7 +574,7 @@
   <xs:element name="GetAllViralPromosByAdvSearchCriteriaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q44="DomainServices" minOccurs="0" name="GetAllViralPromosByAdvSearchCriteriaResult" nillable="true" type="q44:QueryResultOfViralPromo" />
+        <xs:element xmlns:q43="DomainServices" minOccurs="0" name="GetAllViralPromosByAdvSearchCriteriaResult" nillable="true" type="q43:QueryResultOfViralPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -607,7 +590,7 @@
   <xs:element name="GetAllCouponViralPromosBySearchCriteriaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q45="DomainServices" minOccurs="0" name="GetAllCouponViralPromosBySearchCriteriaResult" nillable="true" type="q45:QueryResultOfViralPromo" />
+        <xs:element xmlns:q44="DomainServices" minOccurs="0" name="GetAllCouponViralPromosBySearchCriteriaResult" nillable="true" type="q44:QueryResultOfViralPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -626,7 +609,7 @@
   <xs:element name="GetAllCouponViralPromosByAdvSearchCriteriaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q46="DomainServices" minOccurs="0" name="GetAllCouponViralPromosByAdvSearchCriteriaResult" nillable="true" type="q46:QueryResultOfViralPromo" />
+        <xs:element xmlns:q45="DomainServices" minOccurs="0" name="GetAllCouponViralPromosByAdvSearchCriteriaResult" nillable="true" type="q45:QueryResultOfViralPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -640,7 +623,7 @@
   <xs:element name="GetAllViralPromosByPromoCodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q47="DomainServices" minOccurs="0" name="GetAllViralPromosByPromoCodeResult" nillable="true" type="q47:QueryResultOfViralPromo" />
+        <xs:element xmlns:q46="DomainServices" minOccurs="0" name="GetAllViralPromosByPromoCodeResult" nillable="true" type="q46:QueryResultOfViralPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -654,7 +637,7 @@
   <xs:element name="GetViralPromoByPromoIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetViralPromoByPromoIdResult" nillable="true" type="q48:ViralPromo" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetViralPromoByPromoIdResult" nillable="true" type="q47:ViralPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -669,7 +652,7 @@
   <xs:element name="GetCouponViralPromoByPromoIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetCouponViralPromoByPromoIdResult" nillable="true" type="q49:ViralPromo" />
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetCouponViralPromoByPromoIdResult" nillable="true" type="q48:ViralPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -683,35 +666,35 @@
   <xs:element name="GetCouponViralPromoByPromoCodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetCouponViralPromoByPromoCodeResult" nillable="true" type="q50:ViralPromo" />
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetCouponViralPromoByPromoCodeResult" nillable="true" type="q49:ViralPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateViralPromo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q51:ViralPromo" />
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q50:ViralPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateViralPromoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="UpdateViralPromoResult" nillable="true" type="q52:OperationResult" />
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="UpdateViralPromoResult" nillable="true" type="q51:OperationResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertViralPromo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q53:ViralPromo" />
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q52:ViralPromo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertViralPromoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="InsertViralPromoResult" nillable="true" type="q54:OperationResult" />
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/PromoTool.Data" minOccurs="0" name="InsertViralPromoResult" nillable="true" type="q53:OperationResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -723,7 +706,7 @@
   <xs:element name="GetViralPromoStatsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q55="DomainServices" minOccurs="0" name="GetViralPromoStatsResult" nillable="true" type="q55:QueryResultOfViralPromoStats" />
+        <xs:element xmlns:q54="DomainServices" minOccurs="0" name="GetViralPromoStatsResult" nillable="true" type="q54:QueryResultOfViralPromoStats" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -735,7 +718,7 @@
   <xs:element name="GetAllViralYardValuesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q56="DomainServices" minOccurs="0" name="GetAllViralYardValuesResult" nillable="true" type="q56:QueryResultOfViralYardValue" />
+        <xs:element xmlns:q55="DomainServices" minOccurs="0" name="GetAllViralYardValuesResult" nillable="true" type="q55:QueryResultOfViralYardValue" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -749,7 +732,7 @@
   <xs:element name="GetProductTypesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q57="DomainServices" minOccurs="0" name="GetProductTypesResult" nillable="true" type="q57:QueryResultOfProductType" />
+        <xs:element xmlns:q56="DomainServices" minOccurs="0" name="GetProductTypesResult" nillable="true" type="q56:QueryResultOfProductType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -765,7 +748,7 @@
   <xs:element name="GetProductTypesBySearchCriteriaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q58="DomainServices" minOccurs="0" name="GetProductTypesBySearchCriteriaResult" nillable="true" type="q58:QueryResultOfProductType" />
+        <xs:element xmlns:q57="DomainServices" minOccurs="0" name="GetProductTypesBySearchCriteriaResult" nillable="true" type="q57:QueryResultOfProductType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -777,7 +760,7 @@
   <xs:element name="GetProductTypesRequiringTldsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q59="DomainServices" minOccurs="0" name="GetProductTypesRequiringTldsResult" nillable="true" type="q59:QueryResultOfProductType" />
+        <xs:element xmlns:q58="DomainServices" minOccurs="0" name="GetProductTypesRequiringTldsResult" nillable="true" type="q58:QueryResultOfProductType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -789,7 +772,7 @@
   <xs:element name="GetProductTypeNameSpacesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetProductTypeNameSpacesResult" nillable="true" type="q60:Namespaces" />
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetProductTypeNameSpacesResult" nillable="true" type="q59:Namespaces" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -801,7 +784,7 @@
   <xs:element name="GetProductTypeOverrideTypesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q61="DomainServices" minOccurs="0" name="GetProductTypeOverrideTypesResult" nillable="true" type="q61:QueryResultOfProductTypeOverride" />
+        <xs:element xmlns:q60="DomainServices" minOccurs="0" name="GetProductTypeOverrideTypesResult" nillable="true" type="q60:QueryResultOfProductTypeOverride" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -813,32 +796,44 @@
   <xs:element name="GetPaymentExclusionsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetPaymentExclusionsResult" nillable="true" type="q62:PaymentTypeExclusionList" />
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetPaymentExclusionsResult" nillable="true" type="q61:PaymentTypeExclusionList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetTlds">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="privateLabels" nillable="true" type="q63:PrivateLabelList" />
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="privateLabels" nillable="true" type="q62:PrivateLabelList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetTldsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetTldsResult" nillable="true" type="q64:TldList" />
+        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="GetTldsResult" nillable="true" type="q63:TldList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="PublishPromo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q65:OrderPromoV2" />
+        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q64:OrderPromoV2" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="PublishPromoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PublishProductPromo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="promo" nillable="true" type="q65:ProductPromo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PublishProductPromoResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

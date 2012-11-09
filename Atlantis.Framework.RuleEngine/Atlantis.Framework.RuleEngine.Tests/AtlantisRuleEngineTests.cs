@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Xml;
-using Atlantis.Framework.RuleEngine.Compiler;
 using Atlantis.Framework.RuleEngine.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -25,7 +22,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
       rules.Load(directory);
 
       var model = new Dictionary<string, Dictionary<string, string>>();
-      model.Add("mdlOrg", new Dictionary<string, string> { { "organization", string.Empty }, { "legaltype", "CCO" } });
+      model.Add("mdlOrg", new Dictionary<string, string> {{"organization", string.Empty}, {"legaltype", "CCO"}});
 
       var engineResult = RuleEngine.EvaluateRules(model, rules);
 
@@ -35,9 +32,9 @@ namespace Atlantis.Framework.RuleEngine.Tests
       Assert.IsTrue(facts != null);
       Assert.IsTrue(facts.ContainsInvalids);
 
-      foreach(var fact in facts.Facts)
+      foreach (var fact in facts.Facts)
       {
-        switch(fact.FactKey)
+        switch (fact.FactKey)
         {
           case "organization":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
@@ -46,8 +43,9 @@ namespace Atlantis.Framework.RuleEngine.Tests
           default:
             Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
             break;
-    }
+        }
       }
+    }
 
     [TestMethod]
     [DeploymentItem("ShopperValidation.xml")]
@@ -109,15 +107,10 @@ namespace Atlantis.Framework.RuleEngine.Tests
             Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
 
             break;
-
         }
 
       }
 
     }
-
-
-
-    
   }
 }

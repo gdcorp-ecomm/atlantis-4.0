@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RuleEngine>
+  <Rules>
+    <Rule id="RValidateShopper" desc="" chainable="True" priority="1">
+      <Condition><![CDATA[ 1==1 ]]></Condition>
+      <Actions>
+        <Execute factId="RValidateFirstName" result="true" />
+        
+        <Execute factId="RLastNameRequired" result="true" />
+        <Execute factId="RUserNameRequired" result="true" />
+        <Execute factId="RCreatePassword" result="true" />
+        <Execute factId="RCreatePassword2" result="true" />
+        <Execute factId="RPin" result="true" />
+        <Execute factId="REmail" result="true" />
+      </Actions>
+    </Rule>
+    
+    <!-- START First Name rules driver -->
+    <Rule id="RValidateFirstName" desc="" chainable="True" priority="100">
+      <Condition><![CDATA[ 1==1 ]]></Condition>
+      <Actions>
+        <!-- List the rules that should be executed in order to validate first name -->
+        <Execute factId="RFirstNameRequired" result="true" />
+        <!--<Execute factId="RFirstNameRegex" result="true" />-->
+      </Actions>
+    </Rule>
+    <!-- Create the rules that are required to validate first name -->
+    <Rule id="RFirstNameRequired" desc="" chainable="False"  priority="100">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FFirstName)) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FFirstName" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FFirstName" result="True"><![CDATA[ "First name is required." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END First Name rules driver -->
+    
+    <Rule id="RLastNameRequired" desc="" chainable="False"  priority="100">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FLastName)) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FLastName" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FLastName" result="True"><![CDATA[ "Last name is required." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RUserNameRequired" desc="" chainable="False"  priority="100">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FUserName)) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FUserName" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FUserName" result="True"><![CDATA[ "Username is required." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RCreatePassword" desc="" chainable="False"  priority="100">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FCreatePassword)) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FCreatePassword" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FCreatePassword" result="True"><![CDATA[ "Password is required." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RCreatePassword2" desc="" chainable="False"  priority="100">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FCreatePassword2)) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FCreatePassword2" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FCreatePassword2" result="True"><![CDATA[ "Confirm password is required." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RPin" desc="" chainable="False"  priority="100">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FPin)) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="True"><![CDATA[ "PIN is required." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="REmail" desc="" chainable="False"  priority="100">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FEmail)) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FEmail" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FEmail" result="True"><![CDATA[ "Email is required." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+  </Rules>
+  <!--
+    After this rules doc is compiled, the following "Fact" elements exist in memory as a Fact object with
+    three properties: Value, IsValid, Messages.
+    
+    ######################################### Fact properties #########################################
+    ## Value: When using the rule engine, the developer must pass this XML document along with a dictionary
+    #         that contains the initial value of the facts. The "Value" property is the value as passed in
+    #         the dictionary.
+    ## IsValid = true: This is initialized to true so it is the rule designer's job to determine what
+    #                  causes this rule to toggle to false.
+    ## Messages: As facts are being analyzed, the developer can choose to attach a message string to that
+    #            fact. This "Messages" property is simply a list containing those facts.
+    ###################################################################################################
+  -->
+  <Facts>
+    <Fact id="FFirstName" key="txtFirstName" desc="new value" type="string" modelId="Shopper" />
+    <Fact id="FLastName" key="txtLastName" desc="new value" type="string" modelId="Shopper" />
+    <Fact id="FUserName" key="txtUserName" desc="new value" type="string" modelId="Shopper" />
+    <Fact id="FCreatePassword" key="txtCreatePassword" desc="new value" type="string" modelId="Shopper" />
+    <Fact id="FCreatePassword2" key="txtCreatePassword2" desc="new value" type="string" modelId="Shopper" />
+    <Fact id="FPin" key="txtPin" desc="new value" type="string" modelId="Shopper" />
+    <Fact id="FEmail" key="txtEmail" desc="new value" type="string" modelId="Shopper" />
+  </Facts>
+</RuleEngine>

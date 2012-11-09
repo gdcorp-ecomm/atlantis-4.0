@@ -64,7 +64,7 @@ namespace PromoToolGetProductPromoTests
 		{
 			Guid pathway = Guid.NewGuid();
 			PromoToolGetProdPromoRequestData request = new PromoToolGetProdPromoRequestData(
-        "860427", "http://yuck.com", string.Empty, string.Empty, 0, "PFID1986");
+        "860427", "http://yuck.com", string.Empty, string.Empty, 0, "GPTESTUT13");
 
       for (int i = 0; i < 100; i++)
       {

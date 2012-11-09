@@ -141,11 +141,11 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="QueryResultOfOrderPromoStats" nillable="true" type="tns:QueryResultOfOrderPromoStats" />
-  <xs:complexType name="QueryResultOfResellerType">
+  <xs:complexType name="QueryResultOfResellerTypeWithKey">
     <xs:annotation>
       <xs:appinfo>
         <GenericType Name="QueryResultOf{0}" Namespace="DomainServices" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
-          <GenericParameter Name="ResellerType" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
+          <GenericParameter Name="ResellerTypeWithKey" Namespace="http://schemas.datacontract.org/2004/07/PromoTool.Model" />
         </GenericType>
       </xs:appinfo>
     </xs:annotation>
@@ -159,7 +159,7 @@
               </xs:appinfo>
             </xs:annotation>
           </xs:element>
-          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q7:ArrayOfResellerType">
+          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/PromoTool.Model" minOccurs="0" name="RootResults" nillable="true" type="q7:ArrayOfResellerTypeWithKey">
             <xs:annotation>
               <xs:appinfo>
                 <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
@@ -170,7 +170,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="QueryResultOfResellerType" nillable="true" type="tns:QueryResultOfResellerType" />
+  <xs:element name="QueryResultOfResellerTypeWithKey" nillable="true" type="tns:QueryResultOfResellerTypeWithKey" />
   <xs:complexType name="QueryResultOfCampaignType">
     <xs:annotation>
       <xs:appinfo>

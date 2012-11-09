@@ -307,8 +307,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       if (!string.IsNullOrEmpty(shopperEmail))
       {
         emailContact.ExcludeContactPointType = true;
-        emailContact["lastname"] = _orderData.Detail.GetAttribute("lastname");
-        emailContact["firstname"] = _orderData.Detail.GetAttribute("firstname");
+        emailContact["lastname"] = _orderData.Detail.GetAttribute("bill_to_last_name");
+        emailContact["firstname"] = _orderData.Detail.GetAttribute("bill_to_first_name");
         emailContact["email"] = shopperEmail;
         emailContact["sendemail"] = "true";
       }

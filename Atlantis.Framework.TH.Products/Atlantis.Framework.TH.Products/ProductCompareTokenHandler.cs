@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Atlantis.Framework.TH.Products
 {
-  class ProductCompareTokenHandler : XmlTokenHandlerBase
+  public class ProductCompareTokenHandler : XmlTokenHandlerBase
   {
     public override string TokenKey
     {
@@ -19,6 +19,17 @@ namespace Atlantis.Framework.TH.Products
     public override TokenEvaluationResult EvaluateTokens(IEnumerable<IToken> tokens, IProviderContainer container)
     {
       TokenEvaluationResult result = TokenEvaluationResult.Success;
+      ProductCompareRenderContext contextRenderer = new ProductCompareRenderContext(container);
+
+      foreach (IToken token in tokens)
+      {
+        bool success = contextRenderer.RenderToken(token);
+        if (!success)
+        {
+          result = TokenEvaluationResult.Errors;
+        }
+      }
+      
       return result;
     }
   }

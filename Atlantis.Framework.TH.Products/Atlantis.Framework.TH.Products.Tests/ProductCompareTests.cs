@@ -18,7 +18,7 @@ namespace Atlantis.Framework.TH.Products.Tests
   [DeploymentItem("Atlantis.Framework.PLSignupInfo.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.ProductOffer.Impl.dll")]
   [DeploymentItem("Interop.gdDataCacheLib.dll")]
-  class ProductCompareTests
+  public class ProductCompareTests
   {
     const string _tokenFormat = "[@T[productcompare:{0}]@T]";
 

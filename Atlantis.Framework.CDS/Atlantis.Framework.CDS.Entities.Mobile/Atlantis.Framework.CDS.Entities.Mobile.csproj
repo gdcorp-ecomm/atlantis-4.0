@@ -50,6 +50,7 @@
     <Compile Include="MobileProductSelectorWidget.cs" />
     <Compile Include="MobileSimpleBannerWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Widgets\MobileHome.cs" />
     <Compile Include="Widgets\MobileUserControlContainer.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,9 +11,81 @@ namespace Atlantis.Framework.RuleEngine.Tests
   [TestClass]
   public class AtlantisRuleEngineTests
   {
+   [TestMethod]
+    [DeploymentItem("DotSeRule.xml")]
+    public void TestSeValid()
+    {
+      var rules = new XmlDocument();
+      Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
+      var assemblyPath = pathUri.LocalPath;
+      string directory = Path.Combine(assemblyPath, @"DotSeRule.xml");
+      rules.Load(directory);
+
+      var model = new Dictionary<string, Dictionary<string, string>>();
+      model.Add("mdlSe", new Dictionary<string, string> { { "companycode", "US" } });
+
+      var engineResult = RuleEngine.EvaluateRules(model, rules);
+
+      var modelResults = engineResult.ValidationResults;
+      var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlSe");
+
+      Assert.IsTrue(facts != null);
+      Assert.IsTrue(facts.ContainsInvalids);
+
+      foreach (var fact in facts.Facts)
+      {
+        switch (fact.FactKey)
+        {
+          case "companycode":
+            Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
+            Assert.IsTrue(fact.Messages.Count > 0);
+            break;
+          default:
+            Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
+            break;
+        }
+      }
+    }
+
+    //[TestMethod]
+    [DeploymentItem("DotUsRule.xml")]
+    public void TestUsCompanyType()
+    {
+      var rules = new XmlDocument();
+      Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
+      var assemblyPath = pathUri.LocalPath;
+      string directory = Path.Combine(assemblyPath, @"DotUsRule.xml");
+      rules.Load(directory);
+
+      var model = new Dictionary<string, Dictionary<string, string>>();
+      model.Add("mdlUs", new Dictionary<string, string> { { "companytype", "" }, { "islegalreg", "true" } });
+
+      var engineResult = RuleEngine.EvaluateRules(model, rules);
+
+      var modelResults = engineResult.ValidationResults;
+      var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlUs");
+
+      Assert.IsTrue(facts != null);
+      Assert.IsTrue(facts.ContainsInvalids);
+
+      foreach (var fact in facts.Facts)
+      {
+        switch (fact.FactKey)
+        {
+          case "companytype":
+            Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
+            Assert.IsTrue(fact.Messages.Count > 0);
+            break;
+          default:
+            Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
+            break;
+        }
+      }
+    }
+
     [TestMethod]
     [DeploymentItem("DotCaRule.xml")]
-    public void TestLegalTypeRequiresCompany()
+    public void TestCaLegalTypeRequiresCompany()
     {
       var rules = new XmlDocument();
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
@@ -47,7 +119,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
       }
     }
 
-    [TestMethod]
+    //[TestMethod]
     [DeploymentItem("ShopperValidation.xml")]
     public void TestShopperValidation()
     {

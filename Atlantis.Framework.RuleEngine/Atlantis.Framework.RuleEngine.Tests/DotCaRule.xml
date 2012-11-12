@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RuleEngine>
   <Rules>
-    <Rule id="ruleIsOrgValidForLegalType" desc="" chainable="True"  priority="1">
+    <Rule id="ruleIsOrgValidForLegalType" desc="" chainable="True" priority="1">
       <Condition>
         <![CDATA[ 
-        FACT(factLegalType)=="CCO" OR 
-        FACT(factLegalType)=="RES" OR
-        FACT(factLegalType)=="GOV" OR
-        FACT(factLegalType)=="EDU" OR
-        FACT(factLegalType)=="ASS" ]]>
+        FACT(factLegalType)=="CCO"  ]]>
       </Condition>            
       <Actions>
         <Execute factId="ruleIsOrgNullOrEmpty" result="true" />
       </Actions>
     </Rule>
-    <Rule id="ruleIsOrgNullOrEmpty" desc="" chainable="False"  priority="2">
+    <Rule id="ruleIsOrgNullOrEmpty" desc="" chainable="False" priority="2">
       <Condition><![CDATA[ ISNULLOREMPTY(FACT(factOrg)) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="factOrg" result="True">false</EvaluateIsValid>

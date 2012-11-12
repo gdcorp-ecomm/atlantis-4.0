@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RuleEngine>
+  <Rules>
+    <Rule id="RIsVatRequired2" desc="" >
+      <Condition>
+        <![CDATA[ FACT(FCompanyCode) != "AL" AND
+                  FACT(FCompanyCode) != "AT" AND
+                  FACT(FCompanyCode) != "BY" AND
+                  FACT(FCompanyCode) != "BE" AND
+                  FACT(FCompanyCode) != "BA" AND
+                  FACT(FCompanyCode) != "BG" AND
+                  FACT(FCompanyCode) != "HR" AND
+                  FACT(FCompanyCode) != "CY" AND
+                  FACT(FCompanyCode) != "CZ" AND
+                  FACT(FCompanyCode) != "DK" AND
+                  FACT(FCompanyCode) != "EE" AND
+                  FACT(FCompanyCode) != "FO" AND
+                  FACT(FCompanyCode) != "FI" AND
+                  FACT(FCompanyCode) != "FR" AND
+                  FACT(FCompanyCode) != "DE" AND
+                  FACT(FCompanyCode) != "GI" AND
+                  FACT(FCompanyCode) != "GR" AND
+                  FACT(FCompanyCode) != "GG" AND
+                  FACT(FCompanyCode) != "HU" AND
+                  FACT(FCompanyCode) != "IS" AND
+                  FACT(FCompanyCode) != "IE" AND
+                  FACT(FCompanyCode) != "IM" AND
+                  FACT(FCompanyCode) != "IT" AND
+                  FACT(FCompanyCode) != "JE" AND
+                  FACT(FCompanyCode) != "LV" AND
+                  FACT(FCompanyCode) != "LI" AND
+                  FACT(FCompanyCode) != "LT" AND
+                  FACT(FCompanyCode) != "LU" AND
+                  FACT(FCompanyCode) != "MK" AND
+                  FACT(FCompanyCode) != "MT" AND
+                  FACT(FCompanyCode) != "MD" AND
+                  FACT(FCompanyCode) != "MC" AND
+                  FACT(FCompanyCode) != "ME" AND
+                  FACT(FCompanyCode) != "NL" AND
+                  FACT(FCompanyCode) != "NO" AND
+                  FACT(FCompanyCode) != "PL" AND
+                  FACT(FCompanyCode) != "PT" AND
+                  FACT(FCompanyCode) != "RO" AND
+                  FACT(FCompanyCode) != "SM" AND
+                  FACT(FCompanyCode) != "RS" AND
+                  FACT(FCompanyCode) != "SK" AND
+                  FACT(FCompanyCode) != "SI" AND
+                  FACT(FCompanyCode) != "ES" AND
+                  FACT(FCompanyCode) != "SJ" AND
+                  FACT(FCompanyCode) != "SE" AND
+                  FACT(FCompanyCode) != "CH" AND
+                  FACT(FCompanyCode) != "UA" AND
+                  FACT(FCompanyCode) != "UK" AND
+                  FACT(FCompanyCode) != "VA" ]]>
+      </Condition>
+      <Actions>
+        <EvaluateIsValid factId="FCompanyCode" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FCompanyCode" result="True"><![CDATA[ "VAT is required."]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+  </Rules>
+  <Facts>
+    <Fact id="FCompanyCode" key="companycode" desc="" type="string" modelId="mdlSe" />
+  </Facts>
+</RuleEngine>

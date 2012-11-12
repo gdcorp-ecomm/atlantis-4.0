@@ -51,6 +51,7 @@ namespace Atlantis.Framework.RuleEngine.Compiler
           valueType = typeof(double);
           break;
         case "boolean":
+        case "bool":
           valueType = typeof(bool);
           break;
         case "string":
@@ -169,11 +170,22 @@ namespace Atlantis.Framework.RuleEngine.Compiler
         {
           if (ruleNode.Attributes != null)
           {
-            string id = ruleNode.Attributes["id"].Value;
+            string currentRuleId = ruleNode.Attributes["id"].Value;
             //ensure this has not already been entered
-            if (rom[id] != null)
+            if (rom[currentRuleId] != null)
             {
-              throw new Exception("Rule Ids must be unique: " + id);
+              throw new Exception("Rule Ids must be unique: " + currentRuleId);
+            }
+
+            // Add a main driver rule to run the only rule in the list.
+            if (rules.Count == 1)
+            {
+              var uniqueName = Guid.NewGuid().ToString();
+              var mainActionid = string.Format("{0}-{1}-0", uniqueName, currentRuleId);
+              rom.AddEvidence(new ActionExecute(mainActionid, currentRuleId, 500));
+              var actionMainList = new List<EvidenceSpecifier> {new EvidenceSpecifier(true, mainActionid)};
+              IRule ruleMain = new Rule("mainRule", "true", actionMainList, 1, true);
+              rom.AddEvidence(ruleMain);
             }
 
             bool hasEvidence = false;
@@ -206,16 +218,17 @@ namespace Atlantis.Framework.RuleEngine.Compiler
 
             #region Evaluate
 
-            actionCounter = LoadEvaluation(rom, ruleNode, id, actions, actionCounter, ActionType.EvaluteIsValid);
-            actionCounter = LoadEvaluation(rom, ruleNode, id, actions, actionCounter, ActionType.EvaluateMessage);
+            actionCounter = LoadEvaluation(rom, ruleNode, currentRuleId, actions, actionCounter, ActionType.EvaluteIsValid);
+            actionCounter = LoadEvaluation(rom, ruleNode, currentRuleId, actions, actionCounter, ActionType.EvaluateMessage);
 
             #endregion
 
             #region Execute
 
             var executeList = ruleNode.SelectNodes("Actions//Execute");
-            if (executeList != null)
+            if (executeList != null && executeList.Count > 0)
             {
+              hasEvidence = true;
               foreach (XmlNode execute in executeList)
               {
                 try
@@ -238,7 +251,7 @@ namespace Atlantis.Framework.RuleEngine.Compiler
                       result = Boolean.Parse(execute.Attributes["result"].Value);
                     }
 
-                    var actionId = string.Format("{0}-{1}-{2}", id, actionOperatingName, actionCounter++);
+                    var actionId = string.Format("{0}-{1}-{2}", currentRuleId, actionOperatingName, actionCounter++);
 
                     rom.AddEvidence(new ActionExecute(actionId, actionOperatingName, actionPriority));
                     actions.Add(new EvidenceSpecifier(result, actionId));
@@ -252,12 +265,12 @@ namespace Atlantis.Framework.RuleEngine.Compiler
             }
 
             #endregion
-
-            //now create the rule
-            IRule rule = new Rule(id, condition, actions, priority, hasEvidence);
+            IRule rule = new Rule(currentRuleId, condition, actions, priority, hasEvidence);
             rom.AddEvidence(rule);
           }
         }
+
+       
       }
     }
 

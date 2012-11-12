@@ -21,7 +21,7 @@ namespace Atlantis.Framework.RuleEngine
 
     private void Evaluate(Dictionary<string, Dictionary<string, string>> inputModels)
     {
-      try
+      //try
       {
         var rom = RuleEngineCompiler.Compile(_rules);
 
@@ -34,11 +34,11 @@ namespace Atlantis.Framework.RuleEngine
 
         _ruleEngineResult = new RuleEngineResult(RuleEngineResultStatus.Valid) { ValidationResults = rom.ModelResults };
       }
-      catch (Exception ex)
-      {
-        _ruleEngineResult = new RuleEngineResult(RuleEngineResultStatus.Exception);
-        LogSilent(ex, "RuleEngine.Evaluate");
-      }
+      //catch (Exception ex)
+      //{
+      //  _ruleEngineResult = new RuleEngineResult(RuleEngineResultStatus.Exception);
+      //  LogSilent(ex, "RuleEngine.Evaluate");
+      //}
     }
 
     private void LogSilent(Exception ex, string sourceFunction)

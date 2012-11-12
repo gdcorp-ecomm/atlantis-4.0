@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RuleEngine>
+  <Rules>
+    <Rule id="RValidateCoType" desc="" chainable="True"  priority="1">
+      <Condition>
+        <![CDATA[ FACT(FIsLegalReg) ]]>
+      </Condition>            
+      <Actions>
+        <Execute factId="RCompanyTypeValid" result="true" />
+      </Actions>
+    </Rule>
+    <Rule id="RCompanyTypeValid" desc="" chainable="False"  priority="2">
+      <Condition>
+      <![CDATA[ 
+        ISNULLOREMPTY(FACT(FCompanyType)) OR
+        FACT(FCompanyType)!="6" OR 
+        FACT(FCompanyType)!="7" OR
+        FACT(FCompanyType)!="8" ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FCompanyType" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FCompanyType" result="True"> <![CDATA[ "Company Type is not valid."]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+  </Rules>
+  <Facts>
+    <Fact id="FCompanyType" key="companytype" desc="" type="string" modelId="mdlUs" />
+    <Fact id="FIsLegalReg" key="islegalreg" desc="" type="bool" modelId="mdlUs" />
+  </Facts>
+</RuleEngine>

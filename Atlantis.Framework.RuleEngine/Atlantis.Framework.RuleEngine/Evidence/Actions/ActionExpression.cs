@@ -97,9 +97,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
 
       //set the value
       Trace.WriteLine("FACT " + _operatingId + "=" + result.Value.Value);
-
-     // fact.Value = result.Value.Value;
-
+      
       switch (ActionExpressionType)
       {
         case ActionType.EvaluateMessage:

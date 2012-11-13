@@ -2,7 +2,7 @@
 
 namespace Atlantis.Framework.CDS.Entities.DPP.Widgets
 {
-  public class DPPSearchHeader : IWidgetModel
+    public class DPPSearchHeader : IWidgetModel
   {
     public DPPSearchHeader()
     {
@@ -13,6 +13,6 @@ namespace Atlantis.Framework.CDS.Entities.DPP.Widgets
     public string JavaScript { get; set; }
     public string Markup { get; set; }
     public string DPPUserControl { get; set; }
-
+    public string QueryStringParameters { get; set; }
   }
 }

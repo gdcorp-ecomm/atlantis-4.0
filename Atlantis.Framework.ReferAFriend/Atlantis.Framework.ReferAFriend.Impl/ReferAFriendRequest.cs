@@ -42,7 +42,7 @@ namespace Atlantis.Framework.ReferAFriend.Impl
 			}
 			else
 			{
-				return new ReferAFriendResponseData(req.ShopperID, 0, 0, false, false, string.Empty, DateTime.MinValue);
+				return new ReferAFriendResponseData(req.ShopperID, 0, 0, true, false, string.Empty, DateTime.MinValue);
 			}
 		}
 
@@ -78,7 +78,7 @@ namespace Atlantis.Framework.ReferAFriend.Impl
 
 					cn.Open();
 
-					var shopper = new InternalReferAFriendShopper();
+					var shopper = new InternalReferAFriendShopper() { IsQualified = true };
 
 					using (var dr = cmd.ExecuteReader())
 					{

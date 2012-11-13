@@ -13,7 +13,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
   {
     [TestMethod]
     [DeploymentItem("DotSeRule.xml")]
-    public void TestSeRegIdInValid()
+    public void TestRegIdInValid()
     {
       var rules = new XmlDocument();
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
@@ -39,13 +39,15 @@ namespace Atlantis.Framework.RuleEngine.Tests
       {
         switch (fact.FactKey)
         {
-          //case "companycode":
-          //  Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
-          //  Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
-          //  break;
+          case "companycode":
+            Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
+            break;
           case "regid":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
             Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
+            break;
+          case "vat":
+            Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
             break;
         }
       }
@@ -53,7 +55,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
 
     [TestMethod]
     [DeploymentItem("DotSeRule.xml")]
-    public void TestSeVatInValid()
+    public void TestVatInValid()
     {
       var rules = new XmlDocument();
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
@@ -80,20 +82,22 @@ namespace Atlantis.Framework.RuleEngine.Tests
         switch (fact.FactKey)
         {
           case "companycode":
+            Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
+            break;
+          case "regid":
+            Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
+            break;
+          case "vat":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
             Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
             break;
-          //case "regid":
-          //  Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
-          //  Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
-          //  break;
         }
       }
     }
 
     [TestMethod]
     [DeploymentItem("DotSeRule.xml")]
-    public void TestSeValid()
+    public void TestValid()
     {
       var rules = new XmlDocument();
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
@@ -113,7 +117,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlSe");
 
       Assert.IsTrue(facts != null);
-      Assert.IsTrue(facts.ContainsInvalids);
+      Assert.IsTrue(!facts.ContainsInvalids);
 
       foreach (var fact in facts.Facts)
       {

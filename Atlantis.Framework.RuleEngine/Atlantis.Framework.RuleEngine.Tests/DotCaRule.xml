@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RuleEngine>
   <Rules>
-    <Rule id="ruleIsOrgValidForLegalType" desc="" chainable="True" priority="1">
-      <Condition>
-        <![CDATA[ 
-        FACT(factLegalType)=="CCO"  ]]>
-      </Condition>            
+    <RuleMain id="RCaMain">
       <Actions>
-        <Execute factId="ruleIsOrgNullOrEmpty" result="true" />
+        <Execute ruleId="RCaLegalTypeRequired" />
+        <Execute ruleId="RCaOrgRequired" />
+      </Actions>
+    </RuleMain>
+    <Rule id="RLegalTypeRequired">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FCapr)) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FCapr" result="true">false</EvaluateIsValid>
+        <EvaluateMessage factId="FCapr" result="true"> <![CDATA[ "The Canadian Presence Requirement is not valid."]]></EvaluateMessage>
       </Actions>
     </Rule>
-    <Rule id="ruleIsOrgNullOrEmpty" desc="" chainable="False" priority="2">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(factOrg)) ]]></Condition>
+    <Rule id="RCaOrgRequired" desc="" >
+      <Condition>
+        <![CDATA[ FACT(FLegalType)=="CCO"  ]]>
+      </Condition>            
       <Actions>
-        <EvaluateIsValid factId="factOrg" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="factOrg" result="True"> <![CDATA[ "Organization is required."]]></EvaluateMessage>
+        <Execute ruleId="REvaluateCountry" />
+      </Actions>
+    </Rule>
+    <Rule id="REvaluateOrg">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FOrg))  ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FOrg" result="true">false</EvaluateIsValid>
+        <EvaluateMessage factId="FOrg" result="true"> <![CDATA[ "Organization is required."]]></EvaluateMessage>
       </Actions>
     </Rule>
   </Rules>
   <Facts>
-    <Fact id="factOrg" key="organization" desc="new value" type="string" modelId="mdlOrg" />
-    <Fact id="factLegalType" key="legaltype" desc="new value" type="string" modelId="mdlOrg" />
+    <Fact id="FOrg" key="organization" desc="" type="string" modelId="mdlCa" />
+    <Fact id="FLegalType" key="legaltype" desc="e" type="string" modelId="mdlCa" />
   </Facts>
 </RuleEngine>

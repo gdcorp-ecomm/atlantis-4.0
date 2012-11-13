@@ -3,9 +3,9 @@
   <Rules>
     <RuleMain id="RSeMain">
        <Actions>
-        <Execute ruleId="RSeCountryRequired" result="true" />
-        <Execute ruleId="RSeRegIdRequired" result="true" />
-        <Execute ruleId="RSeSeVatValid" result="true" />
+        <Execute ruleId="RSeCountryRequired" />
+        <Execute ruleId="RSeRegIdRequired" />
+        <Execute ruleId="RSeSeVatValid" />
       </Actions>
     </RuleMain>
     <Rule id="RSeCountryRequired">

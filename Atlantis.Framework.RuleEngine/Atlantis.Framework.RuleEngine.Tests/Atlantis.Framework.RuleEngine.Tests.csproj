@@ -68,13 +68,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AtlantisRuleEngineTests.cs" />
     <Compile Include="CaRuleEngineTests.cs" />
+    <Compile Include="EuRuleEngineTests.cs" />
     <Compile Include="UsRuleEngineTests.cs" />
     <Compile Include="SeRuleEngineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DotEuRule.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="DotSeRule.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

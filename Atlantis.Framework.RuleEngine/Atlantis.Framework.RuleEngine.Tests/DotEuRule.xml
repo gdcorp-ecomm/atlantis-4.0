@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RuleEngine>
+  <Rules>
+    <RuleMain id="REuMain">
+      <Actions>
+        <Execute ruleId="REuEvalulateCountry" />
+      </Actions>
+    </RuleMain>
+    <Rule id="REuEvalulateCountry">
+      <Condition>
+      <![CDATA[ 
+        ISNULLOREMPTY(FACT(FCountryCode)) OR
+        FACT(FCountryCode) != "AL" OR
+        FACT(FCountryCode) != "AT" OR
+        FACT(FCountryCode) != "BY" OR
+        FACT(FCountryCode) != "BE" OR
+        FACT(FCountryCode) != "BA" OR
+        FACT(FCountryCode) != "BG" OR
+        FACT(FCountryCode) != "HR" OR
+        FACT(FCountryCode) != "CY" OR
+        FACT(FCountryCode) != "CZ" OR
+        FACT(FCountryCode) != "DK" OR
+        FACT(FCountryCode) != "EE" OR
+        FACT(FCountryCode) != "FO" OR
+        FACT(FCountryCode) != "FI" OR
+        FACT(FCountryCode) != "FR" OR
+        FACT(FCountryCode) != "DE" OR
+        FACT(FCountryCode) != "GI" OR
+        FACT(FCountryCode) != "GR" OR
+        FACT(FCountryCode) != "GG" OR
+        FACT(FCountryCode) != "HU" OR
+        FACT(FCountryCode) != "IS" OR
+        FACT(FCountryCode) != "IE" OR
+        FACT(FCountryCode) != "IM" OR
+        FACT(FCountryCode) != "IT" OR
+        FACT(FCountryCode) != "JE" OR
+        FACT(FCountryCode) != "LV" OR
+        FACT(FCountryCode) != "LI" OR
+        FACT(FCountryCode) != "LT" OR
+        FACT(FCountryCode) != "LU" OR
+        FACT(FCountryCode) != "MK" OR
+        FACT(FCountryCode) != "MT" OR
+        FACT(FCountryCode) != "MD" OR
+        FACT(FCountryCode) != "MC" OR
+        FACT(FCountryCode) != "ME" OR
+        FACT(FCountryCode) != "NL" OR
+        FACT(FCountryCode) != "NO" OR
+        FACT(FCountryCode) != "PL" OR
+        FACT(FCountryCode) != "PT" OR
+        FACT(FCountryCode) != "RO" OR
+        FACT(FCountryCode) != "SM" OR
+        FACT(FCountryCode) != "RS" OR
+        FACT(FCountryCode) != "SK" OR
+        FACT(FCountryCode) != "SI" OR
+        FACT(FCountryCode) != "ES" OR
+        FACT(FCountryCode) != "SJ" OR
+        FACT(FCountryCode) != "SE" OR
+        FACT(FCountryCode) != "CH" OR
+        FACT(FCountryCode) != "UA" OR
+        FACT(FCountryCode) != "UK" OR
+        FACT(FCountryCode) != "VA" ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FCountryCode" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FCountryCode" result="True"> <![CDATA[ "Registering a .EU domain name requires the registrant contact country to be from European Union."]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+  </Rules>
+  <Facts>
+    <Fact id="FCountryCode" key="countrycode" desc="" type="string" modelId="mdlEu" />
+  </Facts>
+</RuleEngine>

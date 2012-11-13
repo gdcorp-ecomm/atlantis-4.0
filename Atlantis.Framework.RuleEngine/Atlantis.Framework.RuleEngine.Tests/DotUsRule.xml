@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RuleEngine>
   <Rules>
-    <Rule id="RValidateCoType" desc="" chainable="True"  priority="1">
+    <RuleMain id="RUsMain">
+      <Actions>
+        <Execute ruleId="RUsCompanyValid" />
+      </Actions>
+    </RuleMain>
+    <Rule id="RUsCompanyValid">
       <Condition>
         <![CDATA[ FACT(FIsLegalReg) ]]>
-      </Condition>            
+      </Condition>
       <Actions>
-        <Execute factId="RCompanyTypeValid" result="true" />
+        <Execute ruleId="RUsEvalulateCompany" />
       </Actions>
     </Rule>
-    <Rule id="RCompanyTypeValid" desc="" chainable="False"  priority="2">
+    <Rule id="RUsEvalulateCompany">
       <Condition>
       <![CDATA[ 
         ISNULLOREMPTY(FACT(FCompanyType)) OR

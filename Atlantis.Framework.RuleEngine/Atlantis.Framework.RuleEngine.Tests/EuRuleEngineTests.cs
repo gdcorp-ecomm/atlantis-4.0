@@ -9,27 +9,27 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.RuleEngine.Tests
 {
   [TestClass]
-  public class UsRuleEngineTests
+  public class EuRuleEngineTests
   {
     [TestMethod]
-    [DeploymentItem("DotUsRule.xml")]
+    [DeploymentItem("DotEuRule.xml")]
     public void TestUsCompanyTypeRequired()
     {
       var rules = new XmlDocument();
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
       var assemblyPath = pathUri.LocalPath;
-      string directory = Path.Combine(assemblyPath, @"DotUsRule.xml");
+      string directory = Path.Combine(assemblyPath, @"DotEuRule.xml");
       rules.Load(directory);
 
       var model = new Dictionary<string, Dictionary<string, string>>();
-      model.Add("mdlUs", new Dictionary<string, string> { { "companytype", "" }, { "islegalreg", "true" } });
+      model.Add("mdlEu", new Dictionary<string, string> { { "countrycode", "US" } });
 
       var engineResult = RuleEngine.EvaluateRules(model, rules);
 
       Assert.IsTrue(engineResult.Status != RuleEngineResultStatus.Exception);
 
       var modelResults = engineResult.ValidationResults;
-      var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlUs");
+      var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlEu");
 
       Assert.IsTrue(facts != null);
       Assert.IsTrue(facts.ContainsInvalids);
@@ -38,7 +38,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
       {
         switch (fact.FactKey)
         {
-          case "companytype":
+          case "countrycode":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
             Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
             break;

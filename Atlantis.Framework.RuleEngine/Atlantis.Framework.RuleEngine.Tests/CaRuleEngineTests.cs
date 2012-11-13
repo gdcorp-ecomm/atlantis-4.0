@@ -11,9 +11,9 @@ namespace Atlantis.Framework.RuleEngine.Tests
   [TestClass]
   public class CaRuleEngineTests
   {
-    [TestMethod]
+     [TestMethod]
     [DeploymentItem("DotCaRule.xml")]
-    public void TestCaCompany()
+    public void TestCaLegalTypeRequired()
     {
       var rules = new XmlDocument();
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
@@ -22,14 +22,52 @@ namespace Atlantis.Framework.RuleEngine.Tests
       rules.Load(directory);
 
       var model = new Dictionary<string, Dictionary<string, string>>();
-      model.Add("mdlOrg", new Dictionary<string, string> {{"organization", string.Empty}, {"legaltype", "CCO"}});
+      model.Add("mdlCa", new Dictionary<string, string> { { "organization", string.Empty }, { "legaltype", "" } });
 
       var engineResult = RuleEngine.EvaluateRules(model, rules);
 
       Assert.IsTrue(engineResult.Status != RuleEngineResultStatus.Exception);
 
       var modelResults = engineResult.ValidationResults;
-      var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlOrg");
+      var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlCa");
+
+      Assert.IsTrue(facts != null);
+      Assert.IsTrue(facts.ContainsInvalids);
+
+      foreach (var fact in facts.Facts)
+      {
+        switch (fact.FactKey)
+        {
+          case "legaltype":
+            Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
+            Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
+            break;
+          default:
+            Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
+            break;
+        }
+      }
+    }
+
+    [TestMethod]
+    [DeploymentItem("DotCaRule.xml")]
+    public void TestCaOrgRequired()
+    {
+      var rules = new XmlDocument();
+      Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
+      var assemblyPath = pathUri.LocalPath;
+      string directory = Path.Combine(assemblyPath, @"DotCaRule.xml");
+      rules.Load(directory);
+
+      var model = new Dictionary<string, Dictionary<string, string>>();
+      model.Add("mdlCa", new Dictionary<string, string> { { "organization", string.Empty }, { "legaltype", "CCO" } });
+
+      var engineResult = RuleEngine.EvaluateRules(model, rules);
+
+      Assert.IsTrue(engineResult.Status != RuleEngineResultStatus.Exception);
+
+      var modelResults = engineResult.ValidationResults;
+      var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlCa");
 
       Assert.IsTrue(facts != null);
       Assert.IsTrue(facts.ContainsInvalids);

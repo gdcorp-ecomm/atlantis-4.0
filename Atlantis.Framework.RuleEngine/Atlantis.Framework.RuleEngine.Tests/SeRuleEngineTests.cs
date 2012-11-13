@@ -22,7 +22,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
       rules.Load(directory);
 
       var model = new Dictionary<string, Dictionary<string, string>>();
-      model.Add("mdlSe", new Dictionary<string, string> { { "companycode", "FR" }, {"regid", string.Empty }, {"vat", "12345" } });
+      model.Add("mdlSe", new Dictionary<string, string> { { "countrycode", "FR" }, {"regid", string.Empty }, {"vat", "12345" } });
 
       var engineResult = RuleEngine.EvaluateRules(model, rules);
 
@@ -39,7 +39,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
       {
         switch (fact.FactKey)
         {
-          case "companycode":
+          case "countrycode":
             Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
             break;
           case "regid":
@@ -64,7 +64,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
       rules.Load(directory);
 
       var model = new Dictionary<string, Dictionary<string, string>>();
-      model.Add("mdlSe", new Dictionary<string, string> { { "companycode", "FR" }, { "regid", "12345" }, { "vat", string.Empty } });
+      model.Add("mdlSe", new Dictionary<string, string> { { "countrycode", "FR" }, { "regid", "12345" }, { "vat", string.Empty } });
 
       var engineResult = RuleEngine.EvaluateRules(model, rules);
 
@@ -81,7 +81,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
       {
         switch (fact.FactKey)
         {
-          case "companycode":
+          case "countrycode":
             Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
             break;
           case "regid":
@@ -106,7 +106,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
       rules.Load(directory);
 
       var model = new Dictionary<string, Dictionary<string, string>>();
-      model.Add("mdlSe", new Dictionary<string, string> { { "companycode", "FR" }, { "regid", "12345" }, { "vat", "1234567890" } });
+      model.Add("mdlSe", new Dictionary<string, string> { { "countrycode", "FR" }, { "regid", "12345" }, { "vat", "1234567890" } });
 
       var engineResult = RuleEngine.EvaluateRules(model, rules);
 
@@ -123,7 +123,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
       {
         switch (fact.FactKey)
         {
-          case "companycode":
+          case "countrycode":
             Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
             break;
           case "regid":

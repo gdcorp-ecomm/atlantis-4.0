@@ -7,11 +7,11 @@
         <Execute ruleId="RCaOrgRequired" />
       </Actions>
     </RuleMain>
-    <Rule id="RLegalTypeRequired">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FCapr)) ]]></Condition>
+    <Rule id="RCaLegalTypeRequired">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FLegalType)) ]]></Condition>
       <Actions>
-        <EvaluateIsValid factId="FCapr" result="true">false</EvaluateIsValid>
-        <EvaluateMessage factId="FCapr" result="true"> <![CDATA[ "The Canadian Presence Requirement is not valid."]]></EvaluateMessage>
+        <EvaluateIsValid factId="FLegalType" result="true">false</EvaluateIsValid>
+        <EvaluateMessage factId="FLegalType" result="true"> <![CDATA[ "The Canadian Presence Requirement is not valid."]]></EvaluateMessage>
       </Actions>
     </Rule>
     <Rule id="RCaOrgRequired" desc="" >
@@ -19,10 +19,10 @@
         <![CDATA[ FACT(FLegalType)=="CCO"  ]]>
       </Condition>            
       <Actions>
-        <Execute ruleId="REvaluateCountry" />
+        <Execute ruleId="RCaEvaluateOrg" />
       </Actions>
     </Rule>
-    <Rule id="REvaluateOrg">
+    <Rule id="RCaEvaluateOrg">
       <Condition><![CDATA[ ISNULLOREMPTY(FACT(FOrg))  ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FOrg" result="true">false</EvaluateIsValid>

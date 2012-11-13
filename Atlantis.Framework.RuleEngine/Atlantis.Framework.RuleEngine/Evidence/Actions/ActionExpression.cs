@@ -101,12 +101,14 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
       switch (ActionExpressionType)
       {
         case ActionType.EvaluateMessage:
-          fact.Messages.Add(Convert.ToString(result.Value.Value));
+          fact.Messages = Convert.ToString(result.Value.Value);
           break;
         case ActionType.EvaluteIsValid:
           fact.IsValid = Convert.ToBoolean(result.Value.Value);
           break;
       }
+
+      fact.Value = result.Value.Value;
     }
 
     /// <summary>

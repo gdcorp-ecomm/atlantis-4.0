@@ -42,13 +42,13 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         throw new Exception("Rules must have at least one action.");
       }
 
-      foreach (var action in actions)
-      {
-        if (!action.Truthality && chainable)
-        {
-          throw new Exception("Chainable rules are not allowed to contain actions whos result is false.");
-        }
-      }
+      //foreach (var action in actions)
+      //{
+      //  if (!action.Truthality && chainable)
+      //  {
+      //    throw new Exception("Chainable rules are not allowed to contain actions whos result is false.");
+      //  }
+      //}
 
       _actions = actions;
       _chainable = chainable;

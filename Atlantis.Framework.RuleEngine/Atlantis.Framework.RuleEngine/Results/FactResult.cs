@@ -27,15 +27,14 @@ namespace Atlantis.Framework.RuleEngine.Results
       set { _status = value; }
     }
 
-    private IList<string> _messages;
-
-    public IList<string> Messages
+    private string _messages;
+    public string Message
     {
       get
       {
         if (_messages == null)
         {
-          _messages = new List<string>(0);
+          _messages = string.Empty;
         }
         return _messages;
       }

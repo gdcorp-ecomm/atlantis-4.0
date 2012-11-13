@@ -137,6 +137,10 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       {
         inputModel[_evidenceValueKey] = Convert.ToString(value);
       }
+      else
+      {
+        throw new KeyNotFoundException("The specified key could not be found in the input model: " + _evidenceValueKey);
+      }
     }
 
     public void Evaluate()

@@ -1,65 +1,94 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RuleEngine>
   <Rules>
-    <Rule id="RIsVatRequired2" desc="" >
+    <RuleMain id="RSeMain">
+       <Actions>
+        <Execute ruleId="RSeCountryRequired" result="true" />
+        <Execute ruleId="RSeRegIdRequired" result="true" />
+        <Execute ruleId="RSeSeVatValid" result="true" />
+      </Actions>
+    </RuleMain>
+    <Rule id="RSeCountryRequired">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FCompanyCode)) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FCompanyCode" result="true">false</EvaluateIsValid>
+        <EvaluateMessage factId="FCompanyCode" result="true"><![CDATA[ "Country is required."]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RSeRegIdRequired">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FRegId)) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FRegId" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FRegId" result="True"><![CDATA[ "Registration Id is required."]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RSeSeVatValid">
       <Condition>
-        <![CDATA[ FACT(FCompanyCode) != "AL" AND
-                  FACT(FCompanyCode) != "AT" AND
-                  FACT(FCompanyCode) != "BY" AND
-                  FACT(FCompanyCode) != "BE" AND
-                  FACT(FCompanyCode) != "BA" AND
-                  FACT(FCompanyCode) != "BG" AND
-                  FACT(FCompanyCode) != "HR" AND
-                  FACT(FCompanyCode) != "CY" AND
-                  FACT(FCompanyCode) != "CZ" AND
-                  FACT(FCompanyCode) != "DK" AND
-                  FACT(FCompanyCode) != "EE" AND
-                  FACT(FCompanyCode) != "FO" AND
-                  FACT(FCompanyCode) != "FI" AND
-                  FACT(FCompanyCode) != "FR" AND
-                  FACT(FCompanyCode) != "DE" AND
-                  FACT(FCompanyCode) != "GI" AND
-                  FACT(FCompanyCode) != "GR" AND
-                  FACT(FCompanyCode) != "GG" AND
-                  FACT(FCompanyCode) != "HU" AND
-                  FACT(FCompanyCode) != "IS" AND
-                  FACT(FCompanyCode) != "IE" AND
-                  FACT(FCompanyCode) != "IM" AND
-                  FACT(FCompanyCode) != "IT" AND
-                  FACT(FCompanyCode) != "JE" AND
-                  FACT(FCompanyCode) != "LV" AND
-                  FACT(FCompanyCode) != "LI" AND
-                  FACT(FCompanyCode) != "LT" AND
-                  FACT(FCompanyCode) != "LU" AND
-                  FACT(FCompanyCode) != "MK" AND
-                  FACT(FCompanyCode) != "MT" AND
-                  FACT(FCompanyCode) != "MD" AND
-                  FACT(FCompanyCode) != "MC" AND
-                  FACT(FCompanyCode) != "ME" AND
-                  FACT(FCompanyCode) != "NL" AND
-                  FACT(FCompanyCode) != "NO" AND
-                  FACT(FCompanyCode) != "PL" AND
-                  FACT(FCompanyCode) != "PT" AND
-                  FACT(FCompanyCode) != "RO" AND
-                  FACT(FCompanyCode) != "SM" AND
-                  FACT(FCompanyCode) != "RS" AND
-                  FACT(FCompanyCode) != "SK" AND
-                  FACT(FCompanyCode) != "SI" AND
-                  FACT(FCompanyCode) != "ES" AND
-                  FACT(FCompanyCode) != "SJ" AND
-                  FACT(FCompanyCode) != "SE" AND
-                  FACT(FCompanyCode) != "CH" AND
-                  FACT(FCompanyCode) != "UA" AND
-                  FACT(FCompanyCode) != "UK" AND
-                  FACT(FCompanyCode) != "VA" ]]>
+        <![CDATA[ FACT(FCompanyCode) == "AL" OR
+                  FACT(FCompanyCode) == "AT" OR
+                  FACT(FCompanyCode) == "BY" OR
+                  FACT(FCompanyCode) == "BE" OR
+                  FACT(FCompanyCode) == "BA" OR
+                  FACT(FCompanyCode) == "BG" OR
+                  FACT(FCompanyCode) == "HR" OR
+                  FACT(FCompanyCode) == "CY" OR
+                  FACT(FCompanyCode) == "CZ" OR
+                  FACT(FCompanyCode) == "DK" OR
+                  FACT(FCompanyCode) == "EE" OR
+                  FACT(FCompanyCode) == "FO" OR
+                  FACT(FCompanyCode) == "FI" OR
+                  FACT(FCompanyCode) == "FR" OR
+                  FACT(FCompanyCode) == "DE" OR
+                  FACT(FCompanyCode) == "GI" OR
+                  FACT(FCompanyCode) == "GR" OR
+                  FACT(FCompanyCode) == "GG" OR
+                  FACT(FCompanyCode) == "HU" OR
+                  FACT(FCompanyCode) == "IS" OR
+                  FACT(FCompanyCode) == "IE" OR
+                  FACT(FCompanyCode) == "IM" OR
+                  FACT(FCompanyCode) == "IT" OR
+                  FACT(FCompanyCode) == "JE" OR
+                  FACT(FCompanyCode) == "LV" OR
+                  FACT(FCompanyCode) == "LI" OR
+                  FACT(FCompanyCode) == "LT" OR
+                  FACT(FCompanyCode) == "LU" OR
+                  FACT(FCompanyCode) == "MK" OR
+                  FACT(FCompanyCode) == "MT" OR
+                  FACT(FCompanyCode) == "MD" OR
+                  FACT(FCompanyCode) == "MC" OR
+                  FACT(FCompanyCode) == "ME" OR
+                  FACT(FCompanyCode) == "NL" OR
+                  FACT(FCompanyCode) == "NO" OR
+                  FACT(FCompanyCode) == "PL" OR
+                  FACT(FCompanyCode) == "PT" OR
+                  FACT(FCompanyCode) == "RO" OR
+                  FACT(FCompanyCode) == "SM" OR
+                  FACT(FCompanyCode) == "RS" OR
+                  FACT(FCompanyCode) == "SK" OR
+                  FACT(FCompanyCode) == "SI" OR
+                  FACT(FCompanyCode) == "ES" OR
+                  FACT(FCompanyCode) == "SJ" OR
+                  FACT(FCompanyCode) == "SE" OR
+                  FACT(FCompanyCode) == "CH" OR
+                  FACT(FCompanyCode) == "UA" OR
+                  FACT(FCompanyCode) == "UK" OR
+                  FACT(FCompanyCode) == "VA" ]]>
       </Condition>
       <Actions>
-        <EvaluateIsValid factId="FCompanyCode" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="FCompanyCode" result="True"><![CDATA[ "VAT is required."]]></EvaluateMessage>
+        <Execute ruleId="RSeEvaluateVat" result="true" />
+      </Actions>
+    </Rule>
+    <Rule id="RSeEvaluateVat">
+      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FVat)) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FVat" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FVat" result="True"><![CDATA[ "VAT is required."]]></EvaluateMessage>
       </Actions>
     </Rule>
   </Rules>
   <Facts>
     <Fact id="FCompanyCode" key="companycode" desc="" type="string" modelId="mdlSe" />
+    <Fact id="FVat" key="vat" desc="" type="string" modelId="mdlSe" />
+    <Fact id="FRegId" key="regid" desc="" type="string" modelId="mdlSe" />
   </Facts>
 </RuleEngine>

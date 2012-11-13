@@ -162,115 +162,118 @@ namespace Atlantis.Framework.RuleEngine.Compiler
 
     private static void LoadRules(ROM rom, XmlDocument rulesXml)
     {
-      var rules = rulesXml.SelectNodes("RuleEngine/Rules//Rule");
+      var ruleMainNode = rulesXml.SelectSingleNode("RuleEngine/Rules//RuleMain");
 
+      if (ruleMainNode != null)
+      {
+        LoadRule(rom, ruleMainNode);
+      }
+      else
+      {
+        throw new Exception("RuleMain node is missing.");
+      }
+      
+      var rules = rulesXml.SelectNodes("RuleEngine/Rules//Rule");
       if (rules != null)
       {
         foreach (XmlNode ruleNode in rules)
         {
-          if (ruleNode.Attributes != null)
+          LoadRule(rom, ruleNode);
+        }
+      }
+    }
+
+    private static void LoadRule(ROM rom, XmlNode ruleNode)
+    {
+      if (ruleNode.Attributes != null)
+      {
+        string currentRuleId = ruleNode.Attributes["id"].Value;
+        //ensure this has not already been entered
+        if (rom[currentRuleId] != null)
+        {
+          throw new Exception("Rule Ids must be unique: " + currentRuleId);
+        }
+
+        bool hasEvidence = false;
+        if (ruleNode.Attributes["chainable"] != null)
+        {
+          hasEvidence = Boolean.Parse(ruleNode.Attributes["chainable"].Value);
+        }
+
+        int priority = 500;
+        if (ruleNode.Attributes["priority"] != null)
+        {
+          priority = Int32.Parse(ruleNode.Attributes["priority"].Value);
+        }
+
+        //expression
+        string condition;
+        var conditionNode = ruleNode["Condition"];
+        if (conditionNode != null)
+        {
+          condition = conditionNode.InnerText;
+        }
+        else
+        {
+          condition = "true";
+        }
+
+        //actions
+        int actionCounter = 0;
+        var actions = new List<EvidenceSpecifier>();
+
+        #region Evaluate
+
+        actionCounter = LoadEvaluation(rom, ruleNode, currentRuleId, actions, actionCounter, ActionType.EvaluteIsValid);
+        actionCounter = LoadEvaluation(rom, ruleNode, currentRuleId, actions, actionCounter, ActionType.EvaluateMessage);
+
+        #endregion
+
+        #region Execute
+
+        var executeList = ruleNode.SelectNodes("Actions//Execute");
+        if (executeList != null && executeList.Count > 0)
+        {
+          hasEvidence = true;
+          foreach (XmlNode execute in executeList)
           {
-            string currentRuleId = ruleNode.Attributes["id"].Value;
-            //ensure this has not already been entered
-            if (rom[currentRuleId] != null)
+            try
             {
-              throw new Exception("Rule Ids must be unique: " + currentRuleId);
-            }
-
-            // Add a main driver rule to run the only rule in the list.
-            if (rules.Count == 1)
-            {
-              var uniqueName = Guid.NewGuid().ToString();
-              var mainActionid = string.Format("{0}-{1}-0", uniqueName, currentRuleId);
-              rom.AddEvidence(new ActionExecute(mainActionid, currentRuleId, 500));
-              var actionMainList = new List<EvidenceSpecifier> {new EvidenceSpecifier(true, mainActionid)};
-              IRule ruleMain = new Rule("mainRule", "true", actionMainList, 1, true);
-              rom.AddEvidence(ruleMain);
-            }
-
-            bool hasEvidence = false;
-            if (ruleNode.Attributes["chainable"] != null)
-            {
-              hasEvidence = Boolean.Parse(ruleNode.Attributes["chainable"].Value);
-            }
-
-            int priority = 500;
-            if (ruleNode.Attributes["priority"] != null)
-            {
-              priority = Int32.Parse(ruleNode.Attributes["priority"].Value);
-            }
-
-            //expression
-            string condition;
-            var conditionNode = ruleNode["Condition"];
-            if (conditionNode != null)
-            {
-              condition = conditionNode.InnerText;
-            }
-            else
-            {
-              condition = "true";
-            }
-
-            //actions
-            int actionCounter = 0;
-            var actions = new List<EvidenceSpecifier>();
-
-            #region Evaluate
-
-            actionCounter = LoadEvaluation(rom, ruleNode, currentRuleId, actions, actionCounter, ActionType.EvaluteIsValid);
-            actionCounter = LoadEvaluation(rom, ruleNode, currentRuleId, actions, actionCounter, ActionType.EvaluateMessage);
-
-            #endregion
-
-            #region Execute
-
-            var executeList = ruleNode.SelectNodes("Actions//Execute");
-            if (executeList != null && executeList.Count > 0)
-            {
-              hasEvidence = true;
-              foreach (XmlNode execute in executeList)
+              if (execute.Attributes != null)
               {
-                try
+                string actionOperatingName = execute.Attributes["ruleId"].Value;
+
+                bool result = true;
+
+                int actionPriority = 500;
+
+                if (execute.Attributes["priority"] != null)
                 {
-                  if (execute.Attributes != null)
-                  {
-                    string actionOperatingName = execute.Attributes["factId"].Value;
-
-                    bool result = true;
-
-                    int actionPriority = 500;
-
-                    if (execute.Attributes["priority"] != null)
-                    {
-                      actionPriority = Int32.Parse(execute.Attributes["priority"].Value);
-                    }
-
-                    if (execute.Attributes["result"] != null)
-                    {
-                      result = Boolean.Parse(execute.Attributes["result"].Value);
-                    }
-
-                    var actionId = string.Format("{0}-{1}-{2}", currentRuleId, actionOperatingName, actionCounter++);
-
-                    rom.AddEvidence(new ActionExecute(actionId, actionOperatingName, actionPriority));
-                    actions.Add(new EvidenceSpecifier(result, actionId));
-                  }
+                  actionPriority = Int32.Parse(execute.Attributes["priority"].Value);
                 }
-                catch (Exception e)
+
+                if (execute.Attributes["result"] != null)
                 {
-                  throw new Exception("Invalid action: " + execute.OuterXml, e);
+                  result = Boolean.Parse(execute.Attributes["result"].Value);
                 }
+
+                var actionId = string.Format("{0}-{1}-{2}", currentRuleId, actionOperatingName, actionCounter++);
+
+                rom.AddEvidence(new ActionExecute(actionId, actionOperatingName, actionPriority));
+                actions.Add(new EvidenceSpecifier(result, actionId));
               }
             }
-
-            #endregion
-            IRule rule = new Rule(currentRuleId, condition, actions, priority, hasEvidence);
-            rom.AddEvidence(rule);
+            catch (Exception e)
+            {
+              throw new Exception("Invalid action: " + execute.OuterXml, e);
+            }
           }
         }
 
-       
+        #endregion
+
+        IRule rule = new Rule(currentRuleId, condition, actions, priority, hasEvidence);
+        rom.AddEvidence(rule);
       }
     }
 

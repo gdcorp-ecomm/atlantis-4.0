@@ -11,9 +11,9 @@ namespace Atlantis.Framework.RuleEngine.Tests
   [TestClass]
   public class AtlantisRuleEngineTests
   {
-   [TestMethod]
+    [TestMethod]
     [DeploymentItem("DotSeRule.xml")]
-    public void TestSeValid()
+    public void TestSeRegIdInValid()
     {
       var rules = new XmlDocument();
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
@@ -22,11 +22,54 @@ namespace Atlantis.Framework.RuleEngine.Tests
       rules.Load(directory);
 
       var model = new Dictionary<string, Dictionary<string, string>>();
-      model.Add("mdlSe", new Dictionary<string, string> { { "companycode", "US" } });
+      model.Add("mdlSe", new Dictionary<string, string> { { "companycode", "FR" }, {"regid", string.Empty }, {"vat", "12345" } });
 
       var engineResult = RuleEngine.EvaluateRules(model, rules);
 
+     Assert.IsTrue(engineResult.Status != RuleEngineResultStatus.Exception);
+
+     var modelResults = engineResult.ValidationResults;
+
+      var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlSe");
+
+      Assert.IsTrue(facts != null);
+      Assert.IsTrue(facts.ContainsInvalids);
+
+      foreach (var fact in facts.Facts)
+      {
+        switch (fact.FactKey)
+        {
+          //case "companycode":
+          //  Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
+          //  Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
+          //  break;
+          case "regid":
+            Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
+            Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
+            break;
+        }
+      }
+    }
+
+    [TestMethod]
+    [DeploymentItem("DotSeRule.xml")]
+    public void TestSeVatInValid()
+    {
+      var rules = new XmlDocument();
+      Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
+      var assemblyPath = pathUri.LocalPath;
+      string directory = Path.Combine(assemblyPath, @"DotSeRule.xml");
+      rules.Load(directory);
+
+      var model = new Dictionary<string, Dictionary<string, string>>();
+      model.Add("mdlSe", new Dictionary<string, string> { { "companycode", "FR" }, { "regid", "12345" }, { "vat", string.Empty } });
+
+      var engineResult = RuleEngine.EvaluateRules(model, rules);
+
+      Assert.IsTrue(engineResult.Status != RuleEngineResultStatus.Exception);
+
       var modelResults = engineResult.ValidationResults;
+
       var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlSe");
 
       Assert.IsTrue(facts != null);
@@ -38,11 +81,12 @@ namespace Atlantis.Framework.RuleEngine.Tests
         {
           case "companycode":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
-            Assert.IsTrue(fact.Messages.Count > 0);
+            Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
             break;
-          default:
-            Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
-            break;
+          //case "regid":
+          //  Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
+          //  Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
+          //  break;
         }
       }
     }
@@ -62,6 +106,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
 
       var engineResult = RuleEngine.EvaluateRules(model, rules);
 
+      Assert.IsTrue(engineResult.Status != RuleEngineResultStatus.Exception);
+
       var modelResults = engineResult.ValidationResults;
       var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlUs");
 
@@ -74,7 +120,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
         {
           case "companytype":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
-            Assert.IsTrue(fact.Messages.Count > 0);
+            Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
             break;
           default:
             Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
@@ -98,6 +144,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
 
       var engineResult = RuleEngine.EvaluateRules(model, rules);
 
+      Assert.IsTrue(engineResult.Status != RuleEngineResultStatus.Exception);
+
       var modelResults = engineResult.ValidationResults;
       var facts = modelResults.FirstOrDefault(m => m.ModelId == "mdlOrg");
 
@@ -110,7 +158,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
         {
           case "organization":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
-            Assert.IsTrue(fact.Messages.Count > 0);
+            Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
             break;
           default:
             Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
@@ -152,6 +200,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
 
       var engineResult = RuleEngine.EvaluateRules(model, rules);
 
+      Assert.IsTrue(engineResult.Status != RuleEngineResultStatus.Exception);
+
       var modelResults = engineResult.ValidationResults;
       var facts = modelResults.FirstOrDefault(m => m.ModelId == "Shopper");
 
@@ -170,7 +220,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
 
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
 
-            Assert.IsTrue(fact.Messages.Count > 0);
+            Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
 
             break;
 

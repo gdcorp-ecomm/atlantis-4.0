@@ -81,6 +81,14 @@ namespace Atlantis.Framework.TH.Products
         }
       }
 
+      if (!string.IsNullOrEmpty(tokenResult) && !string.IsNullOrEmpty(token.Html))
+      {
+        if (token.Html.Contains("{0}"))
+        {
+          tokenResult = token.Html.Replace("{0}", tokenResult);
+        }
+      }
+
       token.TokenResult = tokenResult;
       return result;
     }
@@ -119,6 +127,14 @@ namespace Atlantis.Framework.TH.Products
             tokenResult = percent.ToString();
             result = true;
           }
+        }
+      }
+
+      if (!string.IsNullOrEmpty(tokenResult) && !string.IsNullOrEmpty(token.Html))
+      {
+        if (token.Html.Contains("{0}"))
+        {
+          tokenResult = token.Html.Replace("{0}", tokenResult);
         }
       }
 

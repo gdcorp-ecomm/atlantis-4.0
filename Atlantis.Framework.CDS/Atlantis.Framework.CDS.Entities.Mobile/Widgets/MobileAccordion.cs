@@ -6,6 +6,7 @@ namespace Atlantis.Framework.CDS.Entities.Mobile.Widgets
 {
   public class MobileAccordion : IWidgetModel
   {
+    public string InlineStyles { get; set; }
     public List<MobileAccordDetails> Details { get; set; }
   }
 
@@ -17,6 +18,7 @@ namespace Atlantis.Framework.CDS.Entities.Mobile.Widgets
 
   public class MobileAccordSubDetails
   {
+    public string InitialBoldText { get; set; }
     public string Text1 { get; set; }
     public string Text2 { get; set; }
   }

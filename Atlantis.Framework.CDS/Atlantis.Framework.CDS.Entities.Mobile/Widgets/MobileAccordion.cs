@@ -9,15 +9,15 @@ namespace Atlantis.Framework.CDS.Entities.Mobile.Widgets
     public List<MobileAccordDetails> Details { get; set; }
   }
 
-  public class MobileAccordDetails : ElementBase
+  public class MobileAccordDetails
   {
-    //public string Text { get; set; } -> comes from ElementBase
+    public string Text { get; set; }
     public List<MobileAccordSubDetails> SubDetails { get; set; }
   }
 
-  public class MobileAccordSubDetails : ElementBase
+  public class MobileAccordSubDetails
   {
-    //public string Text { get; set; } -> comes from ElementBase
+    public string Text1 { get; set; }
     public string Text2 { get; set; }
   }
 }

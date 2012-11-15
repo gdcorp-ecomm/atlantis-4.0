@@ -49,7 +49,7 @@ namespace Atlantis.Framework.ReferAFriend.Impl
 					cmd.CommandTimeout = Util.GetRequestTimeout(req, config);
 					cmd.CommandType = CommandType.StoredProcedure;
 
-					var hashList = hashDict.Values.ToArray();
+					var hashList = hashDict.Keys.ToArray();
 					cmd.Parameters.Add(new SqlParameter("@emailHashList", string.Join(",", hashList)));
 
 					cn.Open();

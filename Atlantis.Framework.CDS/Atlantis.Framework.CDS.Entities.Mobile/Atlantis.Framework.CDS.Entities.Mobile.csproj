@@ -50,6 +50,7 @@
     <Compile Include="MobileProductSelectorWidget.cs" />
     <Compile Include="MobileSimpleBannerWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Widgets\MobilePromoText.cs" />
     <Compile Include="Widgets\MobileAccordion.cs" />
     <Compile Include="Widgets\MobileCommercials.cs" />
     <Compile Include="Widgets\MobileVideoPlayer.cs" />

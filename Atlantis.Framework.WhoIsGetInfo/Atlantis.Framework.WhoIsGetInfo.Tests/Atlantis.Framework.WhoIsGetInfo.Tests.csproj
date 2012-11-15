@@ -80,7 +80,7 @@
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.WhoIsGetInfo.Impl\Atlantis.Framework.WhoIsGetInfo.Impl.csproj">
-      <Project>{5A3AC0ED-FAB9-428A-AF1C-12A27B7893E6}</Project>
+      <Project>{5a3ac0ed-fab9-428a-af1c-12a27b7893e6}</Project>
       <Name>Atlantis.Framework.WhoIsGetInfo.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.WhoIsGetInfo.Interface\Atlantis.Framework.WhoIsGetInfo.Interface.csproj">
@@ -89,7 +89,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Atlantis.config" />
+    <None Include="Atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

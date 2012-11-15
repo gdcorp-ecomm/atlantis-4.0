@@ -30,7 +30,10 @@ namespace Atlantis.Framework.WhoIsGetRegData.Impl
     private string GetWhoIsRegData(WhoIsGetRegDataRequestData whoisRegDataRequestData, ConfigElement oConfig)
     {
       string str = string.Empty;
-      HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(((WsConfigElement)oConfig).WSURL + "?domain=" + whoisRegDataRequestData.DomainToLookup + "&querytype=4");
+      HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(((WsConfigElement)oConfig).WSURL + 
+         "?domain=" + whoisRegDataRequestData.DomainToLookup +
+         "&querytype=4&clientIp=" + whoisRegDataRequestData.ClientIp + "&captcha=" + (whoisRegDataRequestData.WasCaptchaEntered ? 1 : 0));
+
       httpWebRequest.Timeout = (int)whoisRegDataRequestData.RequestTimeout.TotalMilliseconds;
       httpWebRequest.UserAgent = "Atlantis Framework Fetch Request";
       HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();

@@ -20,11 +20,22 @@ namespace Atlantis.Framework.WhoIsGetRegData.Interface
     }
 
     public string DomainToLookup { get; set; }
+    public string ClientIp { get; set; }
+    public bool WasCaptchaEntered { get; set; }
 
-    public WhoIsGetRegDataRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, string domainName)
+    public WhoIsGetRegDataRequestData(string shopperId, 
+      string sourceUrl, 
+      string orderId, 
+      string pathway, 
+      int pageCount, 
+      string domainName,
+      string clientIp,
+      bool wasCaptchaEntered)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
-      this.DomainToLookup = domainName;
+      DomainToLookup = domainName;
+      ClientIp = clientIp;
+      WasCaptchaEntered = wasCaptchaEntered;
     }
 
     public override string GetCacheMD5()

@@ -61,7 +61,8 @@ namespace Atlantis.Framework.ReferAFriend.Impl
 								Amount = (int)dr["total"],
 								IsNewCustomer = ((int)dr["IsNewCustomer"]) == 1,
 								IsPendingCredit = ((int)dr["IsPending"]) == 1,
-								EffectiveCreditDate = (DateTime)dr["EffectiveDate"]
+								EffectiveCreditDate = (DateTime)dr["EffectiveDate"],
+								CreditAmount = (int)dr["InStoreCreditAmount"]
 							};
 
 							list.Add(data);

@@ -17,5 +17,7 @@ namespace Atlantis.Framework.ReferAFriend.Interface
 		public string OrderID { get; set; }
 
 		public string Referral { get; set; }
+
+		public int CreditAmount { get; set; }
 	}
 }

@@ -82,7 +82,7 @@ namespace Atlantis.Framework.ReferAFriend.Impl
 			{
 				oHash = new gdHashLib.HashSHAClass();
 
-				foreach (var emailAddress in emailAddresses.Distinct())
+				foreach (var emailAddress in emailAddresses.Select(s => s.ToLower()).Distinct())
 				{
 					returnDict.Add(oHash.GetHash(emailAddress), emailAddress);
 				}

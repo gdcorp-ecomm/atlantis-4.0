@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="Palms" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="Palms" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;strong&gt;Palms LoginControl Web Service&lt;/strong&gt;</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="Palms">
+      <s:element name="GetLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplicationId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PalmsId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HostName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientIp" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetLoginResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FailedAuthCount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LastAuthSuccess" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LastAuthAttempt" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMultipleLogins">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplicationId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="unbounded" name="PalmsIds" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HostName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientIp" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMultipleLoginsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetMultipleLoginsResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Logins" type="tns:ArrayOfLoginData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLoginData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Login" nillable="true" type="tns:LoginData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LoginData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PalmsId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FailedAuthCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastAuthSuccess" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastAuthAttempt" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetLoginByUserName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplicationId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HostName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientIp" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLoginByUserNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetLoginByUserNameResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="PalmsId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FailedAuthCount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LastAuthSuccess" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LastAuthAttempt" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplicationId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PalmsId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HostName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientIp" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetPasswordResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetUserName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplicationId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PalmsId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HostName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientIp" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetUserNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetUserNameResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplicationId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PalmsId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HostName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientIp" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteLoginResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLogin" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMultipleLoginsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMultipleLogins" />
+  </wsdl:message>
+  <wsdl:message name="GetMultipleLoginsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMultipleLoginsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginByUserNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLoginByUserName" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginByUserNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLoginByUserNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:SetPassword" />
+  </wsdl:message>
+  <wsdl:message name="SetPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:SetPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetUserNameSoapIn">
+    <wsdl:part name="parameters" element="tns:SetUserName" />
+  </wsdl:message>
+  <wsdl:message name="SetUserNameSoapOut">
+    <wsdl:part name="parameters" element="tns:SetUserNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteLogin" />
+  </wsdl:message>
+  <wsdl:message name="DeleteLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteLoginResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="GetLogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves the UserName and Password for the specified PalmsId of the specified Application</wsdl:documentation>
+      <wsdl:input message="tns:GetLoginSoapIn" />
+      <wsdl:output message="tns:GetLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMultipleLogins">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves Login data for the specified PalmsIds of the specificied Application.  Note: Maximum of 100 PalmsIds allowed per request.</wsdl:documentation>
+      <wsdl:input message="tns:GetMultipleLoginsSoapIn" />
+      <wsdl:output message="tns:GetMultipleLoginsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginByUserName">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves the PalmsId and Password for the specified UserName of the specified Application (Note: This method can only be used for Applications that enforce unique usernames and does not require the PalmsId)</wsdl:documentation>
+      <wsdl:input message="tns:GetLoginByUserNameSoapIn" />
+      <wsdl:output message="tns:GetLoginByUserNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Changes the password for the specified PalmsId of the specified Application</wsdl:documentation>
+      <wsdl:input message="tns:SetPasswordSoapIn" />
+      <wsdl:output message="tns:SetPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserName">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Changes the username for the specified PalmsId of the specified Application</wsdl:documentation>
+      <wsdl:input message="tns:SetUserNameSoapIn" />
+      <wsdl:output message="tns:SetUserNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes the specified PalmsId for the specified Application</wsdl:documentation>
+      <wsdl:input message="tns:DeleteLoginSoapIn" />
+      <wsdl:output message="tns:DeleteLoginSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetLogin">
+      <soap:operation soapAction="Palms/GetLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMultipleLogins">
+      <soap:operation soapAction="Palms/GetMultipleLogins" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginByUserName">
+      <soap:operation soapAction="Palms/GetLoginByUserName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPassword">
+      <soap:operation soapAction="Palms/SetPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserName">
+      <soap:operation soapAction="Palms/SetUserName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLogin">
+      <soap:operation soapAction="Palms/DeleteLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetLogin">
+      <soap12:operation soapAction="Palms/GetLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMultipleLogins">
+      <soap12:operation soapAction="Palms/GetMultipleLogins" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginByUserName">
+      <soap12:operation soapAction="Palms/GetLoginByUserName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPassword">
+      <soap12:operation soapAction="Palms/SetPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserName">
+      <soap12:operation soapAction="Palms/SetUserName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLogin">
+      <soap12:operation soapAction="Palms/DeleteLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;strong&gt;Palms LoginControl Web Service&lt;/strong&gt;</wsdl:documentation>
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="https://mgmt.palms.dev.glbt1.gdg/logincontrol/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="https://mgmt.palms.dev.glbt1.gdg/logincontrol/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

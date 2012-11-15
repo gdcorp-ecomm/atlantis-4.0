@@ -4,7 +4,7 @@ using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 using Newtonsoft.Json;
 
 
-namespace Atlantis.Framework.CDS.Entities.Widgets
+namespace Atlantis.Framework.CDS.Entities.Widgets 
 {
   public class TabContentJson : IWidgetModel
   {

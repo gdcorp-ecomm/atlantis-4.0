@@ -8,6 +8,7 @@ namespace Atlantis.Framework.CDS.Entities.Mobile.Widgets
   {
     public string InlineStyles { get; set; }
     public List<MobileAccordDetails> Details { get; set; }
+    public string FooterText { get; set; }
   }
 
   public class MobileAccordDetails

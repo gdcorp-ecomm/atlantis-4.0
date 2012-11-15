@@ -106,6 +106,7 @@
     <Compile Include="Widgets\SearchHeader.cs" />
     <Compile Include="Widgets\Support.cs" />
     <Compile Include="Widgets\TabContent.cs" />
+    <Compile Include="Widgets\TabContentJson.cs" />
     <Compile Include="Widgets\TabsContainer.cs" />
     <Compile Include="Widgets\TabsContainer2.cs" />
     <Compile Include="Widgets\Tag.cs" />

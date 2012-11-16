@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.PrivacyAppGetRecord.Impl.privacyWS;
 using Atlantis.Framework.PrivacyAppGetRecord.Interface;
@@ -22,6 +23,7 @@ namespace Atlantis.Framework.PrivacyAppGetRecord.Impl
 
         service = new wscgdPrivacyAppService();
         service.Url = ((WsConfigElement)oConfig).WSURL;
+        AddClientCertificate(service, oConfig);
         service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
         service.GetRecord(request.HashKey, request.ApplicationId, out responseXml);
 
@@ -45,6 +47,35 @@ namespace Atlantis.Framework.PrivacyAppGetRecord.Impl
       }
 
       return result;
+    }
+
+    #endregion
+
+    #region x509 Certificate Configuration
+    private void AddClientCertificate(wscgdPrivacyAppService service, ConfigElement oConfig)
+    {
+      X509Certificate cert = GetCertificate(oConfig);
+      if (cert != null)
+      {
+        service.ClientCertificates.Add(cert);
+      }
+    }
+
+    private X509Certificate GetCertificate(ConfigElement oConfig)
+    {
+      X509Certificate cert = null;
+      string certificateName = oConfig.GetConfigValue("CertificateName");
+      if (!string.IsNullOrEmpty(certificateName))
+      {
+        X509Store certStore = new X509Store(StoreLocation.LocalMachine);
+        certStore.Open(OpenFlags.ReadOnly);
+        X509CertificateCollection certs = certStore.Certificates.Find(X509FindType.FindBySubjectName, certificateName, true);
+        if (certs.Count > 0)
+        {
+          cert = certs[0];
+        }
+      }
+      return cert;
     }
 
     #endregion

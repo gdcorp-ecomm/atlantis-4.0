@@ -1,6 +1,8 @@
-﻿namespace Atlantis.Framework.Providers.Interface.Currency
+﻿using System;
+
+namespace Atlantis.Framework.Providers.Interface.Currency
 {
-  public interface ICurrencyInfo
+  public interface ICurrencyInfo : IEquatable<ICurrencyInfo>
   {
     string CurrencyType { get; }
     int DecimalPrecision { get; }

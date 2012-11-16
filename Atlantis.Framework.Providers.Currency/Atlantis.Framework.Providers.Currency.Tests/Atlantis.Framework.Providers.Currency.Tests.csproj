@@ -112,6 +112,10 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
+      <Project>{3213e6db-f026-4f17-a46a-7127f79f6620}</Project>
+      <Name>Atlantis.Framework.Nimitz</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Impl\Atlantis.Framework.PLSignupInfo.Impl.csproj">
       <Project>{4dfb1615-1204-4095-b56e-c697a4ea6e03}</Project>
       <Name>Atlantis.Framework.PLSignupInfo.Impl</Name>
@@ -132,33 +136,17 @@
       <Project>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.csproj">
-      <Project>{CA50A18E-5CA1-43BE-82C1-F1910F09780B}</Project>
-      <Name>Atlantis.Framework.Providers.Preferences</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.PromoData\Atlantis.Framework.Providers.PromoData\Atlantis.Framework.Providers.PromoData.csproj">
       <Project>{D67BE3FC-BB67-4ADC-A368-98B04B395396}</Project>
       <Name>Atlantis.Framework.Providers.PromoData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPrefGet\Atlantis.Framework.ShopperPrefGet.Impl\Atlantis.Framework.ShopperPrefGet.Impl.csproj">
-      <Project>{F6887293-66C9-4BB8-98EF-8AC047D22E91}</Project>
-      <Name>Atlantis.Framework.ShopperPrefGet.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPrefGet\Atlantis.Framework.ShopperPrefGet.Interface\Atlantis.Framework.ShopperPrefGet.Interface.csproj">
-      <Project>{9C1FBF6D-E420-4B6F-B5CF-9C5633FB5203}</Project>
-      <Name>Atlantis.Framework.ShopperPrefGet.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPrefUpdate\Atlantis.Framework.ShopperPrefUpdate.Impl\Atlantis.Framework.ShopperPrefUpdate.Impl.csproj">
-      <Project>{881DDBDF-2E24-4260-A40A-64006D4B0412}</Project>
-      <Name>Atlantis.Framework.ShopperPrefUpdate.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPrefUpdate\Atlantis.Framework.ShopperPrefUpdate.Interface\Atlantis.Framework.ShopperPrefUpdate.Interface.csproj">
-      <Project>{565624BE-ABB3-4A2F-B5CE-968C6F18E20A}</Project>
-      <Name>Atlantis.Framework.ShopperPrefUpdate.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
       <Project>{2F8983B4-801B-461A-9D76-26A58A496261}</Project>
       <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
+      <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
+      <Name>Atlantis.Framework.Testing.MockProviders</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency.csproj">
       <Project>{8581EB6C-5093-473E-AB04-318CE071E7FD}</Project>

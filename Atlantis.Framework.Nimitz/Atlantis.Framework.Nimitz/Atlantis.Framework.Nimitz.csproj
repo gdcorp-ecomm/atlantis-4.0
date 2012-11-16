@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{17EBED78-9469-4678-96B1-A175AB221916}</ProjectGuid>
+    <ProjectGuid>{3213E6DB-F026-4F17-A46A-7127F79F6620}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Atlantis.Framework.Nimitz</RootNamespace>

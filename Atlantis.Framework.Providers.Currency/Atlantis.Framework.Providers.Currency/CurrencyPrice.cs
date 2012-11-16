@@ -1,5 +1,5 @@
-﻿using System;
-using Atlantis.Framework.Providers.Interface.Currency;
+﻿using Atlantis.Framework.Providers.Interface.Currency;
+using System;
 
 namespace Atlantis.Framework.Providers.Currency
 {

@@ -47,9 +47,8 @@
     <Compile Include="MockNoManagerContext.cs" />
     <Compile Include="MockShopperContext.cs" />
     <Compile Include="MockShopperPreference.cs" />
-    <Compile Include="MockSiteContextBase.cs" />
+    <Compile Include="MockSiteContext.cs" />
     <Compile Include="MockSiteContextSettings.cs" />
-    <Compile Include="MockSiteContextGoDaddy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Web;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.PLSignupInfo.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Preferences;
 using Atlantis.Framework.Providers.Interface.PromoData;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Web;
 
 namespace Atlantis.Framework.Providers.Currency
 {
@@ -41,21 +41,6 @@ namespace Atlantis.Framework.Providers.Currency
       return (currencyInfoItem != null);
     }
 
-    private static ICurrencyInfo GetValidCurrencyInfoItem(string currencyType)
-    {
-      ICurrencyInfo result = CurrencyData.GetCurrencyInfo(currencyType);
-      if (result == null)
-      {
-        result = CurrencyData.GetCurrencyInfo(CURRENCY_TYPE_USD);
-        if (result == null)
-        {
-          string message = "Critical currency error. Could not get valid currency info for USD or " + HttpUtility.HtmlEncode(currencyType) + ".";
-          throw new Exception(message);
-        }
-      }
-      return result;
-    }
-
     #endregion
 
     const int RESELLER_CONTEXT = 6;
@@ -66,46 +51,26 @@ namespace Atlantis.Framework.Providers.Currency
 
     protected const string LEGACY_CURRENCY_COOKIE_PORTABLE_SOURCE_STR_KEY = "potableSourceStr";
 
-    private ISiteContext _siteContext;
+    private Lazy<ICurrencyInfo> _USDInfo;
+    private Lazy<ISiteContext> _siteContext;
+    private Lazy<IShopperContext> _shopperContext;
+    private Lazy<IShopperPreferencesProvider> _shopperPreferences;
+
     private ISiteContext SiteContext
     {
-      get
-      {
-        if(_siteContext == null)
-        {
-          _siteContext = Container.Resolve<ISiteContext>();
-        }
-
-        return _siteContext;
-      }
+      get { return _siteContext.Value; }
     }
 
-    private IShopperContext _shopperContext;
     private IShopperContext ShopperContext
     {
-      get
-      {
-        if(_shopperContext == null)
-        {
-          _shopperContext = Container.Resolve<IShopperContext>();
-        }
-
-        return _shopperContext;
-      }
+      get { return _shopperContext.Value; }
     }
 
-    private IShopperPreferencesProvider _shopperPreferences;
     private IShopperPreferencesProvider ShopperPreferences
     {
-      get
-      {
-        if (_shopperPreferences == null && Container.CanResolve<IShopperPreferencesProvider>())
-        {
-          _shopperPreferences = Container.Resolve<IShopperPreferencesProvider>();
-        }
-        return _shopperPreferences;
-      }
+      get { return _shopperPreferences.Value; }
     }
+    
 
     private string _legacyCurrencyCookieName;
     private string LegacyCurrencyCookieName
@@ -151,7 +116,7 @@ namespace Atlantis.Framework.Providers.Currency
       }
     }
 
-    private readonly Dictionary<string, string> _priceTextCache;
+    private readonly Dictionary<string, string> _priceFormatCache;
     
     private ICurrencyInfo _selectedDisplayCurrencyInfo;
     private ICurrencyInfo _selectedTransactionalCurrencyInfo;
@@ -160,7 +125,13 @@ namespace Atlantis.Framework.Providers.Currency
 
     public CurrencyProvider(IProviderContainer providerContainer) : base(providerContainer)
     {
-      _priceTextCache = new Dictionary<string, string>();
+      _priceFormatCache = new Dictionary<string, string>();
+
+      _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
+      _shopperContext = new Lazy<IShopperContext>(() => { return Container.Resolve<IShopperContext>(); });
+      _shopperPreferences = new Lazy<IShopperPreferencesProvider>(
+        () => { return Container.CanResolve<IShopperPreferencesProvider>() ? Container.Resolve<IShopperPreferencesProvider>() : null; });
+      _USDInfo = new Lazy<ICurrencyInfo>(() => { return CurrencyData.GetCurrencyInfo(CURRENCY_TYPE_USD); });
     }
 
     #region Selected Currency Settings
@@ -234,7 +205,7 @@ namespace Atlantis.Framework.Providers.Currency
       {
         if (_selectedDisplayCurrencyInfo == null)
         {
-          _selectedDisplayCurrencyInfo = GetValidCurrencyInfoItem(SelectedDisplayCurrencyType);
+          _selectedDisplayCurrencyInfo = GetValidCurrencyInfo(SelectedDisplayCurrencyType);
         }
         return _selectedDisplayCurrencyInfo;
       }
@@ -289,7 +260,7 @@ namespace Atlantis.Framework.Providers.Currency
     public bool IsCurrencyTransactionalForContext(ICurrencyInfo currencyToCheck)
     {
       bool isTransactional = false;
-      if (currencyToCheck.CurrencyType == "USD")
+      if (currencyToCheck.CurrencyType == CURRENCY_TYPE_USD)
       {
         isTransactional = true;
       }
@@ -298,6 +269,20 @@ namespace Atlantis.Framework.Providers.Currency
         isTransactional = (currencyToCheck.IsTransactional) && (IsMultiCurrencyActiveForContext);
       }
       return isTransactional;
+    }
+
+    private void SetSelectedTransactionalCurrency()
+    {
+      if (IsCurrencyTransactionalForContext(SelectedDisplayCurrencyInfo))
+      {
+        _selectedTransactionalCurrencyInfo = SelectedDisplayCurrencyInfo;
+        _selectedTransactionalCurrencyType = SelectedDisplayCurrencyInfo.CurrencyType;
+      }
+      else
+      {
+        _selectedTransactionalCurrencyInfo = _USDInfo.Value;
+        _selectedTransactionalCurrencyType = CURRENCY_TYPE_USD;
+      }
     }
 
     /// <summary>
@@ -309,11 +294,7 @@ namespace Atlantis.Framework.Providers.Currency
       {
         if (_selectedTransactionalCurrencyType == null)
         {
-          _selectedTransactionalCurrencyType = CURRENCY_TYPE_USD;
-          if (IsCurrencyTransactionalForContext(SelectedDisplayCurrencyInfo))
-          {
-            _selectedTransactionalCurrencyType = SelectedDisplayCurrencyInfo.CurrencyType;
-          }
+          SetSelectedTransactionalCurrency();
         }
         return _selectedTransactionalCurrencyType;
       }
@@ -328,7 +309,7 @@ namespace Atlantis.Framework.Providers.Currency
       {
         if (_selectedTransactionalCurrencyInfo == null)
         {
-          _selectedTransactionalCurrencyInfo = GetValidCurrencyInfoItem(SelectedTransactionalCurrencyType);
+          SetSelectedTransactionalCurrency();
         }
         return _selectedTransactionalCurrencyInfo;
       }
@@ -337,6 +318,8 @@ namespace Atlantis.Framework.Providers.Currency
     #endregion
 
     #region Pricing Functions
+
+    #region Logging Missing Prices
 
     private const string _catalogPriceError = "33";
     private void LogMissingCatalogPrice(string call, int unifiedProductId, int shopperPriceType, int quantity, int privateLabelId, string currencyType)
@@ -347,130 +330,156 @@ namespace Atlantis.Framework.Providers.Currency
       Engine.Engine.LogAtlantisException(ex);
     }
 
-    /// <summary>
-    /// Gets the List price of a product
-    /// </summary>
-    /// <param name="unifiedProductId">unified Product Id</param>
-    /// <param name="shopperPriceType">shopper price type</param>
-    /// <returns></returns>
-    public ICurrencyPrice GetListPrice(int unifiedProductId, int shopperPriceType)
+    #endregion
+
+    #region ListPrice
+
+    private ICurrencyPrice GetListPriceInt(int unifiedProductId, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
     {
       int listPrice;
       bool wasConverted;
-      
-      bool success = DataCache.DataCache.GetListPriceEx(SiteContext.PrivateLabelId, unifiedProductId, shopperPriceType, SelectedTransactionalCurrencyType, out listPrice, out wasConverted);
 
-      CurrencyPriceType type = CurrencyPriceType.Transactional;
-      if (wasConverted)
-      {
-        type = CurrencyPriceType.Converted;
-        LogMissingCatalogPrice("CurrencyProvider.GetListPriceEx", unifiedProductId, shopperPriceType, 1, SiteContext.PrivateLabelId, SelectedTransactionalCurrencyType);
-      }
-
-      ICurrencyPrice result = new CurrencyPrice(listPrice, SelectedTransactionalCurrencyInfo, type);
-      return result;
-    }
-
-    /// <summary>
-    /// Gets the List price of a product
-    /// </summary>
-    /// <param name="unifiedProductId">unified Product Id</param>
-    /// <returns></returns>
-    public ICurrencyPrice GetListPrice(int unifiedProductId)
-    {
-      return GetListPrice(unifiedProductId, ShopperContext.ShopperPriceType);
-    }
-
-    /// <summary>
-    /// Gets the Current (PromoPrice) price of a product
-    /// </summary>
-    /// <param name="unifiedProductId">unified Product Id</param>
-    /// <param name="shopperPriceType">shopper price type</param>
-    /// <returns></returns>
-    public ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType)
-    {
-      CurrencyPriceType type;
-      int currentPrice = GetProductCurrentPrice(unifiedProductId, shopperPriceType, out type);
-      int promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
-      ICurrencyPrice result = new CurrencyPrice(promoPrice, SelectedTransactionalCurrencyInfo, type);
-      return result;
-    }
-
-    private int GetProductCurrentPrice(int unifiedProductId, int shopperPriceType, out CurrencyPriceType currencyPriceType)
-    {
-      int currentPrice;
-      bool wasConverted;
-
-      bool success = DataCache.DataCache.GetPromoPriceEx(SiteContext.PrivateLabelId, unifiedProductId, 
-        shopperPriceType, SelectedTransactionalCurrencyType, out currentPrice, out wasConverted);
-
-      currencyPriceType = CurrencyPriceType.Transactional;
+      bool success = DataCache.DataCache.GetListPriceEx(SiteContext.PrivateLabelId, unifiedProductId, shopperPriceType, transactionalCurrencyInfo.CurrencyType, out listPrice, out wasConverted);
+      CurrencyPriceType currencyPriceType = CurrencyPriceType.Transactional;
 
       if (wasConverted)
       {
         currencyPriceType = CurrencyPriceType.Converted;
-        LogMissingCatalogPrice("CurrencyProvider.GetPromoPriceEx", unifiedProductId, shopperPriceType, 1, 
-          SiteContext.PrivateLabelId, SelectedTransactionalCurrencyType);
+        LogMissingCatalogPrice("CurrencyProvider.GetListPriceEx", unifiedProductId, shopperPriceType, 1, SiteContext.PrivateLabelId, transactionalCurrencyInfo.CurrencyType);
       }
 
-      return currentPrice;
+      return new CurrencyPrice(listPrice, transactionalCurrencyInfo, currencyPriceType);
+    }
+    
+    public ICurrencyPrice GetListPrice(int unifiedProductId, int shopperPriceType, ICurrencyInfo currencyInfo)
+    {
+      if (!IsCurrencyTransactionalForContext(currencyInfo))
+      {
+        currencyInfo = _USDInfo.Value;
+      }
+      return GetListPriceInt(unifiedProductId, shopperPriceType, currencyInfo);
     }
 
-    /// <summary>
-    /// Gets the Current (PromoPrice) price of a product
-    /// </summary>
-    /// <param name="unifiedProductId">unified Product Id</param>
-    /// <returns></returns>
+    public ICurrencyPrice GetListPrice(int unifiedProductId, ICurrencyInfo currencyInfo)
+    {
+      if (!IsCurrencyTransactionalForContext(currencyInfo))
+      {
+        currencyInfo = _USDInfo.Value;
+      }
+      return GetListPriceInt(unifiedProductId, ShopperContext.ShopperPriceType, currencyInfo);
+    }
+
+    public ICurrencyPrice GetListPrice(int unifiedProductId, int shopperPriceType)
+    {
+      return GetListPriceInt(unifiedProductId, shopperPriceType, SelectedTransactionalCurrencyInfo);
+    }
+
+    public ICurrencyPrice GetListPrice(int unifiedProductId)
+    {
+      return GetListPriceInt(unifiedProductId, ShopperContext.ShopperPriceType, SelectedTransactionalCurrencyInfo);
+    }
+
+    #endregion
+
+    #region CurrentPrice
+
+    private ICurrencyPrice GetProductCurrentPrice(int unifiedProductId, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
+    {
+      int currentPrice;
+      bool wasConverted;
+
+      bool success = DataCache.DataCache.GetPromoPriceEx(SiteContext.PrivateLabelId, unifiedProductId, shopperPriceType, transactionalCurrencyInfo.CurrencyType, out currentPrice, out wasConverted);
+      CurrencyPriceType currencyPriceType = CurrencyPriceType.Transactional;
+
+      if (wasConverted)
+      {
+        currencyPriceType = CurrencyPriceType.Converted;
+        LogMissingCatalogPrice("CurrencyProvider.GetPromoPriceEx", unifiedProductId, shopperPriceType, 1, SiteContext.PrivateLabelId, transactionalCurrencyInfo.CurrencyType);
+      }
+
+      return new CurrencyPrice(currentPrice, transactionalCurrencyInfo, currencyPriceType);
+    }
+
+    public ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType, ICurrencyInfo currencyInfo)
+    {
+      if (!IsCurrencyTransactionalForContext(currencyInfo))
+      {
+        currencyInfo = _USDInfo.Value;
+      }
+      ICurrencyPrice currentPrice = GetProductCurrentPrice(unifiedProductId, shopperPriceType, currencyInfo);
+      ICurrencyPrice promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
+      return promoPrice;
+    }
+
+    public ICurrencyPrice GetCurrentPrice(int unifiedProductId, ICurrencyInfo currencyInfo)
+    {
+      return GetCurrentPrice(unifiedProductId, ShopperContext.ShopperPriceType, currencyInfo);
+    }
+
+    public ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType)
+    {
+      ICurrencyPrice currentPrice = GetProductCurrentPrice(unifiedProductId, shopperPriceType, SelectedTransactionalCurrencyInfo);
+      ICurrencyPrice promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
+      return promoPrice;
+    }
+
     public ICurrencyPrice GetCurrentPrice(int unifiedProductId)
     {
       return GetCurrentPrice(unifiedProductId, ShopperContext.ShopperPriceType);
     }
 
-    /// <summary>
-    /// Gets the Current (PromoPrice) price of a product
-    /// </summary>
-    /// <param name="unifiedProductId">unified Product Id</param>
-    /// <param name="quantity">quantity of product</param>
-    /// <param name="shopperPriceType">shopper price type</param>
-    /// <returns></returns>
-    public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType)
-    {
-      CurrencyPriceType type;
-      int currentPrice = GetProductCurrentPriceByQuantity(unifiedProductId, quantity, shopperPriceType,  out type);
-      int promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
-      ICurrencyPrice result = new CurrencyPrice(promoPrice, SelectedTransactionalCurrencyInfo, type);
-      return result;
-    }
+    #endregion
 
-    private int GetProductCurrentPriceByQuantity(int unifiedProductId, int quantity, 
-      int shopperPriceType, out CurrencyPriceType currencyPriceType)
+    #region CurrentPriceByQuantity
+
+    private ICurrencyPrice GetProductCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
     {
       int currentPrice;
       bool wasConverted;
 
-      bool success = DataCache.DataCache.GetPromoPriceByQtyEx(SiteContext.PrivateLabelId, unifiedProductId, shopperPriceType, quantity, SelectedTransactionalCurrencyType, out currentPrice, out wasConverted);
-
-      currencyPriceType = CurrencyPriceType.Transactional;
+      bool success = DataCache.DataCache.GetPromoPriceByQtyEx(SiteContext.PrivateLabelId, unifiedProductId, shopperPriceType, quantity, transactionalCurrencyInfo.CurrencyType, out currentPrice, out wasConverted);
+      CurrencyPriceType currencyPriceType = CurrencyPriceType.Transactional;
 
       if (wasConverted)
       {
         currencyPriceType = CurrencyPriceType.Converted;
-        LogMissingCatalogPrice("CurrencyProvider.GetPromoPriceByQtyEx", unifiedProductId, shopperPriceType, quantity, SiteContext.PrivateLabelId, SelectedTransactionalCurrencyType);
+        LogMissingCatalogPrice("CurrencyProvider.GetPromoPriceByQtyEx", unifiedProductId, shopperPriceType, quantity, SiteContext.PrivateLabelId, transactionalCurrencyInfo.CurrencyType);
       }
 
-      return currentPrice;
+      return new CurrencyPrice(currentPrice, transactionalCurrencyInfo, currencyPriceType);
     }
 
-    /// <summary>
-    /// Gets the Current (PromoPrice) price of a product
-    /// </summary>
-    /// <param name="unifiedProductId">unified Product Id</param>
-    /// <param name="quantity">quantity of product</param>
-    /// <returns></returns>
+    public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType, ICurrencyInfo currencyInfo)
+    {
+      if (!IsCurrencyTransactionalForContext(currencyInfo))
+      {
+        currencyInfo = _USDInfo.Value;
+      }
+      ICurrencyPrice currentPrice = GetProductCurrentPriceByQuantity(unifiedProductId, quantity, shopperPriceType, currencyInfo);
+      ICurrencyPrice promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
+      return promoPrice;
+    }
+
+    public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, ICurrencyInfo currencyInfo)
+    {
+      return GetCurrentPriceByQuantity(unifiedProductId, quantity, ShopperContext.ShopperPriceType, currencyInfo);
+    }
+
+    public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType)
+    {
+      ICurrencyPrice currentPrice = GetProductCurrentPriceByQuantity(unifiedProductId, quantity, shopperPriceType, SelectedTransactionalCurrencyInfo);
+      ICurrencyPrice promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
+      return promoPrice;
+    }
+
     public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity)
     {
       return GetCurrentPriceByQuantity(unifiedProductId, quantity, ShopperContext.ShopperPriceType);
     }
+
+    #endregion
+
+    #region IsProductOnSale
 
     /// <summary>
     /// Returns true if product is on sale for the currently selected currency type
@@ -484,10 +493,12 @@ namespace Atlantis.Framework.Providers.Currency
 
       if ((!result) && (HasPromoData))
       {
-        result = IsPromoSale(unifiedProductId, ShopperContext.ShopperPriceType);
+        result = IsPromoSale(unifiedProductId, ShopperContext.ShopperPriceType, SelectedTransactionalCurrencyInfo);
       }
       return result;
     }
+
+    #endregion
 
     #endregion
 
@@ -510,7 +521,24 @@ namespace Atlantis.Framework.Providers.Currency
 
     public string PriceText(ICurrencyPrice price, bool maskPrices, bool dropDecimal, bool dropSymbol, string notOfferedMessage)
     {
-      return ProcessPrice(price, maskPrices, dropDecimal, dropSymbol, notOfferedMessage);
+      PriceFormatOptions formatOptions = PriceFormatOptions.None;
+      if (dropDecimal)
+      {
+        formatOptions |= PriceFormatOptions.DropDecimal;
+      }
+
+      if (dropSymbol)
+      {
+        formatOptions |= PriceFormatOptions.DropSymbol;
+      }
+
+      PriceTextOptions textOptions = PriceTextOptions.None;
+      if (maskPrices)
+      {
+        textOptions |= PriceTextOptions.MaskPrices;
+      }
+
+      return ProcessPriceInt(price, textOptions, formatOptions);
     }
 
     public string PriceText(ICurrencyPrice price, bool maskPrices, CurrencyNegativeFormat negativeFormat)
@@ -520,83 +548,117 @@ namespace Atlantis.Framework.Providers.Currency
 
     public string PriceText(ICurrencyPrice price, bool maskPrices, bool dropDecimal, bool dropSymbol, CurrencyNegativeFormat negativeFormat)
     {
-      return ProcessPrice(price, maskPrices, dropDecimal, dropSymbol, NOT_OFFERED_MSG_DEFAULT, negativeFormat);
+      PriceFormatOptions formatOptions = PriceFormatOptions.None;
+      if (dropDecimal)
+      {
+        formatOptions |= PriceFormatOptions.DropDecimal;
+      }
+
+      if (dropSymbol)
+      {
+        formatOptions |= PriceFormatOptions.DropSymbol;
+      }
+
+      if (negativeFormat == CurrencyNegativeFormat.Parentheses)
+      {
+        formatOptions |= PriceFormatOptions.NegativeParentheses;
+      }
+
+      PriceTextOptions textOptions = PriceTextOptions.None;
+      if (maskPrices)
+      {
+        textOptions |= PriceTextOptions.MaskPrices;
+      }
+
+      if (negativeFormat != CurrencyNegativeFormat.NegativeNotAllowed)
+      {
+        textOptions |= PriceTextOptions.AllowNegativePrice;
+      }
+
+      return ProcessPriceInt(price, textOptions, formatOptions);
     }
 
-    private string GetPriceTextCacheKey(ICurrencyInfo displayCurrencyInfo, ICurrencyPrice price, bool maskPrices, bool dropDecimal, bool dropSymbol, string notOfferedMessage, CurrencyNegativeFormat negativeFormat)
+    public string PriceText(ICurrencyPrice price, PriceTextOptions textOptions = PriceTextOptions.None, PriceFormatOptions formatOptions = PriceFormatOptions.None)
     {
-      return string.Concat(displayCurrencyInfo.CurrencyType, "|", price.CurrencyInfo.CurrencyType, price.Price.ToString(), price.Type.ToString(), maskPrices.ToString(), dropDecimal.ToString(), dropSymbol.ToString(), notOfferedMessage, negativeFormat.ToString());
+      return ProcessPriceInt(price, textOptions, formatOptions);
     }
 
-    private string ProcessPrice(ICurrencyPrice price, bool maskPrices, bool dropDecimal, bool dropSymbol, string notOfferedMessage)
-    {
-      return ProcessPrice(price, maskPrices, dropDecimal, dropSymbol, notOfferedMessage, CurrencyNegativeFormat.NegativeNotAllowed);
-    }
-
-    private string ProcessPrice(ICurrencyPrice price, bool maskPrices, bool dropDecimal, bool dropSymbol, string notOfferedMessage, CurrencyNegativeFormat negativeFormat)
+    private string ProcessPriceInt(ICurrencyPrice price, PriceTextOptions textOptions, PriceFormatOptions formatOptions)
     {
       string result;
-
-      string cacheKey = GetPriceTextCacheKey(SelectedDisplayCurrencyInfo, price, maskPrices, dropDecimal, dropSymbol, notOfferedMessage, negativeFormat);
-      if (_priceTextCache.ContainsKey(cacheKey))
+      if (textOptions.HasFlag(PriceTextOptions.MaskPrices))
       {
-        result = _priceTextCache[cacheKey];
+        result = FormatPriceInt(SelectedDisplayCurrencyInfo, "XXX", formatOptions);
+      }
+      else if ((price.Price < 0) && (!textOptions.HasFlag(PriceTextOptions.AllowNegativePrice)))
+      {
+        result = NOT_OFFERED_MSG_DEFAULT;
       }
       else
       {
-        if (maskPrices)
-        {
-          result = FormatPrice(SelectedDisplayCurrencyInfo, "XXX", dropDecimal, dropSymbol, negativeFormat);
-        }
-        else if ((price.Price < 0) && (negativeFormat == CurrencyNegativeFormat.NegativeNotAllowed))
-        {
-          result = notOfferedMessage;
-        }
-        else
-        {
-          ICurrencyPrice convertedPrice = ConvertPrice(price, SelectedDisplayCurrencyInfo);
-          result = FormatPrice(convertedPrice, dropDecimal, dropSymbol, negativeFormat);
-        }
-
-        _priceTextCache[cacheKey] = result;
+        ICurrencyPrice convertedPrice = ConvertPriceInt(price, SelectedDisplayCurrencyInfo, CurrencyConversionRoundingType.Round);
+        result = FormatPriceInt(convertedPrice, formatOptions);
       }
-
       return result;
     }
 
-    /// <summary>
-    /// Returns the formatted price based on its currency type. NOTE this method is for use when you need
-    /// to force a display of a price while ignoring the shoppers selected currency display setting.
-    /// </summary>
-    /// <param name="currencyPrice">Price with currency that you want to display</param>
-    /// <param name="dropDecimal">true to drop the decimal and any digits after it.</param>
-    /// <param name="dropSymbol">true to not have the symbol</param>
-    /// <returns></returns>
     public string PriceFormat(ICurrencyPrice currencyPrice, bool dropDecimal, bool dropSymbol)
     {
       return PriceFormat(currencyPrice, dropDecimal, dropSymbol, CurrencyNegativeFormat.Minus);
     }
 
-    /// <summary>
-    /// Returns the formatted price based on its currency type. NOTE this method is for use when you need
-    /// to force a display of a price while ignoring the shoppers selected currency display setting.
-    /// </summary>
-    /// <param name="currencyPrice">Price with currency that you want to display</param>
-    /// <param name="dropDecimal">true to drop the decimal and any digits after it.</param>
-    /// <param name="dropSymbol">true to not have the symbol</param>
-    /// <param name="negativeFormat">If set to parentheses negatives will be in (parentheses), otherwise they will start with -minus</param>
-    /// <returns></returns>
     public string PriceFormat(ICurrencyPrice currencyPrice, bool dropDecimal, bool dropSymbol, CurrencyNegativeFormat negativeFormat)
     {
-      return FormatPrice(currencyPrice, dropDecimal, dropSymbol, negativeFormat);
+      PriceFormatOptions options = PriceFormatOptions.None;
+      if (dropDecimal)
+      {
+        options |= PriceFormatOptions.DropDecimal;
+      }
+
+      if (dropSymbol)
+      {
+        options |= PriceFormatOptions.DropSymbol;
+      }
+
+      if (negativeFormat == CurrencyNegativeFormat.Parentheses)
+      {
+        options |= PriceFormatOptions.NegativeParentheses;
+      }
+
+      return FormatPriceInt(currencyPrice, options);
     }
 
-    private static string FormatPrice(ICurrencyPrice currencyPrice, bool dropDecimal, bool dropSymbol, CurrencyNegativeFormat negativeFormat)
+    public string PriceFormat(ICurrencyPrice price, PriceFormatOptions options = PriceFormatOptions.None)
     {
-      return FormatPrice(currencyPrice.CurrencyInfo, currencyPrice.Price.ToString(), dropDecimal, dropSymbol, negativeFormat);
+      return FormatPriceInt(price, options);
     }
 
-    private static string FormatPrice(ICurrencyInfo currencyInfoItem, string processedPrice, bool dropDecimal, bool dropSymbol, CurrencyNegativeFormat negativeFormat)
+    private string GetPriceFormatCacheKey(ICurrencyInfo currencyInfo, string processedPrice, PriceFormatOptions options)
+    {
+      return string.Concat(currencyInfo.CurrencyType, "|", ((int)options).ToString(), "|", processedPrice);
+    }
+
+    private string FormatPriceInt(ICurrencyPrice currencyPrice, PriceFormatOptions options)
+    {
+      return FormatPriceInt(currencyPrice.CurrencyInfo, currencyPrice.Price.ToString(), options);
+    }
+
+    private string FormatPriceInt(ICurrencyInfo currencyInfoItem, string processedPrice, PriceFormatOptions options)
+    {
+      string formatKey = GetPriceFormatCacheKey(currencyInfoItem, processedPrice, options);
+      if (_priceFormatCache.ContainsKey(formatKey))
+      {
+        return _priceFormatCache[formatKey];
+      }
+      else
+      {
+        string result = FormatPriceBuild(currencyInfoItem, processedPrice, options);
+        _priceFormatCache[formatKey] = result;
+        return result;
+      }
+    }
+
+    private string FormatPriceBuild(ICurrencyInfo currencyInfoItem, string processedPrice, PriceFormatOptions options)
     {
       string workingPrice = processedPrice;
 
@@ -616,7 +678,7 @@ namespace Atlantis.Framework.Providers.Currency
 
       if (currencyInfoItem.DecimalPrecision > 0)
       {
-        if (!dropDecimal)
+        if (!options.HasFlag(PriceFormatOptions.DropDecimal))
         {
           decimalChars = currencyInfoItem.DecimalSeparator + workingPrice.Substring(workingPrice.Length - currencyInfoItem.DecimalPrecision);
         }
@@ -640,9 +702,19 @@ namespace Atlantis.Framework.Providers.Currency
         }
       }
 
-
       string currencySymbol;
-      if (CurrencyProviderOptions.UseHtmlCurrencySymbols)
+
+      /// Be careful if trying to combine these.  The option flag has to take precendence over the
+      /// global default property
+      if (options.HasFlag(PriceFormatOptions.AsciiSymbol))
+      {
+        currencySymbol = currencyInfoItem.Symbol;
+      }
+      else if (options.HasFlag(PriceFormatOptions.HtmlSymbol))
+      {
+        currencySymbol = currencyInfoItem.SymbolHtml;
+      }
+      else if (CurrencyProviderOptions.UseHtmlCurrencySymbols)
       {
         currencySymbol = currencyInfoItem.SymbolHtml;
       }
@@ -652,7 +724,7 @@ namespace Atlantis.Framework.Providers.Currency
       }
 
       StringBuilder resultBuilder = new StringBuilder();
-      if (!dropSymbol && currencyInfoItem.SymbolPosition == CurrencySymbolPositionType.Prefix)
+      if (!options.HasFlag(PriceFormatOptions.DropSymbol) && currencyInfoItem.SymbolPosition == CurrencySymbolPositionType.Prefix)
       {
         resultBuilder.Append(currencySymbol);
       }
@@ -660,14 +732,14 @@ namespace Atlantis.Framework.Providers.Currency
       resultBuilder.Append(thousandsChars);
       resultBuilder.Append(nonDecimalChars);
       resultBuilder.Append(decimalChars);
-      if (!dropSymbol && currencyInfoItem.SymbolPosition == CurrencySymbolPositionType.Suffix)
+      if (!options.HasFlag(PriceFormatOptions.DropSymbol) && currencyInfoItem.SymbolPosition == CurrencySymbolPositionType.Suffix)
       {
         resultBuilder.Append(currencySymbol);
       }
 
       if (isNegative)
       {
-        if (negativeFormat == CurrencyNegativeFormat.Parentheses)
+        if (options.HasFlag(PriceFormatOptions.NegativeParentheses))
         {
           resultBuilder.Insert(0, "(");
           resultBuilder.Append(")");
@@ -683,13 +755,72 @@ namespace Atlantis.Framework.Providers.Currency
 
     #endregion
 
-    #region Static Methods
+    #region Price Conversion
 
+    private ICurrencyPrice ConvertPriceInt(ICurrencyPrice priceToConvert, ICurrencyInfo targetCurrencyInfo, CurrencyConversionRoundingType conversionRoundingType)
+    {
+      ICurrencyPrice result = priceToConvert;
+
+      if ((priceToConvert != null) && (targetCurrencyInfo != null))
+      {
+        if ((priceToConvert.Type == CurrencyPriceType.Transactional) && (priceToConvert.CurrencyInfo.Equals(_USDInfo.Value)))
+        {
+          if ((!priceToConvert.CurrencyInfo.Equals(targetCurrencyInfo)) && (targetCurrencyInfo.ExchangeRatePricing > 0))
+          {
+            double convertedDouble;
+            if (conversionRoundingType == CurrencyConversionRoundingType.Ceiling)
+            {
+              convertedDouble = Math.Ceiling(priceToConvert.Price / targetCurrencyInfo.ExchangeRatePricing);
+            }
+            else if (conversionRoundingType == CurrencyConversionRoundingType.Floor)
+            {
+              convertedDouble = Math.Floor(priceToConvert.Price / targetCurrencyInfo.ExchangeRatePricing);
+            }
+            else
+            {
+              convertedDouble = Math.Round(priceToConvert.Price / targetCurrencyInfo.ExchangeRatePricing);
+            }
+
+            int convertedPrice = ConvertToInt32NoOverflow(convertedDouble);
+            result = new CurrencyPrice(convertedPrice, targetCurrencyInfo, CurrencyPriceType.Converted);
+          }
+        }
+        else if ((targetCurrencyInfo.Equals(_USDInfo.Value)) && (!priceToConvert.CurrencyInfo.Equals(_USDInfo.Value)))
+        {
+          double convertedDouble;
+          if (conversionRoundingType == CurrencyConversionRoundingType.Ceiling)
+          {
+            convertedDouble = Math.Ceiling(priceToConvert.Price * targetCurrencyInfo.ExchangeRatePricing);
+          }
+          else if (conversionRoundingType == CurrencyConversionRoundingType.Floor)
+          {
+            convertedDouble = Math.Floor(priceToConvert.Price * targetCurrencyInfo.ExchangeRatePricing);
+          }
+          else
+          {
+            convertedDouble = Math.Round(priceToConvert.Price * priceToConvert.CurrencyInfo.ExchangeRatePricing);
+          }
+
+          int convertedPrice = ConvertToInt32NoOverflow(convertedDouble);
+          result = new CurrencyPrice(convertedPrice, targetCurrencyInfo, CurrencyPriceType.Converted);
+        }
+      }
+
+      return result;
+    }
+
+    public ICurrencyPrice ConvertPrice(ICurrencyPrice priceToConvert, ICurrencyInfo targetCurrencyInfo, CurrencyConversionRoundingType conversionRoundingType = CurrencyConversionRoundingType.Round)
+    {
+      return ConvertPriceInt(priceToConvert, targetCurrencyInfo, conversionRoundingType);
+    }
+
+    [Obsolete("Please use the ConvertPrice method from the ICurrencyProvider instead of this static method.")]
     public static ICurrencyPrice ConvertPrice(ICurrencyPrice priceToConvert, ICurrencyInfo targetCurrencyInfo)
     {
       return ConvertPrice(priceToConvert, targetCurrencyInfo, ConversionRoundingType.Round);
     }
 
+    [Obsolete("Please use the ConvertPrice method from the ICurrencyProvider instead of this static method.")]
     public static ICurrencyPrice ConvertPrice(ICurrencyPrice priceToConvert, ICurrencyInfo targetCurrencyInfo, ConversionRoundingType conversionRoundingType)
     {
       ICurrencyPrice result = priceToConvert;
@@ -713,17 +844,28 @@ namespace Atlantis.Framework.Providers.Currency
             {
               convertedDouble = Math.Round(priceToConvert.Price / targetCurrencyInfo.ExchangeRatePricing);
             }
-            int convertedPrice = Int32.MaxValue;
-            if (convertedDouble < Int32.MaxValue)
-            {
-              convertedPrice = Convert.ToInt32(convertedDouble);
-            }
+
+            int convertedPrice = ConvertToInt32NoOverflow(convertedDouble);
             result = new CurrencyPrice(convertedPrice, targetCurrencyInfo, CurrencyPriceType.Converted);
           }
         }
       }
 
       return result;
+    }
+
+    private static int ConvertToInt32NoOverflow(double value)
+    {
+      if (value >= int.MaxValue)
+      {
+        return int.MaxValue;
+      }
+      else if (value <= int.MinValue)
+      {
+        return int.MinValue;
+      }
+
+      return (int)value;
     }
 
     #endregion
@@ -766,7 +908,7 @@ namespace Atlantis.Framework.Providers.Currency
 
     private Dictionary<int, string> _ProductPromoCodes = new Dictionary<int, string>();
 
-    private int GetPromoPrice(int unifiedProductId, int currentPrice, int shopperPriceType)
+    private ICurrencyPrice GetPromoPrice(int unifiedProductId, ICurrencyPrice currentPrice, int shopperPriceType)
     {
       int? promoPrice = GetProductPromoPrice(unifiedProductId, currentPrice, shopperPriceType);
 
@@ -776,20 +918,20 @@ namespace Atlantis.Framework.Providers.Currency
       }
       else
       {
-        return promoPrice.Value;
+        return new CurrencyPrice(promoPrice.Value, currentPrice.CurrencyInfo, currentPrice.Type);
       }
     }
 
-    private int? GetProductPromoPrice(int unifiedProductId, int currentPrice, int shopperPriceType)
+    private int? GetProductPromoPrice(int unifiedProductId, ICurrencyPrice currentPrice, int shopperPriceType)
     {
       string key = string.Concat(unifiedProductId.ToString(),
         "|", shopperPriceType.ToString(),
-        "|", SelectedTransactionalCurrencyType);
+        "|", currentPrice.CurrencyInfo.CurrencyType);
 
       return GetPromoPriceFromDictionary(unifiedProductId, currentPrice, key);
     }
 
-    private int? GetPromoPriceFromDictionary(int unifiedProductId, int currentPrice, string key)
+    private int? GetPromoPriceFromDictionary(int unifiedProductId, ICurrencyPrice currentPrice, string key)
     {
       int? promoPrice;
 
@@ -797,7 +939,7 @@ namespace Atlantis.Framework.Providers.Currency
       {
         promoPrice = CalculatePromoPrice(unifiedProductId, currentPrice);
 
-        if (promoPrice.HasValue && (promoPrice < currentPrice))
+        if (promoPrice.HasValue && (promoPrice < currentPrice.Price))
         {
           this._productPromoPriceByShopperAndCurrencyTypes[key] = promoPrice;
         }
@@ -810,27 +952,25 @@ namespace Atlantis.Framework.Providers.Currency
       return promoPrice;
     }
 
-    private Dictionary<string, int?> _productPromoPriceByShopperAndCurrencyTypes
-      = new Dictionary<string, int?>(StringComparer.InvariantCultureIgnoreCase);
+    private Dictionary<string, int?> _productPromoPriceByShopperAndCurrencyTypes = new Dictionary<string, int?>(StringComparer.InvariantCultureIgnoreCase);
 
-    private bool IsPromoSale(int unifiedProductId, int shopperPriceType)
+    private bool IsPromoSale(int unifiedProductId, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
     {
       int? promoPrice;
       string key = string.Concat(unifiedProductId.ToString(), 
         "|", shopperPriceType.ToString(), 
-        "|", SelectedTransactionalCurrencyType);
+        "|", transactionalCurrencyInfo.CurrencyType);
 
       if (!this._productPromoPriceByShopperAndCurrencyTypes.TryGetValue(key, out promoPrice))
       {
-        CurrencyPriceType type;
-        int currentPrice = GetProductCurrentPrice(unifiedProductId, ShopperContext.ShopperPriceType, out type);
+        ICurrencyPrice currentPrice = GetProductCurrentPrice(unifiedProductId, shopperPriceType, transactionalCurrencyInfo);
         promoPrice = GetPromoPriceFromDictionary(unifiedProductId, currentPrice, key);
       }
 
       return promoPrice.HasValue;
     }
 
-    private int? CalculatePromoPrice(int unifiedProductId, int currentPrice)
+    private int? CalculatePromoPrice(int unifiedProductId, ICurrencyPrice currentPrice)
     {
       string awardType;
       int? price = null;
@@ -841,19 +981,18 @@ namespace Atlantis.Framework.Providers.Currency
 
         if (pd != null)
         {
-          int awardAmound = pd.GetAwardAmount(unifiedProductId,
-            SelectedTransactionalCurrencyType, out awardType);
+          int awardAmound = pd.GetAwardAmount(unifiedProductId,currentPrice.CurrencyInfo.CurrencyType, out awardType);
 
           if (awardType.Equals("AmountOff", StringComparison.InvariantCultureIgnoreCase))
           {
-            price = currentPrice - awardAmound;
+            price = currentPrice.Price - awardAmound;
           }
           else if (awardType.Equals("PercentOff", StringComparison.InvariantCultureIgnoreCase))
           {
-            price = Convert.ToInt32(currentPrice * (100 - awardAmound) / 100);
+            price = Convert.ToInt32(currentPrice.Price * (100 - awardAmound) / 100);
           }
           else if (awardType.Equals("SetAmount", StringComparison.InvariantCultureIgnoreCase)
-            && (currentPrice > awardAmound))
+            && (currentPrice.Price > awardAmound))
           {
             price = awardAmound;
           }
@@ -864,5 +1003,59 @@ namespace Atlantis.Framework.Providers.Currency
     }
 
     #endregion Promo Pricing
+
+    #region CurrencyData
+
+    public ICurrencyInfo GetCurrencyInfo(string currencyType)
+    {
+      return CurrencyData.GetCurrencyInfo(currencyType);
+    }
+
+    public IEnumerable<ICurrencyInfo> CurrencyInfoList
+    {
+      get { return CurrencyData.CurrencyInfoList; }
+    }
+
+    public ICurrencyInfo GetValidCurrencyInfo(string currencyType)
+    {
+      ICurrencyInfo result = CurrencyData.GetCurrencyInfo(currencyType);
+      if (result == null)
+      {
+        result = _USDInfo.Value;
+        if (result == null)
+        {
+          string message = "Critical currency error. Could not get valid currency info for USD or " + HttpUtility.HtmlEncode(currencyType) + ".";
+          throw new Exception(message);
+        }
+      }
+      return result;
+    }
+
+    #endregion
+
+    #region Helper Functions
+
+    public ICurrencyPrice NewCurrencyPrice(int price, ICurrencyInfo currencyInfo, CurrencyPriceType currencyPriceType)
+    {
+      return new CurrencyPrice(price, currencyInfo, currencyPriceType);
+    }
+
+    public ICurrencyPrice NewCurrencyPriceFromUSD(int usdPrice, ICurrencyInfo currencyInfo = null, CurrencyConversionRoundingType roundingType = CurrencyConversionRoundingType.Round)
+    {
+      if (currencyInfo == null)
+      {
+        currencyInfo = SelectedTransactionalCurrencyInfo;
+      }
+      else if (!IsCurrencyTransactionalForContext(currencyInfo))
+      {
+        currencyInfo = _USDInfo.Value;
+      }
+
+      ICurrencyPrice usdCurrencyPrice = new CurrencyPrice(usdPrice, _USDInfo.Value, CurrencyPriceType.Transactional);
+      return ConvertPriceInt(usdCurrencyPrice, currencyInfo, roundingType);
+    }
+
+    #endregion
+
   }
 }

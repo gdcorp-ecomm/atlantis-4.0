@@ -4,17 +4,79 @@ using System.Web;
 
 namespace Atlantis.Framework.Testing.MockProviders
 {
-  public abstract class MockSiteContextBase : ProviderBase, ISiteContext
+  public class MockSiteContext : ProviderBase, ISiteContext
   {
-    public MockSiteContextBase(IProviderContainer container)
+    public MockSiteContext(IProviderContainer container)
       : base(container)
     {
     }
 
-    public abstract int ContextId { get; }
-    public abstract string StyleId {get;}
-    public abstract int PrivateLabelId {get;}
-    public abstract string ProgId {get;}
+    public int ContextId 
+    {
+      get
+      {
+        int result = 6;
+        switch (PrivateLabelId)
+        {
+          case 1:
+            result = 1;
+            break;
+          case 2:
+            result = 5;
+            break;
+          case 1397:
+            result = 2;
+            break;
+        }
+        return result;
+      }
+    }
+
+
+    public string StyleId 
+    {
+      get
+      {
+        string result = "0";
+        switch (PrivateLabelId)
+        {
+          case 1:
+            result = "1";
+            break;
+          case 2:
+            result = "2";
+            break;
+          case 1397:
+            result = "1387";
+            break;
+        }
+        return result;
+      }
+    }
+
+    public int PrivateLabelId
+    {
+      get
+      {
+        int result = 1;
+        if (HttpContext.Current != null)
+        {
+          if (HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] != null)
+          {
+            result = (int)HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId];
+          }
+        }
+        return result;
+      }
+    }
+
+    public string ProgId
+    {
+      get
+      {
+        return DataCache.DataCache.GetProgID(PrivateLabelId);
+      }
+    }
 
     public System.Web.HttpCookie NewCrossDomainCookie(string cookieName, DateTime expiration)
     {

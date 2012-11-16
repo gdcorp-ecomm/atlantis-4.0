@@ -45,12 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Currency\CurrencyConversionRoundingType.cs" />
     <Compile Include="Currency\CurrencyNegativeFormat.cs" />
     <Compile Include="Currency\CurrencyPriceType.cs" />
     <Compile Include="Currency\CurrencySymbolPositionType.cs" />
     <Compile Include="Currency\ICurrencyInfo.cs" />
     <Compile Include="Currency\ICurrencyPrice.cs" />
     <Compile Include="Currency\ICurrencyProvider.cs" />
+    <Compile Include="Currency\PriceFormatOptions.cs" />
+    <Compile Include="Currency\PriceTextOptions.cs" />
     <Compile Include="Links\ILinkProvider.cs" />
     <Compile Include="Links\QueryParamMode.cs" />
     <Compile Include="Preferences\IShopperPreferencesProvider.cs" />

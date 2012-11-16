@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Atlantis.Framework.Providers.Interface.Currency;
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using Atlantis.Framework.Providers.Interface.Currency;
 
 namespace Atlantis.Framework.Providers.Currency
 {

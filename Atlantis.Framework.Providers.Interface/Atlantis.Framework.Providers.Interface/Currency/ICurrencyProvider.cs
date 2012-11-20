@@ -7,124 +7,45 @@ namespace Atlantis.Framework.Providers.Interface.Currency
   {
     /// <summary>
     /// Looks up the current price of a product.
-    /// Uses the shoppers pricetype and selected transactional currency
-    /// </summary>
-    /// <param name="unifiedProductId">unified product id</param>
-    /// <returns>The current price of a product.</returns>
-    ICurrencyPrice GetCurrentPrice(int unifiedProductId);
-
-    /// <summary>
-    /// Looks up the current price of a product.
-    /// Uses the given pricetype and selected transactional currency
-    /// </summary>
-    /// <param name="unifiedProductId">unified product id</param>
-    /// <param name="shopperPriceType">shopper price type to use</param>
-    /// <returns>The current price of a product.</returns>
-    ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType);
-
-    /// <summary>
-    /// Looks up the current price of a product.
-    /// Uses the given pricetype and given currencytype.
+    /// If pricetype is not given, it will use the shoppers pricetype
+    /// If currencyInfo is not given it will use the shoppers selected transaction currency
     /// If the given currencytype is not transactional, the price will be converted to the given currencytype
+    /// If isc is not given, it will use the ISiteContext.ISC
     /// </summary>
     /// <param name="unifiedProductId">unified product id</param>
-    /// <param name="shopperPriceType">shopper price type to use</param>
-    /// <param name="currencyInfo">currencyType to use</param>
+    /// <param name="shopperPriceType">shopper price type to use.  If not given the shoppers pricetype will be used</param>
+    /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
+    /// <param name="isc">isc to use. If not given the site context ISC will be used.</param>
     /// <returns>The current price of a product.</returns>
-    ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType, ICurrencyInfo currencyInfo);
+    ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null);
 
     /// <summary>
     /// Looks up the current price of a product.
-    /// Uses the shoppers pricetype and given currencytype.
+    /// If pricetype is not given, it will use the shoppers pricetype
+    /// If currencyInfo is not given it will use the shoppers selected transaction currency
     /// If the given currencytype is not transactional, the price will be converted to the given currencytype
-    /// </summary>
-    /// <param name="unifiedProductId">unified product id</param>
-    /// <param name="shopperPriceType">shopper price type to use</param>
-    /// <param name="currencyInfo">currencyType to use</param>
-    /// <returns>The current price of a product.</returns>
-    ICurrencyPrice GetCurrentPrice(int unifiedProductId, ICurrencyInfo currencyInfo);
-
-    /// <summary>
-    /// Looks up the current price of a product.
-    /// Uses the shoppers pricetype and selected transactional currency
+    /// If isc is not given, it will use the ISiteContext.ISC
     /// </summary>
     /// <param name="unifiedProductId">unified product id</param>
     /// <param name="quantity">quantity of product</param>
+    /// <param name="shopperPriceType">shopper price type to use.  If not given the shoppers pricetype will be used</param>
+    /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
+    /// <param name="isc">isc to use. If not given the site context ISC will be used.</param>
     /// <returns>The current price of a product.</returns>
-    ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity);
-
-    /// <summary>
-    /// Looks up the current price of a product.
-    /// Uses the given pricetype and selected transactional currency
-    /// </summary>
-    /// <param name="unifiedProductId">unified product id</param>
-    /// <param name="quantity">quantity of product</param>
-    /// <param name="shopperPriceType">shopper price type to use</param>
-    /// <returns>The current price of a product.</returns>
-    ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType);
-
-    /// <summary>
-    /// Looks up the current price of a product.
-    /// Uses the given pricetype and given currencytype.
-    /// If the given currencytype is not transactional, the price will be converted to the given currencytype
-    /// </summary>
-    /// <param name="unifiedProductId">unified product id</param>
-    /// <param name="quantity">quantity of product</param>
-    /// <param name="shopperPriceType">shopper price type to use</param>
-    /// <param name="currencyInfo">currencyType to use</param>
-    /// <returns>The current price of a product.</returns>
-    ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType, ICurrencyInfo currencyInfo);
-
-    /// <summary>
-    /// Looks up the current price of a product.
-    /// Uses the shoppers pricetype and given currencytype.
-    /// If the given currencytype is not transactional, the price will be converted to the given currencytype
-    /// </summary>
-    /// <param name="unifiedProductId">unified product id</param>
-    /// <param name="quantity">quantity of product</param>
-    /// <param name="shopperPriceType">shopper price type to use</param>
-    /// <param name="currencyInfo">currencyType to use</param>
-    /// <returns>The current price of a product.</returns>
-    ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, ICurrencyInfo currencyInfo);
+    ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null);
 
     /// <summary>
     /// Looks up the list price of a product.
-    /// Uses the shoppers pricetype and selected transactional currency
-    /// </summary>
-    /// <param name="unifiedProductId">unified product id</param>
-    /// <returns>The list price of a product.</returns>
-    ICurrencyPrice GetListPrice(int unifiedProductId);
-
-    /// <summary>
-    /// Looks up the list price of a product.
-    /// Uses the given pricetype and selected transactional currency
-    /// </summary>
-    /// <param name="unifiedProductId">unified product id</param>
-    /// <param name="shopperPriceType">shopper price type to use</param>
-    /// <returns>The list price of a product.</returns>
-    ICurrencyPrice GetListPrice(int unifiedProductId, int shopperPriceType);
-
-    /// <summary>
-    /// Looks up the list price of a product.
-    /// Uses the given pricetype and given currencytype.
+    /// If pricetype is not given, it will use the shoppers pricetype
+    /// If currencyInfo is not given it will use the shoppers selected transaction currency
     /// If the given currencytype is not transactional, the price will be converted to the given currencytype
+    /// If isc is not given, it will use the ISiteContext.ISC
     /// </summary>
     /// <param name="unifiedProductId">unified product id</param>
-    /// <param name="shopperPriceType">shopper price type to use</param>
-    /// <param name="currencyInfo">currencyType to use</param>
+    /// <param name="shopperPriceType">shopper price type to use.  If not given the shoppers pricetype will be used</param>
+    /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
     /// <returns>The list price of a product.</returns>
-    ICurrencyPrice GetListPrice(int unifiedProductId, int shopperPriceType, ICurrencyInfo currencyInfo);
-
-    /// <summary>
-    /// Looks up the list price of a product.
-    /// Uses the shoppers pricetype and given currencytype.
-    /// If the given currencytype is not transactional, the price will be converted to the given currencytype
-    /// </summary>
-    /// <param name="unifiedProductId">unified product id</param>
-    /// <param name="shopperPriceType">shopper price type to use</param>
-    /// <param name="currencyInfo">currencyType to use</param>
-    /// <returns>The list price of a product.</returns>
-    ICurrencyPrice GetListPrice(int unifiedProductId, ICurrencyInfo currencyInfo);
+    ICurrencyPrice GetListPrice(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null);
 
     /// <summary>
     /// Converts a price to the shoppers display currency, then formats it for display based on currency info.
@@ -234,7 +155,7 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     /// </summary>
     /// <param name="unifiedProductId">unified product id</param>
     /// <returns>true of the product is marked as 'onsale'</returns>
-    bool IsProductOnSale(int unifiedProductId);
+    bool IsProductOnSale(int unifiedProductId, ICurrencyInfo transactionCurrency = null);
 
     /// <summary>
     /// Returns the shoppers selected display currency info
@@ -314,6 +235,6 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     /// <param name="conversionRoundingType">rounding type to use during conversion</param>
     /// <returns></returns>
     ICurrencyPrice ConvertPrice(ICurrencyPrice priceToConvert, ICurrencyInfo targetCurrencyInfo, CurrencyConversionRoundingType conversionRoundingType = CurrencyConversionRoundingType.Round);
- 
+
   }
 }

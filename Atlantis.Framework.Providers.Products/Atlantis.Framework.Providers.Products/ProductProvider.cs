@@ -96,6 +96,16 @@ namespace Atlantis.Framework.Providers.Products
       return result;
     }
 
+    public List<IProduct> NewProductList(IEnumerable<int> productIds)
+    {
+      List<IProduct> result = new List<IProduct>();
+      foreach (int productId in productIds)
+      {
+        result.Add(GetProduct(productId));
+      }
+      return result;
+    }
+
     #region ProductView Creation
 
     public virtual List<IProductView> NewProductViewList(IEnumerable<int> productIds)

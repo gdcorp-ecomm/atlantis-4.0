@@ -334,7 +334,7 @@ namespace Atlantis.Framework.Providers.Currency
 
     #region ListPrice
 
-    private ICurrencyPrice GetListPriceInt(int unifiedProductId, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
+    private ICurrencyPrice LookupListPriceInt(int unifiedProductId, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
     {
       int listPrice;
       bool wasConverted;
@@ -350,40 +350,31 @@ namespace Atlantis.Framework.Providers.Currency
 
       return new CurrencyPrice(listPrice, transactionalCurrencyInfo, currencyPriceType);
     }
-    
-    public ICurrencyPrice GetListPrice(int unifiedProductId, int shopperPriceType, ICurrencyInfo currencyInfo)
+
+    public ICurrencyPrice GetListPrice(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null)
     {
-      if (!IsCurrencyTransactionalForContext(currencyInfo))
+      if (shopperPriceType == -1)
       {
-        currencyInfo = _USDInfo.Value;
+        shopperPriceType = _shopperContext.Value.ShopperPriceType;
       }
-      return GetListPriceInt(unifiedProductId, shopperPriceType, currencyInfo);
-    }
 
-    public ICurrencyPrice GetListPrice(int unifiedProductId, ICurrencyInfo currencyInfo)
-    {
-      if (!IsCurrencyTransactionalForContext(currencyInfo))
+      if (transactionCurrency == null)
       {
-        currencyInfo = _USDInfo.Value;
+        transactionCurrency = SelectedTransactionalCurrencyInfo;
       }
-      return GetListPriceInt(unifiedProductId, ShopperContext.ShopperPriceType, currencyInfo);
-    }
+      else if (!IsCurrencyTransactionalForContext(transactionCurrency))
+      {
+        transactionCurrency = _USDInfo.Value;
+      }
 
-    public ICurrencyPrice GetListPrice(int unifiedProductId, int shopperPriceType)
-    {
-      return GetListPriceInt(unifiedProductId, shopperPriceType, SelectedTransactionalCurrencyInfo);
+      return LookupListPriceInt(unifiedProductId, shopperPriceType, transactionCurrency);
     }
-
-    public ICurrencyPrice GetListPrice(int unifiedProductId)
-    {
-      return GetListPriceInt(unifiedProductId, ShopperContext.ShopperPriceType, SelectedTransactionalCurrencyInfo);
-    }
-
+  
     #endregion
 
     #region CurrentPrice
 
-    private ICurrencyPrice GetProductCurrentPrice(int unifiedProductId, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
+    private ICurrencyPrice LookupCurrentPriceInt(int unifiedProductId, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
     {
       int currentPrice;
       bool wasConverted;
@@ -400,39 +391,37 @@ namespace Atlantis.Framework.Providers.Currency
       return new CurrencyPrice(currentPrice, transactionalCurrencyInfo, currencyPriceType);
     }
 
-    public ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType, ICurrencyInfo currencyInfo)
+    public ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null)
     {
-      if (!IsCurrencyTransactionalForContext(currencyInfo))
+      if (shopperPriceType == -1)
       {
-        currencyInfo = _USDInfo.Value;
+        shopperPriceType = _shopperContext.Value.ShopperPriceType;
       }
-      ICurrencyPrice currentPrice = GetProductCurrentPrice(unifiedProductId, shopperPriceType, currencyInfo);
+
+      if (transactionCurrency == null)
+      {
+        transactionCurrency = SelectedTransactionalCurrencyInfo;
+      }
+      else if (!IsCurrencyTransactionalForContext(transactionCurrency))
+      {
+        transactionCurrency = _USDInfo.Value;
+      }
+
+      if (isc == null)
+      {
+        isc = _siteContext.Value.ISC;
+      }
+
+      ICurrencyPrice currentPrice = LookupCurrentPriceInt(unifiedProductId, shopperPriceType, transactionCurrency);
       ICurrencyPrice promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
       return promoPrice;
-    }
-
-    public ICurrencyPrice GetCurrentPrice(int unifiedProductId, ICurrencyInfo currencyInfo)
-    {
-      return GetCurrentPrice(unifiedProductId, ShopperContext.ShopperPriceType, currencyInfo);
-    }
-
-    public ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType)
-    {
-      ICurrencyPrice currentPrice = GetProductCurrentPrice(unifiedProductId, shopperPriceType, SelectedTransactionalCurrencyInfo);
-      ICurrencyPrice promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
-      return promoPrice;
-    }
-
-    public ICurrencyPrice GetCurrentPrice(int unifiedProductId)
-    {
-      return GetCurrentPrice(unifiedProductId, ShopperContext.ShopperPriceType);
     }
 
     #endregion
 
     #region CurrentPriceByQuantity
 
-    private ICurrencyPrice GetProductCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
+    private ICurrencyPrice LookupCurrentPriceByQuantityInt(int unifiedProductId, int quantity, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
     {
       int currentPrice;
       bool wasConverted;
@@ -449,32 +438,32 @@ namespace Atlantis.Framework.Providers.Currency
       return new CurrencyPrice(currentPrice, transactionalCurrencyInfo, currencyPriceType);
     }
 
-    public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType, ICurrencyInfo currencyInfo)
+    public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null)
     {
-      if (!IsCurrencyTransactionalForContext(currencyInfo))
+      if (shopperPriceType == -1)
       {
-        currencyInfo = _USDInfo.Value;
+        shopperPriceType = _shopperContext.Value.ShopperPriceType;
       }
-      ICurrencyPrice currentPrice = GetProductCurrentPriceByQuantity(unifiedProductId, quantity, shopperPriceType, currencyInfo);
+
+      if (transactionCurrency == null)
+      {
+        transactionCurrency = SelectedTransactionalCurrencyInfo;
+      }
+      else if (!IsCurrencyTransactionalForContext(transactionCurrency))
+      {
+        transactionCurrency = _USDInfo.Value;
+      }
+
+      if (isc == null)
+      {
+        isc = _siteContext.Value.ISC;
+      }
+
+      if (quantity < 1) { quantity = 1; }
+
+      ICurrencyPrice currentPrice = LookupCurrentPriceByQuantityInt(unifiedProductId, quantity, shopperPriceType, transactionCurrency);
       ICurrencyPrice promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
       return promoPrice;
-    }
-
-    public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, ICurrencyInfo currencyInfo)
-    {
-      return GetCurrentPriceByQuantity(unifiedProductId, quantity, ShopperContext.ShopperPriceType, currencyInfo);
-    }
-
-    public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType)
-    {
-      ICurrencyPrice currentPrice = GetProductCurrentPriceByQuantity(unifiedProductId, quantity, shopperPriceType, SelectedTransactionalCurrencyInfo);
-      ICurrencyPrice promoPrice = HasPromoData ? GetPromoPrice(unifiedProductId, currentPrice, shopperPriceType) : currentPrice;
-      return promoPrice;
-    }
-
-    public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity)
-    {
-      return GetCurrentPriceByQuantity(unifiedProductId, quantity, ShopperContext.ShopperPriceType);
     }
 
     #endregion
@@ -486,8 +475,17 @@ namespace Atlantis.Framework.Providers.Currency
     /// </summary>
     /// <param name="unifiedProductId">unified Product Id</param>
     /// <returns>true of the product is on sale for the selected currency type</returns>
-    public bool IsProductOnSale(int unifiedProductId)
+    public bool IsProductOnSale(int unifiedProductId, ICurrencyInfo transactionCurrency = null)
     {
+      if (transactionCurrency == null)
+      {
+        transactionCurrency = SelectedTransactionalCurrencyInfo;
+      }
+      else if (!IsCurrencyTransactionalForContext(transactionCurrency))
+      {
+        transactionCurrency = _USDInfo.Value;
+      }
+
       bool result = DataCache.DataCache.IsProductOnSaleForCurrency(SiteContext.PrivateLabelId, 
         unifiedProductId, SelectedTransactionalCurrencyType);
 
@@ -963,7 +961,7 @@ namespace Atlantis.Framework.Providers.Currency
 
       if (!this._productPromoPriceByShopperAndCurrencyTypes.TryGetValue(key, out promoPrice))
       {
-        ICurrencyPrice currentPrice = GetProductCurrentPrice(unifiedProductId, shopperPriceType, transactionalCurrencyInfo);
+        ICurrencyPrice currentPrice = LookupCurrentPriceInt(unifiedProductId, shopperPriceType, transactionalCurrencyInfo);
         promoPrice = GetPromoPriceFromDictionary(unifiedProductId, currentPrice, key);
       }
 
@@ -1056,6 +1054,7 @@ namespace Atlantis.Framework.Providers.Currency
     }
 
     #endregion
+
 
   }
 }

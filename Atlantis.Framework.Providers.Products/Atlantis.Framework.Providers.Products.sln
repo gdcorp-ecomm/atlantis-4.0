@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4F085777-CB2E-4C3A-AAD8-868CA6E7482B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{948766F1-5543-4562-87DD-6A33010BC290}"
@@ -30,11 +30,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockHttpContext", "..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj", "{2F8983B4-801B-461A-9D76-26A58A496261}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockProviders", "..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj", "{5487DEF2-0FA7-4B77-9AAD-0355784589D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PLSignupInfo.Interface", "..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Interface\Atlantis.Framework.PLSignupInfo.Interface.csproj", "{3C228090-226D-435D-AC13-BE073CCDFAE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PLSignupInfo.Impl", "..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Impl\Atlantis.Framework.PLSignupInfo.Impl.csproj", "{4DFB1615-1204-4095-B56E-C697A4EA6E03}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
+		SccNumberOfProjects = 14
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.Providers.Products.sln
@@ -74,6 +80,18 @@ Global
 		SccProjectTopLevelParentUniqueName10 = Atlantis.Framework.Providers.Products.sln
 		SccProjectName10 = ../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
 		SccLocalPath10 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
+		SccProjectUniqueName11 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders\\Atlantis.Framework.Testing.MockProviders.csproj
+		SccProjectTopLevelParentUniqueName11 = Atlantis.Framework.Providers.Products.sln
+		SccProjectName11 = ../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockProviders
+		SccLocalPath11 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders
+		SccProjectUniqueName12 = ..\\Atlantis.Framework.PLSignupInfo\\Atlantis.Framework.PLSignupInfo.Interface\\Atlantis.Framework.PLSignupInfo.Interface.csproj
+		SccProjectTopLevelParentUniqueName12 = Atlantis.Framework.Providers.Products.sln
+		SccProjectName12 = ../Atlantis.Framework.PLSignupInfo/Atlantis.Framework.PLSignupInfo.Interface
+		SccLocalPath12 = ..\\Atlantis.Framework.PLSignupInfo\\Atlantis.Framework.PLSignupInfo.Interface
+		SccProjectUniqueName13 = ..\\Atlantis.Framework.PLSignupInfo\\Atlantis.Framework.PLSignupInfo.Impl\\Atlantis.Framework.PLSignupInfo.Impl.csproj
+		SccProjectTopLevelParentUniqueName13 = Atlantis.Framework.Providers.Products.sln
+		SccProjectName13 = ../Atlantis.Framework.PLSignupInfo/Atlantis.Framework.PLSignupInfo.Impl
+		SccLocalPath13 = ..\\Atlantis.Framework.PLSignupInfo\\Atlantis.Framework.PLSignupInfo.Impl
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.Providers.Products.vsmdi
@@ -123,6 +141,18 @@ Global
 		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C228090-226D-435D-AC13-BE073CCDFAE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,5 +166,8 @@ Global
 		{9E93F4AA-28B0-42FE-BFB8-0E3EDF2E0EA7} = {4F085777-CB2E-4C3A-AAD8-868CA6E7482B}
 		{8581EB6C-5093-473E-AB04-318CE071E7FD} = {4F085777-CB2E-4C3A-AAD8-868CA6E7482B}
 		{2F8983B4-801B-461A-9D76-26A58A496261} = {4F085777-CB2E-4C3A-AAD8-868CA6E7482B}
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6} = {4F085777-CB2E-4C3A-AAD8-868CA6E7482B}
+		{3C228090-226D-435D-AC13-BE073CCDFAE2} = {4F085777-CB2E-4C3A-AAD8-868CA6E7482B}
+		{4DFB1615-1204-4095-B56E-C697A4EA6E03} = {4F085777-CB2E-4C3A-AAD8-868CA6E7482B}
 	EndGlobalSection
 EndGlobal

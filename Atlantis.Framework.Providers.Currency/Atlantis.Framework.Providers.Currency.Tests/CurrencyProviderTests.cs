@@ -648,7 +648,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       ICurrencyInfo usdInfo = currency.GetCurrencyInfo("USD");
       ICurrencyInfo euroInfo = currency.GetCurrencyInfo("EUR");
 
-      ICurrencyPrice euroPrice = currency.GetListPrice(101, euroInfo);
+      ICurrencyPrice euroPrice = currency.GetListPrice(101, transactionCurrency: euroInfo);
       ICurrencyPrice usdPrice = currency.GetListPrice(101);
 
       ICurrencyPrice euroPriceDDC = currency.GetListPrice(101, 8, euroInfo);
@@ -679,7 +679,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       ICurrencyInfo usdInfo = currency.GetCurrencyInfo("USD");
       ICurrencyInfo euroInfo = currency.GetCurrencyInfo("EUR");
 
-      ICurrencyPrice euroPrice = currency.GetCurrentPrice(101, euroInfo);
+      ICurrencyPrice euroPrice = currency.GetCurrentPrice(101, transactionCurrency: euroInfo);
       ICurrencyPrice usdPrice = currency.GetCurrentPrice(101);
 
       ICurrencyPrice euroPriceDDC = currency.GetCurrentPrice(101, 8, euroInfo);
@@ -710,7 +710,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests
       ICurrencyInfo usdInfo = currency.GetCurrencyInfo("USD");
       ICurrencyInfo euroInfo = currency.GetCurrencyInfo("EUR");
 
-      ICurrencyPrice euroPrice = currency.GetCurrentPriceByQuantity(58, 12, euroInfo);
+      ICurrencyPrice euroPrice = currency.GetCurrentPriceByQuantity(58, 12, transactionCurrency: euroInfo);
       ICurrencyPrice usdPrice = currency.GetCurrentPriceByQuantity(58, 12);
 
       ICurrencyPrice euroPriceCC = currency.GetCurrentPriceByQuantity(58, 12, 16, euroInfo);

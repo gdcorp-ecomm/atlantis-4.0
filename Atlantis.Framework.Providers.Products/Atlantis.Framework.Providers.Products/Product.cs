@@ -2,6 +2,7 @@
 using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Interface;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.Providers.Products
 {
@@ -11,13 +12,15 @@ namespace Atlantis.Framework.Providers.Products
     private int _productId;
     private int _privateLabelId;
     private ICurrencyProvider _currencyProvider;
-
+    private Lazy<Dictionary<RecurringPaymentUnitType, double>> _durationUnits;
+   
     internal Product(int productId, int privateLabelId, ICurrencyProvider currencyProvider)
     {
       _productId = productId;
       _privateLabelId = privateLabelId;
       _currencyProvider = currencyProvider;
       _productInfo = new ProductInfo(productId, _privateLabelId);
+      _durationUnits = new Lazy<Dictionary<RecurringPaymentUnitType, double>>(() => { return CalculateDurationUnits(); });
     }
 
     public IProductInfo Info
@@ -30,79 +33,71 @@ namespace Atlantis.Framework.Providers.Products
       get { return _productId; }
     }
 
-    public double Years
+    #region Duration Units
+
+    private Dictionary<RecurringPaymentUnitType, double> CalculateDurationUnits()
     {
-      get
+      Dictionary<RecurringPaymentUnitType, double> result = new Dictionary<RecurringPaymentUnitType, double>();
+
+      switch (DurationUnit)
       {
-        double years;
-
-        switch (DurationUnit)
-        {
-          case RecurringPaymentUnitType.Monthly:
-            years = Duration / 12.0;
-            break;
-          case RecurringPaymentUnitType.Annual:
-            years = Duration;
-            break;
-          case RecurringPaymentUnitType.SemiAnnual:
-            years = Duration / 2.0;
-            break;
-          case RecurringPaymentUnitType.Quarterly:
-            years = Duration / 4.0;
-            break;
-          default:
-            string message = "Product DurationUnit Error";
-            string data = string.Concat("Years:ProductId=", ProductId.ToString(), ":DurationUnit=", DurationUnit.ToString());
-            AtlantisException ex = new AtlantisException("Product.Years", "30", message, data, null, null);
-            Engine.Engine.LogAtlantisException(ex);
-            years = Duration;
-            break;
-        }
-
-        return years;
+        case RecurringPaymentUnitType.Monthly:
+          result[RecurringPaymentUnitType.Monthly] = Duration;
+          result[RecurringPaymentUnitType.Quarterly] = Duration / 3.0;
+          result[RecurringPaymentUnitType.SemiAnnual] = Duration / 6.0;
+          result[RecurringPaymentUnitType.Annual] = Duration / 12.0;
+          break;
+        case RecurringPaymentUnitType.Annual:
+          result[RecurringPaymentUnitType.Monthly] = Duration * 12.0;
+          result[RecurringPaymentUnitType.Quarterly] = Duration * 4.0;
+          result[RecurringPaymentUnitType.SemiAnnual] = Duration * 2.0;
+          result[RecurringPaymentUnitType.Annual] = Duration;
+          break;
+        case RecurringPaymentUnitType.SemiAnnual:
+          result[RecurringPaymentUnitType.Monthly] = Duration * 6.0;
+          result[RecurringPaymentUnitType.Quarterly] = Duration * 2.0;
+          result[RecurringPaymentUnitType.SemiAnnual] = Duration;
+          result[RecurringPaymentUnitType.Annual] = Duration / 2.0;
+          break;
+        case RecurringPaymentUnitType.Quarterly:
+          result[RecurringPaymentUnitType.Monthly] = Duration * 3.0;
+          result[RecurringPaymentUnitType.Quarterly] = Duration;
+          result[RecurringPaymentUnitType.SemiAnnual] = Duration / 2.0;
+          result[RecurringPaymentUnitType.Annual] = Duration / 4.0;
+          break;
+        default:
+          string message = "Product DurationUnit Error";
+          string data = string.Concat("ProductId=", ProductId.ToString(), ":DurationUnit=", DurationUnit.ToString());
+          AtlantisException ex = new AtlantisException("Product.CalculateDurationUnits", "30", message, data, null, null);
+          Engine.Engine.LogAtlantisException(ex);
+          result[RecurringPaymentUnitType.Monthly] = Duration;
+          result[RecurringPaymentUnitType.Quarterly] = Duration;
+          result[RecurringPaymentUnitType.SemiAnnual] = Duration;
+          result[RecurringPaymentUnitType.Annual] = Duration;
+          break;
       }
 
+      return result;
+    }
+
+    public double Years
+    {
+      get { return _durationUnits.Value[RecurringPaymentUnitType.Annual]; }
     }
 
     public int Months
     {
-      get
-      {
-        int duration;
-        
-        switch(DurationUnit)
-        {
-          case RecurringPaymentUnitType.Monthly:
-            duration = Duration;
-            break;
-          case RecurringPaymentUnitType.Annual:
-            duration = Duration * 12;
-            break;
-          case RecurringPaymentUnitType.SemiAnnual:
-            duration = Duration * 6;
-            break;
-          case RecurringPaymentUnitType.Quarterly:
-            duration = Duration * 3;
-            break;
-          default:
-            string message = "Product DurationUnit Error";
-            string data = string.Concat("Months:ProductId=", ProductId.ToString(), ":DurationUnit=", DurationUnit.ToString());
-            AtlantisException ex = new AtlantisException("Product.Months", "30", message, data, null, null);
-            Engine.Engine.LogAtlantisException(ex);
-            duration = Duration;
-            break;
-        }
-
-        return duration;
-      }
+      get { return (int)_durationUnits.Value[RecurringPaymentUnitType.Monthly]; }
     }
 
-    public bool IsOnSale
+    public double Quarters
     {
-      get
-      {
-        return _currencyProvider.IsProductOnSale(ProductId);
-      }
+      get { return _durationUnits.Value[RecurringPaymentUnitType.Quarterly]; }
+    }
+
+    public double HalfYears
+    {
+      get { return _durationUnits.Value[RecurringPaymentUnitType.SemiAnnual]; }
     }
 
     public int Duration
@@ -121,6 +116,64 @@ namespace Atlantis.Framework.Providers.Products
       }
     }
 
+    #endregion
+
+    #region OnSale
+
+    public bool IsOnSale
+    {
+      get { return _currencyProvider.IsProductOnSale(ProductId); }
+    }
+
+    public bool GetIsOnSale(ICurrencyInfo transactionCurrency = null)
+    {
+      return _currencyProvider.IsProductOnSale(ProductId, transactionCurrency);
+    }
+
+    #endregion
+
+    #region Pricing
+
+    private static int ConvertToInt32NoOverflow(double value)
+    {
+      if (value >= int.MaxValue)
+      {
+        return int.MaxValue;
+      }
+      else if (value <= int.MinValue)
+      {
+        return int.MinValue;
+      }
+
+      return (int)value;
+    }
+
+    private ICurrencyPrice GetPeriodPrice(ICurrencyPrice price, RecurringPaymentUnitType durationUnit, PriceRoundingType roundingType)
+    {
+      ICurrencyPrice result = price;
+
+      if (durationUnit != RecurringPaymentUnitType.Unknown)
+      {
+        double periods = _durationUnits.Value[durationUnit];
+
+        if ((periods > 0) && (periods != 1.0))
+        {
+          int periodPrice;
+          if (roundingType == PriceRoundingType.RoundFractionsUpProperly)
+          {
+            periodPrice = ConvertToInt32NoOverflow(Math.Ceiling(price.Price / periods));
+          }
+          else
+          {
+            periodPrice = ConvertToInt32NoOverflow(Math.Floor(price.Price / periods));
+          }
+          result = _currencyProvider.NewCurrencyPrice(periodPrice, price.CurrencyInfo, price.Type);
+        }
+      }
+
+      return result;
+    }
+
     private ICurrencyPrice _listPrice;
     public ICurrencyPrice ListPrice
     {
@@ -134,11 +187,17 @@ namespace Atlantis.Framework.Providers.Products
       }
     }
 
+    public ICurrencyPrice GetListPrice(RecurringPaymentUnitType durationUnit, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, PriceRoundingType roundingType = PriceRoundingType.RoundFractionsUpProperly)
+    {
+      ICurrencyPrice price = _currencyProvider.GetListPrice(ProductId, shopperPriceType, transactionCurrency);
+      return GetPeriodPrice(price, durationUnit, roundingType);
+    }
+
     private ICurrencyPrice _currentPrice;
     public ICurrencyPrice CurrentPrice
     {
-      get 
-      { 
+      get
+      {
         if (_currentPrice == null)
         {
           _currentPrice = _currencyProvider.GetCurrentPrice(ProductId);
@@ -147,10 +206,26 @@ namespace Atlantis.Framework.Providers.Products
       }
     }
 
+    public ICurrencyPrice GetCurrentPrice(RecurringPaymentUnitType durationUnit, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null, PriceRoundingType roundingType = PriceRoundingType.RoundFractionsUpProperly)
+    {
+      ICurrencyPrice price = _currencyProvider.GetCurrentPrice(ProductId, shopperPriceType, transactionCurrency, isc);
+      return GetPeriodPrice(price, durationUnit, roundingType);
+    }
+
     public ICurrencyPrice GetCurrentPriceByQuantity(int quantity)
     {
       return _currencyProvider.GetCurrentPriceByQuantity(ProductId, quantity);
     }
+
+    public ICurrencyPrice GetCurrentPriceByQuantity(int quantity, RecurringPaymentUnitType durationUnit, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null, PriceRoundingType roundingType = PriceRoundingType.RoundFractionsUpProperly)
+    {
+      ICurrencyPrice price = _currencyProvider.GetCurrentPriceByQuantity(ProductId, quantity, shopperPriceType, transactionCurrency, isc);
+      return GetPeriodPrice(price, durationUnit, roundingType);
+    }
+
+    #endregion
+
+
   }
 }
 

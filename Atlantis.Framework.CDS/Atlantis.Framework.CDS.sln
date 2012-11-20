@@ -76,9 +76,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.ProductPlanBoxes", "Atlantis.Framework.CDS.Entities.ProductPlanBoxes\Atlantis.Framework.CDS.Entities.ProductPlanBoxes.csproj", "{489EB428-464E-493F-B5F5-9BC17C8DCCD8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Filters", "Atlantis.Framework.CDS.Entities.Filters\Atlantis.Framework.CDS.Entities.Filters.csproj", "{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.SalesModals", "Atlantis.Framework.CDS.Entities.SalesModals\Atlantis.Framework.CDS.Entities.SalesModals.csproj", "{334F6C42-F934-4A42-B9EF-36EA65637425}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 34
+		SccNumberOfProjects = 36
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -198,6 +202,12 @@ Global
 		SccProjectUniqueName33 = Atlantis.Framework.CDS.Entities.ProductPlanBoxes\\Atlantis.Framework.CDS.Entities.ProductPlanBoxes.csproj
 		SccProjectName33 = Atlantis.Framework.CDS.Entities.ProductPlanBoxes
 		SccLocalPath33 = Atlantis.Framework.CDS.Entities.ProductPlanBoxes
+		SccProjectUniqueName34 = Atlantis.Framework.CDS.Entities.Filters\\Atlantis.Framework.CDS.Entities.Filters.csproj
+		SccProjectName34 = Atlantis.Framework.CDS.Entities.Filters
+		SccLocalPath34 = Atlantis.Framework.CDS.Entities.Filters
+		SccProjectUniqueName35 = Atlantis.Framework.CDS.Entities.SalesModals\\Atlantis.Framework.CDS.Entities.SalesModals.csproj
+		SccProjectName35 = Atlantis.Framework.CDS.Entities.SalesModals
+		SccLocalPath35 = Atlantis.Framework.CDS.Entities.SalesModals
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.CDS.vsmdi
@@ -541,6 +551,26 @@ Global
 		{489EB428-464E-493F-B5F5-9BC17C8DCCD8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{489EB428-464E-493F-B5F5-9BC17C8DCCD8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{489EB428-464E-493F-B5F5-9BC17C8DCCD8}.Release|x86.ActiveCfg = Release|Any CPU
+		{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}.Release|x86.ActiveCfg = Release|Any CPU
+		{334F6C42-F934-4A42-B9EF-36EA65637425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{334F6C42-F934-4A42-B9EF-36EA65637425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{334F6C42-F934-4A42-B9EF-36EA65637425}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{334F6C42-F934-4A42-B9EF-36EA65637425}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{334F6C42-F934-4A42-B9EF-36EA65637425}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{334F6C42-F934-4A42-B9EF-36EA65637425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{334F6C42-F934-4A42-B9EF-36EA65637425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{334F6C42-F934-4A42-B9EF-36EA65637425}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{334F6C42-F934-4A42-B9EF-36EA65637425}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{334F6C42-F934-4A42-B9EF-36EA65637425}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

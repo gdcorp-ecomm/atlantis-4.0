@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using Atlantis.Framework.AddItem.Interface;
 using Atlantis.Framework.Interface;
@@ -10,22 +11,27 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
 {
   public class ProductPackageAddToCartDynamicRouteHandler : DynamicRouteHandlerBase
   {
+    private static IProviderContainer _providerContainer = HttpProviderContainer.Instance;
+
+    public static event AddOrderLevelAttributesDelegate OnAddOrderLevelAttributes;
+    public static event AddItemLevelAttributesDelegate OnAddItemLevelAttributesDelegate;
+
     private ISiteContext _siteContext;
     private ISiteContext SiteContext
     {
-      get { return _siteContext = _siteContext ?? HttpProviderContainer.Instance.Resolve<ISiteContext>(); }
+      get { return _siteContext = _siteContext ?? ProviderContainer.Resolve<ISiteContext>(); }
     }
 
     private IShopperContext _shopperContext;
     private IShopperContext ShopperContext
     {
-      get { return _shopperContext = _shopperContext ?? HttpProviderContainer.Instance.Resolve<IShopperContext>(); }
+      get { return _shopperContext = _shopperContext ?? ProviderContainer.Resolve<IShopperContext>(); }
     }
 
     private ILinkProvider _linkProvider;
     private ILinkProvider LinkProvider
     {
-      get { return _linkProvider = _linkProvider ?? HttpProviderContainer.Instance.Resolve<ILinkProvider>(); }
+      get { return _linkProvider = _linkProvider ?? ProviderContainer.Resolve<ILinkProvider>(); }
     }
 
     private static string ProductGroupId
@@ -51,53 +57,20 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       get { return HttpContext.Current.Request.Form["product-packager-selected-cart-product-package-id"]; }
     }
 
-    private static string AddOnProductPackageId
+    private static IList<string> AddOnProductPackageIds
     {
-      get { return HttpContext.Current.Request.Form["product-packager-selected-addon-product-package-id"]; }
+      get
+      {
+        string addOnPackageIds = HttpContext.Current.Request.Form["product-packager-selected-addon-product-package-ids"];
+        string[] addOnPackageIdsArray = addOnPackageIds != null ? addOnPackageIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : new string[0];
+        
+        return new List<string>(addOnPackageIdsArray);
+      }
     }
 
     private static string UpSellProductPackageId
     {
       get { return HttpContext.Current.Request.Form["product-packager-selected-upsell-product-package-id"]; }
-    }
-
-    private static string ItemTrackingCode
-    {
-      get { return HttpContext.Current.Request.Form["product-packager-item-tracking-code"]; }
-    }
-
-    private static string FastballDiscountId
-    {
-      get { return HttpContext.Current.Request.Form["product-packager-fastball-discount-id"]; }
-    }
-
-    private static string FastballOfferId
-    {
-      get { return HttpContext.Current.Request.Form["product-packager-fastball-offer-id"]; }
-    }
-
-    private static string FastballOfferUid
-    {
-      get { return HttpContext.Current.Request.Form["product-packager-fastball-offer-uid"]; }
-    }
-
-    private static string FastballOrderDiscountId
-    {
-      get { return HttpContext.Current.Request.Form["product-packager-fastball-order-discount-id"]; }
-    }
-
-    private static string DomainYardValue
-    {
-      get { return HttpContext.Current.Request.Form["product-packager-domain-yard-value"]; }
-    }
-
-    private string OrderDiscountCode
-    {
-      get
-      {
-        HttpCookie orderDiscountCookie = HttpContext.Current.Request.Cookies["orderDiscountCode" + SiteContext.PrivateLabelId];
-        return orderDiscountCookie != null ? orderDiscountCookie.Value : string.Empty;
-      }
     }
 
     private bool IsAjaxRequest
@@ -124,9 +97,15 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       get { return HttpRequestMethodType.Post; }
     }
 
-    public override string RoutePath
+    public override DynamicRoutePath RoutePath
     {
-      get { return "productpackager/actions/addtocart"; }
+      get { return new DynamicRoutePath { Name = "Atlantis.Framework.ProductPackagerAddToCartHandler", Path = "productpackager/actions/addtocart" }; }
+    }
+
+    public static IProviderContainer ProviderContainer
+    {
+      get { return _providerContainer; }
+      set { _providerContainer = value; }
     }
 
     private void HandleResponse(bool success)
@@ -139,11 +118,16 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       HttpContext.Current.Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
 
       HttpContext.Current.Response.ContentType = IsAjaxRequest ? "application/json; charset=utf-8" : "text/html; charset=utf-8";
-      HttpContext.Current.Response.StatusCode = success ? (IsAjaxRequest ? 200 : 301) : 500;
+      HttpContext.Current.Response.StatusCode = success ? (IsAjaxRequest ? 200 : 301) : 301;
 
       if(HttpContext.Current.Response.StatusCode == 301)
       {
         HttpContext.Current.Response.AppendHeader("Location", RedirectLocation);
+      }
+
+      if(IsAjaxRequest)
+      {
+        HttpContext.Current.Response.Write("{\"success\":true}");
       }
 
       HttpContext.Current.Response.End();
@@ -155,8 +139,8 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
 
       try
       {
-        AddItemRequestData requestData = AddItemRequestHelper.CreateAddItemRequest(OrderDiscountCode, FastballOrderDiscountId, DomainYardValue);
-        AddItemRequestHelper.AddProductPackagesToRequest(requestData, ProductGroupId, ProductId, CartProductPackageId, AddOnProductPackageId, UpSellProductPackageId, ItemTrackingCode, FastballOfferId, FastballDiscountId, FastballOfferUid);
+        AddItemRequestData requestData = AddItemRequestHelper.CreateAddItemRequest(ProviderContainer, OnAddOrderLevelAttributes);
+        AddItemRequestHelper.AddProductPackagesToRequest(ProviderContainer, OnAddItemLevelAttributesDelegate, requestData, ProductGroupId, ProductId, CartProductPackageId, AddOnProductPackageIds, UpSellProductPackageId);
 
         AddItemResponseData responseData = (AddItemResponseData)Engine.Engine.ProcessRequest(requestData, 4);
         success = responseData.IsSuccess;

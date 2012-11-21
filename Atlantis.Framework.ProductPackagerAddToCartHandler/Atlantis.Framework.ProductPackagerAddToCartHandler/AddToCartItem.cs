@@ -40,12 +40,11 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       get { return _childItems.Count > 0; }
     }
 
-    public AddToCartItem(int productId, int quantity, string itemTrackingCode)
+    public AddToCartItem(int productId, int quantity)
     {
       ProductId = productId;
       this[AddItemAttributes.UnifiedProductId] = productId.ToString(CultureInfo.InvariantCulture);
       this[AddItemAttributes.Quantity] = quantity.ToString(CultureInfo.InvariantCulture);
-      this[AddItemAttributes.ItemTrackingCode] = itemTrackingCode;
     }
 
     public IEnumerator<AddToCartItem> GetChildEnumerator()

@@ -29,5 +29,13 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         {
             get;
         }
+
+        /// <summary>
+        /// States whether this fact is the main rule
+        /// </summary>
+        bool IsMainRule
+        {
+          get;
+        }
     }
 }

@@ -8,22 +8,23 @@
       </Actions>
     </RuleMain>
     <Rule id="RCaLegalTypeRequired">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FLegalType)) ]]></Condition>
+      <Condition><![CDATA[ ISNULLOREMPTY(FLegalType) ]]></Condition>
       <Actions>
+        <Execute ruleId="RCaEvaluateOrg" result="false"/>
         <EvaluateIsValid factId="FLegalType" result="true">false</EvaluateIsValid>
         <EvaluateMessage factId="FLegalType" result="true"> <![CDATA[ "The Canadian Presence Requirement is not valid."]]></EvaluateMessage>
       </Actions>
     </Rule>
     <Rule id="RCaOrgRequired" desc="" >
       <Condition>
-        <![CDATA[ FACT(FLegalType)=="CCO"  ]]>
+        <![CDATA[ FLegalType=="CCO"  ]]>
       </Condition>            
       <Actions>
         <Execute ruleId="RCaEvaluateOrg" />
       </Actions>
     </Rule>
     <Rule id="RCaEvaluateOrg">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FOrg))  ]]></Condition>
+      <Condition><![CDATA[ ISNULLOREMPTY(FOrg)  ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FOrg" result="true">false</EvaluateIsValid>
         <EvaluateMessage factId="FOrg" result="true"> <![CDATA[ "Organization is required."]]></EvaluateMessage>

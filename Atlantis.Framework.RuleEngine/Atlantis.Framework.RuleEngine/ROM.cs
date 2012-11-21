@@ -34,10 +34,6 @@ namespace Atlantis.Framework.RuleEngine
     private readonly Dictionary<string, IEvidence> _evidenceCollection = new Dictionary<string, IEvidence>();
    
     /// <summary>
-    /// specifies for a given evidence all evidence thats dependent on it
-    /// </summary>
-    private readonly Dictionary<string, List<string>> _dependentEvidence = new Dictionary<string, List<string>>();
-    /// <summary>
     /// 
     /// </summary>
     private readonly Dictionary<string, Delegate> _callback = new Dictionary<string, Delegate>();
@@ -71,21 +67,6 @@ namespace Atlantis.Framework.RuleEngine
     {
       //add evidence to collection
       _evidenceCollection.Add(evidence.Id, evidence);
-    }
-
-    /// <summary>
-    /// specifies for a given evidence all evidence thats dependent on it
-    /// </summary>
-    /// <param name="evidence"></param>
-    /// <param name="dependentEvidence"></param>
-    public void AddDependentFact(string evidence, string dependentEvidence)
-    {
-      if (!_dependentEvidence.ContainsKey(evidence))
-      {
-        _dependentEvidence.Add(evidence, new List<string>());
-      }
-
-      _dependentEvidence[evidence].Add(dependentEvidence);
     }
 
     /// <summary>
@@ -131,7 +112,7 @@ namespace Atlantis.Framework.RuleEngine
       var decision = (new Decisions.Decision());
       decision.EvidenceLookup += evidence_EvidenceLookup;
       decision.ModelLookup += EvidenceModelLookup;
-      decision.Evaluate(_evidenceCollection, _dependentEvidence);
+      decision.Evaluate(_evidenceCollection);
       
       var modelId = string.Empty;
       var factModels = new Dictionary<string, IList<IFactResult>>(0);
@@ -149,7 +130,7 @@ namespace Atlantis.Framework.RuleEngine
         if (fact != null)
         {
           var status = fact.IsValid ? ValidationResultStatus.Valid : ValidationResultStatus.InValid;
-          var result = new FactResult(fact.Key, status) {Message = fact.Messages};
+          var result = new FactResult(fact.Key, status) {Messages = fact.Messages};
           
           if (factModels.ContainsKey(modelId))
           {

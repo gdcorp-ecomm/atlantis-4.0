@@ -28,13 +28,14 @@ namespace Atlantis.Framework.RuleEngine.Evidence
   {
     #region IRule Members
     private readonly bool _chainable;
+    private readonly bool _isMainRule;
     protected string Equation { get; set; }
     private readonly List<Symbol> _postfixExpression;
     private readonly List<EvidenceSpecifier> _actions;
     #endregion
 
     #region constructor
-    public Rule(string id, string equation, List<EvidenceSpecifier> actions, int priority, bool chainable)
+    public Rule(string id, string equation, List<EvidenceSpecifier> actions, int priority, bool chainable, bool isMainRule)
       : base(id, priority)
     {
       if (actions == null || actions.Count < 1)
@@ -52,6 +53,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
 
       _actions = actions;
       _chainable = chainable;
+      _isMainRule = isMainRule;
       Equation = equation;
 
       var al = new ArrayList();
@@ -67,10 +69,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       e.Parse(equation); //this method is slow, do it only when needed
       e.InfixToPostfix(); //this method is slow, do it only when needed
       _postfixExpression = e.Postfix; //this method is slow, do it only when needed
-
-      //determine the dependent facts
-      var dependents = ExpressionEvaluator.RelatedEvidence(e.Postfix);
-      DependentEvidenceItems = dependents;
 
       //change event could set its value when a model is attached
       var naked = new Naked(false, typeof(bool));
@@ -152,6 +150,15 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     public bool IsChainable
     {
       get { return _chainable; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    //[System.Diagnostics.DebuggerHidden]
+    public bool IsMainRule
+    {
+      get { return _isMainRule; }
     }
 
     public override void Evaluate()

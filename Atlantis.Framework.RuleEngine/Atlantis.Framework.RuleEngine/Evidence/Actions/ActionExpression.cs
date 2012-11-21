@@ -39,13 +39,9 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
       Equation = equation;
       _operatingId = operatingId;
 
-      //determine the dependent facts
       var e = new ExpressionEvaluator();
       e.Parse(equation); //this method is slow, do it only when needed
-
-      string[] dependents = ExpressionEvaluator.RelatedEvidence(e.Infix);
-      DependentEvidenceItems = dependents;
-
+      
       //assing a value
       var naked = new Naked(null, typeof(string));
       EvidenceResult = naked;
@@ -101,14 +97,12 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
       switch (ActionExpressionType)
       {
         case ActionType.EvaluateMessage:
-          fact.Messages = Convert.ToString(result.Value.Value);
+          fact.Messages.Add(Convert.ToString(result.Value.Value));
           break;
         case ActionType.EvaluteIsValid:
           fact.IsValid = Convert.ToBoolean(result.Value.Value);
           break;
       }
-
-      fact.Value = result.Value.Value;
     }
 
     /// <summary>

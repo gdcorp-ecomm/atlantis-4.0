@@ -44,7 +44,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
             break;
           case "regid":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
-            Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
+            Assert.IsTrue(fact.Messages.Count > 0);
             break;
           case "vat":
             Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
@@ -89,7 +89,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
             break;
           case "vat":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
-            Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
+            Assert.IsTrue(fact.Messages.Count > 0);
             break;
         }
       }

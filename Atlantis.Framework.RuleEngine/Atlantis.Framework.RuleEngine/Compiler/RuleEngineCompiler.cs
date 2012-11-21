@@ -32,7 +32,6 @@ namespace Atlantis.Framework.RuleEngine.Compiler
       var rom = CreateRom();
       LoadFacts(rom, rulesXml);
       LoadRules(rom, rulesXml);
-      AddFactRelationship(rom);
       return rom;
     }
 
@@ -166,7 +165,7 @@ namespace Atlantis.Framework.RuleEngine.Compiler
 
       if (ruleMainNode != null)
       {
-        LoadRule(rom, ruleMainNode);
+        LoadRule(rom, ruleMainNode, true);
       }
       else
       {
@@ -178,12 +177,12 @@ namespace Atlantis.Framework.RuleEngine.Compiler
       {
         foreach (XmlNode ruleNode in rules)
         {
-          LoadRule(rom, ruleNode);
+          LoadRule(rom, ruleNode, false);
         }
       }
     }
 
-    private static void LoadRule(ROM rom, XmlNode ruleNode)
+    private static void LoadRule(ROM rom, XmlNode ruleNode, bool isMain)
     {
       if (ruleNode.Attributes != null)
       {
@@ -272,26 +271,9 @@ namespace Atlantis.Framework.RuleEngine.Compiler
 
         #endregion
 
-        IRule rule = new Rule(currentRuleId, condition, actions, priority, hasEvidence);
+        IRule rule = new Rule(currentRuleId, condition, actions, priority, hasEvidence, isMain);
         rom.AddEvidence(rule);
       }
     }
-
-    private static void AddFactRelationship(ROM rom)
-    {
-      //go though each chainable rule and determine who they are dependent on.
-      foreach (var evidence in rom.Evidence.Values)
-      {
-        var rule = evidence as IRule;
-        if (rule != null && rule.IsChainable)
-        {
-          foreach (var depFacts in rule.DependentEvidence)
-          {
-            rom.AddDependentFact(depFacts, rule.Id);
-          }
-        }
-      }
-    }
-
   }
 }

@@ -33,7 +33,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     private event EvidenceLookupHandler _evidenceLookup;
     private event CallbackHandler _callbackLookup;
 
-    protected string[] DependentEvidenceItems { get; set; }
     protected string[] ClauseEvidences { get; set; }
 
     #endregion
@@ -204,18 +203,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     }
 
     /// <summary>
-    /// Who this evidence is dependent on. Changes to these evidences could cause this evidence to be evaluated.
-    /// </summary>
-    //[System.Diagnostics.DebuggerHidden]
-    public string[] DependentEvidence
-    {
-      get
-      {
-        return DependentEvidenceItems;
-      }
-    }
-
-    /// <summary>
     /// Evidence, typically Actions, that are the clause statement to its evaluated conditional.
     /// Does not have a _value until its been evaluated.
     /// </summary>
@@ -241,28 +228,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     {
       throw new Exception("The method or operation is not implemented.");
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    ////[System.Diagnostics.DebuggerHidden]
-    //[System.Diagnostics.DebuggerHidden]
-    //public virtual object Clone()
-    //{
-    //  Type t = GetType();
-    //  var x = (AEvidence)Activator.CreateInstance(t);
-    //  x._id = Id;
-    //  x._priority = Priority;
-    //  if (DependentEvidenceItems != null)
-    //    x.DependentEvidenceItems = (string[])DependentEvidenceItems.Clone();
-    //  if (ClauseEvidences != null)
-    //    x.ClauseEvidences = (string[])ClauseEvidences.Clone();
-    //  if (EvidenceValue != null)
-    //    x.EvidenceValue = (IEvidenceValue)EvidenceValue.Clone();
-    //  return x;
-    //}
-
 
     private bool _isEvaluatable;
     /// <summary>

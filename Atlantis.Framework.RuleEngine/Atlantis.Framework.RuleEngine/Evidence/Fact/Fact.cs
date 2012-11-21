@@ -111,14 +111,14 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     
     public bool IsValid { get; set; }
 
-    public string _messages;
-    public string Messages
+    private IList<string> _messages;
+    public IList<string> Messages
     {
       get
       {
         if (_messages == null)
         {
-          _messages = string.Empty;
+          _messages = new List<string>(0);
         }
 
         return _messages;

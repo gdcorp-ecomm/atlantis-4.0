@@ -27,7 +27,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     
     #region instance variables
 
-    private object previousValue;
+    
     private readonly Type _valueType;
     private readonly string _modelId;
     private readonly string _evidenceValueKey;
@@ -57,21 +57,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     #region core
 
     //[System.Diagnostics.DebuggerHidden]
-    public object Value
-    {
-      get { return previousValue; }
-      set
-      {
-        //if the incoming value is the previous value we have nothing to do
-        if (previousValue != value)
-        {
-          Dictionary<string, string> model = ModelLookup(this, new ModelLookupArgs(_modelId));
-          SetValue(model, value);
-          previousValue = value;
-          Changed(this, new ChangedModelArgs(_modelId));
-        }
-      }
-    }
+    public object Value { get; set; }
 
     /// <summary>
     /// 
@@ -131,18 +117,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       return result;
     }
     
-    private void SetValue(Dictionary<string, string> inputModel, object value)
-    {
-      if (inputModel.ContainsKey(_evidenceValueKey))
-      {
-        inputModel[_evidenceValueKey] = Convert.ToString(value);
-      }
-      else
-      {
-        throw new KeyNotFoundException("The specified key could not be found in the input model: " + _evidenceValueKey);
-      }
-    }
-
     public void Evaluate()
     {
       Dictionary<string, string> model = ModelLookup(this, new ModelLookupArgs(_modelId));
@@ -155,9 +129,9 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         //throw new Exception("no value for fact");
       }
 
-      if (previousValue == null || !x.Equals(previousValue))
+      if (Value == null || !x.Equals(Value))
       {
-        previousValue = x;
+        Value = x;
         Changed(this, new ChangedModelArgs(_modelId));
       }
     }

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RuleEngine>
+  <Rules>
+    <RuleMain id="RMain">
+      <Actions>
+        <Execute ruleId="RValidatePassword" />
+      </Actions>
+    </RuleMain>
+    
+    <!-- START Password rules driver -->
+    <Rule id="RValidatePassword">
+      <Actions>
+        <!-- List the rules that should be executed in order to validate first name -->
+        <Execute ruleId="RRequireFPassword" />
+        <Execute ruleId="RMaxLengthFPassword" />
+        <Execute ruleId="RMinLengthFPassword" />
+        <Execute ruleId="RRegexFPassword" />
+      </Actions>
+    </Rule>
+    <!-- Create the rules that are required to validate password -->
+    <Rule id="RRequireFPassword">
+      <Condition><![CDATA[ ISNULLOREMPTY(FPassword) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPassword" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPassword" result="True"><![CDATA[ "Password is required." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RMaxLengthFPassword">
+      <Condition><![CDATA[ FPassword @MAXLENGTH FPasswordMaxLength ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPassword" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPassword" result="False"><![CDATA[ "Password cannot be longer than " + FPasswordMaxLength + " characters long." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RMinLengthFPassword">
+      <Condition><![CDATA[ FPassword @MINLENGTH FPasswordMinLength ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPassword" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPassword" result="False"><![CDATA[ "Password must be at least " + FPasswordMinLength + " characters long." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RRegexFPassword">
+      <Condition><![CDATA[ FPassword @REGEX FPasswordRegex ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPassword" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPassword" result="False"><![CDATA[ "Password doesn't match regex." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+  </Rules>
+  <!--
+    After this rules doc is compiled, the following "Fact" elements exist in memory as a Fact object with
+    three properties: Value, IsValid, Messages.
+    
+    ######################################### Fact properties #########################################
+    ## Value: When using the rule engine, the developer must pass this XML document along with a dictionary
+    #         that contains the initial value of the facts. The "Value" property is the value as passed in
+    #         the dictionary.
+    ## IsValid = true: This is initialized to true so it is the rule designer's job to determine what
+    #                  causes this rule to toggle to false.
+    ## Messages: As facts are being analyzed, the developer can choose to attach a message string to that
+    #            fact. This "Messages" property is simply a list containing those facts.
+    ###################################################################################################
+  -->
+  <Facts>
+    <!--Model values to validate-->
+    <Fact id="FPassword"    key="txtCreatePassword"   type="string" modelId="Shopper" />
+
+    <!--Values used to validate the other facts (regex, max, min, etc.)-->
+    <Fact id="FPasswordMaxLength" key="passwordMaxLength" type="string" modelId="Shopper" />
+    <Fact id="FPasswordMinLength" key="passwordMinLength" type="string" modelId="Shopper" />
+    <Fact id="FPasswordRegex"     key="passwordRegex"     type="string" modelId="Shopper" />
+  </Facts>
+</RuleEngine>

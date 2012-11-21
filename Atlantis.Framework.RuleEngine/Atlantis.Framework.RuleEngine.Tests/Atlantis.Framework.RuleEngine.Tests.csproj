@@ -70,12 +70,14 @@
   <ItemGroup>
     <Compile Include="CaRuleEngineTests.cs" />
     <Compile Include="EuRuleEngineTests.cs" />
+    <Compile Include="CustomOperatorTests.cs" />
     <Compile Include="UsRuleEngineTests.cs" />
     <Compile Include="SeRuleEngineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShopperValidation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DotEuRule.xml">
+    <Content Include="CustomOperatorTests.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="DotSeRule.xml">

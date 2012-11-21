@@ -44,7 +44,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
       get;
       set;
     }
-
+    
     /// <summary>
     /// Value of IRuleEngineComparable of this IEvidence
     /// </summary>
@@ -83,15 +83,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     /// </summary>
     /// <returns></returns>
     void Evaluate();
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    string[] DependentEvidence
-    {
-      get;
-    }
 
     /// <summary>
     /// 

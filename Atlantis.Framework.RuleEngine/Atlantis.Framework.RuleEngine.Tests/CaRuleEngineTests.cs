@@ -11,7 +11,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
   [TestClass]
   public class CaRuleEngineTests
   {
-     [TestMethod]
+    [TestMethod]
     [DeploymentItem("DotCaRule.xml")]
     public void TestCaLegalTypeRequired()
     {
@@ -40,7 +40,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
         {
           case "legaltype":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
-            Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
+            Assert.IsTrue(fact.Messages.Count > 0);
             break;
           default:
             Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);
@@ -78,7 +78,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
         {
           case "organization":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
-            Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
+            Assert.IsTrue(fact.Messages.Count > 0);
             break;
           default:
             Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);

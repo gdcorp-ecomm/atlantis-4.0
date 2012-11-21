@@ -40,7 +40,7 @@ namespace Atlantis.Framework.RuleEngine.Tests
         {
           case "companytype":
             Assert.IsTrue(fact.Status == ValidationResultStatus.InValid);
-            Assert.IsTrue(!string.IsNullOrEmpty(fact.Message));
+            Assert.IsTrue(fact.Messages.Count > 0);
             break;
           default:
             Assert.IsTrue(fact.Status == ValidationResultStatus.Valid);

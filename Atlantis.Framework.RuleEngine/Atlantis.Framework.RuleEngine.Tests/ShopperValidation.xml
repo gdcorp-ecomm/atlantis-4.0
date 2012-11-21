@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RuleEngine>
   <Rules>
-    <Rule id="RValidateShopper" desc="" chainable="True" priority="1">
-      <Condition><![CDATA[ 1==1 ]]></Condition>
+    <RuleMain id="RMain">
       <Actions>
-        <Execute factId="RValidateFirstName" result="true" />
-        
-        <Execute factId="RLastNameRequired" result="true" />
-        <Execute factId="RUserNameRequired" result="true" />
-        <Execute factId="RCreatePassword" result="true" />
-        <Execute factId="RCreatePassword2" result="true" />
-        <Execute factId="RPin" result="true" />
-        <Execute factId="REmail" result="true" />
+        <Execute ruleId="RValidateFirstName" />
+        <Execute ruleId="RRequireFLastName" />
+        <Execute ruleId="RRequireFUserName" />
+        <Execute ruleId="RValidatePassword" />
+        <Execute ruleId="RRequireFPin" />
+        <Execute ruleId="RRequireFEmail" />
       </Actions>
-    </Rule>
+    </RuleMain>
     
     <!-- START First Name rules driver -->
-    <Rule id="RValidateFirstName" desc="" chainable="True" priority="100">
-      <Condition><![CDATA[ 1==1 ]]></Condition>
+    <Rule id="RValidateFirstName">
       <Actions>
         <!-- List the rules that should be executed in order to validate first name -->
-        <Execute factId="RFirstNameRequired" result="true" />
+        <Execute ruleId="RRequireFFirstName" />
         <!--<Execute factId="RFirstNameRegex" result="true" />-->
       </Actions>
     </Rule>
     <!-- Create the rules that are required to validate first name -->
-    <Rule id="RFirstNameRequired" desc="" chainable="False"  priority="100">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FFirstName)) ]]></Condition>
+    <Rule id="RRequireFFirstName">
+      <Condition><![CDATA[ ISNULLOREMPTY(FFirstName) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FFirstName" result="True">false</EvaluateIsValid>
         <EvaluateMessage factId="FFirstName" result="True"><![CDATA[ "First name is required." ]]></EvaluateMessage>
@@ -34,43 +30,87 @@
     </Rule>
     <!-- END First Name rules driver -->
     
-    <Rule id="RLastNameRequired" desc="" chainable="False"  priority="100">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FLastName)) ]]></Condition>
+    <Rule id="RRequireFLastName">
+      <Condition><![CDATA[ ISNULLOREMPTY(FLastName) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FLastName" result="True">false</EvaluateIsValid>
         <EvaluateMessage factId="FLastName" result="True"><![CDATA[ "Last name is required." ]]></EvaluateMessage>
       </Actions>
     </Rule>
-    <Rule id="RUserNameRequired" desc="" chainable="False"  priority="100">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FUserName)) ]]></Condition>
+    <Rule id="RRequireFUserName">
+      <Condition><![CDATA[ ISNULLOREMPTY(FUserName) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FUserName" result="True">false</EvaluateIsValid>
         <EvaluateMessage factId="FUserName" result="True"><![CDATA[ "Username is required." ]]></EvaluateMessage>
       </Actions>
     </Rule>
-    <Rule id="RCreatePassword" desc="" chainable="False"  priority="100">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FCreatePassword)) ]]></Condition>
+
+    <!-- START Password rules driver -->
+    <Rule id="RValidatePassword">
       <Actions>
-        <EvaluateIsValid factId="FCreatePassword" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="FCreatePassword" result="True"><![CDATA[ "Password is required." ]]></EvaluateMessage>
+        <!-- List the rules that should be executed in order to validate first name -->
+        <Execute ruleId="RRequireFPassword" />
+        <Execute ruleId="RMaxLengthFPassword" />
+        <Execute ruleId="RMinLengthFPassword" />
+        <Execute ruleId="RRegexFPassword" />
+        <Execute ruleId="RRequireFPassword2" />
+        <Execute ruleId="RMatchFPasswordFPassword2" />
       </Actions>
     </Rule>
-    <Rule id="RCreatePassword2" desc="" chainable="False"  priority="100">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FCreatePassword2)) ]]></Condition>
+    <!-- Create the rules that are required to validate password -->
+    <Rule id="RRequireFPassword">
+      <Condition><![CDATA[ ISNULLOREMPTY(FPassword) ]]></Condition>
       <Actions>
-        <EvaluateIsValid factId="FCreatePassword2" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="FCreatePassword2" result="True"><![CDATA[ "Confirm password is required." ]]></EvaluateMessage>
+        <EvaluateIsValid factId="FPassword" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPassword" result="True"><![CDATA[ "Password is required." ]]></EvaluateMessage>
       </Actions>
     </Rule>
-    <Rule id="RPin" desc="" chainable="False"  priority="100">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FPin)) ]]></Condition>
+    <Rule id="RMaxLengthFPassword">
+      <Condition><![CDATA[ FPassword @MAXLENGTH FPasswordMaxLength ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPassword" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPassword" result="False"><![CDATA[ "Password cannot be longer than " + FPasswordMaxLength + " characters long." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RMinLengthFPassword">
+      <Condition><![CDATA[ FPassword @MINLENGTH FPasswordMinLength ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPassword" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPassword" result="False"><![CDATA[ "Password must be at least " + FPasswordMinLength + " characters long." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RRegexFPassword">
+      <Condition><![CDATA[ FPassword @REGEX FPasswordRegex ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPassword" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPassword" result="False"><![CDATA[ "Password doesn't match regex." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RRequireFPassword2">
+      <Condition><![CDATA[ ISNULLOREMPTY(FPassword2) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPassword2" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPassword2" result="True"><![CDATA[ "Confirm password is required." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RMatchFPasswordFPassword2">
+      <Condition><![CDATA[ FPassword != FPassword2 ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPassword2" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPassword2" result="True"><![CDATA[ "Passwords must match." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Password rules driver -->
+    
+    <Rule id="RRequireFPin">
+      <Condition><![CDATA[ ISNULLOREMPTY(FPin) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FPin" result="True">false</EvaluateIsValid>
         <EvaluateMessage factId="FPin" result="True"><![CDATA[ "PIN is required." ]]></EvaluateMessage>
       </Actions>
     </Rule>
-    <Rule id="REmail" desc="" chainable="False"  priority="100">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FEmail)) ]]></Condition>
+    <Rule id="RRequireFEmail">
+      <Condition><![CDATA[ ISNULLOREMPTY(FEmail) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FEmail" result="True">false</EvaluateIsValid>
         <EvaluateMessage factId="FEmail" result="True"><![CDATA[ "Email is required." ]]></EvaluateMessage>
@@ -92,12 +132,18 @@
     ###################################################################################################
   -->
   <Facts>
-    <Fact id="FFirstName" key="txtFirstName" desc="new value" type="string" modelId="Shopper" />
-    <Fact id="FLastName" key="txtLastName" desc="new value" type="string" modelId="Shopper" />
-    <Fact id="FUserName" key="txtUserName" desc="new value" type="string" modelId="Shopper" />
-    <Fact id="FCreatePassword" key="txtCreatePassword" desc="new value" type="string" modelId="Shopper" />
-    <Fact id="FCreatePassword2" key="txtCreatePassword2" desc="new value" type="string" modelId="Shopper" />
-    <Fact id="FPin" key="txtPin" desc="new value" type="string" modelId="Shopper" />
-    <Fact id="FEmail" key="txtEmail" desc="new value" type="string" modelId="Shopper" />
+    <!--Model values to validate-->
+    <Fact id="FFirstName"   key="txtFirstName"        type="string" modelId="Shopper" />
+    <Fact id="FLastName"    key="txtLastName"         type="string" modelId="Shopper" />
+    <Fact id="FUserName"    key="txtUserName"         type="string" modelId="Shopper" />
+    <Fact id="FPassword"    key="txtCreatePassword"   type="string" modelId="Shopper" />
+    <Fact id="FPassword2"   key="txtCreatePassword2"  type="string" modelId="Shopper" />
+    <Fact id="FPin"         key="txtPin"              type="string" modelId="Shopper" />
+    <Fact id="FEmail"       key="txtEmail"            type="string" modelId="Shopper" />
+    
+    <!--Values used to validate the other facts (regex, max, min, etc.)-->
+    <Fact id="FPasswordMaxLength" key="passwordMaxLength" type="string" modelId="Shopper" />
+    <Fact id="FPasswordMinLength" key="passwordMinLength" type="string" modelId="Shopper" />
+    <Fact id="FPasswordRegex"     key="passwordRegex"     type="string" modelId="Shopper" />
   </Facts>
 </RuleEngine>

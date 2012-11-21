@@ -32,39 +32,13 @@ namespace Atlantis.Framework.RuleEngine.Decisions
     /// 
     /// </summary>
     /// <param name="evidenceCollection"></param>
-    /// <param name="factRelationships"></param>
-    public void Evaluate(Dictionary<string, IEvidence> evidenceCollection, Dictionary<string, List<string>> factRelationships)
+    public void Evaluate(Dictionary<string, IEvidence> evidenceCollection)
     {
       #region register all evidences in this rom with this instance of decision
       foreach (var evidence in evidenceCollection.Values)
       {
-        evidence.CallbackLookup += RaiseCallback;
         evidence.EvidenceLookup += RaiseEvidenceLookup;
         evidence.ModelLookup += RaiseModelLookup;
-
-        // Setup execution logic of Facts
-        evidence.Changed += delegate(object sender, ChangedArgs args)
-        {
-          var senderEvidence = (IEvidence)sender;
-          var fact = senderEvidence as IFact;
-
-          if (fact != null)
-          {
-            //find out the model of this ifact
-            var value = fact.ValueObject;
-            string modelId = value.ModelId;
-
-            //go through all ifacts and add those to of the same model to the execution list
-            foreach (var evidence2 in evidenceCollection.Values)
-            {
-              //exclude all evidences not of IFact type, exclude self and exclude all ifacts who are of a different model
-              if (evidence2 is IFact && evidence2.Id != senderEvidence.Id && evidence2.ValueObject.ModelId == modelId)
-              {
-                Executions.Add(evidence2);
-              }
-            }
-          }
-        };
       }
       #endregion
 
@@ -81,10 +55,10 @@ namespace Atlantis.Framework.RuleEngine.Decisions
       #endregion
 
       #region load up the execution list with chainable rules
-      //load up the execution list with chainable rules
+      //load up the execution list with main rule
       foreach (IEvidence rule in evidenceCollection.Values)
       {
-        if (rule is IRule && ((IRule)rule).IsChainable)
+        if (rule is IRule && ((IRule)rule).IsMainRule)
         {
           Executions.Add(rule);
           Debug.WriteLine("Added rule to execution list: " + rule.Id);
@@ -121,18 +95,6 @@ namespace Atlantis.Framework.RuleEngine.Decisions
             var clauseEvidence = evidenceCollection[clauseEvidenceId];
             Executions.Add(clauseEvidence);
             Debug.WriteLine("Added evidence to execution list: " + clauseEvidence.Id);
-          }
-        }
-
-        //add chainable dependent facts to Executions
-        if (factRelationships.ContainsKey(evidence.Id))
-        {
-          List<string> dependentFacts = factRelationships[evidence.Id];
-          foreach (string dependentFact in dependentFacts)
-          {
-            var dependentEvidence = evidenceCollection[dependentFact];
-            Executions.Add(dependentEvidence);
-            Debug.WriteLine("Added dependent evidence to execution list: " + dependentEvidence.Id);
           }
         }
 

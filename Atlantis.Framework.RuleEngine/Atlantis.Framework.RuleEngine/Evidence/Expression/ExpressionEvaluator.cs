@@ -50,7 +50,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
 
     #region instance varaibles
 
-    private const string LOGICAL_REG_EX = @"(\x29|\x28|>=|<=|!=|==|<|>|AND|OR|NOT|ISNULLOREMPTY|XOR|\x2b|\x2d|\x2a|\x2f)";
+    private const string LOGICAL_REG_EX = @"(\x29|\x28|>=|<=|!=|==|<|>|AND|OR|NOT|ISNULLOREMPTY|XOR|\x2b|\x2d|\x2a|\x2f|@REGEX|@MINLENGTH|@MAXLENGTH)";
     protected double Result = 0;
     protected List<Symbol> InfixSymbol = new List<Symbol>();
     protected List<Symbol> PostfixSymbol = new List<Symbol>();
@@ -260,6 +260,9 @@ namespace Atlantis.Framework.RuleEngine.Evidence
           case "OR":
           case "NOT":
           case "XOR":
+          case "@REGEX":
+          case "@MINLENGTH":
+          case "@MAXLENGTH":
             result = true;
             break;
         }
@@ -353,6 +356,11 @@ namespace Atlantis.Framework.RuleEngine.Evidence
 
       switch (symbol.Name)
       {
+        case "@REGEX":
+        case "@MINLENGTH":
+        case "@MAXLENGTH":
+          result = 40;
+          break;
         case "*":
         case "/":
         case "%":
@@ -541,6 +549,21 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         case "NOT":
           op1 = (Symbol)operandStack.Pop(); //this operation requires one parameters
           operandResult = EvaluateNot(op1);
+          break;
+        case "@REGEX":
+          op2 = (Symbol)operandStack.Pop(); //this operation requires two parameters
+          op1 = (Symbol)operandStack.Pop();
+          operandResult = EvaluateRegex(op1, op2);
+          break;
+        case "@MINLENGTH":
+          op2 = (Symbol)operandStack.Pop(); //this operation requires two parameters
+          op1 = (Symbol)operandStack.Pop();
+          operandResult = EvaluateMinLength(op1, op2);
+          break;
+        case "@MAXLENGTH":
+          op2 = (Symbol)operandStack.Pop(); //this operation requires two parameters
+          op1 = (Symbol)operandStack.Pop();
+          operandResult = EvaluateMaxLength(op1, op2);
           break;
         default:
           throw new Exception(String.Format("Invalid operator: {0} of type {1}", postFix.Name, postFix.SymbolType));
@@ -1175,6 +1198,91 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         replacement = op3;
       }
       Debug.WriteLine("ExpressionExaluator {0} <= {1} = {2}", o1, o2, replacement);
+
+      op3.Value = new Naked(replacement, typeof(bool));
+      return op3;
+    }
+
+    private static Symbol EvaluateRegex(Symbol op1, Symbol op2)
+    {
+      var op3 = new Symbol { SymbolType = Type.Value };
+
+      string input = null;
+      string regex = null;
+
+      object replacement;
+      try
+      {
+        input = Convert.ToString(op1.Value.Value);
+        regex = Convert.ToString(op2.Value.Value);
+
+        Match match = Regex.Match(input, regex);
+        replacement = match.Success;
+      }
+      catch
+      {
+        op3.SymbolType = Type.Invalid;
+        op3.Value = null;
+        replacement = op3;
+      }
+
+      Debug.WriteLine("ExpressionEvaluator {0} @REGEX {1} = {2}", input, regex, replacement);
+
+      op3.Value = new Naked(replacement, typeof(bool));
+      return op3;
+    }
+
+    private static Symbol EvaluateMinLength(Symbol op1, Symbol op2)
+    {
+      var op3 = new Symbol { SymbolType = Type.Value };
+
+      string input = null;
+      int minLength = -1;
+
+      object replacement;
+      try
+      {
+        input = Convert.ToString(op1.Value.Value);
+        minLength = Convert.ToInt32(op2.Value.Value);
+
+        replacement = input.Length >= minLength;
+      }
+      catch
+      {
+        op3.SymbolType = Type.Invalid;
+        op3.Value = null;
+        replacement = op3;
+      }
+
+      Debug.WriteLine("ExpressionEvaluator {0} @MINLENGTH {1} = {2}", input, minLength, replacement);
+
+      op3.Value = new Naked(replacement, typeof(bool));
+      return op3;
+    }
+
+    private static Symbol EvaluateMaxLength(Symbol op1, Symbol op2)
+    {
+      var op3 = new Symbol { SymbolType = Type.Value };
+
+      string input = null;
+      int maxLength = -1;
+
+      object replacement;
+      try
+      {
+        input = Convert.ToString(op1.Value.Value);
+        maxLength = Convert.ToInt32(op2.Value.Value);
+
+        replacement = input.Length <= maxLength;
+      }
+      catch
+      {
+        op3.SymbolType = Type.Invalid;
+        op3.Value = null;
+        replacement = op3;
+      }
+
+      Debug.WriteLine("ExpressionEvaluator {0} @MINLENGTH {1} = {2}", input, maxLength, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;

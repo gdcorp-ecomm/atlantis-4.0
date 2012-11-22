@@ -68,6 +68,22 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       }
     }
 
+    private static IList<CdsAddOnPackage> CdsAddOnProductPackages
+    {
+      get
+      {
+        string cdsAddOnPackageIds = HttpContext.Current.Request.Form["product-packager-selected-cds-addon-product-packages"];
+        string[] cdsAddOnPackageIdsArray = cdsAddOnPackageIds != null ? cdsAddOnPackageIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : new string[0];
+        IList<CdsAddOnPackage> cdsAddOnPackageList = new List<CdsAddOnPackage>(cdsAddOnPackageIdsArray.Length);
+        foreach (string cdsAddOnPackageValue in cdsAddOnPackageIdsArray)
+        {
+          cdsAddOnPackageList.Add(new CdsAddOnPackage(cdsAddOnPackageValue));
+        }
+
+        return cdsAddOnPackageList;
+      }
+    }
+
     private static string UpSellProductPackageId
     {
       get { return HttpContext.Current.Request.Form["product-packager-selected-upsell-product-package-id"]; }
@@ -140,7 +156,7 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       try
       {
         AddItemRequestData requestData = AddItemRequestHelper.CreateAddItemRequest(ProviderContainer, OnAddOrderLevelAttributes);
-        AddItemRequestHelper.AddProductPackagesToRequest(ProviderContainer, OnAddItemLevelAttributesDelegate, requestData, ProductGroupId, ProductId, CartProductPackageId, AddOnProductPackageIds, UpSellProductPackageId);
+        AddItemRequestHelper.AddProductPackagesToRequest(ProviderContainer, OnAddItemLevelAttributesDelegate, requestData, ProductGroupId, ProductId, CartProductPackageId, AddOnProductPackageIds, CdsAddOnProductPackages, UpSellProductPackageId);
 
         AddItemResponseData responseData = (AddItemResponseData)Engine.Engine.ProcessRequest(requestData, 4);
         success = responseData.IsSuccess;

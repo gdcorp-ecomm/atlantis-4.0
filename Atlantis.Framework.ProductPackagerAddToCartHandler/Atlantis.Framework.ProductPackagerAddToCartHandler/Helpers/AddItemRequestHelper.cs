@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
 using Atlantis.Framework.AddItem.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.ProductPackager.Interface;
+using Atlantis.Framework.Providers.Interface.Products;
 
 namespace Atlantis.Framework.ProductPackagerAddToCartHandler
 {
@@ -49,6 +49,94 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       }
     }
 
+    private static double CalculateAddOnDuration(IProviderContainer providerContainer, AddToCartItem parentItem, int addOnPfid)
+    {
+      double addOnDuration = 1;
+
+      IProductProvider productProvider = providerContainer.Resolve<IProductProvider>();
+        
+      IProduct parentProduct = productProvider.GetProduct(parentItem.ProductId);
+      RecurringPaymentUnitType parentDurationType = parentProduct.DurationUnit;
+      double parentDuration = parentProduct.Duration;
+
+      IProduct addOnProduct = productProvider.GetProduct(addOnPfid);
+      RecurringPaymentUnitType addOnDurationType = addOnProduct.DurationUnit;
+
+      switch (parentDurationType)
+      {
+        case RecurringPaymentUnitType.Monthly:
+          switch (addOnDurationType)
+          {
+            case RecurringPaymentUnitType.Monthly:
+              addOnDuration = parentDuration;
+              break;
+            case RecurringPaymentUnitType.Quarterly:
+              addOnDuration = parentDuration / 3;
+              break;
+            case RecurringPaymentUnitType.SemiAnnual:
+              addOnDuration = parentDuration / 6;
+              break;
+            case RecurringPaymentUnitType.Annual:
+              addOnDuration = parentDuration / 12;
+              break;
+          }
+          break;
+        case RecurringPaymentUnitType.Quarterly:
+          switch (addOnDurationType)
+          {
+            case RecurringPaymentUnitType.Monthly:
+              addOnDuration = parentDuration * 3;
+              break;
+            case RecurringPaymentUnitType.Quarterly:
+              addOnDuration = parentDuration;
+              break;
+            case RecurringPaymentUnitType.SemiAnnual:
+              addOnDuration = parentDuration / 2;
+              break;
+            case RecurringPaymentUnitType.Annual:
+              addOnDuration = parentDuration / 4;
+              break;
+          }
+          break;
+        case RecurringPaymentUnitType.SemiAnnual:
+          switch (addOnDurationType)
+          {
+            case RecurringPaymentUnitType.Monthly:
+              addOnDuration = parentDuration * 6;
+              break;
+            case RecurringPaymentUnitType.Quarterly:
+              addOnDuration = parentDuration * 2;
+              break;
+            case RecurringPaymentUnitType.SemiAnnual:
+              addOnDuration = parentDuration;
+              break;
+            case RecurringPaymentUnitType.Annual:
+              addOnDuration = parentDuration / 2;
+              break;
+          }
+          break;
+        case RecurringPaymentUnitType.Annual:
+          switch (addOnDurationType)
+          {
+            case RecurringPaymentUnitType.Monthly:
+              addOnDuration = parentDuration * 12;
+              break;
+            case RecurringPaymentUnitType.Quarterly:
+              addOnDuration = parentDuration * 4;
+              break;
+            case RecurringPaymentUnitType.SemiAnnual:
+              addOnDuration = parentDuration * 2;
+              break;
+            case RecurringPaymentUnitType.Annual:
+              addOnDuration = parentDuration;
+              break;
+          }
+          break;
+      }
+    
+      return addOnDuration;
+    }
+
     private static void MarkAsFree(AddToCartItem freeItem)
     {
       freeItem[AddItemAttributes.OverrideListPrice] = "0";
@@ -78,23 +166,85 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       }
     }
 
+    private static IList<AddToCartItem> GetCdsAddOnPackageItems(IProviderContainer providerContainer, string productGroupId, AddToCartItem parentItem, CdsAddOnPackage cdsAddOnPackage)
+    {
+      IList<AddToCartItem> addToCartItems = new List<AddToCartItem>(16);
+
+      if (parentItem != null)
+      {
+        IProductGroupPackageData packageData = ProductPackagerHelper.GetProductGroupPackageData(productGroupId, parentItem.ProductId);
+
+        if (packageData.ProductPackageMappings.Count > 0)
+        {
+          foreach (IProductPackageMapping productPackageMapping in packageData.ProductPackageMappings)
+          {
+            if (productPackageMapping.PackageType == ProductPackageTypes.AddOn)
+            {
+              IProductPackageData productPackageData = ProductPackagerHelper.GetProductPackage(productPackageMapping.ProductPackageId);
+              foreach (IProductPackageChildProduct productPackageChildProduct in productPackageData.ParentProduct.ChildProducts)
+              {
+                if (productPackageChildProduct.ProductId == cdsAddOnPackage.ProductId)
+                {
+                  AddToCartItem addOnItem = new AddToCartItem(cdsAddOnPackage.ProductId, cdsAddOnPackage.Quantity);
+
+                  double addOnDuration = CalculateAddOnDuration(providerContainer, parentItem, addOnItem.ProductId);
+
+                  if (addOnDuration > 1)
+                  {
+                    AddDuration(addOnItem, addOnDuration);
+                  }
+
+                  if (productPackageChildProduct.IsFree)
+                  {
+                    MarkAsFree(addOnItem);
+                  }
+
+                  if (!string.IsNullOrEmpty(productPackageChildProduct.DiscountCode))
+                  {
+                    addOnItem[AddItemAttributes.DiscountCode] = productPackageChildProduct.DiscountCode;
+                  }
+
+                  if (productPackageChildProduct.IsChild)
+                  {
+                    parentItem.AddChildItem(addOnItem);
+                  }
+                  else
+                  {
+                    addToCartItems.Add(addOnItem);
+                  }
+                  break; // There should only be 1 add on with this pfid
+                }
+              }
+            }
+          }
+        }
+      }
+
+      return addToCartItems;
+      
+    }
+
     private static IList<AddToCartItem> GetItemsByProductId(string productGroupId, int unifiedProductId)
     {
       List<AddToCartItem> addToCartItems = new List<AddToCartItem>(32);
 
       IProductGroupPackageData packageData = ProductPackagerHelper.GetProductGroupPackageData(productGroupId, unifiedProductId);
 
+      bool cartPackageFound = false;
       if (packageData.ProductPackageMappings.Count > 0)
       {
         foreach (IProductPackageMapping productPackageMapping in packageData.ProductPackageMappings)
         {
-          if (string.Compare(productPackageMapping.PackageType, "cart", StringComparison.OrdinalIgnoreCase) == 0)
+          if (productPackageMapping.PackageType == ProductPackageTypes.Cart)
           {
             addToCartItems.AddRange(GetPackageItems(productPackageMapping.ProductPackageId));
+            cartPackageFound = true;
+            break; // There should only be 1 cart package per product
           }
         }
       }
-      else
+
+      if (!cartPackageFound)
       {
         AddToCartItem singleProductItem = new AddToCartItem(packageData.ProductId, packageData.Quantity);
         AddDuration(singleProductItem, packageData.Duration);
@@ -105,45 +255,48 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       return addToCartItems;
     }
 
-    private static IList<AddToCartItem> GetPackageItems(string packageId)
+    private static IList<AddToCartItem> GetPackageItems(string packageId, AddToCartItem parentItem = null)
     {
-      IList<AddToCartItem> cartItems = new List<AddToCartItem>();
+      IList<AddToCartItem> cartItems = new List<AddToCartItem>(16);
 
       IProductPackageData productPackageData = ProductPackagerHelper.GetProductPackage(packageId);
 
-      AddToCartItem parentProduct = new AddToCartItem(productPackageData.ParentProduct.ProductId, productPackageData.ParentProduct.Quantity);
-      AddDuration(parentProduct, productPackageData.ParentProduct.Duration);
-      if (!string.IsNullOrEmpty(productPackageData.ParentProduct.DiscountCode))
+      if (parentItem == null)
       {
-        parentProduct[AddItemAttributes.DiscountCode] = productPackageData.ParentProduct.DiscountCode;
-      }
+        parentItem = new AddToCartItem(productPackageData.ParentProduct.ProductId, productPackageData.ParentProduct.Quantity);
+        AddDuration(parentItem, productPackageData.ParentProduct.Duration);
+        if (!string.IsNullOrEmpty(productPackageData.ParentProduct.DiscountCode))
+        {
+          parentItem[AddItemAttributes.DiscountCode] = productPackageData.ParentProduct.DiscountCode;
+        }
 
-      cartItems.Add(parentProduct);
+        cartItems.Add(parentItem);
+      }
 
       if (productPackageData.ParentProduct.ChildProducts != null)
       {
         foreach (IProductPackageChildProduct packageChildProduct in productPackageData.ParentProduct.ChildProducts)
         {
-          AddToCartItem childProduct = new AddToCartItem(packageChildProduct.ProductId, packageChildProduct.Quantity);
-          AddDuration(childProduct, packageChildProduct.Duration);
+          AddToCartItem packageItem = new AddToCartItem(packageChildProduct.ProductId, packageChildProduct.Quantity);
+          AddDuration(packageItem, packageChildProduct.Duration);
 
           if (packageChildProduct.IsFree)
           {
-            MarkAsFree(childProduct);
+            MarkAsFree(packageItem);
           }
 
           if (!string.IsNullOrEmpty(packageChildProduct.DiscountCode))
           {
-            childProduct[AddItemAttributes.DiscountCode] = packageChildProduct.DiscountCode;
+            packageItem[AddItemAttributes.DiscountCode] = packageChildProduct.DiscountCode;
           }
 
           if (packageChildProduct.IsChild)
           {
-            parentProduct.AddChildItem(childProduct);
+            parentItem.AddChildItem(packageItem);
           }
           else
           {
-            cartItems.Add(childProduct);
+            cartItems.Add(packageItem);
           }
         }
       }
@@ -151,24 +304,35 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       return cartItems;
     }
 
-    private static IList<AddToCartItem> GetAddToCartItems(string productGroupId, int unifiedProductId, string cartProductPackageId, IEnumerable<string> addOnProductPackageIds, string upSellProductPackageId)
+    private static IList<AddToCartItem> GetAddToCartItems(IProviderContainer providerContainer, string productGroupId, int unifiedProductId, string cartProductPackageId, IEnumerable<string> addOnProductPackageIds, IEnumerable<CdsAddOnPackage> cdsAddOnProductPackages, string upSellProductPackageId)
     {
       List<AddToCartItem> addToCartList = new List<AddToCartItem>(32);
+      AddToCartItem parentItem = null;
 
       if (!string.IsNullOrEmpty(cartProductPackageId))
       {
         addToCartList.AddRange(GetPackageItems(cartProductPackageId));
+        parentItem = addToCartList.Count > 0 ? addToCartList[0] : null;
       }
       else if (unifiedProductId > 0)
       {
         addToCartList.AddRange(GetItemsByProductId(productGroupId, unifiedProductId));
+        parentItem = addToCartList.Count > 0 ? addToCartList[0] : null;
       }
 
       if (addOnProductPackageIds != null)
       {
         foreach (string addOnProductPackageId in addOnProductPackageIds)
         {
-          addToCartList.AddRange(GetPackageItems(addOnProductPackageId));  
+          addToCartList.AddRange(GetPackageItems(addOnProductPackageId, parentItem));  
+        }
+      }
+
+      if (cdsAddOnProductPackages != null)
+      {
+        foreach (CdsAddOnPackage cdsAddOnProductPackage in cdsAddOnProductPackages)
+        {
+          addToCartList.AddRange(GetCdsAddOnPackageItems(providerContainer, productGroupId, parentItem, cdsAddOnProductPackage));
         }
       }
 
@@ -196,9 +360,9 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       return requestData;
     }
 
-    internal static void AddProductPackagesToRequest(IProviderContainer providerContainer, AddItemLevelAttributesDelegate addItemLevelAttributesDelegate, AddItemRequestData addItemRequestData, string productGroupId, int unifiedProductId, string cartProductPackageId, IEnumerable<string> addOnProductPackageIds, string upSellProductPackageId)
+    internal static void AddProductPackagesToRequest(IProviderContainer providerContainer, AddItemLevelAttributesDelegate addItemLevelAttributesDelegate, AddItemRequestData addItemRequestData, string productGroupId, int unifiedProductId, string cartProductPackageId, IEnumerable<string> addOnProductPackageIds, IEnumerable<CdsAddOnPackage> cdsAddOnProductPackages, string upSellProductPackageId)
     {
-      IList<AddToCartItem> addToCartItems = GetAddToCartItems(productGroupId, unifiedProductId, cartProductPackageId, addOnProductPackageIds, upSellProductPackageId);
+      IList<AddToCartItem> addToCartItems = GetAddToCartItems(providerContainer, productGroupId, unifiedProductId, cartProductPackageId, addOnProductPackageIds, cdsAddOnProductPackages, upSellProductPackageId);
 
       foreach (AddToCartItem addToCartItem in addToCartItems)
       {

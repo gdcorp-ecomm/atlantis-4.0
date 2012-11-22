@@ -1,10 +1,13 @@
-﻿using Atlantis.Framework.ProductPackager.Impl.ProductPackage;
+﻿using System.Text.RegularExpressions;
+using Atlantis.Framework.ProductPackager.Impl.ProductPackage;
 using Atlantis.Framework.ProductPackager.Interface;
 
 namespace Atlantis.Framework.ProductPackager.Impl
 {
   internal class FbProductPackageMapping : IProductPackageMapping
   {
+    private static readonly Regex _removeNonAlphaCharacters = new Regex(@"[^a-zA-Z]", RegexOptions.Compiled);
+
     private readonly ProductGroupPackage _fbProductPackageMapping;
 
     private string _productPackageId;
@@ -27,7 +30,7 @@ namespace Atlantis.Framework.ProductPackager.Impl
       {
         if(_packageType == null)
         {
-          _packageType = _fbProductPackageMapping.pkgType;
+          _packageType = _removeNonAlphaCharacters.Replace(_fbProductPackageMapping.pkgType, string.Empty).ToLowerInvariant(); // We need to make sure "Add-ons" comes back as "addons" to match the product package xml
         }
         return _packageType;
       }

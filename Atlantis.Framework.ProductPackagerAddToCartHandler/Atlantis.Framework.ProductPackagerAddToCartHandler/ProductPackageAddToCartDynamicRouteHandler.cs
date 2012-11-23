@@ -57,27 +57,16 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       get { return HttpContext.Current.Request.Form["product-packager-selected-cart-product-package-id"]; }
     }
 
-    private static IList<string> AddOnProductPackageIds
+    private static IList<AddOnSelection> AddOnProductPackages
     {
       get
       {
-        string addOnPackageIds = HttpContext.Current.Request.Form["product-packager-selected-addon-product-package-ids"];
-        string[] addOnPackageIdsArray = addOnPackageIds != null ? addOnPackageIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : new string[0];
-        
-        return new List<string>(addOnPackageIdsArray);
-      }
-    }
-
-    private static IList<CdsAddOnPackage> CdsAddOnProductPackages
-    {
-      get
-      {
-        string cdsAddOnPackageIds = HttpContext.Current.Request.Form["product-packager-selected-cds-addon-product-packages"];
+        string cdsAddOnPackageIds = HttpContext.Current.Request.Form["product-packager-selected-addon-product-packages"];
         string[] cdsAddOnPackageIdsArray = cdsAddOnPackageIds != null ? cdsAddOnPackageIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) : new string[0];
-        IList<CdsAddOnPackage> cdsAddOnPackageList = new List<CdsAddOnPackage>(cdsAddOnPackageIdsArray.Length);
+        IList<AddOnSelection> cdsAddOnPackageList = new List<AddOnSelection>(cdsAddOnPackageIdsArray.Length);
         foreach (string cdsAddOnPackageValue in cdsAddOnPackageIdsArray)
         {
-          cdsAddOnPackageList.Add(new CdsAddOnPackage(cdsAddOnPackageValue));
+          cdsAddOnPackageList.Add(new AddOnSelection(cdsAddOnPackageValue));
         }
 
         return cdsAddOnPackageList;
@@ -156,7 +145,7 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       try
       {
         AddItemRequestData requestData = AddItemRequestHelper.CreateAddItemRequest(ProviderContainer, OnAddOrderLevelAttributes);
-        AddItemRequestHelper.AddProductPackagesToRequest(ProviderContainer, OnAddItemLevelAttributesDelegate, requestData, ProductGroupId, ProductId, CartProductPackageId, AddOnProductPackageIds, CdsAddOnProductPackages, UpSellProductPackageId);
+        AddItemRequestHelper.AddProductPackagesToRequest(ProviderContainer, OnAddItemLevelAttributesDelegate, requestData, ProductGroupId, ProductId, CartProductPackageId, AddOnProductPackages, UpSellProductPackageId);
 
         AddItemResponseData responseData = (AddItemResponseData)Engine.Engine.ProcessRequest(requestData, 4);
         success = responseData.IsSuccess;

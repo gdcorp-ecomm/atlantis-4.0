@@ -29,7 +29,7 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
     {
       if(addItemLevelAttributesDelegate != null)
       {
-        ICollection<KeyValuePair<string, string>> itemAttributes = addItemLevelAttributesDelegate.Invoke(providerContainer);
+        ICollection<KeyValuePair<string, string>> itemAttributes = addItemLevelAttributesDelegate.Invoke(providerContainer, addToCartItem.ProductId);
         if(itemAttributes != null)
         {
           foreach (KeyValuePair<string, string> itemAttribute in itemAttributes)
@@ -57,6 +57,7 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
         
       IProduct parentProduct = productProvider.GetProduct(parentItem.ProductId);
       RecurringPaymentUnitType parentDurationType = parentProduct.DurationUnit;
+      // TODO: Do we need to take into account if there is also a duration on the actual cart item? product.Duration * cartItem.Duration?
       double parentDuration = parentProduct.Duration;
 
       IProduct addOnProduct = productProvider.GetProduct(addOnPfid);
@@ -166,7 +167,7 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       }
     }
 
-    private static IList<AddToCartItem> GetCdsAddOnPackageItems(IProviderContainer providerContainer, string productGroupId, AddToCartItem parentItem, CdsAddOnPackage cdsAddOnPackage)
+    private static IList<AddToCartItem> GetAddOnPackageItems(IProviderContainer providerContainer, string productGroupId, AddToCartItem parentItem, AddOnSelection addOnSelection)
     {
       IList<AddToCartItem> addToCartItems = new List<AddToCartItem>(16);
 
@@ -183,13 +184,14 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
               IProductPackageData productPackageData = ProductPackagerHelper.GetProductPackage(productPackageMapping.ProductPackageId);
               foreach (IProductPackageChildProduct productPackageChildProduct in productPackageData.ParentProduct.ChildProducts)
               {
-                if (productPackageChildProduct.ProductId == cdsAddOnPackage.ProductId)
+                if (productPackageChildProduct.ProductId == addOnSelection.ProductId &&
+                    productPackageChildProduct.Quantity == addOnSelection.Quantity)
                 {
-                  AddToCartItem addOnItem = new AddToCartItem(cdsAddOnPackage.ProductId, cdsAddOnPackage.Quantity);
+                  AddToCartItem addOnItem = new AddToCartItem(productPackageChildProduct.ProductId, productPackageChildProduct.Quantity);
 
                   double addOnDuration = CalculateAddOnDuration(providerContainer, parentItem, addOnItem.ProductId);
 
-                  if (addOnDuration > 1)
+                  if (addOnDuration > 1) // If its 1, no need to add the attribute, assumed
                   {
                     AddDuration(addOnItem, addOnDuration);
                   }
@@ -212,7 +214,7 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
                   {
                     addToCartItems.Add(addOnItem);
                   }
-                  break; // There should only be 1 add on with this pfid
+                  break; // There should only be 1 add on with this pfid and quantity
                 }
               }
             }
@@ -304,7 +306,7 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       return cartItems;
     }
 
-    private static IList<AddToCartItem> GetAddToCartItems(IProviderContainer providerContainer, string productGroupId, int unifiedProductId, string cartProductPackageId, IEnumerable<string> addOnProductPackageIds, IEnumerable<CdsAddOnPackage> cdsAddOnProductPackages, string upSellProductPackageId)
+    private static IList<AddToCartItem> GetAddToCartItems(IProviderContainer providerContainer, string productGroupId, int unifiedProductId, string cartProductPackageId, IEnumerable<AddOnSelection> addOnProductPackages, string upSellProductPackageId)
     {
       List<AddToCartItem> addToCartList = new List<AddToCartItem>(32);
       AddToCartItem parentItem = null;
@@ -320,19 +322,11 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
         parentItem = addToCartList.Count > 0 ? addToCartList[0] : null;
       }
 
-      if (addOnProductPackageIds != null)
+      if (addOnProductPackages != null)
       {
-        foreach (string addOnProductPackageId in addOnProductPackageIds)
+        foreach (AddOnSelection addOnSelection in addOnProductPackages)
         {
-          addToCartList.AddRange(GetPackageItems(addOnProductPackageId, parentItem));  
-        }
-      }
-
-      if (cdsAddOnProductPackages != null)
-      {
-        foreach (CdsAddOnPackage cdsAddOnProductPackage in cdsAddOnProductPackages)
-        {
-          addToCartList.AddRange(GetCdsAddOnPackageItems(providerContainer, productGroupId, parentItem, cdsAddOnProductPackage));
+          addToCartList.AddRange(GetAddOnPackageItems(providerContainer, productGroupId, parentItem, addOnSelection));
         }
       }
 
@@ -360,13 +354,23 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
       return requestData;
     }
 
-    internal static void AddProductPackagesToRequest(IProviderContainer providerContainer, AddItemLevelAttributesDelegate addItemLevelAttributesDelegate, AddItemRequestData addItemRequestData, string productGroupId, int unifiedProductId, string cartProductPackageId, IEnumerable<string> addOnProductPackageIds, IEnumerable<CdsAddOnPackage> cdsAddOnProductPackages, string upSellProductPackageId)
+    internal static void AddProductPackagesToRequest(IProviderContainer providerContainer, AddItemLevelAttributesDelegate addItemLevelAttributesDelegate, AddItemRequestData addItemRequestData, string productGroupId, int unifiedProductId, string cartProductPackageId, IEnumerable<AddOnSelection> addOnProductPackages, string upSellProductPackageId)
     {
-      IList<AddToCartItem> addToCartItems = GetAddToCartItems(providerContainer, productGroupId, unifiedProductId, cartProductPackageId, addOnProductPackageIds, cdsAddOnProductPackages, upSellProductPackageId);
+      IList<AddToCartItem> addToCartItems = GetAddToCartItems(providerContainer, productGroupId, unifiedProductId, cartProductPackageId, addOnProductPackages, upSellProductPackageId);
 
       foreach (AddToCartItem addToCartItem in addToCartItems)
       {
         AddContextualItemLevelAttributes(providerContainer, addToCartItem, addItemLevelAttributesDelegate);
+        if (!addToCartItem.IsChild && addToCartItem.HasChildren)
+        {
+          IEnumerator<AddToCartItem> childEnumerator = addToCartItem.GetChildEnumerator();
+          while (childEnumerator.MoveNext())
+          {
+            AddToCartItem childItem = childEnumerator.Current;
+            AddContextualItemLevelAttributes(providerContainer, childItem, addItemLevelAttributesDelegate);
+          }
+        }
+
         AddItemToRequest(addItemRequestData, addToCartItem);
       }
     }

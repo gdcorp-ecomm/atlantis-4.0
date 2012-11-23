@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="AddToCartDelegates.cs" />
     <Compile Include="AddToCartItem.cs" />
-    <Compile Include="CdsAddOnPackage.cs" />
+    <Compile Include="AddOnSelection.cs" />
     <Compile Include="Helpers\AddItemRequestHelper.cs" />
     <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Helpers\HttpRequestHelper.cs" />

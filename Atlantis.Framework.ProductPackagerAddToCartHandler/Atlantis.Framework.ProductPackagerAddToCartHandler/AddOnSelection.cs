@@ -1,13 +1,11 @@
-﻿using System;
-
+﻿
 namespace Atlantis.Framework.ProductPackagerAddToCartHandler
 {
-  [Obsolete("This is only to be used until we fill all product packager gaps around addons")]
-  internal class CdsAddOnPackage
+  internal class AddOnSelection
   {
     private readonly string[] _addOnValues;
 
-    internal CdsAddOnPackage(string inputValue)
+    internal AddOnSelection(string inputValue)
     {
       _addOnValues = inputValue.Split(new[] {'|'});
     }

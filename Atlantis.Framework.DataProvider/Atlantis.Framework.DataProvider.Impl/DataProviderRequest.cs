@@ -293,6 +293,8 @@ namespace Atlantis.Framework.DataProvider.Impl
           return ParameterDirection.Output;
         case "inputoutput":
           return ParameterDirection.InputOutput;
+        case "return":
+          return ParameterDirection.ReturnValue;
         default:
           return ParameterDirection.Input;
       }

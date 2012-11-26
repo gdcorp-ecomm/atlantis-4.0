@@ -10,6 +10,7 @@ using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Providers.Products;
 using Atlantis.Framework.Providers.Interface.Preferences;
+using System.Web;
 
 namespace Atlantis.Framework.TH.Products.Tests
 {
@@ -31,14 +32,14 @@ namespace Atlantis.Framework.TH.Products.Tests
     private void SetBasicContextAndProviders()
     {
       MockHttpContext.SetMockHttpContext("default.aspx", "http://www.godaddy.com/default.aspx?ci=1", "ci=1");
-      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContextGoDaddy>();
+      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
       HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
       HttpProviderContainer.Instance.RegisterProvider<IShopperPreferencesProvider, MockShopperPreference>();
       HttpProviderContainer.Instance.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
       HttpProviderContainer.Instance.RegisterProvider<IProductProvider, ProductProvider>();
     }
 
-    private void TokenSuccess(string xmlTokenData, string shopperCurrency = null)
+    private string TokenSuccess(string xmlTokenData, string shopperCurrency = null, int shopperPriceType = -1)
     {
       SetBasicContextAndProviders();
 
@@ -48,12 +49,19 @@ namespace Atlantis.Framework.TH.Products.Tests
         preferences.UpdatePreference("gdshop_currencyType", shopperCurrency);
       }
 
+      if (shopperPriceType != -1)
+      {
+        HttpContext.Current.Items[MockShopperContextSettings.PriceType] = shopperPriceType;
+      }
+
       string outputText;
 
       string token = string.Format(_tokenFormat, xmlTokenData);
       TokenEvaluationResult result = TokenManager.ReplaceTokens(token, HttpProviderContainer.Instance, out outputText);
       Assert.AreEqual(TokenEvaluationResult.Success, result);
       Assert.AreNotEqual(string.Empty, outputText);
+
+      return outputText;
     }
 
     [TestMethod]
@@ -77,11 +85,42 @@ namespace Atlantis.Framework.TH.Products.Tests
     [TestMethod]
     public void CurrentPriceWithPeriodAndDropOptions()
     {
-      TokenSuccess("<current productid=\"58\" period=\"yearly\" dropdecimal=\"true\" dropsymbol=\"true\" />");
+      string output = TokenSuccess("<current productid=\"58\" period=\"yearly\" dropdecimal=\"true\" dropsymbol=\"true\" />");
+      Assert.IsFalse(output.Contains("$"));
     }
 
+    [TestMethod]
+    public void ListPriceCurrencyOverride()
+    {
+      string output = TokenSuccess("<list productid=\"58\" period=\"monthly\" currencytype=\"INR\" />");
+      Assert.IsFalse(output.Contains("$"));
+    }
 
+    [TestMethod]
+    public void ListPricePriceTypeOverride()
+    {
+      string outputStandard = TokenSuccess("<list productid=\"101\" period=\"yearly\" />");
+      string outputDDC = TokenSuccess("<list productid=\"101\" period=\"yearly\" pricetype=\"8\" />");
+      Assert.AreNotEqual(outputStandard, outputDDC);
+    }
 
+    [TestMethod]
+    public void ListPriceCostcoShopper()
+    {
+      string outputStandard = TokenSuccess("<list productid=\"101\" period=\"yearly\" />");
+      string outputCostco = TokenSuccess("<list productid=\"101\" period=\"yearly\" />", null, 16);
+      Assert.AreNotEqual(outputStandard, outputCostco);
+    }
+
+    [TestMethod]
+    public void NonHtmlSymbol()
+    {
+      string outputHtml = TokenSuccess("<list productid=\"58\" period=\"monthly\" htmlsymbol=\"true\" currencytype=\"EUR\" />");
+      Assert.IsTrue(outputHtml.Contains("&euro;"));
+
+      string output = TokenSuccess("<list productid=\"58\" period=\"monthly\" htmlsymbol=\"false\" currencytype=\"EUR\" />");
+      Assert.IsFalse(output.Contains("&euro;"));
+    }
 
   }
 }

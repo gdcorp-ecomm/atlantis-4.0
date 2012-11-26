@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.Interface;
+using System.Web;
 
 namespace Atlantis.Framework.Testing.MockProviders
 {
@@ -11,7 +12,6 @@ namespace Atlantis.Framework.Testing.MockProviders
 
     private string _shopperId = string.Empty;
     private ShopperStatusType _shopperStatus = ShopperStatusType.Public;
-    private int _shopperPriceType = 0;
 
     public string ShopperId
     {
@@ -25,12 +25,23 @@ namespace Atlantis.Framework.Testing.MockProviders
 
     public int ShopperPriceType
     {
-      get { return _shopperPriceType; }
+      get
+      {
+        int result = 0;
+        if (HttpContext.Current != null)
+        {
+          object priceType = HttpContext.Current.Items[MockShopperContextSettings.PriceType];
+          if ((priceType != null) && (priceType is int))
+          {
+            result = (int)priceType;
+          }
+        }
+        return result;
+      }
     }
 
     public void ClearShopper()
     {
-      _shopperPriceType = 0;
       _shopperId = string.Empty;
       _shopperStatus = ShopperStatusType.Public;
     }

@@ -72,56 +72,10 @@ namespace Atlantis.Framework.TH.Products
       return result;
     }
 
-    private ICurrencyPrice GetProductPrice(IProduct product, string renderType, string currencyTypeOverride)
+
+    private ICurrencyPrice GetPrice(ProductPriceToken token)
     {
-      ICurrencyPrice result;
-
-      if ("list".Equals(renderType))
-      {
-        result = product.ListPrice;
-      }
-      else
-      {
-        result = product.CurrentPrice;
-      }
-
-      return result;
-    }
-
-    private ICurrencyPrice GetViewPrice(IProductView productView, string renderType, RecurringPaymentUnitType periodType)
-    {
-      ICurrencyPrice result;
-
-      if ("list".Equals(renderType))
-      {
-        if (periodType == RecurringPaymentUnitType.Annual)
-        {
-          result = productView.YearlyListPrice;
-        }
-        else
-        {
-          result = productView.MonthlyListPrice;
-        }
-      }
-      else
-      {
-        if (periodType == RecurringPaymentUnitType.Annual)
-        {
-          result = productView.YearlyCurrentPrice;
-        }
-        else
-        {
-          result = productView.MonthlyCurrentPrice;
-        }
-      }
-
-      return result;
-    }
-
-    private bool RenderSimplePrice(ProductPriceToken token)
-    {
-      bool result = false;
-      string priceText = string.Empty;
+      ICurrencyPrice result = null;
 
       if (token.ProductId != 0)
       {
@@ -136,30 +90,98 @@ namespace Atlantis.Framework.TH.Products
           case "yearly":
             periodType = RecurringPaymentUnitType.Annual;
             break;
+          case "semiannual":
+            periodType = RecurringPaymentUnitType.SemiAnnual;
+            break;
+          case "quarterly":
+            periodType = RecurringPaymentUnitType.Quarterly;
+            break;
         }
 
-        ICurrencyPrice price;
-
-        if (periodType == RecurringPaymentUnitType.Unknown)
+        ICurrencyInfo txCurrency = null;
+        if (token.CurrencyType != null)
         {
-          price = GetProductPrice(product, token.RenderType, token.CurrencyType);
+          txCurrency = _currency.GetValidCurrencyInfo(token.CurrencyType);
+        }
+
+        if ("list".Equals(token.RenderType, StringComparison.OrdinalIgnoreCase))
+        {
+          result = product.GetListPrice(periodType, token.PriceType, txCurrency);
         }
         else
         {
-          IProductView productView = _products.NewProductView(product);
-          price = GetViewPrice(productView, token.RenderType, periodType);
+          result = product.GetCurrentPrice(periodType, token.PriceType, txCurrency, token.ISC);
         }
+      }
 
-        if (token.CurrencyType == null)
+      return result;
+    }
+
+    private PriceFormatOptions GetPriceFormatOptions(ProductPriceToken token)
+    {
+      PriceFormatOptions result = PriceFormatOptions.None;
+
+      if (token.DropDecimal)
+      {
+        result |= PriceFormatOptions.DropDecimal;
+      }
+
+      if (token.DropSymbol)
+      {
+        result |= PriceFormatOptions.DropSymbol;
+      }
+      else if (!token.HtmlSymbol)
+      {
+        result |= PriceFormatOptions.AsciiSymbol;
+      }
+
+      if ("parentheses".Equals(token.NegativeFormat, StringComparison.OrdinalIgnoreCase))
+      {
+        result |= PriceFormatOptions.NegativeParentheses;
+      }
+
+      return result;
+    }
+
+
+    private PriceTextOptions GetPriceTextOptions(ProductPriceToken token)
+    {
+      PriceTextOptions result = PriceTextOptions.None;
+
+      if (_maskPricesIfAllowed.Value && token.AllowMask)
+      {
+        result |= PriceTextOptions.MaskPrices;
+      }
+
+      if (!"notallowed".Equals(token.NegativeFormat, StringComparison.OrdinalIgnoreCase))
+      {
+        result |= PriceTextOptions.AllowNegativePrice;
+      }
+
+      return result;
+    }
+
+    private bool RenderSimplePrice(ProductPriceToken token)
+    {
+      bool result = false;
+      string priceText = string.Empty;
+
+      ICurrencyPrice price = GetPrice(token);
+
+      if (price != null)
+      {
+        PriceFormatOptions formatOptions = GetPriceFormatOptions(token);
+
+        if (token.CurrencyType != null)
         {
-          bool maskPrices = _maskPricesIfAllowed.Value && token.AllowMask;
-          priceText = _currency.PriceText(price, maskPrices, token.DropDecimal, token.DropSymbol);
+          priceText = _currency.PriceFormat(price, formatOptions);
         }
         else
         {
-          priceText = _currency.PriceFormat(price, token.DropDecimal, token.DropSymbol);
+          PriceTextOptions textOptions = GetPriceTextOptions(token);
+          priceText = _currency.PriceText(price, textOptions, formatOptions);
         }
-        
+
         result = true;
       }
 

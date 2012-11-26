@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="MockNoManagerContext.cs" />
     <Compile Include="MockShopperContext.cs" />
+    <Compile Include="MockShopperContextSettings.cs" />
     <Compile Include="MockShopperPreference.cs" />
     <Compile Include="MockSiteContext.cs" />
     <Compile Include="MockSiteContextSettings.cs" />

@@ -31,7 +31,7 @@ namespace Atlantis.Framework.TH.Products.Tests
     private void SetBasicContextAndProviders()
     {
       MockHttpContext.SetMockHttpContext("default.aspx", "http://www.godaddy.com/default.aspx?ci=1", "ci=1");
-      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContextGoDaddy>();
+      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
       HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
       HttpProviderContainer.Instance.RegisterProvider<IShopperPreferencesProvider, MockShopperPreference>();
       HttpProviderContainer.Instance.RegisterProvider<ICurrencyProvider, CurrencyProvider>();

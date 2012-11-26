@@ -98,10 +98,10 @@ namespace Atlantis.Framework.Testing.MockProviders
         int result = 0;
         if (HttpContext.Current != null)
         {
-          string pageCount = HttpContext.Current.Items[MockSiteContextSettings.PageCount] as string;
-          if ((!string.IsNullOrEmpty(pageCount)) && (!int.TryParse(pageCount, out result)))
+          object pageCount = HttpContext.Current.Items[MockSiteContextSettings.PageCount];
+          if ((pageCount != null) && (pageCount is int))
           {
-            result = 0;
+            result = (int)pageCount;
           }
         }
         return result;

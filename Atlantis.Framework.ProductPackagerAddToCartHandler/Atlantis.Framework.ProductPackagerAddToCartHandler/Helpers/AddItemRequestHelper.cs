@@ -57,8 +57,15 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
         
       IProduct parentProduct = productProvider.GetProduct(parentItem.ProductId);
       RecurringPaymentUnitType parentDurationType = parentProduct.DurationUnit;
-      // TODO: Do we need to take into account if there is also a duration on the actual cart item? product.Duration * cartItem.Duration?
+      
       double parentDuration = parentProduct.Duration;
+      string parentItemDurationValue;
+      double parentItemDuration;
+      if(parentItem.TryGetValue(AddItemAttributes.Duration, out parentItemDurationValue) &&
+         double.TryParse(parentItemDurationValue, out parentItemDuration))
+      {
+        parentDuration = parentDuration * parentItemDuration;
+      }
 
       IProduct addOnProduct = productProvider.GetProduct(addOnPfid);
       RecurringPaymentUnitType addOnDurationType = addOnProduct.DurationUnit;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
+using Atlantis.Framework.CDS.Entities.Filters;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
@@ -14,7 +15,6 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public string FeatureSpriteImage { get; set; }
     public int FeatureWidth { get; set; }
-    public bool Filtered { get; set; }
 
     private int _numColumns = 1;
     public int NumColumns
@@ -23,7 +23,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       set { _numColumns = value; }
     }
 
-    public class Feature: ElementBase
+    public class Feature: FilterBase
     {
       public Feature()
       {
@@ -32,9 +32,9 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
         SpritePosition = string.Empty;
       }
 
+      public string Text { get; set; }
       public string Title { get; set; }
       public string SpritePosition { get; set; }
-      public bool Filtered { get; set; }
 
       public class FeatureListItem : ElementBase
       {

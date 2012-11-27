@@ -54,10 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.Impl\Atlantis.Framework.CDS.Impl.csproj">
-      <Project>{813511AE-2721-4A3B-9894-E1FB6AC41449}</Project>
-      <Name>Atlantis.Framework.CDS.Impl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.Interface\Atlantis.Framework.CDS.Interface.csproj">
       <Project>{43ECC9F8-C897-4AE0-8C53-22B2691D6995}</Project>
       <Name>Atlantis.Framework.CDS.Interface</Name>

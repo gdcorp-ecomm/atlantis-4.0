@@ -122,5 +122,19 @@ namespace Atlantis.Framework.TH.Products.Tests
       Assert.IsFalse(output.Contains("&euro;"));
     }
 
+    [TestMethod]
+    public void TemplateBasicNoStrike()
+    {
+      string outputHtml = TokenSuccess("<template productid=\"58\" period=\"monthly\"><strike><![CDATA[<strike>{1}</strike> {0}]]></strike><nostrike><![CDATA[]]>{0}</nostrike></template>");
+      Assert.IsTrue(outputHtml.Contains("$"));
+    }
+
+    [TestMethod]
+    public void TemplateBasicStrike()
+    {
+      string outputHtml = TokenSuccess("<template productid=\"40801\" period=\"yearly\"><strike><![CDATA[<strike>{1}</strike> {0}]]></strike><nostrike><![CDATA[]]>{0}</nostrike></template>");
+      Assert.IsTrue(outputHtml.Contains("strike"));
+    }
+
   }
 }

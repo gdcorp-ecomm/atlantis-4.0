@@ -54,6 +54,7 @@ namespace Atlantis.Framework.TH.Products
             result = RenderSimplePrice(ppToken);
             break;
           case "template":
+            result = RenderTemplatePrice(ppToken);
             break;
           default:
             result = false;
@@ -72,8 +73,7 @@ namespace Atlantis.Framework.TH.Products
       return result;
     }
 
-
-    private ICurrencyPrice GetPrice(ProductPriceToken token)
+    private ICurrencyPrice GetPrice(ProductPriceToken token, bool useListPrice)
     {
       ICurrencyPrice result = null;
 
@@ -104,7 +104,7 @@ namespace Atlantis.Framework.TH.Products
           txCurrency = _currency.GetValidCurrencyInfo(token.CurrencyType);
         }
 
-        if ("list".Equals(token.RenderType, StringComparison.OrdinalIgnoreCase))
+        if (useListPrice)
         {
           result = product.GetListPrice(periodType, token.PriceType, txCurrency);
         }
@@ -165,8 +165,9 @@ namespace Atlantis.Framework.TH.Products
     {
       bool result = false;
       string priceText = string.Empty;
+      bool useListPrice = "list".Equals(token.RenderType, StringComparison.OrdinalIgnoreCase);
 
-      ICurrencyPrice price = GetPrice(token);
+      ICurrencyPrice price = GetPrice(token, useListPrice);
 
       if (price != null)
       {
@@ -189,6 +190,45 @@ namespace Atlantis.Framework.TH.Products
       return result;
     }
 
+    private bool RenderTemplatePrice(ProductPriceToken token)
+    {
+      bool result = false;
+      string priceText = string.Empty;
+
+      ICurrencyPrice listPrice = GetPrice(token, true);
+      ICurrencyPrice currentPrice = GetPrice(token, false);
+
+      if ((listPrice != null) && (currentPrice != null))
+      {
+        PriceFormatOptions formatOptions = GetPriceFormatOptions(token);
+        string listText;
+        string currentText;
+
+        if (token.CurrencyType != null)
+        {
+          listText = _currency.PriceFormat(listPrice, formatOptions);
+          currentText = _currency.PriceFormat(currentPrice, formatOptions);
+        }
+        else
+        {
+          PriceTextOptions textOptions = GetPriceTextOptions(token);
+          listText = _currency.PriceText(listPrice, textOptions, formatOptions);
+          currentText = _currency.PriceText(currentPrice, textOptions, formatOptions);
+        }
+
+        string formatTemplate = token.NoStrikeTemplate;
+        if (listPrice.Price > currentPrice.Price)
+        {
+          formatTemplate = token.StrikeTemplate;
+        }
+
+        priceText = string.Format(formatTemplate, currentText, listText);
+        result = true;
+      }
+
+      token.TokenResult = priceText;
+      return result;
+    }
 
   }
 }

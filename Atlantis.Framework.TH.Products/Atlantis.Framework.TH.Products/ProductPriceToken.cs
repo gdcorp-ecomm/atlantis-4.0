@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.Tokens.Interface;
+using System.Linq;
 
 namespace Atlantis.Framework.TH.Products
 {
@@ -19,6 +20,8 @@ namespace Atlantis.Framework.TH.Products
     public string NegativeFormat { get; private set; }
     public int PriceType { get; private set; }
     public string ISC { get; private set; }
+    public string NoStrikeTemplate { get; private set; }
+    public string StrikeTemplate { get; private set; }
 
     public ProductPriceToken(string key, string data, string fullTokenString)
       : base(key, data, fullTokenString)
@@ -33,6 +36,25 @@ namespace Atlantis.Framework.TH.Products
       CurrencyType = GetAttributeText("currencytype", null);
       Period = GetAttributeText("period", string.Empty);
       AllowMask = GetAttributeBool("allowmask", true);
+
+      if (TokenData.Elements("nostrike").Any())
+      {
+        NoStrikeTemplate = TokenData.Element("nostrike").Value;
+      }
+      else
+      {
+        NoStrikeTemplate = string.Empty;
+      }
+
+      if (TokenData.Elements("strike").Any())
+      {
+        StrikeTemplate = TokenData.Element("strike").Value;
+      }
+      else
+      {
+        StrikeTemplate = string.Empty;
+      }
+
     }
   }
 }

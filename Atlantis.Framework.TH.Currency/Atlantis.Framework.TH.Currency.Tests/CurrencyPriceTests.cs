@@ -43,35 +43,64 @@ namespace Atlantis.Framework.TH.Currency.Tests
       return outputText;
     }
 
+    // Negative test
+    private string TokenFail(string xmlTokenData)
+    {
+      SetBasicContextAndProviders();
+
+      string outputText;
+
+      string token = string.Format(_TOKEN_FORMAT, xmlTokenData);
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, HttpProviderContainer.Instance, out outputText);
+      Assert.AreEqual(TokenEvaluationResult.Errors, result);
+
+      return outputText;
+    }
+
     [TestMethod]
     public void Basic()
     {
-      string output = TokenSuccess("<currencyprice amount=\"1000\" />");
+      string output = TokenSuccess("<price usdamount=\"1000\" />");
       Assert.AreEqual("$10.00", output, false);
     }
 
     [TestMethod]
     public void DropOptions()
     {
-      string output = TokenSuccess("<currencyprice amount=\"1000\" dropdecimal=\"true\" dropsymbol=\"true\" />");
+      string output = TokenSuccess("<price usdamount=\"1000\" dropdecimal=\"true\" dropsymbol=\"true\" />");
       Assert.AreEqual("10", output, false);
     }
 
     [TestMethod]
     public void CurrencyOverride()
     {
-      string output = TokenSuccess("<currencyprice amount=\"1000\" currencytype=\"INR\" />");
+      string output = TokenSuccess("<price usdamount=\"1000\" currencytype=\"INR\" />");
       Assert.IsTrue(output.Contains("Rs.") && !output.Contains("$"));
     }
 
     [TestMethod]
     public void NonHtmlSymbol()
     {
-      string outputHtml = TokenSuccess("<currencyprice amount=\"1000\" htmlsymbol=\"true\" currencytype=\"EUR\" />");
+      string outputHtml = TokenSuccess("<price usdamount=\"1000\" htmlsymbol=\"true\" currencytype=\"EUR\" />");
       Assert.IsTrue(outputHtml.Contains("&euro;"));
 
-      string output = TokenSuccess("<currencyprice amount=\"1000\" htmlsymbol=\"false\" currencytype=\"EUR\" />");
+      string output = TokenSuccess("<price usdamount=\"1000\" htmlsymbol=\"false\" currencytype=\"EUR\" />");
       Assert.IsFalse(output.Contains("&euro;"));
+    }
+
+    // Negative tests
+    [TestMethod]
+    public void InvalidRootElement()
+    {
+      string output = TokenFail("<foo usdamount=\"1000\" />");
+      Assert.AreEqual(string.Empty, output, false);
+    }
+
+    [TestMethod]
+    public void InvalidXml()
+    {
+      string output = TokenFail("usdamount=\"1000\"");
+      Assert.AreEqual(string.Empty, output, false);
     }
   }
 }

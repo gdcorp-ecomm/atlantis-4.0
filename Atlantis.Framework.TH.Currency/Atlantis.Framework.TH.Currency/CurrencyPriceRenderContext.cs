@@ -17,27 +17,11 @@ namespace Atlantis.Framework.TH.Currency
   {
     ICurrencyProvider _currency;
     ISiteContext _siteContext;
-    Lazy<bool> _maskPricesIfAllowed;
 
     internal CurrencyPriceRenderContext(IProviderContainer container)
     {
       _siteContext = container.Resolve<ISiteContext>();
       _currency = container.Resolve<ICurrencyProvider>();
-      _maskPricesIfAllowed = new Lazy<bool>(() => { return GetIsPriceMaskOn(); });
-    }
-
-    private bool GetIsPriceMaskOn()
-    {
-      bool result = false;
-      if ((_siteContext.ContextId == 6) && (HttpContext.Current != null) && (HttpContext.Current.Request != null))
-      {
-        string appHeaderQuery = HttpContext.Current.Request.QueryString["app_hdr"];
-        if (string.Equals(appHeaderQuery, "1387", StringComparison.Ordinal))
-        {
-          result = true;
-        }
-      }
-      return result;
     }
 
     internal bool RenderToken(IToken token)
@@ -49,7 +33,7 @@ namespace Atlantis.Framework.TH.Currency
       {
         switch (cpToken.RenderType)
         {
-          case "currencyprice":
+          case "price":
             result = RenderSimplePrice(cpToken);
             break;
           case "template":
@@ -114,11 +98,6 @@ namespace Atlantis.Framework.TH.Currency
     private PriceTextOptions GetPriceTextOptions(CurrencyPriceToken token)
     {
       PriceTextOptions result = PriceTextOptions.None;
-
-      if (_maskPricesIfAllowed.Value && token.AllowMask)
-      {
-        result |= PriceTextOptions.MaskPrices;
-      }
 
       if (!string.Equals("notallowed", token.NegativeFormat, StringComparison.OrdinalIgnoreCase))
       {

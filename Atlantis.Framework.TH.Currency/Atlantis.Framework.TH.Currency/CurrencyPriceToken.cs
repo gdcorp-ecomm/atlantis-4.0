@@ -13,7 +13,6 @@ namespace Atlantis.Framework.TH.Currency
         get { return (TokenData != null) ? TokenData.Name.ToString() : string.Empty; }
       }
 
-      public bool AllowMask { get; private set; }
       public int UsdAmount { get; private set; }
       public string CurrencyType { get; private set; }
       public bool DropDecimal { get; private set; }
@@ -24,13 +23,12 @@ namespace Atlantis.Framework.TH.Currency
       public CurrencyPriceToken(string key, string data, string fullTokenString)
         : base(key, data, fullTokenString)
       {
-        UsdAmount = GetAttributeInt("amount", 0);
+        UsdAmount = GetAttributeInt("usdamount", 0);
         NegativeFormat = GetAttributeText("negative", "minus");
         HtmlSymbol = GetAttributeBool("htmlsymbol", true);
         DropDecimal = GetAttributeBool("dropdecimal", false);
         DropSymbol = GetAttributeBool("dropsymbol", false);
         CurrencyType = GetAttributeText("currencytype", null);
-        AllowMask = GetAttributeBool("allowmask", true);
       }
     }
 }

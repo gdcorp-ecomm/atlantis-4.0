@@ -37,6 +37,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       public string Title { get; set; }
       public string SpritePosition { get; set; }
       public string SpriteHeight { get; set; }
+      public string SpriteWidth { get; set; }
 
       public class FeatureListItem : ElementBase
       {

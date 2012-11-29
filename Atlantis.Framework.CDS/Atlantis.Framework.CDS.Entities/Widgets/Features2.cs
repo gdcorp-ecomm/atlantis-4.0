@@ -30,11 +30,13 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
         Title = string.Empty;
         Text = string.Empty;
         SpritePosition = string.Empty;
+        SpriteHeight = string.Empty;
       }
 
       public string Text { get; set; }
       public string Title { get; set; }
       public string SpritePosition { get; set; }
+      public string SpriteHeight { get; set; }
 
       public class FeatureListItem : ElementBase
       {

@@ -141,6 +141,19 @@ namespace Atlantis.Framework.CDS.Tests
       Assert.AreEqual("this is stuff", model.Stuff);
       Assert.AreEqual("this is noise", model.Noise);
     }
+    [TestMethod]
+    public void Provider_Homepage_ES_test()
+    {
+      //Arrange
+      ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
+
+      //Act
+      var data = provider.GetJSON("content/es/sales/1/homepage/new/default", null);
+
+      //Assert
+      Assert.IsNotNull(data);
+      Assert.AreNotEqual(data, string.Empty);
+    }
 
     [TestMethod]
     public void Validate_JSON_From_CDS_Valid()

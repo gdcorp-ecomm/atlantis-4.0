@@ -70,6 +70,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Widgets\SalesMagicBox.cs" />
+    <Compile Include="Widgets\SearchHeader2.cs" />
     <Compile Include="Widgets\TabContent2.cs" />
     <Compile Include="Widgets\DPPCrossSellModal.cs" />
     <Compile Include="Widgets\DPPPrivacyModal.cs" />

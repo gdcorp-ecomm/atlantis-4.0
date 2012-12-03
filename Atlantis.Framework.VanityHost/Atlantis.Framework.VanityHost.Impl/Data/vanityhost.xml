@@ -8,7 +8,7 @@
     <queryitem name="isc" value="diggbiz" />
   </VanityHost>
   <VanityHost domain="godaddy" dottype="ca" linkcontext="1" linkname="SITEURL.CA" redirect="/" />
-  <VanityHost domain="godaddy" dottype="co.uk" linkcontext="1" linkname="SITEURL.CO.UK" redirect="/" />
+  <VanityHost domain="godaddy" dottype="co.uk" linkcontext="1" linkname="SITEURL.UK" redirect="/" />
   <VanityHost domain="supportwebsite" dottype="com" linkcontext="1" linkname="COMMUNITYURL" redirect="help/" />
   <VanityHost domain="wildwestdomains" dottype="net" linkcontext="2" linkname="SITEURL" redirect="/" />
   <VanityHost domain="bluerazordomains" dottype="com" linkcontext="5" linkname="SITEURL" redirect="/" />

@@ -30,9 +30,8 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     /// <param name="quantity">quantity of product</param>
     /// <param name="shopperPriceType">shopper price type to use.  If not given the shoppers pricetype will be used</param>
     /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
-    /// <param name="isc">isc to use. If not given the site context ISC will be used.</param>
     /// <returns>The current price of a product.</returns>
-    ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null);
+    ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null);
 
     /// <summary>
     /// Looks up the list price of a product.
@@ -154,8 +153,11 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     /// Returns true if a product is marked as 'onsale'
     /// </summary>
     /// <param name="unifiedProductId">unified product id</param>
+    /// <param name="shopperPriceType">shopper price type to use.  If not given the shoppers pricetype will be used</param>
+    /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
+    /// <param name="isc">isc to use. If not given the site context ISC will be used.</param>
     /// <returns>true of the product is marked as 'onsale'</returns>
-    bool IsProductOnSale(int unifiedProductId, ICurrencyInfo transactionCurrency = null);
+    bool IsProductOnSale(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null);
 
     /// <summary>
     /// Returns the shoppers selected display currency info

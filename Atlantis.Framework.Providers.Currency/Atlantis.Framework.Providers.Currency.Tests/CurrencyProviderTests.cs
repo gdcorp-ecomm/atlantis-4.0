@@ -1,7 +1,9 @@
 ﻿using System;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Currency.Tests.Mocks;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Preferences;
+using Atlantis.Framework.Providers.Interface.Pricing;
 using Atlantis.Framework.Providers.Interface.PromoData;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Providers.PromoData;
@@ -701,6 +703,159 @@ namespace Atlantis.Framework.Providers.Currency.Tests
     }
 
     [TestMethod]
+    public void GetCurrentPriceWithAllReqDataAndNoPricingProviderCodeReturnsNormalPrice()
+    {
+      SetContexts(1, string.Empty);
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+      
+      ICurrencyInfo usdInfo = currency.GetCurrencyInfo("USD");
+      ICurrencyPrice usdPrice = currency.GetCurrentPrice(58, 0, usdInfo, "valid");
+
+      Assert.AreNotEqual(MockPriceProvider.USD_PFID58_PRICE, usdPrice.Price);
+    }
+
+    [TestMethod]
+    public void GetCurrentPriceWithInvalidIscCodeReturnsNormalPrice()
+    {
+      SetContexts(1, string.Empty);
+      HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, MockPriceProvider>();
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+
+      ICurrencyInfo usdInfo = currency.GetCurrencyInfo("USD");
+      ICurrencyPrice usdPrice = currency.GetCurrentPrice(58, 0, usdInfo, "invalid");
+
+      Assert.AreNotEqual(MockPriceProvider.USD_PFID58_PRICE, usdPrice.Price);
+    }
+
+    [TestMethod]
+    public void GetCurrentPriceWithValidIscCodeAndUnmatchedPfidReturnsNormalPrice()
+    {
+      SetContexts(1, string.Empty);
+      HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, MockPriceProvider>();
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+
+      ICurrencyInfo usdInfo = currency.GetCurrencyInfo("USD");
+      ICurrencyPrice usdPrice = currency.GetCurrentPrice(200, 0, usdInfo, "valid");
+
+      Assert.AreNotEqual(MockPriceProvider.USD_PFID58_PRICE, usdPrice.Price);
+    }
+
+    [TestMethod]
+    public void GetCurrentPriceWithValidIscCodeMatchedPfidAndMissingCurrencyReturnsNormalPrice()
+    {
+      SetContexts(1, string.Empty);
+      HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, MockPriceProvider>();
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+
+      ICurrencyInfo mxnInfo = currency.GetCurrencyInfo("MXN");
+      ICurrencyPrice mxnPrice = currency.GetCurrentPrice(58, 0, mxnInfo, "valid");
+
+      Assert.AreNotEqual(MockPriceProvider.USD_PFID58_PRICE, mxnPrice.Price);
+    }
+
+    [TestMethod]
+    public void GetCurrentPriceWithValidIscCodeMatchedPfid58AndUsdCurrencyReturnsSpecialPrice()
+    {
+      SetContexts(1, string.Empty);
+      HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, MockPriceProvider>();
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+
+      ICurrencyInfo usdInfo = currency.GetCurrencyInfo("USD");
+      ICurrencyPrice usdPrice = currency.GetCurrentPrice(58, 0, usdInfo, "valid");
+
+      Assert.AreEqual(MockPriceProvider.USD_PFID58_PRICE, usdPrice.Price);
+    }
+
+    [TestMethod]
+    public void GetCurrentPriceWithValidIscCodeMatchedPfid58AndGbpCurrencyReturnsSpecialPrice()
+    {
+      SetContexts(1, string.Empty);
+      HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, MockPriceProvider>();
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+
+      ICurrencyInfo gbpInfo = currency.GetCurrencyInfo("GBP");
+      ICurrencyPrice gbpPrice = currency.GetCurrentPrice(58, 0, gbpInfo, "valid");
+
+      Assert.AreEqual(MockPriceProvider.GBP_PFID58_PRICE, gbpPrice.Price);
+    }
+
+    [TestMethod]
+    public void GetCurrentPriceWithValidIscCodeMatchedPfid58AndInrCurrencyReturnsSpecialPrice()
+    {
+      SetContexts(1, string.Empty);
+      HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, MockPriceProvider>();
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+
+      ICurrencyInfo inrInfo = currency.GetCurrencyInfo("INR");
+      ICurrencyPrice inrPrice = currency.GetCurrentPrice(58, 0, inrInfo, "valid");
+
+      Assert.AreEqual(MockPriceProvider.INR_PFID58_PRICE, inrPrice.Price);
+    }
+
+    [TestMethod]
+    public void GetCurrentPriceWithValidIscCodeMatchedPfid101AndUsdCurrencyReturnsSpecialPrice()
+    {
+      SetContexts(1, string.Empty);
+      HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, MockPriceProvider>();
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+
+      ICurrencyInfo usdInfo = currency.GetCurrencyInfo("USD");
+      ICurrencyPrice usdPrice = currency.GetCurrentPrice(101, 0, usdInfo, "valid");
+
+      Assert.AreEqual(MockPriceProvider.USD_PFID101_PRICE, usdPrice.Price);
+    }
+
+    [TestMethod]
+    public void GetCurrentPriceWithValidIscCodeMatchedPfid101AndGbpCurrencyReturnsSpecialPrice()
+    {
+      SetContexts(1, string.Empty);
+      HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, MockPriceProvider>();
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+
+      ICurrencyInfo gbpInfo = currency.GetCurrencyInfo("GBP");
+      ICurrencyPrice gbpPrice = currency.GetCurrentPrice(101, 0, gbpInfo, "valid");
+
+      Assert.AreEqual(MockPriceProvider.GBP_PFID101_PRICE, gbpPrice.Price);
+    }
+
+    [TestMethod]
+    public void GetCurrentPriceWithValidIscCodeMatchedPfid101AndInrCurrencyReturnsSpecialPrice()
+    {
+      SetContexts(1, string.Empty);
+      HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, MockPriceProvider>();
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+
+      ICurrencyInfo inrInfo = currency.GetCurrencyInfo("INR");
+      ICurrencyPrice inrPrice = currency.GetCurrentPrice(101, 0, inrInfo, "valid");
+
+      Assert.AreEqual(MockPriceProvider.INR_PFID101_PRICE, inrPrice.Price);
+    }
+
+    [TestMethod]
+    public void IsProductOnSaleReturnsFalseForPfid101ValidIscAndMxnCurrency()
+    {
+      SetContexts(1, string.Empty);
+      HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, MockPriceProvider>();
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+      ICurrencyInfo mxnInfo = currency.GetCurrencyInfo("MXN");
+
+      bool result = currency.IsProductOnSale(101, 0, mxnInfo, "valid");
+      Assert.IsFalse(result);
+    }
+
+    [TestMethod]
+    public void IsProductOnSaleReturnsTrueForPfid101AndIscCodeValid()
+    {
+      SetContexts(1, string.Empty);
+      HttpProviderContainer.Instance.RegisterProvider<IPricingProvider, MockPriceProvider>();
+      ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
+      ICurrencyInfo usdInfo = currency.GetCurrencyInfo("USD");
+
+      bool result = currency.IsProductOnSale(101, 0, usdInfo, "valid");
+      Assert.IsTrue(result);
+    }
+
+    [TestMethod]
     public void GetCurrentPriceByQuantity()
     {
       SetContexts(1, string.Empty);
@@ -730,6 +885,5 @@ namespace Atlantis.Framework.Providers.Currency.Tests
 
       Assert.AreEqual(euroPriceDirect, euroPrice.Price);
     }
-
   }
 }

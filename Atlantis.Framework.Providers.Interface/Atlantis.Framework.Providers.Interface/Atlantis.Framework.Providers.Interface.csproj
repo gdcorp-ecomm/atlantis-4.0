@@ -57,6 +57,7 @@
     <Compile Include="Links\ILinkProvider.cs" />
     <Compile Include="Links\QueryParamMode.cs" />
     <Compile Include="Preferences\IShopperPreferencesProvider.cs" />
+    <Compile Include="Pricing\IPricingProvider.cs" />
     <Compile Include="Products\IProduct.cs" />
     <Compile Include="Products\IProductInfo.cs" />
     <Compile Include="Products\IProductProvider.cs" />

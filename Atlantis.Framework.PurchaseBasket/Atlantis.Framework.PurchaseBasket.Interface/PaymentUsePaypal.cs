@@ -26,5 +26,10 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
       set { this["account_number"] = value; }
     }
 
+    public string ExpressToken
+    {
+      get { return GetStringProperty("express_token", string.Empty); }
+      set { this["express_token"] = value; }
+    }
   }
 }

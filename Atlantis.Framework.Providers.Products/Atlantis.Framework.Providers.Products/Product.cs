@@ -125,9 +125,9 @@ namespace Atlantis.Framework.Providers.Products
       get { return _currencyProvider.IsProductOnSale(ProductId); }
     }
 
-    public bool GetIsOnSale(ICurrencyInfo transactionCurrency = null)
+    public bool GetIsOnSale(int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null)
     {
-      return _currencyProvider.IsProductOnSale(ProductId, transactionCurrency);
+      return _currencyProvider.IsProductOnSale(ProductId, shopperPriceType, transactionCurrency, isc);
     }
 
     #endregion
@@ -217,9 +217,9 @@ namespace Atlantis.Framework.Providers.Products
       return _currencyProvider.GetCurrentPriceByQuantity(ProductId, quantity);
     }
 
-    public ICurrencyPrice GetCurrentPriceByQuantity(int quantity, RecurringPaymentUnitType durationUnit, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null, PriceRoundingType roundingType = PriceRoundingType.RoundFractionsUpProperly)
+    public ICurrencyPrice GetCurrentPriceByQuantity(int quantity, RecurringPaymentUnitType durationUnit, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, PriceRoundingType roundingType = PriceRoundingType.RoundFractionsUpProperly)
     {
-      ICurrencyPrice price = _currencyProvider.GetCurrentPriceByQuantity(ProductId, quantity, shopperPriceType, transactionCurrency, isc);
+      ICurrencyPrice price = _currencyProvider.GetCurrentPriceByQuantity(ProductId, quantity, shopperPriceType, transactionCurrency);
       return GetPeriodPrice(price, durationUnit, roundingType);
     }
 

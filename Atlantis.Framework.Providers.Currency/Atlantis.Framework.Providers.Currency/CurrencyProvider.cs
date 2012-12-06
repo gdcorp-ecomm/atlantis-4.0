@@ -485,8 +485,7 @@ namespace Atlantis.Framework.Providers.Currency
 
     #region IsProductOnSale
 
-
-    public bool IsProductOnSale(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null)
+    public bool IsProductOnSale(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null )
     {
       if (shopperPriceType == -1)
       {

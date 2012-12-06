@@ -157,7 +157,7 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     /// <param name="transactionCurrency">currencyType to use. If not given the shoppers transactional currencyType will be used.<see cref="ICurrencyInfo"/></param>
     /// <param name="isc">isc to use. If not given the site context ISC will be used.</param>
     /// <returns>true of the product is marked as 'onsale'</returns>
-    bool IsProductOnSale(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null);
+    bool IsProductOnSale(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null );
 
     /// <summary>
     /// Returns the shoppers selected display currency info

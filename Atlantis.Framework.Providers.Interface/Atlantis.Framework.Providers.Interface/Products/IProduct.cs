@@ -54,9 +54,11 @@ namespace Atlantis.Framework.Providers.Interface.Products
     /// <summary>
     /// true if product is marked as 'on sale' in the catalog (regardless of what prices are)
     /// </summary>
-    /// <param name="transactionCurrency">Transaction currency to use. If not provided, shoppers transaction currency will be used.</param>
+    /// <param name="shopperPriceType">shopper price type to use. If not given, will use shoppers price type</param>
+    /// <param name="transactionCurrency">currencyInfo to use, if null then shoppers selected transactionCurrency will be used.<see cref="ICurrencyInfo"/></param>
+    /// <param name="isc">isc to use, if null then the sitecontext isc will be used</param>
     /// <returns>true if product is on sale</returns>
-    bool GetIsOnSale(ICurrencyInfo transactionCurrency = null);
+    bool GetIsOnSale(int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null);
 
     /// <summary>
     /// Gets the ListPrice for the product for the products native durationUnit and shoppers selected transaction currency
@@ -106,10 +108,9 @@ namespace Atlantis.Framework.Providers.Interface.Products
     /// <param name="durationUnit">durationUnit of returned price<see cref="RecurringPaymentUnitType"/></param>
     /// <param name="shopperPriceType">shopper price type to use. If not given, will use shoppers price type</param>
     /// <param name="transactionCurrency">currencyInfo to use, if null then shoppers selected transactionCurrency will be used.<see cref="ICurrencyInfo"/></param>
-    /// <param name="isc">isc to use, if null then the sitecontext isc will be used</param>
     /// <param name="roundingType">avoid using this when possible.<see cref="PriceRoundingType"/></param>
     /// <returns>CurrentPrice for product</returns>
-    ICurrencyPrice GetCurrentPriceByQuantity(int quantity, RecurringPaymentUnitType durationUnit, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null, PriceRoundingType roundingType = PriceRoundingType.RoundFractionsUpProperly);
+    ICurrencyPrice GetCurrentPriceByQuantity(int quantity, RecurringPaymentUnitType durationUnit, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, PriceRoundingType roundingType = PriceRoundingType.RoundFractionsUpProperly);
 
   }
 }

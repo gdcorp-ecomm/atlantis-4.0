@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Tokens.Interface;
@@ -11,11 +12,29 @@ namespace Atlantis.Framework.TH.Products
   {
     IProductProvider _products;
     ISiteContext _siteContext;
+    ICurrencyProvider _currency;
+    Lazy<bool> _maskPricesIfAllowed;
 
     internal ProductCompareRenderContext(IProviderContainer container)
     {
       _siteContext = container.Resolve<ISiteContext>();
       _products = container.Resolve<IProductProvider>();
+      _currency = container.Resolve<ICurrencyProvider>();
+      _maskPricesIfAllowed = new Lazy<bool>(() => { return GetIsPriceMaskOn(); });
+    }
+
+    private bool GetIsPriceMaskOn()
+    {
+      bool result = false;
+      if ((_siteContext.ContextId == 6) && (HttpContext.Current != null) && (HttpContext.Current.Request != null))
+      {
+        string appHeaderQuery = HttpContext.Current.Request.QueryString["app_hdr"];
+        if ("1387".Equals(appHeaderQuery))
+        {
+          result = true;
+        }
+      }
+      return result;
     }
 
     internal bool RenderToken(IToken token)
@@ -23,77 +42,168 @@ namespace Atlantis.Framework.TH.Products
       bool result = true;
 
       ProductCompareToken pcToken = token as ProductCompareToken;
+      int value1 = 0;
+      int value2 = 0;
+      pcToken.TokenResult = string.Empty;
+
       if (pcToken != null)
       {
-        switch (pcToken.RenderType)
+        if (DetermineValues(pcToken, out value1, out value2))
         {
-          case "percent":
-            result = RenderPercent(pcToken);
-            break;
-          case "times":
-            result = RenderTimes(pcToken);
-            break;
-          default:
-            result = false;
-            pcToken.TokenError = "Invalid element root: " + pcToken.RenderType;
-            pcToken.TokenResult = string.Empty;
-            break;
+          switch (pcToken.RenderType)
+          {
+            case "percent":
+              result = RenderPercent(pcToken, value1, value2);
+              break;
+            case "times":
+              result = RenderTimes(pcToken, value1, value2);
+              break;
+            case "addition":
+              result = RenderAddition(pcToken, value1, value2);
+              break;
+            case "subtraction":
+              result = RenderSubtraction(pcToken, value1, value2);
+              break;
+            case "division":
+              result = RenderDivision(pcToken, value1, value2);
+              break;
+            case "multiplication":
+              result = RenderMultiplication(pcToken, value1, value2);
+              break;
+            default:
+              result = false;
+              pcToken.TokenError = "Invalid element root: " + pcToken.RenderType;
+              break;
+          }
         }
       }
       else
       {
         result = false;
         pcToken.TokenError = "Cannot convert IToken to ProductCompareToken";
-        pcToken.TokenResult = string.Empty;
+      }
+      if (result)
+      {
+        HtmlFormatTokenResult(pcToken);
       }
       return result;
     }
 
-    private bool RenderTimes(ProductCompareToken token)
+    private bool DetermineValues(ProductCompareToken token, out int value1, out int value2)
     {
+      value1 = 0;
+      value2 = 0;
       bool result = false;
-      string tokenResult = string.Empty;
-      double saving = -1;
       if ((token.PrimaryProductId != 0) && (token.SecondaryProductId != 0 || token.SecondaryPrice != 0))
       {
         IProductView primaryProduct = _products.NewProductView(_products.GetProduct(token.PrimaryProductId));
         if (token.SecondaryProductId != 0)
         {
           IProductView secondaryProduct = _products.NewProductView(_products.GetProduct(token.SecondaryProductId));
-          saving = secondaryProduct.MonthlyCurrentPrice.Price / primaryProduct.MonthlyCurrentPrice.Price;
+          value1 = primaryProduct.MonthlyCurrentPrice.Price;
+          value2 = secondaryProduct.MonthlyCurrentPrice.Price;
+          result = true;
         }
         else
         {
           if (token.SecondaryPeriod == "yearly")
           {
-            saving = (double)token.SecondaryPrice / primaryProduct.YearlyCurrentPrice.Price;
+            value1 = primaryProduct.YearlyCurrentPrice.Price;
           }
           else
           {
-            saving = (double)token.SecondaryPrice / primaryProduct.MonthlyCurrentPrice.Price;
+            value1 = primaryProduct.MonthlyCurrentPrice.Price;
           }
-        }
-
-        if (saving >= (double)token.HideBelow)
-        {
-          tokenResult = Math.Round(saving, 1).ToString();
-          result = true;
+          value2 = token.SecondaryPrice;
         }
       }
-
-      if (!string.IsNullOrEmpty(tokenResult) && !string.IsNullOrEmpty(token.Html))
-      {
-        if (token.Html.Contains("{0}"))
-        {
-          tokenResult = token.Html.Replace("{0}", tokenResult);
-        }
-      }
-
-      token.TokenResult = tokenResult;
       return result;
     }
 
-    private bool RenderPercent(ProductCompareToken token)
+    private void HtmlFormatTokenResult(ProductCompareToken token)
+    {
+      if (!string.IsNullOrEmpty(token.TokenResult) && !string.IsNullOrEmpty(token.Html))
+      {
+        if (token.Html.Contains("{0}"))
+        {
+          token.TokenResult = token.Html.Replace("{0}", token.TokenResult);
+        }
+      }
+    }
+
+    protected string GetPriceText(int price)
+    {
+      var ci = CurrencyData.GetCurrencyInfo("USD");
+      var cp = new CurrencyPrice(price, ci, CurrencyPriceType.Transactional);
+      return _currency.PriceText(cp, _maskPricesIfAllowed.Value);
+    }
+
+    #region RenderMethods
+
+    private bool RenderTimes(ProductCompareToken token, int value1, int value2)
+    {
+      bool result = false;
+      double saving = (double)value2 / value1;
+      if (saving >= (double)token.HideBelow)
+      {
+        token.TokenResult = Math.Round(saving, 1).ToString();
+        result = true;
+      }
+      return result;
+    }
+
+    private bool RenderAddition(ProductCompareToken token, int value1, int value2)
+    {
+      bool result = false;
+      int total = value1 + value2;
+      if (total >= token.HideBelow)
+      {
+        token.TokenResult = GetPriceText(total);
+        result = true;
+      }
+      return result;
+    }
+
+    private bool RenderSubtraction(ProductCompareToken token, int value1, int value2)
+    {
+      bool result = false;
+      int total = value1 - value2;
+      if (total >= token.HideBelow)
+      {
+        token.TokenResult = GetPriceText(total);
+        result = true;
+      }
+      return result;
+    }
+
+    private bool RenderMultiplication(ProductCompareToken token, int value1, int value2)
+    {
+      bool result = false;
+      int total = value1 * value2;
+      if (total >= token.HideBelow)
+      {
+        token.TokenResult = GetPriceText(total);
+        result = true;
+      }
+      return result;
+    }
+
+    private bool RenderDivision(ProductCompareToken token, int value1, int value2)
+    {
+      bool result = false;
+      if (value2 != 0)
+      {
+        int total = value1 / value2;
+        if (total >= (double)token.HideBelow)
+        {
+          token.TokenResult = GetPriceText(total);
+          result = true;
+        }
+      }
+      return result;
+    }
+
+    private bool RenderPercent(ProductCompareToken token, double value1, double value2)
     {
       bool result = false;
       string tokenResult = string.Empty;
@@ -114,14 +224,7 @@ namespace Atlantis.Framework.TH.Products
         }
         else
         {
-          if (token.SecondaryPeriod == "yearly")
-          {
-            percent = Convert.ToInt32((1 - (((double)primaryProduct.YearlyCurrentPrice.Price) / (double)token.SecondaryPrice)) * 100);
-          }
-          else
-          {
-            percent = Convert.ToInt32((1 - (((double)primaryProduct.MonthlyCurrentPrice.Price) / (double)token.SecondaryPrice)) * 100);
-          }
+          percent = Convert.ToInt32((1 - (((double)value1) / (double)value2)) * 100);
           if (percent >= token.HideBelow)
           {
             tokenResult = percent.ToString();
@@ -130,16 +233,10 @@ namespace Atlantis.Framework.TH.Products
         }
       }
 
-      if (!string.IsNullOrEmpty(tokenResult) && !string.IsNullOrEmpty(token.Html))
-      {
-        if (token.Html.Contains("{0}"))
-        {
-          tokenResult = token.Html.Replace("{0}", tokenResult);
-        }
-      }
-
       token.TokenResult = tokenResult;
       return result;
     }
   }
+
+    #endregion
 }

@@ -102,7 +102,6 @@ namespace Atlantis.Framework.TH.Products
           IProductView secondaryProduct = _products.NewProductView(_products.GetProduct(token.SecondaryProductId));
           value1 = primaryProduct.MonthlyCurrentPrice.Price;
           value2 = secondaryProduct.MonthlyCurrentPrice.Price;
-          result = true;
         }
         else
         {
@@ -116,6 +115,7 @@ namespace Atlantis.Framework.TH.Products
           }
           value2 = token.SecondaryPrice;
         }
+        result = true;
       }
       return result;
     }

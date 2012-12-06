@@ -111,6 +111,42 @@ namespace Atlantis.Framework.TH.Products.Tests
     }
 
     [TestMethod]
+    public void CompareAddition()
+    {
+      TokenSuccess("<addition primaryproductid=\"58\" secondaryprice=\"100\" secondaryperiod=\"monthly\" />");
+    }
+
+    [TestMethod]
+    public void CompareTwoProductsAddition()
+    {
+      TokenSuccess("<addition primaryproductid=\"58\"  secondaryproductid=\"58\" secondaryperiod=\"monthly\" />");
+    }
+
+    [TestMethod]
+    public void CompareSubtraction()
+    {
+      TokenSuccess("<subtraction primaryproductid=\"58\" secondaryprice=\"100\" secondaryperiod=\"monthly\" />");
+    }
+
+    [TestMethod]
+    public void CompareTwoProductsSubtraction()
+    {
+      TokenSuccess("<subtraction primaryproductid=\"58\"  secondaryproductid=\"58\" secondaryperiod=\"monthly\" />");
+    }
+
+    [TestMethod]
+    public void CompareMultiplication()
+    {
+      TokenSuccess("<multiplication primaryproductid=\"58\" secondaryprice=\"3\" secondaryperiod=\"monthly\" />");
+    }
+
+    [TestMethod]
+    public void CompareDivision()
+    {
+      TokenSuccess("<division primaryproductid=\"58\" secondaryprice=\"3\" secondaryperiod=\"monthly\" />");
+    }
+
+    [TestMethod]
     public void CompareHideBelow()
     {
       TokenEmpty("<percent primaryproductid=\"58\" secondaryproductid=\"58\" hidebelow=\"1\" />");

@@ -5,6 +5,9 @@ using Atlantis.Framework.GetOverrideHash.Interface;
 namespace Atlantis.Framework.GetOverrideHash.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.GetOverrideHash.Impl.dll")]
+  [DeploymentItem("Interop.gdOverrideLib.dll")]
   public class GetOverrideHashTest
   {
     public GetOverrideHashTest()
@@ -17,18 +20,11 @@ namespace Atlantis.Framework.GetOverrideHash.Tests
     #endregion
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void TestMethod1()
+    public void BasicOverride()
     {
-
-      var requestData = new GetOverrideHashRequestData("850774", string.Empty, string.Empty, string.Empty, 0, 1952, 2, 1);
-      //GetOverrideHashRequestData requestData = new GetOverrideHashRequestData(
-      // "850774", string.Empty, string.Empty, string.Empty, 0, 1234, 1, 3456, 2222);
-
+      var requestData = new GetOverrideHashRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1952, 2, 1);
       var response = (GetOverrideHashResponseData)Engine.Engine.ProcessRequest(requestData, 26);
-      string hash = response.Hash;
-
-      Assert.IsFalse(string.IsNullOrWhiteSpace(hash));
+      Assert.IsFalse(string.IsNullOrWhiteSpace(response.Hash));
     }
   }
 }

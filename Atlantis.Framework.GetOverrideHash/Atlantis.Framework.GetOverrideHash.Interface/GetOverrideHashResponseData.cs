@@ -1,60 +1,41 @@
 ﻿using System;
-using System.IO;
-using System.Text;
-using System.Xml;
-
 using Atlantis.Framework.Interface;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.GetOverrideHash.Interface
 {
   public class GetOverrideHashResponseData : IResponseData
   {
-    private readonly string m_sHash;
-    private readonly AtlantisException m_ex;
+    private readonly string _hash;
+    private readonly AtlantisException _exception;
 
-    public GetOverrideHashResponseData(string sHash)
+    public GetOverrideHashResponseData(string hash)
     {
-      m_sHash = sHash;
+      _hash = hash;
     }
 
-    public GetOverrideHashResponseData(string sHash, AtlantisException exAtlantis)
+    public GetOverrideHashResponseData(string hash, RequestData requestData, Exception ex)
     {
-      m_sHash = sHash;
-      m_ex = exAtlantis;
-    }
-
-    public GetOverrideHashResponseData(string sHash, RequestData oRequestData, Exception ex)
-    {
-      m_sHash = sHash;
-      m_ex = new AtlantisException(oRequestData,
-                                   "GetOverrideHashResponseData",
-                                   ex.Message,
-                                   oRequestData.ToXML());
+      _hash = hash;
+      _exception = new AtlantisException(requestData, "GetOverrideHashResponseData", ex.Message + ex.StackTrace, requestData.ToXML());
     }
 
     public string Hash
     {
-      get { return m_sHash; }
+      get { return _hash; }
     }
 
     #region IResponseData Members
 
     public AtlantisException GetException()
     {
-      return m_ex;
+      return _exception;
     }
 
     public string ToXML()
     {
-      var sbResult = new StringBuilder();
-      var xtwResult = new XmlTextWriter(new StringWriter(sbResult));
-
-      xtwResult.WriteStartElement("OverrideHash");
-      if(m_sHash != null)
-        xtwResult.WriteValue(m_sHash);
-      xtwResult.WriteEndElement();
-
-      return sbResult.ToString();
+      XElement element = new XElement("OverrideHash", _hash);
+      return element.ToString();
     }
 
     #endregion

@@ -1,16 +1,12 @@
 ﻿using System;
-
 using Atlantis.Framework.Interface;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.GetOverrideHash.Interface
 {
   public class GetOverrideHashRequestData : RequestData
   {
-    public GetOverrideHashRequestData(string shopperId,
-                                      string sourceUrl,
-                                      string orderId,
-                                      string pathway,
-                                      int pageCount)
+    public GetOverrideHashRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       UnifiedPFID = 0;
@@ -20,15 +16,7 @@ namespace Atlantis.Framework.GetOverrideHash.Interface
       GetCostHash = false;
     }
 
-    public GetOverrideHashRequestData(string shopperId,
-                                  string sourceUrl,
-                                  string orderId,
-                                  string pathway,
-                                  int pageCount,
-                                  int unifiedPfid,
-                                  int privateLabelId,
-                                  int overrideListPrice,
-                                  int overrideCurrentPrice)
+    public GetOverrideHashRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, int unifiedPfid, int privateLabelId, int overrideListPrice, int overrideCurrentPrice)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       UnifiedPFID = unifiedPfid;
@@ -39,16 +27,7 @@ namespace Atlantis.Framework.GetOverrideHash.Interface
       GetCostHash = false;
     }
 
-    public GetOverrideHashRequestData(string shopperId,
-                                  string sourceUrl,
-                                  string orderId,
-                                  string pathway,
-                                  int pageCount,
-                                  int unifiedPfid,
-                                  int privateLabelId,
-                                  int overrideListPrice,
-                                  int overrideCurrentPrice,
-                                  int overrideCurrentCost)
+    public GetOverrideHashRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, int unifiedPfid, int privateLabelId, int overrideListPrice, int overrideCurrentPrice, int overrideCurrentCost)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       UnifiedPFID = unifiedPfid;
@@ -59,14 +38,7 @@ namespace Atlantis.Framework.GetOverrideHash.Interface
       GetCostHash = true;
     }
 
-    public GetOverrideHashRequestData(string shopperId,
-                                  string sourceUrl,
-                                  string orderId,
-                                  string pathway,
-                                  int pageCount,
-                                  int unifiedPfid,
-                                  int privateLabelId,
-                                  int priceTypeId)
+    public GetOverrideHashRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, int unifiedPfid, int privateLabelId, int priceTypeId)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       UnifiedPFID = unifiedPfid;
@@ -90,6 +62,19 @@ namespace Atlantis.Framework.GetOverrideHash.Interface
     public override string GetCacheMD5()
     {
       throw new Exception("GetOverrideHash is not a cacheable request");
+    }
+
+    public override string ToXML()
+    {
+      XElement element = new XElement("GetOverrideHash");
+      element.Add(new XAttribute("unifiedproductid", UnifiedPFID.ToString()));
+      element.Add(new XAttribute("privatelabelid", PrivateLabelID.ToString()));
+      element.Add(new XAttribute("listprice", OverrideListPrice.ToString()));
+      element.Add(new XAttribute("currentprice", OverrideCurrentPrice.ToString()));
+      element.Add(new XAttribute("currentcost", OverrideCurrentCost.ToString()));
+      element.Add(new XAttribute("costhash", GetCostHash.ToString()));
+      element.Add(new XAttribute("pricehash", GetPriceTypeHash.ToString()));
+      return element.ToString();
     }
 
     #endregion

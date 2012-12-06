@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Atlantis.Framework.GetOverrideHash.Interface;
 using Atlantis.Framework.Interface;
 
@@ -9,23 +8,23 @@ namespace Atlantis.Framework.GetOverrideHash.Impl
   {
     #region IRequest Members
 
-    public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
+    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      IResponseData oResponseData;
-      string sHash = null;
+      IResponseData responseData;
+      string hash = null;
 
       try
       {
-        var oGetOverrideHashRequestData = (GetOverrideHashRequestData)oRequestData;
+        var oGetOverrideHashRequestData = (GetOverrideHashRequestData)requestData;
 
         string now = DateTime.Now.Date.ToString();
 
-        object oHash;
+        object hashObject;
         if (oGetOverrideHashRequestData.GetPriceTypeHash)
         {
           using (var pricetype = new OverridePriceWrapper("pricetype"))
           {
-            oHash = pricetype.PriceType.GetHash(oGetOverrideHashRequestData.PrivateLabelID.ToString(),
+            hashObject = pricetype.PriceType.GetHash(oGetOverrideHashRequestData.PrivateLabelID.ToString(),
                                                 oGetOverrideHashRequestData.UnifiedPFID.ToString(),
                                                 oGetOverrideHashRequestData.OverridePriceTypeId.ToString(),
                                                 now);
@@ -37,7 +36,7 @@ namespace Atlantis.Framework.GetOverrideHash.Impl
           {
             if (oGetOverrideHashRequestData.GetCostHash)
             {
-              oHash = price.Price.GetCostHash(oGetOverrideHashRequestData.PrivateLabelID.ToString(),
+              hashObject = price.Price.GetCostHash(oGetOverrideHashRequestData.PrivateLabelID.ToString(),
                                           oGetOverrideHashRequestData.UnifiedPFID.ToString(),
                                           oGetOverrideHashRequestData.OverrideListPrice.ToString(),
                                           oGetOverrideHashRequestData.OverrideCurrentPrice.ToString(),
@@ -46,7 +45,7 @@ namespace Atlantis.Framework.GetOverrideHash.Impl
             }
             else
             {
-              oHash = price.Price.GetHash(oGetOverrideHashRequestData.PrivateLabelID.ToString(),
+              hashObject = price.Price.GetHash(oGetOverrideHashRequestData.PrivateLabelID.ToString(),
                                           oGetOverrideHashRequestData.UnifiedPFID.ToString(),
                                           oGetOverrideHashRequestData.OverrideListPrice.ToString(),
                                           oGetOverrideHashRequestData.OverrideCurrentPrice.ToString(),
@@ -55,20 +54,15 @@ namespace Atlantis.Framework.GetOverrideHash.Impl
           }
         }
 
-        sHash = Convert.ToString(oHash);
-
-        oResponseData = new GetOverrideHashResponseData(sHash);
-      }
-      catch (AtlantisException exAtlantis)
-      {
-        oResponseData = new GetOverrideHashResponseData(sHash, exAtlantis);
+        hash = Convert.ToString(hashObject);
+        responseData = new GetOverrideHashResponseData(hash);
       }
       catch (Exception ex)
       {
-        oResponseData = new GetOverrideHashResponseData(sHash, oRequestData, ex);
+        responseData = new GetOverrideHashResponseData(hash, requestData, ex);
       }
 
-      return oResponseData;
+      return responseData;
     }
 
     #endregion

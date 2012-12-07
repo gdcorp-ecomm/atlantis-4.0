@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pixels>
+  <pixel name="BlueLithium"
+         value="https://ad.yieldmanager.com/pixel?id=113243&amp;amp;t=2"
+         type="image"
+         application="CART"
+         contexts="1"
+         page_url="/fireonthispage.aspx">
+    <enabled value="1" />
+    <trigger>
+      <cookie name="BlueLithium" value="testValue" />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="12345" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Advertising.com"
+         value="https://secure.ace-tag.advertising.com/action/type=701290301/bins=1/rich=0/mnum=1516/logs=0"
+         type="image"
+         application="CART"
+         contexts="1"
+         page_url="fireonthispage.aspx">
+    <enabled value="1"  />
+    <trigger>
+      <sourcecodes>
+        <sourcecode value="AD599COMa" />
+        <sourcecode value="AD599COMb" />
+        <sourcecode value="AD599COMc" />
+        <sourcecode value="AD25OFFa" />
+        <sourcecode value="AD25OFFb" />
+        <sourcecode value="AD25OFFc" />
+        <sourcecode value="AD199COMa" />
+        <sourcecode value="AD199COMb" />
+        <sourcecode value="AD199COMc" />
+        <sourcecode value="AD32OFFa" />
+        <sourcecode value="AD32OFFb" />
+        <sourcecode value="AD32OFFc" />
+      </sourcecodes>
+    </trigger>
+  </pixel>
+  <pixel name="Advertising.com"
+       value="https://sourceCodePrefixOnl"
+       type="image"
+       application="CART"
+       contexts="1"
+       page_url="fireonthispage.aspx">
+    <enabled value="1"  />
+    <trigger>
+      <sourcecodes>
+        <sourcecode value="ABC*" />
+      </sourcecodes>
+    </trigger>
+  </pixel>
+  <pixel name="Advertising.com"
+         value="https://secure.ace-tag.advertising.com/action/type=701290301/bins=1/rich=0/mnum=1516/logs=0"
+         type="image"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_ADVERSTING_COM_PIXEL_ENABLED"
+         page_url="fireonthispage.aspx">
+    <enabled value="1" />
+    <trigger doreplace="true">
+      <cookie name="advertisingHP{{privatelabelid}}" value="" />
+    </trigger>
+  </pixel>
+  <pixel name="Google Ad Services"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;/* &lt;![CDATA[ */var google_conversion_id = 1051291126;var google_conversion_label = &quot;_MoZCPT-2wMQ9tul9QM&quot;;var google_custom_params = window.google_tag_params;var google_remarketing_only = true;/* ]]&gt;*/&lt;/script&gt;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&lt;/script&gt;&lt;noscript&gt;&lt;div style=&quot;display:inline;&quot;&gt;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src&quot;/googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=_MoZCPT-2wMQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&lt;/div&gt;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_ADSERVICES_PIXEL_ENABLED"
+         page_url="fireonthispage.aspx">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true" firsttimeonly="true">
+      <cookie name="GoogleADServices_googleadremarketing" value=""  />
+    </trigger>
+  </pixel>
+</pixels>

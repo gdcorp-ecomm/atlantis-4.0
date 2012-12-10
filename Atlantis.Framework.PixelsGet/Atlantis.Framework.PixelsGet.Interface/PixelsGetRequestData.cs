@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
+using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.PixelsGet.Interface
@@ -16,7 +17,16 @@ namespace Atlantis.Framework.PixelsGet.Interface
     public int ContextId { get; set; }
     public Dictionary<string, string> ReplaceTags { get; set; }
     public bool FirstTimeShopper { get; set; }
+
+    /// <summary>
+    /// Will be overriden if something is passed into XDocumentOverride
+    /// </summary>
     public string XmlFilePathOverride { get; set; }
+
+    /// <summary>
+    /// Overrides the loading of any file paths, including the XmlFilePathOverride
+    /// </summary>
+    public XDocument XDocumentOverride { get; set; }
     #endregion
 
     public PixelsGetRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,

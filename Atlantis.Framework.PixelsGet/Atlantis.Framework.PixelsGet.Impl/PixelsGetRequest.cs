@@ -48,7 +48,16 @@ namespace Atlantis.Framework.PixelsGet.Impl
         pathToLoad = _pixelRequestData.XmlFilePathOverride;
       }
 
-      XDocument pixelData = XDocument.Load(pathToLoad, LoadOptions.None);
+      XDocument pixelData = null;
+
+      if (_pixelRequestData.XDocumentOverride != null)
+      {
+        pixelData = _pixelRequestData.XDocumentOverride;
+      }
+      else
+      {
+        XDocument.Load(pathToLoad, LoadOptions.None);
+      }
 
       foreach (XNode node in pixelData.Root.Nodes())
       {

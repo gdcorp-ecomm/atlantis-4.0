@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 using Atlantis.Framework.PixelsGet.Interface;
 using Atlantis.Framework.PixelsGet.Interface.Constants;
 using Atlantis.Framework.PixelsGet.Interface.PixelObjects;
@@ -28,7 +29,12 @@ namespace Atlantis.Framework.PixelsGet.Test.Web
       _replaceParms.Add(PixelReplaceTags.PrivateLabelId, "1");
       var request = new PixelsGetRequestData(string.Empty, _requestUrl, string.Empty, string.Empty, 0, "CART",
                                                   _isc, CreateCookieCollection(), _replaceParms, _contextId, _fireOnFirstTimeShopperOnly);
-      request.XmlFilePathOverride = Server.MapPath("~/app_data/pixels.xml");
+     // request.XmlFilePathOverride = Server.MapPath("~/app_data/pixels.xml");
+
+      XDocument xdoc = XDocument.Load(Server.MapPath("~/app_data/pixels.xml"));
+
+      request.XDocumentOverride = xdoc;
+
       var response = Engine.Engine.ProcessRequest(request, 627) as PixelsGetResponseData;
 
       rptPixels.DataSource = response.Pixels;

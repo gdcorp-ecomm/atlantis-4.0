@@ -32,7 +32,7 @@ namespace Atlantis.Framework.GrouponRedeemCoupon.Impl
         wsResponse = service.Redeem(request.ShopperID, request.CouponCode);
         var xmlDoc = new XmlDocument();
         xmlDoc.LoadXml(wsResponse);
-        XmlNode root = xmlDoc.SelectSingleNode("/result");
+        XmlNode root = xmlDoc.SelectSingleNode("/Result");
 
         if (root != null)
         {
@@ -45,6 +45,10 @@ namespace Atlantis.Framework.GrouponRedeemCoupon.Impl
             int.TryParse(root.Attributes["amount"].Value, out amount);
 
             response = new GrouponRedeemCouponResponseData(status, amount, root.Attributes["currency"].Value);
+          }
+          else
+          {
+            response = new GrouponRedeemCouponResponseData(status, root.Attributes["error"].Value);
           }
         }
         else

@@ -8,6 +8,7 @@ namespace Atlantis.Framework.GrouponRedeemCoupon.Interface
     public int Status { get; private set; }
     public int Amount { get; private set; }
     public string Currency { get; private set; }
+    public string Error { get; private set; }
 
     public GrouponRedeemCouponResponseData(int status, int amount, string currency)
     {
@@ -15,6 +16,12 @@ namespace Atlantis.Framework.GrouponRedeemCoupon.Interface
       Amount = amount;
       Currency = currency;
     }
+
+    public GrouponRedeemCouponResponseData(int status, string error)
+    {
+      Status = status;
+      Error = error;
+    } 
 
     public string ToXML()
     {

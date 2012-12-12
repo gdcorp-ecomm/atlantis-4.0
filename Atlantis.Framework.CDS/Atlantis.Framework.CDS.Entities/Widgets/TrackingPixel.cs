@@ -19,7 +19,13 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     GoogleAdwordsWwdPage,
     GoogleAdwordsInclude,
     Bizo,
-    Verisign
+    Verisign,
+    YahooRemarketingHP,
+    GoogleRemarketingHP,
+    AdvertisingHP,
+    ValueClickRetargetingHP,
+    ValueClickRetargetingWSB,
+    ValueClickRetargetingDLP
   }
 
   public class TrackingPixel : IWidgetModel

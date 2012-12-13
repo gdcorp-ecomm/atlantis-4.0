@@ -1,5 +1,6 @@
-﻿using System;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
+using System;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.GrouponRedeemCoupon.Interface
 {
@@ -8,14 +9,6 @@ namespace Atlantis.Framework.GrouponRedeemCoupon.Interface
     public GrouponRedeemCouponRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string couponCode) 
       : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
-      if (string.IsNullOrEmpty(shopperId))
-      {
-        throw new ArgumentException("Must provide a value.", "shopperId");
-      }
-      if (string.IsNullOrEmpty(couponCode))
-      {
-        throw new ArgumentException("Must provide a value.", "couponCode");
-      }
       CouponCode = couponCode;
       RequestTimeout = new TimeSpan(0, 0, 10);
     }
@@ -25,6 +18,13 @@ namespace Atlantis.Framework.GrouponRedeemCoupon.Interface
     public override string GetCacheMD5()
     {
       throw new NotImplementedException();
+    }
+
+    public override string ToXML()
+    {
+      XElement element = new XElement("request");
+      element.Add(new XAttribute("shopperid", ShopperID ?? string.Empty), new XAttribute("couponcode", CouponCode ?? string.Empty));
+      return element.ToString();
     }
   }
 }

@@ -13,12 +13,12 @@ namespace Atlantis.Framework.GrouponRedeemCoupon.Tests
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.GrouponRedeemCoupon.Impl.dll")]
-    public void TestMethod1()
+    public void CouponAlreadyUsed()
     {
       var requesData = new GrouponRedeemCouponRequestData("855302", string.Empty, string.Empty, string.Empty, 0,
                                                           "82573-66765-23424-43964");
       var response = (GrouponRedeemCouponResponseData) Engine.Engine.ProcessRequest(requesData, _requestType);
-      Assert.IsTrue(response.Status == 0);
+      Assert.AreEqual(GrouponRedeemStatus.UsedCode, response.Status);
     }
   }
 }

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-using System.Xml;
-using Atlantis.Framework.GrouponRedeemCoupon.Interface;
+﻿using Atlantis.Framework.GrouponRedeemCoupon.Interface;
 using Atlantis.Framework.Interface;
+using System;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.GrouponRedeemCoupon.Impl
 {
@@ -10,82 +10,93 @@ namespace Atlantis.Framework.GrouponRedeemCoupon.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      GrouponRedeemCouponRequestData request;
       GrouponRedeemCouponResponseData response = null;
+      string redeemXml = string.Empty;
 
-      string wsResponse = string.Empty;
-      InStoreCreditCouponService.Coupons service = null;
       try
       {
-        request = (GrouponRedeemCouponRequestData) requestData;
-        string wsURL = ((WsConfigElement) config).WSURL;
-        service = new InStoreCreditCouponService.Coupons();
-        service.Url = wsURL;
-        service.Timeout = (int) Math.Truncate(request.RequestTimeout.TotalMilliseconds);
+        var grouponRequest = (GrouponRedeemCouponRequestData)requestData;
 
-        var cert = GetCertificate(config);
-        if (cert != null)
+        if (string.IsNullOrEmpty(grouponRequest.ShopperID))
         {
-          service.ClientCertificates.Add(cert);
+          response = new GrouponRedeemCouponResponseData(GrouponRedeemStatus.UnknownShopper, "Empty shopper");
         }
-
-        wsResponse = service.Redeem(request.ShopperID, request.CouponCode);
-        var xmlDoc = new XmlDocument();
-        xmlDoc.LoadXml(wsResponse);
-        XmlNode root = xmlDoc.SelectSingleNode("/Result");
-
-        if (root != null)
+        else if (string.IsNullOrEmpty(grouponRequest.CouponCode))
         {
-          int status = -1;
-          int.TryParse(root.Attributes["status"].Value, out status);
-
-          if (status == 0)
-          {
-            int amount;
-            int.TryParse(root.Attributes["amount"].Value, out amount);
-
-            response = new GrouponRedeemCouponResponseData(status, amount, root.Attributes["currency"].Value);
-          }
-          else
-          {
-            response = new GrouponRedeemCouponResponseData(status, root.Attributes["error"].Value);
-          }
+          response = new GrouponRedeemCouponResponseData(GrouponRedeemStatus.UnknownCode, "Empty coupon code");
         }
         else
         {
-          throw new AtlantisException(requestData, "GrouponRedeemCouponRequest", "Received a bad response.",
-                                      string.Format("Response XML: {0}", wsResponse));
+          using (var couponService = new InStoreCreditCouponService.Coupons())
+          {
+            string wsURL = ((WsConfigElement)config).WSURL;
+            couponService.Url = wsURL;
+            couponService.Timeout = (int)Math.Truncate(grouponRequest.RequestTimeout.TotalMilliseconds);
+
+            couponService.ClientCertificates.Add(((WsConfigElement)config).GetClientCertificate());
+            redeemXml = couponService.Redeem(grouponRequest.ShopperID, grouponRequest.CouponCode);
+          }
+
+          XElement element = XElement.Parse(redeemXml);
+          if (!"result".Equals(element.Name.ToString(), StringComparison.OrdinalIgnoreCase))
+          {
+            element = element.Descendants("Result").FirstOrDefault();
+          }
+
+          int status = -1;
+          int parsedStatus;
+          if (int.TryParse(element.Attribute("status").Value, out parsedStatus))
+          {
+            status = parsedStatus;
+          }
+
+          if (status == 0)
+          {
+            int amount = Convert.ToInt32(element.Attribute("amount").Value);
+            string currency = element.Attribute("currency").Value;
+            response = new GrouponRedeemCouponResponseData(amount, currency);
+          }
+          else
+          {
+            string message = element.Attribute("error") != null ? element.Attribute("error").Value : "Empty error attribute";
+            GrouponRedeemStatus couponStatus = GrouponRedeemStatus.UnknownError;
+
+            switch (status)
+            {
+              case 1:
+                couponStatus = GrouponRedeemStatus.UnknownShopper;
+                break;
+              case -1:
+                couponStatus = GrouponRedeemStatus.UnknownCode;
+                break;
+              case -2:
+                couponStatus = GrouponRedeemStatus.UsedCode;
+                break;
+              case -3:
+                couponStatus = GrouponRedeemStatus.ExpiredCode;
+                break;
+              case -4:
+                couponStatus = GrouponRedeemStatus.InactiveCode;
+                break;
+              case 5:
+                couponStatus = GrouponRedeemStatus.InvalidCode;
+                break;
+            }
+
+            response = new GrouponRedeemCouponResponseData(couponStatus, message);
+          }
+          
         }
+
       }
+
       catch (Exception ex)
       {
-        throw new AtlantisException(requestData, "GrouponRedeemCouponRequest",
-                                    "Error invoking GrouponRedeemCouponRequest",
-                                    string.Format("Response XML: {0}", wsResponse), ex);
+        AtlantisException aex = new AtlantisException(requestData, "GrouponRedeemCouponRequest.RequestHandler", ex.Message + ex.StackTrace, redeemXml);
+        response = new GrouponRedeemCouponResponseData(aex);
       }
-      finally
-      {
-        if (service != null)
-        {
-          service.Dispose();
-        }
-      }
+
       return response;
     }    
-
-    private X509Certificate GetCertificate(ConfigElement oConfig)
-    {
-      X509Certificate cert = null;
-      var certificateName = oConfig.GetConfigValue("CertificateName");
-      if (!string.IsNullOrEmpty(certificateName))
-      {
-        var certStore = new X509Store(StoreLocation.LocalMachine);
-        certStore.Open(OpenFlags.ReadOnly);
-        X509CertificateCollection certs = certStore.Certificates.Find(X509FindType.FindBySubjectName, certificateName, true);
-        if (certs.Count > 0)
-          cert = certs[0];
-      }
-      return cert;
-    }
   }
 }

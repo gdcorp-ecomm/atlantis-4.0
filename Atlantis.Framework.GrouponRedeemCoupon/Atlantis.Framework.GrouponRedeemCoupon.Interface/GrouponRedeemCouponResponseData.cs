@@ -1,27 +1,41 @@
-﻿using System;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
+using System;
 
 namespace Atlantis.Framework.GrouponRedeemCoupon.Interface
 {
   public class GrouponRedeemCouponResponseData : IResponseData
   {
-    public int Status { get; private set; }
+    private AtlantisException _exception = null;
+
+    public GrouponRedeemStatus Status { get; private set; }
     public int Amount { get; private set; }
     public string Currency { get; private set; }
-    public string Error { get; private set; }
+    public string Message { get; private set; }
 
-    public GrouponRedeemCouponResponseData(int status, int amount, string currency)
+    public GrouponRedeemCouponResponseData(int amount, string currency)
     {
-      Status = status;
+      Status = GrouponRedeemStatus.Success;
       Amount = amount;
       Currency = currency;
+      Message = string.Empty;
     }
 
-    public GrouponRedeemCouponResponseData(int status, string error)
+    public GrouponRedeemCouponResponseData(GrouponRedeemStatus errorStatus, string errorMessage)
     {
-      Status = status;
-      Error = error;
+      Status = errorStatus;
+      Amount = 0;
+      Currency = string.Empty;
+      Message = errorMessage;
     } 
+
+    public GrouponRedeemCouponResponseData(AtlantisException exception)
+    {
+      _exception = exception;
+      Status = GrouponRedeemStatus.UnknownError;
+      Amount = 0;
+      Currency = string.Empty;
+      Message = string.Empty;
+    }
 
     public string ToXML()
     {
@@ -30,8 +44,7 @@ namespace Atlantis.Framework.GrouponRedeemCoupon.Interface
 
     public AtlantisException GetException()
     {
-      // don't bother using this, just throw any exeception from the request
-      return null;
+      return _exception;
     }
   }
 }

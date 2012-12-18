@@ -63,6 +63,7 @@
     <Compile Include="Widgets\HPSeoContent.cs" />
     <Compile Include="Widgets\HPSingleVideoPod.cs" />
     <Compile Include="Widgets\HPStackedPod.cs" />
+    <Compile Include="Widgets\HPStyleSheet.cs" />
     <Compile Include="Widgets\HPTechPanel.cs" />
   </ItemGroup>
   <ItemGroup>

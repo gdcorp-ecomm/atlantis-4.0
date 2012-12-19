@@ -55,8 +55,6 @@
     <Compile Include="Widgets\ArticleBox.cs" />
     <Compile Include="Widgets\CDSJsonContent.cs" />
     <Compile Include="Widgets\CheckedList.cs" />
-    <Compile Include="Widgets\ContentBase.cs" />
-    <Compile Include="Widgets\ContentContainer.cs" />
     <Compile Include="Widgets\Features2.cs" />
     <Compile Include="Widgets\ManagerRegionSelector.cs" />
     <Compile Include="Widgets\CSSBlock.cs" />

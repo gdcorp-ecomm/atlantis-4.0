@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</ProjectGuid>
+    <ProjectGuid>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Atlantis.Framework.Interface</RootNamespace>

@@ -8,6 +8,7 @@ namespace Atlantis.Framework.FTEStateAreaCodes.Test
   public class UnitTest1
   {
     [TestMethod]
+    [DeploymentItem("Atlantis.Framework.FTEStateAreaCodes.Impl.dll")]
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("app.config")]
     public void TestMethod1()

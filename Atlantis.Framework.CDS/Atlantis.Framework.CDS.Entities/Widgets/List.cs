@@ -10,6 +10,7 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
   {
     public string Title { get; set; }
     public bool Filtered { get; set; }
+    public string SubText { get; set; }
 
     private int _numColumns = 2;
     public int NumColumns

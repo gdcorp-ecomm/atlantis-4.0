@@ -55,6 +55,8 @@
     <Compile Include="Widgets\ArticleBox.cs" />
     <Compile Include="Widgets\CDSJsonContent.cs" />
     <Compile Include="Widgets\CheckedList.cs" />
+    <Compile Include="Widgets\ContentBase.cs" />
+    <Compile Include="Widgets\ContentContainer.cs" />
     <Compile Include="Widgets\Features2.cs" />
     <Compile Include="Widgets\ManagerRegionSelector.cs" />
     <Compile Include="Widgets\CSSBlock.cs" />
@@ -139,7 +141,7 @@
       <Name>Atlantis.Framework.CDS.Entities.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.CDS.Entities.Filters\Atlantis.Framework.CDS.Entities.Filters.csproj">
-      <Project>{0124b5a1-6cb7-4279-ad34-be1da5a83337}</Project>
+      <Project>{0124B5A1-6CB7-4279-AD34-BE1DA5A83337}</Project>
       <Name>Atlantis.Framework.CDS.Entities.Filters</Name>
     </ProjectReference>
   </ItemGroup>

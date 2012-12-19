@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
+using Atlantis.Framework.CDS.Entities.Filters;
 
 namespace Atlantis.Framework.CDS.Entities.Widgets
 {
@@ -53,6 +54,12 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
 
     public class Section : ElementBase
     {
+      public Section()
+        : this(string.Empty)
+      {
+
+      }
+
       public Section(string title)
       {
         Title = title;
@@ -70,11 +77,18 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
       public class Column
       {
         public string ColumnTitle { get; set; }
+        public bool Filtered { get; set; }
         public List<ListItem> ListItems { get; set; }
       }
 
-      public class ListItem : ElementBase
+      public class ListItem : SimpleFilteredItem
       {
+        public ListItem()
+          : this(string.Empty)
+        {
+          
+        }
+
         public ListItem(string text)
         {
           Text = text;

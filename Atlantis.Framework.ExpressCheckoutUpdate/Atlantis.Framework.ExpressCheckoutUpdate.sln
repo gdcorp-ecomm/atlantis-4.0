@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{49D18473-57C8-49B4-BD1D-5F5F2D373739}"
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ExpressC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E0D28171-CBC5-4270-8ECE-73C2AF9693D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{17EBED78-9469-4678-96B1-A175AB221916}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -77,10 +77,10 @@ Global
 		{4F4FCE1B-BD87-497D-9B14-5ABDCEB09EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F4FCE1B-BD87-497D-9B14-5ABDCEB09EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F4FCE1B-BD87-497D-9B14-5ABDCEB09EE6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +88,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {E0D28171-CBC5-4270-8ECE-73C2AF9693D0}
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {E0D28171-CBC5-4270-8ECE-73C2AF9693D0}
-		{17EBED78-9469-4678-96B1-A175AB221916} = {E0D28171-CBC5-4270-8ECE-73C2AF9693D0}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {E0D28171-CBC5-4270-8ECE-73C2AF9693D0}
 	EndGlobalSection
 EndGlobal

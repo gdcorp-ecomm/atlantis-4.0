@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{42158F30-0F14-4543-B79D-B98C6AA3A158}"
@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.TH.Curre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.TH.Currency.Tests", "Atlantis.Framework.TH.Currency.Tests\Atlantis.Framework.TH.Currency.Tests.csproj", "{58F77ACD-767D-4F2A-B043-5F3C24A88AED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{092618E1-1F37-422C-82AF-17A1337B8986}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Currency", "..\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency.csproj", "{8581EB6C-5093-473E-AB04-318CE071E7FD}"
 EndProject
@@ -95,10 +95,10 @@ Global
 		{58F77ACD-767D-4F2A-B043-5F3C24A88AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58F77ACD-767D-4F2A-B043-5F3C24A88AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58F77ACD-767D-4F2A-B043-5F3C24A88AED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{092618E1-1F37-422C-82AF-17A1337B8986}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8581EB6C-5093-473E-AB04-318CE071E7FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8581EB6C-5093-473E-AB04-318CE071E7FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8581EB6C-5093-473E-AB04-318CE071E7FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -130,7 +130,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2474F971-3E1D-4608-9D60-B0A9A1CA8D13} = {42158F30-0F14-4543-B79D-B98C6AA3A158}
 		{79189505-C1C8-4282-83E2-0140A2635624} = {42158F30-0F14-4543-B79D-B98C6AA3A158}
-		{092618E1-1F37-422C-82AF-17A1337B8986} = {42158F30-0F14-4543-B79D-B98C6AA3A158}
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {42158F30-0F14-4543-B79D-B98C6AA3A158}
 		{8581EB6C-5093-473E-AB04-318CE071E7FD} = {42158F30-0F14-4543-B79D-B98C6AA3A158}
 		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE} = {42158F30-0F14-4543-B79D-B98C6AA3A158}
 		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {42158F30-0F14-4543-B79D-B98C6AA3A158}

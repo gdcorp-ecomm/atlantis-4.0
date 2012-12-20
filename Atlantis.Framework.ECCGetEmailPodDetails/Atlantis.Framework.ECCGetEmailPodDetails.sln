@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{30D03581-0E62-48EC-B6B7-55F68562BCE5}"
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetEm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetEmailPodDetails.Interface", "Atlantis.Framework.ECCGetEmailPodDetails.Interface\Atlantis.Framework.ECCGetEmailPodDetails.Interface.csproj", "{98288194-5DEE-4005-B91B-96D105B2FF3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{17EBED78-9469-4678-96B1-A175AB221916}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECCGetEmailPodDetails.Tests", "Atlantis.Framework.ECCGetEmailPodDetails.Tests\Atlantis.Framework.ECCGetEmailPodDetails.Tests.csproj", "{E35C34D8-0B11-4F45-B472-AC9C916BFD36}"
 EndProject
@@ -73,10 +73,10 @@ Global
 		{98288194-5DEE-4005-B91B-96D105B2FF3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98288194-5DEE-4005-B91B-96D105B2FF3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98288194-5DEE-4005-B91B-96D105B2FF3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17EBED78-9469-4678-96B1-A175AB221916}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17EBED78-9469-4678-96B1-A175AB221916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E35C34D8-0B11-4F45-B472-AC9C916BFD36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E35C34D8-0B11-4F45-B472-AC9C916BFD36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E35C34D8-0B11-4F45-B472-AC9C916BFD36}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -88,6 +88,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {30D03581-0E62-48EC-B6B7-55F68562BCE5}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {30D03581-0E62-48EC-B6B7-55F68562BCE5}
-		{17EBED78-9469-4678-96B1-A175AB221916} = {30D03581-0E62-48EC-B6B7-55F68562BCE5}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {30D03581-0E62-48EC-B6B7-55F68562BCE5}
 	EndGlobalSection
 EndGlobal

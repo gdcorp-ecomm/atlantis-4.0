@@ -57,6 +57,7 @@
     <Compile Include="Widgets\HPFeaturedDomainsPod.cs" />
     <Compile Include="Widgets\HPListPod.cs" />
     <Compile Include="Widgets\HPMultiVideoPod.cs" />
+    <Compile Include="Widgets\HPOpenGraph.cs" />
     <Compile Include="Widgets\HPPanelBulkSearch.cs" />
     <Compile Include="Widgets\HPPanelContainer.cs" />
     <Compile Include="Widgets\HPPodContainer.cs" />

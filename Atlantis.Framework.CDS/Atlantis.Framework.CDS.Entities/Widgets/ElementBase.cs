@@ -17,6 +17,5 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     public int ProductGroupOffered { get; set; }
     public bool ManagerOnly { get; set; }
     public bool? TechSupportIs24X7 { get; set; }
-    public string CountryByIP { get; set; }
   }
 }

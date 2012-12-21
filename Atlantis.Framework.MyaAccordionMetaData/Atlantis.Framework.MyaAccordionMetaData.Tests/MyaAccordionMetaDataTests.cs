@@ -188,6 +188,25 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
                 }
                 Debug.WriteLine(string.Format("{0}: {1}", p.Name, sb4.ToString()));
                 break;
+              case "SurveyData":
+                StringBuilder sb5 = new StringBuilder();
+                if (accordion.DoesProductHaveSurveys)
+                {
+                  foreach (SurveyData s in accordion.SurveyData.Values)
+                  {
+                    if (s.LinkUrl != null)
+                    {
+                      sb5.AppendFormat("type: {0}, linkText: {1}, productId: {2}, linkUrlLink: {3}, linkUrlPage: {4}", s.Type, s.LinkText, s.ProductId, s.LinkUrl.Link, s.LinkUrl.Page);
+                    }
+                    else
+                    {
+                      sb5.AppendFormat("type: {0}, linkText: {1}, productId: {2}", s.Type, s.LinkText, s.ProductId);
+                    }
+                    sb5.Append(" | ");
+                  }
+                }
+                Debug.WriteLine(string.Format("{0}: {1}", p.Name, sb5.ToString()));
+                break;
               default:
                 Debug.WriteLine(string.Format("{0}: {1}", p.Name, p.GetValue(accordion, null)));
                 break;

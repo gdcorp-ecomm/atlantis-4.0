@@ -87,16 +87,17 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
       string orionProductName;
       bool isBundleProduct;
       Dictionary<int, ProductMap> productMaps;
+      Dictionary<SurveyData.SurveyTypes, SurveyData> surveyData;
       GetAccordionAttributes(out ciExpansion, out ciRenewNow, out ciSetup, out cmsDisplayGroups,
                              out iconCssCoordinates, out productGroup, out productTypes,
                              out showControlPanel, out showSetupForManagerOnly, out orionProductName,
-                             out isBundleProduct, out productMaps);
+                             out isBundleProduct, out productMaps, out surveyData);
 
       return new AccordionMetaData(accordionId, accordionTitleDefault, accordionTitleGoDaddy, defaultSortOrder, namespaces,
                                    ciExpansion, ciRenewNow, ciSetup, cmsDisplayGroups,
                                    iconCssCoordinates,
                                    productGroup, productTypes, showControlPanel, showSetupForManagerOnly,
-                                   orionProductName, isBundleProduct, productMaps,
+                                   orionProductName, isBundleProduct, productMaps, surveyData,
                                    contentData, controlPanelData, workspaceLoginData);
     }
 
@@ -140,7 +141,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
                                         out List<int> cmsDisplayGroups, out CssSpriteCoordinate iconCssCoordinates,
                                         out int productGroup, out HashSet<int> productTypes,
                                         out bool showControlPanel, out bool showSetupForManagerOnly,
-                                        out string orionProductName, out bool isBundleProduct, out Dictionary<int, ProductMap> productMaps)
+                                        out string orionProductName, out bool isBundleProduct, out Dictionary<int, ProductMap> productMaps, out Dictionary<SurveyData.SurveyTypes, SurveyData> surveyData)
     {
       ciExpansion = string.Empty;
       ciRenewNow = string.Empty;
@@ -168,6 +169,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
         orionProductName = ParseAccordionXml("orionproductname");
         isBundleProduct = string.Compare(ParseAccordionXml("isbundle"), "true", true) == 0;
         productMaps = SetProductMaps(ParseAccordionXmlProductMaps());
+        surveyData = SetSurveyData(ParseAccordionXmlSurveyData());
       }
       else
       {
@@ -189,6 +191,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
     private XElement ParseAccordionXmlProductMaps()
     {
       return IsWellFormedAccordionXml ? (_accordionXDoc.Element("accordion").Element("productmaps") != null ? _accordionXDoc.Element("accordion").Element("productmaps") : null) : null;
+    }
+
+    private XElement ParseAccordionXmlSurveyData()
+    {
+      return IsWellFormedAccordionXml ? (_accordionXDoc.Element("accordion").Element("surveys") != null ? _accordionXDoc.Element("accordion").Element("surveys") : null) : null;
     }
 
     private CssSpriteCoordinate SetCoordinates(string iconnCssCoordinates)
@@ -225,6 +232,30 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
         }
       }
       return cmsDisplayGroupList;
+    }
+
+    private Dictionary<SurveyData.SurveyTypes, SurveyData> SetSurveyData(XElement surveyDataColl)
+    {
+      var surveyDataDict = new Dictionary<SurveyData.SurveyTypes, SurveyData>();
+
+      try
+      {
+        foreach (var survey in surveyDataColl.Elements("survey"))
+        {
+          var type = (SurveyData.SurveyTypes)Enum.Parse(typeof(SurveyData.SurveyTypes), survey.Attribute("type").Value);
+          var linkText = survey.Attribute("linktext").Value;
+          var productid = survey.Attribute("productid") != null ? survey.Attribute("productid").Value : string.Empty;
+          LinkUrlData linkUrl = survey.Element("linkurl") != null ? ParseLinkUrlElement(survey.Element("linkurl")) : null;
+
+          var surveyData = new SurveyData(type, linkText, productid, linkUrl);
+          surveyDataDict[type] = surveyData;
+        }
+      }
+      catch (Exception ex)
+      {
+        surveyDataDict = new Dictionary<SurveyData.SurveyTypes, SurveyData>();
+      }
+      return surveyDataDict;
     }
 
     private Dictionary<int, ProductMap> SetProductMaps(XElement productMaps)

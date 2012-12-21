@@ -98,6 +98,13 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     {
       get { return _productMaps; }
     }
+
+    private readonly Dictionary<SurveyData.SurveyTypes, SurveyData> _surveyData;
+    public Dictionary<SurveyData.SurveyTypes, SurveyData> SurveyData
+    {
+      get { return _surveyData; }
+    }
+
     #endregion
 
     #region Derived Content, Control Panel & WorkspaceLogin Accessors
@@ -125,7 +132,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
     internal AccordionMetaData(int accordionId, string accordionTitleDefault, string accordionTitleGoDaddy, int defaultSortOrder, HashSet<string> namespaces, 
           string ciExpansion, string ciRenewNow, string ciSetup, List<int> cmsDisplayGroups, CssSpriteCoordinate iconCssCoordinates, 
           int productGroup, HashSet<int> productTypes, bool showControlPanel, bool showSetupForManagerOnly, string orionProductName, bool isBundleProduct,
-          Dictionary<int, ProductMap> productMaps, ContentData contentData, ControlPanelData controlPanelData, WorkspaceLoginData workspaceLoginData)
+          Dictionary<int, ProductMap> productMaps, Dictionary<SurveyData.SurveyTypes, SurveyData> surveyData, ContentData contentData, ControlPanelData controlPanelData, WorkspaceLoginData workspaceLoginData)
     {
       _accordionId = accordionId;
       _accordionTitleDefault = accordionTitleDefault;
@@ -147,6 +154,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       _controlPanels = controlPanelData;
       _workspaceLogin = workspaceLoginData;
       _productMaps = productMaps;
+      _surveyData = surveyData;
     }
 
     #region Public Methods
@@ -167,6 +175,10 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface
       return ProductMaps.TryGetValue(group, out map);
     }
 
+    public bool DoesProductHaveSurveys
+    {
+      get { return SurveyData.Count > 0; }
+    }
 
     #endregion
 

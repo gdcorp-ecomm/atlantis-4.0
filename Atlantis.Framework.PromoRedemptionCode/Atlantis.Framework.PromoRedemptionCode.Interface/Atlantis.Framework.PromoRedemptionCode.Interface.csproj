@@ -43,6 +43,7 @@
     <Compile Include="PromoRedemptionCodeResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedemptionCodeStatus.cs" />
+    <Compile Include="RedemptionCodeStatusIds.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">

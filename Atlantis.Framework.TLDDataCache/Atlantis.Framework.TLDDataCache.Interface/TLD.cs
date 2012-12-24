@@ -6,6 +6,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
   {
     public int Id { get; private set; }
     public string Name { get; private set; }
+    public int DefaultOrder { get; private set; }
 
     public int CompareTo(TLD other)
     {

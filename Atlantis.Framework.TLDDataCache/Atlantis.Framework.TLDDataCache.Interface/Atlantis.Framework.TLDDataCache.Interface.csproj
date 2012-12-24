@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="ActiveTLDsRequestData.cs" />
     <Compile Include="OfferedTLDProductTypes.cs" />
+    <Compile Include="OfferedTLDsRequestData.cs" />
+    <Compile Include="OfferedTLDsResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ActiveTLDsResponseData.cs" />
     <Compile Include="TLD.cs" />

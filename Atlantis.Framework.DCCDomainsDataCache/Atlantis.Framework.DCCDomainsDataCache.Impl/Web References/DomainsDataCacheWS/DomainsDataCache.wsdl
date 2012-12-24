@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:DomainsDataCacheWebSvc" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="urn:DomainsDataCacheWebSvc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This is a cache of Domains Data.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="urn:DomainsDataCacheWebSvc">
+      <s:element name="GetAllTldData">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllTldDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllTldDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sTldName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTldIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldDataByTldId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lTldId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldDataByTldIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTldDataByTldIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lTldId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTldNameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRedemptionGracePeriod">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lTldId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRedemptionGracePeriodResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRedemptionGracePeriodResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRegistrationGracePeriod">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lTldId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRegistrationGracePeriodResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRegistrationGracePeriodResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllDomainInfoStatusData">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllDomainInfoStatusDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllDomainInfoStatusDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainInfoStatusDataByStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lStatus" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainInfoStatusDataByStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainInfoStatusDataByStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllEMCData">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllEMCDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllEMCDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEMCDataById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lEmailTemplateLookupId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEMCDataByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEMCDataByIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllHubData">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllHubDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllHubDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHubDataByTldIdAndInternalRegistrarId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lTldId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="lInternalRegistrarId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="lRegistrationApiId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHubDataByTldIdAndInternalRegistrarIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHubDataByTldIdAndInternalRegistrarIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHubDataByTldId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lTldId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="lRegistrationApiId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHubDataByTldIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHubDataByTldIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldmlByTldId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lTldId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldmlByTldIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTldmlByTldIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldmlByTldName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sTldName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldmlByTldNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTldmlByTldNameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllTldlanguageData">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllTldlanguageDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllTldlanguageDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldLanguageDataByTld">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sTld" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldLanguageDataByTldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTldLanguageDataByTldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldLanguageDataByTldId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lTldId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldLanguageDataByTldIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTldLanguageDataByTldIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReloadDomainsDataCache">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sEncryptedPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReloadDomainsDataCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReloadDomainsDataCacheResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MonitorDomainsDataCache">
+        <s:complexType />
+      </s:element>
+      <s:element name="MonitorDomainsDataCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MonitorDomainsDataCacheResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAllTldDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllTldData" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTldDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllTldDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTldIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTldId" />
+  </wsdl:message>
+  <wsdl:message name="GetTldIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTldIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTldDataByTldIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTldDataByTldId" />
+  </wsdl:message>
+  <wsdl:message name="GetTldDataByTldIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTldDataByTldIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTldNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTldName" />
+  </wsdl:message>
+  <wsdl:message name="GetTldNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTldNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRedemptionGracePeriodSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRedemptionGracePeriod" />
+  </wsdl:message>
+  <wsdl:message name="GetRedemptionGracePeriodSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRedemptionGracePeriodResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRegistrationGracePeriodSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRegistrationGracePeriod" />
+  </wsdl:message>
+  <wsdl:message name="GetRegistrationGracePeriodSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRegistrationGracePeriodResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDomainInfoStatusDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllDomainInfoStatusData" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDomainInfoStatusDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllDomainInfoStatusDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoStatusDataByStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainInfoStatusDataByStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainInfoStatusDataByStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainInfoStatusDataByStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllEMCDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllEMCData" />
+  </wsdl:message>
+  <wsdl:message name="GetAllEMCDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllEMCDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEMCDataByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEMCDataById" />
+  </wsdl:message>
+  <wsdl:message name="GetEMCDataByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEMCDataByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllHubDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllHubData" />
+  </wsdl:message>
+  <wsdl:message name="GetAllHubDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllHubDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetHubDataByTldIdAndInternalRegistrarIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHubDataByTldIdAndInternalRegistrarId" />
+  </wsdl:message>
+  <wsdl:message name="GetHubDataByTldIdAndInternalRegistrarIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHubDataByTldIdAndInternalRegistrarIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetHubDataByTldIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHubDataByTldId" />
+  </wsdl:message>
+  <wsdl:message name="GetHubDataByTldIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHubDataByTldIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTldmlByTldIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTldmlByTldId" />
+  </wsdl:message>
+  <wsdl:message name="GetTldmlByTldIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTldmlByTldIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTldmlByTldNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTldmlByTldName" />
+  </wsdl:message>
+  <wsdl:message name="GetTldmlByTldNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTldmlByTldNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTldlanguageDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllTldlanguageData" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTldlanguageDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllTldlanguageDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTldLanguageDataByTldSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTldLanguageDataByTld" />
+  </wsdl:message>
+  <wsdl:message name="GetTldLanguageDataByTldSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTldLanguageDataByTldResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTldLanguageDataByTldIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTldLanguageDataByTldId" />
+  </wsdl:message>
+  <wsdl:message name="GetTldLanguageDataByTldIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTldLanguageDataByTldIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReloadDomainsDataCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:ReloadDomainsDataCache" />
+  </wsdl:message>
+  <wsdl:message name="ReloadDomainsDataCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:ReloadDomainsDataCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="MonitorDomainsDataCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:MonitorDomainsDataCache" />
+  </wsdl:message>
+  <wsdl:message name="MonitorDomainsDataCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:MonitorDomainsDataCacheResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DomainsDataCacheSoap">
+    <wsdl:operation name="GetAllTldData">
+      <wsdl:input message="tns:GetAllTldDataSoapIn" />
+      <wsdl:output message="tns:GetAllTldDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTldId">
+      <wsdl:input message="tns:GetTldIdSoapIn" />
+      <wsdl:output message="tns:GetTldIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTldDataByTldId">
+      <wsdl:input message="tns:GetTldDataByTldIdSoapIn" />
+      <wsdl:output message="tns:GetTldDataByTldIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTldName">
+      <wsdl:input message="tns:GetTldNameSoapIn" />
+      <wsdl:output message="tns:GetTldNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRedemptionGracePeriod">
+      <wsdl:input message="tns:GetRedemptionGracePeriodSoapIn" />
+      <wsdl:output message="tns:GetRedemptionGracePeriodSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRegistrationGracePeriod">
+      <wsdl:input message="tns:GetRegistrationGracePeriodSoapIn" />
+      <wsdl:output message="tns:GetRegistrationGracePeriodSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDomainInfoStatusData">
+      <wsdl:input message="tns:GetAllDomainInfoStatusDataSoapIn" />
+      <wsdl:output message="tns:GetAllDomainInfoStatusDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoStatusDataByStatus">
+      <wsdl:input message="tns:GetDomainInfoStatusDataByStatusSoapIn" />
+      <wsdl:output message="tns:GetDomainInfoStatusDataByStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEMCData">
+      <wsdl:input message="tns:GetAllEMCDataSoapIn" />
+      <wsdl:output message="tns:GetAllEMCDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEMCDataById">
+      <wsdl:input message="tns:GetEMCDataByIdSoapIn" />
+      <wsdl:output message="tns:GetEMCDataByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllHubData">
+      <wsdl:input message="tns:GetAllHubDataSoapIn" />
+      <wsdl:output message="tns:GetAllHubDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHubDataByTldIdAndInternalRegistrarId">
+      <wsdl:input message="tns:GetHubDataByTldIdAndInternalRegistrarIdSoapIn" />
+      <wsdl:output message="tns:GetHubDataByTldIdAndInternalRegistrarIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHubDataByTldId">
+      <wsdl:input message="tns:GetHubDataByTldIdSoapIn" />
+      <wsdl:output message="tns:GetHubDataByTldIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTldmlByTldId">
+      <wsdl:input message="tns:GetTldmlByTldIdSoapIn" />
+      <wsdl:output message="tns:GetTldmlByTldIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTldmlByTldName">
+      <wsdl:input message="tns:GetTldmlByTldNameSoapIn" />
+      <wsdl:output message="tns:GetTldmlByTldNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTldlanguageData">
+      <wsdl:input message="tns:GetAllTldlanguageDataSoapIn" />
+      <wsdl:output message="tns:GetAllTldlanguageDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTldLanguageDataByTld">
+      <wsdl:input message="tns:GetTldLanguageDataByTldSoapIn" />
+      <wsdl:output message="tns:GetTldLanguageDataByTldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTldLanguageDataByTldId">
+      <wsdl:input message="tns:GetTldLanguageDataByTldIdSoapIn" />
+      <wsdl:output message="tns:GetTldLanguageDataByTldIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReloadDomainsDataCache">
+      <wsdl:input message="tns:ReloadDomainsDataCacheSoapIn" />
+      <wsdl:output message="tns:ReloadDomainsDataCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MonitorDomainsDataCache">
+      <wsdl:input message="tns:MonitorDomainsDataCacheSoapIn" />
+      <wsdl:output message="tns:MonitorDomainsDataCacheSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DomainsDataCacheSoap" type="tns:DomainsDataCacheSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllTldData">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetAllTldData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldId">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldDataByTldId">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldDataByTldId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldName">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRedemptionGracePeriod">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetRedemptionGracePeriod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegistrationGracePeriod">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetRegistrationGracePeriod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDomainInfoStatusData">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetAllDomainInfoStatusData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoStatusDataByStatus">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetDomainInfoStatusDataByStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEMCData">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetAllEMCData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEMCDataById">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetEMCDataById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllHubData">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetAllHubData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHubDataByTldIdAndInternalRegistrarId">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetHubDataByTldIdAndInternalRegistrarId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHubDataByTldId">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetHubDataByTldId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldmlByTldId">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldmlByTldId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldmlByTldName">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldmlByTldName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTldlanguageData">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetAllTldlanguageData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldLanguageDataByTld">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldLanguageDataByTld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldLanguageDataByTldId">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldLanguageDataByTldId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReloadDomainsDataCache">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/ReloadDomainsDataCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MonitorDomainsDataCache">
+      <soap:operation soapAction="urn:DomainsDataCacheWebSvc/MonitorDomainsDataCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DomainsDataCacheSoap12" type="tns:DomainsDataCacheSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllTldData">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetAllTldData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldId">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldDataByTldId">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldDataByTldId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldName">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRedemptionGracePeriod">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetRedemptionGracePeriod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegistrationGracePeriod">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetRegistrationGracePeriod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDomainInfoStatusData">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetAllDomainInfoStatusData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainInfoStatusDataByStatus">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetDomainInfoStatusDataByStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEMCData">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetAllEMCData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEMCDataById">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetEMCDataById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllHubData">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetAllHubData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHubDataByTldIdAndInternalRegistrarId">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetHubDataByTldIdAndInternalRegistrarId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHubDataByTldId">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetHubDataByTldId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldmlByTldId">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldmlByTldId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldmlByTldName">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldmlByTldName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTldlanguageData">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetAllTldlanguageData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldLanguageDataByTld">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldLanguageDataByTld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldLanguageDataByTldId">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/GetTldLanguageDataByTldId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReloadDomainsDataCache">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/ReloadDomainsDataCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MonitorDomainsDataCache">
+      <soap12:operation soapAction="urn:DomainsDataCacheWebSvc/MonitorDomainsDataCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DomainsDataCache">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This is a cache of Domains Data.</wsdl:documentation>
+    <wsdl:port name="DomainsDataCacheSoap" binding="tns:DomainsDataCacheSoap">
+      <soap:address location="http://regweb.dev.glbt1.gdg/DomainsDataCacheWebSvc/DomainsDataCache.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DomainsDataCacheSoap12" binding="tns:DomainsDataCacheSoap12">
+      <soap12:address location="http://regweb.dev.glbt1.gdg/DomainsDataCacheWebSvc/DomainsDataCache.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

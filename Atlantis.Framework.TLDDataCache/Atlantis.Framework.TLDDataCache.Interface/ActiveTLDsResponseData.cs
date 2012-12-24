@@ -39,7 +39,6 @@ namespace Atlantis.Framework.TLDDataCache.Interface
         try
         {
           string tld = itemElement.Attribute("tld").Value;
-          int tldId = Convert.ToInt32(itemElement.Attribute("tldid").Value);
 
           foreach (XAttribute itemAtt in itemElement.Attributes())
           {

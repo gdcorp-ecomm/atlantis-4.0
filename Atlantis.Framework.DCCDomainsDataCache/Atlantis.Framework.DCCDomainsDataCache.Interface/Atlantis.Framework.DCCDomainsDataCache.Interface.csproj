@@ -46,7 +46,6 @@
     <Compile Include="TLDMLByNameRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TLDMLByNameResponseData.cs" />
-    <Compile Include="TLDMLStatusType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">

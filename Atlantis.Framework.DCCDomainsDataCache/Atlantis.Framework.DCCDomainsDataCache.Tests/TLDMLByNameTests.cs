@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.DCCDomainsDataCache.Interface;
+﻿using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.DCCDomainsDataCache.Tests
 {

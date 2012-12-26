@@ -9,9 +9,6 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     private XElement _tldmlElement;
     private AtlantisException _exception;
 
-    public TLDMLStatusType Status { get; private set; }
-    public string StatusMessage { get; private set; }
-
     private TLDMLByNameResponseData(XElement tldmlElement)
     {
       _tldmlElement = tldmlElement;

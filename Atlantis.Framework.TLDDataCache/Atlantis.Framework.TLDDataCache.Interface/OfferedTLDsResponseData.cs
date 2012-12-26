@@ -10,7 +10,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
     private AtlantisException _exception;
 
     private HashSet<string> _offeredTLDs;
-    private Dictionary<string, int> _tldOrder;
+    private List<string> _offeredTLDsInOrder;
 
     public static OfferedTLDsResponseData FromException(RequestData requestData, Exception ex)
     {
@@ -32,29 +32,29 @@ namespace Atlantis.Framework.TLDDataCache.Interface
     private OfferedTLDsResponseData(DataTable dataCacheTable)
     {
       _offeredTLDs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-      _tldOrder = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+      _offeredTLDsInOrder = new List<string>();
 
-      DataColumn columnName = dataCacheTable.Columns["name"];
-      DataColumn columnAvailCheckStatus = dataCacheTable.Columns["availcheckstatus"];
-
-      int sortOrder = 0;
-
-      foreach (DataRow row in dataCacheTable.Rows)
+      if (dataCacheTable != null)
       {
-        bool availCheckStatus = (Convert.ToByte(row[columnAvailCheckStatus]) == 1);
-        if (availCheckStatus)
-        {
-          string tld = row[columnName].ToString().ToUpperInvariant();
-          _offeredTLDs.Add(tld);
+        DataColumn columnName = dataCacheTable.Columns["name"];
+        DataColumn columnAvailCheckStatus = dataCacheTable.Columns["availcheckstatus"];
 
-          _tldOrder[tld] = (++sortOrder);
+        foreach (DataRow row in dataCacheTable.Rows)
+        {
+          bool availCheckStatus = (Convert.ToByte(row[columnAvailCheckStatus]) == 1);
+          if (availCheckStatus)
+          {
+            string tld = row[columnName].ToString().ToUpperInvariant();
+            _offeredTLDs.Add(tld);
+            _offeredTLDsInOrder.Add(tld);
+          }
         }
       }
     }
 
     public IEnumerable<string> OfferedTLDs
     {
-      get { return _offeredTLDs; }
+      get { return _offeredTLDsInOrder; }
     }
 
     public bool IsTLDOffered(string tld)
@@ -64,7 +64,13 @@ namespace Atlantis.Framework.TLDDataCache.Interface
 
     public Dictionary<string, int> GetSortOrder()
     {
-      return new Dictionary<string, int>(_tldOrder, StringComparer.OrdinalIgnoreCase);
+      Dictionary<string, int> result = new Dictionary<string, int>(_offeredTLDsInOrder.Count, StringComparer.OrdinalIgnoreCase);
+      int sortOrder = 0;
+      foreach (string tld in _offeredTLDsInOrder)
+      {
+        result[tld] = (++sortOrder);
+      }
+      return result;
     }
 
     public string ToXML()

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
-using Atlantis.Framework.CDS.Entities.Shared;
+using Atlantis.Framework.CDS.Entities.Widgets;
 
 namespace Atlantis.Framework.CDS.Entities.Headers.Widgets
 {
@@ -43,14 +43,14 @@ namespace Atlantis.Framework.CDS.Entities.Headers.Widgets
     public string XS_ContainerCode { get; set; }
     public string XS_LaunchCICode { get; set; }
 
-    private SocialMedia _socialData;
-    public SocialMedia SocialData
+    private HeadersSocialMedia _socialData;
+    public HeadersSocialMedia SocialData
     {
       get
       {
         if (_socialData == null)
         {
-          _socialData = new SocialMedia();
+          _socialData = new HeadersSocialMedia();
         }
         return _socialData;
       }

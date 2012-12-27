@@ -1,4 +1,3 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{FD8841D6-E7C3-4684-AD47-4FDFD7F556B5}"
@@ -82,9 +81,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.PlanBoxes", "Atlantis.Framework.CDS.Entities.PlanBoxes\Atlantis.Framework.CDS.Entities.PlanBoxes.csproj", "{DA7E3CC3-2FBD-4557-9CAF-9137A3C6057B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Tabs", "Atlantis.Framework.CDS.Entities.Tabs\Atlantis.Framework.CDS.Entities.Tabs.csproj", "{32EA3B7B-435C-4917-B9B3-2AB86527F8C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Headers", "Atlantis.Framework.CDS.Entities.Headers\Atlantis.Framework.CDS.Entities.Headers.csproj", "{F28EB44E-8336-4B4C-9678-EDF647D69D27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Shared", "Atlantis.Framework.CDS.Entities.Shared\Atlantis.Framework.CDS.Entities.Shared.csproj", "{51E6F20A-080B-449C-B01F-781B7FBB087C}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 37
+		SccNumberOfProjects = 40
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -213,6 +218,15 @@ Global
 		SccProjectUniqueName36 = Atlantis.Framework.CDS.Entities.PlanBoxes\\Atlantis.Framework.CDS.Entities.PlanBoxes.csproj
 		SccProjectName36 = Atlantis.Framework.CDS.Entities.PlanBoxes
 		SccLocalPath36 = Atlantis.Framework.CDS.Entities.PlanBoxes
+		SccProjectUniqueName37 = Atlantis.Framework.CDS.Entities.Tabs\\Atlantis.Framework.CDS.Entities.Tabs.csproj
+		SccProjectName37 = Atlantis.Framework.CDS.Entities.Tabs
+		SccLocalPath37 = Atlantis.Framework.CDS.Entities.Tabs
+		SccProjectUniqueName38 = Atlantis.Framework.CDS.Entities.Headers\\Atlantis.Framework.CDS.Entities.Headers.csproj
+		SccProjectName38 = Atlantis.Framework.CDS.Entities.Headers
+		SccLocalPath38 = Atlantis.Framework.CDS.Entities.Headers
+		SccProjectUniqueName39 = Atlantis.Framework.CDS.Entities.Shared\\Atlantis.Framework.CDS.Entities.Shared.csproj
+		SccProjectName39 = Atlantis.Framework.CDS.Entities.Shared
+		SccLocalPath39 = Atlantis.Framework.CDS.Entities.Shared
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.CDS.vsmdi
@@ -586,6 +600,36 @@ Global
 		{DA7E3CC3-2FBD-4557-9CAF-9137A3C6057B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DA7E3CC3-2FBD-4557-9CAF-9137A3C6057B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DA7E3CC3-2FBD-4557-9CAF-9137A3C6057B}.Release|x86.ActiveCfg = Release|Any CPU
+		{32EA3B7B-435C-4917-B9B3-2AB86527F8C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32EA3B7B-435C-4917-B9B3-2AB86527F8C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32EA3B7B-435C-4917-B9B3-2AB86527F8C6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{32EA3B7B-435C-4917-B9B3-2AB86527F8C6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{32EA3B7B-435C-4917-B9B3-2AB86527F8C6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{32EA3B7B-435C-4917-B9B3-2AB86527F8C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32EA3B7B-435C-4917-B9B3-2AB86527F8C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32EA3B7B-435C-4917-B9B3-2AB86527F8C6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{32EA3B7B-435C-4917-B9B3-2AB86527F8C6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{32EA3B7B-435C-4917-B9B3-2AB86527F8C6}.Release|x86.ActiveCfg = Release|Any CPU
+		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Release|x86.ActiveCfg = Release|Any CPU
+		{51E6F20A-080B-449C-B01F-781B7FBB087C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51E6F20A-080B-449C-B01F-781B7FBB087C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51E6F20A-080B-449C-B01F-781B7FBB087C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{51E6F20A-080B-449C-B01F-781B7FBB087C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{51E6F20A-080B-449C-B01F-781B7FBB087C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{51E6F20A-080B-449C-B01F-781B7FBB087C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51E6F20A-080B-449C-B01F-781B7FBB087C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51E6F20A-080B-449C-B01F-781B7FBB087C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{51E6F20A-080B-449C-B01F-781B7FBB087C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{51E6F20A-080B-449C-B01F-781B7FBB087C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.CDS.Entities.Common.Interfaces;
 using Atlantis.Framework.CDS.Entities.Widgets;
 
@@ -42,6 +43,9 @@ namespace Atlantis.Framework.CDS.Entities.Headers.Widgets
     public string XS_AppSettingKey { get; set; }
     public string XS_ContainerCode { get; set; }
     public string XS_LaunchCICode { get; set; }
+
+    [Obsolete("Included for backwards compatibility only. Use \"Buttons\" property instead.")]
+    public List<SalesHeader2.MarketingButton> ButtonList { get; set; }
 
     private HeadersSocialMedia _socialData;
     public HeadersSocialMedia SocialData

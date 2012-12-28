@@ -46,12 +46,17 @@
     <Compile Include="HeadersSocialMedia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HeadersMarketingButton.cs" />
+    <Compile Include="Widgets\ManageNowLinks.cs" />
     <Compile Include="Widgets\SalesHeader5.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.CDS.Entities.Common\Atlantis.Framework.CDS.Entities.Common.csproj">
       <Project>{31fbc53c-17ac-48fa-acfb-3512db222f4f}</Project>
       <Name>Atlantis.Framework.CDS.Entities.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.CDS.Entities.Filters\Atlantis.Framework.CDS.Entities.Filters.csproj">
+      <Project>{0124b5a1-6cb7-4279-ad34-be1da5a83337}</Project>
+      <Name>Atlantis.Framework.CDS.Entities.Filters</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.CDS.Entities\Atlantis.Framework.CDS.Entities.csproj">
       <Project>{70e74cbb-1079-4eff-ae95-5b6542c5da80}</Project>

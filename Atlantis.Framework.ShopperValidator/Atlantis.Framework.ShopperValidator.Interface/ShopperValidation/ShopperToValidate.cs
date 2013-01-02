@@ -150,7 +150,6 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ShopperValidation
       // credentials
       this.Username.IsRequired = true;
       this.Password.IsRequired = true;
-      this.PasswordHint.IsRequired = true;
       this.CallInPin.IsRequired = true;
     }
 

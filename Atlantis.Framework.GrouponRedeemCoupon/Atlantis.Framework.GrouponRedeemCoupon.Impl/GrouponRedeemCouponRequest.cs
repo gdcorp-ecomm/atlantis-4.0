@@ -70,7 +70,7 @@ namespace Atlantis.Framework.GrouponRedeemCoupon.Impl
                 couponStatus = GrouponRedeemStatus.UnknownCode;
                 break;
               case -2:
-                couponStatus = GrouponRedeemStatus.UsedCode;
+                couponStatus = GrouponRedeemStatus.InvalidCodeAlreadyUsed;
                 break;
               case -3:
                 couponStatus = GrouponRedeemStatus.ExpiredCode;
@@ -78,8 +78,11 @@ namespace Atlantis.Framework.GrouponRedeemCoupon.Impl
               case -4:
                 couponStatus = GrouponRedeemStatus.InactiveCode;
                 break;
-              case 5:
-                couponStatus = GrouponRedeemStatus.InvalidCode;
+              case 5: // yes positive 5 is correct
+                couponStatus = GrouponRedeemStatus.InvalidCodeTooLongOrEmpty;
+                break;
+              case -5:
+                couponStatus = GrouponRedeemStatus.InvalidCodeShopperAlreadyUsedAnother;
                 break;
             }
 

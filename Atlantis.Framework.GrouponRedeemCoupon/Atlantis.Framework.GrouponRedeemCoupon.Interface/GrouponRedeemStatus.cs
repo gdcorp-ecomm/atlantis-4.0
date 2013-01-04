@@ -6,9 +6,10 @@
     UnknownError,
     UnknownShopper,
     UnknownCode,
-    UsedCode,
+    InvalidCodeAlreadyUsed,
     ExpiredCode,
     InactiveCode,
-    InvalidCode
+    InvalidCodeTooLongOrEmpty,
+    InvalidCodeShopperAlreadyUsedAnother
   }
 }

@@ -4,6 +4,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.Constants
   public class PixelXmlNames
   {
     public const string Name = "name";
+    public const string AssociatedCookieNames = "associatedcookienames";
     public const string Value = "value";
     public const string PixelType = "type";
     public const string Contexts = "contexts";
@@ -16,6 +17,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.Constants
 
     public const string Trigger = "trigger";
     public const string TriggerTypeCookie = "cookie";
+    public const string TriggerTypeCookieGroup = "cookiegroup";
     public const string TriggerTypeIscCodes = "sourcecodes";
     public const string TriggerTypeIscCodeSingle = "sourcecode";
 

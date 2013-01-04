@@ -48,6 +48,7 @@
     <Compile Include="Constants\PixelTypes.cs" />
     <Compile Include="Constants\PixelXmlNames.cs" />
     <Compile Include="PixelObjects\Helpers\CookieHelper.cs" />
+    <Compile Include="PixelObjects\Triggers\CookieGroupTrigger.cs" />
     <Compile Include="PixelsGetRequestData.cs" />
     <Compile Include="PixelsGetResponseData.cs" />
     <Compile Include="PixelObjects\AdditionalDataParams\FastballParam.cs" />

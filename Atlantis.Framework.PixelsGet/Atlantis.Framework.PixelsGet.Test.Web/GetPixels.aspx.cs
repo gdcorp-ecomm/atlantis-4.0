@@ -49,6 +49,15 @@ namespace Atlantis.Framework.PixelsGet.Test.Web
       //  collection.Add(CreateCookie("BlueLithium", "testValue"));
       // collection.Add(CreateCookie("advertisinghp1", string.Empty));
      collection.Add(CreateCookie("GoogleADServices_googleadremarketing", string.Empty));
+     collection.Add(CreateCookie("pixel_googleHP", string.Empty));
+      System.Threading.Thread.Sleep(1000);
+     collection.Add(CreateCookie("pixel_googlewebhosting", string.Empty)); 
+     System.Threading.Thread.Sleep(1000);
+     collection.Add(CreateCookie("pixel_googleSSL", string.Empty));
+     System.Threading.Thread.Sleep(1000);
+     collection.Add(CreateCookie("pixel_googledomains", string.Empty));
+
+
       collection.Add(CreateCookie("RadiumOne_domainsearch", string.Empty));
       return collection;
     }

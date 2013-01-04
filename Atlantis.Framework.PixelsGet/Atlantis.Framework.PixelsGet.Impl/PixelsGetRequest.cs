@@ -182,6 +182,9 @@ namespace Atlantis.Framework.PixelsGet.Impl
         case PixelXmlNames.TriggerTypeIscCodes:
           triggerType = typeof(SourceCodeTrigger);
           break;
+        case PixelXmlNames.TriggerTypeCookieGroup:
+          triggerType = typeof (CookieGroupTrigger);
+          break;
       }
 
       if (triggerType != null)

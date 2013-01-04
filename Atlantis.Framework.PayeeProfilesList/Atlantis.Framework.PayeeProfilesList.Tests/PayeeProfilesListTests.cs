@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.PayeeProfilesList.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.PayeeProfilesList.Impl.dll")]
   public class GetPayeeProfilesListTests
   {
     private const string _shopperId = "856907";
@@ -46,7 +48,6 @@ namespace Atlantis.Framework.PayeeProfilesList.Tests
     #endregion
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void PayeeProfilesListTest()
     {
       PayeeProfilesListRequestData request = new PayeeProfilesListRequestData(_shopperId

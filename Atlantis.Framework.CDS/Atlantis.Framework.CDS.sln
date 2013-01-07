@@ -85,9 +85,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Headers", "Atlantis.Framework.CDS.Entities.Headers\Atlantis.Framework.CDS.Entities.Headers.csproj", "{F28EB44E-8336-4B4C-9678-EDF647D69D27}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.WebDev", "Atlantis.Framework.CDS.Entities.WebDev\Atlantis.Framework.CDS.Entities.WebDev.csproj", "{6A49E22E-404C-43E4-8588-D85A6CD58814}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 39
+		SccNumberOfProjects = 40
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -222,6 +224,9 @@ Global
 		SccProjectUniqueName38 = Atlantis.Framework.CDS.Entities.Headers\\Atlantis.Framework.CDS.Entities.Headers.csproj
 		SccProjectName38 = Atlantis.Framework.CDS.Entities.Headers
 		SccLocalPath38 = Atlantis.Framework.CDS.Entities.Headers
+		SccProjectUniqueName39 = Atlantis.Framework.CDS.Entities.WebDev\\Atlantis.Framework.CDS.Entities.WebDev.csproj
+		SccProjectName39 = Atlantis.Framework.CDS.Entities.WebDev
+		SccLocalPath39 = Atlantis.Framework.CDS.Entities.WebDev
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.CDS.vsmdi
@@ -615,6 +620,16 @@ Global
 		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F28EB44E-8336-4B4C-9678-EDF647D69D27}.Release|x86.ActiveCfg = Release|Any CPU
+		{6A49E22E-404C-43E4-8588-D85A6CD58814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A49E22E-404C-43E4-8588-D85A6CD58814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A49E22E-404C-43E4-8588-D85A6CD58814}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6A49E22E-404C-43E4-8588-D85A6CD58814}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6A49E22E-404C-43E4-8588-D85A6CD58814}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6A49E22E-404C-43E4-8588-D85A6CD58814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A49E22E-404C-43E4-8588-D85A6CD58814}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A49E22E-404C-43E4-8588-D85A6CD58814}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6A49E22E-404C-43E4-8588-D85A6CD58814}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6A49E22E-404C-43E4-8588-D85A6CD58814}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -21,7 +21,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
         foreach (XElement element in TriggerElement.Descendants(PixelXmlNames.TriggerTypeCookieGroup))
         {
           string fireCookieValue = element.Attribute(PixelXmlNames.Value).Value;
-          string cookieName = element.Attribute(PixelXmlNames.Name).Value;
+          string cookieName = element.Attribute(PixelXmlNames.TriggerCookieName).Value;
           string associatedCookieNames = element.Attribute(PixelXmlNames.AssociatedCookieNames).Value;
 
           if (TagReplacer.ReplaceTagOnElement(TriggerElement))

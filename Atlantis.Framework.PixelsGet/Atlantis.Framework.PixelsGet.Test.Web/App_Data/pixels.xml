@@ -96,7 +96,7 @@
          page_url="fireonthispage.aspx">
     <enabled value="1" />
     <trigger doreplace="false" removeafterconsumption="true">
-      <cookiegroup name="pixel_googleHP" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value=""  />
+      <cookiegroup triggercookiename="pixel_googleHP" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value=""  />
     </trigger>
   </pixel>  
   <pixel name="Google India - Domain search pixel cookie"
@@ -108,7 +108,7 @@
          page_url="fireonthispage.aspx">
     <enabled value="1" />
     <trigger doreplace="false" removeafterconsumption="true">
-      <cookiegroup name="pixel_googledomains" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value=""  />
+      <cookiegroup triggercookiename="pixel_googledomains" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value=""  />
     </trigger>
   </pixel>
   <pixel name="Google India - Hosting pixel cookie"
@@ -120,7 +120,7 @@
          page_url="fireonthispage.aspx">
     <enabled value="1" />
     <trigger doreplace="false" removeafterconsumption="true">
-      <cookiegroup name="pixel_googlewebhosting" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value=""  />
+      <cookiegroup triggercookiename="pixel_googlewebhosting" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value=""  />
     </trigger>
   </pixel>
   <pixel name="Google India - SSL pixel cookie"
@@ -132,7 +132,20 @@
          page_url="fireonthispage.aspx">
     <enabled value="1" />
     <trigger doreplace="false" removeafterconsumption="true">
-      <cookiegroup name="pixel_googleSSL" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value=""  />
+      <cookiegroup triggercookiename="pixel_googleSSL" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value=""  />
+    </trigger>
+  </pixel>
+  <pixel name="Value click"
+       value="https://secure.fastclick.net/w/roitrack.cgi?aid=14487"
+       type="image"
+       application="CART"
+       contexts="1"
+       appsettingname="CART_VALUE_CLICK_PIXEL_ENABLED"
+       page_url="fireonthispage.aspx">
+    <enabled value="1" />
+    <trigger doreplace="true" removeafterconsumption="true">
+      <cookie name="LP_ValueClick{{privatelabelid}}" value=""  />
+      <cookie name="LP_ValueClickHP{{privatelabelid}}" value=""  />
     </trigger>
   </pixel>
 </pixels>

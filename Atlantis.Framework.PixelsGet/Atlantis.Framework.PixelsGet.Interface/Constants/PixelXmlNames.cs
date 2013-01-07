@@ -22,6 +22,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.Constants
     public const string TriggerTypeIscCodeSingle = "sourcecode";
 
     public const string TriggerConditionFirstTime = "firsttimeonly";
+    public const string TriggerCookieName = "triggercookiename";
 
   }
 }

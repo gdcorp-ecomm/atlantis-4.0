@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Xml.Linq;
 using Atlantis.Framework.PixelsGet.Interface.PixelObjects.Helpers;
@@ -9,6 +10,8 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 {
   public class CookieTrigger : Trigger
   {
+    private List<string> _allCookieNames = new List<string>();
+
     public CookieTrigger(XElement triggerElement, PixelsGetRequestData pixelRequest)
       : base(triggerElement, pixelRequest)
     { }
@@ -30,51 +33,63 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
             cookieName = replacer.ReplaceTagsIn(cookieName);
           }
 
-          HttpCookie searchCookie = PixelRequest.RequestCookies[cookieName];
+          _allCookieNames.Add(cookieName);
 
-          if (searchCookie != null)
+          if (!shouldFirePixel)
           {
-            bool isFireCookieValueEmpty = string.IsNullOrEmpty(fireCookieValue); //essentially using empty value as a wildcard. As long as cookie exists, fire!
+            HttpCookie searchCookie = PixelRequest.RequestCookies[cookieName];
 
-            if (!isFireCookieValueEmpty)
+            if (searchCookie != null)
             {
-              shouldFirePixel = searchCookie.Value.Equals(fireCookieValue, StringComparison.OrdinalIgnoreCase);
-            }
-            else
-            {
-              shouldFirePixel = true;
-            }
-          }
+              bool isFireCookieValueEmpty = string.IsNullOrEmpty(fireCookieValue); //essentially using empty value as a wildcard. As long as cookie exists, fire!
 
-          if (shouldFirePixel)
-          {
-            RemoveCookieIfNeccesary(TriggerElement, cookieName);
-            break;
+              if (!isFireCookieValueEmpty)
+              {
+                shouldFirePixel = searchCookie.Value.Equals(fireCookieValue, StringComparison.OrdinalIgnoreCase);
+              }
+              else
+              {
+                shouldFirePixel = true;
+              }
+            }
           }
         }
-      }
 
+        if (shouldFirePixel)
+        {
+          RemoveAllCookiesIfNeccesary(TriggerElement);
+        }
+      }
+      
       return shouldFirePixel;
     }
 
-    private void RemoveCookieIfNeccesary(XElement element, string cookieName)
+    private void RemoveAllCookiesIfNeccesary(XElement element)
     {
       var attribute = element.Attribute(PixelXmlNames.RemoveAfterConsumption);
       if (attribute != null)
       {
         if (attribute.Value.Equals("true", StringComparison.OrdinalIgnoreCase))
         {
-          if (HttpContext.Current != null)
+          foreach (string cookieName in _allCookieNames)
           {
-            HttpCookie tempCookie = HttpContext.Current.Response.Cookies[cookieName];
-            if (tempCookie != null)
-            {
-              CookieHelper cookieHelper = new CookieHelper();
-              HttpCookie cookie = cookieHelper.NewCrossDomainCookie(cookieName, DateTime.Now.AddDays(-1));
-              HttpContext.Current.Response.Cookies.Remove(cookieName);
-              HttpContext.Current.Response.Cookies.Add(cookie);
-            }
-          }
+            RemoveCookie(cookieName);
+          } 
+        }
+      }
+    }
+
+    private void RemoveCookie(string cookieName)
+    {
+      if (HttpContext.Current != null)
+      {
+        HttpCookie tempCookie = HttpContext.Current.Response.Cookies[cookieName];
+        if (tempCookie != null)
+        {
+          CookieHelper cookieHelper = new CookieHelper();
+          HttpCookie cookie = cookieHelper.NewCrossDomainCookie(cookieName, DateTime.Now.AddDays(-1));
+          HttpContext.Current.Response.Cookies.Remove(cookieName);
+          HttpContext.Current.Response.Cookies.Add(cookie);
         }
       }
     }

@@ -25,7 +25,11 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     AdvertisingHP,
     ValueClickRetargetingHP,
     ValueClickRetargetingWSB,
-    ValueClickRetargetingDLP
+    ValueClickRetargetingDLP,
+    GoogleIndiaDomains,
+    GoogleIndiaHomePage,
+    GoogleIndiaHosting,
+    GoogleIndiaSSL
   }
 
   public class TrackingPixel : IWidgetModel

@@ -22,40 +22,47 @@ namespace Atlantis.Framework.ShopperFirstOrderGet.Impl
        bool IsCustomerNew = false;
        var request = (ShopperFirstOrderGetRequestData)requestData;
 
+       try
+       {
+         int orderId;
+         if (Int32.TryParse(request.OrderID, out orderId))
+         {
 
-      try
-      {
-        
-        string connectionString =Nimitz.NetConnect.LookupConnectInfo(config);
-        using (var connection = new SqlConnection(connectionString))
-        {
-          using (var command = new SqlCommand(_PROCNAMESCHEDULEGET, connection))
-          {
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
-            command.Parameters.Add(new SqlParameter(_SHOPPERIDPARAM, request.ShopperID));
-            command.Parameters.Add(new SqlParameter(_ORDERIDPARAM, request.OrderID));
-            var firstOrderParam = new SqlParameter(_ISFIRSTORDERPARAM, SqlDbType.Bit);
-            firstOrderParam.Direction = ParameterDirection.Output;
-            command.Parameters.Add(firstOrderParam);
-    
-            connection.Open();
+           string connectionString = Nimitz.NetConnect.LookupConnectInfo(config);
+           using (var connection = new SqlConnection(connectionString))
+           {
+             using (var command = new SqlCommand(_PROCNAMESCHEDULEGET, connection))
+             {
+               command.CommandType = CommandType.StoredProcedure;
+               command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
+               command.Parameters.Add(new SqlParameter(_SHOPPERIDPARAM, request.ShopperID));
+               command.Parameters.Add(new SqlParameter(_ORDERIDPARAM, request.OrderID));
+               var firstOrderParam = new SqlParameter(_ISFIRSTORDERPARAM, SqlDbType.Bit);
+               firstOrderParam.Direction = ParameterDirection.Output;
+               command.Parameters.Add(firstOrderParam);
 
-              command.ExecuteNonQuery();
-              IsCustomerNew = (bool)firstOrderParam.Value;
-            
-              responseData = new ShopperFirstOrderGetResponseData(IsCustomerNew);
-          }
-        }
-      }
-      catch (AtlantisException exAtlantis)
-      {
-          responseData = new ShopperFirstOrderGetResponseData(exAtlantis);
-      }
-      catch (Exception ex)
-      {
-          responseData = new ShopperFirstOrderGetResponseData(request, ex);
-      }
+               connection.Open();
+
+               command.ExecuteNonQuery();
+               IsCustomerNew = (bool)firstOrderParam.Value;
+
+               responseData = new ShopperFirstOrderGetResponseData(IsCustomerNew);
+             }
+           }
+         }
+         else
+         {
+           responseData = new ShopperFirstOrderGetResponseData(false);
+         }
+       }
+       catch (AtlantisException exAtlantis)
+       {
+         responseData = new ShopperFirstOrderGetResponseData(exAtlantis);
+       }
+       catch (Exception ex)
+       {
+         responseData = new ShopperFirstOrderGetResponseData(request, ex);
+       }
 
       return responseData;
     }    

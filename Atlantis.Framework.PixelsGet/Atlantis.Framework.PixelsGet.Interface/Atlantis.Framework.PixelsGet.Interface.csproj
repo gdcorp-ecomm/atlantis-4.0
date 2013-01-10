@@ -48,9 +48,6 @@
     <Compile Include="Constants\PixelTypes.cs" />
     <Compile Include="Constants\PixelXmlNames.cs" />
     <Compile Include="PixelObjects\Helpers\CookieHelper.cs" />
-    <Compile Include="PixelObjects\PixelContainer.cs" />
-    <Compile Include="PixelObjects\PixelData.cs" />
-    <Compile Include="PixelObjects\TriggerData.cs" />
     <Compile Include="PixelObjects\Triggers\CookieGroupTrigger.cs" />
     <Compile Include="PixelsGetRequestData.cs" />
     <Compile Include="PixelsGetResponseData.cs" />

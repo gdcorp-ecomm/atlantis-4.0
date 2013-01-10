@@ -16,7 +16,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
     public override bool ShouldFirePixel(bool isPixelAlreadyTriggered)
     {
       bool shouldFirePixel = false;
-      if (ContinuePixelFireCheck)
+      if (ContinuePixelFireCheck && !isPixelAlreadyTriggered)
       {
         foreach (XElement element in TriggerElement.Descendants(PixelXmlNames.TriggerTypeIscCodeSingle))
         {

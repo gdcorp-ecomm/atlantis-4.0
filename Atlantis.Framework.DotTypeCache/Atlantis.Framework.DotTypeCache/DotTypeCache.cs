@@ -343,5 +343,12 @@ namespace Atlantis.Framework.DotTypeCache
       HttpContext.Current.Request.UserHostAddress, this._siteContext.Pathway, this._siteContext.PageCount);
       Engine.Engine.LogAtlantisException(aex);
     }
+
+    public static string GetRegistrationFieldsXml(string dotType)
+    {
+      var dotTypeInfo = Instance.GetDotTypeInfoInt(dotType);
+      
+      return dotTypeInfo.GetRegistrationFieldsXml();
+    }
   }
 }

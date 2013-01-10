@@ -45,7 +45,7 @@ namespace Atlantis.Framework.DotTypeCache
 
     private Dictionary<int, string> _multiRegRegistrarLookupByPfid
       = new Dictionary<int,string>();
-
+    
     #endregion Properties
 
     #region Constractors
@@ -55,7 +55,6 @@ namespace Atlantis.Framework.DotTypeCache
       this._siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
       this._shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
       this._dotTypeInfo = DotTypeCache.GetStaticDotTypeInfo(dotType);
-
       try
       {
         LoadMultiRegDotTypeInfo(dotType);
@@ -988,6 +987,12 @@ namespace Atlantis.Framework.DotTypeCache
       return registrarIds;
     }
 
+    public string GetRegistrationFieldsXml()
+    {
+      return string.Empty;
+    }
     #endregion
+
+
   }
 }

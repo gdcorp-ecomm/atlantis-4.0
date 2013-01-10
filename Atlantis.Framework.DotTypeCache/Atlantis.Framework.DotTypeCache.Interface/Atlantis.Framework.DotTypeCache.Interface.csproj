@@ -44,6 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CountryValidation.cs" />
+    <Compile Include="DomainContactData.cs" />
+    <Compile Include="DotTypeFields.cs" />
+    <Compile Include="DotTypeFieldValues.cs" />
     <Compile Include="DotTypeProductIds.cs" />
     <Compile Include="DotTypeProductIdTypes.cs" />
     <Compile Include="DotTypeStaticBase.cs" />
@@ -52,6 +56,11 @@
     <Compile Include="IDotTypeInfo.cs" />
     <Compile Include="InvalidDotType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DomainContactControls.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

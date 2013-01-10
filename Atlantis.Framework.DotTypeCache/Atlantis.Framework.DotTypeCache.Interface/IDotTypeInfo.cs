@@ -24,7 +24,6 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     bool HasRenewalIds { get; }
     bool IsMultiRegistrar { get; set; }
     Dictionary<string, string> AdditionalInfo { get; set; }
-
     bool HasExpiredAuctionRegIdsForRegistrarId(string registrarId);
     bool HasRegistrationIdsForRegistrarId(string registrarId);
     bool HasTransferIdsForRegistrarId(string registrarId);
@@ -57,6 +56,9 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     List<int> GetValidRegistrationLengths(int domainCount, params int[] registrationLengths);
     List<int> GetValidTransferLengths(int domainCount, params int[] registrationLengths);
     List<int> GetValidRenewalLengths(int domainCount, params int[] registrationLengths);
+
+    
+    string GetRegistrationFieldsXml();
   }
 
   public interface IMultiRegDotTypeInfo

@@ -185,7 +185,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     {
       return new List<int>();
     }
-
+    
     public bool HasExpiredAuctionRegIdsForRegistrarId(string registrarId)
     {
       return false;
@@ -286,6 +286,12 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return new List<int>();
     }
 
+    public string GetRegistrationFieldsXml()
+    {
+      return string.Empty;
+    }
     #endregion
+
+
   }
 }

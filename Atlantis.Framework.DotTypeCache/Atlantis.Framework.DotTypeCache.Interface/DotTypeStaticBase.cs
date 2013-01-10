@@ -10,7 +10,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     private DotTypeProductIds _preregProductIds;
     private DotTypeProductIds _expiredAuctionRegProductIds;
 
-    public bool HasExpiredAuctionRegIds
+  public bool HasExpiredAuctionRegIds
     {
       get { return (_expiredAuctionRegProductIds != null); }
     }
@@ -35,7 +35,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       get { return (_renewalProductIds != null); }
     }
 
-    private bool _isMultiRegistrar = false;
+    private bool _isMultiRegistrar;
     public bool IsMultiRegistrar
     {
       get { return _isMultiRegistrar; }
@@ -117,9 +117,8 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     {
       return null;
     }
-
     #region IDotTypeInfo Members
-
+    
     public abstract string DotType { get; }
 
     public Dictionary<string, string> AdditionalInfo { get; set; }
@@ -333,7 +332,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 
     public int GetPreRegProductId(string registrarId, int registrationLength, int domainCount)
     {
-      return this.GetPreRegProductId(registrationLength, domainCount);
+      return GetPreRegProductId(registrationLength, domainCount);
     }
 
     public int GetRegistrationProductId(string registrarId, int registrationLength, int domainCount)
@@ -381,6 +380,10 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return this.GetValidExpiredAuctionRegProductIdList(domainCount, registrationLengths);
     }
 
+    public virtual string GetRegistrationFieldsXml()
+    {
+      return DomainContactData.DomainContactXml;
+    }
     #endregion
   }
 }

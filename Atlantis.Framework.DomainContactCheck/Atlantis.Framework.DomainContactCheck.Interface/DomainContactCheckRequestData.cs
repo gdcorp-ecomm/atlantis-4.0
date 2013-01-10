@@ -61,7 +61,7 @@ namespace Atlantis.Framework.DomainContactCheck.Interface
       m_CheckType = checkType;
       m_sTlds = tlds;
       m_PrivateLabelId = privateLabelId;
-      RequestTimeout = TimeSpan.FromSeconds(2d);
+      RequestTimeout = TimeSpan.FromSeconds(4d);
     }
 
     #region RequestData Members

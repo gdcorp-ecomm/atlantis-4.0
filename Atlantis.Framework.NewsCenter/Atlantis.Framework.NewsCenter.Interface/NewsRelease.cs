@@ -27,6 +27,7 @@ namespace Atlantis.Framework.NewsCenter.Interface
     public string UrlPath { get; private set; }
     public string StatusId { get; private set; }
     public string ReleaseDate { get; private set; }
+    public string ExternalFeatureLink { get; private set; }
 
     public bool IsValid { get; private set; }
 
@@ -81,6 +82,7 @@ namespace Atlantis.Framework.NewsCenter.Interface
 
         result.StatusId = GetAttributeValue(newsReleaseElement, "news_status_id");
         result.ReleaseDate = GetAttributeValue(newsReleaseElement, "release_date");
+        result.ExternalFeatureLink = GetAttributeValue(newsReleaseElement, "link");
 
         result.IsValid = true;
       }

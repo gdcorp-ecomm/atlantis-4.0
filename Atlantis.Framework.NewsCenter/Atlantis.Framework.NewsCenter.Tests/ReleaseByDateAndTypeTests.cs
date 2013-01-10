@@ -131,5 +131,14 @@ namespace Atlantis.Framework.NewsCenter.Tests
         Assert.IsTrue(release.Title.ToLowerInvariant().Contains("godaddy"));
       }
     }
+
+    [TestMethod]
+    public void ExternalFeatureLink()
+    {
+      ReleaseByDateAndTypeRequestData request = new ReleaseByDateAndTypeRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, DateTime.Now, "1");
+      ReleaseByDateAndTypeResponseData response = (ReleaseByDateAndTypeResponseData)DataCache.DataCache.GetProcessRequest(request, 631);
+      List<NewsRelease> status1Releases = response.FindAll(n => !string.IsNullOrEmpty(n.ExternalFeatureLink));
+      Assert.IsTrue(status1Releases.Count > 0);      
+    }
   }
 }

@@ -13,11 +13,11 @@ namespace Atlantis.Framework.PixelsGet.Test.Web
 {
   public partial class GetPixels : System.Web.UI.Page
   {
-    string _isc = "abc123";
+    string _isc = "AD25OFFc";
     private int _contextId = 1;
     private string _requestUrl = "http://www.godaddy.com/fireonthispage.aspx?querstryasdf";
     Dictionary<string, string> _replaceParms = new Dictionary<string, string>();
-    private bool _fireOnFirstTimeShopperOnly = false;
+    private bool _fireOnFirstTimeShopperOnly = true;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -47,8 +47,8 @@ namespace Atlantis.Framework.PixelsGet.Test.Web
       var collection = new HttpCookieCollection();
      collection.Add(CreateCookie("Cookie1", "Value"));
       //  collection.Add(CreateCookie("BlueLithium", "testValue"));
-      // collection.Add(CreateCookie("advertisinghp1", string.Empty));
-     collection.Add(CreateCookie("LP_ValueClick1", string.Empty));
+    //  collection.Add(CreateCookie("advertisinghp1", string.Empty));
+     //collection.Add(CreateCookie("LP_ValueClick1", string.Empty));
      collection.Add(CreateCookie("LP_ValueClickHP1", string.Empty));
      collection.Add(CreateCookie("GoogleADServices_googleadremarketing", string.Empty));
      //collection.Add(CreateCookie("pixel_googleHP", string.Empty));

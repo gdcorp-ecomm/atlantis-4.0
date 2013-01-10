@@ -85,5 +85,10 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
     {
       throw new NotImplementedException("Must implement custom logic");
     }
+
+    public virtual bool ShouldFirePixel(bool pixelAlreadyTriggering)
+    {
+      throw new NotImplementedException("Must implement custom logic");
+    }
   }
 }

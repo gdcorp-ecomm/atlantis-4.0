@@ -13,7 +13,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
       : base(triggerElement, pixelRequest)
     { }
 
-    public override bool ShouldFirePixel()
+    public override bool ShouldFirePixel(bool isPixelAlreadyTriggered)
     {
       bool shouldFirePixel = false;
       if (ContinuePixelFireCheck)

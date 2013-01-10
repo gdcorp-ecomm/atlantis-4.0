@@ -16,7 +16,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
       : base(triggerElement, pixelRequest)
     { }
 
-    public override bool ShouldFirePixel()
+    public override bool ShouldFirePixel(bool isPixelAlreadyTriggered)
     {
       bool shouldFirePixel = false;
       if (ContinuePixelFireCheck)
@@ -35,7 +35,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 
           _allCookieNames.Add(cookieName);
 
-          if (!shouldFirePixel)
+          if (!shouldFirePixel && !isPixelAlreadyTriggered)
           {
             HttpCookie searchCookie = PixelRequest.RequestCookies[cookieName];
 
@@ -55,7 +55,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
           }
         }
 
-        if (shouldFirePixel)
+        if (shouldFirePixel || isPixelAlreadyTriggered)
         {
           RemoveAllCookiesIfNeccesary(TriggerElement);
         }

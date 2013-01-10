@@ -121,10 +121,23 @@ namespace Atlantis.Framework.PixelsGet.Impl
 
         if (SourcePageMatchesPixelUrl(validPageUrl))
         {
-          Trigger currentTrigger = GetTrigger(currentElement);
-          if (currentTrigger != null)
+          XElement triggerElement = currentElement.Descendants(PixelXmlNames.Trigger).First(x => x != null);
+          bool pixelAlreadyTriggered = false;
+          foreach (XElement individualTrigger in triggerElement.Nodes())
           {
-            shouldTriggerPixel = currentTrigger.ShouldFirePixel();
+            Trigger currentTrigger = GetTrigger(triggerElement, individualTrigger);
+            if (currentTrigger != null)
+            {
+              if (!shouldTriggerPixel)
+              {
+                shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+              }
+              else
+              {
+                pixelAlreadyTriggered = true;
+                currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+              }
+            }
           }
         }
       }
@@ -165,14 +178,12 @@ namespace Atlantis.Framework.PixelsGet.Impl
     #endregion
 
     #region Get the current trigger
-    private Trigger GetTrigger(XElement currentElement)
+    private Trigger GetTrigger(XElement triggerElement, XElement individualTrigger)
     {
       Trigger trigger = null;
       Type triggerType = null;
 
-      XElement triggerElement = currentElement.Descendants(PixelXmlNames.Trigger).First(x => x != null);
-      XElement triggerTypeElement = (XElement)triggerElement.Nodes().First(x => x != null);
-      string triggerTypeName = triggerTypeElement.Name.ToString();
+      string triggerTypeName = individualTrigger.Name.ToString();
 
       switch (triggerTypeName)
       {
@@ -183,7 +194,7 @@ namespace Atlantis.Framework.PixelsGet.Impl
           triggerType = typeof(SourceCodeTrigger);
           break;
         case PixelXmlNames.TriggerTypeCookieGroup:
-          triggerType = typeof (CookieGroupTrigger);
+          triggerType = typeof(CookieGroupTrigger);
           break;
       }
 

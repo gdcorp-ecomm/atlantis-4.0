@@ -25,7 +25,7 @@
             <fieldset title="Ci Codes"><legend>Ci Codes</legend>
               <asp:Repeater runat="server" ID="rptCiCodes">
                 <ItemTemplate>
-                  <%# ((System.Data.DataRowView)Container.DataItem)[0] %>
+                  <%# Container.DataItem.ToString() %><br />
                 </ItemTemplate>
               </asp:Repeater>
             </fieldset>

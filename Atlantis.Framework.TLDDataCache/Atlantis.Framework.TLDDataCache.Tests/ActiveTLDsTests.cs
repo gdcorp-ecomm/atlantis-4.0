@@ -1,4 +1,4 @@
-﻿using Atlantis.Framework.TLDDataCache.Interface;
+using Atlantis.Framework.TLDDataCache.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -187,6 +187,15 @@ namespace Atlantis.Framework.TLDDataCache.Tests
       var response = (ActiveTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, _ACTIVETLDREQUEST);
       HashSet<string> intersect = response.GetActiveTLDIntersect("specialtldnotvalidflag", "specialtldnotvalidflag2");
       Assert.AreEqual(0, intersect.Count);
+    }
+
+    [TestMethod]
+    public void TLDMLEnabled()
+    {
+      var request = new ActiveTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      var response = (ActiveTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, _ACTIVETLDREQUEST);
+      var tldmlTlds = response.GetActiveTLDUnion("tldml_supported");
+      Assert.IsTrue(tldmlTlds.Count > 0);
     }
 
   }

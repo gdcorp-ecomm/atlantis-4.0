@@ -72,7 +72,5 @@ namespace Atlantis.Framework.TLDDataCache.Tests
       Assert.AreEqual(itemCount, sortOrder.Count);
     }
 
-
-
   }
 }

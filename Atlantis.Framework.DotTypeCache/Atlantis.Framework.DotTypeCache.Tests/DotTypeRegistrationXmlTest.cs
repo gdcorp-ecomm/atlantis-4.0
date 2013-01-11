@@ -56,9 +56,9 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
       var fieldXml = DotTypeCache.GetRegistrationFieldsXml("CA");
 
-      var restrictedNode = XDocument.Parse(fieldXml).Root.Element(RequiredFieldKeys.RESTRICTEDS);
+      var contactNode = XDocument.Parse(fieldXml).Root.Element(RequiredFieldKeys.CONTACTS);
 
-      Assert.IsTrue(restrictedNode.HasElements);
+      Assert.IsTrue(contactNode.HasElements);
     }
 
   }

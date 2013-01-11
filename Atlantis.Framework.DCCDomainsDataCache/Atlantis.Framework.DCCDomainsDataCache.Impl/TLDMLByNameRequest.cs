@@ -43,7 +43,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Impl
           XAttribute resultsAttribute = tldmlElement.Attribute("result");
           if (resultsAttribute.Value.Equals("success", StringComparison.OrdinalIgnoreCase))
           {
-            result = TLDMLByNameResponseData.FromXElement(tldmlElement);
+            result = TLDMLByNameResponseData.FromXDocument(tldmlDoc);
           }
         }
 

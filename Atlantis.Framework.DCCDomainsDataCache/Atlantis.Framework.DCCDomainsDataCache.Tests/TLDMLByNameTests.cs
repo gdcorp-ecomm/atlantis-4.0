@@ -15,14 +15,14 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     public void TLDMLFoundUpperCase()
     {
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "COM.AU");
-      var response = DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
     }
 
     [TestMethod]
     public void TLDMLFoundLowerCase()
     {
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "com.au");
-      var response = DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
     }
 
     [TestMethod]
@@ -30,7 +30,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     public void TLDMLNotFound()
     {
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "INFO");
-      var response = DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
     }
 
     [TestMethod]
@@ -38,7 +38,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     public void TLDMLNull()
     {
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, null);
-      var response = DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
     }
 
     [TestMethod]
@@ -46,7 +46,23 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     public void TLDMLEmptyString()
     {
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, string.Empty);
-      var response = DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+    }
+
+    [TestMethod]
+    public void MinRegistrationLength()
+    {
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "COM.AU");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      Assert.AreNotEqual(0, response.Registration.MinRegistrationYears);
+    }
+
+    [TestMethod]
+    public void MaxRegistrationLength()
+    {
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "COM.AU");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      Assert.AreNotEqual(0, response.Registration.MaxRegistrationYears);
     }
 
   }

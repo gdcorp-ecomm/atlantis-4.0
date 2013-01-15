@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Linq;
 using Atlantis.Framework.BazaarVoiceAPI.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -49,7 +48,7 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Tests
       request.AddQueryParameter("stats", "reviews");
 
       ReviewsAPIResponseData response = (ReviewsAPIResponseData)DataCache.DataCache.GetProcessRequest(request, 638);
-      Assert.IsNull(response.Reviews);
+      Assert.IsTrue(response.Reviews != null && response.Reviews.Count() == 0);
     }
 
     [TestMethod]

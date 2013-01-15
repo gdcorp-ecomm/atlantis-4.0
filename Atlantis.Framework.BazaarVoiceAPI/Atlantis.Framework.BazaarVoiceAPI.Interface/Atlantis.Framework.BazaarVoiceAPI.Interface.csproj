@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Badge.cs" />
+    <Compile Include="Size.cs" />
+    <Compile Include="Photo.cs" />
+    <Compile Include="Video.cs" />
     <Compile Include="Review.cs" />
     <Compile Include="ReviewsAPIRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

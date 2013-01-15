@@ -21,7 +21,7 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Impl
 
       try
       {
-        XNamespace dataApiQuery = "http://www.bazaarvoice.com/xs/DataApiQuery/5.3";
+        XNamespace dataApiQuery = "http://www.bazaarvoice.com/xs/DataApiQuery/" + apiversion;
         XDocument reviewData = XDocument.Load(reqeustUrl);
         List<Review> reviewList = new List<Review>(100);
 
@@ -31,7 +31,7 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Impl
           var reviews = reviewData.Descendants(dataApiQuery + "Review");
           foreach (XElement reviewItem in reviews)
           {
-            Review newReview = Review.FromDataCacheXElement(reviewItem);
+            Review newReview = Review.FromBazaarApiElement(reviewItem, dataApiQuery, requestData);
             if (newReview.IsValid)
             {
               reviewList.Add(newReview);

@@ -9,7 +9,7 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Interface
   public class ReviewsAPIResponseData : IResponseData
   {
     private AtlantisException _exception = null;
-    private Dictionary<string, Review> _reviewsList;
+    private List<Review> _reviewsList;
     
     public ReviewsAPIResponseData(RequestData requestData, Exception ex)
     {
@@ -20,19 +20,15 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Interface
     {
       if (reviews != null)
       {
-        _reviewsList = new Dictionary<string, Review>();
-        foreach (var review in reviews)
-        {
-          if (review.Id != null) _reviewsList.Add(review.Id, review);
-        }
+        _reviewsList = new List<Review>(reviews);
       }
       else
       {
-        _reviewsList = null;
+        _reviewsList = new List<Review>();
       }
     }
 
-    public Dictionary<string, Review> Reviews
+    public IEnumerable<Review> Reviews
     {
       get { return _reviewsList; }
     }

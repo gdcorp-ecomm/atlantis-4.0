@@ -46,9 +46,15 @@ namespace Atlantis.Framework.Interface.Tests
       return this as TProviderInterface;
     }
 
-    public bool CanResolve<TypeT>()
+    public bool CanResolve<TProviderInterface>() where TProviderInterface : class
     {
       return true;
+    }
+
+
+    public bool TryResolve<TProviderInterface>(out TProviderInterface provider) where TProviderInterface : class
+    {
+      throw new System.NotImplementedException();
     }
   }
 }

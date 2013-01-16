@@ -15,43 +15,67 @@ namespace Atlantis.Framework.MyaOrderHistory.Impl
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
       IResponseData oResponseData = null;
-      DataSet ds = null;
-      string procName = string.Empty;
       try
       {
+        int numberOfRecords = 0;
+        int numberOfPages = 0;
+        List<ReceiptItem> receiptList = new List<ReceiptItem>(5);
+        string procName = string.Empty;
+
         string connectionString = NetConnect.LookupConnectInfo(oConfig, ConnectLookupType.NetConnectionString);
-        //when an error occurs a ';' is returned not a valid connection string or empty
-        if (connectionString.Length <= 1)
-        {
-          throw new AtlantisException(oRequestData, "LookupConnectionString",
-                "Database connection string lookup failed", "No Connection For MyaOrderHistoryRequest");
-        }
-
-        MyaOrderHistoryRequestData request = (MyaOrderHistoryRequestData)oRequestData;
-
-        List<SqlParameter> _params = BuildSqlParametersForProc(request, out procName);
-
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
+          MyaOrderHistoryRequestData request = (MyaOrderHistoryRequestData)oRequestData;
+          List<SqlParameter> _params = BuildSqlParametersForProc(request, out procName);
           using (SqlCommand command = new SqlCommand(procName, connection))
           {
             command.CommandType = CommandType.StoredProcedure;
-
+            command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
             foreach (SqlParameter param in _params)
             {
               command.Parameters.Add(param);
             }
-            
-            command.CommandTimeout = (int)Math.Truncate(request.RequestTimeout.TotalSeconds);
-
             connection.Open();
-            ds = new DataSet(Guid.NewGuid().ToString());
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds);
+
+            using (SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection))
+            {
+              while (reader.HasRows)
+              {
+                while (reader.Read())
+                {
+                  numberOfRecords = reader.GetInt32(0);
+                }
+
+                reader.NextResult();
+
+                while (reader.Read())
+                {
+                  numberOfPages = reader.GetInt32(0);
+                }
+
+                reader.NextResult();
+
+                while (reader.Read())
+                {
+                  string receiptId = !reader.IsDBNull(1) ? reader.GetString(1) : string.Empty;
+                  DateTime receiptDate = !reader.IsDBNull(2) ? reader.GetDateTime(2) : DateTime.Now;
+                  string transactionCurrency = !reader.IsDBNull(3) ? reader.GetString(3) : "";
+                  int transactionTotal = !reader.IsDBNull(4) ? reader.GetInt32(4) : 0;
+                  bool isRefunded = !reader.IsDBNull(5);
+                  string orderSource = !reader.IsDBNull(6) ? reader.GetString(6) : string.Empty;
+                  string detailXml = !reader.IsDBNull(7) ? reader.GetString(7) : string.Empty;
+
+                  ReceiptItem item = new ReceiptItem(receiptId, receiptDate, transactionCurrency, transactionTotal, isRefunded, orderSource, detailXml);
+                  receiptList.Add(item);
+
+                }
+
+              }
+            }
           }
         }
 
-        oResponseData = new MyaOrderHistoryResponseData(ds);
+        oResponseData = new MyaOrderHistoryResponseData(numberOfRecords, numberOfPages, receiptList);
       }
       catch (AtlantisException exAtlantis)
       {
@@ -59,7 +83,7 @@ namespace Atlantis.Framework.MyaOrderHistory.Impl
       }
       catch (Exception ex)
       {
-        oResponseData = new MyaOrderHistoryResponseData(ds, oRequestData, ex);
+        oResponseData = new MyaOrderHistoryResponseData(oRequestData, ex);
       }
 
       return oResponseData;

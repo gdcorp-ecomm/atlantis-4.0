@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 namespace Atlantis.Framework.MyaOrderHistory.Interface
@@ -27,26 +28,27 @@ namespace Atlantis.Framework.MyaOrderHistory.Interface
 
     private List<string> ReceiptDescriptionList(string xml)
     {
-      List<string> _items = new List<string>(5);
+      List<string> items = new List<string>(5);
       if (xml.Length > 0)
       {
-        XmlDocument xmlDoc = new XmlDocument();
-        xmlDoc.LoadXml(xml);
-        XmlNodeList nodeList = xmlDoc.SelectNodes("items/item");
-        if (nodeList != null && nodeList.Count > 0)
+        using (XmlReader reader = new XmlTextReader(new StringReader(xml)))
         {
-          foreach (XmlNode node in nodeList)
+          string detail;
+          while (reader.Read())
           {
-            string description = node.Attributes["detail"].Value;
-            if (description.Length > 0)
+            if (reader.IsStartElement() && string.Equals(reader.Name, "item"))
             {
-              _items.Add(description);
+              detail = reader["detail"];
+              if (!string.IsNullOrEmpty(detail))
+              {
+                items.Add(detail);
+              }
             }
           }
         }
       }
 
-      return _items;
+      return items;
     }
 
   }

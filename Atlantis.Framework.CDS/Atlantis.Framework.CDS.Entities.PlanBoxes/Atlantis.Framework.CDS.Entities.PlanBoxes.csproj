@@ -48,8 +48,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Widgets\PlanBoxContainer5.cs" />
+    <Compile Include="Widgets\InputType.cs" />
+    <Compile Include="Widgets\PlanAddOn.cs" />
     <Compile Include="Widgets\PlanBox5.cs" />
+    <Compile Include="Widgets\PlanBox6.cs" />
     <Compile Include="Widgets\PlanBoxContainer4.cs" />
+    <Compile Include="Widgets\PlanDetail.cs" />
+    <Compile Include="Widgets\PlanFeature.cs" />
+    <Compile Include="Widgets\PlanProduct.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atlantis.Framework.CDS.Entities.Common\Atlantis.Framework.CDS.Entities.Common.csproj">

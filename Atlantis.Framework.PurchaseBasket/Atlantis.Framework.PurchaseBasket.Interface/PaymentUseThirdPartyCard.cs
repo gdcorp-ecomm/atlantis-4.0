@@ -9,7 +9,7 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
   {
     public override string ElementName
     {
-      get { return "ThirdpartyCardpayment"; }
+      get { return "ThirdPartyCardPayment"; }
     }
   }
 }

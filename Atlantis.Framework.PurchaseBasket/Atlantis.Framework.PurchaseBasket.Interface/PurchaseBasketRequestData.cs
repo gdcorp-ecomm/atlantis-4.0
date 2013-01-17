@@ -117,6 +117,7 @@ namespace Atlantis.Framework.PurchaseBasket.Interface
       ProcessPayment(xmlWriter, "PaypalPayment", paymentElements);
       ProcessPayment(xmlWriter, "PrepaidPayment", paymentElements);
       ProcessPayment(xmlWriter, "ZeroPayment", paymentElements);
+      ProcessPayment(xmlWriter, "ThirdpartyCardpayment", paymentElements);
       xmlWriter.WriteEndElement();
     }
 

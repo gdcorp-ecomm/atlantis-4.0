@@ -281,7 +281,14 @@ namespace Atlantis.Framework.Providers.Links
 
       if (relativePath.Length > 0)
       {
-        urlStringBuilder.Append("/" + relativePath);
+        if (relativePath.IndexOf('/') == 0)
+        {
+          urlStringBuilder.Append(relativePath);
+        }
+        else
+        {
+          urlStringBuilder.Append("/" + relativePath);
+        }
       }
       else if (!isPage)
       {

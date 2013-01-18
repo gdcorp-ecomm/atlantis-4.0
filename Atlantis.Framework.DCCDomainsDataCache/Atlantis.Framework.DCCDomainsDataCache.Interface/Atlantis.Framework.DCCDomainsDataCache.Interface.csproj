@@ -43,11 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HashSetExtensions.cs" />
     <Compile Include="TLDMLByNameRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TLDMLByNameResponseData.cs" />
     <Compile Include="TLDMLNamespaceElement.cs" />
-    <Compile Include="TLDMLRegistration.cs" />
+    <Compile Include="TldPeriodUnit.cs" />
+    <Compile Include="TLDMLProduct.cs" />
+    <Compile Include="TldValidYearsSet.cs" />
+    <Compile Include="XElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">

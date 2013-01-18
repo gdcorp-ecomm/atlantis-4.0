@@ -1,7 +1,6 @@
 ﻿using Atlantis.Framework.Interface;
 using System;
 using System.Xml.Linq;
-using System.Linq;
 
 namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 {
@@ -10,12 +9,12 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     private XDocument _tldmlDocument;
     private AtlantisException _exception;
 
-    private TLDMLRegistration _registration;
+    private TLDMLProduct _product;
 
     private TLDMLByNameResponseData(XDocument tldmlDocument)
     {
       _tldmlDocument = tldmlDocument;
-      _registration = new TLDMLRegistration(_tldmlDocument);
+      _product = new TLDMLProduct(_tldmlDocument);
     }
 
     private TLDMLByNameResponseData(RequestData requestData, Exception ex)
@@ -35,9 +34,9 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return new TLDMLByNameResponseData(requestData, ex);
     }
 
-    public TLDMLRegistration Registration
+    public TLDMLProduct Product
     {
-      get { return _registration; }
+      get { return _product; }
     }
 
     public string ToXML()

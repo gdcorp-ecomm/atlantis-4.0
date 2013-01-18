@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Atlantis.Framework.DCCDomainsDataCache.Tests
 {
@@ -50,20 +51,46 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     }
 
     [TestMethod]
-    public void MinRegistrationLength()
+    public void MinRegistrationOrg()
     {
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "COM.AU");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
-      Assert.AreNotEqual(0, response.Registration.MinRegistrationYears);
+      Assert.AreNotEqual(0, response.Product.RegistrationYears.Min);
     }
 
     [TestMethod]
-    public void MaxRegistrationLength()
+    public void MaxRegistrationOrg()
     {
       var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "COM.AU");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
-      Assert.AreNotEqual(0, response.Registration.MaxRegistrationYears);
+      Assert.AreNotEqual(0, response.Product.RegistrationYears.Max);
     }
+
+    [TestMethod]
+    public void TLDMLFoundOrg()
+    {
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "ORG");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      Console.WriteLine(response.ToXML());
+    }
+
+    [TestMethod]
+    public void MinRegistrationComAu()
+    {
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "com.au");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      Assert.AreEqual(2, response.Product.RegistrationYears.Min);
+      Assert.AreEqual(2, response.Product.RegistrationYears.Max);
+    }
+
+    [TestMethod]
+    public void NoPreregLengthsOrg()
+    {
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "ORG");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      Assert.AreEqual(response.Product.PreregistrationYears("SRA"), TldValidYearsSet.INVALIDSET);
+    }
+
 
   }
 }

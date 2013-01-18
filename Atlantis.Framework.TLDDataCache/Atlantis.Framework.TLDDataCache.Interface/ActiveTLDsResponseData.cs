@@ -45,7 +45,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
             string name = itemAtt.Name.ToString();
             if ((name != "tld") && (name != "tldid"))
             {
-              if (itemAtt.Value == "1")
+              if (itemAtt.Value != "0")
               {
                 AddTldToFlagSet(name, tld);
               }

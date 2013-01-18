@@ -138,5 +138,14 @@ namespace Atlantis.Framework.RegDotTypeProductIds.Tests
       Assert.IsTrue(response.HasProducts(DotTypeProductTypes.Renewal));
     }
 
+    [TestMethod]
+    public void DotTypeProductTiersRegistrationOrg()
+    {
+      var response = GetProductIds("ORG");
+      DotTypeProductTiers tiers = response.GetDefaultProductTiers(DotTypeProductTypes.Registration);
+      Assert.IsNotNull(tiers);
+    }
+
+
   }
 }

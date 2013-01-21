@@ -235,5 +235,17 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.IsFalse(url.Contains('<'));
     }
 
+    [TestMethod]
+    [DeploymentItem("Interop.gdDataCacheLib.dll")]
+    public void DoubleSlashURL()
+    {
+      string homePage = "http://www.godaddy.com/default.aspx";
+      MockHttpContext.SetMockHttpContext("default.aspx", homePage, string.Empty);
+      ILinkProvider links = NewLinkProvider(1, "832652");
+
+      string doubleLink = links.GetUrl("SITEROOT", "/default.aspx");
+      Assert.AreEqual(doubleLink.ToLowerInvariant(), homePage.ToLowerInvariant());
+    }
+
   }
 }

@@ -48,14 +48,20 @@
     <Compile Include="DomainContactData.cs" />
     <Compile Include="DotTypeFields.cs" />
     <Compile Include="DotTypeFieldValues.cs" />
-    <Compile Include="DotTypeProductIds.cs" />
-    <Compile Include="DotTypeProductIdTypes.cs" />
-    <Compile Include="DotTypeStaticBase.cs" />
-    <Compile Include="DotTypeTier.cs" />
-    <Compile Include="DotTypeEngineRequests.cs" />
+    <Compile Include="StaticDotTypeTiers.cs" />
+    <Compile Include="StaticDotTypeProductIdTypes.cs" />
+    <Compile Include="StaticDotType.cs" />
+    <Compile Include="StaticDotTypeTier.cs" />
     <Compile Include="IDotTypeInfo.cs" />
+    <Compile Include="IDotTypeProvider.cs" />
     <Compile Include="InvalidDotType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Interface\Atlantis.Framework.TLDDataCache.Interface.csproj">
+      <Project>{2a615d6f-9604-40c1-bc6a-2659e3b97bcc}</Project>
+      <Name>Atlantis.Framework.TLDDataCache.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DomainContactControls.xml">

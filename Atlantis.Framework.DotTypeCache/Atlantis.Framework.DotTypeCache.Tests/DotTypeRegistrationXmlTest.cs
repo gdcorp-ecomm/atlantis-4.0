@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Xml.Linq;
-using Atlantis.Framework.DotTypeCache.Interface;
+﻿using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Testing.MockHttpContext;
+using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.DotTypeCache.Tests
 {
@@ -32,28 +32,23 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestInitialize]
     public void InitializeTests()
     {
-      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<IManagerContext, TestContexts>();
+      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
+      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
+      HttpProviderContainer.Instance.RegisterProvider<IManagerContext, MockNoManagerContext>();
+      HttpProviderContainer.Instance.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
       MockHttpContext.SetMockHttpContext("default.aspx", "http://siteadmin.debug.intranet.gdg/default.aspx", string.Empty);
-      ISiteContext siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
-      ((TestContexts)siteContext).SetContextInfo(1, "832652");
+
       IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
-      ((TestContexts)shopperContext).SetContextInfo(1, "832652");
-      IManagerContext managerContext = HttpProviderContainer.Instance.Resolve<IManagerContext>();
-      ((TestContexts)managerContext).SetContextInfo(1, "832652");
+      shopperContext.SetNewShopper("832652");
     }
     
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("dottypecache.config")]
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
-    [DeploymentItem("Atlantis.Framework.DotTypeCache.Interface")]
-    [DeploymentItem("Atlantis.Framework.DotTypeCache")]
-    [DeploymentItem("Atlantis.Framework.DotTypeCache.DotCa")]
+    [DeploymentItem("Atlantis.Framework.DotTypeCache.DotCa.dll")]
     public void GetFieldsXml()
     {
-
       var fieldXml = DotTypeCache.GetRegistrationFieldsXml("CA");
 
       var contactNode = XDocument.Parse(fieldXml).Root.Element(RequiredFieldKeys.CONTACTS);

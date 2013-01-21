@@ -2,20 +2,20 @@
 
 namespace Atlantis.Framework.DotTypeCache.Interface
 {
-  public sealed class DotTypeProductIds
+  public sealed class StaticDotTypeTiers
   {
-    private DotTypeProductIdTypes _productIdType;
-    private List<DotTypeTier> _tierGroups;
+    private StaticDotTypeProductIdTypes _productIdType;
+    private List<StaticDotTypeTier> _tierGroups;
 
-    public DotTypeProductIdTypes ProductIdType
+    public StaticDotTypeProductIdTypes ProductIdType
     {
       get { return _productIdType; }
     }
 
-    public DotTypeProductIds(DotTypeProductIdTypes productIdType, IEnumerable<DotTypeTier> tiers)
+    public StaticDotTypeTiers(StaticDotTypeProductIdTypes productIdType, IEnumerable<StaticDotTypeTier> tiers)
     {
       _productIdType = productIdType;
-      _tierGroups = new List<DotTypeTier>(tiers);
+      _tierGroups = new List<StaticDotTypeTier>(tiers);
       _tierGroups.Sort();
     }
 
@@ -23,7 +23,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     {
       bool result = false;
 
-      DotTypeTier tierGroup = GetTier(domainCount);
+      StaticDotTypeTier tierGroup = GetTier(domainCount);
 
       if (tierGroup != null)
       {
@@ -37,7 +37,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     {
       int result = 0;
 
-      DotTypeTier tierGroup = GetTier(domainCount);
+      StaticDotTypeTier tierGroup = GetTier(domainCount);
 
       if (tierGroup != null)
       {
@@ -47,17 +47,17 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return result;
     }
 
-    public void AddDotTypeTier(DotTypeTier dotTypeTier)
+    public void AddDotTypeTier(StaticDotTypeTier dotTypeTier)
     {
       this._tierGroups.Add(dotTypeTier);
       _tierGroups.Sort();
     }
 
-    public DotTypeTier GetTier(int domainCount)
+    public StaticDotTypeTier GetTier(int domainCount)
     {
-      DotTypeTier result = null;
+      StaticDotTypeTier result = null;
 
-      foreach (DotTypeTier tier in _tierGroups)
+      foreach (StaticDotTypeTier tier in _tierGroups)
       {
         if (domainCount >= tier.MinDomains)
         {

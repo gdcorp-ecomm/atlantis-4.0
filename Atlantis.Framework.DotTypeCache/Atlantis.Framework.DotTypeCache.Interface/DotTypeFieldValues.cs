@@ -1,5 +1,4 @@
 ﻿
-using System.Collections.Generic;
 
 namespace Atlantis.Framework.DotTypeCache.Interface
 {

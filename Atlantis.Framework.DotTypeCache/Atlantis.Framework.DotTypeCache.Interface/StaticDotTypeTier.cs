@@ -2,12 +2,12 @@
 
 namespace Atlantis.Framework.DotTypeCache.Interface
 {
-  public sealed class DotTypeTier : IComparable<DotTypeTier>
+  public sealed class StaticDotTypeTier : IComparable<StaticDotTypeTier>
   {
     private int _minDomains = 0;
     private int[] _productIdsByYearsMinusOne;
 
-    public DotTypeTier(int minDomains, int[] productIds)
+    public StaticDotTypeTier(int minDomains, int[] productIds)
     {
       _minDomains = minDomains;
       _productIdsByYearsMinusOne = productIds;
@@ -42,7 +42,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 
     #region IComparable<Tier> Members
 
-    public int CompareTo(DotTypeTier other)
+    public int CompareTo(StaticDotTypeTier other)
     {
       if (other == null)
       {

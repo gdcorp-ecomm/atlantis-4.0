@@ -3,36 +3,36 @@ using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.DotTk
 {
-  public class DotTk : DotTypeStaticBase
+  public class DotTk : StaticDotType
   {
-    protected override DotTypeProductIds InitializeRegistrationProductIds()
+    protected override StaticDotTypeTiers InitializeRegistrationProductIds()
     {
-      DotTypeTier DotTypeTier0 = new DotTypeTier(0, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
-      DotTypeTier DotTypeTier6to20 = new DotTypeTier(6, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
-      DotTypeTier DotTypeTier21to49 = new DotTypeTier(21, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
-      DotTypeTier DotTypeTier50to100 = new DotTypeTier(50, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
-      DotTypeTier DotTypeTier101to200 = new DotTypeTier(101, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
-      DotTypeTier DotTypeTier201andup = new DotTypeTier(201, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
+      StaticDotTypeTier DotTypeTier0 = new StaticDotTypeTier(0, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
+      StaticDotTypeTier DotTypeTier6to20 = new StaticDotTypeTier(6, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
+      StaticDotTypeTier DotTypeTier21to49 = new StaticDotTypeTier(21, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
+      StaticDotTypeTier DotTypeTier50to100 = new StaticDotTypeTier(50, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
+      StaticDotTypeTier DotTypeTier101to200 = new StaticDotTypeTier(101, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
+      StaticDotTypeTier DotTypeTier201andup = new StaticDotTypeTier(201, new int[] { 40701, 40702, 40703, 40704, 40705, 40706, 40707, 40708, 40709, 40710 });
 
-      DotTypeProductIds result = new DotTypeProductIds(DotTypeProductIdTypes.Register, new DotTypeTier[] { DotTypeTier0, DotTypeTier6to20, DotTypeTier21to49, DotTypeTier50to100, DotTypeTier101to200, DotTypeTier201andup });
+      StaticDotTypeTiers result = new StaticDotTypeTiers(StaticDotTypeProductIdTypes.Register, new StaticDotTypeTier[] { DotTypeTier0, DotTypeTier6to20, DotTypeTier21to49, DotTypeTier50to100, DotTypeTier101to200, DotTypeTier201andup });
       return result;
     }
 
-    protected override DotTypeProductIds InitializeTransferProductIds()
+    protected override StaticDotTypeTiers InitializeTransferProductIds()
     {
       return null;
     }
 
-    protected override DotTypeProductIds InitializeRenewalProductIds()
+    protected override StaticDotTypeTiers InitializeRenewalProductIds()
     {
-      DotTypeTier DotTypeTier0 = new DotTypeTier(0, new int[] { 50701, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
-      DotTypeTier DotTypeTier6to20 = new DotTypeTier(6, new int[] { 50720, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
-      DotTypeTier DotTypeTier21to49 = new DotTypeTier(21, new int[] { 50720, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
-      DotTypeTier DotTypeTier50to100 = new DotTypeTier(50, new int[] { 50722, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
-      DotTypeTier DotTypeTier101to200 = new DotTypeTier(101, new int[] { 50724, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
-      DotTypeTier DotTypeTier201andup = new DotTypeTier(201, new int[] { 50726, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
+      StaticDotTypeTier DotTypeTier0 = new StaticDotTypeTier(0, new int[] { 50701, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
+      StaticDotTypeTier DotTypeTier6to20 = new StaticDotTypeTier(6, new int[] { 50720, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
+      StaticDotTypeTier DotTypeTier21to49 = new StaticDotTypeTier(21, new int[] { 50720, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
+      StaticDotTypeTier DotTypeTier50to100 = new StaticDotTypeTier(50, new int[] { 50722, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
+      StaticDotTypeTier DotTypeTier101to200 = new StaticDotTypeTier(101, new int[] { 50724, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
+      StaticDotTypeTier DotTypeTier201andup = new StaticDotTypeTier(201, new int[] { 50726, 50702, 50703, 50704, 50705, 50706, 50707, 50708, 50709, 50710 });
 
-      DotTypeProductIds result = new DotTypeProductIds(DotTypeProductIdTypes.Renewal, new DotTypeTier[] { DotTypeTier0, DotTypeTier6to20, DotTypeTier21to49, DotTypeTier50to100, DotTypeTier101to200, DotTypeTier201andup });
+      StaticDotTypeTiers result = new StaticDotTypeTiers(StaticDotTypeProductIdTypes.Renewal, new StaticDotTypeTier[] { DotTypeTier0, DotTypeTier6to20, DotTypeTier21to49, DotTypeTier50to100, DotTypeTier101to200, DotTypeTier201andup });
       return result;
     }
 

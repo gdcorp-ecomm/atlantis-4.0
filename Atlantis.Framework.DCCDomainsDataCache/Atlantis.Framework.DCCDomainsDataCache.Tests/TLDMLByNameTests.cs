@@ -53,7 +53,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     [TestMethod]
     public void MinRegistrationOrg()
     {
-      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "COM.AU");
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "org");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
       Assert.AreNotEqual(0, response.Product.RegistrationYears.Min);
     }
@@ -61,7 +61,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
     [TestMethod]
     public void MaxRegistrationOrg()
     {
-      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "COM.AU");
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "Org");
       var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
       Assert.AreNotEqual(0, response.Product.RegistrationYears.Max);
     }

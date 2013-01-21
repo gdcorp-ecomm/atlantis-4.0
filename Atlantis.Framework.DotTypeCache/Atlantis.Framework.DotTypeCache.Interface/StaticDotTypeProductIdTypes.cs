@@ -1,7 +1,7 @@
 ﻿
 namespace Atlantis.Framework.DotTypeCache.Interface
 {
-  public enum DotTypeProductIdTypes
+  public enum StaticDotTypeProductIdTypes
   {
     Register,
     Transfer,

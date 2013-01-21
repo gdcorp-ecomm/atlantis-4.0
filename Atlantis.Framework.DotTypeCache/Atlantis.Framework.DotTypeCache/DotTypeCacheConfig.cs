@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Xml;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeCache
 {
@@ -16,7 +16,8 @@ namespace Atlantis.Framework.DotTypeCache
       get { return _configItems; }
     }
 
-    private ConfigLock _configLock = new ConfigLock();
+    ReaderWriterLockSlim _configLock = new ReaderWriterLockSlim();
+    const int LOCK_TIME_OUT = 5000;
 
     private string _assemblyPath;
     internal string AssemblyPath
@@ -32,7 +33,8 @@ namespace Atlantis.Framework.DotTypeCache
           }
           catch (Exception ex)
           {
-            LogError("Atlantis.Framework.DotTypeCache.DotTypeCacheConfig.AssemblyPath", "", ex.Message);
+            string message = ex.Message + Environment.NewLine + ex.StackTrace;
+            Logging.LogException("DotTypeCacheConfig.AssemblyPath", message, string.Empty);
           }
         }
 
@@ -50,68 +52,33 @@ namespace Atlantis.Framework.DotTypeCache
       XmlDocument xmlDoc = new XmlDocument();
       string configFilePath = string.Empty;
 
-      try
+      if (_configLock.TryEnterWriteLock(LOCK_TIME_OUT))
       {
-        _configLock.GetWriterLock();
-        configFilePath = GetConfigFilePath();
-        _configItems.Clear();
-        xmlDoc.Load(configFilePath);
-        XmlNodeList configElements = xmlDoc.SelectNodes("/ConfigElements/ConfigElement");
-
-        foreach (XmlElement configElement in configElements)
+        try
         {
-          string dotType = configElement.GetAttribute("dottype");
-          string progId = configElement.GetAttribute("progid");
-          string assembly = configElement.GetAttribute("assembly");
-          string isMultiRegistrar = configElement.GetAttribute("multi_registrar") ?? string.Empty;
-          string assemblyPath
-            = Path.Combine(AssemblyPath, assembly);
+          configFilePath = GetConfigFilePath();
+          _configItems.Clear();
+          xmlDoc.Load(configFilePath);
+          XmlNodeList configElements = xmlDoc.SelectNodes("/ConfigElements/ConfigElement");
 
-          if (!string.IsNullOrEmpty(dotType)
-            && !string.IsNullOrEmpty(progId)
-            && !string.IsNullOrEmpty(assemblyPath))
+          foreach (XmlElement configElement in configElements)
           {
-            Dictionary<string, string> configValues = null;
-            XmlNodeList customConfigNodes = configElement.SelectNodes("./ConfigValue");
-
-            if (customConfigNodes.Count > 0)
+            ConfigElement item = HydrateFromXml(configElement);
+            if (item != null)
             {
-              configValues = new Dictionary<string, string>(customConfigNodes.Count);
-
-              foreach (XmlElement configValueElement in customConfigNodes)
-              {
-                if (configValueElement != null)
-                {
-                  string key = configValueElement.GetAttribute("key");
-                  if (!string.IsNullOrEmpty(key))
-                  {
-                    configValues[key] = configValueElement.GetAttribute("value");
-                  }
-                }
-              }
+              _configItems[item.ProgId] = item;
             }
-
-            ConfigElement newConfigElement = new ConfigElement(dotType, progId, assemblyPath, isMultiRegistrar, configValues);
-
-            _configItems[progId] = newConfigElement;
-          }
-          else
-          {
-            LogError("Atlantis.Framework.DotTypeCache.DotTypeCacheConfig.Load()",
-                     String.Format("DotType: {0}; ProgId: {1}; Assembly: {2}", dotType, progId, assemblyPath),
-                     "Unable to Create ConfigElement: Invalid Attribute");
           }
         }
-
+        finally
+        {
+          _configLock.ExitWriteLock();
+        }
       }
-      catch (Exception ex)
+      else
       {
-        LogError("Atlantis.Framework.DotTypeCache.DotTypeCacheConfig.Load()",
-                 "Filename: " + _CONF_FILE_NAME, ex.Message);
-      }
-      finally
-      {
-        _configLock.ReleaseWriterLock();
+        string message = "Acquiring DotTypeCacheConfig write lock timed out.";
+        throw new TimeoutException(message);
       }
     }
 
@@ -130,18 +97,57 @@ namespace Atlantis.Framework.DotTypeCache
       }
       catch (Exception ex)
       {
-        LogError("Atlantis.Framework.DotTypeCache.DotTypeCacheConfig.GetConfigFilePath()", "", ex.Message);
+        string message = ex.Message + Environment.NewLine + ex.StackTrace;
+        Logging.LogException("DotTypeCacheConfig.GetConfigFilePath", message, string.Empty);
       }
 
       return configFilePath;
     }
 
-    private void LogError(string sourceFunction, string input, string errorMessage)
+    private ConfigElement HydrateFromXml(XmlElement configElement)
     {
-      AtlantisException atlEx = new AtlantisException(sourceFunction,
-        string.Empty, string.Empty, errorMessage, string.Empty, string.Empty, string.Empty,
-        string.Empty, string.Empty, 0);
-      Atlantis.Framework.Engine.Engine.LogAtlantisException(atlEx);
+      ConfigElement result = null;
+
+      string dotType = configElement.GetAttribute("dottype");
+      string progId = configElement.GetAttribute("progid");
+      string assembly = configElement.GetAttribute("assembly");
+      string isMultiRegistrar = configElement.GetAttribute("multi_registrar") ?? string.Empty;
+      string assemblyPath
+        = Path.Combine(AssemblyPath, assembly);
+
+      if (!string.IsNullOrEmpty(dotType)
+        && !string.IsNullOrEmpty(progId)
+        && !string.IsNullOrEmpty(assemblyPath))
+      {
+        Dictionary<string, string> configValues = null;
+        XmlNodeList customConfigNodes = configElement.SelectNodes("./ConfigValue");
+
+        if (customConfigNodes.Count > 0)
+        {
+          configValues = new Dictionary<string, string>(customConfigNodes.Count);
+
+          foreach (XmlElement configValueElement in customConfigNodes)
+          {
+            if (configValueElement != null)
+            {
+              string key = configValueElement.GetAttribute("key");
+              if (!string.IsNullOrEmpty(key))
+              {
+                configValues[key] = configValueElement.GetAttribute("value");
+              }
+            }
+          }
+        }
+
+        result = new ConfigElement(dotType, progId, assemblyPath, isMultiRegistrar, configValues);
+      }
+      else
+      {
+        string input = String.Format("DotType: {0}; ProgId: {1}; Assembly: {2}", dotType, progId, assemblyPath);
+        Logging.LogException("DotTypeCacheConfig.Load", "Unable to Create ConfigElement: Invalid Attribute", input);
+      }
+
+      return result;
     }
   }
 }

@@ -26,6 +26,11 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     {
       XName searchKey = XName.Get(this.LocalName, this.Namespace);
       _namespaceRootElement = tldmlDocument.Descendants(searchKey).FirstOrDefault();
+      if (_namespaceRootElement == null)
+      {
+        string message = this.Namespace + ":" + this.LocalName + " element not found.";
+        throw new ArgumentException(message);
+      }
     }
 
     protected int GetExpectedPeriodValue(string elementName, string expectedUnit, int defaultValueIfNotValid)

@@ -196,6 +196,9 @@ namespace Atlantis.Framework.PixelsGet.Impl
         case PixelXmlNames.TriggerTypeCookieGroup:
           triggerType = typeof(CookieGroupTrigger);
           break;
+        case PixelXmlNames.TriggerTypeOrderDetail:
+          triggerType = typeof(OrderDetailTrigger);
+          break;
       }
 
       if (triggerType != null)

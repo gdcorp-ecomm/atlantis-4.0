@@ -12,6 +12,13 @@ namespace Atlantis.Framework.PixelsGet.Interface.Constants
     public const string AppName = "application";
     public const string AppSetting = "appsettingname";
     public const string AdditionalData = "additionaldata";
+    public const string Comparison = "comparison";
+
+    public const string ComparisonEquals = "==";
+    public const string ComparisonGreaterThan = ">";
+    public const string ComparisonGreaterThanOrEqual = ">=";
+    public const string ComparisonLessThan = "<";
+    public const string ComparisonLessThanOrEqual = "<=";
 
     public const string RemoveAfterConsumption = "removeafterconsumption";
 
@@ -20,6 +27,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.Constants
     public const string TriggerTypeCookieGroup = "cookiegroup";
     public const string TriggerTypeIscCodes = "sourcecodes";
     public const string TriggerTypeIscCodeSingle = "sourcecode";
+    public const string TriggerTypeOrderDetail = "orderdetail";
 
     public const string TriggerConditionFirstTime = "firsttimeonly";
     public const string TriggerCookieName = "triggercookiename";

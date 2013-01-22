@@ -59,9 +59,9 @@ namespace Atlantis.Framework.DotTypeCache.DotXxx
       get { return "XXX"; }
     }
 
-    public override int MaxPreRegistrationLength(string preRegistrationType)
+    public override int MaxPreRegLength
     {
-      return 10;
+      get { return 10; }
     }
 
   }

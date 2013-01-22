@@ -107,7 +107,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       regLengths.Add(9);
       regLengths.Add(10);
       //IDotTypeInfo dotTypeInfo = DotTypeCache.GetDotTypeInfo("XXX");
-      int productId = DotTypeCache.GetPreRegistrationProductId("XXX", 1, 1, string.Empty);
+      int productId = DotTypeCache.GetPreRegProductId("XXX", 1, 1);
       ///List<int> RegistrationProductIds = dotTypeInfo.GetValidRegistrationProductIdList(1, regLengths.ToArray());
       ///List<int> TransferProductIds = dotTypeInfo.GetValidTransferProductIdList(1, regLengths.ToArray());
       //List<int> renewProductIds = dotTypeInfo.GetValidRenewalProductIdList(1, regLengths.ToArray());

@@ -10,6 +10,8 @@ namespace Atlantis.Framework.DotTypeCache
 {
   public class TLDMLDotTypeInfo : IDotTypeInfo
   {
+    private const string _DEFAULTPREREGTYPE = "GA";
+
     private string _tld;
     private Lazy<ProductIdListResponseData> _productIdList;
     private Lazy<RegDotTypeRegistryResponseData> _dotTypeRegistryData;
@@ -65,14 +67,14 @@ namespace Atlantis.Framework.DotTypeCache
       get { return _tldml.Value.Product.ExpiredAuctionsYears.Max; }
     }
 
-    public int MinPreRegistrationLength(string preRegistrationType)
+    public int MinPreRegLength
     {
-      return _tldml.Value.Product.PreregistrationYears(preRegistrationType).Min;
+      get { return _tldml.Value.Product.PreregistrationYears(_DEFAULTPREREGTYPE).Min; }
     }
 
-    public int MaxPreRegistrationLength(string preRegistrationType)
+    public int MaxPreRegLength
     {
-      return _tldml.Value.Product.PreregistrationYears(preRegistrationType).Max;
+      get { return _tldml.Value.Product.PreregistrationYears(_DEFAULTPREREGTYPE).Max; }
     }
 
     public int MinRegistrationLength
@@ -138,13 +140,13 @@ namespace Atlantis.Framework.DotTypeCache
       return InternalGetProductId(registryId, registrationLength, domainCount, DotTypeProductTypes.ExpiredAuctionReg);
     }
 
-    public int GetPreRegistrationProductId(int registrationLength, int domainCount, string preRegistrationType)
+    public int GetPreRegProductId(int registrationLength, int domainCount)
     {
       // TODO: handle prereg subtype
       return InternalGetProductId(registrationLength, domainCount, DotTypeProductTypes.PreRegister);
     }
 
-    public int GetPreRegistrationProductId(string registryId, int registrationLength, int domainCount, string preRegistrationType)
+    public int GetPreRegProductId(string registryId, int registrationLength, int domainCount)
     {
       // TODO: handle prereg subtype
       return InternalGetProductId(registryId, registrationLength, domainCount, DotTypeProductTypes.PreRegister);
@@ -249,14 +251,14 @@ namespace Atlantis.Framework.DotTypeCache
       return InternalGetValidProductIds(DotTypeProductTypes.ExpiredAuctionReg, _tldml.Value.Product.ExpiredAuctionsYears, registryId, domainCount, registrationLengths);
     }
 
-    public List<int> GetValidPreRegistrationProductIdList(int domainCount, string preRegistrationType, params int[] registrationLengths)
+    public List<int> GetValidPreRegProductIdList(int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(DotTypeProductTypes.PreRegister, _tldml.Value.Product.PreregistrationYears(preRegistrationType), domainCount, registrationLengths);
+      return InternalGetValidProductIds(DotTypeProductTypes.PreRegister, _tldml.Value.Product.PreregistrationYears(_DEFAULTPREREGTYPE), domainCount, registrationLengths);
     }
 
-    public List<int> GetValidPreRegistrationProductIdList(string registryId, int domainCount, string preRegistrationType, params int[] registrationLengths)
+    public List<int> GetValidPreRegProductIdList(string registryId, int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(DotTypeProductTypes.PreRegister, _tldml.Value.Product.PreregistrationYears(preRegistrationType), registryId, domainCount, registrationLengths);
+      return InternalGetValidProductIds(DotTypeProductTypes.PreRegister, _tldml.Value.Product.PreregistrationYears(_DEFAULTPREREGTYPE), registryId, domainCount, registrationLengths);
     }
 
     public List<int> GetValidRegistrationProductIdList(int domainCount, params int[] registrationLengths)
@@ -306,9 +308,9 @@ namespace Atlantis.Framework.DotTypeCache
       return InternalGetValidYears(DotTypeProductTypes.ExpiredAuctionReg, _tldml.Value.Product.ExpiredAuctionsYears, domainCount, registrationLengths);
     }
 
-    public List<int> GetValidPreRegistrationLengths(int domainCount, string preRegistrationType, params int[] registrationLengths)
+    public List<int> GetValidPreRegLengths(int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidYears(DotTypeProductTypes.PreRegister, _tldml.Value.Product.PreregistrationYears(preRegistrationType), domainCount, registrationLengths);
+      return InternalGetValidYears(DotTypeProductTypes.PreRegister, _tldml.Value.Product.PreregistrationYears(_DEFAULTPREREGTYPE), domainCount, registrationLengths);
     }
 
     public List<int> GetValidRegistrationLengths(int domainCount, params int[] registrationLengths)

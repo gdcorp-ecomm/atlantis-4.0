@@ -77,14 +77,14 @@ namespace Atlantis.Framework.DotTypeCache
       get { return this._dotTypeInfo.MaxExpiredAuctionRegLength; }
     }
 
-    public int MinPreRegistrationLength(string preRegistrationType)
+    public int MinPreRegLength
     {
-      return this._dotTypeInfo.MinPreRegistrationLength(preRegistrationType);
+      get { return this._dotTypeInfo.MinPreRegLength; }
     }
 
-    public int MaxPreRegistrationLength(string preRegistrationType)
+    public int MaxPreRegLength
     {
-      return this._dotTypeInfo.MaxPreRegistrationLength(preRegistrationType);
+      get { return this._dotTypeInfo.MaxPreRegLength; }
     }
 
     public int MinRegistrationLength
@@ -127,9 +127,9 @@ namespace Atlantis.Framework.DotTypeCache
       get { return true; }
     }
 
-    public int GetPreRegistrationProductId(int registrationLength, int domainCount, string preRegistrationType)
+    public int GetPreRegProductId(int registrationLength, int domainCount)
     {
-      return this._dotTypeInfo.GetPreRegistrationProductId(registrationLength, domainCount, preRegistrationType);
+      return this._dotTypeInfo.GetPreRegProductId(registrationLength, domainCount);
     }
 
     public int GetExpiredAuctionRegProductId(int registrationLength, int domainCount)
@@ -187,9 +187,9 @@ namespace Atlantis.Framework.DotTypeCache
       return this._dotTypeInfo.GetValidExpiredAuctionRegProductIdList(domainCount, registrationLengths);
     }
 
-    public List<int> GetValidPreRegistrationProductIdList(int domainCount, string preRegistrationType, params int[] registrationLengths)
+    public List<int> GetValidPreRegProductIdList(int domainCount, params int[] registrationLengths)
     {
-      return this._dotTypeInfo.GetValidPreRegistrationProductIdList(domainCount, preRegistrationType, registrationLengths);
+      return this._dotTypeInfo.GetValidPreRegProductIdList(domainCount, registrationLengths);
     }
 
     public List<int> GetValidRegistrationProductIdList(int domainCount, params int[] registrationLengths)
@@ -226,9 +226,9 @@ namespace Atlantis.Framework.DotTypeCache
       return this._dotTypeInfo.GetValidExpiredAuctionRegLengths(domainCount, registrationLengths);
     }
 
-    public List<int> GetValidPreRegistrationLengths(int domainCount, string preRegistrationType, params int[] registrationLengths)
+    public List<int> GetValidPreRegLengths(int domainCount, params int[] registrationLengths)
     {
-      return this._dotTypeInfo.GetValidPreRegistrationLengths(domainCount, preRegistrationType, registrationLengths);
+      return this._dotTypeInfo.GetValidPreRegLengths(domainCount, registrationLengths);
     }
 
     public List<int> GetValidRegistrationLengths(int domainCount, params int[] registrationLengths)
@@ -279,15 +279,15 @@ namespace Atlantis.Framework.DotTypeCache
       return productId;
     }
 
-    public int GetPreRegistrationProductId(string registryId, int registrationLength, int domainCount, string preRegistrationType)
+    public int GetPreRegProductId(string registryId, int registrationLength, int domainCount)
     {
-      int productId = GetRegistryProductId(registryId, DotTypeProductTypes.PreRegister, registrationLength, domainCount, MinPreRegistrationLength(preRegistrationType), MaxPreRegistrationLength(preRegistrationType));
+      int productId = GetRegistryProductId(registryId, DotTypeProductTypes.PreRegister, registrationLength, domainCount, MinPreRegLength, MaxPreRegLength);
 
       if (productId < 0)
       {
-        productId = this.GetPreRegistrationProductId(registrationLength, domainCount, preRegistrationType);
+        productId = this.GetPreRegProductId(registrationLength, domainCount);
         string message = string.Format(_MISSING_ID_ERROR, registryId, registrationLength, domainCount);
-        Logging.LogException("MultiRegDotTypeInfo.GetPreRegistrationProductId", message, this.DotType);
+        Logging.LogException("MultiRegDotTypeInfo.GetPreRegProductId", message, this.DotType);
       }
 
       return productId;
@@ -348,16 +348,16 @@ namespace Atlantis.Framework.DotTypeCache
       }
     }
 
-    public List<int> GetValidPreRegistrationProductIdList(string registryId, int domainCount, string preRegistrationType, params int[] registrationLengths)
+    public List<int> GetValidPreRegProductIdList(string registryId, int domainCount, params int[] registrationLengths)
     {
       DotTypeProductTiers productTiers = _productData.GetProductTiersForRegistry(registryId, DotTypeProductTypes.PreRegister);
       if (productTiers != null)
       {
-        return GetValidProductIdList(productTiers, MinPreRegistrationLength(preRegistrationType), MaxPreRegistrationLength(preRegistrationType), domainCount, registrationLengths);
+        return GetValidProductIdList(productTiers, MinPreRegLength, MaxPreRegLength, domainCount, registrationLengths);
       }
       else
       {
-        return GetValidPreRegistrationProductIdList(domainCount, preRegistrationType, registrationLengths);
+        return GetValidPreRegProductIdList(domainCount, registrationLengths);
       }
     }
 

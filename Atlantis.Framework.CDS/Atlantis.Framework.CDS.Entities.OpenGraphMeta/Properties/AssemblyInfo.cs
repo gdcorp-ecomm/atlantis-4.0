@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.CDS.Entities.Dynamic")]
+[assembly: AssemblyTitle("Atlantis.Framework.CDS.Entities.OpenGraphMeta")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
 [assembly: AssemblyConfiguration("Debug")]
@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("Release")]
 #endif
 [assembly: AssemblyCompany("GoDaddy.com")]
-[assembly: AssemblyProduct("Atlantis.Framework.CDS.Entities.Dynamic")]
+[assembly: AssemblyProduct("Atlantis.Framework.CDS.Entities.OpenGraphMeta")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b5767572-3051-4d5e-ba66-4e08169eda67")]
+[assembly: Guid("912a5173-8bf9-4a5f-9973-8104ecbec263")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -38,4 +38,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.01.20")]
+[assembly: AssemblyFileVersion("4.13.01.22")]

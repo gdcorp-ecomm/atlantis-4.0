@@ -89,7 +89,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Content", "Atlantis.Framework.CDS.Entities.Content\Atlantis.Framework.CDS.Entities.Content.csproj", "{9CE1EB44-6C60-4EFC-8E57-BABE0739B675}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Dynamic", "Atlantis.Framework.CDS.Entities.Dynamic\Atlantis.Framework.CDS.Entities.Dynamic.csproj", "{2E93F053-8241-42F9-859C-9A7132E03FB2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.OpenGraphMeta", "Atlantis.Framework.CDS.Entities.OpenGraphMeta\Atlantis.Framework.CDS.Entities.OpenGraphMeta.csproj", "{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -234,9 +234,9 @@ Global
 		SccProjectUniqueName40 = Atlantis.Framework.CDS.Entities.Content\\Atlantis.Framework.CDS.Entities.Content.csproj
 		SccProjectName40 = Atlantis.Framework.CDS.Entities.Content
 		SccLocalPath40 = Atlantis.Framework.CDS.Entities.Content
-		SccProjectUniqueName41 = Atlantis.Framework.CDS.Entities.Dynamic\\Atlantis.Framework.CDS.Entities.Dynamic.csproj
-		SccProjectName41 = Atlantis.Framework.CDS.Entities.Dynamic
-		SccLocalPath41 = Atlantis.Framework.CDS.Entities.Dynamic
+		SccProjectUniqueName41 = Atlantis.Framework.CDS.Entities.OpenGraphMeta\\Atlantis.Framework.CDS.Entities.OpenGraphMeta.csproj
+		SccProjectName41 = Atlantis.Framework.CDS.Entities.OpenGraphMeta
+		SccLocalPath41 = Atlantis.Framework.CDS.Entities.OpenGraphMeta
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.CDS.vsmdi
@@ -650,16 +650,16 @@ Global
 		{9CE1EB44-6C60-4EFC-8E57-BABE0739B675}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9CE1EB44-6C60-4EFC-8E57-BABE0739B675}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9CE1EB44-6C60-4EFC-8E57-BABE0739B675}.Release|x86.ActiveCfg = Release|Any CPU
-		{2E93F053-8241-42F9-859C-9A7132E03FB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E93F053-8241-42F9-859C-9A7132E03FB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E93F053-8241-42F9-859C-9A7132E03FB2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{2E93F053-8241-42F9-859C-9A7132E03FB2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{2E93F053-8241-42F9-859C-9A7132E03FB2}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2E93F053-8241-42F9-859C-9A7132E03FB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E93F053-8241-42F9-859C-9A7132E03FB2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E93F053-8241-42F9-859C-9A7132E03FB2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{2E93F053-8241-42F9-859C-9A7132E03FB2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{2E93F053-8241-42F9-859C-9A7132E03FB2}.Release|x86.ActiveCfg = Release|Any CPU
+		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

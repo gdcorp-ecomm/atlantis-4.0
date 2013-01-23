@@ -13,6 +13,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.Constants
     public const string AppSetting = "appsettingname";
     public const string AdditionalData = "additionaldata";
     public const string Comparison = "comparison";
+    public const string Required = "required";
 
     public const string ComparisonEquals = "==";
     public const string ComparisonGreaterThan = ">";

@@ -123,12 +123,23 @@ namespace Atlantis.Framework.PixelsGet.Impl
         {
           XElement triggerElement = currentElement.Descendants(PixelXmlNames.Trigger).First(x => x != null);
           bool pixelAlreadyTriggered = false;
+          string[] requiredTriggers = triggerElement.Attribute(PixelXmlNames.Required).Value.ToLower().Split(',');
           foreach (XElement individualTrigger in triggerElement.Nodes())
           {
             Trigger currentTrigger = GetTrigger(triggerElement, individualTrigger);
             if (currentTrigger != null)
             {
-              if (!shouldTriggerPixel)
+              if ((currentTrigger is OrderDetailTrigger && requiredTriggers.Contains(PixelXmlNames.TriggerTypeOrderDetail)) ||
+                  (currentTrigger is SourceCodeTrigger && requiredTriggers.Contains(PixelXmlNames.TriggerTypeIscCodes)) ||
+                  (currentTrigger is CookieTrigger && requiredTriggers.Contains(PixelXmlNames.TriggerTypeCookie)))
+              {
+                if (!currentTrigger.ShouldFirePixel(pixelAlreadyTriggered))
+                {
+                  shouldTriggerPixel = false;
+                  break;
+                }
+              }
+              else if (!shouldTriggerPixel)
               {
                 shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
               }
@@ -183,7 +194,7 @@ namespace Atlantis.Framework.PixelsGet.Impl
       Trigger trigger = null;
       Type triggerType = null;
 
-      string triggerTypeName = individualTrigger.Name.ToString();
+      string triggerTypeName = individualTrigger.Name.ToString().ToLower();
 
       switch (triggerTypeName)
       {

@@ -1,7 +1,7 @@
 ﻿
 namespace Atlantis.Framework.ResourceInfoByPaymentProfile.Interface
 {
-  public static class ColumnName
+  public class ColumnName
   {
     public const string WorkId = "workID";
     public const string ResourceId = "resourceID";
@@ -29,6 +29,5 @@ namespace Atlantis.Framework.ResourceInfoByPaymentProfile.Interface
     public const string ExternalResourceId = "externalResourceID";
     public const string PurchasedDuration = "purchasedDuration";
     public const string IsPrivacyPlusDomain = "isPrivacyPlusDomain";
-
   }
 }

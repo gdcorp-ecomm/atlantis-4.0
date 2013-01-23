@@ -1,86 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using Atlantis.Framework.Interface;
-using System.Linq;
-using System.Xml.Linq;
 using System.IO;
+using System.Xml.Linq;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.AuthRetrieve.Interface
 {
   public class AuthRetrieveResponseData : IResponseData
   {
-    private AtlantisException _exception = null;
-    private string _resultXML = string.Empty;
-    private bool _success = false;
-    private string _shopperId = string.Empty;
-    private string _spid = string.Empty;
-    private string _ipid = string.Empty;
+    #region Properties
+    private readonly AtlantisException _exception;
+    private readonly string _resultXml = string.Empty;
+    private readonly bool _success;
+    private readonly string _shopperId = string.Empty;
+    private readonly string _spid = string.Empty;
+    private readonly string _ipid = string.Empty;
+    private readonly XDocument _artifactDoc = new XDocument();
 
-    XDocument _artifactDoc = new XDocument();
-
-
+    [Obsolete("Use ToXML")]
     public string ResultXML
     {
-      get
-      {
-        return _resultXML;
-      }
+      get { return _resultXml; }
     }
 
     public bool IsSuccess
     {
-      get
-      {
-        return _success;
-      }
+      get { return _success; }
     }
 
     public string ShopperId
     {
-      get
-      {
-        return _shopperId;
-      }
+      get { return _shopperId; }
     }
 
     public XDocument ArtifactDoc
     {
-      get
-      {
-        return _artifactDoc;
-      }
+      get { return _artifactDoc; }
     }
 
     public string IpID
     {
-      get
-      {
-        return _ipid;
-      }
+      get { return _ipid; }
     }
 
     public string SpID
     {
-      get
-      {
-        return _spid;
-      }
+      get { return _spid; }
     }
+    #endregion
 
     public AuthRetrieveResponseData(string xml)
     {
-      this._success = true;
-      this._resultXML=xml;
+      _success = true;
+      _resultXml = xml;
       _artifactDoc = XDocument.Load(new StringReader(xml));
-      foreach (XElement currentElement in _artifactDoc.Descendants("Request"))
+      foreach (var currentElement in _artifactDoc.Descendants("Request"))
       {
-        foreach (XNode currentNode in currentElement.Nodes())
+        foreach (var currentNode in currentElement.Nodes())
         {
-          if (currentNode is XElement)
+          var node = currentNode as XElement;
+          if (node != null)
           {
-            XElement currAttrib = (XElement)currentNode;
+            var currAttrib = node;
             if (currAttrib.Name == "ShopperID")
             {
               _shopperId = currAttrib.Value;
@@ -88,47 +68,42 @@ namespace Atlantis.Framework.AuthRetrieve.Interface
             }
           }
         }
-
       }
-      XElement rootNode = _artifactDoc.Root;
-      if (rootNode.Attribute("idpid") != null)
+      var rootNode = _artifactDoc.Root;
+      if (rootNode != null)
       {
-        _ipid = _artifactDoc.Root.Attribute("idpid").Value;
-      }
-      if (rootNode.Attribute("spid") != null)
-      {
-        _spid = _artifactDoc.Root.Attribute("spid").Value;
+        if (rootNode.Attribute("idpid") != null)
+        {
+          _ipid = rootNode.Attribute("idpid").Value;
+        }
+        if (rootNode.Attribute("spid") != null)
+        {
+          _spid = rootNode.Attribute("spid").Value;
+        }
       }
 
     }
 
-     public AuthRetrieveResponseData(AtlantisException atlantisException)
+    public AuthRetrieveResponseData(AtlantisException atlantisException)
     {
-      this._exception = atlantisException;      
+      _exception = atlantisException;
     }
 
     public AuthRetrieveResponseData(RequestData requestData, Exception exception)
     {
-      this._exception = new AtlantisException(requestData,
-                                   "AuthRetrieveResponseData",
-                                   exception.Message,
-                                   requestData.ToXML());
+      _exception = new AtlantisException(requestData, "AuthRetrieveResponseData", exception.Message, requestData.ToXML());
     }
 
-
     #region IResponseData Members
-
     public string ToXML()
     {
-      return _resultXML;
+      return _resultXml;
     }
 
     public AtlantisException GetException()
     {
       return _exception;
     }
-
     #endregion
-
   }
 }

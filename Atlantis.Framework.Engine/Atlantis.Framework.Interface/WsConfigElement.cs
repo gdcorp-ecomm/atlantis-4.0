@@ -70,7 +70,7 @@ namespace Atlantis.Framework.Interface
           }
           if (clientCertificate == null)
           {
-            throw new AtlantisException("WsConfigElement::GetClientCertificate", "0", "Unable to find Client Certificate in  cert store.", string.Format("friendlyName: '{0}'", friendlyName), null, null);
+            throw new AtlantisException("WsConfigElement::GetClientCertificate", "0", string.Format("Unable to find Client Certificate '{0}' in cert store.", friendlyName), string.Empty, null, null);
           }
         }
         finally

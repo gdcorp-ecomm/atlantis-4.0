@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.AuthRetrieve.Interface;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.AuthRetrieve.Impl
 {
@@ -11,49 +8,36 @@ namespace Atlantis.Framework.AuthRetrieve.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      AuthRetrieveResponseData responseData = null;
-      string responseXML = string.Empty;
-      string errorXML = string.Empty;
-      XmlDocument responseDoc = new XmlDocument();
-      string requestDataXML = string.Empty;
+      AuthRetrieveResponseData responseData;
       try
       {
-        AuthRetrieveRequestData authData = (AuthRetrieveRequestData)requestData;
-        using (RetrieveAuthSvc.RetrieveAuth oSvc = new RetrieveAuthSvc.RetrieveAuth())
+        var authData = (AuthRetrieveRequestData)requestData;
+        string responseXml;
+        string errorXml;
+        using (var svc = new RetrieveAuthSvc.RetrieveAuth())
         {
-          oSvc.Url = ((WsConfigElement)config).WSURL;
-          oSvc.Timeout = (int)authData.RequestTimeout.TotalMilliseconds;
-          WsConfigElement configElement = (WsConfigElement)config;
-          oSvc.ClientCertificates.Add(configElement.GetClientCertificate("CertificateName"));
-          responseXML = oSvc.GetAuthData(authData.SPKey, authData.Artifact, out  errorXML);          
+          svc.Url = ((WsConfigElement)config).WSURL;
+          svc.Timeout = (int)authData.RequestTimeout.TotalMilliseconds;
+          var configElement = (WsConfigElement)config;
+          svc.ClientCertificates.Add(configElement.GetClientCertificate("CertificateName"));
+          responseXml = svc.GetAuthData(authData.SpKey, authData.Artifact, out errorXml);
         }
 
-        if (!string.IsNullOrEmpty(errorXML))
+        if (!string.IsNullOrEmpty(errorXml))
         {
-          AtlantisException exAtlantis = new AtlantisException(requestData,
-                                                               "AuthRetrieveRequest.RequestHandler",
-                                                               errorXML,
-                                                               requestData.ToXML());
-
-          responseData = new AuthRetrieveResponseData(requestData, exAtlantis);
+          var exAtlantis = new AtlantisException(requestData, "AuthRetrieveRequest.RequestHandler", errorXml, requestData.ToXML());          
+          responseData = new AuthRetrieveResponseData(exAtlantis);
         }
         else
         {
-          responseData = new AuthRetrieveResponseData(responseXML);
+          responseData = new AuthRetrieveResponseData(responseXml);
         }
-      }
-      catch (AtlantisException exAtlantis)
-      {
-        responseData = new AuthRetrieveResponseData(requestData, exAtlantis);
       }
       catch (Exception ex)
       {
         responseData = new AuthRetrieveResponseData(requestData, ex);
       }
-
       return responseData;
     }
-
-
   }
 }

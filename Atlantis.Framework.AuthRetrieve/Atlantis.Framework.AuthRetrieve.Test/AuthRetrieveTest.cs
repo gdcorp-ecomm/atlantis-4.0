@@ -1,31 +1,28 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Atlantis.Framework.AuthRetrieve.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.AuthRetrieve.Test
 {
   [TestClass]
-  public class UnitTest1
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.AuthRetrieve.Impl.dll")]
+  public class AuthRetrieveTest
   {
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void AuthRetrieveTest()
+    [TestMethod]    
+    public void AuthRetrieveDefaultTest()
     {
-      string shopperid = "871984";
-      int _requestType = 533;
+      const string shopperid = "871984";
+      const int requestType = 533;
 
-      AuthRetrieveRequestData request = new AuthRetrieveRequestData(shopperid
+      var request = new AuthRetrieveRequestData(shopperid
         , string.Empty
         , string.Empty
         , string.Empty
         , 0
         , "GDCARTNET-G1DWCARTWEB001"
         , "WRSzDbPuVNmvDhadLPojnSPTJMFNSfXH");
-      AuthRetrieveResponseData response = (AuthRetrieveResponseData)Engine.Engine.ProcessRequest(request, _requestType);
+      var response = (AuthRetrieveResponseData)Engine.Engine.ProcessRequest(request, requestType);
       /* Sample artifact call
     https://cart.test.godaddy-com.ide/sso/redirectlogin.aspx?artifact=wbcaaNQKYaJCcdVzwNxCoLnZnNAeBTnj&transferCart=true&shopper_id_old=75866&page=Basket
        * */
@@ -41,6 +38,5 @@ namespace Atlantis.Framework.AuthRetrieve.Test
       Debug.WriteLine(response.ToXML());
       Assert.IsTrue(response.IsSuccess);
     }
-
   }
 }

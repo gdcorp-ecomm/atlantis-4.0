@@ -73,7 +73,6 @@
   <ItemGroup>
     <Compile Include="AuthRetrieveRequestData.cs" />
     <Compile Include="AuthRetrieveResponseData.cs" />
-    <Compile Include="AuthRetrievalErrors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -60,8 +60,8 @@ namespace Atlantis.Framework.Interface
 
     public virtual string ToXML()
     {
-      StringBuilder sbRequest = new StringBuilder();
-      XmlTextWriter xtwRequest = new XmlTextWriter(new StringWriter(sbRequest));
+      var sbRequest = new StringBuilder();
+      var xtwRequest = new XmlTextWriter(new StringWriter(sbRequest));
 
       xtwRequest.WriteStartElement("INFO");
       xtwRequest.WriteAttributeString("ShopperID", _shopperID);
@@ -76,21 +76,20 @@ namespace Atlantis.Framework.Interface
 
     protected string BuildHashFromStrings(params string[] values)
     {
-      if (values == null)
+      var hashedValue = string.Empty;
+      if (values != null)
       {
-        return string.Empty;
-      }
+        var keyToHash = string.Join("|", values);
 
-      var keyToHash = string.Join("|", values);
-
-      using (MD5 md5 = new MD5CryptoServiceProvider())
-      {
-        md5.Initialize();
-        var stringBytes = ASCIIEncoding.ASCII.GetBytes(keyToHash);
-        var md5Bytes = md5.ComputeHash(stringBytes);
-        var hashedValue = BitConverter.ToString(md5Bytes, 0);
-        return hashedValue.Replace("-", string.Empty);
+        using (MD5 md5 = new MD5CryptoServiceProvider())
+        {
+          md5.Initialize();
+          var stringBytes = ASCIIEncoding.ASCII.GetBytes(keyToHash);
+          var md5Bytes = md5.ComputeHash(stringBytes);
+          hashedValue = BitConverter.ToString(md5Bytes, 0);
+        }
       }
+      return hashedValue;
     }
   }
 }

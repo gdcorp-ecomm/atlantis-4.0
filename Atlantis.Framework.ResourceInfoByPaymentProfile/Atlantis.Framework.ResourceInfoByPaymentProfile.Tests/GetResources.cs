@@ -29,6 +29,8 @@ namespace Atlantis.Framework.ResourceInfoByPaymentProfile.Tests
       //request.ReturnAll = 1;
       //request.RowsPerPage = 400;
 
+      //request.CheckProfileResourceCountOnly = true; // skips processing row data
+
       
       ResourceInfoByPaymentProfileResponseData response = (ResourceInfoByPaymentProfileResponseData)Engine.Engine.ProcessRequest(request, 643);
       
@@ -37,7 +39,7 @@ namespace Atlantis.Framework.ResourceInfoByPaymentProfile.Tests
       int totalPages = response.TotalPages;
       int totalRecords = response.TotalRecords;
 
-      string xml = response.ToXML();
+      //string xml = response.ToXML();
 
       Assert.IsTrue(response.IsSuccess);
     }

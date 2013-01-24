@@ -19,13 +19,12 @@ namespace Atlantis.Framework.ResourceInfoByPaymentProfile.Impl
       IResponseData oResponseData = null;
       try
       {
-        int numberOfRecords = 0;
-        int numberOfPages = 0;
+        int numberOfRecords = 0, numberOfPages = 0;
         List<ResourceInfo> resourceList = new List<ResourceInfo>(10);
 
         ResourceInfoByPaymentProfileRequestData request = oRequestData as ResourceInfoByPaymentProfileRequestData;
 
-        bool returnAll = request != null && request.ReturnAll == 1;
+        bool returnAll = request.ReturnAll == 1;
 
         int iResourceId = -1,
             iNameSpace = -1,
@@ -86,6 +85,11 @@ namespace Atlantis.Framework.ResourceInfoByPaymentProfile.Impl
                 reader.NextResult();
               }
 
+              if (request.CheckProfileResourceCountOnly)
+              {
+                reader.NextResult();
+              }
+
               while (reader.Read())
               {
                 int workId = -1, recordToKeep = -1;
@@ -129,13 +133,18 @@ namespace Atlantis.Framework.ResourceInfoByPaymentProfile.Impl
                 }
                 columnPositionChecked = true;
 
+
                 int resourceId = !reader.IsDBNull(iResourceId) ? reader.GetInt32(iResourceId) : -1;
                 string nameSpace = !reader.IsDBNull(iNameSpace) ? reader.GetString(iNameSpace) : string.Empty;
                 int profileId = !reader.IsDBNull(iProfileId) ? reader.GetInt32(iProfileId) : -1;
-                string productDescription = !reader.IsDBNull(iProductDescription) ? reader.GetString(iProductDescription) : string.Empty;
+                string productDescription = !reader.IsDBNull(iProductDescription)
+                                              ? reader.GetString(iProductDescription)
+                                              : string.Empty;
 
                 string info = !reader.IsDBNull(iInfo) ? reader.GetString(iInfo) : string.Empty;
-                DateTime billingDate = !reader.IsDBNull(iBillingDate) ? reader.GetDateTime(iBillingDate) : DateTime.MinValue;
+                DateTime billingDate = !reader.IsDBNull(iBillingDate)
+                                         ? reader.GetDateTime(iBillingDate)
+                                         : DateTime.MinValue;
                 string orderId = !reader.IsDBNull(iOrderId) ? reader.GetString(iOrderId) : string.Empty;
                 string renewalSku = !reader.IsDBNull(iRenewalSku) ? reader.GetString(iRenewalSku) : string.Empty;
 
@@ -145,15 +154,25 @@ namespace Atlantis.Framework.ResourceInfoByPaymentProfile.Impl
                 int autoRenewFlag = reader.GetInt32(iAutoRenewFlag);
                 int allowRenewals = reader.GetInt32(iAllowRenewals);
 
-                string recurringPayment = !reader.IsDBNull(iRecurringPayment) ? reader.GetString(iRecurringPayment) : string.Empty;
+                string recurringPayment = !reader.IsDBNull(iRecurringPayment)
+                                            ? reader.GetString(iRecurringPayment)
+                                            : string.Empty;
                 int numberOfPeriods = !reader.IsDBNull(iNumberOfPeriods) ? reader.GetInt32(iNumberOfPeriods) : 0;
-                int renewalPfid = !reader.IsDBNull(iRenewalPfid) ? Convert.ToInt32(reader.GetDecimal(iRenewalPfid)) : -1;
+                int renewalPfid = !reader.IsDBNull(iRenewalPfid)
+                                    ? Convert.ToInt32(reader.GetDecimal(iRenewalPfid))
+                                    : -1;
                 int productTypeId = !reader.IsDBNull(iProductTypeId) ? reader.GetInt32(iProductTypeId) : -1;
                 int isPastDue = reader.GetInt32(iIsPastDue);
 
-                DateTime usageSDate = !reader.IsDBNull(iUsageSDate) ? reader.GetDateTime(iUsageSDate) : DateTime.MinValue;
-                DateTime usageEDate = !reader.IsDBNull(iUsageEDate) ? reader.GetDateTime(iUsageEDate) : DateTime.MinValue;
-                string externalResourceId = !reader.IsDBNull(iExternalResourceId) ? reader.GetString(iExternalResourceId) : string.Empty;
+                DateTime usageSDate = !reader.IsDBNull(iUsageSDate)
+                                        ? reader.GetDateTime(iUsageSDate)
+                                        : DateTime.MinValue;
+                DateTime usageEDate = !reader.IsDBNull(iUsageEDate)
+                                        ? reader.GetDateTime(iUsageEDate)
+                                        : DateTime.MinValue;
+                string externalResourceId = !reader.IsDBNull(iExternalResourceId)
+                                              ? reader.GetString(iExternalResourceId)
+                                              : string.Empty;
                 int purchasedDuration = reader.GetInt32(iPurchasedDuration);
                 int isPrivacyPlusDomain = reader.GetInt32(iIsPrivacyPlusDomain);
 
@@ -167,6 +186,7 @@ namespace Atlantis.Framework.ResourceInfoByPaymentProfile.Impl
                                                              isPrivacyPlusDomain);
 
                 resourceList.Add(resourceInfo);
+
               }
             }
           }

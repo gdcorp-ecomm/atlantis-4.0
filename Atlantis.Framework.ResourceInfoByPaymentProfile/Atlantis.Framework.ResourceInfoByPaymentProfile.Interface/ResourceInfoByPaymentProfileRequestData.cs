@@ -17,7 +17,8 @@ namespace Atlantis.Framework.ResourceInfoByPaymentProfile.Interface
     public string InfoFilter { get; set; }
     public int BillingDateFilter { get; set; }
     public int DeptFilter { get; set; }
-    public List<string> NameSpaceFilterList { get; set; } 
+    public List<string> NameSpaceFilterList { get; set; }
+    public bool CheckProfileResourceCountOnly { get; set; }
     
     public ResourceInfoByPaymentProfileRequestData(string shopperId,
                                   string sourceUrl,
@@ -42,6 +43,7 @@ namespace Atlantis.Framework.ResourceInfoByPaymentProfile.Interface
       NameSpaceFilterList = namespaceFilterList;
 
       ReturnAll = returnAll;
+
     }
 
     #region Overrides of RequestData

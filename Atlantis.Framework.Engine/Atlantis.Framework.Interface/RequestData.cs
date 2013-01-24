@@ -81,7 +81,7 @@ namespace Atlantis.Framework.Interface
         return string.Empty;
       }
 
-      var keyToHash = string.Join("-", values);
+      var keyToHash = string.Join("|", values);
 
       using (MD5 md5 = new MD5CryptoServiceProvider())
       {

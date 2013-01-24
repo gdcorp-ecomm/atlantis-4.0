@@ -1,18 +1,18 @@
 using System;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Atlantis.Framework.Interface
 {
   public abstract class RequestData
   {
-    string _sourceURL;
+    readonly string _sourceURL;
     string _shopperID;
-    string _orderID;
-    string _pathway;
-    int _pageCount;
+    readonly string _orderID;
+    readonly string _pathway;
+    readonly int _pageCount;
     TimeSpan _requestTimeout = TimeSpan.FromSeconds(30);
 
     public RequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount)
@@ -72,7 +72,25 @@ namespace Atlantis.Framework.Interface
       xtwRequest.WriteEndElement();
 
       return sbRequest.ToString();
+    }
 
+    protected string BuildHashFromStrings(params string[] values)
+    {
+      if (values == null)
+      {
+        return string.Empty;
+      }
+
+      var keyToHash = string.Join("-", values);
+
+      using (MD5 md5 = new MD5CryptoServiceProvider())
+      {
+        md5.Initialize();
+        var stringBytes = ASCIIEncoding.ASCII.GetBytes(keyToHash);
+        var md5Bytes = md5.ComputeHash(stringBytes);
+        var hashedValue = BitConverter.ToString(md5Bytes, 0);
+        return hashedValue.Replace("-", string.Empty);
+      }
     }
   }
 }

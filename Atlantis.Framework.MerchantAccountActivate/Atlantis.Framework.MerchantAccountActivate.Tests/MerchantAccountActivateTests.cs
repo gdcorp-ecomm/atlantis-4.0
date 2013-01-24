@@ -48,6 +48,7 @@ namespace Atlantis.Framework.MerchantAccountActivate.Tests
 
 		[TestMethod]
 		[DeploymentItem("atlantis.config")]
+    [DeploymentItem("atlantis.framework.merchantaccountactivate.impl.dll")]
 		public void MerchantAccountActivateTest()
 		{
 			int merchantAccountId = 682;

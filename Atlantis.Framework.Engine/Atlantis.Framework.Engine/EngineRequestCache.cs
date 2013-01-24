@@ -72,6 +72,11 @@ namespace Atlantis.Framework.Engine
         }
 
         result = (T)loadedAssembly.CreateInstance(configItem.ProgID);
+        if (result == null)
+        {
+          string message = string.Concat("Class '", configItem.ProgID, "' not found in assembly ", configItem.Assembly);
+          throw new ArgumentException(message);
+        }
 
         if (_requestLock.TryEnterWriteLock(LOCK_TIME_OUT))
         {

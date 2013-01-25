@@ -29,7 +29,8 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     GoogleIndiaDomains,
     GoogleIndiaHomePage,
     GoogleIndiaHosting,
-    GoogleIndiaSSL
+    GoogleIndiaSSL,
+    AdvertisingWSB
   }
 
   public class TrackingPixel : IWidgetModel

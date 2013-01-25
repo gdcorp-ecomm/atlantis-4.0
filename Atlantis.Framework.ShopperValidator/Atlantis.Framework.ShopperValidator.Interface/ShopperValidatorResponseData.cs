@@ -1,20 +1,30 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.RuleEngine.Results;
 using Atlantis.Framework.ShopperValidator.Interface.ShopperValidation;
 
 namespace Atlantis.Framework.ShopperValidator.Interface
 {
   public class ShopperValidatorResponseData: IResponseData
   {
-    private AtlantisException _aex;
+    private readonly AtlantisException _aex;
     public ShopperToValidate ValidatedShopper;
+    public IModelResult ValidatedModel;
 
     public bool IsSuccess
     {
       get;
       private set;
+    }
+
+    public ShopperValidatorResponseData(IRuleEngineResult engineResults)
+    {
+      var modelResults = engineResults.ValidationResults;
+      ValidatedModel = modelResults.FirstOrDefault(m => m.ModelId == ModelConstants.MODEL_ID_SHOPPERVALID);
+      IsSuccess = engineResults.Status == RuleEngineResultStatus.Valid;
     }
 
     public ShopperValidatorResponseData(ShopperToValidate validatedShopper)
@@ -36,7 +46,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface
       {
         var writer = new StringWriter();
         var xmlSerializer = new XmlSerializer(typeof(ShopperToValidate));
-        xmlSerializer.Serialize(writer, this.ValidatedShopper);
+        xmlSerializer.Serialize(writer, ValidatedShopper);
         xmlValue = writer.ToString();
       }
       catch (Exception) { }

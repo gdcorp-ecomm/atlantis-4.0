@@ -50,7 +50,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
 
     #region instance varaibles
 
-    private const string LOGICAL_REG_EX = @"(\x29|\x28|>=|<=|!=|==|<|>|AND|OR|NOT|ISNULLOREMPTY|XOR|\x2b|\x2d|\x2a|\x2f|@REGEX|@MINLENGTH|@MAXLENGTH)";
+    private const string LOGICAL_REG_EX = @"(\x29|\x28|>=|<=|!=|==|<|>|AND|OR|NOT|ISNULLOREMPTY|XOR|\x2b|\x2d|\x2a|\x2f|@REGEX|@MINLENGTH|@MAXLENGTH|@SUBSTRING)";
     protected double Result = 0;
     protected List<Symbol> InfixSymbol = new List<Symbol>();
     protected List<Symbol> PostfixSymbol = new List<Symbol>();
@@ -263,6 +263,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
           case "@REGEX":
           case "@MINLENGTH":
           case "@MAXLENGTH":
+          case "@SUBSTRING":
             result = true;
             break;
         }
@@ -359,6 +360,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         case "@REGEX":
         case "@MINLENGTH":
         case "@MAXLENGTH":
+        case "@SUBSTRING":
           result = 40;
           break;
         case "*":
@@ -564,6 +566,11 @@ namespace Atlantis.Framework.RuleEngine.Evidence
           op2 = (Symbol)operandStack.Pop(); //this operation requires two parameters
           op1 = (Symbol)operandStack.Pop();
           operandResult = EvaluateMaxLength(op1, op2);
+          break;
+        case "@SUBSTRING":
+          op2 = (Symbol)operandStack.Pop(); //this operation requires two parameters
+          op1 = (Symbol)operandStack.Pop();
+          operandResult = EvaluateSubstring(op1, op2);
           break;
         default:
           throw new Exception(String.Format("Invalid operator: {0} of type {1}", postFix.Name, postFix.SymbolType));
@@ -1282,7 +1289,35 @@ namespace Atlantis.Framework.RuleEngine.Evidence
         replacement = op3;
       }
 
-      Debug.WriteLine("ExpressionEvaluator {0} @MINLENGTH {1} = {2}", input, maxLength, replacement);
+      Debug.WriteLine("ExpressionEvaluator {0} @MAXLENGTH {1} = {2}", input, maxLength, replacement);
+
+      op3.Value = new Naked(replacement, typeof(bool));
+      return op3;
+    }
+
+    private static Symbol EvaluateSubstring(Symbol op1, Symbol op2)
+    {
+      var op3 = new Symbol { SymbolType = Type.Value };
+
+      string candidate = null;
+      string baseTester = null;
+
+      object replacement;
+      try
+      {
+        candidate = Convert.ToString(op1.Value.Value);
+        baseTester = Convert.ToString(op2.Value.Value);
+
+        replacement = baseTester.Contains(candidate);
+      }
+      catch
+      {
+        op3.SymbolType = Type.Invalid;
+        op3.Value = null;
+        replacement = op3;
+      }
+
+      Debug.WriteLine("ExpressionEvaluator {0} @SUBSTRING {1} = {2}", candidate, baseTester, replacement);
 
       op3.Value = new Naked(replacement, typeof(bool));
       return op3;

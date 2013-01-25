@@ -1,7 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Xml;
+using Atlantis.Framework.Auth.Interface;
+using Atlantis.Framework.AuthValidatePassword.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.RuleEngine.Results;
+using Atlantis.Framework.SearchShoppers.Interface;
 using Atlantis.Framework.ShopperValidator.Interface;
+using Atlantis.Framework.ShopperValidator.Interface.RuleConstants;
 using Atlantis.Framework.ShopperValidator.Interface.ShopperValidation;
 using Atlantis.Framework.ShopperValidator.Interface.ValidationRules;
 using Atlantis.Framework.ShopperValidator.Interface.Validator;
@@ -10,6 +19,7 @@ namespace Atlantis.Framework.ShopperValidator.Impl
 {
   public class ShopperValidatorRequest : IRequest
   {
+    private IRuleEngineResult _engineResults;
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
@@ -19,14 +29,14 @@ namespace Atlantis.Framework.ShopperValidator.Impl
       {
         var request = (ShopperValidatorRequestData)requestData;
 
-        if (request.ShopperToValidate == null)
+        if (request.ShopperToValidate == null && request.ShopperBaseModel == null)
         {
-          throw new AtlantisException(requestData, "ShopperValidator::RequestHandler", "ShopperToValidate cannot be null", "--input data--");
+          throw new AtlantisException(requestData, "ShopperValidator::RequestHandler", "Both ShopperToValidate and ShopperBaseModel cannot be null", "--input data--");
         }
 
         ValidateShopper(request);
-        
-        responseData = new ShopperValidatorResponseData(request.ShopperToValidate);
+
+        responseData = request.ShopperBaseModel != null ? new ShopperValidatorResponseData(_engineResults) : new ShopperValidatorResponseData(request.ShopperToValidate);
       }
       catch (AtlantisException aex)
       {
@@ -35,7 +45,7 @@ namespace Atlantis.Framework.ShopperValidator.Impl
       catch (Exception ex)
       {
         string message = ex.Message + Environment.NewLine + ex.StackTrace;
-        AtlantisException aex = new AtlantisException(requestData, "ShopperValidator::RequestHandler", message, string.Empty);
+        var aex = new AtlantisException(requestData, "ShopperValidator::RequestHandler", message, string.Empty);
         responseData = new ShopperValidatorResponseData(aex);
       }
 
@@ -46,78 +56,255 @@ namespace Atlantis.Framework.ShopperValidator.Impl
 
     public void ValidateShopper(ShopperValidatorRequestData requestData)
     {
-      ShopperToValidate shopperToValidate = requestData.ShopperToValidate;
+      if (requestData.ShopperBaseModel != null)
+      {
+        ValidateShopperWithRuleEngine(requestData);
+      }
+      else
+      {
+        ShopperToValidate shopperToValidate = requestData.ShopperToValidate;
 
-      #region Create Rules
-      #region Name and Birthday Rules
-      if (shopperToValidate.FirstName.Value != null)
-        shopperToValidate.FirstName.RuleContainer = new FirstNameRule(shopperToValidate.FirstName.Value, isRequired: shopperToValidate.FirstName.IsRequired);
-      if (shopperToValidate.LastName.Value != null)
-        shopperToValidate.LastName.RuleContainer = new LastNameRule(shopperToValidate.LastName.Value, isRequired: shopperToValidate.LastName.IsRequired);
-      if (shopperToValidate.BirthDay.Value != null)
-        shopperToValidate.BirthDay.RuleContainer = new BirthDayRule(shopperToValidate.BirthMonth.Value, shopperToValidate.BirthDay.Value,
-          monthIsRequired: shopperToValidate.BirthMonth.IsRequired, dayIsRequired: shopperToValidate.BirthDay.IsRequired);
-      if (shopperToValidate.BirthMonth.Value != null)
-        shopperToValidate.BirthMonth.RuleContainer = shopperToValidate.BirthDay.RuleContainer;
-      #endregion
+        #region Create Rules
+        #region Name and Birthday Rules
+        if (shopperToValidate.FirstName.Value != null)
+          shopperToValidate.FirstName.RuleContainer = new FirstNameRule(shopperToValidate.FirstName.Value, isRequired: shopperToValidate.FirstName.IsRequired);
+        if (shopperToValidate.LastName.Value != null)
+          shopperToValidate.LastName.RuleContainer = new LastNameRule(shopperToValidate.LastName.Value, isRequired: shopperToValidate.LastName.IsRequired);
+        if (shopperToValidate.BirthDay.Value != null)
+          shopperToValidate.BirthDay.RuleContainer = new BirthDayRule(shopperToValidate.BirthMonth.Value, shopperToValidate.BirthDay.Value,
+            monthIsRequired: shopperToValidate.BirthMonth.IsRequired, dayIsRequired: shopperToValidate.BirthDay.IsRequired);
+        if (shopperToValidate.BirthMonth.Value != null)
+          shopperToValidate.BirthMonth.RuleContainer = shopperToValidate.BirthDay.RuleContainer;
+        #endregion
 
-      #region Address Rules
-      if (shopperToValidate.Address1.Value != null)
-        shopperToValidate.Address1.RuleContainer = new Address1Rule(shopperToValidate.Address1.Value, isRequired: shopperToValidate.Address1.IsRequired);
-      if (shopperToValidate.Address2.Value != null)
-        shopperToValidate.Address2.RuleContainer = new Address2Rule(shopperToValidate.Address2.Value, isRequired: shopperToValidate.Address2.IsRequired);
-      if (shopperToValidate.Email.Value != null)
-        shopperToValidate.Email.RuleContainer = new EmailRule(shopperToValidate.Email.Value, isRequired: shopperToValidate.Email.IsRequired);
-      if (shopperToValidate.City.Value != null)
-        shopperToValidate.City.RuleContainer = new CityRule(shopperToValidate.City.Value, isRequired: shopperToValidate.City.IsRequired);
-      if (shopperToValidate.State.Value != null)
-        shopperToValidate.State.RuleContainer = new StateRule(shopperToValidate.State.Value, isRequired: shopperToValidate.State.IsRequired);
-      if (shopperToValidate.Zip.Value != null)
-        shopperToValidate.Zip.RuleContainer = new ZipRule(shopperToValidate.Zip.Value, shopperToValidate.Country.Value, shopperToValidate.State.Value, isRequired: shopperToValidate.Zip.IsRequired);
-      if (shopperToValidate.Country.Value != null)
-        shopperToValidate.Country.RuleContainer = new CountryRule(shopperToValidate.Country.Value, isRequired: shopperToValidate.Country.IsRequired);
-      #endregion
+        #region Address Rules
+        if (shopperToValidate.Address1.Value != null)
+          shopperToValidate.Address1.RuleContainer = new Address1Rule(shopperToValidate.Address1.Value, isRequired: shopperToValidate.Address1.IsRequired);
+        if (shopperToValidate.Address2.Value != null)
+          shopperToValidate.Address2.RuleContainer = new Address2Rule(shopperToValidate.Address2.Value, isRequired: shopperToValidate.Address2.IsRequired);
+        if (shopperToValidate.Email.Value != null)
+          shopperToValidate.Email.RuleContainer = new EmailRule(shopperToValidate.Email.Value, isRequired: shopperToValidate.Email.IsRequired);
+        if (shopperToValidate.City.Value != null)
+          shopperToValidate.City.RuleContainer = new CityRule(shopperToValidate.City.Value, isRequired: shopperToValidate.City.IsRequired);
+        if (shopperToValidate.State.Value != null)
+          shopperToValidate.State.RuleContainer = new StateRule(shopperToValidate.State.Value, isRequired: shopperToValidate.State.IsRequired);
+        if (shopperToValidate.Zip.Value != null)
+          shopperToValidate.Zip.RuleContainer = new ZipRule(shopperToValidate.Zip.Value, shopperToValidate.Country.Value, shopperToValidate.State.Value, isRequired: shopperToValidate.Zip.IsRequired);
+        if (shopperToValidate.Country.Value != null)
+          shopperToValidate.Country.RuleContainer = new CountryRule(shopperToValidate.Country.Value, isRequired: shopperToValidate.Country.IsRequired);
+        #endregion
 
-      #region Phone Rules
-      if (shopperToValidate.PhoneWork.Value != null)
-        shopperToValidate.PhoneWork.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneWork.Value, isRequired: shopperToValidate.PhoneWork.IsRequired, countryCode: shopperToValidate.Country.Value);
-      if (shopperToValidate.PhoneWorkExtension.Value != null)
-        shopperToValidate.PhoneWorkExtension.RuleContainer = new PhoneExtRule(shopperToValidate.PhoneWorkExtension.Value, isRequired: shopperToValidate.PhoneWorkExtension.IsRequired);
-      if (shopperToValidate.PhoneHome.Value != null)
-        shopperToValidate.PhoneHome.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneHome.Value, isRequired: shopperToValidate.PhoneHome.IsRequired, countryCode: shopperToValidate.Country.Value);
-      if (shopperToValidate.PhoneMobile.Value != null)
-        shopperToValidate.PhoneMobile.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneMobile.Value, isRequired: shopperToValidate.PhoneMobile.IsRequired, countryCode: shopperToValidate.Country.Value);
-      if (shopperToValidate.PhoneMobileSurvey.Value != null)
-        shopperToValidate.PhoneMobileSurvey.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneMobileSurvey.Value, isRequired: shopperToValidate.PhoneMobileSurvey.IsRequired, countryCode: shopperToValidate.Country.Value);
-      #endregion
+        #region Phone Rules
+        if (shopperToValidate.PhoneWork.Value != null)
+          shopperToValidate.PhoneWork.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneWork.Value, shopperToValidate.PhoneWork.IsRequired, shopperToValidate.Country.Value);
+        if (shopperToValidate.PhoneWorkExtension.Value != null)
+          shopperToValidate.PhoneWorkExtension.RuleContainer = new PhoneExtRule(shopperToValidate.PhoneWorkExtension.Value, isRequired: shopperToValidate.PhoneWorkExtension.IsRequired);
+        if (shopperToValidate.PhoneHome.Value != null)
+          shopperToValidate.PhoneHome.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneHome.Value, shopperToValidate.PhoneHome.IsRequired, shopperToValidate.Country.Value);
+        if (shopperToValidate.PhoneMobile.Value != null)
+          shopperToValidate.PhoneMobile.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneMobile.Value, shopperToValidate.PhoneMobile.IsRequired, shopperToValidate.Country.Value);
+        if (shopperToValidate.PhoneMobileSurvey.Value != null)
+          shopperToValidate.PhoneMobileSurvey.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneMobileSurvey.Value, shopperToValidate.PhoneMobileSurvey.IsRequired, shopperToValidate.Country.Value);
+        #endregion
 
-      #region Password Rules
-      if (shopperToValidate.Username.Value != null)
-        shopperToValidate.Username.RuleContainer = new UsernameRule(shopperToValidate.Username.Value, requestData.SourceURL,
-          requestData.Pathway, requestData.PageCount, requestData.IsNewShopper, isRequired: shopperToValidate.Username.IsRequired);
-      if (shopperToValidate.Password.Value != null)
-        shopperToValidate.Password.RuleContainer = new PasswordRule(shopperToValidate.Password.Value, requestData.IsNewShopper,
-          requestData.SourceURL, requestData.Pathway, requestData.PageCount, shopperToValidate.Username.Value, shopperToValidate.PasswordHint.Value,
-          isRequired: shopperToValidate.Password.IsRequired);
-      if (shopperToValidate.PasswordConfirm.Value != null)
-        shopperToValidate.PasswordConfirm.RuleContainer = new PasswordConfirmRule(shopperToValidate.PasswordConfirm.Value, shopperToValidate.Password.Value);
-      if (shopperToValidate.PasswordHint.Value != null)
-        shopperToValidate.PasswordHint.RuleContainer = new PasswordHintRule(shopperToValidate.PasswordHint.Value, isRequired: shopperToValidate.PasswordHint.IsRequired);
-      if (shopperToValidate.CallInPin.Value != null)
-        shopperToValidate.CallInPin.RuleContainer = new CallInPinRule(shopperToValidate.CallInPin.Value, isRequired: shopperToValidate.CallInPin.IsRequired);
-      #endregion
+        #region Password Rules
+        if (shopperToValidate.Username.Value != null)
+          shopperToValidate.Username.RuleContainer = new UsernameRule(shopperToValidate.Username.Value, requestData.SourceURL,
+            requestData.Pathway, requestData.PageCount, requestData.IsNewShopper, isRequired: shopperToValidate.Username.IsRequired);
+        if (shopperToValidate.Password.Value != null)
+          shopperToValidate.Password.RuleContainer = new PasswordRule(shopperToValidate.Password.Value, requestData.IsNewShopper,
+            requestData.SourceURL, requestData.Pathway, requestData.PageCount, shopperToValidate.Username.Value, shopperToValidate.PasswordHint.Value,
+            isRequired: shopperToValidate.Password.IsRequired);
+        if (shopperToValidate.PasswordConfirm.Value != null)
+          shopperToValidate.PasswordConfirm.RuleContainer = new PasswordConfirmRule(shopperToValidate.PasswordConfirm.Value, shopperToValidate.Password.Value);
+        if (shopperToValidate.PasswordHint.Value != null)
+          shopperToValidate.PasswordHint.RuleContainer = new PasswordHintRule(shopperToValidate.PasswordHint.Value, isRequired: shopperToValidate.PasswordHint.IsRequired);
+        if (shopperToValidate.CallInPin.Value != null)
+          shopperToValidate.CallInPin.RuleContainer = new CallInPinRule(shopperToValidate.CallInPin.Value, isRequired: shopperToValidate.CallInPin.IsRequired);
+        #endregion
 
-      HashSet<RuleContainer> shopperRules = CreateShopperRuleContainerList(shopperToValidate);
-      #endregion
+        IEnumerable<RuleContainer> shopperRules = CreateShopperRuleContainerList(shopperToValidate);
+        #endregion
 
-      ShopperRuleValidator shopperValidator = new ShopperRuleValidator(shopperRules);
-      shopperValidator.ValidateAllRules();
+        var shopperValidator = new ShopperRuleValidator(shopperRules);
+        shopperValidator.ValidateAllRules();
+      }
     }
-    private HashSet<RuleContainer> CreateShopperRuleContainerList(ShopperToValidate shopperToValidate)
-    {
-      HashSet<RuleContainer> shopperRules = new HashSet<RuleContainer>();
 
-      foreach (ShopperProperty shopperProperty in shopperToValidate.AllShopperProperties)
+    private void ValidateShopperWithRuleEngine(ShopperValidatorRequestData requestData)
+    {
+      bool success = false;
+      var slimShopperRulesDoc = new XmlDocument();
+      foreach(string resource in Assembly.GetExecutingAssembly().GetManifestResourceNames())
+      {
+        if(resource.EndsWith("SlimShopperValidation.xml"))
+        {
+          using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
+          {
+            try
+            {
+              if (stream != null)
+              {
+                slimShopperRulesDoc.Load(stream);
+                success = true;
+              }
+            }
+            catch (XmlException)
+            {
+              success = false;
+            }
+          }
+          break;
+        }
+      }
+
+      if(!success)
+      {
+        throw new AtlantisException(requestData, "ShopperValidator::ValidateShopperWithRuleEngine", "Error reading SlimShopperValidation.xml", "--input data--");
+      }
+      
+      var model = requestData.ShopperBaseModel;
+      _engineResults = RuleEngine.RuleEngine.EvaluateRules(model, slimShopperRulesDoc);
+
+      var validatedModel = _engineResults.ValidationResults.FirstOrDefault(m => m.ModelId == ModelConstants.MODEL_ID_SHOPPERVALID);
+
+      if (!FactIsInvalid(validatedModel, ModelConstants.FACT_PASSWORD, ModelConstants.FACT_PASSWORD2, ModelConstants.FACT_PASS_MAX_LENGTH, ModelConstants.FACT_PASS_MIN_LENGTH))
+      {
+        DoAuthValidatePasswordRequest(requestData);
+      }
+      if (!FactIsInvalid(validatedModel, ModelConstants.FACT_USERNAME, ModelConstants.FACT_USERNAME_MAX_LENGTH))
+      {
+        DoValidateUsernameSearch(requestData);
+      }
+      if (!FactIsInvalid(validatedModel, ModelConstants.FACT_PIN, ModelConstants.FACT_PIN_MAX_LENGTH, ModelConstants.FACT_PIN_MIN_LENGTH))
+      {
+        DoValidatePinAllSameNumbers(requestData);
+      }
+    }
+
+    private bool FactIsInvalid(IModelResult validatedModel, params string[] factKeys)
+    {
+      return validatedModel.Facts.Where(fact => factKeys.Contains(fact.FactKey)).Any(fact => fact.Status == ValidationResultStatus.InValid);
+    }
+
+    private void DoValidatePinAllSameNumbers(ShopperValidatorRequestData requestData)
+    {
+      string callInPin = requestData.ShopperBaseModel[ModelConstants.MODEL_ID_SHOPPERVALID][ModelConstants.FACT_PIN];
+      int callInPinNumeric = Convert.ToInt16(callInPin);
+      string baseUniformNumber = "";
+      for (int i = 0; i < callInPin.Length; i++)
+      {
+        baseUniformNumber += "1";
+      }
+      if (callInPinNumeric == 0 || callInPinNumeric % Convert.ToInt16(baseUniformNumber) == 0)
+      {
+        foreach (var model in _engineResults.ValidationResults)
+        {
+          if (model.ModelId == ModelConstants.MODEL_ID_SHOPPERVALID)
+          {
+            foreach (var fact in model.Facts)
+            {
+              if (fact.FactKey == ModelConstants.FACT_PIN)
+              {
+                fact.Status = ValidationResultStatus.InValid;
+                fact.Messages.Add("PIN must contain more than one digit");
+                model.ContainsInvalids = true;
+                break;
+              }
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    private void DoValidateUsernameSearch(ShopperValidatorRequestData requestData)
+    {
+      string username = requestData.ShopperBaseModel[ModelConstants.MODEL_ID_SHOPPERVALID][ModelConstants.FACT_USERNAME];
+
+      var loginRequest = new SearchShoppersRequestData(username, requestData.SourceURL, string.Empty, requestData.Pathway, requestData.PageCount, "ShopperValidator::UsernameRule");
+      loginRequest.AddSearchField("loginName", username);
+      loginRequest.AddReturnField("loginName");
+
+      var loginResponse = (SearchShoppersResponseData)Engine.Engine.ProcessRequest(loginRequest, EngineRequestValues.SearchShoppers);
+      if (loginResponse.ShopperCount > 0)
+      {
+        foreach (var model in _engineResults.ValidationResults)
+        {
+          if (model.ModelId == ModelConstants.MODEL_ID_SHOPPERVALID)
+          {
+            foreach (var fact in model.Facts)
+            {
+              if (fact.FactKey == ModelConstants.FACT_USERNAME)
+              {
+                fact.Status = ValidationResultStatus.InValid;
+                fact.Messages.Add("Username already exists");
+                model.ContainsInvalids = true;
+                break;
+              }
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    private void DoAuthValidatePasswordRequest(ShopperValidatorRequestData requestData)
+    {
+      //we do NOT want to pass a shopper/username into this method b/c  it's a new shopper. 
+      //Ecomm's WS will fail b/c it can't find the _username b/c it hasn't been inserted yet..
+      string temporaryUserName = string.Empty;
+
+      var request = new AuthValidatePasswordRequestData(temporaryUserName, requestData.SourceURL, string.Empty, requestData.Pathway, requestData.PageCount, requestData.ShopperBaseModel[ModelConstants.MODEL_ID_SHOPPERVALID][ModelConstants.FACT_PASSWORD]);
+      var response = Engine.Engine.ProcessRequest(request, EngineRequestValues.AuthValidatePassword) as AuthValidatePasswordResponseData;
+
+      if (response != null && response.StatusCode != TwoFactorWebserviceResponseCodes.Success)
+      {
+        string passwordFailedMessage;
+        switch (response.StatusCode)
+        {
+          case AuthPasswordCodes.PasswordFailBlacklisted:
+            passwordFailedMessage = "Password cannot include a common word or phrase.";
+            break;
+          case AuthPasswordCodes.PasswordFailLastFive:
+            passwordFailedMessage = "Cannot reuse the last 5 passwords.";
+            break;
+          case AuthPasswordCodes.PasswordFailMatchesHint:
+            passwordFailedMessage = "Password cannot be equal to Password Hint.";
+            break;
+          case AuthPasswordCodes.PasswordFailThirtyDay:
+            passwordFailedMessage = "Cannot use the same password within 30 days.";
+            break;
+          default:
+            passwordFailedMessage = string.Concat("Password is invalid. Status Code: ", Convert.ToString(response.StatusCode));
+            break;
+        }
+
+        foreach(var model in _engineResults.ValidationResults)
+        {
+          if(model.ModelId == ModelConstants.MODEL_ID_SHOPPERVALID)
+          {
+            foreach(var fact in model.Facts)
+            {
+              if(fact.FactKey == ModelConstants.FACT_PASSWORD)
+              {
+                fact.Status = ValidationResultStatus.InValid;
+                fact.Messages.Add(passwordFailedMessage);
+                model.ContainsInvalids = true;
+                break;
+              }
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    private IEnumerable<RuleContainer> CreateShopperRuleContainerList(ShopperToValidate shopperToValidate)
+    {
+      var shopperRules = new HashSet<RuleContainer>();
+
+      foreach (var shopperProperty in shopperToValidate.AllShopperProperties)
       {
         if (shopperProperty.HasValidationRules)
         {

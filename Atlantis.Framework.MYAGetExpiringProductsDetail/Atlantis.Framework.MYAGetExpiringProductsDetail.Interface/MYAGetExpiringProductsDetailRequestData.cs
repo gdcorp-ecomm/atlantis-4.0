@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using Atlantis.Framework.Interface;
@@ -7,13 +8,25 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Interface
 {
   public class MYAGetExpiringProductsDetailRequestData : RequestData
   {
-    private int _days = 90;
-    public int Days
+    public string ProductTypeListString
     {
       get
       {
-        return _days;
+        string productTypeList = string.Empty;
+
+        if (ProductTypeHashSet.Count > 0)
+        {
+          productTypeList = string.Join(",", ProductTypeHashSet);
+        }
+
+        return productTypeList;
       }
+    }
+
+    private int _days = 90;
+    public int Days
+    {
+      get { return _days; }
       set
       {
         if (value > 0)
@@ -26,10 +39,7 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Interface
     private int _pagenumber = 1;
     public int PageNumber
     {
-      get
-      {
-        return _pagenumber;
-      }
+      get { return _pagenumber; }
       set
       {
         if (value > 0)
@@ -42,10 +52,7 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Interface
     private int _rowsperpage = 1;
     public int RowsPerPage
     {
-      get
-      {
-        return _rowsperpage;
-      }
+      get { return _rowsperpage; }
       set
       {
         if (value > 0)
@@ -56,43 +63,15 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Interface
     }
 
     private string _sortxml = "<orderBy><column sortCol='description' sortDir='ASC'/></orderBy>";
-    public string SortXML
+    public string SortXml
     {
-      get
-      {
-        return _sortxml;
-      }
-      set
-      {
-        _sortxml = value;
-      }
+      get { return _sortxml; }
+      set { _sortxml = value; }
     }
 
-    private int _returnall = 1;
-    public int ReturnAll
-    {
-      get
-      {
-        return _returnall;
-      }
-      set
-      {
-        _returnall = value;
-      }
-    }
+    public bool ReturnAll { get; set; }
 
-    private int _syncableonly = 0;
-    public int SyncableOnly
-    {
-      get
-      {
-        return _syncableonly;
-      }
-      set
-      {
-        _syncableonly = value;
-      }
-    }
+    public int SyncableOnly { get; set; }
 
     private DateTime _iscdate = DateTime.Now;
     public DateTime IscDate
@@ -107,50 +86,19 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Interface
       }
     }
 
-    private string _producttypeidlist = string.Empty;
-    public string ProductTypeIdList
+    private readonly HashSet<string> _productTypeHashSet = new HashSet<string>();
+    public HashSet<string> ProductTypeHashSet
     {
-      get
-      {
-        return _producttypeidlist;
-      }
-      set
-      {
-        _producttypeidlist = value;
-      }
+      get { return _productTypeHashSet; }
     }
 
-    public MYAGetExpiringProductsDetailRequestData(
-      string shopperID,
-      string sourceUrl,
-      string orderID,
-      string pathway,
-      int pageCount)
-      : base(shopperID, sourceUrl, orderID, pathway, pageCount)
+    public MYAGetExpiringProductsDetailRequestData(string shopperId,
+                                                   string sourceUrl,
+                                                   string orderId,
+                                                   string pathway,
+                                                   int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestTimeout = TimeSpan.FromSeconds(5);
-    }
-
-    public MYAGetExpiringProductsDetailRequestData(
-      string shopperID,
-      string sourceUrl,
-      string orderID,
-      string pathway,
-      int pageCount, 
-      int days, int pageNumber, int rowsPerPage,
-      string sortXml,
-      int returnAll, int syncableOnly, DateTime iscDate, string productTypeIdList)
-      : base(shopperID, sourceUrl, orderID, pathway, pageCount)
-    {
-      RequestTimeout = TimeSpan.FromSeconds(5);
-      Days = days;
-      PageNumber = pageNumber;
-      RowsPerPage = rowsPerPage;
-      SortXML = sortXml;
-      ReturnAll = returnAll;
-      SyncableOnly = syncableOnly;
-      IscDate = iscDate;
-      ProductTypeIdList = productTypeIdList;
     }
 
     public override string GetCacheMD5()
@@ -161,11 +109,11 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Interface
       dataBuilder.Append(ShopperID);
       dataBuilder.AppendFormat(".{0}", Days);
       dataBuilder.AppendFormat(".{0}", RowsPerPage);
-      dataBuilder.AppendFormat(".{0}", SortXML);
+      dataBuilder.AppendFormat(".{0}", SortXml);
       dataBuilder.AppendFormat(".{0}", ReturnAll);
       dataBuilder.AppendFormat(".{0}", SyncableOnly);
       dataBuilder.AppendFormat(".{0}", IscDate.ToString("MM.dd.yyyy"));
-      dataBuilder.AppendFormat(".{0}", ProductTypeIdList);
+      dataBuilder.AppendFormat(".{0}", ProductTypeListString);
 
       var data = Encoding.UTF8.GetBytes(dataBuilder.ToString());
 

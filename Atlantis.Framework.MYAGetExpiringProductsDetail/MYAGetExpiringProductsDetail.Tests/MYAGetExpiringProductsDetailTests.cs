@@ -5,27 +5,45 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace MYAGetExpiringProductsDetail.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.MYAGetExpiringProductsDetail.Impl.dll")]
   public class MYAGetExpiringProductsDetailTests
   {
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void MYAGetExpiringProductsDetail()
     {
       //returns all products for shopper
-      MYAGetExpiringProductsDetailRequestData requestData = new MYAGetExpiringProductsDetailRequestData(
-        "822497", string.Empty, string.Empty, string.Empty, 0);     
+      MYAGetExpiringProductsDetailRequestData requestData = new MYAGetExpiringProductsDetailRequestData("822497", string.Empty, string.Empty, string.Empty, 0);     
+      
       MYAGetExpiringProductsDetailResponseData response = (MYAGetExpiringProductsDetailResponseData)Engine.ProcessRequest(requestData, 194);
+      
       Assert.IsTrue(response.IsSuccess);
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void MYASpecificExpiringProductsDetail()
     {
-      MYAGetExpiringProductsDetailRequestData requestData = new MYAGetExpiringProductsDetailRequestData(
-        "822497", string.Empty, string.Empty, string.Empty, 0);
-      requestData.ProductTypeIdList = "14";
+      MYAGetExpiringProductsDetailRequestData requestData = new MYAGetExpiringProductsDetailRequestData("822497", string.Empty, string.Empty, string.Empty, 0);
+      requestData.ProductTypeHashSet.Add("14");
+
       MYAGetExpiringProductsDetailResponseData response = (MYAGetExpiringProductsDetailResponseData)Engine.ProcessRequest(requestData, 194);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    public void MYASpecificExpiringProductsDetailMoreThanFiveProductTypes()
+    {
+      MYAGetExpiringProductsDetailRequestData requestData = new MYAGetExpiringProductsDetailRequestData("822497", string.Empty, string.Empty, string.Empty, 0);
+      requestData.ProductTypeHashSet.Add("14");
+      requestData.ProductTypeHashSet.Add("15");
+      requestData.ProductTypeHashSet.Add("16");
+      requestData.ProductTypeHashSet.Add("17");
+      requestData.ProductTypeHashSet.Add("18");
+      requestData.ProductTypeHashSet.Add("20");
+
+      MYAGetExpiringProductsDetailResponseData response = (MYAGetExpiringProductsDetailResponseData)Engine.ProcessRequest(requestData, 194);
+
       Assert.IsTrue(response.IsSuccess);
     }
   }

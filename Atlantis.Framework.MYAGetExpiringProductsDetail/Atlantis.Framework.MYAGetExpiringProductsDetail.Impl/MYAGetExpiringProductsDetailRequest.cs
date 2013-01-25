@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MYAGetExpiringProductsDetail.Interface;
 using Atlantis.Framework.Nimitz;
@@ -10,52 +11,72 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Impl
 {
   public class MYAGetExpiringProductsDetailRequest : IRequest
   {
-    #region IRequest Members
+    private const string PROC_NAME = "mya_getExpiringProductsDetailGet_sp";
+    private const string SHOPPER_ID_PARAM = "shopper_id";
+    private const string DAYS_PARAM = "days";
+    private const string PAGE_NO_PARAM = "pageno";
+    private const string ROWS_PER_PAGE_PARAM = "rowsperpage";
+    private const string SORT_XML_PARAM = "sortXML";
+    private const string RETURN_ALL_FLAG_PARAM = "returnAllFlag";
+    private const string SYNCABLE_ONLY_PARAM = "syncAbleOnly";
+    private const string ISC_DATE_PARAM = "iscDate";
+    private const string TOTAL_RECORDS_PARAM = "totalrecords";
+    private const string TOTAL_PAGES_PARAM = "totalpages";
+    private const string PRODUCT_TYPE_ID_LIST = "product_typeIDList";
 
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
-      IResponseData oResponseData = null;
-      DataSet ds = null;
-      int totalRecords = 0, totalPages = 0;
-      List<RenewingProductObject> productList = new List<RenewingProductObject>();
+      IResponseData oResponseData;
+      DataSet dataSet = null;
+
       try
       {
         MYAGetExpiringProductsDetailRequestData request = (MYAGetExpiringProductsDetailRequestData)oRequestData;
 
         string connectionString = LookupConnectionString(request, oConfig);
+        int totalRecords;
+        int totalPages;
+        List<RenewingProductObject> productList;
+
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-          using (SqlCommand command = new SqlCommand(_PROCNAME, connection))
+          using (SqlCommand command = new SqlCommand(PROC_NAME, connection))
           {
             command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.Add(new SqlParameter(_SHOPPERIDPARAM, request.ShopperID));
-            command.Parameters.Add(new SqlParameter(_DAYSPARAM, request.Days));
-            command.Parameters.Add(new SqlParameter(_PAGENOPARAM, request.PageNumber));
-            command.Parameters.Add(new SqlParameter(_ROWSPERPAGEPARAM, request.RowsPerPage));
-            command.Parameters.Add(new SqlParameter(_SORTXMLPARAM, request.SortXML));
-            command.Parameters.Add(new SqlParameter(_RETURNALLFLAGPARAM, request.ReturnAll));
-            command.Parameters.Add(new SqlParameter(_SYNCABLEONLYPARAM, request.SyncableOnly));
-            command.Parameters.Add(new SqlParameter(_ISCDATEPARAM, request.IscDate));
-            command.Parameters.Add(new SqlParameter(_TOTALRECORDSPARAM, SqlDbType.Int)).Direction = ParameterDirection.Output;
-            command.Parameters.Add(new SqlParameter(_TOTALPAGESPARAM, SqlDbType.Int)).Direction = ParameterDirection.Output;
-            if (!String.IsNullOrEmpty(request.ProductTypeIdList))
+            command.Parameters.Add(new SqlParameter(SHOPPER_ID_PARAM, request.ShopperID));
+            command.Parameters.Add(new SqlParameter(DAYS_PARAM, request.Days));
+            command.Parameters.Add(new SqlParameter(PAGE_NO_PARAM, request.PageNumber));
+            command.Parameters.Add(new SqlParameter(ROWS_PER_PAGE_PARAM, request.RowsPerPage));
+            command.Parameters.Add(new SqlParameter(SORT_XML_PARAM, request.SortXml));
+            command.Parameters.Add(new SqlParameter(RETURN_ALL_FLAG_PARAM, request.ReturnAll));
+            command.Parameters.Add(new SqlParameter(SYNCABLE_ONLY_PARAM, request.SyncableOnly));
+            command.Parameters.Add(new SqlParameter(ISC_DATE_PARAM, request.IscDate));
+            if (!string.IsNullOrEmpty(request.ProductTypeListString))
             {
-              command.Parameters.Add(new SqlParameter(_PRODUCTTYPEIDLIST, request.ProductTypeIdList));
+              ProductTypeListSizeCheck(request);
+              command.Parameters.Add(new SqlParameter(PRODUCT_TYPE_ID_LIST, request.ProductTypeListString));
             }
+
+            command.Parameters.Add(new SqlParameter(TOTAL_RECORDS_PARAM, SqlDbType.Int)).Direction = ParameterDirection.Output;
+            command.Parameters.Add(new SqlParameter(TOTAL_PAGES_PARAM, SqlDbType.Int)).Direction = ParameterDirection.Output;
+
             command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
 
-            connection.Open();
-            ds = new DataSet(Guid.NewGuid().ToString());
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds);
-            totalRecords = (int)command.Parameters[_TOTALRECORDSPARAM].Value;
-            totalPages = (int)command.Parameters[_TOTALPAGESPARAM].Value;
+            
+            dataSet = new DataSet(Guid.NewGuid().ToString());
 
-            productList = GetObjectListFromDataset(ds);
+            connection.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
+            sqlDataAdapter.Fill(dataSet);
+
+            totalRecords = (int)command.Parameters[TOTAL_RECORDS_PARAM].Value;
+            totalPages = (int)command.Parameters[TOTAL_PAGES_PARAM].Value;
+
+            productList = GetObjectListFromDataset(dataSet);
           }
         }
 
-        oResponseData = new MYAGetExpiringProductsDetailResponseData(ds, productList, totalRecords, totalPages);
+        oResponseData = new MYAGetExpiringProductsDetailResponseData(dataSet, productList, totalRecords, totalPages);
       }
       catch (AtlantisException exAtlantis)
       {
@@ -63,29 +84,28 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Impl
       }
       catch (Exception ex)
       {
-        oResponseData = new MYAGetExpiringProductsDetailResponseData(ds, oRequestData, ex);
+        oResponseData = new MYAGetExpiringProductsDetailResponseData(dataSet, oRequestData, ex);
       }
 
       return oResponseData;
     }
 
-    #endregion
-
-    #region Private Methods
-
-    private const string _PROCNAME = "mya_getExpiringProductsDetailGet_sp";
-    private const string _SHOPPERIDPARAM = "shopper_id";
-    private const string _DAYSPARAM = "days";
-    private const string _PAGENOPARAM = "pageno";
-    private const string _ROWSPERPAGEPARAM = "rowsperpage";
-    private const string _SORTXMLPARAM = "sortXML";
-    private const string _RETURNALLFLAGPARAM = "returnAllFlag";
-    private const string _ALLRECORDSPARAM = "allrecords";
-    private const string _SYNCABLEONLYPARAM = "syncAbleOnly";
-    private const string _ISCDATEPARAM = "iscDate";
-    private const string _TOTALRECORDSPARAM = "totalrecords";
-    private const string _TOTALPAGESPARAM = "totalpages";
-    private const string _PRODUCTTYPEIDLIST = "product_typeIDList";
+    private void ProductTypeListSizeCheck(MYAGetExpiringProductsDetailRequestData request)
+    {
+      if (request.ProductTypeHashSet.Count > 5 && DateTime.Now.Minute == 0)
+      {
+        try
+        {
+          Engine.Engine.LogAtlantisException(new AtlantisException(request,
+                                                                   "MYAGetExpiringProductsDetailRequest.ProductTypeListSizeCheck",
+                                                                   "1",
+                                                                   "MYAGetExpiringProductsDetailRequestData.ProductTypeHashSet count was larger than 5.  If you intended to get all products, leave this HashSet empty.",
+                                                                   "ProductTypeHashSet: " + request.ProductTypeListString, 
+                                                                   IPAddress.Loopback.ToString()));
+        }
+        catch{}
+      }
+    }
 
     private string LookupConnectionString(MYAGetExpiringProductsDetailRequestData request, ConfigElement config)
     {
@@ -112,224 +132,115 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Impl
       return result;
     }
 
+    private int? ParseDataRow(object rowValue, int? defaultValue)
+    {
+      int? value;
+
+      if (rowValue is DBNull)
+      {
+        value = defaultValue;
+      }
+      else
+      {
+        value = Convert.ToInt32(rowValue);
+      }
+
+      return value;
+    }
+
+    private bool? ParseDataRow(object rowValue, bool? defaultValue)
+    {
+      bool? value = defaultValue;
+
+      if (rowValue is Int32)
+      {
+        value = Convert.ToInt32(rowValue) == 1;
+      }
+      else if (rowValue is Boolean)
+      {
+        value = Convert.ToBoolean(rowValue);
+      }
+      else if (rowValue is Byte)
+      {
+        value = Convert.ToByte(rowValue) == 1;
+      }
+
+      return value;
+    }
+
+    private string ParseDataRow(object rowValue, string defaultValue)
+    {
+      string value;
+
+      if (rowValue is DBNull)
+      {
+        value = defaultValue;
+      }
+      else
+      {
+        value = Convert.ToString(rowValue);
+      }
+
+      return value;
+    }
+
+    private DateTime? ParseDataRow(object rowValue, DateTime? defaultValue)
+    {
+      DateTime? value;
+
+      if (rowValue is DBNull)
+      {
+        value = defaultValue;
+      }
+      else
+      {
+        value = Convert.ToDateTime(rowValue);
+      }
+
+      return value;
+    }
+
     private List<RenewingProductObject> GetObjectListFromDataset(DataSet ds)
     {      
       List<RenewingProductObject> productList = new List<RenewingProductObject>();
       foreach (DataRow row in ds.Tables[0].Rows)
       {
         RenewingProductObject product = new RenewingProductObject();
-        if ((row["id"] as DBNull) == null)
-        {
-          product.Id = (int)row["id"];
-        }
-        else
-        {
-          product.Id = null;
-        }
 
-        if ((row["autoRenewFlag"] as DBNull) == null)
+        product.Id = ParseDataRow(row["id"], (int?) null);
+        product.AutoRenewFlag = ParseDataRow(row["autoRenewFlag"], false).Value;
+        product.BillingAttempt = ParseDataRow(row["billing_attempt"], (int?) null);
+        product.Description = ParseDataRow(row["description"], string.Empty);
+        product.DisplayImageFlag = ParseDataRow(row["displayimageflag"], false);
+        product.DomainID = ParseDataRow(row["domainid"], (int?) null);
+        product.CommonName = ParseDataRow(row["domainname"], string.Empty);
+        product.DontSync = ParseDataRow(row["dontsync"], (bool?) null);
+        product.AccountExpirationDate = ParseDataRow(row["expiration_date"], (DateTime?) null);
+        product.ProductTypeID = ParseDataRow(row["gdshop_product_typeID"], (int?) null);
+        product.HasAddon = ParseDataRow(row["hasaddon"], (bool?) null);
+        product.IsHostingProduct = ParseDataRow(row["isHosting"], false).Value;
+        product.IsPastDue = ParseDataRow(row["isPastDue"], false).Value;
+        product.IsRenewalPriceLocked = ParseDataRow(row["isrenewalPriceLocked"], false).Value;
+        product.Namespace = ParseDataRow(row["namespace"], string.Empty);
+        product.OriginalListPrice = ParseDataRow(row["originalListPrice"], (int?) null);
+        product.PFID = ParseDataRow(row["pf_id"], (int?) null);
+        product.RecurringPayment = ParseDataRow(row["recurring_payment"], string.Empty);
+        product.UnifiedRenewalProductId = ParseDataRow(row["unified_renewal_pf_id"], (int?) null);
+        product.BillingResourceId = ParseDataRow(row["resource_id"], (int?) null);
+        product.UnifiedProductID = ParseDataRow(row["unified_productID"], (int?) null);
+        if (ds.Tables[0].Columns.Contains("externalResourceID"))
         {
-          product.AutoRenewFlag = (int)row["autoRenewFlag"] == 0 ? false : true;
+          product.ExternalResourceId = ParseDataRow(row["externalResourceID"], string.Empty);
         }
         else
         {
-          product.AutoRenewFlag = false;
-        }
-
-        if ((row["billing_attempt"] as DBNull) == null)
-        {
-          product.BillingAttempt = (int)row["billing_attempt"];
-        }
-        else
-        {
-          product.BillingAttempt = null;
-        }
-              
-
-        if ((row["description"] as DBNull) == null)
-        {
-          product.Description = (string)row["description"];
-        }
-        else
-        {
-          product.Description = null;
-        }
-        
-        if ((row["displayimageflag"] as DBNull) == null)
-        {
-          product.DisplayImageFlag = (bool)row["displayimageflag"];
-        }
-        else
-        {
-          product.DisplayImageFlag = null;
-        }
-
-        if ((row["domainid"] as DBNull) == null)
-        {
-          product.DomainID = (int)row["domainid"];
-        }
-        else
-        {
-          product.DomainID = null;
-        }
-
-        if ((row["domainname"] as DBNull) == null)
-        {
-          product.CommonName = (string)row["domainname"];
-        }
-        else
-        {
-          product.CommonName = null;
-        }        
-
-        if ((row["dontsync"] as DBNull) == null)
-        {
-          product.DontSync = (byte)row["dontsync"] == 0 ? false : true;
-        }
-        else
-        {
-          product.DontSync = null;
-        }
-
-        if ((row["expiration_date"] as DBNull) == null)
-        {
-          product.AccountExpirationDate = (DateTime)row["expiration_date"];
-        }
-        else
-        {
-          product.AccountExpirationDate = null;
-        }
-
-        if ((row["gdshop_product_typeID"] as DBNull) == null)
-        {
-          product.ProductTypeID = (int)row["gdshop_product_typeID"];
-        }
-        else
-        {
-          product.ProductTypeID = null;
-        }
-
-        if ((row["hasaddon"] as DBNull) == null)
-        {
-          product.HasAddon = (bool)row["hasaddon"];
-        }
-        else
-        {
-          product.HasAddon = null;
-        }
-
-        if ((row["isHosting"] as DBNull) == null)
-        {
-          product.IsHostingProduct = (int)row["isHosting"] == 0 ? false : true;
-        }
-        else
-        {
-          product.IsHostingProduct = false;
-        }
-
-        if ((row["isPastDue"] as DBNull) == null)
-        {
-          product.IsPastDue = (int)row["isPastDue"] == 0 ? false : true;
-        }
-        else
-        {
-          product.IsPastDue = false;
-        }
-
-        if ((row["isrenewalPriceLocked"] as DBNull) == null)
-        {
-          product.IsRenewalPriceLocked = (byte)row["isrenewalPriceLocked"] == 0 ? false : true;
-        }
-        else
-        {
-          product.IsRenewalPriceLocked = false;
-        }
-
-        if ((row["namespace"] as DBNull) == null)
-        {
-          product.Namespace = (string)row["namespace"];
-        }
-        else
-        {
-          product.Namespace = null;
-        }
-
-        if ((row["originalListPrice"] as DBNull) == null)
-        {
-          product.OriginalListPrice = (int)row["originalListPrice"];
-        }
-        else
-        {
-          product.OriginalListPrice = null;
-        }
-
-        if ((row["pf_id"] as DBNull) == null)
-        {
-          int pf_id;
-          if (Int32.TryParse(row["pf_id"].ToString(), out pf_id))
-          {
-            product.PFID = pf_id;
-          }
-          else
-          {
-            product.PFID = null;
-          }
-        }
-        else
-        {
-          product.PFID = null;
-        }
-
-        if ((row["recurring_payment"] as DBNull) == null)
-        {
-          product.RecurringPayment = (string)row["recurring_payment"];
-        }
-        else
-        {
-          product.RecurringPayment = null;
-        }
-
-        if ((row["unified_renewal_pf_id"] as DBNull) == null)
-        {
-          product.UnifiedRenewalProductId = (int)row["unified_renewal_pf_id"];
-        }
-        else
-        {
-          product.UnifiedRenewalProductId = null;
-        }     
-
-        if ((row["resource_id"] as DBNull) == null)
-        {
-          product.BillingResourceId = (int)row["resource_id"];
-        }
-        else
-        {
-          product.BillingResourceId = null;
-        }               
-
-        if ((row["unified_productID"] as DBNull) == null)
-        {
-          product.UnifiedProductID = (int)row["unified_productID"];
-        }
-        else
-        {
-          product.UnifiedProductID = null;
-        }
-
-        if (ds.Tables[0].Columns.Contains("externalResourceID") && (row["externalResourceID"] as DBNull) == null)
-        {
-          product.ExternalResourceId = (string)row["externalResourceID"];
-        }
-        else
-        {
-          product.ExternalResourceId = null;
+          product.ExternalResourceId = string.Empty;
         }
 
         productList.Add(product);
       }
+
       return productList;
     }
-
-    #endregion
   }
 }

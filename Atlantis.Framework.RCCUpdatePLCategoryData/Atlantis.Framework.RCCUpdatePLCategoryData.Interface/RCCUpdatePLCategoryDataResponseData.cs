@@ -61,6 +61,11 @@ namespace Atlantis.Framework.RCCUpdatePLCategoryData.Interface
             return this._responseXml;
         }
 
+        public List<PLDataItem> GetPartialSuccessExceptionList()
+        {
+            return this._exceptionList;
+        }
+
         public AtlantisException GetException()
         {
             return this._exception;

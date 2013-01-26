@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.PaymentProfileClass.Interface
 {
@@ -198,31 +199,31 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
     {
       get
       {
-        string type = string.Empty;
-        switch (ProfileType)
+        string type;
+        switch (ProfileType.ToLower())
         {
-          case "ach":
+          case ProfileTypes.ACH:
             type = "Checking";
             break;
-          case "credit_card":
+          case ProfileTypes.CreditCard:
             type = CreditCardType;
             break;
-          case "gift_card":
+          case ProfileTypes.GiftCard:
             type = "Gift Card";
             break;
-          case "paypal":
+          case ProfileTypes.PayPal:
             type = "Paypal";
             break;
-          case "prepaid":
+          case ProfileTypes.PrePaid:
             type = "GoodAsGold";
             break;
-          case "creditline":
+          case ProfileTypes.LineOfCredit:
             type = "Line of Credit";
             break;
-          case "netgiro":
+          case ProfileTypes.NetGiro:
             type = "Alipay";
             break;
-          case "nullpayment":
+          case ProfileTypes.NullPayment:
             type = "No associated payment method";
             break;
           default:
@@ -237,7 +238,7 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
     {
       get
       {
-        return ProfileType != "nullpayment" ? CreditCardNumber + "" + AccountNumber : string.Empty;
+        return !string.Equals(ProfileType, "nullpayment", StringComparison.OrdinalIgnoreCase) ? CreditCardNumber + "" + AccountNumber : string.Empty;
       }
 
     }
@@ -277,5 +278,18 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
 
       public const string ShopperID = "shopper_id";
     }
+  }
+
+  public class ProfileTypes
+  {
+    public const string ACH = "ach";
+    public const string CreditCard = "credit_card";
+    public const string GiftCard = "gift_card";
+    public const string PayPal = "paypal";
+    public const string PrePaid = "prepaid";
+    public const string LineOfCredit = "creditline";
+    public const string NetGiro = "netgiro";
+    public const string NullPayment = "nullpayment";
+
   }
 }

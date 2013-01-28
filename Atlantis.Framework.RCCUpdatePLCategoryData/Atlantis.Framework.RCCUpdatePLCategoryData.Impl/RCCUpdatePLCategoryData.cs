@@ -81,7 +81,10 @@ namespace Atlantis.Framework.RCCUpdatePLCategoryData.Impl
 
                     if (exceptionList.Count > 0)
                     {
-                        response = new RCCUpdatePLCategoryDataResponseData(plDataUpdate, exceptionList);
+                        if (plDataUpdate.PlDataItems.Count == exceptionList.Count)
+                            response = new RCCUpdatePLCategoryDataResponseData(plDataUpdate, new AtlantisException(plDataUpdate, "RCCUpdatePLCategoryData::RequestHandler", exceptionList[0].PlResponse, null));
+                        else
+                            response = new RCCUpdatePLCategoryDataResponseData(plDataUpdate, exceptionList);
                     }
                     else
                     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Xml;
+using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using Atlantis.Framework.Engine;
 using Atlantis.Framework.Interface;
@@ -26,7 +27,12 @@ namespace Atlantis.Framework.RCCUpdatePLCategoryData.Impl
                     string wsUrl = ((WsConfigElement)config).WSURL;
                     service.Url = wsUrl;
                     service.Timeout = (int)Math.Truncate(plDataUpdate.RequestTimeout.TotalMilliseconds);
-                    service.ClientCertificates.Add(((WsConfigElement)config).GetClientCertificate());
+                    X509Certificate2 cert = ((WsConfigElement)config).GetClientCertificate();
+
+                    if (cert == null)
+                        throw new AtlantisException(plDataUpdate, "RCCUpdatePLCategoryData::RequestHandler", "Invalid or missing certificate passed to triplet", null);
+
+                    service.ClientCertificates.Add(cert);
 
                     for (int i = 0; i < plDataUpdate.PlDataItems.Count; i++)
                     {

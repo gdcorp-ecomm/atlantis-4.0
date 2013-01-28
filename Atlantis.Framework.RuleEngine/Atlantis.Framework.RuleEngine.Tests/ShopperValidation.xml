@@ -1,54 +1,122 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <RuleEngine>
   <Rules>
     <RuleMain id="RMain">
       <Actions>
-        <Execute ruleId="RValidateFirstName" />
-        <Execute ruleId="RRequireFLastName" />
-        <Execute ruleId="RRequireFUserName" />
-        <Execute ruleId="RValidatePassword" />
-        <Execute ruleId="RRequireFPin" />
-        <Execute ruleId="RRequireFEmail" />
+        <Execute ruleId="RValidateFFirstName" />
+        <Execute ruleId="RValidateFLastName" />
+        <Execute ruleId="RValidateFUsername" />
+        <Execute ruleId="RValidateFPassword" />
+        <Execute ruleId="RValidateFPin" />
+        <Execute ruleId="RValidateFEmail" />
       </Actions>
     </RuleMain>
     
-    <!-- START First Name rules driver -->
-    <Rule id="RValidateFirstName">
+    <!-- START First Name rules -->
+    <Rule id="RValidateFFirstName">
       <Actions>
-        <!-- List the rules that should be executed in order to validate first name -->
         <Execute ruleId="RRequireFFirstName" />
-        <!--<Execute factId="RFirstNameRegex" result="true" />-->
+        <Execute ruleId="RMaxLengthFFirstName" />
+        <Execute ruleId="RInvalidCharsFFirstName" />
       </Actions>
     </Rule>
-    <!-- Create the rules that are required to validate first name -->
     <Rule id="RRequireFFirstName">
       <Condition><![CDATA[ ISNULLOREMPTY(FFirstName) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FFirstName" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="FFirstName" result="True"><![CDATA[ "First name is required." ]]></EvaluateMessage>
+        <EvaluateMessage factId="FFirstName" result="True"><![CDATA[ "First Name is required." ]]></EvaluateMessage>
       </Actions>
     </Rule>
-    <!-- END First Name rules driver -->
+    <Rule id="RMaxLengthFFirstName">
+      <Condition><![CDATA[ FFirstName @MAXLENGTH FFirstNameMaxLength ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FFirstName" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FFirstName" result="False"><![CDATA[ "First Name cannot be longer than " + FFirstNameMaxLength + " characters long." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RInvalidCharsFFirstName">
+      <Condition><![CDATA[ FFirstName @REGEX FInvalidCharsRegex ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FFirstName" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FFirstName" result="True"><![CDATA[ "First Name contains invalid characters." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END First Name rules -->
     
+    <!-- START Last Name rules -->
+    <Rule id="RValidateFLastName">
+      <Actions>
+        <Execute ruleId="RRequireFLastName" />
+        <Execute ruleId="RMaxLengthFLastName" />
+        <Execute ruleId="RInvalidCharsFLastName" />
+      </Actions>
+    </Rule>
     <Rule id="RRequireFLastName">
       <Condition><![CDATA[ ISNULLOREMPTY(FLastName) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FLastName" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="FLastName" result="True"><![CDATA[ "Last name is required." ]]></EvaluateMessage>
+        <EvaluateMessage factId="FLastName" result="True"><![CDATA[ "Last Name is required." ]]></EvaluateMessage>
       </Actions>
     </Rule>
-    <Rule id="RRequireFUserName">
-      <Condition><![CDATA[ ISNULLOREMPTY(FUserName) ]]></Condition>
+    <Rule id="RMaxLengthFLastName">
+      <Condition><![CDATA[ FLastName @MAXLENGTH FLastNameMaxLength ]]></Condition>
       <Actions>
-        <EvaluateIsValid factId="FUserName" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="FUserName" result="True"><![CDATA[ "Username is required." ]]></EvaluateMessage>
+        <EvaluateIsValid factId="FLastName" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FLastName" result="False"><![CDATA[ "Last Name cannot be longer than " + FLastNameMaxLength + " characters long." ]]></EvaluateMessage>
       </Actions>
     </Rule>
+    <Rule id="RInvalidCharsFLastName">
+      <Condition><![CDATA[ FLastName @REGEX FInvalidCharsRegex ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FLastName" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FLastName" result="True"><![CDATA[ "Last Name contains invalid characters." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Last Name rules -->
+    
+    <!-- START Username rules -->
+    <Rule id="RValidateFUsername">
+      <Actions>
+        <Execute ruleId="RRequireFUsername" />
+        <Execute ruleId="RMaxLengthFUsername" />
+        <Execute ruleId="RNonNumericOnlyFUsername" />
+        <Execute ruleId="RInvalidCharsFUsername" />
+      </Actions>
+    </Rule>
+    <Rule id="RRequireFUsername">
+      <Condition><![CDATA[ ISNULLOREMPTY(FUsername) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FUsername" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FUsername" result="True"><![CDATA[ "Username is required." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RMaxLengthFUsername">
+      <Condition><![CDATA[ FUsername @MAXLENGTH FUsernameMaxLength ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FUsername" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FUsername" result="False"><![CDATA[ "Username cannot be longer than " + FUsernameMaxLength + " characters long." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RNonNumericOnlyFUsername">
+      <Condition><![CDATA[ FUsername @REGEX FNumericOnlyRegex ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FUsername" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FUsername" result="True"><![CDATA[ "Username cannot be only numbers." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RInvalidCharsFUsername">
+      <Condition><![CDATA[ FUsername @REGEX FInvalidCharsRegex ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FUsername" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FUsername" result="True"><![CDATA[ "Username contains invalid characters." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Username rules -->
 
-    <!-- START Password rules driver -->
-    <Rule id="RValidatePassword">
+    <!-- START Password rules -->
+    <Rule id="RValidateFPassword">
       <Actions>
-        <!-- List the rules that should be executed in order to validate first name -->
         <Execute ruleId="RRequireFPassword" />
         <Execute ruleId="RMaxLengthFPassword" />
         <Execute ruleId="RMinLengthFPassword" />
@@ -57,7 +125,6 @@
         <Execute ruleId="RMatchFPasswordFPassword2" />
       </Actions>
     </Rule>
-    <!-- Create the rules that are required to validate password -->
     <Rule id="RRequireFPassword">
       <Condition><![CDATA[ ISNULLOREMPTY(FPassword) ]]></Condition>
       <Actions>
@@ -68,8 +135,9 @@
     <Rule id="RMaxLengthFPassword">
       <Condition><![CDATA[ FPassword @MAXLENGTH FPasswordMaxLength ]]></Condition>
       <Actions>
-        <EvaluateIsValid factId="FPassword" result="False">false</EvaluateIsValid>
-        <EvaluateMessage factId="FPassword" result="False"><![CDATA[ "Password cannot be longer than " + FPasswordMaxLength + " characters long." ]]></EvaluateMessage>
+        <!-- NOTE: Password max length should not be shown to user, so it invalidates the FPasswordMaxLength Fact -->
+        <EvaluateIsValid factId="FPasswordMaxLength" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPasswordMaxLength" result="False"><![CDATA[ "Password cannot be longer than " + FPasswordMaxLength + " characters long." ]]></EvaluateMessage>
       </Actions>
     </Rule>
     <Rule id="RMinLengthFPassword">
@@ -83,14 +151,14 @@
       <Condition><![CDATA[ FPassword @REGEX FPasswordRegex ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FPassword" result="False">false</EvaluateIsValid>
-        <EvaluateMessage factId="FPassword" result="False"><![CDATA[ "Password doesn't match regex." ]]></EvaluateMessage>
+        <EvaluateMessage factId="FPassword" result="False"><![CDATA[ "Password must contain at least 1 uppercase letter, 1 number, and cannot begin or end with a space." ]]></EvaluateMessage>
       </Actions>
     </Rule>
     <Rule id="RRequireFPassword2">
       <Condition><![CDATA[ ISNULLOREMPTY(FPassword2) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FPassword2" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="FPassword2" result="True"><![CDATA[ "Confirm password is required." ]]></EvaluateMessage>
+        <EvaluateMessage factId="FPassword2" result="True"><![CDATA[ "Confirm Password is required." ]]></EvaluateMessage>
       </Actions>
     </Rule>
     <Rule id="RMatchFPasswordFPassword2">
@@ -100,13 +168,69 @@
         <EvaluateMessage factId="FPassword2" result="True"><![CDATA[ "Passwords must match." ]]></EvaluateMessage>
       </Actions>
     </Rule>
-    <!-- END Password rules driver -->
+    <!-- END Password rules -->
     
+    <!-- START Pin rules -->
+    <Rule id="RValidateFPin">
+      <Actions>
+        <Execute ruleId="RRequireFPin" />
+        <Execute ruleId="RMaxLengthFPin" />
+        <Execute ruleId="RMinLengthFPin" />
+        <Execute ruleId="RNumericOnlyFPin" />
+        <Execute ruleId="RSequentialNumericAscFPin" />
+        <Execute ruleId="RSequentialNumericDescFPin" />
+      </Actions>
+    </Rule>
     <Rule id="RRequireFPin">
       <Condition><![CDATA[ ISNULLOREMPTY(FPin) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FPin" result="True">false</EvaluateIsValid>
         <EvaluateMessage factId="FPin" result="True"><![CDATA[ "PIN is required." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RMaxLengthFPin">
+      <Condition><![CDATA[ FPin @MAXLENGTH FPinMaxLength ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="False"><![CDATA[ "PIN cannot be longer than " + FPinMaxLength + " characters long." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RMinLengthFPin">
+      <Condition><![CDATA[ FPin @MINLENGTH FPinMinLength ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="False"><![CDATA[ "PIN must be at least " + FPinMinLength + " characters long." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RNumericOnlyFPin">
+      <Condition><![CDATA[ FPin @REGEX FNumericOnlyRegex ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="False"><![CDATA[ "PIN must contain only numbers." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RSequentialNumericAscFPin">
+      <Condition><![CDATA[ FPin @SUBSTRING "0123456789012" ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="True"><![CDATA[ "PIN cannot be any straight numerical sequence of digits." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RSequentialNumericDescFPin">
+      <Condition><![CDATA[ FPin @SUBSTRING "0987654321098" ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="True"><![CDATA[ "PIN cannot be any straight numerical sequence of digits." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Pin rules -->
+    
+    <!-- START Email rules -->
+    <Rule id="RValidateFEmail">
+      <Actions>
+        <Execute ruleId="RRequireFEmail" />
+        <Execute ruleId="RMaxLengthFEmail" />
+        <Execute ruleId="RRegexFEmail" />
       </Actions>
     </Rule>
     <Rule id="RRequireFEmail">
@@ -116,34 +240,49 @@
         <EvaluateMessage factId="FEmail" result="True"><![CDATA[ "Email is required." ]]></EvaluateMessage>
       </Actions>
     </Rule>
+    <Rule id="RMaxLengthFEmail">
+      <Condition><![CDATA[ FEmail @MAXLENGTH FEmailMaxLength ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FEmail" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FEmail" result="False"><![CDATA[ "Email cannot be longer than " + FEmailMaxLength + " characters long." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RRegexFEmail">
+      <Condition><![CDATA[ FEmail @REGEX FEmailRegex ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FEmail" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FEmail" result="False"><![CDATA[ "Email is an invalid format." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Email rules -->
   </Rules>
   <!--
     After this rules doc is compiled, the following "Fact" elements exist in memory as a Fact object with
     three properties: Value, IsValid, Messages.
-    
-    ######################################### Fact properties #########################################
-    ## Value: When using the rule engine, the developer must pass this XML document along with a dictionary
-    #         that contains the initial value of the facts. The "Value" property is the value as passed in
-    #         the dictionary.
-    ## IsValid = true: This is initialized to true so it is the rule designer's job to determine what
-    #                  causes this rule to toggle to false.
-    ## Messages: As facts are being analyzed, the developer can choose to attach a message string to that
-    #            fact. This "Messages" property is simply a list containing those facts.
-    ###################################################################################################
   -->
   <Facts>
     <!--Model values to validate-->
     <Fact id="FFirstName"   key="txtFirstName"        type="string" modelId="Shopper" />
     <Fact id="FLastName"    key="txtLastName"         type="string" modelId="Shopper" />
-    <Fact id="FUserName"    key="txtUserName"         type="string" modelId="Shopper" />
+    <Fact id="FUsername"    key="txtUsername"         type="string" modelId="Shopper" />
     <Fact id="FPassword"    key="txtCreatePassword"   type="string" modelId="Shopper" />
     <Fact id="FPassword2"   key="txtCreatePassword2"  type="string" modelId="Shopper" />
     <Fact id="FPin"         key="txtPin"              type="string" modelId="Shopper" />
     <Fact id="FEmail"       key="txtEmail"            type="string" modelId="Shopper" />
     
     <!--Values used to validate the other facts (regex, max, min, etc.)-->
-    <Fact id="FPasswordMaxLength" key="passwordMaxLength" type="string" modelId="Shopper" />
-    <Fact id="FPasswordMinLength" key="passwordMinLength" type="string" modelId="Shopper" />
-    <Fact id="FPasswordRegex"     key="passwordRegex"     type="string" modelId="Shopper" />
+    <Fact id="FFirstNameMaxLength" key="firstNameMaxLength" type="double" modelId="Shopper" />
+    <Fact id="FLastNameMaxLength"  key="lastNameMaxLength"  type="double" modelId="Shopper" />
+    <Fact id="FUsernameMaxLength"  key="usernameMaxLength"  type="double" modelId="Shopper" />
+    <!-- NOTE: Password max length should not be shown to user, so it invalidates the FPasswordMaxLength Fact -->
+    <Fact id="FPasswordMaxLength"  key="passwordMaxLength"  type="double" modelId="Shopper" />
+    <Fact id="FPasswordMinLength"  key="passwordMinLength"  type="double" modelId="Shopper" />
+    <Fact id="FPasswordRegex"      key="passwordRegex"      type="string" modelId="Shopper" />
+    <Fact id="FPinMaxLength"       key="pinMaxLength"       type="double" modelId="Shopper" />
+    <Fact id="FPinMinLength"       key="pinMinLength"       type="double" modelId="Shopper" />
+    <Fact id="FEmailRegex"         key="emailRegex"         type="string" modelId="Shopper" />
+    <Fact id="FEmailMaxLength"     key="emailMaxLength"     type="double" modelId="Shopper" />
+    <Fact id="FNumericOnlyRegex"   key="numericOnlyRegex"   type="string" modelId="Shopper" />
+    <Fact id="FInvalidCharsRegex"  key="invalidCharsRegex"  type="string" modelId="Shopper" />
   </Facts>
 </RuleEngine>

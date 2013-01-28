@@ -71,6 +71,7 @@
     <Compile Include="CaRuleEngineTests.cs" />
     <Compile Include="EuRuleEngineTests.cs" />
     <Compile Include="CustomOperatorTests.cs" />
+    <Compile Include="RulesEngineTests.cs" />
     <Compile Include="UsRuleEngineTests.cs" />
     <Compile Include="SeRuleEngineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,8 +87,12 @@
     <Content Include="DotUsRule.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="ExpressionEvaluatorValidTest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ShopperValidation.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="DotCaRule.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

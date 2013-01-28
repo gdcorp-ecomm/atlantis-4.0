@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RuleEngine>
+  <Rules>
+    <RuleMain id="RMain">
+      <Actions>
+        <Execute ruleId="RAdd" />
+        <Execute ruleId="RSub" />
+        <Execute ruleId="RMult" />
+        <Execute ruleId="RDiv" />
+        <Execute ruleId="REquals" />
+        <Execute ruleId="RNotEquals" />
+        <Execute ruleId="RGreaterThan" />
+        <Execute ruleId="RLessThan" />
+        <Execute ruleId="RGreaterThanOrEquals" />
+        <Execute ruleId="RLessThanOrEquals" />
+        <Execute ruleId="RAnd" />
+        <Execute ruleId="ROr" />
+        <Execute ruleId="RNot" />
+        <Execute ruleId="RRegex" />
+        <Execute ruleId="RMinLength" />
+        <Execute ruleId="RMaxLength" />
+      </Actions>
+    </RuleMain>
+
+    <!-- START Addition Rules -->
+    <Rule id="RAdd">
+      <Actions>
+        <Execute ruleId="RAddDouble" />
+        <Execute ruleId="RAddString" />
+      </Actions>
+    </Rule>
+    <Rule id="RAddDouble">
+      <Condition><![CDATA[ 2 + FOneDouble == 3 ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FAdd" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FAdd" result="False"><![CDATA[ "RAddDouble: 2 plus 1 did not equate to 3" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RAddString">
+      <Condition><![CDATA[ 2 + FOneString == "21" ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FAdd" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FAdd" result="False"><![CDATA[ "RAddString: '2' concat '1' did not equate to '21'" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Addition Rules -->
+    
+    <!-- START Subtraction Rules -->
+    <Rule id="RSub">
+      <Actions>
+        <Execute ruleId="RSubDouble" />
+      </Actions>
+    </Rule>
+    <Rule id="RSubDouble">
+      <Condition><![CDATA[ 2 - FOneDouble == 1 ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FSub" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FSub" result="False"><![CDATA[ "RSubDouble: 2 minus 1 did not equate to 1" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Subtraction Rules-->
+    
+    <!-- START Multiplication Rules -->
+    <Rule id="RMult">
+      <Actions>
+        <Execute ruleId="RMultDouble" />
+      </Actions>
+    </Rule>
+    <Rule id="RMultDouble">
+      <Condition><![CDATA[ 2 * FOneDouble == 2 ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FMult" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FMult" result="False"><![CDATA[ "RMultDouble: 2 multiplied by 1 did not equate to 2" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Multiplication Rules -->
+
+    <!-- START Division Rules -->
+    <Rule id="RDiv">
+      <Actions>
+        <Execute ruleId="RDivDouble" />
+      </Actions>
+    </Rule>
+    <Rule id="RDivDouble">
+      <Condition><![CDATA[ 2 / FOneDouble == 2 ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FDiv" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FDiv" result="False"><![CDATA[ "RDivDouble: 2 divided by 1 did not equate to 2" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Division Rules -->
+
+    <!-- START Equals Rules -->
+    <Rule id="REquals">
+      <Actions>
+        <Execute ruleId="REqualsDoubleValid" />
+      </Actions>
+    </Rule>
+    <Rule id="REqualsDoubleValid">
+      <Condition><![CDATA[ 1 == FOneDouble ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FEquals" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FEquals" result="False"><![CDATA[ "REqualsDoubleValid: 1 did not equal 1" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Equals Rules -->
+
+    <!-- START Not Equals Rules -->
+    <Rule id="RNotEquals">
+      <Actions>
+        <Execute ruleId="RNotEqualsDoubleValid" />
+      </Actions>
+    </Rule>
+    <Rule id="RNotEqualsDoubleValid">
+      <Condition><![CDATA[ 2 != FOneDouble ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FNotEquals" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FNotEquals" result="False"><![CDATA[ "RNotEqualsDoubleValid: 2 did equal 1" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Not Equals Rules -->
+    
+    <!-- START Greater Than Rules -->
+    <Rule id="RGreaterThan">
+      <Actions>
+        <Execute ruleId="RGreaterThanValid" />
+      </Actions>
+    </Rule>
+    <Rule id="RGreaterThanValid">
+      <Condition><![CDATA[ 2 > FOneDouble ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FGreaterThan" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FGreaterThan" result="False"><![CDATA[ "RGreaterThan: 2 was not greater than 1" ]]></EvaluateMessage>
+    </Actions>
+    </Rule>
+    <!-- END Greater Than Rules -->
+
+    <!-- START Less Than Rules -->
+    <Rule id="RLessThan">
+      <Actions>
+        <Execute ruleId="RLessThanValid" />
+      </Actions>
+    </Rule>
+    <Rule id="RLessThanValid">
+      <Condition><![CDATA[ 0 < FOneDouble ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FLessThan" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FLessThan" result="False"><![CDATA[ "RLessThan: 0 was not less than 1" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Less Than Rules -->
+    
+    <!-- START Greater Than Or Equals Rules -->
+    <Rule id="RGreaterThanOrEquals">
+      <Actions>
+        <Execute ruleId="RGreaterThanOrEqualsValid" />
+      </Actions>
+    </Rule>
+    <Rule id="RGreaterThanOrEqualsValid">
+      <Condition><![CDATA[ 2 >= FOneDouble ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FGreaterThanOrEquals" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FGreaterThanOrEquals" result="False"><![CDATA[ "RGreaterThanOrEquals: 2 was not greater than or equal to 1" ]]></EvaluateMessage>
+    </Actions>
+    </Rule>
+    <!-- END Greater Than Or Equals Rules -->
+
+    <!-- START Less Than Or Equals Rules -->
+    <Rule id="RLessThanOrEquals">
+      <Actions>
+        <Execute ruleId="RLessThanOrEqualsValid" />
+      </Actions>
+    </Rule>
+    <Rule id="RLessThanOrEqualsValid">
+      <Condition><![CDATA[ 0 <= FOneDouble ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FLessThanOrEquals" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FLessThanOrEquals" result="False"><![CDATA[ "RLessThanOrEquals: 0 was not less than or equal to 1" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Less Than Or Equals Rules -->
+
+    <!-- START And Rules -->
+    <Rule id="RAnd">
+      <Actions>
+        <Execute ruleId="RAndValid" />
+      </Actions>
+    </Rule>
+    <Rule id="RAndValid">
+      <Condition><![CDATA[ true AND FTrue ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FAnd" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FAnd" result="False"><![CDATA[ "RAnd: true and true was false" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END And Rules -->
+
+    <!-- START Or Rules -->
+    <Rule id="ROr">
+      <Actions>
+        <Execute ruleId="ROrValid" />
+      </Actions>
+    </Rule>
+    <Rule id="ROrValid">
+      <Condition><![CDATA[ true OR FFalse ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FOr" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FOr" result="False"><![CDATA[ "ROr: true or false was false" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Or Rules -->
+
+    <!-- START Not Rules -->
+    <Rule id="RNot">
+      <Actions>
+        <Execute ruleId="RNotValid" />
+      </Actions>
+    </Rule>
+    <Rule id="RNotValid">
+      <Condition><![CDATA[ NOT FFalse ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FNot" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FNot" result="False"><![CDATA[ "RNot: not false was false" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Not Rules -->
+
+    <!-- START Regex Rules -->
+    <Rule id="RRegex">
+      <Actions>
+        <Execute ruleId="RRegexValid" />
+      </Actions>
+    </Rule>
+    <Rule id="RRegexValid">
+      <Condition><![CDATA[ FRegexTester @REGEX FRegexToMatch ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FRegex" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FRegex" result="False"><![CDATA[ "RRegexValid: Regex did not match" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Regex Rules -->
+
+    <!-- START Min Length Rules -->
+    <Rule id="RMinLength">
+      <Actions>
+        <Execute ruleId="RMinLengthValid" />
+      </Actions>
+    </Rule>
+    <Rule id="RMinLengthValid">
+      <Condition><![CDATA[ FMinLengthTester @MINLENGTH FMinLengthValue ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FMinLength" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FMinLength" result="False"><![CDATA[ "RMinLengthValid: the string did not meet the minimum length" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Min Length Rules -->
+
+    <!-- START Max Length Rules -->
+    <Rule id="RMaxLength">
+      <Actions>
+        <Execute ruleId="RMaxLengthValid" />
+      </Actions>
+    </Rule>
+    <Rule id="RMaxLengthValid">
+      <Condition><![CDATA[ FMaxLengthTester @MAXLENGTH FMaxLengthValue ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FMaxLength" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FMaxLength" result="False"><![CDATA[ "RMaxLengthValid: the string did not meet the maximum length" ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Max Length Rules -->
+  </Rules>
+  <!--
+    After this rules doc is compiled, the following "Fact" elements exist in memory as a Fact object with
+    three properties: Value, IsValid, Messages.
+    
+    ######################################### Fact properties #########################################
+    ## Value: When using the rule engine, the developer must pass this XML document along with a dictionary
+    #         that contains the initial value of the facts. The "Value" property is the value as passed in
+    #         the dictionary.
+    ## IsValid = true: This is initialized to true so it is the rule designer's job to determine what
+    #                  causes this rule to toggle to false.
+    ## Messages: As facts are being analyzed, the developer can choose to attach a message string to that
+    #            fact. This "Messages" property is simply a list containing those facts.
+    ###################################################################################################
+  -->
+  <Facts>
+    <!--Model values to validate (since this is a test, these are not given any values but they hold the output of the test)-->
+    <Fact id="FAdd"                   key="add"                   type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FSub"                   key="sub"                   type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FMult"                  key="mult"                  type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FDiv"                   key="div"                   type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FEquals"                key="equals"                type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FNotEquals"             key="equals"                type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FGreaterThan"           key="greaterThan"           type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FLessThan"              key="lessThan"              type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FGreaterThanOrEquals"   key="greaterThanOrEquals"   type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FLessThanOrEquals"      key="lessThanOrEquals"      type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FAnd"                   key="and"                   type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FOr"                    key="or"                    type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FNot"                   key="not"                   type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FRegex"                 key="regex"                 type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FMinLength"             key="minLength"             type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FMaxLength"             key="maxLength"             type="string"  modelId="ExpressionEvaluatorValidTest" />
+    
+    <!--Values used to validate the other facts (regex, max, min, test values, etc.)-->
+    <Fact id="FOneDouble"             key="oneDouble"             type="double"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FOneString"             key="oneString"             type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FTrue"                  key="true"                  type="boolean" modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FFalse"                 key="false"                 type="boolean" modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FRegexTester"           key="regexTester"           type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FRegexToMatch"          key="regexToMatch"          type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FMinLengthTester"       key="minLengthTester"       type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FMinLengthValue"        key="minLengthValue"        type="double"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FMaxLengthTester"       key="maxLengthTester"       type="string"  modelId="ExpressionEvaluatorValidTest" />
+    <Fact id="FMaxLengthValue"        key="maxLengthValue"        type="double"  modelId="ExpressionEvaluatorValidTest" />
+  </Facts>
+</RuleEngine>

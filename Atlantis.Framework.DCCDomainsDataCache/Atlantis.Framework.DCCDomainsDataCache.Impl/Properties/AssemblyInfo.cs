@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 #endif
 [assembly: AssemblyCompany("GoDaddy.com")]
 [assembly: AssemblyProduct("Atlantis.Framework.DCCDomainsDataCache.Impl")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2012")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2012-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -37,4 +37,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.12.12.20")]
+[assembly: AssemblyFileVersion("4.13.1.28")]

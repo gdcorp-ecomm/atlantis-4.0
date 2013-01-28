@@ -10,6 +10,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
+      const string _DATAVALUEELEMENTNAME = "datavalue";
       const string _TLDMLROOTELEMENTNAME = "tldmldoc";
 
       IResponseData result = null;
@@ -43,7 +44,16 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Impl
           XAttribute resultsAttribute = tldmlElement.Attribute("result");
           if (resultsAttribute.Value.Equals("success", StringComparison.OrdinalIgnoreCase))
           {
-            result = TLDMLByNameResponseData.FromXDocument(tldmlDoc);
+            XElement dataValueElement = tldmlDoc.Descendants(_DATAVALUEELEMENTNAME).FirstOrDefault();
+            if (dataValueElement != null)
+            {
+              XAttribute valueAttribute = dataValueElement.Attribute("value");
+              if (valueAttribute != null)
+              {
+                XDocument tldmlValue = XDocument.Parse(valueAttribute.Value);
+                result = TLDMLByNameResponseData.FromXDocument(tldmlValue);
+              }
+            }
           }
         }
 

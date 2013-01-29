@@ -49,5 +49,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     string GetRegistrationFieldsXml();
 
     string GetRegistryIdByProductId(int productId);
+
+    ITLDProduct Product { get; }
   }
 }

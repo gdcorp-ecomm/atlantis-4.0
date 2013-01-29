@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 {
-  public class TLDMLProduct : TLDMLNamespaceElement
+  public class TLDMLProduct : TLDMLNamespaceElement, ITLDProduct  
   {
 
     protected override string Namespace
@@ -68,27 +69,27 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return result;
     }
 
-    public TldValidYearsSet RegistrationYears
+    public ITLDValidYearsSet RegistrationYears
     {
       get { return _offeredRegistrationYears; }
     }
 
-    public TldValidYearsSet TransferYears
+    public ITLDValidYearsSet TransferYears
     {
       get { return _offeredTransferYears; }
     }
 
-    public TldValidYearsSet RenewalYears
+    public ITLDValidYearsSet RenewalYears
     {
       get { return _offeredRenewalYears; }
     }
 
-    public TldValidYearsSet ExpiredAuctionsYears
+    public ITLDValidYearsSet ExpiredAuctionsYears
     {
       get { return _offeredExpiredAuctionYears; }
     }
 
-    public TldValidYearsSet PreregistrationYears(string type)
+    public ITLDValidYearsSet PreregistrationYears(string type)
     {
       TldValidYearsSet result;
       if (!_offeredPreregistrationYears.TryGetValue(type, out result))

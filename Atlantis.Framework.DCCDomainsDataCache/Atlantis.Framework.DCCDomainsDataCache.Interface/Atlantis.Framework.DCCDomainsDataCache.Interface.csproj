@@ -54,6 +54,10 @@
     <Compile Include="XElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
+      <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
       <Name>Atlantis.Framework.Engine</Name>

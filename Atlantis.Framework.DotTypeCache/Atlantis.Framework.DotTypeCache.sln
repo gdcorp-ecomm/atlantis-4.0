@@ -210,9 +210,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeCache.Monitor.WebTest", "Atlantis.Framework.DotTypeCache.Monitor.WebTest\Atlantis.Framework.DotTypeCache.Monitor.WebTest.csproj", "{36B018AC-CDA8-44E8-AFC6-E488FF6A28C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeCache.Static", "Atlantis.Framework.DotTypeCache.Static\Atlantis.Framework.DotTypeCache.Static.csproj", "{C6714B5F-CE86-4D8B-A615-0482465D0619}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 100
+		SccNumberOfProjects = 101
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -607,6 +609,9 @@ Global
 		SccProjectUniqueName99 = Atlantis.Framework.DotTypeCache.Monitor.WebTest\\Atlantis.Framework.DotTypeCache.Monitor.WebTest.csproj
 		SccProjectName99 = Atlantis.Framework.DotTypeCache.Monitor.WebTest
 		SccLocalPath99 = Atlantis.Framework.DotTypeCache.Monitor.WebTest
+		SccProjectUniqueName100 = Atlantis.Framework.DotTypeCache.Static\\Atlantis.Framework.DotTypeCache.Static.csproj
+		SccProjectName100 = Atlantis.Framework.DotTypeCache.Static
+		SccLocalPath100 = Atlantis.Framework.DotTypeCache.Static
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1607,6 +1612,16 @@ Global
 		{36B018AC-CDA8-44E8-AFC6-E488FF6A28C4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{36B018AC-CDA8-44E8-AFC6-E488FF6A28C4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{36B018AC-CDA8-44E8-AFC6-E488FF6A28C4}.Release|x86.ActiveCfg = Release|Any CPU
+		{C6714B5F-CE86-4D8B-A615-0482465D0619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6714B5F-CE86-4D8B-A615-0482465D0619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6714B5F-CE86-4D8B-A615-0482465D0619}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C6714B5F-CE86-4D8B-A615-0482465D0619}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C6714B5F-CE86-4D8B-A615-0482465D0619}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C6714B5F-CE86-4D8B-A615-0482465D0619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6714B5F-CE86-4D8B-A615-0482465D0619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6714B5F-CE86-4D8B-A615-0482465D0619}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C6714B5F-CE86-4D8B-A615-0482465D0619}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C6714B5F-CE86-4D8B-A615-0482465D0619}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

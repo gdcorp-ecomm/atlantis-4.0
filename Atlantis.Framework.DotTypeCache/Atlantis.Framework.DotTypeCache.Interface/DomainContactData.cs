@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Atlantis.Framework.DotTypeCache.Interface
 {
-  internal class DomainContactData
+  public class DomainContactData
   {
     public static string DomainContactXml { get; private set; }
 

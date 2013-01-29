@@ -29,7 +29,7 @@ namespace Atlantis.Framework.DotTypeCache
       _dotTypeRegistryData = new Lazy<RegDotTypeRegistryResponseData>(() => { return LoadDotTypeRegistryData(); });
       _tldml = new Lazy<TLDMLByNameResponseData>(() => { return LoadTLDML(); });
 
-      TLDMLProduct product = _tldml.Value.Product; // Preload the TLDML
+      ITLDProduct product = _tldml.Value.Product; // Preload the TLDML
     }
 
     private TLDMLByNameResponseData LoadTLDML()
@@ -291,13 +291,13 @@ namespace Atlantis.Framework.DotTypeCache
       return InternalGetValidProductIds(DotTypeProductTypes.Renewal, _tldml.Value.Product.RenewalYears, registryId, domainCount, registrationLengths);
     }
 
-    private List<int> InternalGetValidProductIds(DotTypeProductTypes productType, TldValidYearsSet validYears, string registryId, int domainCount, params int[] requestedYears)
+    private List<int> InternalGetValidProductIds(DotTypeProductTypes productType, ITLDValidYearsSet validYears, string registryId, int domainCount, params int[] requestedYears)
     {
       List<DotTypeProduct> products = InternalGetValidProducts(productType, validYears, registryId, domainCount, requestedYears);
       return products.ConvertAll<int>(product => product.ProductId);
     }
 
-    private List<int> InternalGetValidProductIds(DotTypeProductTypes productType, TldValidYearsSet validYears, int domainCount, params int[] requestedYears)
+    private List<int> InternalGetValidProductIds(DotTypeProductTypes productType, ITLDValidYearsSet validYears, int domainCount, params int[] requestedYears)
     {
       List<DotTypeProduct> products = InternalGetValidProducts(productType, validYears, domainCount, requestedYears);
       return products.ConvertAll<int>(product => product.ProductId);
@@ -328,13 +328,13 @@ namespace Atlantis.Framework.DotTypeCache
       return InternalGetValidYears(DotTypeProductTypes.Renewal, _tldml.Value.Product.RenewalYears, domainCount, registrationLengths);
     }
 
-    private List<int> InternalGetValidYears(DotTypeProductTypes productType, TldValidYearsSet validYears, int domainCount, params int[] requestedYears)
+    private List<int> InternalGetValidYears(DotTypeProductTypes productType, ITLDValidYearsSet validYears, int domainCount, params int[] requestedYears)
     {
       List<DotTypeProduct> products = InternalGetValidProducts(productType, validYears, domainCount, requestedYears);
       return products.ConvertAll<int>(product => product.Years);
     }
 
-    private List<DotTypeProduct> InternalGetValidProducts(DotTypeProductTypes productType, TldValidYearsSet validYears, int domainCount, params int[] requestedYears)
+    private List<DotTypeProduct> InternalGetValidProducts(DotTypeProductTypes productType, ITLDValidYearsSet validYears, int domainCount, params int[] requestedYears)
     {
       string registryId = null;
 
@@ -350,7 +350,7 @@ namespace Atlantis.Framework.DotTypeCache
       return InternalGetValidProducts(productType, validYears, registryId, domainCount, requestedYears);
     }
 
-    private List<DotTypeProduct> InternalGetValidProducts(DotTypeProductTypes productType, TldValidYearsSet validYears, string registryId, int domainCount, params int[] requestedYears)
+    private List<DotTypeProduct> InternalGetValidProducts(DotTypeProductTypes productType, ITLDValidYearsSet validYears, string registryId, int domainCount, params int[] requestedYears)
     {
       List<DotTypeProduct> result = new List<DotTypeProduct>(10);
       DotTypeProductTiers tiers = null;
@@ -394,6 +394,11 @@ namespace Atlantis.Framework.DotTypeCache
       }
 
       return result;
+    }
+
+    public ITLDProduct Product 
+	{
+      get { return _tldml.Value.Product; }
     }
 
     public string GetRegistrationFieldsXml()

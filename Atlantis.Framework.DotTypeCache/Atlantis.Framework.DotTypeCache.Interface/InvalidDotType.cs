@@ -235,6 +235,11 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       return string.Empty;
     }
 
+    public ITLDProduct Product
+    {
+      get { return null; }
+    }
+
     public string GetRegistrationFieldsXml()
     {
       return string.Empty;

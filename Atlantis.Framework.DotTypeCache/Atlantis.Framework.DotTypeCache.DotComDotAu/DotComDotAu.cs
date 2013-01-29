@@ -1,4 +1,4 @@
-﻿using Atlantis.Framework.DotTypeCache.Interface;
+﻿using Atlantis.Framework.DotTypeCache.Static;
 
 namespace Atlantis.Framework.DotTypeCache.DotComDotAu
 {

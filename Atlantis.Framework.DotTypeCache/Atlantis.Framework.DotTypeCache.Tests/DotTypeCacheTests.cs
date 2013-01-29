@@ -21,6 +21,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
   [DeploymentItem("Atlantis.Framework.DotTypeCache.DotOrg.dll")]
   [DeploymentItem("Atlantis.Framework.DotTypeCache.DotCoDotUk.dll")]
   [DeploymentItem("Atlantis.Framework.DotTypeCache.DotXxx.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeCache.DotNet.dll")]
   public class DotTypeCacheTests
   {
     private TestContext testContextInstance;
@@ -215,6 +216,45 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Assert.AreEqual(static3yearOrg, tldml3yearOrg);
     }
 
+    [TestMethod]
+    public void GetDotTypeProductCoUk()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("CO.UK");
+      ITLDProduct product = dotType.Product;
+      Assert.IsTrue(product != null);
+    }
+
+    [TestMethod]
+    public void GetDotTypeProductComAu()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("COM.AU");
+      ITLDProduct product = dotType.Product;
+      Assert.IsTrue(product != null);
+    }
+
+    [TestMethod]
+    public void GetDotTypeProductNet()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("NET");
+      ITLDProduct product = dotType.Product;
+      Assert.IsTrue(product != null);
+    }
+
+    [TestMethod]
+    public void GetDotTypeProductInvalidDotType()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("RAJ");
+      ITLDProduct product = dotType.Product;
+      Assert.IsTrue(product == null);
+    }
+
+    [TestMethod]
+    public void GetDotTypePreRegYearsForNet()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("NET");
+      ITLDValidYearsSet vys = dotType.Product.PreregistrationYears("testing");
+      Assert.IsTrue(vys.Min > 0);
+    }
 
   }
 }

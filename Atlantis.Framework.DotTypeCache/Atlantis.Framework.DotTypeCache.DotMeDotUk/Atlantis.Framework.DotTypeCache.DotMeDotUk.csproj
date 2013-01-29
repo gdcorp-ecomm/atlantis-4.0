@@ -52,6 +52,10 @@
       <Project>{95E67E48-7173-4F0C-854F-2F08CBFCF923}</Project>
       <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Static\Atlantis.Framework.DotTypeCache.Static.csproj">
+      <Project>{c6714b5f-ce86-4d8b-a615-0482465d0619}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Static</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

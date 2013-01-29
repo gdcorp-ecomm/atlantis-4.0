@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 {
-  public class TldValidYearsSet
+  public class TldValidYearsSet : ITLDValidYearsSet
   {
     private static TldValidYearsSet _noValidYears;
 

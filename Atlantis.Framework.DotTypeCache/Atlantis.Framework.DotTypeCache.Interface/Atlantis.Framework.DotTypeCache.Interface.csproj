@@ -44,14 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ITLDValidYearsSet.cs" />
+    <Compile Include="ITLDProduct.cs" />
     <Compile Include="CountryValidation.cs" />
     <Compile Include="DomainContactData.cs" />
     <Compile Include="DotTypeFields.cs" />
     <Compile Include="DotTypeFieldValues.cs" />
-    <Compile Include="StaticDotTypeTiers.cs" />
-    <Compile Include="StaticDotTypeProductIdTypes.cs" />
-    <Compile Include="StaticDotType.cs" />
-    <Compile Include="StaticDotTypeTier.cs" />
     <Compile Include="IDotTypeInfo.cs" />
     <Compile Include="IDotTypeProvider.cs" />
     <Compile Include="InvalidDotType.cs" />

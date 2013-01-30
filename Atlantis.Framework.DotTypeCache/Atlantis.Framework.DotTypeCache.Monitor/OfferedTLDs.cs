@@ -101,7 +101,7 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
     private XElement GetTldElement(string tldName, Dictionary<string, bool> flagSets)
     {
       XElement result = new XElement("TLD");
-      result.Add(new XAttribute("Name", tldName));
+      result.Add(new XAttribute("Name", tldName.ToUpperInvariant()));
 
       XElement resultFlag = new XElement("Flags");
       foreach (var flagSet in flagSets)

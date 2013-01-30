@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OfferedTLDs.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="IMonitor.cs" />
     <Compile Include="MonitorData.cs" />
@@ -66,6 +67,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
       <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Interface\Atlantis.Framework.TLDDataCache.Interface.csproj">
+      <Project>{2a615d6f-9604-40c1-bc6a-2659e3b97bcc}</Project>
+      <Name>Atlantis.Framework.TLDDataCache.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
       <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>

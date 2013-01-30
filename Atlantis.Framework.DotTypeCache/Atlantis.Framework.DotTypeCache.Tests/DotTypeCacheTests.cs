@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.TLDDataCache.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,6 +18,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
   [DeploymentItem("Atlantis.Framework.RegDotTypeRegistry.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.RegDotTypeProductIds.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DCCDomainsDataCache.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DotTypeCache.DotCom.dll")]
   [DeploymentItem("Atlantis.Framework.DotTypeCache.DotOrg.dll")]
   [DeploymentItem("Atlantis.Framework.DotTypeCache.DotCoDotUk.dll")]
@@ -40,6 +42,14 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       {
         testContextInstance = value;
       }
+    }
+
+    public IDotTypeProvider DotTypeProvider
+    {
+      get
+      {
+        return HttpProviderContainer.Instance.Resolve<IDotTypeProvider>();
+      } 
     }
 
     [TestInitialize]
@@ -256,5 +266,25 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Assert.IsTrue(vys.Min > 0);
     }
 
+    [TestMethod]
+    public void GetOfferedTLDFlagsForAll()
+    {
+      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetOfferedTLDFlags(OfferedTLDProductTypes.Registration);
+      Assert.IsTrue(offeredTLDs != null);
+    }
+
+    [TestMethod]
+    public void GetOfferedTLDFlagsForOrg()
+    {
+      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetOfferedTLDFlags(OfferedTLDProductTypes.Registration, new string[] { "org" });
+      Assert.IsTrue(offeredTLDs != null);
+    }
+
+    [TestMethod]
+    public void GetOfferedTLDFlagsForOrgAndCom()
+    {
+      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetOfferedTLDFlags(OfferedTLDProductTypes.Registration, new string[] {"org", "com"});
+      Assert.IsTrue(offeredTLDs != null);
+    }
   }
 }

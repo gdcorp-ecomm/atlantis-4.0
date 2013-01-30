@@ -91,6 +91,14 @@
       <Project>{970b458c-3fdf-45d7-8b0e-3d8818907ffd}</Project>
       <Name>Atlantis.Framework.RegDotTypeRegistry.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Impl\Atlantis.Framework.TLDDataCache.Impl.csproj">
+      <Project>{b6638632-2265-4f7e-a6a2-c494391dfbab}</Project>
+      <Name>Atlantis.Framework.TLDDataCache.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Interface\Atlantis.Framework.TLDDataCache.Interface.csproj">
+      <Project>{2a615d6f-9604-40c1-bc6a-2659e3b97bcc}</Project>
+      <Name>Atlantis.Framework.TLDDataCache.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
       <Project>{95E67E48-7173-4F0C-854F-2F08CBFCF923}</Project>
       <Name>Atlantis.Framework.DotTypeCache.Interface</Name>

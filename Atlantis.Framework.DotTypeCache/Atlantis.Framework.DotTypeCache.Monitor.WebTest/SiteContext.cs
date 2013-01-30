@@ -10,7 +10,7 @@ namespace Atlantis.Framework.DotTypeCache.Monitor.WebTest
 
     public int ContextId { get { throw new NotImplementedException(); } }
     public string StyleId { get { throw new NotImplementedException(); } }
-    public int PrivateLabelId { get { throw new NotImplementedException(); } }
+    public int PrivateLabelId { get { return 1; } }
     public string ProgId { get { throw new NotImplementedException(); } }
     public HttpCookie NewCrossDomainCookie(string cookieName, DateTime expiration)
     {

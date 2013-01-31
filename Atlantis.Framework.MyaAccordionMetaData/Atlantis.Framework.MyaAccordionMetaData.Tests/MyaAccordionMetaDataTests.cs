@@ -51,12 +51,13 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Impl")]
     public void MyaAccordionMetaDataTest()
     {
 
       var gdContextId = 1;
 
-      MyaAccordionMetaDataRequestData.MinimumAccordionMetaDataCount = 30;
+      MyaAccordionMetaDataRequestData.MinimumAccordionMetaDataCount = 1;
 
       MyaAccordionMetaDataRequestData request = new MyaAccordionMetaDataRequestData("856907"
         , string.Empty
@@ -99,10 +100,23 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
                 if (accordion.Content.ShowBuyLink)
                 {
                   StringBuilder sb = new StringBuilder();
-                  Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2}", accordion.Content.LinkUrl.Link, accordion.Content.LinkUrl.Page, accordion.Content.LinkUrl.Type)));
-                  foreach (string key in accordion.Content.LinkUrl.GetNewQsKeys())
+                  Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2}", accordion.Content.BuyMoreLink.Link, accordion.Content.BuyMoreLink.Page, accordion.Content.BuyMoreLink.Type)));
+                  foreach (string key in accordion.Content.BuyMoreLink.GetNewQsKeys())
                   {
-                    sb.Append(string.Format("{0}: {1}", key, accordion.Content.LinkUrl.GetNewQsKeys()[key]));
+                    sb.Append(string.Format("{0}: {1}", key, accordion.Content.BuyMoreLink.GetNewQsKeys()[key]));
+                  }
+                  if (sb.Length > 0)
+                  {
+                    Debug.WriteLine(string.Format("{0} QsKeys: {1}", p.Name, sb.ToString()));
+                  }
+                }
+                if (accordion.Content.ShowHelpLink)
+                {
+                  StringBuilder sb = new StringBuilder();
+                  Debug.WriteLine(string.Format("{0}: {1}", p.Name, string.Format("Link: {0} | Page: {1} | Type: {2}", accordion.Content.HelpLink.Link, accordion.Content.HelpLink.Page, accordion.Content.HelpLink.Type)));
+                  foreach (string key in accordion.Content.HelpLink.GetNewQsKeys())
+                  {
+                    sb.Append(string.Format("{0}: {1}", key, accordion.Content.HelpLink.GetNewQsKeys()[key]));
                   }
                   if (sb.Length > 0)
                   {
@@ -228,6 +242,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Impl")]
     public void CacheSoilTest()
     {
       #if DEBUG

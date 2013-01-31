@@ -48,7 +48,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
         }
         catch (Exception ex)
         {
-          var aex = new AtlantisException("XmlBuilder::BuildList", "0", "Exception: " + ex.Message, ex.StackTrace, null, null);
+          var aex = new AtlantisException("XmlBuilder::BuildMetaDataList", "0", "Exception: " + ex.Message, ex.StackTrace, null, null);
           Engine.Engine.LogAtlantisException(aex);
         }
       }
@@ -312,7 +312,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
     {
       string msg = string.Empty;
       ContentData content = null;
-      XElement link = null;
+      List<LinkUrlData> links = new List<LinkUrlData>();
       string showOptionsForMgrOnly = string.Empty;
 
       _contentXDoc = XDocument.Parse(contentXml);
@@ -320,11 +320,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
       {
         try
         {
-          link = _contentXDoc.Element("content").Element("data").Element("linkurl");
+          links = ParseContentLinks(_contentXDoc.Element("content").Element("data").Element("links"));
         }
         catch
         {
-          link = null;
+          links = new List<LinkUrlData>();
         }
 
         try
@@ -336,27 +336,13 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
           showOptionsForMgrOnly = string.Empty;
         }
 
-        switch (link == null)
+        switch (links.Count.Equals(0))
         {
           case true:
-            if (string.IsNullOrEmpty(showOptionsForMgrOnly))
-            {
-              content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"));            
-            }
-            else
-            {
-              content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentXml("optionsmgronly"));            
-            }
+            content = string.IsNullOrEmpty(showOptionsForMgrOnly) ? new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions")) : new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentXml("optionsmgronly"));
             break;
           case false:
-            if (string.IsNullOrEmpty(showOptionsForMgrOnly))
-            {
-              content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentBuyLinkXml(link));            
-            }
-            else
-            {
-              content = new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentXml("optionsmgronly"), ParseContentBuyLinkXml(link));            
-            }
+            content = string.IsNullOrEmpty(showOptionsForMgrOnly) ? new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), null, links) : new ContentData(ParseContentXml("accountlist"), ParseContentXml("jsonpage"), ParseContentXml("cioptions"), ParseContentXml("optionsmgronly"), links);
             break;        
         }
       }
@@ -385,11 +371,18 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
       get { return !_contentXDoc.Element("content").HasAttributes; }
     }
 
-    private LinkUrlData ParseContentBuyLinkXml(XElement link)
+    private List<LinkUrlData> ParseContentLinks(XElement contentLinks)
     {
-      return IsWellFormedContentXml ? ParseLinkUrlElement(link) : null;
+      List<LinkUrlData> links = new List<LinkUrlData>();
+      if (IsWellFormedContentXml)
+      {
+        foreach (XElement link in contentLinks.Elements("linkurl"))
+        {
+          links.Add(ParseLinkUrlElement(link));
+        }
+      }
+      return links;
     }
-
     #endregion
 
     #region ControlPanel

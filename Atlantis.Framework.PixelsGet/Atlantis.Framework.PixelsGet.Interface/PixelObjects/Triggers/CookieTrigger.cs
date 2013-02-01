@@ -16,6 +16,11 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
       : base(triggerElement, pixelRequest)
     { }
 
+    public override string TriggerType()
+    {
+      return PixelXmlNames.TriggerTypeCookie;
+    }
+
     public override bool ShouldFirePixel(bool isPixelAlreadyTriggered)
     {
       bool shouldFirePixel = false;

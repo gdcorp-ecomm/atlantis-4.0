@@ -90,5 +90,10 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
     {
       throw new NotImplementedException("Must implement custom logic");
     }
+
+    public virtual string TriggerType()
+    {
+      throw new NotImplementedException("Must implement custom logic");
+    }
   }
 }

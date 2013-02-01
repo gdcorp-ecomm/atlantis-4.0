@@ -7,5 +7,6 @@ namespace Atlantis.Framework.PixelsGet.Interface.Constants
     public const string IFrame = "iframe";
     public const string Script = "script";
     public const string Verbatim = "none";
+    public const string Control = "control";
   }
 }

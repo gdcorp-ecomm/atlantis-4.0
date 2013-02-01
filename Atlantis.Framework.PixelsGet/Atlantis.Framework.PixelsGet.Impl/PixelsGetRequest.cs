@@ -129,13 +129,11 @@ namespace Atlantis.Framework.PixelsGet.Impl
             Trigger currentTrigger = GetTrigger(triggerElement, individualTrigger);
             if (currentTrigger != null)
             {
-              if ((currentTrigger is OrderDetailTrigger && requiredTriggers.Contains(PixelXmlNames.TriggerTypeOrderDetail)) ||
-                  (currentTrigger is SourceCodeTrigger && requiredTriggers.Contains(PixelXmlNames.TriggerTypeIscCodes)) ||
-                  (currentTrigger is CookieTrigger && requiredTriggers.Contains(PixelXmlNames.TriggerTypeCookie)))
+              if (requiredTriggers.Contains(currentTrigger.TriggerType()))
               {
-                if (!currentTrigger.ShouldFirePixel(pixelAlreadyTriggered))
+                shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+                if (!shouldTriggerPixel)
                 {
-                  shouldTriggerPixel = false;
                   break;
                 }
               }

@@ -9,14 +9,14 @@
       </Actions>
     </RuleMain>
     <Rule id="RSeCountryRequired">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FCountryCode)) ]]></Condition>
+      <Condition><![CDATA[ ISNULLOREMPTY(FCountryCode) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FCountryCode" result="true">false</EvaluateIsValid>
         <EvaluateMessage factId="FCountryCode" result="true"><![CDATA[ "Country is required."]]></EvaluateMessage>
       </Actions>
     </Rule>
     <Rule id="RSeRegIdRequired">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FRegId)) ]]></Condition>
+      <Condition><![CDATA[ ISNULLOREMPTY(FRegId) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FRegId" result="True">false</EvaluateIsValid>
         <EvaluateMessage factId="FRegId" result="True"><![CDATA[ "Registration Id is required."]]></EvaluateMessage>
@@ -24,62 +24,62 @@
     </Rule>
     <Rule id="RSeSeVatValid">
       <Condition>
-        <![CDATA[ FACT(FCountryCode) == "AL" OR
-                  FACT(FCountryCode) == "AT" OR
-                  FACT(FCountryCode) == "BY" OR
-                  FACT(FCountryCode) == "BE" OR
-                  FACT(FCountryCode) == "BA" OR
-                  FACT(FCountryCode) == "BG" OR
-                  FACT(FCountryCode) == "HR" OR
-                  FACT(FCountryCode) == "CY" OR
-                  FACT(FCountryCode) == "CZ" OR
-                  FACT(FCountryCode) == "DK" OR
-                  FACT(FCountryCode) == "EE" OR
-                  FACT(FCountryCode) == "FO" OR
-                  FACT(FCountryCode) == "FI" OR
-                  FACT(FCountryCode) == "FR" OR
-                  FACT(FCountryCode) == "DE" OR
-                  FACT(FCountryCode) == "GI" OR
-                  FACT(FCountryCode) == "GR" OR
-                  FACT(FCountryCode) == "GG" OR
-                  FACT(FCountryCode) == "HU" OR
-                  FACT(FCountryCode) == "IS" OR
-                  FACT(FCountryCode) == "IE" OR
-                  FACT(FCountryCode) == "IM" OR
-                  FACT(FCountryCode) == "IT" OR
-                  FACT(FCountryCode) == "JE" OR
-                  FACT(FCountryCode) == "LV" OR
-                  FACT(FCountryCode) == "LI" OR
-                  FACT(FCountryCode) == "LT" OR
-                  FACT(FCountryCode) == "LU" OR
-                  FACT(FCountryCode) == "MK" OR
-                  FACT(FCountryCode) == "MT" OR
-                  FACT(FCountryCode) == "MD" OR
-                  FACT(FCountryCode) == "MC" OR
-                  FACT(FCountryCode) == "ME" OR
-                  FACT(FCountryCode) == "NL" OR
-                  FACT(FCountryCode) == "NO" OR
-                  FACT(FCountryCode) == "PL" OR
-                  FACT(FCountryCode) == "PT" OR
-                  FACT(FCountryCode) == "RO" OR
-                  FACT(FCountryCode) == "SM" OR
-                  FACT(FCountryCode) == "RS" OR
-                  FACT(FCountryCode) == "SK" OR
-                  FACT(FCountryCode) == "SI" OR
-                  FACT(FCountryCode) == "ES" OR
-                  FACT(FCountryCode) == "SJ" OR
-                  FACT(FCountryCode) == "SE" OR
-                  FACT(FCountryCode) == "CH" OR
-                  FACT(FCountryCode) == "UA" OR
-                  FACT(FCountryCode) == "UK" OR
-                  FACT(FCountryCode) == "VA" ]]>
+        <![CDATA[ FCountryCode == "AL" OR
+                  FCountryCode == "AT" OR
+                  FCountryCode == "BY" OR
+                  FCountryCode == "BE" OR
+                  FCountryCode == "BA" OR
+                  FCountryCode == "BG" OR
+                  FCountryCode == "HR" OR
+                  FCountryCode == "CY" OR
+                  FCountryCode == "CZ" OR
+                  FCountryCode == "DK" OR
+                  FCountryCode == "EE" OR
+                  FCountryCode == "FO" OR
+                  FCountryCode == "FI" OR
+                  FCountryCode == "FR" OR
+                  FCountryCode == "DE" OR
+                  FCountryCode == "GI" OR
+                  FCountryCode == "GR" OR
+                  FCountryCode == "GG" OR
+                  FCountryCode == "HU" OR
+                  FCountryCode == "IS" OR
+                  FCountryCode == "IE" OR
+                  FCountryCode == "IM" OR
+                  FCountryCode == "IT" OR
+                  FCountryCode == "JE" OR
+                  FCountryCode == "LV" OR
+                  FCountryCode == "LI" OR
+                  FCountryCode == "LT" OR
+                  FCountryCode == "LU" OR
+                  FCountryCode == "MK" OR
+                  FCountryCode == "MT" OR
+                  FCountryCode == "MD" OR
+                  FCountryCode == "MC" OR
+                  FCountryCode == "ME" OR
+                  FCountryCode == "NL" OR
+                  FCountryCode == "NO" OR
+                  FCountryCode == "PL" OR
+                  FCountryCode == "PT" OR
+                  FCountryCode == "RO" OR
+                  FCountryCode == "SM" OR
+                  FCountryCode == "RS" OR
+                  FCountryCode == "SK" OR
+                  FCountryCode == "SI" OR
+                  FCountryCode == "ES" OR
+                  FCountryCode == "SJ" OR
+                  FCountryCode == "SE" OR
+                  FCountryCode == "CH" OR
+                  FCountryCode == "UA" OR
+                  FCountryCode == "UK" OR
+                  FCountryCode == "VA" ]]>
       </Condition>
       <Actions>
         <Execute ruleId="RSeEvaluateVat" result="true" />
       </Actions>
     </Rule>
     <Rule id="RSeEvaluateVat">
-      <Condition><![CDATA[ ISNULLOREMPTY(FACT(FVat)) ]]></Condition>
+      <Condition><![CDATA[ ISNULLOREMPTY(FVat) ]]></Condition>
       <Actions>
         <EvaluateIsValid factId="FVat" result="True">false</EvaluateIsValid>
         <EvaluateMessage factId="FVat" result="True"><![CDATA[ "VAT is required."]]></EvaluateMessage>
@@ -87,8 +87,8 @@
     </Rule>
   </Rules>
   <Facts>
-    <Fact id="FCountryCode" key="countrycode" desc="" type="string" modelId="mdlSe" />
-    <Fact id="FVat" key="vat" desc="" type="string" modelId="mdlSe" />
-    <Fact id="FRegId" key="regid" desc="" type="string" modelId="mdlSe" />
+    <Fact id="FCountryCode" key="countrycode" type="string" modelId="mdlSe" />
+    <Fact id="FVat"         key="vat"         type="string" modelId="mdlSe" />
+    <Fact id="FRegId"       key="regid"       type="string" modelId="mdlSe" />
   </Facts>
 </RuleEngine>

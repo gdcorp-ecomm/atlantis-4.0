@@ -36,7 +36,6 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Interface
     public string ProductId { get; private set; }
     public string AuthorId { get; private set; }
     public string IsSyndicated { get; private set; }
-    public static XNamespace dataApiQuery { get; private set; }
 
     public bool IsValid { get; private set; }
 
@@ -66,31 +65,31 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Interface
       try
       {
         result.Id = GetElementAttribute(reviewElement, "id");
-        result.ModerationStatus = GetElementValue(reviewElement, "ModerationStatus");
-        result.LastModificationTime = GetElementValue(reviewElement, "LastModificationTime");
-        result.IsRatingsOnly = GetElementValue(reviewElement, "IsRatingsOnly");
-        result.Title = GetElementValue(reviewElement, "Title");
-        result.ReviewText = GetElementValue(reviewElement, "ReviewText");
-        result.TotalCommentCount = GetElementValue(reviewElement, "TotalCommentCount");
-        result.Rating = GetElementValue(reviewElement, "Rating");
-        result.RatingRange = GetElementValue(reviewElement, "RatingRange");
-        result.IsRecommended = GetElementValue(reviewElement, "IsRecommended");
-        result.TotalFeedbackCount = GetElementValue(reviewElement, "TotalFeedbackCount");
-        result.TotalPositiveFeedbackCount = GetElementValue(reviewElement, "TotalPositiveFeedbackCount");
-        result.TotalNegativeFeedbackCount = GetElementValue(reviewElement, "TotalNegativeFeedbackCount");
-        result.UserNickname = GetElementValue(reviewElement, "UserNickname");
-        result.UserLocation = GetElementValue(reviewElement, "UserLocation");
-        result.ContentLocale = GetElementValue(reviewElement, "ContentLocale");
-        result.SubmissionTime = GetElementValue(reviewElement, "SubmissionTime");
-        result.Badges = (GetElementValue(reviewElement, "Badges", null) != null)
+        result.ModerationStatus = GetElementValue(reviewElement, "ModerationStatus", dataApiQuery);
+        result.LastModificationTime = GetElementValue(reviewElement, "LastModificationTime", dataApiQuery);
+        result.IsRatingsOnly = GetElementValue(reviewElement, "IsRatingsOnly", dataApiQuery);
+        result.Title = GetElementValue(reviewElement, "Title", dataApiQuery);
+        result.ReviewText = GetElementValue(reviewElement, "ReviewText", dataApiQuery);
+        result.TotalCommentCount = GetElementValue(reviewElement, "TotalCommentCount", dataApiQuery);
+        result.Rating = GetElementValue(reviewElement, "Rating", dataApiQuery);
+        result.RatingRange = GetElementValue(reviewElement, "RatingRange", dataApiQuery);
+        result.IsRecommended = GetElementValue(reviewElement, "IsRecommended", dataApiQuery);
+        result.TotalFeedbackCount = GetElementValue(reviewElement, "TotalFeedbackCount", dataApiQuery);
+        result.TotalPositiveFeedbackCount = GetElementValue(reviewElement, "TotalPositiveFeedbackCount", dataApiQuery);
+        result.TotalNegativeFeedbackCount = GetElementValue(reviewElement, "TotalNegativeFeedbackCount", dataApiQuery);
+        result.UserNickname = GetElementValue(reviewElement, "UserNickname", dataApiQuery);
+        result.UserLocation = GetElementValue(reviewElement, "UserLocation", dataApiQuery);
+        result.ContentLocale = GetElementValue(reviewElement, "ContentLocale", dataApiQuery);
+        result.SubmissionTime = GetElementValue(reviewElement, "SubmissionTime", dataApiQuery);
+        result.Badges = (GetElementValue(reviewElement, "Badges", dataApiQuery, null) != null)
                    ? (from b in reviewElement.Element(dataApiQuery + "Badges").Descendants(dataApiQuery + "Badge")
                       select new Badge
                         {
                           Id = GetElementAttribute(b, "id"),
-                          ContentType = GetElementValue(b, "ContentType")
+                          ContentType = GetElementValue(b, "ContentType", dataApiQuery)
                         }).ToList()
-                   : null;
-        result.Photos = (GetElementValue(reviewElement, "Photos", null) != null)
+                   : new List<Badge>();
+        result.Photos = (GetElementValue(reviewElement, "Photos", dataApiQuery, null) != null)
                    ? (from p in reviewElement.Element(dataApiQuery + "Photos").Descendants(dataApiQuery + "Photo")
                       select new Photo
                         {
@@ -102,22 +101,22 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Interface
                                        Url = GetElementAttribute(s, "url")
                                      }).ToList()
                         }).ToList()
-                   : null;
-        result.Videos = (GetElementValue(reviewElement, "Videos", null) != null)
+                   : new List<Photo>();
+        result.Videos = (GetElementValue(reviewElement, "Videos", dataApiQuery, null) != null)
                    ? (from v in reviewElement.Element(dataApiQuery + "Videos").Descendants(dataApiQuery + "Video")
                       select new Video
                         {
-                          Caption = GetElementValue(v, "Caption"),
-                          VideoHost = GetElementValue(v, "VideoHost"),
-                          VideoId = GetElementValue(v, "VideoId"),
-                          VideoUrl = GetElementValue(v, "VideoUrl"),
-                          VideoThumbnailUrl = GetElementValue(v, "VideoThumbnailUrl")
+                          Caption = GetElementValue(v, "Caption", dataApiQuery),
+                          VideoHost = GetElementValue(v, "VideoHost", dataApiQuery),
+                          VideoId = GetElementValue(v, "VideoId", dataApiQuery),
+                          VideoUrl = GetElementValue(v, "VideoUrl", dataApiQuery),
+                          VideoThumbnailUrl = GetElementValue(v, "VideoThumbnailUrl", dataApiQuery)
                         }).ToList()
-                   : null;
-        result.LastModeratedTime = GetElementValue(reviewElement, "LastModeratedTime");
-        result.ProductId = GetElementValue(reviewElement, "ProductId");
-        result.AuthorId = GetElementValue(reviewElement, "AuthorId");
-        result.IsSyndicated = GetElementValue(reviewElement, "IsSyndicated");
+                   : new List<Video>();
+        result.LastModeratedTime = GetElementValue(reviewElement, "LastModeratedTime", dataApiQuery);
+        result.ProductId = GetElementValue(reviewElement, "ProductId", dataApiQuery);
+        result.AuthorId = GetElementValue(reviewElement, "AuthorId", dataApiQuery);
+        result.IsSyndicated = GetElementValue(reviewElement, "IsSyndicated", dataApiQuery);
 
         result.IsValid = true;
       }
@@ -141,7 +140,7 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Interface
       return result;
     }
 
-    private static string GetElementValue(XElement x, string elementName, string defaultValue = "")
+    private static string GetElementValue(XElement x, string elementName, XNamespace dataApiQuery, string defaultValue = "")
     {
       var foundElement = x.Element(dataApiQuery + elementName);
       if (foundElement != null)

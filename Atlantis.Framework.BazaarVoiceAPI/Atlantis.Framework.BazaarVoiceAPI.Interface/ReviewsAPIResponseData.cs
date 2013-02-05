@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.BazaarVoiceAPI.Interface
@@ -18,7 +16,7 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Interface
 
     public ReviewsAPIResponseData(IEnumerable<Review> reviews)
     {
-      if (reviews != null)
+       if (reviews != null)
       {
         _reviewsList = new List<Review>(reviews);
       }

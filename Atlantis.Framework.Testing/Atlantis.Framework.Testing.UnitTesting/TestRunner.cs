@@ -55,7 +55,7 @@ namespace Atlantis.Framework.Testing.UnitTesting
 
         #region public
 
-        public void ExecuteTests(string classToTest)
+        public void ExecuteTests(string classToTest, HashSet<string> testMethods)
         {
 
             GetTestRunnerExecutionInformation();
@@ -74,13 +74,17 @@ namespace Atlantis.Framework.Testing.UnitTesting
                 AddLogData(this, new UnitTestLogDataEventArgs("Test Runner", String.Format("Initialized at {0}", DateTime.Now)));
 
                 var tests = GetTests(out fixtureSetup, out fixtureTeardown, out testSetup, out testTeardown);
+                if (testMethods.Count > 0)
+                {
+                  tests = tests.FindAll(x => testMethods.Contains(x.Name));
+                }
+
                 if (tests.Count > 0)
                 {
                     RunTestFixtureSetup(fixtureSetup);
 
                     foreach (var test in tests)
                     {
-
                         try
                         {
                             RunTestSetup(testSetup);
@@ -98,7 +102,6 @@ namespace Atlantis.Framework.Testing.UnitTesting
                     }
 
                     RunTestFixtureTeardown(fixtureTeardown);
-
                 }
             }
             catch (Exception e)

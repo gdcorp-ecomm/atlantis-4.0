@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -41,6 +42,24 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
           temp = AvailableContentReturnTypes.xml;
         }
         return temp;
+      }
+    }
+
+    private HashSet<string> TestMethods
+    {
+      get
+      {
+        var testMethods = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var methods = HttpContext.Current.Request["testmethod"];
+        if (!string.IsNullOrEmpty(methods))
+        {
+          var separators = new[] {",", "|"};
+          foreach (var method in methods.Split(separators, StringSplitOptions.RemoveEmptyEntries))
+          {
+            testMethods.Add(method.Trim());
+          }
+        }
+        return testMethods;
       }
     }
 
@@ -91,7 +110,8 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
           }
 
           LocalTestRunner = new TestRunner();
-          LocalTestRunner.ExecuteTests(string.Concat("UnitTests.", string.Join(".", classToTest)));
+
+          LocalTestRunner.ExecuteTests(string.Concat("UnitTests.", string.Join(".", classToTest)), TestMethods);
 
           ResponseOutput(context, LocalTestRunner.TestData);
         }

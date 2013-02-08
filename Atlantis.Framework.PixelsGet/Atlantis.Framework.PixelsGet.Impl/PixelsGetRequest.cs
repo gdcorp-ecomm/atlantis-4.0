@@ -121,30 +121,41 @@ namespace Atlantis.Framework.PixelsGet.Impl
 
         if (SourcePageMatchesPixelUrl(validPageUrl))
         {
-          XElement triggerElement = currentElement.Descendants(PixelXmlNames.Trigger).First(x => x != null);
-          bool pixelAlreadyTriggered = false;
-          string[] requiredTriggers = triggerElement.Attribute(PixelXmlNames.Required).Value.ToLower().Split(',');
-          foreach (XElement individualTrigger in triggerElement.Nodes())
+          if (currentElement.Descendants(PixelXmlNames.Trigger).Count() == 0)
           {
-            Trigger currentTrigger = GetTrigger(triggerElement, individualTrigger);
-            if (currentTrigger != null)
+            shouldTriggerPixel = true;
+          }
+          else
+          {
+            XElement triggerElement = currentElement.Descendants(PixelXmlNames.Trigger).First(x => x != null);
+            bool pixelAlreadyTriggered = false;
+            string[] requiredTriggers = { "" };
+            if (triggerElement.Attribute(PixelXmlNames.Required) != null)
             {
-              if (requiredTriggers.Contains(currentTrigger.TriggerType()))
+              requiredTriggers = triggerElement.Attribute(PixelXmlNames.Required).Value.ToLower().Split(',');
+            }
+            foreach (XElement individualTrigger in triggerElement.Nodes())
+            {
+              Trigger currentTrigger = GetTrigger(triggerElement, individualTrigger);
+              if (currentTrigger != null)
               {
-                shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
-                if (!shouldTriggerPixel)
+                if (requiredTriggers.Contains(currentTrigger.TriggerType()))
                 {
-                  break;
+                  shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+                  if (!shouldTriggerPixel)
+                  {
+                    break;
+                  }
                 }
-              }
-              else if (!shouldTriggerPixel)
-              {
-                shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
-              }
-              else
-              {
-                pixelAlreadyTriggered = true;
-                currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+                else if (!shouldTriggerPixel)
+                {
+                  shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+                }
+                else
+                {
+                  pixelAlreadyTriggered = true;
+                  currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+                }
               }
             }
           }

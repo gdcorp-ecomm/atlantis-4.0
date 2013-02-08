@@ -28,10 +28,6 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
         foreach (XElement element in TriggerElement.Descendants(PixelXmlNames.TriggerTypeCookieGroup))
         {
           string fireCookieValue = element.Attribute(PixelXmlNames.Value).Value;
-          if (element.Attribute(PixelXmlNames.CookieEncoded) != null)
-          {
-            fireCookieValue = Atlantis.Framework.BasePages.Cookies.CookieHelper.DecryptCookieValue(fireCookieValue);
-          }
           string cookieName = element.Attribute(PixelXmlNames.TriggerCookieName).Value;
           string associatedCookieNames = element.Attribute(PixelXmlNames.AssociatedCookieNames).Value;
 
@@ -51,7 +47,14 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 
             if (!isFireCookieValueEmpty)
             {
-              shouldFirePixel = searchCookie.Value.Equals(fireCookieValue, StringComparison.OrdinalIgnoreCase);
+              if (element.Attribute(PixelXmlNames.CookieEncoded) != null)
+              {
+                shouldFirePixel = Atlantis.Framework.BasePages.Cookies.CookieHelper.DecryptCookieValue(searchCookie.Value).Equals(fireCookieValue, StringComparison.OrdinalIgnoreCase);
+              }
+              else
+              {
+                shouldFirePixel = searchCookie.Value.Equals(fireCookieValue, StringComparison.OrdinalIgnoreCase);
+              }
             }
             else
             {

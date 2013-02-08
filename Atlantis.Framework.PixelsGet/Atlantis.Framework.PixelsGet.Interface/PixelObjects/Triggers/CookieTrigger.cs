@@ -54,7 +54,14 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 
               if (!isFireCookieValueEmpty)
               {
-                shouldFirePixel = searchCookie.Value.Equals(fireCookieValue, StringComparison.OrdinalIgnoreCase);
+                if (element.Attribute(PixelXmlNames.CookieEncoded) != null)
+                {
+                  shouldFirePixel = Atlantis.Framework.BasePages.Cookies.CookieHelper.DecryptCookieValue(searchCookie.Value).Equals(fireCookieValue, StringComparison.OrdinalIgnoreCase);
+                }
+                else
+                {
+                  shouldFirePixel = searchCookie.Value.Equals(fireCookieValue, StringComparison.OrdinalIgnoreCase);
+                }
               }
               else
               {

@@ -10,6 +10,7 @@ namespace Atlantis.Framework.PixelsGet.Test
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.PixelsGet.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.PixelsGet.Interface.dll")]
   [DeploymentItem("pixels.xml")]
   public class UnitTest1
   {

@@ -4,6 +4,8 @@ using System.Web;
 using System.Xml.Linq;
 using Atlantis.Framework.PixelsGet.Interface.PixelObjects.Helpers;
 using Atlantis.Framework.PixelsGet.Interface.Constants;
+using Atlantis.Framework.BasePages.Cookies;
+
 
 namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 {
@@ -26,6 +28,10 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
         foreach (XElement element in TriggerElement.Descendants(PixelXmlNames.TriggerTypeCookieGroup))
         {
           string fireCookieValue = element.Attribute(PixelXmlNames.Value).Value;
+          if (element.Attribute(PixelXmlNames.CookieEncoded) != null)
+          {
+            fireCookieValue = Atlantis.Framework.BasePages.Cookies.CookieHelper.DecryptCookieValue(fireCookieValue);
+          }
           string cookieName = element.Attribute(PixelXmlNames.TriggerCookieName).Value;
           string associatedCookieNames = element.Attribute(PixelXmlNames.AssociatedCookieNames).Value;
 
@@ -114,7 +120,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
               HttpCookie tempCookie = HttpContext.Current.Response.Cookies[associatedCookieName];
               if (tempCookie != null)
               {
-                CookieHelper cookieHelper = new CookieHelper();
+                PixelObjects.Helpers.CookieHelper cookieHelper = new PixelObjects.Helpers.CookieHelper();
                 HttpCookie cookie = cookieHelper.NewCrossDomainCookie(associatedCookieName, DateTime.Now.AddDays(-1));
                 HttpContext.Current.Response.Cookies.Remove(associatedCookieName);
                 HttpContext.Current.Response.Cookies.Add(cookie);

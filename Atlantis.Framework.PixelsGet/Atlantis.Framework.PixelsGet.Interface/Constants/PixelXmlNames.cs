@@ -14,6 +14,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.Constants
     public const string AdditionalData = "additionaldata";
     public const string Comparison = "comparison";
     public const string Required = "required";
+    public const string CookieEncoded = "cookieencoded";
 
     public const string ComparisonEquals = "==";
     public const string ComparisonGreaterThan = ">";

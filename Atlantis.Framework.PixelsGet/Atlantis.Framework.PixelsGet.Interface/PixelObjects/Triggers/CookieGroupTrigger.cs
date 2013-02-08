@@ -120,6 +120,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
               HttpCookie tempCookie = PixelRequest.RequestCookies[associatedCookieName];
               if (tempCookie != null)
               {
+                PixelRequest.RequestCookies.Remove(associatedCookieName);
                 if (HttpContext.Current != null)
                 {
                   HttpContext.Current.Response.Cookies.Remove(associatedCookieName);

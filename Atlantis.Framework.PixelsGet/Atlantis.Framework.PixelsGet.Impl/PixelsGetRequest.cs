@@ -76,7 +76,7 @@ namespace Atlantis.Framework.PixelsGet.Impl
         catch (Exception ex)
         {
           var aex = new AtlantisException(_pixelRequestData, "PixelGetRequest::GetAppPixelsForApp",
-                                          "Pixel get failed.  Potentially invalid xml in pixel file", ex.StackTrace);
+                                          "Pixel get failed.  Potentially invalid xml in pixel file", ex.StackTrace + pixelData.ToString());
           Engine.Engine.LogAtlantisException(aex);
         }
       }
@@ -114,52 +114,64 @@ namespace Atlantis.Framework.PixelsGet.Impl
     private bool TriggerPixel(XElement currentElement)
     {
       bool shouldTriggerPixel = false;
-
-      if (IsValidContext(currentElement))
+      try
       {
-        string validPageUrl = currentElement.Attribute(PixelXmlNames.PageUrl).Value.ToLower();
 
-        if (SourcePageMatchesPixelUrl(validPageUrl))
+        if (IsValidContext(currentElement))
         {
-          if (currentElement.Descendants(PixelXmlNames.Trigger).Count() == 0)
+          if (currentElement.Attribute(PixelXmlNames.PageUrl) != null)
           {
-            shouldTriggerPixel = true;
-          }
-          else
-          {
-            XElement triggerElement = currentElement.Descendants(PixelXmlNames.Trigger).First(x => x != null);
-            bool pixelAlreadyTriggered = false;
-            string[] requiredTriggers = { "" };
-            if (triggerElement.Attribute(PixelXmlNames.Required) != null)
+            string validPageUrl = currentElement.Attribute(PixelXmlNames.PageUrl).Value.ToLower();
+
+            if (SourcePageMatchesPixelUrl(validPageUrl))
             {
-              requiredTriggers = triggerElement.Attribute(PixelXmlNames.Required).Value.ToLower().Split(',');
-            }
-            foreach (XElement individualTrigger in triggerElement.Nodes())
-            {
-              Trigger currentTrigger = GetTrigger(triggerElement, individualTrigger);
-              if (currentTrigger != null)
+              if (currentElement.Descendants(PixelXmlNames.Trigger).Count() == 0)
               {
-                if (requiredTriggers.Contains(currentTrigger.TriggerType()))
+                shouldTriggerPixel = true;
+              }
+              else
+              {
+                XElement triggerElement = currentElement.Descendants(PixelXmlNames.Trigger).First(x => x != null);
+                bool pixelAlreadyTriggered = false;
+                string[] requiredTriggers = { "" };
+                if (triggerElement.Attribute(PixelXmlNames.Required) != null)
                 {
-                  shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
-                  if (!shouldTriggerPixel)
+                  requiredTriggers = triggerElement.Attribute(PixelXmlNames.Required).Value.ToLower().Split(',');
+                }
+                foreach (XElement individualTrigger in triggerElement.Nodes())
+                {
+                  Trigger currentTrigger = GetTrigger(triggerElement, individualTrigger);
+                  if (currentTrigger != null)
                   {
-                    break;
+                    if (requiredTriggers.Contains(currentTrigger.TriggerType()))
+                    {
+                      shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+                      if (!shouldTriggerPixel)
+                      {
+                        break;
+                      }
+                    }
+                    else if (!shouldTriggerPixel)
+                    {
+                      shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+                    }
+                    else
+                    {
+                      pixelAlreadyTriggered = true;
+                      currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+                    }
                   }
-                }
-                else if (!shouldTriggerPixel)
-                {
-                  shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
-                }
-                else
-                {
-                  pixelAlreadyTriggered = true;
-                  currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
                 }
               }
             }
           }
         }
+      }
+      catch (Exception ex)
+      {
+        var aex = new AtlantisException(_pixelRequestData, "PixelGetRequest::TriggerPixel",
+                                        "Pixel get failed.  Potentially invalid xml in pixel element", ex.StackTrace + " " + currentElement.ToString());
+        Engine.Engine.LogAtlantisException(aex);
       }
 
       return shouldTriggerPixel;

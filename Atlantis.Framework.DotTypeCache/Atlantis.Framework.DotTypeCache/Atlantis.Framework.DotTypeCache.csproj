@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigElement.cs" />
+    <Compile Include="TLDDataImpl.cs" />
     <Compile Include="DotTypeCache.cs" />
     <Compile Include="DotTypeCacheConfig.cs" />
     <Compile Include="DotTypeEngineRequests.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="MultiRegistryStaticDotTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticDotTypes.cs" />
+    <Compile Include="TLDLanguageData.cs" />
     <Compile Include="TLDMLDotTypeInfo.cs" />
     <Compile Include="TLDMLDotTypes.cs" />
   </ItemGroup>

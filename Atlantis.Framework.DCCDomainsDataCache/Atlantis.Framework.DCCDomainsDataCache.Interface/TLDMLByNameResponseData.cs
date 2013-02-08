@@ -11,11 +11,13 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     private AtlantisException _exception;
 
     private ITLDProduct _product;
+    private ITLDTld _tld;
 
     private TLDMLByNameResponseData(XDocument tldmlDocument)
     {
       _tldmlDocument = tldmlDocument;
       _product = new TLDMLProduct(_tldmlDocument) as ITLDProduct;
+      _tld = new TLDMLTld(_tldmlDocument) as ITLDTld;
     }
 
     private TLDMLByNameResponseData(RequestData requestData, Exception ex)
@@ -38,6 +40,11 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     public ITLDProduct Product
     {
       get { return _product; }
+    }
+
+    public ITLDTld Tld
+    {
+      get { return _tld; }
     }
 
     public string ToXML()

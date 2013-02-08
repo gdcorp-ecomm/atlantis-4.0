@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StaticLanguageData.cs" />
+    <Compile Include="StaticTld.cs" />
     <Compile Include="StaticValidYearsSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticDotType.cs" />
@@ -53,6 +55,10 @@
     <Compile Include="StaticProduct.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
+      <Project>{7f2738f8-683c-49e7-88cd-e986c70f0321}</Project>
+      <Name>Atlantis.Framework.DataCache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
       <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
       <Name>Atlantis.Framework.DotTypeCache.Interface</Name>

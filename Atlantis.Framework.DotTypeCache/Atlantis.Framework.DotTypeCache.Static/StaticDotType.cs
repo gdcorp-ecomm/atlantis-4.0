@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Xml;
 using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Static
@@ -12,6 +14,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
     private StaticDotTypeTiers _expiredAuctionRegProductIds;
 
     private StaticProduct _staticProduct;
+    private StaticTld _staticTld;
 
     private bool _isMultiRegistry = false;
     public bool IsMultiRegistry
@@ -83,6 +86,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
       _preregistrationProductIds = InitializePreRegistrationProductIds();
       _expiredAuctionRegProductIds = InitializeExpiredAuctionRegProductIds();
       _staticProduct = new StaticProduct(this);
+      _staticTld = new StaticTld(this);
     }
 
     protected abstract StaticDotTypeTiers InitializeRegistrationProductIds();
@@ -336,6 +340,40 @@ namespace Atlantis.Framework.DotTypeCache.Static
     public ITLDProduct Product 
     {
       get { return _staticProduct; }
+    }
+
+    private int? _tldId;
+    public int TldId
+    {
+      get
+      {
+        if (_tldId == null)
+        {
+          const string tldIdColumnName = "tldid";
+          string sTldId = string.Empty;
+          _tldId = 0;
+          int tldId;
+
+          var tldData = DataCache.DataCache.GetExtendedTLDData(DotType);
+
+          Dictionary<string, string> tldInfo;
+          tldData.TryGetValue(DotType, out tldInfo);
+
+          if (tldInfo != null && tldInfo.Count > 0 && tldInfo.ContainsKey(tldIdColumnName))
+          {
+            tldInfo.TryGetValue(tldIdColumnName, out sTldId);
+          }
+
+          int.TryParse(sTldId, out tldId);
+          _tldId = tldId;
+        }
+        return _tldId.Value;
+      }
+    }
+
+    public ITLDTld Tld
+    {
+      get { return _staticTld; }
     }
 
     public string GetRegistrationFieldsXml()

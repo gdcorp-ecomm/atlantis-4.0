@@ -28,7 +28,10 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
     public XDocument GetMonitorData(NameValueCollection qsc)
     {
       XDocument result = new XDocument();
+      
       XElement root = new XElement("OfferedTLDs");
+      root.Add(GetProcessId(), GetMachineName(), GetFileVersion(), GetInterfaceVersion());
+      result.Add(root);
 
       try
       {
@@ -55,7 +58,6 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
         if (!string.IsNullOrEmpty(tldProductType))
         {
           root.Add(ProductType(tldProductType));
-          root.Add(GetProcessId(), GetMachineName());
 
           OfferedTLDProductTypes type;
           if (tldProductType.ToLowerInvariant() == "bulktransfer")
@@ -67,10 +69,32 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
             type = (OfferedTLDProductTypes)Enum.Parse(typeof(OfferedTLDProductTypes), CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tldProductType.ToLower()));
           }
 
-          var tlds = dotTypeProvider.GetOfferedTLDFlags(type, tldNames);
+          ITLDDataImpl tldData;
+          switch (type)
+          {
+              case OfferedTLDProductTypes.Registration:
+                tldData = dotTypeProvider.GetTLDDataForRegistration;
+                break;
+              case OfferedTLDProductTypes.Transfer:
+                tldData = dotTypeProvider.GetTLDDataForTransfer;
+                break;
+              case OfferedTLDProductTypes.Bulk:
+                tldData = dotTypeProvider.GetTLDDataForBulk;
+                break;
+              case OfferedTLDProductTypes.BulkTransfer:
+                tldData = dotTypeProvider.GetTLDDataForBulkTransfer;
+                break;
+              default:
+                tldData = dotTypeProvider.GetTLDDataForRegistration;
+                break;
+          }
+
+          var tlds = tldData.GetDiagnosticsOfferedTLDFlags(tldNames);
+          XElement tldInfo = new XElement("TLDInfo");
           foreach (var tld in tlds)
           {
-            root.Add(GetTldElement(tld.Key, tld.Value));
+            tldInfo.Add(GetTldElement(tld.Key, tld.Value));
+            root.Add(tldInfo);
           }
         }
       }
@@ -79,7 +103,6 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
         root.Add(new XElement("error", ex.Message));
       }
 
-      result.Add(root);
       return result;
     }
 
@@ -96,6 +119,16 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
     private XAttribute GetMachineName()
     {
       return new XAttribute("MachineName", Environment.MachineName);
+    }
+
+    private XAttribute GetFileVersion()
+    {
+      return new XAttribute("DotTypeCacheVersion", DotTypeCache.FileVersion);
+    }
+
+    private XAttribute GetInterfaceVersion()
+    {
+      return new XAttribute("DotTypeCacheInterfaceVersion", DotTypeCache.InterfaceVersion);
     }
 
     private XElement GetTldElement(string tldName, Dictionary<string, bool> flagSets)

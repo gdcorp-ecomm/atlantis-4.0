@@ -91,6 +91,13 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Tests
       Assert.AreEqual(response.Product.PreregistrationYears("SRA"), TldValidYearsSet.INVALIDSET);
     }
 
+    [TestMethod]
+    public void GetTLDMLTld()
+    {
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "com.au");
+      var response = (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, _GETBYNAMEREQUEST);
+      Assert.IsTrue(response.Tld.LanguageDataList.Count > 0);
+    }
 
   }
 }

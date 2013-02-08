@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ITLDTld.cs" />
+    <Compile Include="ITLDLanguageData.cs" />
+    <Compile Include="ITLDDataImpl.cs" />
     <Compile Include="ITLDValidYearsSet.cs" />
     <Compile Include="ITLDProduct.cs" />
     <Compile Include="CountryValidation.cs" />

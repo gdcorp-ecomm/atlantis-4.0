@@ -1,4 +1,6 @@
-﻿using Atlantis.Framework.DotTypeCache.Interface;
+﻿using System;
+using System.Reflection;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using System.Collections.Generic;
 
@@ -7,6 +9,37 @@ namespace Atlantis.Framework.DotTypeCache
   public sealed class DotTypeCache
   {
     // TODO: Obsolete these methods for use of the provider
+
+    public static string FileVersion { get; set; }
+    public static string InterfaceVersion { get; set; }
+
+    static DotTypeCache()
+    {
+      try
+      {
+        object[] fileVersions = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
+        if ((fileVersions.Length > 0))
+        {
+          AssemblyFileVersionAttribute engineFileVersion = fileVersions[0] as AssemblyFileVersionAttribute;
+          if (engineFileVersion != null)
+          {
+            FileVersion = engineFileVersion.Version;
+          }
+        }
+
+        Type configElementType = typeof(InvalidDotType);
+        object[] interfaceFileVersions = configElementType.Assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
+        if ((interfaceFileVersions != null) && (interfaceFileVersions.Length > 0))
+        {
+          AssemblyFileVersionAttribute interfaceFileVersion = interfaceFileVersions[0] as AssemblyFileVersionAttribute;
+          if (interfaceFileVersion != null)
+          {
+            InterfaceVersion = interfaceFileVersion.Version;
+          }
+        }
+      }
+      catch { }        
+    }
 
     private static IDotTypeProvider DotTypes
     {

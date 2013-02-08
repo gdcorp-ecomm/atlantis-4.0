@@ -397,8 +397,42 @@ namespace Atlantis.Framework.DotTypeCache
     }
 
     public ITLDProduct Product 
-	{
+	  {
       get { return _tldml.Value.Product; }
+    }
+
+    private int? _tldId;
+    public int TldId
+    {
+      get
+      {
+        if (_tldId == null)
+        {
+          const string tldIdColumnName = "tldid";
+          string sTldId = string.Empty;
+          _tldId = 0;
+          int tldId;
+
+          var tldData = DataCache.DataCache.GetExtendedTLDData(DotType);
+
+          Dictionary<string, string> tldInfo;
+          tldData.TryGetValue(DotType, out tldInfo);
+
+          if (tldInfo != null && tldInfo.Count > 0 && tldInfo.ContainsKey(tldIdColumnName))
+          {
+            tldInfo.TryGetValue(tldIdColumnName, out sTldId);
+          }
+
+          int.TryParse(sTldId, out tldId);
+          _tldId = tldId;
+        }
+        return _tldId.Value;
+      }
+    }
+
+    public ITLDTld Tld
+    {
+      get { return _tldml.Value.Tld; }   
     }
 
     public string GetRegistrationFieldsXml()

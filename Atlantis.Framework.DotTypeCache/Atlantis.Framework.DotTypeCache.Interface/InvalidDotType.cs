@@ -240,6 +240,16 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       get { return null; }
     }
 
+    public int TldId
+    {
+      get { return 0; }
+    }
+
+    public ITLDTld Tld 
+    {
+      get { return null; }
+    }
+
     public string GetRegistrationFieldsXml()
     {
       return string.Empty;

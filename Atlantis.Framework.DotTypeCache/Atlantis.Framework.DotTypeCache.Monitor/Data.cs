@@ -25,6 +25,10 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
     {
       XDocument result = new XDocument();
 
+      XElement root = new XElement("Data");
+      root.Add(GetProcessId(), GetMachineName(), GetFileVersion(), GetInterfaceVersion());
+      result.Add(root);
+
       var items = qsc.AllKeys.SelectMany(qsc.GetValues, (k, v) => new { key = k, value = v });
       var tldValue = string.Empty;
       foreach (var item in items)
@@ -41,10 +45,10 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
         IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo(tldValue);
         var className = dotType.GetType().FullName;
 
-        XElement root = new XElement("TLDInfo");
-        root.Add(DotTypeName(tldValue), DotTypeSource(className), GetProcessId(), GetMachineName());
+        XElement tldInfo = new XElement("TLDInfo");
+        tldInfo.Add(DotTypeName(tldValue), DotTypeSource(className));
 
-        result.Add(root);
+        root.Add(tldInfo);
       }
 
       return result;
@@ -58,6 +62,16 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
     private XAttribute DotTypeSource(string className)
     {
       return new XAttribute("DotTypeSource", className);
+    }
+
+    private XAttribute GetFileVersion()
+    {
+      return new XAttribute("DotTypeCacheVersion", DotTypeCache.FileVersion);
+    }
+
+    private XAttribute GetInterfaceVersion()
+    {
+      return new XAttribute("DotTypeCacheInterfaceVersion", DotTypeCache.InterfaceVersion);
     }
 
     private XAttribute GetProcessId()

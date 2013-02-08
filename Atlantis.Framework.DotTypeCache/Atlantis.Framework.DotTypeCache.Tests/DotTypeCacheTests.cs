@@ -269,22 +269,142 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetOfferedTLDFlagsForAll()
     {
-      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetOfferedTLDFlags(OfferedTLDProductTypes.Registration);
+      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetTLDDataForRegistration.GetDiagnosticsOfferedTLDFlags();
       Assert.IsTrue(offeredTLDs != null);
     }
 
     [TestMethod]
     public void GetOfferedTLDFlagsForOrg()
     {
-      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetOfferedTLDFlags(OfferedTLDProductTypes.Registration, new string[] { "org" });
+      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetTLDDataForRegistration.GetDiagnosticsOfferedTLDFlags(new string[] { "org" });
       Assert.IsTrue(offeredTLDs != null);
     }
 
     [TestMethod]
     public void GetOfferedTLDFlagsForOrgAndCom()
     {
-      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetOfferedTLDFlags(OfferedTLDProductTypes.Registration, new string[] {"org", "com"});
+      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetTLDDataForRegistration.GetDiagnosticsOfferedTLDFlags(new string[] { "org", "com" });
       Assert.IsTrue(offeredTLDs != null);
+    }
+
+    [TestMethod]
+    public void GetTldIdForComAu()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("com.au");
+      int tldId = dotType.TldId;
+      Assert.IsTrue(tldId > 0);
+    }
+
+    [TestMethod]
+    public void GetTldIdForStaticCom()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("com");
+      int tldId = dotType.TldId;
+      Assert.IsTrue(tldId > 0);
+    }
+
+    [TestMethod]
+    public void GetTldIdForInvalidDomain()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("raj");
+      int tldId = dotType.TldId;
+      Assert.IsTrue(tldId == 0);
+    }
+
+    [TestMethod]
+    public void GetLanguageListForComAu()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("com.au");
+      Assert.IsTrue(dotType.Tld.LanguageDataList != null);
+    }
+
+    [TestMethod]
+    public void GetLanguageListForStaticCom()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("org");
+      Assert.IsTrue(dotType.Tld.LanguageDataList != null);
+    }
+
+    [TestMethod]
+    public void GetLanguageListForInvalid()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("raj");
+      Assert.IsTrue(dotType.Tld == null);
+    }
+
+    [TestMethod]
+    public void GetOfferedTLDsSetForAllValidFlags()
+    {
+      string[] t = new string[] {"availcheckstatus", "mainpricebox"};
+      HashSet<string> tlds = DotTypeProvider.GetTLDDataForRegistration.GetOfferedTLDsSetForAllFlags(t);
+      Assert.IsTrue(tlds.Count > 0);
+    }
+
+    [TestMethod]
+    public void GetOfferedTLDsSetForAllNoFlags()
+    {
+      string[] t = new string[] { };
+      HashSet<string> tlds = DotTypeProvider.GetTLDDataForRegistration.GetOfferedTLDsSetForAllFlags(t);
+      Assert.IsTrue(tlds.Count == 0);
+    }
+
+    [TestMethod]
+    public void GetOfferedTLDsSetForAllInvalidFlags()
+    {
+      string[] t = new string[] { "hello"};
+      HashSet<string> tlds = DotTypeProvider.GetTLDDataForRegistration.GetOfferedTLDsSetForAllFlags(t);
+      Assert.IsTrue(tlds.Count == 0);
+    }
+
+    [TestMethod]
+    public void GetOfferedTLDsSetForAnyValidFlags()
+    {
+      string[] t = new string[] { "availcheckstatus", "mainpricebox" };
+      HashSet<string> tlds = DotTypeProvider.GetTLDDataForRegistration.GetOfferedTLDsSetForAnyFlags(t);
+      var hl = new HashSet<string>(tlds);
+      Assert.IsTrue(tlds.Count > 0);
+    }
+
+    [TestMethod]
+    public void FilterNonOfferedTLDsAsList()
+    {
+      var t = new List<string>();
+      t.Add("org");
+      List<string> tlds = DotTypeProvider.GetTLDDataForRegistration.FilterNonOfferedTLDs(t);
+      Assert.IsTrue(tlds.Count > 0);
+    }
+
+    [TestMethod]
+    public void FilterNonOfferedTLDsAsHashSet()
+    {
+      var t = new HashSet<string>(StringComparer.OrdinalIgnoreCase); 
+      t.Add("org");
+      t.Add("com");
+      HashSet<string> tlds = DotTypeProvider.GetTLDDataForRegistration.FilterNonOfferedTLDs(t);
+      Assert.IsTrue(tlds.Count > 0);
+    }
+
+    [TestMethod]
+    public void FilterNonOfferedTLDsForInvalid()
+    {
+      var t = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+      t.Add("raj");
+      HashSet<string> tlds = DotTypeProvider.GetTLDDataForRegistration.FilterNonOfferedTLDs(t);
+      Assert.IsTrue(tlds.Count == 0);
+    }
+
+    [TestMethod]
+    public void IsOfferedCheckForOrg()
+    {
+      bool flag = DotTypeProvider.GetTLDDataForRegistration.IsOffered("org");
+      Assert.IsTrue(flag);
+    }
+
+    [TestMethod]
+    public void IsOfferedCheckForInvalidTld()
+    {
+      bool flag = DotTypeProvider.GetTLDDataForRegistration.IsOffered("raj");
+      Assert.IsFalse(flag);
     }
   }
 }

@@ -417,6 +417,16 @@ namespace Atlantis.Framework.DotTypeCache
       get { return this._dotTypeInfo.Product; }
     }
 
+    public int TldId
+    {
+      get { return this._dotTypeInfo.TldId; }
+    }
+
+    public ITLDTld Tld
+    {
+      get { return this._dotTypeInfo.Tld; } 
+    }
+
     public string GetRegistrationFieldsXml()
     {
       return string.Empty;

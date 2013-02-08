@@ -15,15 +15,20 @@ namespace Atlantis.Framework.DotTypeCache
 
   public class DotTypeProvider : ProviderBase, IDotTypeProvider
   {
-    const int _OFFEREDTLDREQUEST = 637;
-    const int _ACTIVETLDREQUEST = 635;
+    private readonly Dictionary<string, IDotTypeInfo> _dotTypesRequestCache;
+    private readonly ITLDDataImpl _tldDataForRegistration;
+    private readonly ITLDDataImpl _tldDataForTransfer;
+    private readonly ITLDDataImpl _tldDataForBulk;
+    private readonly ITLDDataImpl _tldDataForBulkTransfer;
 
-    private Dictionary<string, IDotTypeInfo> _dotTypesRequestCache;
-
-    public DotTypeProvider(IProviderContainer container)
-      : base(container)
+    public DotTypeProvider(IProviderContainer container) : base(container)
     {
       _dotTypesRequestCache = new Dictionary<string, IDotTypeInfo>(100, StringComparer.OrdinalIgnoreCase);
+
+      _tldDataForRegistration = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Registration);
+      _tldDataForTransfer = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Transfer);
+      _tldDataForBulk = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Bulk);
+      _tldDataForBulkTransfer = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.BulkTransfer);
     }
 
     private ISiteContext _siteContext;
@@ -78,55 +83,24 @@ namespace Atlantis.Framework.DotTypeCache
       return TLDMLDotTypes.TLDMLIsAvailable(dotType) || StaticDotTypes.HasDotType(dotType);
     }
 
-    public Dictionary<string, Dictionary<string, bool>> GetOfferedTLDFlags(OfferedTLDProductTypes tldProductType, string[] tldNames = null)
+    public ITLDDataImpl GetTLDDataForRegistration
     {
-      Dictionary<string, Dictionary<string, bool>> tldInfo = new Dictionary<string, Dictionary<string, bool>>(1);
-
-      ActiveTLDsRequestData aRequest = new ActiveTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
-      ActiveTLDsResponseData aResponse = (ActiveTLDsResponseData)DataCache.DataCache.GetProcessRequest(aRequest, _ACTIVETLDREQUEST);
-      var allFlags = aResponse.AllFlagNames;
-
-      OfferedTLDsRequestData oRequest = new OfferedTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, SiteContext.PrivateLabelId, tldProductType);
-      OfferedTLDsResponseData oResponse = (OfferedTLDsResponseData)DataCache.DataCache.GetProcessRequest(oRequest, _OFFEREDTLDREQUEST);
-
-      tldNames = tldNames ?? new string[0];
-
-      List<string> offeredTlds = new List<string>();
-      if (tldNames.Length > 0)
-      {
-        foreach (var offeredTld in tldNames)
-        {
-          if (oResponse.OfferedTLDs.Contains(offeredTld, StringComparer.OrdinalIgnoreCase))
-          {
-            offeredTlds.Add(offeredTld);
-          }
-        }
-      }
-      else
-      {
-        offeredTlds = oResponse.OfferedTLDs.ToList();
-      }
-
-      foreach (var tld in offeredTlds)
-      {
-        var flagSets = new Dictionary<string, bool>();
-        if (allFlags != null && allFlags.Any())
-        {
-          foreach (var flag in allFlags)
-          {
-            flagSets.Add(flag, aResponse.IsTLDActive(tld, flag));
-          }
-        }
-        if (!tldInfo.ContainsKey(tld))
-        {
-          tldInfo.Add(tld, flagSets);
-        }
-      }
-
-      return tldInfo;
+      get { return _tldDataForRegistration; }
     }
 
-    /// Expose TLDDataCache lists
-    /// Expose ActiveTLD functionality
+    public ITLDDataImpl GetTLDDataForTransfer
+    {
+      get { return _tldDataForTransfer; }
+    }
+
+    public ITLDDataImpl GetTLDDataForBulk
+    {
+      get { return _tldDataForBulk; }
+    }
+
+    public ITLDDataImpl GetTLDDataForBulkTransfer
+    {
+      get { return _tldDataForBulkTransfer; }
+    }
   }
 }

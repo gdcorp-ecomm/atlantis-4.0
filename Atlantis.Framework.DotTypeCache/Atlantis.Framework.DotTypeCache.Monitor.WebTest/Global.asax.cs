@@ -11,6 +11,7 @@ namespace Atlantis.Framework.DotTypeCache.Monitor.WebTest
     protected void Application_Start(object sender, EventArgs e)
     {
       HttpProviderContainer.Instance.RegisterProvider<ISiteContext, SiteContext>();
+      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, ShopperContext>();
       System.Web.Routing.RouteTable.Routes.MapDotTypeCacheMonitorHandler();
     }
 

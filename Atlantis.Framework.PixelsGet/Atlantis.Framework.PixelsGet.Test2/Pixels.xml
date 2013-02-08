@@ -1,0 +1,906 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pixels>
+  <pixel name="Affiliate Image"
+         value="~/OrderConfirmation/Controls/PixelTracking/AffiliateImagePixel.ascx"
+         type="control"
+         application="CART"
+         contexts="*"
+         appsettingname=""
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+  </pixel>
+  <pixel name="Commission Junction"
+         value="~/OrderConfirmation/Controls/PixelTracking/CommissionJunctionPixel.ascx"
+         type="control"
+         application="CART"
+         contexts="*"
+         appsettingname=""
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+  </pixel>
+  <pixel name="Yahoo Content Reseller"
+         value="https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D1256026%26t%3D2"
+         type="image"
+         application="CART"
+         contexts="1"
+         appsettingname=""
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <additionaldata>
+      <fastball cicode="78805" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Trial Pay"
+         value="https%3A%2F%2Ftpc.trialpay.com%2F%3Ftp_aid%3D101210%26tp_pid%3D25BK75G"
+         type="image"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_PIXEL_CURRENT_TRIALPAY1"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+      <orderdetail name="_total_total" comparison="&gt;=" value="500" />
+      <sourcecodes>
+        <sourcecode value="trialpay1" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78452" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Trial Pay"
+         value="~/OrderConfirmation/Controls/PixelTracking/TrialPayPixel.ascx"
+         type="control"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_PIXEL_NEW_TRIALPAY1"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+      <orderdetail name="_total_total" comparison="&gt;=" value="500" />
+      <sourcecodes>
+        <sourcecode value="trialpay1" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78452" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Trial Pay"
+         value="https%3A%2F%2Ftpc.trialpay.com%2F%3Ftp_aid%3D101210%26tp_pid%3D1JUCHCI"
+         type="image"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_PIXEL_CURRENT_TRIALPAYI"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+      <orderdetail name="_total_total" comparison="&gt;=" value="500" />
+      <sourcecodes>
+        <sourcecode value="trialpayi" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78795" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Trial Pay"
+         value="~/OrderConfirmation/Controls/PixelTracking/TrialPayPixel.ascx"
+         type="control"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_PIXEL_NEW_TRIALPAYI"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+      <orderdetail name="_total_total" comparison="&gt;=" value="500" />
+      <sourcecodes>
+        <sourcecode value="trialpayi" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78795" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Trial Pay"
+         value="~/OrderConfirmation/Controls/PixelTracking/TrialPayPixel.ascx"
+         type="control"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_PIXEL_CURRENT_TPDOMPTM"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+      <orderdetail name="_total_total" comparison="&gt;=" value="500" />
+      <sourcecodes>
+        <sourcecode value="tpdomptm" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78452" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Trial Pay"
+         value="~/OrderConfirmation/Controls/PixelTracking/TrialPayPixel.ascx"
+         type="control"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_PIXEL_CURRENT_TPINTPTM"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+      <orderdetail name="_total_total" comparison="&gt;=" value="500" />
+      <sourcecodes>
+        <sourcecode value="tpintptm" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78795" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Trial Pay"
+         value="~/OrderConfirmation/Controls/PixelTracking/TrialPayPixel.ascx"
+         type="control"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_PIXEL_CURRENT_TPDOMOW1"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+      <orderdetail name="_total_total" comparison="&gt;=" value="500" />
+      <sourcecodes>
+        <sourcecode value="tpdomow1" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78452" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Trial Pay"
+         value="~/OrderConfirmation/Controls/PixelTracking/TrialPayPixel.ascx"
+         type="control"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_PIXEL_CURRENT_TPINTLOW1"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+      <orderdetail name="_total_total" comparison="&gt;=" value="500" />
+      <sourcecodes>
+        <sourcecode value="tpintlow1" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78795" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Blue Lithium"
+         value="%3Cimg%20src%3D%22https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D113243%26t%3D2%22%20width%3D%221%22%20height%3D%221%22%20border%3D%220%22%20%2F%3E%0A%3Cimg%20src%3D%22https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D341229%26t%3D2%22%20width%3D%221%22%20height%3D%221%22%20border%3D%220%22%20%2F%3E%0A%3Cimg%20src%3D%22https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D549332%26t%3D2%22%20width%3D%221%22%20height%3D%221%22%20border%3D%220%22%20%2F%3E%0A%3Cimg%20src%3D%22https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D549334%26t%3D2%22%20width%3D%221%22%20height%3D%221%22%20border%3D%220%22%20%2F%3E"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="ENABLE_BLIPIXEL"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger removeafterconsumption="true">
+      <cookie name="BlueLithium" value="" />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="14749,14750,14751" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Blue Lithium SSL"
+         value="%3Cimg%20src%3D%22https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D427804%26t%3D2%22%20width%3D%221%22%20height%3D%221%22%20border%3D%220%22%20%2F%3E%0A%3Cimg%20src%3D%22https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D549331%26t%3D2%22%20width%3D%221%22%20height%3D%221%22%20border%3D%220%22%20%2F%3E%0A%3Cimg%20src%3D%22https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D549335%26t%3D2%22%20width%3D%221%22%20height%3D%221%22%20border%3D%220%22%20%2F%3E"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="ENABLE_BLIPIXEL"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger removeafterconsumption="true">
+      <cookie name="BlueLithium_SSL" value="" />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="15017,15019,15021" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Blue Lithium Domain Search"
+         value="https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D427801%26t%3D2"
+         type="image"
+         application="CART"
+         contexts="1"
+         appsettingname="ENABLE_BLIPIXEL"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger removeafterconsumption="true">
+      <cookie name="BlueLithium_domainsearch" value="" />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="15016,15018,15020" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Bid Management"
+         value="~/OrderConfirmation/Controls/PixelTracking/BidManagementPixel.ascx"
+         type="control"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_BIDMANAGEMENT_PIXEL_ENABLE"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger>
+      <sourcecodes>
+        <sourcecode value="basl*" />
+        <sourcecode value="bcax*" />
+        <sourcecode value="bdbp*" />
+        <sourcecode value="bema*" />
+        <sourcecode value="bgdn*" />
+        <sourcecode value="bght*" />
+        <sourcecode value="bgsl*" />
+        <sourcecode value="bibz*" />
+        <sourcecode value="bicp*" />
+        <sourcecode value="bidc*" />
+        <sourcecode value="bido*" />
+        <sourcecode value="bids*" />
+        <sourcecode value="biio*" />
+        <sourcecode value="bime*" />
+        <sourcecode value="bine*" />
+        <sourcecode value="binf*" />
+        <sourcecode value="bing*" />
+        <sourcecode value="bisl*" />
+        <sourcecode value="biud*" />
+        <sourcecode value="bixx*" />
+        <sourcecode value="biyd*" />
+        <sourcecode value="bmob*" />
+        <sourcecode value="bqpc*" />
+        <sourcecode value="bsdo*" />
+        <sourcecode value="bsfn*" />
+        <sourcecode value="btdn*" />
+        <sourcecode value="btnt*" />
+        <sourcecode value="bww3*" />
+        <sourcecode value="cnd7*" />
+        <sourcecode value="dbpg*" />
+        <sourcecode value="dedg*" />
+        <sourcecode value="dssl*" />
+        <sourcecode value="dsu3*" />
+        <sourcecode value="dukg*" />
+        <sourcecode value="esdg*" />
+        <sourcecode value="essl*" />
+        <sourcecode value="frdg*" />
+        <sourcecode value="gauc*" />
+        <sourcecode value="gcau*" />
+        <sourcecode value="gdbp*" />
+        <sourcecode value="gdpb*" />
+        <sourcecode value="gfnf*" />
+        <sourcecode value="gfnn*" />
+        <sourcecode value="gimd*" />
+        <sourcecode value="gimh*" />
+        <sourcecode value="gims*" />
+        <sourcecode value="gixx*" />
+        <sourcecode value="gmnh*" />
+        <sourcecode value="gnau*" />
+        <sourcecode value="gnnn*" />
+        <sourcecode value="goaf*" />
+        <sourcecode value="goaj*" />
+        <sourcecode value="goaz*" />
+        <sourcecode value="goba*" />
+        <sourcecode value="goc5*" />
+        <sourcecode value="goca*" />
+        <sourcecode value="goch*" />
+        <sourcecode value="gocn*" />
+        <sourcecode value="goco*" />
+        <sourcecode value="godo*" />
+        <sourcecode value="goem*" />
+        <sourcecode value="goeu*" />
+        <sourcecode value="gofa*" />
+        <sourcecode value="gofb*" />
+        <sourcecode value="gofe*" />
+        <sourcecode value="goff*" />
+        <sourcecode value="gofg*" />
+        <sourcecode value="gofn*" />
+        <sourcecode value="gofx*" />
+        <sourcecode value="gohk*" />
+        <sourcecode value="goim*" />
+        <sourcecode value="goin*" />
+        <sourcecode value="gois*" />
+        <sourcecode value="gola*" />
+        <sourcecode value="gome*" />
+        <sourcecode value="gomo*" />
+        <sourcecode value="gomz*" />
+        <sourcecode value="gooa*" />
+        <sourcecode value="goob*" />
+        <sourcecode value="goob*" />
+        <sourcecode value="gooc*" />
+        <sourcecode value="good*" />
+        <sourcecode value="gooe*" />
+        <sourcecode value="goof*" />
+        <sourcecode value="gooh*" />
+        <sourcecode value="gooi*" />
+        <sourcecode value="gooj*" />
+        <sourcecode value="goom*" />
+        <sourcecode value="goon*" />
+        <sourcecode value="gooo*" />
+        <sourcecode value="goop*" />
+        <sourcecode value="goot*" />
+        <sourcecode value="goou*" />
+        <sourcecode value="goov*" />
+        <sourcecode value="goow*" />
+        <sourcecode value="gooy*" />
+        <sourcecode value="gopr*" />
+        <sourcecode value="goqs*" />
+        <sourcecode value="gorp*" />
+        <sourcecode value="gosk*" />
+        <sourcecode value="goss*" />
+        <sourcecode value="gota*" />
+        <sourcecode value="gotl*" />
+        <sourcecode value="goua*" />
+        <sourcecode value="gouk*" />
+        <sourcecode value="gowt*" />
+        <sourcecode value="gres*" />
+        <sourcecode value="gsfn*" />
+        <sourcecode value="gsnd*" />
+        <sourcecode value="gspc*" />
+        <sourcecode value="gspn*" />
+        <sourcecode value="gssn*" />
+        <sourcecode value="gtdn*" />
+        <sourcecode value="gtld*" />
+        <sourcecode value="gtnf*" />
+        <sourcecode value="gtng*" />
+        <sourcecode value="gtnh*" />
+        <sourcecode value="gtnn*" />
+        <sourcecode value="gwst*" />
+        <sourcecode value="gxxx*" />
+        <sourcecode value="ho99*" />
+        <sourcecode value="hos3*" />
+        <sourcecode value="hos4*" />
+        <sourcecode value="hosb*" />
+        <sourcecode value="hs50*" />
+        <sourcecode value="hs99*" />
+        <sourcecode value="htgs*" />
+        <sourcecode value="msfn*" />
+        <sourcecode value="msnc*" />
+        <sourcecode value="msnd*" />
+        <sourcecode value="ssfl*" />
+        <sourcecode value="ssgl*" />
+        <sourcecode value="sshl*" />
+        <sourcecode value="sslg*" />
+        <sourcecode value="sslf*" />
+        <sourcecode value="sslj*" />
+        <sourcecode value="sslq*" />
+        <sourcecode value="sslx*" />
+        <sourcecode value="ukdg*" />
+        <sourcecode value="wwgo*" />
+        <sourcecode value="wwgv*" />
+        <sourcecode value="xssl*" />
+        <sourcecode value="yhkt*" />
+        <sourcecode value="ysfn*" />
+        <sourcecode value="ysnd*" />
+        <sourcecode value="zssl*" />
+      </sourcecodes>
+    </trigger>
+  </pixel>
+  <pixel name="Extole"
+         value="~/OrderConfirmation/Controls/PixelTracking/ExtolePixel.ascx"
+         type="control"
+         application="CART"
+         contexts="*"
+         appsettingname="CART_EXTOLEPIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger required="orderdetail,sourcecodes">
+      <orderdetail name="_total_total" comparison="&gt;=" value="1000" />
+      <sourcecodes>
+        <sourcecode value="REFERME" />
+      </sourcecodes>
+    </trigger>
+  </pixel>
+  <pixel name="SponsorPay"
+         doreplace="true"
+         value="~/OrderConfirmation/Controls/PixelTracking/SponsorPayPixel.ascx"
+         type="control"
+         application="CART"
+         contexts="*"
+         appsettingname="CART_SPONSORPAY_ENABLE"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="true" removeafterconsumption="true" firsttimeonly="true" required="orderdetail,sourcecodes">
+      <orderdetail name="_total_total" comparison="&gt;" value="500" />
+      <sourcecodes>
+        <sourcecode value="spp1" />
+        <sourcecode value="spp2" />
+        <sourcecode value="spp3" />
+        <sourcecode value="spp4" />
+        <sourcecode value="spp5" />
+        <sourcecode value="spp1i" />
+        <sourcecode value="spp2i" />
+        <sourcecode value="spp3i" />
+        <sourcecode value="spp4i" />
+        <sourcecode value="spp5i" />
+        <sourcecode value="spbe1" />
+        <sourcecode value="spsbbe" />
+      </sourcecodes>
+    </trigger>
+  </pixel>
+  <pixel name="Verisign"
+         value="https://fls.doubleclick.net/activityi;src=3639908;type=q2reg757;cat=gd_ty;ord=1;num={{guid}}"
+         type="script"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_VERISIGN_PIXEL_ENABLE"
+         doreplace="true"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="true" removeafterconsumption="true">
+      <cookie name="verisignpixel_{{privatelabelid}}" value=""  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78796" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Natural Intelligence"
+         value="%3Cimg%20src%3D%22https%3A%2F%2Fnaturaltracking.com%2Ftc.php%3Faccount_id%3D61c8192a792a%26conversion_value%3D230%26type%3Dsale%22%20width%3D%221%22%20height%3D%221%22%20alt%3D%22%22%20border%3D%220%22%20%2F%3E%0A%3Cimg%20src%3D%22https%3A%2F%2Fwww.googleadservices.com%2Fpagead%2Fconversion%2F1000066972%2F%3Fvalue%3D230%26amp%3Blabel%3DgSliCPT2ywQQnJ_v3AM%26amp%3Bguid%3DON%26amp%3Bscript%3D0%22%20width%3D%221%22%20height%3D%221%22%20alt%3D%22%22%20border%3D%220%22%20%2F%3E"
+         type="none"
+         application="CART"
+         contexts="*"
+         appsettingname="CART_NATURAL_INTEL_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="false">
+      <sourcecodes>
+        <sourcecode value="iapni*" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78792" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Bizo"
+         value="%3Cscript%20type%3D%22text%2Fjavascript%22%3E%0A%20%20_bizo_data_partner_id%20%3D%20%221671%22%3B%0A%20%20(function%20()%20%7B%20var%20b%2C%20a%2C%20u%3B%20a%20%3D%20document.createElement(%22script%22)%3B%20a.type%20%3D%20%22text%2Fjavascript%22%3B%20a.async%20%3D%20true%3B%20u%20%3D%20(window.location.protocol%20%3D%3D%3D%20%22https%3A%22%20%3F%20%22https%3A%2F%2Fsjs.%22%20%3A%20%22http%3A%2F%2Fjs.%22)%20%2B%20%22bizographics.com%2Finsight.min.js%22%3B%20a.src%20%3D%20u%3B%20b%20%3D%20document.getElementsByTagName(%22script%22)%5B0%5D%3B%20return%20b.parentNode.insertBefore(a%2C%20b)%20%7D)()%3B%0A%3C%2Fscript%3E%0A"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_BIZO_PIXEL_ENABLE"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="true" removeafterconsumption="false">
+      <cookie name="bizopixel_{{privatelabelid}}" value=""  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78788" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Ozone Media"
+         value="https%3A%2F%2Fsecure.adnxs.com%2Fpx%3Fid%3D30716%26t%3D1"
+         type="script"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_OZONE_PIXEL_ENABLE"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="false">
+      <sourcecodes>
+        <sourcecode value="ozon*" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78793" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Value click"
+         value="https://secure.fastclick.net/w/roitrack.cgi?aid=12908"
+         type="image"
+         application="CART"
+         contexts="*"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="false">
+      <sourcecodes>
+        <sourcecode value="vc20cana" />
+        <sourcecode value="vc20canb" />
+        <sourcecode value="vc20canc" />
+        <sourcecode value="vc25cana" />
+        <sourcecode value="vc25canb" />
+        <sourcecode value="vc25cabc" />
+        <sourcecode value="vc799cana" />
+        <sourcecode value="vc799canb" />
+        <sourcecode value="vc799canc" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78252" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Interactive Optimization"
+         value="https://ss1.zedo.com/ads2/t?o=446896;h=1434258;z={{guid}}"
+         type="image"
+         application="CART"
+         contexts="*"
+         appsettingname="CART_INTER_PIXEL_ENABLE"
+         doreplace="true"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="false">
+      <sourcecodes>
+        <sourcecode value="3i799cana" />
+        <sourcecode value="3i799canb" />
+        <sourcecode value="3i799canc" />
+        <sourcecode value="3i20cana" />
+        <sourcecode value="3i20canb" />
+        <sourcecode value="3i20canc" />
+        <sourcecode value="3i25cana" />
+        <sourcecode value="3i25canb" />
+        <sourcecode value="3i25canc" />
+        <sourcecode value="3i799ausa" />
+        <sourcecode value="3i799ausb" />
+        <sourcecode value="3i799ausc" />
+        <sourcecode value="3i20ausa" />
+        <sourcecode value="3i20ausb" />
+        <sourcecode value="3i20ausc" />
+        <sourcecode value="3i25ausa" />
+        <sourcecode value="3i25ausb" />
+        <sourcecode value="3i25ausc" />
+        <sourcecode value="3i799uka" />
+        <sourcecode value="3i799ukb" />
+        <sourcecode value="3i799ukc" />
+        <sourcecode value="3i20uka" />
+        <sourcecode value="3i20ukb" />
+        <sourcecode value="3i20ukc" />
+        <sourcecode value="3i25uka" />
+        <sourcecode value="3i25ukb" />
+        <sourcecode value="3i25ukc" />
+        <sourcecode value="3i799inda" />
+        <sourcecode value="3i799indb" />
+        <sourcecode value="3i799indc" />
+        <sourcecode value="3i20inda" />
+        <sourcecode value="3i20indb" />
+        <sourcecode value="3i20indc" />
+        <sourcecode value="3i25inda" />
+        <sourcecode value="3i25indb" />
+        <sourcecode value="3i25indc" />
+      </sourcecodes>
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78800" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Advertising.com"
+         value="https://secure.ace-tag.advertising.com/action/type=701290301/bins=1/rich=0/mnum=1516/logs=0"
+         type="image"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_ADVERTISING_COM_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="true" removeafterconsumption="true" firsttimeonly="true">
+      <sourcecodes>
+        <sourcecode value="AD599COMa" />
+        <sourcecode value="AD599COMb" />
+        <sourcecode value="AD599COMc" />
+        <sourcecode value="AD25OFFa" />
+        <sourcecode value="AD25OFFb" />
+        <sourcecode value="AD25OFFc" />
+        <sourcecode value="AD25OFF1" />
+        <sourcecode value="AD25OFF2" />
+        <sourcecode value="AD25OFF3" />
+        <sourcecode value="AD199COMa" />
+        <sourcecode value="AD199COMb" />
+        <sourcecode value="AD199COMc" />
+        <sourcecode value="AD32OFFa" />
+        <sourcecode value="AD32OFFb" />
+        <sourcecode value="AD32OFFc" />
+        <sourcecode value="AD50weba" />
+        <sourcecode value="AD50webb" />
+        <sourcecode value="AD50webc" />
+        <sourcecode value="AD499SSLa" />
+        <sourcecode value="AD499SSLb" />
+        <sourcecode value="AD499SSLc" />
+      </sourcecodes>
+      <cookie name="advertisingHP{{privatelabelid}}" value="" />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78157" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Ad Services"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;/* &lt;![CDATA[ */var google_conversion_id = 1051291126;var google_conversion_label = &quot;_MoZCPT-2wMQ9tul9QM&quot;;var google_custom_params = window.google_tag_params;var google_remarketing_only = true;/* ]]&gt;*/&lt;/script&gt;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&lt;/script&gt;&lt;noscript&gt;&lt;div style=&quot;display:inline;&quot;&gt;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src&quot;/googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=_MoZCPT-2wMQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&lt;/div&gt;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_ADSERVICES_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookie name="GoogleADServicesgoogleremarketing" value=""  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78790" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Radium One"
+         value="&lt;-- RadiumOne code begin --&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;&lt;!--&#13;&#10;document.write(&#39;&lt;iframe src=&quot;https://rs.gwallet.com/r1/pixel/x5882r&#39;+Math.round(Math.random()*10000000)+&#39;&quot; width=&quot;1&quot; height=&quot;1&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot;scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;&#39;);&#13;&#10;//--&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;iframe src=&quot;https://rs.gwallet.com/r1/pixel/x5882&quot; width=&quot;1&quot; height=&quot;1&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;&#13;&#10;&lt;/noscript&gt;&#13;&#10;&lt;-- RadiumOne code end --&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_RADIUM_ONE_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true" firsttimeonly="true">
+      <cookie name="RadiumOne_domainsearch" value=""  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78794" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Value click"
+       value="https://secure.fastclick.net/w/roitrack.cgi?aid=14487"
+       type="image"
+       application="CART"
+       contexts="1"
+       appsettingname="CART_VALUE_CLICK_PIXEL_ENABLED"
+       page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="true" removeafterconsumption="true" firsttimeonly="true">
+      <sourcecodes>
+        <sourcecode value="VC199coma" />
+        <sourcecode value="VC199comb" />
+        <sourcecode value="VC199comc" />
+        <sourcecode value="VC199comd" />
+        <sourcecode value="VC199come" />
+        <sourcecode value="VC32offa" />
+        <sourcecode value="VC32offb" />
+        <sourcecode value="VC32offc" />
+        <sourcecode value="VC499ssla" />
+        <sourcecode value="VC499sslb" />
+        <sourcecode value="VC499sslc" />
+        <sourcecode value="VC50weba" />
+        <sourcecode value="VC50webb" />
+        <sourcecode value="VC50webc" />
+      </sourcecodes>
+      <cookie name="LP_ValueClick{{privatelabelid}}" value=""  />
+      <cookie name="LP_ValueClickHP{{privatelabelid}}" value=""  />
+      <cookie name="ValueClick{{privatelabelid}}" value=""  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78252" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google India - Homepage pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;KEDQCIz48gMQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=KEDQCIz48gMQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_INDIA_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googleHP" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="in" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="79093" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google India - Domain search pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;qUS5CLSu9QMQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=qUS5CLSu9QMQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_INDIA_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googledomains" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="in" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="79091" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google India - Hosting pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;IHFQCNSq9QMQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=IHFQCNSq9QMQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_INDIA_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googlewebhosting" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="in" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="79092" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google India - SSL pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;_TRNCMSs9QMQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=_TRNCMSs9QMQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_INDIA_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googleSSL" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="in" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="79094" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Australia - Homepage pixel cookie"
+       value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;V8xYCIzsmQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=V8xYCIzsmQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+       type="none"
+       application="CART"
+       contexts="1"
+       appsettingname="CART_GOOGLE_AU_PIXEL_ENABLED"
+       page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googleHP" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="au" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78424" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Australia - Domain search pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;wZ5OCNzxmQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=wZ5OCNzxmQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_AU_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googledomains" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="au" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78422" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Australia - Hosting pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;C9XHCPztmQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=C9XHCPztmQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_AU_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googlewebhosting" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="au" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78423" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Australia - SSL pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;JoyrCOzvmQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=JoyrCOzvmQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_AU_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googleSSL" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="au" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78425" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Canada - Homepage pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;XYSpCPz8mQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=XYSpCPz8mQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_CA_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googleHP" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="ca" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78428" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Canada - Domain search pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;rDi4CMyCmgQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=rDi4CMyCmgQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_CA_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googledomains" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="ca" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78426" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Canada - Hosting pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;2R0lCOz-mQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=2R0lCOz-mQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_CA_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googlewebhosting" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="ca" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78427" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Canada - SSL pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;0dAYCNyAmgQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=0dAYCNyAmgQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_CA_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googleSSL" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="ca" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78429" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Spanish - Homepage pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;Gy2-CLz1mQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=Gy2-CLz1mQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_ES_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googleHP" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="es" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78432" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Spanish - Domain search pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;6vS4CIz7mQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=6vS4CIz7mQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_ES_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googledomains" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="es" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78430" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Spanish - Hosting pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;pKR7CKz3mQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=pKR7CKz3mQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_ES_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googlewebhosting" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="es" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78431" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Spanish - SSL pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;cwdHCJz5mQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=cwdHCJz5mQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_ES_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googleSSL" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="es" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78433" />
+    </additionaldata>
+  </pixel>
+</pixels>

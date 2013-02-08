@@ -11,10 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PixelsGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PixelsGet.Interface", "Atlantis.Framework.PixelsGet.Interface\Atlantis.Framework.PixelsGet.Interface.csproj", "{004D21CB-B886-4DE6-BCCD-66E1CCDF3C22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PixelsGet.Test", "Atlantis.Framework.PixelsGet.Test\Atlantis.Framework.PixelsGet.Test.csproj", "{E083A970-C9D9-4C49-B17D-56417485DC69}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PixelsGet.Test.Web", "Atlantis.Framework.PixelsGet.Test.Web\Atlantis.Framework.PixelsGet.Test.Web.csproj", "{4A2EE7D6-79D6-4D56-AA0D-80B22E9D8E2D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BasePages", "..\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages.csproj", "{69A90C5C-706C-49DD-8F1C-78B8FFB67EA3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
@@ -22,6 +18,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ManagerUser.Interface", "..\Atlantis.Framework.ManagerUser\Atlantis.Framework.ManagerUser.Interface\Atlantis.Framework.ManagerUser.Interface.csproj", "{55F48501-FE1B-441B-A786-A14001AD2F04}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperPriceType.Interface", "..\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Interface\Atlantis.Framework.ShopperPriceType.Interface.csproj", "{F310FE92-7999-46F3-A64E-36F90243BA02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.PixelsGet.Test2", "Atlantis.Framework.PixelsGet.Test2\Atlantis.Framework.PixelsGet.Test2.csproj", "{F7ECAFF2-B4C2-41D6-9DB9-0AF3144D7CA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.VerifyShopper.Interface", "..\Atlantis.Framework.VerifyShopper\Atlantis.Framework.VerifyShopper.Interface\Atlantis.Framework.VerifyShopper.Interface.csproj", "{8CDD515F-375E-4FA5-9E41-F95227396675}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -37,34 +37,35 @@ Global
 		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.PixelsGet.sln
 		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
 		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName3 = Atlantis.Framework.PixelsGet.Test\\Atlantis.Framework.PixelsGet.Test.csproj
-		SccProjectName3 = Atlantis.Framework.PixelsGet.Test
-		SccLocalPath3 = Atlantis.Framework.PixelsGet.Test
-		SccProjectUniqueName4 = Atlantis.Framework.PixelsGet.Impl\\Atlantis.Framework.PixelsGet.Impl.csproj
-		SccProjectName4 = Atlantis.Framework.PixelsGet.Impl
-		SccLocalPath4 = Atlantis.Framework.PixelsGet.Impl
-		SccProjectUniqueName5 = Atlantis.Framework.PixelsGet.Interface\\Atlantis.Framework.PixelsGet.Interface.csproj
-		SccProjectName5 = Atlantis.Framework.PixelsGet.Interface
-		SccLocalPath5 = Atlantis.Framework.PixelsGet.Interface
-		SccProjectUniqueName6 = Atlantis.Framework.PixelsGet.Test.Web\\Atlantis.Framework.PixelsGet.Test.Web.csproj
-		SccProjectName6 = Atlantis.Framework.PixelsGet.Test.Web
-		SccLocalPath6 = Atlantis.Framework.PixelsGet.Test.Web
-		SccProjectUniqueName7 = ..\\Atlantis.Framework.BasePages\\Atlantis.Framework.BasePages\\Atlantis.Framework.BasePages.csproj
+		SccProjectUniqueName3 = Atlantis.Framework.PixelsGet.Impl\\Atlantis.Framework.PixelsGet.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.PixelsGet.Impl
+		SccLocalPath3 = Atlantis.Framework.PixelsGet.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.PixelsGet.Interface\\Atlantis.Framework.PixelsGet.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.PixelsGet.Interface
+		SccLocalPath4 = Atlantis.Framework.PixelsGet.Interface
+		SccProjectUniqueName5 = ..\\Atlantis.Framework.BasePages\\Atlantis.Framework.BasePages\\Atlantis.Framework.BasePages.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.PixelsGet.sln
+		SccProjectName5 = ../Atlantis.Framework.BasePages/Atlantis.Framework.BasePages
+		SccLocalPath5 = ..\\Atlantis.Framework.BasePages\\Atlantis.Framework.BasePages
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.PixelsGet.sln
+		SccProjectName6 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
+		SccLocalPath6 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.ManagerUser\\Atlantis.Framework.ManagerUser.Interface\\Atlantis.Framework.ManagerUser.Interface.csproj
 		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.PixelsGet.sln
-		SccProjectName7 = ../Atlantis.Framework.BasePages/Atlantis.Framework.BasePages
-		SccLocalPath7 = ..\\Atlantis.Framework.BasePages\\Atlantis.Framework.BasePages
-		SccProjectUniqueName8 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
+		SccProjectName7 = ../Atlantis.Framework.ManagerUser/Atlantis.Framework.ManagerUser.Interface
+		SccLocalPath7 = ..\\Atlantis.Framework.ManagerUser\\Atlantis.Framework.ManagerUser.Interface
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.ShopperPriceType\\Atlantis.Framework.ShopperPriceType.Interface\\Atlantis.Framework.ShopperPriceType.Interface.csproj
 		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.PixelsGet.sln
-		SccProjectName8 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
-		SccLocalPath8 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
-		SccProjectUniqueName9 = ..\\Atlantis.Framework.ManagerUser\\Atlantis.Framework.ManagerUser.Interface\\Atlantis.Framework.ManagerUser.Interface.csproj
-		SccProjectTopLevelParentUniqueName9 = Atlantis.Framework.PixelsGet.sln
-		SccProjectName9 = ../Atlantis.Framework.ManagerUser/Atlantis.Framework.ManagerUser.Interface
-		SccLocalPath9 = ..\\Atlantis.Framework.ManagerUser\\Atlantis.Framework.ManagerUser.Interface
-		SccProjectUniqueName10 = ..\\Atlantis.Framework.ShopperPriceType\\Atlantis.Framework.ShopperPriceType.Interface\\Atlantis.Framework.ShopperPriceType.Interface.csproj
+		SccProjectName8 = ../Atlantis.Framework.ShopperPriceType/Atlantis.Framework.ShopperPriceType.Interface
+		SccLocalPath8 = ..\\Atlantis.Framework.ShopperPriceType\\Atlantis.Framework.ShopperPriceType.Interface
+		SccProjectUniqueName9 = Atlantis.Framework.PixelsGet.Test2\\Atlantis.Framework.PixelsGet.Test2.csproj
+		SccProjectName9 = Atlantis.Framework.PixelsGet.Test2
+		SccLocalPath9 = Atlantis.Framework.PixelsGet.Test2
+		SccProjectUniqueName10 = ..\\Atlantis.Framework.VerifyShopper\\Atlantis.Framework.VerifyShopper.Interface\\Atlantis.Framework.VerifyShopper.Interface.csproj
 		SccProjectTopLevelParentUniqueName10 = Atlantis.Framework.PixelsGet.sln
-		SccProjectName10 = ../Atlantis.Framework.ShopperPriceType/Atlantis.Framework.ShopperPriceType.Interface
-		SccLocalPath10 = ..\\Atlantis.Framework.ShopperPriceType\\Atlantis.Framework.ShopperPriceType.Interface
+		SccProjectName10 = ../Atlantis.Framework.VerifyShopper/Atlantis.Framework.VerifyShopper.Interface
+		SccLocalPath10 = ..\\Atlantis.Framework.VerifyShopper\\Atlantis.Framework.VerifyShopper.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,14 +88,6 @@ Global
 		{004D21CB-B886-4DE6-BCCD-66E1CCDF3C22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{004D21CB-B886-4DE6-BCCD-66E1CCDF3C22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{004D21CB-B886-4DE6-BCCD-66E1CCDF3C22}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E083A970-C9D9-4C49-B17D-56417485DC69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E083A970-C9D9-4C49-B17D-56417485DC69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E083A970-C9D9-4C49-B17D-56417485DC69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E083A970-C9D9-4C49-B17D-56417485DC69}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A2EE7D6-79D6-4D56-AA0D-80B22E9D8E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A2EE7D6-79D6-4D56-AA0D-80B22E9D8E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A2EE7D6-79D6-4D56-AA0D-80B22E9D8E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A2EE7D6-79D6-4D56-AA0D-80B22E9D8E2D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{69A90C5C-706C-49DD-8F1C-78B8FFB67EA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{69A90C5C-706C-49DD-8F1C-78B8FFB67EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69A90C5C-706C-49DD-8F1C-78B8FFB67EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -111,6 +104,14 @@ Global
 		{F310FE92-7999-46F3-A64E-36F90243BA02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F310FE92-7999-46F3-A64E-36F90243BA02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F310FE92-7999-46F3-A64E-36F90243BA02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7ECAFF2-B4C2-41D6-9DB9-0AF3144D7CA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7ECAFF2-B4C2-41D6-9DB9-0AF3144D7CA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7ECAFF2-B4C2-41D6-9DB9-0AF3144D7CA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7ECAFF2-B4C2-41D6-9DB9-0AF3144D7CA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CDD515F-375E-4FA5-9E41-F95227396675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CDD515F-375E-4FA5-9E41-F95227396675}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CDD515F-375E-4FA5-9E41-F95227396675}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CDD515F-375E-4FA5-9E41-F95227396675}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,5 +123,6 @@ Global
 		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {196A09FE-1741-4989-B7B1-9D074D2DAA12}
 		{55F48501-FE1B-441B-A786-A14001AD2F04} = {196A09FE-1741-4989-B7B1-9D074D2DAA12}
 		{F310FE92-7999-46F3-A64E-36F90243BA02} = {196A09FE-1741-4989-B7B1-9D074D2DAA12}
+		{8CDD515F-375E-4FA5-9E41-F95227396675} = {196A09FE-1741-4989-B7B1-9D074D2DAA12}
 	EndGlobalSection
 EndGlobal

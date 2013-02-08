@@ -56,7 +56,7 @@ namespace Atlantis.Framework.PixelsGet.Impl
       }
       else
       {
-        XDocument.Load(pathToLoad, LoadOptions.None);
+        pixelData = XDocument.Load(pathToLoad, LoadOptions.None);
       }
 
       foreach (XNode node in pixelData.Root.Nodes())

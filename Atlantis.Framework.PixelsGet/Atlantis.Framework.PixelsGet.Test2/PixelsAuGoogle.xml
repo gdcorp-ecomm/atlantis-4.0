@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pixels>
+  <pixel name="Google Australia - Homepage pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;V8xYCIzsmQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=V8xYCIzsmQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_AU_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googleHP" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="au" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78424" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Google Australia - Domain search pixel cookie"
+         value="&lt;script type=&quot;text/javascript&quot;&gt;&#13;&#10;/* &lt;![CDATA[ */&#13;&#10;var google_conversion_id = 1051291126;&#13;&#10;var google_conversion_label = &quot;wZ5OCNzxmQQQ9tul9QM&quot;;&#13;&#10;var google_custom_params = window.google_tag_params;&#13;&#10;var google_remarketing_only = true;&#13;&#10;/* ]]&gt; */&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;script type=&quot;text/javascript&quot; src=&quot;//www.googleadservices.com/pagead/conversion.js&quot;&gt;&#13;&#10;&lt;/script&gt;&#13;&#10;&lt;noscript&gt;&#13;&#10;&lt;div style=&quot;display:inline;&quot;&gt;&#13;&#10;&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot; src=&quot;//googleads.g.doubleclick.net/pagead/viewthroughconversion/1051291126/?value=0&amp;amp;label=wZ5OCNzxmQQQ9tul9QM&amp;amp;guid=ON&amp;amp;script=0&quot;/&gt;&#13;&#10;&lt;/div&gt;&#13;&#10;&lt;/noscript&gt;"
+         type="none"
+         application="CART"
+         contexts="1"
+         appsettingname="CART_GOOGLE_AU_PIXEL_ENABLED"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="false" removeafterconsumption="true">
+      <cookiegroup triggercookiename="pixel_googledomains" associatedcookienames="pixel_googleHP,pixel_googledomains,pixel_googlewebhosting,pixel_googleSSL" value="au" cookieencoded="true"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78422" />
+    </additionaldata>
+  </pixel>
+</pixels>

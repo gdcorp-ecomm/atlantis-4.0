@@ -91,16 +91,13 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 
         if (!isTriggerCookie)
         {
-          if (HttpContext.Current != null)
+          HttpCookie tempCookie = PixelRequest.RequestCookies[associatedCookieName];
+          if (tempCookie != null)
           {
-            HttpCookie tempCookie = PixelRequest.RequestCookies[associatedCookieName];
-            if (tempCookie != null)
+            if (tempCookie.Expires > triggerCookieExpires)
             {
-              if (tempCookie.Expires > triggerCookieExpires)
-              {
-                isNewestCookie = false;
-                break;
-              }
+              isNewestCookie = false;
+              break;
             }
           }
         }
@@ -116,17 +113,20 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
       {
         if (attribute.Value.Equals("true", StringComparison.OrdinalIgnoreCase))
         {
-          if (HttpContext.Current != null)
+          if (PixelRequest.RequestCookies != null)
           {
             foreach (string associatedCookieName in associatedCookieNames.Split(','))
             {
-              HttpCookie tempCookie = HttpContext.Current.Response.Cookies[associatedCookieName];
+              HttpCookie tempCookie = PixelRequest.RequestCookies[associatedCookieName];
               if (tempCookie != null)
               {
-                PixelObjects.Helpers.CookieHelper cookieHelper = new PixelObjects.Helpers.CookieHelper();
-                HttpCookie cookie = cookieHelper.NewCrossDomainCookie(associatedCookieName, DateTime.Now.AddDays(-1));
-                HttpContext.Current.Response.Cookies.Remove(associatedCookieName);
-                HttpContext.Current.Response.Cookies.Add(cookie);
+                if (HttpContext.Current != null)
+                {
+                  HttpContext.Current.Response.Cookies.Remove(associatedCookieName);
+                  PixelObjects.Helpers.CookieHelper cookieHelper = new PixelObjects.Helpers.CookieHelper();
+                  HttpCookie cookie = cookieHelper.NewCrossDomainCookie(associatedCookieName, DateTime.Now.AddDays(-1));
+                  HttpContext.Current.Response.Cookies.Add(cookie);
+                }
               }
             }
           }

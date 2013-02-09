@@ -64,15 +64,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 
           if (shouldFirePixel)
           {
-            if (IsNewestCookieInGroup(searchCookie, associatedCookieNames))
-            {
-              RemoveAllCookiesIfNeccesary(TriggerElement, cookieName);
-              break;
-            }
-            else
-            {
-              shouldFirePixel = false;
-            }
+            RemoveAllCookiesIfNeccesary(TriggerElement, associatedCookieNames);
           }
         }
       }
@@ -80,32 +72,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
       return shouldFirePixel;
     }
 
-    private bool IsNewestCookieInGroup(HttpCookie triggerCookie, string associatedCookies)
-    {
-      bool isNewestCookie = true;
-      DateTime triggerCookieExpires = triggerCookie.Expires;
-
-      foreach (var associatedCookieName in associatedCookies.Split(','))
-      {
-        bool isTriggerCookie = associatedCookieName.Equals(triggerCookie.Name, StringComparison.OrdinalIgnoreCase);
-
-        if (!isTriggerCookie)
-        {
-          HttpCookie tempCookie = PixelRequest.RequestCookies[associatedCookieName];
-          if (tempCookie != null)
-          {
-            if (tempCookie.Expires > triggerCookieExpires)
-            {
-              isNewestCookie = false;
-              break;
-            }
-          }
-        }
-      }
-
-      return isNewestCookie;
-    }
-
+    
     private void RemoveAllCookiesIfNeccesary(XElement element, string associatedCookieNames)
     {
       var attribute = element.Attribute(PixelXmlNames.RemoveAfterConsumption);

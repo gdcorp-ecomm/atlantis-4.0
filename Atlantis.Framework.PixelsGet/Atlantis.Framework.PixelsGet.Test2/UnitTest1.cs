@@ -57,17 +57,24 @@ namespace Atlantis.Framework.PixelsGet.Test
     private HttpCookieCollection CreateGoogleCookieCollection()
     {
       var collection = new HttpCookieCollection();
-      collection.Add(CreateCookie("pixel_googleHP", "lbjjlhodwhegzcaiudraoefahfweccwb", 10));
+      collection.Add(CreateCookie("pixel_googleHP", "lbjjlhodwhegzcaiudraoefahfweccwb", -1));
       //  collection.Add(CreateCookie("BlueLithium", "testValue"));
       // collection.Add(CreateCookie("advertisinghp1", string.Empty));
-      collection.Add(CreateCookie("pixel_googledomains", "bdmjtivaifqdafkcgblhejeitfdiifmh", 12));
+      collection.Add(CreateCookie("pixel_googledomains", "bdmjtivaifqdafkcgblhejeitfdiifmh", -1));
       return collection;
     }
 
     private HttpCookie CreateCookie(string name, string value, int minutes)
     {
       var cookie = new HttpCookie(name, value);
-      cookie.Expires = DateTime.Now.AddMinutes(minutes);
+      if (minutes == -1)
+      {
+        cookie.Expires = DateTime.MinValue;
+      }
+      else
+      {
+        cookie.Expires = DateTime.Now.AddMinutes(minutes);
+      }
       cookie.Path = "/";
       return cookie;
     }

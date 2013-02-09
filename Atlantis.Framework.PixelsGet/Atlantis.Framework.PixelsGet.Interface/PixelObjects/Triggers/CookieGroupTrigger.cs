@@ -91,9 +91,9 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
                 if (HttpContext.Current != null)
                 {
                   HttpContext.Current.Response.Cookies.Remove(associatedCookieName);
-                  PixelObjects.Helpers.CookieHelper cookieHelper = new PixelObjects.Helpers.CookieHelper();
-                  HttpCookie cookie = cookieHelper.NewCrossDomainCookie(associatedCookieName, DateTime.Now.AddDays(-1));
-                  HttpContext.Current.Response.Cookies.Add(cookie);
+                  //PixelObjects.Helpers.CookieHelper cookieHelper = new PixelObjects.Helpers.CookieHelper();
+                  //HttpCookie cookie = cookieHelper.NewCrossDomainCookie(associatedCookieName, DateTime.Now.AddDays(-1));
+                  //HttpContext.Current.Response.Cookies.Add(cookie);
                 }
               }
             }

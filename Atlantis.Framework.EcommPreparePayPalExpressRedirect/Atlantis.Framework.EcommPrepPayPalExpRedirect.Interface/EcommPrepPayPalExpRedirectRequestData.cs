@@ -17,6 +17,7 @@ namespace Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface
     public string CartBorderColor { get; set; }
     public string LogoImage { get; set; }
     public string LocaleCode { get; set; }
+    public int ProfileID { get; set; }
 
     public EcommPrepPayPalExpRedirectRequestData( string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
                                                   string returnUrl, string cancelUrl, string headerImage, string headerBorderColor, string headerBackColor,
@@ -35,6 +36,24 @@ namespace Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface
       LocaleCode = localeCode;
     }
 
+    public EcommPrepPayPalExpRedirectRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
+                                                  string returnUrl, string cancelUrl, string headerImage, string headerBorderColor, string headerBackColor,
+                                                  string headerPayFlowColor, string cartBorderColor, string logoImage, string localeCode,int profileID)
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    {
+      RequestTimeout = TimeSpan.FromSeconds(20);
+      ReturnURL = returnUrl;
+      CancelURL = cancelUrl;
+      HeaderImage = headerImage;
+      HeaderBorderColor = headerBorderColor;
+      HeaderBackColor = headerBackColor;
+      HeaderPayFlowColor = headerPayFlowColor;
+      CartBorderColor = cartBorderColor;
+      LogoImage = logoImage;
+      LocaleCode = localeCode;
+      ProfileID = profileID;
+    }
+
     public override string GetCacheMD5()
     {
       throw new NotImplementedException("GetCacheMD5 not implemented in EcommPrepPayPalExpRedirectRequestData");
@@ -48,7 +67,11 @@ namespace Atlantis.Framework.EcommPrepPayPalExpRedirect.Interface
       xtwRequest.WriteStartElement("PayPalExpressSetup");
       xtwRequest.WriteAttributeString("ReturnURL", ReturnURL);
       xtwRequest.WriteAttributeString("CancelURL", CancelURL);
-      
+
+      if (ProfileID != 0)
+      {
+        xtwRequest.WriteAttributeString("pp_shopperProfileID", ProfileID.ToString());
+      }
       if (!string.IsNullOrEmpty(HeaderImage))
         xtwRequest.WriteAttributeString("cpp-header-image", HeaderImage);
 

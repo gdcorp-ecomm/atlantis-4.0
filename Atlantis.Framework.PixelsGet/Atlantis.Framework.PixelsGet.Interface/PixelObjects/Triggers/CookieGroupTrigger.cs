@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using Atlantis.Framework.PixelsGet.Interface.PixelObjects.Helpers;
 using Atlantis.Framework.PixelsGet.Interface.Constants;
 using Atlantis.Framework.BasePages.Cookies;
+using System.Collections.Generic;
 
 
 namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
@@ -20,7 +21,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
       return PixelXmlNames.TriggerTypeCookieGroup;
     }
 
-    public override bool ShouldFirePixel(bool isPixelAlreadyTriggered)
+    public override bool ShouldFirePixel(bool isPixelAlreadyTriggered, List<Pixel> alreadyFiredPixels, ref string triggerReturn)
     {
       bool shouldFirePixel = false;
       if (ContinuePixelFireCheck)
@@ -41,7 +42,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 
           HttpCookie searchCookie = PixelRequest.RequestCookies[cookieName];
 
-          if (searchCookie != null && searchCookie.Expires == DateTime.MinValue)
+          if (searchCookie != null && AllOtherCookiesInGroupHaveNotFired(associatedCookieNames, alreadyFiredPixels))
           {
             bool isFireCookieValueEmpty = string.IsNullOrEmpty(fireCookieValue); //essentially using empty value as a wildcard. As long as cookie exists, fire!
 
@@ -64,12 +65,25 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 
           if (shouldFirePixel)
           {
+            triggerReturn = cookieName;
             RemoveAllCookiesIfNeccesary(TriggerElement, associatedCookieNames);
           }
         }
       }
 
       return shouldFirePixel;
+    }
+
+    private bool AllOtherCookiesInGroupHaveNotFired(string associatedCookieNames, List<Pixel> alreadyFiredPixels)
+    {
+        foreach (string associatedCookieName in associatedCookieNames.Split(','))
+        {
+          if (null != alreadyFiredPixels.Find(p => (String.Compare(p.TriggerReturn, associatedCookieName, true) == 0)))
+          {
+            return false;
+          }
+        }
+        return true;
     }
 
     
@@ -89,6 +103,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
               {
                 if (HttpContext.Current != null)
                 {
+                  tempCookie.Expires = DateTime.Now.AddDays(-1);
                   HttpContext.Current.Response.Cookies.Remove(associatedCookieName);
                   PixelObjects.Helpers.CookieHelper cookieHelper = new PixelObjects.Helpers.CookieHelper();
                   HttpCookie cookie = cookieHelper.NewCrossDomainCookie(associatedCookieName, DateTime.Now.AddDays(-1));

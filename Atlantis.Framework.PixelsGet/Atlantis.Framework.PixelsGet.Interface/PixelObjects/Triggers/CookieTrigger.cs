@@ -21,7 +21,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
       return PixelXmlNames.TriggerTypeCookie;
     }
 
-    public override bool ShouldFirePixel(bool isPixelAlreadyTriggered)
+    public override bool ShouldFirePixel(bool isPixelAlreadyTriggered, List<Pixel> alreadyFiredPixels, ref string triggerReturn)
     {
       bool shouldFirePixel = false;
       if (ContinuePixelFireCheck)

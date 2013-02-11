@@ -66,9 +66,11 @@ namespace Atlantis.Framework.PixelsGet.Impl
           XElement currentElement = (XElement)node;
           if (currentElement != null && currentElement.Attribute(PixelXmlNames.AppName).Value == _pixelRequestData.AppName)
           {
-            if (TriggerPixel(currentElement))
+            string triggerReturn = String.Empty;
+            if (TriggerPixel(currentElement, pixels, ref triggerReturn))
             {
               Pixel newPixel = CreatePixel(currentElement);
+              newPixel.TriggerReturn = triggerReturn;
               pixels.Add(newPixel);
             }
           }
@@ -111,7 +113,7 @@ namespace Atlantis.Framework.PixelsGet.Impl
       return newPixel;
     }
 
-    private bool TriggerPixel(XElement currentElement)
+    private bool TriggerPixel(XElement currentElement, List<Pixel> pixelsFired, ref string triggerReturn)
     {
       bool shouldTriggerPixel = false;
       try
@@ -145,7 +147,7 @@ namespace Atlantis.Framework.PixelsGet.Impl
                   {
                     if (requiredTriggers.Contains(currentTrigger.TriggerType()))
                     {
-                      shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+                      shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered, pixelsFired, ref triggerReturn);
                       if (!shouldTriggerPixel)
                       {
                         break;
@@ -153,12 +155,12 @@ namespace Atlantis.Framework.PixelsGet.Impl
                     }
                     else if (!shouldTriggerPixel)
                     {
-                      shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+                      shouldTriggerPixel = currentTrigger.ShouldFirePixel(pixelAlreadyTriggered, pixelsFired, ref triggerReturn);
                     }
                     else
                     {
                       pixelAlreadyTriggered = true;
-                      currentTrigger.ShouldFirePixel(pixelAlreadyTriggered);
+                      currentTrigger.ShouldFirePixel(pixelAlreadyTriggered, pixelsFired, ref triggerReturn);
                     }
                   }
                 }

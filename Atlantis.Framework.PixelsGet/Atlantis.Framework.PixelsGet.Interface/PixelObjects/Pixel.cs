@@ -11,6 +11,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects
     public string PixelType { get; set; }
     public List<string> CiCodes { get; set; }
     public string AppSettingName { get; set; }
+    public string TriggerReturn { get; set; }
 
     public Pixel(string value, string name, string type, List<string> ciCodes, string appSetting = "")
     {

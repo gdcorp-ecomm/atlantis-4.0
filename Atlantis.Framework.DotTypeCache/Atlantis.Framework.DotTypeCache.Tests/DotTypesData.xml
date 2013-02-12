@@ -1,0 +1,1081 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DotTypes>
+  <DotType DotTypeName="ag">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="am">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="asia">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="at">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="be">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="biz">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>True</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="bz">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="ca">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="cc">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>True</HasExpiredAuctionIds>
+  </DotType>  
+  <DotType DotTypeName="cn">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="co">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>4</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>5</MaxRenewalLength>
+    <HasPreRegIds>True</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="co.in">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="co.nz">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="co.uk">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>1</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="com">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>True</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="com.ag">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="com.br">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="com.bz">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="com.cn">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="com.co">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>4</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>5</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="com.es">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>1</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="com.mx">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>5</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="com.sc">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="com.tw">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="de">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="es">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>1</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="eu">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="firm.in">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="fm">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="fr">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>1</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="gen.in">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="gs">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="idv.tw">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="in">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="ind.in">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="info">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>True</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="it">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>1</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="jobs">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="jp">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="me">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="me.uk">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>1</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="mobi">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="ms">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="mx">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>5</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>5</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="name">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>True</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="net">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>True</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="net.ag">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="net.br">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="net.bz">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="net.cn">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>5</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="net.co">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>4</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>5</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="net.in">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="net.nz">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="net.sc">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="nl">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="nom.co">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>4</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>5</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="nom.es">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>1</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="nu">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>2</MinRegistrationLength>
+    <MaxRegistrationLength>2</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>2</MinRenewalLength>
+    <MaxRenewalLength>2</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="org">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>True</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="org.ag">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="org.cn">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="org.es">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>5</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>1</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="org.in">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="org.nz">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="org.sc">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="org.tw">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="org.uk">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>1</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="sc">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="se">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>1</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="tc">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="tk">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>2</MinRegistrationLength>
+    <MaxRegistrationLength>2</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="tv">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>True</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="tw">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="us">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>True</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="vg">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>1</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>1</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>False</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="ws">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>False</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>True</HasExpiredAuctionIds>
+  </DotType>
+  <DotType DotTypeName="xxx">
+    <MinPreRegLength>1</MinPreRegLength>
+    <MaxPreRegLength>10</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinRegistrationLength>1</MinRegistrationLength>
+    <MaxRegistrationLength>10</MaxRegistrationLength>
+    <MinTransferLength>1</MinTransferLength>
+    <MaxTransferLength>9</MaxTransferLength>
+    <MinRenewalLength>1</MinRenewalLength>
+    <MaxRenewalLength>10</MaxRenewalLength>
+    <HasPreRegIds>True</HasPreRegIds>
+    <HasRegistrationIds>True</HasRegistrationIds>
+    <HasTransferIds>True</HasTransferIds>
+    <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
+  </DotType>
+</DotTypes>

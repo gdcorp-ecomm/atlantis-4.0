@@ -58,10 +58,11 @@ namespace Atlantis.Framework.GetCreditGroupSummary.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.GetCreditGroupSummary.Impl.dll")]
     public void TestMethod1()
     {
-      GetCreditGroupSummaryRequestData requestData = new GetCreditGroupSummaryRequestData("858421",
-        "http://localhost", "", "", 0, 187);
+      GetCreditGroupSummaryRequestData requestData = new GetCreditGroupSummaryRequestData("842904",
+        "http://localhost", "", "", 0, 193);
       GetCreditGroupSummaryResponseData responseData = (GetCreditGroupSummaryResponseData)Engine.Engine.ProcessRequest(requestData, 80);
       Assert.AreEqual(responseData.XML.Substring(0, 22), "<CREDITS totalCredits=");
     }

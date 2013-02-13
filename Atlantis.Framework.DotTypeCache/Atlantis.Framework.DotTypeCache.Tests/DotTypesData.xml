@@ -818,7 +818,7 @@
     <MinRegistrationLength>1</MinRegistrationLength>
     <MaxRegistrationLength>10</MaxRegistrationLength>
     <MinTransferLength>1</MinTransferLength>
-    <MaxTransferLength>9</MaxTransferLength>
+    <MaxTransferLength>10</MaxTransferLength>
     <MinRenewalLength>1</MinRenewalLength>
     <MaxRenewalLength>10</MaxRenewalLength>
     <HasPreRegIds>False</HasPreRegIds>

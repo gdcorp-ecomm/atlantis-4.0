@@ -298,7 +298,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       string dotType = System.Convert.ToString(testContextInstance.DataRow["DotTypeName"]);
       IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(dotType);
       Assert.IsNotNull(info);
-      Assert.AreEqual(dotType.ToUpper(), info.DotType, "DotType does not match for : " + dotType.ToUpper());
+      //Assert.AreEqual(dotType.ToUpper(), info.DotType, "DotType does not match for : " + dotType.ToUpper());
+      Assert.AreEqual(dotType.ToLower(), info.DotType.ToLower(), "DotType does not match for : " + dotType);
       
       /*Assert.AreEqual((string)testContextInstance.DataRow["HasPreRegIds"], info.HasPreRegIds.ToString(),
           "HasPreRegIds does not match for: " + dotType.ToUpper() + ". Expected: " +

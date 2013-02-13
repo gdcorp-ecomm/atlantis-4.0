@@ -61,6 +61,7 @@ namespace Atlantis.Framework.CommerceOrderXml.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.CommerceOrderXml.Impl.dll")]
     public void CommerceOrderXmlTest()
     {
       string recentOrderId = "1467535";

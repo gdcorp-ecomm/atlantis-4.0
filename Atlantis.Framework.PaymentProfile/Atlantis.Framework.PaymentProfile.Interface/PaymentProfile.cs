@@ -206,6 +206,7 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
             type = "Checking";
             break;
           case ProfileTypes.CreditCard:
+          case ProfileTypes.PrePaidCard:
             type = CreditCardType;
             break;
           case ProfileTypes.GiftCard:
@@ -287,6 +288,7 @@ namespace Atlantis.Framework.PaymentProfileClass.Interface
     public const string GiftCard = "gift_card";
     public const string PayPal = "paypal";
     public const string PrePaid = "prepaid";
+    public const string PrePaidCard = "prepaid_card";
     public const string LineOfCredit = "creditline";
     public const string NetGiro = "netgiro";
     public const string NullPayment = "nullpayment";

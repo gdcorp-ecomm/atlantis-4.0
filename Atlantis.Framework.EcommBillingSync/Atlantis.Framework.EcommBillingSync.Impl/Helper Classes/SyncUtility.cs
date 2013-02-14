@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using Atlantis.Framework.EcommBillingSync.Interface;
 using Atlantis.Framework.Interface;
 using gdOverrideLib;
+using Atlantis.Framework.EcommProductAddOns.Interface;
 
 namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
 {
@@ -118,6 +119,59 @@ namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
 			}
 
 			return hash;      
+    }
+
+    public bool BillingSyncProductHasAddOns(EcommBillingSyncRequestData ebsRequest, int billingResourceId, string orionId, string resourceType, int privateLabelId, int index, string duration, string durationHash, out List<AddToCartItem> addOnItems, out string addOnGuidId)
+    {
+      var hasAddOns = false;
+      addOnItems = new List<AddToCartItem>();
+      addOnGuidId = string.Empty;
+
+      try
+      {
+        var request = new EcommProductAddOnsRequestData(ebsRequest.ShopperID
+          , ebsRequest.SourceURL
+          , ebsRequest.OrderID
+          , ebsRequest.Pathway
+          , ebsRequest.PageCount
+          , ebsRequest.PrivateLabelId
+          , orionId
+          , resourceType);
+
+        var response = (EcommProductAddOnsResponseData)DataCache.DataCache.GetProcessRequest(request, ebsRequest.EcommProductAddOnsRequestType);
+
+        if (response.IsSuccess && response.HasAddOns)
+        {
+          hasAddOns = true;
+          addOnGuidId = new Guid().ToString();
+          addOnItems = CreateAddOnItems(ebsRequest, response.AddOnProducts, billingResourceId, addOnGuidId, index, duration, durationHash);
+        }
+      }
+      catch (Exception ex)
+      {
+        var data = string.Format("PrivateLabelId: {0} | OrionId: {1} | ResourceType: {2}", privateLabelId, orionId, resourceType);
+        throw new AtlantisException("EcommBillingSync.Helper_Classes::BillingSyncProductHasAddOns", "0", ex.Message, data, null, null);
+      }
+
+      return hasAddOns;
+    }
+
+    private List<AddToCartItem> CreateAddOnItems(EcommBillingSyncRequestData ebsRequest, IEnumerable<AddOnProduct> addOnProducts, int billingResourceId, string guid, int index, string duration, string durationHash)
+    {
+      const int QUANTITY = 1;
+      var addToCartItems = new List<AddToCartItem>();
+
+      foreach (var addOnProduct in addOnProducts)
+      {
+        var item = new AddToCartItem(string.Format("{0}_{1}", billingResourceId, index), addOnProduct.RenewalUnifiedProductId, billingResourceId, QUANTITY, ebsRequest.ItemTrackingCode, duration, durationHash);
+        // Only add Guid Info. Do not add TARGET_EXPIRATION_DATE for any add-ons. Will cause cart to fail on 
+        // duration as duration validation compares target date to this billing date, which is null for add-ons.
+        item[AddToCartItemProperty.GROUP_ID] = guid;
+        item[AddToCartItemProperty.PARENT_GROUP_ID] = guid;
+        addToCartItems.Add(item);
+      }
+
+      return addToCartItems;
     }
   }
 }

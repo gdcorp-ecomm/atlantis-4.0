@@ -44,8 +44,8 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
       var targetDate = DateTime.Parse("2/21/2013");
       var billDate1 = DateTime.Parse("2010-08-15 00:00:00.000");
       var billDate2 = DateTime.Parse("2010-05-15 00:00:00.000");
-      var bsp1 = new BillingSyncProduct(1, 383377, "a97bbfcd-48e3-11df-b65b-005056956427", billDate1, "monthly", 10055, 1);
-      var bsp2 = new BillingSyncProduct(1, 383378, "b020a244-48e3-11df-b65b-005056956427", billDate2, "monthly", 10055, 1);
+      var bsp1 = new BillingSyncProduct(1, 383377, "hosting", "a97bbfcd-48e3-11df-b65b-005056956427", billDate1, "monthly", 10055, 1);
+      var bsp2 = new BillingSyncProduct(1, 383378, "hosting", "b020a244-48e3-11df-b65b-005056956427", billDate2, "monthly", 10055, 1);
       var billingSyncProducts = new List<BillingSyncProduct> { bsp1, bsp2 };
 
       var request = new EcommBillingSyncRequestData(SHOPPER_ID
@@ -69,7 +69,7 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
     public void EcommBillingSyncInvalidDateTest()
     {
       var dt = DateTime.MaxValue;
-      var bsp = new BillingSyncProduct(1, 1, "abceian-anad0ah", DateTime.MinValue, "annual", 11111, 1);
+      var bsp = new BillingSyncProduct(1, 1, "blah", "abceian-anad0ah", DateTime.MinValue, "annual", 11111, 1);
       var billingSyncProducts = new List<BillingSyncProduct> {bsp};
 
       try
@@ -96,7 +96,7 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
     public void EcommBillingSyncInvalidBillingSyncProductTest()
     {
       var dt = DateTime.Parse("2/8/2013");
-      var bsp = new BillingSyncProduct(1, 1, "abceian-anad0ah", DateTime.MinValue, "annual", 11111, 1);
+      var bsp = new BillingSyncProduct(1, 1, "blah", "abceian-anad0ah", DateTime.MinValue, "annual", 11111, 1);
       var billingSyncProducts = new List<BillingSyncProduct> { bsp };
 
       try

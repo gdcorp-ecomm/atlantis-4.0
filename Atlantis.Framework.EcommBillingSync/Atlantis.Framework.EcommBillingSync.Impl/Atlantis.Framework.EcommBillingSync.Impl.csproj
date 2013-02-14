@@ -123,6 +123,10 @@
       <Project>{7f2738f8-683c-49e7-88cd-e986c70f0321}</Project>
       <Name>Atlantis.Framework.DataCache</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.EcommProductAddOns\Atlantis.Framework.EcommProductAddOns.Interface\Atlantis.Framework.EcommProductAddOns.Interface.csproj">
+      <Project>{51abac11-1534-45e4-9f30-f191541551e6}</Project>
+      <Name>Atlantis.Framework.EcommProductAddOns.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
       <Name>Atlantis.Framework.Engine</Name>

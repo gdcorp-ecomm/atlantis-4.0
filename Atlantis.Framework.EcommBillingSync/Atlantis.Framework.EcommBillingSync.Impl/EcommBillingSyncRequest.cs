@@ -32,6 +32,7 @@ namespace Atlantis.Framework.EcommBillingSync.Impl
     private bool SyncListIncludesAnnualProduct { get; set; }
     private int SyncMonth { get; set; }
     private int SyncDay { get; set; }
+    private EcommBillingSyncRequestData EbsRequest { get; set; }
     #endregion
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
@@ -67,6 +68,7 @@ namespace Atlantis.Framework.EcommBillingSync.Impl
     #region Private Methods
     private void SetRequestProperties(EcommBillingSyncRequestData request)
     {
+      EbsRequest = request;
       BillingSyncProducts = request.BillingSyncProducts;
       PrivateLabelId = request.PrivateLabelId;
       SyncMonth = request.SyncDate.Month;
@@ -93,21 +95,23 @@ namespace Atlantis.Framework.EcommBillingSync.Impl
 
     private IEnumerable<AddToCartItem> CreateItems(BillingSyncProduct bsp, int index, string itemTrackingCode)
     {
-      const int quantity = 1;
+      const int QUANTITY = 1;
+      List<AddToCartItem> addOnItems;
+      string addOnGuidId;
 
       var items = new List<AddToCartItem>();
       var newBillDate = SyncListIncludesAnnualProduct ? NewBillDate : SyncUtil.GetNewExpirationDate(bsp.OriginalBillingDate, bsp.RecurringPaymentType, SyncMonth, SyncDay);
       var duration = SyncUtil.GetDuration(bsp.OriginalBillingDate, newBillDate, bsp.RecurringPaymentType);
       var durationHash = SyncUtil.GetDurationHash(PrivateLabelId, bsp.RenewalPfId, Convert.ToDouble(duration));
-      var item = new AddToCartItem(string.Format("{0}_{1}", bsp.BillingResourceId, index), bsp.RenewalPfId,bsp.BillingResourceId, quantity, itemTrackingCode, duration, durationHash);
+      var item = new AddToCartItem(string.Format("{0}_{1}", bsp.BillingResourceId, index), bsp.RenewalPfId, bsp.BillingResourceId, QUANTITY, itemTrackingCode, duration, durationHash);
       item[AddToCartItemProperty.TARGET_EXPIRATION_DATE] = newBillDate.ToString();
 
-      if (BillingSyncProductHadAddOns(bsp.OrionId))
+      if (SyncUtil.BillingSyncProductHasAddOns(EbsRequest, bsp.BillingResourceId, bsp.OrionId, bsp.Namespace, PrivateLabelId, index, duration, durationHash, out addOnItems, out addOnGuidId))
       {
-        var groupId = Guid.NewGuid().ToString();
-        item[AddToCartItemProperty.GROUP_ID] = groupId;
-        item[AddToCartItemProperty.PARENT_GROUP_ID] = groupId;
+        item[AddToCartItemProperty.GROUP_ID] = addOnGuidId;
+        item[AddToCartItemProperty.PARENT_GROUP_ID] = addOnGuidId;
         items.Add(item);
+        items.AddRange(addOnItems);
       }
       else
       {
@@ -115,11 +119,6 @@ namespace Atlantis.Framework.EcommBillingSync.Impl
       }
 
       return items;
-    }
-
-    private bool BillingSyncProductHadAddOns(string orionId)
-    {
-      return false;
     }
 
     #endregion

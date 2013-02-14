@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}</ProjectGuid>
+    <ProjectGuid>{7E98657D-D90F-4FE6-8BC7-ECE09CF7ECC4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Atlantis.Framework.EcommProductAddOns.Impl</RootNamespace>

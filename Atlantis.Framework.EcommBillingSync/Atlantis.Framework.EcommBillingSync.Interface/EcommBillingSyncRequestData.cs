@@ -9,12 +9,14 @@ namespace Atlantis.Framework.EcommBillingSync.Interface
   {
     #region Private Constants
     private const int ADD_ITEM_REQUEST_TYPE = 4;
+    private const int ECOMM_PRODUCT_ADDONS_TYPE = 652;
     #endregion 
 
     #region Properties
     public int AddItemRequestType { get; private set; }
     public List<BillingSyncProduct> BillingSyncProducts { get; private set; }
     public string ClientIp { get; private set; }
+    public int EcommProductAddOnsRequestType { get; private set; }
     public string ItemTrackingCode { get; private set; }
     public int PrivateLabelId { get; private set; }
     public string SelectedTransactionalCurrencyType { get; private set; }
@@ -32,7 +34,8 @@ namespace Atlantis.Framework.EcommBillingSync.Interface
       , string selectedTransactionalCurrencyType
       , string clientIp
       , int privateLabelId
-      , int addItemRequestType = ADD_ITEM_REQUEST_TYPE)
+      , int addItemRequestType = ADD_ITEM_REQUEST_TYPE
+      , int ecommProductAddOnsRequestType = ECOMM_PRODUCT_ADDONS_TYPE)
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       CheckForInvalidInput(billingSyncProducts, syncDate);
@@ -40,6 +43,7 @@ namespace Atlantis.Framework.EcommBillingSync.Interface
       AddItemRequestType = addItemRequestType;
       BillingSyncProducts = billingSyncProducts;
       ClientIp = clientIp;
+      EcommProductAddOnsRequestType = ecommProductAddOnsRequestType;
       ItemTrackingCode = itemTrackingCode;
       PrivateLabelId = privateLabelId;
       RequestTimeout = TimeSpan.FromSeconds(30);

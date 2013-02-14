@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s0="urn:wscgdBillingStateService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:wscgdBillingStateService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:wscgdBillingStateService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="QueryIn">
+    <wsdl:part name="bstrResourceID" type="s:string" />
+    <wsdl:part name="bstrResourceType" type="s:string" />
+    <wsdl:part name="bstrIDType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrResourceXML" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrChangeXML" type="s:string" />
+    <wsdl:part name="bstrItemRequestXML" type="s:string" />
+    <wsdl:part name="lRenewalPeriods" type="s:int" />
+    <wsdl:part name="lUnifiedRenewalPFID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="ChangeOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NewIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lPrivateLabelID" type="s:int" />
+    <wsdl:part name="bstrNewXML" type="s:string" />
+    <wsdl:part name="bstrItemRequestXML" type="s:string" />
+    <wsdl:part name="lPurchasePeriods" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="NewOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrCartShopperID" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetChildInfoByBundlePFIDIn">
+    <wsdl:part name="lBundlePFID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetChildInfoByBundlePFIDOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="wscgdBillingStateServiceSoap">
+    <wsdl:operation name="Query">
+      <wsdl:input message="s0:QueryIn" />
+      <wsdl:output message="s0:QueryOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Change">
+      <wsdl:input message="s0:ChangeIn" />
+      <wsdl:output message="s0:ChangeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="New">
+      <wsdl:input message="s0:NewIn" />
+      <wsdl:output message="s0:NewOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChildInfoByBundlePFID">
+      <wsdl:input message="s0:GetChildInfoByBundlePFIDIn" />
+      <wsdl:output message="s0:GetChildInfoByBundlePFIDOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wscgdBillingStateServiceSoap" type="s0:wscgdBillingStateServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="Query">
+      <soap:operation soapAction="#Query" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdBillingStateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdBillingStateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Change">
+      <soap:operation soapAction="#Change" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdBillingStateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdBillingStateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="New">
+      <soap:operation soapAction="#New" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdBillingStateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdBillingStateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChildInfoByBundlePFID">
+      <soap:operation soapAction="#GetChildInfoByBundlePFID" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:wscgdBillingStateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:wscgdBillingStateService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wscgdBillingStateService">
+    <wsdl:port name="wscgdBillingStateServiceSoap" binding="s0:wscgdBillingStateServiceSoap">
+      <soap:address location="http://gdcomm.dev.glbt1.gdg:80/wscgdBillingState/wscgdBillingState.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

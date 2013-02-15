@@ -44,15 +44,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         testContextInstance = value;
       }
     }
-
-    //public IDotTypeProvider DotTypeProvider
-    //{
-    //  get
-    //  {
-    //    return HttpProviderContainer.Instance.Resolve<IDotTypeProvider>();
-    //  }
-    //}
-
+    
     [TestInitialize]
     public void InitializeTests()
     {
@@ -64,15 +56,12 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
       shopperContext.SetNewShopper("832652");
     }
-
-
-
-
+    
     [TestMethod]
     public void StaticVsTLDMLEnabled()
     {
       List<string> tldList = new List<string>();
-      tldList.Add("org");
+      tldList.Add("org"); //com.au
 
       foreach (string tld in tldList)
       {
@@ -95,6 +84,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         AssertHelper.AddResults(staticTld.MaxRegistrationLength == tldml.MaxRegistrationLength, "MaxRegistrationLength did not match for " + tld);
         AssertHelper.AddResults(staticTld.MaxRenewalLength == tldml.MaxRenewalLength, "MaxRenewalLength did not match for " + tld);
 
+        //todo:fix
         if (tldml.MaxRenewalMonthsOut == null)
         {
           AssertHelper.AddResults(false,
@@ -121,6 +111,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         tldmlmethod = tldml.GetPreRegProductId(3, 1);
         AssertHelper.AddResults(statTld == tldmlmethod, "GetPreRegProductId for 3 years did not match for " + tld);
 
+        //todo:fix
         string statString = staticTld.GetRegistrationFieldsXml();
         //string tldmlmethodToString = tldml.GetRegistrationFieldsXml();
         AssertHelper.AddResults(statString == "blah", "GetRegistrationFieldsXml for 3 years did not match for " + tld);
@@ -129,6 +120,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         tldmlmethod = tldml.GetRegistrationProductId(3, 1);
         AssertHelper.AddResults(statTld == tldmlmethod, "GetRegistrationProductId for 3 years did not match for " + tld);
 
+        //todo:fix
         statString = staticTld.GetRegistryIdByProductId(986);
         string tldmlmethodToString = tldml.GetRegistryIdByProductId(986);
         AssertHelper.AddResults(statString == "blah", "GetRegistryIdByProductId did not match for " + tld);
@@ -190,48 +182,14 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         var statValidTransferLengths = staticTld.GetValidTransferLengths(1, pparams);
         var validTransferLengths = tldml.GetValidTransferLengths(1, pparams);
         AssertHelper.AddResults(statValidTransferLengths == validTransferLengths, "GetValidTransferLengths did not match for " + tld);
-
-
-
+        
         //todo:fix
         var statValidTransferProductIdList = staticTld.GetValidTransferProductIdList(1, pparams);
         var validTransferProductIdList = tldml.GetValidTransferProductIdList(1, pparams);
         AssertHelper.AddResults(statValidTransferProductIdList == validTransferProductIdList, "GetValidTransferLengths did not match for " + tld);
-
-
-        
-
-
-
-
-
-
-
       }
     }
 
-    [TestMethod]
-    public void OrgStaticVsTLDMLEnabedProductIds()
-    {
-      Type staticDotTypesType = Assembly.GetAssembly(typeof(DotTypeCache)).GetType("Atlantis.Framework.DotTypeCache.StaticDotTypes");
-      MethodInfo getStaticDotType = staticDotTypesType.GetMethod("GetDotType", BindingFlags.Static | BindingFlags.Public);
-      object[] methodParms = new object[1] { "org" };
-      IDotTypeInfo staticOrg = getStaticDotType.Invoke(null, methodParms) as IDotTypeInfo;
-
-      IDotTypeInfo tldmlOrg = DotTypeCache.GetDotTypeInfo("org");
-
-      int static3yearOrg = staticOrg.GetRegistrationProductId(3, 1);
-      int tldml3yearOrg = tldmlOrg.GetRegistrationProductId(3, 1);
-      Assert.AreEqual(static3yearOrg, tldml3yearOrg);
-
-      static3yearOrg = staticOrg.GetRenewalProductId(3, 1);
-      tldml3yearOrg = tldmlOrg.GetRenewalProductId(3, 1);
-      Assert.AreEqual(static3yearOrg, tldml3yearOrg);
-
-      static3yearOrg = staticOrg.GetTransferProductId(3, 1);
-      tldml3yearOrg = tldmlOrg.GetTransferProductId(3, 1);
-      Assert.AreEqual(static3yearOrg, tldml3yearOrg);
-    }
 
 
   }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Xml.Linq;
 using Atlantis.Framework.EcommBillingSync.Interface;
 using Atlantis.Framework.Interface;
 using gdOverrideLib;
@@ -121,7 +123,28 @@ namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
 			return hash;      
     }
 
-    public bool BillingSyncProductHasAddOns(EcommBillingSyncRequestData ebsRequest, int billingResourceId, string orionId, string resourceType, int privateLabelId, int index, string duration, string durationHash, out List<AddToCartItem> addOnItems, out string addOnGuidId)
+    public int GetRenewalPfid(int renewalPfId, string recurringPaymentType, int privateLabelId)
+    {
+      const string BILLING_SYNC_CALL = "<BillingSyncProductList><param name=\"n_pf_id\" value=\"{0}\"/><param name=\"n_privatelabelResellerTypeID\" value=\"{1}\"/></BillingSyncProductList>";
+      var correctRenewalPfId = 0;
+
+      var productList = DataCache.DataCache.GetCacheData(string.Format(BILLING_SYNC_CALL, renewalPfId, privateLabelId));
+
+      var xDoc = XDocument.Parse(productList);
+
+      var dataElement = xDoc.Element("data");
+      if (dataElement != null)
+      {
+        var renewalItems = dataElement.Elements("item").Where(item => item.Attribute("isRenewal").Value == "1");
+        var xElements = renewalItems as IList<XElement> ?? renewalItems.ToList();
+        var renewalItemsList = xElements.ToList();
+        var onePeriodMatchingRecurringRenewalItem = renewalItemsList.Find(ri => ri.Attribute("numberOfPeriods").Value == "1" && String.Compare(ri.Attribute("recurring_payment").Value, recurringPaymentType, StringComparison.OrdinalIgnoreCase) == 0);
+        correctRenewalPfId = Convert.ToInt32(onePeriodMatchingRecurringRenewalItem.Attribute("catalog_productUnifiedProductID").Value);
+      }
+      return correctRenewalPfId;
+    }
+    
+    public bool BillingSyncProductHasAddOns(EcommBillingSyncRequestData ebsRequest, int billingResourceId, string orionId, string resourceType, int privateLabelId, int index, string duration, out List<AddToCartItem> addOnItems, out string addOnGuidId)
     {
       var hasAddOns = false;
       addOnItems = new List<AddToCartItem>();
@@ -138,13 +161,13 @@ namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
           , orionId
           , resourceType);
 
-        var response = (EcommProductAddOnsResponseData)DataCache.DataCache.GetProcessRequest(request, ebsRequest.EcommProductAddOnsRequestType);
+        var response = (EcommProductAddOnsResponseData)Engine.Engine.ProcessRequest(request, ebsRequest.EcommProductAddOnsRequestType);
 
         if (response.IsSuccess && response.HasAddOns)
         {
           hasAddOns = true;
-          addOnGuidId = new Guid().ToString();
-          addOnItems = CreateAddOnItems(ebsRequest, response.AddOnProducts, billingResourceId, addOnGuidId, index, duration, durationHash);
+          addOnGuidId = Guid.NewGuid().ToString();
+          addOnItems = CreateAddOnItems(ebsRequest, response.AddOnProducts, billingResourceId, addOnGuidId, index, duration);
         }
       }
       catch (Exception ex)
@@ -156,14 +179,16 @@ namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
       return hasAddOns;
     }
 
-    private List<AddToCartItem> CreateAddOnItems(EcommBillingSyncRequestData ebsRequest, IEnumerable<AddOnProduct> addOnProducts, int billingResourceId, string guid, int index, string duration, string durationHash)
+    private List<AddToCartItem> CreateAddOnItems(EcommBillingSyncRequestData ebsRequest, IEnumerable<AddOnProduct> addOnProducts, int billingResourceId, string guid, int index, string duration)
     {
       const int QUANTITY = 1;
       var addToCartItems = new List<AddToCartItem>();
 
       foreach (var addOnProduct in addOnProducts)
       {
+        var durationHash = GetDurationHash(ebsRequest.PrivateLabelId, addOnProduct.RenewalUnifiedProductId, Convert.ToDouble(duration));
         var item = new AddToCartItem(string.Format("{0}_{1}", billingResourceId, index), addOnProduct.RenewalUnifiedProductId, billingResourceId, QUANTITY, ebsRequest.ItemTrackingCode, duration, durationHash);
+
         // Only add Guid Info. Do not add TARGET_EXPIRATION_DATE for any add-ons. Will cause cart to fail on 
         // duration as duration validation compares target date to this billing date, which is null for add-ons.
         item[AddToCartItemProperty.GROUP_ID] = guid;

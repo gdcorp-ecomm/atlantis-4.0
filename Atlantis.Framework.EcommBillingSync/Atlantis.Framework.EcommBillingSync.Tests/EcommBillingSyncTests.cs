@@ -38,6 +38,7 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
     #endregion
 
     [TestMethod]
+    [DeploymentItem("atlantis.framework.ecommproductaddons.impl.dll")]
     [DeploymentItem("atlantis.framework.additem.impl.dll")]
     public void EcommBillingSyncNoAddOnsTest()
     {
@@ -61,6 +62,67 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
         , 1);
 
       var response = (EcommBillingSyncResponseData) Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.framework.ecommproductaddons.impl.dll")]
+    [DeploymentItem("atlantis.framework.additem.impl.dll")]
+    public void EcommBillingSyncNumberOfPeriodsGreaterThanOneTest()
+    {
+      var targetDate = DateTime.Parse("2/21/2013");
+      var billDate1 = DateTime.Parse("2010-08-15 00:00:00.000");
+      var billDate2 = DateTime.Parse("2010-05-15 00:00:00.000");
+      var billDate3 = DateTime.Parse("2013-06-07 00:00:00.000");
+      var bsp1 = new BillingSyncProduct(1, 383377, "hosting", "a97bbfcd-48e3-11df-b65b-005056956427", billDate1, "monthly", 10055, 1);
+      var bsp2 = new BillingSyncProduct(1, 383378, "hosting", "b020a244-48e3-11df-b65b-005056956427", billDate2, "monthly", 10055, 1);
+      var bsp3 = new BillingSyncProduct(1, 399173, "hosting", "bd2bfcf7-725c-11df-9145-005056956427", billDate3, "annual", 52014, 3);
+      var billingSyncProducts = new List<BillingSyncProduct> { bsp1, bsp2, bsp3 };
+
+      var request = new EcommBillingSyncRequestData(SHOPPER_ID
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , billingSyncProducts
+        , targetDate
+        , "mya_web_billingsync"
+        , "USD"
+        , "127.0.0.1"
+        , 1);
+
+      var response = (EcommBillingSyncResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
+    [TestMethod]
+    [DeploymentItem("atlantis.framework.ecommproductaddons.impl.dll")]
+    [DeploymentItem("atlantis.framework.additem.impl.dll")]
+    public void EcommBillingSyncWithAddOnsTest()
+    {
+      var targetDate = DateTime.Parse("2/21/2013");
+      var billDate1 = DateTime.Parse("2010-08-15 00:00:00.000");
+      var billDate2 = DateTime.Parse("2010-05-15 00:00:00.000");
+      var billDate3 = DateTime.Parse("2011-01-29 00:00:00.000");
+      var bsp1 = new BillingSyncProduct(1, 383377, "hosting", "a97bbfcd-48e3-11df-b65b-005056956427", billDate1, "monthly", 10055, 1);
+      var bsp2 = new BillingSyncProduct(1, 383378, "hosting", "b020a244-48e3-11df-b65b-005056956427", billDate2, "monthly", 10055, 1);
+      var bsp3 = new BillingSyncProduct(1, 381156, "dedhost", "d423f0f3-0d15-11df-a185-005056956427", billDate3, "monthly", 11211, 1);
+      var billingSyncProducts = new List<BillingSyncProduct> { bsp1, bsp2, bsp3 };
+
+      var request = new EcommBillingSyncRequestData(SHOPPER_ID
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , billingSyncProducts
+        , targetDate
+        , "mya_web_billingsync"
+        , "USD"
+        , "127.0.0.1"
+        , 1);
+
+      var response = (EcommBillingSyncResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
 
       Assert.IsTrue(response.IsSuccess);
     }

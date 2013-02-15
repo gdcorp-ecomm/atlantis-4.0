@@ -176,12 +176,6 @@ namespace Atlantis.Framework.ProductBillingResourceInfo.Impl
           }
         }
 
-        if (returnAll && resourceList.Count > 0)
-        {
-          numberOfPages = 1;
-          numberOfRecords = resourceList.Count;
-        }
-
         oResponseData = new ProductBillingResourceInfoResponseData(numberOfRecords, numberOfPages, resourceList);
       }
       catch (AtlantisException exAtlantis)

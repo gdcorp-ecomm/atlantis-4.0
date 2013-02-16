@@ -91,9 +91,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.OpenGraphMeta", "Atlantis.Framework.CDS.Entities.OpenGraphMeta\Atlantis.Framework.CDS.Entities.OpenGraphMeta.csproj", "{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Footers", "Atlantis.Framework.CDS.Entities.Footers\Atlantis.Framework.CDS.Entities.Footers.csproj", "{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 42
+		SccNumberOfProjects = 43
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -237,6 +239,9 @@ Global
 		SccProjectUniqueName41 = Atlantis.Framework.CDS.Entities.OpenGraphMeta\\Atlantis.Framework.CDS.Entities.OpenGraphMeta.csproj
 		SccProjectName41 = Atlantis.Framework.CDS.Entities.OpenGraphMeta
 		SccLocalPath41 = Atlantis.Framework.CDS.Entities.OpenGraphMeta
+		SccProjectUniqueName42 = Atlantis.Framework.CDS.Entities.Footers\\Atlantis.Framework.CDS.Entities.Footers.csproj
+		SccProjectName42 = Atlantis.Framework.CDS.Entities.Footers
+		SccLocalPath42 = Atlantis.Framework.CDS.Entities.Footers
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.CDS.vsmdi
@@ -660,6 +665,16 @@ Global
 		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5309A8DB-9BC0-4F7E-8BAF-2EB2C93237F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

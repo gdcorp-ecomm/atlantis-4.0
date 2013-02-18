@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -10,20 +11,20 @@ namespace Atlantis.Framework.DomainCheck.Interface
 {
   public class DomainCheckRequestData : RequestData
   {
-    bool _skipZoneCheck = false;
-    bool _skipDatabaseCheck = false;
-    bool _skipRegistryCheck = false;
+    bool _skipZoneCheck;
+    bool _skipDatabaseCheck;
+    bool _skipRegistryCheck;
 
-    int _privateLabelID = -1;
-    string _clientIPAddress = string.Empty;
-    string _registrarID = string.Empty;
+    readonly int _privateLabelID = -1;
+    string _clientIpAddress = string.Empty;
+    string _registrarId = string.Empty;
     string _sourceCode = string.Empty;
-    string _hostIPAddress = string.Empty;
+    readonly string _hostIpAddress = string.Empty;
 
     TimeSpan _waitTime = TimeSpan.FromMilliseconds(2500);
 
-    List<DomainToCheck> _domainsToCheck = new List<DomainToCheck>();
-    HashSet<string> _addedDomains = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+    readonly List<DomainToCheck> _domainsToCheck = new List<DomainToCheck>();
+    readonly HashSet<string> _addedDomains = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
 
     public DomainCheckRequestData(
       string shopperID, string sourceUrl, string orderId, string pathway, int pageCount,
@@ -34,7 +35,7 @@ namespace Atlantis.Framework.DomainCheck.Interface
       _privateLabelID = privateLabelId;
       ClientIPAddress = clientIPAddress;
       _sourceCode = sourceCode;
-      _hostIPAddress = GetLocalAddress();
+      _hostIpAddress = GetLocalAddress();
     }
 
     public DomainCheckRequestData(
@@ -75,25 +76,25 @@ namespace Atlantis.Framework.DomainCheck.Interface
 
     public string ClientIPAddress
     {
-      get { return _clientIPAddress; }
+      get { return _clientIpAddress; }
       private set
       {
-        _clientIPAddress = string.Empty;
-        IPAddress address = null;
+        _clientIpAddress = string.Empty;
+        IPAddress address;
         if (IPAddress.TryParse(value, out address))
-          _clientIPAddress = address.ToString();
+          _clientIpAddress = address.ToString();
       }
     }
 
     public string HostIPAddress
     {
-      get { return _hostIPAddress; }
+      get { return _hostIpAddress; }
     }
 
     public string RegistrarID
     {
-      get { return _registrarID; }
-      set { _registrarID = value; }
+      get { return _registrarId; }
+      set { _registrarId = value; }
     }
 
     public int PrivateLabelID
@@ -168,7 +169,7 @@ namespace Atlantis.Framework.DomainCheck.Interface
 
       xtwResult.WriteStartElement("checkdata");
 
-      xtwResult.WriteAttributeString("waittime", WaitTime.TotalMilliseconds.ToString());
+      xtwResult.WriteAttributeString("waittime", WaitTime.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
       xtwResult.WriteAttributeString("type", "REG");
 
@@ -177,29 +178,50 @@ namespace Atlantis.Framework.DomainCheck.Interface
       sbSkip.Append((sbSkip.Length > 0 ? "," : string.Empty) + (SkipRegistryCheck ? "checkregistry" : string.Empty));
 
       if (sbSkip.Length > 0)
+      {
         xtwResult.WriteAttributeString("skip", sbSkip.ToString());
+      }
 
       if (ClientIPAddress.Length > 0)
+      {
         xtwResult.WriteAttributeString("customerIP", ClientIPAddress);
+      }
+
+      if (!string.IsNullOrEmpty(ShopperID))
+      {
+        xtwResult.WriteAttributeString("shopperID", ShopperID);
+      }
 
       if (PrivateLabelID > -1)
-        xtwResult.WriteAttributeString("privatelabelid", PrivateLabelID.ToString());
+      {
+        xtwResult.WriteAttributeString("privatelabelid", PrivateLabelID.ToString(CultureInfo.InvariantCulture));
+      }
 
       if (HostIPAddress.Length > 0)
+      {
         xtwResult.WriteAttributeString("ip", HostIPAddress);
+      }
 
       xtwResult.WriteAttributeString("source", Environment.MachineName);
 
       if (RegistrarID.Length > 0)
+      {
         xtwResult.WriteAttributeString("registrarID", RegistrarID);
+      }
       else
-        xtwResult.WriteAttributeString("registrarID", GetRegistrarID());
+      { 
+        xtwResult.WriteAttributeString("registrarID", GetRegistrarID()); 
+      }
 
       if (!string.IsNullOrEmpty(_sourceCode))
+      {
         xtwResult.WriteAttributeString("sourceCode", _sourceCode);
+      }
 
       if (Pathway.Length > 0)
+      {
         xtwResult.WriteAttributeString("visitingID", Pathway);
+      }
 
       foreach (DomainToCheck domainToCheck in _domainsToCheck)
       {

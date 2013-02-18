@@ -73,8 +73,7 @@ namespace Atlantis.Framework.PixelsGetXML.Impl
       }
       catch (Exception ex)
       {
-        string message = ex.Message + Environment.NewLine + ex.StackTrace;
-        AtlantisException aex = new AtlantisException(requestData, "PixelsGet.Impl.GetAllPixelsFromProc", message, requestData.ShopperID);
+        result = new PixelsGetXMLResponseData(requestData, ex);
       }
 
       return result;

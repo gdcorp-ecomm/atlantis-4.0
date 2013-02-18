@@ -33,5 +33,15 @@ namespace Atlantis.Framework.PixelsGetXML.Interface
     }
 
     #endregion
+
+    public PixelsGetXMLResponseData(RequestData requestData, Exception ex)
+    {
+      _exception = new AtlantisException(requestData, "PixelsGetResponseData", ex.Message, ex.StackTrace);
+    }
+
+    public PixelsGetXMLResponseData()
+    {
+    }
+
   }
 }

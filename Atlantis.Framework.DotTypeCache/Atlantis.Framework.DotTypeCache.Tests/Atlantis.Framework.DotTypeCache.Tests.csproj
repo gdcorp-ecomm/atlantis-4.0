@@ -463,7 +463,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DotTypesData.xml" />
+    <Content Include="DotTypesData.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="refs\Enums.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

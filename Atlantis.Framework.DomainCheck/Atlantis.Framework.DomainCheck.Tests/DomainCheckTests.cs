@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
+using System.Xml.Linq;
 using Atlantis.Framework.DomainCheck.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -62,6 +63,7 @@ namespace Atlantis.Framework.DomainCheck.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DomainCheck.Impl.dll")]
     public void DomainCheckBasicTest()
     {
       DomainToCheck domain = new DomainToCheck("miccobluered7.com", false);
@@ -76,6 +78,7 @@ namespace Atlantis.Framework.DomainCheck.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DomainCheck.Impl.dll")]
     public void DomainCheckTimeoutTest()
     {
       List<DomainToCheck> domains = new List<DomainToCheck>();
@@ -102,6 +105,7 @@ namespace Atlantis.Framework.DomainCheck.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DomainCheck.Impl.dll")]
     public void DomainCheckAsyncTest()
     {
       _asyncResponse = null;
@@ -133,6 +137,25 @@ namespace Atlantis.Framework.DomainCheck.Tests
     {
       _asyncResponse = Engine.Engine.EndProcessRequest(result) as DomainCheckResponseData;
       _asyncSearchComplete = true;
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DomainCheck.Impl.dll")]
+    public void DomainCheckShopperIdAttributeTest()
+    {
+      DomainToCheck domain = new DomainToCheck("miccobluered7.com", false);
+      DomainCheckRequestData request = new DomainCheckRequestData(
+        "832652", string.Empty, string.Empty, string.Empty, 0,
+        domain, 1, "127.0.0.1", "UnitTest");
+      request.WaitTime = TimeSpan.FromSeconds(5);
+
+      DomainCheckResponseData response = (DomainCheckResponseData)Engine.Engine.ProcessRequest(request, 16);
+
+      var doc = XDocument.Parse(request.ToXML());
+
+      Assert.IsTrue(doc.Root.Attribute("shopperID").Value == "832652");
+      Assert.IsTrue(response.IsSuccess);
     }
   }
 }

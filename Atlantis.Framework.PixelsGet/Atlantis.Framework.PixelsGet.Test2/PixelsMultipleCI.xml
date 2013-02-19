@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pixels>
+  <pixel name="Blue Lithium"
+       value="%3Cimg%20src%3D%22https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D113243%26t%3D2%22%20width%3D%221%22%20height%3D%221%22%20border%3D%220%22%20%2F%3E%0A%3Cimg%20src%3D%22https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D341229%26t%3D2%22%20width%3D%221%22%20height%3D%221%22%20border%3D%220%22%20%2F%3E%0A%3Cimg%20src%3D%22https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D549332%26t%3D2%22%20width%3D%221%22%20height%3D%221%22%20border%3D%220%22%20%2F%3E%0A%3Cimg%20src%3D%22https%3A%2F%2Fad.yieldmanager.com%2Fpixel%3Fid%3D549334%26t%3D2%22%20width%3D%221%22%20height%3D%221%22%20border%3D%220%22%20%2F%3E"
+       type="none"
+       application="CART"
+       contexts="1"
+       appsettingname="ENABLE_BLIPIXEL"
+       page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger removeafterconsumption="true">
+      <cookie name="BlueLithium" value="" />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="14749" />
+      <fastball cicode="14750" />
+      <fastball cicode="14751" />
+    </additionaldata>
+  </pixel>
+</pixels>

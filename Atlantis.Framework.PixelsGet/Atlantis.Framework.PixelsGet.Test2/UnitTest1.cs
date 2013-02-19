@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 using Atlantis.Framework.PixelsGet.Interface;
+using Atlantis.Framework.PixelsGet.Interface.PixelObjects;
 using Atlantis.Framework.PixelsGet.Interface.Constants;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,7 +11,10 @@ namespace Atlantis.Framework.PixelsGet.Test
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("pixels.xml")]
+  [DeploymentItem("Receipt.xml")]
   [DeploymentItem("pixelsAuGoogle.xml")]
+  [DeploymentItem("PixelsMultipleCI.xml")]
+  [DeploymentItem("pixelsSponsorPay.xml")]
   [DeploymentItem("Atlantis.Framework.PixelsGet.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.PixelsGet.Interface.dll")]
   public class UnitTest1
@@ -44,16 +48,6 @@ namespace Atlantis.Framework.PixelsGet.Test
       Assert.IsTrue(response.IsSuccess);
     }
 
-    private HttpCookieCollection CreateCookieCollection()
-    {
-      var collection = new HttpCookieCollection();
-      collection.Add(CreateCookie("Cookie1", "Value", 10));
-      //  collection.Add(CreateCookie("BlueLithium", "testValue"));
-      // collection.Add(CreateCookie("advertisinghp1", string.Empty));
-      collection.Add(CreateCookie("GoogleADServices_googleadremarketing", string.Empty, 10));
-      return collection;
-    }
-
     private HttpCookieCollection CreateGoogleCookieCollection()
     {
       var collection = new HttpCookieCollection();
@@ -61,6 +55,65 @@ namespace Atlantis.Framework.PixelsGet.Test
       //  collection.Add(CreateCookie("BlueLithium", "testValue"));
       // collection.Add(CreateCookie("advertisinghp1", string.Empty));
       collection.Add(CreateCookie("pixel_googledomains", "bdmjtivaifqdafkcgblhejeitfdiifmh", -1));
+      return collection;
+    }
+
+    [TestMethod]
+    public void GetTrialPayNotFire()
+    {
+      _isc = "spp2";
+      _replaceParms.Add(Atlantis.Framework.PixelsGet.Interface.Constants.PixelReplaceTags.PrivateLabelId, "1");
+      var request = new PixelsGetRequestData(string.Empty, _requestUrl, string.Empty, string.Empty, 0, "CART",
+                                                  _isc, CreateSponsorPayCookieCollection(), _replaceParms, _contextId);
+      request.FirstTimeShopper = true;
+      request.XmlFilePathOverride = System.IO.Directory.GetCurrentDirectory() + "\\Pixels.xml";
+      request.OrderXml = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "\\Receipt.xml");
+      var response = Engine.Engine.ProcessRequest(request, 627) as PixelsGetResponseData;
+      Assert.IsTrue(response.IsSuccess);
+      foreach (Pixel pixel in response.Pixels)
+      {
+        Assert.IsTrue(!pixel.Name.Contains("Trial"));
+      }
+    }
+
+    private HttpCookieCollection CreateSponsorPayCookieCollection()
+    {
+      var collection = new HttpCookieCollection();
+      collection.Add(CreateCookie("pixeldata1", "SPSBBE=", 10));
+      return collection;
+    }
+
+    [TestMethod]
+    public void GetMultipleCI()
+    {
+      _replaceParms.Add(Atlantis.Framework.PixelsGet.Interface.Constants.PixelReplaceTags.PrivateLabelId, "1");
+      var request = new PixelsGetRequestData(string.Empty, _requestUrl, string.Empty, string.Empty, 0, "CART",
+                                                  _isc, CreateBlueLithiumCookieCollection(), _replaceParms, _contextId);
+      request.FirstTimeShopper = true;
+      request.XmlFilePathOverride = System.IO.Directory.GetCurrentDirectory() + "\\PixelsMultipleCI.xml";
+      request.OrderXml = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "\\Receipt.xml");
+      var response = Engine.Engine.ProcessRequest(request, 627) as PixelsGetResponseData;
+      Assert.IsTrue(response.IsSuccess);
+      foreach (Pixel pixel in response.Pixels)
+      {
+        Assert.IsTrue(pixel.CiCodes.Count == 3);
+      }
+    }
+
+    private HttpCookieCollection CreateBlueLithiumCookieCollection()
+    {
+      var collection = new HttpCookieCollection();
+      collection.Add(CreateCookie("pixeldata1", "BlueLithium=", 10));
+      return collection;
+    }
+
+    private HttpCookieCollection CreateCookieCollection()
+    {
+      var collection = new HttpCookieCollection();
+      collection.Add(CreateCookie("Cookie1", "Value", 10));
+      //  collection.Add(CreateCookie("BlueLithium", "testValue"));
+      // collection.Add(CreateCookie("advertisinghp1", string.Empty));
+      collection.Add(CreateCookie("GoogleADServices_googleadremarketing", string.Empty, 10));
       return collection;
     }
 

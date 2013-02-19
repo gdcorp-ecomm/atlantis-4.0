@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pixels>
+  <pixel name="SponsorPay"
+         doreplace="true"
+         value="~/OrderConfirmation/Controls/PixelTracking/SponsorPayPixel.ascx"
+         type="control"
+         application="CART"
+         contexts="*"
+         appsettingname="CART_SPONSORPAY_ENABLE"
+         page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger doreplace="true" removeafterconsumption="true" firsttimeonly="true" required="orderdetail,sourcecodes">
+      <orderdetail name="_total_total" comparison="&gt;" value="500" />
+      <sourcecodes>
+        <sourcecode value="spp1" />
+        <sourcecode value="spp2" />
+        <sourcecode value="spp3" />
+        <sourcecode value="spp4" />
+        <sourcecode value="spp5" />
+        <sourcecode value="spp1i" />
+        <sourcecode value="spp2i" />
+        <sourcecode value="spp3i" />
+        <sourcecode value="spp4i" />
+        <sourcecode value="spp5i" />
+        <sourcecode value="spbe1" />
+        <sourcecode value="spsbbe" />
+      </sourcecodes>
+    </trigger>
+  </pixel>
+</pixels>

@@ -38,7 +38,7 @@
          appsettingname="CART_PIXEL_CURRENT_TRIALPAY1"
          page_url="Order_Confirmation">
     <enabled value="1" />
-    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+    <trigger firsttimeonly="true" required="orderdetail,sourcecode">
       <orderdetail name="_total_total" comparison="&gt;=" value="500" />
       <sourcecodes>
         <sourcecode value="trialpay1" />
@@ -56,7 +56,7 @@
          appsettingname="CART_PIXEL_NEW_TRIALPAY1"
          page_url="Order_Confirmation">
     <enabled value="1" />
-    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+    <trigger firsttimeonly="true" required="orderdetail,sourcecode">
       <orderdetail name="_total_total" comparison="&gt;=" value="500" />
       <sourcecodes>
         <sourcecode value="trialpay1" />
@@ -74,7 +74,7 @@
          appsettingname="CART_PIXEL_CURRENT_TRIALPAYI"
          page_url="Order_Confirmation">
     <enabled value="1" />
-    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+    <trigger firsttimeonly="true" required="orderdetail,sourcecode">
       <orderdetail name="_total_total" comparison="&gt;=" value="500" />
       <sourcecodes>
         <sourcecode value="trialpayi" />
@@ -92,7 +92,7 @@
          appsettingname="CART_PIXEL_NEW_TRIALPAYI"
          page_url="Order_Confirmation">
     <enabled value="1" />
-    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+    <trigger firsttimeonly="true" required="orderdetail,sourcecode">
       <orderdetail name="_total_total" comparison="&gt;=" value="500" />
       <sourcecodes>
         <sourcecode value="trialpayi" />
@@ -110,7 +110,7 @@
          appsettingname="CART_PIXEL_CURRENT_TPDOMPTM"
          page_url="Order_Confirmation">
     <enabled value="1" />
-    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+    <trigger firsttimeonly="true" required="orderdetail,sourcecode">
       <orderdetail name="_total_total" comparison="&gt;=" value="500" />
       <sourcecodes>
         <sourcecode value="tpdomptm" />
@@ -128,7 +128,7 @@
          appsettingname="CART_PIXEL_CURRENT_TPINTPTM"
          page_url="Order_Confirmation">
     <enabled value="1" />
-    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+    <trigger firsttimeonly="true" required="orderdetail,sourcecode">
       <orderdetail name="_total_total" comparison="&gt;=" value="500" />
       <sourcecodes>
         <sourcecode value="tpintptm" />
@@ -146,7 +146,7 @@
          appsettingname="CART_PIXEL_CURRENT_TPDOMOW1"
          page_url="Order_Confirmation">
     <enabled value="1" />
-    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+    <trigger firsttimeonly="true" required="orderdetail,sourcecode">
       <orderdetail name="_total_total" comparison="&gt;=" value="500" />
       <sourcecodes>
         <sourcecode value="tpdomow1" />
@@ -164,7 +164,7 @@
          appsettingname="CART_PIXEL_CURRENT_TPINTLOW1"
          page_url="Order_Confirmation">
     <enabled value="1" />
-    <trigger firsttimeonly="true" required="orderdetail,sourcecodes">
+    <trigger firsttimeonly="true" required="orderdetail,sourcecode">
       <orderdetail name="_total_total" comparison="&gt;=" value="500" />
       <sourcecodes>
         <sourcecode value="tpintlow1" />
@@ -386,7 +386,7 @@
          appsettingname="CART_EXTOLEPIXEL_ENABLED"
          page_url="Order_Confirmation">
     <enabled value="1" />
-    <trigger required="orderdetail,sourcecodes">
+    <trigger required="orderdetail,sourcecode">
       <orderdetail name="_total_total" comparison="&gt;=" value="1000" />
       <sourcecodes>
         <sourcecode value="REFERME" />
@@ -402,7 +402,7 @@
          appsettingname="CART_SPONSORPAY_ENABLE"
          page_url="Order_Confirmation">
     <enabled value="1" />
-    <trigger doreplace="true" removeafterconsumption="true" firsttimeonly="true" required="orderdetail,sourcecodes">
+    <trigger doreplace="true" removeafterconsumption="true" firsttimeonly="true" required="orderdetail,sourcecode">
       <orderdetail name="_total_total" comparison="&gt;" value="500" />
       <sourcecodes>
         <sourcecode value="spp1" />

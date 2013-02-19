@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FC7381B1-66E0-462F-952B-4EC1F18E9C90}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atlantis.Framework.DotTypeCache.StaticTypes</RootNamespace>
+    <AssemblyName>Atlantis.Framework.DotTypeCache.StaticTypes</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DotAg.cs" />
+    <Compile Include="DotAm.cs" />
+    <Compile Include="DotAsia.cs" />
+    <Compile Include="DotAt.cs" />
+    <Compile Include="DotBe.cs" />
+    <Compile Include="DotBiz.cs" />
+    <Compile Include="DotBz.cs" />
+    <Compile Include="DotCa.cs" />
+    <Compile Include="DotCc.cs" />
+    <Compile Include="DotCn.cs" />
+    <Compile Include="DotCo.cs" />
+    <Compile Include="DotCoDotIn.cs" />
+    <Compile Include="DotCoDotNz.cs" />
+    <Compile Include="DotCoDotUk.cs" />
+    <Compile Include="DotCom.cs" />
+    <Compile Include="DotComDotAg.cs" />
+    <Compile Include="DotComDotAu.cs" />
+    <Compile Include="DotComDotBr.cs" />
+    <Compile Include="DotComDotBz.cs" />
+    <Compile Include="DotComDotCn.cs" />
+    <Compile Include="DotComDotCo.cs" />
+    <Compile Include="DotComDotEs.cs" />
+    <Compile Include="DotComDotMx.cs" />
+    <Compile Include="DotComDotSc.cs" />
+    <Compile Include="DotComDotTw.cs" />
+    <Compile Include="DotDe.cs" />
+    <Compile Include="DotEs.cs" />
+    <Compile Include="DotEu.cs" />
+    <Compile Include="DotFirmDotIn.cs" />
+    <Compile Include="DotFm.cs" />
+    <Compile Include="DotFr.cs" />
+    <Compile Include="DotGenDotIn.cs" />
+    <Compile Include="DotGs.cs" />
+    <Compile Include="DotIdvDotTw.cs" />
+    <Compile Include="DotIn.cs" />
+    <Compile Include="DotIndDotIn.cs" />
+    <Compile Include="DotInfo.cs" />
+    <Compile Include="DotIt.cs" />
+    <Compile Include="DotJobs.cs" />
+    <Compile Include="DotJp.cs" />
+    <Compile Include="DotMe.cs" />
+    <Compile Include="DotMeDotUk.cs" />
+    <Compile Include="DotMobi.cs" />
+    <Compile Include="DotMs.cs" />
+    <Compile Include="DotMx.cs" />
+    <Compile Include="DotName.cs" />
+    <Compile Include="DotNet.cs" />
+    <Compile Include="DotNetDotAg.cs" />
+    <Compile Include="DotNetDotAu.cs" />
+    <Compile Include="DotNetDotBr.cs" />
+    <Compile Include="DotNetDotBz.cs" />
+    <Compile Include="DotNetDotCn.cs" />
+    <Compile Include="DotNetDotCo.cs" />
+    <Compile Include="DotNetDotIn.cs" />
+    <Compile Include="DotNetDotNz.cs" />
+    <Compile Include="DotNetDotSc.cs" />
+    <Compile Include="DotNl.cs" />
+    <Compile Include="DotNomDotCo.cs" />
+    <Compile Include="DotNomDotEs.cs" />
+    <Compile Include="DotNu.cs" />
+    <Compile Include="DotOrg.cs" />
+    <Compile Include="DotOrgDotAg.cs" />
+    <Compile Include="DotOrgDotAu.cs" />
+    <Compile Include="DotOrgDotCn.cs" />
+    <Compile Include="DotOrgDotEs.cs" />
+    <Compile Include="DotOrgDotIn.cs" />
+    <Compile Include="DotOrgDotNz.cs" />
+    <Compile Include="DotOrgDotSc.cs" />
+    <Compile Include="DotOrgDotTw.cs" />
+    <Compile Include="DotOrgDotUk.cs" />
+    <Compile Include="DotSc.cs" />
+    <Compile Include="DotSe.cs" />
+    <Compile Include="DotTc.cs" />
+    <Compile Include="DotTk.cs" />
+    <Compile Include="DotTv.cs" />
+    <Compile Include="DotTw.cs" />
+    <Compile Include="DotUs.cs" />
+    <Compile Include="DotVg.cs" />
+    <Compile Include="DotWs.cs" />
+    <Compile Include="DotXxx.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
+      <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Static\Atlantis.Framework.DotTypeCache.Static.csproj">
+      <Project>{c6714b5f-ce86-4d8b-a615-0482465d0619}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Static</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

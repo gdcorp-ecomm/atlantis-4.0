@@ -1,5 +1,6 @@
 ﻿using Atlantis.Framework.DotTypeCache.Interface;
 using System;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.DotTypeCache
 {
@@ -16,10 +17,14 @@ namespace Atlantis.Framework.DotTypeCache
         try
         {
           var dotTypeAttributesDictionary = DataCache.DataCache.GetExtendedTLDData(dotType);
-          var dotTypeAttributes = dotTypeAttributesDictionary[dotType];
-          if ((dotTypeAttributes != null) && (dotTypeAttributes.ContainsKey(TLDMLSupportedFlag)))
+
+          Dictionary<string, string> dotTypeAttributes;
+          if (dotTypeAttributesDictionary.TryGetValue(dotType, out dotTypeAttributes))
           {
-            result = dotTypeAttributes[TLDMLSupportedFlag] != "0";
+            if ((dotTypeAttributes != null) && (dotTypeAttributes.ContainsKey(TLDMLSupportedFlag)))
+            {
+              result = dotTypeAttributes[TLDMLSupportedFlag] != "0";
+            }
           }
         }
         catch (Exception ex)

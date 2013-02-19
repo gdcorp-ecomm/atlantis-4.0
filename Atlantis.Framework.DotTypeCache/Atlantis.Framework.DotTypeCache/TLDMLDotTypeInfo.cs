@@ -1,6 +1,5 @@
 ﻿using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
 using Atlantis.Framework.RegDotTypeRegistry.Interface;
 using System;
@@ -16,6 +15,7 @@ namespace Atlantis.Framework.DotTypeCache
     private Lazy<ProductIdListResponseData> _productIdList;
     private Lazy<RegDotTypeRegistryResponseData> _dotTypeRegistryData;
     private Lazy<TLDMLByNameResponseData> _tldml;
+    private Lazy<int> _tldId;
 
     internal static TLDMLDotTypeInfo FromDotType(string dotType)
     {
@@ -25,11 +25,35 @@ namespace Atlantis.Framework.DotTypeCache
     private TLDMLDotTypeInfo(string tld)
     {
       _tld = tld;
+      _tldId = new Lazy<int>(() => { return LoadTldId(); });
       _productIdList = new Lazy<ProductIdListResponseData>(() => { return LoadProductIds(); });
       _dotTypeRegistryData = new Lazy<RegDotTypeRegistryResponseData>(() => { return LoadDotTypeRegistryData(); });
       _tldml = new Lazy<TLDMLByNameResponseData>(() => { return LoadTLDML(); });
 
       ITLDProduct product = _tldml.Value.Product; // Preload the TLDML
+    }
+
+    private int LoadTldId()
+    {
+      const string tldIdColumnName = "tldid";
+      int result = 0;
+
+      var tldData = DataCache.DataCache.GetExtendedTLDData(_tld);
+      Dictionary<string, string> tldInfo;
+      if (tldData.TryGetValue(_tld, out tldInfo))
+      {
+        string tldIdString;
+        if (tldInfo.TryGetValue(tldIdColumnName, out tldIdString))
+        {
+          int tldId;
+          if (int.TryParse(tldIdString, out tldId))
+          {
+            result = tldId;
+          }
+        }
+      }
+
+      return result;
     }
 
     private TLDMLByNameResponseData LoadTLDML()
@@ -396,43 +420,19 @@ namespace Atlantis.Framework.DotTypeCache
       return result;
     }
 
-    public ITLDProduct Product 
-	  {
+    public ITLDProduct Product
+    {
       get { return _tldml.Value.Product; }
     }
 
-    private int? _tldId;
     public int TldId
     {
-      get
-      {
-        if (_tldId == null)
-        {
-          const string tldIdColumnName = "tldid";
-          string sTldId = string.Empty;
-          _tldId = 0;
-          int tldId;
-
-          var tldData = DataCache.DataCache.GetExtendedTLDData(DotType);
-
-          Dictionary<string, string> tldInfo;
-          tldData.TryGetValue(DotType, out tldInfo);
-
-          if (tldInfo != null && tldInfo.Count > 0 && tldInfo.ContainsKey(tldIdColumnName))
-          {
-            tldInfo.TryGetValue(tldIdColumnName, out sTldId);
-          }
-
-          int.TryParse(sTldId, out tldId);
-          _tldId = tldId;
-        }
-        return _tldId.Value;
-      }
+      get { return _tldId.Value; }
     }
 
     public ITLDTld Tld
     {
-      get { return _tldml.Value.Tld; }   
+      get { return _tldml.Value.Tld; }
     }
 
     public string GetRegistrationFieldsXml()

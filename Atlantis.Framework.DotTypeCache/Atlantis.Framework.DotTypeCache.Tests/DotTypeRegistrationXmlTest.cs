@@ -36,7 +36,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
       HttpProviderContainer.Instance.RegisterProvider<IManagerContext, MockNoManagerContext>();
       HttpProviderContainer.Instance.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://siteadmin.debug.intranet.gdg/default.aspx", string.Empty);
+      MockHttpRequest request = new MockHttpRequest("http://siteadmin.debug.intranet.gdg/default.aspx");
+      MockHttpContext.SetFromWorkerRequest(request);
 
       IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
       shopperContext.SetNewShopper("832652");
@@ -46,7 +47,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("dottypecache.config")]
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
-    [DeploymentItem("Atlantis.Framework.DotTypeCache.DotCa.dll")]
+    [DeploymentItem("Atlantis.Framework.DotTypeCache.StaticTypes.dll")]
     public void GetFieldsXml()
     {
       var fieldXml = DotTypeCache.GetRegistrationFieldsXml("CA");

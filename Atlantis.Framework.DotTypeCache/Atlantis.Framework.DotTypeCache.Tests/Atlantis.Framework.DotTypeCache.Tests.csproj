@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Data">
+      <HintPath>..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.Automation\Reference\Data.dll</HintPath>
+    </Reference>
     <Reference Include="Enums">
       <HintPath>..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.Automation\Reference\Enums.dll</HintPath>
     </Reference>

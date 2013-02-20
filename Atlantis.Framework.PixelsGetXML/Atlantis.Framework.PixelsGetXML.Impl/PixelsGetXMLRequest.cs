@@ -45,24 +45,45 @@ namespace Atlantis.Framework.PixelsGetXML.Impl
 
                 foreach (DataRow pixelRow in pixelDataTable.Rows)
                 {
-                  string pixel = pixelRow["pixelXml"] is DBNull ? string.Empty : Convert.ToString(pixelRow["pixelXml"]);
-                  string trigger = pixelRow["triggerXml"] is DBNull ? string.Empty : Convert.ToString(pixelRow["triggerXml"]);
-                  string additionalData = pixelRow["additionalData"] is DBNull ? string.Empty : Convert.ToString(pixelRow["additionalData"]);
-                  if (!string.IsNullOrEmpty(pixel.Trim()))
+                  string pixel = string.Empty;
+                  string trigger = string.Empty;
+                  string additionalData = string.Empty;
+                  try
                   {
-                    XElement pixelXml = XElement.Parse(pixel);
+                    if (!(pixelRow["pixelXml"] is DBNull))
+                    {
+                      pixel = Convert.ToString(pixelRow["pixelXml"]);
+                    }
+                    if (!(pixelRow["triggerXml"] is DBNull))
+                    {
+                      trigger = Convert.ToString(pixelRow["triggerXml"]);
+                    }
+                    if (!(pixelRow["additionalData"] is DBNull))
+                    {
+                      additionalData = Convert.ToString(pixelRow["additionalData"]);
+                    }
+                    if (!string.IsNullOrEmpty(pixel.Trim()))
+                    {
+                      XElement pixelXml = XElement.Parse(pixel);
 
-                    if (!string.IsNullOrEmpty(trigger.Trim()))
-                    {
-                      XElement triggerXml = XElement.Parse(trigger);
-                      pixelXml.Add(triggerXml);
+                      if (!string.IsNullOrEmpty(trigger.Trim()))
+                      {
+                        XElement triggerXml = XElement.Parse(trigger);
+                        pixelXml.Add(triggerXml);
+                      }
+                      if (!string.IsNullOrEmpty(additionalData.Trim()))
+                      {
+                        XElement additionalDataXml = XElement.Parse(additionalData);
+                        pixelXml.Add(additionalDataXml);
+                      }
+                      xmlResults.Root.Add(pixelXml);
                     }
-                    if (!string.IsNullOrEmpty(additionalData.Trim()))
-                    {
-                      XElement additionalDataXml = XElement.Parse(additionalData);
-                      pixelXml.Add(additionalDataXml);
-                    }
-                    xmlResults.Root.Add(pixelXml);
+                  }
+                  catch (Exception e)
+                  {
+                    var aex = new AtlantisException(requestData, "PixelsGetXMLRequest:RequestHandler", "Pixel XML failed to parse " + e.Message, pixel + trigger + additionalData);
+                    Engine.Engine.LogAtlantisException(aex);
+                    result = new PixelsGetXMLResponseData(requestData, e);
                   }
                 }
               }

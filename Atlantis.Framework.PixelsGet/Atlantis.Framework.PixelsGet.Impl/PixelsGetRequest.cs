@@ -139,6 +139,15 @@ namespace Atlantis.Framework.PixelsGet.Impl
                 if (triggerElement.Attribute(PixelXmlNames.Required) != null)
                 {
                   requiredTriggers = triggerElement.Attribute(PixelXmlNames.Required).Value.ToLower().Split(',');
+                  foreach (string requiredTrigger in requiredTriggers)
+                  {
+                    if (triggerElement.Descendants(requiredTrigger).Count() == 0)
+                    {
+                      var aex = new AtlantisException(_pixelRequestData, "PixelGetRequest::TriggerPixel",
+                                                      "Missing required trigger " + requiredTrigger + " in XML", currentElement.ToString());
+                      Engine.Engine.LogAtlantisException(aex);
+                    }
+                  }
                 }
                 foreach (XElement individualTrigger in triggerElement.Nodes())
                 {

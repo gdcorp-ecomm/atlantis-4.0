@@ -60,6 +60,10 @@
       <Project>{7f2738f8-683c-49e7-88cd-e986c70f0321}</Project>
       <Name>Atlantis.Framework.DataCache</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.DCCDomainsDataCache\Atlantis.Framework.DCCDomainsDataCache.Interface\Atlantis.Framework.DCCDomainsDataCache.Interface.csproj">
+      <Project>{98f402fb-90d0-4bea-8d97-46a73e6363b8}</Project>
+      <Name>Atlantis.Framework.DCCDomainsDataCache.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>

@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -72,6 +73,14 @@
     <ProjectReference Include="..\..\Atlantis.Framework.DCCDomainsDataCache\Atlantis.Framework.DCCDomainsDataCache.Interface\Atlantis.Framework.DCCDomainsDataCache.Interface.csproj">
       <Project>{98f402fb-90d0-4bea-8d97-46a73e6363b8}</Project>
       <Name>Atlantis.Framework.DCCDomainsDataCache.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.DomainContactFields\Atlantis.Framework.DomainContactFields.Impl\Atlantis.Framework.DomainContactFields.Impl.csproj">
+      <Project>{3d75db33-f705-4c5d-8cf2-21ff27e67655}</Project>
+      <Name>Atlantis.Framework.DomainContactFields.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.DomainContactFields\Atlantis.Framework.DomainContactFields.Interface\Atlantis.Framework.DomainContactFields.Interface.csproj">
+      <Project>{bd8f8fc4-8a78-4dde-8ed7-8caef06791fe}</Project>
+      <Name>Atlantis.Framework.DomainContactFields.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{092618E1-1F37-422C-82AF-17A1337B8986}</Project>

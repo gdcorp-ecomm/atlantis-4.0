@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Atlantis.Framework.DomainContactFields.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Static
@@ -15,6 +17,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     private StaticProduct _staticProduct;
     private StaticTld _staticTld;
+    private Lazy<DomainContactFieldsResponseData> _domainContactFieldsData;
 
     private bool _isMultiRegistry = false;
     public bool IsMultiRegistry
@@ -87,6 +90,13 @@ namespace Atlantis.Framework.DotTypeCache.Static
       _expiredAuctionRegProductIds = InitializeExpiredAuctionRegProductIds();
       _staticProduct = new StaticProduct(this);
       _staticTld = new StaticTld(this);
+      _domainContactFieldsData = new Lazy<DomainContactFieldsResponseData>(LoadDomainContactFieldsData);
+    }
+
+    private DomainContactFieldsResponseData LoadDomainContactFieldsData()
+    {
+      var request = new DomainContactFieldsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, DotType);
+      return (DomainContactFieldsResponseData)DataCache.DataCache.GetProcessRequest(request, 651);
     }
 
     protected abstract StaticDotTypeTiers InitializeRegistrationProductIds();
@@ -378,7 +388,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     public string GetRegistrationFieldsXml()
     {
-      return DomainContactData.DomainContactXml;
+      return _domainContactFieldsData.Value.DomainContactFields;
     }
     #endregion
 

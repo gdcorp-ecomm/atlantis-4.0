@@ -12,12 +12,9 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     HashSet<string> GetOfferedTLDsSetForAllFlags(params string[] flagNames);
     HashSet<string> GetOfferedTLDsSetForAnyFlags(params string[] flagNames);
 
-    List<string> TLDList { get; }
+    List<string> OfferedTLDsList { get; }
 
-    List<string> GetCustomTLDsByGroupName(string groupName);
-
-    List<string> FilterNonOfferedTLDs(List<string> tldListToFilter);
-    HashSet<string> FilterNonOfferedTLDs(HashSet<string> tldSetToFilter);
+    List<string> GetCustomTLDsOfferedByGroupName(string groupName);
     bool IsOffered(string tld);
   }
 }

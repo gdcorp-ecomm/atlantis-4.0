@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.DCCDomainsDataCache.Interface;
+using Atlantis.Framework.DomainContactFields.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
 using Atlantis.Framework.RegDotTypeRegistry.Interface;
@@ -16,6 +17,7 @@ namespace Atlantis.Framework.DotTypeCache
     private Lazy<RegDotTypeRegistryResponseData> _dotTypeRegistryData;
     private Lazy<TLDMLByNameResponseData> _tldml;
     private Lazy<int> _tldId;
+    private Lazy<DomainContactFieldsResponseData> _domainContactFieldsData;
 
     internal static TLDMLDotTypeInfo FromDotType(string dotType)
     {
@@ -29,6 +31,7 @@ namespace Atlantis.Framework.DotTypeCache
       _productIdList = new Lazy<ProductIdListResponseData>(() => { return LoadProductIds(); });
       _dotTypeRegistryData = new Lazy<RegDotTypeRegistryResponseData>(() => { return LoadDotTypeRegistryData(); });
       _tldml = new Lazy<TLDMLByNameResponseData>(() => { return LoadTLDML(); });
+      _domainContactFieldsData = new Lazy<DomainContactFieldsResponseData>(LoadDomainContactFieldsData);
 
       ITLDProduct product = _tldml.Value.Product; // Preload the TLDML
     }
@@ -72,6 +75,12 @@ namespace Atlantis.Framework.DotTypeCache
     {
       ProductIdListRequestData request = new ProductIdListRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
       return (ProductIdListResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ProductIdList);
+    }
+
+    private DomainContactFieldsResponseData LoadDomainContactFieldsData()
+    {
+      var request = new DomainContactFieldsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, DotType);
+      return (DomainContactFieldsResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.DomainContactFields);
     }
 
     public string DotType
@@ -437,7 +446,7 @@ namespace Atlantis.Framework.DotTypeCache
 
     public string GetRegistrationFieldsXml()
     {
-      throw new NotImplementedException();
+      return _domainContactFieldsData.Value.DomainContactFields;
     }
   }
 }

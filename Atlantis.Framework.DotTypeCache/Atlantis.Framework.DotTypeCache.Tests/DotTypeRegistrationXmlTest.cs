@@ -48,6 +48,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [DeploymentItem("dottypecache.config")]
     [DeploymentItem("Interop.gdDataCacheLib.dll")]
     [DeploymentItem("Atlantis.Framework.DotTypeCache.StaticTypes.dll")]
+    [DeploymentItem("Atlantis.Framework.DomainContactFields.Impl.dll")]
     public void GetFieldsXml()
     {
       var fieldXml = DotTypeCache.GetRegistrationFieldsXml("CA");

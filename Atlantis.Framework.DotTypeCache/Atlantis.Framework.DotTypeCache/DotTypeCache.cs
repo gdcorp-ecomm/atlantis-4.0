@@ -8,8 +8,6 @@ namespace Atlantis.Framework.DotTypeCache
 {
   public sealed class DotTypeCache
   {
-    // TODO: Obsolete these methods for use of the provider
-
     public static string FileVersion { get; set; }
     public static string InterfaceVersion { get; set; }
 
@@ -66,8 +64,6 @@ namespace Atlantis.Framework.DotTypeCache
     {
       return DotTypes.HasDotTypeInfo(dotType);
     }
-
-    /// TODO: Obsolete most all of these methods ... callers should Get the dottype using dottypeprovider
 
     public static int GetExpiredAuctionRegProductId(string dotType, int registrationLength, int domainCount)
     {

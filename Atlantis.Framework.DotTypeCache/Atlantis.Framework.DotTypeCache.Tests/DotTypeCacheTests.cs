@@ -1316,5 +1316,12 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     #endregion
 
     #endregion
+
+    [TestMethod]
+    public void IsOfferedCheckForCom()
+    {
+      bool flag = DotTypeProvider.GetTLDDataForRegistration.IsOffered("com");
+      Assert.IsTrue(flag);
+    }
   }
 }

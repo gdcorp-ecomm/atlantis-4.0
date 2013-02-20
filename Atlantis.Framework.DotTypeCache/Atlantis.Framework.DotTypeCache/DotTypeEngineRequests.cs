@@ -7,6 +7,7 @@
     private static int _activeTldsRequest = 635;
     private static int _offeredTldsRequest = 637;
     private static int _tldmlByNameRequest = 634;
+    private static int _domainContactFieldsRequest = 651;
 
     public static int TLDMLByName
     {
@@ -36,6 +37,12 @@
     {
       get { return _offeredTldsRequest; }
       set { _offeredTldsRequest = value; }
+    }
+
+    public static int DomainContactFields
+    {
+      get { return _domainContactFieldsRequest; }
+      set { _domainContactFieldsRequest = value; }
     }
   }
 }

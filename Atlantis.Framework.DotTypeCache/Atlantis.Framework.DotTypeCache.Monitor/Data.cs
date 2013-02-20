@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using System.Xml;
@@ -47,8 +48,25 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
 
         XElement tldInfo = new XElement("TLDInfo");
         tldInfo.Add(DotTypeName(tldValue), DotTypeSource(className));
-
         root.Add(tldInfo);
+
+        TLDMLByNameResponseData response = null;
+        foreach ( var name in className.Split(new string[] {"."}, StringSplitOptions.RemoveEmptyEntries))
+        {
+          if (name.ToLowerInvariant() == "tldmldottypeinfo")
+          {
+            TLDMLByNameRequestData request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, tldValue);
+            response =  (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.TLDMLByName);
+            break;
+          }
+        }
+
+        if (response != null)
+        {
+          tldInfo = new XElement("TLDMLData");
+          tldInfo.Add(XElement.Parse(response.ToXML()));
+          root.Add(tldInfo);
+        }
       }
 
       return result;

@@ -30,7 +30,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     {
       _offeredRegistrationYears = LoadValidYears("registrationperiodcollection", "registrationperiod");
       _offeredTransferYears = LoadValidYears("transferperiodcollection", "transferperiod");
-      _offeredRenewalYears = LoadValidYears("renewalperiodcollection", "renewalperiod");
+      _offeredRenewalYears = LoadValidYears("renewperiodcollection", "renewperiod");
       _offeredExpiredAuctionYears = LoadValidYears("expiredauctionperiodcollection", "expiredauctionperiod");
       _offeredPreregistrationYears = LoadPreregistrationYears();
     }

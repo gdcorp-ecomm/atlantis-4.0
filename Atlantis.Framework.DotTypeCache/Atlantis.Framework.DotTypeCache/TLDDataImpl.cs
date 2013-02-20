@@ -1,4 +1,8 @@
-﻿using Atlantis.Framework.DotTypeCache.Interface;
+﻿using System.Collections.Specialized;
+using System.Configuration;
+using System.Web;
+using System.Web.Configuration;
+using Atlantis.Framework.DotTypeCache.Interface;
 using System;
 using System.Collections.Generic;
 using Atlantis.Framework.TLDDataCache.Interface;
@@ -96,27 +100,24 @@ namespace Atlantis.Framework.DotTypeCache
       return tldInfo;
     }
 
-    private HashSet<string> _tldSet;
-    private HashSet<string> TLDSet
+    private HashSet<string> _offeredTldsSet;
+    private HashSet<string> OfferedTLDsSet
     {
       get
       {
-        if (_tldSet == null)
+        if (_offeredTldsSet == null)
         {
-          _tldSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+          _offeredTldsSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
           if (OfferedTldsResponse != null && OfferedTldsResponse.OfferedTLDs.Any())
           {
             foreach (var tld in OfferedTldsResponse.OfferedTLDs)
             {
-              if (DotTypeCache.HasDotTypeInfo(tld))
-              {
-                _tldSet.Add(tld);
-              }
+              _offeredTldsSet.Add(tld);
             }
           }
         }
-        return _tldSet;
+        return _offeredTldsSet;
       }
     }
 
@@ -127,7 +128,7 @@ namespace Atlantis.Framework.DotTypeCache
       return aTlds;
     }
 
-    private HashSet<string> GetTLDsSetForAnyFlags(params string[] flagNames)
+    private IEnumerable<string> GetTLDsSetForAnyFlags(params string[] flagNames)
     {
       HashSet<string> aTlds = ActiveTldsResponse.GetActiveTLDUnion(flagNames);
 
@@ -138,9 +139,10 @@ namespace Atlantis.Framework.DotTypeCache
     {
       var returnTlds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-      foreach (var aTld in GetTLDsSetForAllFlags(flagNames))
+      var aTlds = GetTLDsSetForAllFlags(flagNames);
+      foreach (var aTld in aTlds)
       {
-        if (TLDSet.Contains(aTld))
+        if (OfferedTLDsSet.Contains(aTld))
         {
           returnTlds.Add(aTld);
         }
@@ -153,9 +155,10 @@ namespace Atlantis.Framework.DotTypeCache
     {
       var returnTlds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-      foreach (var aTld in GetTLDsSetForAnyFlags(flagNames))
+      var aTlds = GetTLDsSetForAnyFlags(flagNames);
+      foreach (var aTld in aTlds)
       {
-        if (TLDSet.Contains(aTld))
+        if (OfferedTLDsSet.Contains(aTld))
         {
           returnTlds.Add(aTld);
         }
@@ -164,46 +167,25 @@ namespace Atlantis.Framework.DotTypeCache
       return returnTlds;
     }
 
-    private List<string> _tldList; 
-    public List<string> TLDList
+    private List<string> _offeredTldsList; 
+    public List<string> OfferedTLDsList
     {
       get
       {
-        if (_tldList == null)
+        if (_offeredTldsList == null)
         {
-          _tldList = new List<string>();
+          _offeredTldsList = new List<string>();
 
           if (OfferedTldsResponse != null && OfferedTldsResponse.OfferedTLDs.Any())
           {
-            foreach (var tld in OfferedTldsResponse.OfferedTLDs)
-            {
-              if (DotTypeCache.HasDotTypeInfo(tld))
-              {
-                _tldList.Add(tld);
-              }
-            }
+            _offeredTldsList = OfferedTldsResponse.OfferedTLDs.ToList();
           }
         }
-        return _tldList;
-        
+        return _offeredTldsList;
       }
     }
 
-    private List<string> GetOfferedTLDsListForAllFlags(params string[] flagNames)
-    {
-      HashSet<string> aTlds = ActiveTldsResponse.GetActiveTLDIntersect(flagNames);
-
-      return OfferedTldsResponse.OfferedTLDs.Where(oTld => aTlds.Contains(oTld) && TLDSet.Contains(oTld)).ToList();
-    }
-
-    private List<string> GetOfferedTLDsListForAnyFlags(params string[] flagNames)
-    {
-      HashSet<string> aTlds = ActiveTldsResponse.GetActiveTLDUnion(flagNames);
-
-      return OfferedTldsResponse.OfferedTLDs.Where(oTld => aTlds.Contains(oTld) && TLDSet.Contains(oTld)).ToList();
-    }
-
-    public List<string> GetCustomTLDsByGroupName(string groupName)
+    public List<string> GetCustomTLDsOfferedByGroupName(string groupName)
     {
       var tldList = new List<string>(0);
       var request = new CustomTLDGroupRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, groupName);
@@ -211,63 +193,18 @@ namespace Atlantis.Framework.DotTypeCache
 
       if (response != null && response.TldsInOrder.Any())
       {
-        tldList = response.TldsInOrder.ToList();
-      }
+        var validTlds = GetAllOfferedTLDs();
 
-      return tldList;
-    }
-
-    private List<string> GetOfferedCustomTLDsByGroupName(string groupName)
-    {
-      var tldList = new List<string>(0);
-
-      foreach (var tld in GetCustomTLDsByGroupName(groupName))
-      {
-        if (TLDSet.Contains(tld))
+        foreach (var tld in response.TldsInOrder)
         {
-          tldList.Add(tld);
+          if (validTlds.Contains(tld))
+          {
+            tldList.Add(tld);
+          }
         }
       }
 
       return tldList;
-    }
-
-    public List<string> FilterNonOfferedTLDs(List<string> tldListToFilter)
-    {
-      var list = new List<string>();
-
-      if (tldListToFilter.Any())
-      {
-        var validTlds = GetAllOfferedTLDs();
-
-        foreach (string tld in tldListToFilter)
-        {
-          if (validTlds.Contains(tld))
-          {
-            list.Add(tld);
-          }
-        }
-      }
-      return list;      
-    }
-
-    public HashSet<string> FilterNonOfferedTLDs(HashSet<string> tldHashSetToFilter)
-    {
-      var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-      if (tldHashSetToFilter.Any())
-      {
-        var validTlds = GetAllOfferedTLDs();
-
-        foreach (string tld in tldHashSetToFilter)
-        {
-          if (validTlds.Contains(tld))
-          {
-            set.Add(tld);
-          }
-        }
-      }
-      return set;      
     }
 
     public bool IsOffered(string tld)
@@ -285,14 +222,31 @@ namespace Atlantis.Framework.DotTypeCache
 
       foreach (var tld in tlds)
       {
-        if (TLDSet.Contains(tld))
+        if (OfferedTLDsSet.Contains(tld))
         {
           offeredTlds.Add(tld);
         }
       }
-      var overRideTlds = new HashSet<string>(GetCustomTLDsByGroupName("OverRideTLDs"), StringComparer.OrdinalIgnoreCase);
 
-      offeredTlds.UnionWith(overRideTlds);
+      HashSet<string> overRideTlds = null;
+
+      string stagingServers = DataCache.DataCache.GetAppSetting("DotTypeCacheStagingServers");
+      string stagingTlds = DataCache.DataCache.GetAppSetting("DotTypeCacheStagingTLDs");
+
+      if (!string.IsNullOrEmpty(stagingServers) && !string.IsNullOrEmpty(stagingTlds))
+      {
+        var serverArr = stagingServers.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries);
+        if (serverArr.Any(s => s.Trim().ToLowerInvariant() == Environment.MachineName.ToLowerInvariant()))
+        {
+          var stagingTldList = stagingTlds.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries);
+          overRideTlds = new HashSet<string>(stagingTldList, StringComparer.OrdinalIgnoreCase);
+        }
+      }
+
+      if (overRideTlds != null)
+      {
+        offeredTlds.UnionWith(overRideTlds);
+      }
       return offeredTlds;
     }
   }

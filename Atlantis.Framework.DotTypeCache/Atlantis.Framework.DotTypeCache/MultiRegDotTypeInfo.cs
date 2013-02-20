@@ -429,7 +429,7 @@ namespace Atlantis.Framework.DotTypeCache
 
     public string GetRegistrationFieldsXml()
     {
-      return string.Empty;
+      return this._dotTypeInfo.GetRegistrationFieldsXml();
     }
 
   }

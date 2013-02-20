@@ -94,8 +94,8 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
           foreach (var tld in tlds)
           {
             tldInfo.Add(GetTldElement(tld.Key, tld.Value));
-            root.Add(tldInfo);
           }
+          root.Add(tldInfo);
         }
       }
       catch (Exception ex)

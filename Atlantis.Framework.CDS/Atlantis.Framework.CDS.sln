@@ -93,9 +93,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Footers", "Atlantis.Framework.CDS.Entities.Footers\Atlantis.Framework.CDS.Entities.Footers.csproj", "{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CDS.Entities.Page", "Atlantis.Framework.CDS.Entities.Page\Atlantis.Framework.CDS.Entities.Page.csproj", "{92B3CE44-3196-442F-AF8F-848C606E39EA}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 43
+		SccNumberOfProjects = 44
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -242,6 +244,9 @@ Global
 		SccProjectUniqueName42 = Atlantis.Framework.CDS.Entities.Footers\\Atlantis.Framework.CDS.Entities.Footers.csproj
 		SccProjectName42 = Atlantis.Framework.CDS.Entities.Footers
 		SccLocalPath42 = Atlantis.Framework.CDS.Entities.Footers
+		SccProjectUniqueName43 = Atlantis.Framework.CDS.Entities.Page\\Atlantis.Framework.CDS.Entities.Page.csproj
+		SccProjectName43 = Atlantis.Framework.CDS.Entities.Page
+		SccLocalPath43 = Atlantis.Framework.CDS.Entities.Page
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.CDS.vsmdi
@@ -675,6 +680,16 @@ Global
 		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CFC42A5C-B46C-4F86-B170-93C0914EC8F6}.Release|x86.ActiveCfg = Release|Any CPU
+		{92B3CE44-3196-442F-AF8F-848C606E39EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92B3CE44-3196-442F-AF8F-848C606E39EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92B3CE44-3196-442F-AF8F-848C606E39EA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{92B3CE44-3196-442F-AF8F-848C606E39EA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{92B3CE44-3196-442F-AF8F-848C606E39EA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{92B3CE44-3196-442F-AF8F-848C606E39EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92B3CE44-3196-442F-AF8F-848C606E39EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92B3CE44-3196-442F-AF8F-848C606E39EA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{92B3CE44-3196-442F-AF8F-848C606E39EA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{92B3CE44-3196-442F-AF8F-848C606E39EA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

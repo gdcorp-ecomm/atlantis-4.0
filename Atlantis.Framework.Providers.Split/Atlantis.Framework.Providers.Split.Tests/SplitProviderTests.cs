@@ -4,10 +4,13 @@ using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Providers.Split.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Web;
+using Atlantis.Framework.Testing.MockProviders;
 
 namespace Atlantis.Framework.Providers.Split.Tests
 {
   [TestClass]
+  [DeploymentItem("Interop.gdDataCacheLib.dll")]
   public class SplitProviderTests
   {
     public SplitProviderTests()
@@ -35,28 +38,27 @@ namespace Atlantis.Framework.Providers.Split.Tests
     [TestInitialize]
     public void InitializeTests()
     {
-      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<ISplitProvider, SplitProvider>();
     }
 
-    private ISplitProvider NewSplitProvider(int privateLabelId, string shopperId)
+    private ISplitProvider InitializeProvidersAndReturnSplitProvider(int privateLabelId, string shopperId)
     {
-      ISiteContext siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
-      ((TestContexts)siteContext).SetContextInfo(privateLabelId, shopperId);
+      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
+      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
+      HttpProviderContainer.Instance.RegisterProvider<ISplitProvider, SplitProvider>();
+
+      HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] = privateLabelId;
       IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
-      ((TestContexts)shopperContext).SetContextInfo(privateLabelId, shopperId);
+      shopperContext.SetNewShopper(shopperId);
 
       ISplitProvider splitProvider = HttpProviderContainer.Instance.Resolve<ISplitProvider>();
       return splitProvider;
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void IsInRange()
     {
       MockHttpContext.SetMockHttpContext("default.aspx", "http://www.godaddy.com/default.aspx", String.Empty);
-      ISplitProvider split = NewSplitProvider(1, "858884");
+      ISplitProvider split = InitializeProvidersAndReturnSplitProvider(1, "858884");
 
       Assert.IsNotNull(split);
       Assert.IsTrue(split.SplitValue > 0);
@@ -64,11 +66,10 @@ namespace Atlantis.Framework.Providers.Split.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void StandardAndPCSplits()
     {
       MockHttpContext.SetMockHttpContext("default.aspx", "http://www.godaddy.com/default.aspx", String.Empty);
-      ISplitProvider split = NewSplitProvider(1, "858884");
+      ISplitProvider split = InitializeProvidersAndReturnSplitProvider(1, "858884");
 
       Assert.IsNotNull(split);
       Assert.IsTrue(split.SplitValue > 0);
@@ -79,15 +80,28 @@ namespace Atlantis.Framework.Providers.Split.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void StandardAndPCSplitsToConsole()
     {
       for (int x = 0; x < 100; x++)
       {
         MockHttpContext.SetMockHttpContext("default.aspx", "http://www.godaddy.com/default.aspx", String.Empty);
-        ISplitProvider split = NewSplitProvider(1, "858884");
+        ISplitProvider split = InitializeProvidersAndReturnSplitProvider(1, "858884");
         Console.WriteLine(split.SplitValue.ToString() + " : " + split.PCSplitValue.ToString());
       }
+    }
+
+    [TestMethod]
+    public void SplitValueCookieExists()
+    {
+      MockHttpRequest request = new MockHttpRequest("http://www.godaddy.com/default.aspx");
+      MockHttpContext.SetFromWorkerRequest(request);
+      HttpCookie splitCookie = new HttpCookie("SplitValue1", "72");
+      splitCookie.Domain = ".godaddy.com";
+      HttpContext.Current.Request.Cookies.Add(splitCookie);
+
+      ISplitProvider split = InitializeProvidersAndReturnSplitProvider(1, string.Empty);
+      Assert.AreEqual(72, split.SplitValue);
+      Assert.AreEqual(0, HttpContext.Current.Response.Cookies.Count);
     }
 
 

@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplitProviderTests.cs" />
-    <Compile Include="TestContexts.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
@@ -70,6 +69,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
       <Project>{5B0E8D0F-247E-4937-8177-48EA5E267CAB}</Project>
       <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
+      <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
+      <Name>Atlantis.Framework.Testing.MockProviders</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Split.Interface\Atlantis.Framework.Providers.Split.Interface.csproj">
       <Project>{797D9094-F4F7-4947-B3D2-23E4A0A60656}</Project>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Atlantis.Framework.Interface;
+using BillingSyncErrorType = Atlantis.Framework.EcommBillingSync.Interface.BillingSyncErrorData.BillingSyncErrorType;
 
 namespace Atlantis.Framework.EcommBillingSync.Interface
 {
@@ -21,6 +22,8 @@ namespace Atlantis.Framework.EcommBillingSync.Interface
     public int PrivateLabelId { get; private set; }
     public string SelectedTransactionalCurrencyType { get; private set; }
     public DateTime SyncDate { get; private set; }
+    public List<BillingSyncErrorData> BillingSyncErrors { get; private set; }
+    public bool RequestContainsInvalidSyncDate { get; private set; }
     #endregion
 
     public EcommBillingSyncRequestData(string shopperId
@@ -52,17 +55,36 @@ namespace Atlantis.Framework.EcommBillingSync.Interface
     }
 
     #region Invalid Request
-    private static void CheckForInvalidInput(List<BillingSyncProduct> billingSyncProducts, DateTime syncDate)
+    private void CheckForInvalidInput(List<BillingSyncProduct> billingSyncProducts, DateTime syncDate)
     {
+      BillingSyncErrors = new List<BillingSyncErrorData>();
+      RequestContainsInvalidSyncDate = false;
+      InvalidDataException ide;
+
+      var billingSyncProductsCopy = new List<BillingSyncProduct>(billingSyncProducts);
+
       if (syncDate.Day < 1 || syncDate.Day > 28)
       {
-        throw new InvalidDataException("Synchronization date must be between 1 & 28 inclusive");
+        ide = new InvalidDataException("Synchronization date must be between 1 & 28 inclusive");
+        BillingSyncErrors.Add(new BillingSyncErrorData(BillingSyncErrorType.InvalidSyncDate, ide));
+        RequestContainsInvalidSyncDate = true;
+        return;
       }
 
-      var invalidBsp = billingSyncProducts.Find(bsp => !bsp.AllowRenewals);
-      if (invalidBsp != null)
+      var invalidBspsByFlag = billingSyncProductsCopy.FindAll(bsp => !bsp.AllowRenewals);
+      foreach (var bsp in invalidBspsByFlag)
       {
-        throw new InvalidDataException(string.Format("Sychronization list includes product ineligible for renewal - (ResourceId: {0} | OrionId: {1})", invalidBsp.BillingResourceId, invalidBsp.OrionId));
+        billingSyncProducts.Remove(bsp);
+        ide = new InvalidDataException(string.Format("BillingSyncProduct is ineligible for renewal"));
+        BillingSyncErrors.Add(new BillingSyncErrorData(BillingSyncErrorType.RenewalNotAllowedByFlag, ide, bsp));
+      }
+
+      var invalidBspsByRecurringType = billingSyncProductsCopy.FindAll(bsp => String.Compare(bsp.RecurringPaymentType, "onetime", StringComparison.OrdinalIgnoreCase) == 0);
+      foreach (var bsp in invalidBspsByRecurringType)
+      {
+        billingSyncProducts.Remove(bsp);
+        ide = new InvalidDataException(string.Format("BillingSyncProduct has ineligible 'onetime' recurringType"));
+        BillingSyncErrors.Add(new BillingSyncErrorData(BillingSyncErrorType.RenewalNotAllowedByRecurringType, ide, bsp));
       }
     }
     #endregion

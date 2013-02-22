@@ -1,28 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.EcommBillingSync.Interface
 {
   public class EcommBillingSyncResponseData : IResponseData
   {
-    private readonly AtlantisException _exception = null;
+    private readonly AtlantisException _exception;
     private readonly string _resultXml = string.Empty;
+    public readonly List<BillingSyncErrorData> BillingSyncErrors = null;
+    public bool IsSuccess { get; private set; }
 
-    public bool IsSuccess
+    public EcommBillingSyncResponseData(List<BillingSyncErrorData> billingSyncErrors)
     {
-      get { return _exception == null; }
+      IsSuccess = true;
+      BillingSyncErrors = billingSyncErrors;
     }
 
-    public EcommBillingSyncResponseData()
-    { }
-
-     public EcommBillingSyncResponseData(AtlantisException atlantisException)
+    public EcommBillingSyncResponseData(AtlantisException atlantisException, List<BillingSyncErrorData> billingSyncErrors)
     {
+      IsSuccess = false;
+      BillingSyncErrors = billingSyncErrors;
       _exception = atlantisException;
     }
 
-    public EcommBillingSyncResponseData(RequestData requestData, Exception exception)
+    public EcommBillingSyncResponseData(RequestData requestData, Exception exception, List<BillingSyncErrorData> billingSyncErrors)
     {
+      IsSuccess = false;
+      BillingSyncErrors = billingSyncErrors;
       _exception = new AtlantisException(requestData
         , "EcommBillingSyncResponseData"
         , exception.Message

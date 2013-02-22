@@ -37,6 +37,7 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
     //
     #endregion
 
+    #region IsSuccess == True Tests
     [TestMethod]
     [DeploymentItem("atlantis.framework.ecommproductaddons.impl.dll")]
     [DeploymentItem("atlantis.framework.additem.impl.dll")]
@@ -45,8 +46,8 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
       var targetDate = DateTime.Parse("2/21/2013");
       var billDate1 = DateTime.Parse("2010-08-15 00:00:00.000");
       var billDate2 = DateTime.Parse("2010-05-15 00:00:00.000");
-      var bsp1 = new BillingSyncProduct(1, 383377, "hosting", "a97bbfcd-48e3-11df-b65b-005056956427", billDate1, "monthly", 10055, 1);
-      var bsp2 = new BillingSyncProduct(1, 383378, "hosting", "b020a244-48e3-11df-b65b-005056956427", billDate2, "monthly", 10055, 1);
+      var bsp1 = new BillingSyncProduct(1, 383377, "hosting", "a97bbfcd-48e3-11df-b65b-005056956427", billDate1, "monthly", 10055, 1, "blah");
+      var bsp2 = new BillingSyncProduct(1, 383378, "hosting", "b020a244-48e3-11df-b65b-005056956427", billDate2, "monthly", 10055, 1, "blah");
       var billingSyncProducts = new List<BillingSyncProduct> { bsp1, bsp2 };
 
       var request = new EcommBillingSyncRequestData(SHOPPER_ID
@@ -75,9 +76,9 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
       var billDate1 = DateTime.Parse("2010-08-15 00:00:00.000");
       var billDate2 = DateTime.Parse("2010-05-15 00:00:00.000");
       var billDate3 = DateTime.Parse("2013-06-07 00:00:00.000");
-      var bsp1 = new BillingSyncProduct(1, 383377, "hosting", "a97bbfcd-48e3-11df-b65b-005056956427", billDate1, "monthly", 10055, 1);
-      var bsp2 = new BillingSyncProduct(1, 383378, "hosting", "b020a244-48e3-11df-b65b-005056956427", billDate2, "monthly", 10055, 1);
-      var bsp3 = new BillingSyncProduct(1, 399173, "hosting", "bd2bfcf7-725c-11df-9145-005056956427", billDate3, "annual", 52014, 3);
+      var bsp1 = new BillingSyncProduct(1, 383377, "hosting", "a97bbfcd-48e3-11df-b65b-005056956427", billDate1, "monthly", 10055, 1, "blah");
+      var bsp2 = new BillingSyncProduct(1, 383378, "hosting", "b020a244-48e3-11df-b65b-005056956427", billDate2, "monthly", 10055, 1, "blah");
+      var bsp3 = new BillingSyncProduct(1, 399173, "hosting", "bd2bfcf7-725c-11df-9145-005056956427", billDate3, "annual", 52014, 3, "blah");
       var billingSyncProducts = new List<BillingSyncProduct> { bsp1, bsp2, bsp3 };
 
       var request = new EcommBillingSyncRequestData(SHOPPER_ID
@@ -105,9 +106,9 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
       var billDate1 = DateTime.Parse("2010-08-15 00:00:00.000");
       var billDate2 = DateTime.Parse("2010-05-15 00:00:00.000");
       var billDate3 = DateTime.Parse("2011-01-29 00:00:00.000");
-      var bsp1 = new BillingSyncProduct(1, 383377, "hosting", "a97bbfcd-48e3-11df-b65b-005056956427", billDate1, "monthly", 10055, 1);
-      var bsp2 = new BillingSyncProduct(1, 383378, "hosting", "b020a244-48e3-11df-b65b-005056956427", billDate2, "monthly", 10055, 1);
-      var bsp3 = new BillingSyncProduct(1, 381156, "dedhost", "d423f0f3-0d15-11df-a185-005056956427", billDate3, "monthly", 11211, 1);
+      var bsp1 = new BillingSyncProduct(1, 383377, "hosting", "a97bbfcd-48e3-11df-b65b-005056956427", billDate1, "monthly", 10055, 1, "blah");
+      var bsp2 = new BillingSyncProduct(1, 383378, "hosting", "b020a244-48e3-11df-b65b-005056956427", billDate2, "monthly", 10055, 1, "blah");
+      var bsp3 = new BillingSyncProduct(1, 381156, "dedhost", "d423f0f3-0d15-11df-a185-005056956427", billDate3, "monthly", 11211, 1, "blah");
       var billingSyncProducts = new List<BillingSyncProduct> { bsp1, bsp2, bsp3 };
 
       var request = new EcommBillingSyncRequestData(SHOPPER_ID
@@ -128,57 +129,159 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
     }
 
     [TestMethod]
+    [DeploymentItem("atlantis.framework.ecommproductaddons.impl.dll")]
+    [DeploymentItem("atlantis.framework.additem.impl.dll")]
+    public void EcommBillingSyncInvalidOneOfTwoProductsRecurringTypeTest()
+    {
+      var dt = DateTime.Parse("2/8/2013");
+      var billDate = DateTime.Parse("2013-06-07 00:00:00.000");
+      var bsp = new BillingSyncProduct(1, 1, "blah", "abceian-anad0ah", DateTime.MinValue, "onetime", 11111, 1, "blah");
+      var bsp2 = new BillingSyncProduct(1, 399173, "hosting", "bd2bfcf7-725c-11df-9145-005056956427", billDate, "annual", 52014, 3, "blah");
+      var billingSyncProducts = new List<BillingSyncProduct> { bsp, bsp2 };
+
+      var request = new EcommBillingSyncRequestData(SHOPPER_ID
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , billingSyncProducts
+        , dt
+        , "mya_web_billingsync"
+        , "USD"
+        , "127.0.0.1"
+        , 1);
+
+      var response = (EcommBillingSyncResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
+
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(request.BillingSyncProducts.Count.Equals(1));
+      Assert.IsTrue(request.BillingSyncErrors.Count > 0);
+      Assert.IsTrue(request.BillingSyncErrors[0].ErrorType == BillingSyncErrorData.BillingSyncErrorType.RenewalNotAllowedByRecurringType);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.framework.ecommproductaddons.impl.dll")]
+    [DeploymentItem("atlantis.framework.additem.impl.dll")]
+    public void EcommBillingSyncCashParkHybridTest()
+    {
+      var syncDate = DateTime.Parse("2/26/2013");
+      var billDate = DateTime.Parse("2009-12-25 00:00:00.000");
+      var bsp = new BillingSyncProduct(1, 361888, "cashparkHy", "c94be490-91f5-479c-b2d3-6b8e34013131", billDate, "annual", 16875, 1, "BESTTUCKER.COM");
+      var billingSyncProducts = new List<BillingSyncProduct> { bsp };
+
+      var request = new EcommBillingSyncRequestData(SHOPPER_ID
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , billingSyncProducts
+        , syncDate
+        , "mya_web_billingsync"
+        , "USD"
+        , "127.0.0.1"
+        , 1);
+
+      var response = (EcommBillingSyncResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
+
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(request.BillingSyncProducts.Count.Equals(1));
+      Assert.IsTrue(request.BillingSyncErrors.Count.Equals(0));
+    }
+    #endregion 
+
+    #region IsSuccess == False Tests
+    [TestMethod]
     public void EcommBillingSyncInvalidDateTest()
     {
       var dt = DateTime.MaxValue;
-      var bsp = new BillingSyncProduct(1, 1, "blah", "abceian-anad0ah", DateTime.MinValue, "annual", 11111, 1);
+      var bsp = new BillingSyncProduct(1, 1, "blah", "abceian-anad0ah", DateTime.MinValue, "annual", 11111, 1, "blah");
       var billingSyncProducts = new List<BillingSyncProduct> {bsp};
+
+      var request = new EcommBillingSyncRequestData(SHOPPER_ID
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , billingSyncProducts
+        , dt
+        , "mya_web_billingsync"
+        , "USD"
+        , "127.0.0.1"
+        , 1);
 
       try
       {
-        var request = new EcommBillingSyncRequestData(SHOPPER_ID
-          , string.Empty
-          , string.Empty
-          , string.Empty
-          , 0
-          , billingSyncProducts
-          , dt
-          , "mya_web_billingsync"
-          , "USD"
-          , "127.0.0.1"
-          , 1);
+        var response = (EcommBillingSyncResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
       }
-      catch (Exception ex)
+      catch (Exception)
       {
-        Assert.IsTrue(ex.Message.Equals("Synchronization date must be between 1 & 28 inclusive"));
+        Assert.IsTrue(request.RequestContainsInvalidSyncDate);
+        Assert.IsTrue(request.BillingSyncErrors.Count > 0);
+        Assert.IsTrue(request.BillingSyncErrors[0].ErrorType == BillingSyncErrorData.BillingSyncErrorType.InvalidSyncDate);
       }
     }
 
     [TestMethod]
-    public void EcommBillingSyncInvalidBillingSyncProductTest()
+    public void EcommBillingSyncInvalidProductRenewalByFlagTest()
     {
       var dt = DateTime.Parse("2/8/2013");
-      var bsp = new BillingSyncProduct(1, 1, "blah", "abceian-anad0ah", DateTime.MinValue, "annual", 11111, 1);
+      var bsp = new BillingSyncProduct(0, 1, "blah", "abceian-anad0ah", DateTime.MinValue, "annual", 11111, 1, "blah");
       var billingSyncProducts = new List<BillingSyncProduct> { bsp };
+
+      var request = new EcommBillingSyncRequestData(SHOPPER_ID
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , billingSyncProducts
+        , dt
+        , "mya_web_billingsync"
+        , "USD"
+        , "127.0.0.1"
+        , 1);
 
       try
       {
-        var request = new EcommBillingSyncRequestData(SHOPPER_ID
-          , string.Empty
-          , string.Empty
-          , string.Empty
-          , 0
-          , billingSyncProducts
-          , dt
-          , "mya_web_billingsync"
-          , "USD"
-          , "127.0.0.1"
-          , 1);
+        var response = (EcommBillingSyncResponseData) Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
       }
-      catch (Exception ex)
+      catch
       {
-        Assert.IsTrue(ex.Message.Contains("Sychronization list includes product ineligible for renewal"));
+        Assert.IsTrue(request.BillingSyncProducts.Count.Equals(0));
+        Assert.IsTrue(request.BillingSyncErrors.Count > 0);
+        Assert.IsTrue(request.BillingSyncErrors[0].ErrorType == BillingSyncErrorData.BillingSyncErrorType.RenewalNotAllowedByFlag);
       }
     }
+
+    [TestMethod]
+    public void EcommBillingSyncInvalidAllProductsRecurringTypeTest()
+    {
+      var dt = DateTime.Parse("2/8/2013");
+      var bsp = new BillingSyncProduct(1, 1, "blah", "abceian-anad0ah", DateTime.MinValue, "onetime", 11111, 1, "blah");
+      var billingSyncProducts = new List<BillingSyncProduct> { bsp };
+
+      var request = new EcommBillingSyncRequestData(SHOPPER_ID
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , billingSyncProducts
+        , dt
+        , "mya_web_billingsync"
+        , "USD"
+        , "127.0.0.1"
+        , 1);
+
+      try
+      {
+        var response = (EcommBillingSyncResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
+      }
+      catch (Exception)
+      {
+        Assert.IsTrue(request.BillingSyncProducts.Count.Equals(0));
+        Assert.IsTrue(request.BillingSyncErrors.Count > 0);
+        Assert.IsTrue(request.BillingSyncErrors[0].ErrorType == BillingSyncErrorData.BillingSyncErrorType.RenewalNotAllowedByRecurringType);
+      }
+    }
+    #endregion
   }
 }

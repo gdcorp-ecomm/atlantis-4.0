@@ -99,11 +99,13 @@ namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
 
         }
 
-        throw new AtlantisException(ebsRequest
+        var aex = new AtlantisException(ebsRequest
           , "EcommBillingSync.CartUtility::PostToCart"
           , string.Format("ErrorNumber - {0}: {1}", errorNumber, errorDescription)
           , ebsRequest.ToXML());
 
+        ebsRequest.BillingSyncErrors.Add(new BillingSyncErrorData(BillingSyncErrorData.BillingSyncErrorType.BasketSvcError, aex));
+        throw aex;
       }
 
       return cartResponse;

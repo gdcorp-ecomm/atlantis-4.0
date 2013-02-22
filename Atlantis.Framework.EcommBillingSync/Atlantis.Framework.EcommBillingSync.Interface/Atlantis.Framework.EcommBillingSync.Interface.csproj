@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillingSyncErrorData.cs" />
     <Compile Include="BillingSyncProduct.cs" />
     <Compile Include="EcommBillingSyncRequestData.cs" />
     <Compile Include="EcommBillingSyncResponseData.cs" />

@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveTLDsRequestData.cs" />
+    <Compile Include="TLDLanguageResponseData.cs" />
+    <Compile Include="TLDLanguageRequestData.cs" />
     <Compile Include="CustomTLDGroupRequestData.cs" />
     <Compile Include="CustomTLDGroupResponseData.cs" />
     <Compile Include="OfferedTLDProductTypes.cs" />

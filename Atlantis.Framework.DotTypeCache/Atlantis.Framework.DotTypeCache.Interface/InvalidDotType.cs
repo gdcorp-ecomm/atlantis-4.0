@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Interface
 {
@@ -70,6 +71,16 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       get { return 120; }
     }
 
+    public RegistryLanguage GetLanguageDataByName(string languageName)
+    {
+      return null;
+    }
+
+    public RegistryLanguage GetLanguageDataById(int languageId)
+    {
+      return null;
+    }
+
     public int GetExpiredAuctionRegProductId(int registrationLength, int domainCount)
     {
       return 0;
@@ -128,6 +139,11 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     public bool IsMultiRegistry
     {
       get { return false; }
+    }
+
+    public IEnumerable<RegistryLanguage> RegistryLanguages
+    {
+      get { return null; }
     }
 
     public List<int> GetValidExpiredAuctionRegLengths(int domainCount, params int[] registrationLengths)

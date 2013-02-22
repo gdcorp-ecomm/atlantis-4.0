@@ -5,6 +5,7 @@ using Atlantis.Framework.RegDotTypeProductIds.Interface;
 using Atlantis.Framework.RegDotTypeRegistry.Interface;
 using System;
 using System.Collections.Generic;
+using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache
 {
@@ -18,6 +19,7 @@ namespace Atlantis.Framework.DotTypeCache
     private Lazy<TLDMLByNameResponseData> _tldml;
     private Lazy<int> _tldId;
     private Lazy<DomainContactFieldsResponseData> _domainContactFieldsData;
+    private Lazy<TLDLanguageResponseData> _languagesData;
 
     internal static TLDMLDotTypeInfo FromDotType(string dotType)
     {
@@ -32,6 +34,7 @@ namespace Atlantis.Framework.DotTypeCache
       _dotTypeRegistryData = new Lazy<RegDotTypeRegistryResponseData>(() => { return LoadDotTypeRegistryData(); });
       _tldml = new Lazy<TLDMLByNameResponseData>(() => { return LoadTLDML(); });
       _domainContactFieldsData = new Lazy<DomainContactFieldsResponseData>(LoadDomainContactFieldsData);
+      _languagesData = new Lazy<TLDLanguageResponseData>(LoadLanguagesData);
 
       ITLDProduct product = _tldml.Value.Product; // Preload the TLDML
     }
@@ -79,8 +82,14 @@ namespace Atlantis.Framework.DotTypeCache
 
     private DomainContactFieldsResponseData LoadDomainContactFieldsData()
     {
-      var request = new DomainContactFieldsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, DotType);
+      var request = new DomainContactFieldsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
       return (DomainContactFieldsResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.DomainContactFields);
+    }
+
+    private TLDLanguageResponseData LoadLanguagesData()
+    {
+      var request = new TLDLanguageRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tldId.Value);
+      return (TLDLanguageResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.Languages);
     }
 
     public string DotType
@@ -161,6 +170,21 @@ namespace Atlantis.Framework.DotTypeCache
     {
       // TODO: how to tell multiregistry from TLDML?
       get { return StaticDotTypes.IsDotTypeMultiRegistry(_tld); }
+    }
+
+    public IEnumerable<RegistryLanguage> RegistryLanguages
+    {
+      get { return _languagesData.Value.RegistryLanguages; }
+    }
+
+    public RegistryLanguage GetLanguageDataByName(string languageName)
+    {
+      return _languagesData.Value.GetLanguageDataByName(languageName); 
+    }
+
+    public RegistryLanguage GetLanguageDataById(int languageId)
+    {
+      return _languagesData.Value.GetLanguageDataById(languageId);
     }
 
     public int GetExpiredAuctionRegProductId(int registrationLength, int domainCount)

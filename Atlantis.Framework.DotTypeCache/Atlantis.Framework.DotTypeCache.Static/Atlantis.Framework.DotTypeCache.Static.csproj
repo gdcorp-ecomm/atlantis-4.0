@@ -67,6 +67,10 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Interface\Atlantis.Framework.TLDDataCache.Interface.csproj">
+      <Project>{2a615d6f-9604-40c1-bc6a-2659e3b97bcc}</Project>
+      <Name>Atlantis.Framework.TLDDataCache.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
       <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
       <Name>Atlantis.Framework.DotTypeCache.Interface</Name>

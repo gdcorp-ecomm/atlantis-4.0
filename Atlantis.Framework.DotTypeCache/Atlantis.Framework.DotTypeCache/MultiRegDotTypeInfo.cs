@@ -2,6 +2,7 @@
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
 using Atlantis.Framework.RegDotTypeRegistry.Interface;
 using System.Collections.Generic;
+using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache
 {
@@ -125,6 +126,21 @@ namespace Atlantis.Framework.DotTypeCache
     public bool IsMultiRegistry
     {
       get { return true; }
+    }
+
+    public IEnumerable<RegistryLanguage> RegistryLanguages
+    {
+      get { return this._dotTypeInfo.RegistryLanguages; }
+    }
+
+    public RegistryLanguage GetLanguageDataByName(string languageName)
+    {
+      return this._dotTypeInfo.GetLanguageDataByName(languageName);
+    }
+
+    public RegistryLanguage GetLanguageDataById(int languageId)
+    {
+      return this._dotTypeInfo.GetLanguageDataById(languageId);
     }
 
     public int GetPreRegProductId(int registrationLength, int domainCount)

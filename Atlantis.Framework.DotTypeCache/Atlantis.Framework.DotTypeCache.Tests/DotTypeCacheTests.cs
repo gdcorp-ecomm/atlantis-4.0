@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.DotTypeCache.Interface;
+﻿using System.Linq;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.TLDDataCache.Interface;
@@ -1323,5 +1324,51 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       bool flag = DotTypeProvider.GetTLDDataForRegistration.IsOffered("com");
       Assert.IsTrue(flag);
     }
+
+    [TestMethod]
+    public void GetRegistryLanguagesTLDMLOrg()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("ORG");
+      IEnumerable<RegistryLanguage> registryLanguages = dotType.RegistryLanguages;
+
+      Assert.IsTrue(registryLanguages != null && registryLanguages.Any());
+    }
+
+    [TestMethod]
+    public void GetRegistryLanguagesCom()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("COM");
+      IEnumerable<RegistryLanguage> registryLanguages = dotType.RegistryLanguages;
+
+      Assert.IsTrue(registryLanguages != null && registryLanguages.Any());
+    }
+
+    [TestMethod]
+    public void GetRegistryLanguagesInvalid()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("RAJj");
+      IEnumerable<RegistryLanguage> registryLanguages = dotType.RegistryLanguages;
+
+      Assert.IsTrue(registryLanguages == null);
+    }
+
+    [TestMethod]
+    public void GetRegistryLanguageByNameOrg()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("ORG");
+      RegistryLanguage registryLanguage = dotType.GetLanguageDataByName("belarusian");
+
+      Assert.IsTrue(registryLanguage != null);
+    }
+
+    [TestMethod]
+    public void GetRegistryLanguageByIdOrg()
+    {
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("ORG");
+      RegistryLanguage registryLanguage = dotType.GetLanguageDataById(16);
+
+      Assert.IsTrue(registryLanguage != null);
+    }
+
   }
 }

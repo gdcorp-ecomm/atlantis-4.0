@@ -21,37 +21,6 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 
     public TLDMLTld(XDocument tldmlDoc) : base(tldmlDoc)
     {
-      _languageDataList = LoadLanguageDataList();
     }
-
-    private List<ITLDLanguageData> _languageDataList;
-    public List<ITLDLanguageData> LanguageDataList
-    {
-      get { return _languageDataList; }
-    }
-
-    private List<ITLDLanguageData> LoadLanguageDataList()
-    {
-      List<ITLDLanguageData> result = new List<ITLDLanguageData>();
-
-      XElement languageCollection = NamespaceElement.Descendants("idnlanguagecollection").FirstOrDefault();
-      if (languageCollection != null)
-      {
-        foreach (var language in languageCollection.Descendants("idnlanguage"))
-        {
-          XAttribute nameAtt = language.Attribute("name");
-          XAttribute regTagAtt = language.Attribute("registrytag");
-
-          if (nameAtt != null && regTagAtt != null)
-          {
-            var languageData = new TldLanguageData(nameAtt.Value, regTagAtt.Value);
-            result.Add(languageData);
-          }
-        }
-      }
-
-      return result;
-    }
-
   }
 }

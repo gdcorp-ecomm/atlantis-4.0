@@ -4,11 +4,15 @@ using System.IO;
 using System.Xml;
 using Atlantis.Framework.DomainContactFields.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
+using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Static
 {
   public abstract class StaticDotType : IDotTypeInfo
   {
+    private static int _domainContactFieldsRequest = 651;
+    private static int _languagesRequest = 655;
+
     private StaticDotTypeTiers _registerProductIds;
     private StaticDotTypeTiers _transferProductIds;
     private StaticDotTypeTiers _renewalProductIds;
@@ -18,6 +22,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
     private StaticProduct _staticProduct;
     private StaticTld _staticTld;
     private Lazy<DomainContactFieldsResponseData> _domainContactFieldsData;
+    private Lazy<TLDLanguageResponseData> _languagesData;
 
     private bool _isMultiRegistry = false;
     public bool IsMultiRegistry
@@ -91,12 +96,19 @@ namespace Atlantis.Framework.DotTypeCache.Static
       _staticProduct = new StaticProduct(this);
       _staticTld = new StaticTld(this);
       _domainContactFieldsData = new Lazy<DomainContactFieldsResponseData>(LoadDomainContactFieldsData);
+      _languagesData = new Lazy<TLDLanguageResponseData>(LoadLanguagesData);
     }
 
     private DomainContactFieldsResponseData LoadDomainContactFieldsData()
     {
       var request = new DomainContactFieldsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, DotType);
-      return (DomainContactFieldsResponseData)DataCache.DataCache.GetProcessRequest(request, 651);
+      return (DomainContactFieldsResponseData)DataCache.DataCache.GetProcessRequest(request, _domainContactFieldsRequest);
+    }
+
+    private TLDLanguageResponseData LoadLanguagesData()
+    {
+      var request = new TLDLanguageRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, TldId);
+      return (TLDLanguageResponseData)DataCache.DataCache.GetProcessRequest(request, _languagesRequest);
     }
 
     protected abstract StaticDotTypeTiers InitializeRegistrationProductIds();
@@ -116,6 +128,21 @@ namespace Atlantis.Framework.DotTypeCache.Static
     #region IDotTypeInfo Members
 
     public abstract string DotType { get; }
+
+    public IEnumerable<RegistryLanguage> RegistryLanguages
+    {
+      get { return _languagesData.Value.RegistryLanguages; }
+    }
+
+    public RegistryLanguage GetLanguageDataByName(string languageName)
+    {
+      return _languagesData.Value.GetLanguageDataByName(languageName);
+    }
+
+    public RegistryLanguage GetLanguageDataById(int languageId)
+    {
+      return _languagesData.Value.GetLanguageDataById(languageId);
+    }
 
     private List<int> GetValidProductIdList(StaticDotTypeTiers productIds, int minLength, int maxLength,
       int domainCount, params int[] registrationLengths)

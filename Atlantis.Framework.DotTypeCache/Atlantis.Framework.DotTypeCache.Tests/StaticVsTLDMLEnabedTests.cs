@@ -134,37 +134,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         AssertHelper.AddResults(staticTld.TldId.ToString() == tldml.TldId.ToString(), "TldId did not match for " + tld +
           ". Static: " + staticTld.TldId + ". Tldml Enabled: " + tldml.TldId);
 
-        foreach (var staticLang in staticTld.Tld.LanguageDataList)
-        {
-          bool containsLang = false;
-          bool containsRegTag = false;
-
-          foreach (var tldmlLang in tldml.Tld.LanguageDataList)
-          {
-
-            if (tldmlLang.LanguageName == staticLang.LanguageName)
-            {
-              containsLang = true;
-            }
-
-            if (tldmlLang.RegistryTag == staticLang.RegistryTag)
-            {
-              containsRegTag = true;
-            }
-          }
-
-          if (!containsLang)
-          {
-            AssertHelper.AddResults(false, "LanguageName did not match for " + tld);
-          }
-
-          if (!containsRegTag)
-          {
-            AssertHelper.AddResults(false, "RegistryTag did not match for " + tld);
-          }
-
-        }
-
         AssertHelper.AddResults(staticTld.DotType.ToLower() == tldml.DotType.ToLower(), "DotType static vs tldml did not match for " + tld + ". Static: "
           + staticTld.DotType.ToLower() + ". Tldml Enabled: " + tldml.DotType.ToLower());
 

@@ -1356,7 +1356,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetRegistryLanguageByNameOrg()
     {
       IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("ORG");
-      RegistryLanguage registryLanguage = dotType.GetLanguageDataByName("belarusian");
+      RegistryLanguage registryLanguage = dotType.GetLanguageByName("belarusian");
 
       Assert.IsTrue(registryLanguage != null);
     }
@@ -1365,7 +1365,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetRegistryLanguageByIdOrg()
     {
       IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("ORG");
-      RegistryLanguage registryLanguage = dotType.GetLanguageDataById(16);
+      RegistryLanguage registryLanguage = dotType.GetLanguageById(16);
 
       Assert.IsTrue(registryLanguage != null);
     }

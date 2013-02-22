@@ -20,8 +20,8 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     bool IsMultiRegistry { get; }
 
     IEnumerable<RegistryLanguage> RegistryLanguages { get; }
-    RegistryLanguage GetLanguageDataByName(string languageName);
-    RegistryLanguage GetLanguageDataById(int languageId);
+    RegistryLanguage GetLanguageByName(string languageName);
+    RegistryLanguage GetLanguageById(int languageId);
     
     int GetExpiredAuctionRegProductId(int registrationLength, int domainCount);
     int GetExpiredAuctionRegProductId(string registryId, int registrationLength, int domainCount);

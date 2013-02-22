@@ -133,14 +133,14 @@ namespace Atlantis.Framework.DotTypeCache
       get { return this._dotTypeInfo.RegistryLanguages; }
     }
 
-    public RegistryLanguage GetLanguageDataByName(string languageName)
+    public RegistryLanguage GetLanguageByName(string languageName)
     {
-      return this._dotTypeInfo.GetLanguageDataByName(languageName);
+      return this._dotTypeInfo.GetLanguageByName(languageName);
     }
 
-    public RegistryLanguage GetLanguageDataById(int languageId)
+    public RegistryLanguage GetLanguageById(int languageId)
     {
-      return this._dotTypeInfo.GetLanguageDataById(languageId);
+      return this._dotTypeInfo.GetLanguageById(languageId);
     }
 
     public int GetPreRegProductId(int registrationLength, int domainCount)

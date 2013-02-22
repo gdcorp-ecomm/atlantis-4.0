@@ -71,12 +71,12 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       get { return 120; }
     }
 
-    public RegistryLanguage GetLanguageDataByName(string languageName)
+    public RegistryLanguage GetLanguageByName(string languageName)
     {
       return null;
     }
 
-    public RegistryLanguage GetLanguageDataById(int languageId)
+    public RegistryLanguage GetLanguageById(int languageId)
     {
       return null;
     }

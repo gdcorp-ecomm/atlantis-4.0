@@ -177,12 +177,12 @@ namespace Atlantis.Framework.DotTypeCache
       get { return _languagesData.Value.RegistryLanguages; }
     }
 
-    public RegistryLanguage GetLanguageDataByName(string languageName)
+    public RegistryLanguage GetLanguageByName(string languageName)
     {
       return _languagesData.Value.GetLanguageDataByName(languageName); 
     }
 
-    public RegistryLanguage GetLanguageDataById(int languageId)
+    public RegistryLanguage GetLanguageById(int languageId)
     {
       return _languagesData.Value.GetLanguageDataById(languageId);
     }

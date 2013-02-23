@@ -22,7 +22,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
     public RegistryLanguage GetLanguageDataByName(string languageName)
     {
       RegistryLanguage result;
-      _tldLanguagesDataByName.TryGetValue(languageName.ToLowerInvariant(), out result);
+      _tldLanguagesDataByName.TryGetValue(languageName, out result);
       return result;
     }
 
@@ -55,59 +55,33 @@ namespace Atlantis.Framework.TLDDataCache.Interface
       _xmlData = dataCacheElement.ToString();
       _tldLanguageData = new List<RegistryLanguage>();
       _tldLanguagesDataById = new Dictionary<int, RegistryLanguage>();
-      _tldLanguagesDataByName = new Dictionary<string, RegistryLanguage>();
+      _tldLanguagesDataByName = new Dictionary<string, RegistryLanguage>(StringComparer.OrdinalIgnoreCase);
 
       foreach (XElement itemElement in dataCacheElement.Elements("item"))
       {
-        try
-        {
-          var languageId = 0;
-          var languageName = string.Empty;
-          var registryTag = string.Empty;
+        int languageId;
 
-          var found = false;
-          foreach (XAttribute itemAtt in itemElement.Attributes())
-          {
-            string name = itemAtt.Name.ToString();
-            if (name == "languageId" || name == "languageName" || name == "registryTag")
-            {
-              found = true;
+        var idAtt = itemElement.Attribute("languageId");
+        var nameAtt = itemElement.Attribute("languageName");
+        var tagAtt = itemElement.Attribute("registryTag");
 
-              if ((name == "languageId"))
-              {
-                if (!string.IsNullOrEmpty(itemAtt.Value))
-                {
-                  int langId;
-                  if (Int32.TryParse(itemAtt.Value, out langId))
-                  {
-                    languageId = langId;
-                  }
-                }
-              }
-              if (name == "languageName")
-              {
-                languageName = itemAtt.Value;
-              }
-              if (name == "registryTag")
-              {
-                registryTag = itemAtt.Value;
-              }
-            }
-          }
-          if (found)
-          {
-            var regLangData = new RegistryLanguage(languageId, languageName, registryTag);
-            _tldLanguageData.Add(regLangData);
-            _tldLanguagesDataById.Add(languageId, regLangData);
-            _tldLanguagesDataByName.Add(languageName.ToLowerInvariant(), regLangData);
-          }
-        }
-        catch (Exception ex)
+        if (string.IsNullOrEmpty(idAtt.Value) || string.IsNullOrEmpty(nameAtt.Value) || string.IsNullOrEmpty(tagAtt.Value) || !Int32.TryParse(idAtt.Value, out languageId))
         {
-          string message = ex.Message + ex.StackTrace;
+          const string message = "Xml with invalid langId, langName or registryTag";
           var aex = new AtlantisException("TLDLanguageResponseData.ctor", "0", message, itemElement.ToString(), null, null);
           Engine.Engine.LogAtlantisException(aex);
+
+          continue;
         }
+
+        languageId = Int32.Parse(idAtt.Value);
+        string languageName = nameAtt.Value;
+        string registryTag = tagAtt.Value;
+
+        var regLangData = new RegistryLanguage(languageId, languageName, registryTag);
+        _tldLanguageData.Add(regLangData);
+        _tldLanguagesDataById.Add(languageId, regLangData);
+        _tldLanguagesDataByName.Add(languageName, regLangData);
       }
     }
 
@@ -125,19 +99,5 @@ namespace Atlantis.Framework.TLDDataCache.Interface
     {
       return _exception;
     }
-  }
-
-  public class RegistryLanguage
-  {
-    public RegistryLanguage(int languageId, string languageName, string registryTag)
-    {
-      LanguageId = languageId;
-      LanguageName = languageName;
-      RegistryTag = registryTag;
-    }
-
-    public int LanguageId { get; set; }
-    public string LanguageName { get; set; }
-    public string RegistryTag { get; set; }
   }
 }

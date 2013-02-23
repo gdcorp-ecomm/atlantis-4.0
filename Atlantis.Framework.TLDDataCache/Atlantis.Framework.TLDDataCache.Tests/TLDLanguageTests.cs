@@ -15,6 +15,13 @@ namespace Atlantis.Framework.TLDDataCache.Tests
     const int _TLDLANGUAGEREQUEST = 655;
 
     [TestMethod]
+    public void RequestToXmlForOrg()
+    {
+      var request = new TLDLanguageRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 3);
+      Assert.IsTrue(!string.IsNullOrEmpty(request.ToXML()));
+    }
+
+    [TestMethod]
     public void GetRegistryLanguagesForOrg()
     {
       var request = new TLDLanguageRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 3);

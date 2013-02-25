@@ -39,6 +39,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     private int LoadRenewProhibitedPeriodForExpiration()
     {
       int period = 0;
+      _renewProhibitedPeriodForExpirationUnit = string.Empty;
 
       XElement collection = NamespaceElement.Descendants("renewprohibitedperiodcollection").FirstOrDefault();
       if (collection != null)

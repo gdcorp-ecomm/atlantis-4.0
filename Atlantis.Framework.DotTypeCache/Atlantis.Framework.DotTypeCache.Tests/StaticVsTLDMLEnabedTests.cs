@@ -169,17 +169,13 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
         AssertHelper.AddResults(staticTld.MinTransferLength == tldml.MinTransferLength, "MinTransferLength did not match for " + tld + ". Static: "
           + staticTld.MinTransferLength + ". Tldml Enabled: " + tldml.MinTransferLength);
+        
+        AssertHelper.AddResults(staticTld.Tld.RenewProhibitedPeriodForExpiration == tldml.Tld.RenewProhibitedPeriodForExpiration, "RenewProhibitedPeriodForExpiration did not match for " + tld + ". Static: "
+         + staticTld.Tld.RenewProhibitedPeriodForExpiration + ". Tldml Enabled: " + tldml.Tld.RenewProhibitedPeriodForExpiration);
 
-        //TODO: When RenewProhibitedPeriodForExpiration works enable assert
-        //AssertHelper.AddResults(staticTld.Tld.RenewProhibitedPeriodForExpiration == tldml.Tld.RenewProhibitedPeriodForExpiration, "RenewProhibitedPeriodForExpiration did not match for " + tld + ". Static: "
-        // + staticTld.Tld.RenewProhibitedPeriodForExpiration + ". Tldml Enabled: " + tldml.Tld.RenewProhibitedPeriodForExpiration);
-        AssertHelper.AddResults(false, "RenewProhibitedPeriodForExpiration not implemented");
-
-        //TODO: When RenewProhibitedPeriodForExpirationUnit works enable assert
-        //AssertHelper.AddResults(staticTld.Tld.RenewProhibitedPeriodForExpirationUnit == tldml.Tld.RenewProhibitedPeriodForExpirationUnit, "RenewProhibitedPeriodForExpirationUnit did not match for " + tld + ". Static: "
-        // + staticTld.Tld.RenewProhibitedPeriodForExpirationUnit + ". Tldml Enabled: " + tldml.Tld.RenewProhibitedPeriodForExpirationUnit);
-        AssertHelper.AddResults(false, "RenewProhibitedPeriodForExpirationUnit not implemented");
-
+        AssertHelper.AddResults(staticTld.Tld.RenewProhibitedPeriodForExpirationUnit == tldml.Tld.RenewProhibitedPeriodForExpirationUnit, "RenewProhibitedPeriodForExpirationUnit did not match for " + tld + ". Static: "
+         + staticTld.Tld.RenewProhibitedPeriodForExpirationUnit + ". Tldml Enabled: " + tldml.Tld.RenewProhibitedPeriodForExpirationUnit);
+       
         int OutValueStatic = 0;
         int outValueTldml = 0;
 

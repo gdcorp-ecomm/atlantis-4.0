@@ -160,7 +160,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
         AssertHelper.AddResults(staticTld.MinPreRegLength == tldml.MinPreRegLength, "MinPreRegLength did not match for " + tld + ". Static: "
           + staticTld.MinPreRegLength + ". Tldml Enabled: " + tldml.MinPreRegLength);
-        
+
         AssertHelper.AddResults(staticTld.MinRegistrationLength == tldml.MinRegistrationLength, "MinRegistrationLength did not match for " + tld + ". Static: "
           + staticTld.MinRegistrationLength + ". Tldml Enabled: " + tldml.MinRegistrationLength);
 
@@ -169,6 +169,26 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
         AssertHelper.AddResults(staticTld.MinTransferLength == tldml.MinTransferLength, "MinTransferLength did not match for " + tld + ". Static: "
           + staticTld.MinTransferLength + ". Tldml Enabled: " + tldml.MinTransferLength);
+
+        //TODO: When RenewProhibitedPeriodForExpiration works enable assert
+        //AssertHelper.AddResults(staticTld.Tld.RenewProhibitedPeriodForExpiration == tldml.Tld.RenewProhibitedPeriodForExpiration, "RenewProhibitedPeriodForExpiration did not match for " + tld + ". Static: "
+        // + staticTld.Tld.RenewProhibitedPeriodForExpiration + ". Tldml Enabled: " + tldml.Tld.RenewProhibitedPeriodForExpiration);
+        AssertHelper.AddResults(false, "RenewProhibitedPeriodForExpiration not implemented");
+
+        //TODO: When RenewProhibitedPeriodForExpirationUnit works enable assert
+        //AssertHelper.AddResults(staticTld.Tld.RenewProhibitedPeriodForExpirationUnit == tldml.Tld.RenewProhibitedPeriodForExpirationUnit, "RenewProhibitedPeriodForExpirationUnit did not match for " + tld + ". Static: "
+        // + staticTld.Tld.RenewProhibitedPeriodForExpirationUnit + ". Tldml Enabled: " + tldml.Tld.RenewProhibitedPeriodForExpirationUnit);
+        AssertHelper.AddResults(false, "RenewProhibitedPeriodForExpirationUnit not implemented");
+
+        int OutValueStatic = 0;
+        int outValueTldml = 0;
+
+        bool canRenewStatic = staticTld.CanRenew(DateTime.Now.AddYears(-5), out OutValueStatic);
+        bool canRenewTldml = tldml.CanRenew(DateTime.Now.AddYears(-5), out outValueTldml);
+
+        AssertHelper.AddResults(canRenewStatic == canRenewTldml,
+       "CanRenew did not match for " + tld + ". Static: " + canRenewStatic +
+       ". Out Value = " + OutValueStatic + ". Tldml Enabled: " + canRenewTldml + ". Out Value = " + outValueTldml);
 
         int statTld = 0;
         int tldmlmethod = 0;
@@ -191,7 +211,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         //}
         //TODO: When GetExpiredAuctionRegProductId is fixed and we get values then take out this next assert
         AssertHelper.AddResults(statTld == tldmlmethod, "GetExpiredAuctionRegProductId not working for tldml enabled");
-        
+
         foreach (int dc in domainCount)
         {
           for (int regLength = staticTld.Product.RegistrationYears.Min;
@@ -211,7 +231,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         string statRegistrationFieldsXml = staticTld.GetRegistrationFieldsXml();
         string registrationFieldsXml = tldml.GetRegistrationFieldsXml();
         AssertHelper.AddResults(statRegistrationFieldsXml == registrationFieldsXml, "GetRegistrationFieldsXml did not match for " + tld);
-     
+
         foreach (int dc in domainCount)
         {
           for (int regLength = staticTld.Product.RegistrationYears.Min;
@@ -286,7 +306,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         //    count++;
         //  }
         //}
-        
+
         List<int> lengths = staticTld.GetValidExpiredAuctionRegLengths(1, regLengths);
         List<int> lengthsT = tldml.GetValidExpiredAuctionRegLengths(1, regLengths);
         AssertHelper.AddResults(false, "GetValidExpiredAuctionRegLengths did not match for " + tld + ". Not getting anything back for tldml enabled.");
@@ -321,7 +341,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         var statPreRegPidList = staticTld.GetValidPreRegProductIdList(1, regLengths);
         var preRegPidList = tldml.GetValidPreRegProductIdList(1, regLengths);
         AssertHelper.AddResults(false, "GetValidPreRegProductIdList calls return a count of zero for static and tldml enabled for " + tld);
-        
+
         var statValidPreRegLengths = staticTld.GetValidRegistrationLengths(1, regLengths);
         var validPreRegLengths = tldml.GetValidRegistrationLengths(1, regLengths);
 
@@ -332,7 +352,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
          + statValidPreRegLength + ". Tldml Enabled: " + validPreRegLengths[count]);
           count++;
         }
-        
+
         var statValidRegistrationProductIdList = staticTld.GetValidRegistrationProductIdList(1, regLengths);
         var validRegistrationProductIdList = tldml.GetValidRegistrationProductIdList(1, regLengths);
 
@@ -366,7 +386,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
          + pid + ". Tldml Enabled: " + validRenewalProductIdList[count]);
           count++;
         }
-        
+
         var statValidTransferLengths = staticTld.GetValidTransferLengths(1, regLengths);
         var validTransferLengths = tldml.GetValidTransferLengths(1, regLengths);
 
@@ -377,7 +397,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
          + length + ". Tldml Enabled: " + validTransferLengths[count]);
           count++;
         }
-       
+
         var statValidTransferProductIdList = staticTld.GetValidTransferProductIdList(1, regLengths);
         var validTransferProductIdList = tldml.GetValidTransferProductIdList(1, regLengths);
 

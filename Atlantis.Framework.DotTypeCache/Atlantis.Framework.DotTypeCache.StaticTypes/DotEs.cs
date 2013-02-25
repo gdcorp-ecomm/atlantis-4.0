@@ -63,7 +63,7 @@ namespace Atlantis.Framework.DotTypeCache.StaticTypes
       get { return 1; }
     }
 
-    public override int MaxRenewalMonthsOut
+    protected override int MaxRenewalMonthsOut
     {
       get { return 24; }
     }

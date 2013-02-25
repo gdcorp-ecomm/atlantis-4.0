@@ -1370,5 +1370,31 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Assert.IsTrue(registryLanguage != null);
     }
 
+    [TestMethod]
+    public void CanRenewTests()
+    {
+      bool canRenew1, canRenew2, canRenew3, canRenew4, canRenew5;
+      int maxValidRenewlength1, maxValidRenewlength2, maxValidRenewlength3, maxValidRenewlength4, maxValidRenewlength5;
+      DateTime expDate = DateTime.Now;
+
+      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("COM.AU");
+      canRenew1 = dotType.CanRenew(expDate, out maxValidRenewlength1);
+
+      dotType = DotTypeCache.GetDotTypeInfo("COM");
+      canRenew2 = dotType.CanRenew(expDate, out maxValidRenewlength2);
+
+      dotType = DotTypeCache.GetDotTypeInfo("ASIA");
+      canRenew3 = dotType.CanRenew(expDate, out maxValidRenewlength3);
+
+      dotType = DotTypeCache.GetDotTypeInfo("AM");
+      canRenew4 = dotType.CanRenew(expDate, out maxValidRenewlength4);
+
+      dotType = DotTypeCache.GetDotTypeInfo("AT");
+      canRenew5 = dotType.CanRenew(expDate, out maxValidRenewlength5);
+
+      Assert.IsTrue((!canRenew1 && maxValidRenewlength1 <= 0) || (canRenew2 && maxValidRenewlength2 > 0) || 
+                    (canRenew3 && maxValidRenewlength3 > 0) || (canRenew4 && maxValidRenewlength4 > 0)
+                    || (canRenew5 && maxValidRenewlength5 > 0));
+    }
   }
 }

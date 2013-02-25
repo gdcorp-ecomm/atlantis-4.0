@@ -53,6 +53,7 @@
     <Compile Include="StaticDotTypeTier.cs" />
     <Compile Include="StaticDotTypeTiers.cs" />
     <Compile Include="StaticProduct.cs" />
+    <Compile Include="TLDRenewal.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">

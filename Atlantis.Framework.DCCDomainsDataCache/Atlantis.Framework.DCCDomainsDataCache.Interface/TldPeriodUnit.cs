@@ -4,6 +4,7 @@
   {
     Unknown,
     Months,
-    Years
+    Years,
+    Days
   }
 }

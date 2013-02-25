@@ -185,12 +185,6 @@ namespace Atlantis.Framework.DotTypeCache
       return dotTypeInfo.MaxRenewalLength;
     }
 
-    public static int GetMaxRenewalMonthsOut(string dotType)
-    {
-      IDotTypeInfo dotTypeInfo = GetDotTypeInfo(dotType);
-      return dotTypeInfo.MaxRenewalMonthsOut;
-    }
-
     public static string GetAdditionalInfoValue(string dotType, string additionalInfoKey)
     {
       // TODO: how to get additional info for non static?

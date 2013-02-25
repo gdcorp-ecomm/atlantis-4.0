@@ -72,6 +72,30 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return result;
     }
 
+    public static int PeriodDays(this XElement element, int defaultIfMissing = 0)
+    {
+      int result = defaultIfMissing;
+
+      XAttribute unitAttribute = element.Attribute("unit");
+      XAttribute valueAttribute = element.Attribute("value");
+
+      if ((unitAttribute != null) && (valueAttribute != null))
+      {
+        int valueInt;
+        if (int.TryParse(valueAttribute.Value, out valueInt))
+        {
+          TldPeriodUnit foundUnit = ParsePeriodUnit(unitAttribute.Value);
+
+          if (foundUnit == TldPeriodUnit.Days)
+          {
+            result = valueInt;
+          }
+        }
+      }
+
+      return result;
+    }
+
     private static TldPeriodUnit ParsePeriodUnit(string unit)
     {
       TldPeriodUnit result = TldPeriodUnit.Unknown;
@@ -83,6 +107,9 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
           break;
         case "month":
           result = TldPeriodUnit.Months;
+          break;
+        case "day":
+          result = TldPeriodUnit.Days;
           break;
       }
 

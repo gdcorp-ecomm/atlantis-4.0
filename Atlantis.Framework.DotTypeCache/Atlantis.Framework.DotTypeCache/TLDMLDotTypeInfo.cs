@@ -187,6 +187,57 @@ namespace Atlantis.Framework.DotTypeCache
       return _languagesData.Value.GetLanguageDataById(languageId);
     }
 
+    public bool CanRenew(DateTime currentExpirationDate, out int maxValidRenewalLength)
+    {
+      maxValidRenewalLength = -1;
+      var canRenew = false;
+
+      var origExpirationDate = currentExpirationDate;
+
+      for (var i = MaxRenewalLength; i >= MinRenewalLength; i--)
+      {
+        var d = origExpirationDate;
+        var newRenewalDate = d.AddYears(i);
+        var maxRenewalDate = DateTime.MinValue;
+        
+        switch (Tld.RenewProhibitedPeriodForExpirationUnit)
+        {
+          case "month":
+            maxRenewalDate = DateTime.Now.Date.AddMonths(Tld.RenewProhibitedPeriodForExpiration * -1);
+            break;
+          case "day":
+            maxRenewalDate = DateTime.Now.Date.AddDays(Tld.RenewProhibitedPeriodForExpiration * -1);
+            break;
+        }
+
+        if (newRenewalDate <= maxRenewalDate)
+        {
+          maxValidRenewalLength = i;
+          break;
+        }
+      }
+
+      if (maxValidRenewalLength > 0)
+      {
+        int? renewalMonthsBeforeExpiration = TLDRenewal.GetRenewalMonthsBeforeExpiration(DotType);
+        if (renewalMonthsBeforeExpiration.HasValue)
+        {
+          var renewalEligibilityDate = origExpirationDate.AddMonths(renewalMonthsBeforeExpiration.Value * -1);
+
+          if (DateTime.Now.Date >= renewalEligibilityDate)
+          {
+            canRenew = true;
+          }
+        }
+        else
+        {
+          canRenew = true;
+        }
+      }
+
+      return canRenew;
+    }
+
     public int GetExpiredAuctionRegProductId(int registrationLength, int domainCount)
     {
       return InternalGetProductId(registrationLength, domainCount, DotTypeProductTypes.ExpiredAuctionReg);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Interface
@@ -16,13 +17,13 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     int MaxTransferLength { get; }
     int MinRenewalLength { get; }
     int MaxRenewalLength { get; }
-    int MaxRenewalMonthsOut { get; }
     bool IsMultiRegistry { get; }
 
     IEnumerable<RegistryLanguage> RegistryLanguages { get; }
     RegistryLanguage GetLanguageByName(string languageName);
     RegistryLanguage GetLanguageById(int languageId);
-    
+    bool CanRenew(DateTime currentExpirationDate, out int maxValidRenewalLength);
+
     int GetExpiredAuctionRegProductId(int registrationLength, int domainCount);
     int GetExpiredAuctionRegProductId(string registryId, int registrationLength, int domainCount);
     int GetPreRegProductId(int registrationLength, int domainCount);

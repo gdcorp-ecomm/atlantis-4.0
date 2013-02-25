@@ -12,5 +12,15 @@ namespace Atlantis.Framework.DotTypeCache.Static
     {
       _staticDotType = staticDotType;
     }
+
+    public int RenewProhibitedPeriodForExpiration
+    {
+      get { throw new System.NotImplementedException(); }
+    }
+
+    public string RenewProhibitedPeriodForExpirationUnit
+    {
+      get { throw new System.NotImplementedException(); }
+    }
   }
 }

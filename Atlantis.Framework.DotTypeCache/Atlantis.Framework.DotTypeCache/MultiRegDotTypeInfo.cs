@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.DotTypeCache.Interface;
+﻿using System;
+using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
 using Atlantis.Framework.RegDotTypeRegistry.Interface;
 using System.Collections.Generic;
@@ -118,11 +119,6 @@ namespace Atlantis.Framework.DotTypeCache
       get { return this._dotTypeInfo.MaxRenewalLength; }
     }
 
-    public int MaxRenewalMonthsOut
-    {
-      get { return this._dotTypeInfo.MaxRenewalMonthsOut; }
-    }
-
     public bool IsMultiRegistry
     {
       get { return true; }
@@ -141,6 +137,11 @@ namespace Atlantis.Framework.DotTypeCache
     public RegistryLanguage GetLanguageById(int languageId)
     {
       return this._dotTypeInfo.GetLanguageById(languageId);
+    }
+
+    public bool CanRenew(DateTime currentExpirationDate, out int maxValidRenewalLength)
+    {
+      return this._dotTypeInfo.CanRenew(currentExpirationDate, out maxValidRenewalLength);
     }
 
     public int GetPreRegProductId(int registrationLength, int domainCount)

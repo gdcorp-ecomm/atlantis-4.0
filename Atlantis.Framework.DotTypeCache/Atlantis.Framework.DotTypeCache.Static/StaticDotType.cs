@@ -71,7 +71,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
       get { return 10; }
     }
 
-    public virtual int MaxRenewalMonthsOut
+    protected virtual int MaxRenewalMonthsOut
     {
       get { return 120; }
     }
@@ -142,6 +142,46 @@ namespace Atlantis.Framework.DotTypeCache.Static
     public RegistryLanguage GetLanguageById(int languageId)
     {
       return _languagesData.Value.GetLanguageDataById(languageId);
+    }
+
+    public bool CanRenew(DateTime currentExpirationDate, out int maxValidRenewalLength)
+    {
+      maxValidRenewalLength = -1;
+      bool canRenew = false;
+
+      DateTime origExpirationDate = currentExpirationDate;
+
+      for (int i = MaxRenewalLength; i >= MinRenewalLength; i--)
+      {
+        var d = origExpirationDate;
+        DateTime newRenewalDate = d.AddYears(i);
+        DateTime maxRenewalDate = DateTime.Now.Date.AddMonths(MaxRenewalMonthsOut);
+        if (newRenewalDate <= maxRenewalDate)
+        {
+          maxValidRenewalLength = i;
+          break;
+        }
+      }
+
+      if (maxValidRenewalLength > 0)
+      {
+        int? renewalMonthsBeforeExpiration = TLDRenewal.GetRenewalMonthsBeforeExpiration(DotType);
+        if (renewalMonthsBeforeExpiration.HasValue)
+        {
+          DateTime renewalEligibilityDate = origExpirationDate.AddMonths(renewalMonthsBeforeExpiration.Value * -1);
+
+          if (DateTime.Now.Date >= renewalEligibilityDate)
+          {
+            canRenew = true;
+          }
+        }
+        else
+        {
+          canRenew = true;
+        }
+      }
+
+      return canRenew;
     }
 
     private List<int> GetValidProductIdList(StaticDotTypeTiers productIds, int minLength, int maxLength,

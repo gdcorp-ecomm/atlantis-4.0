@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Interface
@@ -79,6 +80,12 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     public RegistryLanguage GetLanguageById(int languageId)
     {
       return null;
+    }
+
+    public bool CanRenew(DateTime currentExpirationDate, out int maxValidRenewalLength)
+    {
+      maxValidRenewalLength = -1;
+      return false;
     }
 
     public int GetExpiredAuctionRegProductId(int registrationLength, int domainCount)

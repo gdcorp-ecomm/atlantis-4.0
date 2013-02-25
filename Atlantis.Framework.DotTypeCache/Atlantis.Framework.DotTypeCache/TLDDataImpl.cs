@@ -230,8 +230,8 @@ namespace Atlantis.Framework.DotTypeCache
 
       HashSet<string> overRideTlds = null;
 
-      string stagingServers = DataCache.DataCache.GetAppSetting("DotTypeCacheStagingServers");
-      string stagingTlds = DataCache.DataCache.GetAppSetting("DotTypeCacheStagingTLDs");
+      string stagingServers = DataCache.DataCache.GetAppSetting("DOTTYPECACHE_STAGING_SERVERS");
+      string stagingTlds = DataCache.DataCache.GetAppSetting("DOTTYPECACHE_STAGING_TLDS");
 
       if (!string.IsNullOrEmpty(stagingServers) && !string.IsNullOrEmpty(stagingTlds))
       {

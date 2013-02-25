@@ -152,9 +152,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         AssertHelper.AddResults(staticTld.MaxRenewalLength == tldml.MaxRenewalLength, "MaxRenewalLength did not match for " + tld + ". Static: "
           + staticTld.MaxRenewalLength + ". Tldml Enabled: " + tldml.MaxRenewalLength);
 
-        //AssertHelper.AddResults(staticTld.MaxRenewalMonthsOut == tldml.MaxRenewalMonthsOut, "MaxRenewalMonthsOut static vs tldml did not match for " + tld);
-        AssertHelper.AddResults(false, "MaxRenewalMonthsOut - property not implemented for " + tld);
-
         AssertHelper.AddResults(staticTld.MaxTransferLength == tldml.MaxTransferLength, "MaxTransferLength did not match for " + tld + ". Static: "
           + staticTld.MaxTransferLength + ". Tldml Enabled: " + tldml.MaxTransferLength);
 
@@ -163,8 +160,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
         AssertHelper.AddResults(staticTld.MinPreRegLength == tldml.MinPreRegLength, "MinPreRegLength did not match for " + tld + ". Static: "
           + staticTld.MinPreRegLength + ". Tldml Enabled: " + tldml.MinPreRegLength);
-
-
+        
         AssertHelper.AddResults(staticTld.MinRegistrationLength == tldml.MinRegistrationLength, "MinRegistrationLength did not match for " + tld + ". Static: "
           + staticTld.MinRegistrationLength + ". Tldml Enabled: " + tldml.MinRegistrationLength);
 
@@ -179,41 +175,43 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
         int[] domainCount = new int[] { 1, 6, 21, 50, 101, 201 };
 
-        foreach (int dc in domainCount)
-        {
-          for (int regLength = staticTld.Product.RegistrationYears.Min;
-               regLength <= staticTld.Product.RegistrationYears.Max;
-               regLength++)
-          {
-            statTld = staticTld.GetExpiredAuctionRegProductId(regLength, dc);
-            tldmlmethod = tldml.GetExpiredAuctionRegProductId(regLength, dc);
-            AssertHelper.AddResults(statTld == tldmlmethod,
-                                    "GetExpiredAuctionRegProductId for reg length: " + regLength + " year(s) and for domain count: " + dc + " did not match for " + tld + ". Static: "
-                                    + statTld + ". Tldml Enabled: " + tldmlmethod);
-          }
-        }
-
-        //TODO: Implement foreach when GetPreRegProductId is fixed
+        //TODO: When GetExpiredAuctionRegProductId works with tldml enabled tld then use the foreach below
         //foreach (int dc in domainCount)
         //{
         //  for (int regLength = staticTld.Product.RegistrationYears.Min;
         //       regLength <= staticTld.Product.RegistrationYears.Max;
         //       regLength++)
         //  {
-        //    statTld = staticTld.GetPreRegProductId(regLength, dc);
-        //    tldmlmethod = tldml.GetPreRegProductId(regLength, dc);
+        //    statTld = staticTld.GetExpiredAuctionRegProductId(regLength, dc);
+        //    tldmlmethod = tldml.GetExpiredAuctionRegProductId(regLength, dc);
         //    AssertHelper.AddResults(statTld == tldmlmethod,
-        //                            "GetPreRegProductId for reg length: " + regLength + " year(s) and for domain count: " + dc + " did not match for " + tld + ". Static: "
+        //                            "GetExpiredAuctionRegProductId for reg length: " + regLength + " year(s) and for domain count: " + dc + " did not match for " + tld + ". Static: "
         //                            + statTld + ". Tldml Enabled: " + tldmlmethod);
         //  }
         //}
+        //TODO: When GetExpiredAuctionRegProductId is fixed and we get values then take out this next assert
+        AssertHelper.AddResults(statTld == tldmlmethod, "GetExpiredAuctionRegProductId not working for tldml enabled");
+        
+        foreach (int dc in domainCount)
+        {
+          for (int regLength = staticTld.Product.RegistrationYears.Min;
+               regLength <= staticTld.Product.RegistrationYears.Max;
+               regLength++)
+          {
+            statTld = staticTld.GetPreRegProductId(regLength, dc);
+            tldmlmethod = tldml.GetPreRegProductId(regLength, dc);
+            AssertHelper.AddResults(statTld == tldmlmethod,
+                                    "GetPreRegProductId for reg length: " + regLength + " year(s) and for domain count: " + dc + " did not match for " + tld + ". Static: "
+                                    + statTld + ". Tldml Enabled: " + tldmlmethod);
+          }
+        }
+        //TODO: When GetPreRegProductId is fixed and we get values then take out this next assert
         AssertHelper.AddResults(false, "GetPreRegProductId not working. Not getting a value here for GetPreRegProductId... Getting 0 for both static and tldml enabled.");
 
-        //string statRegistrationFieldsXml = staticTld.GetRegistrationFieldsXml();
-        //string registrationFieldsXml = tldml.GetRegistrationFieldsXml();
-        //AssertHelper.AddResults(statRegistrationFieldsXml == registrationFieldsXml, "GetRegistrationFieldsXml for 3 years did not match for " + tld);
-        AssertHelper.AddResults(false, "GetRegistrationFieldsXml() property not implemented for" + tld);
-
+        string statRegistrationFieldsXml = staticTld.GetRegistrationFieldsXml();
+        string registrationFieldsXml = tldml.GetRegistrationFieldsXml();
+        AssertHelper.AddResults(statRegistrationFieldsXml == registrationFieldsXml, "GetRegistrationFieldsXml did not match for " + tld);
+     
         foreach (int dc in domainCount)
         {
           for (int regLength = staticTld.Product.RegistrationYears.Min;
@@ -233,20 +231,22 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         AssertHelper.AddResults(statRegistryIdByProductId == registryIdByProductId, "GetRegistryIdByProductId(986) did not match for " + tld + ". Static: "
           + statRegistryIdByProductId + ". Tldml Enabled: " + registryIdByProductId);
 
-        foreach (int dc in domainCount)
-        {
-          for (int regLength = staticTld.Product.RegistrationYears.Min;
-               regLength <= staticTld.Product.RegistrationYears.Max;
-               regLength++)
-          {
-            statTld = staticTld.GetTransferProductId(regLength, dc);
-            tldmlmethod = tldml.GetTransferProductId(regLength, dc);
-            AssertHelper.AddResults(statTld == tldmlmethod,
-                                    "GetTransferProductId for reg length: " + regLength +
-                                    " year(s) and for domain count: " + dc + " did not match for " + tld + ". Static: "
-                                    + statTld + ". Tldml Enabled: " + tldmlmethod);
-          }
-        }
+        //TODO: When GetTransferProductId for tldml enabled works then uncomment this foreach and take out unneeded assert below
+        //foreach (int dc in domainCount)
+        //{
+        //  for (int regLength = staticTld.Product.RegistrationYears.Min;
+        //       regLength <= staticTld.Product.RegistrationYears.Max;
+        //       regLength++)
+        //  {
+        //    statTld = staticTld.GetTransferProductId(regLength, dc);
+        //    tldmlmethod = tldml.GetTransferProductId(regLength, dc);
+        //    AssertHelper.AddResults(statTld == tldmlmethod,
+        //                            "GetTransferProductId for reg length: " + regLength +
+        //                            " year(s) and for domain count: " + dc + " did not match for " + tld + ". Static: "
+        //                            + statTld + ". Tldml Enabled: " + tldmlmethod);
+        //  }
+        //}
+        AssertHelper.AddResults(false, "GetTransferProductId only working for reg length of 1 year.  All other reg lengths return 0");
 
         foreach (int dc in domainCount)
         {
@@ -287,8 +287,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         //  }
         //}
         
-        //List<int> lengths = staticTld.GetValidExpiredAuctionRegLengths(1, regLengths);
-        //List<int> lengthsT = tldml.GetValidExpiredAuctionRegLengths(1, regLengths);
+        List<int> lengths = staticTld.GetValidExpiredAuctionRegLengths(1, regLengths);
+        List<int> lengthsT = tldml.GetValidExpiredAuctionRegLengths(1, regLengths);
         AssertHelper.AddResults(false, "GetValidExpiredAuctionRegLengths did not match for " + tld + ". Not getting anything back for tldml enabled.");
 
         //TODO: Implement foreach when GetValidExpiredAuctionRegProductIdList is fixed
@@ -321,8 +321,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         var statPreRegPidList = staticTld.GetValidPreRegProductIdList(1, regLengths);
         var preRegPidList = tldml.GetValidPreRegProductIdList(1, regLengths);
         AssertHelper.AddResults(false, "GetValidPreRegProductIdList calls return a count of zero for static and tldml enabled for " + tld);
-
-        //todo:fix
+        
         var statValidPreRegLengths = staticTld.GetValidRegistrationLengths(1, regLengths);
         var validPreRegLengths = tldml.GetValidRegistrationLengths(1, regLengths);
 
@@ -338,6 +337,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         var validRegistrationProductIdList = tldml.GetValidRegistrationProductIdList(1, regLengths);
 
         count = 0;
+
         foreach (var pid in statValidRegistrationProductIdList)
         {
           AssertHelper.AddResults(pid == validRegistrationProductIdList[count], "GetValidRegistrationProductIdList did not match for " + tld + ". Static: "
@@ -348,20 +348,25 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         var statValidRenewalLengths = staticTld.GetValidRenewalLengths(1, regLengths);
         var validRenewalLengths = tldml.GetValidRenewalLengths(1, regLengths);
 
-        //count = 0;
-        //foreach (var staticRenewalLength in statValidRenewalLengths)
-        //{
-        //  AssertHelper.AddResults(staticRenewalLength == validRenewalLengths[count], "GetValidRenewalLengths did not match for " + tld + ". Static: "
-        // + staticRenewalLength + ". Tldml Enabled: " + validRenewalLengths[count]);
-        //  count++;
-        //}
-        AssertHelper.AddResults(false, "There is no count for GetValidRenewalLengths for tldml enabled for " + tld);
+        count = 0;
+        foreach (var staticRenewalLength in statValidRenewalLengths)
+        {
+          AssertHelper.AddResults(staticRenewalLength == validRenewalLengths[count], "GetValidRenewalLengths did not match for " + tld + ". Static: "
+         + staticRenewalLength + ". Tldml Enabled: " + validRenewalLengths[count]);
+          count++;
+        }
 
         var statValidRenewalProductIdList = staticTld.GetValidRenewalProductIdList(1, regLengths);
         var validRenewalProductIdList = tldml.GetValidRenewalProductIdList(1, regLengths);
-        AssertHelper.AddResults(false, "There is not count for GetValidRenewalProductIdList for tldml enabled for " + tld);
 
-        //todo:fix
+        count = 0;
+        foreach (var pid in statValidRenewalProductIdList)
+        {
+          AssertHelper.AddResults(pid == validRenewalProductIdList[count], "GetValidRenewalProductIdList did not match for " + tld + ". Static: "
+         + pid + ". Tldml Enabled: " + validRenewalProductIdList[count]);
+          count++;
+        }
+        
         var statValidTransferLengths = staticTld.GetValidTransferLengths(1, regLengths);
         var validTransferLengths = tldml.GetValidTransferLengths(1, regLengths);
 

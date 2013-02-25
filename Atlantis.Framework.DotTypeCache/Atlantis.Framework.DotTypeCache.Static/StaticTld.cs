@@ -15,12 +15,18 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     public int RenewProhibitedPeriodForExpiration
     {
-      get { return 0; }
+      get
+      {
+        return 0;               //This is not be used since MaxRenewalMonthsOut is used for statics
+      }
     }
 
     public string RenewProhibitedPeriodForExpirationUnit
     {
-      get { return string.Empty; }
+      get
+      {
+        return string.Empty;    //This is not be used since MaxRenewalMonthsOut is used for statics
+      }
     }
   }
 }

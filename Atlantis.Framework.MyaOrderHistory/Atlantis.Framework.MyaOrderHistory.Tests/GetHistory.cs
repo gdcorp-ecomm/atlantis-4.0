@@ -8,6 +8,8 @@ namespace Atlantis.Framework.MyaOrderHistory.Tests
   /// Summary description for UnitTest1
   /// </summary>
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.MyaOrderHistory.Impl.dll")]
   public class GetHistory
   {
     public GetHistory()
@@ -76,6 +78,21 @@ namespace Atlantis.Framework.MyaOrderHistory.Tests
 
       MyaOrderHistoryResponseData response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
       
+      Assert.IsTrue(response.IsSuccess);
+
+    }
+
+    [TestMethod]
+    public void TestMethodOrderId()
+    {
+
+      MyaOrderHistoryRequestData request = new MyaOrderHistoryRequestData("856907", string.Empty, "1451694", string.Empty, 0);
+
+      //request.StartDate = DateTime.Now.AddYears(-1);
+      //request.EndDate = DateTime.Now;
+
+      MyaOrderHistoryResponseData response = (MyaOrderHistoryResponseData)Engine.Engine.ProcessRequest(request, 571);
+
       Assert.IsTrue(response.IsSuccess);
 
     }

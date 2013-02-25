@@ -15,12 +15,12 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     public int RenewProhibitedPeriodForExpiration
     {
-      get { throw new System.NotImplementedException(); }
+      get { return 0; }
     }
 
     public string RenewProhibitedPeriodForExpirationUnit
     {
-      get { throw new System.NotImplementedException(); }
+      get { return string.Empty; }
     }
   }
 }

@@ -198,16 +198,19 @@ namespace Atlantis.Framework.DotTypeCache
       {
         var d = origExpirationDate;
         var newRenewalDate = d.AddYears(i);
-        var maxRenewalDate = DateTime.MinValue;
-        
-        switch (Tld.RenewProhibitedPeriodForExpirationUnit)
+        var maxRenewalDate = DateTime.Now.AddYears(MaxRenewalLength);
+
+        if (!string.IsNullOrEmpty(Tld.RenewProhibitedPeriodForExpirationUnit))
         {
-          case "month":
-            maxRenewalDate = DateTime.Now.Date.AddMonths(Tld.RenewProhibitedPeriodForExpiration * -1);
-            break;
-          case "day":
-            maxRenewalDate = DateTime.Now.Date.AddDays(Tld.RenewProhibitedPeriodForExpiration * -1);
-            break;
+          switch (Tld.RenewProhibitedPeriodForExpirationUnit)
+          {
+            case "month":
+              maxRenewalDate = DateTime.Now.Date.AddMonths(Tld.RenewProhibitedPeriodForExpiration*-1);
+              break;
+            case "day":
+              maxRenewalDate = DateTime.Now.Date.AddDays(Tld.RenewProhibitedPeriodForExpiration*-1);
+              break;
+          }
         }
 
         if (newRenewalDate <= maxRenewalDate)

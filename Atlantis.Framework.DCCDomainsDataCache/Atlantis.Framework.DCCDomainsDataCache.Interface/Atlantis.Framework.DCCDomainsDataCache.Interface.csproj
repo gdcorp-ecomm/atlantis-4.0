@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TldLanguageData.cs" />
     <Compile Include="TLDMLTld.cs" />
     <Compile Include="HashSetExtensions.cs" />
     <Compile Include="TLDMLByNameRequestData.cs" />

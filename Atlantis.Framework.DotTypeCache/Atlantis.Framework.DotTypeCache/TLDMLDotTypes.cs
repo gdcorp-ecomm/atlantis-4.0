@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.DotTypeCache.Interface;
 using System;
 using System.Collections.Generic;
+using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache
 {
@@ -16,15 +17,12 @@ namespace Atlantis.Framework.DotTypeCache
       {
         try
         {
-          var dotTypeAttributesDictionary = DataCache.DataCache.GetExtendedTLDData(dotType);
+          var request = new ActiveTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+          var response = (ActiveTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ActiveTlds);
 
-          Dictionary<string, string> dotTypeAttributes;
-          if (dotTypeAttributesDictionary.TryGetValue(dotType, out dotTypeAttributes))
+          if (response != null)
           {
-            if ((dotTypeAttributes != null) && (dotTypeAttributes.ContainsKey(TLDMLSupportedFlag)))
-            {
-              result = dotTypeAttributes[TLDMLSupportedFlag] != "0";
-            }
+            result = response.IsTLDActive(dotType, TLDMLSupportedFlag);
           }
         }
         catch (Exception ex)
@@ -32,7 +30,6 @@ namespace Atlantis.Framework.DotTypeCache
           string message = ex.Message + Environment.NewLine + ex.StackTrace;
           Logging.LogException("TLDMLDotTypes.TLDMLIsAvailable", message, dotType);
         }
-
       }
 
       return result;

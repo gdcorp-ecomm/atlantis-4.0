@@ -161,11 +161,6 @@ namespace Atlantis.Framework.DotTypeCache
       }
     }
 
-    public int MaxRenewalMonthsOut
-    {
-      get { throw new NotImplementedException(); }
-    }
-
     public bool IsMultiRegistry
     {
       // TODO: how to tell multiregistry from TLDML?

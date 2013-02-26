@@ -228,25 +228,6 @@ namespace Atlantis.Framework.DotTypeCache
         }
       }
 
-      HashSet<string> overRideTlds = null;
-
-      string stagingServers = DataCache.DataCache.GetAppSetting("DOTTYPECACHE_STAGING_SERVERS");
-      string stagingTlds = DataCache.DataCache.GetAppSetting("DOTTYPECACHE_STAGING_TLDS");
-
-      if (!string.IsNullOrEmpty(stagingServers) && !string.IsNullOrEmpty(stagingTlds))
-      {
-        var serverArr = stagingServers.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries);
-        if (serverArr.Any(s => s.Trim().ToLowerInvariant() == Environment.MachineName.ToLowerInvariant()))
-        {
-          var stagingTldList = stagingTlds.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries);
-          overRideTlds = new HashSet<string>(stagingTldList, StringComparer.OrdinalIgnoreCase);
-        }
-      }
-
-      if (overRideTlds != null)
-      {
-        offeredTlds.UnionWith(overRideTlds);
-      }
       return offeredTlds;
     }
   }

@@ -250,14 +250,14 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         //TODO: When GetTransferProductId for tldml enabled works then uncomment this foreach and take out unneeded assert below
         //foreach (int dc in domainCount)
         //{
-        //  for (int regLength = staticTld.Product.RegistrationYears.Min;
-        //       regLength <= staticTld.Product.RegistrationYears.Max;
-        //       regLength++)
+        //  for (int transferYears = staticTld.Product.TransferYears.Min;
+        //       transferYears <= staticTld.Product.TransferYears.Max;
+        //       transferYears++)
         //  {
-        //    statTld = staticTld.GetTransferProductId(regLength, dc);
-        //    tldmlmethod = tldml.GetTransferProductId(regLength, dc);
+        //    statTld = staticTld.GetTransferProductId(transferYears, dc);
+        //    tldmlmethod = tldml.GetTransferProductId(transferYears, dc);
         //    AssertHelper.AddResults(statTld == tldmlmethod,
-        //                            "GetTransferProductId for reg length: " + regLength +
+        //                            "GetTransferProductId for reg length: " + transferYears +
         //                            " year(s) and for domain count: " + dc + " did not match for " + tld + ". Static: "
         //                            + statTld + ". Tldml Enabled: " + tldmlmethod);
         //  }

@@ -11,7 +11,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 
     protected override string Namespace
     {
-      get { return "urn:godaddy:ns:product-1.0"; }
+      get { return "urn:godaddy:ns:product"; }
     }
 
     protected override string LocalName

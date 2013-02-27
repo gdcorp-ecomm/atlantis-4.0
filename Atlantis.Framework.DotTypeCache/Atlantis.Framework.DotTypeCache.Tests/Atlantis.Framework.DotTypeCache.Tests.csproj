@@ -55,6 +55,10 @@
     <Reference Include="TestSetUpAndSettings">
       <HintPath>..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.Automation\Reference\TestSetUpAndSettings.dll</HintPath>
     </Reference>
+    <Reference Include="TLDML, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.Automation\Reference\TLDML.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -62,6 +66,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DotTypeCacheTestsForTldmlEnabledTlds.cs" />
     <Compile Include="StaticVsTLDMLEnabledTests.cs" />
     <Compile Include="DotTypeRegistrationXmlTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

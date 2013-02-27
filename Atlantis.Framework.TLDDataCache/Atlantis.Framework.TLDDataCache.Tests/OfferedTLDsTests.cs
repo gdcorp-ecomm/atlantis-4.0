@@ -13,6 +13,14 @@ namespace Atlantis.Framework.TLDDataCache.Tests
     const int _OFFEREDTLDREQUEST = 637;
 
     [TestMethod]
+    public void OfferedTldsInvalid()
+    {
+      var request = new OfferedTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, OfferedTLDProductTypes.Invalid);
+      var response = (OfferedTLDsResponseData)DataCache.DataCache.GetProcessRequest(request, _OFFEREDTLDREQUEST);
+      Assert.IsTrue(response.OfferedTLDs.Count() == 0);
+    }
+
+    [TestMethod]
     public void OfferedTldsBasic()
     {
       var request = new OfferedTLDsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, OfferedTLDProductTypes.Registration);

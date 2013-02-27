@@ -6,6 +6,7 @@
     IDotTypeInfo GetDotTypeInfo(string dotType);
     bool HasDotTypeInfo(string dotType);
 
+    ITLDDataImpl GetTLDDataForInvalid { get; }
     ITLDDataImpl GetTLDDataForRegistration { get; }
     ITLDDataImpl GetTLDDataForTransfer { get; }
     ITLDDataImpl GetTLDDataForBulk { get; }

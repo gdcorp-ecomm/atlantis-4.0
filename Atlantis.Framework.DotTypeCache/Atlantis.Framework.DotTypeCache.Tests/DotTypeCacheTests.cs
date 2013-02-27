@@ -1398,5 +1398,41 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Assert.IsTrue((canRenew && maxValidRenewlength > 0) && (!canRenew1 && maxValidRenewlength1 <= 0) || (canRenew2 && maxValidRenewlength2 > 0) || 
                     (canRenew3 && maxValidRenewlength3 > 0) || (canRenew4 && maxValidRenewlength4 > 0) || (canRenew5 && maxValidRenewlength5 > 0));
     }
+
+    [TestMethod]
+    public void GetTLDDataForInvalidProductTypes()
+    {
+      ITLDDataImpl invalid = DotTypeProvider.GetTLDDataForInvalid;
+      Assert.IsTrue(invalid.OfferedTLDsList.Count == 0);
+    }
+
+    [TestMethod]
+    public void GetTLDDataForRegistration()
+    {
+      ITLDDataImpl reg = DotTypeProvider.GetTLDDataForRegistration;
+      Assert.IsTrue(reg.OfferedTLDsList.Count > 0);
+    }
+
+    [TestMethod]
+    public void GetTLDDataForTransfer()
+    {
+      ITLDDataImpl reg = DotTypeProvider.GetTLDDataForTransfer;
+      Assert.IsTrue(reg.OfferedTLDsList.Count > 0);
+    }
+
+    [TestMethod]
+    public void GetTLDDataForBulk()
+    {
+      ITLDDataImpl reg = DotTypeProvider.GetTLDDataForBulk;
+      Assert.IsTrue(reg.OfferedTLDsList.Count > 0);
+    }
+
+    [TestMethod]
+    public void GetTLDDataForBulkTransfer()
+    {
+      ITLDDataImpl reg = DotTypeProvider.GetTLDDataForBulkTransfer;
+      Assert.IsTrue(reg.OfferedTLDsList.Count > 0);
+    }
+
   }
 }

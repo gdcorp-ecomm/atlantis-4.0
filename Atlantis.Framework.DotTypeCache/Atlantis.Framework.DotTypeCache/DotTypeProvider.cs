@@ -16,6 +16,7 @@ namespace Atlantis.Framework.DotTypeCache
   public class DotTypeProvider : ProviderBase, IDotTypeProvider
   {
     private readonly Dictionary<string, IDotTypeInfo> _dotTypesRequestCache;
+    private readonly ITLDDataImpl _tldDataForInvalid;
     private readonly ITLDDataImpl _tldDataForRegistration;
     private readonly ITLDDataImpl _tldDataForTransfer;
     private readonly ITLDDataImpl _tldDataForBulk;
@@ -25,6 +26,7 @@ namespace Atlantis.Framework.DotTypeCache
     {
       _dotTypesRequestCache = new Dictionary<string, IDotTypeInfo>(100, StringComparer.OrdinalIgnoreCase);
 
+      _tldDataForInvalid = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Invalid);
       _tldDataForRegistration = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Registration);
       _tldDataForTransfer = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Transfer);
       _tldDataForBulk = new TLDDataImpl(SiteContext.PrivateLabelId, OfferedTLDProductTypes.Bulk);
@@ -81,6 +83,11 @@ namespace Atlantis.Framework.DotTypeCache
     public bool HasDotTypeInfo(string dotType)
     {
       return TLDMLDotTypes.TLDMLIsAvailable(dotType) || StaticDotTypes.HasDotType(dotType);
+    }
+
+    public ITLDDataImpl GetTLDDataForInvalid
+    {
+      get { return _tldDataForInvalid; }
     }
 
     public ITLDDataImpl GetTLDDataForRegistration

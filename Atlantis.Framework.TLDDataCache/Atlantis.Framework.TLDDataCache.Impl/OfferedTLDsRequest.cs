@@ -14,7 +14,13 @@ namespace Atlantis.Framework.TLDDataCache.Impl
       try
       {
         var offeredTldRequest = ((OfferedTLDsRequestData)requestData);
-        DataTable offeredTlds = DataCache.DataCache.GetTLDList(offeredTldRequest.PrivateLabelId, (int)offeredTldRequest.TLDProductType);
+
+        var offeredTlds = new DataTable();
+        if (offeredTldRequest.TLDProductType != OfferedTLDProductTypes.Invalid)
+        {
+          offeredTlds = DataCache.DataCache.GetTLDList(offeredTldRequest.PrivateLabelId,
+                                                                 (int) offeredTldRequest.TLDProductType);
+        }
         result = OfferedTLDsResponseData.FromDataTable(offeredTlds);
       }
       catch (Exception ex)

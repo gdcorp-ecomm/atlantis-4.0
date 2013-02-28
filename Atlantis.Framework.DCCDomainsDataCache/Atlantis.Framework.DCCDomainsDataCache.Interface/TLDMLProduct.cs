@@ -39,13 +39,16 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     {
       Dictionary<string, TldValidYearsSet> result = new Dictionary<string, TldValidYearsSet>(StringComparer.OrdinalIgnoreCase);
 
-      var preregistrationCollections = NamespaceElement.Descendants("preregistrationperiodcollection");
-      foreach (XElement preregCollection in preregistrationCollections)
+      var preregistrationPhaseCollections = NamespaceElement.Descendants("preregistrationphasecollection");
+      foreach (XElement preregPhaseCollection in preregistrationPhaseCollections)
       {
-        XAttribute typeAtt = preregCollection.Attribute("type");
-        if (typeAtt != null)
+        foreach (var preregistrationPhase in preregPhaseCollection.Descendants("preregistrationphase"))
         {
-          result[typeAtt.Value] = TldValidYearsSet.FromPeriodElements(preregCollection.Descendants("preregistrationperiod"));
+          XAttribute valueAtt = preregistrationPhase.Attribute("value");
+          if (valueAtt != null)
+          {
+            result[valueAtt.Value] = TldValidYearsSet.FromPeriodElements(preregistrationPhase.Descendants("preregistrationperiod"));
+          }
         }
       }
 

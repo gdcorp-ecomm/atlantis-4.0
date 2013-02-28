@@ -19,6 +19,8 @@ namespace Atlantis.Framework.SsoServiceProvider.Interface
     public string RedirectLogoutUrl { get; private set; }
     public string CertificateName { get; private set; }
     public SsoServiceProviderStatus Status { get; private set; }
+    public bool IsUsingPrimaryServiceProviderName { get; private set; }
+    public string PrimaryServiceProviderName { get; private set; }
 
     public SsoServiceProviderResponseData(string serviceProviderName, string serviceProviderXml)
     {
@@ -40,6 +42,19 @@ namespace Atlantis.Framework.SsoServiceProvider.Interface
 
         string isRetiredValue = GetAttributeValue(itemElement, "isRetired", "0");
         Status = "1".Equals(isRetiredValue) ? SsoServiceProviderStatus.Retired : SsoServiceProviderStatus.Active;
+
+        string serviceProviderNameReturn = GetAttributeValue(itemElement, "serviceProviderName", string.Empty);
+        PrimaryServiceProviderName = string.Empty;
+
+        if (!string.IsNullOrEmpty(serviceProviderNameReturn))
+        {
+          IsUsingPrimaryServiceProviderName = !serviceProviderNameReturn.Equals(serviceProviderName, StringComparison.OrdinalIgnoreCase);
+          if (IsUsingPrimaryServiceProviderName)
+          {
+            PrimaryServiceProviderName = serviceProviderNameReturn;
+          }
+        }
+
       }
     }
 

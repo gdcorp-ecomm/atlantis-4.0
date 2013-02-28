@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrmLynxPermissionKeys.cs" />
     <Compile Include="CRMLynxPermissionRequestData.cs" />
     <Compile Include="CRMLynxPermissionResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

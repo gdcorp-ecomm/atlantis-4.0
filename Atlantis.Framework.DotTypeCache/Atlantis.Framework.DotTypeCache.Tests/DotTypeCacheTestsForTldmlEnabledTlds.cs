@@ -66,7 +66,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
       IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
       shopperContext.SetNewShopper("832652");
-      //tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
+      tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
       tlds = new List<string>();
       tlds.Add("ORG");
       domainCount = new int[] { 1, 6, 21, 50, 101, 201 };
@@ -78,10 +78,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Console.WriteLine("Assertions: " + AssertHelper.AssertCount.ToString());
       AssertHelper.GetResults();
     }
-
-
-
-
+    
     [TestMethod]
     public void GetDotType()
     {
@@ -94,28 +91,28 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         AssertHelper.AddResults(!string.IsNullOrEmpty(description), "GetDotTypeInfo description is null or empty for:  " + tld);
       }
     }
-    
+
     [TestMethod]
     public void GetDotTypeProductIds()
     {
       foreach (var tld in tlds)
       {
         IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(tld);
-    
+
         foreach (int dc in domainCount)
         {
-          for (int regLength = info.Product.RegistrationYears.Min;
-               regLength <= info.Product.RegistrationYears.Max;
-               regLength++)
-          {
-            int productIdDefault = DotTypeCache.GetRegistrationProductId(tld, regLength, dc);
-            int prodId = Convert.ToInt32(TLDMLProduct.GetPFID(tld, regLength, productfamily.DomainRegistration, dc));
-            AssertHelper.AddResults(productIdDefault == prodId, "Product ids do not match for: " + tld + "Expected in tldml: " + prodId + ". Actual: " + productIdDefault + " . Reg length: " + regLength + " year(s) and domain count: " + dc);
+          List<int> reglengths = TLDML.TLDMLProduct.GetAllEnabledRegistrationLengths(tld);
 
-            int productIdFirstRegistrar = DotTypeCache.GetTransferProductId(tld, "1", regLength, dc);
-            int productIdSecondRegistrar = DotTypeCache.GetRegistrationProductId(tld, "2", regLength, dc);
+          foreach (var reglength in reglengths)
+          {
+            int productIdDefault = DotTypeCache.GetRegistrationProductId(tld, reglength, dc);
+            int prodId = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.DomainRegistration, dc));
+            AssertHelper.AddResults(productIdDefault == prodId, "Product ids do not match for: " + tld + "Expected in tldml: " + prodId + ". Actual: " + productIdDefault + " . Reg length: " + reglength + " year(s) and domain count: " + dc);
+
+            int productIdFirstRegistrar = DotTypeCache.GetTransferProductId(tld, "1", reglength, dc);
+            int productIdSecondRegistrar = DotTypeCache.GetRegistrationProductId(tld, "2", reglength, dc);
             AssertHelper.AddResults((productIdDefault * productIdFirstRegistrar * productIdSecondRegistrar) != 0,
-                                    "GetDotTypeProductIds - A product id was zero for: " + tld + ". Reg length: " + regLength + " year(s) and domain count: " + dc);
+                                    "GetDotTypeProductIds - A product id was zero for: " + tld + ". Reg length: " + reglength + " year(s) and domain count: " + dc);
           }
         }
       }
@@ -127,29 +124,25 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       foreach (var tld in tlds)
       {
         IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(tld);
-        List<int> regLengths = new List<int>();
+        List<int> reglengths = TLDML.TLDMLProduct.GetAllEnabledRegistrationLengths(tld);
 
-        for (int regLength = info.Product.RegistrationYears.Min;
-             regLength <= info.Product.RegistrationYears.Max;
-             regLength++)
+        foreach (var reglength in reglengths)
         {
-          regLengths.Add(regLength);
-        }
-
-        foreach (int dc in domainCount)
-        {
-          List<int> registrationProductIds = info.GetValidRegistrationProductIdList(dc, regLengths.ToArray());
-
-          foreach (int regLength in regLengths)
+          foreach (int dc in domainCount)
           {
-            int prodIdFromTdml =
-              Convert.ToInt32(TLDMLProduct.GetPFID(tld, regLength, productfamily.DomainRegistration, dc));
+            List<int> registrationProductIds = info.GetValidRegistrationProductIdList(dc, reglength);
 
+            foreach (int regLength in reglengths)
+            {
+              int prodIdFromTdml =
+                Convert.ToInt32(TLDMLProduct.GetPFID(tld, regLength, productfamily.DomainRegistration, dc));
 
-            AssertHelper.AddResults(registrationProductIds.Contains(prodIdFromTdml),
-                                    "Product id from tdml was not found in the registrationProductId list for: " + tld + ". Expected in list: " +
-                                    prodIdFromTdml + ". Reg length: " + regLength +
-                                    " year(s) and domain count: " + dc);
+              AssertHelper.AddResults(registrationProductIds.Contains(prodIdFromTdml),
+                                      "Product id from tdml was not found in the registrationProductId list for: " +
+                                      tld + ". Expected in list: " +
+                                      prodIdFromTdml + ". Reg length: " + regLength +
+                                      " year(s) and domain count: " + dc);
+            }
           }
         }
       }
@@ -161,48 +154,36 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       foreach (var tld in tlds)
       {
         IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(tld);
-        List<int> regLengths = new List<int>();
+        List<int> reglengths = TLDML.TLDMLProduct.GetAllEnabledTransferLengths(tld);
 
-        for (int regLength = info.Product.TransferYears.Min;
-             regLength <= info.Product.TransferYears.Max;
-             regLength++)
+        foreach (int reglength in reglengths)
         {
-          regLengths.Add(regLength);
-        }
-
-        foreach (int dc in domainCount)
-        {
-          List<int> transferProductIds = info.GetValidTransferProductIdList(dc, regLengths.ToArray());
-
-          foreach (int regLength in regLengths)
+          foreach (int dc in domainCount)
           {
+            List<int> transferProductIds = info.GetValidTransferProductIdList(dc, reglength);
+
             int prodIdFromTdml =
-              Convert.ToInt32(TLDMLProduct.GetPFID(tld, regLength, productfamily.DomainTransfer, dc));
-            
+              Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.DomainTransfer, dc));
+
             AssertHelper.AddResults(transferProductIds.Contains(prodIdFromTdml),
-                                    "Product id from tdml was not found in the transferProductIds list for: " + tld + ". Expected in list: " +
-                                    prodIdFromTdml + ". Reg length: " + regLength +
+                                    "Product id from tdml was not found in the transferProductIds list for: " + tld +
+                                    ". Expected in list: " +
+                                    prodIdFromTdml + ". Reg length: " + reglength +
                                     " year(s) and domain count: " + dc);
           }
         }
       }
     }
-  
+
     [TestMethod]
     public void GetDotTypeProductIds2()
     {
       foreach (var tld in tlds)
       {
         IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(tld);
-        List<int> regLengths = new List<int>();
 
-        for (int regLength = info.Product.RegistrationYears.Min;
-             regLength <= info.Product.RegistrationYears.Max;
-             regLength++)
-        {
-          regLengths.Add(regLength);
-        }
-
+        List<int> regLengths = TLDML.TLDMLProduct.GetAllEnabledRegistrationLengths(tld);
+        
         foreach (int dc in domainCount)
         {
           List<int> registrationProductIds = info.GetValidRegistrationProductIdList(dc, regLengths.ToArray());
@@ -259,7 +240,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         AssertHelper.AddResults(!string.IsNullOrEmpty(registryId), "GetRegistryIdByProductId not found for: : " + tld);
       }
     }
-    
+
     [TestMethod]
     public void TLDMLAttributeExists()
     {
@@ -272,15 +253,141 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
+    public void PropertiesAreValid()
+    {
+      foreach (string tld in tlds)
+      {
+        IDotTypeInfo tldml = DotTypeCache.GetDotTypeInfo(tld);
+
+        List<int> expiredAuctionLengths = TLDML.TLDMLProduct.GetAllEnabledExpiredAuctionLengths(tld);
+        
+        AssertHelper.AddResults(tldml.Product.ExpiredAuctionsYears.Max == expiredAuctionLengths.Max(), "Product.ExpiredAuctionsYears.Max is not correct for: " +
+          tld + ". Expected: " + expiredAuctionLengths.Max() + ". Actual: " + tldml.Product.ExpiredAuctionsYears.Max);
+
+        AssertHelper.AddResults(tldml.Product.ExpiredAuctionsYears.Min == expiredAuctionLengths.Min(), "Product.ExpiredAuctionsYears.Min is not correct for: " +
+          tld + ". Expected: " + expiredAuctionLengths.Min() + ". Actual: " + tldml.Product.ExpiredAuctionsYears.Min);
+
+        AssertHelper.AddResults(tldml.Product.ExpiredAuctionsYears.IsValid(1), "ExpiredAuctionsYears.IsValid(1) returned false for: " + tld);
+
+        List<int> regLengths = TLDML.TLDMLProduct.GetAllEnabledRegistrationLengths(tld);
+
+        AssertHelper.AddResults(regLengths.Max() == tldml.Product.RegistrationYears.Max, "Product.RegistrationYears.Max did not match for: " + tld +
+          ". Expected: " + regLengths.Max() + ". Actual: " + tldml.Product.RegistrationYears.Max);
+
+        AssertHelper.AddResults(regLengths.Min() == tldml.Product.RegistrationYears.Min, "Product.RegistrationYears.Min did not match for: " + tld +
+          ". Expected: " + regLengths.Min() + ". Actual: " + tldml.Product.RegistrationYears.Min);
+        
+        AssertHelper.AddResults(tldml.Product.RegistrationYears.IsValid(1), "Product.RegistrationYears.IsValid(1) is false for:  " + tld);
+
+        List<int> renewalLengths = TLDML.TLDMLProduct.GetAllEnabledRenewalLengths(tld);
+
+        AssertHelper.AddResults(tldml.Product.RenewalYears.Max == renewalLengths.Max(), "Product.RenewalYears.Max did not match for: " + tld +
+          ". Expected: " + renewalLengths.Max() + ". Actual: " + tldml.Product.RenewalYears.Max);
+
+        AssertHelper.AddResults(tldml.Product.RenewalYears.Min == renewalLengths.Min(), "Product.RenewalYears.Min did not match for: " + tld +
+            ". Expected: " + renewalLengths.Min() + ". Actual: " + tldml.Product.RenewalYears.Min);
+
+        AssertHelper.AddResults(tldml.Product.RenewalYears.IsValid(1), "Product.RenewalYears.IsValid(1) is false for: " + tld);
+
+        List<int> transferLengths = TLDML.TLDMLProduct.GetAllEnabledTransferLengths(tld);
+
+        AssertHelper.AddResults(tldml.Product.TransferYears.Max == transferLengths.Max(), "Product.TransferYears.Max did not match for " + tld +
+            ". Expected: " + transferLengths.Max() + ". Actual: " + tldml.Product.TransferYears.Max);
+
+        AssertHelper.AddResults(tldml.Product.TransferYears.Min == transferLengths.Min(), "Product.TransferYears.Min did not match for " + tld +
+            ". Expected: " + transferLengths.Min() + ". Actual: " + tldml.Product.TransferYears.Min);
+
+        AssertHelper.AddResults(tldml.Product.TransferYears.IsValid(1), "Product.TransferYears.IsValid(1) is false for: " + tld);
+
+        //List<int> preRegLengths = TLDML.TLDMLProduct. GetAllEnabledTransferLengths(tld);
+
+        //AssertHelper.AddResults(tldml.Product.PreregistrationYears("GA").Max,
+        //  "Product.PreregistrationYears.Max did not match for " + tld + ". Static: " + staticTld.Product.PreregistrationYears("GA").Max +
+        //  ". Tldml Enabled: " + tldml.Product.PreregistrationYears("GA").Max);
+
+        //AssertHelper.AddResults(staticTld.Product.PreregistrationYears("GA").Min == tldml.Product.PreregistrationYears("GA").Min,
+        //  "Product.PreregistrationYears.Min did not match for " + tld + ". Static: " + staticTld.Product.PreregistrationYears("GA").Min +
+        //  ". Tldml Enabled: " + tldml.Product.PreregistrationYears("GA").Min);
+
+        //AssertHelper.AddResults(staticTld.Product.PreregistrationYears("GA").IsValid(1) == tldml.Product.PreregistrationYears("GA").IsValid(1),
+        //  "Product.PreregistrationYears.IsValid(1) did not match for " + tld + ". Static: " + staticTld.Product.PreregistrationYears("GA").IsValid(1) +
+        //  ". Tldml Enabled: " + tldml.Product.PreregistrationYears("GA").IsValid(1));
+
+        //AssertHelper.AddResults(staticTld.TldId.ToString() == tldml.TldId.ToString(), "TldId did not match for " + tld +
+        //  ". Static: " + staticTld.TldId + ". Tldml Enabled: " + tldml.TldId);
+
+        //AssertHelper.AddResults(staticTld.DotType.ToLower() == tldml.DotType.ToLower(), "DotType static vs tldml did not match for " + tld + ". Static: "
+        //  + staticTld.DotType.ToLower() + ". Tldml Enabled: " + tldml.DotType.ToLower());
+
+        //AssertHelper.AddResults(staticTld.IsMultiRegistry == tldml.IsMultiRegistry, "IsMultiRegistry did not match for " + tld + ". Static: "
+        //  + staticTld.IsMultiRegistry + ". Tldml Enabled: " + tldml.IsMultiRegistry);
+
+        //AssertHelper.AddResults(staticTld.MaxExpiredAuctionRegLength == tldml.MaxExpiredAuctionRegLength, "MaxExpiredAuctionRegLength did not match for " + tld + ". Static: "
+        //  + staticTld.MaxExpiredAuctionRegLength + ". Tldml Enabled: " + tldml.MaxExpiredAuctionRegLength);
+
+        //AssertHelper.AddResults(staticTld.MaxPreRegLength == tldml.MaxPreRegLength, "MaxPreRegLength did not match for " + tld + ". Static: "
+        //  + staticTld.MaxPreRegLength + ". Tldml Enabled: " + tldml.MaxPreRegLength);
+
+        //AssertHelper.AddResults(staticTld.MaxRegistrationLength == tldml.MaxRegistrationLength, "MaxRegistrationLength did not match for " + tld + ". Static: "
+        //  + staticTld.MaxRegistrationLength + ". Tldml Enabled: " + tldml.MaxRegistrationLength);
+
+        //AssertHelper.AddResults(staticTld.MaxRenewalLength == tldml.MaxRenewalLength, "MaxRenewalLength did not match for " + tld + ". Static: "
+        //  + staticTld.MaxRenewalLength + ". Tldml Enabled: " + tldml.MaxRenewalLength);
+
+        //AssertHelper.AddResults(staticTld.MaxTransferLength == tldml.MaxTransferLength, "MaxTransferLength did not match for " + tld + ". Static: "
+        //  + staticTld.MaxTransferLength + ". Tldml Enabled: " + tldml.MaxTransferLength);
+
+        //AssertHelper.AddResults(staticTld.MinExpiredAuctionRegLength == tldml.MinExpiredAuctionRegLength, "MinExpiredAuctionRegLength did not match for " + tld + ". Static: "
+        //  + staticTld.MinExpiredAuctionRegLength + ". Tldml Enabled: " + tldml.MinExpiredAuctionRegLength);
+
+        //AssertHelper.AddResults(staticTld.MinPreRegLength == tldml.MinPreRegLength, "MinPreRegLength did not match for " + tld + ". Static: "
+        //  + staticTld.MinPreRegLength + ". Tldml Enabled: " + tldml.MinPreRegLength);
+
+        //AssertHelper.AddResults(staticTld.MinRegistrationLength == tldml.MinRegistrationLength, "MinRegistrationLength did not match for " + tld + ". Static: "
+        //  + staticTld.MinRegistrationLength + ". Tldml Enabled: " + tldml.MinRegistrationLength);
+
+        //AssertHelper.AddResults(staticTld.MinRenewalLength == tldml.MinRenewalLength, "MinRenewalLength did not match for " + tld + ". Static: "
+        //  + staticTld.MinRenewalLength + ". Tldml Enabled: " + tldml.MinRenewalLength);
+
+        //AssertHelper.AddResults(staticTld.MinTransferLength == tldml.MinTransferLength, "MinTransferLength did not match for " + tld + ". Static: "
+        //  + staticTld.MinTransferLength + ". Tldml Enabled: " + tldml.MinTransferLength);
+
+        //AssertHelper.AddResults(staticTld.Tld.RenewProhibitedPeriodForExpiration == tldml.Tld.RenewProhibitedPeriodForExpiration, "RenewProhibitedPeriodForExpiration did not match for " + tld + ". Static: "
+        // + staticTld.Tld.RenewProhibitedPeriodForExpiration + ". Tldml Enabled: " + tldml.Tld.RenewProhibitedPeriodForExpiration);
+
+        //AssertHelper.AddResults(staticTld.Tld.RenewProhibitedPeriodForExpirationUnit == tldml.Tld.RenewProhibitedPeriodForExpirationUnit, "RenewProhibitedPeriodForExpirationUnit did not match for " + tld + ". Static: "
+        // + staticTld.Tld.RenewProhibitedPeriodForExpirationUnit + ". Tldml Enabled: " + tldml.Tld.RenewProhibitedPeriodForExpirationUnit);
+
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    [TestMethod]
     public void OrgStaticVsTLDMLEnabled()
     {
       foreach (var tld in tlds)
       {
         Type staticDotTypesType =
-          Assembly.GetAssembly(typeof (DotTypeCache)).GetType("Atlantis.Framework.DotTypeCache.StaticDotTypes");
+          Assembly.GetAssembly(typeof(DotTypeCache)).GetType("Atlantis.Framework.DotTypeCache.StaticDotTypes");
         MethodInfo getStaticDotType = staticDotTypesType.GetMethod("GetDotType",
                                                                    BindingFlags.Static | BindingFlags.Public);
-        object[] methodParms = new object[1] {"org"};
+        object[] methodParms = new object[1] { "org" };
         IDotTypeInfo staticOrg = getStaticDotType.Invoke(null, methodParms) as IDotTypeInfo;
 
         IDotTypeInfo tldmlOrg = DotTypeCache.GetDotTypeInfo("org");

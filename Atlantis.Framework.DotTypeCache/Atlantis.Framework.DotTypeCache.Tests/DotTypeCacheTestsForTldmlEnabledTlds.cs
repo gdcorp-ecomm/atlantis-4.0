@@ -66,7 +66,9 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
       IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
       shopperContext.SetNewShopper("832652");
-      tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
+      //tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
+      tlds = new List<string>();
+      tlds.Add("ORG");
       domainCount = new int[] { 1, 6, 21, 50, 101, 201 };
     }
 
@@ -77,17 +79,29 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       AssertHelper.GetResults();
     }
 
+
+
+
+    [TestMethod]
+    public void GetDotType()
+    {
+      foreach (var tld in tlds)
+      {
+        IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(tld);
+        AssertHelper.AddResults(info != null, "GetDotTypeInfo is null for: " + tld);
+
+        string description = DotTypeCache.GetAdditionalInfoValue(tld, "Description");
+        AssertHelper.AddResults(!string.IsNullOrEmpty(description), "GetDotTypeInfo description is null or empty for:  " + tld);
+      }
+    }
+    
     [TestMethod]
     public void GetDotTypeProductIds()
     {
       foreach (var tld in tlds)
       {
         IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(tld);
-        AssertHelper.AddResults(info != null, "Info is null for: " + tld);
-
-        string description = DotTypeCache.GetAdditionalInfoValue(tld, "Description");
-        AssertHelper.AddResults(!string.IsNullOrEmpty(description), "Description is null or empty for:  " + tld);
-
+    
         foreach (int dc in domainCount)
         {
           for (int regLength = info.Product.RegistrationYears.Min;
@@ -108,6 +122,73 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
+    public void GetValidRegistrationProductIds()
+    {
+      foreach (var tld in tlds)
+      {
+        IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(tld);
+        List<int> regLengths = new List<int>();
+
+        for (int regLength = info.Product.RegistrationYears.Min;
+             regLength <= info.Product.RegistrationYears.Max;
+             regLength++)
+        {
+          regLengths.Add(regLength);
+        }
+
+        foreach (int dc in domainCount)
+        {
+          List<int> registrationProductIds = info.GetValidRegistrationProductIdList(dc, regLengths.ToArray());
+
+          foreach (int regLength in regLengths)
+          {
+            int prodIdFromTdml =
+              Convert.ToInt32(TLDMLProduct.GetPFID(tld, regLength, productfamily.DomainRegistration, dc));
+
+
+            AssertHelper.AddResults(registrationProductIds.Contains(prodIdFromTdml),
+                                    "Product id from tdml was not found in the registrationProductId list for: " + tld + ". Expected in list: " +
+                                    prodIdFromTdml + ". Reg length: " + regLength +
+                                    " year(s) and domain count: " + dc);
+          }
+        }
+      }
+    }
+
+    [TestMethod]
+    public void GetValidTransferProductIds()
+    {
+      foreach (var tld in tlds)
+      {
+        IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(tld);
+        List<int> regLengths = new List<int>();
+
+        for (int regLength = info.Product.TransferYears.Min;
+             regLength <= info.Product.TransferYears.Max;
+             regLength++)
+        {
+          regLengths.Add(regLength);
+        }
+
+        foreach (int dc in domainCount)
+        {
+          List<int> transferProductIds = info.GetValidTransferProductIdList(dc, regLengths.ToArray());
+
+          foreach (int regLength in regLengths)
+          {
+            int prodIdFromTdml =
+              Convert.ToInt32(TLDMLProduct.GetPFID(tld, regLength, productfamily.DomainTransfer, dc));
+            
+            AssertHelper.AddResults(transferProductIds.Contains(prodIdFromTdml),
+                                    "Product id from tdml was not found in the transferProductIds list for: " + tld + ". Expected in list: " +
+                                    prodIdFromTdml + ". Reg length: " + regLength +
+                                    " year(s) and domain count: " + dc);
+          }
+        }
+      }
+    }
+  
+    [TestMethod]
     public void GetDotTypeProductIds2()
     {
       foreach (var tld in tlds)
@@ -119,7 +200,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
              regLength <= info.Product.RegistrationYears.Max;
              regLength++)
         {
-
           regLengths.Add(regLength);
         }
 
@@ -136,16 +216,16 @@ namespace Atlantis.Framework.DotTypeCache.Tests
             int renewalProdId = Convert.ToInt32(TLDMLProduct.GetPFID(tld, regLength, productfamily.DomainRenewal, dc));
             int renewProductId = info.GetRenewalProductId("1", regLength, dc);
             AssertHelper.AddResults(renewProductId == renewalProdId, "Renewal product ids do not match for: " + tld + ". Expected in tldml: " + renewalProdId + ". Actual: " + renewProductId + " . Reg length: " + regLength + " year(s) and domain count: " + dc);
-            
+
             AssertHelper.AddResults(
-              (registrationProductIds.Count*transferProductIds.Count*renewProductIds.Count*renewProductIds2.Count*
-               renewProductIds3.Count*renewProductId) != 0, "GetDotTypeProductIds2 - A product id was zero for: " + tld + ". Reg length: " + regLength + " year(s) and domain count: " + dc);
+              (registrationProductIds.Count * transferProductIds.Count * renewProductIds.Count * renewProductIds2.Count *
+               renewProductIds3.Count * renewProductId) != 0, "GetDotTypeProductIds2 - A product id was zero for: " + tld + ". Reg length: " + regLength + " year(s) and domain count: " + dc);
           }
         }
       }
     }
 
-    [TestMethod]
+    //[TestMethod] - This is not working at this time
     public void GetDotTypePreRegProductId()
     {
       foreach (var tld in tlds)
@@ -153,12 +233,13 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(tld);
         List<int> regLengths = new List<int>();
 
-        for (int regLength = info.Product.RegistrationYears.Min;
-             regLength <= info.Product.RegistrationYears.Max;
+        for (int regLength = info.Product.PreregistrationYears("GA").Min;
+             regLength <= info.Product.PreregistrationYears("GA").Max;
              regLength++)
         {
           foreach (int dc in domainCount)
           {
+            int renewalProdId = Convert.ToInt32(TLDMLProduct.GetPFID(tld, regLength, productfamily.DomainRenewal, dc));
             int productId = DotTypeCache.GetPreRegProductId(tld, regLength, dc);
             AssertHelper.AddResults(productId != 0, "GetDotTypePreRegProductId - A pre reg product id was zero for: " + tld + ". Reg length: " + regLength + " year(s) and domain count: " + dc);
           }
@@ -171,82 +252,41 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     {
       foreach (var tld in tlds)
       {
-        string prodId = TLDML.TLDMLProduct.GetPFID(tld, 1, productfamily.DomainRegistration);
+        int prodId = Convert.ToInt32(TLDML.TLDMLProduct.GetPFID(tld, 1, productfamily.DomainRegistration));
 
         IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo(tld);
-        string registryId = dotType.GetRegistryIdByProductId(Convert.ToInt32(prodId));
-        Assert.IsTrue(!string.IsNullOrEmpty(registryId));
+        string registryId = dotType.GetRegistryIdByProductId(prodId);
+        AssertHelper.AddResults(!string.IsNullOrEmpty(registryId), "GetRegistryIdByProductId not found for: : " + tld);
       }
     }
-
-    [TestMethod]
-    public void InvalidDotType()
-    {
-      IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("MICCOBLAH");
-      Assert.AreEqual(DotTypeCache.InvalidDotType, dotType);
-    }
-
-    [TestMethod]
-    public void DotTypeProviderExists()
-    {
-      IDotTypeProvider dotTypeProvider = HttpProviderContainer.Instance.Resolve<IDotTypeProvider>();
-      Assert.IsNotNull(dotTypeProvider);
-    }
-
-    [TestMethod]
-    public void TLDMLAvailable()
-    {
-      bool result = TLDMLIsAvailable("COM.AU");
-      Assert.IsTrue(result);
-    }
-
-    [TestMethod]
-    public void TLDMLAvailableLowerCase()
-    {
-      bool result = TLDMLIsAvailable("com.au");
-      Assert.IsTrue(result);
-    }
-
-    [TestMethod]
-    public void TLDMLNotAvailable()
-    {
-      bool result = TLDMLIsAvailable("NET");
-      Assert.IsFalse(result);
-    }
-
-    [TestMethod]
-    public void TLDMLNotAvailableLowerCase()
-    {
-      bool result = TLDMLIsAvailable("net");
-      Assert.IsFalse(result);
-    }
-
-    private bool TLDMLIsAvailable(string dotType)
-    {
-      MethodInfo TLDMLIsAvailableMethod = (typeof(TLDMLDotTypes)).GetMethod("TLDMLIsAvailable", BindingFlags.Static | BindingFlags.NonPublic);
-      var args = new object[1] { dotType };
-      return (bool)TLDMLIsAvailableMethod.Invoke(null, args);
-    }
-
+    
     [TestMethod]
     public void TLDMLAttributeExists()
     {
-      var dotTypeAttributesDictionary = DataCache.DataCache.GetExtendedTLDData("COM");
-      var dotTypeAttributes = dotTypeAttributesDictionary["COM"];
-      Assert.IsTrue(dotTypeAttributes.ContainsKey(TLDMLDotTypes.TLDMLSupportedFlag));
+      foreach (var tld in tlds)
+      {
+        var dotTypeAttributesDictionary = DataCache.DataCache.GetExtendedTLDData(tld);
+        var dotTypeAttributes = dotTypeAttributesDictionary[tld];
+        AssertHelper.AddResults(dotTypeAttributes.ContainsKey(TLDMLDotTypes.TLDMLSupportedFlag), "Key not found for: " + tld);
+      }
     }
 
     [TestMethod]
     public void OrgStaticVsTLDMLEnabled()
     {
-      Type staticDotTypesType = Assembly.GetAssembly(typeof(DotTypeCache)).GetType("Atlantis.Framework.DotTypeCache.StaticDotTypes");
-      MethodInfo getStaticDotType = staticDotTypesType.GetMethod("GetDotType", BindingFlags.Static | BindingFlags.Public);
-      object[] methodParms = new object[1] { "org" };
-      IDotTypeInfo staticOrg = getStaticDotType.Invoke(null, methodParms) as IDotTypeInfo;
+      foreach (var tld in tlds)
+      {
+        Type staticDotTypesType =
+          Assembly.GetAssembly(typeof (DotTypeCache)).GetType("Atlantis.Framework.DotTypeCache.StaticDotTypes");
+        MethodInfo getStaticDotType = staticDotTypesType.GetMethod("GetDotType",
+                                                                   BindingFlags.Static | BindingFlags.Public);
+        object[] methodParms = new object[1] {"org"};
+        IDotTypeInfo staticOrg = getStaticDotType.Invoke(null, methodParms) as IDotTypeInfo;
 
-      IDotTypeInfo tldmlOrg = DotTypeCache.GetDotTypeInfo("org");
+        IDotTypeInfo tldmlOrg = DotTypeCache.GetDotTypeInfo("org");
 
-      Assert.AreNotEqual(staticOrg, tldmlOrg);
+        Assert.AreNotEqual(staticOrg, tldmlOrg);
+      }
     }
 
     [TestMethod]

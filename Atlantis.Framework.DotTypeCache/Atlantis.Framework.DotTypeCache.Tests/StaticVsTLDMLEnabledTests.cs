@@ -119,17 +119,17 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         AssertHelper.AddResults(staticTld.Product.TransferYears.IsValid(1) == tldml.Product.TransferYears.IsValid(1),
           "Product.TransferYears.IsValid(1) did not match for " + tld + ". Static: " + staticTld.Product.TransferYears.IsValid(1) + ". Tldml Enabled: " + tldml.Product.TransferYears.IsValid(1));
 
-        AssertHelper.AddResults(staticTld.Product.PreregistrationYears("testing").Max == tldml.Product.PreregistrationYears("testing").Max,
-          "Product.PreregistrationYears.Max did not match for " + tld + ". Static: " + staticTld.Product.PreregistrationYears("testing").Max +
-          ". Tldml Enabled: " + tldml.Product.PreregistrationYears("testing").Max);
+        AssertHelper.AddResults(staticTld.Product.PreregistrationYears("GA").Max == tldml.Product.PreregistrationYears("GA").Max,
+          "Product.PreregistrationYears.Max did not match for " + tld + ". Static: " + staticTld.Product.PreregistrationYears("GA").Max +
+          ". Tldml Enabled: " + tldml.Product.PreregistrationYears("GA").Max);
 
-        AssertHelper.AddResults(staticTld.Product.PreregistrationYears("testing").Min == tldml.Product.PreregistrationYears("testing").Min,
-          "Product.PreregistrationYears.Min did not match for " + tld + ". Static: " + staticTld.Product.PreregistrationYears("testing").Min +
-          ". Tldml Enabled: " + tldml.Product.PreregistrationYears("testing").Min);
+        AssertHelper.AddResults(staticTld.Product.PreregistrationYears("GA").Min == tldml.Product.PreregistrationYears("GA").Min,
+          "Product.PreregistrationYears.Min did not match for " + tld + ". Static: " + staticTld.Product.PreregistrationYears("GA").Min +
+          ". Tldml Enabled: " + tldml.Product.PreregistrationYears("GA").Min);
 
-        AssertHelper.AddResults(staticTld.Product.PreregistrationYears("testing").IsValid(1) == tldml.Product.PreregistrationYears("testing").IsValid(1),
-          "Product.PreregistrationYears.IsValid(1) did not match for " + tld + ". Static: " + staticTld.Product.PreregistrationYears("testing").IsValid(1) +
-          ". Tldml Enabled: " + tldml.Product.PreregistrationYears("testing").IsValid(1));
+        AssertHelper.AddResults(staticTld.Product.PreregistrationYears("GA").IsValid(1) == tldml.Product.PreregistrationYears("GA").IsValid(1),
+          "Product.PreregistrationYears.IsValid(1) did not match for " + tld + ". Static: " + staticTld.Product.PreregistrationYears("GA").IsValid(1) +
+          ". Tldml Enabled: " + tldml.Product.PreregistrationYears("GA").IsValid(1));
 
         AssertHelper.AddResults(staticTld.TldId.ToString() == tldml.TldId.ToString(), "TldId did not match for " + tld +
           ". Static: " + staticTld.TldId + ". Tldml Enabled: " + tldml.TldId);

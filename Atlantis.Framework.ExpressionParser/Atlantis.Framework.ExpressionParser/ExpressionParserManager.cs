@@ -1,22 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using Atlantis.Framework.Interface;
 using NCalc;
 
 namespace Atlantis.Framework.ExpressionParser
 {
-  public static class ExpressionParserManager
+  public class ExpressionParserManager
   {
-    public delegate bool EvaluateFunctionDelegate(string functionName, IEnumerable<string> parameters);
+    public delegate bool EvaluateFunctionDelegate(string functionName, IEnumerable<string> parameters, IProviderContainer providerContainer);
+
+    private IProviderContainer ProviderContainer { get; set; }
 
     public static EvaluateFunctionDelegate EvaluateFunctionHandler { get; set; }
+    
+    public ExpressionParserManager(IProviderContainer providerContainer)
+    {
+      ProviderContainer = providerContainer;
+    }
 
-    private static void EvaluateFunction(string functionName, FunctionArgs functionArgs)
+    private void EvaluateFunction(string functionName, FunctionArgs functionArgs)
     {
       IEnumerable<string> expectedValues = GetExpectedValues(functionArgs);
 
       if (EvaluateFunctionHandler != null)
       {
-        functionArgs.Result = EvaluateFunctionHandler.Invoke(functionName, expectedValues); 
+        functionArgs.Result = EvaluateFunctionHandler.Invoke(functionName, expectedValues, ProviderContainer); 
       }
       else
       {
@@ -24,7 +32,7 @@ namespace Atlantis.Framework.ExpressionParser
       }
     }
 
-    private static IEnumerable<string> GetExpectedValues(FunctionArgs functionArgs)
+    private IEnumerable<string> GetExpectedValues(FunctionArgs functionArgs)
     {
       IList<string> expectedValues = new List<string>(functionArgs.Parameters.Length);
 
@@ -36,7 +44,7 @@ namespace Atlantis.Framework.ExpressionParser
       return expectedValues;
     }
 
-    public static bool EvaluateExpression(string rawExpression)
+    public bool EvaluateExpression(string rawExpression)
     {
       bool evaluationResult = false;
 

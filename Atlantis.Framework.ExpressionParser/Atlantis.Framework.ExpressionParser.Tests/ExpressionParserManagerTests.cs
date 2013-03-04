@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.ExpressionParser.Tests.EvaluateFunctionHandlers;
+using Atlantis.Framework.Providers.ProviderContainer.Impl;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.ExpressionParser.Tests
@@ -6,6 +7,20 @@ namespace Atlantis.Framework.ExpressionParser.Tests
   [TestClass]
   public class ExpressionParserManagerTests
   {
+    private ExpressionParserManager _expressionParserManager;
+    private ExpressionParserManager ExpressionParserManager
+    {
+      get
+      {
+        if (_expressionParserManager == null)
+        {
+          _expressionParserManager = new ExpressionParserManager(new ObjectProviderContainer());
+        }
+
+        return _expressionParserManager;
+      }
+    }
+
     [TestInitialize]
     public void Initialize()
     {

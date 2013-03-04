@@ -1,0 +1,29 @@
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Conditions.Interface;
+using Atlantis.Framework.Interface;
+
+namespace Atlantis.Framework.Conditions.Tests.ConditionHandlers
+{
+  internal class AprimoMessageIdConditionHandler : IConditionHandler
+  {
+    private const string ACTUAL_VALUE = "1234";
+
+    public string ConditionName { get { return "aprimoMessageId"; } }
+    
+    public bool EvaluateCondition(string conditionName, IEnumerable<string> parameters, IProviderContainer providerContainer)
+    {
+      bool evaluationResult = false;
+
+      foreach (string parameter in parameters)
+      {
+        if (parameter == ACTUAL_VALUE)
+        {
+          evaluationResult = true;
+          break;
+        }
+      }
+
+      return evaluationResult;
+    }
+  }
+}

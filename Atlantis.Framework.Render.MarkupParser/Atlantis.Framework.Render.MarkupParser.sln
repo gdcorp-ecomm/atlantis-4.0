@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.MarkupParser", "Atlantis.Framework.Render.MarkupParser\Atlantis.Framework.Render.MarkupParser.csproj", "{772AAC0D-761E-4906-B46F-100E1AF3F5CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.MarkupParser.Tests", "Atlantis.Framework.Render.MarkupParser.Tests\Atlantis.Framework.Render.MarkupParser.Tests.csproj", "{6B3D6FC1-972A-44E1-9BD3-006D97AED8A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ExpressionParser", "..\Atlantis.Framework.ExpressionParser\Atlantis.Framework.ExpressionParser\Atlantis.Framework.ExpressionParser.csproj", "{A06963BD-8807-4716-8CA3-B296C96831F4}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Atlantis.Framework.Render.MarkupParser\\Atlantis.Framework.Render.MarkupParser.csproj
+		SccProjectName1 = Atlantis.Framework.Render.MarkupParser
+		SccLocalPath1 = Atlantis.Framework.Render.MarkupParser
+		SccProjectUniqueName2 = Atlantis.Framework.Render.MarkupParser.Tests\\Atlantis.Framework.Render.MarkupParser.Tests.csproj
+		SccProjectName2 = Atlantis.Framework.Render.MarkupParser.Tests
+		SccLocalPath2 = Atlantis.Framework.Render.MarkupParser.Tests
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.ExpressionParser\\Atlantis.Framework.ExpressionParser\\Atlantis.Framework.ExpressionParser.csproj
+		SccProjectName3 = ../Atlantis.Framework.ExpressionParser/Atlantis.Framework.ExpressionParser
+		SccLocalPath3 = ..\\Atlantis.Framework.ExpressionParser\\Atlantis.Framework.ExpressionParser
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B3D6FC1-972A-44E1-9BD3-006D97AED8A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B3D6FC1-972A-44E1-9BD3-006D97AED8A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B3D6FC1-972A-44E1-9BD3-006D97AED8A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B3D6FC1-972A-44E1-9BD3-006D97AED8A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A06963BD-8807-4716-8CA3-B296C96831F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A06963BD-8807-4716-8CA3-B296C96831F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A06963BD-8807-4716-8CA3-B296C96831F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A06963BD-8807-4716-8CA3-B296C96831F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

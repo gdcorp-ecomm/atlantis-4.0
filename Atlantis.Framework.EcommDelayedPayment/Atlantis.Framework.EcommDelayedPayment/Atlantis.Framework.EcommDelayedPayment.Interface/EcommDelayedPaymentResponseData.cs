@@ -53,7 +53,7 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
           PopulateFormValues(formNode);
           RedirectURL = redirectURL.InnerText;
           RedirectAction = "POST";
-          foreach(XmlAttribute currentAttribute in redirectTypeNod)
+          foreach(XmlAttribute currentAttribute in redirectTypeNod.Attributes)
           {
             if (currentAttribute.Name=="action")
             {

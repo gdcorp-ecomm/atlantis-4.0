@@ -16,6 +16,7 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
     public string RedirectURL { get; set; }
     public string ErrorOccured { get; set; }
     public string InvoiceID { get; set; }
+    public string RedirectType { get; set; }
 
     public Dictionary<string, string> FormValues
     {
@@ -48,8 +49,17 @@ namespace Atlantis.Framework.EcommDelayedPayment.Interface
           redirectDoc.LoadXml(redirectXML);
           XmlNode redirectURL = redirectDoc.SelectSingleNode("//Redirect/URL");
           XmlNode formNode = redirectDoc.SelectSingleNode("//Redirect/Form");
+          XmlNode redirectTypeNod = redirectDoc.SelectSingleNode("//Redirect/Type");
           PopulateFormValues(formNode);
           RedirectURL = redirectURL.InnerText;
+          if (redirectTypeNod != null)
+          {
+            RedirectType = redirectTypeNod.InnerText;
+          }
+          else
+          {
+            RedirectType = "POST";
+          }
         }
         else if (!string.IsNullOrEmpty(errorXML))
         {

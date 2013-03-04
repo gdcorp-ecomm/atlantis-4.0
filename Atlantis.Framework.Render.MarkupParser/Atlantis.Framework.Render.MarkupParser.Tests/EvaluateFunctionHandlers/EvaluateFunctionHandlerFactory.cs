@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Render.MarkupParser.Tests.EvaluateFunctionHandlers;
 
 namespace Atlantis.Framework.ExpressionParser.Tests.EvaluateFunctionHandlers
 {
   public static class EvaluateFunctionHandlerFactory
   {
-    public static bool EvaluateFunctionHandler(string functionName, IEnumerable<string> parameters)
+    public static bool EvaluateFunctionHandler(string functionName, IEnumerable<string> parameters, IProviderContainer providerContainer)
     {
       bool result = false;
 

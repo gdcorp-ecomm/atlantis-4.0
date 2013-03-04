@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using Atlantis.Framework.ExpressionParser;
 using Atlantis.Framework.ExpressionParser.Tests.EvaluateFunctionHandlers;
+using Atlantis.Framework.Providers.ProviderContainer.Impl;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.Render.MarkupParser.Tests
@@ -14,6 +15,20 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
   public class MarkupParserManagerTests
   {
     private const string PRE_PROCESSOR_PREFIX = "##";
+
+    private ExpressionParserManager _expressionParserManager;
+    private ExpressionParserManager ExpressionParserManager
+    {
+      get
+      {
+        if (_expressionParserManager == null)
+        {
+          _expressionParserManager = new ExpressionParserManager(new ObjectProviderContainer());
+        }
+
+        return _expressionParserManager;
+      }
+    }
 
     [TestInitialize]
     public void Initialize()

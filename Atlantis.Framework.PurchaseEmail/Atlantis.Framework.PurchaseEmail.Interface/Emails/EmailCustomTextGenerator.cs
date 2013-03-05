@@ -624,8 +624,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     {
       if (eulaProvider.ConfiguredEULA.Count > 0)
       {
-        itemsTextBuilder.Append("<br /><br /><table width='370' cellspacing='1' cellpadding='0' border='0' class='bodyText' bgcolor='#EEEEEE' ");
-        itemsTextBuilder.Append("style=\"font-size: 12px; color: black; font-family: arial,sans serif;\">");
+        itemsTextBuilder.Append("<br /><br /><table cellspacing='1' cellpadding='3' border='0' class='bodyText' bgcolor='#EEEEEE' ");
+        itemsTextBuilder.Append("style=\"font-size: 12px; color: black; font-family: arial,sans serif;width:auto;\">");
         itemsTextBuilder.Append("<tr><td colspan='3' style='line-height:5px'>&nbsp;</td></tr>");
         itemsTextBuilder.Append("<tr><td colspan='3' class='bodyText'><b>[%%LCST.REQ.UTOS_IMPORTANT_INFO%%]:</b></td></tr>");
         if (eulaProvider.ConfiguredEULA.Contains(eulaProvider.GetEULAData(EULARuleType.GiftCard)))

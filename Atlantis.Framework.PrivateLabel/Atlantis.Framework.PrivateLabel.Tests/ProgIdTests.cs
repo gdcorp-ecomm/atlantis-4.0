@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.PrivateLabel.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Xml.Linq;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.PrivateLabel.Tests
 {

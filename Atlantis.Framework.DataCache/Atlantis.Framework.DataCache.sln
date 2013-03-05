@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C9520C68-32F3-4322-B089-3EACEA925CEC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
@@ -20,9 +20,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache.LoadTest", "Atlantis.Framework.DataCache.LoadTest\Atlantis.Framework.DataCache.LoadTest.csproj", "{EBEE76E5-8FC7-431D-8097-AC87EB154068}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCacheService", "Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj", "{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCacheService.Tests", "Atlantis.Framework.DataCacheService.Tests\Atlantis.Framework.DataCacheService.Tests.csproj", "{F8F1FB10-7457-4840-B3BB-5DAF8076CE7D}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -43,6 +47,12 @@ Global
 		SccProjectUniqueName5 = Atlantis.Framework.DataCache.LoadTest\\Atlantis.Framework.DataCache.LoadTest.csproj
 		SccProjectName5 = Atlantis.Framework.DataCache.LoadTest
 		SccLocalPath5 = Atlantis.Framework.DataCache.LoadTest
+		SccProjectUniqueName6 = Atlantis.Framework.DataCacheService\\Atlantis.Framework.DataCacheService.csproj
+		SccProjectName6 = Atlantis.Framework.DataCacheService
+		SccLocalPath6 = Atlantis.Framework.DataCacheService
+		SccProjectUniqueName7 = Atlantis.Framework.DataCacheService.Tests\\Atlantis.Framework.DataCacheService.Tests.csproj
+		SccProjectName7 = Atlantis.Framework.DataCacheService.Tests
+		SccLocalPath7 = Atlantis.Framework.DataCacheService.Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.DataCache.vsmdi
@@ -106,6 +116,26 @@ Global
 		{EBEE76E5-8FC7-431D-8097-AC87EB154068}.Release|Mixed Platforms.Build.0 = Release|x86
 		{EBEE76E5-8FC7-431D-8097-AC87EB154068}.Release|x86.ActiveCfg = Release|x86
 		{EBEE76E5-8FC7-431D-8097-AC87EB154068}.Release|x86.Build.0 = Release|x86
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{F8F1FB10-7457-4840-B3BB-5DAF8076CE7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F1FB10-7457-4840-B3BB-5DAF8076CE7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F1FB10-7457-4840-B3BB-5DAF8076CE7D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F8F1FB10-7457-4840-B3BB-5DAF8076CE7D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F8F1FB10-7457-4840-B3BB-5DAF8076CE7D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F8F1FB10-7457-4840-B3BB-5DAF8076CE7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F1FB10-7457-4840-B3BB-5DAF8076CE7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F1FB10-7457-4840-B3BB-5DAF8076CE7D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F8F1FB10-7457-4840-B3BB-5DAF8076CE7D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F8F1FB10-7457-4840-B3BB-5DAF8076CE7D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

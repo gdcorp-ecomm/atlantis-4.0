@@ -62,7 +62,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       shopperContext.SetNewShopper("832652");
       //tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
       tlds = new List<string>();
-      tlds.Add("BORG");
+      tlds.Add("ORG");
       domainCount = new int[] { 1, 6, 21, 50, 101, 201 };
       standardRegLengths = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     }

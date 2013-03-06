@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="urn:PPWebSvcService" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:PPWebSvcService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s0="urn:PPWebSvcService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:PPWebSvcService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:PPWebSvcService">
       <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
@@ -167,12 +167,24 @@
     <wsdl:part name="return" type="s:short" />
     <wsdl:part name="plProfileID" type="s:int" />
   </wsdl:message>
-  <wsdl:message name="DeactivateProfileIn">
+  <wsdl:message name="GetInfoByShopperIDForCartIn">
     <wsdl:part name="bstrSourceData" type="s:string" />
     <wsdl:part name="bstrShopperID" type="s:string" />
-    <wsdl:part name="lProfileID" type="s:int" />
+    <wsdl:part name="lProfilesToGet" type="s:int" />
   </wsdl:message>
-  <wsdl:message name="DeactivateProfileOut" />
+  <wsdl:message name="GetInfoByShopperIDForCartOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MatchActiveProfileIn">
+    <wsdl:part name="bstrSourceData" type="s:string" />
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="bstrAcctType" type="s:string" />
+    <wsdl:part name="bstrAcctNumSuffix" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MatchActiveProfileOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="plProfileID" type="s:int" />
+  </wsdl:message>
   <wsdl:portType name="PPWebSvcServiceSoap">
     <wsdl:operation name="UpdateProfile">
       <wsdl:input message="s0:UpdateProfileIn" />
@@ -250,9 +262,13 @@
       <wsdl:input message="s0:MatchActiveCheckingProfileIn" />
       <wsdl:output message="s0:MatchActiveCheckingProfileOut" />
     </wsdl:operation>
-    <wsdl:operation name="DeactivateProfile">
-      <wsdl:input message="s0:DeactivateProfileIn" />
-      <wsdl:output message="s0:DeactivateProfileOut" />
+    <wsdl:operation name="GetInfoByShopperIDForCart">
+      <wsdl:input message="s0:GetInfoByShopperIDForCartIn" />
+      <wsdl:output message="s0:GetInfoByShopperIDForCartOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MatchActiveProfile">
+      <wsdl:input message="s0:MatchActiveProfileIn" />
+      <wsdl:output message="s0:MatchActiveProfileOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="PPWebSvcServiceSoap" type="s0:PPWebSvcServiceSoap">
@@ -428,8 +444,17 @@
         <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DeactivateProfile">
-      <soap:operation soapAction="#DeactivateProfile" style="rpc" />
+    <wsdl:operation name="GetInfoByShopperIDForCart">
+      <soap:operation soapAction="#GetInfoByShopperIDForCart" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchActiveProfile">
+      <soap:operation soapAction="#MatchActiveProfile" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:PPWebSvcService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

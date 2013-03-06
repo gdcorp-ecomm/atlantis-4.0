@@ -21,7 +21,14 @@ namespace Atlantis.Framework.EcommPaymentProfiles.Impl
         {
           ppWs.Url = ((WsConfigElement) config).WSURL;
           ppWs.Timeout = (int) request.RequestTimeout.TotalMilliseconds;
-          responseXml = ppWs.GetInfoByShopperID(string.Empty, request.ShopperID);
+          if (request.MaxProfileCount > 0)
+          {
+            responseXml = ppWs.GetInfoByShopperIDForCart(string.Empty, request.ShopperID, request.MaxProfileCount);
+          }
+          else
+          {
+            responseXml = ppWs.GetInfoByShopperID(string.Empty, request.ShopperID);
+          }
 
           if (responseXml.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
           {

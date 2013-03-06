@@ -6,6 +6,7 @@ namespace Atlantis.Framework.EcommPaymentProfiles.Interface
 {
   public class EcommPaymentProfilesRequestData : RequestData
   {
+    public int MaxProfileCount { get; set; }
     public EcommPaymentProfilesRequestData(string shopperId
       , string sourceUrl
       , string orderId
@@ -14,6 +15,18 @@ namespace Atlantis.Framework.EcommPaymentProfiles.Interface
       : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       RequestTimeout = TimeSpan.FromSeconds(5d);
+    }
+
+    public EcommPaymentProfilesRequestData(string shopperId
+      , string sourceUrl
+      , string orderId
+      , string pathway
+      , int pageCount
+      , int maxProfileCount)
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    {
+      RequestTimeout = TimeSpan.FromSeconds(5d);
+      MaxProfileCount = maxProfileCount;
     }
 
     public override string GetCacheMD5()

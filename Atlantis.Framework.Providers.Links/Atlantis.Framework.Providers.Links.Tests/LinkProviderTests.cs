@@ -303,10 +303,10 @@ namespace Atlantis.Framework.Providers.Links.Tests
       string url = links.CssRoot;
       Assert.IsTrue(url.Contains(nonManagerUrl));
 
-      IPAddress indiaAddress = IPAddress.Parse("172.29.33.45");
-      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true, indiaAddress);
+      IPAddress indiaP3VMwareAddress = IPAddress.Parse("172.29.33.45");
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true, indiaP3VMwareAddress);
       string c3url = links.CssRoot;
-      Assert.AreEqual(url, c3url);
+      Assert.AreNotEqual(url, c3url);
     }
 
 

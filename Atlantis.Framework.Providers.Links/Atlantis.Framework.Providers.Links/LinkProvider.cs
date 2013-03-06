@@ -836,11 +836,7 @@ namespace Atlantis.Framework.Providers.Links
       string result = nonManagerType;
       if ((_useC3ImageUrls.Value) && (_siteContext.Manager.IsManager))
       {
-        string country = InternalGeo.LookupCountry(OriginIP);
-        if (!country.Equals("in", StringComparison.OrdinalIgnoreCase))
-        {
-          result = managerType;
-        }
+        result = managerType;
       }
 
       return result;

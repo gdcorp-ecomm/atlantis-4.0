@@ -260,32 +260,33 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
 
     private Dictionary<int, ProductMap> SetProductMaps(XElement productMaps)
     {
-      Dictionary<int, ProductMap> prodMapDict = new Dictionary<int, ProductMap>();
-      int group = 0;
-      HashSet<int> types = new HashSet<int>();
-      string description = string.Empty;
+      var prodMapDict = new Dictionary<int, ProductMap>();
 
       if (productMaps != null)
       {
         foreach (XElement pm in productMaps.Elements())
         {
-          group = Convert.ToInt32(pm.Attribute("group").Value);
-          types = SetProductTypes(pm.Attribute("typelist").Value);
-          description = pm.Attribute("description").Value;
+          var group = Convert.ToInt32(pm.Attribute("group").Value);
+          var types = SetProductTypes(pm.Attribute("typelist").Value);
+          var namespaces = SetProductNamespaces(pm.Attribute("ns").Value);
+          var description = pm.Attribute("description").Value;
 
-          ProductMap productMap = new ProductMap(group, types, description);
+          var productMap = new ProductMap(group, types, namespaces, description);
           prodMapDict.Add(group, productMap);
         }
       }
       return prodMapDict;
     }
 
-    private HashSet<int> SetProductTypes(string typesStr) 
+    private static HashSet<int> SetProductTypes(string typesStr) 
     { 
       var set = new HashSet<int>();
-      if (string.IsNullOrWhiteSpace(typesStr)) { return null; }
+      if (string.IsNullOrWhiteSpace(typesStr))
+      {
+        return null;
+      }
       var split = typesStr.Split(',');
-      foreach (string typeStr in split)
+      foreach (var typeStr in split)
       {
         int type;
         if (int.TryParse(typeStr, out type))
@@ -298,6 +299,21 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaDataBuilder
           var aex = new AtlantisException("XmlBuilder::SetProductTypes", "0", "Unable to parse an Accordion Metadata Product Type value", data, null, null);
           Engine.Engine.LogAtlantisException(aex);
         }
+      }
+      return set.Count == 0 ? null : set;
+    }
+
+    private static HashSet<string> SetProductNamespaces(string namespacesStr)
+    {
+      var set = new HashSet<string>();
+      if (string.IsNullOrWhiteSpace(namespacesStr))
+      {
+        return null;
+      }
+      var split = namespacesStr.Split(',');
+      foreach (var namespaceStr in split)
+      {
+        set.Add(namespaceStr);
       }
       return set.Count == 0 ? null : set;
     }

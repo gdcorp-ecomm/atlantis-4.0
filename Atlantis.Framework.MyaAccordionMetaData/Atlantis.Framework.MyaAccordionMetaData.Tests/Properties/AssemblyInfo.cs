@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Release Build")]
 #endif
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
+[assembly: AssemblyCompany("GoDaddy.com")]
 [assembly: AssemblyProduct("Atlantis.Framework.MyaAccordionMetaData.Tests")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com 2011-2013")]
 [assembly: AssemblyTrademark("")]
@@ -35,4 +35,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.1.31")]
+[assembly: AssemblyFileVersion("4.13.2.28")]

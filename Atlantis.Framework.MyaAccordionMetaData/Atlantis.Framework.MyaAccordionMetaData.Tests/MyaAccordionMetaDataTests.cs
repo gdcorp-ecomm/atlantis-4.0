@@ -51,7 +51,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Impl")]
+    [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Impl.dll")]
     public void MyaAccordionMetaDataTest()
     {
 
@@ -198,7 +198,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
                 StringBuilder sb4 = new StringBuilder();
                 foreach (ProductMap pm in accordion.ProductMaps.Values)
                 {
-                  sb4.AppendFormat("group: {0}, types: {1}, desc: {2}\n", pm.Group, string.Join("* ", pm.TypeList), pm.Description);
+                  sb4.AppendFormat("group: {0}, types: {1}, ns: {3}, desc: {2}\n", pm.Group, string.Join("* ", pm.TypeList), pm.Description, string.Join("* ", pm.NamespaceList));
                 }
                 Debug.WriteLine(string.Format("{0}: {1}", p.Name, sb4.ToString()));
                 break;
@@ -242,7 +242,7 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Impl")]
+    [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Impl.dll")]
     public void CacheSoilTest()
     {
       #if DEBUG

@@ -11,10 +11,9 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
     [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Interface.dll")]
     public void SetProductTypesTest_TwoValues()
     {
-      XmlBuilder_Accessor target = new XmlBuilder_Accessor();
       string typesStr = "123,456";
       var expected = new HashSet<int>() { 123, 456 };
-      HashSet<int> actual = target.SetProductTypes(typesStr);
+      HashSet<int> actual = XmlBuilder_Accessor.SetProductTypes(typesStr);
       Assert.IsTrue(expected.SetEquals(actual));
     }
 
@@ -22,10 +21,9 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
     [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Interface.dll")]
     public void SetProductTypesTest_OneValue()
     {
-      XmlBuilder_Accessor target = new XmlBuilder_Accessor();
       string typesStr = "123";
       var expected = new HashSet<int>() { 123 };
-      HashSet<int> actual = target.SetProductTypes(typesStr);
+      HashSet<int> actual = XmlBuilder_Accessor.SetProductTypes(typesStr);
       Assert.IsTrue(expected.SetEquals(actual));
     }
 
@@ -33,10 +31,9 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
     [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Interface.dll")]
     public void SetProductTypesTest_EmptyStringValue()
     {
-      XmlBuilder_Accessor target = new XmlBuilder_Accessor();
       string typesStr = string.Empty;
       var expected = new HashSet<int>();
-      HashSet<int> actual = target.SetProductTypes(typesStr);
+      HashSet<int> actual = XmlBuilder_Accessor.SetProductTypes(typesStr);
       Assert.IsNull(actual);
     }
 
@@ -44,10 +41,9 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
     [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Interface.dll")]
     public void SetProductTypesTest_Null()
     {
-      XmlBuilder_Accessor target = new XmlBuilder_Accessor();
       string typesStr = null;
       var expected = new HashSet<int>();
-      HashSet<int> actual = target.SetProductTypes(typesStr);
+      HashSet<int> actual = XmlBuilder_Accessor.SetProductTypes(typesStr);
       Assert.IsNull(actual);
     }
 
@@ -55,10 +51,9 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
     [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Interface.dll")]
     public void SetProductTypesTest_NotAnInt()
     {
-      XmlBuilder_Accessor target = new XmlBuilder_Accessor();
       string typesStr = "a,23e";
       var expected = new HashSet<int>();
-      HashSet<int> actual = target.SetProductTypes(typesStr);
+      HashSet<int> actual = XmlBuilder_Accessor.SetProductTypes(typesStr);
       Assert.IsNull(actual);
     }
 
@@ -66,10 +61,9 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Tests
     [DeploymentItem("Atlantis.Framework.MyaAccordionMetaData.Interface.dll")]
     public void SetProductTypesTest_ExtraComma()
     {
-      XmlBuilder_Accessor target = new XmlBuilder_Accessor();
       string typesStr = "123,456,";
       var expected = new HashSet<int>() { 123, 456 };
-      HashSet<int> actual = target.SetProductTypes(typesStr);
+      HashSet<int> actual = XmlBuilder_Accessor.SetProductTypes(typesStr);
       Assert.IsTrue(expected.SetEquals(actual));
     }
 

@@ -15,6 +15,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
     {
       get { return _types; }
     }
+    private readonly HashSet<string> _namespaceList; 
+    public HashSet<string> NamespaceList
+    {
+      get { return _namespaceList; }
+    }
     private readonly string _description;
     public string Description
     {
@@ -22,10 +27,11 @@ namespace Atlantis.Framework.MyaAccordionMetaData.Interface.MetaData
     }
     #endregion
 
-    internal ProductMap(int group, HashSet<int> types, string description)
+    internal ProductMap(int group, HashSet<int> types, HashSet<string> namespaceList, string description)
     {
       _group = group;
       _types = types;
+      _namespaceList = namespaceList;
       _description = description;
     }
 

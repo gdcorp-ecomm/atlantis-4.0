@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KnownPrivateLabelIds.cs" />
     <Compile Include="MockManagerContext.cs" />
     <Compile Include="MockManagerContextSettings.cs" />
     <Compile Include="MockNoManagerContext.cs" />

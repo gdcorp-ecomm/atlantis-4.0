@@ -15,20 +15,7 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        int result = 6;
-        switch (PrivateLabelId)
-        {
-          case 1:
-            result = 1;
-            break;
-          case 2:
-            result = 5;
-            break;
-          case 1387:
-            result = 2;
-            break;
-        }
-        return result;
+        return KnownPrivateLabelIds.GetContextId(PrivateLabelId);
       }
     }
 
@@ -40,13 +27,13 @@ namespace Atlantis.Framework.Testing.MockProviders
         string result = "0";
         switch (PrivateLabelId)
         {
-          case 1:
+          case KnownPrivateLabelIds.GoDaddy:
             result = "1";
             break;
-          case 2:
+          case KnownPrivateLabelIds.BlueRazor:
             result = "2";
             break;
-          case 1397:
+          case KnownPrivateLabelIds.WildWestDomains:
             result = "1387";
             break;
         }
@@ -58,7 +45,7 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        int result = 1;
+        int result = KnownPrivateLabelIds.GoDaddy;
 
         if (Manager.IsManager)
         {

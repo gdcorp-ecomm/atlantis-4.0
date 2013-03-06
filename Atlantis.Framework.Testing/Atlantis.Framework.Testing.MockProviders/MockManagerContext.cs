@@ -87,20 +87,7 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        int result = 6;
-        switch (ManagerPrivateLabelId)
-        {
-          case 1:
-            result = 1;
-            break;
-          case 2:
-            result = 5;
-            break;
-          case 1387:
-            result = 2;
-            break;
-        }
-        return result;
+        return KnownPrivateLabelIds.GetContextId(ManagerPrivateLabelId);
       }
     }
   }

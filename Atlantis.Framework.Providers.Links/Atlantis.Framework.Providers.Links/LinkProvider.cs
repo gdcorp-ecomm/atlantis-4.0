@@ -99,24 +99,6 @@ namespace Atlantis.Framework.Providers.Links
       }
     }
 
-    private string _originIP;
-    private string OriginIP
-    {
-      get
-      {
-        if (_originIP == null)
-        {
-          _originIP = HttpContext.Current.Request.UserHostAddress;
-          if (Container.CanResolve<IProxyContext>())
-          {
-            IProxyContext proxy = Container.Resolve<IProxyContext>();
-            _originIP = proxy.OriginIP;
-          }
-        }
-        return _originIP;
-      }
-    }
-
     public bool IsDebugInternal()
     {
       return _siteContext.IsRequestInternal &&

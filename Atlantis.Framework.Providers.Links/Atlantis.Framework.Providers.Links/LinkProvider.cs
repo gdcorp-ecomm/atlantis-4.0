@@ -92,19 +92,11 @@ namespace Atlantis.Framework.Providers.Links
         return _contextHost;
       }
     }
-    /// <summary>
-    /// Used so if internal and debug url, https links are not given for relative urls
-    /// </summary>
-    /// <returns>true if the request is an internal IP and has .debug. in the url</returns>
+
     public bool IsDebugInternal()
     {
-      bool result = false;
-      if ((_siteContext.IsRequestInternal) &&
-        (ContextHost.Contains(".debug.")))
-      {
-        result = true;
-      }
-      return result;
+      return _siteContext.IsRequestInternal &&
+             (ContextHost.Contains(".debug.") || ContextHost.StartsWith("debug."));
     }
 
     private bool IsSecureConnection

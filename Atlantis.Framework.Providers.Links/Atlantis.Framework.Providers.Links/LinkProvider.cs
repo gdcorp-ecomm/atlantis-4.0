@@ -54,6 +54,7 @@ namespace Atlantis.Framework.Providers.Links
 
     private readonly Dictionary<int, Dictionary<string, string>> _linkMaps;
     private readonly ISiteContext _siteContext;
+    private Lazy<bool> _useC3ImageUrls;
 
     private enum UrlRootMode
     {
@@ -68,6 +69,13 @@ namespace Atlantis.Framework.Providers.Links
     {
       _linkMaps = new Dictionary<int, Dictionary<string, string>>(1);
       _siteContext = container.Resolve<ISiteContext>();
+      _useC3ImageUrls = new Lazy<bool>(() => { return GetUseC3ImageUrls(); });
+    }
+
+    private bool GetUseC3ImageUrls()
+    {
+      string useC3ImageUrlsSetting = DataCache.DataCache.GetAppSetting("LINKPROVIDER.USEC3IMAGEURLS");
+      return "true".Equals(useC3ImageUrlsSetting, StringComparison.OrdinalIgnoreCase);
     }
 
     private string _contextHost;
@@ -826,7 +834,7 @@ namespace Atlantis.Framework.Providers.Links
     private string ChooseLinkType(string nonManagerType, string managerType)
     {
       string result = nonManagerType;
-      if (_siteContext.Manager.IsManager)
+      if ((_useC3ImageUrls.Value) && (_siteContext.Manager.IsManager))
       {
         string country = InternalGeo.LookupCountry(OriginIP);
         if (!country.Equals("in", StringComparison.OrdinalIgnoreCase))

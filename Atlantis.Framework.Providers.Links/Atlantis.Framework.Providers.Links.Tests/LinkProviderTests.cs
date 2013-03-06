@@ -4,6 +4,7 @@ using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
@@ -183,6 +184,12 @@ namespace Atlantis.Framework.Providers.Links.Tests
       Assert.AreEqual(doubleLink.ToLowerInvariant(), homePage.ToLowerInvariant());
     }
 
+    void ValidateUseC3ImageUrlsIsOn()
+    {
+      string useC3ImageUrls = DataCache.DataCache.GetAppSetting("LINKPROVIDER.USEC3IMAGEURLS");
+      Assert.IsTrue("true".Equals(useC3ImageUrls, StringComparison.OrdinalIgnoreCase), "This test cannot complete successfully if LINKPROVIDER.USEC3IMAGEURLS is not 'true'");
+    }
+
     [TestMethod]
     public void ImageRoot()
     {
@@ -198,6 +205,8 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
       string c3url = links.ImageRoot;
+
+      ValidateUseC3ImageUrlsIsOn();
       Assert.IsTrue(c3url.Contains(managerUrl));
     }
 
@@ -216,6 +225,8 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
       string c3url = links.CssRoot;
+
+      ValidateUseC3ImageUrlsIsOn();
       Assert.IsTrue(c3url.Contains(managerUrl));
     }
 
@@ -234,6 +245,8 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
       string c3url = links.JavascriptRoot;
+
+      ValidateUseC3ImageUrlsIsOn();
       Assert.IsTrue(c3url.Contains(managerUrl));
     }
 
@@ -252,6 +265,8 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
       string c3url = links.LargeImagesRoot;
+
+      ValidateUseC3ImageUrlsIsOn();
       Assert.IsTrue(c3url.Contains(managerUrl));
     }
 
@@ -270,6 +285,8 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
       links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
       string c3url = links.PresentationCentralImagesRoot;
+
+      ValidateUseC3ImageUrlsIsOn();
       Assert.IsTrue(c3url.Contains(managerUrl));
     }
 

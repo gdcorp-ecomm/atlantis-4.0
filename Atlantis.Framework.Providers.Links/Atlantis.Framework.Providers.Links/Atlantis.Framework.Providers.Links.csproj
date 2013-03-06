@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InternalGeo.cs" />
     <Compile Include="LinkProvider.cs" />
     <Compile Include="LinkProviderCommonParameters.cs" />
     <Compile Include="LinkProviderEngineRequests.cs" />

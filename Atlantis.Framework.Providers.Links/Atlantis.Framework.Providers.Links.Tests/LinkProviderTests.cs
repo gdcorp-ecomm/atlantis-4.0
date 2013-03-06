@@ -1,101 +1,61 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.Interface;
-using System.Collections.Specialized;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Testing.MockHttpContext;
+using Atlantis.Framework.Testing.MockProviders;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Net;
 using System.Web;
 
 namespace Atlantis.Framework.Providers.Links.Tests
 {
-  /// <summary>
-  /// Summary description for UnitTest1
-  /// </summary>
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Interop.gdDataCacheLib.dll")]
+  [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
   public class LinkProviderTests
   {
-    public LinkProviderTests()
+    private ILinkProvider NewLinkProvider(string url, int privateLabelId, string shopperId, bool isInternal = false, bool isManager = false, IPAddress userHostAddress = null)
     {
-      //
-      // TODO: Add constructor logic here
-      //
-    }
-
-    private TestContext testContextInstance;
-
-    /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
-    {
-      get
+      MockHttpRequest request = new MockHttpRequest(url);
+      if (userHostAddress != null)
       {
-        return testContextInstance;
+        request.MockRemoteAddress(userHostAddress);
       }
-      set
+
+      MockHttpContext.SetFromWorkerRequest(request);
+
+      HttpContext.Current.Items[MockSiteContextSettings.IsRequestInternal] = isInternal;
+      HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] = privateLabelId;
+
+      if (isManager)
       {
-        testContextInstance = value;
+        HttpContext.Current.Items[MockManagerContextSettings.IsManager] = isManager;
+        HttpContext.Current.Items[MockManagerContextSettings.PrivateLabelId] = privateLabelId;
+        HttpContext.Current.Items[MockManagerContextSettings.ShopperId] = shopperId;
       }
-    }
 
-    #region Additional test attributes
-    //
-    // You can use the following additional attributes as you write your tests:
-    //
-    // Use ClassInitialize to run code before running the first test in the class
-    // [ClassInitialize()]
-    // public static void MyClassInitialize(TestContext testContext) { }
-    //
-    // Use ClassCleanup to run code after all tests in a class have run
-    // [ClassCleanup()]
-    // public static void MyClassCleanup() { }
-    //
-    // Use TestInitialize to run code before running each test 
-    // [TestInitialize()]
-    // public void MyTestInitialize() { }
-    //
-    // Use TestCleanup to run code after each test has run
-    // [TestCleanup()]
-    // public void MyTestCleanup() { }
-    //
-    #endregion
-
-    [TestInitialize]
-    public void InitializeTests()
-    {
-      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, TestContexts>();
-      HttpProviderContainer.Instance.RegisterProvider<IManagerContext, TestContexts>();
+      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
+      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
+      HttpProviderContainer.Instance.RegisterProvider<IManagerContext, MockManagerContext>();
       HttpProviderContainer.Instance.RegisterProvider<ILinkProvider, LinkProvider>();
-    }
 
-    private ILinkProvider NewLinkProvider(int privateLabelId, string shopperId)
-    {
-      HttpContext.Current.Items.Clear();
-      ISiteContext siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
-      ((TestContexts)siteContext).SetContextInfo(privateLabelId, shopperId);
-      IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
-      ((TestContexts)shopperContext).SetContextInfo(privateLabelId, shopperId);
-      IManagerContext managerContext = HttpProviderContainer.Instance.Resolve<IManagerContext>();
-      ((TestContexts)managerContext).SetContextInfo(privateLabelId, shopperId);
+      if (!isManager)
+      {
+        IShopperContext shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
+        shopperContext.SetNewShopper(shopperId);
+      }
 
       ILinkProvider linkProvider = HttpProviderContainer.Instance.Resolve<ILinkProvider>();
       return linkProvider;
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
-    [DeploymentItem("Atlantis.Framework.LinkInfo.Impl.dll")]
     public void LowerCaseForSEOFullUrlIgnored()
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://WWW.GODADDY.COM/default.aspx", string.Empty);
-      ILinkProvider links = NewLinkProvider(1, "832652");
+      ILinkProvider links = NewLinkProvider("http://WWW.GODADDY.COM/default.aspx", 1, "832652");
       LinkProvider.LowerCaseRelativeUrlsForSEO = true;
 
       string mixedCaseLink = links.GetUrl("SITEROOT", "TEST.AsPx");
@@ -103,11 +63,9 @@ namespace Atlantis.Framework.Providers.Links.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void LowerCaseForSEO()
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://WWW.GODADDY.COM/default.aspx", string.Empty);
-      ILinkProvider links = NewLinkProvider(1, "832652");
+      ILinkProvider links = NewLinkProvider("http://WWW.GODADDY.COM/default.aspx", 1, "832652");
       LinkProvider.LowerCaseRelativeUrlsForSEO = false;
 
       string mixedCaseLink = links.GetRelativeUrl("/tesT.aspx");
@@ -123,68 +81,53 @@ namespace Atlantis.Framework.Providers.Links.Tests
 
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void IsDebugInternal()
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://siteadmin.debug.intranet.gdg/default.aspx", string.Empty);
-      ILinkProvider links = NewLinkProvider(1, "832652");
-
+      ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1, "832652", true);
       Assert.IsTrue(links.IsDebugInternal());
 
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://siteadmin.dev.intranet.gdg/default.aspx", string.Empty);
-      links = NewLinkProvider(1, "832652");
-
+      links = NewLinkProvider("http://siteadmin.dev.intranet.gdg/default.aspx", 1, "832652", true);
       Assert.IsFalse(links.IsDebugInternal());
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void ProgId()
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://siteadmin.debug.intranet.gdg/default.aspx", string.Empty);
-
-      ILinkProvider links = NewLinkProvider(1724, "");
+      ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1724, string.Empty);
       string url = links.GetRelativeUrl("/test.aspx");
       Assert.IsTrue(url.Contains("prog_id="));
 
-      links = NewLinkProvider(1, "");
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1, string.Empty);
       url = links.GetRelativeUrl("/test.aspx");
       Assert.IsFalse(url.Contains("prog_id="));
 
-      links = NewLinkProvider(2, "");
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 2, string.Empty);
       url = links.GetRelativeUrl("/test.aspx");
       Assert.IsFalse(url.Contains("prog_id="));
 
-      links = NewLinkProvider(1387, "");
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1387, string.Empty);
       url = links.GetRelativeUrl("/test.aspx");
       Assert.IsFalse(url.Contains("prog_id="));
 
       LinkProviderCommonParameters.HandleProgId = false;
-      links = NewLinkProvider(1724, "");
+      links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?prog_id=hunter", 1724, string.Empty);
       url = links.GetRelativeUrl("/test.aspx");
       Assert.IsFalse(url.Contains("prog_id="));
       LinkProviderCommonParameters.HandleProgId = true;
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void FullUrlNoTilda()
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://siteadmin.debug.intranet.gdg/default.aspx", string.Empty);
-
-      ILinkProvider links = NewLinkProvider(1724, "");
-
+      ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 1724, string.Empty);
       string url = links.GetFullUrl("/test.aspx");
       Assert.IsTrue(url.Contains("prog_id="));
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void ISC()
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://siteadmin.debug.intranet.gdg/default.aspx", "isc=blue");
-
-      ILinkProvider links = NewLinkProvider(2, "");
+      ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx?isc=blue", 2, string.Empty);
 
       string url = links.GetRelativeUrl("/test.aspx");
       Assert.IsTrue(url.Contains("isc=blue"));
@@ -210,13 +153,10 @@ namespace Atlantis.Framework.Providers.Links.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void CommonParametersDelegate()
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://siteadmin.debug.intranet.gdg/default.aspx", string.Empty);
-
       LinkProviderCommonParameters.AddCommonParameters += new LinkProviderCommonParameters.AddCommonParametersHandler(HandleCommonParmeters);
-      ILinkProvider links = NewLinkProvider(2, "");
+      ILinkProvider links = NewLinkProvider("http://siteadmin.debug.intranet.gdg/default.aspx", 2, string.Empty);
 
       _handleActive = true;
       string url = links.GetRelativeUrl("/test.aspx");
@@ -225,27 +165,133 @@ namespace Atlantis.Framework.Providers.Links.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void XSSParameters()
     {
-      MockHttpContext.SetMockHttpContext("ssl-certificates.aspx", "http://www.godaddy.com/ssl-certificates.aspx", "ci=8979&%3C/script%3E%3Cscript%3Ealert%28666%29%3C/script%3E=123");
-      ILinkProvider links = NewLinkProvider(1, string.Empty);
+      ILinkProvider links = NewLinkProvider("http://www.godaddy.com/ssl-certificates.aspx&ci=8979&%3C/script%3E%3Cscript%3Ealert%28666%29%3C/script%3E=123", 1, string.Empty);
       _handleActive = true;
       string url = links.GetRelativeUrl("/test.aspx", HttpContext.Current.Request.QueryString);
       Assert.IsFalse(url.Contains('<'));
     }
 
     [TestMethod]
-    [DeploymentItem("Interop.gdDataCacheLib.dll")]
     public void DoubleSlashURL()
     {
       string homePage = "http://www.godaddy.com/default.aspx";
-      MockHttpContext.SetMockHttpContext("default.aspx", homePage, string.Empty);
-      ILinkProvider links = NewLinkProvider(1, "832652");
+      ILinkProvider links = NewLinkProvider(homePage, 1, "832652");
 
       string doubleLink = links.GetUrl("SITEROOT", "/default.aspx");
       Assert.AreEqual(doubleLink.ToLowerInvariant(), homePage.ToLowerInvariant());
     }
+
+    [TestMethod]
+    public void ImageRoot()
+    {
+      ILinkProvider links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+
+      string nonManagerUrl = links["EXTERNALIMAGEURL"];
+      string managerUrl = links["EXTERNALIMAGEURL.C3"];
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      string url = links.ImageRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
+      string c3url = links.ImageRoot;
+      Assert.IsTrue(c3url.Contains(managerUrl));
+    }
+
+    [TestMethod]
+    public void CSSRoot()
+    {
+      ILinkProvider links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+
+      string nonManagerUrl = links["EXTERNALCSSURL"];
+      string managerUrl = links["EXTERNALCSSURL.C3"];
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      string url = links.CssRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
+      string c3url = links.CssRoot;
+      Assert.IsTrue(c3url.Contains(managerUrl));
+    }
+
+    [TestMethod]
+    public void JavascriptRoot()
+    {
+      ILinkProvider links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+
+      string nonManagerUrl = links["EXTERNALJSURL"];
+      string managerUrl = links["EXTERNALJSURL.C3"];
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      string url = links.JavascriptRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
+      string c3url = links.JavascriptRoot;
+      Assert.IsTrue(c3url.Contains(managerUrl));
+    }
+
+    [TestMethod]
+    public void LargeImagesRoot()
+    {
+      ILinkProvider links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+
+      string nonManagerUrl = links["EXTERNALBIGIMAGE1URL"];
+      string managerUrl = links["EXTERNALBIGIMAGE1URL.C3"];
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      string url = links.LargeImagesRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
+      string c3url = links.LargeImagesRoot;
+      Assert.IsTrue(c3url.Contains(managerUrl));
+    }
+
+    [TestMethod]
+    public void PresentationCentralRoot()
+    {
+      ILinkProvider links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+
+      string nonManagerUrl = links["EXTERNALBIGIMAGE2URL"];
+      string managerUrl = links["EXTERNALBIGIMAGE2URL.C3"];
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      string url = links.PresentationCentralImagesRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true);
+      string c3url = links.PresentationCentralImagesRoot;
+      Assert.IsTrue(c3url.Contains(managerUrl));
+    }
+
+    [TestMethod]
+    public void CSSRootIndiaCSR()
+    {
+      ILinkProvider links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true);
+
+      string nonManagerUrl = links["EXTERNALCSSURL"];
+      string managerUrl = links["EXTERNALCSSURL.C3"];
+
+      Assert.AreNotEqual(nonManagerUrl, managerUrl);
+
+      string url = links.CssRoot;
+      Assert.IsTrue(url.Contains(nonManagerUrl));
+
+      IPAddress indiaAddress = IPAddress.Parse("172.29.33.45");
+      links = NewLinkProvider("http://www.godaddy.com/default.aspx", 1, string.Empty, true, true, indiaAddress);
+      string c3url = links.CssRoot;
+      Assert.AreEqual(url, c3url);
+    }
+
 
   }
 }

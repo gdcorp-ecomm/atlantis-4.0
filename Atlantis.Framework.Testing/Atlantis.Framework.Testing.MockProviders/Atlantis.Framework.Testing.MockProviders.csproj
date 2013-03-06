@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockManagerContext.cs" />
+    <Compile Include="MockManagerContextSettings.cs" />
     <Compile Include="MockNoManagerContext.cs" />
     <Compile Include="MockShopperContext.cs" />
     <Compile Include="MockShopperContextSettings.cs" />

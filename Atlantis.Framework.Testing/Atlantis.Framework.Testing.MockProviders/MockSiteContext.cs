@@ -24,7 +24,7 @@ namespace Atlantis.Framework.Testing.MockProviders
           case 2:
             result = 5;
             break;
-          case 1397:
+          case 1387:
             result = 2;
             break;
         }
@@ -59,7 +59,12 @@ namespace Atlantis.Framework.Testing.MockProviders
       get
       {
         int result = 1;
-        if (HttpContext.Current != null)
+
+        if (Manager.IsManager)
+        {
+          result = Manager.ManagerPrivateLabelId;
+        }
+        else if (HttpContext.Current != null)
         {
           if (HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] != null)
           {

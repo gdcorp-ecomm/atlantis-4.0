@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C6CD6C4E-87A6-4E97-9960-AAF4F2D01E44}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
@@ -28,11 +28,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockProviders", "..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj", "{5487DEF2-0FA7-4B77-9AAD-0355784589D6}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
 		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.Providers.Links.sln
@@ -68,6 +70,10 @@ Global
 		SccProjectUniqueName9 = Atlantis.Framework.Providers.Links.Tests\\Atlantis.Framework.Providers.Links.Tests.csproj
 		SccProjectName9 = Atlantis.Framework.Providers.Links.Tests
 		SccLocalPath9 = Atlantis.Framework.Providers.Links.Tests
+		SccProjectUniqueName10 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders\\Atlantis.Framework.Testing.MockProviders.csproj
+		SccProjectTopLevelParentUniqueName10 = Atlantis.Framework.Providers.Links.sln
+		SccProjectName10 = ../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockProviders
+		SccLocalPath10 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.Providers.Links.vsmdi
@@ -113,6 +119,10 @@ Global
 		{B3F24D51-ECAC-46AC-983F-86B8A973DA7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3F24D51-ECAC-46AC-983F-86B8A973DA7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3F24D51-ECAC-46AC-983F-86B8A973DA7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,5 +135,6 @@ Global
 		{39A8B945-42C8-45E8-ADD6-5BC7EB73F423} = {C6CD6C4E-87A6-4E97-9960-AAF4F2D01E44}
 		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE} = {C6CD6C4E-87A6-4E97-9960-AAF4F2D01E44}
 		{2F8983B4-801B-461A-9D76-26A58A496261} = {C6CD6C4E-87A6-4E97-9960-AAF4F2D01E44}
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6} = {C6CD6C4E-87A6-4E97-9960-AAF4F2D01E44}
 	EndGlobalSection
 EndGlobal

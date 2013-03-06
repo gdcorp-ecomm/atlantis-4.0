@@ -1,5 +1,4 @@
-﻿
-namespace Atlantis.Framework.Providers.Links
+﻿namespace Atlantis.Framework.Providers.Links
 {
   internal static class LinkTypes
   {
@@ -13,5 +12,10 @@ namespace Atlantis.Framework.Providers.Links
     public const string VideoLimeLight = "VIDEOLIMELIGHTURL";
     public const string VideoLocal = "VIDEOLOCALURL";
     public const string VideoMe = "VIDEOMEURL";
+    public const string C3Image = "EXTERNALIMAGEURL.C3";
+    public const string C3ExternalCSS = "EXTERNALCSSURL.C3";
+    public const string C3ExternalScript = "EXTERNALJSURL.C3";
+    public const string C3ExternalBigImage1 = "EXTERNALBIGIMAGE1URL.C3";
+    public const string C3ExternalBigImage2 = "EXTERNALBIGIMAGE2URL.C3";
   }
 }

@@ -84,12 +84,17 @@ namespace Atlantis.Framework.Testing.MockHttpContext
 
     public override string GetQueryString()
     {
-      return _uri.Query;
+      string result = _uri.Query;
+      if ((result.Length > 1) && (result[0] == '?'))
+      {
+        result = result.Substring(1);
+      }
+      return result;
     }
 
     public override string GetRawUrl()
     {
-      return _uri.AbsolutePath;
+      return _uri.AbsolutePath + _uri.Query;
     }
 
     public override string GetRemoteAddress()

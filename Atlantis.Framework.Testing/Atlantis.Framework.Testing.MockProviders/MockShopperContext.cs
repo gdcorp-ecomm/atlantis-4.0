@@ -1,13 +1,17 @@
 ﻿using Atlantis.Framework.Interface;
+using System;
 using System.Web;
 
 namespace Atlantis.Framework.Testing.MockProviders
 {
   public class MockShopperContext : ProviderBase, IShopperContext
   {
+    Lazy<ISiteContext> _siteContext;
+
     public MockShopperContext(IProviderContainer container)
       : base(container)
     {
+      _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
     }
 
     private string _shopperId = string.Empty;
@@ -15,12 +19,32 @@ namespace Atlantis.Framework.Testing.MockProviders
 
     public string ShopperId
     {
-      get { return _shopperId; }
+      get 
+      {
+        if (_siteContext.Value.Manager.IsManager)
+        {
+          return _siteContext.Value.Manager.ManagerShopperId;
+        }
+        else
+        {
+          return _shopperId; 
+        }
+      }
     }
 
     public ShopperStatusType ShopperStatus
     {
-      get { return _shopperStatus; }
+      get 
+      {
+        if (_siteContext.Value.Manager.IsManager)
+        {
+          return ShopperStatusType.Manager;
+        }
+        else
+        {
+          return _shopperStatus; 
+        }
+      }
     }
 
     public int ShopperPriceType

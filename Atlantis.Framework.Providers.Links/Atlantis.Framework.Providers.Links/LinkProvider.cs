@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Web;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.LinkInfo.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Text;
+using System.Web;
 
 namespace Atlantis.Framework.Providers.Links
 {
-
   public class LinkProvider : ProviderBase, ILinkProvider
   {
     private static bool _allowRelativeUrls = false;
@@ -90,6 +88,24 @@ namespace Atlantis.Framework.Providers.Links
           }
         }
         return _contextHost;
+      }
+    }
+
+    private string _originIP;
+    private string OriginIP
+    {
+      get
+      {
+        if (_originIP == null)
+        {
+          _originIP = HttpContext.Current.Request.UserHostAddress;
+          if (Container.CanResolve<IProxyContext>())
+          {
+            IProxyContext proxy = Container.Resolve<IProxyContext>();
+            _originIP = proxy.OriginIP;
+          }
+        }
+        return _originIP;
       }
     }
 
@@ -319,7 +335,7 @@ namespace Atlantis.Framework.Providers.Links
     {
       string scheme = isSecure ? _schemeSecure : _schemeNonSecure;
 
-      if (relativePath.Contains('?') || relativePath.Contains('&'))
+      if (relativePath.Contains("?") || relativePath.Contains("&"))
       {
         throw new ArgumentException("Relative path cannot contain query string.");
       }
@@ -377,7 +393,7 @@ namespace Atlantis.Framework.Providers.Links
       NameValueCollection queryParameters,
       UrlRootMode rootMode)
     {
-      if (relativePath.Contains('?') || relativePath.Contains('&'))
+      if (relativePath.Contains("?") || relativePath.Contains("&"))
       {
         throw new ArgumentException("Relative path cannot contain query string.");
       }
@@ -807,10 +823,22 @@ namespace Atlantis.Framework.Providers.Links
 
     #region Image Root
 
+    private string ChooseLinkType(string nonManagerType, string managerType)
+    {
+      string result = nonManagerType;
+      if (_siteContext.Manager.IsManager)
+      {
+        string country = InternalGeo.LookupCountry(OriginIP);
+        if (!country.Equals("in", StringComparison.OrdinalIgnoreCase))
+        {
+          result = managerType;
+        }
+      }
+
+      return result;
+    }
+
     private string _imageRoot;
-    /// <summary>
-    /// Image root for most images (unless using largeImageRoot or PresentationCentralImageRoot)
-    /// </summary>
     public string ImageRoot
     {
       get
@@ -818,16 +846,14 @@ namespace Atlantis.Framework.Providers.Links
         if (_imageRoot == null)
         {
           string scheme = IsSecureConnection ? _schemeSecure : _schemeNonSecure;
-          _imageRoot = scheme + this[LinkTypes.Image] + "/";
+          string linkType = ChooseLinkType(LinkTypes.Image, LinkTypes.C3Image);
+          _imageRoot = scheme + this[linkType] + "/";
         }
         return _imageRoot;
       }
     }
 
     private string _cssRoot;
-    /// <summary>
-    /// Image root for CSS files
-    /// </summary>
     public string CssRoot
     {
       get
@@ -835,16 +861,14 @@ namespace Atlantis.Framework.Providers.Links
         if (_cssRoot == null)
         {
           string scheme = IsSecureConnection ? _schemeSecure : _schemeNonSecure;
-          _cssRoot = scheme + this[LinkTypes.ExternalCSS] + "/";
+          string linkType = ChooseLinkType(LinkTypes.ExternalCSS, LinkTypes.C3ExternalCSS);
+          _cssRoot = scheme + this[linkType] + "/";
         }
         return _cssRoot;
       }
     }
 
     private string _javascriptRoot;
-    /// <summary>
-    /// Image root for javascript files
-    /// </summary>
     public string JavascriptRoot
     {
       get
@@ -852,16 +876,14 @@ namespace Atlantis.Framework.Providers.Links
         if (_javascriptRoot == null)
         {
           string scheme = IsSecureConnection ? _schemeSecure : _schemeNonSecure;
-          _javascriptRoot = scheme + this[LinkTypes.ExternalScript] + "/";
+          string linkType = ChooseLinkType(LinkTypes.ExternalScript, LinkTypes.C3ExternalScript);
+          _javascriptRoot = scheme + this[linkType] + "/";
         }
         return _javascriptRoot;
       }
     }
 
     private string _largeImagesRoot;
-    /// <summary>
-    /// Image root for Large Images.  Use if you have a large flv or background on your page
-    /// </summary>
     public string LargeImagesRoot
     {
       get
@@ -869,17 +891,14 @@ namespace Atlantis.Framework.Providers.Links
         if (_largeImagesRoot == null)
         {
           string scheme = IsSecureConnection ? _schemeSecure : _schemeNonSecure;
-          _largeImagesRoot = scheme + this[LinkTypes.ExternalBigImage1] + "/";
+          string linkType = ChooseLinkType(LinkTypes.ExternalBigImage1, LinkTypes.C3ExternalBigImage1);
+          _largeImagesRoot = scheme + this[linkType] + "/";
         }
         return _largeImagesRoot;
       }
     }
 
     private string _presentationCentralImagesRoot;
-    /// <summary>
-    /// Image root for Presentation Central Images. Use if you want to share a cached image 
-    /// that presentation central uses (like shadow borders)
-    /// </summary>
     public string PresentationCentralImagesRoot
     {
       get
@@ -887,7 +906,8 @@ namespace Atlantis.Framework.Providers.Links
         if (_presentationCentralImagesRoot == null)
         {
           string scheme = IsSecureConnection ? _schemeSecure : _schemeNonSecure;
-          _presentationCentralImagesRoot = scheme + this[LinkTypes.ExternalBigImage2] + "/";
+          string linkType = ChooseLinkType(LinkTypes.ExternalBigImage2, LinkTypes.C3ExternalBigImage2);
+          _presentationCentralImagesRoot = scheme + this[linkType] + "/";
         }
         return _presentationCentralImagesRoot;
       }

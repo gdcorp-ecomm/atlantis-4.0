@@ -3,6 +3,7 @@
   public enum MonitorDataTypes
   {
     Data,
+    ActiveTLDs,
     OfferedTLDs
   }
 }

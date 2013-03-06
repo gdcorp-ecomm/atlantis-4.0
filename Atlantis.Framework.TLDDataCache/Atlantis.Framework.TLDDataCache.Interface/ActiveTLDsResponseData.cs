@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Linq;
+using Atlantis.Framework.Interface;
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -61,6 +62,8 @@ namespace Atlantis.Framework.TLDDataCache.Interface
         }
 
       }
+
+      AddOverrideTldsToFlagSet();
     }
 
     private void AddTldToFlagSet(string name, string tld)
@@ -71,7 +74,60 @@ namespace Atlantis.Framework.TLDDataCache.Interface
         tldSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         _tldSetsByActiveFlags[name] = tldSet;
       }
-      tldSet.Add(tld);
+      if (!tldSet.Contains(tld))
+      {
+        tldSet.Add(tld);
+      }
+    }
+
+    private void AddOverrideTldsToFlagSet()
+    {
+      HashSet<string> overrideTlds = TLDsHelper.OverrideTlds;
+      if (overrideTlds != null && overrideTlds.Count > 0)
+      {
+        foreach (var overrideTld in overrideTlds)
+        {
+          try
+          {
+            var found = false;
+            HashSet<string> tldSet;
+            if (_tldSetsByActiveFlags.TryGetValue("availcheckstatus", out tldSet))
+            {
+              if (tldSet.Contains(overrideTld))
+              {
+                found = true;
+              }
+            }
+
+            if (!found)
+            {
+              var tldData = DataCache.DataCache.GetExtendedTLDData(overrideTld);
+
+              Dictionary<string, string> flagInfo;
+              if (tldData.TryGetValue(overrideTld, out flagInfo))
+              {
+                foreach (var activeFlag in _tldSetsByActiveFlags.Keys)
+                {
+                  string flagValueString;
+                  if (flagInfo.TryGetValue(activeFlag, out flagValueString))
+                  {
+                    if (flagValueString != "0" || (flagValueString == "0" && activeFlag == "availcheckstatus"))
+                    {
+                      AddTldToFlagSet(activeFlag, overrideTld);
+                    }
+                  }
+                }
+              }
+            }
+          }
+          catch (Exception ex)
+          {
+            var message = ex.Message + ex.StackTrace;
+            var aex = new AtlantisException("ActiveTLDsResponseData.ctor", "0", message, overrideTld, null, null);
+            Engine.Engine.LogAtlantisException(aex);
+          }
+        }
+      }
     }
 
     public bool IsTLDActive(string tld, string flagName)

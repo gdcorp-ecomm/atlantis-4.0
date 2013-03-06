@@ -90,7 +90,8 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
           }
 
           var tlds = tldData.GetDiagnosticsOfferedTLDFlags(tldNames);
-          XElement tldInfo = new XElement("TLDInfo");
+          var tldInfo = new XElement("TLDInfo");
+          tldInfo.Add(new XAttribute("count", tlds.Count));
           foreach (var tld in tlds)
           {
             tldInfo.Add(GetTldElement(tld.Key, tld.Value));

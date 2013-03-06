@@ -34,7 +34,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
       _offeredTLDs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
       _offeredTLDsInOrder = new List<string>();
 
-      if (dataCacheTable != null)
+      if (dataCacheTable != null && dataCacheTable.Rows.Count > 0)
       {
         DataColumn columnName = dataCacheTable.Columns["name"];
         DataColumn columnAvailCheckStatus = dataCacheTable.Columns["availcheckstatus"];
@@ -48,6 +48,22 @@ namespace Atlantis.Framework.TLDDataCache.Interface
             _offeredTLDs.Add(tld);
             _offeredTLDsInOrder.Add(tld);
           }
+        }
+
+        AddOverrideTlds();
+      }
+    }
+
+    private void AddOverrideTlds()
+    {
+      var overrideTlds = TLDsHelper.OverrideTlds;
+      foreach (var overrideTld in overrideTlds)
+      {
+        if (!_offeredTLDs.Contains(overrideTld))
+        {
+          var tld = overrideTld.ToUpperInvariant();
+          _offeredTLDs.Add(tld);
+          _offeredTLDsInOrder.Add(tld);
         }
       }
     }

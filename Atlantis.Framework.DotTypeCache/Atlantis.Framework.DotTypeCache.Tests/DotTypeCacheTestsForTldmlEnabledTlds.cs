@@ -63,7 +63,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       //tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
       tlds = new List<string>();
       tlds.Add("BORG");
-      domainCount = new[] { 1 };
+      domainCount = new[] { 1 }; //{ 1, 6, 21, 50, 101, 201 };... Using bulk domain counts will work in phase two or later of tldml changes.
       standardRegLengths = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     }
 

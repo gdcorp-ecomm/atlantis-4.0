@@ -63,8 +63,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       //tlds = TLDML.TLDMLDocument.GetTLDMLSupportedTLDs();
       tlds = new List<string>();
       tlds.Add("BORG");
-      domainCount = new [] { 1, 6, 21, 50, 101, 201 };
-      standardRegLengths = new [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+      domainCount = new[] { 1 };
+      standardRegLengths = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     }
 
     [TestCleanup()]
@@ -81,15 +81,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       {
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
         AssertHelper.AddResults(dotTypeCache != null, "GetDotTypeInfo is null for: " + tld);
-
-        string description = DotTypeCache.GetAdditionalInfoValue(tld, "Description");
-
-        AssertHelper.AddResults(!string.IsNullOrEmpty(description),
-                                "GetDotTypeInfo description is null or empty for:  " + tld);
       }
     }
-
-
 
     [TestMethod]
     public void GetTransferProductId()
@@ -138,7 +131,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
-    public void GetValidRegistrationProductIds()
+    public void GetValidRegistrationProductIdListWithIndRegLength()
     {
       foreach (var tld in tlds)
       {
@@ -150,18 +143,15 @@ namespace Atlantis.Framework.DotTypeCache.Tests
           foreach (int dc in domainCount)
           {
             List<int> registrationProductIds = dotTypeCache.GetValidRegistrationProductIdList(dc, reglength);
+            
+            int prodIdFromTdml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.DomainRegistration, dc));
 
-            foreach (int regLength in reglengths)
-            {
-              int prodIdFromTdml =
-                Convert.ToInt32(TLDMLProduct.GetPFID(tld, regLength, productfamily.DomainRegistration, dc));
+            AssertHelper.AddResults(registrationProductIds.Contains(prodIdFromTdml),
+                                    "Product id from tdml was not found in the registrationProductId list for: " +
+                                    tld + ". Expected in list: " +
+                                    prodIdFromTdml + ". Reg length: " + reglength +
+                                    " year(s) and domain count: " + dc);
 
-              AssertHelper.AddResults(registrationProductIds.Contains(prodIdFromTdml),
-                                      "Product id from tdml was not found in the registrationProductId list for: " +
-                                      tld + ". Expected in list: " +
-                                      prodIdFromTdml + ". Reg length: " + regLength +
-                                      " year(s) and domain count: " + dc);
-            }
           }
         }
       }
@@ -237,7 +227,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       foreach (var tld in tlds)
       {
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-        
+
         for (int regLength = dotTypeCache.Product.PreregistrationYears("GA").Min;
              regLength <= dotTypeCache.Product.PreregistrationYears("GA").Max;
              regLength++)
@@ -589,7 +579,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         List<int> preRegLengths = TLDML.TLDMLProduct.GetAllEnabledPreRegistrationLengths(tld);
 
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-        
+
         int tldmlmethod = 0;
 
         foreach (int dc in domainCount)
@@ -630,8 +620,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
           foreach (var reglength in reglengths)
           {
-            int dotTypeCacheGetRenewalProductId = DotTypeCache.GetRenewalProductId(tld, "1", reglength, dc);
-            int prodIdFromTldml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.DomainTransfer, dc));
+            int dotTypeCacheGetRenewalProductId = DotTypeCache.GetRenewalProductId(tld, reglength, dc);
+            int prodIdFromTldml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.DomainRenewal, dc));
             AssertHelper.AddResults(
               dotTypeCacheGetRenewalProductId == prodIdFromTldml && dotTypeCacheGetRenewalProductId != 0,
               "GetRenewalProductId - ids do not match or are zero for: " + tld + ". Reg length: " + reglength +
@@ -641,6 +631,28 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
+    [TestMethod]
+    public void GetRenewalProductId2()
+    {
+      foreach (var tld in tlds)
+      {
+        foreach (int dc in domainCount)
+        {
+          List<int> reglengths = TLDML.TLDMLProduct.GetAllEnabledRenewalLengths(tld);
+
+          foreach (var reglength in reglengths)
+          {
+            int dotTypeCacheGetRenewalProductId = DotTypeCache.GetRenewalProductId(tld, "1", reglength, dc);
+            int prodIdFromTldml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.DomainTransfer, dc));
+            AssertHelper.AddResults(
+              dotTypeCacheGetRenewalProductId == prodIdFromTldml && dotTypeCacheGetRenewalProductId != 0,
+              "GetRenewalProductId2 - ids do not match or are zero for: " + tld + ". Reg length: " + reglength +
+              " year(s) and domain count: " + dc);
+          }
+        }
+      }
+    }
+    
     [TestMethod]
     public void GetValidExpiredAuctionRegLengths()
     {
@@ -655,7 +667,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
           AssertHelper.AddResults(dotTypeCacheGetRenewalProductIds.Count > 0,
                                   "GetRenewalProductIds does not contain pfids for: " + tld + ". And domain count: " +
                                   dc);
-
         }
       }
     }
@@ -729,7 +740,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
-    public void GetValidRegistrationProductId()
+    public void GetValidRegistrationProductIdList()
     {
       foreach (string tld in tlds)
       {

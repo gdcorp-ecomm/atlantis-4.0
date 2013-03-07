@@ -12,14 +12,16 @@ namespace Atlantis.Framework.TLDDataCache.Tests
   [DeploymentItem("Interop.gdDataCacheLib.dll")]
   public class ExtendedTLDDataTests
   {
-    const int _EXTENDEDTLDDATAREQUEST = 665;
+    const int _EXTENDEDTLDDATAREQUEST = 668;
 
     [TestMethod]
     public void ExtendedTLDDataForCom()
     {
       var request = new ExtendedTLDDataRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "com");
       var response = (ExtendedTLDDataResponseData)DataCache.DataCache.GetProcessRequest(request, _EXTENDEDTLDDATAREQUEST);
-      Assert.IsTrue(response.TLDData.Count == 1);
+      string tldName;
+      bool success = response.TryGetValue("tld", out tldName);
+      Assert.IsTrue(success);
     }
 
     [TestMethod]
@@ -27,7 +29,9 @@ namespace Atlantis.Framework.TLDDataCache.Tests
     {
       var request = new ExtendedTLDDataRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "raj");
       var response = (ExtendedTLDDataResponseData)DataCache.DataCache.GetProcessRequest(request, _EXTENDEDTLDDATAREQUEST);
-      Assert.IsTrue(response.TLDData.Count == 0);
+      string tldName;
+      bool success = response.TryGetValue("tld", out tldName);
+      Assert.IsFalse(success);
     }
   }
 }

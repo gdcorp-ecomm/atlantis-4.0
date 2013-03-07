@@ -46,6 +46,7 @@
     <Compile Include="ActiveTLDsRequestData.cs" />
     <Compile Include="ExtendedTLDDataResponseData.cs" />
     <Compile Include="ExtendedTLDDataRequestData.cs" />
+    <Compile Include="TLDDataCacheEngineRequests.cs" />
     <Compile Include="ValidDotTypesResponseData.cs" />
     <Compile Include="ValidDotTypesRequestData.cs" />
     <Compile Include="RegistryLanguage.cs" />

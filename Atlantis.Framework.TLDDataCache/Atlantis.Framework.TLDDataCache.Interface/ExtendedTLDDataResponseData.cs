@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.TLDDataCache.Interface
@@ -8,9 +9,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
   public class ExtendedTLDDataResponseData : IResponseData
   {
     private readonly AtlantisException _exception;
-    private readonly string _xmlData;
-
-    private readonly Dictionary<string, Dictionary<string, string>> _tldData;
+    private readonly Dictionary<string, string> _tldData;
 
     public static ExtendedTLDDataResponseData FromException(RequestData requestData, Exception ex)
     {
@@ -31,46 +30,35 @@ namespace Atlantis.Framework.TLDDataCache.Interface
 
     private ExtendedTLDDataResponseData(XElement dataCacheElement)
     {
-      _xmlData = dataCacheElement.ToString();
-      _tldData = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase);
+      _tldData = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-      foreach (XElement itemElement in dataCacheElement.Elements("item"))
+      XElement itemElement = dataCacheElement.Descendants("data").FirstOrDefault();
+      if (itemElement != null)
       {
-        try
+        foreach (XAttribute itemAtt in itemElement.Attributes())
         {
-          var dictTldData = new Dictionary<string, string>();
-          foreach (XAttribute itemAtt in itemElement.Attributes())
-          {
-            dictTldData.Add(itemAtt.Name.ToString(), itemAtt.Value);
-          }
-
-          _tldData.Add(dictTldData["tld"], dictTldData);
-        }
-        catch (Exception ex)
-        {
-          string message = ex.Message + ex.StackTrace;
-          var aex = new AtlantisException("ExtendedTLDDataResponseData.ctor", "0", message, itemElement.ToString(), null, null);
-          Engine.Engine.LogAtlantisException(aex);
+          _tldData[itemAtt.Name.ToString()] = itemAtt.Value;
         }
       }
     }
 
-    public Dictionary<string, Dictionary<string, string>> TLDData
+    public bool TryGetValue(string extendedDataKey, out string value)
     {
-      get
-      {
-        return _tldData;
-      }
+      return _tldData.TryGetValue(extendedDataKey, out value);
     }
-    
+
     public string ToXML()
     {
-      string result = "<exception/>";
-      if (_xmlData != null)
+      XElement element = new XElement("ExtendedTLDData");
+
+      if (_tldData != null)
       {
-        result = _xmlData;
+        foreach (KeyValuePair<string, string> kvp in _tldData)
+        {
+          element.Add(new XAttribute(kvp.Key, kvp.Value));
+        }
       }
-      return result;
+      return element.ToString();
     }
 
     public AtlantisException GetException()

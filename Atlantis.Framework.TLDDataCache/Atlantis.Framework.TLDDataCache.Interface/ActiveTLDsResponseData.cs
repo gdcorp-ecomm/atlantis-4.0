@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;

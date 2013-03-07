@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.DataCacheService;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
 using System;
 using System.Xml.Linq;
@@ -7,7 +8,7 @@ namespace Atlantis.Framework.TLDDataCache.Impl
 {
   public class ValidDotTypesRequest : IRequest
   {
-    private const string _TLDINFOREQUESTFORMAT = "<GetTLDInfo><param name=\"tldIdOrName\" value=\"{0}\"/></GetTLDInfo>";
+    private const string _TLDINFOREQUESTFORMAT = "<GetTLDList />";
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
@@ -15,14 +16,13 @@ namespace Atlantis.Framework.TLDDataCache.Impl
 
       try
       {
-        string tld = ((ValidDotTypesRequestData)requestData).TLD;
-        if (string.IsNullOrEmpty(tld))
+        string responseXml;
+
+        using (var comCache = GdDataCacheOutOfProcess.CreateDisposable())
         {
-          throw new ArgumentException("TLD cannot be empty or null.");
+          responseXml = comCache.GetCacheData(_TLDINFOREQUESTFORMAT);
         }
 
-        string requestXml = string.Format(_TLDINFOREQUESTFORMAT, tld);
-        string responseXml = DataCache.DataCache.GetCacheData(requestXml);
         XElement tldElements = XElement.Parse(responseXml);
         result = ValidDotTypesResponseData.FromDataCacheElement(tldElements);
       }

@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.DataCacheService;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
 using System;
 using System.Xml.Linq;
@@ -22,7 +23,13 @@ namespace Atlantis.Framework.TLDDataCache.Impl
         }
 
         string requestXml = string.Format(_TLDINFOREQUESTFORMAT, tld);
-        string responseXml = DataCache.DataCache.GetCacheData(requestXml);
+
+        string responseXml;
+        using (var comCache = GdDataCacheOutOfProcess.CreateDisposable())
+        {
+          responseXml = comCache.GetCacheData(requestXml);
+        }
+
         XElement tldElements = XElement.Parse(responseXml);
         result = ActiveTLDsResponseData.FromDataCacheElement(tldElements);
       }

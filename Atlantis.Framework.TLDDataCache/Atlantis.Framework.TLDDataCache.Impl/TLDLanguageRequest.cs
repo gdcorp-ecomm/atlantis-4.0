@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.DataCacheService;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
 using System;
 using System.Xml.Linq;
@@ -15,14 +16,15 @@ namespace Atlantis.Framework.TLDDataCache.Impl
 
       try
       {
-        int tldId = ((TLDLanguageRequestData)requestData).TLDId;
-        if (tldId == 0)
+        TLDLanguageRequestData languageRequest = (TLDLanguageRequestData)requestData;
+        string requestXml = string.Format(_TLDLANGUAGEINFO_REQUESTFORMAT, languageRequest.TLDId.ToString());
+        string responseXml;
+
+        using (var comCache = GdDataCacheOutOfProcess.CreateDisposable())
         {
-          throw new ArgumentException("TLD cannot be empty or null.");
+          responseXml = comCache.GetCacheData(requestXml);
         }
 
-        string requestXml = string.Format(_TLDLANGUAGEINFO_REQUESTFORMAT, tldId);
-        string responseXml = DataCache.DataCache.GetCacheData(requestXml);
         XElement tldElements = XElement.Parse(responseXml);
         result = TLDLanguageResponseData.FromDataCacheElement(tldElements);
       }

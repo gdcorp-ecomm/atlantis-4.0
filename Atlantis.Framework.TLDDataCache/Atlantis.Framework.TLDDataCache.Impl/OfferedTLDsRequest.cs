@@ -1,7 +1,7 @@
-﻿using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.DataCacheService;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
 using System;
-using System.Data;
 
 namespace Atlantis.Framework.TLDDataCache.Impl
 {
@@ -15,17 +15,24 @@ namespace Atlantis.Framework.TLDDataCache.Impl
       {
         var offeredTldRequest = ((OfferedTLDsRequestData)requestData);
 
-        var offeredTlds = new DataTable();
         if (offeredTldRequest.TLDProductType != OfferedTLDProductTypes.Invalid)
         {
-          offeredTlds = DataCache.DataCache.GetTLDList(offeredTldRequest.PrivateLabelId,
-                                                                 (int) offeredTldRequest.TLDProductType);
+          string cacheXml;
+          using (var comCache = GdDataCacheOutOfProcess.CreateDisposable())
+          {
+            cacheXml = comCache.GetTLDList(offeredTldRequest.PrivateLabelId, (int)offeredTldRequest.TLDProductType);
+          }
+          result = OfferedTLDsResponseData.FromCacheXml(cacheXml);
         }
-        result = OfferedTLDsResponseData.FromDataTable(offeredTlds);
+        else
+        {
+          result = OfferedTLDsResponseData.Empty;
+        }
       }
       catch (Exception ex)
       {
-        result = OfferedTLDsResponseData.FromException(requestData, ex);
+        AtlantisException exception = new AtlantisException(requestData, "OfferedTLDsRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
+        result = OfferedTLDsResponseData.FromException(exception);
       }
 
       return result;

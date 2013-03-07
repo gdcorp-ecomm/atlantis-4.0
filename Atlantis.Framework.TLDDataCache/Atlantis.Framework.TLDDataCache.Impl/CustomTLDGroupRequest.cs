@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.DataCacheService;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
 using System;
 
@@ -23,7 +24,13 @@ namespace Atlantis.Framework.TLDDataCache.Impl
         else
         {
           string settingName = string.Format(_APPSETTINGFORMAT, groupRequest.GroupName);
-          string setting = DataCache.DataCache.GetAppSetting(settingName);
+          string setting;
+          
+          using (var comCache = GdDataCacheOutOfProcess.CreateDisposable())
+          {
+            setting = comCache.GetAppSetting(settingName);
+          }
+
           result = CustomTLDGroupResponseData.FromDelimitedString(setting);
         }
       }

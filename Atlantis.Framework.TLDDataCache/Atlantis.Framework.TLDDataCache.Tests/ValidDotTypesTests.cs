@@ -12,14 +12,18 @@ namespace Atlantis.Framework.TLDDataCache.Tests
   [DeploymentItem("Interop.gdDataCacheLib.dll")]
   public class ValidDotTypesTests
   {
-    const int _VALIDDOTTYPESREQUEST = 664;
+    const int _VALIDDOTTYPESREQUEST = 667;
 
     [TestMethod]
     public void ValidDotTypes()
     {
       var request = new ValidDotTypesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
       var response = (ValidDotTypesResponseData)DataCache.DataCache.GetProcessRequest(request, _VALIDDOTTYPESREQUEST);
-      Assert.IsTrue(response.ValidDotTypes.Any());
+      Assert.IsTrue(response.IsValidTld("com"));
+
+      int tldId;
+      bool success = response.TryGetTldId("com", out tldId);
+      Assert.IsTrue(success);
     }
   }
 }

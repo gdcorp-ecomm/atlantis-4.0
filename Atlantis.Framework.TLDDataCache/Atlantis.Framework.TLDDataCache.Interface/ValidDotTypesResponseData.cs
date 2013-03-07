@@ -8,9 +8,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
   public class ValidDotTypesResponseData : IResponseData
   {
     private readonly AtlantisException _exception;
-    private readonly string _xmlData;
-
-    private readonly HashSet<string> _validDotTypes;
+    private readonly Dictionary<string, int> _validDotTypes;
 
     public static ValidDotTypesResponseData FromException(RequestData requestData, Exception ex)
     {
@@ -24,25 +22,25 @@ namespace Atlantis.Framework.TLDDataCache.Interface
       _exception = new AtlantisException(requestData, "ValidDotTypesResponseData.ctor", message, inputData);
     }
 
-    public static ValidDotTypesResponseData FromDataCacheElement(XElement dataCacheElement)
+    public static ValidDotTypesResponseData FromDataCacheElement(XElement cacheDataElement)
     {
-      return new ValidDotTypesResponseData(dataCacheElement);
+      return new ValidDotTypesResponseData(cacheDataElement);
     }
 
-    private ValidDotTypesResponseData(XElement dataCacheElement)
+    private ValidDotTypesResponseData(XElement cacheDataElement)
     {
-      _xmlData = dataCacheElement.ToString();
-      _validDotTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+      _validDotTypes = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
-      foreach (XElement itemElement in dataCacheElement.Elements("item"))
+      foreach (XElement itemElement in cacheDataElement.Descendants("item"))
       {
         try
         {
           string tld = itemElement.Attribute("tld").Value;
+          int tldid = Convert.ToInt32(itemElement.Attribute("tldid").Value);
           
           if (!string.IsNullOrEmpty(tld))
           {
-            _validDotTypes.Add(tld);
+            _validDotTypes.Add(tld, tldid);
           }
         }
         catch (Exception ex)
@@ -55,22 +53,29 @@ namespace Atlantis.Framework.TLDDataCache.Interface
       }
     }
 
-    public IEnumerable<string> ValidDotTypes
+    public bool TryGetTldId(string tld, out int tldId)
     {
-      get
-      {
-        return _validDotTypes;
-      }
+      return _validDotTypes.TryGetValue(tld, out tldId);
     }
-    
+
+    public bool IsValidTld(string tld)
+    {
+      return _validDotTypes.ContainsKey(tld);
+    }
+
     public string ToXML()
     {
-      string result = "<exception/>";
-      if (_xmlData != null)
+      XElement element = new XElement("validdottypes");
+
+      foreach (KeyValuePair<string, int> kvp in _validDotTypes)
       {
-        result = _xmlData;
+        XElement tld = new XElement("tld",
+          new XAttribute("name", kvp.Key),
+          new XAttribute("id", kvp.Value.ToString()));
+        element.Add(tld);
       }
-      return result;
+
+      return element.ToString();
     }
 
     public AtlantisException GetException()

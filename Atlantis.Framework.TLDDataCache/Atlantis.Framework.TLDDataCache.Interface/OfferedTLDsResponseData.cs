@@ -2,31 +2,73 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.TLDDataCache.Interface
 {
   public class OfferedTLDsResponseData : IResponseData
   {
-    private AtlantisException _exception;
+    public static OfferedTLDsResponseData Empty {get; private set;}
 
+    static OfferedTLDsResponseData()
+    {
+      Empty = new OfferedTLDsResponseData();
+    }
+
+    private AtlantisException _exception;
     private HashSet<string> _offeredTLDs;
     private List<string> _offeredTLDsInOrder;
 
-    public static OfferedTLDsResponseData FromException(RequestData requestData, Exception ex)
+    public static OfferedTLDsResponseData FromException(AtlantisException exception)
     {
-      return new OfferedTLDsResponseData(requestData, ex);
+      return new OfferedTLDsResponseData(exception);
     }
 
-    private OfferedTLDsResponseData(RequestData requestData, Exception ex)
+    private OfferedTLDsResponseData(AtlantisException exception)
     {
-      string message = ex.Message + ex.StackTrace;
-      string inputData = requestData.ToXML();
-      _exception = new AtlantisException(requestData, "OfferedTLDsResponseData.ctor", message, inputData);
+      _exception = exception;
+    }
+
+    public static OfferedTLDsResponseData FromCacheXml(string cacheXml)
+    {
+      List<string> tlds = new List<string>();
+
+      XElement tldList = XElement.Parse(cacheXml);
+      foreach (var tldItem in tldList.Descendants("tld"))
+      {
+        string name = tldItem.Attribute("name").Value;
+        string availCheckStatus = tldItem.Attribute("availcheckstatus").Value;
+        if ("1".Equals(availCheckStatus))
+        {
+          tlds.Add(name);
+        }
+      }
+
+      if (tlds.Count == 0)
+      {
+        return Empty;
+      }
+      else
+      {
+        return new OfferedTLDsResponseData(tlds);
+      }
     }
 
     public static OfferedTLDsResponseData FromDataTable(DataTable dataCacheTable)
     {
       return new OfferedTLDsResponseData(dataCacheTable);
+    }
+
+    private OfferedTLDsResponseData()
+    {
+      _offeredTLDs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+      _offeredTLDsInOrder = new List<string>();
+    }
+
+    private OfferedTLDsResponseData(List<string> tlds)
+    {
+      _offeredTLDsInOrder = tlds;
+      _offeredTLDs = new HashSet<string>(tlds, StringComparer.OrdinalIgnoreCase);
     }
 
     private OfferedTLDsResponseData(DataTable dataCacheTable)

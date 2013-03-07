@@ -58,6 +58,7 @@ namespace Atlantis.Framework.Geo.Tests
       AtlantisException exception = new AtlantisException("StateTests.StateResponseException", "0", "TestMessage", "TestData", null, null);
       StateResponseData response = StateResponseData.FromException(exception);
       Assert.IsNotNull(response.GetException());
+      Assert.AreEqual(0, response.Count);
     }
 
     [TestMethod]
@@ -73,7 +74,17 @@ namespace Atlantis.Framework.Geo.Tests
     {
       string cacheXml = "<states><state id=\"74\" code=\"AL\" name=\"Alabama\" country=\"226\" /></states>";
       StateResponseData response = StateResponseData.FromDataCacheXml(cacheXml);
-      Assert.AreNotEqual(0, response.States.Count());
+      Assert.AreNotEqual(0, response.Count);
+    }
+
+
+    [TestMethod]
+    public void StateResponseNoData()
+    {
+      string cacheXml = "<states></states>";
+      StateResponseData response = StateResponseData.FromDataCacheXml(cacheXml);
+      Assert.AreEqual(0, response.Count);
+      Assert.AreEqual(StateResponseData.Empty, response);
     }
 
     [TestMethod]
@@ -81,11 +92,22 @@ namespace Atlantis.Framework.Geo.Tests
     {
       StateRequestData request = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 226);
       StateResponseData response = (StateResponseData)Engine.Engine.ProcessRequest(request, _STATEREQUESTTYPE);
-      Assert.AreNotEqual(0, response.States.Count());
+      Assert.AreNotEqual(0, response.Count);
+      Assert.AreEqual(response.States.Count(), response.Count);
 
       string xml = response.ToXML();
       XElement.Parse(xml);
     }
+
+    [TestMethod]
+    public void GetNoStates()
+    {
+      StateRequestData request = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 219);
+      StateResponseData response = (StateResponseData)Engine.Engine.ProcessRequest(request, _STATEREQUESTTYPE);
+      Assert.AreEqual(0, response.Count);
+      Assert.AreEqual(StateResponseData.Empty, response);
+    }
+
 
     [TestMethod]
     public void GetStateByName()

@@ -46,6 +46,11 @@ namespace Atlantis.Framework.DataCacheService
       return _COMAccessClass.GetCacheData(requestXml);
     }
 
+    public string GetMgrCategoriesForUser(int managerUserId)
+    {
+      return _COMAccessClass.GetMgrCategoriesForUser(managerUserId);
+    }
+
     public string GetCountriesXml()
     {
       return _COMAccessClass.GetCountryList();

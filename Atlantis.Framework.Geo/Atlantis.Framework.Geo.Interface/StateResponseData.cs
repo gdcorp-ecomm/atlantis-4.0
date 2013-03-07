@@ -7,6 +7,13 @@ namespace Atlantis.Framework.Geo.Interface
 {
   public class StateResponseData : IResponseData
   {
+    public static StateResponseData Empty { get; private set; }
+
+    static StateResponseData()
+    {
+      Empty = new StateResponseData(new List<State>(0));
+    }
+
     private AtlantisException _exception = null;
     private List<State> _stateList;
     private Dictionary<string, State> _statesByName;
@@ -25,7 +32,15 @@ namespace Atlantis.Framework.Geo.Interface
         stateList.Add(state);
       }
 
-      return new StateResponseData(stateList);
+      if (stateList.Count > 0)
+      {
+        return new StateResponseData(stateList);
+      }
+      else
+      {
+        return Empty;
+      }
+
     }
 
     public static StateResponseData FromException(AtlantisException exception)
@@ -57,6 +72,21 @@ namespace Atlantis.Framework.Geo.Interface
     public IEnumerable<State> States
     {
       get { return _stateList; }
+    }
+
+    public int Count
+    {
+      get 
+      {
+        if (_stateList != null)
+        {
+          return _stateList.Count;
+        }
+        else
+        {
+          return 0;
+        }
+      }
     }
 
     public State FindStateByName(string name)

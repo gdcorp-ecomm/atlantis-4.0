@@ -813,8 +813,8 @@
     <HasRenewalIds>True</HasRenewalIds><HasExpiredAuctionIds>False</HasExpiredAuctionIds>
   </DotType>
   <DotType DotTypeName="org">
-    <MinPreRegLength>1</MinPreRegLength>
-    <MaxPreRegLength>1</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
+    <MinPreRegLength>0</MinPreRegLength>
+    <MaxPreRegLength>0</MaxPreRegLength>    <MinExpAuctionRegLength>1</MinExpAuctionRegLength>    <MaxExpAuctionRegLength>10</MaxExpAuctionRegLength>
     <MinRegistrationLength>1</MinRegistrationLength>
     <MaxRegistrationLength>10</MaxRegistrationLength>
     <MinTransferLength>1</MinTransferLength>

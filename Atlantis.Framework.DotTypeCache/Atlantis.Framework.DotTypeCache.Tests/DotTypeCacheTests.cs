@@ -1324,14 +1324,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       bool flag = DotTypeProvider.GetTLDDataForRegistration.IsOffered("com");
       Assert.IsTrue(flag);
     }
-
-    [TestMethod]
-    public void IsOfferedCheckForCoDotIn()
-    {
-      bool flag = DotTypeProvider.GetTLDDataForRegistration.IsOffered("co.in");
-      Assert.IsTrue(flag);
-    }
-
+    
     [TestMethod]
     public void GetRegistryLanguagesTLDMLOrg()
     {

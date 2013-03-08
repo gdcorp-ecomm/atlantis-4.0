@@ -549,39 +549,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
                                 + statRegistryIdByProductId + ". Tldml Enabled: " + registryIdByProductId);
       }
     }
-
-    [TestMethod]
-    public void GetTransferProductIdStaticVsTLDMLEnabled()
-    {
-      foreach (string tld in tlds)
-      {
-        object[] methodParms = new object[1] { tld };
-
-        IDotTypeInfo staticTld = getStaticDotType.Invoke(null, methodParms) as IDotTypeInfo;
-
-        IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-
-        int statTld = 0;
-        int tldmlmethod = 0;
-        
-        foreach (int dc in domainCount)
-        {
-          for (int transferYears = staticTld.Product.TransferYears.Min;
-               transferYears <= staticTld.Product.TransferYears.Max;
-               transferYears++)
-          {
-            statTld = staticTld.GetTransferProductId(transferYears, dc);
-            tldmlmethod = dotTypeCache.GetTransferProductId(transferYears, dc);
-            AssertHelper.AddResults(statTld == tldmlmethod,
-                                    "GetTransferProductId for reg length: " + transferYears +
-                                    " year(s) and for domain count: " + dc + " did not match for " + tld +
-                                    ". Static: "
-                                    + statTld + ". Tldml Enabled: " + tldmlmethod);
-          }
-        }
-      }
-    }
-
+    
     [TestMethod]
     public void ProductRegistrationYearsStaticVsTLDMLEnabled()
     {

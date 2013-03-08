@@ -18,12 +18,12 @@ namespace Atlantis.Framework.DotTypeCache.Static
       get { return _minDomains; }
     }
 
-    public int GetProductId(int registrionLength)
+    public int GetProductId(int registrationLength)
     {
       int result = 0;
-      if ((registrionLength >= 1) && (registrionLength <= _productIdsByYearsMinusOne.Length))
+      if ((registrationLength >= 1) && (registrationLength <= _productIdsByYearsMinusOne.Length))
       {
-        int index = registrionLength - 1;
+        int index = registrationLength - 1;
         result = _productIdsByYearsMinusOne[index];
       }
       return result;
@@ -35,9 +35,9 @@ namespace Atlantis.Framework.DotTypeCache.Static
       return (productId != 0);
     }
 
-    public void AddProductId(int registrionLength, int productId)
+    public void AddProductId(int registrationLength, int productId)
     {
-      this._productIdsByYearsMinusOne[registrionLength - 1] = productId;
+      this._productIdsByYearsMinusOne[registrationLength - 1] = productId;
     }
 
     #region IComparable<Tier> Members

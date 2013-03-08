@@ -643,7 +643,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
           foreach (var reglength in reglengths)
           {
             int dotTypeCacheGetRenewalProductId = DotTypeCache.GetRenewalProductId(tld, "1", reglength, dc);
-            int prodIdFromTldml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.DomainTransfer, dc));
+            int prodIdFromTldml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.DomainRenewal, dc));
             AssertHelper.AddResults(
               dotTypeCacheGetRenewalProductId == prodIdFromTldml && dotTypeCacheGetRenewalProductId != 0,
               "GetRenewalProductId2 - ids do not match or are zero for: " + tld + ". Reg length: " + reglength +

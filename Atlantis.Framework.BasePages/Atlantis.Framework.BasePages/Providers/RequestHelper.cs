@@ -101,17 +101,20 @@ namespace Atlantis.Framework.BasePages.Providers
 
       string hostName = GetContextHost().ToLowerInvariant();
 
-      if (hostName.Contains(".ote."))
+      if (hostName.Contains(".ote.") || hostName.StartsWith("ote."))
       {
         result = ServerLocationType.Ote;
       }
       else if (isRequestInternal)
       {
-        if (hostName.Contains(".test."))
+        if (hostName.Contains(".test.") || hostName.StartsWith("test."))
         {
           result = ServerLocationType.Test;
         }
-        else if (hostName.Contains(".dev.") || hostName.Contains(".debug."))
+        else if (hostName.Contains(".dev.") ||
+                 hostName.StartsWith("dev.") || 
+                 hostName.Contains(".debug.") ||
+                 hostName.StartsWith("debug."))
         {
           if (WebConfigurationManager.AppSettings["EnvironmentOverride"] == "Test")
           {

@@ -4,6 +4,8 @@
   {
     Data,
     ActiveTLDs,
-    OfferedTLDs
+    OfferedTLDs,
+    ProductIDs,
+    Help
   }
 }

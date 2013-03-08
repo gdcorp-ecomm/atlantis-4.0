@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveTLDs.cs" />
+    <Compile Include="Help.cs" />
+    <Compile Include="ProductIDs.cs" />
     <Compile Include="OfferedTLDs.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="IMonitor.cs" />
@@ -73,6 +75,10 @@
       <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.RegDotTypeProductIds\Atlantis.Framework.RegDotTypeProductIds.Interface\Atlantis.Framework.RegDotTypeProductIds.Interface.csproj">
+      <Project>{AE02C23A-DED2-492E-BF1B-BE5D6E7A805A}</Project>
+      <Name>Atlantis.Framework.RegDotTypeProductIds.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Interface\Atlantis.Framework.TLDDataCache.Interface.csproj">
       <Project>{2a615d6f-9604-40c1-bc6a-2659e3b97bcc}</Project>
       <Name>Atlantis.Framework.TLDDataCache.Interface</Name>
@@ -80,6 +86,14 @@
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Interface\Atlantis.Framework.DotTypeCache.Interface.csproj">
       <Project>{95e67e48-7173-4f0c-854f-2f08cbfcf923}</Project>
       <Name>Atlantis.Framework.DotTypeCache.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.StaticTypes\Atlantis.Framework.DotTypeCache.StaticTypes.csproj">
+      <Project>{FC7381B1-66E0-462F-952B-4EC1F18E9C90}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.StaticTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeCache.Static\Atlantis.Framework.DotTypeCache.Static.csproj">
+      <Project>{c6714b5f-ce86-4d8b-a615-0482465d0619}</Project>
+      <Name>Atlantis.Framework.DotTypeCache.Static</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DotTypeCache\Atlantis.Framework.DotTypeCache.csproj">
       <Project>{c86da599-d09d-4c1e-934d-7e59d38ea9c2}</Project>

@@ -530,25 +530,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         }
       }
     }
-
-    [TestMethod]
-    public void GetRegistryIdByProductIdStaticVsTLDMLEnabled()
-    {
-      foreach (string tld in tlds)
-      {
-        object[] methodParms = new object[1] { tld };
-
-        IDotTypeInfo staticTld = getStaticDotType.Invoke(null, methodParms) as IDotTypeInfo;
-
-        IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
-
-        string statRegistryIdByProductId = staticTld.GetRegistryIdByProductId(986);
-        string registryIdByProductId = dotTypeCache.GetRegistryIdByProductId(986);
-        AssertHelper.AddResults(statRegistryIdByProductId == registryIdByProductId,
-                                "GetRegistryIdByProductId(986) did not match for " + tld + ". Static: "
-                                + statRegistryIdByProductId + ". Tldml Enabled: " + registryIdByProductId);
-      }
-    }
     
     [TestMethod]
     public void ProductRegistrationYearsStaticVsTLDMLEnabled()

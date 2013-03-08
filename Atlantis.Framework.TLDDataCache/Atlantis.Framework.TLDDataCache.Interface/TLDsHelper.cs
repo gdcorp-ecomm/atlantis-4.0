@@ -27,13 +27,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
 
               foreach (var tld in stagingTldList)
               {
-                var tldData = DataCache.DataCache.GetExtendedTLDData(tld);
-
-                Dictionary<string, string> flagInfo;
-                if (tldData.TryGetValue(tld, out flagInfo))
-                {
-                  _overrideTlds.Add(tld);
-                }
+                _overrideTlds.Add(tld);
               }
             }
           }

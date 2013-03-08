@@ -100,20 +100,23 @@ namespace Atlantis.Framework.TLDDataCache.Interface
 
             if (!found)
             {
-              var tldData = DataCache.DataCache.GetExtendedTLDData(overrideTld);
-
-              Dictionary<string, string> flagInfo;
-              if (tldData.TryGetValue(overrideTld, out flagInfo))
+              foreach (var activeFlag in _tldSetsByActiveFlags.Keys)
               {
-                foreach (var activeFlag in _tldSetsByActiveFlags.Keys)
+                if (activeFlag == "availcheckstatus")
                 {
-                  string flagValueString;
-                  if (flagInfo.TryGetValue(activeFlag, out flagValueString))
+                  AddTldToFlagSet(activeFlag, overrideTld);
+                  continue;
+                }
+
+                var request = new ExtendedTLDDataRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, overrideTld);
+                var response = (ExtendedTLDDataResponseData)DataCache.DataCache.GetProcessRequest(request, TLDDataCacheEngineRequests.ExtendedTLDData);
+
+                string flagValueString;
+                if (response.TryGetValue(activeFlag, out flagValueString))
+                {
+                  if (flagValueString != "0")
                   {
-                    if (flagValueString != "0" || (flagValueString == "0" && activeFlag == "availcheckstatus"))
-                    {
-                      AddTldToFlagSet(activeFlag, overrideTld);
-                    }
+                    AddTldToFlagSet(activeFlag, overrideTld);
                   }
                 }
               }

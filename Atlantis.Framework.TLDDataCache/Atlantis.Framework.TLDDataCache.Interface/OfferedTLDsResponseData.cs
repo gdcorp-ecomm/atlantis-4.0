@@ -44,19 +44,18 @@ namespace Atlantis.Framework.TLDDataCache.Interface
         }
       }
 
+      var overrideTlds = TLDsHelper.OverrideTlds;
+      if (overrideTlds.Count > 0)
+      {
+        tlds.AddRange(new List<string>(overrideTlds));
+      }
+
       if (tlds.Count == 0)
       {
         return Empty;
       }
-      else
-      {
-        return new OfferedTLDsResponseData(tlds);
-      }
-    }
-
-    public static OfferedTLDsResponseData FromDataTable(DataTable dataCacheTable)
-    {
-      return new OfferedTLDsResponseData(dataCacheTable);
+  
+      return new OfferedTLDsResponseData(tlds);
     }
 
     private OfferedTLDsResponseData()
@@ -69,45 +68,6 @@ namespace Atlantis.Framework.TLDDataCache.Interface
     {
       _offeredTLDsInOrder = tlds;
       _offeredTLDs = new HashSet<string>(tlds, StringComparer.OrdinalIgnoreCase);
-    }
-
-    private OfferedTLDsResponseData(DataTable dataCacheTable)
-    {
-      _offeredTLDs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-      _offeredTLDsInOrder = new List<string>();
-
-      if (dataCacheTable != null && dataCacheTable.Rows.Count > 0)
-      {
-        DataColumn columnName = dataCacheTable.Columns["name"];
-        DataColumn columnAvailCheckStatus = dataCacheTable.Columns["availcheckstatus"];
-
-        foreach (DataRow row in dataCacheTable.Rows)
-        {
-          bool availCheckStatus = (Convert.ToByte(row[columnAvailCheckStatus]) == 1);
-          if (availCheckStatus)
-          {
-            string tld = row[columnName].ToString().ToUpperInvariant();
-            _offeredTLDs.Add(tld);
-            _offeredTLDsInOrder.Add(tld);
-          }
-        }
-
-        AddOverrideTlds();
-      }
-    }
-
-    private void AddOverrideTlds()
-    {
-      var overrideTlds = TLDsHelper.OverrideTlds;
-      foreach (var overrideTld in overrideTlds)
-      {
-        if (!_offeredTLDs.Contains(overrideTld))
-        {
-          var tld = overrideTld.ToUpperInvariant();
-          _offeredTLDs.Add(tld);
-          _offeredTLDsInOrder.Add(tld);
-        }
-      }
     }
 
     public IEnumerable<string> OfferedTLDs
@@ -133,7 +93,19 @@ namespace Atlantis.Framework.TLDDataCache.Interface
 
     public string ToXML()
     {
-      throw new NotImplementedException();
+      var rootElement = new XElement("OfferedTLDsData");
+
+      if (_offeredTLDsInOrder != null)
+      {
+        foreach (var tld in _offeredTLDsInOrder)
+        {
+          var tldElement = new XElement("tld");
+          tldElement.Add(new XAttribute("name", tld));
+
+          rootElement.Add(tldElement);
+        }
+      }
+      return rootElement.ToString();
     }
 
     public AtlantisException GetException()

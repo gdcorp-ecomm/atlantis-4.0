@@ -74,12 +74,12 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
 
     private XAttribute DotTypeName(string name)
     {
-      return new XAttribute("Name", name.ToUpperInvariant());
+      return new XAttribute("name", name.ToUpperInvariant());
     }
 
     private XAttribute DotTypeSource(string className)
     {
-      return new XAttribute("DotTypeSource", className);
+      return new XAttribute("dottypesource", className);
     }
 
     private XAttribute GetFileVersion()

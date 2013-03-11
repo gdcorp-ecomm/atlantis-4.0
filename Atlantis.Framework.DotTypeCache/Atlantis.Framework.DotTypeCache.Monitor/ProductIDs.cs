@@ -104,8 +104,6 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
                                                                             BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.GetProperty | BindingFlags.GetField,
                                                                             null, tiers, null);
 
-                  var productids = new XElement("ProductIDs");
-
                   var pidList = new List<int>();
                   foreach (var s in tier)
                   {
@@ -114,10 +112,13 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
                                                                     BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | 
                                                                     BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.GetProperty | BindingFlags.GetField,
                                                                     null, s, null);
-                    pidList.AddRange(tierProducts);
+
+                    var productids = new XElement("ProductIDs");
+                    productids.Add(new XAttribute("mindomains", s.MinDomains));
+                    productids.Add(new XAttribute("value", string.Join(",", tierProducts)));
+
+                    productType.Add(productids);
                   }
-                  productids.Add(new XAttribute("value", string.Join(",", pidList)));
-                  productType.Add(productids);
                   data.Add(productType);
                 }
               }

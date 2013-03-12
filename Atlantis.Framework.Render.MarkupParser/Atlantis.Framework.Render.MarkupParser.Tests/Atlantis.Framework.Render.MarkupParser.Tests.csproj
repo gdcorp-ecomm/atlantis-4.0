@@ -59,7 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ConditionHandlers\AprimoMessageIdConditionHandler.cs" />
+    <Compile Include="ConditionHandlers\TargetedMessageIdConditionHandler.cs" />
     <Compile Include="ConditionHandlers\CountrySiteContextConditionHandler.cs" />
     <Compile Include="ConditionHandlers\DataCenterCondtionHandler.cs" />
     <Compile Include="MarkupParserManagerTests.cs" />

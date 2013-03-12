@@ -4,11 +4,11 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Render.MarkupParser.Tests.ConditionHandlers
 {
-  internal class AprimoMessageIdConditionHandler : IConditionHandler
+  internal class TargetedMessageIdConditionHandler : IConditionHandler
   {
     private const string ACTUAL_VALUE = "1234";
 
-    public string ConditionName { get { return "aprimoMessageId"; } }
+    public string ConditionName { get { return "targetedMessageId"; } }
     
     public bool EvaluateCondition(string conditionName, IEnumerable<string> parameters, IProviderContainer providerContainer)
     {

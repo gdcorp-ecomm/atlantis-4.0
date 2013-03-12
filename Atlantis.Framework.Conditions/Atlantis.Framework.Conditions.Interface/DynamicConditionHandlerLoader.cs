@@ -45,7 +45,7 @@ namespace Atlantis.Framework.Conditions.Interface
     static DynamicConditionHandlerLoader()
     {
       _assemblySearchPatterns = new List<string>();
-      _assemblySearchPatterns.Add("Atlantis.Framework.Conditions.*");
+      _assemblySearchPatterns.Add("Atlantis.Framework.Conditions.Handlers.*");
     }
 
     public DynamicConditionHandlerLoader(params Assembly[] additionalAssemblies)

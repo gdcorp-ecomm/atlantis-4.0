@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Web;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Conditions.Interface
@@ -22,11 +23,18 @@ namespace Atlantis.Framework.Conditions.Interface
       }
       else
       {
-        throw new ArgumentException(string.Format("Attempted to add duplicate IConditionHandler ConditionName. ConditionName: \"{0}\", Type: \"{1}\"", conditionHandler.ConditionName, conditionHandler.GetType()));
+        AtlantisException aex = new AtlantisException("ConditionHandlerManager.AddConditionHandler()", 
+                                                      "0", 
+                                                      string.Format("Attempted to add duplicate IConditionHandler ConditionName. ConditionName: \"{0}\", Type: \"{1}\"", conditionHandler.ConditionName, conditionHandler.GetType()), 
+                                                      conditionHandler.ConditionName, 
+                                                      null, 
+                                                      null);
+
+        Engine.Engine.LogAtlantisException(aex);
       }
     }
 
-    public static void AutoRegisterTokenHandlers()
+    public static void AutoRegisterConditionHandlers()
     {
       AutoRegisterConditionHandlers(null);
     }

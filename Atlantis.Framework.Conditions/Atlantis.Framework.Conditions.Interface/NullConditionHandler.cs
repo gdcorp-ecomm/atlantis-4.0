@@ -9,6 +9,7 @@ namespace Atlantis.Framework.Conditions.Interface
 
     public bool EvaluateCondition(string conditionName, IEnumerable<string> expectedValues, IProviderContainer providerContainer)
     {
+
       AtlantisException atlantisException = new AtlantisException("NullConditionHandler.EvaluateCondition",
                                                                   "0",
                                                                   string.Format("Condition \"{0}\" does not have a defined IConditionHandler.", conditionName),

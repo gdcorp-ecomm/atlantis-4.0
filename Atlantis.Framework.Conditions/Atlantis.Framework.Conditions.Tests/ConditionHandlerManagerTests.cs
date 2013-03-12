@@ -4,10 +4,12 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using Atlantis.Framework.Conditions.Interface;
-using Atlantis.Framework.Conditions.Tests.ConditionHandlers;
 using Atlantis.Framework.ExpressionParser;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.ProviderContainer.Impl;
 using Atlantis.Framework.Render.MarkupParser;
+using Atlantis.Framework.Testing.MockHttpContext;
+using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.Conditions.Tests
@@ -19,6 +21,23 @@ namespace Atlantis.Framework.Conditions.Tests
 
     private bool _conditionHandlersRegistered;
 
+    private IProviderContainer _objectProviderContainer;
+    private IProviderContainer ObjectProviderContainer
+    {
+      get
+      {
+        if (_objectProviderContainer == null)
+        {
+          _objectProviderContainer = new ObjectProviderContainer();
+          _objectProviderContainer.RegisterProvider<ISiteContext, MockSiteContext>();
+          _objectProviderContainer.RegisterProvider<IShopperContext, MockShopperContext>();
+          _objectProviderContainer.RegisterProvider<IManagerContext, MockManagerContext>();
+        }
+
+        return _objectProviderContainer;
+      }
+    }
+
     private ExpressionParserManager _expressionParserManager;
     private ExpressionParserManager ExpressionParserManager
     {
@@ -26,7 +45,7 @@ namespace Atlantis.Framework.Conditions.Tests
       {
         if (_expressionParserManager == null)
         {
-          _expressionParserManager = new ExpressionParserManager(new ObjectProviderContainer());
+          _expressionParserManager = new ExpressionParserManager(ObjectProviderContainer);
         }
 
         return _expressionParserManager;
@@ -36,14 +55,14 @@ namespace Atlantis.Framework.Conditions.Tests
     [TestInitialize]
     public void Initialize()
     {
+      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
       ExpressionParserManager.EvaluateFunctionHandler += ConditionHandlerManager.EvaluateCondition;
 
       if (!_conditionHandlersRegistered)
       {
-        ConditionHandlerManager.RegisterConditionHandler(new DataCenterCondtionHandler());
-        ConditionHandlerManager.RegisterConditionHandler(new CountrySiteContextConditionHandler());
-        ConditionHandlerManager.RegisterConditionHandler(new AprimoMessageIdConditionHandler());
-
+        ConditionHandlerManager.AutoRegisterConditionHandlers(Assembly.GetExecutingAssembly());
         _conditionHandlersRegistered = true;
       }
     }
@@ -58,7 +77,25 @@ namespace Atlantis.Framework.Conditions.Tests
     }
 
     [TestMethod]
-    public void HtmlFileParseTest()
+    public void EvaludateValidConditionTrue()
+    {
+      Assert.IsTrue(ConditionHandlerManager.EvaluateCondition("dataCenter", new[] { "AP" }, ObjectProviderContainer));
+    }
+
+    [TestMethod]
+    public void EvaludateValidConditionFalse()
+    {
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("dataCenter", new[] { "US" }, ObjectProviderContainer));
+    }
+
+    [TestMethod]
+    public void EvaludateUnRegisteredCondition()
+    {
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("doesNotExist", new[] { "value1" }, ObjectProviderContainer));
+    }
+
+    [TestMethod]
+    public void HtmlFileParseIntegrationTest()
     {
       string finalMarkup = string.Empty;
 

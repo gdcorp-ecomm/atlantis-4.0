@@ -4,9 +4,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.ExpressionParser;
-using Atlantis.Framework.ExpressionParser.Tests.EvaluateFunctionHandlers;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Testing.MockHttpContext;
+using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.Render.MarkupParser.Tests
@@ -16,6 +19,25 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
   {
     private const string PRE_PROCESSOR_PREFIX = "##";
 
+    private bool _conditionHandlersRegistered;
+
+    private IProviderContainer _objectProviderContainer;
+    private IProviderContainer ObjectProviderContainer
+    {
+      get
+      {
+        if (_objectProviderContainer == null)
+        {
+          _objectProviderContainer = new ObjectProviderContainer();
+          _objectProviderContainer.RegisterProvider<ISiteContext, MockSiteContext>();
+          _objectProviderContainer.RegisterProvider<IShopperContext, MockShopperContext>();
+          _objectProviderContainer.RegisterProvider<IManagerContext, MockManagerContext>();
+        }
+
+        return _objectProviderContainer;
+      }
+    }
+
     private ExpressionParserManager _expressionParserManager;
     private ExpressionParserManager ExpressionParserManager
     {
@@ -23,7 +45,7 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
       {
         if (_expressionParserManager == null)
         {
-          _expressionParserManager = new ExpressionParserManager(new ObjectProviderContainer());
+          _expressionParserManager = new ExpressionParserManager(ObjectProviderContainer);
         }
 
         return _expressionParserManager;
@@ -33,7 +55,16 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
     [TestInitialize]
     public void Initialize()
     {
-      ExpressionParserManager.EvaluateFunctionHandler += EvaluateFunctionHandlerFactory.EvaluateFunctionHandler;
+      MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      ExpressionParserManager.EvaluateFunctionHandler += ConditionHandlerManager.EvaluateCondition;
+
+      if (!_conditionHandlersRegistered)
+      {
+        ConditionHandlerManager.AutoRegisterConditionHandlers(Assembly.GetExecutingAssembly());
+        _conditionHandlersRegistered = true;
+      }
     }
 
     private void WriteOutput(string message)
@@ -477,7 +508,7 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
     }
 
     [TestMethod]
-    public void HtmlFileParseTest()
+    public void HtmlFileParseIntegrationTest()
     {
       string finalMarkup = string.Empty;
 

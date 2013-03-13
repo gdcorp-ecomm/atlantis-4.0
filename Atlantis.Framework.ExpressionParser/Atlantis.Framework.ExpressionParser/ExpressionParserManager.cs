@@ -11,7 +11,7 @@ namespace Atlantis.Framework.ExpressionParser
 
     private IProviderContainer ProviderContainer { get; set; }
 
-    public static EvaluateFunctionDelegate EvaluateFunctionHandler { get; set; }
+    public EvaluateFunctionDelegate EvaluateFunctionHandler { get; set; }
     
     public ExpressionParserManager(IProviderContainer providerContainer)
     {

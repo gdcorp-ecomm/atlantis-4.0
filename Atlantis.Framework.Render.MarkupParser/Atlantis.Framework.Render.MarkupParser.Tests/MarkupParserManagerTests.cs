@@ -46,6 +46,7 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
         if (_expressionParserManager == null)
         {
           _expressionParserManager = new ExpressionParserManager(ObjectProviderContainer);
+          _expressionParserManager.EvaluateFunctionHandler += ConditionHandlerManager.EvaluateCondition;
         }
 
         return _expressionParserManager;
@@ -57,8 +58,6 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
     {
       MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-
-      ExpressionParserManager.EvaluateFunctionHandler += ConditionHandlerManager.EvaluateCondition;
 
       if (!_conditionHandlersRegistered)
       {

@@ -37,6 +37,10 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
           el = new XElement("productids");
           el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/productids?tld=borg"));
           root.Add(el);
+
+          el = new XElement("tldmlready");
+          el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/tldmlready?tld=borg|a.borg"));
+          root.Add(el);
         }
       }
       catch (Exception ex)

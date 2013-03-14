@@ -18,12 +18,12 @@ namespace Atlantis.Framework.Render.MarkupParser
     private int _currentIfStatementCount;
     private MarkupParserManager.EvaluateExpressionDelegate _evaluateExpressionDelegate;
 
-    internal StringBuilder ParseAndEvaluate(string markup, string preProcessorPrefix, MarkupParserManager.EvaluateExpressionDelegate evaluateExpressionDelegate)
+    internal string ParseAndEvaluate(string markup, string preProcessorPrefix, MarkupParserManager.EvaluateExpressionDelegate evaluateExpressionDelegate)
     {
       ResetParser(markup, preProcessorPrefix, evaluateExpressionDelegate);
       BeginMarkupParsing();
 
-      return _outputMarkup;
+      return _outputMarkup.ToString();
     }
 
     private void ResetParser(string markup, string preProcessorPrefix, MarkupParserManager.EvaluateExpressionDelegate evaluateExpressionDelegate)

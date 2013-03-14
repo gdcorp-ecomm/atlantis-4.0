@@ -3,7 +3,6 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Text;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.ExpressionParser;
 using Atlantis.Framework.Interface;
@@ -83,11 +82,11 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
                         Timbo
                         ##endif";
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      WriteOutput(parsedMarkup.ToString());
+      WriteOutput(parsedMarkup);
 
-      Assert.IsTrue(parsedMarkup.ToString().Contains("Timbo"));
+      Assert.IsTrue(parsedMarkup.Contains("Timbo"));
     }
 
     [TestMethod]
@@ -98,11 +97,11 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
                         Timbo
                         ##endif";
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      WriteOutput(parsedMarkup.ToString());
+      WriteOutput(parsedMarkup);
 
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Timbo"));
+      Assert.IsFalse(parsedMarkup.Contains("Timbo"));
     }
 
     [TestMethod]
@@ -116,13 +115,13 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
                         ##endif";
 
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      WriteOutput(parsedMarkup.ToString());
+      WriteOutput(parsedMarkup);
 
-      Assert.IsTrue(parsedMarkup.ToString().Contains("Billy Bob"));
+      Assert.IsTrue(parsedMarkup.Contains("Billy Bob"));
 
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Timbo"));
+      Assert.IsFalse(parsedMarkup.Contains("Timbo"));
     }
 
     [TestMethod]
@@ -138,14 +137,14 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
                         ##endif";
 
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      WriteOutput(parsedMarkup.ToString());
+      WriteOutput(parsedMarkup);
 
-      Assert.IsTrue(parsedMarkup.ToString().Contains("Jimmy John"));
+      Assert.IsTrue(parsedMarkup.Contains("Jimmy John"));
 
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Timbo"));
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Billy Bob"));
+      Assert.IsFalse(parsedMarkup.Contains("Timbo"));
+      Assert.IsFalse(parsedMarkup.Contains("Billy Bob"));
     }
 
     [TestMethod]
@@ -162,15 +161,15 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
                         Billy Bob
                         ##endif";
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      WriteOutput(parsedMarkup.ToString());
+      WriteOutput(parsedMarkup);
 
-      Assert.IsTrue(parsedMarkup.ToString().Contains("Jimmy John"));
+      Assert.IsTrue(parsedMarkup.Contains("Jimmy John"));
 
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Timbo"));
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Tommy Gun"));
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Billy Bob"));
+      Assert.IsFalse(parsedMarkup.Contains("Timbo"));
+      Assert.IsFalse(parsedMarkup.Contains("Tommy Gun"));
+      Assert.IsFalse(parsedMarkup.Contains("Billy Bob"));
     }
 
     [TestMethod]
@@ -182,11 +181,11 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
                         ##endif";
 
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      WriteOutput(parsedMarkup.ToString());
+      WriteOutput(parsedMarkup);
 
-      Assert.IsTrue(parsedMarkup.ToString().Contains("Timbo"));
+      Assert.IsTrue(parsedMarkup.Contains("Timbo"));
     }
 
     [TestMethod]
@@ -198,11 +197,11 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
                         ##endif";
 
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      WriteOutput(parsedMarkup.ToString());
+      WriteOutput(parsedMarkup);
 
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Timbo"));
+      Assert.IsFalse(parsedMarkup.Contains("Timbo"));
     }
 
     [TestMethod]
@@ -216,13 +215,13 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
                         ##endif";
 
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      WriteOutput(parsedMarkup.ToString());
+      WriteOutput(parsedMarkup);
 
-      Assert.IsTrue(parsedMarkup.ToString().Contains("Billy Bob"));
+      Assert.IsTrue(parsedMarkup.Contains("Billy Bob"));
 
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Timbo"));
+      Assert.IsFalse(parsedMarkup.Contains("Timbo"));
     }
 
     [TestMethod]
@@ -238,14 +237,14 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
                         ##endif";
 
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      WriteOutput(parsedMarkup.ToString());
+      WriteOutput(parsedMarkup);
 
-      Assert.IsTrue(parsedMarkup.ToString().Contains("Jimmy John"));
+      Assert.IsTrue(parsedMarkup.Contains("Jimmy John"));
 
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Timbo"));
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Billy Bob"));
+      Assert.IsFalse(parsedMarkup.Contains("Timbo"));
+      Assert.IsFalse(parsedMarkup.Contains("Billy Bob"));
     }
 
     [TestMethod]
@@ -273,15 +272,15 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
                         ##endif";
 
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      WriteOutput(parsedMarkup.ToString());
+      WriteOutput(parsedMarkup);
 
-      Assert.IsTrue(parsedMarkup.ToString().Contains("Jimmy John"));
-      Assert.IsTrue(parsedMarkup.ToString().Contains("Asia Pacific"));
+      Assert.IsTrue(parsedMarkup.Contains("Jimmy John"));
+      Assert.IsTrue(parsedMarkup.Contains("Asia Pacific"));
 
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Timbo"));
-      Assert.IsFalse(parsedMarkup.ToString().Contains("Billy Bob"));
+      Assert.IsFalse(parsedMarkup.Contains("Timbo"));
+      Assert.IsFalse(parsedMarkup.Contains("Billy Bob"));
     }
 
     [TestMethod]
@@ -519,7 +518,7 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
 
       double startMilliseconds = DateTime.UtcNow.Ticks;
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(noExpressionsMarkup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(noExpressionsMarkup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
       double endMilliseconds = DateTime.UtcNow.Ticks;
 
@@ -543,7 +542,7 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
       double milliSecondsWithExpressions = (endMilliseconds - startMilliseconds) / 10000.00;
 
       WriteOutput(string.Format("With Expressions - Total Parse Time: {0} milliseconds", milliSecondsWithExpressions));
-      finalMarkup = parsedMarkup.ToString();
+      finalMarkup = parsedMarkup;
 
       WriteOutput(finalMarkup);
     }

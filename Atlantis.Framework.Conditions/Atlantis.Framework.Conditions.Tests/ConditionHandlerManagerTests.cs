@@ -104,13 +104,13 @@ namespace Atlantis.Framework.Conditions.Tests
         noExpressionsMarkup = htmlFileStream.ReadToEnd();
       }
 
-      double startMilliseconds = DateTime.UtcNow.Ticks;
+      double startNanoSeconds = DateTime.UtcNow.Ticks;
 
-      StringBuilder parsedMarkup = MarkupParserManager.ParseAndEvaluate(noExpressionsMarkup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(noExpressionsMarkup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      double endMilliseconds = DateTime.UtcNow.Ticks;
+      double endNanoSeconds = DateTime.UtcNow.Ticks;
 
-      double milliSeconds = (endMilliseconds - startMilliseconds) / 10000.00;
+      double milliSeconds = (endNanoSeconds - startNanoSeconds) / 10000.00;
 
       WriteOutput(string.Format("No Expressions - Total Parse Time: {0} milliseconds", milliSeconds));
 
@@ -121,16 +121,16 @@ namespace Atlantis.Framework.Conditions.Tests
         withExpressionsMarkup = htmlFileStream.ReadToEnd();
       }
 
-      startMilliseconds = DateTime.UtcNow.Ticks;
+      startNanoSeconds = DateTime.UtcNow.Ticks;
 
       parsedMarkup = MarkupParserManager.ParseAndEvaluate(withExpressionsMarkup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
 
-      endMilliseconds = DateTime.UtcNow.Ticks;
+      endNanoSeconds = DateTime.UtcNow.Ticks;
 
-      double milliSecondsWithExpressions = (endMilliseconds - startMilliseconds) / 10000.00;
+      double milliSecondsWithExpressions = (endNanoSeconds - startNanoSeconds) / 10000.00;
 
       WriteOutput(string.Format("With Expressions - Total Parse Time: {0} milliseconds", milliSecondsWithExpressions));
-      finalMarkup = parsedMarkup.ToString();
+      finalMarkup = parsedMarkup;
 
       WriteOutput(finalMarkup);
     }

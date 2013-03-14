@@ -1,6 +1,16 @@
-﻿
-namespace Atlantis.Framework.AccountExecContactInfo.Interface
+﻿namespace Atlantis.Framework.AccountExecContactInfo.Interface
 {
+  public enum PortfolioTypes
+  {
+    PremierServicesPlatinum = 1,
+    ResellerAdvisor = 2,
+    AMT = 3,
+    CAE = 4,
+    CN = 5,
+    PremierServicesGold = 6,
+    PremierServicesSilver = 7    
+  }
+
   public class VipInfo
   {
     #region Properties
@@ -14,6 +24,12 @@ namespace Atlantis.Framework.AccountExecContactInfo.Interface
     public string RepEmail
     {
       get { return _repEmail; }
+    }
+
+    private readonly PortfolioTypes _repPortfolioTypeId;
+    public PortfolioTypes RepPortfolioTypeId
+    {
+      get { return _repPortfolioTypeId; }
     }
 
     private readonly string _repPortfolioType;
@@ -35,10 +51,11 @@ namespace Atlantis.Framework.AccountExecContactInfo.Interface
     }
     #endregion
 
-    public VipInfo(string repName, string repEmail, string type, string phone, string ext)
+    public VipInfo(string repName, string repEmail, PortfolioTypes typeId, string type, string phone, string ext)
     {
       _repName = repName;
       _repEmail = repEmail;
+      _repPortfolioTypeId = typeId;
       _repPortfolioType = type;
       _repExternalContactPhone = phone;
       _repPhoneExtension = ext;

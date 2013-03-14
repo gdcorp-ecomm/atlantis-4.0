@@ -16,13 +16,12 @@ namespace Atlantis.Framework.AccountExecContactInfo.Impl
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      AccountExecContactInfoResponseData responseData = null;
-      VipInfo vipInfo = null;
+      AccountExecContactInfoResponseData responseData;
 
       try
       {
         var request = (AccountExecContactInfoRequestData)requestData;
-        vipInfo = GetVipInfo(request, config);
+        var vipInfo = GetVipInfo(request, config);
 
         responseData = new AccountExecContactInfoResponseData(vipInfo);
       }
@@ -40,23 +39,23 @@ namespace Atlantis.Framework.AccountExecContactInfo.Impl
       return responseData;
     }
 
-    private VipInfo GetVipInfo(AccountExecContactInfoRequestData request, ConfigElement config)
+    private static VipInfo GetVipInfo(RequestData request, ConfigElement config)
     {
       VipInfo info = null;
 
-      using (SqlConnection cn = new SqlConnection(NetConnect.LookupConnectInfo(config)))
+      using (var cn = new SqlConnection(NetConnect.LookupConnectInfo(config)))
       {
-        using (SqlCommand cmd = new SqlCommand(PROC_NAME, cn))
+        using (var cmd = new SqlCommand(PROC_NAME, cn))
         {
           cmd.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
           cmd.CommandType = CommandType.StoredProcedure;
-          cmd.Parameters.Add(new SqlParameter("@shopper_id", request.ShopperID));
+          cmd.Parameters.Add(new SqlParameter(SHOPPER_PARAM, request.ShopperID));
           cn.Open();
-          using (SqlDataReader dr = cmd.ExecuteReader())
+          using (var dr = cmd.ExecuteReader())
           {
             while (dr.Read())
             {
-              info = PopulateObjectFromDB(dr);
+              info = PopulateObjectFromDb(dr);
             }
           }
         }
@@ -64,15 +63,21 @@ namespace Atlantis.Framework.AccountExecContactInfo.Impl
       return info;
     }
 
-    private VipInfo PopulateObjectFromDB(IDataReader idr)
+    private static VipInfo PopulateObjectFromDb(IDataRecord idr)
     {
-      string name = idr["AssignedRepName"].ToString();
-      string email = idr["AssignedRepEmail"].ToString();
-      string portfolioType = idr["PortfolioType"].ToString();
-      string phone = idr["MYAExternalNumberDailIn"].ToString();
-      string ext = idr["AssignedRepExt"].ToString();
+      PortfolioTypes portfolioTypeId = 0;
+      var name = idr["AssignedRepName"].ToString();
+      var email = idr["AssignedRepEmail"].ToString();
+      int temp;
+      if (int.TryParse(idr["crm_portfolioTypeID"].ToString(), out temp))
+      {
+        portfolioTypeId = (PortfolioTypes) temp;
+      }
+      var portfolioType = idr["PortfolioType"].ToString();
+      var phone = idr["MYAExternalNumberDailIn"].ToString();
+      var ext = idr["AssignedRepExt"].ToString();
 
-      return new VipInfo(name, email, portfolioType, phone, ext);
+      return new VipInfo(name, email, portfolioTypeId, portfolioType, phone, ext);
     }
   }
 }

@@ -7,7 +7,7 @@ namespace Atlantis.Framework.AccountExecContactInfo.Interface
 {
   public class AccountExecContactInfoResponseData : IResponseData, ISessionSerializableResponse
   {
-    private AtlantisException _exception = null;
+    private readonly AtlantisException _exception;
     public VipInfo VipRepInfo { get; private set; }
 
     public bool IsSuccess
@@ -16,14 +16,15 @@ namespace Atlantis.Framework.AccountExecContactInfo.Interface
     }
 
     public AccountExecContactInfoResponseData()
-    { }
+    {
+    }
 
     public AccountExecContactInfoResponseData(VipInfo vipInfo)
     {
       VipRepInfo = vipInfo;
     }
 
-     public AccountExecContactInfoResponseData(AtlantisException atlantisException)
+    public AccountExecContactInfoResponseData(AtlantisException atlantisException)
     {
       _exception = atlantisException;
     }
@@ -31,25 +32,27 @@ namespace Atlantis.Framework.AccountExecContactInfo.Interface
     public AccountExecContactInfoResponseData(RequestData requestData, Exception exception)
     {
       _exception = new AtlantisException(requestData
-        , "AccountExecContactInfoResponseData"
-        , exception.Message
-        , requestData.ToXML());
+                                         , "AccountExecContactInfoResponseData"
+                                         , exception.Message
+                                         , requestData.ToXML());
     }
 
     #region IResponseData Members
 
     public string ToXML()
     {
-      string xml = string.Empty; ;
+      string xml = string.Empty;
+      ;
 
       if (VipRepInfo != null)
       {
-        XElement vipInfoXml = new XElement("vipInfo"
-          , new XAttribute("name", VipRepInfo.RepName)
-          , new XAttribute("email", VipRepInfo.RepEmail)
-          , new XAttribute("portfoliotype", VipRepInfo.RepPortfolioType)
-          , new XAttribute("phone", VipRepInfo.RepExternalContactPhone)
-          , new XAttribute("extension", VipRepInfo.RepPhoneExtension));
+        var vipInfoXml = new XElement("vipInfo"
+                                      , new XAttribute("name", VipRepInfo.RepName)
+                                      , new XAttribute("email", VipRepInfo.RepEmail)
+                                      , new XAttribute("portfoliotypeid", VipRepInfo.RepPortfolioTypeId)
+                                      , new XAttribute("portfoliotype", VipRepInfo.RepPortfolioType)
+                                      , new XAttribute("phone", VipRepInfo.RepExternalContactPhone)
+                                      , new XAttribute("extension", VipRepInfo.RepPhoneExtension));
 
         xml = vipInfoXml.ToString();
       }
@@ -61,6 +64,7 @@ namespace Atlantis.Framework.AccountExecContactInfo.Interface
     {
       return _exception;
     }
+
     #endregion
 
     #region ISessionSerializableResponse Members
@@ -74,16 +78,21 @@ namespace Atlantis.Framework.AccountExecContactInfo.Interface
     {
       if (!string.IsNullOrEmpty(sessionData))
       {
-        XDocument xDoc = XDocument.Parse(sessionData);
-        XElement vipXml = xDoc.Element("vipInfo");
-        VipRepInfo = new VipInfo(vipXml.Attribute("name").Value
-          , vipXml.Attribute("email").Value
-          , vipXml.Attribute("portfoliotype").Value
-          , vipXml.Attribute("phone").Value
-          , vipXml.Attribute("extension").Value);
+        var xDoc = XDocument.Parse(sessionData);
+        var vipXml = xDoc.Element("vipInfo");
+        if (vipXml != null)
+        {
+          VipRepInfo = new VipInfo(vipXml.Attribute("name").Value
+                                   , vipXml.Attribute("email").Value
+                                   , (PortfolioTypes)Enum.Parse(typeof (PortfolioTypes), vipXml.Attribute("portfoliotypeid").Value)
+                                   , vipXml.Attribute("portfoliotype").Value
+                                   , vipXml.Attribute("phone").Value
+                                   , vipXml.Attribute("extension").Value);
+        }
       }
     }
+
     #endregion
- 
+
   }
 }

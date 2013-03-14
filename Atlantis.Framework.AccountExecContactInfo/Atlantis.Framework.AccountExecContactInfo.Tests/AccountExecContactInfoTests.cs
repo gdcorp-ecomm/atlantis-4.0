@@ -13,9 +13,6 @@ namespace Atlantis.Framework.AccountExecContactInfo.Tests
     private const int _requestType = 527;
 
 
-    public GetAccountExecContactInfoTests()
-    { }
-
     private TestContext testContextInstance;
 
     public TestContext TestContext
@@ -53,24 +50,25 @@ namespace Atlantis.Framework.AccountExecContactInfo.Tests
     {
       MockHttpContext.SetMockHttpContext(string.Empty, "http://localhost", string.Empty);
 
-      AccountExecContactInfoRequestData request = new AccountExecContactInfoRequestData(_vipShopperId
+      var request = new AccountExecContactInfoRequestData(_vipShopperId
         , string.Empty
         , string.Empty
         , string.Empty
         , 0);
 
-      AccountExecContactInfoResponseData response1 = SessionCache.SessionCache.GetProcessRequest<AccountExecContactInfoResponseData>(request, _requestType);
-      AccountExecContactInfoResponseData response2 = SessionCache.SessionCache.GetProcessRequest<AccountExecContactInfoResponseData>(request, _requestType);
+      var response1 = SessionCache.SessionCache.GetProcessRequest<AccountExecContactInfoResponseData>(request, _requestType);
+      var response2 = SessionCache.SessionCache.GetProcessRequest<AccountExecContactInfoResponseData>(request, _requestType);
 
       Debug.WriteLine(response1.ToXML());
       Assert.IsTrue(response1.IsSuccess);
 
-      string xml = response2.SerializeSessionData();
+      var xml = response2.SerializeSessionData();
       Debug.WriteLine("Serialized Response");
       Debug.WriteLine(xml);
 
       Assert.AreEqual(response1.VipRepInfo.RepPhoneExtension, response2.VipRepInfo.RepPhoneExtension);
       Assert.IsTrue(response2.IsSuccess);
+      Assert.AreEqual(response2.VipRepInfo.RepPortfolioTypeId, PortfolioTypes.PremierServicesPlatinum);
     }
 
     [TestMethod]
@@ -80,19 +78,19 @@ namespace Atlantis.Framework.AccountExecContactInfo.Tests
     {
       MockHttpContext.SetMockHttpContext(string.Empty, "http://localhost", string.Empty);
 
-      AccountExecContactInfoRequestData request = new AccountExecContactInfoRequestData(_ordinaryShopperId
+      var request = new AccountExecContactInfoRequestData(_ordinaryShopperId
         , string.Empty
         , string.Empty
         , string.Empty
         , 0);
 
-      AccountExecContactInfoResponseData response1 = SessionCache.SessionCache.GetProcessRequest<AccountExecContactInfoResponseData>(request, _requestType);
-      AccountExecContactInfoResponseData response2 = SessionCache.SessionCache.GetProcessRequest<AccountExecContactInfoResponseData>(request, _requestType);
+      var response1 = SessionCache.SessionCache.GetProcessRequest<AccountExecContactInfoResponseData>(request, _requestType);
+      var response2 = SessionCache.SessionCache.GetProcessRequest<AccountExecContactInfoResponseData>(request, _requestType);
 
       Debug.WriteLine(response1.ToXML());
       Assert.IsTrue(response1.IsSuccess);
 
-      string xml = response2.SerializeSessionData();
+      var xml = response2.SerializeSessionData();
       Debug.WriteLine("Serialized Response");
       Debug.WriteLine(xml);
 

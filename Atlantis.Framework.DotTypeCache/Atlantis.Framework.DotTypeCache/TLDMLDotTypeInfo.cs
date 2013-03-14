@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.DomainContactFields.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
+using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
 using Atlantis.Framework.RegDotTypeRegistry.Interface;
 using System;
@@ -20,6 +21,7 @@ namespace Atlantis.Framework.DotTypeCache
     private Lazy<int> _tldId;
     private Lazy<DomainContactFieldsResponseData> _domainContactFieldsData;
     private Lazy<TLDLanguageResponseData> _languagesData;
+    private Lazy<ValidDotTypesResponseData> _validDotTypes;
 
     internal static TLDMLDotTypeInfo FromDotType(string dotType)
     {
@@ -29,54 +31,40 @@ namespace Atlantis.Framework.DotTypeCache
     private TLDMLDotTypeInfo(string tld)
     {
       _tld = tld;
-      _tldId = new Lazy<int>(() => { return LoadTldId(); });
-      _productIdList = new Lazy<ProductIdListResponseData>(() => { return LoadProductIds(); });
-      _dotTypeRegistryData = new Lazy<RegDotTypeRegistryResponseData>(() => { return LoadDotTypeRegistryData(); });
-      _tldml = new Lazy<TLDMLByNameResponseData>(() => { return LoadTLDML(); });
+      _tldId = new Lazy<int>(LoadTldId);
+      _productIdList = new Lazy<ProductIdListResponseData>(LoadProductIds);
+      _dotTypeRegistryData = new Lazy<RegDotTypeRegistryResponseData>(LoadDotTypeRegistryData);
+      _tldml = new Lazy<TLDMLByNameResponseData>(LoadTLDML);
       _domainContactFieldsData = new Lazy<DomainContactFieldsResponseData>(LoadDomainContactFieldsData);
       _languagesData = new Lazy<TLDLanguageResponseData>(LoadLanguagesData);
+      _validDotTypes = new Lazy<ValidDotTypesResponseData>(LoadValidDotTypes);
 
       ITLDProduct product = _tldml.Value.Product; // Preload the TLDML
     }
 
     private int LoadTldId()
     {
-      const string tldIdColumnName = "tldid";
-      int result = 0;
+      int tldId;
+      _validDotTypes.Value.TryGetTldId(_tld, out tldId);
 
-      var tldData = DataCache.DataCache.GetExtendedTLDData(_tld);
-      Dictionary<string, string> tldInfo;
-      if (tldData.TryGetValue(_tld, out tldInfo))
-      {
-        string tldIdString;
-        if (tldInfo.TryGetValue(tldIdColumnName, out tldIdString))
-        {
-          int tldId;
-          if (int.TryParse(tldIdString, out tldId))
-          {
-            result = tldId;
-          }
-        }
-      }
-
-      return result;
+      return tldId;
     }
 
     private TLDMLByNameResponseData LoadTLDML()
     {
-      TLDMLByNameRequestData request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
+      var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
       return (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.TLDMLByName);
     }
 
     private RegDotTypeRegistryResponseData LoadDotTypeRegistryData()
     {
-      RegDotTypeRegistryRequestData request = new RegDotTypeRegistryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
+      var request = new RegDotTypeRegistryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
       return (RegDotTypeRegistryResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.Registry);
     }
 
     private ProductIdListResponseData LoadProductIds()
     {
-      ProductIdListRequestData request = new ProductIdListRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
+      var request = new ProductIdListRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
       return (ProductIdListResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ProductIdList);
     }
 
@@ -90,6 +78,12 @@ namespace Atlantis.Framework.DotTypeCache
     {
       var request = new TLDLanguageRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tldId.Value);
       return (TLDLanguageResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.Languages);
+    }
+
+    private ValidDotTypesResponseData LoadValidDotTypes()
+    {
+      var request = new ValidDotTypesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      return (ValidDotTypesResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ValidDotTypes);
     }
 
     public string DotType

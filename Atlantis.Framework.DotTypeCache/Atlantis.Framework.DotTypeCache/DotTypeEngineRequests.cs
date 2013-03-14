@@ -9,6 +9,7 @@
     private static int _tldmlByNameRequest = 634;
     private static int _domainContactFieldsRequest = 651;
     private static int _languagesRequest = 655;
+    private static int _validDotTypesRequest = 667;
 
     public static int TLDMLByName
     {
@@ -50,6 +51,12 @@
     {
       get { return _languagesRequest; }
       set { _languagesRequest = value; }
+    }
+
+    public static int ValidDotTypes
+    {
+      get { return _validDotTypesRequest; }
+      set { _validDotTypesRequest = value; }
     }
   }
 }

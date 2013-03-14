@@ -12,6 +12,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
   {
     private static int _domainContactFieldsRequest = 651;
     private static int _languagesRequest = 655;
+    private static int _validDotTypesRequest = 667;
 
     private StaticDotTypeTiers _registerProductIds;
     private StaticDotTypeTiers _transferProductIds;
@@ -23,6 +24,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
     private StaticTld _staticTld;
     private Lazy<DomainContactFieldsResponseData> _domainContactFieldsData;
     private Lazy<TLDLanguageResponseData> _languagesData;
+    private Lazy<ValidDotTypesResponseData> _validDotTypes;
 
     private bool _isMultiRegistry = false;
     public bool IsMultiRegistry
@@ -97,6 +99,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
       _staticTld = new StaticTld(this);
       _domainContactFieldsData = new Lazy<DomainContactFieldsResponseData>(LoadDomainContactFieldsData);
       _languagesData = new Lazy<TLDLanguageResponseData>(LoadLanguagesData);
+      _validDotTypes = new Lazy<ValidDotTypesResponseData>(LoadValidDotTypes);
     }
 
     private DomainContactFieldsResponseData LoadDomainContactFieldsData()
@@ -109,6 +112,12 @@ namespace Atlantis.Framework.DotTypeCache.Static
     {
       var request = new TLDLanguageRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, TldId);
       return (TLDLanguageResponseData)DataCache.DataCache.GetProcessRequest(request, _languagesRequest);
+    }
+
+    private ValidDotTypesResponseData LoadValidDotTypes()
+    {
+      var request = new ValidDotTypesRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      return (ValidDotTypesResponseData)DataCache.DataCache.GetProcessRequest(request, _validDotTypesRequest);
     }
 
     protected abstract StaticDotTypeTiers InitializeRegistrationProductIds();
@@ -419,32 +428,14 @@ namespace Atlantis.Framework.DotTypeCache.Static
       get { return _staticProduct; }
     }
 
-    private int? _tldId;
     public int TldId
     {
       get
       {
-        if (_tldId == null)
-        {
-          const string tldIdColumnName = "tldid";
-          string sTldId = string.Empty;
-          _tldId = 0;
-          int tldId;
+        int tldId;
+        _validDotTypes.Value.TryGetTldId(DotType, out tldId);
 
-          var tldData = DataCache.DataCache.GetExtendedTLDData(DotType);
-
-          Dictionary<string, string> tldInfo;
-          tldData.TryGetValue(DotType, out tldInfo);
-
-          if (tldInfo != null && tldInfo.Count > 0 && tldInfo.ContainsKey(tldIdColumnName))
-          {
-            tldInfo.TryGetValue(tldIdColumnName, out sTldId);
-          }
-
-          int.TryParse(sTldId, out tldId);
-          _tldId = tldId;
-        }
-        return _tldId.Value;
+        return tldId;
       }
     }
 

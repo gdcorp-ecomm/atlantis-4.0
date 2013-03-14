@@ -57,20 +57,12 @@ namespace Atlantis.Framework.Render.Pipeline.Tests
       TokenManager.RegisterTokenHandler(new DataCenterToken());
     }
 
-    private void SetupRenderPipeline()
-    {
-      RenderPipelineManager.AddRenderHandler(new ConditionRenderHandler());
-      RenderPipelineManager.AddRenderHandler(new TargetedMessageRenderHandler());
-      RenderPipelineManager.AddRenderHandler(new TokenRenderHandler());
-    }
-
     private void ApplicationStart()
     {
       SetupHttpContext();
       RegisterProviders();
       RegisterConditions();
       RegisterTokens();
-      SetupRenderPipeline();
     }    
 
     [TestInitialize]
@@ -80,8 +72,44 @@ namespace Atlantis.Framework.Render.Pipeline.Tests
     }
 
     [TestMethod]
+    public void RenderContentEmptyPipelineTest()
+    {
+      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
+
+      IRenderContent renderContent = new SimpleRenderContent();
+      renderContent.Content = "Hello World!";
+
+      renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
+
+      WriteOutput(renderContent.Content);
+      Assert.IsTrue(renderContent.Content == "Hello World!");
+    }
+
+    [TestMethod]
+    public void RenderContentOrderOfPipelineTest()
+    {
+      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
+      renderPipelineManager.AddRenderHandler(new RenderHandlerThree());
+      renderPipelineManager.AddRenderHandler(new RenderHandlerOne());
+      renderPipelineManager.AddRenderHandler(new RenderHandlerTwo());
+
+      IRenderContent renderContent = new SimpleRenderContent();
+      renderContent.Content = string.Empty;
+
+      renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
+
+      WriteOutput(renderContent.Content);
+      Assert.IsTrue(renderContent.Content == "three one two");
+    }
+
+    [TestMethod]
     public void RenderContentWithAllVariationsIntegrationTest()
     {
+      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
+      renderPipelineManager.AddRenderHandler(new ConditionRenderHandler());
+      renderPipelineManager.AddRenderHandler(new TargetedMessageRenderHandler());
+      renderPipelineManager.AddRenderHandler(new TokenRenderHandler());
+
       IRenderContent renderContent = new SimpleRenderContent();
       renderContent.Content = @"<div>Current DataCenter: [@T[dataCenter:name]@T]</div>
                                 ##if(dataCenter(AP))
@@ -95,7 +123,7 @@ namespace Atlantis.Framework.Render.Pipeline.Tests
                                 <div><img alt=""targeted message"" src=""[@TargetedMessage[imageUrl]@TargetedMessage]"" />
                                 ##endif";
 
-      RenderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
+      renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
 
       WriteOutput(renderContent.Content);
 
@@ -107,6 +135,11 @@ namespace Atlantis.Framework.Render.Pipeline.Tests
     [TestMethod]
     public void RenderContentHtmlFileIntegrationTest()
     {
+      RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
+      renderPipelineManager.AddRenderHandler(new ConditionRenderHandler());
+      renderPipelineManager.AddRenderHandler(new TargetedMessageRenderHandler());
+      renderPipelineManager.AddRenderHandler(new TokenRenderHandler());
+
       string withExpressionsMarkup;
       using (StreamReader htmlFileStream = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("Atlantis.Framework.Render.Pipeline.Tests.Data.home-page-with-conditions.html")))
       {
@@ -118,7 +151,7 @@ namespace Atlantis.Framework.Render.Pipeline.Tests
 
       double startNanoSeconds = DateTime.UtcNow.Ticks;
 
-      RenderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
+      renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
 
       double endNanoSeconds = DateTime.UtcNow.Ticks;
 

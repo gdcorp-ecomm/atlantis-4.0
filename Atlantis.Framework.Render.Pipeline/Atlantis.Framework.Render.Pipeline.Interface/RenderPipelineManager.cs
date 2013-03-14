@@ -3,16 +3,16 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Render.Pipeline.Interface
 {
-  public static class RenderPipelineManager
+  public class RenderPipelineManager
   {
-    private static readonly RenderPipeline _renderPipeline = new RenderPipeline();
+    private readonly RenderPipeline _renderPipeline = new RenderPipeline();
 
-    public static void AddRenderHandler(IRenderHandler renderHandler)
+    public void AddRenderHandler(IRenderHandler renderHandler)
     {
       _renderPipeline.Add(renderHandler);
     }
 
-    public static void RenderContent(IRenderContent renderContent, IProviderContainer providerContainer)
+    public void RenderContent(IRenderContent renderContent, IProviderContainer providerContainer)
     {
       foreach (IRenderHandler renderHandler in _renderPipeline.RenderHandlers)
       {

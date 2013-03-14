@@ -3,33 +3,28 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
-using System.Xml;
 using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Monitor
 {
   internal class OfferedTLDs : IMonitor
   {
-    private IDotTypeProvider dotTypeProvider;
+    private readonly IDotTypeProvider _dotTypeProvider;
     public OfferedTLDs()
     {
       HttpProviderContainer.Instance.RegisterProvider<IDotTypeProvider, DotTypeProvider>();
-      dotTypeProvider = HttpProviderContainer.Instance.Resolve<IDotTypeProvider>();
+      _dotTypeProvider = HttpProviderContainer.Instance.Resolve<IDotTypeProvider>();
     }
 
     public XDocument GetMonitorData(NameValueCollection qsc)
     {
-      XDocument result = new XDocument();
+      var result = new XDocument();
       
-      XElement root = new XElement("OfferedTLDs");
+      var root = new XElement("OfferedTLDs");
       root.Add(GetProcessId(), GetMachineName(), GetFileVersion(), GetInterfaceVersion());
       result.Add(root);
 
@@ -37,7 +32,7 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
       {
         var items = qsc.AllKeys.SelectMany(qsc.GetValues, (k, v) => new { key = k, value = v });
         string tldProductType = string.Empty;
-        string[] tldNames = new string[] {};
+        var tldNames = new string[] {};
         foreach (var item in items)
         {
           if (!string.IsNullOrEmpty(item.key) && !string.IsNullOrEmpty(item.value))
@@ -48,7 +43,7 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
                 tldProductType = item.value;
                 break;
               case "tld":
-                char[] delimiters = new char[2] { '|', ',' };
+                var delimiters = new[] { '|', ',' };
                 tldNames = item.value.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
                 break;
             }
@@ -73,19 +68,19 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
           switch (type)
           {
               case OfferedTLDProductTypes.Registration:
-                tldData = dotTypeProvider.GetTLDDataForRegistration;
+                tldData = _dotTypeProvider.GetTLDDataForRegistration;
                 break;
               case OfferedTLDProductTypes.Transfer:
-                tldData = dotTypeProvider.GetTLDDataForTransfer;
+                tldData = _dotTypeProvider.GetTLDDataForTransfer;
                 break;
               case OfferedTLDProductTypes.Bulk:
-                tldData = dotTypeProvider.GetTLDDataForBulk;
+                tldData = _dotTypeProvider.GetTLDDataForBulk;
                 break;
               case OfferedTLDProductTypes.BulkTransfer:
-                tldData = dotTypeProvider.GetTLDDataForBulkTransfer;
+                tldData = _dotTypeProvider.GetTLDDataForBulkTransfer;
                 break;
               default:
-                tldData = dotTypeProvider.GetTLDDataForRegistration;
+                tldData = _dotTypeProvider.GetTLDDataForRegistration;
                 break;
           }
 
@@ -134,10 +129,10 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
 
     private XElement GetTldElement(string tldName, Dictionary<string, bool> flagSets)
     {
-      XElement result = new XElement("TLD");
+      var result = new XElement("TLD");
       result.Add(new XAttribute("name", tldName.ToUpperInvariant()));
 
-      XElement resultFlag = new XElement("Flags");
+      var resultFlag = new XElement("Flags");
       foreach (var flagSet in flagSets)
       {
         resultFlag.Add(new XAttribute(flagSet.Key, flagSet.Value));

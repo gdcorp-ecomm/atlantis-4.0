@@ -10,31 +10,34 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
   {
     public XDocument GetMonitorData(NameValueCollection qsc)
     {
-      XDocument result = new XDocument();
+      var result = new XDocument();
       
-      XElement root = new XElement("MonitorUrls");
+      var root = new XElement("MonitorUrls");
       root.Add(GetProcessId(), GetMachineName(), GetFileVersion(), GetInterfaceVersion());
       result.Add(root);
 
       try
       {
-        string baseUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
+        if (HttpContext.Current.Request.ApplicationPath != null)
+        {
+          string baseUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
 
-        var el = new XElement("dottypeinfo");
-        el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/data?tld=com"));
-        root.Add(el);
+          var el = new XElement("dottypeinfo");
+          el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/data?tld=com"));
+          root.Add(el);
 
-        el = new XElement("activetlds");
-        el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/activetlds"));
-        root.Add(el);
+          el = new XElement("activetlds");
+          el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/activetlds"));
+          root.Add(el);
 
-        el = new XElement("offeredtlds");
-        el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/offeredtlds?type=registration&tld=org|com"));
-        root.Add(el);
+          el = new XElement("offeredtlds");
+          el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/offeredtlds?type=registration&tld=org|com"));
+          root.Add(el);
 
-        el = new XElement("productids");
-        el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/productids?tld=borg"));
-        root.Add(el);
+          el = new XElement("productids");
+          el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/productids?tld=borg"));
+          root.Add(el);
+        }
       }
       catch (Exception ex)
       {

@@ -6,6 +6,7 @@
     ActiveTLDs,
     OfferedTLDs,
     ProductIDs,
-    Help
+    Help,
+    TldmlReady
   }
 }

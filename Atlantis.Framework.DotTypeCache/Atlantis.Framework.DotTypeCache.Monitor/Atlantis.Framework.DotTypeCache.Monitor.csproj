@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveTLDs.cs" />
+    <Compile Include="TldmlReady.cs" />
     <Compile Include="Help.cs" />
     <Compile Include="ProductIDs.cs" />
     <Compile Include="OfferedTLDs.cs" />

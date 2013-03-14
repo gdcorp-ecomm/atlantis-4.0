@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.DotTypeCache.Static;
-using Atlantis.Framework.DotTypeCache.StaticTypes;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
-using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Monitor
 {
@@ -81,7 +78,7 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
                   Type classType = dotTypeInfo.GetType();
                   object objInstance = Activator.CreateInstance(classType);
 
-                  StaticDotTypeTiers tiers = null;
+                  StaticDotTypeTiers tiers;
                   try
                   {
                     tiers = (StaticDotTypeTiers)classType.InvokeMember(meth,
@@ -104,7 +101,6 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
                                                                             BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.GetProperty | BindingFlags.GetField,
                                                                             null, tiers, null);
 
-                  var pidList = new List<int>();
                   foreach (var s in tier)
                   {
                     classType = s.GetType();

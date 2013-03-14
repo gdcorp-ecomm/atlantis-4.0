@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
-using System.Xml;
 
 namespace Atlantis.Framework.DotTypeCache.Monitor
 {
@@ -24,9 +18,9 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
 
     public XDocument GetMonitorData(NameValueCollection qsc)
     {
-      XDocument result = new XDocument();
+      var result = new XDocument();
 
-      XElement root = new XElement("Data");
+      var root = new XElement("Data");
       root.Add(GetProcessId(), GetMachineName(), GetFileVersion(), GetInterfaceVersion());
       result.Add(root);
 
@@ -43,10 +37,10 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
 
       if (!string.IsNullOrEmpty(tldValue))
       {
-        IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo(tldValue);
+        var dotType = DotTypeCache.GetDotTypeInfo(tldValue);
         var className = dotType.GetType().FullName;
 
-        XElement tldInfo = new XElement("TLDInfo");
+        var tldInfo = new XElement("TLDInfo");
         tldInfo.Add(DotTypeName(tldValue), DotTypeSource(className));
         root.Add(tldInfo);
 
@@ -55,7 +49,7 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
         {
           if (name.ToLowerInvariant() == "tldmldottypeinfo")
           {
-            TLDMLByNameRequestData request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, tldValue);
+            var request = new TLDMLByNameRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, tldValue);
             response =  (TLDMLByNameResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.TLDMLByName);
             break;
           }

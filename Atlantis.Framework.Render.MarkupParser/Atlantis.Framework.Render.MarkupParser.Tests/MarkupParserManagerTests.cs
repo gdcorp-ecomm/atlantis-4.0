@@ -45,7 +45,7 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
         if (_expressionParserManager == null)
         {
           _expressionParserManager = new ExpressionParserManager(ObjectProviderContainer);
-          _expressionParserManager.EvaluateFunctionHandler += ConditionHandlerManager.EvaluateCondition;
+          _expressionParserManager.EvaluateExpressionHandler += ConditionHandlerManager.EvaluateCondition;
         }
 
         return _expressionParserManager;

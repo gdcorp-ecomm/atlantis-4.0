@@ -26,8 +26,8 @@ namespace Atlantis.Framework.Render.Pipeline.Interface
                                                         "0",
                                                         string.Format("IRenderHandler error. Type: \"{0}\", Error: \"{1}\"", renderHandler.GetType(), ex.Message),
                                                         ex.StackTrace,
-                                                        providerContainer.Resolve<ISiteContext>(),
-                                                        providerContainer.Resolve<IShopperContext>());
+                                                        null,
+                                                        null);
 
           Engine.Engine.LogAtlantisException(aex);
         }

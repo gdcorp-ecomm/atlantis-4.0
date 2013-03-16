@@ -13,7 +13,7 @@ namespace Atlantis.Framework.Render.Pipeline.Tests.RenderHandlers
     public void ProcessContent(IRenderContent renderContent, IProviderContainer providerContainer)
     {
       ExpressionParserManager expressionParserManager = new ExpressionParserManager(providerContainer);
-      expressionParserManager.EvaluateFunctionHandler += ConditionHandlerManager.EvaluateCondition;
+      expressionParserManager.EvaluateExpressionHandler += ConditionHandlerManager.EvaluateCondition;
 
       string modifiedContent = MarkupParserManager.ParseAndEvaluate(renderContent.Content, PRE_PROCESSOR_PREFIX, expressionParserManager.EvaluateExpression);
 

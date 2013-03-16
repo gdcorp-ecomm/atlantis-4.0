@@ -24,7 +24,7 @@ namespace Atlantis.Framework.ExpressionParser.Tests
     [TestInitialize]
     public void Initialize()
     {
-      ExpressionParserManager.EvaluateFunctionHandler += EvaluateFunctionHandlerFactory.EvaluateFunctionHandler;
+      ExpressionParserManager.EvaluateExpressionHandler += EvaluateFunctionHandlerFactory.EvaluateFunctionHandler;
     }
 
     [TestMethod]

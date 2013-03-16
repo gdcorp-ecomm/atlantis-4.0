@@ -11,7 +11,7 @@ namespace Atlantis.Framework.ExpressionParser
 
     private IProviderContainer ProviderContainer { get; set; }
 
-    public EvaluateFunctionDelegate EvaluateFunctionHandler { get; set; }
+    public EvaluateFunctionDelegate EvaluateExpressionHandler { get; set; }
     
     public ExpressionParserManager(IProviderContainer providerContainer)
     {
@@ -22,9 +22,9 @@ namespace Atlantis.Framework.ExpressionParser
     {
       IEnumerable<string> expectedValues = GetExpectedValues(functionArgs);
 
-      if (EvaluateFunctionHandler != null)
+      if (EvaluateExpressionHandler != null)
       {
-        functionArgs.Result = EvaluateFunctionHandler.Invoke(functionName, expectedValues, ProviderContainer); 
+        functionArgs.Result = EvaluateExpressionHandler.Invoke(functionName, expectedValues, ProviderContainer); 
       }
       else
       {

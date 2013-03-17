@@ -95,19 +95,18 @@ namespace Atlantis.Framework.EcommProductAddOns.Impl
 
       var productList = DataCache.DataCache.GetCacheData(string.Format(BILLING_SYNC_CALL, addOnProduct.UnifiedProductId, privateLabelId));
 
-      XDocument xDoc = XDocument.Parse(productList);
+      var xDoc = XDocument.Parse(productList);
 
       var dataElement = xDoc.Element("data");
       if (dataElement != null)
       {
-        var renewalItems = dataElement.Elements("item").Where(item => item.Attribute("isRenewal").Value == "1");
-        foreach (var renewalItem in renewalItems)
+        var ownedProduct = dataElement.Elements("item").FirstOrDefault(item => item.Attribute("catalog_productUnifiedProductID").Value == addOnProduct.UnifiedProductId.ToString());
+        if (ownedProduct != null)
         {
-          addOnProduct.RenewalUnifiedProductId = renewalItem.Attribute("catalog_productUnifiedProductID") != null ? Convert.ToInt32(renewalItem.Attribute("catalog_productUnifiedProductID").Value) : 0;
-          break;
-        }        
+          var renewalItem = dataElement.Elements("item").FirstOrDefault(item => item.Attribute("isRenewal").Value == "1" && item.Attribute("recurring_payment").Value == ownedProduct.Attribute("recurring_payment").Value && item.Attribute("numberOfPeriods").Value == ownedProduct.Attribute("numberOfPeriods").Value);
+          addOnProduct.RenewalUnifiedProductId = renewalItem != null ? Convert.ToInt32(renewalItem.Attribute("catalog_productUnifiedProductID").Value) : 0;
+        }
       }
-
       return addOnProduct;
     }
 

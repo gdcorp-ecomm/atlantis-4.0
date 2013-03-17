@@ -10,10 +10,12 @@ namespace Atlantis.Framework.EcommProductAddOns.Impl
 {
   public class EcommProductAddOnsRequest : IRequest
   {
+    private bool? HasRenewableAddon { get; set; }
+
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
       EcommProductAddOnsResponseData responseData;
-
+      
       try
       {
         var wsConfigElement = (WsConfigElement) config;
@@ -43,7 +45,7 @@ namespace Atlantis.Framework.EcommProductAddOns.Impl
           else
           {
             var addOns = CreateAddOnProductList(responseXml, request.PrivateLabelId);
-            responseData = new EcommProductAddOnsResponseData(addOns);
+            responseData = new EcommProductAddOnsResponseData(addOns, HasRenewableAddon.Value);
           }
         }
       }
@@ -62,10 +64,10 @@ namespace Atlantis.Framework.EcommProductAddOns.Impl
     }
 
     #region Private Methods
-    private static List<AddOnProduct> CreateAddOnProductList(string responseXml, int privateLabelId)
+    private List<AddOnProduct> CreateAddOnProductList(string responseXml, int privateLabelId)
     {
       var addOnProducts = new List<AddOnProduct>();
-
+      
       var xDoc = XDocument.Parse(responseXml);
       var bsq = xDoc.Element("BillingStateQuery");
       if (bsq != null)
@@ -83,9 +85,13 @@ namespace Atlantis.Framework.EcommProductAddOns.Impl
       return addOnProducts;
     }
 
-    private static AddOnProduct CreateAddOnProduct(XElement addOn, int privateLabelId)
+    private AddOnProduct CreateAddOnProduct(XElement addOn, int privateLabelId)
     {
       const string BILLING_SYNC_CALL = "<BillingSyncProductList><param name=\"n_pf_id\" value=\"{0}\"/><param name=\"n_privatelabelResellerTypeID\" value=\"{1}\"/></BillingSyncProductList>";
+      if (!HasRenewableAddon.HasValue)
+      {
+        HasRenewableAddon = false;
+      }
 
       var addOnProduct = new AddOnProduct
                            {
@@ -103,8 +109,13 @@ namespace Atlantis.Framework.EcommProductAddOns.Impl
         var ownedProduct = dataElement.Elements("item").FirstOrDefault(item => item.Attribute("catalog_productUnifiedProductID").Value == addOnProduct.UnifiedProductId.ToString());
         if (ownedProduct != null)
         {
+          addOnProduct.RenewalUnifiedProductId = 0;
           var renewalItem = dataElement.Elements("item").FirstOrDefault(item => item.Attribute("isRenewal").Value == "1" && item.Attribute("recurring_payment").Value == ownedProduct.Attribute("recurring_payment").Value && item.Attribute("numberOfPeriods").Value == ownedProduct.Attribute("numberOfPeriods").Value);
-          addOnProduct.RenewalUnifiedProductId = renewalItem != null ? Convert.ToInt32(renewalItem.Attribute("catalog_productUnifiedProductID").Value) : 0;
+          if (renewalItem != null)
+          {
+            HasRenewableAddon = true;
+            addOnProduct.RenewalUnifiedProductId = Convert.ToInt32(renewalItem.Attribute("catalog_productUnifiedProductID").Value);
+          }
         }
       }
       return addOnProduct;

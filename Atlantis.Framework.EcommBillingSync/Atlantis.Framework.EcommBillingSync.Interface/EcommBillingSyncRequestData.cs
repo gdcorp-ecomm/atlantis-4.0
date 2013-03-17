@@ -49,7 +49,7 @@ namespace Atlantis.Framework.EcommBillingSync.Interface
       EcommProductAddOnsRequestType = ecommProductAddOnsRequestType;
       ItemTrackingCode = itemTrackingCode;
       PrivateLabelId = privateLabelId;
-      RequestTimeout = TimeSpan.FromSeconds(30);
+      RequestTimeout = TimeSpan.FromSeconds(120);
       SelectedTransactionalCurrencyType = selectedTransactionalCurrencyType;
       SyncDate = syncDate;
     }

@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}</ProjectGuid>
+    <ProjectGuid>{7E98657D-D90F-4FE6-8BC7-ECE09CF7ECC4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Atlantis.Framework.EcommProductAddOns.Impl</RootNamespace>
@@ -126,7 +126,7 @@
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.EcommProductAddOns.Interface\Atlantis.Framework.EcommProductAddOns.Interface.csproj">
-      <Project>{3a47c855-6f2e-4843-848c-bd2451ad28e0}</Project>
+      <Project>{51abac11-1534-45e4-9f30-f191541551e6}</Project>
       <Name>Atlantis.Framework.EcommProductAddOns.Interface</Name>
     </ProjectReference>
   </ItemGroup>

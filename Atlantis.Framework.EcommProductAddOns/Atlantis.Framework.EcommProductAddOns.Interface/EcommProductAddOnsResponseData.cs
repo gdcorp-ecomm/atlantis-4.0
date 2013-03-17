@@ -9,6 +9,7 @@ namespace Atlantis.Framework.EcommProductAddOns.Interface
     private readonly AtlantisException _exception = null;
     private readonly string _resultXml = string.Empty;
     public bool HasAddOns { get; private set; }
+    public bool HasRenewableAddOns { get; private set; }
     public List<AddOnProduct> AddOnProducts { get; set; } 
 
     public bool IsSuccess
@@ -16,9 +17,10 @@ namespace Atlantis.Framework.EcommProductAddOns.Interface
       get { return _exception == null; }
     }
 
-    public EcommProductAddOnsResponseData(List<AddOnProduct> addOnProducts )
+    public EcommProductAddOnsResponseData(List<AddOnProduct> addOnProducts, bool hasRenewableAddOns)
     {
       HasAddOns = addOnProducts.Count > 0;
+      HasRenewableAddOns = hasRenewableAddOns;
       AddOnProducts = addOnProducts;
     }
 

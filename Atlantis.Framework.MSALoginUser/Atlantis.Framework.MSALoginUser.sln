@@ -11,18 +11,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.MSA.Interface", "..\Atlantis.Framework.MSA.Interface\Atlantis.Framework.MSA.Interface\Atlantis.Framework.MSA.Interface.csproj", "{7D9D82B9-229C-4047-8C57-B74B4ED9FA49}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
-		SccProjectName0 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccLocalPath2 = .
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
 		SccProjectUniqueName3 = Atlantis.Framework.MSALoginUser.Impl\\Atlantis.Framework.MSALoginUser.Impl.csproj
 		SccProjectName3 = Atlantis.Framework.MSALoginUser.Impl
 		SccLocalPath3 = Atlantis.Framework.MSALoginUser.Impl
@@ -32,6 +34,9 @@ Global
 		SccProjectUniqueName5 = Atlantis.Framework.MSALoginUser.Tests\\Atlantis.Framework.MSALoginUser.Tests.csproj
 		SccProjectName5 = Atlantis.Framework.MSALoginUser.Tests
 		SccLocalPath5 = Atlantis.Framework.MSALoginUser.Tests
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.MSA.Interface\\Atlantis.Framework.MSA.Interface\\Atlantis.Framework.MSA.Interface.csproj
+		SccProjectName6 = ../Atlantis.Framework.MSA.Interface/Atlantis.Framework.MSA.Interface
+		SccLocalPath6 = ..\\Atlantis.Framework.MSA.Interface\\Atlantis.Framework.MSA.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +63,10 @@ Global
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D9D82B9-229C-4047-8C57-B74B4ED9FA49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D9D82B9-229C-4047-8C57-B74B4ED9FA49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D9D82B9-229C-4047-8C57-B74B4ED9FA49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D9D82B9-229C-4047-8C57-B74B4ED9FA49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

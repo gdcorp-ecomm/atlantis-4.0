@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.MSA.Interface;
 using Atlantis.Framework.MSALoginUser.Interface;
 using System.Web;
 
@@ -27,19 +28,8 @@ namespace Atlantis.Framework.MSALoginUser.Impl
         
         string messageBody = String.Format(BodyString, username, loginRequest.Password, loginRequest.ApiKey);
 
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(webServiceUrl);
-        request.Method = WebRequestMethods.Http.Post;
-
-        byte[] bodyBytes = Encoding.UTF8.GetBytes(messageBody);
-
-        request.ContentType = "application/x-www-form-urlencoded";
-        request.ContentLength = bodyBytes.Length;
-
-        Stream requestStream = request.GetRequestStream();
-        requestStream.Write(bodyBytes, 0, bodyBytes.Length);
-        requestStream.Close();
-
-        HttpWebResponse loginResponse = (HttpWebResponse)request.GetResponse();
+        HttpWebResponse loginResponse = MailApiUtil.sendMailAPIRequest(webServiceUrl, messageBody, string.Empty,
+                                                                       loginRequest.ApiKey);
         Stream responseStream = loginResponse.GetResponseStream();
         StreamReader responseReader = new StreamReader(responseStream, Encoding.UTF8);
         string jsonResponse = responseReader.ReadToEnd();

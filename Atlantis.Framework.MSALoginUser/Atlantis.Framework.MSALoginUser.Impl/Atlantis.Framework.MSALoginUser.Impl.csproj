@@ -59,6 +59,10 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MSA.Interface\Atlantis.Framework.MSA.Interface\Atlantis.Framework.MSA.Interface.csproj">
+      <Project>{7d9d82b9-229c-4047-8c57-b74b4ed9fa49}</Project>
+      <Name>Atlantis.Framework.MSA.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.MSALoginUser.Interface\Atlantis.Framework.MSALoginUser.Interface.csproj">
       <Project>{32a5bf80-9ee6-4284-8827-47e17c14e463}</Project>
       <Name>Atlantis.Framework.MSALoginUser.Interface</Name>

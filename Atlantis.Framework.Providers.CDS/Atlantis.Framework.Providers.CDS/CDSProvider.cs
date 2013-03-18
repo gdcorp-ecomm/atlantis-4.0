@@ -131,6 +131,54 @@ namespace Atlantis.Framework.Providers.CDS
       return parsedData2;
     }
 
+
+    public string Get(string query)
+    {
+      var response = string.Empty;
+
+      bool bypassCache = false;
+      if (HttpContext.Current != null)
+      {
+        DateTime activeDate;
+        var queryString = HttpContext.Current.Request.QueryString;
+        var docId = queryString["vid"];
+        var qsDate = queryString["activedate"];
+        if ((DateTime.TryParse(qsDate, out activeDate) || IsValidMongoObjectId(docId)) && _siteContext.IsRequestInternal)
+        {
+          bypassCache = true;
+          var queryParams = new NameValueCollection();
+          if (activeDate != default(DateTime))
+          {
+            queryParams.Add("activedate", activeDate.ToString("O"));
+          }
+          if (IsValidMongoObjectId(docId))
+          {
+            queryParams.Add("docid", docId);
+          }
+          if (queryParams.Count > 0)
+          {
+            string appendChar = query.Contains("?") ? "&" : "?";
+            query += string.Concat(appendChar, ToQueryString(queryParams));
+          }
+        }
+      }
+
+      var requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query);
+      try
+      {
+        var responseData = bypassCache ? (CDSResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType) : (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType);
+        if (responseData.IsSuccess)
+        {
+          response = responseData.ResponseData;
+        }
+      }
+      catch (Exception ex)
+      {
+        Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+      }
+      return response;
+    }
+
     private bool IsValidMongoObjectId(string text)
     {
       bool result = false;

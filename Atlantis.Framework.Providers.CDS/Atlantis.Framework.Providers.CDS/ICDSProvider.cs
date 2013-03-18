@@ -9,5 +9,6 @@ namespace Atlantis.Framework.Providers.Interface.CDS
     T GetModel<T>(string query, Dictionary<string, string> customTokens) where T : new();
     string GetJSON(string query);
     string GetJSON(string query, Dictionary<string, string> customTokens);
+    string Get(string query);
   }
 }

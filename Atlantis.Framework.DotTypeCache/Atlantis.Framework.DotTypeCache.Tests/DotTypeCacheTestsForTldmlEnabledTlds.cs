@@ -77,7 +77,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetDotType()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
         AssertHelper.AddResults(dotTypeCache != null, "GetDotTypeInfo is null for: " + tld);
@@ -87,13 +87,13 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetTransferProductId()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         foreach (int dc in domainCount)
         {
           List<int> reglengths = TLDML.TLDMLProduct.GetAllEnabledRegistrationLengths(tld);
 
-          foreach (var reglength in reglengths)
+          foreach (int reglength in reglengths)
           {
             int dotTypeCacheGetTransferProductId = DotTypeCache.GetTransferProductId(tld, "1", reglength, dc);
             int prodIdFromTldml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.Transfer, dc));
@@ -110,13 +110,13 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetRegistrationProductId()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         foreach (int dc in domainCount)
         {
           List<int> reglengths = TLDML.TLDMLProduct.GetAllEnabledRegistrationLengths(tld);
 
-          foreach (var reglength in reglengths)
+          foreach (int reglength in reglengths)
           {
             int dotTypeCacheGetRegistrationProductId = DotTypeCache.GetRegistrationProductId(tld, "2", reglength, dc);
             int prodIdFromDR =
@@ -133,12 +133,12 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetValidRegistrationProductIdListWithIndRegLength()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
         List<int> reglengths = TLDML.TLDMLProduct.GetAllEnabledRegistrationLengths(tld);
 
-        foreach (var reglength in reglengths)
+        foreach (int reglength in reglengths)
         {
           foreach (int dc in domainCount)
           {
@@ -160,7 +160,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetValidTransferProductIds()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
         List<int> reglengths = TLDML.TLDMLProduct.GetAllEnabledTransferLengths(tld);
@@ -187,7 +187,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetDotTypeProductIds2()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
 
@@ -224,7 +224,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetDotTypePreRegProductId()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
 
@@ -247,7 +247,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetDotTypeProductId()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         int prodId = Convert.ToInt32(TLDML.TLDMLProduct.GetPFID(tld, 1, productfamily.Registration));
 
@@ -261,10 +261,10 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void TldmlAttributesExists()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
-        var dotTypeAttributesDictionary = DataCache.DataCache.GetExtendedTLDData(tld);
-        var dotTypeAttributes = dotTypeAttributesDictionary[tld];
+        Dictionary<string, Dictionary<string, string>> dotTypeAttributesDictionary = DataCache.DataCache.GetExtendedTLDData(tld);
+        Dictionary<string, string> dotTypeAttributes = dotTypeAttributesDictionary[tld];
 
         AssertHelper.AddResults(dotTypeAttributes.ContainsKey(TLDMLDotTypes.TLDMLSupportedFlag),
                                 "Key not found for: " + tld);
@@ -524,8 +524,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       {
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
 
-        var temp = dotTypeCache.Tld.RenewProhibitedPeriodForExpiration;
-        var temp2 = dotTypeCache.Tld.RenewProhibitedPeriodForExpirationUnit;
+        int temp = dotTypeCache.Tld.RenewProhibitedPeriodForExpiration;
+        string temp2 = dotTypeCache.Tld.RenewProhibitedPeriodForExpirationUnit;
 
         AssertHelper.AddResults(false, "Not getting anything back from RenewProhibitedPeriodForExpiration and RenewProhibitedPeriodForExpirationUnit.");
       }
@@ -612,13 +612,13 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetRenewalProductId()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         foreach (int dc in domainCount)
         {
           List<int> reglengths = TLDML.TLDMLProduct.GetAllEnabledRenewalLengths(tld);
 
-          foreach (var reglength in reglengths)
+          foreach (int reglength in reglengths)
           {
             int dotTypeCacheGetRenewalProductId = DotTypeCache.GetRenewalProductId(tld, reglength, dc);
             int prodIdFromTldml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.Renewal, dc));
@@ -634,13 +634,13 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetRenewalProductId2()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         foreach (int dc in domainCount)
         {
           List<int> reglengths = TLDML.TLDMLProduct.GetAllEnabledRenewalLengths(tld);
 
-          foreach (var reglength in reglengths)
+          foreach (int reglength in reglengths)
           {
             int dotTypeCacheGetRenewalProductId = DotTypeCache.GetRenewalProductId(tld, "1", reglength, dc);
             int prodIdFromTldml = Convert.ToInt32(TLDMLProduct.GetPFID(tld, reglength, productfamily.Renewal, dc));
@@ -656,7 +656,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetValidExpiredAuctionRegLengths()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
 
@@ -674,7 +674,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void GetValidExpiredAuctionRegProductIdList()
     {
-      foreach (var tld in tlds)
+      foreach (string tld in tlds)
       {
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
 

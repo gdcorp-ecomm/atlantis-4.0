@@ -579,7 +579,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
           int count = 0;
           List<int> lengthsStatic = staticTld.GetValidExpiredAuctionRegLengths(dc, regLengths);
 
-          foreach (var lengthsTdml in dotTypeCache.GetValidExpiredAuctionRegLengths(dc, regLengths))
+          foreach (int lengthsTdml in dotTypeCache.GetValidExpiredAuctionRegLengths(dc, regLengths))
           {
             AssertHelper.AddResults(lengthsTdml == lengthsStatic[count],
                                     "GetValidExpiredAuctionRegLengths for domain count: " + dc + " did not match for " + tld +
@@ -608,7 +608,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
           int count = 0;
 
-          foreach (var tldmlPid in dotTypeCache.GetValidExpiredAuctionRegProductIdList(dc, regLengths))
+          foreach (int tldmlPid in dotTypeCache.GetValidExpiredAuctionRegProductIdList(dc, regLengths))
           {
             AssertHelper.AddResults(tldmlPid == staticValidExpiredAuctionRegProductIdList[count],
                                     "GetValidExpiredAuctionRegProductIdList PID for domain count: " + dc + " did not match for " + tld +
@@ -638,7 +638,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
           List<int> statPreRegLengths = staticTld.GetValidPreRegLengths(dc, regLengths);
 
-          foreach (var tldmlPid in dotTypeCache.GetValidPreRegLengths(dc, regLengths))
+          foreach (int tldmlPid in dotTypeCache.GetValidPreRegLengths(dc, regLengths))
           {
             AssertHelper.AddResults(tldmlPid == statPreRegLengths[count],
                                     "GetValidPreRegLengths PID for domain count: " + dc + " did not match for " + tld +
@@ -662,8 +662,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         IDotTypeInfo dotTypeCache = DotTypeCache.GetDotTypeInfo(tld);
 
         //TODO: Implement foreach when GetValidPreRegProductIdList is fixed
-        var statPreRegPidList = staticTld.GetValidPreRegProductIdList(1, regLengths);
-        var preRegPidList = dotTypeCache.GetValidPreRegProductIdList(1, regLengths);
+        List<int> statPreRegPidList = staticTld.GetValidPreRegProductIdList(1, regLengths);
+        List<int> preRegPidList = dotTypeCache.GetValidPreRegProductIdList(1, regLengths);
         AssertHelper.AddResults(false, "GetValidPreRegProductIdList calls return a count of zero for static and tldml enabled for " + tld);
       }
     }
@@ -684,7 +684,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
           int count = 0;
           List<int> staticPreRegLengths = staticTld.GetValidRegistrationLengths(dc, regLengths);
 
-          foreach (var tldmlValidPreRegLength in dotTypeCache.GetValidRegistrationLengths(dc, regLengths))
+          foreach (int tldmlValidPreRegLength in dotTypeCache.GetValidRegistrationLengths(dc, regLengths))
           {
             AssertHelper.AddResults(tldmlValidPreRegLength == staticPreRegLengths[count],
                                     "GetValidRegistrationLengths did not match for " + tld + ". And for this domain count " + dc + ". Static: "
@@ -708,11 +708,11 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
         foreach (int dc in domainCount)
         {
-          var statValidRegistrationProductIdList = staticTld.GetValidRegistrationProductIdList(dc, regLengths);
+          List<int> statValidRegistrationProductIdList = staticTld.GetValidRegistrationProductIdList(dc, regLengths);
 
           int count = 0;
 
-          foreach (var tldmlPid in dotTypeCache.GetValidRegistrationProductIdList(dc, regLengths))
+          foreach (int tldmlPid in dotTypeCache.GetValidRegistrationProductIdList(dc, regLengths))
           {
             AssertHelper.AddResults(tldmlPid == statValidRegistrationProductIdList[count],
                                     "GetValidRegistrationProductIdList did not match for " + tld + ". And for this domain count " + dc + ". Static: "
@@ -737,9 +737,9 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         foreach (int dc in domainCount)
         {
           int count = 0;
-          var statValidRenewalLengths = staticTld.GetValidRenewalLengths(dc, regLengths);
+          List<int> statValidRenewalLengths = staticTld.GetValidRenewalLengths(dc, regLengths);
 
-          foreach (var tldlGetValidRenewalLength in dotTypeCache.GetValidRenewalLengths(dc, regLengths))
+          foreach (int tldlGetValidRenewalLength in dotTypeCache.GetValidRenewalLengths(dc, regLengths))
           {
             AssertHelper.AddResults(tldlGetValidRenewalLength == statValidRenewalLengths[count],
                                     "GetValidRenewalLengths did not match for " + tld + ". And for this domain count " + dc + ". Static: "
@@ -765,9 +765,9 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         {
           int count = 0;
 
-          var statValidRenewalProductIdList = staticTld.GetValidRenewalProductIdList(dc, regLengths);
+          List<int> statValidRenewalProductIdList = staticTld.GetValidRenewalProductIdList(dc, regLengths);
 
-          foreach (var tldmlPid in dotTypeCache.GetValidRenewalProductIdList(dc, regLengths))
+          foreach (int tldmlPid in dotTypeCache.GetValidRenewalProductIdList(dc, regLengths))
           {
             AssertHelper.AddResults(tldmlPid == statValidRenewalProductIdList[count],
                                     "GetValidRenewalProductIdList did not match for " + tld + ". And for this domain count " + dc + ". Static: "
@@ -791,10 +791,10 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
         foreach (int dc in domainCount)
         {
-          var statValidTransferLengths = staticTld.GetValidTransferLengths(dc, regLengths);
+          List<int> statValidTransferLengths = staticTld.GetValidTransferLengths(dc, regLengths);
           int count = 0;
 
-          foreach (var tldlLength in dotTypeCache.GetValidTransferLengths(dc, regLengths))
+          foreach (int tldlLength in dotTypeCache.GetValidTransferLengths(dc, regLengths))
           {
             AssertHelper.AddResults(tldlLength == statValidTransferLengths[count],
                                     "GetValidTransferLengths did not match for " + tld + ". And for this domain count " + dc + ". Static: "
@@ -819,9 +819,9 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         foreach (int dc in domainCount)
         {
           int count = 0;
-          var statValidTransferProductIdList = staticTld.GetValidTransferProductIdList(dc, regLengths);
+          List<int> statValidTransferProductIdList = staticTld.GetValidTransferProductIdList(dc, regLengths);
 
-          foreach (var tldmlTransferPid in dotTypeCache.GetValidTransferProductIdList(dc, regLengths))
+          foreach (int tldmlTransferPid in dotTypeCache.GetValidTransferProductIdList(dc, regLengths))
           {
             AssertHelper.AddResults(tldmlTransferPid == statValidTransferProductIdList[count],
                                     "GetValidTransferLengths did not match for " + tld + ". And for this domain count " + dc + ". Static: "

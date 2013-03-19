@@ -11,7 +11,8 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
     FabulousDomains = 1,
     BuyDomains = 2,
     DomainsBot = 4,
-    Auctions = 6    
+    Auctions = 6,
+    PrivateSale = 11
   }
 
   [Obsolete("This class is obsolete.")]

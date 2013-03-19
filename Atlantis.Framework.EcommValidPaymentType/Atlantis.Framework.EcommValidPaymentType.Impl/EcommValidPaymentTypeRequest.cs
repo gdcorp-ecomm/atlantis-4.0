@@ -21,7 +21,16 @@ namespace Atlantis.Framework.EcommValidPaymentType.Impl
         wscgdPaymentService.Timeout = (int)ecommValidPaymentTypeRequestData.RequestTimeout.TotalMilliseconds;
 
         string responseXml;
-        int resultCode = wscgdPaymentService.GetActivePaymentTypesForCurrency(ecommValidPaymentTypeRequestData.BasketType, ecommValidPaymentTypeRequestData.TransactionalCurrencyType, out responseXml);
+        int resultCode;
+
+        if (string.IsNullOrEmpty(ecommValidPaymentTypeRequestData.SelectedCountry))
+        {
+          resultCode = wscgdPaymentService.GetActivePaymentTypesForCurrency(ecommValidPaymentTypeRequestData.BasketType, ecommValidPaymentTypeRequestData.TransactionalCurrencyType, out responseXml);
+        }
+        else
+        {
+          resultCode = wscgdPaymentService.GetActivePaymentTypesEx(ecommValidPaymentTypeRequestData.ToXML(), out responseXml);
+        }
         responseData = new EcommValidPaymentTypeResponseData(requestData, responseXml, resultCode);
       }
       catch (Exception ex)

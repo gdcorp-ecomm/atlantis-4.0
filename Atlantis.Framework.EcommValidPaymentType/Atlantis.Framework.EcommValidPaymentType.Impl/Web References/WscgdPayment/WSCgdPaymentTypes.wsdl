@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="urn:WSCgdPaymentTypesService" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSCgdPaymentTypesService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s0="urn:WSCgdPaymentTypesService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSCgdPaymentTypesService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WSCgdPaymentTypesService">
       <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
@@ -27,6 +27,22 @@
     <wsdl:part name="return" type="s:int" />
     <wsdl:part name="pbstrOutput" type="s:string" />
   </wsdl:message>
+  <wsdl:message name="GetAvailableCurrenciesForPaymentTypeIn">
+    <wsdl:part name="bstrBasketType" type="s:string" />
+    <wsdl:part name="bstrPaymentType" type="s:string" />
+    <wsdl:part name="bstrPaymentSubtype" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAvailableCurrenciesForPaymentTypeOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrOutput" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetActivePaymentTypesExIn">
+    <wsdl:part name="bstrRequestXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetActivePaymentTypesExOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrOutput" type="s:string" />
+  </wsdl:message>
   <wsdl:portType name="WSCgdPaymentTypesServiceSoap">
     <wsdl:operation name="GetActivePaymentTypes">
       <wsdl:input message="s0:GetActivePaymentTypesIn" />
@@ -39,6 +55,14 @@
     <wsdl:operation name="GetActivePaymentCurrencies">
       <wsdl:input message="s0:GetActivePaymentCurrenciesIn" />
       <wsdl:output message="s0:GetActivePaymentCurrenciesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableCurrenciesForPaymentType">
+      <wsdl:input message="s0:GetAvailableCurrenciesForPaymentTypeIn" />
+      <wsdl:output message="s0:GetAvailableCurrenciesForPaymentTypeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActivePaymentTypesEx">
+      <wsdl:input message="s0:GetActivePaymentTypesExIn" />
+      <wsdl:output message="s0:GetActivePaymentTypesExOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSCgdPaymentTypesServiceSoap" type="s0:WSCgdPaymentTypesServiceSoap">
@@ -63,6 +87,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetActivePaymentCurrencies">
       <soap:operation soapAction="#GetActivePaymentCurrencies" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdPaymentTypesService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdPaymentTypesService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableCurrenciesForPaymentType">
+      <soap:operation soapAction="#GetAvailableCurrenciesForPaymentType" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdPaymentTypesService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdPaymentTypesService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivePaymentTypesEx">
+      <soap:operation soapAction="#GetActivePaymentTypesEx" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:WSCgdPaymentTypesService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

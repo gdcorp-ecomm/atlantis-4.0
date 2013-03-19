@@ -187,6 +187,33 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
       Assert.IsTrue(request.BillingSyncProducts.Count.Equals(1));
       Assert.IsTrue(request.BillingSyncErrors.Count.Equals(0));
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.framework.ecommproductaddons.impl.dll")]
+    [DeploymentItem("atlantis.framework.additem.impl.dll")]
+    public void EcommBillingSyncSemiAnnualProduct()
+    {
+      var targetDate = DateTime.Parse("3/27/2013");
+      var billDate1 = DateTime.Parse("2013-09-19 00:00:00.000");
+      var bsp1 = new BillingSyncProduct(1, 1037810, "eem", "1c93236f-90e1-11e2-b132-0050569575d8", billDate1, "semiannual", 101177, 1, "New Account");
+      var billingSyncProducts = new List<BillingSyncProduct> { bsp1 };
+
+      var request = new EcommBillingSyncRequestData(SHOPPER_ID
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , billingSyncProducts
+        , targetDate
+        , "mya_web_billingsync"
+        , "USD"
+        , "127.0.0.1"
+        , 1);
+
+      var response = (EcommBillingSyncResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
+
+      Assert.IsTrue(response.IsSuccess);
+    }
     #endregion 
 
     #region IsSuccess == False Tests
@@ -281,6 +308,35 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
         Assert.IsTrue(request.BillingSyncErrors.Count > 0);
         Assert.IsTrue(request.BillingSyncErrors[0].ErrorType == BillingSyncErrorData.BillingSyncErrorType.RenewalNotAllowedByRecurringType);
       }
+    }
+    #endregion
+
+    #region PL Shopper Tests
+    [TestMethod]
+    [DeploymentItem("atlantis.framework.ecommproductaddons.impl.dll")]
+    [DeploymentItem("atlantis.framework.additem.impl.dll")]
+    public void EcommBillingSyncResellerUnlimitedCalendar()
+    {
+      var targetDate = DateTime.Parse("3/27/2013");
+      var billDate1 = DateTime.Parse("2015-03-19 00:00:00.000");
+      var bsp1 = new BillingSyncProduct(1, 1037802, "calendar", "5710bcfb-90d2-11e2-b132-0050569575d8", billDate1, "annual", 10832, 2, "New Account");
+      var billingSyncProducts = new List<BillingSyncProduct> { bsp1 };
+
+      var request = new EcommBillingSyncRequestData("859675"  
+        , string.Empty
+        , string.Empty
+        , string.Empty
+        , 0
+        , billingSyncProducts
+        , targetDate
+        , "mya_web_billingsync"
+        , "USD"
+        , "127.0.0.1"
+        , 440151);
+
+      var response = (EcommBillingSyncResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
+
+      Assert.IsTrue(response.IsSuccess);
     }
     #endregion
   }

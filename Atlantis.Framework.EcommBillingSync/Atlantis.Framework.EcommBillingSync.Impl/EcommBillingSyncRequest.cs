@@ -103,7 +103,7 @@ namespace Atlantis.Framework.EcommBillingSync.Impl
       var items = new List<AddToCartItem>();      
       var newBillDate = SyncUtil.GetNewExpirationDate(bsp.OriginalBillingDate, bsp.RecurringPaymentType, SyncMonth, SyncDay);
       var duration = SyncUtil.GetDuration(bsp.OriginalBillingDate, newBillDate, bsp.RecurringPaymentType);
-      var renewalProductId = bsp.RenewalPeriods.Equals(1) ? bsp.RenewalProductId : SyncUtil.GetRenewalProductId(bsp.RenewalProductId, bsp.RecurringPaymentType, PrivateLabelId);
+      var renewalProductId = bsp.RenewalPeriods.Equals(1) ? SyncUtil.GetUnifiedRenewalProductId(bsp.RenewalProductId, PrivateLabelId, EbsRequest) : SyncUtil.GetOnePeriodRenewalProductId(bsp.RenewalProductId, bsp.RecurringPaymentType, PrivateLabelId, EbsRequest);
       var durationHash = SyncUtil.GetDurationHash(EbsRequest, renewalProductId, Convert.ToDouble(duration), bsp);
       var item = new AddToCartItem(string.Format("{0}_{1}", bsp.BillingResourceId, index), renewalProductId, bsp.BillingResourceId, QUANTITY, itemTrackingCode, duration, durationHash);
       item[AddToCartItemProperty.TARGET_EXPIRATION_DATE] = newBillDate.ToString();

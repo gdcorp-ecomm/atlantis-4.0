@@ -76,6 +76,7 @@
     <Compile Include="Helper Classes\CartUtility.cs" />
     <Compile Include="EcommBillingSyncRequest.cs" />
     <Compile Include="Helper Classes\SyncUtility.cs" />
+    <Compile Include="Helper Classes\UnifiedProductIdProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

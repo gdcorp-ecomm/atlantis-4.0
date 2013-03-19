@@ -10,9 +10,11 @@ using gdOverrideLib;
 using BillingSyncErrorType = Atlantis.Framework.EcommBillingSync.Interface.BillingSyncErrorData.BillingSyncErrorType;
 
 namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
-{
+{  
   public class SyncUtility
   {
+    private readonly Lazy<UnifiedProductIdProvider> _productProvider = new Lazy<UnifiedProductIdProvider>();
+    
     #region Expiration Date & Duration Calculations 
     public DateTime GetNewExpirationDate(DateTime originalDate, string recurringPaymentType, int syncMonth, int syncDay)
     {
@@ -70,6 +72,9 @@ namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
         case "quarterly":
           daysPerPeriod = DAYS_PER_YEAR / 4;
           break;
+        case "semiannual":
+          daysPerPeriod = DAYS_PER_YEAR / 2;
+          break;
         case "biannual":
           daysPerPeriod = DAYS_PER_YEAR * 2;
           break;
@@ -113,12 +118,19 @@ namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
     #endregion
 
     #region Multi-year Renewal ProductId Retrieval
-    public int GetRenewalProductId(int renewalProductId, string recurringPaymentType, int privateLabelId)
+    public int GetUnifiedRenewalProductId(int renewalProductId, int privateLabelId, EcommBillingSyncRequestData ebsRequest)
+    {
+      return _productProvider.Value.GetUnifiedProductIdByPfid(renewalProductId, privateLabelId, ebsRequest);
+    }
+
+    public int GetOnePeriodRenewalProductId(int renewalProductId, string recurringPaymentType, int privateLabelId, EcommBillingSyncRequestData ebsRequest)
     {
       const string BILLING_SYNC_CALL = "<BillingSyncProductList><param name=\"n_pf_id\" value=\"{0}\"/><param name=\"n_privatelabelResellerTypeID\" value=\"{1}\"/></BillingSyncProductList>";
       var correctRenewalProductId = 0;
 
-      var productList = DataCache.DataCache.GetCacheData(string.Format(BILLING_SYNC_CALL, renewalProductId, privateLabelId));
+      var resellerTypeId = DataCache.DataCache.GetPrivateLabelType(privateLabelId);
+      var unifiedProductId = GetUnifiedRenewalProductId(renewalProductId, privateLabelId, ebsRequest);
+      var productList = DataCache.DataCache.GetCacheData(string.Format(BILLING_SYNC_CALL, unifiedProductId, resellerTypeId));
 
       var xDoc = XDocument.Parse(productList);
 

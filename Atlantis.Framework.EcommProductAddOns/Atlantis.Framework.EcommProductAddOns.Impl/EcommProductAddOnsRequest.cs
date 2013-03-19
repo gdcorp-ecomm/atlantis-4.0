@@ -10,7 +10,11 @@ namespace Atlantis.Framework.EcommProductAddOns.Impl
 {
   public class EcommProductAddOnsRequest : IRequest
   {
-    private bool? HasRenewableAddon { get; set; }
+    private bool? _hasRenewableAddon;
+    private bool HasRenewableAddon
+    {
+      get { return _hasRenewableAddon ?? false; }
+    }
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
@@ -45,7 +49,8 @@ namespace Atlantis.Framework.EcommProductAddOns.Impl
           else
           {
             var addOns = CreateAddOnProductList(responseXml, request.PrivateLabelId);
-            responseData = new EcommProductAddOnsResponseData(addOns, HasRenewableAddon.Value);
+
+            responseData = new EcommProductAddOnsResponseData(addOns, HasRenewableAddon);
           }
         }
       }
@@ -88,9 +93,9 @@ namespace Atlantis.Framework.EcommProductAddOns.Impl
     private AddOnProduct CreateAddOnProduct(XElement addOn, int privateLabelId)
     {
       const string BILLING_SYNC_CALL = "<BillingSyncProductList><param name=\"n_pf_id\" value=\"{0}\"/><param name=\"n_privatelabelResellerTypeID\" value=\"{1}\"/></BillingSyncProductList>";
-      if (!HasRenewableAddon.HasValue)
+      if (!_hasRenewableAddon.HasValue)
       {
-        HasRenewableAddon = false;
+        _hasRenewableAddon = false;
       }
 
       var addOnProduct = new AddOnProduct
@@ -99,7 +104,8 @@ namespace Atlantis.Framework.EcommProductAddOns.Impl
                              UnifiedProductId = addOn.Attribute("UnifiedProductID") != null ? Convert.ToInt32(addOn.Attribute("UnifiedProductID").Value) : 0
                            };
 
-      var productList = DataCache.DataCache.GetCacheData(string.Format(BILLING_SYNC_CALL, addOnProduct.UnifiedProductId, privateLabelId));
+      var resellerTypeId = DataCache.DataCache.GetPrivateLabelType(privateLabelId);
+      var productList = DataCache.DataCache.GetCacheData(string.Format(BILLING_SYNC_CALL, addOnProduct.UnifiedProductId, resellerTypeId));
 
       var xDoc = XDocument.Parse(productList);
 
@@ -113,7 +119,7 @@ namespace Atlantis.Framework.EcommProductAddOns.Impl
           var renewalItem = dataElement.Elements("item").FirstOrDefault(item => item.Attribute("isRenewal").Value == "1" && item.Attribute("recurring_payment").Value == ownedProduct.Attribute("recurring_payment").Value && item.Attribute("numberOfPeriods").Value == ownedProduct.Attribute("numberOfPeriods").Value);
           if (renewalItem != null)
           {
-            HasRenewableAddon = true;
+            _hasRenewableAddon = true;
             addOnProduct.RenewalUnifiedProductId = Convert.ToInt32(renewalItem.Attribute("catalog_productUnifiedProductID").Value);
           }
         }

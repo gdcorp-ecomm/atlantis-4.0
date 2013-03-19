@@ -12,7 +12,8 @@ namespace Atlantis.Framework.EcommBillingSync.Interface
       RenewalNotAllowedByRecurringType,
       BillingStateSvcError,
       BasketSvcError,
-      GdOverrideLibSvcError
+      GdOverrideLibSvcError,
+      UnifiedProductIdLookupError
     }
 
     public BillingSyncErrorType ErrorType { get; private set; }

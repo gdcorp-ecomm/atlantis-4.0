@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.MSA.Interface;
 
 namespace Atlantis.Framework.MSAGetFolderList.Interface
 {

@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GetFolderListResponse.cs" />
-    <Compile Include="MailFolder.cs" />
     <Compile Include="MSAGetFolderListResponseData.cs" />
     <Compile Include="MSAGetFolderListRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -28,7 +28,7 @@ namespace Atlantis.Framework.MSAGetFolderList.Impl
           string webServiceUrl = getFolderListRequestData.BaseUrl.Contains("80") ? "http://" : "https://";
 
           webServiceUrl += getFolderListRequestData.BaseUrl;
-          webServiceUrl += ((WsConfigElement)config).WSURL;
+          webServiceUrl += config.GetConfigValue("ServicePath");
 
 
           HttpWebResponse folderListRequest = MailApiUtil.sendMailAPIRequest(webServiceUrl, BodyString,

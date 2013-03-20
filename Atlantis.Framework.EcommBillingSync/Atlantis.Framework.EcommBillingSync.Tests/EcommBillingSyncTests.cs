@@ -339,5 +339,65 @@ namespace Atlantis.Framework.EcommBillingSync.Tests
       Assert.IsTrue(response.IsSuccess);
     }
     #endregion
+
+    #region Test Shopper Tests - Need to use Test WS in atlantis.config
+    //[TestMethod]
+    //[DeploymentItem("atlantis.framework.ecommproductaddons.impl.dll")]
+    //[DeploymentItem("atlantis.framework.additem.impl.dll")]
+    //public void EcommBillingSyncProximaTest()
+    //{
+    //  var syncDate = DateTime.Parse("3/27/2013");
+    //  var billDate = DateTime.Parse("2014-7-30 00:00:00.000");
+    //  var bsp = new BillingSyncProduct(1, 1807089, "proxima", "c859faaf-daa0-11e1-aa0e-005056953ce3", billDate, "annual", 10084, 1, "DOMAINFORSSL.INFO");
+    //  var billingSyncProducts = new List<BillingSyncProduct> { bsp };
+
+    //  var request = new EcommBillingSyncRequestData("128879"
+    //    , string.Empty
+    //    , string.Empty
+    //    , string.Empty
+    //    , 0
+    //    , billingSyncProducts
+    //    , syncDate
+    //    , "mya_web_billingsync"
+    //    , "USD"
+    //    , "127.0.0.1"
+    //    , 1);
+
+    //  var response = (EcommBillingSyncResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
+
+    //  Assert.IsTrue(response.IsSuccess);
+    //  Assert.IsTrue(request.BillingSyncProducts.Count.Equals(1));
+    //  Assert.IsTrue(request.BillingSyncErrors.Count.Equals(0));
+    //}
+
+    //[TestMethod]
+    //[DeploymentItem("atlantis.framework.ecommproductaddons.impl.dll")]
+    //[DeploymentItem("atlantis.framework.additem.impl.dll")]
+    //public void EcommBillingSyncSevTest()
+    //{
+    //  var syncDate = DateTime.Parse("3/27/2013");
+    //  var billDate = DateTime.Parse("2016-1-18 00:00:00.000");
+    //  var bsp = new BillingSyncProduct(1, 14583, "trafblazer", "", billDate, "annual", 281413, 3, "Not Yet Setup");
+    //  var billingSyncProducts = new List<BillingSyncProduct> { bsp };
+
+    //  var request = new EcommBillingSyncRequestData("128844"
+    //    , string.Empty
+    //    , string.Empty
+    //    , string.Empty
+    //    , 0
+    //    , billingSyncProducts
+    //    , syncDate
+    //    , "mya_web_billingsync"
+    //    , "USD"
+    //    , "127.0.0.1"
+    //    , 273313);
+
+    //  var response = (EcommBillingSyncResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE);
+
+    //  Assert.IsTrue(response.IsSuccess);
+    //  Assert.IsTrue(request.BillingSyncProducts.Count.Equals(1));
+    //  Assert.IsTrue(request.BillingSyncErrors.Count.Equals(0));
+    //}
+    #endregion
   }
 }

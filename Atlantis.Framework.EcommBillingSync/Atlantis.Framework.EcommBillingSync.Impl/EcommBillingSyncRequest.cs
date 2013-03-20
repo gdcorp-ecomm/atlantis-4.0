@@ -112,18 +112,25 @@ namespace Atlantis.Framework.EcommBillingSync.Impl
       {
         item[AddToCartItemProperty.GROUP_ID] = addOnGuidId;
         item[AddToCartItemProperty.PARENT_GROUP_ID] = addOnGuidId;
-        items.Add(item);
-        items.AddRange(addOnItems);
       }
-      else if (!string.IsNullOrEmpty(customXml = SyncUtil.BuildCustomXmlIfNecessary(bsp.Namespace, bsp.ProductNameInfo, bsp.BillingResourceId, duration)))
+      if (!string.IsNullOrEmpty(customXml = SyncUtil.BuildCustomXmlIfNecessary(bsp.Namespace, bsp.ProductNameInfo, bsp.BillingResourceId, duration)))
       {
         item.CustomXml = customXml;
-        items.Add(item);
       }
-      else
+
+      if (renewalProductId > 0)
       {
-        items.Add(item);
+        if (addOnItems != null && addOnItems.Count > 0)
+        {
+          items.Add(item);
+          items.AddRange(addOnItems);
+        }
+        else
+        {
+          items.Add(item);
+        }
       }
+
       return items;
     }
     #endregion

@@ -134,13 +134,12 @@ namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
       var correctRenewalProductId = 0;
 
       var resellerTypeId = DataCache.DataCache.GetPrivateLabelType(privateLabelId);
-      var unifiedProductId = GetUnifiedRenewalProductId(renewalProductId, privateLabelId, ebsRequest);
-      var productList = DataCache.DataCache.GetCacheData(string.Format(BILLING_SYNC_CALL, unifiedProductId, resellerTypeId));
+      var productList = DataCache.DataCache.GetCacheData(string.Format(BILLING_SYNC_CALL, renewalProductId, resellerTypeId));
 
       var xDoc = XDocument.Parse(productList);
 
       var dataElement = xDoc.Element("data");
-      if (dataElement != null)
+      if (dataElement != null && dataElement.HasElements)
       {
         var renewalItems = dataElement.Elements("item").Where(item => item.Attribute("isRenewal").Value == "1");
         var xElements = renewalItems as IList<XElement> ?? renewalItems.ToList();

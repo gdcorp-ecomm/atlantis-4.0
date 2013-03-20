@@ -120,7 +120,12 @@ namespace Atlantis.Framework.EcommBillingSync.Impl.Helper_Classes
     #region Multi-year Renewal ProductId Retrieval
     public int GetUnifiedRenewalProductId(int renewalProductId, int privateLabelId, EcommBillingSyncRequestData ebsRequest)
     {
-      return _productProvider.Value.GetUnifiedProductIdByPfid(renewalProductId, privateLabelId, ebsRequest);
+      var upid = _productProvider.Value.GetUnifiedProductIdByPfid(renewalProductId, privateLabelId, ebsRequest);
+      if (upid.Equals(int.MinValue))
+      {
+        upid = renewalProductId;
+      }
+      return upid;
     }
 
     public int GetOnePeriodRenewalProductId(int renewalProductId, string recurringPaymentType, int privateLabelId, EcommBillingSyncRequestData ebsRequest)

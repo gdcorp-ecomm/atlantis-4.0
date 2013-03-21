@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://godaddy.com" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="gdValidationRuleWebSvc" targetNamespace="http://godaddy.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="httpsBinding_IgdValidationRuleWebSvc_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://godaddy.com">
+      <xsd:element name="GetRuleMainByName">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="RuleMainName" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRuleMainByNameResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GetRuleMainByNameResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRuleMainNameById">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="RuleMainId" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRuleMainNameByIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GetRuleMainNameByIdResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SetRuleMainAttributes">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="RuleMainName" nillable="true" type="xsd:string" />
+            <xsd:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ExecuteRuleNames" nillable="true" type="q1:ArrayOfstring" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SetRuleMainAttributesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="SetRuleMainAttributesResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteRuleMainByName">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="RuleMainName" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteRuleMainByNameResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="DeleteRuleMainByNameResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EvaluateRuleMain">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="RuleMainName" nillable="true" type="xsd:string" />
+            <xsd:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FactKeyValuePairs" nillable="true" type="q2:ArrayOfKeyValueOfstringstring" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EvaluateRuleMainResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="EvaluateRuleMainResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRuleByName">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="RuleName" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRuleByNameResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GetRuleByNameResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SetRuleAttributes">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element xmlns:q3="http://schemas.datacontract.org/2004/07/gdValidationRuleWebSvc" minOccurs="0" name="RuleAttributes" nillable="true" type="q3:gdRuleAttributes" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SetRuleAttributesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="SetRuleAttributesResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteRuleByName">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="RuleName" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteRuleByNameResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="DeleteRuleByNameResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetFactByName">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FactName" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetFactByNameResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GetFactByNameResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SetFactAttributes">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FactName" nillable="true" type="xsd:string" />
+            <xsd:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AttributeNameValuePairs" nillable="true" type="q4:ArrayOfKeyValueOfstringstring" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SetFactAttributesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="SetFactAttributesResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteFactByName">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FactName" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteFactByNameResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="DeleteFactByNameResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetVersion">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetVersionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GetVersionResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Test">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TestResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="TestResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+    <xsd:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+      <xsd:complexType name="ArrayOfstring">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+      <xsd:complexType name="ArrayOfKeyValueOfstringstring">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringstring">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="Key" nillable="true" type="xsd:string" />
+                <xsd:element name="Value" nillable="true" type="xsd:string" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfKeyValueOfstringstring" nillable="true" type="tns:ArrayOfKeyValueOfstringstring" />
+    </xsd:schema>
+    <xsd:schema xmlns:tns="http://schemas.datacontract.org/2004/07/gdValidationRuleWebSvc" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/gdValidationRuleWebSvc">
+      <xsd:complexType name="gdRuleAttributes">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="RuleCondition" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="RuleDescription" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="RuleExecuteRuleFalse" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="RuleExecuteRuleTrue" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="RuleFactName" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="RuleName" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="RuleReturnMessageFalse" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="RuleReturnMessageTrue" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="RuleReturnValueFalse" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="RuleReturnValueTrue" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="gdRuleAttributes" nillable="true" type="tns:gdRuleAttributes" />
+    </xsd:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IgdValidationRuleWebSvc_GetRuleMainByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRuleMainByName" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_GetRuleMainByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRuleMainByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_GetRuleMainNameById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRuleMainNameById" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_GetRuleMainNameById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRuleMainNameByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_SetRuleMainAttributes_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetRuleMainAttributes" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_SetRuleMainAttributes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetRuleMainAttributesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_DeleteRuleMainByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRuleMainByName" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_DeleteRuleMainByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRuleMainByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_EvaluateRuleMain_InputMessage">
+    <wsdl:part name="parameters" element="tns:EvaluateRuleMain" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_EvaluateRuleMain_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EvaluateRuleMainResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_GetRuleByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRuleByName" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_GetRuleByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRuleByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_SetRuleAttributes_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetRuleAttributes" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_SetRuleAttributes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetRuleAttributesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_DeleteRuleByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRuleByName" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_DeleteRuleByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRuleByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_GetFactByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFactByName" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_GetFactByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFactByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_SetFactAttributes_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetFactAttributes" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_SetFactAttributes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetFactAttributesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_DeleteFactByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFactByName" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_DeleteFactByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFactByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_GetVersion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVersion" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_GetVersion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_Test_InputMessage">
+    <wsdl:part name="parameters" element="tns:Test" />
+  </wsdl:message>
+  <wsdl:message name="IgdValidationRuleWebSvc_Test_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TestResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IgdValidationRuleWebSvc">
+    <wsdl:operation name="GetRuleMainByName">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/GetRuleMainByName" message="tns:IgdValidationRuleWebSvc_GetRuleMainByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/GetRuleMainByNameResponse" message="tns:IgdValidationRuleWebSvc_GetRuleMainByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRuleMainNameById">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/GetRuleMainNameById" message="tns:IgdValidationRuleWebSvc_GetRuleMainNameById_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/GetRuleMainNameByIdResponse" message="tns:IgdValidationRuleWebSvc_GetRuleMainNameById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetRuleMainAttributes">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/SetRuleMainAttributes" message="tns:IgdValidationRuleWebSvc_SetRuleMainAttributes_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/SetRuleMainAttributesResponse" message="tns:IgdValidationRuleWebSvc_SetRuleMainAttributes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRuleMainByName">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/DeleteRuleMainByName" message="tns:IgdValidationRuleWebSvc_DeleteRuleMainByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/DeleteRuleMainByNameResponse" message="tns:IgdValidationRuleWebSvc_DeleteRuleMainByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EvaluateRuleMain">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/EvaluateRuleMain" message="tns:IgdValidationRuleWebSvc_EvaluateRuleMain_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/EvaluateRuleMainResponse" message="tns:IgdValidationRuleWebSvc_EvaluateRuleMain_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRuleByName">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/GetRuleByName" message="tns:IgdValidationRuleWebSvc_GetRuleByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/GetRuleByNameResponse" message="tns:IgdValidationRuleWebSvc_GetRuleByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetRuleAttributes">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/SetRuleAttributes" message="tns:IgdValidationRuleWebSvc_SetRuleAttributes_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/SetRuleAttributesResponse" message="tns:IgdValidationRuleWebSvc_SetRuleAttributes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRuleByName">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/DeleteRuleByName" message="tns:IgdValidationRuleWebSvc_DeleteRuleByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/DeleteRuleByNameResponse" message="tns:IgdValidationRuleWebSvc_DeleteRuleByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFactByName">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/GetFactByName" message="tns:IgdValidationRuleWebSvc_GetFactByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/GetFactByNameResponse" message="tns:IgdValidationRuleWebSvc_GetFactByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetFactAttributes">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/SetFactAttributes" message="tns:IgdValidationRuleWebSvc_SetFactAttributes_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/SetFactAttributesResponse" message="tns:IgdValidationRuleWebSvc_SetFactAttributes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFactByName">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/DeleteFactByName" message="tns:IgdValidationRuleWebSvc_DeleteFactByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/DeleteFactByNameResponse" message="tns:IgdValidationRuleWebSvc_DeleteFactByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/GetVersion" message="tns:IgdValidationRuleWebSvc_GetVersion_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/GetVersionResponse" message="tns:IgdValidationRuleWebSvc_GetVersion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <wsdl:input wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/Test" message="tns:IgdValidationRuleWebSvc_Test_InputMessage" />
+      <wsdl:output wsaw:Action="http://godaddy.com/IgdValidationRuleWebSvc/TestResponse" message="tns:IgdValidationRuleWebSvc_Test_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="httpsBinding_IgdValidationRuleWebSvc" type="tns:IgdValidationRuleWebSvc">
+    <wsp:PolicyReference URI="#httpsBinding_IgdValidationRuleWebSvc_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRuleMainByName">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/GetRuleMainByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRuleMainNameById">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/GetRuleMainNameById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRuleMainAttributes">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/SetRuleMainAttributes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRuleMainByName">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/DeleteRuleMainByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EvaluateRuleMain">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/EvaluateRuleMain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRuleByName">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/GetRuleByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRuleAttributes">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/SetRuleAttributes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRuleByName">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/DeleteRuleByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFactByName">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/GetFactByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFactAttributes">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/SetFactAttributes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFactByName">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/DeleteFactByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/GetVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap:operation soapAction="http://godaddy.com/IgdValidationRuleWebSvc/Test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="gdValidationRuleWebSvc">
+    <wsdl:port name="httpsBinding_IgdValidationRuleWebSvc" binding="tns:httpsBinding_IgdValidationRuleWebSvc">
+      <soap:address location="https://dtvapp.dev.glbt1.gdg/gdValidationRuleWebSvc/gdValidationRuleWebSvc.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

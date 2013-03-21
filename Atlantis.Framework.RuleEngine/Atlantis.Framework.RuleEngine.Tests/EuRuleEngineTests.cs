@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 using Atlantis.Framework.RuleEngine.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,11 +16,11 @@ namespace Atlantis.Framework.RuleEngine.Tests
     [DeploymentItem("DotEuRule.xml")]
     public void TestUsCompanyTypeRequired()
     {
-      var rules = new XmlDocument();
+      
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"DotEuRule.xml");
-      rules.Load(directory);
+      XDocument rules = XDocument.Load(directory);
 
       var model = new Dictionary<string, Dictionary<string, string>>();
       model.Add("mdlEu", new Dictionary<string, string> { { "countrycode", "US" } });

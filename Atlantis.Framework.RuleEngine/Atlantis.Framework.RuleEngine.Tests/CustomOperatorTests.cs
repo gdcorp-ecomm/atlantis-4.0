@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 using Atlantis.Framework.RuleEngine.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,11 +17,11 @@ namespace Atlantis.Framework.RuleEngine.Tests
     [DeploymentItem("CustomOperatorTests.xml")]
     public void TestShopperValidation()
     {
-      var rules = new XmlDocument();
+      
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"CustomOperatorTests.xml");
-      rules.Load(directory);
+      XDocument rules = XDocument.Load(directory);
 
       var model = new Dictionary<string, Dictionary<string, string>>();
 

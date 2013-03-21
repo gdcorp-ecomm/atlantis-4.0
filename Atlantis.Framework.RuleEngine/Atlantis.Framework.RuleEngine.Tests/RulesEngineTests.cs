@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 using Atlantis.Framework.RuleEngine.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -85,8 +86,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ExpressionEvaluatorValidTest.xml");
       
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildEETestModel("1", "1", "true", "false",
         "meat", @"[team]*", "football", "7", "snuffleupagus", "14");
       var engineResult = RuleEngine.EvaluateRules(model, rules);

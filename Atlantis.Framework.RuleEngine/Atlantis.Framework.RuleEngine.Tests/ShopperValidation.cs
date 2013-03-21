@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 using Atlantis.Framework.RuleEngine.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -133,8 +134,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
       
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -151,8 +152,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel(string.Empty, "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -169,8 +170,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel(null, "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -187,8 +188,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var longFirstName = "";
       while (longFirstName.Length < _firstNameMaxLength + 1)
@@ -211,8 +212,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("first;name", "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -231,8 +232,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("firstname", string.Empty, "username", "P4ssW0rd!", "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -249,8 +250,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("firstname", null, "username", "P4ssW0rd!", "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -267,8 +268,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var longLastName = "";
       while (longLastName.Length < _lastNameMaxLength + 1)
@@ -291,8 +292,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("firstname", "last;name", "username", "P4ssW0rd!", "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -311,8 +312,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("firstname", "lastname", string.Empty, "P4ssW0rd!", "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -329,8 +330,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("firstname", "lastname", null, "P4ssW0rd!", "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -347,8 +348,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var longUsername = "";
       while (longUsername.Length < _usernameMaxLength + 1)
@@ -371,8 +372,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("firstname", "lastname", "123456789", "P4ssW0rd!", "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -389,8 +390,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("firstname", "lastname", "user;name", "P4ssW0rd!", "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -409,8 +410,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", string.Empty, string.Empty, "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -426,8 +427,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", null, null, "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -443,8 +444,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", string.Empty, "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -460,8 +461,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", string.Empty, "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -477,8 +478,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", null, "P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -494,8 +495,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", null, "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -511,8 +512,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", "PassWord!", "PassWord!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -528,8 +529,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", "p4ssw0rd!", "p4ssw0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -545,8 +546,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", " P4ssW0rd!", " P4ssW0rd!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -562,8 +563,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var shortPassword = "P4s!";
       while (shortPassword.Length < _passwordMinLength-1)
@@ -586,8 +587,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var longPassword = "P4s!";
       while (longPassword.Length < _passwordMaxLength+1)
@@ -610,8 +611,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", "P4ssW0rd!!", "1254", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -630,8 +631,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", string.Empty, "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -647,8 +648,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", null, "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -664,8 +665,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var shortPIN = "7";
       while (shortPIN.Length < _callInPinMinLength - 1)
@@ -688,8 +689,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var longPIN = "7";
       while (longPIN.Length < _callInPinMaxLength + 1)
@@ -712,8 +713,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", "123f", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -730,8 +731,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", "1234", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -748,8 +749,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", "8765", "email@email.com");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
@@ -768,8 +769,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", "1254", string.Empty);
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -785,8 +786,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", "1254", null);
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;
@@ -802,8 +803,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       var longEmail = "a@x.";
       while (longEmail.Length < _emailMaxLength + 1)
@@ -826,8 +827,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, @"ShopperValidation.xml");
 
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
       var model = BuildModel("firstname", "lastname", "username", "P4ssW0rd!", "P4ssW0rd!", "1254", "email@emailcom");
       var engineResult = RuleEngine.EvaluateRules(model, rules);
       var modelResults = engineResult.ValidationResults;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.RuleEngine.Compiler;
@@ -11,9 +12,9 @@ namespace Atlantis.Framework.RuleEngine
   public sealed class RuleEngine
   {
     private RuleEngineResult _ruleEngineResult;
-    private readonly XmlDocument _rules;
+    private readonly XDocument _rules;
 
-    private RuleEngine(Dictionary<string, Dictionary<string, string>> inputModel, XmlDocument rules)
+    private RuleEngine(Dictionary<string, Dictionary<string, string>> inputModel, XDocument rules)
     {
       _rules = rules;
       Evaluate(inputModel);
@@ -68,7 +69,26 @@ namespace Atlantis.Framework.RuleEngine
     /// <param name="inputModel"></param>
     /// <param name="rules"> </param>
     /// <returns></returns>
+    [System.Obsolete("For better performance, use EvaluateRules overloaded method having rules parameter type as XDocument")]
     public static IRuleEngineResult EvaluateRules(Dictionary<string, Dictionary<string, string>> inputModel, XmlDocument rules)
+    {
+      XDocument xDocRules;
+      using (var nodeReader = new XmlNodeReader(rules))
+      {
+        nodeReader.MoveToContent();
+        xDocRules = XDocument.Load(nodeReader);
+      }
+
+      return EvaluateRules(inputModel, xDocRules);
+    }
+
+    /// <summary>
+    /// Modile Id Keys and associated value pairs to be used to create Fact results.
+    /// </summary>
+    /// <param name="inputModel"></param>
+    /// <param name="rules"> </param>
+    /// <returns></returns>
+    public static IRuleEngineResult EvaluateRules(Dictionary<string, Dictionary<string, string>> inputModel, XDocument rules)
     {
       var ruleEngine = new RuleEngine(inputModel, rules);
 

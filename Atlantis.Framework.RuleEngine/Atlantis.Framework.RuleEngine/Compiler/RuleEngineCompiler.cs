@@ -19,7 +19,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using Atlantis.Framework.RuleEngine.Evidence;
 using Atlantis.Framework.RuleEngine.Evidence.Actions;
 
@@ -27,7 +30,7 @@ namespace Atlantis.Framework.RuleEngine.Compiler
 {
   public class RuleEngineCompiler
   {
-    public static ROM Compile(XmlDocument rulesXml)
+    public static ROM Compile(XDocument rulesXml)
     {
       var rom = CreateRom();
       LoadFacts(rom, rulesXml);
@@ -63,82 +66,78 @@ namespace Atlantis.Framework.RuleEngine.Compiler
       return valueType;
     }
 
-    private static void LoadFacts(ROM rom, XmlDocument rulesXml)
+    private static void LoadFacts(ROM rom, XDocument rulesXml)
     {
-      var facts = rulesXml.SelectNodes("RuleEngine/Facts//Fact");
-
-      if (facts != null)
+      var facts = rulesXml.XPathSelectElements("RuleEngine/Facts/Fact");
+      foreach (XElement factNode in facts)
       {
-        foreach (XmlNode factNode in facts)
+        if (factNode.HasAttributes)
         {
-          if (factNode.Attributes != null)
+          string id = factNode.Attribute("id").Value;
+          string type = factNode.Attribute("type").Value;
+          string modelId = factNode.Attribute("modelId").Value;
+
+          //ensure same rule wont be entered twice
+          if (rom[id] != null)
           {
-            string id = factNode.Attributes["id"].Value;
-            string type = factNode.Attributes["type"].Value;
-            string modelId = factNode.Attributes["modelId"].Value;
-
-            //ensure same rule wont be entered twice
-            if (rom[id] != null)
-            {
-              throw new Exception("Fact has already been loaded: " + id);
-            }
-
-            //determine priority
-            int priority = 500;
-            if (factNode.Attributes["priority"] != null)
-            {
-              priority = Int32.Parse(factNode.Attributes["priority"].Value);
-            }
-
-            //determine value type
-            var valueType = GetFactType(type);
-
-            var key = factNode.Attributes["key"].Value;
-
-            IFact fact = new Fact(id, priority, key, valueType, modelId, true);
-
-            rom.AddEvidence(fact);
+            throw new Exception("Fact has already been loaded: " + id);
           }
+
+          //determine priority
+          int priority = 500;
+          if (factNode.Attribute("priority") != null)
+          {
+            priority = Int32.Parse(factNode.Attribute("priority").Value);
+          }
+
+          //determine value type
+          var valueType = GetFactType(type);
+
+          var key = factNode.Attribute("key").Value;
+
+          IFact fact = new Fact(id, priority, key, valueType, modelId, true);
+
+          rom.AddEvidence(fact);
         }
       }
     }
-
-    private static int LoadEvaluation(ROM rom, XmlNode ruleNode, string ruleNodeId, List<EvidenceSpecifier> actions, int actionCounter, ActionType actionType)
+    private static int LoadEvaluation(ROM rom, XElement ruleNode, string ruleNodeId, List<EvidenceSpecifier> actions, int actionCounter, ActionType actionType)
     {
       var path = string.Empty;
 
       switch (actionType)
       {
         case ActionType.EvaluteIsValid:
-          path = "Actions//EvaluateIsValid";
+          path = "./Actions/EvaluateIsValid";
           break;
         case ActionType.EvaluateMessage:
-          path = "Actions//EvaluateMessage";
+          path = "./Actions/EvaluateMessage";
           break;
       }
 
-      var evaluateList = ruleNode.SelectNodes(path);
-      if (evaluateList != null)
+      var evaluateList = ruleNode.XPathSelectElements(path);
+      var xElements = evaluateList as XElement[] ?? evaluateList.ToArray();
+      if (xElements.Any())
       {
-        foreach (XmlNode evaluate in evaluateList)
+        foreach (XElement evaluate in xElements)
         {
           try
           {
-            if (evaluate.Attributes != null)
+            if (evaluate.HasAttributes)
             {
-              var actionOperatingName = evaluate.Attributes["factId"].Value;
-              var evaluationSetValue = evaluate.InnerText;
+              var actionOperatingName = evaluate.Attribute("factId").Value;
+              var evaluationSetValue = evaluate.Value;
 
               var actionPriority = 500;
-              if (evaluate.Attributes["priority"] != null)
+              if (evaluate.Attribute("priority") != null)
               {
-                actionPriority = Int32.Parse(evaluate.Attributes["priority"].Value);
+                actionPriority = Int32.Parse(evaluate.Attribute("priority").Value);
               }
 
               var result = true;
-              if (evaluate.Attributes["result"] != null)
+              if (evaluate.Attribute("result") != null)
               {
-                result = Boolean.Parse(evaluate.Attributes["result"].Value);
+                result = Boolean.Parse(evaluate.Attribute("result").Value);
               }
 
               var actionId = string.Format("{0}-{1}-{2}", ruleNodeId, actionOperatingName, actionCounter++);
@@ -151,7 +150,7 @@ namespace Atlantis.Framework.RuleEngine.Compiler
           }
           catch (Exception e)
           {
-            throw new Exception("Invalid action: " + evaluate.OuterXml, e);
+            throw new Exception("Invalid action: " + evaluate, e);
           }
         }
       }
@@ -159,10 +158,9 @@ namespace Atlantis.Framework.RuleEngine.Compiler
       return actionCounter;
     }
 
-    private static void LoadRules(ROM rom, XmlDocument rulesXml)
+    private static void LoadRules(ROM rom, XDocument rulesXml)
     {
-      var ruleMainNode = rulesXml.SelectSingleNode("RuleEngine/Rules//RuleMain");
-
+      var ruleMainNode = rulesXml.XPathSelectElements("RuleEngine/Rules/RuleMain").FirstOrDefault();
       if (ruleMainNode != null)
       {
         LoadRule(rom, ruleMainNode, true);
@@ -171,22 +169,19 @@ namespace Atlantis.Framework.RuleEngine.Compiler
       {
         throw new Exception("RuleMain node is missing.");
       }
-      
-      var rules = rulesXml.SelectNodes("RuleEngine/Rules//Rule");
-      if (rules != null)
+
+      var rules = rulesXml.XPathSelectElements("RuleEngine/Rules/Rule");
+      foreach (XElement ruleNode in rules)
       {
-        foreach (XmlNode ruleNode in rules)
-        {
-          LoadRule(rom, ruleNode, false);
-        }
+        LoadRule(rom, ruleNode, false);
       }
     }
 
-    private static void LoadRule(ROM rom, XmlNode ruleNode, bool isMain)
+    private static void LoadRule(ROM rom, XElement ruleElement, bool isMain)
     {
-      if (ruleNode.Attributes != null)
+      if (ruleElement.HasAttributes)
       {
-        string currentRuleId = ruleNode.Attributes["id"].Value;
+        string currentRuleId = ruleElement.Attribute("id").Value;
         //ensure this has not already been entered
         if (rom[currentRuleId] != null)
         {
@@ -194,23 +189,23 @@ namespace Atlantis.Framework.RuleEngine.Compiler
         }
 
         bool hasEvidence = false;
-        if (ruleNode.Attributes["chainable"] != null)
+        if (ruleElement.Attribute("chainable") != null)
         {
-          hasEvidence = Boolean.Parse(ruleNode.Attributes["chainable"].Value);
+          hasEvidence = Boolean.Parse(ruleElement.Attribute("chainable").Value);
         }
 
         int priority = 500;
-        if (ruleNode.Attributes["priority"] != null)
+        if (ruleElement.Attribute("priority") != null)
         {
-          priority = Int32.Parse(ruleNode.Attributes["priority"].Value);
+          priority = Int32.Parse(ruleElement.Attribute("priority").Value);
         }
 
         //expression
         string condition;
-        var conditionNode = ruleNode["Condition"];
+        var conditionNode = ruleElement.XPathSelectElement("./Condition");
         if (conditionNode != null)
         {
-          condition = conditionNode.InnerText;
+          condition = conditionNode.Value;
         }
         else
         {
@@ -223,37 +218,38 @@ namespace Atlantis.Framework.RuleEngine.Compiler
 
         #region Evaluate
 
-        actionCounter = LoadEvaluation(rom, ruleNode, currentRuleId, actions, actionCounter, ActionType.EvaluteIsValid);
-        actionCounter = LoadEvaluation(rom, ruleNode, currentRuleId, actions, actionCounter, ActionType.EvaluateMessage);
+        actionCounter = LoadEvaluation(rom, ruleElement, currentRuleId, actions, actionCounter, ActionType.EvaluteIsValid);
+        actionCounter = LoadEvaluation(rom, ruleElement, currentRuleId, actions, actionCounter, ActionType.EvaluateMessage);
 
         #endregion
 
         #region Execute
 
-        var executeList = ruleNode.SelectNodes("Actions//Execute");
-        if (executeList != null && executeList.Count > 0)
+        var executeList = ruleElement.XPathSelectElements("./Actions/Execute");
+        var xElements = executeList as XElement[] ?? executeList.ToArray();
+        if (xElements.Any())
         {
           hasEvidence = true;
-          foreach (XmlNode execute in executeList)
+          foreach (XElement execute in xElements)
           {
             try
             {
-              if (execute.Attributes != null)
+              if (execute.HasAttributes)
               {
-                string actionOperatingName = execute.Attributes["ruleId"].Value;
+                string actionOperatingName = execute.Attribute("ruleId").Value;
 
                 bool result = true;
 
                 int actionPriority = 500;
 
-                if (execute.Attributes["priority"] != null)
+                if (execute.Attribute("priority") != null)
                 {
-                  actionPriority = Int32.Parse(execute.Attributes["priority"].Value);
+                  actionPriority = Int32.Parse(execute.Attribute("priority").Value);
                 }
 
-                if (execute.Attributes["result"] != null)
+                if (execute.Attribute("result") != null)
                 {
-                  result = Boolean.Parse(execute.Attributes["result"].Value);
+                  result = Boolean.Parse(execute.Attribute("result").Value);
                 }
 
                 var actionId = string.Format("{0}-{1}-{2}", currentRuleId, actionOperatingName, actionCounter++);
@@ -264,7 +260,7 @@ namespace Atlantis.Framework.RuleEngine.Compiler
             }
             catch (Exception e)
             {
-              throw new Exception("Invalid action: " + execute.OuterXml, e);
+              throw new Exception("Invalid action: " + execute, e);
             }
           }
         }

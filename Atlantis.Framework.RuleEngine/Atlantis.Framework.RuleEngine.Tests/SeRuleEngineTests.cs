@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 using Atlantis.Framework.RuleEngine.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -84,8 +85,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, SE_RULE_XML);
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       // This is where we set our model fact values
       var model = BuildModel("FR", "12345", string.Empty);
@@ -106,8 +107,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, SE_RULE_XML);
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       // This is where we set our model fact values
       var model = BuildModel("FR", string.Empty, "12345");
@@ -128,8 +129,8 @@ namespace Atlantis.Framework.RuleEngine.Tests
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
       var assemblyPath = pathUri.LocalPath;
       string directory = Path.Combine(assemblyPath, SE_RULE_XML);
-      var rules = new XmlDocument();
-      rules.Load(directory);
+      
+      XDocument rules = XDocument.Load(directory);
 
       // This is where we set our model fact values
       var model = BuildModel("FR", "1234567890", "12345");

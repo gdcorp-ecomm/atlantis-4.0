@@ -273,10 +273,22 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       get { return null; }
     }
 
+    public ITLDApplicationControl ApplicationControl
+    {
+      get { return null; }
+    }
+
+    public bool IsValidPreRegistrationPhase(string type, string subType, out ITLDPreRegistrationPhase preRegistrationPhase)
+    {
+      preRegistrationPhase = null;
+      return false;
+    }
+
     public string GetRegistrationFieldsXml()
     {
       return string.Empty;
     }
+
     #endregion
 
   }

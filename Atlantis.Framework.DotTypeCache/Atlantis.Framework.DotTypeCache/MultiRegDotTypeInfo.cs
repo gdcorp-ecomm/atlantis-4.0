@@ -1,5 +1,6 @@
 ﻿using System;
 using Atlantis.Framework.DotTypeCache.Interface;
+using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
 using Atlantis.Framework.RegDotTypeRegistry.Interface;
 using System.Collections.Generic;
@@ -442,6 +443,16 @@ namespace Atlantis.Framework.DotTypeCache
     public ITLDTld Tld
     {
       get { return this._dotTypeInfo.Tld; } 
+    }
+
+    public ITLDApplicationControl ApplicationControl
+    {
+      get { return this._dotTypeInfo.ApplicationControl; }
+    }
+
+    public bool IsValidPreRegistrationPhase(string type, string subType, out ITLDPreRegistrationPhase preRegistrationPhase)
+    {
+      return this._dotTypeInfo.IsValidPreRegistrationPhase(type, subType, out preRegistrationPhase);
     }
 
     public string GetRegistrationFieldsXml()

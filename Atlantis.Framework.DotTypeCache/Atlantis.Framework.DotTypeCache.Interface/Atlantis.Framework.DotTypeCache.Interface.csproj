@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ITLDPreRegistrationPhase.cs" />
+    <Compile Include="ITLDPreRegistration.cs" />
+    <Compile Include="ITLDApplicationControl.cs" />
     <Compile Include="ITLDTld.cs" />
     <Compile Include="ITLDDataImpl.cs" />
     <Compile Include="ITLDValidYearsSet.cs" />

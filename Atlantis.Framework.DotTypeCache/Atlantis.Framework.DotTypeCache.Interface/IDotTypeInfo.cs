@@ -59,5 +59,8 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     ITLDProduct Product { get; }
     int TldId { get; }
     ITLDTld Tld { get; }
+    ITLDApplicationControl ApplicationControl { get; }
+
+    bool IsValidPreRegistrationPhase(string type, string subType, out ITLDPreRegistrationPhase preRegistrationPhase);
   }
 }

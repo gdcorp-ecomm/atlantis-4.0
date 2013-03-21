@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TldPreRegistrationPhase.cs" />
+    <Compile Include="TLDMLPreRegistration.cs" />
+    <Compile Include="TLDMLApplicationControl.cs" />
     <Compile Include="TLDMLTld.cs" />
     <Compile Include="HashSetExtensions.cs" />
     <Compile Include="TLDMLByNameRequestData.cs" />

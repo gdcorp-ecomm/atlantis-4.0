@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.DotTypeCache.Interface;
 using System;
 using System.Collections.Generic;
+using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache

@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Xml;
 
-namespace Atlantis.Framework.DotTypeCache
+namespace Atlantis.Framework.DotTypeCache.Static
 {
   class DotTypeCacheConfig
   {
@@ -61,12 +61,15 @@ namespace Atlantis.Framework.DotTypeCache
           xmlDoc.Load(configFilePath);
           XmlNodeList configElements = xmlDoc.SelectNodes("/ConfigElements/ConfigElement");
 
-          foreach (XmlElement configElement in configElements)
+          if (configElements != null)
           {
-            ConfigElement item = HydrateFromXml(configElement);
-            if (item != null)
+            foreach (XmlElement configElement in configElements)
             {
-              _configItems[item.ProgId] = item;
+              ConfigElement item = HydrateFromXml(configElement);
+              if (item != null)
+              {
+                _configItems[item.ProgId] = item;
+              }
             }
           }
         }

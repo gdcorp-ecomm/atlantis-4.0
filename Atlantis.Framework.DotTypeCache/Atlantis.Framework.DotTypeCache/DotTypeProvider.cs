@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Atlantis.Framework.DotTypeCache.Interface;
+using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.Interface;
 using System;
 using System.Collections.Generic;

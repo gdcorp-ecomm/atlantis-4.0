@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Atlantis.Framework.DotTypeCache
+namespace Atlantis.Framework.DotTypeCache.Static
 {
   public sealed class ConfigElement
   {

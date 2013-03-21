@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Atlantis.Framework.DotTypeCache
+namespace Atlantis.Framework.DotTypeCache.Static
 {
-  internal static class StaticDotTypes
+  public static class StaticDotTypes
   {
     static DotTypeCacheConfig _config;
     static IDotTypeInfo _invalidDotType;

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Atlantis.Framework.DotTypeCache.Interface;
+using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.TLDDataCache.Interface;
@@ -69,7 +70,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       int productIdDefault = DotTypeCache.GetRegistrationProductId("co.uk", 2, 1);
       int productIdFirstRegistrar = DotTypeCache.GetTransferProductId("co.uk", "1", 2, 1);
       int productIdSecondRegistrar = DotTypeCache.GetRegistrationProductId("co.uk", "2", 2, 1);
-      string description = DotTypeCache.GetAdditionalInfoValue("co.uk", "Description");
       IDotTypeInfo info = DotTypeCache.GetDotTypeInfo("co.uk");
       Assert.IsTrue((productIdDefault * productIdSecondRegistrar) != 0);
       //Assert.IsTrue((productIdDefault * productIdFirstRegistrar * productIdSecondRegistrar) != 0);
@@ -191,7 +191,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void OrgStaticVsTLDMLEnabled()
     {
-      Type staticDotTypesType = Assembly.GetAssembly(typeof(DotTypeCache)).GetType("Atlantis.Framework.DotTypeCache.StaticDotTypes");
+      Type staticDotTypesType = typeof (StaticDotTypes); 
       MethodInfo getStaticDotType = staticDotTypesType.GetMethod("GetDotType", BindingFlags.Static | BindingFlags.Public);
       object[] methodParms = new object[1] { "org"};
       IDotTypeInfo staticOrg = getStaticDotType.Invoke(null, methodParms) as IDotTypeInfo;
@@ -204,7 +204,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void OrgStaticVsTLDMLEnabedProductIds()
     {
-      Type staticDotTypesType = Assembly.GetAssembly(typeof(DotTypeCache)).GetType("Atlantis.Framework.DotTypeCache.StaticDotTypes");
+      Type staticDotTypesType = typeof(StaticDotTypes);
       MethodInfo getStaticDotType = staticDotTypesType.GetMethod("GetDotType", BindingFlags.Static | BindingFlags.Public);
       object[] methodParms = new object[1] { "org" };
       IDotTypeInfo staticOrg = getStaticDotType.Invoke(null, methodParms) as IDotTypeInfo;
@@ -263,28 +263,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       ITLDValidYearsSet vys = dotType.Product.PreregistrationYears("testing");
       Assert.IsTrue(vys.Min > 0);
     }
-
-    /*
-    [TestMethod]
-    public void GetOfferedTLDFlagsForAll()
-    {
-      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetOfferedTLDFlags(OfferedTLDProductTypes.Registration);
-      Assert.IsTrue(offeredTLDs != null);
-    }
-
-    [TestMethod]
-    public void GetOfferedTLDFlagsForOrg()
-    {
-      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetOfferedTLDFlags(OfferedTLDProductTypes.Registration, new string[] { "org" });
-      Assert.IsTrue(offeredTLDs != null);
-    }
-
-    [TestMethod]
-    public void GetOfferedTLDFlagsForOrgAndCom()
-    {
-      Dictionary<string, Dictionary<string, bool>> offeredTLDs = DotTypeProvider.GetOfferedTLDFlags(OfferedTLDProductTypes.Registration, new string[] {"org", "com"});
-      Assert.IsTrue(offeredTLDs != null);
-    }*/
 
     #region GetDotTypeInfo
     
@@ -1256,68 +1234,6 @@ namespace Atlantis.Framework.DotTypeCache.Tests
 
     #endregion
     
-    #region GetAdditionalInfoValue
-
-    [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\DotTypesData.xml", "DotType",
-        DataAccessMethod.Sequential), DeploymentItem("Atlantis.Framework.DotTypeCache.Tests\\DotTypesData.xml"),
-        TestMethod]
-    public void GetAdditionalInfoValue()
-    {
-      string dotType = System.Convert.ToString(testContextInstance.DataRow["DotTypeName"]);
-      string result = DotTypeCache.GetAdditionalInfoValue(dotType, "LandingPageUrl");
-      Assert.AreNotEqual(0, result.Length, "LandingPageUrl not returned for dotType: " + dotType);
-    }
-
-    #region Negative Tests
-
-    [TestMethod]
-    public void N_GetAdditionalInfoValue_EmptyDotType()
-    {
-      string result = DotTypeCache.GetAdditionalInfoValue(string.Empty, "LandingPageUrl");
-      Assert.AreEqual(0, result.Length);
-    }
-
-    [TestMethod]
-    public void N_GetAdditionalInfoValue_InvalidDotType()
-    {
-      string result = DotTypeCache.GetAdditionalInfoValue("blah", "LandingPageUrl");
-      Assert.AreEqual(0, result.Length);
-    }
-
-    [TestMethod]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void N_GetAdditionalInfoValue_NullDotType()
-    {
-      string result = DotTypeCache.GetAdditionalInfoValue(null, "LandingPageUrl");
-      Assert.AreEqual(0, result.Length);
-    }
-
-    [TestMethod]
-    public void N_GetAdditionalInfoValue_EmptyValue()
-    {
-      string result = DotTypeCache.GetAdditionalInfoValue("com", string.Empty);
-      Assert.AreEqual(0, result.Length);
-    }
-
-    [TestMethod]
-    public void N_GetAdditionalInfoValue_InvalidValue()
-    {
-      string result = DotTypeCache.GetAdditionalInfoValue("com", "blah");
-      Assert.AreEqual(0, result.Length);
-    }
-
-    [TestMethod]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void N_GetAdditionalInfoValue_NullValue()
-    {
-      string result = DotTypeCache.GetAdditionalInfoValue("com", null);
-      Assert.AreEqual(0, result.Length);
-    }
-
-    #endregion
-
-    #endregion
-
     [TestMethod]
     public void IsOfferedCheckForCom()
     {
@@ -1434,5 +1350,45 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Assert.IsTrue(reg.OfferedTLDsList.Count > 0);
     }
 
+    [TestMethod]
+    public void IsValidPreRegPhaseForTldmlBorg()
+    {
+      IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("borg");
+      ITLDPreRegistrationPhase preregphase;
+      bool valid = dotTypeInfo.IsValidPreRegistrationPhase("Sunrise", "SRA", out preregphase);
+
+      Assert.IsTrue(!valid && preregphase == null);
+      //Assert.IsTrue(valid && !string.IsNullOrEmpty(preregphase.Type) && !string.IsNullOrEmpty(preregphase.SubType) && !string.IsNullOrEmpty(preregphase.Description));
+    }
+
+    [TestMethod]
+    public void IsValidPreRegPhaseForInvalidTld()
+    {
+      IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("raj");
+      ITLDPreRegistrationPhase preregphase;
+      bool valid = dotTypeInfo.IsValidPreRegistrationPhase("Sunrise", "SRA", out preregphase);
+
+      Assert.IsTrue(!valid && preregphase == null);
+    }
+
+    [TestMethod]
+    public void IsValidPreRegPhaseForStaticTld()
+    {
+      IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("com");
+      ITLDPreRegistrationPhase preregphase;
+      bool valid = dotTypeInfo.IsValidPreRegistrationPhase("Sunrise", "SRA", out preregphase);
+
+      Assert.IsTrue(!valid && preregphase == null);
+    }
+
+    [TestMethod]
+    public void IsValidPreRegPhaseForStaticMultiRegTld()
+    {
+      IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("co.uk");
+      ITLDPreRegistrationPhase preregphase;
+      bool valid = dotTypeInfo.IsValidPreRegistrationPhase("Sunrise", "SRA", out preregphase);
+
+      Assert.IsTrue(!valid && preregphase == null);
+    }
   }
 }

@@ -1,4 +1,5 @@
 ﻿using Atlantis.Framework.DotTypeCache.Interface;
+using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.TLDDataCache.Interface;
@@ -20,12 +21,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
   [DeploymentItem("Atlantis.Framework.RegDotTypeProductIds.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DCCDomainsDataCache.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
-  [DeploymentItem("Atlantis.Framework.DotTypeCache.DotCom.dll")]
-  [DeploymentItem("Atlantis.Framework.DotTypeCache.DotOrg.dll")]
-  [DeploymentItem("Atlantis.Framework.DotTypeCache.DotCoDotUk.dll")]
-  [DeploymentItem("Atlantis.Framework.DotTypeCache.DotXxx.dll")]
-  [DeploymentItem("Atlantis.Framework.DotTypeCache.DotNet.dll")]
-  [DeploymentItem("Atlantis.Framework.DotTypeCache.DotComDotAu.dll")]
+  [DeploymentItem("Atlantis.Framework.DomainContactFields.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeCache.StaticTypes.dll")]
   public class StaticVsTLDMLEnabledTests
   {
     private TestContext testContextInstance;
@@ -65,7 +62,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       tlds.Add("org");
       domainCount = new int[] { 1, 6, 21, 50, 101, 201 };
       regLengths = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-      staticDotTypesType = Assembly.GetAssembly(typeof(DotTypeCache)).GetType("Atlantis.Framework.DotTypeCache.StaticDotTypes");
+      staticDotTypesType = typeof(StaticDotTypes);
       getStaticDotType = staticDotTypesType.GetMethod("GetDotType", BindingFlags.Static | BindingFlags.Public);
     }
 

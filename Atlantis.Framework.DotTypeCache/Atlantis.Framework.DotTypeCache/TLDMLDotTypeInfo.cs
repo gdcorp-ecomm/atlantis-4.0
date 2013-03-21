@@ -157,8 +157,10 @@ namespace Atlantis.Framework.DotTypeCache
 
     public bool IsMultiRegistry
     {
-      // TODO: how to tell multiregistry from TLDML?
-      get { return StaticDotTypes.IsDotTypeMultiRegistry(_tld); }
+      get
+      {
+        return _tldml.Value.ApplicationControl.IsMultiRegistry; 
+      }
     }
 
     public IEnumerable<RegistryLanguage> RegistryLanguages
@@ -509,6 +511,25 @@ namespace Atlantis.Framework.DotTypeCache
     public ITLDTld Tld
     {
       get { return _tldml.Value.Tld; }
+    }
+
+    public ITLDApplicationControl ApplicationControl
+    {
+      get
+      {
+        return _tldml.Value.ApplicationControl;
+      }
+    }
+
+    public bool IsValidPreRegistrationPhase(string type, string subType, out ITLDPreRegistrationPhase preRegistrationPhase)
+    {
+      if (_tldml.Value.PreRegistration != null)
+      {
+        return _tldml.Value.PreRegistration.IsValidPreRegistrationPhase(type, subType, out preRegistrationPhase);
+      }
+      
+      preRegistrationPhase = null;
+      return false;
     }
 
     public string GetRegistrationFieldsXml()

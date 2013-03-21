@@ -10,14 +10,18 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     private XDocument _tldmlDocument;
     private AtlantisException _exception;
 
-    private ITLDProduct _product;
-    private ITLDTld _tld;
+    private readonly ITLDProduct _product;
+    private readonly ITLDTld _tld;
+    private readonly ITLDApplicationControl _applicationControl;
+    private readonly ITLDPreRegistration _preRegistration;
 
     private TLDMLByNameResponseData(XDocument tldmlDocument)
     {
       _tldmlDocument = tldmlDocument;
       _product = new TLDMLProduct(_tldmlDocument) as ITLDProduct;
       _tld = new TLDMLTld(_tldmlDocument) as ITLDTld;
+      _applicationControl = new TLDMLApplicationControl(_tldmlDocument) as ITLDApplicationControl;
+      //_preRegistration = new TLDMLPreRegistration(_tldmlDocument);
     }
 
     private TLDMLByNameResponseData(RequestData requestData, Exception ex)
@@ -45,6 +49,16 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     public ITLDTld Tld
     {
       get { return _tld; }
+    }
+
+    public ITLDApplicationControl ApplicationControl
+    {
+      get { return _applicationControl; }
+    }
+
+    public ITLDPreRegistration PreRegistration
+    {
+      get { return _preRegistration; }
     }
 
     public string ToXML()

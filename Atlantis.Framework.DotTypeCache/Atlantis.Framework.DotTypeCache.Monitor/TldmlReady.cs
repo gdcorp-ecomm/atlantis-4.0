@@ -128,7 +128,7 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
           tldmlReady.Add(new XAttribute("TldmlReady", isTldmlReady));
 
           var tldInfo = new XElement("TldInfo");
-          tldInfo.Add(new XAttribute("TldmlEnabled", dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo"));
+          tldInfo.Add(new XAttribute("TldmlSupported", dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo"));
           tldInfo.Add(new XAttribute("IsActiveTld", activeTldsResponse.IsTLDActive(tldName, "availcheckstatus")));
 
           tldInfo.Add(new XAttribute("IsOfferedForRegistration", offeredTldsRegistration.TryGetValue(tldName, out flags)));

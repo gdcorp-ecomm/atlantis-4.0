@@ -1,5 +1,6 @@
 ﻿using Atlantis.Framework.DotTypeCache.Interface;
 using System;
+using Atlantis.Framework.DotTypeCache.Static;
 
 namespace Atlantis.Framework.DotTypeCache
 {

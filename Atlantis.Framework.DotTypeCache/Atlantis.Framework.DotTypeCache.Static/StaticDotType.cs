@@ -22,6 +22,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     private StaticProduct _staticProduct;
     private StaticTld _staticTld;
+    private StaticApplicationControl _staticApplicationControl;
     private Lazy<DomainContactFieldsResponseData> _domainContactFieldsData;
     private Lazy<TLDLanguageResponseData> _languagesData;
     private Lazy<ValidDotTypesResponseData> _validDotTypes;
@@ -97,6 +98,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
       _expiredAuctionRegProductIds = InitializeExpiredAuctionRegProductIds();
       _staticProduct = new StaticProduct(this);
       _staticTld = new StaticTld(this);
+      _staticApplicationControl = new StaticApplicationControl(this);
       _domainContactFieldsData = new Lazy<DomainContactFieldsResponseData>(LoadDomainContactFieldsData);
       _languagesData = new Lazy<TLDLanguageResponseData>(LoadLanguagesData);
       _validDotTypes = new Lazy<ValidDotTypesResponseData>(LoadValidDotTypes);
@@ -441,7 +443,24 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     public ITLDTld Tld
     {
-      get { return _staticTld; }
+      get
+      {
+        return _staticTld;
+      }
+    }
+
+    public ITLDApplicationControl ApplicationControl
+    {
+      get
+      {
+        return _staticApplicationControl;
+      } 
+    }
+
+    public bool IsValidPreRegistrationPhase(string type, string subType, out ITLDPreRegistrationPhase preRegistrationPhase)
+    {
+      preRegistrationPhase = null;
+      return false;
     }
 
     public string GetRegistrationFieldsXml()

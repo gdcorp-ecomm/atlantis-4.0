@@ -47,6 +47,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MongoDB\MongoDB.Bson.dll" />
+    <Content Include="MongoDB\MongoDB.Driver.dll" />
     <Content Include="Json.net\Newtonsoft.Json.dll" />
     <Content Include="Json.net\Newtonsoft.Json.xml" />
     <Content Include="Testing\TestSetUpAndSettings.dll">

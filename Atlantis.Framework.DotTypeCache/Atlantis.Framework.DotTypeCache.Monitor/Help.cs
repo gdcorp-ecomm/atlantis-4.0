@@ -22,23 +22,28 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
         {
           string baseUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
 
-          var el = new XElement("dottypeinfo");
+          var el = new XElement("MonitorUrl");
+          el.Add(new XAttribute("type", "dottypecache"));
           el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/data?tld=com"));
           root.Add(el);
 
-          el = new XElement("activetlds");
+          el = new XElement("MonitorUrl");
+          el.Add(new XAttribute("type", "activetlds"));
           el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/activetlds"));
           root.Add(el);
 
-          el = new XElement("offeredtlds");
+          el = new XElement("MonitorUrl");
+          el.Add(new XAttribute("type", "offeredtlds"));
           el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/offeredtlds?type=registration&tld=org|com"));
           root.Add(el);
 
-          el = new XElement("productids");
+          el = new XElement("MonitorUrl");
+          el.Add(new XAttribute("type", "productids"));
           el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/productids?tld=borg"));
           root.Add(el);
 
-          el = new XElement("tldmlready");
+          el = new XElement("MonitorUrl");
+          el.Add(new XAttribute("type", "tldmlready"));
           el.Add(new XAttribute("sampleurl", baseUrl + "_dottypecache/monitor/tldmlready?tld=borg|a.borg"));
           root.Add(el);
         }

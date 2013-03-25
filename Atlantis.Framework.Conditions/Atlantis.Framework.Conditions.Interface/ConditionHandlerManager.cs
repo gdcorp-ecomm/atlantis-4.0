@@ -1,18 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Web;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Conditions.Interface
 {
   public static class ConditionHandlerManager
   {
-    private static Dictionary<string, IConditionHandler> _conditionHandlers;
+    private static readonly Dictionary<string, IConditionHandler> _conditionHandlers;
 
     static ConditionHandlerManager()
     {
       _conditionHandlers = new Dictionary<string, IConditionHandler>(StringComparer.OrdinalIgnoreCase);
+    }
+
+    private static void LogException(string message, string sourceFunction, string condtionName)
+    {
+      AtlantisException aex = new AtlantisException(sourceFunction,
+                                                    "0",
+                                                    message,
+                                                    "ConditionName: " + condtionName,
+                                                    null,
+                                                    null);
+
+      Engine.Engine.LogAtlantisException(aex);
     }
 
     private static void AddConditionHandler(IConditionHandler conditionHandler)
@@ -23,20 +34,10 @@ namespace Atlantis.Framework.Conditions.Interface
       }
       else
       {
-        AtlantisException aex = new AtlantisException("ConditionHandlerManager.AddConditionHandler()", 
-                                                      "0", 
-                                                      string.Format("Attempted to add duplicate IConditionHandler ConditionName. ConditionName: \"{0}\", Type: \"{1}\"", conditionHandler.ConditionName, conditionHandler.GetType()), 
-                                                      conditionHandler.ConditionName, 
-                                                      null, 
-                                                      null);
-
-        Engine.Engine.LogAtlantisException(aex);
+        LogException(string.Format("Attempted to add duplicate IConditionHandler ConditionName. ConditionName: \"{0}\", Type: \"{1}\"", conditionHandler.ConditionName, conditionHandler.GetType()), 
+                     "ConditionHandlerManager.AddConditionHandler()", 
+                     "ConditionName: " + conditionHandler.ConditionName);
       }
-    }
-
-    public static void AutoRegisterConditionHandlers()
-    {
-      AutoRegisterConditionHandlers(null);
     }
 
     public static void AutoRegisterConditionHandlers(params Assembly[] additionalAssemblies)
@@ -67,13 +68,26 @@ namespace Atlantis.Framework.Conditions.Interface
 
     public static bool EvaluateCondition(string conditionName, IEnumerable<string> parameters, IProviderContainer providerContainer)
     {
+      bool conditionResult = false;
+
       IConditionHandler conditionHandler;
       if (!_conditionHandlers.TryGetValue(conditionName, out conditionHandler))
       {
         conditionHandler = new NullConditionHandler();
       }
 
-      return conditionHandler.EvaluateCondition(conditionName, parameters, providerContainer);
+      try
+      {
+        conditionResult = conditionHandler.EvaluateCondition(conditionName, parameters, providerContainer);
+      }
+      catch (Exception ex)
+      {
+        LogException(string.Format("Unhandled IConditionHandler Exception: " + ex.Message),
+                     "EvaluateCondition()",
+                     conditionName);
+      }
+
+      return conditionResult;
     }
   }
 }

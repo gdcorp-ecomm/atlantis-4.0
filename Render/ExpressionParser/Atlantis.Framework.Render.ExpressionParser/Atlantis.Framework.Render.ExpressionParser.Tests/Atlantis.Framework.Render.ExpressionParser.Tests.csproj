@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{21545580-88F5-4803-A2DC-7D1025BFA991}</ProjectGuid>
+    <ProjectGuid>{D8D8EA86-1F4F-4670-8ABA-B68F412A2FF9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.ExpressionParser.Tests</RootNamespace>
-    <AssemblyName>Atlantis.Framework.ExpressionParser.Tests</AssemblyName>
+    <RootNamespace>Atlantis.Framework.Render.ExpressionParser.Tests</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Render.ExpressionParser.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -64,21 +64,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+    <ProjectReference Include="..\..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+    <ProjectReference Include="..\..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer.Impl.csproj">
+    <ProjectReference Include="..\..\..\..\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer.Impl.csproj">
       <Project>{8a7ee679-abc6-4f76-99a6-5c9c1203d9f0}</Project>
       <Name>Atlantis.Framework.Providers.ProviderContainer.Impl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.ExpressionParser\Atlantis.Framework.ExpressionParser.csproj">
-      <Project>{a06963bd-8807-4716-8ca3-b296c96831f4}</Project>
-      <Name>Atlantis.Framework.ExpressionParser</Name>
+    <ProjectReference Include="..\Atlantis.Framework.Render.ExpressionParser\Atlantis.Framework.Render.ExpressionParser.csproj">
+      <Project>{e35a1790-4605-4adb-813e-dcd5485f58bb}</Project>
+      <Name>Atlantis.Framework.Render.ExpressionParser</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

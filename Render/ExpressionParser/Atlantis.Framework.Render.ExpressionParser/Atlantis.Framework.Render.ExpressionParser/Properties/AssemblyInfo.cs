@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.ExpressionParser")]
+[assembly: AssemblyTitle("Atlantis.Framework.Render.ExpressionParser")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
 [assembly: AssemblyConfiguration("Debug Build")]
@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("Release Build")]
 #endif
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
-[assembly: AssemblyProduct("Atlantis.Framework.ExpressionParser")]
+[assembly: AssemblyProduct("Atlantis.Framework.Render.ExpressionParser")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d616a1d9-daad-4579-8191-d81603afe3c2")]
+[assembly: Guid("821a068b-789d-4f01-9961-3cda12b7f42b")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -37,4 +37,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.3.15")]
+[assembly: AssemblyFileVersion("4.13.3.25")]

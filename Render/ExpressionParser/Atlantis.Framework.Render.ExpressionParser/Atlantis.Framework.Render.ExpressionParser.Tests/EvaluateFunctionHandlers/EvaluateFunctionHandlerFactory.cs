@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 
-namespace Atlantis.Framework.ExpressionParser.Tests.EvaluateFunctionHandlers
+namespace Atlantis.Framework.Render.ExpressionParser.Tests.EvaluateFunctionHandlers
 {
   public static class EvaluateFunctionHandlerFactory
   {

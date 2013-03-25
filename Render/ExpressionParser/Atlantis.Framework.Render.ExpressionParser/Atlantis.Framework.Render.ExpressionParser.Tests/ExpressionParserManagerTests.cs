@@ -1,8 +1,8 @@
-﻿using Atlantis.Framework.ExpressionParser.Tests.EvaluateFunctionHandlers;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
+﻿using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Render.ExpressionParser.Tests.EvaluateFunctionHandlers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Atlantis.Framework.ExpressionParser.Tests
+namespace Atlantis.Framework.Render.ExpressionParser.Tests
 {
   [TestClass]
   public class ExpressionParserManagerTests

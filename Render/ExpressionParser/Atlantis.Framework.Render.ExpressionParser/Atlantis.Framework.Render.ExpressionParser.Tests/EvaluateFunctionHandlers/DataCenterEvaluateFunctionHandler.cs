@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Atlantis.Framework.ExpressionParser.Tests.EvaluateFunctionHandlers
+namespace Atlantis.Framework.Render.ExpressionParser.Tests.EvaluateFunctionHandlers
 {
-  public class CountrySiteContextEvaluateFunctionHandler
+  public class DataCenterEvaluateFunctionHandler
   {
-    private const string ACTUAL_VALUE = "IN";
+    private const string ACTUAL_VALUE = "AP";
 
     public bool EvaluateFunction(string functionName, IEnumerable<string> parameters)
     {

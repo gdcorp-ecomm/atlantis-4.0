@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 using NCalc;
 
-namespace Atlantis.Framework.ExpressionParser
+namespace Atlantis.Framework.Render.ExpressionParser
 {
   public class ExpressionParserManager
   {
@@ -12,7 +12,7 @@ namespace Atlantis.Framework.ExpressionParser
     private IProviderContainer ProviderContainer { get; set; }
 
     public EvaluateFunctionDelegate EvaluateExpressionHandler { get; set; }
-    
+
     public ExpressionParserManager(IProviderContainer providerContainer)
     {
       ProviderContainer = providerContainer;
@@ -24,7 +24,7 @@ namespace Atlantis.Framework.ExpressionParser
 
       if (EvaluateExpressionHandler != null)
       {
-        functionArgs.Result = EvaluateExpressionHandler.Invoke(functionName, expectedValues, ProviderContainer); 
+        functionArgs.Result = EvaluateExpressionHandler.Invoke(functionName, expectedValues, ProviderContainer);
       }
       else
       {
@@ -38,7 +38,7 @@ namespace Atlantis.Framework.ExpressionParser
 
       foreach (Expression expression in functionArgs.Parameters)
       {
-        expectedValues.Add(expression.ParsedExpression.ToString().Trim('[',']'));
+        expectedValues.Add(expression.ParsedExpression.ToString().Trim('[', ']'));
       }
 
       return expectedValues;
@@ -54,7 +54,7 @@ namespace Atlantis.Framework.ExpressionParser
       object evaluationResultObject = expression.Evaluate();
       if (evaluationResultObject is bool)
       {
-        evaluationResult = (bool) evaluationResultObject;
+        evaluationResult = (bool)evaluationResultObject;
       }
 
       return evaluationResult;

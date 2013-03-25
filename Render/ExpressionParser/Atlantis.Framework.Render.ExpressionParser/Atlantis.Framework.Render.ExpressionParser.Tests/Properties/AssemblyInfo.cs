@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.ExpressionParser.Tests")]
+[assembly: AssemblyTitle("Atlantis.Framework.Render.ExpressionParser.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Atlantis.Framework.ExpressionParser.Tests")]
+[assembly: AssemblyProduct("Atlantis.Framework.Render.ExpressionParser.Tests")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("39fa4714-65c5-46c9-9ed9-cfcde2256c65")]
+[assembly: Guid("308b12c2-91a9-4f59-be51-24b5ddda7a19")]
 
 // Version information for an assembly consists of the following four values:
 //

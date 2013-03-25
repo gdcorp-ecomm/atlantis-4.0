@@ -6,7 +6,9 @@
     public enum SurveyTypes
     {
       PQC = 0,
-      BV = 1
+      BV = 1,
+      PQC_1Q = 2,
+      PQC_FB = 3
     }
     #endregion
 

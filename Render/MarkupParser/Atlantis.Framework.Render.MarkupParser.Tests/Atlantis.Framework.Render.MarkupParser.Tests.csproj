@@ -70,33 +70,33 @@
     <EmbeddedResource Include="Data\home-page-with-conditions.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.Conditions\Atlantis.Framework.Conditions.Interface\Atlantis.Framework.Conditions.Interface.csproj">
-      <Project>{9f0b7f62-5a62-4823-8697-a18fa91b2a8d}</Project>
-      <Name>Atlantis.Framework.Conditions.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ExpressionParser\Atlantis.Framework.ExpressionParser\Atlantis.Framework.ExpressionParser.csproj">
-      <Project>{a06963bd-8807-4716-8ca3-b296c96831f4}</Project>
-      <Name>Atlantis.Framework.ExpressionParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer.Impl.csproj">
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer.Impl.csproj">
       <Project>{8a7ee679-abc6-4f76-99a6-5c9c1203d9f0}</Project>
       <Name>Atlantis.Framework.Providers.ProviderContainer.Impl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
       <Project>{2f8983b4-801b-461a-9d76-26a58a496261}</Project>
       <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Conditions\Interface\Atlantis.Framework.Conditions.Interface\Atlantis.Framework.Conditions.Interface.csproj">
+      <Project>{9f0b7f62-5a62-4823-8697-a18fa91b2a8d}</Project>
+      <Name>Atlantis.Framework.Conditions.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ExpressionParser\Atlantis.Framework.Render.ExpressionParser\Atlantis.Framework.Render.ExpressionParser.csproj">
+      <Project>{e35a1790-4605-4adb-813e-dcd5485f58bb}</Project>
+      <Name>Atlantis.Framework.Render.ExpressionParser</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Render.MarkupParser\Atlantis.Framework.Render.MarkupParser.csproj">
       <Project>{772aac0d-761e-4906-b46f-100e1af3f5ca}</Project>

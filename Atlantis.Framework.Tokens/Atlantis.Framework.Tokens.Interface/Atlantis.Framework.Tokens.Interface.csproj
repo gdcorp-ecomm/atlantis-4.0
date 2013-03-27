@@ -55,6 +55,7 @@
     <Compile Include="TokenBase.cs" />
     <Compile Include="TokenEvaluationResult.cs" />
     <Compile Include="TokenManager.cs" />
+    <Compile Include="TokenRenderHandler.cs" />
     <Compile Include="XmlToken.cs" />
     <Compile Include="XmlTokenHandlerBase.cs" />
   </ItemGroup>
@@ -66,6 +67,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{29e7ccc1-0f54-45f9-8492-62145046c625}</Project>
       <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
+      <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

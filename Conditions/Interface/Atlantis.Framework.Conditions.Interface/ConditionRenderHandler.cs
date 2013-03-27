@@ -1,10 +1,9 @@
-﻿using Atlantis.Framework.Conditions.Interface;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Render.ExpressionParser;
 using Atlantis.Framework.Render.MarkupParser;
 using Atlantis.Framework.Render.Pipeline.Interface;
 
-namespace Atlantis.Framework.Render.Pipeline.Tests.RenderHandlers
+namespace Atlantis.Framework.Conditions.Interface
 {
   public class ConditionRenderHandler : IRenderHandler
   {

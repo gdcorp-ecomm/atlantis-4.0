@@ -12,6 +12,14 @@ namespace Atlantis.Framework.Render.Pipeline.Interface
       _renderPipeline.Add(renderHandler);
     }
 
+    public void AddRenderHandler(params IRenderHandler[] renderHandlers)
+    {
+      foreach (IRenderHandler renderHandler in renderHandlers)
+      {
+        _renderPipeline.Add(renderHandler);  
+      }
+    }
+
     public void RenderContent(IRenderContent renderContent, IProviderContainer providerContainer)
     {
       foreach (IRenderHandler renderHandler in _renderPipeline.RenderHandlers)

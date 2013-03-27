@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{38CA93D9-99C9-4B34-8C10-F9B78928869E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommFreeProduct.Impl", "Atlantis.Framework.RegFreeProduct\Atlantis.Framework.RegFreeProduct.Impl\Atlantis.Framework.EcommFreeProduct.Impl.csproj", "{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommFreeProduct.Impl", "Atlantis.Framework.EcommFreeProduct\Atlantis.Framework.EcommFreeProduct.Impl\Atlantis.Framework.EcommFreeProduct.Impl.csproj", "{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommFreeProduct.Interface", "Atlantis.Framework.RegFreeProduct\Atlantis.Framework.RegFreeProduct.Interface\Atlantis.Framework.EcommFreeProduct.Interface.csproj", "{3A47C855-6F2E-4843-848C-BD2451AD28E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommFreeProduct.Interface", "Atlantis.Framework.EcommFreeProduct\Atlantis.Framework.EcommFreeProduct.Interface\Atlantis.Framework.EcommFreeProduct.Interface.csproj", "{3A47C855-6F2E-4843-848C-BD2451AD28E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommFreeProduct.Test", "Atlantis.Framework.RegFreeProduct\Atlantis.Framework.RegFreeProduct.Test\Atlantis.Framework.EcommFreeProduct.Test.csproj", "{0451E068-0C0A-43D7-81BD-A7F85C76DAC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.EcommFreeProduct.Test", "Atlantis.Framework.EcommFreeProduct\Atlantis.Framework.EcommFreeProduct.Test\Atlantis.Framework.EcommFreeProduct.Test.csproj", "{0451E068-0C0A-43D7-81BD-A7F85C76DAC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
 EndProject

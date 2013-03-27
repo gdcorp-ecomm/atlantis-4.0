@@ -21,6 +21,7 @@ namespace Atlantis.Framework.CDS.Entities.PlanBoxes.Widgets
     public bool ShowMonthlyView { get; set; }
     public string CustomHeaderDurationText { get; set; }
     public bool RequireLogin { get; set; }
+    public string RedirectModalText { get; set; }
     private string _submitButtonText;
     public string SubmitButtonText
     {

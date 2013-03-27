@@ -1,12 +1,12 @@
 ﻿
-namespace Atlantis.Framework.RegFreeProduct.Impl
+namespace Atlantis.Framework.EcommFreeProduct.Impl
 {
   using System;
   using System.Linq;
   using System.Xml.Linq;
   using Atlantis.Framework.Interface;
-  using Atlantis.Framework.RegFreeProduct.Impl.ProcessFreeItems;
-  using Atlantis.Framework.RegFreeProduct.Interface;
+  using Atlantis.Framework.EcommFreeProduct.Impl.ProcessFreeItems;
+  using Atlantis.Framework.EcommFreeProduct.Interface;
 
   public class RegisterFreeProductRequest : IRequest
   {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
-using Atlantis.Framework.RegFreeProduct.Impl;
-using Atlantis.Framework.RegFreeProduct.Interface;
+using Atlantis.Framework.EcommFreeProduct.Impl;
+using Atlantis.Framework.EcommFreeProduct.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 
 
@@ -66,7 +66,7 @@ namespace Atlantis.Framework.RegFreeProduct.Test
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    [DeploymentItem("Atlantis.Framework.RegFreeProduct.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.EcommFreeProduct.Impl.dll")]
     public void RegFreeProductTest()
     {
       MockHttpContext.SetMockHttpContext(string.Empty, "http://localhost", string.Empty);

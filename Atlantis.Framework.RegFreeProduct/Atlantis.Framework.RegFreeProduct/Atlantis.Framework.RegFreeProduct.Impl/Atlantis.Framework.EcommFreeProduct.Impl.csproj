@@ -8,8 +8,8 @@
     <ProjectGuid>{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.RegFreeProduct.Impl</RootNamespace>
-    <AssemblyName>Atlantis.Framework.RegFreeProduct.Impl</AssemblyName>
+    <RootNamespace>Atlantis.Framework.EcommFreeProduct.Impl</RootNamespace>
+    <AssemblyName>Atlantis.Framework.EcommFreeProduct.Impl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -132,9 +132,9 @@
       <Project>{3213e6db-f026-4f17-a46a-7127f79f6620}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.RegFreeProduct.Interface\Atlantis.Framework.RegFreeProduct.Interface.csproj">
+    <ProjectReference Include="..\Atlantis.Framework.RegFreeProduct.Interface\Atlantis.Framework.EcommFreeProduct.Interface.csproj">
       <Project>{3a47c855-6f2e-4843-848c-bd2451ad28e0}</Project>
-      <Name>Atlantis.Framework.RegFreeProduct.Interface</Name>
+      <Name>Atlantis.Framework.EcommFreeProduct.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Atlantis.Framework.RegFreeProduct.Impl.Properties {
+namespace Atlantis.Framework.EcommFreeProduct.Impl.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

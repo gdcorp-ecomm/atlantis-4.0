@@ -1,5 +1,5 @@
 ﻿
-namespace Atlantis.Framework.RegFreeProduct.Interface
+namespace Atlantis.Framework.EcommFreeProduct.Interface
 {
   using System;
   using System.Linq;

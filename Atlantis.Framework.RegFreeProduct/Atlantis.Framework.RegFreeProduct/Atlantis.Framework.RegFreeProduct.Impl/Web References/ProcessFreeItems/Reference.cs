@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace Atlantis.Framework.RegFreeProduct.Impl.ProcessFreeItems {
+namespace Atlantis.Framework.EcommFreeProduct.Impl.ProcessFreeItems {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -35,7 +35,7 @@ namespace Atlantis.Framework.RegFreeProduct.Impl.ProcessFreeItems {
         
         /// <remarks/>
         public Service() {
-            this.Url = global::Atlantis.Framework.RegFreeProduct.Impl.Properties.Settings.Default.Atlantis_Framework_RegFreeProduct_Impl_ProcessFreeItems_Service;
+            this.Url = global::Atlantis.Framework.EcommFreeProduct.Impl.Properties.Settings.Default.Atlantis_Framework_RegFreeProduct_Impl_ProcessFreeItems_Service;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

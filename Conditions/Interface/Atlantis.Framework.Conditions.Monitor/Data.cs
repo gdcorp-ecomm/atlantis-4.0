@@ -23,7 +23,7 @@ namespace Atlantis.Framework.Conditions.Monitor
       var result = new XDocument();
 
       var root = new XElement("conditionhandlers");
-      root.Add(GetProcessId(), GetMachineName(), GetInterfaceVersion());
+      root.Add(GetMachineName(), GetProcessId(), GetInterfaceVersion());
       result.Add(root);
 
       var fieldInfo = typeof (ConditionHandlerManager).GetField("_conditionHandlers", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance);
@@ -34,8 +34,11 @@ namespace Atlantis.Framework.Conditions.Monitor
         foreach (var conditionHandler in conditionHandlers)
         {
           var conditionHandlerElement = new XElement("conditionhandler");
-          conditionHandlerElement.Add(new XAttribute("conditionname", conditionHandler.Key));
-          conditionHandlerElement.Add(new XAttribute("classtype", conditionHandler.Value.GetType().FullName));
+          conditionHandlerElement.Add(new XAttribute("name", conditionHandler.Key));
+          conditionHandlerElement.Add(new XAttribute("handler", conditionHandler.Value.GetType().FullName.Replace("Atlantis.Framework.", "A.F.")));
+          conditionHandlerElement.Add(new XAttribute("assembly", conditionHandler.Value.GetType().Assembly.GetName().Name.Replace("Atlantis.Framework.", "A.F.")));
+          conditionHandlerElement.Add(new XAttribute("description", GetAssemblyDescription(conditionHandler.Value)));
+          conditionHandlerElement.Add(new XAttribute("version", GetAssemblyVersion(conditionHandler.Value)));
           root.Add(conditionHandlerElement);
         }
       }
@@ -69,6 +72,40 @@ namespace Atlantis.Framework.Conditions.Monitor
       }
 
       return new XAttribute("conditionsinterfaceversion", interfaceVersion);
+    }
+
+    private string GetAssemblyVersion(IConditionHandler conditionHandler)
+    {
+      string assemblyVersion = string.Empty;
+
+      object[] customAttributes = conditionHandler.GetType().Assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), true);
+      if ((customAttributes != null) && (customAttributes.Length > 0))
+      {
+        var attribute = customAttributes[0] as AssemblyFileVersionAttribute;
+        if (attribute != null)
+        {
+          assemblyVersion = attribute.Version;
+        }
+      }
+
+      return assemblyVersion;
+    }
+
+    private string GetAssemblyDescription(IConditionHandler conditionHandler)
+    {
+      string assemblyDescription = string.Empty;
+
+      object[] customAttributes = conditionHandler.GetType().Assembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute), true);
+      if ((customAttributes != null) && (customAttributes.Length > 0))
+      {
+        var attribute = customAttributes[0] as AssemblyDescriptionAttribute;
+        if (attribute != null)
+        {
+          assemblyDescription = attribute.Description;
+        }
+      }
+
+      return assemblyDescription;
     }
   }
 }

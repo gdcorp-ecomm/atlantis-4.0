@@ -37,8 +37,8 @@ namespace Atlantis.Framework.Conditions.Monitor
           conditionHandlerElement.Add(new XAttribute("name", conditionHandler.Key));
           conditionHandlerElement.Add(new XAttribute("handler", conditionHandler.Value.GetType().FullName.Replace("Atlantis.Framework.", "A.F.")));
           conditionHandlerElement.Add(new XAttribute("assembly", conditionHandler.Value.GetType().Assembly.GetName().Name.Replace("Atlantis.Framework.", "A.F.")));
-          conditionHandlerElement.Add(new XAttribute("description", GetAssemblyDescription(conditionHandler.Value)));
-          conditionHandlerElement.Add(new XAttribute("version", GetAssemblyVersion(conditionHandler.Value)));
+          conditionHandlerElement.Add(new XAttribute("description", GetHandlerAssemblyDescription(conditionHandler.Value)));
+          conditionHandlerElement.Add(new XAttribute("version", GetHandlerAssemblyVersion(conditionHandler.Value)));
           root.Add(conditionHandlerElement);
         }
       }
@@ -74,7 +74,7 @@ namespace Atlantis.Framework.Conditions.Monitor
       return new XAttribute("conditionsinterfaceversion", interfaceVersion);
     }
 
-    private string GetAssemblyVersion(IConditionHandler conditionHandler)
+    private string GetHandlerAssemblyVersion(IConditionHandler conditionHandler)
     {
       string assemblyVersion = string.Empty;
 
@@ -91,7 +91,7 @@ namespace Atlantis.Framework.Conditions.Monitor
       return assemblyVersion;
     }
 
-    private string GetAssemblyDescription(IConditionHandler conditionHandler)
+    private string GetHandlerAssemblyDescription(IConditionHandler conditionHandler)
     {
       string assemblyDescription = string.Empty;
 

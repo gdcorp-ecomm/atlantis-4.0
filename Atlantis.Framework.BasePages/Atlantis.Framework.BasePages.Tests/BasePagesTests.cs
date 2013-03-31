@@ -16,6 +16,8 @@ namespace Atlantis.Framework.BasePages.Tests
       Type jsonSecurityType = basePages.GetType("Atlantis.Framework.BasePages.Json.JsonSecurity");
       MethodInfo isCallbackValidMethod = jsonSecurityType.GetMethod("IsCallbackValid", BindingFlags.NonPublic | BindingFlags.Static);
 
+      JsonSecurity.ValidateCallbackValue = true;
+
       bool result = IsCallbackValue(isCallbackValidMethod, "pcj_setData");
       Assert.IsTrue(result);
 
@@ -26,7 +28,7 @@ namespace Atlantis.Framework.BasePages.Tests
       Assert.IsFalse(result);
 
       result = IsCallbackValue(isCallbackValidMethod, "pcj_s.etData");
-      Assert.IsFalse(result);
+      Assert.IsTrue(result);
 
       result = IsCallbackValue(isCallbackValidMethod, "pcj_s<etData");
       Assert.IsFalse(result);
@@ -36,6 +38,20 @@ namespace Atlantis.Framework.BasePages.Tests
 
       result = IsCallbackValue(isCallbackValidMethod, "pcj_s[etData");
       Assert.IsFalse(result);
+
+      JsonSecurity.ValidateCallbackValue = false;
+
+      result = IsCallbackValue(isCallbackValidMethod, "pcj_set#Data");
+      Assert.IsTrue(result);
+
+      result = IsCallbackValue(isCallbackValidMethod, "pcj_s<etData");
+      Assert.IsTrue(result);
+
+      result = IsCallbackValue(isCallbackValidMethod, "pcj_s(etData");
+      Assert.IsTrue(result);
+
+      result = IsCallbackValue(isCallbackValidMethod, "pcj_s[etData");
+      Assert.IsTrue(result);
 
     }
 

@@ -59,6 +59,10 @@
     <Compile Include="ProxyContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
+      <Project>{3e299d3b-3c8d-455a-92a4-05ff6c60e6f3}</Project>
+      <Name>Atlantis.Framework.DataCacheService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
       <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
       <Name>Atlantis.Framework.DataCache</Name>
@@ -71,13 +75,21 @@
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
+      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
+      <Name>Atlantis.Framework.Providers.Containers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.Interface\Atlantis.Framework.Providers.Preferences.Interface.csproj">
+      <Project>{1a50e3b8-4a5c-4e48-bad4-17c5092f0dde}</Project>
+      <Name>Atlantis.Framework.Providers.Preferences.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
       <Project>{5B0E8D0F-247E-4937-8177-48EA5E267CAB}</Project>
       <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
+      <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
+      <Name>Atlantis.Framework.Testing.MockProviders</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.ProxyContext\Atlantis.Framework.Providers.ProxyContext.csproj">
       <Project>{016D33CB-E21F-430C-B793-4E345D2837BF}</Project>

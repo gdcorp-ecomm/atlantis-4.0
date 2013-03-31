@@ -6,8 +6,7 @@
 
     public static bool IsValidRequest(string ipAddress)
     {
-      ProxyWhiteList proxyWhiteList = DataCache.DataCache.GetCustomCacheData(_PROXYTYPEID,
-                                                                             ProxyWhiteList.LoadProxyWhiteList);
+      ProxyWhiteList proxyWhiteList = DataCache.DataCache.GetCustomCacheData(_PROXYTYPEID, ProxyWhiteList.LoadProxyWhiteList);
       return proxyWhiteList.IsValidProxyIP(ipAddress);
     }
   }

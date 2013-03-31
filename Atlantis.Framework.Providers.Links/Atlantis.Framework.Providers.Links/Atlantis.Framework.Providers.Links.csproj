@@ -68,9 +68,9 @@
       <Project>{39A8B945-42C8-45E8-ADD6-5BC7EB73F423}</Project>
       <Name>Atlantis.Framework.LinkInfo.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.Links.Interface\Atlantis.Framework.Providers.Links.Interface.csproj">
+      <Project>{9972e990-31f1-4c30-9bb5-ac1f3bd4e600}</Project>
+      <Name>Atlantis.Framework.Providers.Links.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

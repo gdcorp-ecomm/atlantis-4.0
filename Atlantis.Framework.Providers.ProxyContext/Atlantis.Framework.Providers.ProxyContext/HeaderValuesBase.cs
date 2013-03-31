@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Atlantis.Framework.Interface;
+using System.Net;
 using System.Web;
 
 namespace Atlantis.Framework.Providers.ProxyContext
@@ -12,7 +13,8 @@ namespace Atlantis.Framework.Providers.ProxyContext
       _localAddresses = Dns.GetHostAddresses(string.Empty);
     }
 
-    public abstract HeaderValueStatus GetStatus(string ipAddress);
+    public abstract HeaderValueStatus CheckForProxyHeaders(string sourceIpAddress, out IProxyData proxyData);
+    public abstract ProxyTypes ProxyType { get; }
 
     protected static string GetFirstHeaderValue(string name)
     {
@@ -24,6 +26,7 @@ namespace Atlantis.Framework.Providers.ProxyContext
         if ((headerValues != null) && (headerValues.Length > 0))
         {
           result = headerValues[0];
+          string key = "WebProxyContext.RawHeaderValue." + name;
         }
       }
 

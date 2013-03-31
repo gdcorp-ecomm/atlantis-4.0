@@ -14,8 +14,8 @@ using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Providers.Links;
 using Atlantis.Framework.Providers.Preferences;
 using Atlantis.Framework.Providers.Products;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
 using Atlantis.Framework.ShopperFirstOrderGet.Interface;
+using Atlantis.Framework.Providers.Containers;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 {
@@ -209,7 +209,8 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
           totalPrice = -1;
         }
 
-        string totalPriceText = Currency.PriceText(new CurrencyPrice(totalPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional), false, CurrencyNegativeFormat.Parentheses);
+        ICurrencyPrice totalCurrencyPrice = Currency.NewCurrencyPrice(totalPrice, Currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional);
+        string totalPriceText = Currency.PriceText(totalCurrencyPrice, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses);
         return totalPriceText;
       }
     }
@@ -738,7 +739,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       string iscCode = GetISC();
 
       var emailCustomTextProvider = new EmailCustomTextGenerator(_orderData, _currency, _departmentIds, _linkProvider, _products);
-      CrossSellConfig crossSellConfig = new CrossSellConfig(_orderData, _departmentIds, _products);
+      CrossSellConfig crossSellConfig = new CrossSellConfig(_orderData, _departmentIds, _objectContainer);
 
       StringBuilder itemsTextBuilder = new StringBuilder(1000);
 
@@ -749,66 +750,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       return itemsTextBuilder.ToString();
     }
-
-    #region Video.Me
-
-    Dictionary<string, int> _shopperProductData;
-    protected string GetVideoLink(string htmlOrText)
-    {
-      StringBuilder pmBuilder = new StringBuilder(1000);
-      if (!HasVideoMe())
-      {
-        if (htmlOrText == "html")
-        {
-          pmBuilder.Append("<div>");
-          pmBuilder.Append("<img src='" + Links.ImageRoot + "cart/img_video_me.gif' width='88' height='37' align='left' hspace='4'/>");
-          pmBuilder.Append("[%%LCST.REQ.UTOS_PS%%] <a href='http://www.video.me/Default.aspx'>[%%LCST.REQ.UTOS_LOGIN%%]</a> [%%LCST.REQ.UTOS_GD_USERNAME%%]");
-          pmBuilder.Append("</div>");
-        }
-        else
-        {
-          pmBuilder.Append("[%%LCST.REQ.UTOS_PS%%] [%%LCST.REQ.UTOS_LOGIN%%] [%%LCST.REQ.UTOS_GD_USERNAME%%] : http://www.video.me/Default.aspx");
-        }
-      }
-      return pmBuilder.ToString();
-    }
-
-    private bool HasVideoMe()
-    {
-      bool hasVideoMe = false;
-      if (_shopperProductData == null)
-      {
-        EmailCustomTextGenerator emailCustomTextProvider = new EmailCustomTextGenerator(_orderData, _currency, _departmentIds, _linkProvider, _products);
-        CrossSellConfig crossSellConfig = new CrossSellConfig(_orderData, _departmentIds, _products);
-        Dictionary<string, int> shopperProductData = crossSellConfig.GetShopperProductDictionary(_orderData.ShopperId, _orderData.PrivateLabelId.ToString(), true);
-        _shopperProductData = shopperProductData;
-      }
-      //Check mirage data
-      if (_shopperProductData.ContainsKey(ProductIds.VideoMeEcon1mo.ToString()) ||
-      _shopperProductData.ContainsKey(ProductIds.VideoMeEcon1yr.ToString()) ||
-      _shopperProductData.ContainsKey(ProductIds.VideoMeEcon2yr.ToString()) ||
-      _shopperProductData.ContainsKey(ProductIds.VideoMeEcon3yr.ToString()))
-      {
-        hasVideoMe = true;
-      }
-      if (!hasVideoMe)
-      {
-        //check current order
-        XmlNodeList itemNodes = _orderData.OrderXmlDoc.SelectNodes(string.Format("/ORDER/ITEMS/ITEM[@pf_id='{0}' or @pf_id='{1}' or @pf_id='{2}' or @pf_id='{3}']",
-        ProductIds.VideoMeEcon1mo.ToString(),
-        ProductIds.VideoMeEcon1yr.ToString(),
-        ProductIds.VideoMeEcon2yr.ToString(),
-        ProductIds.VideoMeEcon3yr.ToString()));
-        if (itemNodes.Count > 0)
-        {
-          hasVideoMe = true;
-        }
-      }
-      return hasVideoMe;
-    }
-
-
-    #endregion
 
   }
 }

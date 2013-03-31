@@ -44,6 +44,7 @@ namespace Atlantis.Framework.Providers.Split.Tests
     {
       HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
       HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
+      HttpProviderContainer.Instance.RegisterProvider<IManagerContext, MockNoManagerContext>();
       HttpProviderContainer.Instance.RegisterProvider<ISplitProvider, SplitProvider>();
 
       HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] = privateLabelId;

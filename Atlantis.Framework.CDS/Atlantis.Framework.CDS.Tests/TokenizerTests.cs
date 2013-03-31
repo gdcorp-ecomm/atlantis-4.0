@@ -129,7 +129,7 @@ namespace Atlantis.Framework.CDS.Tests
 
       //Act
       var result = t.Parse("{{link::blah::/default.aspx::false::ci|1234556|var2|true}}");
-      var expected = Links.GetFullUrl("//default.aspx", QueryParamMode.ExplicitParameters, new NameValueCollection { { "ci", "1234556" }, { "var2", "true" } });
+      var expected = Links.GetFullUrl("/default.aspx", QueryParamMode.ExplicitParameters, new NameValueCollection { { "ci", "1234556" }, { "var2", "true" } });
 
       //Assert
       Assert.IsNotNull(result);

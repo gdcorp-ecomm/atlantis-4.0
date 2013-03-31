@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.PromoData.Interface;
 using Atlantis.Framework.Providers.Interface.PromoData;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
 
 namespace Atlantis.Framework.Providers.PromoData
 {
@@ -11,8 +9,6 @@ namespace Atlantis.Framework.Providers.PromoData
   {
     public PromoData(string promoCode)
     {
-      this._siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
-      this._shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
       this._promoCode = promoCode;
 
       try
@@ -26,9 +22,6 @@ namespace Atlantis.Framework.Providers.PromoData
     }
 
     #region Properties
-
-    private ISiteContext _siteContext;
-    private IShopperContext _shopperContext;
 
     private IPromoProduct _promoProduct;
 
@@ -91,9 +84,7 @@ namespace Atlantis.Framework.Providers.PromoData
 
     private void GetPromoData(string promoCode)
     {
-      PromoDataRequestData request = new PromoDataRequestData(this._shopperContext.ShopperId,
-        HttpContext.Current.Request.Url.ToString(), String.Empty, this._siteContext.Pathway, this._siteContext.PageCount,
-        promoCode);
+      PromoDataRequestData request = new PromoDataRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, promoCode);
       int timeout;
       string appSetting = DataCache.DataCache.GetAppSetting("ATLANTIS_PROMODATA_TIMEOUT");
 
@@ -117,9 +108,7 @@ namespace Atlantis.Framework.Providers.PromoData
 
     private void LogException(string sourceFunction, string message, string source)
     {
-      AtlantisException aex = new AtlantisException(sourceFunction, HttpContext.Current.Request.Url.ToString(),
-        "0", message, source, this._shopperContext.ShopperId, string.Empty,HttpContext.Current.Request.UserHostAddress,
-        this._siteContext.Pathway, this._siteContext.PageCount);
+      AtlantisException aex = new AtlantisException(sourceFunction, "0", message, source, null, null);
       Engine.Engine.LogAtlantisException(aex);
     }
 

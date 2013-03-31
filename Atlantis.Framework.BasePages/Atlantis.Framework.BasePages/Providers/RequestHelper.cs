@@ -1,9 +1,9 @@
-﻿using System;
-using System.Web;
-using Atlantis.Framework.Interface;
-using System.Web.Configuration;
-using System.Collections.Generic;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.Configuration;
 
 namespace Atlantis.Framework.BasePages.Providers
 {
@@ -34,9 +34,9 @@ namespace Atlantis.Framework.BasePages.Providers
     {
       string result = HttpContext.Current.Request.Url.Host;
       IProxyContext proxyContext = GetProxyContext();
-      if ((proxyContext != null) && (proxyContext.IsLocalARR))
+      if (proxyContext != null)
       {
-        result = proxyContext.ARRHost;
+        result = proxyContext.ContextHost;
       }
       return result;
     }
@@ -48,6 +48,7 @@ namespace Atlantis.Framework.BasePages.Providers
       {
         return false; // If the proxy status is invalid for any reason, treat as external
       }
+
       bool result = false;
       string originalHostAddress = GetOriginUserHostAddress();
       if (originalHostAddress != null)

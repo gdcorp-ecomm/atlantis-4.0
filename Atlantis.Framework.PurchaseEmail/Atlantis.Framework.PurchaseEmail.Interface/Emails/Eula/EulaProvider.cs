@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
 using System.Xml;
-using Atlantis.Framework.DataProvider.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.PurchaseEmail.Interface.Providers;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Providers.Interface.Products;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula

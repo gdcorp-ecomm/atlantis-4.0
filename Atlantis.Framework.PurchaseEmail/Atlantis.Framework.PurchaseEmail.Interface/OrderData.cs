@@ -5,12 +5,13 @@ using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Preferences;
 using Atlantis.Framework.Providers.Preferences;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Providers.Interface.Links;
 using Atlantis.Framework.PurchaseEmail.Interface.Emails.Eula;
 using Atlantis.Framework.Providers.Links;
 using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Providers.Products;
+using Atlantis.Framework.PurchaseEmail.Interface.Providers;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface
 {
@@ -36,12 +37,15 @@ namespace Atlantis.Framework.PurchaseEmail.Interface
       providerContainer.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
       providerContainer.RegisterProvider<ILinkProvider, LinkProvider>();
       providerContainer.RegisterProvider<IProductProvider, ProductProvider>();
+      providerContainer.RegisterProvider<ShopperProductProvider, ShopperProductProvider>();
+
       _currency = providerContainer.Resolve<ICurrencyProvider>();
       providerContainer.RegisterProvider<IShopperContext, OrderData>(this);
       providerContainer.RegisterProvider<ISiteContext, OrderData>(this);
       _linkProvider = providerContainer.Resolve<ILinkProvider>();
       _siteContext = providerContainer.Resolve<ISiteContext>();
       _localizationCode = localizationCode;
+
       ProcessOrderXml();
       //Process order before Processing EULA's
       _eulaProvider = new EulaProvider(this, _linkProvider, providerContainer);

@@ -130,9 +130,13 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
+      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
+      <Name>Atlantis.Framework.Providers.Containers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links.Interface\Atlantis.Framework.Providers.Links.Interface.csproj">
+      <Project>{9972e990-31f1-4c30-9bb5-ac1f3bd4e600}</Project>
+      <Name>Atlantis.Framework.Providers.Links.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.CDS.Entities.Common\Atlantis.Framework.CDS.Entities.Common.csproj">
       <Project>{31FBC53C-17AC-48FA-ACFB-3512DB222F4F}</Project>

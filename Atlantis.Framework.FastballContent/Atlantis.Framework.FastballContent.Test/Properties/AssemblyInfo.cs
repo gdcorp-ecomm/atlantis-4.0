@@ -6,8 +6,13 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.FastballContent.Test")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
+#endif
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.FastballContent.Test")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2010")]
@@ -31,5 +36,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.0.0")] // DO NOT CHANGE THE AssemblyVersion
-[assembly: AssemblyFileVersion("1.0.0.0")] // YOU CAN EDIT AssemblyFileVersion
+[assembly: AssemblyVersion("4.0.0.0")] 
+[assembly: AssemblyFileVersion("4.0.0.0")]

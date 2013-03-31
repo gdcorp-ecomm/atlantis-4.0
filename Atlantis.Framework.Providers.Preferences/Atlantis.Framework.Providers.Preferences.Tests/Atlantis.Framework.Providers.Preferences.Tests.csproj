@@ -80,7 +80,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopperPreferenceTests.cs" />
-    <Compile Include="TestContexts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -127,9 +126,9 @@
       <Project>{3213E6DB-F026-4F17-A46A-7127F79F6620}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
+      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
+      <Name>Atlantis.Framework.Providers.Containers</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.ShopperPrefGet\Atlantis.Framework.ShopperPrefGet.Impl\Atlantis.Framework.ShopperPrefGet.Impl.csproj">
       <Project>{F6887293-66C9-4BB8-98EF-8AC047D22E91}</Project>
@@ -150,6 +149,14 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
       <Project>{2F8983B4-801B-461A-9D76-26A58A496261}</Project>
       <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
+      <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
+      <Name>Atlantis.Framework.Testing.MockProviders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.Preferences.Interface\Atlantis.Framework.Providers.Preferences.Interface.csproj">
+      <Project>{1a50e3b8-4a5c-4e48-bad4-17c5092f0dde}</Project>
+      <Name>Atlantis.Framework.Providers.Preferences.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.csproj">
       <Project>{CA50A18E-5CA1-43BE-82C1-F1910F09780B}</Project>

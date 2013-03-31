@@ -86,10 +86,6 @@
       <Project>{D7260EE7-F41C-4AC4-87FF-959BD107A4DE}</Project>
       <Name>Atlantis.Framework.ProductOffer.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency.csproj">
-      <Project>{7EB0E12F-F1DB-49B0-B87D-918BD6950151}</Project>
-      <Name>Atlantis.Framework.Providers.Currency</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
       <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>

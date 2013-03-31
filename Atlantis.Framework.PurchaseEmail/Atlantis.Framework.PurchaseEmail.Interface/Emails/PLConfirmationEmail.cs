@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Atlantis.Framework.MessagingProcess.Interface;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.PurchaseEmail.Interface.Providers;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails

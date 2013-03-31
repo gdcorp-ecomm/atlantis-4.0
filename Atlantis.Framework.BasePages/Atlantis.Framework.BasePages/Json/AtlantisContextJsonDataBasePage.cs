@@ -1,16 +1,21 @@
-﻿using System;
+﻿using Atlantis.Framework.Interface;
+using System;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.BasePages.Json
 {
   public abstract class AtlantisContextJsonDataBasePage : AtlantisContextBasePage
   {
+    public AtlantisContextJsonDataBasePage() : base()
+    {
+      AllowCrossDomainJson = JsonSecurity.AllowCrossDomainJsonDefault;
+    }
+
     protected enum RenderModeType
     {
       Undetermined,
@@ -59,14 +64,20 @@ namespace Atlantis.Framework.BasePages.Json
       }
     }
 
+    protected bool AllowCrossDomainJson { get; set; }
+
     protected virtual string CallBack
     {
       get
       {
         string result = string.Empty;
-        if (Request["callback"] != null)
+        if ((AllowCrossDomainJson) && (Request["callback"] != null))
         {
-          result = Request["callback"];
+          string callback = Request["callback"];
+          if (JsonSecurity.IsCallbackValid(callback))
+          {
+            result = callback;
+          }
         }
 
         return result;

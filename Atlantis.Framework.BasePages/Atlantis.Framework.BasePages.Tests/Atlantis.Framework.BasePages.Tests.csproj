@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{890A9B83-B2F8-4A52-936B-439C80E488FC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atlantis.Framework.BasePages.Tests</RootNamespace>
+    <AssemblyName>Atlantis.Framework.BasePages.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="BasePagesTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
+      <Project>{7f2738f8-683c-49e7-88cd-e986c70f0321}</Project>
+      <Name>Atlantis.Framework.DataCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
+      <Name>Atlantis.Framework.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.ManagerUser\Atlantis.Framework.ManagerUser.Impl\Atlantis.Framework.ManagerUser.Impl.csproj">
+      <Project>{544997fa-fbe6-49f9-bea0-d55e6b7d7e3f}</Project>
+      <Name>Atlantis.Framework.ManagerUser.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.ManagerUser\Atlantis.Framework.ManagerUser.Interface\Atlantis.Framework.ManagerUser.Interface.csproj">
+      <Project>{55f48501-fe1b-441b-a786-a14001ad2f04}</Project>
+      <Name>Atlantis.Framework.ManagerUser.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
+      <Project>{3213e6db-f026-4f17-a46a-7127f79f6620}</Project>
+      <Name>Atlantis.Framework.Nimitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
+      <Project>{53be1e8c-c474-4d2d-b2e3-db00cbe1b5f9}</Project>
+      <Name>Atlantis.Framework.SessionCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Impl\Atlantis.Framework.ShopperPriceType.Impl.csproj">
+      <Project>{b328af05-4bee-45bb-9913-c836e5593e50}</Project>
+      <Name>Atlantis.Framework.ShopperPriceType.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Interface\Atlantis.Framework.ShopperPriceType.Interface.csproj">
+      <Project>{f310fe92-7999-46f3-a64e-36f90243ba02}</Project>
+      <Name>Atlantis.Framework.ShopperPriceType.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.VerifyShopper\Atlantis.Framework.VerifyShopper.Impl\Atlantis.Framework.VerifyShopper.Impl.csproj">
+      <Project>{fb8a1912-7114-4fe2-9e96-9698635fbeb1}</Project>
+      <Name>Atlantis.Framework.VerifyShopper.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.VerifyShopper\Atlantis.Framework.VerifyShopper.Interface\Atlantis.Framework.VerifyShopper.Interface.csproj">
+      <Project>{8cdd515f-375e-4fa5-9e41-f95227396675}</Project>
+      <Name>Atlantis.Framework.VerifyShopper.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages.csproj">
+      <Project>{69a90c5c-706c-49dd-8f1c-78b8ffb67ea3}</Project>
+      <Name>Atlantis.Framework.BasePages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

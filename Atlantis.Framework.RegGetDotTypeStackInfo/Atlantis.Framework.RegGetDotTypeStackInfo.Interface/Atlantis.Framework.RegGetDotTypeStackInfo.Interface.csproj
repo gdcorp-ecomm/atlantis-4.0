@@ -59,10 +59,6 @@
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

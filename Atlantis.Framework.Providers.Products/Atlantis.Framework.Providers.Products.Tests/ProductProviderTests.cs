@@ -189,10 +189,10 @@ namespace Atlantis.Framework.Providers.Products.Tests
       var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
       var dotCom1Year = productProvider.GetProduct(101);
 
-      ICurrencyPrice currentPrice = dotCom1Year.GetCurrentPrice(RecurringPaymentUnitType.Annual);
+      ICurrencyPrice listPrice = dotCom1Year.GetListPrice(RecurringPaymentUnitType.Annual);
       ICurrencyPrice currentPriceDDC = dotCom1Year.GetCurrentPrice(RecurringPaymentUnitType.Annual, 16);
 
-      Assert.IsTrue(currentPrice.Price > currentPriceDDC.Price);
+      Assert.AreNotEqual(currentPriceDDC.Price, listPrice.Price);
     }
 
     [TestMethod]

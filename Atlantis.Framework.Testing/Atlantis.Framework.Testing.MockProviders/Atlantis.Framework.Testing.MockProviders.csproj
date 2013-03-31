@@ -48,6 +48,7 @@
     <Compile Include="MockManagerContext.cs" />
     <Compile Include="MockManagerContextSettings.cs" />
     <Compile Include="MockNoManagerContext.cs" />
+    <Compile Include="MockProviderContainer.cs" />
     <Compile Include="MockShopperContext.cs" />
     <Compile Include="MockShopperContextSettings.cs" />
     <Compile Include="MockShopperPreference.cs" />
@@ -64,9 +65,9 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.Interface\Atlantis.Framework.Providers.Preferences.Interface.csproj">
+      <Project>{1a50e3b8-4a5c-4e48-bad4-17c5092f0dde}</Project>
+      <Name>Atlantis.Framework.Providers.Preferences.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

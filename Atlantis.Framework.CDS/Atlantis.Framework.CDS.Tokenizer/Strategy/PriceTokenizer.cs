@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using Atlantis.Framework.CDS.Tokenizer.Interfaces;
 using Atlantis.Framework.CDS.Tokenizer.Tokens;
-using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
-
 
 namespace Atlantis.Framework.CDS.Tokenizer.Strategy
 {
@@ -15,8 +13,13 @@ namespace Atlantis.Framework.CDS.Tokenizer.Strategy
     {
       ICurrencyProvider currency = HttpProviderContainer.Instance.Resolve<ICurrencyProvider>();
 
-      ICurrencyPrice price = new CurrencyPrice(Int32.Parse(tokens[PriceToken.AMOUNT]), CurrencyData.GetCurrencyInfo(tokens[PriceToken.CURRENCY_TYPE]), CurrencyPriceType.Transactional);
-      return currency.PriceText(price, false, tokens[PriceToken.DROP_DECIMAL] == "dropdecimal");
+      ICurrencyPrice price = currency.NewCurrencyPrice(Int32.Parse(tokens[PriceToken.AMOUNT]), currency.GetCurrencyInfo(tokens[PriceToken.CURRENCY_TYPE]), CurrencyPriceType.Transactional);
+      PriceFormatOptions formatOptions = PriceFormatOptions.None;
+      if (tokens[PriceToken.DROP_DECIMAL] == "dropdecimal")
+      {
+        formatOptions = PriceFormatOptions.DropDecimal;
+      }
+      return currency.PriceText(price, PriceTextOptions.None, formatOptions);
     }
   }
 }

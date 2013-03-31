@@ -5,11 +5,16 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.CDS.Tokenizer")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
+#endif
+[assembly: AssemblyCompany("GoDaddy.com")]
 [assembly: AssemblyProduct("Atlantis.Framework.CDS.Tokenizer")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2010-2012")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2010-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,4 +37,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.12.10.23")]
+[assembly: AssemblyFileVersion("4.13.3.13")]

@@ -25,9 +25,8 @@ namespace Atlantis.Framework.ProductPackagerAddToCartHandler
           clientIp = HttpContext.Current.Request.UserHostAddress;
         }
 
-        IProxyContext proxyContext = HttpProviderContainer.Instance.Resolve<IProxyContext>();
-
-        if (proxyContext.IsTransalationDomain)
+        IProxyContext proxyContext;
+        if (HttpProviderContainer.Instance.TryResolve(out proxyContext))
         {
           clientIp = proxyContext.OriginIP;
         }

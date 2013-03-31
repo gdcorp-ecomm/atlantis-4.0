@@ -1,8 +1,8 @@
-﻿using System;
-using System.Web;
-using Atlantis.Framework.BasePages.Cookies;
+﻿using Atlantis.Framework.BasePages.Cookies;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.ShopperPriceType.Interface;
+using System;
+using System.Web;
 
 namespace Atlantis.Framework.BasePages.Providers
 {

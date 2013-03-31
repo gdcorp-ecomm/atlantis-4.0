@@ -57,9 +57,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atlantis.Framework.Providers.Interface">
-      <HintPath>..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\bin\Debug\Atlantis.Framework.Providers.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="Interop.gdMiniEncryptLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -110,6 +107,14 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
+      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
+      <Name>Atlantis.Framework.Providers.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links.Interface\Atlantis.Framework.Providers.Links.Interface.csproj">
+      <Project>{9972e990-31f1-4c30-9bb5-ac1f3bd4e600}</Project>
+      <Name>Atlantis.Framework.Providers.Links.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

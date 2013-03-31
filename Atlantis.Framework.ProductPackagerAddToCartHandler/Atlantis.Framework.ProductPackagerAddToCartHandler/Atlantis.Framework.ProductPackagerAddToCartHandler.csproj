@@ -64,10 +64,6 @@
       <Project>{11f533d0-57d6-4932-a9fe-7fab84446fba}</Project>
       <Name>Atlantis.Framework.AddItem.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages.csproj">
-      <Project>{69a90c5c-706c-49dd-8f1c-78b8ffb67ea3}</Project>
-      <Name>Atlantis.Framework.BasePages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.CreateShopper\Atlantis.Framework.CreateShopper.Impl\Atlantis.Framework.CreateShopper.Impl.csproj">
       <Project>{840e6c43-a573-43df-a69d-2f21934906f5}</Project>
       <Name>Atlantis.Framework.CreateShopper.Impl</Name>
@@ -112,14 +108,6 @@
       <Project>{6bc4cfdb-2657-4f3c-86ee-1913eb38de9c}</Project>
       <Name>Atlantis.Framework.GetOverrideHash.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ManagerUser\Atlantis.Framework.ManagerUser.Impl\Atlantis.Framework.ManagerUser.Impl.csproj">
-      <Project>{544997fa-fbe6-49f9-bea0-d55e6b7d7e3f}</Project>
-      <Name>Atlantis.Framework.ManagerUser.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ManagerUser\Atlantis.Framework.ManagerUser.Interface\Atlantis.Framework.ManagerUser.Interface.csproj">
-      <Project>{55f48501-fe1b-441b-a786-a14001ad2f04}</Project>
-      <Name>Atlantis.Framework.ManagerUser.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
       <Project>{3213e6db-f026-4f17-a46a-7127f79f6620}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>
@@ -148,21 +136,17 @@
       <Project>{6b741f84-29bb-43f9-bb12-995c3133ce6d}</Project>
       <Name>Atlantis.Framework.ProductPackager.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
+      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
+      <Name>Atlantis.Framework.Providers.Containers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
       <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
-      <Project>{53be1e8c-c474-4d2d-b2e3-db00cbe1b5f9}</Project>
-      <Name>Atlantis.Framework.SessionCache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Impl\Atlantis.Framework.ShopperPriceType.Impl.csproj">
-      <Project>{b328af05-4bee-45bb-9913-c836e5593e50}</Project>
-      <Name>Atlantis.Framework.ShopperPriceType.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.ShopperPriceType\Atlantis.Framework.ShopperPriceType.Interface\Atlantis.Framework.ShopperPriceType.Interface.csproj">
-      <Project>{f310fe92-7999-46f3-a64e-36f90243ba02}</Project>
-      <Name>Atlantis.Framework.ShopperPriceType.Interface</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links.Interface\Atlantis.Framework.Providers.Links.Interface.csproj">
+      <Project>{9972e990-31f1-4c30-9bb5-ac1f3bd4e600}</Project>
+      <Name>Atlantis.Framework.Providers.Links.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.VerifyShopper\Atlantis.Framework.VerifyShopper.Impl\Atlantis.Framework.VerifyShopper.Impl.csproj">
       <Project>{fb8a1912-7114-4fe2-9e96-9698635fbeb1}</Project>

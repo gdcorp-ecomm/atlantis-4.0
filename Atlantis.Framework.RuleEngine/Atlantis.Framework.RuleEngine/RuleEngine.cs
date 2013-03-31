@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.RuleEngine.Compiler;
 using Atlantis.Framework.RuleEngine.Results;
 
@@ -44,13 +43,8 @@ namespace Atlantis.Framework.RuleEngine
 
     private void LogSilent(Exception ex, string sourceFunction)
     {
-      try
-      {
-        var siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
-        var shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
-        Engine.Engine.LogAtlantisException(new AtlantisException(sourceFunction, string.Empty, ex.Message, ex.ToString(), siteContext, shopperContext));
-      }
-      catch{}
+      // TODO: possibly provide events for logging so its not tied to Engine
+      Engine.Engine.LogAtlantisException(new AtlantisException(sourceFunction, string.Empty, ex.Message + ex.StackTrace, string.Empty, null, null));
     }
 
     public RuleEngineResult GetRuleEngineResult()

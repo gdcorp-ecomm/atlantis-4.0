@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 using Atlantis.Framework.Providers.Interface.Links;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.PurchaseEmail.Interface.Providers;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails

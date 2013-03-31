@@ -1,6 +1,6 @@
-﻿using System.Web.UI;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using System.Web.UI;
 
 namespace Atlantis.Framework.BasePages
 {

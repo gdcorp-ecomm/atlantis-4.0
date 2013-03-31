@@ -8,7 +8,7 @@ using Atlantis.Framework.EcommPaymentProfile.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MessagingProcess.Interface;
 using Atlantis.Framework.Providers.Interface.Links;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.PurchaseEmail.Interface.Providers;
 using Atlantis.Framework.PaymentProfileClass.Interface;
 using System.Xml;
@@ -17,9 +17,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 {
   internal class GDConfirmationEmail : PurchaseConfirmationEmailBase
   {
-    private int engineGetPaymentProfileAlternateId = 381;
-    private int engineGetPaymentProfiles = 59;
-
     private bool _isAZHumane;
     private bool _isDevServer;
     private RequestData _requestData;
@@ -66,8 +63,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       SetParam(EmailTokenNames.OrderTime, OrderTime);
       SetParam(EmailTokenNames.CrossSellItems, GetCrossSellItems());
       SetParam(EmailTokenNames.VATId, VATId);
-      SetParam(EmailTokenNames.VideoMeHTMLLink, GetVideoLink("html"));
-      SetParam(EmailTokenNames.VideoMeTextLink, GetVideoLink("text"));
+      
+      // TODO: this product does not exist anymore. Confirm that our email templates don't have these two tokens and remove these 2 lines.
+      SetParam(EmailTokenNames.VideoMeHTMLLink, string.Empty);
+      SetParam(EmailTokenNames.VideoMeTextLink, string.Empty);
+
       SetParam(EmailTokenNames.HostingConciergeBanner, HostingConciergeBannerHtmlGet());
       SetParam(EmailTokenNames.HostingConciergeText, HostingConciergeTextGet((IsHTMLEmail ? true : false), true));
       SetParam(EmailTokenNames.AlipayRenewalText, AliPayRenewalNotice());
@@ -100,7 +100,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
           {
             // Customer has no non-Alipay backup payment method available
             var reqAltPaymentProfile = new GetPaymentProfileAlternateRequestData(ShopperContext.ShopperId, _requestData.SourceURL, Order.OrderId, Order.Pathway, Order.PageCount);
-            var rspAltPaymentProfile = (GetPaymentProfileAlternateResponseData)Engine.Engine.ProcessRequest(reqAltPaymentProfile, engineGetPaymentProfileAlternateId);
+            var rspAltPaymentProfile = (GetPaymentProfileAlternateResponseData)Engine.Engine.ProcessRequest(reqAltPaymentProfile, PurchaseEmailEngineRequests.PaymentProfileAlternateId);
             if (!rspAltPaymentProfile.IsSuccess)
             {
               AtlantisException aex = new AtlantisException(_requestData, "GDConfirmationEmail.AliPayRenewalNotice", "GetPaymentProfileAlternateResponseData.IsSuccess<>true", String.Empty);
@@ -118,7 +118,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
             // get all of our payment profiles
             EcommPaymentProfileRequestData reqPaymentProfiles = new EcommPaymentProfileRequestData(ShopperContext.ShopperId, _requestData.SourceURL, Order.OrderId, Order.Pathway, Order.PageCount, rspAltPaymentProfile.PaymentProfileId);
-            EcommPaymentProfileResponseData rspPaymentProfile = (EcommPaymentProfileResponseData)Engine.Engine.ProcessRequest(reqPaymentProfiles, engineGetPaymentProfiles);
+            EcommPaymentProfileResponseData rspPaymentProfile = (EcommPaymentProfileResponseData)Engine.Engine.ProcessRequest(reqPaymentProfiles, PurchaseEmailEngineRequests.PaymentProfiles);
             if (!rspPaymentProfile.IsSuccess)
             {
               AtlantisException aex = new AtlantisException(_requestData, "GDConfirmationEmail.AliPayRenewalNotice", "GetPaymentProfilesResponseData.IsSuccess<>true", String.Empty);

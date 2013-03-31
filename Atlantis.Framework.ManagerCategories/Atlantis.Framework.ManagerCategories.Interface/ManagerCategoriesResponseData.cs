@@ -1,24 +1,79 @@
-﻿using System;
+﻿using Atlantis.Framework.Interface;
+using System;
 using System.Collections.Generic;
-using Atlantis.Framework.Interface;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.ManagerCategories.Interface
 {
   public class ManagerCategoriesResponseData : IResponseData
   {
-    private AtlantisException _exception = null;
+    public static ManagerCategoriesResponseData Empty { get; private set; }
+
+    static ManagerCategoriesResponseData()
+    {
+      Empty = new ManagerCategoriesResponseData();
+    }
+
     private HashSet<int> _managerCategories;
     private Dictionary<string, string> _managerAttributes;
 
-    public ManagerCategoriesResponseData(IDictionary<string, string> managerAttributes, IEnumerable<int> managerCategories)
+    public static ManagerCategoriesResponseData FromCacheDataXml(string cacheDataXml)
     {
-      _managerCategories = new HashSet<int>(managerCategories);
-      _managerAttributes = new Dictionary<string, string>(managerAttributes);
+      if (string.IsNullOrEmpty(cacheDataXml))
+      {
+        return Empty;
+      }
+
+      try
+      {
+        XElement dataElement = XElement.Parse(cacheDataXml);
+
+        Dictionary<string, string> managerAttributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        HashSet<int> managerCategories = new HashSet<int>();
+
+        XElement userElement = dataElement;
+        if (userElement.Name.LocalName != "user")
+        {
+          userElement = dataElement.Descendants("user").FirstOrDefault();
+        }
+
+        foreach (XAttribute managerAttribute in userElement.Attributes())
+        {
+          managerAttributes[managerAttribute.Name.LocalName] = managerAttribute.Value;
+        }
+
+        var categoryElements = userElement.Descendants("category");
+        foreach (var categoryElement in categoryElements)
+        {
+          int category;
+          if (int.TryParse(categoryElement.Value, out category))
+          {
+            managerCategories.Add(category);
+          }
+        }
+
+        return new ManagerCategoriesResponseData(managerAttributes, managerCategories);
+      }
+      catch (Exception ex)
+      {
+        AtlantisException exception = new AtlantisException("ManagerCategoriesResponseData.FromCacheDataXml", "0", ex.Message + ex.StackTrace, cacheDataXml, null, null);
+        Engine.Engine.LogAtlantisException(exception);
+        return Empty;
+      }
+
     }
 
-    public ManagerCategoriesResponseData(RequestData requestData, Exception ex)
+    private ManagerCategoriesResponseData()
     {
-      _exception = new AtlantisException(requestData, "ManagerCategoriesResponseData", ex.Message, ex.StackTrace, ex);
+      _managerCategories = new HashSet<int>();
+      _managerAttributes = new Dictionary<string, string>();
+    }
+
+    private ManagerCategoriesResponseData(Dictionary<string, string> managerAttributes, HashSet<int> managerCategories)
+    {
+      _managerCategories = managerCategories;
+      _managerAttributes = managerAttributes;
     }
 
     public bool HasManagerAttribute(string key)
@@ -34,6 +89,11 @@ namespace Atlantis.Framework.ManagerCategories.Interface
     public Dictionary<string, string>.KeyCollection ManagerAttributeKeys
     {
       get { return _managerAttributes.Keys; }
+    }
+
+    public int ManagerCategoryCount
+    {
+      get { return _managerCategories.Count; }
     }
 
     public bool HasManagerCategory(int category)
@@ -63,12 +123,12 @@ namespace Atlantis.Framework.ManagerCategories.Interface
 
     public string ToXML()
     {
-      throw new NotImplementedException();
+      return new XElement("ManagerCategoriesResponseData").ToString();
     }
 
     public AtlantisException GetException()
     {
-      return _exception;
+      return null;
     }
 
   }

@@ -1,192 +1,102 @@
-﻿using System.Web;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
+using System;
+using System.Collections.Generic;
+using System.Web;
 
 namespace Atlantis.Framework.Providers.ProxyContext
 {
   public class WebProxyContext : ProviderBase, IProxyContext
   {
-    private ARRHeaderValues _arrHeaderValues;
-    private ResellerDomainHeaderValues _resellerHeaderValues;
-    private TranslationHeaderValues _translationHeaderValues;
+    private Lazy<WebProxyData> _proxyData;
 
     public WebProxyContext(IProviderContainer container)
       :base(container)
     {
-      _arrHeaderValues = new ARRHeaderValues();
-      _resellerHeaderValues = new ResellerDomainHeaderValues();
-      _translationHeaderValues = new TranslationHeaderValues();
+      _proxyData = new Lazy<WebProxyData>(() => { return new WebProxyData(); });
     }
 
-    ProxyStatusType _status = ProxyStatusType.Undetermined;
     public ProxyStatusType Status
     {
       get
       {
-        // return early to keep in undetermined state
         if (HttpContext.Current == null)
         {
-          return _status;
+          return ProxyStatusType.Undetermined;
         }
-
-        // Conditions we care about for Invalid status:
-        // 1. Whitelisted server that is not loopback but sent bad headers (reseller and translation header status will be Invalid)
-        // 2. Not on whitelist but sent headers (reseller and translation header status will be Invalid)
-        // 3. ARR Incomplete header values or not loopback
-        if (_status == ProxyStatusType.Undetermined)
+        else
         {
-          _status = ProxyStatusType.Invalid;
-
-          HeaderValueStatus arrStatus = _arrHeaderValues.GetStatus(HttpContext.Current.Request.UserHostAddress);
-          string originIP = IsLocalARR ? ARRIP : HttpContext.Current.Request.UserHostAddress;
-          HeaderValueStatus resellerStatus = _resellerHeaderValues.GetStatus(originIP);
-          HeaderValueStatus translationStatus = _translationHeaderValues.GetStatus(originIP);
-
-          if (arrStatus == HeaderValueStatus.Empty && resellerStatus == HeaderValueStatus.Empty && translationStatus == HeaderValueStatus.Empty)
-          {
-            _status = ProxyStatusType.None;
-          }
-          else if ((arrStatus != HeaderValueStatus.Invalid) && (resellerStatus != HeaderValueStatus.Invalid) && (translationStatus != HeaderValueStatus.Invalid))
-          {
-            _status = ProxyStatusType.Valid;
-          }
+          return _proxyData.Value.Status;
         }
-
-        return _status;
       }
     }
 
-    bool? _isLocalARR;
-    public bool IsLocalARR
+    public IEnumerable<IProxyData> ActiveProxyChain
     {
-      get
+      get 
       {
         if (HttpContext.Current == null)
         {
-          return false; // early return on purpose to not set any bool? values
+          return new List<IProxyData>(0);
         }
-
-        if (!_isLocalARR.HasValue)
+        else
         {
-          _isLocalARR = _arrHeaderValues.GetStatus(HttpContext.Current.Request.UserHostAddress) == HeaderValueStatus.Valid;
+          return _proxyData.Value.ActiveProxyChain;
         }
-        return _isLocalARR.Value;
       }
     }
 
-    bool? _isResellerDomain;
-    public bool IsResellerDomain
+    public bool IsProxyActive(ProxyTypes proxyType)
     {
-      get
+      if (HttpContext.Current == null)
       {
-        if (HttpContext.Current == null)
-        {
-          return false; // early return on purpose to not set any bool? values
-        }
-
-        if (!_isResellerDomain.HasValue)
-        {
-          string originIP = IsLocalARR ? ARRIP : HttpContext.Current.Request.UserHostAddress;
-          _isResellerDomain = _resellerHeaderValues.GetStatus(originIP) == HeaderValueStatus.Valid;
-        }
-        return _isResellerDomain.Value;
+        return false;
       }
-    }
-
-    bool? _isTranslationDomain;
-    public bool IsTransalationDomain
-    {
-      get
+      else
       {
-        if (HttpContext.Current == null)
-        {
-          return false; // early return on purpose to not set any bool? values
-        }
-
-        if (!_isTranslationDomain.HasValue)
-        {
-          string originIP = IsLocalARR ? ARRIP : HttpContext.Current.Request.UserHostAddress;
-          _isTranslationDomain = _translationHeaderValues.GetStatus(originIP) == HeaderValueStatus.Valid;
-        }
-        return _isTranslationDomain.Value;
+        return _proxyData.Value.IsProxyActive(proxyType);
       }
     }
 
-    public string ResellerDomainUrl
+    public bool TryGetActiveProxy(ProxyTypes proxyType, out IProxyData proxyData)
     {
-      get { return _resellerHeaderValues.OriginalUrl; }
-    }
-
-    public string ResellerDomainHost
-    {
-      get { return _resellerHeaderValues.OriginalHost; }
-    }
-
-    public string ResellerDomainIP
-    {
-      get { return _resellerHeaderValues.OriginalIP; }
-    }
-
-    public string ARRUrl
-    {
-      get { return _arrHeaderValues.OriginalUrl; }
-    }
-
-    public string ARRHost
-    {
-      get { return _arrHeaderValues.OriginalHost; }
-    }
-
-    public string ARRIP
-    {
-      get { return _arrHeaderValues.OriginalIP; }
-    }
-
-    public string TranslationHost
-    {
-      get { return _translationHeaderValues.OriginalHost; }
-    }
-
-    public string TranslationPort
-    {
-      get { return _translationHeaderValues.OriginalPort; }
-    }
-
-    public string TranslationIP
-    {
-      get { return _translationHeaderValues.OriginalIP; }
-    }
-
-    public string TranslationLanguage
-    {
-      get { return _translationHeaderValues.Language; }
+      if (HttpContext.Current == null)
+      {
+        proxyData = null;
+        return false;
+      }
+      else
+      {
+        return _proxyData.Value.TryGetActiveProxy(proxyType, out proxyData);
+      }
     }
 
     public string OriginIP
     {
-      get 
-      { 
-        string result = string.Empty;
-
-        if (HttpContext.Current != null)
+      get
+      {
+        if (HttpContext.Current == null)
         {
-          result = HttpContext.Current.Request.UserHostAddress;
+          return string.Empty;
         }
-
-        if (IsLocalARR)
+        else
         {
-          result = ARRIP;
+          return _proxyData.Value.OriginIP;
         }
+      }
+    }
 
-        if (IsResellerDomain)
+    public string OriginHost
+    {
+      get
+      {
+        if (HttpContext.Current == null)
         {
-          result = ResellerDomainIP;
+          return string.Empty;
         }
-        else if (IsTransalationDomain)
+        else
         {
-          result = TranslationIP;
+          return _proxyData.Value.OriginHost;
         }
-
-        return result;
       }
     }
 
@@ -194,20 +104,222 @@ namespace Atlantis.Framework.Providers.ProxyContext
     {
       get
       {
-        string result = string.Empty;
-
-        if (HttpContext.Current != null)
+        if (HttpContext.Current == null)
         {
-          result = HttpContext.Current.Request.Url.Host;
+          return string.Empty;
         }
-
-        if (IsLocalARR)
+        else
         {
-          result = ARRHost;
+          return _proxyData.Value.ContextHost;
         }
-
-        return result;
       }
     }
+
+    #region Obsolete
+
+    public bool IsLocalARR
+    {
+      get
+      {
+        if (HttpContext.Current == null)
+        {
+          return false;
+        }
+        else
+        {
+          return _proxyData.Value.IsProxyActive(ProxyTypes.LocalARR);
+        }
+      }
+    }
+
+    public bool IsResellerDomain
+    {
+      get
+      {
+        if (HttpContext.Current == null)
+        {
+          return false;
+        }
+        else
+        {
+          return _proxyData.Value.IsProxyActive(ProxyTypes.CustomResellerARR);
+        }
+      }
+    }
+
+    public bool IsTransalationDomain
+    {
+      get
+      {
+        if (HttpContext.Current == null)
+        {
+          return false; 
+        }
+        else
+        {
+          return _proxyData.Value.IsProxyActive(ProxyTypes.TransPerfectTranslation);
+        }
+      }
+    }
+
+    public string ARRHost
+    {
+      get
+      {
+        if (HttpContext.Current == null)
+        {
+          return string.Empty;
+        }
+        else
+        {
+          string result = string.Empty;
+          IProxyData data;
+          if (_proxyData.Value.TryGetActiveProxy(ProxyTypes.LocalARR, out data))
+          {
+            result = data.OriginalHost;
+          }
+
+          return result;
+        }
+      }
+    }
+
+    public string ARRIP
+    {
+      get
+      {
+        if (HttpContext.Current == null)
+        {
+          return string.Empty;
+        }
+        else
+        {
+          string result = string.Empty;
+          IProxyData data;
+          if (_proxyData.Value.TryGetActiveProxy(ProxyTypes.LocalARR, out data))
+          {
+            result = data.OriginalIP;
+          }
+
+          return result;
+        }
+      }
+    }
+
+    public string ResellerDomainHost
+    {
+      get
+      {
+        if (HttpContext.Current == null)
+        {
+          return string.Empty;
+        }
+        else
+        {
+          string result = string.Empty;
+          IProxyData data;
+          if (_proxyData.Value.TryGetActiveProxy(ProxyTypes.CustomResellerARR, out data))
+          {
+            result = data.OriginalHost;
+          }
+
+          return result;
+        }
+      }
+    }
+
+    public string ResellerDomainIP
+    {
+      get
+      {
+        if (HttpContext.Current == null)
+        {
+          return string.Empty;
+        }
+        else
+        {
+          string result = string.Empty;
+          IProxyData data;
+          if (_proxyData.Value.TryGetActiveProxy(ProxyTypes.CustomResellerARR, out data))
+          {
+            result = data.OriginalIP;
+          }
+
+          return result;
+        }
+      }
+    }
+
+    public string TranslationHost
+    {
+      get
+      {
+        if (HttpContext.Current == null)
+        {
+          return string.Empty;
+        }
+        else
+        {
+          string result = string.Empty;
+          IProxyData data;
+          if (_proxyData.Value.TryGetActiveProxy(ProxyTypes.TransPerfectTranslation, out data))
+          {
+            result = data.OriginalHost;
+          }
+
+          return result;
+        }
+      }
+    }
+
+    public string TranslationIP
+    {
+      get
+      {
+        if (HttpContext.Current == null)
+        {
+          return string.Empty;
+        }
+        else
+        {
+          string result = string.Empty;
+          IProxyData data;
+          if (_proxyData.Value.TryGetActiveProxy(ProxyTypes.TransPerfectTranslation, out data))
+          {
+            result = data.OriginalIP;
+          }
+
+          return result;
+        }
+      }
+    }
+
+    public string TranslationLanguage
+    {
+      get
+      {
+        if (HttpContext.Current == null)
+        {
+          return string.Empty;
+        }
+        else
+        {
+          string result = string.Empty;
+          IProxyData data;
+          if (_proxyData.Value.TryGetActiveProxy(ProxyTypes.TransPerfectTranslation, out data))
+          {
+            string language;
+            if (data.TryGetExtendedData("language", out language))
+            {
+              result = language;
+            }
+          }
+
+          return result;
+        }
+      }
+    }
+
+    #endregion
   }
 }

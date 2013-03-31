@@ -7,13 +7,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.Providers.PromoData")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
 #else
 [assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
 #endif
-[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("Atlantis.Framework.Providers.PromoData")]
-[assembly: AssemblyCompany("GoDaddy.com, Inc.")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2008-2011")]
+[assembly: AssemblyCompany("GoDaddy.com")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com. 2008-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -36,4 +37,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.11.12.01")]
+[assembly: AssemblyFileVersion("4.13.3.13")]

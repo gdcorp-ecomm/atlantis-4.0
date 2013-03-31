@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Atlantis.Framework.Interface;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.RegGetDotTypeStackInfo.Interface
 {

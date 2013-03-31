@@ -1,7 +1,7 @@
 ﻿using System;
 using Atlantis.Framework.DotTypeCache.Monitor.Web;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Providers.Containers;
 
 namespace Atlantis.Framework.DotTypeCache.Monitor.WebTest
 {

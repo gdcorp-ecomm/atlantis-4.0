@@ -1,4 +1,3 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3195E134-DE93-423E-BDED-37C654617B3A}"
@@ -28,7 +27,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Atlantis.Framework.BasePage
 		SccLocalPath = "SAK"
 		SccProvider = "SAK"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}|Atlantis.Framework.Interface.dll;{B23DE506-143A-4709-84FE-8097EB5E4007}|Atlantis.Framework.BasePages.SiteAdmin.dll;{7F2738F8-683C-49E7-88CD-E986C70F0321}|Atlantis.Framework.DataCache.dll;{D30157B2-C1B3-4073-BA5E-632E2337A997}|Atlantis.Framework.Engine.dll;{FD52CDBE-0BA5-4EED-BB0D-184F96F23011}|Atlantis.Framework.ManagerCategories.Interface.dll;{55F48501-FE1B-441B-A786-A14001AD2F04}|Atlantis.Framework.ManagerUser.Interface.dll;{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}|Atlantis.Framework.Providers.Interface.dll;{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}|Atlantis.Framework.Interface.dll;{D30157B2-C1B3-4073-BA5E-632E2337A997}|Atlantis.Framework.Engine.dll;"
+		ProjectReferences = "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}|Atlantis.Framework.Interface.dll;{B23DE506-143A-4709-84FE-8097EB5E4007}|Atlantis.Framework.BasePages.SiteAdmin.dll;{7F2738F8-683C-49E7-88CD-E986C70F0321}|Atlantis.Framework.DataCache.dll;{D30157B2-C1B3-4073-BA5E-632E2337A997}|Atlantis.Framework.Engine.dll;{FD52CDBE-0BA5-4EED-BB0D-184F96F23011}|Atlantis.Framework.ManagerCategories.Interface.dll;{55F48501-FE1B-441B-A786-A14001AD2F04}|Atlantis.Framework.ManagerUser.Interface.dll;{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}|Atlantis.Framework.Providers.Interface.dll;{C333E679-494E-422D-AB5E-E4C0EC94ACD5}|Atlantis.Framework.Providers.Containers.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/Atlantis.Framework.BasePages.SiteAdminTestWeb"
 		Debug.AspNetCompiler.PhysicalPath = "Atlantis.Framework.BasePages.SiteAdminTestWeb\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Atlantis.Framework.BasePages.SiteAdminTestWeb\"
@@ -50,9 +49,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ManagerC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ManagerCategories.Impl", "..\Atlantis.Framework.ManagerCategories\Atlantis.Framework.ManagerCategories.Impl\Atlantis.Framework.ManagerCategories.Impl.csproj", "{FC5B3293-EC90-438C-9E61-5D88D7F78F8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Containers", "..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj", "{C333E679-494E-422D-AB5E-E4C0EC94ACD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCacheService", "..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj", "{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 13
+		SccNumberOfProjects = 15
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -104,6 +107,14 @@ Global
 		SccProjectTopLevelParentUniqueName12 = Atlantis.Framework.BasePages.SiteAdmin.sln
 		SccProjectName12 = ../Atlantis.Framework.ManagerCategories/Atlantis.Framework.ManagerCategories.Impl
 		SccLocalPath12 = ..\\Atlantis.Framework.ManagerCategories\\Atlantis.Framework.ManagerCategories.Impl
+		SccProjectUniqueName13 = ..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers.csproj
+		SccProjectTopLevelParentUniqueName13 = Atlantis.Framework.BasePages.SiteAdmin.sln
+		SccProjectName13 = ../Atlantis.Framework.Providers.Containers/Atlantis.Framework.Providers.Containers
+		SccLocalPath13 = ..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers
+		SccProjectUniqueName14 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService\\Atlantis.Framework.DataCacheService.csproj
+		SccProjectTopLevelParentUniqueName14 = Atlantis.Framework.BasePages.SiteAdmin.sln
+		SccProjectName14 = ../Atlantis.Framework.DataCache/Atlantis.Framework.DataCacheService
+		SccLocalPath14 = ..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -158,6 +169,14 @@ Global
 		{FC5B3293-EC90-438C-9E61-5D88D7F78F8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC5B3293-EC90-438C-9E61-5D88D7F78F8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC5B3293-EC90-438C-9E61-5D88D7F78F8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -173,5 +192,7 @@ Global
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {3195E134-DE93-423E-BDED-37C654617B3A}
 		{FD52CDBE-0BA5-4EED-BB0D-184F96F23011} = {3195E134-DE93-423E-BDED-37C654617B3A}
 		{FC5B3293-EC90-438C-9E61-5D88D7F78F8D} = {3195E134-DE93-423E-BDED-37C654617B3A}
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {3195E134-DE93-423E-BDED-37C654617B3A}
+		{3E299D3B-3C8D-455A-92A4-05FF6C60E6F3} = {3195E134-DE93-423E-BDED-37C654617B3A}
 	EndGlobalSection
 EndGlobal

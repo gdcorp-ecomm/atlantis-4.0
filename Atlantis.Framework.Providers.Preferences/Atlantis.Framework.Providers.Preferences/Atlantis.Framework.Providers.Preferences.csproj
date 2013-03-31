@@ -71,10 +71,6 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.ShopperPrefGet\Atlantis.Framework.ShopperPrefGet.Interface\Atlantis.Framework.ShopperPrefGet.Interface.csproj">
       <Project>{9C1FBF6D-E420-4B6F-B5CF-9C5633FB5203}</Project>
       <Name>Atlantis.Framework.ShopperPrefGet.Interface</Name>
@@ -82,6 +78,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.ShopperPrefUpdate\Atlantis.Framework.ShopperPrefUpdate.Interface\Atlantis.Framework.ShopperPrefUpdate.Interface.csproj">
       <Project>{565624BE-ABB3-4A2F-B5CE-968C6F18E20A}</Project>
       <Name>Atlantis.Framework.ShopperPrefUpdate.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.Preferences.Interface\Atlantis.Framework.Providers.Preferences.Interface.csproj">
+      <Project>{1a50e3b8-4a5c-4e48-bad4-17c5092f0dde}</Project>
+      <Name>Atlantis.Framework.Providers.Preferences.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

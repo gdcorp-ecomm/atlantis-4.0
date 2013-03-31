@@ -205,34 +205,19 @@ namespace Atlantis.Framework.Interface
 
       try
       {
-        if (HttpContext.Current != null)
+        if ((HttpContext.Current != null) && (HttpContext.Current.Request != null))
         {
-          if (HttpContext.Current.Request != null)
-          {
-            result = HttpContext.Current.Request.Url.ToString();
-          }
+          result = HttpContext.Current.Request.Url.ToString();
 
           IProviderContainer container = WebRequestProviderContainer;
           if ((container != null) && (container.CanResolve<IProxyContext>()))
           {
             IProxyContext proxy = container.Resolve<IProxyContext>();
-
             if (proxy.Status != ProxyStatusType.None)
             {
-              if (proxy.IsLocalARR)
+              foreach (IProxyData proxyData in proxy.ActiveProxyChain)
               {
-                result = "[" + proxy.ARRHost + "]" + result;
-              }
-
-              /// Regardless of ARR proxy or not, we could have another external proxy 
-              /// from custom reseller domains or our translation servers
-              if (proxy.IsResellerDomain)
-              {
-                result = "[" + proxy.ResellerDomainHost + "]" + result;
-              }
-              else if (proxy.IsTransalationDomain)
-              {
-                result = "[" + proxy.TranslationHost + "]" + result;
+                result = "[" + proxyData.OriginalHost + "]" + result;
               }
             }
           }

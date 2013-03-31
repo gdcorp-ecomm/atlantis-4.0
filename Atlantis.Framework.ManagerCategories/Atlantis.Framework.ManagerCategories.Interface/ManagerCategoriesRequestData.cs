@@ -1,6 +1,5 @@
-﻿using System;
-using Atlantis.Framework.Interface;
-using System.Security.Cryptography;
+﻿using Atlantis.Framework.Interface;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.ManagerCategories.Interface
 {
@@ -16,12 +15,14 @@ namespace Atlantis.Framework.ManagerCategories.Interface
 
     public override string GetCacheMD5()
     {
-      MD5 oMD5 = new MD5CryptoServiceProvider();
-      oMD5.Initialize();
-      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(ManagerUserId.ToString());
-      byte[] md5Bytes = oMD5.ComputeHash(stringBytes);
-      string sValue = BitConverter.ToString(md5Bytes, 0);
-      return sValue.Replace("-", "");
+      return ManagerUserId.ToString();
+    }
+
+    public override string ToXML()
+    {
+      XElement element = new XElement("ManagerCategoriesRequestData");
+      element.Add(new XAttribute("manageruserid", ManagerUserId.ToString()));
+      return element.ToString(SaveOptions.DisableFormatting);
     }
   }
 }

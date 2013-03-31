@@ -1,97 +1,57 @@
-﻿using System.Web;
+﻿using Atlantis.Framework.Interface;
+using System.Collections.Generic;
+using System.Web;
 
 namespace Atlantis.Framework.Providers.ProxyContext
 {
   internal class TranslationHeaderValues : HeaderValuesBase
   {
     const string _TRANSLATIONORIGINALHOST = "X-OriginalHost";
-    const string _TRANSLATIONORIGINALPORT = "X-OriginalPort";
     const string _TRANSLATIONORIGINALIP = "X-OriginalIP";
     const string _TRANSLATIONORIGINALLANG = "X-OriginalLang";
 
-    private HeaderValueStatus _status = HeaderValueStatus.Unknown;
-    public override HeaderValueStatus GetStatus(string ipAddress)
+    public override HeaderValueStatus CheckForProxyHeaders(string sourceIpAddress, out IProxyData proxyData)
     {
+      proxyData = null;
       if (HttpContext.Current == null)
       {
-        return _status;
+        return HeaderValueStatus.Unknown;
       }
 
-      if (_status == HeaderValueStatus.Unknown)
+      HeaderValueStatus result = HeaderValueStatus.Invalid;
+
+      string originalIP = GetFirstHeaderValue(_TRANSLATIONORIGINALIP);
+      string originalHost = GetFirstHeaderValue(_TRANSLATIONORIGINALHOST);
+      string language = GetFirstHeaderValue(_TRANSLATIONORIGINALLANG);
+
+      if ((originalHost == null) && (originalIP == null) && (language == null))
       {
-        _status = HeaderValueStatus.Invalid;
-
-        bool isWhiteListed = TranslationProxyWhitelist.IsValidRequest(ipAddress);
-
-        if ((OriginalHost == null) && (OriginalIP == null) && (OriginalPort == null) && (Language == null))
+        // Empty is only valid if it comes from a not whitelisted ipAddress that or its the loopback
+        result = HeaderValueStatus.Empty;
+        if (TranslationProxyWhitelist.IsValidRequest(sourceIpAddress) && !IsAddressThisMachine(sourceIpAddress))
         {
-          // Empty is only valid if it comes from a not whitelisted ipAddress that or its the loopback
-          _status = HeaderValueStatus.Empty;
-          if (isWhiteListed && !IsAddressThisMachine(ipAddress))
-          {
-            _status = HeaderValueStatus.Invalid;
-          }
-        }
-        else if ((OriginalHost != null) && (OriginalIP != null))
-        {
-          _status = isWhiteListed || IsAddressThisMachine(ipAddress) ? HeaderValueStatus.Valid : HeaderValueStatus.Invalid;
+          result = HeaderValueStatus.Invalid;
         }
       }
-      return _status;
+      else if ((originalHost != null) && (originalIP != null) && (language != null))
+      {
+        bool isWhiteListed = TranslationProxyWhitelist.IsValidRequest(sourceIpAddress) || IsAddressThisMachine(sourceIpAddress);
+        result = isWhiteListed ? HeaderValueStatus.Valid : HeaderValueStatus.Invalid;
+      }
+
+      if (result == HeaderValueStatus.Valid)
+      {
+        Dictionary<string, string> extendedData = new Dictionary<string, string>(1);
+        extendedData["language"] = language;
+        proxyData = ProxyData.FromValidData(ProxyType, originalIP, originalHost, false, extendedData);
+      }
+
+      return result;
     }
 
-    private bool _isInitialized = false;
-
-    private void GetHeaderValues()
+    public override ProxyTypes ProxyType
     {
-      if (!_isInitialized)
-      {
-        _isInitialized = true;
-        _originalIP = GetFirstHeaderValue(_TRANSLATIONORIGINALIP);
-        _originalHost = GetFirstHeaderValue(_TRANSLATIONORIGINALHOST);
-        _originalPort = GetFirstHeaderValue(_TRANSLATIONORIGINALPORT);
-        _language = GetFirstHeaderValue(_TRANSLATIONORIGINALLANG);
-      }
-    }
-
-    private string _originalIP = null;
-    public string OriginalIP
-    {
-      get
-      {
-        GetHeaderValues();
-        return _originalIP;
-      }
-    }
-
-    private string _originalHost = null;
-    public string OriginalHost
-    {
-      get
-      {
-        GetHeaderValues();
-        return _originalHost;
-      }
-    }
-
-    private string _originalPort = null;
-    public string OriginalPort
-    {
-      get
-      {
-        GetHeaderValues();
-        return _originalPort;
-      }
-    }
-
-    private string _language = null;
-    public string Language
-    {
-      get
-      {
-        GetHeaderValues();
-        return _language;
-      }
+      get { return ProxyTypes.TransPerfectTranslation; }
     }
   }
 }

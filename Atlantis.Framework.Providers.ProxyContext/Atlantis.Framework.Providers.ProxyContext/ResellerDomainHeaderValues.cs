@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using Atlantis.Framework.Interface;
+using System.Web;
 
 namespace Atlantis.Framework.Providers.ProxyContext
 {
@@ -6,81 +7,46 @@ namespace Atlantis.Framework.Providers.ProxyContext
   {
     const string _RESELLERORIGINALIP = "X-ARR-PL-OriginalIP";
     const string _RESELLERORIGINALHOST = "X-ARR-PL-OriginalHost";
-    const string _RESELLERORIGINALURL = "X-ARR-PL-OriginalUrl";
 
-    private HeaderValueStatus _status = HeaderValueStatus.Unknown;
-    public override HeaderValueStatus GetStatus(string ipAddress)
+    public override HeaderValueStatus CheckForProxyHeaders(string sourceIpAddress, out IProxyData proxyData)
     {
+      proxyData = null;
       if (HttpContext.Current == null)
       {
-        return _status;
+        return HeaderValueStatus.Unknown;
       }
 
-      if (_status == HeaderValueStatus.Unknown)
+      HeaderValueStatus result = HeaderValueStatus.Invalid;
+
+      string originalIP = GetFirstHeaderValue(_RESELLERORIGINALIP);
+      string originalHost = GetFirstHeaderValue(_RESELLERORIGINALHOST);
+
+      if ((originalHost == null) && (originalIP == null))
       {
-        _status = HeaderValueStatus.Invalid;
-
-        bool isWhiteListed = ResellerProxyWhitelist.IsValidRequest(ipAddress);
-
-        if ((OriginalHost == null) && (OriginalIP == null) && (OriginalUrl == null))
+        // Empty is only valid if it comes from a not whitelisted ipAddress that or its the loopback
+        result = HeaderValueStatus.Empty;
+        if (ResellerProxyWhitelist.IsValidRequest(sourceIpAddress) && !IsAddressThisMachine(sourceIpAddress))
         {
-          // Empty is only valid if it comes from a not whitelisted ipAddress that or its the loopback
-          _status = HeaderValueStatus.Empty;
-          if (isWhiteListed && !IsAddressThisMachine(ipAddress))
-          {
-            _status = HeaderValueStatus.Invalid;
-          }
-        }
-        else if ((OriginalHost != null) && (OriginalIP != null))
-        {
-          _status = isWhiteListed || IsAddressThisMachine(ipAddress) ? HeaderValueStatus.Valid : HeaderValueStatus.Invalid;
+          result = HeaderValueStatus.Invalid;
         }
       }
-      return _status;
-    }
-
-    private bool _isInitialized = false;
-
-    private void GetHeaderValues()
-    {
-      if (!_isInitialized)
+      else if ((originalHost != null) && (originalIP != null))
       {
-        _isInitialized = true;
-        _originalIP = GetFirstHeaderValue(_RESELLERORIGINALIP);
-        _originalHost = GetFirstHeaderValue(_RESELLERORIGINALHOST);
-        _originalUrl = GetFirstHeaderValue(_RESELLERORIGINALURL);
+        bool isWhiteListed = ResellerProxyWhitelist.IsValidRequest(sourceIpAddress) || IsAddressThisMachine(sourceIpAddress);
+        result = isWhiteListed ? HeaderValueStatus.Valid : HeaderValueStatus.Invalid;
       }
-    }
 
-    private string _originalIP = null;
-    public string OriginalIP
-    {
-      get
+      if (result == HeaderValueStatus.Valid)
       {
-        GetHeaderValues();
-        return _originalIP;
+        proxyData = ProxyData.FromValidData(ProxyType, originalIP, originalHost, false);
       }
+
+      return result;
     }
 
-    private string _originalHost = null;
-    public string OriginalHost
+    public override ProxyTypes ProxyType
     {
-      get
-      {
-        GetHeaderValues();
-        return _originalHost;
-      }
+      get { return ProxyTypes.CustomResellerARR; }
     }
-
-    private string _originalUrl = null;
-    public string OriginalUrl
-    {
-      get
-      {
-        GetHeaderValues();
-        return _originalUrl;
-      }
-    }
-
   }
 }

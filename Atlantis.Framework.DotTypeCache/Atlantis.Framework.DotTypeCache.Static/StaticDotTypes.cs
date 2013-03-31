@@ -8,7 +8,6 @@ namespace Atlantis.Framework.DotTypeCache.Static
   public static class StaticDotTypes
   {
     static DotTypeCacheConfig _config;
-    static IDotTypeInfo _invalidDotType;
     static Dictionary<string, IDotTypeInfo> _staticDotTypes;
     static HashSet<string> _multiRegistryDotTypes;
     static Dictionary<string, Dictionary<string, string>> _additionalData;
@@ -16,7 +15,6 @@ namespace Atlantis.Framework.DotTypeCache.Static
     static StaticDotTypes()
     {
       _config = new DotTypeCacheConfig();
-      _invalidDotType = new InvalidDotType();
       _staticDotTypes = new Dictionary<string, IDotTypeInfo>(_config.ConfigItems.Count, StringComparer.OrdinalIgnoreCase);
       _multiRegistryDotTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
       _additionalData = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase);
@@ -32,11 +30,6 @@ namespace Atlantis.Framework.DotTypeCache.Static
       }
     }
 
-    public static IDotTypeInfo InvalidDotType
-    {
-      get { return _invalidDotType; }
-    }
-
     public static IDotTypeInfo GetDotType(string dotType)
     {
       if (_staticDotTypes.ContainsKey(dotType))
@@ -45,7 +38,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
       }
       else
       {
-        return _invalidDotType;
+        return InvalidDotType.Instance;
       }
     }
 

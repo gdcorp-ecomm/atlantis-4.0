@@ -1,63 +1,64 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Atlantis.Framework.Testing.UnitTesting.BaseClasses
 {
-    [DataContract(IsReference = false, Name = "TestResultData", Namespace = "")]
-    public class TestResultData : ITestResults
+  [DataContract(IsReference = false, Name = "TestResultData", Namespace = "")]
+  public class TestResultData : ITestResults
+  {
+    private TestExtendedLogData _extLogData;
+    private List<TestResultBase> _testResults;
+    private TestResultSummary _summary;
+
+    [DataMember]
+    public List<TestResultBase> TestResults
     {
-        private TestExtendedLogData _extLogData;
-        private List<TestResultBase> _testResults;
-        private TestResultSummary _summary;
-
-        [DataMember]
-        public List<TestResultBase> TestResults
+      get
+      {
+        if (_testResults == null)
         {
-            get
-            {
-                if (_testResults == null)
-                {
-                    _testResults = new List<TestResultBase>();
-                }
-                return _testResults;
-            }
-            set { _testResults = value; }
+          _testResults = new List<TestResultBase>();
         }
-
-        [DataMember]
-        public TestExtendedLogData ExtendedLogData
-        {
-            get
-            {
-                if (_extLogData == null)
-                {
-                    _extLogData = new TestExtendedLogData();
-                }
-                return _extLogData;
-            }
-        }
-
-        [DataMember]
-        public int ProcessId { get; set; }
-
-        [DataMember]
-        public string AssemblyFileVersion { get; set; }
-
-        [DataMember]
-        public string ExecutingServerName { get; set; }
-
-        [DataMember]
-        public TestResultSummary Summary { 
-            get { 
-                if (_summary == null)
-                {
-                    _summary = new TestResultSummary();
-                }
-                return _summary;
-            }
-            set { _summary = value; }
-        }
-
+        return _testResults;
+      }
+      set { _testResults = value; }
     }
+
+    [DataMember]
+    public TestExtendedLogData ExtendedLogData
+    {
+      get
+      {
+        if (_extLogData == null)
+        {
+          _extLogData = new TestExtendedLogData();
+        }
+        return _extLogData;
+      }
+    }
+
+    [DataMember]
+    public int ProcessId { get; set; }
+
+    [DataMember]
+    public string AssemblyFileVersion { get; set; }
+
+    [DataMember]
+    public string ExecutingServerName { get; set; }
+
+    [DataMember]
+    public TestResultSummary Summary
+    {
+      get
+      {
+        if (_summary == null)
+        {
+          _summary = new TestResultSummary();
+        }
+        return _summary;
+      }
+      set { _summary = value; }
+    }
+
+  }
 }

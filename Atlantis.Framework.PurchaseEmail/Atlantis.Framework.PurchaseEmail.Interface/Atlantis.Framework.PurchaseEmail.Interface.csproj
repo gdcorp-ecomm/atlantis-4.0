@@ -107,6 +107,7 @@
     <Compile Include="PLDataCategory.cs" />
     <Compile Include="Providers\LinkTypes.cs" />
     <Compile Include="Providers\ProductGroups.cs" />
+    <Compile Include="Providers\ShopperProductProvider.cs" />
     <Compile Include="PurchaseEmailEngineRequests.cs" />
     <Compile Include="OrderData.cs" />
     <Compile Include="PurchaseEmailRequestData.cs" />
@@ -117,10 +118,6 @@
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
       <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
       <Name>Atlantis.Framework.DataCache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataProvider\Atlantis.Framework.DataProvider.Interface\Atlantis.Framework.DataProvider.Interface.csproj">
-      <Project>{BEE136BA-2908-438B-9033-CCDB137CB5F9}</Project>
-      <Name>Atlantis.Framework.DataProvider.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.EcommPaymentProfile\Atlantis.Framework.EcommPaymentProfile.Impl\Atlantis.Framework.EcommPaymentProfile.Impl.csproj">
       <Project>{BFA829D2-AB95-4913-BCF3-CB0748AD3AB4}</Project>
@@ -158,6 +155,18 @@
       <Project>{8D5F838D-A604-4CEF-9F86-FE9A6843584A}</Project>
       <Name>Atlantis.Framework.MessagingProcess.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MyaMirageData\Atlantis.Framework.MyaMirageData.Interface\Atlantis.Framework.MyaMirageData.Interface.csproj">
+      <Project>{54fffe85-22b9-49f1-b244-cb3fe5591416}</Project>
+      <Name>Atlantis.Framework.MyaMirageData.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MyaMirageStatus\Atlantis.Framework.MyaMirageStatus.Interface\Atlantis.Framework.MyaMirageStatus.Interface.csproj">
+      <Project>{714d675d-326c-485f-b756-9ed2a931a2dc}</Project>
+      <Name>Atlantis.Framework.MyaMirageStatus.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.MyaRecentNamespaces\Atlantis.Framework.MyaRecentNamespaces.Interface\Atlantis.Framework.MyaRecentNamespaces.Interface.csproj">
+      <Project>{7dbcb185-df3c-495b-bd0f-c33e75355006}</Project>
+      <Name>Atlantis.Framework.MyaRecentNamespaces.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.PaymentProfile\Atlantis.Framework.PaymentProfile.Interface\Atlantis.Framework.PaymentProfile.Interface.csproj">
       <Project>{8B540B38-34E0-4136-B409-1DC7B322AA63}</Project>
       <Name>Atlantis.Framework.PaymentProfile.Interface</Name>
@@ -165,6 +174,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.ProductOffer\Atlantis.Framework.ProductOffer.Interface\Atlantis.Framework.ProductOffer.Interface.csproj">
       <Project>{D7260EE7-F41C-4AC4-87FF-959BD107A4DE}</Project>
       <Name>Atlantis.Framework.ProductOffer.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
+      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
+      <Name>Atlantis.Framework.Providers.Containers</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency.csproj">
       <Project>{7EB0E12F-F1DB-49B0-B87D-918BD6950151}</Project>
@@ -174,9 +187,17 @@
       <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links.Interface\Atlantis.Framework.Providers.Links.Interface.csproj">
+      <Project>{9972e990-31f1-4c30-9bb5-ac1f3bd4e600}</Project>
+      <Name>Atlantis.Framework.Providers.Links.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links.csproj">
       <Project>{6AD11637-3BFB-4FF3-B1A5-AADE45303928}</Project>
       <Name>Atlantis.Framework.Providers.Links</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.Interface\Atlantis.Framework.Providers.Preferences.Interface.csproj">
+      <Project>{1a50e3b8-4a5c-4e48-bad4-17c5092f0dde}</Project>
+      <Name>Atlantis.Framework.Providers.Preferences.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.csproj">
       <Project>{EC9CD880-2578-4B00-A629-A4AA916FB2BE}</Project>
@@ -186,9 +207,9 @@
       <Project>{F078F62F-8023-4E25-8834-973377000D57}</Project>
       <Name>Atlantis.Framework.Providers.Products</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer.Impl.csproj">
-      <Project>{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}</Project>
-      <Name>Atlantis.Framework.Providers.ProviderContainer.Impl</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
+      <Project>{53be1e8c-c474-4d2d-b2e3-db00cbe1b5f9}</Project>
+      <Name>Atlantis.Framework.SessionCache</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.ShopperFirstOrderGet\Atlantis.Framework.ShopperFirstOrderGet.Impl\Atlantis.Framework.ShopperFirstOrderGet.Impl.csproj">
       <Project>{A97FE745-78C7-4184-91AE-89543CB8DE0D}</Project>

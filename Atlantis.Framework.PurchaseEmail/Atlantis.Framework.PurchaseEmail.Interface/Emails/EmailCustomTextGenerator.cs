@@ -89,8 +89,10 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
           int itemPrice = 0;
           int.TryParse(itemElement.GetAttribute("_oadjust_adjustedprice"), out itemPrice);
 
-          itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" +
-                                 _currency.PriceText(new CurrencyPrice(itemPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional), false, CurrencyNegativeFormat.Parentheses) + "</td>");
+          ICurrencyPrice itemCurrencyPrice = _currency.NewCurrencyPrice(itemPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional);
+          string itemPriceText = _currency.PriceText(itemCurrencyPrice, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses);
+
+          itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + itemPriceText + "</td>");
           itemTextBuilder.Append("  </tr>");
         }
       }
@@ -100,19 +102,19 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       itemTextBuilder.Append("  </tr>");
       itemTextBuilder.Append("  <tr>");
       itemTextBuilder.Append("    <td colspan='2' align='right' valign='top' class='bodyText'>[%%LCST.REQ.SUBTOTAL%%]:</td>");
-      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.SubTotal, false, CurrencyNegativeFormat.Parentheses) + "</td>");
+      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.SubTotal, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses) + "</td>");
       itemTextBuilder.Append("  </tr>");
       itemTextBuilder.Append("  <tr>");
       itemTextBuilder.Append("    <td colspan='2' align='right' valign='top' class='bodyText'>[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:</td>");
-      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.TotalShipping, false) + "</td>");
+      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.TotalShipping) + "</td>");
       itemTextBuilder.Append("  </tr>");
       itemTextBuilder.Append("  <tr>");
       itemTextBuilder.Append("    <td colspan='2' align='right' valign='top' class='bodyText'>[%%LCST.REQ.TAX%%]:</td>");
-      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.TotalTax, false) + "</td>");
+      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.TotalTax) + "</td>");
       itemTextBuilder.Append("  </tr>");
       itemTextBuilder.Append("  <tr>");
       itemTextBuilder.Append("    <td colspan='2' align='right' valign='top' class='bodyText'>[%%LCST.REQ.TOTAL%%]:</td>");
-      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.TotalTotal, false, CurrencyNegativeFormat.Parentheses) + "</td>");
+      itemTextBuilder.Append("    <td align='right' valign='top' class='bodyText'>" + _currency.PriceText(_orderData.TotalTotal, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses) + "</td>");
       itemTextBuilder.Append("  </tr>");
       itemTextBuilder.Append("</table>");
     }
@@ -172,7 +174,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
         + PadStringForColumn(itemElement.GetAttribute("name"), PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Center)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(new CurrencyPrice(itemPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional), false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Center)
+        + PadStringForColumn(_currency.PriceText(_currency.NewCurrencyPrice(itemPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional), PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Center)
         );
 
         if (debug) itemsTextBuilder.Append("<br/>");
@@ -203,22 +205,22 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
       itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.SUBTOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.SubTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.SubTotal, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
       itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.TotalShipping, false), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.TotalShipping), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
       itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.TAX%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.TotalTax, false), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.TotalTax), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
       itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.TOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.TotalTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.TotalTotal, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
     }
 
@@ -243,7 +245,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             itemElement.GetAttribute("quantity") + "</td>");
           itemTextBuilder.Append("<td align='center' class='bodyText'>" + itemElement.GetAttribute("name") + "</td>");
           itemTextBuilder.Append("<td align='right' class='bodyText'>" +
-                                 _currency.PriceText(new CurrencyPrice(itemPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional), false, CurrencyNegativeFormat.Parentheses) +
+                                 _currency.PriceText(new CurrencyPrice(itemPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional), PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses) +
                                  "</td></tr></table>");
 
           //check for domain nodes in the item's CUSTOMXML 
@@ -282,10 +284,10 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         }
       }
       itemTextBuilder.Append("<table width='270' cellspacing='0' cellpadding='0' border='0'><tr><td colspan='3' align='center' class='bodyText'><hr></td></tr>");
-      itemTextBuilder.Append("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.SUBTOTAL%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.SubTotal, false, CurrencyNegativeFormat.Parentheses) + "</td></tr>");
-      itemTextBuilder.Append("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalShipping, false) + "</td></tr>");
-      itemTextBuilder.Append("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.TAX%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalTax, false) + "</td></tr>");
-      itemTextBuilder.Append("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.TOTAL%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalTotal, false, CurrencyNegativeFormat.Parentheses) + "</td></tr>");
+      itemTextBuilder.Append("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.SUBTOTAL%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.SubTotal, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses) + "</td></tr>");
+      itemTextBuilder.Append("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalShipping) + "</td></tr>");
+      itemTextBuilder.Append("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.TAX%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalTax) + "</td></tr>");
+      itemTextBuilder.Append("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.TOTAL%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalTotal, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses) + "</td></tr>");
       itemTextBuilder.Append("</table>");
     }
     #endregion
@@ -368,28 +370,28 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       {
         itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.SPECIAL_SAVINGS%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
           + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-          + PadStringForColumn(_currency.PriceText(_orderData.OrderDiscountAmount, false), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+          + PadStringForColumn(_currency.PriceText(_orderData.OrderDiscountAmount), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
         if (debug) itemsTextBuilder.Append("<br/>");
       }
 
       itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.SUBTOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.SubTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.SubTotal, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
       itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.TotalShipping, false), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.TotalShipping), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
       itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.TAX%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.TotalTax, false), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.TotalTax), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
 
       itemsTextBuilder.AppendLine(BuildPadStringFunction("[%%LCST.REQ.TOTAL%%]:", PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.QTY_COL_WIDTH + PlainTextPadding.NAME_COL_WIDTH, HorizontalAlign.Right)
         + string.Empty.PadLeft(PlainTextPadding.SPACER_COL_WIDTH)
-        + PadStringForColumn(_currency.PriceText(_orderData.TotalTotal, false, CurrencyNegativeFormat.Parentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
+        + PadStringForColumn(_currency.PriceText(_orderData.TotalTotal, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses), PlainTextPadding.PRICE_COL_WIDTH, HorizontalAlign.Right));
       if (debug) itemsTextBuilder.Append("<br/>");
     }
 
@@ -456,12 +458,12 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       itemsTextBuilder.AppendLine("<table width='300' cellspacing='0' cellpadding='0' border='0'><tr><td colspan='3' align='center' class='bodyText'><hr></td></tr>");
       if (_orderData.OrderDiscountAmount.Price != 0)
       {
-        itemsTextBuilder.AppendLine("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.SPECIAL_SAVINGS%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.OrderDiscountAmount, false) + "</td></tr>");
+        itemsTextBuilder.AppendLine("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.SPECIAL_SAVINGS%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.OrderDiscountAmount) + "</td></tr>");
       }
-      itemsTextBuilder.AppendLine("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.SUBTOTAL%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.SubTotal, false, CurrencyNegativeFormat.Parentheses) + "</td></tr>");
-      itemsTextBuilder.AppendLine("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalShipping, false) + "</td></tr>");
-      itemsTextBuilder.AppendLine("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.TAX%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalTax, false) + "</td></tr>");
-      itemsTextBuilder.AppendLine("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.TOTAL%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalTotal, false, CurrencyNegativeFormat.Parentheses) + "</td></tr>");
+      itemsTextBuilder.AppendLine("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.SUBTOTAL%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.SubTotal, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses) + "</td></tr>");
+      itemsTextBuilder.AppendLine("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.SHIPPING_AND_HANDLING_PLAIN_TEXT%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalShipping) + "</td></tr>");
+      itemsTextBuilder.AppendLine("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.TAX%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalTax) + "</td></tr>");
+      itemsTextBuilder.AppendLine("<tr><td colspan='3' align='right' class='bodyText'>[%%LCST.REQ.TOTAL%%]:&nbsp;&nbsp;&nbsp;" + _currency.PriceText(_orderData.TotalTotal, PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses) + "</td></tr>");
       itemsTextBuilder.AppendLine("</table>");
     }
 
@@ -510,7 +512,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       {
         int itemPrice;
         int.TryParse(adjustedOrderPrice, out itemPrice);
-        return _currency.PriceText(new CurrencyPrice(itemPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional), false, CurrencyNegativeFormat.Parentheses);
+        return _currency.PriceText(new CurrencyPrice(itemPrice, _currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional), PriceTextOptions.AllowNegativePrice, PriceFormatOptions.NegativeParentheses);
       }
       else
         return string.Empty;

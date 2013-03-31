@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
+﻿using Atlantis.Framework.DataCacheService;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.RegGetDotTypeStackInfo.Interface;
+using System;
+using System.Collections.Generic;
+using System.Xml;
 
 namespace Atlantis.Framework.RegGetDotTypeStackInfo.Impl
 {
   public class DotTypeStackCacheInfo : IRequest
   {
-    #region IRequest Members
-
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
       IResponseData oResponseData = null;
@@ -18,8 +17,14 @@ namespace Atlantis.Framework.RegGetDotTypeStackInfo.Impl
 
       try
       {
-        RegGetDotTypeStackInfoRequestData oGetDotTypeStackInfoRequestData = (RegGetDotTypeStackInfoRequestData)oRequestData;       
-        xml = DataCache.DataCache.GetCacheData(string.Format("<GetDomainMultiStackPricesWithCurrency><param name=\"n_privateLabelID\" value=\"{0}\"/><param name=\"gdshop_currencyType\" value=\"{1}\"/></GetDomainMultiStackPricesWithCurrency>", oGetDotTypeStackInfoRequestData.PrivateLabelId, oGetDotTypeStackInfoRequestData.CurrencyType));
+        RegGetDotTypeStackInfoRequestData oGetDotTypeStackInfoRequestData = (RegGetDotTypeStackInfoRequestData)oRequestData;
+        string requestXml = string.Format("<GetDomainMultiStackPricesWithCurrency><param name=\"n_privateLabelID\" value=\"{0}\"/><param name=\"gdshop_currencyType\" value=\"{1}\"/></GetDomainMultiStackPricesWithCurrency>", oGetDotTypeStackInfoRequestData.PrivateLabelId, oGetDotTypeStackInfoRequestData.CurrencyType);
+
+        using (var comCache = GdDataCacheOutOfProcess.CreateDisposable())
+        {
+          xml = comCache.GetCacheData(requestXml);
+        }
+
         XmlDocument xmlDocument = new XmlDocument();
         xmlDocument.LoadXml(xml);
         XmlNodeList nodes = xmlDocument.SelectNodes("/data/item");
@@ -81,8 +86,5 @@ namespace Atlantis.Framework.RegGetDotTypeStackInfo.Impl
       return oResponseData;
 
     }
-
-    #endregion
-
   }
 }

@@ -7,6 +7,7 @@ namespace Atlantis.Framework.BasePages.TestWeb
   {
     protected void Page_Load(object sender, EventArgs e)
     {
+      AllowCrossDomainJson = true;
     }
 
     protected override string GetSerializedJson()

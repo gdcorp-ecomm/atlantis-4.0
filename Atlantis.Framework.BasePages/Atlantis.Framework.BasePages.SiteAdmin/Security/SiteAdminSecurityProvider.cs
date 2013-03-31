@@ -35,14 +35,12 @@ namespace Atlantis.Framework.BasePages.SiteAdmin.Security
       {
         int managerUserIdInt;
         int.TryParse(_siteContext.Value.Manager.ManagerUserId, out managerUserIdInt);
-        ManagerCategoriesRequestData request = new ManagerCategoriesRequestData(
-          string.Empty, HttpContext.Current.Request.Url.ToString(), string.Empty, string.Empty,
-          0, managerUserIdInt);
+        ManagerCategoriesRequestData request = new ManagerCategoriesRequestData(string.Empty, HttpContext.Current.Request.Url.ToString(), string.Empty, string.Empty, 0, managerUserIdInt);
         result = (ManagerCategoriesResponseData)DataCache.DataCache.GetProcessRequest(request, SiteAdminBaseEngineRequests.ManagerCategories);
       }
       catch
       {
-        result = new ManagerCategoriesResponseData(new Dictionary<string, string>(), new List<int>());
+        result = ManagerCategoriesResponseData.Empty;
       }
       return result;
     }

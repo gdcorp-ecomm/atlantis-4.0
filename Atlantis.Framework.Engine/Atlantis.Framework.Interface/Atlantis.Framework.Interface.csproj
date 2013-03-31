@@ -55,6 +55,7 @@
     <Compile Include="IManagerContext.cs" />
     <Compile Include="IProviderContainer.cs" />
     <Compile Include="IProxyContext.cs" />
+    <Compile Include="IProxyData.cs" />
     <Compile Include="IRequest.cs" />
     <Compile Include="IResponseData.cs" />
     <Compile Include="IShopperContext.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderBase.cs" />
     <Compile Include="ProxyStatusType.cs" />
+    <Compile Include="ProxyTypes.cs" />
     <Compile Include="RequestData.cs" />
     <Compile Include="ServerLocationType.cs" />
     <Compile Include="ShopperStatusType.cs" />

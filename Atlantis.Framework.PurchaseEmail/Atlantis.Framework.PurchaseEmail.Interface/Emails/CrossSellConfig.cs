@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Xml;
-using Atlantis.Framework.DataProvider.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.PurchaseEmail.Interface.Providers;
+using System.Xml.Linq;
+using System.Linq;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 {
@@ -21,6 +21,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     DepartmentIds _departmentIds;
     OrderData _orderData;
     IProductProvider _products;
+    ShopperProductProvider _shopperProducts;
 
     public CrossSellConfigId Id { get { return _id; } }
     public string Description { get { return _description; } }
@@ -28,11 +29,13 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     public int CiCode { get { return _ciCode; } }
     public string ItemTrackingCode { get { return _itemTrackingCode; } }
 
-    public CrossSellConfig(OrderData orderData, DepartmentIds departmentIds, IProductProvider products)
+    public CrossSellConfig(OrderData orderData, DepartmentIds departmentIds, IProviderContainer container)
     {
       _orderData = orderData;
       _departmentIds = departmentIds;
-      _products = products;
+
+      _products = container.Resolve<IProductProvider>();
+      _shopperProducts = container.Resolve<ShopperProductProvider>();
 
       _productsToShow = new List<CrossSellConfigProductId>();
       _crossSellProductList = new List<CrossSellConfigProductId>();
@@ -201,32 +204,46 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     private void GetCrossSellConfigData()
     {
       string callXML = string.Format("<GetCrossSellConfig><param name=\"configurationID\" value=\"{0}\"/></GetCrossSellConfig>", _id.ToString());
-      DataTable dataTable = DataCache.DataCache.GetCacheDataTable(callXML);
-      if (dataTable != null && dataTable.Rows.Count > 0)
+      string dataXml = DataCache.DataCache.GetCacheData(callXML);
+
+      if (!string.IsNullOrEmpty(dataXml))
       {
-        _description = (string)dataTable.Rows[0]["configurationDescription"];
-        _itemTrackingCode = (string)dataTable.Rows[0]["itemTrackingCode"];
-        _ciCode = int.Parse((string)dataTable.Rows[0]["clickImpressionCode"]);
-        string productsToShow = (string)dataTable.Rows[0]["showOnly"];
-        if (!string.IsNullOrEmpty(productsToShow))
+        try
         {
-          string[] productsToShowParts = productsToShow.Split("|".ToCharArray());
-          foreach (string strCrossSellProductId in productsToShowParts)
+          XDocument dataDoc = XDocument.Parse(dataXml);
+          XElement itemElement = dataDoc.Descendants("item").First();
+
+          _description = itemElement.Attribute("configurationDescription").Value;
+          _itemTrackingCode = itemElement.Attribute("itemTrackingCode").Value;
+          _ciCode = int.Parse(itemElement.Attribute("clickImpressionCode").Value);
+          string productsToShow = itemElement.Attribute("showOnly").Value;
+
+          if (!string.IsNullOrEmpty(productsToShow))
           {
-            int intCrossSellProductId = -1;
-            if (!int.TryParse(strCrossSellProductId, out intCrossSellProductId))
+            string[] productsToShowParts = productsToShow.Split("|".ToCharArray());
+            foreach (string strCrossSellProductId in productsToShowParts)
             {
-              intCrossSellProductId = -1;
-            }
-            if (intCrossSellProductId != -1)
-            {
-              if (Enum.IsDefined(typeof(CrossSellConfigProductId), intCrossSellProductId))
+              int intCrossSellProductId = -1;
+              if (!int.TryParse(strCrossSellProductId, out intCrossSellProductId))
               {
-                CrossSellConfigProductId productId = (CrossSellConfigProductId)intCrossSellProductId;
-                _productsToShow.Add(productId);
+                intCrossSellProductId = -1;
+              }
+              if (intCrossSellProductId != -1)
+              {
+                if (Enum.IsDefined(typeof(CrossSellConfigProductId), intCrossSellProductId))
+                {
+                  CrossSellConfigProductId productId = (CrossSellConfigProductId)intCrossSellProductId;
+                  _productsToShow.Add(productId);
+                }
               }
             }
           }
+
+        }
+        catch (Exception ex)
+        {
+          AtlantisException exception = new AtlantisException("PurchaseEmail.CrossSellConfig.GetCrossSellConfigData", "0", ex.Message + ex.StackTrace, dataXml, null, null);
+          Engine.Engine.LogAtlantisException(exception);
         }
 
       }
@@ -234,7 +251,6 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 
     private void ValidateProductsToShow()
     {
-      Dictionary<string, int> shopperProductData = GetShopperProductDictionary(_orderData.ShopperId, _orderData.PrivateLabelId.ToString(), true);
       bool isValid;
       foreach (CrossSellConfigProductId productId in _productsToShow)
       {
@@ -242,76 +258,76 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         switch (productId)
         {
           case CrossSellConfigProductId.COLD_FUSION:
-            if (_products.IsProductGroupOffered(ProductGroups.Hosting) && !shopperProductData.ContainsKey("hosting"))
+            if (_products.IsProductGroupOffered(ProductGroups.Hosting) && !_shopperProducts.HasProductNamespace("hosting"))
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.LOGODESIGN:
-            if (_products.IsProductGroupOffered(ProductGroups.Logo) && !shopperProductData.ContainsKey(ProductIds.LogoDesign.ToString()))
+            if (_products.IsProductGroupOffered(ProductGroups.Logo) && !_shopperProducts.HasProductId(ProductIds.LogoDesign))
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.TRAFFIC_FACTS:
-            if (_products.IsProductGroupOffered(ProductGroups.Hosting) && !shopperProductData.ContainsKey("deluxestat"))
+            if (_products.IsProductGroupOffered(ProductGroups.Hosting) && !_shopperProducts.HasProductNamespace("deluxestat"))
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.HOSTING:
-            if (_products.IsProductGroupOffered(ProductGroups.Hosting) && !shopperProductData.ContainsKey("hosting"))
+            if (_products.IsProductGroupOffered(ProductGroups.Hosting) && !_shopperProducts.HasProductNamespace("hosting"))
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.WST:
             if (_products.IsProductGroupOffered(ProductGroups.WebSiteTonight)
-              && !shopperProductData.ContainsKey(ProductIds.website01pg.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.website05pg.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_E_1year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_E_2year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_E_3year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_E_4year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_E_5year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.website10pg.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_D_1year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_D_2year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_D_3year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_D_4year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_D_5year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.website20pg.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_P_1year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_P_2year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_P_3year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_P_4year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.WST_P_5year.ToString())
+              && !_shopperProducts.HasProductId(ProductIds.website01pg)
+              && !_shopperProducts.HasProductId(ProductIds.website05pg)
+              && !_shopperProducts.HasProductId(ProductIds.WST_E_1year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_E_2year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_E_3year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_E_4year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_E_5year)
+              && !_shopperProducts.HasProductId(ProductIds.website10pg)
+              && !_shopperProducts.HasProductId(ProductIds.WST_D_1year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_D_2year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_D_3year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_D_4year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_D_5year)
+              && !_shopperProducts.HasProductId(ProductIds.website20pg)
+              && !_shopperProducts.HasProductId(ProductIds.WST_P_1year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_P_2year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_P_3year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_P_4year)
+              && !_shopperProducts.HasProductId(ProductIds.WST_P_5year)
                )
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.TRAFFICB:
-            if (_products.IsProductGroupOffered(ProductGroups.TrafficBlazer) && !shopperProductData.ContainsKey("trafblazer"))
+            if (_products.IsProductGroupOffered(ProductGroups.TrafficBlazer) && !_shopperProducts.HasProductNamespace("trafblazer"))
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.EMAIL:
           case CrossSellConfigProductId.OFF:
-            if (_products.IsProductGroupOffered(ProductGroups.Email) && !shopperProductData.ContainsKey("email"))
+            if (_products.IsProductGroupOffered(ProductGroups.Email) && !_shopperProducts.HasProductNamespace("email"))
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.FAXTHRU_EMAIL:
             if (_products.IsProductGroupOffered(ProductGroups.FaxThruEmail)
-              && !shopperProductData.ContainsKey(ProductIds.FTE_Local_E.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.FTE_Local_D.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.FTE_Local_P.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.FTE_Toll_E.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.FTE_Toll_D.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.FTE_Toll_P.ToString())
+              && !_shopperProducts.HasProductId(ProductIds.FTE_Local_E)
+              && !_shopperProducts.HasProductId(ProductIds.FTE_Local_D)
+              && !_shopperProducts.HasProductId(ProductIds.FTE_Local_P)
+              && !_shopperProducts.HasProductId(ProductIds.FTE_Toll_E)
+              && !_shopperProducts.HasProductId(ProductIds.FTE_Toll_D)
+              && !_shopperProducts.HasProductId(ProductIds.FTE_Toll_P)
             )
             {
               isValid = true;
@@ -319,9 +335,9 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             break;
           case CrossSellConfigProductId.EEM:
             if (_products.IsProductGroupOffered(ProductGroups.ExpressEmailMarketing)
-              && !shopperProductData.ContainsKey(ProductIds.OGC_E.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.OGC_D.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.OGC_P.ToString())
+              && !_shopperProducts.HasProductId(ProductIds.OGC_E)
+              && !_shopperProducts.HasProductId(ProductIds.OGC_D)
+              && !_shopperProducts.HasProductId(ProductIds.OGC_P)
               )
             {
               isValid = true;
@@ -329,9 +345,9 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             break;
           case CrossSellConfigProductId.GROUP_CALENDAR:
             if (_products.IsProductGroupOffered(ProductGroups.OnlineGroupCalendar)
-              && !shopperProductData.ContainsKey(ProductIds.Calendar_E.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Calendar_D.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Calendar_P.ToString())
+              && !_shopperProducts.HasProductId(ProductIds.Calendar_E)
+              && !_shopperProducts.HasProductId(ProductIds.Calendar_D)
+              && !_shopperProducts.HasProductId(ProductIds.Calendar_P)
               )
             {
               isValid = true;
@@ -339,69 +355,69 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             break;
           case CrossSellConfigProductId.SSL_TURBO:
           case CrossSellConfigProductId.SSL_HIGH:
-            if (_products.IsProductGroupOffered(ProductGroups.SSLCertificates) && !shopperProductData.ContainsKey("sslcert"))
+            if (_products.IsProductGroupOffered(ProductGroups.SSLCertificates) && !_shopperProducts.HasProductNamespace("sslcert"))
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.CART:
             if (_products.IsProductGroupOffered(ProductGroups.QuickShoppingCart)
-              && !shopperProductData.ContainsKey(ProductIds.Cart_E_Monthly.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_D_Monthly.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_P_Monthly.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_E_1year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_E_2year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_E_3year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_E_4year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_E_5year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_D_1year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_D_2year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_D_3year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_D_4year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_D_5year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_P_1year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_P_2year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_P_3year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_P_4year.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Cart_P_5year.ToString())
+              && !_shopperProducts.HasProductId(ProductIds.Cart_E_Monthly)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_D_Monthly)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_P_Monthly)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_E_1year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_E_2year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_E_3year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_E_4year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_E_5year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_D_1year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_D_2year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_D_3year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_D_4year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_D_5year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_P_1year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_P_2year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_P_3year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_P_4year)
+              && !_shopperProducts.HasProductId(ProductIds.Cart_P_5year)
               )
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.CSITE:
-            if (_products.IsProductGroupOffered(ProductGroups.CSite) && !shopperProductData.ContainsKey("ideareg"))
+            if (_products.IsProductGroupOffered(ProductGroups.CSite) && !_shopperProducts.HasProductNamespace("ideareg"))
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.DNA:
             if (_products.IsProductGroupOffered(ProductGroups.DomainNameAftermarket)
-              && !shopperProductData.ContainsKey(ProductIds.DNA_DomainPurchase.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.DNA_ManagedOffer.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.DNA_ManagedAuction.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.DNA_TransAssuredOffer.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.DNA_PrivateOffer.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.DNA_PrivateAuction.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.DNA_TransAssuredAuction.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.DNA_Subscription.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.DNA_SubscriptionRenewal.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.DNA_SubscriptionMonitorBundle.ToString())
+              && !_shopperProducts.HasProductId(ProductIds.DNA_DomainPurchase)
+              && !_shopperProducts.HasProductId(ProductIds.DNA_ManagedOffer)
+              && !_shopperProducts.HasProductId(ProductIds.DNA_ManagedAuction)
+              && !_shopperProducts.HasProductId(ProductIds.DNA_TransAssuredOffer)
+              && !_shopperProducts.HasProductId(ProductIds.DNA_PrivateOffer)
+              && !_shopperProducts.HasProductId(ProductIds.DNA_PrivateAuction)
+              && !_shopperProducts.HasProductId(ProductIds.DNA_TransAssuredAuction)
+              && !_shopperProducts.HasProductId(ProductIds.DNA_Subscription)
+              && !_shopperProducts.HasProductId(ProductIds.DNA_SubscriptionRenewal)
+              && !_shopperProducts.HasProductId(ProductIds.DNA_SubscriptionMonitorBundle)
               )
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.MERCH_ACCT:
-            if (_products.IsProductGroupOffered(ProductGroups.MerchantAccount) && !shopperProductData.ContainsKey("merchacct"))
+            if (_products.IsProductGroupOffered(ProductGroups.MerchantAccount) && !_shopperProducts.HasProductNamespace("merchacct"))
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.PRO_RESELLER:
             if (_products.IsProductGroupOffered(ProductGroups.InstantReseller)
-              && !shopperProductData.ContainsKey(ProductIds.Reseller.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.Reseller_Renewal.ToString())
+              && !_shopperProducts.HasProductId(ProductIds.Reseller)
+              && !_shopperProducts.HasProductId(ProductIds.Reseller_Renewal)
               )
             {
               isValid = true;
@@ -409,27 +425,27 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             break;
           case CrossSellConfigProductId.SUPER_RESELLER:
             if (_products.IsProductGroupOffered(ProductGroups.InstantReseller)
-              && !shopperProductData.ContainsKey(ProductIds.ResellerPro.ToString())
-              && !shopperProductData.ContainsKey(ProductIds.ResellerPro_Renewal.ToString())
+              && !_shopperProducts.HasProductId(ProductIds.ResellerPro)
+              && !_shopperProducts.HasProductId(ProductIds.ResellerPro_Renewal)
               )
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.PRIVATE_DOMAINS:
-            if (_products.IsProductGroupOffered(ProductGroups.PrivateRegistrations) && !shopperProductData.ContainsKey("domains"))
+            if (_products.IsProductGroupOffered(ProductGroups.PrivateRegistrations) && !_shopperProducts.HasProductNamespace("domains"))
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.DELUXE_WHOIS:
-            if (_products.IsProductGroupOffered(ProductGroups.BusinessRegistration) && !shopperProductData.ContainsKey("domains"))
+            if (_products.IsProductGroupOffered(ProductGroups.BusinessRegistration) && !_shopperProducts.HasProductNamespace("domains"))
             {
               isValid = true;
             }
             break;
           case CrossSellConfigProductId.APPRAISAL:
-            if (_products.IsProductGroupOffered(ProductGroups.DomainNameAppraisal) && !shopperProductData.ContainsKey("domains"))
+            if (_products.IsProductGroupOffered(ProductGroups.DomainNameAppraisal) && !_shopperProducts.HasProductNamespace("domains"))
             {
               isValid = true;
             }
@@ -445,113 +461,5 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         }
       }
     }
-
-    #region Shopper data
-    private bool IsMirageCurrent(string shopperId)
-    {
-      bool result = true;
-
-      try
-      {
-        Dictionary<string, object> parms = new Dictionary<string, object>();
-        parms.Add("shopper_id", shopperId);
-        DataProviderRequestData request = new DataProviderRequestData(
-          shopperId, string.Empty, string.Empty, string.Empty, 0,
-          "ismiragecurrent", parms);
-        request.RequestTimeout = new TimeSpan(0,0,2);
-        DataProviderResponseData response = (DataProviderResponseData)Engine.Engine.ProcessRequest(request, PurchaseEmailEngineRequests.DataProvider);
-        DataSet ds = response.GetResponseObject() as DataSet;
-
-        if ((ds.Tables.Count > 0) && (ds.Tables[0].Rows.Count > 0))
-        {
-          if (shopperId == (ds.Tables[0].Rows[0][0]).ToString())
-          {
-            result = false;
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        string message = ex.Message + Environment.NewLine + ex.StackTrace;
-        AtlantisException aex = new AtlantisException("CrossSellConfig.IsMirageCurrent", string.Empty, "0",
-          message, "ShopperId=" + _orderData.ShopperId, _orderData.ShopperId, _orderData.OrderId,
-          string.Empty, string.Empty, 0);
-        Engine.Engine.LogAtlantisException(aex);
-      }
-
-      return result;
-    }
-
-    private DataSet GetDbDataSet(string shopperId, int privateLabelId)
-    {
-      string queryName = "currentproductgroups";
-      string useROSetting = DataCache.DataCache.GetAppSetting("PC_PRODUCTS_USE_RO").ToLowerInvariant();
-      if (useROSetting == "true")
-      {
-        queryName = "currentproductgroups_ro";
-      }
-
-      Dictionary<string, object> parms = new Dictionary<string, object>();
-      parms.Add("s_shopper_id", shopperId);
-      parms.Add("s_privateLabelID", privateLabelId);
-      DataProviderRequestData request = new DataProviderRequestData(shopperId,
-        string.Empty, string.Empty, string.Empty, 0, queryName, parms);
-      request.RequestTimeout = new TimeSpan(0,0,8);
-      DataProviderResponseData response = (DataProviderResponseData)Engine.Engine.ProcessRequest(request, PurchaseEmailEngineRequests.DataProvider);
-      return response.GetResponseObject() as DataSet;
-    }
-
-    private void AddRecentlyPurchasedProducts(string privateLabelId, string shopperId, Dictionary<string, int> products)
-    {
-      if (!string.IsNullOrEmpty(privateLabelId) && !string.IsNullOrEmpty(shopperId))
-      {
-        if (!IsMirageCurrent(shopperId))
-        {
-          DataSet dbSet = GetDbDataSet(shopperId, int.Parse(privateLabelId));
-          if (null != dbSet && dbSet.Tables.Count > 0)
-          {
-            if (dbSet.Tables[0].Rows.Count > 0)
-            {
-              foreach (DataRow dr in dbSet.Tables[0].Rows)
-              {
-                string key = "pg|" + dr.ItemArray[0];
-                if (!products.ContainsKey(key))
-                {
-                  products[key] = 1;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    public Dictionary<string, int> GetShopperProductDictionary(string shopperId, string privateLabelId, bool includeRecent)
-    {
-      Dictionary<string, int> result = new Dictionary<string, int>(StringComparer.InvariantCultureIgnoreCase);
-      if (!string.IsNullOrEmpty(privateLabelId) && !string.IsNullOrEmpty(shopperId))
-      {
-        try
-        {
-          result = new Dictionary<string, int>(DataCache.DataCache.GetShopperProduct(shopperId));
-          if (includeRecent)
-          {
-            AddRecentlyPurchasedProducts(privateLabelId, shopperId, result);
-          }
-        }
-        catch (Exception ex)
-        {
-          string message = ex.Message + System.Environment.NewLine + ex.StackTrace;
-          AtlantisException aex = new AtlantisException("CrossSellConfig.GetShopperProductDictionary", string.Empty, "0",
-            message, "ShopperId=" + _orderData.ShopperId, _orderData.ShopperId, _orderData.OrderId,
-            string.Empty, string.Empty, 0);
-          Engine.Engine.LogAtlantisException(aex);
-        }
-      }
-
-      return result;
-    }
-
-    #endregion
   }
 }

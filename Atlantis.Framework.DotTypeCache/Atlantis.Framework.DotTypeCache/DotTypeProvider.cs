@@ -42,14 +42,14 @@ namespace Atlantis.Framework.DotTypeCache
 
     public IDotTypeInfo InvalidDotType
     {
-      get { return StaticDotTypes.InvalidDotType; }
+      get { return Interface.InvalidDotType.Instance; }
     }
 
     public IDotTypeInfo GetDotTypeInfo(string dotType)
     {
       if (string.IsNullOrEmpty(dotType))
       {
-        return StaticDotTypes.InvalidDotType;
+        return Interface.InvalidDotType.Instance;
       }
 
       IDotTypeInfo result;
@@ -68,7 +68,7 @@ namespace Atlantis.Framework.DotTypeCache
       if (result == null)
       {
         result = StaticDotTypes.GetDotType(dotType);
-        if (result != StaticDotTypes.InvalidDotType)
+        if (result != Interface.InvalidDotType.Instance)
         {
           IDotTypeInfo multiRegistryDotType = MultiRegistryStaticDotTypes.GetMultiRegistryDotTypeIfAvailable(dotType);
           if (multiRegistryDotType != null)

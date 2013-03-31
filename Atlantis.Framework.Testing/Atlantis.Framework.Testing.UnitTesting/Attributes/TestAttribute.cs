@@ -2,11 +2,6 @@
 
 namespace Atlantis.Framework.Testing.UnitTesting
 {
-
-  /// <summary>
-  /// Summary description for UnitTestAttribute
-  /// </summary>
-  /// 
   [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
   public class TestAttribute : Attribute
   {

@@ -3,9 +3,6 @@
 
 namespace Atlantis.Framework.Testing.UnitTesting
 {
-  /// <summary>
-  /// Summary description for TestSetupAttribute
-  /// </summary>
   [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
   public class TestSetupAttribute : Attribute
   {

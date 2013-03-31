@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Testing.UnitTesting.BaseClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -9,9 +12,6 @@ using System.Threading;
 using System.Web;
 using System.Xml;
 using System.Xml.Xsl;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
-using Atlantis.Framework.Testing.UnitTesting.BaseClasses;
 
 namespace Atlantis.Framework.Testing.UnitTesting.Handlers
 {
@@ -53,7 +53,7 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
         var methods = HttpContext.Current.Request["testmethod"];
         if (!string.IsNullOrEmpty(methods))
         {
-          var separators = new[] {",", "|"};
+          var separators = new[] { ",", "|" };
           foreach (var method in methods.Split(separators, StringSplitOptions.RemoveEmptyEntries))
           {
             testMethods.Add(method.Trim());
@@ -65,7 +65,7 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
 
     private string XsltPath
     {
-      get { return HttpContext.Current.Request["xsltpath"] ?? string.Empty ; }
+      get { return HttpContext.Current.Request["xsltpath"] ?? string.Empty; }
     }
 
     private ISiteContext _siteContext;

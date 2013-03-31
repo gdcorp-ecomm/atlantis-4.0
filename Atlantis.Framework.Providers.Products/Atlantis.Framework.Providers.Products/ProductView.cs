@@ -1,5 +1,4 @@
 ﻿using System;
-using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Providers.Interface.Currency;
 
@@ -16,6 +15,7 @@ namespace Atlantis.Framework.Providers.Products
     private string _labelText;
     private PriceRoundingType _priceRoundingMethod = PriceRoundingType.RoundFractionsUpProperly;
     private SavingsRoundingType _savingsRoundingMethod = SavingsRoundingType.FloorSavingsProperly;
+    private ICurrencyProvider _currencyProvider;
 
     public IProduct Product
     {
@@ -40,16 +40,18 @@ namespace Atlantis.Framework.Providers.Products
       set { _isDefault = value; }
     }
 
-    internal ProductView(IProduct product, bool isDefault, PriceRoundingType priceRoundingMethod, SavingsRoundingType savingsRoundingMethod)
+    internal ProductView(ICurrencyProvider currencyProvider, IProduct product, bool isDefault, PriceRoundingType priceRoundingMethod, SavingsRoundingType savingsRoundingMethod)
     {
+      _currencyProvider = currencyProvider;
       _product = product;
       IsDefault = isDefault;
       _priceRoundingMethod = priceRoundingMethod;
       _savingsRoundingMethod = savingsRoundingMethod;
     }
 
-    internal ProductView(IProduct product, bool isDefault, int quantity, PriceRoundingType priceRoundingMethod, SavingsRoundingType savingsRoundingMethod)
+    internal ProductView(ICurrencyProvider currencyProvider, IProduct product, bool isDefault, int quantity, PriceRoundingType priceRoundingMethod, SavingsRoundingType savingsRoundingMethod)
     {
+      _currencyProvider = currencyProvider;
       _product = product;
       IsDefault = isDefault;
       _priceRoundingMethod = priceRoundingMethod;
@@ -104,7 +106,7 @@ namespace Atlantis.Framework.Providers.Products
         }
 
         int equivalentPrice = (int)Math.Floor(baseProduct.ListPrice.Price * factor);
-        result = new CurrencyPrice(equivalentPrice, baseProduct.ListPrice.CurrencyInfo, baseProduct.ListPrice.Type);
+        result = _currencyProvider.NewCurrencyPrice(equivalentPrice, baseProduct.ListPrice.CurrencyInfo, baseProduct.ListPrice.Type);
       }
       return result;
     }
@@ -126,7 +128,7 @@ namespace Atlantis.Framework.Providers.Products
         }
 
         int equivalentPrice = (int)Math.Floor(baseProduct.CurrentPrice.Price * factor);
-        result = new CurrencyPrice(equivalentPrice, baseProduct.CurrentPrice.CurrencyInfo, baseProduct.CurrentPrice.Type);
+        result = _currencyProvider.NewCurrencyPrice(equivalentPrice, baseProduct.CurrentPrice.CurrencyInfo, baseProduct.CurrentPrice.Type);
       }
 
       return result;
@@ -158,7 +160,7 @@ namespace Atlantis.Framework.Providers.Products
         }
       }
 
-      return new CurrencyPrice(resultPrice, price.CurrencyInfo, price.Type);
+      return _currencyProvider.NewCurrencyPrice(resultPrice, price.CurrencyInfo, price.Type);
     }
 
     public void CalculateSavings(IProduct baseProduct)
@@ -205,11 +207,11 @@ namespace Atlantis.Framework.Providers.Products
         double discountFactor = (100.0 - minimumSavingsPercent) / 100.0;
         if (SavingsRounding == SavingsRoundingType.FloorSavingsProperly)
         {
-          _viewPrice = new CurrencyPrice((int)(Math.Ceiling(baseListPrice.Price * discountFactor)), baseListPrice.CurrencyInfo, baseListPrice.Type);
+          _viewPrice = _currencyProvider.NewCurrencyPrice((int)(Math.Ceiling(baseListPrice.Price * discountFactor)), baseListPrice.CurrencyInfo, baseListPrice.Type);
         }
         else
         {
-          _viewPrice = new CurrencyPrice((int)(Math.Round(baseListPrice.Price * discountFactor)), baseListPrice.CurrencyInfo, baseListPrice.Type);
+          _viewPrice = _currencyProvider.NewCurrencyPrice((int)(Math.Round(baseListPrice.Price * discountFactor)), baseListPrice.CurrencyInfo, baseListPrice.Type);
         }
         _savingsPercentage = minimumSavingsPercent;
       }
@@ -226,11 +228,11 @@ namespace Atlantis.Framework.Providers.Products
         double discountFactor = (100.0 - (_savingsPercentage)) / 100.0;
         if (SavingsRounding == SavingsRoundingType.FloorSavingsProperly)
         {
-          _viewPrice = new CurrencyPrice((int)(Math.Ceiling(baseListPrice.Price * discountFactor)), baseListPrice.CurrencyInfo, baseListPrice.Type);
+          _viewPrice = _currencyProvider.NewCurrencyPrice((int)(Math.Ceiling(baseListPrice.Price * discountFactor)), baseListPrice.CurrencyInfo, baseListPrice.Type);
         }
         else
         {
-          _viewPrice = new CurrencyPrice((int)(Math.Round(baseListPrice.Price * discountFactor)), baseListPrice.CurrencyInfo, baseListPrice.Type);
+          _viewPrice = _currencyProvider.NewCurrencyPrice((int)(Math.Round(baseListPrice.Price * discountFactor)), baseListPrice.CurrencyInfo, baseListPrice.Type);
         }
       }
     }
@@ -240,7 +242,7 @@ namespace Atlantis.Framework.Providers.Products
       if (fixedDiscountPrice.Price > 0)
       {
         _isDiscounted = true;
-        _viewPrice = new CurrencyPrice(Math.Max(_product.CurrentPrice.Price - fixedDiscountPrice.Price, 0), 
+        _viewPrice = _currencyProvider.NewCurrencyPrice(Math.Max(_product.CurrentPrice.Price - fixedDiscountPrice.Price, 0), 
                                        _product.CurrentPrice.CurrencyInfo, 
                                        _product.CurrentPrice.Type);
 
@@ -328,7 +330,7 @@ namespace Atlantis.Framework.Providers.Products
         ICurrencyPrice result;
         if (Quantity > 1)
         {
-          result = new CurrencyPrice(UnitPrice.Price * Quantity, UnitPrice.CurrencyInfo, UnitPrice.Type);
+          result = _currencyProvider.NewCurrencyPrice(UnitPrice.Price * Quantity, UnitPrice.CurrencyInfo, UnitPrice.Type);
         }
         else
         {

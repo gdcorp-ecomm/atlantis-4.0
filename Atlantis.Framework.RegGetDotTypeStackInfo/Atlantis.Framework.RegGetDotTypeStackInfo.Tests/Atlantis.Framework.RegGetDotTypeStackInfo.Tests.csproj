@@ -52,20 +52,19 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegGetDotTypeStackInfoTests.cs" />
-    <Compile Include="TestContexts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
-      <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
-      <Name>Atlantis.Framework.DataCache</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
+      <Project>{3e299d3b-3c8d-455a-92a4-05ff6c60e6f3}</Project>
+      <Name>Atlantis.Framework.DataCacheService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
+      <Name>Atlantis.Framework.Engine</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.RegGetDotTypeStackInfo.Impl\Atlantis.Framework.RegGetDotTypeStackInfo.Impl.csproj">
       <Project>{03226862-26CE-43CE-82BF-C66BCDA37B65}</Project>

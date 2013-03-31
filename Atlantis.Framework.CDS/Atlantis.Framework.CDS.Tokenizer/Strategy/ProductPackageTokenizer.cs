@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Atlantis.Framework.CDS.Tokenizer.Interfaces;
 using Atlantis.Framework.CDS.Tokenizer.Tokens;
-using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
@@ -34,8 +33,13 @@ namespace Atlantis.Framework.CDS.Tokenizer.Strategy
           totalPrice = totalPrice + (tokens[ProductPackageToken.TERM_LABEL] == "monthly" ? pv.MonthlyListPrice.Price : pv.YearlyListPrice.Price);
         }
       }
-      price = new CurrencyPrice(totalPrice, currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional);
-      return currency.PriceText(price, false, tokens[ProductPackageToken.DROP_DECIMAL] == "dropdecimal");
+      price = currency.NewCurrencyPrice(totalPrice, currency.SelectedTransactionalCurrencyInfo, CurrencyPriceType.Transactional);
+      PriceFormatOptions formatOptions = PriceFormatOptions.None;
+      if (tokens[PriceToken.DROP_DECIMAL] == "dropdecimal")
+      {
+        formatOptions = PriceFormatOptions.DropDecimal;
+      }
+      return currency.PriceText(price, PriceTextOptions.None, formatOptions);
     }
   }
 }

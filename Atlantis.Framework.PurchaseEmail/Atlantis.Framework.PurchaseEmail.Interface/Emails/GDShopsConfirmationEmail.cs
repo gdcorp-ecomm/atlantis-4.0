@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Atlantis.Framework.MessagingProcess.Interface;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Providers.Containers;
 
 namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
 {

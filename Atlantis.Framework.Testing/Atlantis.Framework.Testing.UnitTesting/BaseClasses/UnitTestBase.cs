@@ -2,9 +2,6 @@
 
 namespace Atlantis.Framework.Testing.UnitTesting
 {
-  /// <summary>
-  /// Summary description for UnitTestPageBase
-  /// </summary>
   public class UnitTestBase
   {
 

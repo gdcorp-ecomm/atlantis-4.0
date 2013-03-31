@@ -1,7 +1,7 @@
-﻿using System.Web;
-using System.Web.SessionState;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using System.Web;
+using System.Web.SessionState;
 
 namespace Atlantis.Framework.BasePages
 {

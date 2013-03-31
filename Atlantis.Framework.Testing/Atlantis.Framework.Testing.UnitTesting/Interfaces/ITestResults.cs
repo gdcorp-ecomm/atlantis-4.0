@@ -1,6 +1,5 @@
-using System.Collections.Generic;
 using Atlantis.Framework.Testing.UnitTesting.BaseClasses;
-
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.Testing.UnitTesting
 {

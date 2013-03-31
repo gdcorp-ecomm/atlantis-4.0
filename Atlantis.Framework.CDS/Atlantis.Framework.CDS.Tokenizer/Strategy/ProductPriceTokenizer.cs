@@ -45,7 +45,12 @@ namespace Atlantis.Framework.CDS.Tokenizer.Strategy
         }
       }
 
-      return currency.PriceText(price, false, tokens[ProductToken.DROP_DECIMAL] == "dropdecimal");
+      PriceFormatOptions formatOptions = PriceFormatOptions.None;
+      if (tokens[PriceToken.DROP_DECIMAL] == "dropdecimal")
+      {
+        formatOptions = PriceFormatOptions.DropDecimal;
+      }
+      return currency.PriceText(price, PriceTextOptions.None, formatOptions);
     }
   }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using Atlantis.Framework.DotTypeCache.Interface;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using System.Collections.Generic;
+using Atlantis.Framework.Providers.Containers;
 
 namespace Atlantis.Framework.DotTypeCache
 {

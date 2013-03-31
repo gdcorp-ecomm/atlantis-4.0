@@ -119,7 +119,7 @@ namespace Atlantis.Framework.Providers.Products
 
       foreach (int productId in productIds)
       {
-        resultProductViewList.Add(new ProductView(GetProduct(productId), false, priceRoundingMethod, savingsRoundingMethod));
+        resultProductViewList.Add(new ProductView(CurrencyProvider, GetProduct(productId), false, priceRoundingMethod, savingsRoundingMethod));
       }
 
       return resultProductViewList;
@@ -138,7 +138,7 @@ namespace Atlantis.Framework.Providers.Products
       foreach (int productId in productIds)
       {
         bool isDefault = (productId == defaultId);
-        resultProductViewList.Add(new ProductView(GetProduct(productId), isDefault, priceRoundingMethod, savingsRoundingMethod));
+        resultProductViewList.Add(new ProductView(CurrencyProvider, GetProduct(productId), isDefault, priceRoundingMethod, savingsRoundingMethod));
         if (isDefault)
         {
           defaultSet = true;
@@ -161,7 +161,7 @@ namespace Atlantis.Framework.Providers.Products
         resultProductViewDictionary = new Dictionary<T, IProductView>();
         for (int i = 0; i < keys.Count; i++)
         {
-          resultProductViewDictionary.Add(keys[i], new ProductView(GetProduct(productIds[i]), false, priceRoundingMethod, savingsRoundingMethod));
+          resultProductViewDictionary.Add(keys[i], new ProductView(CurrencyProvider, GetProduct(productIds[i]), false, priceRoundingMethod, savingsRoundingMethod));
         }
       }
       return resultProductViewDictionary;
@@ -169,19 +169,19 @@ namespace Atlantis.Framework.Providers.Products
 
     public IProductView NewProductView(IProduct product, bool isDefault, int quantity, PriceRoundingType priceRoundingMethod, SavingsRoundingType savingsRoundingMethod)
     {
-      IProductView result = new ProductView(product, isDefault, quantity, priceRoundingMethod, savingsRoundingMethod);
+      IProductView result = new ProductView(CurrencyProvider, product, isDefault, quantity, priceRoundingMethod, savingsRoundingMethod);
       return result;
     }
 
     public IProductView NewProductView(IProduct product)
     {
-      IProductView result = new ProductView(product, false, 1, PriceRoundingType.RoundFractionsUpProperly, SavingsRoundingType.FloorSavingsProperly);
+      IProductView result = new ProductView(CurrencyProvider, product, false, 1, PriceRoundingType.RoundFractionsUpProperly, SavingsRoundingType.FloorSavingsProperly);
       return result;
     }
 
     public IProductView NewProductView(IProduct product, PriceRoundingType priceRoundingMethod, SavingsRoundingType savingsRoundingMethod)
     {
-      IProductView result = new ProductView(product, false, 1, priceRoundingMethod, savingsRoundingMethod);
+      IProductView result = new ProductView(CurrencyProvider, product, false, 1, priceRoundingMethod, savingsRoundingMethod);
       return result;
     }
 

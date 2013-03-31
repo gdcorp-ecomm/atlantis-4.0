@@ -47,7 +47,7 @@ namespace Atlantis.Framework.Testing.MockProviders
       {
         int result = KnownPrivateLabelIds.GoDaddy;
 
-        if (Manager.IsManager)
+        if ((IsManagerAvailable) && (Manager.IsManager))
         {
           result = Manager.ManagerPrivateLabelId;
         }
@@ -173,6 +173,11 @@ namespace Atlantis.Framework.Testing.MockProviders
         }
         return result;
       }
+    }
+
+    private bool IsManagerAvailable
+    {
+      get { return Container.CanResolve<IManagerContext>(); }
     }
 
     public IManagerContext Manager

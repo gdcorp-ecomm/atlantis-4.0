@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Atlantis.Framework.Interface;
+using System.Collections.Generic;
 using System.Web;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.BasePages.Providers
 {

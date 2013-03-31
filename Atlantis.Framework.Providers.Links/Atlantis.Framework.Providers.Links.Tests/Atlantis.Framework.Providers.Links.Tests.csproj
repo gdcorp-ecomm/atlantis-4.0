@@ -74,8 +74,12 @@
       <Project>{39A8B945-42C8-45E8-ADD6-5BC7EB73F423}</Project>
       <Name>Atlantis.Framework.LinkInfo.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
+      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
+      <Name>Atlantis.Framework.Providers.Containers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}</Project>
+      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
@@ -85,6 +89,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.Links.Interface\Atlantis.Framework.Providers.Links.Interface.csproj">
+      <Project>{9972e990-31f1-4c30-9bb5-ac1f3bd4e600}</Project>
+      <Name>Atlantis.Framework.Providers.Links.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links.csproj">
       <Project>{1A992CC0-680A-4E62-8691-C3C8C629142F}</Project>

@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Providers.Interface.Currency;
+﻿using Atlantis.Framework.DataCacheService;
+using Atlantis.Framework.Providers.Interface.Currency;
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -56,7 +57,11 @@ namespace Atlantis.Framework.Providers.Currency
 
     internal static CurrencyData GetCurrencyData(string key)
     {
-      string currencyDataXml = DataCache.DataCache.GetCurrencyDataXml(key);
+      string currencyDataXml;
+      using (var comCache = GdDataCacheOutOfProcess.CreateDisposable())
+      {
+        currencyDataXml = comCache.GetCurrencyDataXml();
+      }
       XElement currencyDataElement = XElement.Parse(currencyDataXml);
       CurrencyData result = new CurrencyData(currencyDataElement);
       return result;

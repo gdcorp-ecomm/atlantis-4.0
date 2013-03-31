@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.ManagerCategories.Interface;
+using Atlantis.Framework.DataCacheService;
 
 namespace Atlantis.Framework.ManagerCategories.Impl
 {
@@ -12,18 +12,21 @@ namespace Atlantis.Framework.ManagerCategories.Impl
       IResponseData result = null;
       try
       {
-        ManagerCategoriesRequestData request = requestData as ManagerCategoriesRequestData;
+        ManagerCategoriesRequestData request = (ManagerCategoriesRequestData)requestData;
 
-        Dictionary<string, string> managerAttributes;
-        List<int> managerCategories;
+        string cacheDataXml;
+        using (var comCache = GdDataCacheOutOfProcess.CreateDisposable())
+        {
+          cacheDataXml = comCache.GetMgrCategoriesForUser(request.ManagerUserId);
+        }
 
-        DataCache.DataCache.GetMgrCategoriesForUser(request.ManagerUserId, out managerAttributes, out managerCategories);
-        result = new ManagerCategoriesResponseData(managerAttributes, managerCategories);
-
+        result = ManagerCategoriesResponseData.FromCacheDataXml(cacheDataXml);
       }
       catch (Exception ex)
       {
-        result = new ManagerCategoriesResponseData(requestData, ex);
+        AtlantisException exception = new AtlantisException("ManagerCategoriesRequest.RequestHandler", "0", ex.Message + ex.StackTrace, requestData.ToXML(), null, null);
+        Engine.Engine.LogAtlantisException(exception);
+        result = ManagerCategoriesResponseData.Empty;
       }
       return result;
     }

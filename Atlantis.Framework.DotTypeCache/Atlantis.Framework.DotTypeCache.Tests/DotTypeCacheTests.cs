@@ -132,7 +132,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
-    public void InvalidDotType()
+    public void InvalidDotTypeValid()
     {
       IDotTypeInfo dotType = DotTypeCache.GetDotTypeInfo("MICCOBLAH");
       Assert.AreEqual(DotTypeCache.InvalidDotType, dotType);
@@ -1389,6 +1389,16 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       bool valid = dotTypeInfo.IsValidPreRegistrationPhase("Sunrise", "SRA", out preregphase);
 
       Assert.IsTrue(!valid && preregphase == null);
+    }
+
+    [TestMethod]
+    public void InvalidDotTypeLandingPageUrl()
+    {
+      IDotTypeInfo inValid = DotTypeProvider.GetDotTypeInfo("nowaythisiseverinthere");
+      Assert.AreEqual(InvalidDotType.Instance, inValid);
+      Assert.AreEqual(string.Empty, inValid.ApplicationControl.LandingPageUrl);
+      Assert.AreEqual(string.Empty, inValid.ApplicationControl.DotTypeDescription);
+      Assert.AreEqual(false, inValid.ApplicationControl.IsMultiRegistry);
     }
   }
 }

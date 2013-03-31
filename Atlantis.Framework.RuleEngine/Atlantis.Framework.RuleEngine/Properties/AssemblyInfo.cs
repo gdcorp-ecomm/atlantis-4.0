@@ -7,14 +7,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.RuleEngine")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
 #else
 [assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
 #endif
-
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Atlantis.Framework.RuleEnginee")]
-[assembly: AssemblyCompany("Go Daddy Operating Company, LLC")]
-[assembly: AssemblyCopyright("Copyright © 2012 Go Daddy Operating Company, LLC")]
+[assembly: AssemblyProduct("Atlantis.Framework.RuleEngine")]
+[assembly: AssemblyCompany("GoDaddy")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy 2012-2013 ")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

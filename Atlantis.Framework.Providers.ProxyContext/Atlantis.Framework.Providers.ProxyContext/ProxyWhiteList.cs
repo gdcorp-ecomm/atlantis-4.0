@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Atlantis.Framework.DataCacheService;
+using Atlantis.Framework.Interface;
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Providers.ProxyContext
 {
@@ -15,7 +16,13 @@ namespace Atlantis.Framework.Providers.ProxyContext
       try
       {
         string cacheDataRequest = string.Format(_PROXYCACHEREQUEST, proxyTypeId);
-        string xmlData = DataCache.DataCache.GetCacheData(cacheDataRequest);
+        string xmlData;
+
+        using (GdDataCacheOutOfProcess comCache = GdDataCacheOutOfProcess.CreateDisposable())
+        {
+          xmlData = comCache.GetCacheData(cacheDataRequest);
+        }
+
         if (!string.IsNullOrEmpty(xmlData))
         {
           XElement xmlDoc = XElement.Parse(xmlData);

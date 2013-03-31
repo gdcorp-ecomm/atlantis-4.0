@@ -6,7 +6,21 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 {
   public class InvalidDotType : IDotTypeInfo
   {
-    public InvalidDotType()
+    static readonly IDotTypeInfo _instance;
+
+    static InvalidDotType()
+    {
+      _instance = new InvalidDotType();
+    }
+
+    public static IDotTypeInfo Instance
+    {
+      get { return _instance; }
+    }
+
+    private ITLDApplicationControl _invalidApplicationControl = new InvalidApplicationControl();
+
+    private InvalidDotType()
     {
     }
 
@@ -275,7 +289,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 
     public ITLDApplicationControl ApplicationControl
     {
-      get { return null; }
+      get { return _invalidApplicationControl; }
     }
 
     public bool IsValidPreRegistrationPhase(string type, string subType, out ITLDPreRegistrationPhase preRegistrationPhase)
@@ -291,5 +305,22 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 
     #endregion
 
+    public class InvalidApplicationControl : ITLDApplicationControl
+    {
+      public string DotTypeDescription
+      {
+        get { return string.Empty; }
+      }
+
+      public string LandingPageUrl
+      {
+        get { return string.Empty; }
+      }
+
+      public bool IsMultiRegistry
+      {
+        get { return false; }
+      }
+    }
   }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace Atlantis.Framework.Testing.UnitTesting
+﻿namespace Atlantis.Framework.Testing.UnitTesting
 {
   public enum AvailableContentReturnTypes
   {

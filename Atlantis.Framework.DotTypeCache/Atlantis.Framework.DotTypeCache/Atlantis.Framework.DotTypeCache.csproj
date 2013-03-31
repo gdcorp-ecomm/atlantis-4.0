@@ -62,17 +62,9 @@
       <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
       <Name>Atlantis.Framework.DataCache</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.DCCDomainsDataCache\Atlantis.Framework.DCCDomainsDataCache.Impl\Atlantis.Framework.DCCDomainsDataCache.Impl.csproj">
-      <Project>{89873d19-5d77-4886-add3-cedbf196d270}</Project>
-      <Name>Atlantis.Framework.DCCDomainsDataCache.Impl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.DCCDomainsDataCache\Atlantis.Framework.DCCDomainsDataCache.Interface\Atlantis.Framework.DCCDomainsDataCache.Interface.csproj">
       <Project>{98f402fb-90d0-4bea-8d97-46a73e6363b8}</Project>
       <Name>Atlantis.Framework.DCCDomainsDataCache.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.DomainContactFields\Atlantis.Framework.DomainContactFields.Impl\Atlantis.Framework.DomainContactFields.Impl.csproj">
-      <Project>{3d75db33-f705-4c5d-8cf2-21ff27e67655}</Project>
-      <Name>Atlantis.Framework.DomainContactFields.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.DomainContactFields\Atlantis.Framework.DomainContactFields.Interface\Atlantis.Framework.DomainContactFields.Interface.csproj">
       <Project>{bd8f8fc4-8a78-4dde-8ed7-8caef06791fe}</Project>
@@ -86,9 +78,9 @@
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{CDB8B44E-47FC-4F39-96EF-207EB67772FF}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
+      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
+      <Name>Atlantis.Framework.Providers.Containers</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.RegDotTypeProductIds\Atlantis.Framework.RegDotTypeProductIds.Interface\Atlantis.Framework.RegDotTypeProductIds.Interface.csproj">
       <Project>{ae02c23a-ded2-492e-bf1b-be5d6e7a805a}</Project>
@@ -97,10 +89,6 @@
     <ProjectReference Include="..\..\Atlantis.Framework.RegDotTypeRegistry\Atlantis.Framework.RegDotTypeRegistry.Interface\Atlantis.Framework.RegDotTypeRegistry.Interface.csproj">
       <Project>{970b458c-3fdf-45d7-8b0e-3d8818907ffd}</Project>
       <Name>Atlantis.Framework.RegDotTypeRegistry.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Impl\Atlantis.Framework.TLDDataCache.Impl.csproj">
-      <Project>{b6638632-2265-4f7e-a6a2-c494391dfbab}</Project>
-      <Name>Atlantis.Framework.TLDDataCache.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Interface\Atlantis.Framework.TLDDataCache.Interface.csproj">
       <Project>{2a615d6f-9604-40c1-bc6a-2659e3b97bcc}</Project>

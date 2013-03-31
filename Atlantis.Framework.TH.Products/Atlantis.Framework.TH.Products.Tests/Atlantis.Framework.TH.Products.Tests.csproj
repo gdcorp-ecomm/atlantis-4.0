@@ -91,6 +91,10 @@
       <Project>{d7260ee7-f41c-4ac4-87ff-959bd107a4de}</Project>
       <Name>Atlantis.Framework.ProductOffer.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
+      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
+      <Name>Atlantis.Framework.Providers.Containers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency.csproj">
       <Project>{8581eb6c-5093-473e-ab04-318ce071e7fd}</Project>
       <Name>Atlantis.Framework.Providers.Currency</Name>
@@ -98,6 +102,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
       <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.Interface\Atlantis.Framework.Providers.Preferences.Interface.csproj">
+      <Project>{1a50e3b8-4a5c-4e48-bad4-17c5092f0dde}</Project>
+      <Name>Atlantis.Framework.Providers.Preferences.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Products\Atlantis.Framework.Providers.Products\Atlantis.Framework.Providers.Products.csproj">
       <Project>{f078f62f-8023-4e25-8834-973377000d57}</Project>

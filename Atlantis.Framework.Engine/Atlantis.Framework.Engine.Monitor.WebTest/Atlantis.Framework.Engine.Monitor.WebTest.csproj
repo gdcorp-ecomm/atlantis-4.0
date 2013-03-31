@@ -90,9 +90,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
+      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
+      <Name>Atlantis.Framework.Providers.Containers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Engine.Monitor\Atlantis.Framework.Engine.Monitor.csproj">
       <Project>{8f3e2866-0624-4c9d-94fb-043bf64c24ce}</Project>

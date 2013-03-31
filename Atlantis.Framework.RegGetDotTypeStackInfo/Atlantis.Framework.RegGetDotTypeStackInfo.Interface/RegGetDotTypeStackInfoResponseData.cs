@@ -1,15 +1,11 @@
-﻿using System;
+﻿using Atlantis.Framework.Interface;
+using System;
 using System.Collections.Generic;
-using System.Web;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
 
 namespace Atlantis.Framework.RegGetDotTypeStackInfo.Interface
 {
   public class RegGetDotTypeStackInfoResponseData : IResponseData
   {
-    private IShopperContext _shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>();
-    private ISiteContext _siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>();
     private AtlantisException _exception;
     private string _stackXML = string.Empty;
     private Dictionary<string, Dictionary<string, DotTypeStackItem>> _dotTypeStackItems = new Dictionary<string, Dictionary<string, DotTypeStackItem>>();
@@ -25,31 +21,22 @@ namespace Atlantis.Framework.RegGetDotTypeStackInfo.Interface
       _dotTypeStackItems = dotTypeStackInfo;
       _stackXML = stackXML;
       _exception = exAtlantis;
-    }    
+    }
 
     public RegGetDotTypeStackInfoResponseData(Dictionary<string, Dictionary<string, DotTypeStackItem>> dotTypeStackInfo, string stackXML, Exception ex)
     {
       _dotTypeStackItems = dotTypeStackInfo;
       _stackXML = stackXML;
 
-      AtlantisException aex = new AtlantisException("DotTypeStackCacheInfo.DotTypeStackCacheInfo"
-                                                    , HttpContext.Current.Request.Url.ToString()
-                                                    , "0"
-                                                    , ex.Message
-                                                    , ex.Source
-                                                    , this._shopperContext.ShopperId
-                                                    , string.Empty
-                                                    , HttpContext.Current.Request.UserHostAddress
-                                                    , this._siteContext.Pathway
-                                                    , this._siteContext.PageCount);
+      AtlantisException aex = new AtlantisException("DotTypeStackCacheInfo.DotTypeStackCacheInfo", "0", ex.Message + ex.StackTrace, stackXML, null, null);
       Engine.Engine.LogAtlantisException(aex);
     }
 
-      public int GetPriceForTld(string tld, string promoCode)
-      {
-          return GetPriceForTld(tld, promoCode, true);
-      }
-    
+    public int GetPriceForTld(string tld, string promoCode)
+    {
+      return GetPriceForTld(tld, promoCode, true);
+    }
+
     public int GetPriceForTld(string tld, string promoCode, bool logExceptionOnError)
     {
       int price = 0;
@@ -59,27 +46,11 @@ namespace Atlantis.Framework.RegGetDotTypeStackInfo.Interface
       }
       else
       {
-          if (logExceptionOnError)
-          {
-              AtlantisException aex = new AtlantisException("DotTypeStackCache.GetPriceForTld"
-                                                            ,
-                                                            HttpContext.Current != null
-                                                                ? HttpContext.Current.Request.Url.ToString()
-                                                                : null
-                                                            , "0"
-                                                            ,
-                                                            "The promo code or tld does not exist in the stack tlds data cache"
-                                                            , "DotTypeStackCache"
-                                                            , this._shopperContext.ShopperId
-                                                            , string.Empty
-                                                            ,
-                                                            HttpContext.Current != null
-                                                                ? HttpContext.Current.Request.UserHostAddress
-                                                                : null
-                                                            , this._siteContext.Pathway
-                                                            , this._siteContext.PageCount);
-              Engine.Engine.LogAtlantisException(aex);
-          }
+        if (logExceptionOnError)
+        {
+          AtlantisException aex = new AtlantisException("DotTypeStackCache.GetPriceForTld", "0", "The promo code or tld does not exist in the stack tlds data cache", _stackXML, null, null);
+          Engine.Engine.LogAtlantisException(aex);
+        }
       }
       return price;
     }
@@ -93,16 +64,7 @@ namespace Atlantis.Framework.RegGetDotTypeStackInfo.Interface
       }
       else
       {
-        AtlantisException aex = new AtlantisException("DotTypeStackCache.GetStackIdForTld"
-                                                , HttpContext.Current != null ? HttpContext.Current.Request.Url.ToString() : null
-                                                , "0"
-                                                , "The promo code or tld does not exist in the stack tlds datacache"
-                                                , "DotTypeStackCache"
-                                                , this._shopperContext.ShopperId
-                                                , string.Empty
-                                                , HttpContext.Current != null ? HttpContext.Current.Request.UserHostAddress : null
-                                                , this._siteContext.Pathway
-                                                , this._siteContext.PageCount);
+        AtlantisException aex = new AtlantisException("DotTypeStackCache.GetStackIdForTld", "0", "The promo code or tld does not exist in the stack tlds data cache", _stackXML, null, null);
         Engine.Engine.LogAtlantisException(aex);
       }
       return stackId;
@@ -112,7 +74,7 @@ namespace Atlantis.Framework.RegGetDotTypeStackInfo.Interface
     {
       get
       {
-        return _dotTypeStackItems.Count; 
+        return _dotTypeStackItems.Count;
       }
     }
 

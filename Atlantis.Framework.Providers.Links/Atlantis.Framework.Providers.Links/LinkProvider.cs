@@ -86,13 +86,10 @@ namespace Atlantis.Framework.Providers.Links
         if (_contextHost == null)
         {
           _contextHost = HttpContext.Current.Request.Url.Host.ToLowerInvariant();
-          if (Container.CanResolve<IProxyContext>())
+          IProxyContext proxy;
+          if (Container.TryResolve(out proxy))
           {
-            IProxyContext proxy = Container.Resolve<IProxyContext>();
-            if (proxy.IsLocalARR)
-            {
-              _contextHost = proxy.ARRHost;
-            }
+            _contextHost = proxy.ContextHost;
           }
         }
         return _contextHost;

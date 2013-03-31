@@ -77,6 +77,10 @@
       <Project>{3c228090-226d-435d-ac13-be073ccdfae2}</Project>
       <Name>Atlantis.Framework.PLSignupInfo.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
+      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
+      <Name>Atlantis.Framework.Providers.Containers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency.csproj">
       <Project>{8581eb6c-5093-473e-ab04-318ce071e7fd}</Project>
       <Name>Atlantis.Framework.Providers.Currency</Name>

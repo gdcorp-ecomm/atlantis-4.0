@@ -1,4 +1,3 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{42158F30-0F14-4543-B79D-B98C6AA3A158}"
@@ -25,24 +24,26 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockProviders", "..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj", "{5487DEF2-0FA7-4B77-9AAD-0355784589D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Containers", "..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj", "{C333E679-494E-422D-AB5E-E4C0EC94ACD5}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
+		SccNumberOfProjects = 13
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.TH.Currency.sln
-		SccProjectName0 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath0 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName1 = ..\\Atlantis.Framework.Tokens\\Atlantis.Framework.Tokens.Interface\\Atlantis.Framework.Tokens.Interface.csproj
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.TH.Currency.sln
-		SccProjectName1 = ../Atlantis.Framework.Tokens/Atlantis.Framework.Tokens.Interface
-		SccLocalPath1 = ..\\Atlantis.Framework.Tokens\\Atlantis.Framework.Tokens.Interface
-		SccProjectUniqueName2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectName1 = ../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\Atlantis.Framework.Tokens\\Atlantis.Framework.Tokens.Interface\\Atlantis.Framework.Tokens.Interface.csproj
 		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.TH.Currency.sln
-		SccProjectName2 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath2 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccLocalPath3 = .
+		SccProjectName2 = ../Atlantis.Framework.Tokens/Atlantis.Framework.Tokens.Interface
+		SccLocalPath2 = ..\\Atlantis.Framework.Tokens\\Atlantis.Framework.Tokens.Interface
+		SccProjectUniqueName3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.TH.Currency.sln
+		SccProjectName3 = ../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath3 = ..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
 		SccProjectUniqueName4 = Atlantis.Framework.TH.Currency.Tests\\Atlantis.Framework.TH.Currency.Tests.csproj
 		SccProjectName4 = Atlantis.Framework.TH.Currency.Tests
 		SccLocalPath4 = Atlantis.Framework.TH.Currency.Tests
@@ -73,6 +74,10 @@ Global
 		SccProjectTopLevelParentUniqueName11 = Atlantis.Framework.TH.Currency.sln
 		SccProjectName11 = ../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockProviders
 		SccLocalPath11 = ..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders
+		SccProjectUniqueName12 = ..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers.csproj
+		SccProjectTopLevelParentUniqueName12 = Atlantis.Framework.TH.Currency.sln
+		SccProjectName12 = ../Atlantis.Framework.Providers.Containers/Atlantis.Framework.Providers.Containers
+		SccLocalPath12 = ..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +128,10 @@ Global
 		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,5 +146,6 @@ Global
 		{3C228090-226D-435D-AC13-BE073CCDFAE2} = {42158F30-0F14-4543-B79D-B98C6AA3A158}
 		{2F8983B4-801B-461A-9D76-26A58A496261} = {42158F30-0F14-4543-B79D-B98C6AA3A158}
 		{5487DEF2-0FA7-4B77-9AAD-0355784589D6} = {42158F30-0F14-4543-B79D-B98C6AA3A158}
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {42158F30-0F14-4543-B79D-B98C6AA3A158}
 	EndGlobalSection
 EndGlobal

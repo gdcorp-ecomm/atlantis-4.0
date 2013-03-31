@@ -45,18 +45,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveProxyTypes.cs" />
+    <Compile Include="AkamaiHeaderValues.cs" />
     <Compile Include="ARRHeaderValues.cs" />
+    <Compile Include="CountrySiteHeaderValues.cs" />
+    <Compile Include="CountrySiteProxyWhiteList.cs" />
     <Compile Include="HeaderValuesBase.cs" />
     <Compile Include="HeaderValueStatus.cs" />
+    <Compile Include="ProxyData.cs" />
     <Compile Include="ProxyWhiteList.cs" />
     <Compile Include="ResellerDomainHeaderValues.cs" />
     <Compile Include="ResellerProxyWhitelist.cs" />
+    <Compile Include="SmartlingHeaderValues.cs" />
     <Compile Include="TranslationHeaderValues.cs" />
     <Compile Include="TranslationProxyWhitelist.cs" />
     <Compile Include="WebProxyContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebProxyData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
+      <Project>{3e299d3b-3c8d-455a-92a4-05ff6c60e6f3}</Project>
+      <Name>Atlantis.Framework.DataCacheService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
       <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
       <Name>Atlantis.Framework.DataCache</Name>
@@ -69,6 +80,9 @@
       <Project>{2474F971-3E1D-4608-9D60-B0A9A1CA8D13}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DeveloperGuidance.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,5 @@
-﻿using System;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
+using System;
 
 namespace Atlantis.Framework.BasePages.Authentication
 {

@@ -1,11 +1,7 @@
 ﻿using System;
 
-
 namespace Atlantis.Framework.Testing.UnitTesting
 {
-  /// <summary>
-  /// Summary description for TestTeardown
-  /// </summary>
   [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
   public class TestTeardownAttribute : Attribute
   {

@@ -1,5 +1,5 @@
-﻿using System.Web;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
+using System.Web;
 
 namespace Atlantis.Framework.BasePages.Providers
 {
@@ -33,13 +33,7 @@ namespace Atlantis.Framework.BasePages.Providers
           }
           else
           {
-            string sHost = HttpContext.Current.Request.Url.Host.ToLowerInvariant();
-            IProxyContext proxy = RequestHelper.GetProxyContext();
-            if ((proxy != null) && (proxy.IsLocalARR))
-            {
-              sHost = proxy.ARRHost.ToLowerInvariant();
-            }
-
+            string sHost = RequestHelper.GetContextHost();
             if (sHost.Contains("godaddy.com") || sHost.Contains("godaddy-com.ide") || sHost.Contains("godaddymobile.com") || sHost.Contains("godaddymobile-com.ide"))
               _contextId = ContextIds.GoDaddy;
             else if (sHost.Contains("bluerazor.com") || sHost.Contains("bluerazor-com.ide"))

@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Diagnostics;
+using Atlantis.Framework.Interface;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -13,11 +14,14 @@ namespace Atlantis.Framework.Tokens.Interface
     const string _TOKENDATA = "tokendata";
     const string _DEFAULTTOKENPATTERN = @"\[@T\[(?<tokenkey>[a-zA-z0-9]*?):(?<tokendata>.*?)\]@T\]";
     private static Dictionary<string, ITokenHandler> _tokenHandlers;
+    private static readonly Dictionary<string, TokenHandlerStats> _tokenHandlersStats;
     private static List<Regex> _tokenExpressions;
 
     static TokenManager()
     {
       _tokenHandlers = new Dictionary<string, ITokenHandler>(StringComparer.OrdinalIgnoreCase);
+      _tokenHandlersStats = new Dictionary<string, TokenHandlerStats>(StringComparer.OrdinalIgnoreCase);
+
       _tokenExpressions = new List<Regex>();
 
       Regex defaultTokenEx = new Regex(_DEFAULTTOKENPATTERN, RegexOptions.Singleline | RegexOptions.Compiled);
@@ -53,6 +57,8 @@ namespace Atlantis.Framework.Tokens.Interface
       }
 
       _tokenHandlers[tokenHandler.TokenKey] = tokenHandler;
+      _tokenHandlersStats[tokenHandler.TokenKey] = new TokenHandlerStats();
+
     }
 
     public static void RegisterTokenExpression(Regex tokenExpression)
@@ -153,7 +159,6 @@ namespace Atlantis.Framework.Tokens.Interface
       }
       else
       {
-
         StringBuilder workingText = new StringBuilder(inputText);
 
         List<string> errors;
@@ -213,7 +218,10 @@ namespace Atlantis.Framework.Tokens.Interface
               tokenHandler = null;
             }
 
-            group = new InProcessTokenGroup(tokenHandler);
+            TokenHandlerStats tokenHandlerStats;
+            _tokenHandlersStats.TryGetValue(tokenKey, out tokenHandlerStats);
+
+            group = new InProcessTokenGroup(tokenHandler, tokenHandlerStats);
             trackingGroups[tokenKey] = group;
             result.Add(group);
             group.AddInProcessToken(tokenKey, tokenData, matchValue);

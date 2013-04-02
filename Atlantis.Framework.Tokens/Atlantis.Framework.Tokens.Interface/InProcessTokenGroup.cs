@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Diagnostics;
+using Atlantis.Framework.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,13 +12,16 @@ namespace Atlantis.Framework.Tokens.Interface
     private const string _HANDLERERROR = "Handler Exception running EvaluateTokens";
 
     public ITokenHandler TokenHandler { get; private set; }
+    private TokenHandlerStats _tokenHandlerStats;
 
     List<IToken> _inProcessTokens;
     HashSet<string> _uniqueReplacements;
 
-    public InProcessTokenGroup(ITokenHandler handler)
+    public InProcessTokenGroup(ITokenHandler handler, TokenHandlerStats handlerStats)
     {
       TokenHandler = handler;
+      _tokenHandlerStats = handlerStats;
+
       _inProcessTokens = new List<IToken>();
       _uniqueReplacements = new HashSet<string>(StringComparer.Ordinal);
     }
@@ -66,12 +70,33 @@ namespace Atlantis.Framework.Tokens.Interface
       }
       else if (TokenHandler != null)
       {
+        Stopwatch callTimer = null;
+        TokenHandlerStats stats;
+        bool isException = false;
+
         try
         {
+          callTimer = Stopwatch.StartNew();
           result = TokenHandler.EvaluateTokens(_inProcessTokens, container);
+          callTimer.Stop();
+
+          if (_tokenHandlerStats != null)
+          {
+            _tokenHandlerStats.LogSuccess(callTimer);
+          }
         }
         catch (Exception ex)
         {
+          if (callTimer != null)
+          {
+            callTimer.Stop();
+          }
+
+          if (_tokenHandlerStats != null)
+          {
+            _tokenHandlerStats.LogFailure(callTimer);
+          }
+
           SetErrorOnTokens(_HANDLERERROR);
           if (debug != null)
           {

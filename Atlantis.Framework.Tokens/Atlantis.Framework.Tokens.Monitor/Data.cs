@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Reflection;
 using System.Xml.Linq;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Tokens.Interface;
 
 namespace Atlantis.Framework.Tokens.Monitor
@@ -35,6 +36,23 @@ namespace Atlantis.Framework.Tokens.Monitor
           tokenHandlerElement.Add(new XAttribute("assembly", tokenHandler.Value.GetType().Assembly.GetName().Name.Replace("Atlantis.Framework.", "A.F.")));
           tokenHandlerElement.Add(new XAttribute("description", GetHandlerAssemblyDescription(tokenHandler.Value)));
           tokenHandlerElement.Add(new XAttribute("version", GetHandlerAssemblyVersion(tokenHandler.Value)));
+
+          var statsFieldInfo = typeof(TokenManager).GetField("_tokenHandlersStats", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance);
+          if (statsFieldInfo != null)
+          {
+            var conditionHandlersStats = (Dictionary<string, TokenHandlerStats>)statsFieldInfo.GetValue(null);
+
+            var stats = new CalculatedStats(conditionHandlersStats[tokenHandler.Key]);
+            tokenHandlerElement.Add(
+              new XAttribute("callsperminute", stats.CallsPerMinute.ToString("F2")),
+              new XAttribute("succeeded", stats.Succeeded),
+              new XAttribute("failed", stats.Failed),
+              new XAttribute("failurerate", stats.FailureRate.ToString("0.0%")),
+              new XAttribute("avgsuccessms", stats.AverageSuccessTime.TotalMilliseconds.ToString("F2")),
+              new XAttribute("avgfailms", stats.AverageFailTime.TotalMilliseconds.ToString("F2")),
+              new XAttribute("runminutes", stats.RunTime.TotalMinutes.ToString("F2")));
+          }
+
           root.Add(tokenHandlerElement);
         }
       }
@@ -103,5 +121,48 @@ namespace Atlantis.Framework.Tokens.Monitor
 
       return assemblyDescription;
     }
+
+    private class CalculatedStats
+    {
+      public int Failed { get; private set; }
+      public int Succeeded { get; private set; }
+      public double CallsPerMinute { get; private set; }
+      public double FailureRate { get; private set; }
+
+      public TimeSpan RunTime { get; private set; }
+      public TimeSpan AverageFailTime { get; private set; }
+      public TimeSpan AverageSuccessTime { get; private set; }
+
+      public CalculatedStats(ConfigElementStats stats)
+      {
+        Failed = stats.Failed;
+        Succeeded = stats.Succeeded;
+
+        AverageFailTime = stats.CalculateAverageFailTime();
+        AverageSuccessTime = stats.CalculateAverageSuccessTime();
+
+        RunTime = DateTime.Now.Subtract(stats.StartTime);
+        int total = Succeeded + Failed;
+
+        if (RunTime.TotalMinutes > 0)
+        {
+          CallsPerMinute = total / RunTime.TotalMinutes;
+        }
+        else
+        {
+          CallsPerMinute = 0;
+        }
+
+        if (total > 0)
+        {
+          FailureRate = (double)Failed / total;
+        }
+        else
+        {
+          FailureRate = 0;
+        }
+      }
+    }
+
   }
 }

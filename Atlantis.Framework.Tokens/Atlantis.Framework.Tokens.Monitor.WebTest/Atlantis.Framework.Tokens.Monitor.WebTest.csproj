@@ -62,6 +62,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Data\inputdata2.txt" />
+    <EmbeddedResource Include="Data\inputdata1.txt" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />

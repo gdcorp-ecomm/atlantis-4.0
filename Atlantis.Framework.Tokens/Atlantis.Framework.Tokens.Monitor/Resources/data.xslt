@@ -18,14 +18,29 @@
           Tokens Interface Version: <xsl:value-of select="//tokenhandlers/@tokensinterfaceversion"/><br />
         </div>
         <br/>
-        <div>
-          Registered Token Handlers:
-        </div>
+        <br />
+        <div>Calls with Failures</div>
         <div>
           <xsl:call-template name="TokenHandlersTable">
-            <xsl:with-param name="handlersList" select="//tokenhandlers/tokenhandler"></xsl:with-param>
+            <xsl:with-param name="handlersList" select="//tokenhandlers/tokenhandler[@failed != '0']"></xsl:with-param>
           </xsl:call-template>
         </div>
+        <br />
+        <br />
+        <div>Calls with No Failures</div>
+        <div>
+          <xsl:call-template name="TokenHandlersTable">
+            <xsl:with-param name="handlersList" select="//tokenhandlers/tokenhandler[@failed = '0' and @succeeded != '0']"></xsl:with-param>
+          </xsl:call-template>
+        </div>
+        <br />
+        <br />
+        <div>Not Called</div>
+        <div>
+          <xsl:call-template name="TokenHandlersTable">
+            <xsl:with-param name="handlersList" select="//tokenhandlers/tokenhandler[@failed = '0' and @succeeded = '0']"></xsl:with-param>
+          </xsl:call-template>
+        </div>        
       </body>
     </html>
   </xsl:template>
@@ -39,6 +54,13 @@
         <th>Assembly</th>
         <th>Description</th>
         <th>Version</th>
+        <th>Calls/min</th>
+        <th>Success</th>
+        <th>Fail</th>
+        <th>Fail%</th>
+        <th>Avg Success (ms)</th>
+        <th>Avg Fail (ms)</th>
+        <th>TimeFrame (min)</th>
       </tr>
       <xsl:for-each select="$handlersList/.">
         <tr>
@@ -67,6 +89,27 @@
           </td>
           <td>
             <xsl:value-of select="./@version"/>
+          </td>
+          <td>
+            <xsl:value-of select="./@callsperminute"/>
+          </td>
+          <td>
+            <xsl:value-of select="./@succeeded"/>
+          </td>
+          <td>
+            <xsl:value-of select="./@failed"/>
+          </td>
+          <td>
+            <xsl:value-of select="./@failurerate"/>
+          </td>
+          <td>
+            <xsl:value-of select="./@avgsuccessms"/>
+          </td>
+          <td>
+            <xsl:value-of select="./@avgfailms"/>
+          </td>
+          <td>
+            <xsl:value-of select="./@runminutes"/>
           </td>
         </tr>
       </xsl:for-each>

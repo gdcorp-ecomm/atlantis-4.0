@@ -7,6 +7,7 @@ namespace Atlantis.Framework.Providers.ProxyContext
   {
     const string _AKAMAIORIGINALIP = "X-Akamai-OriginalIP";
     const string _AKAMAISECRET = "X-Akamai-Secret";
+    const string _AKAMAIHOST = "X-Akamai-Host";
 
     public override HeaderValueStatus CheckForProxyHeaders(string sourceIpAddress, out Interface.IProxyData proxyData)
     {
@@ -19,14 +20,14 @@ namespace Atlantis.Framework.Providers.ProxyContext
       HeaderValueStatus result = HeaderValueStatus.Invalid;
 
       string originalIP = GetFirstHeaderValue(_AKAMAIORIGINALIP);
-      string originalHost = HttpContext.Current.Request.Url.Host;
+      string originalHost = GetFirstHeaderValue(_AKAMAIHOST);
       string secret = GetFirstHeaderValue(_AKAMAISECRET);
 
-      if ((originalIP == null) && (secret == null))
+      if ((originalIP == null) && (secret == null) && (originalHost == null))
       {
         result = HeaderValueStatus.Empty;
       }
-      else if ((originalIP != null) && (secret != null))
+      else if ((originalIP != null) && (secret != null) && (originalHost != null))
       {
         string validSecrets = DataCache.DataCache.GetAppSetting("ATLANTIS_PROXY_AKAMAI_SECRET");
         bool isSecretValid = validSecrets.Contains(secret);

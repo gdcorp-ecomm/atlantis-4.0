@@ -46,6 +46,7 @@ namespace Atlantis.Framework.Providers.ProxyContext.Tests
     const string _TXLANGUAGE = "kl";
     const string _COUNTRYORIGINHOST = "jp.originalhost.com";
     const string _AKAMAISECRET = "DSADEBUG";
+    const string _AKAMAIHOST = "yy.originalhost.com";
     const string _SMARTLINGORIGINHOST = "zz.originalhost.com";
     const string _SMARTLINGSECRET = "SLDEBUG";
     const string _SMARTLINGLANGUAGE = "fr-FR";
@@ -79,6 +80,7 @@ namespace Atlantis.Framework.Providers.ProxyContext.Tests
     {
       headers["X-Akamai-OriginalIP"] = ipAddress;
       headers["X-Akamai-Secret"] = _AKAMAISECRET;
+      headers["X-Akamai-Host"] = _AKAMAIHOST;
     }
 
     private void AppendSmartlingHeaders(Dictionary<string, string> headers, string ipAddress)
@@ -456,8 +458,8 @@ namespace Atlantis.Framework.Providers.ProxyContext.Tests
       Assert.AreEqual(AKAMAIORIGINIP, context.OriginIP);
       Assert.AreEqual(AKAMAIORIGINIP, akamaiData.OriginalIP);
 
-      Assert.AreEqual(_NONPROXIEDHOST, context.OriginHost);
-      Assert.AreEqual(_NONPROXIEDHOST, context.ContextHost);
+      Assert.AreEqual(_AKAMAIHOST, context.OriginHost);
+      Assert.AreEqual(_AKAMAIHOST, context.ContextHost);
     }
 
     [TestMethod]
@@ -494,8 +496,8 @@ namespace Atlantis.Framework.Providers.ProxyContext.Tests
       Assert.AreNotEqual(ARRORIGINIP, context.OriginIP);
       Assert.AreEqual(ARRORIGINIP, arrData.OriginalIP);
 
-      Assert.AreEqual(_NONPROXIEDHOST, context.OriginHost);
-      Assert.AreEqual(_NONPROXIEDHOST, context.ContextHost);
+      Assert.AreEqual(_AKAMAIHOST, context.OriginHost);
+      Assert.AreEqual(_AKAMAIHOST, context.ContextHost);
     }
 
     [TestMethod]

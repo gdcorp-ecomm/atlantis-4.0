@@ -5,8 +5,16 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.FastballPromoBanners.Impl")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release")]
+#endif
+
+
 [assembly: AssemblyCompany("Go Daddy, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.FastballPromoBanners.Impl")]
 [assembly: AssemblyCopyright("Copyright © Go Daddy, Inc. 2011")]

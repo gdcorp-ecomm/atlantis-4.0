@@ -18,6 +18,8 @@ namespace Atlantis.Framework.FastballPromoBanners.Interface
 
     public int PrivateLabelId { get; private set; }
 
+    public string TransactionalCurrency { get; private set; }
+
     /// <summary>
     /// Optional.  C3 Rep Id.
     /// </summary>
@@ -38,6 +40,7 @@ namespace Atlantis.Framework.FastballPromoBanners.Interface
             candidateData.SetAttributeValue("PrivateLabelID", PrivateLabelId);
           }
           candidateData.SetAttributeValue("ISC", Isc);
+          candidateData.SetAttributeValue("TransactionalCurrency", TransactionalCurrency);
 
           _candidateRequest = candidateData.ToString(SaveOptions.DisableFormatting);
         }
@@ -78,6 +81,7 @@ namespace Atlantis.Framework.FastballPromoBanners.Interface
     public FastballPromoBannersRequestData(int applicationId,
                                            string placement,
                                            string isc,
+                                           string transactionalCurrency,
                                            string shopperId,
                                            int privateLabelId,
                                            string sourceUrl,
@@ -91,12 +95,13 @@ namespace Atlantis.Framework.FastballPromoBanners.Interface
       Isc = isc;
       PrivateLabelId = privateLabelId;
       RequestTimeout = _defaultTimeout;
+      TransactionalCurrency = transactionalCurrency;
     }
 
     public override string GetCacheMD5()
     {
       MD5 md5 = MD5.Create();
-      byte[] inputBytes = Encoding.ASCII.GetBytes(string.Format("{0}:{1}:{2}:{3}", ShopperID, Isc, ApplicationId, Placement));
+      byte[] inputBytes = Encoding.ASCII.GetBytes(string.Format("{0}:{1}:{2}:{3}:{4}", ShopperID, Isc, ApplicationId, Placement, TransactionalCurrency));
       byte[] hashBytes = md5.ComputeHash(inputBytes);
 
       StringBuilder sb = new StringBuilder();

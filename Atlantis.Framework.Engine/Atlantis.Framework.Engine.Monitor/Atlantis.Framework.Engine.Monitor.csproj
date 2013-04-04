@@ -44,12 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EngineCallStats\EngineCallStatsProvider.cs" />
     <Compile Include="FirewallTest.cs" />
     <Compile Include="Firewall\FirewallResult.cs" />
     <Compile Include="Firewall\TimeoutSocket.cs" />
     <Compile Include="MonitorData.cs" />
     <Compile Include="MonitorDataTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EngineCallStats\EngineCallRequestStats.cs" />
     <Compile Include="Web\EngineMonitorHttpHandler.cs" />
     <Compile Include="Web\EngineMonitorRouteCollectionExtensions.cs" />
     <Compile Include="Web\EngineMonitorRouteHandler.cs" />

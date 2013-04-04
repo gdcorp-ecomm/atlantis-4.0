@@ -79,6 +79,22 @@ namespace Atlantis.Framework.Engine.Monitor.EngineCallStats
                   break;
                 case "requesttype":
                   stats.RequestType = requestInfo.Value;
+
+                  ConfigElement configElement;
+                  if (Engine.TryGetConfigElement(Convert.ToInt32(requestInfo.Value), out configElement))
+                  {
+                    try
+                    {
+                      var wsConfigElement = configElement as WsConfigElement;
+                      if (wsConfigElement != null)
+                      {
+                        stats.WebServiceUrl = wsConfigElement.WSURL;
+                      }
+                    }
+                    catch
+                    {
+                    }
+                  }
                   break;
                 case "requestdetails":
                   stats.RequestDetails = requestInfo.Value;
@@ -110,6 +126,12 @@ namespace Atlantis.Framework.Engine.Monitor.EngineCallStats
           var data = "<p>" + "Request class = " + stat.RequestClassName + "</p>";
           data += "<p>" + "Start time = " + stat.StartTime.ToString(CultureInfo.InvariantCulture) + "</p>";
           data += "<p>" + "End time = " + stat.EndTime.ToString(CultureInfo.InvariantCulture) + "</p>";
+
+          if (!string.IsNullOrEmpty(stat.WebServiceUrl))
+          {
+            data += "<p>" + "Web Service Url = " + HttpContext.Current.Server.HtmlEncode(stat.WebServiceUrl);
+          }
+
           data += "<p>" + "Request details = " + HttpContext.Current.Server.HtmlEncode(stat.RequestDetails) + "</p>";
           data += "<p>" + "Response details = " + HttpContext.Current.Server.HtmlEncode(stat.ResponseDetails);
 

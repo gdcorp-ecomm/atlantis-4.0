@@ -14,7 +14,7 @@ namespace Atlantis.Framework.BasePages.Providers
 
   public class GdgManagerContextProvider : ProviderBase, IManagerContext
   {
-    public static event ManagerLoggingDelegate OnManagerLogging;
+
 
     private const int _WWD_PLID = 1387;
     private const string _MGRSHOPPERQSKEY = "mgrshopper";
@@ -308,17 +308,10 @@ namespace Atlantis.Framework.BasePages.Providers
 
     private void LogManagerException(string message, string data)
     {
-      if (OnManagerLogging == null)
-      {
-        AtlantisException managerException = new AtlantisException(
+      AtlantisException managerException = new AtlantisException(
           "GdgManagerContextProvider.DetermineManager", RequestUrl, "403", message, data,
           _managerShopperId, string.Empty, ClientIP, string.Empty, 0);
-        Engine.Engine.LogAtlantisException(managerException);
-      }
-      else
-      {
-        OnManagerLogging(message, data);
-      }
+      Engine.Engine.LogAtlantisException(managerException);
     }
 
     #region IManagerContext Members

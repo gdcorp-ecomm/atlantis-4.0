@@ -627,7 +627,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       if (eulaProvider.ConfiguredEULA.Count > 0)
       {
         itemsTextBuilder.Append("<br /><br /><table cellspacing='1' cellpadding='3' border='0' class='bodyText' bgcolor='#EEEEEE' ");
-        itemsTextBuilder.Append("style=\"font-size: 12px; color: black; font-family: arial,sans serif;width:auto;\">");
+        itemsTextBuilder.Append("style=\"font-size: 12px; color: black; font-family: arial,sans serif;width:100%;\">");
         itemsTextBuilder.Append("<tr><td colspan='3' style='line-height:5px'>&nbsp;</td></tr>");
         itemsTextBuilder.Append("<tr><td colspan='3' class='bodyText'><b>[%%LCST.REQ.UTOS_IMPORTANT_INFO%%]:</b></td></tr>");
         if (eulaProvider.ConfiguredEULA.Contains(eulaProvider.GetEULAData(EULARuleType.GiftCard)))
@@ -642,7 +642,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             itemsTextBuilder.Append("</td></tr>");
           }
         }
-        itemsTextBuilder.Append("<tr><td style='line-height:5px'>&nbsp;</td></tr>");
+        itemsTextBuilder.Append("<tr><td style='line-height:5px;width:30%;'>&nbsp;</td></tr>");
 
 
         bool hostingConciergeHasShown = false;
@@ -658,15 +658,15 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
             itemsTextBuilder.Append("<tr>");
             if (!string.IsNullOrEmpty(productName))
             {
-              itemsTextBuilder.AppendFormat("<td width=130px class='bodyText' style='padding-left:3px'>{0} </td>", productName);
+              itemsTextBuilder.AppendFormat("<td class='bodyText' style='padding-left:3pxwidth:30%;'>{0} </td>", productName);
             }
             if (!string.IsNullOrEmpty(productInfoURL))
             {
-              itemsTextBuilder.AppendFormat("<td width=130px class='bodyText'><a href='{0}'>[%%LCST.REQ.UTOS_PRODUCT_INFO%%]</a></td>", productInfoURL);
+              itemsTextBuilder.AppendFormat("<td style='width:30%;' class='bodyText'><a href='{0}'>[%%LCST.REQ.UTOS_PRODUCT_INFO%%]</a></td>", productInfoURL);
             }
             if (!string.IsNullOrEmpty(legalInfoURL))
             {
-              itemsTextBuilder.AppendFormat("<td class='bodyText'><a href='{0}'>{1}</a></td>", legalInfoURL, GetAgreementTypeText(eulaData.AgreementType));
+              itemsTextBuilder.AppendFormat("<td style='width:30%;' class='bodyText'><a href='{0}'>{1}</a></td>", legalInfoURL, GetAgreementTypeText(eulaData.AgreementType));
             }
             itemsTextBuilder.Append("</tr>");
 
@@ -687,7 +687,7 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
                   break;
               }
             }
-            itemsTextBuilder.Append("<tr><td style='line-height:5px'>&nbsp;</td></tr>");
+            itemsTextBuilder.Append("<tr><td width='30%' style='line-height:5px'>&nbsp;</td></tr>");
 
           }
         }

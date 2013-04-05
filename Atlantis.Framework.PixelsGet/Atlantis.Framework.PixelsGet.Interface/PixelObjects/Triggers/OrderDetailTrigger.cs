@@ -5,6 +5,8 @@ using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 using Atlantis.Framework.PixelsGet.Interface.Constants;
+using Atlantis.Framework.Providers.Currency;
+using Atlantis.Framework.Providers.Interface.Currency;
 
 namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 {
@@ -17,6 +19,30 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
     public override string TriggerType()
     {
       return PixelXmlNames.TriggerTypeOrderDetail;
+    }
+
+    public static ICurrencyPrice ConvertTransactionalToUSD(ICurrencyPrice transactionalPrice)
+    {
+      ICurrencyPrice result = transactionalPrice;
+      if (transactionalPrice != null && transactionalPrice.Type == CurrencyPriceType.Transactional)
+      {
+        ICurrencyInfo transactionalInfo = transactionalPrice.CurrencyInfo;
+        ICurrencyInfo usdInfo = CurrencyData.GetCurrencyInfo("USD");
+        if (usdInfo != null)
+        {
+          if ((!transactionalPrice.CurrencyInfo.Equals(usdInfo)) && (transactionalInfo.ExchangeRatePricing > 0))
+          {
+            double convertedDouble = Math.Round(transactionalPrice.Price * transactionalInfo.ExchangeRatePricing);
+            int convertedPrice = Int32.MaxValue;
+            if (convertedDouble < Int32.MaxValue)
+            {
+              convertedPrice = Convert.ToInt32(convertedDouble);
+            }
+            result = new CurrencyPrice(convertedPrice, usdInfo, CurrencyPriceType.Transactional);
+          }
+        }
+      }
+      return result;
     }
 
     public override bool ShouldFirePixel(bool isPixelAlreadyTriggered, List<Pixel> alreadyFiredPixels, ref string triggerReturn)
@@ -43,25 +69,38 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
             }
             else
             {
-              int fireOrderDetailValueInt = 0;
-              int.TryParse(fireOrderDetailValue, out fireOrderDetailValueInt);
-
               int orderValueInt = GetIntAttribute(_orderDetail, fireOrderDetailName, 0);
 
-              switch (fireOrderDetailComparison)
+              int fireOrderDetailValueInt = 0;
+              if (fireOrderDetailValue.Length > 0)
               {
-                case PixelXmlNames.ComparisonGreaterThan:
-                  shouldFirePixel = (orderValueInt > fireOrderDetailValueInt);
-                  break;
-                case PixelXmlNames.ComparisonGreaterThanOrEqual:
-                  shouldFirePixel = (orderValueInt >= fireOrderDetailValueInt);
-                  break;
-                case PixelXmlNames.ComparisonLessThan:
-                  shouldFirePixel = (orderValueInt < fireOrderDetailValueInt);
-                  break;
-                case PixelXmlNames.ComparisonLessThanOrEqual:
-                  shouldFirePixel = (orderValueInt <= fireOrderDetailValueInt);
-                  break;
+                if (fireOrderDetailName.Equals("_total_total", StringComparison.OrdinalIgnoreCase) && fireOrderDetailValue[0] = '$' && fireOrderDetailValue.Length > 1)
+                {
+                  fireOrderDetailValue = fireOrderDetailValue.Substring(1);
+                  int.TryParse(fireOrderDetailValue, out fireOrderDetailValueInt);
+
+                  string convertToCurrency = GetStringAttribute(_orderDetail, "transactioncurrency", "");
+                  orderValueInt = ConvertTransactionalToUSD(new CurrencyPrice(orderValueInt, convertToCurrency, CurrencyPriceType.Transactional));
+                }
+                else
+                {
+                  int.TryParse(fireOrderDetailValue, out fireOrderDetailValueInt);
+                }
+                switch (fireOrderDetailComparison)
+                {
+                  case PixelXmlNames.ComparisonGreaterThan:
+                    shouldFirePixel = (orderValueInt > fireOrderDetailValueInt);
+                    break;
+                  case PixelXmlNames.ComparisonGreaterThanOrEqual:
+                    shouldFirePixel = (orderValueInt >= fireOrderDetailValueInt);
+                    break;
+                  case PixelXmlNames.ComparisonLessThan:
+                    shouldFirePixel = (orderValueInt < fireOrderDetailValueInt);
+                    break;
+                  case PixelXmlNames.ComparisonLessThanOrEqual:
+                    shouldFirePixel = (orderValueInt <= fireOrderDetailValueInt);
+                    break;
+                }
               }
             }
 

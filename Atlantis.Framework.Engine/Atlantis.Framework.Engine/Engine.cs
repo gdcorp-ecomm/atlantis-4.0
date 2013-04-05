@@ -309,6 +309,12 @@ namespace Atlantis.Framework.Engine
       }
     }
 
+    public static void LogToGoDadLog(AtlantisException exAtlantis)
+    {
+      DefaultEngineLogger oLogger=new DefaultEngineLogger();
+      oLogger.LogAtlantisException(exAtlantis);
+    }
+
     public static LoggingStatusType LoggingStatus
     {
       get { return _loggingStatus; }

@@ -74,13 +74,15 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
               int fireOrderDetailValueInt = 0;
               if (fireOrderDetailValue.Length > 0)
               {
-                if (fireOrderDetailName.Equals("_total_total", StringComparison.OrdinalIgnoreCase) && fireOrderDetailValue[0] = '$' && fireOrderDetailValue.Length > 1)
+                if (fireOrderDetailName.Equals("_total_total", StringComparison.OrdinalIgnoreCase) && fireOrderDetailValue[0] == '$' && fireOrderDetailValue.Length > 1)
                 {
                   fireOrderDetailValue = fireOrderDetailValue.Substring(1);
                   int.TryParse(fireOrderDetailValue, out fireOrderDetailValueInt);
 
-                  string convertToCurrency = GetStringAttribute(_orderDetail, "transactioncurrency", "");
-                  orderValueInt = ConvertTransactionalToUSD(new CurrencyPrice(orderValueInt, convertToCurrency, CurrencyPriceType.Transactional));
+                  string convertToCurrency = GetStringAttribute(_orderDetail, "transactioncurrency", "USD");
+                  ICurrencyInfo currentInfo = CurrencyData.GetCurrencyInfo(convertToCurrency);
+                  ICurrencyPrice currentPrice = ConvertTransactionalToUSD(new CurrencyPrice(orderValueInt, currentInfo, CurrencyPriceType.Transactional));
+                  orderValueInt = currentPrice.Price;
                 }
                 else
                 {

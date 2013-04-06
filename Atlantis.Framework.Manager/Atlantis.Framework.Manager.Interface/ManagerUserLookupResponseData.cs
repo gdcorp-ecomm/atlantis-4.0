@@ -15,6 +15,8 @@ namespace Atlantis.Framework.Manager.Interface
       get { return _ex == null; }
     }
 
+    public static ManagerUserLookupResponseData Empty { get; private set; }
+
     public ManagerUserLookupResponseData(ManagerUserData managerUser)
     {
       ManagerUser = managerUser;

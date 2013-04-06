@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Security.Principal;
 using System.Web;
 using System.Web.SessionState;
 
@@ -28,6 +29,15 @@ namespace Atlantis.Framework.Testing.MockHttpContext
       mockContext.Items["AspSession"] = session;
 
       HttpContext.Current = mockContext;
+    }
+
+    public static void SetUser()
+    {
+      var windowsIdentity = WindowsIdentity.GetCurrent();
+      if (windowsIdentity != null && windowsIdentity.AuthenticationType != null)
+      {
+        HttpContext.Current.User = new GenericPrincipal(new GenericIdentity(windowsIdentity.Name, windowsIdentity.AuthenticationType), new string[0]);  
+      }
     }
   }
 }

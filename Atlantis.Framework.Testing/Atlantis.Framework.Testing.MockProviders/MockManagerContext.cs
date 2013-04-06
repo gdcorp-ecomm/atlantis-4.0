@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System;
+using Atlantis.Framework.Interface;
 using System.Collections.Specialized;
 using System.Web;
 
@@ -20,7 +21,7 @@ namespace Atlantis.Framework.Testing.MockProviders
         bool result = false;
         if (HttpContext.Current.Items[MockManagerContextSettings.IsManager] != null)
         {
-          result = (bool)HttpContext.Current.Items[MockManagerContextSettings.IsManager];
+          result = Convert.ToBoolean(HttpContext.Current.Items[MockManagerContextSettings.IsManager]);
         }
         return result;
       }
@@ -77,7 +78,7 @@ namespace Atlantis.Framework.Testing.MockProviders
         int result = 0;
         if (HttpContext.Current.Items[MockManagerContextSettings.PrivateLabelId] != null)
         {
-          result = (int)HttpContext.Current.Items[MockManagerContextSettings.PrivateLabelId];
+          result = Convert.ToInt32(HttpContext.Current.Items[MockManagerContextSettings.PrivateLabelId]);
         }
         return result;
       }

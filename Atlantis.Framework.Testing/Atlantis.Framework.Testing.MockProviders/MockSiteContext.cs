@@ -55,7 +55,7 @@ namespace Atlantis.Framework.Testing.MockProviders
         {
           if (HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] != null)
           {
-            result = (int)HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId];
+            result = Convert.ToInt32(HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId]);
           }
         }
         return result;
@@ -93,7 +93,7 @@ namespace Atlantis.Framework.Testing.MockProviders
           object pageCount = HttpContext.Current.Items[MockSiteContextSettings.PageCount];
           if ((pageCount != null) && (pageCount is int))
           {
-            result = (int)pageCount;
+            result = Convert.ToInt32(pageCount);
           }
         }
         return result;
@@ -152,7 +152,7 @@ namespace Atlantis.Framework.Testing.MockProviders
         {
           if (HttpContext.Current.Items[MockSiteContextSettings.IsRequestInternal] != null)
           {
-            result = (bool)HttpContext.Current.Items[MockSiteContextSettings.IsRequestInternal];
+            result = Convert.ToBoolean(HttpContext.Current.Items[MockSiteContextSettings.IsRequestInternal]);
           }
         }
         return result;

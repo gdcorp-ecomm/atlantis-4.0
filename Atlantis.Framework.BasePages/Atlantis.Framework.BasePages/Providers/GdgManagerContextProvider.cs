@@ -173,24 +173,30 @@ namespace Atlantis.Framework.BasePages.Providers
       bool result = false;
       domain = null;
       userId = null;
-
-      WindowsIdentity windowsIdentity = HttpContext.Current.User.Identity as WindowsIdentity;
-      if ((windowsIdentity != null) && (windowsIdentity.IsAuthenticated))
+      try
       {
-        string[] nameParts = windowsIdentity.Name.Split('\\');
-        if (nameParts.Length == 2)
+        WindowsIdentity windowsIdentity = HttpContext.Current.User.Identity as WindowsIdentity;
+        if ((windowsIdentity != null) && (windowsIdentity.IsAuthenticated))
         {
-          domain = nameParts[0];
-          userId = nameParts[1];
-          result = true;
+          string[] nameParts = windowsIdentity.Name.Split('\\');
+          if (nameParts.Length == 2)
+          {
+            domain = nameParts[0];
+            userId = nameParts[1];
+            result = true;
+          }
+          else
+          {
+            LogManagerException("Windows identity cannot be determined.", windowsIdentity.Name);
+          }
         }
-        else
+
+        if (!result)
         {
-          LogManagerException("Windows identity cannot be determined.", windowsIdentity.Name);
+          LogManagerException("Windows identity cannot be determined.", "Windows authentication issue.");
         }
       }
-
-      if (!result)
+      catch
       {
         LogManagerException("Windows identity cannot be determined.", "Windows authentication issue.");
       }

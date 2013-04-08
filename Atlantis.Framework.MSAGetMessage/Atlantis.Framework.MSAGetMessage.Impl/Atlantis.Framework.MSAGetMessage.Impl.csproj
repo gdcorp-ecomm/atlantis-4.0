@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7D9D82B9-229C-4047-8C57-B74B4ED9FA49}</ProjectGuid>
+    <ProjectGuid>{DCDDBF95-5571-4E2D-B6A5-F1A4F716ACE8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.MSA.Interface</RootNamespace>
-    <AssemblyName>Atlantis.Framework.MSA.Interface</AssemblyName>
+    <RootNamespace>Atlantis.Framework.MSAGetMessage.Impl</RootNamespace>
+    <AssemblyName>Atlantis.Framework.MSAGetMessage.Impl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -36,8 +36,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,13 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DisplayError.cs" />
-    <Compile Include="MailApiResponse.cs" />
-    <Compile Include="MailApiResponseState.cs" />
-    <Compile Include="MailApiUtil.cs" />
-    <Compile Include="MailFolder.cs" />
-    <Compile Include="MessageHeader.cs" />
-    <Compile Include="MessageList.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -20,8 +20,8 @@ namespace Atlantis.Framework.MSAGetFolderList.Impl
       {
 
         MSAGetFolderListRequestData getFolderListRequestData = (MSAGetFolderListRequestData)requestData;
-        MSAGetFolderListResponseData result;
-        GetFolderListResponse responseData = new GetFolderListResponse();
+        MSAGetFolderListResponseData getFolderListResponseData;
+        GetFolderListResponse getFolderListResponse = new GetFolderListResponse();
         try
         {
         
@@ -31,11 +31,11 @@ namespace Atlantis.Framework.MSAGetFolderList.Impl
           webServiceUrl += config.GetConfigValue("ServicePath");
 
 
-          HttpWebResponse folderListRequest = MailApiUtil.sendMailAPIRequest(webServiceUrl, BodyString,
+          HttpWebResponse webResponse = MailApiUtil.sendMailAPIRequest(webServiceUrl, BodyString,
                                                                              getFolderListRequestData.Hash,
                                                                              getFolderListRequestData.ApiKey);
 
-          Stream responseStream = folderListRequest.GetResponseStream();
+          Stream responseStream = webResponse.GetResponseStream();
           StreamReader responseReader = new StreamReader(responseStream, Encoding.UTF8);
           string jsonResponse = responseReader.ReadToEnd();
 
@@ -43,21 +43,21 @@ namespace Atlantis.Framework.MSAGetFolderList.Impl
 
           DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(GetFolderListResponse));
 
-          responseData = (GetFolderListResponse)serializer.ReadObject(stream);
+          getFolderListResponse = (GetFolderListResponse)serializer.ReadObject(stream);
           responseStream.Close();
           responseReader.Close();
           stream.Close();
-          result = new MSAGetFolderListResponseData(responseData);
+          getFolderListResponseData = new MSAGetFolderListResponseData(getFolderListResponse);
 
         }
         catch (Exception ex)
         {
           AtlantisException aex = new AtlantisException(requestData, "MSALoginUserRequest.RequestHandler", ex.Message,
                                                         ex.StackTrace, ex);
-          result = new MSAGetFolderListResponseData(aex);
+          getFolderListResponseData = new MSAGetFolderListResponseData(aex);
         }
 
-        return result;
+        return getFolderListResponseData;
       }
     }
 }

@@ -1,29 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.MSA.Interface;
 
-namespace Atlantis.Framework.MSAGetFolderList.Interface
+namespace Atlantis.Framework.MSAGetMessage.Interface
 {
-  public class MSAGetFolderListResponseData : IResponseData
+  public class MSAGetMessageResponseData: IResponseData
   {    
     AtlantisException _exception;
     bool _success = true;
 
-    public List<MailFolder> MailFolders { get; set; }
+    public Message Message { get; set; }
 
-    public MSAGetFolderListResponseData()
+    public MSAGetMessageResponseData()
     {
 
     }
 
-    public MSAGetFolderListResponseData(GetFolderListResponse response)
+    public MSAGetMessageResponseData(GetMessageResponse response)
     {
-      MailFolders = response.MailFolders;
-    }
-  
+      Message = response.Message;
+    }  
 
-    public MSAGetFolderListResponseData(AtlantisException ex)
+    public MSAGetMessageResponseData(AtlantisException ex)
     {
       _exception = ex;
       _success = false;

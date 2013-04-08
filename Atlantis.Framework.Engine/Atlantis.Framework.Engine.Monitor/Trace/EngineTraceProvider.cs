@@ -141,7 +141,14 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
 
         if (EngineTraceType == EngineTraceTypes.Details)
         {
-          request["requestDetails"] = requestData.ToXML();
+          try
+          {
+            request["requestDetails"] = requestData.ToXML();
+          }
+          catch (Exception)
+          {
+            request["requestDetails"] = "Could not parse to xml";
+          }
         }
 
         _requestTrace[requestId] = request;
@@ -157,7 +164,14 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
         {
           if (EngineTraceType == EngineTraceTypes.Details)
           {
-            request["responseDetails"] = responseData.ToXML();
+            try
+            {
+              request["responseDetails"] = responseData.ToXML();
+            }
+            catch (Exception)
+            {
+              request["responseDetails"] = "Could not parse to xml";
+            }
           }
           request["end"] = DateTime.Now.ToString(CultureInfo.InvariantCulture);
 
@@ -201,7 +215,7 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
                         stats.WebServiceUrl = wsConfigElement.WSURL;
                       }
                     }
-                    catch
+                    catch (Exception)
                     {
                     }
                   }

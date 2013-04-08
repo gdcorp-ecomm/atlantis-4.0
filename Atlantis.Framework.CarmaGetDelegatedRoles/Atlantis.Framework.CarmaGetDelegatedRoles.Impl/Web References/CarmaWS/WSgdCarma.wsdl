@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s0="urn:WSgdCarmaService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSgdCarmaService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WSgdCarmaService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SendInvitationIn">
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="bstrEmailAddress" type="s:string" />
+    <wsdl:part name="bstrRecipientFirstName" type="s:string" />
+    <wsdl:part name="bstrRecipientLastName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendInvitationOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateRoleIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="bstrRole" type="s:string" />
+    <wsdl:part name="bstrDesc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateRoleOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRoleDataIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="lRoleID" type="s:int" />
+    <wsdl:part name="bstrName" type="s:string" />
+    <wsdl:part name="bstrDesc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRoleDataOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRolesIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetRolesOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeprecateRoleIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="lRoleID" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="DeprecateRoleOut">
+    <wsdl:part name="return" type="s:short" />
+  </wsdl:message>
+  <wsdl:message name="AssociateIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="lResourceID" type="s:int" />
+    <wsdl:part name="lResourceType" type="s:int" />
+    <wsdl:part name="lRoleID" type="s:int" />
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="bstrSecondaryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AssociateOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeassociateIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="lResourceID" type="s:int" />
+    <wsdl:part name="lResourceType" type="s:int" />
+    <wsdl:part name="lRoleID" type="s:int" />
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="bstrSecondaryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeassociateOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeassociateAllIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="lResourceID" type="s:int" />
+    <wsdl:part name="lResourceType" type="s:int" />
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="bstrSecondaryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeassociateAllOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RevokeTypeIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="bstrSecondaryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RevokeTypeOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RevokeAllIn">
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="bstrSecondaryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RevokeAllOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustedShoppersIn">
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustedShoppersOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDelegatedResourcesIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="bstrSecondaryID" type="s:string" />
+    <wsdl:part name="lPageNo" type="s:int" />
+    <wsdl:part name="lRowsPerPage" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetDelegatedResourcesOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDelegatedRolesIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="lResourceID" type="s:int" />
+    <wsdl:part name="lResourceType" type="s:int" />
+    <wsdl:part name="bstrSecondaryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDelegatedRolesOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetManagedResourcesIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="lPageNo" type="s:int" />
+    <wsdl:part name="lRowsPerPage" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetManagedResourcesOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetManagedResourcesByShopperIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="bstrSecondaryID" type="s:string" />
+    <wsdl:part name="lPageNo" type="s:int" />
+    <wsdl:part name="lRowsPerPage" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetManagedResourcesByShopperOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDelegatesByResourceIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="lResourceID" type="s:int" />
+    <wsdl:part name="lResourceType" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetDelegatesByResourceOut">
+    <wsdl:part name="return" type="s:string" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AssociateListIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="lResourceID" type="s:int" />
+    <wsdl:part name="lResourceType" type="s:int" />
+    <wsdl:part name="bstrRoleList" type="s:string" />
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="bstrSecondaryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AssociateListOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ClearAndAssociateIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="lResourceID" type="s:int" />
+    <wsdl:part name="lResourceType" type="s:int" />
+    <wsdl:part name="bstrRoleList" type="s:string" />
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="bstrSecondaryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ClearAndAssociateOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveTrustedShopperIn">
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="bstrSecondaryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveTrustedShopperOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveByResourceIn">
+    <wsdl:part name="lApplicationID" type="s:int" />
+    <wsdl:part name="bstrPrimaryID" type="s:string" />
+    <wsdl:part name="lResourceID" type="s:int" />
+    <wsdl:part name="lResourceType" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="RemoveByResourceOut">
+    <wsdl:part name="return" type="s:short" />
+    <wsdl:part name="pbstrError" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WSgdCarmaServiceSoap">
+    <wsdl:operation name="SendInvitation">
+      <wsdl:input message="s0:SendInvitationIn" />
+      <wsdl:output message="s0:SendInvitationOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateRole">
+      <wsdl:input message="s0:CreateRoleIn" />
+      <wsdl:output message="s0:CreateRoleOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRoleData">
+      <wsdl:input message="s0:UpdateRoleDataIn" />
+      <wsdl:output message="s0:UpdateRoleDataOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoles">
+      <wsdl:input message="s0:GetRolesIn" />
+      <wsdl:output message="s0:GetRolesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeprecateRole">
+      <wsdl:input message="s0:DeprecateRoleIn" />
+      <wsdl:output message="s0:DeprecateRoleOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Associate">
+      <wsdl:input message="s0:AssociateIn" />
+      <wsdl:output message="s0:AssociateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Deassociate">
+      <wsdl:input message="s0:DeassociateIn" />
+      <wsdl:output message="s0:DeassociateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeassociateAll">
+      <wsdl:input message="s0:DeassociateAllIn" />
+      <wsdl:output message="s0:DeassociateAllOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RevokeType">
+      <wsdl:input message="s0:RevokeTypeIn" />
+      <wsdl:output message="s0:RevokeTypeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RevokeAll">
+      <wsdl:input message="s0:RevokeAllIn" />
+      <wsdl:output message="s0:RevokeAllOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustedShoppers">
+      <wsdl:input message="s0:GetTrustedShoppersIn" />
+      <wsdl:output message="s0:GetTrustedShoppersOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDelegatedResources">
+      <wsdl:input message="s0:GetDelegatedResourcesIn" />
+      <wsdl:output message="s0:GetDelegatedResourcesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDelegatedRoles">
+      <wsdl:input message="s0:GetDelegatedRolesIn" />
+      <wsdl:output message="s0:GetDelegatedRolesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManagedResources">
+      <wsdl:input message="s0:GetManagedResourcesIn" />
+      <wsdl:output message="s0:GetManagedResourcesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManagedResourcesByShopper">
+      <wsdl:input message="s0:GetManagedResourcesByShopperIn" />
+      <wsdl:output message="s0:GetManagedResourcesByShopperOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDelegatesByResource">
+      <wsdl:input message="s0:GetDelegatesByResourceIn" />
+      <wsdl:output message="s0:GetDelegatesByResourceOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssociateList">
+      <wsdl:input message="s0:AssociateListIn" />
+      <wsdl:output message="s0:AssociateListOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearAndAssociate">
+      <wsdl:input message="s0:ClearAndAssociateIn" />
+      <wsdl:output message="s0:ClearAndAssociateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTrustedShopper">
+      <wsdl:input message="s0:RemoveTrustedShopperIn" />
+      <wsdl:output message="s0:RemoveTrustedShopperOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveByResource">
+      <wsdl:input message="s0:RemoveByResourceIn" />
+      <wsdl:output message="s0:RemoveByResourceOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSgdCarmaServiceSoap" type="s0:WSgdCarmaServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="SendInvitation">
+      <soap:operation soapAction="#SendInvitation" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRole">
+      <soap:operation soapAction="#CreateRole" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRoleData">
+      <soap:operation soapAction="#UpdateRoleData" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoles">
+      <soap:operation soapAction="#GetRoles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeprecateRole">
+      <soap:operation soapAction="#DeprecateRole" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Associate">
+      <soap:operation soapAction="#Associate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Deassociate">
+      <soap:operation soapAction="#Deassociate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeassociateAll">
+      <soap:operation soapAction="#DeassociateAll" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeType">
+      <soap:operation soapAction="#RevokeType" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeAll">
+      <soap:operation soapAction="#RevokeAll" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustedShoppers">
+      <soap:operation soapAction="#GetTrustedShoppers" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDelegatedResources">
+      <soap:operation soapAction="#GetDelegatedResources" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDelegatedRoles">
+      <soap:operation soapAction="#GetDelegatedRoles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagedResources">
+      <soap:operation soapAction="#GetManagedResources" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagedResourcesByShopper">
+      <soap:operation soapAction="#GetManagedResourcesByShopper" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDelegatesByResource">
+      <soap:operation soapAction="#GetDelegatesByResource" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssociateList">
+      <soap:operation soapAction="#AssociateList" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearAndAssociate">
+      <soap:operation soapAction="#ClearAndAssociate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTrustedShopper">
+      <soap:operation soapAction="#RemoveTrustedShopper" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveByResource">
+      <soap:operation soapAction="#RemoveByResource" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSgdCarmaService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSgdCarmaService">
+    <wsdl:port name="WSgdCarmaServiceSoap" binding="s0:WSgdCarmaServiceSoap">
+      <soap:address location="http://commgtwyws.dev.glbt1.gdg:80/WSgdCarma/WSgdCarma.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,6 +1,6 @@
 ﻿using System;
 using Atlantis.Framework.BasePages.Providers;
-using Atlantis.Framework.Engine.Monitor.EngineCallStats;
+using Atlantis.Framework.Engine.Monitor.Trace;
 using Atlantis.Framework.Engine.Monitor.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
@@ -13,7 +13,7 @@ namespace Atlantis.Framework.Engine.Monitor.WebTest
     {
       HttpProviderContainer.Instance.RegisterProvider<ISiteContext, SiteContext>();
       HttpProviderContainer.Instance.RegisterProvider<IDebugContext, DebugProvider>();
-      EngineCallStatsProvider.Initialize();
+      EngineTrace.Initialize();
 
       System.Web.Routing.RouteTable.Routes.MapEngineMonitorHandler();
     }

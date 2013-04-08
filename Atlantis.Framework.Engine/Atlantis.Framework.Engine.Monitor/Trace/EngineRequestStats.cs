@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Atlantis.Framework.Engine.Monitor.EngineCallStats
+namespace Atlantis.Framework.Engine.Monitor.Trace
 {
-  public class EngineCallRequestStats
+  public class EngineRequestStats
   {
     public Guid RequestId { get; set; }
     public string RequestType { get; set; }

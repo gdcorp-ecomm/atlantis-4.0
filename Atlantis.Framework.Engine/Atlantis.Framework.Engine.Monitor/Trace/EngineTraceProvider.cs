@@ -53,15 +53,16 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
 
     private void SetCookieValueForEngineTrace(string value)
     {
+      HttpCookie afCookie = _siteContext.Value.NewCrossDomainMemCookie(COOKIE_NAME);
+      afCookie.Values.Add(ENGINETRACE_KEY, value);
+
       if (!AtlantisFrameworkCookieExists)
       {
-        HttpCookie afCookie = _siteContext.Value.NewCrossDomainMemCookie(COOKIE_NAME);
-        afCookie.Values[ENGINETRACE_KEY] = value;
         HttpContext.Current.Response.Cookies.Add(afCookie);
       }
       else
       {
-        HttpContext.Current.Response.Cookies[COOKIE_NAME][ENGINETRACE_KEY] = value;
+        HttpContext.Current.Response.Cookies.Set(afCookie);
       }
     }
 

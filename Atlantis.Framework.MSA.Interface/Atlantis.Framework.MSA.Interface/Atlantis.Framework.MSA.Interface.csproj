@@ -50,7 +50,10 @@
     <Compile Include="MailApiResponseState.cs" />
     <Compile Include="MailApiUtil.cs" />
     <Compile Include="MailFolder.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="MessageAttachment.cs" />
     <Compile Include="MessageHeader.cs" />
+    <Compile Include="MessageInfo.cs" />
     <Compile Include="MessageList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

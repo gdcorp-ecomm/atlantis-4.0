@@ -11,76 +11,59 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
 {
   public class EcommInstoreStatementResponseData: IResponseData
   {
-    private bool _success;
-    private AtlantisException _exception;
-    private DataSet _results;
+    public DataSet StatementDataSet { get; private set; }
+    private readonly AtlantisException _exception;
+
+    public bool IsSuccess
+    {
+      get { return _exception == null; }
+    }
 
     public EcommInstoreStatementResponseData(DataSet ds)
     {
-      _results = ds;
-      _success = true;
+      StatementDataSet = ds;
     }
 
     public EcommInstoreStatementResponseData(AtlantisException aex)
     {
-      _success = false;
       _exception = aex;
     }
 
     public EcommInstoreStatementResponseData(RequestData request, Exception ex)
     {
-      _success = false;
       _exception = new AtlantisException(request, "EcommInstoreStatementResponseData", ex.Message, string.Empty);
     }
 
-    public bool IsSuccess
-    {
-      get
-      {
-        return _success;
-      }
-    }
+    #region Public Accessors
 
-    public DataSet StatementDataSet
+    private string _processedToXmlString = string.Empty;
+    public string ProcessedToXmlString
     {
       get
       {
-        return _results;
-      }
-    }
-
-    private string _processedToXMLString = string.Empty;
-    public string ProcessedToXMLString
-    {
-      get
-      {
-        if (string.IsNullOrEmpty(_processedToXMLString))
+        if (string.IsNullOrEmpty(_processedToXmlString))
         {
-          StringBuilder sb = new StringBuilder();
+          var sb = new StringBuilder();
           sb.Append(@"<instorecredits>");
 
-          if (_results.Tables.Count > 0)
+          if (StatementDataSet.Tables.Count > 0)
           {
-            DataRowCollection drc = _results.Tables[0].Rows;
+            DataRowCollection drc = StatementDataSet.Tables[0].Rows;
             if (drc != null && drc.Count > 0)
             {
-              string currency = string.Empty;
-              string tempCurrency = string.Empty;
-              bool currencySwitch = false;
-              int i = 0;
-              int rowType = 0;
-              string date = string.Empty;
-              string description = string.Empty;
-              string amount = string.Empty;
+              var currency = string.Empty;
+              var i = 0;
 
-              StringBuilder deposits = new StringBuilder();
-              StringBuilder withdrawls = new StringBuilder();
+              var deposits = new StringBuilder();
+              var withdrawls = new StringBuilder();
 
               foreach (DataRow dr in drc)
               {
+                int rowType;
                 int.TryParse(dr["rowType"].ToString(), out rowType);
-                tempCurrency = dr["nativeCurrencyType"].ToString();
+                var tempCurrency = dr["nativeCurrencyType"].ToString();
 
+                bool currencySwitch;
                 if (!string.Equals(currency, tempCurrency))
                 {
                   currencySwitch = true;
@@ -113,29 +96,30 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
                   sb.Append("\">");
                 }
 
-                date = dr["transactionDate"].ToString();
-                description = dr["description"].ToString();
-                amount = dr["amount"].ToString();
+                string date = dr["transactionDate"].ToString();
+                string description = dr["description"].ToString();
+                string amount = dr["amount"].ToString();
+                string expirationDate = dr["expirationDate"] != DBNull.Value ? dr["expirationDate"].ToString() : "N/A";
                 switch (rowType)
                 {
                   case 1:
                     sb.Append("<beginbalance>");
-                    sb.Append(AddBlock(date, description, amount));
+                    sb.Append(AddBlock(date, description, amount, expirationDate));
                     sb.Append("</beginbalance>");
                     break;
                   case 2:
                     deposits.Append("<deposit>");
-                    deposits.Append(AddBlock(date, description, amount));
+                    deposits.Append(AddBlock(date, description, amount, expirationDate));
                     deposits.Append("</deposit>");
                     break;
                   case 3:
                     withdrawls.Append("<withdrawl>");
-                    withdrawls.Append(AddBlock(date, description, amount));
+                    withdrawls.Append(AddBlock(date, description, amount, expirationDate));
                     withdrawls.Append("</withdrawl>");
                     break;
                   case 4:
                     sb.Append("<endbalance>");
-                    sb.Append(AddBlock(date, description, amount));
+                    sb.Append(AddBlock(date, description, amount, expirationDate));
                     sb.Append("</endbalance>");
                     break;
                 }
@@ -160,10 +144,10 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
           }
           sb.Append("</instorecredits>");
 
-          _processedToXMLString =  sb.ToString();
+          _processedToXmlString =  sb.ToString();
         }
 
-        return _processedToXMLString;
+        return _processedToXmlString;
       }
     }
 
@@ -171,27 +155,24 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
     {
       get
       {
-        List<InstoreStatementByCurrency> statementList = new List<InstoreStatementByCurrency>();
+        var statementList = new List<InstoreStatementByCurrency>();
 
-        StringBuilder sb = new StringBuilder();
+        var sb = new StringBuilder();
         sb.Append(@"<instorecredits>");
         sb.Append(BuildInvalidDateRangeXml());
         sb.Append("</instorecredits>");
 
-        XDocument xdoc = XDocument.Parse(sb.ToString());
+        var xdoc = XDocument.Parse(sb.ToString());
 
         if (xdoc != null)
         {
           var currencyList = xdoc.Elements("instorecredits").Elements("currency");
           if (currencyList != null)
           {
-
-            string currency = string.Empty;
-
             foreach (XElement currencyElement in currencyList)
             {
-              currency = GetAttributeValue(currencyElement, "type");
-              InstoreStatementByCurrency statement = new InstoreStatementByCurrency(currency);
+              string currency = GetAttributeValue(currencyElement, "type");
+              var statement = new InstoreStatementByCurrency(currency);
 
               IEnumerable<XElement> beginingBalance = currencyElement.Elements("beginbalance");
               ProcessSubElements(beginingBalance, ref statement, 1);
@@ -209,7 +190,6 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
             }
           }
         }
-
         return statementList;
       }
     }
@@ -218,22 +198,19 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
     {
       get
       {
-        List<InstoreStatementByCurrency> statementList = new List<InstoreStatementByCurrency>();
+        var statementList = new List<InstoreStatementByCurrency>();
 
-        XDocument xdoc = XDocument.Parse(ProcessedToXMLString);
+        var xdoc = XDocument.Parse(ProcessedToXmlString);
 
         if (xdoc != null)
         {
           var currencyList = xdoc.Elements("instorecredits").Elements("currency");
           if (currencyList != null)
           {
-            
-            string currency = string.Empty;
-
             foreach (XElement currencyElement in currencyList)
             {
-              currency = GetAttributeValue(currencyElement, "type");
-              InstoreStatementByCurrency statement = new InstoreStatementByCurrency(currency);
+              var currency = GetAttributeValue(currencyElement, "type");
+              var statement = new InstoreStatementByCurrency(currency);
 
               IEnumerable<XElement> beginingBalance = currencyElement.Elements("beginbalance");
               ProcessSubElements(beginingBalance, ref statement, 1);
@@ -255,29 +232,30 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
         return statementList;
       }
     }
+    #endregion 
 
     #region Private Methods
 
     private string BuildInvalidDateRangeXml()
     {
-      XElement currencyType = new XElement("currency", 
+      var currencyType = new XElement("currency", 
         new XAttribute("type", "USD"));
 
-      XElement description = new XElement("description");
+      var description = new XElement("description");
       description.Add(new XCData(""));
 
-      XElement beginBal = new XElement("beginbalance", 
+      var beginBal = new XElement("beginbalance", 
         new XElement("date", "This date range is outside your in-store credit history."),
         new XElement(description),
         new XElement("amount", 0));
 
-      XElement endBal = new XElement("endbalance",
+      var endBal = new XElement("endbalance",
         new XElement("date", "This date range is outside your in-store credit history."),
         new XElement(description),
         new XElement("amount", 0));
 
-      XElement deposits = new XElement("deposits");
-      XElement withdrawal = new XElement("withdrawls");
+      var deposits = new XElement("deposits");
+      var withdrawal = new XElement("withdrawls");
 
       currencyType.Add(beginBal);
       currencyType.Add(endBal);
@@ -289,18 +267,16 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
 
     private void ProcessSubElements(IEnumerable<XElement> elements, ref InstoreStatementByCurrency statement, int rowtype)
     {
-      string date = string.Empty;
-      string description = string.Empty;
-      int amount = 0;
-
       if (elements != null)
       {
         foreach (XElement elem in elements)
         {
-          date = GetElementValue(elem.Element("date"));
-          description = GetElementValue(elem.Element("description"));
+          var date = GetElementValue(elem.Element("date"));
+          var description = GetElementValue(elem.Element("description"));
+          int amount;
           int.TryParse(GetElementValue(elem.Element("amount")), out amount);
-          statement.AddItem(date, description, amount, rowtype);
+          var expirationDate = GetElementValue(elem.Element("exdate"));
+          statement.AddItem(date, description, amount, rowtype, expirationDate);
         }
       }
     }
@@ -312,7 +288,6 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
       {
         value = e.Value;
       }
-
       return value;
     }
 
@@ -323,20 +298,27 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
       {
         value = e.Attribute(name).Value;
       }
-
       return value;
     }
 
-    private string AddBlock(string date, string description, string amount)
+    private string AddBlock(string date, string description, string amount, string expirationDate)
     {
-      StringBuilder sb = new StringBuilder();
-      sb.Append("<date>");
+      var sb = new StringBuilder();
 
-      DateTime dt; string dts = string.Empty;
+      DateTime dt; 
+      var dts = string.Empty;
       if (DateTime.TryParse(date, out dt))
       {
         dts = dt.ToString("d");
       }
+
+      DateTime edt; 
+      var edts = string.Empty;
+      if (DateTime.TryParse(expirationDate, out edt))
+      {
+        edts = edt.ToString("d");
+      }
+      sb.Append("<date>");
       sb.Append(dts);
       sb.Append("</date>");
       sb.Append("<description><![CDATA[");
@@ -345,27 +327,19 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
       sb.Append("<amount>");
       sb.Append(amount);
       sb.Append("</amount>");
+      sb.Append("<exdate>");
+      sb.Append(edts);
+      sb.Append("</exdate>");
 
       return sb.ToString();
     }
 
     #endregion
 
-
     #region IResponseData Members
     public string ToXML()
     {
-      var xml = string.Empty;
-
-      if (_success)
-      {
-        var serializer = new XmlSerializer(typeof(DataSet));
-        var writer = new StringWriter();
-        serializer.Serialize(writer, this._results);
-        xml = writer.ToString();
-      }
-
-      return xml;
+      return IsSuccess ? StatementDataSet.GetXml() : string.Empty;
     }
 
     public AtlantisException GetException()
@@ -374,5 +348,4 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
     }
     #endregion
   }
-
 }

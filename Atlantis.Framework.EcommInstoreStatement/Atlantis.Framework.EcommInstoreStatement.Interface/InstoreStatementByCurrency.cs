@@ -4,13 +4,13 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
 {
   public class InstoreStatementByCurrency
   {
-    public string Currency { get; set; }
-    public string BeginningBalanceDate { get; set; }
-    public int BeginningBalanceAmount { get; set; }
-    public string EndingBalanceDate { get; set; }
-    public int EndingBalanceAmount { get; set; }
-    public List<CreditInfo> Deposits { get; set; }
-    public List<CreditInfo> Withdrawls { get; set; }
+    public string Currency { get; private set; }
+    public string BeginningBalanceDate { get; private set; }
+    public int BeginningBalanceAmount { get; private set; }
+    public string EndingBalanceDate { get; private set; }
+    public int EndingBalanceAmount { get; private set; }
+    public List<CreditInfo> Deposits { get; private set; }
+    public List<CreditInfo> Withdrawls { get; private set; }
 
     public InstoreStatementByCurrency(string currency)
     {
@@ -19,7 +19,7 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
       Withdrawls = new List<CreditInfo>();
     }
 
-    public void AddItem(string date, string description, int amount, int rowType)
+    public void AddItem(string date, string description, int amount, int rowType, string expirationDate)
     {
       switch (rowType)
       {
@@ -28,11 +28,11 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
           BeginningBalanceAmount = amount;
           break;
         case 2:
-          CreditInfo d = new CreditInfo(date, description, amount);
+          var d = new CreditInfo(date, description, amount, expirationDate);
           Deposits.Add(d);
           break;
         case 3:
-          CreditInfo w = new CreditInfo(date, description, amount);
+          var w = new CreditInfo(date, description, amount, expirationDate);
           Withdrawls.Add(w);
           break;
         case 4:
@@ -44,15 +44,17 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
 
     public class CreditInfo
     {
-      public string Date { get; set; }
-      public string Description { get; set; }
-      public int Amount { get; set; }
+      public string Date { get; private set; }
+      public string Description { get; private set; }
+      public int Amount { get; private set; }
+      public string ExpirationDate { get; private set; }
 
-      public CreditInfo(string date, string description, int amount)
+      public CreditInfo(string date, string description, int amount, string expirationDate)
       {
         Date = date;
         Description = description;
         Amount = amount;
+        ExpirationDate = expirationDate;
       }
     }
   }

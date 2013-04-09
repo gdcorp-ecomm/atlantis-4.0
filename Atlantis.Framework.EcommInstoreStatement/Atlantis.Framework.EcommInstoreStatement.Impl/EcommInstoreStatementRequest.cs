@@ -15,13 +15,13 @@ namespace Atlantis.Framework.EcommInstoreStatement.Impl
       EcommInstoreStatementResponseData response = null;
       try
       {
-        string connectionString = NetConnect.LookupConnectInfo(config);
+        var connectionString = NetConnect.LookupConnectInfo(config);
 
-        EcommInstoreStatementRequestData request = (EcommInstoreStatementRequestData)requestData;
+        var request = (EcommInstoreStatementRequestData)requestData;
 
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        using (var connection = new SqlConnection(connectionString))
         {
-          using (SqlCommand command = new SqlCommand("mya_instoreCreditStatement_sp", connection))
+          using (var command = new SqlCommand("mya_instoreCreditStatement_sp", connection))
           {
             command.CommandType = CommandType.StoredProcedure;
             command.CommandTimeout = (int)requestData.RequestTimeout.TotalSeconds;
@@ -30,8 +30,8 @@ namespace Atlantis.Framework.EcommInstoreStatement.Impl
             command.Parameters.AddWithValue("@s_shopper_id", requestData.ShopperID);
             command.Parameters.AddWithValue("@s_nativeCurrencyType", request.Currency);
             
-            SqlDataAdapter da = new SqlDataAdapter(command);
-            DataSet ds = new DataSet();
+            var da = new SqlDataAdapter(command);
+            var ds = new DataSet();
             da.Fill(ds);
 
             response = new EcommInstoreStatementResponseData(ds);

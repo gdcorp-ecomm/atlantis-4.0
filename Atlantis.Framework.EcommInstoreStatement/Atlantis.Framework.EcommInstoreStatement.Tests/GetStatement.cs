@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Atlantis.Framework.EcommInstoreStatement.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,13 +10,6 @@ namespace Atlantis.Framework.EcommInstoreStatement.Tests
   [TestClass]
   public class GetStatement
   {
-    public GetStatement()
-    {
-      //
-      // TODO: Add constructor logic here
-      //
-    }
-
     private TestContext testContextInstance;
 
     /// <summary>
@@ -26,14 +18,8 @@ namespace Atlantis.Framework.EcommInstoreStatement.Tests
     ///</summary>
     public TestContext TestContext
     {
-      get
-      {
-        return testContextInstance;
-      }
-      set
-      {
-        testContextInstance = value;
-      }
+      get { return testContextInstance; }
+      set { testContextInstance = value; }
     }
 
     #region Additional test attributes
@@ -61,15 +47,18 @@ namespace Atlantis.Framework.EcommInstoreStatement.Tests
     [TestMethod]
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("app.config")]
-    public void TestMethod1()
+    [DeploymentItem("Atlantis.Framework.EcommInstoreStatement.Impl.dll")]
+    public void InstoreCreditStatementTest()
     {
-      DateTime startDate = new DateTime(2001,01,01);
-      DateTime endDate = DateTime.Now;
-      EcommInstoreStatementRequestData request = new EcommInstoreStatementRequestData("840748", string.Empty, string.Empty, string.Empty, 0, startDate, endDate);
-      EcommInstoreStatementResponseData response = (EcommInstoreStatementResponseData)Engine.Engine.ProcessRequest(request, 496);
+      var startDate = new DateTime(2012,05,01);
+      var endDate = new DateTime(2013, 05, 06);
+      var request = new EcommInstoreStatementRequestData("856907", string.Empty, string.Empty, string.Empty, 0, startDate, endDate);
+      var response = (EcommInstoreStatementResponseData)Engine.Engine.ProcessRequest(request, 496);
 
-      string xml = response.ProcessedToXMLString;
-      List<InstoreStatementByCurrency> list = response.StatementByCurrencyList;
+      var xml = response.ProcessedToXmlString;
+      var list = response.StatementByCurrencyList;
+      var emptyList = response.EmptyStatement;
+
       Assert.IsTrue(response.IsSuccess);
     }
   }

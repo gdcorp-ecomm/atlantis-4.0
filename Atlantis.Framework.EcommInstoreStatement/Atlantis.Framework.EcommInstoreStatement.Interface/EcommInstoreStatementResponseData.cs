@@ -94,10 +94,10 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
                   sb.Append("\">");
                 }
 
-                string date = dr["transactionDate"].ToString();
-                string description = dr["description"].ToString();
-                string amount = dr["amount"].ToString();
-                string expirationDate = dr["expirationDate"] != DBNull.Value ? dr["expirationDate"].ToString() : "N/A";
+                var date = dr["transactionDate"].ToString();
+                var description = dr["description"].ToString();
+                var amount = dr["amount"].ToString();
+                var expirationDate = dr["expirationDate"] != DBNull.Value ? dr["expirationDate"].ToString() : "N/A";
                 switch (rowType)
                 {
                   case 1:
@@ -310,12 +310,8 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
         dts = dt.ToString("d");
       }
 
-      DateTime edt; 
-      var edts = string.Empty;
-      if (DateTime.TryParse(expirationDate, out edt))
-      {
-        edts = edt.ToString("d");
-      }
+      DateTime edt;
+      var edts = DateTime.TryParse(expirationDate, out edt) ? edt.ToString("d") : expirationDate;
       sb.Append("<date>");
       sb.Append(dts);
       sb.Append("</date>");

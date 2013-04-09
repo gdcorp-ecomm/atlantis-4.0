@@ -4,7 +4,7 @@ namespace Atlantis.Framework.EcommInstoreStatement.Interface
 {
   public class InstoreStatementByCurrency
   {
-    public string Currency { get; private set; }
+    public string Currency { get; set; }
     public string BeginningBalanceDate { get; private set; }
     public int BeginningBalanceAmount { get; private set; }
     public string EndingBalanceDate { get; private set; }

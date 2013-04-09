@@ -15,14 +15,26 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
 
     private static void Engine_OnProcessRequestStart(RequestData requestData, int requestType, Guid requestId)
     {
-      var traceProvider = HttpProviderContainer.Instance.Resolve<EngineTraceProvider>();
-      traceProvider.Engine_OnProcessRequestStart(requestData, requestType, requestId);
+      try
+      {
+        var traceProvider = HttpProviderContainer.Instance.Resolve<EngineTraceProvider>();
+        traceProvider.Engine_OnProcessRequestStart(requestData, requestType, requestId);
+      }
+      catch (Exception)
+      {
+      }
     }
 
     private static void Engine_OnProcessRequestComplete(RequestData requestData, int requestType, Guid requestId, IResponseData responseData)
     {
-      var traceProvider = HttpProviderContainer.Instance.Resolve<EngineTraceProvider>();
-      traceProvider.Engine_OnProcessRequestComplete(requestData, requestType, requestId, responseData);
+      try
+      {
+        var traceProvider = HttpProviderContainer.Instance.Resolve<EngineTraceProvider>();
+        traceProvider.Engine_OnProcessRequestComplete(requestData, requestType, requestId, responseData);
+      }
+      catch (Exception)
+      {
+      }
     }
   }
 }

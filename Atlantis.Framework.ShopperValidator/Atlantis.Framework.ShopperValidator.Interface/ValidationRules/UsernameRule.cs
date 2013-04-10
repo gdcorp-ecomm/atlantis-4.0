@@ -24,6 +24,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
       //base.RulesToValidate.Add(new RequiredRule(_fieldName, _username));
       base.RulesToValidate.Add(new InvalidCharactersRule(_fieldName, _username));
       base.RulesToValidate.Add(new MaxLengthRule(_fieldName, _username, LengthConstants.UsernameMaxLength));
+      base.RulesToValidate.Add(new MinLengthRule(_fieldName, _username, LengthConstants.UsernameMinLength));
 
       if (isNewShopper)
       {

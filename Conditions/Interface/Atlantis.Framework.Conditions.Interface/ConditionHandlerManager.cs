@@ -70,7 +70,7 @@ namespace Atlantis.Framework.Conditions.Interface
       AddConditionHandler(conditionHandler);
     }
 
-    public static bool EvaluateCondition(string conditionName, IEnumerable<string> parameters, IProviderContainer providerContainer)
+    public static bool EvaluateCondition(string conditionName, IList<string> parameters, IProviderContainer providerContainer)
     {
       bool conditionResult = false;
       Stopwatch callTimer = null;

@@ -7,7 +7,7 @@ namespace Atlantis.Framework.Render.ExpressionParser
 {
   public class ExpressionParserManager
   {
-    public delegate bool EvaluateFunctionDelegate(string functionName, IEnumerable<string> parameters, IProviderContainer providerContainer);
+    public delegate bool EvaluateFunctionDelegate(string functionName, IList<string> parameters, IProviderContainer providerContainer);
 
     private IProviderContainer ProviderContainer { get; set; }
 
@@ -20,7 +20,7 @@ namespace Atlantis.Framework.Render.ExpressionParser
 
     private void EvaluateFunction(string functionName, FunctionArgs functionArgs)
     {
-      IEnumerable<string> expectedValues = GetExpectedValues(functionArgs);
+      IList<string> expectedValues = GetExpectedValues(functionArgs);
 
       if (EvaluateExpressionHandler != null)
       {
@@ -32,7 +32,7 @@ namespace Atlantis.Framework.Render.ExpressionParser
       }
     }
 
-    private IEnumerable<string> GetExpectedValues(FunctionArgs functionArgs)
+    private IList<string> GetExpectedValues(FunctionArgs functionArgs)
     {
       IList<string> expectedValues = new List<string>(functionArgs.Parameters.Length);
 

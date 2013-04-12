@@ -9,6 +9,6 @@ namespace Atlantis.Framework.Conditions.Interface
   {
     string ConditionName { get; }
 
-    bool EvaluateCondition(string conditionName, IEnumerable<string> parameters, IProviderContainer providerContainer);
+    bool EvaluateCondition(string conditionName, IList<string> parameters, IProviderContainer providerContainer);
   }
 }

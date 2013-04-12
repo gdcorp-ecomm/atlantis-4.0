@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Testing.MockProviders;
 
 namespace Atlantis.Framework.Conditions.Monitor.WebTest
 {
-  public partial class Default : System.Web.UI.Page
+  public partial class Default : Page
   {
     private IProviderContainer _objectProviderContainer;
     private IProviderContainer ObjectProviderContainer

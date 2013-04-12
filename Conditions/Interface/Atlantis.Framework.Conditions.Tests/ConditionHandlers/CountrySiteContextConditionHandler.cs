@@ -9,8 +9,8 @@ namespace Atlantis.Framework.Conditions.Tests.ConditionHandlers
     private const string ACTUAL_VALUE = "IN";
 
     public string ConditionName { get { return "countrySiteContext"; } }
-    
-    public bool EvaluateCondition(string conditionName, IEnumerable<string> parameters, IProviderContainer providerContainer)
+
+    public bool EvaluateCondition(string conditionName, IList<string> parameters, IProviderContainer providerContainer)
     {
       bool evaluationResult = false;
 

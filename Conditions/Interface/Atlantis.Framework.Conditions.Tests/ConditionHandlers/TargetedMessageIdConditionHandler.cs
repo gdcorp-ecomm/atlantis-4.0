@@ -9,8 +9,8 @@ namespace Atlantis.Framework.Conditions.Tests.ConditionHandlers
     private const string ACTUAL_VALUE = "1234";
 
     public string ConditionName { get { return "targetedMessageId"; } }
-    
-    public bool EvaluateCondition(string conditionName, IEnumerable<string> parameters, IProviderContainer providerContainer)
+
+    public bool EvaluateCondition(string conditionName, IList<string> parameters, IProviderContainer providerContainer)
     {
       bool evaluationResult = false;
 

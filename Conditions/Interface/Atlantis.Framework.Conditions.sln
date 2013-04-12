@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.MarkupParser", "..\..\Render\MarkupParser\Atlantis.Framework.Render.MarkupParser\Atlantis.Framework.Render.MarkupParser.csproj", "{772AAC0D-761E-4906-B46F-100E1AF3F5CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.ProviderContainer.Impl", "..\..\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer.Impl.csproj", "{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Conditions.Monitor", "Atlantis.Framework.Conditions.Monitor\Atlantis.Framework.Conditions.Monitor.csproj", "{A1005CE1-482B-40C0-AF80-95CB29B82E27}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Conditions.Monitor.WebTest", "Atlantis.Framework.Conditions.Monitor.WebTest\Atlantis.Framework.Conditions.Monitor.WebTest.csproj", "{546E10C2-0404-4078-9CE0-4F65973DF8A3}"
@@ -28,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Interface", "..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj", "{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Pipeline.Interface", "..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj", "{0D7F076F-1809-437B-B045-E35A7E68E423}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Containers", "..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj", "{C333E679-494E-422D-AB5E-E4C0EC94ACD5}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -65,24 +65,24 @@ Global
 		SccProjectTopLevelParentUniqueName8 = Atlantis.Framework.Conditions.sln
 		SccProjectName8 = ../../Render/MarkupParser/Atlantis.Framework.Render.MarkupParser
 		SccLocalPath8 = ..\\..\\Render\\MarkupParser\\Atlantis.Framework.Render.MarkupParser
-		SccProjectUniqueName9 = ..\\..\\Atlantis.Framework.Providers.ProviderContainer\\Atlantis.Framework.Providers.ProviderContainer\\Atlantis.Framework.Providers.ProviderContainer.Impl.csproj
-		SccProjectTopLevelParentUniqueName9 = Atlantis.Framework.Conditions.sln
-		SccProjectName9 = ../../Atlantis.Framework.Providers.ProviderContainer/Atlantis.Framework.Providers.ProviderContainer
-		SccLocalPath9 = ..\\..\\Atlantis.Framework.Providers.ProviderContainer\\Atlantis.Framework.Providers.ProviderContainer
-		SccProjectUniqueName10 = Atlantis.Framework.Conditions.Monitor\\Atlantis.Framework.Conditions.Monitor.csproj
-		SccProjectName10 = Atlantis.Framework.Conditions.Monitor
-		SccLocalPath10 = Atlantis.Framework.Conditions.Monitor
-		SccProjectUniqueName11 = Atlantis.Framework.Conditions.Monitor.WebTest\\Atlantis.Framework.Conditions.Monitor.WebTest.csproj
-		SccProjectName11 = Atlantis.Framework.Conditions.Monitor.WebTest
-		SccLocalPath11 = Atlantis.Framework.Conditions.Monitor.WebTest
-		SccProjectUniqueName12 = ..\\..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface.csproj
+		SccProjectUniqueName9 = Atlantis.Framework.Conditions.Monitor\\Atlantis.Framework.Conditions.Monitor.csproj
+		SccProjectName9 = Atlantis.Framework.Conditions.Monitor
+		SccLocalPath9 = Atlantis.Framework.Conditions.Monitor
+		SccProjectUniqueName10 = Atlantis.Framework.Conditions.Monitor.WebTest\\Atlantis.Framework.Conditions.Monitor.WebTest.csproj
+		SccProjectName10 = Atlantis.Framework.Conditions.Monitor.WebTest
+		SccLocalPath10 = Atlantis.Framework.Conditions.Monitor.WebTest
+		SccProjectUniqueName11 = ..\\..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface.csproj
+		SccProjectTopLevelParentUniqueName11 = Atlantis.Framework.Conditions.sln
+		SccProjectName11 = ../../Atlantis.Framework.Providers.Interface/Atlantis.Framework.Providers.Interface
+		SccLocalPath11 = ..\\..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface
+		SccProjectUniqueName12 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface\\Atlantis.Framework.Render.Pipeline.Interface.csproj
 		SccProjectTopLevelParentUniqueName12 = Atlantis.Framework.Conditions.sln
-		SccProjectName12 = ../../Atlantis.Framework.Providers.Interface/Atlantis.Framework.Providers.Interface
-		SccLocalPath12 = ..\\..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface
-		SccProjectUniqueName13 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface\\Atlantis.Framework.Render.Pipeline.Interface.csproj
+		SccProjectName12 = ../../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline.Interface
+		SccLocalPath12 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface
+		SccProjectUniqueName13 = ..\\..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers.csproj
 		SccProjectTopLevelParentUniqueName13 = Atlantis.Framework.Conditions.sln
-		SccProjectName13 = ../../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline.Interface
-		SccLocalPath13 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface
+		SccProjectName13 = ../../Atlantis.Framework.Providers.Containers/Atlantis.Framework.Providers.Containers
+		SccLocalPath13 = ..\\..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,10 +121,6 @@ Global
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1005CE1-482B-40C0-AF80-95CB29B82E27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1005CE1-482B-40C0-AF80-95CB29B82E27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1005CE1-482B-40C0-AF80-95CB29B82E27}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -141,6 +137,10 @@ Global
 		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,8 +152,8 @@ Global
 		{5487DEF2-0FA7-4B77-9AAD-0355784589D6} = {EAB353A2-3E92-44A3-A907-C5C0F518255B}
 		{E35A1790-4605-4ADB-813E-DCD5485F58BB} = {EAB353A2-3E92-44A3-A907-C5C0F518255B}
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA} = {EAB353A2-3E92-44A3-A907-C5C0F518255B}
-		{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0} = {EAB353A2-3E92-44A3-A907-C5C0F518255B}
 		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE} = {EAB353A2-3E92-44A3-A907-C5C0F518255B}
 		{0D7F076F-1809-437B-B045-E35A7E68E423} = {EAB353A2-3E92-44A3-A907-C5C0F518255B}
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {EAB353A2-3E92-44A3-A907-C5C0F518255B}
 	EndGlobalSection
 EndGlobal

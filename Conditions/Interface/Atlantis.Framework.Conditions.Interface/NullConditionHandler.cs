@@ -7,7 +7,7 @@ namespace Atlantis.Framework.Conditions.Interface
   {
     public string ConditionName { get { return "null"; } }
 
-    public bool EvaluateCondition(string conditionName, IEnumerable<string> expectedValues, IProviderContainer providerContainer)
+    public bool EvaluateCondition(string conditionName, IList<string> expectedValues, IProviderContainer providerContainer)
     {
 
       AtlantisException atlantisException = new AtlantisException("NullConditionHandler.EvaluateCondition",

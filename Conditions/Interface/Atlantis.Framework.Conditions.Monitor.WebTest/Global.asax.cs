@@ -3,7 +3,7 @@ using System.Reflection;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Conditions.Monitor.Web;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Providers.Containers;
 
 namespace Atlantis.Framework.Conditions.Monitor.WebTest
 {

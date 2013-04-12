@@ -10,7 +10,7 @@ namespace Atlantis.Framework.Render.Pipeline.Tests.ConditionHandlers
 
     public string ConditionName { get { return "targetedMessageId"; } }
     
-    public bool EvaluateCondition(string conditionName, IEnumerable<string> parameters, IProviderContainer providerContainer)
+    public bool EvaluateCondition(string conditionName, IList<string> parameters, IProviderContainer providerContainer)
     {
       bool evaluationResult = false;
 

@@ -59,7 +59,15 @@ namespace Atlantis.Framework.EcommPricing.Interface
             item = data.Descendants("Error").FirstOrDefault();
             if (item != null)
             {
-              responseObject = new PriceEstimateResponseData();
+              item = data.Descendants("Description").FirstOrDefault();
+              if (item != null && !item.IsEmpty)
+              {
+                responseObject = new PriceEstimateResponseData(item.Value);
+              }
+              else
+              {
+                responseObject = new PriceEstimateResponseData();
+              }
             }
           }
         }
@@ -99,6 +107,14 @@ namespace Atlantis.Framework.EcommPricing.Interface
       _exception = exception;
     }
 
+    private PriceEstimateResponseData(string errorDescription)
+    {
+      IsPriceFound = false;
+      CurrencyType = string.Empty;
+      AdjustedPrice = 0;
+      ErrorDescription = errorDescription;
+    }
+
     private PriceEstimateResponseData(string currencyType, int adjustedPrice)
     {
       IsPriceFound = true;
@@ -109,6 +125,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
     public bool IsPriceFound { get; private set; }
     public string CurrencyType { get; private set; }
     public int AdjustedPrice { get; private set; }
+    public string ErrorDescription { get; private set; }
 
     public string ToXML()
     {
@@ -116,7 +133,8 @@ namespace Atlantis.Framework.EcommPricing.Interface
       element.Add(
         new XAttribute("pricefound", IsPriceFound.ToString()),
         new XAttribute("currencytype", CurrencyType),
-        new XAttribute("adjustedprice", AdjustedPrice.ToString(CultureInfo.InvariantCulture)));
+        new XAttribute("adjustedprice", AdjustedPrice.ToString(CultureInfo.InvariantCulture)),
+        new XAttribute("errordescription", ErrorDescription));
 
       return element.ToString(SaveOptions.DisableFormatting);
     }

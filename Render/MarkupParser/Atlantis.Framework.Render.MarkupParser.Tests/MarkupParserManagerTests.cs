@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Render.ExpressionParser;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;

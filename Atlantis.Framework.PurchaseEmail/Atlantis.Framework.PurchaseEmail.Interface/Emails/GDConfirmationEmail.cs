@@ -25,6 +25,11 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
     private const string NATIONALBREASTCANCER_NAMESPACE = "FOS";
     private const string NATIONALBREASTCANCER_ITC_CODE = "dpp_carepkg";
 
+    private const string AZ_HUMANE_PACKAGE_TYPE = "AZHumaneSocietyWSB";
+    private const string AZ_HUMANE_PACKAGE_NAMESPACE = "FOS";
+    private const string AZ_HUMANE_PACKAGE_ITC_CODE = "slp_az_humane";
+    private const string AZ_HUMANE_PACKAGE_MANAGER_ITC_CODE = "mgr_slp_az_humane";
+
     public GDConfirmationEmail(OrderData orderData, EmailRequired emailRequired, bool isAZHumane, bool isDevServer, RequestData rd, ObjectProviderContainer objectContainer)
       : base(orderData, emailRequired, objectContainer)
     {
@@ -285,6 +290,10 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
         {
           result.Add(CreateNationalBreastCancerFoundationRequest());
         }
+        if (IsITCInOrder(AZ_HUMANE_PACKAGE_ITC_CODE) || IsITCInOrder(AZ_HUMANE_PACKAGE_MANAGER_ITC_CODE))
+        {
+          result.Add(CreateAZHumanePackageRequest());
+        }
         if (_isAZHumane)
         {
           _emailTemplate = EmailTemplates[EmailTemplateType.ArizonaHumaneSociety];
@@ -326,6 +335,24 @@ namespace Atlantis.Framework.PurchaseEmail.Interface.Emails
       emailContact["EmailType"] = IsHTMLEmail ? "html" : "plaintext";
       emailParms.ContactPoints.Add(emailContact);
       emailParms["DOMAINNAME"] = new AttributeValue(FirstDomainInOrder()); 
+      request.AddResource(emailParms);
+
+      return request;
+    }
+
+    private MessagingProcessRequestData CreateAZHumanePackageRequest()
+    {
+
+      MessagingProcessRequestData request = new MessagingProcessRequestData(ShopperContext.ShopperId, string.Empty, Order.OrderId,
+         SiteContext.Pathway, SiteContext.PageCount, SiteContext.PrivateLabelId, AZ_HUMANE_PACKAGE_TYPE, AZ_HUMANE_PACKAGE_NAMESPACE);
+
+      ResourceItem emailParms = new ResourceItem("CartOrder", Order.OrderId);
+
+      ContactPointItem emailContact = new ContactPointItem("ShopperContact", ContactPointTypes.Shopper);
+      emailContact["id"] = ShopperContext.ShopperId;
+      emailContact["EmailType"] = IsHTMLEmail ? "html" : "plaintext";
+      emailParms.ContactPoints.Add(emailContact);
+      emailParms["DOMAINNAME"] = new AttributeValue(FirstDomainInOrder());
       request.AddResource(emailParms);
 
       return request;

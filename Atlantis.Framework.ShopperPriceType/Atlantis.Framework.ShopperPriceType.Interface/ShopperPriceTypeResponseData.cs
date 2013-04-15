@@ -15,6 +15,7 @@ namespace Atlantis.Framework.ShopperPriceType.Interface
       public const int ResellerDiscountShopper = 2;
       public const int GoDaddyDiscountDomainClub = 8;
       public const int CostcoShopper = 16;
+      public const int EmployeeShopper = 32;
     }
 
     private int _maskedPriceType = 0;
@@ -57,7 +58,11 @@ namespace Atlantis.Framework.ShopperPriceType.Interface
 
       if (privateLabelId == 1)
       {
-        if ((rawPriceType & ShopperPriceTypes.GoDaddyDiscountDomainClub) > 0)
+        if ((rawPriceType & ShopperPriceTypes.EmployeeShopper) > 0)
+        {
+          result = ShopperPriceTypes.EmployeeShopper;
+        }
+        else if ((rawPriceType & ShopperPriceTypes.GoDaddyDiscountDomainClub) > 0)
         {
           result = ShopperPriceTypes.GoDaddyDiscountDomainClub;
         }

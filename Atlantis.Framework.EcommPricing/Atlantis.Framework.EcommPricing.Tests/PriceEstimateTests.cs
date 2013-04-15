@@ -199,6 +199,15 @@ namespace Atlantis.Framework.EcommPricing.Tests
       Assert.AreEqual(response1.AdjustedPrice, response2.AdjustedPrice);
     }
 
+    [TestMethod]
+    public void ValidRequestWithDiscountCode()
+    {
+      var request1 = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", string.Empty, 1, 54, "cbwsp01");
+      var response1 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request1, _REQUESTTYPE);
+      Assert.IsNotNull(response1);
+      Assert.IsTrue(response1.IsPriceFound);
+    }
+        
     // Test the ToXml method on the response object
     [TestMethod]
     public void ResponseToXml()

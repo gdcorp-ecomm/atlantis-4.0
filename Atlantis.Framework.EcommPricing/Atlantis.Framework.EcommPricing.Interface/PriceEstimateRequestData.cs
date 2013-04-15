@@ -16,6 +16,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
     public int ShopperPriceType { get; set; }
     public string CurrencyType { get; set; }
     public string PromoCode { get; set; }
+    public string DiscountCode { get; set; }
     public int PriceGroupId { get; set; }
     public int UnifiedProductId { get; set; }
 
@@ -26,6 +27,20 @@ namespace Atlantis.Framework.EcommPricing.Interface
       ShopperPriceType = shopperPriceType;
       CurrencyType = currencyType;
       PromoCode = PreValidatePromoCode(promoCode);
+      DiscountCode = string.Empty;
+      PriceGroupId = priceGroupId;
+      UnifiedProductId = unifiedProductId;
+      RequestTimeout = _requestTimeout;
+    }
+
+    public PriceEstimateRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int privateLabelId, int shopperPriceType, string currencyType, string promoCode, int priceGroupId, int unifiedProductId, string discountCode)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    {
+      PrivateLabelId = privateLabelId;
+      ShopperPriceType = shopperPriceType;
+      CurrencyType = currencyType;
+      PromoCode = PreValidatePromoCode(promoCode);
+      DiscountCode = discountCode;
       PriceGroupId = priceGroupId;
       UnifiedProductId = unifiedProductId;
       RequestTimeout = _requestTimeout;
@@ -51,7 +66,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
 
     public override string GetCacheMD5()
     {
-      var values = new[] { PrivateLabelId.ToString(), ShopperPriceType.ToString(), CurrencyType, PromoCode, PriceGroupId.ToString(), UnifiedProductId.ToString() };
+      var values = new[] { PrivateLabelId.ToString(), ShopperPriceType.ToString(), CurrencyType, PromoCode, PriceGroupId.ToString(), UnifiedProductId.ToString(), DiscountCode };
       return BuildHashFromStrings(values);
     }
 
@@ -64,6 +79,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
       element.Add(new XAttribute("PromoCode", PromoCode));
       element.Add(new XAttribute("PriceGroupId", PriceGroupId.ToString()));
       element.Add(new XAttribute("UnifiedProductId", UnifiedProductId.ToString()));
+      element.Add(new XAttribute("DiscountCode", DiscountCode));
       return element.ToString();
     }
   }

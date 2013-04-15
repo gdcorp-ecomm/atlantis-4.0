@@ -120,6 +120,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
       IsPriceFound = true;
       CurrencyType = currencyType;
       AdjustedPrice = adjustedPrice;
+      ErrorDescription = string.Empty;
     }
 
     public bool IsPriceFound { get; private set; }

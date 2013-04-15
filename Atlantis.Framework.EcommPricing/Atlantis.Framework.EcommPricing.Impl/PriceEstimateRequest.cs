@@ -8,7 +8,8 @@ namespace Atlantis.Framework.EcommPricing.Impl
     public class PriceEstimateRequest : IRequest
     {
       private const string _REQUESTFORMAT = "<PriceEstimateRequest privateLabelID=\"{0}\" membershipLevel=\"{1}\" transactionCurrency=\"{2}\" source_code=\"{3}\"><Item pf_id=\"{4}\" priceGroupID=\"{5}\"/></PriceEstimateRequest>";
-      
+      private const string _REQUESTFORMATDISCOUNT = "<PriceEstimateRequest privateLabelID=\"{0}\" membershipLevel=\"{1}\" transactionCurrency=\"{2}\"><Item pf_id=\"{4}\" discount_code=\"{3}\"/></PriceEstimateRequest>";
+
       public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
       {
         IResponseData result;
@@ -24,13 +25,27 @@ namespace Atlantis.Framework.EcommPricing.Impl
           
           var priceEstimateRequest = (PriceEstimateRequestData)requestData;
           
-          string serviceRequest = string.Format(_REQUESTFORMAT, 
-                                              priceEstimateRequest.PrivateLabelId, 
-                                              priceEstimateRequest.ShopperPriceType, 
-                                              priceEstimateRequest.CurrencyType, 
-                                              priceEstimateRequest.PromoCode, 
-                                              DataCache.DataCache.GetPFIDByUnifiedID(priceEstimateRequest.UnifiedProductId, priceEstimateRequest.PrivateLabelId), 
-                                              priceEstimateRequest.PriceGroupId );
+          string serviceRequest = string.Empty;
+          if (!string.IsNullOrEmpty(priceEstimateRequest.DiscountCode))
+          {
+            serviceRequest = string.Format(_REQUESTFORMATDISCOUNT,
+                                              priceEstimateRequest.PrivateLabelId,
+                                              priceEstimateRequest.ShopperPriceType,
+                                              priceEstimateRequest.CurrencyType,
+                                              priceEstimateRequest.DiscountCode,
+                                              DataCache.DataCache.GetPFIDByUnifiedID(priceEstimateRequest.UnifiedProductId, priceEstimateRequest.PrivateLabelId),
+                                              priceEstimateRequest.PriceGroupId);
+          }
+          else
+          {
+            serviceRequest = string.Format(_REQUESTFORMAT,
+                                              priceEstimateRequest.PrivateLabelId,
+                                              priceEstimateRequest.ShopperPriceType,
+                                              priceEstimateRequest.CurrencyType,
+                                              priceEstimateRequest.PromoCode,
+                                              DataCache.DataCache.GetPFIDByUnifiedID(priceEstimateRequest.UnifiedProductId, priceEstimateRequest.PrivateLabelId),
+                                              priceEstimateRequest.PriceGroupId);
+          }
 
           using (var oSvc = new PricingService.Service())
           {

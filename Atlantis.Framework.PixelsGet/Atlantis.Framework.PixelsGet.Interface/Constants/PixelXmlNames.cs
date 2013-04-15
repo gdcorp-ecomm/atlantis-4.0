@@ -30,6 +30,8 @@ namespace Atlantis.Framework.PixelsGet.Interface.Constants
     public const string TriggerTypeIscCodes = "sourcecodes";
     public const string TriggerTypeIscCodeSingle = "sourcecode";
     public const string TriggerTypeOrderDetail = "orderdetail";
+    public const string TriggerTypeItems = "items";
+    public const string TriggerTypeItemSingle = "item";
 
     public const string TriggerConditionFirstTime = "firsttimeonly";
     public const string TriggerCookieName = "triggercookiename";

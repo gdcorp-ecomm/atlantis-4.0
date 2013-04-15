@@ -50,6 +50,7 @@
     <Compile Include="Constants\PixelXmlNames.cs" />
     <Compile Include="PixelObjects\Helpers\CookieHelper.cs" />
     <Compile Include="PixelObjects\Triggers\CookieGroupTrigger.cs" />
+    <Compile Include="PixelObjects\Triggers\ItemTrigger.cs" />
     <Compile Include="PixelObjects\Triggers\OrderDetailTrigger.cs" />
     <Compile Include="PixelsGetRequestData.cs" />
     <Compile Include="PixelsGetResponseData.cs" />
@@ -72,6 +73,14 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency.csproj">
+      <Project>{8581eb6c-5093-473e-ab04-318ce071e7fd}</Project>
+      <Name>Atlantis.Framework.Providers.Currency</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
+      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
+      <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

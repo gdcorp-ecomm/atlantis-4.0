@@ -23,9 +23,6 @@ namespace Atlantis.Framework.DotTypeCache.Static
     private StaticProduct _staticProduct;
     private StaticTld _staticTld;
     private StaticApplicationControl _staticApplicationControl;
-    private Lazy<DomainContactFieldsResponseData> _domainContactFieldsData;
-    private Lazy<TLDLanguageResponseData> _languagesData;
-    private Lazy<ValidDotTypesResponseData> _validDotTypes;
 
     private bool _isMultiRegistry = false;
     public bool IsMultiRegistry
@@ -99,9 +96,6 @@ namespace Atlantis.Framework.DotTypeCache.Static
       _staticProduct = new StaticProduct(this);
       _staticTld = new StaticTld(this);
       _staticApplicationControl = new StaticApplicationControl(this);
-      _domainContactFieldsData = new Lazy<DomainContactFieldsResponseData>(LoadDomainContactFieldsData);
-      _languagesData = new Lazy<TLDLanguageResponseData>(LoadLanguagesData);
-      _validDotTypes = new Lazy<ValidDotTypesResponseData>(LoadValidDotTypes);
     }
 
     private DomainContactFieldsResponseData LoadDomainContactFieldsData()
@@ -142,17 +136,23 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     public IEnumerable<RegistryLanguage> RegistryLanguages
     {
-      get { return _languagesData.Value.RegistryLanguages; }
+      get
+      {
+        var languagesData = LoadLanguagesData();
+        return languagesData.RegistryLanguages;
+      }
     }
 
     public RegistryLanguage GetLanguageByName(string languageName)
     {
-      return _languagesData.Value.GetLanguageDataByName(languageName);
+      var languagesData = LoadLanguagesData();
+      return languagesData.GetLanguageDataByName(languageName);
     }
 
     public RegistryLanguage GetLanguageById(int languageId)
     {
-      return _languagesData.Value.GetLanguageDataById(languageId);
+      var languagesData = LoadLanguagesData();
+      return languagesData.GetLanguageDataById(languageId);
     }
 
     public bool CanRenew(DateTime currentExpirationDate, out int maxValidRenewalLength)
@@ -435,7 +435,9 @@ namespace Atlantis.Framework.DotTypeCache.Static
       get
       {
         int tldId;
-        _validDotTypes.Value.TryGetTldId(DotType, out tldId);
+
+        var validDotTypes = LoadValidDotTypes();
+        validDotTypes.TryGetTldId(DotType, out tldId);
 
         return tldId;
       }
@@ -465,7 +467,8 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     public string GetRegistrationFieldsXml()
     {
-      return _domainContactFieldsData.Value.DomainContactFields;
+      var domainContactFieldsData = LoadDomainContactFieldsData();
+      return domainContactFieldsData.DomainContactFields;
     }
     #endregion
 

@@ -8,7 +8,7 @@ namespace Atlantis.Framework.CH.Localization
 {
   public class CountrySiteAnyConditionHandler : IConditionHandler
   {
-    public string ConditionName { get { return "countrySite.Any"; } }
+    public string ConditionName { get { return "countrySiteAny"; } }
 
     public bool EvaluateCondition(string conditionName, IList<string> parameters, IProviderContainer providerContainer)
     {

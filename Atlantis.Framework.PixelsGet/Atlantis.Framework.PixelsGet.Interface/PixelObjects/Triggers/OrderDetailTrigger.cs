@@ -80,7 +80,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
       var shouldFirePixel = false;
 
       #region Get attributes from orderdetail element
-      string orderDetailAttributeValue = GetStringAttribute(orderDetail, priceAttributeName, "USD");
+      string orderDetailAttributeValue = GetStringAttribute(orderDetail, priceAttributeName, "0");
       string transactionCurrency = GetStringAttribute(orderDetail, "transactioncurrency", "USD");
 
       string relationalOperator = System.Web.HttpUtility.HtmlDecode(triggerElement.Attribute(PixelXmlNames.Comparison).Value);

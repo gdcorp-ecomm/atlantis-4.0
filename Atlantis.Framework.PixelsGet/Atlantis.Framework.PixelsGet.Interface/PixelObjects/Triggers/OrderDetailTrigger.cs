@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 using Atlantis.Framework.PixelsGet.Interface.Constants;
@@ -59,60 +58,78 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 
           foreach (XElement element in TriggerElement.Descendants(PixelXmlNames.TriggerTypeOrderDetail))
           {
-            string fireOrderDetailName = element.Attribute(PixelXmlNames.Name).Value;
-            string fireOrderDetailValue = element.Attribute(PixelXmlNames.Value).Value;
-            string fireOrderDetailComparison = System.Web.HttpUtility.HtmlDecode(element.Attribute(PixelXmlNames.Comparison).Value);
-
-            if (fireOrderDetailComparison.Equals(PixelXmlNames.ComparisonEquals) || fireOrderDetailComparison == "")
+            string orderDetailAttributeName = element.Attribute(PixelXmlNames.Name).Value;
+            if (orderDetailAttributeName == "_total_total")
             {
-              shouldFirePixel = (fireOrderDetailValue.Equals(GetStringAttribute(_orderDetail, fireOrderDetailName, ""), StringComparison.OrdinalIgnoreCase));
-            }
-            else
-            {
-              int orderValueInt = GetIntAttribute(_orderDetail, fireOrderDetailName, 0);
-
-              int fireOrderDetailValueInt = 0;
-              if (fireOrderDetailValue.Length > 0)
-              {
-                if (fireOrderDetailName.Equals("_total_total", StringComparison.OrdinalIgnoreCase) && fireOrderDetailValue[0] == '$' && fireOrderDetailValue.Length > 1)
-                {
-                  fireOrderDetailValue = fireOrderDetailValue.Substring(1);
-                  int.TryParse(fireOrderDetailValue, out fireOrderDetailValueInt);
-
-                  string convertToCurrency = GetStringAttribute(_orderDetail, "transactioncurrency", "USD");
-                  ICurrencyInfo currentInfo = CurrencyData.GetCurrencyInfo(convertToCurrency);
-                  ICurrencyPrice currentPrice = ConvertTransactionalToUSD(new CurrencyPrice(orderValueInt, currentInfo, CurrencyPriceType.Transactional));
-                  orderValueInt = currentPrice.Price;
-                }
-                else
-                {
-                  int.TryParse(fireOrderDetailValue, out fireOrderDetailValueInt);
-                }
-                switch (fireOrderDetailComparison)
-                {
-                  case PixelXmlNames.ComparisonGreaterThan:
-                    shouldFirePixel = (orderValueInt > fireOrderDetailValueInt);
-                    break;
-                  case PixelXmlNames.ComparisonGreaterThanOrEqual:
-                    shouldFirePixel = (orderValueInt >= fireOrderDetailValueInt);
-                    break;
-                  case PixelXmlNames.ComparisonLessThan:
-                    shouldFirePixel = (orderValueInt < fireOrderDetailValueInt);
-                    break;
-                  case PixelXmlNames.ComparisonLessThanOrEqual:
-                    shouldFirePixel = (orderValueInt <= fireOrderDetailValueInt);
-                    break;
-                }
-              }
+              shouldFirePixel = ShouldFireOnPriceTrigger(orderDetailAttributeName, _orderDetail, element);
             }
 
             if (shouldFirePixel)
             {
               break;
             }
-
           }
         }
+      }
+      return shouldFirePixel;
+    }
+
+
+    private bool ShouldFireOnPriceTrigger(string priceAttributeName, XmlNode orderDetail, XElement triggerElement)
+    {
+      var shouldFirePixel = false;
+
+      #region Get attributes from orderdetail element
+      string orderDetailAttributeValue = GetStringAttribute(orderDetail, priceAttributeName, "USD");
+      string transactionCurrency = GetStringAttribute(orderDetail, "transactioncurrency", "USD");
+
+      string relationalOperator = System.Web.HttpUtility.HtmlDecode(triggerElement.Attribute(PixelXmlNames.Comparison).Value);
+      string targetValue = triggerElement.Attribute(PixelXmlNames.Value).Value;
+      string targetCurrency = triggerElement.Attribute(PixelXmlNames.Currency).Value;
+      if (string.IsNullOrEmpty(targetCurrency))
+      {
+        targetCurrency = "USD";
+      }
+      #endregion
+      int orderDetailValueInt;
+      int targetValueInt;
+
+      if (int.TryParse(orderDetailAttributeValue, out orderDetailValueInt) &&
+          int.TryParse(targetValue, out targetValueInt))
+      {
+        #region Convert to usable price objects
+
+        ICurrencyInfo transactionCurrencyInfo = CurrencyData.GetCurrencyInfo(transactionCurrency);
+        ICurrencyPrice transactionalPrice = new CurrencyPrice(orderDetailValueInt, transactionCurrencyInfo, CurrencyPriceType.Transactional);
+        ICurrencyInfo targetCurrencyInfo = CurrencyData.GetCurrencyInfo(targetCurrency);
+        ICurrencyPrice targetPrice = new CurrencyPrice(targetValueInt, targetCurrencyInfo, CurrencyPriceType.Transactional);
+        ICurrencyPrice convertedTransactionPrice = ConvertTransactionalToUSD(transactionalPrice);
+        ICurrencyPrice convertedTargetPrice = ConvertTransactionalToUSD(targetPrice);
+
+        #endregion
+
+        #region Handle value comparisons
+
+        switch (relationalOperator)
+        {
+          case PixelXmlNames.ComparisonGreaterThan:
+            shouldFirePixel = (convertedTransactionPrice.Price > convertedTargetPrice.Price);
+            break;
+          case PixelXmlNames.ComparisonGreaterThanOrEqual:
+            shouldFirePixel = (convertedTransactionPrice.Price >= convertedTargetPrice.Price);
+            break;
+          case PixelXmlNames.ComparisonLessThan:
+            shouldFirePixel = (convertedTransactionPrice.Price < convertedTargetPrice.Price);
+            break;
+          case PixelXmlNames.ComparisonLessThanOrEqual:
+            shouldFirePixel = (convertedTransactionPrice.Price <= convertedTargetPrice.Price);
+            break;
+          case PixelXmlNames.ComparisonEquals:
+            shouldFirePixel = (convertedTransactionPrice.Price == convertedTargetPrice.Price);
+            break;
+        }
+
+        #endregion
       }
       return shouldFirePixel;
     }

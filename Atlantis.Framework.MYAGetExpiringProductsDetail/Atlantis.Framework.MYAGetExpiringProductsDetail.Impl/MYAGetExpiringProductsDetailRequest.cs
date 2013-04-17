@@ -228,14 +228,8 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Impl
         product.UnifiedRenewalProductId = ParseDataRow(row["unified_renewal_pf_id"], (int?) null);
         product.BillingResourceId = ParseDataRow(row["resource_id"], (int?) null);
         product.UnifiedProductID = ParseDataRow(row["unified_productID"], (int?) null);
-        if (ds.Tables[0].Columns.Contains("externalResourceID"))
-        {
-          product.ExternalResourceId = ParseDataRow(row["externalResourceID"], string.Empty);
-        }
-        else
-        {
-          product.ExternalResourceId = string.Empty;
-        }
+        product.ExternalResourceId = ds.Tables[0].Columns.Contains("externalResourceID") ? ParseDataRow(row["externalResourceID"], string.Empty) : string.Empty;
+        product.FriendlyName = ds.Tables[0].Columns.Contains("description2") ? ParseDataRow(row["description2"], string.Empty) : string.Empty;
 
         productList.Add(product);
       }

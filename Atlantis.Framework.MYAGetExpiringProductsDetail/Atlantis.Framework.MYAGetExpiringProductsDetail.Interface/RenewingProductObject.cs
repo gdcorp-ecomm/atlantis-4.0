@@ -16,6 +16,9 @@ namespace Atlantis.Framework.MYAGetExpiringProductsDetail.Interface
     [DataMember(Name = "desc")]
     public string Description { get; set; }
 
+    [DataMember(Name = "description2")]
+    public string FriendlyName { get; set; }
+
     [DataMember(Name = "pfid")]
     public int? PFID { get; set; }
 

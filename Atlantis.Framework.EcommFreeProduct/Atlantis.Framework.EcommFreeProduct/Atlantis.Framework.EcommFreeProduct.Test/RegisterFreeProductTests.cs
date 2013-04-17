@@ -74,7 +74,7 @@ namespace Atlantis.Framework.RegFreeProduct.Test
       RegisterFreeProductRequestData request = new RegisterFreeProductRequestData(_shopperId, string.Empty, string.Empty, string.Empty, 0, string.Empty);
       request.AddItem("2701", "1");
 
-      int _requestType = 642;
+      int _requestType = 679;
       RegisterFreeProductResponseData response = (RegisterFreeProductResponseData)Engine.Engine.ProcessRequest(request, _requestType);
 
       // Cache call

@@ -1,0 +1,940 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://alpha.orion.dev.starfieldtech.com" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://alpha.orion.dev.starfieldtech.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://alpha.orion.dev.starfieldtech.com">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="ReadEventQueueByType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EventTypes" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadEventQueueByTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReadEventQueueByTypeResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfEvent" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEvent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Event" nillable="true" type="tns:Event" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Event">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="UID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="AuditMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventTypeDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Requestor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestorDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateModified" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCompleted" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProcessDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventItems" type="tns:ArrayOfEventItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="AuditItems" type="tns:ArrayOfEventAuditItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEventItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EventItem" nillable="true" type="tns:EventItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EventItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="UID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="TargetUID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemTypeDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ObjectType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PriorValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:Account" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Account">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SystemNamespace" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResellerId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProductTemplateId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductTemplateName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductUid" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrionCustomerId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpireDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CanBeModified" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsActive" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsRemoved" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountAttributes" type="tns:ArrayOfAccountAttribute" />
+          <s:element minOccurs="0" maxOccurs="1" name="Quotas" type="tns:ArrayOfAccountQuota" />
+          <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:ArrayOfAccountInternalData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAccountAttribute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountAttribute" nillable="true" type="tns:AccountAttribute" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountAttribute">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AttributeId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AttributeUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductAttributeUid" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsTemplateAttribute" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TemplateInternalName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayStatus" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReadOnly" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CanBeModified" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountElements" type="tns:ArrayOfAccountElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAccountElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountElement" nillable="true" type="tns:AccountElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ElementId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ElementUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductAttributeElementUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayStatus" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReadOnly" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CanBeModified" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChildElements" type="tns:ArrayOfAccountElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAccountQuota">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountQuota" nillable="true" type="tns:AccountQuota" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountQuota">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="objType" type="tns:ObjectType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ObjectUid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuotaType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaUsage" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaBeginPeriod" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaEndPeriod" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:ArrayOfAccountQuotaDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ObjectType">
+        <s:restriction base="s:string">
+          <s:enumeration value="ACCOUNT" />
+          <s:enumeration value="ATTRIBUTE" />
+          <s:enumeration value="ELEMENT" />
+          <s:enumeration value="SERVER" />
+          <s:enumeration value="RESELLER" />
+          <s:enumeration value="APPLICATION" />
+          <s:enumeration value="PRODUCT" />
+          <s:enumeration value="PRODUCT_ATTRIBUTE" />
+          <s:enumeration value="PRODUCT_ATTRIBUTE_ELEMENT" />
+          <s:enumeration value="ACCOUNT_ATTRIBUTE" />
+          <s:enumeration value="ACCOUNT_ATTRIBUTE_ELEMENT" />
+          <s:enumeration value="MODIFIED_ELEMENT" />
+          <s:enumeration value="NEW_ATTRIBUTE" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfAccountQuotaDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountQuotaDetail" nillable="true" type="tns:AccountQuotaDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountQuotaDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AccountAttributeName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuotaType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaUsage" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaBeginPeriod" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuotaEndPeriod" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAccountInternalData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountInternalData" nillable="true" type="tns:AccountInternalData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountInternalData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemValue" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEventAuditItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EventAuditItem" nillable="true" type="tns:EventAuditItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EventAuditItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="EventID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="StatusID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateModified" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AuthHeader" type="tns:AuthHeader" />
+      <s:complexType name="AuthHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="ReadEventQueueByType_Paged">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EventTypes" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EventIndex" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadEventQueueByType_PagedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReadEventQueueByType_PagedResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfEvent" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadEventQueue_INIT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EventTypes" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EventIndex" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadEventQueue_INITResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReadEventQueue_INITResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfEvent" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadEventQueuebySubscriber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Subscriber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EventIndex" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadEventQueuebySubscriberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReadEventQueuebySubscriberResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfEvent" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertEvents">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Events" type="tns:ArrayOfEvent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertEventsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertEventsResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertEventsEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Events" type="tns:ArrayOfEvent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertEventsExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertEventsExResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfEventId" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEventId">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EventId" nillable="true" type="tns:EventId" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EventId">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Uid" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateEvents">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Events" type="tns:ArrayOfEventUpdate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEventUpdate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EventUpdate" nillable="true" type="tns:EventUpdate" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EventUpdate">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AuditMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateEventsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateEventsResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssignEvents">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EventUID" type="tns:ArrayOfGuid" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subscriber" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGuid">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="guid" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AssignEventsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AssignEventsResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReAssignEvents">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EventUID" type="tns:ArrayOfGuid" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subscriber" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReAssignEventsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReAssignEventsResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEventsByEventId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EventId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEventsByEventIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetEventsByEventIdResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfEvent" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateEventProcessDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Events" type="tns:ArrayOfEvent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateEventProcessDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateEventProcessDateResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddSubscriber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubscriberName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddSubscriberResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSubscribers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubscriberName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="AllowPartialMatch" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubscribersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Subscribers" type="tns:ArrayOfSubscriber" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSubscriber">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Subscriber" nillable="true" type="tns:Subscriber" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Subscriber">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetConfiguredListeners">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EventType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfiguredListenersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Listeners" type="tns:ArrayOfString1" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Name" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ReadEventQueueByTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadEventQueueByType" />
+  </wsdl:message>
+  <wsdl:message name="ReadEventQueueByTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadEventQueueByTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadEventQueueByTypeAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="ReadEventQueueByType_PagedSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadEventQueueByType_Paged" />
+  </wsdl:message>
+  <wsdl:message name="ReadEventQueueByType_PagedSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadEventQueueByType_PagedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadEventQueueByType_PagedAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="ReadEventQueue_INITSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadEventQueue_INIT" />
+  </wsdl:message>
+  <wsdl:message name="ReadEventQueue_INITSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadEventQueue_INITResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadEventQueue_INITAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="ReadEventQueuebySubscriberSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadEventQueuebySubscriber" />
+  </wsdl:message>
+  <wsdl:message name="ReadEventQueuebySubscriberSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadEventQueuebySubscriberResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadEventQueuebySubscriberAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="InsertEventsSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertEvents" />
+  </wsdl:message>
+  <wsdl:message name="InsertEventsSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertEventsAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="InsertEventsExSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertEventsEx" />
+  </wsdl:message>
+  <wsdl:message name="InsertEventsExSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertEventsExResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertEventsExAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEventsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateEvents" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEventsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEventsAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="AssignEventsSoapIn">
+    <wsdl:part name="parameters" element="tns:AssignEvents" />
+  </wsdl:message>
+  <wsdl:message name="AssignEventsSoapOut">
+    <wsdl:part name="parameters" element="tns:AssignEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AssignEventsAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="ReAssignEventsSoapIn">
+    <wsdl:part name="parameters" element="tns:ReAssignEvents" />
+  </wsdl:message>
+  <wsdl:message name="ReAssignEventsSoapOut">
+    <wsdl:part name="parameters" element="tns:ReAssignEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReAssignEventsAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetEventsByEventIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEventsByEventId" />
+  </wsdl:message>
+  <wsdl:message name="GetEventsByEventIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEventsByEventIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEventsByEventIdAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEventProcessDateSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateEventProcessDate" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEventProcessDateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateEventProcessDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEventProcessDateAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="AddSubscriberSoapIn">
+    <wsdl:part name="parameters" element="tns:AddSubscriber" />
+  </wsdl:message>
+  <wsdl:message name="AddSubscriberSoapOut">
+    <wsdl:part name="parameters" element="tns:AddSubscriberResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSubscribersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubscribers" />
+  </wsdl:message>
+  <wsdl:message name="GetSubscribersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubscribersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConfiguredListenersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConfiguredListeners" />
+  </wsdl:message>
+  <wsdl:message name="GetConfiguredListenersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConfiguredListenersResponse" />
+  </wsdl:message>
+  <wsdl:portType name="EventQueueSoap">
+    <wsdl:operation name="ReadEventQueueByType">
+      <wsdl:input message="tns:ReadEventQueueByTypeSoapIn" />
+      <wsdl:output message="tns:ReadEventQueueByTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadEventQueueByType_Paged">
+      <wsdl:input message="tns:ReadEventQueueByType_PagedSoapIn" />
+      <wsdl:output message="tns:ReadEventQueueByType_PagedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadEventQueue_INIT">
+      <wsdl:input message="tns:ReadEventQueue_INITSoapIn" />
+      <wsdl:output message="tns:ReadEventQueue_INITSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadEventQueuebySubscriber">
+      <wsdl:input message="tns:ReadEventQueuebySubscriberSoapIn" />
+      <wsdl:output message="tns:ReadEventQueuebySubscriberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertEvents">
+      <wsdl:input message="tns:InsertEventsSoapIn" />
+      <wsdl:output message="tns:InsertEventsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertEventsEx">
+      <wsdl:input message="tns:InsertEventsExSoapIn" />
+      <wsdl:output message="tns:InsertEventsExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEvents">
+      <wsdl:input message="tns:UpdateEventsSoapIn" />
+      <wsdl:output message="tns:UpdateEventsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignEvents">
+      <wsdl:input message="tns:AssignEventsSoapIn" />
+      <wsdl:output message="tns:AssignEventsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReAssignEvents">
+      <wsdl:input message="tns:ReAssignEventsSoapIn" />
+      <wsdl:output message="tns:ReAssignEventsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsByEventId">
+      <wsdl:input message="tns:GetEventsByEventIdSoapIn" />
+      <wsdl:output message="tns:GetEventsByEventIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventProcessDate">
+      <wsdl:input message="tns:UpdateEventProcessDateSoapIn" />
+      <wsdl:output message="tns:UpdateEventProcessDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSubscriber">
+      <wsdl:input message="tns:AddSubscriberSoapIn" />
+      <wsdl:output message="tns:AddSubscriberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscribers">
+      <wsdl:input message="tns:GetSubscribersSoapIn" />
+      <wsdl:output message="tns:GetSubscribersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfiguredListeners">
+      <wsdl:input message="tns:GetConfiguredListenersSoapIn" />
+      <wsdl:output message="tns:GetConfiguredListenersSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EventQueueSoap" type="tns:EventQueueSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ReadEventQueueByType">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/ReadEventQueueByType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ReadEventQueueByTypeAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadEventQueueByType_Paged">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/ReadEventQueueByType_Paged" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ReadEventQueueByType_PagedAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadEventQueue_INIT">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/ReadEventQueue_INIT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ReadEventQueue_INITAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadEventQueuebySubscriber">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/ReadEventQueuebySubscriber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ReadEventQueuebySubscriberAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertEvents">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/InsertEvents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:InsertEventsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertEventsEx">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/InsertEventsEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:InsertEventsExAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEvents">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/UpdateEvents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateEventsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignEvents">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/AssignEvents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AssignEventsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReAssignEvents">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/ReAssignEvents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ReAssignEventsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsByEventId">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/GetEventsByEventId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetEventsByEventIdAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventProcessDate">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/UpdateEventProcessDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateEventProcessDateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSubscriber">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/AddSubscriber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscribers">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/GetSubscribers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfiguredListeners">
+      <soap:operation soapAction="http://alpha.orion.dev.starfieldtech.com/GetConfiguredListeners" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EventQueueSoap1" type="tns:EventQueueSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ReadEventQueueByType">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/ReadEventQueueByType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ReadEventQueueByTypeAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadEventQueueByType_Paged">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/ReadEventQueueByType_Paged" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ReadEventQueueByType_PagedAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadEventQueue_INIT">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/ReadEventQueue_INIT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ReadEventQueue_INITAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadEventQueuebySubscriber">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/ReadEventQueuebySubscriber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ReadEventQueuebySubscriberAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertEvents">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/InsertEvents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:InsertEventsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertEventsEx">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/InsertEventsEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:InsertEventsExAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEvents">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/UpdateEvents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateEventsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignEvents">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/AssignEvents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AssignEventsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReAssignEvents">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/ReAssignEvents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ReAssignEventsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsByEventId">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/GetEventsByEventId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetEventsByEventIdAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventProcessDate">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/UpdateEventProcessDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateEventProcessDateAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSubscriber">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/AddSubscriber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscribers">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/GetSubscribers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfiguredListeners">
+      <soap12:operation soapAction="http://alpha.orion.dev.starfieldtech.com/GetConfiguredListeners" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EventQueue">
+    <wsdl:port name="EventQueueSoap" binding="tns:EventQueueSoap">
+      <soap:address location="https://orion.starfieldtech.com.dev.sdl1.gdg/internal/eventqueue.asmx" />
+    </wsdl:port>
+    <wsdl:port name="EventQueueSoap1" binding="tns:EventQueueSoap1">
+      <soap12:address location="https://orion.starfieldtech.com.dev.sdl1.gdg/internal/eventqueue.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

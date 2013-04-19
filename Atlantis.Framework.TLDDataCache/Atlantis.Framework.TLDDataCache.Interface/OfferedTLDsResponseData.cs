@@ -44,7 +44,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
         }
       }
 
-      var overrideTlds = TLDsHelper.OverrideTlds;
+      var overrideTlds = TLDsHelper.OverrideTlds();
       if (overrideTlds.Count > 0)
       {
         tlds.AddRange(new List<string>(overrideTlds));

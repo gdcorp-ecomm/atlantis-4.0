@@ -81,7 +81,7 @@ namespace Atlantis.Framework.TLDDataCache.Interface
 
     private void AddOverrideTldsToFlagSet()
     {
-      HashSet<string> overrideTlds = TLDsHelper.OverrideTlds;
+      HashSet<string> overrideTlds = TLDsHelper.OverrideTlds();
       if (overrideTlds != null && overrideTlds.Count > 0)
       {
         foreach (var overrideTld in overrideTlds)

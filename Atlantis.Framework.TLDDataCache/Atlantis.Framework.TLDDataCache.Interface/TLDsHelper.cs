@@ -1,39 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Atlantis.Framework.TLDDataCache.Interface
 {
   public static class TLDsHelper
   {
-    private static HashSet<string> _overrideTlds;
-    public static HashSet<string> OverrideTlds
+    public static HashSet<string> OverrideTlds()
     {
-      get
+      var overrideTlds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+      string stagingServers = DataCache.DataCache.GetAppSetting("DOTTYPECACHE_STAGING_SERVERS");
+      string stagingTlds = DataCache.DataCache.GetAppSetting("DOTTYPECACHE_STAGING_TLDS");
+
+      if (!string.IsNullOrEmpty(stagingServers) && !string.IsNullOrEmpty(stagingTlds))
       {
-        if (_overrideTlds == null)
+        var serverArr = stagingServers.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (var serverName in serverArr)
         {
-          _overrideTlds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-          string stagingServers = DataCache.DataCache.GetAppSetting("DOTTYPECACHE_STAGING_SERVERS");
-          string stagingTlds = DataCache.DataCache.GetAppSetting("DOTTYPECACHE_STAGING_TLDS");
-
-          if (!string.IsNullOrEmpty(stagingServers) && !string.IsNullOrEmpty(stagingTlds))
+          if (Environment.MachineName.Equals(serverName, StringComparison.OrdinalIgnoreCase))
           {
-            var serverArr = stagingServers.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
-            if (serverArr.Any(s => s.Trim().ToLowerInvariant() == Environment.MachineName.ToLowerInvariant()))
-            {
-              var stagingTldList = stagingTlds.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+            var stagingTldList = stagingTlds.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
 
-              foreach (var tld in stagingTldList)
-              {
-                _overrideTlds.Add(tld);
-              }
-            }
+            overrideTlds = new HashSet<string>(stagingTldList, StringComparer.OrdinalIgnoreCase);
           }
         }
-        return _overrideTlds;
       }
+
+      return overrideTlds;
     }
   }
 }

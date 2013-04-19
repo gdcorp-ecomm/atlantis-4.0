@@ -43,8 +43,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Data\LanguageData.cs" />
+    <Compile Include="Data\Logging.cs" />
+    <Compile Include="Data\Phrase.cs" />
+    <Compile Include="Data\PhraseData.cs" />
+    <Compile Include="Data\PhraseDictionary.cs" />
+    <Compile Include="Data\PhrasePredicate.cs" />
+    <Compile Include="Data\PhraseGroup.cs" />
+    <Compile Include="Data\XElementExtensions.cs" />
+    <Compile Include="LanguagePhraseRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
+      <Name>Atlantis.Framework.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.Language.Interface\Atlantis.Framework.Language.Interface.csproj">
+      <Project>{11a7884c-71b6-41cd-824f-0f22797d417d}</Project>
+      <Name>Atlantis.Framework.Language.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\LanguageData.dat" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

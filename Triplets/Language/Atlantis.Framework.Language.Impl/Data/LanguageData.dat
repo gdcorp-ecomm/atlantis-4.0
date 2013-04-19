@@ -1,0 +1,13 @@
+﻿<phrase dictionary="testdictionary" key="testkey" />
+Green River
+<phrase dictionary="testdictionary" key="testkey" language="es" />
+Rio Verde
+<phrase dictionary="testdictionary" key="testkey" contextid="1" />
+GoDaddy Green River
+<phrase dictionary="testdictionary" key="testkey" countrysite="uk" />
+Thames River
+<phrase dictionary="testdictionary" key="testkey" countrysite="uk" language="es" />
+el Thames River
+<phrase dictionary="testdictionary" key="testkey" countrysite="uk" language="es-mx" contextid="6" />
+el Thames Reseller River
+

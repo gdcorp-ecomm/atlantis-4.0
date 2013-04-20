@@ -4,7 +4,7 @@ namespace Atlantis.Framework.Reseller.Interface.CustomDomains
 {
     public struct DnsEntry
     {
-        public DnsEntry(string fqdn, DnsRecordType recordType, bool isAssignable)
+        internal DnsEntry(string fqdn, DnsRecordType recordType, bool isAssignable)
         {
             FQDN = fqdn;
             RecordType = recordType;

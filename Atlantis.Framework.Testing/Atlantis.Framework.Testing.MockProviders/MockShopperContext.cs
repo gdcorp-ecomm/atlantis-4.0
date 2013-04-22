@@ -1,10 +1,9 @@
 ﻿using Atlantis.Framework.Interface;
 using System;
-using System.Web;
 
 namespace Atlantis.Framework.Testing.MockProviders
 {
-  public class MockShopperContext : ProviderBase, IShopperContext
+  public class MockShopperContext : MockProviderBase, IShopperContext
   {
     Lazy<ISiteContext> _siteContext;
 
@@ -52,14 +51,13 @@ namespace Atlantis.Framework.Testing.MockProviders
       get
       {
         int result = 0;
-        if (HttpContext.Current != null)
+
+        object priceType = GetMockSetting(MockShopperContextSettings.PriceType);
+        if ((priceType != null) && (priceType is int))
         {
-          object priceType = HttpContext.Current.Items[MockShopperContextSettings.PriceType];
-          if ((priceType != null) && (priceType is int))
-          {
-            result = (int)priceType;
-          }
+          result = (int)priceType;
         }
+
         return result;
       }
     }

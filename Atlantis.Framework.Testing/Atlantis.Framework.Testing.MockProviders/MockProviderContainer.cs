@@ -8,11 +8,12 @@ namespace Atlantis.Framework.Testing.MockProviders
 {
   public class MockProviderContainer : IProviderContainer
   {
-    private const string KEY_FORMAT = "Atlantis.Framework.Interface.ObjectProviderContainer.{0}";
+    private const string KEY_FORMAT = "Atlantis.Framework.Interface.MockProviderContainer.{0}";
 
     private readonly object _lockSync = new object();
     private readonly IDictionary<Type, Type> _registeredProvidersDictionary = new Dictionary<Type, Type>(64);
     private readonly IDictionary<string, object> _providerInterfaces = new Dictionary<string, object>();
+    private readonly IDictionary<string, object> _mockProviderSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
 
     private static string GetObjectKey(Type type)
     {
@@ -74,7 +75,7 @@ namespace Atlantis.Framework.Testing.MockProviders
       if (providerInterface == null)
       {
         providerInterface = ProviderContainerHelper.ConstructProvider<TProviderInterface>(providerType, this);
-        Debug.WriteLine(string.Format("ObjectProviderContainer: {0}:{1} instantiated | Key: {2} | Url: {3}", providerInterfaceType.Name, providerType.Name, key, string.Empty));
+        Debug.WriteLine(string.Format("MockProviderContainer: {0}:{1} instantiated | Key: {2}", providerInterfaceType.Name, providerType.Name, key));
         _providerInterfaces[key] = providerInterface;
       }
 
@@ -178,7 +179,21 @@ namespace Atlantis.Framework.Testing.MockProviders
 
         return constructorInfo != null;
       }
+    }
 
+    public object GetMockSetting(string name)
+    {
+      object result = null;
+      if (_mockProviderSettings.ContainsKey(name))
+      {
+        result = _mockProviderSettings[name];
+      }
+      return result;
+    }
+
+    public void SetMockSetting(string name, object value)
+    {
+      _mockProviderSettings[name] = value;
     }
 
   }

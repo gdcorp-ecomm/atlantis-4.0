@@ -4,7 +4,7 @@ using System.Web;
 
 namespace Atlantis.Framework.Testing.MockProviders
 {
-  public class MockSiteContext : ProviderBase, ISiteContext
+  public class MockSiteContext : MockProviderBase, ISiteContext
   {
     public MockSiteContext(IProviderContainer container)
       : base(container)
@@ -51,11 +51,12 @@ namespace Atlantis.Framework.Testing.MockProviders
         {
           result = Manager.ManagerPrivateLabelId;
         }
-        else if (HttpContext.Current != null)
+        else
         {
-          if (HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] != null)
+          object mockPrivateLabelId = GetMockSetting(MockSiteContextSettings.PrivateLabelId);
+          if (mockPrivateLabelId != null)
           {
-            result = Convert.ToInt32(HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId]);
+            result = Convert.ToInt32(mockPrivateLabelId);
           }
         }
         return result;
@@ -88,14 +89,13 @@ namespace Atlantis.Framework.Testing.MockProviders
       get 
       {
         int result = 0;
-        if (HttpContext.Current != null)
+
+        object mockPageCount = GetMockSetting(MockSiteContextSettings.PageCount);
+        if (mockPageCount != null)
         {
-          object pageCount = HttpContext.Current.Items[MockSiteContextSettings.PageCount];
-          if ((pageCount != null) && (pageCount is int))
-          {
-            result = Convert.ToInt32(pageCount);
-          }
+          result = Convert.ToInt32(mockPageCount);
         }
+
         return result;
       }
     }
@@ -105,14 +105,13 @@ namespace Atlantis.Framework.Testing.MockProviders
       get 
       {
         string result = string.Empty;
-        if (HttpContext.Current != null)
+
+        string mockPathway = GetMockSetting(MockSiteContextSettings.Pathway) as string;
+        if (mockPathway != null)
         {
-          string pathway = HttpContext.Current.Items[MockSiteContextSettings.Pathway] as string;
-          if (pathway != null)
-          {
-            result = pathway;
-          }
+          result = mockPathway;
         }
+
         return result;
       }
     }
@@ -126,6 +125,7 @@ namespace Atlantis.Framework.Testing.MockProviders
         {
           result = HttpContext.Current.Request.QueryString["ci"] ?? string.Empty;
         }
+
         return result;
       }
     }
@@ -139,6 +139,7 @@ namespace Atlantis.Framework.Testing.MockProviders
         {
           result = HttpContext.Current.Request.QueryString["isc"] ?? string.Empty;
         }
+
         return result;
       }
     }
@@ -148,13 +149,13 @@ namespace Atlantis.Framework.Testing.MockProviders
       get 
       {
         bool result = false;
-        if (HttpContext.Current != null)
+
+        object mockIsRequestInternal = GetMockSetting(MockSiteContextSettings.IsRequestInternal);
+        if (mockIsRequestInternal != null)
         {
-          if (HttpContext.Current.Items[MockSiteContextSettings.IsRequestInternal] != null)
-          {
-            result = Convert.ToBoolean(HttpContext.Current.Items[MockSiteContextSettings.IsRequestInternal]);
-          }
+          result = Convert.ToBoolean(mockIsRequestInternal);
         }
+
         return result;
       }
     }
@@ -164,13 +165,13 @@ namespace Atlantis.Framework.Testing.MockProviders
       get
       {
         ServerLocationType result = ServerLocationType.Dev;
-        if (HttpContext.Current != null)
+
+        object mockServerLocation = GetMockSetting(MockSiteContextSettings.ServerLocation);
+        if (mockServerLocation != null)
         {
-          if (HttpContext.Current.Items[MockSiteContextSettings.IsRequestInternal] != null)
-          {
-            result = (ServerLocationType)HttpContext.Current.Items[MockSiteContextSettings.ServerLocation];
-          }
+          result = (ServerLocationType)mockServerLocation;
         }
+
         return result;
       }
     }

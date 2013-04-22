@@ -42,7 +42,9 @@ namespace Atlantis.Framework.CDS.Entities.Widgets
     GoogleEsDomains,
     GoogleEsHomePage,
     GoogleEsHosting,
-    GoogleEsSSL
+    GoogleEsSSL,
+    FacebookRetargeting,
+    RocketFuel
   }
 
   public class TrackingPixel : IWidgetModel

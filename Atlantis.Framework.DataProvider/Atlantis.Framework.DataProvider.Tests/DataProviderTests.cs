@@ -1,9 +1,6 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
 using Atlantis.Framework.DataProvider.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.DataProvider.Tests
 {
@@ -84,5 +81,34 @@ namespace Atlantis.Framework.DataProvider.Tests
       object result = response.GetResponseObject();
       Assert.IsNotNull(result);
     }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("DataProvider.xml")]
+    [DeploymentItem("Atlantis.Framework.DataProvider.Impl.dll")]
+    public void DataProviderWebServiceBasic()
+    {
+      var parameters = new Dictionary<string, object>(1);
+      parameters["bstrShopperID"] = "840420";
+      var request = new DataProviderRequestData("840420", string.Empty, string.Empty, string.Empty, 0, "BasketGetItemCounts", parameters);
+      var response = (DataProviderResponseData)Engine.Engine.ProcessRequest(request, 35);
+      object result = response.GetResponseObject();
+      Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("DataProvider.xml")]
+    [DeploymentItem("Atlantis.Framework.DataProvider.Impl.dll")]
+    public void DataProviderWebServiceWithCert()
+    {
+      var parameters = new Dictionary<string, object>(1);
+      parameters["shopperID"] = "840420";
+      var request = new DataProviderRequestData("840420", string.Empty, string.Empty, string.Empty, 0, "CostcoGetMemberInfo", parameters);
+      var response = (DataProviderResponseData)Engine.Engine.ProcessRequest(request, 35);
+      object result = response.GetResponseObject();
+      Assert.IsNotNull(result);
+    }
+
   }
 }

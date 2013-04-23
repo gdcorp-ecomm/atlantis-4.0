@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Web.Services.Description;
@@ -306,7 +307,7 @@ namespace Atlantis.Framework.DataProvider.Impl
 
     private object DoWebServiceMethod(ProviderRequestSetting wss, DataProviderRequestData oDataProviderRequestData, out Dictionary<string, object> outputParameters)
     {
-      Type serviceType = LookupWebServiceType(oDataProviderRequestData, wss.HostName);
+      Type serviceType = LookupWebServiceType(oDataProviderRequestData, wss);
       MethodInfo targetMethod = GetTargetMethod(oDataProviderRequestData, serviceType, wss.TargetName);
       PropertyInfo timeoutProperty = GetTimeoutProperty(oDataProviderRequestData, serviceType);
 
@@ -335,6 +336,18 @@ namespace Atlantis.Framework.DataProvider.Impl
       object result = null;
       using (IDisposable instance = Activator.CreateInstance(serviceType) as IDisposable)
       {
+        if (!string.IsNullOrEmpty(wss.CertName))
+        {
+          var clientCertsProperty = GetClientCertificatesProperty(oDataProviderRequestData, serviceType);
+          if (clientCertsProperty != null)
+          {
+            var cert = wss.GetClientCertificate(wss.CertName);
+            cert.Verify();
+            var certs = (X509CertificateCollection)clientCertsProperty.GetValue(instance, null);
+            certs.Add(cert);
+          }
+        }
+
         if (timeoutProperty != null)
         {
           int millisecondTimeout = (int)oDataProviderRequestData.RequestTimeout.TotalMilliseconds;
@@ -355,12 +368,13 @@ namespace Atlantis.Framework.DataProvider.Impl
       return result;
     }
 
-    private Type LookupWebServiceType(DataProviderRequestData oDataProviderRequestData, string hostName)
+    private Type LookupWebServiceType(DataProviderRequestData oDataProviderRequestData, ProviderRequestSetting wss)
     {
-      Type serviceType = null;
+      var hostName = wss.HostName;
       try
       {
         _wsdlLock.AcquireReaderLock(Timeout.Infinite);
+        Type serviceType;
         if (m_webServices.TryGetValue(oDataProviderRequestData.RequestName, out serviceType))
         {
           _wsdlLock.ReleaseLock();
@@ -376,7 +390,12 @@ namespace Atlantis.Framework.DataProvider.Impl
           {
             string suffixedHostName = EnsureWSDLQuery(hostName);
 
-            WebRequest webReq = WebRequest.Create(suffixedHostName);
+            var webReq = WebRequest.Create(suffixedHostName);
+            if (!string.IsNullOrEmpty(wss.CertName))
+            {
+              ((HttpWebRequest)webReq).ClientCertificates.Add(wss.GetClientCertificate(wss.CertName));
+            }
+
             Stream stream = webReq.GetResponse().GetResponseStream();
             ServiceDescription serviceDesc = ServiceDescription.Read(stream);
             string serviceName = serviceDesc.Services[0].Name;
@@ -471,6 +490,21 @@ namespace Atlantis.Framework.DataProvider.Impl
       foreach (PropertyInfo property in properties)
       {
         if (property.Name == "Timeout")
+        {
+          result = property;
+          break;
+        }
+      }
+      return result;
+    }
+
+    private PropertyInfo GetClientCertificatesProperty(DataProviderRequestData oDataProviderRequestData, Type serviceType)
+    {
+      PropertyInfo result = null;
+      PropertyInfo[] properties = serviceType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+      foreach (PropertyInfo property in properties)
+      {
+        if (property.Name == "ClientCertificates")
         {
           result = property;
           break;

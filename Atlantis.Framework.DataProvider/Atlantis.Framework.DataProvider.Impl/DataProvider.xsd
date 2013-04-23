@@ -44,6 +44,7 @@
                   </xs:sequence>
                   <xs:attribute name="name" type="xs:string" use="required" />
                   <xs:attribute name="host_name" type="xs:string" use="required" />
+                  <xs:attribute name="cert_name" type="xs:string" use="optional" />
                   <xs:attribute name="target_name" type="xs:string" use="required" />
                 </xs:complexType>
               </xs:element>

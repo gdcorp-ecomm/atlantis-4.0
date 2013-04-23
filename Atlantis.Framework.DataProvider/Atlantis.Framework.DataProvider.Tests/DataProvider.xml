@@ -30,6 +30,12 @@
       <param name="application_id" type="short"></param>
       <param name="privateLabelId" type="int"></param>
     </wssetting>
+    <wssetting name="BasketGetItemCounts" host_name="http://gdcomm.dev.glbt1.gdg/WscgdBasket/WscgdBasket.dll?Handler=GenWscgdBasketWSDL" target_name="GetItemCounts">
+      <param name="ShopperID" type="string"></param>
+    </wssetting>
+    <wssetting name="CostcoGetMemberInfo" host_name="https://gdcomm.dev.glbt1.gdg/WSgdCostco/Service1.asmx?WSDL" target_name="GetMemberInfo" cert_name="corp.web.mya.dev.client.godaddy.com">
+      <param name="shopperID" type="string"></param>
+    </wssetting>
   </WebService>
   <RESTService>
     <rssetting name="menuxmlservice_request" host_name="http://services.dev.godaddy-com.ide/menus/ControlPanelMenuXmlService.aspx" target_name="">

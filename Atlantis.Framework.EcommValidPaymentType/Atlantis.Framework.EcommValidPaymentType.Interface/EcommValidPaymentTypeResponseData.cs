@@ -47,28 +47,28 @@ namespace Atlantis.Framework.EcommValidPaymentType.Interface
 
     private bool ParseResponseXml(string responseXml)
     {
-      XmlDocument activePaymentTypesXml = new XmlDocument();
-      activePaymentTypesXml.LoadXml(responseXml);
+        XmlDocument activePaymentTypesXml = new XmlDocument();
+        activePaymentTypesXml.LoadXml(responseXml);
 
-      XmlNodeList paymentType = activePaymentTypesXml.SelectNodes("//PaymentType");
+        XmlNodeList paymentType = activePaymentTypesXml.SelectNodes("//PaymentType");
 
-      if (paymentType != null)
-      {
-        foreach (XmlElement currentType in paymentType)
+        if (paymentType != null)
         {
-          string type = currentType.GetAttribute("type");
-          string name = currentType.GetAttribute("name");
-          if (!string.IsNullOrEmpty(type))
+          foreach (XmlElement currentType in paymentType)
           {
-            PaymentTypeInfo newType = new PaymentTypeInfo(type, name);
-            _allowedPaymentTypes.Add(type);
-            _allowedPaymentTypeInfos.Add(newType);
-            _allowedPaymentTypeNames.Add(type.ToLowerInvariant() + "." + name.ToLowerInvariant());
+            string type = currentType.GetAttribute("type");
+            string name = currentType.GetAttribute("name");
+            if (!string.IsNullOrEmpty(type))
+            {
+              PaymentTypeInfo newType = new PaymentTypeInfo(type, name);
+              _allowedPaymentTypes.Add(type);
+              _allowedPaymentTypeInfos.Add(newType);
+              _allowedPaymentTypeNames.Add(type.ToLowerInvariant() + "." + name.ToLowerInvariant());
+            }
           }
         }
-      }
 
-      return _allowedPaymentTypes.Count > 0;
+      return _allowedPaymentTypes.Count >= 0;
     }
 
     public bool IsPaymentTypeAllowed(string paymentType, string paymentName)

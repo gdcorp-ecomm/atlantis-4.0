@@ -47,6 +47,44 @@ namespace Atlantis.Framework.EcommValidPaymentType.Tests
     }
 
     [TestMethod]
+    public void GetValidPaymentTypesForCOP()
+    {
+      EcommValidPaymentTypeRequestData requestData = new EcommValidPaymentTypeRequestData("847235",
+                                                                                          "http://atlantis.framework.ecommvalidpaymenttype.tests/",
+                                                                                          string.Empty,
+                                                                                          Guid.NewGuid().ToString(),
+                                                                                          0,
+                                                                                          "gdshop",
+                                                                                          "COP");
+
+      try
+      {
+        EcommValidPaymentTypeResponseData responseData = (EcommValidPaymentTypeResponseData)Engine.Engine.ProcessRequest(requestData, 362);
+
+        if (responseData.IsSuccess)
+        {
+          if (responseData.IsPaymentTypeAllowed(PaymentTypes.CreditCard, "Discover"))
+          {
+            Console.Write("Credit card payment is allowed for USD");
+          }
+          else
+          {
+            Console.Write("Credit card payment is NOT allowed for USD");
+          }
+        }
+        else
+        {
+          Assert.Fail();
+        }
+      }
+      catch (Exception ex)
+      {
+        Console.Write(ex.Message);
+        Assert.Fail();
+      }
+    }
+
+    [TestMethod]
     [DeploymentItem("atlantis.config")]
     public void GetValidPaymentTypesForGBP()
     {

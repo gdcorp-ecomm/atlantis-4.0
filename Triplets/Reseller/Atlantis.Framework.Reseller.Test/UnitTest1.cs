@@ -16,19 +16,32 @@ namespace Atlantis.Framework.Reseller.Test
             string knownCustomDomainUrl = "dev.minimyn.com";
             int knownPlid = 441130;
 
-            GetCustomDomainSiteByUrlRequestData request = new GetCustomDomainSiteByUrlRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, knownCustomDomainUrl);
-            GetCustomDomainSiteByUrlResponseData response = Engine.Engine.ProcessRequest(request, 682) as GetCustomDomainSiteByUrlResponseData;
+            var request = new GetCustomDomainSiteByUrlRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, knownCustomDomainUrl);
+            GetCustomDomainSiteResponseData response = Engine.Engine.ProcessRequest(request, 682) as GetCustomDomainSiteResponseData;
 
             Assert.AreEqual(knownPlid, response.PrivateLabelId);
         }
+
+        [TestMethod]
+        public void GetCustomDomainSiteByPLID()
+        {
+          string knownCustomDomainUrl = "dev.minimyn.com";
+          int knownPlid = 441130;
+
+          var request = new GetCustomDomainSitebyPLIDRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, knownPlid);
+          GetCustomDomainSiteResponseData response = Engine.Engine.ProcessRequest(request, 682) as GetCustomDomainSiteResponseData;
+
+          Assert.AreEqual(knownCustomDomainUrl, response.DomainNameUrl);
+        }
+
 
         [TestMethod]
         public void FailedLookupCustomDomainSite()
         {
             string bunkDomainUrl = "werewrwew.com";
 
-            GetCustomDomainSiteByUrlRequestData request = new GetCustomDomainSiteByUrlRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, bunkDomainUrl);
-            GetCustomDomainSiteByUrlResponseData response = Engine.Engine.ProcessRequest(request, 682) as GetCustomDomainSiteByUrlResponseData;
+            var request = new GetCustomDomainSiteByUrlRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, bunkDomainUrl);
+            GetCustomDomainSiteResponseData response = Engine.Engine.ProcessRequest(request, 682) as GetCustomDomainSiteResponseData;
 
             Assert.IsTrue(response.ResponseState == Interface.CustomDomains.CustomDomainSiteRetrieveState.FailedLookup);
         }

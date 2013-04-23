@@ -11,9 +11,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Release Build")]
 #endif
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoDaddy.com")]
+[assembly: AssemblyCompany("GoDaddy")]
 [assembly: AssemblyProduct("Atlantis.Framework.DataProvider.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2012")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -36,4 +36,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.12.11.25")]
+[assembly: AssemblyFileVersion("4.13.04.23")]

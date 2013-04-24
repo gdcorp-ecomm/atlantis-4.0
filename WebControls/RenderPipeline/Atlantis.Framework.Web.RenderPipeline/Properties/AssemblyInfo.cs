@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Atlantis.Framework.Language.Impl")]
+[assembly: AssemblyTitle("Atlantis.Framework.Web.RenderPipeline")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
 [assembly: AssemblyConfiguration("Debug Build")]
@@ -13,9 +13,9 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyDescription("Release Build")]
 [assembly: AssemblyConfiguration("Release Build")]
 #endif
-[assembly: AssemblyCompany("GoDaddy.com")]
-[assembly: AssemblyProduct("Atlantis.Framework.Language.Impl")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com 2013")]
+[assembly: AssemblyCompany("GoDaddy")]
+[assembly: AssemblyProduct("Atlantis.Framework.Web.RenderPipeline")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -23,10 +23,9 @@ using System.Runtime.CompilerServices;
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
-[assembly: InternalsVisibleTo("Atlantis.Framework.Language.Tests")]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e71ebf9a-bf96-4cd5-b7fb-64c9ee22ca35")]
+[assembly: Guid("296d21b5-f2f9-4515-a8d9-f29f920b6d14")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -39,4 +38,4 @@ using System.Runtime.CompilerServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.4.18")]
+[assembly: AssemblyFileVersion("4.13.4.24")]

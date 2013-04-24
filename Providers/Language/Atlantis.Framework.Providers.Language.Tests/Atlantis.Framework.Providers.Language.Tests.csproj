@@ -58,6 +58,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="LanguageProviderTests.cs" />
+    <Compile Include="LanguageRenderHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +77,10 @@
     <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
+      <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Testing\Atlantis.Framework.Testing.MockLocalization\Atlantis.Framework.Testing.MockLocalization.csproj">
       <Project>{d4a97573-4ae0-4c40-843a-67b8b898b4bf}</Project>

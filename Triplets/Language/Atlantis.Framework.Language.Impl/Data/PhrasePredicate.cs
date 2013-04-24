@@ -53,19 +53,20 @@ namespace Atlantis.Framework.Language.Impl.Data
       {
         _phraseKeys.Add(BuildKey(contextId, _DEFAULTCOUNTRYSITE, language));
 
-        if (shortLangugage != null)
-        {
-          _phraseKeys.Add(BuildKey(contextId, _DEFAULTCOUNTRYSITE, shortLangugage));
-        }
-
         if (_DEFAULTCONTEXT != contextId)
         {
           _phraseKeys.Add(BuildKey(_DEFAULTCONTEXT, _DEFAULTCOUNTRYSITE, language));
-          if (shortLangugage != null)
+        }
+
+        if (shortLangugage != null)
+        {
+          _phraseKeys.Add(BuildKey(contextId, _DEFAULTCOUNTRYSITE, shortLangugage));
+          if (_DEFAULTCONTEXT != contextId)
           {
             _phraseKeys.Add(BuildKey(_DEFAULTCONTEXT, _DEFAULTCOUNTRYSITE, shortLangugage));
           }
         }
+
       }
 
       // degrade language - show english

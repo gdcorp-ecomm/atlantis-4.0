@@ -1,6 +1,8 @@
-﻿using Atlantis.Framework.Language.Interface;
+﻿using Atlantis.Framework.Language.Impl.Data;
+using Atlantis.Framework.Language.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml.Linq;
+using System.Linq;
 
 namespace Atlantis.Framework.Language.Tests
 {
@@ -193,6 +195,41 @@ namespace Atlantis.Framework.Language.Tests
       var response = (LanguagePhraseResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       Assert.AreEqual(string.Empty, response.LanguagePhrase);
     }
+
+    [TestMethod]
+    public void PhrasePredicateDegradationAll()
+    {
+      string expectedDegradation = "1|uk|es-mx,0|uk|es-mx,1|uk|es,0|uk|es,1|www|es-mx,0|www|es-mx,1|www|es,0|www|es,1|uk|en,0|uk|en,1|www|en,0|www|en";
+      PhrasePredicate predicate = new PhrasePredicate(1, "uk", "es-mx");
+      Assert.AreEqual(12, predicate.PhraseKeys.Count());
+
+      string joinedKeys = string.Join(",", predicate.PhraseKeys.ToArray());
+      Assert.AreEqual(expectedDegradation, joinedKeys);
+    }
+
+    [TestMethod]
+    public void PhrasePredicateDegradationContextOnly()
+    {
+      string expectedDegradation = "6|www|en,0|www|en";
+      PhrasePredicate predicate = new PhrasePredicate(6, "www", "en");
+      Assert.AreEqual(2, predicate.PhraseKeys.Count());
+
+      string joinedKeys = string.Join(",", predicate.PhraseKeys.ToArray());
+      Assert.AreEqual(expectedDegradation, joinedKeys);
+    }
+
+    [TestMethod]
+    public void PhrasePredicateDegradationContextAndLanguage()
+    {
+      string expectedDegradation = "1|www|es-mx,0|www|es-mx,1|www|es,0|www|es,1|www|en,0|www|en";
+      PhrasePredicate predicate = new PhrasePredicate(1, "www", "es-mx");
+      Assert.AreEqual(6, predicate.PhraseKeys.Count());
+
+      string joinedKeys = string.Join(",", predicate.PhraseKeys.ToArray());
+      Assert.AreEqual(expectedDegradation, joinedKeys);
+    }
+
+
 
   }
 }

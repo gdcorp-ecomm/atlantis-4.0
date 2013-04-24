@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Widgets\PlanBoxContainer4_noButton2.cs" />
     <Compile Include="Widgets\PlanBox5_wButton1.cs" />
     <Compile Include="Widgets\PlanBoxContainer4_noButton1.cs" />
     <Compile Include="Widgets\PlanBoxContainer5.cs" />

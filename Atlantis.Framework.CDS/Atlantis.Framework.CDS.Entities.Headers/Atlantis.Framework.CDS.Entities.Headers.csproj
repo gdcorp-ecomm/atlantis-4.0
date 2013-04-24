@@ -43,9 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HeadersMarketingButton2.cs" />
     <Compile Include="HeadersSocialMedia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HeadersMarketingButton.cs" />
+    <Compile Include="Widgets\SalesHeader5_requireLogin1.cs" />
     <Compile Include="Widgets\ManageNowLinks.cs" />
     <Compile Include="Widgets\SalesHeader5.cs" />
   </ItemGroup>

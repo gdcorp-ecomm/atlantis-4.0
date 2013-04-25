@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 namespace Atlantis.Framework.Providers.Localization.Interface
 {
+  /// <summary>
+  /// Provider interface used to obtain language and country site context
+  /// </summary>
   public interface ILocalizationProvider
   {
     /// <summary>

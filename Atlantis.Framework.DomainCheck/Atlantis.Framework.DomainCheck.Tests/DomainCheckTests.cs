@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Xml.Linq;
@@ -111,14 +112,14 @@ namespace Atlantis.Framework.DomainCheck.Tests
       _asyncResponse = null;
 
       List<DomainToCheck> domains = new List<DomainToCheck>();
-      domains.Add(new DomainToCheck("micco.com", false));
-      domains.Add(new DomainToCheck("micco1.com", false));
-      domains.Add(new DomainToCheck("micco2.com", false));
-      domains.Add(new DomainToCheck("micco3.com", false));
-      domains.Add(new DomainToCheck("micco4.com", false));
+      domains.Add(new DomainToCheck("stair.com", false));
+      domains.Add(new DomainToCheck("stair1.com", false));
+      domains.Add(new DomainToCheck("stair2.com", false));
+      domains.Add(new DomainToCheck("stair3.com", false));
+      domains.Add(new DomainToCheck("stair4.com", false));
 
       DomainCheckRequestData request = new DomainCheckRequestData(
-        "832652", string.Empty, string.Empty, string.Empty, 0,
+        "70707070", string.Empty, string.Empty, string.Empty, 0,
         domains, 1, "127.0.0.1", "UnitTest");
       request.WaitTime = TimeSpan.FromSeconds(5);
       request.RequestTimeout = TimeSpan.FromMilliseconds(1);
@@ -144,7 +145,7 @@ namespace Atlantis.Framework.DomainCheck.Tests
     [DeploymentItem("Atlantis.Framework.DomainCheck.Impl.dll")]
     public void DomainCheckShopperIdAttributeTest()
     {
-      DomainToCheck domain = new DomainToCheck("miccobluered7.com", false);
+      DomainToCheck domain = new DomainToCheck("miccobluered8.com", false);
       DomainCheckRequestData request = new DomainCheckRequestData(
         "832652", string.Empty, string.Empty, string.Empty, 0,
         domain, 1, "127.0.0.1", "UnitTest");
@@ -156,6 +157,81 @@ namespace Atlantis.Framework.DomainCheck.Tests
 
       Assert.IsTrue(doc.Root.Attribute("shopperID").Value == "832652");
       Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DomainCheck.Impl.dll")]
+    public void DomainCheckExactTypedTest()
+    {
+      var shopperID = string.Empty;// "12345678";
+      const string domainname = "shaun1.stair";
+      const bool wastyped = true;
+      const string typedDomainName = "shaun2.stair"; //string.Empty;
+      const string tldChoice = "com";
+      const bool wasTldSelected = false;
+      const bool specialCharsRemoved = false;
+      var splitValue = string.Empty; //"54";
+
+      var domain = new DomainToCheck(domainname, wastyped, typedDomainName, tldChoice, wasTldSelected, specialCharsRemoved, splitValue);
+      
+      var request = new DomainCheckRequestData(shopperID, string.Empty, string.Empty, string.Empty, 6, domain, 1, "127.0.0.1", "UnitTest:DomainCheckExactTypedTest");
+
+      var response = (DomainCheckResponseData)Engine.Engine.ProcessRequest(request, 16);
+      Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.DomainCheck.Impl.dll")]
+    public void AsyncDomainCheckExactTypedTest()
+    {
+      const string shopperID = "12345678";
+      const string domainname = "shaun.stair";
+      const bool wastyped = true;
+      const string typedDomainName = "shaun.stair"; //string.Empty;
+      const string tldChoice = "com";
+      const bool wasTldSelected = false;
+      const bool specialCharsRemoved = true;
+      const string splitValue = "54";
+
+      var domains = new List<DomainToCheck>
+                      {
+                        new DomainToCheck(domainname, wastyped, typedDomainName, tldChoice, wasTldSelected, specialCharsRemoved, splitValue),
+                        new DomainToCheck("shaunstair.com", false),
+                        new DomainToCheck("shaun3.stair", false),
+                        new DomainToCheck("shaun4.stair", false),
+                        new DomainToCheck("shaunstair.net", false)
+                      };
+
+
+      //var request = new DomainCheckRequestData(shopperID, "127.0.0.1", string.Empty, "", 1, 1, "127.0.0.1",
+      //                                         "UnitTest:DomainCheckExactTypedTest")
+      //                {
+      //                  WaitTime = TimeSpan.FromMilliseconds(2500),
+      //                  RegistrarID = "1",
+      //                  RequestTimeout = TimeSpan.FromMilliseconds(5000),
+      //                  TypedDomainName = domainname,
+      //                  WasTLDSelected = wasTldSelected,
+      //                  SpecialCharsRemoved = specialCharsRemoved,
+      //                  SplitValue = splitValue,
+      //                  TldChoice = tldChoice
+      //                };
+
+      //request.AddDomain(new DomainToCheck(domainname, wastyped, typedDomainName, tldChoice, wasTldSelected, specialCharsRemoved, splitValue));
+
+      //request.AddDomain(new DomainToCheck("shaunstair.com", false));
+      //request.AddDomain(new DomainToCheck("shaun2.stair", false));
+      //request.AddDomain(new DomainToCheck("shaun3.stair", false));
+      //request.AddDomain(new DomainToCheck("shaunstair.net", false));
+
+
+      var request = new DomainCheckRequestData(shopperID, string.Empty, string.Empty, string.Empty, 6, domains, 1, "127.0.0.1", "UnitTest:DomainCheckExactTypedTest");
+
+      var requestXml = request.ToXML();
+      var response = (DomainCheckResponseData)Engine.Engine.ProcessRequest(request, 16);
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(requestXml.Contains("typedDomainName"));
     }
   }
 }

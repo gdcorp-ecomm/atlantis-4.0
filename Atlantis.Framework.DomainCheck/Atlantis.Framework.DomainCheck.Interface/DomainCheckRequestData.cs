@@ -11,14 +11,16 @@ namespace Atlantis.Framework.DomainCheck.Interface
 {
   public class DomainCheckRequestData : RequestData
   {
-    bool _skipZoneCheck;
-    bool _skipDatabaseCheck;
-    bool _skipRegistryCheck;
-
     readonly int _privateLabelID = -1;
     string _clientIpAddress = string.Empty;
     string _registrarId = string.Empty;
     string _sourceCode = string.Empty;
+    string _typedDomainName = string.Empty;
+    string _tldChoice = string.Empty;
+    string _splitValue = string.Empty;
+    bool _wasTldSelected;
+    bool _specialCharsRemoved;
+
     readonly string _hostIpAddress = string.Empty;
 
     TimeSpan _waitTime = TimeSpan.FromMilliseconds(2500);
@@ -45,6 +47,11 @@ namespace Atlantis.Framework.DomainCheck.Interface
     {
       RequestTimeout = TimeSpan.FromMilliseconds(2500);
       AddDomain(domain);
+      _specialCharsRemoved = domain.SpecialCharsRemoved;
+      _typedDomainName = domain.TypedDomainName;
+      _tldChoice = domain.TldChoice;
+      _wasTldSelected = domain.WasTldSelected;
+      _splitValue = domain.SplitValue;
     }
 
     public DomainCheckRequestData(
@@ -56,23 +63,11 @@ namespace Atlantis.Framework.DomainCheck.Interface
       AddDomains(domains);
     }
 
-    public bool SkipZoneCheck
-    {
-      get { return _skipZoneCheck; }
-      set { _skipZoneCheck = value; }
-    }
+    public bool SkipZoneCheck { get; set; }
 
-    public bool SkipDatabaseCheck
-    {
-      get { return _skipDatabaseCheck; }
-      set { _skipDatabaseCheck = value; }
-    }
+    public bool SkipDatabaseCheck { get; set; }
 
-    public bool SkipRegistryCheck
-    {
-      get { return _skipRegistryCheck; }
-      set { _skipRegistryCheck = value; }
-    }
+    public bool SkipRegistryCheck { get; set; }
 
     public string ClientIPAddress
     {
@@ -121,6 +116,36 @@ namespace Atlantis.Framework.DomainCheck.Interface
       set { _sourceCode = value; }
     }
 
+    public string TypedDomainName
+    {
+      get { return _typedDomainName; }
+      set { _typedDomainName = value; }
+    }
+
+    public string TldChoice
+    {
+      get { return _tldChoice; }
+      set { _tldChoice = value; }
+    }
+
+    public bool WasTLDSelected
+    {
+      get { return _wasTldSelected; }
+      set { _wasTldSelected = value; }
+    }
+
+    public bool SpecialCharsRemoved
+    {
+      get { return _specialCharsRemoved; }
+      set { _specialCharsRemoved = value; }
+    }
+
+    public string SplitValue
+    {
+      get { return _splitValue; }
+      set { _splitValue = value; }
+    }
+
     public void AddDomain(DomainToCheck domainToCheck)
     {
       if (!_addedDomains.Contains(domainToCheck.DomainName))
@@ -134,6 +159,14 @@ namespace Atlantis.Framework.DomainCheck.Interface
     {
       foreach (DomainToCheck domainToCheck in domainsToCheck)
       {
+        if (!string.IsNullOrEmpty(domainToCheck.TypedDomainName))
+        {
+          _specialCharsRemoved = domainToCheck.SpecialCharsRemoved;
+          _typedDomainName = domainToCheck.TypedDomainName;
+          _tldChoice = domainToCheck.TldChoice;
+          _wasTldSelected = domainToCheck.WasTldSelected;
+          _splitValue = domainToCheck.SplitValue;
+        }
         AddDomain(domainToCheck);
       }
     }
@@ -221,6 +254,25 @@ namespace Atlantis.Framework.DomainCheck.Interface
       if (Pathway.Length > 0)
       {
         xtwResult.WriteAttributeString("visitingID", Pathway);
+      }
+
+      if (!string.IsNullOrEmpty(TypedDomainName))
+      {
+        xtwResult.WriteAttributeString("typedDomainName", TypedDomainName);
+      }
+
+      if (!string.IsNullOrEmpty(TldChoice))
+      {
+        xtwResult.WriteAttributeString("tldChoice", TldChoice);
+      }
+
+      xtwResult.WriteAttributeString("wasTLDSelected", WasTLDSelected ? "1" : "0");
+
+      xtwResult.WriteAttributeString("specialCharsRemoved", SpecialCharsRemoved ? "1" : "0");
+
+      if (!string.IsNullOrEmpty(SplitValue))
+      {
+        xtwResult.WriteAttributeString("splitValue", SplitValue);
       }
 
       foreach (DomainToCheck domainToCheck in _domainsToCheck)

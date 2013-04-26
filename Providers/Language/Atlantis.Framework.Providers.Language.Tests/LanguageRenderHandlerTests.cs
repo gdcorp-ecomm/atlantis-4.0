@@ -10,7 +10,9 @@ namespace Atlantis.Framework.Providers.Language.Tests
 {
   [TestClass]
   [DeploymentItem("atlantis.config")]
-  [DeploymentItem("LanguageData.dat")]
+  [DeploymentItem("en.language")]
+  [DeploymentItem("es-mx.language")]
+  [DeploymentItem("es.language")]
   [DeploymentItem("Atlantis.Framework.Language.Impl.dll")]
   public class LanguageRenderHandlerTests
   {

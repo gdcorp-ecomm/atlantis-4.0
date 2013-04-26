@@ -229,6 +229,28 @@ namespace Atlantis.Framework.Language.Tests
       Assert.AreEqual(expectedDegradation, joinedKeys);
     }
 
+    [TestMethod]
+    public void PhrasePredicateNullInputs()
+    {
+      string expectedDegradation = "0|www|en";
+      PhrasePredicate predicate = new PhrasePredicate(0, null, null);
+      Assert.AreEqual(1, predicate.PhraseKeys.Count());
+
+      string joinedKeys = string.Join(",", predicate.PhraseKeys.ToArray());
+      Assert.AreEqual(expectedDegradation, joinedKeys);
+    }
+
+    [TestMethod]
+    public void PhrasePredicateEmptyInputs()
+    {
+      string expectedDegradation = "0|www|en";
+      PhrasePredicate predicate = new PhrasePredicate(0, string.Empty, string.Empty);
+      Assert.AreEqual(1, predicate.PhraseKeys.Count());
+
+      string joinedKeys = string.Join(",", predicate.PhraseKeys.ToArray());
+      Assert.AreEqual(expectedDegradation, joinedKeys);
+    }
+
 
 
   }

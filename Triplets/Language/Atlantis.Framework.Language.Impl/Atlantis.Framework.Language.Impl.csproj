@@ -69,7 +69,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\LanguageData.dat" />
+    <None Include="Data\en.language" />
+    <None Include="Data\es-mx.language" />
+    <None Include="Data\es.language" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

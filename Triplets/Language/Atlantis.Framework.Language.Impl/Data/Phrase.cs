@@ -5,17 +5,16 @@ namespace Atlantis.Framework.Language.Impl.Data
 {
   internal class Phrase
   {
-    internal static Phrase FromPhraseElementLine(string phraseElementLine)
+    internal static Phrase FromPhraseElementLine(string phraseElementLine, string language)
     {
       Phrase result = null;
 
       try
       {
-        // <phrase dictionary="testdictionary" key="testkey" countrysite="uk" language="es" contextid="6" />
+        // <phrase dictionary="testdictionary" key="testkey" countrysite="uk" contextid="6" />
         XElement phraseElement = XElement.Parse(phraseElementLine);
         string dictionary = phraseElement.GetAttributeValue("dictionary", string.Empty);
         string key = phraseElement.GetAttributeValue("key", string.Empty);
-        string language = phraseElement.GetAttributeValue("language", "en");
         string countrysite = phraseElement.GetAttributeValue("countrysite", "www");
         int contextId = phraseElement.GetAttributeValueInt("contextid", 0);
         result = new Phrase(dictionary, key, language, countrysite, contextId);

@@ -14,23 +14,36 @@ namespace Atlantis.Framework.Language.Impl.Data
 
     private void LoadLanguageData()
     {
-      var languageFile = GetLanguageFileName();
-      if (File.Exists(languageFile))
+      var languageFiles = GetLanguageFileNames();
+      foreach (var languageFile in languageFiles)
       {
-        ParseLanguageFile(languageFile);
+        if (File.Exists(languageFile))
+        {
+          ParseLanguageFile(languageFile);
+        }
       }
     }
 
-    private string GetLanguageFileName()
+    private string[] GetLanguageFileNames()
     {
       Uri pathUri = new Uri(Path.GetDirectoryName(this.GetType().Assembly.CodeBase));
       string assemblyPath = pathUri.LocalPath;
-      return Path.Combine(assemblyPath, "LanguageData.dat");
+      return Directory.GetFiles(assemblyPath, "*.language");
     }
 
     private void ParseLanguageFile(string languageFile)
     {
+      FileInfo fileInfo = new FileInfo(languageFile);
+
+      int dotPosition = fileInfo.Name.IndexOf('.');
+      if (dotPosition < 2)
+      {
+        return;
+      }
+
+      string language = fileInfo.Name.Substring(0, dotPosition);
       string[] dataLines = File.ReadAllLines(languageFile);
+      
 
       Phrase currentPhrase = null;
 
@@ -44,7 +57,7 @@ namespace Atlantis.Framework.Language.Impl.Data
             StorePhrase(currentPhrase);
           }
 
-          currentPhrase = Phrase.FromPhraseElementLine(dataLine);
+          currentPhrase = Phrase.FromPhraseElementLine(dataLine, language);
         }
         else if (currentPhrase != null)
         {

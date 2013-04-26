@@ -20,13 +20,15 @@ namespace Atlantis.Framework.Render.Pipeline.Interface
       }
     }
 
-    public void RenderContent(IRenderContent renderContent, IProviderContainer providerContainer)
+    public IProcessedRenderContent RenderContent(IRenderContent renderContent, IProviderContainer providerContainer)
     {
+      IProcessedRenderContent processedRenderContent = new ProcessedRenderContent(renderContent);
+
       foreach (IRenderHandler renderHandler in _renderPipeline.RenderHandlers)
       {
         try
         {
-          renderHandler.ProcessContent(renderContent, providerContainer);
+          renderHandler.ProcessContent(processedRenderContent, providerContainer);
         }
         catch (Exception ex)
         {
@@ -40,6 +42,8 @@ namespace Atlantis.Framework.Render.Pipeline.Interface
           Engine.Engine.LogAtlantisException(aex);
         }
       }
+
+      return processedRenderContent;
     }
   }
 }

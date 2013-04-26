@@ -5,16 +5,16 @@ namespace Atlantis.Framework.Render.Pipeline.Tests.RenderHandlers
 {
   class RenderHandlerTwo : IRenderHandler
   {
-    public void ProcessContent(IRenderContent renderContent, IProviderContainer providerContainer)
+    public void ProcessContent(IProcessedRenderContent processedRenderContent, IProviderContainer providerContainer)
     {
       string contentToAppend = "two";
 
-      if (!string.IsNullOrEmpty(renderContent.Content))
+      if (!string.IsNullOrEmpty(processedRenderContent.Content))
       {
         contentToAppend = " " + contentToAppend;
       }
 
-      renderContent.Content = renderContent.Content + contentToAppend;
+      processedRenderContent.OverWriteContent(processedRenderContent.Content + contentToAppend);
     }
   }
 }

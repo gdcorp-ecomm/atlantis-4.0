@@ -18,8 +18,6 @@ namespace Atlantis.Framework.Conditions.Tests
   {
     private const string PRE_PROCESSOR_PREFIX = "##";
 
-    private bool _conditionHandlersRegistered;
-
     private IProviderContainer _objectProviderContainer;
     private IProviderContainer ObjectProviderContainer
     {
@@ -58,11 +56,7 @@ namespace Atlantis.Framework.Conditions.Tests
       MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      if (!_conditionHandlersRegistered)
-      {
-        ConditionHandlerManager.AutoRegisterConditionHandlers(Assembly.GetExecutingAssembly());
-        _conditionHandlersRegistered = true;
-      }
+      ConditionHandlerManager.AutoRegisterConditionHandlers(Assembly.GetExecutingAssembly());
     }
 
     private void WriteOutput(string message)

@@ -9,10 +9,10 @@ namespace Atlantis.Framework.Render.Pipeline.Tests.RenderHandlers
   {
     private static readonly Regex _targetedMessageRegex = new Regex(@"\[@TargetedMessage\[(?<propertyname>.*?)\]@TargetedMessage\]", RegexOptions.Singleline | RegexOptions.Compiled);
 
-    public void ProcessContent(IRenderContent renderContent, IProviderContainer providerContainer)
+    public void ProcessContent(IProcessedRenderContent processedRenderContent, IProviderContainer providerContainer)
     {
-      MatchCollection matches = _targetedMessageRegex.Matches(renderContent.Content);
-      StringBuilder targetedMessageMarkupBuilder = new StringBuilder(renderContent.Content);
+      MatchCollection matches = _targetedMessageRegex.Matches(processedRenderContent.Content);
+      StringBuilder targetedMessageMarkupBuilder = new StringBuilder(processedRenderContent.Content);
 
       foreach (Match match in matches)
       {
@@ -34,7 +34,7 @@ namespace Atlantis.Framework.Render.Pipeline.Tests.RenderHandlers
         targetedMessageMarkupBuilder = targetedMessageMarkupBuilder.Replace(matchValue, replaceValue);
       }
 
-      renderContent.Content = targetedMessageMarkupBuilder.ToString();
+      processedRenderContent.OverWriteContent(targetedMessageMarkupBuilder.ToString());
     }
   }
 }

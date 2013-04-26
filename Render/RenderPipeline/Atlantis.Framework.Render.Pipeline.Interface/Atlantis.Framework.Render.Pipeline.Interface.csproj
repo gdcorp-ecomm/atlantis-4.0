@@ -44,8 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRenderContent.cs" />
+    <Compile Include="IProcessedRenderContent.cs" />
     <Compile Include="IRenderHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProcessedRenderContent.cs" />
     <Compile Include="RenderPipeline.cs" />
     <Compile Include="RenderPipelineManager.cs" />
   </ItemGroup>

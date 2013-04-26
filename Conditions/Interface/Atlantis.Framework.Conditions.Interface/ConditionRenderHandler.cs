@@ -9,14 +9,14 @@ namespace Atlantis.Framework.Conditions.Interface
   {
     private const string PRE_PROCESSOR_PREFIX = "##";
 
-    public void ProcessContent(IRenderContent renderContent, IProviderContainer providerContainer)
+    public void ProcessContent(IProcessedRenderContent processedRenderContent, IProviderContainer providerContainer)
     {
       ExpressionParserManager expressionParserManager = new ExpressionParserManager(providerContainer);
       expressionParserManager.EvaluateExpressionHandler += ConditionHandlerManager.EvaluateCondition;
 
-      string modifiedContent = MarkupParserManager.ParseAndEvaluate(renderContent.Content, PRE_PROCESSOR_PREFIX, expressionParserManager.EvaluateExpression);
+      string modifiedContent = MarkupParserManager.ParseAndEvaluate(processedRenderContent.Content, PRE_PROCESSOR_PREFIX, expressionParserManager.EvaluateExpression);
 
-      renderContent.Content = modifiedContent;
+      processedRenderContent.OverWriteContent(modifiedContent);
     }
   }
 }

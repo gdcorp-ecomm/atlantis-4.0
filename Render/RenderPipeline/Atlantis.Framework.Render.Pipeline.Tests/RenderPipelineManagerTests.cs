@@ -76,13 +76,12 @@ namespace Atlantis.Framework.Render.Pipeline.Tests
     {
       RenderPipelineManager renderPipelineManager = new RenderPipelineManager();
 
-      IRenderContent renderContent = new SimpleRenderContent();
-      renderContent.Content = "Hello World!";
+      IRenderContent renderContent = new SimpleRenderContent("Hello World!");
 
-      renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
+      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
 
-      WriteOutput(renderContent.Content);
-      Assert.IsTrue(renderContent.Content == "Hello World!");
+      WriteOutput(processedRenderContent.Content);
+      Assert.IsTrue(processedRenderContent.Content == "Hello World!");
     }
 
     [TestMethod]
@@ -93,13 +92,12 @@ namespace Atlantis.Framework.Render.Pipeline.Tests
       renderPipelineManager.AddRenderHandler(new RenderHandlerOne());
       renderPipelineManager.AddRenderHandler(new RenderHandlerTwo());
 
-      IRenderContent renderContent = new SimpleRenderContent();
-      renderContent.Content = string.Empty;
+      IRenderContent renderContent = new SimpleRenderContent(string.Empty);
 
-      renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
+      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
 
-      WriteOutput(renderContent.Content);
-      Assert.IsTrue(renderContent.Content == "three one two");
+      WriteOutput(processedRenderContent.Content);
+      Assert.IsTrue(processedRenderContent.Content == "three one two");
     }
 
     [TestMethod]
@@ -109,9 +107,8 @@ namespace Atlantis.Framework.Render.Pipeline.Tests
       renderPipelineManager.AddRenderHandler(new ConditionRenderHandler());
       renderPipelineManager.AddRenderHandler(new TargetedMessageRenderHandler());
       renderPipelineManager.AddRenderHandler(new TokenRenderHandler());
-
-      IRenderContent renderContent = new SimpleRenderContent();
-      renderContent.Content = @"<div>Current DataCenter: [@T[dataCenter:name]@T]</div>
+      
+      string renderContentRaw = @"<div>Current DataCenter: [@T[dataCenter:name]@T]</div>
                                 ##if(dataCenter(AP))
                                 <div>Deliver amazing performance to the eastern hemisphere</div>
                                 ##else
@@ -123,13 +120,15 @@ namespace Atlantis.Framework.Render.Pipeline.Tests
                                 <div><img alt=""targeted message"" src=""[@TargetedMessage[imageUrl]@TargetedMessage]"" />
                                 ##endif";
 
-      renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
+      IRenderContent renderContent = new SimpleRenderContent(renderContentRaw);
 
-      WriteOutput(renderContent.Content);
+      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
 
-      Assert.IsTrue(renderContent.Content.Contains("Asia Pacific"));
-      Assert.IsTrue(renderContent.Content.Contains("eastern hemisphere"));
-      Assert.IsTrue(renderContent.Content.Contains("Targeted Message Here!!!!"));
+      WriteOutput(processedRenderContent.Content);
+
+      Assert.IsTrue(processedRenderContent.Content.Contains("Asia Pacific"));
+      Assert.IsTrue(processedRenderContent.Content.Contains("eastern hemisphere"));
+      Assert.IsTrue(processedRenderContent.Content.Contains("Targeted Message Here!!!!"));
     }
 
     [TestMethod]
@@ -146,22 +145,21 @@ namespace Atlantis.Framework.Render.Pipeline.Tests
         withExpressionsMarkup = htmlFileStream.ReadToEnd();
       }
 
-      IRenderContent renderContent = new SimpleRenderContent();
-      renderContent.Content = withExpressionsMarkup;
+      IRenderContent renderContent = new SimpleRenderContent(withExpressionsMarkup);
 
       double startNanoSeconds = DateTime.UtcNow.Ticks;
 
-      renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
+      IProcessedRenderContent processedRenderContent = renderPipelineManager.RenderContent(renderContent, ObjectProviderContainer);
 
       double endNanoSeconds = DateTime.UtcNow.Ticks;
 
       double totalMilliSeconds = (endNanoSeconds - startNanoSeconds) / 10000.00;
 
       WriteOutput(string.Format("Total Render Time: {0} milliseconds", totalMilliSeconds));
-      WriteOutput(renderContent.Content);
+      WriteOutput(processedRenderContent.Content);
 
-      Assert.IsTrue(renderContent.Content.Contains("Asia Pacific"));
-      Assert.IsTrue(renderContent.Content.Contains("Targeted Message Here!!!!"));
+      Assert.IsTrue(processedRenderContent.Content.Contains("Asia Pacific"));
+      Assert.IsTrue(processedRenderContent.Content.Contains("Targeted Message Here!!!!"));
     }
   }
 }

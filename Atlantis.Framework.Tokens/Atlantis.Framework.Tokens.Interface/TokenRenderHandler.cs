@@ -5,12 +5,12 @@ namespace Atlantis.Framework.Tokens.Interface
 {
   public class TokenRenderHandler : IRenderHandler
   {
-    public void ProcessContent(IRenderContent renderContent, IProviderContainer providerContainer)
+    public void ProcessContent(IProcessedRenderContent processedRenderContent, IProviderContainer providerContainer)
     {
       string modifiedContent;
-      TokenManager.ReplaceTokens(renderContent.Content, providerContainer, out modifiedContent);
+      TokenManager.ReplaceTokens(processedRenderContent.Content, providerContainer, out modifiedContent);
 
-      renderContent.Content = modifiedContent;
+      processedRenderContent.OverWriteContent(modifiedContent);
     }
   }
 }

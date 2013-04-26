@@ -2,10 +2,10 @@
 
 namespace Atlantis.Framework.Providers.CDS
 {
-  internal class CDSTokenEncoding : ITokenEncoding
+  internal class CDSWidgetTokenEncoding : ITokenEncoding
   {
-    const string _ENCODEDQUOTE = "\\\"";
-    const string _QUOTE = "\"";
+    private const string _ENCODEDQUOTE = "\\\\\\\"";
+    private const string _QUOTE = "\"";
 
     public string DecodeTokenData(string rawTokenData)
     {

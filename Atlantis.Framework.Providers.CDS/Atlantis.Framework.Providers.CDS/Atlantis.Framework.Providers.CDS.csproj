@@ -46,9 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CDSWidgetConditionRenderHandler.cs" />
     <Compile Include="CDSProvider.cs" />
     <Compile Include="CDSProviderEngineRequests.cs" />
-    <Compile Include="CDSTokenEncoding.cs" />
+    <Compile Include="CDSWidgetTokenEncoding.cs" />
+    <Compile Include="CDSWidgetTokenRenderHandler.cs" />
+    <Compile Include="CDSWidgetRenderContent.cs" />
     <Compile Include="ErrorEnums.cs" />
     <Compile Include="ICDSProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +84,22 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Tokens\Atlantis.Framework.Tokens.Interface\Atlantis.Framework.Tokens.Interface.csproj">
       <Project>{79189505-c1c8-4282-83e2-0140a2635624}</Project>
       <Name>Atlantis.Framework.Tokens.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conditions\Interface\Atlantis.Framework.Conditions.Interface\Atlantis.Framework.Conditions.Interface.csproj">
+      <Project>{9f0b7f62-5a62-4823-8697-a18fa91b2a8d}</Project>
+      <Name>Atlantis.Framework.Conditions.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Render\ExpressionParser\Atlantis.Framework.Render.ExpressionParser\Atlantis.Framework.Render.ExpressionParser.csproj">
+      <Project>{e35a1790-4605-4adb-813e-dcd5485f58bb}</Project>
+      <Name>Atlantis.Framework.Render.ExpressionParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Render\MarkupParser\Atlantis.Framework.Render.MarkupParser\Atlantis.Framework.Render.MarkupParser.csproj">
+      <Project>{772aac0d-761e-4906-b46f-100e1af3f5ca}</Project>
+      <Name>Atlantis.Framework.Render.MarkupParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
+      <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -30,11 +30,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Tokens.Interface", "..\Atlantis.Framework.Tokens\Atlantis.Framework.Tokens.Interface\Atlantis.Framework.Tokens.Interface.csproj", "{79189505-C1C8-4282-83E2-0140A2635624}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Links.Interface", "..\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links.Interface\Atlantis.Framework.Providers.Links.Interface.csproj", "{9972E990-31F1-4C30-9BB5-AC1F3BD4E600}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Pipeline.Interface", "..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj", "{0D7F076F-1809-437B-B045-E35A7E68E423}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Conditions.Interface", "..\Conditions\Interface\Atlantis.Framework.Conditions.Interface\Atlantis.Framework.Conditions.Interface.csproj", "{9F0B7F62-5A62-4823-8697-A18FA91B2A8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.ExpressionParser", "..\Render\ExpressionParser\Atlantis.Framework.Render.ExpressionParser\Atlantis.Framework.Render.ExpressionParser.csproj", "{E35A1790-4605-4ADB-813E-DCD5485F58BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.MarkupParser", "..\Render\MarkupParser\Atlantis.Framework.Render.MarkupParser\Atlantis.Framework.Render.MarkupParser.csproj", "{772AAC0D-761E-4906-B46F-100E1AF3F5CA}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 13
+		SccNumberOfProjects = 16
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -80,10 +86,22 @@ Global
 		SccProjectTopLevelParentUniqueName11 = Atlantis.Framework.Providers.CDS.sln
 		SccProjectName11 = ../Atlantis.Framework.Tokens/Atlantis.Framework.Tokens.Interface
 		SccLocalPath11 = ..\\Atlantis.Framework.Tokens\\Atlantis.Framework.Tokens.Interface
-		SccProjectUniqueName12 = ..\\Atlantis.Framework.Providers.Links\\Atlantis.Framework.Providers.Links.Interface\\Atlantis.Framework.Providers.Links.Interface.csproj
+		SccProjectUniqueName12 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface\\Atlantis.Framework.Render.Pipeline.Interface.csproj
 		SccProjectTopLevelParentUniqueName12 = Atlantis.Framework.Providers.CDS.sln
-		SccProjectName12 = ../Atlantis.Framework.Providers.Links/Atlantis.Framework.Providers.Links.Interface
-		SccLocalPath12 = ..\\Atlantis.Framework.Providers.Links\\Atlantis.Framework.Providers.Links.Interface
+		SccProjectName12 = ../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline.Interface
+		SccLocalPath12 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface
+		SccProjectUniqueName13 = ..\\Conditions\\Interface\\Atlantis.Framework.Conditions.Interface\\Atlantis.Framework.Conditions.Interface.csproj
+		SccProjectTopLevelParentUniqueName13 = Atlantis.Framework.Providers.CDS.sln
+		SccProjectName13 = ../Conditions/Interface/Atlantis.Framework.Conditions.Interface
+		SccLocalPath13 = ..\\Conditions\\Interface\\Atlantis.Framework.Conditions.Interface
+		SccProjectUniqueName14 = ..\\Render\\ExpressionParser\\Atlantis.Framework.Render.ExpressionParser\\Atlantis.Framework.Render.ExpressionParser.csproj
+		SccProjectTopLevelParentUniqueName14 = Atlantis.Framework.Providers.CDS.sln
+		SccProjectName14 = ../Render/ExpressionParser/Atlantis.Framework.Render.ExpressionParser
+		SccLocalPath14 = ..\\Render\\ExpressionParser\\Atlantis.Framework.Render.ExpressionParser
+		SccProjectUniqueName15 = ..\\Render\\MarkupParser\\Atlantis.Framework.Render.MarkupParser\\Atlantis.Framework.Render.MarkupParser.csproj
+		SccProjectTopLevelParentUniqueName15 = Atlantis.Framework.Providers.CDS.sln
+		SccProjectName15 = ../Render/MarkupParser/Atlantis.Framework.Render.MarkupParser
+		SccLocalPath15 = ..\\Render\\MarkupParser\\Atlantis.Framework.Render.MarkupParser
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -134,10 +152,22 @@ Global
 		{79189505-C1C8-4282-83E2-0140A2635624}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79189505-C1C8-4282-83E2-0140A2635624}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79189505-C1C8-4282-83E2-0140A2635624}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9972E990-31F1-4C30-9BB5-AC1F3BD4E600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9972E990-31F1-4C30-9BB5-AC1F3BD4E600}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9972E990-31F1-4C30-9BB5-AC1F3BD4E600}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9972E990-31F1-4C30-9BB5-AC1F3BD4E600}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F0B7F62-5A62-4823-8697-A18FA91B2A8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F0B7F62-5A62-4823-8697-A18FA91B2A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F0B7F62-5A62-4823-8697-A18FA91B2A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F0B7F62-5A62-4823-8697-A18FA91B2A8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E35A1790-4605-4ADB-813E-DCD5485F58BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E35A1790-4605-4ADB-813E-DCD5485F58BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E35A1790-4605-4ADB-813E-DCD5485F58BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E35A1790-4605-4ADB-813E-DCD5485F58BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +182,9 @@ Global
 		{813511AE-2721-4A3B-9894-E1FB6AC41449} = {DFB1F189-F109-4A36-812E-A43696324DE6}
 		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {DFB1F189-F109-4A36-812E-A43696324DE6}
 		{79189505-C1C8-4282-83E2-0140A2635624} = {DFB1F189-F109-4A36-812E-A43696324DE6}
-		{9972E990-31F1-4C30-9BB5-AC1F3BD4E600} = {DFB1F189-F109-4A36-812E-A43696324DE6}
+		{0D7F076F-1809-437B-B045-E35A7E68E423} = {DFB1F189-F109-4A36-812E-A43696324DE6}
+		{9F0B7F62-5A62-4823-8697-A18FA91B2A8D} = {DFB1F189-F109-4A36-812E-A43696324DE6}
+		{E35A1790-4605-4ADB-813E-DCD5485F58BB} = {DFB1F189-F109-4A36-812E-A43696324DE6}
+		{772AAC0D-761E-4906-B46F-100E1AF3F5CA} = {DFB1F189-F109-4A36-812E-A43696324DE6}
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Web.Script.Serialization;
 using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.CDS.Tokenizer;
@@ -9,14 +10,24 @@ using System.Web;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 using System.Linq;
-using Atlantis.Framework.Tokens.Interface;
+using Atlantis.Framework.Render.Pipeline.Interface;
 
 namespace Atlantis.Framework.Providers.CDS
 {
   public class CDSProvider : ProviderBase, ICDSProvider
   {
+    private static readonly RenderPipelineManager _cdsWidgetRenderPipelineManager = new RenderPipelineManager();
+    private static readonly Regex _validMongoObjectIdRegex = new Regex(@"^[0-9a-fA-F]{24}$", RegexOptions.Compiled);
+    private static readonly Regex _widgetContentRegex = new Regex(@"""Content""\s*:\s*""(?<content>[^""\\]*(?:\\.[^""\\]*)*)""", RegexOptions.Compiled);
+
     private readonly ISiteContext _siteContext;
     private readonly IShopperContext _shopperContext;
+
+    static CDSProvider()
+    {
+      _cdsWidgetRenderPipelineManager.AddRenderHandler(new CDSWidgetConditionRenderHandler());
+      _cdsWidgetRenderPipelineManager.AddRenderHandler(new CDSWidgetTokenRenderHandler());
+    }
 
     public CDSProvider(IProviderContainer container) : base(container)
     {
@@ -24,62 +35,32 @@ namespace Atlantis.Framework.Providers.CDS
       _shopperContext = container.Resolve<IShopperContext>();
     }
 
-    #region Implementation of ICDSProvider
-
-    public T GetModel<T>(string query) where T : new()
+    private bool IsValidMongoObjectId(string text)
     {
-      return GetModel<T>(query, null);
+      bool result = false;
+      if (text != null)
+      {
+        result = _validMongoObjectIdRegex.IsMatch(text);
+      }
+      return result;
     }
 
-    public T GetModel<T>(string query, Dictionary<string, string> customTokens) where T : new()
+    private string ToQueryString(NameValueCollection nvc)
     {
+      return string.Join("&", nvc.AllKeys.SelectMany(key => nvc.GetValues(key).Select(value => string.Format("{0}={1}", key, value))).ToArray());
+    }
 
-      var parsedData1 = string.Empty;
-      var parsedData2 = string.Empty;
-      CDSResponseData responseData;
+    private string ParseLegacyTokens(string cdsContent, Dictionary<string, string> customTokens)
+    {
       CDSTokenizer tokenizer = new CDSTokenizer();
-
-      T model = new T();
-      var serializer = new JavaScriptSerializer();
-
-      CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query);
-
-      try
-      {
-        responseData = (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType );
-        if (responseData.IsSuccess)
-        {
-          //old token framework - this line will parse tokens that are in old format. Eg. {{product::3604::price::keepdecimal::yearly}}
-          //Eventually after all tokens have been converted into the format, this line would be removed from here.
-          parsedData1 = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
-
-          //new token framework - this line will parse token that are in new format.  Eg. [@T[AdCreditShowHide:{property: "google", html: "some html here..."}]@T]
-          ITokenEncoding cdsJsonEncoding = new CDSTokenEncoding();
-          TokenEvaluationResult result = TokenManager.ReplaceTokens(parsedData1, Container, cdsJsonEncoding, out parsedData2);
-        }
-        model = serializer.Deserialize<T>(parsedData2);
-      }
-      catch (Exception ex)
-      {
-        Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, _shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount));
-      }
-      return model;
+      return customTokens != null ? tokenizer.Parse(cdsContent, customTokens) : tokenizer.Parse(cdsContent);
     }
 
-
-
-    public string GetJSON(string query)
+    private string ProcessQueryOverrides(string query, out bool bypassCache)
     {
-      return GetJSON(query, null);
-    }
+      string finalQuery = query;
+      bypassCache = false;
 
-    public string GetJSON(string query, Dictionary<string, string> customTokens)
-    {
-      var parsedData1 = string.Empty;
-      var parsedData2 = string.Empty;
-      CDSResponseData responseData;
-
-      bool bypassCache = false;
       if (HttpContext.Current != null)
       {
         DateTime activeDate;
@@ -100,101 +81,94 @@ namespace Atlantis.Framework.Providers.CDS
           }
           if (queryParams.Count > 0)
           {
-            string appendChar = query.Contains("?") ? "&" : "?";
-            query += string.Concat(appendChar, ToQueryString(queryParams));
+            string appendChar = finalQuery.Contains("?") ? "&" : "?";
+            finalQuery += string.Concat(appendChar, ToQueryString(queryParams));
           }
         }
       }
 
+      return finalQuery;
+    }
+
+    private string ProcessAndRenderRequest(string query, bool bypassCache, IProviderContainer providerContainer, Dictionary<string, string> customTokens)
+    {
       CDSRequestData requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query);
 
+      string finalContent = string.Empty;
+
+      CDSResponseData responseData = bypassCache ? (CDSResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType) : (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType);
+
+      if (responseData.IsSuccess)
+      {
+        string content = ParseLegacyTokens(responseData.ResponseData, customTokens);
+        
+        StringBuilder finalContentBuilder = new StringBuilder(content);
+
+        MatchCollection widgetContentMatches = _widgetContentRegex.Matches(responseData.ResponseData);
+        
+        foreach (Match widgetContentMatch in widgetContentMatches)
+        {
+          string rawContent = widgetContentMatch.Groups["content"].Value;
+
+          IRenderContent renderContent = new CDSWidgetRenderContent();
+          renderContent.Content = rawContent;
+
+          _cdsWidgetRenderPipelineManager.RenderContent(renderContent, providerContainer);
+
+          finalContentBuilder.Replace(rawContent, renderContent.Content);
+        }
+
+        finalContent = finalContentBuilder.ToString();
+      }
+
+      return finalContent;
+    }
+
+    public T GetModel<T>(string query, IProviderContainer providerContainer) where T : new()
+    {
+      return GetModel<T>(query, providerContainer, null);
+    }
+
+    public T GetModel<T>(string query, IProviderContainer providerContainer, Dictionary<string, string> customTokens) where T : new()
+    {
+      T model = new T();
+      var serializer = new JavaScriptSerializer();
+
       try
       {
-        responseData = bypassCache ? (CDSResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType) : (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType);
-        if (responseData.IsSuccess)
-        {
-          CDSTokenizer tokenizer = new CDSTokenizer();
+        string finalContent = ProcessAndRenderRequest(query, false, providerContainer, customTokens);
+        model = serializer.Deserialize<T>(finalContent);
+      }
+      catch (Exception ex)
+      {
+        Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, _shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount));
+      }
 
-          //old token framework - this line will parse tokens that are in old format. Eg. {{product::3604::price::keepdecimal::yearly}}
-          //Eventually after all tokens have been converted into the format, this line would be removed from here.
-          parsedData1 = (customTokens != null) ? tokenizer.Parse(responseData.ResponseData, customTokens) : tokenizer.Parse(responseData.ResponseData);
+      return model;
+    }
 
-          //new token framework - this line will parse token that are in new format.  Eg. [@T[AdCreditShowHide:{property: "google", html: "some html here..."}]@T]
-          ITokenEncoding cdsJsonEncoding = new CDSTokenEncoding();
-          TokenEvaluationResult result = TokenManager.ReplaceTokens(parsedData1, Container, cdsJsonEncoding, out parsedData2);
-        }
+    public string GetJson(string query, IProviderContainer providerContainer)
+    {
+      return GetJson(query, providerContainer, null);
+    }
+
+    public string GetJson(string query, IProviderContainer providerContainer, Dictionary<string, string> customTokens)
+    {
+      string finalContent = string.Empty;
+
+      bool bypassCache;
+      query = ProcessQueryOverrides(query, out bypassCache);
+
+      try
+      {
+        finalContent = ProcessAndRenderRequest(query, bypassCache, providerContainer, customTokens);
       }
       catch (Exception ex)
       {
         Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
       }
-      return parsedData2;
+
+      return finalContent;
     }
-
-
-    public string Get(string query)
-    {
-      var response = string.Empty;
-
-      bool bypassCache = false;
-      if (HttpContext.Current != null)
-      {
-        DateTime activeDate;
-        var queryString = HttpContext.Current.Request.QueryString;
-        var docId = queryString["vid"];
-        var qsDate = queryString["activedate"];
-        if ((DateTime.TryParse(qsDate, out activeDate) || IsValidMongoObjectId(docId)) && _siteContext.IsRequestInternal)
-        {
-          bypassCache = true;
-          var queryParams = new NameValueCollection();
-          if (activeDate != default(DateTime))
-          {
-            queryParams.Add("activedate", activeDate.ToString("O"));
-          }
-          if (IsValidMongoObjectId(docId))
-          {
-            queryParams.Add("docid", docId);
-          }
-          if (queryParams.Count > 0)
-          {
-            string appendChar = query.Contains("?") ? "&" : "?";
-            query += string.Concat(appendChar, ToQueryString(queryParams));
-          }
-        }
-      }
-
-      var requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, query);
-      try
-      {
-        var responseData = bypassCache ? (CDSResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType) : (CDSResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.CDSRequestType);
-        if (responseData.IsSuccess)
-        {
-          response = responseData.ResponseData;
-        }
-      }
-      catch (Exception ex)
-      {
-        Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
-      }
-      return response;
-    }
-
-    private bool IsValidMongoObjectId(string text)
-    {
-      bool result = false;
-      if (text != null)
-      {
-        string pattern = @"^[0-9a-fA-F]{24}$";
-        result = Regex.IsMatch(text, pattern);
-      }
-      return result;
-    }
-
-    private string ToQueryString(NameValueCollection nvc)
-    {
-      return string.Join("&", nvc.AllKeys.SelectMany(key => nvc.GetValues(key).Select(value => string.Format("{0}={1}", key, value))).ToArray());
-    }
-
-    #endregion
   }
 }

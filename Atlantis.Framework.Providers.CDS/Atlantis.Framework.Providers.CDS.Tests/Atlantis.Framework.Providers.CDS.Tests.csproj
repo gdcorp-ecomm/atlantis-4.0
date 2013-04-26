@@ -41,6 +41,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Web" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -55,9 +57,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ConditionHandlers\CountrySiteAnyUnitTestConditionHandler.cs" />
     <Compile Include="TestContexts.cs" />
     <Compile Include="CDSProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TokenHandlers\CurrencyPriceUnitTestTokenHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.Impl\Atlantis.Framework.CDS.Impl.csproj">
@@ -92,13 +96,17 @@
       <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
       <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Links\Atlantis.Framework.Providers.Links.Interface\Atlantis.Framework.Providers.Links.Interface.csproj">
-      <Project>{9972e990-31f1-4c30-9bb5-ac1f3bd4e600}</Project>
-      <Name>Atlantis.Framework.Providers.Links.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Tokens\Atlantis.Framework.Tokens.Interface\Atlantis.Framework.Tokens.Interface.csproj">
       <Project>{79189505-c1c8-4282-83e2-0140a2635624}</Project>
       <Name>Atlantis.Framework.Tokens.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Conditions\Interface\Atlantis.Framework.Conditions.Interface\Atlantis.Framework.Conditions.Interface.csproj">
+      <Project>{9f0b7f62-5a62-4823-8697-a18fa91b2a8d}</Project>
+      <Name>Atlantis.Framework.Conditions.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
+      <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.CDS\Atlantis.Framework.Providers.CDS.csproj">
       <Project>{52f92d36-69d4-447e-91e0-e155c4ee7dc6}</Project>
@@ -110,6 +118,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

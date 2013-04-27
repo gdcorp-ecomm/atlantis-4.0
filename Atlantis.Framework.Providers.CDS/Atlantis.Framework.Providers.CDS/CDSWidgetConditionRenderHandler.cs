@@ -12,16 +12,16 @@ namespace Atlantis.Framework.Providers.CDS
     private const string CARRAIGE_RETURN_ENCODED = "\\r\\n";
     private const string CARRAIGE_RETURN_DECODED = "\r\n";
 
-    public void ProcessContent(IRenderContent renderContent, IProviderContainer providerContainer)
+    public void ProcessContent(IProcessedRenderContent processRenderContent, IProviderContainer providerContainer)
     {
       ExpressionParserManager expressionParserManager = new ExpressionParserManager(providerContainer);
       expressionParserManager.EvaluateExpressionHandler += ConditionHandlerManager.EvaluateCondition;
 
-      renderContent.Content = renderContent.Content.Replace(CARRAIGE_RETURN_ENCODED, CARRAIGE_RETURN_DECODED);
+      processRenderContent.OverWriteContent(processRenderContent.Content.Replace(CARRAIGE_RETURN_ENCODED, CARRAIGE_RETURN_DECODED));
 
-      string modifiedContent = MarkupParserManager.ParseAndEvaluate(renderContent.Content, PRE_PROCESSOR_PREFIX, expressionParserManager.EvaluateExpression);
+      string modifiedContent = MarkupParserManager.ParseAndEvaluate(processRenderContent.Content, PRE_PROCESSOR_PREFIX, expressionParserManager.EvaluateExpression);
 
-      renderContent.Content = modifiedContent.Replace(CARRAIGE_RETURN_DECODED, CARRAIGE_RETURN_ENCODED);
+      processRenderContent.OverWriteContent(modifiedContent.Replace(CARRAIGE_RETURN_DECODED, CARRAIGE_RETURN_ENCODED));
     }
   }
 }

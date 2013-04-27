@@ -6,14 +6,14 @@ namespace Atlantis.Framework.Providers.CDS
 {
   internal class CDSWidgetTokenRenderHandler : IRenderHandler
   {
-    public void ProcessContent(IRenderContent renderContent, IProviderContainer providerContainer)
+    public void ProcessContent(IProcessedRenderContent processRenderContent, IProviderContainer providerContainer)
     {
       string modifiedContent;
       
       ITokenEncoding cdsJsonEncoding = new CDSWidgetTokenEncoding();
-      TokenManager.ReplaceTokens(renderContent.Content, providerContainer, cdsJsonEncoding, out modifiedContent);
+      TokenManager.ReplaceTokens(processRenderContent.Content, providerContainer, cdsJsonEncoding, out modifiedContent);
 
-      renderContent.Content = modifiedContent;
+      processRenderContent.OverWriteContent(modifiedContent);
     }
   }
 }

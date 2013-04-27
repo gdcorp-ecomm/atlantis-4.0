@@ -9,7 +9,6 @@ using Atlantis.Framework.Providers.Interface.CDS;
 using System.Web;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
-using System.Linq;
 using Atlantis.Framework.Render.Pipeline.Interface;
 
 namespace Atlantis.Framework.Providers.CDS
@@ -45,9 +44,23 @@ namespace Atlantis.Framework.Providers.CDS
       return result;
     }
 
-    private string ToQueryString(NameValueCollection nvc)
+    private string ToQueryString(NameValueCollection nameValuePairs)
     {
-      return string.Join("&", nvc.AllKeys.SelectMany(key => nvc.GetValues(key).Select(value => string.Format("{0}={1}", key, value))).ToArray());
+      string queryString = string.Empty;
+      
+      if (nameValuePairs != null)
+      {
+        StringBuilder queryStringBuilder = new StringBuilder();
+
+        for (int i = 0; i < nameValuePairs.Count; i++)
+        {
+          queryStringBuilder.AppendFormat(i == 0 ? "{0}={1}" : "&{0}={1}", nameValuePairs.Keys[i], nameValuePairs.Get(i));
+        }
+
+        queryString = queryStringBuilder.ToString();
+      }
+
+      return queryString;
     }
 
     private string ParseLegacyTokens(string cdsContent, Dictionary<string, string> customTokens)
@@ -110,12 +123,11 @@ namespace Atlantis.Framework.Providers.CDS
         {
           string rawContent = widgetContentMatch.Groups["content"].Value;
 
-          IRenderContent renderContent = new CDSWidgetRenderContent();
-          renderContent.Content = rawContent;
+          IRenderContent renderContent = new CDSWidgetRenderContent(rawContent);
 
-          _cdsWidgetRenderPipelineManager.RenderContent(renderContent, providerContainer);
+          IProcessedRenderContent processedRenderContent = _cdsWidgetRenderPipelineManager.RenderContent(renderContent, providerContainer);
 
-          finalContentBuilder.Replace(rawContent, renderContent.Content);
+          finalContentBuilder.Replace(rawContent, processedRenderContent.Content);
         }
 
         finalContent = finalContentBuilder.ToString();

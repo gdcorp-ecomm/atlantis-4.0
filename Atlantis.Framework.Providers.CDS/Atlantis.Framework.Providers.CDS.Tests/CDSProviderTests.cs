@@ -5,7 +5,6 @@ using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.CDS;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
-using Atlantis.Framework.Render.Pipeline.Interface;
 using Atlantis.Framework.Tokens.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -32,7 +31,10 @@ namespace Atlantis.Framework.Providers.CDS.Tests
     {
       var cdsProvider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
       string cdsJson = cdsProvider.GetJson("content/en/sales/1/cdstesting/renderpipeline/condition-test", HttpProviderContainer.Instance);
-      Assert.IsNotNull(cdsJson);
+      
+      Assert.IsTrue(cdsJson.Contains("Your Country Site is United States or India"));
+      Assert.IsTrue(cdsJson.Contains("$1000"));
+      
       Debug.WriteLine(cdsJson);
       Console.WriteLine(cdsJson);
     }

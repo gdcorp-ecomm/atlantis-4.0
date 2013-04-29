@@ -59,6 +59,46 @@ namespace Atlantis.Framework.PixelsGet.Test
     }
 
     [TestMethod]
+    [DeploymentItem("ReceiptItemTrigger.xml")]
+    [DeploymentItem("PixelItemTrigger.xml")]
+    public void GetItemTrigger()
+    {
+      _isc = "USAD2013";
+      var collection = new HttpCookieCollection();
+      collection.Add(CreateCookie("pixel_US_RocketFuel1", "gjpgreiibeqhfaqaoefhyhkjwemdvipj", -1));
+      _replaceParms.Add(Atlantis.Framework.PixelsGet.Interface.Constants.PixelReplaceTags.PrivateLabelId, "1");
+      var request = new PixelsGetRequestData(string.Empty, _requestUrl, string.Empty, string.Empty, 0, "CART",
+                                                  _isc, collection, _replaceParms, _contextId);
+      request.FirstTimeShopper = false;
+      request.XmlFilePathOverride = System.IO.Directory.GetCurrentDirectory() + "\\PixelItemTrigger.xml";
+      request.OrderXml = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "\\ReceiptItemTrigger.xml");
+      var response = Engine.Engine.ProcessRequest(request, 627) as PixelsGetResponseData;
+      Assert.IsTrue(response.IsSuccess);
+      foreach (Pixel pixel in response.Pixels)
+      {
+        Assert.IsTrue(pixel.Name.Contains("Rocket"));
+      }
+    }
+
+    [TestMethod]
+    [DeploymentItem("ReceiptNoItemTrigger.xml")]
+    [DeploymentItem("PixelItemTrigger.xml")]
+    public void GetNoItemTrigger()
+    {
+      _isc = "USAD2013";
+      var collection = new HttpCookieCollection();
+      collection.Add(CreateCookie("pixel_US_RocketFuel1", "gjpgreiibeqhfaqaoefhyhkjwemdvipj", -1));
+      _replaceParms.Add(Atlantis.Framework.PixelsGet.Interface.Constants.PixelReplaceTags.PrivateLabelId, "1");
+      var request = new PixelsGetRequestData(string.Empty, _requestUrl, string.Empty, string.Empty, 0, "CART",
+                                                  _isc, collection, _replaceParms, _contextId);
+      request.FirstTimeShopper = false;
+      request.XmlFilePathOverride = System.IO.Directory.GetCurrentDirectory() + "\\PixelItemTrigger.xml";
+      request.OrderXml = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "\\ReceiptNoItemTrigger.xml");
+      var response = Engine.Engine.ProcessRequest(request, 627) as PixelsGetResponseData;
+      Assert.IsTrue(response.Pixels.Count == 0);
+    }
+
+    [TestMethod]
     public void GetTrialPayNotFire()
     {
       _isc = "spp2";

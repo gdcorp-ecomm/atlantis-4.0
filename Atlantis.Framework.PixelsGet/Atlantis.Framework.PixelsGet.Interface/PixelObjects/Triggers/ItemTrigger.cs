@@ -36,13 +36,19 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
             string fireOrderItemName = element.Attribute(PixelXmlNames.Name).Value;
             string fireOrderItemValue = element.Attribute(PixelXmlNames.Value).Value;
 
-            foreach (XElement orderItem in _orderItems.ChildNodes)
+            foreach (XmlNode orderItem in _orderItems.ChildNodes)
             {
-              string orderItemValue = orderItem.Attribute(fireOrderItemName).Value;
-              if (orderItemValue.Equals(fireOrderItemValue, StringComparison.OrdinalIgnoreCase))
+              if (orderItem.Attributes != null)
               {
-                shouldFirePixel = true;
-                break;
+                if (orderItem.Attributes[fireOrderItemName] != null)
+                {
+                  string orderItemValue = orderItem.Attributes[fireOrderItemName].Value;
+                  if (orderItemValue.Equals(fireOrderItemValue, StringComparison.OrdinalIgnoreCase))
+                  {
+                    shouldFirePixel = true;
+                    break;
+                  }
+                }
               }
             }
 

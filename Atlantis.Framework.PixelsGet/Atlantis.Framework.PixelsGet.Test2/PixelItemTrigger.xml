@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pixels>
+  <pixel name="Rocket Fuel" value="&lt;img width=&quot;1&quot; height=&quot;1&quot; src=&quot;//u.optorb.com/m?p=1&amp;r=hI8hXp5q5DQjkgb&quot;&gt;  &lt;!-- optimal retargeting tag --&gt;  &lt;script type=&quot;text/javascript&quot;&gt;  /* &lt;![CDATA[ */  var optimal_pixel_code = &quot;hI8hXp5q5DQjkgb&quot;;  /* ]]&gt; */  &lt;/script&gt;  &lt;script type=&quot;text/javascript&quot; src=&quot;//evjs.optorb.com/js/r1.js&quot;&gt;  &lt;/script&gt;  &lt;noscript&gt; &lt;div style=&quot;display:inline;&quot;&gt;  &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;border-style:none;&quot; alt=&quot;&quot;  src=&quot;//u.optorb.com/m?p=1&amp;r=hI8hXp5q5DQjkgb&quot;/&gt;  &lt;/div&gt;  &lt;/noscript&gt;" type="none" application="CART" contexts="1" appsettingname="CART_PIXEL_ROCKET_FUEL_ENABLE" page_url="Order_Confirmation">
+    <trigger removeafterconsumption="true" required="item,cookie" doreplace="true">
+      <items>
+        <item name="_product_unifiedproductid" value="11601" />
+        <item name="_product_unifiedproductid" value="11602" />
+        <item name="_product_unifiedproductid" value="11603" />
+        <item name="_product_unifiedproductid" value="11604" />
+        <item name="_product_unifiedproductid" value="11605" />
+        <item name="_product_unifiedproductid" value="11606" />
+        <item name="_product_unifiedproductid" value="11607" />
+        <item name="_product_unifiedproductid" value="11608" />
+        <item name="_product_unifiedproductid" value="11609" />
+        <item name="_product_unifiedproductid" value="11610" />
+      </items>
+      <cookie name="pixel_US_RocketFuel{{privatelabelid}}" value="" />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="80490" />
+    </additionaldata>
+  </pixel>
+</pixels>

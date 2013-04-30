@@ -11,14 +11,14 @@ namespace Atlantis.Framework.SplitTesting.Impl
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      IResponseData result = null;
+      IResponseData result;
 
       try
       {
         var request = ((ActiveSplitTestsRequestData)requestData);
         var requestXml = string.Format(RequestFormat, request.CategoryName);
 
-        var cacheXml = string.Empty;
+        string cacheXml;
         using (var comCache = GdDataCacheOutOfProcess.CreateDisposable())
         {
           cacheXml = comCache.GetCacheData(requestXml);

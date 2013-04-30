@@ -69,7 +69,7 @@ namespace Atlantis.Framework.SplitTesting.Interface
         }
         catch (Exception ex)
         {
-          AtlantisException exception = new AtlantisException("ActiveSplitTestDetailsResponseData.FromCacheXml", "0", ex.Message + ex.StackTrace, cacheXml, null, null);
+          var exception = new AtlantisException("ActiveSplitTestDetailsResponseData.FromCacheXml", "0", ex.Message + ex.StackTrace, cacheXml, null, null);
           Engine.Engine.LogAtlantisException(exception);
         }
       }

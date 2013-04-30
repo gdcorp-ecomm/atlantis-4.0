@@ -47,20 +47,6 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     }
 
     [TestMethod]
-    public void GetSplitTestSideForValidTestId()
-    {
-      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
-      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
-
-      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
-
-      Assert.IsNotNull(splitProvider);
-
-      var side1 = splitProvider.GetSplitTestingSide(1);
-      Assert.IsTrue(!string.IsNullOrEmpty(side1));
-    }
-
-    [TestMethod]
     public void GetSplitTestSideForInvalidTestId()
     {
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
@@ -74,7 +60,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
     }
 
     [TestMethod]
-    public void GetSplitTestSideForValidTestIdsFromSameRequest()
+    public void GetSplitTestSideForValidTestIdNoEligibilityRules()
     {
       var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
@@ -83,10 +69,55 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
 
       Assert.IsNotNull(splitProvider);
 
-      var side1 = splitProvider.GetSplitTestingSide(1);
+      var side1 = splitProvider.GetSplitTestingSide(1009);
+      Assert.IsTrue(!string.IsNullOrEmpty(side1));
+    }
+
+    [TestMethod]
+    public void GetSplitTestSideForValidTestIdsNoEligibilityRulesFromSameRequest()
+    {
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+
+      Assert.IsNotNull(splitProvider);
+
+      var side1 = splitProvider.GetSplitTestingSide(1009);
       Assert.IsTrue(!string.IsNullOrEmpty(side1));
 
-      var side2 = splitProvider.GetSplitTestingSide(1);
+      var side2 = splitProvider.GetSplitTestingSide(1009);
+      Assert.IsTrue(side1 == side2);
+    }
+
+    [TestMethod]
+    public void GetSplitTestSideForValidTestIdWithEligibilityRules()
+    {
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+
+      Assert.IsNotNull(splitProvider);
+
+      var side1 = splitProvider.GetSplitTestingSide(1008);
+      Assert.IsTrue(!string.IsNullOrEmpty(side1));
+    }
+
+    [TestMethod]
+    public void GetSplitTestSideForValidTestIdsWithEligibilityRulesFromSameRequest()
+    {
+      var mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      ISplitTestingProvider splitProvider = InitializeProvidersAndReturnSplitTestProvider(1, "858884");
+
+      Assert.IsNotNull(splitProvider);
+
+      var side1 = splitProvider.GetSplitTestingSide(1008);
+      Assert.IsTrue(!string.IsNullOrEmpty(side1));
+
+      var side2 = splitProvider.GetSplitTestingSide(1008);
       Assert.IsTrue(side1 == side2);
     }
   }

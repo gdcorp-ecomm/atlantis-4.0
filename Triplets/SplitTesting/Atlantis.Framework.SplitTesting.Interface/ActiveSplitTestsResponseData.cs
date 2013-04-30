@@ -44,10 +44,12 @@ namespace Atlantis.Framework.SplitTesting.Interface
             var runidAtt = itemElement.Attribute("SplitTestRunID");
             var startdateAtt = itemElement.Attribute("TestStartDate");
 
-            if (string.IsNullOrEmpty(testidAtt.Value) || string.IsNullOrEmpty(versionnumberAtt.Value) ||
-                string.IsNullOrEmpty(runidAtt.Value) || string.IsNullOrEmpty(startdateAtt.Value))
+            if (testidAtt == null || string.IsNullOrEmpty(testidAtt.Value) ||
+                versionnumberAtt == null || string.IsNullOrEmpty(versionnumberAtt.Value) ||
+                runidAtt == null || string.IsNullOrEmpty(runidAtt.Value) ||
+                startdateAtt == null || string.IsNullOrEmpty(startdateAtt.Value))
             {
-              const string message = "Xml with invalid SplitTestID, VersionNumber, itemElement or TestStartDate";
+              const string message = "Xml with invalid SplitTestID, VersionNumber, SplitTestRunID or TestStartDate";
               var aex = new AtlantisException("ActiveSplitTestsResponseData.ctor", "0", message, itemElement.ToString(),
                                               null, null);
               Engine.Engine.LogAtlantisException(aex);
@@ -57,7 +59,7 @@ namespace Atlantis.Framework.SplitTesting.Interface
 
             var testid = testidAtt.Value;
             var versionnumber = versionnumberAtt.Value;
-            var eligibilityrules = eligibilityrulesAtt.Value;
+            var eligibilityrules = eligibilityrulesAtt != null ? eligibilityrulesAtt.Value : string.Empty;
             var runid = runidAtt.Value;
             var startdate = startdateAtt.Value;
 

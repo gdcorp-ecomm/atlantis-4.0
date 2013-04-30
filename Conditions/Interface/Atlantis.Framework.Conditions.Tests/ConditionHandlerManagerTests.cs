@@ -4,7 +4,6 @@ using System.IO;
 using System.Reflection;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Render.ExpressionParser;
 using Atlantis.Framework.Render.MarkupParser;
 using Atlantis.Framework.Testing.MockHttpContext;
@@ -18,20 +17,20 @@ namespace Atlantis.Framework.Conditions.Tests
   {
     private const string PRE_PROCESSOR_PREFIX = "##";
 
-    private IProviderContainer _objectProviderContainer;
-    private IProviderContainer ObjectProviderContainer
+    private IProviderContainer _providerContainer;
+    private IProviderContainer ProviderContainer
     {
       get
       {
-        if (_objectProviderContainer == null)
+        if (_providerContainer == null)
         {
-          _objectProviderContainer = new ObjectProviderContainer();
-          _objectProviderContainer.RegisterProvider<ISiteContext, MockSiteContext>();
-          _objectProviderContainer.RegisterProvider<IShopperContext, MockShopperContext>();
-          _objectProviderContainer.RegisterProvider<IManagerContext, MockManagerContext>();
+          _providerContainer = new MockProviderContainer();
+          _providerContainer.RegisterProvider<ISiteContext, MockSiteContext>();
+          _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
+          _providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
         }
 
-        return _objectProviderContainer;
+        return _providerContainer;
       }
     }
 
@@ -42,7 +41,7 @@ namespace Atlantis.Framework.Conditions.Tests
       {
         if (_expressionParserManager == null)
         {
-          _expressionParserManager = new ExpressionParserManager(ObjectProviderContainer);
+          _expressionParserManager = new ExpressionParserManager(ProviderContainer);
           _expressionParserManager.EvaluateExpressionHandler += ConditionHandlerManager.EvaluateCondition;
         }
 
@@ -71,19 +70,19 @@ namespace Atlantis.Framework.Conditions.Tests
     [TestMethod]
     public void EvaludateValidConditionTrue()
     {
-      Assert.IsTrue(ConditionHandlerManager.EvaluateCondition("dataCenter", new[] { "AP" }, ObjectProviderContainer));
+      Assert.IsTrue(ConditionHandlerManager.EvaluateCondition("dataCenter", new[] { "AP" }, ProviderContainer));
     }
 
     [TestMethod]
     public void EvaludateValidConditionFalse()
     {
-      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("dataCenter", new[] { "US" }, ObjectProviderContainer));
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("dataCenter", new[] { "US" }, ProviderContainer));
     }
 
     [TestMethod]
     public void EvaludateUnRegisteredCondition()
     {
-      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("doesNotExist", new[] { "value1" }, ObjectProviderContainer));
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("doesNotExist", new[] { "value1" }, ProviderContainer));
     }
 
     [TestMethod]

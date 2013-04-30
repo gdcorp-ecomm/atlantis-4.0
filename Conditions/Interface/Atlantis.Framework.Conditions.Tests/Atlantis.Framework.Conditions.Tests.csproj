@@ -73,10 +73,6 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
-      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
-      <Name>Atlantis.Framework.Providers.Containers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
       <Project>{2f8983b4-801b-461a-9d76-26a58a496261}</Project>
       <Name>Atlantis.Framework.Testing.MockHttpContext</Name>

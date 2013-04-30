@@ -49,7 +49,7 @@ namespace Atlantis.Framework.SplitTesting.Tests
     [TestMethod]
     public void ActiveTestDetailsResponseDataWithEmptyItems()
     {
-      const string data = "<data count=\"1\"><item SplitTestSideID=\"\" SideName=\"\" PercentAllocation=\"50.00\"/></data>";
+      const string data = "<data count=\"1\"><item SplitTestSideID=\"\" SideName=\"\" InitialPercentAllocation=\"50.00\"/></data>";
       var response = ActiveSplitTestDetailsResponseData.FromCacheXml(data);
       Assert.AreEqual(false, response.SplitTestDetails.Any());
     }
@@ -57,7 +57,7 @@ namespace Atlantis.Framework.SplitTesting.Tests
     [TestMethod]
     public void ActiveTestDetailsResponseDataWithValidItems()
     {
-      const string data = "<data count=\"1\"><item SplitTestSideID=\"1\" SideName=\"A\" PercentAllocation=\"50.00\"/><item SplitTestSideID=\"1\" SideName=\"B\" PercentAllocation=\"50.00\" /></data>";
+      const string data = "<data count=\"1\"><item SplitTestSideID=\"1\" SideName=\"A\" InitialPercentAllocation=\"50.00\"/><item SplitTestSideID=\"1\" SideName=\"B\" PercentAllocation=\"50.00\" /></data>";
       var response = ActiveSplitTestDetailsResponseData.FromCacheXml(data);
       Assert.AreEqual(true, response.SplitTestDetails.Any());
     }
@@ -65,7 +65,7 @@ namespace Atlantis.Framework.SplitTesting.Tests
     [TestMethod]
     public void ActiveTestDetailsResponseDataWithValidItemsToXml()
     {
-      const string data = "<data count=\"1\"><item SplitTestSideID=\"1\" SideName=\"A\" PercentAllocation=\"50.00\"/><item SplitTestSideID=\"1\" SideName=\"B\" PercentAllocation=\"50.00\" /></data>";
+      const string data = "<data count=\"1\"><item SplitTestSideID=\"1\" SideName=\"A\" InitialPercentAllocation=\"50.00\"/><item SplitTestSideID=\"1\" SideName=\"B\" PercentAllocation=\"50.00\" /></data>";
       var response = ActiveSplitTestDetailsResponseData.FromCacheXml(data);
 
       XElement a = XElement.Parse(response.ToXML());
@@ -100,7 +100,7 @@ namespace Atlantis.Framework.SplitTesting.Tests
     [TestMethod]
     public void RunActiveTestDetailsRequestWithValidData()
     {
-      var request = new ActiveSplitTestDetailsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1);
+      var request = new ActiveSplitTestDetailsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1008);
       var response = (ActiveSplitTestDetailsResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
 
       Assert.AreEqual(true, response.SplitTestDetails.Any());

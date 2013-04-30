@@ -40,12 +40,12 @@ namespace Atlantis.Framework.SplitTesting.Interface
           {
             var sideidAtt = itemElement.Attribute("SplitTestSideID");
             var sidenameAtt = itemElement.Attribute("SideName");
-            var percentallocationAtt = itemElement.Attribute("PercentAllocation");
+            var percentallocationAtt = itemElement.Attribute("InitialPercentAllocation");
 
             if (string.IsNullOrEmpty(sideidAtt.Value) || string.IsNullOrEmpty(sidenameAtt.Value) ||
                 string.IsNullOrEmpty(percentallocationAtt.Value))
             {
-              const string message = "Xml with invalid SplitTestSideID, SideName or PercentAllocation";
+              const string message = "Xml with invalid SplitTestSideID, SideName or InitialPercentAllocation";
               var aex = new AtlantisException("ActiveSplitTestDetailsResponseData.ctor", "0", message,
                                               itemElement.ToString(), null, null);
               Engine.Engine.LogAtlantisException(aex);
@@ -108,7 +108,7 @@ namespace Atlantis.Framework.SplitTesting.Interface
           var testElement = new XElement("SplitTestDetail");
           testElement.Add(new XAttribute("SideId", splitTestDetail.SideId));
           testElement.Add(new XAttribute("SideName", splitTestDetail.Name));
-          testElement.Add(new XAttribute("PercentAllocation", splitTestDetail.Allocation));
+          testElement.Add(new XAttribute("InitialPercentAllocation", splitTestDetail.Allocation));
 
           rootElement.Add(testElement);
         }

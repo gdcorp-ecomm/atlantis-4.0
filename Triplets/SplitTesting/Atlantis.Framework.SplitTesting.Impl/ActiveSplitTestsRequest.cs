@@ -21,8 +21,8 @@ namespace Atlantis.Framework.SplitTesting.Impl
         var cacheXml = string.Empty;
         using (var comCache = GdDataCacheOutOfProcess.CreateDisposable())
         {
-          //cacheXml = comCache.GetCacheData(requestXml);
-          cacheXml = "<data count=\"1\"><item SplitTestID=\"1\" VersionNumber=\"1\" EligibilityRules=\"dataCenter(AP)\" SplitTestRunID=\"1\" TestStartDate=\"04/22/2013\"/></data>";
+          cacheXml = comCache.GetCacheData(requestXml);
+          //cacheXml = "<data count=\"1\"><item SplitTestID=\"1\" VersionNumber=\"1\" EligibilityRules=\"dataCenter(AP)\" SplitTestRunID=\"1\" TestStartDate=\"04/22/2013\"/></data>";
         }
         result = ActiveSplitTestsResponseData.FromCacheXml(cacheXml);
       }

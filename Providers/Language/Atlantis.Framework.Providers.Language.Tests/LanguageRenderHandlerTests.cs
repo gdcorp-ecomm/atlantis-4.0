@@ -41,9 +41,9 @@ namespace Atlantis.Framework.Providers.Language.Tests
 
       var pipeline = new RenderPipelineManager();
       pipeline.AddRenderHandler(new LanguageRenderHandler());
-      pipeline.RenderContent(content, container);
+      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
 
-      Assert.AreEqual("<div>Thames River</div>", content.Content);
+      Assert.AreEqual("<div>Thames River</div>", processedContent.Content);
     }
 
     [TestMethod]
@@ -54,9 +54,9 @@ namespace Atlantis.Framework.Providers.Language.Tests
 
       var pipeline = new RenderPipelineManager();
       pipeline.AddRenderHandler(new LanguageRenderHandler());
-      pipeline.RenderContent(content, container);
+      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
 
-      Assert.AreEqual("<div>GoDaddy Green River</div>", content.Content);
+      Assert.AreEqual("<div>GoDaddy Green River</div>", processedContent.Content);
     }
 
     [TestMethod]
@@ -67,9 +67,9 @@ namespace Atlantis.Framework.Providers.Language.Tests
 
       var pipeline = new RenderPipelineManager();
       pipeline.AddRenderHandler(new LanguageRenderHandler());
-      pipeline.RenderContent(content, container);
+      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
 
-      Assert.AreEqual("<div></div>", content.Content);
+      Assert.AreEqual("<div></div>", processedContent.Content);
     }
 
     [TestMethod]
@@ -80,9 +80,9 @@ namespace Atlantis.Framework.Providers.Language.Tests
 
       var pipeline = new RenderPipelineManager();
       pipeline.AddRenderHandler(new LanguageRenderHandler());
-      pipeline.RenderContent(content, container);
+      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
 
-      Assert.AreEqual("<div>Hello</div>", content.Content);
+      Assert.AreEqual("<div>Hello</div>", processedContent.Content);
     }
 
 
@@ -93,7 +93,7 @@ namespace Atlantis.Framework.Providers.Language.Tests
         Content = content;
       }
 
-      public string Content { get; set; }
+      public string Content { get; private set; }
     }
 
   }

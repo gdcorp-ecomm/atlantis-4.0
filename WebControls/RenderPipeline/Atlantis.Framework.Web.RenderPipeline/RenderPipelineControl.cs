@@ -54,9 +54,9 @@ namespace Atlantis.Framework.Web.RenderPipeline
         }
 
         var content = new PipelineContent(prePipelineText.ToString());
-        _pipelineManager.RenderContent(content, HttpProviderContainer.Instance);
+        IProcessedRenderContent processedContent = _pipelineManager.RenderContent(content, HttpProviderContainer.Instance);
 
-        writer.Write(content.Content);
+        writer.Write(processedContent.Content);
       }
 
       private class PipelineContent : IRenderContent
@@ -66,7 +66,7 @@ namespace Atlantis.Framework.Web.RenderPipeline
           Content = content;
         }
 
-        public string Content { get; set; }
+        public string Content { get; private set; }
       }
     }
 }

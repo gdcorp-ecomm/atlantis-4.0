@@ -33,18 +33,14 @@ namespace Atlantis.Framework.Language.Impl.Data
 
     private void ParseLanguageFile(string languageFile)
     {
-      FileInfo fileInfo = new FileInfo(languageFile);
+      PhraseFileInfo fileInfo = new PhraseFileInfo(languageFile);
 
-      int dotPosition = fileInfo.Name.IndexOf('.');
-      if (dotPosition < 2)
+      if (!fileInfo.IsLanguageDataValid)
       {
         return;
       }
 
-      string language = fileInfo.Name.Substring(0, dotPosition);
       string[] dataLines = File.ReadAllLines(languageFile);
-      
-
       Phrase currentPhrase = null;
 
       foreach (string dataLine in dataLines)
@@ -57,7 +53,7 @@ namespace Atlantis.Framework.Language.Impl.Data
             StorePhrase(currentPhrase);
           }
 
-          currentPhrase = Phrase.FromPhraseElementLine(dataLine, language);
+          currentPhrase = Phrase.FromPhraseElementLine(dataLine, fileInfo);
         }
         else if (currentPhrase != null)
         {

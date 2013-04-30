@@ -19,15 +19,15 @@ namespace Atlantis.Framework.Providers.Language
       _languagePhraseTokenPattern = new Regex(_DEFAULTTOKENPATTERN, RegexOptions.Singleline | RegexOptions.Compiled);
     }
 
-    public void ProcessContent(IRenderContent renderContent, IProviderContainer providerContainer)
+    public void ProcessContent(IProcessedRenderContent processRenderContent, IProviderContainer providerContainer)
     {
       ILanguageProvider languageProvider;
       if (providerContainer.TryResolve(out languageProvider))
       {
-        var matches = _languagePhraseTokenPattern.Matches(renderContent.Content);
+        var matches = _languagePhraseTokenPattern.Matches(processRenderContent.Content);
         if (matches.Count > 0)
         {
-          StringBuilder contentBuilder = new StringBuilder(renderContent.Content);
+          StringBuilder contentBuilder = new StringBuilder(processRenderContent.Content);
 
           foreach (Match phraseMatch in matches)
           {
@@ -49,7 +49,7 @@ namespace Atlantis.Framework.Providers.Language
             contentBuilder.Replace(phraseMatch.Value, replacement);
           }
 
-          renderContent.Content = contentBuilder.ToString();
+          processRenderContent.OverWriteContent(contentBuilder.ToString());
         }
       }
     }

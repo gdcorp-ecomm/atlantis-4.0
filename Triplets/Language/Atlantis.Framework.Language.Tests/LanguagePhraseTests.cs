@@ -144,6 +144,15 @@ namespace Atlantis.Framework.Language.Tests
     }
 
     [TestMethod]
+    public void RequestDefaultAllDict2()
+    {
+      var request = new LanguagePhraseRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "dict2", "testkey", "en", "www", 1);
+      var response = (LanguagePhraseResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
+      Assert.IsFalse(string.IsNullOrEmpty(response.LanguagePhrase));
+      Assert.IsTrue(response.LanguagePhrase.StartsWith("Purple River"));
+    }
+
+    [TestMethod]
     public void RequestDefaultReseller()
     {
       var request = new LanguagePhraseRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "testdictionary", "testkey", "en", "www", 6);
@@ -251,7 +260,38 @@ namespace Atlantis.Framework.Language.Tests
       Assert.AreEqual(expectedDegradation, joinedKeys);
     }
 
+    [TestMethod]
+    public void PhraseFileInfoValid()
+    {
+      PhraseFileInfo info = new PhraseFileInfo(@"c:\temp\blue-en.language");
+      Assert.AreEqual("blue", info.DictionaryName);
+      Assert.AreEqual("en", info.Language);
+      Assert.IsTrue(info.IsLanguageDataValid);
+    }
 
+    [TestMethod]
+    public void PhraseFileInfoValidFullLanguage()
+    {
+      PhraseFileInfo info = new PhraseFileInfo(@"c:\temp\greenarm-es-mx.language");
+      Assert.AreEqual("greenarm", info.DictionaryName);
+      Assert.AreEqual("es-mx", info.Language);
+      Assert.IsTrue(info.IsLanguageDataValid);
+    }
+
+    [TestMethod]
+    public void PhraseFileInfoNoLanguage()
+    {
+      PhraseFileInfo info = new PhraseFileInfo(@"c:\temp\blue-.language");
+      Assert.AreEqual("blue", info.DictionaryName);
+      Assert.IsFalse(info.IsLanguageDataValid);
+    }
+
+    [TestMethod]
+    public void PhraseFileInfoNoLanguageNoDash()
+    {
+      PhraseFileInfo info = new PhraseFileInfo(@"c:\temp\blue.language");
+      Assert.IsFalse(info.IsLanguageDataValid);
+    }
 
   }
 }

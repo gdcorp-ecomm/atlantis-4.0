@@ -4,9 +4,9 @@ namespace Atlantis.Framework.Web.RenderPipeline.TestWeb.TestRenderHandlers
 {
   public class SquigglyRenderHandler : IRenderHandler
   {
-    public void ProcessContent(IRenderContent renderContent, Interface.IProviderContainer providerContainer)
+    public void ProcessContent(IProcessedRenderContent processRenderContent, Interface.IProviderContainer providerContainer)
     {
-      renderContent.Content = renderContent.Content.Replace("{{green}}", "KickAss!");
+      processRenderContent.OverWriteContent(processRenderContent.Content.Replace("{{green}}", "KickAss!"));
     }
   }
 }

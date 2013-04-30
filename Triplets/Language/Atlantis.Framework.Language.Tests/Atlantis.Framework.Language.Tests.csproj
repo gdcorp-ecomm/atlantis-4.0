@@ -87,13 +87,16 @@
     <None Include="atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="en.language">
+    <None Include="dict2-en.language">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="es-mx.language">
+    <None Include="testdictionary-en.language">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="es.language">
+    <None Include="testdictionary-es-mx.language">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="testdictionary-es.language">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

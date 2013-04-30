@@ -14,8 +14,6 @@ namespace Atlantis.Framework.CH.Localization.Tests
   [TestClass]
   public class CountrySiteAnyConditionHandlerTests
   {
-    private const string PRE_PROCESSOR_PREFIX = "##";
-
     private IProviderContainer _providerContainer;
     private IProviderContainer ProviderContainer
     {

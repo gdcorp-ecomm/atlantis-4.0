@@ -30,6 +30,31 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
       set { _allowExternalRequestsToRunTests = value; }
     }
 
+    private static string _unitTestNamespace;
+    public static string UnitTestNamespace
+    {
+      get
+      {
+        return _unitTestNamespace ?? (_unitTestNamespace = "UnitTests");
+      }
+      set
+      {
+        _unitTestNamespace = value;
+      }
+    }
+
+    private static string[] _unitTestAssemblies;
+    public static string[] UnitTestAssemblies
+    {
+      get
+      {
+        return _unitTestAssemblies ?? (_unitTestAssemblies = new string[] { "App_Code" });
+      }
+      set
+      {
+        _unitTestAssemblies = value;
+      }
+    }
 
     private TestRunner LocalTestRunner { get; set; }
     private AvailableContentReturnTypes ResponseOutputType
@@ -110,8 +135,9 @@ namespace Atlantis.Framework.Testing.UnitTesting.Handlers
           }
 
           LocalTestRunner = new TestRunner();
+          LocalTestRunner.UnitTestAssemblies = UnitTestAssemblies;
 
-          LocalTestRunner.ExecuteTests(string.Concat("UnitTests.", string.Join(".", classToTest)), TestMethods);
+          LocalTestRunner.ExecuteTests(UnitTestNamespace, string.Join(".", classToTest), TestMethods);
 
           ResponseOutput(context, LocalTestRunner.TestData);
         }

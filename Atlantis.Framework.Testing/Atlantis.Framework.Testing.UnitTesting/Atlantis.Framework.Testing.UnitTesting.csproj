@@ -44,7 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\TestCollectionAttribute.cs" />
     <Compile Include="Attributes\TestFixtureAttribute.cs" />
+    <Compile Include="Exceptions\InvalidTestClassException.cs" />
+    <Compile Include="Exceptions\TestClassNotInAssembliesException.cs" />
+    <Compile Include="Interfaces\IUnitTestCollection.cs" />
     <Compile Include="BaseClasses\TestResultSummary.cs" />
     <Compile Include="BaseClasses\UnitTestBaseHttpHandler.cs" />
     <Compile Include="BaseClasses\TestExtendedLogData.cs" />

@@ -1,21 +1,25 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Testing.UnitTesting.Attributes;
 using Atlantis.Framework.Testing.UnitTesting.BaseClasses;
 using Atlantis.Framework.Testing.UnitTesting.Exceptions;
+using Atlantis.Framework.Testing.UnitTesting.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using System.Linq;
 
 namespace Atlantis.Framework.Testing.UnitTesting
 {
-
   public sealed class TestRunner
   {
 
     #region Properties
 
     public bool RunDestructiveTests { get; set; }
+
+    public string[] UnitTestAssemblies { get; set; }
 
     private TestResultData _testData;
     public TestResultData TestData
@@ -55,53 +59,132 @@ namespace Atlantis.Framework.Testing.UnitTesting
 
     #region public
 
-    public void ExecuteTests(string classToTest, HashSet<string> testMethods)
+    private List<UnitTestBase> GetListOfTestClasses(string[] assemblyNames, string unitTestingNamespace, Type reqAttr)
+    {
+      var listTestInsts = new List<UnitTestBase>();
+      foreach (var asmName in assemblyNames)
+      {
+        var asm = Assembly.Load(asmName);
+        var testInsts = asm.GetTypes().Where(
+          o =>
+          (o.Namespace ?? String.Empty).StartsWith(unitTestingNamespace, StringComparison.Ordinal)
+          && o.IsSubclassOf(typeof(UnitTestBase)) // ensure the typecast will work
+          && o.GetCustomAttributes(typeof(TestFixtureAttribute), false).Length > 0
+          && (reqAttr == null // only if the required attribute is supplied, then search the classes and methods
+              || o.GetCustomAttributes(reqAttr, false).Length > 0 // if the required attribute is present on the class, then include the class
+              || o.GetMethods(BindingFlags.Public | BindingFlags.Instance).Any(
+                m => m.GetCustomAttributes(reqAttr, false).Length > 0 // if the required attribute is present on any method in the  class, then include the class
+                ))).Select<Type, UnitTestBase>(t => (UnitTestBase)Activator.CreateInstance(t));
+
+        listTestInsts.AddRange(testInsts);
+      }
+      return listTestInsts;
+    }
+
+    public void ExecuteTests(string unitTestingNamespace, string relclassToTest, HashSet<string> testMethods)
     {
 
       GetTestRunnerExecutionInformation();
 
+      string classToTest = String.Concat(unitTestingNamespace, ".", relclassToTest);
       try
       {
-        _currentTestClass = Activator.CreateInstance(Assembly.Load("App_Code").GetType(classToTest)) as UnitTestBase;
-        MethodInfo fixtureSetup;
-        MethodInfo fixtureTeardown;
-        MethodInfo testSetup;
-        MethodInfo testTeardown;
 
-        if (CurrentTestClass != null)
-          CurrentTestClass.Log += new UnitTestBase.LogData(AddLogData);
-
-        AddLogData(this, new UnitTestLogDataEventArgs("Test Runner", String.Format("Initialized at {0}", DateTime.Now)));
-
-        var tests = GetTests(out fixtureSetup, out fixtureTeardown, out testSetup, out testTeardown);
-        if (testMethods.Count > 0)
+        // find the class in the list of client assemblies
+        Type typeOfClassToTest = null;
+        foreach (var asm in UnitTestAssemblies)
         {
-          tests = tests.FindAll(x => testMethods.Contains(x.Name));
+          typeOfClassToTest = Assembly.Load(asm).GetType(classToTest);
+          if (typeOfClassToTest != null)
+          {
+            break;
+          }
+        }
+        if (typeOfClassToTest == null)
+        {
+          throw new TestClassNotInAssembliesException(String.Concat("Class '", classToTest, "' not found in these assemblies: ", String.Join(", ", UnitTestAssemblies), "."));
         }
 
-        if (tests.Count > 0)
+        Type reqAttr = null;
+
+        var testClasses = new List<UnitTestBase>();
+        var potentialTestClass = Activator.CreateInstance(typeOfClassToTest);
+        var unitTestClass = potentialTestClass as UnitTestBase;
+        // see if the class is a unit test
+        if (unitTestClass != null)
         {
-          RunTestFixtureSetup(fixtureSetup);
-
-          foreach (var test in tests)
+          testClasses.Add(unitTestClass);
+        }
+        else
+        {
+          // see if it is also a collection defined by interface (simpler case)
+          var potentialTestCollection = potentialTestClass as IUnitTestCollection;
+          if (potentialTestCollection != null)
           {
-            try
+            reqAttr = potentialTestCollection.CollectionAttribute;
+          }
+          else
+          {
+            // see if the TestCollection Attribute is there
+            var collectionAttr = (TestCollectionAttribute)Attribute.GetCustomAttribute(typeOfClassToTest, typeof(TestCollectionAttribute), false);
+            if (collectionAttr != null)
             {
-              RunTestSetup(testSetup);
-
-              RunTest(test);
-
-              RunTestTeardown(testTeardown);
-
+              // get the required attribute if it is specified
+              reqAttr = this.LoadTypeFromAssemblies(collectionAttr.RequiredAttr);
             }
-            catch (Exception ex)
+            else
             {
-              AddTestResult(false, test.Name, "The test suite runner encountered an error. " + ex.Message);
+              throw new InvalidTestClassException(String.Concat("Class ", classToTest, " was not derived from UnitTestBase nor was it a test collection"));
             }
+          }
+          var classesInCollection = GetListOfTestClasses(UnitTestAssemblies, unitTestingNamespace, reqAttr);
+          testClasses.AddRange(classesInCollection);
+        }
 
+        foreach (var testClass in testClasses)
+        {
+          _currentTestClass = testClass;
+
+          MethodInfo fixtureSetup;
+          MethodInfo fixtureTeardown;
+          MethodInfo testSetup;
+          MethodInfo testTeardown;
+
+          if (CurrentTestClass != null)
+            CurrentTestClass.Log += AddLogData;
+
+          AddLogData(this, new UnitTestLogDataEventArgs("Test Runner", String.Format("Initialized at {0}", DateTime.Now)));
+
+          var tests = GetTests(out fixtureSetup, out fixtureTeardown, out testSetup, out testTeardown, reqAttr);
+          if (testMethods.Count > 0)
+          {
+            tests = tests.FindAll(x => testMethods.Contains(x.Name));
           }
 
-          RunTestFixtureTeardown(fixtureTeardown);
+          if (tests.Count > 0)
+          {
+            RunTestFixtureSetup(fixtureSetup);
+
+            foreach (var test in tests)
+            {
+              try
+              {
+                RunTestSetup(testSetup);
+
+                RunTest(test);
+
+                RunTestTeardown(testTeardown);
+
+              }
+              catch (Exception ex)
+              {
+                AddTestResult(false, test.Name, "The test suite runner encountered an error. " + ex.Message);
+              }
+
+            }
+
+            RunTestFixtureTeardown(fixtureTeardown);
+          }
         }
       }
       catch (Exception e)
@@ -117,6 +200,23 @@ namespace Atlantis.Framework.Testing.UnitTesting
 
 
     #region private
+
+    private Type LoadTypeFromAssemblies(string className)
+    {
+      Type classType = null;
+      if (!String.IsNullOrEmpty(className))
+      {
+        foreach (var asm in UnitTestAssemblies)
+        {
+          classType = Assembly.Load(asm).GetType(className);
+          if (classType != null)
+          {
+            break;
+          }
+        }
+      }
+      return classType;
+    }
 
     private void GetTestRunnerExecutionInformation()
     {
@@ -169,7 +269,7 @@ namespace Atlantis.Framework.Testing.UnitTesting
 
     }
 
-    private List<MethodInfo> GetTests(out MethodInfo fixtureSetup, out MethodInfo fixtureTeardown, out MethodInfo testSetup, out MethodInfo testTeardown)
+    private List<MethodInfo> GetTests(out MethodInfo fixtureSetup, out MethodInfo fixtureTeardown, out MethodInfo testSetup, out MethodInfo testTeardown, Type reqAttr)
     {
       var tests = new List<MethodInfo>();
       var testType = CurrentTestClass.GetType();
@@ -190,7 +290,7 @@ namespace Atlantis.Framework.Testing.UnitTesting
       }
 
 
-
+      bool bAlwaysAddMethod = reqAttr == null || Attribute.GetCustomAttribute(testType, reqAttr, false) != null;
       foreach (MethodInfo mi in testType.GetMethods())
       {
         var fixtureSetupAttr = (TestFixtureSetupAttribute)Attribute.GetCustomAttribute(mi, typeof(TestFixtureSetupAttribute));
@@ -215,13 +315,15 @@ namespace Atlantis.Framework.Testing.UnitTesting
         if (testTeardownAttr != null && testTeardown == null)
         {
           testTeardown = mi;
-
         }
 
         var testAttr = (TestAttribute)Attribute.GetCustomAttribute(mi, typeof(TestAttribute));
         if (testAttr != null)
         {
-          tests.Add(mi);
+          if (bAlwaysAddMethod || Attribute.GetCustomAttribute(mi, reqAttr) != null)
+          {
+            tests.Add(mi);
+          }
         }
       }
 

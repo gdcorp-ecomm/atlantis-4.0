@@ -2,6 +2,7 @@
 using Atlantis.Framework.Providers.Language.Interface;
 using Atlantis.Framework.Render.Pipeline.Interface;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -27,26 +28,31 @@ namespace Atlantis.Framework.Providers.Language
         var matches = _languagePhraseTokenPattern.Matches(processRenderContent.Content);
         if (matches.Count > 0)
         {
+          HashSet<string> alreadyReplaced = new HashSet<string>();
           StringBuilder contentBuilder = new StringBuilder(processRenderContent.Content);
 
           foreach (Match phraseMatch in matches)
           {
-            string replacement = string.Empty;
-
-            try
+            if (!alreadyReplaced.Contains(phraseMatch.Value))
             {
-              string dictionary = phraseMatch.Groups[_DICTIONARYKEY].Captures[0].Value;
-              string phrasekey = phraseMatch.Groups[_PHRASEKEY].Captures[0].Value;
+              string replacement = string.Empty;
 
-              replacement = languageProvider.GetLanguagePhrase(dictionary, phrasekey);
-            }
-            catch (Exception ex)
-            {
-              AtlantisException exception = new AtlantisException("LanguageRenderHandler.ProcessContent", "0", ex.Message + ex.StackTrace, phraseMatch.Value, null, null);
-              Engine.Engine.LogAtlantisException(exception);           
-            }
+              try
+              {
+                string dictionary = phraseMatch.Groups[_DICTIONARYKEY].Captures[0].Value;
+                string phrasekey = phraseMatch.Groups[_PHRASEKEY].Captures[0].Value;
 
-            contentBuilder.Replace(phraseMatch.Value, replacement);
+                replacement = languageProvider.GetLanguagePhrase(dictionary, phrasekey);
+              }
+              catch (Exception ex)
+              {
+                AtlantisException exception = new AtlantisException("LanguageRenderHandler.ProcessContent", "0", ex.Message + ex.StackTrace, phraseMatch.Value, null, null);
+                Engine.Engine.LogAtlantisException(exception);
+              }
+
+              contentBuilder.Replace(phraseMatch.Value, replacement);
+              alreadyReplaced.Add(phraseMatch.Value);
+            }
           }
 
           processRenderContent.OverWriteContent(contentBuilder.ToString());

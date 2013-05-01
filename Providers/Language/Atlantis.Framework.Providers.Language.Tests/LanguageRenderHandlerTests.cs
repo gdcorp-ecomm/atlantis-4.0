@@ -10,9 +10,9 @@ namespace Atlantis.Framework.Providers.Language.Tests
 {
   [TestClass]
   [DeploymentItem("atlantis.config")]
-  [DeploymentItem("en.language")]
-  [DeploymentItem("es-mx.language")]
-  [DeploymentItem("es.language")]
+  [DeploymentItem("testdictionary-en.language")]
+  [DeploymentItem("testdictionary-es-mx.language")]
+  [DeploymentItem("testdictionary-es.language")]
   [DeploymentItem("Atlantis.Framework.Language.Impl.dll")]
   public class LanguageRenderHandlerTests
   {
@@ -57,6 +57,19 @@ namespace Atlantis.Framework.Providers.Language.Tests
       IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
 
       Assert.AreEqual("<div>GoDaddy Green River</div>", processedContent.Content);
+    }
+
+    [TestMethod]
+    public void ValidLanaguagePhraseReplacementWwwDuplicate()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "www", "en");
+      TestContent content = new TestContent("<div>[@L[testdictionary:testkey]@L]</div><div>[@L[testdictionary:testkey]@L]</div>");
+
+      var pipeline = new RenderPipelineManager();
+      pipeline.AddRenderHandler(new LanguageRenderHandler());
+      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+
+      Assert.AreEqual("<div>GoDaddy Green River</div><div>GoDaddy Green River</div>", processedContent.Content);
     }
 
     [TestMethod]

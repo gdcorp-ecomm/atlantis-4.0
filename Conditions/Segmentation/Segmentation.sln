@@ -27,9 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CH.Shopp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.CH.ShopperSegment.Tests", "Atlantis.Framework.CH.ShopperSegmentation.Tests\Atlantis.Framework.CH.ShopperSegment.Tests.csproj", "{7459ACE7-B678-4A3A-B6EC-8A12C1D63EE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 13
+		SccNumberOfProjects = 14
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -79,6 +81,10 @@ Global
 		SccProjectUniqueName12 = Atlantis.Framework.CH.ShopperSegmentation.Tests\\Atlantis.Framework.CH.ShopperSegment.Tests.csproj
 		SccProjectName12 = Atlantis.Framework.CH.ShopperSegmentation.Tests
 		SccLocalPath12 = Atlantis.Framework.CH.ShopperSegmentation.Tests
+		SccProjectUniqueName13 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
+		SccProjectTopLevelParentUniqueName13 = Segmentation.sln
+		SccProjectName13 = ../../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
+		SccLocalPath13 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +139,10 @@ Global
 		{7459ACE7-B678-4A3A-B6EC-8A12C1D63EE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7459ACE7-B678-4A3A-B6EC-8A12C1D63EE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7459ACE7-B678-4A3A-B6EC-8A12C1D63EE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,5 +158,6 @@ Global
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA} = {D07E7FC3-9BC0-4646-881A-010A5675DA28}
 		{0D7F076F-1809-437B-B045-E35A7E68E423} = {D07E7FC3-9BC0-4646-881A-010A5675DA28}
 		{1A50E3B8-4A5C-4E48-BAD4-17C5092F0DDE} = {D07E7FC3-9BC0-4646-881A-010A5675DA28}
+		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {D07E7FC3-9BC0-4646-881A-010A5675DA28}
 	EndGlobalSection
 EndGlobal

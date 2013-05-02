@@ -58,7 +58,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ConditionHandlers\DataCenterConditionHandler.cs" />
-    <Compile Include="IsActiveSplitTestingSideTests.cs" />
+    <Compile Include="SplitTestingSideIsActiveTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

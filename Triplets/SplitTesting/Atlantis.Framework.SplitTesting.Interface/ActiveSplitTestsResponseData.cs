@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
@@ -16,6 +17,7 @@ namespace Atlantis.Framework.SplitTesting.Interface
 
     private readonly AtlantisException _exception;
     private readonly IEnumerable<ActiveSplitTest> _activeSplitTests;
+    private readonly Dictionary<int, ActiveSplitTest> _activeSplitTestsByTestId;
 
     public static ActiveSplitTestsResponseData FromException(AtlantisException exception)
     {
@@ -98,14 +100,27 @@ namespace Atlantis.Framework.SplitTesting.Interface
       _activeSplitTests = new List<ActiveSplitTest>();
     }
 
-    private ActiveSplitTestsResponseData(IEnumerable<ActiveSplitTest> splitTests)
+    private ActiveSplitTestsResponseData(List<ActiveSplitTest> splitTests)
     {
       _activeSplitTests = splitTests;
+      _activeSplitTestsByTestId = new Dictionary<int, ActiveSplitTest>();
+
+      foreach (var splitTest in splitTests)
+      {
+        _activeSplitTestsByTestId[splitTest.TestId] = splitTest;
+      }
     }
 
     public IEnumerable<ActiveSplitTest> SplitTests
     {
       get { return _activeSplitTests; }
+    }
+
+    public bool TryGetSplitTestByTestId(int testId, out ActiveSplitTest result)
+    {
+      bool found = _activeSplitTestsByTestId.TryGetValue(testId, out result);
+
+      return found;
     }
 
     public string ToXML()

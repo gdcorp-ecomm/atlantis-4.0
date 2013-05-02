@@ -1,9 +1,11 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Web;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Providers.SplitTesting.Interface;
+using Atlantis.Framework.SplitTesting.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -88,6 +90,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
 
       var side2 = splitProvider.GetSplitTestingSide(1009);
       Assert.IsTrue(side1 == side2);
+
+      var tracking = splitProvider.GetActiveTestsForTrackingData;
     }
 
     [TestMethod]

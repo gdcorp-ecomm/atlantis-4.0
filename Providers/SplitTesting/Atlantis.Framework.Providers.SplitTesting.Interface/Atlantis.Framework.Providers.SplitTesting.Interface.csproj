@@ -46,6 +46,12 @@
     <Compile Include="ISplitTestingProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Triplets\SplitTesting\Atlantis.Framework.SplitTesting.Interface\Atlantis.Framework.SplitTesting.Interface.csproj">
+      <Project>{3c889792-7183-4648-8031-418bae99c76b}</Project>
+      <Name>Atlantis.Framework.SplitTesting.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

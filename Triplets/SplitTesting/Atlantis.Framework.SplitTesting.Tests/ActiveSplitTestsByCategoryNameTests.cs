@@ -15,6 +15,97 @@ namespace Atlantis.Framework.SplitTesting.Tests
   {
     // <data count="1"><item SplitTestID="1" VersionNumber="1" EligibilityRules="dataCenterAny(AP)" SplitTestRunID="1" /></data>
 
+    #region ActiveSplitTest class - Equals & GetHashCode tests
+
+    [TestMethod]
+    public void ActiveTestsActiveSplitTestCheckEqualsTrue()
+    {
+      var test1 = new ActiveSplitTest
+                    {
+                      TestId = 1,
+                      RunId = 1,
+                      VersionNumber = 1,
+                      EligibilityRules = "hello",
+                      StartDate = DateTime.Now
+                    };
+
+      var test2 = new ActiveSplitTest
+      {
+        TestId = 2,
+        RunId = 1,
+        VersionNumber = 3,
+        EligibilityRules = "hellooooooooooo",
+        StartDate = DateTime.Now.AddDays(5)
+      };
+
+      Assert.IsTrue(test1.Equals(test2));
+    }
+
+    [TestMethod]
+    public void ActiveTestsActiveSplitTestCheckEqualsFalse()
+    {
+      var test1 = new ActiveSplitTest
+      {
+        TestId = 1,
+        RunId = 1,
+        VersionNumber = 1,
+        EligibilityRules = "hello",
+        StartDate = DateTime.Now
+      };
+
+      var test2 = new ActiveSplitTest
+      {
+        TestId = 2,
+        RunId = 2,
+        VersionNumber = 3,
+        EligibilityRules = "hellooooooooooo",
+        StartDate = DateTime.Now.AddDays(5)
+      };
+
+      Assert.IsFalse(test1.Equals(test2));
+    }
+
+    [TestMethod]
+    public void ActiveTestsActiveSplitTestCheckEqualsInvalidObjectNull()
+    {
+      var test1 = new ActiveSplitTest
+      {
+        TestId = 1,
+        RunId = 1,
+        VersionNumber = 1
+      };
+
+      Assert.IsFalse(test1.Equals(null));
+    }
+
+    [TestMethod]
+    public void ActiveTestsActiveSplitTestCheckEqualsInvalidObject()
+    {
+      var test1 = new ActiveSplitTest
+      {
+        TestId = 1,
+        RunId = 1,
+        VersionNumber = 1
+      };
+
+      Assert.IsFalse(test1.Equals(new object()));
+    }
+
+    [TestMethod]
+    public void ActiveTestsActiveSplitTestCheckGetHashCode()
+    {
+      var test1 = new ActiveSplitTest
+      {
+        TestId = 1,
+        RunId = 1,
+        VersionNumber = 1
+      };
+
+      Assert.IsTrue(test1.GetHashCode() == 1);
+    }
+
+    #endregion
+
     [TestMethod]
     public void ActiveTestsRequestDataProperties()
     {
@@ -105,6 +196,23 @@ namespace Atlantis.Framework.SplitTesting.Tests
       var response = (ActiveSplitTestsResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
 
       Assert.AreEqual(true, response.SplitTests.Any());
+    }
+
+    [TestMethod]
+    public void RunActiveTestsRequestGetByTestID()
+    {
+      var request = new ActiveSplitTestsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "test");
+      var response = (ActiveSplitTestsResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
+
+      ActiveSplitTest splitTest;
+      if (response.TryGetSplitTestByTestId(1008, out splitTest))
+      {
+        Assert.IsTrue(splitTest != null);
+      }
+      else
+      {
+        Assert.Fail();
+      }
     }
 
     internal class XData : RequestData

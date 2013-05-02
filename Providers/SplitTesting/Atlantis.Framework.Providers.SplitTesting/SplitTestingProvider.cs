@@ -15,41 +15,44 @@ namespace Atlantis.Framework.Providers.SplitTesting
   {
     private static readonly Random rand = new Random();
 
-    private readonly Lazy<SplitTestingCookie> _splitTestCookie;
-    private readonly Dictionary<string, string> _splitTestCookieData;
+    private readonly IProviderContainer _container;
+    private Lazy<SplitTestingState> _splitTestingState;
 
     private readonly Lazy<ActiveSplitTestsResponseData> _activeSplitTestsResponse;
-    private readonly Dictionary<string, string> _activeSidesByTests;
+
+    private readonly Dictionary<ActiveSplitTest, string> _sidesByTestsForRequest;
 
     private readonly ExpressionParserManager _expressionParserManager;
 
     public SplitTestingProvider(IProviderContainer container)
       : base(container)
     {
-      _splitTestCookie = new Lazy<SplitTestingCookie>(() => new SplitTestingCookie(Container));
-      _splitTestCookieData = _splitTestCookie.Value.Value;
+      _container = container;
 
       _activeSplitTestsResponse = new Lazy<ActiveSplitTestsResponseData>(LoadActiveTests);
-      _activeSidesByTests = new Dictionary<string, string>();
+
+      _sidesByTestsForRequest = new Dictionary<ActiveSplitTest, string>();
 
       _expressionParserManager = new ExpressionParserManager(Container);
       _expressionParserManager.EvaluateExpressionHandler += ConditionHandlerManager.EvaluateCondition;
-
-      RefreshCookieData();
     }
 
     private ActiveSplitTestsResponseData LoadActiveTests()
     {
+      ActiveSplitTestsResponseData result = null;
       try
       {
         var request = new ActiveSplitTestsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, SplitTestingConfiguration.DefaultCategoryName);
-        return (ActiveSplitTestsResponseData)DataCache.DataCache.GetProcessRequest(request, SplitTestingEngineRequests.ActiveSplitTests);
+        result = (ActiveSplitTestsResponseData)DataCache.DataCache.GetProcessRequest(request, SplitTestingEngineRequests.ActiveSplitTests);
+
+        _splitTestingState = new Lazy<SplitTestingState>(() => new SplitTestingState(_container, result));
       }
       catch (Exception ex)
       {
         SplitTestingConfiguration.LogError(GetType().Name + ".LoadActiveTests", ex);
-        return null;
       }
+
+      return result;
     }
 
     private ActiveSplitTestDetailsResponseData LoadActiveTestDetails(int splitTestId)
@@ -66,111 +69,87 @@ namespace Atlantis.Framework.Providers.SplitTesting
       }
     }
 
-    private void RefreshCookieData()
+    private bool IsActiveTest(int splitTestId, out ActiveSplitTest result)
     {
-      if (_splitTestCookieData != null && 
-          _activeSplitTestsResponse.Value != null && _activeSplitTestsResponse.Value.SplitTests.Any())
+      var isActive = false;
+      result = null;
+
+      if (_activeSplitTestsResponse.Value != null)
       {
-        var keysToRemove = new List<string>();
-        var activeTests = _activeSplitTestsResponse.Value.SplitTests.ToList();
-
-        GetCookieDataKeysToRemove(activeTests, keysToRemove);
-
-        foreach (var item in keysToRemove)
+        if (_activeSplitTestsResponse.Value.TryGetSplitTestByTestId(splitTestId, out result))
         {
-          _splitTestCookieData.Remove(item);
+          isActive = true;
         }
-
-        _splitTestCookie.Value.Value = _splitTestCookieData;
       }
+
+      return isActive;
     }
 
-    private void GetCookieDataKeysToRemove(List<ActiveSplitTest> activeTests, ICollection<string> keysToRemove)
+    private bool IsEligibleTest(ActiveSplitTest activeSplitTest)
     {
-      foreach (var cookieData in _splitTestCookieData)
-      {
-        var found = false;
-        foreach (var activeTest in activeTests)
-        {
-          var key = string.Format("{0}-{1}", activeTest.TestId.ToString(CultureInfo.InvariantCulture), activeTest.VersionNumber.ToString(CultureInfo.InvariantCulture));
-
-          if (cookieData.Key == key)
-          {
-            found = true;
-            break;
-          }
-        }
-
-        if (!found)
-        {
-          keysToRemove.Add(cookieData.Key);
-        }
-      }
-    }
-
-    private bool IsActiveTest(int splitTestId, out int versionNumber)
-    {
-      var result = false;
-      versionNumber = 0;
-
-      if (_activeSplitTestsResponse.Value != null && _activeSplitTestsResponse.Value.SplitTests.Any())
-      {
-        var activeSplitTests = _activeSplitTestsResponse.Value.SplitTests;
-
-        try
-        {
-          foreach (var activeSplitTest in activeSplitTests)
-          {
-            if (activeSplitTest.TestId == splitTestId)
-            {
-              if (( !string.IsNullOrEmpty(activeSplitTest.EligibilityRules) && _expressionParserManager.EvaluateExpression(activeSplitTest.EligibilityRules) ) ||
-                    string.IsNullOrEmpty(activeSplitTest.EligibilityRules)
-                 )
-              {
-                versionNumber = activeSplitTest.VersionNumber;
-                result = true;
-                break;
-              }
-            }
-          }
-        }
-        catch (Exception ex)
-        {
-          SplitTestingConfiguration.LogError(GetType().Name + ".IsActiveTest", ex);
-        }
-      }
-
-      return result;
+      return (!string.IsNullOrEmpty(activeSplitTest.EligibilityRules) && _expressionParserManager.EvaluateExpression(activeSplitTest.EligibilityRules)) || 
+            string.IsNullOrEmpty(activeSplitTest.EligibilityRules);
     }
 
     public string GetSplitTestingSide(int splitTestId)
     {
       var side = string.Empty;
 
-      int versionNumber;
-      if (IsActiveTest(splitTestId, out versionNumber) && versionNumber > 0)
+      ActiveSplitTest activeSplitTest;
+      if (IsActiveTest(splitTestId, out activeSplitTest) && activeSplitTest != null && activeSplitTest.VersionNumber > 0)
       {
-        var key = string.Format("{0}-{1}", splitTestId.ToString(CultureInfo.InvariantCulture), versionNumber.ToString(CultureInfo.InvariantCulture));
+        var key = string.Format("{0}-{1}", splitTestId.ToString(CultureInfo.InvariantCulture), activeSplitTest.VersionNumber.ToString(CultureInfo.InvariantCulture));
 
-        side = GetFromCookie(key);
-        if (string.IsNullOrEmpty(side))
+        side = GetSplitSideFromState(key);
+        if (side != "0")
         {
-          side = GetFromCurrentRequestCache(key);
-        }
-
-        if (string.IsNullOrEmpty(side))
-        {
-          side = GetFromTriplet(splitTestId, key);
+          if (!string.IsNullOrEmpty(side))
+          {
+            if (!IsEligibleTest(activeSplitTest))
+            {
+              UpdateRequestCache(activeSplitTest, "0");
+              UpdateState(key, "0");
+            }
+            else
+            {
+              UpdateRequestCache(activeSplitTest, side);
+            }
+          }
+          else
+          {
+            side = GetSplitSideFromTriplet(activeSplitTest, key);
+            if (!string.IsNullOrEmpty(side))
+            {
+              UpdateRequestCache(activeSplitTest, side);
+              UpdateState(key, side);
+            }
+          }
         }
       }
 
       return side;
     }
 
-    private string GetFromTriplet(int splitTestId, string key)
+    public Dictionary<ActiveSplitTest, string> GetActiveTestsForTrackingData
     {
-      string side = null;
-      var activeTestDetailsResponse = LoadActiveTestDetails(splitTestId);
+      get
+      {
+        return _sidesByTestsForRequest;
+      }
+    }
+
+    public IEnumerable<ActiveSplitTest> GetAllActiveTests
+    {
+      get
+      {
+        return _activeSplitTestsResponse.Value != null ? _activeSplitTestsResponse.Value.SplitTests : new List<ActiveSplitTest>();
+      }
+    }
+
+    private string GetSplitSideFromTriplet(ActiveSplitTest splitTest, string key)
+    {
+      var side = string.Empty;
+      var activeTestDetailsResponse = LoadActiveTestDetails(splitTest.TestId);
 
       if (activeTestDetailsResponse != null && activeTestDetailsResponse.SplitTestDetails.Any())
       {
@@ -185,13 +164,6 @@ namespace Atlantis.Framework.Providers.SplitTesting
           {
             side = dtl.Name;
 
-            if (_activeSidesByTests != null)
-            {
-              _activeSidesByTests[key] = side;
-            }
-
-            _splitTestCookieData[key] = side;
-            _splitTestCookie.Value.Value = _splitTestCookieData;
             break;
           }
         }
@@ -199,13 +171,13 @@ namespace Atlantis.Framework.Providers.SplitTesting
       return side;
     }
 
-    private string GetFromCurrentRequestCache(string key)
+    private string GetSplitSideFromState(string key)
     {
-      string side = string.Empty;
-      if (_activeSidesByTests != null)
+      var side = string.Empty;
+      if (_splitTestingState.Value.Value != null)
       {
         string value;
-        if (_activeSidesByTests.TryGetValue(key, out value))
+        if (_splitTestingState.Value.Value.TryGetValue(key, out value))
         {
           side = value;
         }
@@ -213,18 +185,16 @@ namespace Atlantis.Framework.Providers.SplitTesting
       return side;
     }
 
-    private string GetFromCookie(string key)
+    private void UpdateState(string key, string side)
     {
-      string side = string.Empty;
-      if (_splitTestCookie.Value.Value != null)
-      {
-        string value;
-        if (_splitTestCookie.Value.Value.TryGetValue(key, out value))
-        {
-          side = value;
-        }
-      }
-      return side;
+      var splitTestingStateData = _splitTestingState.Value.Value;
+      splitTestingStateData[key] = side;
+      _splitTestingState.Value.Value = splitTestingStateData;
+    }
+
+    private void UpdateRequestCache(ActiveSplitTest splitTest, string side)
+    {
+      _sidesByTestsForRequest[splitTest] = side;
     }
   }
 }

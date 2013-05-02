@@ -12,7 +12,7 @@ namespace Atlantis.Framework.CH.SplitTesting.Tests
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.SplitTesting.Impl.dll")]
-  public class IsActiveSplitTestingSideTests
+  public class SplitTestingSideIsActiveTests
   {
     private bool _conditionHandlersRegistered;
 
@@ -22,7 +22,7 @@ namespace Atlantis.Framework.CH.SplitTesting.Tests
       if (!_conditionHandlersRegistered)
       {
         ConditionHandlerManager.AutoRegisterConditionHandlers(Assembly.GetExecutingAssembly());
-        ConditionHandlerManager.RegisterConditionHandler(new IsActiveSplitTestingSideConditionHandler());
+        ConditionHandlerManager.RegisterConditionHandler(new SplitTestingSideIsActiveConditionHandler());
         _conditionHandlersRegistered = true;
       }
     }
@@ -45,13 +45,13 @@ namespace Atlantis.Framework.CH.SplitTesting.Tests
     [TestMethod]
     public void EvaluateValidConditionFalse()
     {
-      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("isActiveSplitTestingSide", new[] { "9999998989", "A" }, ObjectProviderContainer));
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("SplitTestingSideIsActive", new[] { "9999998989", "A" }, ObjectProviderContainer));
     }
 
     [TestMethod]
     public void EvaluateValidConditionInvalidFalse()
     {
-      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("isActiveSplitTestingSide", new[] { "123Abc", "A" }, ObjectProviderContainer));
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("SplitTestingSideIsActive", new[] { "123Abc", "A" }, ObjectProviderContainer));
     }
   }
 }

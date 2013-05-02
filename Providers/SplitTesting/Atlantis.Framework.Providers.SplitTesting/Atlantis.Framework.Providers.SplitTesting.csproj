@@ -49,6 +49,7 @@
     <Compile Include="SplitTestingConfiguration.cs" />
     <Compile Include="SplitTestingProvider.cs" />
     <Compile Include="SplitTestingEngineRequests.cs" />
+    <Compile Include="SplitTestingState.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">

@@ -20,6 +20,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
     internal SplitTestingCookie(IProviderContainer container)
     {
       _container = container;
+
       _siteContext = new Lazy<ISiteContext>(() => _container.Resolve<ISiteContext>());
       _cookieName = new Lazy<string>(LoadCookieName);
     }
@@ -37,7 +38,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
       }
     }
 
-    public Dictionary<string, string> Value
+    internal Dictionary<string, string> Value
     {
       get
       {

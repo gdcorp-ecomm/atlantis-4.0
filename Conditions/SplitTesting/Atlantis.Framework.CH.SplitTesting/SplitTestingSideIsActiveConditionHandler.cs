@@ -7,11 +7,11 @@ using Atlantis.Framework.Providers.SplitTesting.Interface;
 
 namespace Atlantis.Framework.CH.SplitTesting
 {
-  public class IsActiveSplitTestingSideConditionHandler : IConditionHandler
+  public class SplitTestingSideIsActiveConditionHandler : IConditionHandler
   {
     public string ConditionName
     {
-      get { return "isActiveSplitTestingSide"; }
+      get { return "SplitTestingSideIsActive"; }
     }
 
     public bool EvaluateCondition(string conditionName, IList<string> parameters, IProviderContainer providerContainer)

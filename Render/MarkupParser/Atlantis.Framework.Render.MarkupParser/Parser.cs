@@ -7,6 +7,8 @@ namespace Atlantis.Framework.Render.MarkupParser
 {
   internal class Parser : IDisposable
   {
+    private const string CARRAIGE_RETURN = "\r\n";
+
     private static readonly Regex _removeWhiteSpaceRegex = new Regex(@"\s+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
     private string _preProcessorPrefix;
@@ -122,8 +124,16 @@ namespace Atlantis.Framework.Render.MarkupParser
     {
       if (writeTextToOutput)
       {
-        _outputMarkup.AppendLine(_currentLine);
+        if (_outputMarkup.Length == 0)
+        {
+          _outputMarkup.Append(_currentLine);
+        }
+        else
+        {
+          _outputMarkup.Append(CARRAIGE_RETURN + _currentLine);
+        }
       }
+
       ParseNextLine();
     }
 

@@ -31,30 +31,33 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
 
           XmlNode _orderItems = _orderXMLDoc.SelectSingleNode("//ITEMS");
 
-          foreach (XElement element in TriggerElement.Descendants(PixelXmlNames.TriggerTypeItemSingle))
+          if (_orderItems != null)
           {
-            string fireOrderItemName = element.Attribute(PixelXmlNames.Name).Value;
-            string fireOrderItemValue = element.Attribute(PixelXmlNames.Value).Value;
-
-            foreach (XmlNode orderItem in _orderItems.ChildNodes)
+            foreach (XElement element in TriggerElement.Descendants(PixelXmlNames.TriggerTypeItemSingle))
             {
-              if (orderItem.Attributes != null)
+              string fireOrderItemName = element.Attribute(PixelXmlNames.Name).Value;
+              string fireOrderItemValue = element.Attribute(PixelXmlNames.Value).Value;
+
+              foreach (XmlNode orderItem in _orderItems.ChildNodes)
               {
-                if (orderItem.Attributes[fireOrderItemName] != null)
+                if (orderItem.Attributes != null)
                 {
-                  string orderItemValue = orderItem.Attributes[fireOrderItemName].Value;
-                  if (orderItemValue.Equals(fireOrderItemValue, StringComparison.OrdinalIgnoreCase))
+                  if (orderItem.Attributes[fireOrderItemName] != null)
                   {
-                    shouldFirePixel = true;
-                    break;
+                    string orderItemValue = orderItem.Attributes[fireOrderItemName].Value;
+                    if (orderItemValue.Equals(fireOrderItemValue, StringComparison.OrdinalIgnoreCase))
+                    {
+                      shouldFirePixel = true;
+                      break;
+                    }
                   }
                 }
               }
-            }
 
-            if (shouldFirePixel)
-            {
-              break;
+              if (shouldFirePixel)
+              {
+                break;
+              }
             }
           }
         }

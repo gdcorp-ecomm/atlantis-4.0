@@ -8,7 +8,7 @@ namespace Atlantis.Framework.EcommValidPaymentType.Interface
 {
   public class EcommValidPaymentTypeResponseData : IResponseData
   {
-    private readonly AtlantisException _atlantisException;
+    private AtlantisException _atlantisException;
     private HashSet<string> _allowedPaymentTypes = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
     private HashSet<string> _allowedPaymentTypeNames = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
 
@@ -26,14 +26,7 @@ namespace Atlantis.Framework.EcommValidPaymentType.Interface
     public EcommValidPaymentTypeResponseData(RequestData requestData, string responseXml, int resultCode)
     {
       ResultXml = responseXml;
-      _isSuccess = ParseResponseXml(responseXml);
-      if(!_isSuccess)
-      {
-        _atlantisException = new AtlantisException(requestData,
-                                                   MethodBase.GetCurrentMethod().DeclaringType.FullName,
-                                                   string.Format("Unable to parse response Xml. Result code: {0}. Response XML: {1}", resultCode, responseXml),
-                                                   string.Empty);
-      }
+      _isSuccess = ParseResponseXml(responseXml,requestData,resultCode);      
     }
 
     public EcommValidPaymentTypeResponseData(RequestData requestData, Exception ex)
@@ -45,9 +38,11 @@ namespace Atlantis.Framework.EcommValidPaymentType.Interface
                                                  string.Empty);
     }
 
-    private bool ParseResponseXml(string responseXml)
+    private bool ParseResponseXml(string responseXml, RequestData requestData,int resultCode)
     {
-        XmlDocument activePaymentTypesXml = new XmlDocument();
+      XmlDocument activePaymentTypesXml = new XmlDocument();
+      try
+      {
         activePaymentTypesXml.LoadXml(responseXml);
 
         XmlNodeList paymentType = activePaymentTypesXml.SelectNodes("//PaymentType");
@@ -67,7 +62,14 @@ namespace Atlantis.Framework.EcommValidPaymentType.Interface
             }
           }
         }
-
+      }
+      catch (Exception ex)
+      {
+        _atlantisException = new AtlantisException(requestData,
+                                                  MethodBase.GetCurrentMethod().DeclaringType.FullName,
+                                                  string.Format("Unable to parse response Xml. Result code: {0}. Response XML: {1}", resultCode, responseXml),
+                                                  string.Empty,ex);
+      }
       return _allowedPaymentTypes.Count >= 0;
     }
 

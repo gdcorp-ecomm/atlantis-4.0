@@ -120,7 +120,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
             }
             else
             {
-              side = GetSplitSideFromTriplet(activeSplitTest, key);
+              side = GetSplitSideFromTriplet(activeSplitTest);
               if (!string.IsNullOrEmpty(side))
               {
                 UpdateRequestCache(activeSplitTest, side);
@@ -171,7 +171,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
       }
     }
 
-    private string GetSplitSideFromTriplet(ActiveSplitTest splitTest, string key)
+    private string GetSplitSideFromTriplet(ActiveSplitTest splitTest)
     {
       var side = string.Empty;
       var activeTestDetailsResponse = LoadActiveTestDetails(splitTest.TestId);

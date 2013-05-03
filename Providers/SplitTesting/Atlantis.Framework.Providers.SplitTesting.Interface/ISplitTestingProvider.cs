@@ -3,10 +3,11 @@ using Atlantis.Framework.SplitTesting.Interface;
 
 namespace Atlantis.Framework.Providers.SplitTesting.Interface
 {
-  public interface ISplitTestingProvider
+  public interface ISplitTestingProvider 
   {
     string GetSplitTestingSide(int splitTestId);
-    Dictionary<ActiveSplitTest, string> GetActiveTestsForTrackingData { get; }
     IEnumerable<ActiveSplitTest> GetAllActiveTests { get; }
+    string GetTrafficImageData { get; }
+    Dictionary<ActiveSplitTest, string> GetTrafficImageDictionary { get; }
   }
 }

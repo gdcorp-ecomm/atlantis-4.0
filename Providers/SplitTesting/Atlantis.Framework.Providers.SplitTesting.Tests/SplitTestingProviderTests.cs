@@ -90,8 +90,6 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
 
       var side2 = splitProvider.GetSplitTestingSide(1009);
       Assert.IsTrue(side1 == side2);
-
-      var tracking = splitProvider.GetActiveTestsForTrackingData;
     }
 
     [TestMethod]

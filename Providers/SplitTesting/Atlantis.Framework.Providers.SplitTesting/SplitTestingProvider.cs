@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.SplitTest;
@@ -103,25 +104,28 @@ namespace Atlantis.Framework.Providers.SplitTesting
         side = GetSplitSideFromState(key);
         if (side != "0")
         {
-          if (!string.IsNullOrEmpty(side))
+          if (!IsEligibleTest(activeSplitTest))
           {
-            if (!IsEligibleTest(activeSplitTest))
+            if (!string.IsNullOrEmpty(side))
             {
               UpdateRequestCache(activeSplitTest, "0");
               UpdateState(key, "0");
             }
-            else
-            {
-              UpdateRequestCache(activeSplitTest, side);
-            }
           }
           else
           {
-            side = GetSplitSideFromTriplet(activeSplitTest, key);
             if (!string.IsNullOrEmpty(side))
             {
               UpdateRequestCache(activeSplitTest, side);
-              UpdateState(key, side);
+            }
+            else
+            {
+              side = GetSplitSideFromTriplet(activeSplitTest, key);
+              if (!string.IsNullOrEmpty(side))
+              {
+                UpdateRequestCache(activeSplitTest, side);
+                UpdateState(key, side);
+              }
             }
           }
         }
@@ -130,11 +134,32 @@ namespace Atlantis.Framework.Providers.SplitTesting
       return side;
     }
 
-    public Dictionary<ActiveSplitTest, string> GetActiveTestsForTrackingData
+    public Dictionary<ActiveSplitTest, string> GetTrafficImageDictionary
+    {
+      get { return _sidesByTestsForRequest; }
+    }
+
+    public string GetTrafficImageData
     {
       get
       {
-        return _sidesByTestsForRequest;
+        const string format = "{0}.{1}.{2}.{3}";
+        const string separator = "^";
+
+        var result = new StringBuilder();
+        foreach (var info in _sidesByTestsForRequest)
+        {
+          var splitTest = info.Key;
+          var side = info.Value;
+
+          if (result.Length > 0)
+          {
+            result.Append(separator);
+          }
+          result.Append(string.Format(format, splitTest.TestId, splitTest.RunId, splitTest.VersionNumber, side));
+
+        }
+        return result.ToString();
       }
     }
 

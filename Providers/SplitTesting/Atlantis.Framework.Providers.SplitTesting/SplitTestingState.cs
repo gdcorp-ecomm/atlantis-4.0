@@ -11,6 +11,8 @@ namespace Atlantis.Framework.Providers.SplitTesting
   {
     private readonly Lazy<SplitTestingCookie> _splitTestCookie;
     private readonly ActiveSplitTestsResponseData _activeSplitTestsResponse;
+    
+    private Dictionary<string, string> _splitTestingStateData;
 
     internal SplitTestingState(IProviderContainer container, ActiveSplitTestsResponseData activeSplitTestsResponseData)
     {
@@ -22,16 +24,23 @@ namespace Atlantis.Framework.Providers.SplitTesting
 
     internal Dictionary<string, string> Value
     {
-      get { return _splitTestCookie.Value.Value; }
+      get
+      {
+        return _splitTestingStateData;
+      }
 
-      set { _splitTestCookie.Value.Value = value; }
+      set
+      {
+        _splitTestingStateData = value;
+        _splitTestCookie.Value.Value = value;
+      }
     }
     
     private void RefreshData()
     {
-      var cookieData = _splitTestCookie.Value.Value;
+      _splitTestingStateData = _splitTestCookie.Value.Value;
 
-      if (cookieData != null &&
+      if (_splitTestingStateData != null &&
           _activeSplitTestsResponse != null && _activeSplitTestsResponse.SplitTests.Any())
       {
         var keysToRemove = new List<string>();
@@ -39,12 +48,15 @@ namespace Atlantis.Framework.Providers.SplitTesting
 
         GetCookieDataKeysToRemove(activeTests, keysToRemove);
 
-        foreach (var item in keysToRemove)
+        if (keysToRemove.Count > 0)
         {
-          cookieData.Remove(item);
-        }
+          foreach (var item in keysToRemove)
+          {
+            _splitTestingStateData.Remove(item);
+          }
 
-        _splitTestCookie.Value.Value = cookieData;
+          _splitTestCookie.Value.Value = _splitTestingStateData;
+        }
       }
     }
 

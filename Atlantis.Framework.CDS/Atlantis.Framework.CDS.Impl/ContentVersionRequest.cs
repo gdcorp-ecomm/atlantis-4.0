@@ -1,19 +1,17 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Net.Cache;
-using Atlantis.Framework.CDS.Interface;
+﻿using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.Interface;
+using System;
+using System.Net;
 
 namespace Atlantis.Framework.CDS.Impl
 {
-  public class CDSRequest : IRequest
+  public class ContentVersionRequest : IRequest
   {
     const string ApplicationNameKey = "ApplicationName";
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      CDSResponseData result = null;
+      ContentVersionResponseData result = null;
       CDSRequestData cdsRequestData = requestData as CDSRequestData;
       WsConfigElement wsConfig = (WsConfigElement)config;
       cdsRequestData.AppName = wsConfig.GetConfigValue(ApplicationNameKey); //used to identify the App in the errorlog entry
@@ -22,23 +20,18 @@ namespace Atlantis.Framework.CDS.Impl
       try
       {
         string responseText = service.GetWebResponse();
-        result = new CDSResponseData(responseText);
-      }
-      catch (WebException ex)
-      {
-        if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.NotFound)
+        if (!string.IsNullOrEmpty(responseText))
         {
-          result = new CDSResponseData(ex.Message, false);
+          result = new ContentVersionResponseData(responseText);
         }
         else
         {
-          result = new CDSResponseData(cdsRequestData, ex);
-          throw;
-        }        
+          result = new ContentVersionResponseData(cdsRequestData, new Exception("Empty response from the CDS service."));
+        }
       }
       catch (Exception ex)
       {
-        result = new CDSResponseData(cdsRequestData, ex);
+        result = new ContentVersionResponseData(cdsRequestData, ex);
         throw;
       }
       return result;

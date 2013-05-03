@@ -50,7 +50,6 @@ namespace Atlantis.Framework.CDS.Tests
 
       //Assert
       Assert.IsTrue(responseData.IsSuccess);
-      Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, responseData.StatusCode);
     }
 
     [TestMethod]
@@ -68,6 +67,32 @@ namespace Atlantis.Framework.CDS.Tests
       //Act 
       CDSResponseData responseData = (CDSResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
       Assert.IsFalse(responseData.IsSuccess);
+    }
+
+    [TestMethod()]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
+    public void UrlWhiteListRequesTest()
+    {
+      //Arrange
+      string shopperId = "12345";
+      int requestType = 688;
+      string query = "content/sales/whitelist";
+      string pathway = Guid.NewGuid().ToString();
+      string errorDescription = "this is a test error descrption!";
+      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);
+
+      //Act
+      UrlWhitelistResponseData responseData = (UrlWhitelistResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
+
+      //Assert
+      Assert.IsTrue(responseData.Contains("/default.aspx"));
+      Assert.IsTrue(responseData.Contains("/hosting/web-hosting.aspx"));
+      Assert.IsTrue(responseData.Contains("/hosting/email-hosting"));
+
+      Assert.IsFalse(responseData.Contains("/default1.aspx"));
+      Assert.IsFalse(responseData.Contains("/hosting1/web-hosting.aspx"));
+      Assert.IsFalse(responseData.Contains("/hosting/email-hosting-"));
     }
   }
 }

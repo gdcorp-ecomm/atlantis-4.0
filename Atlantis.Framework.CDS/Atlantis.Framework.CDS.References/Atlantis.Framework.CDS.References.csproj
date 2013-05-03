@@ -47,6 +47,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Atlantis\Atlantis.Framework.Render.Pipeline.Interface.dll" />
     <Content Include="MongoDB\MongoDB.Bson.dll" />
     <Content Include="MongoDB\MongoDB.Driver.dll" />
     <Content Include="Json.net\Newtonsoft.Json.dll" />

@@ -77,11 +77,17 @@
     <Compile Include="Helpers\LinkTypes.cs" />
     <Compile Include="Helpers\JSONValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProviderTests.cs" />
+    <Compile Include="ProviderTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TokenizerTests.cs" />
     <Compile Include="TripletTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Obsolete\Atlantis.Framework.Providers.CDS\Atlantis.Framework.Providers.CDS\Atlantis.Framework.Providers.CDS.csproj">
+      <Project>{52f92d36-69d4-447e-91e0-e155c4ee7dc6}</Project>
+      <Name>Atlantis.Framework.Providers.CDS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
       <Project>{8E4322D7-C6B3-4EE1-9FAD-7B848B38C834}</Project>
       <Name>Atlantis.Framework.DataCache</Name>
@@ -97,10 +103,6 @@
     <ProjectReference Include="..\..\Atlantis.Framework.LinkInfo\Atlantis.Framework.LinkInfo.Impl\Atlantis.Framework.LinkInfo.Impl.csproj">
       <Project>{1D5D8BFA-F1F1-43E6-80C7-5ECAFECCB9F2}</Project>
       <Name>Atlantis.Framework.LinkInfo.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.CDS\Atlantis.Framework.Providers.CDS\Atlantis.Framework.Providers.CDS.csproj">
-      <Project>{52F92D36-69D4-447E-91E0-E155C4EE7DC6}</Project>
-      <Name>Atlantis.Framework.Providers.CDS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
       <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>

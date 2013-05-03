@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Atlantis.Framework.CDS.Entities.PlanBoxes.Widgets
 {
-  public class PlanBoxContainer4_noButton1 : IWidgetModel
+  public class PlanBoxContainer4_noButton2 : IWidgetModel
   {
     public string PlanBoxFormName { get; set; }
     public string FormActionUrl { get; set; }

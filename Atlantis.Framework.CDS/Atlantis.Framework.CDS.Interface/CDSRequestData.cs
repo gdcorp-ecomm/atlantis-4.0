@@ -1,15 +1,18 @@
-﻿using System;
+﻿using Atlantis.Framework.Interface;
+using System;
+using System.IO;
 using System.Security.Cryptography;
-using Atlantis.Framework.Interface;
-using System.Text.RegularExpressions;
-using System.Collections.Specialized;
-using System.Linq;
+using System.Text;
+using System.Xml;
 
 namespace Atlantis.Framework.CDS.Interface
 {
-
   public class CDSRequestData : RequestData
   {
+    const string TypeName = "CDSRequestData";
+    public string AppName { get; set; }
+    public string Query { get; private set; }
+
     public CDSRequestData(string shopperId,
                                   string sourceUrl,
                                   string orderId,
@@ -22,14 +25,30 @@ namespace Atlantis.Framework.CDS.Interface
       RequestTimeout = TimeSpan.FromSeconds(20);
     }
 
-    public string Query { get; private set; }
+    public override string ToXML()
+    {
+      var sbRequest = new StringBuilder();
+      var xtwRequest = new XmlTextWriter(new StringWriter(sbRequest));
+
+      xtwRequest.WriteStartElement("INFO");
+      xtwRequest.WriteAttributeString("AppName", AppName ?? "Unknown");
+      xtwRequest.WriteAttributeString("ShopperID", ShopperID);
+      xtwRequest.WriteAttributeString("SourceURL", SourceURL);
+      xtwRequest.WriteAttributeString("OrderID", OrderID);
+      xtwRequest.WriteAttributeString("Pathway", Pathway);
+      xtwRequest.WriteAttributeString("PageCount", System.Convert.ToString(PageCount));
+      xtwRequest.WriteAttributeString("Query", Query);
+      xtwRequest.WriteEndElement();
+
+      return sbRequest.ToString();
+    }
 
     public override string GetCacheMD5()
     {
       MD5 oMD5 = new MD5CryptoServiceProvider();
       oMD5.Initialize();
 
-      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes("CDSRequestData:Query:" + Query);
+      byte[] stringBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:Query:{1}", TypeName, Query));
       byte[] md5Bytes = oMD5.ComputeHash(stringBytes);
       string sValue = BitConverter.ToString(md5Bytes, 0);
       return sValue.Replace("-", "");

@@ -1,34 +1,31 @@
-﻿using System;
-using System.Net;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
+using System;
 
 namespace Atlantis.Framework.CDS.Interface
 {
-
   public class CDSResponseData : IResponseData
   {
     private AtlantisException _exception = null;
-    private string _resultXML = string.Empty;
-    private string _responseData = string.Empty;
     private bool _success = false;
-    private HttpStatusCode _statusCode = 0;
+    private string _responseData = null;
 
-    public CDSResponseData(AtlantisException atlantisException)
+    public CDSResponseData(string responseData)
     {
-      _exception = atlantisException;
-    }
-
-    public CDSResponseData(string responseData, HttpStatusCode statusCode)
-    {
-      _success = (statusCode == HttpStatusCode.OK);
       _responseData = responseData;
-      _statusCode = statusCode;
+      _success = true;
     }
 
-    public CDSResponseData(RequestData requestData, HttpStatusCode statusCode, Exception exception)
+    [Obsolete("Only exists for backward compatibility.  Use CDSResponseData(string responseData) instead.")]
+    public CDSResponseData(string responseData, bool success)
     {
-      _statusCode = statusCode;
-      _exception = new AtlantisException(requestData, "CDSResponseData", exception.Message + exception.StackTrace, requestData.ToXML());
+      _responseData = responseData;
+      _success = success;
+    }
+
+    public CDSResponseData(RequestData requestData, Exception exception)
+    {
+      _exception = new AtlantisException(requestData, this.GetType().Name, exception.Message + exception.StackTrace, requestData.ToXML());
+      _success = false;
     }
 
     public bool IsSuccess
@@ -47,14 +44,6 @@ namespace Atlantis.Framework.CDS.Interface
       }
     }
 
-    public HttpStatusCode StatusCode
-    {
-      get
-      {
-        return _statusCode;
-      }
-    }    
-
     #region IResponseData Members
 
     public string ToXML()
@@ -70,5 +59,4 @@ namespace Atlantis.Framework.CDS.Interface
     #endregion
 
   }
-
 }

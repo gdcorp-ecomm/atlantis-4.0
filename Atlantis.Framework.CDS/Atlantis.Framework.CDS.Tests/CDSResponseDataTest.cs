@@ -79,7 +79,7 @@ namespace Atlantis.Framework.CDS.Tests
       AtlantisException atlantisException = new AtlantisException(requestData, "test", errorDescription, "test");
 
       //Act
-      CDSResponseData responseData = new CDSResponseData(atlantisException);
+      CDSResponseData responseData = new CDSResponseData(requestData, atlantisException);
    
       //Assert     
       Assert.AreEqual(errorDescription, responseData.GetException().ErrorDescription);
@@ -95,12 +95,11 @@ namespace Atlantis.Framework.CDS.Tests
       string shopperId = "12345";
       string query = "test.com";
       string pathway = Guid.NewGuid().ToString();           
-      HttpStatusCode statusCode = new HttpStatusCode();
       Exception exception = new Exception("This is a test exception!");
       CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);
       
       //Act
-      CDSResponseData responseData = new CDSResponseData(requestData, statusCode, exception);           
+      CDSResponseData responseData = new CDSResponseData(requestData, exception);           
 
       //Assert
       Assert.AreEqual(exception.Message, responseData.GetException().ErrorDescription);
@@ -114,10 +113,9 @@ namespace Atlantis.Framework.CDS.Tests
     {
       //Arrange
       string responseData = "this is a test response data message!";   
-      HttpStatusCode statusCode = new HttpStatusCode();           
 
       //Act
-      CDSResponseData target = new CDSResponseData(responseData, statusCode);     
+      CDSResponseData target = new CDSResponseData(responseData);     
 
       //Assert
       Assert.AreEqual(responseData, target.ResponseData);     
@@ -135,13 +133,14 @@ namespace Atlantis.Framework.CDS.Tests
       string pathway = Guid.NewGuid().ToString();
       string errorDescription = "this is a test error descrption!";
       CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);
-      AtlantisException atlantisException = new AtlantisException(requestData, "test", errorDescription, "test");      
-      CDSResponseData responseData = new CDSResponseData(atlantisException);
+      AtlantisException atlantisException = new AtlantisException(requestData, "test", errorDescription, "test");
+      CDSResponseData responseData = new CDSResponseData(requestData, atlantisException);
       var actual = responseData.ToXML();
      
       //Assert
       Assert.IsNotNull(actual);
     }
+        
   }
 
 }

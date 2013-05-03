@@ -103,7 +103,7 @@ namespace Atlantis.Framework.CDS.Tests
 
       //Act
       ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
-      PageData model = provider.GetModel<PageData>("en/sales/1/domainaddon/domain-backorders.aspx");
+      PageData model = provider.GetModel<PageData>("en/sales/1/domainaddon/domain-backorders.aspx", null);
 
       //Assert
       Assert.IsNotNull(model);      
@@ -117,7 +117,7 @@ namespace Atlantis.Framework.CDS.Tests
 
         //Act
         ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
-        PageData model = provider.GetModel<PageData>("sales/1/danica");
+        PageData model = provider.GetModel<PageData>("sales/1/danica", null);
 
         //Assert
         Assert.IsNull(model);
@@ -132,8 +132,8 @@ namespace Atlantis.Framework.CDS.Tests
 
       //Act
       ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
-      var data = provider.GetJSON("gdtv/celebs/leeann-dearing/",null);
-      PageData model = provider.GetModel<PageData>("gdtv/celebs/leeann-dearing/");
+      var data = provider.GetJson("gdtv/celebs/leeann-dearing/",null);
+      PageData model = provider.GetModel<PageData>("gdtv/celebs/leeann-dearing/", null);
 
       //Assert
       Assert.IsNotNull(data);
@@ -148,7 +148,7 @@ namespace Atlantis.Framework.CDS.Tests
       ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
 
       //Act
-      var data = provider.GetJSON("content/es/sales/1/homepage/new/default", null);
+      var data = provider.GetJson("content/es/sales/1/homepage/new/magic", null);
 
       //Assert
       Assert.IsNotNull(data);
@@ -162,7 +162,7 @@ namespace Atlantis.Framework.CDS.Tests
 
       //Act
       ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
-      var data = provider.GetJSON("sales/1/lp/email", null);
+      var data = provider.GetJson("content/es/sales/1/homepage/new/default", null);
 
       //Assert
       Assert.IsTrue(JSONValidator.Validate(data));
@@ -175,10 +175,11 @@ namespace Atlantis.Framework.CDS.Tests
 
       //Act
       ICDSProvider provider = HttpProviderContainer.Instance.Resolve<ICDSProvider>();
-      var data = provider.GetJSON("test/invalid/PoorlyFormed", null);
+      var data = provider.GetJson("test/invalid/PoorlyFormed", null);
 
       //Assert
       Assert.IsFalse(JSONValidator.Validate(data));
     }
+
   }
 }

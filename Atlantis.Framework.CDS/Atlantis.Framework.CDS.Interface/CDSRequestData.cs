@@ -31,6 +31,7 @@ namespace Atlantis.Framework.CDS.Interface
       var xtwRequest = new XmlTextWriter(new StringWriter(sbRequest));
 
       xtwRequest.WriteStartElement("INFO");
+      xtwRequest.WriteAttributeString("RequestData", this.GetType().FullName);
       xtwRequest.WriteAttributeString("AppName", AppName ?? "Unknown");
       xtwRequest.WriteAttributeString("ShopperID", ShopperID);
       xtwRequest.WriteAttributeString("SourceURL", SourceURL);

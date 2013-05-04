@@ -72,7 +72,7 @@ namespace Atlantis.Framework.CDS.Tests
     [TestMethod()]
     [DeploymentItem("atlantis.config")]
     [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
-    public void UrlWhiteListRequesTest()
+    public void UrlWhiteListRequestTest()
     {
       //Arrange
       string shopperId = "12345";
@@ -93,6 +93,27 @@ namespace Atlantis.Framework.CDS.Tests
       Assert.IsFalse(responseData.Contains("/default1.aspx"));
       Assert.IsFalse(responseData.Contains("/hosting1/web-hosting.aspx"));
       Assert.IsFalse(responseData.Contains("/hosting/email-hosting-"));
+    }
+
+    [TestMethod()]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
+    public void ContentVersionRequestTest()
+    {
+      //Arrange
+      string shopperId = "12345";
+      int requestType = 687;
+      string query = "content/sales/whitelist";
+      string pathway = Guid.NewGuid().ToString();
+      string errorDescription = "this is a test error descrption!";
+      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);
+
+      //Act
+      ContentVersionResponseData responseData = (ContentVersionResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
+
+      //Assert
+      Assert.IsNotNull(responseData.Content);
+
     }
   }
 }

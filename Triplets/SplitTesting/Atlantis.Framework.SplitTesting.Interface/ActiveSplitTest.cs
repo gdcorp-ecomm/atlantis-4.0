@@ -1,8 +1,9 @@
 ﻿using System;
+using Atlantis.Framework.Providers.SplitTesting.Interface;
 
 namespace Atlantis.Framework.SplitTesting.Interface
 {
-  public class ActiveSplitTest
+  public class ActiveSplitTest : IActiveSplitTest
   {
     public int TestId { get; set; }
     public int RunId { get; set; }

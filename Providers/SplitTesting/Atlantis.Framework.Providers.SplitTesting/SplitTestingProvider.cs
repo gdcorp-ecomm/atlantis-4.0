@@ -14,14 +14,16 @@ namespace Atlantis.Framework.Providers.SplitTesting
 {
   public class SplitTestingProvider : ProviderBase, ISplitTestingProvider
   {
+    private const string NotEligibleSideId = "0";
     private static readonly Random rand = new Random();
+    private static readonly IActiveSplitTestSide _zeroSideInstance = new ActiveSplitTestSide {SideId = 0, Name = "0", Allocation = 0D};
 
     private readonly IProviderContainer _container;
     private Lazy<SplitTestingState> _splitTestingState;
 
     private readonly Lazy<ActiveSplitTestsResponseData> _activeSplitTestsResponse;
 
-    private readonly Dictionary<ActiveSplitTest, string> _sidesByTestsForRequest;
+    private readonly Dictionary<IActiveSplitTest, IActiveSplitTestSide> _sidesByTestsForRequest;
 
     private readonly ExpressionParserManager _expressionParserManager;
 
@@ -32,7 +34,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
 
       _activeSplitTestsResponse = new Lazy<ActiveSplitTestsResponseData>(LoadActiveTests);
 
-      _sidesByTestsForRequest = new Dictionary<ActiveSplitTest, string>();
+      _sidesByTestsForRequest = new Dictionary<IActiveSplitTest, IActiveSplitTestSide>();
 
       _expressionParserManager = new ExpressionParserManager(Container);
       _expressionParserManager.EvaluateExpressionHandler += ConditionHandlerManager.EvaluateCondition;
@@ -70,7 +72,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
       }
     }
 
-    private bool IsActiveTest(int splitTestId, out ActiveSplitTest result)
+    private bool IsActiveTest(int splitTestId, out IActiveSplitTest result)
     {
       var isActive = false;
       result = null;
@@ -86,60 +88,97 @@ namespace Atlantis.Framework.Providers.SplitTesting
       return isActive;
     }
 
-    private bool IsEligibleTest(ActiveSplitTest activeSplitTest)
+    private bool IsEligibleTest(IActiveSplitTest activeSplitTest)
     {
       return (!string.IsNullOrEmpty(activeSplitTest.EligibilityRules) && _expressionParserManager.EvaluateExpression(activeSplitTest.EligibilityRules)) || 
             string.IsNullOrEmpty(activeSplitTest.EligibilityRules);
     }
 
-    public string GetSplitTestingSide(int splitTestId)
+    public IActiveSplitTestSide GetSplitTestingSide(int splitTestId)
     {
-      var side = string.Empty;
+      IActiveSplitTestSide splitTestSide = null;
 
-      ActiveSplitTest activeSplitTest;
+      IActiveSplitTest activeSplitTest;
       if (IsActiveTest(splitTestId, out activeSplitTest) && activeSplitTest != null && activeSplitTest.VersionNumber > 0)
       {
         var key = string.Format("{0}-{1}", splitTestId.ToString(CultureInfo.InvariantCulture), activeSplitTest.VersionNumber.ToString(CultureInfo.InvariantCulture));
 
-        side = GetSplitSideFromState(key);
-        if (side != "0")
+        string sideId = GetSplitSideFromState(key);
+        if (sideId != NotEligibleSideId)
         {
           if (!IsEligibleTest(activeSplitTest))
           {
-            if (!string.IsNullOrEmpty(side))
+            if (!string.IsNullOrEmpty(sideId))
             {
-              UpdateRequestCache(activeSplitTest, "0");
-              UpdateState(key, "0");
+              UpdateRequestCache(activeSplitTest, NotEligibleSideId);
+              UpdateState(key, NotEligibleSideId);
             }
           }
           else
           {
-            if (!string.IsNullOrEmpty(side))
+            if (!string.IsNullOrEmpty(sideId))
             {
-              UpdateRequestCache(activeSplitTest, side);
+              UpdateRequestCache(activeSplitTest, sideId);
             }
             else
             {
-              side = GetSplitSideFromTriplet(activeSplitTest);
-              if (!string.IsNullOrEmpty(side))
+              sideId = GetSplitSideFromTriplet(activeSplitTest);
+              if (!string.IsNullOrEmpty(sideId))
               {
-                UpdateRequestCache(activeSplitTest, side);
-                UpdateState(key, side);
+                UpdateRequestCache(activeSplitTest, sideId);
+                UpdateState(key, sideId);
               }
             }
           }
         }
+
+        splitTestSide = GetActiveSplitTestSide(splitTestId, sideId);
+
       }
 
-      return side;
+      return splitTestSide;
     }
 
-    public Dictionary<ActiveSplitTest, string> GetTrafficImageDictionary
+    private IActiveSplitTestSide GetActiveSplitTestSide(int splitTestId, string sideId)
+    {
+      IActiveSplitTestSide splitTestSide = null;
+
+      if (!string.IsNullOrEmpty(sideId))
+      {
+        if (sideId != NotEligibleSideId)
+        {
+          int iSideId;
+          if (Int32.TryParse(sideId, out iSideId) && iSideId > 0)
+          {
+            var activeTestDetailsResponse = LoadActiveTestDetails(splitTestId);
+
+            if (activeTestDetailsResponse != null && activeTestDetailsResponse.SplitTestDetails.Any())
+            {
+              var details = activeTestDetailsResponse.SplitTestDetails.ToList();
+              foreach (var dtl in details)
+              {
+                if (dtl.SideId == iSideId)
+                {
+                  splitTestSide = dtl;
+                }
+              }
+            }
+          }
+        }
+        else
+        {
+          splitTestSide = _zeroSideInstance;
+        }
+      }
+      return splitTestSide;
+    }
+
+    public Dictionary<IActiveSplitTest, IActiveSplitTestSide> GetTrackingDictionary
     {
       get { return _sidesByTestsForRequest; }
     }
 
-    public string GetTrafficImageData
+    public string GetTrackingData
     {
       get
       {
@@ -150,30 +189,30 @@ namespace Atlantis.Framework.Providers.SplitTesting
         foreach (var info in _sidesByTestsForRequest)
         {
           var splitTest = info.Key;
-          var side = info.Value;
+          var sideId = info.Value.SideId;
 
           if (result.Length > 0)
           {
             result.Append(separator);
           }
-          result.Append(string.Format(format, splitTest.TestId, splitTest.RunId, splitTest.VersionNumber, side));
+          result.Append(string.Format(format, splitTest.TestId, splitTest.RunId, splitTest.VersionNumber, sideId));
 
         }
         return result.ToString();
       }
     }
 
-    public IEnumerable<ActiveSplitTest> GetAllActiveTests
+    public IEnumerable<IActiveSplitTest> GetAllActiveTests
     {
       get
       {
-        return _activeSplitTestsResponse.Value != null ? _activeSplitTestsResponse.Value.SplitTests : new List<ActiveSplitTest>();
+        return _activeSplitTestsResponse.Value != null ? _activeSplitTestsResponse.Value.SplitTests : new List<IActiveSplitTest>();
       }
     }
 
-    private string GetSplitSideFromTriplet(ActiveSplitTest splitTest)
+    private string GetSplitSideFromTriplet(IActiveSplitTest splitTest)
     {
-      var side = string.Empty;
+      var sideId = string.Empty;
       var activeTestDetailsResponse = LoadActiveTestDetails(splitTest.TestId);
 
       if (activeTestDetailsResponse != null && activeTestDetailsResponse.SplitTestDetails.Any())
@@ -187,39 +226,40 @@ namespace Atlantis.Framework.Providers.SplitTesting
           totalAllocation = totalAllocation + dtl.Allocation;
           if (totalAllocation >= randomSplit)
           {
-            side = dtl.Name;
+            sideId = dtl.SideId.ToString(CultureInfo.InvariantCulture);
 
             break;
           }
         }
       }
-      return side;
+      return sideId;
     }
 
     private string GetSplitSideFromState(string key)
     {
-      var side = string.Empty;
+      var sideId = string.Empty;
       if (_splitTestingState.Value.Value != null)
       {
         string value;
         if (_splitTestingState.Value.Value.TryGetValue(key, out value))
         {
-          side = value;
+          sideId = value;
         }
       }
-      return side;
+      return sideId;
     }
 
-    private void UpdateState(string key, string side)
+    private void UpdateState(string key, string sideId)
     {
       var splitTestingStateData = _splitTestingState.Value.Value;
-      splitTestingStateData[key] = side;
+      splitTestingStateData[key] = sideId;
       _splitTestingState.Value.Value = splitTestingStateData;
     }
 
-    private void UpdateRequestCache(ActiveSplitTest splitTest, string side)
+    private void UpdateRequestCache(IActiveSplitTest splitTest, string sideId)
     {
-      _sidesByTestsForRequest[splitTest] = side;
+      IActiveSplitTestSide splitTestSide = GetActiveSplitTestSide(splitTest.TestId, sideId);
+      _sidesByTestsForRequest[splitTest] = splitTestSide;
     }
   }
 }

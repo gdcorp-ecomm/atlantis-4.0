@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.SplitTesting.Interface;
 using Atlantis.Framework.SplitTesting.Interface;
 
 namespace Atlantis.Framework.Providers.SplitTesting
@@ -60,7 +61,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
       }
     }
 
-    private void GetCookieDataKeysToRemove(List<ActiveSplitTest> activeTests, ICollection<string> keysToRemove)
+    private void GetCookieDataKeysToRemove(List<IActiveSplitTest> activeTests, ICollection<string> keysToRemove)
     {
       var cookieData = _splitTestCookie.Value.Value;
 

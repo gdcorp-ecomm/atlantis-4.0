@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.SplitTesting.Interface;
 
 namespace Atlantis.Framework.SplitTesting.Interface
 {
@@ -15,7 +16,7 @@ namespace Atlantis.Framework.SplitTesting.Interface
     }
 
     private readonly AtlantisException _exception;
-    private readonly IEnumerable<ActiveSplitTestSide> _activeSplitTestDetails;
+    private readonly IEnumerable<IActiveSplitTestSide> _activeSplitTestDetails;
 
     public static ActiveSplitTestDetailsResponseData FromException(AtlantisException exception)
     {
@@ -92,7 +93,7 @@ namespace Atlantis.Framework.SplitTesting.Interface
       _activeSplitTestDetails = splitTests;
     }
 
-    public IEnumerable<ActiveSplitTestSide> SplitTestDetails
+    public IEnumerable<IActiveSplitTestSide> SplitTestDetails
     {
       get { return _activeSplitTestDetails; }
     }

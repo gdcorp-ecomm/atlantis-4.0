@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.SplitTesting.Interface;
 
 namespace Atlantis.Framework.SplitTesting.Interface
 {
@@ -16,8 +17,8 @@ namespace Atlantis.Framework.SplitTesting.Interface
     }
 
     private readonly AtlantisException _exception;
-    private readonly IEnumerable<ActiveSplitTest> _activeSplitTests;
-    private readonly Dictionary<int, ActiveSplitTest> _activeSplitTestsByTestId;
+    private readonly IEnumerable<IActiveSplitTest> _activeSplitTests;
+    private readonly Dictionary<int, IActiveSplitTest> _activeSplitTestsByTestId;
 
     public static ActiveSplitTestsResponseData FromException(AtlantisException exception)
     {
@@ -103,7 +104,7 @@ namespace Atlantis.Framework.SplitTesting.Interface
     private ActiveSplitTestsResponseData(List<ActiveSplitTest> splitTests)
     {
       _activeSplitTests = splitTests;
-      _activeSplitTestsByTestId = new Dictionary<int, ActiveSplitTest>();
+      _activeSplitTestsByTestId = new Dictionary<int, IActiveSplitTest>();
 
       foreach (var splitTest in splitTests)
       {
@@ -111,12 +112,12 @@ namespace Atlantis.Framework.SplitTesting.Interface
       }
     }
 
-    public IEnumerable<ActiveSplitTest> SplitTests
+    public IEnumerable<IActiveSplitTest> SplitTests
     {
       get { return _activeSplitTests; }
     }
 
-    public bool TryGetSplitTestByTestId(int testId, out ActiveSplitTest result)
+    public bool TryGetSplitTestByTestId(int testId, out IActiveSplitTest result)
     {
       bool found = _activeSplitTestsByTestId.TryGetValue(testId, out result);
 

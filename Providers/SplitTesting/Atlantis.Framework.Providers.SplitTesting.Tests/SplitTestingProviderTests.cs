@@ -58,7 +58,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.IsNotNull(splitProvider);
 
       var side1 = splitProvider.GetSplitTestingSide(9999);
-      Assert.IsTrue(string.IsNullOrEmpty(side1));
+      Assert.IsTrue(side1 == null);
     }
 
     [TestMethod]
@@ -72,7 +72,7 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.IsNotNull(splitProvider);
 
       var side1 = splitProvider.GetSplitTestingSide(1009);
-      Assert.IsTrue(!string.IsNullOrEmpty(side1));
+      Assert.IsTrue(side1 != null && !string.IsNullOrEmpty(side1.Name));
     }
 
     [TestMethod]
@@ -86,10 +86,10 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
       Assert.IsNotNull(splitProvider);
 
       var side1 = splitProvider.GetSplitTestingSide(1009);
-      Assert.IsTrue(!string.IsNullOrEmpty(side1));
+      Assert.IsTrue(side1 != null);
 
       var side2 = splitProvider.GetSplitTestingSide(1009);
-      Assert.IsTrue(side1 == side2);
+      Assert.IsTrue(side2 != null && side1.Name == side2.Name);
     }
 
     [TestMethod]
@@ -102,8 +102,8 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
 
       Assert.IsNotNull(splitProvider);
 
-      var side1 = splitProvider.GetSplitTestingSide(1008);
-      Assert.IsTrue(!string.IsNullOrEmpty(side1));
+      var side1 = splitProvider.GetSplitTestingSide(1010);
+      Assert.IsTrue(side1 != null);
     }
 
     [TestMethod]
@@ -116,11 +116,11 @@ namespace Atlantis.Framework.Providers.SplitTesting.Tests
 
       Assert.IsNotNull(splitProvider);
 
-      var side1 = splitProvider.GetSplitTestingSide(1008);
-      Assert.IsTrue(!string.IsNullOrEmpty(side1));
+      var side1 = splitProvider.GetSplitTestingSide(1010);
+      Assert.IsTrue(side1 != null);
 
-      var side2 = splitProvider.GetSplitTestingSide(1008);
-      Assert.IsTrue(side1 == side2);
+      var side2 = splitProvider.GetSplitTestingSide(1010);
+      Assert.IsTrue(side2 != null && side1.Name == side2.Name);
     }
   }
 }

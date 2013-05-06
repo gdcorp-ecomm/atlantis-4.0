@@ -25,12 +25,16 @@ namespace Atlantis.Framework.CH.SplitTesting
           var splitTestId = parameters[0];
           var splitTestSide = parameters[1];
 
-          var splitTestingProvider = providerContainer.Resolve<ISplitTestingProvider>();
-          var side = splitTestingProvider.GetSplitTestingSide(Convert.ToInt32(splitTestId));
-
-          if (!string.IsNullOrEmpty(side))
+          int result;
+          if (int.TryParse(splitTestId, out result))
           {
-            evaluationResult = string.Equals(splitTestSide, side, StringComparison.OrdinalIgnoreCase);
+            var splitTestingProvider = providerContainer.Resolve<ISplitTestingProvider>();
+            var activeSplitTestSide = splitTestingProvider.GetSplitTestingSide(result);
+
+            if (activeSplitTestSide != null && !string.IsNullOrEmpty(activeSplitTestSide.Name))
+            {
+              evaluationResult = string.Equals(splitTestSide, activeSplitTestSide.Name, StringComparison.OrdinalIgnoreCase);
+            }
           }
         }
         catch (Exception ex)

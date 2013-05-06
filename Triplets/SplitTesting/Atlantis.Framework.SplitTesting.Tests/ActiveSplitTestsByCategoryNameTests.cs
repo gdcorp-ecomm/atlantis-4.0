@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.SplitTesting.Interface;
 using Atlantis.Framework.SplitTesting.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -204,7 +205,7 @@ namespace Atlantis.Framework.SplitTesting.Tests
       var request = new ActiveSplitTestsRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "test");
       var response = (ActiveSplitTestsResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
 
-      ActiveSplitTest splitTest;
+      IActiveSplitTest splitTest;
       if (response.TryGetSplitTestByTestId(1008, out splitTest))
       {
         Assert.IsTrue(splitTest != null);

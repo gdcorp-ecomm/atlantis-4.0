@@ -14,7 +14,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
 {
   public class SplitTestingProvider : ProviderBase, ISplitTestingProvider
   {
-    private const string NotEligibleSideId = "0";
+    private const string NOT_ELIGIBLE_SIDE_ID = "0";
     private static readonly Random rand = new Random();
     private static readonly IActiveSplitTestSide _zeroSideInstance = new ActiveSplitTestSide {SideId = 0, Name = "0", Allocation = 0D};
 
@@ -104,14 +104,18 @@ namespace Atlantis.Framework.Providers.SplitTesting
         var key = string.Format("{0}-{1}", splitTestId.ToString(CultureInfo.InvariantCulture), activeSplitTest.VersionNumber.ToString(CultureInfo.InvariantCulture));
 
         string sideId = GetSplitSideFromState(key);
-        if (sideId != NotEligibleSideId)
+        if (sideId != NOT_ELIGIBLE_SIDE_ID)
         {
           if (!IsEligibleTest(activeSplitTest))
           {
             if (!string.IsNullOrEmpty(sideId))
             {
-              UpdateRequestCache(activeSplitTest, NotEligibleSideId);
-              UpdateState(key, NotEligibleSideId);
+              UpdateRequestCache(activeSplitTest, NOT_ELIGIBLE_SIDE_ID);
+              UpdateState(key, NOT_ELIGIBLE_SIDE_ID);
+            }
+            else
+            {
+              sideId = NOT_ELIGIBLE_SIDE_ID;
             }
           }
           else
@@ -145,7 +149,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
 
       if (!string.IsNullOrEmpty(sideId))
       {
-        if (sideId != NotEligibleSideId)
+        if (sideId != NOT_ELIGIBLE_SIDE_ID)
         {
           int iSideId;
           if (Int32.TryParse(sideId, out iSideId) && iSideId > 0)

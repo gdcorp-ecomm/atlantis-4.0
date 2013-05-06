@@ -155,6 +155,8 @@ namespace Atlantis.Framework.Interface
       _errorDescription = errorDescription;
       ExData = data;
 
+      ReplaceNullSiteContextOrShopperContext(ref shopperContext, ref siteContext);
+
       if (shopperContext != null)
       {
         ShopperID = shopperContext.ShopperId;
@@ -168,6 +170,33 @@ namespace Atlantis.Framework.Interface
 
       SourceURL = _sourceUrl;
       ClientIP = _clientIP;
+    }
+
+    private void ReplaceNullSiteContextOrShopperContext(ref IShopperContext shopperContext, ref ISiteContext siteContext)
+    {
+      try
+      {
+        if (siteContext == null)
+        {
+          IProviderContainer container = WebRequestProviderContainer;
+          if ((container != null) && (container.CanResolve<ISiteContext>()))
+          {
+            siteContext = container.Resolve<ISiteContext>();
+          }
+        }
+        if (shopperContext == null)
+        {
+          IProviderContainer container = WebRequestProviderContainer;
+          if ((container != null) && (container.CanResolve<IShopperContext>()))
+          {
+            shopperContext = container.Resolve<IShopperContext>();
+          }
+        }
+      }
+      catch (Exception)
+      {
+        //don't catch anything here, as we're already in an error condition
+      }
     }
 
     private string GetClientIPFromContext(string givenIP)

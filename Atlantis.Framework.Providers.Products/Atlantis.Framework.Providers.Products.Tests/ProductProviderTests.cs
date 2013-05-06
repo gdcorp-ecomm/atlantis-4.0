@@ -210,5 +210,15 @@ namespace Atlantis.Framework.Providers.Products.Tests
 
       Assert.AreNotEqual(currentPrice.CurrencyInfo.CurrencyType, currentPriceEuro.CurrencyInfo.CurrencyType);
     }
+
+    [TestMethod]
+    public void GetInvalidProduct()
+    {
+      SetContexts(1, string.Empty);
+      AtlantisException.SetWebRequestProviderContainer(HttpProviderContainer.Instance);
+      var productProvider = HttpProviderContainer.Instance.Resolve<IProductProvider>();
+      IProduct prod1 = productProvider.GetProduct(0);
+      //success or failure for this test is a log message containing a shopper id
+    }
   }
 }

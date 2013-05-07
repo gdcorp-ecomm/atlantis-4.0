@@ -199,7 +199,7 @@ namespace Atlantis.Framework.Providers.SplitTesting
           {
             result.Append(separator);
           }
-          result.Append(string.Format(format, splitTest.TestId, splitTest.RunId, splitTest.VersionNumber, sideId));
+          result.Append(string.Format(format, splitTest.TestId, splitTest.VersionNumber, splitTest.RunId, sideId));
 
         }
         return result.ToString();

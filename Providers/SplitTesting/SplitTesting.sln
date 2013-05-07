@@ -33,9 +33,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Pipeline.Interface", "..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj", "{0D7F076F-1809-437B-B045-E35A7E68E423}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.SplitTesting.Monitor", "Atlantis.Framework.Providers.SplitTesting.Monitor\Atlantis.Framework.Providers.SplitTesting.Monitor.csproj", "{A093E966-B0AC-4C31-9A58-6613323152C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest", "Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest\Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest.csproj", "{425DFEE6-AD19-4186-878A-342EE70DE2D6}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 16
+		SccNumberOfProjects = 18
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -96,6 +100,12 @@ Global
 		SccProjectTopLevelParentUniqueName15 = SplitTesting.sln
 		SccProjectName15 = ../../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline.Interface
 		SccLocalPath15 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface
+		SccProjectUniqueName16 = Atlantis.Framework.Providers.SplitTesting.Monitor\\Atlantis.Framework.Providers.SplitTesting.Monitor.csproj
+		SccProjectName16 = Atlantis.Framework.Providers.SplitTesting.Monitor
+		SccLocalPath16 = Atlantis.Framework.Providers.SplitTesting.Monitor
+		SccProjectUniqueName17 = Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest\\Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest.csproj
+		SccProjectName17 = Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest
+		SccLocalPath17 = Atlantis.Framework.Providers.SplitTesting.Monitor.WebTest
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -162,6 +172,14 @@ Global
 		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A093E966-B0AC-4C31-9A58-6613323152C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A093E966-B0AC-4C31-9A58-6613323152C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A093E966-B0AC-4C31-9A58-6613323152C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A093E966-B0AC-4C31-9A58-6613323152C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425DFEE6-AD19-4186-878A-342EE70DE2D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425DFEE6-AD19-4186-878A-342EE70DE2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425DFEE6-AD19-4186-878A-342EE70DE2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425DFEE6-AD19-4186-878A-342EE70DE2D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

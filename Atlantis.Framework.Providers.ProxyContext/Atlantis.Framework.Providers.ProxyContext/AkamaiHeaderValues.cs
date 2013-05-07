@@ -5,9 +5,9 @@ namespace Atlantis.Framework.Providers.ProxyContext
 {
   internal class AkamaiHeaderValues : HeaderValuesBase
   {
-    const string _AKAMAIORIGINALIP = "X-Akamai-OriginalIP";
-    const string _AKAMAISECRET = "X-Akamai-Secret";
-    const string _AKAMAIHOST = "X-Akamai-Host";
+    const string _AKAMAIORIGINALIP = "X-DSA-OriginalIP";
+    const string _AKAMAISECRET = "X-DSA-Secret";
+    const string _AKAMAIHOST = "X-DSA-Host";
 
     public override HeaderValueStatus CheckForProxyHeaders(string sourceIpAddress, out Interface.IProxyData proxyData)
     {

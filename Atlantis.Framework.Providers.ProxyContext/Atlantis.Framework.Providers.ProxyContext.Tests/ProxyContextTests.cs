@@ -13,6 +13,7 @@ namespace Atlantis.Framework.Providers.ProxyContext.Tests
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Interop.gdDataCacheLib.dll")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
   public class ProxyContextTests
   {
     [TestInitialize]
@@ -78,9 +79,9 @@ namespace Atlantis.Framework.Providers.ProxyContext.Tests
 
     private void AppendAkamaiSiteHeaders(Dictionary<string, string> headers, string ipAddress)
     {
-      headers["X-Akamai-OriginalIP"] = ipAddress;
-      headers["X-Akamai-Secret"] = _AKAMAISECRET;
-      headers["X-Akamai-Host"] = _AKAMAIHOST;
+      headers["X-DSA-OriginalIP"] = ipAddress;
+      headers["X-DSA-Secret"] = _AKAMAISECRET;
+      headers["X-DSA-Host"] = _AKAMAIHOST;
     }
 
     private void AppendSmartlingHeaders(Dictionary<string, string> headers, string ipAddress)
@@ -507,7 +508,7 @@ namespace Atlantis.Framework.Providers.ProxyContext.Tests
 
       Dictionary<string, string> headers = new Dictionary<string, string>();
       AppendAkamaiSiteHeaders(headers, AKAMAIORIGINIP);
-      headers.Remove("X-Akamai-Secret");
+      headers.Remove("X-DSA-Secret");
 
       MockHttpRequest request = new MockHttpRequest(_NONPROXIEDURL);
       request.MockHeaderValues(headers);
@@ -528,7 +529,7 @@ namespace Atlantis.Framework.Providers.ProxyContext.Tests
 
       Dictionary<string, string> headers = new Dictionary<string, string>();
       AppendAkamaiSiteHeaders(headers, AKAMAIORIGINIP);
-      headers["X-Akamai-Secret"] = "blah";
+      headers["X-DSA-Secret"] = "blah";
 
       MockHttpRequest request = new MockHttpRequest(_NONPROXIEDURL);
       request.MockHeaderValues(headers);

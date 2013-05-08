@@ -17,6 +17,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
     static PlaceHolderProvider()
     {
+      InitializePlaceHolders();
+    }
+
+    private static void InitializePlaceHolders()
+    {
       IPlaceHolderHandler userControlPlaceHolderHandler = new UserControlPlaceHolderHandler();
 
       _placeHolderHandlers[userControlPlaceHolderHandler.Name] = userControlPlaceHolderHandler;

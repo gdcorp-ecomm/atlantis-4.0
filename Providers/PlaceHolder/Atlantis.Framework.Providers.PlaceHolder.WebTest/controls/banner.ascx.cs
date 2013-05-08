@@ -6,17 +6,30 @@ namespace Atlantis.Framework.Providers.PlaceHolder.WebTest.controls
 {
   public partial class banner : UserControl, IPlaceHolderControl
   {
-    private IDictionary<string, string> _parameters;
+    private readonly IDictionary<string, string> _parameters = new Dictionary<string, string>(32);
     public IDictionary<string, string> Parameters 
-    { 
-      get
+    {
+      get { return _parameters; }
+    }
+
+    public bool ValidateParameters(out string errorLogMessage)
+    {
+      bool isValid = true;
+
+      errorLogMessage = string.Empty;
+
+      if (!Parameters.ContainsKey("title"))
       {
-        if (_parameters == null)
-        {
-          _parameters = new Dictionary<string, string>(32);
-        }
-        return _parameters;
+        errorLogMessage = "Parameter \"title\" is required.";
+        isValid = false;
       }
+      else if (!Parameters.ContainsKey("text"))
+      {
+        errorLogMessage = "Parameter \"text\" is required.";
+        isValid = false;
+      }
+
+      return isValid;
     }
   }
 }

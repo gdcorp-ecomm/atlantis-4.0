@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.WebTest
 {
-  public partial class Default : System.Web.UI.Page
+  public partial class Default : RenderPipelineBasePage
   {
-    protected void Page_Load(object sender, EventArgs e)
+    protected override void OnInit(EventArgs e)
     {
+      base.OnInit(e);
 
+      AddRenderHandler(new PlaceHolderRenderHandler());
     }
   }
 }

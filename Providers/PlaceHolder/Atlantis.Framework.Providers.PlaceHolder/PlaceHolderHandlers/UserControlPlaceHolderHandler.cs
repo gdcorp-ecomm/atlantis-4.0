@@ -72,25 +72,41 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     private void SetUserControlParameters(Control userControl, PlaceHolderData placeHolderData)
     {
       IPlaceHolderControl placeHolderControl = userControl as IPlaceHolderControl;
+
+      string errorLogMessage;
+
       if (placeHolderControl == null)
       {
         throw new Exception("User control must implement IPlaceHolderControl.");
       }
-
+      
       foreach (PlaceHolderParameter placeHolderParameter in placeHolderData.Parameters)
       {
         placeHolderControl.Parameters[placeHolderParameter.Key] = placeHolderParameter.Value;
+      }
+
+      if (!placeHolderControl.ValidateParameters(out errorLogMessage))
+      {
+        throw new Exception(errorLogMessage);
       }
     }
 
     private string RenderControlToHtml(Control userControl)
     {
-      StringBuilder htmlStringBuilder = new StringBuilder();
-      StringWriter stringWriter = new StringWriter(htmlStringBuilder);
-      HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter);
+      string html = string.Empty;
 
-      userControl.RenderControl(htmlTextWriter);
-      return htmlStringBuilder.ToString();
+      if (userControl != null)
+      {
+        StringBuilder htmlStringBuilder = new StringBuilder();
+        StringWriter stringWriter = new StringWriter(htmlStringBuilder);
+        HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter);
+
+        userControl.RenderControl(htmlTextWriter);
+
+        html = htmlStringBuilder.ToString();
+      }
+
+      return html;
     }
   }
 }

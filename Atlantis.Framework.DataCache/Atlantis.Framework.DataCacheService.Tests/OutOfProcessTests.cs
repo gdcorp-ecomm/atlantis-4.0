@@ -205,7 +205,7 @@ namespace Atlantis.Framework.DataCacheService.Tests
 
       using (GdDataCacheOutOfProcess comCache = GdDataCacheOutOfProcess.CreateDisposable())
       {
-        success = comCache.WithOptionsGetListPrice("101", 1, "0,USD", out price, out isEstimate);
+        success = comCache.WithOptionsGetListPrice(101, 1, "0,USD", out price, out isEstimate);
       }
 
       Assert.IsTrue(success);
@@ -222,7 +222,7 @@ namespace Atlantis.Framework.DataCacheService.Tests
 
       using (GdDataCacheOutOfProcess comCache = GdDataCacheOutOfProcess.CreateDisposable())
       {
-        success = comCache.WithOptionsGetPromoPrice("101", 1, 1, "0,USD", out price, out isEstimate);
+        success = comCache.WithOptionsGetPromoPrice(101, 1, 1, "0,USD", out price, out isEstimate);
       }
 
       Assert.IsTrue(success);
@@ -237,9 +237,69 @@ namespace Atlantis.Framework.DataCacheService.Tests
 
       using (GdDataCacheOutOfProcess comCache = GdDataCacheOutOfProcess.CreateDisposable())
       {
-        isOnSale = comCache.WithOptionsIsProductOnSale("101", 1, "0,USD");
+        isOnSale = comCache.WithOptionsIsProductOnSale(101, 1, "0,USD");
       }
     }
+
+    [TestMethod]
+    public void GetMgrCategoriesForUser()
+    {
+      using (GdDataCacheOutOfProcess comCache = GdDataCacheOutOfProcess.CreateDisposable())
+      {
+        string result = comCache.GetMgrCategoriesForUser(2055);
+        XElement parsedResult = XElement.Parse(result);
+      }
+    }
+
+    private const string _REQUESTFORMATDISCOUNT = "<PriceEstimateRequest privateLabelID=\"{0}\" membershipLevel=\"{1}\" transactionCurrency=\"{2}\"><Item unifiedProductID=\"{4}\" discount_code=\"{3}\"/></PriceEstimateRequest>";
+
+    [TestMethod]
+    public void GetPriceEstimateDiscountCode()
+    {
+      string request = string.Format(_REQUESTFORMATDISCOUNT, "1", "0", "USD", "cbwsp01", "56950");
+
+      using (GdDataCacheOutOfProcess comCache = GdDataCacheOutOfProcess.CreateDisposable())
+      {
+        string response = comCache.GetPriceEstimate(request);
+        XElement parsedResponse = XElement.Parse(response);
+      }
+    }
+
+    private const string _REQUESTFORMATSOURCE = "<PriceEstimateRequest privateLabelID=\"{0}\" membershipLevel=\"{1}\" transactionCurrency=\"{2}\" source_code=\"{3}\"><Item unifiedProductID=\"{4}\" /></PriceEstimateRequest>";
+
+    [TestMethod]
+    public void GetPriceEstimateSourceCode()
+    {
+      string request = string.Format(_REQUESTFORMATSOURCE, "1", "0", "USD", "testhost", "42002");
+
+      using (GdDataCacheOutOfProcess comCache = GdDataCacheOutOfProcess.CreateDisposable())
+      {
+        string response = comCache.GetPriceEstimate(request);
+        XElement parsedResponse = XElement.Parse(response);
+      }
+    }
+
+    [TestMethod]
+    public void DisplayCachedData()
+    {
+      using (GdDataCacheOutOfProcess comCache = GdDataCacheOutOfProcess.CreateDisposable())
+      {
+        int privateLabelId = comCache.GetPrivateLabelId("hunter");
+        string cacheData = comCache.DisplayCachedData(4, "getprivatelabelid");
+      }
+    }
+
+    [TestMethod]
+    public void ClearCachedData()
+    {
+      using (GdDataCacheOutOfProcess comCache = GdDataCacheOutOfProcess.CreateDisposable())
+      {
+        int privateLabelId = comCache.GetPrivateLabelId("hunter");
+        comCache.ClearCachedData("getprivatelabelid");
+        string cacheData = comCache.DisplayCachedData(4, "getprivatelabelid");
+      }
+    }
+
 
   }
 }

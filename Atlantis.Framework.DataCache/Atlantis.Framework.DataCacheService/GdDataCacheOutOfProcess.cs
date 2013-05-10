@@ -36,6 +36,16 @@ namespace Atlantis.Framework.DataCacheService
       return new GdDataCacheOutOfProcess();
     }
 
+    public void ClearCachedData(string cacheName)
+    {
+      _COMAccessClass.ClearCachedData(cacheName);
+    }
+
+    public string DisplayCachedData(int depth, string cacheName)
+    {
+      return _COMAccessClass.DisplayCachedData(depth, cacheName);
+    }
+
     public string GetAppSetting(string settingName)
     {
       return _COMAccessClass.GetAppSetting(settingName);
@@ -106,29 +116,24 @@ namespace Atlantis.Framework.DataCacheService
       return _COMAccessClass.GetPFIDByUnifiedID(unifiedProductId, privateLabelId);
     }
 
-    public bool WithOptionsGetListPrice(string nonunifiedPfid, int privateLabelId, string options, out int price, out bool isEstimate)
+    public bool WithOptionsGetListPrice(int unifiedProductId, int privateLabelId, string options, out int price, out bool isEstimate)
     {
-      object priceObject;
-      object isEstimateObject;
-      bool result = _COMAccessClass.WithOptionsGetListPrice(privateLabelId, nonunifiedPfid, options, out priceObject, out isEstimateObject);
-      price = (int)priceObject;
-      isEstimate = (bool)isEstimateObject;
-      return result;
+      return _COMAccessClass.WithOptionsGetListPriceByUnifiedPFID(privateLabelId, unifiedProductId, options, out price, out isEstimate);
     }
 
-    public bool WithOptionsGetPromoPrice(string nonunifiedPfid, int privateLabelId, int quantity, string options, out int price, out bool isEstimate)
+    public bool WithOptionsGetPromoPrice(int unifiedProductId, int privateLabelId, int quantity, string options, out int price, out bool isEstimate)
     {
-      object priceObject;
-      object isEstimateObject;
-      bool result = _COMAccessClass.WithOptionsGetPromoPriceByQty(privateLabelId, nonunifiedPfid, quantity, options, out priceObject, out isEstimateObject);
-      price = (int)priceObject;
-      isEstimate = (bool)isEstimateObject;
-      return result;
+      return _COMAccessClass.WithOptionsGetPromoPriceByQtyAndUnifiedPFID(privateLabelId, unifiedProductId, quantity, options, out price, out isEstimate);
     }
 
-    public bool WithOptionsIsProductOnSale(string nonunifiedPfid, int privateLabelId, string options)
+    public bool WithOptionsIsProductOnSale(int unifiedProductId, int privateLabelId, string options)
     {
-      return _COMAccessClass.WithOptionsIsProductOnSale(privateLabelId, nonunifiedPfid, options);
+      return _COMAccessClass.WithOptionsIsProductOnSaleByUnifiedPFID(privateLabelId, unifiedProductId, options);
+    }
+
+    public string GetPriceEstimate(string requestXml)
+    {
+      return _COMAccessClass.GetPriceEstimateEx(requestXml);
     }
   }
 }

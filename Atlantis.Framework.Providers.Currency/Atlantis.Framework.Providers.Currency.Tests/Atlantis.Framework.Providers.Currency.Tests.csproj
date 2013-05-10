@@ -57,10 +57,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.gdDataCacheLib">
-      <HintPath>..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Interop\Interop.gdDataCacheLib.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="Interop.gdMiniEncryptLib">
       <HintPath>..\..\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages\Reference\Interop.gdMiniEncryptLib.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>

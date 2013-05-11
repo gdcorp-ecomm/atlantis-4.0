@@ -83,19 +83,14 @@ namespace Atlantis.Framework.Engine
       ConfigElement result = null;
 
       int requestType = 0;
-      int lpc = 0;
       string assemblyPath = Path.Combine(AssemblyPath, xlConfigElement.GetAttribute("assembly"));
       string progId = xlConfigElement.GetAttribute("progid");
       string requestTypeString = xlConfigElement.GetAttribute("request_type");
-      string lpcString = xlConfigElement.GetAttribute("lpc");
 
       if (progId.Length > 0
           && assemblyPath.Length > 0
-          && int.TryParse(requestTypeString, out requestType)
-          && int.TryParse(lpcString, out lpc))
+          && int.TryParse(requestTypeString, out requestType))
       {
-        bool isLPC = lpc != 0;
-
         // Get custom config values
         Dictionary<string, string> configValues = null;
         XmlNodeList customConfigNodes = xlConfigElement.SelectNodes("./ConfigValue");
@@ -118,18 +113,17 @@ namespace Atlantis.Framework.Engine
         if (xlConfigElement.HasAttribute("ws_url"))
         {
           string configItemWebServiceUrl = xlConfigElement.GetAttribute("ws_url");
-          result = new WsConfigElement(requestType, progId, assemblyPath, isLPC, configItemWebServiceUrl, configValues);
+          result = new WsConfigElement(requestType, progId, assemblyPath, configItemWebServiceUrl, configValues);
         }
         else
         {
-          result = new ConfigElement(requestType, progId, assemblyPath, isLPC, configValues);
+          result = new ConfigElement(requestType, progId, assemblyPath, configValues);
         }
       }
       else
       {
         LogError(GetType().Name + "." + MethodBase.GetCurrentMethod().Name,
-                  String.Format("ProgID: {0}, Assembly: {1} RequestType: {2} LPC: {3}",
-                                progId, assemblyPath, requestTypeString, lpcString),
+                  String.Format("ProgID: {0}, Assembly: {1} RequestType: {2}", progId, assemblyPath, requestTypeString),
                   "Unable to Create ConfigElement: Invalid Attribute");
       }
 

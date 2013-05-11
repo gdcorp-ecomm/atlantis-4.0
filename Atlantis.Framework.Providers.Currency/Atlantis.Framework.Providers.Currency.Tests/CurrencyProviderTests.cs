@@ -15,6 +15,8 @@ using System.Web;
 namespace Atlantis.Framework.Providers.Currency.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
   public class CurrencyProviderTests
   {
     private void SetContexts(int privateLabelId, string shopperId)

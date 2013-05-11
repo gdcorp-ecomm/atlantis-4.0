@@ -15,6 +15,15 @@ namespace Atlantis.Framework.Interface
     readonly int _pageCount;
     TimeSpan _requestTimeout = TimeSpan.FromSeconds(30);
 
+    public RequestData()
+    {
+      _shopperID = string.Empty;
+      _sourceURL = string.Empty;
+      _orderID = string.Empty;
+      _pathway = string.Empty;
+      _pageCount = 0;
+    }
+      
     public RequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount)
     {
       _shopperID = shopperId;
@@ -56,7 +65,11 @@ namespace Atlantis.Framework.Interface
       set { _requestTimeout = value; }
     }
 
-    public abstract string GetCacheMD5();
+    public virtual string GetCacheMD5()
+    {
+      string message = this.GetType().Name + " is not cacheable because it does not override GetCacheMD5";
+      throw new NotImplementedException(message);
+    }
 
     public virtual string ToXML()
     {

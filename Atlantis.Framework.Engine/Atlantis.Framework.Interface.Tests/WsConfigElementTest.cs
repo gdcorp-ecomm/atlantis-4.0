@@ -21,7 +21,7 @@ namespace Atlantis.Framework.Engine.Tests
       string webServiceUrl = "doesnt.matter.for.this.test";
       Dictionary<string, string> configValues = new Dictionary<string, string>();
       configValues.Add("CertificateName", "corp.web.mya.dev.client.godaddy.com");
-      WsConfigElement target = new WsConfigElement(1, progId, assembly, LPC, webServiceUrl, configValues);
+      WsConfigElement target = new WsConfigElement(1, progId, assembly, webServiceUrl, configValues);
       string friendlyName = "CertificateNameIsNotCorrect";
       X509Certificate2 actual;
       actual = target.GetClientCertificate(friendlyName);
@@ -38,7 +38,7 @@ namespace Atlantis.Framework.Engine.Tests
       string webServiceUrl = "doesnt.matter.for.this.test";
       Dictionary<string, string> configValues = new Dictionary<string, string>();
       configValues.Add("CertificateName", "corp.web.mya.dev.client.godaddy.com.not.going.to.be.found");
-      WsConfigElement target = new WsConfigElement(1, progId, assembly, LPC, webServiceUrl, configValues);
+      WsConfigElement target = new WsConfigElement(1, progId, assembly, webServiceUrl, configValues);
 
       string friendlyName = "CertificateName";
       X509Certificate2 actual;

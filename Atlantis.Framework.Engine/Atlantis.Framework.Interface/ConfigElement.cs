@@ -8,7 +8,6 @@ namespace Atlantis.Framework.Interface
     private int _requestType;
     private string _progId;
     private string _assembly;
-    private bool _lpc;
     private Dictionary<string, string> _configValues = null;
 
     private volatile string _assemblyFileVersion = "0.0.0.0";
@@ -16,17 +15,16 @@ namespace Atlantis.Framework.Interface
 
     ConfigElementStats _stats;
 
-    public ConfigElement(int requestType, string progId, string assembly, bool lpc)
+    public ConfigElement(int requestType, string progId, string assembly)
     {
       _requestType = requestType;
       _progId = progId;
       _assembly = assembly;
-      _lpc = lpc;
       _stats = new ConfigElementStats();
     }
 
-    public ConfigElement(int requestType, string progId, string assembly, bool lpc, Dictionary<string, string> configValues)
-      : this(requestType, progId, assembly, lpc)
+    public ConfigElement(int requestType, string progId, string assembly, Dictionary<string, string> configValues)
+      : this(requestType, progId, assembly)
     {
       if ((configValues != null) && (configValues.Count > 0))
       {
@@ -58,11 +56,6 @@ namespace Atlantis.Framework.Interface
     public string Assembly
     {
       get { return _assembly; }
-    }
-
-    public bool LPC
-    {
-      get { return _lpc; }
     }
 
     public string AssemblyFileVersion

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Web;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.ShopperSegment.Interface;
+using Atlantis.Framework.ShopperSegment.Interface;
 
 namespace Atlantis.Framework.Providers.ShopperSegment
 {
@@ -13,7 +10,7 @@ namespace Atlantis.Framework.Providers.ShopperSegment
     private readonly ISiteContext _siteContext;
     private readonly IShopperContext _shopperContext;
 
-    protected ShopperSegmentProvider(IProviderContainer container)
+    public ShopperSegmentProvider(IProviderContainer container)
       : base(container)
     {
       _siteContext = Container.Resolve<ISiteContext>();
@@ -25,35 +22,45 @@ namespace Atlantis.Framework.Providers.ShopperSegment
       get { return _shopperContext; }
     }
 
-    public IEnumerable<int> GetShopperSegmentIds()
+    public ISiteContext SiteContext
     {
-      // TODO: Get information from the triplet for the shopper segment ids
-      throw new NotImplementedException();
+      get { return _siteContext; }
     }
 
     public int GetShopperSegmentId()
     {
-      int returnValue = -1;
+      int returnValue = 0;
+      
+      returnValue = GetSpoofValue(SiteContext);
 
-      // TODO: Get information from the triplet for the shopper segment id
-      //return QaSpoofable.GetAppSetting(Container.Resolve<ISiteContext>(), "SEGMENTATION_VALUE");
+      if (0 >= returnValue)
+      {
+        RequestData request = new ShopperSegmentRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, SiteContext.Pathway, SiteContext.PageCount);
+        IResponseData response = Engine.Engine.ProcessRequest(request, ShopperSegmentEngineRequests.ShopperSegmentId);
+
+        ShopperSegmentResponseData converted = response as ShopperSegmentResponseData;
+        if (!ReferenceEquals(null, converted) && converted.IsSuccess)
+        {
+          returnValue = converted.SegmentId;
+        } 
+      }
 
       return returnValue;
     }
 
-    public static string GetAppSetting(ISiteContext siteContext, string appSettingName)
+    private static int GetSpoofValue(ISiteContext siteContext)
     {
-      string returnValue = string.Empty;
+      int returnValue = 0;
 
       if (siteContext.IsRequestInternal)
       {
-        string spoofParam = "QA--" + appSettingName;
-        string spoofValue = HttpContext.Current.Request[spoofParam];
+        string spoofValue = HttpContext.Current.Request["QA--SEGMENTATION_VALUE"];
         if (!string.IsNullOrEmpty(spoofValue))
         {
-          returnValue = spoofValue;
+          int.TryParse(spoofValue, out returnValue);
         }
       }
+
       return returnValue;
     }
   }

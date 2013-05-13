@@ -15,34 +15,57 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockProviders", "..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj", "{5487DEF2-0FA7-4B77-9AAD-0355784589D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperSegment.Interface", "..\..\Atlantis.Framework.ShopperSegment\Atlantis.Framework.ShopperSegment.Interface\Atlantis.Framework.ShopperSegment.Interface.csproj", "{3A47C855-6F2E-4843-848C-BD2451AD28E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.ShopperSegment.Tests", "Atlantis.Framework.Providers.ShopperSegment.Tests\Atlantis.Framework.Providers.ShopperSegment.Tests.csproj", "{126025FC-59D9-498A-B745-61D521B94512}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ShopperSegment.Impl", "..\..\Atlantis.Framework.ShopperSegment\Atlantis.Framework.ShopperSegment.Impl\Atlantis.Framework.ShopperSegment.Impl.csproj", "{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Containers", "..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj", "{C333E679-494E-422D-AB5E-E4C0EC94ACD5}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName0 = Segmentation.sln
-		SccProjectName0 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName1 = Segmentation.sln
-		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
+		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
 		SccProjectTopLevelParentUniqueName2 = Segmentation.sln
-		SccProjectName2 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
-		SccLocalPath2 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
-		SccProjectUniqueName3 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders\\Atlantis.Framework.Testing.MockProviders.csproj
+		SccProjectName2 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
 		SccProjectTopLevelParentUniqueName3 = Segmentation.sln
-		SccProjectName3 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockProviders
-		SccLocalPath3 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders
-		SccProjectUniqueName4 = Atlantis.Framework.Providers.ShopperSegment.Interface\\Atlantis.Framework.Providers.ShopperSegment.Interface.csproj
-		SccProjectName4 = Atlantis.Framework.Providers.ShopperSegment.Interface
-		SccLocalPath4 = Atlantis.Framework.Providers.ShopperSegment.Interface
-		SccLocalPath5 = .
+		SccProjectName3 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
+		SccLocalPath3 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
+		SccProjectUniqueName4 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders\\Atlantis.Framework.Testing.MockProviders.csproj
+		SccProjectTopLevelParentUniqueName4 = Segmentation.sln
+		SccProjectName4 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockProviders
+		SccLocalPath4 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders
+		SccProjectUniqueName5 = Atlantis.Framework.Providers.ShopperSegment.Interface\\Atlantis.Framework.Providers.ShopperSegment.Interface.csproj
+		SccProjectName5 = Atlantis.Framework.Providers.ShopperSegment.Interface
+		SccLocalPath5 = Atlantis.Framework.Providers.ShopperSegment.Interface
 		SccProjectUniqueName6 = Atlantis.Framework.Providers.ShopperSegment\\Atlantis.Framework.Providers.ShopperSegment.csproj
 		SccProjectName6 = Atlantis.Framework.Providers.ShopperSegment
 		SccLocalPath6 = Atlantis.Framework.Providers.ShopperSegment
+		SccProjectUniqueName7 = ..\\..\\Atlantis.Framework.ShopperSegment\\Atlantis.Framework.ShopperSegment.Interface\\Atlantis.Framework.ShopperSegment.Interface.csproj
+		SccProjectTopLevelParentUniqueName7 = Segmentation.sln
+		SccProjectName7 = ../../Atlantis.Framework.ShopperSegment/Atlantis.Framework.ShopperSegment.Interface
+		SccLocalPath7 = ..\\..\\Atlantis.Framework.ShopperSegment\\Atlantis.Framework.ShopperSegment.Interface
+		SccProjectUniqueName8 = Atlantis.Framework.Providers.ShopperSegment.Tests\\Atlantis.Framework.Providers.ShopperSegment.Tests.csproj
+		SccProjectName8 = Atlantis.Framework.Providers.ShopperSegment.Tests
+		SccLocalPath8 = Atlantis.Framework.Providers.ShopperSegment.Tests
+		SccProjectUniqueName9 = ..\\..\\Atlantis.Framework.ShopperSegment\\Atlantis.Framework.ShopperSegment.Impl\\Atlantis.Framework.ShopperSegment.Impl.csproj
+		SccProjectTopLevelParentUniqueName9 = Segmentation.sln
+		SccProjectName9 = ../../Atlantis.Framework.ShopperSegment/Atlantis.Framework.ShopperSegment.Impl
+		SccLocalPath9 = ..\\..\\Atlantis.Framework.ShopperSegment\\Atlantis.Framework.ShopperSegment.Impl
+		SccProjectUniqueName10 = ..\\..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers.csproj
+		SccProjectTopLevelParentUniqueName10 = Segmentation.sln
+		SccProjectName10 = ../../Atlantis.Framework.Providers.Containers/Atlantis.Framework.Providers.Containers
+		SccLocalPath10 = ..\\..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +96,22 @@ Global
 		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{126025FC-59D9-498A-B745-61D521B94512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{126025FC-59D9-498A-B745-61D521B94512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{126025FC-59D9-498A-B745-61D521B94512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{126025FC-59D9-498A-B745-61D521B94512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,5 +121,8 @@ Global
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
 		{2F8983B4-801B-461A-9D76-26A58A496261} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
 		{5487DEF2-0FA7-4B77-9AAD-0355784589D6} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
 	EndGlobalSection
 EndGlobal

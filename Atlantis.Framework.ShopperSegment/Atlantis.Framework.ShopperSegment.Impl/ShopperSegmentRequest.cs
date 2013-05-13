@@ -25,34 +25,31 @@ namespace Atlantis.Framework.ShopperSegment.Impl
 
       try
       {
-        using (SqlConnection connection = new SqlConnection(NetConnect.LookupConnectInfo(config)))
+        if (!string.IsNullOrEmpty(requestData.ShopperID))
         {
-          using (SqlCommand command = new SqlCommand(PROCNAME, connection) { CommandType = CommandType.StoredProcedure, CommandTimeout = 30 })
+          using (SqlConnection connection = new SqlConnection(NetConnect.LookupConnectInfo(config)))
           {
-            command.Parameters.Add(new SqlParameter(SHOPPER_ID_PARAM_NAME, requestData.ShopperID));
-            connection.Open();
-            using (SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection))
+            using (SqlCommand command = new SqlCommand(PROCNAME, connection) { CommandType = CommandType.StoredProcedure, CommandTimeout = (int)requestData.RequestTimeout.TotalSeconds })
             {
-              for (int i = 0; i < reader.FieldCount; i++)
+              command.Parameters.Add(new SqlParameter(SHOPPER_ID_PARAM_NAME, requestData.ShopperID));
+              connection.Open();
+              using (SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection))
               {
-                Debug.WriteLine(string.Format("{0}:{1}:{2}", reader.GetName(i), reader.GetFieldType(i), reader.GetDataTypeName(i)));
-              }
-              if (reader.HasRows)
-              {
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                  int shopperIdOrdinal = reader.GetOrdinal(SHOPPER_ID_COL_NAME);
-                  int plIdOrdinal = reader.GetOrdinal(PRIVATE_LABEL_ID_COL_NAME);
-                  int segmentIdOrdinal = reader.GetOrdinal(SEGMENT_CODE_COL_NAME);
+                  while (reader.Read())
+                  {
+                    int shopperIdOrdinal = reader.GetOrdinal(SHOPPER_ID_COL_NAME);
+                    int plIdOrdinal = reader.GetOrdinal(PRIVATE_LABEL_ID_COL_NAME);
+                    int segmentIdOrdinal = reader.GetOrdinal(SEGMENT_CODE_COL_NAME);
 
-                  returnValue = new ShopperSegmentResponseData(
-                    !reader.IsDBNull(shopperIdOrdinal) ? reader.GetString(shopperIdOrdinal) : string.Empty,
-                    !reader.IsDBNull(plIdOrdinal) ? reader.GetInt32(plIdOrdinal) : 0,
-                    !reader.IsDBNull(segmentIdOrdinal) ? reader.GetByte(segmentIdOrdinal) : -1);
+                    returnValue = new ShopperSegmentResponseData(
+                      !reader.IsDBNull(segmentIdOrdinal) ? reader.GetByte(segmentIdOrdinal) : -1);
+                  }
                 }
               }
             }
-          }
+          } 
         }
       }
 

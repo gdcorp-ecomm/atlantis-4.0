@@ -16,7 +16,11 @@ namespace Atlantis.Framework.ShopperSegment.Interface
     
     public override string GetCacheMD5()
     {
-      throw new NotImplementedException("GetCacheMD5 not implemented in ShopperSegmentRequestData");
+      MD5 md5 = new MD5CryptoServiceProvider();
+      md5.Initialize();
+
+      byte[] md5Bytes = md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(ShopperID));
+      return BitConverter.ToString(md5Bytes).Replace("-", "");
     }
 
 

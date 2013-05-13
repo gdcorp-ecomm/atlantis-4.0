@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.SessionCache;
 
 namespace Atlantis.Framework.ShopperSegment.Interface
 {
-  public class ShopperSegmentResponseData : IResponseData
+  public class ShopperSegmentResponseData : IResponseData, ISessionSerializableResponse
   {
     private AtlantisException _exception = null;
 
@@ -16,10 +18,8 @@ namespace Atlantis.Framework.ShopperSegment.Interface
     {
     }
     
-    public ShopperSegmentResponseData(string shopperId, int privateLabelId, int segmentId)
+    public ShopperSegmentResponseData(int segmentId)
     {
-      this.ShopperId = shopperId;
-      this.PrivateLabelId = privateLabelId;
       this.SegmentId = segmentId;
     }
 
@@ -40,12 +40,8 @@ namespace Atlantis.Framework.ShopperSegment.Interface
         return null == _exception;
       }
     }
-
-    public int PrivateLabelId { get; set; }
-
+    
     public int SegmentId { get; set; }
-
-    public string ShopperId { get; set; }
 
     public AtlantisException GetException()
     {
@@ -59,8 +55,29 @@ namespace Atlantis.Framework.ShopperSegment.Interface
 
       xmlSerializer.Serialize(writer, this);
 
-      return writer.ToString();
+      string returnValue = writer.ToString();
+
+      return returnValue;
     }
 
+
+    public string SerializeSessionData()
+    {
+      return this.ToXML();
+    }
+
+    public void DeserializeSessionData(string sessionData)
+    {
+      if (!string.IsNullOrEmpty(sessionData))
+      {
+        XmlSerializer xmlSerializer = new XmlSerializer(typeof(ShopperSegmentResponseData));
+        StringReader reader = new StringReader(sessionData);
+        ShopperSegmentResponseData temp = xmlSerializer.Deserialize(reader) as ShopperSegmentResponseData;
+        if (!ReferenceEquals(null, temp))
+        {
+          this.SegmentId = temp.SegmentId;
+        }
+      }
+    }
   }
 }

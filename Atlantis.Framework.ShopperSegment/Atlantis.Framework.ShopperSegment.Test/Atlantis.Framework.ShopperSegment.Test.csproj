@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -73,6 +74,18 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj">
       <Project>{3213e6db-f026-4f17-a46a-7127f79f6620}</Project>
       <Name>Atlantis.Framework.Nimitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
+      <Project>{53be1e8c-c474-4d2d-b2e3-db00cbe1b5f9}</Project>
+      <Name>Atlantis.Framework.SessionCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
+      <Project>{2f8983b4-801b-461a-9d76-26a58a496261}</Project>
+      <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
+      <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
+      <Name>Atlantis.Framework.Testing.MockProviders</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.ShopperSegment.Impl\Atlantis.Framework.ShopperSegment.Impl.csproj">
       <Project>{e6f29f7a-da09-4c50-91d8-a230d7f445c2}</Project>

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Web;
 using Atlantis.Framework.ShopperSegment.Interface;
+using Atlantis.Framework.Testing.MockHttpContext;
+using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.ShopperSegment.Test
@@ -75,6 +78,23 @@ namespace Atlantis.Framework.ShopperSegment.Test
       actual = (ShopperSegmentResponseData)Engine.Engine.ProcessRequest(request, REQUEST_TYPE_ID);
       Assert.IsTrue(actual.IsSuccess);
       Assert.AreEqual(0, actual.SegmentId);
+
+    }
+
+    [TestMethod]
+    public void GetShopperSegmentFromSessionTest()
+    {
+      HttpWorkerRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+
+      ShopperSegmentRequestData request = new ShopperSegmentRequestData("1001206", string.Empty, string.Empty, string.Empty, 0);
+      ShopperSegmentResponseData actual = SessionCache.SessionCache.GetProcessRequest<ShopperSegmentResponseData>(request, REQUEST_TYPE_ID, TimeSpan.FromMinutes(5));
+      Assert.AreEqual(2, actual.SegmentId);
+
+      request = new ShopperSegmentRequestData("1001206", string.Empty, string.Empty, string.Empty, 0);
+      actual = SessionCache.SessionCache.GetProcessRequest<ShopperSegmentResponseData>(request, REQUEST_TYPE_ID, TimeSpan.FromMinutes(5));
+      Assert.AreEqual(2, actual.SegmentId);
+
 
     }
   }

@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Interface
 {
@@ -6,6 +7,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Interface
   {
     string Name { get; }
 
-    string GetPlaceHolderContent(string name, string data, IProviderContainer providerContainer);
+    string GetPlaceHolderContent(string name, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer);
   }
 }

@@ -43,9 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPlaceHolderData.cs" />
     <Compile Include="IPlaceHolderHandler.cs" />
+    <Compile Include="IPlaceHolderParameter.cs" />
     <Compile Include="IPlaceHolderProvider.cs" />
-    <Compile Include="IPlaceHolderUserControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

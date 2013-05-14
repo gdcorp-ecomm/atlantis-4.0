@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using Atlantis.Framework.Interface;
@@ -14,6 +15,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
     private static readonly Regex _placeHolderRegex = new Regex(@"\[@P\[(?<placeholderkey>[a-zA-z0-9]*?):(?<placeholderdata>.*?)\]@P\]", RegexOptions.Compiled | RegexOptions.Singleline);
     private static readonly IDictionary<string, IPlaceHolderHandler> _placeHolderHandlers = new Dictionary<string, IPlaceHolderHandler>(StringComparer.OrdinalIgnoreCase);
+
+    private readonly IDictionary<string, IPlaceHolderData> _placeHolderSharedData = new Dictionary<string, IPlaceHolderData>(256);
+    private readonly ICollection<string> _debugContextErrors = new Collection<string>(); 
 
     static PlaceHolderProvider()
     {
@@ -31,43 +35,65 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     {
     }
 
+    public IPlaceHolderData GetPlaceHolderData(string type)
+    {
+      IPlaceHolderData placeHolderData;
+      
+      if (!_placeHolderSharedData.TryGetValue(type, out placeHolderData))
+      {
+        placeHolderData = new XmlPlaceHolderData();
+      }
+
+      return placeHolderData;
+    }
+
     public string ReplacePlaceHolders(string content)
     {
       string originalContent = content ?? string.Empty;
-
-      string finalContent = originalContent;
+      string finalContent = string.Empty;
 
       if (originalContent != string.Empty)
       {
-        MatchCollection placeHolderMatches = _placeHolderRegex.Matches(originalContent);
-
-        if (placeHolderMatches.Count > 0)
-        {
-          StringBuilder contentBuilder = new StringBuilder(originalContent);
-
-          foreach (Match placeHolderMatch in placeHolderMatches)
-          {
-            string matchValue = placeHolderMatch.Value;
-            string placeHolderContent = ProcessPlaceHolderContent(placeHolderMatch);
-
-            contentBuilder.Replace(matchValue, placeHolderContent);
-          }
-
-          finalContent = contentBuilder.ToString();
-        }
+        finalContent = ProcessPlaceHolderMatches(originalContent);
       }
 
       return finalContent;
     }
 
-    private string ProcessPlaceHolderContent(Match placeHolderMatch)
+    private string ProcessPlaceHolderMatches(string originalContent)
     {
+      string finalContent = originalContent;
+
+      MatchCollection placeHolderMatches = _placeHolderRegex.Matches(originalContent);
+
+      if (placeHolderMatches.Count > 0)
+      {
+        StringBuilder contentBuilder = new StringBuilder(originalContent);
+
+        foreach (Match placeHolderMatch in placeHolderMatches)
+        {
+          ProcessPlaceHolderMatch(placeHolderMatch, contentBuilder);
+        }
+
+        finalContent = contentBuilder.ToString();
+
+        LogDebugContextData();
+      }
+
+      return finalContent;
+    }
+
+    private void ProcessPlaceHolderMatch(Match placeHolderMatch, StringBuilder contentBuilder)
+    {
+      string matchValue = placeHolderMatch.Value;
       string placeHolderKey = placeHolderMatch.Groups[PLACE_HOLDER_KEY].Captures[0].Value;
-      string placeHolderData = placeHolderMatch.Groups[PLACE_HOLDER_DATA].Captures[0].Value;
+      string placeHolderDataString = placeHolderMatch.Groups[PLACE_HOLDER_DATA].Captures[0].Value;
 
       IPlaceHolderHandler placeHolderHandler = DeterminePlaceHolderHandler(placeHolderKey);
 
-      return placeHolderHandler.GetPlaceHolderContent(placeHolderKey, placeHolderData, Container);
+      string content = placeHolderHandler.GetPlaceHolderContent(placeHolderKey, placeHolderDataString, _placeHolderSharedData, _debugContextErrors, Container);
+
+      contentBuilder.Replace(matchValue, content);
     }
 
     private IPlaceHolderHandler DeterminePlaceHolderHandler(string placeHolderKey)
@@ -80,6 +106,21 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
 
       return placeHolderHandler;
+    }
+
+    private void LogDebugContextData()
+    {
+      IDebugContext debugContext;
+      if (_debugContextErrors.Count > 0 && Container.TryResolve(out debugContext))
+      {
+        StringBuilder placeHolderDebugBuilder = new StringBuilder();
+        foreach (string debugContextError in _debugContextErrors)
+        {
+          placeHolderDebugBuilder.AppendLine(debugContextError);
+        }
+
+        debugContext.LogDebugTrackingData("PlaceHolder Errors", placeHolderDebugBuilder.ToString());
+      }
     }
   }
 }

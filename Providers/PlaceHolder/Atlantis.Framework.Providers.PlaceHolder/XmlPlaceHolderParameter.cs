@@ -1,9 +1,10 @@
 ﻿using System.Xml.Serialization;
+using Atlantis.Framework.Providers.PlaceHolder.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder
 {
   [XmlRoot(ElementName = "Parameter")]
-  public class PlaceHolderParameter
+  public class XmlPlaceHolderParameter : IPlaceHolderParameter
   {
     [XmlAttribute(AttributeName = "key")]
     public string Key { get; set; }

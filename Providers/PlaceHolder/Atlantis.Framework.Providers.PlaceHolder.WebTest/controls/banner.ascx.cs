@@ -1,35 +1,32 @@
-﻿using System.Collections.Generic;
-using System.Web.UI;
+﻿using System.Web.UI;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.WebTest.controls
 {
-  public partial class banner : UserControl, IPlaceHolderControl
+  public partial class banner : UserControl
   {
-    private readonly IDictionary<string, string> _parameters = new Dictionary<string, string>(32);
-    public IDictionary<string, string> Parameters 
+    private IPlaceHolderData _placeHolderData;
+    protected IPlaceHolderData PlaceHolderData
     {
-      get { return _parameters; }
+      get
+      {
+        if (_placeHolderData == null)
+        {
+          IPlaceHolderProvider placeHolderProvider = ProviderContainerHelper.Instance.Resolve<IPlaceHolderProvider>();
+          _placeHolderData = placeHolderProvider.GetPlaceHolderData(GetType().ToString());
+        }
+
+        return _placeHolderData;
+      }
     }
 
-    public bool ValidateParameters(out string errorLogMessage)
+    public override bool Visible
     {
-      bool isValid = true;
-
-      errorLogMessage = string.Empty;
-
-      if (!Parameters.ContainsKey("title"))
+      get
       {
-        errorLogMessage = "Parameter \"title\" is required.";
-        isValid = false;
+        return _placeHolderData.Parameters.ContainsKey("title") && 
+               _placeHolderData.Parameters.ContainsKey("text");
       }
-      else if (!Parameters.ContainsKey("text"))
-      {
-        errorLogMessage = "Parameter \"text\" is required.";
-        isValid = false;
-      }
-
-      return isValid;
     }
   }
 }

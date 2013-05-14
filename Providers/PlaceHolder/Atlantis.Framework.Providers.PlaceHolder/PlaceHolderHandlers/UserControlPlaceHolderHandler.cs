@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Web;
@@ -14,28 +15,33 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 
     public string Name { get { return "userControl"; } }
 
-    public string GetPlaceHolderContent(string name, string data, IProviderContainer providerContainer)
+    public string GetPlaceHolderContent(string name, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
     {
       string renderContent = string.Empty;
 
       try
       {
-        PlaceHolderData placeHolderData = DeserializeData(data);
+        IPlaceHolderData placeHolderData = DeserializeData(data);
         Control userControl = InitializeUserControl(placeHolderData);
+
+        placeHolderSharedData[userControl.GetType().ToString()] = placeHolderData;
 
         renderContent = RenderControlToHtml(userControl);
       }
       catch (Exception ex)
       {
-        ErrorLogger.LogException(string.Format("{0} place holder error. {1}", Name, ex.Message), "RenderPlaceHolderContent()", data);
+        string errorMessage = string.Format("{0} place holder error. {1}", Name, ex.Message);
+
+        debugContextErrors.Add(errorMessage);
+        ErrorLogger.LogException(errorMessage, "RenderPlaceHolderContent()", data);
       }
 
       return renderContent;
     }
 
-    private PlaceHolderData DeserializeData(string data)
+    private IPlaceHolderData DeserializeData(string data)
     {
-      PlaceHolderData placeHolderData = _xmlDataSerializer.Deserialize<PlaceHolderData>(data);
+      IPlaceHolderData placeHolderData = _xmlDataSerializer.Deserialize<XmlPlaceHolderData>(data);
       
       if (placeHolderData == null)
       {
@@ -45,7 +51,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       return placeHolderData;
     }
 
-    private Control InitializeUserControl(PlaceHolderData placeHolderData)
+    private Control InitializeUserControl(IPlaceHolderData placeHolderData)
     {
       Control userControl;
 
@@ -58,8 +64,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
         {
           throw new Exception("Unhandled exception loading user control.");
         }
-
-        SetUserControlParameters(userControl, placeHolderData);
       }
       catch (Exception ex)
       {
@@ -67,28 +71,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
 
       return userControl;
-    }
-
-    private void SetUserControlParameters(Control userControl, PlaceHolderData placeHolderData)
-    {
-      IPlaceHolderControl placeHolderControl = userControl as IPlaceHolderControl;
-
-      string errorLogMessage;
-
-      if (placeHolderControl == null)
-      {
-        throw new Exception("User control must implement IPlaceHolderControl.");
-      }
-      
-      foreach (PlaceHolderParameter placeHolderParameter in placeHolderData.Parameters)
-      {
-        placeHolderControl.Parameters[placeHolderParameter.Key] = placeHolderParameter.Value;
-      }
-
-      if (!placeHolderControl.ValidateParameters(out errorLogMessage))
-      {
-        throw new Exception(errorLogMessage);
-      }
     }
 
     private string RenderControlToHtml(Control userControl)

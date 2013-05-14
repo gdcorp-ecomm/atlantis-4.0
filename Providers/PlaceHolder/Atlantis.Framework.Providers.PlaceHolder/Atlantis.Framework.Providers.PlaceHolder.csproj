@@ -45,9 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorLogger.cs" />
-    <Compile Include="PlaceHolderData.cs" />
+    <Compile Include="XmlPlaceHolderData.cs" />
     <Compile Include="PlaceHolderHandlers\NullPlaceHolderHandler.cs" />
-    <Compile Include="PlaceHolderParameter.cs" />
+    <Compile Include="XmlPlaceHolderParameter.cs" />
     <Compile Include="PlaceHolderProvider.cs" />
     <Compile Include="RenderHandler\PlaceHolderRenderHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

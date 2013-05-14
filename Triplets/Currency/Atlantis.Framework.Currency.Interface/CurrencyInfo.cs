@@ -27,7 +27,7 @@ namespace Atlantis.Framework.Currency.Interface
           rawCurrencyInfo.SymbolHtml = element.LookupAttribute("currencySymbolHtml", "$");
 
           string position = element.LookupAttribute("currencySymbolPosition", "prefix");
-          if (position.Equals("prefix", StringComparison.InvariantCultureIgnoreCase))
+          if (position.Equals("prefix", StringComparison.OrdinalIgnoreCase))
           {
             rawCurrencyInfo.SymbolPosition = CurrencySymbolPositionType.Prefix;
           }

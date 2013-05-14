@@ -89,6 +89,14 @@
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Triplets\Segmentation\Atlantis.Framework.Segmentation.Impl\Atlantis.Framework.Segmentation.Impl.csproj">
+      <Project>{e6f29f7a-da09-4c50-91d8-a230d7f445c2}</Project>
+      <Name>Atlantis.Framework.Segmentation.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Triplets\Segmentation\Atlantis.Framework.Segmentation.Interface\Atlantis.Framework.Segmentation.Interface.csproj">
+      <Project>{8048871a-8ddc-4407-8f89-32e41b49593c}</Project>
+      <Name>Atlantis.Framework.Segmentation.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.ShopperSegment.Interface\Atlantis.Framework.Providers.Segmentation.Interface.csproj">
       <Project>{bd4c4dec-fac5-4558-a79b-e1d0c6f5ab8a}</Project>
       <Name>Atlantis.Framework.Providers.Segmentation.Interface</Name>

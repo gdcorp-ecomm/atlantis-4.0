@@ -23,9 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Segmentation.Interface", "..\..\Triplets\Segmentation\Atlantis.Framework.Segmentation.Interface\Atlantis.Framework.Segmentation.Interface.csproj", "{8048871A-8DDC-4407-8F89-32E41B49593C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Segmentation.Impl", "..\..\Triplets\Segmentation\Atlantis.Framework.Segmentation.Impl\Atlantis.Framework.Segmentation.Impl.csproj", "{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
+		SccNumberOfProjects = 12
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -66,6 +68,10 @@ Global
 		SccProjectTopLevelParentUniqueName10 = Segmentation.sln
 		SccProjectName10 = ../../Triplets/Segmentation/Atlantis.Framework.Segmentation.Interface
 		SccLocalPath10 = ..\\..\\Triplets\\Segmentation\\Atlantis.Framework.Segmentation.Interface
+		SccProjectUniqueName11 = ..\\..\\Triplets\\Segmentation\\Atlantis.Framework.Segmentation.Impl\\Atlantis.Framework.Segmentation.Impl.csproj
+		SccProjectTopLevelParentUniqueName11 = Segmentation.sln
+		SccProjectName11 = ../../Triplets/Segmentation/Atlantis.Framework.Segmentation.Impl
+		SccLocalPath11 = ..\\..\\Triplets\\Segmentation\\Atlantis.Framework.Segmentation.Impl
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -112,6 +118,10 @@ Global
 		{8048871A-8DDC-4407-8F89-32E41B49593C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8048871A-8DDC-4407-8F89-32E41B49593C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8048871A-8DDC-4407-8F89-32E41B49593C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,5 +134,6 @@ Global
 		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
 		{8048871A-8DDC-4407-8F89-32E41B49593C} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
 	EndGlobalSection
 EndGlobal

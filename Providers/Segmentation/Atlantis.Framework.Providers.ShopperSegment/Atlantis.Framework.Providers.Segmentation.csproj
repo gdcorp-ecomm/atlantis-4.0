@@ -61,12 +61,8 @@
       <Project>{53be1e8c-c474-4d2d-b2e3-db00cbe1b5f9}</Project>
       <Name>Atlantis.Framework.SessionCache</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.ShopperSegment\Atlantis.Framework.ShopperSegment.Impl\Atlantis.Framework.Segmentation.Impl.csproj">
-      <Project>{e6f29f7a-da09-4c50-91d8-a230d7f445c2}</Project>
-      <Name>Atlantis.Framework.Segmentation.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.ShopperSegment\Atlantis.Framework.ShopperSegment.Interface\Atlantis.Framework.Segmentation.Interface.csproj">
-      <Project>{3a47c855-6f2e-4843-848c-bd2451ad28e0}</Project>
+    <ProjectReference Include="..\..\..\Triplets\Segmentation\Atlantis.Framework.Segmentation.Interface\Atlantis.Framework.Segmentation.Interface.csproj">
+      <Project>{8048871a-8ddc-4407-8f89-32e41b49593c}</Project>
       <Name>Atlantis.Framework.Segmentation.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.ShopperSegment.Interface\Atlantis.Framework.Providers.Segmentation.Interface.csproj">

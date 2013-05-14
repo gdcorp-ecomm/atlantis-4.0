@@ -1,0 +1,128 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E76E5285-6CDE-4F0A-8A1A-3C8194897F9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Segmentation.Impl", "Atlantis.Framework.Segmentation.Impl\Atlantis.Framework.Segmentation.Impl.csproj", "{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Segmentation.Interface", "Atlantis.Framework.Segmentation.Interface\Atlantis.Framework.Segmentation.Interface.csproj", "{3A47C855-6F2E-4843-848C-BD2451AD28E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Segmentation.Test", "Atlantis.Framework.Segmentation.Test\Atlantis.Framework.Segmentation.Test.csproj", "{1E3D4C61-710E-4BC9-9510-EE59D6A861EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DataCache", "..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj", "{7F2738F8-683C-49E7-88CD-E986C70F0321}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockHttpContext", "..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj", "{2F8983B4-801B-461A-9D76-26A58A496261}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockProviders", "..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj", "{5487DEF2-0FA7-4B77-9AAD-0355784589D6}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccProjectUniqueName0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName0 = Atlantis.Framework.Segmentation.sln
+		SccProjectName0 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = Atlantis.Framework.Segmentation.sln
+		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName2 = Atlantis.Framework.Segmentation.sln
+		SccProjectName2 = ../../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath2 = ..\\..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName3 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
+		SccProjectTopLevelParentUniqueName3 = Atlantis.Framework.Segmentation.sln
+		SccProjectName3 = ../../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
+		SccLocalPath3 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
+		SccProjectUniqueName4 = ..\\..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
+		SccProjectTopLevelParentUniqueName4 = Atlantis.Framework.Segmentation.sln
+		SccProjectName4 = ../../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
+		SccLocalPath4 = ..\\..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
+		SccProjectUniqueName5 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
+		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.Segmentation.sln
+		SccProjectName5 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
+		SccLocalPath5 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
+		SccProjectUniqueName6 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders\\Atlantis.Framework.Testing.MockProviders.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.Segmentation.sln
+		SccProjectName6 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockProviders
+		SccLocalPath6 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders
+		SccProjectUniqueName7 = Atlantis.Framework.Segmentation.Interface\\Atlantis.Framework.Segmentation.Interface.csproj
+		SccProjectName7 = Atlantis.Framework.Segmentation.Interface
+		SccLocalPath7 = Atlantis.Framework.Segmentation.Interface
+		SccLocalPath8 = .
+		SccProjectUniqueName9 = Atlantis.Framework.Segmentation.Impl\\Atlantis.Framework.Segmentation.Impl.csproj
+		SccProjectName9 = Atlantis.Framework.Segmentation.Impl
+		SccLocalPath9 = Atlantis.Framework.Segmentation.Impl
+		SccProjectUniqueName10 = Atlantis.Framework.Segmentation.Test\\Atlantis.Framework.Segmentation.Test.csproj
+		SccProjectName10 = Atlantis.Framework.Segmentation.Test
+		SccLocalPath10 = Atlantis.Framework.Segmentation.Test
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E3D4C61-710E-4BC9-9510-EE59D6A861EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E3D4C61-710E-4BC9-9510-EE59D6A861EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E3D4C61-710E-4BC9-9510-EE59D6A861EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E3D4C61-710E-4BC9-9510-EE59D6A861EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F2738F8-683C-49E7-88CD-E986C70F0321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {E76E5285-6CDE-4F0A-8A1A-3C8194897F9E}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {E76E5285-6CDE-4F0A-8A1A-3C8194897F9E}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {E76E5285-6CDE-4F0A-8A1A-3C8194897F9E}
+		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {E76E5285-6CDE-4F0A-8A1A-3C8194897F9E}
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {E76E5285-6CDE-4F0A-8A1A-3C8194897F9E}
+		{2F8983B4-801B-461A-9D76-26A58A496261} = {E76E5285-6CDE-4F0A-8A1A-3C8194897F9E}
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6} = {E76E5285-6CDE-4F0A-8A1A-3C8194897F9E}
+	EndGlobalSection
+EndGlobal

@@ -4,7 +4,7 @@ using System.Text;
 using System.Security.Cryptography;
 using Atlantis.Framework.Interface;
 
-namespace Atlantis.Framework.ShopperSegment.Interface
+namespace Atlantis.Framework.Segmentation.Interface
 {
   public class ShopperSegmentRequestData : RequestData
   {

@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.SessionCache;
 
-namespace Atlantis.Framework.ShopperSegment.Interface
+namespace Atlantis.Framework.Segmentation.Interface
 {
   public class ShopperSegmentResponseData : IResponseData, ISessionSerializableResponse
   {

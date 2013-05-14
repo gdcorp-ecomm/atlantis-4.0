@@ -8,8 +8,8 @@
     <ProjectGuid>{3A47C855-6F2E-4843-848C-BD2451AD28E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.ShopperSegment.Interface</RootNamespace>
-    <AssemblyName>Atlantis.Framework.ShopperSegment.Interface</AssemblyName>
+    <RootNamespace>Atlantis.Framework.Segmentation.Interface</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Segmentation.Interface</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

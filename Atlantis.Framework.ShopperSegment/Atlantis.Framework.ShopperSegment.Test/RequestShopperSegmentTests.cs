@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web;
-using Atlantis.Framework.ShopperSegment.Interface;
+using Atlantis.Framework.Segmentation.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,7 +31,7 @@ namespace Atlantis.Framework.ShopperSegment.Test
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    [DeploymentItem("Atlantis.Framework.ShopperSegment.Impl.dll")]
+    [DeploymentItem("Atlantis.Framework.Segmentation.Impl.dll")]
     public void GetShopperSegmentTest()
     {
       ShopperSegmentRequestData request = new ShopperSegmentRequestData("1001206", string.Empty, string.Empty, string.Empty, 0);

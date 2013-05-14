@@ -8,8 +8,8 @@
     <ProjectGuid>{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.ShopperSegment.Impl</RootNamespace>
-    <AssemblyName>Atlantis.Framework.ShopperSegment.Impl</AssemblyName>
+    <RootNamespace>Atlantis.Framework.Segmentation.Impl</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Segmentation.Impl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -75,17 +75,6 @@
   <ItemGroup>
     <Compile Include="ShopperSegmentRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -117,9 +106,9 @@
       <Project>{53be1e8c-c474-4d2d-b2e3-db00cbe1b5f9}</Project>
       <Name>Atlantis.Framework.SessionCache</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.ShopperSegment.Interface\Atlantis.Framework.ShopperSegment.Interface.csproj">
+    <ProjectReference Include="..\Atlantis.Framework.ShopperSegment.Interface\Atlantis.Framework.Segmentation.Interface.csproj">
       <Project>{3a47c855-6f2e-4843-848c-bd2451ad28e0}</Project>
-      <Name>Atlantis.Framework.ShopperSegment.Interface</Name>
+      <Name>Atlantis.Framework.Segmentation.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

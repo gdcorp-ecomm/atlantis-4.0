@@ -7,15 +7,13 @@ using System.Text;
 using System.Xml;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Nimitz;
-using Atlantis.Framework.ShopperSegment.Interface;
+using Atlantis.Framework.Segmentation.Interface;
 
-namespace Atlantis.Framework.ShopperSegment.Impl
+namespace Atlantis.Framework.Segmentation.Impl
 {
   public class ShopperSegmentRequest : IRequest
   {
     private const string PROCNAME = "dbo.fb_ShopperHeaderSegmentCodeGet_sp";
-    private const string SHOPPER_ID_COL_NAME = "shopper_id";
-    private const string PRIVATE_LABEL_ID_COL_NAME = "PrivateLabelID";
     private const string SEGMENT_CODE_COL_NAME = "SegmentCode";
     private const string SHOPPER_ID_PARAM_NAME = "@shopper_id";
 
@@ -39,8 +37,6 @@ namespace Atlantis.Framework.ShopperSegment.Impl
                 {
                   while (reader.Read())
                   {
-                    int shopperIdOrdinal = reader.GetOrdinal(SHOPPER_ID_COL_NAME);
-                    int plIdOrdinal = reader.GetOrdinal(PRIVATE_LABEL_ID_COL_NAME);
                     int segmentIdOrdinal = reader.GetOrdinal(SEGMENT_CODE_COL_NAME);
 
                     returnValue = new ShopperSegmentResponseData(

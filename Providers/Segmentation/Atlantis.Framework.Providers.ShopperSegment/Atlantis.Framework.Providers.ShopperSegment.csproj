@@ -57,6 +57,10 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj">
+      <Project>{53be1e8c-c474-4d2d-b2e3-db00cbe1b5f9}</Project>
+      <Name>Atlantis.Framework.SessionCache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.ShopperSegment\Atlantis.Framework.ShopperSegment.Interface\Atlantis.Framework.ShopperSegment.Interface.csproj">
       <Project>{3a47c855-6f2e-4843-848c-bd2451ad28e0}</Project>
       <Name>Atlantis.Framework.ShopperSegment.Interface</Name>

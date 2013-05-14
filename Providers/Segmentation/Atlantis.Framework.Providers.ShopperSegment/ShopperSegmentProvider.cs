@@ -36,7 +36,7 @@ namespace Atlantis.Framework.Providers.ShopperSegment
       if (0 >= returnValue)
       {
         RequestData request = new ShopperSegmentRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, SiteContext.Pathway, SiteContext.PageCount);
-        IResponseData response = Engine.Engine.ProcessRequest(request, ShopperSegmentEngineRequests.ShopperSegmentId);
+        IResponseData response = SessionCache.SessionCache.GetProcessRequest<ShopperSegmentResponseData>(request, ShopperSegmentEngineRequests.ShopperSegmentId);
 
         ShopperSegmentResponseData converted = response as ShopperSegmentResponseData;
         if (!ReferenceEquals(null, converted) && converted.IsSuccess)

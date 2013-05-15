@@ -18,7 +18,7 @@ namespace Atlantis.Framework.Reseller.Interface
 
         public override string GetCacheMD5()
         {
-            throw new Exception("This method not supported by this object.");
+          return BuildHashFromStrings(CustomDomainUrl.ToLowerInvariant());
         }
 
         public override string ToXML()

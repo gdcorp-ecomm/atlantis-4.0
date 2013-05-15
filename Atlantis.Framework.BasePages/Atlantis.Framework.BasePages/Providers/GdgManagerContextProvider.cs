@@ -27,7 +27,8 @@ namespace Atlantis.Framework.BasePages.Providers
     private int _managerPrivateLabelId;
     private int _managerContextId = ContextIds.Unknown;
 
-    public GdgManagerContextProvider(IProviderContainer providerContainer) : base(providerContainer)
+    public GdgManagerContextProvider(IProviderContainer providerContainer)
+      : base(providerContainer)
     {
       DetermineManager();
     }
@@ -81,7 +82,7 @@ namespace Atlantis.Framework.BasePages.Providers
             {
               result = false;
               managerLoginName = "QS Error: " + domain + @"\" + userId;
-              LogManagerException(managerLoginName, validManagerUserid + "!=" + lookupResponse.ManagerUserId );
+              LogManagerException(managerLoginName, validManagerUserid + "!=" + lookupResponse.ManagerUserId);
             }
 
           }
@@ -175,30 +176,48 @@ namespace Atlantis.Framework.BasePages.Providers
       userId = null;
       try
       {
-        WindowsIdentity windowsIdentity = HttpContext.Current.User.Identity as WindowsIdentity;
-        if ((windowsIdentity != null) && (windowsIdentity.IsAuthenticated))
+        if (HttpContext.Current != null && HttpContext.Current.User != null && HttpContext.Current.User.Identity != null)
         {
-          string[] nameParts = windowsIdentity.Name.Split('\\');
-          if (nameParts.Length == 2)
+          WindowsIdentity windowsIdentity = HttpContext.Current.User.Identity as WindowsIdentity;
+          if ((windowsIdentity != null) && (windowsIdentity.IsAuthenticated))
           {
-            domain = nameParts[0];
-            userId = nameParts[1];
-            result = true;
+            string[] nameParts = windowsIdentity.Name.Split('\\');
+            if (nameParts.Length == 2)
+            {
+              domain = nameParts[0];
+              userId = nameParts[1];
+              result = true;
+            }
+            else
+            {
+              LogManagerException("Windows identity cannot be determined.", windowsIdentity.Name);
+            }
           }
-          else
+
+          if (!result)
           {
-            LogManagerException("Windows identity cannot be determined.", windowsIdentity.Name);
+            LogManagerException("Windows identity cannot be determined result False.", "Windows authentication issue.");
           }
         }
-
-        if (!result)
+        else
         {
-          LogManagerException("Windows identity cannot be determined result False.", "Windows authentication issue.");
+          if (HttpContext.Current == null)
+          {
+            LogManagerException("No Current Context.", "Windows authentication issue.");
+          }
+          else if (HttpContext.Current.User == null)
+          {
+            LogManagerException("No Current User.", "Windows authentication issue.");
+          }
+          else if (HttpContext.Current.User.Identity == null)
+          {
+            LogManagerException("No Current Identity.", "Windows authentication issue.");
+          }
         }
       }
-      catch(System.Exception ex)
+      catch (System.Exception ex)
       {
-        LogManagerException("Windows identity cannot be determined."+ex.ToString(), "Windows authentication issue.");
+        LogManagerException("Windows identity cannot be determined." + ex.ToString(), "Windows authentication issue.");
       }
 
       return result;
@@ -236,7 +255,7 @@ namespace Atlantis.Framework.BasePages.Providers
     private void DetermineManager()
     {
       _isManager = false;
-      
+
       try
       {
         if (RequestHelper.IsRequestInternal() && IsRequestInternalManagerHost())
@@ -249,7 +268,7 @@ namespace Atlantis.Framework.BasePages.Providers
             string managerUserIdFromQueryString = mgrShopperArray[1];
             string expiresString = mgrShopperArray[2];
 
-            if (!string.IsNullOrEmpty(shopperIdFromQueryString) 
+            if (!string.IsNullOrEmpty(shopperIdFromQueryString)
               && !string.IsNullOrEmpty(managerUserIdFromQueryString)
               && !string.IsNullOrEmpty(expiresString))
             {
@@ -275,7 +294,7 @@ namespace Atlantis.Framework.BasePages.Providers
           }
         }
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
         _isManager = false;
         _managerUserId = string.Empty;

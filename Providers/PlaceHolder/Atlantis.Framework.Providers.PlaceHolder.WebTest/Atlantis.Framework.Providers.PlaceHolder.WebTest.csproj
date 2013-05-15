@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="controls\banner.ascx" />
+    <Content Include="controls\content.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -72,6 +73,13 @@
     </Compile>
     <Compile Include="controls\banner.ascx.designer.cs">
       <DependentUpon>banner.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controls\content.ascx.cs">
+      <DependentUpon>content.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controls\content.ascx.designer.cs">
+      <DependentUpon>content.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

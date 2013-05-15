@@ -60,6 +60,36 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     }
 
     [TestMethod]
+    public void NoParametersPlaceHolder()
+    {
+      string content = @"<div>
+                          [@P[userControl:<Data location=""sdfdfsafsf""></Data>]@P]
+                         </div>";
+
+
+      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
+      
+      placeHolderProvider.ReplacePlaceHolders(content);
+    }
+
+    [TestMethod]
+    public void EncodedPlaceHolder()
+    {
+      string content = @"<div>
+                          [@P[userControl:<Data location=\""sdfdfsafsf\""><Parameters><Parameter key=\""Hello\"" value=\""World\"" /></Parameters></Data>]@P]
+                         </div>";
+
+
+      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
+      IPlaceHolderEncoding testPlaceHolderEncoding = new TestPlaceHolderEncoding();
+
+      string finalContent = placeHolderProvider.ReplacePlaceHolders(content, testPlaceHolderEncoding);
+
+      WriteOutput(finalContent);
+      Assert.IsFalse(finalContent.Contains("[@P[") || finalContent.Contains("]@P]"));
+    }
+
+    [TestMethod]
     public void NoPlaceHolders()
     {
       string content = @"<div>

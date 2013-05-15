@@ -9,5 +9,8 @@
   <div>
     [@P[userControl:<Data location="~/controls/banner.ascx"><Parameters><Parameter key="title" value="Attention!" /><Parameter key="text" value="Scheduled maintenance underway." /></Parameters></Data>]@P]
   </div>
+  <div>
+    [@P[userControl:<Data location="~/controls/content.ascx" />]@P]
+  </div>
 </body>
 </html>

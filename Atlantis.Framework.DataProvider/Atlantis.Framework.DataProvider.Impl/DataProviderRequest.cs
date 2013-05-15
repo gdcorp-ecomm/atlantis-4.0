@@ -209,18 +209,27 @@ namespace Atlantis.Framework.DataProvider.Impl
 
           foreach (ProviderParameter p in dbs.ParamList)
           {
+            SqlParameter pn = new SqlParameter();
             if (oDataProviderRequestData.Params.ContainsKey(p.Name))
             {
-              SqlParameter pn = new SqlParameter();
               pn.ParameterName = p.Name;
               pn.SqlDbType = GetSqlDbType(p.Type);
-              pn.SqlValue = oDataProviderRequestData.Params[p.Name];
               pn.Direction = GetParameterDirection(p.Direction);
               if (pn.Direction != ParameterDirection.Input)
               {
                 hasOutput = true;
               }
-              sqlCmd.Parameters.Add(pn);
+
+              switch (p.Type)
+              {
+                case "structured":
+                  sqlCmd.Parameters.AddWithValue(p.Name, oDataProviderRequestData.Params[p.Name]);
+                  break;
+                default:
+                  pn.SqlValue = oDataProviderRequestData.Params[p.Name];
+                  sqlCmd.Parameters.Add(pn);
+                  break;
+              }
             }
           }
 

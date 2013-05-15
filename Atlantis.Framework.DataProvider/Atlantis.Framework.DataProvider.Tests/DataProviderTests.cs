@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using Atlantis.Framework.DataProvider.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,6 +10,7 @@ namespace Atlantis.Framework.DataProvider.Tests
   /// Summary description for UnitTest1
   /// </summary>
   [TestClass]
+  [DeploymentItem("Atlantis.Framework.DataProvider.Impl.dll")]
   public class DataProviderTests
   {
     public DataProviderTests()
@@ -110,5 +113,32 @@ namespace Atlantis.Framework.DataProvider.Tests
       Assert.IsNotNull(result);
     }
 
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("DataProvider.xml")]
+    public void DataProviderProcTableValuedParam()
+    {
+      Dictionary<string, object> parameters = new Dictionary<string, object>(1);
+      parameters["TestName"] = "raj test upd";
+      parameters["DescriptionInfo"] = "raj test description upd";
+      parameters["SplitTestCategoryID"] = 0;
+      parameters["SplitTestID"] = 1015;
+      parameters["AuditUser"] = "rvontela";
+
+      DataTable dt = new DataTable();
+      dt.Columns.Add("SideName", typeof(string));
+      dt.Columns.Add("InitialPercentAllocation", typeof(double));
+      dt.Columns.Add("DescriptionInfo", typeof(string));
+
+      dt.Rows.Add("B", "100.00", "Description B");
+
+      parameters["SplitTestSides"] = dt.GetChanges();
+
+      DataProviderRequestData request = new DataProviderRequestData(
+        "832652", string.Empty, string.Empty, string.Empty, 0, "activetestupsert", parameters);
+      DataProviderResponseData response = (DataProviderResponseData)Engine.Engine.ProcessRequest(request, 35);
+      object result = response.GetResponseObject();
+      Assert.IsNotNull(result);
+    }
   }
 }

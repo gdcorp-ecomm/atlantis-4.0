@@ -23,6 +23,15 @@
       <param name="gdshop_socialMediaVideoID" type="int" size="" direction="output" />
       <param name="gdshop_socialMediaCompetitionID" type="int" size="" />
     </dbsetting>
+    <dbsetting name="activetestupsert" dsn="corp.web.siteadmin.godaddywebsitetraffic" app_name="sales" cert_name="corp.web.siteadmin.dev.client.godaddy.com" target_name="SplitTestAdmin_SplitTestMerge_sp">
+      <param name="TestName" type="varchar" size="50" />
+      <param name="DescriptionInfo" type="varchar" size="50" />
+      <param name="SplitTestCategoryID" type="int" size="" />
+      <param name="EligibilityRules" type="varchar" size="-1" />
+      <param name="SplitTestID" type="int" size="" />
+      <param name="AuditUser" type="varchar" size="100" />
+      <param name="SplitTestSides" type="structured" size="" />
+    </dbsetting>
   </DatabaseAccess>
   <WebService>
     <wssetting name="JustForYouOffers_GetOffersWithPlId" host_name="http://172.19.69.1/fbiSmartOffers/SmartOffers.asmx" target_name="GetOffersWithPlid">

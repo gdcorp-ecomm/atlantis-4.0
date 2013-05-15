@@ -193,12 +193,12 @@ namespace Atlantis.Framework.BasePages.Providers
 
         if (!result)
         {
-          LogManagerException("Windows identity cannot be determined.", "Windows authentication issue.");
+          LogManagerException("Windows identity cannot be determined result False.", "Windows authentication issue.");
         }
       }
-      catch
+      catch(System.Exception ex)
       {
-        LogManagerException("Windows identity cannot be determined.", "Windows authentication issue.");
+        LogManagerException("Windows identity cannot be determined."+ex.ToString(), "Windows authentication issue.");
       }
 
       return result;

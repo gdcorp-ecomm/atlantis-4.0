@@ -61,6 +61,11 @@ namespace Atlantis.Framework.Currency.Interface
       }
     }
 
+    public bool Contains(string currencyType)
+    {
+      return _currencyInfoSet.ContainsKey(currencyType);
+    }
+
     public string ToXML()
     {
       XElement currencydata = new XElement("currencytypes");

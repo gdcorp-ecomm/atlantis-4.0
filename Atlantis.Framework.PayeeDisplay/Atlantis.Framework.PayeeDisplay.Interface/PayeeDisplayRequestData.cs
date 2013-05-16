@@ -12,6 +12,7 @@ namespace Atlantis.Framework.PayeeDisplay.Interface
                                             int pageCount)
       : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
+      RequestTimeout = TimeSpan.FromSeconds(10);
     }
 
     public override string GetCacheMD5()

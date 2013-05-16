@@ -62,10 +62,11 @@ namespace Atlantis.Framework.PayeeDisplay.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
-    [DeploymentItem("App.config")]   
+    [DeploymentItem("App.config")]
+    [DeploymentItem("Atlantis.Framework.PayeeDisplay.Impl.dll")]
     public void TestMethod1()
     {
-      PayeeDisplayRequestData request = new PayeeDisplayRequestData("850774", string.Empty, string.Empty, string.Empty, 0);
+      PayeeDisplayRequestData request = new PayeeDisplayRequestData("864988", string.Empty, string.Empty, string.Empty, 0);
       PayeeDisplayResponseData response = (PayeeDisplayResponseData)Engine.Engine.ProcessRequest(request, 485);
 
       Assert.IsTrue(response.IsSuccess);

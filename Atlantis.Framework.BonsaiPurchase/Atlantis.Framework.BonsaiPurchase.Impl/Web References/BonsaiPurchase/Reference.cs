@@ -169,7 +169,7 @@ namespace Atlantis.Framework.BonsaiPurchase.Impl.BonsaiPurchase {
         }
         
         /// <remarks/>
-        public new string Error {
+        public string Error {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[2]));

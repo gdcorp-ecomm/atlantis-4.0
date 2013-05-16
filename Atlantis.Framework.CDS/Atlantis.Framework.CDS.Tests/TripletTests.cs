@@ -86,13 +86,14 @@ namespace Atlantis.Framework.CDS.Tests
       UrlWhitelistResponseData responseData = (UrlWhitelistResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
 
       //Assert
-      Assert.IsTrue(responseData.Contains("/default.aspx"));
-      Assert.IsTrue(responseData.Contains("/hosting/web-hosting.aspx"));
-      Assert.IsTrue(responseData.Contains("/hosting/email-hosting"));
+      string output;
+      Assert.IsTrue(responseData.TryGetValue("/default.aspx", out output));
+      Assert.IsTrue(responseData.TryGetValue("/hosting/web-hosting.aspx", out output));
+      Assert.IsTrue(responseData.TryGetValue("/hosting/email-hosting", out output));
 
-      Assert.IsFalse(responseData.Contains("/default1.aspx"));
-      Assert.IsFalse(responseData.Contains("/hosting1/web-hosting.aspx"));
-      Assert.IsFalse(responseData.Contains("/hosting/email-hosting-"));
+      Assert.IsFalse(responseData.TryGetValue("/default1.aspx", out output));
+      Assert.IsFalse(responseData.TryGetValue("/hosting1/web-hosting.aspx", out output));
+      Assert.IsFalse(responseData.TryGetValue("/hosting/email-hosting-", out output));
     }
 
     [TestMethod()]

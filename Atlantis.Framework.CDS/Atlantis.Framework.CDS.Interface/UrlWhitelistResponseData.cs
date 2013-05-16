@@ -11,7 +11,7 @@ namespace Atlantis.Framework.CDS.Interface
     private class UrlWhiteList
     {
       [JsonProperty("urls")]
-      public HashSet<string> List { get; set; }
+      public Dictionary<string, string> List { get; set; }
     }
 
     private UrlWhiteList _urlWhiteList;
@@ -33,12 +33,13 @@ namespace Atlantis.Framework.CDS.Interface
     /// </summary>
     /// <param name="relativePath">Example: "hosting/web-hosting.aspx"</param>
     /// <returns>true/false</returns>
-    public bool Contains(string relativePath)
+    public bool TryGetValue(string relativePath, out string style)
     {
+      style = null;
       bool contains = false;
       if (_urlWhiteList != null && _urlWhiteList.List != null)
       {
-        contains = _urlWhiteList.List.Contains(relativePath);
+        contains = _urlWhiteList.List.TryGetValue(relativePath, out style);
       }
       return contains;
     }

@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Segmentation.Interface", "..\..\Triplets\Segmentation\Atlantis.Framework.Segmentation.Interface\Atlantis.Framework.Segmentation.Interface.csproj", "{8048871A-8DDC-4407-8F89-32E41B49593C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Segmentation.Interface", "..\..\Triplets\Segmentation\Atlantis.Framework.Segmentation.Interface\Atlantis.Framework.Segmentation.Interface.csproj", "{3A47C855-6F2E-4843-848C-BD2451AD28E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Segmentation.Impl", "..\..\Triplets\Segmentation\Atlantis.Framework.Segmentation.Impl\Atlantis.Framework.Segmentation.Impl.csproj", "{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}"
 EndProject
@@ -114,10 +114,10 @@ Global
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8048871A-8DDC-4407-8F89-32E41B49593C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8048871A-8DDC-4407-8F89-32E41B49593C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8048871A-8DDC-4407-8F89-32E41B49593C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8048871A-8DDC-4407-8F89-32E41B49593C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -133,7 +133,7 @@ Global
 		{5487DEF2-0FA7-4B77-9AAD-0355784589D6} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
 		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
 		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
-		{8048871A-8DDC-4407-8F89-32E41B49593C} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
+		{3A47C855-6F2E-4843-848C-BD2451AD28E0} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
 		{E6F29F7A-DA09-4C50-91D8-A230D7F445C2} = {CB31AEF9-A8EE-40AF-BEF6-0EE64C9E1C54}
 	EndGlobalSection
 EndGlobal

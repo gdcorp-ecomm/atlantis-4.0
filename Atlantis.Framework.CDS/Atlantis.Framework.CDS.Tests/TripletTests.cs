@@ -116,5 +116,32 @@ namespace Atlantis.Framework.CDS.Tests
       Assert.IsNotNull(responseData.Content);
 
     }
+
+    [TestMethod()]
+    [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
+    public void RoutingRulesRequestTest()
+    {
+      //Arrange
+      string shopperId = "12345";
+      int requestType = 696;
+      string query = "content/sales/hosting/webhostingrules?docid=5170752af778fc014c90b155";
+      string pathway = Guid.NewGuid().ToString();
+      string errorDescription = "this is a test error descrption!";
+      CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);
+
+      //Act
+      RoutingRulesResponseData responseData = (RoutingRulesResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
+
+      //Assert
+      Assert.IsNotNull(responseData.RoutingRules);
+      foreach (RoutingRule rule in responseData.RoutingRules)
+      {
+        Assert.IsNotNull(rule.Type);
+        Assert.IsNotNull(rule.Condition);
+        Assert.IsNotNull(rule.Data);
+      }
+
+    }
   }
 }

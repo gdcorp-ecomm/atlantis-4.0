@@ -52,6 +52,8 @@
     <Compile Include="ContentVersion.cs" />
     <Compile Include="ContentVersionResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoutingRule.cs" />
+    <Compile Include="RoutingRulesResponseData.cs" />
     <Compile Include="UrlWhitelistResponseData.cs" />
   </ItemGroup>
   <ItemGroup>

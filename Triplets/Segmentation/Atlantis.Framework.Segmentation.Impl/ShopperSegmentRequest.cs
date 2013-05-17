@@ -19,7 +19,7 @@ namespace Atlantis.Framework.Segmentation.Impl
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      ShopperSegmentResponseData returnValue = new ShopperSegmentResponseData();
+      ShopperSegmentResponseData returnValue = new ShopperSegmentResponseData(0);
 
       try
       {
@@ -39,7 +39,7 @@ namespace Atlantis.Framework.Segmentation.Impl
                   {
                     int segmentIdOrdinal = reader.GetOrdinal(SEGMENT_CODE_COL_NAME);
 
-                    returnValue = new ShopperSegmentResponseData(!reader.IsDBNull(segmentIdOrdinal) ? reader.GetByte(segmentIdOrdinal) : -1);
+                    returnValue = new ShopperSegmentResponseData(!reader.IsDBNull(segmentIdOrdinal) ? reader.GetByte(segmentIdOrdinal) : 0);
                   }
                 }
               }

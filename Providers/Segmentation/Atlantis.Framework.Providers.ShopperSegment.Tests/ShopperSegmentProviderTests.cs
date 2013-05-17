@@ -14,6 +14,8 @@ namespace Atlantis.Framework.Providers.ShopperSegment.Tests
   [DeploymentItem("Atlantis.Framework.Segmentation.Impl.dll")]
   public class ShopperSegmentProviderTests
   {
+    public TestContext TestContext { get; set; }
+
     private ISegmentationProvider InitProvider(int privateLabelId, string shopperId)
     {
       HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
@@ -31,27 +33,40 @@ namespace Atlantis.Framework.Providers.ShopperSegment.Tests
     [TestMethod]
     public void GetShopperSegmentIdTest()
     {
-      // Get a new request
-      HttpWorkerRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
-      MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
 
-      string[] shopperIds = new[] { "1001206", "1001232", "1000534", "100075", "100019", "1001708", "1001909", "100147", "100090" };
+      string[] shopperIds = new[] { "1001206", "1001232", "1000534", "100075", "100019" };
       
       foreach (var item in shopperIds)
       {
+        // Get a new request
+        HttpWorkerRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+        MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
         ISegmentationProvider provider = InitProvider(1, item);
         Assert.IsNotNull(provider);
         Assert.AreNotEqual(0, provider.GetShopperSegmentId());
+        this.TestContext.WriteLine("shopperId: {0}, segmentId: {1}", item, provider.GetShopperSegmentId());
       }
 
-      //shopperIds = new[] { "100090" };
+      shopperIds = new[] { "1001708", "100147", "100090", "1001909" };
+      foreach (var item in shopperIds)
+      {
+        // Get a new request
+        HttpWorkerRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+        MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+        ISegmentationProvider provider = InitProvider(1, item);
+        this.TestContext.WriteLine("shopperId: {0}, segmentId: {1}", item, provider.GetShopperSegmentId());
+      }
 
-      //foreach (var item in shopperIds)
-      //{
-      //  ISegmentationProvider provider = InitProvider(1, item);
-      //  Assert.IsNotNull(provider);
-      //  Assert.AreEqual(0, provider.GetShopperSegmentId());
-      //}
+      shopperIds = new[] { "100101", "100102", "100103", "100104", "100105", "100106", "100107", "100108", "100109", "100110", "100111", "100112", "100113", "100114", "100115", "100116", "100117", "100118", "100119", "100120", "100121", "100122", "100123", "100124", "100125", "100126", "100127", "100128", "100129", "100130", "100131", "100132", "100133", "100134", "100135", "100136", "100137", "100138", "100139", "100140", "100141", "100142", "100144", "100145", "100146", "100147", "100148", "100149", "100150", "100151", "100152", "100153", "100154", "100155", "100156", "100157", "100158", "100159", "100160", "100161", "100162", "100163", "100164", "100165"};
+      foreach (var item in shopperIds)
+      {
+        // Get a new request
+        HttpWorkerRequest mockHttpRequest = new MockHttpRequest("http://www.debug.godaddy-com.ide/");
+        MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
+        ISegmentationProvider provider = InitProvider(1, item);
+        this.TestContext.WriteLine("shopperId: {0}, segmentId: {1}", item, provider.GetShopperSegmentId());
+      }
+
     }
 
 

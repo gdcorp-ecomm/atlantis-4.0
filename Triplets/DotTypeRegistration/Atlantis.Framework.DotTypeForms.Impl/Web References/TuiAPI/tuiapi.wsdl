@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ValidateAppInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="ValidateAppInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateAppInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateAppInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateAppInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateAppInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAppInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAppInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAppInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAppInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAppInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateAppInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAppInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAppInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteAppInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFormSchemaByName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="formname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFormSchemaByNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFormSchemaByNameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFormSchemaByPlacement">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="tldid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="placement" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFormSchemaByPlacementResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFormSchemaByPlacementResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidateAppInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateAppInfo" />
+  </wsdl:message>
+  <wsdl:message name="ValidateAppInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateAppInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateAppInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateAppInfo" />
+  </wsdl:message>
+  <wsdl:message name="CreateAppInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateAppInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAppInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAppInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAppInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAppInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAppInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateAppInfo" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAppInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateAppInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAppInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteAppInfo" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAppInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteAppInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFormSchemaByNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFormSchemaByName" />
+  </wsdl:message>
+  <wsdl:message name="GetFormSchemaByNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFormSchemaByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFormSchemaByPlacementSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFormSchemaByPlacement" />
+  </wsdl:message>
+  <wsdl:message name="GetFormSchemaByPlacementSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFormSchemaByPlacementResponse" />
+  </wsdl:message>
+  <wsdl:portType name="TuiApiSoap">
+    <wsdl:operation name="ValidateAppInfo">
+      <wsdl:input message="tns:ValidateAppInfoSoapIn" />
+      <wsdl:output message="tns:ValidateAppInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateAppInfo">
+      <wsdl:input message="tns:CreateAppInfoSoapIn" />
+      <wsdl:output message="tns:CreateAppInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAppInfo">
+      <wsdl:input message="tns:GetAppInfoSoapIn" />
+      <wsdl:output message="tns:GetAppInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAppInfo">
+      <wsdl:input message="tns:UpdateAppInfoSoapIn" />
+      <wsdl:output message="tns:UpdateAppInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAppInfo">
+      <wsdl:input message="tns:DeleteAppInfoSoapIn" />
+      <wsdl:output message="tns:DeleteAppInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFormSchemaByName">
+      <wsdl:input message="tns:GetFormSchemaByNameSoapIn" />
+      <wsdl:output message="tns:GetFormSchemaByNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFormSchemaByPlacement">
+      <wsdl:input message="tns:GetFormSchemaByPlacementSoapIn" />
+      <wsdl:output message="tns:GetFormSchemaByPlacementSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TuiApiSoap" type="tns:TuiApiSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidateAppInfo">
+      <soap:operation soapAction="http://tempuri.org/ValidateAppInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAppInfo">
+      <soap:operation soapAction="http://tempuri.org/CreateAppInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppInfo">
+      <soap:operation soapAction="http://tempuri.org/GetAppInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAppInfo">
+      <soap:operation soapAction="http://tempuri.org/UpdateAppInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAppInfo">
+      <soap:operation soapAction="http://tempuri.org/DeleteAppInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFormSchemaByName">
+      <soap:operation soapAction="http://tempuri.org/GetFormSchemaByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFormSchemaByPlacement">
+      <soap:operation soapAction="http://tempuri.org/GetFormSchemaByPlacement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TuiApiSoap12" type="tns:TuiApiSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidateAppInfo">
+      <soap12:operation soapAction="http://tempuri.org/ValidateAppInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAppInfo">
+      <soap12:operation soapAction="http://tempuri.org/CreateAppInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetAppInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAppInfo">
+      <soap12:operation soapAction="http://tempuri.org/UpdateAppInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAppInfo">
+      <soap12:operation soapAction="http://tempuri.org/DeleteAppInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFormSchemaByName">
+      <soap12:operation soapAction="http://tempuri.org/GetFormSchemaByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFormSchemaByPlacement">
+      <soap12:operation soapAction="http://tempuri.org/GetFormSchemaByPlacement" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TuiApi">
+    <wsdl:port name="TuiApiSoap" binding="tns:TuiApiSoap">
+      <soap:address location="https://tui.dev.int.secureserver.net/tuiapi.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TuiApiSoap12" binding="tns:TuiApiSoap12">
+      <soap12:address location="https://tui.dev.int.secureserver.net/tuiapi.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

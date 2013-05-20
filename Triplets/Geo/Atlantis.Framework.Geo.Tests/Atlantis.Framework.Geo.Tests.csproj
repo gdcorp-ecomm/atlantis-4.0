@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{526B2891-9192-4A82-87AE-D3AE2055FA31}</ProjectGuid>
+    <ProjectGuid>{229D7511-1C70-48C7-AF31-C60DDA43A7A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Atlantis.Framework.Geo.Tests</RootNamespace>
@@ -62,28 +62,28 @@
     <Compile Include="CountryTests.cs" />
     <Compile Include="InvalidRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StateTests.cs" />
     <Compile Include="RegionTests.cs" />
+    <Compile Include="StateTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
+    <ProjectReference Include="..\..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
       <Project>{3e299d3b-3c8d-455a-92a4-05ff6c60e6f3}</Project>
       <Name>Atlantis.Framework.DataCacheService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Geo.Impl\Atlantis.Framework.Geo.Impl.csproj">
-      <Project>{a41e549f-a590-4997-ad10-4595e45522d9}</Project>
+      <Project>{95a7334d-a6ee-46d4-97c3-320e119abc59}</Project>
       <Name>Atlantis.Framework.Geo.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Geo.Interface\Atlantis.Framework.Geo.Interface.csproj">
-      <Project>{63381f12-82af-4e36-9611-038293dc205e}</Project>
+      <Project>{27f0cd4d-3807-445b-ab34-2b96e7937492}</Project>
       <Name>Atlantis.Framework.Geo.Interface</Name>
     </ProjectReference>
   </ItemGroup>

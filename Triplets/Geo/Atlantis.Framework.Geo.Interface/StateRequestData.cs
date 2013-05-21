@@ -7,8 +7,7 @@ namespace Atlantis.Framework.Geo.Interface
   {
     public int CountryId { get; private set; }
 
-    public StateRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int countryId)
-      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    public StateRequestData(int countryId)
     {
       CountryId = countryId;
     }

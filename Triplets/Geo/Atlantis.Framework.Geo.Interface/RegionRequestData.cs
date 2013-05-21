@@ -8,8 +8,7 @@ namespace Atlantis.Framework.Geo.Interface
     public int RegionTypeId { get; private set; }
     public string RegionName { get; private set; }
 
-    public RegionRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int regionTypeId, string regionName)
-      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    public RegionRequestData(int regionTypeId, string regionName)
     {
       RegionTypeId = regionTypeId;
       RegionName = regionName ?? string.Empty;

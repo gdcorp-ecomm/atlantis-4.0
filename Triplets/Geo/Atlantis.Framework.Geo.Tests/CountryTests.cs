@@ -31,15 +31,15 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void CountryRequestCacheKey()
     {
-      CountryRequestData request = new CountryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
-      CountryRequestData request2 = new CountryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      CountryRequestData request = new CountryRequestData();
+      CountryRequestData request2 = new CountryRequestData();
       Assert.AreEqual(request.GetCacheMD5(), request2.GetCacheMD5());
     }
 
     [TestMethod]
     public void CountryRequestXml()
     {
-      CountryRequestData request = new CountryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      CountryRequestData request = new CountryRequestData();
       string xml = request.ToXML();
       XElement.Parse(xml);
     }
@@ -71,7 +71,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void GetCountries()
     {
-      CountryRequestData request = new CountryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      CountryRequestData request = new CountryRequestData();
       CountryResponseData response = (CountryResponseData)Engine.Engine.ProcessRequest(request, _COUNTRYREQUESTTYPE);
       Assert.AreNotEqual(0, response.Countries.Count());
 
@@ -82,7 +82,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void GetCountryByName()
     {
-      CountryRequestData request = new CountryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      CountryRequestData request = new CountryRequestData();
       CountryResponseData response = (CountryResponseData)Engine.Engine.ProcessRequest(request, _COUNTRYREQUESTTYPE);
       Country country = response.FindCountryByName("UNITED STATES");
       Assert.IsNotNull(country);
@@ -91,7 +91,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void GetCountryById()
     {
-      CountryRequestData request = new CountryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      CountryRequestData request = new CountryRequestData();
       CountryResponseData response = (CountryResponseData)Engine.Engine.ProcessRequest(request, _COUNTRYREQUESTTYPE);
       Country country = response.FindCountryById(226);
       Assert.IsNotNull(country);
@@ -100,7 +100,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void GetCountryByCode()
     {
-      CountryRequestData request = new CountryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0);
+      CountryRequestData request = new CountryRequestData();
       CountryResponseData response = (CountryResponseData)Engine.Engine.ProcessRequest(request, _COUNTRYREQUESTTYPE);
       Country country = response.FindCountryByCode("us");
       Assert.IsNotNull(country);

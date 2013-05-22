@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,7 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPCountryLookupRequest.cs" />
+    <Compile Include="IPLookup\CountryDataIPv4.cs" />
     <Compile Include="CountryRequest.cs" />
+    <Compile Include="IPLookup\DatabaseInfo.cs" />
+    <Compile Include="IPLookup\GeoDataFileBase.cs" />
+    <Compile Include="IPLookup\GeoFilePath.cs" />
+    <Compile Include="IPLookup\InternalCountries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionRequest.cs" />
     <Compile Include="StateRequest.cs" />
@@ -52,6 +59,10 @@
     <ProjectReference Include="..\..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
       <Project>{3e299d3b-3c8d-455a-92a4-05ff6c60e6f3}</Project>
       <Name>Atlantis.Framework.DataCacheService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
+      <Name>Atlantis.Framework.Engine</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>

@@ -31,23 +31,23 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void StateRequestCacheKeySame()
     {
-      StateRequestData request = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 226);
-      StateRequestData request2 = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 226);
+      StateRequestData request = new StateRequestData(226);
+      StateRequestData request2 = new StateRequestData(226);
       Assert.AreEqual(request.GetCacheMD5(), request2.GetCacheMD5());
     }
 
     [TestMethod]
     public void StateRequestCacheKeyDifferent()
     {
-      StateRequestData request = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 226);
-      StateRequestData request2 = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 200);
+      StateRequestData request = new StateRequestData(226);
+      StateRequestData request2 = new StateRequestData(200);
       Assert.AreNotEqual(request.GetCacheMD5(), request2.GetCacheMD5());
     }
 
     [TestMethod]
     public void StateRequestXml()
     {
-      StateRequestData request = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 226);
+      StateRequestData request = new StateRequestData(226);
       string xml = request.ToXML();
       XElement.Parse(xml);
     }
@@ -90,7 +90,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void GetStates()
     {
-      StateRequestData request = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 226);
+      StateRequestData request = new StateRequestData(226);
       StateResponseData response = (StateResponseData)Engine.Engine.ProcessRequest(request, _STATEREQUESTTYPE);
       Assert.AreNotEqual(0, response.Count);
       Assert.AreEqual(response.States.Count(), response.Count);
@@ -102,7 +102,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void GetNoStates()
     {
-      StateRequestData request = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 219);
+      StateRequestData request = new StateRequestData(219);
       StateResponseData response = (StateResponseData)Engine.Engine.ProcessRequest(request, _STATEREQUESTTYPE);
       Assert.AreEqual(0, response.Count);
       Assert.AreEqual(StateResponseData.Empty, response);
@@ -112,7 +112,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void GetStateByName()
     {
-      StateRequestData request = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 226);
+      StateRequestData request = new StateRequestData(226);
       StateResponseData response = (StateResponseData)Engine.Engine.ProcessRequest(request, _STATEREQUESTTYPE);
       State state = response.FindStateByName("arizonA");
       Assert.IsNotNull(state);
@@ -121,7 +121,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void GetStateById()
     {
-      StateRequestData request = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 226);
+      StateRequestData request = new StateRequestData(226);
       StateResponseData response = (StateResponseData)Engine.Engine.ProcessRequest(request, _STATEREQUESTTYPE);
       State state = response.FindStateById(78);
       Assert.IsNotNull(state);
@@ -130,7 +130,7 @@ namespace Atlantis.Framework.Geo.Tests
     [TestMethod]
     public void GetStateByCode()
     {
-      StateRequestData request = new StateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 226);
+      StateRequestData request = new StateRequestData(226);
       StateResponseData response = (StateResponseData)Engine.Engine.ProcessRequest(request, _STATEREQUESTTYPE);
       State state = response.FindStateByCode("az");
       Assert.IsNotNull(state);

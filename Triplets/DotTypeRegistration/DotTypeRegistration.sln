@@ -21,9 +21,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeValidation.Tests", "Atlantis.Framework.DotTypeValidation.Tests\Atlantis.Framework.DotTypeValidation.Tests.csproj", "{0A0CEA12-4762-4C9C-B44E-C77EBDE55312}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeClaims.Tests", "Atlantis.Framework.DotTypeClaims.Tests\Atlantis.Framework.DotTypeClaims.Tests.csproj", "{41620509-EBFF-411A-AB12-CE2417CA5DD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeClaims.Impl", "Atlantis.Framework.DotTypeClaims.Impl\Atlantis.Framework.DotTypeClaims.Impl.csproj", "{E4C60F74-EBF7-4F79-8D5B-19075A283077}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeClaims.Interface", "Atlantis.Framework.DotTypeClaims.Interface\Atlantis.Framework.DotTypeClaims.Interface.csproj", "{95B2C83E-9F94-4497-A089-BFA65E8D4A85}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 13
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -57,6 +63,15 @@ Global
 		SccProjectUniqueName9 = Atlantis.Framework.DotTypeValidation.Tests\\Atlantis.Framework.DotTypeValidation.Tests.csproj
 		SccProjectName9 = Atlantis.Framework.DotTypeValidation.Tests
 		SccLocalPath9 = Atlantis.Framework.DotTypeValidation.Tests
+		SccProjectUniqueName10 = Atlantis.Framework.DotTypeClaims.Tests\\Atlantis.Framework.DotTypeClaims.Tests.csproj
+		SccProjectName10 = Atlantis.Framework.DotTypeClaims.Tests
+		SccLocalPath10 = Atlantis.Framework.DotTypeClaims.Tests
+		SccProjectUniqueName11 = Atlantis.Framework.DotTypeClaims.Impl\\Atlantis.Framework.DotTypeClaims.Impl.csproj
+		SccProjectName11 = Atlantis.Framework.DotTypeClaims.Impl
+		SccLocalPath11 = Atlantis.Framework.DotTypeClaims.Impl
+		SccProjectUniqueName12 = Atlantis.Framework.DotTypeClaims.Interface\\Atlantis.Framework.DotTypeClaims.Interface.csproj
+		SccProjectName12 = Atlantis.Framework.DotTypeClaims.Interface
+		SccLocalPath12 = Atlantis.Framework.DotTypeClaims.Interface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +114,18 @@ Global
 		{0A0CEA12-4762-4C9C-B44E-C77EBDE55312}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A0CEA12-4762-4C9C-B44E-C77EBDE55312}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A0CEA12-4762-4C9C-B44E-C77EBDE55312}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41620509-EBFF-411A-AB12-CE2417CA5DD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41620509-EBFF-411A-AB12-CE2417CA5DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41620509-EBFF-411A-AB12-CE2417CA5DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41620509-EBFF-411A-AB12-CE2417CA5DD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4C60F74-EBF7-4F79-8D5B-19075A283077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4C60F74-EBF7-4F79-8D5B-19075A283077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4C60F74-EBF7-4F79-8D5B-19075A283077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4C60F74-EBF7-4F79-8D5B-19075A283077}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95B2C83E-9F94-4497-A089-BFA65E8D4A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95B2C83E-9F94-4497-A089-BFA65E8D4A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95B2C83E-9F94-4497-A089-BFA65E8D4A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95B2C83E-9F94-4497-A089-BFA65E8D4A85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

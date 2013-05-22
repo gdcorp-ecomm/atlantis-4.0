@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C3C614C7-FAB8-47FC-ACCE-C229E99AEF87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeEoi.Impl", "Atlantis.Framework.DotTypeEoi.Impl\Atlantis.Framework.DotTypeEoi.Impl.csproj", "{59FF3C50-A3DF-4CF2-9578-5C65B43C59B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeEoi.Interface", "Atlantis.Framework.DotTypeEoi.Interface\Atlantis.Framework.DotTypeEoi.Interface.csproj", "{7D931E9E-8088-4B73-BEBC-7BAE27A5083B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Interface", "..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj", "{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.DotTypeEoi.Tests", "Atlantis.Framework.DotTypeEoi.Tests\Atlantis.Framework.DotTypeEoi.Tests.csproj", "{3B2CB6FE-87D9-47E6-BA20-A8A21A7C37DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.DotTypeEoi.Interface", "..\..\Providers\DotTypeEoi\Atlantis.Framework.Providers.DotTypeEoi.Interface\Atlantis.Framework.Providers.DotTypeEoi.Interface.csproj", "{FEA94B7E-7E36-4FA8-9369-CBD41AD53F5B}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
+		SccProjectUniqueName0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccProjectTopLevelParentUniqueName0 = DotTypeEoi.sln
+		SccProjectName0 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
+		SccProjectTopLevelParentUniqueName1 = DotTypeEoi.sln
+		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = Atlantis.Framework.DotTypeEoi.Impl\\Atlantis.Framework.DotTypeEoi.Impl.csproj
+		SccProjectName3 = Atlantis.Framework.DotTypeEoi.Impl
+		SccLocalPath3 = Atlantis.Framework.DotTypeEoi.Impl
+		SccProjectUniqueName4 = Atlantis.Framework.DotTypeEoi.Interface\\Atlantis.Framework.DotTypeEoi.Interface.csproj
+		SccProjectName4 = Atlantis.Framework.DotTypeEoi.Interface
+		SccLocalPath4 = Atlantis.Framework.DotTypeEoi.Interface
+		SccProjectUniqueName5 = Atlantis.Framework.DotTypeEoi.Tests\\Atlantis.Framework.DotTypeEoi.Tests.csproj
+		SccProjectName5 = Atlantis.Framework.DotTypeEoi.Tests
+		SccLocalPath5 = Atlantis.Framework.DotTypeEoi.Tests
+		SccProjectUniqueName6 = ..\\..\\Providers\\DotTypeEoi\\Atlantis.Framework.Providers.DotTypeEoi.Interface\\Atlantis.Framework.Providers.DotTypeEoi.Interface.csproj
+		SccProjectTopLevelParentUniqueName6 = DotTypeEoi.sln
+		SccProjectName6 = ../../Providers/DotTypeEoi/Atlantis.Framework.Providers.DotTypeEoi.Interface
+		SccLocalPath6 = ..\\..\\Providers\\DotTypeEoi\\Atlantis.Framework.Providers.DotTypeEoi.Interface
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30157B2-C1B3-4073-BA5E-632E2337A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59FF3C50-A3DF-4CF2-9578-5C65B43C59B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59FF3C50-A3DF-4CF2-9578-5C65B43C59B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59FF3C50-A3DF-4CF2-9578-5C65B43C59B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59FF3C50-A3DF-4CF2-9578-5C65B43C59B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D931E9E-8088-4B73-BEBC-7BAE27A5083B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D931E9E-8088-4B73-BEBC-7BAE27A5083B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D931E9E-8088-4B73-BEBC-7BAE27A5083B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D931E9E-8088-4B73-BEBC-7BAE27A5083B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B2CB6FE-87D9-47E6-BA20-A8A21A7C37DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B2CB6FE-87D9-47E6-BA20-A8A21A7C37DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B2CB6FE-87D9-47E6-BA20-A8A21A7C37DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B2CB6FE-87D9-47E6-BA20-A8A21A7C37DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEA94B7E-7E36-4FA8-9369-CBD41AD53F5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEA94B7E-7E36-4FA8-9369-CBD41AD53F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEA94B7E-7E36-4FA8-9369-CBD41AD53F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEA94B7E-7E36-4FA8-9369-CBD41AD53F5B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {C3C614C7-FAB8-47FC-ACCE-C229E99AEF87}
+		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {C3C614C7-FAB8-47FC-ACCE-C229E99AEF87}
+		{FEA94B7E-7E36-4FA8-9369-CBD41AD53F5B} = {C3C614C7-FAB8-47FC-ACCE-C229E99AEF87}
+	EndGlobalSection
+EndGlobal

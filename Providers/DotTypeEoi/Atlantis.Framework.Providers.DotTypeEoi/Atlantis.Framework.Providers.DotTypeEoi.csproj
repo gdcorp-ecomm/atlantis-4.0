@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4104AFF7-324B-455F-B771-6D6ACC475B5D}</ProjectGuid>
+    <ProjectGuid>{6873C20C-8A4A-4987-AB28-C7D8B36AF6D1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.Providers.DotTypeRegistration</RootNamespace>
-    <AssemblyName>Atlantis.Framework.Providers.DotTypeRegistration</AssemblyName>
+    <RootNamespace>Atlantis.Framework.Providers.DotTypeEoi</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Providers.DotTypeEoi</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -36,7 +36,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DotTypeRegistrationEngineRequests.cs" />
-    <Compile Include="DotTypeRegistrationProvider.cs" />
+    <Compile Include="DotTypeEoiEngineRequests.cs" />
+    <Compile Include="DotTypeEoiProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,33 +64,17 @@
       <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
       <Name>Atlantis.Framework.Providers.Containers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\DotTypeRegistration\Atlantis.Framework.DotTypeClaims.Impl\Atlantis.Framework.DotTypeClaims.Impl.csproj">
-      <Project>{e4c60f74-ebf7-4f79-8d5b-19075a283077}</Project>
-      <Name>Atlantis.Framework.DotTypeClaims.Impl</Name>
+    <ProjectReference Include="..\..\..\Triplets\DotTypeEoi\Atlantis.Framework.DotTypeEoi.Impl\Atlantis.Framework.DotTypeEoi.Impl.csproj">
+      <Project>{59ff3c50-a3df-4cf2-9578-5c65b43c59b6}</Project>
+      <Name>Atlantis.Framework.DotTypeEoi.Impl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\DotTypeRegistration\Atlantis.Framework.DotTypeClaims.Interface\Atlantis.Framework.DotTypeClaims.Interface.csproj">
-      <Project>{95b2c83e-9f94-4497-a089-bfa65e8d4a85}</Project>
-      <Name>Atlantis.Framework.DotTypeClaims.Interface</Name>
+    <ProjectReference Include="..\..\..\Triplets\DotTypeEoi\Atlantis.Framework.DotTypeEoi.Interface\Atlantis.Framework.DotTypeEoi.Interface.csproj">
+      <Project>{7d931e9e-8088-4b73-bebc-7bae27a5083b}</Project>
+      <Name>Atlantis.Framework.DotTypeEoi.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\DotTypeRegistration\Atlantis.Framework.DotTypeForms.Impl\Atlantis.Framework.DotTypeForms.Impl.csproj">
-      <Project>{f5ba97a4-d1d4-4bfa-aea3-17b92510d2df}</Project>
-      <Name>Atlantis.Framework.DotTypeForms.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\DotTypeRegistration\Atlantis.Framework.DotTypeForms.Interface\Atlantis.Framework.DotTypeForms.Interface.csproj">
-      <Project>{86434db7-0a41-4802-a9aa-1f95676a38f7}</Project>
-      <Name>Atlantis.Framework.DotTypeForms.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\DotTypeRegistration\Atlantis.Framework.DotTypeValidation.Impl\Atlantis.Framework.DotTypeValidation.Impl.csproj">
-      <Project>{57529dcb-a2da-414a-9200-466bf9305ef8}</Project>
-      <Name>Atlantis.Framework.DotTypeValidation.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Triplets\DotTypeRegistration\Atlantis.Framework.DotTypeValidation.Interface\Atlantis.Framework.DotTypeValidation.Interface.csproj">
-      <Project>{b546bc6f-fe39-414c-b7ce-7cf5efdc1d62}</Project>
-      <Name>Atlantis.Framework.DotTypeValidation.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.Providers.DotTypeRegistration.Interface\Atlantis.Framework.Providers.DotTypeRegistration.Interface.csproj">
-      <Project>{35b615cd-c78e-484c-92c5-d54cd0b86cd2}</Project>
-      <Name>Atlantis.Framework.Providers.DotTypeRegistration.Interface</Name>
+    <ProjectReference Include="..\Atlantis.Framework.Providers.DotTypeEoi.Interface\Atlantis.Framework.Providers.DotTypeEoi.Interface.csproj">
+      <Project>{fea94b7e-7e36-4fa8-9369-cbd41ad53f5b}</Project>
+      <Name>Atlantis.Framework.Providers.DotTypeEoi.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

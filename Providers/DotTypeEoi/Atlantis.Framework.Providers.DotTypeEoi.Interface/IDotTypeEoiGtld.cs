@@ -1,0 +1,14 @@
+﻿namespace Atlantis.Framework.Providers.DotTypeEoi.Interface
+{
+  public interface IDotTypeEoiGtld
+  {
+    int SubCategoryId { get; set; }
+    string Name { get; set; }
+    int IsIdn { get; set; }
+    string IdnScript { get; set; }
+    string EnglishMeaning { get; set; }
+    string ALabel { get; set; }
+    int GtldSubCategoryId { get; set; }
+    int DisplayOrder { get; set; }
+  }
+}

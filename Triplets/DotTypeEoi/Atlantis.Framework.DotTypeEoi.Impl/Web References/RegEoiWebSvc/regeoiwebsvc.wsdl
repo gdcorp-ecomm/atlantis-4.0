@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:RegEOIWebSvc" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="urn:RegEOIWebSvc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="urn:RegEOIWebSvc">
+      <s:element name="GetGeneralEOIXml">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetGeneralEOIXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGeneralEOIXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGeneralEOIJSON">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetGeneralEOIJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGeneralEOIJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperWatchListXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperWatchListXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShopperWatchListXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperWatchListJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperWatchListJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShopperWatchListJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddToShopperWatchListXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="displayTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gTldsXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddToShopperWatchListXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddToShopperWatchListXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveFromShopperWatchListXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gTldsXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveFromShopperWatchListXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveFromShopperWatchListXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperWishListXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperWishListXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShopperWishListXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperWishListJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperWishListJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShopperWishListJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddToShopperWishList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gTldsXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddToShopperWishListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddToShopperWishListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveFromShopperWishListXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gTldsXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveFromShopperWishListXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveFromShopperWishListXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetGeneralEOIXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGeneralEOIXml" />
+  </wsdl:message>
+  <wsdl:message name="GetGeneralEOIXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGeneralEOIXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGeneralEOIJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGeneralEOIJSON" />
+  </wsdl:message>
+  <wsdl:message name="GetGeneralEOIJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGeneralEOIJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWatchListXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShopperWatchListXml" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWatchListXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShopperWatchListXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWatchListJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShopperWatchListJSON" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWatchListJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShopperWatchListJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddToShopperWatchListXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:AddToShopperWatchListXml" />
+  </wsdl:message>
+  <wsdl:message name="AddToShopperWatchListXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:AddToShopperWatchListXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveFromShopperWatchListXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveFromShopperWatchListXml" />
+  </wsdl:message>
+  <wsdl:message name="RemoveFromShopperWatchListXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveFromShopperWatchListXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWishListXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShopperWishListXml" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWishListXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShopperWishListXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWishListJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShopperWishListJSON" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWishListJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShopperWishListJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddToShopperWishListSoapIn">
+    <wsdl:part name="parameters" element="tns:AddToShopperWishList" />
+  </wsdl:message>
+  <wsdl:message name="AddToShopperWishListSoapOut">
+    <wsdl:part name="parameters" element="tns:AddToShopperWishListResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveFromShopperWishListXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveFromShopperWishListXml" />
+  </wsdl:message>
+  <wsdl:message name="RemoveFromShopperWishListXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveFromShopperWishListXmlResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RegEOIWebSvcSoap">
+    <wsdl:operation name="GetGeneralEOIXml">
+      <wsdl:input message="tns:GetGeneralEOIXmlSoapIn" />
+      <wsdl:output message="tns:GetGeneralEOIXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGeneralEOIJSON">
+      <wsdl:input message="tns:GetGeneralEOIJSONSoapIn" />
+      <wsdl:output message="tns:GetGeneralEOIJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWatchListXml">
+      <wsdl:input message="tns:GetShopperWatchListXmlSoapIn" />
+      <wsdl:output message="tns:GetShopperWatchListXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWatchListJSON">
+      <wsdl:input message="tns:GetShopperWatchListJSONSoapIn" />
+      <wsdl:output message="tns:GetShopperWatchListJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddToShopperWatchListXml">
+      <wsdl:input message="tns:AddToShopperWatchListXmlSoapIn" />
+      <wsdl:output message="tns:AddToShopperWatchListXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromShopperWatchListXml">
+      <wsdl:input message="tns:RemoveFromShopperWatchListXmlSoapIn" />
+      <wsdl:output message="tns:RemoveFromShopperWatchListXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWishListXml">
+      <wsdl:input message="tns:GetShopperWishListXmlSoapIn" />
+      <wsdl:output message="tns:GetShopperWishListXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWishListJSON">
+      <wsdl:input message="tns:GetShopperWishListJSONSoapIn" />
+      <wsdl:output message="tns:GetShopperWishListJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddToShopperWishList">
+      <wsdl:input message="tns:AddToShopperWishListSoapIn" />
+      <wsdl:output message="tns:AddToShopperWishListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromShopperWishListXml">
+      <wsdl:input message="tns:RemoveFromShopperWishListXmlSoapIn" />
+      <wsdl:output message="tns:RemoveFromShopperWishListXmlSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegEOIWebSvcSoap" type="tns:RegEOIWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetGeneralEOIXml">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetGeneralEOIXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeneralEOIJSON">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetGeneralEOIJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWatchListXml">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetShopperWatchListXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWatchListJSON">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetShopperWatchListJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToShopperWatchListXml">
+      <soap:operation soapAction="urn:RegEOIWebSvc/AddToShopperWatchListXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromShopperWatchListXml">
+      <soap:operation soapAction="urn:RegEOIWebSvc/RemoveFromShopperWatchListXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWishListXml">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetShopperWishListXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWishListJSON">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetShopperWishListJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToShopperWishList">
+      <soap:operation soapAction="urn:RegEOIWebSvc/AddToShopperWishList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromShopperWishListXml">
+      <soap:operation soapAction="urn:RegEOIWebSvc/RemoveFromShopperWishListXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegEOIWebSvcSoap12" type="tns:RegEOIWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetGeneralEOIXml">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetGeneralEOIXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeneralEOIJSON">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetGeneralEOIJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWatchListXml">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetShopperWatchListXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWatchListJSON">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetShopperWatchListJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToShopperWatchListXml">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/AddToShopperWatchListXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromShopperWatchListXml">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/RemoveFromShopperWatchListXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWishListXml">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetShopperWishListXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWishListJSON">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetShopperWishListJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToShopperWishList">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/AddToShopperWishList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromShopperWishListXml">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/RemoveFromShopperWishListXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegEOIWebSvc">
+    <wsdl:port name="RegEOIWebSvcSoap" binding="tns:RegEOIWebSvcSoap">
+      <soap:address location="http://g1dwregcheck01/regeoiwebsvc/regeoiwebsvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RegEOIWebSvcSoap12" binding="tns:RegEOIWebSvcSoap12">
+      <soap12:address location="http://g1dwregcheck01/regeoiwebsvc/regeoiwebsvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

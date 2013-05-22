@@ -14,9 +14,7 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
     public string Phase { get; set; }
     public Dictionary<string, string> Fields = new Dictionary<string,string>();
 
-    public DotTypeValidationRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
-      string clientApplication, string serverName, int tldId, string phase, Dictionary<string, string> fields)
-      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    public DotTypeValidationRequestData(string clientApplication, string serverName, int tldId, string phase, Dictionary<string, string> fields)
     {
       ClientApplication = clientApplication;
       ServerName = serverName;

@@ -4,24 +4,21 @@ using System.Text;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
-namespace Atlantis.Framework.DotTypeForms.Interface
+namespace Atlantis.Framework.DotTypeClaims.Interface
 {
-  public class DotTypeFormsXmlSchemaRequestData : RequestData
+  public class DotTypeClaimsRequestData : RequestData
   {
     public int TldId { get; set; }
-    public string Placement { get; set; }
 
-    public DotTypeFormsXmlSchemaRequestData(int tldId, string placement)
+    public DotTypeClaimsRequestData(int tldId)
     {
       TldId = tldId;
-      Placement = placement;
     }
 
     public override string ToXML()
     {
-      var element = new XElement("DotTypeFormsSchemaRequestData");
+      var element = new XElement("DotTypeClaimsRequestData");
       element.Add(new XAttribute("tldid", TldId.ToString(CultureInfo.InvariantCulture)));
-      element.Add(new XAttribute("placement", Placement));
       return element.ToString();
     }
 

@@ -17,39 +17,61 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Geo.Impl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Geo.Interface", "Atlantis.Framework.Providers.Geo.Interface\Atlantis.Framework.Providers.Geo.Interface.csproj", "{56C72BAE-FF21-49FF-A097-AC38B874AC39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Geo", "Atlantis.Framework.Providers.Geo\Atlantis.Framework.Providers.Geo.csproj", "{49E70B29-00BD-4665-994B-F232E84D63A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Geo.Tests", "Atlantis.Framework.Providers.Geo.Tests\Atlantis.Framework.Providers.Geo.Tests.csproj", "{092843DD-3DE9-45F9-8DD1-CA8AFDEBD249}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockHttpContext", "..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj", "{2F8983B4-801B-461A-9D76-26A58A496261}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Testing.MockProviders", "..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj", "{5487DEF2-0FA7-4B77-9AAD-0355784589D6}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 12
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName0 = Geo.sln
-		SccProjectName0 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName1 = Geo.sln
-		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService\\Atlantis.Framework.DataCacheService.csproj
+		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
 		SccProjectTopLevelParentUniqueName2 = Geo.sln
-		SccProjectName2 = ../../Atlantis.Framework.DataCache/Atlantis.Framework.DataCacheService
-		SccLocalPath2 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService
-		SccProjectUniqueName3 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
+		SccProjectName2 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService\\Atlantis.Framework.DataCacheService.csproj
 		SccProjectTopLevelParentUniqueName3 = Geo.sln
-		SccProjectName3 = ../../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
-		SccLocalPath3 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
-		SccProjectUniqueName4 = ..\\..\\Triplets\\Geo\\Atlantis.Framework.Geo.Interface\\Atlantis.Framework.Geo.Interface.csproj
+		SccProjectName3 = ../../Atlantis.Framework.DataCache/Atlantis.Framework.DataCacheService
+		SccLocalPath3 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCacheService
+		SccProjectUniqueName4 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache.csproj
 		SccProjectTopLevelParentUniqueName4 = Geo.sln
-		SccProjectName4 = ../../Triplets/Geo/Atlantis.Framework.Geo.Interface
-		SccLocalPath4 = ..\\..\\Triplets\\Geo\\Atlantis.Framework.Geo.Interface
-		SccProjectUniqueName5 = ..\\..\\Triplets\\Geo\\Atlantis.Framework.Geo.Impl\\Atlantis.Framework.Geo.Impl.csproj
+		SccProjectName4 = ../../Atlantis.Framework.DataCache/Atlantis.Framework.DataCache
+		SccLocalPath4 = ..\\..\\Atlantis.Framework.DataCache\\Atlantis.Framework.DataCache
+		SccProjectUniqueName5 = ..\\..\\Triplets\\Geo\\Atlantis.Framework.Geo.Interface\\Atlantis.Framework.Geo.Interface.csproj
 		SccProjectTopLevelParentUniqueName5 = Geo.sln
-		SccProjectName5 = ../../Triplets/Geo/Atlantis.Framework.Geo.Impl
-		SccLocalPath5 = ..\\..\\Triplets\\Geo\\Atlantis.Framework.Geo.Impl
-		SccLocalPath6 = .
+		SccProjectName5 = ../../Triplets/Geo/Atlantis.Framework.Geo.Interface
+		SccLocalPath5 = ..\\..\\Triplets\\Geo\\Atlantis.Framework.Geo.Interface
+		SccProjectUniqueName6 = ..\\..\\Triplets\\Geo\\Atlantis.Framework.Geo.Impl\\Atlantis.Framework.Geo.Impl.csproj
+		SccProjectTopLevelParentUniqueName6 = Geo.sln
+		SccProjectName6 = ../../Triplets/Geo/Atlantis.Framework.Geo.Impl
+		SccLocalPath6 = ..\\..\\Triplets\\Geo\\Atlantis.Framework.Geo.Impl
 		SccProjectUniqueName7 = Atlantis.Framework.Providers.Geo.Interface\\Atlantis.Framework.Providers.Geo.Interface.csproj
 		SccProjectName7 = Atlantis.Framework.Providers.Geo.Interface
 		SccLocalPath7 = Atlantis.Framework.Providers.Geo.Interface
+		SccProjectUniqueName8 = Atlantis.Framework.Providers.Geo\\Atlantis.Framework.Providers.Geo.csproj
+		SccProjectName8 = Atlantis.Framework.Providers.Geo
+		SccLocalPath8 = Atlantis.Framework.Providers.Geo
+		SccProjectUniqueName9 = Atlantis.Framework.Providers.Geo.Tests\\Atlantis.Framework.Providers.Geo.Tests.csproj
+		SccProjectName9 = Atlantis.Framework.Providers.Geo.Tests
+		SccLocalPath9 = Atlantis.Framework.Providers.Geo.Tests
+		SccProjectUniqueName10 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext\\Atlantis.Framework.Testing.MockHttpContext.csproj
+		SccProjectTopLevelParentUniqueName10 = Geo.sln
+		SccProjectName10 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockHttpContext
+		SccLocalPath10 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockHttpContext
+		SccProjectUniqueName11 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders\\Atlantis.Framework.Testing.MockProviders.csproj
+		SccProjectTopLevelParentUniqueName11 = Geo.sln
+		SccProjectName11 = ../../Atlantis.Framework.Testing/Atlantis.Framework.Testing.MockProviders
+		SccLocalPath11 = ..\\..\\Atlantis.Framework.Testing\\Atlantis.Framework.Testing.MockProviders
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +106,22 @@ Global
 		{56C72BAE-FF21-49FF-A097-AC38B874AC39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56C72BAE-FF21-49FF-A097-AC38B874AC39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56C72BAE-FF21-49FF-A097-AC38B874AC39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49E70B29-00BD-4665-994B-F232E84D63A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E70B29-00BD-4665-994B-F232E84D63A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E70B29-00BD-4665-994B-F232E84D63A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E70B29-00BD-4665-994B-F232E84D63A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{092843DD-3DE9-45F9-8DD1-CA8AFDEBD249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{092843DD-3DE9-45F9-8DD1-CA8AFDEBD249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{092843DD-3DE9-45F9-8DD1-CA8AFDEBD249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{092843DD-3DE9-45F9-8DD1-CA8AFDEBD249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8983B4-801B-461A-9D76-26A58A496261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,5 +133,7 @@ Global
 		{7F2738F8-683C-49E7-88CD-E986C70F0321} = {3F024E68-7E32-47CC-8AAD-3A3A31EC9ADA}
 		{27F0CD4D-3807-445B-AB34-2B96E7937492} = {3F024E68-7E32-47CC-8AAD-3A3A31EC9ADA}
 		{95A7334D-A6EE-46D4-97C3-320E119ABC59} = {3F024E68-7E32-47CC-8AAD-3A3A31EC9ADA}
+		{2F8983B4-801B-461A-9D76-26A58A496261} = {3F024E68-7E32-47CC-8AAD-3A3A31EC9ADA}
+		{5487DEF2-0FA7-4B77-9AAD-0355784589D6} = {3F024E68-7E32-47CC-8AAD-3A3A31EC9ADA}
 	EndGlobalSection
 EndGlobal

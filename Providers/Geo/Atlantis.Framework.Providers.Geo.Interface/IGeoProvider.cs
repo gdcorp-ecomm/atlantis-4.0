@@ -22,5 +22,12 @@ namespace Atlantis.Framework.Providers.Geo.Interface
     /// <param name="regionName">Region name (see lu_region table)</param>
     /// <returns>true if the country code of the current request is in the given region (case-insensitive)</returns>
     bool IsUserInRegion(int regionTypeId, string regionName);
+
+    /// <summary>
+    /// Sets a spoofed IP address for the lifetime of the provider. This call will have no affect if 
+    /// the request is not internal.
+    /// </summary>
+    /// <param name="spoofIpAddress">IP address to use as the users 'spoofed' IP</param>
+    void SpoofUserIPAddress(string spoofIpAddress);
   }
 }

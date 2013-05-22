@@ -57,7 +57,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DotTypeGetGeneralEoiJsonTests.cs" />
+    <Compile Include="DotTypeGeneralEoiJsonTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,13 +6,13 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.DotTypeEoi.Impl.dll")]
-  public class DotTypeGetGeneralEoiJsonTests
+  public class DotTypeGeneralEoiJsonTests
   {
     [TestMethod]
     public void DotTypeGetGeneralEoiJsonGoodRequest()
     {
-      var request = new DotTypeGetGeneralEoiJsonRequestData();
-      var response = (DotTypeGetGeneralEoiJsonResponseData)Engine.Engine.ProcessRequest(request, 698);
+      var request = new GeneralEoiJsonRequestData();
+      var response = (GeneralEoiJsonResponseData)Engine.Engine.ProcessRequest(request, 698);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, response.DotTypeEoiResponse != null);
     }

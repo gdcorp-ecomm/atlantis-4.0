@@ -6,11 +6,11 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeEoi.Impl
 {
-  public class DotTypeGetGeneralEoiJsonRequest : IRequest
+  public class GeneralEoiJsonRequest : IRequest
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      DotTypeGetGeneralEoiJsonResponseData responseData;
+      GeneralEoiJsonResponseData responseData;
       string responseXml = string.Empty;
 
       try
@@ -31,17 +31,17 @@ namespace Atlantis.Framework.DotTypeEoi.Impl
                                                                   responseXml,
                                                                   requestData.ToXML());
 
-            responseData = new DotTypeGetGeneralEoiJsonResponseData(responseXml, exAtlantis);
+            responseData = new GeneralEoiJsonResponseData(responseXml, exAtlantis);
           }
           else
           {
-            responseData = new DotTypeGetGeneralEoiJsonResponseData(responseElement.Value);
+            responseData = new GeneralEoiJsonResponseData(responseElement.Value);
           }
         }
       }
       catch (Exception ex)
       {
-        responseData = new DotTypeGetGeneralEoiJsonResponseData(responseXml, requestData, ex);
+        responseData = new GeneralEoiJsonResponseData(responseXml, requestData, ex);
       }
 
       return responseData;

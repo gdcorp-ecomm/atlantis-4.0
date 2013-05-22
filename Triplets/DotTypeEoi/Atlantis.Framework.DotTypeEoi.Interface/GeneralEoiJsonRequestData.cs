@@ -2,9 +2,9 @@
 
 namespace Atlantis.Framework.DotTypeEoi.Interface
 {
-  public class DotTypeGetGeneralEoiJsonRequestData : RequestData
+  public class GeneralEoiJsonRequestData : RequestData
   {
-    public DotTypeGetGeneralEoiJsonRequestData()
+    public GeneralEoiJsonRequestData()
     {
     }
 

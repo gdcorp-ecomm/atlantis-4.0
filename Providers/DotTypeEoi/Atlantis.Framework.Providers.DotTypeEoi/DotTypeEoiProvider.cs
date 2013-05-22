@@ -37,11 +37,11 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
       try
       {
-        var request = new DotTypeGetGeneralEoiJsonRequestData();
-        var response = (DotTypeGetGeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.DotTypeGetGeneralEoiJsonRequest);
+        var request = new GeneralEoiJsonRequestData();
+        var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.DotTypeGetGeneralEoiJsonRequest);
         if (response.IsSuccess)
         {
-          dotTypeEoiResponse = response.DotTypeEoiResponse;
+          dotTypeEoiResponse = response.EoiResponse;
           success = true;
         }
       }

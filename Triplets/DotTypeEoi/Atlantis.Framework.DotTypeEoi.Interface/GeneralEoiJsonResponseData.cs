@@ -7,27 +7,27 @@ using Atlantis.Framework.Providers.DotTypeEoi.Interface;
 
 namespace Atlantis.Framework.DotTypeEoi.Interface
 {
-  public class DotTypeGetGeneralEoiJsonResponseData : IResponseData
+  public class GeneralEoiJsonResponseData : IResponseData
   {
     private readonly string _responseXml;
     private readonly AtlantisException _exception;
     private readonly bool _isSuccess;
     private IDotTypeEoiResponse _dotTypeEoiResponse;
 
-    public DotTypeGetGeneralEoiJsonResponseData(string responseJson)
+    public GeneralEoiJsonResponseData(string responseJson)
     {
       _exception = null;
       _isSuccess = DeserializeJson(responseJson);
     }
 
-    public DotTypeGetGeneralEoiJsonResponseData(string responseXml, AtlantisException exAtlantis)
+    public GeneralEoiJsonResponseData(string responseXml, AtlantisException exAtlantis)
     {
       _responseXml = responseXml;
       _exception = exAtlantis;
       _isSuccess = false;
     }
 
-    public DotTypeGetGeneralEoiJsonResponseData(string responseXml, RequestData requestData, Exception ex)
+    public GeneralEoiJsonResponseData(string responseXml, RequestData requestData, Exception ex)
     {
       _responseXml = responseXml;
       _exception = new AtlantisException(requestData, "DotTypeGetGeneralEoiJsonResponseData", ex.Message, requestData.ToXML());

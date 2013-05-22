@@ -52,8 +52,8 @@
     <Compile Include="DotTypeEoiGtld.cs" />
     <Compile Include="DotTypeEoiCategory.cs" />
     <Compile Include="DotTypeEoiResponse.cs" />
-    <Compile Include="DotTypeGetGeneralEoiJsonResponseData.cs" />
-    <Compile Include="DotTypeGetGeneralEoiJsonRequestData.cs" />
+    <Compile Include="GeneralEoiJsonResponseData.cs" />
+    <Compile Include="GeneralEoiJsonRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

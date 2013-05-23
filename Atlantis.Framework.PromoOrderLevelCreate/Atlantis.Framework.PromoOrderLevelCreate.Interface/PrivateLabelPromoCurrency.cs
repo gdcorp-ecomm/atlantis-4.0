@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Atlantis.Framework.Currency.Interface;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 
@@ -6,6 +7,13 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Interface
 {
   public class PrivateLabelPromoCurrency
   {
+    public static int CurrencyTypesRequestType { get; set; }
+
+    static PrivateLabelPromoCurrency()
+    {
+      CurrencyTypesRequestType = 693;
+    }
+
     public enum AwardType
     {
       Unspecified = 0,
@@ -16,8 +24,6 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Interface
     //Failsafe in case we cannot retrieve the app setting for max discount %-off
     private const int _MAX_AWARD_VALUE_PCT = 2000;
 
-    internal Dictionary<string, Dictionary<string, string>> AvailableCurrencies = new Dictionary<string, Dictionary<string, string>>();
-  
     public PrivateLabelPromoCurrency() { }
 
     public PrivateLabelPromoCurrency(int awardValue, AwardType awardType, string currency, int minSubtotal)
@@ -26,8 +32,6 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Interface
       this.TypeOfAward = awardType;
       this.CurrencyType = currency;
       this.MinSubtotal = minSubtotal;
-
-      AvailableCurrencies = DataCache.DataCache.GetCurrencyDataAll();
     }
 
     /// <summary>
@@ -79,9 +83,7 @@ namespace Atlantis.Framework.PromoOrderLevelCreate.Interface
         result = false;
         exception = new OrderLevelPromoException("You cannot allocate a greater monetary discount than the minimum order subtotal. Please check the 'AwardValue' and 'MinSubtotal' fields.", OrderLevelPromoExceptionReason.AwardValueGreaterThanAllowed);
       }
-
-      // Check if currency exists
-      else if (promoCurrency.CurrencyType.ToUpper() != "USD" && !promoCurrency.AvailableCurrencies.ContainsKey(promoCurrency.CurrencyType.ToUpper()))
+      else if (promoCurrency.CurrencyType.ToUpper() != "USD" && !CurrencyValidaton.IsCurrencyValid(promoCurrency.CurrencyType, CurrencyTypesRequestType))
       {
         result = false;
         exception = new OrderLevelPromoException("You cannot specify an invalid currency type. Please check the 'CurrencyType' field.", OrderLevelPromoExceptionReason.InvalidCurrencySpecification);

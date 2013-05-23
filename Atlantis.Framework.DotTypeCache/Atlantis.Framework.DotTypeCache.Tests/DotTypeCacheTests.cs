@@ -22,6 +22,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
   [DeploymentItem("Atlantis.Framework.DCCDomainsDataCache.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DotTypeCache.StaticTypes.dll")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
   public class DotTypeCacheTests
   {
     private TestContext testContextInstance;
@@ -148,14 +150,14 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void TLDMLAvailable()
     {
-      bool result = TLDMLIsAvailable("COM.AU");
+      bool result = TLDMLIsAvailable("CZ");
       Assert.IsTrue(result);
     }
 
     [TestMethod]
     public void TLDMLAvailableLowerCase()
     {
-      bool result = TLDMLIsAvailable("com.au");
+      bool result = TLDMLIsAvailable("cz");
       Assert.IsTrue(result);
     }
 
@@ -183,9 +185,10 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void TLDMLAttributeExists()
     {
-      var dotTypeAttributesDictionary = DataCache.DataCache.GetExtendedTLDData("COM");
-      var dotTypeAttributes = dotTypeAttributesDictionary["COM"];
-      Assert.IsTrue(dotTypeAttributes.ContainsKey(TLDMLDotTypes.TLDMLSupportedFlag));
+      var request = new ExtendedTLDDataRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "COM");
+      var response = (ExtendedTLDDataResponseData)DataCache.DataCache.GetProcessRequest(request, 668);
+      string flagValue;
+      Assert.IsTrue(response.TryGetValue(TLDMLDotTypes.TLDMLSupportedFlag, out flagValue));
     }
 
     [TestMethod]

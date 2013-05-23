@@ -48,6 +48,7 @@
     <Compile Include="DotTypeCacheConfig.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="StaticApplicationControl.cs" />
+    <Compile Include="StaticDotTypeEngineRequests.cs" />
     <Compile Include="StaticDotTypes.cs" />
     <Compile Include="StaticTld.cs" />
     <Compile Include="StaticValidYearsSet.cs" />

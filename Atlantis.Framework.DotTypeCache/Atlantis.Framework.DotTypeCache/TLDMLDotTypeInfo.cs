@@ -213,7 +213,7 @@ namespace Atlantis.Framework.DotTypeCache
 
       if (maxValidRenewalLength > 0)
       {
-        int? renewalMonthsBeforeExpiration = TLDRenewal.GetRenewalMonthsBeforeExpiration(DotType);
+        int? renewalMonthsBeforeExpiration = Atlantis.Framework.DotTypeCache.Static.TLDRenewal.GetRenewalMonthsBeforeExpiration(DotType);
         if (renewalMonthsBeforeExpiration.HasValue)
         {
           var renewalEligibilityDate = origExpirationDate.AddMonths(renewalMonthsBeforeExpiration.Value * -1);

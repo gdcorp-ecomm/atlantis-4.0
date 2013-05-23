@@ -23,6 +23,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
   [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DomainContactFields.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DotTypeCache.StaticTypes.dll")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
   public class StaticVsTLDMLEnabledTests
   {
     private TestContext testContextInstance;

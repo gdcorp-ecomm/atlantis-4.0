@@ -25,6 +25,8 @@ namespace Atlantis.Framework.DotTypeCache.Tests
   [DeploymentItem("Atlantis.Framework.DCCDomainsDataCache.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.TLDDataCache.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.DotTypeCache.StaticTypes.dll")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
   public class DotTypeCacheTestsForTldmlEnabledTlds
   {
     private List<string> tlds;
@@ -263,11 +265,11 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     {
       foreach (string tld in tlds)
       {
-        Dictionary<string, Dictionary<string, string>> dotTypeAttributesDictionary = DataCache.DataCache.GetExtendedTLDData(tld);
-        Dictionary<string, string> dotTypeAttributes = dotTypeAttributesDictionary[tld];
+        var request = new ExtendedTLDDataRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, tld);
+        var response = (ExtendedTLDDataResponseData)DataCache.DataCache.GetProcessRequest(request, 668);
 
-        AssertHelper.AddResults(dotTypeAttributes.ContainsKey(TLDMLDotTypes.TLDMLSupportedFlag),
-                                "Key not found for: " + tld);
+        string flagValue;
+        AssertHelper.AddResults(response.TryGetValue(TLDMLDotTypes.TLDMLSupportedFlag, out flagValue), "Key not found for: " + tld);
       }
     }
 

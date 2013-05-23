@@ -1,22 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using Atlantis.Framework.TLDDataCache.Interface;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace Atlantis.Framework.DotTypeCache.Static
 {
-  public class TLDRenewal
+  public static class TLDRenewal
   {
     private static Dictionary<string, int?> _renewalMonthsBeforeExpiration;
-
-    #region Constructor
 
     static TLDRenewal()
     {
       _renewalMonthsBeforeExpiration = new Dictionary<string, int?>();
     }
-    #endregion
-
-    #region methods
 
     public static int? GetRenewalMonthsBeforeExpiration(string tld)
     {
@@ -35,13 +31,11 @@ namespace Atlantis.Framework.DotTypeCache.Static
     {
       int? renewalMonthsBeforeExpiration = null;
 
-      var extendedTLDData = DataCache.DataCache.GetExtendedTLDData(tld);
-      if (extendedTLDData != null && extendedTLDData.ContainsKey(tld))
+      var extendedTLDData = GetExtendedTLDData(tld);
+      if (extendedTLDData != null)
       {
-        var tldDictionary = extendedTLDData[tld];
         string tldDataXML = null;
-
-        if (tldDictionary.TryGetValue("tldData", out tldDataXML))
+        if (extendedTLDData.TryGetValue("tldData", out tldDataXML))
         {
           XElement tldDataElement = null;
           try
@@ -75,7 +69,12 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
       return renewalMonthsBeforeExpiration;
     }
-    #endregion
+
+    private static ExtendedTLDDataResponseData GetExtendedTLDData(string tld)
+    {
+      var request = new ExtendedTLDDataRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, tld);
+      return (ExtendedTLDDataResponseData)DataCache.DataCache.GetProcessRequest(request, StaticDotTypeEngineRequests.ExtendedTLDData);
+    }
 
   }
 }

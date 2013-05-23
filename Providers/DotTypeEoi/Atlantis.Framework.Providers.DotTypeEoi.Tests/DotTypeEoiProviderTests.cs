@@ -1,5 +1,4 @@
-﻿using System;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeEoi.Interface;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,6 +30,16 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, dotTypeEoiResponse.Categories.Count > 0);
       Assert.AreEqual(true, dotTypeEoiResponse.Categories[0].Gtlds.Count > 0);
+    }
+
+    [TestMethod]
+    public void ShopperWatchListEmpty()
+    {
+      IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
+      IShopperWatchListResponse shopperWatchListResponse;
+      bool isSuccess = provider.GetShopperWatchList(out shopperWatchListResponse);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, shopperWatchListResponse.Gtlds.Count == 0);
     }
   }
 }

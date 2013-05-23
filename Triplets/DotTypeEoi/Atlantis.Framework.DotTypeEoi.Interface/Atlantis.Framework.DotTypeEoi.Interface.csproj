@@ -44,10 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ShopperWatchListJsonResponse.cs" />
+    <Compile Include="ShopperWatchListResponse.cs" />
+    <Compile Include="ShopperWatchListJsonResponseData.cs" />
+    <Compile Include="ShopperWatchListJsonRequestData.cs" />
     <Compile Include="DotTypeEoiGtlds.cs" />
     <Compile Include="DotTypeSubCategories.cs" />
     <Compile Include="DotTypeEoiCategories.cs" />
-    <Compile Include="DotTypeJsonResponse.cs" />
+    <Compile Include="DotTypeEoiJsonResponse.cs" />
     <Compile Include="DotTypeEoiSubCategory.cs" />
     <Compile Include="DotTypeEoiGtld.cs" />
     <Compile Include="DotTypeEoiCategory.cs" />

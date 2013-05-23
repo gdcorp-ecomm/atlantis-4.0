@@ -6,11 +6,11 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeEoi.Impl
 {
-  public class GeneralEoiJsonRequest : IRequest
+  public class ShopperWatchListJsonRequest : IRequest
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      GeneralEoiJsonResponseData responseData;
+      ShopperWatchListResponseData responseData;
       string responseXml = string.Empty;
 
       try
@@ -19,29 +19,29 @@ namespace Atlantis.Framework.DotTypeEoi.Impl
         {
           regEoiWebSvc.Url = ((WsConfigElement)config).WSURL;
           regEoiWebSvc.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
-          responseXml = regEoiWebSvc.GetGeneralEOIJSON();
+          responseXml = regEoiWebSvc.GetShopperWatchListJSON(requestData.ShopperID);
 
-          var getGeneralEoiJsonElement = XElement.Parse(responseXml);
-          var responseElement = getGeneralEoiJsonElement.Element("response");
+          var shopperWatchListJsonElement = XElement.Parse(responseXml);
+          var responseElement = shopperWatchListJsonElement.Element("response");
           var resultAttribute = responseElement.Attribute("result").Value;
           if (string.IsNullOrEmpty(resultAttribute) || !resultAttribute.Equals("success"))
           {
             var exAtlantis = new AtlantisException(requestData,
-                                                   "DotTypeGetGeneralEoiJsonRequest",
+                                                   "ShopperWatchListJsonRequest",
                                                    responseXml,
                                                    requestData.ToXML());
 
-            responseData = new GeneralEoiJsonResponseData(responseXml, exAtlantis);
+            responseData = new ShopperWatchListResponseData(responseXml, exAtlantis);
           }
           else
           {
-            responseData = new GeneralEoiJsonResponseData(responseElement.Value);
+            responseData = new ShopperWatchListResponseData(responseElement.Value);
           }
         }
       }
       catch (Exception ex)
       {
-        responseData = new GeneralEoiJsonResponseData(responseXml, requestData, ex);
+        responseData = new ShopperWatchListResponseData(responseXml, requestData, ex);
       }
 
       return responseData;

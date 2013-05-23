@@ -2,15 +2,15 @@
 
 namespace Atlantis.Framework.DotTypeEoi.Interface
 {
-  public class GeneralEoiJsonRequestData : RequestData
+  public class ShopperWatchListJsonRequestData : RequestData
   {
-    public GeneralEoiJsonRequestData()
+    public ShopperWatchListJsonRequestData()
     {
     }
 
     public override string GetCacheMD5()
     {
-      return "GeneralEoiJsonRequest";
+      return "ShopperWatchListJsonRequestData";
     }
   }
 }

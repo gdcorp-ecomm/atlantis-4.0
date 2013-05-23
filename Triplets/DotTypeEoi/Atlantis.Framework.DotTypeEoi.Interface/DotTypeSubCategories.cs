@@ -6,6 +6,6 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
   public class DotTypeEoiSubCategories
   {
     [DataMember(Name = "subCategory")]
-    public DotTypeEoiSubCategory SubCategory { get; set; }
+    public DotTypeEoiSubCategory SubCategoryObject { get; set; }
   }
 }

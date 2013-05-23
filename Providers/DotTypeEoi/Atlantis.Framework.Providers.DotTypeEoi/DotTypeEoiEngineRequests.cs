@@ -4,9 +4,11 @@
   {
     static DotTypeEoiEngineRequests()
     {
-      DotTypeGetGeneralEoiJsonRequest = 698;
+      GeneralEoiJsonRequest = 698;
+      ShopperWatchListJsonRequest = 703;
     }
 
-    public static int DotTypeGetGeneralEoiJsonRequest { get; set; }
+    public static int GeneralEoiJsonRequest { get; set; }
+    public static int ShopperWatchListJsonRequest { get; set; }
   }
 }

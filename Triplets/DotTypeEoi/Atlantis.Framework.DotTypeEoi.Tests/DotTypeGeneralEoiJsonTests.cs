@@ -15,6 +15,8 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
       var response = (GeneralEoiJsonResponseData)Engine.Engine.ProcessRequest(request, 698);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, response.DotTypeEoiResponse != null);
+      Assert.AreEqual(true, response.DotTypeEoiResponse.Categories.Count > 0);
+      Assert.AreEqual(true, response.DotTypeEoiResponse.Categories[0].Gtlds.Count > 0);
     }
   }
 }

@@ -81,6 +81,10 @@
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Triplets\DotTypeEoi\Atlantis.Framework.DotTypeEoi.Impl\Atlantis.Framework.DotTypeEoi.Impl.csproj">
+      <Project>{59ff3c50-a3df-4cf2-9578-5c65b43c59b6}</Project>
+      <Name>Atlantis.Framework.DotTypeEoi.Impl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.DotTypeEoi.Interface\Atlantis.Framework.Providers.DotTypeEoi.Interface.csproj">
       <Project>{fea94b7e-7e36-4fa8-9369-cbd41ad53f5b}</Project>
       <Name>Atlantis.Framework.Providers.DotTypeEoi.Interface</Name>
@@ -93,6 +97,7 @@
   <ItemGroup>
     <None Include="atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <Choose>

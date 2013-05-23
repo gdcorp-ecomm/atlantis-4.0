@@ -19,6 +19,6 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     public int ShowSelectAll { get; set; }
 
     [DataMember(Name = "gTlds")]
-    public DotTypeEoiGtlds Gtlds { get; set; }
+    public DotTypeEoiGtlds GtldsObject { get; set; }
   }
 }

@@ -3,5 +3,6 @@
   public interface IDotTypeEoiProvider
   {
     bool GetGeneralEoi(out IDotTypeEoiResponse dotTypeEoi);
+    bool GetShopperWatchList(out IShopperWatchListResponse shopperWatchListResponse);
   }
 }

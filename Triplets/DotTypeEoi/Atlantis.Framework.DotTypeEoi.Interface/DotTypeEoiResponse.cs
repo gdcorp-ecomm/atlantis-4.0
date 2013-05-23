@@ -11,12 +11,26 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     public string DisplayTime { get; set; }
 
     [DataMember(Name = "categories")]
-    public DotTypeEoiCategories CategoriesWrapper { get; set; }
+    public DotTypeEoiCategories CategoriesObject { get; set; }
 
+    [IgnoreDataMember()]
     public IList<IDotTypeEoiCategory> Categories
     {
-      get { return CategoriesWrapper.CategoryList; }
-      set{}
+      get
+      {
+        IList<IDotTypeEoiCategory> categories;
+        if (CategoriesObject != null)
+        {
+          categories = (IList<IDotTypeEoiCategory>)CategoriesObject.CategoryList;
+        }
+        else
+        {
+          categories = new List<IDotTypeEoiCategory>();
+        }
+
+        return categories;
+      }
+      set { }
     }
   }
 }

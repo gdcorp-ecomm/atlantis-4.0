@@ -17,12 +17,28 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     public int DisplayOrder { get; set; }
 
     [DataMember(Name = "subCategories")]
-    public DotTypeEoiSubCategories SubCategories { get; set; }
+    public DotTypeEoiSubCategories SubCategoriesObject { get; set; }
 
+    [IgnoreDataMember()]
     public IList<IDotTypeEoiGtld> Gtlds
     {
-      get { return SubCategories.SubCategory.Gtlds.GtldList; }
-      set{}
+      get
+      {
+        IList<IDotTypeEoiGtld> gtlds;
+        if (SubCategoriesObject != null &&
+            SubCategoriesObject.SubCategoryObject != null &&
+            SubCategoriesObject.SubCategoryObject.GtldsObject != null)
+        {
+          gtlds = (IList<IDotTypeEoiGtld>)SubCategoriesObject.SubCategoryObject.GtldsObject.GtldList;
+        }
+        else
+        {
+          gtlds = new List<IDotTypeEoiGtld>();
+        }
+
+        return gtlds;
+      }
+      set { }
     }
   }
 }

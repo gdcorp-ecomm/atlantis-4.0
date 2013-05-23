@@ -26,6 +26,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     {
       try
       {
+        _responseXml = responseXml;
         var responseElement = responseXml.Descendants("response").FirstOrDefault();
         if (responseElement != null)
         {

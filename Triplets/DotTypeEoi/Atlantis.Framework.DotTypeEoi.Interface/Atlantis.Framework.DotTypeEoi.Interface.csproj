@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="AddToShopperWatchListRequestData.cs" />
     <Compile Include="AddToShopperWatchListResponseData.cs" />
+    <Compile Include="RemoveFromShopperWatchListRequestData.cs" />
+    <Compile Include="RemoveFromShopperWatchListResponseData.cs" />
     <Compile Include="ShopperWatchListJsonResponse.cs" />
     <Compile Include="ShopperWatchListResponse.cs" />
     <Compile Include="ShopperWatchListJsonResponseData.cs" />

@@ -17,6 +17,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
       Assert.AreEqual(true, response.DotTypeEoiResponse != null);
       Assert.AreEqual(true, response.DotTypeEoiResponse.Categories.Count > 0);
       Assert.AreEqual(true, response.DotTypeEoiResponse.Categories[0].Gtlds.Count > 0);
+      Assert.AreEqual(true, response.DotTypeEoiResponse.Categories[0].Gtlds[0].Id > -1);
     }
   }
 }

@@ -2,7 +2,7 @@
 {
   public interface IDotTypeEoiGtld
   {
-    int SubCategoryId { get; set; }
+    int Id { get; set; }
     string Name { get; set; }
     int IsIdn { get; set; }
     string IdnScript { get; set; }

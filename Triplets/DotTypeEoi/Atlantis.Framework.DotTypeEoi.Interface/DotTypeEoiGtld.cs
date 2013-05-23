@@ -7,7 +7,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
   public class DotTypeEoiGtld : IDotTypeEoiGtld
   {
     [DataMember(Name = "@id")]
-    public int SubCategoryId { get; set; }
+    public int Id { get; set; }
 
     [DataMember(Name = "@name")]
     public string Name { get; set; }
@@ -29,5 +29,8 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
 
     [DataMember(Name = "@displayOrder")]
     public int DisplayOrder { get; set; }
+
+    [DataMember(Name = "@comments")]
+    public string Comments { get; set; }
   }
 }

@@ -18,5 +18,17 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
       Assert.AreEqual(true, response.ShopperWatchListResponse != null);
       Assert.AreEqual(true, response.ShopperWatchListResponse.Gtlds.Count == 0);
     }
+
+    [TestMethod]
+    public void ShopperWatchListJsonSuccess()
+    {
+      var request = new ShopperWatchListJsonRequestData();
+      request.ShopperID = "1";
+      var response = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, 703);
+      Assert.AreEqual(true, response.IsSuccess);
+      Assert.AreEqual(true, response.ShopperWatchListResponse != null);
+      Assert.AreEqual(true, response.ShopperWatchListResponse.Gtlds.Count > 0);
+      Assert.AreEqual(true, response.ShopperWatchListResponse.Gtlds[0].Id > -1);
+    }
   }
 }

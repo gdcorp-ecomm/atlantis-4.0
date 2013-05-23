@@ -46,10 +46,5 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
 
       return result.ToString(SaveOptions.DisableFormatting);
     }
-
-    public override string GetCacheMD5()
-    {
-      throw new Exception("AddToShopperWatchList is not a cacheable request.");
-    }
   }
 }

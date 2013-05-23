@@ -28,7 +28,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
       }
       catch (Exception)
       {
-        Assert.AreEqual(1, 1);        
+        Assert.AreEqual(1, 1);
       }
     }
 

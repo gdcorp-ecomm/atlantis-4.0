@@ -54,15 +54,15 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool GetShopperWatchList(out IShopperWatchListResponse shopperWatchListResponse)
+    public bool GetShopperWatchList(string shopperId, out IShopperWatchListResponse shopperWatchListResponse)
     {
       var success = false;
       shopperWatchListResponse = null;
 
       try
       {
-        var request = new ShopperWatchListJsonRequestData();
-        var response = (ShopperWatchListResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.ShopperWatchListJsonRequest);
+        var request = new ShopperWatchListJsonRequestData(shopperId);
+        var response = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.ShopperWatchListJsonRequest);
         if (response.IsSuccess)
         {
           shopperWatchListResponse = response.ShopperWatchListResponse;
@@ -86,7 +86,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       try
       {
         var request = new AddToShopperWatchListRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, string.Empty, 0, displayTime, gTldsXml);
-        var response = (AddToShopperWatchListResponseData) Atlantis.Framework.Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
+        var response = (AddToShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
         if (response.IsSuccess)
         {
           success = true;
@@ -110,7 +110,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       try
       {
         var request = new RemoveFromShopperWatchListRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, string.Empty, 0, gTldsXml);
-        var response = (RemoveFromShopperWatchListResponseData)Atlantis.Framework.Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.RemoveFromShopperWatchListRequest);
+        var response = (RemoveFromShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.RemoveFromShopperWatchListRequest);
         if (response.IsSuccess)
         {
           success = true;

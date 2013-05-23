@@ -37,9 +37,20 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IShopperWatchListResponse shopperWatchListResponse;
-      bool isSuccess = provider.GetShopperWatchList(out shopperWatchListResponse);
+      bool isSuccess = provider.GetShopperWatchList("878145", out shopperWatchListResponse);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, shopperWatchListResponse.Gtlds.Count == 0);
+    }
+
+    [TestMethod]
+    public void ShopperWatchListSuccess()
+    {
+      IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
+      IShopperWatchListResponse shopperWatchListResponse;
+      bool isSuccess = provider.GetShopperWatchList("1", out shopperWatchListResponse);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, shopperWatchListResponse.Gtlds.Count > 0);
+      Assert.AreEqual(true, shopperWatchListResponse.Gtlds[0].Id > -1);
     }
 
     [TestMethod]

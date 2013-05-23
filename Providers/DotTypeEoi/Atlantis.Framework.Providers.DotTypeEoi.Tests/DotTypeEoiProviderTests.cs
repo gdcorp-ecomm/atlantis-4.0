@@ -41,5 +41,27 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, shopperWatchListResponse.Gtlds.Count == 0);
     }
+
+    [TestMethod]
+    public void DotTypeAddToShopperWatchListSuccess()
+    {
+      IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
+      string responseMessage;
+
+      const string gTlds = @"<gTlds><gTld id='18' gTldSubCategoryId='234' /></gTlds>";
+      bool isSuccess = provider.AddToShopperWatchList("2013-05-23 10:29:55", gTlds, out responseMessage);
+      Assert.AreEqual(true, isSuccess);
+    }
+
+    [TestMethod]
+    public void DotTypeRemvoeFromShopperWatchListSuccess()
+    {
+      IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
+      string responseMessage;
+
+      const string gTlds = @"<gTlds><gTld id='18' gTldSubCategoryId='234' /></gTlds>";
+      bool isSuccess = provider.RemoveFromShopperWatchList(gTlds, out responseMessage);
+      Assert.AreEqual(true, isSuccess);
+    }
   }
 }

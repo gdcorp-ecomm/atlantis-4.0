@@ -54,14 +54,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool GetShopperWatchList(string shopperId, out IShopperWatchListResponse shopperWatchListResponse)
+    public bool GetShopperWatchList(out IShopperWatchListResponse shopperWatchListResponse)
     {
       var success = false;
       shopperWatchListResponse = null;
 
       try
       {
-        var request = new ShopperWatchListJsonRequestData(shopperId);
+        var request = new ShopperWatchListJsonRequestData(ShopperContext.ShopperId);
         var response = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.ShopperWatchListJsonRequest);
         if (response.IsSuccess)
         {

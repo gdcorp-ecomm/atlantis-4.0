@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddToShopperWatchListRequestData.cs" />
+    <Compile Include="AddToShopperWatchListResponseData.cs" />
     <Compile Include="ShopperWatchListJsonResponse.cs" />
     <Compile Include="ShopperWatchListResponse.cs" />
     <Compile Include="ShopperWatchListJsonResponseData.cs" />

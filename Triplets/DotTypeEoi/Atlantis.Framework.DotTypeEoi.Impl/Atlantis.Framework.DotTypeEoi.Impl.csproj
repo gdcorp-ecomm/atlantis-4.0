@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddToShopperWatchListRequest.cs" />
+    <Compile Include="RemoveFromShopperWatchListRequest.cs" />
     <Compile Include="ShopperWatchListJsonRequest.cs" />
     <Compile Include="GeneralEoiJsonRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

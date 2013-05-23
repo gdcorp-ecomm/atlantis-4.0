@@ -13,7 +13,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     public void AddToShopperWatchListGoodRequest()
     {
       var gTlds = @"<gTlds><gTld id='18' gTldSubCategoryId='234' /></gTlds>";
-      var request = new AddToShopperWatchListRequestData("861126", string.Empty, string.Empty, string.Empty, 0, "2013-05-23 10:29:55", gTlds);
+      var request = new AddToShopperWatchListRequestData("861126", "2013-05-23 10:29:55", gTlds);
       var response = (AddToShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, 704);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ResponseMessage));
@@ -24,7 +24,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     {
       try
       {
-        var request = new AddToShopperWatchListRequestData("861126", string.Empty, string.Empty, string.Empty, 0, string.Empty, string.Empty);
+        var request = new AddToShopperWatchListRequestData("861126", string.Empty, string.Empty);
       }
       catch (Exception)
       {
@@ -36,7 +36,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     public void AddToShopperWatchListRequestToXml()
     {
       const string gTlds = @"<gTlds><gTld id='18' gTldSubCategoryId='234' /></gTlds>";
-      var request = new AddToShopperWatchListRequestData("861126", string.Empty, string.Empty, string.Empty, 0, "2013-05-23 10:29:55", gTlds);
+      var request = new AddToShopperWatchListRequestData("861126", "2013-05-23 10:29:55", gTlds);
       Assert.AreEqual(true, !string.IsNullOrEmpty(request.ToXML()));
     }
 
@@ -44,7 +44,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     public void AddToShopperWatchListResponseToXml()
     {
       const string gTlds = @"<gTlds><gTld id='18' gTldSubCategoryId='234' /></gTlds>";
-      var request = new AddToShopperWatchListRequestData("861126", string.Empty, string.Empty, string.Empty, 0, "2013-05-23 10:29:55", gTlds);
+      var request = new AddToShopperWatchListRequestData("861126", "2013-05-23 10:29:55", gTlds);
       var response = (AddToShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, 704);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));

@@ -85,8 +85,8 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
       try
       {
-        var request = new AddToShopperWatchListRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, string.Empty, 0, displayTime, gTldsXml);
-        var response = (AddToShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
+        var request = new AddToShopperWatchListRequestData(ShopperContext.ShopperId, displayTime, gTldsXml);
+        var response = (AddToShopperWatchListResponseData) Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
         if (response.IsSuccess)
         {
           success = true;
@@ -109,7 +109,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
       try
       {
-        var request = new RemoveFromShopperWatchListRequestData(ShopperContext.ShopperId, string.Empty, string.Empty, string.Empty, 0, gTldsXml);
+        var request = new RemoveFromShopperWatchListRequestData(ShopperContext.ShopperId, gTldsXml);
         var response = (RemoveFromShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.RemoveFromShopperWatchListRequest);
         if (response.IsSuccess)
         {

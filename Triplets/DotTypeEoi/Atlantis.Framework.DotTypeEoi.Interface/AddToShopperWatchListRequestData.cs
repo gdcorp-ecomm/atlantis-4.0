@@ -6,8 +6,6 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
 {
   public class AddToShopperWatchListRequestData : RequestData
   {
-    private readonly string _shopperId;
-
     private readonly string _gTldsXml;
     public string GTldsXml
     {
@@ -20,15 +18,14 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
       get { return _displayTime; }
     }
 
-    public AddToShopperWatchListRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string displayTime, string gTldsXml)
-      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    public AddToShopperWatchListRequestData(string shopperId, string displayTime, string gTldsXml)
     {
       if (string.IsNullOrEmpty(displayTime) || string.IsNullOrEmpty(gTldsXml))
       {
         throw new ArgumentException("DisplayTime and gTldsXml cannot be null or empty.");
       }
 
-      _shopperId = shopperId;
+      ShopperID = shopperId;
       _displayTime = displayTime;
       _gTldsXml = gTldsXml;
       
@@ -38,7 +35,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     public override string ToXML()
     {
       var result = new XElement("request");
-      result.Add(new XAttribute("shopperId", _shopperId));
+      result.Add(new XAttribute("shopperId", ShopperID));
       result.Add(new XAttribute("displayTime", _displayTime));
 
       var gTlds = new XElement("gTldsXml") {Value = _gTldsXml};

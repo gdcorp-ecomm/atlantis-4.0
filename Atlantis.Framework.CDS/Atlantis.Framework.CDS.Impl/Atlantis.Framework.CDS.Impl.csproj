@@ -36,6 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.0.4.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Atlantis.Framework.CDS.References\Json.net\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +52,7 @@
     <Compile Include="CDSRequest.cs" />
     <Compile Include="ContentVersionRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderTemplateContentRequest.cs" />
     <Compile Include="RoutingRulesRequest.cs" />
     <Compile Include="UrlWhitelistRequest.cs" />
   </ItemGroup>
@@ -63,6 +68,14 @@
     <ProjectReference Include="..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
       <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
       <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Render\RenderTemplate\Atlantis.Framework.Render.Template.Interface\Atlantis.Framework.Render.Template.Interface.csproj">
+      <Project>{11a49d77-67d1-4145-9d26-668f6cac6a0d}</Project>
+      <Name>Atlantis.Framework.Render.Template.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Render\RenderTemplate\Atlantis.Framework.Render.Template\Atlantis.Framework.Render.Template.csproj">
+      <Project>{90f026c3-01cc-497a-ba3c-9c6922d60809}</Project>
+      <Name>Atlantis.Framework.Render.Template</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.CDS.Interface\Atlantis.Framework.CDS.Interface.csproj">
       <Project>{43ECC9F8-C897-4AE0-8C53-22B2691D6995}</Project>

@@ -1,7 +1,6 @@
 ﻿using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.Interface;
 using System;
-using System.Net;
 
 namespace Atlantis.Framework.CDS.Impl
 {
@@ -32,8 +31,8 @@ namespace Atlantis.Framework.CDS.Impl
       catch (Exception ex)
       {
         result = new ContentVersionResponseData(cdsRequestData, ex);
-        throw;
       }
+
       return result;
     }
   }

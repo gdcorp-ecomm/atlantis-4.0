@@ -2,7 +2,6 @@
 using Atlantis.Framework.Render.Pipeline.Interface;
 using Newtonsoft.Json;
 using System;
-using System.Net;
 
 namespace Atlantis.Framework.CDS.Interface
 {
@@ -36,7 +35,7 @@ namespace Atlantis.Framework.CDS.Interface
 
     #region IRenderContent Members
 
-    public string Content { get { return (_contentVersion != null) ? _contentVersion.Content : null; } }
+    public string Content { get { return (_contentVersion != null) ? _contentVersion.Content : string.Empty; } }
 
     #endregion
   }

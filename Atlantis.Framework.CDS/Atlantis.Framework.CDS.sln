@@ -111,9 +111,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.MarkupParser", "..\Render\MarkupParser\Atlantis.Framework.Render.MarkupParser\Atlantis.Framework.Render.MarkupParser.csproj", "{772AAC0D-761E-4906-B46F-100E1AF3F5CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Template", "..\Render\RenderTemplate\Atlantis.Framework.Render.Template\Atlantis.Framework.Render.Template.csproj", "{90F026C3-01CC-497A-BA3C-9C6922D60809}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Template.Interface", "..\Render\RenderTemplate\Atlantis.Framework.Render.Template.Interface\Atlantis.Framework.Render.Template.Interface.csproj", "{11A49D77-67D1-4145-9D26-668F6CAC6A0D}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 52
+		SccNumberOfProjects = 54
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -296,6 +300,14 @@ Global
 		SccProjectTopLevelParentUniqueName51 = Atlantis.Framework.CDS.sln
 		SccProjectName51 = ../Render/MarkupParser/Atlantis.Framework.Render.MarkupParser
 		SccLocalPath51 = ..\\Render\\MarkupParser\\Atlantis.Framework.Render.MarkupParser
+		SccProjectUniqueName52 = ..\\Render\\RenderTemplate\\Atlantis.Framework.Render.Template\\Atlantis.Framework.Render.Template.csproj
+		SccProjectTopLevelParentUniqueName52 = Atlantis.Framework.CDS.sln
+		SccProjectName52 = ../Render/RenderTemplate/Atlantis.Framework.Render.Template
+		SccLocalPath52 = ..\\Render\\RenderTemplate\\Atlantis.Framework.Render.Template
+		SccProjectUniqueName53 = ..\\Render\\RenderTemplate\\Atlantis.Framework.Render.Template.Interface\\Atlantis.Framework.Render.Template.Interface.csproj
+		SccProjectTopLevelParentUniqueName53 = Atlantis.Framework.CDS.sln
+		SccProjectName53 = ../Render/RenderTemplate/Atlantis.Framework.Render.Template.Interface
+		SccLocalPath53 = ..\\Render\\RenderTemplate\\Atlantis.Framework.Render.Template.Interface
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.CDS.vsmdi
@@ -819,6 +831,26 @@ Global
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Release|x86.ActiveCfg = Release|Any CPU
+		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Release|x86.ActiveCfg = Release|Any CPU
+		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -850,5 +882,7 @@ Global
 		{9F0B7F62-5A62-4823-8697-A18FA91B2A8D} = {FD8841D6-E7C3-4684-AD47-4FDFD7F556B5}
 		{E35A1790-4605-4ADB-813E-DCD5485F58BB} = {FD8841D6-E7C3-4684-AD47-4FDFD7F556B5}
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA} = {FD8841D6-E7C3-4684-AD47-4FDFD7F556B5}
+		{90F026C3-01CC-497A-BA3C-9C6922D60809} = {FD8841D6-E7C3-4684-AD47-4FDFD7F556B5}
+		{11A49D77-67D1-4145-9D26-668F6CAC6A0D} = {FD8841D6-E7C3-4684-AD47-4FDFD7F556B5}
 	EndGlobalSection
 EndGlobal

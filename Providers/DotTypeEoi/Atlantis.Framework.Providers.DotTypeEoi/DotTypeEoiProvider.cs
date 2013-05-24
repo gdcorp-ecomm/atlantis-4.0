@@ -7,27 +7,11 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 {
   public class DotTypeEoiProvider : ProviderBase, IDotTypeEoiProvider
   {
-    private readonly IProviderContainer _container;
-
-    private ISiteContext SiteContext
-    {
-      get
-      {
-        return _container.Resolve<ISiteContext>();
-      }
-    }
-
-    private IShopperContext ShopperContext
-    {
-      get
-      {
-        return _container.Resolve<IShopperContext>();
-      }
-    }
+    private readonly Lazy<IShopperContext> _shopperContext;
 
     public DotTypeEoiProvider(IProviderContainer container) : base(container)
     {
-      _container = container;
+      _shopperContext = new Lazy<IShopperContext>(() => { return Container.Resolve<IShopperContext>(); });
     }
 
     public bool GetGeneralEoi(out IDotTypeEoiResponse dotTypeEoiResponse)
@@ -47,7 +31,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       }
       catch (Exception ex)
       {
-        var exception = new AtlantisException("DotTypeEoiProvider.GetGeneralEoi", "0", ex.Message + ex.StackTrace, string.Empty, SiteContext, ShopperContext);
+        var exception = new AtlantisException("DotTypeEoiProvider.GetGeneralEoi", "0", ex.Message + ex.StackTrace, string.Empty, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
 
@@ -61,7 +45,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
       try
       {
-        var request = new ShopperWatchListJsonRequestData(ShopperContext.ShopperId);
+        var request = new ShopperWatchListJsonRequestData(_shopperContext.Value.ShopperId);
         var response = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.ShopperWatchListJsonRequest);
         if (response.IsSuccess)
         {
@@ -71,7 +55,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       }
       catch (Exception ex)
       {
-        var exception = new AtlantisException("DotTypeEoiProvider.GetShopperWatchList", "0", ex.Message + ex.StackTrace, string.Empty, SiteContext, ShopperContext);
+        var exception = new AtlantisException("DotTypeEoiProvider.GetShopperWatchList", "0", ex.Message + ex.StackTrace, string.Empty, null, _shopperContext.Value);
         Engine.Engine.LogAtlantisException(exception);
       }
 
@@ -85,7 +69,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
       try
       {
-        var request = new AddToShopperWatchListRequestData(ShopperContext.ShopperId, displayTime, gTldsXml);
+        var request = new AddToShopperWatchListRequestData(_shopperContext.Value.ShopperId, displayTime, gTldsXml);
         var response = (AddToShopperWatchListResponseData) Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
         if (response.IsSuccess)
         {
@@ -95,7 +79,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       }
       catch (Exception ex)
       {
-        var exception = new AtlantisException("DotTypeEoiProvider.AddToShopperWatchList", "0", ex.Message + ex.StackTrace, string.Empty, SiteContext, ShopperContext);
+        var exception = new AtlantisException("DotTypeEoiProvider.AddToShopperWatchList", "0", ex.Message + ex.StackTrace, string.Empty, null, _shopperContext.Value);
         Engine.Engine.LogAtlantisException(exception);
       }
 
@@ -109,7 +93,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
       try
       {
-        var request = new RemoveFromShopperWatchListRequestData(ShopperContext.ShopperId, gTldsXml);
+        var request = new RemoveFromShopperWatchListRequestData(_shopperContext.Value.ShopperId, gTldsXml);
         var response = (RemoveFromShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.RemoveFromShopperWatchListRequest);
         if (response.IsSuccess)
         {
@@ -119,7 +103,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       }
       catch (Exception ex)
       {
-        var exception = new AtlantisException("DotTypeEoiProvider.RemoveFromShopperWatchList", "0", ex.Message + ex.StackTrace, string.Empty, SiteContext, ShopperContext);
+        var exception = new AtlantisException("DotTypeEoiProvider.RemoveFromShopperWatchList", "0", ex.Message + ex.StackTrace, string.Empty, null, _shopperContext.Value);
         Engine.Engine.LogAtlantisException(exception);
       }
 

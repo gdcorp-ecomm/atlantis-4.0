@@ -24,6 +24,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     {
       _container.RegisterProvider<ISiteContext, MockSiteContext>();
       _container.RegisterProvider<IManagerContext, MockNoManagerContext>();
+      _container.RegisterProvider<IShopperContext, MockShopperContext>();
       _container.RegisterProvider<IDotTypeEoiProvider, DotTypeEoiProvider>();
 
       return _container.Resolve<IDotTypeEoiProvider>();

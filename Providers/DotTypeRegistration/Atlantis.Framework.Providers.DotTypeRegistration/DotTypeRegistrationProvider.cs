@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
 using Atlantis.Framework.DotTypeClaims.Interface;
 using Atlantis.Framework.DotTypeValidation.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
@@ -11,27 +10,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 {
   public class DotTypeRegistrationProvider : ProviderBase, IDotTypeRegistrationProvider
   {
-    private readonly IProviderContainer _container;
-
-    private ISiteContext SiteContext
-    {
-      get
-      {
-        return _container.Resolve<ISiteContext>();
-      }
-    }
-
-    private IShopperContext ShopperContext
-    {
-      get
-      {
-        return _container.Resolve<IShopperContext>();
-      }
-    }
-
     public DotTypeRegistrationProvider(IProviderContainer container) : base(container)
     {
-      _container = container;
     }
 
     public bool GetDotTypeFormsSchema(int tldId, string placement, out IDotTypeFormsSchema dotTypeFormsSchema)
@@ -52,7 +32,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       catch (Exception ex)
       {
         var data = "tldId: " + tldId + ", placement: " + placement;
-        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeForms", "0", ex.Message + ex.StackTrace, data, SiteContext, ShopperContext);
+        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeForms", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
 
@@ -77,7 +57,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       catch (Exception ex)
       {
         var data = "tldId: " + tldId;
-        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeClaims", "0", ex.Message + ex.StackTrace, data, SiteContext, ShopperContext);
+        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeClaims", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
 
@@ -113,7 +93,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       catch (Exception ex)
       {
         var data = "clientApplcation: " + clientApplication + ", serverName: " + serverName + ", tldId: " + tldId + ", phase: " + phase + ", fields: " + fields;
-        var exception = new AtlantisException("DotTypeRegistrationProvider.ValidateDotTypeForms", "0", ex.Message + ex.StackTrace, data, SiteContext, ShopperContext);
+        var exception = new AtlantisException("DotTypeRegistrationProvider.ValidateDotTypeForms", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
 
@@ -149,7 +129,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       catch (Exception ex)
       {
         var data = "clientApplcation: " + clientApplication + ", serverName: " + serverName + ", tldId: " + tldId + ", phase: " + phase;
-        var exception = new AtlantisException("DotTypeRegistrationProvider.ValidateDotTypeClaims", "0", ex.Message + ex.StackTrace, data, SiteContext, ShopperContext);
+        var exception = new AtlantisException("DotTypeRegistrationProvider.ValidateDotTypeClaims", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
 

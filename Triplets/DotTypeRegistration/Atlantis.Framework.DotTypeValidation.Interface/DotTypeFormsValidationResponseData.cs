@@ -5,7 +5,7 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeValidation.Interface
 {
-  public class DotTypeValidationResponseData : IResponseData
+  public class DotTypeFormsValidationResponseData : IResponseData
   {
     private readonly string _responseXml;
     private readonly AtlantisException _exception;
@@ -14,23 +14,23 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
     private Dictionary<string, string> _validationErrors;
     private string _token;
 
-    public DotTypeValidationResponseData(string responseXml)
+    public DotTypeFormsValidationResponseData(string responseXml)
     {
       _responseXml = responseXml;
       _exception = null;
       BuildFromXml();
     }
 
-    public DotTypeValidationResponseData(string responseXml, AtlantisException exAtlantis)
+    public DotTypeFormsValidationResponseData(string responseXml, AtlantisException exAtlantis)
     {
       _responseXml = responseXml;
       _exception = exAtlantis;
     }
 
-    public DotTypeValidationResponseData(string responseXml, RequestData requestData, Exception ex)
+    public DotTypeFormsValidationResponseData(string responseXml, RequestData requestData, Exception ex)
     {
       _responseXml = responseXml;
-      _exception = new AtlantisException(requestData, "DotTypeValidationResponseData", ex.Message, requestData.ToXML());
+      _exception = new AtlantisException(requestData, "DotTypeFormsValidationResponseData", ex.Message, requestData.ToXML());
     }
 
     public bool IsSuccess
@@ -93,7 +93,7 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
       }
       catch (Exception ex)
       {
-        var exception = new AtlantisException("DotTypeValidationResponseData.BuildFromXml", "0", ex.Message + ex.StackTrace, _responseXml, null, null);
+        var exception = new AtlantisException("DotTypeFormsValidationResponseData.BuildFromXml", "0", ex.Message + ex.StackTrace, _responseXml, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
     }

@@ -10,15 +10,23 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
   [DeploymentItem("Atlantis.Framework.DotTypeEoi.Impl.dll")]
   public class DotTypeEoiProviderTests
   {
+    readonly MockProviderContainer _container = new MockProviderContainer();
+
+    private IShopperContext ShopperContext
+    {
+      get
+      {
+        return _container.Resolve<IShopperContext>();
+      }
+    }
+
     private IDotTypeEoiProvider NewDotTypeEoiProvider()
     {
-      var container = new MockProviderContainer();
-      container.RegisterProvider<ISiteContext, MockSiteContext>();
-      container.RegisterProvider<IManagerContext, MockNoManagerContext>();
-      container.RegisterProvider<IShopperContext, MockShopperContext>();
-      container.RegisterProvider<IDotTypeEoiProvider, DotTypeEoiProvider>();
+      _container.RegisterProvider<ISiteContext, MockSiteContext>();
+      _container.RegisterProvider<IManagerContext, MockNoManagerContext>();
+      _container.RegisterProvider<IDotTypeEoiProvider, DotTypeEoiProvider>();
 
-      return container.Resolve<IDotTypeEoiProvider>();
+      return _container.Resolve<IDotTypeEoiProvider>();
     }
 
     [TestMethod]
@@ -33,21 +41,23 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     }
 
     [TestMethod]
-    public void ShopperWatchListEmpty()
+    public void DotTypeShopperWatchListEmpty()
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IShopperWatchListResponse shopperWatchListResponse;
-      bool isSuccess = provider.GetShopperWatchList("878145", out shopperWatchListResponse);
+      ShopperContext.SetLoggedInShopper("878145");
+      bool isSuccess = provider.GetShopperWatchList(out shopperWatchListResponse);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, shopperWatchListResponse.Gtlds.Count == 0);
     }
 
     [TestMethod]
-    public void ShopperWatchListSuccess()
+    public void DotTypeShopperWatchListSuccess()
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IShopperWatchListResponse shopperWatchListResponse;
-      bool isSuccess = provider.GetShopperWatchList("1", out shopperWatchListResponse);
+      ShopperContext.SetLoggedInShopper("1");
+      bool isSuccess = provider.GetShopperWatchList(out shopperWatchListResponse);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, shopperWatchListResponse.Gtlds.Count > 0);
       Assert.AreEqual(true, shopperWatchListResponse.Gtlds[0].Id > -1);

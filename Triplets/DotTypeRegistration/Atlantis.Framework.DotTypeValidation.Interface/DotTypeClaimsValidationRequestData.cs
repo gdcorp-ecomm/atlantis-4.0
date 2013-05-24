@@ -6,21 +6,19 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeValidation.Interface
 {
-  public class DotTypeValidationRequestData : RequestData
+  public class DotTypeClaimsValidationRequestData : RequestData
   {
     public string ClientApplication { get; set; }
     public string ServerName { get; set; }
     public int TldId { get; set; }
     public string Phase { get; set; }
-    public Dictionary<string, string> Fields = new Dictionary<string,string>();
 
-    public DotTypeValidationRequestData(string clientApplication, string serverName, int tldId, string phase, Dictionary<string, string> fields)
+    public DotTypeClaimsValidationRequestData(string clientApplication, string serverName, int tldId, string phase/* Claims notice object*/)
     {
       ClientApplication = clientApplication;
       ServerName = serverName;
       TldId = tldId;
       Phase = phase;
-      Fields = fields;
     }
 
     public override string ToXML()
@@ -31,13 +29,7 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
       rootElement.Add(new XAttribute("tldid", TldId));
       rootElement.Add(new XAttribute("phase", Phase));
 
-      foreach (var field in Fields)
-      {
-        var fieldElement = new XElement("key");
-        fieldElement.Add(new XAttribute("name", field.Key));
-        fieldElement.Add(new XAttribute("value", field.Value));
-        rootElement.Add(fieldElement);
-      }
+      //Convert Claims Notice object to xml
 
       return rootElement.ToString();
     }

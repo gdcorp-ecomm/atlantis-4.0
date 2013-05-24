@@ -94,8 +94,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 
       try
       {
-        var request = new DotTypeValidationRequestData(clientApplication, serverName, tldId, phase, fields);
-        var response = (DotTypeValidationResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeValidationRequest);
+        var request = new DotTypeFormsValidationRequestData(clientApplication, serverName, tldId, phase, fields);
+        var response = (DotTypeFormsValidationResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeValidationRequest);
         if (response.IsSuccess)
         {
           if (response.HasErrors)
@@ -113,7 +113,43 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       catch (Exception ex)
       {
         var data = "clientApplcation: " + clientApplication + ", serverName: " + serverName + ", tldId: " + tldId + ", phase: " + phase + ", fields: " + fields;
-        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeForms", "0", ex.Message + ex.StackTrace, data, SiteContext, ShopperContext);
+        var exception = new AtlantisException("DotTypeRegistrationProvider.ValidateDotTypeForms", "0", ex.Message + ex.StackTrace, data, SiteContext, ShopperContext);
+        Engine.Engine.LogAtlantisException(exception);
+      }
+
+      return success;
+    }
+
+    public bool ValidateDotTypeClaims(string clientApplication, string serverName, int tldId, string phase, /*Claims notice object*/
+      out bool hasErrors, out Dictionary<string, string> validationErrors, out string token)
+    {
+      var success = false;
+      hasErrors = false;
+      token = string.Empty;
+      validationErrors = null;
+
+      try
+      {
+        var request = new DotTypeClaimsValidationRequestData(clientApplication, serverName, tldId, phase);
+        var response = (DotTypeClaimsValidationResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeValidationRequest);
+        if (response.IsSuccess)
+        {
+          if (response.HasErrors)
+          {
+            hasErrors = true;
+            validationErrors = response.ValidationErrors;
+          }
+          else
+          {
+            token = response.Token;
+          }
+          success = true;
+        }
+      }
+      catch (Exception ex)
+      {
+        var data = "clientApplcation: " + clientApplication + ", serverName: " + serverName + ", tldId: " + tldId + ", phase: " + phase;
+        var exception = new AtlantisException("DotTypeRegistrationProvider.ValidateDotTypeClaims", "0", ex.Message + ex.StackTrace, data, SiteContext, ShopperContext);
         Engine.Engine.LogAtlantisException(exception);
       }
 

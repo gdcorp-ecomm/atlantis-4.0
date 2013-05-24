@@ -4,16 +4,16 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeValidation.Impl
 {
-  public class DotTypeValidationRequest : IRequest
+  public class DotTypeFormsValidationRequest : IRequest
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      DotTypeValidationResponseData responseData;
+      DotTypeFormsValidationResponseData responseData;
       string responseXml = string.Empty;
 
       try
       {
-        var dotTypeValidationRequestData = (DotTypeValidationRequestData)requestData;
+        var dotTypeValidationRequestData = (DotTypeFormsValidationRequestData)requestData;
         using (var regAppTokenWebSvc = new RegAppTokenWebSvc.RegAppTokenWebSvc())
         {
           regAppTokenWebSvc.Url = ((WsConfigElement)config).WSURL;
@@ -31,13 +31,13 @@ namespace Atlantis.Framework.DotTypeValidation.Impl
           }
           else
           {*/
-          responseData = new DotTypeValidationResponseData(responseXml);
+          responseData = new DotTypeFormsValidationResponseData(responseXml);
           //}
         }
       }
       catch (Exception ex)
       {
-        responseData = new DotTypeValidationResponseData(responseXml, requestData, ex);
+        responseData = new DotTypeFormsValidationResponseData(responseXml, requestData, ex);
       }
 
       return responseData;

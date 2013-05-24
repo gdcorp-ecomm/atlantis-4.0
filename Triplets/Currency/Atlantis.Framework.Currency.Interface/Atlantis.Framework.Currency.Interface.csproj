@@ -47,6 +47,8 @@
     <Compile Include="CurrencyInfo.cs" />
     <Compile Include="CurrencyTypesRequestData.cs" />
     <Compile Include="CurrencyTypesResponseData.cs" />
+    <Compile Include="MultiCurrencyContextsRequestData.cs" />
+    <Compile Include="MultiCurrencyContextsResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XElementExtensions.cs" />
   </ItemGroup>

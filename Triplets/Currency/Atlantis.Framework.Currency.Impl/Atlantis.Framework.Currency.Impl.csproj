@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="CurrencyTypesAllRequest.cs" />
     <Compile Include="CurrencyTypesRequest.cs" />
+    <Compile Include="MultiCurrencyContextsRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

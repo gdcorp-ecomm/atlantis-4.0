@@ -1,7 +1,6 @@
 ﻿using Atlantis.Framework.DataCacheService;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Products.Interface;
-using System;
 
 namespace Atlantis.Framework.Products.Impl
 {
@@ -11,23 +10,14 @@ namespace Atlantis.Framework.Products.Impl
     {
       IResponseData result = NonUnifiedPfidResponseData.NotFound;
 
-      try
+      var nonUnifiedRequest = (NonUnifiedPfidRequestData)requestData;
+      int pfid = 0;
+      using (GdDataCacheOutOfProcess outCache = GdDataCacheOutOfProcess.CreateDisposable())
       {
-        var nonUnifiedRequest = (NonUnifiedPfidRequestData)requestData;
-        int pfid = 0;
-        using (GdDataCacheOutOfProcess outCache = GdDataCacheOutOfProcess.CreateDisposable())
-        {
-          pfid = outCache.ConvertToPFID(nonUnifiedRequest.UnifiedProductId, nonUnifiedRequest.PrivateLabelId);
-        }
-
-        result = NonUnifiedPfidResponseData.FromNonUnifiedPfid(pfid);
-      }
-      catch (Exception ex)
-      {
-        AtlantisException exception = new AtlantisException(requestData, "NonUnifiedPfidRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
+        pfid = outCache.ConvertToPFID(nonUnifiedRequest.UnifiedProductId, nonUnifiedRequest.PrivateLabelId);
       }
 
-      return result;
+      return NonUnifiedPfidResponseData.FromNonUnifiedPfid(pfid);
     }
   }
 }

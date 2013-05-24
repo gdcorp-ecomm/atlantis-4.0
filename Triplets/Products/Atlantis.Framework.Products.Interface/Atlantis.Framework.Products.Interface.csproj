@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="NonUnifiedPfidRequestData.cs" />
     <Compile Include="NonUnifiedPfidResponseData.cs" />
+    <Compile Include="ProductGroupsOfferedRequestData.cs" />
+    <Compile Include="ProductGroupsOfferedResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

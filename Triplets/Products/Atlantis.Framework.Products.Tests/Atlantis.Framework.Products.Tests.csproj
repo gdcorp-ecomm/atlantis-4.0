@@ -60,6 +60,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="NonUnifiedPfidTests.cs" />
+    <Compile Include="ProductGroupsOfferedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

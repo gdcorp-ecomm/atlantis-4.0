@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Products.Interface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml.Linq;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Products.Tests
 {
@@ -68,11 +67,11 @@ namespace Atlantis.Framework.Products.Tests
     }
 
     [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
     public void BadRequest()
     {
       var request = new BadRequestType();
       var response = (NonUnifiedPfidResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
-      Assert.IsTrue(ReferenceEquals(response, NonUnifiedPfidResponseData.NotFound));
     }
 
     private class BadRequestType : RequestData

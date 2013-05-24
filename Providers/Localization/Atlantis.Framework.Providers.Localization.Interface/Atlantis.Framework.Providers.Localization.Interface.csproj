@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILocalizationRedirectProvider.cs" />
+    <Compile Include="ILocalizationRedirectResult.cs" />
     <Compile Include="ILocalizationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

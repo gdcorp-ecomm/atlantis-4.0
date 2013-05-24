@@ -110,6 +110,7 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     #endregion
     
     public bool IsValid { get; set; }
+    
 
     private IList<string> _messages;
     public IList<string> Messages
@@ -127,6 +128,8 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     }
     
     public string InputValue { get; set; }
+
+    public object OutputValue { get; set; }
 
     public void UpdateResults()
     {

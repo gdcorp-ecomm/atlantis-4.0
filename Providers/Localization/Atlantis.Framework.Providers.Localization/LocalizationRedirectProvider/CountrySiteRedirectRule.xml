@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Last Country RULE must execute to RToSiteDefault on a result=false-->
+<RuleEngine>
+  <Rules>
+    <RuleMain id="RCountrySiteRedirect">
+      <Actions>
+        <Execute ruleId="RTryNoCookieGlobalSite" />
+      </Actions>
+    </RuleMain>
+
+    <Rule id="RTryNoCookieGlobalSite" desc="Verify where to redirect">
+      <Condition>
+        <![CDATA[FCountrySite == "WWW" AND NOT FHasCountryCookie AND FLangPref == "EN" AND FIPCountry == "US"]]>
+      </Condition>
+      <Actions>
+        <EvaluateValue factId="FCountrySite" result="true">FCountrySite</EvaluateValue>
+        <EvaluateValue factId="FLangPref" result="true">FLangPref</EvaluateValue>
+        <Execute ruleId="RTryRedirectToES" result="false" />
+      </Actions>
+    </Rule>
+
+    <Rule id="RTryRedirectToES" desc="Verify where to redirect">
+      <Condition>
+        <![CDATA[FCountrySite == "WWW" AND NOT FHasCountryCookie AND FLangPref == "ES"]]>
+      </Condition>
+      <Actions>
+        <Execute ruleId="RTryRedirectToCountryIp" result="false" />
+        <EvaluateValue factId="FCountrySite" result="true">FLangPref</EvaluateValue>
+        <EvaluateValue factId="FLangPref" result="true">FLangPref</EvaluateValue>
+      </Actions>
+    </Rule>
+
+    <Rule id="RTryRedirectToCountryIp" desc="Verify where to redirect">
+      <Condition>
+        <![CDATA[FCountrySite == "WWW" AND NOT FHasCountryCookie]]>
+      </Condition>
+      <Actions>
+        <Execute ruleId="RTryRedirectToCountryPref" result="false" />
+        <EvaluateValue factId="FCountrySite" result="true">FIPCountry</EvaluateValue>
+        <EvaluateValue factId="FLangPref" result="true">FLangPref</EvaluateValue>
+      </Actions>
+    </Rule>
+
+    <Rule id="RTryRedirectToCountryPref" desc="Verify where to redirect">
+      <Condition>
+        <![CDATA[FCountrySite == "WWW" AND FHasCountryCookie]]>
+      </Condition>
+      <Actions>
+        <Execute ruleId="RRedirectToCountrySite" result="false" />
+        <EvaluateValue factId="FCountrySite" result="true">FCountryPref</EvaluateValue>
+        <EvaluateValue factId="FLangPref" result="true">FLangPref</EvaluateValue>
+      </Actions>
+    </Rule>
+
+    <Rule id="RRedirectToCountrySite" desc="Verify where to redirect">
+      <Actions>
+        <EvaluateValue factId="FCountrySite" result="true">FCountrySite</EvaluateValue>
+        <EvaluateValue factId="FLangPref" result="true">FLangPref</EvaluateValue>
+      </Actions>
+    </Rule>
+  </Rules>
+  <Facts>
+    <Fact id="FHasCountryCookie" key="hasCookie" desc="Stores the customer country" type="bool" modelId="mdlCountryRedirect" />
+    <Fact id="FLangPref" key="langPref" desc="Stores the customer language preference" type="string" modelId="mdlCountryRedirect" />
+    <Fact id="FCountryPref" key="countryPref" desc="Stores the customer country preference" type="string" modelId="mdlCountryRedirect" />
+    <Fact id="FAuth" key="isAuth" desc="Stores customer authentication" type="bool" modelId="mdlCountryRedirect" />
+    <Fact id="FIPCountry" key="ipCountry" desc="Stores the customer country based on IP" type="string" modelId="mdlCountryRedirect" />
+    <Fact id="FCountrySite" key="countrySite" desc="The country site the customer requested" type="string" modelId="mdlCountryRedirect" />
+  </Facts>
+</RuleEngine>

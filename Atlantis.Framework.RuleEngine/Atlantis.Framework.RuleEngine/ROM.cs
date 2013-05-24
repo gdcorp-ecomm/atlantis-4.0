@@ -130,8 +130,8 @@ namespace Atlantis.Framework.RuleEngine
         if (fact != null)
         {
           var status = fact.IsValid ? ValidationResultStatus.Valid : ValidationResultStatus.InValid;
-          var result = new FactResult(fact.Key, status) {Messages = fact.Messages};
-          
+          var result = new FactResult(fact.Key, status) { Messages = fact.Messages, OutputValue = fact.OutputValue };
+
           if (factModels.ContainsKey(modelId))
           {
             factModels[modelId].Add(result);

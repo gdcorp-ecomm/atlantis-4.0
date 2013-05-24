@@ -1,27 +1,28 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Globalization;
+using Atlantis.Framework.Interface;
 using System;
 using System.Web;
 
 namespace Atlantis.Framework.Providers.Localization
 {
-  internal class CountrySiteCookie
+  public class CountrySiteCookie
   {
-    IProviderContainer _container;
-    Lazy<string> _cookieName;
-    Lazy<HttpCookie> _requestCookie;
-    Lazy<ISiteContext> _siteContext;
+    readonly IProviderContainer _container;
+    readonly Lazy<string> _cookieName;
+    readonly Lazy<HttpCookie> _requestCookie;
+    readonly Lazy<ISiteContext> _siteContext;
 
     internal CountrySiteCookie(IProviderContainer container)
     {
       _container = container;
-      _siteContext = new Lazy<ISiteContext>(() => { return _container.Resolve<ISiteContext>(); });
-      _cookieName = new Lazy<string>(() => { return LoadCookieName(); });
-      _requestCookie = new Lazy<HttpCookie>(() => { return LoadRequestCookie(); });
+      _siteContext = new Lazy<ISiteContext>(() => _container.Resolve<ISiteContext>());
+      _cookieName = new Lazy<string>(LoadCookieName);
+      _requestCookie = new Lazy<HttpCookie>(LoadRequestCookie);
     }
 
     private string LoadCookieName()
     {
-      return "countrysite" + _siteContext.Value.PrivateLabelId.ToString();
+      return "countrysite" + _siteContext.Value.PrivateLabelId.ToString(CultureInfo.InvariantCulture);
     }
 
     private HttpCookie LoadRequestCookie()

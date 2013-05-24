@@ -1,20 +1,17 @@
-﻿using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Localization.Interface;
-using System;
+﻿using System;
 using System.Web;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Providers.Localization
 {
-  public class CountryCookieLocalizationProvider : LocalizationProvider, ILocalizationProvider
+  public class CountryCookieLocalizationProvider : LocalizationProvider
   {
-    private Lazy<ISiteContext> _siteContext;
-    private Lazy<CountrySiteCookie> _countrySiteCookie;
+    private readonly Lazy<ISiteContext> _siteContext;
 
     public CountryCookieLocalizationProvider(IProviderContainer container)
       :base(container)
     {
-      _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
-      _countrySiteCookie = new Lazy<CountrySiteCookie>(() => { return new CountrySiteCookie(Container); });
+      _siteContext = new Lazy<ISiteContext>(() => Container.Resolve<ISiteContext>());
     }
 
     protected override string DetermineCountrySite()
@@ -23,9 +20,9 @@ namespace Atlantis.Framework.Providers.Localization
 
       if ((HttpContext.Current != null) && (_siteContext.Value.ContextId == 1))
       {
-        if ((_countrySiteCookie.Value.HasValue) && (IsValidCountrySubdomain(_countrySiteCookie.Value.Value)))
+        if ((CountrySiteCookie.Value.HasValue) && (IsValidCountrySubdomain(CountrySiteCookie.Value.Value)))
         {
-          result = _countrySiteCookie.Value.Value;
+          result = CountrySiteCookie.Value.Value;
         }
       }
 

@@ -23,18 +23,20 @@ namespace Atlantis.Framework.Providers.Localization
 
     protected const string _WWW = "WWW";
 
-    private Lazy<string> _countrySite;
-    private Lazy<ValidCountrySubdomainsResponseData> _validCountrySubdomains;
-    private Lazy<string> _fullLanguage;
-    private Lazy<string> _shortLanguage;
+    private readonly Lazy<string> _countrySite;
+    private readonly Lazy<ValidCountrySubdomainsResponseData> _validCountrySubdomains;
+    private readonly Lazy<string> _fullLanguage;
+    private readonly Lazy<string> _shortLanguage;
+    protected Lazy<CountrySiteCookie> CountrySiteCookie;
 
     public LocalizationProvider(IProviderContainer container)
       : base(container)
     {
-      _countrySite = new Lazy<string>(() => { return DetermineCountrySite(); });
-      _validCountrySubdomains = new Lazy<ValidCountrySubdomainsResponseData>(() => { return LoadValidCountrySubdomains(); });
-      _fullLanguage = new Lazy<string>(() => { return DetermineFullLanguage(); });
-      _shortLanguage = new Lazy<string>(() => { return DetermineShortLanguage(); });
+      _countrySite = new Lazy<string>(DetermineCountrySite);
+      _validCountrySubdomains = new Lazy<ValidCountrySubdomainsResponseData>(LoadValidCountrySubdomains);
+      _fullLanguage = new Lazy<string>(DetermineFullLanguage);
+      _shortLanguage = new Lazy<string>(DetermineShortLanguage);
+      CountrySiteCookie = new Lazy<CountrySiteCookie>(() => new CountrySiteCookie(Container));
     }
 
     protected abstract string DetermineCountrySite();
@@ -45,7 +47,7 @@ namespace Atlantis.Framework.Providers.Localization
       return (ValidCountrySubdomainsResponseData)DataCache.DataCache.GetProcessRequest(request, LocalizationProviderEngineRequests.ValidCountrySubdomains);
     }
 
-    protected bool IsValidCountrySubdomain(string countryCode)
+    public bool IsValidCountrySubdomain(string countryCode)
     {
       return _validCountrySubdomains.Value.IsValidCountrySubdomain(countryCode);
     }
@@ -163,6 +165,18 @@ namespace Atlantis.Framework.Providers.Localization
       return result;
     }
 
+    public virtual string PreviousCountrySiteCookieValue
+    {
+      get
+      {
+        string result = null;
+        if (CountrySiteCookie.Value.HasValue)
+        {
+          result = CountrySiteCookie.Value.Value;
+        }
 
+        return result;
+      }
+    }
   }
 }

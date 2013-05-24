@@ -1,16 +1,17 @@
 ﻿
 namespace Atlantis.Framework.RuleEngine.Evidence.Expression
 {
-  public struct Symbol
-  {
-    public string Name;
-    public IEvidenceValue Value;
-    public ExpressionEvaluator.Type SymbolType;
-    public override string ToString()
+    public struct Symbol
     {
-      return Name;
-    }
+        public string Name;
+        public IEvidenceValue Value;
+        public ExpressionEvaluator.Type SymbolType;
 
-    public string ConditionKey { get; set; }
-  }
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public string ConditionKey { get; set; }
+    }
 }

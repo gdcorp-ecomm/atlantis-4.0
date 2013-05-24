@@ -22,17 +22,18 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     {
       Assembly assembly = Assembly.Load("Atlantis.Framework.Providers.Localization");
       Type countrySiteCookieType = assembly.GetType("Atlantis.Framework.Providers.Localization.CountrySiteCookie");
-      PrivateObject result = new PrivateObject(countrySiteCookieType, constructorArgs); ;
+      PrivateObject result = new PrivateObject(countrySiteCookieType, constructorArgs); 
       return result;
     }
 
-    private PrivateObject NewCountrySiteCookieContext()
+    private PrivateObject NewCountrySiteCookieContext(int privateLabelId = 1)
     {
       MockHttpRequest request = new MockHttpRequest("http://www.mysite.com");
       MockHttpContext.SetFromWorkerRequest(request);
 
-      IProviderContainer container = new MockProviderContainer();
+      MockProviderContainer container = new MockProviderContainer();
       container.RegisterProvider<ISiteContext, MockSiteContext>();
+      container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, privateLabelId);
 
       object[] constructorParams = new object[1] { container };
       return NewCountrySiteCookieClass(constructorParams);
@@ -90,8 +91,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
     [TestMethod]
     public void CookieNameNotHardcoded()
     {
-      PrivateObject countrySiteCookie = NewCountrySiteCookieContext();
-      HttpContext.Current.Items[MockSiteContextSettings.PrivateLabelId] = 3;
+      PrivateObject countrySiteCookie = NewCountrySiteCookieContext(3);
 
       Lazy<string> cookieNameMember = (Lazy<string>)countrySiteCookie.GetField("_cookieName", BindingFlags.NonPublic | BindingFlags.Instance);
       Assert.AreEqual("countrysite3", cookieNameMember.Value);

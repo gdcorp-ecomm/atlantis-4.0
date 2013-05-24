@@ -102,6 +102,9 @@ namespace Atlantis.Framework.RuleEngine.Evidence.Actions
         case ActionType.EvaluteIsValid:
           fact.IsValid = Convert.ToBoolean(result.Value.Value);
           break;
+        case ActionType.EvaluateValue:
+          fact.OutputValue = result.Value.Value;
+          break;
       }
     }
 

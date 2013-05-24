@@ -113,6 +113,9 @@ namespace Atlantis.Framework.RuleEngine.Compiler
         case ActionType.EvaluateMessage:
           path = "./Actions/EvaluateMessage";
           break;
+        case ActionType.EvaluateValue:
+          path = "./Actions/EvaluateValue";
+          break;
       }
 
       var evaluateList = ruleNode.XPathSelectElements(path);
@@ -220,6 +223,7 @@ namespace Atlantis.Framework.RuleEngine.Compiler
 
         actionCounter = LoadEvaluation(rom, ruleElement, currentRuleId, actions, actionCounter, ActionType.EvaluteIsValid);
         actionCounter = LoadEvaluation(rom, ruleElement, currentRuleId, actions, actionCounter, ActionType.EvaluateMessage);
+        actionCounter = LoadEvaluation(rom, ruleElement, currentRuleId, actions, actionCounter, ActionType.EvaluateValue);
 
         #endregion
 

@@ -22,9 +22,6 @@ using System.Collections.Generic;
 
 namespace Atlantis.Framework.RuleEngine.Evidence
 {
-  /// <summary>
-  /// 
-  /// </summary>
   public abstract class AEvidence : IEvidence
   {
     #region instance variables
@@ -132,17 +129,9 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     protected abstract int CalculateInternalPriority(int priority);
 
 
-    /// <summary>
-    /// Identified of the evidence
-    /// </summary>
-    //[System.Diagnostics.DebuggerHidden]
     public string Id { get; private set; }
 
-
-    private IEvidenceValue _value;/// <summary>
-    /// Contains the IRuleEngineComparable object that contains the _value for this evidence
-    /// </summary>
-    //[System.Diagnostics.DebuggerHidden]
+    protected IEvidenceValue _value;
     public virtual object Value
     {
       get

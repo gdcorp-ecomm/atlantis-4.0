@@ -68,5 +68,17 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     /// <param name="baseLinkType">linktype to adjust</param>
     /// <returns>countrysite specific linktype if on a country site</returns>
     string GetCountrySiteLinkType(string baseLinkType);
+
+    /// <summary>
+    /// Returns the previous country preference value in the countrysite cookie.
+    /// </summary>
+    string PreviousCountrySiteCookieValue { get; }
+
+    /// <summary>
+    /// Returns true if the given is valid country subdomain (not case sensitive).
+    /// </summary>
+    /// <param name="countryCode">Country code.</param>
+    /// <returns>Returns true if the given is valid country subdomain (not case sensitive).</returns>
+    bool IsValidCountrySubdomain(string countryCode);
   }
 }

@@ -40,5 +40,7 @@ namespace Atlantis.Framework.RuleEngine.Results
       }
       set { _messages = value; }
     }
+
+    public object OutputValue { get; set; }
   }
 }

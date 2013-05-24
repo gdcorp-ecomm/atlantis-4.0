@@ -46,6 +46,10 @@
   <ItemGroup>
     <Compile Include="CountryCookieLocalizationProvider.cs" />
     <Compile Include="CountrySiteCookie.cs" />
+    <Compile Include="LocalizationRedirectProvider\LocalizationRedirectProvider.cs" />
+    <Compile Include="LocalizationRedirectProvider\LocalizationRedirectResponse.cs" />
+    <Compile Include="LocalizationRedirectProvider\RuleEngineModel.cs" />
+    <Compile Include="LocalizationRedirectProvider\CountrySiteRedirectRuleData.cs" />
     <Compile Include="CountrySubdomainLocalizationProvider.cs" />
     <Compile Include="LocalizationProvider.cs" />
     <Compile Include="LocalizationProviderEngineRequests.cs" />
@@ -64,10 +68,23 @@
       <Project>{b324d9ec-957a-40df-8007-9281245ceff0}</Project>
       <Name>Atlantis.Framework.Localization.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.RuleEngine\Atlantis.Framework.RuleEngine\Atlantis.Framework.RuleEngine.csproj">
+      <Project>{8bbf78dd-a792-4b0f-a311-b6b670263fba}</Project>
+      <Name>Atlantis.Framework.RuleEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Geo\Atlantis.Framework.Providers.Geo.Interface\Atlantis.Framework.Providers.Geo.Interface.csproj">
+      <Project>{56c72bae-ff21-49ff-a097-ac38b874ac39}</Project>
+      <Name>Atlantis.Framework.Providers.Geo.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
       <Project>{061fcadc-9547-47e2-9643-cfbcfa355ac2}</Project>
       <Name>Atlantis.Framework.Providers.Localization.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LocalizationRedirectProvider\CountrySiteRedirectRule.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

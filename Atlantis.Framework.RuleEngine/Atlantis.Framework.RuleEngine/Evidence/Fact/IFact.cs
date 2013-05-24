@@ -27,5 +27,6 @@ namespace Atlantis.Framework.RuleEngine.Evidence
     bool IsValid { get; set; }
     string Key { get; }
     IList<string> Messages { get; set; }
+    object OutputValue { get; set; }
   }
 }

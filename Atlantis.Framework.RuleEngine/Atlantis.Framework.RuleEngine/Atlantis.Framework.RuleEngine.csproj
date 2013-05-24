@@ -61,6 +61,8 @@
     <Compile Include="Evidence\EvidenceValue\IEvidenceValue.cs" />
     <Compile Include="Evidence\EvidenceValue\Naked.cs" />
     <Compile Include="Evidence\Expression\ExpressionEvaluator.cs" />
+    <Compile Include="Evidence\Expression\ExpressionParser.cs" />
+    <Compile Include="Evidence\Expression\ExpressionTokens.cs" />
     <Compile Include="Evidence\Expression\Symbol.cs" />
     <Compile Include="Evidence\Fact\Fact.cs" />
     <Compile Include="Evidence\Fact\IFact.cs" />
@@ -79,16 +81,6 @@
     <Compile Include="RuleEngine.cs" />
     <Compile Include="Results\RuleEngineResultStatus.cs" />
     <Compile Include="Results\ValidationResultStatus.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
-      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
-      <Name>Atlantis.Framework.Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
-      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
-      <Name>Atlantis.Framework.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

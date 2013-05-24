@@ -1,4 +1,5 @@
 ﻿using System.Web.UI;
+using Atlantis.Framework.Render.Pipeline;
 using Atlantis.Framework.Render.Pipeline.Interface;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.WebTest

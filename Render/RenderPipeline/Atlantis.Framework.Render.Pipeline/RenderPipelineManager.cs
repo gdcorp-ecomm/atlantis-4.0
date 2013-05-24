@@ -1,7 +1,8 @@
 ﻿using System;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Render.Pipeline.Interface;
 
-namespace Atlantis.Framework.Render.Pipeline.Interface
+namespace Atlantis.Framework.Render.Pipeline
 {
   public class RenderPipelineManager
   {

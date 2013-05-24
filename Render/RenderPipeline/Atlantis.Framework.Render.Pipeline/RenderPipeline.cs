@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Atlantis.Framework.Render.Pipeline.Interface;
 
-namespace Atlantis.Framework.Render.Pipeline.Interface
+namespace Atlantis.Framework.Render.Pipeline
 {
   internal class RenderPipeline
   {

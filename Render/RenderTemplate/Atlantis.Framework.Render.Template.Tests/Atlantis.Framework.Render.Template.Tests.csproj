@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3E5C0DD7-099E-46F3-8B65-9ACFDE340866}</ProjectGuid>
+    <ProjectGuid>{22F5FC32-1AE3-46E2-813D-95E9626A5391}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.Render.Pipeline.Tests</RootNamespace>
-    <AssemblyName>Atlantis.Framework.Render.Pipeline.Tests</AssemblyName>
+    <RootNamespace>Atlantis.Framework.Render.Template.Tests</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Render.Template.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -43,7 +43,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -58,17 +57,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ConditionHandlers\CountrySiteContextConditionHandler.cs" />
-    <Compile Include="ConditionHandlers\DataCenterCondtionHandler.cs" />
-    <Compile Include="ConditionHandlers\TargetedMessageIdConditionHandler.cs" />
-    <Compile Include="RenderContent\SimpleRenderContent.cs" />
-    <Compile Include="RenderHandlers\RenderHandlerOne.cs" />
-    <Compile Include="RenderHandlers\RenderHandlerThree.cs" />
-    <Compile Include="RenderHandlers\RenderHandlerTwo.cs" />
-    <Compile Include="RenderHandlers\TargetedMessageRenderHandler.cs" />
-    <Compile Include="RenderPipelineManagerTests.cs" />
+    <Compile Include="RenderTemplateManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tokens\DataCenterToken.cs" />
+    <Compile Include="TestRenderContent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
@@ -79,45 +70,18 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
-      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
-      <Name>Atlantis.Framework.Providers.Containers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
-      <Project>{2f8983b4-801b-461a-9d76-26a58a496261}</Project>
-      <Name>Atlantis.Framework.Testing.MockHttpContext</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockProviders\Atlantis.Framework.Testing.MockProviders.csproj">
-      <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
-      <Name>Atlantis.Framework.Testing.MockProviders</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Tokens\Atlantis.Framework.Tokens.Interface\Atlantis.Framework.Tokens.Interface.csproj">
-      <Project>{79189505-c1c8-4282-83e2-0140a2635624}</Project>
-      <Name>Atlantis.Framework.Tokens.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Conditions\Interface\Atlantis.Framework.Conditions.Interface\Atlantis.Framework.Conditions.Interface.csproj">
-      <Project>{9f0b7f62-5a62-4823-8697-a18fa91b2a8d}</Project>
-      <Name>Atlantis.Framework.Conditions.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ExpressionParser\Atlantis.Framework.Render.ExpressionParser\Atlantis.Framework.Render.ExpressionParser.csproj">
-      <Project>{e35a1790-4605-4adb-813e-dcd5485f58bb}</Project>
-      <Name>Atlantis.Framework.Render.ExpressionParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MarkupParser\Atlantis.Framework.Render.MarkupParser\Atlantis.Framework.Render.MarkupParser.csproj">
-      <Project>{772aac0d-761e-4906-b46f-100e1af3f5ca}</Project>
-      <Name>Atlantis.Framework.Render.MarkupParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
+    <ProjectReference Include="..\..\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
       <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
       <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.Render.Pipeline\Atlantis.Framework.Render.Pipeline.csproj">
-      <Project>{68764d92-7cd9-45fb-b650-1429656dcf14}</Project>
-      <Name>Atlantis.Framework.Render.Pipeline</Name>
+    <ProjectReference Include="..\Atlantis.Framework.Render.Template.Interface\Atlantis.Framework.Render.Template.Interface.csproj">
+      <Project>{11a49d77-67d1-4145-9d26-668f6cac6a0d}</Project>
+      <Name>Atlantis.Framework.Render.Template.Interface</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\home-page-with-conditions.html" />
+    <ProjectReference Include="..\Atlantis.Framework.Render.Template\Atlantis.Framework.Render.Template.csproj">
+      <Project>{90f026c3-01cc-497a-ba3c-9c6922d60809}</Project>
+      <Name>Atlantis.Framework.Render.Template</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

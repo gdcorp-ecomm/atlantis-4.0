@@ -1,4 +1,6 @@
-﻿namespace Atlantis.Framework.Render.Pipeline.Interface
+﻿using Atlantis.Framework.Render.Pipeline.Interface;
+
+namespace Atlantis.Framework.Render.Pipeline
 {
   internal class ProcessedRenderContent : IProcessedRenderContent
   {

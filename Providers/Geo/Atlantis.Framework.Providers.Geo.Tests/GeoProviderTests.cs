@@ -14,9 +14,9 @@ namespace Atlantis.Framework.Providers.Geo.Tests
   [DeploymentItem("GeoIP.dat")]
   public class GeoProviderTests
   {
-    private IGeoProvider CreateGeoProvider(string requestIP, bool isInternal = false, bool useMockProxy = false)
+    private IGeoProvider CreateGeoProvider(string requestIP, bool isInternal = false, bool useMockProxy = false, string spoofip = null)
     {
-      MockHttpRequest request = new MockHttpRequest("http://blue.com");
+      MockHttpRequest request = new MockHttpRequest("http://blue.com?qaspoofip=" + spoofip ?? string.Empty);
 
       IPAddress address;
       if (IPAddress.TryParse(requestIP, out address))
@@ -61,28 +61,17 @@ namespace Atlantis.Framework.Providers.Geo.Tests
     [TestMethod]
     public void SpoofTheIP()
     {
-      IGeoProvider geoProvider = CreateGeoProvider("127.0.0.1", true);
-      geoProvider.SpoofUserIPAddress("148.204.3.3");
+      IGeoProvider geoProvider = CreateGeoProvider("127.0.0.1", true, spoofip: "148.204.3.3");
       Assert.AreEqual("mx", geoProvider.RequestCountryCode);
     }
 
     [TestMethod]
     public void SpoofTheIPNotAllowed()
     {
-      IGeoProvider geoProvider = CreateGeoProvider("182.50.145.39", false);
-      geoProvider.SpoofUserIPAddress("148.204.3.3");
+      IGeoProvider geoProvider = CreateGeoProvider("182.50.145.39", false, spoofip: "148.204.3.3");
       Assert.AreEqual("sg", geoProvider.RequestCountryCode);
     }
-
-    [TestMethod]
-    public void SpoofTooLate()
-    {
-      IGeoProvider geoProvider = CreateGeoProvider("127.0.0.1", true);
-      Assert.AreEqual("us", geoProvider.RequestCountryCode);
-      geoProvider.SpoofUserIPAddress("148.204.3.3");
-      Assert.AreEqual("us", geoProvider.RequestCountryCode);
-    }
-
+    
     [TestMethod]
     public void RequestCountryProxy()
     {

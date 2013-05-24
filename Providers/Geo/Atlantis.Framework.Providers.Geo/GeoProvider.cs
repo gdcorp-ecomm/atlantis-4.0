@@ -10,7 +10,6 @@ namespace Atlantis.Framework.Providers.Geo
   {
     Lazy<ISiteContext> _siteContext;
     Lazy<IProxyContext> _proxyContext;
-    string _spoofedIPAddress = null;
     Lazy<string> _requestCountryCode;
     Lazy<CountryResponseData> _countries;
 
@@ -61,21 +60,36 @@ namespace Atlantis.Framework.Providers.Geo
       return result;
     }
 
+    private string GetSpoofIp()
+    {
+      var result = string.Empty;
+      if (_siteContext.Value.IsRequestInternal && HttpContext.Current != null)
+      {
+        var spoofIp = HttpContext.Current.Request.QueryString["qaspoofip"];
+
+        if (!string.IsNullOrEmpty(spoofIp))
+        {
+          result = spoofIp;
+        }
+      }
+
+      return result;
+    }
+
     private string GetRequestIP()
     {
-      string result = string.Empty;
+      string result = GetSpoofIp();
 
-      if (!string.IsNullOrEmpty(_spoofedIPAddress))
+      if (string.IsNullOrEmpty(result))
       {
-        result = _spoofedIPAddress;
-      }
-      else if (_proxyContext.Value != null)
-      {
-        result = _proxyContext.Value.OriginIP;
-      }
-      else if (HttpContext.Current != null)
-      {
-        result = HttpContext.Current.Request.UserHostAddress;
+        if (_proxyContext.Value != null)
+        {
+          result = _proxyContext.Value.OriginIP;
+        }
+        else if (HttpContext.Current != null)
+        {
+          result = HttpContext.Current.Request.UserHostAddress;
+        }
       }
 
       return result;
@@ -110,14 +124,6 @@ namespace Atlantis.Framework.Providers.Geo
       }
 
       return result;
-    }
-
-    public void SpoofUserIPAddress(string spoofIpAddress)
-    {
-      if (_siteContext.Value.IsRequestInternal)
-      {
-        _spoofedIPAddress = spoofIpAddress;
-      }
     }
   }
 }

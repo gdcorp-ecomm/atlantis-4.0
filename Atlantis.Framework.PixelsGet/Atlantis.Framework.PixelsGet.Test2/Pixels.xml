@@ -1,5 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <pixels>
+  <pixel name="Test" value="Html Here" type="none" application="SALES" contexts="1" page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger removeafterconsumption="false">
+      <cookie name="TestCookie1" value="encrypt" expirationDays="90" fireWhen="missing"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78790" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Test1" value="Html Here" type="none" application="SALES" contexts="1" page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger removeafterconsumption="false" doreplace="true">
+      <cookie name="pixel_US_RocketFuel{{privatelabelid}}" value="encrypt" expirationDays="90" fireWhen="always"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78790" />
+    </additionaldata>
+  </pixel>
+  <pixel name="Test3" value="Html Here" type="none" application="SALES" contexts="1" page_url="Order_Confirmation">
+    <enabled value="1" />
+    <trigger removeafterconsumption="false">
+      <cookie name="TestCookie3" value="encrypt" expirationDays="90" fireWhen="present"  />
+    </trigger>
+    <additionaldata>
+      <fastball cicode="78790" />
+    </additionaldata>
+  </pixel>
   <pixel name="Affiliate Image"
          value="~/OrderConfirmation/Controls/PixelTracking/AffiliateImagePixel.ascx"
          type="control"

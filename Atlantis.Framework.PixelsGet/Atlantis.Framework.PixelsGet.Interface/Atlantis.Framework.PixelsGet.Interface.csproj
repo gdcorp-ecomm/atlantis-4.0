@@ -48,8 +48,10 @@
     <Compile Include="Constants\PixelReplaceTags.cs" />
     <Compile Include="Constants\PixelTypes.cs" />
     <Compile Include="Constants\PixelXmlNames.cs" />
+    <Compile Include="PixelObjects\CookieData.cs" />
     <Compile Include="PixelObjects\Helpers\CookieHelper.cs" />
     <Compile Include="PixelObjects\Triggers\CookieGroupTrigger.cs" />
+    <Compile Include="PixelObjects\Triggers\GlobalTriggerChecks\AuthenticatedUserOnlyCheck.cs" />
     <Compile Include="PixelObjects\Triggers\ItemTrigger.cs" />
     <Compile Include="PixelObjects\Triggers\OrderDetailTrigger.cs" />
     <Compile Include="PixelsGetRequestData.cs" />

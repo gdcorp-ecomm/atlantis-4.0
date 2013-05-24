@@ -17,6 +17,7 @@ namespace Atlantis.Framework.PixelsGet.Interface
     public int ContextId { get; set; }
     public Dictionary<string, string> ReplaceTags { get; set; }
     public bool FirstTimeShopper { get; set; }
+    public bool IsUserAuthenticated { get; set; }
 
     /// <summary>
     /// Will be overriden if something is passed into XDocumentOverride
@@ -49,6 +50,14 @@ namespace Atlantis.Framework.PixelsGet.Interface
       : this(shopperId, sourceUrl, orderId, pathway, pageCount, appName, iscCode, requestCookies, replaceTags, contextId, orderXml)
     {
       FirstTimeShopper = firstTimeShopper;
+    }
+
+    public PixelsGetRequestData(string shopperId, string sourceUrl, string orderId, string pathway, int pageCount,
+                                 string appName, string iscCode, HttpCookieCollection requestCookies, Dictionary<string, string> replaceTags,
+                                 int contextId, bool firstTimeShopper, bool isUserAuthenticated, string orderXml = "")
+      : this(shopperId, sourceUrl, orderId, pathway, pageCount, appName, iscCode, requestCookies, replaceTags, contextId, firstTimeShopper, orderXml)
+    {
+      IsUserAuthenticated = isUserAuthenticated;
     }
     
     public override string GetCacheMD5()

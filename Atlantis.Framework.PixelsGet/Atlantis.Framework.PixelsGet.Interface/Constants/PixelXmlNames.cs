@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace Atlantis.Framework.PixelsGet.Interface.Constants
 {
   public class PixelXmlNames
@@ -13,6 +14,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.Constants
     public const string AppName = "application";
     public const string AppSetting = "appsettingname";
     public const string AdditionalData = "additionaldata";
+    public const string ExpirationDays = "expirationDays";
     public const string Comparison = "comparison";
     public const string Required = "required";
     public const string CookieEncoded = "cookieencoded";
@@ -36,6 +38,7 @@ namespace Atlantis.Framework.PixelsGet.Interface.Constants
 
     public const string TriggerConditionFirstTime = "firsttimeonly";
     public const string TriggerCookieName = "triggercookiename";
+    public const string TriggerConditionAuthenticatedOnly = "authenticatedonly";
 
   }
 }

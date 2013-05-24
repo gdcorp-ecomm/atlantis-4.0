@@ -5,6 +5,9 @@ using Atlantis.Framework.PixelsGet.Interface;
 using Atlantis.Framework.PixelsGet.Interface.PixelObjects;
 using Atlantis.Framework.PixelsGet.Interface.Constants;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
+using System.Xml.Linq;
+using Atlantis.Framework.BasePages.Cookies;
 
 namespace Atlantis.Framework.PixelsGet.Test
 {
@@ -33,6 +36,68 @@ namespace Atlantis.Framework.PixelsGet.Test
       var response = Engine.Engine.ProcessRequest(request, 627) as PixelsGetResponseData;
 
       Assert.IsTrue(response.IsSuccess);
+    }
+
+    [TestMethod]
+    public void FirePixelWhenCookieMissingTest()
+    {
+      _replaceParms.Add(Atlantis.Framework.PixelsGet.Interface.Constants.PixelReplaceTags.PrivateLabelId, "1");
+      HttpCookieCollection cookies = CreateCookieCollection();
+      var request = new PixelsGetRequestData(string.Empty, _requestUrl, string.Empty, string.Empty, 0, "SALES",
+                                                  _isc, cookies, _replaceParms, _contextId);
+      request.FirstTimeShopper = true;
+      request.XmlFilePathOverride = System.IO.Directory.GetCurrentDirectory() + "\\Pixels.xml";
+      
+      var response = Engine.Engine.ProcessRequest(request, 627) as PixelsGetResponseData;
+
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(0 < response.Pixels.Count);
+      Assert.AreEqual(2, response.Pixels.Count);
+      Assert.AreEqual(1, response.Pixels.Count((x) => string.Equals(x.Name, "Test", StringComparison.OrdinalIgnoreCase)));
+    }
+
+    [TestMethod]
+    public void FirePixelWhenCookiePresentTest()
+    {
+      _replaceParms.Add(Atlantis.Framework.PixelsGet.Interface.Constants.PixelReplaceTags.PrivateLabelId, "1");
+      HttpCookieCollection cookies = CreateCookieCollection();
+      cookies.Add(new HttpCookie("TestCookie3", "encrypt"));
+      var request = new PixelsGetRequestData(string.Empty, _requestUrl, string.Empty, string.Empty, 0, "SALES",
+                                                  _isc, cookies, _replaceParms, _contextId);
+      request.FirstTimeShopper = true;
+      request.XmlFilePathOverride = System.IO.Directory.GetCurrentDirectory() + "\\Pixels.xml";
+      var response = Engine.Engine.ProcessRequest(request, 627) as PixelsGetResponseData;
+
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(0 < response.Pixels.Count);
+      Assert.AreEqual(3, response.Pixels.Count);
+      Assert.AreEqual(1, response.Pixels.Count((x) => string.Equals(x.Name, "Test3", StringComparison.OrdinalIgnoreCase)));
+    }
+
+    [TestMethod]
+    public void FirePixelAlwaysCookieTest()
+    {
+      _replaceParms.Add(Atlantis.Framework.PixelsGet.Interface.Constants.PixelReplaceTags.PrivateLabelId, "1");
+      HttpCookieCollection cookies = CreateCookieCollection();
+      var request = new PixelsGetRequestData(string.Empty, _requestUrl, string.Empty, string.Empty, 0, "SALES",
+                                                  _isc, cookies, _replaceParms, _contextId, false, false);
+      request.FirstTimeShopper = true;
+      request.XmlFilePathOverride = System.IO.Directory.GetCurrentDirectory() + "\\Pixels.xml";
+      var response = Engine.Engine.ProcessRequest(request, 627) as PixelsGetResponseData;
+
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(0 < response.Pixels.Count);
+      Assert.AreEqual(2, response.Pixels.Count);
+      Assert.AreEqual(1, response.Pixels.Count((x) => string.Equals(x.Name, "Test1", StringComparison.OrdinalIgnoreCase)));
+
+      HttpCookie newCookie = new HttpCookie("pixel_US_RocketFuel1");
+      cookies.Add(newCookie);
+      response = Engine.Engine.ProcessRequest(request, 627) as PixelsGetResponseData;
+
+      Assert.IsTrue(response.IsSuccess);
+      Assert.IsTrue(0 < response.Pixels.Count);
+      Assert.AreEqual(2, response.Pixels.Count);
+      Assert.AreEqual(1, response.Pixels.Count((x) => string.Equals(x.Name, "Test1", StringComparison.OrdinalIgnoreCase)));
     }
 
     [TestMethod]

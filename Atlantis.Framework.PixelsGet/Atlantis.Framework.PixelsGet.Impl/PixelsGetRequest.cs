@@ -109,7 +109,27 @@ namespace Atlantis.Framework.PixelsGet.Impl
         value = replacer.ReplaceTagsIn(value);
       }
 
-      Pixel newPixel = new Pixel(value, name, pixelType, ciCodes, appSettingName);
+      IList<CookieData> cookieValues = new List<CookieData>();
+      var cookieValuesXml = currentElement.Descendants(PixelXmlNames.TriggerTypeCookie);
+      if (!ReferenceEquals(null, cookieValuesXml))
+      {
+        foreach (var item in cookieValuesXml)
+        {
+          string cookieName = ReferenceEquals(null, item.Attribute(PixelXmlNames.Name)) ? string.Empty : item.Attribute(PixelXmlNames.Name).Value;
+          string cookieValue = ReferenceEquals(null, item.Attribute(PixelXmlNames.Value)) ? string.Empty : item.Attribute(PixelXmlNames.Value).Value;
+          int expirationDays = ReferenceEquals(null, item.Attribute(PixelXmlNames.ExpirationDays)) ? 30 : int.Parse(item.Attribute(PixelXmlNames.ExpirationDays).Value);
+          bool isEncoded = ReferenceEquals(null, item.Attribute(PixelXmlNames.CookieEncoded)) ? false : bool.Parse(item.Attribute(PixelXmlNames.CookieEncoded).Value);
+          if (!ReferenceEquals(null, _pixelRequestData.ReplaceTags) && TagReplacer.ReplaceTagOnElement(item))
+          {
+            TagReplacer replacer = new TagReplacer(_pixelRequestData.ReplaceTags);
+            cookieName = replacer.ReplaceTagsIn(cookieName);
+            cookieValue = replacer.ReplaceTagsIn(cookieValue);
+          }
+          cookieValues.Add(new CookieData(cookieName, expirationDays, isEncoded, cookieValue));
+        }
+      }
+
+      Pixel newPixel = new Pixel(value, name, pixelType, ciCodes, cookieValues, appSettingName);
       return newPixel;
     }
 

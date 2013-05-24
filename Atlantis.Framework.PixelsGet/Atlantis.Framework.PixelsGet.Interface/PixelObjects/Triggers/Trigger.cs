@@ -21,7 +21,8 @@ namespace Atlantis.Framework.PixelsGet.Interface.PixelObjects.Triggers
         if (_globalAttributesToCheck == null)
         {
           _globalAttributesToCheck = new List<GlobalTriggerCheck>();
-          _globalAttributesToCheck.Add(new FirstTimeOnlyShopperCheck(PixelRequest.FirstTimeShopper)); 
+          _globalAttributesToCheck.Add(new FirstTimeOnlyShopperCheck(PixelRequest.FirstTimeShopper));
+          _globalAttributesToCheck.Add(new AuthenticatedUserOnlyCheck(PixelRequest.IsUserAuthenticated));
         }
 
         return _globalAttributesToCheck;

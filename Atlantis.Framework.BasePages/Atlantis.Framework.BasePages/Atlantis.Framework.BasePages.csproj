@@ -66,6 +66,7 @@
     <Compile Include="Authentication\AuthenticationHelper.cs" />
     <Compile Include="Authentication\AuthenticationWrapper.cs" />
     <Compile Include="BasePageEngineRequests.cs" />
+    <Compile Include="BasePageRenderContent.cs" />
     <Compile Include="ContextIds.cs" />
     <Compile Include="Cookies\CookieCryptWrapper.cs" />
     <Compile Include="Cookies\CookieHelper.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Providers\RequestHelper.cs" />
     <Compile Include="Providers\ShopperContextProvider.cs" />
     <Compile Include="Providers\SiteContextProviderBase.cs" />
+    <Compile Include="StripWhiteSpaceRenderHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
@@ -120,6 +122,14 @@
     <ProjectReference Include="..\..\Atlantis.Framework.VerifyShopper\Atlantis.Framework.VerifyShopper.Interface\Atlantis.Framework.VerifyShopper.Interface.csproj">
       <Project>{8CDD515F-375E-4FA5-9E41-F95227396675}</Project>
       <Name>Atlantis.Framework.VerifyShopper.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
+      <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline\Atlantis.Framework.Render.Pipeline.csproj">
+      <Project>{68764d92-7cd9-45fb-b650-1429656dcf14}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,8 @@ namespace Atlantis.Framework.Render.Pipeline
   {
     private readonly RenderPipeline _renderPipeline = new RenderPipeline();
 
+    public int RenderHandlerCount { get { return _renderPipeline.RenderHandlers.Count; } }
+
     public void AddRenderHandler(IRenderHandler renderHandler)
     {
       _renderPipeline.Add(renderHandler);

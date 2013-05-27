@@ -11,8 +11,8 @@ namespace Atlantis.Framework.CDS.Interface
 {
   public class RoutingRulesResponseData : CDSResponseData
   {
-    Dictionary<string, ReadOnlyCollection<IRoutingRule>> _readOnlyRulesDict { get; set; }
-    public static ReadOnlyCollection<IRoutingRule> NullRoutingRules = new ReadOnlyCollection<IRoutingRule>(new List<IRoutingRule>());
+    private Dictionary<string, ReadOnlyCollection<IRoutingRule>> _readOnlyRulesDict { get; set; }
+    private static ReadOnlyCollection<IRoutingRule> NullRoutingRules = new ReadOnlyCollection<IRoutingRule>(new List<IRoutingRule>());
 
     public RoutingRulesResponseData(string responseData)
       : base(responseData)

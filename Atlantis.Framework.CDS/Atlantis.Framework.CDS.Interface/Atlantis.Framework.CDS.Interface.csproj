@@ -51,11 +51,16 @@
     <Compile Include="CDSResponseData.cs" />
     <Compile Include="ContentVersion.cs" />
     <Compile Include="ContentVersionResponseData.cs" />
+    <Compile Include="IRoutingRule.cs" />
+    <Compile Include="IUrlData.cs" />
+    <Compile Include="IWhitelistResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenderTemplateContentResponseData.cs" />
     <Compile Include="RoutingRule.cs" />
     <Compile Include="RoutingRulesResponseData.cs" />
+    <Compile Include="UrlData.cs" />
     <Compile Include="UrlWhitelistResponseData.cs" />
+    <Compile Include="UrlWhitelistResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">

@@ -7,6 +7,7 @@ using Atlantis.Framework.CDS.Interface;
 using Atlantis.Framework.DataCache;
 using System.Net;
 using Atlantis.Framework.Interface;
+using System.Collections.ObjectModel;
 
 namespace Atlantis.Framework.CDS.Tests
 {
@@ -77,7 +78,7 @@ namespace Atlantis.Framework.CDS.Tests
       //Arrange
       string shopperId = "12345";
       int requestType = 688;
-      string query = "content/sales/whitelist";
+      string query = "content/sales/whitelist?docid=5175b13e8b29c70404bc0163";
       string pathway = Guid.NewGuid().ToString();
       string errorDescription = "this is a test error descrption!";
       CDSRequestData requestData = new CDSRequestData(shopperId, string.Empty, string.Empty, pathway, 1, query);
@@ -86,14 +87,26 @@ namespace Atlantis.Framework.CDS.Tests
       UrlWhitelistResponseData responseData = (UrlWhitelistResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
 
       //Assert
-      string output;
-      Assert.IsTrue(responseData.TryGetValue("/default.aspx", out output));
-      Assert.IsTrue(responseData.TryGetValue("/hosting/web-hosting.aspx", out output));
-      Assert.IsTrue(responseData.TryGetValue("/hosting/email-hosting", out output));
+      Assert.IsTrue(responseData.CheckWhitelist("/default.aspx").Exists);
+      Assert.IsNotNull(responseData.CheckWhitelist("/default.aspx").UrlData);
+      Assert.IsNotNull(responseData.CheckWhitelist("/default.aspx").UrlData.Style);
 
-      Assert.IsFalse(responseData.TryGetValue("/default1.aspx", out output));
-      Assert.IsFalse(responseData.TryGetValue("/hosting1/web-hosting.aspx", out output));
-      Assert.IsFalse(responseData.TryGetValue("/hosting/email-hosting-", out output));
+      Assert.IsTrue(responseData.CheckWhitelist("/hosting/web-hosting.aspx").Exists);
+      Assert.IsNotNull(responseData.CheckWhitelist("/hosting/web-hosting.aspx").UrlData);
+      Assert.IsNotNull(responseData.CheckWhitelist("/hosting/web-hosting.aspx").UrlData.Style);
+
+      Assert.IsTrue(responseData.CheckWhitelist("/hosting/email-hosting").Exists);
+      Assert.IsNotNull(responseData.CheckWhitelist("/hosting/email-hosting").UrlData);
+      Assert.IsNotNull(responseData.CheckWhitelist("/hosting/email-hosting").UrlData.Style);
+
+      Assert.IsFalse(responseData.CheckWhitelist("/default1.aspx").Exists);
+      Assert.IsNull(responseData.CheckWhitelist("/default1.aspx").UrlData);
+
+      Assert.IsFalse(responseData.CheckWhitelist("/hosting/ web-hosting.aspx").Exists);
+      Assert.IsNull(responseData.CheckWhitelist("/hosting/ web-hosting.aspx").UrlData);
+
+      Assert.IsFalse(responseData.CheckWhitelist("/hosting1/email-hosting").Exists);
+      Assert.IsNull(responseData.CheckWhitelist("/hosting1/email-hosting").UrlData);
     }
 
     [TestMethod()]
@@ -134,12 +147,29 @@ namespace Atlantis.Framework.CDS.Tests
       RoutingRulesResponseData responseData = (RoutingRulesResponseData)Engine.Engine.ProcessRequest(requestData, requestType);
 
       //Assert
-      Assert.IsNotNull(responseData.RoutingRules);
-      foreach (RoutingRule rule in responseData.RoutingRules)
+      ReadOnlyCollection<IRoutingRule> routingRules;
+      if (responseData.TryGetValue("Redirect", out routingRules))
       {
-        Assert.IsNotNull(rule.Type);
-        Assert.IsNotNull(rule.Condition);
-        Assert.IsNotNull(rule.Data);
+        Assert.IsNotNull(routingRules);
+        foreach (IRoutingRule rule in routingRules)
+        {
+          Assert.IsNotNull(rule.Type);
+          Assert.IsTrue(rule.Type == "Redirect");
+          Assert.IsNotNull(rule.Condition);
+          Assert.IsNotNull(rule.Data);
+        }
+      }
+
+      if (responseData.TryGetValue("Route", out routingRules))
+      {
+        Assert.IsNotNull(routingRules);
+        foreach (IRoutingRule rule in routingRules)
+        {
+          Assert.IsNotNull(rule.Type);
+          Assert.IsTrue(rule.Type == "Route");
+          Assert.IsNotNull(rule.Condition);
+          Assert.IsNotNull(rule.Data);
+        }
       }
 
     }

@@ -11,37 +11,56 @@ namespace Atlantis.Framework.CDS.Interface
 {
   public class RoutingRulesResponseData : CDSResponseData
   {
-    private class RoutingRulesForDeserialization
-    {
-      [JsonProperty("Type")]
-      public string Type { get; set; }
-
-      [JsonProperty("Condition")]
-      public string Condition { get; set; }
-
-      [JsonProperty("Data")]
-      public string Data { get; set; }
-    }
-    
-    public ReadOnlyCollection<RoutingRule> RoutingRules { get; private set; }
+    Dictionary<string, ReadOnlyCollection<IRoutingRule>> _readOnlyRulesDict { get; set; }
+    public static ReadOnlyCollection<IRoutingRule> NullRoutingRules = new ReadOnlyCollection<IRoutingRule>(new List<IRoutingRule>());
 
     public RoutingRulesResponseData(string responseData)
       : base(responseData)
     {
       ContentVersion contentVersion = JsonConvert.DeserializeObject<ContentVersion>(responseData);
-      List<RoutingRulesForDeserialization> routingRulesForDeserialization = JsonConvert.DeserializeObject<List<RoutingRulesForDeserialization>>(contentVersion.Content);
+      List<RoutingRule> rulesList = JsonConvert.DeserializeObject<List<RoutingRule>>(contentVersion.Content);
 
-      List<RoutingRule> routingRulesTemp = new List<RoutingRule>(routingRulesForDeserialization.Count);
-      foreach (RoutingRulesForDeserialization rule in routingRulesForDeserialization)
+      Dictionary<string, List<IRoutingRule>> rulesDict = new Dictionary<string, List<IRoutingRule>>();
+      foreach (RoutingRule rule in rulesList)
       {
-         routingRulesTemp.Add(new RoutingRule(rule.Type, rule.Condition, rule.Data));
+        if (rulesDict.ContainsKey(rule.Type))
+        {
+          rulesDict[rule.Type].Add(new RoutingRule() { Type = rule.Type, Condition = rule.Condition, Data = rule.Data });
+        }
+        else
+        {
+          rulesDict.Add(rule.Type, new List<IRoutingRule>() { new RoutingRule() { Type = rule.Type, Condition = rule.Condition, Data = rule.Data } });
+        }
       }
-      RoutingRules = new ReadOnlyCollection<RoutingRule>(routingRulesTemp);
+
+      _readOnlyRulesDict = new Dictionary<string, ReadOnlyCollection<IRoutingRule>>(rulesDict.Count);
+      foreach (string key in rulesDict.Keys)
+      {
+        _readOnlyRulesDict.Add(key, new ReadOnlyCollection<IRoutingRule>(rulesDict[key]));
+      }
     }
 
     public RoutingRulesResponseData(RequestData requestData, Exception exception)
       : base(requestData, exception)
     {
     }
+
+    public bool TryGetValue(string type, out ReadOnlyCollection<IRoutingRule> routingRules)
+    {
+      bool found = false;
+      routingRules = NullRoutingRules;
+
+      if (_readOnlyRulesDict != null)
+      {
+        if (!_readOnlyRulesDict.TryGetValue(type, out routingRules))
+        {
+          routingRules = NullRoutingRules;
+          found = true;
+        }
+      }
+
+      return found;
+    }
+
   }
 }

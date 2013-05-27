@@ -8,19 +8,19 @@ namespace Atlantis.Framework.CDS.Interface
 {
   public class UrlWhitelistResponseData : CDSResponseData
   {
-    private class UrlWhiteList
-    {
-      [JsonProperty("urls")]
-      public Dictionary<string, string> List { get; set; }
-    }
-
-    private UrlWhiteList _urlWhiteList;
+    private Dictionary<string, IWhitelistResult> _whitelist = null;
+    public static IWhitelistResult NullWhielistResult = new UrlWhitelistResult() { Exists = false, UrlData = null };
 
     public UrlWhitelistResponseData(string responseData)
       : base(responseData)
     {
       ContentVersion contentVersion = JsonConvert.DeserializeObject<ContentVersion>(responseData);
-      _urlWhiteList = JsonConvert.DeserializeObject<UrlWhiteList>(contentVersion.Content);
+      Dictionary<string, UrlData> _temp = JsonConvert.DeserializeObject<Dictionary<string, UrlData>>(contentVersion.Content);
+      _whitelist = new Dictionary<string, IWhitelistResult>();
+      foreach (var t in _temp)
+      {
+        _whitelist.Add(t.Key, new UrlWhitelistResult() { Exists = true, UrlData = t.Value });
+      }
     }
 
     public UrlWhitelistResponseData(RequestData requestData, Exception exception)
@@ -28,20 +28,15 @@ namespace Atlantis.Framework.CDS.Interface
     {
     }
 
-    /// <summary>
-    /// Does a case-sensitive search for the given string with-in the UrlWhiteList and returns true if found.
-    /// </summary>
-    /// <param name="relativePath">Example: "hosting/web-hosting.aspx"</param>
-    /// <returns>true/false</returns>
-    public bool TryGetValue(string relativePath, out string style)
+    public IWhitelistResult CheckWhitelist(string relativePath)
     {
-      style = null;
-      bool contains = false;
-      if (_urlWhiteList != null && _urlWhiteList.List != null)
+      IWhitelistResult temp = null;
+      if (_whitelist != null)
       {
-        contains = _urlWhiteList.List.TryGetValue(relativePath, out style);
+        _whitelist.TryGetValue(relativePath, out temp);
       }
-      return contains;
+
+      return temp ?? NullWhielistResult;
     }
   }
 }

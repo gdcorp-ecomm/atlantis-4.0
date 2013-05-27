@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,19 +7,15 @@ using System.Text;
 
 namespace Atlantis.Framework.CDS.Interface
 {
-  public class RoutingRule
+  internal class RoutingRule : IRoutingRule
   {
-    public string Type { get; private set; }
+    [JsonProperty("Type")]
+    public string Type { get; set; }
 
-    public string Condition { get; private set; }
+    [JsonProperty("Condition")]
+    public string Condition { get; set; }
 
-    public string Data { get; private set; }
-
-    public RoutingRule(string type, string condition, string data)
-    {
-      Type = type;
-      Condition = condition;
-      Data = data;
-    }
+    [JsonProperty("Data")]
+    public string Data { get; set; }
   }
 }

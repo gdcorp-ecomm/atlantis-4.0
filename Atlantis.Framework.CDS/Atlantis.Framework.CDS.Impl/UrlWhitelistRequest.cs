@@ -35,7 +35,6 @@ namespace Atlantis.Framework.CDS.Impl
       catch (Exception ex)
       {
         result = new UrlWhitelistResponseData(cdsRequestData, ex);
-        throw;
       }
       return result;
     }

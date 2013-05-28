@@ -5,7 +5,7 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeValidation.Interface
 {
-  public class DotTypeFormsValidationResponseData : IResponseData
+  public class DotTypeValidationResponseData : IResponseData
   {
     private readonly string _responseXml;
     private readonly AtlantisException _exception;
@@ -14,20 +14,20 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
     private Dictionary<string, string> _validationErrors;
     private string _token;
 
-    public DotTypeFormsValidationResponseData(string responseXml)
+    public DotTypeValidationResponseData(string responseXml)
     {
       _responseXml = responseXml;
       _exception = null;
       BuildFromXml();
     }
 
-    public DotTypeFormsValidationResponseData(string responseXml, AtlantisException exAtlantis)
+    public DotTypeValidationResponseData(string responseXml, AtlantisException exAtlantis)
     {
       _responseXml = responseXml;
       _exception = exAtlantis;
     }
 
-    public DotTypeFormsValidationResponseData(string responseXml, RequestData requestData, Exception ex)
+    public DotTypeValidationResponseData(string responseXml, RequestData requestData, Exception ex)
     {
       _responseXml = responseXml;
       _exception = new AtlantisException(requestData, "DotTypeFormsValidationResponseData", ex.Message, requestData.ToXML());

@@ -43,10 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DotTypeClaimsValidationRequestData.cs" />
-    <Compile Include="DotTypeClaimsValidationResponseData.cs" />
-    <Compile Include="DotTypeFormsValidationResponseData.cs" />
-    <Compile Include="DotTypeFormsValidationRequestData.cs" />
+    <Compile Include="DotTypeValidationResponseData.cs" />
+    <Compile Include="DotTypeValidationRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

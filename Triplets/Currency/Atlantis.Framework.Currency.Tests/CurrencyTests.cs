@@ -1,7 +1,7 @@
-﻿using Atlantis.Framework.Currency.Interface;
+﻿using System.Xml.Linq;
+using Atlantis.Framework.Currency.Interface;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Xml.Linq;
 
 namespace Atlantis.Framework.Currency.Tests
 {
@@ -206,6 +206,20 @@ namespace Atlantis.Framework.Currency.Tests
       var response = (CurrencyTypesResponseData)Engine.Engine.ProcessRequest(request, REQUESTTYPE);
       Assert.IsNotNull(response);
       Assert.IsTrue(response.Count > 0);
+    }
+
+    [TestMethod]
+    public void CurrencyTypesIsActiveCheckRequest()
+    {
+      var request = new CurrencyTypesRequestData();
+      var response = (CurrencyTypesResponseData)Engine.Engine.ProcessRequest(request, REQUESTTYPE);
+      Assert.IsNotNull(response);
+      var isActive = true;
+      foreach (var currInfo in response)
+      {
+        isActive = isActive && currInfo.IsActive;
+      }
+      Assert.IsTrue(isActive);
     }
 
 

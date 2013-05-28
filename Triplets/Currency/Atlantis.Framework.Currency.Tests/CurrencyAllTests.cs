@@ -28,5 +28,21 @@ namespace Atlantis.Framework.Currency.Tests
       Assert.IsTrue(response.Contains("USD"));
     }
 
+    [TestMethod]
+    public void CurrencyTypesAllCheckIsActiveRequest()
+    {
+      var request = new CurrencyTypesRequestData();
+      request.RequestTimeout = new TimeSpan(0, 0, 10);
+      var response = (CurrencyTypesResponseData)Engine.Engine.ProcessRequest(request, REQUESTTYPE);
+      Assert.IsNotNull(response);
+      var isActive = true;
+      foreach (var currInfo in response)
+      {
+        isActive = isActive && currInfo.IsActive;
+      }
+      Assert.IsTrue(isActive);
+    }
+
+
   }
 }

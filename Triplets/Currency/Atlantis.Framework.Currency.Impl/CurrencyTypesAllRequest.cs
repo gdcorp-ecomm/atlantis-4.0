@@ -10,8 +10,8 @@ namespace Atlantis.Framework.Currency.Impl
 {
   public class CurrencyTypesAllRequest : IRequest
   {
-    private const string CURRENCY_TYPES_STORED_PROCEDURE = "gdshop_currencyTypeGetWithInactive_sp";
-    private const string CURRENCY_TYPES_RATES_STORED_PROCEDURE = "gdshop_currencyTypeConversionRateGetWithInactive_sp";
+    private const string CURRENCY_TYPES_STORED_PROCEDURE = "gdshop_currencyTypeGetAll_sp";
+    private const string CURRENCY_TYPES_RATES_STORED_PROCEDURE = "gdshop_currencyTypeConversionRateGetAll_sp";
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {

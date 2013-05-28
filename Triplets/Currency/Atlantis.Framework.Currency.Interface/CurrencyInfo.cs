@@ -1,6 +1,6 @@
-﻿using Atlantis.Framework.Providers.Interface.Currency;
-using System;
+﻿using System;
 using System.Xml.Linq;
+using Atlantis.Framework.Providers.Interface.Currency;
 
 namespace Atlantis.Framework.Currency.Interface
 {
@@ -12,7 +12,7 @@ namespace Atlantis.Framework.Currency.Interface
 
       if (element != null)
       {
-        CurrencyInfo rawCurrencyInfo = new CurrencyInfo();
+        var rawCurrencyInfo = new CurrencyInfo();
 
         rawCurrencyInfo.CurrencyType = element.LookupAttribute("gdshop_currencyType", string.Empty);
 
@@ -26,7 +26,7 @@ namespace Atlantis.Framework.Currency.Interface
           rawCurrencyInfo.Symbol = element.LookupAttribute("currencySymbol", "$");
           rawCurrencyInfo.SymbolHtml = element.LookupAttribute("currencySymbolHtml", "$");
 
-          string position = element.LookupAttribute("currencySymbolPosition", "prefix");
+          var position = element.LookupAttribute("currencySymbolPosition", "prefix");
           if (position.Equals("prefix", StringComparison.OrdinalIgnoreCase))
           {
             rawCurrencyInfo.SymbolPosition = CurrencySymbolPositionType.Prefix;
@@ -46,9 +46,12 @@ namespace Atlantis.Framework.Currency.Interface
           }
           else
           {
-            string isTransactional = element.LookupAttribute("isTransactional", "0");
+            var isTransactional = element.LookupAttribute("isTransactional", "0");
             rawCurrencyInfo.IsTransactional = (isTransactional == "1");
           }
+
+          var isActive = element.LookupAttribute("isActive", "1");
+          rawCurrencyInfo.IsActive = (isActive == "1");
 
           result = rawCurrencyInfo;
         }
@@ -62,19 +65,20 @@ namespace Atlantis.Framework.Currency.Interface
     }
 
     public string CurrencyType { get; private set; }
-    public int DecimalPrecision {get; private set;}
-    public string DecimalSeparator {get; private set;}
-    public string Description {get; private set;}
-    public string DescriptionPlural {get; private set;}
-    public double ExchangeRate {get; private set;}
-    public double ExchangeRatePricing {get; private set;}
-    public double ExchangeRateOperating {get; private set;}
-    public string Symbol {get; private set;}
-    public string SymbolHtml {get;private set;}
-    public CurrencySymbolPositionType SymbolPosition {get; private set;}
-    public string ThousandsSeparator {get; private set;}
-    public bool IsTransactional {get; private set;}
-    
+    public int DecimalPrecision { get; private set; }
+    public string DecimalSeparator { get; private set; }
+    public string Description { get; private set; }
+    public string DescriptionPlural { get; private set; }
+    public double ExchangeRate { get; private set; }
+    public double ExchangeRatePricing { get; private set; }
+    public double ExchangeRateOperating { get; private set; }
+    public string Symbol { get; private set; }
+    public string SymbolHtml { get; private set; }
+    public CurrencySymbolPositionType SymbolPosition { get; private set; }
+    public string ThousandsSeparator { get; private set; }
+    public bool IsTransactional { get; private set; }
+    public bool IsActive { get; private set; }
+
     public bool Equals(ICurrencyInfo other)
     {
       bool result = false;

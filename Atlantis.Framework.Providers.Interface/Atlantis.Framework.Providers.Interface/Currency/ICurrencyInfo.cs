@@ -17,5 +17,6 @@ namespace Atlantis.Framework.Providers.Interface.Currency
     CurrencySymbolPositionType SymbolPosition { get; }
     string ThousandsSeparator { get; }
     bool IsTransactional { get; }
+    bool IsActive { get; }
   }
 }

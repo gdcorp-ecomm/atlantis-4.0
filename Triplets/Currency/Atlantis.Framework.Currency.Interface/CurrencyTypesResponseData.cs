@@ -1,8 +1,9 @@
-﻿using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Interface.Currency;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Xml.Linq;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.Interface.Currency;
 
 namespace Atlantis.Framework.Currency.Interface
 {
@@ -68,24 +69,25 @@ namespace Atlantis.Framework.Currency.Interface
 
     public string ToXML()
     {
-      XElement currencydata = new XElement("currencytypes");
+      var currencydata = new XElement("currencytypes");
 
       foreach (ICurrencyInfo info in this)
       {
-        XElement infoElement = new XElement("currency",
+        var infoElement = new XElement("currency",
           new XAttribute("type", info.CurrencyType),
           new XAttribute("description", info.Description),
           new XAttribute("descriptionplural", info.DescriptionPlural),
           new XAttribute("symbol", info.Symbol),
           new XAttribute("symbolhtml", info.SymbolHtml),
           new XAttribute("symbolposition", info.SymbolPosition.ToString()),
-          new XAttribute("decimalprecision", info.DecimalPrecision.ToString()),
+          new XAttribute("decimalprecision", info.DecimalPrecision.ToString(CultureInfo.InvariantCulture)),
           new XAttribute("decimalseparator", info.DecimalSeparator),
           new XAttribute("thousandsseparator", info.ThousandsSeparator),
           new XAttribute("istransactional", info.IsTransactional.ToString()),
-          new XAttribute("exchangerate", info.ExchangeRate.ToString()),
-          new XAttribute("exchangeratepricing", info.ExchangeRatePricing.ToString()),
-          new XAttribute("exchangerateoperating", info.ExchangeRateOperating.ToString()));
+          new XAttribute("isactive", info.IsActive.ToString()),
+          new XAttribute("exchangerate", info.ExchangeRate.ToString(CultureInfo.InvariantCulture)),
+          new XAttribute("exchangeratepricing", info.ExchangeRatePricing.ToString(CultureInfo.InvariantCulture)),
+          new XAttribute("exchangerateoperating", info.ExchangeRateOperating.ToString(CultureInfo.InvariantCulture)));
         currencydata.Add(infoElement);
       }
 

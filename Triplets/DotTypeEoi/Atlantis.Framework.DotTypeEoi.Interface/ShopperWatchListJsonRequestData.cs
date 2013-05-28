@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeEoi.Interface
 {
@@ -7,6 +8,8 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     public ShopperWatchListJsonRequestData(string shopperId)
     {
       ShopperID = shopperId;
+
+      RequestTimeout = TimeSpan.FromSeconds(10);
     }
   }
 }

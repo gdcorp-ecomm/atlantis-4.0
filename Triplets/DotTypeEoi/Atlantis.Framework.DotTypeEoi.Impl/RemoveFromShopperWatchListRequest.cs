@@ -10,34 +10,43 @@ namespace Atlantis.Framework.DotTypeEoi.Impl
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      IResponseData result = null;
-      var request = requestData as RemoveFromShopperWatchListRequestData;
+      RemoveFromShopperWatchListResponseData responseData;
+      var responseXml = string.Empty;
 
       var shopperId = requestData.ShopperID;
 
       try
       {
-        if (request != null)
+        using (var regEoiWebSvc = new RegEOIWebSvc())
         {
-          var gTldsXml = request.GTldsXml;
+          regEoiWebSvc.Url = ((WsConfigElement)config).WSURL;
+          regEoiWebSvc.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+          responseXml = regEoiWebSvc.RemoveFromShopperWatchListXml(shopperId, requestData.ToXML());
 
-          using (var regEoiWebSvc = new RegEOIWebSvc())
+          var addToShopperWatchListElement = XElement.Parse(responseXml);
+          var responseElement = addToShopperWatchListElement.Element("response");
+          var resultAttribute = responseElement.Attribute("result").Value;
+          if (string.IsNullOrEmpty(resultAttribute) || !resultAttribute.Equals("success"))
           {
-            regEoiWebSvc.Url = ((WsConfigElement) config).WSURL;
-            regEoiWebSvc.Timeout = (int) requestData.RequestTimeout.TotalMilliseconds;
-            var responseXml = regEoiWebSvc.RemoveFromShopperWatchListXml(shopperId, gTldsXml);
+            var exAtlantis = new AtlantisException(requestData,
+                                                   "RemoveFromShopperWatchListRequest",
+                                                   responseXml,
+                                                   requestData.ToXML());
 
-            result = RemoveFromShopperWatchListResponseData.FromXElement(XElement.Parse(responseXml));
+            responseData = new RemoveFromShopperWatchListResponseData(responseXml, exAtlantis);
+          }
+          else
+          {
+            responseData = new RemoveFromShopperWatchListResponseData(responseElement.Value);
           }
         }
       }
       catch (Exception ex)
       {
-        var exception = new AtlantisException(requestData, "RemoveFromShopperWatchListRequest.RequestHandler", ex.Message + ex.StackTrace, requestData.ToXML());
-        result = RemoveFromShopperWatchListResponseData.FromException(exception);
+        responseData = new RemoveFromShopperWatchListResponseData(responseXml, requestData, ex);
       }
 
-      return result;
+      return responseData;
     }
   }
 }

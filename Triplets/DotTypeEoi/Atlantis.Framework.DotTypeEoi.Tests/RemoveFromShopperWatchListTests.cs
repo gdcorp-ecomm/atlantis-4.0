@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.DotTypeEoi.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,7 +13,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     [TestMethod]
     public void RemoveFromShopperWatchListGoodRequest()
     {
-      var gTlds = @"<gTlds><gTld id='18' gTldSubCategoryId='234' /></gTlds>";
+      var gTlds = new List<string> { "18" };
       var request = new RemoveFromShopperWatchListRequestData("861126", gTlds);
       var response = (RemoveFromShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, 705);
       Assert.AreEqual(true, response.IsSuccess);
@@ -24,7 +25,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     {
       try
       {
-        var request = new RemoveFromShopperWatchListRequestData("861126", string.Empty);
+        var request = new RemoveFromShopperWatchListRequestData("861126", new List<string>());
       }
       catch (Exception)
       {
@@ -35,7 +36,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     [TestMethod]
     public void RemoveFromShopperWatchListRequestToXml()
     {
-      const string gTlds = @"<gTlds><gTld id='18' gTldSubCategoryId='234' /></gTlds>";
+      var gTlds = new List<string> { "18" };
       var request = new RemoveFromShopperWatchListRequestData("861126", gTlds);
       Assert.AreEqual(true, !string.IsNullOrEmpty(request.ToXML()));
     }
@@ -43,7 +44,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     [TestMethod]
     public void RemoveFromShopperWatchListResponseToXml()
     {
-      const string gTlds = @"<gTlds><gTld id='18' gTldSubCategoryId='234' /></gTlds>";
+      var gTlds = new List<string> { "18" };
       var request = new RemoveFromShopperWatchListRequestData("861126", gTlds);
       var response = (RemoveFromShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, 705);
       Assert.AreEqual(true, response.IsSuccess);

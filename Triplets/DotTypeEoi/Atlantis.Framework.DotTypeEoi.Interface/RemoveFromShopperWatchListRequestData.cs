@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
@@ -6,30 +7,28 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
 {
   public class RemoveFromShopperWatchListRequestData : RequestData
   {
-    public readonly string GTldsXml;
+    public IList<string> GtldIds { get; set; }
 
-    public RemoveFromShopperWatchListRequestData(string shopperId, string gTldsXml)
+    public RemoveFromShopperWatchListRequestData(string shopperId, IList<string> gTldIds)
     {
-      if (string.IsNullOrEmpty(gTldsXml))
-      {
-        throw new ArgumentException("gTldsXml cannot be null or empty.");
-      }
-
       ShopperID = shopperId;
-      GTldsXml = gTldsXml;
-      
+      GtldIds = gTldIds;
+
       RequestTimeout = TimeSpan.FromSeconds(10);
     }
 
     public override string ToXML()
     {
-      var result = new XElement("request");
-      result.Add(new XAttribute("shopperId", ShopperID));
+      var gTldsElement = new XElement("gTlds");
 
-      var gTlds = new XElement("gTldsXml") { Value = GTldsXml };
-      result.Add(gTlds);
+      foreach (var gtld in GtldIds)
+      {
+        var gtldElement = new XElement("gTld");
+        gtldElement.Add(new XAttribute("id", gtld));
+        gTldsElement.Add(gtldElement);
+      }
 
-      return result.ToString(SaveOptions.DisableFormatting);
+      return gTldsElement.ToString();
     }
   }
 }

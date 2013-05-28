@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
@@ -6,42 +7,28 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
 {
   public class AddToShopperWatchListRequestData : RequestData
   {
-    private readonly string _gTldsXml;
-    public string GTldsXml
-    {
-      get { return _gTldsXml; }
-    }
+    public IList<string> GtldIds { get; set; }
 
-    private readonly string _displayTime;
-    public string DisplayTime
+    public AddToShopperWatchListRequestData(string shopperId, IList<string> gTldIds)
     {
-      get { return _displayTime; }
-    }
-
-    public AddToShopperWatchListRequestData(string shopperId, string displayTime, string gTldsXml)
-    {
-      if (string.IsNullOrEmpty(displayTime) || string.IsNullOrEmpty(gTldsXml))
-      {
-        throw new ArgumentException("DisplayTime and gTldsXml cannot be null or empty.");
-      }
-
       ShopperID = shopperId;
-      _displayTime = displayTime;
-      _gTldsXml = gTldsXml;
-      
+      GtldIds = gTldIds;
+
       RequestTimeout = TimeSpan.FromSeconds(10);
     }
 
     public override string ToXML()
     {
-      var result = new XElement("request");
-      result.Add(new XAttribute("shopperId", ShopperID));
-      result.Add(new XAttribute("displayTime", _displayTime));
+      var gTldsElement = new XElement("gTlds");
 
-      var gTlds = new XElement("gTldsXml") {Value = _gTldsXml};
-      result.Add(gTlds);
+      foreach (var gtld in GtldIds)
+      {
+        var gtldElement = new XElement("gTld");
+        gtldElement.Add(new XAttribute("id", gtld));
+        gTldsElement.Add(gtldElement);
+      }
 
-      return result.ToString(SaveOptions.DisableFormatting);
+      return gTldsElement.ToString();
     }
   }
 }

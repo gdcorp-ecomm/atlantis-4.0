@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeEoi.Interface
 {
@@ -6,6 +7,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
   {
     public GeneralEoiJsonRequestData()
     {
+      RequestTimeout = TimeSpan.FromSeconds(10);
     }
 
     public override string GetCacheMD5()

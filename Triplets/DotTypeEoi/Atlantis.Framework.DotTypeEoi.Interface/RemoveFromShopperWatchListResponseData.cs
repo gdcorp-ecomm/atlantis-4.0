@@ -1,20 +1,13 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Xml.Linq;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.DotTypeEoi.Interface;
 
 namespace Atlantis.Framework.DotTypeEoi.Interface
 {
   public class RemoveFromShopperWatchListResponseData : IResponseData
   {
-    private readonly XElement _responseXml;
+    private readonly string _responseXml;
     private readonly AtlantisException _exception;
     private readonly bool _isSuccess;
-    private readonly string _responseMessage;
 
     public RemoveFromShopperWatchListResponseData(AtlantisException exception)
     {
@@ -22,36 +15,30 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
       _isSuccess = false;
     }
 
-    public RemoveFromShopperWatchListResponseData(XElement responseXml)
+    public RemoveFromShopperWatchListResponseData(string responseXml)
     {
-      try
-      {
-        _responseXml = responseXml;
-        var responseElement = responseXml.Descendants("response").FirstOrDefault();
-        if (responseElement != null)
-        {
-          _responseMessage = responseElement.Value;
-          _isSuccess = responseElement.Attribute("result").Value.Equals("success", StringComparison.OrdinalIgnoreCase);
-        }
-      }
-      catch (Exception)
-      {
-      }
+      _exception = null;
+      _responseXml = responseXml;
+      _isSuccess = true;
     }
 
-    public static IResponseData FromXElement(XElement responseXml)
+    public RemoveFromShopperWatchListResponseData(string responseXml, AtlantisException exAtlantis)
     {
-      return new RemoveFromShopperWatchListResponseData(responseXml);
+      _responseXml = responseXml;
+      _exception = exAtlantis;
+      _isSuccess = false;
     }
 
-    public static IResponseData FromException(AtlantisException ex)
+    public RemoveFromShopperWatchListResponseData(string responseXml, RequestData requestData, Exception ex)
     {
-      return new RemoveFromShopperWatchListResponseData(ex);
+      _responseXml = responseXml;
+      _exception = new AtlantisException(requestData, "RemoveFromShopperWatchListResponseData", ex.Message, requestData.ToXML());
+      _isSuccess = false;
     }
 
     public string ToXML()
     {
-      return _responseXml.ToString();
+      return _responseXml;
     }
 
     public AtlantisException GetException()
@@ -66,7 +53,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
 
     public string ResponseMessage
     {
-      get { return _responseMessage; }
+      get { return _responseXml; }
     }
   }
 }

@@ -129,10 +129,6 @@ namespace Atlantis.Framework.EcommInvoices.Interface
           return Convert.ToDateTime("1/1/1980");
         }
       }
-      private set
-      {
-        _expiresDate = value;
-      }
     }
 
     private string _expiresText;
@@ -144,7 +140,7 @@ namespace Atlantis.Framework.EcommInvoices.Interface
         {
           if (_status != InvoiceStatus.Cancelled && _status != InvoiceStatus.Completed)
           {
-            _expiresText = OrderDate.ToString("d");
+            _expiresText = ExpiresDate.ToString("d");
           }
           else
           {
@@ -158,11 +154,11 @@ namespace Atlantis.Framework.EcommInvoices.Interface
 
     #endregion
 
-    public Invoice(string uid, string orderNumber, int status, int processorStatus, DateTime orderDate, DateTime lastModifiedDate, string paymentType, string currency, int amount)
+    public Invoice(string uid, string orderNumber, int status, int processorStatus, DateTime orderDate, DateTime lastModifiedDate, string paymentType, string currency, int amount, DateTime expirationDate)
     {
       _orderNumber = orderNumber;
       _status = status;
-      ExpiresDate = orderDate;
+      _expiresDate = expirationDate;
 
       UID = uid;
       ProcessorStatus = processorStatus;

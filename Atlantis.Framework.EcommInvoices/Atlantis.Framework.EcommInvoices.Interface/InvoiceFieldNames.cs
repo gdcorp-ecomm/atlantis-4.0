@@ -11,5 +11,6 @@
     public const string ProcessorStatus = "processor_status";
     public const string CreateDate = "date_entered";
     public const string LastModifiedDate = "date_changed";
+    public const string ExpirationDate = "expirationDate";
   }
 }

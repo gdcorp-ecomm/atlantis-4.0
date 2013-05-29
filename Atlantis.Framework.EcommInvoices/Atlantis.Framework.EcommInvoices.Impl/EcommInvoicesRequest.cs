@@ -81,11 +81,14 @@ namespace Atlantis.Framework.EcommInvoices.Impl
 
     private Invoice CreateInvoice(XElement element)
     {
+      DateTime expdate = string.IsNullOrEmpty(element.Attribute(InvoiceFieldNames.ExpirationDate).Value)
+                           ? DateTime.MinValue
+                           : Convert.ToDateTime(element.Attribute(InvoiceFieldNames.ExpirationDate).Value);
       Invoice invoice = new Invoice(
         element.Attribute(InvoiceFieldNames.UID).Value, element.Attribute(InvoiceFieldNames.OrderId).Value, Convert.ToInt32(element.Attribute(InvoiceFieldNames.Status).Value)
         , Convert.ToInt32(element.Attribute(InvoiceFieldNames.ProcessorStatus).Value), Convert.ToDateTime(element.Attribute(InvoiceFieldNames.CreateDate).Value)
         , Convert. ToDateTime(element.Attribute(InvoiceFieldNames.LastModifiedDate).Value), element.Attribute(InvoiceFieldNames.ProcessorType).Value
-        , element.Attribute(InvoiceFieldNames.Currency).Value, Convert.ToInt32(element.Attribute(InvoiceFieldNames.Amount).Value)
+        , element.Attribute(InvoiceFieldNames.Currency).Value, Convert.ToInt32(element.Attribute(InvoiceFieldNames.Amount).Value), expdate
       );
 
       return invoice;

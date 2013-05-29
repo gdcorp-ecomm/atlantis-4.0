@@ -7,10 +7,11 @@ namespace Atlantis.Framework.EcommInvoices.Test
   {
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.EcommInvoices.Impl.dll")]
     public void GetAllInvoicesForShopperTest()
     {
       RetrievalAttributes retAttr = new RetrievalAttributes();
-      EcommInvoicesRequestData request = new EcommInvoicesRequestData("830398", string.Empty, string.Empty, string.Empty, 0, retAttr);
+      EcommInvoicesRequestData request = new EcommInvoicesRequestData("856907", string.Empty, string.Empty, string.Empty, 0, retAttr);
       EcommInvoicesResponseData response = (EcommInvoicesResponseData)Engine.Engine.ProcessRequest(request, 439);
 
       Assert.IsTrue(response.IsSuccess);
@@ -18,6 +19,7 @@ namespace Atlantis.Framework.EcommInvoices.Test
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.EcommInvoices.Impl.dll")]
     public void GetCancelledInvoicesForShopperTest()
     {
       RetrievalAttributes retAttr = new RetrievalAttributes(InvoiceStatus.Cancelled);
@@ -29,6 +31,7 @@ namespace Atlantis.Framework.EcommInvoices.Test
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.EcommInvoices.Impl.dll")]
     public void GetOrderedByAmountInvoicesForShopperTest()
     {
       RetrievalAttributes retAttr = new RetrievalAttributes();

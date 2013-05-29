@@ -52,7 +52,7 @@ namespace Atlantis.Framework.EcommInvoices.Interface
             statusText = "Declined";
           }
         }
-        else if (ExpiresDate > DateTime.Now || (_status == InvoiceStatus.Cancelled || _status == InvoiceStatus.Completed))
+        else
         {
           switch (_status)
           {
@@ -71,11 +71,13 @@ namespace Atlantis.Framework.EcommInvoices.Interface
             case InvoiceStatus.Active:
               statusText = "Pending";
               break;
-          }
-        }
-        else
-        {
-          statusText = "Expired";
+            case InvoiceStatus.Expired30:
+              statusText = "Expired";
+              break;
+            default:
+              statusText = "Expired";
+              break;
+          }         
         }
 
         return statusText;
@@ -142,7 +144,7 @@ namespace Atlantis.Framework.EcommInvoices.Interface
         {
           if (_status != InvoiceStatus.Cancelled && _status != InvoiceStatus.Completed)
           {
-            _expiresText = OrderDate.AddDays(30).ToString("d");
+            _expiresText = OrderDate.ToString("d");
           }
           else
           {
@@ -160,7 +162,7 @@ namespace Atlantis.Framework.EcommInvoices.Interface
     {
       _orderNumber = orderNumber;
       _status = status;
-      ExpiresDate = orderDate.AddDays(30);
+      ExpiresDate = orderDate;
 
       UID = uid;
       ProcessorStatus = processorStatus;

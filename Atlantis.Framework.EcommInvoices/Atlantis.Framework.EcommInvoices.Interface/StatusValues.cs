@@ -8,6 +8,7 @@
     public const int Cancelled = 3;
     public const int Completed = 4;
     public const int Failed = 5;
+    public const int Expired30 = 6; //new status to return for invoices that we expire automatically after approximately 30 days
   }
   public static class InvoiceProcessorStatus
   {

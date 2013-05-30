@@ -23,7 +23,7 @@ namespace Atlantis.Framework.MobilePushEmailGetSub.Tests
             MobilePushEmailGetSubscriptionsResponseData response = (MobilePushEmailGetSubscriptionsResponseData)Engine.Engine.ProcessRequest(request, _REQUESTID);
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Subscriptions);
-            Assert.IsTrue(response.Subscriptions.Length>0);
+            Assert.IsTrue(response.Subscriptions.Count > 0);
             Assert.IsTrue(response.LoginExists);
         }
 
@@ -48,7 +48,7 @@ namespace Atlantis.Framework.MobilePushEmailGetSub.Tests
             MobilePushEmailGetSubscriptionsResponseData response = (MobilePushEmailGetSubscriptionsResponseData)Engine.Engine.ProcessRequest(request, _REQUESTID);
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Subscriptions);
-            Assert.IsTrue(response.Subscriptions.Length == 0);
+            Assert.IsTrue(response.Subscriptions.Count == 0);
             Assert.IsTrue(response.LoginExists);
         }
 

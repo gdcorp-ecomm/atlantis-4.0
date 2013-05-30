@@ -59,6 +59,8 @@
     <Compile Include="EccOFFPlanDetails.cs" />
     <Compile Include="EccResponseDataBase.cs" />
     <Compile Include="EccSmtpRelayInfo.cs" />
+    <Compile Include="EmailPush\EmailPushSubscriptionItem.cs" />
+    <Compile Include="EmailPush\EmailPushSubscriptions.cs" />
     <Compile Include="Enums\EccOFFPlanInfoRequestStatus.cs" />
     <Compile Include="Enums\EccAccountStatus.cs" />
     <Compile Include="Enums\EccAccountType.cs" />

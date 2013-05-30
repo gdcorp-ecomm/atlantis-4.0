@@ -73,6 +73,7 @@
     <Compile Include="jsonHelpers\EccJsonRequest.cs" />
     <Compile Include="jsonHelpers\EccJsonResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PushSubscribeDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EccEmailAddressDetails.cs" />

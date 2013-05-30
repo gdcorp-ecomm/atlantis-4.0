@@ -1,117 +1,111 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Net;
-using System.Reflection;
-using System.Runtime.Serialization.Json;
-using System.Text;
+﻿using Atlantis.Framework.Ecc.Interface.Authentication;
+using Atlantis.Framework.Ecc.Interface.jsonHelpers;
 using Atlantis.Framework.Interface;
 using System;
 using Atlantis.Framework.MobilePushEmailGetSub.Interface;
-using Atlantis.Framework.MobilePushEmailGetSubscriptions.Interface.Objects;
+using Atlantis.Framework.MobilePushEmailGetSubscriptions.Impl.Json;
+using Atlantis.Framework.Nimitz;
 
 namespace Atlantis.Framework.MobilePushEmailGetSubscriptions.Impl
 {
-    public class MobilePushEmailGetSubscriptionsRequest : IRequest
+  public class MobilePushEmailGetSubscriptionsRequest : IRequest
+  {
+    public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
-        private const string EccGetSubscriptionById = "{0}?action=getSubscriptions";
-        private const string EccGetSubscriptionByEmail = "{0}?action=getSubscriptions&login={1}";
-        private const string NonExistantLogin = "LOGIN DOES NOT EXIST";
+        /*
+        Retrieve the RIM status for an email address
 
-        public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
+        @param RequestObj $aRequest   Standard inbound request object
+        REQUIRED OBJECT PROPERTIES:
+        RequestObj->Id                          The Authentication ID used to identify the caller
+        RequestObj->Token                       The Token/Password associated with the supplied Authentication ID
+        RequestObj->Parameters->emailaddress    The email address being queried
+
+        CONTITIONAL OBJECT PROPERTIES:
+        RequestObj->Parameters->subid           The Subscription ID.
+                                              If not supplied, returns all records.
+                                              If supplied, restricts results to only
+                                              the RIM.Subscription record with a matching subscription_id.
+
+
+
+        OPTIONAL OBJECT PROPERTIES:
+        RequestObj->Parameters->subaccount      The Shopper ID of the customer sub account being queried (overrides the shopper)
+
+        IGNORED OBJECT PROPERTIES:
+        RequestObj->Parameters->shopper         The Shopper ID of the customer account being queried
+        RequestObj->Parameters->reseller        The Reseller ID associated to the Shopper ID
+        RequestObj->Return->PageNumber
+        RequestObj->Return->ResultsPerPage
+        RequestObj->Return->OrderBy
+        RequestObj->Return->SortOrder
+
+        @return ResponseObj       Standard outbound response object
+        ON SUCCESS:
+        ResponseObj->ResultCode     = 0
+        ResponseObj->Message        = blank
+        ResponseObj->Timer          = # of seconds it took to derive the response
+        ResponseObj->Results        = An indexed array of Subscription IDs established for the email address
+
+        ON FAIL:
+        ResponseObj->ResultCode     = Unique number indicating why the web service failed
+        ResponseObj->Message        = Reason why web service failed
+        ResponseObj->Timer          = # of seconds it took to derive the response
+        ResponseObj->Results        = empty
+        */
+
+      IResponseData responseData = null;
+
+      var subscribeRequest = (MobilePushEmailGetSubscriptionsRequestData)oRequestData;
+
+      const int pageNumber = 1;
+      const int resultsPerPage = 100000;
+      const string requestMethod = "getRIMForEmail";
+
+      string requestKey;
+      string authName;
+      string authToken;
+
+
+      MobilePushEmailGetSubscriptionsRequestData mobPushGetSubsRequest = (MobilePushEmailGetSubscriptionsRequestData)oRequestData;
+      WsConfigElement wsConfig = (WsConfigElement)oConfig;
+
+      string nimitzAuthXml = NetConnect.LookupConnectInfo(oConfig, ConnectLookupType.Xml);
+      NimitzAuthHelper.GetConnectionCredentials(nimitzAuthXml, out requestKey, out authName, out authToken);
+
+      try
+      {
+        if (string.IsNullOrEmpty(mobPushGetSubsRequest.Email))
         {
-            IResponseData result = null;
-
-            MobilePushEmailGetSubscriptionsRequestData mobPushGetSubsRequest = (MobilePushEmailGetSubscriptionsRequestData) requestData;
-            WsConfigElement wsConfig = (WsConfigElement) config;
-
-            try
-            {
-                // Email goes in query string
-                // SubscriptionID goes in HTTP header ("X-Subscription-Id")
-                // TODO: Determine in testing if we have to have the Email, if we use the SubscriptionID
-                if (string.IsNullOrEmpty(mobPushGetSubsRequest.Email) && string.IsNullOrEmpty(mobPushGetSubsRequest.SubscriptionId))
-                {
-                    throw new Exception("Either Email or SubscriptionID must be present in parameters");
-                }
-                HttpWebRequest webRequest;
-                string subscriptionUrl;
-                ICollection<KeyValuePair<string, string>> requestHeaders = new Collection<KeyValuePair<string, string>>();
-                if (string.IsNullOrEmpty(mobPushGetSubsRequest.Email))
-                {
-                    subscriptionUrl = string.Format(EccGetSubscriptionById, wsConfig.WSURL);
-                    requestHeaders.Add(new KeyValuePair<string, string>("X-Subscription-Id", mobPushGetSubsRequest.SubscriptionId));
-                }
-                else
-                {
-                    subscriptionUrl = string.Format(EccGetSubscriptionByEmail, wsConfig.WSURL, mobPushGetSubsRequest.Email);
-                }
-                webRequest = WebRequest.Create(subscriptionUrl) as HttpWebRequest;
-                if (webRequest != null)
-                {
-                    webRequest.Timeout = (int) requestData.RequestTimeout.TotalMilliseconds;
-                    webRequest.Method = "POST";
-                    webRequest.ContentType = "application/x-www-form-urlencoded";
-                    webRequest.ContentLength = 0;
-
-                    foreach (KeyValuePair<string, string> reqHeader in requestHeaders)
-                    {
-                        webRequest.Headers.Add(reqHeader.Key, reqHeader.Value);
-                    }
-                    using (HttpWebResponse response = webRequest.GetResponse() as HttpWebResponse)
-                    {
-                        if (response != null && webRequest.HaveResponse)
-                        {
-                            Stream responseStream = response.GetResponseStream();
-                            if (responseStream != null)
-                            {
-                                StreamReader responseReader = new StreamReader(responseStream, Encoding.UTF8);
-                                string jsonResponse = responseReader.ReadToEnd();
-                                MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonResponse));
-
-                                try
-                                {
-                                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(PushEmailSubscription[]));
-                                    PushEmailSubscription[] subscriptions = (PushEmailSubscription[])serializer.ReadObject(stream);
-                                    result =    new MobilePushEmailGetSubscriptionsResponseData(subscriptions);                             }
-                                catch (Exception ex)
-                                {
-                                    if (jsonResponse.ToUpper().Contains(NonExistantLogin))
-                                    {
-                                        result = new MobilePushEmailGetSubscriptionsResponseData((PushEmailSubscription[])null);
-                                        ((MobilePushEmailGetSubscriptionsResponseData) result).LoginExists = false;
-                                    }
-                                    else
-                                    {
-                                        result = new MobilePushEmailGetSubscriptionsResponseData(requestData, ex);
-                                    }
-                                }
-                                responseStream.Close();
-                                responseReader.Close();
-                                stream.Close();
-                            }
-                            else
-                            {
-                                AtlantisException exception = new AtlantisException(requestData,
-                                                                                    MethodBase.GetCurrentMethod().DeclaringType.FullName,
-                                                                                    "No responseStream, called " +
-                                                                                    subscriptionUrl,string.Empty);
-                                result = new MobilePushEmailGetSubscriptionsResponseData(exception);
-
-                            }
-                        }
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                result = new MobilePushEmailGetSubscriptionsResponseData(requestData, ex);
-            }
-
-
-
-            return result;
+          throw new Exception("Email must be present in parameters");
         }
+
+        var oJsonRequestBody = new MobilePushEmailGetSubscriptionJsonRequest
+        {
+          EmailAddress = subscribeRequest.Email,
+          Subaccount = string.Empty,
+          SubscriptionId = subscribeRequest.SubscriptionId
+        };
+
+        var oRequest = new EccJsonRequest<MobilePushEmailGetSubscriptionJsonRequest>
+        {
+          Id = authName,
+          Token = authToken,
+          Return = new EccJsonPaging(pageNumber, resultsPerPage, string.Empty, string.Empty),
+          Parameters = oJsonRequestBody
+        };
+
+        string sRequest = System.Uri.EscapeDataString(oRequest.ToJson());
+        string response = EccJsonRequestHandler.PostRequest(sRequest, wsConfig.WSURL, requestMethod, requestKey);
+        responseData = new MobilePushEmailGetSubscriptionsResponseData(response);
+
+      }
+      catch (Exception ex)
+      {
+        responseData = new MobilePushEmailGetSubscriptionsResponseData(oRequestData, ex);
+      }
+
+      return responseData;
     }
+  }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using Atlantis.Framework.Ecc.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.SessionCache;
@@ -34,16 +31,6 @@ namespace Atlantis.Framework.MobilePushEmailSubscribe.Interface
                                                 MethodBase.GetCurrentMethod().DeclaringType.FullName,
                                                 ex.Message,
                                                 ex.StackTrace);
-    }
-
-    public string ToXML()
-    {
-      return string.Empty;
-    }
-
-    public AtlantisException GetException()
-    {
-      return AtlantisException;
     }
 
     #region Implementation of ISessionSerializableResponse

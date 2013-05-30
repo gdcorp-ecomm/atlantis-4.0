@@ -13,53 +13,6 @@ namespace Atlantis.Framework.MobilePushEmailSubscribe.Impl
 {
   public class MobilePushEmailSubscribeRequest : IRequest
   {
-    private static void PostRequest(string requestUrl, TimeSpan requestTimeout, IEnumerable<KeyValuePair<string, string>> requestHeaders, out IDictionary<string, string> responseHeaders)
-    {
-      responseHeaders = new Dictionary<string, string>(16);
-
-      try
-      {
-        HttpWebRequest webRequest = WebRequest.Create(requestUrl) as HttpWebRequest;
-
-        if (webRequest != null)
-        {
-          webRequest.Timeout = (int)requestTimeout.TotalMilliseconds;
-          webRequest.Method = "POST";
-          webRequest.ContentType = "application/x-www-form-urlencoded";
-          webRequest.ContentLength = 0;
-
-          foreach (KeyValuePair<string, string> customRequestHeader in requestHeaders)
-          {
-            webRequest.Headers.Add(customRequestHeader.Key, customRequestHeader.Value);
-          }
-        }
-
-        if (webRequest != null)
-        {
-          using (HttpWebResponse webResponse = webRequest.GetResponse() as HttpWebResponse)
-          {
-            if (webResponse != null && webRequest.HaveResponse)
-            {
-              using (Stream webResponseData = webResponse.GetResponseStream())
-              {
-                if (webResponseData != null)
-                {
-                  foreach (string headerKey in webResponse.Headers.AllKeys)
-                  {
-                    responseHeaders[headerKey] = webResponse.Headers[headerKey];
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        throw new Exception(string.Format("Error posting to ECC subscribe service. {0}", ex.Message));
-      }
-    }
-
     #region IRequest Members
 
     public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)

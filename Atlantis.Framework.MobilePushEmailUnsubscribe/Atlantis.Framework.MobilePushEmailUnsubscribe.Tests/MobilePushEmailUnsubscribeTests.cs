@@ -11,7 +11,7 @@ namespace Atlantis.Framework.MobilePushEmailUnsubscribe.Tests
     private const string EMAIL_VALID = "test1@smccoyforever.com";
     private const string EMAIL_INVALID = "timbo@notvalid.com";
 
-    private const long SUBSCRIPTION_ID_VALID = 174;
+    private const long SUBSCRIPTION_ID_VALID = 482;
     private const long SUBSCRIPTION_ID_INVALID = -2;
 
     [TestMethod]

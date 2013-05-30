@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Reflection;
+using Atlantis.Framework.Ecc.Interface;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.SessionCache;
 
 namespace Atlantis.Framework.MobilePushEmailUnsubscribe.Interface
 {
-  public class MobilePushEmailUnsubscribeResponseData : IResponseData
+  public class MobilePushEmailUnsubscribeResponseData :  EccResponseDataBase<object>, ISessionSerializableResponse
   {
     private AtlantisException AtlantisException { get; set; }
 
-    public bool IsSuccess { get; private set; }
-
     public MobilePushEmailUnsubscribeResponseData()
     {
-      IsSuccess = true;
+    }
+
+    public MobilePushEmailUnsubscribeResponseData(string resultJson)
+      : base(resultJson)
+    {
     }
 
     public MobilePushEmailUnsubscribeResponseData(RequestData requestData, Exception ex)
@@ -24,14 +28,18 @@ namespace Atlantis.Framework.MobilePushEmailUnsubscribe.Interface
                                                 ex.StackTrace);
     }
 
-    public string ToXML()
+    #region Implementation of ISessionSerializableResponse
+
+    public string SerializeSessionData()
     {
-      return string.Empty;
+      throw new NotImplementedException();
     }
 
-    public AtlantisException GetException()
+    public void DeserializeSessionData(string sessionData)
     {
-      return AtlantisException;
+      throw new NotImplementedException();
     }
+
+    #endregion
   }
 }

@@ -11,6 +11,8 @@ namespace Atlantis.Framework.MobilePushEmailUnsubscribe.Interface
 
     public long SubscriptionId { get; private set; }
 
+    public bool? IsMobile { get; set; }
+
     public MobilePushEmailUnsubscribeRequestData(string email, long subscriptionId, string shopperId, string sourceUrl, string orderId, string pathway, int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       Email = email;

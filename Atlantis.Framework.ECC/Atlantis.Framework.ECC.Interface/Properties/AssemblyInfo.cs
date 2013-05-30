@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, LLC")]
 [assembly: AssemblyProduct("Atlantis.Framework.ECC.Interface")]
-[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2010-2012")]
+[assembly: AssemblyCopyright("Copyright © GoDaddy.com, LLC 2010-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -36,4 +36,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.12.8.30")]
+[assembly: AssemblyFileVersion("4.13.5.30")]

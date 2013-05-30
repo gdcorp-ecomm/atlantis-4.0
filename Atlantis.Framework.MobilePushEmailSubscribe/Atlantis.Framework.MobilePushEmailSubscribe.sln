@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C7AD9606-4D95-4DE7-A226-3480AD77DF36}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Engine", "..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj", "{D30157B2-C1B3-4073-BA5E-632E2337A997}"
@@ -20,9 +20,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Nimitz", "..\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz\Atlantis.Framework.Nimitz.csproj", "{3213E6DB-F026-4F17-A46A-7127F79F6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.SessionCache", "..\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache\Atlantis.Framework.SessionCache.csproj", "{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.ECC.Interface", "..\Atlantis.Framework.ECC\Atlantis.Framework.ECC.Interface\Atlantis.Framework.ECC.Interface.csproj", "{35A2F607-EB94-4A71-9A01-2285357D3A61}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -43,6 +49,17 @@ Global
 		SccProjectUniqueName5 = Atlantis.Framework.MobilePushEmailSubscribe.Tests\\Atlantis.Framework.MobilePushEmailSubscribe.Tests.csproj
 		SccProjectName5 = Atlantis.Framework.MobilePushEmailSubscribe.Tests
 		SccLocalPath5 = Atlantis.Framework.MobilePushEmailSubscribe.Tests
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.MobilePushEmailSubscribe.sln
+		SccProjectName6 = ../Atlantis.Framework.Nimitz/Atlantis.Framework.Nimitz
+		SccLocalPath6 = ..\\Atlantis.Framework.Nimitz\\Atlantis.Framework.Nimitz
+		SccProjectUniqueName7 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache.csproj
+		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.MobilePushEmailSubscribe.sln
+		SccProjectName7 = ../Atlantis.Framework.SessionCache/Atlantis.Framework.SessionCache
+		SccLocalPath7 = ..\\Atlantis.Framework.SessionCache\\Atlantis.Framework.SessionCache
+		SccProjectUniqueName8 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface\\Atlantis.Framework.ECC.Interface.csproj
+		SccProjectName8 = ../Atlantis.Framework.ECC/Atlantis.Framework.ECC.Interface
+		SccLocalPath8 = ..\\Atlantis.Framework.ECC\\Atlantis.Framework.ECC.Interface
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.MobilePushEmailSubscribe.vsmdi
@@ -72,6 +89,18 @@ Global
 		{8FCFA637-296C-48ED-AA8C-26D6947ACD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FCFA637-296C-48ED-AA8C-26D6947ACD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FCFA637-296C-48ED-AA8C-26D6947ACD7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3213E6DB-F026-4F17-A46A-7127F79F6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A2F607-EB94-4A71-9A01-2285357D3A61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,5 +108,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {C7AD9606-4D95-4DE7-A226-3480AD77DF36}
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {C7AD9606-4D95-4DE7-A226-3480AD77DF36}
+		{3213E6DB-F026-4F17-A46A-7127F79F6620} = {C7AD9606-4D95-4DE7-A226-3480AD77DF36}
+		{53BE1E8C-C474-4D2D-B2E3-DB00CBE1B5F9} = {C7AD9606-4D95-4DE7-A226-3480AD77DF36}
 	EndGlobalSection
 EndGlobal

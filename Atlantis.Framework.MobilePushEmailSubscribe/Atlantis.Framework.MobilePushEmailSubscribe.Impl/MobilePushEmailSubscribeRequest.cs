@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Net;
-using System.Text;
+using Atlantis.Framework.Ecc.Interface.Authentication;
+using Atlantis.Framework.Ecc.Interface.jsonHelpers;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.MobilePushEmailSubscribe.Impl.Json;
 using Atlantis.Framework.MobilePushEmailSubscribe.Interface;
+using Atlantis.Framework.Nimitz;
 
 namespace Atlantis.Framework.MobilePushEmailSubscribe.Impl
 {
@@ -58,66 +60,74 @@ namespace Atlantis.Framework.MobilePushEmailSubscribe.Impl
       }
     }
 
-    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
+    #region IRequest Members
+
+    public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
       IResponseData responseData;
+      var subscribeRequest = (MobilePushEmailSubscribeRequestData)oRequestData;
 
-      MobilePushEmailSubscribeRequestData mobilePushEmailSubscribeRequestData = (MobilePushEmailSubscribeRequestData)requestData;
-      WsConfigElement wsConfigElement = (WsConfigElement) config;
+      const int pageNumber = 1;
+      const int resultsPerPage = 100000;
+      const string requestMethod = "setRIMAccount";
+
+      string requestKey;
+      string authName;
+      string authToken;
+
+      string nimitzAuthXml = NetConnect.LookupConnectInfo(oConfig, ConnectLookupType.Xml);
+      NimitzAuthHelper.GetConnectionCredentials(nimitzAuthXml, out requestKey, out authName, out authToken);
 
       try
       {
-        if (string.IsNullOrEmpty(mobilePushEmailSubscribeRequestData.CallbackUrl))
+        var wsConfig = ((WsConfigElement)oConfig);
+
+        if (string.IsNullOrEmpty(subscribeRequest.CallbackUrl))
         {
           throw new Exception("CallbackUrl cannot be empty.");
         }
 
-        if(string.IsNullOrEmpty(mobilePushEmailSubscribeRequestData.PushRegistrationId))
+        if (string.IsNullOrEmpty(subscribeRequest.PushRegistrationId))
         {
           throw new Exception("PushRegistrationId cannot be empty.");
         }
 
-        if (string.IsNullOrEmpty(mobilePushEmailSubscribeRequestData.Email))
+        if (string.IsNullOrEmpty(subscribeRequest.Email))
         {
           throw new Exception("Email cannot be empty.");
         }
 
-        string callBackUrl = string.Format("{0}?action=Notification&login={1}", mobilePushEmailSubscribeRequestData.CallbackUrl,
-                                                                                mobilePushEmailSubscribeRequestData.Email);
-
-        string subscriptionUrl = string.Format("{0}?action=SUBSCRIBE&login={1}", wsConfigElement.WSURL, mobilePushEmailSubscribeRequestData.Email);
-
-        ICollection<KeyValuePair<string, string>> requestHeaders = new Collection<KeyValuePair<string, string>>();
-        requestHeaders.Add(new KeyValuePair<string, string>("X-Call-Back", callBackUrl));
-        requestHeaders.Add(new KeyValuePair<string, string>("X-Notification-Info", mobilePushEmailSubscribeRequestData.PushRegistrationId));
-
-        IDictionary<string, string> responseHeaders;
-        PostRequest(subscriptionUrl, requestData.RequestTimeout, requestHeaders, out responseHeaders);
+        string callBackUrl = string.Format("{0}?action=Notification&login={1}", subscribeRequest.CallbackUrl,
+                                                                                subscribeRequest.Email);
         
-        string subscriptionIdHeaderValue;
-        long subscriptionId;
-        if (responseHeaders.TryGetValue("X-Subscription-Id", out subscriptionIdHeaderValue) &&
-            long.TryParse(subscriptionIdHeaderValue, out subscriptionId))
+        var oJsonRequestBody = new MobilePushEmailSubscribeJsonRequest
+                                 {
+                                   Notification = subscribeRequest.PushRegistrationId,
+                                   Callback = callBackUrl,
+                                   EmailAddress = subscribeRequest.Email,
+                                   IsMobile = (subscribeRequest.IsMobile.HasValue ? (subscribeRequest.IsMobile.Value ? "1" : "0")  : string.Empty),
+                                   Subaccount = string.Empty
+                                 };
+
+        var oRequest = new EccJsonRequest<MobilePushEmailSubscribeJsonRequest>
         {
-          responseData = new MobilePushEmailSubscribeResponseData(subscriptionId);
-        }
-        else
-        {
-          StringBuilder responseHeadersBuilder = new StringBuilder();
-          foreach (KeyValuePair<string, string> responseHeader in responseHeaders)
-          {
-            responseHeadersBuilder.AppendFormat("{0}: {1},", responseHeader.Key, responseHeader.Value);
-          }
-          
-          throw new Exception(string.Format("SubscriptionId not returned. ResponseHeaders: {0}", responseHeadersBuilder));
-        }
+          Id = authName,
+          Token = authToken,
+          Return = new EccJsonPaging(pageNumber, resultsPerPage, string.Empty, string.Empty),
+          Parameters = oJsonRequestBody
+        };
+
+        string sRequest = System.Uri.EscapeDataString(oRequest.ToJson());
+        string response = EccJsonRequestHandler.PostRequest(sRequest, wsConfig.WSURL, requestMethod, requestKey);
+        responseData = new MobilePushEmailSubscribeResponseData(response);
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
-        responseData = new MobilePushEmailSubscribeResponseData(requestData, ex);
+        responseData = new MobilePushEmailSubscribeResponseData(oRequestData, ex);
       }
 
       return responseData;
     }
+    #endregion
   }
 }

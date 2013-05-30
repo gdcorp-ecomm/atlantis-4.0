@@ -13,11 +13,23 @@ namespace Atlantis.Framework.MobilePushEmailSubscribe.Interface
 
     public string CallbackUrl { get; private set; }
 
+    public bool? IsMobile { get; set; }
+
     public MobilePushEmailSubscribeRequestData(string email, string pushRegistrationId, string callbackUrl, string shopperId, string sourceUrl, string orderId, string pathway, int pageCount) : base(shopperId, sourceUrl, orderId, pathway, pageCount)
     {
       Email = email;
       PushRegistrationId = pushRegistrationId;
       CallbackUrl = callbackUrl;
+      RequestTimeout = _defaultRequestTimeout;
+    }
+
+    public MobilePushEmailSubscribeRequestData(string email, string pushRegistrationId, string callbackUrl, string shopperId, string sourceUrl, string orderId, string pathway, int pageCount, bool isMobile)
+      : base(shopperId, sourceUrl, orderId, pathway, pageCount)
+    {
+      Email = email;
+      PushRegistrationId = pushRegistrationId;
+      CallbackUrl = callbackUrl;
+      IsMobile = isMobile;
       RequestTimeout = _defaultRequestTimeout;
     }
 

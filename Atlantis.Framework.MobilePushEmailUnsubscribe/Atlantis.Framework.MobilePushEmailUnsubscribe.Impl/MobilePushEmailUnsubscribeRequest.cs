@@ -1,105 +1,124 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Net;
+using System.Globalization;
+using Atlantis.Framework.Ecc.Interface.Authentication;
+using Atlantis.Framework.Ecc.Interface.jsonHelpers;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.MobilePushEmailUnsubscribe.Impl.Json;
 using Atlantis.Framework.MobilePushEmailUnsubscribe.Interface;
+using Atlantis.Framework.Nimitz;
 
 namespace Atlantis.Framework.MobilePushEmailUnsubscribe.Impl
 {
   public class MobilePushEmailUnsubscribeRequest : IRequest
   {
-    private static void PostRequest(string requestUrl, TimeSpan requestTimeout, IEnumerable<KeyValuePair<string, string>> requestHeaders, out IDictionary<string, string> responseHeaders)
+    public IResponseData RequestHandler(RequestData oRequestData, ConfigElement oConfig)
     {
-      responseHeaders = new Dictionary<string, string>(16);
+      /*
+Unsubscribe an Email Address from RIM
 
-      try
+ @param RequestObj $aRequest   Standard inbound request object
+   REQUIRED OBJECT PROPERTIES:
+       RequestObj->Id                          The Authentication ID used to identify the caller
+       RequestObj->Token                       The Token/Password associated with the supplied Authentication ID
+       RequestObj->Parameters->emailaddress    The email address being unsubscribed from RIM
+       RequestObj->Parameters->subscription    The 'X-Subscription-Id' value from the original request headers from the customer
+
+   CONTITIONAL OBJECT PROPERTIES:
+       None of the RequestObj properties are conditional for this web service
+
+   OPTIONAL OBJECT PROPERTIES:
+       RequestObj->Parameters->subaccount      The Shopper ID of the customer sub account being queried (overrides the shopper)
+       RequestObj->Parameters->mobile          Flag to force "mobile" bit in EmailAuth.UserInfo table
+                                               1 = Set mobile bit ON
+                                               0 = Set mobile bit OFF
+                                               Not provided = Ignored
+
+   IGNORED OBJECT PROPERTIES:
+       RequestObj->Parameters->shopper         The Shopper ID of the customer account being queried
+       RequestObj->Parameters->reseller        The Reseller ID associated to the Shopper ID
+       RequestObj->Return->PageNumber
+       RequestObj->Return->ResultsPerPage
+       RequestObj->Return->OrderBy
+       RequestObj->Return->SortOrder
+
+ @return ResponseObj       Standard outbound response object
+   ON SUCCESS:
+       ResponseObj->ResultCode     = 0
+       ResponseObj->Message        = blank
+       ResponseObj->Timer          = # of seconds it took to derive the response
+       ResponseObj->Results        = empty
+
+   ON FAIL:
+       ResponseObj->ResultCode     = Unique number indicating why the web service failed
+       ResponseObj->ResultCodes     = 30000; message = "Email address xxx does not exist." 
+  30001; message = "Email address xxx is a type of: zzz. Only email accounts may be unsubscribed from RIM." 
+ 30002; message = "The email address xxx already exists." 
+ 30003; message = "3 Failed to unsubscribe xxx / zzz" 
+ 30004; message = "2 Failed to unsubscribe xxx / yyy"
+       ResponseObj->Message        = Reason why web service failed
+       ResponseObj->Timer          = # of seconds it took to derive the response
+       ResponseObj->Results        = empty
+       * */
+
+      MobilePushEmailUnsubscribeRequestData mobilePushEmailUnsubscribeRequestData = (MobilePushEmailUnsubscribeRequestData)oRequestData;
+      WsConfigElement wsConfigElement = (WsConfigElement)oConfig;
+
+      if (mobilePushEmailUnsubscribeRequestData.SubscriptionId <= 0)
       {
-        HttpWebRequest webRequest = WebRequest.Create(requestUrl) as HttpWebRequest;
-
-        if (webRequest != null)
-        {
-          webRequest.Timeout = (int)requestTimeout.TotalMilliseconds;
-          webRequest.Method = "POST";
-          webRequest.ContentType = "application/x-www-form-urlencoded";
-          webRequest.ContentLength = 0;
-
-          foreach (KeyValuePair<string, string> customRequestHeader in requestHeaders)
-          {
-            webRequest.Headers.Add(customRequestHeader.Key, customRequestHeader.Value);
-          }
-        }
-
-        if (webRequest != null)
-        {
-          using (HttpWebResponse webResponse = webRequest.GetResponse() as HttpWebResponse)
-          {
-            if (webResponse != null && webRequest.HaveResponse)
-            {
-              using (Stream webResponseData = webResponse.GetResponseStream())
-              {
-                if (webResponseData != null)
-                {
-                  foreach (string headerKey in webResponse.Headers.AllKeys)
-                  {
-                    responseHeaders[headerKey] = webResponse.Headers[headerKey];
-                  }
-                }
-              }
-            }
-          }
-        }
+        throw new Exception("SubscriptionId must be greater than zero.");
       }
-      catch (Exception ex)
+
+      if (string.IsNullOrEmpty(mobilePushEmailUnsubscribeRequestData.Email))
       {
-        throw new Exception(string.Format("Error posting to ECC subscribe service. {0}", ex.Message));
+        throw new Exception("Email cannot be empty.");
       }
-    }
 
-    public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
-    {
+
       IResponseData responseData;
+      var unsubscribeRequest = (MobilePushEmailUnsubscribeRequestData)oRequestData;
 
-      MobilePushEmailUnsubscribeRequestData mobilePushEmailUnsubscribeRequestData = (MobilePushEmailUnsubscribeRequestData)requestData;
-      WsConfigElement wsConfigElement = (WsConfigElement)config;
+      const int pageNumber = 1;
+      const int resultsPerPage = 100000;
+      const string requestMethod = "removeRIMAccount";
+
+      string requestKey = "tH15!zt433Cc@P1*";
+      string authName = "GDMobile201111";
+      string authToken = "DgD11M0b!l32o!1";
+
+      //string nimitzAuthXml = NetConnect.LookupConnectInfo(oConfig, ConnectLookupType.Xml);
+      //NimitzAuthHelper.GetConnectionCredentials(nimitzAuthXml, out requestKey, out authName, out authToken);
 
       try
       {
-        if (mobilePushEmailUnsubscribeRequestData.SubscriptionId <= 0)
+        var wsConfig = ((WsConfigElement)oConfig);
+
+        var oJsonRequestBody = new MobilePushEmailUnsubscribeJsonRequest
         {
-          throw new Exception("SubscriptionId must be greater than zero.");
-        }
+          EmailAddress = unsubscribeRequest.Email,
+          IsMobile = (unsubscribeRequest.IsMobile.HasValue ? (unsubscribeRequest.IsMobile.Value ? "1" : "0") : string.Empty),
+          Subaccount = string.Empty,
+          SubscriptionId = unsubscribeRequest.SubscriptionId.ToString(CultureInfo.InvariantCulture)
+        };
 
-        if (string.IsNullOrEmpty(mobilePushEmailUnsubscribeRequestData.Email))
+        var oRequest = new EccJsonRequest<MobilePushEmailUnsubscribeJsonRequest>
         {
-          throw new Exception("Email cannot be empty.");
-        }
+          Id = authName,
+          Token = authToken,
+          Return = new EccJsonPaging(pageNumber, resultsPerPage, string.Empty, string.Empty),
+          Parameters = oJsonRequestBody
+        };
 
-        string unsubscribeUrl = string.Format("{0}?action=UNSUBSCRIBE&login={1}", wsConfigElement.WSURL, mobilePushEmailUnsubscribeRequestData.Email);
-
-        ICollection<KeyValuePair<string, string>> requestHeaders = new Collection<KeyValuePair<string, string>>();
-        requestHeaders.Add(new KeyValuePair<string, string>("X-Subscription-Id", mobilePushEmailUnsubscribeRequestData.SubscriptionId.ToString()));
-
-        IDictionary<string, string> responseHeaders;
-        PostRequest(unsubscribeUrl, requestData.RequestTimeout, requestHeaders, out responseHeaders);
-
-        string subscriptionErrorHeaderValue;
-        if (!responseHeaders.TryGetValue("X-Subscription-Failure", out subscriptionErrorHeaderValue))
-        {
-          responseData = new MobilePushEmailUnsubscribeResponseData();
-        }
-        else
-        {
-          throw new Exception(string.Format("Unsubscribe failure: {0}", subscriptionErrorHeaderValue));
-        }
+        string sRequest = System.Uri.EscapeDataString(oRequest.ToJson());
+        string response = EccJsonRequestHandler.PostRequest(sRequest, wsConfig.WSURL, requestMethod, requestKey);
+        responseData = new MobilePushEmailUnsubscribeResponseData(response);
       }
       catch (Exception ex)
       {
-        responseData = new MobilePushEmailUnsubscribeResponseData(requestData, ex);
+        responseData = new MobilePushEmailUnsubscribeResponseData(oRequestData, ex);
       }
 
       return responseData;
+
     }
   }
 }

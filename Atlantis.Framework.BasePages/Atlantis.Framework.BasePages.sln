@@ -40,13 +40,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.BasePage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Containers", "..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj", "{C333E679-494E-422D-AB5E-E4C0EC94ACD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Pipeline", "..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline\Atlantis.Framework.Render.Pipeline.csproj", "{68764D92-7CD9-45FB-B650-1429656DCF14}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Pipeline.Interface", "..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj", "{0D7F076F-1809-437B-B045-E35A7E68E423}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 18
+		SccNumberOfProjects = 16
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -107,14 +103,6 @@ Global
 		SccProjectTopLevelParentUniqueName15 = Atlantis.Framework.BasePages.sln
 		SccProjectName15 = ../Atlantis.Framework.Providers.Containers/Atlantis.Framework.Providers.Containers
 		SccLocalPath15 = ..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers
-		SccProjectUniqueName16 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline\\Atlantis.Framework.Render.Pipeline.csproj
-		SccProjectTopLevelParentUniqueName16 = Atlantis.Framework.BasePages.sln
-		SccProjectName16 = ../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline
-		SccLocalPath16 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline
-		SccProjectUniqueName17 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface\\Atlantis.Framework.Render.Pipeline.Interface.csproj
-		SccProjectTopLevelParentUniqueName17 = Atlantis.Framework.BasePages.sln
-		SccProjectName17 = ../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline.Interface
-		SccLocalPath17 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Atlantis.Framework.BasePages.vsmdi
@@ -184,14 +172,6 @@ Global
 		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68764D92-7CD9-45FB-B650-1429656DCF14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68764D92-7CD9-45FB-B650-1429656DCF14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68764D92-7CD9-45FB-B650-1429656DCF14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68764D92-7CD9-45FB-B650-1429656DCF14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -209,7 +189,5 @@ Global
 		{FB8A1912-7114-4FE2-9E96-9698635FBEB1} = {17C09AEF-0987-45E9-89CE-D996E3B207E8}
 		{8CDD515F-375E-4FA5-9E41-F95227396675} = {17C09AEF-0987-45E9-89CE-D996E3B207E8}
 		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {17C09AEF-0987-45E9-89CE-D996E3B207E8}
-		{68764D92-7CD9-45FB-B650-1429656DCF14} = {17C09AEF-0987-45E9-89CE-D996E3B207E8}
-		{0D7F076F-1809-437B-B045-E35A7E68E423} = {17C09AEF-0987-45E9-89CE-D996E3B207E8}
 	EndGlobalSection
 EndGlobal

@@ -1,15 +1,14 @@
 ﻿using System.IO;
+using System.Text.RegularExpressions;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using System.Web.UI;
-using Atlantis.Framework.Render.Pipeline;
-using Atlantis.Framework.Render.Pipeline.Interface;
 
 namespace Atlantis.Framework.BasePages
 {
   public abstract class AtlantisContextBasePage : Page
   {
-    private readonly RenderPipelineManager _renderPipelineManager = new RenderPipelineManager();
+    private static readonly Regex _lineBreaksRegex = new Regex(@"(\s*(\r)?\n\s*)+", RegexOptions.Compiled);
 
     public static bool StripWhitespaceOnRenderDefault = false;
 
@@ -46,27 +45,17 @@ namespace Atlantis.Framework.BasePages
       }
     }
 
-    private void StripWhiteSpaceCheck()
-    {
-      if (StripWhitespaceOnRender)
-      {
-        _renderPipelineManager.AddRenderHandler(new StripWhiteSpaceRenderHandler());
-      }
-    }
-
     private void RenderPage(HtmlTextWriter writer)
     {
-      if (_renderPipelineManager.RenderHandlerCount > 0)
+      if (StripWhitespaceOnRender)
       {
         using (HtmlTextWriter htmlwriter = new HtmlTextWriter(new StringWriter()))
         {
           base.Render(htmlwriter);
 
-          IRenderContent renderContent = new BasePageRenderContent(htmlwriter.InnerWriter.ToString());
+          string modifiedContent = _lineBreaksRegex.Replace(htmlwriter.InnerWriter.ToString(), "\n").Trim();
 
-          IProcessedRenderContent processedRenderContent = _renderPipelineManager.RenderContent(renderContent, HttpProviderContainer.Instance);
-
-          writer.Write(processedRenderContent.Content);
+          writer.Write(modifiedContent);
         }
       }
       else
@@ -75,19 +64,8 @@ namespace Atlantis.Framework.BasePages
       }
     }
 
-    protected void AddRenderHandler(params IRenderHandler[] renderHandlers)
-    {
-      _renderPipelineManager.AddRenderHandler(renderHandlers);
-    }
-
-    protected void AddRenderHandler(IRenderHandler renderHandler)
-    {
-      _renderPipelineManager.AddRenderHandler(renderHandler);
-    }
-
     protected override void Render(HtmlTextWriter writer)
     {
-      StripWhiteSpaceCheck();
       RenderPage(writer);
     }
   }

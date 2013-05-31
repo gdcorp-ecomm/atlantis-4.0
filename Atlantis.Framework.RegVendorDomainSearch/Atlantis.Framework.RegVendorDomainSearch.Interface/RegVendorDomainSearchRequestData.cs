@@ -18,6 +18,7 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
     private string _tlds;
     private string _searchDatabase = string.Empty;
     private string _supportedLanguages = string.Empty;
+    private string _auctionType = string.Empty;
 
     public TimeSpan _requestTimeout = TimeSpan.FromMilliseconds(2500);
 
@@ -71,6 +72,24 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
       this._supportedLanguages = supportedLanguages;
     }
 
+    public RegVendorDomainSearchRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount,
+        string searchDatabase, string domainName, string requestingServer, string customerIp,
+        int privateLabelID, string sourceCode, int maxDomainsPerVendor, string tlds, string supportedLanguages, string auctionType)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    {
+      this._searchDatabase = searchDatabase;
+      this._domainName = domainName;
+      this._requestingServer = requestingServer;
+      this._customerIp = customerIp;
+      this._privateLabelID = privateLabelID;
+      this._sourceCode = sourceCode;
+      this._visitingId = pathway;
+      this._maxDomainsPerVendor = maxDomainsPerVendor;
+      this._tlds = tlds;
+      this._supportedLanguages = supportedLanguages;
+      this._auctionType = auctionType;
+    }
+
     public override string GetCacheMD5()
     {
       throw new System.NotImplementedException();
@@ -103,6 +122,10 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
           if (!string.IsNullOrEmpty(vendors))
           {
             writer.WriteAttributeString("vendorid", vendors);
+          }
+          if (!string.IsNullOrEmpty(_auctionType))
+          {
+            writer.WriteAttributeString("auctiontype", this._auctionType);
           }
 
           writer.WriteAttributeString("domainname", this._domainName);

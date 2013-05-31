@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Atlantis.Framework.RegVendorDomainSearch.Interface
 {
@@ -39,21 +37,22 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
     public string Server { get; set; }
     public string DateTime { get; set; }
 
-    public DPPDomainNameMatch ExactMatch { get; private set; }
+    private List<DPPDomainNameMatch> _exactMatch = new List<DPPDomainNameMatch>();
+    public List<DPPDomainNameMatch> ExactMatch
+    {
+      get { return _exactMatch; }
+    }
 
     private List<DPPDomainNameMatch> _premiumMatch = new List<DPPDomainNameMatch>();
     public List<DPPDomainNameMatch> PremiumMatch
     {
-      get
-      {
-        return _premiumMatch;
-      }
+      get { return _premiumMatch; }
     }
 
     public void AddExactMatch(RegVendorDomainSearchVendor vendorId, int id, string name, int price, 
       int pct, string auctionType, string auctionEndTime)
     {
-      ExactMatch = new DPPDomainNameMatch(vendorId, id, name, price, pct, auctionType, auctionEndTime);
+      ExactMatch.Add(new DPPDomainNameMatch(vendorId, id, name, price, pct, auctionType, auctionEndTime));
     }
 
     public void AddPremiumMatch(RegVendorDomainSearchVendor vendorId, int id, string name, 
@@ -64,7 +63,7 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
 
     public void AddExactMatch(DPPDomainNameMatch match)
     {
-      ExactMatch = match;
+      ExactMatch.Add(match);
     }
 
     public void AddPremiumMatch(DPPDomainNameMatch match)

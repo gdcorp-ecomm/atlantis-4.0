@@ -1,7 +1,7 @@
 ﻿using System;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.RegVendorDomainSearch.Interface;
 using Atlantis.Framework.RegVendorDomainSearch.Impl.gdDPPSearch;
+using Atlantis.Framework.RegVendorDomainSearch.Interface;
 
 namespace Atlantis.Framework.RegVendorDomainSearch.Impl
 {
@@ -52,7 +52,7 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Impl
       return responseData;
 
     }
-    
+
     /******************************************************************************/
 
     #endregion

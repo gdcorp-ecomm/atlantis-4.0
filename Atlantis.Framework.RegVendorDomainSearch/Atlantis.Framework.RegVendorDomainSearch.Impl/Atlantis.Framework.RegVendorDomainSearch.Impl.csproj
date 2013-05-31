@@ -89,9 +89,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <WebReferenceUrl Include="http://g1dwlep001/gddppsearch/gddppsearchws.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\gdDPPSearch\</RelPath>

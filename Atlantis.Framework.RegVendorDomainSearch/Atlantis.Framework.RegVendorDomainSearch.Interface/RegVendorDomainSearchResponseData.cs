@@ -85,16 +85,18 @@ namespace Atlantis.Framework.RegVendorDomainSearch.Interface
       }
 
       // Exact domain match
-      XmlElement xnExact = (XmlElement)xdDoc.SelectSingleNode("/dppdomainsearch/exact/domain");
+      XmlElement xnExact = (XmlElement)xdDoc.SelectSingleNode("/dppdomainsearch/exact");
       if (xnExact != null)
       {
-        DPPDomainNameMatch match = new DPPDomainNameMatch();
-        foreach (XmlAttribute attr in xnExact.Attributes)
+        foreach (XmlElement xnDomain in xnExact)
         {
-          handleAttribute(ref match, attr.Name, attr.Value);
+          DPPDomainNameMatch match = new DPPDomainNameMatch();
+          foreach (XmlAttribute attr in xnDomain.Attributes)
+          {
+            handleAttribute(ref match, attr.Name, attr.Value);
+          }
+          _domainSearchResult.AddExactMatch(match);
         }
-
-        _domainSearchResult.AddExactMatch(match);
       }
 
       // premium domain match

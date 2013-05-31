@@ -2,13 +2,13 @@
 using System.Xml;
 using Atlantis.Framework.Interface;
 
-namespace Atlantis.Framework.AuctionConfirmBuyNow.Interface 
+namespace Atlantis.Framework.AuctionConfirmBuyNow.Interface
 {
   public class AuctionConfirmBuyNowResponseData : IResponseData
   {
     private AtlantisException _atlEx;
     private string _auctionConfirmBuyNowResponseXml = string.Empty;
-    
+
     public bool IsSuccess { get; private set; }
 
     public bool IsConfirmBuyNowValid { get; private set; }
@@ -22,29 +22,33 @@ namespace Atlantis.Framework.AuctionConfirmBuyNow.Interface
         _auctionConfirmBuyNowResponseXml = auctionXml;
         IsSuccess = true;
         _atlEx = null;
+        PopulateFromXML(auctionXml);
+      }
+    }
 
-        XmlDocument xDoc = new XmlDocument();
-        xDoc.LoadXml(auctionXml);
+    private void PopulateFromXML(string resultXml)
+    {
+      XmlDocument xDoc = new XmlDocument();
+      xDoc.LoadXml(resultXml);
 
-        var item = xDoc.SelectSingleNode("/ConfirmBuyNowWithSystemIdRsp");
-        if (item != null)
+      var item = xDoc.SelectSingleNode("/ConfirmBuyNowWithSystemIdRsp");
+      if (item != null)
+      {
+        XmlAttributeCollection xAtr = item.Attributes;
+        if (xAtr != null)
         {
-          XmlAttributeCollection xAtr = item.Attributes;
-          if (xAtr != null)
+          foreach (XmlAttribute xAtrNode in xAtr)
           {
-            foreach (XmlAttribute xAtrNode in xAtr)
+            if (!string.IsNullOrEmpty(xAtrNode.Value))
             {
-              if (!string.IsNullOrEmpty(xAtrNode.Value))
+              switch (xAtrNode.Name.ToLower())
               {
-                switch (xAtrNode.Name)
-                {
-                  case "Valid":
-                    IsConfirmBuyNowValid = string.Compare(xAtrNode.Value, "true", true) == 0;
-                    break;
-                  case "Error":
-                    ErrorMessage = xAtrNode.Value;
-                    break;
-                }
+                case "valid":
+                  IsConfirmBuyNowValid = string.Compare(xAtrNode.Value, "true", true) == 0;
+                  break;
+                case "error":
+                  ErrorMessage = xAtrNode.Value;
+                  break;
               }
             }
           }
@@ -54,13 +58,9 @@ namespace Atlantis.Framework.AuctionConfirmBuyNow.Interface
 
     public AuctionConfirmBuyNowResponseData(RequestData oRequestData, Exception ex)
     {
-      _atlEx = new AtlantisException(oRequestData,
-        "AuctionConfirmBuyNowResponseData",
-        ex.Message,
-        oRequestData.ToXML());
+      _atlEx = new AtlantisException(oRequestData, "AuctionConfirmBuyNowResponseData", ex.Message, oRequestData.ToXML());
     }
 
-    
     #region Implementation of IResponseData
 
     public string ToXML()

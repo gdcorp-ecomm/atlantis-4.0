@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuctionConfirmBuyNowBulkRequest.cs" />
     <Compile Include="AuctionConfirmBuyNowRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -70,16 +71,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx%3fop=ConfirmBuyNow">
+    <WebReferenceUrl Include="http://tdnam.dev.intranet.gdg/trpAdminUtilsService/trpBiddingService.asmx%3fop=ConfirmBuyNow">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\AuctionAPIWebService\</RelPath>
-      <UpdateFromURL>http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx%3fop=ConfirmBuyNow</UpdateFromURL>
+      <UpdateFromURL>http://tdnam.dev.intranet.gdg/trpAdminUtilsService/trpBiddingService.asmx%3fop=ConfirmBuyNow</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -89,10 +87,10 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web References\AuctionAPIWebService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

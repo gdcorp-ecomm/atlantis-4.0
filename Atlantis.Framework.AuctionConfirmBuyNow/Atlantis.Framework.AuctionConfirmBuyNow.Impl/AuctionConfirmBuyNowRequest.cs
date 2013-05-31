@@ -13,15 +13,15 @@ namespace Atlantis.Framework.AuctionConfirmBuyNow.Impl
     {
       AuctionConfirmBuyNowResponseData oResponseData = null;
 
-      AuctionConfirmBuyNowRequestData request = (AuctionConfirmBuyNowRequestData) oRequestData;
+      AuctionConfirmBuyNowRequestData request = (AuctionConfirmBuyNowRequestData)oRequestData;
 
       trpBiddingService service = new trpBiddingService();
-                                    
+
       try
       {
-        service.Url = ((WsConfigElement) oConfig).WSURL;
-        service.Timeout = (int) request.RequestTimeout.TotalMilliseconds;
-        
+        service.Url = ((WsConfigElement)oConfig).WSURL;
+        service.Timeout = (int)request.RequestTimeout.TotalMilliseconds;
+
         string response = service.ConfirmBuyNowWithSystemId(request.SourceSystemId, request.AuctionItemId, request.ShopperID, request.Comments, request.Isc, request.Itc);
 
         oResponseData = new AuctionConfirmBuyNowResponseData(response);

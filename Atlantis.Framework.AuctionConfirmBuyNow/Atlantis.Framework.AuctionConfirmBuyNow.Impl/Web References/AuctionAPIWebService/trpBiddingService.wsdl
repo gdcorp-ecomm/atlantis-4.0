@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="trpBiddingService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="trpBiddingService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="trpBiddingService" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="trpBiddingService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Domain Name AfterMarket Bidding WebService.</wsdl:documentation>
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="trpBiddingService">
@@ -51,38 +51,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="PlaceExternalBid">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="sDomain" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="sBidderShopperID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="sBidAmount" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="PlaceExternalBidResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="PlaceExternalBidResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="PlaceBid">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="sBidderShopperID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="sBidAmount" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="PlaceBidResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="PlaceBidResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="ConfirmBid">
         <s:complexType>
           <s:sequence>
@@ -130,21 +98,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ConfirmBackorderBidResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="PlaceBuyNow">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="sBidderShopperID" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="PlaceBuyNowResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="PlaceBuyNowResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -212,24 +165,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="PlaceCounterOffer">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="sItemBidID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="sBidAmount" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="sComments" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="PlaceCounterOfferResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="PlaceCounterOfferResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="ConfirmCounterOffer">
         <s:complexType>
           <s:sequence>
@@ -245,22 +180,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ConfirmCounterOfferResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="PlaceAcceptOffer">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="sMemberItemID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="sItemBidID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="sShopperID" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="PlaceAcceptOfferResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="PlaceAcceptOfferResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -294,6 +213,22 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ConfirmAcceptOfferWithSystemIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VendorSpecificBiddingAction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sourceSystemID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="action" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="inputXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VendorSpecificBiddingActionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VendorSpecificBiddingActionResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -338,18 +273,6 @@
   <wsdl:message name="GetBidInformationSoapOut">
     <wsdl:part name="parameters" element="tns:GetBidInformationResponse" />
   </wsdl:message>
-  <wsdl:message name="PlaceExternalBidSoapIn">
-    <wsdl:part name="parameters" element="tns:PlaceExternalBid" />
-  </wsdl:message>
-  <wsdl:message name="PlaceExternalBidSoapOut">
-    <wsdl:part name="parameters" element="tns:PlaceExternalBidResponse" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBidSoapIn">
-    <wsdl:part name="parameters" element="tns:PlaceBid" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBidSoapOut">
-    <wsdl:part name="parameters" element="tns:PlaceBidResponse" />
-  </wsdl:message>
   <wsdl:message name="ConfirmBidSoapIn">
     <wsdl:part name="parameters" element="tns:ConfirmBid" />
   </wsdl:message>
@@ -367,12 +290,6 @@
   </wsdl:message>
   <wsdl:message name="ConfirmBackorderBidSoapOut">
     <wsdl:part name="parameters" element="tns:ConfirmBackorderBidResponse" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBuyNowSoapIn">
-    <wsdl:part name="parameters" element="tns:PlaceBuyNow" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBuyNowSoapOut">
-    <wsdl:part name="parameters" element="tns:PlaceBuyNowResponse" />
   </wsdl:message>
   <wsdl:message name="ConfirmBuyNowWithSystemIdSoapIn">
     <wsdl:part name="parameters" element="tns:ConfirmBuyNowWithSystemId" />
@@ -398,23 +315,11 @@
   <wsdl:message name="GetOffersSoapOut">
     <wsdl:part name="parameters" element="tns:GetOffersResponse" />
   </wsdl:message>
-  <wsdl:message name="PlaceCounterOfferSoapIn">
-    <wsdl:part name="parameters" element="tns:PlaceCounterOffer" />
-  </wsdl:message>
-  <wsdl:message name="PlaceCounterOfferSoapOut">
-    <wsdl:part name="parameters" element="tns:PlaceCounterOfferResponse" />
-  </wsdl:message>
   <wsdl:message name="ConfirmCounterOfferSoapIn">
     <wsdl:part name="parameters" element="tns:ConfirmCounterOffer" />
   </wsdl:message>
   <wsdl:message name="ConfirmCounterOfferSoapOut">
     <wsdl:part name="parameters" element="tns:ConfirmCounterOfferResponse" />
-  </wsdl:message>
-  <wsdl:message name="PlaceAcceptOfferSoapIn">
-    <wsdl:part name="parameters" element="tns:PlaceAcceptOffer" />
-  </wsdl:message>
-  <wsdl:message name="PlaceAcceptOfferSoapOut">
-    <wsdl:part name="parameters" element="tns:PlaceAcceptOfferResponse" />
   </wsdl:message>
   <wsdl:message name="ConfirmAcceptOfferSoapIn">
     <wsdl:part name="parameters" element="tns:ConfirmAcceptOffer" />
@@ -427,6 +332,12 @@
   </wsdl:message>
   <wsdl:message name="ConfirmAcceptOfferWithSystemIdSoapOut">
     <wsdl:part name="parameters" element="tns:ConfirmAcceptOfferWithSystemIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="VendorSpecificBiddingActionSoapIn">
+    <wsdl:part name="parameters" element="tns:VendorSpecificBiddingAction" />
+  </wsdl:message>
+  <wsdl:message name="VendorSpecificBiddingActionSoapOut">
+    <wsdl:part name="parameters" element="tns:VendorSpecificBiddingActionResponse" />
   </wsdl:message>
   <wsdl:message name="GetBidHistorySoapIn">
     <wsdl:part name="parameters" element="tns:GetBidHistory" />
@@ -454,22 +365,6 @@
   <wsdl:message name="GetBidInformationHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
-  <wsdl:message name="PlaceExternalBidHttpGetIn">
-    <wsdl:part name="sDomain" type="s:string" />
-    <wsdl:part name="sBidderShopperID" type="s:string" />
-    <wsdl:part name="sBidAmount" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceExternalBidHttpGetOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBidHttpGetIn">
-    <wsdl:part name="sMemberItemID" type="s:string" />
-    <wsdl:part name="sBidderShopperID" type="s:string" />
-    <wsdl:part name="sBidAmount" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBidHttpGetOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
   <wsdl:message name="ConfirmBidHttpGetIn">
     <wsdl:part name="sourceSystemID" type="s:string" />
     <wsdl:part name="sMemberItemID" type="s:string" />
@@ -494,13 +389,6 @@
     <wsdl:part name="sBackorderId" type="s:string" />
   </wsdl:message>
   <wsdl:message name="ConfirmBackorderBidHttpGetOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBuyNowHttpGetIn">
-    <wsdl:part name="sMemberItemID" type="s:string" />
-    <wsdl:part name="sBidderShopperID" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBuyNowHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="ConfirmBuyNowWithSystemIdHttpGetIn">
@@ -535,16 +423,6 @@
   <wsdl:message name="GetOffersHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
-  <wsdl:message name="PlaceCounterOfferHttpGetIn">
-    <wsdl:part name="sMemberItemID" type="s:string" />
-    <wsdl:part name="sItemBidID" type="s:string" />
-    <wsdl:part name="sShopperID" type="s:string" />
-    <wsdl:part name="sBidAmount" type="s:string" />
-    <wsdl:part name="sComments" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceCounterOfferHttpGetOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
   <wsdl:message name="ConfirmCounterOfferHttpGetIn">
     <wsdl:part name="sMemberItemID" type="s:string" />
     <wsdl:part name="sItemBidID" type="s:string" />
@@ -553,14 +431,6 @@
     <wsdl:part name="sComments" type="s:string" />
   </wsdl:message>
   <wsdl:message name="ConfirmCounterOfferHttpGetOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceAcceptOfferHttpGetIn">
-    <wsdl:part name="sMemberItemID" type="s:string" />
-    <wsdl:part name="sItemBidID" type="s:string" />
-    <wsdl:part name="sShopperID" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceAcceptOfferHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="ConfirmAcceptOfferHttpGetIn">
@@ -578,6 +448,14 @@
     <wsdl:part name="sShopperID" type="s:string" />
   </wsdl:message>
   <wsdl:message name="ConfirmAcceptOfferWithSystemIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="VendorSpecificBiddingActionHttpGetIn">
+    <wsdl:part name="sourceSystemID" type="s:string" />
+    <wsdl:part name="action" type="s:string" />
+    <wsdl:part name="inputXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VendorSpecificBiddingActionHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="GetBidHistoryHttpGetIn">
@@ -606,22 +484,6 @@
   <wsdl:message name="GetBidInformationHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
-  <wsdl:message name="PlaceExternalBidHttpPostIn">
-    <wsdl:part name="sDomain" type="s:string" />
-    <wsdl:part name="sBidderShopperID" type="s:string" />
-    <wsdl:part name="sBidAmount" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceExternalBidHttpPostOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBidHttpPostIn">
-    <wsdl:part name="sMemberItemID" type="s:string" />
-    <wsdl:part name="sBidderShopperID" type="s:string" />
-    <wsdl:part name="sBidAmount" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBidHttpPostOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
   <wsdl:message name="ConfirmBidHttpPostIn">
     <wsdl:part name="sourceSystemID" type="s:string" />
     <wsdl:part name="sMemberItemID" type="s:string" />
@@ -646,13 +508,6 @@
     <wsdl:part name="sBackorderId" type="s:string" />
   </wsdl:message>
   <wsdl:message name="ConfirmBackorderBidHttpPostOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBuyNowHttpPostIn">
-    <wsdl:part name="sMemberItemID" type="s:string" />
-    <wsdl:part name="sBidderShopperID" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceBuyNowHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="ConfirmBuyNowWithSystemIdHttpPostIn">
@@ -687,16 +542,6 @@
   <wsdl:message name="GetOffersHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
-  <wsdl:message name="PlaceCounterOfferHttpPostIn">
-    <wsdl:part name="sMemberItemID" type="s:string" />
-    <wsdl:part name="sItemBidID" type="s:string" />
-    <wsdl:part name="sShopperID" type="s:string" />
-    <wsdl:part name="sBidAmount" type="s:string" />
-    <wsdl:part name="sComments" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceCounterOfferHttpPostOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
   <wsdl:message name="ConfirmCounterOfferHttpPostIn">
     <wsdl:part name="sMemberItemID" type="s:string" />
     <wsdl:part name="sItemBidID" type="s:string" />
@@ -705,14 +550,6 @@
     <wsdl:part name="sComments" type="s:string" />
   </wsdl:message>
   <wsdl:message name="ConfirmCounterOfferHttpPostOut">
-    <wsdl:part name="Body" element="tns:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceAcceptOfferHttpPostIn">
-    <wsdl:part name="sMemberItemID" type="s:string" />
-    <wsdl:part name="sItemBidID" type="s:string" />
-    <wsdl:part name="sShopperID" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="PlaceAcceptOfferHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="ConfirmAcceptOfferHttpPostIn">
@@ -730,6 +567,14 @@
     <wsdl:part name="sShopperID" type="s:string" />
   </wsdl:message>
   <wsdl:message name="ConfirmAcceptOfferWithSystemIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="VendorSpecificBiddingActionHttpPostIn">
+    <wsdl:part name="sourceSystemID" type="s:string" />
+    <wsdl:part name="action" type="s:string" />
+    <wsdl:part name="inputXml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VendorSpecificBiddingActionHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="GetBidHistoryHttpPostIn">
@@ -755,14 +600,6 @@
       <wsdl:input message="tns:GetBidInformationSoapIn" />
       <wsdl:output message="tns:GetBidInformationSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="PlaceExternalBid">
-      <wsdl:input message="tns:PlaceExternalBidSoapIn" />
-      <wsdl:output message="tns:PlaceExternalBidSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBid">
-      <wsdl:input message="tns:PlaceBidSoapIn" />
-      <wsdl:output message="tns:PlaceBidSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="ConfirmBid">
       <wsdl:input message="tns:ConfirmBidSoapIn" />
       <wsdl:output message="tns:ConfirmBidSoapOut" />
@@ -774,10 +611,6 @@
     <wsdl:operation name="ConfirmBackorderBid">
       <wsdl:input message="tns:ConfirmBackorderBidSoapIn" />
       <wsdl:output message="tns:ConfirmBackorderBidSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBuyNow">
-      <wsdl:input message="tns:PlaceBuyNowSoapIn" />
-      <wsdl:output message="tns:PlaceBuyNowSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ConfirmBuyNowWithSystemId">
       <wsdl:input message="tns:ConfirmBuyNowWithSystemIdSoapIn" />
@@ -795,17 +628,9 @@
       <wsdl:input message="tns:GetOffersSoapIn" />
       <wsdl:output message="tns:GetOffersSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="PlaceCounterOffer">
-      <wsdl:input message="tns:PlaceCounterOfferSoapIn" />
-      <wsdl:output message="tns:PlaceCounterOfferSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="ConfirmCounterOffer">
       <wsdl:input message="tns:ConfirmCounterOfferSoapIn" />
       <wsdl:output message="tns:ConfirmCounterOfferSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="PlaceAcceptOffer">
-      <wsdl:input message="tns:PlaceAcceptOfferSoapIn" />
-      <wsdl:output message="tns:PlaceAcceptOfferSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ConfirmAcceptOffer">
       <wsdl:input message="tns:ConfirmAcceptOfferSoapIn" />
@@ -814,6 +639,10 @@
     <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
       <wsdl:input message="tns:ConfirmAcceptOfferWithSystemIdSoapIn" />
       <wsdl:output message="tns:ConfirmAcceptOfferWithSystemIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VendorSpecificBiddingAction">
+      <wsdl:input message="tns:VendorSpecificBiddingActionSoapIn" />
+      <wsdl:output message="tns:VendorSpecificBiddingActionSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetBidHistory">
       <wsdl:input message="tns:GetBidHistorySoapIn" />
@@ -837,14 +666,6 @@
       <wsdl:input message="tns:GetBidInformationHttpGetIn" />
       <wsdl:output message="tns:GetBidInformationHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="PlaceExternalBid">
-      <wsdl:input message="tns:PlaceExternalBidHttpGetIn" />
-      <wsdl:output message="tns:PlaceExternalBidHttpGetOut" />
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBid">
-      <wsdl:input message="tns:PlaceBidHttpGetIn" />
-      <wsdl:output message="tns:PlaceBidHttpGetOut" />
-    </wsdl:operation>
     <wsdl:operation name="ConfirmBid">
       <wsdl:input message="tns:ConfirmBidHttpGetIn" />
       <wsdl:output message="tns:ConfirmBidHttpGetOut" />
@@ -856,10 +677,6 @@
     <wsdl:operation name="ConfirmBackorderBid">
       <wsdl:input message="tns:ConfirmBackorderBidHttpGetIn" />
       <wsdl:output message="tns:ConfirmBackorderBidHttpGetOut" />
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBuyNow">
-      <wsdl:input message="tns:PlaceBuyNowHttpGetIn" />
-      <wsdl:output message="tns:PlaceBuyNowHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="ConfirmBuyNowWithSystemId">
       <wsdl:input message="tns:ConfirmBuyNowWithSystemIdHttpGetIn" />
@@ -877,17 +694,9 @@
       <wsdl:input message="tns:GetOffersHttpGetIn" />
       <wsdl:output message="tns:GetOffersHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="PlaceCounterOffer">
-      <wsdl:input message="tns:PlaceCounterOfferHttpGetIn" />
-      <wsdl:output message="tns:PlaceCounterOfferHttpGetOut" />
-    </wsdl:operation>
     <wsdl:operation name="ConfirmCounterOffer">
       <wsdl:input message="tns:ConfirmCounterOfferHttpGetIn" />
       <wsdl:output message="tns:ConfirmCounterOfferHttpGetOut" />
-    </wsdl:operation>
-    <wsdl:operation name="PlaceAcceptOffer">
-      <wsdl:input message="tns:PlaceAcceptOfferHttpGetIn" />
-      <wsdl:output message="tns:PlaceAcceptOfferHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="ConfirmAcceptOffer">
       <wsdl:input message="tns:ConfirmAcceptOfferHttpGetIn" />
@@ -896,6 +705,10 @@
     <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
       <wsdl:input message="tns:ConfirmAcceptOfferWithSystemIdHttpGetIn" />
       <wsdl:output message="tns:ConfirmAcceptOfferWithSystemIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VendorSpecificBiddingAction">
+      <wsdl:input message="tns:VendorSpecificBiddingActionHttpGetIn" />
+      <wsdl:output message="tns:VendorSpecificBiddingActionHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="GetBidHistory">
       <wsdl:input message="tns:GetBidHistoryHttpGetIn" />
@@ -919,14 +732,6 @@
       <wsdl:input message="tns:GetBidInformationHttpPostIn" />
       <wsdl:output message="tns:GetBidInformationHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="PlaceExternalBid">
-      <wsdl:input message="tns:PlaceExternalBidHttpPostIn" />
-      <wsdl:output message="tns:PlaceExternalBidHttpPostOut" />
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBid">
-      <wsdl:input message="tns:PlaceBidHttpPostIn" />
-      <wsdl:output message="tns:PlaceBidHttpPostOut" />
-    </wsdl:operation>
     <wsdl:operation name="ConfirmBid">
       <wsdl:input message="tns:ConfirmBidHttpPostIn" />
       <wsdl:output message="tns:ConfirmBidHttpPostOut" />
@@ -938,10 +743,6 @@
     <wsdl:operation name="ConfirmBackorderBid">
       <wsdl:input message="tns:ConfirmBackorderBidHttpPostIn" />
       <wsdl:output message="tns:ConfirmBackorderBidHttpPostOut" />
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBuyNow">
-      <wsdl:input message="tns:PlaceBuyNowHttpPostIn" />
-      <wsdl:output message="tns:PlaceBuyNowHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="ConfirmBuyNowWithSystemId">
       <wsdl:input message="tns:ConfirmBuyNowWithSystemIdHttpPostIn" />
@@ -959,17 +760,9 @@
       <wsdl:input message="tns:GetOffersHttpPostIn" />
       <wsdl:output message="tns:GetOffersHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="PlaceCounterOffer">
-      <wsdl:input message="tns:PlaceCounterOfferHttpPostIn" />
-      <wsdl:output message="tns:PlaceCounterOfferHttpPostOut" />
-    </wsdl:operation>
     <wsdl:operation name="ConfirmCounterOffer">
       <wsdl:input message="tns:ConfirmCounterOfferHttpPostIn" />
       <wsdl:output message="tns:ConfirmCounterOfferHttpPostOut" />
-    </wsdl:operation>
-    <wsdl:operation name="PlaceAcceptOffer">
-      <wsdl:input message="tns:PlaceAcceptOfferHttpPostIn" />
-      <wsdl:output message="tns:PlaceAcceptOfferHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="ConfirmAcceptOffer">
       <wsdl:input message="tns:ConfirmAcceptOfferHttpPostIn" />
@@ -978,6 +771,10 @@
     <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
       <wsdl:input message="tns:ConfirmAcceptOfferWithSystemIdHttpPostIn" />
       <wsdl:output message="tns:ConfirmAcceptOfferWithSystemIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VendorSpecificBiddingAction">
+      <wsdl:input message="tns:VendorSpecificBiddingActionHttpPostIn" />
+      <wsdl:output message="tns:VendorSpecificBiddingActionHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="GetBidHistory">
       <wsdl:input message="tns:GetBidHistoryHttpPostIn" />
@@ -1022,24 +819,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PlaceExternalBid">
-      <soap:operation soapAction="trpBiddingService/PlaceExternalBid" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBid">
-      <soap:operation soapAction="trpBiddingService/PlaceBid" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ConfirmBid">
       <soap:operation soapAction="trpBiddingService/ConfirmBid" style="document" />
       <wsdl:input>
@@ -1060,15 +839,6 @@
     </wsdl:operation>
     <wsdl:operation name="ConfirmBackorderBid">
       <soap:operation soapAction="trpBiddingService/ConfirmBackorderBid" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBuyNow">
-      <soap:operation soapAction="trpBiddingService/PlaceBuyNow" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1112,26 +882,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PlaceCounterOffer">
-      <soap:operation soapAction="trpBiddingService/PlaceCounterOffer" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ConfirmCounterOffer">
       <soap:operation soapAction="trpBiddingService/ConfirmCounterOffer" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceAcceptOffer">
-      <soap:operation soapAction="trpBiddingService/PlaceAcceptOffer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1150,6 +902,15 @@
     </wsdl:operation>
     <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
       <soap:operation soapAction="trpBiddingService/ConfirmAcceptOfferWithSystemId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VendorSpecificBiddingAction">
+      <soap:operation soapAction="trpBiddingService/VendorSpecificBiddingAction" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1205,24 +966,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PlaceExternalBid">
-      <soap12:operation soapAction="trpBiddingService/PlaceExternalBid" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBid">
-      <soap12:operation soapAction="trpBiddingService/PlaceBid" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ConfirmBid">
       <soap12:operation soapAction="trpBiddingService/ConfirmBid" style="document" />
       <wsdl:input>
@@ -1243,15 +986,6 @@
     </wsdl:operation>
     <wsdl:operation name="ConfirmBackorderBid">
       <soap12:operation soapAction="trpBiddingService/ConfirmBackorderBid" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBuyNow">
-      <soap12:operation soapAction="trpBiddingService/PlaceBuyNow" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1295,26 +1029,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PlaceCounterOffer">
-      <soap12:operation soapAction="trpBiddingService/PlaceCounterOffer" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ConfirmCounterOffer">
       <soap12:operation soapAction="trpBiddingService/ConfirmCounterOffer" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceAcceptOffer">
-      <soap12:operation soapAction="trpBiddingService/PlaceAcceptOffer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1333,6 +1049,15 @@
     </wsdl:operation>
     <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
       <soap12:operation soapAction="trpBiddingService/ConfirmAcceptOfferWithSystemId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VendorSpecificBiddingAction">
+      <soap12:operation soapAction="trpBiddingService/VendorSpecificBiddingAction" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1388,24 +1113,6 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PlaceExternalBid">
-      <http:operation location="/PlaceExternalBid" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBid">
-      <http:operation location="/PlaceBid" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ConfirmBid">
       <http:operation location="/ConfirmBid" />
       <wsdl:input>
@@ -1426,15 +1133,6 @@
     </wsdl:operation>
     <wsdl:operation name="ConfirmBackorderBid">
       <http:operation location="/ConfirmBackorderBid" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBuyNow">
-      <http:operation location="/PlaceBuyNow" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -1478,26 +1176,8 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PlaceCounterOffer">
-      <http:operation location="/PlaceCounterOffer" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ConfirmCounterOffer">
       <http:operation location="/ConfirmCounterOffer" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceAcceptOffer">
-      <http:operation location="/PlaceAcceptOffer" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -1516,6 +1196,15 @@
     </wsdl:operation>
     <wsdl:operation name="ConfirmAcceptOfferWithSystemId">
       <http:operation location="/ConfirmAcceptOfferWithSystemId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VendorSpecificBiddingAction">
+      <http:operation location="/VendorSpecificBiddingAction" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -1571,24 +1260,6 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PlaceExternalBid">
-      <http:operation location="/PlaceExternalBid" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBid">
-      <http:operation location="/PlaceBid" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ConfirmBid">
       <http:operation location="/ConfirmBid" />
       <wsdl:input>
@@ -1609,15 +1280,6 @@
     </wsdl:operation>
     <wsdl:operation name="ConfirmBackorderBid">
       <http:operation location="/ConfirmBackorderBid" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceBuyNow">
-      <http:operation location="/PlaceBuyNow" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
@@ -1661,26 +1323,8 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PlaceCounterOffer">
-      <http:operation location="/PlaceCounterOffer" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ConfirmCounterOffer">
       <http:operation location="/ConfirmCounterOffer" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlaceAcceptOffer">
-      <http:operation location="/PlaceAcceptOffer" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
@@ -1706,6 +1350,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="VendorSpecificBiddingAction">
+      <http:operation location="/VendorSpecificBiddingAction" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetBidHistory">
       <http:operation location="/GetBidHistory" />
       <wsdl:input>
@@ -1719,16 +1372,16 @@
   <wsdl:service name="trpBiddingService">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Domain Name AfterMarket Bidding WebService.</wsdl:documentation>
     <wsdl:port name="trpBiddingServiceSoap" binding="tns:trpBiddingServiceSoap">
-      <soap:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx" />
+      <soap:address location="http://tdnam.dev.intranet.gdg/trpAdminUtilsService/trpBiddingService.asmx" />
     </wsdl:port>
     <wsdl:port name="trpBiddingServiceSoap12" binding="tns:trpBiddingServiceSoap12">
-      <soap12:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx" />
+      <soap12:address location="http://tdnam.dev.intranet.gdg/trpAdminUtilsService/trpBiddingService.asmx" />
     </wsdl:port>
     <wsdl:port name="trpBiddingServiceHttpGet" binding="tns:trpBiddingServiceHttpGet">
-      <http:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx" />
+      <http:address location="http://tdnam.dev.intranet.gdg/trpAdminUtilsService/trpBiddingService.asmx" />
     </wsdl:port>
     <wsdl:port name="trpBiddingServiceHttpPost" binding="tns:trpBiddingServiceHttpPost">
-      <http:address location="http://g1dwdnaweb01/trpAdminUtilsService/trpBiddingService.asmx" />
+      <http:address location="http://tdnam.dev.intranet.gdg/trpAdminUtilsService/trpBiddingService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

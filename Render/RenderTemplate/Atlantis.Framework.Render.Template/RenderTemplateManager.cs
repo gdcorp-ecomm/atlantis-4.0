@@ -9,5 +9,11 @@ namespace Atlantis.Framework.Render.Template
     {
       return new RenderTemplateContent(renderContent);
     }
+
+    public static void ProcessTemplate(IRenderTemplateContent renderTemplateContent)
+    {
+      IRenderTemplateHandler renderTemplateHandler = RenderTemplateHandlerFactory.GetHandler(renderTemplateContent);
+      renderTemplateHandler.ProcessTemplate();
+    }
   }
 }

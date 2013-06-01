@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Text.RegularExpressions;
 using Atlantis.Framework.Render.Pipeline.Interface;
 using Atlantis.Framework.Render.Template.Interface;
@@ -9,10 +8,9 @@ namespace Atlantis.Framework.Render.Template
 {
   internal class RenderTemplateSectionData
   {
-    private const int MAX_LINES = 256000;
+    private const int MAX_LINES = 100000;
     private const string SECTION_END = "</template-section>";
     private const string TEMPLATE_DATA = "<template-data";
-    private const string CARRAIGE_RETURN = "\r\n";
 
     private static readonly Regex _sectionBeginRegex = new Regex(@"<template-section\s+name=""(?<name>\w+)""\s*>", RegexOptions.Compiled);
     private static readonly IDictionary<string, string> _emptyAttributeDictionary = new Dictionary<string, string>(0); 
@@ -50,76 +48,94 @@ namespace Atlantis.Framework.Render.Template
       return currentLine.Contains(SECTION_END);
     }
 
-    private void ProcessSections()
+    private void AppendSectionContent(SectionData currentSectionData, LineData lineData)
     {
-      string currentLine;
-      LineData lineData = GetNextLine(out currentLine);
-
-      while (lineData.Type != LineType.EndContent && !HasHitMaxLinesLimit)
+      if (currentSectionData != null)
       {
-        if (lineData.Type != LineType.BeginSection)
-        {
-          lineData = GetNextLine(out currentLine);
-        }
-        else
-        {
-          string sectionName = lineData.Attributes["name"];
-          
-          StringBuilder sectionContentBuilder = new StringBuilder();
-
-          lineData = GetNextLine(out currentLine);
-
-          while (lineData.Type == LineType.Literal && !HasHitMaxLinesLimit)
-          {
-            if (sectionContentBuilder.Length == 0)
-            {
-              sectionContentBuilder.Append(currentLine);
-            }
-            else
-            {
-              sectionContentBuilder.Append(CARRAIGE_RETURN + currentLine);
-            }
-
-            lineData = GetNextLine(out currentLine);
-          }
-
-          if (sectionContentBuilder.Length > 0)
-          {
-            _renderSectionDictionary[sectionName] = new RenderTemplateSection { Name = sectionName, Content = sectionContentBuilder.ToString() }; 
-          }
-        }
+        currentSectionData.Append(lineData.Text);
       }
     }
 
-    private LineData GetNextLine(out string currentLine)
+    private void ProcessCurrentSection(SectionData currentSectionData)
+    {
+      IRenderTemplateSection renderTemplateSection;
+      if (currentSectionData != null && currentSectionData.Flush(out renderTemplateSection))
+      {
+        _renderSectionDictionary[renderTemplateSection.Name] = renderTemplateSection;
+      }
+    }
+
+    private SectionData CreateNextSection(LineData lineData)
+    {
+      SectionData sectionData = null;
+      
+      string sectionName;
+      if (lineData.Attributes.TryGetValue("name", out sectionName))
+      {
+        sectionData = new SectionData(lineData.Attributes["name"]);
+      }
+
+      return sectionData;
+    }
+
+    private void ProcessSections()
+    {
+      LineData lineData = GetNextLine();
+      SectionData currentSectionData = null;
+
+      while (lineData.Type != LineType.EndContent && !HasHitMaxLinesLimit)
+      {
+        switch (lineData.Type)
+        {
+          case LineType.BeginSection:
+            ProcessCurrentSection(currentSectionData);
+            currentSectionData = CreateNextSection(lineData); 
+            break;
+          case LineType.EndSection:
+          case LineType.EndContent:
+            ProcessCurrentSection(currentSectionData);
+            break;
+          case LineType.Literal:
+            AppendSectionContent(currentSectionData, lineData);
+            break;
+        }
+
+        lineData = GetNextLine();
+      }
+
+      // Done with the loop, lets check to see if there was one last section to process
+      ProcessCurrentSection(currentSectionData);
+    }
+
+    private LineData GetNextLine()
     {
       LineData lineData;
 
-      currentLine = _markupReader.ReadLine();
+      string currentLine = _markupReader.ReadLine();
       _currentLineNumber++;
 
       if (currentLine == null)
       {
-        lineData = new LineData { Type = LineType.EndContent, Attributes = _emptyAttributeDictionary };
+        lineData = new LineData { Text = string.Empty, Type = LineType.EndContent, Attributes = _emptyAttributeDictionary };
       }
       else
       {
         string sectionName;
         if (IsLineBeginSection(currentLine, out sectionName))
         {
-          lineData = new LineData { Type = LineType.BeginSection, Attributes = new Dictionary<string, string> { { "name", sectionName } } };
+          lineData = new LineData { Text = currentLine, Type = LineType.BeginSection, Attributes = new Dictionary<string, string> { { "name", sectionName } } };
         }
         else if (IsLineEndSection(currentLine))
         {
-          lineData = new LineData { Type = LineType.EndSection, Attributes = _emptyAttributeDictionary };
+          lineData = new LineData { Text = currentLine, Type = LineType.EndSection, Attributes = _emptyAttributeDictionary };
         }
         else if(IsLineTemplateData(currentLine))
         {
-          lineData = new LineData { Type = LineType.TemplateData, Attributes = _emptyAttributeDictionary };
+          lineData = new LineData { Text = currentLine, Type = LineType.TemplateData, Attributes = _emptyAttributeDictionary };
         }
         else
         {
-          lineData = new LineData { Type = LineType.Literal, Attributes = _emptyAttributeDictionary };
+          lineData = new LineData { Text = currentLine, Type = LineType.Literal, Attributes = _emptyAttributeDictionary };
         }
       }
 

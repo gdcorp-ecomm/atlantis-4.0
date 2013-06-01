@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="IRenderTemplateContent.cs" />
     <Compile Include="IRenderTemplateData.cs" />
+    <Compile Include="IRenderTemplateHandler.cs" />
     <Compile Include="IRenderTemplateSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -14,6 +14,8 @@ namespace Atlantis.Framework.Providers.Containers
 
     private readonly IDictionary<string, object> _providerInterfaces = new Dictionary<string, object>();
 
+    private readonly ProviderContainerDataBase _providerContainerData = new ObjectProviderContainerData();
+
     private static string GetObjectKey(Type type)
     {
       return string.Format(KEY_FORMAT, type.FullName);
@@ -90,7 +92,9 @@ namespace Atlantis.Framework.Providers.Containers
       if (providerInterface == null)
       {
         providerInterface = ProviderContainerHelper.ConstructProvider<TProviderInterface>(providerType, this);
-        Debug.WriteLine(string.Format("ObjectProviderContainer: {0}:{1} instantiated | Key: {2} | Url: {3}", providerInterfaceType.Name, providerType.Name, key, string.Empty));
+        #if DEBUG
+        Debug.WriteLine("ObjectProviderContainer: {0}:{1} instantiated | Key: {2} | Url: {3}", providerInterfaceType.Name, providerType.Name, key, string.Empty);
+        #endif
         _providerInterfaces[key] = providerInterface;
       }
 
@@ -117,6 +121,16 @@ namespace Atlantis.Framework.Providers.Containers
     {
       Type providerInterfaceType = typeof(TProviderInterface);
       return _registeredProvidersDictionary.ContainsKey(providerInterfaceType);
+    }
+
+    public T GetData<T>(string key, T defaultValue)
+    {
+      return _providerContainerData.GetData(key, defaultValue);
+    }
+
+    public void SetData<T>(string key, T value)
+    {
+      _providerContainerData.SetData(key, value);
     }
   }
 }

@@ -27,6 +27,16 @@ namespace Atlantis.Framework.Providers.Containers.Tests
       return true;
     }
 
+    public T GetData<T>(string key, T defaultValue)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void SetData<T>(string key, T value)
+    {
+      throw new NotImplementedException();
+    }
+
 
     public bool TryResolve<TProviderInterface>(out TProviderInterface provider) where TProviderInterface : class
     {

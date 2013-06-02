@@ -14,6 +14,7 @@ namespace Atlantis.Framework.Testing.MockProviders
     private readonly IDictionary<Type, Type> _registeredProvidersDictionary = new Dictionary<Type, Type>(64);
     private readonly IDictionary<string, object> _providerInterfaces = new Dictionary<string, object>();
     private readonly IDictionary<string, object> _mockProviderSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+    private readonly MockProviderContainerData _containerData = new MockProviderContainerData();
 
     private static string GetObjectKey(Type type)
     {
@@ -75,7 +76,9 @@ namespace Atlantis.Framework.Testing.MockProviders
       if (providerInterface == null)
       {
         providerInterface = ProviderContainerHelper.ConstructProvider<TProviderInterface>(providerType, this);
-        Debug.WriteLine(string.Format("MockProviderContainer: {0}:{1} instantiated | Key: {2}", providerInterfaceType.Name, providerType.Name, key));
+        #if DEBUG
+        Debug.WriteLine("MockProviderContainer: {0}:{1} instantiated | Key: {2}", providerInterfaceType.Name, providerType.Name, key);
+        #endif
         _providerInterfaces[key] = providerInterface;
       }
 
@@ -102,6 +105,16 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       Type providerInterfaceType = typeof(TProviderInterface);
       return _registeredProvidersDictionary.ContainsKey(providerInterfaceType);
+    }
+
+    public T GetData<T>(string key, T defaultValue)
+    {
+      return _containerData.GetData(key, defaultValue);
+    }
+
+    public void SetData<T>(string key, T value)
+    {
+      _containerData.SetData(key, value);
     }
 
     private static class ProviderContainerHelper
@@ -131,7 +144,7 @@ namespace Atlantis.Framework.Testing.MockProviders
 
         try
         {
-          object[] parameters = new object[1] { providerContainer };
+          object[] parameters = new object[] { providerContainer };
           returnObject = (TProviderInterface)providerConstructor.Invoke(parameters);
         }
         catch (ArgumentException argEx)

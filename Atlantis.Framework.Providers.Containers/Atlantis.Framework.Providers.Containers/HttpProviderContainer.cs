@@ -12,6 +12,7 @@ namespace Atlantis.Framework.Providers.Containers
 
     private readonly object _lockSync = new object();
     private readonly IDictionary<Type, Type> _registeredProvidersDictionary = new Dictionary<Type, Type>(256);
+    private readonly ProviderContainerDataBase _providerContainerData = new HttpProviderContainerData();
 
     private readonly static IProviderContainer _instance = new HttpProviderContainer();
     public static IProviderContainer Instance
@@ -112,6 +113,16 @@ namespace Atlantis.Framework.Providers.Containers
     {
       Type providerInterfaceType = typeof(TProviderInterface);
       return _registeredProvidersDictionary.ContainsKey(providerInterfaceType);
+    }
+
+    public T GetData<T>(string key, T defaultValue)
+    {
+      return _providerContainerData.GetData(key, defaultValue);
+    }
+
+    public void SetData<T>(string key, T value)
+    {
+      _providerContainerData.SetData(key, value);
     }
   }
 }

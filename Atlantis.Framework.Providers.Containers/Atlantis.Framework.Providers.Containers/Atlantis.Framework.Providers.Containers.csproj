@@ -46,8 +46,11 @@
   <ItemGroup>
     <Compile Include="Compatibility\HttpProviderContainer.cs" />
     <Compile Include="HttpProviderContainer.cs" />
+    <Compile Include="HttpProviderContainerData.cs" />
     <Compile Include="ObjectProviderContainer.cs" />
+    <Compile Include="ObjectProviderContainerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderContainerDataBase.cs" />
     <Compile Include="ProviderContainerHelper.cs" />
   </ItemGroup>
   <ItemGroup>

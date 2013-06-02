@@ -10,5 +10,9 @@ namespace Atlantis.Framework.Interface
     bool TryResolve<TProviderInterface>(out TProviderInterface provider) where TProviderInterface : class;
 
     bool CanResolve<TProviderInterface>() where TProviderInterface : class;
+
+    T GetData<T>(string key, T defaultValue);
+
+    void SetData<T>(string key, T value);
   }
 }

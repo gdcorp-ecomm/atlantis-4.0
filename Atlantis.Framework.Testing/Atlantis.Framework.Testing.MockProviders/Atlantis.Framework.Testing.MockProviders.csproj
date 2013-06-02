@@ -50,6 +50,7 @@
     <Compile Include="MockNoManagerContext.cs" />
     <Compile Include="MockProviderBase.cs" />
     <Compile Include="MockProviderContainer.cs" />
+    <Compile Include="MockProviderContainerData.cs" />
     <Compile Include="MockShopperContext.cs" />
     <Compile Include="MockShopperContextSettings.cs" />
     <Compile Include="MockShopperPreference.cs" />

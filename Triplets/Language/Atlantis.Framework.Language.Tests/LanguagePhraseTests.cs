@@ -293,5 +293,13 @@ namespace Atlantis.Framework.Language.Tests
       Assert.IsFalse(info.IsLanguageDataValid);
     }
 
+    [TestMethod]
+    public void PreserveLineFeeds()
+    {
+      var request = new LanguagePhraseRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "dict2", "doubleline", "en", "www", 1);
+      var response = (LanguagePhraseResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
+      Assert.IsFalse(string.IsNullOrEmpty(response.LanguagePhrase));
+      Assert.IsFalse(response.LanguagePhrase.Contains("chasingthe"));
+    }
   }
 }

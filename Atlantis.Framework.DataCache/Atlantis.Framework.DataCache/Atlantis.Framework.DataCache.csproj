@@ -35,11 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.ADODB, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <HintPath>Interop\Interop.ADODB.dll</HintPath>
-    </Reference>
     <Reference Include="Interop.gdDataCacheLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -58,18 +53,17 @@
     <Compile Include="CachedValue.cs" />
     <Compile Include="CacheManager.cs" />
     <Compile Include="DataCache.cs" />
-    <Compile Include="DataCacheWrapper.cs" />
+    <Compile Include="DataCacheEngineRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SlimLock.cs" />
     <Compile Include="SlimRead.cs" />
     <Compile Include="SlimWrite.cs" />
-    <Compile Include="Structs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Interop\Interop.ADODB.dll" />
-    <Content Include="Interop\Interop.gdDataCacheLib.dll" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Interface\Atlantis.Framework.AppSettings.Interface.csproj">
+      <Project>{638f2820-0ca4-43c1-8712-1823704389d3}</Project>
+      <Name>Atlantis.Framework.AppSettings.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{D30157B2-C1B3-4073-BA5E-632E2337A997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -78,7 +72,24 @@
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PrivateLabel\Atlantis.Framework.PrivateLabel.Interface\Atlantis.Framework.PrivateLabel.Interface.csproj">
+      <Project>{af7389f6-2167-4503-974e-42139638a9cc}</Project>
+      <Name>Atlantis.Framework.PrivateLabel.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\DataCacheGeneric\Atlantis.Framework.DataCacheGeneric.Interface\Atlantis.Framework.DataCacheGeneric.Interface.csproj">
+      <Project>{cbfe3b17-5d0f-481a-8ebe-f2493ec96637}</Project>
+      <Name>Atlantis.Framework.DataCacheGeneric.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\Products\Atlantis.Framework.Products.Interface\Atlantis.Framework.Products.Interface.csproj">
+      <Project>{f025da79-8d84-4bb9-affc-4b3156532212}</Project>
+      <Name>Atlantis.Framework.Products.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
+      <Project>{3e299d3b-3c8d-455a-92a4-05ff6c60e6f3}</Project>
+      <Name>Atlantis.Framework.DataCacheService</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

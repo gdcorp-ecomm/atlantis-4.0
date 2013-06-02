@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
 using System.Threading;
 
@@ -8,7 +6,7 @@ namespace LoadTest
 {
   public class LoadTestWorker
   {
-    public delegate void LoadTestHandler(object oState); 
+    public delegate void LoadTestHandler(object oState);
 
     [DllImport("Kernel32.dll")]
     [System.Security.SuppressUnmanagedCodeSecurity()]

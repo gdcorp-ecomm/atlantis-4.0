@@ -39,14 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.ADODB">
-      <HintPath>..\Atlantis.Framework.DataCache\Interop\Interop.ADODB.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Interop.gdDataCacheLib">
-      <HintPath>..\Atlantis.Framework.DataCache\Interop\Interop.gdDataCacheLib.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -83,6 +75,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="atlantis.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,6 +89,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Impl\Atlantis.Framework.AppSettings.Impl.csproj">
+      <Project>{1f866bc2-a3d5-4042-abaa-b90cdc575dff}</Project>
+      <Name>Atlantis.Framework.AppSettings.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Interface\Atlantis.Framework.AppSettings.Interface.csproj">
+      <Project>{638f2820-0ca4-43c1-8712-1823704389d3}</Project>
+      <Name>Atlantis.Framework.AppSettings.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{D30157B2-C1B3-4073-BA5E-632E2337A997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -101,6 +104,34 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PrivateLabel\Atlantis.Framework.PrivateLabel.Impl\Atlantis.Framework.PrivateLabel.Impl.csproj">
+      <Project>{dda75fcc-711e-4fa7-a688-adb2d17ccccd}</Project>
+      <Name>Atlantis.Framework.PrivateLabel.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PrivateLabel\Atlantis.Framework.PrivateLabel.Interface\Atlantis.Framework.PrivateLabel.Interface.csproj">
+      <Project>{af7389f6-2167-4503-974e-42139638a9cc}</Project>
+      <Name>Atlantis.Framework.PrivateLabel.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\DataCacheGeneric\Atlantis.Framework.DataCacheGeneric.Impl\Atlantis.Framework.DataCacheGeneric.Impl.csproj">
+      <Project>{41573a44-95d3-4bde-9cff-65552accd7e4}</Project>
+      <Name>Atlantis.Framework.DataCacheGeneric.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\DataCacheGeneric\Atlantis.Framework.DataCacheGeneric.Interface\Atlantis.Framework.DataCacheGeneric.Interface.csproj">
+      <Project>{cbfe3b17-5d0f-481a-8ebe-f2493ec96637}</Project>
+      <Name>Atlantis.Framework.DataCacheGeneric.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\Products\Atlantis.Framework.Products.Impl\Atlantis.Framework.Products.Impl.csproj">
+      <Project>{962c4260-4c3a-4b55-98e0-df9d0f3592de}</Project>
+      <Name>Atlantis.Framework.Products.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\Products\Atlantis.Framework.Products.Interface\Atlantis.Framework.Products.Interface.csproj">
+      <Project>{f025da79-8d84-4bb9-affc-4b3156532212}</Project>
+      <Name>Atlantis.Framework.Products.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
+      <Project>{3e299d3b-3c8d-455a-92a4-05ff6c60e6f3}</Project>
+      <Name>Atlantis.Framework.DataCacheService</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
       <Project>{7F2738F8-683C-49E7-88CD-E986C70F0321}</Project>

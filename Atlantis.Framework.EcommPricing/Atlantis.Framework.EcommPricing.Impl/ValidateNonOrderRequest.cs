@@ -1,6 +1,6 @@
-﻿using Atlantis.Framework.EcommPricing.Interface;
+﻿using Atlantis.Framework.DataCacheService;
+using Atlantis.Framework.EcommPricing.Interface;
 using Atlantis.Framework.Interface;
-using System;
 
 namespace Atlantis.Framework.EcommPricing.Impl
 {
@@ -10,23 +10,16 @@ namespace Atlantis.Framework.EcommPricing.Impl
 
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      IResponseData result;
+      ValidateNonOrderRequestData validateRequest = (ValidateNonOrderRequestData)requestData;
+      string cacheRequest = string.Format(_REQUESTFORMAT, validateRequest.PromoCode, validateRequest.PrivateLabelId);
 
-      try
+      string cacheResponse;
+      using (var comCache = GdDataCacheOutOfProcess.CreateDisposable())
       {
-        ValidateNonOrderRequestData validateRequest = (ValidateNonOrderRequestData)requestData;
-        string cacheRequest = string.Format(_REQUESTFORMAT, validateRequest.PromoCode, validateRequest.PrivateLabelId);
-        string cacheResponse = DataCache.DataCache.GetCacheData(cacheRequest);
-        result = ValidateNonOrderResponseData.FromCacheDataXml(cacheResponse);
-      }
-      catch (Exception ex)
-      {
-        string message = ex.Message + ex.StackTrace;
-        AtlantisException aex = new AtlantisException(requestData, "RequestHandler", message, requestData.ToXML());
-        result = ValidateNonOrderResponseData.FromException(aex);
+        cacheResponse = comCache.GetCacheData(cacheRequest);
       }
 
-      return result;
+      return ValidateNonOrderResponseData.FromCacheDataXml(cacheResponse);
     }
   }
 }

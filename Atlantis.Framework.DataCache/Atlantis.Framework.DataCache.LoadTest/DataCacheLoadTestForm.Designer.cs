@@ -82,6 +82,7 @@
       this.pbrTest.Location = new System.Drawing.Point(12, 104);
       this.pbrTest.Name = "pbrTest";
       this.pbrTest.Size = new System.Drawing.Size(431, 22);
+      this.pbrTest.Step = 1;
       this.pbrTest.TabIndex = 20;
       // 
       // lblWriter

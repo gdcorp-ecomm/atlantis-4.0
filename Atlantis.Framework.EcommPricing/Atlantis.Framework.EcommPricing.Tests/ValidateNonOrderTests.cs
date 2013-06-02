@@ -19,7 +19,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void RequestToXml()
     {
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, "GDPROMOIPO");
+      var request = new ValidateNonOrderRequestData(1, "GDPROMOIPO");
       string xml = request.ToXML();
       Assert.IsTrue(xml.Contains("\"1\""));
       Assert.IsTrue(xml.Contains("\"GDPROMOIPO\""));
@@ -28,31 +28,31 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void RequestCacheKeyMatch()
     {
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, "GDPROMOIPO");
-      var request2 = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, "GDPROMOipo");
+      var request = new ValidateNonOrderRequestData(1, "GDPROMOIPO");
+      var request2 = new ValidateNonOrderRequestData(1, "GDPROMOipo");
       Assert.AreEqual(request.GetCacheMD5(), request2.GetCacheMD5());      
     }
 
     [TestMethod]
     public void RequestCacheKeyDifferentPrivateLabelId()
     {
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, "GDPROMOIPO");
-      var request2 = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 2, "GDPROMOipo");
+      var request = new ValidateNonOrderRequestData(1, "GDPROMOIPO");
+      var request2 = new ValidateNonOrderRequestData(2, "GDPROMOipo");
       Assert.AreNotEqual(request.GetCacheMD5(), request2.GetCacheMD5());
     }
 
     [TestMethod]
     public void RequestCacheKeyDifferentPromoCode()
     {
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, "GDPROMOIPO");
-      var request2 = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, "GDPROMOip0");
+      var request = new ValidateNonOrderRequestData(1, "GDPROMOIPO");
+      var request2 = new ValidateNonOrderRequestData(1, "GDPROMOip0");
       Assert.AreNotEqual(request.GetCacheMD5(), request2.GetCacheMD5());
     }
 
     [TestMethod]
     public void RequestBadPrivateLabelId()
     {
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, -123, "GDPROMOIPO");
+      var request = new ValidateNonOrderRequestData(-123, "GDPROMOIPO");
       var response = (ValidateNonOrderResponseData)DataCache.DataCache.GetProcessRequest(request, _REQUESTTYPE);
       Assert.AreEqual(ValidateNonOrderResponseData.InActiveResponse, response);
     }
@@ -62,21 +62,21 @@ namespace Atlantis.Framework.EcommPricing.Tests
     {
       string twentyone = "123456789012345678901";
       string twenty = "12345678901234567890";
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, twentyone);
+      var request = new ValidateNonOrderRequestData(1, twentyone);
       Assert.AreEqual(twenty, request.PromoCode);
     }
 
     [TestMethod]
     public void RequestBadPromoCodeNull()
     {
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, null);
+      var request = new ValidateNonOrderRequestData(1, null);
       Assert.AreEqual(string.Empty, request.PromoCode);
     }
 
     [TestMethod]
     public void RequestBadPromoCodeEmpty()
     {
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, string.Empty);
+      var request = new ValidateNonOrderRequestData(1, string.Empty);
       Assert.AreEqual(string.Empty, request.PromoCode);
     }
 
@@ -84,7 +84,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     public void RequestBadPromoCodeNonAlphaNumeric()
     {
       string promoCode = "blue-\n\rX";
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, promoCode);
+      var request = new ValidateNonOrderRequestData(1, promoCode);
       Assert.AreEqual(string.Empty, request.PromoCode);
     }
 
@@ -157,7 +157,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void InActiveResponse()
     {
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, "GDPROMOIP0");
+      var request = new ValidateNonOrderRequestData(1, "GDPROMOIP0");
       var response = (ValidateNonOrderResponseData)DataCache.DataCache.GetProcessRequest(request, _REQUESTTYPE);
       Assert.IsFalse(response.IsActive);
     }
@@ -165,7 +165,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void ActiveResponse()
     {
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, "GDPROMOIPO");
+      var request = new ValidateNonOrderRequestData(1, "GDPROMOIPO");
       var response = (ValidateNonOrderResponseData)DataCache.DataCache.GetProcessRequest(request, _REQUESTTYPE);
       Assert.IsTrue(response.IsActive);
     }
@@ -173,7 +173,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void ResponseToXml()
     {
-      var request = new ValidateNonOrderRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, "GDPROMOIPO");
+      var request = new ValidateNonOrderRequestData(1, "GDPROMOIPO");
       var response = (ValidateNonOrderResponseData)DataCache.DataCache.GetProcessRequest(request, _REQUESTTYPE);
       XElement parsed = XElement.Parse(response.ToXML());
     }

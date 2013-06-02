@@ -16,31 +16,31 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void RequestDataConstructorGeneratesNewRequestDataObject()
     {
-      var request = new PriceEstimateRequestData(string.Empty, string.Empty, string.Empty,string.Empty, 0, 1, 1, "USD", "Example", 1, 54);
+      var request = new PriceEstimateRequestData(1, 1, "USD", "Example", 1, 54);
       Assert.IsNotNull(request);
     }
 
     [TestMethod]
     public void RequestCacheKeyCaseInsenstive()
     {
-      var request = new PriceEstimateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, 1, "USD", "EXAMPLE", 1, 54);
-      var request2 = new PriceEstimateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, 1, "USD", "example", 1, 54);
+      var request = new PriceEstimateRequestData(1, 1, "USD", "EXAMPLE", 1, 54);
+      var request2 = new PriceEstimateRequestData(1, 1, "USD", "example", 1, 54);
       Assert.AreEqual(request.GetCacheMD5(), request2.GetCacheMD5());
     }
 
     [TestMethod]
     public void GroupRequestCacheKeyDifferent()
     {
-      var request = new PriceEstimateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, 1, "USD", "Example1", 1, 54);
-      var request2 = new PriceEstimateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, 1, "USD", "Example2", 1, 54);
+      var request = new PriceEstimateRequestData(1, 1, "USD", "Example1", 1, 54);
+      var request2 = new PriceEstimateRequestData(1, 1, "USD", "Example2", 1, 54);
       Assert.AreNotEqual(request.GetCacheMD5(), request2.GetCacheMD5());
     }
 
     [TestMethod]
     public void LongPromoCodeIsTruncatedAtTwentyCharacters()
     {
-      var request = new PriceEstimateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, 1, "USD", "Example89012345678901234567890", 1, 54);
-      var request2 = new PriceEstimateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, 1, "USD", "Example8901234567890", 1, 54);
+      var request = new PriceEstimateRequestData(1, 1, "USD", "Example89012345678901234567890", 1, 54);
+      var request2 = new PriceEstimateRequestData(1, 1, "USD", "Example8901234567890", 1, 54);
       Assert.AreEqual(request.GetCacheMD5(), request2.GetCacheMD5());
     }
 
@@ -48,7 +48,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     public void RequestDataToXml()
     {
       string promoCode = "Example";
-      var request = new PriceEstimateRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, 1, "USD", promoCode, 1, 54);
+      var request = new PriceEstimateRequestData(1, 1, "USD", promoCode, 1, 54);
       XElement.Parse(request.ToXML());
       Assert.IsTrue(request.ToXML().Contains(promoCode.ToUpperInvariant()));
     }
@@ -95,7 +95,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void ValidRequestReturnsValidResponse()
     {
-      var request = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", "TestCode", 1, 54);
+      var request = new PriceEstimateRequestData(1, 1, "USD", "TestCode", 1, 54);
       var response = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
 
       Assert.IsNotNull(response);
@@ -106,7 +106,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void InValidPlidRequestReturnsNoPriceFoundResponse()
     {
-      var request = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, -1, 1, "USD", "TestCode", 1, 54);
+      var request = new PriceEstimateRequestData(-1, 1, "USD", "TestCode", 1, 54);
       var response = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
 
       Assert.IsNotNull(response);
@@ -117,7 +117,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void InValidPfidRequestReturnsNoPriceFoundResponse()
     {
-      var request = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", "TestCode", 1, 0);
+      var request = new PriceEstimateRequestData(1, 1, "USD", "TestCode", 1, 0);
       var response = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
 
       Assert.IsNotNull(response);
@@ -129,7 +129,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void InValidCurrencyRequestReturnsNoPriceFoundResponse()
     {
-      var request = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "SGD", "TestCode", 1, 42001);
+      var request = new PriceEstimateRequestData(1, 1, "BLUE", "TestCode", 1, 42001);
       var response = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
 
       Assert.IsNotNull(response);
@@ -140,7 +140,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void ValidRequestWithoutPromoCodeReturnsValidResponse()
     {
-      var request = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", string.Empty, 1, 54);
+      var request = new PriceEstimateRequestData(1, 1, "USD", string.Empty, 1, 54);
       var response = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
 
       Assert.IsNotNull(response);
@@ -151,11 +151,11 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void ValidRequestWithPromoCodeReturnsValidResponseAndSpecialPricing()
     {
-      var request1 = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", string.Empty, 1, 42002);
+      var request1 = new PriceEstimateRequestData(1, 1, "USD", string.Empty, 1, 42002);
       var response1 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request1, _REQUESTTYPE);
 
 
-      var request2 = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", "testhost", 1, 42002);
+      var request2 = new PriceEstimateRequestData(1, 1, "USD", "testhost", 1, 42002);
       var response2 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request2, _REQUESTTYPE);
 
       Assert.IsNotNull(response1);
@@ -169,11 +169,11 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void ValidRequestWithPromoCodeForNonTargetCurrencyReturnsValidResponseAndNoSpecialPricing()
     {
-      var request1 = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "MXN", string.Empty, 1, 42002);
+      var request1 = new PriceEstimateRequestData(1, 1, "MXN", string.Empty, 1, 42002);
       var response1 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request1, _REQUESTTYPE);
 
 
-      var request2 = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "MXN", "testhost", 1, 42002);
+      var request2 = new PriceEstimateRequestData(1, 1, "MXN", "testhost", 1, 42002);
       var response2 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request2, _REQUESTTYPE);
 
       Assert.IsNotNull(response1);
@@ -186,11 +186,11 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void ValidRequestWithPromoCodeForNonTargetProductReturnsValidResponseAndNoSpecialPricing()
     {
-      var request1 = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", string.Empty, 1, 54);
+      var request1 = new PriceEstimateRequestData(1, 1, "USD", string.Empty, 1, 54);
       var response1 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request1, _REQUESTTYPE);
 
 
-      var request2 = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", "testhost", 1, 54);
+      var request2 = new PriceEstimateRequestData(1, 1, "USD", "testhost", 1, 54);
       var response2 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request2, _REQUESTTYPE);
 
       Assert.IsNotNull(response1);
@@ -202,7 +202,7 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void ValidRequestWithDiscountCode()
     {
-      var request1 = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", string.Empty, 1, 54, "cbwsp01");
+      var request1 = new PriceEstimateRequestData(1, 1, "USD", string.Empty, 1, 54, "cbwsp01");
       var response1 = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request1, _REQUESTTYPE);
       Assert.IsNotNull(response1);
       Assert.IsTrue(response1.IsPriceFound);
@@ -212,28 +212,10 @@ namespace Atlantis.Framework.EcommPricing.Tests
     [TestMethod]
     public void ResponseToXml()
     {
-      var request = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", "testhost", 1, 54);
+      var request = new PriceEstimateRequestData(1, 1, "USD", "testhost", 1, 54);
       var response = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       XElement parsed = XElement.Parse(response.ToXML());
       Assert.IsNotNull(parsed);
-    }
-
-    // Test that non-https url fails
-    [TestMethod]
-    [ExpectedException(typeof(AtlantisException))]
-    public void RequestUsingNonHttpsServiceUrlFails()
-    {
-      var request = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", "testhost", 1, 54);
-      var response = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request, 65701);
-    }
-
-    // Test that call using missing cert fails
-    [TestMethod]
-    [ExpectedException(typeof(AtlantisException))]
-    public void RequestUsingMissingCertFails()
-    {
-      var request = new PriceEstimateRequestData("859775", string.Empty, string.Empty, string.Empty, 1, 1, 1, "USD", "testhost", 1, 54);
-      var response = (PriceEstimateResponseData)Engine.Engine.ProcessRequest(request, 65702);
     }
   }
 }

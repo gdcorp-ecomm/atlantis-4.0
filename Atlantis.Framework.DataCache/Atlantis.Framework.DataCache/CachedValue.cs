@@ -2,24 +2,22 @@ using System;
 
 namespace Atlantis.Framework.DataCache
 {
-  class CachedValue
+  class CachedValue<T>
   {
     long _finalTicks;
-    object _cacheValue;
+    T _cacheValue;
     string _key;
     bool _isActive = true;
-    int _privateLabelId;
     volatile bool _refreshInProgress = false;
 
-    public CachedValue(string key, object cacheValue, long finalTicks, int privateLabelId)
+    public CachedValue(string key, T cacheValue, long finalTicks)
     {
       _key = key;
       _cacheValue = cacheValue;
       _finalTicks = finalTicks;
-      _privateLabelId = privateLabelId;
     }
 
-    public object Value
+    public T Value
     {
       get { return _cacheValue; }
     }
@@ -27,11 +25,6 @@ namespace Atlantis.Framework.DataCache
     public long FinalTicks
     {
       get { return _finalTicks; }
-    }
-
-    public int PrivateLabelId
-    {
-      get { return _privateLabelId; }
     }
 
     public string Key

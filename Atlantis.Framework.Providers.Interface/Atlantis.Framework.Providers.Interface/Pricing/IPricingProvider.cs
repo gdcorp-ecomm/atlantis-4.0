@@ -21,5 +21,10 @@
     /// <param name="catalogId">for future use to support different price catalogs</param>
     /// <returns>true if the isc is found or false if it is not</returns>
     bool GetCurrentPrice(int unifiedProductId, int shopperPriceType, string currencyType, out int price, string isc = "" , int catalogId = 0);
+
+    /// <summary>
+    /// Can be set to enable or dispable the ISC pricing provider on a per-page basis
+    /// </summary>
+    bool Enabled { get; set; }
   }
 }

@@ -1,96 +1,40 @@
+using Atlantis.Framework.Interface;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Threading;
-using System.Xml;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DataCache
 {
-  class Cache
+  class Cache<T>
   {
-#if DEBUG
-    static TimeSpan _DEFAULTITEMCACHETIME = TimeSpan.FromMinutes(5);
-#else
     static TimeSpan _DEFAULTITEMCACHETIME = TimeSpan.FromMinutes(10);
-#endif
-
     const int MAX_CLEAN = 100;
 
-    Dictionary<string, CachedValue> _cachedValuesDictionary;
+    Dictionary<string, CachedValue<T>> _cachedValuesDictionary;
     LinkedList<object> _cachedValuesLinkList;
 
     SlimLock _cacheLock;
     string _cacheName;
     TimeSpan _itemCacheTime;
     DateTime _cacheCreateTime;
-    string _privateLabelIdName;
-    bool _isBasedOnPrivateLabelId;
-
-    int _iHit = 0;
-    int _iMiss = 0;
 
     private TimeSpan DefaultItemCacheTime
     {
       get { return _DEFAULTITEMCACHETIME; }
     }
 
-    internal Cache(string cacheName, string privateLabelIdName)
+    internal Cache(string cacheName)
     {
-      _cachedValuesDictionary = new Dictionary<string, CachedValue>();
+      _cachedValuesDictionary = new Dictionary<string, CachedValue<T>>();
       _cachedValuesLinkList = new LinkedList<object>();
 
       _cacheName = cacheName;
-      _privateLabelIdName = privateLabelIdName;
-      _isBasedOnPrivateLabelId = true;
       _cacheLock = new SlimLock();
       _itemCacheTime = DefaultItemCacheTime;
       _cacheCreateTime = DateTime.UtcNow;
     }
 
-    internal Cache(string cacheName, bool isBasedOnPrivateLabelId)
-      : this(cacheName, null)
-    {
-      _isBasedOnPrivateLabelId = isBasedOnPrivateLabelId;
-    }
-
-    public string PrivateLabelIdName
-    {
-      get { return _privateLabelIdName; }
-    }
-
-    public bool IsBasedOnPrivateLabelId
-    {
-      get { return _isBasedOnPrivateLabelId; }
-    }
-
-    public string GetStats()
-    {
-      TimeSpan ts = DateTime.UtcNow - _cacheCreateTime;
-      int seconds = (int)ts.TotalSeconds + 1;
-
-      int iHit = Interlocked.CompareExchange(ref _iHit, 0, 0);
-      int iMiss = Interlocked.CompareExchange(ref _iMiss, 0, 0);
-
-      StringBuilder sb = new StringBuilder();
-      sb.Append("<Stats><CacheName>");
-      sb.Append(_cacheName);
-      sb.Append("</CacheName><CacheCreate>");
-      sb.Append(_cacheCreateTime.ToLongTimeString());
-      sb.Append("</CacheCreate><HitCount>");
-      sb.Append(iHit.ToString());
-      sb.Append("</HitCount><MissCount>");
-      sb.Append(iMiss.ToString());
-      sb.Append("</MissCount><HitPerSecond>");
-      sb.Append(((iHit / seconds)).ToString());
-      sb.Append("</HitPerSecond><MissPerSecond>");
-      sb.Append(((iMiss / seconds)).ToString());
-      sb.Append("</MissPerSecond></Stats>");
-      return sb.ToString();
-    }
-
-    public bool TryGetValue(string key, out CachedValue cachedValue)
+    public bool TryGetValue(string key, out CachedValue<T> cachedValue)
     {
       cachedValue = null;
       bool isFresh = false;
@@ -107,14 +51,6 @@ namespace Atlantis.Framework.DataCache
         {
           isFresh = !cachedValue.IsExpired || cachedValue.RefreshInProgress;
         }
-
-#if DEBUG
-        if (isFresh && foundValue)
-          Interlocked.Increment(ref _iHit);
-        else
-          Interlocked.Increment(ref _iMiss);
-#endif
-
       }
       catch (Exception ex)
       {
@@ -126,7 +62,7 @@ namespace Atlantis.Framework.DataCache
       return isFresh;
     }
 
-    public void RenewValue(CachedValue cachedValue)
+    public void RenewValue(CachedValue<T> cachedValue)
     {
       try
       {
@@ -135,7 +71,7 @@ namespace Atlantis.Framework.DataCache
           cachedValue.MarkInactive();
 
           DateTime finalExpiration = DateTime.UtcNow + _itemCacheTime;
-          CachedValue renewedCacheValue = new CachedValue(cachedValue.Key, cachedValue.Value, finalExpiration.Ticks, cachedValue.PrivateLabelId);
+          CachedValue<T> renewedCacheValue = new CachedValue<T>(cachedValue.Key, cachedValue.Value, finalExpiration.Ticks);
           _cachedValuesDictionary[renewedCacheValue.Key] = renewedCacheValue;
           _cachedValuesLinkList.AddLast(new WeakReference(renewedCacheValue));
         }
@@ -146,7 +82,7 @@ namespace Atlantis.Framework.DataCache
       }
     }
 
-    private void QuickClean(CachedValue oldCachedValue)
+    private void QuickClean(CachedValue<T> oldCachedValue)
     {
       try
       {
@@ -166,7 +102,7 @@ namespace Atlantis.Framework.DataCache
           WeakReference oWeakRef = (WeakReference)oNode.Value;
           LinkedListNode<object> oNextNode = oNode.Next;
 
-          CachedValue targetCachedValue = oWeakRef.Target as CachedValue;
+          CachedValue<T> targetCachedValue = oWeakRef.Target as CachedValue<T>;
           if ((targetCachedValue == null) || (!targetCachedValue.IsActive))
           {
             _cachedValuesLinkList.Remove(oNode);
@@ -192,10 +128,10 @@ namespace Atlantis.Framework.DataCache
     }
 
     // WeakReference - http://msdn2.microsoft.com/en-us/library/ms404247.aspx
-    public void AddValue(string key, object cacheValue, int privateLabelId, CachedValue oldCachedValue)
+    public void AddValue(string key, T cacheValue, CachedValue<T> oldCachedValue)
     {
       DateTime finalExpiration = DateTime.UtcNow + _itemCacheTime;
-      CachedValue newCachedValue = new CachedValue(key, cacheValue, finalExpiration.Ticks, privateLabelId);
+      CachedValue<T> newCachedValue = new CachedValue<T>(key, cacheValue, finalExpiration.Ticks);
 
       using (SlimWrite write = _cacheLock.GetWriteLock())
       {
@@ -205,56 +141,6 @@ namespace Atlantis.Framework.DataCache
       }
     }
 
-    public void AddValue(string key, object cacheValue, CachedValue oldCachedValue)
-    {
-      AddValue(key, cacheValue, 0, oldCachedValue);
-    }
-
-    public void ClearByPLID(HashSet<int> privateLabelIds)
-    {
-      try
-      {
-        if ((privateLabelIds != null) && (privateLabelIds.Count > 0))
-        {
-          using (SlimWrite write = _cacheLock.GetWriteLock())
-          {
-            long timeKeyFiveHoursAgo = (DateTime.UtcNow.AddHours(-5)).Ticks;
-            LinkedListNode<object> oNode = _cachedValuesLinkList.First;
-
-            while (oNode != null)
-            {
-              WeakReference oWeakRef = (WeakReference)oNode.Value;
-              LinkedListNode<object> oNextNode = oNode.Next;
-
-              CachedValue cachedValue = oWeakRef.Target as CachedValue;
-
-              if ((cachedValue == null) || (!cachedValue.IsActive))
-              {
-                _cachedValuesLinkList.Remove(oNode);
-              }
-              else if (cachedValue.FinalTicks < timeKeyFiveHoursAgo)
-              {
-                cachedValue.MarkInactive();
-                _cachedValuesDictionary.Remove(cachedValue.Key);
-                _cachedValuesLinkList.Remove(oNode);
-              }
-              else if ((cachedValue.PrivateLabelId > 0) && (privateLabelIds.Contains(cachedValue.PrivateLabelId)))
-              {
-                cachedValue.MarkInactive();
-                _cachedValuesDictionary.Remove(cachedValue.Key);
-                _cachedValuesLinkList.Remove(oNode);
-              }
-
-              oNode = oNextNode;
-            }
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        LogError("Cache.ClearByPLID(): " + _cacheName, "", ex);
-      }
-    }
     public void Clear()
     {
       using (SlimWrite write = _cacheLock.GetWriteLock())
@@ -262,30 +148,6 @@ namespace Atlantis.Framework.DataCache
         _cachedValuesLinkList.Clear();
         _cachedValuesDictionary.Clear();
       }
-    }
-
-    virtual public string Display()
-    {
-      StringBuilder sbRequest = new StringBuilder();
-      XmlTextWriter xtwRequest = new XmlTextWriter(new StringWriter(sbRequest));
-      xtwRequest.WriteStartElement("Cache");
-      xtwRequest.WriteAttributeString("MethodName", _cacheName);
-
-#if DEBUG
-      using (SlimRead read = _cacheLock.GetReadLock())
-      {
-        foreach (KeyValuePair<string, CachedValue> oPair in _cachedValuesDictionary)
-        {
-          xtwRequest.WriteStartElement("Data");
-          xtwRequest.WriteAttributeString("Key", oPair.Key);
-          xtwRequest.WriteAttributeString("Value", ((CachedValue)oPair.Value).Value.ToString());
-          xtwRequest.WriteEndElement();
-        }
-      }
-#endif
-
-      xtwRequest.WriteEndElement();
-      return sbRequest.ToString();
     }
 
     private void LogError(string cacheName, string key, Exception ex)

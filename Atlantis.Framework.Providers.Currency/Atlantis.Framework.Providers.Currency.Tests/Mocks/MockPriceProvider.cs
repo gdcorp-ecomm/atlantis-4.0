@@ -14,6 +14,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
 
     public MockPriceProvider(IProviderContainer container) : base(container)
     {
+      Enabled = true;
     }
 
     public bool DoesIscAffectPricing(string iscCode)
@@ -70,5 +71,7 @@ namespace Atlantis.Framework.Providers.Currency.Tests.Mocks
       }
       return success;
     }
+
+    public bool Enabled { get; set; }
   }
 }

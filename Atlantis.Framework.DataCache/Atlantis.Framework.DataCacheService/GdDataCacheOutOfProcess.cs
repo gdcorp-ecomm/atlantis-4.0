@@ -5,11 +5,11 @@ namespace Atlantis.Framework.DataCacheService
 {
   public class GdDataCacheOutOfProcess : IDisposable
   {
-    private gdDataCacheLib.AccessClass _COMAccessClass;
+    private gdDataCacheLib.IAccess _COMAccessClass;
 
     private GdDataCacheOutOfProcess()
     {
-      _COMAccessClass = new gdDataCacheLib.AccessClass();
+      _COMAccessClass = new gdDataCacheLib.Access();
     }
 
     ~GdDataCacheOutOfProcess()

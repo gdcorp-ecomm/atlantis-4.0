@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -44,16 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CurrencyData.cs" />
-    <Compile Include="CurrencyInfo.cs" />
     <Compile Include="CurrencyPrice.cs" />
     <Compile Include="CurrencyProvider.cs" />
     <Compile Include="CurrencyProviderEngineRequests.cs" />
     <Compile Include="CurrencyProviderOptions.cs" />
-    <Compile Include="MultiCurrencyContexts.cs" />
+    <Compile Include="IscPricingProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.AppSettings\Atlantis.Framework.AppSettings.Interface\Atlantis.Framework.AppSettings.Interface.csproj">
+      <Project>{638f2820-0ca4-43c1-8712-1823704389d3}</Project>
+      <Name>Atlantis.Framework.AppSettings.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
       <Project>{3e299d3b-3c8d-455a-92a4-05ff6c60e6f3}</Project>
       <Name>Atlantis.Framework.DataCacheService</Name>
@@ -61,6 +64,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
       <Project>{7F2738F8-683C-49E7-88CD-E986C70F0321}</Project>
       <Name>Atlantis.Framework.DataCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.EcommPricing\Atlantis.Framework.EcommPricing.Interface\Atlantis.Framework.EcommPricing.Interface.csproj">
+      <Project>{b79f812e-7bbb-4fa8-b702-840bc1318c0b}</Project>
+      <Name>Atlantis.Framework.EcommPricing.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{D30157B2-C1B3-4073-BA5E-632E2337A997}</Project>
@@ -81,6 +88,10 @@
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.Interface\Atlantis.Framework.Providers.Preferences.Interface.csproj">
       <Project>{1a50e3b8-4a5c-4e48-bad4-17c5092f0dde}</Project>
       <Name>Atlantis.Framework.Providers.Preferences.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\Currency\Atlantis.Framework.Currency.Interface\Atlantis.Framework.Currency.Interface.csproj">
+      <Project>{86171d86-ae69-4f12-b69c-28e2a427fbf4}</Project>
+      <Name>Atlantis.Framework.Currency.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

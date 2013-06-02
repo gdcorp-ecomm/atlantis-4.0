@@ -66,12 +66,20 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurrencyProviderTests.cs" />
+    <Compile Include="Mocks\MockAppSettingRequest.cs" />
+    <Compile Include="Mocks\MockCurrencyInfo.cs" />
+    <Compile Include="Mocks\MockEcommPricingTripletRequest.cs" />
     <Compile Include="Mocks\MockPriceProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IscPricingProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -112,6 +120,14 @@
       <Project>{7F2738F8-683C-49E7-88CD-E986C70F0321}</Project>
       <Name>Atlantis.Framework.DataCache</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.EcommPricing\Atlantis.Framework.EcommPricing.Impl\Atlantis.Framework.EcommPricing.Impl.csproj">
+      <Project>{e397a17b-7672-4ce4-89e1-386ab75b19d8}</Project>
+      <Name>Atlantis.Framework.EcommPricing.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.EcommPricing\Atlantis.Framework.EcommPricing.Interface\Atlantis.Framework.EcommPricing.Interface.csproj">
+      <Project>{b79f812e-7bbb-4fa8-b702-840bc1318c0b}</Project>
+      <Name>Atlantis.Framework.EcommPricing.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{D30157B2-C1B3-4073-BA5E-632E2337A997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -131,6 +147,14 @@
     <ProjectReference Include="..\..\Atlantis.Framework.PLSignupInfo\Atlantis.Framework.PLSignupInfo.Interface\Atlantis.Framework.PLSignupInfo.Interface.csproj">
       <Project>{3c228090-226d-435d-ac13-be073ccdfae2}</Project>
       <Name>Atlantis.Framework.PLSignupInfo.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PrivateLabel\Atlantis.Framework.PrivateLabel.Impl\Atlantis.Framework.PrivateLabel.Impl.csproj">
+      <Project>{dda75fcc-711e-4fa7-a688-adb2d17ccccd}</Project>
+      <Name>Atlantis.Framework.PrivateLabel.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Atlantis.Framework.PrivateLabel\Atlantis.Framework.PrivateLabel.Interface\Atlantis.Framework.PrivateLabel.Interface.csproj">
+      <Project>{af7389f6-2167-4503-974e-42139638a9cc}</Project>
+      <Name>Atlantis.Framework.PrivateLabel.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.PromoData\Atlantis.Framework.PromoData.Impl\Atlantis.Framework.PromoData.Impl.csproj">
       <Project>{8EB9D6B2-C2B6-4CD3-BEAE-2C22347A81DA}</Project>
@@ -164,6 +188,14 @@
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\Currency\Atlantis.Framework.Currency.Impl\Atlantis.Framework.Currency.Impl.csproj">
+      <Project>{8dcdc38c-750f-43b4-921e-d49087b30495}</Project>
+      <Name>Atlantis.Framework.Currency.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Triplets\Currency\Atlantis.Framework.Currency.Interface\Atlantis.Framework.Currency.Interface.csproj">
+      <Project>{86171d86-ae69-4f12-b69c-28e2a427fbf4}</Project>
+      <Name>Atlantis.Framework.Currency.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.Currency\Atlantis.Framework.Providers.Currency.csproj">
       <Project>{8581EB6C-5093-473E-AB04-318CE071E7FD}</Project>
       <Name>Atlantis.Framework.Providers.Currency</Name>
@@ -172,10 +204,23 @@
   <ItemGroup>
     <None Include="atlantis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="QA\" />
+    <EmbeddedResource Include="ValidateNonOrderExpired.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ValidateNonOrderValid.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ValidateNonOrderInvalid.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PriceEstimateValid.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

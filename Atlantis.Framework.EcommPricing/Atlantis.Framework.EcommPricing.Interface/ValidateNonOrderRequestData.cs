@@ -12,8 +12,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
     public int PrivateLabelId { get; private set; }
     public string PromoCode { get; private set; }
 
-    public ValidateNonOrderRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int privateLabelId, string promoCode)
-      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    public ValidateNonOrderRequestData(int privateLabelId, string promoCode)
     {
       PrivateLabelId = privateLabelId;
       PromoCode = PreValidatePromoCode(promoCode);

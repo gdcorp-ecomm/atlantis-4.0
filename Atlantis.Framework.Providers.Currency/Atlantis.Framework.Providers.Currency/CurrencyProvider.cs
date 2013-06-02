@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Web;
+using Atlantis.Framework.EcommPricing.Interface;
+using Atlantis.Framework.Currency.Interface;
 
 namespace Atlantis.Framework.Providers.Currency
 {
@@ -18,44 +20,29 @@ namespace Atlantis.Framework.Providers.Currency
     Floor = 2
   }
 
+  internal static class ProviderErrors
+  {
+    internal static string CatalogPriceError = "33";
+    internal static string CatalogPriceErrorMsg = "Catalog Price Missing (USD conversion used)";
+    internal static string ListPriceNotFoundError = "34";
+    internal static string ListPriceNotFoundErrorMsg = "List Price Not Found";
+    internal static string PromoPriceNotFoundError = "35";
+    internal static string PromoPriceNotFoundErrorMsg = "Promo Price Not Found";
+  }
+
   public class CurrencyProvider : ProviderBase, ICurrencyProvider
   {
-    #region Static Properties
-
-    private static bool _useCookies = false;
-    /// <summary>
-    /// Only used if the ShopperPreferences Provider cannot be resolved
-    /// </summary>
-    public static bool UseLegacyCookies
-    {
-      get { return _useCookies; }
-      set { _useCookies = value; }
-    }
-
-    #endregion
-
-    #region Static Methods
-
-    private static bool IsValidCurrencyType(string currencyType)
-    {
-      ICurrencyInfo currencyInfoItem = CurrencyData.GetCurrencyInfo(currencyType);
-      return (currencyInfoItem != null);
-    }
-
-    #endregion
-
     const int RESELLER_CONTEXT = 6;
     private const string CURRENCY_TYPE_USD = "USD";
     private const string NOT_OFFERED_MSG_DEFAULT = "Product not offered.";
     private const string CURRENCY_PREFERENCE_KEY = "gdshop_currencyType";
-    private const string LEGACY_CURRENCY_COOKIE_PREFIX = "currency";
-
-    protected const string LEGACY_CURRENCY_COOKIE_PORTABLE_SOURCE_STR_KEY = "potableSourceStr";
 
     private Lazy<ICurrencyInfo> _USDInfo;
     private Lazy<ISiteContext> _siteContext;
     private Lazy<IShopperContext> _shopperContext;
     private Lazy<IShopperPreferencesProvider> _shopperPreferences;
+    private Lazy<CurrencyTypesResponseData> _currencyData;
+    private Lazy<MultiCurrencyContextsResponseData> _multiCurrencyContexts;
 
     private ISiteContext SiteContext
     {
@@ -72,51 +59,6 @@ namespace Atlantis.Framework.Providers.Currency
       get { return _shopperPreferences.Value; }
     }
 
-
-    private string _legacyCurrencyCookieName;
-    private string LegacyCurrencyCookieName
-    {
-      get
-      {
-        if (string.IsNullOrEmpty(_legacyCurrencyCookieName))
-        {
-          _legacyCurrencyCookieName = LEGACY_CURRENCY_COOKIE_PREFIX + SiteContext.PrivateLabelId;
-        }
-        return _legacyCurrencyCookieName;
-      }
-    }
-
-    /// <summary>
-    /// Only used if the ShopperPreferences Provider cannot be resolved
-    /// </summary>
-    private string LegacyCurrencyCookieValue
-    {
-      get
-      {
-        string currencyValue = string.Empty;
-        HttpCookie currencyCookie = HttpContext.Current.Request.Cookies[LegacyCurrencyCookieName];
-
-        if (currencyCookie != null && !string.IsNullOrEmpty(currencyCookie[LEGACY_CURRENCY_COOKIE_PORTABLE_SOURCE_STR_KEY]))
-        {
-          currencyValue = currencyCookie[LEGACY_CURRENCY_COOKIE_PORTABLE_SOURCE_STR_KEY];
-        }
-
-        return currencyValue;
-      }
-      set
-      {
-        if (IsValidCurrencyType(value))
-        {
-          HttpCookie cookie = SiteContext.NewCrossDomainCookie(LegacyCurrencyCookieName, DateTime.Now.AddYears(1));
-          if (cookie != null)
-          {
-            cookie[LEGACY_CURRENCY_COOKIE_PORTABLE_SOURCE_STR_KEY] = value;
-            HttpContext.Current.Response.Cookies.Set(cookie);
-          }
-        }
-      }
-    }
-
     private readonly Dictionary<string, string> _priceFormatCache;
 
     private ICurrencyInfo _selectedDisplayCurrencyInfo;
@@ -130,17 +72,19 @@ namespace Atlantis.Framework.Providers.Currency
       _priceFormatCache = new Dictionary<string, string>();
 
       _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
-      _shopperContext = new Lazy<IShopperContext>(() => { return Container.Resolve<IShopperContext>(); });
+      _shopperContext = new Lazy<IShopperContext>(() => { return Container.Resolve<IShopperContext>(); });      
       _shopperPreferences = new Lazy<IShopperPreferencesProvider>(
         () => { return Container.CanResolve<IShopperPreferencesProvider>() ? Container.Resolve<IShopperPreferencesProvider>() : null; });
-      _USDInfo = new Lazy<ICurrencyInfo>(() => { return CurrencyData.GetCurrencyInfo(CURRENCY_TYPE_USD); });
+      
+      _USDInfo = new Lazy<ICurrencyInfo>(
+        () => { return _currencyData.Value[CURRENCY_TYPE_USD]; });
+
+      _currencyData = new Lazy<CurrencyTypesResponseData>(GetCurrencyTypes);
+      _multiCurrencyContexts = new Lazy<MultiCurrencyContextsResponseData>(GetMultiCurrencyContexts);
     }
 
     #region Selected Currency Settings
 
-    /// <summary>
-    /// Returns or sets the shoppers selected Currency type
-    /// </summary>
     public string SelectedDisplayCurrencyType
     {
       get
@@ -153,11 +97,6 @@ namespace Atlantis.Framework.Providers.Currency
             {
               _selectedDisplayCurrencyType = ShopperPreferences.GetPreference(CURRENCY_PREFERENCE_KEY, string.Empty);
             }
-          }
-          else if (UseLegacyCookies)
-          {
-            // If the ShopperPreferences provider could not be resolved, we have to manually grab the legacy cookie value
-            _selectedDisplayCurrencyType = LegacyCurrencyCookieValue;
           }
 
           if ((string.IsNullOrEmpty(_selectedDisplayCurrencyType)) || (!IsValidCurrencyType(_selectedDisplayCurrencyType)))
@@ -184,11 +123,6 @@ namespace Atlantis.Framework.Providers.Currency
           {
             ShopperPreferences.UpdatePreference(CURRENCY_PREFERENCE_KEY, value);
           }
-          else if (UseLegacyCookies)
-          {
-            // If the ShopperPreferences provider could not be resolved, we have to manually set the legacy cookie value
-            LegacyCurrencyCookieValue = value;
-          }
 
           _selectedDisplayCurrencyInfo = null;
           _selectedTransactionalCurrencyType = null;
@@ -198,9 +132,6 @@ namespace Atlantis.Framework.Providers.Currency
       }
     }
 
-    /// <summary>
-    /// Returns the ICurrencyInfo for the shoppers selected currency type
-    /// </summary>
     public ICurrencyInfo SelectedDisplayCurrencyInfo
     {
       get
@@ -222,13 +153,13 @@ namespace Atlantis.Framework.Providers.Currency
         {
           if (SiteContext.ContextId == RESELLER_CONTEXT)
           {
-            _isMultiCurrencyActiveForContext =
-              MultiCurrencyContexts.GetIsContextIdActive(SiteContext.ContextId) &&
+            _isMultiCurrencyActiveForContext = 
+              _multiCurrencyContexts.Value.IsContextIdActive(SiteContext.ContextId) &&
               ((PLSignupInfoData != null) && (PLSignupInfoData.IsMultiCurrencyReseller));
           }
           else
           {
-            _isMultiCurrencyActiveForContext = MultiCurrencyContexts.GetIsContextIdActive(SiteContext.ContextId);
+            _isMultiCurrencyActiveForContext = _multiCurrencyContexts.Value.IsContextIdActive(SiteContext.ContextId);
           }
         }
         return _isMultiCurrencyActiveForContext.Value;
@@ -287,9 +218,6 @@ namespace Atlantis.Framework.Providers.Currency
       }
     }
 
-    /// <summary>
-    /// Returns the shoppers transactional currency based on their selected currency
-    /// </summary>
     public string SelectedTransactionalCurrencyType
     {
       get
@@ -302,9 +230,6 @@ namespace Atlantis.Framework.Providers.Currency
       }
     }
 
-    /// <summary>
-    /// Returns the ICurrencyInfo for the shoppers selected transactional currency type
-    /// </summary>
     public ICurrencyInfo SelectedTransactionalCurrencyInfo
     {
       get
@@ -323,12 +248,24 @@ namespace Atlantis.Framework.Providers.Currency
 
     #region Logging Missing Prices
 
-    private const string _catalogPriceError = "33";
     private void LogMissingCatalogPrice(string call, int unifiedProductId, int shopperPriceType, int quantity, int privateLabelId, string currencyType)
     {
-      string message = "Catalog Price Missing (USD conversion used)";
       string data = string.Concat(call, ":uid=", unifiedProductId.ToString(), ":plid=", privateLabelId.ToString(), ":cur=", currencyType, ":pricetype=", shopperPriceType.ToString(), ":q=", quantity.ToString());
-      AtlantisException ex = new AtlantisException(call, _catalogPriceError, message, data, SiteContext, ShopperContext);
+      AtlantisException ex = new AtlantisException(call, ProviderErrors.CatalogPriceError, ProviderErrors.CatalogPriceErrorMsg, data, SiteContext, ShopperContext);
+      Engine.Engine.LogAtlantisException(ex);
+    }
+
+    private void LogListPriceNotFound(string call, int unifiedProductId, int shopperPriceType, int quantity, int privateLabelId, string currencyType)
+    {
+      string data = string.Concat(call, ":uid=", unifiedProductId.ToString(), ":plid=", privateLabelId.ToString(), ":cur=", currencyType, ":pricetype=", shopperPriceType.ToString(), ":q=", quantity.ToString());
+      AtlantisException ex = new AtlantisException(call, ProviderErrors.ListPriceNotFoundError, ProviderErrors.ListPriceNotFoundErrorMsg, data, SiteContext, ShopperContext);
+      Engine.Engine.LogAtlantisException(ex);
+    }
+
+    private void LogPromoPriceNotFound(string call, int unifiedProductId, int shopperPriceType, int quantity, int privateLabelId, string currencyType)
+    {
+      string data = string.Concat(call, ":uid=", unifiedProductId.ToString(), ":plid=", privateLabelId.ToString(), ":cur=", currencyType, ":pricetype=", shopperPriceType.ToString(), ":q=", quantity.ToString());
+      AtlantisException ex = new AtlantisException(call, ProviderErrors.PromoPriceNotFoundError, ProviderErrors.PromoPriceNotFoundError, data, SiteContext, ShopperContext);
       Engine.Engine.LogAtlantisException(ex);
     }
 
@@ -338,19 +275,22 @@ namespace Atlantis.Framework.Providers.Currency
 
     private ICurrencyPrice LookupListPriceInt(int unifiedProductId, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
     {
-      int listPrice;
-      bool wasConverted;
+      var listPriceRequestData = new ListPriceRequestData(unifiedProductId, SiteContext.PrivateLabelId, shopperPriceType, transactionalCurrencyInfo.CurrencyType);
+      var listPriceResponseData = (ListPriceResponseData)DataCache.DataCache.GetProcessRequest(listPriceRequestData, CurrencyProviderEngineRequests.ListPriceRequest);
 
-      bool success = DataCache.DataCache.GetListPriceEx(SiteContext.PrivateLabelId, unifiedProductId, shopperPriceType, transactionalCurrencyInfo.CurrencyType, out listPrice, out wasConverted);
       CurrencyPriceType currencyPriceType = CurrencyPriceType.Transactional;
 
-      if (wasConverted)
+      if (!listPriceResponseData.IsPriceFound)
+      {
+        LogListPriceNotFound("CurrencyProvider.EcommPricingListPriceRequest", unifiedProductId, shopperPriceType, 1, SiteContext.PrivateLabelId, transactionalCurrencyInfo.CurrencyType);
+      }
+      else if (listPriceResponseData.IsEstimate)
       {
         currencyPriceType = CurrencyPriceType.Converted;
-        LogMissingCatalogPrice("CurrencyProvider.GetListPriceEx", unifiedProductId, shopperPriceType, 1, SiteContext.PrivateLabelId, transactionalCurrencyInfo.CurrencyType);
+        LogMissingCatalogPrice("CurrencyProvider.EcommPricingListPriceRequest", unifiedProductId, shopperPriceType, 1, SiteContext.PrivateLabelId, transactionalCurrencyInfo.CurrencyType);
       }
 
-      return new CurrencyPrice(listPrice, transactionalCurrencyInfo, currencyPriceType);
+      return new CurrencyPrice(listPriceResponseData.Price, transactionalCurrencyInfo, currencyPriceType);
     }
 
     public ICurrencyPrice GetListPrice(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null)
@@ -378,19 +318,7 @@ namespace Atlantis.Framework.Providers.Currency
 
     private ICurrencyPrice LookupCurrentPriceInt(int unifiedProductId, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
     {
-      int currentPrice;
-      bool wasConverted;
-
-      bool success = DataCache.DataCache.GetPromoPriceEx(SiteContext.PrivateLabelId, unifiedProductId, shopperPriceType, transactionalCurrencyInfo.CurrencyType, out currentPrice, out wasConverted);
-      CurrencyPriceType currencyPriceType = CurrencyPriceType.Transactional;
-
-      if (wasConverted)
-      {
-        currencyPriceType = CurrencyPriceType.Converted;
-        LogMissingCatalogPrice("CurrencyProvider.GetPromoPriceEx", unifiedProductId, shopperPriceType, 1, SiteContext.PrivateLabelId, transactionalCurrencyInfo.CurrencyType);
-      }
-
-      return new CurrencyPrice(currentPrice, transactionalCurrencyInfo, currencyPriceType);
+      return LookupCurrentPriceByQuantityInt(unifiedProductId, 1, shopperPriceType, transactionalCurrencyInfo);
     }
 
     public ICurrencyPrice GetCurrentPrice(int unifiedProductId, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null, string isc = null)
@@ -415,7 +343,7 @@ namespace Atlantis.Framework.Providers.Currency
       }
 
       IPricingProvider pricingProvider;
-      ICurrencyPrice currentPrice = null;
+      ICurrencyPrice currentPrice = null;  
 
       if (Container.TryResolve(out pricingProvider) && pricingProvider.DoesIscAffectPricing(isc))
       {
@@ -443,19 +371,22 @@ namespace Atlantis.Framework.Providers.Currency
 
     private ICurrencyPrice LookupCurrentPriceByQuantityInt(int unifiedProductId, int quantity, int shopperPriceType, ICurrencyInfo transactionalCurrencyInfo)
     {
-      int currentPrice;
-      bool wasConverted;
+      var requestData = new PromoPriceRequestData(unifiedProductId, SiteContext.PrivateLabelId, quantity, shopperPriceType, transactionalCurrencyInfo.CurrencyType);
+      var responseData = (PromoPriceResponseData)DataCache.DataCache.GetProcessRequest(requestData, CurrencyProviderEngineRequests.PromoPriceRequest);
 
-      bool success = DataCache.DataCache.GetPromoPriceByQtyEx(SiteContext.PrivateLabelId, unifiedProductId, shopperPriceType, quantity, transactionalCurrencyInfo.CurrencyType, out currentPrice, out wasConverted);
       CurrencyPriceType currencyPriceType = CurrencyPriceType.Transactional;
 
-      if (wasConverted)
+      if (!responseData.IsPriceFound)
+      {
+        LogPromoPriceNotFound("CurrencyProvider.EcommPricingPromoPriceRequest", unifiedProductId, shopperPriceType, 1, SiteContext.PrivateLabelId, transactionalCurrencyInfo.CurrencyType);
+      }
+      else if (responseData.IsEstimate)
       {
         currencyPriceType = CurrencyPriceType.Converted;
-        LogMissingCatalogPrice("CurrencyProvider.GetPromoPriceByQtyEx", unifiedProductId, shopperPriceType, quantity, SiteContext.PrivateLabelId, transactionalCurrencyInfo.CurrencyType);
+        LogMissingCatalogPrice("CurrencyProvider.EcommPricingPromoPriceRequest", unifiedProductId, shopperPriceType, 1, SiteContext.PrivateLabelId, transactionalCurrencyInfo.CurrencyType);
       }
 
-      return new CurrencyPrice(currentPrice, transactionalCurrencyInfo, currencyPriceType);
+      return new CurrencyPrice(responseData.Price, transactionalCurrencyInfo, currencyPriceType);
     }
 
     public ICurrencyPrice GetCurrentPriceByQuantity(int unifiedProductId, int quantity, int shopperPriceType = -1, ICurrencyInfo transactionCurrency = null)
@@ -506,7 +437,9 @@ namespace Atlantis.Framework.Providers.Currency
         isc = _siteContext.Value.ISC;
       }
 
-      bool result = DataCache.DataCache.IsProductOnSaleForCurrency(SiteContext.PrivateLabelId, unifiedProductId, transactionCurrency.CurrencyType);
+      var requestData = new ProductIsOnSaleRequestData(unifiedProductId, SiteContext.PrivateLabelId, shopperPriceType, transactionCurrency.CurrencyType);
+      var responseData = (ProductIsOnSaleResponseData)DataCache.DataCache.GetProcessRequest(requestData, CurrencyProviderEngineRequests.ProductIsOnSaleRequest);
+      bool result = responseData.IsOnSale;
       
       IPricingProvider pricingProvider;
       if (Container.TryResolve(out pricingProvider) && pricingProvider.DoesIscAffectPricing(isc))
@@ -1035,19 +968,39 @@ namespace Atlantis.Framework.Providers.Currency
 
     #region CurrencyData
 
+    private MultiCurrencyContextsResponseData GetMultiCurrencyContexts()
+    {
+      MultiCurrencyContextsRequestData request = new MultiCurrencyContextsRequestData();
+      MultiCurrencyContextsResponseData response = (MultiCurrencyContextsResponseData)DataCache.DataCache.GetProcessRequest(request, CurrencyProviderEngineRequests.MultiCurrencyContexts);
+      return response;
+    }
+
+    private CurrencyTypesResponseData GetCurrencyTypes()
+    {
+      CurrencyTypesRequestData requestData = new CurrencyTypesRequestData();
+      CurrencyTypesResponseData responseData = (CurrencyTypesResponseData)DataCache.DataCache.GetProcessRequest(requestData, CurrencyProviderEngineRequests.CurrencyTypesRequest);
+      return responseData;
+    }
+
+    private bool IsValidCurrencyType(string currencyType)
+    {
+      ICurrencyInfo currencyInfoItem = _currencyData.Value[currencyType];
+      return (currencyInfoItem != null);
+    }
+
     public ICurrencyInfo GetCurrencyInfo(string currencyType)
     {
-      return CurrencyData.GetCurrencyInfo(currencyType);
+      return _currencyData.Value[currencyType];
     }
 
     public IEnumerable<ICurrencyInfo> CurrencyInfoList
     {
-      get { return CurrencyData.CurrencyInfoList; }
+      get { return _currencyData.Value; }
     }
 
     public ICurrencyInfo GetValidCurrencyInfo(string currencyType)
     {
-      ICurrencyInfo result = CurrencyData.GetCurrencyInfo(currencyType);
+      ICurrencyInfo result = _currencyData.Value[currencyType];
       if (result == null)
       {
         result = _USDInfo.Value;
@@ -1085,7 +1038,5 @@ namespace Atlantis.Framework.Providers.Currency
     }
 
     #endregion
-
-
   }
 }

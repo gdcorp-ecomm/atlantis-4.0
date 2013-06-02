@@ -4,7 +4,7 @@ using System.Xml.Linq;
 namespace Atlantis.Framework.DataCacheService.Tests
 {
   [TestClass]
-  [DeploymentItem("Interop.gdDataCacheLib.dll")]
+  //[DeploymentItem("Interop.gdDataCacheLib.dll")]
   public class OutOfProcessTests
   {
     public OutOfProcessTests()

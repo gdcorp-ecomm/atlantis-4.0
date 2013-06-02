@@ -7,76 +7,16 @@ using System.Data;
 
 namespace Atlantis.Framework.DataCache.Tests
 {
-  /// <summary>
-  /// Summary description for UnitTest1
-  /// </summary>
   [TestClass]
-  [DeploymentItem("Interop.gdDataCacheLib.dll")]
+  //[DeploymentItem("Interop.gdDataCacheLib.dll")]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.DataCacheService.dll")]
+  [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.AppSettings.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.PrivateLabel.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Products.Impl.dll")]
   public class DataCacheTests
   {
-    public DataCacheTests()
-    {
-    }
-
-    private TestContext testContextInstance;
-
-    /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
-    {
-      get
-      {
-        return testContextInstance;
-      }
-      set
-      {
-        testContextInstance = value;
-      }
-    }
-
-    #region Additional test attributes
-    //
-    // You can use the following additional attributes as you write your tests:
-    //
-    // Use ClassInitialize to run code before running the first test in the class
-    // [ClassInitialize()]
-    // public static void MyClassInitialize(TestContext testContext) { }
-    //
-    // Use ClassCleanup to run code after all tests in a class have run
-    // [ClassCleanup()]
-    // public static void MyClassCleanup() { }
-    //
-    // Use TestInitialize to run code before running each test 
-    // [TestInitialize()]
-    // public void MyTestInitialize() { }
-    //
-    // Use TestCleanup to run code after each test has run
-    // [TestCleanup()]
-    // public void MyTestCleanup() { }
-    //
-    #endregion
-
-    [TestMethod]
-    public void GetCurrencyDataAll()
-    {
-      Dictionary<string, Dictionary<string,string>> currencyInfo = DataCache.GetCurrencyDataAll();
-      Assert.IsTrue(currencyInfo.ContainsKey("USD"));
-    }
-
-    [TestMethod]
-    public void GetRegistryFee()
-    {
-      //int price = DataCache.GetRegistryFee(101, "USD");
-    }
-
-    [TestMethod]
-    public void ValidDotTypes()
-    {
-      HashSet<string> dotTypes = DataCache.GetValidDotTypes();
-    }
-
     [TestMethod]
     public void CustomClassBasic()
     {
@@ -114,34 +54,73 @@ namespace Atlantis.Framework.DataCache.Tests
     }
 
     [TestMethod]
-    public void GetListPriceEx()
+    public void GetNonUnifiedPfid()
     {
-      const int mcpOffPlid = 1724;
-      const int mcpOnPlid = 440804;
+      int pfid = DataCache.GetPFIDByUnifiedID(101, 2);
+      Assert.AreNotEqual(101, pfid);
+    }
 
-      int price;
-      bool estimate;
+    [TestMethod]
+    public void GetAppSetting()
+    {
+      string value = DataCache.GetAppSetting("SALES_VALID_COUNTRY_SITES");
+      Assert.IsNotNull(value);
+    }
 
-      DataCache.GetListPriceEx(1, 101, 0, "EUR", out price, out estimate);
-      Assert.IsTrue(price > 0);
-      Assert.IsFalse(estimate);
+    [TestMethod]
+    public void GetProgId()
+    {
+      string progId = DataCache.GetProgID(1724);
+      Assert.AreEqual("hunter", progId);
+    }
 
-      DataCache.GetListPriceEx(mcpOffPlid, 101, 0, "EUR", out price, out estimate);
-      Assert.IsTrue(price > 0);
-      Assert.IsFalse(estimate);
+    [TestMethod]
+    public void GetPrivateLabelId()
+    {
+      int privateLabelId = DataCache.GetPrivateLabelId("hunter");
+      Assert.AreEqual(1724, privateLabelId);
+    }
 
-      DataCache.GetListPriceEx(mcpOnPlid, 101, 0, "EUR", out price, out estimate);
-      Assert.IsTrue(price > 0);
-      Assert.IsFalse(estimate);
+    [TestMethod]
+    public void GetPrivateLabelType()
+    {
+      int privateLabelType = DataCache.GetPrivateLabelType(1724);
+      Assert.AreEqual(2, privateLabelType);
+    }
 
-      DataCache.GetListPriceEx(2, 101, 0, "EUR", out price, out estimate);
-      Assert.IsTrue(price > 0);
-      Assert.IsFalse(estimate);
+    [TestMethod]
+    public void IsPrivateLabelActive()
+    {
+      bool isActive = DataCache.IsPrivateLabelActive(1724);
+      Assert.IsTrue(isActive);
+    }
 
-      DataCache.GetListPriceEx(1387, 101, 0, "EUR", out price, out estimate);
-      Assert.IsTrue(price < 0);
-      Assert.IsFalse(estimate);
+    [TestMethod]
+    public void GetPLData()
+    {
+      string company = DataCache.GetPLData(1724, 0);
+      Assert.IsNotNull(company);
+    }
 
+    [TestMethod]
+    public void GetPLDataTwice()
+    {
+      string company = DataCache.GetPLData(1724, 0);
+      string company2 = DataCache.GetPLData(1724, 0);
+      Assert.ReferenceEquals(company, company2);
+    }
+
+    [TestMethod]
+    public void ClearInProcessCachedData()
+    {
+      string company = DataCache.GetPLData(1724, 0);
+      string company2 = DataCache.GetPLData(1724, 0);
+      Assert.ReferenceEquals(company, company2);
+
+      DataCache.ClearCachedData(659);
+
+      string company3 = DataCache.GetPLData(1724, 0);
+      Assert.IsFalse(object.ReferenceEquals(company, company3));
     }
 
   }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Atlantis.Framework.Currency.Tests
 {
@@ -64,6 +65,7 @@ namespace Atlantis.Framework.Currency.Tests
       var request = new MultiCurrencyContextsRequestData();
       var response = (MultiCurrencyContextsResponseData)Engine.Engine.ProcessRequest(request, _REQUESTTYPE);
       response.ValidateActive(1);
+      XElement.Parse(response.ToXML());
     }
   }
 

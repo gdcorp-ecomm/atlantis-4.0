@@ -1,0 +1,20 @@
+﻿<PriceEstimates>
+	<PriceEstimate transactionCurrency="USD" >
+		<Item pf_id="101" priceGroupID="0" list_price="854" _oadjust_adjustedprice="754" _icann_fee_adjusted="100"/>
+	</PriceEstimate>
+	<PriceEstimate transactionCurrency="USD" >
+		<Item pf_id="58" priceGroupID="0" list_price="527" _oadjust_adjustedprice="427" _icann_fee_adjusted="100"/>
+	</PriceEstimate>
+	<PriceEstimate transactionCurrency="GBP" >
+		<Item pf_id="101" priceGroupID="0" list_price="826" _oadjust_adjustedprice="726" _icann_fee_adjusted="100"/>
+	</PriceEstimate>
+	<PriceEstimate transactionCurrency="GBP" >
+		<Item pf_id="58" priceGroupID="0" list_price="513" _oadjust_adjustedprice="413" _icann_fee_adjusted="100"/>
+	</PriceEstimate>
+	<PriceEstimate transactionCurrency="INR" >
+		<Item pf_id="101" priceGroupID="0" list_price="21914" _oadjust_adjustedprice="20914" _icann_fee_adjusted="1000"/>"
+	</PriceEstimate>
+	<PriceEstimate transactionCurrency="INR" >
+		<Item pf_id="58" priceGroupID="0" list_price="11957" _oadjust_adjustedprice="10957" _icann_fee_adjusted="1000"/>"
+	</PriceEstimate>
+</PriceEstimates>

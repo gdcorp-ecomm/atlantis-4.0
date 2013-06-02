@@ -1,7 +1,7 @@
-﻿using Atlantis.Framework.Interface;
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.EcommPricing.Interface
 {
@@ -20,8 +20,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
     public int PriceGroupId { get; set; }
     public int UnifiedProductId { get; set; }
 
-    public PriceEstimateRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int privateLabelId, int shopperPriceType, string currencyType, string promoCode, int priceGroupId, int unifiedProductId)
-      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    public PriceEstimateRequestData(int privateLabelId, int shopperPriceType, string currencyType, string promoCode, int priceGroupId, int unifiedProductId)
     {
       PrivateLabelId = privateLabelId;
       ShopperPriceType = shopperPriceType;
@@ -33,8 +32,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
       RequestTimeout = _requestTimeout;
     }
 
-    public PriceEstimateRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, int privateLabelId, int shopperPriceType, string currencyType, string promoCode, int priceGroupId, int unifiedProductId, string discountCode)
-      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    public PriceEstimateRequestData(int privateLabelId, int shopperPriceType, string currencyType, string promoCode, int priceGroupId, int unifiedProductId, string discountCode)
     {
       PrivateLabelId = privateLabelId;
       ShopperPriceType = shopperPriceType;
@@ -66,8 +64,7 @@ namespace Atlantis.Framework.EcommPricing.Interface
 
     public override string GetCacheMD5()
     {
-      var values = new[] { PrivateLabelId.ToString(), ShopperPriceType.ToString(), CurrencyType, PromoCode, PriceGroupId.ToString(), UnifiedProductId.ToString(), DiscountCode };
-      return BuildHashFromStrings(values);
+      return BuildHashFromStrings(PrivateLabelId.ToString(), ShopperPriceType.ToString(), CurrencyType, PromoCode, PriceGroupId.ToString(), UnifiedProductId.ToString(), DiscountCode);
     }
 
     public override string ToXML()

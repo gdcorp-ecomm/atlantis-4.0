@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.DataCacheService;
+using Atlantis.Framework.Interface;
 using System;
 using System.Web;
 
@@ -67,7 +68,14 @@ namespace Atlantis.Framework.Testing.MockProviders
     {
       get
       {
-        return DataCache.DataCache.GetProgID(PrivateLabelId);
+        string progId;
+
+        using (GdDataCacheOutOfProcess dataCache = GdDataCacheOutOfProcess.CreateDisposable())
+        {
+          progId = dataCache.GetProgId(PrivateLabelId);
+        }
+
+        return progId;
       }
     }
 

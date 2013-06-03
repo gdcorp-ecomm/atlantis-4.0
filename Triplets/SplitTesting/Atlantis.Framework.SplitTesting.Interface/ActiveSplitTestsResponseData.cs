@@ -99,6 +99,7 @@ namespace Atlantis.Framework.SplitTesting.Interface
     private ActiveSplitTestsResponseData()
     {
       _activeSplitTests = new List<ActiveSplitTest>();
+      _activeSplitTestsByTestId = new Dictionary<int, IActiveSplitTest>();
     }
 
     private ActiveSplitTestsResponseData(List<ActiveSplitTest> splitTests)

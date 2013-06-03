@@ -85,6 +85,10 @@
       <Project>{59ff3c50-a3df-4cf2-9578-5c65b43c59b6}</Project>
       <Name>Atlantis.Framework.DotTypeEoi.Impl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Triplets\DotTypeEoi\Atlantis.Framework.DotTypeEoi.Interface\Atlantis.Framework.DotTypeEoi.Interface.csproj">
+      <Project>{7d931e9e-8088-4b73-bebc-7bae27a5083b}</Project>
+      <Name>Atlantis.Framework.DotTypeEoi.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.DotTypeEoi.Interface\Atlantis.Framework.Providers.DotTypeEoi.Interface.csproj">
       <Project>{fea94b7e-7e36-4fa8-9369-cbd41ad53f5b}</Project>
       <Name>Atlantis.Framework.Providers.DotTypeEoi.Interface</Name>

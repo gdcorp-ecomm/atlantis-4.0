@@ -13,15 +13,13 @@ namespace Atlantis.Framework.DotTypeEoi.Impl
       RemoveFromShopperWatchListResponseData responseData;
       var responseXml = string.Empty;
 
-      var shopperId = requestData.ShopperID;
-
       try
       {
         using (var regEoiWebSvc = new RegEOIWebSvc())
         {
           regEoiWebSvc.Url = ((WsConfigElement)config).WSURL;
           regEoiWebSvc.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
-          responseXml = regEoiWebSvc.RemoveFromShopperWatchListXml(shopperId, requestData.ToXML());
+          responseXml = regEoiWebSvc.RemoveFromShopperWatchListXml(requestData.ShopperID, requestData.ToXML());
 
           var addToShopperWatchListElement = XElement.Parse(responseXml);
           var responseElement = addToShopperWatchListElement.Element("response");

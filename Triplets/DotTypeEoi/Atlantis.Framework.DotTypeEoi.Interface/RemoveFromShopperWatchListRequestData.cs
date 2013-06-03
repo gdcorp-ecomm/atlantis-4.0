@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.DotTypeEoi.Interface;
 
 namespace Atlantis.Framework.DotTypeEoi.Interface
 {
   public class RemoveFromShopperWatchListRequestData : RequestData
   {
-    public IList<string> GtldIds { get; set; }
+    public IList<IDotTypeEoiGtld> Gtlds { get; set; }
 
-    public RemoveFromShopperWatchListRequestData(string shopperId, IList<string> gTldIds)
+    public RemoveFromShopperWatchListRequestData(string shopperId, IList<IDotTypeEoiGtld> gTlds)
     {
       ShopperID = shopperId;
-      GtldIds = gTldIds;
+      Gtlds = gTlds;
 
       RequestTimeout = TimeSpan.FromSeconds(10);
     }
@@ -21,10 +22,10 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     {
       var gTldsElement = new XElement("gTlds");
 
-      foreach (var gtld in GtldIds)
+      foreach (var gTld in Gtlds)
       {
         var gtldElement = new XElement("gTld");
-        gtldElement.Add(new XAttribute("id", gtld));
+        gtldElement.Add(new XAttribute("id", gTld.Id));
         gTldsElement.Add(gtldElement);
       }
 

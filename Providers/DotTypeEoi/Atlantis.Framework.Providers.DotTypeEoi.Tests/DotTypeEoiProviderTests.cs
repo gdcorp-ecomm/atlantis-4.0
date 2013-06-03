@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Atlantis.Framework.DotTypeEoi.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeEoi.Interface;
 using Atlantis.Framework.Testing.MockProviders;
@@ -71,8 +72,11 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       string responseMessage;
 
-      var gTlds = new List<string> { "18" };
-      bool isSuccess = provider.AddToShopperWatchList(gTlds, out responseMessage);
+      var gTlds = new List<IDotTypeEoiGtld>(1);
+      var gTld = new DotTypeEoiGtld { Id = 18, GtldSubCategoryId = 234 };
+      const string displayTime = "2013-05-23 10:29:55";
+      gTlds.Add(gTld);
+      bool isSuccess = provider.AddToShopperWatchList(displayTime, gTlds, out responseMessage);
       Assert.AreEqual(true, isSuccess);
     }
 
@@ -82,7 +86,8 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       string responseMessage;
 
-      var gTlds = new List<string> { "18" };
+      var gTlds = new List<IDotTypeEoiGtld>(1);
+      var gTld = new DotTypeEoiGtld { Id = 18, GtldSubCategoryId = 234 };
       bool isSuccess = provider.RemoveFromShopperWatchList(gTlds, out responseMessage);
       Assert.AreEqual(true, isSuccess);
     }

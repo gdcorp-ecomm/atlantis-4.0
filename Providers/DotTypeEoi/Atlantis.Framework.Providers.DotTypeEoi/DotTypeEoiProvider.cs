@@ -63,14 +63,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool AddToShopperWatchList(IList<string> gTldIds, out string responseMessage)
+    public bool AddToShopperWatchList(string displayTime, IList<IDotTypeEoiGtld> gTlds, out string responseMessage)
     {
       var success = false;
       responseMessage = string.Empty;
 
       try
       {
-        var request = new AddToShopperWatchListRequestData(_shopperContext.Value.ShopperId, gTldIds);
+          var request = new AddToShopperWatchListRequestData(_shopperContext.Value.ShopperId, displayTime, gTlds);
         var response = (AddToShopperWatchListResponseData) Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
         if (response.IsSuccess)
         {
@@ -87,14 +87,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool RemoveFromShopperWatchList(IList<string> gTldIds, out string responseMessage)
+    public bool RemoveFromShopperWatchList(IList<IDotTypeEoiGtld> gTlds, out string responseMessage)
     {
       var success = false;
       responseMessage = string.Empty;
 
       try
       {
-        var request = new RemoveFromShopperWatchListRequestData(_shopperContext.Value.ShopperId, gTldIds);
+          var request = new RemoveFromShopperWatchListRequestData(_shopperContext.Value.ShopperId, gTlds);
         var response = (RemoveFromShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.RemoveFromShopperWatchListRequest);
         if (response.IsSuccess)
         {

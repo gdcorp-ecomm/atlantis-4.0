@@ -13,7 +13,7 @@ namespace Atlantis.Framework.DotTypeEoi.Impl
       AddToShopperWatchListResponseData responseData;
       var responseXml = string.Empty;
 
-      var shopperId = requestData.ShopperID;
+      var addToShopperWatchListRequest = (AddToShopperWatchListRequestData) requestData;
 
       try
       {
@@ -21,7 +21,7 @@ namespace Atlantis.Framework.DotTypeEoi.Impl
         {
           regEoiWebSvc.Url = ((WsConfigElement) config).WSURL;
           regEoiWebSvc.Timeout = (int) requestData.RequestTimeout.TotalMilliseconds;
-          responseXml = regEoiWebSvc.AddToShopperWatchListXml(shopperId, DateTime.Now.ToString(), requestData.ToXML());
+          responseXml = regEoiWebSvc.AddToShopperWatchListXml(requestData.ShopperID, addToShopperWatchListRequest.DisplayTime, addToShopperWatchListRequest.ToXML());
 
           var addToShopperWatchListElement = XElement.Parse(responseXml);
           var responseElement = addToShopperWatchListElement.Element("response");

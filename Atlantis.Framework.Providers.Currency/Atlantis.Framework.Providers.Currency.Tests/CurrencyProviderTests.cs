@@ -694,18 +694,20 @@ namespace Atlantis.Framework.Providers.Currency.Tests
     }
 
     [TestMethod]
-    public void GetListPriceFakeCurrencyInfoReturnsZeroPrice()
+    public void GetListPriceFakeCurrencyInfoReturnsUSDPrice()
     {
       var container = SetContexts(1, string.Empty);
       ICurrencyProvider currency = container.Resolve<ICurrencyProvider>();
       currency.SelectedDisplayCurrencyType = "USD";
+
+      var usdPrice = currency.GetListPrice(101, 1);
 
       string currencyItem = "<currency gdshop_currencyType=\"XXXX\" isTransactional=\"1\" />";
       XElement currencyElement = XElement.Parse(currencyItem);
       MockCurrencyInfo fakeCurrencyInfo = MockCurrencyInfo.FromCacheElement(currencyElement);
 
       ICurrencyPrice fakePrice = currency.GetListPrice(101, 1, fakeCurrencyInfo);
-      Assert.AreEqual(0, fakePrice.Price);
+      Assert.AreEqual(usdPrice.Price, fakePrice.Price);
     }
 
     [TestMethod]
@@ -737,18 +739,20 @@ namespace Atlantis.Framework.Providers.Currency.Tests
     }
 
     [TestMethod]
-    public void GetCurrentPriceFakeCurrencyInfoReturnsZeroPrice()
+    public void GetCurrentPriceFakeCurrencyInfoReturnsUSDPrice()
     {
       var container = SetContexts(1, string.Empty);
       ICurrencyProvider currency = container.Resolve<ICurrencyProvider>();
       currency.SelectedDisplayCurrencyType = "USD";
+
+      var usdPrice = currency.GetCurrentPrice(101, 1);
 
       string currencyItem = "<currency gdshop_currencyType=\"XXXX\" isTransactional=\"1\" />";
       XElement currencyElement = XElement.Parse(currencyItem);
       MockCurrencyInfo fakeCurrencyInfo = MockCurrencyInfo.FromCacheElement(currencyElement);
 
       ICurrencyPrice fakePrice = currency.GetCurrentPrice(101, 1, fakeCurrencyInfo);
-      Assert.AreEqual(0, fakePrice.Price);
+      Assert.AreEqual(usdPrice.Price, fakePrice.Price);
     }
 
     [TestMethod]
@@ -1011,18 +1015,20 @@ namespace Atlantis.Framework.Providers.Currency.Tests
     }
 
     [TestMethod]
-    public void GetCurrentPriceByQuantityFakeCurrencyInfoReturnsZeroPrice()
+    public void GetCurrentPriceByQuantityFakeCurrencyInfoReturnsUSDPrice()
     {
       var container = SetContexts(1, string.Empty);
       ICurrencyProvider currency = container.Resolve<ICurrencyProvider>();
       currency.SelectedDisplayCurrencyType = "USD";
+
+      var usdPrice = currency.GetCurrentPriceByQuantity(101, 1111, 1);
 
       string currencyItem = "<currency gdshop_currencyType=\"XXXX\" isTransactional=\"1\" />";
       XElement currencyElement = XElement.Parse(currencyItem);
       MockCurrencyInfo fakeCurrencyInfo = MockCurrencyInfo.FromCacheElement(currencyElement);
 
       ICurrencyPrice fakePrice = currency.GetCurrentPriceByQuantity(101, 1111, 1, fakeCurrencyInfo);
-      Assert.AreEqual(0, fakePrice.Price);
+      Assert.AreEqual(usdPrice.Price, fakePrice.Price);
     }    
   }
 }

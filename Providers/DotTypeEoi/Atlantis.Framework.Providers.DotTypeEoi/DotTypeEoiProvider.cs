@@ -15,24 +15,72 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       _shopperContext = new Lazy<IShopperContext>(() => { return Container.Resolve<IShopperContext>(); });
     }
 
-    public bool GetGeneralEoi(out IDotTypeEoiResponse dotTypeEoiResponse)
+    private readonly Dictionary<int, string> _categoryList = new Dictionary<int, string>();
+
+    public bool GetGeneralEoi(int page, int entriesPerPage, int categoryId, out string displayTime, out IList<IDotTypeEoiGtld> gTlds, out int totalPages)
     {
       var success = false;
-      dotTypeEoiResponse = null;
+      displayTime = null;
+      gTlds = null;
+      totalPages = 0;
 
       try
       {
         var request = new GeneralEoiJsonRequestData();
         var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
-        if (response.IsSuccess)
+        if (response.IsSuccess && response.DotTypeEoiResponse != null)
         {
-          dotTypeEoiResponse = response.DotTypeEoiResponse;
+          var dotTypeEoiResponse = response.DotTypeEoiResponse;
+          displayTime = dotTypeEoiResponse.DisplayTime;
+          foreach (var category in dotTypeEoiResponse.Categories)
+          {
+            if (categoryId == category.CategoryId)
+            {
+              gTlds = new List<IDotTypeEoiGtld>();
+              var gTldList = category.Gtlds;
+              int startPos = page * entriesPerPage;
+              for (int i = startPos; i < startPos + entriesPerPage; i++)
+              {
+                gTlds.Add(gTldList[i]);
+              }
+              totalPages = (int)Math.Ceiling(gTldList.Count/(double)entriesPerPage);
+              success = true;
+            }
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        var data = "page: " + page + ", entriesPerPage: " + entriesPerPage + ", categoryId: " + categoryId;
+        var exception = new AtlantisException("DotTypeEoiProvider.GetGeneralEoi(page, entriesPerPage, categoryId)", "0", ex.Message + ex.StackTrace, data, null, null);
+        Engine.Engine.LogAtlantisException(exception);
+      }
+
+      return success;
+    }
+
+    public bool GetGeneralEoiCategoryList(out Dictionary<int, string> categoryList)
+    {
+      var success = false;
+      categoryList = null;
+
+      try
+      {
+        var request = new GeneralEoiJsonRequestData();
+        var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
+        if (response.IsSuccess && response.DotTypeEoiResponse != null)
+        {
+          foreach (var category in response.DotTypeEoiResponse.Categories)
+          {
+            _categoryList.Add(category.CategoryId, category.Name);
+          }
+          categoryList = _categoryList;
           success = true;
         }
       }
       catch (Exception ex)
       {
-        var exception = new AtlantisException("DotTypeEoiProvider.GetGeneralEoi", "0", ex.Message + ex.StackTrace, string.Empty, null, null);
+        var exception = new AtlantisException("DotTypeEoiProvider.GetGeneralEoiCategoryList", "0", ex.Message + ex.StackTrace, string.Empty, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
 

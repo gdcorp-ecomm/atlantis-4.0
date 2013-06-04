@@ -33,14 +33,44 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     }
 
     [TestMethod]
-    public void DotTypeGetGeneralEoiSuccess()
+    public void DotTypeGetGeneralEoi1()
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
-      IDotTypeEoiResponse dotTypeEoiResponse;
-      bool isSuccess = provider.GetGeneralEoi(out dotTypeEoiResponse);
+      string displayTime;
+      IList<IDotTypeEoiGtld> gTlds;
+      int totalPages;
+      bool isSuccess = provider.GetGeneralEoi(0, 5, 1, out displayTime, out gTlds, out totalPages);
       Assert.AreEqual(true, isSuccess);
-      Assert.AreEqual(true, dotTypeEoiResponse.Categories.Count > 0);
-      Assert.AreEqual(true, dotTypeEoiResponse.Categories[0].Gtlds.Count > 0);
+      Assert.AreEqual(true, displayTime != string.Empty);
+      Assert.AreEqual(true, gTlds.Count == 5);
+      Assert.AreEqual(true, gTlds[0].Name != string.Empty);
+      Assert.AreEqual(true, totalPages > 0);
+    }
+
+    [TestMethod]
+    public void DotTypeGetGeneralEoi2()
+    {
+      IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
+      string displayTime;
+      IList<IDotTypeEoiGtld> gTlds;
+      int totalPages;
+      bool isSuccess = provider.GetGeneralEoi(2, 8, 6, out displayTime, out gTlds, out totalPages);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, displayTime != string.Empty);
+      Assert.AreEqual(true, gTlds.Count == 8);
+      Assert.AreEqual(true, gTlds[0].Name != string.Empty);
+      Assert.AreEqual(true, totalPages > 0);
+    }
+
+    [TestMethod]
+    public void DotTypeGetGeneralEoiCategoryList()
+    {
+      IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
+      Dictionary<int, string> categoryList;
+      bool isSuccess = provider.GetGeneralEoiCategoryList(out categoryList);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, categoryList.Count > 0);
+      Assert.AreEqual(true, categoryList[0] != string.Empty);
     }
 
     [TestMethod]
@@ -88,6 +118,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
 
       var gTlds = new List<IDotTypeEoiGtld>(1);
       var gTld = new DotTypeEoiGtld { Id = 18, GtldSubCategoryId = 234 };
+      gTlds.Add(gTld);
       bool isSuccess = provider.RemoveFromShopperWatchList(gTlds, out responseMessage);
       Assert.AreEqual(true, isSuccess);
     }

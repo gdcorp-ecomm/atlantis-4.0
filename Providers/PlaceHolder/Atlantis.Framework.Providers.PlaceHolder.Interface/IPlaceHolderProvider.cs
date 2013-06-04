@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Interface
 {
   public interface IPlaceHolderProvider
   {
     IPlaceHolderData GetPlaceHolderData(string type);
+
+    string GetPlaceHolderMarkup(string type, string location, IDictionary<string, string> parameters);
 
     string ReplacePlaceHolders(string content);
 

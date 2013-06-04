@@ -6,7 +6,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 {
   public class NullPlaceHolderHandler : IPlaceHolderHandler
   {
-    public string Name { get { return "null"; } }
+    public string Type { get { return "null"; } }
 
     public string GetPlaceHolderContent(string name, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
     {

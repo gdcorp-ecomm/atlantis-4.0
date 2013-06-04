@@ -13,7 +13,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
   {
     private readonly XmlDataSerializer _xmlDataSerializer = new XmlDataSerializer();
 
-    public string Name { get { return "userControl"; } }
+    public string Type { get { return PlaceHolderTypes.UserControl; } }
 
     public string GetPlaceHolderContent(string name, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
     {
@@ -30,7 +30,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
       catch (Exception ex)
       {
-        string errorMessage = string.Format("{0} place holder error. {1}", Name, ex.Message);
+        string errorMessage = string.Format("{0} place holder error. {1}", Type, ex.Message);
 
         debugContextErrors.Add(errorMessage);
         ErrorLogger.LogException(errorMessage, "RenderPlaceHolderContent()", data);

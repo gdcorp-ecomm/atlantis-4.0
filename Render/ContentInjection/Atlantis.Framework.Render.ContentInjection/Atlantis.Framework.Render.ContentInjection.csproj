@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{57D6C492-F584-43EF-8F3C-D433179297D7}</ProjectGuid>
+    <ProjectGuid>{772F3587-7323-4DC4-A8F3-B20E4B48E8D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Framework.Providers.PlaceHolder</RootNamespace>
-    <AssemblyName>Atlantis.Framework.Providers.PlaceHolder</AssemblyName>
+    <RootNamespace>Atlantis.Framework.Render.ContentInjection</RootNamespace>
+    <AssemblyName>Atlantis.Framework.Render.ContentInjection</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -36,7 +36,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,16 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorLogger.cs" />
-    <Compile Include="PlaceHolder.cs" />
-    <Compile Include="XmlPlaceHolderData.cs" />
-    <Compile Include="PlaceHolderHandlers\NullPlaceHolderHandler.cs" />
-    <Compile Include="XmlPlaceHolderParameter.cs" />
-    <Compile Include="PlaceHolderProvider.cs" />
-    <Compile Include="RenderHandler\PlaceHolderRenderHandler.cs" />
+    <Compile Include="ContentInjectionContext.cs" />
+    <Compile Include="ContentInjectionPosition.cs" />
+    <Compile Include="ContentInjectionRenderHandler.cs" />
+    <Compile Include="HtmlBodyBeginContentInjectionItem.cs" />
+    <Compile Include="HtmlBodyEndContentInjectionItem.cs" />
+    <Compile Include="HtmlHeadBeginContentInjectionItem.cs" />
+    <Compile Include="HtmlHeadEndContentInjectionItem.cs" />
+    <Compile Include="IContentInjectionContext.cs" />
+    <Compile Include="IContentInjectionItem.cs" />
+    <Compile Include="NullContentInjectionContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PlaceHolderHandlers\UserControlPlaceHolderHandler.cs" />
-    <Compile Include="XmlDataSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
@@ -64,17 +64,9 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
-      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
-      <Name>Atlantis.Framework.Providers.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
+    <ProjectReference Include="..\..\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
       <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
       <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.Providers.PlaceHolder.Interface\Atlantis.Framework.Providers.PlaceHolder.Interface.csproj">
-      <Project>{e9297a57-bdaf-45a3-ac6c-891f5235385f}</Project>
-      <Name>Atlantis.Framework.Providers.PlaceHolder.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

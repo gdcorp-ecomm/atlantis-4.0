@@ -8,7 +8,7 @@ namespace Atlantis.Framework.Render.Pipeline
     
     internal ProcessedRenderContent(IRenderContent renderContent)
     {
-      Content = string.Copy(renderContent.Content);
+      Content = string.Copy(renderContent.Content ?? string.Empty);
     }
 
     public void OverWriteContent(string content)

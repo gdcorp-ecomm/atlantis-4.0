@@ -28,7 +28,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     {
       IPlaceHolderHandler userControlPlaceHolderHandler = new UserControlPlaceHolderHandler();
 
-      _placeHolderHandlers[userControlPlaceHolderHandler.Name] = userControlPlaceHolderHandler;
+      _placeHolderHandlers[userControlPlaceHolderHandler.Type] = userControlPlaceHolderHandler;
     }
 
     public PlaceHolderProvider(IProviderContainer container) : base(container)
@@ -45,6 +45,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
 
       return placeHolderData;
+    }
+
+    public string GetPlaceHolderMarkup(string type, string location, IDictionary<string, string> parameters)
+    {
+      PlaceHolder placeHolder = new PlaceHolder(type, location, parameters);
+      return placeHolder.ToMarkup();
     }
 
     public string ReplacePlaceHolders(string content)

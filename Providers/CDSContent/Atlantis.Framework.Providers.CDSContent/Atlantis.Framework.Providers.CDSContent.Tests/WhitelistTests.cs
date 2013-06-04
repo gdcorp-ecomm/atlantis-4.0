@@ -41,7 +41,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     }
 
     [TestMethod]
-    public void AppNameIsWrong()
+    public void AppNameIsWrong_WhitelistTests()
     {
       string appName = "blah blah";
       string relativePath = "/hosting/email-hosting";
@@ -52,7 +52,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     }
 
     [TestMethod]
-    public void RelativePathIsNull()
+    public void RelativePathIsNull_WhitelistTests()
     {
       string appName = "blah blah";
       string relativePath = null;
@@ -63,9 +63,9 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     }
 
     [TestMethod]
-    public void UrlExists()
+    public void UrlExists_WhitelistTests()
     {
-      string appName = "sales";
+      string appName = "sales/unittest";
       string relativePath = "/hosting/email-hosting";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
@@ -73,9 +73,9 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     }
 
     [TestMethod]
-    public void UrlDoesNotExist()
+    public void UrlDoesNotExist_WhitelistTests()
     {
-      string appName = "sales";
+      string appName = "sales/unittest";
       string relativePath = "hosting/email-hosting";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
@@ -83,9 +83,9 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     }
 
     [TestMethod]
-    public void StyleIsCorrect()
+    public void StyleIsCorrect_WhitelistTests()
     {
-      string appName = "sales";
+      string appName = "sales/unittest";
       string relativePath = "/default.aspx";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
@@ -93,9 +93,9 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       Assert.IsTrue(whiteListResult.UrlData.Style == "w");
     }
 
-    public void StyleIsIncorrect()
+    public void StyleIsIncorrect_WhitelistTests()
     {
-      string appName = "sales";
+      string appName = "sales/unittest";
       string relativePath = "/hosting/email-hosting";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);

@@ -13,7 +13,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Interface
   {
     IWhitelistResult CheckWhiteList(string appName, string relativePath);
     IRedirectResult CheckRedirectRules(string appName, string relativePath);
-    string GetContentPath(string appName, string relativePath);
-    string RenderContent(string contentPath, RenderPipelineManager renderPipelineManager);
+    string GetContent(string appName, string relativePath, RenderPipelineManager renderPipelineManager);
+    //IRenderContentTemplate GetRenderTemplateContent(IRenderContent renderContent);
   }
 }

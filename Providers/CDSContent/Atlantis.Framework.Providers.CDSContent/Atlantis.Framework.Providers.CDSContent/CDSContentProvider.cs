@@ -18,15 +18,16 @@ namespace Atlantis.Framework.Providers.CDSContent
   {
     const string WhiteListFormat = "content/{0}/whitelist";
     const string RulesDocFormat = "content/{0}/{1}.rule";
-    const string DefaultContentPath = "content/{0}/{1}";
-
-    IProviderContainer _container;
-    private readonly ISiteContext _siteContext;
-    private readonly IShopperContext _shopperContext;
-    static ExpressionParserManager _expressionParser;
+    const string DefaultContentPathFormat = "content/{0}/{1}";
+    const string ContentPathFormat = "content/{0}";
 
     private static readonly IRedirectResult NullRedirectResult = new RedirectResult(false, null);
 
+    private IProviderContainer _container;
+    private readonly ISiteContext _siteContext;
+    private readonly IShopperContext _shopperContext;
+    private ExpressionParserManager _expressionParser;
+    
     public CDSContentProvider(IProviderContainer container)
       : base(container)
     {
@@ -57,7 +58,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         }
         catch (Exception ex)
         {
-          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, cdsQuery.Query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, cdsQuery.Query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
         }
       }
 
@@ -75,6 +76,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         {
           string ruleData = GetRuleData(redirectRules);
           if (!string.IsNullOrEmpty(ruleData))
+
           {
             RedirectData rawRedirectData = JsonConvert.DeserializeObject<RedirectData>(ruleData);
             if (!string.IsNullOrEmpty(rawRedirectData.Location))
@@ -87,47 +89,18 @@ namespace Atlantis.Framework.Providers.CDSContent
         }
         catch (Exception ex)
         {
-          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, appName + "-" + relativePath, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, appName + "-" + relativePath, string.Empty, string.Empty, string.Empty, string.Empty, 0));
         }
       }
 
       return redirectResult;
     }
 
-    public string GetContentPath(string appName, string relativePath)
+    public string GetContent(string appName, string relativePath, RenderPipelineManager renderPipelineManager)
     {
-      string contentPath = string.Format(DefaultContentPath, appName, relativePath);
-      ReadOnlyCollection<IRoutingRule> routeRules = GetRoutingRules(appName, relativePath, RoutingRuleTypes.Route);
+      string processedText = string.Empty;
 
-      if (routeRules != null)
-      {
-        try
-        {
-          string ruleData = GetRuleData(routeRules);
-          if (!string.IsNullOrEmpty(ruleData))
-          {
-            RouteData rawRouteData = JsonConvert.DeserializeObject<RouteData>(ruleData);
-            if (!string.IsNullOrEmpty(rawRouteData.Location))
-            {
-              string resultText;
-              TokenManager.ReplaceTokens(rawRouteData.Location, _container, out resultText);
-              contentPath = resultText;
-            }
-          }
-        }
-        catch (Exception ex)
-        {
-          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, appName + "-" + relativePath, string.Empty, string.Empty, string.Empty, string.Empty, 0));
-        }
-      }
-
-      return contentPath;
-    }
-
-    public string RenderContent(string contentPath, RenderPipelineManager renderPipelineManager)
-    {
-      string processedContent = string.Empty;
-
+      string contentPath = GetContentPath(appName, relativePath);
       if (!string.IsNullOrEmpty(contentPath))
       {
         ProcessQuery cdsQuery = new ProcessQuery(_container, contentPath);
@@ -137,16 +110,16 @@ namespace Atlantis.Framework.Providers.CDSContent
           ContentVersionResponseData responseData = cdsQuery.BypassCache ? (ContentVersionResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.ContentVersionRequestType) : (ContentVersionResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.ContentVersionRequestType);
           if (responseData != null && responseData.IsSuccess && !string.IsNullOrEmpty(responseData.Content))
           {
-            processedContent = renderPipelineManager.RenderContent(responseData, _container).Content;
+            processedText = renderPipelineManager.RenderContent(responseData, _container).Content;
           }
         }
         catch (Exception ex)
         {
-          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, cdsQuery.Query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, cdsQuery.Query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
         }
       }
 
-      return processedContent;
+      return processedText;
     }
     
     #endregion
@@ -171,7 +144,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         }
         catch (Exception ex)
         {
-          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, ErrorEnums.GeneralError.ToString(), ex.Message, cdsQuery.Query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, cdsQuery.Query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
         }
       }
 
@@ -189,7 +162,15 @@ namespace Atlantis.Framework.Providers.CDSContent
           bool result;
           if (!string.IsNullOrEmpty(rule.Condition))
           {
-            result = _expressionParser.EvaluateExpression(rule.Condition);
+            try
+            {
+              result = _expressionParser.EvaluateExpression(rule.Condition);
+            }
+            catch (Exception ex)
+            {
+              Engine.Engine.LogAtlantisException(new AtlantisException("Error evaluating condition: " + ex.Source, string.Empty, "0", ex.Message, "Condition: " + rule.Condition, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+              result = false;
+            }
             if (result && !string.IsNullOrEmpty(rule.Data))
             {
               ruleData = rule.Data;
@@ -200,6 +181,39 @@ namespace Atlantis.Framework.Providers.CDSContent
       }
 
       return ruleData;
+    }
+
+    internal string GetContentPath(string appName, string relativePath)
+    {
+      string contentPath = string.Empty;
+
+      if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(relativePath))
+      {
+        contentPath = string.Format(DefaultContentPathFormat, appName, relativePath);
+
+        ReadOnlyCollection<IRoutingRule> routeRules = GetRoutingRules(appName, relativePath, RoutingRuleTypes.Route);
+        if (routeRules != null)
+        {
+          string ruleData = GetRuleData(routeRules);
+          if (!string.IsNullOrEmpty(ruleData))
+          {
+            try
+            {
+              RouteData rawRouteData = JsonConvert.DeserializeObject<RouteData>(ruleData);
+              if (!string.IsNullOrEmpty(rawRouteData.Location))
+              {
+                contentPath = string.Format(ContentPathFormat, rawRouteData.Location);
+              }
+
+            }
+            catch (Exception ex)
+            {
+              Engine.Engine.LogAtlantisException(new AtlantisException("Error deserializing rule data: " + ex.Source, string.Empty, "0", ex.Message, appName + "-" + relativePath + " - RuleDataString: " + ruleData, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+            }
+          }
+        }
+      }
+      return contentPath;
     }
 
     #endregion

@@ -58,8 +58,14 @@
     <Compile Include="ConditionHandlers\CountrySiteContextConditionHandler.cs" />
     <Compile Include="ConditionHandlers\DataCenterCondtionHandler.cs" />
     <Compile Include="ConditionHandlers\TargetedMessageIdConditionHandler.cs" />
+    <Compile Include="GetContentPathTests.cs" />
     <Compile Include="RedirectRuleTests.cs" />
-    <Compile Include="RouteRuleTests.cs" />
+    <Compile Include="GetContentTests.cs" />
+    <Compile Include="RenderHandlers\RenderHandlerOne.cs" />
+    <Compile Include="RenderHandlers\RenderHandlerThree.cs" />
+    <Compile Include="RenderHandlers\RenderHandlerTwo.cs" />
+    <Compile Include="RenderHandlers\TargetedMessageRenderHandler.cs" />
+    <Compile Include="TokenHandlers\DataCenterToken.cs" />
     <Compile Include="WhitelistTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,6 +106,10 @@
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Atlantis.Framework.Tokens\Atlantis.Framework.Tokens.Interface\Atlantis.Framework.Tokens.Interface.csproj">
+      <Project>{79189505-c1c8-4282-83e2-0140a2635624}</Project>
+      <Name>Atlantis.Framework.Tokens.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Conditions\Interface\Atlantis.Framework.Conditions.Interface\Atlantis.Framework.Conditions.Interface.csproj">
       <Project>{9f0b7f62-5a62-4823-8697-a18fa91b2a8d}</Project>
       <Name>Atlantis.Framework.Conditions.Interface</Name>
@@ -107,6 +117,10 @@
     <ProjectReference Include="..\..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
       <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
       <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline\Atlantis.Framework.Render.Pipeline.csproj">
+      <Project>{68764d92-7cd9-45fb-b650-1429656dcf14}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.CDSContent.Interface\Atlantis.Framework.Providers.CDSContent.Interface.csproj">
       <Project>{99bcb8c3-f00f-44be-ab61-7b433f519e2b}</Project>
@@ -125,6 +139,7 @@
   <ItemGroup>
     <Content Include="ConditionHandlers\Atlantis.Framework.CH.CountrySiteAny.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -51,7 +51,6 @@
     <Compile Include="CDSContentProvider.cs" />
     <Compile Include="ProcessQuery.cs" />
     <Compile Include="CDSProviderEngineRequests.cs" />
-    <Compile Include="ErrorEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

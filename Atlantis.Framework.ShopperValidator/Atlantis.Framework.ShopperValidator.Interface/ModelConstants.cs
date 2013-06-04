@@ -14,7 +14,6 @@ namespace Atlantis.Framework.ShopperValidator.Interface
     public static string FACT_USERNAME = "txtUsername";
     public static string FACT_PASSWORD = "txtCreatePassword";
     public static string FACT_PASSWORD2 = "txtCreatePassword2";
-    public static string FACT_PIN = "txtPin";
     public static string FACT_EMAIL = "txtEmail";
 
     public static string FACT_FIRST_NAME_MAX_LENGTH = "firstNameMaxLength";
@@ -23,8 +22,6 @@ namespace Atlantis.Framework.ShopperValidator.Interface
     public static string FACT_PASS_MAX_LENGTH = "passwordMaxLength";
     public static string FACT_PASS_MIN_LENGTH = "passwordMinLength";
     public static string FACT_PASS_REGEX = "passwordRegex";
-    public static string FACT_PIN_MAX_LENGTH = "pinMaxLength";
-    public static string FACT_PIN_MIN_LENGTH = "pinMinLength";
     public static string FACT_EMAIL_REGEX = "emailRegex";
     public static string FACT_EMAIL_MAX_LENGTH = "emailMaxLength";
     public static string FACT_NUMERIC_ONLY_REGEX = "numericOnlyRegex";

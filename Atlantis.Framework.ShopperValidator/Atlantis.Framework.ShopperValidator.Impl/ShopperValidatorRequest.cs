@@ -131,13 +131,13 @@ namespace Atlantis.Framework.ShopperValidator.Impl
       }
     }
 
-    private void ValidateShopperWithRuleEngine(ShopperValidatorRequestData requestData)
+    private bool LoadValidationRulesXml(out XmlDocument validationRulesXml)
     {
-      bool success = false;
-      var slimShopperRulesDoc = new XmlDocument();
-      foreach(string resource in Assembly.GetExecutingAssembly().GetManifestResourceNames())
+      validationRulesXml = new XmlDocument();
+      var success = false;
+      foreach (string resource in Assembly.GetExecutingAssembly().GetManifestResourceNames())
       {
-        if(resource.EndsWith("SlimShopperValidation.xml"))
+        if (resource.EndsWith("SlimShopperValidation.xml"))
         {
           using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
           {
@@ -145,7 +145,7 @@ namespace Atlantis.Framework.ShopperValidator.Impl
             {
               if (stream != null)
               {
-                slimShopperRulesDoc.Load(stream);
+                validationRulesXml.Load(stream);
                 success = true;
               }
             }
@@ -157,6 +157,14 @@ namespace Atlantis.Framework.ShopperValidator.Impl
           break;
         }
       }
+
+      return success;
+    }
+
+    private void ValidateShopperWithRuleEngine(ShopperValidatorRequestData requestData)
+    {
+      XmlDocument slimShopperRulesDoc;
+      var success = LoadValidationRulesXml(out slimShopperRulesDoc);
 
       if(!success)
       {
@@ -176,46 +184,11 @@ namespace Atlantis.Framework.ShopperValidator.Impl
       {
         DoValidateUsernameSearch(requestData);
       }
-      if (!FactIsInvalid(validatedModel, ModelConstants.FACT_PIN, ModelConstants.FACT_PIN_MAX_LENGTH, ModelConstants.FACT_PIN_MIN_LENGTH))
-      {
-        DoValidatePinAllSameNumbers(requestData);
-      }
     }
 
     private bool FactIsInvalid(IModelResult validatedModel, params string[] factKeys)
     {
       return validatedModel.Facts.Where(fact => factKeys.Contains(fact.FactKey)).Any(fact => fact.Status == ValidationResultStatus.InValid);
-    }
-
-    private void DoValidatePinAllSameNumbers(ShopperValidatorRequestData requestData)
-    {
-      string callInPin = requestData.ShopperBaseModel[ModelConstants.MODEL_ID_SHOPPERVALID][ModelConstants.FACT_PIN];
-      int callInPinNumeric = Convert.ToInt16(callInPin);
-      string baseUniformNumber = "";
-      for (int i = 0; i < callInPin.Length; i++)
-      {
-        baseUniformNumber += "1";
-      }
-      if (callInPinNumeric == 0 || callInPinNumeric % Convert.ToInt16(baseUniformNumber) == 0)
-      {
-        foreach (var model in _engineResults.ValidationResults)
-        {
-          if (model.ModelId == ModelConstants.MODEL_ID_SHOPPERVALID)
-          {
-            foreach (var fact in model.Facts)
-            {
-              if (fact.FactKey == ModelConstants.FACT_PIN)
-              {
-                fact.Status = ValidationResultStatus.InValid;
-                fact.Messages.Add("PIN must contain more than one digit");
-                model.ContainsInvalids = true;
-                break;
-              }
-            }
-            break;
-          }
-        }
-      }
     }
 
     private void DoValidateUsernameSearch(ShopperValidatorRequestData requestData)

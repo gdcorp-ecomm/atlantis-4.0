@@ -66,11 +66,11 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     public void DotTypeGetGeneralEoiCategoryList()
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
-      Dictionary<int, string> categoryList;
+      IList<ICategoryData> categoryList;
       bool isSuccess = provider.GetGeneralEoiCategoryList(out categoryList);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, categoryList.Count > 0);
-      Assert.AreEqual(true, categoryList[0] != string.Empty);
+      Assert.AreEqual(true, categoryList[0] != null);
     }
 
     [TestMethod]

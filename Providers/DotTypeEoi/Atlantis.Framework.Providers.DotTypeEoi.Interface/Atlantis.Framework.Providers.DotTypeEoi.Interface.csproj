@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICategoryData.cs" />
     <Compile Include="IShopperWatchListResponse.cs" />
     <Compile Include="IDotTypeEoiCategory.cs" />
     <Compile Include="IDotTypeEoiGtld.cs" />

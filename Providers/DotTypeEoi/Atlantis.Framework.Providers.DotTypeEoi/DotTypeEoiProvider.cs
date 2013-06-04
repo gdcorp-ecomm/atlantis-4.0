@@ -15,7 +15,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       _shopperContext = new Lazy<IShopperContext>(() => { return Container.Resolve<IShopperContext>(); });
     }
 
-    private readonly Dictionary<int, string> _categoryList = new Dictionary<int, string>();
+    private readonly IList<ICategoryData> _categoryList = new List<ICategoryData>();
 
     public bool GetGeneralEoi(int page, int entriesPerPage, int categoryId, out string displayTime, out IList<IDotTypeEoiGtld> gTlds, out int totalPages)
     {
@@ -59,7 +59,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool GetGeneralEoiCategoryList(out Dictionary<int, string> categoryList)
+    public bool GetGeneralEoiCategoryList(out IList<ICategoryData> categoryList)
     {
       var success = false;
       categoryList = null;
@@ -72,7 +72,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
         {
           foreach (var category in response.DotTypeEoiResponse.Categories)
           {
-            _categoryList.Add(category.CategoryId, category.Name);
+            _categoryList.Add(new CategoryData(category));
           }
           categoryList = _categoryList;
           success = true;

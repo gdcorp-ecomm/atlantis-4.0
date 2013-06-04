@@ -1,30 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using Atlantis.Framework.Providers.Containers;
+using Atlantis.Framework.Render.Pipeline;
+using Atlantis.Framework.Render.Pipeline.Interface;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.UI;
-using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Containers;
-using Atlantis.Framework.Render.Pipeline.Interface;
-using Atlantis.Framework.Render.Template;
-using Atlantis.Framework.Render.Template.Interface;
 
-namespace Atlantis.Framework.Render.Pipeline
+namespace Atlantis.Framework.Web.RenderPipeline
 {
   public class RenderPipelineBasePage : Page
   {
     private readonly RenderPipelineManager _renderPipelineManager = new RenderPipelineManager();
-
-    private ISiteContext _siteContext;
-    protected virtual ISiteContext SiteContext
-    {
-      get { return _siteContext ?? (_siteContext = HttpProviderContainer.Instance.Resolve<ISiteContext>()); }
-    }
-
-    private IShopperContext _shopperContext;
-    protected virtual IShopperContext ShopperContext
-    {
-      get { return _shopperContext ?? (_shopperContext = HttpProviderContainer.Instance.Resolve<IShopperContext>()); }
-    }
 
     private void RenderPage(HtmlTextWriter writer)
     {
@@ -47,7 +33,7 @@ namespace Atlantis.Framework.Render.Pipeline
       }
     }
 
-    protected void AddRenderHandlers(IRenderHandler[] renderHandlers)
+    protected void AddRenderHandlers(params IRenderHandler[] renderHandlers)
     {
       _renderPipelineManager.AddRenderHandler(renderHandlers);
     }
@@ -55,11 +41,6 @@ namespace Atlantis.Framework.Render.Pipeline
     protected void AddRenderHandlers(IEnumerable<IRenderHandler> renderHandlers)
     {
       _renderPipelineManager.AddRenderHandler(renderHandlers.ToArray());
-    }
-
-    protected void ProcessTemplate(IRenderTemplateContent renderTemplateContent)
-    {
-      RenderTemplateManager.ProcessTemplate(renderTemplateContent);
     }
 
     protected override void Render(HtmlTextWriter writer)

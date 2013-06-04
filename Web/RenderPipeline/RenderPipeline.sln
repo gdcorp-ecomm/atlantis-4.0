@@ -15,34 +15,40 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.RenderPipeline.TestWeb", "Atlantis.Framework.Web.RenderPipeline.TestWeb\Atlantis.Framework.Web.RenderPipeline.TestWeb.csproj", "{701E9C37-EB66-43D0-9EDD-F61A1FEA8946}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Pipeline", "..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline\Atlantis.Framework.Render.Pipeline.csproj", "{68764D92-7CD9-45FB-B650-1429656DCF14}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
-		SccProjectUniqueName0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
-		SccProjectTopLevelParentUniqueName0 = RenderPipeline.sln
-		SccProjectName0 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
-		SccLocalPath0 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
-		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface\\Atlantis.Framework.Interface.csproj
 		SccProjectTopLevelParentUniqueName1 = RenderPipeline.sln
-		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
-		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
-		SccProjectUniqueName2 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface\\Atlantis.Framework.Render.Pipeline.Interface.csproj
+		SccProjectName1 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Interface
+		SccLocalPath1 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Interface
+		SccProjectUniqueName2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine.csproj
 		SccProjectTopLevelParentUniqueName2 = RenderPipeline.sln
-		SccProjectName2 = ../../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline.Interface
-		SccLocalPath2 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface
-		SccProjectUniqueName3 = ..\\..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers.csproj
+		SccProjectName2 = ../../Atlantis.Framework.Engine/Atlantis.Framework.Engine
+		SccLocalPath2 = ..\\..\\Atlantis.Framework.Engine\\Atlantis.Framework.Engine
+		SccProjectUniqueName3 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface\\Atlantis.Framework.Render.Pipeline.Interface.csproj
 		SccProjectTopLevelParentUniqueName3 = RenderPipeline.sln
-		SccProjectName3 = ../../Atlantis.Framework.Providers.Containers/Atlantis.Framework.Providers.Containers
-		SccLocalPath3 = ..\\..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers
-		SccLocalPath4 = .
+		SccProjectName3 = ../../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline.Interface
+		SccLocalPath3 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface
+		SccProjectUniqueName4 = ..\\..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers.csproj
+		SccProjectTopLevelParentUniqueName4 = RenderPipeline.sln
+		SccProjectName4 = ../../Atlantis.Framework.Providers.Containers/Atlantis.Framework.Providers.Containers
+		SccLocalPath4 = ..\\..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers
 		SccProjectUniqueName5 = Atlantis.Framework.Web.RenderPipeline.TestWeb\\Atlantis.Framework.Web.RenderPipeline.TestWeb.csproj
 		SccProjectName5 = Atlantis.Framework.Web.RenderPipeline.TestWeb
 		SccLocalPath5 = Atlantis.Framework.Web.RenderPipeline.TestWeb
 		SccProjectUniqueName6 = Atlantis.Framework.Web.RenderPipeline\\Atlantis.Framework.Web.RenderPipeline.csproj
 		SccProjectName6 = Atlantis.Framework.Web.RenderPipeline
 		SccLocalPath6 = Atlantis.Framework.Web.RenderPipeline
+		SccProjectUniqueName7 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline\\Atlantis.Framework.Render.Pipeline.csproj
+		SccProjectTopLevelParentUniqueName7 = RenderPipeline.sln
+		SccProjectName7 = ../../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline
+		SccLocalPath7 = ..\\..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +79,10 @@ Global
 		{701E9C37-EB66-43D0-9EDD-F61A1FEA8946}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{701E9C37-EB66-43D0-9EDD-F61A1FEA8946}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{701E9C37-EB66-43D0-9EDD-F61A1FEA8946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68764D92-7CD9-45FB-B650-1429656DCF14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68764D92-7CD9-45FB-B650-1429656DCF14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68764D92-7CD9-45FB-B650-1429656DCF14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68764D92-7CD9-45FB-B650-1429656DCF14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,5 +92,6 @@ Global
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {73D86A68-B2F7-4187-A7B1-C9E016F6AA34}
 		{0D7F076F-1809-437B-B045-E35A7E68E423} = {73D86A68-B2F7-4187-A7B1-C9E016F6AA34}
 		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {73D86A68-B2F7-4187-A7B1-C9E016F6AA34}
+		{68764D92-7CD9-45FB-B650-1429656DCF14} = {73D86A68-B2F7-4187-A7B1-C9E016F6AA34}
 	EndGlobalSection
 EndGlobal

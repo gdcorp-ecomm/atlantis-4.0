@@ -1,8 +1,8 @@
-﻿using System.Text.RegularExpressions;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Render.Pipeline.Interface;
+using System.Text.RegularExpressions;
 
-namespace Atlantis.Framework.Render.Pipeline
+namespace Atlantis.Framework.Web.RenderPipeline
 {
   public class StripWhiteSpaceRenderHandler : IRenderHandler
   {

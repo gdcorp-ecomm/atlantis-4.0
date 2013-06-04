@@ -1,6 +1,6 @@
 ﻿using Atlantis.Framework.Render.Pipeline.Interface;
 
-namespace Atlantis.Framework.Render.Pipeline
+namespace Atlantis.Framework.Web.RenderPipeline
 {
   internal class BasePageRenderContent : IRenderContent
   {

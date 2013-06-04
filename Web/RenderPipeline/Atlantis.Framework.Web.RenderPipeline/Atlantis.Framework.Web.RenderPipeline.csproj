@@ -44,8 +44,13 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasePageRenderContent.cs" />
+    <Compile Include="RenderPipelineBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="RenderPipelineControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StripWhiteSpaceRenderHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
@@ -59,6 +64,10 @@
     <ProjectReference Include="..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj">
       <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
       <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline\Atlantis.Framework.Render.Pipeline.csproj">
+      <Project>{68764d92-7cd9-45fb-b650-1429656dcf14}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

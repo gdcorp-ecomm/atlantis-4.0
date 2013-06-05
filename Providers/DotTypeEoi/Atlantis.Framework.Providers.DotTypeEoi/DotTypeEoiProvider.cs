@@ -39,7 +39,12 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
               gTlds = new List<IDotTypeEoiGtld>();
               var gTldList = category.Gtlds;
               int startPos = page * entriesPerPage;
-              for (int i = startPos; i < startPos + entriesPerPage; i++)
+              int endPos = startPos + entriesPerPage;
+              if (endPos > gTldList.Count)
+              {
+                endPos = gTldList.Count;
+              }
+              for (int i = startPos; i < endPos; i++)
               {
                 gTlds.Add(gTldList[i]);
               }

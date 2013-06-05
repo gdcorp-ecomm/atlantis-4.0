@@ -6,6 +6,7 @@ using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Render.Pipeline;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
+using Atlantis.Framework.Tokens.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -56,11 +57,16 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       ConditionHandlerManager.AutoRegisterConditionHandlers(Assembly.GetExecutingAssembly());
     }
 
+    private void RegisterTokens()
+    {
+      TokenManager.RegisterTokenHandler(new DataCenterToken());
+    }
+
     private void RegisterRenderHandlers()
     {
-      RenderPipelineMgr.AddRenderHandler(new RenderHandlerThree());
-      RenderPipelineMgr.AddRenderHandler(new RenderHandlerOne());
-      RenderPipelineMgr.AddRenderHandler(new RenderHandlerTwo());
+      RenderPipelineMgr.AddRenderHandler(new ConditionRenderHandler());
+      RenderPipelineMgr.AddRenderHandler(new TargetedMessageRenderHandler());
+      RenderPipelineMgr.AddRenderHandler(new TokenRenderHandler());
     }
 
 
@@ -83,6 +89,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       RegisterProviders();
       RegisterConditions();
       RegisterRenderHandlers();
+      RegisterTokens();
     }
 
     [TestInitialize]
@@ -107,7 +114,6 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       string appName = "blah blah";
       string relativePath = null;
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
-      IRedirectResult redirectResult = provider.CheckRedirectRules(appName, relativePath);
       string content= provider.GetContent(appName, relativePath, RenderPipelineMgr);
       Assert.IsTrue(content == string.Empty);
     }
@@ -118,7 +124,6 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       string appName = "sales/unittest";
       string relativePath = "defaultcontentpath_getcontenttests";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
-      IRedirectResult redirectResult = provider.CheckRedirectRules(appName, relativePath);
       string content = provider.GetContent(appName, relativePath, RenderPipelineMgr);
       Assert.IsTrue(content.Contains("Asia Pacific"));
       Assert.IsTrue(content.Contains("eastern hemisphere"));
@@ -129,19 +134,17 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     public void ContentNotFound_GetContentTests()
     {
       string appName = "sales/unittest";
-      string relativePath = "contentnotfound_getcontenttests";
+      string relativePath = "notfound-notfound-notfound";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       string content = provider.GetContent(appName, relativePath, RenderPipelineMgr);
-      Assert.IsTrue(content.Contains("Asia Pacific"));
-      Assert.IsTrue(content.Contains("eastern hemisphere"));
-      Assert.IsTrue(content.Contains("Targeted Message Here!!!!"));
+      Assert.IsTrue(content == string.Empty);
     }
 
     [TestMethod]
     public void RenderPipelineTests_GetContentTests()
     {
       string appName = "sales/unittest";
-      string relativePath = "contentnotfound_getcontenttests";
+      string relativePath = "renderpipelinetests_getcontenttests";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       string content = provider.GetContent(appName, relativePath, RenderPipelineMgr);
       Assert.IsTrue(content.Contains("Asia Pacific"));

@@ -90,7 +90,7 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     public void RelativePathIsNull_GetContentPathTests()
     {
       string appName = "blah blah";
-      string relativePath = null;
+      string relativePath = "temp";
       CDSContentProvider provider = (CDSContentProvider) ProviderContainer.Resolve<ICDSContentProvider>();
       string path = provider.GetContentPath(appName, relativePath);
       Assert.IsTrue(path == string.Format("content/{0}/{1}", appName, relativePath));

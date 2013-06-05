@@ -18,24 +18,6 @@ namespace Atlantis.Framework.Render.ContentInjection
       }
     }
 
-    private void LogException(string message, string sourceFunction, string data)
-    {
-      AtlantisException aex = new AtlantisException(sourceFunction,
-                                                    "0",
-                                                    message,
-                                                    data,
-                                                    null,
-                                                    null);
-
-      try
-      {
-        Engine.Engine.LogAtlantisException(aex);
-      }
-      catch
-      {
-      }
-    }
-
     private void ProcessContentItems(IProcessedRenderContent processedRenderContent, IProviderContainer providerContainer)
     {
       if (_context.IsValid)
@@ -70,12 +52,8 @@ namespace Atlantis.Framework.Render.ContentInjection
 
         if (!contentInjected)
         {
-          LogException("Content not injected: " + contentInjectionItem,
-                       "ContentInjectionRenderHandler.ProcessContentInjection()",
-                       "PlaceholderRegex: " + contentInjectionItem.PlaceHolderRegex + ", Position: " + contentInjectionItem.Position.ToString());
-
           LogDebugData("ContentInjectionItem-" + contentInjectionItem,
-                       "Content not injected. PlaceholderRegex: " + contentInjectionItem.PlaceHolderRegex + ", Position: " + contentInjectionItem.Position.ToString(),
+                       "Content not injected, place holder not found. PlaceholderRegex: " + contentInjectionItem.PlaceHolderRegex + ", Position: " + contentInjectionItem.Position.ToString(),
                        providerContainer);
         }
       }

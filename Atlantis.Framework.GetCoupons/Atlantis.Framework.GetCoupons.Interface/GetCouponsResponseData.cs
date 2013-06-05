@@ -122,6 +122,18 @@ namespace Atlantis.Framework.GetCoupons.Interface
             couponCode = node.Attributes["couponCode"].Value;
           }
 
+          string provisionDate = string.Empty;
+          if (node.Attributes["provisionDate"] != null && !string.IsNullOrEmpty(node.Attributes["provisionDate"].Value))
+          {
+            provisionDate = Convert.ToDateTime(node.Attributes["provisionDate"].Value).ToShortDateString();
+          }
+
+          string expirationDate = string.Empty;
+          if (node.Attributes["expirationDate"] != null && !string.IsNullOrEmpty(node.Attributes["expirationDate"].Value))
+          {
+            expirationDate = Convert.ToDateTime(node.Attributes["expirationDate"].Value).ToShortDateString();
+          }
+
 
           AdWordCoupon coupon = new AdWordCoupon(couponKey
             , orderId
@@ -129,7 +141,7 @@ namespace Atlantis.Framework.GetCoupons.Interface
             , vendorId
             , value
             , outOfStock
-            , couponCode);
+            , couponCode, provisionDate, expirationDate);
 
           _couponList.Add(coupon);
         }

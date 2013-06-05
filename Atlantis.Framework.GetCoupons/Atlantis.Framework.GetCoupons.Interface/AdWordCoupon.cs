@@ -13,6 +13,8 @@ namespace Atlantis.Framework.GetCoupons.Interface
     private int _couponValue = 0;
     private bool _outOfStock = false;
     private string _couponCode = string.Empty;
+    private string _provisionDate = string.Empty;
+    private string _expirationDate = string.Empty;
     
     public string CouponKey { get { return _couponKey; } }
 
@@ -29,6 +31,10 @@ namespace Atlantis.Framework.GetCoupons.Interface
 
     public string CouponCode { get { return _couponCode; } }
 
+    public string ProvisionDate { get { return _provisionDate; } }
+
+    public string ExpirationDate { get { return _expirationDate; } }
+
     #endregion 
 
     public AdWordCoupon(string couponKey
@@ -36,7 +42,7 @@ namespace Atlantis.Framework.GetCoupons.Interface
       , string vendor
       , int vendorId
       , int couponValue
-      , bool outOfStock )
+      , bool outOfStock)
     {
       _couponKey = couponKey;
       _orderId = orderId;
@@ -45,6 +51,8 @@ namespace Atlantis.Framework.GetCoupons.Interface
       _couponValue = couponValue;
       _outOfStock = outOfStock;
       _couponCode = string.Empty;
+      _provisionDate = string.Empty;
+      _expirationDate = string.Empty;
     }
     
     public AdWordCoupon(string couponKey
@@ -53,7 +61,7 @@ namespace Atlantis.Framework.GetCoupons.Interface
       , int vendorId
       , int couponValue
       , bool outOfStock
-      , string couponCode)
+      , string couponCode, string provisionDate, string expirationDate)
     {
       _couponKey = couponKey;
       _orderId = orderId;
@@ -62,6 +70,8 @@ namespace Atlantis.Framework.GetCoupons.Interface
       _couponValue = couponValue;
       _outOfStock = outOfStock;
       _couponCode = couponCode;
+      _provisionDate = provisionDate;
+      _expirationDate = expirationDate;
     }
   }
 }

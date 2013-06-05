@@ -20,6 +20,7 @@ namespace Atlantis.Framework.GetCoupons.Tests
 
     [TestMethod]
     [DeploymentItem("atlantis.config")]
+    [DeploymentItem("Atlantis.Framework.GetCoupons.Impl.dll")]
     public void GetCoupons()
     {
       MockHttpContext.SetMockHttpContext(string.Empty, "http://localhost", string.Empty);
@@ -29,7 +30,6 @@ namespace Atlantis.Framework.GetCoupons.Tests
         , string.Empty
         , string.Empty
         , 0);
-           
 
       GetCouponsResponseData response = SessionCache.SessionCache.GetProcessRequest<GetCouponsResponseData>(request, 86);
       GetCouponsResponseData response2 = SessionCache.SessionCache.GetProcessRequest<GetCouponsResponseData>(request, 86);
@@ -51,6 +51,9 @@ namespace Atlantis.Framework.GetCoupons.Tests
         Assert.IsFalse(coupon.VendorId.Equals(0));
         Debug.WriteLine(string.Format("VendorId: {0}", coupon.VendorId));
         Debug.WriteLine(string.Format("OutOfStock: {0}", coupon.OutOfStock));
+
+        Debug.WriteLine(string.Format("ProvisionDate: {0}", coupon.ProvisionDate));
+        Debug.WriteLine(string.Format("ExpirationDate: {0}", coupon.ExpirationDate));
         Debug.WriteLine("");
 
         Assert.AreEqual(coupon.CouponCode, coupon2.CouponCode);

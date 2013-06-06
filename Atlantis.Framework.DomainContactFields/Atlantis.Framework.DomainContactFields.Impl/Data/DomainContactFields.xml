@@ -4,12 +4,6 @@
     <input id="firstname" name="firstname" type="text" title="First Name" required="required" />
     <input id="lastname" name="lastname" type="text" title="Last Name" required="required" />
     <input id="organization" name="organization" type="text" title="Organization" />
-    <input id="address1" name="address1" type="text" title="Address 1" required="required" />
-    <input id="address2" name="address2" type="text" title="Address 2"  />
-    <input id="city" name="city" type="text" title="City"  required="required" />
-    <input id="txtstate" name="state" type="text" title="State" required="required" />
-    <select id="ddlstate" name="state" title="State" conditional="true"></select>
-    <input id="zip" name="zip" type="text" title="Zip/Postal Code"  required="required" />
     <select name="country" id="country" title="Country" required="required">
       <option selected="selected" value="US">United States</option>
       <option value="AF">Afghanistan</option>
@@ -253,6 +247,12 @@
       <option value="ZM">Zambia</option>
       <option value="ZW">Zimbabwe</option>
     </select>
+    <input id="address1" name="address1" type="text" title="Address 1" required="required" />
+    <input id="address2" name="address2" type="text" title="Address 2"  />
+    <input id="city" name="city" type="text" title="City"  required="required" />
+    <input id="txtstate" name="state" type="text" title="State/Territory/Province" required="required" />
+    <select id="ddlstate" name="state" title="State/Territory/Province" conditional="true"></select>
+    <input id="zip" name="zip" type="text" title="Zip/Postal Code"  required="required" />
     <input id="phone" name="phone" type="text" title="Phone" required="required" />
     <input id="fax" name="fax" type="text" title="Fax" />
     <input id="email" name="email" type="text" title="Email" required="required" />

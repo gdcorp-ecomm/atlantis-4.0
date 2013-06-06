@@ -165,7 +165,7 @@ namespace Atlantis.Framework.MessagingShopperNote.Interface
           break;
         case NoteTypes.CUSTOMER_NOTE:
           dictionaryItems.Add("PrivateLabelID", PrivateLabelId.ToString());
-          dictionaryItems.Add("AccessRoleID", AccessRoleId);
+          dictionaryItems.Add("AccessRoleID", string.IsNullOrEmpty(AccessRoleId) ? AccessRoleIds.General.ToString() : AccessRoleId);
           dictionaryItems.Add("CustomerNote", cleanNote);
           dictionaryItems.Add("ManagerUserID", ManagerUserId);
           dictionaryItems.Add("NoteTypeLookupID", NoteTypeLookupId);

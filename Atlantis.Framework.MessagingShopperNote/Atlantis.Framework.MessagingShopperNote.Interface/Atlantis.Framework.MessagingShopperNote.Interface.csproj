@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessRoleIds.cs" />
     <Compile Include="MessagingShopperNoteRequestData.cs" />
     <Compile Include="MessagingShopperNoteResponseData.cs" />
     <Compile Include="NoteTypes.cs" />

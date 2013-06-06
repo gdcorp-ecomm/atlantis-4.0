@@ -167,13 +167,13 @@ namespace Atlantis.Framework.MessagingShopperNote.Interface
           dictionaryItems.Add("PrivateLabelID", PrivateLabelId.ToString());
           dictionaryItems.Add("AccessRoleID", string.IsNullOrEmpty(AccessRoleId) ? AccessRoleIds.General.ToString() : AccessRoleId);
           dictionaryItems.Add("CustomerNote", cleanNote);
-          dictionaryItems.Add("ManagerUserID", ManagerUserId);
+          dictionaryItems.Add("ManagerUserID", string.IsNullOrEmpty(ManagerUserId) ? "0" : ManagerUserId);
           dictionaryItems.Add("NoteTypeLookupID", string.IsNullOrEmpty(NoteTypeLookupId) ? NoteTypeLookupIds.CRM.ToString() : NoteTypeLookupId);
-          dictionaryItems.Add("RequestingIP", RequestingIp);
-          dictionaryItems.Add("SessionID", SessionId);
+          dictionaryItems.Add("RequestingIP", string.IsNullOrEmpty(RequestingIp) ? "0.0.0.0" : RequestingIp);
+          dictionaryItems.Add("SessionID", string.IsNullOrEmpty(SessionId) ? "1" : SessionId);
           dictionaryItems.Add("ShopperID", ShopperID);
-          dictionaryItems.Add("ShortDescription", ShortDescription);
-          dictionaryItems.Add("TaskActionTypeID", TaskActionTypeId);
+          dictionaryItems.Add("ShortDescription", string.IsNullOrEmpty(ShortDescription) ? cleanNote : ShortDescription);
+          dictionaryItems.Add("TaskActionTypeID", string.IsNullOrEmpty(TaskActionTypeId) ? "1" : TaskActionTypeId);
           dictionaryItems.Add("TimeStamp", TimeStamp.ToString());
           break;
         case NoteTypes.SHOPPER_NOTE:

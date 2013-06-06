@@ -11,7 +11,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     [TestMethod]
     public void DotTypeGetGeneralEoiJsonGoodRequest()
     {
-      var request = new GeneralEoiJsonRequestData();
+      var request = new GeneralEoiJsonRequestData("en-us");
       var response = (GeneralEoiJsonResponseData)Engine.Engine.ProcessRequest(request, 698);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, response.DotTypeEoiResponse != null);

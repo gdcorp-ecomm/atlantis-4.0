@@ -13,13 +13,15 @@ namespace Atlantis.Framework.DotTypeEoi.Impl
       ShopperWatchListResponseData responseData;
       string responseXml = string.Empty;
 
+      var shopperWatchListRequest = (ShopperWatchListJsonRequestData)requestData;
+
       try
       {
         using (var regEoiWebSvc = new RegEOIWebSvc())
         {
           regEoiWebSvc.Url = ((WsConfigElement)config).WSURL;
           regEoiWebSvc.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
-          responseXml = regEoiWebSvc.GetShopperWatchListJSON(requestData.ShopperID);
+          responseXml = regEoiWebSvc.GetShopperWatchListJSON(requestData.ShopperID, shopperWatchListRequest.LanguageCode);
 
           var shopperWatchListJsonElement = XElement.Parse(responseXml);
           var responseElement = shopperWatchListJsonElement.Element("response");

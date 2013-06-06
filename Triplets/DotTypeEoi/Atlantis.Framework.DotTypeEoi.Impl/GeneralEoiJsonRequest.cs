@@ -13,13 +13,15 @@ namespace Atlantis.Framework.DotTypeEoi.Impl
       GeneralEoiJsonResponseData responseData;
       string responseXml = string.Empty;
 
+      var generalEoiRequest = (GeneralEoiJsonRequestData)requestData;
+
       try
       {
         using (var regEoiWebSvc = new RegEOIWebSvc())
         {
           regEoiWebSvc.Url = ((WsConfigElement)config).WSURL;
           regEoiWebSvc.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
-          responseXml = regEoiWebSvc.GetGeneralEOIJSON();
+          responseXml = regEoiWebSvc.GetGeneralEOIJSON(generalEoiRequest.LanguageCode);
 
           var getGeneralEoiJsonElement = XElement.Parse(responseXml);
           var responseElement = getGeneralEoiJsonElement.Element("response");

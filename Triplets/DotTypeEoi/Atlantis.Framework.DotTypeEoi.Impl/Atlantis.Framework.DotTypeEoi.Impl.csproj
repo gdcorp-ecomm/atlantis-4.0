@@ -68,19 +68,6 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://g1dwregcheck01/regeoiwebsvc/regeoiwebsvc.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\RegEoiWebSvc\</RelPath>
-      <UpdateFromURL>http://g1dwregcheck01/regeoiwebsvc/regeoiwebsvc.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Atlantis_Framework_DotTypeEoi_Impl_RegEoiWebSvc_RegEOIWebSvc</CachedSettingsPropName>
-    </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -91,9 +78,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\RegEoiWebSvc\regeoiwebsvc.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\RegEoiWebSvc\regeoiwebsvc.disco" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
@@ -108,6 +92,22 @@
       <Project>{7d931e9e-8088-4b73-bebc-7bae27a5083b}</Project>
       <Name>Atlantis.Framework.DotTypeEoi.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://g1dwregcheck01/regeoiwebsvc/regeoiwebsvc.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\RegEoiWebSvc\</RelPath>
+      <UpdateFromURL>http://g1dwregcheck01/regeoiwebsvc/regeoiwebsvc.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Atlantis_Framework_DotTypeEoi_Impl_RegEoiWebSvc_RegEOIWebSvc</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\RegEoiWebSvc\regeoiwebsvc.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

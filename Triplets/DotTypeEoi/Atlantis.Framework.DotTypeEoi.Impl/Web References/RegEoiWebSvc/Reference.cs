@@ -49,6 +49,10 @@ namespace Atlantis.Framework.DotTypeEoi.Impl.RegEoiWebSvc {
         
         private System.Threading.SendOrPostCallback RemoveFromShopperWishListXmlOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetTldPhaseDataXmlOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetTldPhaseDataJSONOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -118,23 +122,31 @@ namespace Atlantis.Framework.DotTypeEoi.Impl.RegEoiWebSvc {
         public event RemoveFromShopperWishListXmlCompletedEventHandler RemoveFromShopperWishListXmlCompleted;
         
         /// <remarks/>
+        public event GetTldPhaseDataXmlCompletedEventHandler GetTldPhaseDataXmlCompleted;
+        
+        /// <remarks/>
+        public event GetTldPhaseDataJSONCompletedEventHandler GetTldPhaseDataJSONCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:RegEOIWebSvc/GetGeneralEOIXml", RequestNamespace="urn:RegEOIWebSvc", ResponseNamespace="urn:RegEOIWebSvc", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetGeneralEOIXml() {
-            object[] results = this.Invoke("GetGeneralEOIXml", new object[0]);
+        public string GetGeneralEOIXml(string languageCode) {
+            object[] results = this.Invoke("GetGeneralEOIXml", new object[] {
+                        languageCode});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GetGeneralEOIXmlAsync() {
-            this.GetGeneralEOIXmlAsync(null);
+        public void GetGeneralEOIXmlAsync(string languageCode) {
+            this.GetGeneralEOIXmlAsync(languageCode, null);
         }
         
         /// <remarks/>
-        public void GetGeneralEOIXmlAsync(object userState) {
+        public void GetGeneralEOIXmlAsync(string languageCode, object userState) {
             if ((this.GetGeneralEOIXmlOperationCompleted == null)) {
                 this.GetGeneralEOIXmlOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetGeneralEOIXmlOperationCompleted);
             }
-            this.InvokeAsync("GetGeneralEOIXml", new object[0], this.GetGeneralEOIXmlOperationCompleted, userState);
+            this.InvokeAsync("GetGeneralEOIXml", new object[] {
+                        languageCode}, this.GetGeneralEOIXmlOperationCompleted, userState);
         }
         
         private void OnGetGeneralEOIXmlOperationCompleted(object arg) {
@@ -146,22 +158,24 @@ namespace Atlantis.Framework.DotTypeEoi.Impl.RegEoiWebSvc {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:RegEOIWebSvc/GetGeneralEOIJSON", RequestNamespace="urn:RegEOIWebSvc", ResponseNamespace="urn:RegEOIWebSvc", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetGeneralEOIJSON() {
-            object[] results = this.Invoke("GetGeneralEOIJSON", new object[0]);
+        public string GetGeneralEOIJSON(string languageCode) {
+            object[] results = this.Invoke("GetGeneralEOIJSON", new object[] {
+                        languageCode});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GetGeneralEOIJSONAsync() {
-            this.GetGeneralEOIJSONAsync(null);
+        public void GetGeneralEOIJSONAsync(string languageCode) {
+            this.GetGeneralEOIJSONAsync(languageCode, null);
         }
         
         /// <remarks/>
-        public void GetGeneralEOIJSONAsync(object userState) {
+        public void GetGeneralEOIJSONAsync(string languageCode, object userState) {
             if ((this.GetGeneralEOIJSONOperationCompleted == null)) {
                 this.GetGeneralEOIJSONOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetGeneralEOIJSONOperationCompleted);
             }
-            this.InvokeAsync("GetGeneralEOIJSON", new object[0], this.GetGeneralEOIJSONOperationCompleted, userState);
+            this.InvokeAsync("GetGeneralEOIJSON", new object[] {
+                        languageCode}, this.GetGeneralEOIJSONOperationCompleted, userState);
         }
         
         private void OnGetGeneralEOIJSONOperationCompleted(object arg) {
@@ -173,24 +187,26 @@ namespace Atlantis.Framework.DotTypeEoi.Impl.RegEoiWebSvc {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:RegEOIWebSvc/GetShopperWatchListXml", RequestNamespace="urn:RegEOIWebSvc", ResponseNamespace="urn:RegEOIWebSvc", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetShopperWatchListXml(string shopperId) {
+        public string GetShopperWatchListXml(string shopperId, string languageCode) {
             object[] results = this.Invoke("GetShopperWatchListXml", new object[] {
-                        shopperId});
+                        shopperId,
+                        languageCode});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GetShopperWatchListXmlAsync(string shopperId) {
-            this.GetShopperWatchListXmlAsync(shopperId, null);
+        public void GetShopperWatchListXmlAsync(string shopperId, string languageCode) {
+            this.GetShopperWatchListXmlAsync(shopperId, languageCode, null);
         }
         
         /// <remarks/>
-        public void GetShopperWatchListXmlAsync(string shopperId, object userState) {
+        public void GetShopperWatchListXmlAsync(string shopperId, string languageCode, object userState) {
             if ((this.GetShopperWatchListXmlOperationCompleted == null)) {
                 this.GetShopperWatchListXmlOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetShopperWatchListXmlOperationCompleted);
             }
             this.InvokeAsync("GetShopperWatchListXml", new object[] {
-                        shopperId}, this.GetShopperWatchListXmlOperationCompleted, userState);
+                        shopperId,
+                        languageCode}, this.GetShopperWatchListXmlOperationCompleted, userState);
         }
         
         private void OnGetShopperWatchListXmlOperationCompleted(object arg) {
@@ -202,24 +218,26 @@ namespace Atlantis.Framework.DotTypeEoi.Impl.RegEoiWebSvc {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:RegEOIWebSvc/GetShopperWatchListJSON", RequestNamespace="urn:RegEOIWebSvc", ResponseNamespace="urn:RegEOIWebSvc", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetShopperWatchListJSON(string shopperId) {
+        public string GetShopperWatchListJSON(string shopperId, string languageCode) {
             object[] results = this.Invoke("GetShopperWatchListJSON", new object[] {
-                        shopperId});
+                        shopperId,
+                        languageCode});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GetShopperWatchListJSONAsync(string shopperId) {
-            this.GetShopperWatchListJSONAsync(shopperId, null);
+        public void GetShopperWatchListJSONAsync(string shopperId, string languageCode) {
+            this.GetShopperWatchListJSONAsync(shopperId, languageCode, null);
         }
         
         /// <remarks/>
-        public void GetShopperWatchListJSONAsync(string shopperId, object userState) {
+        public void GetShopperWatchListJSONAsync(string shopperId, string languageCode, object userState) {
             if ((this.GetShopperWatchListJSONOperationCompleted == null)) {
                 this.GetShopperWatchListJSONOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetShopperWatchListJSONOperationCompleted);
             }
             this.InvokeAsync("GetShopperWatchListJSON", new object[] {
-                        shopperId}, this.GetShopperWatchListJSONOperationCompleted, userState);
+                        shopperId,
+                        languageCode}, this.GetShopperWatchListJSONOperationCompleted, userState);
         }
         
         private void OnGetShopperWatchListJSONOperationCompleted(object arg) {
@@ -231,28 +249,30 @@ namespace Atlantis.Framework.DotTypeEoi.Impl.RegEoiWebSvc {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:RegEOIWebSvc/AddToShopperWatchListXml", RequestNamespace="urn:RegEOIWebSvc", ResponseNamespace="urn:RegEOIWebSvc", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string AddToShopperWatchListXml(string shopperId, string displayTime, string gTldsXml) {
+        public string AddToShopperWatchListXml(string shopperId, string displayTime, string gTldsXml, string languageCode) {
             object[] results = this.Invoke("AddToShopperWatchListXml", new object[] {
                         shopperId,
                         displayTime,
-                        gTldsXml});
+                        gTldsXml,
+                        languageCode});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void AddToShopperWatchListXmlAsync(string shopperId, string displayTime, string gTldsXml) {
-            this.AddToShopperWatchListXmlAsync(shopperId, displayTime, gTldsXml, null);
+        public void AddToShopperWatchListXmlAsync(string shopperId, string displayTime, string gTldsXml, string languageCode) {
+            this.AddToShopperWatchListXmlAsync(shopperId, displayTime, gTldsXml, languageCode, null);
         }
         
         /// <remarks/>
-        public void AddToShopperWatchListXmlAsync(string shopperId, string displayTime, string gTldsXml, object userState) {
+        public void AddToShopperWatchListXmlAsync(string shopperId, string displayTime, string gTldsXml, string languageCode, object userState) {
             if ((this.AddToShopperWatchListXmlOperationCompleted == null)) {
                 this.AddToShopperWatchListXmlOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddToShopperWatchListXmlOperationCompleted);
             }
             this.InvokeAsync("AddToShopperWatchListXml", new object[] {
                         shopperId,
                         displayTime,
-                        gTldsXml}, this.AddToShopperWatchListXmlOperationCompleted, userState);
+                        gTldsXml,
+                        languageCode}, this.AddToShopperWatchListXmlOperationCompleted, userState);
         }
         
         private void OnAddToShopperWatchListXmlOperationCompleted(object arg) {
@@ -295,24 +315,26 @@ namespace Atlantis.Framework.DotTypeEoi.Impl.RegEoiWebSvc {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:RegEOIWebSvc/GetShopperWishListXml", RequestNamespace="urn:RegEOIWebSvc", ResponseNamespace="urn:RegEOIWebSvc", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetShopperWishListXml(string shopperId) {
+        public string GetShopperWishListXml(string shopperId, string languageCode) {
             object[] results = this.Invoke("GetShopperWishListXml", new object[] {
-                        shopperId});
+                        shopperId,
+                        languageCode});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GetShopperWishListXmlAsync(string shopperId) {
-            this.GetShopperWishListXmlAsync(shopperId, null);
+        public void GetShopperWishListXmlAsync(string shopperId, string languageCode) {
+            this.GetShopperWishListXmlAsync(shopperId, languageCode, null);
         }
         
         /// <remarks/>
-        public void GetShopperWishListXmlAsync(string shopperId, object userState) {
+        public void GetShopperWishListXmlAsync(string shopperId, string languageCode, object userState) {
             if ((this.GetShopperWishListXmlOperationCompleted == null)) {
                 this.GetShopperWishListXmlOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetShopperWishListXmlOperationCompleted);
             }
             this.InvokeAsync("GetShopperWishListXml", new object[] {
-                        shopperId}, this.GetShopperWishListXmlOperationCompleted, userState);
+                        shopperId,
+                        languageCode}, this.GetShopperWishListXmlOperationCompleted, userState);
         }
         
         private void OnGetShopperWishListXmlOperationCompleted(object arg) {
@@ -324,24 +346,26 @@ namespace Atlantis.Framework.DotTypeEoi.Impl.RegEoiWebSvc {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:RegEOIWebSvc/GetShopperWishListJSON", RequestNamespace="urn:RegEOIWebSvc", ResponseNamespace="urn:RegEOIWebSvc", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetShopperWishListJSON(string shopperId) {
+        public string GetShopperWishListJSON(string shopperId, string languageCode) {
             object[] results = this.Invoke("GetShopperWishListJSON", new object[] {
-                        shopperId});
+                        shopperId,
+                        languageCode});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GetShopperWishListJSONAsync(string shopperId) {
-            this.GetShopperWishListJSONAsync(shopperId, null);
+        public void GetShopperWishListJSONAsync(string shopperId, string languageCode) {
+            this.GetShopperWishListJSONAsync(shopperId, languageCode, null);
         }
         
         /// <remarks/>
-        public void GetShopperWishListJSONAsync(string shopperId, object userState) {
+        public void GetShopperWishListJSONAsync(string shopperId, string languageCode, object userState) {
             if ((this.GetShopperWishListJSONOperationCompleted == null)) {
                 this.GetShopperWishListJSONOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetShopperWishListJSONOperationCompleted);
             }
             this.InvokeAsync("GetShopperWishListJSON", new object[] {
-                        shopperId}, this.GetShopperWishListJSONOperationCompleted, userState);
+                        shopperId,
+                        languageCode}, this.GetShopperWishListJSONOperationCompleted, userState);
         }
         
         private void OnGetShopperWishListJSONOperationCompleted(object arg) {
@@ -353,26 +377,28 @@ namespace Atlantis.Framework.DotTypeEoi.Impl.RegEoiWebSvc {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:RegEOIWebSvc/AddToShopperWishList", RequestNamespace="urn:RegEOIWebSvc", ResponseNamespace="urn:RegEOIWebSvc", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string AddToShopperWishList(string shopperId, string gTldsXml) {
+        public string AddToShopperWishList(string shopperId, string gTldsXml, string languageCode) {
             object[] results = this.Invoke("AddToShopperWishList", new object[] {
                         shopperId,
-                        gTldsXml});
+                        gTldsXml,
+                        languageCode});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void AddToShopperWishListAsync(string shopperId, string gTldsXml) {
-            this.AddToShopperWishListAsync(shopperId, gTldsXml, null);
+        public void AddToShopperWishListAsync(string shopperId, string gTldsXml, string languageCode) {
+            this.AddToShopperWishListAsync(shopperId, gTldsXml, languageCode, null);
         }
         
         /// <remarks/>
-        public void AddToShopperWishListAsync(string shopperId, string gTldsXml, object userState) {
+        public void AddToShopperWishListAsync(string shopperId, string gTldsXml, string languageCode, object userState) {
             if ((this.AddToShopperWishListOperationCompleted == null)) {
                 this.AddToShopperWishListOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddToShopperWishListOperationCompleted);
             }
             this.InvokeAsync("AddToShopperWishList", new object[] {
                         shopperId,
-                        gTldsXml}, this.AddToShopperWishListOperationCompleted, userState);
+                        gTldsXml,
+                        languageCode}, this.AddToShopperWishListOperationCompleted, userState);
         }
         
         private void OnAddToShopperWishListOperationCompleted(object arg) {
@@ -410,6 +436,64 @@ namespace Atlantis.Framework.DotTypeEoi.Impl.RegEoiWebSvc {
             if ((this.RemoveFromShopperWishListXmlCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.RemoveFromShopperWishListXmlCompleted(this, new RemoveFromShopperWishListXmlCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:RegEOIWebSvc/GetTldPhaseDataXml", RequestNamespace="urn:RegEOIWebSvc", ResponseNamespace="urn:RegEOIWebSvc", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetTldPhaseDataXml(string languageCode) {
+            object[] results = this.Invoke("GetTldPhaseDataXml", new object[] {
+                        languageCode});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetTldPhaseDataXmlAsync(string languageCode) {
+            this.GetTldPhaseDataXmlAsync(languageCode, null);
+        }
+        
+        /// <remarks/>
+        public void GetTldPhaseDataXmlAsync(string languageCode, object userState) {
+            if ((this.GetTldPhaseDataXmlOperationCompleted == null)) {
+                this.GetTldPhaseDataXmlOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTldPhaseDataXmlOperationCompleted);
+            }
+            this.InvokeAsync("GetTldPhaseDataXml", new object[] {
+                        languageCode}, this.GetTldPhaseDataXmlOperationCompleted, userState);
+        }
+        
+        private void OnGetTldPhaseDataXmlOperationCompleted(object arg) {
+            if ((this.GetTldPhaseDataXmlCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetTldPhaseDataXmlCompleted(this, new GetTldPhaseDataXmlCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:RegEOIWebSvc/GetTldPhaseDataJSON", RequestNamespace="urn:RegEOIWebSvc", ResponseNamespace="urn:RegEOIWebSvc", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetTldPhaseDataJSON(string languageCode) {
+            object[] results = this.Invoke("GetTldPhaseDataJSON", new object[] {
+                        languageCode});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetTldPhaseDataJSONAsync(string languageCode) {
+            this.GetTldPhaseDataJSONAsync(languageCode, null);
+        }
+        
+        /// <remarks/>
+        public void GetTldPhaseDataJSONAsync(string languageCode, object userState) {
+            if ((this.GetTldPhaseDataJSONOperationCompleted == null)) {
+                this.GetTldPhaseDataJSONOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTldPhaseDataJSONOperationCompleted);
+            }
+            this.InvokeAsync("GetTldPhaseDataJSON", new object[] {
+                        languageCode}, this.GetTldPhaseDataJSONOperationCompleted, userState);
+        }
+        
+        private void OnGetTldPhaseDataJSONOperationCompleted(object arg) {
+            if ((this.GetTldPhaseDataJSONCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetTldPhaseDataJSONCompleted(this, new GetTldPhaseDataJSONCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -679,6 +763,58 @@ namespace Atlantis.Framework.DotTypeEoi.Impl.RegEoiWebSvc {
         private object[] results;
         
         internal RemoveFromShopperWishListXmlCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void GetTldPhaseDataXmlCompletedEventHandler(object sender, GetTldPhaseDataXmlCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetTldPhaseDataXmlCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetTldPhaseDataXmlCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void GetTldPhaseDataJSONCompletedEventHandler(object sender, GetTldPhaseDataJSONCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetTldPhaseDataJSONCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetTldPhaseDataJSONCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

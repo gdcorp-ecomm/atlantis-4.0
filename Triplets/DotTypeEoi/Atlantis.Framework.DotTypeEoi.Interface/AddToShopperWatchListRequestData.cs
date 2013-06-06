@@ -10,12 +10,14 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
   {
     public string DisplayTime { get; set; }
     public IList<IDotTypeEoiGtld> Gtlds { get; set; }
+    public string LanguageCode { get; set; }
 
-    public AddToShopperWatchListRequestData(string shopperId, string displayTime, IList<IDotTypeEoiGtld> gTlds)
+    public AddToShopperWatchListRequestData(string shopperId, string displayTime, IList<IDotTypeEoiGtld> gTlds, string languageCode)
     {
       ShopperID = shopperId;
       DisplayTime = displayTime;
       Gtlds = gTlds;
+      LanguageCode = languageCode;
 
       RequestTimeout = TimeSpan.FromSeconds(10);
     }

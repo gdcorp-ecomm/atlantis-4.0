@@ -1,4 +1,6 @@
-﻿using Atlantis.Framework.DotTypeEoi.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.DotTypeEoi.Interface;
+using Atlantis.Framework.Providers.DotTypeEoi.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.DotTypeEoi.Tests
@@ -9,24 +11,20 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
   public class ShopperWatchListJsonTests
   {
     [TestMethod]
-    public void ShopperWatchListJsonEmptyList()
-    {
-      var request = new ShopperWatchListJsonRequestData("878145");
-      var response = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, 703);
-      Assert.AreEqual(true, response.IsSuccess);
-      Assert.AreEqual(true, response.ShopperWatchListResponse != null);
-      Assert.AreEqual(true, response.ShopperWatchListResponse.Gtlds.Count == 0);
-    }
-
-    [TestMethod]
     public void ShopperWatchListJsonSuccess()
     {
-      var request = new ShopperWatchListJsonRequestData("1");
-      var response = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, 703);
-      Assert.AreEqual(true, response.IsSuccess);
-      Assert.AreEqual(true, response.ShopperWatchListResponse != null);
-      Assert.AreEqual(true, response.ShopperWatchListResponse.Gtlds.Count > 0);
-      Assert.AreEqual(true, response.ShopperWatchListResponse.Gtlds[0].Id > -1);
+      var gTlds = new List<IDotTypeEoiGtld>(1);
+      var gTld = new DotTypeEoiGtld { Id = 42, GtldSubCategoryId = 2952 };
+      const string displayTime = "2013-05-23 10:29:55";
+      gTlds.Add(gTld);
+      var request1 = new AddToShopperWatchListRequestData("861126", displayTime, gTlds, "en-us");
+      Engine.Engine.ProcessRequest(request1, 704);
+      var request2 = new ShopperWatchListJsonRequestData("861126", "en-us");
+      var response2 = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request2, 703);
+      Assert.AreEqual(true, response2.IsSuccess);
+      Assert.AreEqual(true, response2.ShopperWatchListResponse != null);
+      Assert.AreEqual(true, response2.ShopperWatchListResponse.GtldIdDictionary.Count > 0);
+      Assert.AreEqual(true, response2.ShopperWatchListResponse.GtldIdDictionary[42].Id > -1);
     }
   }
 }

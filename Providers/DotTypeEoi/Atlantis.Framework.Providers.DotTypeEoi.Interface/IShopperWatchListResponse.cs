@@ -4,6 +4,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Interface
 {
   public interface IShopperWatchListResponse
   {
-    IList<IDotTypeEoiGtld> Gtlds { get; set; }
+    IEnumerable<IDotTypeEoiGtld> Gtlds { get; }
+    IDictionary<int, IDotTypeEoiGtld> GtldIdDictionary { get; }
   }
 }

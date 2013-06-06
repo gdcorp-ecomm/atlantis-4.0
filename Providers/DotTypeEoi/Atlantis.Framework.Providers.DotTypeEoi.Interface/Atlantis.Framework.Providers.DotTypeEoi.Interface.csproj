@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionButtonTypes.cs" />
+    <Compile Include="IGeneralEoiData.cs" />
     <Compile Include="ICategoryData.cs" />
     <Compile Include="IShopperWatchListResponse.cs" />
     <Compile Include="IDotTypeEoiCategory.cs" />

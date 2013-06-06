@@ -38,7 +38,6 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
 
         return gtlds;
       }
-      set { }
     }
   }
 }

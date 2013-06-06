@@ -11,23 +11,35 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     public DotTypeEoiGtlds GtldsObject { get; set; }
 
     [IgnoreDataMember()]
-    public IList<IDotTypeEoiGtld> Gtlds
+    public IEnumerable<IDotTypeEoiGtld> Gtlds
+    {
+      get { return GtldIdDictionary.Values; }
+    }
+
+    private IDictionary<int, IDotTypeEoiGtld> _gtldIdDictionary;
+    [IgnoreDataMember()]
+    public IDictionary<int, IDotTypeEoiGtld> GtldIdDictionary
     {
       get
       {
-        IList<IDotTypeEoiGtld> gtlds;
-        if (GtldsObject != null)
+        if (_gtldIdDictionary == null)
         {
-          gtlds = (IList<IDotTypeEoiGtld>) GtldsObject.GtldList;
-        }
-        else
-        {
-          gtlds = new List<IDotTypeEoiGtld>();
+          if (GtldsObject != null && GtldsObject.GtldList != null)
+          {
+            _gtldIdDictionary = new Dictionary<int, IDotTypeEoiGtld>(GtldsObject.GtldList.Count);
+            foreach (var gtld in GtldsObject.GtldList)
+            {
+              _gtldIdDictionary[gtld.Id] = gtld;
+            }
+          }
+          else
+          {
+            _gtldIdDictionary = new Dictionary<int, IDotTypeEoiGtld>(0);
+          }
         }
 
-        return gtlds;
+        return _gtldIdDictionary;
       }
-      set { }
     }
   }
 }

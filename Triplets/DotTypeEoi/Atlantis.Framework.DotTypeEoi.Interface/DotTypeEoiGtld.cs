@@ -32,5 +32,8 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
 
     [DataMember(Name = "@comments")]
     public string Comments { get; set; }
+
+    [IgnoreDataMember()]
+    public ActionButtonTypes ActionButtonType { get; set; }
   }
 }

@@ -10,5 +10,6 @@
     string ALabel { get; set; }
     int GtldSubCategoryId { get; set; }
     int DisplayOrder { get; set; }
+    ActionButtonTypes ActionButtonType { get; set; }
   }
 }

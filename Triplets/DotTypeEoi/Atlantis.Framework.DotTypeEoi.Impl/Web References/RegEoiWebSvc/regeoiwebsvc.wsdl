@@ -3,7 +3,11 @@
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="urn:RegEOIWebSvc">
       <s:element name="GetGeneralEOIXml">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="GetGeneralEOIXmlResponse">
         <s:complexType>
@@ -13,7 +17,11 @@
         </s:complexType>
       </s:element>
       <s:element name="GetGeneralEOIJSON">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="GetGeneralEOIJSONResponse">
         <s:complexType>
@@ -26,6 +34,7 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -40,6 +49,7 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -56,6 +66,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="displayTime" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="gTldsXml" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -85,6 +96,7 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -99,6 +111,7 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -114,6 +127,7 @@
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="gTldsXml" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -136,6 +150,34 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="RemoveFromShopperWishListXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldPhaseDataXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldPhaseDataXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTldPhaseDataXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldPhaseDataJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTldPhaseDataJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTldPhaseDataJSONResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -201,6 +243,18 @@
   <wsdl:message name="RemoveFromShopperWishListXmlSoapOut">
     <wsdl:part name="parameters" element="tns:RemoveFromShopperWishListXmlResponse" />
   </wsdl:message>
+  <wsdl:message name="GetTldPhaseDataXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTldPhaseDataXml" />
+  </wsdl:message>
+  <wsdl:message name="GetTldPhaseDataXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTldPhaseDataXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTldPhaseDataJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTldPhaseDataJSON" />
+  </wsdl:message>
+  <wsdl:message name="GetTldPhaseDataJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTldPhaseDataJSONResponse" />
+  </wsdl:message>
   <wsdl:portType name="RegEOIWebSvcSoap">
     <wsdl:operation name="GetGeneralEOIXml">
       <wsdl:input message="tns:GetGeneralEOIXmlSoapIn" />
@@ -241,6 +295,14 @@
     <wsdl:operation name="RemoveFromShopperWishListXml">
       <wsdl:input message="tns:RemoveFromShopperWishListXmlSoapIn" />
       <wsdl:output message="tns:RemoveFromShopperWishListXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTldPhaseDataXml">
+      <wsdl:input message="tns:GetTldPhaseDataXmlSoapIn" />
+      <wsdl:output message="tns:GetTldPhaseDataXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTldPhaseDataJSON">
+      <wsdl:input message="tns:GetTldPhaseDataJSONSoapIn" />
+      <wsdl:output message="tns:GetTldPhaseDataJSONSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="RegEOIWebSvcSoap" type="tns:RegEOIWebSvcSoap">
@@ -335,6 +397,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetTldPhaseDataXml">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetTldPhaseDataXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldPhaseDataJSON">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetTldPhaseDataJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="RegEOIWebSvcSoap12" type="tns:RegEOIWebSvcSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -421,6 +501,24 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveFromShopperWishListXml">
       <soap12:operation soapAction="urn:RegEOIWebSvc/RemoveFromShopperWishListXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldPhaseDataXml">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetTldPhaseDataXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTldPhaseDataJSON">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetTldPhaseDataJSON" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

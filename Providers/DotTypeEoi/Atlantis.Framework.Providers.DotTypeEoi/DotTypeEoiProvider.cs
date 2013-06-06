@@ -17,26 +17,24 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
     private readonly IList<ICategoryData> _categoryList = new List<ICategoryData>();
 
-    public bool GetGeneralEoi(int page, int entriesPerPage, int categoryId, out string displayTime, out IList<IDotTypeEoiGtld> gTlds, out int totalPages)
+    public bool GetGeneralEoi(int page, int entriesPerPage, int categoryId, string languageCode, out IGeneralEoiData generalEoiData)
     {
       var success = false;
-      displayTime = null;
-      gTlds = null;
-      totalPages = 0;
+      generalEoiData = null;
 
       try
       {
-        var request = new GeneralEoiJsonRequestData();
+        var request = new GeneralEoiJsonRequestData(languageCode);
         var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
         if (response.IsSuccess && response.DotTypeEoiResponse != null)
         {
           var dotTypeEoiResponse = response.DotTypeEoiResponse;
-          displayTime = dotTypeEoiResponse.DisplayTime;
+          var displayTime = dotTypeEoiResponse.DisplayTime;
           foreach (var category in dotTypeEoiResponse.Categories)
           {
             if (categoryId == category.CategoryId)
             {
-              gTlds = new List<IDotTypeEoiGtld>();
+              var gTlds = new List<IDotTypeEoiGtld>();
               var gTldList = category.Gtlds;
               int startPos = page * entriesPerPage;
               int endPos = startPos + entriesPerPage;
@@ -48,7 +46,28 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
               {
                 gTlds.Add(gTldList[i]);
               }
-              totalPages = (int)Math.Ceiling(gTldList.Count/(double)entriesPerPage);
+
+              if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated)
+              {
+                IShopperWatchListResponse shopperWatchListResponse;
+                if (GetShopperWatchList(languageCode, out shopperWatchListResponse))
+                {
+                  foreach (var gTld in gTlds)
+                  {
+                    if (shopperWatchListResponse.GtldIdDictionary.ContainsKey(gTld.Id))
+                    {
+                      gTld.ActionButtonType = ActionButtonTypes.DontWatch;
+                    }
+                    else
+                    {
+                      gTld.ActionButtonType = ActionButtonTypes.Watch;
+                    }
+                  }
+                }
+              }
+
+              var totalPages = (int)Math.Ceiling(gTldList.Count/(double)entriesPerPage);
+              generalEoiData = new GeneralEoiData(displayTime, gTlds, totalPages);
               success = true;
             }
           }
@@ -64,14 +83,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool GetGeneralEoiCategoryList(out IList<ICategoryData> categoryList)
+    public bool GetGeneralEoiCategoryList(string languageCode, out IList<ICategoryData> categoryList)
     {
       var success = false;
       categoryList = null;
 
       try
       {
-        var request = new GeneralEoiJsonRequestData();
+        var request = new GeneralEoiJsonRequestData(languageCode);
         var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
         if (response.IsSuccess && response.DotTypeEoiResponse != null)
         {
@@ -92,14 +111,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool GetShopperWatchList(out IShopperWatchListResponse shopperWatchListResponse)
+    public bool GetShopperWatchList(string languageCode, out IShopperWatchListResponse shopperWatchListResponse)
     {
       var success = false;
       shopperWatchListResponse = null;
 
       try
       {
-        var request = new ShopperWatchListJsonRequestData(_shopperContext.Value.ShopperId);
+        var request = new ShopperWatchListJsonRequestData(_shopperContext.Value.ShopperId, languageCode);
         var response = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.ShopperWatchListJsonRequest);
         if (response.IsSuccess)
         {
@@ -116,14 +135,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool AddToShopperWatchList(string displayTime, IList<IDotTypeEoiGtld> gTlds, out string responseMessage)
+    public bool AddToShopperWatchList(string displayTime, IList<IDotTypeEoiGtld> gTlds, string languageCode, out string responseMessage)
     {
       var success = false;
       responseMessage = string.Empty;
 
       try
       {
-          var request = new AddToShopperWatchListRequestData(_shopperContext.Value.ShopperId, displayTime, gTlds);
+          var request = new AddToShopperWatchListRequestData(_shopperContext.Value.ShopperId, displayTime, gTlds, languageCode);
         var response = (AddToShopperWatchListResponseData) Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
         if (response.IsSuccess)
         {

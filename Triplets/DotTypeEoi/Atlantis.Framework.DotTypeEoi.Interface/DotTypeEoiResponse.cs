@@ -30,7 +30,6 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
 
         return categories;
       }
-      set { }
     }
   }
 }

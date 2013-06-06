@@ -155,7 +155,7 @@ namespace Atlantis.Framework.MessagingShopperNote.Interface
           dictionaryItems.Add("AccessReasonID", AccessReasonId);
           dictionaryItems.Add("ManagerUserID", ManagerUserId);
           dictionaryItems.Add("MessageID", MessageId);
-          dictionaryItems.Add("NoteTypeLookupID", NoteTypeLookupId);
+          dictionaryItems.Add("NoteTypeLookupID", string.IsNullOrEmpty(NoteTypeLookupId) ? NoteTypeLookupIds.CRM.ToString() : NoteTypeLookupId);
           dictionaryItems.Add("PrivateLabelID", PrivateLabelId.ToString());
           dictionaryItems.Add("SessionID", SessionId);
           dictionaryItems.Add("ShopperID", ShopperID);
@@ -168,7 +168,7 @@ namespace Atlantis.Framework.MessagingShopperNote.Interface
           dictionaryItems.Add("AccessRoleID", string.IsNullOrEmpty(AccessRoleId) ? AccessRoleIds.General.ToString() : AccessRoleId);
           dictionaryItems.Add("CustomerNote", cleanNote);
           dictionaryItems.Add("ManagerUserID", ManagerUserId);
-          dictionaryItems.Add("NoteTypeLookupID", NoteTypeLookupId);
+          dictionaryItems.Add("NoteTypeLookupID", string.IsNullOrEmpty(NoteTypeLookupId) ? NoteTypeLookupIds.CRM.ToString() : NoteTypeLookupId);
           dictionaryItems.Add("RequestingIP", RequestingIp);
           dictionaryItems.Add("SessionID", SessionId);
           dictionaryItems.Add("ShopperID", ShopperID);

@@ -71,6 +71,7 @@
     <Compile Include="AccessRoleIds.cs" />
     <Compile Include="MessagingShopperNoteRequestData.cs" />
     <Compile Include="MessagingShopperNoteResponseData.cs" />
+    <Compile Include="NoteTypeLookupIds.cs" />
     <Compile Include="NoteTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

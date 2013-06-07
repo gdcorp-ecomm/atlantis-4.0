@@ -12,7 +12,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
     public DotTypeEoiProvider(IProviderContainer container) : base(container)
     {
-      _shopperContext = new Lazy<IShopperContext>(() => { return Container.Resolve<IShopperContext>(); });
+      _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
     }
 
     private readonly IList<ICategoryData> _categoryList = new List<ICategoryData>();
@@ -36,12 +36,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
             {
               var gTlds = new List<IDotTypeEoiGtld>();
               var gTldList = category.Gtlds;
-              int startPos = page * entriesPerPage;
+
+              int startPos = (page - 1) * entriesPerPage;
               int endPos = startPos + entriesPerPage;
               if (endPos > gTldList.Count)
               {
                 endPos = gTldList.Count;
               }
+
               for (int i = startPos; i < endPos; i++)
               {
                 gTlds.Add(gTldList[i]);

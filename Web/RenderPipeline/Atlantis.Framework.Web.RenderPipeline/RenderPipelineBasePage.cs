@@ -8,7 +8,7 @@ using System.Web.UI;
 
 namespace Atlantis.Framework.Web.RenderPipeline
 {
-  public class RenderPipelineBasePage : Page
+  public abstract class RenderPipelineBasePage : Page
   {
     private readonly RenderPipelineManager _renderPipelineManager = new RenderPipelineManager();
 

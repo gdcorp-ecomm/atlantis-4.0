@@ -28,7 +28,7 @@ namespace Atlantis.Framework.AdWordReferenceLink.Impl
           {
             command.CommandType = CommandType.StoredProcedure;
             command.CommandTimeout = (int)request.RequestTimeout.TotalSeconds;
-            command.Parameters.AddWithValue("@s_couponCode", request.CouponKey);
+            command.Parameters.AddWithValue("@s_couponCode", request.CouponCode);
 
             connection.Open();
             using (SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection))

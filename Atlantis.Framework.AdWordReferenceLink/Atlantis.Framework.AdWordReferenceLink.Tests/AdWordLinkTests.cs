@@ -13,7 +13,7 @@ namespace Atlantis.Framework.AdWordReferenceLink.Tests
     [DeploymentItem("Atlantis.Framework.AdWordReferenceLink.Impl.dll")]
     public void GetAdWordsLink()
     {
-      AdWordReferenceLinkRequestData requestData = new AdWordReferenceLinkRequestData("856907", string.Empty, string.Empty, string.Empty, 0, "5317");
+      AdWordReferenceLinkRequestData requestData = new AdWordReferenceLinkRequestData("856907", string.Empty, string.Empty, string.Empty, 0, "42832-63646-D152");
 
       AdWordReferenceLinkResponseData response = (AdWordReferenceLinkResponseData)Engine.Engine.ProcessRequest(requestData, 708);
 

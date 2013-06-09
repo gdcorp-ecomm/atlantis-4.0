@@ -6,15 +6,15 @@ namespace Atlantis.Framework.AdWordReferenceLink.Interface
   public class AdWordReferenceLinkRequestData : RequestData
   {
 
-    public string CouponKey { get; set; }
+    public string CouponCode { get; set; }
 
     public AdWordReferenceLinkRequestData(string shopperId, 
                                             string sourceUrL, 
                                             string orderId, 
                                             string pathway, 
-                                            int pageCount, string couponKey) : base(shopperId, sourceUrL, orderId, pathway, pageCount)
+                                            int pageCount, string couponCode) : base(shopperId, sourceUrL, orderId, pathway, pageCount)
     {
-      CouponKey = couponKey;
+      CouponCode = couponCode;
     }
 
     #region Overrides of RequestData

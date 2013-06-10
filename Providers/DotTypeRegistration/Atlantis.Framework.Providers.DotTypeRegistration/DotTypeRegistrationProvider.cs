@@ -14,14 +14,14 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
     {
     }
 
-    public bool GetDotTypeFormsSchema(int tldId, string placement, out IDotTypeFormsSchema dotTypeFormsSchema)
+    public bool GetDotTypeFormsSchema(int tldId, string placement, string phase, string language, out IDotTypeFormsSchema dotTypeFormsSchema)
     {
       var success = false;
       dotTypeFormsSchema = null;
 
       try
       {
-        var request = new DotTypeFormsXmlSchemaRequestData(tldId, placement);
+        var request = new DotTypeFormsXmlSchemaRequestData(tldId, placement, phase, language);
         var response = (DotTypeFormsXmlSchemaResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsXmlRequest);
         if (response.IsSuccess)
         {

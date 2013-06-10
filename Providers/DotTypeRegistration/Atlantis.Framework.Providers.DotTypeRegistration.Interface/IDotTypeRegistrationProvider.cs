@@ -4,7 +4,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
 {
   public interface IDotTypeRegistrationProvider
   {
-    bool GetDotTypeFormsSchema(int tldId, string placement, out IDotTypeFormsSchema dotTypeFormsSchema);
+    bool GetDotTypeFormsSchema(int tldId, string placement, string phase, string language, out IDotTypeFormsSchema dotTypeFormsSchema);
 
     bool GetDotTypeClaims(int tldId, out string claimsXml);
 

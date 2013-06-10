@@ -22,68 +22,63 @@ namespace Atlantis.Framework.DotTypeForms.Interface
     {
       try
       {
-        var formsElement = XElement.Parse(responseXml);
-
-        var tldId = formsElement.Attribute("tldid");
-        var placement = formsElement.Attribute("placement");
-
-        if (tldId == null || placement == null)
+        if (!string.IsNullOrEmpty(responseXml))
         {
-          const string message = "Xml is missing TldId or Placement in response";
-          var xmlHeaderException = new AtlantisException("DotTypeFormsSchemaResponseData.BuildModelFromXml", "0",
-                                                          message, responseXml, null, null);
-          throw xmlHeaderException;
+          var formsElement = XElement.Parse(responseXml);
+
+          var error = formsElement.Name.LocalName;
+          if (!error.Equals("error"))
+          {
+            var formCollection = new List<IDotTypeFormsForm>(2);
+            var formElementList = formsElement.Descendants("form");
+            foreach (var formElement in formElementList)
+            {
+              var formName = formElement.Attribute("name");
+              var formDescription = formElement.Attribute("description");
+              var formType = formElement.Attribute("type");
+              var formGetMethod = formElement.Attribute("getmethod");
+              var formSetMethod = formElement.Attribute("setmethod");
+
+              if (formName == null || formDescription == null || formType == null || formGetMethod == null ||
+                  formSetMethod == null)
+              {
+                const string message =
+                  "Xml with invalid FormName, FormDescription, FormType, FormGetMethod or FormSetMethod";
+                var xmlHeaderException = new AtlantisException("DotTypeFormsSchemaResponseData.BuildModelFromXml", "0",
+                                                               message, responseXml, null, null);
+                throw xmlHeaderException;
+              }
+
+              var dotTypeFormsForm = new DotTypeFormsForm
+                                       {
+                                         FormName = formName.Value,
+                                         FormDescription = formDescription.Value,
+                                         FormType = formType.Value,
+                                         FormGetMethod = formGetMethod.Value,
+                                         FormSetMethod = formSetMethod.Value,
+                                         ValidationRuleCollection = ParseValidationRuleCollection(formElement)
+                                       };
+
+              var fieldCollection = ParseFieldCollection(formElement);
+              if (fieldCollection != null && fieldCollection.Count > 0)
+              {
+                dotTypeFormsForm.FieldCollection = fieldCollection;
+              }
+              else
+              {
+                const string message = "Xml is missing FieldCollection";
+                var xmlHeaderException = new AtlantisException("DotTypeFormsSchemaResponseData.BuildModelFromXml", "0",
+                                                               message, responseXml, null, null);
+                throw xmlHeaderException;
+              }
+
+              formCollection.Add(dotTypeFormsForm);
+            }
+
+            FormCollection = formCollection;
+            IsSuccess = true;
+          }
         }
-
-        TldId = Int32.Parse(tldId.Value);
-        Placement = placement.Value;
-
-        var formCollection = new List<IDotTypeFormsForm>(2);
-        var formElementList = formsElement.Descendants("form");
-        foreach (var formElement in formElementList)
-        {
-          var formName = formElement.Attribute("name");
-          var formDescription = formElement.Attribute("description");
-          var formType = formElement.Attribute("type");
-          var formGetMethod = formElement.Attribute("getmethod");
-          var formSetMethod = formElement.Attribute("setmethod");
-
-          if (formName == null || formDescription == null || formType == null || formGetMethod == null || formSetMethod == null)
-          {
-            const string message = "Xml with invalid FormName, FormDescription, FormType, FormGetMethod or FormSetMethod";
-            var xmlHeaderException = new AtlantisException("DotTypeFormsSchemaResponseData.BuildModelFromXml", "0",
-                                                            message, responseXml, null, null);
-            throw xmlHeaderException;
-          }
-
-          var dotTypeFormsForm = new DotTypeFormsForm
-          {
-            FormName = formName.Value,
-            FormDescription = formDescription.Value,
-            FormType = formType.Value,
-            FormGetMethod = formGetMethod.Value,
-            FormSetMethod = formSetMethod.Value,
-            ValidationRuleCollection = ParseValidationRuleCollection(formElement)
-          };
-
-          var fieldCollection = ParseFieldCollection(formElement);
-          if (fieldCollection != null && fieldCollection.Count > 0)
-          {
-            dotTypeFormsForm.FieldCollection = fieldCollection;
-          }
-          else
-          {
-            const string message = "Xml is missing FieldCollection";
-            var xmlHeaderException = new AtlantisException("DotTypeFormsSchemaResponseData.BuildModelFromXml", "0",
-                                                            message, responseXml, null, null);
-            throw xmlHeaderException;
-          }
-
-          formCollection.Add(dotTypeFormsForm);
-        }
-
-        FormCollection = formCollection;
-        IsSuccess = true;
       }
       catch (Exception ex)
       {
@@ -117,24 +112,22 @@ namespace Atlantis.Framework.DotTypeForms.Interface
     {
       IList<IDotTypeFormsField> fieldCollection = null;
 
-      var fieldCollectionElement = parent.Element("fieldcollection");
-      if (fieldCollectionElement != null)
-      {
-        fieldCollection = new List<IDotTypeFormsField>();
-        foreach (var field in fieldCollectionElement.Elements("field"))
-        {
-          var dotTypeFormsField = new DotTypeFormsField
-          {
-            FieldName = field.Attribute("name").Value,
-            FieldLabel = field.Attribute("label").Value,
-            FieldDescription = field.Attribute("description").Value,
-            FieldType = field.Attribute("type").Value,
-            ValidationRuleCollection = ParseValidationRuleCollection(field),
-            ItemCollection = ParseItemCollection(field)
-          };
+      var fieldCollectionElements = parent.Descendants("fieldcollection");
 
-          fieldCollection.Add(dotTypeFormsField);
-        }
+      fieldCollection = new List<IDotTypeFormsField>();
+      foreach (var field in fieldCollectionElements.Elements("field"))
+      {
+        var dotTypeFormsField = new DotTypeFormsField
+        {
+          FieldName = field.Attribute("name").Value,
+          FieldLabel = field.Attribute("label").Value,
+          FieldDescription = field.Attribute("description").Value,
+          FieldType = field.Attribute("type").Value,
+          ValidationRuleCollection = ParseValidationRuleCollection(field),
+          ItemCollection = ParseItemCollection(field)
+        };
+
+        fieldCollection.Add(dotTypeFormsField);
       }
 
       return fieldCollection;

@@ -18,7 +18,7 @@ namespace Atlantis.Framework.DotTypeForms.Impl
         {
           tuiApiService.Url = ((WsConfigElement)config).WSURL;
           tuiApiService.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
-          responseXml = tuiApiService.GetFormSchemaByPlacement(dotTypeFormsXmlSchemaRequestData.TldId, dotTypeFormsXmlSchemaRequestData.Placement)[0];
+          responseXml = tuiApiService.GetFormSchemas(dotTypeFormsXmlSchemaRequestData.ToXML());
 
           /*if (responseXml.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
           {

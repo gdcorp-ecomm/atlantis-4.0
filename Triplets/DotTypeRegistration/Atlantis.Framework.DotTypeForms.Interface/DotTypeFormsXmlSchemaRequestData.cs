@@ -10,18 +10,24 @@ namespace Atlantis.Framework.DotTypeForms.Interface
   {
     public int TldId { get; set; }
     public string Placement { get; set; }
+    public string Phase { get; set; }
+    public string Language { get; set; }
 
-    public DotTypeFormsXmlSchemaRequestData(int tldId, string placement)
+    public DotTypeFormsXmlSchemaRequestData(int tldId, string placement, string phase, string language)
     {
       TldId = tldId;
       Placement = placement;
+      Phase = phase;
+      Language = language;
     }
 
     public override string ToXML()
     {
-      var element = new XElement("DotTypeFormsSchemaRequestData");
+      var element = new XElement("parameters");
       element.Add(new XAttribute("tldid", TldId.ToString(CultureInfo.InvariantCulture)));
       element.Add(new XAttribute("placement", Placement));
+      element.Add(new XAttribute("phase", Phase));
+      element.Add(new XAttribute("language", Language));
       return element.ToString();
     }
 

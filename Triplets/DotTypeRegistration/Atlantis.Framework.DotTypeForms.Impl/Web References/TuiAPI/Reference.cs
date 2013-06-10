@@ -39,9 +39,9 @@ namespace Atlantis.Framework.DotTypeForms.Impl.TuiAPI {
         
         private System.Threading.SendOrPostCallback DeleteAppInfoOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetFormSchemaByNameOperationCompleted;
+        private System.Threading.SendOrPostCallback GetFormSchemasOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetFormSchemaByPlacementOperationCompleted;
+        private System.Threading.SendOrPostCallback GetFormsOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -97,10 +97,10 @@ namespace Atlantis.Framework.DotTypeForms.Impl.TuiAPI {
         public event DeleteAppInfoCompletedEventHandler DeleteAppInfoCompleted;
         
         /// <remarks/>
-        public event GetFormSchemaByNameCompletedEventHandler GetFormSchemaByNameCompleted;
+        public event GetFormSchemasCompletedEventHandler GetFormSchemasCompleted;
         
         /// <remarks/>
-        public event GetFormSchemaByPlacementCompletedEventHandler GetFormSchemaByPlacementCompleted;
+        public event GetFormsCompletedEventHandler GetFormsCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ValidateAppInfo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -246,62 +246,60 @@ namespace Atlantis.Framework.DotTypeForms.Impl.TuiAPI {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetFormSchemaByName", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetFormSchemaByName(string formname) {
-            object[] results = this.Invoke("GetFormSchemaByName", new object[] {
-                        formname});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetFormSchemas", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetFormSchemas(string parameters) {
+            object[] results = this.Invoke("GetFormSchemas", new object[] {
+                        parameters});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GetFormSchemaByNameAsync(string formname) {
-            this.GetFormSchemaByNameAsync(formname, null);
+        public void GetFormSchemasAsync(string parameters) {
+            this.GetFormSchemasAsync(parameters, null);
         }
         
         /// <remarks/>
-        public void GetFormSchemaByNameAsync(string formname, object userState) {
-            if ((this.GetFormSchemaByNameOperationCompleted == null)) {
-                this.GetFormSchemaByNameOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetFormSchemaByNameOperationCompleted);
+        public void GetFormSchemasAsync(string parameters, object userState) {
+            if ((this.GetFormSchemasOperationCompleted == null)) {
+                this.GetFormSchemasOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetFormSchemasOperationCompleted);
             }
-            this.InvokeAsync("GetFormSchemaByName", new object[] {
-                        formname}, this.GetFormSchemaByNameOperationCompleted, userState);
+            this.InvokeAsync("GetFormSchemas", new object[] {
+                        parameters}, this.GetFormSchemasOperationCompleted, userState);
         }
         
-        private void OnGetFormSchemaByNameOperationCompleted(object arg) {
-            if ((this.GetFormSchemaByNameCompleted != null)) {
+        private void OnGetFormSchemasOperationCompleted(object arg) {
+            if ((this.GetFormSchemasCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetFormSchemaByNameCompleted(this, new GetFormSchemaByNameCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetFormSchemasCompleted(this, new GetFormSchemasCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetFormSchemaByPlacement", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string[] GetFormSchemaByPlacement(int tldid, string placement) {
-            object[] results = this.Invoke("GetFormSchemaByPlacement", new object[] {
-                        tldid,
-                        placement});
-            return ((string[])(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetForms", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetForms(string parameters) {
+            object[] results = this.Invoke("GetForms", new object[] {
+                        parameters});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GetFormSchemaByPlacementAsync(int tldid, string placement) {
-            this.GetFormSchemaByPlacementAsync(tldid, placement, null);
+        public void GetFormsAsync(string parameters) {
+            this.GetFormsAsync(parameters, null);
         }
         
         /// <remarks/>
-        public void GetFormSchemaByPlacementAsync(int tldid, string placement, object userState) {
-            if ((this.GetFormSchemaByPlacementOperationCompleted == null)) {
-                this.GetFormSchemaByPlacementOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetFormSchemaByPlacementOperationCompleted);
+        public void GetFormsAsync(string parameters, object userState) {
+            if ((this.GetFormsOperationCompleted == null)) {
+                this.GetFormsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetFormsOperationCompleted);
             }
-            this.InvokeAsync("GetFormSchemaByPlacement", new object[] {
-                        tldid,
-                        placement}, this.GetFormSchemaByPlacementOperationCompleted, userState);
+            this.InvokeAsync("GetForms", new object[] {
+                        parameters}, this.GetFormsOperationCompleted, userState);
         }
         
-        private void OnGetFormSchemaByPlacementOperationCompleted(object arg) {
-            if ((this.GetFormSchemaByPlacementCompleted != null)) {
+        private void OnGetFormsOperationCompleted(object arg) {
+            if ((this.GetFormsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetFormSchemaByPlacementCompleted(this, new GetFormSchemaByPlacementCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetFormsCompleted(this, new GetFormsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -456,17 +454,17 @@ namespace Atlantis.Framework.DotTypeForms.Impl.TuiAPI {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void GetFormSchemaByNameCompletedEventHandler(object sender, GetFormSchemaByNameCompletedEventArgs e);
+    public delegate void GetFormSchemasCompletedEventHandler(object sender, GetFormSchemasCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetFormSchemaByNameCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetFormSchemasCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GetFormSchemaByNameCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetFormSchemasCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -482,26 +480,26 @@ namespace Atlantis.Framework.DotTypeForms.Impl.TuiAPI {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void GetFormSchemaByPlacementCompletedEventHandler(object sender, GetFormSchemaByPlacementCompletedEventArgs e);
+    public delegate void GetFormsCompletedEventHandler(object sender, GetFormsCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetFormSchemaByPlacementCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetFormsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GetFormSchemaByPlacementCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetFormsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public string[] Result {
+        public string Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string[])(this.results[0]));
+                return ((string)(this.results[0]));
             }
         }
     }

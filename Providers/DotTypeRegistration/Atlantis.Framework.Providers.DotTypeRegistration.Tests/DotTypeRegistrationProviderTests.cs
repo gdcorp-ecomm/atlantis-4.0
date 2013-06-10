@@ -26,7 +26,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
       IDotTypeFormsSchema dotTypeFormsSchema;
-      bool isSuccess = provider.GetDotTypeFormsSchema(12345, "name of placement", out dotTypeFormsSchema);
+      bool isSuccess = provider.GetDotTypeFormsSchema(1640, "MOBILE", "GA", "EN", out dotTypeFormsSchema);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, dotTypeFormsSchema.FormCollection.Count > 0);
     }
@@ -35,7 +35,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
       IDotTypeFormsSchema dotTypeFormsSchema;
-      bool isSuccess = provider.GetDotTypeFormsSchema(-1, "name of placement", out dotTypeFormsSchema);
+      bool isSuccess = provider.GetDotTypeFormsSchema(-1, "name of placement", "GA", "EN", out dotTypeFormsSchema);
       Assert.AreEqual(false, isSuccess);
       Assert.AreEqual(true, dotTypeFormsSchema == null);
     }

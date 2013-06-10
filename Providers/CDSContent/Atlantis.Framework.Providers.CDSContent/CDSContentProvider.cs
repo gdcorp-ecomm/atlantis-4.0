@@ -22,6 +22,7 @@ namespace Atlantis.Framework.Providers.CDSContent
     const string ContentPathFormat = "content/{0}";
 
     private static readonly IRedirectResult NullRedirectResult = new RedirectResult(false, null);
+    private static readonly IRenderContent NullRenderContent = new ContentVersionResponseData(null);
 
     private IProviderContainer _container;
     private readonly ISiteContext _siteContext;
@@ -96,9 +97,9 @@ namespace Atlantis.Framework.Providers.CDSContent
       return redirectResult;
     }
 
-    public string GetContent(string appName, string relativePath, RenderPipelineManager renderPipelineManager)
+    public IRenderContent GetContent(string appName, string relativePath)
     {
-      string processedText = string.Empty;
+      IRenderContent contentVersion = NullRenderContent;
 
       string contentPath = GetContentPath(appName, relativePath);
       if (!string.IsNullOrEmpty(contentPath))
@@ -110,7 +111,7 @@ namespace Atlantis.Framework.Providers.CDSContent
           ContentVersionResponseData responseData = cdsQuery.BypassCache ? (ContentVersionResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.ContentVersionRequestType) : (ContentVersionResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.ContentVersionRequestType);
           if (responseData != null && responseData.IsSuccess && !string.IsNullOrEmpty(responseData.Content))
           {
-            processedText = renderPipelineManager.RenderContent(responseData, _container).Content;
+            contentVersion = responseData;
           }
         }
         catch (Exception ex)
@@ -119,7 +120,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         }
       }
 
-      return processedText;
+      return contentVersion;
     }
     
     #endregion

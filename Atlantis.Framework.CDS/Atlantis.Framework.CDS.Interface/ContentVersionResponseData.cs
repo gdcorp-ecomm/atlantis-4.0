@@ -24,7 +24,10 @@ namespace Atlantis.Framework.CDS.Interface
     public ContentVersionResponseData(string responseData)
       : base(responseData)
     {
-      _contentVersion = JsonConvert.DeserializeObject<ContentVersion>(responseData);
+      if (!string.IsNullOrEmpty(responseData))
+      {
+        _contentVersion = JsonConvert.DeserializeObject<ContentVersion>(responseData);
+      }
     }
 
     public ContentVersionResponseData(RequestData requestData, Exception exception)

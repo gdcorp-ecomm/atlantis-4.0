@@ -4,6 +4,7 @@ using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.CDSContent.Tests.RenderHandlers;
 using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Render.Pipeline;
+using Atlantis.Framework.Render.Pipeline.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Atlantis.Framework.Tokens.Interface;
@@ -104,8 +105,8 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       string appName = "blah blah";
       string relativePath = "/hosting/email-hosting";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
-      string content = provider.GetContent(appName, relativePath, RenderPipelineMgr);
-      Assert.IsTrue(content == string.Empty);
+      IRenderContent renderContent = provider.GetContent(appName, relativePath);
+      Assert.IsTrue(renderContent.Content == string.Empty);
     }
 
     [TestMethod]
@@ -114,20 +115,21 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       string appName = "blah blah";
       string relativePath = null;
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
-      string content= provider.GetContent(appName, relativePath, RenderPipelineMgr);
-      Assert.IsTrue(content == string.Empty);
+      IRenderContent renderContent= provider.GetContent(appName, relativePath);
+      Assert.IsTrue(renderContent.Content == string.Empty);
     }
 
     [TestMethod]
     public void DefaultContentPath_GetContentTests()
     {
       string appName = "sales/unittest";
+
       string relativePath = "defaultcontentpath_getcontenttests";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
-      string content = provider.GetContent(appName, relativePath, RenderPipelineMgr);
-      Assert.IsTrue(content.Contains("Asia Pacific"));
-      Assert.IsTrue(content.Contains("eastern hemisphere"));
-      Assert.IsTrue(content.Contains("Targeted Message Here!!!!"));
+      IRenderContent renderContent = provider.GetContent(appName, relativePath);
+      Assert.IsTrue(renderContent.Content.Contains("Current DataCenter: [@T[dataCenter:name]@T]"));
+      Assert.IsTrue(renderContent.Content.Contains("eastern hemisphere"));
+      Assert.IsTrue(renderContent.Content.Contains("[@TargetedMessage[imageUrl]@TargetedMessage]"));
     }
 
     [TestMethod]
@@ -136,8 +138,8 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       string appName = "sales/unittest";
       string relativePath = "notfound-notfound-notfound";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
-      string content = provider.GetContent(appName, relativePath, RenderPipelineMgr);
-      Assert.IsTrue(content == string.Empty);
+      IRenderContent renderContent = provider.GetContent(appName, relativePath);
+      Assert.IsTrue(renderContent.Content == string.Empty);
     }
 
     [TestMethod]
@@ -146,10 +148,10 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       string appName = "sales/unittest";
       string relativePath = "renderpipelinetests_getcontenttests";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
-      string content = provider.GetContent(appName, relativePath, RenderPipelineMgr);
-      Assert.IsTrue(content.Contains("Asia Pacific"));
-      Assert.IsTrue(content.Contains("eastern hemisphere"));
-      Assert.IsTrue(content.Contains("Targeted Message Here!!!!"));
+      IRenderContent renderContent = provider.GetContent(appName, relativePath);
+      Assert.IsTrue(renderContent.Content.Contains("Current DataCenter: [@T[dataCenter:name]@T]"));
+      Assert.IsTrue(renderContent.Content.Contains("eastern hemisphere"));
+      Assert.IsTrue(renderContent.Content.Contains("[@TargetedMessage[imageUrl]@TargetedMessage]"));
     }
        
   }

@@ -28,20 +28,16 @@ namespace Atlantis.Framework.ShopperValidator.Interface
 
    public Dictionary<string, Dictionary<string, string>> ShopperBaseModel;
 
-   public ShopperValidatorRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string firstName, string lastName, string username, string password, string confirmPassword, string email)
+   public ShopperValidatorRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string username, string password, string confirmPassword, string email)
      : base(shopperId, sourceURL, orderId, pathway, pageCount)
    {
      ShopperBaseModel = new Dictionary<string, Dictionary<string, string>>(1);
      ShopperBaseModel.Add(ModelConstants.MODEL_ID_SHOPPERVALID, new Dictionary<string, string>
                           {
-                            {ModelConstants.FACT_FIRST_NAME, firstName},
-                            {ModelConstants.FACT_LAST_NAME, lastName},
                             {ModelConstants.FACT_USERNAME, username},
                             {ModelConstants.FACT_PASSWORD, password},
                             {ModelConstants.FACT_PASSWORD2, confirmPassword},
                             {ModelConstants.FACT_EMAIL, email},
-                            {ModelConstants.FACT_FIRST_NAME_MAX_LENGTH, Convert.ToString(LengthConstants.FirstNameMaxLength)},
-                            {ModelConstants.FACT_LAST_NAME_MAX_LENGTH, Convert.ToString(LengthConstants.LastNameMaxLength)},
                             {ModelConstants.FACT_USERNAME_MAX_LENGTH, Convert.ToString(LengthConstants.UsernameMaxLength)},
                             {ModelConstants.FACT_PASS_MAX_LENGTH, Convert.ToString(LengthConstants.PasswordMaxLength)},
                             {ModelConstants.FACT_PASS_MIN_LENGTH, Convert.ToString(LengthConstants.PasswordMinLength)},

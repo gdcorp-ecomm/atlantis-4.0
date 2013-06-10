@@ -3,75 +3,11 @@
   <Rules>
     <RuleMain id="RMain">
       <Actions>
-        <Execute ruleId="RValidateFFirstName" />
-        <Execute ruleId="RValidateFLastName" />
         <Execute ruleId="RValidateFUsername" />
         <Execute ruleId="RValidateFPassword" />
         <Execute ruleId="RValidateFEmail" />
       </Actions>
     </RuleMain>
-
-    <!-- START First Name rules -->
-    <Rule id="RValidateFFirstName">
-      <Actions>
-        <Execute ruleId="RRequireFFirstName" />
-        <Execute ruleId="RMaxLengthFFirstName" />
-        <Execute ruleId="RInvalidCharsFFirstName" />
-      </Actions>
-    </Rule>
-    <Rule id="RRequireFFirstName">
-      <Condition><![CDATA[ ISNULLOREMPTY(FFirstName) ]]></Condition>
-      <Actions>
-        <EvaluateIsValid factId="FFirstName" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="FFirstName" result="True"><![CDATA[ "First Name is required." ]]></EvaluateMessage>
-      </Actions>
-    </Rule>
-    <Rule id="RMaxLengthFFirstName">
-      <Condition><![CDATA[ FFirstName @MAXLENGTH FFirstNameMaxLength ]]></Condition>
-      <Actions>
-        <EvaluateIsValid factId="FFirstName" result="False">false</EvaluateIsValid>
-        <EvaluateMessage factId="FFirstName" result="False"><![CDATA[ "First Name cannot be longer than " + FFirstNameMaxLength + " characters long." ]]></EvaluateMessage>
-      </Actions>
-    </Rule>
-    <Rule id="RInvalidCharsFFirstName">
-      <Condition><![CDATA[ FFirstName @REGEX FInvalidCharsRegex ]]></Condition>
-      <Actions>
-        <EvaluateIsValid factId="FFirstName" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="FFirstName" result="True"><![CDATA[ "First Name contains invalid characters." ]]></EvaluateMessage>
-      </Actions>
-    </Rule>
-    <!-- END First Name rules -->
-
-    <!-- START Last Name rules -->
-    <Rule id="RValidateFLastName">
-      <Actions>
-        <Execute ruleId="RRequireFLastName" />
-        <Execute ruleId="RMaxLengthFLastName" />
-        <Execute ruleId="RInvalidCharsFLastName" />
-      </Actions>
-    </Rule>
-    <Rule id="RRequireFLastName">
-      <Condition><![CDATA[ ISNULLOREMPTY(FLastName) ]]></Condition>
-      <Actions>
-        <EvaluateIsValid factId="FLastName" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="FLastName" result="True"><![CDATA[ "Last Name is required." ]]></EvaluateMessage>
-      </Actions>
-    </Rule>
-    <Rule id="RMaxLengthFLastName">
-      <Condition><![CDATA[ FLastName @MAXLENGTH FLastNameMaxLength ]]></Condition>
-      <Actions>
-        <EvaluateIsValid factId="FLastName" result="False">false</EvaluateIsValid>
-        <EvaluateMessage factId="FLastName" result="False"><![CDATA[ "Last Name cannot be longer than " + FLastNameMaxLength + " characters long." ]]></EvaluateMessage>
-      </Actions>
-    </Rule>
-    <Rule id="RInvalidCharsFLastName">
-      <Condition><![CDATA[ FLastName @REGEX FInvalidCharsRegex ]]></Condition>
-      <Actions>
-        <EvaluateIsValid factId="FLastName" result="True">false</EvaluateIsValid>
-        <EvaluateMessage factId="FLastName" result="True"><![CDATA[ "Last Name contains invalid characters." ]]></EvaluateMessage>
-      </Actions>
-    </Rule>
-    <!-- END Last Name rules -->
 
     <!-- START Username rules -->
     <Rule id="RValidateFUsername">
@@ -205,16 +141,12 @@
   -->
   <Facts>
     <!--Model values to validate-->
-    <Fact id="FFirstName"   key="txtFirstName"        type="string" modelId="Shopper" />
-    <Fact id="FLastName"    key="txtLastName"         type="string" modelId="Shopper" />
     <Fact id="FUsername"    key="txtUsername"         type="string" modelId="Shopper" />
     <Fact id="FPassword"    key="txtCreatePassword"   type="string" modelId="Shopper" />
     <Fact id="FPassword2"   key="txtCreatePassword2"  type="string" modelId="Shopper" />
     <Fact id="FEmail"       key="txtEmail"            type="string" modelId="Shopper" />
 
     <!--Values used to validate the other facts (regex, max, min, etc.)-->
-    <Fact id="FFirstNameMaxLength" key="firstNameMaxLength" type="double" modelId="Shopper" />
-    <Fact id="FLastNameMaxLength"  key="lastNameMaxLength"  type="double" modelId="Shopper" />
     <Fact id="FUsernameMaxLength"  key="usernameMaxLength"  type="double" modelId="Shopper" />
     <!-- NOTE: Password max length should not be shown to user, so it invalidates the FPasswordMaxLength Fact -->
     <Fact id="FPasswordMaxLength"  key="passwordMaxLength"  type="double" modelId="Shopper" />

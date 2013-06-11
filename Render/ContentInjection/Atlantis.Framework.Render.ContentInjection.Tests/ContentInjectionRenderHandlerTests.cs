@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.PlaceHolder;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
@@ -100,10 +101,10 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
     {
       IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
 
-      IContentInjectionItem headBeginContentInjectionItem = new HtmlHeadBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/metatags/ieedgemetatag.ascx", null));
-      IContentInjectionItem headEndContentInjectionItem = new HtmlHeadEndContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/scripts/gascript.ascx", null));
-      IContentInjectionItem bodyBeginContentInjectionItem = new HtmlBodyBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/banners/iscbanner.ascx", null));
-      IContentInjectionItem bodyEndContentInjectionItem = new HtmlBodyEndContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/traffic/trafficimage.ascx", null));
+      IContentInjectionItem headBeginContentInjectionItem = new HtmlHeadBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/metatags/ieedgemetatag.ascx", null));
+      IContentInjectionItem headEndContentInjectionItem = new HtmlHeadEndContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/scripts/gascript.ascx", null));
+      IContentInjectionItem bodyBeginContentInjectionItem = new HtmlBodyBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/banners/iscbanner.ascx", null));
+      IContentInjectionItem bodyEndContentInjectionItem = new HtmlBodyEndContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/traffic/trafficimage.ascx", null));
 
       IContentInjectionItem[] contentInjectionItems = new[] { headBeginContentInjectionItem,
                                                               headEndContentInjectionItem,

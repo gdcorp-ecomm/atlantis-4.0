@@ -10,6 +10,7 @@
     string ALabel { get; set; }
     int GtldSubCategoryId { get; set; }
     int DisplayOrder { get; set; }
+    string Comments { get; set; }
     ActionButtonTypes ActionButtonType { get; set; }
   }
 }

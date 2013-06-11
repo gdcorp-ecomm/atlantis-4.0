@@ -55,7 +55,6 @@
     <Compile Include="IUrlData.cs" />
     <Compile Include="IWhitelistResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RenderTemplateContentResponseData.cs" />
     <Compile Include="RoutingRule.cs" />
     <Compile Include="RoutingRulesResponseData.cs" />
     <Compile Include="UrlData.cs" />

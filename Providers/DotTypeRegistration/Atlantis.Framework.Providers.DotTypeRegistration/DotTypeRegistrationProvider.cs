@@ -21,8 +21,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 
       try
       {
-        var request = new DotTypeFormsXmlSchemaRequestData(tldId, placement, phase, language);
-        var response = (DotTypeFormsXmlSchemaResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsXmlRequest);
+        var request = new DotTypeFormsXmlRequestData(tldId, placement, phase, language);
+        var response = (DotTypeFormsXmlResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsXmlRequest);
         if (response.IsSuccess)
         {
           dotTypeFormsSchema = response.DotTypeFormsSchema;
@@ -92,7 +92,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       }
       catch (Exception ex)
       {
-        var data = "clientApplcation: " + clientApplication + ", serverName: " + serverName + ", tldId: " + tldId + ", phase: " + phase + ", fields: " + fields;
+        var data = "clientApplication: " + clientApplication + ", serverName: " + serverName + ", tldId: " + tldId + ", phase: " + phase + ", fields: " + fields;
         var exception = new AtlantisException("DotTypeRegistrationProvider.ValidateDotTypeRegistration", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }

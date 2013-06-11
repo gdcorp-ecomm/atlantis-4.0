@@ -35,7 +35,7 @@ namespace Atlantis.Framework.DotTypeForms.Interface
             {
               var formName = formElement.Attribute("name");
               var formDescription = formElement.Attribute("description");
-              var formType = formElement.Attribute("type");
+              var formType = formElement.Attribute("type") ?? formElement.Attribute("rendertype");
               var formGetMethod = formElement.Attribute("getmethod");
               var formSetMethod = formElement.Attribute("setmethod");
 

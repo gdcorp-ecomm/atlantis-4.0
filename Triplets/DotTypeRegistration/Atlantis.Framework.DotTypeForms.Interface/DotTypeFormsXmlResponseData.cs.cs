@@ -3,14 +3,14 @@ using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeForms.Interface
 {
-  public class DotTypeFormsXmlSchemaResponseData : IResponseData
+  public class DotTypeFormsXmlResponseData : IResponseData
   {
     private readonly string _responseXml;
     private readonly AtlantisException _exception;
     private readonly bool _isSuccess;
     private readonly DotTypeFormsSchema _dotTypeFormsSchema;
 
-    public DotTypeFormsXmlSchemaResponseData(string responseXml)
+    public DotTypeFormsXmlResponseData(string responseXml)
     {
       _responseXml = responseXml;
       _exception = null;
@@ -18,13 +18,13 @@ namespace Atlantis.Framework.DotTypeForms.Interface
       _isSuccess = _dotTypeFormsSchema.IsSuccess;
     }
 
-    public DotTypeFormsXmlSchemaResponseData(string responseXml, AtlantisException exAtlantis)
+    public DotTypeFormsXmlResponseData(string responseXml, AtlantisException exAtlantis)
     {
       _responseXml = responseXml;
       _exception = exAtlantis;
     }
 
-    public DotTypeFormsXmlSchemaResponseData(string responseXml, RequestData requestData, Exception ex)
+    public DotTypeFormsXmlResponseData(string responseXml, RequestData requestData, Exception ex)
     {
       _responseXml = responseXml;
       _exception = new AtlantisException(requestData, "DotTypeFormsXmlSchemaResponseData", ex.Message, requestData.ToXML());

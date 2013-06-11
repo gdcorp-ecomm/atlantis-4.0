@@ -43,13 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DotTypeFormsHtmlRequestData.cs" />
+    <Compile Include="DotTypeFormsBaseRequestData.cs" />
     <Compile Include="DotTypeFormsSchema.cs" />
     <Compile Include="DotTypeFormsForm.cs" />
     <Compile Include="DotTypeFormsItem.cs" />
     <Compile Include="DotTypeFormsValidationRule.cs" />
     <Compile Include="DotTypeFormsField.cs" />
-    <Compile Include="DotTypeFormsXmlSchemaResponseData.cs.cs" />
-    <Compile Include="DotTypeFormsXmlSchemaRequestData.cs" />
+    <Compile Include="DotTypeFormsXmlResponseData.cs.cs" />
+    <Compile Include="DotTypeFormsXmlRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

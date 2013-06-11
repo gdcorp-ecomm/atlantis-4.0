@@ -11,8 +11,8 @@ namespace Atlantis.Framework.DotTypeForms.Tests
     [TestMethod]
     public void DotTypeFormsSchemaGoodRequest()
     {
-      var request = new DotTypeFormsXmlSchemaRequestData(1640, "MOBILE", "GA", "EN");
-      var response = (DotTypeFormsXmlSchemaResponseData)Engine.Engine.ProcessRequest(request, 689);
+      var request = new DotTypeFormsXmlRequestData(1640, "MOBILE", "GA", "EN");
+      var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));
     }
@@ -20,8 +20,8 @@ namespace Atlantis.Framework.DotTypeForms.Tests
     [TestMethod]
     public void DotTypeFormsSchemaBadRequest()
     {
-      var request = new DotTypeFormsXmlSchemaRequestData(-1, "name of placement", "GA", "EN");
-      var response = (DotTypeFormsXmlSchemaResponseData)Engine.Engine.ProcessRequest(request, 689);
+      var request = new DotTypeFormsXmlRequestData(-1, "name of placement", "GA", "EN");
+      var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
       Assert.AreEqual(false, response.IsSuccess);
     }
   }

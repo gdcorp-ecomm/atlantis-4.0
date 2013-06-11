@@ -51,13 +51,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Provider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.MarkupParser", "..\..\Render\MarkupParser\Atlantis.Framework.Render.MarkupParser\Atlantis.Framework.Render.MarkupParser.csproj", "{772AAC0D-761E-4906-B46F-100E1AF3F5CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Template.Interface", "..\..\Render\RenderTemplate\Atlantis.Framework.Render.Template.Interface\Atlantis.Framework.Render.Template.Interface.csproj", "{11A49D77-67D1-4145-9D26-668F6CAC6A0D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Template", "..\..\Render\RenderTemplate\Atlantis.Framework.Render.Template\Atlantis.Framework.Render.Template.csproj", "{90F026C3-01CC-497A-BA3C-9C6922D60809}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 27
+		SccNumberOfProjects = 25
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -154,14 +150,6 @@ Global
 		SccProjectUniqueName24 = Atlantis.Framework.Providers.CDSContent.Tests\\Atlantis.Framework.Providers.CDSContent.Tests.csproj
 		SccProjectName24 = Atlantis.Framework.Providers.CDSContent.Tests
 		SccLocalPath24 = Atlantis.Framework.Providers.CDSContent.Tests
-		SccProjectUniqueName25 = ..\\..\\Render\\RenderTemplate\\Atlantis.Framework.Render.Template.Interface\\Atlantis.Framework.Render.Template.Interface.csproj
-		SccProjectTopLevelParentUniqueName25 = CDSContent.sln
-		SccProjectName25 = ../../Render/RenderTemplate/Atlantis.Framework.Render.Template.Interface
-		SccLocalPath25 = ..\\..\\Render\\RenderTemplate\\Atlantis.Framework.Render.Template.Interface
-		SccProjectUniqueName26 = ..\\..\\Render\\RenderTemplate\\Atlantis.Framework.Render.Template\\Atlantis.Framework.Render.Template.csproj
-		SccProjectTopLevelParentUniqueName26 = CDSContent.sln
-		SccProjectName26 = ../../Render/RenderTemplate/Atlantis.Framework.Render.Template
-		SccLocalPath26 = ..\\..\\Render\\RenderTemplate\\Atlantis.Framework.Render.Template
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -264,14 +252,6 @@ Global
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11A49D77-67D1-4145-9D26-668F6CAC6A0D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90F026C3-01CC-497A-BA3C-9C6922D60809}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -298,7 +278,5 @@ Global
 		{5487DEF2-0FA7-4B77-9AAD-0355784589D6} = {A065D284-D3A6-4413-8517-AACAEB0709BC}
 		{79189505-C1C8-4282-83E2-0140A2635624} = {A065D284-D3A6-4413-8517-AACAEB0709BC}
 		{772AAC0D-761E-4906-B46F-100E1AF3F5CA} = {A065D284-D3A6-4413-8517-AACAEB0709BC}
-		{11A49D77-67D1-4145-9D26-668F6CAC6A0D} = {A065D284-D3A6-4413-8517-AACAEB0709BC}
-		{90F026C3-01CC-497A-BA3C-9C6922D60809} = {A065D284-D3A6-4413-8517-AACAEB0709BC}
 	EndGlobalSection
 EndGlobal

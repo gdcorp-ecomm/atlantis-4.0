@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Language.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.Render.Pipeline;
 using Atlantis.Framework.Render.Pipeline.Interface;
 using Atlantis.Framework.Testing.MockLocalization;
 using Atlantis.Framework.Testing.MockProviders;

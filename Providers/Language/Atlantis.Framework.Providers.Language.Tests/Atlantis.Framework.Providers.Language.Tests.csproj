@@ -82,6 +82,10 @@
       <Project>{0d7f076f-1809-437b-b045-e35a7e68e423}</Project>
       <Name>Atlantis.Framework.Render.Pipeline.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline\Atlantis.Framework.Render.Pipeline.csproj">
+      <Project>{68764d92-7cd9-45fb-b650-1429656dcf14}</Project>
+      <Name>Atlantis.Framework.Render.Pipeline</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Testing\Atlantis.Framework.Testing.MockLocalization\Atlantis.Framework.Testing.MockLocalization.csproj">
       <Project>{d4a97573-4ae0-4c40-843a-67b8b898b4bf}</Project>
       <Name>Atlantis.Framework.Testing.MockLocalization</Name>

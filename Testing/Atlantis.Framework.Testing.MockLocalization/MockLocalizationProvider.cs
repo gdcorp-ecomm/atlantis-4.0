@@ -124,5 +124,16 @@ namespace Atlantis.Framework.Testing.MockLocalization
       }
       return result;
     }
+
+
+    public string PreviousCountrySiteCookieValue
+    {
+      get { throw new NotImplementedException(); }
+    }
+
+    public bool IsValidCountrySubdomain(string countryCode)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

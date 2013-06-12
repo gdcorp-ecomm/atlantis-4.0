@@ -71,7 +71,7 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
     {
       IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
 
-      IContentInjectionItem headBeginContentInjectionItem = new HtmlHeadBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/metatags/ieedgemetatag.ascx", null));
+      IContentInjectionItem headBeginContentInjectionItem = new HtmlHeadBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/metatags/ieedgemetatag.ascx", null));
 
       IContentInjectionItem[] contentInjectionItems = new[] { headBeginContentInjectionItem };
 
@@ -93,7 +93,7 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
       Assert.IsTrue(processedRenderContent.Content.Contains("<body>"));
       Assert.IsTrue(processedRenderContent.Content.Contains("</body>"));
 
-      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/metatags/ieedgemetatag.ascx", null)));
+      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/metatags/ieedgemetatag.ascx", null)));
     }
 
     [TestMethod]
@@ -129,10 +129,10 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
       Assert.IsTrue(processedRenderContent.Content.Contains("<body>"));
       Assert.IsTrue(processedRenderContent.Content.Contains("</body>"));
 
-      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/metatags/ieedgemetatag.ascx", null)));
-      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/scripts/gascript.ascx", null)));
-      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/banners/iscbanner.ascx", null)));
-      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/traffic/trafficimage.ascx", null)));
+      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/metatags/ieedgemetatag.ascx", null)));
+      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/scripts/gascript.ascx", null)));
+      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/banners/iscbanner.ascx", null)));
+      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/traffic/trafficimage.ascx", null)));
     }
 
     [TestMethod]
@@ -140,10 +140,10 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
     {
       IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
 
-      IContentInjectionItem headBeginContentInjectionItem = new HtmlHeadBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/metatags/ieedgemetatag.ascx", null));
-      IContentInjectionItem headEndContentInjectionItem = new HtmlHeadEndContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/scripts/gascript.ascx", null));
-      IContentInjectionItem bodyBeginContentInjectionItem = new HtmlBodyBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/banners/iscbanner.ascx", null));
-      IContentInjectionItem bodyEndContentInjectionItem = new HtmlBodyEndContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/traffic/trafficimage.ascx", null));
+      IContentInjectionItem headBeginContentInjectionItem = new HtmlHeadBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/metatags/ieedgemetatag.ascx", null));
+      IContentInjectionItem headEndContentInjectionItem = new HtmlHeadEndContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/scripts/gascript.ascx", null));
+      IContentInjectionItem bodyBeginContentInjectionItem = new HtmlBodyBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/banners/iscbanner.ascx", null));
+      IContentInjectionItem bodyEndContentInjectionItem = new HtmlBodyEndContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/traffic/trafficimage.ascx", null));
 
       IContentInjectionItem[] contentInjectionItems = new[] { headBeginContentInjectionItem,
                                                               headEndContentInjectionItem,
@@ -168,10 +168,10 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
       Assert.IsTrue(processedRenderContent.Content.Contains("<body style=\"background-color:#000;\">"));
       Assert.IsTrue(processedRenderContent.Content.Contains("</body>"));
 
-      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/metatags/ieedgemetatag.ascx", null)));
-      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/scripts/gascript.ascx", null)));
-      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/banners/iscbanner.ascx", null)));
-      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/traffic/trafficimage.ascx", null)));
+      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/metatags/ieedgemetatag.ascx", null)));
+      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/scripts/gascript.ascx", null)));
+      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/banners/iscbanner.ascx", null)));
+      Assert.IsTrue(processedRenderContent.Content.Contains(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/traffic/trafficimage.ascx", null)));
     }
 
     [TestMethod]
@@ -179,7 +179,7 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
     {
       IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
 
-      IContentInjectionItem headBeginContentInjectionItem = new HtmlHeadBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/metatags/ieedgemetatag.ascx", null));
+      IContentInjectionItem headBeginContentInjectionItem = new HtmlHeadBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/metatags/ieedgemetatag.ascx", null));
 
       IContentInjectionItem[] contentInjectionItems = new[] { headBeginContentInjectionItem };
 
@@ -204,7 +204,7 @@ namespace Atlantis.Framework.Render.ContentInjection.Tests
     {
       IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
 
-      IContentInjectionItem headBeginContentInjectionItem = new HtmlHeadBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup("userControl", "~/controls/metatags/ieedgemetatag.ascx", null));
+      IContentInjectionItem headBeginContentInjectionItem = new HtmlHeadBeginContentInjectionItem(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, "~/controls/metatags/ieedgemetatag.ascx", null));
 
       IContentInjectionItem[] contentInjectionItems = new[] { headBeginContentInjectionItem };
 

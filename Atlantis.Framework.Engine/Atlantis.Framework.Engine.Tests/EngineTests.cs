@@ -1,88 +1,55 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Atlantis.Framework.Engine.Tests.MockTriplet;
+﻿using Atlantis.Framework.Engine.Tests.MockTriplet;
 using Atlantis.Framework.Interface;
-using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Diagnostics;
 using System.Xml.Linq;
+using System.Linq;
 
 namespace Atlantis.Framework.Engine.Tests
 {
-  /// <summary>
-  /// Summary description for UnitTest1
-  /// </summary>
   [TestClass]
+  [DeploymentItem("atlantis.config")]
   public class EngineTests
   {
+    IErrorLogger _defaultEngineLogger;
+    EngineTestsLogger _engineTestsLogger;
+
     public EngineTests()
     {
-      //
-      // TODO: Add constructor logic here
-      //
+      _engineTestsLogger = new EngineTestsLogger();
     }
 
-    private TestContext testContextInstance;
-
-    /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
+    [TestInitialize]
+    public void Initialize()
     {
-      get
-      {
-        return testContextInstance;
-      }
-      set
-      {
-        testContextInstance = value;
-      }
+      _defaultEngineLogger = EngineLogging.EngineLogger;
+      EngineLogging.EngineLogger = _engineTestsLogger;
     }
 
-    #region Additional test attributes
-    //
-    // You can use the following additional attributes as you write your tests:
-    //
-    // Use ClassInitialize to run code before running the first test in the class
-    // [ClassInitialize()]
-    // public static void MyClassInitialize(TestContext testContext) { }
-    //
-    // Use ClassCleanup to run code after all tests in a class have run
-    // [ClassCleanup()]
-    // public static void MyClassCleanup() { }
-    //
-    // Use TestInitialize to run code before running each test 
-    // [TestInitialize()]
-    // public void MyTestInitialize() { }
-    //
-    // Use TestCleanup to run code after each test has run
-    // [TestCleanup()]
-    // public void MyTestCleanup() { }
-    //
-    #endregion
+    [TestCleanup]
+    public void Cleanup()
+    {
+      EngineLogging.EngineLogger = _defaultEngineLogger;
+    }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void ConfigElementWithCustomValues()
     {
-      ConfigTestRequestData request = new ConfigTestRequestData("832652", string.Empty, string.Empty, string.Empty, 0);
+      ConfigTestRequestData request = new ConfigTestRequestData();
       ConfigTestResponseData response = (ConfigTestResponseData)Engine.ProcessRequest(request, 9999);
       Assert.IsTrue(response.IsSuccess);
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void ConfigElementWithoutCustomValues()
     {
-      ConfigTestRequestData request = new ConfigTestRequestData("832652", string.Empty, string.Empty, string.Empty, 0);
+      ConfigTestRequestData request = new ConfigTestRequestData();
       ConfigTestResponseData response = (ConfigTestResponseData)Engine.ProcessRequest(request, 9998);
       Assert.IsTrue(response.IsSuccess);
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void LogException()
     {
       AtlantisException ex = new AtlantisException("EngineTests.LogException", "911", "Test log message only.", string.Empty, null, null);
@@ -92,14 +59,13 @@ namespace Atlantis.Framework.Engine.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void EngineStats()
     {
       for (int i = 0; i < 500; i++)
       {
         try
         {
-          ConfigTestRequestData request = new ConfigTestRequestData("832652", string.Empty, string.Empty, string.Empty, 0);
+          ConfigTestRequestData request = new ConfigTestRequestData();
           ConfigTestResponseData response = (ConfigTestResponseData)Engine.ProcessRequest(request, 9997);
         }
         catch { }
@@ -123,26 +89,6 @@ namespace Atlantis.Framework.Engine.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void MonitorData()
-    {
-      for (int i = 0; i < 500; i++)
-      {
-        try
-        {
-          ConfigTestRequestData request = new ConfigTestRequestData("832652", string.Empty, string.Empty, string.Empty, 0);
-          ConfigTestResponseData response = (ConfigTestResponseData)Engine.ProcessRequest(request, 9997);
-        }
-        catch { }
-      }
-
-      XDocument stats = Monitor.MonitorData.GetMonitorData(Monitor.MonitorDataTypes.Stats);
-      Assert.IsNotNull(stats);
-    }
-
-
-    [TestMethod]
-    [DeploymentItem("atlantis.config")]
     public void LogExceptionOverriddenLogger()
     {
       TestLogger testLogger = new TestLogger();
@@ -154,6 +100,99 @@ namespace Atlantis.Framework.Engine.Tests
 
         AtlantisException ex = new AtlantisException("EngineTests.LogException", "911", "Test log message only.", string.Empty, null, null);
         Engine.LogAtlantisException(ex);
+
+        Assert.AreEqual(LoggingStatusType.WorkingNormally, Engine.LoggingStatus);
+        Assert.IsTrue(testLogger.IGotLogged);
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void LogExceptionBadLogger()
+    {
+      LoggerWithException badLogger = new LoggerWithException();
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+
+      try
+      {
+        EngineLogging.EngineLogger = badLogger;
+
+        AtlantisException ex = new AtlantisException("EngineTests.LogException", "911", "Test log message only.", string.Empty, null, null);
+        Engine.LogAtlantisException(ex);
+
+        Assert.AreEqual(LoggingStatusType.Error, Engine.LoggingStatus);
+        Assert.IsNotNull(Engine.LastLoggingError);
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void LogExceptionNullLogger()
+    {
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+
+      try
+      {
+        EngineLogging.EngineLogger = null;
+
+        AtlantisException ex = new AtlantisException("EngineTests.LogException", "911", "Test log message only.", string.Empty, null, null);
+        Engine.LogAtlantisException(ex);
+
+        Assert.AreEqual(LoggingStatusType.NullLogger, Engine.LoggingStatus);
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void LogExceptionCustomLoggerGeneric()
+    {
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+
+      try
+      {
+        EngineLogging.EngineLogger = null;
+
+        AtlantisException ex = new AtlantisException("EngineTests.LogException", "911", "Test log message only.", string.Empty, null, null);
+        Engine.LogAtlantisException<TestLogger>(ex);
+
+        Assert.AreEqual(LoggingStatusType.WorkingNormally, Engine.LoggingStatus);
+      }
+      finally
+      {
+        EngineLogging.EngineLogger = oldLogger;
+      }
+    }
+
+    [TestMethod]
+    public void DefaultEngineLogger()
+    {
+      _engineTestsLogger.ClearExceptions();
+      AtlantisException ex = new AtlantisException("EngineTests.LogException", "911", "Test log message only.", string.Empty, null, null);
+      Engine.LogAtlantisException(ex, _defaultEngineLogger);
+      Assert.AreEqual(0, _engineTestsLogger.ExceptionCount);
+    }
+
+    [TestMethod]
+    public void LogExceptionCustomLoggerPreMade()
+    {
+      TestLogger testLogger = new TestLogger();
+      IErrorLogger oldLogger = EngineLogging.EngineLogger;
+
+      try
+      {
+        EngineLogging.EngineLogger = null;
+
+        AtlantisException ex = new AtlantisException("EngineTests.LogException", "911", "Test log message only.", string.Empty, null, null);
+        Engine.LogAtlantisException(ex, testLogger);
 
         Assert.AreEqual(LoggingStatusType.WorkingNormally, Engine.LoggingStatus);
         Assert.IsTrue(testLogger.IGotLogged);
@@ -179,15 +218,33 @@ namespace Atlantis.Framework.Engine.Tests
       }
     }
 
+    private class LoggerWithException : IErrorLogger
+    {
+      public void LogAtlantisException(AtlantisException atlantisException)
+      {
+        throw new ApplicationException();
+      }
+    }
+
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
+    public void LogExceptionWithoutDescription()
+    {
+      Exception rootCause = new Exception("Root Cause");
+      var requestData = new ConfigTestRequestData();
+      AtlantisException atlantisException = new AtlantisException(requestData, string.Empty, string.Empty, string.Empty, rootCause);
+      Engine.LogAtlantisException(atlantisException);
+
+      Assert.AreEqual(LoggingStatusType.WorkingNormally, Engine.LoggingStatus);
+    }
+
+    [TestMethod]
     public void EngineStatsReset()
     {
       for (int i = 0; i < 500; i++)
       {
         try
         {
-          ConfigTestRequestData request = new ConfigTestRequestData("832652", string.Empty, string.Empty, string.Empty, 0);
+          ConfigTestRequestData request = new ConfigTestRequestData();
           ConfigTestResponseData response = (ConfigTestResponseData)Engine.ProcessRequest(request, 9997);
         }
         catch { }
@@ -203,13 +260,401 @@ namespace Atlantis.Framework.Engine.Tests
     }
 
     [TestMethod]
-    [DeploymentItem("atlantis.config")]
-    public void FirewallTest()
+    public void ReloadConfig()
     {
-      XDocument firewalldata = Monitor.MonitorData.GetMonitorData(Monitor.MonitorDataTypes.FirewallTest);
-      Assert.IsNotNull(firewalldata);
+      ConfigTestRequestData request = new ConfigTestRequestData();
+      ConfigTestResponseData response = (ConfigTestResponseData)Engine.ProcessRequest(request, 9999);
+
+      Engine.ReloadConfig();
+
+      request = new ConfigTestRequestData();
+      response = (ConfigTestResponseData)Engine.ProcessRequest(request, 9999);
     }
 
+    [TestMethod]
+    public void AsyncRequest()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("blue");
+      IAsyncResult resultInProgress = Engine.BeginProcessRequest(request, 9990, null, null);
+
+      Stopwatch timer = Stopwatch.StartNew();
+      bool done = false;
+      while (!done)
+      {
+        if (resultInProgress.IsCompleted)
+        {
+          done = true;
+        }
+
+        if (timer.Elapsed.TotalSeconds > 2)
+        {
+          throw new TimeoutException();
+        }
+      }
+
+      TestTripletResponseData response = (TestTripletResponseData)Engine.EndProcessRequest(resultInProgress);
+      Assert.AreEqual("blue", response.ResultData);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void AsyncRequestExceptionBeforeAsyncStart()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("beginerror");
+      Engine.BeginProcessRequest(request, 9990, null, null);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void AsyncRequestAtlantisExceptionBeforeAsyncStart()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("beginerroratlantis");
+      Engine.BeginProcessRequest(request, 9990, null, null);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void AsyncRequestExceptionDuringAsync()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("duringerror");
+      IAsyncResult resultInProgress = Engine.BeginProcessRequest(request, 9990, null, null);
+
+      Stopwatch timer = Stopwatch.StartNew();
+      bool done = false;
+      while (!done)
+      {
+        if (resultInProgress.IsCompleted)
+        {
+          done = true;
+        }
+
+        if (timer.Elapsed.TotalSeconds > 10)
+        {
+          throw new TimeoutException();
+        }
+      }
+
+      Engine.EndProcessRequest(resultInProgress);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void AsyncRequestAtlantisExceptionDuringResponse()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("enderroratlantis");
+      IAsyncResult resultInProgress = Engine.BeginProcessRequest(request, 9990, null, null);
+
+      Stopwatch timer = Stopwatch.StartNew();
+      bool done = false;
+      while (!done)
+      {
+        if (resultInProgress.IsCompleted)
+        {
+          done = true;
+        }
+
+        if (timer.Elapsed.TotalSeconds > 10)
+        {
+          throw new TimeoutException();
+        }
+      }
+
+      Engine.EndProcessRequest(resultInProgress);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void AsyncRequestExceptionOnResponse()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("responseerror");
+      IAsyncResult resultInProgress = Engine.BeginProcessRequest(request, 9990, null, null);
+
+      Stopwatch timer = Stopwatch.StartNew();
+      bool done = false;
+      while (!done)
+      {
+        if (resultInProgress.IsCompleted)
+        {
+          done = true;
+        }
+
+        if (timer.Elapsed.TotalSeconds > 10)
+        {
+          throw new TimeoutException();
+        }
+      }
+
+      Engine.EndProcessRequest(resultInProgress);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void AsyncRequestThreadAbort()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("threadabort");
+      IAsyncResult resultInProgress = Engine.BeginProcessRequest(request, 9990, null, null);
+
+      Stopwatch timer = Stopwatch.StartNew();
+      bool done = false;
+      while (!done)
+      {
+        if (resultInProgress.IsCompleted)
+        {
+          done = true;
+        }
+
+        if (timer.Elapsed.TotalSeconds > 10)
+        {
+          throw new TimeoutException();
+        }
+      }
+
+      Engine.EndProcessRequest(resultInProgress);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void AsyncRequestInvalidState()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("invalidstate");
+      IAsyncResult resultInProgress = Engine.BeginProcessRequest(request, 9990, null, null);
+
+      Stopwatch timer = Stopwatch.StartNew();
+      bool done = false;
+      while (!done)
+      {
+        if (resultInProgress.IsCompleted)
+        {
+          done = true;
+        }
+
+        if (timer.Elapsed.TotalSeconds > 10)
+        {
+          throw new TimeoutException();
+        }
+      }
+
+      Engine.EndProcessRequest(resultInProgress);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void SyncRequestExceptionOnResponse()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("responseerror");
+      Engine.ProcessRequest(request, 9991);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void SyncRequestExceptionDuringRequest()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("beginerror");
+      Engine.ProcessRequest(request, 9991);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void SyncRequestAtlantisExceptionDuringRequest()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("beginerroratlantis");
+      Engine.ProcessRequest(request, 9991);
+    }
+
+    int _requestType = -1;
+
+    [TestMethod]
+    public void SyncRequestWithDelegate()
+    {
+      _requestType = -1;
+      Engine.OnRequestCompleted += Engine_OnRequestCompleted;
+
+      try
+      {
+        TestTripletRequestData request = new TestTripletRequestData("green");
+        var response = (TestTripletResponseData)Engine.ProcessRequest(request, 9991);
+
+        Assert.AreEqual(9991, _requestType);
+      }
+      finally
+      {
+        Engine.OnRequestCompleted -= Engine_OnRequestCompleted;
+      }
+    }
+
+    void Engine_OnRequestCompleted(ICompletedRequest completedRequest)
+    {
+      TimeSpan time = completedRequest.ElapsedTime;
+      Assert.IsNotNull(completedRequest.RequestData);
+      Assert.IsFalse(string.IsNullOrEmpty(completedRequest.ToString()));
+      _requestType = completedRequest.Config.RequestType;
+    }
+
+    [TestMethod]
+    public void AsyncRequestWithDelegate()
+    {
+      _requestType = -1;
+      Engine.OnRequestCompleted += Engine_OnRequestCompleted;
+
+      try
+      {
+        TestTripletRequestData request = new TestTripletRequestData("blue");
+        IAsyncResult resultInProgress = Engine.BeginProcessRequest(request, 9990, null, null);
+
+        Stopwatch timer = Stopwatch.StartNew();
+        bool done = false;
+        while (!done)
+        {
+          if (resultInProgress.IsCompleted)
+          {
+            done = true;
+          }
+
+          if (timer.Elapsed.TotalSeconds > 30)
+          {
+            throw new TimeoutException();
+          }
+        }
+
+        Engine.EndProcessRequest(resultInProgress);
+
+        Assert.AreEqual(9990, _requestType);
+      }
+      finally
+      {
+        Engine.OnRequestCompleted -= Engine_OnRequestCompleted;
+      }
+    }
+
+    bool _exceptionStillHitDelegate = false;
+
+    [TestMethod]
+    public void SyncRequestExceptionWithDelegate()
+    {
+      _exceptionStillHitDelegate = false;
+      Engine.OnRequestCompleted += Engine_OnRequestCompletedWithException;
+
+      try
+      {
+        TestTripletRequestData request = new TestTripletRequestData("beginerror");
+        var response = (TestTripletResponseData)Engine.ProcessRequest(request, 9991);
+      }
+      catch
+      {
+        Assert.IsTrue(_exceptionStillHitDelegate);
+      }
+      finally
+      {
+        Engine.OnRequestCompleted -= Engine_OnRequestCompletedWithException;
+      }
+    }
+
+    void Engine_OnRequestCompletedWithException(ICompletedRequest completedRequest)
+    {
+      _exceptionStillHitDelegate = completedRequest.Exception != null;
+    }
+
+    [TestMethod]
+    public void SyncRequestExceptionWithBadDelegate()
+    {
+      _engineTestsLogger.ClearExceptions();
+
+      Engine.OnRequestCompleted += Engine_OnRequestCompletedBad;
+
+      try
+      {
+        TestTripletRequestData request = new TestTripletRequestData("green");
+        var response = (TestTripletResponseData)Engine.ProcessRequest(request, 9991);
+        Assert.AreEqual(1, _engineTestsLogger.ExceptionCount);
+        Assert.IsTrue(_engineTestsLogger.ExceptionsLogged.First().Message.StartsWith("Bad Delegate"));
+      }
+      finally
+      {
+        Engine.OnRequestCompleted -= Engine_OnRequestCompletedBad;
+      }
+    }
+
+    void Engine_OnRequestCompletedBad(ICompletedRequest completedRequest)
+    {
+      throw new ApplicationException("Bad Delegate");
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void SyncRequestWithNullResponse()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("null");
+      var response = (TestTripletResponseData)Engine.ProcessRequest(request, 9991);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void InvalidRequestType()
+    {
+      TestTripletRequestData request = new TestTripletRequestData("green");
+      var response = (TestTripletResponseData)Engine.ProcessRequest(request, 19991);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void SyncRequestWithDelegateAndNullResponse()
+    {
+      Engine.OnRequestCompleted += Engine_OnRequestCompletedNullResponse;
+
+      try
+      {
+        TestTripletRequestData request = new TestTripletRequestData("null");
+        var response = (TestTripletResponseData)Engine.ProcessRequest(request, 9991);
+      }
+      finally
+      {
+        Engine.OnRequestCompleted -= Engine_OnRequestCompletedNullResponse;
+      }
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void AsyncRequestWithDelegateAndNullResponse()
+    {
+      _requestType = -1;
+      Engine.OnRequestCompleted += Engine_OnRequestCompletedNullResponse;
+      
+      try
+      {
+        TestTripletRequestData request = new TestTripletRequestData("null");
+        IAsyncResult resultInProgress = Engine.BeginProcessRequest(request, 9990, null, null);
+
+        Stopwatch timer = Stopwatch.StartNew();
+        bool done = false;
+        while (!done)
+        {
+          if (resultInProgress.IsCompleted)
+          {
+            done = true;
+          }
+
+          if (timer.Elapsed.TotalSeconds > 30)
+          {
+            throw new TimeoutException();
+          }
+        }
+
+        Engine.EndProcessRequest(resultInProgress);
+
+        Assert.AreEqual(9990, _requestType);
+      }
+      finally
+      {
+        Engine.OnRequestCompleted -= Engine_OnRequestCompletedNullResponse;
+      }
+    }
+
+    void Engine_OnRequestCompletedNullResponse(ICompletedRequest completedRequest)
+    {
+      Assert.IsNotNull(completedRequest.Exception);
+      string value = completedRequest.ToString();
+      Assert.IsNull(completedRequest.ResponseData);
+    }
 
   }
 }

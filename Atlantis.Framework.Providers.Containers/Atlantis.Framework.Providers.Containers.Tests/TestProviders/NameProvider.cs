@@ -5,7 +5,7 @@ namespace Atlantis.Framework.Providers.Containers.Tests
 {
   public class NameProvider : ProviderBase, INameProvider
   {
-    public string FirstName { get; private set; }
+    public string FirstName { get; set; }
 
     public string LastName { get; private set; }
 

@@ -7,18 +7,15 @@ using System.Threading;
 
 namespace Atlantis.Framework.Engine
 {
-  public delegate void ProcessRequestStartDelegate(RequestData requestData, int requestType, Guid requestId);
-  public delegate void ProcessRequestCompleteDelegate(RequestData requestData, int requestType, Guid requestId, IResponseData oResponse);
+  public delegate void RequestCompletedDelegate(ICompletedRequest completedRequest);
 
   public class Engine
   {
-    public static event ProcessRequestStartDelegate OnProcessRequestStart;
-    public static event ProcessRequestCompleteDelegate OnProcessRequestComplete;
+    public static event RequestCompletedDelegate OnRequestCompleted;
 
-    static EngineRequestCache<IRequest> _requestCache;
-    static EngineRequestCache<IAsyncRequest> _asyncRequestCache;
-
-    static EngineConfig _engineConfig;
+    internal static EngineRequestCache<IRequest> RequestCache { get; private set; }
+    internal static EngineRequestCache<IAsyncRequest> AsyncRequestCache { get; private set; }
+    internal static EngineConfig Config { get; private set; }
 
     static Exception _lastLoggingException;
     static LoggingStatusType _loggingStatus;
@@ -26,14 +23,12 @@ namespace Atlantis.Framework.Engine
     public static string EngineVersion { get; private set; }
     public static string InterfaceVersion { get; private set; }
 
-    // Thread-safe class initializer
-    // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnbda/html/singletondespatt.asp
     static Engine()
     {
-      _requestCache = new EngineRequestCache<IRequest>();
-      _asyncRequestCache = new EngineRequestCache<IAsyncRequest>();
+      RequestCache = new EngineRequestCache<IRequest>();
+      AsyncRequestCache = new EngineRequestCache<IAsyncRequest>();
+      Config = new EngineConfig();
 
-      _engineConfig = new EngineConfig();
       _lastLoggingException = null;
       _loggingStatus = LoggingStatusType.WorkingNormally;
 
@@ -67,234 +62,79 @@ namespace Atlantis.Framework.Engine
 
     }
 
-    #region Standard Requests
-
     public static IResponseData ProcessRequest(RequestData request, int requestType)
     {
-      IResponseData response = null;
-      ConfigElement configItem = null;
-      Stopwatch callTimer = null;
+      SyncRequest syncRequest = new SyncRequest(request, requestType);
+      syncRequest.Execute();
 
-      try
+      CallRequestCompleted(syncRequest);
+
+      if (!syncRequest.Success)
       {
-        configItem = _engineConfig.GetConfig(requestType);
-
-        IRequest oIRequest = _requestCache.GetRequestObject(configItem);
-        Guid requestId = Guid.NewGuid();
-
-        ProcessRequestStartDelegate startDelegate = OnProcessRequestStart;
-        if (startDelegate != null)
-        {
-          startDelegate(request, requestType, requestId);
-        }
-
-        callTimer = Stopwatch.StartNew();
-        response = oIRequest.RequestHandler((RequestData)request, configItem);
-        callTimer.Stop();
-
-        ProcessRequestCompleteDelegate completeDelegate = OnProcessRequestComplete;
-        if (completeDelegate != null)
-        {
-          completeDelegate(request, requestType, requestId, response);
-        }
-      }
-      catch (AtlantisException ex)
-      {
-        if (callTimer != null)
-        {
-          callTimer.Stop();
-        }
-
-        if (configItem != null)
-        {
-          configItem.Stats.LogFailure(callTimer);
-        }
-
-        LogAtlantisException(ex);
-        throw ex;
-      }
-      catch (Exception ex)
-      {
-        if (callTimer != null)
-        {
-          callTimer.Stop();
-        }
-
-        if (configItem != null)
-        {
-          configItem.Stats.LogFailure(callTimer);
-        }
-
-        System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(0, false);
-        System.Diagnostics.StackFrame sf = st.GetFrame(0);
-
-        AtlantisException exAtlantis = new AtlantisException((RequestData)request,
-                                                              sf.GetMethod().ToString(),
-                                                              ex.Message.ToString(),
-                                                              request.ToXML(),
-                                                              ex);
-        LogAtlantisException(exAtlantis);
-        throw exAtlantis;
+        throw syncRequest.Exception;
       }
 
-      //Check for Exception in Response
-      AtlantisException exTest = response.GetException();
-      if (exTest != null)
-      {
-        if (configItem != null)
-        {
-          configItem.Stats.LogFailure(callTimer);
-        }
-
-        LogAtlantisException(exTest);
-        throw exTest;
-      }
-
-      if (configItem != null)
-      {
-        configItem.Stats.LogSuccess(callTimer);
-      }
-
-      return response;
+      return syncRequest.ResponseData;
     }
 
-    #endregion
-
-    #region Async Requests
-
-    public static IAsyncResult BeginProcessRequest(
-      RequestData request, int requestType, AsyncCallback callback, object state)
+    public static IAsyncResult BeginProcessRequest(RequestData request, int requestType, AsyncCallback callback, object state)
     {
-      ConfigElement configItem = null;
-      IAsyncResult asyncResult = null;
-      IAsyncRequest asyncRequest = null;
+      AsyncRequestBegin asyncRequest = new AsyncRequestBegin(request, requestType, callback, state);
+      asyncRequest.Execute();
 
-      try
+      if (!asyncRequest.Success)
       {
-        configItem = _engineConfig.GetConfig(requestType);
-        asyncRequest = _asyncRequestCache.GetRequestObject(configItem);
-        asyncResult = asyncRequest.BeginHandleRequest(request, configItem, callback, state);
-      }
-      catch (AtlantisException ex)
-      {
-        if (configItem != null)
-        {
-          configItem.Stats.LogFailure(null);
-        }
-
-        LogAtlantisException(ex);
-        throw ex;
-      }
-      catch (ThreadAbortException)
-      {
-      }
-      catch (Exception ex)
-      {
-        if (configItem != null)
-        {
-          configItem.Stats.LogFailure(null);
-        }
-
-        System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(0, false);
-        System.Diagnostics.StackFrame sf = st.GetFrame(0);
-
-        AtlantisException exAtlantis = new AtlantisException(request,
-                                                             sf.GetMethod().ToString(),
-                                                             ex.Message.ToString(),
-                                                             request.ToXML());
-        LogAtlantisException(exAtlantis);
-        throw exAtlantis;
+        throw asyncRequest.Exception;
       }
 
-      return asyncResult;
+      return asyncRequest.AsyncResult;
     }
 
     public static IResponseData EndProcessRequest(IAsyncResult asyncResult)
     {
-      IAsyncRequest asyncRequest = null;
-      IResponseData response = null;
-      AsyncState asyncState = null;
+      AsyncRequestEnd asyncRequest = new AsyncRequestEnd(asyncResult);
+      asyncRequest.Execute();
 
-      try
+      CallRequestCompleted(asyncRequest);
+
+      if (!asyncRequest.Success)
       {
-        asyncState = asyncResult.AsyncState as AsyncState;
-
-        if (asyncState != null)
-        {
-          asyncRequest = _asyncRequestCache.GetRequestObject(asyncState.Config);
-          response = asyncRequest.EndHandleRequest(asyncResult);
-          asyncState.CallTimer.Stop();
-        }
-        else
-        {
-          throw new AtlantisException(
-            null, "Engine." + MethodBase.GetCurrentMethod().Name, 
-            "Invalid AsyncState argument", string.Empty);
-        }
-      }
-      catch (AtlantisException ex)
-      {
-        if ((asyncState != null) && (asyncState.Config != null))
-        {
-          asyncState.CallTimer.Stop();
-          asyncState.Config.Stats.LogFailure(asyncState.CallTimer);
-        }
-
-        LogAtlantisException(ex);
-        throw ex;
-      }
-      catch (Exception ex)
-      {
-        if ((asyncState != null) && (asyncState.Config != null))
-        {
-          asyncState.CallTimer.Stop();
-          asyncState.Config.Stats.LogFailure(asyncState.CallTimer);
-        }
-
-        System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(0, false);
-        System.Diagnostics.StackFrame sf = st.GetFrame(0);
-
-        AtlantisException exAtlantis = new AtlantisException(asyncState.RequestData,
-                                                             sf.GetMethod().ToString(),
-                                                             ex.Message.ToString(),
-                                                             asyncState.RequestData.ToXML());
-        LogAtlantisException(exAtlantis);
-        throw exAtlantis;
+        throw asyncRequest.Exception;
       }
 
-      //Check for Exception in Response
-      AtlantisException exTest = response.GetException();
-      if (exTest != null)
-      {
-        if ((asyncState != null) && (asyncState.Config != null))
-        {
-          asyncState.Config.Stats.LogFailure(asyncState.CallTimer);
-        }
-
-        LogAtlantisException(exTest);
-        throw exTest;
-      }
-
-      if ((asyncState != null) && (asyncState.Config != null))
-      {
-        asyncState.Config.Stats.LogSuccess(asyncState.CallTimer);
-      }
-
-      return response;
+      return asyncRequest.ResponseData;
     }
 
-    #endregion
+    private static void CallRequestCompleted(ICompletedRequest completedRequest)
+    {
+      if (completedRequest != null)
+      {
+        var requestCompletedDelegate = OnRequestCompleted;
+        if (requestCompletedDelegate != null)
+        {
+          try
+          {
+            requestCompletedDelegate(completedRequest);
+          }
+          catch (Exception ex)
+          {
+            string message = ex.Message + ex.StackTrace;
+            AtlantisException exception = new AtlantisException("RequestCompletedDelegate", 0, message, completedRequest.ToString());
+            Engine.LogAtlantisException(exception);
+          }
+        }
+      }
+    }
 
     #region Logging
 
-    public static void LogAtlantisException(AtlantisException exAtlantis)
+    public static void LogAtlantisException(AtlantisException exception, IErrorLogger errorLogger)
     {
       try
       {
-        IErrorLogger errorLogger = EngineLogging.EngineLogger;
         if (errorLogger != null)
         {
-          errorLogger.LogAtlantisException(exAtlantis);
+          errorLogger.LogAtlantisException(exception);
           _loggingStatus = LoggingStatusType.WorkingNormally;
         }
         else
@@ -307,12 +147,18 @@ namespace Atlantis.Framework.Engine
         _loggingStatus = LoggingStatusType.Error;
         _lastLoggingException = ex;
       }
+
     }
 
-    public static void LogToGoDadLog(AtlantisException exAtlantis)
+    public static void LogAtlantisException(AtlantisException exception)
     {
-      DefaultEngineLogger oLogger=new DefaultEngineLogger();
-      oLogger.LogAtlantisException(exAtlantis);
+      LogAtlantisException(exception, EngineLogging.EngineLogger);
+    }
+
+    public static void LogAtlantisException<T>(AtlantisException exception) where T: IErrorLogger, new()
+    {
+      IErrorLogger errorLogger = new T();
+      LogAtlantisException(exception, errorLogger);
     }
 
     public static LoggingStatusType LoggingStatus
@@ -329,24 +175,24 @@ namespace Atlantis.Framework.Engine
 
     public static void ReloadConfig()
     {
-      _engineConfig.Load();
+      Config.Load();
       ClearAssemblyCache();
     }
 
     private static void ClearAssemblyCache()
     {
-      _requestCache.Clear();
-      _asyncRequestCache.Clear();
+      RequestCache.Clear();
+      AsyncRequestCache.Clear();
     }
 
     public static IList<ConfigElement> GetConfigElements()
     {
-      return _engineConfig.GetAllConfigs();
+      return Config.GetAllConfigs();
     }
 
     public static bool TryGetConfigElement(int requestType, out ConfigElement configElement)
     {
-      return _engineConfig.TryGetConfigElement(requestType, out configElement);
+      return Config.TryGetConfigElement(requestType, out configElement);
     }
   }
 

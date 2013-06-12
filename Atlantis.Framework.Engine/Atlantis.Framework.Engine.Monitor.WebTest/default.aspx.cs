@@ -1,7 +1,6 @@
 ﻿using System;
 using Atlantis.Framework.Engine.Monitor.Trace;
 using Atlantis.Framework.Engine.Tests.MockTriplet;
-using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 
 namespace Atlantis.Framework.Engine.Monitor.WebTest
@@ -11,32 +10,39 @@ namespace Atlantis.Framework.Engine.Monitor.WebTest
     protected void Page_Load(object sender, EventArgs e)
     {
       RunEngineCalls();
-
-      var trace = statsProvider.EngineTraceStats;
     }
 
-    private EngineTraceProvider _provider;
-    protected EngineTraceProvider statsProvider
+    protected string RequestTraceStats
     {
       get
       {
-        if (_provider == null)
+        var trace = HttpProviderContainer.Instance.Resolve<EngineTraceProvider>();
+
+        int success = 0;
+        int failed = 0;
+        foreach (var completedRequest in trace.CompletedEngineRequests)
         {
-          _provider = HttpProviderContainer.Instance.Resolve<EngineTraceProvider>();
+          if (completedRequest.Exception != null)
+          {
+            failed++;
+          }
+          else
+          {
+            success++;
+          }
         }
 
-        return _provider;
+        return string.Format("successful={0} : failed={1}", success.ToString(), failed.ToString());
       }
     }
 
-
     private void RunEngineCalls()
     {
-      for (int i = 0; i < 1; i++)
+      for (int i = 0; i < 100; i++)
       {
         try
         {
-          ConfigTestRequestData request = new ConfigTestRequestData("832652", string.Empty, string.Empty, string.Empty, 0);
+          ConfigTestRequestData request = new ConfigTestRequestData();
           ConfigTestResponseData response = (ConfigTestResponseData)Engine.ProcessRequest(request, 9997);
         }
         catch { }

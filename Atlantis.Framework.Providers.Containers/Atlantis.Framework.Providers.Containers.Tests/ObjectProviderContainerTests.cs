@@ -50,6 +50,15 @@ namespace Atlantis.Framework.Providers.Containers.Tests
     }
 
     [TestMethod]
+    public void GetAndSetData()
+    {
+      ObjectContainer.RegisterProvider<INameProvider, NameProvider>();
+      ObjectContainer.SetData<string>("myname", "SuperName");
+      string value = ObjectContainer.GetData<string>("myname", "defaultName");
+      Assert.AreEqual("SuperName", value);
+    }
+
+    [TestMethod]
     public void ObjectResolveProviderWithZeroParameters()
     {
       ObjectContainer.RegisterProvider<INameProvider, NameProvider>();
@@ -60,21 +69,21 @@ namespace Atlantis.Framework.Providers.Containers.Tests
     }
 
     [TestMethod]
-    public void HttpCanResolveTrue()
+    public void CanResolveTrue()
     {
       ObjectContainer.RegisterProvider<INameProvider, NameProvider>();
       Assert.IsTrue(ObjectContainer.CanResolve<INameProvider>());
     }
 
     [TestMethod]
-    public void HttpCanResolveFalse()
+    public void CanResolveFalse()
     {
       ObjectContainer.RegisterProvider<INameProvider, NameProvider>();
       Assert.IsFalse(ObjectContainer.CanResolve<IEmployeeProvider>());
     }
 
     [TestMethod]
-    public void HttpTryResolveSuccess()
+    public void TryResolveSuccess()
     {
       ObjectContainer.RegisterProvider<INameProvider, NameProvider>();
       INameProvider nameProvider;
@@ -84,7 +93,7 @@ namespace Atlantis.Framework.Providers.Containers.Tests
     }
 
     [TestMethod]
-    public void HttpTryResolveNotFound()
+    public void TryResolveNotFound()
     {
       IEmployeeProvider provider;
       bool success = ObjectContainer.TryResolve(out provider);
@@ -92,6 +101,20 @@ namespace Atlantis.Framework.Providers.Containers.Tests
       Assert.IsNull(provider);
     }
 
+    [TestMethod]
+    public void TryResolveRepeated()
+    {
+      ObjectProviderContainer newContainer = new ObjectProviderContainer();
+      newContainer.RegisterProvider<INameProvider, NameProvider>();
+      INameProvider nameProvider;
+      bool success = newContainer.TryResolve(out nameProvider);
+      nameProvider.FirstName = "Hello";
+
+      INameProvider sameName;
+      success = newContainer.TryResolve(out sameName);
+      Assert.IsTrue(success);
+      Assert.AreEqual("Hello", sameName.FirstName);
+    }
 
     [TestMethod]
     public void ObjectResolveProviderNotRegistered()

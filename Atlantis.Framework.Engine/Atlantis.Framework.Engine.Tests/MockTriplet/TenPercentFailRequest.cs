@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Atlantis.Framework.Interface;
+using System;
 using System.Threading;
-using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Engine.Tests.MockTriplet
 {

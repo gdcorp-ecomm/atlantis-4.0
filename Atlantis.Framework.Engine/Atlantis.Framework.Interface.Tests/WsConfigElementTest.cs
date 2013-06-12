@@ -17,7 +17,6 @@ namespace Atlantis.Framework.Engine.Tests
     {
       string progId = "1";
       string assembly = "doesnt.matter.for.this.test";
-      bool LPC = false;
       string webServiceUrl = "doesnt.matter.for.this.test";
       Dictionary<string, string> configValues = new Dictionary<string, string>();
       configValues.Add("CertificateName", "corp.web.mya.dev.client.godaddy.com");
@@ -34,7 +33,6 @@ namespace Atlantis.Framework.Engine.Tests
     {
       string progId = "1";
       string assembly = "doesnt.matter.for.this.test";
-      bool LPC = false;
       string webServiceUrl = "doesnt.matter.for.this.test";
       Dictionary<string, string> configValues = new Dictionary<string, string>();
       configValues.Add("CertificateName", "corp.web.mya.dev.client.godaddy.com.not.going.to.be.found");

@@ -96,14 +96,17 @@ namespace Atlantis.Framework.Providers.Containers
     public bool TryResolve<TProviderInterface>(out TProviderInterface providerInterface) where TProviderInterface : class
     {
       bool isRegistered = false;
-      providerInterface = default(TProviderInterface);
 
       Type providerInterfaceType = typeof(TProviderInterface);
       Type providerType;
-      if(_registeredProvidersDictionary.TryGetValue(providerInterfaceType, out providerType))
+      if (_registeredProvidersDictionary.TryGetValue(providerInterfaceType, out providerType))
       {
-        providerInterface = ProviderContainerHelper.ConstructProvider<TProviderInterface>(providerType, this);
+        providerInterface = Resolve<TProviderInterface>();
         isRegistered = true;
+      }
+      else
+      {
+        providerInterface = default(TProviderInterface);
       }
 
       return isRegistered;

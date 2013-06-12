@@ -31,13 +31,6 @@ namespace Atlantis.Framework.Engine
 
     public void LogAtlantisException(AtlantisException atlantisException)
     {
-      // Get some defaults
-      string sourceServer = atlantisException.SourceServer;
-      if (string.IsNullOrEmpty(sourceServer))
-      {
-        sourceServer = Environment.MachineName;
-      }
-
       string errorDescription = atlantisException.ErrorDescription;
       if (string.IsNullOrEmpty(errorDescription))
       {
@@ -52,7 +45,7 @@ namespace Atlantis.Framework.Engine
       {
         oLog.Url = _logWebServiceUrl;
         oLog.Timeout = 2000;
-        oLog.LogErrorEx(sourceServer, atlantisException.SourceFunction, atlantisException.SourceURL,
+        oLog.LogErrorEx(Environment.MachineName, atlantisException.SourceFunction, atlantisException.SourceURL,
                         uint.Parse(atlantisException.ErrorNumber), errorDescription,
                         atlantisException.ExData, atlantisException.ShopperID, atlantisException.OrderID,
                         atlantisException.ClientIP, atlantisException.Pathway, atlantisException.PageCount);

@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -7,10 +8,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Atlantis.Framework.Engine")]
 #if DEBUG
 [assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
 #else
 [assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
 #endif
-[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyProduct("Atlantis.Framework.Engine")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2011-2013")]
@@ -36,4 +38,6 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.5.10")]
+[assembly: AssemblyFileVersion("4.13.6.11")]
+//
+[assembly: InternalsVisibleTo("Atlantis.Framework.Engine.Tests")]

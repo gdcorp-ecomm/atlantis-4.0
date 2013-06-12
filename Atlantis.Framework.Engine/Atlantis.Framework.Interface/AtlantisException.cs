@@ -37,7 +37,6 @@ namespace Atlantis.Framework.Interface
     }
 
     DateTime _logTime;
-    string _sourceServer = string.Empty;
     string _sourceFunction = string.Empty;
     string _sourceUrl = "-- http://localhost --";
     string _errorNumber = "0";
@@ -56,16 +55,12 @@ namespace Atlantis.Framework.Interface
       : base(errorDescription)
     {
       _logTime = DateTime.Now;
-      _sourceServer = Dns.GetHostName();
       _sourceFunction = sourceFunction;
       _errorDescription = errorDescription;
       ExData = data;
-      ShopperID = requestData.ShopperID;
-      OrderID = requestData.OrderID;
-      Pathway = requestData.Pathway;
-      _pageCount = requestData.PageCount;
 
-      SourceURL = requestData.SourceURL;
+      SetRequestData(requestData);
+
       ClientIP = IPAddress.Loopback.ToString();
     }
 
@@ -77,16 +72,12 @@ namespace Atlantis.Framework.Interface
       : base(ex.Message, ex.InnerException)
     {
       _logTime = DateTime.Now;
-      _sourceServer = Dns.GetHostName();
       _sourceFunction = sourceFunction;
       _errorDescription = errorDescription;
       ExData = data;
-      ShopperID = requestData.ShopperID;
-      OrderID = requestData.OrderID;
-      Pathway = requestData.Pathway;
-      _pageCount = requestData.PageCount;
 
-      SourceURL = requestData.SourceURL;
+      SetRequestData(requestData);
+
       ClientIP = IPAddress.Loopback.ToString();
     }
 
@@ -99,17 +90,25 @@ namespace Atlantis.Framework.Interface
       : base(errorDescription)
     {
       _logTime = DateTime.Now;
-      _sourceServer = Dns.GetHostName();
       _sourceFunction = sourceFunction;
       _errorDescription = errorDescription;
       ExData = data;
-      ShopperID = requestData.ShopperID;
-      OrderID = requestData.OrderID;
-      Pathway = requestData.Pathway;
-      _pageCount = requestData.PageCount;
 
-      SourceURL = requestData.SourceURL;
+      SetRequestData(requestData);
+
       ClientIP = clientIP;
+    }
+
+    private void SetRequestData(RequestData requestData)
+    {
+      if (requestData != null)
+      {
+        ShopperID = requestData.ShopperID;
+        OrderID = requestData.OrderID;
+        Pathway = requestData.Pathway;
+        _pageCount = requestData.PageCount;
+        SourceURL = requestData.SourceURL;
+      }
     }
 
     public AtlantisException(string sourceFunction,
@@ -125,7 +124,6 @@ namespace Atlantis.Framework.Interface
       : base(errorDescription)
     {
       _logTime = DateTime.Now;
-      _sourceServer = Dns.GetHostName();
       _sourceFunction = sourceFunction;
       _errorNumber = errorNumber;
       _errorDescription = errorDescription;
@@ -139,6 +137,11 @@ namespace Atlantis.Framework.Interface
       ClientIP = clientIP;
     }
 
+    public AtlantisException(string sourceFunction, int errorNumber, string errorDescription, string data)
+      : this(sourceFunction, errorNumber.ToString(), errorDescription, data, null, null)
+    {
+    }
+
     public AtlantisException(
       string sourceFunction,
       string errorNumber,
@@ -149,7 +152,6 @@ namespace Atlantis.Framework.Interface
       : base(errorDescription)
     {
       _logTime = DateTime.Now;
-      _sourceServer = Dns.GetHostName();
       _sourceFunction = sourceFunction;
       _errorNumber = errorNumber;
       _errorDescription = errorDescription;
@@ -267,7 +269,7 @@ namespace Atlantis.Framework.Interface
 
     public string SourceServer
     {
-      get { return _sourceServer; }
+      get { return Environment.MachineName; }
     }
 
     public string SourceFunction
@@ -364,7 +366,7 @@ namespace Atlantis.Framework.Interface
       XmlTextWriter xtwRequest = new XmlTextWriter(new StringWriter(sbRequest));
 
       xtwRequest.WriteStartElement("SITE_LOG_ERROR");
-      xtwRequest.WriteAttributeString("source_server", _sourceServer);
+      xtwRequest.WriteAttributeString("source_server", SourceServer);
       xtwRequest.WriteAttributeString("source_function", _sourceFunction);
       xtwRequest.WriteAttributeString("error_number", _errorNumber);
       xtwRequest.WriteAttributeString("error_description", _errorDescription);

@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -9,235 +8,68 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
   public class EngineTraceProvider : ProviderBase
   {
     private readonly Lazy<ISiteContext> _siteContext;
-    private readonly Dictionary<Guid, Dictionary<string, string>> _requestTrace;
-    private readonly string _engineTraceQueryStringValue;
-    private const string COOKIE_NAME = "AtlantisFramework";
-    private const string ENGINETRACE_KEY = "enginetrace";
+    private readonly Lazy<List<ICompletedRequest>> _completedRequests;
+
+    private readonly Lazy<bool> _engineTraceOn;
+    private const string _TRACEPARAMETER = "atlantisenginetrace";
 
     public EngineTraceProvider(IProviderContainer container) 
       : base(container)
     {
+      _completedRequests = new Lazy<List<ICompletedRequest>>(() => {return new List<ICompletedRequest>(10);});
+
       _siteContext = new Lazy<ISiteContext>(Container.Resolve<ISiteContext>);
-
-      _requestTrace = new Dictionary<Guid, Dictionary<string, string>>();
-      _engineTraceQueryStringValue = HttpContext.Current.Request.QueryString[ENGINETRACE_KEY] ?? string.Empty;
-
-      EngineTraceTypes result;
-      if (!string.IsNullOrEmpty(_engineTraceQueryStringValue) && Enum.TryParse(_engineTraceQueryStringValue, out result))
-      {
-        SetCookieValueForEngineTrace(_engineTraceQueryStringValue);
-      }
-      else
-      {
-        _engineTraceQueryStringValue = string.Empty;
-      }
+      _engineTraceOn = new Lazy<bool>(() => { return GetEngineTraceOn(); });
     }
 
-    #region "enginetrace" cookie related
-    private bool AtlantisFrameworkCookieExists
+    private bool GetEngineTraceOn()
     {
-      get
+      bool result = false;
+      if ((HttpContext.Current != null) && (_siteContext.Value.IsRequestInternal))
       {
-        HttpCookie engineTraceCookie = HttpContext.Current.Request.Cookies[COOKIE_NAME];
-        return engineTraceCookie != null;
-      }
-    }
-
-    private HttpCookie AtlantisFrameworkCookie
-    {
-      get
-      {
-        return HttpContext.Current.Request.Cookies[COOKIE_NAME];
-      }
-    }
-
-    private void SetCookieValueForEngineTrace(string value)
-    {
-      HttpCookie afCookie = _siteContext.Value.NewCrossDomainMemCookie(COOKIE_NAME);
-      afCookie.Values.Add(ENGINETRACE_KEY, value);
-
-      if (!AtlantisFrameworkCookieExists)
-      {
-        HttpContext.Current.Response.Cookies.Add(afCookie);
-      }
-      else
-      {
-        HttpContext.Current.Response.Cookies.Set(afCookie);
-      }
-    }
-
-    private string GetCookieValueForEngineTrace
-    {
-      get
-      {
-        var engineTrace = "0";
-        if (AtlantisFrameworkCookieExists)
+        string queryenginetrace = HttpContext.Current.Request.QueryString[_TRACEPARAMETER];
+        if (queryenginetrace != null)
         {
-          engineTrace = AtlantisFrameworkCookie.Values[ENGINETRACE_KEY] ?? "0";
+          result = queryenginetrace == "1";
+          WriteCookie(result);
         }
-        return engineTrace;
-      }
-    }
-
-    private EngineTraceTypes EngineTraceType
-    {
-      get
-      {
-        EngineTraceTypes traceType;
-
-        var checkTraceType = !string.IsNullOrEmpty(_engineTraceQueryStringValue)
-                  ? _engineTraceQueryStringValue
-                  : GetCookieValueForEngineTrace;
-
-        switch (checkTraceType)
+        else
         {
-          case "0":
-            traceType = EngineTraceTypes.None;
-            break;
-          case "1":
-            traceType = EngineTraceTypes.Summary;
-            break;
-          case "2":
-            traceType = EngineTraceTypes.Details;
-            break;
-          default:
-            traceType = EngineTraceTypes.None;
-            break;
-        }
-        return traceType;
-      }
-    }
-    #endregion
-
-    internal void Engine_OnProcessRequestStart(RequestData requestData, int requestType, Guid requestId)
-    {
-      if (HttpContext.Current != null)
-      {
-        ProcessRequestStart(requestData, requestType, requestId);
-      }
-    }
-
-    internal void Engine_OnProcessRequestComplete(RequestData requestData, int requestType, Guid requestId, IResponseData oResponse)
-    {
-      if (HttpContext.Current != null)
-      {
-        ProcessRequestEnd(requestData, requestType, requestId, oResponse);
-      }
-    }
-
-    private void ProcessRequestStart(RequestData requestData, int requestType, Guid requestId)
-    {
-      if (_siteContext.Value.IsRequestInternal && EngineTraceType != EngineTraceTypes.None)
-      {
-        Dictionary<string, string> request;
-        if (!_requestTrace.TryGetValue(requestId, out request))
-        {
-          request = new Dictionary<string, string>();
-        }
-
-        request["requestClass"] = requestData.GetType().ToString();
-        request["requestType"] = requestType.ToString(CultureInfo.InvariantCulture);
-        request["start"] = DateTime.Now.ToString(CultureInfo.InvariantCulture);
-
-        if (EngineTraceType == EngineTraceTypes.Details)
-        {
-          try
+          HttpCookie cookieTrace = HttpContext.Current.Request.Cookies[_TRACEPARAMETER];
+          if (cookieTrace != null)
           {
-            request["requestDetails"] = requestData.ToXML();
-          }
-          catch (Exception)
-          {
-            request["requestDetails"] = "Could not parse to xml";
+            result = cookieTrace.Value == "1";
           }
         }
-
-        _requestTrace[requestId] = request;
       }
+
+      return result;
     }
 
-    private void ProcessRequestEnd(RequestData requestData, int requestType, Guid requestId, IResponseData responseData)
+    private void WriteCookie(bool result)
     {
-      if (_siteContext.Value.IsRequestInternal && EngineTraceType != EngineTraceTypes.None)
-      {
-        Dictionary<string, string> request;
-        if (_requestTrace.TryGetValue(requestId, out request))
-        {
-          if (EngineTraceType == EngineTraceTypes.Details)
-          {
-            try
-            {
-              request["responseDetails"] = responseData.ToXML();
-            }
-            catch (Exception)
-            {
-              request["responseDetails"] = "Could not parse to xml";
-            }
-          }
-          request["end"] = DateTime.Now.ToString(CultureInfo.InvariantCulture);
+      string newCookieValue = result ? "1" : "0";
 
-          _requestTrace[requestId] = request;
-        }
+      HttpCookie existingCookie = HttpContext.Current.Request.Cookies[_TRACEPARAMETER];
+      if ((existingCookie == null) || (existingCookie.Value != newCookieValue))
+      {
+        HttpContext.Current.Response.Cookies.Set(new HttpCookie(_TRACEPARAMETER, newCookieValue));
       }
     }
 
-    private List<EngineRequestStats> _engineCallStats;
-    public IEnumerable<EngineRequestStats> EngineTraceStats
+    public IEnumerable<ICompletedRequest> CompletedEngineRequests
     {
       get
       {
-        _engineCallStats = new List<EngineRequestStats>();
+        return _completedRequests.Value;
+      }
+    }
 
-        if (_requestTrace != null)
-        {
-          foreach (var info in _requestTrace)
-          {
-            var stats = new EngineRequestStats();
-            stats.RequestId = info.Key;
-
-            foreach (var requestInfo in info.Value)
-            {
-              switch (requestInfo.Key.ToLowerInvariant())
-              {
-                case "requestclass":
-                  stats.RequestClassName = requestInfo.Value;
-                  break;
-                case "requesttype":
-                  stats.RequestType = requestInfo.Value;
-
-                  ConfigElement configElement;
-                  if (Engine.TryGetConfigElement(Convert.ToInt32(requestInfo.Value), out configElement))
-                  {
-                    try
-                    {
-                      var wsConfigElement = configElement as WsConfigElement;
-                      if (wsConfigElement != null)
-                      {
-                        stats.WebServiceUrl = wsConfigElement.WSURL;
-                      }
-                    }
-                    catch (Exception)
-                    {
-                    }
-                  }
-                  break;
-                case "requestdetails":
-                  stats.RequestDetails = requestInfo.Value;
-                  break;
-                case "responsedetails":
-                  stats.ResponseDetails = requestInfo.Value;
-                  break;
-                case "start":
-                  stats.StartTime= Convert.ToDateTime(requestInfo.Value);
-                  break;
-                case "end":
-                  stats.EndTime= Convert.ToDateTime(requestInfo.Value);
-                  break;
-              }
-            }
-            _engineCallStats.Add(stats);
-          }
-        }
-        return _engineCallStats;
+    internal void LogCompletedRequest(ICompletedRequest completedRequest)
+    {
+      if (_engineTraceOn.Value)
+      {
+        _completedRequests.Value.Add(completedRequest);
       }
     }
   }

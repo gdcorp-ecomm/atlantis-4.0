@@ -1,6 +1,7 @@
 ﻿using Atlantis.Framework.Testing.MockHttpContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Web;
 
 namespace Atlantis.Framework.Providers.Containers.Tests
 {
@@ -48,13 +49,24 @@ namespace Atlantis.Framework.Providers.Containers.Tests
     }
 
     [TestMethod]
+    public void GetAndSetData()
+    {
+      HttpProviderContainer.Instance.SetData<string>("myname", "SuperName");
+      string value = HttpProviderContainer.Instance.GetData<string>("myname", "defaultName");
+      Assert.AreEqual("SuperName", value);
+      HttpContext.Current.Items.Clear();
+      value = HttpProviderContainer.Instance.GetData<string>("myname", "defaultName");
+      Assert.AreEqual("defaultName", value);
+    }
+
+    [TestMethod]
     public void HttpResolveProviderWithZeroParameters()
     {
       HttpProviderContainer.Instance.RegisterProvider<INameProvider, NameProvider>();
       INameProvider nameProvider = HttpProviderContainer.Instance.Resolve<INameProvider>();
 
       INameProvider nameProvider2 = HttpProviderContainer.Instance.Resolve<INameProvider>();
-      Assert.AreEqual(nameProvider, nameProvider2);
+      Assert.IsTrue(ReferenceEquals(nameProvider, nameProvider2));
     }
 
     [TestMethod]
@@ -86,6 +98,21 @@ namespace Atlantis.Framework.Providers.Containers.Tests
       bool success = HttpProviderContainer.Instance.TryResolve(out nameProvider);
       Assert.IsTrue(success);
       Assert.IsNotNull(nameProvider);
+    }
+
+    [TestMethod]
+    public void HttpTryResolveRepeated()
+    {
+      HttpContext.Current.Items.Clear();
+      HttpProviderContainer.Instance.RegisterProvider<INameProvider, NameProvider>();
+      INameProvider nameProvider;
+      bool success = HttpProviderContainer.Instance.TryResolve(out nameProvider);
+      nameProvider.FirstName = "Hello";
+
+      INameProvider sameName;
+      success = HttpProviderContainer.Instance.TryResolve(out sameName);
+      Assert.IsTrue(success);
+      Assert.AreEqual("Hello", sameName.FirstName);
     }
 
     [TestMethod]

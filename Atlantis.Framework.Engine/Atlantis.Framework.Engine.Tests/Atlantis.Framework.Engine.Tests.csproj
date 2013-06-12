@@ -51,11 +51,17 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EngineMonitorTests.cs" />
     <Compile Include="EngineTests.cs" />
+    <Compile Include="EngineTestsLogger.cs" />
+    <Compile Include="MockTriplet\AsyncTripletRequest.cs" />
+    <Compile Include="MockTriplet\TestTripletRequestData.cs" />
+    <Compile Include="MockTriplet\TestTripletResponseData.cs" />
     <Compile Include="MockTriplet\ConfigTestRequest1.cs" />
     <Compile Include="MockTriplet\ConfigTestRequest2.cs" />
     <Compile Include="MockTriplet\ConfigTestRequestData.cs" />
     <Compile Include="MockTriplet\ConfigTestResponseData.cs" />
+    <Compile Include="MockTriplet\SyncTripletRequest.cs" />
     <Compile Include="MockTriplet\TenPercentFailRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

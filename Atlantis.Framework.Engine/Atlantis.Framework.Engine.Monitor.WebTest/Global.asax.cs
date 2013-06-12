@@ -13,7 +13,7 @@ namespace Atlantis.Framework.Engine.Monitor.WebTest
     {
       HttpProviderContainer.Instance.RegisterProvider<ISiteContext, SiteContext>();
       HttpProviderContainer.Instance.RegisterProvider<IDebugContext, DebugProvider>();
-      EngineTrace.Initialize();
+      HttpRequestEngineTrace.Initialize();
 
       System.Web.Routing.RouteTable.Routes.MapEngineMonitorHandler();
     }

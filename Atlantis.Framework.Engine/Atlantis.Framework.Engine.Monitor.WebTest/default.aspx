@@ -13,5 +13,10 @@
     <a href="/_engine/monitor/FirewallTest?responsetype=html">Firewall Test Html</a><br />
     <a href="/_engine/monitor/FirewallTest?responsetype=xml">Firewall Test Xml</a><br />
   </div>
+  <br />
+  <div>
+    Request Trace Data:<br />
+    <%: RequestTraceStats %>
+  </div>
 </body>
 </html>

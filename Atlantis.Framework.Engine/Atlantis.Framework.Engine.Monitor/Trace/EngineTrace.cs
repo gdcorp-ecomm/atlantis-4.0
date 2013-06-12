@@ -1,39 +1,34 @@
 ﻿using System;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using System.Web;
 
 namespace Atlantis.Framework.Engine.Monitor.Trace
 {
-  public static class EngineTrace
+  public static class HttpRequestEngineTrace
   {
     public static void Initialize()
     {
       HttpProviderContainer.Instance.RegisterProvider<EngineTraceProvider, EngineTraceProvider>();
-      Engine.OnProcessRequestStart += Engine_OnProcessRequestStart;
-      Engine.OnProcessRequestComplete += Engine_OnProcessRequestComplete;
+      Engine.OnRequestCompleted += Engine_OnRequestCompleted;
     }
 
-    private static void Engine_OnProcessRequestStart(RequestData requestData, int requestType, Guid requestId)
+    static void Engine_OnRequestCompleted(ICompletedRequest completedRequest)
     {
-      try
+      if ((HttpContext.Current != null) && (completedRequest != null))
       {
-        var traceProvider = HttpProviderContainer.Instance.Resolve<EngineTraceProvider>();
-        traceProvider.Engine_OnProcessRequestStart(requestData, requestType, requestId);
-      }
-      catch (Exception)
-      {
-      }
-    }
-
-    private static void Engine_OnProcessRequestComplete(RequestData requestData, int requestType, Guid requestId, IResponseData responseData)
-    {
-      try
-      {
-        var traceProvider = HttpProviderContainer.Instance.Resolve<EngineTraceProvider>();
-        traceProvider.Engine_OnProcessRequestComplete(requestData, requestType, requestId, responseData);
-      }
-      catch (Exception)
-      {
+        try
+        {
+          EngineTraceProvider trace;
+          if (HttpProviderContainer.Instance.TryResolve<EngineTraceProvider>(out trace))
+          {
+            trace.LogCompletedRequest(completedRequest);
+          }
+        }
+        catch (Exception ex)
+        {
+          AtlantisException exception = new AtlantisException("HttpRequestEngineTrace.OnRequestCompleted", 0, ex.Message + ex.StackTrace, string.Empty);
+        }
       }
     }
   }

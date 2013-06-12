@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s0="urn:WSCgdAdWordCouponsService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:WSCgdAdWordCouponsService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:WSCgdAdWordCouponsService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCouponsIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCouponsOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProvisionCouponIn">
+    <wsdl:part name="bstrShopperID" type="s:string" />
+    <wsdl:part name="lCouponKey" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="ProvisionCouponOut">
+    <wsdl:part name="return" type="s:string" />
+  </wsdl:message>
+  <wsdl:portType name="WSCgdAdWordCouponsServiceSoap">
+    <wsdl:operation name="GetCoupons">
+      <wsdl:input message="s0:GetCouponsIn" />
+      <wsdl:output message="s0:GetCouponsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProvisionCoupon">
+      <wsdl:input message="s0:ProvisionCouponIn" />
+      <wsdl:output message="s0:ProvisionCouponOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSCgdAdWordCouponsServiceSoap" type="s0:WSCgdAdWordCouponsServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="GetCoupons">
+      <soap:operation soapAction="#GetCoupons" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdAdWordCouponsService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdAdWordCouponsService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProvisionCoupon">
+      <soap:operation soapAction="#ProvisionCoupon" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:WSCgdAdWordCouponsService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:WSCgdAdWordCouponsService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCgdAdWordCouponsService">
+    <wsdl:port name="WSCgdAdWordCouponsServiceSoap" binding="s0:WSCgdAdWordCouponsServiceSoap">
+      <soap:address location="http://gdcomm.dev.glbt1.gdg:80/WSCgdAdWordCoupons/WSCgdAdWordCoupons.dll?Handler=Default" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

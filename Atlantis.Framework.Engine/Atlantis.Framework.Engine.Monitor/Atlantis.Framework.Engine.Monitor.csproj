@@ -44,9 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Trace\EngineTrace.cs" />
-    <Compile Include="Trace\EngineTraceProvider.cs" />
-    <Compile Include="Trace\EngineTraceTypes.cs" />
+    <Compile Include="Trace\HttpRequestEngineTrace.cs" />
+    <Compile Include="Trace\HttpRequestEngineTraceProvider.cs" />
     <Compile Include="FirewallTest.cs" />
     <Compile Include="Firewall\FirewallResult.cs" />
     <Compile Include="Firewall\TimeoutSocket.cs" />

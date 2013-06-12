@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Atlantis.Framework.Engine.Monitor.Trace
 {
-  public class EngineTraceProvider : ProviderBase
+  public class HttpRequestEngineTraceProvider : ProviderBase
   {
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<List<ICompletedRequest>> _completedRequests;
@@ -13,7 +13,7 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
     private readonly Lazy<bool> _engineTraceOn;
     private const string _TRACEPARAMETER = "atlantisenginetrace";
 
-    public EngineTraceProvider(IProviderContainer container) 
+    public HttpRequestEngineTraceProvider(IProviderContainer container) 
       : base(container)
     {
       _completedRequests = new Lazy<List<ICompletedRequest>>(() => {return new List<ICompletedRequest>(10);});

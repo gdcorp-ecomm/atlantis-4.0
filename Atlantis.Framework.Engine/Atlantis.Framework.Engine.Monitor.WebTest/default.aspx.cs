@@ -16,7 +16,7 @@ namespace Atlantis.Framework.Engine.Monitor.WebTest
     {
       get
       {
-        var trace = HttpProviderContainer.Instance.Resolve<EngineTraceProvider>();
+        var trace = HttpProviderContainer.Instance.Resolve<HttpRequestEngineTraceProvider>();
 
         int success = 0;
         int failed = 0;

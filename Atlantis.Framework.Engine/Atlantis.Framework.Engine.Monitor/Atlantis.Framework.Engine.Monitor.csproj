@@ -52,6 +52,7 @@
     <Compile Include="MonitorData.cs" />
     <Compile Include="MonitorDataTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Trace\IEngineTraceProvider.cs" />
     <Compile Include="Web\EngineMonitorHttpHandler.cs" />
     <Compile Include="Web\EngineMonitorRouteCollectionExtensions.cs" />
     <Compile Include="Web\EngineMonitorRouteHandler.cs" />

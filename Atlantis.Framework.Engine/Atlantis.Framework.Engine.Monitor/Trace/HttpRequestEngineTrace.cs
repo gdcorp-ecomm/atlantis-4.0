@@ -7,9 +7,9 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
 {
   public static class HttpRequestEngineTrace
   {
-    public static void Initialize()
+    public static void Register()
     {
-      HttpProviderContainer.Instance.RegisterProvider<HttpRequestEngineTraceProvider, HttpRequestEngineTraceProvider>();
+      HttpProviderContainer.Instance.RegisterProvider<IEngineTraceProvider, HttpRequestEngineTraceProvider>();
       Engine.OnRequestCompleted += Engine_OnRequestCompleted;
     }
 
@@ -19,8 +19,8 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
       {
         try
         {
-          HttpRequestEngineTraceProvider trace;
-          if (HttpProviderContainer.Instance.TryResolve<HttpRequestEngineTraceProvider>(out trace))
+          IEngineTraceProvider trace;
+          if (HttpProviderContainer.Instance.TryResolve(out trace))
           {
             trace.LogCompletedRequest(completedRequest);
           }

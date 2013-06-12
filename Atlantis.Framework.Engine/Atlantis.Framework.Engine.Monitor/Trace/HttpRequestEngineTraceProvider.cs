@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Atlantis.Framework.Engine.Monitor.Trace
 {
-  public class HttpRequestEngineTraceProvider : ProviderBase
+  public class HttpRequestEngineTraceProvider : ProviderBase, IEngineTraceProvider
   {
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<List<ICompletedRequest>> _completedRequests;
@@ -65,7 +65,7 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
       }
     }
 
-    internal void LogCompletedRequest(ICompletedRequest completedRequest)
+    public void LogCompletedRequest(ICompletedRequest completedRequest)
     {
       if (_engineTraceOn.Value)
       {

@@ -17,9 +17,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Web.RenderPipeline", "..\RenderPipeline\Atlantis.Framework.Web.RenderPipeline\Atlantis.Framework.Web.RenderPipeline.csproj", "{1FF847B7-4B9E-4C2E-A91E-759B0E772C40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.PlaceHolder.Interface", "..\..\Providers\PlaceHolder\Atlantis.Framework.Providers.PlaceHolder.Interface\Atlantis.Framework.Providers.PlaceHolder.Interface.csproj", "{E9297A57-BDAF-45A3-AC6C-891F5235385F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.ContentInjection", "..\..\Render\ContentInjection\Atlantis.Framework.Render.ContentInjection\Atlantis.Framework.Render.ContentInjection.csproj", "{772F3587-7323-4DC4-A8F3-B20E4B48E8D7}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 10
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/gd
 		SccLocalPath0 = .
@@ -50,6 +54,14 @@ Global
 		SccProjectTopLevelParentUniqueName7 = CDSContent.sln
 		SccProjectName7 = ../RenderPipeline/Atlantis.Framework.Web.RenderPipeline
 		SccLocalPath7 = ..\\RenderPipeline\\Atlantis.Framework.Web.RenderPipeline
+		SccProjectUniqueName8 = ..\\..\\Providers\\PlaceHolder\\Atlantis.Framework.Providers.PlaceHolder.Interface\\Atlantis.Framework.Providers.PlaceHolder.Interface.csproj
+		SccProjectTopLevelParentUniqueName8 = CDSContent.sln
+		SccProjectName8 = ../../Providers/PlaceHolder/Atlantis.Framework.Providers.PlaceHolder.Interface
+		SccLocalPath8 = ..\\..\\Providers\\PlaceHolder\\Atlantis.Framework.Providers.PlaceHolder.Interface
+		SccProjectUniqueName9 = ..\\..\\Render\\ContentInjection\\Atlantis.Framework.Render.ContentInjection\\Atlantis.Framework.Render.ContentInjection.csproj
+		SccProjectTopLevelParentUniqueName9 = CDSContent.sln
+		SccProjectName9 = ../../Render/ContentInjection/Atlantis.Framework.Render.ContentInjection
+		SccLocalPath9 = ..\\..\\Render\\ContentInjection\\Atlantis.Framework.Render.ContentInjection
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +96,14 @@ Global
 		{1FF847B7-4B9E-4C2E-A91E-759B0E772C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF847B7-4B9E-4C2E-A91E-759B0E772C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF847B7-4B9E-4C2E-A91E-759B0E772C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9297A57-BDAF-45A3-AC6C-891F5235385F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9297A57-BDAF-45A3-AC6C-891F5235385F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9297A57-BDAF-45A3-AC6C-891F5235385F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9297A57-BDAF-45A3-AC6C-891F5235385F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{772F3587-7323-4DC4-A8F3-B20E4B48E8D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{772F3587-7323-4DC4-A8F3-B20E4B48E8D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{772F3587-7323-4DC4-A8F3-B20E4B48E8D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{772F3587-7323-4DC4-A8F3-B20E4B48E8D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,5 +115,7 @@ Global
 		{43ECC9F8-C897-4AE0-8C53-22B2691D6995} = {D0650014-FF46-4484-817C-B0C87CA939CD}
 		{0D7F076F-1809-437B-B045-E35A7E68E423} = {D0650014-FF46-4484-817C-B0C87CA939CD}
 		{1FF847B7-4B9E-4C2E-A91E-759B0E772C40} = {D0650014-FF46-4484-817C-B0C87CA939CD}
+		{E9297A57-BDAF-45A3-AC6C-891F5235385F} = {D0650014-FF46-4484-817C-B0C87CA939CD}
+		{772F3587-7323-4DC4-A8F3-B20E4B48E8D7} = {D0650014-FF46-4484-817C-B0C87CA939CD}
 	EndGlobalSection
 EndGlobal

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryData.cs" />
+    <Compile Include="GeneralGtldData.cs" />
     <Compile Include="GeneralEoiData.cs" />
     <Compile Include="DotTypeEoiEngineRequests.cs" />
     <Compile Include="DotTypeEoiProvider.cs" />

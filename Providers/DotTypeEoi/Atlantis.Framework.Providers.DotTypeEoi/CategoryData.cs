@@ -8,9 +8,11 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
     {
       CategoryId = category.CategoryId;
       Name = category.Name;
+      DisplayName = category.DisplayName;
     }
 
     public int CategoryId { get; set; }
     public string Name { get; set; }
+    public string DisplayName { get; set; }
   }
 }

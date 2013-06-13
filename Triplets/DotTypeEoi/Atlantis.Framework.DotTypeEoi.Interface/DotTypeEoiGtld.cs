@@ -34,6 +34,9 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     public string Comments { get; set; }
 
     [IgnoreDataMember()]
+    public bool IsFeatured { get; set; }
+
+    [IgnoreDataMember()]
     public ActionButtonTypes ActionButtonType { get; set; }
   }
 }

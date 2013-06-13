@@ -19,9 +19,13 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
       get
       {
         IList<IDotTypeEoiCategory> categories;
-        if (CategoriesObject != null)
+        if (CategoriesObject != null && CategoriesObject.CategoryList != null && CategoriesObject.CategoryList.Count > 0)
         {
-          categories = (IList<IDotTypeEoiCategory>)CategoriesObject.CategoryList;
+          categories = new List<IDotTypeEoiCategory>(CategoriesObject.CategoryList.Count);
+          foreach (var category in CategoriesObject.CategoryList)
+          {
+            categories.Add(category);
+          }
         }
         else
         {

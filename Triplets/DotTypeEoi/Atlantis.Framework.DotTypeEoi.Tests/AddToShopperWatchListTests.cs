@@ -15,10 +15,10 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     public void AddToShopperWatchListGoodRequest()
     {
       var gTlds = new List<IDotTypeEoiGtld>(1);
-      var gTld = new DotTypeEoiGtld { Id = 42, GtldSubCategoryId = 2952 };
+      var gTld = new DotTypeEoiGtld { Id = 1609, GtldSubCategoryId = 10320 };
       const string displayTime = "2013-05-23 10:29:55";
       gTlds.Add(gTld);
-      var request = new AddToShopperWatchListRequestData("861126", displayTime, gTlds, "en-us");
+      var request = new AddToShopperWatchListRequestData("861126", displayTime, gTlds, "en");
       var response = (AddToShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, 704);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ResponseMessage));
@@ -29,7 +29,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     {
       try
       {
-        var request = new AddToShopperWatchListRequestData("", "", new List<IDotTypeEoiGtld>(), "en-us");
+        var request = new AddToShopperWatchListRequestData("", "", new List<IDotTypeEoiGtld>(), "en");
       }
       catch (Exception)
       {
@@ -41,10 +41,10 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     public void AddToShopperWatchListRequestToXml()
     {
       var gTlds = new List<IDotTypeEoiGtld>(1);
-      var gTld = new DotTypeEoiGtld { Id = 18, GtldSubCategoryId = 234 };
+      var gTld = new DotTypeEoiGtld { Id = 1609, GtldSubCategoryId = 10320 };
       const string displayTime = "2013-05-23 10:29:55";
       gTlds.Add(gTld);
-      var request = new AddToShopperWatchListRequestData("", displayTime, gTlds, "en-us");
+      var request = new AddToShopperWatchListRequestData("", displayTime, gTlds, "en");
       Assert.AreEqual(true, !string.IsNullOrEmpty(request.ToXML()));
     }
 
@@ -52,10 +52,10 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
     public void AddToShopperWatchListResponseToXml()
     {
       var gTlds = new List<IDotTypeEoiGtld>(1);
-      var gTld = new DotTypeEoiGtld { Id = 18, GtldSubCategoryId = 234 };
+      var gTld = new DotTypeEoiGtld { Id = 1609, GtldSubCategoryId = 10320 };
       const string displayTime = "2013-05-23 10:29:55";
       gTlds.Add(gTld);
-      var request = new AddToShopperWatchListRequestData("", displayTime, gTlds, "en-us");
+      var request = new AddToShopperWatchListRequestData("", displayTime, gTlds, "en");
       var response = (AddToShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, 704);
       Assert.AreEqual(true, response.IsSuccess);
       Assert.AreEqual(true, !string.IsNullOrEmpty(response.ToXML()));

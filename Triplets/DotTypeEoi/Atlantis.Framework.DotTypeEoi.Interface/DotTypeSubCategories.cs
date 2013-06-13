@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Atlantis.Framework.DotTypeEoi.Interface
 {
@@ -6,6 +7,6 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
   public class DotTypeEoiSubCategories
   {
     [DataMember(Name = "subCategory")]
-    public DotTypeEoiSubCategory SubCategoryObject { get; set; }
+    public IList<DotTypeEoiSubCategory> SubCategoryListObject { get; set; }
   }
 }

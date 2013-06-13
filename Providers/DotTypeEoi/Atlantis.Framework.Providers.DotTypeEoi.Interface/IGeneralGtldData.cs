@@ -2,9 +2,10 @@
 
 namespace Atlantis.Framework.Providers.DotTypeEoi.Interface
 {
-  public interface IGeneralEoiData
+  public interface IGeneralGtldData
   {
     string DisplayTime { get; }
-    IList<IDotTypeEoiCategory> Categories { get; }
+    IList<IDotTypeEoiGtld> Gtlds { get; }
+    int TotalPages { get; }
   }
 }

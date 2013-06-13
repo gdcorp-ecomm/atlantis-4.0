@@ -5,15 +5,13 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 {
   class GeneralEoiData : IGeneralEoiData
   {
-    public GeneralEoiData(string displayTime, IList<IDotTypeEoiGtld> gtlds, int totalPages)
+    public GeneralEoiData(string displayTime, IList<IDotTypeEoiCategory> categories)
     {
       DisplayTime = displayTime;
-      Gtlds = gtlds;
-      TotalPages = totalPages;
+      Categories = categories;
     }
 
     public string DisplayTime { get; set; }
-    public IList<IDotTypeEoiGtld> Gtlds { get; set; }
-    public int TotalPages { get; set; }
+    public IList<IDotTypeEoiCategory> Categories { get; set; }
   }
 }

@@ -11,6 +11,7 @@
     int GtldSubCategoryId { get; set; }
     int DisplayOrder { get; set; }
     string Comments { get; set; }
+    bool IsFeatured { get; set; }
     ActionButtonTypes ActionButtonType { get; set; }
   }
 }

@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionButtonTypes.cs" />
+    <Compile Include="IGeneralGtldData.cs" />
+    <Compile Include="IDotTypeEoiSubCategory.cs" />
     <Compile Include="IGeneralEoiData.cs" />
     <Compile Include="ICategoryData.cs" />
     <Compile Include="IShopperWatchListResponse.cs" />

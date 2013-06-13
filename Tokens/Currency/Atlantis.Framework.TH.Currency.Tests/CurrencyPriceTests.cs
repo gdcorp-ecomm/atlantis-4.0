@@ -1,8 +1,6 @@
-﻿using System;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Atlantis.Framework.Tokens.Interface;
@@ -11,6 +9,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.TH.Currency.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.Currency.Impl.dll")]
   public class CurrencyPriceTests
   {
     private const string _TOKEN_FORMAT = "[@T[currencyprice:{0}]@T]";
@@ -21,22 +21,27 @@ namespace Atlantis.Framework.TH.Currency.Tests
       TokenManager.RegisterTokenHandler(new CurrencyPriceTokenHandler());
     }
 
-    private void SetBasicContextAndProviders()
+    private IProviderContainer SetBasicContextAndProviders()
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://www.godaddy.com/default.aspx?ci=1", "ci=1");
-      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
-      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
-      HttpProviderContainer.Instance.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
+      MockHttpRequest request = new MockHttpRequest("http://www.godaddy.com/default.aspx?ci=1");
+      MockHttpContext.SetFromWorkerRequest(request);
+
+      MockProviderContainer container = new MockProviderContainer();
+      container.RegisterProvider<ISiteContext, MockSiteContext>();
+      container.RegisterProvider<IShopperContext, MockShopperContext>();
+      container.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
+
+      return container;
     }
 
     private string TokenSuccess(string xmlTokenData)
     {
-      SetBasicContextAndProviders();
+      var container = SetBasicContextAndProviders();
 
       string outputText;
 
       string token = string.Format(_TOKEN_FORMAT, xmlTokenData);
-      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, HttpProviderContainer.Instance, out outputText);
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
       Assert.AreEqual(TokenEvaluationResult.Success, result);
       Assert.AreNotEqual(string.Empty, outputText);
 
@@ -46,12 +51,12 @@ namespace Atlantis.Framework.TH.Currency.Tests
     // Negative test
     private string TokenFail(string xmlTokenData)
     {
-      SetBasicContextAndProviders();
+      var container = SetBasicContextAndProviders();
 
       string outputText;
 
       string token = string.Format(_TOKEN_FORMAT, xmlTokenData);
-      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, HttpProviderContainer.Instance, out outputText);
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
       Assert.AreEqual(TokenEvaluationResult.Errors, result);
 
       return outputText;

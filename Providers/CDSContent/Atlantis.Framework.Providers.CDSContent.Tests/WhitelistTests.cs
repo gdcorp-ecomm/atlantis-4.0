@@ -67,8 +67,8 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     [TestMethod]
     public void UrlExists_WhitelistTests()
     {
-      string appName = "sales/unittest";
-      string relativePath = "/hosting/email-hosting";
+      string appName = "sales";
+      string relativePath = "robots.txt";
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
       Assert.IsTrue(whiteListResult.Exists);

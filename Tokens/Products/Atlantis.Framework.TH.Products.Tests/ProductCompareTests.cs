@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Tokens.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Testing.MockProviders;
 using Atlantis.Framework.Providers.Interface.Currency;
@@ -17,7 +16,9 @@ namespace Atlantis.Framework.TH.Products.Tests
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.PLSignupInfo.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.ProductOffer.Impl.dll")]
-  [DeploymentItem("Interop.gdDataCacheLib.dll")]
+  [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.Currency.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.EcommPricing.Impl.dll")]
   public class ProductCompareTests
   {
     const string _tokenFormat = "[@T[productcompare:{0}]@T]";
@@ -28,48 +29,53 @@ namespace Atlantis.Framework.TH.Products.Tests
       TokenManager.RegisterTokenHandler(new ProductCompareTokenHandler());
     }
 
-    private void SetBasicContextAndProviders()
+    private IProviderContainer SetBasicContextAndProviders()
     {
-      MockHttpContext.SetMockHttpContext("default.aspx", "http://www.godaddy.com/default.aspx?ci=1", "ci=1");
-      HttpProviderContainer.Instance.RegisterProvider<ISiteContext, MockSiteContext>();
-      HttpProviderContainer.Instance.RegisterProvider<IShopperContext, MockShopperContext>();
-      HttpProviderContainer.Instance.RegisterProvider<IShopperPreferencesProvider, MockShopperPreference>();
-      HttpProviderContainer.Instance.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
-      HttpProviderContainer.Instance.RegisterProvider<IProductProvider, ProductProvider>();
+      MockHttpRequest request = new MockHttpRequest("http://www.godaddy.com/default.aspx?ci=1");
+      MockHttpContext.SetFromWorkerRequest(request);
+
+      IProviderContainer result = new MockProviderContainer();
+      result.RegisterProvider<ISiteContext, MockSiteContext>();
+      result.RegisterProvider<IShopperContext, MockShopperContext>();
+      result.RegisterProvider<IShopperPreferencesProvider, MockShopperPreference>();
+      result.RegisterProvider<ICurrencyProvider, CurrencyProvider>();
+      result.RegisterProvider<IProductProvider, ProductProvider>();
+
+      return result;
     }
 
     private void TokenSuccess(string xmlTokenData, string shopperCurrency = null)
     {
-      SetBasicContextAndProviders();
+      var container = SetBasicContextAndProviders();
 
       if (shopperCurrency != null)
       {
-        IShopperPreferencesProvider preferences = HttpProviderContainer.Instance.Resolve<IShopperPreferencesProvider>();
+        IShopperPreferencesProvider preferences = container.Resolve<IShopperPreferencesProvider>();
         preferences.UpdatePreference("gdshop_currencyType", shopperCurrency);
       }
 
       string outputText;
 
       string token = string.Format(_tokenFormat, xmlTokenData);
-      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, HttpProviderContainer.Instance, out outputText);
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
       Assert.AreEqual(TokenEvaluationResult.Success, result);
       Assert.AreNotEqual(string.Empty, outputText);
     }
     
     private void TokenEmpty(string xmlTokenData, string shopperCurrency = null)
     {
-      SetBasicContextAndProviders();
+      var container = SetBasicContextAndProviders();
 
       if (shopperCurrency != null)
       {
-        IShopperPreferencesProvider preferences = HttpProviderContainer.Instance.Resolve<IShopperPreferencesProvider>();
+        IShopperPreferencesProvider preferences = container.Resolve<IShopperPreferencesProvider>();
         preferences.UpdatePreference("gdshop_currencyType", shopperCurrency);
       }
 
       string outputText;
 
       string token = string.Format(_tokenFormat, xmlTokenData);
-      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, HttpProviderContainer.Instance, out outputText);
+      TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
       Assert.AreEqual(TokenEvaluationResult.Errors, result);
       Assert.AreEqual(string.Empty, outputText);
     }

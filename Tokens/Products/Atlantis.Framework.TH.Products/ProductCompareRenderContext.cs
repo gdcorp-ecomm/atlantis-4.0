@@ -1,5 +1,4 @@
 ﻿using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Currency;
 using Atlantis.Framework.Providers.Interface.Currency;
 using Atlantis.Framework.Providers.Interface.Products;
 using Atlantis.Framework.Tokens.Interface;
@@ -133,9 +132,16 @@ namespace Atlantis.Framework.TH.Products
 
     protected string GetPriceText(int price)
     {
-      var ci = CurrencyData.GetCurrencyInfo("USD");
-      var cp = new CurrencyPrice(price, ci, CurrencyPriceType.Transactional);
-      return _currency.PriceText(cp, _maskPricesIfAllowed.Value);
+      var ci = _currency.GetCurrencyInfo("USD");
+      var cp = _currency.NewCurrencyPrice(price, ci, CurrencyPriceType.Transactional);
+
+      PriceTextOptions options = PriceTextOptions.None;
+      if (_maskPricesIfAllowed.Value)
+      {
+        options = PriceTextOptions.MaskPrices;
+      }
+
+      return _currency.PriceText(cp, options);
     }
 
     #region RenderMethods

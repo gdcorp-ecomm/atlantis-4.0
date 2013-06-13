@@ -1,38 +1,99 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
 using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.DotTypeClaims.Interface
 {
   public class DotTypeClaimsResponseData : IResponseData
   {
+    public static DotTypeClaimsResponseData Empty { get; private set; }
+
+    static DotTypeClaimsResponseData()
+    {
+      Empty = new DotTypeClaimsResponseData();
+    }
+
     private readonly string _responseXml;
     private readonly AtlantisException _exception;
     private readonly bool _isSuccess;
-    private readonly string _claimsXml;
+    private readonly Dictionary<string, string> _noticeXmlByDomain;
+    private readonly Dictionary<string, string> _claimsXmlByDomain;
 
-    public DotTypeClaimsResponseData(string responseXml)
+    private DotTypeClaimsResponseData()
     {
-      _responseXml = responseXml;
-      _exception = null;
-      _claimsXml = responseXml;
-      _isSuccess = true;
+      _noticeXmlByDomain = new Dictionary<string, string>();
+      _claimsXmlByDomain = new Dictionary<string, string>();
     }
 
-    public DotTypeClaimsResponseData(string responseXml, AtlantisException exAtlantis)
+    public static DotTypeClaimsResponseData FromResponseXml(string responseXml)
     {
-      _responseXml = responseXml;
-      _exception = exAtlantis;
+      if (!string.IsNullOrEmpty(responseXml))
+      {
+        return new DotTypeClaimsResponseData(responseXml);
+      }
+      
+      return Empty;
     }
 
-    public DotTypeClaimsResponseData(string responseXml, RequestData requestData, Exception ex)
+    private DotTypeClaimsResponseData(string responseXml)
     {
-      _responseXml = responseXml;
-      _exception = new AtlantisException(requestData, "DotTypeClaimsResponseData", ex.Message, requestData.ToXML());
+      try
+      {
+        _responseXml = responseXml;
+
+        _noticeXmlByDomain = new Dictionary<string, string>();
+        _claimsXmlByDomain = new Dictionary<string, string>();
+
+        XElement strResponse = XElement.Parse(responseXml);
+
+        bool.TryParse(strResponse.Attribute("success").Value, out _isSuccess);
+
+        if (_isSuccess)
+        {
+
+          var domains = strResponse.Descendants("domain");
+          foreach (var domain in domains)
+          {
+            var noticeElement = domain.Element("notice");
+            if (noticeElement != null)
+            {
+              _noticeXmlByDomain[domain.Attribute("name").Value] = noticeElement.ToString();
+
+              var claimsElement = noticeElement.Element("claims");
+              if (claimsElement != null)
+              {
+                _claimsXmlByDomain[domain.Attribute("name").Value] = claimsElement.ToString();
+              }
+            }
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        var exception = new AtlantisException("DotTypeClaimsResponseData.FromResponseXml", "0", ex.Message + ex.StackTrace, responseXml, null, null);
+        Engine.Engine.LogAtlantisException(exception);
+      }
     }
 
-    public string ClaimsXml
+    public static DotTypeClaimsResponseData FromException(AtlantisException exception)
     {
-      get { return _claimsXml; }
+      return new DotTypeClaimsResponseData(exception);
+    }
+
+    private DotTypeClaimsResponseData(AtlantisException exception)
+    {
+      _exception = exception;
+    }
+
+    public bool TryGetNoticeXmlByDomain(string domain, out string noticeXml)
+    {
+      return _noticeXmlByDomain.TryGetValue(domain, out noticeXml);
+    }
+
+    public bool TryGetClaimsXmlByDomain(string domain, out string claimsXml)
+    {
+      return _claimsXmlByDomain.TryGetValue(domain, out claimsXml);
     }
 
     public bool IsSuccess

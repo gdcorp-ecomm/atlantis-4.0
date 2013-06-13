@@ -20,19 +20,7 @@ namespace Atlantis.Framework.DotTypeValidation.Impl
           regAppTokenWebSvc.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
           responseXml = regAppTokenWebSvc.RegisterPIIDataExt(dotTypeValidationRequestData.ToXML());
 
-          /*if (responseXml.IndexOf("<error>", StringComparison.OrdinalIgnoreCase) > -1)
-          {
-            AtlantisException exAtlantis = new AtlantisException(oRequestData,
-                                                                 "ShopperRequest.RequestHandler",
-                                                                 responseXml,
-                                                                 oRequestData.ToXML());
-
-            oResponseData = new DotTypeValidationResponseData(responseXml, exAtlantis);
-          }
-          else
-          {*/
           responseData = new DotTypeValidationResponseData(responseXml);
-          //}
         }
       }
       catch (Exception ex)

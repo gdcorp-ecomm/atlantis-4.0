@@ -6,7 +6,6 @@ namespace Atlantis.Framework.DotTypeForms.Interface
   public class DotTypeFormsForm : IDotTypeFormsForm
   {
     public string FormName { get; set; }
-    public string FormType { get; set; }
     public string FormDescription { get; set; }
     public string FormGetMethod { get; set; }
     public string FormSetMethod { get; set; }

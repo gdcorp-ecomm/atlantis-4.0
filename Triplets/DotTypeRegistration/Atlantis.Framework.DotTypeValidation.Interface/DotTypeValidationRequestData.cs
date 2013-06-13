@@ -12,15 +12,31 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
     public string ServerName { get; set; }
     public int TldId { get; set; }
     public string Phase { get; set; }
-    public Dictionary<string, string> Fields = new Dictionary<string,string>();
+    public string Category { get; set; }
 
-    public DotTypeValidationRequestData(string clientApplication, string serverName, int tldId, string phase, Dictionary<string, string> fields)
+    public Dictionary<string, string> Fields = new Dictionary<string, string>();
+    public string NoticeXml { get; set; }
+
+    public DotTypeValidationRequestData(string clientApplication, string serverName, int tldId, string phase, string category,
+                                        Dictionary<string, string> fields)
     {
       ClientApplication = clientApplication;
       ServerName = serverName;
       TldId = tldId;
       Phase = phase;
+      Category = category;
       Fields = fields;
+    }
+
+    public DotTypeValidationRequestData(string clientApplication, string serverName, int tldId, string phase, string category,
+                                        string noticeXml)
+    {
+      ClientApplication = clientApplication;
+      ServerName = serverName;
+      TldId = tldId;
+      Phase = phase;
+      Category = category;
+      NoticeXml = noticeXml;
     }
 
     public override string ToXML()
@@ -30,13 +46,22 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
       rootElement.Add(new XAttribute("servername", ServerName));
       rootElement.Add(new XAttribute("tldid", TldId));
       rootElement.Add(new XAttribute("phase", Phase));
+      rootElement.Add(new XAttribute("category", Category));
 
-      foreach (var field in Fields)
+      if (Fields.Count > 0)
       {
-        var fieldElement = new XElement("key");
-        fieldElement.Add(new XAttribute("name", field.Key));
-        fieldElement.Add(new XAttribute("value", field.Value));
-        rootElement.Add(fieldElement);
+        foreach (var field in Fields)
+        {
+          var fieldElement = new XElement("key");
+          fieldElement.Add(new XAttribute("name", field.Key));
+          fieldElement.Add(new XAttribute("value", field.Value));
+          rootElement.Add(fieldElement);
+        }
+      }
+
+      if (!string.IsNullOrEmpty(NoticeXml))
+      {
+        rootElement.Add(NoticeXml);
       }
 
       return rootElement.ToString();

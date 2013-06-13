@@ -35,12 +35,10 @@ namespace Atlantis.Framework.DotTypeForms.Interface
             {
               var formName = formElement.Attribute("name");
               var formDescription = formElement.Attribute("description");
-              var formType = formElement.Attribute("type") ?? formElement.Attribute("rendertype");
               var formGetMethod = formElement.Attribute("getmethod");
               var formSetMethod = formElement.Attribute("setmethod");
 
-              if (formName == null || formDescription == null || formType == null || formGetMethod == null ||
-                  formSetMethod == null)
+              if (formName == null || formDescription == null || formGetMethod == null || formSetMethod == null)
               {
                 const string message =
                   "Xml with invalid FormName, FormDescription, FormType, FormGetMethod or FormSetMethod";
@@ -53,7 +51,6 @@ namespace Atlantis.Framework.DotTypeForms.Interface
                                        {
                                          FormName = formName.Value,
                                          FormDescription = formDescription.Value,
-                                         FormType = formType.Value,
                                          FormGetMethod = formGetMethod.Value,
                                          FormSetMethod = formSetMethod.Value,
                                          ValidationRuleCollection = ParseValidationRuleCollection(formElement)
@@ -123,6 +120,8 @@ namespace Atlantis.Framework.DotTypeForms.Interface
           FieldLabel = field.Attribute("label").Value,
           FieldDescription = field.Attribute("description").Value,
           FieldType = field.Attribute("type").Value,
+          DataSource = field.Attribute("datasource") != null ? field.Attribute("datasource").Value : string.Empty,
+          DataSourceMethod = field.Attribute("method") != null ? field.Attribute("method").Value : string.Empty,
           ValidationRuleCollection = ParseValidationRuleCollection(field),
           ItemCollection = ParseItemCollection(field)
         };

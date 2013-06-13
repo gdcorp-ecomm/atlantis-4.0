@@ -69,27 +69,30 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
       {
         var rootElement = XElement.Parse(_responseXml);
 
-        if (rootElement.Name.ToString().Equals("errors"))
+        if (!rootElement.Name.LocalName.Equals("error"))
         {
-          _hasErrors = true;
-          _validationErrors = new Dictionary<string, string>();
-
-          foreach (var errorElement in rootElement.Descendants("error"))
+          if (rootElement.Name.LocalName.Equals("errors"))
           {
-            var key = errorElement.Attribute("key").Value;
-            var errorMessage = errorElement.Value;
-            _validationErrors.Add(key, errorMessage);
+            _hasErrors = true;
+            _validationErrors = new Dictionary<string, string>();
+
+            foreach (var errorElement in rootElement.Descendants("error"))
+            {
+              var key = errorElement.Attribute("key").Value;
+              var errorMessage = errorElement.Value;
+              _validationErrors.Add(key, errorMessage);
+            }
+
+            _token = string.Empty;
+          }
+          else if (rootElement.Name.ToString().Equals("success"))
+          {
+            _hasErrors = false;
+            _token = rootElement.Value;
           }
 
-          _token = string.Empty;
+          _isSuccess = true;
         }
-        else if (rootElement.Name.ToString().Equals("success"))
-        {
-          _hasErrors = false;
-          _token = rootElement.Value;
-        }
-
-        _isSuccess = true;
       }
       catch (Exception ex)
       {

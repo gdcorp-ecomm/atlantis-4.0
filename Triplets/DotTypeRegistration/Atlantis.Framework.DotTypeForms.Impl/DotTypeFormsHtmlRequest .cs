@@ -4,28 +4,28 @@ using System;
 
 namespace Atlantis.Framework.DotTypeForms.Impl
 {
-  public class DotTypeFormsXmlRequest : IRequest
+  public class DotTypeFormsHtmlRequest : IRequest
   {
     public IResponseData RequestHandler(RequestData requestData, ConfigElement config)
     {
-      DotTypeFormsXmlResponseData responseData;
-      var responseXml = string.Empty;
+      DotTypeFormsHtmlResponseData responseData;
+      var responseHtml = string.Empty;
 
       try
       {
-        var dotTypeFormsXmlSchemaRequestData = (DotTypeFormsXmlRequestData)requestData;
+        var dotTypeFormsHtmlSchemaRequestData = (DotTypeFormsHtmlRequestData)requestData;
         using (var tuiApiService = new TuiAPI.TuiApi())
         {
           tuiApiService.Url = ((WsConfigElement)config).WSURL;
           tuiApiService.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
-          responseXml = tuiApiService.GetFormSchemas(dotTypeFormsXmlSchemaRequestData.ToXML());
+          responseHtml = tuiApiService.GetForms(dotTypeFormsHtmlSchemaRequestData.ToXML());
 
-          responseData = new DotTypeFormsXmlResponseData(responseXml);
+          responseData = new DotTypeFormsHtmlResponseData(responseHtml);
         }
       }
       catch (Exception ex)
       {
-        responseData = new DotTypeFormsXmlResponseData(responseXml, requestData, ex);
+        responseData = new DotTypeFormsHtmlResponseData(responseHtml, requestData, ex);
       }
 
       return responseData;

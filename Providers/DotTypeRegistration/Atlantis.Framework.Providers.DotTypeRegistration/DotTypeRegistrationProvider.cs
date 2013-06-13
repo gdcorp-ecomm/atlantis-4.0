@@ -64,7 +64,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool ValidateDotTypeRegistration(string clientApplication, string serverName, int tldId, string phase, Dictionary<string, string> fields,
+    public bool ValidateDotTypeRegistration(string clientApplication, string serverName, int tldId, string phase, string category, Dictionary<string, string> fields,
       out bool hasErrors, out Dictionary<string, string> validationErrors, out string token)
     {
       var success = false;
@@ -74,7 +74,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 
       try
       {
-        var request = new DotTypeValidationRequestData(clientApplication, serverName, tldId, phase, fields);
+        var request = new DotTypeValidationRequestData(clientApplication, serverName, tldId, phase, category, fields);
         var response = (DotTypeValidationResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeValidationRequest);
         if (response.IsSuccess)
         {

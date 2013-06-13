@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DotTypeFormsHtmlResponseData.cs" />
     <Compile Include="DotTypeFormsHtmlRequestData.cs" />
     <Compile Include="DotTypeFormsBaseRequestData.cs" />
     <Compile Include="DotTypeFormsSchema.cs" />

@@ -126,6 +126,45 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
+    public bool SearchEoi(string searchString, string languageCode, out IGeneralGtldData generalGtldData)
+    {
+      var success = false;
+      generalGtldData = null;
+
+      try
+      {
+        var request = new GeneralEoiJsonRequestData(languageCode);
+        var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
+        if (response.IsSuccess && response.DotTypeEoiResponse != null)
+        {
+          foreach (var category in response.DotTypeEoiResponse.Categories)
+          {
+            if (category.Name.ToLower() == "all categories" && category.Gtlds != null && category.Gtlds.Count > 0)
+            {
+              var gtlds = new List<IDotTypeEoiGtld>();
+              foreach (var gtld in category.Gtlds)
+              {
+                if (gtld.Name.ToLower().Contains(searchString.ToLower()))
+                {
+                  gtlds.Add(gtld);
+                }
+              }
+              generalGtldData = new GeneralGtldData(response.DotTypeEoiResponse.DisplayTime, gtlds, 0);
+              success = true;
+              break;
+            }
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        var exception = new AtlantisException("DotTypeEoiProvider.SearchEoi", "0", ex.Message + ex.StackTrace, searchString, null, null);
+        Engine.Engine.LogAtlantisException(exception);
+      }
+
+      return success;
+    }
+
     public bool GetShopperWatchList(string languageCode, out IShopperWatchListResponse shopperWatchListResponse)
     {
       var success = false;

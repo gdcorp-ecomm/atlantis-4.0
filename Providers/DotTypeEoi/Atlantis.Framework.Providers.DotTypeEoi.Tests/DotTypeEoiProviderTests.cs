@@ -38,7 +38,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IGeneralEoiData generalEoiData;
       ShopperContext.SetLoggedInShopper("861126");
-      bool isSuccess = provider.GetGeneralEoi("en-us", out generalEoiData);
+      bool isSuccess = provider.GetGeneralEoi("en", out generalEoiData);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, generalEoiData.DisplayTime != string.Empty);
       Assert.AreEqual(true, generalEoiData.Categories.Count > 0);
@@ -53,7 +53,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IGeneralGtldData generalGtldData;
-      bool isSuccess = provider.GetGeneralEoi(1, 5, 22, "en-us", out generalGtldData);
+      bool isSuccess = provider.GetGeneralEoi(1, 5, 22, "en", out generalGtldData);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, generalGtldData.DisplayTime != string.Empty);
       Assert.AreEqual(true, generalGtldData.Gtlds.Count == 5);
@@ -67,7 +67,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IGeneralGtldData generalGtldData;
       ShopperContext.SetLoggedInShopper("861126");
-      bool isSuccess = provider.GetGeneralEoi(2, 8, 22, "en-us", out generalGtldData);
+      bool isSuccess = provider.GetGeneralEoi(2, 8, 22, "en", out generalGtldData);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, generalGtldData.DisplayTime != string.Empty);
       Assert.AreEqual(true, generalGtldData.Gtlds.Count == 8);
@@ -80,10 +80,21 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IList<ICategoryData> categoryList;
-      bool isSuccess = provider.GetGeneralEoiCategoryList("en-us", out categoryList);
+      bool isSuccess = provider.GetGeneralEoiCategoryList("en", out categoryList);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, categoryList.Count > 0);
       Assert.AreEqual(true, categoryList[0] != null);
+    }
+
+    [TestMethod]
+    public void DotTypeSearchEoi()
+    {
+      IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
+      IGeneralGtldData generalGtldData;
+      bool isSuccess = provider.SearchEoi("ba", "en", out generalGtldData);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, generalGtldData.Gtlds.Count > 0);
+      Assert.AreEqual(true, generalGtldData.Gtlds[0].Id > -1);
     }
 
     [TestMethod]
@@ -92,7 +103,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IShopperWatchListResponse shopperWatchListResponse;
       ShopperContext.SetLoggedInShopper("0");
-      bool isSuccess = provider.GetShopperWatchList("en-us", out shopperWatchListResponse);
+      bool isSuccess = provider.GetShopperWatchList("en", out shopperWatchListResponse);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, shopperWatchListResponse.GtldIdDictionary.Count == 0);
     }
@@ -107,10 +118,10 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       var gTld = new DotTypeEoiGtld { Id = 1609, GtldSubCategoryId = 10320 };
       const string displayTime = "2013-05-23 10:29:55";
       gTlds.Add(gTld);
-      provider.AddToShopperWatchList(displayTime, gTlds, "en-us", out responseMessage);
+      provider.AddToShopperWatchList(displayTime, gTlds, "en", out responseMessage);
 
       IShopperWatchListResponse shopperWatchListResponse;
-      bool isSuccess = provider.GetShopperWatchList("en-us", out shopperWatchListResponse);
+      bool isSuccess = provider.GetShopperWatchList("en", out shopperWatchListResponse);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, shopperWatchListResponse.GtldIdDictionary.Count > 0);
       Assert.AreEqual(true, shopperWatchListResponse.GtldIdDictionary[1609].Id > -1);
@@ -125,7 +136,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       var gTld = new DotTypeEoiGtld { Id = 1609, GtldSubCategoryId = 10320 };
       const string displayTime = "2013-05-23 10:29:55";
       gTlds.Add(gTld);
-      bool isSuccess = provider.AddToShopperWatchList(displayTime, gTlds, "en-us", out responseMessage);
+      bool isSuccess = provider.AddToShopperWatchList(displayTime, gTlds, "en", out responseMessage);
       Assert.AreEqual(true, isSuccess);
     }
 

@@ -9,7 +9,8 @@ namespace Atlantis.Framework.CDS.Interface
   public class UrlWhitelistResponseData : CDSResponseData
   {
     private Dictionary<string, IWhitelistResult> _whitelist = null;
-    public static IWhitelistResult NullWhielistResult = new UrlWhitelistResult() { Exists = false, UrlData = null };
+    public static IUrlData NullUrlData = new UrlData() { Style = string.Empty };
+    public static IWhitelistResult NullWhielistResult = new UrlWhitelistResult() { Exists = false, UrlData = NullUrlData };
 
     public UrlWhitelistResponseData(string responseData)
       : base(responseData)

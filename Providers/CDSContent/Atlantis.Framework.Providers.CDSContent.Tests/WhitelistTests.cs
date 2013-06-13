@@ -48,7 +48,8 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
       Assert.IsFalse(whiteListResult.Exists);
-      Assert.IsNull(whiteListResult.UrlData);
+      Assert.IsNotNull(whiteListResult.UrlData);
+      Assert.IsTrue(whiteListResult.UrlData.Style == string.Empty);
     }
 
     [TestMethod]
@@ -59,7 +60,8 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
       ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
       IWhitelistResult whiteListResult = provider.CheckWhiteList(appName, relativePath);
       Assert.IsFalse(whiteListResult.Exists);
-      Assert.IsNull(whiteListResult.UrlData);
+      Assert.IsNotNull(whiteListResult.UrlData);
+      Assert.IsTrue(whiteListResult.UrlData.Style == string.Empty);
     }
 
     [TestMethod]

@@ -69,12 +69,7 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
 
     public override string GetCacheMD5()
     {
-      MD5 md5 = new MD5CryptoServiceProvider();
-      var requestXml = ToXML();
-      var data = Encoding.UTF8.GetBytes(requestXml);
-      var hash = md5.ComputeHash(data);
-      var result = Encoding.UTF8.GetString(hash);
-      return result;
+      return BuildHashFromStrings(ToXML());
     }
   }
 }

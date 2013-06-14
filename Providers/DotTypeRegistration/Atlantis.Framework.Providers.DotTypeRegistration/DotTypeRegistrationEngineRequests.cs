@@ -6,7 +6,7 @@
       {
         DotTypeFormsXmlRequest = 689;
         DotTypeValidationRequest = 695;
-        DotTypeClaimsRequest = 696;
+        DotTypeClaimsRequest = 710;
       }
 
       public static int DotTypeFormsXmlRequest { get; set; }

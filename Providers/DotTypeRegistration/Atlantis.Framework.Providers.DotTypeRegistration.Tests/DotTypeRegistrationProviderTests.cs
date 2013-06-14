@@ -8,6 +8,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
   [TestClass]
   [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.DotTypeForms.Impl.dll")]
+  [DeploymentItem("Atlantis.Framework.DotTypeClaims.Impl.dll")]
   public class DotTypeRegistrationProviderTests
   {
     private IDotTypeRegistrationProvider NewDotTypeRegistrationProvider()
@@ -38,6 +39,28 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       bool isSuccess = provider.GetDotTypeFormsSchema(-1, "name of placement", "GA", "EN", out dotTypeFormsSchema);
       Assert.AreEqual(false, isSuccess);
       Assert.AreEqual(true, dotTypeFormsSchema == null);
+    }
+
+    [TestMethod]
+    public void DotTypeClaimsSuccess()
+    {
+      IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
+
+      string[] domains = {"domain1.shop", "domain2.shop"};
+      IDotTypeClaimsSchema dotTypeClaims;
+      bool isSuccess = provider.GetClaimsSchema(domains, out dotTypeClaims);
+
+      Assert.AreEqual(true, isSuccess);
+      
+      string claimsXml;
+      Assert.AreEqual(true, dotTypeClaims.TryGetClaimsXmlByDomain("domain1.shop", out claimsXml));
+
+      string noticeXml;
+      Assert.AreEqual(true, dotTypeClaims.TryGetNoticeXmlByDomain("domain1.shop", out noticeXml));
+
+      Assert.AreEqual(false, dotTypeClaims.TryGetClaimsXmlByDomain("domain2.shop", out claimsXml));
+
+      Assert.AreEqual(false, dotTypeClaims.TryGetNoticeXmlByDomain("domain2.shop", out noticeXml));
     }
   }
 }

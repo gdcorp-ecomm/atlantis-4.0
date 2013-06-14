@@ -39,24 +39,24 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool GetDotTypeClaims(int tldId, out string claimsXml)
+    public bool GetClaimsSchema(string[] domains, out IDotTypeClaimsSchema dotTypeClaimsSchema)
     {
       var success = false;
-      claimsXml = string.Empty;
+      dotTypeClaimsSchema = null;
 
       try
       {
-        var request = new DotTypeClaimsRequestData(tldId);
+        var request = new DotTypeClaimsRequestData(domains);
         var response = (DotTypeClaimsResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeClaimsRequest);
         if (response.IsSuccess)
         {
-          claimsXml = response.ClaimsXml;
+          dotTypeClaimsSchema = response.DotTypeClaims;
           success = true;
         }
       }
       catch (Exception ex)
       {
-        var data = "tldId: " + tldId;
+        var data = "domains: " + string.Join(",", domains);
         var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeClaims", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
@@ -64,7 +64,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool ValidateDotTypeRegistration(string clientApplication, string serverName, int tldId, string phase, string category, Dictionary<string, string> fields,
+    public bool ValidateTrademarkData(string clientApplication, string serverName, int tldId, string phase, string category, Dictionary<string, string> fields,
       out bool hasErrors, out Dictionary<string, string> validationErrors, out string token)
     {
       var success = false;
@@ -94,6 +94,42 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       {
         var data = "clientApplication: " + clientApplication + ", serverName: " + serverName + ", tldId: " + tldId + ", phase: " + phase + ", fields: " + fields;
         var exception = new AtlantisException("DotTypeRegistrationProvider.ValidateDotTypeRegistration", "0", ex.Message + ex.StackTrace, data, null, null);
+        Engine.Engine.LogAtlantisException(exception);
+      }
+
+      return success;
+    }
+
+    public bool ValidateClaimData(string clientApplication, string serverName, int tldId, string phase, string category, string noticeXml,
+      out bool hasErrors, out Dictionary<string, string> validationErrors, out string token)
+    {
+      var success = false;
+      hasErrors = false;
+      token = string.Empty;
+      validationErrors = null;
+
+      try
+      {
+        var request = new DotTypeValidationRequestData(clientApplication, serverName, tldId, phase, category, noticeXml);
+        var response = (DotTypeValidationResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeValidationRequest);
+        if (response.IsSuccess)
+        {
+          if (response.HasErrors)
+          {
+            hasErrors = true;
+            validationErrors = response.ValidationErrors;
+          }
+          else
+          {
+            token = response.Token;
+          }
+          success = true;
+        }
+      }
+      catch (Exception ex)
+      {
+        var data = "clientApplication: " + clientApplication + ", serverName: " + serverName + ", tldId: " + tldId + ", phase: " + phase + ", fields: " + noticeXml;
+        var exception = new AtlantisException("DotTypeRegistrationProvider.ValidateClaimData", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
 

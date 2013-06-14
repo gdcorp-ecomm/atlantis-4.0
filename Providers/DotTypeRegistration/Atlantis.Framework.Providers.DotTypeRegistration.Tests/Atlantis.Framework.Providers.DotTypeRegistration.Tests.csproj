@@ -81,6 +81,14 @@
       <Project>{5487def2-0fa7-4b77-9aad-0355784589d6}</Project>
       <Name>Atlantis.Framework.Testing.MockProviders</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Triplets\DotTypeRegistration\Atlantis.Framework.DotTypeClaims.Impl\Atlantis.Framework.DotTypeClaims.Impl.csproj">
+      <Project>{e4c60f74-ebf7-4f79-8d5b-19075a283077}</Project>
+      <Name>Atlantis.Framework.DotTypeClaims.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Triplets\DotTypeRegistration\Atlantis.Framework.DotTypeForms.Impl\Atlantis.Framework.DotTypeForms.Impl.csproj">
+      <Project>{f5ba97a4-d1d4-4bfa-aea3-17b92510d2df}</Project>
+      <Name>Atlantis.Framework.DotTypeForms.Impl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.DotTypeRegistration.Interface\Atlantis.Framework.Providers.DotTypeRegistration.Interface.csproj">
       <Project>{35b615cd-c78e-484c-92c5-d54cd0b86cd2}</Project>
       <Name>Atlantis.Framework.Providers.DotTypeRegistration.Interface</Name>

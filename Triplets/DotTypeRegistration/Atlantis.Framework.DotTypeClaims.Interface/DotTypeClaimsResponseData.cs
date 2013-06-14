@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 
 namespace Atlantis.Framework.DotTypeClaims.Interface
 {
@@ -17,6 +18,8 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
     private readonly string _responseXml;
     private readonly AtlantisException _exception;
     private readonly bool _isSuccess;
+
+    private readonly IDotTypeClaimsSchema _dotTypeClaimsSchema;
     private readonly Dictionary<string, string> _noticeXmlByDomain;
     private readonly Dictionary<string, string> _claimsXmlByDomain;
 
@@ -51,7 +54,6 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
 
         if (_isSuccess)
         {
-
           var domains = strResponse.Descendants("domain");
           foreach (var domain in domains)
           {
@@ -67,6 +69,7 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
               }
             }
           }
+          _dotTypeClaimsSchema = new DotTypeClaimsSchema(_noticeXmlByDomain, _claimsXmlByDomain);
         }
       }
       catch (Exception ex)
@@ -86,14 +89,9 @@ namespace Atlantis.Framework.DotTypeClaims.Interface
       _exception = exception;
     }
 
-    public bool TryGetNoticeXmlByDomain(string domain, out string noticeXml)
+    public IDotTypeClaimsSchema DotTypeClaims
     {
-      return _noticeXmlByDomain.TryGetValue(domain, out noticeXml);
-    }
-
-    public bool TryGetClaimsXmlByDomain(string domain, out string claimsXml)
-    {
-      return _claimsXmlByDomain.TryGetValue(domain, out claimsXml);
+      get { return _dotTypeClaimsSchema; }  
     }
 
     public bool IsSuccess

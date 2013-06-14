@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DotTypeClaimsResponseData.cs" />
     <Compile Include="DotTypeClaimsRequestData.cs" />
+    <Compile Include="DotTypeClaimsSchema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +56,10 @@
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Providers\DotTypeRegistration\Atlantis.Framework.Providers.DotTypeRegistration.Interface\Atlantis.Framework.Providers.DotTypeRegistration.Interface.csproj">
+      <Project>{35b615cd-c78e-484c-92c5-d54cd0b86cd2}</Project>
+      <Name>Atlantis.Framework.Providers.DotTypeRegistration.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -149,6 +149,9 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
                   gtlds.Add(gtld);
                 }
               }
+
+              AddGtldButtonStatus(gtlds, languageCode);
+
               generalGtldData = new GeneralGtldData(response.DotTypeEoiResponse.DisplayTime, gtlds, 0);
               success = true;
               break;

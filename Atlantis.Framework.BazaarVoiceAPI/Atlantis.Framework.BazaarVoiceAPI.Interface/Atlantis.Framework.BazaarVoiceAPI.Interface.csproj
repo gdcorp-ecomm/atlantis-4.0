@@ -38,13 +38,12 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Badge.cs" />
+    <Compile Include="ReviewsSEORequestData.cs" />
+    <Compile Include="ReviewsSEOResponseData.cs" />
     <Compile Include="Size.cs" />
     <Compile Include="Photo.cs" />
     <Compile Include="Video.cs" />

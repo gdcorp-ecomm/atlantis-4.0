@@ -38,26 +38,20 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ReviewsAPIRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReviewsSEORequest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache\Atlantis.Framework.DataCache.csproj">
-      <Project>{7F2738F8-683C-49E7-88CD-E986C70F0321}</Project>
-      <Name>Atlantis.Framework.DataCache</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
       <Project>{A083A52E-C3C3-42E0-8DFD-54719E4C3B25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.BazaarVoiceAPI.Interface\Atlantis.Framework.BazaarVoiceAPI.Interface.csproj">
-      <Project>{18CFF4EC-BBD1-4309-8F5A-2AC75FCF127C}</Project>
+      <Project>{18cff4ec-bbd1-4309-8f5a-2ac75fcf127c}</Project>
       <Name>Atlantis.Framework.BazaarVoiceAPI.Interface</Name>
     </ProjectReference>
   </ItemGroup>

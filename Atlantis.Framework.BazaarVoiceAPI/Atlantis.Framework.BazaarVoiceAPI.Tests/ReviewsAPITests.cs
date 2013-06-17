@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Atlantis.Framework.BazaarVoiceAPI.Interface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.BazaarVoiceAPI.Tests
 {
@@ -19,7 +20,7 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Tests
       request.AddQueryParameter("Include", "products");
       request.AddQueryParameter("Stats", "reviews");
 
-      ReviewsAPIResponseData response = (ReviewsAPIResponseData)DataCache.DataCache.GetProcessRequest(request, 638);
+      ReviewsAPIResponseData response = (ReviewsAPIResponseData)Engine.Engine.ProcessRequest(request, 638);
       Assert.IsTrue(response.Reviews != null && response.Reviews.Count() == 1);
     }
 
@@ -33,7 +34,7 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Tests
       request.AddQueryParameter("Include", "products");
       request.AddQueryParameter("Stats", "reviews");
 
-      ReviewsAPIResponseData response = (ReviewsAPIResponseData)DataCache.DataCache.GetProcessRequest(request, 638);
+      ReviewsAPIResponseData response = (ReviewsAPIResponseData)Engine.Engine.ProcessRequest(request, 638);
       Assert.IsTrue(response.Reviews != null && response.Reviews.Count() == 10);
     }
 
@@ -47,7 +48,7 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Tests
       request.AddQueryParameter("Include", "products");
       request.AddQueryParameter("Stats", "reviews");
 
-      ReviewsAPIResponseData response = (ReviewsAPIResponseData)DataCache.DataCache.GetProcessRequest(request, 638);
+      ReviewsAPIResponseData response = (ReviewsAPIResponseData)Engine.Engine.ProcessRequest(request, 638);
       Assert.IsTrue(response.Reviews != null && response.Reviews.Count() == 0);
     }
 
@@ -107,5 +108,72 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Tests
 
       Assert.AreEqual(request1.GetCacheMD5(), request2.GetCacheMD5());
     }
+
+    [TestMethod]
+    public void GetReviewsWithDefaultConfig()
+    {
+      ReviewsSEORequestData request = new ReviewsSEORequestData(1, "ssl-certificates");
+      ReviewsSEOResponseData response = (ReviewsSEOResponseData)Engine.Engine.ProcessRequest(request, 712);
+
+      Assert.IsTrue(!string.IsNullOrEmpty(response.HTML));
+    }
+
+    [TestMethod]
+    public void GetReviewsWithoutSlashinConfigConfig()
+    {
+      ReviewsSEORequestData request = new ReviewsSEORequestData(1, "ssl-certificates");
+      ReviewsSEOResponseData response = (ReviewsSEOResponseData)Engine.Engine.ProcessRequest(request, 1000);
+
+      Assert.IsTrue(!string.IsNullOrEmpty(response.HTML));
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void GetReviewsWithBadParams()
+    {
+      ReviewsSEORequestData request = new ReviewsSEORequestData(1, "ssl-certificates", "1224-en_us");
+      ReviewsSEOResponseData response = (ReviewsSEOResponseData)Engine.Engine.ProcessRequest(request, 712);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AtlantisException))]
+    public void GetReviewsWitSeparateAPIKey()
+    {
+      ReviewsSEORequestData request = new ReviewsSEORequestData(1, "ssl-certificates");
+      request.APIKey = "godaddy-skjdhfkjewh5kj4h";  
+      ReviewsSEOResponseData response = (ReviewsSEOResponseData)Engine.Engine.ProcessRequest(request, 712);
+      
+    }
+
+    [TestMethod]
+    public void CheckSEOMD5CacheMatch()
+    {
+      ReviewsSEORequestData request1 = new ReviewsSEORequestData(1, "ssl-certificates");
+      ReviewsSEORequestData request2 = new ReviewsSEORequestData(1, "ssl-certificates");
+
+      Assert.IsTrue(request1.GetCacheMD5().Equals(request2.GetCacheMD5()));
+
+    }
+
+    [TestMethod]
+    public void CheckSEOMD5CacheDiff()
+    {
+      ReviewsSEORequestData request1 = new ReviewsSEORequestData(1, "ssl-certificates");
+      ReviewsSEORequestData request2 = new ReviewsSEORequestData(2, "ssl-certificates");
+
+      Assert.IsTrue(!request1.GetCacheMD5().Equals(request2.GetCacheMD5()));
+
+    }
+
+    [TestMethod]
+    public void CheckSEOMD5CacheDiffAPIKeyIsNUll()
+    {
+      ReviewsSEORequestData request1 = new ReviewsSEORequestData(1, "ssl-certificates");
+      request1.APIKey = null;
+      ReviewsSEORequestData request2 = new ReviewsSEORequestData(2, "ssl-certificates");
+
+      Assert.IsTrue(!request1.GetCacheMD5().Equals(request2.GetCacheMD5()));
+
+    }    
   }
 }

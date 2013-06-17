@@ -23,7 +23,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     }
 
     [TestMethod]
-    public void DotTypeFormsSuccess()
+    public void DotTypeFormsSchemaSuccess()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
       IDotTypeFormsSchema dotTypeFormsSchema;
@@ -32,7 +32,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       Assert.AreEqual(true, dotTypeFormsSchema.FormCollection.Count > 0);
     }
 
-    public void DotTypeFormsFailure()
+    public void DotTypeFormsSchemaFailure()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
       IDotTypeFormsSchema dotTypeFormsSchema;
@@ -62,5 +62,16 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
 
       Assert.AreEqual(false, dotTypeClaims.TryGetNoticeXmlByDomain("domain2.shop", out noticeXml));
     }
+
+    [TestMethod]
+    public void DotTypeFormsSuccess()
+    {
+      IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
+      string dotTypeFormsHtml;
+      bool isSuccess = provider.GetDotTypeForms(1640, "MOBILE", "GA", "EN", out dotTypeFormsHtml);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, !string.IsNullOrEmpty(dotTypeFormsHtml));
+    }
+
   }
 }

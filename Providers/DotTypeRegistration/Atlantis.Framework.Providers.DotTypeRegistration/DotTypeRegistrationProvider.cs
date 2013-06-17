@@ -14,6 +14,31 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
     {
     }
 
+    public bool GetDotTypeForms(int tldId, string placement, string phase, string language, out string dotTypeFormsHtml)
+    {
+      var success = false;
+      dotTypeFormsHtml = null;
+
+      try
+      {
+        var request = new DotTypeFormsHtmlRequestData(tldId, placement, phase, language);
+        var response = (DotTypeFormsHtmlResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsHtmlRequest);
+        if (response.IsSuccess)
+        {
+          dotTypeFormsHtml = response.ToXML();
+          success = true;
+        }
+      }
+      catch (Exception ex)
+      {
+        var data = "tldId: " + tldId + ", placement: " + placement + ", phase: " + phase + ", language: " + language;
+        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeForms", "0", ex.Message + ex.StackTrace, data, null, null);
+        Engine.Engine.LogAtlantisException(exception);
+      }
+
+      return success;
+    }
+
     public bool GetDotTypeFormsSchema(int tldId, string placement, string phase, string language, out IDotTypeFormsSchema dotTypeFormsSchema)
     {
       var success = false;
@@ -31,8 +56,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       }
       catch (Exception ex)
       {
-        var data = "tldId: " + tldId + ", placement: " + placement;
-        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeForms", "0", ex.Message + ex.StackTrace, data, null, null);
+        var data = "tldId: " + tldId + ", placement: " + placement + ", phase: " + phase + ", language: " + language;
+        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeFormsSchema", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
 

@@ -8,8 +8,6 @@ namespace Atlantis.Framework.DotTypeForms.Interface
 {
   public class DotTypeFormsSchema : IDotTypeFormsSchema
   {
-    public int TldId { get; set; }
-    public string Placement { get; set; }
     public IList<IDotTypeFormsForm> FormCollection { get; set; }
     public bool IsSuccess { get; set; }
 

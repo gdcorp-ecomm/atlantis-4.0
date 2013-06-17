@@ -32,6 +32,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
       Assert.AreEqual(true, dotTypeFormsSchema.FormCollection.Count > 0);
     }
 
+    [TestMethod]
     public void DotTypeFormsSchemaFailure()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();

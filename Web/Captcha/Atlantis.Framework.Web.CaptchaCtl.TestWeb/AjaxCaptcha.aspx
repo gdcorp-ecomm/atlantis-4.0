@@ -9,7 +9,7 @@
 <head runat="server">
     <title></title>
     <script src="http://img3.wsimg-com.ide/shared/js/1.8.3/global.20130605.min.js" type="text/javascript"></script>
-    <script src="_ImageServer/script/bot_detect_20130613.js" type="text/javascript"></script>
+    <script src="http://img3.wsimg-com.ide/AtlantisScripts/Atlantis.Web.Controls/Captcha/bot_detect_20130613.min.js" type="text/javascript"></script>
     <link rel="Stylesheet" type="text/css" href="http://img2.wsimg-com.ide/shared/css/1/styles_20120926.min.css" />
 </head>
 <body>

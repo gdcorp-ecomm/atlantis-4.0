@@ -1,4 +1,4 @@
-﻿if (typeof (BotDetect) == "undefined") { // start single inclusion guard
+if (typeof (BotDetect) == "undefined") { // start single inclusion guard
     BotDetect = function () {
         var _clickEvent = 'click.captcha';
         var _keypressEvent = 'keypress.captcha';

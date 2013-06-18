@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ListPriceRequest.cs" />
+    <Compile Include="PriceGroupsByCountrySiteRequest.cs" />
     <Compile Include="ProductIsOnSaleRequest.cs" />
     <Compile Include="PromoPriceRequest.cs" />
     <Compile Include="PriceEstimateRequest.cs" />

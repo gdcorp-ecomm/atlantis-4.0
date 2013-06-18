@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Atlantis.Framework.Providers.Containers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Atlantis.Framework.Tokens.Interface;
 using Atlantis.Framework.Tokens.Tests.Handlers;
 using Atlantis.Framework.Tokens.Tests.Data;
@@ -6,7 +7,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
 
 namespace Atlantis.Framework.Tokens.Tests
 {

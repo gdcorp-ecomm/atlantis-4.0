@@ -10,8 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Tokens.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Tokens.Tests", "Atlantis.Framework.Tokens.Tests\Atlantis.Framework.Tokens.Tests.csproj", "{F28F1870-129D-4A58-B13A-8799D41249D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.ProviderContainer.Impl", "..\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer.Impl.csproj", "{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.TH.TestDynamic", "Atlantis.Framework.TH.TestDynamic\Atlantis.Framework.TH.TestDynamic.csproj", "{AB6C50DB-26D3-48B3-B69E-D9C773DA29C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Interface", "..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj", "{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE}"
@@ -21,6 +19,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Tokens.Monitor.WebTest", "Atlantis.Framework.Tokens.Monitor.WebTest\Atlantis.Framework.Tokens.Monitor.WebTest.csproj", "{78C28940-1668-4B18-A37A-43BED1B2BB67}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Render.Pipeline.Interface", "..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline.Interface\Atlantis.Framework.Render.Pipeline.Interface.csproj", "{0D7F076F-1809-437B-B045-E35A7E68E423}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Framework.Providers.Containers", "..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj", "{C333E679-494E-422D-AB5E-E4C0EC94ACD5}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -42,27 +42,27 @@ Global
 		SccProjectUniqueName4 = Atlantis.Framework.Tokens.Tests\\Atlantis.Framework.Tokens.Tests.csproj
 		SccProjectName4 = Atlantis.Framework.Tokens.Tests
 		SccLocalPath4 = Atlantis.Framework.Tokens.Tests
-		SccProjectUniqueName5 = ..\\Atlantis.Framework.Providers.ProviderContainer\\Atlantis.Framework.Providers.ProviderContainer\\Atlantis.Framework.Providers.ProviderContainer.Impl.csproj
-		SccProjectTopLevelParentUniqueName5 = Atlantis.Framework.Tokens.sln
-		SccProjectName5 = ../Atlantis.Framework.Providers.ProviderContainer/Atlantis.Framework.Providers.ProviderContainer
-		SccLocalPath5 = ..\\Atlantis.Framework.Providers.ProviderContainer\\Atlantis.Framework.Providers.ProviderContainer
-		SccProjectUniqueName6 = Atlantis.Framework.TH.TestDynamic\\Atlantis.Framework.TH.TestDynamic.csproj
-		SccProjectName6 = Atlantis.Framework.TH.TestDynamic
-		SccLocalPath6 = Atlantis.Framework.TH.TestDynamic
-		SccProjectUniqueName7 = ..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface.csproj
-		SccProjectTopLevelParentUniqueName7 = Atlantis.Framework.Tokens.sln
-		SccProjectName7 = ../Atlantis.Framework.Providers.Interface/Atlantis.Framework.Providers.Interface
-		SccLocalPath7 = ..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface
-		SccProjectUniqueName8 = Atlantis.Framework.Tokens.Monitor\\Atlantis.Framework.Tokens.Monitor.csproj
-		SccProjectName8 = Atlantis.Framework.Tokens.Monitor
-		SccLocalPath8 = Atlantis.Framework.Tokens.Monitor
-		SccProjectUniqueName9 = Atlantis.Framework.Tokens.Monitor.WebTest\\Atlantis.Framework.Tokens.Monitor.WebTest.csproj
-		SccProjectName9 = Atlantis.Framework.Tokens.Monitor.WebTest
-		SccLocalPath9 = Atlantis.Framework.Tokens.Monitor.WebTest
-		SccProjectUniqueName10 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface\\Atlantis.Framework.Render.Pipeline.Interface.csproj
+		SccProjectUniqueName5 = Atlantis.Framework.TH.TestDynamic\\Atlantis.Framework.TH.TestDynamic.csproj
+		SccProjectName5 = Atlantis.Framework.TH.TestDynamic
+		SccLocalPath5 = Atlantis.Framework.TH.TestDynamic
+		SccProjectUniqueName6 = ..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface.csproj
+		SccProjectTopLevelParentUniqueName6 = Atlantis.Framework.Tokens.sln
+		SccProjectName6 = ../Atlantis.Framework.Providers.Interface/Atlantis.Framework.Providers.Interface
+		SccLocalPath6 = ..\\Atlantis.Framework.Providers.Interface\\Atlantis.Framework.Providers.Interface
+		SccProjectUniqueName7 = Atlantis.Framework.Tokens.Monitor\\Atlantis.Framework.Tokens.Monitor.csproj
+		SccProjectName7 = Atlantis.Framework.Tokens.Monitor
+		SccLocalPath7 = Atlantis.Framework.Tokens.Monitor
+		SccProjectUniqueName8 = Atlantis.Framework.Tokens.Monitor.WebTest\\Atlantis.Framework.Tokens.Monitor.WebTest.csproj
+		SccProjectName8 = Atlantis.Framework.Tokens.Monitor.WebTest
+		SccLocalPath8 = Atlantis.Framework.Tokens.Monitor.WebTest
+		SccProjectUniqueName9 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface\\Atlantis.Framework.Render.Pipeline.Interface.csproj
+		SccProjectTopLevelParentUniqueName9 = Atlantis.Framework.Tokens.sln
+		SccProjectName9 = ../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline.Interface
+		SccLocalPath9 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface
+		SccProjectUniqueName10 = ..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers.csproj
 		SccProjectTopLevelParentUniqueName10 = Atlantis.Framework.Tokens.sln
-		SccProjectName10 = ../Render/RenderPipeline/Atlantis.Framework.Render.Pipeline.Interface
-		SccLocalPath10 = ..\\Render\\RenderPipeline\\Atlantis.Framework.Render.Pipeline.Interface
+		SccProjectName10 = ../Atlantis.Framework.Providers.Containers/Atlantis.Framework.Providers.Containers
+		SccLocalPath10 = ..\\Atlantis.Framework.Providers.Containers\\Atlantis.Framework.Providers.Containers
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,10 +85,6 @@ Global
 		{F28F1870-129D-4A58-B13A-8799D41249D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F28F1870-129D-4A58-B13A-8799D41249D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F28F1870-129D-4A58-B13A-8799D41249D4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB6C50DB-26D3-48B3-B69E-D9C773DA29C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB6C50DB-26D3-48B3-B69E-D9C773DA29C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB6C50DB-26D3-48B3-B69E-D9C773DA29C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -109,6 +105,10 @@ Global
 		{0D7F076F-1809-437B-B045-E35A7E68E423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D7F076F-1809-437B-B045-E35A7E68E423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,8 +116,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A083A52E-C3C3-42E0-8DFD-54719E4C3B25} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
 		{D30157B2-C1B3-4073-BA5E-632E2337A997} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
-		{8A7EE679-ABC6-4F76-99A6-5C9C1203D9F0} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
 		{6CC33C6B-FAA7-4B6A-8C3B-BFE94A1A65DE} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
 		{0D7F076F-1809-437B-B045-E35A7E68E423} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
+		{C333E679-494E-422D-AB5E-E4C0EC94ACD5} = {231F3310-3BE2-4FC0-AF5F-0367B11BECA4}
 	EndGlobalSection
 EndGlobal

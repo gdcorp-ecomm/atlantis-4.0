@@ -9,7 +9,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Xsl;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Providers.Containers;
 
 namespace Atlantis.Framework.Tokens.Monitor.Web
 {
@@ -166,7 +166,7 @@ namespace Atlantis.Framework.Tokens.Monitor.Web
     private class XmlHtmlWriter : XmlTextWriter
     {
       string _openingElement = string.Empty;
-      readonly HashSet<string> _fullyClosedElements = new HashSet<string>(new string[] { "br", "hr" });
+      readonly HashSet<string> _fullyClosedElements = new HashSet<string>(new[] { "br", "hr" });
 
       public XmlHtmlWriter(TextWriter writer)
         : base(writer)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.Interface.ProviderContainer;
+using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Tokens.Interface;
 using Atlantis.Framework.Tokens.Monitor.Web;
 

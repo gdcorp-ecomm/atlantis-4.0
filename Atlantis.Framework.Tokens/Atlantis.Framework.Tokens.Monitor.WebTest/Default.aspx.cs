@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Atlantis.Framework.Interface;
-using Atlantis.Framework.Providers.ProviderContainer.Impl;
+using Atlantis.Framework.Providers.Containers;
 using Atlantis.Framework.Tokens.Interface;
 
 namespace Atlantis.Framework.Tokens.Monitor.WebTest

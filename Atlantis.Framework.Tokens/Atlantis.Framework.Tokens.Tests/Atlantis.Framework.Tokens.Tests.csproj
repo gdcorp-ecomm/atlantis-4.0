@@ -84,9 +84,9 @@
       <Project>{29e7ccc1-0f54-45f9-8492-62145046c625}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer\Atlantis.Framework.Providers.ProviderContainer.Impl.csproj">
-      <Project>{8a7ee679-abc6-4f76-99a6-5c9c1203d9f0}</Project>
-      <Name>Atlantis.Framework.Providers.ProviderContainer.Impl</Name>
+    <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
+      <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
+      <Name>Atlantis.Framework.Providers.Containers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.TH.TestDynamic\Atlantis.Framework.TH.TestDynamic.csproj">
       <Project>{ab6c50db-26d3-48b3-b69e-d9c773da29c6}</Project>

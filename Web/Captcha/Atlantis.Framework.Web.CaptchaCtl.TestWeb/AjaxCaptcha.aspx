@@ -46,6 +46,9 @@
                 </div>
             </Template>
         </atlantis:CaptchaTemplateControl>
+         <div>
+            <h1>Standard Ajax Validation 2nd Instance of captcha on same page</h1>
+        </div>
         <atlantis:CaptchaTemplateControl ID="CaptchaTemplateControl1" runat="server" CaptchaImagePlaceHolderID="plcCaptchaLocation2" StashRenderLocation="javascriptStash" CaptchaValidateSelector=".captchaValidate2" CaptchaValueID="captchaTextBox2" ImageReloadPlaceHolderID="plcImageReload2" PlaySoundPlaceHolderID="plcPlaySound2" CaptchaID="standardAjaxValidation2" AjaxAuthentication="true" AjaxAuthenticationCallback="AjaxAuthenticationResults2" AutoClearInput="true" AutoFocusInput="true">
             <Template>
                 <div style="width: 330px;">
@@ -78,7 +81,7 @@
         <div>
             <hr />
             <div style="padding-bottom: 10px;">
-                <h1>Custom Ajax Validation</h1>
+                <h1>Custom Ajax Validation 3rd Instance of captcha on same page</h1>
             </div>
             <div>
                 <span>Add this extra data</span>

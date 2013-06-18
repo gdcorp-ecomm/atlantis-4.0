@@ -1,0 +1,620 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DB71A246-51E3-4495-8840-BDF31CEC0E2C}</ProjectGuid>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>BotDetect</AssemblyName>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BotDetect</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SignAssembly>false</SignAssembly>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>http://localhost/BotDetect/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET40</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <BaseAddress>285212672</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;RELEASE;NET40</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <BaseAddress>285212672</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\CaptchaCode\BannedCharacterSequences.cs" />
+    <Compile Include="Core\CaptchaCode\CharacterSetFactory.cs" />
+    <Compile Include="Core\CaptchaCode\CodeGenerationPurpose.cs" />
+    <Compile Include="Core\CaptchaCode\ICodeGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\BubblesImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\ElectricImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\MeltingHeat2ImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\Neon2ImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\NeonImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\RadarImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\Ripple2ImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\RippleImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\SpiderWeb2ImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\Split2ImageGenerator.cs" />
+    <Compile Include="Core\CaptchaSound\SoundGenerator.cs" />
+    <Compile Include="Core\CaptchaSound\Defaults.cs" />
+    <Compile Include="Core\CaptchaSound\Styles\ScratchedSoundGenerator.cs" />
+    <Compile Include="Core\CaptchaSound\Styles\RobotSoundGenerator.cs" />
+    <Compile Include="Core\CaptchaSound\Styles\HiveMindSoundGenerator.cs" />
+    <Compile Include="Core\CaptchaSound\Styles\PulseSoundGenerator.cs" />
+    <Compile Include="Core\CaptchaSound\Styles\IndustrialSoundGenerator.cs" />
+    <Compile Include="Core\CaptchaSound\Styles\SynthSoundGenerator.cs" />
+    <Compile Include="Core\CaptchaSound\Styles\RedAlertSoundGenerator.cs" />
+    <Compile Include="Core\CaptchaSound\Styles\DispatchSoundGenerator.cs" />
+    <Compile Include="Core\CaptchaSound\Styles\WorkshopSoundGenerator.cs" />
+    <Compile Include="Core\CaptchaSound\Styles\RadioSoundGenerator.cs" />
+    <Compile Include="Infrastructure\Audio\AudioTrack.cs" />
+    <Compile Include="Infrastructure\Audio\Audio.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Delay\Phaser.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Misc\Invert.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Volume\Compressor.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Delay\Delay.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Volume\Gain.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Volume\FadeIn.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Volume\FadeOut.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Misc\Root.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Misc\Square.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Volume\Expander.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Misc\Drain.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Misc\Reverse.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Volume\Overdrive.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Volume\Normalize.cs" />
+    <Compile Include="Infrastructure\Audio\Formats\WavPcm\WavPcm16bit8kHzMonoConverter.cs" />
+    <Compile Include="Infrastructure\Audio\Formats\FormatConverter.cs" />
+    <Compile Include="Infrastructure\Audio\Noise\Generators\ToneNoise.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Format\BdspLookup.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Reader\BdspLookupReader.cs" />
+    <Compile Include="Infrastructure\Audio\Pronunciation\Defaults.cs" />
+    <Compile Include="Infrastructure\Audio\Wav\Defaults.cs" />
+    <Compile Include="Infrastructure\Audio\Formats\FormatConverterFactory.cs" />
+    <Compile Include="Infrastructure\Audio\Formats\IFormatConverter.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Effect.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\IEffect.cs" />
+    <Compile Include="Infrastructure\Audio\Noise\INoise.cs" />
+    <Compile Include="Infrastructure\Audio\Noise\Noise.cs" />
+    <Compile Include="Infrastructure\Audio\Pronunciation\IPronunciation.cs" />
+    <Compile Include="Infrastructure\Audio\Pronunciation\PronunciationFactory.cs" />
+    <Compile Include="Infrastructure\Audio\Pronunciation\Pronunciation.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Delay\Chorus.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Delay\Echo.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Delay\Flanger.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Delay\Reverb.cs" />
+    <Compile Include="Infrastructure\Audio\Effects\Volume\Tremolo.cs" />
+    <Compile Include="Infrastructure\Audio\Noise\Generators\WhiteNoise.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Format\BdspString.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Format\BdspConstants.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Format\BdspDataChunk.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\SoundPackage.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\SoundPackageEntry.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Format\SoundPackageFormat.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Reader\BdspDataReader.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Reader\BdspFileReader.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Reader\BdspHeaderReader.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Format\BdspToc.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\SoundPackageFacade.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Writer\BdspFileWriter.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Writer\BdspDataWriter.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Writer\BdspHeaderWriter.cs" />
+    <Compile Include="Infrastructure\Audio\Packaging\Writer\BdspLookupWriter.cs" />
+    <Compile Include="Infrastructure\Audio\Formats\WavPcm\WavPcm8bit8kHzMonoConverter.cs" />
+    <Compile Include="Infrastructure\Audio\Wav\DataChunk.cs" />
+    <Compile Include="Infrastructure\Audio\Wav\FormatChunk.cs" />
+    <Compile Include="Infrastructure\Audio\Wav\RiffHeader.cs" />
+    <Compile Include="Infrastructure\Audio\Wav\Header.cs" />
+    <Compile Include="Infrastructure\Audio\PcmSound.cs" />
+    <Compile Include="Infrastructure\Audio\IAudio.cs" />
+    <Compile Include="Infrastructure\Collections\C5\arrays\ArrayList.cs" />
+    <Compile Include="Infrastructure\Collections\C5\arrays\CircularQueue.cs" />
+    <Compile Include="Infrastructure\Collections\C5\arrays\HashedArrayList.cs" />
+    <Compile Include="Infrastructure\Collections\C5\arrays\SortedArray.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Attributes.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Builtin.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Collections.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Comparer.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Delegates.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Dictionaries.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Enums.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Events.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Exceptions.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Formatting.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Hashers.cs" />
+    <Compile Include="Infrastructure\Collections\C5\hashing\HashBag.cs" />
+    <Compile Include="Infrastructure\Collections\C5\hashing\HashDictionary.cs" />
+    <Compile Include="Infrastructure\Collections\C5\hashing\HashTable.cs" />
+    <Compile Include="Infrastructure\Collections\C5\heaps\IntervalHeap.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Interfaces.cs" />
+    <Compile Include="Infrastructure\Collections\C5\linkedlists\HashedLinkedList.cs" />
+    <Compile Include="Infrastructure\Collections\C5\linkedlists\LinkedList.cs" />
+    <Compile Include="Infrastructure\Collections\C5\MappedEnumerators.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Random.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\Collections\C5\Records.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Sorting.cs" />
+    <Compile Include="Infrastructure\Collections\C5\trees\RedBlackTreeBag.cs" />
+    <Compile Include="Infrastructure\Collections\C5\trees\RedBlackTreeDictionary.cs" />
+    <Compile Include="Infrastructure\Collections\C5\trees\RedBlackTreeSet.cs" />
+    <Compile Include="Infrastructure\Collections\C5\ViewSupport.cs" />
+    <Compile Include="Infrastructure\Collections\C5\WrappedArray.cs" />
+    <Compile Include="Infrastructure\Collections\C5\Wrappers.cs" />
+    <Compile Include="Infrastructure\Collections\CollectionHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\Collections\Sets.cs" />
+    <Compile Include="Infrastructure\Crypto\SHA1.cs" />
+    <Compile Include="Infrastructure\Crypto\CryptoRandom.cs" />
+    <Compile Include="Infrastructure\Crypto\RijndaelEncryption.cs" />
+    <Compile Include="Infrastructure\Crypto\SHA256.cs" />
+    <Compile Include="Infrastructure\I18n\BaseCharset.cs" />
+    <Compile Include="Infrastructure\I18n\BaseLanguage.cs" />
+    <Compile Include="Infrastructure\I18n\Macrolanguage.cs" />
+    <Compile Include="Infrastructure\I18n\Country.cs" />
+    <Compile Include="Infrastructure\Web\ServerHelper.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CaptchaHttpHandlerTroubleshootingElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\DisabledImageStylesElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\DisabledSoundStylesElement.cs" />
+    <Compile Include="Support\Configuration\Elements\CaptchaHttpHandlerTroubleshootingConfiguration.cs" />
+    <Compile Include="Support\I18n\SupportedLocales.cs" />
+    <Compile Include="Support\I18n\LocalizationException.cs" />
+    <Compile Include="Support\I18n\Localization.cs" />
+    <Compile Include="Support\I18n\LocaleParser.cs" />
+    <Compile Include="Infrastructure\Math\MathException.cs" />
+    <Compile Include="Infrastructure\Drawing\Color\ColorCollection.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Text\RtlText.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Text\Text.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Effects\Generators\Halo.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Effects\Generators\Perspective.cs" />
+    <Compile Include="Infrastructure\Drawing\GdiGraphics.cs" />
+    <Compile Include="Infrastructure\Drawing\Color\Color.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Effects\Generators\Wave.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Effects\Effect.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Effects\Generators\Fuzz.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Effects\IEffect.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\AtomicShape.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Atomic\Circle.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Atomic\Bezier.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Atomic\Glyph.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Atomic\Line.cs" />
+    <Compile Include="Infrastructure\Drawing\LineStyle\LineStyle.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Atomic\Point.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Atomic\Rectangle.cs" />
+    <Compile Include="Infrastructure\Drawing\IGraphics.cs" />
+    <Compile Include="Infrastructure\Drawing\ImageSize.cs" />
+    <Compile Include="Infrastructure\Drawing\LineStyle\LineElement.cs" />
+    <Compile Include="Infrastructure\Drawing\LineStyle\LineLayer.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Random\RandomGlyphs.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Random\RandomRectangles.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Random\RandomBeziers.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Formulaic\SpokeLines.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\RandomNoise.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Formulaic\VerticallLines.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Formulaic\HorizontalLines.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Random\RandomCircles.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Formulaic\ConcentricCircles.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Random\RandomLines.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Random\RandomDots.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\ShapeCollection.cs" />
+    <Compile Include="Infrastructure\Drawing\Font\Font.cs" />
+    <Compile Include="Infrastructure\Drawing\Font\FontCollection.cs" />
+    <Compile Include="Infrastructure\Drawing\Font\FontCase.cs" />
+    <Compile Include="Infrastructure\Drawing\Transform\Warp.cs" />
+    <Compile Include="Infrastructure\Drawing\Transform\Translation.cs" />
+    <Compile Include="Infrastructure\Drawing\Transform\Scaling.cs" />
+    <Compile Include="Infrastructure\Drawing\Transform\Rotation.cs" />
+    <Compile Include="Infrastructure\Drawing\Transform\Transform.cs" />
+    <Compile Include="Infrastructure\Drawing\Font\FontWeight.cs" />
+    <Compile Include="Infrastructure\Drawing\2D\Text\LtrlText.cs" />
+    <Compile Include="Infrastructure\Logging\LoggingProviderHelper.cs" />
+    <Compile Include="Infrastructure\Math\MathHelper.cs" />
+    <Compile Include="Infrastructure\Audio\Mixer.cs" />
+    <Compile Include="Core\CaptchaSound\SoundStyle.cs" />
+    <Compile Include="Core\CaptchaSound\SoundGeneratorFactory.cs" />
+    <Compile Include="Core\CaptchaSound\ISoundGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\ImageGenerator.cs" />
+    <Compile Include="Core\CaptchaBase.cs" />
+    <Compile Include="Core\CaptchaCode\CharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\ArabicCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\CyrillicCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\DevanagariCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\GreekCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\HangulCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\HanSimplifiedCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\HanTraditionalCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\HebrewCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\HiraganaCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\KatakanaCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\LatinCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\Locales\BopomofoCharacterSet.cs" />
+    <Compile Include="Core\CaptchaCode\CodeStyle.cs" />
+    <Compile Include="Infrastructure\Math\RandomizationStyle.cs" />
+    <Compile Include="Support\CaptchaDefaults.cs" />
+    <Compile Include="Support\CaptchaRandomization.cs" />
+    <Compile Include="Core\CaptchaCode\Code.cs" />
+    <Compile Include="Core\CaptchaCode\CodeCollection.cs" />
+    <Compile Include="Core\CaptchaCode\Validation\ValidationAttemptOrigin.cs" />
+    <Compile Include="Infrastructure\Resources\ResourceHelper.cs" />
+    <Compile Include="Infrastructure\Serialization\FastSerializer.cs" />
+    <Compile Include="Infrastructure\Web\JavaScriptHelper.cs" />
+    <Compile Include="Infrastructure\Web\RequestTrace.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CaptchaSessionTroubleshootingElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\HelpLinkElement.cs" />
+    <Compile Include="Support\Configuration\Elements\CaptchaSessionTroubleshootingConfiguration.cs" />
+    <Compile Include="Support\Logging\CaptchaLogging.cs" />
+    <Compile Include="Support\Configuration\CaptchaConfiguration.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CaptchaUserInputElement.cs" />
+    <Compile Include="Support\Configuration\Elements\CaptchaLoggingConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Support\Configuration\Elements\CaptchaUserInputConfiguration.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CharacterSetElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CharacterSetElementCollection.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CaptchaSoundElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CaptchaReloadingElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\AutoReloadExpiredCaptchasElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\SoundPackagesElement.cs" />
+    <Compile Include="Support\Configuration\ICaptchaConfiguration.cs" />
+    <Compile Include="Support\Configuration\Elements\CaptchaImageConfiguration.cs" />
+    <Compile Include="Support\Configuration\Elements\CaptchaReloadingConfiguration.cs" />
+    <Compile Include="Support\Configuration\Elements\CaptchaSoundConfiguration.cs" />
+    <Compile Include="Support\Configuration\Elements\CaptchaEncryptionConfiguration.cs" />
+    <Compile Include="Support\Configuration\Elements\CaptchaRequestFilterConfiguration.cs" />
+    <Compile Include="Support\Configuration\Elements\CaptchaUrlsConfiguration.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\BotDetectConfigurationSection.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CaptchaCodesElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CaptchaLoggingElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\TestModeElement.cs" />
+    <Compile Include="Support\Configuration\Elements\CaptchaCodesConfiguration.cs" />
+    <Compile Include="Web\Persistence\CaptchaPersistence.cs" />
+    <Compile Include="Web\Persistence\SessionTroubleshooting.cs" />
+    <Compile Include="Infrastructure\Status.cs" />
+    <Compile Include="Web\InitializedCaptchaControlEventArgs.cs" />
+    <Compile Include="Web\Http\CaptchaUrls.cs" />
+    <Compile Include="Core\CaptchaEventArgs.cs" />
+    <Compile Include="Core\CaptchaCode\GeneratedCaptchaCode.cs" />
+    <Compile Include="Core\CaptchaImage\GeneratedCaptchaImage.cs" />
+    <Compile Include="Core\CaptchaSound\GeneratedCaptchaSound.cs" />
+    <Compile Include="Core\CaptchaCode\Validation\ValidatedUserInput.cs" />
+    <Compile Include="Core\CaptchaCode\GeneratingCaptchaCode.cs" />
+    <Compile Include="Core\CaptchaImage\GeneratingCaptchaImage.cs" />
+    <Compile Include="Core\CaptchaSound\GeneratingCaptchaSound.cs" />
+    <Compile Include="Core\CaptchaCode\Validation\ValidatingUserInput.cs" />
+    <Compile Include="Core\CaptchaCode\CaptchaCodeGenerationException.cs" />
+    <Compile Include="Support\Configuration\CaptchaConfigurationException.cs" />
+    <Compile Include="Core\CaptchaException.cs" />
+    <Compile Include="Core\CaptchaGenerationException.cs" />
+    <Compile Include="Core\CaptchaImage\CaptchaImageGenerationException.cs" />
+    <Compile Include="Web\Persistence\CaptchaPersistenceException.cs" />
+    <Compile Include="Core\CaptchaSound\CaptchaSoundGenerationException.cs" />
+    <Compile Include="Web\Http\CaptchaTroubleshootingModule.cs" />
+    <Compile Include="Web\UI\Captcha.cs" />
+    <Compile Include="Web\Http\CaptchaHttpCommand.cs" />
+    <Compile Include="Web\CaptchaControl.cs" />
+    <Compile Include="Web\Http\CaptchaHandler.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CaptchaImageElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CaptchaEncryptionElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\LocalizedStringElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\LocalizedStringElementCollection.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\ReloadIconElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CaptchaRequestFilterElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\SoundIconElement.cs" />
+    <Compile Include="Support\Configuration\ConfigSection\CaptchaUrlsElement.cs" />
+    <Compile Include="Web\UI\CaptchaDesigner.cs" />
+    <Compile Include="Web\Http\CaptchaHttpException.cs" />
+    <Compile Include="Web\CaptchaControlException.cs" />
+    <Compile Include="Web\Persistence\CustomSessionIdManager.cs" />
+    <Compile Include="Infrastructure\Configuration\DotNetConfigurationProvider.cs" />
+    <Compile Include="Infrastructure\Configuration\IConfigurationProvider.cs" />
+    <Compile Include="Infrastructure\Configuration\IniFileConfigurationProvider.cs" />
+    <Compile Include="Infrastructure\Configuration\RegistryConfigurationProvider.cs" />
+    <Compile Include="Infrastructure\Crypto\CryptoHelper.cs" />
+    <Compile Include="Infrastructure\BaseEventArgs.cs" />
+    <Compile Include="Infrastructure\Audio\AudioException.cs" />
+    <Compile Include="Infrastructure\Configuration\ConfigurationException.cs" />
+    <Compile Include="Infrastructure\Crypto\CryptoException.cs" />
+    <Compile Include="Infrastructure\BaseException.cs" />
+    <Compile Include="Infrastructure\Drawing\DrawingException.cs" />
+    <Compile Include="Infrastructure\Logging\LoggingException.cs" />
+    <Compile Include="Infrastructure\Persistence\PersistenceException.cs" />
+    <Compile Include="Infrastructure\Text\TextException.cs" />
+    <Compile Include="Infrastructure\Logging\ILoggingProvider.cs" />
+    <Compile Include="Infrastructure\Logging\LoggingProvider.cs" />
+    <Compile Include="Infrastructure\Logging\NullLoggingProvider.cs" />
+    <Compile Include="Infrastructure\Persistence\AspNetApplicationPersistanceProvider.cs" />
+    <Compile Include="Infrastructure\Persistence\AspNetCachePersistanceProvider.cs" />
+    <Compile Include="Infrastructure\Persistence\AspNetSessionPersistanceProvider.cs" />
+    <Compile Include="Infrastructure\Persistence\IPersistenceProvider.cs" />
+    <Compile Include="Infrastructure\Persistence\PersistenceProvider.cs" />
+    <Compile Include="Infrastructure\Persistence\StaticMemberPersistanceProvider.cs" />
+    <Compile Include="Infrastructure\Math\RandomGenerator.cs" />
+    <Compile Include="Infrastructure\Math\RandomRange.cs" />
+    <Compile Include="Infrastructure\Text\StringHelper.cs" />
+    <Compile Include="Infrastructure\Web\HtmlHelper.cs" />
+    <Compile Include="Infrastructure\Web\HttpHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\Drawing\ImageFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\ImageGeneratorFacade.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\AncientMosaicImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\BlackOverlapImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\Bullets2ImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\BulletsImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\CaughtInTheNet2ImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\CaughtInTheNetImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\ChalkboardImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\Chess3DImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\ChessImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\ChippedImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\CirclesImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\CollageImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\CorrosionImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\CrossShadow2ImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\CrossShadowImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\CutImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\DartsImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\DistortionImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\FingerprintsImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\FlashImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\GhostlyImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\Graffiti2ImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\GraffitiImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\JailImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\HaloImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\InBandagesImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\LegoImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\MassImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\MeltingHeatImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\NegativeImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\Overlap2ImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\OverlapImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\PaintMessImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\RoughImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\SnowImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\SpiderWebImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\SplitImageGenerator.cs" />
+    <Compile Include="Core\CaptchaImage\Styles\StitchImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\StrippyImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\SunAndWarmAirImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\Sunrays2ImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\SunraysImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\ThickThinLines2ImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\ThickThinLinesImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\ThinWavyLettersImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\VertigoImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\WantedCircularImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\WaveImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\WavyChessImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\Styles\WavyColorLettersImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\IImageGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\ImageGeneratorFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaImage\ImageStyle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\Audio\SoundFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\CaptchaSound\SoundGeneratorFacade.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Http\CaptchaRequestValidator.cs" />
+    <Compile Include="Web\UI\CaptchaValidator.cs" />
+    <EmbeddedResource Include="Infrastructure\Audio\Pronunciation\Resources\Pronunciation_English_US.bdsp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Infrastructure\Audio\Pronunciation\Resources\demo.wav" />
+    <EmbeddedResource Include="Infrastructure\Audio\Pronunciation\Resources\test.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Infrastructure\Audio\Wav\FormatTags.txt" />
+    <Content Include="Infrastructure\Collections\C5\LICENSE.txt" />
+    <EmbeddedResource Include="Web\Resources\SmallDisabledReloadIcon.gif" />
+    <EmbeddedResource Include="Web\Resources\SmallDisabledSoundIcon.gif" />
+    <EmbeddedResource Include="Web\Resources\DisabledReloadIcon.gif" />
+    <EmbeddedResource Include="Web\Resources\DisabledSoundIcon.gif" />
+    <EmbeddedResource Include="Web\Resources\SmallReloadIcon.gif" />
+    <EmbeddedResource Include="Web\Resources\SmallSoundIcon.gif" />
+    <EmbeddedResource Include="Web\UI\Captcha.bmp" />
+    <EmbeddedResource Include="Web\Resources\ReloadIcon.gif" />
+    <EmbeddedResource Include="Web\Resources\SoundIcon.gif" />
+    <EmbeddedResource Include="Web\ClientSide\BotDetectScripts.js" />
+    <EmbeddedResource Include="Web\Style\BotDetectLayout.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

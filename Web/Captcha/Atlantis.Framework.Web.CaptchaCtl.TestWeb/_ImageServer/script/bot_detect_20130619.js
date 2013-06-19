@@ -1,5 +1,5 @@
-if (typeof (BotDetect) == "undefined") { // start single inclusion guard
-    BotDetect = function () {
+if (typeof (AtlantisCaptcha) == "undefined") { // start single inclusion guard
+    AtlantisCaptcha = function () {
         var _clickEvent = 'click.captcha';
         var _keypressEvent = 'keypress.captcha';
         var _reloadCaptchaEvent = 'captchaReload';

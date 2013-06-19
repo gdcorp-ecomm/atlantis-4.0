@@ -473,7 +473,7 @@ ToolboxData(
       scriptBuilder.AppendLine("<script type=\"text/javascript\">");
       scriptBuilder.Append(JQueryDelim);
       scriptBuilder.AppendLine("(document).ready(function () {");
-      scriptBuilder.AppendLine("var captcha" + CaptchaID + "=new BotDetect();");
+      scriptBuilder.AppendLine("var captcha" + CaptchaID + "=new AtlantisCaptcha();");
       scriptBuilder.Append("captcha" + CaptchaID + ".Init('");
       scriptBuilder.Append(CaptchaControl.CaptchaControl.CaptchaId);
       scriptBuilder.Append("', '");

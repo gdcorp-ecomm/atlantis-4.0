@@ -7,22 +7,9 @@ namespace Atlantis.Framework.DotTypeCache.Static
 {
   public static class TLDRenewal
   {
-    private static Dictionary<string, int?> _renewalMonthsBeforeExpiration;
-
-    static TLDRenewal()
-    {
-      _renewalMonthsBeforeExpiration = new Dictionary<string, int?>();
-    }
-
     public static int? GetRenewalMonthsBeforeExpiration(string tld)
     {
-      int? result = null;
-
-      if (!_renewalMonthsBeforeExpiration.TryGetValue(tld, out result))
-      {
-        result = GetRenewalMonthsBeforeExpirationInternal(tld);
-        _renewalMonthsBeforeExpiration.Add(tld, result);
-      }
+      int? result = GetRenewalMonthsBeforeExpirationInternal(tld);
 
       return result;
     }

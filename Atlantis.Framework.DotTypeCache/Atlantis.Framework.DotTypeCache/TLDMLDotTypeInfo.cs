@@ -58,14 +58,28 @@ namespace Atlantis.Framework.DotTypeCache
 
     private RegDotTypeRegistryResponseData LoadDotTypeRegistryData()
     {
-      var request = new RegDotTypeRegistryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
-      return (RegDotTypeRegistryResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.Registry);
+      try
+      {
+        var request = new RegDotTypeRegistryRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
+        return (RegDotTypeRegistryResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.Registry);
+      }
+      catch (Exception)
+      {
+        return null;
+      }
     }
 
     private ProductIdListResponseData LoadProductIds()
     {
-      var request = new ProductIdListRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
-      return (ProductIdListResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ProductIdList);
+      try
+      {
+        var request = new ProductIdListRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, _tld);
+        return (ProductIdListResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEngineRequests.ProductIdList);
+      }
+      catch (Exception)
+      {
+        return null;
+      }
     }
 
     private DomainContactFieldsResponseData LoadDomainContactFieldsData()
@@ -101,16 +115,6 @@ namespace Atlantis.Framework.DotTypeCache
     public int MaxExpiredAuctionRegLength
     {
       get { return _tldml.Value.Product.ExpiredAuctionsYears.Max; }
-    }
-
-    public int MinPreRegLength
-    {
-      get { return _tldml.Value.Product.PreregistrationYears(_DEFAULTPREREGTYPE).Min; }
-    }
-
-    public int MaxPreRegLength
-    {
-      get { return _tldml.Value.Product.PreregistrationYears(_DEFAULTPREREGTYPE).Max; }
     }
 
     public int MinRegistrationLength
@@ -159,7 +163,7 @@ namespace Atlantis.Framework.DotTypeCache
     {
       get
       {
-        return _tldml.Value.ApplicationControl.IsMultiRegistry; 
+        return _tldml.Value.ApplicationControl.IsMultiRegistry;
       }
     }
 
@@ -170,7 +174,7 @@ namespace Atlantis.Framework.DotTypeCache
 
     public RegistryLanguage GetLanguageByName(string languageName)
     {
-      return _languagesData.Value.GetLanguageDataByName(languageName); 
+      return _languagesData.Value.GetLanguageDataByName(languageName);
     }
 
     public RegistryLanguage GetLanguageById(int languageId)
@@ -196,10 +200,10 @@ namespace Atlantis.Framework.DotTypeCache
           switch (Tld.RenewProhibitedPeriodForExpirationUnit)
           {
             case "month":
-              maxRenewalDate = DateTime.Now.Date.AddMonths(Tld.RenewProhibitedPeriodForExpiration*-1);
+              maxRenewalDate = DateTime.Now.Date.AddMonths(Tld.RenewProhibitedPeriodForExpiration * -1);
               break;
             case "day":
-              maxRenewalDate = DateTime.Now.Date.AddDays(Tld.RenewProhibitedPeriodForExpiration*-1);
+              maxRenewalDate = DateTime.Now.Date.AddDays(Tld.RenewProhibitedPeriodForExpiration * -1);
               break;
           }
         }
@@ -242,16 +246,14 @@ namespace Atlantis.Framework.DotTypeCache
       return InternalGetProductId(registryId, registrationLength, domainCount, DotTypeProductTypes.ExpiredAuctionReg);
     }
 
-    public int GetPreRegProductId(int registrationLength, int domainCount)
+    public int GetPreRegProductId(PreRegPhases preRegPhase, int registrationLength, int domainCount)
     {
-      // TODO: handle prereg subtype
-      return InternalGetProductId(registrationLength, domainCount, DotTypeProductTypes.PreRegister);
+      return InternalGetProductId(registrationLength, domainCount, PhaseHelper.GetDotTypeProductTypes(preRegPhase));
     }
 
-    public int GetPreRegProductId(string registryId, int registrationLength, int domainCount)
+    public int GetPreRegProductId(PreRegPhases preRegPhase, string registryId, int registrationLength, int domainCount)
     {
-      // TODO: handle prereg subtype
-      return InternalGetProductId(registryId, registrationLength, domainCount, DotTypeProductTypes.PreRegister);
+      return InternalGetProductId(registryId, registrationLength, domainCount, PhaseHelper.GetDotTypeProductTypes(preRegPhase));
     }
 
     public int GetRegistrationProductId(int registrationLength, int domainCount)
@@ -288,11 +290,11 @@ namespace Atlantis.Framework.DotTypeCache
     {
       string registryId = null;
 
-      if (productType == DotTypeProductTypes.Registration)
+      if (productType == DotTypeProductTypes.Registration && _dotTypeRegistryData.Value != null)
       {
         registryId = _dotTypeRegistryData.Value.RegistrationAPI.Id;
       }
-      else if (productType == DotTypeProductTypes.Transfer)
+      else if (productType == DotTypeProductTypes.Transfer && _dotTypeRegistryData.Value != null)
       {
         registryId = _dotTypeRegistryData.Value.TransferAPI.Id;
       }
@@ -307,12 +309,18 @@ namespace Atlantis.Framework.DotTypeCache
 
       if (!string.IsNullOrEmpty(registryId))
       {
-        tiers = _productIdList.Value.GetProductTiersForRegistry(registryId, productType);
+        if (_productIdList.Value != null)
+        {
+          tiers = _productIdList.Value.GetProductTiersForRegistry(registryId, productType);
+        }
       }
 
       if (tiers == null)
       {
-        tiers = _productIdList.Value.GetDefaultProductTiers(productType);
+        if (_productIdList.Value != null)
+        {
+          tiers = _productIdList.Value.GetDefaultProductTiers(productType);
+        }
       }
 
       if (tiers != null)
@@ -353,14 +361,16 @@ namespace Atlantis.Framework.DotTypeCache
       return InternalGetValidProductIds(DotTypeProductTypes.ExpiredAuctionReg, _tldml.Value.Product.ExpiredAuctionsYears, registryId, domainCount, registrationLengths);
     }
 
-    public List<int> GetValidPreRegProductIdList(int domainCount, params int[] registrationLengths)
+    public List<int> GetValidPreRegProductIdList(PreRegPhases preRegPhase, int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(DotTypeProductTypes.PreRegister, _tldml.Value.Product.PreregistrationYears(_DEFAULTPREREGTYPE), domainCount, registrationLengths);
+      return InternalGetValidProductIds(PhaseHelper.GetDotTypeProductTypes(preRegPhase), _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(preRegPhase)), 
+                                        domainCount, registrationLengths);
     }
 
-    public List<int> GetValidPreRegProductIdList(string registryId, int domainCount, params int[] registrationLengths)
+    public List<int> GetValidPreRegProductIdList(PreRegPhases preRegPhase, string registryId, int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(DotTypeProductTypes.PreRegister, _tldml.Value.Product.PreregistrationYears(_DEFAULTPREREGTYPE), registryId, domainCount, registrationLengths);
+      return InternalGetValidProductIds(PhaseHelper.GetDotTypeProductTypes(preRegPhase), _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(preRegPhase)), 
+                                        registryId, domainCount, registrationLengths);
     }
 
     public List<int> GetValidRegistrationProductIdList(int domainCount, params int[] registrationLengths)
@@ -410,9 +420,10 @@ namespace Atlantis.Framework.DotTypeCache
       return InternalGetValidYears(DotTypeProductTypes.ExpiredAuctionReg, _tldml.Value.Product.ExpiredAuctionsYears, domainCount, registrationLengths);
     }
 
-    public List<int> GetValidPreRegLengths(int domainCount, params int[] registrationLengths)
+    public List<int> GetValidPreRegLengths(PreRegPhases preRegPhase, int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidYears(DotTypeProductTypes.PreRegister, _tldml.Value.Product.PreregistrationYears(_DEFAULTPREREGTYPE), domainCount, registrationLengths);
+      return InternalGetValidYears(PhaseHelper.GetDotTypeProductTypes(preRegPhase), _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(preRegPhase)), 
+                                   domainCount, registrationLengths);
     }
 
     public List<int> GetValidRegistrationLengths(int domainCount, params int[] registrationLengths)
@@ -440,11 +451,11 @@ namespace Atlantis.Framework.DotTypeCache
     {
       string registryId = null;
 
-      if (productType == DotTypeProductTypes.Registration)
+      if (productType == DotTypeProductTypes.Registration && _dotTypeRegistryData.Value != null)
       {
         registryId = _dotTypeRegistryData.Value.RegistrationAPI.Id;
       }
-      else if (productType == DotTypeProductTypes.Transfer)
+      else if (productType == DotTypeProductTypes.Transfer && _dotTypeRegistryData.Value != null)
       {
         registryId = _dotTypeRegistryData.Value.TransferAPI.Id;
       }
@@ -459,12 +470,18 @@ namespace Atlantis.Framework.DotTypeCache
 
       if (!string.IsNullOrEmpty(registryId))
       {
-        tiers = _productIdList.Value.GetProductTiersForRegistry(registryId, productType);
+        if (_productIdList.Value != null)
+        {
+          tiers = _productIdList.Value.GetProductTiersForRegistry(registryId, productType);
+        }
       }
 
       if (tiers == null)
       {
-        tiers = _productIdList.Value.GetDefaultProductTiers(productType);
+        if (_productIdList.Value != null)
+        {
+          tiers = _productIdList.Value.GetDefaultProductTiers(productType);
+        }
       }
 
       if (tiers != null)
@@ -490,7 +507,7 @@ namespace Atlantis.Framework.DotTypeCache
       string result = string.Empty;
 
       DotTypeProduct product;
-      if (_productIdList.Value.TryGetProductByProductId(productId, out product))
+      if (_productIdList.Value != null && _productIdList.Value.TryGetProductByProductId(productId, out product))
       {
         result = product.RegistryId;
       }
@@ -521,15 +538,34 @@ namespace Atlantis.Framework.DotTypeCache
       }
     }
 
-    public bool IsValidPreRegistrationPhase(string type, string subType, out ITLDPreRegistrationPhase preRegistrationPhase)
+    public ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase)
     {
-      if (_tldml.Value.PreRegistration != null)
+      ITLDLaunchPhase launchPhase = null;
+      if (_tldml.Value.Phase != null)
       {
-        return _tldml.Value.PreRegistration.IsValidPreRegistrationPhase(type, subType, out preRegistrationPhase);
+        launchPhase = _tldml.Value.Phase.GetLaunchPhase(preRegPhase);
       }
-      
-      preRegistrationPhase = null;
-      return false;
+      return launchPhase;
+    }
+
+    public int GetMinPreRegLength(PreRegPhases preRegPhase)
+    {
+      return _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(preRegPhase)).Min;
+    }
+
+    public int GetMaxPreRegLength(PreRegPhases preRegPhase)
+    {
+      return _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(preRegPhase)).Max;
+    }
+
+    public bool HasPreRegApplicationFee(PreRegPhases preRegPhase)
+    {
+      return _tldml.Value.Product.HasPreRegApplicationFee(PhaseHelper.GetPhaseCode(preRegPhase));
+    }
+
+    public int GetPreRegApplicationProductId(PreRegPhases preRegPhase)
+    {
+      return InternalGetProductId(0, 1, PhaseHelper.GetDotTypeProductTypes(preRegPhase, true));
     }
 
     public string GetRegistrationFieldsXml()

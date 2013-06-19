@@ -44,8 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITLDPreRegistrationPhase.cs" />
-    <Compile Include="ITLDPreRegistration.cs" />
+    <Compile Include="ITLDLaunchPhase.cs" />
+    <Compile Include="ITLDLaunchPhasePeriod.cs" />
+    <Compile Include="ITLDPhase.cs" />
     <Compile Include="ITLDApplicationControl.cs" />
     <Compile Include="ITLDTld.cs" />
     <Compile Include="ITLDDataImpl.cs" />
@@ -56,9 +57,15 @@
     <Compile Include="IDotTypeInfo.cs" />
     <Compile Include="IDotTypeProvider.cs" />
     <Compile Include="InvalidDotType.cs" />
+    <Compile Include="PhaseHelper.cs" />
+    <Compile Include="PreRegPhases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Atlantis.Framework.RegDotTypeProductIds\Atlantis.Framework.RegDotTypeProductIds.Interface\Atlantis.Framework.RegDotTypeProductIds.Interface.csproj">
+      <Project>{ae02c23a-ded2-492e-bf1b-be5d6e7a805a}</Project>
+      <Name>Atlantis.Framework.RegDotTypeProductIds.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.TLDDataCache\Atlantis.Framework.TLDDataCache.Interface\Atlantis.Framework.TLDDataCache.Interface.csproj">
       <Project>{2a615d6f-9604-40c1-bc6a-2659e3b97bcc}</Project>
       <Name>Atlantis.Framework.TLDDataCache.Interface</Name>

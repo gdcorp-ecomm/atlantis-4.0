@@ -24,6 +24,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     private TldValidYearsSet _offeredRenewalYears;
     private TldValidYearsSet _offeredExpiredAuctionYears;
     private Dictionary<string, TldValidYearsSet> _offeredPreregistrationYears;
+    private Dictionary<string, bool> _offeredPreRegApplicationFees = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
 
     public TLDMLProduct(XDocument tldmlDoc)
       : base(tldmlDoc)
@@ -33,26 +34,6 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       _offeredRenewalYears = LoadValidYears("renewperiodcollection", "renewperiod");
       _offeredExpiredAuctionYears = LoadValidYears("expiredauctionperiodcollection", "expiredauctionperiod");
       _offeredPreregistrationYears = LoadPreregistrationYears();
-    }
-
-    private Dictionary<string, TldValidYearsSet> LoadPreregistrationYears()
-    {
-      Dictionary<string, TldValidYearsSet> result = new Dictionary<string, TldValidYearsSet>(StringComparer.OrdinalIgnoreCase);
-
-      var preregistrationPhaseCollections = NamespaceElement.Descendants("preregistrationphasecollection");
-      foreach (XElement preregPhaseCollection in preregistrationPhaseCollections)
-      {
-        foreach (var preregistrationPhase in preregPhaseCollection.Descendants("preregistrationphase"))
-        {
-          XAttribute valueAtt = preregistrationPhase.Attribute("value");
-          if (valueAtt != null)
-          {
-            result[valueAtt.Value] = TldValidYearsSet.FromPeriodElements(preregistrationPhase.Descendants("preregistrationperiod"));
-          }
-        }
-      }
-
-      return result;
     }
 
     private TldValidYearsSet LoadValidYears(string periodCollectionName, string periodItemName)
@@ -70,6 +51,39 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       }
 
       return result;
+    }
+
+    private Dictionary<string, TldValidYearsSet> LoadPreregistrationYears()
+    {
+      var phaseYears = new Dictionary<string, TldValidYearsSet>(StringComparer.OrdinalIgnoreCase);
+
+      var launchRegCollections = NamespaceElement.Descendants("launchregistrationcollection");
+      foreach (XElement launchRegCollection in launchRegCollections)
+      {
+        foreach (var phase in launchRegCollection.Descendants("launchregistration"))
+        {
+          XAttribute valueAtt = phase.Attribute("code");
+          if (valueAtt != null)
+          {
+            phaseYears[valueAtt.Value] = TldValidYearsSet.FromPeriodElements(phase.Descendants("launchregistrationperiod"));
+
+            //load the application fee dictionary for each phase
+            LoadPhasesApplicationFees(phase, valueAtt);
+          }
+        }
+      }
+
+      return phaseYears;
+    }
+
+    private void LoadPhasesApplicationFees(XElement phase, XAttribute valueAtt)
+    {
+      var applicationElement = phase.Descendants("applicationFee").FirstOrDefault();
+      if (applicationElement != null)
+      {
+        _offeredPreRegApplicationFees[valueAtt.Value] = "true".Equals(applicationElement.Attribute("enabled").Value,
+                                                              StringComparison.OrdinalIgnoreCase);
+      }
     }
 
     public ITLDValidYearsSet RegistrationYears
@@ -102,5 +116,12 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return result;
     }
 
+    public bool HasPreRegApplicationFee(string type)
+    {
+      bool result;
+      _offeredPreRegApplicationFees.TryGetValue(type, out result);
+
+      return result;
+    }
   }
 }

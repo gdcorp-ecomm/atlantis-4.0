@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Linq;
+using Atlantis.Framework.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -47,7 +48,13 @@ namespace Atlantis.Framework.TLDDataCache.Interface
       var overrideTlds = TLDsHelper.OverrideTlds();
       if (overrideTlds.Count > 0)
       {
-        tlds.AddRange(new List<string>(overrideTlds));
+        foreach (var item in overrideTlds)
+        {
+          if (!tlds.Contains(item, StringComparer.OrdinalIgnoreCase))
+          {
+            tlds.Add(item);
+          }
+        }
       }
 
       if (tlds.Count == 0)

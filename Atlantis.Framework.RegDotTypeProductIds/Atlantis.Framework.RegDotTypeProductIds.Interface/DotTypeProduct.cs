@@ -30,15 +30,8 @@ namespace Atlantis.Framework.RegDotTypeProductIds.Interface
       RegistryId = GetAttributeValueString(productElement, _REGISTRATIONAPIID, string.Empty);
       
       string type = GetAttributeValueString(productElement, _TYPEATTRIBUTE, string.Empty);
-      DotTypeProductTypes validType;
-      if (Enum.TryParse(type, out validType))
-      {
-        ProductType = validType;
-      }
-      else
-      {
-        ProductType = DotTypeProductTypes.None;
-      }
+
+      ProductType = EnumHelper.GetValueFromDescription<DotTypeProductTypes>(type);
     }
 
     public bool IsValid

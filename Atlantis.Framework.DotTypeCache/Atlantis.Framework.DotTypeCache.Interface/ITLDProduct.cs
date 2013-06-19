@@ -7,5 +7,6 @@
     ITLDValidYearsSet RenewalYears { get; }
     ITLDValidYearsSet ExpiredAuctionsYears { get; }
     ITLDValidYearsSet PreregistrationYears(string type);
+    bool HasPreRegApplicationFee(string type);
   }
 }

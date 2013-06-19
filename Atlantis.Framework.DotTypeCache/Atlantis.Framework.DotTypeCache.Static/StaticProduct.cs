@@ -56,5 +56,10 @@ namespace Atlantis.Framework.DotTypeCache.Static
     {
       return _preregistrationYears;
     }
+
+    public bool HasPreRegApplicationFee(string type)
+    {
+      return false;
+    }
   }
 }

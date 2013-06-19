@@ -80,16 +80,6 @@ namespace Atlantis.Framework.DotTypeCache
       get { return this._dotTypeInfo.MaxExpiredAuctionRegLength; }
     }
 
-    public int MinPreRegLength
-    {
-      get { return this._dotTypeInfo.MinPreRegLength; }
-    }
-
-    public int MaxPreRegLength
-    {
-      get { return this._dotTypeInfo.MaxPreRegLength; }
-    }
-
     public int MinRegistrationLength
     {
       get { return this._dotTypeInfo.MinRegistrationLength; }
@@ -145,9 +135,9 @@ namespace Atlantis.Framework.DotTypeCache
       return this._dotTypeInfo.CanRenew(currentExpirationDate, out maxValidRenewalLength);
     }
 
-    public int GetPreRegProductId(int registrationLength, int domainCount)
+    public int GetPreRegProductId(PreRegPhases preRegPhase, int registrationLength, int domainCount)
     {
-      return this._dotTypeInfo.GetPreRegProductId(registrationLength, domainCount);
+      return this._dotTypeInfo.GetPreRegProductId(preRegPhase, registrationLength, domainCount);
     }
 
     public int GetExpiredAuctionRegProductId(int registrationLength, int domainCount)
@@ -205,9 +195,9 @@ namespace Atlantis.Framework.DotTypeCache
       return this._dotTypeInfo.GetValidExpiredAuctionRegProductIdList(domainCount, registrationLengths);
     }
 
-    public List<int> GetValidPreRegProductIdList(int domainCount, params int[] registrationLengths)
+    public List<int> GetValidPreRegProductIdList(PreRegPhases preRegPhase, int domainCount, params int[] registrationLengths)
     {
-      return this._dotTypeInfo.GetValidPreRegProductIdList(domainCount, registrationLengths);
+      return this._dotTypeInfo.GetValidPreRegProductIdList(preRegPhase, domainCount, registrationLengths);
     }
 
     public List<int> GetValidRegistrationProductIdList(int domainCount, params int[] registrationLengths)
@@ -244,9 +234,9 @@ namespace Atlantis.Framework.DotTypeCache
       return this._dotTypeInfo.GetValidExpiredAuctionRegLengths(domainCount, registrationLengths);
     }
 
-    public List<int> GetValidPreRegLengths(int domainCount, params int[] registrationLengths)
+    public List<int> GetValidPreRegLengths(PreRegPhases preRegPhase, int domainCount, params int[] registrationLengths)
     {
-      return this._dotTypeInfo.GetValidPreRegLengths(domainCount, registrationLengths);
+      return this._dotTypeInfo.GetValidPreRegLengths(preRegPhase, domainCount, registrationLengths);
     }
 
     public List<int> GetValidRegistrationLengths(int domainCount, params int[] registrationLengths)
@@ -297,13 +287,13 @@ namespace Atlantis.Framework.DotTypeCache
       return productId;
     }
 
-    public int GetPreRegProductId(string registryId, int registrationLength, int domainCount)
+    public int GetPreRegProductId(PreRegPhases preRegPhase, string registryId, int registrationLength, int domainCount)
     {
-      int productId = GetRegistryProductId(registryId, DotTypeProductTypes.PreRegister, registrationLength, domainCount, MinPreRegLength, MaxPreRegLength);
+      int productId = GetRegistryProductId(registryId, DotTypeProductTypes.PreRegister, registrationLength, domainCount, GetMinPreRegLength(preRegPhase), GetMaxPreRegLength(preRegPhase));
 
       if (productId < 0)
       {
-        productId = this.GetPreRegProductId(registrationLength, domainCount);
+        productId = this.GetPreRegProductId(preRegPhase, registrationLength, domainCount);
         string message = string.Format(_MISSING_ID_ERROR, registryId, registrationLength, domainCount);
         Logging.LogException("MultiRegDotTypeInfo.GetPreRegProductId", message, this.DotType);
       }
@@ -366,16 +356,16 @@ namespace Atlantis.Framework.DotTypeCache
       }
     }
 
-    public List<int> GetValidPreRegProductIdList(string registryId, int domainCount, params int[] registrationLengths)
+    public List<int> GetValidPreRegProductIdList(PreRegPhases preRegPhase, string registryId, int domainCount, params int[] registrationLengths)
     {
       DotTypeProductTiers productTiers = _productData.GetProductTiersForRegistry(registryId, DotTypeProductTypes.PreRegister);
       if (productTiers != null)
       {
-        return GetValidProductIdList(productTiers, MinPreRegLength, MaxPreRegLength, domainCount, registrationLengths);
+        return GetValidProductIdList(productTiers, GetMinPreRegLength(preRegPhase), GetMaxPreRegLength(preRegPhase), domainCount, registrationLengths);
       }
       else
       {
-        return GetValidPreRegProductIdList(domainCount, registrationLengths);
+        return GetValidPreRegProductIdList(preRegPhase, domainCount, registrationLengths);
       }
     }
 
@@ -450,9 +440,29 @@ namespace Atlantis.Framework.DotTypeCache
       get { return this._dotTypeInfo.ApplicationControl; }
     }
 
-    public bool IsValidPreRegistrationPhase(string type, string subType, out ITLDPreRegistrationPhase preRegistrationPhase)
+    public ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase)
     {
-      return this._dotTypeInfo.IsValidPreRegistrationPhase(type, subType, out preRegistrationPhase);
+      return this._dotTypeInfo.GetLaunchPhase(preRegPhase);
+    }
+
+    public int GetMinPreRegLength(PreRegPhases preRegPhase)
+    {
+      return this._dotTypeInfo.GetMinPreRegLength(preRegPhase);
+    }
+
+    public int GetMaxPreRegLength(PreRegPhases preRegPhase)
+    {
+      return this._dotTypeInfo.GetMaxPreRegLength(preRegPhase);
+    }
+
+    public bool HasPreRegApplicationFee(PreRegPhases preRegPhase)
+    {
+      return this._dotTypeInfo.HasPreRegApplicationFee(preRegPhase);
+    }
+
+    public int GetPreRegApplicationProductId(PreRegPhases preRegPhase)
+    {
+      return this._dotTypeInfo.GetPreRegApplicationProductId(preRegPhase);
     }
 
     public string GetRegistrationFieldsXml()

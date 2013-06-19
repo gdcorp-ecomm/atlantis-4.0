@@ -47,6 +47,7 @@
     <Compile Include="DotTypeProductTiers.cs" />
     <Compile Include="DotTypeProductTypes.cs" />
     <Compile Include="DotTypeProductTier.cs" />
+    <Compile Include="EnumHelper.cs" />
     <Compile Include="ProductIdListRequestData.cs" />
     <Compile Include="ProductIdListResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

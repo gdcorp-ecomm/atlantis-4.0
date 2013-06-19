@@ -133,6 +133,17 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
     }
 
     [TestMethod]
+    public void DraftVersion_GetContentTests()
+    {
+      string appName = "sales";
+
+      string relativePath = "yermom?version=51c23725f778fc10204fd85d";
+      ICDSContentProvider provider = ProviderContainer.Resolve<ICDSContentProvider>();
+      IRenderContent renderContent = provider.GetContent(appName, relativePath);
+      Assert.IsTrue(!string.IsNullOrEmpty(renderContent.Content));
+    }
+
+    [TestMethod]
     public void ContentNotFound_GetContentTests()
     {
       string appName = "sales/unittest";

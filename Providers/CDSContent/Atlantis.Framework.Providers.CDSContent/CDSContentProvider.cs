@@ -45,11 +45,11 @@ namespace Atlantis.Framework.Providers.CDSContent
 
       if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(relativePath))
       {
-        ProcessQuery cdsQuery = new ProcessQuery(_container, string.Format(WhiteListFormat, appName));
-        var requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, cdsQuery.Query);
+        string cdsPath = string.Format(WhiteListFormat, appName);
+        var requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, cdsPath);
         try
         {
-          UrlWhitelistResponseData responseData = cdsQuery.BypassCache ? (UrlWhitelistResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.UrlWhitelistRequestType) : (UrlWhitelistResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.UrlWhitelistRequestType);
+          UrlWhitelistResponseData responseData = (UrlWhitelistResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.UrlWhitelistRequestType);
           if (responseData != null && responseData.IsSuccess)
           {
             result = responseData.CheckWhitelist(relativePath);
@@ -57,7 +57,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         }
         catch (Exception ex)
         {
-          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, cdsQuery.Query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, cdsPath, string.Empty, string.Empty, string.Empty, string.Empty, 0));
         }
       }
 
@@ -131,11 +131,11 @@ namespace Atlantis.Framework.Providers.CDSContent
 
       if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(relativePath))
       {
-        ProcessQuery cdsQuery = new ProcessQuery(_container, string.Format(RulesDocFormat, appName, relativePath));
-        var requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, cdsQuery.Query);
+        string cdsPath = string.Format(RulesDocFormat, appName, relativePath);
+        var requestData = new CDSRequestData(_shopperContext.ShopperId, string.Empty, string.Empty, _siteContext.Pathway, _siteContext.PageCount, cdsPath);
         try
         {
-          RoutingRulesResponseData responseData = cdsQuery.BypassCache ? (RoutingRulesResponseData)Engine.Engine.ProcessRequest(requestData, CDSProviderEngineRequests.RoutingRulesRequestType) : (RoutingRulesResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.RoutingRulesRequestType);
+          RoutingRulesResponseData responseData = (RoutingRulesResponseData)DataCache.DataCache.GetProcessRequest(requestData, CDSProviderEngineRequests.RoutingRulesRequestType);
           if (responseData != null && responseData.IsSuccess)
           {
             responseData.TryGetValue(type, out routingRules);
@@ -143,7 +143,7 @@ namespace Atlantis.Framework.Providers.CDSContent
         }
         catch (Exception ex)
         {
-          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, cdsQuery.Query, string.Empty, string.Empty, string.Empty, string.Empty, 0));
+          Engine.Engine.LogAtlantisException(new AtlantisException(ex.Source, string.Empty, "0", ex.Message, cdsPath, string.Empty, string.Empty, string.Empty, string.Empty, 0));
         }
       }
 

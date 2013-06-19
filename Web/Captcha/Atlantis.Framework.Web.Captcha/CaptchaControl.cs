@@ -379,6 +379,14 @@ ToolboxData(
       return validated;
     }
 
+    public static bool IsCaptchaValid(string captchaValue, string captchaID)
+    {
+      string instanceID = HttpContext.Current.Session[captchaID + ":Captcha_InstanceID"] as string;
+      string controlCaptchaID = HttpContext.Current.Session[captchaID + ":Captcha_CaptchaID"] as string;
+      bool validated = BotDetect.Web.CaptchaControl.AjaxValidate(controlCaptchaID, captchaValue, instanceID);
+      return validated;
+    }
+
     protected override void CreateChildControls()
     {
 

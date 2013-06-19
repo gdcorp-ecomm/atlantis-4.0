@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Atlantis.Framework.Web.CaptchaCtl;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -52,7 +53,7 @@ public partial class ValidateCaptchaAction : System.Web.UI.Page
   protected void Page_Load(object sender, EventArgs e)
   {
     string captchaValue = Request.QueryString["captchaValue"] as string;
-    bool isValid = captcha1.IsCaptchaValid(captchaValue);
+    bool isValid=CaptchaTemplateControl.IsCaptchaValid(captchaValue, "customAjaxValidation");
     currentDataObject.Valid = isValid;
   }
 

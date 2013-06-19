@@ -46,6 +46,15 @@ namespace BotDetect.Web.UI
       captchaControl.Urls = CaptchaUrls.Relative;
     }
 
+    public Captcha(string captchaId) 
+    {
+      captchaControl = new CaptchaControl(captchaId);
+
+      // use relative urls in Web Forms by default
+      captchaControl.Urls = CaptchaUrls.Relative;
+    }
+
+
     private CaptchaControl captchaControl;
 
     /// <summary>
@@ -587,7 +596,7 @@ namespace BotDetect.Web.UI
     {
       try
       {
-        IncludeStyleSheets();
+        
       }
       catch (HttpException ex)
       {
@@ -798,14 +807,12 @@ namespace BotDetect.Web.UI
 
       RenderWarnings(writer);
 
-      writer.WriteLine("  <div class=\"LBD_CaptchaDiv {4}\" id=\"{0}_CaptchaDiv\" style=\"width: {1}px !important; height: {2}px !important; {3}\"><!--",
+      writer.WriteLine("  <div class=\"LBD_CaptchaDiv {4}\" id=\"{0}_CaptchaDiv\" style=\"width: {1}px; height: {2}px; {3}\">",
           captchaControl.CaptchaId, captchaControl.TotalWidth, captchaControl.TotalHeight, this.Style.Value, this.CssClass);
 
       RenderCaptchaImageMarkup(writer);
       RenderCaptchaIcons(writer);
 
-      RenderScriptIncludes(writer);
-      RenderCssIncludes(writer);
       RenderHiddenFields(writer);
 
       writer.WriteLine("  </div>");
@@ -851,7 +858,7 @@ namespace BotDetect.Web.UI
     /// </summary>
     protected void RenderCaptchaImageMarkup(HtmlTextWriter writer)
     {
-      writer.WriteLine(" --><div class=\"LBD_CaptchaImageDiv\" id=\"{0}_CaptchaImageDiv\" style=\"width: {1}px !important; height: {2}px !important;\"><!--",
+      writer.WriteLine(" <div class=\"LBD_CaptchaImageDiv\" id=\"{0}_CaptchaImageDiv\" style=\"width: {1}px; height: {2}px;\">",
           captchaControl.CaptchaId, captchaControl.ImageSize.Width, captchaControl.ImageSize.Height);
 
 
@@ -873,14 +880,7 @@ namespace BotDetect.Web.UI
         }
       }
 
-      if (captchaControl.RenderIcons)
-      {
-        writer.WriteLine(" --></div><!--");
-      }
-      else
-      {
-        writer.WriteLine(" --></div>");
-      }
+	  writer.WriteLine(" </div>");      
     }
 
 
@@ -888,7 +888,7 @@ namespace BotDetect.Web.UI
     protected void RenderPlainImage(HtmlTextWriter writer)
     {
       // plain image
-      writer.WriteLine("   --><img class=\"LBD_CaptchaImage\" id=\"{0}\" src=\"{1}\" alt=\"{2}\" /><!--",
+      writer.WriteLine("   <img class=\"LBD_CaptchaImage\" id=\"{0}\" src=\"{1}\" alt=\"{2}\" />",
           captchaControl.ImageClientId, captchaControl.CaptchaImageUrl, captchaControl.CaptchaImageTooltip);
     }
 
@@ -898,14 +898,14 @@ namespace BotDetect.Web.UI
       //image link to configured help page
       if (captchaControl.IsTabIndexSet)
       {
-        writer.WriteLine("   --><a target=\"_blank\" href=\"{3}\" title=\"{6}\" tabindex=\"{5}\" onclick=\"{4}.OnHelpLinkClick(); return {4}.FollowHelpLink;\"><img class=\"LBD_CaptchaImage\" id=\"{0}\" src=\"{1}\" alt=\"{2}\" /></a><!--",
+        writer.WriteLine("   <a target=\"_blank\" href=\"{3}\" title=\"{6}\" tabindex=\"{5}\" onclick=\"{4}.OnHelpLinkClick(); return {4}.FollowHelpLink;\"><img class=\"LBD_CaptchaImage\" id=\"{0}\" src=\"{1}\" alt=\"{2}\" /></a>",
             captchaControl.ImageClientId, captchaControl.CaptchaImageUrl, captchaControl.CaptchaImageTooltip, captchaControl.HelpPage, captchaControl.CaptchaId, captchaControl.TabIndex, captchaControl.HelpLinkText);
 
         captchaControl.TabIndex++;
       }
       else
       {
-        writer.WriteLine("   --><a target=\"_blank\" href=\"{3}\" title=\"{6}\" onclick=\"{4}.OnHelpLinkClick(); return {4}.FollowHelpLink;\"><img class=\"LBD_CaptchaImage\" id=\"{0}\" src=\"{1}\" alt=\"{2}\" /></a><!--",
+        writer.WriteLine("   <a target=\"_blank\" href=\"{3}\" title=\"{6}\" onclick=\"{4}.OnHelpLinkClick(); return {4}.FollowHelpLink;\"><img class=\"LBD_CaptchaImage\" id=\"{0}\" src=\"{1}\" alt=\"{2}\" /></a>",
             captchaControl.ImageClientId, captchaControl.CaptchaImageUrl, captchaControl.CaptchaImageTooltip, captchaControl.HelpPage, captchaControl.CaptchaId, captchaControl.TabIndex, captchaControl.HelpLinkText);
       }
     }
@@ -913,20 +913,20 @@ namespace BotDetect.Web.UI
     protected void RenderPlainImageWithTextLink(HtmlTextWriter writer)
     {
       // image wrapped in an extra div 
-      writer.WriteLine("   --><div class=\"LBD_CaptchaImageDiv\" style=\"width:{3}px; height:{4}px;\"><img class=\"LBD_CaptchaImage\" id=\"{0}\" src=\"{1}\" alt=\"{2}\" /></div><!--",
+      writer.WriteLine("   <div class=\"LBD_CaptchaImageDiv\" style=\"width:{3}px; height:{4}px;\"><img class=\"LBD_CaptchaImage\" id=\"{0}\" src=\"{1}\" alt=\"{2}\" /></div>",
           captchaControl.ImageClientId, captchaControl.CaptchaImageUrl, captchaControl.CaptchaImageTooltip, captchaControl.ImageSize.Width, captchaControl.AdjustedHeight, captchaControl.CaptchaId);
 
       // + help link
       if (captchaControl.IsTabIndexSet)
       {
-        writer.WriteLine("   --><a href=\"{0}\" target=\"_blank\" title=\"{1}\" tabindex=\"{4}\" style=\"display: block !important; height: {2}px !important; margin: 0 !important; padding: 0 !important; font-size: {3}px !important; line-height: {2}px !important; visibility: visible !important; font-family: Verdana, DejaVu Sans, Bitstream Vera Sans, Verdana Ref, sans-serif !important; vertical-align: middle !important; text-align: center !important; text-decoration: none !important; background-color: #f8f8f8 !important; color: #606060 !important;\">{1}</a><!--",
+        writer.WriteLine("   <a href=\"{0}\" target=\"_blank\" title=\"{1}\" tabindex=\"{4}\" style=\"display: block !important; height: {2}px !important; margin: 0 !important; padding: 0 !important; font-size: {3}px !important; line-height: {2}px !important; visibility: visible !important; font-family: Verdana, DejaVu Sans, Bitstream Vera Sans, Verdana Ref, sans-serif !important; vertical-align: middle !important; text-align: center !important; text-decoration: none !important; background-color: #f8f8f8 !important; color: #606060 !important;\">{1}</a>",
             captchaControl.HelpPage, captchaControl.HelpLinkText, captchaControl.HelpLinkHeight, captchaControl.HelpLinkFontSize, captchaControl.TabIndex);
 
         captchaControl.TabIndex++;
       }
       else
       {
-        writer.WriteLine("   --><a href=\"{0}\" target=\"_blank\" title=\"{1}\" style=\"display: block !important; height: {2}px !important; margin: 0 !important; padding: 0 !important; font-size: {3}px !important; line-height: {2}px !important; visibility: visible !important; font-family: Verdana, DejaVu Sans, Bitstream Vera Sans, Verdana Ref, sans-serif !important; vertical-align: middle !important; text-align: center !important; text-decoration: none !important; background-color: #f8f8f8 !important; color: #606060 !important;\">{1}</a><!--",
+        writer.WriteLine("   <a href=\"{0}\" target=\"_blank\" title=\"{1}\" style=\"display: block !important; height: {2}px !important; margin: 0 !important; padding: 0 !important; font-size: {3}px !important; line-height: {2}px !important; visibility: visible !important; font-family: Verdana, DejaVu Sans, Bitstream Vera Sans, Verdana Ref, sans-serif !important; vertical-align: middle !important; text-align: center !important; text-decoration: none !important; background-color: #f8f8f8 !important; color: #606060 !important;\">{1}</a>",
             captchaControl.HelpPage, captchaControl.HelpLinkText, captchaControl.HelpLinkHeight, captchaControl.HelpLinkFontSize);
       }
     }
@@ -939,24 +939,11 @@ namespace BotDetect.Web.UI
     {
       if (captchaControl.RenderIcons)
       {
-        writer.WriteLine(" --><div class=\"LBD_CaptchaIconsDiv\" id=\"{0}_CaptchaIconsDiv\" style=\"width: {1}px !important;\"><!--",
-            captchaControl.CaptchaId, captchaControl.IconsDivWidth);
 
         // reload icon
         if (captchaControl.ReloadIconEnabled)
         {
-          if (captchaControl.IsTabIndexSet)
-          {
-            writer.WriteLine("   --><a class=\"LBD_ReloadLink\" id=\"{0}_ReloadLink\" href=\"#\" tabindex=\"{3}\" onclick=\"{0}.ReloadImage(); this.blur(); return false;\" title=\"{2}\"><img class=\"LBD_ReloadIcon\" id=\"{0}_ReloadIcon\" src=\"{1}\" alt=\"{2}\" /></a><!--",
-                captchaControl.CaptchaId, captchaControl.ReloadIconUrl, captchaControl.ReloadIconTooltip, captchaControl.TabIndex);
-
-            captchaControl.TabIndex++;
-          }
-          else
-          {
-            writer.WriteLine("   --><a class=\"LBD_ReloadLink\" id=\"{0}_ReloadLink\" href=\"#\" onclick=\"{0}.ReloadImage(); this.blur(); return false;\" title=\"{2}\"><img class=\"LBD_ReloadIcon\" id=\"{0}_ReloadIcon\" src=\"{1}\" alt=\"{2}\" /></a><!--",
-                captchaControl.CaptchaId, captchaControl.ReloadIconUrl, captchaControl.ReloadIconTooltip);
-          }
+          RenderHiddenElements(writer, "_ReloadLink", captchaControl.ReloadIconUrl);        
         }
 
         // sound icon
@@ -964,35 +951,23 @@ namespace BotDetect.Web.UI
         {
           if (captchaControl.CaptchaSoundAvailable)
           {
-            if (captchaControl.IsTabIndexSet)
-            {
-              writer.WriteLine("   --><a class=\"LBD_SoundLink\" id=\"{0}_SoundLink\" href=\"{1}\" tabindex=\"{4}\" onclick=\"{0}.PlaySound(); this.blur(); return false;\" title=\"{3}\"><img class=\"LBD_SoundIcon\" id=\"{0}_SoundIcon\" src=\"{2}\" alt=\"{3}\" /></a><!--",
-                  captchaControl.CaptchaId, captchaControl.CaptchaSoundUrl, captchaControl.SoundIconUrl, captchaControl.SoundIconTooltip, captchaControl.TabIndex);
-            }
-            else
-            {
-              writer.WriteLine("   --><a class=\"LBD_SoundLink\" id=\"{0}_SoundLink\" href=\"{1}\" onclick=\"{0}.PlaySound(); this.blur(); return false;\" title=\"{3}\"><img class=\"LBD_SoundIcon\" id=\"{0}_SoundIcon\" src=\"{2}\" alt=\"{3}\" /></a><!--",
-                  captchaControl.CaptchaId, captchaControl.CaptchaSoundUrl, captchaControl.SoundIconUrl, captchaControl.SoundIconTooltip);
-            }
-          }
-          else
-          {
-            writer.WriteLine("   --><a target=\"_blank\" class=\"LBD_DisabledLink\" id=\"{0}_SoundLink\" href=\"http://captcha.biz/doc/aspnet/howto/captcha-integration.html#files_BotDetectSoundPackages\" onclick=\"this.blur();\"><img class=\"LBD_SoundIcon\" id=\"{0}_SoundIcon\" src=\"{0}\" alt=\"\" /><span style=\"color:red !important;\">{1}</span></a><!--",
-                captchaControl.SoundIconUrl, captchaControl.SoundIconTooltip);
+            RenderHiddenElements(writer, "_SoundLink", captchaControl.CaptchaSoundUrl);            
           }
         }
 
         // invisible sound placeholder element
         if (captchaControl.CaptchaSoundEnabled)
         {
-          writer.WriteLine("   --><div class=\"LBD_Placeholder\" id=\"{0}\">&nbsp;</div><!--",
-              captchaControl.AudioPlaceholderClientId);
+          writer.WriteLine("   <div style=\"display:none\" class=\"LBD_Placeholder\" id=\"{0}\">&nbsp;</div>", captchaControl.AudioPlaceholderClientId);
         }
-
-        writer.WriteLine(" --></div>");
       }
     }
 
+    private void RenderHiddenElements(HtmlTextWriter writer, string controlSuffix, string href) //GODADDY OVERRIDE
+    {
+      string controlToWrite = string.Format("<a style=\"display:none\" id=\"{0}{1}\" href=\"{2}\"></a>", captchaControl.CaptchaId, controlSuffix, href);
+      writer.WriteLine(controlToWrite);
+    }
     protected void RenderScriptIncludes(HtmlTextWriter writer)
     {
       // we need the script include for sound & reload icons, and any 

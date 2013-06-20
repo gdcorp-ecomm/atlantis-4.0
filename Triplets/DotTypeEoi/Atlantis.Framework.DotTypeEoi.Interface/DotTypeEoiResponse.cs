@@ -13,26 +13,50 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     [DataMember(Name = "categories")]
     public DotTypeEoiCategories CategoriesObject { get; set; }
 
-    [IgnoreDataMember()]
+    private IList<IDotTypeEoiCategory> _categories;
+    [IgnoreDataMember]
     public IList<IDotTypeEoiCategory> Categories
     {
       get
       {
-        IList<IDotTypeEoiCategory> categories;
-        if (CategoriesObject != null && CategoriesObject.CategoryList != null && CategoriesObject.CategoryList.Count > 0)
+        if (_categories == null)
         {
-          categories = new List<IDotTypeEoiCategory>(CategoriesObject.CategoryList.Count);
-          foreach (var category in CategoriesObject.CategoryList)
+          if (CategoriesObject != null && CategoriesObject.CategoryList != null && CategoriesObject.CategoryList.Count > 0)
           {
-            categories.Add(category);
+            _categories = new List<IDotTypeEoiCategory>(CategoriesObject.CategoryList.Count);
+            foreach (var category in CategoriesObject.CategoryList)
+            {
+              _categories.Add(category);
+            }
+          }
+          else
+          {
+            _categories = new List<IDotTypeEoiCategory>(0);
           }
         }
-        else
-        {
-          categories = new List<IDotTypeEoiCategory>();
-        }
 
-        return categories;
+        return _categories;
+      }
+    }
+
+    private IDictionary<int, IDotTypeEoiGtld> _allGtlds;
+    [IgnoreDataMember]
+    public IDictionary<int, IDotTypeEoiGtld> AllGtlds 
+    {
+      get
+      {
+        if (_allGtlds == null)
+        {
+          _allGtlds = new Dictionary<int, IDotTypeEoiGtld>(1024);
+          foreach (IDotTypeEoiCategory dotTypeEoiCategory in Categories)
+          {
+            foreach (IDotTypeEoiGtld dotTypeEoiGtld in dotTypeEoiCategory.Gtlds)
+            {
+              _allGtlds[dotTypeEoiGtld.Id] = dotTypeEoiGtld;
+            }
+          }
+        }
+        return _allGtlds;
       }
     }
   }

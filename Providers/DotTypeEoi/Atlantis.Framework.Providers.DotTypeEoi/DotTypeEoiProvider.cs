@@ -3,35 +3,78 @@ using System.Collections.Generic;
 using Atlantis.Framework.DotTypeEoi.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeEoi.Interface;
+using Atlantis.Framework.Providers.Localization.Interface;
 
 namespace Atlantis.Framework.Providers.DotTypeEoi
 {
   public class DotTypeEoiProvider : ProviderBase, IDotTypeEoiProvider
   {
+    private const string ENGLISH = "en";
+    private const string SPANISH = "sp";
+
     private readonly Lazy<IShopperContext> _shopperContext;
+    private readonly IList<ICategoryData> _categoryList = new List<ICategoryData>();
+
+    private string _fullLanguage;
+    private string FullLanguage
+    {
+      get { return _fullLanguage ?? (_fullLanguage = DetermineFullLanguage()); }
+    }
 
     public DotTypeEoiProvider(IProviderContainer container) : base(container)
     {
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
     }
 
-    private readonly IList<ICategoryData> _categoryList = new List<ICategoryData>();
+    private string DetermineFullLanguage()
+    {
+      string fullLanguage = ENGLISH;
 
-    public bool GetGeneralEoi(string languageCode, out IGeneralEoiData generalEoiData)
+      ILocalizationProvider localizationProvider;
+      if (Container.TryResolve(out localizationProvider))
+      {
+        fullLanguage = localizationProvider.FullLanguage;
+      }
+
+      if (IsSpanishTransPerfectProxy(fullLanguage))
+      {
+        fullLanguage = ENGLISH;
+      }
+
+      return fullLanguage;
+    }
+
+    private bool IsSpanishTransPerfectProxy(string fullLanguage)
+    {
+      bool isSpanishTransPerfectProxy = false;
+
+      IProxyContext proxyContext;
+      if (Container.TryResolve(out proxyContext))
+      {
+        IProxyData languageProxy;
+        isSpanishTransPerfectProxy = fullLanguage.ToLowerInvariant().StartsWith(SPANISH) && 
+                                     proxyContext.TryGetActiveProxy(ProxyTypes.TransPerfectTranslation, out languageProxy);
+      }
+
+      return isSpanishTransPerfectProxy;
+    }
+
+    public bool GetGeneralEoi(out IGeneralEoiData generalEoiData)
     {
       var success = false;
       generalEoiData = null;
 
       try
       {
-        var request = new GeneralEoiJsonRequestData(languageCode);
+        var request = new GeneralEoiJsonRequestData(FullLanguage);
         var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
+        
         if (response.IsSuccess && response.DotTypeEoiResponse != null)
         {
           var dotTypeEoiResponse = response.DotTypeEoiResponse;
           var displayTime = dotTypeEoiResponse.DisplayTime;
 
-          AddGtldButtonStatus(dotTypeEoiResponse.Categories, languageCode);
+          AddGtldButtonStatus(dotTypeEoiResponse.Categories);
 
           generalEoiData = new GeneralEoiData(displayTime, dotTypeEoiResponse.Categories);
           success = true;
@@ -39,7 +82,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       }
       catch (Exception ex)
       {
-        var data = "languageCode: " + languageCode;
+        var data = "languageCode: " + FullLanguage;
         var exception = new AtlantisException("DotTypeEoiProvider.GetGeneralEoi(languageCode)", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
@@ -47,19 +90,20 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool GetGeneralEoi(int page, int entriesPerPage, int categoryId, string languageCode, out IGeneralGtldData generalGtldData)
+    public bool GetGeneralEoi(int page, int entriesPerPage, int categoryId, out IGeneralGtldData generalGtldData)
     {
       var success = false;
       generalGtldData = null;
 
       try
       {
-        var request = new GeneralEoiJsonRequestData(languageCode);
+        var request = new GeneralEoiJsonRequestData(FullLanguage);
         var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
         if (response.IsSuccess && response.DotTypeEoiResponse != null)
         {
           var dotTypeEoiResponse = response.DotTypeEoiResponse;
           var displayTime = dotTypeEoiResponse.DisplayTime;
+          
           foreach (var category in dotTypeEoiResponse.Categories)
           {
             if (categoryId == category.CategoryId)
@@ -79,7 +123,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
                 gtlds.Add(gtldList[i]);
               }
 
-              AddGtldButtonStatus(gtlds, languageCode);
+              AddGtldButtonStatus(gtlds);
 
               var totalPages = (int)Math.Ceiling(gtldList.Count / (double)entriesPerPage);
               generalGtldData = new GeneralGtldData(displayTime, gtlds, totalPages);
@@ -90,7 +134,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       }
       catch (Exception ex)
       {
-        var data = "page: " + page + ", entriesPerPage: " + entriesPerPage + ", categoryId: " + categoryId + ", languageCode: " + languageCode;
+        var data = "page: " + page + ", entriesPerPage: " + entriesPerPage + ", categoryId: " + categoryId + ", languageCode: " + FullLanguage;
         var exception = new AtlantisException("DotTypeEoiProvider.GetGeneralEoi(page, entriesPerPage, categoryId, languageCode)", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
@@ -98,15 +142,16 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool GetGeneralEoiCategoryList(string languageCode, out IList<ICategoryData> categoryList)
+    public bool GetGeneralEoiCategoryList(out IList<ICategoryData> categoryList)
     {
       var success = false;
       categoryList = null;
 
       try
       {
-        var request = new GeneralEoiJsonRequestData(languageCode);
+        var request = new GeneralEoiJsonRequestData(FullLanguage);
         var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
+        
         if (response.IsSuccess && response.DotTypeEoiResponse != null)
         {
           foreach (var category in response.DotTypeEoiResponse.Categories)
@@ -126,37 +171,33 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool SearchEoi(string searchString, string languageCode, out IGeneralGtldData generalGtldData)
+    public bool SearchEoi(string searchString, out IGeneralGtldData generalGtldData)
     {
       var success = false;
       generalGtldData = null;
 
       try
       {
-        var request = new GeneralEoiJsonRequestData(languageCode);
+        var request = new GeneralEoiJsonRequestData(FullLanguage);
         var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
+        
         if (response.IsSuccess && response.DotTypeEoiResponse != null)
         {
-          foreach (var category in response.DotTypeEoiResponse.Categories)
+          IEnumerable<IDotTypeEoiGtld> gtlds = response.DotTypeEoiResponse.AllGtlds.Values;
+          IList<IDotTypeEoiGtld> matchingGtlds = new List<IDotTypeEoiGtld>(response.DotTypeEoiResponse.AllGtlds.Count);
+
+          foreach (var gtld in gtlds)
           {
-            if (category.Name.ToLower() == "all categories" && category.Gtlds != null && category.Gtlds.Count > 0)
+            if (gtld.Name.ToLower().Contains(searchString.ToLower()))
             {
-              var gtlds = new List<IDotTypeEoiGtld>();
-              foreach (var gtld in category.Gtlds)
-              {
-                if (gtld.Name.ToLower().Contains(searchString.ToLower()))
-                {
-                  gtlds.Add(gtld);
-                }
-              }
-
-              AddGtldButtonStatus(gtlds, languageCode);
-
-              generalGtldData = new GeneralGtldData(response.DotTypeEoiResponse.DisplayTime, gtlds, 0);
-              success = true;
-              break;
+              matchingGtlds.Add(gtld);
             }
           }
+
+          AddGtldButtonStatus(gtlds);
+
+          generalGtldData = new GeneralGtldData(response.DotTypeEoiResponse.DisplayTime, matchingGtlds, 0);
+          success = true;
         }
       }
       catch (Exception ex)
@@ -168,14 +209,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool GetShopperWatchList(string languageCode, out IShopperWatchListResponse shopperWatchListResponse)
+    public bool GetShopperWatchList(out IShopperWatchListResponse shopperWatchListResponse)
     {
       var success = false;
       shopperWatchListResponse = null;
 
       try
       {
-        var request = new ShopperWatchListJsonRequestData(_shopperContext.Value.ShopperId, languageCode);
+        var request = new ShopperWatchListJsonRequestData(_shopperContext.Value.ShopperId, FullLanguage);
         var response = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.ShopperWatchListJsonRequest);
         if (response.IsSuccess)
         {
@@ -192,14 +233,14 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    public bool AddToShopperWatchList(string displayTime, IList<IDotTypeEoiGtld> gTlds, string languageCode, out string responseMessage)
+    public bool AddToShopperWatchList(string displayTime, IList<IDotTypeEoiGtld> gTlds, out string responseMessage)
     {
       var success = false;
       responseMessage = string.Empty;
 
       try
       {
-          var request = new AddToShopperWatchListRequestData(_shopperContext.Value.ShopperId, displayTime, gTlds, languageCode);
+        var request = new AddToShopperWatchListRequestData(_shopperContext.Value.ShopperId, displayTime, gTlds, FullLanguage);
         var response = (AddToShopperWatchListResponseData) Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
         if (response.IsSuccess)
         {
@@ -240,7 +281,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
-    private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiCategory> categories, string languageCode)
+    private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiCategory> categories)
     {
       foreach (var category in categories)
       {
@@ -248,17 +289,17 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
         foreach (var subCategory in subCategories)
         {
           var gtlds = subCategory.Gtlds;
-          AddGtldButtonStatus(gtlds, languageCode);
+          AddGtldButtonStatus(gtlds);
         }
       }
     }
 
-    private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiGtld> gtlds, string languageCode)
+    private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiGtld> gtlds)
     {
       if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated)
       {
         IShopperWatchListResponse shopperWatchListResponse;
-        if (GetShopperWatchList(languageCode, out shopperWatchListResponse))
+        if (GetShopperWatchList(out shopperWatchListResponse))
         {
           foreach (var gtld in gtlds)
           {

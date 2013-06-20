@@ -75,6 +75,10 @@
       <Project>{7d931e9e-8088-4b73-bebc-7bae27a5083b}</Project>
       <Name>Atlantis.Framework.DotTypeEoi.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Localization\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
+      <Project>{061fcadc-9547-47e2-9643-cfbcfa355ac2}</Project>
+      <Name>Atlantis.Framework.Providers.Localization.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.DotTypeEoi.Interface\Atlantis.Framework.Providers.DotTypeEoi.Interface.csproj">
       <Project>{fea94b7e-7e36-4fa8-9369-cbd41ad53f5b}</Project>
       <Name>Atlantis.Framework.Providers.DotTypeEoi.Interface</Name>

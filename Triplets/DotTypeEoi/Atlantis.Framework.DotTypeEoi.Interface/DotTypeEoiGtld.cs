@@ -33,10 +33,10 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     [DataMember(Name = "@comments")]
     public string Comments { get; set; }
 
-    [IgnoreDataMember()]
+    [IgnoreDataMember]
     public bool IsFeatured { get; set; }
 
-    [IgnoreDataMember()]
+    [IgnoreDataMember]
     public ActionButtonTypes ActionButtonType { get; set; }
   }
 }

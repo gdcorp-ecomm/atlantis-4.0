@@ -12,7 +12,9 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
     }
 
     public int CategoryId { get; set; }
+
     public string Name { get; set; }
+
     public string DisplayName { get; set; }
   }
 }

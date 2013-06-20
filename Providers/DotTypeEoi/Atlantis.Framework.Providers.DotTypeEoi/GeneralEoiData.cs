@@ -12,6 +12,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
     }
 
     public string DisplayTime { get; set; }
+
     public IList<IDotTypeEoiCategory> Categories { get; set; }
   }
 }

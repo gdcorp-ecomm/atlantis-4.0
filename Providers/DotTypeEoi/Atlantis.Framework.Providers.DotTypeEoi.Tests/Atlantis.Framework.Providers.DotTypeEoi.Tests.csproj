@@ -43,6 +43,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -69,9 +70,21 @@
       <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
       <Name>Atlantis.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Localization\Atlantis.Framework.Localization.Impl\Atlantis.Framework.Localization.Impl.csproj">
+      <Project>{fe5bc5f5-bc23-499c-9ac6-470c6f350475}</Project>
+      <Name>Atlantis.Framework.Localization.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Localization\Atlantis.Framework.Localization.Interface\Atlantis.Framework.Localization.Interface.csproj">
+      <Project>{b324d9ec-957a-40df-8007-9281245ceff0}</Project>
+      <Name>Atlantis.Framework.Localization.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.Preferences\Atlantis.Framework.Providers.Preferences.Interface\Atlantis.Framework.Providers.Preferences.Interface.csproj">
       <Project>{1a50e3b8-4a5c-4e48-bad4-17c5092f0dde}</Project>
       <Name>Atlantis.Framework.Providers.Preferences.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.ProxyContext\Atlantis.Framework.Providers.ProxyContext\Atlantis.Framework.Providers.ProxyContext.csproj">
+      <Project>{016d33cb-e21f-430c-b793-4e345d2837bf}</Project>
+      <Name>Atlantis.Framework.Providers.ProxyContext</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Testing\Atlantis.Framework.Testing.MockHttpContext\Atlantis.Framework.Testing.MockHttpContext.csproj">
       <Project>{2f8983b4-801b-461a-9d76-26a58a496261}</Project>
@@ -88,6 +101,14 @@
     <ProjectReference Include="..\..\..\Triplets\DotTypeEoi\Atlantis.Framework.DotTypeEoi.Interface\Atlantis.Framework.DotTypeEoi.Interface.csproj">
       <Project>{7d931e9e-8088-4b73-bebc-7bae27a5083b}</Project>
       <Name>Atlantis.Framework.DotTypeEoi.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Localization\Atlantis.Framework.Providers.Localization.Interface\Atlantis.Framework.Providers.Localization.Interface.csproj">
+      <Project>{061fcadc-9547-47e2-9643-cfbcfa355ac2}</Project>
+      <Name>Atlantis.Framework.Providers.Localization.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Localization\Atlantis.Framework.Providers.Localization\Atlantis.Framework.Providers.Localization.csproj">
+      <Project>{b6571cf6-7f3e-47df-984d-f90c4abf8584}</Project>
+      <Name>Atlantis.Framework.Providers.Localization</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.DotTypeEoi.Interface\Atlantis.Framework.Providers.DotTypeEoi.Interface.csproj">
       <Project>{fea94b7e-7e36-4fa8-9369-cbd41ad53f5b}</Project>

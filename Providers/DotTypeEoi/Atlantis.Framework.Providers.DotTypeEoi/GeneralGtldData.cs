@@ -13,7 +13,9 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
     }
 
     public string DisplayTime { get; set; }
+
     public IList<IDotTypeEoiGtld> Gtlds { get; set; }
+
     public int TotalPages { get; set; }
   }
 }

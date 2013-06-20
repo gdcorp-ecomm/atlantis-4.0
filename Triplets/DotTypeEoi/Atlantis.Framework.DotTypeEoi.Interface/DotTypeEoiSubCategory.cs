@@ -25,28 +25,31 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     [DataMember(Name = "gTlds")]
     public DotTypeEoiGtlds GtldsObject { get; set; }
 
-    [IgnoreDataMember()]
+    private IList<IDotTypeEoiGtld> _gtlds;
+    [IgnoreDataMember]
     public IList<IDotTypeEoiGtld> Gtlds
     {
       get
       {
-        IList<IDotTypeEoiGtld> gtlds;
-        if (GtldsObject != null && GtldsObject.GtldList != null && GtldsObject.GtldList.Count > 0)
+        if (_gtlds == null)
         {
-          gtlds = new List<IDotTypeEoiGtld>(GtldsObject.GtldList.Count);
-          foreach (var gtld in GtldsObject.GtldList)
+          if (GtldsObject != null && GtldsObject.GtldList != null && GtldsObject.GtldList.Count > 0)
           {
-            var gtldTemp = gtld;
-            gtldTemp.IsFeatured = Name.ToLower() == "featured";
-            gtlds.Add(gtld);
+            _gtlds = new List<IDotTypeEoiGtld>(GtldsObject.GtldList.Count);
+            foreach (var gtld in GtldsObject.GtldList)
+            {
+              var gtldTemp = gtld;
+              gtldTemp.IsFeatured = Name.ToLower() == "featured";
+              _gtlds.Add(gtld);
+            }
+          }
+          else
+          {
+            _gtlds = new List<IDotTypeEoiGtld>(0);
           }
         }
-        else
-        {
-          gtlds = new List<IDotTypeEoiGtld>();
-        }
 
-        return gtlds;
+        return _gtlds;
       }
     }
   }

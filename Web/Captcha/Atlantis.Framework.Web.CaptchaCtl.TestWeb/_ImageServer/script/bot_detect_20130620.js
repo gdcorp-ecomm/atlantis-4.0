@@ -7,15 +7,23 @@ if (typeof (AtlantisCaptcha) == "undefined") { // start single inclusion guard
         var _ajaxValidateEvent = 'captchaAjaxValidate';
         var _imageLoadingEvent = 'captchaLoading';
         var _imageLoadedEvent = 'captchaLoaded';
+        var _stopAutoReload = 'captchaStopReload';
         var _currentInstance;
         var _captchaId = '';
         var _instanceId = '';
         var _imageId = '';
+        var _loadingPlaceholderID = '';
+        var _loadingText = '';
         var _validateSelector = '';
         var _soundPlayingInProgress = false;
         var _reloadInProgress = false;
         var _autofocusInput = false;
         var _autoClearInput = false;
+        var _autoReloadImage = false;
+        var _autoReloadTime = 1000;
+
+        var _reloadIntervalTimer = 0;
+
         var _millisecondsInAMinute = 60000;
         var _ajaxAuth = false;
         var _ajaxAuthenticateCallback;
@@ -25,7 +33,11 @@ if (typeof (AtlantisCaptcha) == "undefined") { // start single inclusion guard
         var PlaySoundLink;
         var CaptchaInput;
 
-        this.Init = function (captchaId, instanceId, reloadLinkId,playSoundLinkId, inputId,validateSelector, autoFocusInput, autoClearInput, ajaxAuthenticate,ajaxAuthenticateCallback) {
+        this.Init = function (captchaId, instanceId, reloadLinkId, playSoundLinkId, inputId, validateSelector, autoFocusInput, autoClearInput, ajaxAuthenticate, ajaxAuthenticateCallback, loadingPlaceHolder, loadingText, autoReload, autoReloadTime) {
+            _autoReloadTime = autoReloadTime;
+            _autoReloadImage = autoReload.toLowerCase() == 'true';
+            _loadingText = loadingText;
+            _loadingPlaceholderID = loadingPlaceHolder;
             _currentInstance = this;
             _captchaId = captchaId;
             _instanceId = instanceId;
@@ -46,6 +58,9 @@ if (typeof (AtlantisCaptcha) == "undefined") { // start single inclusion guard
             CaptchaInput.bind(_ajaxValidateEvent, function () {
                 _currentInstance.Validate();
             });
+            CaptchaInput.bind(_stopAutoReload, function () {
+                window.clearInterval(_reloadIntervalTimer);
+            });
             _autofocusInput = autoFocusInput;
             _autoClearInput = autoClearInput;
             PlaySoundLink.bind(_clickEvent, function () {
@@ -54,6 +69,12 @@ if (typeof (AtlantisCaptcha) == "undefined") { // start single inclusion guard
             ReloadLink.bind(_clickEvent, function () {
                 _currentInstance.ReloadImage();                
             });
+            if (_autoReloadImage) {
+                _reloadIntervalTimer = window.setInterval(function () {
+                    _currentInstance.ReloadImage();
+                }, _autoReloadTime);
+            }
+
             var _validationURL = Image.attr('src').replace('get=image', 'get=validationResult');
 
             if (_ajaxAuth) {
@@ -81,10 +102,19 @@ if (typeof (AtlantisCaptcha) == "undefined") { // start single inclusion guard
                 var imageContainer = $('#' + _captchaId + "_CaptchaImageDiv");
                 _reloadInProgress = true;
                 DisableReloadIcon();
-                var _loadingSpan = document.createElement('span');
-                _loadingSpan.appendChild(document.createTextNode('loading...'));
+                var _loadingSpan;
+                var loadingUI;
+                if (_loadingText!='') {
+                     _loadingSpan = document.createElement('span');
+                    _loadingSpan.appendChild(document.createTextNode(_loadingText));
+                    imageContainer.append(_loadingSpan);
+                }
+                else if (_loadingPlaceholderID != '') {
+                    loadingUI = $('#' + _loadingPlaceholderID);
+                    loadingUI.show();
+                    imageContainer.append(loadingUI);
+                }
                 Image.remove();
-                imageContainer.append(_loadingSpan);
                 CaptchaInput.trigger(_imageLoadingEvent);
                 var imageUrl = UpdateTimestamp(Image.attr('src'));
                 var newImage = InitNewImage(imageUrl);
@@ -113,6 +143,10 @@ if (typeof (AtlantisCaptcha) == "undefined") { // start single inclusion guard
 
         var PostReloadImage = function (loadingSpan) {
             $(loadingSpan).remove();
+            if (_loadingPlaceholderID != '') {
+                var loadingUI = $('#' + _loadingPlaceholderID);
+                loadingUI.remove();
+            }
             _reloadInProgress = false;
             CaptchaInput.trigger(_imageLoadedEvent);
         };

@@ -9,15 +9,15 @@
 <head runat="server">
     <title></title>
     <script src="http://img3.wsimg-com.ide/shared/js/1.8.3/global.20130605.min.js" type="text/javascript"></script>
-    <script src="http://img3.wsimg-com.ide/AtlantisScripts/Atlantis.Web.Controls/Captcha/bot_detect_20130619.min.js" type="text/javascript"></script>
+    <script src="_ImageServer/script/bot_detect_20130620.js" type="text/javascript"></script>
     <link rel="Stylesheet" type="text/css" href="http://img2.wsimg-com.ide/shared/css/1/styles_20120926.min.css" />
 </head>
 <body>
     <div style="padding-left: 100px;">
         <div>
-            <h1>Standard Ajax Validation</h1>
+            <h1>Standard Ajax Validation with 10 second auto reload</h1>
         </div>
-        <atlantis:CaptchaTemplateControl ID="captchaTemplate1" runat="server" CaptchaImagePlaceHolderID="plcCaptchaLocation" StashRenderLocation="javascriptStash" CaptchaValidateSelector=".captchaValidate" CaptchaValueID="captchaTextBox" ImageReloadPlaceHolderID="plcImageReload" PlaySoundPlaceHolderID="plcPlaySound" CaptchaID="standardAjaxValidation" AjaxAuthentication="true" AjaxAuthenticationCallback="AjaxAuthenticationResults" AutoClearInput="true" AutoFocusInput="true">
+        <atlantis:CaptchaTemplateControl ID="captchaTemplate1" runat="server" CaptchaImagePlaceHolderID="plcCaptchaLocation" StashRenderLocation="javascriptStash" CaptchaValidateSelector=".captchaValidate" CaptchaValueID="captchaTextBox" ImageReloadPlaceHolderID="plcImageReload" PlaySoundPlaceHolderID="plcPlaySound" CaptchaID="standardAjaxValidation" AjaxAuthentication="true" AjaxAuthenticationCallback="AjaxAuthenticationResults" AutoClearInput="true" AutoFocusInput="true" LoadingText="Loading..." AutoReloadImage="true">
             <Template>
                 <div style="width: 330px;">
                     <div style="float: left; padding-bottom: 10px;">
@@ -46,10 +46,10 @@
                 </div>
             </Template>
         </atlantis:CaptchaTemplateControl>
-         <div>
+        <div>
             <h1>Standard Ajax Validation 2nd Instance of captcha on same page</h1>
         </div>
-        <atlantis:CaptchaTemplateControl ID="CaptchaTemplateControl1" runat="server" CaptchaImagePlaceHolderID="plcCaptchaLocation2" StashRenderLocation="javascriptStash" CaptchaValidateSelector=".captchaValidate2" CaptchaValueID="captchaTextBox2" ImageReloadPlaceHolderID="plcImageReload2" PlaySoundPlaceHolderID="plcPlaySound2" CaptchaID="standardAjaxValidation2" AjaxAuthentication="true" AjaxAuthenticationCallback="AjaxAuthenticationResults2" AutoClearInput="true" AutoFocusInput="true">
+        <atlantis:CaptchaTemplateControl ID="CaptchaTemplateControl1" runat="server" CaptchaImagePlaceHolderID="plcCaptchaLocation2" StashRenderLocation="javascriptStash" CaptchaValidateSelector=".captchaValidate2" CaptchaValueID="captchaTextBox2" ImageReloadPlaceHolderID="plcImageReload2" PlaySoundPlaceHolderID="plcPlaySound2" CaptchaID="standardAjaxValidation2" AjaxAuthentication="true" AjaxAuthenticationCallback="AjaxAuthenticationResults2" AutoClearInput="true" AutoFocusInput="true" LoadingImagePlaceHolderID="plcLoadingUI" LoadingImageContainerPlaceHolderID="plcLoadingUIContainer">
             <Template>
                 <div style="width: 330px;">
                     <div style="float: left; padding-bottom: 10px;">
@@ -76,6 +76,11 @@
                         Validate Me
                     </div>
                 </div>
+                <asp:PlaceHolder ID="plcLoadingUIContainer" runat="server">
+                    <span id="plcLoadingUI" style="display:none;">
+                        Hello there I'm loading......
+                    </span>
+                </asp:PlaceHolder>
             </Template>
         </atlantis:CaptchaTemplateControl>
         <div>
@@ -131,7 +136,7 @@
         function isValid(result) {
             alert(result.Valid);
             if (!result.Valid) {
-               $('#cart_captcha_value_customAjaxValidation').trigger('captchaReload');
+                $('#cart_captcha_value_customAjaxValidation').trigger('captchaReload');
             }
         }
     </script>

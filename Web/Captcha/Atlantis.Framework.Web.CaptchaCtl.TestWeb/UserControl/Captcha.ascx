@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Captcha.ascx.cs" Inherits="Shared_Captcha_Captcha" %>
-<atlantis:CaptchaTemplateControl ID="captchaTemplate1" runat="server" CaptchaImagePlaceHolderID="plcCaptchaLocation" StashRenderLocation="javascriptStash" AjaxAuthentication="false" CaptchaValidateSelector=".captchaValidate1" AutoClearInput="true" AutoFocusInput="true">
+<atlantis:CaptchaTemplateControl ID="captchaTemplate1" runat="server" CaptchaImagePlaceHolderID="plcCaptchaLocation" StashRenderLocation="javascriptStash" AjaxAuthentication="false" CaptchaValidateSelector=".captchaValidate1" AutoClearInput="true" AutoFocusInput="true" LoadingText="Loading...">
     <Template>
         <div style="width: 500px;">
             <div style="float: left; padding-bottom: 10px;">

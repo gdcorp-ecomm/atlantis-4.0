@@ -47,6 +47,8 @@ ToolboxData(
     private TemplateOwner ownerValue;
     private HtmlGenericControl _imageContainer = new HtmlGenericControl();
     private HtmlGenericControl _audioContainer = new HtmlGenericControl();
+    private HtmlGenericControl _loadingPlaceHolder = new HtmlGenericControl();
+
     private HtmlImage _reloadImage = new HtmlImage();
     private HtmlImage _playSound = new HtmlImage();
     private StashContent _stashLocation = new StashContent();
@@ -71,8 +73,19 @@ ToolboxData(
 
       _imageContainer.TagName = "div";
 
+      _loadingPlaceHolder.TagName = "div";
+      _loadingPlaceHolder.Attributes["style"] = "display:none;";
+
       _audioContainer.TagName = "div";
       _audioContainer.ID = CaptchaID + "_AudioPlaceholder";
+    }
+
+    public HtmlGenericControl LoadingImagePlaceHolder
+    {
+      get
+      {
+        return _loadingPlaceHolder;
+      }
     }
 
     public HtmlImage ReloadImage
@@ -279,6 +292,45 @@ ToolboxData(
       }
     }
 
+    private string _loadingText = string.Empty;
+    public string LoadingText
+    {
+      get
+      {
+        return _loadingText;
+      }
+      set
+      {
+        _loadingText = value;
+      }
+    }    
+
+    private string _loadingImagePlaceHolderID;
+    public string LoadingImagePlaceHolderID
+    {
+      get
+      {
+        return _loadingImagePlaceHolderID;
+      }
+      set
+      {
+        _loadingImagePlaceHolderID = value;
+      }
+    }
+
+    private string _loadingImageContainerPlaceHolderID;
+    public string LoadingImageContainerPlaceHolderID
+    {
+      get
+      {
+        return _loadingImageContainerPlaceHolderID;
+      }
+      set
+      {
+        _loadingImageContainerPlaceHolderID = value;
+      }
+    }    
+
     private string _stashRenderLocation;
     public string StashRenderLocation
     {
@@ -289,6 +341,35 @@ ToolboxData(
       set
       {
         _stashRenderLocation = value;
+      }
+    }
+
+    private int _autoReloadMiliSeconds=10000;
+    public int AutoReloadMiliSeconds
+    {
+      get
+      {
+        return _autoReloadMiliSeconds;
+      }
+      set
+      {
+        if (_autoReloadMiliSeconds >= 10000)
+        {
+          _autoReloadMiliSeconds = value;
+        }
+      }
+    }
+
+    private bool _autoReloadImage = false;
+    public bool AutoReloadImage
+    {
+      get
+      {
+        return _autoReloadImage;
+      }
+      set
+      {
+        _autoReloadImage = value;
       }
     }
 
@@ -417,6 +498,10 @@ ToolboxData(
           {
             currentcontrol.Controls.Add(_playSound);
           }
+          else if (currentcontrol.ID.Equals(LoadingImageContainerPlaceHolderID, StringComparison.OrdinalIgnoreCase))
+          {
+            currentcontrol.Controls.Add(_loadingPlaceHolder);
+          }
         }
       }
       this.Controls.Add(ownerValue);
@@ -500,15 +585,27 @@ ToolboxData(
       scriptBuilder.Append(AutoClearInput);
       scriptBuilder.Append("','");
       scriptBuilder.Append(AjaxAuthentication);
+      scriptBuilder.Append("',");
       if (AjaxAuthentication)
       {
-        scriptBuilder.Append("',");
         scriptBuilder.Append(AjaxAuthenticationCallback);
       }
       else
       {
-        scriptBuilder.Append("'");
+        scriptBuilder.Append("''");
       }
+      scriptBuilder.Append(",'");
+      scriptBuilder.Append(_loadingImagePlaceHolderID);
+      scriptBuilder.Append("'");
+      scriptBuilder.Append(",'");
+      scriptBuilder.Append(_loadingText);
+      scriptBuilder.Append("'");
+      scriptBuilder.Append(",'");
+      scriptBuilder.Append(_autoReloadImage);
+      scriptBuilder.Append("'");
+      scriptBuilder.Append(",'");
+      scriptBuilder.Append(_autoReloadMiliSeconds);
+      scriptBuilder.Append("'");
       scriptBuilder.Append(");");
       scriptBuilder.AppendLine("});");
       scriptBuilder.AppendLine("</script>");

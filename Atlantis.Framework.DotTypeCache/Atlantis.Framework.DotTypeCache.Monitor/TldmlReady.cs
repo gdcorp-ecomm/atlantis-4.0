@@ -111,21 +111,48 @@ namespace Atlantis.Framework.DotTypeCache.Monitor
           }
 
           Dictionary<string, bool> flags;
-          var isTldmlReady = dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo" &&
-                             activeTldsResponse.IsTLDActive(tldName, "availcheckstatus") &&
-                             (offeredTldsRegistration.TryGetValue(tldName, out flags) ||
-                              offeredTldsTransfer.TryGetValue(tldName, out flags) ||
-                              offeredTldsBulk.TryGetValue(tldName, out flags) ||
-                              offeredTldsBulkTransfer.TryGetValue(tldName, out flags)
-                             ) &&
-                             minRegLength > 0 && minXferLength > 0 && minRenewalLength > 0 && maxRegLength > 0 &&
-                             maxXferLength > 0 && maxRenewalLength > 0 &&
-                             regProductId > 0 && xferProductId > 0 && renewalProductId > 0;
+          
+          //var isTldmlReady = dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo" &&
+          //                   activeTldsResponse.IsTLDActive(tldName, "availcheckstatus") &&
+          //                   (offeredTldsRegistration.TryGetValue(tldName, out flags) ||
+          //                    offeredTldsTransfer.TryGetValue(tldName, out flags) ||
+          //                    offeredTldsBulk.TryGetValue(tldName, out flags) ||
+          //                    offeredTldsBulkTransfer.TryGetValue(tldName, out flags)
+          //                   ) &&
+          //                   minRegLength > 0 && minXferLength > 0 && minRenewalLength > 0 && maxRegLength > 0 &&
+          //                   maxXferLength > 0 && maxRenewalLength > 0 &&
+          //                   regProductId > 0 && xferProductId > 0 && renewalProductId > 0;
 
+          bool isTldmlReadyForRegistration = dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo" &&
+                             activeTldsResponse.IsTLDActive(tldName, "availcheckstatus") &&
+                             offeredTldsRegistration.TryGetValue(tldName, out flags) &&
+                             minRegLength > 0 && maxRegLength > 0 &&
+                             regProductId > 0;
+
+          bool isTldmlReadyForTransfer = dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo" &&
+                             activeTldsResponse.IsTLDActive(tldName, "availcheckstatus") &&
+                             offeredTldsTransfer.TryGetValue(tldName, out flags) &&
+                             minXferLength > 0 && maxXferLength > 0 &&
+                             xferProductId > 0;
+
+          bool isTldmlReadyForBulk = dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo" &&
+                             activeTldsResponse.IsTLDActive(tldName, "availcheckstatus") &&
+                             offeredTldsBulk.TryGetValue(tldName, out flags) &&
+                             minRegLength > 0 && maxRegLength > 0 &&
+                             regProductId > 0;
+
+          bool isTldmlReadyForBulkTransfer = dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo" &&
+                             activeTldsResponse.IsTLDActive(tldName, "availcheckstatus") &&
+                             offeredTldsBulkTransfer.TryGetValue(tldName, out flags) &&
+                             minXferLength > 0 && maxXferLength > 0 &&
+                             xferProductId > 0;
 
           var tldmlReady = new XElement("DotType");
           tldmlReady.Add(new XAttribute("value", tldName.ToUpperInvariant()));
-          tldmlReady.Add(new XAttribute("TldmlReady", isTldmlReady));
+          tldmlReady.Add(new XAttribute("TldmlReadyForRegistration", isTldmlReadyForRegistration));
+          tldmlReady.Add(new XAttribute("TldmlReadyForTransfer", isTldmlReadyForTransfer));
+          tldmlReady.Add(new XAttribute("TldmlReadyForBulk", isTldmlReadyForBulk));
+          tldmlReady.Add(new XAttribute("TldmlReadyForBulkTransfer", isTldmlReadyForBulkTransfer));
 
           var tldInfo = new XElement("TldInfo");
           tldInfo.Add(new XAttribute("TldmlSupported", dotTypeInfo.GetType().Name == "TLDMLDotTypeInfo"));

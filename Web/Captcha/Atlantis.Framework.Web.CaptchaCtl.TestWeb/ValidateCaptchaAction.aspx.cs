@@ -53,7 +53,8 @@ public partial class ValidateCaptchaAction : System.Web.UI.Page
   protected void Page_Load(object sender, EventArgs e)
   {
     string captchaValue = Request.QueryString["captchaValue"] as string;
-    bool isValid=CaptchaTemplateControl.IsCaptchaValid(captchaValue, "customAjaxValidation");
+    string instanceID = Request.QueryString["instanceID"] as string;
+    bool isValid = CaptchaTemplateControl.IsCaptchaValid(captchaValue, instanceID);
     currentDataObject.Valid = isValid;
   }
 

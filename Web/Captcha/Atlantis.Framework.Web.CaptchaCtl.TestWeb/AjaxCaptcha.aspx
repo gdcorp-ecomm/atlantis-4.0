@@ -77,8 +77,7 @@
                     </div>
                 </div>
                 <asp:PlaceHolder ID="plcLoadingUIContainer" runat="server">
-                    <span id="plcLoadingUI" style="display:none;">
-                        Hello there I'm loading......
+                    <span id="plcLoadingUI" style="display: none;">Hello there I'm loading......
                     </span>
                 </asp:PlaceHolder>
             </Template>
@@ -99,6 +98,38 @@
                 <span id="g-addGiftCard-Confirm" class="g-btn-lg g-btn-prg">Validate Captcha</span>
             </div>
         </div>
+        <div>
+            <h1>Custom Ajax Validation 4th Instance of captcha on same page</h1>
+        </div>
+        <atlantis:CaptchaTemplateControl ID="CaptchaTemplateControl2" runat="server" CaptchaID="instance4" SaveValidationDataInSession="true" CaptchaImagePlaceHolderID="plcCaptchaLocation4" ReloadLinkID="change_code_instance4" PlaySoundLinkID="speak_code_instance4" StashRenderLocation="javascriptStash" CaptchaValueID="cart_captcha_value_instance4"  AutoClearInput="true" AutoFocusInput="true" >
+            <Template>
+                <div style="width: 500px;">
+                    <div style="float: left; padding-bottom: 10px;">
+                        <asp:PlaceHolder ID="plcCaptchaLocation4" runat="server"></asp:PlaceHolder>
+                    </div>
+                    <div style="padding-left: 10px; float: left;">
+                        <div class="captcha_button" style="padding-bottom: 5px;" id="speak_code_instance4">
+                            <div class="g-btn-lg g-btn-prg" style="width: 100px;">Speak Code</div>
+                        </div>
+                        <div class="captcha_button" id="change_code_instance4">
+                            <div class="g-btn-lg g-btn-prg" style="width: 100px;">Change Code</div>
+                        </div>
+                    </div>
+                    <div style="clear: both;">
+                        <asp:PlaceHolder ID="plcCaptchaLable" runat="server">
+                            <div style="padding-top: 15px;" class="cboth">
+                                <strong>Add Captcha here</strong>
+                            </div>
+                        </asp:PlaceHolder>
+                        <input type="text" name="cart_captcha_value_instance4" id="cart_captcha_value_instance4" maxlength="90" style="width: 180px;" />
+                    </div>
+
+                </div>
+            </Template>
+        </atlantis:CaptchaTemplateControl>
+         <div class="g-buttonpane">
+                <span id="validateCaptcha4" class="g-btn-lg g-btn-prg">Validate Captcha</span>
+            </div>
     </div>
 
     <script type="text/javascript">
@@ -127,12 +158,33 @@
                     dataType: "json",
                     url: '<%=ValidateCaptchaURL%>',
                     data: {
-                        captchaValue: captchaValue
+                        captchaValue: captchaValue,
+                        instanceID: 'customAjaxValidation'
                     },
                     success: isValid
                 });
             });
         });
+        $(document).ready(function () {
+            $('#validateCaptcha4').bind('click.captcha', function () {
+                var captchaValue = $('#cart_captcha_value_instance4').val();
+                $.ajax({
+                    dataType: "json",
+                    url: '<%=ValidateCaptchaURL%>',
+                    data: {
+                        captchaValue: captchaValue,
+                        instanceID: 'instance4'
+                    },
+                    success: isValid2
+                });
+            });
+        });
+        function isValid2(result) {
+            alert(result.Valid);
+            if (!result.Valid) {
+                $('#cart_captcha_value_instance4').trigger('captchaReload');
+            }
+        }
         function isValid(result) {
             alert(result.Valid);
             if (!result.Valid) {

@@ -80,6 +80,7 @@ ToolboxData(
       _audioContainer.ID = CaptchaID + "_AudioPlaceholder";
     }
 
+    [Description("image placeholder in the template"), Category("ChildControls")] 
     public HtmlGenericControl LoadingImagePlaceHolder
     {
       get
@@ -88,6 +89,7 @@ ToolboxData(
       }
     }
 
+    [Description("reload image"), Category("ChildControls")] 
     public HtmlImage ReloadImage
     {
       get
@@ -95,6 +97,7 @@ ToolboxData(
         return _reloadImage;
       }
     }
+    [Description("play sound image"), Category("ChildControls")] 
     public HtmlImage PlaySoundImage
     {
       get
@@ -102,6 +105,8 @@ ToolboxData(
         return _playSound;
       }
     }
+
+    [Description("stash content"), Category("ChildControls")] 
     public StashContent StashContentControl
     {
       get
@@ -110,6 +115,7 @@ ToolboxData(
       }
     }
 
+    [Description("is sound enabled"), Category("Behavior")] 
     private bool IsSoundEnabled
     {
       get
@@ -121,7 +127,9 @@ ToolboxData(
         _isSoundEnabled = true;
       }
     }
+
     private string _captchaID = string.Empty;
+    [Description("unique captcha instance ID"), Category("Behavior")]
     public string CaptchaID
     {
       get
@@ -135,6 +143,7 @@ ToolboxData(
     }
 
     private string _jqueryDelimiter = "$";
+    [Description("jquery delimiter"), Category("Behavior")]
     public string JQueryDelim
     {
       get
@@ -148,6 +157,7 @@ ToolboxData(
     }
 
     private string _captchaInstanceId = string.Empty;
+    [Description("captcha instance ID - used for validation"), Category("Behavior")]
     public string CaptchaInstanceId
     {
       get
@@ -162,6 +172,7 @@ ToolboxData(
     }
 
     Captcha _currentCaptchaControl;
+    [Description("BotDetect Captcha Control"), Category("ChildControls")]
     public Captcha CaptchaControl
     {
       get
@@ -175,6 +186,7 @@ ToolboxData(
     }
 
     private string _captchaImagePlaceHolderID;
+    [Description("captcha image placeholder id"), Category("TemplatePlaceholderID")]
     public string CaptchaImagePlaceHolderID
     {
       get
@@ -188,6 +200,7 @@ ToolboxData(
     }
 
     private string _captchaValueID;
+    [Description("captcha value id"), Category("Behavior")]
     public string CaptchaValueID
     {
       get
@@ -201,6 +214,7 @@ ToolboxData(
     }
 
     private bool _autoFocusInput;
+    [Description("auto focus on input"), Category("Behavior")]
     public bool AutoFocusInput
     {
       get
@@ -214,6 +228,7 @@ ToolboxData(
     }
 
     private bool _autoClearInput;
+    [Description("auto clear input"), Category("Behavior")]
     public bool AutoClearInput
     {
       get
@@ -227,6 +242,7 @@ ToolboxData(
     }
 
     private bool _ajaxAuthentication;
+    [Description("ajax authentication enable"), Category("AjaxBehavior")]
     public bool AjaxAuthentication
     {
       get
@@ -240,6 +256,7 @@ ToolboxData(
     }
 
     private string _ajaxAuthenticationCallback;
+    [Description("jscript callback function on ajax authentication"), Category("AjaxBehavior")]
     public string AjaxAuthenticationCallback
     {
       get
@@ -252,8 +269,8 @@ ToolboxData(
       }
     }
 
-
     private string _captchaValidateSelector;
+    [Description("jquery selector for ajax validators"), Category("AjaxBehavior")]
     public string CaptchaValidateSelector
     {
       get
@@ -267,6 +284,7 @@ ToolboxData(
     }
 
     private string _imageReloadPlaceHolderID;
+    [Description("placeholder in template used for reload captcha"), Category("TemplatePlaceholderID")]
     public string ImageReloadPlaceHolderID
     {
       get
@@ -280,6 +298,7 @@ ToolboxData(
     }
 
     private string _playSoundPlaceHolderID;
+    [Description("placeholder in template used for sound play"), Category("TemplatePlaceholderID")]
     public string PlaySoundPlaceHolderID
     {
       get
@@ -293,6 +312,7 @@ ToolboxData(
     }
 
     private string _loadingText = string.Empty;
+    [Description("text shown whil image renders"), Category("Behavior")]
     public string LoadingText
     {
       get
@@ -303,9 +323,10 @@ ToolboxData(
       {
         _loadingText = value;
       }
-    }    
+    }
 
     private string _loadingImagePlaceHolderID;
+    [Description("placeholder of UI to be shown while image renders"), Category("TemplatePlaceholderID")]
     public string LoadingImagePlaceHolderID
     {
       get
@@ -319,6 +340,7 @@ ToolboxData(
     }
 
     private string _loadingImageContainerPlaceHolderID;
+    [Description("loading image container placeholder id"), Category("TemplatePlaceholderID")]
     public string LoadingImageContainerPlaceHolderID
     {
       get
@@ -329,9 +351,10 @@ ToolboxData(
       {
         _loadingImageContainerPlaceHolderID = value;
       }
-    }    
+    }
 
     private string _stashRenderLocation;
+    [Description("stash render location"), Category("Behavior")]
     public string StashRenderLocation
     {
       get
@@ -344,7 +367,8 @@ ToolboxData(
       }
     }
 
-    private int _autoReloadMiliSeconds=10000;
+    private int _autoReloadMiliSeconds = 10000;
+    [Description("auto reload time in miliseconds"), Category("Behavior")]
     public int AutoReloadMiliSeconds
     {
       get
@@ -361,6 +385,7 @@ ToolboxData(
     }
 
     private bool _autoReloadImage = false;
+    [Description("auto reload enable"), Category("Behavior")]
     public bool AutoReloadImage
     {
       get
@@ -374,6 +399,7 @@ ToolboxData(
     }
 
     private bool _autobindEvents = true;
+    [Description("auto bind events"), Category("Behavior")]
     public bool AutoBindEvents
     {
       get
@@ -387,6 +413,7 @@ ToolboxData(
     }
 
     private string _reloadLinkID;
+    [Description("reload id"), Category("Behavior")]
     public string ReloadLinkID
     {
       get
@@ -400,6 +427,7 @@ ToolboxData(
     }
 
     private string _playSoundLinkID;
+    [Description("play sound id"), Category("Behavior")]
     public string PlaySoundLinkID
     {
       get
@@ -547,6 +575,7 @@ ToolboxData(
     }
 
     private bool _saveValidationDataInSession = false;
+   [Description("use session during custom validation"), Category("Behavior")]
     public bool SaveValidationDataInSession
     {
       get

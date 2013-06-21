@@ -1,5 +1,4 @@
 ﻿using System;
-using Atlantis.Framework.BasePages.Providers;
 using Atlantis.Framework.Engine.Monitor.Trace;
 using Atlantis.Framework.Engine.Monitor.Web;
 using Atlantis.Framework.Interface;

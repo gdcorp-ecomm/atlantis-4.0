@@ -66,6 +66,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DebugProvider.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -90,10 +91,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages\Atlantis.Framework.BasePages.csproj">
-      <Project>{69a90c5c-706c-49dd-8f1c-78b8ffb67ea3}</Project>
-      <Name>Atlantis.Framework.BasePages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
       <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
       <Name>Atlantis.Framework.Providers.Containers</Name>

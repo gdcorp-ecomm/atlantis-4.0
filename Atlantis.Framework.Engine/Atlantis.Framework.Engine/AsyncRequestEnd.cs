@@ -8,8 +8,6 @@ namespace Atlantis.Framework.Engine
   {
     private IAsyncRequest _asyncHandler = null;
     private AtlantisException _exception = null;
-    private AsyncCallback _callback = null;
-    private object _state = null;
     private AsyncState _asyncState;
     private IResponseData _responseData = null;
     private IAsyncResult _asyncResult;

@@ -2,6 +2,7 @@
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Interface.ProviderContainer;
 using System.Web;
+using System.Diagnostics;
 
 namespace Atlantis.Framework.Engine.Monitor.Trace
 {
@@ -25,9 +26,9 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
             trace.LogCompletedRequest(completedRequest);
           }
         }
-        catch (Exception ex)
+        catch
         {
-          AtlantisException exception = new AtlantisException("HttpRequestEngineTrace.OnRequestCompleted", 0, ex.Message + ex.StackTrace, string.Empty);
+          // Logging here could cause a risk of an infinite loop
         }
       }
     }

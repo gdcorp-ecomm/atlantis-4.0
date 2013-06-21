@@ -7,9 +7,11 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
 {
   public class HttpRequestEngineTraceProvider : ProviderBase, IEngineTraceProvider
   {
-    private readonly Lazy<ISiteContext> _siteContext;
+    /// <summary>
+    /// NOTE! Do not add any code to this class that could trigger an Engine Request.  That could cause an infinite loop
+    /// due to Engine Requests triggering the event to call this code.
+    /// </summary>
     private readonly Lazy<List<ICompletedRequest>> _completedRequests;
-
     private readonly Lazy<bool> _engineTraceOn;
     private const string _TRACEPARAMETER = "atlantisenginetrace";
 
@@ -17,15 +19,13 @@ namespace Atlantis.Framework.Engine.Monitor.Trace
       : base(container)
     {
       _completedRequests = new Lazy<List<ICompletedRequest>>(() => {return new List<ICompletedRequest>(10);});
-
-      _siteContext = new Lazy<ISiteContext>(Container.Resolve<ISiteContext>);
       _engineTraceOn = new Lazy<bool>(() => { return GetEngineTraceOn(); });
     }
 
     private bool GetEngineTraceOn()
     {
       bool result = false;
-      if ((HttpContext.Current != null) && (_siteContext.Value.IsRequestInternal))
+      if (HttpContext.Current != null)
       {
         string queryenginetrace = HttpContext.Current.Request.QueryString[_TRACEPARAMETER];
         if (queryenginetrace != null)

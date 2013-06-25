@@ -335,10 +335,6 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       {
         get { return false; }
       }
-      public bool IsGtld
-      {
-        get { return false; }
-      }
     }
   }
 }

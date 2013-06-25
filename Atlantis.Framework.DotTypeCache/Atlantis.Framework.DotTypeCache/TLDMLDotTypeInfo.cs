@@ -171,14 +171,10 @@ namespace Atlantis.Framework.DotTypeCache
     {
       get 
       { 
-        return _tldml.Value.ApplicationControl.IsGtld; 
-      } 
+        return _tldml.Value.Tld.IsGtld;
+      }
     }
 
-    public bool IsGld
-    {
-      get { return _tldml.Value.ApplicationControl.IsGtld; }
-    }
 
     public IEnumerable<RegistryLanguage> RegistryLanguages
     {

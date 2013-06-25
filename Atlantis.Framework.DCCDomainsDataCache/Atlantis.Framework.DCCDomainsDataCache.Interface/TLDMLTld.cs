@@ -22,6 +22,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     public TLDMLTld(XDocument tldmlDoc) : base(tldmlDoc)
     {
       _renewProhibitedPeriodForExpiration = LoadRenewProhibitedPeriodForExpiration();
+      _isGtld = LoadIsGTld();
     }
 
     private readonly int _renewProhibitedPeriodForExpiration;
@@ -36,6 +37,21 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       get { return _renewProhibitedPeriodForExpirationUnit; }
     }
 
+    private bool _isGtld;
+    public bool IsGtld
+    {
+      get { return _isGtld; }
+    }
+    private bool LoadIsGTld()
+    {
+      var gtldFalg = false;
+      var isGTldAttribute = NamespaceElement.Attribute("isGTLD");
+      if (isGTldAttribute != null)
+      {
+        gtldFalg = Convert.ToBoolean(isGTldAttribute.Value);
+      }
+      return gtldFalg;
+    }
     private int LoadRenewProhibitedPeriodForExpiration()
     {
       int period = 0;

@@ -7,6 +7,5 @@
     string DotTypeDescription { get; }
     string LandingPageUrl { get; }
     bool IsMultiRegistry { get; }
-    bool IsGtld { get; }
   }
 }

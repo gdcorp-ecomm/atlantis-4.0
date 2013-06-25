@@ -28,5 +28,13 @@ namespace Atlantis.Framework.DotTypeCache.Static
         return string.Empty;    //This is not be used since MaxRenewalMonthsOut is used for statics
       }
     }
+
+    public bool IsGtld 
+    {
+      get
+      {
+        return false;
+      }
+    }
   }
 }

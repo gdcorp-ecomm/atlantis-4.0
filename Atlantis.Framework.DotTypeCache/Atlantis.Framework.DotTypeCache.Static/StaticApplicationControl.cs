@@ -33,5 +33,9 @@ namespace Atlantis.Framework.DotTypeCache.Static
         return StaticDotTypes.IsDotTypeMultiRegistry(_staticDotType.DotType);
       } 
     }
+    public bool IsGtld
+    {
+      get { return false; }
+    }
   }
 }

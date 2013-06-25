@@ -16,6 +16,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     int MinRenewalLength { get; }
     int MaxRenewalLength { get; }
     bool IsMultiRegistry { get; }
+    bool IsGtld { get; }
 
     IEnumerable<RegistryLanguage> RegistryLanguages { get; }
     RegistryLanguage GetLanguageByName(string languageName);

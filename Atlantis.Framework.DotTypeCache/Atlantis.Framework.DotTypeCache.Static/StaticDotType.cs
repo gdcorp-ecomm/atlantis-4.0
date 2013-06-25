@@ -31,6 +31,13 @@ namespace Atlantis.Framework.DotTypeCache.Static
       protected set { _isMultiRegistry = value; }
     }
 
+    private bool _isGtld = false;
+    public bool IsGtld
+    {
+      get { return _isGtld; }
+      protected set { _isGtld = value; }
+    }
+
     public virtual int MinPreRegLength
     {
       get { return 1; }

@@ -167,6 +167,19 @@ namespace Atlantis.Framework.DotTypeCache
       }
     }
 
+    public bool IsGtld 
+    {
+      get 
+      { 
+        return _tldml.Value.ApplicationControl.IsGtld; 
+      } 
+    }
+
+    public bool IsGld
+    {
+      get { return _tldml.Value.ApplicationControl.IsGtld; }
+    }
+
     public IEnumerable<RegistryLanguage> RegistryLanguages
     {
       get { return _languagesData.Value.RegistryLanguages; }

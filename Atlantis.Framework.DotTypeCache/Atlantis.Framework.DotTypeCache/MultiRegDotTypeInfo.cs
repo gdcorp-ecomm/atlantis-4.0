@@ -114,6 +114,10 @@ namespace Atlantis.Framework.DotTypeCache
     {
       get { return true; }
     }
+    public bool IsGtld
+    {
+      get { return  this._dotTypeInfo.IsGtld; }
+    }
 
     public IEnumerable<RegistryLanguage> RegistryLanguages
     {

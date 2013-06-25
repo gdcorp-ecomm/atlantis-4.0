@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 using Atlantis.Framework.DotTypeCache.Interface;
 
@@ -22,6 +23,11 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     public TLDMLApplicationControl(XDocument tldmlDoc) : base(tldmlDoc)
     {
       Load();
+      var isGtldSearchKey = XName.Get("tld", "urn:godaddy:ns:tld");
+      _isGtld = false;
+      var isGTldAttribute = tldmlDoc.Descendants(isGtldSearchKey).FirstOrDefault();
+      if (isGTldAttribute != null)
+        _isGtld = Convert.ToBoolean(isGTldAttribute.Attribute("isGTLD").Value);
     }
 
     private string _dotTypeDescription;
@@ -40,6 +46,12 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     public bool IsMultiRegistry
     {
       get { return _isMultiRegistry; }
+    }
+
+    private bool _isGtld;
+    public bool IsGtld
+    {
+      get { return _isGtld; }
     }
 
     private void Load()
@@ -79,6 +91,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
             _isMultiRegistry = attr.Value.Equals("true");
           }
         }
+
       }
     }
   }

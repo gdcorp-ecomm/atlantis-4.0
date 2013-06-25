@@ -1395,5 +1395,36 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Assert.AreEqual(string.Empty, inValid.ApplicationControl.DotTypeDescription);
       Assert.AreEqual(false, inValid.ApplicationControl.IsMultiRegistry);
     }
+    [TestMethod]
+    public void GetAllRegTLDs()
+    {
+      var nongtldList=new Dictionary<string,IDotTypeInfo>();
+      var gtldList = new Dictionary<string, IDotTypeInfo>();
+
+      ITLDDataImpl reg = DotTypeProvider.GetTLDDataForRegistration;
+      foreach (var tldItem in reg.OfferedTLDsList)
+      {
+        var info = DotTypeCache.GetDotTypeInfo(tldItem);
+        if (info.IsGtld)
+        {
+          gtldList.Add(tldItem,info);
+        }
+        else
+        {
+          nongtldList.Add(tldItem,info);
+        }
+      }
+      Assert.IsTrue(gtldList.Count > 0); Assert.IsTrue(nongtldList.Count > 0);
+    }
+
+    [TestMethod]
+    public void GetDotinfo1()
+    {
+      IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("e.borg");
+     
+
+      Assert.IsTrue(dotTypeInfo.IsGtld ==true);
+      //Assert.IsTrue(launchphase != null && !string.IsNullOrEmpty(launchphase.Type) && !string.IsNullOrEmpty(launchphase.SubType) && !string.IsNullOrEmpty(launchphase.Description));
+    }
   }
 }

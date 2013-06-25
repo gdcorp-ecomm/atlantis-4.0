@@ -152,6 +152,11 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       get { return false; }
     }
 
+    public bool IsGtld 
+    {
+      get { return false; }
+    }
+
     public IEnumerable<RegistryLanguage> RegistryLanguages
     {
       get { return null; }
@@ -327,6 +332,10 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       }
 
       public bool IsMultiRegistry
+      {
+        get { return false; }
+      }
+      public bool IsGtld
       {
         get { return false; }
       }

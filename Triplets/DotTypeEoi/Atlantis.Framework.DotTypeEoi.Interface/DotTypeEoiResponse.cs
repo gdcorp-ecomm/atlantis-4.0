@@ -50,9 +50,12 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
           _allGtlds = new Dictionary<int, IDotTypeEoiGtld>(1024);
           foreach (IDotTypeEoiCategory dotTypeEoiCategory in Categories)
           {
-            foreach (IDotTypeEoiGtld dotTypeEoiGtld in dotTypeEoiCategory.Gtlds)
+            foreach (IDotTypeEoiSubCategory dotTypeEoiSubCategory in dotTypeEoiCategory.SubCategories)
             {
-              _allGtlds[dotTypeEoiGtld.Id] = dotTypeEoiGtld;
+              foreach (IDotTypeEoiGtld dotTypeEoiGtld in dotTypeEoiCategory.Gtlds)
+              {
+                _allGtlds[dotTypeEoiGtld.Id] = new DotTypeEoiGtld(dotTypeEoiGtld, dotTypeEoiSubCategory);
+              }
             }
           }
         }

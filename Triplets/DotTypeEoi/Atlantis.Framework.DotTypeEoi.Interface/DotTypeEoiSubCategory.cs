@@ -38,9 +38,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
             _gtlds = new List<IDotTypeEoiGtld>(GtldsObject.GtldList.Count);
             foreach (var gtld in GtldsObject.GtldList)
             {
-              var gtldTemp = gtld;
-              gtldTemp.IsFeatured = Name.ToLower() == "featured";
-              _gtlds.Add(gtld);
+              _gtlds.Add(new DotTypeEoiGtld(gtld, this));
             }
           }
           else

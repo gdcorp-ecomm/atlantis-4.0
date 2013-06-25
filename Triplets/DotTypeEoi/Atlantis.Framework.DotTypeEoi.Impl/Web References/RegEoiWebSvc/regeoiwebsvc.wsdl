@@ -30,6 +30,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetShopperWatchListCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperWatchListCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShopperWatchListCountResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetShopperWatchListXml">
         <s:complexType>
           <s:sequence>
@@ -89,6 +103,21 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="RemoveFromShopperWatchListXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperWishListCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopperId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShopperWishListCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShopperWishListCountResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -181,6 +210,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="RefreshCache">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="languageCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RefreshCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RefreshCacheResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetGeneralEOIXmlSoapIn">
@@ -194,6 +237,12 @@
   </wsdl:message>
   <wsdl:message name="GetGeneralEOIJSONSoapOut">
     <wsdl:part name="parameters" element="tns:GetGeneralEOIJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWatchListCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShopperWatchListCount" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWatchListCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShopperWatchListCountResponse" />
   </wsdl:message>
   <wsdl:message name="GetShopperWatchListXmlSoapIn">
     <wsdl:part name="parameters" element="tns:GetShopperWatchListXml" />
@@ -218,6 +267,12 @@
   </wsdl:message>
   <wsdl:message name="RemoveFromShopperWatchListXmlSoapOut">
     <wsdl:part name="parameters" element="tns:RemoveFromShopperWatchListXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWishListCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShopperWishListCount" />
+  </wsdl:message>
+  <wsdl:message name="GetShopperWishListCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShopperWishListCountResponse" />
   </wsdl:message>
   <wsdl:message name="GetShopperWishListXmlSoapIn">
     <wsdl:part name="parameters" element="tns:GetShopperWishListXml" />
@@ -255,6 +310,12 @@
   <wsdl:message name="GetTldPhaseDataJSONSoapOut">
     <wsdl:part name="parameters" element="tns:GetTldPhaseDataJSONResponse" />
   </wsdl:message>
+  <wsdl:message name="RefreshCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:RefreshCache" />
+  </wsdl:message>
+  <wsdl:message name="RefreshCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:RefreshCacheResponse" />
+  </wsdl:message>
   <wsdl:portType name="RegEOIWebSvcSoap">
     <wsdl:operation name="GetGeneralEOIXml">
       <wsdl:input message="tns:GetGeneralEOIXmlSoapIn" />
@@ -263,6 +324,10 @@
     <wsdl:operation name="GetGeneralEOIJSON">
       <wsdl:input message="tns:GetGeneralEOIJSONSoapIn" />
       <wsdl:output message="tns:GetGeneralEOIJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWatchListCount">
+      <wsdl:input message="tns:GetShopperWatchListCountSoapIn" />
+      <wsdl:output message="tns:GetShopperWatchListCountSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetShopperWatchListXml">
       <wsdl:input message="tns:GetShopperWatchListXmlSoapIn" />
@@ -279,6 +344,10 @@
     <wsdl:operation name="RemoveFromShopperWatchListXml">
       <wsdl:input message="tns:RemoveFromShopperWatchListXmlSoapIn" />
       <wsdl:output message="tns:RemoveFromShopperWatchListXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWishListCount">
+      <wsdl:input message="tns:GetShopperWishListCountSoapIn" />
+      <wsdl:output message="tns:GetShopperWishListCountSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetShopperWishListXml">
       <wsdl:input message="tns:GetShopperWishListXmlSoapIn" />
@@ -304,6 +373,10 @@
       <wsdl:input message="tns:GetTldPhaseDataJSONSoapIn" />
       <wsdl:output message="tns:GetTldPhaseDataJSONSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="RefreshCache">
+      <wsdl:input message="tns:RefreshCacheSoapIn" />
+      <wsdl:output message="tns:RefreshCacheSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="RegEOIWebSvcSoap" type="tns:RegEOIWebSvcSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -318,6 +391,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetGeneralEOIJSON">
       <soap:operation soapAction="urn:RegEOIWebSvc/GetGeneralEOIJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWatchListCount">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetShopperWatchListCount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -354,6 +436,15 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveFromShopperWatchListXml">
       <soap:operation soapAction="urn:RegEOIWebSvc/RemoveFromShopperWatchListXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWishListCount">
+      <soap:operation soapAction="urn:RegEOIWebSvc/GetShopperWishListCount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -415,6 +506,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RefreshCache">
+      <soap:operation soapAction="urn:RegEOIWebSvc/RefreshCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="RegEOIWebSvcSoap12" type="tns:RegEOIWebSvcSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -429,6 +529,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetGeneralEOIJSON">
       <soap12:operation soapAction="urn:RegEOIWebSvc/GetGeneralEOIJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWatchListCount">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetShopperWatchListCount" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -465,6 +574,15 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveFromShopperWatchListXml">
       <soap12:operation soapAction="urn:RegEOIWebSvc/RemoveFromShopperWatchListXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShopperWishListCount">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/GetShopperWishListCount" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -519,6 +637,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetTldPhaseDataJSON">
       <soap12:operation soapAction="urn:RegEOIWebSvc/GetTldPhaseDataJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefreshCache">
+      <soap12:operation soapAction="urn:RegEOIWebSvc/RefreshCache" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

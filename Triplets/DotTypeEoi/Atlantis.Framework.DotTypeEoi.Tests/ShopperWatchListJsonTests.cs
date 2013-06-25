@@ -25,6 +25,7 @@ namespace Atlantis.Framework.DotTypeEoi.Tests
       Assert.AreEqual(true, response2.ShopperWatchListResponse != null);
       Assert.AreEqual(true, response2.ShopperWatchListResponse.GtldIdDictionary.Count > 0);
       Assert.AreEqual(true, response2.ShopperWatchListResponse.GtldIdDictionary[1609].Id > -1);
+      Assert.AreEqual(true, response2.ShopperWatchListResponse.GtldCount >= 0);
     }
   }
 }

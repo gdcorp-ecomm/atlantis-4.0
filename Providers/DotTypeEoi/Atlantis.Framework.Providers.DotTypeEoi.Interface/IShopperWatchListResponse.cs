@@ -7,5 +7,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Interface
     IEnumerable<IDotTypeEoiGtld> Gtlds { get; }
 
     IDictionary<int, IDotTypeEoiGtld> GtldIdDictionary { get; }
+
+    int GtldCount { get; }
   }
 }

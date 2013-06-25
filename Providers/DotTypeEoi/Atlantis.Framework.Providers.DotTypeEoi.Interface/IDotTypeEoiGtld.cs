@@ -20,7 +20,7 @@
 
     string Comments { get; set; }
 
-    bool IsFeatured { get; set; }
+    bool IsFeatured { get; }
 
     ActionButtonTypes ActionButtonType { get; set; }
   }

@@ -10,14 +10,20 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     [DataMember(Name = "gTlds")]
     public DotTypeEoiGtlds GtldsObject { get; set; }
 
-    [IgnoreDataMember()]
+    [IgnoreDataMember]
+    public int GtldCount
+    {
+      get { return GtldsObject.GtldCount; }
+    }
+
+    [IgnoreDataMember]
     public IEnumerable<IDotTypeEoiGtld> Gtlds
     {
       get { return GtldIdDictionary.Values; }
     }
 
     private IDictionary<int, IDotTypeEoiGtld> _gtldIdDictionary;
-    [IgnoreDataMember()]
+    [IgnoreDataMember]
     public IDictionary<int, IDotTypeEoiGtld> GtldIdDictionary
     {
       get

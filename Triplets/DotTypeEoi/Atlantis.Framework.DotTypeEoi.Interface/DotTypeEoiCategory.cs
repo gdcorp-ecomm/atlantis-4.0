@@ -22,57 +22,57 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     [DataMember(Name = "subCategories")]
     public DotTypeEoiSubCategories SubCategoriesObject { get; set; }
 
-    [IgnoreDataMember()]
+    private IList<IDotTypeEoiSubCategory> _subCategories;
+    [IgnoreDataMember]
     public IList<IDotTypeEoiSubCategory> SubCategories
     {
       get
       {
-        IList<IDotTypeEoiSubCategory> subCategories;
-        if (SubCategoriesObject != null && SubCategoriesObject.SubCategoryListObject != null && SubCategoriesObject.SubCategoryListObject.Count > 0)
+        if (_subCategories == null)
         {
-          subCategories = new List<IDotTypeEoiSubCategory>(SubCategoriesObject.SubCategoryListObject.Count);
-          foreach (var subCategory in SubCategoriesObject.SubCategoryListObject)
+          if (SubCategoriesObject != null && SubCategoriesObject.SubCategoryListObject != null && SubCategoriesObject.SubCategoryListObject.Count > 0)
           {
-            subCategories.Add(subCategory);
+            _subCategories = new List<IDotTypeEoiSubCategory>(SubCategoriesObject.SubCategoryListObject.Count);
+            foreach (var subCategory in SubCategoriesObject.SubCategoryListObject)
+            {
+              _subCategories.Add(subCategory);
+            }
+          }
+          else
+          {
+            _subCategories = new List<IDotTypeEoiSubCategory>();
           }
         }
-        else
-        {
-          subCategories = new List<IDotTypeEoiSubCategory>();
-        }
 
-        return subCategories;
+        return _subCategories;
       }
     }
 
-    [IgnoreDataMember()]
+    private IList<IDotTypeEoiGtld> _gtlds;
+    [IgnoreDataMember]
     public IList<IDotTypeEoiGtld> Gtlds
     {
       get
       {
-        IList<IDotTypeEoiGtld> gtlds = new List<IDotTypeEoiGtld>();
-        if (SubCategoriesObject != null && SubCategoriesObject.SubCategoryListObject != null && SubCategoriesObject.SubCategoryListObject.Count > 0)
+        if (_gtlds == null)
         {
-          foreach (var subCategory in SubCategoriesObject.SubCategoryListObject)
+          if (SubCategoriesObject != null && SubCategoriesObject.SubCategoryListObject != null && SubCategoriesObject.SubCategoryListObject.Count > 0)
           {
-            if (subCategory.GtldsObject != null && subCategory.GtldsObject.GtldList != null && subCategory.GtldsObject.GtldList.Count > 0)
+            foreach (var subCategory in SubCategoriesObject.SubCategoryListObject)
             {
-              bool isFeatured = subCategory.Name.ToLower() == "featured";
-              IList<IDotTypeEoiGtld> tempGtldList = new List<IDotTypeEoiGtld>(subCategory.GtldsObject.GtldList.Count);
-              foreach (var gtld in subCategory.GtldsObject.GtldList)
+              if (subCategory.GtldsObject != null && subCategory.GtldsObject.GtldList != null && subCategory.GtldsObject.GtldList.Count > 0)
               {
-                gtld.IsFeatured = isFeatured;
-                tempGtldList.Add(gtld);
-              }
-              foreach (var tempGtld in tempGtldList)
-              {
-                gtlds.Add(tempGtld);
+                _gtlds = new List<IDotTypeEoiGtld>(subCategory.GtldsObject.GtldList.Count);
+                foreach (var gtld in subCategory.GtldsObject.GtldList)
+                {
+                  _gtlds.Add(new DotTypeEoiGtld(gtld, subCategory));
+                }
               }
             }
           }
         }
 
-        return gtlds;
+        return _gtlds;
       }
     }
   }

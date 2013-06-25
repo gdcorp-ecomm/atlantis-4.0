@@ -8,5 +8,8 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
   {
     [DataMember(Name = "gTld")]
     public IList<DotTypeEoiGtld> GtldList { get; set; }
+
+    [DataMember(Name = "@count")]
+    public int GtldCount { get; set; }
   }
 }

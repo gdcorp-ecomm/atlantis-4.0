@@ -34,9 +34,28 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     public string Comments { get; set; }
 
     [IgnoreDataMember]
-    public bool IsFeatured { get; set; }
+    public bool IsFeatured { get; private set; }
 
     [IgnoreDataMember]
     public ActionButtonTypes ActionButtonType { get; set; }
+
+    public DotTypeEoiGtld()
+    {
+    }
+
+    public DotTypeEoiGtld(IDotTypeEoiGtld gtld, IDotTypeEoiSubCategory subCategory)
+    {
+      Id = gtld.Id;
+      Name = gtld.Name;
+      IsIdn = gtld.IsIdn;
+      IdnScript = gtld.IdnScript;
+      EnglishMeaning = gtld.EnglishMeaning;
+      ALabel = gtld.ALabel;
+      GtldSubCategoryId = gtld.GtldSubCategoryId;
+      DisplayOrder = gtld.DisplayOrder;
+      Comments = gtld.Comments;
+
+      IsFeatured = subCategory.Name.ToLower() == "featured";
+    }
   }
 }

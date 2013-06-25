@@ -1424,16 +1424,13 @@ namespace Atlantis.Framework.DotTypeCache.Tests
      
 
       Assert.IsTrue(dotTypeInfo.IsGtld ==true);
-      //Assert.IsTrue(launchphase != null && !string.IsNullOrEmpty(launchphase.Type) && !string.IsNullOrEmpty(launchphase.SubType) && !string.IsNullOrEmpty(launchphase.Description));
+    
     }
     [TestMethod]
     public void GetDotinfoForCO()
     {
       IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("CO");
-
-
       Assert.IsTrue(String.Equals(dotTypeInfo.ApplicationControl.DotTypeDescription, "Global, credible and recognizable!"));
-      //Assert.IsTrue(launchphase != null && !string.IsNullOrEmpty(launchphase.Type) && !string.IsNullOrEmpty(launchphase.SubType) && !string.IsNullOrEmpty(launchphase.Description));
     }
   }
 }

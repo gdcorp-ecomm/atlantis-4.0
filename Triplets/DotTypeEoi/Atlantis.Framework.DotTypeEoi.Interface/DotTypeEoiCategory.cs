@@ -40,7 +40,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
           }
           else
           {
-            _subCategories = new List<IDotTypeEoiSubCategory>();
+            _subCategories = new List<IDotTypeEoiSubCategory>(0);
           }
         }
 
@@ -58,17 +58,21 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
         {
           if (SubCategoriesObject != null && SubCategoriesObject.SubCategoryListObject != null && SubCategoriesObject.SubCategoryListObject.Count > 0)
           {
+            _gtlds = new List<IDotTypeEoiGtld>(1024);
             foreach (var subCategory in SubCategoriesObject.SubCategoryListObject)
             {
               if (subCategory.GtldsObject != null && subCategory.GtldsObject.GtldList != null && subCategory.GtldsObject.GtldList.Count > 0)
               {
-                _gtlds = new List<IDotTypeEoiGtld>(subCategory.GtldsObject.GtldList.Count);
                 foreach (var gtld in subCategory.GtldsObject.GtldList)
                 {
                   _gtlds.Add(new DotTypeEoiGtld(gtld, subCategory));
                 }
               }
             }
+          }
+          else
+          {
+            _gtlds = new List<IDotTypeEoiGtld>(0);
           }
         }
 

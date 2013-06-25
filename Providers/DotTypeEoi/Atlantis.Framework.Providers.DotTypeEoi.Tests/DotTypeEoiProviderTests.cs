@@ -80,7 +80,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       IGeneralGtldData generalGtldData;
       ShopperContext.SetLoggedInShopper("861126");
-      bool isSuccess = provider.GetGeneralEoi(2, 8, 22, out generalGtldData);
+      bool isSuccess = provider.GetGeneralEoi(2, 8, 23, out generalGtldData);
       Assert.AreEqual(true, isSuccess);
       Assert.AreEqual(true, generalGtldData.DisplayTime != string.Empty);
       Assert.AreEqual(true, generalGtldData.Gtlds.Count == 8);

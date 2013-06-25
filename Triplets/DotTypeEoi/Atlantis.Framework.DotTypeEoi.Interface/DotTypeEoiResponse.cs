@@ -41,22 +41,32 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
 
     private IDictionary<int, IDotTypeEoiGtld> _allGtlds;
     [IgnoreDataMember]
-    public IDictionary<int, IDotTypeEoiGtld> AllGtlds 
+    public IDictionary<int, IDotTypeEoiGtld> AllGtlds
     {
       get
       {
         if (_allGtlds == null)
         {
-          _allGtlds = new Dictionary<int, IDotTypeEoiGtld>(1024);
-          foreach (IDotTypeEoiCategory dotTypeEoiCategory in Categories)
+          if (Categories != null)
           {
-            foreach (IDotTypeEoiSubCategory dotTypeEoiSubCategory in dotTypeEoiCategory.SubCategories)
+            _allGtlds = new Dictionary<int, IDotTypeEoiGtld>(1024);
+            foreach (IDotTypeEoiCategory dotTypeEoiCategory in Categories)
             {
-              foreach (IDotTypeEoiGtld dotTypeEoiGtld in dotTypeEoiCategory.Gtlds)
+              if (dotTypeEoiCategory.SubCategories != null)
               {
-                _allGtlds[dotTypeEoiGtld.Id] = new DotTypeEoiGtld(dotTypeEoiGtld, dotTypeEoiSubCategory);
+                foreach (IDotTypeEoiSubCategory dotTypeEoiSubCategory in dotTypeEoiCategory.SubCategories)
+                {
+                  foreach (IDotTypeEoiGtld dotTypeEoiGtld in dotTypeEoiCategory.Gtlds)
+                  {
+                    _allGtlds[dotTypeEoiGtld.Id] = new DotTypeEoiGtld(dotTypeEoiGtld, dotTypeEoiSubCategory);
+                  }
+                }
               }
             }
+          }
+          else
+          {
+            _allGtlds = new Dictionary<int, IDotTypeEoiGtld>(0);
           }
         }
         return _allGtlds;

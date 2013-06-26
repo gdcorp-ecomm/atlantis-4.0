@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ReviewsAPITests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReviewsSEOAPITests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="atlantis.config">
@@ -78,6 +79,9 @@
       <Project>{18cff4ec-bbd1-4309-8f5a-2ac75fcf127c}</Project>
       <Name>Atlantis.Framework.BazaarVoiceAPI.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -3,6 +3,7 @@ using Atlantis.Framework.Interface;
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Cache;
 using System.Text;
 
 namespace Atlantis.Framework.BazaarVoiceAPI.Impl
@@ -19,34 +20,25 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Impl
 
       WebRequest request = GetWebRequest(serviceConfig, requestData);
 
-      string output;
-      using (WebResponse response = request.GetResponse())
+      try
       {
-        using (Stream receiveStream = response.GetResponseStream())
+        string output;
+        using (WebResponse response = request.GetResponse())
         {
-          using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
+          using (Stream receiveStream = response.GetResponseStream())
           {
-            output = readStream.ReadToEnd();
+            using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
+            {
+              output = readStream.ReadToEnd();
+            }
           }
         }
+        result = new ReviewsSEOResponseData(output, request.RequestUri.AbsoluteUri);
       }
-
-      string responseHtml = ParseResponse(serviceConfig, output);
-
-      result = new ReviewsSEOResponseData(responseHtml);
-
-
-      return result;
-
-    }
-
-    private string ParseResponse(WsConfigElement config, string output)
-    {
-      string separator = config.WSURL.Contains("?") ? "&" : "?";
-      string url = config.WSURL.EndsWith("/") ? config.WSURL.Substring(config.WSURL.Length - 1) : config.WSURL;
-
-      string result = output.Replace("{INSERT_PAGE_URI}", string.Format("{0}{1}", url, separator));
-
+      catch
+      {
+        result = new ReviewsSEOResponseData(string.Empty, request.RequestUri.AbsoluteUri);
+      }
       return result;
 
     }
@@ -59,13 +51,13 @@ namespace Atlantis.Framework.BazaarVoiceAPI.Impl
 
       string apiKey = string.IsNullOrEmpty(apiRequestData.APIKey) ? config.GetConfigValue("APIKey") : apiRequestData.APIKey;
       string DisplayCode = string.IsNullOrEmpty(apiRequestData.DisplayCode) ? config.GetConfigValue("DisplayCode") : apiRequestData.DisplayCode;
-      string fullPath = string.Format("{0}{1}/{2}/reviews/product/{3}/{4}.htm", url, apiKey, DisplayCode, apiRequestData.PageNumber.ToString(), apiRequestData.BVProductId);
+      string fullPath = string.Format("{0}{1}/{2}/reviews/product/{3}/{4}.htm", url, apiKey, DisplayCode, apiRequestData.PageNumber.ToString(), apiRequestData.BazaarVoiceProductId);
 
       UriBuilder urlBuilder = new UriBuilder(fullPath);
       Uri uri = urlBuilder.Uri;
       result = HttpWebRequest.Create(uri);
       result.Timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
-      //result.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);  TODO:  Check with Micco if I need this
+      result.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache); 
       return result;
     }
   }

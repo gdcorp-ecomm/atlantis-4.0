@@ -555,8 +555,11 @@ namespace BotDetect.Web
       if ((null != _userState) && (_userState.Contains(customLightColorKey)))
       {
         byte[] serializedBytes = _userState[customLightColorKey] as byte[];
-        Color deserialized = DeserializeObject<Color>(serializedBytes);
-        captcha.CustomLightColor = deserialized;
+        if (serializedBytes != null)
+        {
+          Color deserialized = DeserializeObject<Color>(serializedBytes);
+          captcha.CustomLightColor = deserialized;
+        }
       }
     }
 
@@ -589,8 +592,11 @@ namespace BotDetect.Web
       if ((null != _userState) && (_userState.Contains(customDarkColorKey)))
       {
         byte[] serializedBytes = _userState[customDarkColorKey] as byte[];
-        Color deserialized = DeserializeObject<Color>(serializedBytes);
-        captcha.CustomDarkColor = deserialized;
+        if (serializedBytes != null)
+        {
+          Color deserialized = DeserializeObject<Color>(serializedBytes);
+          captcha.CustomDarkColor = deserialized;
+        }
       }
     }
 

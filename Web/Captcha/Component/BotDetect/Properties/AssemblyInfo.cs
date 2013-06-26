@@ -26,8 +26,8 @@ using System.Web.UI;
 [assembly: AssemblyTrademark("BotDetect, BotDetect CAPTCHA, Lanap, Lanap Software, Lanap CAPTCHA, Lanap BotDetect, Lanap BotDetect CAPTCHA, Lanapsoft, Lanapsoft CAPTCHA, Lanapsoft BotDetect, Lanapsoft BotDetect CAPTCHA")]
 [assembly: AssemblyCulture("")]	
 [assembly: TagPrefix("BotDetect", "BotDetect")]
-[assembly: AssemblyVersion("3.0.12.1")]
-[assembly: AssemblyFileVersion("3.0.12.1")]
+[assembly: AssemblyVersion("3.13.12.1")]
+[assembly: AssemblyFileVersion("4.13.06.26")]
 
 
 // assembly settings

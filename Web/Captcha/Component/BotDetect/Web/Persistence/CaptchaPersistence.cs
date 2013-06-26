@@ -521,8 +521,11 @@ namespace BotDetect.Web
       {
         //deserialize
         byte[] serializedBytes = _userState[codeCollectionKey] as byte[];
-        CodeCollection deserialized=DeserializeObject<CodeCollection>(serializedBytes);
-        captcha.CodeCollection = deserialized;
+        if (serializedBytes != null)
+        {
+          CodeCollection deserialized = DeserializeObject<CodeCollection>(serializedBytes);
+          captcha.CodeCollection = deserialized;
+        }
       }
     }
 

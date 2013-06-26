@@ -62,69 +62,72 @@ namespace Atlantis.Framework.ProductUpgradePath.Interface
     public void SetupFilteredProducts(int originalPfid)
     {
       _filteredProducts.Clear();
-      UpgradeProductInfo origproduct = _products[originalPfid];
-      foreach (ProductOptions currentOption in _productOptions)
+      if (_products.ContainsKey(originalPfid))
       {
-        System.Diagnostics.Debug.WriteLine(currentOption.Duration + ":" + currentOption.DurationUnit);
-        int monthlyUnit = currentOption.Duration / 12;
+        UpgradeProductInfo origproduct = _products[originalPfid];
+        foreach (ProductOptions currentOption in _productOptions)
+        {
+          System.Diagnostics.Debug.WriteLine(currentOption.Duration + ":" + currentOption.DurationUnit);
+          int monthlyUnit = currentOption.Duration / 12;
+          if (!_filteredProducts.ContainsKey(originalPfid))
+          {
+            if (currentOption.DurationUnit == DurationUnit.Month && origproduct.RecurringMethod == UpgradeProductInfo.MONTHLY && currentOption.Duration >= origproduct.PeriodCount)
+            {
+              AddToFilteredProduct(origproduct);
+            }
+            else if (currentOption.DurationUnit == DurationUnit.Month && origproduct.RecurringMethod == UpgradeProductInfo.QUARTERLY && currentOption.Duration >= 3)
+            {
+              AddToFilteredProduct(origproduct);
+            }
+            else if (currentOption.DurationUnit == DurationUnit.Month && origproduct.RecurringMethod == UpgradeProductInfo.SEMIANUUAL && currentOption.Duration >= 6)
+            {
+              AddToFilteredProduct(origproduct);
+            }
+            else if (currentOption.DurationUnit == DurationUnit.Month && origproduct.RecurringMethod == UpgradeProductInfo.ANNUAL && monthlyUnit >= origproduct.PeriodCount)
+            {
+              AddToFilteredProduct(origproduct);
+            }
+            else if (currentOption.DurationUnit == DurationUnit.Year && origproduct.RecurringMethod == UpgradeProductInfo.ANNUAL && currentOption.Duration >= origproduct.PeriodCount)
+            {
+              AddToFilteredProduct(origproduct);
+            }
+          }
+          foreach (KeyValuePair<int, UpgradeProductInfo> currentProduct in _products)
+          {
+            UpgradeProductInfo tempProduct = currentProduct.Value;
+            System.Diagnostics.Debug.WriteLine(tempProduct.RecurringMethod + ":" + tempProduct.PeriodCount);
+            if (currentOption.DurationUnit == DurationUnit.Month && tempProduct.RecurringMethod == UpgradeProductInfo.MONTHLY && currentOption.Duration == tempProduct.PeriodCount)
+            {
+              AddToFilteredProduct(currentOption, tempProduct);
+              break;
+            }
+            else if (currentOption.DurationUnit == DurationUnit.Month && tempProduct.RecurringMethod == UpgradeProductInfo.QUARTERLY && currentOption.Duration == 3)
+            {
+              AddToFilteredProduct(currentOption, tempProduct);
+              break;
+            }
+            else if (currentOption.DurationUnit == DurationUnit.Month && tempProduct.RecurringMethod == UpgradeProductInfo.SEMIANUUAL && currentOption.Duration == 6)
+            {
+              AddToFilteredProduct(currentOption, tempProduct);
+              break;
+            }
+            else if (currentOption.DurationUnit == DurationUnit.Month && tempProduct.RecurringMethod == UpgradeProductInfo.ANNUAL && monthlyUnit == tempProduct.PeriodCount)
+            {
+              AddToFilteredProduct(currentOption, tempProduct);
+              break;
+            }
+            else if (currentOption.DurationUnit == DurationUnit.Year && tempProduct.RecurringMethod == UpgradeProductInfo.ANNUAL && currentOption.Duration == tempProduct.PeriodCount)
+            {
+              AddToFilteredProduct(currentOption, tempProduct);
+              break;
+            }
+          }
+
+        }
         if (!_filteredProducts.ContainsKey(originalPfid))
         {
-          if (currentOption.DurationUnit == DurationUnit.Month && origproduct.RecurringMethod == UpgradeProductInfo.MONTHLY && currentOption.Duration >= origproduct.PeriodCount)
-          {
-            AddToFilteredProduct(origproduct);
-          }
-          else if (currentOption.DurationUnit == DurationUnit.Month && origproduct.RecurringMethod == UpgradeProductInfo.QUARTERLY && currentOption.Duration >= 3)
-          {
-            AddToFilteredProduct(origproduct);
-          }
-          else if (currentOption.DurationUnit == DurationUnit.Month && origproduct.RecurringMethod == UpgradeProductInfo.SEMIANUUAL && currentOption.Duration >= 6)
-          {
-            AddToFilteredProduct(origproduct);
-          }
-          else if (currentOption.DurationUnit == DurationUnit.Month && origproduct.RecurringMethod == UpgradeProductInfo.ANNUAL && monthlyUnit >= origproduct.PeriodCount)
-          {
-            AddToFilteredProduct(origproduct);
-          }
-          else if (currentOption.DurationUnit == DurationUnit.Year && origproduct.RecurringMethod == UpgradeProductInfo.ANNUAL && currentOption.Duration >= origproduct.PeriodCount)
-          {
-            AddToFilteredProduct(origproduct);
-          }
-        }
-        foreach (KeyValuePair<int, UpgradeProductInfo> currentProduct in _products)
-        {
-          UpgradeProductInfo tempProduct = currentProduct.Value;
-          System.Diagnostics.Debug.WriteLine(tempProduct.RecurringMethod + ":" + tempProduct.PeriodCount);
-          if (currentOption.DurationUnit == DurationUnit.Month && tempProduct.RecurringMethod == UpgradeProductInfo.MONTHLY && currentOption.Duration == tempProduct.PeriodCount)
-          {
-            AddToFilteredProduct(currentOption, tempProduct);
-            break;
-          }
-          else if (currentOption.DurationUnit == DurationUnit.Month && tempProduct.RecurringMethod == UpgradeProductInfo.QUARTERLY && currentOption.Duration == 3)
-          {
-            AddToFilteredProduct(currentOption, tempProduct);
-            break;
-          }
-          else if (currentOption.DurationUnit == DurationUnit.Month && tempProduct.RecurringMethod == UpgradeProductInfo.SEMIANUUAL && currentOption.Duration == 6)
-          {
-            AddToFilteredProduct(currentOption, tempProduct);
-            break;
-          }
-          else if (currentOption.DurationUnit == DurationUnit.Month && tempProduct.RecurringMethod == UpgradeProductInfo.ANNUAL && monthlyUnit == tempProduct.PeriodCount)
-          {
-            AddToFilteredProduct(currentOption, tempProduct);
-            break;
-          }
-          else if (currentOption.DurationUnit == DurationUnit.Year && tempProduct.RecurringMethod == UpgradeProductInfo.ANNUAL && currentOption.Duration == tempProduct.PeriodCount)
-          {
-            AddToFilteredProduct(currentOption, tempProduct);
-            break;
-          }
-        }
-
-      }
-      if (!_filteredProducts.ContainsKey(originalPfid))
-      {
-        AddToFilteredProduct(origproduct);
+          AddToFilteredProduct(origproduct);
+        }        
       }
     }
 

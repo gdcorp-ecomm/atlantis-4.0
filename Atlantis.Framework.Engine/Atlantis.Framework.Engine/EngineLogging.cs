@@ -2,6 +2,9 @@
 
 namespace Atlantis.Framework.Engine
 {
+  /// <summary>
+  /// Static class used to change the default engine logging sink
+  /// </summary>
   public static class EngineLogging
   {
     static IErrorLogger _errorLogger;
@@ -11,6 +14,9 @@ namespace Atlantis.Framework.Engine
       _errorLogger = new DefaultEngineLogger();
     }
 
+    /// <summary>
+    /// Gets or Sets the <c>IErrorLogger that the Engine will use.</c>
+    /// </summary>
     public static IErrorLogger EngineLogger
     {
       get { return _errorLogger; }

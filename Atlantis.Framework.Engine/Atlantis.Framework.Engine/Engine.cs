@@ -7,10 +7,21 @@ using System.Threading;
 
 namespace Atlantis.Framework.Engine
 {
+  /// <summary>
+  /// Delegate for a post request event.
+  /// </summary>
+  /// <param name="completedRequest"><c>ICompletedRequest</c> that will be passed to the delegate</param>
   public delegate void RequestCompletedDelegate(ICompletedRequest completedRequest);
 
+  /// <summary>
+  /// The Atlantis Framework Engine.
+  /// </summary>
   public class Engine
   {
+    /// <summary>
+    /// This event will get fired after every engine request.
+    /// Please ensure that you do not trigger another engine call from inside this event.
+    /// </summary>
     public static event RequestCompletedDelegate OnRequestCompleted;
 
     internal static EngineRequestCache<IRequest> RequestCache { get; private set; }
@@ -20,7 +31,14 @@ namespace Atlantis.Framework.Engine
     static Exception _lastLoggingException;
     static LoggingStatusType _loggingStatus;
 
+    /// <summary>
+    /// The FileVersion of the Engine Assembly
+    /// </summary>
     public static string EngineVersion { get; private set; }
+
+    /// <summary>
+    /// The FileVersion of the Interface Assembly
+    /// </summary>
     public static string InterfaceVersion { get; private set; }
 
     static Engine()

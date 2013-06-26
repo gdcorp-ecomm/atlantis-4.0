@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Atlantis.Framework.Engine
 {
-  public class AsyncRequestEnd : ICompletedRequest
+  internal class AsyncRequestEnd : ICompletedRequest
   {
     private IAsyncRequest _asyncHandler = null;
     private AtlantisException _exception = null;

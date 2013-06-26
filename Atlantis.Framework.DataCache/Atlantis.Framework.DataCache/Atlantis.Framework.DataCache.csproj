@@ -79,10 +79,6 @@
       <Project>{f025da79-8d84-4bb9-affc-4b3156532212}</Project>
       <Name>Atlantis.Framework.Products.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Framework.DataCacheService\Atlantis.Framework.DataCacheService.csproj">
-      <Project>{3e299d3b-3c8d-455a-92a4-05ff6c60e6f3}</Project>
-      <Name>Atlantis.Framework.DataCacheService</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,6 +4,10 @@ using System.Configuration;
 
 namespace Atlantis.Framework.Engine
 {
+  /// <summary>
+  /// The default logger for the engine.  It requires the following setting in web.config: Atlantis.Framework.Engine.LogWSURL
+  /// This logger logs to the godaddyLog database.  If entry in web.config is missing it will attempt to log to DEV
+  /// </summary>
   public class DefaultEngineLogger : IErrorLogger
   {
     const string _LOGWEBSERVICESETTINGSKEY = "Atlantis.Framework.Engine.LogWSURL";
@@ -29,6 +33,10 @@ namespace Atlantis.Framework.Engine
       return result;
     }
 
+    /// <summary>
+    /// Logs an <c>AtlantisException</c> to the godaddylog database
+    /// </summary>
+    /// <param name="atlantisException"><c>AtlantisException to log.</c></param>
     public void LogAtlantisException(AtlantisException atlantisException)
     {
       string errorDescription = atlantisException.ErrorDescription;

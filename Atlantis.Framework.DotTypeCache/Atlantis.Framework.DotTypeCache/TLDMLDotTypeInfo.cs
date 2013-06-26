@@ -1,11 +1,11 @@
-﻿using Atlantis.Framework.DCCDomainsDataCache.Interface;
+﻿using System;
+using System.Collections.Generic;
+using Atlantis.Framework.DCCDomainsDataCache.Interface;
 using Atlantis.Framework.DomainContactFields.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
 using Atlantis.Framework.RegDotTypeRegistry.Interface;
-using System;
-using System.Collections.Generic;
 using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache
@@ -372,13 +372,13 @@ namespace Atlantis.Framework.DotTypeCache
 
     public List<int> GetValidPreRegProductIdList(PreRegPhases preRegPhase, int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(PhaseHelper.GetDotTypeProductTypes(preRegPhase), _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(preRegPhase)), 
+      return InternalGetValidProductIds(PhaseHelper.GetDotTypeProductTypes(preRegPhase), _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(preRegPhase)),
                                         domainCount, registrationLengths);
     }
 
     public List<int> GetValidPreRegProductIdList(PreRegPhases preRegPhase, string registryId, int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidProductIds(PhaseHelper.GetDotTypeProductTypes(preRegPhase), _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(preRegPhase)), 
+      return InternalGetValidProductIds(PhaseHelper.GetDotTypeProductTypes(preRegPhase), _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(preRegPhase)),
                                         registryId, domainCount, registrationLengths);
     }
 
@@ -431,7 +431,7 @@ namespace Atlantis.Framework.DotTypeCache
 
     public List<int> GetValidPreRegLengths(PreRegPhases preRegPhase, int domainCount, params int[] registrationLengths)
     {
-      return InternalGetValidYears(PhaseHelper.GetDotTypeProductTypes(preRegPhase), _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(preRegPhase)), 
+      return InternalGetValidYears(PhaseHelper.GetDotTypeProductTypes(preRegPhase), _tldml.Value.Product.PreregistrationYears(PhaseHelper.GetPhaseCode(preRegPhase)),
                                    domainCount, registrationLengths);
     }
 
@@ -545,6 +545,16 @@ namespace Atlantis.Framework.DotTypeCache
       {
         return _tldml.Value.ApplicationControl;
       }
+    }
+
+    public Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases()
+    {
+      Dictionary<string, ITLDLaunchPhase> launchPhases = new Dictionary<string, ITLDLaunchPhase>();
+      if (_tldml.Value.Phase != null)
+      {
+        launchPhases = _tldml.Value.Phase.GetActiveClientRequestPhases();
+      }
+      return launchPhases;
     }
 
     public ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase)

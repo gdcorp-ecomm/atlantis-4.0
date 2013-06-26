@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
 
 namespace Atlantis.Framework.DotTypeCache.Interface
@@ -46,10 +47,24 @@ namespace Atlantis.Framework.DotTypeCache.Interface
 
     public static string GetPhaseCode(PreRegPhases preRegPhase)
     {
-      string result;
+      string result = string.Empty;
       _phases.TryGetValue(preRegPhase, out result);
 
       return result;
+    }
+
+    public static PreRegPhases GetPreRegPhase(string phaseCode)
+    {
+      PreRegPhases phase = PreRegPhases.Invalid;
+      foreach (var pair in _phases)
+      {
+        if (phaseCode.Equals(pair.Value, StringComparison.OrdinalIgnoreCase))
+        {
+          phase = pair.Key;
+          break;
+        }
+      }
+      return phase;
     }
   }
 }

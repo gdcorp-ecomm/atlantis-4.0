@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml;
 using Atlantis.Framework.DomainContactFields.Interface;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.TLDDataCache.Interface;
@@ -126,7 +124,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
     protected abstract StaticDotTypeTiers InitializeRegistrationProductIds();
     protected abstract StaticDotTypeTiers InitializeTransferProductIds();
     protected abstract StaticDotTypeTiers InitializeRenewalProductIds();
-    
+
     protected virtual StaticDotTypeTiers InitializePreRegistrationProductIds()
     {
       return null;
@@ -253,8 +251,8 @@ namespace Atlantis.Framework.DotTypeCache.Static
     {
       int result = 0;
 
-      if ((_preregistrationProductIds != null) 
-        && (registrationLength >= MinPreRegLength) 
+      if ((_preregistrationProductIds != null)
+        && (registrationLength >= MinPreRegLength)
         && (registrationLength <= MaxPreRegLength))
       {
         result = _preregistrationProductIds.GetProductId(registrationLength, domainCount);
@@ -267,8 +265,8 @@ namespace Atlantis.Framework.DotTypeCache.Static
     {
       int result = 0;
 
-      if ((_registerProductIds != null) 
-        && (registrationLength >= MinRegistrationLength) 
+      if ((_registerProductIds != null)
+        && (registrationLength >= MinRegistrationLength)
         && (registrationLength <= MaxRegistrationLength))
       {
         result = _registerProductIds.GetProductId(registrationLength, domainCount);
@@ -281,8 +279,8 @@ namespace Atlantis.Framework.DotTypeCache.Static
     {
       int result = 0;
 
-      if ((_transferProductIds != null) 
-        && (registrationLength >= MinTransferLength) 
+      if ((_transferProductIds != null)
+        && (registrationLength >= MinTransferLength)
         && (registrationLength <= MaxTransferLength))
       {
         result = _transferProductIds.GetProductId(registrationLength, domainCount);
@@ -295,8 +293,8 @@ namespace Atlantis.Framework.DotTypeCache.Static
     {
       int result = 0;
 
-      if ((_renewalProductIds != null) 
-        && (registrationLength >= MinRenewalLength) 
+      if ((_renewalProductIds != null)
+        && (registrationLength >= MinRenewalLength)
         && (registrationLength <= MaxRenewalLength))
       {
         result = _renewalProductIds.GetProductId(registrationLength, domainCount);
@@ -321,37 +319,37 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     public List<int> GetValidRegistrationProductIdList(int domainCount, params int[] registrationLengths)
     {
-      return GetValidProductIdList(_registerProductIds, MinRegistrationLength, MaxRegistrationLength, 
+      return GetValidProductIdList(_registerProductIds, MinRegistrationLength, MaxRegistrationLength,
         domainCount, registrationLengths);
     }
 
     public List<int> GetValidRegistrationLengths(int domainCount, params int[] registrationLengths)
     {
-      return GetValidLengths(_registerProductIds, MinRegistrationLength, MaxRegistrationLength, 
+      return GetValidLengths(_registerProductIds, MinRegistrationLength, MaxRegistrationLength,
         domainCount, registrationLengths);
     }
 
     public List<int> GetValidTransferProductIdList(int domainCount, params int[] registrationLengths)
     {
-      return GetValidProductIdList(_transferProductIds, MinTransferLength, MaxTransferLength, 
+      return GetValidProductIdList(_transferProductIds, MinTransferLength, MaxTransferLength,
         domainCount, registrationLengths);
     }
 
     public List<int> GetValidTransferLengths(int domainCount, params int[] registrationLengths)
     {
-      return GetValidLengths(_transferProductIds, MinTransferLength, MaxTransferLength, 
+      return GetValidLengths(_transferProductIds, MinTransferLength, MaxTransferLength,
         domainCount, registrationLengths);
     }
 
     public List<int> GetValidRenewalProductIdList(int domainCount, params int[] registrationLengths)
     {
-      return GetValidProductIdList(_renewalProductIds, MinRenewalLength, MaxRenewalLength, 
+      return GetValidProductIdList(_renewalProductIds, MinRenewalLength, MaxRenewalLength,
         domainCount, registrationLengths);
     }
 
     public List<int> GetValidRenewalLengths(int domainCount, params int[] registrationLengths)
     {
-      return GetValidLengths(_renewalProductIds, MinRenewalLength, MaxRenewalLength, 
+      return GetValidLengths(_renewalProductIds, MinRenewalLength, MaxRenewalLength,
         domainCount, registrationLengths);
     }
 
@@ -379,7 +377,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     public int GetPreRegProductId(PreRegPhases preRegPhase, string registryId, int registrationLength, int domainCount)
     {
-      return this.GetPreRegProductId(preRegPhase,registrationLength, domainCount);
+      return this.GetPreRegProductId(preRegPhase, registrationLength, domainCount);
     }
 
     public int GetRegistrationProductId(string registryId, int registrationLength, int domainCount)
@@ -432,7 +430,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
       return string.Empty;
     }
 
-    public ITLDProduct Product 
+    public ITLDProduct Product
     {
       get { return _staticProduct; }
     }
@@ -452,18 +450,17 @@ namespace Atlantis.Framework.DotTypeCache.Static
 
     public ITLDTld Tld
     {
-      get
-      {
-        return _staticTld;
-      }
+      get { return _staticTld; }
     }
 
     public ITLDApplicationControl ApplicationControl
     {
-      get
-      {
-        return _staticApplicationControl;
-      } 
+      get { return _staticApplicationControl; }
+    }
+
+    public Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases()
+    {
+      return new Dictionary<string, ITLDLaunchPhase>();
     }
 
     public ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase)
@@ -496,7 +493,7 @@ namespace Atlantis.Framework.DotTypeCache.Static
       var domainContactFieldsData = LoadDomainContactFieldsData();
       return domainContactFieldsData.DomainContactFields;
     }
-    #endregion
 
+    #endregion
   }
 }

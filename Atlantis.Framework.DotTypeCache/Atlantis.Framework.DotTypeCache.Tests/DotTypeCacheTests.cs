@@ -49,7 +49,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       get
       {
         return HttpProviderContainer.Instance.Resolve<IDotTypeProvider>();
-      } 
+      }
     }
 
     [TestInitialize]
@@ -193,13 +193,13 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     [TestMethod]
     public void OrgStaticVsTLDMLEnabled()
     {
-      Type staticDotTypesType = typeof (StaticDotTypes); 
+      Type staticDotTypesType = typeof(StaticDotTypes);
       MethodInfo getStaticDotType = staticDotTypesType.GetMethod("GetDotType", BindingFlags.Static | BindingFlags.Public);
-      object[] methodParms = new object[1] { "org"};
+      object[] methodParms = new object[1] { "org" };
       IDotTypeInfo staticOrg = getStaticDotType.Invoke(null, methodParms) as IDotTypeInfo;
 
       IDotTypeInfo tldmlOrg = DotTypeCache.GetDotTypeInfo("org");
-      
+
       Assert.AreNotEqual(staticOrg, tldmlOrg);
     }
 
@@ -212,11 +212,11 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       IDotTypeInfo staticOrg = getStaticDotType.Invoke(null, methodParms) as IDotTypeInfo;
 
       IDotTypeInfo tldmlOrg = DotTypeCache.GetDotTypeInfo("org");
-      
+
       int static3yearOrg = staticOrg.GetRegistrationProductId(3, 1);
       int tldml3yearOrg = tldmlOrg.GetRegistrationProductId(3, 1);
       Assert.AreEqual(static3yearOrg, tldml3yearOrg);
-            
+
       static3yearOrg = staticOrg.GetRenewalProductId(3, 1);
       tldml3yearOrg = tldmlOrg.GetRenewalProductId(3, 1);
       Assert.AreEqual(static3yearOrg, tldml3yearOrg);
@@ -267,7 +267,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     #region GetDotTypeInfo
-    
+
     [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\DotTypesData.xml", "DotType",
         DataAccessMethod.Sequential), DeploymentItem("Atlantis.Framework.DotTypeCache.Tests\\DotTypesData.xml"),
       TestMethod]
@@ -278,7 +278,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Assert.IsNotNull(info);
       //Assert.AreEqual(dotType.ToUpper(), info.DotType, "DotType does not match for : " + dotType.ToUpper());
       Assert.AreEqual(dotType.ToLower(), info.DotType.ToLower(), "DotType does not match for : " + dotType);
-      
+
       /*Assert.AreEqual((string)testContextInstance.DataRow["HasPreRegIds"], info.HasPreRegIds.ToString(),
           "HasPreRegIds does not match for: " + dotType.ToUpper() + ". Expected: " +
           (string)testContextInstance.DataRow["HasPreRegIds"] + " Actual: " + info.HasPreRegIds.ToString());
@@ -326,7 +326,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
           "MinTransferLength does not match for: " + dotType.ToUpper() + ". Expected: " +
           (string)testContextInstance.DataRow["MinTransferLength"] + " Actual: " + info.MinTransferLength.ToString());
     }
-    
+
     #region Negative Tests
 
     [TestMethod]
@@ -404,7 +404,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       string dotType = System.Convert.ToString(testContextInstance.DataRow["DotTypeName"]);
       Console.WriteLine("DotType: " + dotType);
       IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(dotType);
-            
+
       List<int> preRegList = info.GetValidPreRegProductIdList(PreRegPhases.GeneralAvailability, 1, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
       if (preRegList.Count > 0)
@@ -413,7 +413,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         Assert.IsTrue(productId > 0, "ProductID < 0 for dotType: " + dotType);
       }
     }
-        
+
     [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\DotTypesData.xml", "DotType",
         DataAccessMethod.Sequential), DeploymentItem("Atlantis.Framework.DotTypeCache.Tests\\DotTypesData.xml"),
         TestMethod]
@@ -492,7 +492,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     #endregion
 
     #region GetExpiredAucctionRegistrationProductID
-    
+
     [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\DotTypesData.xml", "DotType",
         DataAccessMethod.Sequential), DeploymentItem("Atlantis.Framework.DotTypeCache.Tests\\DotTypesData.xml"),
         TestMethod]
@@ -592,7 +592,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         Assert.IsTrue(productId > 0, "ProductID < 0 for dotType: " + dotType);
       }
     }
-    
+
     #region Negative Tests
 
     [TestMethod]
@@ -728,7 +728,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     #endregion
 
     #region GetRenewalProductId
-    
+
     [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\DotTypesData.xml", "DotType",
         DataAccessMethod.Sequential), DeploymentItem("Atlantis.Framework.DotTypeCache.Tests\\DotTypesData.xml"),
         TestMethod]
@@ -736,7 +736,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     {
       string dotType = System.Convert.ToString(testContextInstance.DataRow["DotTypeName"]);
       IDotTypeInfo info = DotTypeCache.GetDotTypeInfo(dotType);
-      
+
       List<int> renewalList = info.GetValidRenewalProductIdList(1, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
       if (renewalList.Count > 0)
@@ -746,7 +746,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       }
     }
 
-    
+
     [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\DotTypesData.xml", "DotType",
         DataAccessMethod.Sequential), DeploymentItem("Atlantis.Framework.DotTypeCache.Tests\\DotTypesData.xml"),
         TestMethod]
@@ -778,7 +778,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         Assert.IsTrue(productId > 0, "ProductID < 0 for dotType: " + dotType);
       }
     }
-    
+
     #region Negative Tests
 
     [TestMethod]
@@ -901,7 +901,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     #endregion
 
     #region GetMinExpiredAuctionRegistrationLength
-    
+
     [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\DotTypesData.xml", "DotType",
         DataAccessMethod.Sequential), DeploymentItem("Atlantis.Framework.DotTypeCache.Tests\\DotTypesData.xml"),
         TestMethod]
@@ -948,7 +948,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     #endregion
 
     #region GetMaxExpiredAuctionRegistrationLength
-    
+
     [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\DotTypesData.xml", "DotType",
         DataAccessMethod.Sequential), DeploymentItem("Atlantis.Framework.DotTypeCache.Tests\\DotTypesData.xml"),
         TestMethod]
@@ -1235,14 +1235,14 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     #endregion
 
     #endregion
-    
+
     [TestMethod]
     public void IsOfferedCheckForCom()
     {
       bool flag = DotTypeProvider.GetTLDDataForRegistration.IsOffered("com");
       Assert.IsTrue(flag);
     }
-    
+
     [TestMethod]
     public void GetRegistryLanguagesTLDMLOrg()
     {
@@ -1313,7 +1313,7 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       dotType = DotTypeCache.GetDotTypeInfo("AT");
       canRenew5 = dotType.CanRenew(expDate, out maxValidRenewlength5);
 
-      Assert.IsTrue((canRenew && maxValidRenewlength > 0) && (!canRenew1 && maxValidRenewlength1 <= 0) || (canRenew2 && maxValidRenewlength2 > 0) || 
+      Assert.IsTrue((canRenew && maxValidRenewlength > 0) && (!canRenew1 && maxValidRenewlength1 <= 0) || (canRenew2 && maxValidRenewlength2 > 0) ||
                     (canRenew3 && maxValidRenewlength3 > 0) || (canRenew4 && maxValidRenewlength4 > 0) || (canRenew5 && maxValidRenewlength5 > 0));
     }
 
@@ -1387,6 +1387,14 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     }
 
     [TestMethod]
+    public void GetInvalidLaunchPhase()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("f.borg");
+      var launchphase = dotTypeInfo.GetLaunchPhase(PreRegPhases.Invalid);
+      Assert.IsTrue(launchphase == null);
+    }
+
+    [TestMethod]
     public void GetDotTypeLandingPageUrl()
     {
       IDotTypeInfo inValid = DotTypeProvider.GetDotTypeInfo("nowaythisiseverinthere");
@@ -1395,10 +1403,11 @@ namespace Atlantis.Framework.DotTypeCache.Tests
       Assert.AreEqual(string.Empty, inValid.ApplicationControl.DotTypeDescription);
       Assert.AreEqual(false, inValid.ApplicationControl.IsMultiRegistry);
     }
+
     [TestMethod]
     public void GetAllRegTLDs()
     {
-      var nongtldList=new Dictionary<string,IDotTypeInfo>();
+      var nongtldList = new Dictionary<string, IDotTypeInfo>();
       var gtldList = new Dictionary<string, IDotTypeInfo>();
 
       ITLDDataImpl reg = DotTypeProvider.GetTLDDataForRegistration;
@@ -1407,11 +1416,11 @@ namespace Atlantis.Framework.DotTypeCache.Tests
         var info = DotTypeCache.GetDotTypeInfo(tldItem);
         if (info.IsGtld)
         {
-          gtldList.Add(tldItem,info);
+          gtldList.Add(tldItem, info);
         }
         else
         {
-          nongtldList.Add(tldItem,info);
+          nongtldList.Add(tldItem, info);
         }
       }
       Assert.IsTrue(gtldList.Count > 0); Assert.IsTrue(nongtldList.Count > 0);
@@ -1421,16 +1430,62 @@ namespace Atlantis.Framework.DotTypeCache.Tests
     public void GetDotinfoForBorg()
     {
       IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("e.borg");
-     
 
-      Assert.IsTrue(dotTypeInfo.IsGtld ==true);
+      Assert.IsTrue(dotTypeInfo.IsGtld == true);
     
     }
+
     [TestMethod]
     public void GetDotinfoForCO()
     {
       IDotTypeInfo dotTypeInfo = DotTypeProvider.GetDotTypeInfo("CO");
       Assert.IsTrue(String.Equals(dotTypeInfo.ApplicationControl.DotTypeDescription, "Global, credible and recognizable!"));
+    }
+
+    [TestMethod]
+    public void GetActiveClientRequestPhasesFBorg()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("f.borg");
+      var launchphases = dotTypeInfo.GetActiveClientRequestPhases();
+
+      Assert.IsTrue(launchphases.Count == 3);
+      List<string> validTypes = new List<string>() { "GA", "LR", "SRA" };
+      foreach (var phase in launchphases)
+      {
+        Assert.IsTrue(validTypes.Contains(phase.Key));
+      }
+    }
+
+    [TestMethod]
+    public void GetActiveClientRequestPhasesForTldmlBorg()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("borg");
+      var launchphases = dotTypeInfo.GetActiveClientRequestPhases();
+      Assert.IsTrue(launchphases.Count == 0);
+    }
+
+    [TestMethod]
+    public void GetActiveClientRequestPhasesForInvalidTld()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("nate");
+      var launchphases = dotTypeInfo.GetActiveClientRequestPhases();
+      Assert.IsTrue(launchphases.Count == 0);
+    }
+
+    [TestMethod]
+    public void GetActiveClientRequestPhasesForStaticTld()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("com");
+      var launchphases = dotTypeInfo.GetActiveClientRequestPhases();
+      Assert.IsTrue(launchphases.Count == 0);
+    }
+
+    [TestMethod]
+    public void GetActiveClientRequestPhasesForStaticMultiRegTld()
+    {
+      var dotTypeInfo = DotTypeProvider.GetDotTypeInfo("co.uk");
+      var launchphases = dotTypeInfo.GetActiveClientRequestPhases();
+      Assert.IsTrue(launchphases.Count == 0);
     }
   }
 }

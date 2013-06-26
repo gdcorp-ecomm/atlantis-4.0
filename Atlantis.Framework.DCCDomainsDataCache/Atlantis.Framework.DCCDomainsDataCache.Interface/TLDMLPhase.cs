@@ -5,9 +5,9 @@ using Atlantis.Framework.DotTypeCache.Interface;
 
 namespace Atlantis.Framework.DCCDomainsDataCache.Interface
 {
-// ReSharper disable InconsistentNaming
-  public class TLDMLPhase : TLDMLNamespaceElement, ITLDPhase  
-// ReSharper restore InconsistentNaming
+  // ReSharper disable InconsistentNaming
+  public class TLDMLPhase : TLDMLNamespaceElement, ITLDPhase
+  // ReSharper restore InconsistentNaming
   {
     protected override string Namespace
     {
@@ -43,7 +43,7 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
             if (typeAtt != null)
             {
               result[typeAtt.Value] = TldLaunchPhase.FromPhaseElement(launchPhase);
-            }          
+            }
           }
         }
       }
@@ -51,14 +51,38 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
       return result;
     }
 
+    public Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases()
+    {
+      var launchPhases = new Dictionary<string, ITLDLaunchPhase>(StringComparer.OrdinalIgnoreCase);
+      if (_launchPhases != null)
+      {
+        foreach (var phase in _launchPhases)
+        {
+          foreach (var period in phase.Value.Periods)
+          {
+            if (period.Type.Equals("clientrequest", StringComparison.OrdinalIgnoreCase) && period.IsActive())
+            {
+              launchPhases[phase.Key] = phase.Value;
+              break;
+            }
+          }
+        }
+      }
+      return launchPhases;
+    }
+
     public ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase)
     {
       var launchPhase = TldLaunchPhase.NULLPHASE;
 
-      TldLaunchPhase result;
-      if (_launchPhases.TryGetValue(preRegPhase.ToString(), out result))
+      string phaseCode = PhaseHelper.GetPhaseCode(preRegPhase);
+      if (!string.IsNullOrEmpty(phaseCode))
       {
-        launchPhase = result;
+        TldLaunchPhase result;
+        if (_launchPhases.TryGetValue(phaseCode, out result))
+        {
+          launchPhase = result;
+        }
       }
 
       return launchPhase;

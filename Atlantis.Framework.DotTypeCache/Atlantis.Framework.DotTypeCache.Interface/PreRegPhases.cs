@@ -6,6 +6,7 @@
     SunriseB,
     SunriseC,
     Landrush,
-    GeneralAvailability
+    GeneralAvailability,
+    Invalid
   }
 }

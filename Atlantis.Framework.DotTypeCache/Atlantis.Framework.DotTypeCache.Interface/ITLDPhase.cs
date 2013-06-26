@@ -1,9 +1,12 @@
-﻿namespace Atlantis.Framework.DotTypeCache.Interface
+﻿using System.Collections.Generic;
+
+namespace Atlantis.Framework.DotTypeCache.Interface
 {
-// ReSharper disable InconsistentNaming
+  // ReSharper disable InconsistentNaming
   public interface ITLDPhase
-// ReSharper restore InconsistentNaming
+  // ReSharper restore InconsistentNaming
   {
+    Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases();
     ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase);
   }
 }

@@ -50,7 +50,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     List<int> GetValidRegistrationLengths(int domainCount, params int[] registrationLengths);
     List<int> GetValidTransferLengths(int domainCount, params int[] registrationLengths);
     List<int> GetValidRenewalLengths(int domainCount, params int[] registrationLengths);
-    
+
     string GetRegistrationFieldsXml();
 
     string GetRegistryIdByProductId(int productId);
@@ -60,7 +60,9 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     ITLDTld Tld { get; }
     ITLDApplicationControl ApplicationControl { get; }
 
+    Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases();
     ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase);
+
     int GetMinPreRegLength(PreRegPhases preRegPhase);
     int GetMaxPreRegLength(PreRegPhases preRegPhase);
     bool HasPreRegApplicationFee(PreRegPhases preRegPhase);

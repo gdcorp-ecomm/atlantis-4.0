@@ -277,7 +277,7 @@ namespace Atlantis.Framework.DotTypeCache.Interface
       get { return 0; }
     }
 
-    public ITLDTld Tld 
+    public ITLDTld Tld
     {
       get { return null; }
     }
@@ -285,6 +285,11 @@ namespace Atlantis.Framework.DotTypeCache.Interface
     public ITLDApplicationControl ApplicationControl
     {
       get { return _invalidApplicationControl; }
+    }
+
+    public Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases()
+    {
+      return new Dictionary<string, ITLDLaunchPhase>();
     }
 
     public ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase)

@@ -9,5 +9,15 @@ namespace Atlantis.Framework.DCCDomainsDataCache.Interface
     public DateTime StartDate { get; set; }
     public DateTime StopDate { get; set; }
     public bool AvailCheck { get; set; }
+
+    public bool IsActive()
+    {
+      return IsActive(DateTime.UtcNow);
+    }
+
+    public bool IsActive(DateTime date)
+    {
+      return (date >= StartDate && date < StopDate);
+    }
   }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atlantis.Framework.DotTypeCache.Interface;
 using Atlantis.Framework.DotTypeCache.Static;
 using Atlantis.Framework.RegDotTypeProductIds.Interface;
 using Atlantis.Framework.RegDotTypeRegistry.Interface;
-using System.Collections.Generic;
 using Atlantis.Framework.TLDDataCache.Interface;
 
 namespace Atlantis.Framework.DotTypeCache
@@ -436,12 +436,17 @@ namespace Atlantis.Framework.DotTypeCache
 
     public ITLDTld Tld
     {
-      get { return this._dotTypeInfo.Tld; } 
+      get { return this._dotTypeInfo.Tld; }
     }
 
     public ITLDApplicationControl ApplicationControl
     {
       get { return this._dotTypeInfo.ApplicationControl; }
+    }
+
+    public Dictionary<string, ITLDLaunchPhase> GetActiveClientRequestPhases()
+    {
+      return this._dotTypeInfo.GetActiveClientRequestPhases();
     }
 
     public ITLDLaunchPhase GetLaunchPhase(PreRegPhases preRegPhase)

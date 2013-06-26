@@ -5,8 +5,13 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Atlantis.Framework.DotTypeCache.Tests")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+#if DEBUG
+[assembly: AssemblyDescription("Debug Build")]
+[assembly: AssemblyConfiguration("Debug Build")]
+#else
+[assembly: AssemblyDescription("Release Build")]
+[assembly: AssemblyConfiguration("Release Build")]
+#endif
 [assembly: AssemblyProduct("Atlantis.Framework.DotTypeCache.Tests")]
 [assembly: AssemblyCompany("GoDaddy.com, Inc.")]
 [assembly: AssemblyCopyright("Copyright © GoDaddy.com, Inc. 2008-2011")]
@@ -31,4 +36,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.13.6.20")]
+[assembly: AssemblyFileVersion("4.13.6.25")]

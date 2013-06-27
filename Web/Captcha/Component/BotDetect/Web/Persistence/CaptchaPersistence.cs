@@ -302,32 +302,40 @@ namespace BotDetect.Web
 
     private static void LoadImageStyle(CaptchaBase captcha, string captchaId)
     {
-      string imageStyleKey = GetImageStyleKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(imageStyleKey)))
+      try
       {
-        ImageStyle ImageStyleResult=ImageStyle.AncientMosaic;
-        if (Enum.TryParse<ImageStyle>(_userState[imageStyleKey] as string,out ImageStyleResult))
+        string imageStyleKey = GetImageStyleKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(imageStyleKey)))
         {
-          captcha.ImageStyleNullable = (ImageStyle?)ImageStyleResult;
+          ImageStyle ImageStyleResult = ImageStyle.AncientMosaic;
+          if (Enum.TryParse<ImageStyle>(_userState[imageStyleKey] as string, out ImageStyleResult))
+          {
+            captcha.ImageStyleNullable = (ImageStyle?)ImageStyleResult;
+          }
         }
       }
+      catch { }
     }
 
     private static void SaveImageStyle(string captchaId, ImageStyle? value)
     {
-      string imageStyleKey = GetImageStyleKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (null != value)
+        string imageStyleKey = GetImageStyleKey(captchaId);
+
+        if (null != _userState)
         {
-          _userState[imageStyleKey] = Enum.GetName(value.GetType(), value);
-        }
-        else
-        {
-          _userState.Remove(imageStyleKey);
+          if (null != value)
+          {
+            _userState[imageStyleKey] = Enum.GetName(value.GetType(), value);
+          }
+          else
+          {
+            _userState.Remove(imageStyleKey);
+          }
         }
       }
+      catch { }
     }
 
     /// the imageFormat is stored in user persistence using this key
@@ -400,28 +408,41 @@ namespace BotDetect.Web
 
     private static void LoadImageSize(CaptchaBase captcha, string captchaId)
     {
-      string imageSizeKey = GetImageSizeKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(imageSizeKey)))
+      try
       {
-        captcha.ImageSize = (ImageSize)_userState[imageSizeKey];
+        string imageSizeKey = GetImageSizeKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(imageSizeKey)))
+        {
+          byte[] serializedBytes = _userState[imageSizeKey] as byte[];
+          if (serializedBytes != null)
+          {
+            ImageSize deserialized = DeserializeObject<ImageSize>(serializedBytes);
+            captcha.ImageSize = deserialized;
+          }
+        }
       }
+      catch { }
     }
 
     private static void SaveImageSize(string captchaId, ImageSize value)
     {
-      string imageSizeKey = GetImageSizeKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (CaptchaDefaults.ImageSize != value)
+        string imageSizeKey = GetImageSizeKey(captchaId);
+        if (null != _userState)
         {
-          _userState[imageSizeKey] = value;
-        }
-        else
-        {
-          _userState.Remove(imageSizeKey);
+          if (CaptchaDefaults.ImageSize != value)
+          {
+            byte[] resultantValue = SerializeObject<ImageSize>(value);
+            _userState[imageSizeKey] = resultantValue;
+          }
+          else
+          {
+            _userState.Remove(imageSizeKey);
+          }
         }
       }
+      catch { }
     }
 
     /// the soundStyle is stored in user persistence using this key
@@ -432,28 +453,42 @@ namespace BotDetect.Web
 
     private static void LoadSoundStyle(CaptchaBase captcha, string captchaId)
     {
-      string soundStyleKey = GetSoundStyleKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(soundStyleKey)))
+      try
       {
-        captcha.SoundStyleNullable = (SoundStyle?)_userState[soundStyleKey];
+        string soundStyleKey = GetSoundStyleKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(soundStyleKey)))
+        {
+          byte[] serializedBytes = _userState[soundStyleKey] as byte[];
+          if (serializedBytes != null)
+          {
+            SoundStyle deserialized = DeserializeObject<SoundStyle>(serializedBytes);
+            captcha.SoundStyleNullable = deserialized;
+          }
+        }
       }
+      catch { }
     }
 
     private static void SaveSoundStyle(string captchaId, SoundStyle? value)
     {
-      string soundStyleKey = GetSoundStyleKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (null != value)
+        string soundStyleKey = GetSoundStyleKey(captchaId);
+
+        if (null != _userState)
         {
-          _userState[soundStyleKey] = value;
-        }
-        else
-        {
-          _userState.Remove(soundStyleKey);
+          if (null != value && value.HasValue)
+          {
+            byte[] resultantValue = SerializeObject<SoundStyle>(value.Value);
+            _userState[soundStyleKey] = resultantValue;
+          }
+          else
+          {
+            _userState.Remove(soundStyleKey);
+          }
         }
       }
+      catch { }
     }
 
 
@@ -465,28 +500,41 @@ namespace BotDetect.Web
 
     private static void LoadSoundFormat(CaptchaBase captcha, string captchaId)
     {
-      string soundFormatKey = GetSoundFormatKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(soundFormatKey)))
+      try
       {
-        captcha.SoundFormat = (SoundFormat)_userState[soundFormatKey];
+        string soundFormatKey = GetSoundFormatKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(soundFormatKey)))
+        {
+          byte[] serializedBytes = _userState[soundFormatKey] as byte[];
+          if (serializedBytes != null)
+          {
+            SoundFormat deserialized = DeserializeObject<SoundFormat>(serializedBytes);
+            captcha.SoundFormat = deserialized;
+          }
+        }
       }
+      catch { }
     }
 
     private static void SaveSoundFormat(string captchaId, SoundFormat value)
     {
-      string soundFormatKey = GetSoundFormatKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (CaptchaDefaults.SoundFormat != value)
+        string soundFormatKey = GetSoundFormatKey(captchaId);
+        if (null != _userState)
         {
-          _userState[soundFormatKey] = value;
-        }
-        else
-        {
-          _userState.Remove(soundFormatKey);
+          if (CaptchaDefaults.SoundFormat != value)
+          {
+            byte[] resultantValue = SerializeObject<SoundFormat>(value);
+            _userState[soundFormatKey] = resultantValue;
+          }
+          else
+          {
+            _userState.Remove(soundFormatKey);
+          }
         }
       }
+      catch { }
     }
 
 
@@ -516,34 +564,42 @@ namespace BotDetect.Web
 
     private static void LoadCodeCollection(CaptchaBase captcha, string captchaId)
     {
-      string codeCollectionKey = GetCodeCollectionKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(codeCollectionKey)))
+      try
       {
-        //deserialize
-        byte[] serializedBytes = _userState[codeCollectionKey] as byte[];
-        if (serializedBytes != null)
+        string codeCollectionKey = GetCodeCollectionKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(codeCollectionKey)))
         {
-          CodeCollection deserialized = DeserializeObject<CodeCollection>(serializedBytes);
-          captcha.CodeCollection = deserialized;
+          //deserialize
+          byte[] serializedBytes = _userState[codeCollectionKey] as byte[];
+          if (serializedBytes != null)
+          {
+            CodeCollection deserialized = DeserializeObject<CodeCollection>(serializedBytes);
+            captcha.CodeCollection = deserialized;
+          }
         }
       }
+      catch { }
     }
 
     private static void SaveCodeCollection(string captchaId, CodeCollection value)
     {
-      string codeCollectionKey = GetCodeCollectionKey(captchaId);
-      if (null != _userState)
+      try
       {
-        if (null != value)
+        string codeCollectionKey = GetCodeCollectionKey(captchaId);
+        if (null != _userState)
         {
-          byte[] resultantValue = SerializeObject<CodeCollection>(value);
-          _userState[codeCollectionKey] = resultantValue;
-        }
-        else
-        {
-          _userState.Remove(codeCollectionKey);
+          if (null != value)
+          {
+            byte[] resultantValue = SerializeObject<CodeCollection>(value);
+            _userState[codeCollectionKey] = resultantValue;
+          }
+          else
+          {
+            _userState.Remove(codeCollectionKey);
+          }
         }
       }
+      catch { }
     }
 
     // the customLightColor is saved in user persistence using this key
@@ -745,16 +801,20 @@ namespace BotDetect.Web
 
     private static void LoadUseHorizontalIcons(CaptchaControl captcha, string captchaId)
     {
-      string useHorizontalIconsKey = GetUseHorizontalIconsKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(useHorizontalIconsKey)))
+      try
       {
-        byte[] serializedBytes = _userState[useHorizontalIconsKey] as byte[];
-        if (serializedBytes != null)
+        string useHorizontalIconsKey = GetUseHorizontalIconsKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(useHorizontalIconsKey)))
         {
-          Status deserialized = DeserializeObject<Status>(serializedBytes);
-          captcha._useHorizontalIcons = deserialized;
+          byte[] serializedBytes = _userState[useHorizontalIconsKey] as byte[];
+          if (serializedBytes != null)
+          {
+            Status deserialized = DeserializeObject<Status>(serializedBytes);
+            captcha._useHorizontalIcons = deserialized;
+          }
         }
       }
+      catch { }
     }
 
     private static void SaveUseHorizontalIcons(string captchaId, Status value)

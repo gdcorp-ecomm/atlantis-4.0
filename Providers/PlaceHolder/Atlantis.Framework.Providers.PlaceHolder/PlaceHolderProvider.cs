@@ -27,8 +27,10 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     private static void InitializePlaceHolders()
     {
       IPlaceHolderHandler userControlPlaceHolderHandler = new UserControlPlaceHolderHandler();
+      IPlaceHolderHandler cdsDocumentPlaceHolderHandler = new CDSPlaceHolderHandler();
 
       _placeHolderHandlers[userControlPlaceHolderHandler.Type] = userControlPlaceHolderHandler;
+      _placeHolderHandlers[cdsDocumentPlaceHolderHandler.Type] = cdsDocumentPlaceHolderHandler;
     }
 
     public PlaceHolderProvider(IProviderContainer container) : base(container)

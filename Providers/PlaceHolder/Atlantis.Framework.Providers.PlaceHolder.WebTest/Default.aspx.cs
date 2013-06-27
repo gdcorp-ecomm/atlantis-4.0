@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Atlantis.Framework.Interface;
+using System;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.WebTest
 {

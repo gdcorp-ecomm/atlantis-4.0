@@ -12,5 +12,8 @@
   <div>
     [@P[userControl:<Data location="~/controls/content.ascx" />]@P]
   </div>
+   <div>
+    [@P[cdsDocument:<Data app="sales" location="document/location/test" />]@P]
+  </div>
 </body>
 </html>

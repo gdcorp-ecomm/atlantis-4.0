@@ -104,6 +104,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.Interface\Atlantis.Framework.CDS.Interface.csproj">
+      <Project>{43ecc9f8-c897-4ae0-8c53-22b2691d6995}</Project>
+      <Name>Atlantis.Framework.CDS.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
       <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
       <Name>Atlantis.Framework.Engine</Name>
@@ -131,6 +135,10 @@
     <ProjectReference Include="..\..\..\Render\RenderPipeline\Atlantis.Framework.Render.Pipeline\Atlantis.Framework.Render.Pipeline.csproj">
       <Project>{68764d92-7cd9-45fb-b650-1429656dcf14}</Project>
       <Name>Atlantis.Framework.Render.Pipeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CDSContent\Atlantis.Framework.Providers.CDSContent.Interface\Atlantis.Framework.Providers.CDSContent.Interface.csproj">
+      <Project>{99bcb8c3-f00f-44be-ab61-7b433f519e2b}</Project>
+      <Name>Atlantis.Framework.Providers.CDSContent.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis.Framework.Providers.PlaceHolder.Interface\Atlantis.Framework.Providers.PlaceHolder.Interface.csproj">
       <Project>{e9297a57-bdaf-45a3-ac6c-891f5235385f}</Project>

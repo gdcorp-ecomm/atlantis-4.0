@@ -15,6 +15,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
     [XmlAttribute(AttributeName = "location")]
     public string Location { get; set; }
 
+    [XmlAttribute(AttributeName = "app")]
+    public string App { get; set; }
+
     private IDictionary<string, IPlaceHolderParameter> _parameters;
     public IDictionary<string, IPlaceHolderParameter> Parameters 
     {

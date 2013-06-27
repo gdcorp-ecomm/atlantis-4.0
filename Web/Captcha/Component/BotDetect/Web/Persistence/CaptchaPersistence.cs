@@ -554,33 +554,41 @@ namespace BotDetect.Web
 
     private static void LoadCustomLightColor(CaptchaBase captcha, string captchaId)
     {
-      string customLightColorKey = GetCustomLightColorKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(customLightColorKey)))
+      try
       {
-        byte[] serializedBytes = _userState[customLightColorKey] as byte[];
-        if (serializedBytes != null)
+        string customLightColorKey = GetCustomLightColorKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(customLightColorKey)))
         {
-          Color deserialized = DeserializeObject<Color>(serializedBytes);
-          captcha.CustomLightColor = deserialized;
+          byte[] serializedBytes = _userState[customLightColorKey] as byte[];
+          if (serializedBytes != null)
+          {
+            Color deserialized = DeserializeObject<Color>(serializedBytes);
+            captcha.CustomLightColor = deserialized;
+          }
         }
       }
+      catch { }
     }
 
     private static void SaveCustomLightColor(string captchaId, Color value)
     {
-      string customLightColorKey = GetCustomLightColorKey(captchaId);
-      if (null != _userState && value!=null)
+      try
       {
-        if (CaptchaDefaults.CustomLightColor != value)
+        string customLightColorKey = GetCustomLightColorKey(captchaId);
+        if (null != _userState && value != null)
         {
-          byte[] resultantValue = SerializeObject<Color>(value);
-          _userState[customLightColorKey] = resultantValue;
-        }
-        else
-        {
-          _userState.Remove(customLightColorKey);
+          if (CaptchaDefaults.CustomLightColor != value)
+          {
+            byte[] resultantValue = SerializeObject<Color>(value);
+            _userState[customLightColorKey] = resultantValue;
+          }
+          else
+          {
+            _userState.Remove(customLightColorKey);
+          }
         }
       }
+      catch { }
     }
 
     // the customDarkColor is saved in user persistence using this key
@@ -591,34 +599,42 @@ namespace BotDetect.Web
 
     private static void LoadCustomDarkColor(CaptchaBase captcha, string captchaId)
     {
-      string customDarkColorKey = GetCustomDarkColorKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(customDarkColorKey)))
+      try
       {
-        byte[] serializedBytes = _userState[customDarkColorKey] as byte[];
-        if (serializedBytes != null)
+        string customDarkColorKey = GetCustomDarkColorKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(customDarkColorKey)))
         {
-          Color deserialized = DeserializeObject<Color>(serializedBytes);
-          captcha.CustomDarkColor = deserialized;
+          byte[] serializedBytes = _userState[customDarkColorKey] as byte[];
+          if (serializedBytes != null)
+          {
+            Color deserialized = DeserializeObject<Color>(serializedBytes);
+            captcha.CustomDarkColor = deserialized;
+          }
         }
       }
+      catch { }
     }
 
     private static void SaveCustomDarkColor(string captchaId, Color value)
     {
-      string customDarkColorKey = GetCustomDarkColorKey(captchaId);
-
-      if (null != _userState && value!=null)
+      try
       {
-        if (CaptchaDefaults.CustomDarkColor != value)
+        string customDarkColorKey = GetCustomDarkColorKey(captchaId);
+
+        if (null != _userState && value != null)
         {
-          byte[] resultantValue = SerializeObject<Color>(value);
-          _userState[customDarkColorKey] = resultantValue;
-        }
-        else
-        {
-          _userState.Remove(customDarkColorKey);
+          if (CaptchaDefaults.CustomDarkColor != value)
+          {
+            byte[] resultantValue = SerializeObject<Color>(value);
+            _userState[customDarkColorKey] = resultantValue;
+          }
+          else
+          {
+            _userState.Remove(customDarkColorKey);
+          }
         }
       }
+      catch { }
     }
 
 
@@ -732,25 +748,34 @@ namespace BotDetect.Web
       string useHorizontalIconsKey = GetUseHorizontalIconsKey(captchaId);
       if ((null != _userState) && (_userState.Contains(useHorizontalIconsKey)))
       {
-        captcha._useHorizontalIcons = (Status)_userState[useHorizontalIconsKey];
+        byte[] serializedBytes = _userState[useHorizontalIconsKey] as byte[];
+        if (serializedBytes != null)
+        {
+          Status deserialized = DeserializeObject<Status>(serializedBytes);
+          captcha._useHorizontalIcons = deserialized;
+        }
       }
     }
 
     private static void SaveUseHorizontalIcons(string captchaId, Status value)
     {
-      string useHorizontalIconsKey = GetUseHorizontalIconsKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (Status.Unknown != value)
+        string useHorizontalIconsKey = GetUseHorizontalIconsKey(captchaId);
+        if (null != _userState)
         {
-          _userState[useHorizontalIconsKey] = value;
-        }
-        else
-        {
-          _userState.Remove(useHorizontalIconsKey);
+          if (Status.Unknown != value)
+          {
+            byte[] resultantValue = SerializeObject<Status>(value);
+            _userState[useHorizontalIconsKey] = resultantValue;
+          }
+          else
+          {
+            _userState.Remove(useHorizontalIconsKey);
+          }
         }
       }
+      catch { }
     }
 
 
@@ -762,28 +787,41 @@ namespace BotDetect.Web
 
     private static void LoadUseSmallIcons(CaptchaControl captcha, string captchaId)
     {
-      string useSmallIconsKey = GetUseSmallIconsKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(useSmallIconsKey)))
+      try
       {
-        captcha._useSmallIcons = (Status)_userState[useSmallIconsKey];
+        string useSmallIconsKey = GetUseSmallIconsKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(useSmallIconsKey)))
+        {
+          byte[] serializedBytes = _userState[useSmallIconsKey] as byte[];
+          if (serializedBytes != null)
+          {
+            Status deserialized = DeserializeObject<Status>(serializedBytes);
+            captcha._useSmallIcons = deserialized;
+          }
+        }
       }
+      catch { }
     }
 
     private static void SaveUseSmallIcons(string captchaId, Status value)
     {
-      string useSmallIconsKey = GetUseSmallIconsKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (Status.Unknown != value)
+        string useSmallIconsKey = GetUseSmallIconsKey(captchaId);
+        if (null != _userState)
         {
-          _userState[useSmallIconsKey] = value;
-        }
-        else
-        {
-          _userState.Remove(useSmallIconsKey);
+          if (Status.Unknown != value)
+          {
+            byte[] resultantValue = SerializeObject<Status>(value);
+            _userState[useSmallIconsKey] = resultantValue;
+          }
+          else
+          {
+            _userState.Remove(useSmallIconsKey);
+          }
         }
       }
+      catch { }
     }
 
 

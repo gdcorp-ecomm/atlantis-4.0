@@ -8,6 +8,8 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Interface
 
     bool GetGeneralEoi(int page, int entriesPerPage, int categoryId, out IGeneralGtldData generalGtldData);
 
+    bool GetGeneralEoi(int categoryId, out IGeneralGtldData generalGtldData);
+
     bool GetGeneralEoiCategoryList(out IList<ICategoryData> categoryList);
 
     bool SearchEoi(string searchString, out IGeneralGtldData generalGtldData);

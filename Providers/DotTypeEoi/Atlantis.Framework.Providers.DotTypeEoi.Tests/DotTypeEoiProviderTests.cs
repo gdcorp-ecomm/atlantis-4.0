@@ -89,6 +89,20 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     }
 
     [TestMethod]
+    public void DotTypeGetGeneralEoiNonPaginated()
+    {
+      IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
+      IGeneralGtldData generalGtldData;
+      ShopperContext.SetLoggedInShopper("861126");
+      bool isSuccess = provider.GetGeneralEoi(23, out generalGtldData);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, generalGtldData.DisplayTime != string.Empty);
+      Assert.AreEqual(true, generalGtldData.Gtlds.Count > 0);
+      Assert.AreEqual(true, generalGtldData.Gtlds[0].Name != string.Empty);
+      Assert.AreEqual(true, generalGtldData.TotalPages ==1);
+    }
+
+    [TestMethod]
     public void DotTypeGetGeneralEoiCategoryList()
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();

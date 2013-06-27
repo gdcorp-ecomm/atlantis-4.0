@@ -142,6 +142,49 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       return success;
     }
 
+    public bool GetGeneralEoi(int categoryId, out IGeneralGtldData generalGtldData)
+    {
+      var success = false;
+      generalGtldData = null;
+
+      try
+      {
+        var request = new GeneralEoiJsonRequestData(FullLanguage);
+        var response = (GeneralEoiJsonResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeEoiEngineRequests.GeneralEoiJsonRequest);
+        if (response.IsSuccess && response.DotTypeEoiResponse != null)
+        {
+          var dotTypeEoiResponse = response.DotTypeEoiResponse;
+          var displayTime = dotTypeEoiResponse.DisplayTime;
+
+          foreach (var category in dotTypeEoiResponse.Categories)
+          {
+            if (categoryId == category.CategoryId)
+            {
+              var gtlds = new List<IDotTypeEoiGtld>();
+
+              foreach (var gtld in category.Gtlds)
+              {
+                gtlds.Add(gtld);
+              }
+
+              AddGtldButtonStatus(gtlds);
+
+              generalGtldData = new GeneralGtldData(displayTime, gtlds, 1);
+              success = true;
+            }
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        var data = "categoryId: " + categoryId + ", languageCode: " + FullLanguage;
+        var exception = new AtlantisException("DotTypeEoiProvider.GetGeneralEoi(categoryId, languageCode)", "0", ex.Message + ex.StackTrace, data, null, null);
+        Engine.Engine.LogAtlantisException(exception);
+      }
+
+      return success;
+    }
+
     public bool GetGeneralEoiCategoryList(out IList<ICategoryData> categoryList)
     {
       var success = false;

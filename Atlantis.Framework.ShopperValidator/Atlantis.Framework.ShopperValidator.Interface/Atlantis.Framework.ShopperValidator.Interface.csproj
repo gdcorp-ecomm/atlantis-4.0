@@ -58,6 +58,7 @@
     <Compile Include="ValidationRules\Address2Rule.cs" />
     <Compile Include="ValidationRules\AnyPhoneRule.cs" />
     <Compile Include="ValidationRules\BaseRules\BlankRule.cs" />
+    <Compile Include="ValidationRules\BaseRules\EqualLength.cs" />
     <Compile Include="ValidationRules\BaseRules\InvalidCharactersRule.cs" />
     <Compile Include="ValidationRules\BaseRules\MatchRule.cs" />
     <Compile Include="ValidationRules\BaseRules\MinLengthRule.cs" />

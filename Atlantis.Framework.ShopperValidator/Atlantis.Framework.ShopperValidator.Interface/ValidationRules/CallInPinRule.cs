@@ -16,7 +16,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
       _fieldName = fieldName;
 
       base.RulesToValidate.Add(new MaxLengthRule(fieldName, value, LengthConstants.CallInPinMaxLength));
-      base.RulesToValidate.Add(new MinLengthRule(fieldName, value, LengthConstants.CallInPinMinLength));
+      base.RulesToValidate.Add(new EqualLength(fieldName, value, LengthConstants.CallInPinMinLength,false));
       base.RulesToValidate.Add(new NumericRule(fieldName, value));
 
       BuildCustomRules();

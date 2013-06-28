@@ -14,10 +14,13 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     private readonly bool _isSuccess;
     private IShopperWatchListResponse _shopperWatchListResponse;
 
-    public ShopperWatchListResponseData(string responseJson)
+    public ShopperWatchListResponseData(string responseJson, RequestData requestData)
     {
-      _exception = null;
       _isSuccess = DeserializeJson(responseJson);
+      if (!_isSuccess)
+      {
+        _exception = new AtlantisException(requestData, "ShopperWatchListResponseData", "Deserialization exception", requestData.ToXML());
+      }
     }
 
     public ShopperWatchListResponseData(string responseXml, AtlantisException exAtlantis)

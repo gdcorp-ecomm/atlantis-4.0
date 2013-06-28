@@ -257,20 +257,23 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       shopperWatchListResponse = null;
 
-      try
+      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated)
       {
-        var request = new ShopperWatchListJsonRequestData(_shopperContext.Value.ShopperId, FullLanguage);
-        var response = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.ShopperWatchListJsonRequest);
-        if (response.IsSuccess)
+        try
         {
-          shopperWatchListResponse = response.ShopperWatchListResponse;
-          success = true;
+          var request = new ShopperWatchListJsonRequestData(_shopperContext.Value.ShopperId, FullLanguage);
+          var response = (ShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.ShopperWatchListJsonRequest);
+          if (response.IsSuccess)
+          {
+            shopperWatchListResponse = response.ShopperWatchListResponse;
+            success = true;
+          }
         }
-      }
-      catch (Exception ex)
-      {
-        var exception = new AtlantisException("DotTypeEoiProvider.GetShopperWatchList", "0", ex.Message + ex.StackTrace, string.Empty, null, _shopperContext.Value);
-        Engine.Engine.LogAtlantisException(exception);
+        catch (Exception ex)
+        {
+          var exception = new AtlantisException("DotTypeEoiProvider.GetShopperWatchList", "0", ex.Message + ex.StackTrace, string.Empty, null, _shopperContext.Value);
+          Engine.Engine.LogAtlantisException(exception);
+        }
       }
 
       return success;
@@ -281,20 +284,27 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       responseMessage = string.Empty;
 
-      try
+      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated)
       {
-        var request = new AddToShopperWatchListRequestData(_shopperContext.Value.ShopperId, displayTime, gTlds, FullLanguage);
-        var response = (AddToShopperWatchListResponseData) Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
-        if (response.IsSuccess)
+        try
         {
-          success = true;
+          var request = new AddToShopperWatchListRequestData(_shopperContext.Value.ShopperId, displayTime, gTlds,
+                                                             FullLanguage);
+          var response =
+            (AddToShopperWatchListResponseData)
+            Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.AddToShopperWatchListRequest);
+          if (response.IsSuccess)
+          {
+            success = true;
+          }
+          responseMessage = response.ResponseMessage;
         }
-        responseMessage = response.ResponseMessage;
-      }
-      catch (Exception ex)
-      {
-        var exception = new AtlantisException("DotTypeEoiProvider.AddToShopperWatchList", "0", ex.Message + ex.StackTrace, string.Empty, null, _shopperContext.Value);
-        Engine.Engine.LogAtlantisException(exception);
+        catch (Exception ex)
+        {
+          var exception = new AtlantisException("DotTypeEoiProvider.AddToShopperWatchList", "0",
+                                                ex.Message + ex.StackTrace, string.Empty, null, _shopperContext.Value);
+          Engine.Engine.LogAtlantisException(exception);
+        }
       }
 
       return success;
@@ -305,20 +315,26 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       responseMessage = string.Empty;
 
-      try
+      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated)
       {
-          var request = new RemoveFromShopperWatchListRequestData(_shopperContext.Value.ShopperId, gTlds);
-        var response = (RemoveFromShopperWatchListResponseData)Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.RemoveFromShopperWatchListRequest);
-        if (response.IsSuccess)
+        try
         {
-          success = true;
+          var request = new RemoveFromShopperWatchListRequestData(_shopperContext.Value.ShopperId, gTlds);
+          var response =
+            (RemoveFromShopperWatchListResponseData)
+            Engine.Engine.ProcessRequest(request, DotTypeEoiEngineRequests.RemoveFromShopperWatchListRequest);
+          if (response.IsSuccess)
+          {
+            success = true;
+          }
+          responseMessage = response.ResponseMessage;
         }
-        responseMessage = response.ResponseMessage;
-      }
-      catch (Exception ex)
-      {
-        var exception = new AtlantisException("DotTypeEoiProvider.RemoveFromShopperWatchList", "0", ex.Message + ex.StackTrace, string.Empty, null, _shopperContext.Value);
-        Engine.Engine.LogAtlantisException(exception);
+        catch (Exception ex)
+        {
+          var exception = new AtlantisException("DotTypeEoiProvider.RemoveFromShopperWatchList", "0",
+                                                ex.Message + ex.StackTrace, string.Empty, null, _shopperContext.Value);
+          Engine.Engine.LogAtlantisException(exception);
+        }
       }
 
       return success;

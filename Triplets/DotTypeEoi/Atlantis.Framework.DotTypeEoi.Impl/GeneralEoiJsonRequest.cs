@@ -37,7 +37,7 @@ namespace Atlantis.Framework.DotTypeEoi.Impl
           }
           else
           {
-            responseData = new GeneralEoiJsonResponseData(responseElement.Value);
+            responseData = new GeneralEoiJsonResponseData(responseElement.Value, requestData);
           }
         }
       }

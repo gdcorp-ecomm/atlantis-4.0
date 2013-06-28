@@ -159,6 +159,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       string responseMessage;
+      ShopperContext.SetLoggedInShopper("861126");
       var gTlds = new List<IDotTypeEoiGtld>(1);
       var gTld = new DotTypeEoiGtld { Id = 1609, GtldSubCategoryId = 10320 };
       const string displayTime = "2013-05-23 10:29:55";
@@ -172,7 +173,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi.Tests
     {
       IDotTypeEoiProvider provider = NewDotTypeEoiProvider();
       string responseMessage;
-
+      ShopperContext.SetLoggedInShopper("861126");
       var gTlds = new List<IDotTypeEoiGtld>(1);
       var gTld = new DotTypeEoiGtld { Id = 1609, GtldSubCategoryId = 10320 };
       gTlds.Add(gTld);

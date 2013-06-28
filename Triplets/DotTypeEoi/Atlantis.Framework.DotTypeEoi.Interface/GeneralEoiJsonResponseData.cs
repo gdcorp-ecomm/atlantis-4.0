@@ -14,10 +14,13 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
     private readonly bool _isSuccess;
     private IDotTypeEoiResponse _dotTypeEoiResponse;
 
-    public GeneralEoiJsonResponseData(string responseJson)
+    public GeneralEoiJsonResponseData(string responseJson, RequestData requestData)
     {
-      _exception = null;
       _isSuccess = DeserializeJson(responseJson);
+      if (!_isSuccess)
+      {
+        _exception = new AtlantisException(requestData, "GeneralEoiJsonResponseData", "Deserialization exception", requestData.ToXML());
+      }
     }
 
     public GeneralEoiJsonResponseData(string responseXml, AtlantisException exAtlantis)
@@ -65,7 +68,7 @@ namespace Atlantis.Framework.DotTypeEoi.Interface
         _dotTypeEoiResponse = dotTypeJsonResponse.DotTypeEoiResponse;
         stream.Close();
       }
-      catch (Exception e)
+      catch (Exception ex)
       {
         success = false;
       }

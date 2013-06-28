@@ -37,7 +37,7 @@ namespace Atlantis.Framework.DotTypeEoi.Impl
           }
           else
           {
-            responseData = new ShopperWatchListResponseData(responseElement.Value);
+            responseData = new ShopperWatchListResponseData(responseElement.Value, requestData);
           }
         }
       }

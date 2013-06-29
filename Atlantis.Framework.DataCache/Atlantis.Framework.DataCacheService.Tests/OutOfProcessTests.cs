@@ -300,6 +300,14 @@ namespace Atlantis.Framework.DataCacheService.Tests
       }
     }
 
-
+    [TestMethod]
+    public void GetShopperRenewingServices()
+    {
+      using (GdDataCacheOutOfProcess comCache = GdDataCacheOutOfProcess.CreateDisposable())
+      {
+        var response = comCache.GetShopperRenewingServices("856907");
+        Assert.IsTrue(response.Split('|').Length.Equals(2));
+      }
+    }
   }
 }

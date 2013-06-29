@@ -135,5 +135,10 @@ namespace Atlantis.Framework.DataCacheService
     {
       return _COMAccessClass.GetPriceEstimateEx(requestXml);
     }
+
+    public string GetShopperRenewingServices(string shopperId)
+    {
+      return _COMAccessClass.GetShopperRenewingServices(shopperId);
+    }
   }
 }

@@ -342,13 +342,29 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
     private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiCategory> categories)
     {
-      foreach (var category in categories)
+      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated)
       {
-        var subCategories = category.SubCategories;
-        foreach (var subCategory in subCategories)
+        IShopperWatchListResponse shopperWatchListResponse;
+        if (GetShopperWatchList(out shopperWatchListResponse))
         {
-          var gtlds = subCategory.Gtlds;
-          AddGtldButtonStatus(gtlds);
+          foreach (var category in categories)
+          {
+            var subCategories = category.SubCategories;
+            foreach (var subCategory in subCategories)
+            {
+              foreach (var gtld in subCategory.Gtlds)
+              {
+                if (shopperWatchListResponse.GtldIdDictionary.ContainsKey(gtld.Id))
+                {
+                  gtld.ActionButtonType = ActionButtonTypes.DontWatch;
+                }
+                else
+                {
+                  gtld.ActionButtonType = ActionButtonTypes.Watch;
+                }
+              }
+            }
+          }
         }
       }
     }

@@ -70,18 +70,21 @@ namespace Atlantis.Framework.ProductBillingResourceInfo.Impl
 
             using (SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection))
             {
-              
-              while (reader.Read())
-              {
-                numberOfRecords = reader.GetInt32(0);
-              }
-              reader.NextResult();
 
-              while (reader.Read())
+              if (request.ReturnAll == 0)
               {
-                numberOfPages = reader.GetInt32(0);
+                while (reader.Read())
+                {
+                  numberOfRecords = reader.GetInt32(0);
+                }
+                reader.NextResult();
+
+                while (reader.Read())
+                {
+                  numberOfPages = reader.GetInt32(0);
+                }
+                reader.NextResult();
               }
-              reader.NextResult();
 
               while (reader.Read())
               {
@@ -174,6 +177,12 @@ namespace Atlantis.Framework.ProductBillingResourceInfo.Impl
               }
             }
           }
+        }
+
+        if (request.ReturnAll == 1)
+        {
+          numberOfPages = 1;
+          numberOfRecords = resourceList.Count;
         }
 
         oResponseData = new ProductBillingResourceInfoResponseData(numberOfRecords, numberOfPages, resourceList);

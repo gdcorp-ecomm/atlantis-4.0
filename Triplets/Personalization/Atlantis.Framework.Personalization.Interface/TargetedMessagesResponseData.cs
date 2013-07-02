@@ -10,20 +10,10 @@ namespace Atlantis.Framework.Personalization.Interface
 {
   public class TargetedMessagesResponseData : IResponseData, ISessionSerializableResponse
   {
-
     public TargetedMessagesResponseData(){}
 
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
-    private bool _success = false;
-
-    public bool IsSuccess
-    {
-      get
-      {
-        return _success;
-      }
-    }
 
     public TargetedMessages TargetedMessagesData { get; private set; }
 
@@ -32,72 +22,44 @@ namespace Atlantis.Framework.Personalization.Interface
       try
       {
         _resultXML = xml;
-        _success = true;
         TargetedMessagesData = BuildTargetedMessages();
       }
       catch (Exception ex)
       {
-        this._exception = new AtlantisException(null, "TargetedMessagesResponseData", ex.Message, TargetedMessagesXml.ToString());
-        _success = false;
+        _exception = new AtlantisException(null, "TargetedMessagesResponseData", ex.Message, _resultXML);
       }
-    }
-
-    public TargetedMessagesResponseData(AtlantisException atlantisException)
-    {
-      this._exception = atlantisException;
-      _success = false;
     }
 
     public TargetedMessagesResponseData(RequestData requestData, Exception exception)
     {
-      this._exception = new AtlantisException(requestData, "TargetedMessagesResponseData", exception.Message, requestData.ToXML());
-      _success = false;
+      _exception = new AtlantisException(requestData, "TargetedMessagesResponseData", exception.Message, requestData.ToXML());
     }
 
     private TargetedMessages BuildTargetedMessages()
     {
       TargetedMessages messages = new TargetedMessages();
-      XmlReader reader = TargetedMessagesXml.Root.CreateReader();
-      XmlSerializer serializer = new XmlSerializer(typeof(TargetedMessages), TargetedMessagesXml.Root.GetDefaultNamespace().NamespaceName);
-      messages = (TargetedMessages)serializer.Deserialize(reader);
-      reader.Close();
-      return messages;
-    }
 
-    private XDocument _targetedMessagesXml;
-    private XDocument TargetedMessagesXml
-    {
-      get
+      try
       {
-        if (_targetedMessagesXml == null)
-        {
-          string parseError = null;
-          if (!string.IsNullOrEmpty(_resultXML))
-          {
-            try
-            {
-              _targetedMessagesXml = XDocument.Parse(_resultXML);
-            }
-            catch (Exception ex)
-            {
-              parseError = ex.Message;
-              _targetedMessagesXml = null;
-            }
-          }
+        var targetMessageXml = XDocument.Parse(_resultXML);
 
-          if (_targetedMessagesXml == null)
+        if (targetMessageXml.Root != null)
+        {
+          using (XmlReader reader = targetMessageXml.Root.CreateReader())
           {
-            XElement root = new XElement("TargetedMessages");
-            if (parseError != null)
-            {
-              XElement parseErrorElement = new XElement("ParseError", parseError);
-              root.Add(parseErrorElement);
-            }
-            _targetedMessagesXml = new XDocument(root);
+            XmlSerializer serializer = new XmlSerializer(typeof(TargetedMessages), targetMessageXml.Root.GetDefaultNamespace().NamespaceName);
+            messages = (TargetedMessages)serializer.Deserialize(reader);
+            reader.Close();
           }
         }
-        return _targetedMessagesXml;
+
       }
+      catch (Exception ex)
+      {
+        _exception = new AtlantisException(null, "TargetedMessagesResponseData.BuildTargetedMessages", ex.Message, _resultXML);
+      }
+
+      return messages;
     }
 
     #region IResponseData Members
@@ -122,15 +84,14 @@ namespace Atlantis.Framework.Personalization.Interface
 
     public void DeserializeSessionData(string sessionData)
     {
-      if (!string.IsNullOrEmpty(sessionData))
+      if (string.IsNullOrEmpty(sessionData)) return;
+
+      XmlSerializer xmlSerializer = new XmlSerializer(typeof(TargetedMessagesResponseData));
+      StringReader reader = new StringReader(sessionData);
+      TargetedMessagesResponseData responseData = xmlSerializer.Deserialize(reader) as TargetedMessagesResponseData;
+      if (responseData != null)
       {
-        XmlSerializer xmlSerializer = new XmlSerializer(typeof(TargetedMessagesResponseData));
-        StringReader reader = new StringReader(sessionData);
-        TargetedMessagesResponseData responseData = xmlSerializer.Deserialize(reader) as TargetedMessagesResponseData;
-        if (!ReferenceEquals(null, responseData))
-        {
-          TargetedMessagesData = responseData.TargetedMessagesData;
-        }
+        TargetedMessagesData = responseData.TargetedMessagesData;
       }
     }
     #endregion

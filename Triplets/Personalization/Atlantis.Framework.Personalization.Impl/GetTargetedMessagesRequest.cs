@@ -32,10 +32,6 @@ namespace Atlantis.Framework.Personalization.Impl
         }
         responseData = new TargetedMessagesResponseData(output);
       }
-      catch (AtlantisException exAtlantis)
-      {
-        responseData = new TargetedMessagesResponseData(exAtlantis);
-      }
       catch (Exception ex)
       {
         responseData = new TargetedMessagesResponseData(oRequestData, ex);
@@ -43,24 +39,16 @@ namespace Atlantis.Framework.Personalization.Impl
       return responseData;
     }
 
-
-
     private WebRequest GetWebRequest(WsConfigElement config, RequestData oRequestData)
     {
       TargetedMessagesRequestData requestData = (TargetedMessagesRequestData)oRequestData;
 
       string appID = requestData.AppId;
       string interactionPoint = requestData.InteractionPoint;
+      string shopperId = requestData.ShopperID;
 
       HttpWebRequest result;
-      UriBuilder urlBuilder = new UriBuilder(BuildRequestUrl(config.WSURL, appID, interactionPoint));
-
-      string query = BuildRequestQuery(requestData);
-
-      if (!string.IsNullOrEmpty(query))
-      {
-        urlBuilder.Query = query;
-      }
+      UriBuilder urlBuilder = new UriBuilder(BuildRequestUrl(config.WSURL, appID, interactionPoint,shopperId));
 
       Uri uri = urlBuilder.Uri;
       result = (HttpWebRequest)WebRequest.Create(uri);
@@ -70,28 +58,9 @@ namespace Atlantis.Framework.Personalization.Impl
       return result;
     }
 
-    private string BuildRequestUrl(string webServiceUrl, string appID, string interactionPoint)
+    private string BuildRequestUrl(string webServiceUrl, string appID, string interactionPoint, string shopperId)
     {
-      return String.Format("{0}/{1}/{2}", webServiceUrl, appID, interactionPoint);
+      return String.Format("{0}/{1}/{2}?shopperData=shopperID={3}", webServiceUrl, appID, interactionPoint,shopperId);
     }
-
-    private string BuildRequestQuery(TargetedMessagesRequestData requestData)
-    {
-      List<string> queryItems = new List<string>();
-
-      if (!String.IsNullOrEmpty(requestData.ContextData))
-      {
-        queryItems.Add(String.Format("{0}={1}", "contextData", Uri.EscapeDataString(requestData.ContextData)));
-      }
-      if (!String.IsNullOrEmpty(requestData.ShopperData))
-      {
-        queryItems.Add(String.Format("{0}={1}", "shopperData", Uri.EscapeDataString(requestData.ShopperData)));
-      }
-
-      queryItems.Sort();
-
-      return string.Join("&", queryItems);
-    }
-
   }
 }

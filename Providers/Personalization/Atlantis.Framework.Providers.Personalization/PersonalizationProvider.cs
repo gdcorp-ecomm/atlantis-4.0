@@ -25,20 +25,8 @@ namespace Atlantis.Framework.Providers.Personalization
     {
       string appId = "2";
       string interactionPoint = "Homepage";
-      bool shopperTrusted = (_shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted) || (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated);
 
-      Dictionary<string, string> contextData = new Dictionary<string, string>();
-      contextData.Add("TransactionalCurrency", "USD");
-      contextData.Add("Language", "en");
-
-      Dictionary<string, string> shopperData = new Dictionary<string, string>();
-      shopperData.Add("PrivateLabelId", _siteContext.Value.PrivateLabelId.ToString());
-      shopperData.Add("ShopperId", _shopperContext.Value.ShopperId);
-      shopperData.Add("IsShopperAuthenticated", shopperTrusted ? "1" : "0");
-
-      RequestData request = new TargetedMessagesRequestData(_shopperContext.Value.ShopperId, String.Empty, String.Empty, _siteContext.Value.Pathway,
-        _siteContext.Value.PageCount, appId, interactionPoint, contextData, shopperData);
-
+      RequestData request = new TargetedMessagesRequestData(_shopperContext.Value.ShopperId, appId, interactionPoint);
       TargetedMessagesResponseData response = SessionCache.SessionCache.GetProcessRequest<TargetedMessagesResponseData>(request, PersonalizationEngineRequests.RequestId);
 
       return response.TargetedMessagesData;

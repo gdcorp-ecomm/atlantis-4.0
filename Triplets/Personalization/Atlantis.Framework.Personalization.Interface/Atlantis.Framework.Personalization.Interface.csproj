@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Message.cs" />
+    <Compile Include="MessageTag.cs" />
     <Compile Include="TargetedMessagesRequestData.cs" />
     <Compile Include="TargetedMessagesResponseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

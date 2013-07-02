@@ -13,23 +13,4 @@ namespace Atlantis.Framework.Personalization.Interface
       Messages = new List<Message>();
     }
   }
-
-  public class Message
-  {
-    public string MessageTrackingId { get; set; }
-    public string MessageId { get; set; }
-    public string MessageName { get; set; }
-    public string MessageSequence { get; set; }
-    public List<MessageTag> MessageTags { get; set; }
-
-    public Message()
-    {
-      MessageTags = new List<MessageTag>();
-    }
-  }
-
-  public class MessageTag
-  {
-    public string Name { get; set; }
-  }
 }

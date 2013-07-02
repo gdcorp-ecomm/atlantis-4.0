@@ -240,7 +240,7 @@ namespace Atlantis.Framework.ProductBillingResourceInfo.Impl
       _paramList.Add(new SqlParameter("@pageno", request.PageNumber));
       _paramList.Add(new SqlParameter("@rowsperpage", request.RowsPerPage));
       _paramList.Add(new SqlParameter("@sortcol", request.SortByColumn));
-      _paramList.Add(new SqlParameter("@sortdir", request.SortDirection));
+      _paramList.Add(new SqlParameter("@sortdir", string.IsNullOrEmpty(request.SortDirection) ? "ASC" : request.SortDirection));
       _paramList.Add(new SqlParameter("@returnAll", request.ReturnAll));
       _paramList.Add(new SqlParameter("@onlyNulls", request.OnlyNulls));
 

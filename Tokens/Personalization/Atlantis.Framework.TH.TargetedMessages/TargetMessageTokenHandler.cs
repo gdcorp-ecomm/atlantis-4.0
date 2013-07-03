@@ -11,7 +11,7 @@ using Atlantis.Framework.Tokens.Interface;
 namespace Atlantis.Framework.TH.TargetedMessages
 {
   /// <summary>
-  /// Example token: [@T[targetmessage:<tokendata messagetag="EngmtActNewCustSurveyMobileDLP"></tokendata>@T]
+  /// Example token: [@T[targetmessageid:EngmtActNewCustSurveyMobileDLP]@T]
   /// </summary>
   public class TargetMessageTokenHandler : SimpleTokenHandlerBase
   {
@@ -19,50 +19,35 @@ namespace Atlantis.Framework.TH.TargetedMessages
 
     public override string TokenKey
     {
-      get { return "targetmessage"; }
+      get { return "targetmessageid"; }
     }
 
     public override TokenEvaluationResult EvaluateTokens(IEnumerable<IToken> tokens, IProviderContainer container)
     {
       TokenEvaluationResult result = TokenEvaluationResult.Success;
-      const string errorSource = "TargetMessages.EvaluateTokens";
-
       foreach (var token in tokens)
       {
         SimpleToken simpleToken = token as SimpleToken;
-        XElement xmlTokenData = null;
+
         string tokenResult = null;
 
-        if (simpleToken != null && !String.IsNullOrWhiteSpace(simpleToken.RawTokenData))
+        if (simpleToken != null && !String.IsNullOrEmpty(simpleToken.RawTokenData))
         {
-          try
-          {
-            xmlTokenData = XElement.Parse(simpleToken.RawTokenData);
-          }
-          catch (Exception ex)
-          {
-            result = TokenEvaluationResult.Errors;
-            LogDebugMessage(container, ex.ToString(), errorSource);
-          }
+          var personalizationProvider = container.Resolve<IPersonalizationProvider>();
+          var targetedMessages = personalizationProvider.GetTargetedMessages();
 
-          if (xmlTokenData != null)
+          foreach (var message in targetedMessages.Messages)
           {
-            var personalizationProvider = container.Resolve<IPersonalizationProvider>();
-            var targetedMessages = personalizationProvider.GetTargetedMessages();
-
-            foreach (var message in targetedMessages.Messages)
+            //Ignore Case
+            foreach (MessageTag messagetag in message.MessageTags)
             {
-              if (!String.IsNullOrEmpty(tokenResult)) { break; }
-
-              foreach (MessageTag messagetag in message.MessageTags)
+              if (String.Compare(simpleToken.TokenData, messagetag.Name, StringComparison.OrdinalIgnoreCase) == 0)
               {
-                if (xmlTokenData.Attribute(ATTR_MESSAGE_TAG).Value == messagetag.Name)
-                {
-                  tokenResult = message.MessageId;
-                  break;
-                }
+                tokenResult = message.MessageId;
+                break;
               }
             }
+            if (!String.IsNullOrEmpty(tokenResult)) { break; }
           }
         }
 
@@ -71,16 +56,5 @@ namespace Atlantis.Framework.TH.TargetedMessages
 
       return result;
     }
-
-    private void LogDebugMessage(IProviderContainer container, string message, string errorSource)
-    {
-      IDebugContext debugContext = null;
-      if (container.CanResolve<IDebugContext>())
-      {
-        debugContext = container.Resolve<IDebugContext>();
-        debugContext.LogDebugTrackingData(errorSource, message);
-      }
-    }
-
   }
 }

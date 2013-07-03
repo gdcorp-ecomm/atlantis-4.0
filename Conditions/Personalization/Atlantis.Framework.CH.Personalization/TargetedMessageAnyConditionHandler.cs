@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Atlantis.Framework.Conditions.Interface;
 using Atlantis.Framework.Interface;
@@ -13,7 +14,7 @@ namespace Atlantis.Framework.CH.Personalization
 
     public bool EvaluateCondition(string conditionName, IList<string> parameters, IProviderContainer providerContainer)
     {
-      bool returnValue = false;
+      bool messageTagFound = false;
 
       if (parameters != null && parameters.Count > 0)
       {
@@ -22,21 +23,19 @@ namespace Atlantis.Framework.CH.Personalization
 
         foreach (var parameter in parameters)
         {
-          if (returnValue) { break; }
-
           foreach (var message in targetedMessages.Messages)
           {
-            if (returnValue) { break; }
-
-            if (message.MessageTags.Any(messageTag => parameter == messageTag.Name))
+            if (message.MessageTags.Any(messageTag => string.Compare(parameter, messageTag.Name, StringComparison.OrdinalIgnoreCase) == 0))
             {
-              returnValue = true;
+              messageTagFound = true;
+              break;
             }
           }
+          if (messageTagFound) { break; }
         }
       }
 
-      return returnValue;
+      return messageTagFound;
     }
   }
 }

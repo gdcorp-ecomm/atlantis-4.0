@@ -15,7 +15,7 @@ namespace Atlantis.Framework.TH.TargetedMessages.Tests
   [DeploymentItem("Atlantis.Framework.Personalization.Impl.dll")]
   public class TargetMessageTests
   {
-    private const string _tokenFormat = "[@T[targetmessage:{0}]@T]";
+    private const string _tokenFormat = "[@T[targetmessageid:{0}]@T]";
 
     [TestInitialize]
     public void InitializeTests()
@@ -52,7 +52,7 @@ namespace Atlantis.Framework.TH.TargetedMessages.Tests
     [TestMethod]
     public void TargetMessageTokenMatch()
     {
-      string outputText = TokenSuccess("<tokendata messagetag=\"EngmtActNewCustSurveyMobileDLP\"></tokendata>");
+      string outputText = TokenSuccess("EngmtActNewCustSurveyMobileDLP");
       Assert.IsTrue(outputText == "7f8426c1-e9de-491f-9bcb-19fd8351d22a");
     }
   }

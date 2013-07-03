@@ -257,7 +257,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       shopperWatchListResponse = null;
 
-      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated)
+      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated || _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted)
       {
         try
         {
@@ -284,7 +284,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       responseMessage = string.Empty;
 
-      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated)
+      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated || _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted)
       {
         try
         {
@@ -315,7 +315,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       responseMessage = string.Empty;
 
-      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated)
+      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated || _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted)
       {
         try
         {
@@ -342,7 +342,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
     private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiCategory> categories)
     {
-      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated)
+      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated || _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted)
       {
         IShopperWatchListResponse shopperWatchListResponse;
         if (GetShopperWatchList(out shopperWatchListResponse))
@@ -371,7 +371,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
     private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiGtld> gtlds)
     {
-      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated)
+      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated || _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted)
       {
         IShopperWatchListResponse shopperWatchListResponse;
         if (GetShopperWatchList(out shopperWatchListResponse))

@@ -17,9 +17,8 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
   public class PersonalizationMessageTests
   {
     readonly MockProviderContainer _container = new MockProviderContainer();
-    private IPersonalizationProvider _personalizationProvider;
 
-    private void Initialize()
+    private void InitializeProvidersContexts()
     {
       MockHttpRequest mockHttpRequest = new MockHttpRequest("http://www.godaddy.com/");
       MockHttpContext.SetFromWorkerRequest(mockHttpRequest);
@@ -28,18 +27,17 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
       _container.RegisterProvider<IManagerContext, MockNoManagerContext>();
       _container.RegisterProvider<IPersonalizationProvider, PersonalizationProvider>();
       _container.RegisterProvider<IShopperContext, MockShopperContext>();
+      _container.RegisterProvider<IPersonalizationProvider,PersonalizationProvider>();
 
-      _container.Resolve<IShopperContext>().SetNewShopper("12345");
-
-      _personalizationProvider = _container.Resolve<IPersonalizationProvider>();
     }
 
     [TestMethod]
     public void GetTargetedMessagesObject()
     {
-      Initialize();
-      var targetMessage = _personalizationProvider.GetTargetedMessages();
-      
+      InitializeProvidersContexts();
+      _container.Resolve<IShopperContext>().SetNewShopper("12345");
+      var targetMessage = _container.Resolve<IPersonalizationProvider>().GetTargetedMessages();
+
       XmlSerializer serializer = new XmlSerializer(typeof(TargetedMessages));
 
       using (var stringWriter = new StringWriter())

@@ -22,7 +22,7 @@ namespace Atlantis.Framework.Personalization.Test
       TargetedMessagesRequestData request = new TargetedMessagesRequestData("12345", "1", appId, interactionPoint);
       TargetedMessagesResponseData response = (TargetedMessagesResponseData)Engine.Engine.ProcessRequest(request, 669);
 
-      Debug.WriteLine(response.ToXML());
+      Debug.Write(response.ToXML());
       Assert.IsTrue(response.TargetedMessagesData.ResultCode == 0);
     }
   }

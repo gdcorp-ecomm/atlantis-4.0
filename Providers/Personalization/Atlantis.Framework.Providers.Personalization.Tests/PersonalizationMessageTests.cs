@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Xml.Serialization;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Personalization.Interface;
@@ -25,10 +24,8 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
 
       _container.RegisterProvider<ISiteContext, MockSiteContext>();
       _container.RegisterProvider<IManagerContext, MockNoManagerContext>();
-      _container.RegisterProvider<IPersonalizationProvider, PersonalizationProvider>();
       _container.RegisterProvider<IShopperContext, MockShopperContext>();
-      _container.RegisterProvider<IPersonalizationProvider,PersonalizationProvider>();
-
+      _container.RegisterProvider<IPersonalizationProvider, PersonalizationProvider>();
     }
 
     [TestMethod]

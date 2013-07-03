@@ -120,11 +120,6 @@
       <Name>Atlantis.Framework.TH.TargetedMessages</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="atlantis.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

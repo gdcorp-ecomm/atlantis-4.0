@@ -15,8 +15,6 @@ namespace Atlantis.Framework.TH.TargetedMessages
   /// </summary>
   public class TargetMessageTokenHandler : SimpleTokenHandlerBase
   {
-    private const string ATTR_MESSAGE_TAG = "messagetag";
-
     public override string TokenKey
     {
       get { return "targetmessageid"; }
@@ -38,7 +36,6 @@ namespace Atlantis.Framework.TH.TargetedMessages
 
           foreach (var message in targetedMessages.Messages)
           {
-            //Ignore Case
             foreach (MessageTag messagetag in message.MessageTags)
             {
               if (String.Compare(simpleToken.TokenData, messagetag.Name, StringComparison.OrdinalIgnoreCase) == 0)

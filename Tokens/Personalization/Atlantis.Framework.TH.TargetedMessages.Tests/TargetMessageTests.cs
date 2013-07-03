@@ -10,7 +10,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.TH.TargetedMessages.Tests
 {
   [TestClass]
-  [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.DataCacheGeneric.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.Personalization.Impl.dll")]
   public class TargetMessageTests
@@ -50,10 +49,28 @@ namespace Atlantis.Framework.TH.TargetedMessages.Tests
     }
 
     [TestMethod]
-    public void TargetMessageTokenMatch()
+    public void TargetMessageTokenMatch1LowerCase()
     {
-      string outputText = TokenSuccess("EngmtActNewCustSurveyMobileDLP");
+      string outputText = TokenSuccess("EngmtActNewCustSurveyMobileDLP".ToLower());
       Assert.IsTrue(outputText == "7f8426c1-e9de-491f-9bcb-19fd8351d22a");
+    }
+    [TestMethod]
+    public void TargetMessageTokenMatch2UpperCase()
+    {
+      string outputText = TokenSuccess("EngmtActNewCustSurveyWebDLP".ToUpper());
+      Assert.IsTrue(outputText == "7f8426c1-e9de-491f-9bcb-19fd8351d22a");
+    }
+    [TestMethod]
+    public void TargetMessageTokenMatch3()
+    {
+      string outputText = TokenSuccess("EngmtCustServMobileAppMobileHP");
+      Assert.IsTrue(outputText == "0e554af3-9851-4a99-90f0-1d11987ea553");
+    }
+    [TestMethod]
+    public void TargetMessageTokenMatch4()
+    {
+      string outputText = TokenSuccess("EngmtCustServMobileAppWebHP");
+      Assert.IsTrue(outputText == "0e554af3-9851-4a99-90f0-1d11987ea553");
     }
   }
 }

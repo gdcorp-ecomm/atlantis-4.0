@@ -12,7 +12,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Atlantis.Framework.CH.Personalization.Tests
 {
   [TestClass]
-  [DeploymentItem("atlantis.config")]
   [DeploymentItem("Atlantis.Framework.Personalization.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.CH.Personalization.dll")]
   public class TargetMessageAnyConditionHandlerTest
@@ -64,7 +63,28 @@ namespace Atlantis.Framework.CH.Personalization.Tests
     }
 
     [TestMethod]
-    public void EvaluateCondition()
+    public void EvaluateCondition1LowerCase()
+    {
+      string expression = String.Format("{0}({1})", CONDITION_NAME, "EngmtCustServMobileAppMobileHP".ToLower());
+      bool actual = ExpressionParserManager.EvaluateExpression(expression);
+      Assert.IsTrue(actual);
+    }
+    [TestMethod]
+    public void EvaluateCondition2UpperCase()
+    {
+      string expression = String.Format("{0}({1})", CONDITION_NAME, "EngmtCustServMobileAppWebHP".ToUpper());
+      bool actual = ExpressionParserManager.EvaluateExpression(expression);
+      Assert.IsTrue(actual);
+    }
+    [TestMethod]
+    public void EvaluateCondition3()
+    {
+      string expression = String.Format("{0}({1})", CONDITION_NAME, "EngmtActNewCustSurveyMobileDLP");
+      bool actual = ExpressionParserManager.EvaluateExpression(expression);
+      Assert.IsTrue(actual);
+    }
+    [TestMethod]
+    public void EvaluateCondition4()
     {
       string expression = String.Format("{0}({1})", CONDITION_NAME, "EngmtActNewCustSurveyWebDLP");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);

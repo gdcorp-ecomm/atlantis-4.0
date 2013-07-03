@@ -1,7 +1,8 @@
 ﻿namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
 {
-  public interface IDotTypeFormsSchema
+  public enum ViewTypes
   {
-    IDotTypeFormsForm Form { get; set; }
+    MobileRich = 0,
+    MobileDefault = 1,
   }
 }

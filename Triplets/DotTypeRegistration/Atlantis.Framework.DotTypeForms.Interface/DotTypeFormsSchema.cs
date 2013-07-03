@@ -8,7 +8,7 @@ namespace Atlantis.Framework.DotTypeForms.Interface
 {
   public class DotTypeFormsSchema : IDotTypeFormsSchema
   {
-    public IList<IDotTypeFormsForm> FormCollection { get; set; }
+    public IDotTypeFormsForm Form { get; set; }
     public bool IsSuccess { get; set; }
 
     public DotTypeFormsSchema(string responseXml)
@@ -27,9 +27,9 @@ namespace Atlantis.Framework.DotTypeForms.Interface
           var error = formsElement.Name.LocalName;
           if (!error.Equals("error"))
           {
-            var formCollection = new List<IDotTypeFormsForm>(2);
-            var formElementList = formsElement.Descendants("form");
-            foreach (var formElement in formElementList)
+            var form = new DotTypeFormsForm();
+            var formElement = formsElement.Element("form");
+            if (formElement != null)
             {
               var formName = formElement.Attribute("name");
               var formDescription = formElement.Attribute("description");
@@ -50,8 +50,7 @@ namespace Atlantis.Framework.DotTypeForms.Interface
                                          FormName = formName.Value,
                                          FormDescription = formDescription.Value,
                                          FormGetMethod = formGetMethod.Value,
-                                         FormSetMethod = formSetMethod.Value,
-                                         ValidationRuleCollection = ParseValidationRuleCollection(formElement)
+                                         FormSetMethod = formSetMethod.Value
                                        };
 
               var fieldCollection = ParseFieldCollection(formElement);
@@ -66,11 +65,10 @@ namespace Atlantis.Framework.DotTypeForms.Interface
                                                                message, responseXml, null, null);
                 throw xmlHeaderException;
               }
-
-              formCollection.Add(dotTypeFormsForm);
+              form = dotTypeFormsForm;
             }
 
-            FormCollection = formCollection;
+            Form = form;
             IsSuccess = true;
           }
         }
@@ -80,27 +78,6 @@ namespace Atlantis.Framework.DotTypeForms.Interface
         var exception = new AtlantisException("DotTypeFormsSchemaResponseData.BuildModelFromXml", "0", ex.Message + ex.StackTrace, responseXml, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
-    }
-
-    private IList<IDotTypeFormsValidationRule> ParseValidationRuleCollection(XElement parent)
-    {
-      IList<IDotTypeFormsValidationRule> validationRuleCollection = null;
-
-      var validationRuleCollectionElement = parent.Element("validationrulecollection");
-      if (validationRuleCollectionElement != null)
-      {
-        validationRuleCollection = new List<IDotTypeFormsValidationRule>();
-        foreach (var validationRule in validationRuleCollectionElement.Elements("validationrule"))
-        {
-          var dotTypeFormsValidationRule = new DotTypeFormsValidationRule
-          {
-            ValidationRuleName = validationRule.Attribute("name").Value
-          };
-          validationRuleCollection.Add(dotTypeFormsValidationRule);
-        }
-      }
-
-      return validationRuleCollection;
     }
 
     private IList<IDotTypeFormsField> ParseFieldCollection(XElement parent)
@@ -120,7 +97,6 @@ namespace Atlantis.Framework.DotTypeForms.Interface
           FieldType = field.Attribute("type").Value,
           DataSource = field.Attribute("datasource") != null ? field.Attribute("datasource").Value : string.Empty,
           DataSourceMethod = field.Attribute("method") != null ? field.Attribute("method").Value : string.Empty,
-          ValidationRuleCollection = ParseValidationRuleCollection(field),
           ItemCollection = ParseItemCollection(field)
         };
 

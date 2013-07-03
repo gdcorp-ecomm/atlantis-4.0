@@ -23,23 +23,36 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     }
 
     [TestMethod]
-    public void DotTypeFormsSchemaSuccess()
+    public void DotTypeFormsSchemaMobileRichSuccess()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
-      IDotTypeFormsSchema dotTypeFormsSchema;
-      bool isSuccess = provider.GetDotTypeFormsSchema(1640, "MOBILE", "GA", "EN", out dotTypeFormsSchema);
+      string htmlData;
+      string[] domains = { "domain1.shop", "domain2.shop" };
+      bool isSuccess = provider.GetDotTypeFormsSchema(1640, "MOBILE", "GA", "EN", domains, ViewTypes.MobileRich, out htmlData);
       Assert.AreEqual(true, isSuccess);
-      Assert.AreEqual(true, dotTypeFormsSchema.FormCollection.Count > 0);
+      Assert.AreEqual(true, !string.IsNullOrEmpty(htmlData));
+    }
+
+    [TestMethod]
+    public void DotTypeFormsSchemaMobileDefaultSuccess()
+    {
+      IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
+      string htmlData;
+      string[] domains = { "domain1.shop", "domain2.shop" };
+      bool isSuccess = provider.GetDotTypeFormsSchema(1640, "MOBILE", "GA", "EN", domains, ViewTypes.MobileDefault, out htmlData);
+      Assert.AreEqual(true, isSuccess);
+      Assert.AreEqual(true, !string.IsNullOrEmpty(htmlData));
     }
 
     [TestMethod]
     public void DotTypeFormsSchemaFailure()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
-      IDotTypeFormsSchema dotTypeFormsSchema;
-      bool isSuccess = provider.GetDotTypeFormsSchema(-1, "name of placement", "GA", "EN", out dotTypeFormsSchema);
+      string htmlData;
+      string[] domains = { "domain1.shop", "domain2.shop" };
+      bool isSuccess = provider.GetDotTypeFormsSchema(-1, "name of placement", "GA", "EN", domains, ViewTypes.MobileRich, out htmlData);
       Assert.AreEqual(false, isSuccess);
-      Assert.AreEqual(true, dotTypeFormsSchema == null);
+      Assert.AreEqual(true, string.IsNullOrEmpty(htmlData));
     }
 
     [TestMethod]

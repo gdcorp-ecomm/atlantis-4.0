@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using Atlantis.Framework.DotTypeClaims.Interface;
 using Atlantis.Framework.DotTypeValidation.Interface;
+using Atlantis.Framework.Providers.DotTypeRegistration.Factories;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.DotTypeForms.Interface;
+using Atlantis.Framework.Providers.DotTypeRegistration.Interface.Handlers;
 
 namespace Atlantis.Framework.Providers.DotTypeRegistration
 {
@@ -39,26 +41,65 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool GetDotTypeFormsSchema(int tldId, string placement, string phase, string language, out IDotTypeFormsSchema dotTypeFormsSchema)
+    public bool GetDotTypeFormsSchema(int tldId, string placement, string phase, string language, string[] domains, ViewTypes viewType, 
+                                      out string dotTypeFormsSchemaHtml)
     {
       var success = false;
-      dotTypeFormsSchema = null;
+      dotTypeFormsSchemaHtml = string.Empty;
 
       try
       {
-        var request = new DotTypeFormsXmlRequestData(tldId, placement, phase, language);
-        var response = (DotTypeFormsXmlResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsXmlRequest);
-        if (response.IsSuccess)
+        IDotTypeFormsSchema dotTypeFormsSchema;
+        success = GetDotTypeFormsXmlSchema(tldId, placement, phase, language, out dotTypeFormsSchema);
+
+        if (success && dotTypeFormsSchema != null)
         {
-          dotTypeFormsSchema = response.DotTypeFormsSchema;
-          success = true;
+          success = TransformFormsSchemaToHtml(domains, viewType, dotTypeFormsSchema, out dotTypeFormsSchemaHtml);
         }
       }
       catch (Exception ex)
       {
-        var data = "tldId: " + tldId + ", placement: " + placement + ", phase: " + phase + ", language: " + language;
+        var data = "tldId: " + tldId + ", placement: " + placement + ", phase: " + phase + ", language: " + language + ", viewtype: " + viewType.ToString();
         var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeFormsSchema", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
+
+      }
+
+      return success;
+    }
+
+    private static bool GetDotTypeFormsXmlSchema(int tldId, string placement, string phase, string language, out IDotTypeFormsSchema dotTypeFormsSchema)
+    {
+      var success = false;
+      dotTypeFormsSchema = null;
+
+      var request = new DotTypeFormsXmlRequestData(tldId, placement, phase, language);
+      var response = (DotTypeFormsXmlResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsXmlRequest);
+      if (response.IsSuccess)
+      {
+        dotTypeFormsSchema = response.DotTypeFormsSchema;
+        success = true;
+      }
+
+      return success;
+    }
+    
+    private bool TransformFormsSchemaToHtml(string[] domains, ViewTypes viewType, IDotTypeFormsSchema dotTypeFormsSchema, out string dotTypeFormsSchemaHtml)
+    {
+      bool success = false;
+      dotTypeFormsSchemaHtml = string.Empty;
+
+      try
+      {
+        IDotTypeFormTransformHandler transformType = DotTypeFormTransformFactory.GetFormTransformHandler(viewType);
+        if (transformType != null)
+        {
+          success = transformType.TransformFormToHtml(dotTypeFormsSchema, domains, Container, out dotTypeFormsSchemaHtml);
+        }
+      }
+      catch (Exception)
+      {
+        success = false;
       }
 
       return success;
@@ -89,7 +130,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool ValidateTrademarkData(string clientApplication, string serverName, int tldId, string phase, string category, Dictionary<string, string> fields,
+    public bool ValidateData(string clientApplication, string serverName, int tldId, string phase, string category, Dictionary<string, string> fields,
       out bool hasErrors, out Dictionary<string, string> validationErrors, out string token)
     {
       var success = false;
@@ -119,42 +160,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       {
         var data = "clientApplication: " + clientApplication + ", serverName: " + serverName + ", tldId: " + tldId + ", phase: " + phase + ", fields: " + fields;
         var exception = new AtlantisException("DotTypeRegistrationProvider.ValidateDotTypeRegistration", "0", ex.Message + ex.StackTrace, data, null, null);
-        Engine.Engine.LogAtlantisException(exception);
-      }
-
-      return success;
-    }
-
-    public bool ValidateClaimData(string clientApplication, string serverName, int tldId, string phase, string category, string noticeXml,
-      out bool hasErrors, out Dictionary<string, string> validationErrors, out string token)
-    {
-      var success = false;
-      hasErrors = false;
-      token = string.Empty;
-      validationErrors = null;
-
-      try
-      {
-        var request = new DotTypeValidationRequestData(clientApplication, serverName, tldId, phase, category, noticeXml);
-        var response = (DotTypeValidationResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeValidationRequest);
-        if (response.IsSuccess)
-        {
-          if (response.HasErrors)
-          {
-            hasErrors = true;
-            validationErrors = response.ValidationErrors;
-          }
-          else
-          {
-            token = response.Token;
-          }
-          success = true;
-        }
-      }
-      catch (Exception ex)
-      {
-        var data = "clientApplication: " + clientApplication + ", serverName: " + serverName + ", tldId: " + tldId + ", phase: " + phase + ", fields: " + noticeXml;
-        var exception = new AtlantisException("DotTypeRegistrationProvider.ValidateClaimData", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
 

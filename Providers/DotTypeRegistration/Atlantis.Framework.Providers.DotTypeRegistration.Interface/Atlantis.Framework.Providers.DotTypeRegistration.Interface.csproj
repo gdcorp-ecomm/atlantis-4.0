@@ -43,14 +43,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormFieldTypes.cs" />
+    <Compile Include="Handlers\IDotTypeFormFieldTypeHandler.cs" />
     <Compile Include="IDotTypeClaimsSchema.cs" />
     <Compile Include="IDotTypeFormsItem.cs" />
-    <Compile Include="IDotTypeFormsValidationRule.cs" />
     <Compile Include="IDotTypeFormsField.cs" />
     <Compile Include="IDotTypeFormsForm.cs" />
     <Compile Include="IDotTypeFormsSchema.cs" />
+    <Compile Include="Handlers\IDotTypeFormTransformHandler.cs" />
     <Compile Include="IDotTypeRegistrationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewTypes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
+      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
+      <Name>Atlantis.Framework.Providers.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,7 +10,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
     string FieldLabel { get; set; }
     string DataSource { get; set; }
     string DataSourceMethod { get; set; }
-    IList<IDotTypeFormsValidationRule> ValidationRuleCollection { get; set; }
     IList<IDotTypeFormsItem> ItemCollection { get; set; }
   }
 }

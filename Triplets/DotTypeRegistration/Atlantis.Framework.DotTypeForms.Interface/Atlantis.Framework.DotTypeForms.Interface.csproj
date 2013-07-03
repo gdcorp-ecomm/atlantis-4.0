@@ -49,9 +49,8 @@
     <Compile Include="DotTypeFormsSchema.cs" />
     <Compile Include="DotTypeFormsForm.cs" />
     <Compile Include="DotTypeFormsItem.cs" />
-    <Compile Include="DotTypeFormsValidationRule.cs" />
     <Compile Include="DotTypeFormsField.cs" />
-    <Compile Include="DotTypeFormsXmlResponseData.cs.cs" />
+    <Compile Include="DotTypeFormsXmlResponseData.cs" />
     <Compile Include="DotTypeFormsXmlRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

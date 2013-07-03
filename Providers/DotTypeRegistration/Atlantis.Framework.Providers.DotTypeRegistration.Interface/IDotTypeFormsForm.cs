@@ -8,7 +8,6 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
     string FormDescription { get; set; }
     string FormGetMethod { get; set; }
     string FormSetMethod { get; set; }
-    IList<IDotTypeFormsValidationRule> ValidationRuleCollection { get; set; }
     IList<IDotTypeFormsField> FieldCollection { get; set; }
   }
 }

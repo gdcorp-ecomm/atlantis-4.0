@@ -44,8 +44,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\MobileDefault\MobileDefaultClaimFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileDefault\MobileDefaultCheckboxFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileDefault\MobileDefaultDateFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileDefault\MobileDefaultDatetimeFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileDefault\MobileDefaultEmailFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileDefault\MobileDefaultNumberFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileDefault\MobileDefaultPhoneFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileDefault\MobileDefaultRadioFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileDefault\MobileDefaultSelectFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileDefault\MobileDefaultStringFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileRich\MobileRichEmailFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileRich\MobileRichPhoneFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileRich\MobileRichDatetimeFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileRich\MobileRichDateFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileRich\MobileRichNumberFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileRich\MobileRichStringFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileRich\MobileRichRadioFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileRich\MobileRichSelectFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileRich\MobileRichCheckboxFieldTypeHandler.cs" />
+    <Compile Include="Handlers\MobileRich\MobileRichClaimFieldTypeHandler.cs" />
+    <Compile Include="Factories\DotTypeFormFieldTypeFactory.cs" />
+    <Compile Include="Handlers\MobileDefault\MobileDefaultFormTransformHandler.cs" />
+    <Compile Include="Factories\DotTypeFormTransformFactory.cs" />
     <Compile Include="DotTypeRegistrationEngineRequests.cs" />
     <Compile Include="DotTypeRegistrationProvider.cs" />
+    <Compile Include="Handlers\MobileRich\MobileRichFormTransformHandler.cs" />
+    <Compile Include="Handlers\FieldTypeDataKeyConstants.cs" />
+    <Compile Include="Handlers\TransformHandlerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +90,10 @@
     <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers\Atlantis.Framework.Providers.Containers.csproj">
       <Project>{c333e679-494e-422d-ab5e-e4c0ec94acd5}</Project>
       <Name>Atlantis.Framework.Providers.Containers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface\Atlantis.Framework.Providers.Interface.csproj">
+      <Project>{6cc33c6b-faa7-4b6a-8c3b-bfe94a1a65de}</Project>
+      <Name>Atlantis.Framework.Providers.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Triplets\DotTypeRegistration\Atlantis.Framework.DotTypeClaims.Impl\Atlantis.Framework.DotTypeClaims.Impl.csproj">
       <Project>{e4c60f74-ebf7-4f79-8d5b-19075a283077}</Project>

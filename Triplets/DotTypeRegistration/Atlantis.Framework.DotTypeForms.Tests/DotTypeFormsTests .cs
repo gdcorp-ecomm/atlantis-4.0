@@ -21,7 +21,7 @@ namespace Atlantis.Framework.DotTypeForms.Tests
     public void DotTypeFormsXmlBadRequest()
     {
       var request = new DotTypeFormsXmlRequestData(-1, "name of placement", "GA", "EN");
-      var response = (DotTypeFormsHtmlResponseData)Engine.Engine.ProcessRequest(request, 689);
+      var response = (DotTypeFormsXmlResponseData)Engine.Engine.ProcessRequest(request, 689);
       Assert.AreEqual(false, response.IsSuccess);
     }
 

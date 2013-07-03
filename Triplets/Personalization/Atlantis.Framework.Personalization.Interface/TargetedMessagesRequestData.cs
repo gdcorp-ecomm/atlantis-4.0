@@ -11,19 +11,21 @@ namespace Atlantis.Framework.Personalization.Interface
     private const int DEFAULT_TIMEOUT = 10;
     public string AppId { get; set; }
     public string InteractionPoint { get; set; }
+    public string PrivateLabel { get; set; }
 
-    public TargetedMessagesRequestData(string shopperId, string appId, string interactionPoint)
+    public TargetedMessagesRequestData(string shopperId, string privateLabel, string appId, string interactionPoint)
     {
       AppId = appId;
       InteractionPoint = interactionPoint;
       ShopperID = shopperId;
+      PrivateLabel = privateLabel;
 
       RequestTimeout = TimeSpan.FromSeconds(DEFAULT_TIMEOUT);
     }
 
     public override string GetCacheMD5()
     {
-      return BuildHashFromStrings(ShopperID, AppId, InteractionPoint);
+      return BuildHashFromStrings(ShopperID, PrivateLabel, AppId, InteractionPoint);
     }
 
   }

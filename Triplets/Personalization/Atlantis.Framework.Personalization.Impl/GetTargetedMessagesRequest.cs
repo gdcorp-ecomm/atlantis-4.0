@@ -46,9 +46,10 @@ namespace Atlantis.Framework.Personalization.Impl
       string appID = requestData.AppId;
       string interactionPoint = requestData.InteractionPoint;
       string shopperId = requestData.ShopperID;
+      string privateLabel = requestData.PrivateLabel;
 
       HttpWebRequest result;
-      UriBuilder urlBuilder = new UriBuilder(BuildRequestUrl(config.WSURL, appID, interactionPoint,shopperId));
+      UriBuilder urlBuilder = new UriBuilder(BuildRequestUrl(config.WSURL, appID, interactionPoint, shopperId, privateLabel));
 
       Uri uri = urlBuilder.Uri;
       result = (HttpWebRequest)WebRequest.Create(uri);
@@ -58,9 +59,9 @@ namespace Atlantis.Framework.Personalization.Impl
       return result;
     }
 
-    private string BuildRequestUrl(string webServiceUrl, string appID, string interactionPoint, string shopperId)
+    private string BuildRequestUrl(string webServiceUrl, string appID, string interactionPoint, string shopperId, string privateLabel)
     {
-      return String.Format("{0}/{1}/{2}?shopperData=shopperID={3}", webServiceUrl, appID, interactionPoint,shopperId);
+      return String.Format("{0}/{1}/{2}?shopperData=shopperID={3}|privateLabelID={4}", webServiceUrl, appID, interactionPoint, shopperId, privateLabel);
     }
   }
 }

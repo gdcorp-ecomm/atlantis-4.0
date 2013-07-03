@@ -11,8 +11,6 @@ namespace Atlantis.Framework.Providers.Personalization
 
     private readonly Lazy<ISiteContext> _siteContext;
     private readonly Lazy<IShopperContext> _shopperContext;
-    //private readonly Lazy<ICurrencyProvider> _currency;
-    //private readonly Lazy<ILocalizationProvider> _localization;
 
     public PersonalizationProvider(IProviderContainer container)
       : base(container)
@@ -23,10 +21,10 @@ namespace Atlantis.Framework.Providers.Personalization
 
     public TargetedMessages GetTargetedMessages()
     {
-      string appId = "2";
-      string interactionPoint = "Homepage";
+      const string appId = "2";
+      const string interactionPoint = "Homepage";
 
-      RequestData request = new TargetedMessagesRequestData(_shopperContext.Value.ShopperId, appId, interactionPoint);
+      RequestData request = new TargetedMessagesRequestData(_shopperContext.Value.ShopperId, _siteContext.Value.PrivateLabelId.ToString(), appId, interactionPoint);
       TargetedMessagesResponseData response = SessionCache.SessionCache.GetProcessRequest<TargetedMessagesResponseData>(request, PersonalizationEngineRequests.RequestId);
 
       return response.TargetedMessagesData;

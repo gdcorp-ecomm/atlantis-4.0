@@ -19,7 +19,7 @@ namespace Atlantis.Framework.Personalization.Test
       const string appId = "2";
       const string interactionPoint = "ProductUpsell";
 
-      TargetedMessagesRequestData request = new TargetedMessagesRequestData("12345", appId, interactionPoint);
+      TargetedMessagesRequestData request = new TargetedMessagesRequestData("12345", "1", appId, interactionPoint);
       TargetedMessagesResponseData response = (TargetedMessagesResponseData)Engine.Engine.ProcessRequest(request, 669);
 
       Debug.WriteLine(response.ToXML());

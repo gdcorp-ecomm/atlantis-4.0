@@ -5,5 +5,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Interface
   {
     public const string UserControl = "userControl";
     public const string CDSDocument = "cdsDocument";
+    public const string WebControl = "webControl";
   }
 }

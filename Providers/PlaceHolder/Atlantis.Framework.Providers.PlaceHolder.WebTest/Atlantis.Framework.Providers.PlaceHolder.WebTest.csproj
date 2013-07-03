@@ -67,6 +67,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\WebControls\WebControlOne.cs" />
+    <Content Include="App_Code\WebControls\WebControlTwo.cs" />
     <Compile Include="controls\banner.ascx.cs">
       <DependentUpon>banner.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

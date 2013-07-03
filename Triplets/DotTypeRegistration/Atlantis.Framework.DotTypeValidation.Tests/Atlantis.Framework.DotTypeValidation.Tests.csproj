@@ -65,6 +65,24 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Engine\Atlantis.Framework.Engine.csproj">
+      <Project>{d30157b2-c1b3-4073-ba5e-632e2337a997}</Project>
+      <Name>Atlantis.Framework.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">
+      <Project>{a083a52e-c3c3-42e0-8dfd-54719e4c3b25}</Project>
+      <Name>Atlantis.Framework.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeValidation.Impl\Atlantis.Framework.DotTypeValidation.Impl.csproj">
+      <Project>{57529dcb-a2da-414a-9200-466bf9305ef8}</Project>
+      <Name>Atlantis.Framework.DotTypeValidation.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Framework.DotTypeValidation.Interface\Atlantis.Framework.DotTypeValidation.Interface.csproj">
+      <Project>{b546bc6f-fe39-414c-b7ce-7cf5efdc1d62}</Project>
+      <Name>Atlantis.Framework.DotTypeValidation.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

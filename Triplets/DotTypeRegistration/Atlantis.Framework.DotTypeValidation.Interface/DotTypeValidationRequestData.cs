@@ -15,7 +15,6 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
     public string Category { get; set; }
 
     public Dictionary<string, string> Fields = new Dictionary<string, string>();
-    public string NoticeXml { get; set; }
 
     public DotTypeValidationRequestData(string clientApplication, string serverName, int tldId, string phase, string category,
                                         Dictionary<string, string> fields)
@@ -26,17 +25,6 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
       Phase = phase;
       Category = category;
       Fields = fields;
-    }
-
-    public DotTypeValidationRequestData(string clientApplication, string serverName, int tldId, string phase, string category,
-                                        string noticeXml)
-    {
-      ClientApplication = clientApplication;
-      ServerName = serverName;
-      TldId = tldId;
-      Phase = phase;
-      Category = category;
-      NoticeXml = noticeXml;
     }
 
     public override string ToXML()
@@ -57,11 +45,6 @@ namespace Atlantis.Framework.DotTypeValidation.Interface
           fieldElement.Add(new XAttribute("value", field.Value));
           rootElement.Add(fieldElement);
         }
-      }
-
-      if (!string.IsNullOrEmpty(NoticeXml))
-      {
-        rootElement.Add(NoticeXml);
       }
 
       return rootElement.ToString();

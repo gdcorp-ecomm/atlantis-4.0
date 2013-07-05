@@ -26,19 +26,22 @@ namespace Atlantis.Framework.Providers.CDSContent
         if ((DateTime.TryParse(qsDate, out activeDate) || IsValidContentId(docId)) && siteContext.IsRequestInternal)
         {
           BypassCache = true;
-          var queryParams = new NameValueCollection();
-          if (activeDate != default(DateTime))
+          if (!string.IsNullOrEmpty(Query))
           {
-            queryParams.Add("activedate", activeDate.ToString("O"));
-          }
-          if (IsValidContentId(docId))
-          {
-            queryParams.Add("docid", docId);
-          }
-          if (queryParams.Count > 0)
-          {
-            string appendChar = Query.Contains("?") ? "&" : "?";
-            Query += string.Concat(appendChar, ToQueryString(queryParams));
+            var queryParams = new NameValueCollection();
+            if (activeDate != default(DateTime))
+            {
+              queryParams.Add("activedate", activeDate.ToString("O"));
+            }
+            if (IsValidContentId(docId))
+            {
+              queryParams.Add("docid", docId);
+            }
+            if (queryParams.Count > 0)
+            {
+              string appendChar = Query.Contains("?") ? "&" : "?";
+              Query += string.Concat(appendChar, ToQueryString(queryParams));
+            }
           }
         }
       }

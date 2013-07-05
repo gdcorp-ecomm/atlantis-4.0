@@ -27,6 +27,10 @@ namespace Atlantis.Framework.Providers.CDSContent.Tests
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
           _providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
           _providerContainer.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
+
+          MockProviderContainer mockContainer = _providerContainer as MockProviderContainer;
+          mockContainer.SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+          mockContainer.SetMockSetting(MockSiteContextSettings.ServerLocation, ServerLocationType.Dev);
         }
 
         return _providerContainer;

@@ -20,7 +20,7 @@ namespace Atlantis.Framework.CH.Personalization.Tests
     {
     }
 
-    public TargetedMessages GetTargetedMessages()
+    public TargetedMessages GetTargetedMessages(string appId, string interactionPoint)
     {
       TargetedMessages messages = null;
       string testXml =

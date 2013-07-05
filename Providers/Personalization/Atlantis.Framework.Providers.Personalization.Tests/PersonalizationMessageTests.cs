@@ -33,7 +33,7 @@ namespace Atlantis.Framework.Providers.Personalization.Tests
     {
       InitializeProvidersContexts();
       _container.Resolve<IShopperContext>().SetNewShopper("12345");
-      var targetMessage = _container.Resolve<IPersonalizationProvider>().GetTargetedMessages();
+      var targetMessage = _container.Resolve<IPersonalizationProvider>().GetTargetedMessages("2", "Homepage");
 
       XmlSerializer serializer = new XmlSerializer(typeof(TargetedMessages));
 

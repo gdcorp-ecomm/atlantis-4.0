@@ -17,7 +17,7 @@ namespace Atlantis.Framework.TH.TargetedMessages.Tests
     {
     }
 
-    public Personalization.Interface.TargetedMessages GetTargetedMessages()
+    public Personalization.Interface.TargetedMessages GetTargetedMessages(string appId, string interactionPoint)
     {
       Personalization.Interface.TargetedMessages messages = null;
       string testXml =

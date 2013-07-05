@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TargetMessageRenderContext.cs" />
+    <Compile Include="TargetMessageToken.cs" />
     <Compile Include="TargetMessageTokenHandler.cs" />
   </ItemGroup>
   <ItemGroup>

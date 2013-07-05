@@ -11,44 +11,31 @@ using Atlantis.Framework.Tokens.Interface;
 namespace Atlantis.Framework.TH.TargetedMessages
 {
   /// <summary>
-  /// Example token: [@T[targetmessageid:EngmtActNewCustSurveyMobileDLP]@T]
+  /// Example token: [@T[targetmessageid:<messagetag name="EngmtActNewCustSurveyMobileDLP" appid="2" interactionpoint="Homepage"></messagetag>]@T]
   /// </summary>
-  public class TargetMessageTokenHandler : SimpleTokenHandlerBase
+  public class TargetMessageTokenHandler : XmlTokenHandlerBase
   {
     public override string TokenKey
     {
       get { return "targetmessageid"; }
     }
 
+    public override IToken CreateToken(string tokenData, string fullTokenString)
+    {
+      return new TargetMessageToken(TokenKey, tokenData, fullTokenString);
+    }
+
     public override TokenEvaluationResult EvaluateTokens(IEnumerable<IToken> tokens, IProviderContainer container)
     {
       TokenEvaluationResult result = TokenEvaluationResult.Success;
+      TargetMessageRenderContext contextRenderer = new TargetMessageRenderContext(container);
+
       foreach (var token in tokens)
       {
-        SimpleToken simpleToken = token as SimpleToken;
-
-        string tokenResult = null;
-
-        if (simpleToken != null && !String.IsNullOrEmpty(simpleToken.RawTokenData))
+        if (!contextRenderer.RenderToken(token))
         {
-          var personalizationProvider = container.Resolve<IPersonalizationProvider>();
-          var targetedMessages = personalizationProvider.GetTargetedMessages();
-
-          foreach (var message in targetedMessages.Messages)
-          {
-            foreach (MessageTag messagetag in message.MessageTags)
-            {
-              if (String.Compare(simpleToken.TokenData, messagetag.Name, StringComparison.OrdinalIgnoreCase) == 0)
-              {
-                tokenResult = message.MessageId;
-                break;
-              }
-            }
-            if (!String.IsNullOrEmpty(tokenResult)) { break; }
-          }
+          result = TokenEvaluationResult.Errors;
         }
-
-        token.TokenResult = tokenResult ?? String.Empty;
       }
 
       return result;

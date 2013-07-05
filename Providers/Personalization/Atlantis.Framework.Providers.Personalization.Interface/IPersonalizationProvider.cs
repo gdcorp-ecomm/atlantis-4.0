@@ -4,6 +4,6 @@ namespace Atlantis.Framework.Providers.Personalization.Interface
 {
   public interface IPersonalizationProvider
   {
-    TargetedMessages GetTargetedMessages();
+    TargetedMessages GetTargetedMessages(string appId, string interactionPoint);
   }
 }

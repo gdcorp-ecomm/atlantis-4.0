@@ -16,7 +16,7 @@ namespace Atlantis.Framework.CH.Personalization.Tests
   [DeploymentItem("Atlantis.Framework.CH.Personalization.dll")]
   public class TargetMessageAnyConditionHandlerTest
   {
-    private const string CONDITION_NAME = "targetMessageTagAny";
+    private const string CONDITION_NAME = "targetMessageTag";
 
     private IProviderContainer _providerContainer;
     protected IProviderContainer ProviderContainer
@@ -65,30 +65,37 @@ namespace Atlantis.Framework.CH.Personalization.Tests
     [TestMethod]
     public void EvaluateCondition1LowerCase()
     {
-      string expression = String.Format("{0}({1})", CONDITION_NAME, "EngmtCustServMobileAppMobileHP".ToLower());
+      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "EngmtCustServMobileAppMobileHP".ToLower(),"2","Homepage");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
-    public void EvaluateCondition2UpperCase()
+    public void EvaluateCondition2()
     {
-      string expression = String.Format("{0}({1})", CONDITION_NAME, "EngmtCustServMobileAppWebHP".ToUpper());
+      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "EngmtCustServMobileAppWebHP", "2", "Homepage");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
-    public void EvaluateCondition3()
+    public void EvaluateCondition3UpperCase()
     {
-      string expression = String.Format("{0}({1})", CONDITION_NAME, "EngmtActNewCustSurveyMobileDLP");
+      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "EngmtActNewCustSurveyMobileDLP".ToUpper(), "2", "Homepage");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
     public void EvaluateCondition4()
     {
-      string expression = String.Format("{0}({1})", CONDITION_NAME, "EngmtActNewCustSurveyWebDLP");
+      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "EngmtActNewCustSurveyWebDLP", "2", "Homepage");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
+    }
+    [TestMethod]
+    public void EvaluateCondition5()
+    {
+      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "TagDoesNotExist", "2", "Homepage");
+      bool actual = ExpressionParserManager.EvaluateExpression(expression);
+      Assert.IsFalse(actual);
     }
   }
 }

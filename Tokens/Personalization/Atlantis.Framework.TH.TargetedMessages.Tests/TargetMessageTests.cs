@@ -44,33 +44,38 @@ namespace Atlantis.Framework.TH.TargetedMessages.Tests
       string outputText;
       TokenEvaluationResult result = TokenManager.ReplaceTokens(token, container, out outputText);
       Assert.AreEqual(TokenEvaluationResult.Success, result);
-      Assert.AreNotEqual(String.Empty, outputText);
       return outputText;
     }
 
     [TestMethod]
-    public void TargetMessageTokenMatch1LowerCase()
+    public void TargetMessageTokenMatch1()
     {
-      string outputText = TokenSuccess("EngmtActNewCustSurveyMobileDLP".ToLower());
-      Assert.IsTrue(outputText == "7f8426c1-e9de-491f-9bcb-19fd8351d22a");
+      string outputText = TokenSuccess("<messagetag name=\"EngmtActNewCustSurveyMobileDLP\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
+      Assert.IsTrue(String.Compare(outputText, "7f8426c1-e9de-491f-9bcb-19fd8351d22a", StringComparison.OrdinalIgnoreCase) == 0);
     }
     [TestMethod]
-    public void TargetMessageTokenMatch2UpperCase()
+    public void TargetMessageTokenMatch2()
     {
-      string outputText = TokenSuccess("EngmtActNewCustSurveyWebDLP".ToUpper());
-      Assert.IsTrue(outputText == "7f8426c1-e9de-491f-9bcb-19fd8351d22a");
+      string outputText = TokenSuccess("<messagetag name=\"EngmtActNewCustSurveyWebDLP\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
+      Assert.IsTrue(String.Compare(outputText, "7f8426c1-e9de-491f-9bcb-19fd8351d22a", StringComparison.OrdinalIgnoreCase) == 0);
     }
     [TestMethod]
     public void TargetMessageTokenMatch3()
     {
-      string outputText = TokenSuccess("EngmtCustServMobileAppMobileHP");
-      Assert.IsTrue(outputText == "0e554af3-9851-4a99-90f0-1d11987ea553");
+      string outputText = TokenSuccess("<messagetag name=\"EngmtCustServMobileAppMobileHP\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
+      Assert.IsTrue(String.Compare(outputText, "0e554af3-9851-4a99-90f0-1d11987ea553", StringComparison.OrdinalIgnoreCase) == 0);
     }
     [TestMethod]
     public void TargetMessageTokenMatch4()
     {
-      string outputText = TokenSuccess("EngmtCustServMobileAppWebHP");
-      Assert.IsTrue(outputText == "0e554af3-9851-4a99-90f0-1d11987ea553");
+      string outputText = TokenSuccess("<messagetag name=\"EngmtCustServMobileAppWebHP\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
+      Assert.IsTrue(String.Compare(outputText, "0e554af3-9851-4a99-90f0-1d11987ea553", StringComparison.OrdinalIgnoreCase) == 0);
+    }
+    [TestMethod]
+    public void TargetMessageTokenNoMatch()
+    {
+      string outputText = TokenSuccess("<messagetag name=\"MessageDoesNotExist\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
+      Assert.AreEqual(outputText, String.Empty);
     }
   }
 }

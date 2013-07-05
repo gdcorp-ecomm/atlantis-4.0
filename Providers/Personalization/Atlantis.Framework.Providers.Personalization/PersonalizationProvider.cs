@@ -19,11 +19,8 @@ namespace Atlantis.Framework.Providers.Personalization
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
     }
 
-    public TargetedMessages GetTargetedMessages()
+    public TargetedMessages GetTargetedMessages(string appId, string interactionPoint)
     {
-      const string appId = "2";
-      const string interactionPoint = "Homepage";
-
       RequestData request = new TargetedMessagesRequestData(_shopperContext.Value.ShopperId, _siteContext.Value.PrivateLabelId.ToString(), appId, interactionPoint);
       TargetedMessagesResponseData response = SessionCache.SessionCache.GetProcessRequest<TargetedMessagesResponseData>(request, PersonalizationEngineRequests.RequestId);
 

@@ -59,7 +59,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="MockPersonalizationProvider.cs" />
-    <Compile Include="TargetMessageAnyConditionHandlerTest.cs" />
+    <Compile Include="TargetMessageConditionHandlerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

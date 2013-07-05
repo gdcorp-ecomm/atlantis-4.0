@@ -14,7 +14,7 @@ namespace Atlantis.Framework.CH.Personalization.Tests
   [TestClass]
   [DeploymentItem("Atlantis.Framework.Personalization.Impl.dll")]
   [DeploymentItem("Atlantis.Framework.CH.Personalization.dll")]
-  public class TargetMessageAnyConditionHandlerTest
+  public class TargetMessageConditionHandlerTest
   {
     private const string CONDITION_NAME = "targetMessageTag";
 
@@ -63,30 +63,30 @@ namespace Atlantis.Framework.CH.Personalization.Tests
     }
 
     [TestMethod]
-    public void EvaluateCondition1LowerCase()
+    public void EvaluateCondition1()
     {
-      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "EngmtCustServMobileAppMobileHP".ToLower(),"2","Homepage");
+      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "EnGmtACtNewCusTSurvEyMObiLeDLP", "2", "Homepage");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
     public void EvaluateCondition2()
     {
-      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "EngmtCustServMobileAppWebHP", "2", "Homepage");
+      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "ENGMTActNEWCustSuRveyWEbDLP", "2", "Homepage");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
-    public void EvaluateCondition3UpperCase()
+    public void EvaluateCondition3()
     {
-      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "EngmtActNewCustSurveyMobileDLP".ToUpper(), "2", "Homepage");
+      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "engmtcustservmobileappmobilehp", "2", "Homepage");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }
     [TestMethod]
     public void EvaluateCondition4()
     {
-      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "EngmtActNewCustSurveyWebDLP", "2", "Homepage");
+      string expression = String.Format("{0}({1},{2},{3})", CONDITION_NAME, "ENGMTCUSTSERVMOBILEAPPWEBHP", "2", "Homepage");
       bool actual = ExpressionParserManager.EvaluateExpression(expression);
       Assert.IsTrue(actual);
     }

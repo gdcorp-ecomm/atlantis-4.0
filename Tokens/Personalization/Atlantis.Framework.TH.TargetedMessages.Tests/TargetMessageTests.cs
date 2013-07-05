@@ -50,25 +50,25 @@ namespace Atlantis.Framework.TH.TargetedMessages.Tests
     [TestMethod]
     public void TargetMessageTokenMatch1()
     {
-      string outputText = TokenSuccess("<messagetag name=\"EngmtActNewCustSurveyMobileDLP\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
+      string outputText = TokenSuccess("<messagetag name=\"EnGmtACtNewCusTSurvEyMObiLeDLP\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
       Assert.IsTrue(String.Compare(outputText, "7f8426c1-e9de-491f-9bcb-19fd8351d22a", StringComparison.OrdinalIgnoreCase) == 0);
     }
     [TestMethod]
     public void TargetMessageTokenMatch2()
     {
-      string outputText = TokenSuccess("<messagetag name=\"EngmtActNewCustSurveyWebDLP\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
+      string outputText = TokenSuccess("<messagetag name=\"ENGMTActNEWCustSuRveyWEbDLP\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
       Assert.IsTrue(String.Compare(outputText, "7f8426c1-e9de-491f-9bcb-19fd8351d22a", StringComparison.OrdinalIgnoreCase) == 0);
     }
     [TestMethod]
     public void TargetMessageTokenMatch3()
     {
-      string outputText = TokenSuccess("<messagetag name=\"EngmtCustServMobileAppMobileHP\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
+      string outputText = TokenSuccess("<messagetag name=\"engmtcustservmobileappmobilehp\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
       Assert.IsTrue(String.Compare(outputText, "0e554af3-9851-4a99-90f0-1d11987ea553", StringComparison.OrdinalIgnoreCase) == 0);
     }
     [TestMethod]
     public void TargetMessageTokenMatch4()
     {
-      string outputText = TokenSuccess("<messagetag name=\"EngmtCustServMobileAppWebHP\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
+      string outputText = TokenSuccess("<messagetag name=\"ENGMTCUSTSERVMOBILEAPPWEBHP\" appid=\"2\" interactionpoint=\"Homepage\"></messagetag>");
       Assert.IsTrue(String.Compare(outputText, "0e554af3-9851-4a99-90f0-1d11987ea553", StringComparison.OrdinalIgnoreCase) == 0);
     }
     [TestMethod]

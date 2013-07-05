@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICDSPlaceHolderData.cs" />
     <Compile Include="IPlaceHolderData.cs" />
     <Compile Include="IPlaceHolderEncoding.cs" />
     <Compile Include="IPlaceHolderHandler.cs" />

@@ -24,9 +24,15 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       {
         IWebControlPlaceHolderData placeHolderData = DeserializeData(data);
         Control webControl = InitializeWebControl(placeHolderData);
-
-        placeHolderSharedData[webControl.GetType().ToString()] = placeHolderData;
-
+        if (!string.IsNullOrEmpty(placeHolderData.Id))
+        {
+          webControl.ID = placeHolderData.Id;
+        }
+        else
+        {
+          webControl.ID = webControl.GetType().ToString();
+        }
+        placeHolderSharedData[webControl.ID] = placeHolderData;
         renderContent = RenderControlToHtml(webControl);
       }
       catch (Exception ex)

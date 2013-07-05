@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorLogger.cs" />
+    <Compile Include="XmlCDSPlaceHolderData.cs" />
     <Compile Include="PlaceHolder.cs" />
     <Compile Include="PlaceHolderHandlers\CDSPlaceHolderHandler.cs" />
     <Compile Include="PlaceHolderHandlers\CompositionContainer.cs" />

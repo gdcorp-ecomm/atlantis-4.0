@@ -23,8 +23,15 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       {
         IPlaceHolderData placeHolderData = DeserializeData(data);
         Control userControl = InitializeUserControl(placeHolderData);
-
-        placeHolderSharedData[userControl.GetType().ToString()] = placeHolderData;
+        if (!string.IsNullOrEmpty(placeHolderData.Id))
+        {
+          userControl.ID = placeHolderData.Id;
+        }
+        else
+        {
+          userControl.ID = userControl.GetType().ToString();
+        }
+        placeHolderSharedData[userControl.ID] = placeHolderData;
 
         renderContent = RenderControlToHtml(userControl);
       }

@@ -5,6 +5,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.WebTest.controls
 {
   public partial class banner : UserControl
   {
+    
+
     private IPlaceHolderData _placeHolderData;
     protected IPlaceHolderData PlaceHolderData
     {
@@ -13,7 +15,8 @@ namespace Atlantis.Framework.Providers.PlaceHolder.WebTest.controls
         if (_placeHolderData == null)
         {
           IPlaceHolderProvider placeHolderProvider = ProviderContainerHelper.Instance.Resolve<IPlaceHolderProvider>();
-          _placeHolderData = placeHolderProvider.GetPlaceHolderData(GetType().ToString());
+          _placeHolderData = placeHolderProvider.GetPlaceHolderData(ID);
+          
         }
 
         return _placeHolderData;

@@ -22,7 +22,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder
             {
                 try
                 {
-                    IPlaceHolderData placeHolderData = DeserializeData(data);
+                    ICDSPlaceHolderData placeHolderData = DeserializeData(data);
                     renderContent = cds.GetContent(placeHolderData.App, placeHolderData.Location).Content;
                 }
                 catch (Exception ex)
@@ -37,9 +37,9 @@ namespace Atlantis.Framework.Providers.PlaceHolder
             return renderContent;
         }
 
-        private IPlaceHolderData DeserializeData(string data)
+        private ICDSPlaceHolderData DeserializeData(string data)
         {
-            IPlaceHolderData placeHolderData = _xmlDataSerializer.Deserialize<XmlPlaceHolderData>(data);
+          ICDSPlaceHolderData placeHolderData = _xmlDataSerializer.Deserialize<XmlCDSPlaceHolderData>(data);
 
             if (placeHolderData == null)
             {

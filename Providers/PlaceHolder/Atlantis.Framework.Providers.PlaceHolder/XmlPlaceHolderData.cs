@@ -12,11 +12,11 @@ namespace Atlantis.Framework.Providers.PlaceHolder
   {
     private readonly XmlDataSerializer _xmlDataSerializer = new XmlDataSerializer();
 
+    [XmlAttribute(AttributeName = "id")]
+    public string Id { get; set; }
+
     [XmlAttribute(AttributeName = "location")]
     public string Location { get; set; }
-
-    [XmlAttribute(AttributeName = "app")]
-    public string App { get; set; }
 
     private IDictionary<string, IPlaceHolderParameter> _parameters;
     public IDictionary<string, IPlaceHolderParameter> Parameters 

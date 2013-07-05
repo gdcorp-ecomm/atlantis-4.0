@@ -4,7 +4,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Interface
 {
     public interface IPlaceHolderData
     {
-        string App { get; set; }
+        string Id { get; }
 
         string Location { get; }
 

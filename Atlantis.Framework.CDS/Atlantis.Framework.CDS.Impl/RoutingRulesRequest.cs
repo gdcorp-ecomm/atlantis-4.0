@@ -32,10 +32,18 @@ namespace Atlantis.Framework.CDS.Impl
           result = new RoutingRulesResponseData(cdsRequestData, new Exception("Empty response from the CDS service."));
         }
       }
-      //catch (WebException wex)
-      //{
-      //  wex.Status == WebExceptionStatus.n
-      //}
+      catch (WebException ex)
+      {
+        if (ex.Response != null && ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.NotFound)
+        {
+          result = new RoutingRulesResponseData(ex.Message, false);
+        }
+        else
+        {
+          result = new RoutingRulesResponseData(cdsRequestData, ex);
+          throw;
+        }
+      }
       catch (Exception ex)
       {
         result = new RoutingRulesResponseData(cdsRequestData, ex);

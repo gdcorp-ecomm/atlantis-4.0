@@ -15,7 +15,7 @@ namespace Atlantis.Framework.Personalization.Interface
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
 
-    public TargetedMessages TargetedMessagesData { get; private set; }
+    public TargetedMessages TargetedMessagesData { get; set; }
 
     public TargetedMessagesResponseData(string xml)
     {

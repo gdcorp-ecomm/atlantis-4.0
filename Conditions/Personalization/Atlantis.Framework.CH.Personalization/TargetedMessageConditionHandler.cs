@@ -39,8 +39,7 @@ namespace Atlantis.Framework.CH.Personalization
         }
         catch (Exception ex)
         {
-          throw ex;
-          //throw new AtlantisException("TargetedMessageConditionHandler", -1, ex.Message, parameters.ToString());
+          throw new AtlantisException(null, "TargetedMessageConditionHandler.EvaulateCondition", ex.Message, String.Join(",", parameters));
         }
 
       }

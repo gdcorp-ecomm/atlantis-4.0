@@ -26,6 +26,8 @@ namespace Atlantis.Framework.CH.Personalization
           var personalizationProvider = providerContainer.Resolve<IPersonalizationProvider>();
           TargetedMessages targetedMessages = personalizationProvider.GetTargetedMessages(parameters[1], parameters[2]);
 
+          if (targetedMessages == null) return false;
+
           foreach (var message in targetedMessages.Messages)
           {
             if (message.MessageTags.Any(messageTag => string.Compare(parameters[0], messageTag.Name, StringComparison.OrdinalIgnoreCase) == 0))
@@ -35,9 +37,10 @@ namespace Atlantis.Framework.CH.Personalization
             }
           }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-          throw;
+          throw ex;
+          //throw new AtlantisException("TargetedMessageConditionHandler", -1, ex.Message, parameters.ToString());
         }
 
       }

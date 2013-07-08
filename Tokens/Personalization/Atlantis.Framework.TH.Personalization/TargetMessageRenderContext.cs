@@ -44,6 +44,9 @@ namespace Atlantis.Framework.TH.Personalization
       if (token != null && !String.IsNullOrEmpty(token.RawTokenData))
       {
         var targetMessages = _personalizationProvider.GetTargetedMessages(token.AppId, token.InteractionPoint);
+
+        if (targetMessages == null) return false;
+
         if (targetMessages.ResultCode == 0)
         {
           foreach (var message in targetMessages.Messages)

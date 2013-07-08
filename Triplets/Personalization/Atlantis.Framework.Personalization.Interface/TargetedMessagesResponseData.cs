@@ -10,7 +10,7 @@ namespace Atlantis.Framework.Personalization.Interface
 {
   public class TargetedMessagesResponseData : IResponseData, ISessionSerializableResponse
   {
-    public TargetedMessagesResponseData(){}
+    public TargetedMessagesResponseData() { }
 
     private AtlantisException _exception = null;
     private string _resultXML = string.Empty;
@@ -22,7 +22,7 @@ namespace Atlantis.Framework.Personalization.Interface
       try
       {
         _resultXML = xml;
-        TargetedMessagesData = BuildTargetedMessages();
+        TargetedMessagesData = BuildTargetedMessages(_resultXML);
       }
       catch (Exception ex)
       {
@@ -35,13 +35,13 @@ namespace Atlantis.Framework.Personalization.Interface
       _exception = new AtlantisException(requestData, "TargetedMessagesResponseData", exception.Message, requestData.ToXML());
     }
 
-    private TargetedMessages BuildTargetedMessages()
+    private TargetedMessages BuildTargetedMessages(string xmlResult)
     {
       TargetedMessages messages = new TargetedMessages();
 
       try
       {
-        var targetMessageXml = XDocument.Parse(_resultXML);
+        var targetMessageXml = XDocument.Parse(xmlResult);
 
         if (targetMessageXml.Root != null)
         {
@@ -52,7 +52,6 @@ namespace Atlantis.Framework.Personalization.Interface
             reader.Close();
           }
         }
-
       }
       catch (Exception ex)
       {
@@ -86,13 +85,7 @@ namespace Atlantis.Framework.Personalization.Interface
     {
       if (string.IsNullOrEmpty(sessionData)) return;
 
-      XmlSerializer xmlSerializer = new XmlSerializer(typeof(TargetedMessagesResponseData));
-      StringReader reader = new StringReader(sessionData);
-      TargetedMessagesResponseData responseData = xmlSerializer.Deserialize(reader) as TargetedMessagesResponseData;
-      if (responseData != null)
-      {
-        TargetedMessagesData = responseData.TargetedMessagesData;
-      }
+      TargetedMessagesData = BuildTargetedMessages(sessionData);
     }
     #endregion
 

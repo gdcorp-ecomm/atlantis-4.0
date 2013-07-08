@@ -41,60 +41,69 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool GetDotTypeFormsSchema(int tldId, string placement, string phase, string language, string[] domains, ViewTypes viewType, 
-                                      out string dotTypeFormsSchemaHtml)
+    public bool GetDotTypeFormSchemas(int tldId, string placement, string phase, string language, string[] domains, ViewTypes viewType, 
+                                      out Dictionary<string, string> dotTypeFormSchemasHtml)
     {
       var success = false;
-      dotTypeFormsSchemaHtml = string.Empty;
+      dotTypeFormSchemasHtml = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
       try
       {
-        IDotTypeFormsSchema dotTypeFormsSchema;
-        success = GetDotTypeFormsXmlSchema(tldId, placement, phase, language, out dotTypeFormsSchema);
+        IDotTypeFormsSchema dotTypeFormSchema;
+        success = GetDotTypeFormXmlSchema(tldId, placement, phase, language, out dotTypeFormSchema);
 
-        if (success && dotTypeFormsSchema != null)
+        if (success && dotTypeFormSchema != null)
         {
-          success = TransformFormsSchemaToHtml(domains, viewType, dotTypeFormsSchema, out dotTypeFormsSchemaHtml);
+          success = TransformFormSchemaToHtml(domains, viewType, dotTypeFormSchema, out dotTypeFormSchemasHtml);
         }
       }
       catch (Exception ex)
       {
         var data = "tldId: " + tldId + ", placement: " + placement + ", phase: " + phase + ", language: " + language + ", viewtype: " + viewType.ToString();
-        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeFormsSchema", "0", ex.Message + ex.StackTrace, data, null, null);
+        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeFormSchemas", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
-
       }
 
       return success;
     }
 
-    private static bool GetDotTypeFormsXmlSchema(int tldId, string placement, string phase, string language, out IDotTypeFormsSchema dotTypeFormsSchema)
+    private static bool GetDotTypeFormXmlSchema(int tldId, string placement, string phase, string language, out IDotTypeFormsSchema dotTypeFormSchema)
     {
       var success = false;
-      dotTypeFormsSchema = null;
+      dotTypeFormSchema = null;
 
       var request = new DotTypeFormsXmlRequestData(tldId, placement, phase, language);
-      var response = (DotTypeFormsXmlResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsXmlRequest);
-      if (response.IsSuccess)
+
+      try
       {
-        dotTypeFormsSchema = response.DotTypeFormsSchema;
-        success = true;
+        var response = (DotTypeFormsXmlResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeFormsXmlRequest);
+        if (response.IsSuccess)
+        {
+          dotTypeFormSchema = response.DotTypeFormsSchema;
+          success = true;
+        }
+      }
+      catch (Exception ex)
+      {
+        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeFormXmlSchema", "0", ex.Message, request.ToXML(), null, null);
+        Engine.Engine.LogAtlantisException(exception);
+        success = false;
       }
 
       return success;
     }
-    
-    private bool TransformFormsSchemaToHtml(string[] domains, ViewTypes viewType, IDotTypeFormsSchema dotTypeFormsSchema, out string dotTypeFormsSchemaHtml)
+
+    private bool TransformFormSchemaToHtml(string[] domains, ViewTypes viewType, IDotTypeFormsSchema dotTypeFormSchema, out Dictionary<string, string> dotTypeFormSchemasHtml)
     {
       bool success = false;
-      dotTypeFormsSchemaHtml = string.Empty;
+      dotTypeFormSchemasHtml = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
       try
       {
         IDotTypeFormTransformHandler transformType = DotTypeFormTransformFactory.GetFormTransformHandler(viewType);
         if (transformType != null)
         {
-          success = transformType.TransformFormToHtml(dotTypeFormsSchema, domains, Container, out dotTypeFormsSchemaHtml);
+          success = transformType.TransformFormToHtml(dotTypeFormSchema, domains, Container, out dotTypeFormSchemasHtml);
         }
       }
       catch (Exception)

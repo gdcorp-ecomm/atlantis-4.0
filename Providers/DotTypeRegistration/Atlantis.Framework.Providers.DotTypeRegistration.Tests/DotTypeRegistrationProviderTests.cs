@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -26,33 +27,33 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     public void DotTypeFormsSchemaMobileRichSuccess()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
-      string htmlData;
+      Dictionary<string, string> htmlData;
       string[] domains = { "domain1.shop", "domain2.shop" };
-      bool isSuccess = provider.GetDotTypeFormsSchema(1640, "MOBILE", "GA", "EN", domains, ViewTypes.MobileRich, out htmlData);
+      bool isSuccess = provider.GetDotTypeFormSchemas(1640, "MOBILE", "GA", "EN", domains, ViewTypes.MobileRich, out htmlData);
       Assert.AreEqual(true, isSuccess);
-      Assert.AreEqual(true, !string.IsNullOrEmpty(htmlData));
+      Assert.AreEqual(true, htmlData.Count > 0);
     }
 
     [TestMethod]
     public void DotTypeFormsSchemaMobileDefaultSuccess()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
-      string htmlData;
+      Dictionary<string, string> htmlData;
       string[] domains = { "domain1.shop", "domain2.shop" };
-      bool isSuccess = provider.GetDotTypeFormsSchema(1640, "MOBILE", "GA", "EN", domains, ViewTypes.MobileDefault, out htmlData);
+      bool isSuccess = provider.GetDotTypeFormSchemas(1640, "MOBILE", "GA", "EN", domains, ViewTypes.MobileDefault, out htmlData);
       Assert.AreEqual(true, isSuccess);
-      Assert.AreEqual(true, !string.IsNullOrEmpty(htmlData));
+      Assert.AreEqual(true, htmlData.Count > 0);
     }
 
     [TestMethod]
     public void DotTypeFormsSchemaFailure()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
-      string htmlData;
+      Dictionary<string, string> htmlData;
       string[] domains = { "domain1.shop", "domain2.shop" };
-      bool isSuccess = provider.GetDotTypeFormsSchema(-1, "name of placement", "GA", "EN", domains, ViewTypes.MobileRich, out htmlData);
+      bool isSuccess = provider.GetDotTypeFormSchemas(-1, "name of placement", "GA", "EN", domains, ViewTypes.MobileRich, out htmlData);
       Assert.AreEqual(false, isSuccess);
-      Assert.AreEqual(true, string.IsNullOrEmpty(htmlData));
+      Assert.AreEqual(true, htmlData.Count == 0);
     }
 
     [TestMethod]

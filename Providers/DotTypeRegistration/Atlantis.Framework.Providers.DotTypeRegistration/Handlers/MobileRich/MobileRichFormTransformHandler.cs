@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Factories;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
@@ -8,51 +10,66 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers.MobileRich
 {
   public class MobileRichFormTransformHandler : IDotTypeFormTransformHandler
   {
-    public bool TransformFormToHtml(IDotTypeFormsSchema formsSchema, string[] domains, IProviderContainer providerContainer,
-                                    out string formSchemaHtml)
+    public bool TransformFormToHtml(IDotTypeFormsSchema formSchema, string[] domains, IProviderContainer providerContainer,
+                                    out Dictionary<string,string> formSchemasHtml)
     {
-      bool result = true;
-      formSchemaHtml = string.Empty;
-      var sbFormSchemaHtml = new StringBuilder();
+      bool result = false;
+      formSchemasHtml = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-      if (formsSchema.Form != null)
+      try
       {
-        var form = formsSchema.Form;
-
-        var fields = form.FieldCollection;
-        foreach (var field in fields)
+        if (formSchema.Form != null)
         {
-          var formFieldType = TransformHandlerHelper.GetFormFieldType(field.FieldType);
-          if (formFieldType != FormFieldTypes.None)
+          var form = formSchema.Form;
+          var fields = form.FieldCollection;
+
+          foreach (var domain in domains)
           {
-            if (TransformHandlerHelper.SetFieldTypeData(formFieldType, providerContainer, domains, field))
+            var sbFormSchemaHtml = new StringBuilder();
+            foreach (var field in fields)
             {
-              IDotTypeFormFieldTypeHandler fieldTypeHandler =
-                DotTypeFormFieldTypeFactory.GetFormFieldTypeHandler(ViewTypes.MobileRich, formFieldType);
-              if (fieldTypeHandler != null)
+              var formFieldType = TransformHandlerHelper.GetFormFieldType(field.FieldType);
+              if (formFieldType != FormFieldTypes.None)
               {
-                string fieldHtmlData;
-                if (fieldTypeHandler.RenderField(formFieldType, providerContainer, out fieldHtmlData))
+                if (TransformHandlerHelper.SetFieldTypeData(formFieldType, providerContainer, domain, field))
                 {
-                  if (!string.IsNullOrEmpty(fieldHtmlData))
+                  IDotTypeFormFieldTypeHandler fieldTypeHandler =
+                    DotTypeFormFieldTypeFactory.GetFormFieldTypeHandler(ViewTypes.MobileRich, formFieldType);
+                  if (fieldTypeHandler != null)
                   {
-                    sbFormSchemaHtml.Append(fieldHtmlData);
+                    string fieldHtmlData;
+                    if (fieldTypeHandler.RenderField(formFieldType, providerContainer, out fieldHtmlData))
+                    {
+                      if (!string.IsNullOrEmpty(fieldHtmlData))
+                      {
+                        sbFormSchemaHtml.Append(fieldHtmlData);
+                      }
+                    }
                   }
                 }
               }
+              else
+              {
+                var exception = new AtlantisException("MobileRichFormTransformHandler.TransformFormToHtml", "0", "Invalid field type", field.FieldName, null, null);
+                Engine.Engine.LogAtlantisException(exception);
+              }
             }
+            formSchemasHtml[domain] = sbFormSchemaHtml.ToString();
           }
-          else
-          {
-            var exception = new AtlantisException("MobileRichFormTransformHandler.TransformFormToHtml", "0", "Invalid field type", form.FormName, null, null);
-            Engine.Engine.LogAtlantisException(exception);
 
-            result = false;
+          if (formSchemasHtml.Count > 0)
+          {
+            result = true;
           }
         }
-
-        formSchemaHtml = sbFormSchemaHtml.ToString();
       }
+      catch (Exception ex)
+      {
+        var exception = new AtlantisException("MobileRichFormTransformHandler.TransformFormToHtml", "0", ex.Message, formSchema.ToString(), null, null);
+        Engine.Engine.LogAtlantisException(exception);
+        throw;
+      }
+
       return result;
     }
   }

@@ -40,7 +40,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers.MobileRich
     {
       var result = new StringBuilder();
 
-      result.Append("<div class='section-row'>");
+      result.Append("<div class='section-row groove'>");
       result.Append("<input type='checkbox' name='" + field.FieldName + "'>" + "</input>" );
       result.Append("<label class='pad-lt-sm'>" + HttpUtility.HtmlEncode(field.FieldLabel) + "</label>");
       result.Append("</div>");

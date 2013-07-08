@@ -42,7 +42,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers.MobileRich
 
       if (field.ItemCollection.Count > 0)
       {
-        result.Append("<div class='section-row orient-vert'>");
+        result.Append("<div class='section-row groove orient-vert'>");
         foreach (var item in field.ItemCollection)
         {
           result.Append("<div>");

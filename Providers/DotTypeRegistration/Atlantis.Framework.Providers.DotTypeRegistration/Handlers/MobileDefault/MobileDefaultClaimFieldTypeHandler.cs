@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using Atlantis.Framework.DotTypeClaims.Interface;
@@ -19,17 +18,17 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers.MobileDefaul
 
       try
       {
-        var additionalData = providerContainer.GetData(FieldTypeDataKeyConstants.CLAIM_DATA_KEY, new Tuple<IDotTypeFormsField, string[]>(new DotTypeFormsField(), new string[0]));
+        var additionalData = providerContainer.GetData(FieldTypeDataKeyConstants.CLAIM_DATA_KEY, new Tuple<IDotTypeFormsField, string>(new DotTypeFormsField(), string.Empty));
         if (additionalData.Item2.Length > 0)
         {
           var field = additionalData.Item1;
-          var domains = additionalData.Item2;
-          var claimResponseData = LoadClaimData(domains);
+          var domain = additionalData.Item2;
+          var claimResponseData = LoadClaimData(domain);
 
           var claims = claimResponseData.DotTypeClaims;
           if (claims != null)
           {
-            dataSourceHtml = ConvertClaimsToHtml(field, domains, claims);
+            dataSourceHtml = ConvertClaimsToHtml(field, domain, claims);
             result = true;
           }
         }
@@ -47,28 +46,27 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers.MobileDefaul
       return result;
     }
 
-    private static string ConvertClaimsToHtml(IDotTypeFormsField field, IEnumerable<string> domains, IDotTypeClaimsSchema claims)
+    private static string ConvertClaimsToHtml(IDotTypeFormsField field, string domain, IDotTypeClaimsSchema claims)
     {
       var result = new StringBuilder();
 
-      result.Append("<div class='form-field'>");
-      foreach (var domain in domains)
+      string claimsXml;
+      if (claims.TryGetClaimsXmlByDomain(domain, out claimsXml))
       {
-        string claimsXml;
-        if (claims.TryGetClaimsXmlByDomain(domain, out claimsXml))
-        {
-          result.Append("<input type='checkbox' name='" + field.FieldName + "-" + domain + "' value='" + claimsXml + "'>" + "</input>");
-          result.Append("<label>" + HttpUtility.HtmlEncode(claimsXml) + "</label>");
-        }
+        result.Append("<div class='form-field'>");
+        result.Append("<input type='checkbox' name='" + field.FieldName + "-" + domain + "' value='" + claimsXml + "'>" + "</input>");
+        result.Append("<label>" + HttpUtility.HtmlEncode(claimsXml) + "</label>");
+        result.Append("<input type='hidden' name='acceptedDate' value=''></input>");
+        result.Append("</div>");
       }
-      result.Append("<input type='hidden' name='acceptedDate' value=''></input>");
-      result.Append("</div>");
 
       return result.ToString();
     }
 
-    private static DotTypeClaimsResponseData LoadClaimData(string[] domains)
+    private static DotTypeClaimsResponseData LoadClaimData(string domain)
     {
+      string[] domains = { domain };
+
       var request = new DotTypeClaimsRequestData(domains);
       return (DotTypeClaimsResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeClaimsRequest);
     }

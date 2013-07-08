@@ -40,7 +40,7 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers.MobileRich
     {
       var result = new StringBuilder();
 
-      result.Append("<div class='section-row orient-vert'>");
+      result.Append("<div class='section-row groove orient-vert'>");
       result.Append("<label class='font-sm'>" + HttpUtility.HtmlEncode(field.FieldLabel) + ":</label>");
       result.Append("<input type='phone' class='max rnd' name='" + field.FieldName + "'>" + "</input>");
       result.Append("</div>");

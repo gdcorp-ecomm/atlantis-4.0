@@ -6,8 +6,8 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface
   {
     bool GetDotTypeForms(int tldId, string placement, string phase, string language, out string dotTypeFormsHtml);
 
-    bool GetDotTypeFormsSchema(int tldId, string placement, string phase, string language, string[] domains, ViewTypes viewType,
-                               out string dotTypeFormsHtml);
+    bool GetDotTypeFormSchemas(int tldId, string placement, string phase, string language, string[] domains, ViewTypes viewType,
+                               out Dictionary<string, string> dotTypeFormsHtml);
 
     bool GetClaimsSchema(string[] domains, out IDotTypeClaimsSchema claimsResponseData);
 

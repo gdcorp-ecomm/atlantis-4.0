@@ -5,6 +5,7 @@ using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -201,7 +202,7 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
       Assert.IsTrue(localization.IsGlobalSite());
       Assert.AreEqual("ES", localization.ShortLanguage.ToUpperInvariant());
-      Assert.AreEqual("ES", localization.FullLanguage.ToUpperInvariant());
+      Assert.AreEqual("ES-US", localization.FullLanguage.ToUpperInvariant());
       Assert.IsTrue(localization.IsActiveLanguage("eS"));
       Assert.IsFalse(localization.IsActiveLanguage("eS-mx"));
     }
@@ -219,6 +220,81 @@ namespace Atlantis.Framework.Providers.Localization.Tests
       Assert.IsTrue(localization.IsActiveLanguage("fR"));
       Assert.IsTrue(localization.IsActiveLanguage("fR-Ca"));
     }
+
+    [TestMethod]
+    public void SetLanguageOnTransperfectProxy()
+    {
+      IProviderContainer container = SetContext("http://ca.mysite.com");
+      container.RegisterProvider<IProxyContext, TransperfectTestWebProxy>();
+
+      ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
+      Assert.IsTrue(localization.IsGlobalSite());
+      Assert.AreEqual("ES", localization.ShortLanguage.ToUpperInvariant());
+
+      localization.SetLanguage("fr");
+      Assert.AreEqual("FR", localization.ShortLanguage.ToUpperInvariant());
+      Assert.AreNotEqual("fr-ca", localization.FullLanguage.ToLowerInvariant());
+    }
+
+    [TestMethod]
+    public void SetLanguageOnNormalRequest()
+    {
+      IProviderContainer container = SetContext("http://ca.mysite.com");
+
+      ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
+      Assert.AreEqual("EN-CA", localization.FullLanguage.ToUpperInvariant());
+
+      localization.SetLanguage("fr");
+      Assert.AreEqual("FR", localization.ShortLanguage.ToUpperInvariant());
+      Assert.AreEqual("fr-ca", localization.FullLanguage.ToLowerInvariant());
+    }
+
+    [TestMethod]
+    public void CultureDefault()
+    {
+      IProviderContainer container = SetContext("http://www.mysite.com");
+      ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
+      Assert.IsTrue(localization.IsGlobalSite());
+
+      CultureInfo info = localization.CurrentCultureInfo;
+      Assert.AreEqual("en-US", info.Name);
+    }
+
+    [TestMethod]
+    public void CultureAustralianEnglish()
+    {
+      IProviderContainer container = SetContext("http://au.mysite.com");
+      ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
+
+      CultureInfo info = localization.CurrentCultureInfo;
+      Assert.AreEqual("en-AU", info.Name);
+    }
+
+    [TestMethod]
+    public void CultureCanadianEnglish()
+    {
+      IProviderContainer container = SetContext("http://ca.mysite.com");
+      ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
+
+      CultureInfo info = localization.CurrentCultureInfo;
+      Assert.AreEqual("en-CA", info.Name);
+    }
+
+    [TestMethod]
+    public void CultureCandianFrench()
+    {
+      IProviderContainer container = SetContext("http://ca.mysite.com");
+      ILocalizationProvider localization = container.Resolve<ILocalizationProvider>();
+      CultureInfo info = localization.CurrentCultureInfo;
+      Assert.AreEqual("en-CA", info.Name);
+
+      localization.SetLanguage("fr");
+
+      info = localization.CurrentCultureInfo;
+      Assert.AreEqual("fr-CA", info.Name);
+    }
+
+
 
   }
 }

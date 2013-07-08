@@ -1,6 +1,6 @@
-﻿using System.Globalization;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using System;
+using System.Globalization;
 using System.Web;
 
 namespace Atlantis.Framework.Providers.Localization

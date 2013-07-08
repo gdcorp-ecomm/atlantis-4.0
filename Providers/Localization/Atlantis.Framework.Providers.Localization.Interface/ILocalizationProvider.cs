@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+
 namespace Atlantis.Framework.Providers.Localization.Interface
 {
   /// <summary>
@@ -7,13 +9,13 @@ namespace Atlantis.Framework.Providers.Localization.Interface
   public interface ILocalizationProvider
   {
     /// <summary>
-    /// Will return the full language in language-dialect form if available
+    /// Will return the full language in language-locale form if available
     /// Example: en-au, fr-ca.  
     /// </summary>
     string FullLanguage { get; }
 
     /// <summary>
-    /// Will return the short language only without any -dialect
+    /// Will return the short language only without any -locale
     /// </summary>
     string ShortLanguage { get; }
 
@@ -80,5 +82,16 @@ namespace Atlantis.Framework.Providers.Localization.Interface
     /// <param name="countryCode">Country code.</param>
     /// <returns>Returns true if the given is valid country subdomain (not case sensitive).</returns>
     bool IsValidCountrySubdomain(string countryCode);
+
+    /// <summary>
+    /// Sets the language for the request
+    /// </summary>
+    /// <param name="language">langage to set as the language for the request</param>
+    void SetLanguage(string language);
+
+    /// <summary>
+    /// Returns the CultureInfo of the current request.
+    /// </summary>
+    CultureInfo CurrentCultureInfo { get; }
   }
 }

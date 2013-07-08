@@ -1,10 +1,10 @@
-﻿using System.Xml;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Geo.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
+using Atlantis.Framework.RuleEngine.Results;
 using System;
 using System.Linq;
-using Atlantis.Framework.RuleEngine.Results;
+using System.Xml;
 
 namespace Atlantis.Framework.Providers.Localization
 {

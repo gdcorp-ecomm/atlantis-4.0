@@ -3,39 +3,27 @@ using Atlantis.Framework.Localization.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Atlantis.Framework.Providers.Localization
 {
   public abstract class LocalizationProvider : ProviderBase, ILocalizationProvider
   {
-    static Dictionary<string, string> _englishDefaultLanguages;
-
-    static LocalizationProvider()
-    {
-      _englishDefaultLanguages = new Dictionary<string, string>(5, StringComparer.OrdinalIgnoreCase);
-      _englishDefaultLanguages[_WWW] = "en";
-      _englishDefaultLanguages["au"] = "en-au";
-      _englishDefaultLanguages["ca"] = "en-ca";
-      _englishDefaultLanguages["in"] = "en-in";
-      _englishDefaultLanguages["uk"] = "en-gb";
-    }
-
     protected const string _WWW = "WWW";
 
     private readonly Lazy<string> _countrySite;
     private readonly Lazy<ValidCountrySubdomainsResponseData> _validCountrySubdomains;
-    private readonly Lazy<string> _fullLanguage;
-    private readonly Lazy<string> _shortLanguage;
     protected Lazy<CountrySiteCookie> CountrySiteCookie;
+
+    private LanguageLocale _languageLocale = null;
+    private CultureInfo _cultureInfo = null;
 
     public LocalizationProvider(IProviderContainer container)
       : base(container)
     {
       _countrySite = new Lazy<string>(DetermineCountrySite);
       _validCountrySubdomains = new Lazy<ValidCountrySubdomainsResponseData>(LoadValidCountrySubdomains);
-      _fullLanguage = new Lazy<string>(DetermineFullLanguage);
-      _shortLanguage = new Lazy<string>(DetermineShortLanguage);
       CountrySiteCookie = new Lazy<CountrySiteCookie>(() => new CountrySiteCookie(Container));
     }
 
@@ -88,63 +76,48 @@ namespace Atlantis.Framework.Providers.Localization
       return result;
     }
 
-    private string DetermineFullLanguage()
+    private LanguageLocale Language
     {
-      string result = _englishDefaultLanguages[_WWW];
-
-      if (!IsGlobalSite())
+      get
       {
-        string englishVariation;
-        if (_englishDefaultLanguages.TryGetValue(_countrySite.Value, out englishVariation))
+        if (_languageLocale == null)
         {
-          result = englishVariation;
-        }
-      }
+          string shortLanguage = "en";
 
-      IProxyContext proxyContext;
-      if (Container.TryResolve(out proxyContext))
-      {
-        IProxyData languageProxy;
-        if (proxyContext.TryGetActiveProxy(ProxyTypes.TransPerfectTranslation, out languageProxy))
-        {
-          string language;
-          if (languageProxy.TryGetExtendedData("language", out language))
+          IProxyContext proxyContext;
+          if (Container.TryResolve(out proxyContext))
           {
-            result = language;
+            IProxyData languageProxy;
+            if (proxyContext.TryGetActiveProxy(ProxyTypes.TransPerfectTranslation, out languageProxy))
+            {
+              string language;
+              if (languageProxy.TryGetExtendedData("language", out language))
+              {
+                shortLanguage = language;
+              }
+            }
+            else if (proxyContext.TryGetActiveProxy(ProxyTypes.SmartlingTranslation, out languageProxy))
+            {
+              string language;
+              if (languageProxy.TryGetExtendedData("language", out language))
+              {
+                shortLanguage = language;
+              }
+            }
           }
-        }
-        else if (proxyContext.TryGetActiveProxy(ProxyTypes.SmartlingTranslation, out languageProxy))
-        {
-          string language;
-          if (languageProxy.TryGetExtendedData("language", out language))
-          {
-            result = language;
-          }
-        }
-      }
 
-      return result;
-    }
-
-    private string DetermineShortLanguage()
-    {
-      string result = _fullLanguage.Value;
-      if (result != null)
-      {
-        int indexDash = result.IndexOf('-');
-        if (indexDash > 0)
-        {
-          result = result.Substring(0, indexDash);
+          _languageLocale = LanguageLocale.FromLanguageAndCountrySite(shortLanguage, _countrySite.Value);
         }
+
+        return _languageLocale;
       }
-      return result;
     }
 
     public string FullLanguage
     {
       get 
       {
-        return _fullLanguage.Value;
+        return Language.FullLanguage;
       }
     }
 
@@ -152,15 +125,15 @@ namespace Atlantis.Framework.Providers.Localization
     {
       get 
       {
-        return _shortLanguage.Value;
+        return Language.ShortLanguage;
       }
     }
 
     public bool IsActiveLanguage(string language)
     {
       bool result =
-        (language.Equals(_shortLanguage.Value, StringComparison.OrdinalIgnoreCase)) ||
-        (language.Equals(_fullLanguage.Value, StringComparison.OrdinalIgnoreCase));
+        (language.Equals(Language.ShortLanguage, StringComparison.OrdinalIgnoreCase)) ||
+        (language.Equals(Language.FullLanguage, StringComparison.OrdinalIgnoreCase));
 
       return result;
     }
@@ -177,6 +150,42 @@ namespace Atlantis.Framework.Providers.Localization
 
         return result;
       }
+    }
+
+    public void SetLanguage(string language)
+    {
+      _languageLocale = LanguageLocale.FromLanguageAndCountrySite(language, _countrySite.Value);
+      _cultureInfo = null;
+    }
+
+    public CultureInfo CurrentCultureInfo
+    {
+      get 
+      {
+        if (_cultureInfo == null)
+        {
+          _cultureInfo = DetermineCultureInfo();
+        }
+        return _cultureInfo;
+      }
+    }
+
+    private CultureInfo DetermineCultureInfo()
+    {
+      CultureInfo result = CultureInfo.CurrentCulture;
+
+      try
+      {
+        CultureInfo localizedCulture = CultureInfo.GetCultureInfo(Language.FullLanguage);
+        result = localizedCulture;
+      }
+      catch (CultureNotFoundException ex)
+      {
+        AtlantisException aex = new AtlantisException("LocalizationProvider.DetermineCultureInfo", 0, ex.Message + ex.StackTrace, Language.FullLanguage);
+        Engine.Engine.LogAtlantisException(aex);
+      }
+
+      return result;
     }
   }
 }

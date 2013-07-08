@@ -133,8 +133,12 @@ namespace BotDetect.Web
     /// <param name="captcha"></param>
     public static void SaveCodes(CaptchaControl captcha)
     {
-      string captchaId = captcha.CaptchaId;
-      SaveCodeCollection(captchaId, captcha.CaptchaBase.CodeCollection);
+      try
+      {
+        string captchaId = captcha.CaptchaId;
+        SaveCodeCollection(captchaId, captcha.CaptchaBase.CodeCollection);
+      }
+      catch { }
     }
 
     /// the Locale is stored in user persistence using this key
@@ -145,28 +149,36 @@ namespace BotDetect.Web
 
     private static void LoadLocale(CaptchaBase captcha, string captchaId)
     {
-      string LocaleKey = GetLocaleKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(LocaleKey)))
+      try
       {
-        captcha.Locale = (string)_userState[LocaleKey];
+        string LocaleKey = GetLocaleKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(LocaleKey)))
+        {
+          captcha.Locale = (string)_userState[LocaleKey];
+        }
       }
+      catch { }
     }
 
     private static void SaveLocale(string captchaId, string value)
     {
-      string LocaleKey = GetLocaleKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (CaptchaDefaults.Locale != value)
+        string LocaleKey = GetLocaleKey(captchaId);
+
+        if (null != _userState)
         {
-          _userState[LocaleKey] = value;
-        }
-        else
-        {
-          _userState.Remove(LocaleKey);
+          if (CaptchaDefaults.Locale != value)
+          {
+            _userState[LocaleKey] = value;
+          }
+          else
+          {
+            _userState.Remove(LocaleKey);
+          }
         }
       }
+      catch { }
     }
 
     /// the codeLength is stored in user persistence using this key
@@ -177,32 +189,40 @@ namespace BotDetect.Web
 
     private static void LoadCodeLength(CaptchaBase captcha, string captchaId)
     {
-      string codeLengthKey = GetCodeLengthKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(codeLengthKey)))
+      try
       {
-        int tempValue = 0;
-        if (int.TryParse(_userState[codeLengthKey] as string, out tempValue))
+        string codeLengthKey = GetCodeLengthKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(codeLengthKey)))
         {
-          captcha.CodeLength=tempValue;
+          int tempValue = 0;
+          if (int.TryParse(_userState[codeLengthKey] as string, out tempValue))
+          {
+            captcha.CodeLength = tempValue;
+          }
         }
       }
+      catch { }
     }
 
     private static void SaveCodeLength(string captchaId, int value)
     {
-      string codeLengthKey = GetCodeLengthKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (CaptchaDefaults.CodeLength != value)
+        string codeLengthKey = GetCodeLengthKey(captchaId);
+
+        if (null != _userState)
         {
-          _userState[codeLengthKey] = value.ToString();
-        }
-        else
-        {
-          _userState.Remove(codeLengthKey);
+          if (CaptchaDefaults.CodeLength != value)
+          {
+            _userState[codeLengthKey] = value.ToString();
+          }
+          else
+          {
+            _userState.Remove(codeLengthKey);
+          }
         }
       }
+      catch { }
     }
 
     /// the codeStyle is stored in user persistence using this key
@@ -213,53 +233,61 @@ namespace BotDetect.Web
 
     private static void LoadCodeStyle(CaptchaBase captcha, string captchaId)
     {
-      string codeStyleKey = GetCodeStyleKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(codeStyleKey)))
+      try
       {
-        string tempValue=_userState[codeStyleKey] as string;
-        switch(tempValue)
+        string codeStyleKey = GetCodeStyleKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(codeStyleKey)))
         {
-          case "Alpha":
-            captcha.CodeStyle = CodeStyle.Alpha;
-            break;
-          case "Alphanumeric":
-            captcha.CodeStyle = CodeStyle.Alphanumeric;
-            break;
-          case "Numeric":
-            captcha.CodeStyle = CodeStyle.Numeric;
-            break;
+          string tempValue = _userState[codeStyleKey] as string;
+          switch (tempValue)
+          {
+            case "Alpha":
+              captcha.CodeStyle = CodeStyle.Alpha;
+              break;
+            case "Alphanumeric":
+              captcha.CodeStyle = CodeStyle.Alphanumeric;
+              break;
+            case "Numeric":
+              captcha.CodeStyle = CodeStyle.Numeric;
+              break;
+          }
         }
       }
+      catch { }
     }
 
     private static void SaveCodeStyle(string captchaId, CodeStyle value)
     {
-      string codeStyleKey = GetCodeStyleKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (CaptchaDefaults.CodeStyle != value)
+        string codeStyleKey = GetCodeStyleKey(captchaId);
+
+        if (null != _userState)
         {
-          string tempCodeStyle = "Alphanumeric";
-          switch (value)
+          if (CaptchaDefaults.CodeStyle != value)
           {
-            case CodeStyle.Alpha:
-              tempCodeStyle = "Alpha";
-              break;
-            case CodeStyle.Alphanumeric:
-              tempCodeStyle = "Alphanumeric";
-              break;
-            case CodeStyle.Numeric:
-              tempCodeStyle = "Numeric";
-              break;
+            string tempCodeStyle = "Alphanumeric";
+            switch (value)
+            {
+              case CodeStyle.Alpha:
+                tempCodeStyle = "Alpha";
+                break;
+              case CodeStyle.Alphanumeric:
+                tempCodeStyle = "Alphanumeric";
+                break;
+              case CodeStyle.Numeric:
+                tempCodeStyle = "Numeric";
+                break;
+            }
+            _userState[codeStyleKey] = tempCodeStyle;
           }
-          _userState[codeStyleKey] = tempCodeStyle;
-        }
-        else
-        {
-          _userState.Remove(codeStyleKey);
+          else
+          {
+            _userState.Remove(codeStyleKey);
+          }
         }
       }
+      catch { }
     }
 
     /// the customCharacterSetName is stored in user persistence using this key
@@ -270,28 +298,36 @@ namespace BotDetect.Web
 
     private static void LoadCustomCharacterSetName(CaptchaBase captcha, string captchaId)
     {
-      string customCharacterSetNameKey = GetCustomCharacterSetNameKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(customCharacterSetNameKey)))
+      try
       {
-        captcha.CustomCharacterSetName = (string)_userState[customCharacterSetNameKey];
+        string customCharacterSetNameKey = GetCustomCharacterSetNameKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(customCharacterSetNameKey)))
+        {
+          captcha.CustomCharacterSetName = (string)_userState[customCharacterSetNameKey];
+        }
       }
+      catch { }
     }
 
     private static void SaveCustomCharacterSetName(string captchaId, string value)
     {
-      string customCharacterSetNameKey = GetCustomCharacterSetNameKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (CaptchaDefaults.CustomCharacterSetName != value)
+        string customCharacterSetNameKey = GetCustomCharacterSetNameKey(captchaId);
+
+        if (null != _userState)
         {
-          _userState[customCharacterSetNameKey] = value;
-        }
-        else
-        {
-          _userState.Remove(customCharacterSetNameKey);
+          if (CaptchaDefaults.CustomCharacterSetName != value)
+          {
+            _userState[customCharacterSetNameKey] = value;
+          }
+          else
+          {
+            _userState.Remove(customCharacterSetNameKey);
+          }
         }
       }
+      catch { }
     }
 
     /// the imageStyle is stored in user persistence using this key
@@ -346,58 +382,66 @@ namespace BotDetect.Web
 
     private static void LoadImageFormat(CaptchaBase captcha, string captchaId)
     {
-      string imageFormatKey = GetImageFormatKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(imageFormatKey)))
+      try
       {
-        string imageFormat = _userState[imageFormatKey] as string;
-        switch (imageFormatKey)
+        string imageFormatKey = GetImageFormatKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(imageFormatKey)))
         {
-          case "Bmp":
-            captcha.ImageFormat = ImageFormat.Bmp;
-            break;
-          case "Gif":
-            captcha.ImageFormat = ImageFormat.Bmp;
-            break;
-          case "Jpeg":
-            captcha.ImageFormat = ImageFormat.Bmp;
-            break;
-          case "Png":
-            captcha.ImageFormat = ImageFormat.Bmp;
-            break;
+          string imageFormat = _userState[imageFormatKey] as string;
+          switch (imageFormatKey)
+          {
+            case "Bmp":
+              captcha.ImageFormat = ImageFormat.Bmp;
+              break;
+            case "Gif":
+              captcha.ImageFormat = ImageFormat.Bmp;
+              break;
+            case "Jpeg":
+              captcha.ImageFormat = ImageFormat.Bmp;
+              break;
+            case "Png":
+              captcha.ImageFormat = ImageFormat.Bmp;
+              break;
+          }
         }
       }
+      catch { }
     }
 
     private static void SaveImageFormat(string captchaId, ImageFormat value)
     {
-      string imageFormatKey = GetImageFormatKey(captchaId);
-      string imageFormatTemp = string.Empty;
-      switch (value)
+      try
       {
-        case ImageFormat.Bmp:
-          imageFormatTemp = "Bmp";
-          break;
-        case ImageFormat.Gif:
-          imageFormatTemp = "Gif";
-          break;
-        case ImageFormat.Jpeg:
-          imageFormatTemp = "Jpeg";
-          break;
-        case ImageFormat.Png:
-          imageFormatTemp = "Png";
-          break;
-      }
-      if (null != _userState)
-      {
-        if (CaptchaDefaults.ImageFormat != value)
+        string imageFormatKey = GetImageFormatKey(captchaId);
+        string imageFormatTemp = string.Empty;
+        switch (value)
         {
-          _userState[imageFormatKey] = imageFormatTemp;
+          case ImageFormat.Bmp:
+            imageFormatTemp = "Bmp";
+            break;
+          case ImageFormat.Gif:
+            imageFormatTemp = "Gif";
+            break;
+          case ImageFormat.Jpeg:
+            imageFormatTemp = "Jpeg";
+            break;
+          case ImageFormat.Png:
+            imageFormatTemp = "Png";
+            break;
         }
-        else
+        if (null != _userState)
         {
-          _userState.Remove(imageFormatKey);
+          if (CaptchaDefaults.ImageFormat != value)
+          {
+            _userState[imageFormatKey] = imageFormatTemp;
+          }
+          else
+          {
+            _userState.Remove(imageFormatKey);
+          }
         }
       }
+      catch { }
     }
 
     /// the imageSize is stored in user persistence using this key
@@ -702,28 +746,36 @@ namespace BotDetect.Web
 
     private static void LoadCaptchaImageTooltip(CaptchaControl captcha, string captchaId)
     {
-      string captchaImageTooltipKey = GetCaptchaImageTooltipKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(captchaImageTooltipKey)))
+      try
       {
-        captcha._captchaImageTooltip = (String)_userState[captchaImageTooltipKey];
+        string captchaImageTooltipKey = GetCaptchaImageTooltipKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(captchaImageTooltipKey)))
+        {
+          captcha._captchaImageTooltip = (String)_userState[captchaImageTooltipKey];
+        }
       }
+      catch { }
     }
 
     private static void SaveCaptchaImageTooltip(string captchaId, String value)
     {
-      string captchaImageTooltipKey = GetCaptchaImageTooltipKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (StringHelper.HasValue(value))
+        string captchaImageTooltipKey = GetCaptchaImageTooltipKey(captchaId);
+
+        if (null != _userState)
         {
-          _userState[captchaImageTooltipKey] = value;
-        }
-        else
-        {
-          _userState.Remove(captchaImageTooltipKey);
+          if (StringHelper.HasValue(value))
+          {
+            _userState[captchaImageTooltipKey] = value;
+          }
+          else
+          {
+            _userState.Remove(captchaImageTooltipKey);
+          }
         }
       }
+      catch { }
     }
 
 
@@ -735,28 +787,36 @@ namespace BotDetect.Web
 
     private static void LoadReloadIconTooltip(CaptchaControl captcha, string captchaId)
     {
-      string reloadIconTooltipKey = GetReloadIconTooltipKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(reloadIconTooltipKey)))
+      try
       {
-        captcha._reloadIconTooltip = (String)_userState[reloadIconTooltipKey];
+        string reloadIconTooltipKey = GetReloadIconTooltipKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(reloadIconTooltipKey)))
+        {
+          captcha._reloadIconTooltip = (String)_userState[reloadIconTooltipKey];
+        }
       }
+      catch { }
     }
 
     private static void SaveReloadIconTooltip(string captchaId, String value)
     {
-      string reloadIconTooltipKey = GetReloadIconTooltipKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (StringHelper.HasValue(value))
+        string reloadIconTooltipKey = GetReloadIconTooltipKey(captchaId);
+
+        if (null != _userState)
         {
-          _userState[reloadIconTooltipKey] = value;
-        }
-        else
-        {
-          _userState.Remove(reloadIconTooltipKey);
+          if (StringHelper.HasValue(value))
+          {
+            _userState[reloadIconTooltipKey] = value;
+          }
+          else
+          {
+            _userState.Remove(reloadIconTooltipKey);
+          }
         }
       }
+      catch { }
     }
 
 
@@ -768,28 +828,36 @@ namespace BotDetect.Web
 
     private static void LoadSoundIconTooltip(CaptchaControl captcha, string captchaId)
     {
-      string soundIconTooltipKey = GetSoundIconTooltipKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(soundIconTooltipKey)))
+      try
       {
-        captcha._soundIconTooltip = (String)_userState[soundIconTooltipKey];
+        string soundIconTooltipKey = GetSoundIconTooltipKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(soundIconTooltipKey)))
+        {
+          captcha._soundIconTooltip = (String)_userState[soundIconTooltipKey];
+        }
       }
+      catch { }
     }
 
     private static void SaveSoundIconTooltip(string captchaId, String value)
     {
-      string soundIconTooltipKey = GetSoundIconTooltipKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (StringHelper.HasValue(value))
+        string soundIconTooltipKey = GetSoundIconTooltipKey(captchaId);
+
+        if (null != _userState)
         {
-          _userState[soundIconTooltipKey] = value;
-        }
-        else
-        {
-          _userState.Remove(soundIconTooltipKey);
+          if (StringHelper.HasValue(value))
+          {
+            _userState[soundIconTooltipKey] = value;
+          }
+          else
+          {
+            _userState.Remove(soundIconTooltipKey);
+          }
         }
       }
+      catch { }
     }
 
 
@@ -893,28 +961,36 @@ namespace BotDetect.Web
 
     private static void LoadIconsDivWidth(CaptchaControl captcha, string captchaId)
     {
-      string iconsDivWidthKey = GetIconsDivWidthKey(captchaId);
-      if ((null != _userState) && (_userState.Contains(iconsDivWidthKey)))
+      try
       {
-        captcha._iconsDivWidth = (int)_userState[iconsDivWidthKey];
+        string iconsDivWidthKey = GetIconsDivWidthKey(captchaId);
+        if ((null != _userState) && (_userState.Contains(iconsDivWidthKey)))
+        {
+          captcha._iconsDivWidth = (int)_userState[iconsDivWidthKey];
+        }
       }
+      catch { }
     }
 
     private static void SaveIconsDivWidth(string captchaId, int value)
     {
-      string iconsDivWidthKey = GetIconsDivWidthKey(captchaId);
-
-      if (null != _userState)
+      try
       {
-        if (0 < value)
+        string iconsDivWidthKey = GetIconsDivWidthKey(captchaId);
+
+        if (null != _userState)
         {
-          _userState[iconsDivWidthKey] = value;
-        }
-        else
-        {
-          _userState.Remove(iconsDivWidthKey);
+          if (0 < value)
+          {
+            _userState[iconsDivWidthKey] = value;
+          }
+          else
+          {
+            _userState.Remove(iconsDivWidthKey);
+          }
         }
       }
+      catch { }
     }
 
 

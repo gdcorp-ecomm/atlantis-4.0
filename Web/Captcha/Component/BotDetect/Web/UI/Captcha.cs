@@ -40,18 +40,37 @@ namespace BotDetect.Web.UI
   {
     public Captcha()
     {
-      captchaControl = new CaptchaControl("DesignerInitializedCaptcha");
+      try
+      {
+        captchaControl = new CaptchaControl("DesignerInitializedCaptcha");
 
-      // use relative urls in Web Forms by default
-      captchaControl.Urls = CaptchaUrls.Relative;
+        // use relative urls in Web Forms by default
+        captchaControl.Urls = CaptchaUrls.Relative;
+      }
+      catch (System.Exception ex)
+      {
+        ErrorHandler(ex);
+      }
     }
 
     public Captcha(string captchaId) 
     {
-      captchaControl = new CaptchaControl(captchaId);
+      try
+      {
+        captchaControl = new CaptchaControl(captchaId);
 
-      // use relative urls in Web Forms by default
-      captchaControl.Urls = CaptchaUrls.Relative;
+        // use relative urls in Web Forms by default
+        captchaControl.Urls = CaptchaUrls.Relative;
+      }
+      catch (System.Exception ex)
+      {
+        try
+        {
+          captchaControl = new CaptchaControl("DesignerInitializedCaptcha");
+        }
+        catch { }
+        ErrorHandler(ex);
+      }
     }
 
 
@@ -505,8 +524,16 @@ namespace BotDetect.Web.UI
       }
     }
 
-    // captcha instance events
+    private void ErrorHandler(System.Exception ex)
+    {
+      if (ErrorOccured != null)
+      {
+        ErrorOccured(ex, new EventArgs());
+      }
+    }
 
+    // captcha instance events
+    public event EventHandler ErrorOccured;
     /// <summary>
     /// Custom event handler delegate for InitializedCaptchaControl events, 
     /// most commonly used for Captcha property randomization
@@ -568,28 +595,41 @@ namespace BotDetect.Web.UI
     /// </summary>
     protected void ForwardInstanceHandlersToGlobal()
     {
-      CaptchaControl.RegisterInitializedCaptchaControlHandler(captchaControl.CaptchaId, this.InitializedCaptchaControl);
+      try
+      {
+        CaptchaControl.RegisterInitializedCaptchaControlHandler(captchaControl.CaptchaId, this.InitializedCaptchaControl);
 
-      CaptchaBase.RegisterGeneratingCaptchaCodeHandler(captchaControl.CaptchaId, this.GeneratingCaptchaCode);
-      CaptchaBase.RegisterGeneratedCaptchaCodeHandler(captchaControl.CaptchaId, this.GeneratedCaptchaCode);
+        CaptchaBase.RegisterGeneratingCaptchaCodeHandler(captchaControl.CaptchaId, this.GeneratingCaptchaCode);
+        CaptchaBase.RegisterGeneratedCaptchaCodeHandler(captchaControl.CaptchaId, this.GeneratedCaptchaCode);
 
-      CaptchaBase.RegisterGeneratingCaptchaImageHandler(captchaControl.CaptchaId, this.GeneratingCaptchaImage);
-      CaptchaBase.RegisterGeneratedCaptchaImageHandler(captchaControl.CaptchaId, this.GeneratedCaptchaImage);
+        CaptchaBase.RegisterGeneratingCaptchaImageHandler(captchaControl.CaptchaId, this.GeneratingCaptchaImage);
+        CaptchaBase.RegisterGeneratedCaptchaImageHandler(captchaControl.CaptchaId, this.GeneratedCaptchaImage);
 
-      CaptchaBase.RegisterGeneratingCaptchaSoundHandler(captchaControl.CaptchaId, this.GeneratingCaptchaSound);
-      CaptchaBase.RegisterGeneratedCaptchaSoundHandler(captchaControl.CaptchaId, this.GeneratedCaptchaSound);
+        CaptchaBase.RegisterGeneratingCaptchaSoundHandler(captchaControl.CaptchaId, this.GeneratingCaptchaSound);
+        CaptchaBase.RegisterGeneratedCaptchaSoundHandler(captchaControl.CaptchaId, this.GeneratedCaptchaSound);
 
-      CaptchaBase.RegisterValidatingUserInputHandler(captchaControl.CaptchaId, this.ValidatingUserInput);
-      CaptchaBase.RegisterValidatedUserInputHandler(captchaControl.CaptchaId, this.ValidatedUserInput);
+        CaptchaBase.RegisterValidatingUserInputHandler(captchaControl.CaptchaId, this.ValidatingUserInput);
+        CaptchaBase.RegisterValidatedUserInputHandler(captchaControl.CaptchaId, this.ValidatedUserInput);
+      }
+      catch (System.Exception ex)
+      {
+        ErrorHandler(ex);
+      }
     }
 
     #endregion CaptchaControl field delegation
 
     protected override void CreateChildControls()
     {
-      base.CreateChildControls();
-
-      InitializePageHeader();
+      try
+      {
+        base.CreateChildControls();
+        InitializePageHeader();
+      }
+      catch (System.Exception ex)
+      {
+        ErrorHandler(ex);
+      }
     }
 
     protected void InitializePageHeader()
@@ -620,12 +660,19 @@ namespace BotDetect.Web.UI
     /// </summary>
     protected void IncludeStyleSheets()
     {
-      if (null != this.Page.Header)
+      try
       {
-        int includeIndex = IncludeMainStyleSheet();
+        if (null != this.Page.Header)
+        {
+          int includeIndex = IncludeMainStyleSheet();
 
-        // set success flag, used when rendering the control
-        _layoutCssAdded = true;
+          // set success flag, used when rendering the control
+          _layoutCssAdded = true;
+        }
+      }
+      catch (System.Exception ex)
+      {
+        ErrorHandler(ex);
       }
     }
 
@@ -705,18 +752,25 @@ namespace BotDetect.Web.UI
 
     protected override void OnInit(System.EventArgs e)
     {
-      base.OnInit(e);
-
-      if (!IsDesignMode)
+      try
       {
-        // determine the Captcha identifier
-        string captchaId = this.AppRelativeCaptchaId;
+        base.OnInit(e);
 
-        // load any saved values
-        CaptchaPersistence.Load(captchaControl, captchaId);
+        if (!IsDesignMode)
+        {
+          // determine the Captcha identifier
+          string captchaId = this.AppRelativeCaptchaId;
 
-        // the control doesn't use viewstate
-        this.EnableViewState = false;
+          // load any saved values
+          CaptchaPersistence.Load(captchaControl, captchaId);
+
+          // the control doesn't use viewstate
+          this.EnableViewState = false;
+        }
+      }
+      catch (System.Exception ex)
+      {
+        ErrorHandler(ex);
       }
     }
 
@@ -770,20 +824,26 @@ namespace BotDetect.Web.UI
     protected override void OnPreRender(System.EventArgs e)
     {
       base.OnPreRender(e);
-
-      if (!IsDesignMode)
+      try
       {
-        // save all customized control values
-        CaptchaPersistence.Save(captchaControl);
+        if (!IsDesignMode)
+        {
+          // save all customized control values
+          CaptchaPersistence.Save(captchaControl);
 
-        // event handler propagation
-        ForwardInstanceHandlersToGlobal();
+          // event handler propagation
+          ForwardInstanceHandlersToGlobal();
 
-        // we move control initialization to after state saving,
-        // so custom CaptchaControlInitialized handlers registered in
-        // the Page_Init properly affect control state and their
-        // effects are not persisted in Session state
-        captchaControl.Initialize();
+          // we move control initialization to after state saving,
+          // so custom CaptchaControlInitialized handlers registered in
+          // the Page_Init properly affect control state and their
+          // effects are not persisted in Session state
+          captchaControl.Initialize();
+        }
+      }
+      catch (System.Exception ex)
+      {
+        ErrorHandler(ex);
       }
     }
 
@@ -793,9 +853,16 @@ namespace BotDetect.Web.UI
     /// <param name="output"> The HTML writer to write out to </param>
     protected override void Render(HtmlTextWriter writer)
     {
-      if (!IsDesignMode)
+      try
       {
-        RenderXhtml11Strict(writer);
+        if (!IsDesignMode)
+        {
+          RenderXhtml11Strict(writer);
+        }
+      }
+      catch (System.Exception ex)
+      {
+        ErrorHandler(ex);
       }
     }
 
@@ -858,29 +925,36 @@ namespace BotDetect.Web.UI
     /// </summary>
     protected void RenderCaptchaImageMarkup(HtmlTextWriter writer)
     {
-      writer.WriteLine(" <div class=\"LBD_CaptchaImageDiv\" id=\"{0}_CaptchaImageDiv\" style=\"width: {1}px; height: {2}px;\">",
-          captchaControl.CaptchaId, captchaControl.ImageSize.Width, captchaControl.ImageSize.Height);
+      try
+      {
+        writer.WriteLine(" <div class=\"LBD_CaptchaImageDiv\" id=\"{0}_CaptchaImageDiv\" style=\"width: {1}px; height: {2}px;\">",
+            captchaControl.CaptchaId, captchaControl.ImageSize.Width, captchaControl.ImageSize.Height);
 
 
-      if (!captchaControl.HelpLinkEnabled)
-      {
-        RenderPlainImage(writer);
-      }
-      else
-      {
-        switch (captchaControl.HelpLinkMode)
+        if (!captchaControl.HelpLinkEnabled)
         {
-          case HelpLinkMode.Image:
-            RenderLinkedImage(writer);
-            break;
-
-          case HelpLinkMode.Text:
-            RenderPlainImageWithTextLink(writer);
-            break;
+          RenderPlainImage(writer);
         }
-      }
+        else
+        {
+          switch (captchaControl.HelpLinkMode)
+          {
+            case HelpLinkMode.Image:
+              RenderLinkedImage(writer);
+              break;
 
-	  writer.WriteLine(" </div>");      
+            case HelpLinkMode.Text:
+              RenderPlainImageWithTextLink(writer);
+              break;
+          }
+        }
+
+        writer.WriteLine(" </div>");
+      }
+      catch (System.Exception ex)
+      {
+        ErrorHandler(ex);
+      }
     }
 
 

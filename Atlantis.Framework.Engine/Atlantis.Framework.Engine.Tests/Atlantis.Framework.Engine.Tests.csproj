@@ -54,6 +54,7 @@
     <Compile Include="EngineMonitorTests.cs" />
     <Compile Include="EngineTests.cs" />
     <Compile Include="EngineTestsLogger.cs" />
+    <Compile Include="ErrorLoggerWithBadConstructor.cs" />
     <Compile Include="MockTriplet\AsyncTripletRequest.cs" />
     <Compile Include="MockTriplet\TestTripletRequestData.cs" />
     <Compile Include="MockTriplet\TestTripletResponseData.cs" />

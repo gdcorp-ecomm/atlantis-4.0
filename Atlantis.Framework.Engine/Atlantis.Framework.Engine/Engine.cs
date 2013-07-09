@@ -211,8 +211,23 @@ namespace Atlantis.Framework.Engine
     /// <param name="exception"><c>AtlantisException</c> to log.</param>
     public static void LogAtlantisException<T>(AtlantisException exception) where T: IErrorLogger, new()
     {
-      IErrorLogger errorLogger = new T();
-      LogAtlantisException(exception, errorLogger);
+
+      IErrorLogger errorLogger = null;
+      try
+      {
+        errorLogger = new T();
+      }
+      catch (Exception ex)
+      {
+        _loggingStatus = LoggingStatusType.Error;
+        _lastLoggingException = ex;
+      }
+
+      if (errorLogger != null)
+      {
+        LogAtlantisException(exception, errorLogger);
+      }
+
     }
 
     /// <summary>

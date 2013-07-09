@@ -173,6 +173,18 @@ namespace Atlantis.Framework.Engine.Tests
     }
 
     [TestMethod]
+    public void LogExceptionBadConstructorGeneric()
+    {
+      AtlantisException ex = new AtlantisException("EngineTests.LogException", "911", "Test log message only.", string.Empty, null, null);
+      Engine.LogAtlantisException(ex);
+      Assert.AreEqual(LoggingStatusType.WorkingNormally, Engine.LoggingStatus);
+
+      Engine.LogAtlantisException<ErrorLoggerWithBadConstructor>(ex);
+      Assert.AreEqual(LoggingStatusType.Error, Engine.LoggingStatus);
+      Assert.AreEqual(typeof(ApplicationException), Engine.LastLoggingError.InnerException.GetType());
+    }
+
+    [TestMethod]
     public void DefaultEngineLogger()
     {
       _engineTestsLogger.ClearExceptions();

@@ -1,4 +1,5 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Globalization;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Testing.MockProviders;
 using System;
@@ -133,7 +134,13 @@ namespace Atlantis.Framework.Testing.MockLocalization
 
     public bool IsValidCountrySubdomain(string countryCode)
     {
-      throw new NotImplementedException();
+      return true;
     }
+
+    public void SetLanguage(string language)
+    {
+    }
+
+    public CultureInfo CurrentCultureInfo { get; private set; }
   }
 }

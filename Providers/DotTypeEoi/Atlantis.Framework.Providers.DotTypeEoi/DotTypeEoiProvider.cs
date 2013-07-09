@@ -21,6 +21,15 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       get { return _fullLanguage ?? (_fullLanguage = DetermineFullLanguage()); }
     }
 
+    private bool IsAuthenticated
+    {
+      get
+      {
+        return _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted ||
+               _shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated;
+      }
+    }
+
     public DotTypeEoiProvider(IProviderContainer container) : base(container)
     {
       _shopperContext = new Lazy<IShopperContext>(() => Container.Resolve<IShopperContext>());
@@ -257,7 +266,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       shopperWatchListResponse = null;
 
-      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated || _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted)
+      if (IsAuthenticated)
       {
         try
         {
@@ -284,7 +293,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       responseMessage = string.Empty;
 
-      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated || _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted)
+      if (IsAuthenticated)
       {
         try
         {
@@ -315,7 +324,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
       var success = false;
       responseMessage = string.Empty;
 
-      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated || _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted)
+      if (IsAuthenticated)
       {
         try
         {
@@ -342,7 +351,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
     private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiCategory> categories)
     {
-      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated || _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted)
+      if (IsAuthenticated)
       {
         IShopperWatchListResponse shopperWatchListResponse;
         if (GetShopperWatchList(out shopperWatchListResponse))
@@ -371,7 +380,7 @@ namespace Atlantis.Framework.Providers.DotTypeEoi
 
     private void AddGtldButtonStatus(IEnumerable<IDotTypeEoiGtld> gtlds)
     {
-      if (_shopperContext.Value.ShopperStatus == ShopperStatusType.Authenticated || _shopperContext.Value.ShopperStatus == ShopperStatusType.PartiallyTrusted)
+      if (IsAuthenticated)
       {
         IShopperWatchListResponse shopperWatchListResponse;
         if (GetShopperWatchList(out shopperWatchListResponse))

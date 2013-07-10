@@ -70,6 +70,12 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CaRuleEngineTests.cs" />
+    <Compile Include="CountrySiteRedirectTests\CanadaSiteTest.cs" />
+    <Compile Include="CountrySiteRedirectTests\SpanishTest.cs" />
+    <Compile Include="CountrySiteRedirectTests\AustraliaSiteTest.cs" />
+    <Compile Include="CountrySiteRedirectTests\UnitedKingdomSiteTest.cs" />
+    <Compile Include="CountrySiteRedirectTests\GlobalSiteTest.cs" />
+    <Compile Include="CountrySiteRedirectTests\IndiaSiteTest.cs" />
     <Compile Include="EuRuleEngineTests.cs" />
     <Compile Include="CustomOperatorTests.cs" />
     <Compile Include="RulesEngineTests.cs" />
@@ -79,6 +85,10 @@
     <Compile Include="ShopperValidation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CountrySiteRedirectTests\CountrySiteRedirectRule.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="CustomOperatorTests.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

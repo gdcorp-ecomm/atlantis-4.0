@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Atlantis.Framework.Domains.Interface;
 using Newtonsoft.Json.Linq;
@@ -76,7 +77,13 @@ namespace Atlantis.Framework.DomainSearch.Interface
             case "databasepercentilerank":
               if (int.TryParse(domainTokenValue, out intValue))
               {
-                WeightRelevancePercentileRank = intValue;
+                DatabasePercentileRank = intValue;
+              }
+              break;
+            case "percentilerank":
+              if (int.TryParse(domainTokenValue, out intValue))
+              {
+                PercentileRank = intValue;
               }
               break;
             case "hasdash":
@@ -142,6 +149,24 @@ namespace Atlantis.Framework.DomainSearch.Interface
             case "availcheckstatus":
               AvailCheckTypePerformed = domainTokenValue;
               break;
+            case "cartattributes":
+              if (!string.IsNullOrEmpty(domainTokenValue))
+              {
+                CartAttributes = domainTokenValue.Split(new char[','], StringSplitOptions.RemoveEmptyEntries).ToArray();
+              }
+              break;
+            case "isinternaltransfer":
+              if (bool.TryParse(domainTokenValue, out boolValue))
+              {
+                IsInternalTransfer = boolValue;
+              }
+              break;
+            case "whoisexp":
+              if (DateTime.TryParse(domainTokenValue, out timeStamp))
+              {
+                WhoIsExpiration = timeStamp;
+              }
+              break;
           }
         }
       }
@@ -169,13 +194,28 @@ namespace Atlantis.Framework.DomainSearch.Interface
 
     public bool IsTypo { get; private set; }
 
+    public bool IsInternalTransfer { get; private set; }
+
     public bool IsDomainUsingSynonym { get; private set; }
 
     public DateTime AuctionEndTimeStamp { get; private set; }
 
     public DateTime LastUpdateTimeStamp { get; private set; }
 
-    public int WeightRelevancePercentileRank { get; private set; }
+    /// <summary>
+    /// If the domain is available for internal transfer, this is the Who Is expiration data that was present on the Avail Check call.
+    /// </summary>
+    public DateTime WhoIsExpiration { get; private set; }
+
+    /// <summary>
+    /// Represents a weight of relevance compared to the search phrase with in the requested database.  If present this value can be used for sorting based on the search relevancy.
+    /// </summary>
+    public int DatabasePercentileRank { get; private set; }
+
+    /// <summary>
+    /// Represents the overall weight of relevance compared to the search phrase.  If present this value can be used for sorting based on the search relevancy.
+    /// </summary>
+    public int PercentileRank { get; private set; }
 
     public int LengthOfSld { get; private set; }
 
@@ -192,6 +232,24 @@ namespace Atlantis.Framework.DomainSearch.Interface
     public string DomainSearchDataBase { get; private set; }
 
     public string AuctionTypeId { get; private set; }
+
+    private IEnumerable<string> _cartAttributes;
+    /// <summary>
+    /// List of attributes and values that should be passed on to the Cart for down stream systems use (example values: isoingo=true).
+    /// </summary>
+    public IEnumerable<string> CartAttributes
+    {
+      get
+      {
+        if (_cartAttributes == null)
+        {
+          _cartAttributes = new string[0];
+        }
+
+        return _cartAttributes;
+      }
+      private set { _cartAttributes = value; }
+    }
 
     private readonly IDomain _responseDomain;
     public IDomain Domain

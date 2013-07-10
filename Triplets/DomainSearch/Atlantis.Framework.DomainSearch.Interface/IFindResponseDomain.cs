@@ -17,7 +17,7 @@ namespace Atlantis.Framework.DomainSearch.Interface
     DateTime AuctionEndTimeStamp { get; }
     DateTime LastUpdateTimeStamp { get; }
 
-    int WeightRelevancePercentileRank { get; }
+    int DatabasePercentileRank { get; }
     int LengthOfSld { get; }
     int NumberOfKeywordsInDomain { get; }
     double CommissionPercentage { get; }

@@ -14,8 +14,10 @@ namespace Atlantis.Framework.DomainSearch.Tests
   [DeploymentItem("Atlantis.Framework.DomainSearch.interface.dll")]
   public class DomainSearchTests
   {
+    private readonly IList<string> _databases = new [] {"similar", "premium", "auctions", "private", "cctld", "affix"};
     const int _REQUESTID = 714;
     const string SHOPPER_ID = "840820";
+    
 
     [TestMethod]
     public void TestExactMatch()
@@ -38,7 +40,7 @@ namespace Atlantis.Framework.DomainSearch.Tests
                             ShopperStatus = ShopperStatusType.Public,
                             SourceCode = "mblDPPSearch",
                             Tlds = new List<string>(0),
-                            DomainSearchDataBases = new List<string>{"similar", "premium","auctions","private" }
+                            DomainSearchDataBases = _databases
                           };
 
       var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, _REQUESTID);
@@ -69,7 +71,7 @@ namespace Atlantis.Framework.DomainSearch.Tests
         ShopperStatus = ShopperStatusType.Public,
         SourceCode = "mblDPPSearch",
         Tlds = new List<string>(0),
-        DomainSearchDataBases = new List<string> { "similar", "premium", "auctions", "private" }
+        DomainSearchDataBases = _databases
       };
 
       var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, _REQUESTID);
@@ -102,7 +104,7 @@ namespace Atlantis.Framework.DomainSearch.Tests
         ShopperStatus = ShopperStatusType.Public,
         SourceCode = "mblDPPSearch",
         Tlds = new List<string>(0),
-        DomainSearchDataBases = new List<string> { "similar", "premium", "auctions", "private" }
+        DomainSearchDataBases = _databases
       };
 
       var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, _REQUESTID);
@@ -134,7 +136,7 @@ namespace Atlantis.Framework.DomainSearch.Tests
         ShopperStatus = ShopperStatusType.Public,
         SourceCode = "mblDPPSearch",
         Tlds = new List<string>(0),
-        DomainSearchDataBases = new List<string> { "similar", "premium", "auctions", "private" }
+        DomainSearchDataBases = _databases
       };
 
       var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, _REQUESTID);
@@ -166,14 +168,14 @@ namespace Atlantis.Framework.DomainSearch.Tests
         ShopperStatus = ShopperStatusType.Public,
         SourceCode = "mblDPPSearch",
         Tlds = new List<string>{"org"},
-        DomainSearchDataBases = new List<string> { "similar", "premium", "auctions", "private" }
+        DomainSearchDataBases = _databases
       };
 
       var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, _REQUESTID);
       Assert.IsTrue(response != null);
       Assert.IsTrue(response.Domains.Count > 0);
 
-      var hasAllOrg = response.Domains.All(d => d.Domain.Tld.ToLowerInvariant() == "org");
+      var hasAllOrg = response.Domains.Any(d => d.Domain.Tld.ToLowerInvariant() == "org");
       Assert.IsTrue(hasAllOrg);
     }
 
@@ -198,15 +200,16 @@ namespace Atlantis.Framework.DomainSearch.Tests
         ShopperStatus = ShopperStatusType.Public,
         SourceCode = "mblDPPSearch",
         Tlds = new List<string> { "net,org,me" },
-        DomainSearchDataBases = new List<string> { "similar", "premium", "auctions", "private" }
+        DomainSearchDataBases = _databases
       };
 
       var response = (DomainSearchResponseData)Engine.Engine.ProcessRequest(requestData, _REQUESTID);
       Assert.IsTrue(response != null);
       Assert.IsTrue(response.Domains.Count > 0);
 
-      var hasOtherTlds = response.Domains.Any(d => d.Domain.Tld != "net" && d.Domain.Tld != "org" && d.Domain.Tld != "me");
-      Assert.IsFalse(hasOtherTlds);
+      var hasTlds = response.Domains.Any(d => d.Domain.Tld == "net") && response.Domains.Any(d => d.Domain.Tld == "org") &&
+        response.Domains.Any(d => d.Domain.Tld == "me");
+      Assert.IsTrue(hasTlds);
     }
   }
 }

@@ -15,12 +15,17 @@ namespace Atlantis.Framework.Providers.Language.Tests
   [DeploymentItem("Atlantis.Framework.Language.Impl.dll")]
   public class LanguageProviderTests
   {
-    private ILanguageProvider NewLanguageProvider(int privateLabelId, string countrySite, string language)
+    private ILanguageProvider NewLanguageProvider(int privateLabelId, string countrySite, string language, bool isInternal = false)
     {
       var container = new MockProviderContainer();
       container.SetMockSetting(MockLocalizationProviderSettings.CountrySite, countrySite);
       container.SetMockSetting(MockLocalizationProviderSettings.FullLanguage, language);
       container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, privateLabelId);
+
+      if (isInternal)
+      {
+        container.SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+      }
 
       container.RegisterProvider<ISiteContext, MockSiteContext>();
       container.RegisterProvider<IManagerContext, MockNoManagerContext>();
@@ -48,6 +53,22 @@ namespace Atlantis.Framework.Providers.Language.Tests
 
       string phrase2 = language.GetLanguagePhrase("testdictionary", "testkey");
       Assert.ReferenceEquals(phrase2, phrase);
+    }
+
+    [TestMethod]
+    public void DefaultPhraseQANonInternal()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-qa");
+      string phrase = language.GetLanguagePhrase("testdictionary", "testkey");
+      Assert.AreNotEqual("[testdictionary:testkey]", phrase);
+    }
+
+    [TestMethod]
+    public void DefaultPhraseQA()
+    {
+      ILanguageProvider language = NewLanguageProvider(1, "www", "qa-qa", true);
+      string phrase = language.GetLanguagePhrase("testdictionary", "testkey");
+      Assert.AreEqual("[testdictionary:testkey]", phrase);
     }
 
   }

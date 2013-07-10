@@ -17,12 +17,17 @@ namespace Atlantis.Framework.Providers.Language.Tests
   [DeploymentItem("Atlantis.Framework.Language.Impl.dll")]
   public class LanguageRenderHandlerTests
   {
-    private IProviderContainer NewLanguageProviderContainer(int privateLabelId, string countrySite, string language)
+    private IProviderContainer NewLanguageProviderContainer(int privateLabelId, string countrySite, string language, bool isInternal = false)
     {
       var container = new MockProviderContainer();
       container.SetMockSetting(MockLocalizationProviderSettings.CountrySite, countrySite);
       container.SetMockSetting(MockLocalizationProviderSettings.FullLanguage, language);
       container.SetMockSetting(MockSiteContextSettings.PrivateLabelId, privateLabelId);
+
+      if (isInternal)
+      {
+        container.SetMockSetting(MockSiteContextSettings.IsRequestInternal, true);
+      }
 
       container.RegisterProvider<ISiteContext, MockSiteContext>();
       container.RegisterProvider<IManagerContext, MockNoManagerContext>();
@@ -109,6 +114,33 @@ namespace Atlantis.Framework.Providers.Language.Tests
 
       public string Content { get; private set; }
     }
+
+    [TestMethod]
+    public void ValidLanaguagePhraseReplacementQaNotInternal()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "www", "qa-qa");
+      TestContent content = new TestContent("<div>[@L[testdictionary:testkey]@L]</div>");
+
+      var pipeline = new RenderPipelineManager();
+      pipeline.AddRenderHandler(new LanguageRenderHandler());
+      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+
+      Assert.AreNotEqual("<div>[testdictionary:testkey]</div>", processedContent.Content);
+    }
+
+    [TestMethod]
+    public void ValidLanaguagePhraseReplacementQa()
+    {
+      IProviderContainer container = NewLanguageProviderContainer(1, "www", "qa-qa", true);
+      TestContent content = new TestContent("<div>[@L[testdictionary:testkey]@L]</div>");
+
+      var pipeline = new RenderPipelineManager();
+      pipeline.AddRenderHandler(new LanguageRenderHandler());
+      IProcessedRenderContent processedContent = pipeline.RenderContent(content, container);
+
+      Assert.AreEqual("<div>[testdictionary:testkey]</div>", processedContent.Content);
+    }
+
 
   }
 }

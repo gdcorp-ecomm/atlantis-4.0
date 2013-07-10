@@ -10,15 +10,16 @@ namespace Atlantis.Framework.Providers.Language
   {
     const string _DEFAULTCOUNTRYSITE = "www";
     const string _DEFAULTLANGUAGE = "en";
+    const string _QALANGUAGESHOW = "qa-qa";
 
-    Lazy<int> _contextId;
+    Lazy<ISiteContext> _siteContext;
     Lazy<string> _language;
     Lazy<string> _countrySite;
 
     public LanguageProvider(IProviderContainer container)
       :base(container)
     {
-      _contextId = new Lazy<int>(() => { return LoadContextId(); });
+      _siteContext = new Lazy<ISiteContext>(() => { return Container.Resolve<ISiteContext>(); });
       _language = new Lazy<string>(() => { return LoadLanguage(); });
       _countrySite = new Lazy<string>(() => { return LoadCountrySite(); });
     }
@@ -45,17 +46,43 @@ namespace Atlantis.Framework.Providers.Language
       return result;
     }
 
-    private int LoadContextId()
-    {
-      var siteContext = Container.Resolve<ISiteContext>();
-      return siteContext.ContextId;
-    }
-
     public string GetLanguagePhrase(string dictionaryName, string phraseKey)
     {
-      var request = new LanguagePhraseRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, dictionaryName, phraseKey, _language.Value, _countrySite.Value, _contextId.Value);
-      var response = (LanguagePhraseResponseData)DataCache.DataCache.GetProcessRequest(request, LanguageProviderEngineRequests.LanguagePhrase);
-      return response.LanguagePhrase;
+      if (ShowDictionaryAndKeyRaw)
+      {
+        return GetQALanguagePhrase(dictionaryName, phraseKey);
+      }
+      else
+      {
+        var request = new LanguagePhraseRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, dictionaryName, phraseKey, _language.Value, _countrySite.Value, _siteContext.Value.ContextId);
+        var response = (LanguagePhraseResponseData)DataCache.DataCache.GetProcessRequest(request, LanguageProviderEngineRequests.LanguagePhrase);
+        return response.LanguagePhrase;
+      }
     }
+
+    private bool? _showDictionaryAndKeyRaw;
+    private bool ShowDictionaryAndKeyRaw
+    {
+      get
+      {
+        if (!_showDictionaryAndKeyRaw.HasValue)
+        {
+          _showDictionaryAndKeyRaw = false;
+          ILocalizationProvider localization;
+
+          if ((_siteContext.Value.IsRequestInternal) && (Container.TryResolve(out localization)))
+          {
+            _showDictionaryAndKeyRaw = localization.IsActiveLanguage(_QALANGUAGESHOW);
+          }
+        }
+        return _showDictionaryAndKeyRaw.Value;
+      }
+    }
+
+    private string GetQALanguagePhrase(string dictionaryName, string phraseKey)
+    {
+      return string.Concat("[", dictionaryName, ":", phraseKey, "]");
+    }
+
   }
 }

@@ -1,9 +1,9 @@
-﻿using System.Globalization;
-using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Localization.Interface;
 using Atlantis.Framework.Testing.MockProviders;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Atlantis.Framework.Testing.MockLocalization
@@ -15,6 +15,7 @@ namespace Atlantis.Framework.Testing.MockLocalization
 
     Lazy<string> _countrySite;
     Lazy<string> _fullLanguage;
+    private CultureInfo _cultureInfo = null;
 
     public MockLocalizationProvider(IProviderContainer container)
       : base(container)
@@ -139,8 +140,38 @@ namespace Atlantis.Framework.Testing.MockLocalization
 
     public void SetLanguage(string language)
     {
+      /// In order to implement this, full language would have to be updated to 
+      /// not be a lazy, so it could get reset in here.  Until this is actually
+      /// needed to be mocked, this effort is not needed.
+      throw new NotImplementedException();
     }
 
-    public CultureInfo CurrentCultureInfo { get; private set; }
+    public CultureInfo CurrentCultureInfo
+    {
+      get
+      {
+        if (_cultureInfo == null)
+        {
+          _cultureInfo = DetermineCultureInfo();
+        }
+        return _cultureInfo;
+      }
+    }
+
+    private CultureInfo DetermineCultureInfo()
+    {
+      CultureInfo result = CultureInfo.CurrentCulture;
+
+      try
+      {
+        CultureInfo localizedCulture = CultureInfo.GetCultureInfo(_fullLanguage.Value);
+        result = localizedCulture;
+      }
+      catch (CultureNotFoundException)
+      {
+      }
+
+      return result;
+    }
   }
 }

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using Atlantis.Framework.RuleEngine.Results;
 using Atlantis.Framework.ShopperValidator.Interface;
-using Atlantis.Framework.ShopperValidator.Interface.ShopperValidation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Atlantis.Framework.ShopperValidator.Test
@@ -35,7 +33,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestRuleEngineSlimShopperValid()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -102,7 +100,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREGoodShopper()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -115,7 +113,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadUsernameEmpty()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, string.Empty, "P4ssW0rd!", "P4ssW0rd!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, string.Empty, "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -127,7 +125,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadUsernameNull()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, null, "P4ssW0rd!", "P4ssW0rd!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, null, "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -145,7 +143,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
         longUsername += "A";
       }
 
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, longUsername, "P4ssW0rd!", "P4ssW0rd!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, longUsername, "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -157,7 +155,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadUsernameAllNumeric()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "123456789", "P4ssW0rd!", "P4ssW0rd!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "123456789", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -169,7 +167,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadUsernameInvalidChars()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "user;name", "P4ssW0rd!", "P4ssW0rd!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "user;name", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -184,7 +182,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBothBadPasswordsEmpty()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", string.Empty, string.Empty, "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", string.Empty, string.Empty, "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -196,7 +194,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBothBadPasswordsNull()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", null, null, "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", null, null, "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -208,7 +206,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordEmpty()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", string.Empty, "P4ssW0rd!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", string.Empty, "P4ssW0rd!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -220,7 +218,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadPassword2Empty()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", string.Empty, "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", string.Empty, "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -232,7 +230,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordNull()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", null, "P4ssW0rd!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", null, "P4ssW0rd!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -244,7 +242,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadPassword2Null()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", null, "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", null, "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -256,7 +254,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordRegexNoNumbers()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "PassWord!", "PassWord!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "PassWord!", "PassWord!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -268,7 +266,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordRegexNoCaps()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "p4ssw0rd!", "p4ssw0rd!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "p4ssw0rd!", "p4ssw0rd!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -280,7 +278,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordRegexBeginningSpace()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", " P4ssW0rd!", " P4ssW0rd!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", " P4ssW0rd!", " P4ssW0rd!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -298,7 +296,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
         shortPassword += "A";
       }
 
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", shortPassword, shortPassword, "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", shortPassword, shortPassword, "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -316,7 +314,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
         longPassword += "A";
       }
 
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", longPassword, longPassword, "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", longPassword, longPassword, "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -328,7 +326,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadPasswordMatch()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!!", "email@email.com");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!!", "1223", "email@email.com");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -343,7 +341,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadEmailEmpty()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", string.Empty);
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", string.Empty);
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -355,7 +353,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadEmailNull()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", null);
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", null);
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -373,7 +371,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
         longEmail += "c";
       }
 
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", longEmail);
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", longEmail);
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
@@ -385,12 +383,62 @@ namespace Atlantis.Framework.ShopperValidator.Test
     [DeploymentItem("atlantis.config")]
     public void TestREBadEmailRegex()
     {
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "email@emailcom");
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "1223", "email@emailcom");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       Assert.IsTrue(response.IsSuccess);
 
       EvaluateValid(response.ValidatedModel, ModelConstants.FACT_EMAIL);
+    }
+    #endregion
+
+    #region PIN Tests (count = 4)
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void TestREBadPinEmpty()
+    {
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", string.Empty, "email@email.com");
+      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+
+      Assert.IsTrue(response.IsSuccess);
+
+      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PIN);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void TestREBadPinNull()
+    {
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", null, "email@email.com");
+      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+
+      Assert.IsTrue(response.IsSuccess);
+
+      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PIN);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void TestREBadPinMaxLength()
+    {
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "12235", "email@email.com");
+      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+
+      Assert.IsTrue(response.IsSuccess);
+
+      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PIN);
+    }
+
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void TestREBadPinMinLength()
+    {
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, "username", "P4ssW0rd!", "P4ssW0rd!", "122", "email@email.com");
+      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+
+      Assert.IsTrue(response.IsSuccess);
+
+      EvaluateValid(response.ValidatedModel, ModelConstants.FACT_PIN);
     }
     #endregion
 

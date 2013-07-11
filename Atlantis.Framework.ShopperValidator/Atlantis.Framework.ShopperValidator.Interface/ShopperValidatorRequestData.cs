@@ -28,7 +28,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface
 
    public Dictionary<string, Dictionary<string, string>> ShopperBaseModel;
 
-   public ShopperValidatorRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string username, string password, string confirmPassword, string email)
+   public ShopperValidatorRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string username, string password, string confirmPassword, string pin, string email)
      : base(shopperId, sourceURL, orderId, pathway, pageCount)
    {
      ShopperBaseModel = new Dictionary<string, Dictionary<string, string>>(1);
@@ -37,11 +37,14 @@ namespace Atlantis.Framework.ShopperValidator.Interface
                             {ModelConstants.FACT_USERNAME, username},
                             {ModelConstants.FACT_PASSWORD, password},
                             {ModelConstants.FACT_PASSWORD2, confirmPassword},
+                            {ModelConstants.FACT_PIN, pin},
                             {ModelConstants.FACT_EMAIL, email},
                             {ModelConstants.FACT_USERNAME_MAX_LENGTH, Convert.ToString(LengthConstants.UsernameMaxLength)},
                             {ModelConstants.FACT_PASS_MAX_LENGTH, Convert.ToString(LengthConstants.PasswordMaxLength)},
                             {ModelConstants.FACT_PASS_MIN_LENGTH, Convert.ToString(LengthConstants.PasswordMinLength)},
                             {ModelConstants.FACT_PASS_REGEX, PasswordValidator.ExpressionRule.ServerPattern},
+                            {ModelConstants.FACT_PIN_MAX_LENGTH, Convert.ToString(LengthConstants.CallInPinMaxLength)},
+                            {ModelConstants.FACT_PIN_MIN_LENGTH, Convert.ToString(LengthConstants.CallInPinMinLength)},
                             {ModelConstants.FACT_EMAIL_REGEX, RegexConstants.EmailPattern},
                             {ModelConstants.FACT_EMAIL_MAX_LENGTH, Convert.ToString(LengthConstants.EmailMaxLength)},
                             {ModelConstants.FACT_NUMERIC_ONLY_REGEX, RegexConstants.NumericOnlyPattern},

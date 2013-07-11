@@ -184,6 +184,10 @@ namespace Atlantis.Framework.ShopperValidator.Impl
       {
         DoValidateUsernameSearch(requestData);
       }
+      if (!FactIsInvalid(validatedModel, ModelConstants.FACT_PIN, ModelConstants.FACT_PIN_MAX_LENGTH, ModelConstants.FACT_PIN_MIN_LENGTH))
+      {
+        DoValidatePinAllSameNumbers(requestData);
+      }
     }
 
     private bool FactIsInvalid(IModelResult validatedModel, params string[] factKeys)
@@ -212,6 +216,37 @@ namespace Atlantis.Framework.ShopperValidator.Impl
               {
                 fact.Status = ValidationResultStatus.InValid;
                 fact.Messages.Add("Username already exists");
+                model.ContainsInvalids = true;
+                break;
+              }
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    private void DoValidatePinAllSameNumbers(ShopperValidatorRequestData requestData)
+    {
+      string callInPin = requestData.ShopperBaseModel[ModelConstants.MODEL_ID_SHOPPERVALID][ModelConstants.FACT_PIN];
+      int callInPinNumeric = Convert.ToInt16(callInPin);
+      string baseUniformNumber = "";
+      for (int i = 0; i < callInPin.Length; i++)
+      {
+        baseUniformNumber += "1";
+      }
+      if (callInPinNumeric == 0 || callInPinNumeric % Convert.ToInt16(baseUniformNumber) == 0)
+      {
+        foreach (var model in _engineResults.ValidationResults)
+        {
+          if (model.ModelId == ModelConstants.MODEL_ID_SHOPPERVALID)
+          {
+            foreach (var fact in model.Facts)
+            {
+              if (fact.FactKey == ModelConstants.FACT_PIN)
+              {
+                fact.Status = ValidationResultStatus.InValid;
+                fact.Messages.Add("PIN must contain more than one digit");
                 model.ContainsInvalids = true;
                 break;
               }

@@ -5,6 +5,7 @@
       <Actions>
         <Execute ruleId="RValidateFUsername" />
         <Execute ruleId="RValidateFPassword" />
+        <Execute ruleId="RValidateFPin" />
         <Execute ruleId="RValidateFEmail" />
       </Actions>
     </RuleMain>
@@ -104,6 +105,61 @@
     </Rule>
     <!-- END Password rules -->
 
+    <!-- START Pin rules -->
+    <Rule id="RValidateFPin">
+      <Actions>
+        <Execute ruleId="RRequireFPin" />
+      </Actions>
+    </Rule>
+    <Rule id="RRequireFPin">
+      <Condition><![CDATA[ ISNULLOREMPTY(FPin) ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="True"><![CDATA[ "PIN is required." ]]></EvaluateMessage>
+        <Execute ruleId="RMaxLengthFPin" result="False" />
+        <Execute ruleId="RMinLengthFPin" result="False" />
+        <Execute ruleId="RNumericOnlyFPin" result="False" />
+        <Execute ruleId="RSequentialNumericAscFPin" result="False" />
+        <Execute ruleId="RSequentialNumericDescFPin" result="False" />
+      </Actions>
+    </Rule>
+    <Rule id="RMaxLengthFPin">
+      <Condition><![CDATA[ FPin @MAXLENGTH FPinMaxLength ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="False"><![CDATA[ "PIN cannot be longer than " + FPinMaxLength + " characters long." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RMinLengthFPin">
+      <Condition><![CDATA[ FPin @MINLENGTH FPinMinLength ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="False"><![CDATA[ "PIN must be at least " + FPinMinLength + " characters long." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RNumericOnlyFPin">
+      <Condition><![CDATA[ FPin @REGEX FNumericOnlyRegex ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="False">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="False"><![CDATA[ "PIN must contain only numbers." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RSequentialNumericAscFPin">
+      <Condition><![CDATA[ FPin @SUBSTRING "0123456789012" ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="True"><![CDATA[ "PIN cannot be any straight numerical sequence of digits." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <Rule id="RSequentialNumericDescFPin">
+      <Condition><![CDATA[ FPin @SUBSTRING "0987654321098" ]]></Condition>
+      <Actions>
+        <EvaluateIsValid factId="FPin" result="True">false</EvaluateIsValid>
+        <EvaluateMessage factId="FPin" result="True"><![CDATA[ "PIN cannot be any straight numerical sequence of digits." ]]></EvaluateMessage>
+      </Actions>
+    </Rule>
+    <!-- END Pin rules -->
+
     <!-- START Email rules -->
     <Rule id="RValidateFEmail">
       <Actions>
@@ -144,6 +200,7 @@
     <Fact id="FUsername"    key="txtUsername"         type="string" modelId="Shopper" />
     <Fact id="FPassword"    key="txtCreatePassword"   type="string" modelId="Shopper" />
     <Fact id="FPassword2"   key="txtCreatePassword2"  type="string" modelId="Shopper" />
+    <Fact id="FPin"         key="txtPin"              type="string" modelId="Shopper" />
     <Fact id="FEmail"       key="txtEmail"            type="string" modelId="Shopper" />
 
     <!--Values used to validate the other facts (regex, max, min, etc.)-->
@@ -152,6 +209,8 @@
     <Fact id="FPasswordMaxLength"  key="passwordMaxLength"  type="double" modelId="Shopper" />
     <Fact id="FPasswordMinLength"  key="passwordMinLength"  type="double" modelId="Shopper" />
     <Fact id="FPasswordRegex"      key="passwordRegex"      type="string" modelId="Shopper" />
+    <Fact id="FPinMaxLength"       key="pinMaxLength"       type="double" modelId="Shopper" />
+    <Fact id="FPinMinLength"       key="pinMinLength"       type="double" modelId="Shopper" />
     <Fact id="FEmailRegex"         key="emailRegex"         type="string" modelId="Shopper" />
     <Fact id="FEmailMaxLength"     key="emailMaxLength"     type="double" modelId="Shopper" />
     <Fact id="FNumericOnlyRegex"   key="numericOnlyRegex"   type="string" modelId="Shopper" />

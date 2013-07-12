@@ -18,6 +18,8 @@ namespace BotDetect.Web
   /// </summary>
   public sealed class CaptchaPersistence
   {
+    private const string SESSION_PREFIX = "LBD_V1_";
+
     private static IPersistenceProvider _userState = AspNetSessionPersistenceProvider.Persistence;
 
     /// <summary>
@@ -144,7 +146,7 @@ namespace BotDetect.Web
     /// the Locale is stored in user persistence using this key
     private static string GetLocaleKey(string captchaId)
     {
-      return "LBD_Locale_" + captchaId;
+      return SESSION_PREFIX+"Locale_" + captchaId;
     }
 
     private static void LoadLocale(CaptchaBase captcha, string captchaId)
@@ -184,7 +186,7 @@ namespace BotDetect.Web
     /// the codeLength is stored in user persistence using this key
     private static string GetCodeLengthKey(string captchaId)
     {
-      return "LBD_CodeLength_" + captchaId;
+      return SESSION_PREFIX+"CodeLength_" + captchaId;
     }
 
     private static void LoadCodeLength(CaptchaBase captcha, string captchaId)
@@ -228,7 +230,7 @@ namespace BotDetect.Web
     /// the codeStyle is stored in user persistence using this key
     private static string GetCodeStyleKey(string captchaId)
     {
-      return "LBD_CodeStyle_" + captchaId;
+      return SESSION_PREFIX+"CodeStyle_" + captchaId;
     }
 
     private static void LoadCodeStyle(CaptchaBase captcha, string captchaId)
@@ -293,7 +295,7 @@ namespace BotDetect.Web
     /// the customCharacterSetName is stored in user persistence using this key
     private static string GetCustomCharacterSetNameKey(string captchaId)
     {
-      return "LBD_CustomCharacterSetName_" + captchaId;
+      return SESSION_PREFIX+"CustomCharacterSetName_" + captchaId;
     }
 
     private static void LoadCustomCharacterSetName(CaptchaBase captcha, string captchaId)
@@ -333,7 +335,7 @@ namespace BotDetect.Web
     /// the imageStyle is stored in user persistence using this key
     private static string GetImageStyleKey(string captchaId)
     {
-      return "LBD_ImageStyle_" + captchaId;
+      return SESSION_PREFIX+"ImageStyle_" + captchaId;
     }
 
     private static void LoadImageStyle(CaptchaBase captcha, string captchaId)
@@ -377,7 +379,7 @@ namespace BotDetect.Web
     /// the imageFormat is stored in user persistence using this key
     private static string GetImageFormatKey(string captchaId)
     {
-      return "LBD_ImageFormat_" + captchaId;
+      return SESSION_PREFIX+"ImageFormat_" + captchaId;
     }
 
     private static void LoadImageFormat(CaptchaBase captcha, string captchaId)
@@ -447,7 +449,7 @@ namespace BotDetect.Web
     /// the imageSize is stored in user persistence using this key
     private static string GetImageSizeKey(string captchaId)
     {
-      return "LBD_ImageSize_" + captchaId;
+      return SESSION_PREFIX+"ImageSize_" + captchaId;
     }
 
     private static void LoadImageSize(CaptchaBase captcha, string captchaId)
@@ -492,7 +494,7 @@ namespace BotDetect.Web
     /// the soundStyle is stored in user persistence using this key
     private static string GetSoundStyleKey(string captchaId)
     {
-      return "LBD_SoundStyle_" + captchaId;
+      return SESSION_PREFIX+"SoundStyle_" + captchaId;
     }
 
     private static void LoadSoundStyle(CaptchaBase captcha, string captchaId)
@@ -539,7 +541,7 @@ namespace BotDetect.Web
     /// the soundFormat is stored in user persistence using this key
     private static string GetSoundFormatKey(string captchaId)
     {
-      return "LBD_SoundFormat_" + captchaId;
+      return SESSION_PREFIX+"SoundFormat_" + captchaId;
     }
 
     private static void LoadSoundFormat(CaptchaBase captcha, string captchaId)
@@ -585,7 +587,7 @@ namespace BotDetect.Web
     /// the codeCollection is stored in user persistence using this key
     private static string GetCodeCollectionKey(string captchaId)
     {
-      return "LBD_CodeCollection_" + captchaId;
+      return SESSION_PREFIX+"CodeCollection_" + captchaId;
     }
 
     private static byte[] SerializeObject<VT>(VT currentObject)
@@ -649,7 +651,7 @@ namespace BotDetect.Web
     // the customLightColor is saved in user persistence using this key
     private static string GetCustomLightColorKey(string captchaId)
     {
-      return "LBD_CustomLightColor_" + captchaId;
+      return SESSION_PREFIX+"CustomLightColor_" + captchaId;
     }
 
     private static void LoadCustomLightColor(CaptchaBase captcha, string captchaId)
@@ -694,7 +696,7 @@ namespace BotDetect.Web
     // the customDarkColor is saved in user persistence using this key
     private static string GetCustomDarkColorKey(string captchaId)
     {
-      return "LBD_CustomDarkColor_" + captchaId;
+      return SESSION_PREFIX+"CustomDarkColor_" + captchaId;
     }
 
     private static void LoadCustomDarkColor(CaptchaBase captcha, string captchaId)
@@ -741,7 +743,7 @@ namespace BotDetect.Web
     /// the captchaImageTooltip string is stored in user persistence using this key
     private static string GetCaptchaImageTooltipKey(string captchaId)
     {
-      return "LBD_CaptchaImageTooltip_" + captchaId;
+      return SESSION_PREFIX+"CaptchaImageTooltip_" + captchaId;
     }
 
     private static void LoadCaptchaImageTooltip(CaptchaControl captcha, string captchaId)
@@ -782,7 +784,7 @@ namespace BotDetect.Web
     /// the reloadIconTooltip string is stored in user persistence using this key
     private static string GetReloadIconTooltipKey(string captchaId)
     {
-      return "LBD_ReloadIconTooltip_" + captchaId;
+      return SESSION_PREFIX+"ReloadIconTooltip_" + captchaId;
     }
 
     private static void LoadReloadIconTooltip(CaptchaControl captcha, string captchaId)
@@ -823,7 +825,7 @@ namespace BotDetect.Web
     /// the soundIconTooltip string is stored in user persistence using this key
     private static string GetSoundIconTooltipKey(string captchaId)
     {
-      return "LBD_SoundIconTooltip_" + captchaId;
+      return SESSION_PREFIX+"SoundIconTooltip_" + captchaId;
     }
 
     private static void LoadSoundIconTooltip(CaptchaControl captcha, string captchaId)
@@ -864,7 +866,7 @@ namespace BotDetect.Web
     /// the useHorizontalIcons flag is stored in user persistence using this key
     private static string GetUseHorizontalIconsKey(string captchaId)
     {
-      return "LBD_UseHorizontalIcons_" + captchaId;
+      return SESSION_PREFIX+"UseHorizontalIcons_" + captchaId;
     }
 
     private static void LoadUseHorizontalIcons(CaptchaControl captcha, string captchaId)
@@ -910,7 +912,7 @@ namespace BotDetect.Web
     /// the useSmallIcons flag is stored in user persistence using this key
     private static string GetUseSmallIconsKey(string captchaId)
     {
-      return "LBD_UseSmallIcons_" + captchaId;
+      return SESSION_PREFIX+"UseSmallIcons_" + captchaId;
     }
 
     private static void LoadUseSmallIcons(CaptchaControl captcha, string captchaId)
@@ -956,7 +958,7 @@ namespace BotDetect.Web
     /// the iconsDivWidth value is stored in user persistence using this key
     private static string GetIconsDivWidthKey(string captchaId)
     {
-      return "LBD_IconsDivWidth_" + captchaId;
+      return SESSION_PREFIX+"IconsDivWidth_" + captchaId;
     }
 
     private static void LoadIconsDivWidth(CaptchaControl captcha, string captchaId)
@@ -1048,7 +1050,7 @@ namespace BotDetect.Web
         {
           if (BotDetectKeyPattern.IsMatch(key))
           {
-            int start = key.IndexOf("LBD_", StringComparison.Ordinal);
+            int start = key.IndexOf(SESSION_PREFIX, StringComparison.Ordinal);
             string externalKey = key.Substring(start);
 
             log.Append("    " + externalKey + ": ");

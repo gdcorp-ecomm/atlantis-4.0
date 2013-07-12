@@ -12,6 +12,9 @@ namespace Atlantis.Framework.Providers.Geo
     Lazy<IProxyContext> _proxyContext;
     Lazy<string> _requestCountryCode;
     Lazy<CountryResponseData> _countries;
+    Lazy<string> _ipAddress;
+
+    IGeoLocation _requestLocation = null;
 
     public GeoProvider(IProviderContainer container)
       : base(container)
@@ -20,6 +23,7 @@ namespace Atlantis.Framework.Providers.Geo
       _proxyContext = new Lazy<IProxyContext>(() => { return LoadProxyContext(); });
       _requestCountryCode = new Lazy<string>(() => { return DetermineRequestCountryCode(); });
       _countries = new Lazy<CountryResponseData>(() => { return LoadCountries(); });
+      _ipAddress = new Lazy<string>(() => { return GetRequestIP(); });
     }
 
     private IProxyContext LoadProxyContext()
@@ -35,11 +39,17 @@ namespace Atlantis.Framework.Providers.Geo
     private string DetermineRequestCountryCode()
     {
       string result = "us";
-      string ipAddress = GetRequestIP();
-
-      if (!string.IsNullOrEmpty(ipAddress))
+      if (!string.IsNullOrEmpty(_ipAddress.Value))
       {
-        result = LookupCountryByIP(ipAddress);      
+        string alreadyLoadedCountryCode;
+        if (TryGetCountryCodeFromLocation(out alreadyLoadedCountryCode))
+        {
+          result = alreadyLoadedCountryCode;
+        }
+        else
+        {
+          result = LookupCountryByIP(_ipAddress.Value);      
+        }
       }
 
       return result;
@@ -49,12 +59,34 @@ namespace Atlantis.Framework.Providers.Geo
     {
       string result = "us";
 
-      var request = new IPCountryLookupRequestData(ipAddress);
-      var response = (IPCountryLookupResponseData)Engine.Engine.ProcessRequest(request, GeoProviderEngineRequests.IPCountryLookup);
-
-      if (response.CountryFound)
+      try
       {
-        result = response.CountryCode;
+        var request = new IPCountryLookupRequestData(ipAddress);
+        var response = (IPCountryLookupResponseData)Engine.Engine.ProcessRequest(request, GeoProviderEngineRequests.IPCountryLookup);
+
+        if (response.CountryFound)
+        {
+          result = response.CountryCode;
+        }
+      }
+      catch (Exception ex)
+      {
+        AtlantisException exception = new AtlantisException("GeoProvider.LookupCountryByIP", 0, ex.Message, ex.StackTrace);
+        Engine.Engine.LogAtlantisException(exception);
+      }
+
+      return result;
+    }
+
+    private bool TryGetCountryCodeFromLocation(out string countryCode)
+    {
+      countryCode = null;
+      bool result = false;
+
+      if ((_requestLocation != null) && (!string.IsNullOrEmpty(_requestLocation.CountryCode)))
+      {
+        countryCode = _requestLocation.CountryCode;
+        result = true;
       }
 
       return result;
@@ -114,13 +146,61 @@ namespace Atlantis.Framework.Providers.Geo
     public bool IsUserInRegion(int regionTypeId, string regionName)
     {
       bool result = false;
-      
-      Country country = _countries.Value.FindCountryByCode(_requestCountryCode.Value);
-      if (country != null)
+
+      try
       {
-        var regionRequest = new RegionRequestData(regionTypeId, regionName);
-        var regionResponse = (RegionResponseData)DataCache.DataCache.GetProcessRequest(regionRequest, GeoProviderEngineRequests.Regions);
-        result = regionResponse.HasCountry(country.Id);
+        Country country = _countries.Value.FindCountryByCode(_requestCountryCode.Value);
+        if (country != null)
+        {
+          var regionRequest = new RegionRequestData(regionTypeId, regionName);
+          var regionResponse = (RegionResponseData)DataCache.DataCache.GetProcessRequest(regionRequest, GeoProviderEngineRequests.Regions);
+          result = regionResponse.HasCountry(country.Id);
+        }
+      }
+      catch (Exception ex)
+      {
+        AtlantisException exception = new AtlantisException("GeoProvider.IsUserInRegion", 0, ex.Message, ex.StackTrace);
+        Engine.Engine.LogAtlantisException(exception);
+      }
+
+      return result;
+    }
+
+    public IGeoLocation RequestGeoLocation
+    {
+      get 
+      {
+        if (_requestLocation == null)
+        {
+          _requestLocation = LoadGeoLocationFromIP(_ipAddress.Value);
+        }
+
+        return _requestLocation;
+      }
+    }
+
+    private IGeoLocation LoadGeoLocationFromIP(string ipAddress)
+    {
+      IGeoLocation result = null;
+
+      if (ipAddress != null)
+      {
+        try
+        {
+          var locationRequest = new IPLocationLookupRequestData(_ipAddress.Value);
+          var locationResponse = (IPLocationLookupResponseData)Engine.Engine.ProcessRequest(locationRequest, GeoProviderEngineRequests.IPLocationLookup);
+          result = GeoLocation.FromIPLocation(locationResponse.Location);
+        }
+        catch (Exception ex)
+        {
+          AtlantisException exception = new AtlantisException("GeoProvider.LoadGeoLocationFromIP", 0, ex.Message, ex.StackTrace);
+          Engine.Engine.LogAtlantisException(exception);
+        }
+      }
+
+      if (result == null)
+      {
+        result = GeoLocation.FromNotFound();
       }
 
       return result;

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeoLocation.cs" />
     <Compile Include="GeoProvider.cs" />
     <Compile Include="GeoProviderEngineRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

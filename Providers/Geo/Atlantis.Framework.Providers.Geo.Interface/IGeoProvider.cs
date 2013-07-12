@@ -1,10 +1,13 @@
-﻿
-namespace Atlantis.Framework.Providers.Geo.Interface
+﻿namespace Atlantis.Framework.Providers.Geo.Interface
 {
+  /// <summary>
+  /// Provides functionality related to GeoLocation, countrys, states, and regions
+  /// </summary>
   public interface IGeoProvider
   {
     /// <summary>
     /// Returns the country code based on the IP address of the current request.
+    /// Requires the GeoIP.dat country database
     /// </summary>
     string RequestCountryCode { get; }
 
@@ -22,5 +25,11 @@ namespace Atlantis.Framework.Providers.Geo.Interface
     /// <param name="regionName">Region name (see lu_region table)</param>
     /// <returns>true if the country code of the current request is in the given region (case-insensitive)</returns>
     bool IsUserInRegion(int regionTypeId, string regionName);
+
+    /// <summary>
+    /// Returns the detailed GeoLocation based on the IP address of the current request.
+    /// Requires the GeoIPLocation.dat city database
+    /// </summary>
+    IGeoLocation RequestGeoLocation { get; }
   }
 }

@@ -1,9 +1,12 @@
-﻿using Atlantis.Framework.Interface;
+﻿using Atlantis.Framework.Geo.Interface;
+using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.Geo.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Net;
+using System.Reflection;
 
 namespace Atlantis.Framework.Providers.Geo.Tests
 {
@@ -12,6 +15,7 @@ namespace Atlantis.Framework.Providers.Geo.Tests
   [DeploymentItem("Interop.gdDataCacheLib.dll")]
   [DeploymentItem("Atlantis.Framework.Geo.Impl.dll")]
   [DeploymentItem("GeoIP.dat")]
+  [DeploymentItem("GeoIPLocation.dat")]
   public class GeoProviderTests
   {
     private IGeoProvider CreateGeoProvider(string requestIP, bool isInternal = false, bool useMockProxy = false, string spoofip = null)
@@ -93,6 +97,58 @@ namespace Atlantis.Framework.Providers.Geo.Tests
       IGeoProvider geoProvider = CreateGeoProvider("1.179.3.3", false);
       Assert.IsFalse(geoProvider.IsUserInRegion(2, "EU"));
     }
+
+    [TestMethod]
+    public void UserLocation()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("97.74.104.201", false);
+      Assert.AreEqual("us", geoProvider.RequestGeoLocation.CountryCode);
+      Assert.AreEqual("Scottsdale", geoProvider.RequestGeoLocation.City);
+      Assert.AreNotEqual(0, geoProvider.RequestGeoLocation.Latitude);
+      Assert.AreNotEqual(0, geoProvider.RequestGeoLocation.Longitude);
+      Assert.AreNotEqual(0, geoProvider.RequestGeoLocation.MetroCode);
+
+      Assert.IsFalse(string.IsNullOrEmpty(geoProvider.RequestGeoLocation.GeoRegion));
+      Assert.IsFalse(string.IsNullOrEmpty(geoProvider.RequestGeoLocation.GeoRegionName));
+      Assert.IsFalse(string.IsNullOrEmpty(geoProvider.RequestGeoLocation.PostalCode));
+    }
+
+    [TestMethod]
+    public void UserLocationFirstSavesCountryCall()
+    {
+      ConfigElement countryLookupConfig;
+      Engine.Engine.TryGetConfigElement(GeoProviderEngineRequests.IPCountryLookup, out countryLookupConfig);
+      countryLookupConfig.ResetStats();
+
+      IGeoProvider geoProvider = CreateGeoProvider("97.74.104.201", false);
+      Assert.AreEqual("us", geoProvider.RequestGeoLocation.CountryCode);
+      Assert.AreEqual("us", geoProvider.RequestCountryCode);
+
+      ConfigElementStats stats = countryLookupConfig.ResetStats();
+      Assert.AreEqual(0, stats.Succeeded);
+      Assert.AreEqual(0, stats.Failed);
+    }
+
+    [TestMethod]
+    public void GeoLocationConstructorsFromNotFound()
+    {
+      Type geoLocationType = typeof(Atlantis.Framework.Providers.Geo.GeoLocation);
+      MethodInfo fromNotFound = geoLocationType.GetMethod("FromNotFound", BindingFlags.Static | BindingFlags.NonPublic);
+      IGeoLocation newNotFound = fromNotFound.Invoke(null, null) as IGeoLocation;
+      Assert.AreEqual(string.Empty, newNotFound.City);
+    }
+
+    [TestMethod]
+    public void GeoLocationConstructorsNullIPLocation()
+    {
+      Type geoLocationType = typeof(Atlantis.Framework.Providers.Geo.GeoLocation);
+      MethodInfo fromNull = geoLocationType.GetMethod("FromIPLocation", BindingFlags.Static | BindingFlags.NonPublic);
+      IPLocation nullLocation = null;
+      object[] parameters = new object[1] { nullLocation };
+      IGeoLocation newNotFound = fromNull.Invoke(null, parameters) as IGeoLocation;
+      Assert.AreEqual(string.Empty, newNotFound.City);
+    }
+
 
   }
 }

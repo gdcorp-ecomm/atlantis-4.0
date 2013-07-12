@@ -1,7 +1,44 @@
-﻿namespace Atlantis.Framework.Geo.Impl.IPLookup
+﻿using Atlantis.Framework.Geo.Interface;
+
+namespace Atlantis.Framework.Geo.Impl.IPLookup
 {
   internal static class InternalCountries
   {
+    private readonly static IPLocation _indiaCallCenter;
+    private readonly static IPLocation _otherInternalLocation;
+
+    static InternalCountries()
+    {
+      _indiaCallCenter = new IPLocation();
+      _indiaCallCenter.CountryCode = "in";
+      _indiaCallCenter.City = "Bangalore";
+      _indiaCallCenter.RegionName = "Karnataka";
+      _indiaCallCenter.Region = "19";
+
+      _otherInternalLocation = new IPLocation();
+      _otherInternalLocation.CountryCode = "us";
+      _otherInternalLocation.City = "Phoenix";
+      _otherInternalLocation.RegionName = "Arizona";
+      _otherInternalLocation.Region = "AZ";
+    }
+
+    internal static IPLocation LookupLocation(string ipAddress)
+    {
+      IPLocation result = null;
+
+      string countryCode = LookupCountryCode(ipAddress);
+      if (countryCode == "in")
+      {
+        result = _indiaCallCenter;
+      }
+      else if (countryCode == "us")
+      {
+        result = _otherInternalLocation;
+      }
+
+      return result;
+    }
+
     internal static string LookupCountryCode(string ipAddress)
     {
       string result = string.Empty;

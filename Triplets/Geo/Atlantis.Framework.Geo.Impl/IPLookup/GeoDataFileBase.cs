@@ -5,15 +5,16 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
 {
   internal abstract class GeoDataFileBase
   {
-    protected static int COUNTRY_BEGIN = 16776960;
-    protected static int MAX_RECORD_LENGTH = 4;
+    protected const int COUNTRY_BEGIN = 16776960;
+    protected const int MAX_RECORD_LENGTH = 4;
+    protected const int FULL_RECORD_LENGTH = 100;
 
-    private static int STRUCTURE_INFO_MAX_SIZE = 20;
-    private static int SEGMENT_RECORD_LENGTH = 3;
-    private static int STANDARD_RECORD_LENGTH = 3;
-    private static int ORG_RECORD_LENGTH = 4;
-    private static int STATE_BEGIN_REV0 = 16700000;
-    private static int STATE_BEGIN_REV1 = 16000000;
+    const int STRUCTURE_INFO_MAX_SIZE = 20;
+    const int SEGMENT_RECORD_LENGTH = 3;
+    const int STANDARD_RECORD_LENGTH = 3;
+    const int ORG_RECORD_LENGTH = 4;
+    const int STATE_BEGIN_REV0 = 16700000;
+    const int STATE_BEGIN_REV1 = 16000000;
     
     /// <summary>
     /// When updating this array from the maxmind API, 
@@ -47,34 +48,6 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       "ZM","ME","ZW","A1","A2","O1","AX","GG","IM","JE",
       "BL","MF", "BQ", "SS", "O1"	};
 
-    protected static String[] CountryNames = {
-      "N/A","Asia/Pacific Region","Europe","Andorra","United Arab Emirates","Afghanistan","Antigua and Barbuda","Anguilla","Albania","Armenia","Curacao",
-      "Angola","Antarctica","Argentina","American Samoa","Austria","Australia","Aruba","Azerbaijan","Bosnia and Herzegovina","Barbados",
-      "Bangladesh","Belgium","Burkina Faso","Bulgaria","Bahrain","Burundi","Benin","Bermuda","Brunei Darussalam","Bolivia",
-      "Brazil","Bahamas","Bhutan","Bouvet Island","Botswana","Belarus","Belize","Canada","Cocos (Keeling) Islands","Congo, The Democratic Republic of the",
-      "Central African Republic","Congo","Switzerland","Cote D'Ivoire","Cook Islands","Chile","Cameroon","China","Colombia","Costa Rica",
-      "Cuba","Cape Verde","Christmas Island","Cyprus","Czech Republic","Germany","Djibouti","Denmark","Dominica","Dominican Republic",
-      "Algeria","Ecuador","Estonia","Egypt","Western Sahara","Eritrea","Spain","Ethiopia","Finland","Fiji",
-      "Falkland Islands (Malvinas)","Micronesia, Federated States of","Faroe Islands","France","Sint Maarten (Dutch part)","Gabon","United Kingdom","Grenada","Georgia","French Guiana",
-      "Ghana","Gibraltar","Greenland","Gambia","Guinea","Guadeloupe","Equatorial Guinea","Greece","South Georgia and the South Sandwich Islands","Guatemala",
-      "Guam","Guinea-Bissau","Guyana","Hong Kong","Heard Island and McDonald Islands","Honduras","Croatia","Haiti","Hungary","Indonesia",
-      "Ireland","Israel","India","British Indian Ocean Territory","Iraq","Iran, Islamic Republic of","Iceland","Italy","Jamaica","Jordan",
-      "Japan","Kenya","Kyrgyzstan","Cambodia","Kiribati","Comoros","Saint Kitts and Nevis","Korea, Democratic People's Republic of","Korea, Republic of","Kuwait",
-      "Cayman Islands","Kazakhstan","Lao People's Democratic Republic","Lebanon","Saint Lucia","Liechtenstein","Sri Lanka","Liberia","Lesotho","Lithuania",
-      "Luxembourg","Latvia","Libya","Morocco","Monaco","Moldova, Republic of","Madagascar","Marshall Islands","Macedonia","Mali",
-      "Myanmar","Mongolia","Macau","Northern Mariana Islands","Martinique","Mauritania","Montserrat","Malta","Mauritius","Maldives",
-      "Malawi","Mexico","Malaysia","Mozambique","Namibia","New Caledonia","Niger","Norfolk Island","Nigeria","Nicaragua",
-      "Netherlands","Norway","Nepal","Nauru","Niue","New Zealand","Oman","Panama","Peru","French Polynesia",
-      "Papua New Guinea","Philippines","Pakistan","Poland","Saint Pierre and Miquelon","Pitcairn Islands","Puerto Rico","Palestinian Territory","Portugal","Palau",
-      "Paraguay","Qatar","Reunion","Romania","Russian Federation","Rwanda","Saudi Arabia","Solomon Islands","Seychelles","Sudan",
-      "Sweden","Singapore","Saint Helena","Slovenia","Svalbard and Jan Mayen","Slovakia","Sierra Leone","San Marino","Senegal","Somalia","Suriname",
-      "Sao Tome and Principe","El Salvador","Syrian Arab Republic","Swaziland","Turks and Caicos Islands","Chad","French Southern Territories","Togo","Thailand",
-      "Tajikistan","Tokelau","Turkmenistan","Tunisia","Tonga","Timor-Leste","Turkey","Trinidad and Tobago","Tuvalu","Taiwan",
-      "Tanzania, United Republic of","Ukraine","Uganda","United States Minor Outlying Islands","United States","Uruguay","Uzbekistan","Holy See (Vatican City State)","Saint Vincent and the Grenadines","Venezuela",
-      "Virgin Islands, British","Virgin Islands, U.S.","Vietnam","Vanuatu","Wallis and Futuna","Samoa","Yemen","Mayotte","Serbia","South Africa",
-      "Zambia","Montenegro","Zimbabwe","Anonymous Proxy","Satellite Provider","Other","Aland Islands","Guernsey","Isle of Man","Jersey",
-      "Saint Barthelemy","Saint Martin", "Bonaire, Saint Eustatius and Saba", "South Sudan", "Other" };
-
     protected byte[] FileData { get; private set; }
     protected DatabaseInfo DataInfo { get; private set; }
     protected byte DatabaseType { get; private set; }
@@ -101,14 +74,14 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
     {
       int i, j;
       byte[] delim = new byte[3];
-      byte[] buf = new byte[GeoDataFileBase.SEGMENT_RECORD_LENGTH];
+      byte[] buf = new byte[SEGMENT_RECORD_LENGTH];
       DatabaseType = Convert.ToByte(DatabaseInfo.COUNTRY_EDITION);
-      _recordLength = GeoDataFileBase.STANDARD_RECORD_LENGTH;
+      _recordLength = STANDARD_RECORD_LENGTH;
 
       using (MemoryStream dataStream = new MemoryStream(FileData, false))
       {
         dataStream.Seek(-3, SeekOrigin.End);
-        for (i = 0; i < GeoDataFileBase.STRUCTURE_INFO_MAX_SIZE; i++)
+        for (i = 0; i < STRUCTURE_INFO_MAX_SIZE; i++)
         {
           dataStream.Read(delim, 0, 3);
           if (delim[0] == 255 && delim[1] == 255 && delim[2] == 255)
@@ -124,8 +97,8 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
             if (DatabaseType == DatabaseInfo.REGION_EDITION_REV0)
             {
               _databaseSegments = new int[1];
-              _databaseSegments[0] = GeoDataFileBase.STATE_BEGIN_REV0;
-              _recordLength = GeoDataFileBase.STANDARD_RECORD_LENGTH;
+              _databaseSegments[0] = STATE_BEGIN_REV0;
+              _recordLength = STANDARD_RECORD_LENGTH;
             }
             else if (DatabaseType == DatabaseInfo.REGION_EDITION_REV1)
             {
@@ -191,9 +164,77 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
       }
     }
 
+    protected int SeekCountry(long ipAddressNumber)
+    {
+      byte[] buf = new byte[2 * MAX_RECORD_LENGTH];
+      int[] x = new int[2];
+      int offset = 0;
+      for (int depth = 31; depth >= 0; depth--)
+      {
+        try
+        {
+          for (int i = 0; i < (2 * MAX_RECORD_LENGTH); i++)
+          {
+            buf[i] = FileData[i + (2 * RecordLength * offset)];
+          }
+        }
+        catch (IOException)
+        {
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+          x[i] = 0;
+          for (int j = 0; j < RecordLength; j++)
+          {
+            int y = buf[(i * RecordLength) + j];
+            if (y < 0)
+            {
+              y += 256;
+            }
+            x[i] += (y << (j * 8));
+          }
+        }
+
+        if ((ipAddressNumber & (1 << depth)) > 0)
+        {
+          if (x[1] >= DatabaseSegments[0])
+          {
+            return x[1];
+          }
+          offset = x[1];
+        }
+        else
+        {
+          if (x[0] >= DatabaseSegments[0])
+          {
+            return x[0];
+          }
+          offset = x[0];
+        }
+      }
+
+      return 0;
+    }
+
     protected static int UnsignedByteToInt(byte b)
     {
       return (int)b & 0xFF;
+    }
+
+    protected static long BytesToLong(byte[] address)
+    {
+      long result = 0;
+      for (int i = 0; i < 4; ++i)
+      {
+        long y = address[i];
+        if (y < 0)
+        {
+          y += 256;
+        }
+        result += y << ((3 - i) * 8);
+      }
+      return result;
     }
   }
 

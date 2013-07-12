@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Net;
 
 namespace Atlantis.Framework.Geo.Impl.IPLookup
@@ -48,74 +47,6 @@ namespace Atlantis.Framework.Geo.Impl.IPLookup
     {
       long ipAddressNumber = BytesToLong(address.GetAddressBytes());
       return SeekCountry(ipAddressNumber);
-    }
-
-    private int SeekCountry(long ipAddressNumber)
-    {
-      byte[] buf = new byte[2 * MAX_RECORD_LENGTH];
-      int[] x = new int[2];
-      int offset = 0;
-      for (int depth = 31; depth >= 0; depth--)
-      {
-        try
-        {
-          for (int i = 0; i < (2 * MAX_RECORD_LENGTH); i++)
-          {
-            buf[i] = FileData[i + (2 * RecordLength * offset)];
-          }
-        }
-        catch (IOException)
-        {
-        }
-
-        for (int i = 0; i < 2; i++)
-        {
-          x[i] = 0;
-          for (int j = 0; j < RecordLength; j++)
-          {
-            int y = buf[(i * RecordLength) + j];
-            if (y < 0)
-            {
-              y += 256;
-            }
-            x[i] += (y << (j * 8));
-          }
-        }
-
-        if ((ipAddressNumber & (1 << depth)) > 0)
-        {
-          if (x[1] >= DatabaseSegments[0])
-          {
-            return x[1];
-          }
-          offset = x[1];
-        }
-        else
-        {
-          if (x[0] >= DatabaseSegments[0])
-          {
-            return x[0];
-          }
-          offset = x[0];
-        }
-      }
-
-      return 0;
-    }
-
-    private static long BytesToLong(byte[] address)
-    {
-      long result = 0;
-      for (int i = 0; i < 4; ++i)
-      {
-        long y = address[i];
-        if (y < 0)
-        {
-          y += 256;
-        }
-        result += y << ((3 - i) * 8);
-      }
-      return result;
     }
   }
 

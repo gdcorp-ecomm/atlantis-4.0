@@ -45,12 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPCountryLookupRequest.cs" />
+    <Compile Include="IPLocationLookupRequest.cs" />
+    <Compile Include="IPLookup\LocationDataIPv4.cs" />
     <Compile Include="IPLookup\CountryDataIPv4.cs" />
     <Compile Include="CountryRequest.cs" />
     <Compile Include="IPLookup\DatabaseInfo.cs" />
     <Compile Include="IPLookup\GeoDataFileBase.cs" />
     <Compile Include="IPLookup\GeoFilePath.cs" />
     <Compile Include="IPLookup\InternalCountries.cs" />
+    <Compile Include="IPLookup\RegionName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionRequest.cs" />
     <Compile Include="StateRequest.cs" />

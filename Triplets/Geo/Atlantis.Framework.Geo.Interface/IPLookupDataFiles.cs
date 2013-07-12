@@ -2,6 +2,7 @@
 {
   public static class IPLookupDataFiles
   {
+    static string _locationFile = "GeoIPLocation.dat";
     static string _countryFile = "GeoIP.dat";
     static IPLookupPathTypes _pathType = IPLookupPathTypes.AssemblyLocation;
 
@@ -9,6 +10,12 @@
     {
       get { return _countryFile; }
       set { _countryFile = value; }
+    }
+
+    public static string LocationFile
+    {
+      get { return _locationFile; }
+      set { _locationFile = value; }
     }
 
     public static IPLookupPathTypes PathType

@@ -46,7 +46,10 @@
     <Compile Include="Country.cs" />
     <Compile Include="CountryRequestData.cs" />
     <Compile Include="CountryResponseData.cs" />
+    <Compile Include="IPLocationLookupRequestData.cs" />
+    <Compile Include="IPLocationLookupResponseData.cs" />
     <Compile Include="IPCountryLookupResponseData.cs" />
+    <Compile Include="IPLocation.cs" />
     <Compile Include="IPLookupPathTypes.cs" />
     <Compile Include="IPLookupDataFiles.cs" />
     <Compile Include="IPLookupRequestData.cs" />

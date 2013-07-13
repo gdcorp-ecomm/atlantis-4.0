@@ -44,16 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormFieldTypes.cs" />
+    <Compile Include="DotTypeFormFieldTypes.cs" />
     <Compile Include="Handlers\IDotTypeFormFieldTypeHandler.cs" />
     <Compile Include="IDotTypeClaimsSchema.cs" />
     <Compile Include="IDotTypeFormsItem.cs" />
     <Compile Include="IDotTypeFormsField.cs" />
     <Compile Include="IDotTypeFormsForm.cs" />
     <Compile Include="IDotTypeFormsSchema.cs" />
-    <Compile Include="Handlers\IDotTypeFormTransformHandler.cs" />
     <Compile Include="IDotTypeRegistrationProvider.cs" />
+    <Compile Include="IFormField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Atlantis.Framework.Engine\Atlantis.Framework.Interface\Atlantis.Framework.Interface.csproj">

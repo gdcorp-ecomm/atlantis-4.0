@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 
@@ -7,49 +6,49 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
 {
   public class TransformHandlerHelper
   {
-    public static FormFieldTypes GetFormFieldType(string fieldType)
+    public static DotTypeFormFieldTypes GetFormFieldType(string fieldType)
     {
-      FormFieldTypes formFieldType;
+      DotTypeFormFieldTypes formFieldType;
       switch (fieldType.ToLowerInvariant())
       {
         case "claims":
-          formFieldType = FormFieldTypes.Claims;
+          formFieldType = DotTypeFormFieldTypes.Claims;
           break;
         case "checkbox":
-          formFieldType = FormFieldTypes.Checkbox;
+          formFieldType = DotTypeFormFieldTypes.Checkbox;
           break;
         case "select":
-          formFieldType = FormFieldTypes.Select;
+          formFieldType = DotTypeFormFieldTypes.Select;
           break;
         case "radio":
-          formFieldType = FormFieldTypes.Radio;
+          formFieldType = DotTypeFormFieldTypes.Radio;
           break;
         case "string":
-          formFieldType = FormFieldTypes.String;
+          formFieldType = DotTypeFormFieldTypes.String;
           break;
         case "number":
-          formFieldType = FormFieldTypes.Number;
+          formFieldType = DotTypeFormFieldTypes.Number;
           break;
         case "date":
-          formFieldType = FormFieldTypes.Date;
+          formFieldType = DotTypeFormFieldTypes.Date;
           break;
         case "datetime":
-          formFieldType = FormFieldTypes.Datetime;
+          formFieldType = DotTypeFormFieldTypes.Datetime;
           break;
         case "email":
-          formFieldType = FormFieldTypes.Email;
+          formFieldType = DotTypeFormFieldTypes.Email;
           break;
         case "phone":
-          formFieldType = FormFieldTypes.Phone;
+          formFieldType = DotTypeFormFieldTypes.Phone;
           break;
         default:
-          formFieldType = FormFieldTypes.None;
+          formFieldType = DotTypeFormFieldTypes.None;
           break;
       }
       return formFieldType;
     }
 
-    public static bool SetFieldTypeData(FormFieldTypes formFieldType, IProviderContainer providerContainer, string domain, IDotTypeFormsField field)
+    public static bool SetFieldTypeData(DotTypeFormFieldTypes formFieldType, IProviderContainer providerContainer, string domain, IDotTypeFormsField field)
     {
       var result = true;
 
@@ -57,35 +56,35 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Handlers
       {
         switch (formFieldType)
         {
-          case FormFieldTypes.Claims:
+          case DotTypeFormFieldTypes.Claims:
             var tuple = new Tuple<IDotTypeFormsField, string>(field, domain);
             providerContainer.SetData(FieldTypeDataKeyConstants.CLAIM_DATA_KEY, tuple);
             break;
-          case FormFieldTypes.Checkbox:
+          case DotTypeFormFieldTypes.Checkbox:
             providerContainer.SetData(FieldTypeDataKeyConstants.CHECKBOX_DATA_KEY, field);
             break;
-          case FormFieldTypes.Select:
+          case DotTypeFormFieldTypes.Select:
             providerContainer.SetData(FieldTypeDataKeyConstants.SELECT_DATA_KEY, field);
             break;
-          case FormFieldTypes.Radio:
+          case DotTypeFormFieldTypes.Radio:
             providerContainer.SetData(FieldTypeDataKeyConstants.RADIO_DATA_KEY, field);
             break;
-          case FormFieldTypes.String:
+          case DotTypeFormFieldTypes.String:
             providerContainer.SetData(FieldTypeDataKeyConstants.STRING_DATA_KEY, field);
             break;
-          case FormFieldTypes.Number:
+          case DotTypeFormFieldTypes.Number:
             providerContainer.SetData(FieldTypeDataKeyConstants.NUMBER_DATA_KEY, field);
             break;
-          case FormFieldTypes.Date:
+          case DotTypeFormFieldTypes.Date:
             providerContainer.SetData(FieldTypeDataKeyConstants.DATE_DATA_KEY, field);
             break;
-          case FormFieldTypes.Datetime:
+          case DotTypeFormFieldTypes.Datetime:
             providerContainer.SetData(FieldTypeDataKeyConstants.DATETIME_DATA_KEY, field);
             break;
-          case FormFieldTypes.Phone:
+          case DotTypeFormFieldTypes.Phone:
             providerContainer.SetData(FieldTypeDataKeyConstants.PHONE_DATA_KEY, field);
             break;
-          case FormFieldTypes.Email:
+          case DotTypeFormFieldTypes.Email:
             providerContainer.SetData(FieldTypeDataKeyConstants.EMAIL_DATA_KEY, field);
             break;
           default:

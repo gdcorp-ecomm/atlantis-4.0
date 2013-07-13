@@ -24,58 +24,25 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Tests
     }
 
     [TestMethod]
-    public void DotTypeFormsSchemaMobileRichSuccess()
+    public void DotTypeFormsSchemaSuccess()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
-      Dictionary<string, string> htmlData;
+      IDictionary<string, IList<IFormField>> formFieldsByDomain;
       string[] domains = { "domain1.shop", "domain2.shop" };
-      bool isSuccess = provider.GetDotTypeFormSchemas(1640, "MOBILE", "GA", "EN", domains, ViewTypes.MobileRich, out htmlData);
+      bool isSuccess = provider.GetDotTypeFormSchemas(1640, "MOBILE", "GA", "EN", domains, out formFieldsByDomain);
       Assert.AreEqual(true, isSuccess);
-      Assert.AreEqual(true, htmlData.Count > 0);
-    }
-
-    [TestMethod]
-    public void DotTypeFormsSchemaMobileDefaultSuccess()
-    {
-      IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
-      Dictionary<string, string> htmlData;
-      string[] domains = { "domain1.shop", "domain2.shop" };
-      bool isSuccess = provider.GetDotTypeFormSchemas(1640, "MOBILE", "GA", "EN", domains, ViewTypes.MobileDefault, out htmlData);
-      Assert.AreEqual(true, isSuccess);
-      Assert.AreEqual(true, htmlData.Count > 0);
+      Assert.AreEqual(true, formFieldsByDomain.Count > 0);
     }
 
     [TestMethod]
     public void DotTypeFormsSchemaFailure()
     {
       IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
-      Dictionary<string, string> htmlData;
+      IDictionary<string, IList<IFormField>> formFieldsByDomain;
       string[] domains = { "domain1.shop", "domain2.shop" };
-      bool isSuccess = provider.GetDotTypeFormSchemas(-1, "name of placement", "GA", "EN", domains, ViewTypes.MobileRich, out htmlData);
+      bool isSuccess = provider.GetDotTypeFormSchemas(-1, "name of placement", "GA", "EN", domains, out formFieldsByDomain);
       Assert.AreEqual(false, isSuccess);
-      Assert.AreEqual(true, htmlData.Count == 0);
-    }
-
-    [TestMethod]
-    public void DotTypeClaimsSuccess()
-    {
-      IDotTypeRegistrationProvider provider = NewDotTypeRegistrationProvider();
-
-      string[] domains = {"domain1.shop", "domain2.shop"};
-      IDotTypeClaimsSchema dotTypeClaims;
-      bool isSuccess = provider.GetClaimsSchema(domains, out dotTypeClaims);
-
-      Assert.AreEqual(true, isSuccess);
-      
-      string claimsXml;
-      Assert.AreEqual(true, dotTypeClaims.TryGetClaimsXmlByDomain("domain1.shop", out claimsXml));
-
-      string noticeXml;
-      Assert.AreEqual(true, dotTypeClaims.TryGetNoticeXmlByDomain("domain1.shop", out noticeXml));
-
-      Assert.AreEqual(false, dotTypeClaims.TryGetClaimsXmlByDomain("domain2.shop", out claimsXml));
-
-      Assert.AreEqual(false, dotTypeClaims.TryGetNoticeXmlByDomain("domain2.shop", out noticeXml));
+      Assert.AreEqual(true, formFieldsByDomain.Count == 0);
     }
 
     [TestMethod]

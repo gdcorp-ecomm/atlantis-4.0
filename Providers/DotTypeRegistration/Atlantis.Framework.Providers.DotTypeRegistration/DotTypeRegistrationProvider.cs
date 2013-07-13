@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Atlantis.Framework.DotTypeClaims.Interface;
 using Atlantis.Framework.DotTypeValidation.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Factories;
+using Atlantis.Framework.Providers.DotTypeRegistration.Handlers;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 using Atlantis.Framework.Interface;
 using Atlantis.Framework.DotTypeForms.Interface;
@@ -41,11 +43,10 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    public bool GetDotTypeFormSchemas(int tldId, string placement, string phase, string language, string[] domains, ViewTypes viewType, 
-                                      out Dictionary<string, string> dotTypeFormSchemasHtml)
+    public bool GetDotTypeFormSchemas(int tldId, string placement, string phase, string language, string[] domains, out IDictionary<string, IList<IFormField>> formFieldsByDomain)
     {
       var success = false;
-      dotTypeFormSchemasHtml = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      formFieldsByDomain = new Dictionary<string, IList<IFormField>>(StringComparer.OrdinalIgnoreCase);
 
       try
       {
@@ -54,12 +55,12 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
 
         if (success && dotTypeFormSchema != null)
         {
-          success = TransformFormSchemaToHtml(domains, viewType, dotTypeFormSchema, out dotTypeFormSchemasHtml);
+          success = TransformFormSchemaToFormFields(domains, dotTypeFormSchema, out formFieldsByDomain);
         }
       }
       catch (Exception ex)
       {
-        var data = "tldId: " + tldId + ", placement: " + placement + ", phase: " + phase + ", language: " + language + ", viewtype: " + viewType.ToString();
+        var data = "tldId: " + tldId + ", placement: " + placement + ", phase: " + phase + ", language: " + language;
         var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeFormSchemas", "0", ex.Message + ex.StackTrace, data, null, null);
         Engine.Engine.LogAtlantisException(exception);
       }
@@ -93,47 +94,60 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration
       return success;
     }
 
-    private bool TransformFormSchemaToHtml(string[] domains, ViewTypes viewType, IDotTypeFormsSchema dotTypeFormSchema, out Dictionary<string, string> dotTypeFormSchemasHtml)
+    private bool TransformFormSchemaToFormFields(IEnumerable<string> domains, IDotTypeFormsSchema formSchema, out IDictionary<string, IList<IFormField>> formFieldsByDomain)
     {
       bool success = false;
-      dotTypeFormSchemasHtml = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      formFieldsByDomain = new Dictionary<string, IList<IFormField>>(StringComparer.OrdinalIgnoreCase);
 
       try
       {
-        IDotTypeFormTransformHandler transformType = DotTypeFormTransformFactory.GetFormTransformHandler(viewType);
-        if (transformType != null)
+        if (formSchema.Form != null)
         {
-          success = transformType.TransformFormToHtml(dotTypeFormSchema, domains, Container, out dotTypeFormSchemasHtml);
+          var form = formSchema.Form;
+          var fields = form.FieldCollection;
+
+          foreach (var domain in domains)
+          {
+            IList<IFormField> formFieldsForDomain = new List<IFormField>();
+            foreach (var field in fields)
+            {
+              var formFieldType = TransformHandlerHelper.GetFormFieldType(field.FieldType);
+              if (formFieldType != DotTypeFormFieldTypes.None)
+              {
+                if (TransformHandlerHelper.SetFieldTypeData(formFieldType, Container, domain, field))
+                {
+                  IDotTypeFormFieldTypeHandler fieldTypeHandler = DotTypeFormFieldTypeFactory.GetFormFieldTypeHandler(formFieldType);
+                  if (fieldTypeHandler != null)
+                  {
+                    IList<IFormField> formFieldList;
+                    if (fieldTypeHandler.RenderDotTypeFormField(formFieldType, Container, out formFieldList))
+                    {
+                      foreach (var formField in formFieldList)
+                      {
+                        formFieldsForDomain.Add(formField);
+                      }
+                    }
+                  }
+                }
+              }
+              else
+              {
+                var exception = new AtlantisException("DotTypeRegistrationProvider.TransformFormSchemaToFormFields", "0", "Invalid field type", field.FieldName, null, null);
+                Engine.Engine.LogAtlantisException(exception);
+              }
+            }
+            formFieldsByDomain[domain] = formFieldsForDomain;
+          }
+
+          if (formFieldsByDomain.Count > 0)
+          {
+            success = true;
+          }
         }
       }
       catch (Exception)
       {
         success = false;
-      }
-
-      return success;
-    }
-
-    public bool GetClaimsSchema(string[] domains, out IDotTypeClaimsSchema dotTypeClaimsSchema)
-    {
-      var success = false;
-      dotTypeClaimsSchema = null;
-
-      try
-      {
-        var request = new DotTypeClaimsRequestData(domains);
-        var response = (DotTypeClaimsResponseData)DataCache.DataCache.GetProcessRequest(request, DotTypeRegistrationEngineRequests.DotTypeClaimsRequest);
-        if (response.IsSuccess)
-        {
-          dotTypeClaimsSchema = response.DotTypeClaims;
-          success = true;
-        }
-      }
-      catch (Exception ex)
-      {
-        var data = "domains: " + string.Join(",", domains);
-        var exception = new AtlantisException("DotTypeRegistrationProvider.GetDotTypeClaims", "0", ex.Message + ex.StackTrace, data, null, null);
-        Engine.Engine.LogAtlantisException(exception);
       }
 
       return success;

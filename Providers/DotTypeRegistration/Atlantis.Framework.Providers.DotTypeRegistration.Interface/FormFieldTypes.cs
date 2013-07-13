@@ -3,15 +3,16 @@
   public enum FormFieldTypes
   {
     None = -1,
-    Claims = 0,
-    Select = 1,
-    Checkbox = 2,
-    Radio = 3,
-    String = 4,
-    Number = 5,
-    Date = 6,
-    Datetime = 7,
-    Email = 8,
-    Phone = 9
+    Label = 0,
+    InputText = 1,
+    InputNumber = 2,
+    InputDate = 3,
+    InputDatetime = 4,
+    InputEmail = 5,
+    InputPhone = 6,
+    Checkbox = 7,
+    Select = 8,
+    Radio = 9,
+    Hidden = 10
   }
 }

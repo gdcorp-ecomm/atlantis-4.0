@@ -1,9 +1,10 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System.Collections.Generic;
+using Atlantis.Framework.Interface;
 
 namespace Atlantis.Framework.Providers.DotTypeRegistration.Interface.Handlers
 {
   public interface IDotTypeFormFieldTypeHandler
   {
-    bool RenderField(FormFieldTypes fieldType, IProviderContainer providerContainer, out string htmlData);
+    bool RenderDotTypeFormField(DotTypeFormFieldTypes fieldType, IProviderContainer providerContainer, out IList<IFormField> formFields);
   }
 }

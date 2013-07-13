@@ -1,5 +1,4 @@
-﻿using Atlantis.Framework.Providers.DotTypeRegistration.Handlers.MobileDefault;
-using Atlantis.Framework.Providers.DotTypeRegistration.Handlers.MobileRich;
+﻿using Atlantis.Framework.Providers.DotTypeRegistration.Handlers;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface;
 using Atlantis.Framework.Providers.DotTypeRegistration.Interface.Handlers;
 
@@ -7,81 +6,41 @@ namespace Atlantis.Framework.Providers.DotTypeRegistration.Factories
 {
   public static class DotTypeFormFieldTypeFactory
   {
-    public static IDotTypeFormFieldTypeHandler GetFormFieldTypeHandler(ViewTypes viewType, FormFieldTypes fieldType)
+    public static IDotTypeFormFieldTypeHandler GetFormFieldTypeHandler(DotTypeFormFieldTypes fieldType)
     {
       IDotTypeFormFieldTypeHandler fieldTypeHandler = null;
 
-      switch (viewType)
+      switch (fieldType)
       {
-        case ViewTypes.MobileRich:
-          switch (fieldType)
-          {
-            case FormFieldTypes.Claims:
-              fieldTypeHandler = new MobileRichClaimFieldTypeHandler();
-              break;
-            case FormFieldTypes.Checkbox:
-              fieldTypeHandler = new MobileRichCheckboxFieldTypeHandler();
-              break;
-            case FormFieldTypes.Select:
-              fieldTypeHandler = new MobileRichSelectFieldTypeHandler();
-              break;
-            case FormFieldTypes.Radio:
-              fieldTypeHandler = new MobileRichRadioFieldTypeHandler();
-              break;
-            case FormFieldTypes.String:
-              fieldTypeHandler = new MobileRichStringFieldTypeHandler();
-              break;
-            case FormFieldTypes.Number:
-              fieldTypeHandler = new MobileRichNumberFieldTypeHandler();
-              break;
-            case FormFieldTypes.Date:
-              fieldTypeHandler = new MobileRichDateFieldTypeHandler();
-              break;
-            case FormFieldTypes.Datetime:
-              fieldTypeHandler = new MobileRichDatetimeFieldTypeHandler();
-              break;
-            case FormFieldTypes.Phone:
-              fieldTypeHandler = new MobileRichPhoneFieldTypeHandler();
-              break;
-            case FormFieldTypes.Email:
-              fieldTypeHandler = new MobileRichEmailFieldTypeHandler();
-              break;
-          }
+        case DotTypeFormFieldTypes.Claims:
+          fieldTypeHandler = new ClaimFieldTypeHandler();
           break;
-        case ViewTypes.MobileDefault:
-          switch (fieldType)
-          {
-            case FormFieldTypes.Claims:
-              fieldTypeHandler = new MobileDefaultClaimFieldTypeHandler();
-              break;
-            case FormFieldTypes.Checkbox:
-              fieldTypeHandler = new MobileDefaultCheckboxFieldTypeHandler();
-              break;
-            case FormFieldTypes.Select:
-              fieldTypeHandler = new MobileDefaultSelectFieldTypeHandler();
-              break;
-            case FormFieldTypes.Radio:
-              fieldTypeHandler = new MobileDefaultRadioFieldTypeHandler();
-              break;
-            case FormFieldTypes.String:
-              fieldTypeHandler = new MobileDefaultStringFieldTypeHandler();
-              break;
-            case FormFieldTypes.Number:
-              fieldTypeHandler = new MobileDefaultNumberFieldTypeHandler();
-              break;
-            case FormFieldTypes.Date:
-              fieldTypeHandler = new MobileDefaultDateFieldTypeHandler();
-              break;
-            case FormFieldTypes.Datetime:
-              fieldTypeHandler = new MobileDefaultDatetimeFieldTypeHandler();
-              break;
-            case FormFieldTypes.Phone:
-              fieldTypeHandler = new MobileDefaultPhoneFieldTypeHandler();
-              break;
-            case FormFieldTypes.Email:
-              fieldTypeHandler = new MobileDefaultEmailFieldTypeHandler();
-              break;
-          }
+        case DotTypeFormFieldTypes.Checkbox:
+          fieldTypeHandler = new CheckboxFieldTypeHandler();
+          break;
+        case DotTypeFormFieldTypes.Select:
+          fieldTypeHandler = new SelectFieldTypeHandler();
+          break;
+        case DotTypeFormFieldTypes.Radio:
+          fieldTypeHandler = new RadioFieldTypeHandler();
+          break;
+        case DotTypeFormFieldTypes.String:
+          fieldTypeHandler = new StringFieldTypeHandler();
+          break;
+        case DotTypeFormFieldTypes.Number:
+          fieldTypeHandler = new NumberFieldTypeHandler();
+          break;
+        case DotTypeFormFieldTypes.Date:
+          fieldTypeHandler = new DateFieldTypeHandler();
+          break;
+        case DotTypeFormFieldTypes.Datetime:
+          fieldTypeHandler = new DatetimeFieldTypeHandler();
+          break;
+        case DotTypeFormFieldTypes.Phone:
+          fieldTypeHandler = new PhoneFieldTypeHandler();
+          break;
+        case DotTypeFormFieldTypes.Email:
+          fieldTypeHandler = new EmailFieldTypeHandler();
           break;
       }
 

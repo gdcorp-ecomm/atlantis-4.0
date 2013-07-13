@@ -10,6 +10,7 @@ using Atlantis.Framework.Interface;
 using Atlantis.Framework.RuleEngine.Results;
 using Atlantis.Framework.SearchShoppers.Interface;
 using Atlantis.Framework.ShopperValidator.Interface;
+using Atlantis.Framework.ShopperValidator.Interface.LanguageResources;
 using Atlantis.Framework.ShopperValidator.Interface.RuleConstants;
 using Atlantis.Framework.ShopperValidator.Interface.ShopperValidation;
 using Atlantis.Framework.ShopperValidator.Interface.ValidationRules;
@@ -67,60 +68,60 @@ namespace Atlantis.Framework.ShopperValidator.Impl
         #region Create Rules
         #region Name and Birthday Rules
         if (shopperToValidate.FirstName.Value != null)
-          shopperToValidate.FirstName.RuleContainer = new FirstNameRule(shopperToValidate.FirstName.Value, isRequired: shopperToValidate.FirstName.IsRequired);
+          shopperToValidate.FirstName.RuleContainer = new FirstNameRule(shopperToValidate.FirstName.Value, isRequired: shopperToValidate.FirstName.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.LastName.Value != null)
-          shopperToValidate.LastName.RuleContainer = new LastNameRule(shopperToValidate.LastName.Value, isRequired: shopperToValidate.LastName.IsRequired);
+          shopperToValidate.LastName.RuleContainer = new LastNameRule(shopperToValidate.LastName.Value, isRequired: shopperToValidate.LastName.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.BirthDay.Value != null)
           shopperToValidate.BirthDay.RuleContainer = new BirthDayRule(shopperToValidate.BirthMonth.Value, shopperToValidate.BirthDay.Value,
-            monthIsRequired: shopperToValidate.BirthMonth.IsRequired, dayIsRequired: shopperToValidate.BirthDay.IsRequired);
+            monthIsRequired: shopperToValidate.BirthMonth.IsRequired, dayIsRequired: shopperToValidate.BirthDay.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.BirthMonth.Value != null)
           shopperToValidate.BirthMonth.RuleContainer = shopperToValidate.BirthDay.RuleContainer;
         #endregion
 
         #region Address Rules
         if (shopperToValidate.Address1.Value != null)
-          shopperToValidate.Address1.RuleContainer = new Address1Rule(shopperToValidate.Address1.Value, isRequired: shopperToValidate.Address1.IsRequired);
+          shopperToValidate.Address1.RuleContainer = new Address1Rule(shopperToValidate.Address1.Value, isRequired: shopperToValidate.Address1.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.Address2.Value != null)
-          shopperToValidate.Address2.RuleContainer = new Address2Rule(shopperToValidate.Address2.Value, isRequired: shopperToValidate.Address2.IsRequired);
+          shopperToValidate.Address2.RuleContainer = new Address2Rule(shopperToValidate.Address2.Value, isRequired: shopperToValidate.Address2.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.Email.Value != null)
-          shopperToValidate.Email.RuleContainer = new EmailRule(shopperToValidate.Email.Value, isRequired: shopperToValidate.Email.IsRequired);
+          shopperToValidate.Email.RuleContainer = new EmailRule(shopperToValidate.Email.Value, isRequired: shopperToValidate.Email.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.City.Value != null)
-          shopperToValidate.City.RuleContainer = new CityRule(shopperToValidate.City.Value, isRequired: shopperToValidate.City.IsRequired);
+          shopperToValidate.City.RuleContainer = new CityRule(shopperToValidate.City.Value, isRequired: shopperToValidate.City.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.State.Value != null)
-          shopperToValidate.State.RuleContainer = new StateRule(shopperToValidate.State.Value, isRequired: shopperToValidate.State.IsRequired);
+          shopperToValidate.State.RuleContainer = new StateRule(shopperToValidate.State.Value, isRequired: shopperToValidate.State.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.Zip.Value != null)
-          shopperToValidate.Zip.RuleContainer = new ZipRule(shopperToValidate.Zip.Value, shopperToValidate.Country.Value, shopperToValidate.State.Value, isRequired: shopperToValidate.Zip.IsRequired);
+          shopperToValidate.Zip.RuleContainer = new ZipRule(shopperToValidate.Zip.Value, shopperToValidate.Country.Value, shopperToValidate.State.Value, isRequired: shopperToValidate.Zip.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.Country.Value != null)
-          shopperToValidate.Country.RuleContainer = new CountryRule(shopperToValidate.Country.Value, isRequired: shopperToValidate.Country.IsRequired);
+          shopperToValidate.Country.RuleContainer = new CountryRule(shopperToValidate.Country.Value, isRequired: shopperToValidate.Country.IsRequired, culture: requestData.Culture);
         #endregion
 
         #region Phone Rules
         if (shopperToValidate.PhoneWork.Value != null)
-          shopperToValidate.PhoneWork.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneWork.Value, shopperToValidate.PhoneWork.IsRequired, shopperToValidate.Country.Value);
+          shopperToValidate.PhoneWork.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneWork.Value, shopperToValidate.PhoneWork.IsRequired, shopperToValidate.Country.Value, culture: requestData.Culture);
         if (shopperToValidate.PhoneWorkExtension.Value != null)
-          shopperToValidate.PhoneWorkExtension.RuleContainer = new PhoneExtRule(shopperToValidate.PhoneWorkExtension.Value, isRequired: shopperToValidate.PhoneWorkExtension.IsRequired);
+          shopperToValidate.PhoneWorkExtension.RuleContainer = new PhoneExtRule(shopperToValidate.PhoneWorkExtension.Value, isRequired: shopperToValidate.PhoneWorkExtension.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.PhoneHome.Value != null)
-          shopperToValidate.PhoneHome.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneHome.Value, shopperToValidate.PhoneHome.IsRequired, shopperToValidate.Country.Value);
+          shopperToValidate.PhoneHome.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneHome.Value, shopperToValidate.PhoneHome.IsRequired, shopperToValidate.Country.Value, culture: requestData.Culture);
         if (shopperToValidate.PhoneMobile.Value != null)
-          shopperToValidate.PhoneMobile.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneMobile.Value, shopperToValidate.PhoneMobile.IsRequired, shopperToValidate.Country.Value);
+          shopperToValidate.PhoneMobile.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneMobile.Value, shopperToValidate.PhoneMobile.IsRequired, shopperToValidate.Country.Value, culture: requestData.Culture);
         if (shopperToValidate.PhoneMobileSurvey.Value != null)
-          shopperToValidate.PhoneMobileSurvey.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneMobileSurvey.Value, shopperToValidate.PhoneMobileSurvey.IsRequired, shopperToValidate.Country.Value);
+          shopperToValidate.PhoneMobileSurvey.RuleContainer = new AnyPhoneRule(shopperToValidate.PhoneMobileSurvey.Value, shopperToValidate.PhoneMobileSurvey.IsRequired, shopperToValidate.Country.Value, culture: requestData.Culture);
         #endregion
 
         #region Password Rules
         if (shopperToValidate.Username.Value != null)
           shopperToValidate.Username.RuleContainer = new UsernameRule(shopperToValidate.Username.Value, requestData.SourceURL,
-            requestData.Pathway, requestData.PageCount, requestData.IsNewShopper, isRequired: shopperToValidate.Username.IsRequired);
+            requestData.Pathway, requestData.PageCount, requestData.IsNewShopper, isRequired: shopperToValidate.Username.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.Password.Value != null)
           shopperToValidate.Password.RuleContainer = new PasswordRule(shopperToValidate.Password.Value, requestData.IsNewShopper,
             requestData.SourceURL, requestData.Pathway, requestData.PageCount, shopperToValidate.Username.Value, shopperToValidate.PasswordHint.Value,
-            isRequired: shopperToValidate.Password.IsRequired);
+            isRequired: shopperToValidate.Password.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.PasswordConfirm.Value != null)
-          shopperToValidate.PasswordConfirm.RuleContainer = new PasswordConfirmRule(shopperToValidate.PasswordConfirm.Value, shopperToValidate.Password.Value);
+          shopperToValidate.PasswordConfirm.RuleContainer = new PasswordConfirmRule(shopperToValidate.PasswordConfirm.Value, shopperToValidate.Password.Value, culture: requestData.Culture);
         if (shopperToValidate.PasswordHint.Value != null)
-          shopperToValidate.PasswordHint.RuleContainer = new PasswordHintRule(shopperToValidate.PasswordHint.Value, isRequired: shopperToValidate.PasswordHint.IsRequired);
+          shopperToValidate.PasswordHint.RuleContainer = new PasswordHintRule(shopperToValidate.PasswordHint.Value, isRequired: shopperToValidate.PasswordHint.IsRequired, culture: requestData.Culture);
         if (shopperToValidate.CallInPin.Value != null)
-          shopperToValidate.CallInPin.RuleContainer = new CallInPinRule(shopperToValidate.CallInPin.Value, isRequired: shopperToValidate.CallInPin.IsRequired);
+          shopperToValidate.CallInPin.RuleContainer = new CallInPinRule(shopperToValidate.CallInPin.Value, isRequired: shopperToValidate.CallInPin.IsRequired, culture: requestData.Culture);
         #endregion
 
         IEnumerable<RuleContainer> shopperRules = CreateShopperRuleContainerList(shopperToValidate);
@@ -166,11 +167,11 @@ namespace Atlantis.Framework.ShopperValidator.Impl
       XmlDocument slimShopperRulesDoc;
       var success = LoadValidationRulesXml(out slimShopperRulesDoc);
 
-      if(!success)
+      if (!success)
       {
         throw new AtlantisException(requestData, "ShopperValidator::ValidateShopperWithRuleEngine", "Error reading SlimShopperValidation.xml", "--input data--");
       }
-      
+
       var model = requestData.ShopperBaseModel;
       _engineResults = RuleEngine.RuleEngine.EvaluateRules(model, slimShopperRulesDoc);
 
@@ -214,8 +215,9 @@ namespace Atlantis.Framework.ShopperValidator.Impl
             {
               if (fact.FactKey == ModelConstants.FACT_USERNAME)
               {
+                FetchResource fetcher = new FetchResource(ResourceNamespace.ShopperValidator, requestData.Culture);
                 fact.Status = ValidationResultStatus.InValid;
-                fact.Messages.Add("Username already exists");
+                fact.Messages.Add(fetcher.GetString("usenameExists"));
                 model.ContainsInvalids = true;
                 break;
               }
@@ -245,8 +247,9 @@ namespace Atlantis.Framework.ShopperValidator.Impl
             {
               if (fact.FactKey == ModelConstants.FACT_PIN)
               {
+                FetchResource fetcher = new FetchResource(ResourceNamespace.ShopperValidator, requestData.Culture);
                 fact.Status = ValidationResultStatus.InValid;
-                fact.Messages.Add("PIN must contain more than one digit");
+                fact.Messages.Add(fetcher.GetString("pinOneDigit"));
                 model.ContainsInvalids = true;
                 break;
               }
@@ -268,33 +271,36 @@ namespace Atlantis.Framework.ShopperValidator.Impl
 
       if (response != null && response.StatusCode != TwoFactorWebserviceResponseCodes.Success)
       {
+        FetchResource fetcher = new FetchResource(ResourceNamespace.ShopperValidator, requestData.Culture);
+        string password = fetcher.GetString("password");
+
         string passwordFailedMessage;
         switch (response.StatusCode)
         {
           case AuthPasswordCodes.PasswordFailBlacklisted:
-            passwordFailedMessage = "Password cannot include a common word or phrase.";
+            passwordFailedMessage = string.Format(fetcher.GetString("commonPhrase"), password);
             break;
           case AuthPasswordCodes.PasswordFailLastFive:
-            passwordFailedMessage = "Cannot reuse the last 5 passwords.";
+            passwordFailedMessage = fetcher.GetString("lastFive");
             break;
           case AuthPasswordCodes.PasswordFailMatchesHint:
-            passwordFailedMessage = "Password cannot be equal to Password Hint.";
+            passwordFailedMessage = string.Format(fetcher.GetString("matchesHint"), password);
             break;
           case AuthPasswordCodes.PasswordFailThirtyDay:
-            passwordFailedMessage = "Cannot use the same password within 30 days.";
+            passwordFailedMessage = fetcher.GetString("samePassword");
             break;
           default:
-            passwordFailedMessage = string.Concat("Password is invalid. Status Code: ", Convert.ToString(response.StatusCode));
+            passwordFailedMessage = string.Format(fetcher.GetString("isInvalidStatusCode"), password, Convert.ToString(response.StatusCode));
             break;
         }
 
-        foreach(var model in _engineResults.ValidationResults)
+        foreach (var model in _engineResults.ValidationResults)
         {
-          if(model.ModelId == ModelConstants.MODEL_ID_SHOPPERVALID)
+          if (model.ModelId == ModelConstants.MODEL_ID_SHOPPERVALID)
           {
-            foreach(var fact in model.Facts)
+            foreach (var fact in model.Facts)
             {
-              if(fact.FactKey == ModelConstants.FACT_PASSWORD)
+              if (fact.FactKey == ModelConstants.FACT_PASSWORD)
               {
                 fact.Status = ValidationResultStatus.InValid;
                 fact.Messages.Add(passwordFailedMessage);
@@ -324,6 +330,5 @@ namespace Atlantis.Framework.ShopperValidator.Impl
     }
 
     #endregion
-
   }
 }

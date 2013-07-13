@@ -7,32 +7,80 @@ using Atlantis.Framework.ValidateField.Interface;
 
 namespace Atlantis.Framework.ShopperValidator.Interface
 {
- public class ShopperValidatorRequestData: RequestData
+  public class ShopperValidatorRequestData : RequestData
   {
-   public ShopperToValidate ShopperToValidate;
-   public bool IsNewShopper;
+    public ShopperToValidate ShopperToValidate;
+    public bool IsNewShopper;
 
-   private ValidateFieldResponseData _passwordValidator;
-   protected ValidateFieldResponseData PasswordValidator
-   {
-     get
-     {
-       if (_passwordValidator == null)
-       {
-         var validatorRequest = new ValidateFieldRequestData(string.Empty, SourceURL, string.Empty, Pathway, PageCount, "password");
-         _passwordValidator = (ValidateFieldResponseData)DataCache.DataCache.GetProcessRequest(validatorRequest, EngineRequestValues.ValidateField);
-       }
-       return _passwordValidator;
-     }
-   }
+    private const string _DEFAULT_CULTURE = "en";
+    private string _culture;
+    public string Culture
+    {
+      get
+      {
+        if (string.IsNullOrEmpty(_culture))
+        {
+          _culture = _DEFAULT_CULTURE;
+        }
+        return _culture;
+      }
 
-   public Dictionary<string, Dictionary<string, string>> ShopperBaseModel;
+      set { _culture = value; }
+    }
 
-   public ShopperValidatorRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string username, string password, string confirmPassword, string pin, string email)
-     : base(shopperId, sourceURL, orderId, pathway, pageCount)
-   {
-     ShopperBaseModel = new Dictionary<string, Dictionary<string, string>>(1);
-     ShopperBaseModel.Add(ModelConstants.MODEL_ID_SHOPPERVALID, new Dictionary<string, string>
+    private ValidateFieldResponseData _passwordValidator;
+    protected ValidateFieldResponseData PasswordValidator
+    {
+      get
+      {
+        if (_passwordValidator == null)
+        {
+          var validatorRequest = new ValidateFieldRequestData(string.Empty, SourceURL, string.Empty, Pathway, PageCount, "password");
+          _passwordValidator = (ValidateFieldResponseData)DataCache.DataCache.GetProcessRequest(validatorRequest, EngineRequestValues.ValidateField);
+        }
+        return _passwordValidator;
+      }
+    }
+
+    public Dictionary<string, Dictionary<string, string>> ShopperBaseModel;
+
+    public ShopperValidatorRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string username, string password, string confirmPassword, string pin, string email)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    {
+      SetUpShopperBaseModal(username, password, confirmPassword, pin, email);
+    }
+
+    public ShopperValidatorRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string username, string password, string confirmPassword, string pin, string email, string culture)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    {
+      Culture = culture;
+      SetUpShopperBaseModal(username, password, confirmPassword, pin, email);
+    }
+
+    public ShopperValidatorRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, ShopperToValidate shopperToValidate, bool isNewShopper)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    {
+      ShopperToValidate = shopperToValidate;
+      IsNewShopper = isNewShopper;
+    }
+
+    public ShopperValidatorRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, ShopperToValidate shopperToValidate, bool isNewShopper, string culture)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    {
+      ShopperToValidate = shopperToValidate;
+      IsNewShopper = isNewShopper;
+      Culture = culture;
+    }
+
+    public override string GetCacheMD5()
+    {
+      throw new NotImplementedException();
+    }
+
+    private void SetUpShopperBaseModal(string username, string password, string confirmPassword, string pin, string email)
+    {
+      ShopperBaseModel = new Dictionary<string, Dictionary<string, string>>(1);
+      ShopperBaseModel.Add(ModelConstants.MODEL_ID_SHOPPERVALID, new Dictionary<string, string>
                           {
                             {ModelConstants.FACT_USERNAME, username},
                             {ModelConstants.FACT_PASSWORD, password},
@@ -50,18 +98,6 @@ namespace Atlantis.Framework.ShopperValidator.Interface
                             {ModelConstants.FACT_NUMERIC_ONLY_REGEX, RegexConstants.NumericOnlyPattern},
                             {ModelConstants.FACT_INVALID_CHARACTERS_REGEX, RegexConstants.InvalidCharactersPattern}
                           });
-   }
-
-   public ShopperValidatorRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, ShopperToValidate shopperToValidate, bool isNewShopper)
-     : base(shopperId, sourceURL, orderId, pathway, pageCount)
-   {
-     ShopperToValidate = shopperToValidate;
-     IsNewShopper = isNewShopper;
-   }
-
-   public override string GetCacheMD5()
-   {
-     throw new NotImplementedException();
-   }
+    }
   }
 }

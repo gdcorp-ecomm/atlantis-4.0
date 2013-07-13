@@ -3,16 +3,20 @@ using Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRules;
 
 namespace Atlantis.Framework.ShopperValidator.Interface.Validator
 {
-  public class PhoneExtRule : SingleValueRuleContainer
+  public class PhoneExtRule : RuleContainer
   {
-    public PhoneExtRule(string value, string fieldName = FieldNames.PhoneExtension, bool isRequired = false)
-      : base(value, fieldName, isRequired)
+    public PhoneExtRule(string value, string fieldName = "", bool isRequired = false, string culture = "")
+      : base(value, culture)
     {
-      base.RulesToValidate.Add(new MaxLengthRule(fieldName, value, LengthConstants.PhoneExtMaxLength));
+      var FieldNames = new FieldNames(Culture);
+      DefaultFieldNameHelper.OverwriteTextIfEmpty(fieldName, FieldNames.PhoneExtension, out fieldName);
+
+      AddIsRequiredRule(value, fieldName, isRequired);
+      base.RulesToValidate.Add(new MaxLengthRule(Culture, fieldName, value, LengthConstants.PhoneExtMaxLength));
 
       if (!string.IsNullOrEmpty(value))
       {
-        base.RulesToValidate.Add(new NumericRule(fieldName, value));
+        base.RulesToValidate.Add(new NumericRule(fieldName, value, Culture));
       }
     }
   }

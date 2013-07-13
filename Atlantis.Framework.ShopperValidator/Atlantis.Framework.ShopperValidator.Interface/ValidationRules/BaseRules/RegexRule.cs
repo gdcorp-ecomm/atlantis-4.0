@@ -7,14 +7,19 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
   {
     private Regex _regexPattern;
     private bool _isValidIfDoesntMatchRegex;
-    public RegexRule(string fieldName, string textToValidate, Regex regexPattern, bool isValidIfDoesntMatchRegex = false)
-      : base()
+    public RegexRule(string fieldName, string textToValidate, Regex regexPattern, bool isValidIfDoesntMatchRegex = false, string culture = "")
+      : base(culture)
     {
       _regexPattern = regexPattern;
       _isValidIfDoesntMatchRegex = isValidIfDoesntMatchRegex;
       base.ItemToValidate = textToValidate;
-      base.ErrorMessage = string.Concat(fieldName, " is an invalid format.");
+      base.ErrorMessage = string.Format(FetchResource.GetString("invalidFormat"), fieldName);
     }
+
+    public RegexRule(string culture, string fieldName, string textToValidate, Regex regexPattern, bool isValidIfDoesntMatchRegex = false)
+      : this(fieldName, textToValidate, regexPattern, isValidIfDoesntMatchRegex, culture)
+    { }
+
 
     public override void Validate()
     {

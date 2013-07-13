@@ -2,15 +2,15 @@
 
 namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRules
 {
- public class RequiredRule: ValidationRule
+  public class RequiredRule : ValidationRule
   {
-   public RequiredRule(string fieldName, string textToValidate)
-      : base()
+    public RequiredRule(string fieldName, string textToValidate, string culture = "")
+      : base(culture)
     {
       base.ItemToValidate = textToValidate;
-      base.ErrorMessage = string.Concat(fieldName, " is required");
+      base.ErrorMessage = string.Format(FetchResource.GetString("required"), fieldName);
     }
-
+    
     public override void Validate()
     {
       base.IsValid = false;

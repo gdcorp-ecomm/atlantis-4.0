@@ -7,21 +7,24 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
 {
   public class BirthDayRule : RuleContainer
   {
-    public BirthDayRule(string birthMonth, string birthDay, string fieldName = FieldNames.BirthDay, bool dayIsRequired = false, bool monthIsRequired = false)
-      : base()
+    public BirthDayRule(string birthMonth, string birthDay, string fieldName = "", bool dayIsRequired = false, bool monthIsRequired = false, string culture = "")
+      : base(culture)
     {
+      var FieldNames = new FieldNames(Culture);
+      DefaultFieldNameHelper.OverwriteTextIfEmpty(fieldName, FieldNames.BirthDay, out fieldName);
+
       BuildCustomRule(birthMonth, birthDay, fieldName);
       if (dayIsRequired)
-        base.RulesToValidate.Add(new RequiredRule(fieldName, birthDay));
+        base.RulesToValidate.Add(new RequiredRule(fieldName, birthDay, Culture));
       if (monthIsRequired)
-        base.RulesToValidate.Add(new RequiredRule(fieldName, birthMonth));
+        base.RulesToValidate.Add(new RequiredRule(fieldName, birthMonth, Culture));
     }
 
     #region Custom Rules
     private void BuildCustomRule(string birthMonth, string birthDay, string fieldName)
     {
       bool birthdayIsValid = true;
-      string errorMessage = "If providing a birthday you must provide valid values";
+      string errorMessage = FetchResource.GetString("birthdayValid");
 
       bool hasBirthdayInfo = !string.IsNullOrEmpty(birthMonth) || !string.IsNullOrEmpty(birthDay);
 
@@ -39,7 +42,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
         }
       }
 
-      base.RulesToValidate.Add(new BlankRule(birthdayIsValid, errorMessage));
+      base.RulesToValidate.Add(new BlankRule( birthdayIsValid, errorMessage, Culture));
     }
     #endregion
   }

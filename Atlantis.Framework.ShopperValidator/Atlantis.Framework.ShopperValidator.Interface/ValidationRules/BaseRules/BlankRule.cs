@@ -4,11 +4,19 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
 {
   public class BlankRule : ValidationRule
   {
-    public BlankRule(bool isValid, string errorMessage = "Invalid data")
-      : base()
+    public BlankRule(bool isValid, string errorMessage = "", string culture = "")
+      : base(culture)
     {
       base.IsValid = isValid;
-      base.ErrorMessage = errorMessage;
+      if (string.IsNullOrEmpty(errorMessage))
+      {
+        base.ErrorMessage = FetchResource.GetString("invalidData");
+      }
+      else
+      {
+        base.ErrorMessage = errorMessage;
+      }
+
     }
 
     public override void Validate()

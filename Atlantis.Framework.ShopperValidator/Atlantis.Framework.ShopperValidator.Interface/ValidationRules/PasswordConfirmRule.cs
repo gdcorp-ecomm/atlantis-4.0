@@ -6,22 +6,23 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
 {
   public class PasswordConfirmRule : RuleContainer
   {
-    private const string ErrorFormat = "{0} cannot be greater than {1} characters.  Trim {0} before supplying it to the validator.";
-
-    public PasswordConfirmRule(string value, string password, string fieldName = FieldNames.PasswordConfirm)
-      : base()
+    public PasswordConfirmRule(string value, string password, string fieldName = "", string culture = "")
+      : base(value, culture)
     {
+      var FieldNames = new FieldNames(Culture);
+      DefaultFieldNameHelper.OverwriteTextIfEmpty(fieldName, FieldNames.PasswordConfirm, out fieldName);
+      string errorFormat = FetchResource.GetString("passwordConfirm");
       //passwords greater than 255 characters are invalid, but we cannot display them a message (MP# 90509)
       if (value.Length > 255)
       {
-        throw new System.InvalidOperationException(string.Format(ErrorFormat, fieldName, LengthConstants.PasswordMaxLength));
+        throw new System.InvalidOperationException(string.Format(errorFormat, fieldName, LengthConstants.PasswordMaxLength));
       }
       else if (password.Length > 255)
       {
-        throw new System.InvalidOperationException(string.Format(ErrorFormat, "Password", LengthConstants.PasswordMaxLength));
+        throw new System.InvalidOperationException(string.Format(errorFormat, fieldName, LengthConstants.PasswordMaxLength));
       }
 
-      base.RulesToValidate.Add(new MatchRule(fieldName, value, "Password", password));
+      base.RulesToValidate.Add(new MatchRule(Culture, fieldName, value, fieldName, password));
     }
   }
 }

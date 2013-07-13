@@ -4,7 +4,7 @@ using Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRules;
 
 namespace Atlantis.Framework.ShopperValidator.Interface.Validator
 {
-  public class UsernameRule : SingleValueRuleContainer
+  public class UsernameRule : RuleContainer
   {
     private string _username;
     private string _fieldName;
@@ -12,40 +12,50 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
     private string _pathway = string.Empty;
     private int _pageCount = 0;
 
+    private bool _usernameExists;
+    public bool UsernameAlreadyExists
+    {
+      get { return _usernameExists; }
+    }
+
     /// <summary>
     /// Should ONLY be used when requestUrl, pathway, and pageCount are undefined.  Otherwise use constructor which accepts these parameters.
     /// </summary>
-    public UsernameRule(string value, bool isNewShopper = false, string fieldName = FieldNames.Username, bool isRequired = false)
-      : base(value, fieldName, isRequired)
+    public UsernameRule(string value, bool isNewShopper = false, string fieldName = "", bool isRequired = false, string culture = "")
+      : base(value, culture)
     {
+      var FieldNames = new FieldNames(Culture);
+      DefaultFieldNameHelper.OverwriteTextIfEmpty(fieldName, FieldNames.Username, out fieldName);
+
       _username = value;
       _fieldName = fieldName;
 
-      //base.RulesToValidate.Add(new RequiredRule(_fieldName, _username));
-      base.RulesToValidate.Add(new InvalidCharactersRule(_fieldName, _username));
-      base.RulesToValidate.Add(new MaxLengthRule(_fieldName, _username, LengthConstants.UsernameMaxLength));
-      base.RulesToValidate.Add(new MinLengthRule(_fieldName, _username, LengthConstants.UsernameMinLength));
+      AddIsRequiredRule(value, fieldName, isRequired);
+      base.RulesToValidate.Add(new InvalidCharactersRule(_fieldName, _username, Culture));
+      base.RulesToValidate.Add(new MaxLengthRule(Culture, _fieldName, _username, LengthConstants.UsernameMaxLength));
+      base.RulesToValidate.Add(new MinLengthRule(Culture, _fieldName, _username, LengthConstants.UsernameMinLength));
 
       if (isNewShopper)
       {
         BuildNewShopperRules();
       }
     }
-    
-    public UsernameRule(string value, string requestUrl, string pathway, int pageCount, bool isNewShopper = false, string fieldName = FieldNames.Username, bool isRequired = false)
-      : this(value, isNewShopper, fieldName, isRequired)
+
+    public UsernameRule(string value, string requestUrl, string pathway, int pageCount, bool isNewShopper = false, string fieldName = "", bool isRequired = false, string culture = "")
+      : this(value, isNewShopper, fieldName, isRequired, culture)
     {
       _requestUrl = requestUrl;
       _pageCount = pageCount;
       _pathway = pathway;
     }
-      
+
     private void BuildNewShopperRules()
     {
       //Login cannot be all numbers
       if (RegexConstants.NumericOnly.IsMatch(_username))
       {
-        base.RulesToValidate.Add(new BlankRule(false, string.Concat(_fieldName, " cannot be only numbers")));
+        string formatString = FetchResource.GetString("cannotBeNumeric");
+        base.RulesToValidate.Add(new BlankRule(false, string.Format(formatString, _fieldName), Culture));
       }
       else
       {
@@ -53,10 +63,12 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
         loginRequest.AddSearchField("loginName", _username);
         loginRequest.AddReturnField("loginName");
 
-        SearchShoppersResponseData loginResponse =  (SearchShoppersResponseData)Engine.Engine.ProcessRequest(loginRequest, EngineRequestValues.SearchShoppers);
+        SearchShoppersResponseData loginResponse = (SearchShoppersResponseData)Engine.Engine.ProcessRequest(loginRequest, EngineRequestValues.SearchShoppers);
         if (loginResponse.ShopperCount > 0)
         {
-          base.RulesToValidate.Add(new BlankRule(false, string.Concat(_fieldName, " already exists")));
+          _usernameExists = true;
+          string formatString = FetchResource.GetString("alreadyExists");
+          base.RulesToValidate.Add(new BlankRule(false, string.Format(formatString, _fieldName), Culture));
         }
       }
     }

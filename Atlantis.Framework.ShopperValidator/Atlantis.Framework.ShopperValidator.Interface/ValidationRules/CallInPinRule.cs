@@ -4,20 +4,24 @@ using System;
 
 namespace Atlantis.Framework.ShopperValidator.Interface.Validator
 {
-  public class CallInPinRule : SingleValueRuleContainer
+  public class CallInPinRule : RuleContainer
   {
     private string _callInPin;
     private string _fieldName;
 
-    public CallInPinRule(string value, string fieldName = FieldNames.CallInPin, bool isRequired = false)
-      : base(value, fieldName, isRequired)
+    public CallInPinRule(string value, string fieldName = "", bool isRequired = false, string culture = "")
+      : base(value, culture)
     {
+      var FieldNames = new FieldNames(culture);
+      DefaultFieldNameHelper.OverwriteTextIfEmpty(fieldName, FieldNames.CallInPin, out fieldName);
+
       _callInPin = value;
       _fieldName = fieldName;
 
-      base.RulesToValidate.Add(new MaxLengthRule(fieldName, value, LengthConstants.CallInPinMaxLength));
-      base.RulesToValidate.Add(new EqualLength(fieldName, value, LengthConstants.CallInPinMinLength,false));
-      base.RulesToValidate.Add(new NumericRule(fieldName, value));
+      AddIsRequiredRule(value, fieldName, isRequired);
+      base.RulesToValidate.Add(new MaxLengthRule(Culture, fieldName, value, LengthConstants.CallInPinMaxLength));
+      base.RulesToValidate.Add(new EqualLength(Culture, fieldName, value, LengthConstants.CallInPinMinLength, false));
+      base.RulesToValidate.Add(new NumericRule(fieldName, value, Culture));
 
       BuildCustomRules();
     }
@@ -30,7 +34,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
         string forward = "0123456789012";
         string backward = "0987654321098";
         int firstNumber = Convert.ToInt16(_callInPin.Substring(0, 1));
-        
+
         if (firstNumber == 0) { firstNumber = 1; }  //prevents division by zero
 
         //cannot be same four digits or in any numerically ascending/descending order 
@@ -39,7 +43,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.Validator
 
         if (isCallInPinSequential || isCallInPinSameFour)
         {
-          base.RulesToValidate.Add(new BlankRule(false, string.Concat(_fieldName, " cannot be any straight numerical sequence of digits.")));
+          base.RulesToValidate.Add(new BlankRule(false, string.Format(FetchResource.GetString("straightNumerical"), _fieldName), Culture));
         }
       }
     }

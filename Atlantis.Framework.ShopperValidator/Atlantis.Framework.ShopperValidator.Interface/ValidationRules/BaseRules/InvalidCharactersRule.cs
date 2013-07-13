@@ -6,12 +6,12 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
   {
     private const bool _IS_VALID_IF_REGEX_DOESNT_MATCH = true;
 
-    public InvalidCharactersRule(string fieldName, string textToValidate)
-      : base(fieldName, textToValidate, RegexConstants.InvalidCharacters, _IS_VALID_IF_REGEX_DOESNT_MATCH)
+    public InvalidCharactersRule(string fieldName, string textToValidate, string culture = "")
+      : base(fieldName, textToValidate, RegexConstants.InvalidCharacters, _IS_VALID_IF_REGEX_DOESNT_MATCH, culture)
     {
-      base.ErrorMessage = string.Concat(fieldName, " contains invalid characters");
+      base.ErrorMessage = string.Format(FetchResource.GetString("invalidCharacters"), fieldName);
     }
-
+    
     public override void Validate()
     {
       base.Validate();

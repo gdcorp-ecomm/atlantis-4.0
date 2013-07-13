@@ -8,7 +8,7 @@ using Atlantis.Framework.ValidateField.Interface;
 
 namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
 {
-  public class PasswordRule : SingleValueRuleContainer
+  public class PasswordRule : RuleContainer
   {
     private string _fieldName;
     private string _username;
@@ -21,32 +21,36 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
     /// <summary>
     /// Should ONLY be used when requestUrl, pathway, and pageCount are undefined.  Otherwise use constructor which accepts these parameters.
     /// </summary>
-    public PasswordRule(string value, bool isNewShopper, string username = "", string passwordHint = "", string fieldName = FieldNames.Password, bool isRequired = false)
-      : base(value, fieldName, isRequired)
+    public PasswordRule(string value, bool isNewShopper, string username = "", string passwordHint = "", string fieldName = "", bool isRequired = false, string culture = "")
+      : base(value, culture)
     {
+      var FieldNames = new FieldNames(Culture);
+      DefaultFieldNameHelper.OverwriteTextIfEmpty(fieldName, FieldNames.Password, out fieldName);
+
       _fieldName = fieldName;
       _username = username ?? string.Empty;
       _password = value ?? string.Empty;
       _isNewShopper = isNewShopper;
+      
+      AddIsRequiredRule(value, fieldName, isRequired);
 
       if (_password.Length > 255) //passwords greater than 255 characters are invalid, but we cannot display them a message (MP# 90509)
       {
         throw new System.InvalidOperationException(string.Format("{0} cannot be greater than {1} characters.  Trim {0} before supplying it to the validator.", fieldName, LengthConstants.PasswordMaxLength));
       }
 
-      //base.RulesToValidate.Add(new RequiredRule(fieldName, value));
 
       #region Not match username
       if (!string.IsNullOrEmpty(_username))
       {
-        base.RulesToValidate.Add(new NotMatchRule(fieldName, value, "Username", _username));
+        base.RulesToValidate.Add(new NotMatchRule(fieldName, value, FieldNames.Username, _username, culture: Culture));
       }
       #endregion
 
       #region Not match new hint
       if (!string.IsNullOrEmpty(passwordHint))
       {
-        base.RulesToValidate.Add(new NotMatchRule(fieldName, value, "Password hint", passwordHint));
+        base.RulesToValidate.Add(new NotMatchRule(fieldName, value, FieldNames.PasswordHint, passwordHint, culture: Culture));
       }
       #endregion
 
@@ -54,8 +58,8 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
     }
 
     public PasswordRule(string value, bool isNewShopper, string requestUrl, string pathway, int pageCount, string username = "",
-      string passwordHint = "", string fieldName = FieldNames.Password, bool isRequired = false)
-      : this(value, isNewShopper, username, passwordHint, fieldName, isRequired)
+      string passwordHint = "", string fieldName = "", bool isRequired = false, string culture = "")
+      : this(value, isNewShopper, username, passwordHint, fieldName, isRequired, culture)
     {
       _requestUrl = requestUrl;
       _pageCount = pageCount;
@@ -84,7 +88,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
       {
         foreach (var failure in errors)
         {
-          base.RulesToValidate.Add(new BlankRule(false, failure.GetFormattedDescription(_fieldName)));
+          base.RulesToValidate.Add(new BlankRule(false, failure.GetFormattedDescription(_fieldName), Culture));
         }
       }
 
@@ -96,7 +100,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
       //we do NOT want to pass a shopper/username into this method b/c  it's a new shopper. 
       //Ecomm's WS will fail b/c it can't find the _username b/c it hasn't been inserted yet..
       string temporaryUserName = _isNewShopper ? string.Empty : _username;
-      
+
       var request = new AuthValidatePasswordRequestData(temporaryUserName, _requestUrl, string.Empty, _pathway, _pageCount, _password);
       var response = Engine.Engine.ProcessRequest(request, EngineRequestValues.AuthValidatePassword) as AuthValidatePasswordResponseData;
 
@@ -106,23 +110,23 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
         switch (response.StatusCode)
         {
           case AuthPasswordCodes.PasswordFailBlacklisted:
-            passwordFailedMessage = string.Concat(_fieldName, " cannot include a common word or phrase.");
+            passwordFailedMessage = string.Format(FetchResource.GetString("commonPhrase"), _fieldName);
             break;
           case AuthPasswordCodes.PasswordFailLastFive:
-            passwordFailedMessage = "Cannot reuse the last 5 passwords.";
+            passwordFailedMessage = FetchResource.GetString("lastFive");
             break;
           case AuthPasswordCodes.PasswordFailMatchesHint:
-            passwordFailedMessage = string.Concat(_fieldName, " cannot be equal to Password Hint.");
+            passwordFailedMessage = string.Format(FetchResource.GetString("matchesHint"), _fieldName);
             break;
           case AuthPasswordCodes.PasswordFailThirtyDay:
-            passwordFailedMessage = "Cannot use the same password within 30 days.";
+            passwordFailedMessage = FetchResource.GetString("samePassword");
             break;
           default:
-            passwordFailedMessage = string.Concat(_fieldName, " is invalid. Status Code: ", response.StatusCode.ToString());
+            passwordFailedMessage = string.Format(FetchResource.GetString("isInvalidStatusCode"), _fieldName, response.StatusCode.ToString());
             break;
         }
 
-        base.RulesToValidate.Add(new BlankRule(false, passwordFailedMessage));
+        base.RulesToValidate.Add(new BlankRule( false, passwordFailedMessage, Culture));
       }
     }
     #endregion

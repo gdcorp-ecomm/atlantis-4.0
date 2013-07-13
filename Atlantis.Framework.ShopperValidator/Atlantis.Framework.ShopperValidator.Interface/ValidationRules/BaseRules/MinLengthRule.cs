@@ -1,4 +1,6 @@
-﻿using Atlantis.Framework.ShopperValidator.Interface.Validator;
+﻿using System.Reflection;
+using System.Resources;
+using Atlantis.Framework.ShopperValidator.Interface.Validator;
 
 namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRules
 {
@@ -6,13 +8,18 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
   {
     public int MinLength { get; private set; }
 
-    public MinLengthRule(string fieldName, string textToValidate, int minLength = 0)
-      : base()
+    public MinLengthRule(string fieldName, string textToValidate, int minLength = 0, string culture = "")
+      : base(culture)
     {
       MinLength = minLength;
       base.ItemToValidate = textToValidate;
-      base.ErrorMessage = string.Concat(fieldName, " must be greater than ", MinLength.ToString(), " characters.");
+
+      base.ErrorMessage = string.Format(FetchResource.GetString("minLengthError"), fieldName, MinLength.ToString());
     }
+
+    public MinLengthRule(string culture, string fieldName, string textToValidate, int minLength = 0)
+      : this(fieldName, textToValidate, minLength, culture)
+    {}
 
     public override void Validate()
     {

@@ -4,14 +4,17 @@ using Atlantis.Framework.ShopperValidator.Interface.Validator;
 
 namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
 {
-  public class PasswordHintRule : SingleValueRuleContainer
+  public class PasswordHintRule : RuleContainer
   {
-    public PasswordHintRule(string value, string fieldName = FieldNames.PasswordHint, bool isRequired = false)
-      : base(value, fieldName, isRequired)
+    public PasswordHintRule(string value, string fieldName = "", bool isRequired = false, string culture = "")
+      : base(value, culture)
     {
-      //base.RulesToValidate.Add(new RequiredRule(fieldName, value));
-      base.RulesToValidate.Add(new MaxLengthRule(fieldName, value, LengthConstants.PasswordHintMaxLength));
-      base.RulesToValidate.Add(new InvalidCharactersRule(fieldName, value));
+      var FieldNames = new FieldNames(Culture);
+      DefaultFieldNameHelper.OverwriteTextIfEmpty(fieldName, FieldNames.PasswordHint, out fieldName);
+
+      AddIsRequiredRule(value, fieldName, isRequired);
+      base.RulesToValidate.Add(new MaxLengthRule(Culture, fieldName, value, LengthConstants.PasswordHintMaxLength));
+      base.RulesToValidate.Add(new InvalidCharactersRule(fieldName, value, Culture));
     }
   }
 }

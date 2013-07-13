@@ -12,16 +12,16 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
     private string _countryCode;
     private bool _isRequired = false;
 
-    public PhoneRule(string value, string fieldName, bool isRequired = false, string countryCode = "us")
-      : base()
+    public PhoneRule(string value, string fieldName, bool isRequired = false, string countryCode = "us", string culture = "")
+      : base(culture)
     {
       base.ItemToValidate = value;
-      base.ErrorMessage = string.Concat(fieldName, " is invalid.");
+      base.ErrorMessage = string.Format(FetchResource.GetString("isInvalid"), fieldName);
       base.FieldName = fieldName;
       _isRequired = isRequired;
       _countryCode = countryCode ?? "us";
     }
-
+    
     public PhoneRule(string value, string fieldName, string countryCode = "us")
       : this(value, fieldName, false, countryCode)
     { }
@@ -31,49 +31,34 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
       base.IsValid = false;
       if (base.ItemToValidate != null)
       {
-        /*if (base.ItemToValidate.Length > 0)
-        {*/
-          base.ItemToValidate = RegexConstants.SpecialCharacters.Replace(base.ItemToValidate, string.Empty);
-          bool isUsOrCanada = _countryCode.Equals("us", StringComparison.InvariantCultureIgnoreCase)
-            || _countryCode.Equals("ca", StringComparison.InvariantCultureIgnoreCase);
+        base.ItemToValidate = RegexConstants.SpecialCharacters.Replace(base.ItemToValidate, string.Empty);
+        bool isUsOrCanada = _countryCode.Equals("us", StringComparison.InvariantCultureIgnoreCase)
+          || _countryCode.Equals("ca", StringComparison.InvariantCultureIgnoreCase);
 
-          base.IsValid = RegexConstants.NumericOnly.IsMatch(base.ItemToValidate);
-          if (base.IsValid)
+        base.IsValid = RegexConstants.NumericOnly.IsMatch(base.ItemToValidate);
+        if (base.IsValid)
+        {
+          if (isUsOrCanada)
           {
-            if (isUsOrCanada)
+            base.IsValid = RegexConstants.PhoneUsCanada.IsMatch(base.ItemToValidate);
+            if (!base.IsValid)
             {
-              base.IsValid = RegexConstants.PhoneUsCanada.IsMatch(base.ItemToValidate);
-              if (!base.IsValid)
-              {
-                base.ErrorMessage = string.Concat(base.FieldName, " must not start with a 0 or 1.  Must contain ",
-                  LengthConstants.PhoneUsCanadaMaxLength, " characters");
-              }
-            }
-            else
-            {
-              base.IsValid = base.ItemToValidate.Length <= LengthConstants.PhoneInternationalMaxLengh;
-              if (!base.IsValid)
-              {
-                base.ErrorMessage = string.Concat(base.FieldName, " must contain ", LengthConstants.PhoneInternationalMaxLengh, " characters");
-              }
+              base.ErrorMessage = string.Format(FetchResource.GetString("phoneMustStartAndContain"), base.FieldName, LengthConstants.PhoneUsCanadaMaxLength);
             }
           }
           else
           {
-            base.ErrorMessage = string.Concat(base.FieldName, " must be numeric");
+            base.IsValid = base.ItemToValidate.Length <= LengthConstants.PhoneInternationalMaxLengh;
+            if (!base.IsValid)
+            {
+              base.ErrorMessage = string.Format(FetchResource.GetString("phoneMustContainCharacters"), FieldName, LengthConstants.PhoneInternationalMaxLengh);
+            }
           }
-        /*}
+        }
         else
         {
-          if (!_isRequired)
-          {
-            base.IsValid = true;
-          }
-          else
-          {
-            base.ErrorMessage = string.Concat(FieldName, " is required");
-          }
-        }*/
+          base.ErrorMessage = string.Format(FetchResource.GetString("mustBeNumeric"), base.FieldName);
+        }
       }
     }
   }

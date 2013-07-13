@@ -4,10 +4,11 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
 {
   public class NumericRule : RegexRule
   {
-    public NumericRule(string fieldName, string textToValidate)
-      : base(fieldName, textToValidate, RegexConstants.NumericOnly)
+    public NumericRule(string fieldName, string textToValidate, string culture = "")
+      : base(fieldName, textToValidate, RegexConstants.NumericOnly, false, culture)
     {
-      base.ErrorMessage = string.Concat(fieldName, " must contain only numbers.");
+      base.ErrorMessage = string.Format(FetchResource.GetString("numericRule"), fieldName);
     }
+
   }
 }

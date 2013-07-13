@@ -3,18 +3,16 @@ using Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRules;
 
 namespace Atlantis.Framework.ShopperValidator.Interface.Validator
 {
-  public class AnyPhoneRule : SingleValueRuleContainer
+  public class AnyPhoneRule : RuleContainer
   {
-    public AnyPhoneRule(string value, bool isRequired = false, string countryCode = "us", string fieldName = FieldNames.Phone)
-      : base(value, fieldName, isRequired)
+    public AnyPhoneRule(string value, bool isRequired = false, string countryCode = "us", string fieldName = "", string culture = "en")
+      : base(value, culture)
     {
-      base.RulesToValidate.Add(new PhoneRule(value, fieldName, countryCode));
-    }
-
-    public AnyPhoneRule(string value, string countryCode = "us", string fieldName = FieldNames.Phone)
-      : base(value, fieldName, false)
-    {
-      base.RulesToValidate.Add(new PhoneRule(value, fieldName, countryCode));
+      var FieldNames = new FieldNames(culture);
+      DefaultFieldNameHelper.OverwriteTextIfEmpty(fieldName, FieldNames.Phone, out fieldName);
+      
+      AddIsRequiredRule(value, fieldName, isRequired);
+      base.RulesToValidate.Add(new PhoneRule( value, fieldName, isRequired, countryCode, Culture));
     }
   }
 }

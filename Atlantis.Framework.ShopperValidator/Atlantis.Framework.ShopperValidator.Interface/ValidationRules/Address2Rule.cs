@@ -4,13 +4,17 @@ using Atlantis.Framework.ShopperValidator.Interface.Validator;
 
 namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
 {
-  public class Address2Rule : SingleValueRuleContainer
+  public class Address2Rule : RuleContainer
   {
-    public Address2Rule(string value, string fieldName = FieldNames.Address2, bool isRequired = false)
-      : base(value, fieldName, isRequired)
+    public Address2Rule(string value, string fieldName = "", bool isRequired = false, string culture = "")
+      : base(value,culture)
     {
-      base.RulesToValidate.Add(new MaxLengthRule(fieldName, value, LengthConstants.AddressMaxLength));
-      base.RulesToValidate.Add(new InvalidCharactersRule(fieldName, value));
+      var FieldNames = new FieldNames(culture);
+      DefaultFieldNameHelper.OverwriteTextIfEmpty(fieldName, FieldNames.Address2, out fieldName);
+
+      AddIsRequiredRule(value, fieldName, isRequired);
+      base.RulesToValidate.Add(new MaxLengthRule(Culture, fieldName, value, LengthConstants.AddressMaxLength));
+      base.RulesToValidate.Add(new InvalidCharactersRule(fieldName, value, Culture));
     }
   }
 }

@@ -6,13 +6,19 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules.BaseRule
   {
     public int MaxLength { get; private set; }
 
-    public MaxLengthRule(string fieldName, string textToValidate, int maxLength = int.MaxValue)
-      : base()
+    public MaxLengthRule(string fieldName, string textToValidate, int maxLength = int.MaxValue, string culture = "")
+      : base(culture)
     {
+      var maxLengthError = FetchResource.GetString("maxLengthError");
+
       MaxLength = maxLength;
       base.ItemToValidate = textToValidate;
-      base.ErrorMessage = string.Concat(fieldName, " must be less than ", MaxLength.ToString(), " characters.");
+      base.ErrorMessage = string.Format(maxLengthError, fieldName, MaxLength.ToString());
     }
+
+    public MaxLengthRule(string culture, string fieldName, string textToValidate, int maxLength = int.MaxValue)
+      : this(fieldName, textToValidate, maxLength, culture)
+    { }
 
     public override void Validate()
     {

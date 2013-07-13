@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
+using System.Text.RegularExpressions;
 using Atlantis.Framework.RuleEngine.Results;
 using Atlantis.Framework.ShopperValidator.Interface;
 using Atlantis.Framework.ShopperValidator.Interface.ShopperValidation;
@@ -67,7 +71,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
       var workPhoneUsFail = new AnyPhoneRule(_workPhoneValidIntl, true);
       var workPhoneIntl = new AnyPhoneRule(_workPhoneValidIntl, true, "aj");
       var workPhoneMissing = new AnyPhoneRule(string.Empty, true);
-      var workPhoneMissingValid = new AnyPhoneRule(string.Empty, "work phone missing valid");
+      var workPhoneMissingValid = new AnyPhoneRule("work phone missing valid");
       var passwordruleBlacklist = new PasswordRule("Password1234", false);
       var passwordruleNoCapital = new PasswordRule("thisisnotvalid1234", false);
       var passwordruleNoNumber = new PasswordRule("Thisisnotvalid", false);
@@ -78,7 +82,7 @@ namespace Atlantis.Framework.ShopperValidator.Test
       {
         var passwordruleMaxLength = new PasswordRule(_overMaxLength, false);
       }
-      catch(System.InvalidOperationException e)
+      catch (System.InvalidOperationException e)
       {
         blewChunks = true;
       }
@@ -130,13 +134,13 @@ namespace Atlantis.Framework.ShopperValidator.Test
 
       var shopper = new ShopperToValidate("www.requesturl.com", "pathway", 0);
 
-      shopper.FirstName.Value = "Seth";
+      shopper.FirstName.Value = "";
       shopper.LastName.Value = "Yukna";
       shopper.Address1.Value = "123 any street";
       shopper.Address2.Value = _overMaxLength;
       shopper.CallInPin.Value = "1423";
       shopper.City.Value = "Lakewood";
-      shopper.Country.Value = "ca"; 
+      shopper.Country.Value = "ca";
       shopper.Email.Value = "seth";
       shopper.Password.Value = "Seth1seth";
       shopper.PasswordConfirm.Value = shopper.Password.Value;
@@ -152,9 +156,9 @@ namespace Atlantis.Framework.ShopperValidator.Test
       shopper.Zip.Value = "E2L 4V8";
       shopper.BirthDay.Value = "23";
 
-
+      shopper.InitStandardRequiredFields();
       var isNewShopper = true;
-      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, shopper, isNewShopper);
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, shopper, isNewShopper, "es-MX");
       var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
 
       foreach (var prop in response.ValidatedShopper.AllShopperProperties)
@@ -249,6 +253,144 @@ namespace Atlantis.Framework.ShopperValidator.Test
       }
 
       Assert.IsTrue(response.IsSuccess);
+    }
+
+
+    private string _culture = "de-DE";
+    private string _invalidChars = "<script>alert<%=Message%>";
+    [TestMethod]
+    [DeploymentItem("atlantis.config")]
+    public void TestLanguageErrorMessages()
+    {
+      var blankRule = new BlankRule(false, culture: _culture);
+      var equalRule = new EqualLength(_culture, "equal", "four", 3, true);
+      var invalidChar = new InvalidCharactersRule("invalidchar", "<script>$M<@$%M<A", _culture);
+      var match = new MatchRule(_culture, "match", "asdf", "match2nd", "isjdf");
+      var maxLength = new MaxLengthRule(_culture, "maxLength", "thisislonger", 4);
+      var minLength = new MinLengthRule(_culture, "minlength", "asdfasdf", 25);
+      var notMatch = new NotMatchRule(_culture, "notmatch", "asdf", "notmatch2nd", "asdf");
+      var numeric = new NumericRule("numeric", "asdf", _culture);
+      var phone = new PhoneRule("asdf", "phone", culture: _culture);
+      var regex = new RegexRule(_culture, "reggy", "asdf", new Regex(@"^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,6}$"));
+      var required = new RequiredRule("required", "", _culture);
+      var xss = new XssRule("xss", "<script alert('hi');</script>", _culture);
+
+      var emailRule = new EmailRule("fasdf", culture: _culture);
+      var zipRuleUs = new ZipRule("234", "us", "notstate", culture: _culture);
+      var zipRuleOther = new ZipRule("1234", "aj", "notstate", culture: _culture);
+      var lastName = new LastNameRule(_overMaxLength, culture: _culture);
+      var firstName = new FirstNameRule(_overMaxLength, culture: _culture);
+      var address1 = new Address1Rule(_overMaxLength, culture: _culture);
+      var address2 = new Address2Rule(_overMaxLength, culture: _culture);
+      var stateRule = new StateRule(_overMaxLength, culture: _culture);
+      var countryRule = new CountryRule(_overMaxLength, culture: _culture);
+      var birthday = new BirthDayRule("234", "23423", culture: _culture);
+      var callInPin = new CallInPinRule("12341234", culture: _culture);
+      var confirm = new PasswordConfirmRule("asdfaw", "39r", culture: _culture);
+      var cityRule = new CityRule(_invalidChars, culture: _culture);
+      var hint = new PasswordHintRule(_overMaxLength, culture: _culture);
+      var username = new UsernameRule("syukna", true, culture: _culture);
+      var username2 = new UsernameRule("asdf-3f089nasd0fnas0df9n309fna0sdfnasd0f9asdfn0493nfasdf", culture: _culture);
+      var phoneExt = new PhoneExtRule("3093093n90ansdf09asn0f9n309fn039anf09anw09asndf0asnf0934nf0a93n0a93fna09nf03n", culture: _culture);
+      var workInvalidStart = new AnyPhoneRule(_workPhoneInvalidStart, true, culture: _culture);
+      var workPhoneInvalidChars = new AnyPhoneRule(_workPhoneInvalidChars, true, culture: _culture);
+      var workPhoneValid = new AnyPhoneRule(_workPhoneValid, true, culture: _culture);
+      var workPhoneUsFail = new AnyPhoneRule(_workPhoneValidIntl, true, culture: _culture);
+      var workPhoneIntl = new AnyPhoneRule(_workPhoneValidIntl, true, "aj", culture: _culture);
+      var workPhoneMissing = new AnyPhoneRule(string.Empty, true, culture: _culture);
+      var workPhoneMissingValid = new AnyPhoneRule("work phone missing valid", culture: _culture);
+      var passwordruleBlacklist = new PasswordRule("Password1234", false, culture: _culture);
+      var passwordruleNoCapital = new PasswordRule("thisisnotvalid1234", false, culture: _culture);
+      var passwordruleNoNumber = new PasswordRule("Thisisnotvalid", false, culture: _culture);
+      var passwordruleMinLength = new PasswordRule("short", false, culture: _culture);
+      var passwordruleNotMatchCurrentHint = new PasswordRule("Seth456sethseth", false, "867900", culture: _culture);
+      var passwordRuleNotMatchNewHint = new PasswordRule("shouldstopbeforeothervalidations", false, string.Empty, "shouldstopbeforeothervalidations", culture: _culture);
+
+      var shopper = new ShopperToValidate("www.requesturl.com", "pathway", 0);
+      shopper.FirstName.Value = firstName.Value;
+      shopper.LastName.Value = lastName.Value;
+      shopper.Address1.Value = address1.Value;
+      shopper.Address2.Value = address2.Value;
+      shopper.CallInPin.Value = callInPin.Value;
+      shopper.City.Value = cityRule.Value;
+      shopper.Country.Value = countryRule.Value;
+      shopper.Email.Value = emailRule.Value;
+      shopper.Password.Value = passwordruleBlacklist.Value;
+      shopper.PasswordConfirm.Value = confirm.Value;
+      shopper.PasswordHint.Value = hint.Value;
+      shopper.PhoneHome.Value = workPhoneInvalidChars.Value;
+      shopper.PhoneMobile.Value = workPhoneInvalidChars.Value;
+      shopper.PhoneMobileSurvey.Value = workPhoneInvalidChars.Value;
+      shopper.PhoneWork.Value = workPhoneInvalidChars.Value;
+      shopper.PhoneWorkExtension.Value = phoneExt.Value;
+      shopper.State.Value = stateRule.Value;
+      shopper.BirthMonth.Value = "sdasfasdf";
+      shopper.BirthDay.Value = "8923";
+      shopper.AccountUsageType.Value = "081";
+      shopper.Username.Value = username.Value;
+      shopper.Zip.Value = _invalidChars;
+
+      ProcessBaseRules(blankRule, equalRule, invalidChar, match, maxLength, minLength, notMatch, numeric, phone, regex,
+                  required, xss);
+
+      ProcessRuleContainers(emailRule, zipRuleUs, zipRuleOther, lastName, firstName, address1, address2, stateRule, countryRule,
+        birthday, callInPin, confirm, hint, username, username2, phoneExt, cityRule,
+        workInvalidStart, workPhoneInvalidChars, workPhoneValid, workPhoneUsFail, workPhoneIntl, workPhoneMissing, workPhoneMissingValid,
+        passwordruleBlacklist, passwordruleNoCapital, passwordruleNoNumber, passwordruleMinLength, passwordruleNotMatchCurrentHint,
+        passwordRuleNotMatchNewHint);
+
+      ProcessRequestData(shopper);
+
+
+      string p = "pause";
+    }
+
+    private void ProcessBaseRules(params ValidationRule[] vRules)
+    {
+      foreach (ValidationRule rule in vRules)
+      {
+        rule.Validate();
+        WriteMessage(rule.IsValid, rule.ErrorMessage);
+        bool errorMessageBlank = string.IsNullOrEmpty(rule.ErrorMessage);
+        Assert.IsFalse(errorMessageBlank);
+      }
+    }
+
+    private void ProcessRuleContainers(params RuleContainer[] ruleContainers)
+    {
+      foreach (RuleContainer rule in ruleContainers)
+      {
+        rule.Validate();
+        WriteMessage(rule.IsValid, rule.ErrorMessage, rule.Value);
+        bool messageIsMissing = !rule.IsValid && string.IsNullOrEmpty(rule.ErrorMessage);
+        Assert.IsFalse(messageIsMissing);
+      }
+    }
+
+    private void ProcessRequestData(ShopperToValidate shopper)
+    {
+      Debug.WriteLine("");
+      Debug.WriteLine(" ----  SHOPPER VALIDATOR -------");
+      Debug.WriteLine("");
+      shopper.InitStandardRequiredFields();
+      var isNewShopper = true;
+      var request = new ShopperValidatorRequestData(string.Empty, string.Empty, string.Empty, string.Empty, 0, shopper, isNewShopper, _culture);
+      var response = Engine.Engine.ProcessRequest(request, 588) as ShopperValidatorResponseData;
+
+      foreach (var prop in response.ValidatedShopper.AllShopperProperties)
+      {
+        if (prop.HasValidationRules)
+        {
+          WriteMessage(prop.RuleContainer.IsValid, prop.RuleContainer.ErrorMessage, prop.Value);
+          bool messageIsMissing = !prop.RuleContainer.IsValid && string.IsNullOrEmpty(prop.RuleContainer.ErrorMessage);
+          Assert.IsFalse(messageIsMissing);
+        }
+      }
+    }
+
+    private void WriteMessage(bool isvalid, string errormessage, string value = "")
+    {
+      Debug.WriteLine("IsValid: " + isvalid.ToString() + "   ErrorMessage: " + errormessage + "   [Value: " + value.PadRight(50).Substring(0, 49));
     }
   }
 }

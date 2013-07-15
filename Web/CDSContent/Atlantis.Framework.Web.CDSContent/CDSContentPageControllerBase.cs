@@ -15,7 +15,7 @@ namespace Atlantis.Framework.Web.CDSContent
 {
   public abstract class CDSContentPageControllerBase : RenderPipelineBasePage
   {
-    private static readonly IList<string> _emptyUserControlPathList = new List<string>(0);
+    private static readonly IList<IPlaceHolder> _emptyPlaceHolderList = new List<IPlaceHolder>(0);
  
     private ICDSContentProvider _cdsContentProvider;
     protected ICDSContentProvider CdsContentProvider
@@ -31,13 +31,13 @@ namespace Atlantis.Framework.Web.CDSContent
 
     protected abstract IList<IRenderHandler> RenderHandlers { get; }
 
-    protected virtual IList<string> HeadBeginUserControlPaths { get { return _emptyUserControlPathList; } }
+    protected virtual IList<IPlaceHolder> HeadBeginPlaceHolders { get { return _emptyPlaceHolderList; } }
 
-    protected virtual IList<string> HeadEndUserControlPaths { get { return _emptyUserControlPathList; } }
+    protected virtual IList<IPlaceHolder> HeadEndPlaceHolders { get { return _emptyPlaceHolderList; } }
 
-    protected virtual IList<string> BodyBeginUserControlPaths { get { return _emptyUserControlPathList; } }
+    protected virtual IList<IPlaceHolder> BodyBeginPlaceHolders { get { return _emptyPlaceHolderList; } }
 
-    protected virtual IList<string> BodyEndUserControlPaths { get { return _emptyUserControlPathList; } }
+    protected virtual IList<IPlaceHolder> BodyEndPlaceHolders { get { return _emptyPlaceHolderList; } }
 
     private bool _useInjectionRenderHandler;
     protected virtual bool UseInjectionRenderHandler
@@ -91,31 +91,29 @@ namespace Atlantis.Framework.Web.CDSContent
     {
       if (UseInjectionRenderHandler)
       {
-        IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
-
         IList<IContentInjectionItem> contentInjectionItems = new List<IContentInjectionItem>(4);
 
-        if (HeadBeginUserControlPaths != null && HeadBeginUserControlPaths.Count > 0)
+        if (HeadBeginPlaceHolders != null && HeadBeginPlaceHolders.Count > 0)
         {
-          string headBeginMarkup = BuildInjectionItemMarkup(placeHolderProvider, HeadBeginUserControlPaths);
+          string headBeginMarkup = BuildInjectionItemMarkup(HeadBeginPlaceHolders);
           contentInjectionItems.Add(new HtmlHeadBeginContentInjectionItem(headBeginMarkup));
         }
 
-        if (HeadEndUserControlPaths != null && HeadEndUserControlPaths.Count > 0)
+        if (HeadEndPlaceHolders != null && HeadEndPlaceHolders.Count > 0)
         {
-          string headEndMarkup = BuildInjectionItemMarkup(placeHolderProvider, HeadEndUserControlPaths);
+          string headEndMarkup = BuildInjectionItemMarkup(HeadEndPlaceHolders);
           contentInjectionItems.Add(new HtmlHeadEndContentInjectionItem(headEndMarkup));
         }
 
-        if (BodyBeginUserControlPaths != null && BodyBeginUserControlPaths.Count > 0)
+        if (BodyBeginPlaceHolders != null && BodyBeginPlaceHolders.Count > 0)
         {
-          string bodyBeginMarkup = BuildInjectionItemMarkup(placeHolderProvider, BodyBeginUserControlPaths);
+          string bodyBeginMarkup = BuildInjectionItemMarkup(BodyBeginPlaceHolders);
           contentInjectionItems.Add(new HtmlBodyBeginContentInjectionItem(bodyBeginMarkup));
         }
 
-        if (BodyEndUserControlPaths != null && BodyEndUserControlPaths.Count > 0)
+        if (BodyEndPlaceHolders != null && BodyEndPlaceHolders.Count > 0)
         {
-          string bodyEndMarkup = BuildInjectionItemMarkup(placeHolderProvider, BodyEndUserControlPaths);
+          string bodyEndMarkup = BuildInjectionItemMarkup(BodyEndPlaceHolders);
           contentInjectionItems.Add(new HtmlBodyEndContentInjectionItem(bodyEndMarkup));
         }
 
@@ -127,13 +125,13 @@ namespace Atlantis.Framework.Web.CDSContent
       }
     }
 
-    private string BuildInjectionItemMarkup(IPlaceHolderProvider placeHolderProvider, IList<string> userControlPaths)
+    private string BuildInjectionItemMarkup(IList<IPlaceHolder> placeHolderList)
     {
       StringBuilder markupBuilder = new StringBuilder();
 
-      foreach (string userControlPath in userControlPaths)
+      foreach (IPlaceHolder placeHolder in placeHolderList)
       {
-        markupBuilder.Append(placeHolderProvider.GetPlaceHolderMarkup(PlaceHolderTypes.UserControl, userControlPath, null));
+        markupBuilder.Append(placeHolder.ToMarkup());
       }
 
       return markupBuilder.ToString();

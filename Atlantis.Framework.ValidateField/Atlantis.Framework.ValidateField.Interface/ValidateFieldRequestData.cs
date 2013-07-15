@@ -7,10 +7,19 @@ namespace Atlantis.Framework.ValidateField.Interface
   public class ValidateFieldRequestData : RequestData
   {
     public string FieldNameKey { get; private set; }
+    public string Culture { get; private set; }
+
 
     public ValidateFieldRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string fieldNameKey)
-    : base(shopperId, sourceURL, orderId, pathway, pageCount)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
     {
+      FieldNameKey = fieldNameKey;
+    }
+
+    public ValidateFieldRequestData(string shopperId, string sourceURL, string orderId, string pathway, int pageCount, string fieldNameKey, string culture)
+      : base(shopperId, sourceURL, orderId, pathway, pageCount)
+    {
+      Culture = culture;
       FieldNameKey = fieldNameKey;
     }
 

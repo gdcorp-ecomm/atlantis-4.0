@@ -20,7 +20,7 @@ namespace Atlantis.Framework.ValidateField.Impl
 
       if (FieldValidationData.TryGetFieldValidationXml(request.FieldNameKey, out fieldValidationXml))
       {
-        result = new ValidateFieldResponseData(fieldValidationXml);
+        result = new ValidateFieldResponseData(fieldValidationXml, request.Culture);
       }
       else
       {

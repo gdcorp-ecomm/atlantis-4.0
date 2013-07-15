@@ -14,9 +14,26 @@ namespace Atlantis.Framework.ValidateField.Interface
     public ValidationRuleLength LengthRule { get; private set; }
     public ValidationRuleRegEx ExpressionRule { get; private set; }
     public string FieldType { get; private set; }
+    public string Culuture { get; private set; }
 
-    public ValidateFieldResponseData(string fieldValidationXml)
+    private string _defaultCulture = "en";
+    private string _culture;
+    public string Culture
     {
+      get
+      {
+        if (string.IsNullOrEmpty(_culture))
+        {
+          _culture = _defaultCulture;
+        }
+
+        return _culture;
+      }
+    }
+
+    public ValidateFieldResponseData(string fieldValidationXml, string culture = "")
+    {
+      _culture = culture;
       FieldType = "none";
       LengthRule = null;
       ExpressionRule = null;
@@ -34,13 +51,13 @@ namespace Atlantis.Framework.ValidateField.Interface
         XElement lengthRuleElement = _fieldValidationDoc.Root.Descendants("length").FirstOrDefault();
         if (lengthRuleElement != null)
         {
-          LengthRule = new ValidationRuleLength(lengthRuleElement);
+          LengthRule = new ValidationRuleLength(lengthRuleElement, Culture);
         }
 
         XElement expressionRuleElement = _fieldValidationDoc.Root.Descendants("regex").FirstOrDefault();
         if (expressionRuleElement != null)
         {
-          ExpressionRule = new ValidationRuleRegEx(expressionRuleElement);
+          ExpressionRule = new ValidationRuleRegEx(expressionRuleElement, Culture);
         }
       }
       else

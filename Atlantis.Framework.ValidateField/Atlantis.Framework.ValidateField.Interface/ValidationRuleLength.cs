@@ -7,8 +7,8 @@ namespace Atlantis.Framework.ValidateField.Interface
     public int MinimumLength { get; private set; }
     public int MaximumLength { get; private set; }
 
-    public ValidationRuleLength(XElement ruleElement)
-      : base(ruleElement)
+    public ValidationRuleLength(XElement ruleElement, string culture = "")
+      : base(ruleElement, culture)
     {
       MinimumLength = 0;
       MaximumLength = int.MaxValue;

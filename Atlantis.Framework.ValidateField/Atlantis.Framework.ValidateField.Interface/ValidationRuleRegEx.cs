@@ -13,8 +13,8 @@ namespace Atlantis.Framework.ValidateField.Interface
 
     Regex _validationExpression = null;
 
-    public ValidationRuleRegEx(XElement ruleElement)
-      : base(ruleElement)
+    public ValidationRuleRegEx(XElement ruleElement, string culture = "")
+      : base(ruleElement, culture)
     {
       MatchIsValid = true;
       IgnoreCase = false;

@@ -6,16 +6,15 @@ namespace WebControls
 {
   public class WebControlTwo : Control
   {
-
-    private IWebControlPlaceHolderData _placeHolderData;
-    protected IWebControlPlaceHolderData PlaceHolderData
+    private IPlaceHolderData _placeHolderData;
+    protected IPlaceHolderData PlaceHolderData
     {
       get
       {
         if (_placeHolderData == null)
         {
           IPlaceHolderProvider placeHolderProvider = ProviderContainerHelper.Instance.Resolve<IPlaceHolderProvider>();
-          _placeHolderData = (IWebControlPlaceHolderData)placeHolderProvider.GetPlaceHolderData(ID);
+          _placeHolderData = placeHolderProvider.GetPlaceHolderData(ID);
         }
 
         return _placeHolderData;
@@ -25,7 +24,8 @@ namespace WebControls
 
     protected override void Render(HtmlTextWriter writer)
     {
-      writer.WriteLine(string.Format("<h1>{0}</h1>", PlaceHolderData.Parameters["text"].Value));
+      string text;
+      writer.WriteLine("<h1>{0}</h1>", PlaceHolderData.TryGetParameter("text", out text) ? text : "Failed to retreive \"text\" parameter.");
     }
   }
 }

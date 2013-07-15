@@ -106,6 +106,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.Impl\Atlantis.Framework.CDS.Impl.csproj">
+      <Project>{813511ae-2721-4a3b-9894-e1fb6ac41449}</Project>
+      <Name>Atlantis.Framework.CDS.Impl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Atlantis.Framework.CDS\Atlantis.Framework.CDS.Interface\Atlantis.Framework.CDS.Interface.csproj">
       <Project>{43ecc9f8-c897-4ae0-8c53-22b2691d6995}</Project>
       <Name>Atlantis.Framework.CDS.Interface</Name>

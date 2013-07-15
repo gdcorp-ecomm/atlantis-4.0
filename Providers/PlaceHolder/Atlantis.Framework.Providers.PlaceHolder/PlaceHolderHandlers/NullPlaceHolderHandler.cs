@@ -8,12 +8,12 @@ namespace Atlantis.Framework.Providers.PlaceHolder
   {
     public string Type { get { return "null"; } }
 
-    public string GetPlaceHolderContent(string name, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
+    public string GetPlaceHolderContent(string type, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
     {
-      string errorMessage = string.Format("Unknown place holder type \"{0}\".", name);
+      string errorMessage = string.Format("Unknown place holder type: \"{0}\".", type);
       
       debugContextErrors.Add(errorMessage);
-      ErrorLogger.LogException(errorMessage, "RenderPlaceHolderContent", data);
+      ErrorLogger.LogException(errorMessage, "NullPlaceHolderHandler.GetPlaceHolderContent()", data);
 
       return string.Empty;
     }

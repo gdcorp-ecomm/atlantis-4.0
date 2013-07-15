@@ -23,13 +23,9 @@
     [@P[cdsDocument:<Data id="cdstest" app="sales" location="document/location/test" />]@P]
     <hr />
   </div>
-  [@P[webControl:<Data id="one" assemblyname="App_Code" location="WebControls.WebControlOne"><Parameters><Parameter key="text" value="Web control one" /></Parameters></Data>]@P]
+  [@P[webControl:<Data id="one" assembly="App_Code" type="WebControls.WebControlOne"><Parameters><Parameter key="text" value="Web control one" /></Parameters></Data>]@P]
   <hr />
-  [@P[webControl:<Data id="two" assemblyname="App_Code" location="WebControls.WebControlTwo"><Parameters><Parameter key="text" value="Web control two" /></Parameters></Data>]@P]
+  [@P[webControl:<Data id="two" assembly="App_Code" type="WebControls.WebControlTwo"><Parameters><Parameter key="text" value="Web control two" /></Parameters></Data>]@P]
   <hr />
-  [@P[webControl:<Data id="button" assemblyname="System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" location="System.Web.UI.WebControls.Button"></Data>]@P]
-  <hr />
-  <br />
-  <sup><asp:label runat="server" ID="temp"></asp:label></sup>
 </body>
 </html>

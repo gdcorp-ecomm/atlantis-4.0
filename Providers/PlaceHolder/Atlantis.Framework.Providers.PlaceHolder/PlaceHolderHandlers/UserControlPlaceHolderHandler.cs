@@ -11,26 +11,18 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 {
   internal class UserControlPlaceHolderHandler : IPlaceHolderHandler
   {
-    private readonly XmlDataSerializer _xmlDataSerializer = new XmlDataSerializer();
-
     public string Type { get { return PlaceHolderTypes.UserControl; } }
 
-    public string GetPlaceHolderContent(string name, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
+    public string GetPlaceHolderContent(string type, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
     {
       string renderContent = string.Empty;
 
       try
       {
-        IPlaceHolderData placeHolderData = DeserializeData(data);
+        PlaceHolderData placeHolderData = new PlaceHolderData(data);
+
         Control userControl = InitializeUserControl(placeHolderData);
-        if (!string.IsNullOrEmpty(placeHolderData.Id))
-        {
-          userControl.ID = placeHolderData.Id;
-        }
-        else
-        {
-          userControl.ID = userControl.GetType().ToString();
-        }
+
         placeHolderSharedData[userControl.ID] = placeHolderData;
 
         renderContent = RenderControlToHtml(userControl);
@@ -40,37 +32,34 @@ namespace Atlantis.Framework.Providers.PlaceHolder
         string errorMessage = string.Format("{0} place holder error. {1}", Type, ex.Message);
 
         debugContextErrors.Add(errorMessage);
-        ErrorLogger.LogException(errorMessage, "RenderPlaceHolderContent()", data);
+        ErrorLogger.LogException(errorMessage, "UserControlPlaceHolderHandler.GetPlaceHolderContent()", data);
       }
 
       return renderContent;
     }
 
-    private IPlaceHolderData DeserializeData(string data)
-    {
-      IPlaceHolderData placeHolderData = _xmlDataSerializer.Deserialize<XmlPlaceHolderData>(data);
-      
-      if (placeHolderData == null)
-      {
-        throw new Exception("Unhandled deserialization error, null returned.");
-      }
-
-      return placeHolderData;
-    }
-
-    private Control InitializeUserControl(IPlaceHolderData placeHolderData)
+    private Control InitializeUserControl(PlaceHolderData placeHolderData)
     {
       Control userControl;
 
       try
       {
+        string location;
+        if (!placeHolderData.TryGetAttribute(PlaceHolderAttributes.Location, out location))
+        {
+          throw new Exception("Attribute \"" + PlaceHolderAttributes.Location + "\" is required.");
+        }
+
         Page currentPage = HttpContext.Current.Handler == null ? new Page() : (Page)HttpContext.Current.Handler;
-        userControl = currentPage.LoadControl(placeHolderData.Location);
+        userControl = currentPage.LoadControl(location);
         
         if (userControl == null)
         {
           throw new Exception("Unhandled exception loading user control.");
         }
+
+        string id;
+        userControl.ID = placeHolderData.TryGetAttribute(PlaceHolderAttributes.Id, out id) ? id : userControl.GetType().ToString();
       }
       catch (Exception ex)
       {

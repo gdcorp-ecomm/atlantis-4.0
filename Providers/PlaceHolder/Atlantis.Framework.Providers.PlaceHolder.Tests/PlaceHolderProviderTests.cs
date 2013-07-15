@@ -1,18 +1,24 @@
-﻿using Atlantis.Framework.Interface;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
+using Atlantis.Framework.Interface;
+using Atlantis.Framework.Providers.CDSContent;
+using Atlantis.Framework.Providers.CDSContent.Interface;
 using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using Atlantis.Framework.Testing.MockHttpContext;
 using Atlantis.Framework.Testing.MockProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Diagnostics;
 
 namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 {
   [TestClass]
+  [DeploymentItem("atlantis.config")]
+  [DeploymentItem("Atlantis.Framework.CDS.Impl.dll")]
   public class PlaceHolderProviderTests
   {
-    private IProviderContainer _providerContainer;
-    private IProviderContainer ProviderContainer
+    private static IProviderContainer _providerContainer;
+    public static IProviderContainer ProviderContainer
     {
       get
       {
@@ -23,6 +29,7 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
           _providerContainer.RegisterProvider<IShopperContext, MockShopperContext>();
           _providerContainer.RegisterProvider<IManagerContext, MockManagerContext>();
           _providerContainer.RegisterProvider<IPlaceHolderProvider, PlaceHolderProvider>();
+          _providerContainer.RegisterProvider<ICDSContentProvider, CDSContentProvider>();
         }
 
         return _providerContainer;
@@ -74,23 +81,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
     }
 
     [TestMethod]
-    public void EncodedPlaceHolder()
-    {
-      string content = @"<div>
-                          [@P[userControl:<Data location=\""sdfdfsafsf\""><Parameters><Parameter key=\""Hello\"" value=\""World\"" /></Parameters></Data>]@P]
-                         </div>";
-
-
-      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
-      IPlaceHolderEncoding testPlaceHolderEncoding = new TestPlaceHolderEncoding();
-
-      string finalContent = placeHolderProvider.ReplacePlaceHolders(content, testPlaceHolderEncoding);
-
-      WriteOutput(finalContent);
-      Assert.IsFalse(finalContent.Contains("[@P[") || finalContent.Contains("]@P]"));
-    }
-
-    [TestMethod]
     public void NoPlaceHolders()
     {
       string content = @"<div>
@@ -115,6 +105,193 @@ namespace Atlantis.Framework.Providers.PlaceHolder.Tests
 
       WriteOutput(finalContent);
       Assert.IsTrue(finalContent.Equals(string.Empty));
+    }
+
+    [TestMethod]
+    public void CreateUserControlPlaceHolderValid()
+    {
+      IPlaceHolder placeHolder = new UserControlPlaceHolder("someId", "~/somepath/control.ascx", new List<KeyValuePair<string, string>>(0));
+
+      string markup = placeHolder.ToMarkup();
+
+      WriteOutput(markup);
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.UserControl + ":<Data id=\"someId\" location=\"~/somepath/control.ascx\" />]@P]"));
+    }
+
+    [TestMethod]
+    public void CreateUserControlPlaceHolderWithParamsValid()
+    {
+      IList<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>(2);
+      parameters.Add(new KeyValuePair<string, string>("title", "Hello World!"));
+      parameters.Add(new KeyValuePair<string, string>("text", "My Name Is Timbo"));
+
+      IPlaceHolder placeHolder = new UserControlPlaceHolder("someId", "~/somepath/control.ascx", parameters);
+
+      string markup = placeHolder.ToMarkup();
+
+      WriteOutput(markup);
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.UserControl + ":<Data id=\"someId\" location=\"~/somepath/control.ascx\"><Parameters><Parameter key=\"title\" value=\"Hello World!\" /><Parameter key=\"text\" value=\"My Name Is Timbo\" /></Parameters></Data>]@P]"));
+    }
+
+    [TestMethod]
+    public void CreateUserControlPlaceHolderWithNullParams()
+    {
+      IPlaceHolder placeHolder = new UserControlPlaceHolder("someId", "~/somepath/control.ascx", null);
+
+      string markup = placeHolder.ToMarkup();
+
+      WriteOutput(markup);
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.UserControl + ":<Data id=\"someId\" location=\"~/somepath/control.ascx\" />]@P]"));
+    }
+
+    [TestMethod]
+    public void CreateWebControlPlaceHolderValid()
+    {
+      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId", 
+                                                           Assembly.GetExecutingAssembly().FullName,
+                                                           "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
+                                                           new List<KeyValuePair<string, string>>(0));
+
+      string markup = placeHolder.ToMarkup();
+
+      WriteOutput(markup);
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.WebControl + ":<Data id=\"someId\" assembly=\"" + Assembly.GetExecutingAssembly().FullName + "\" type=\"Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne\" />]@P]"));
+    }
+
+    [TestMethod]
+    public void CreateWebControlPlaceHolderWithParamsValid()
+    {
+      IList<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>(2);
+      parameters.Add(new KeyValuePair<string, string>("title", "Hello World!"));
+      parameters.Add(new KeyValuePair<string, string>("text", "My Name Is Timbo"));
+
+      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId",
+                                                           Assembly.GetExecutingAssembly().FullName,
+                                                           "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
+                                                           parameters);
+
+      string markup = placeHolder.ToMarkup();
+
+      WriteOutput(markup);
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.WebControl + ":<Data id=\"someId\" assembly=\"" + Assembly.GetExecutingAssembly().FullName + "\" type=\"Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne\"><Parameters><Parameter key=\"title\" value=\"Hello World!\" /><Parameter key=\"text\" value=\"My Name Is Timbo\" /></Parameters></Data>]@P]"));
+    }
+
+    [TestMethod]
+    public void CreateWebControlPlaceHolderWithNullParams()
+    {
+      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId",
+                                                           Assembly.GetExecutingAssembly().FullName,
+                                                           "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
+                                                           null);
+
+      string markup = placeHolder.ToMarkup();
+
+      WriteOutput(markup);
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.WebControl + ":<Data id=\"someId\" assembly=\"" + Assembly.GetExecutingAssembly().FullName + "\" type=\"Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne\" />]@P]"));
+    }
+
+    [TestMethod]
+    public void RenderWebControlPlaceHolderValid()
+    {
+      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId",
+                                                           Assembly.GetExecutingAssembly().FullName,
+                                                           "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
+                                                           new List<KeyValuePair<string, string>>(0));
+
+      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
+      
+      WriteOutput(renderedContent);
+      Assert.IsTrue(renderedContent.Equals("Web Control One!"));
+    }
+
+    [TestMethod]
+    public void RenderWebControlWithParametersValid()
+    {
+      IList<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>(2);
+      parameters.Add(new KeyValuePair<string, string>("title", "Hello World!"));
+      parameters.Add(new KeyValuePair<string, string>("text", "My Name Is Timbo"));
+
+      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId",
+                                                           Assembly.GetExecutingAssembly().FullName,
+                                                           "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
+                                                           parameters);
+
+      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
+
+      WriteOutput(renderedContent);
+      Assert.IsTrue(renderedContent.Equals("Web Control One!Hello World!My Name Is Timbo"));
+    }
+
+    [TestMethod]
+    public void RenderWebControlTwiceForTypeCache()
+    {
+      IPlaceHolder placeHolder = new WebControlPlaceHolder("someId",
+                                                           Assembly.GetExecutingAssembly().FullName,
+                                                           "Atlantis.Framework.Providers.PlaceHolder.Tests.WebControls.WebControlOne",
+                                                           new List<KeyValuePair<string, string>>(0));
+
+      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup() + Environment.NewLine + placeHolder.ToMarkup());
+
+      WriteOutput(renderedContent);
+      Assert.IsTrue(renderedContent.Equals("Web Control One!" + Environment.NewLine + "Web Control One!"));
+    }
+
+    [TestMethod]
+    public void CreateCDSDocumentPlaceHolderValid()
+    {
+      IPlaceHolder placeHolder = new CDSDocumentPlaceHolder("atlantis",
+                                                            "home");
+
+      string markup = placeHolder.ToMarkup();
+
+      WriteOutput(markup);
+      Assert.IsTrue(markup.Equals("[@P[" + PlaceHolderTypes.CDSDocument + ":<Data app=\"atlantis\" location=\"home\" />]@P]"));
+    }
+
+    [TestMethod]
+    public void RenderCDSDocumentValid()
+    {
+      IPlaceHolder placeHolder = new CDSDocumentPlaceHolder("atlantis",
+                                                            "home");
+
+      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
+
+      WriteOutput(renderedContent);
+
+      Assert.IsTrue(!string.IsNullOrEmpty(renderedContent), "Empty document returned!");
+      Assert.IsTrue(renderedContent.StartsWith("<!DOCTYPE html>"), "Document did not start with doctype declaration");
+    }
+
+    [TestMethod]
+    public void RenderCDSDocumentEmptyAppPath()
+    {
+      IPlaceHolder placeHolder = new CDSDocumentPlaceHolder(string.Empty,
+                                                            string.Empty);
+
+      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
+
+      WriteOutput(renderedContent);
+
+      Assert.IsTrue(renderedContent == string.Empty, "Document should return as a string.Empty");
+    }
+
+    [TestMethod]
+    public void RenderCDSDocumentNullAppPath()
+    {
+      IPlaceHolder placeHolder = new CDSDocumentPlaceHolder(null,
+                                                            null);
+
+      IPlaceHolderProvider placeHolderProvider = ProviderContainer.Resolve<IPlaceHolderProvider>();
+      string renderedContent = placeHolderProvider.ReplacePlaceHolders(placeHolder.ToMarkup());
+
+      WriteOutput(renderedContent);
+
+      Assert.IsTrue(renderedContent == string.Empty, "Document should return as a string.Empty");
     }
   }
 }

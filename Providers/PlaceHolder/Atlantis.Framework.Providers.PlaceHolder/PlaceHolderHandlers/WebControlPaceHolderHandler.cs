@@ -3,7 +3,6 @@ using Atlantis.Framework.Providers.PlaceHolder.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -12,27 +11,20 @@ namespace Atlantis.Framework.Providers.PlaceHolder
 {
   internal class WebControlPaceHolderHandler : IPlaceHolderHandler
   {
-    private readonly XmlDataSerializer _xmlDataSerializer = new XmlDataSerializer();
-
     public string Type { get { return PlaceHolderTypes.WebControl; } }
 
-    public string GetPlaceHolderContent(string name, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
+    public string GetPlaceHolderContent(string type, string data, IDictionary<string, IPlaceHolderData> placeHolderSharedData, ICollection<string> debugContextErrors, IProviderContainer providerContainer)
     {
       string renderContent = string.Empty;
 
       try
       {
-        IWebControlPlaceHolderData placeHolderData = DeserializeData(data);
+        PlaceHolderData placeHolderData = new PlaceHolderData(data);
+        
         Control webControl = InitializeWebControl(placeHolderData);
-        if (!string.IsNullOrEmpty(placeHolderData.Id))
-        {
-          webControl.ID = placeHolderData.Id;
-        }
-        else
-        {
-          webControl.ID = webControl.GetType().ToString();
-        }
+        
         placeHolderSharedData[webControl.ID] = placeHolderData;
+        
         renderContent = RenderControlToHtml(webControl);
       }
       catch (Exception ex)
@@ -40,44 +32,38 @@ namespace Atlantis.Framework.Providers.PlaceHolder
         string errorMessage = string.Format("{0} place holder error. {1}", Type, ex.Message);
 
         debugContextErrors.Add(errorMessage);
-        ErrorLogger.LogException(errorMessage, "RenderPlaceHolderContent()", data);
+        ErrorLogger.LogException(errorMessage, "WebControlPaceHolderHandler.GetPlaceHolderContent()", data);
       }
 
       return renderContent;
     }
 
-    private IWebControlPlaceHolderData DeserializeData(string data)
-    {
-      IWebControlPlaceHolderData placeHolderData = _xmlDataSerializer.Deserialize<XmlWebControlPlaceHolderData>(data);
-
-      if (placeHolderData == null)
-      {
-        throw new Exception("Unhandled deserialization error, null returned.");
-      }
-
-      return placeHolderData;
-    }
-
-    private Control InitializeWebControl(IWebControlPlaceHolderData placeHolderData)
+    private Control InitializeWebControl(PlaceHolderData placeHolderData)
     {
       Control webControl;
 
       try
       {
         Page currentPage = HttpContext.Current.Handler == null ? new Page() : (Page)HttpContext.Current.Handler;
-        Type type = GetType(placeHolderData.AssemblyName, placeHolderData.Location);
-        if (type != null)
+        string assemblyName;
+        string typeName;
+        if (placeHolderData.TryGetAttribute(PlaceHolderAttributes.Assembly, out assemblyName) &&
+            placeHolderData.TryGetAttribute(PlaceHolderAttributes.Type, out typeName))
         {
+          Type type = WebControlTypeManager.GetType(assemblyName, typeName);
           webControl = currentPage.LoadControl(type, null);
 
           if (webControl == null)
           {
-            throw new Exception("Unhandled exception loading web control.");
+            throw new Exception("Unable to load web control.");
           }
+
+          string id;
+          webControl.ID = placeHolderData.TryGetAttribute(PlaceHolderAttributes.Id, out id) ? id : webControl.GetType().ToString();
         }
         else
         {
-          throw new Exception(string.Format("Type {0} not found.", placeHolderData.Location));
+          throw new Exception(string.Format("Attributes \"{0}\" and \"{1}\" are required.", PlaceHolderAttributes.Assembly, PlaceHolderAttributes.Type));
         }
       }
       catch (Exception ex)
@@ -104,22 +90,6 @@ namespace Atlantis.Framework.Providers.PlaceHolder
       }
 
       return html;
-    }
-
-    private Type GetType(string assemblyName, string typeName)
-    {
-      Type type = null;
-
-      try
-      {
-        type = Assembly.Load(assemblyName).GetType(typeName);
-      }
-      catch (Exception ex)
-      {
-        throw new Exception(string.Format("Error finding the type {0}.  {1}", typeName, ex.Message));
-      }
-
-      return type;
     }
   }
 }

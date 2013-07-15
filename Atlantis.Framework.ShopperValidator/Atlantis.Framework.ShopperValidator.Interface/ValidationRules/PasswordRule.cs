@@ -78,7 +78,7 @@ namespace Atlantis.Framework.ShopperValidator.Interface.ValidationRules
     #region Custom Rules
     private bool PasswordIsValid_ValidateField()
     {
-      var validatorRequest = new ValidateFieldRequestData(string.Empty, _requestUrl, string.Empty, _pathway, _pageCount, "password");
+      var validatorRequest = new ValidateFieldRequestData(string.Empty, _requestUrl, string.Empty, _pathway, _pageCount, "password", Culture);
       ValidateFieldResponseData validator = (ValidateFieldResponseData)DataCache.DataCache.GetProcessRequest(validatorRequest, EngineRequestValues.ValidateField);
 
       List<ValidationFailure> errors;

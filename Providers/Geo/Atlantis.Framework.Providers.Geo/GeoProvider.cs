@@ -140,7 +140,12 @@ namespace Atlantis.Framework.Providers.Geo
 
     public bool IsUserInCountry(string countryCode)
     {
-      return countryCode.Equals(_requestCountryCode.Value, StringComparison.OrdinalIgnoreCase);
+      if (string.IsNullOrEmpty(countryCode))
+      {
+        return false;
+      }
+
+      return  countryCode.Equals(_requestCountryCode.Value, StringComparison.OrdinalIgnoreCase);
     }
 
     public bool IsUserInRegion(int regionTypeId, string regionName)

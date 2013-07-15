@@ -84,6 +84,13 @@ namespace Atlantis.Framework.Providers.Geo.Tests
     }
 
     [TestMethod]
+    public void UserInNullCountry()
+    {
+      IGeoProvider geoProvider = CreateGeoProvider("148.204.3.3", false, true);
+      Assert.IsFalse(geoProvider.IsUserInCountry(null));
+    }
+
+    [TestMethod]
     public void UserInRegion()
     {
       IGeoProvider geoProvider = CreateGeoProvider("5.158.255.220", false);

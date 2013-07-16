@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -68,21 +69,51 @@ namespace Atlantis.Framework.Conditions.Tests
     }
 
     [TestMethod]
-    public void EvaludateValidConditionTrue()
+    public void EvaluateValidConditionTrue()
     {
       Assert.IsTrue(ConditionHandlerManager.EvaluateCondition("dataCenter", new[] { "AP" }, ProviderContainer));
     }
 
     [TestMethod]
-    public void EvaludateValidConditionFalse()
+    public void EvaluateValidConditionFalse()
     {
       Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("dataCenter", new[] { "US" }, ProviderContainer));
     }
 
     [TestMethod]
-    public void EvaludateUnRegisteredCondition()
+    public void EvaluateUnRegisteredCondition()
     {
       Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("doesNotExist", new[] { "value1" }, ProviderContainer));
+    }
+
+    [TestMethod]
+    public void EvaluateValidConditionNullParam()
+    {
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("dataCenter", new [] { "US", null }, ProviderContainer));
+    }
+
+    [TestMethod]
+    public void EvaluateValidConditionNullParamList()
+    {
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("dataCenter", null, ProviderContainer));
+    }
+
+    [TestMethod]
+    public void EvaluateValidConditionEmptyParamList()
+    {
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("dataCenter", new List<string>(0), ProviderContainer));
+    }
+
+    [TestMethod]
+    public void EvaluateValidConditionParamWithSpace()
+    {
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("dataCenter", new[] { "United States" }, ProviderContainer));
+    }
+
+    [TestMethod]
+    public void EvaluateValidConditionTwoParamWithSpace()
+    {
+      Assert.IsFalse(ConditionHandlerManager.EvaluateCondition("dataCenter", new[] { "IN", "United States" }, ProviderContainer));
     }
 
     [TestMethod]

@@ -105,6 +105,21 @@ namespace Atlantis.Framework.Render.MarkupParser.Tests
     }
 
     [TestMethod]
+    public void SimpleMarkupTestSpaceInParam()
+    {
+      string markup = @"Hi my name is
+                        ##if(!dataCenter(AP, [United States]))
+                        Timbo
+                        ##endif";
+
+      string parsedMarkup = MarkupParserManager.ParseAndEvaluate(markup, PRE_PROCESSOR_PREFIX, ExpressionParserManager.EvaluateExpression);
+
+      WriteOutput(parsedMarkup);
+
+      Assert.IsFalse(parsedMarkup.Contains("Timbo"));
+    }
+
+    [TestMethod]
     public void SimpleMarkupTestIfElseCondition()
     {
       string markup = @"Hi my name is

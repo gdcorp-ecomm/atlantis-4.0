@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Atlantis.Framework.Render.MarkupParser
 {
@@ -9,14 +8,13 @@ namespace Atlantis.Framework.Render.MarkupParser
   {
     private const string CARRAIGE_RETURN = "\r\n";
 
-    private static readonly Regex _removeWhiteSpaceRegex = new Regex(@"\s+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
     private string _preProcessorPrefix;
     private StringBuilder _outputMarkup;
     private TextReader _markupReader;
     private MarkupLanguageSymbol _currentSymbol;
     private int _currentLineNumber;
     private string _currentLine;
+    private string _currentLineTrimmed;
     private int _currentIfStatementCount;
     private MarkupParserManager.EvaluateExpressionDelegate _evaluateExpressionDelegate;
 
@@ -41,67 +39,66 @@ namespace Atlantis.Framework.Render.MarkupParser
 
     private void BeginMarkupParsing()
     {
-      ParseNextLine();
+      GetLine();
       while (_currentSymbol != MarkupLanguageSymbol.None)
       {
         ParseFirstLineSequence();
       }
     }
 
-    private void ParseNextLine()
+    private void GetLine()
     {
-      string currentLine = GetLine();
+      _currentLine = _markupReader.ReadLine();
 
-      if (currentLine == null)
+      if (_currentLine != null)
       {
-        _currentSymbol = MarkupLanguageSymbol.None;
-        _currentLine = null;
+        _currentLineTrimmed = _currentLine.Trim();
+        DetermineCurrentSymbol();
+        _currentLineNumber++;
       }
       else
       {
-        _currentLine = currentLine;
-        string currentLineNoWhiteSpace = _removeWhiteSpaceRegex.Replace(currentLine, string.Empty);
+        _currentLineTrimmed = null;
+        _currentSymbol = MarkupLanguageSymbol.None;
+      }
+    }
 
-        if (currentLineNoWhiteSpace.Length > 1 && currentLineNoWhiteSpace.Substring(0, 2).Equals(_preProcessorPrefix, StringComparison.Ordinal))
-        {
-          _currentSymbol = LanguageSymbolFactory.GetPreProcessorSymbol(currentLineNoWhiteSpace, _preProcessorPrefix);
-          switch (_currentSymbol)
-          {
-            case MarkupLanguageSymbol.None:
-              ExceptionHelper.ThrowParseError("Invalid pre-preocessor symbol " + currentLineNoWhiteSpace, _currentLineNumber, _currentLine);
-              break;
-            case MarkupLanguageSymbol.Else:
-            case MarkupLanguageSymbol.ElseIf:
-            case MarkupLanguageSymbol.EndIf:
-              if (_currentIfStatementCount <= 0)
-              {
-                ExceptionHelper.ThrowParseError(string.Format("Missing starting {0}if condition.", _preProcessorPrefix), _currentLineNumber, _currentLine);
-              }
-              break;
-          }
+    private void DetermineCurrentSymbol()
+    {
+      if (IsPreProcessorSymbol())
+      {
+        _currentSymbol = LanguageSymbolFactory.GetPreProcessorSymbol(_currentLineTrimmed, _preProcessorPrefix);
 
-        }
-        else
+        switch (_currentSymbol)
         {
-          _currentSymbol = MarkupLanguageSymbol.Text;
+          case MarkupLanguageSymbol.None:
+            ExceptionHelper.ThrowParseError("Invalid pre-preocessor symbol: " + _currentLineTrimmed, _currentLineNumber, _currentLine);
+            break;
+          case MarkupLanguageSymbol.Else:
+          case MarkupLanguageSymbol.ElseIf:
+          case MarkupLanguageSymbol.EndIf:
+            if (_currentIfStatementCount <= 0)
+            {
+              ExceptionHelper.ThrowParseError(string.Format("Missing starting {0}if condition.", _preProcessorPrefix), _currentLineNumber, _currentLine);
+            }
+            break;
         }
       }
+      else
+      {
+        _currentSymbol = MarkupLanguageSymbol.Text;
+      }
+    }
+
+    private bool IsPreProcessorSymbol()
+    {
+      return _currentLineTrimmed.Length > 1 &&
+             _currentLineTrimmed.Substring(0, 2).Equals(_preProcessorPrefix, StringComparison.Ordinal);
     }
 
     private void ParseFirstLineSequence()
     {
       ParseLineSequence(true);
-    }
-
-    private string GetLine()
-    {
-      _currentLine = _markupReader.ReadLine();
-      if (_currentLine != null)
-      {
-        _currentLineNumber++;
-      }
-
-      return _currentLine;
     }
 
     private void ParseLineSequence(bool isParentConditionTrue)
@@ -134,7 +131,7 @@ namespace Atlantis.Framework.Render.MarkupParser
         }
       }
 
-      ParseNextLine();
+      GetLine();
     }
 
     private void ProcessIfStatement(bool isParentConditionTrue)
@@ -174,7 +171,7 @@ namespace Atlantis.Framework.Render.MarkupParser
 
       _currentIfStatementCount--;
 
-      ParseNextLine();
+      GetLine();
     }
 
     private bool ProcessIfLine(bool evaluateExpression)
@@ -187,7 +184,7 @@ namespace Atlantis.Framework.Render.MarkupParser
         expressionResult = EvaluateExpression(expression);
       }
 
-      ParseNextLine();
+      GetLine();
       ParseLineSequence(expressionResult);
 
       return expressionResult;
@@ -203,7 +200,7 @@ namespace Atlantis.Framework.Render.MarkupParser
         expressionResult = EvaluateExpression(expression);
       }
 
-      ParseNextLine();
+      GetLine();
       ParseLineSequence(expressionResult);
 
       return expressionResult;
@@ -211,7 +208,7 @@ namespace Atlantis.Framework.Render.MarkupParser
 
     private void ProcessElseLine(bool evaluateExpression)
     {
-      ParseNextLine();
+      GetLine();
       ParseLineSequence(evaluateExpression);
     }
 
@@ -233,7 +230,7 @@ namespace Atlantis.Framework.Render.MarkupParser
 
     private string ParseExpression(string preProcessorSymbol)
     {
-      return _removeWhiteSpaceRegex.Replace(_currentLine, string.Empty).Replace(preProcessorSymbol, string.Empty);
+      return _currentLineTrimmed.Replace(preProcessorSymbol, string.Empty);
     }
 
     public void Dispose()

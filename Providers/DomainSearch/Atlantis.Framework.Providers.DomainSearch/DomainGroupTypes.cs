@@ -38,5 +38,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
     /// Exact match is found on search phrase.
     /// </summary>
     public const string EXACT_MATCH = "exactmatch";
+
+    public const string All_DOMAINS = "alldomains";
   }
 }

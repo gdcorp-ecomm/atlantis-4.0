@@ -13,7 +13,7 @@ namespace Atlantis.Framework.Providers.DomainSearch
     private Lazy<ISiteContext> _siteContext;
     private Lazy<IShopperContext> _shopperContext;
 
-    private readonly IList<string> _domainSearchDatabases = new List<string> { "affix,auctions,cctld,private,premium,,similar" };
+    private readonly IList<string> _domainSearchDatabases = new List<string> { "affix,auctions,cctld,private,premium,similar" };
     private const bool INCLUDE_SPINS = true;
 
     public DomainSearchProvider(IProviderContainer container)
@@ -43,8 +43,18 @@ namespace Atlantis.Framework.Providers.DomainSearch
       }
     }
 
-    private static void GroupDomainResponse(Dictionary<string, IEnumerable<IFindResponseDomain>> domainResult, List<IFindResponseDomain> responseDomainList)
+    private static Dictionary<string, IEnumerable<IFindResponseDomain>> GroupDomainResponse(DomainSearchResponseData responseData)
     {
+     var domainResult = new Dictionary<string, IEnumerable<IFindResponseDomain>>(responseData.Domains.Count);
+      if (responseData.ExactMatchDomains != null)
+      {
+        domainResult.Add(DomainGroupTypes.EXACT_MATCH, responseData.ExactMatchDomains);
+      }
+
+      var responseDomainList = responseData.Domains.ToList();
+
+      domainResult.Add(DomainGroupTypes.All_DOMAINS, responseDomainList);
+
       var affixDomains = responseDomainList.FindAll(d => d.DomainSearchDataBase != null && d.DomainSearchDataBase.ToLowerInvariant() == DomainGroupTypes.AFFIX);
       if (affixDomains.Count != 0)
       {
@@ -80,6 +90,8 @@ namespace Atlantis.Framework.Providers.DomainSearch
       {
         domainResult.Add(DomainGroupTypes.SIMILIAR, similiarDomains);
       }
+
+      return domainResult;
     }
 
     public bool SearchDomain(string searchPhrase, string sourceCode, string sourceUrl, out Dictionary<string, IEnumerable<IFindResponseDomain>> domainResult)
@@ -111,15 +123,15 @@ namespace Atlantis.Framework.Providers.DomainSearch
 
           if (exception == null)
           {
-            domainResult = new Dictionary<string, IEnumerable<IFindResponseDomain>>(64);
-            if (response.ExactMatchDomains != null)
-            {
-              domainResult.Add(DomainGroupTypes.EXACT_MATCH, response.ExactMatchDomains);
-            }
+            //domainResult = new Dictionary<string, IEnumerable<IFindResponseDomain>>(64);
+            //if (response.ExactMatchDomains != null)
+            //{
+            //  domainResult.Add(DomainGroupTypes.EXACT_MATCH, response.ExactMatchDomains);
+            //}
 
-            var responseDomainList = response.Domains.ToList();
+            //var responseDomainList = response.Domains.ToList();
 
-            GroupDomainResponse(domainResult, responseDomainList);
+           domainResult =  GroupDomainResponse(response);
 
             success = true;
           }
